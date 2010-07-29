@@ -1,0 +1,14 @@
+@charset "utf-8";
+/* CSS Document */
+#ajaxupload_dialog .ajaxupload_p_1{
+    margin-top:80px;
+}
+#ajaxupload_dialog .ajaxupload_p_2{
+    margin: 20px 40px;
+}
+#ajaxupload_path{
+    color:#080;
+    font-weight:bold;
+
+}
+
