@@ -1,0 +1,26 @@
+@charset "utf-8";
+.ui-dialog .ui-mapeditor{
+	font-size: 1.1em;
+	overflow-x: hidden;
+	max-height: 300px;
+}
+.ui-mapeditor table tr a.ui-state-default{
+	width: 16px;
+	display: block;
+}
+.ui-mapeditor table tr td span{
+	cursor: pointer;
+}
+.ui-mapeditor .ui-mapeditor-submit{
+	margin: 0 0 0 .5em;
+}
+/* todo width */
+.ui-dialog .ui-mapeditor input{
+	font-weight:normal;
+        width:  9em;
+
+}
+.ui-dialog .ui-mapeditor input.ui-mapeditor-add,
+.ui-dialog .ui-mapeditor input.ui-mapeditor-submit{
+    width: auto;
+}

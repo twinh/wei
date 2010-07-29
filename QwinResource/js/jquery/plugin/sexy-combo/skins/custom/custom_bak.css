@@ -1,0 +1,81 @@
+
+div.custom {
+    white-space: nowrap;
+    height: 24px;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    width: 146px;
+}
+
+div.custom input {
+    margin: 0 0 0 0;
+    font:normal 14px tahoma, arial, helvetica, sans-serif;
+    padding:1px 3px;
+    background:#fff url(sexy-input-bg.jpg) repeat-x 0 0;
+    border:1px solid #000000;
+    height: 20px;
+    line-height: 20px;
+    vertical-align:middle; 
+    left: 0px;
+    top: 0px; 
+    width: 187px;  
+
+}
+
+div.custom div.icon {
+    width:24px;
+    height:24px;
+    border: 0;
+    background:transparent url(arrow.jpg) no-repeat 0 0;
+    cursor:pointer;
+   /* border-bottom: 1px solid #B5B8C8;*/
+    top:0px;
+    left: 187px; 
+
+}
+
+
+div.custom div.list-wrapper {
+    left: 0px;
+    top: 24px;
+    border: 1px solid #000000;
+	border-top: 0;
+    background-color: #FFFFFF;
+    padding: 0;
+    margin: 0;
+    width: 205px;
+    bottom: auto;
+}
+
+div.custom div.list-wrapper-up {
+    top: auto;
+    bottom: 24px;
+    border: 1px solid #000000;
+	border-bottom: 0;	
+}
+
+div.custom ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    height: 200px;
+}
+
+
+div.custom  li {
+    padding: 0;
+    padding-left: 5px;
+    font:normal 14px tahoma, arial, helvetica, sans-serif;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    margin: 0;
+}
+
+div.custom li.active {
+    background-color: rgb(160, 169, 194);
+}
+
+div.custom input.empty {
+    color: gray;
+}
