@@ -183,4 +183,20 @@ class Qwin_Miku_Controller
         }
         return null;
     }
+
+    public function onNamespaceNotExists($set, $config)
+    {
+        require_once 'Qwin/Miku/Controller/Exception.php';
+        throw new Qwin_Miku_Controller_Exception('The namespace ' . $set['namespace'] . ' is not allowed.');
+    }
+
+    public function onModuleNotExists($set, $config)
+    {
+        return true;
+    }
+
+    public function onControllerNotExists($set, $config)
+    {
+        
+    }
 }
