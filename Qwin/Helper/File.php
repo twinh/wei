@@ -1,31 +1,28 @@
 <?php
 /**
- * qfile 的名称
+ * File
  *
- * qfile 的简要介绍
+ * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
- * Copyright (c) 2009 Twin. All rights reserved.
- * 
- * LICENSE:
- * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- * @author    Twin Huang <twinh@yahoo.cn>
- * @copyright Twin Huang
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2009-05-10 utf-8 中文
- * @since     2009-11-24 20:45:11 utf-8 中文
+ * @package     Qwin
+ * @subpackage  Helper
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @version     $Id$
+ * @since       2009-11-24 20:45:11
  */
 
 class Qwin_Helper_File
@@ -44,7 +41,7 @@ class Qwin_Helper_File
     
     function writeArr($arr, $path, $name = '')
     {
-        $arr = Qwin_Class::run('Qwin_Helper_Array')->tophpCode($arr);
+        $arr = Qwin::run('Qwin_Helper_Array')->tophpCode($arr);
         if('' != $name)
         {
             $file_str = "<?php\r\n\$$name = $arr;\r\n?>";

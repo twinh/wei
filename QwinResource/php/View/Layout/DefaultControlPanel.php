@@ -24,8 +24,8 @@
  * @author    Twin Huang <twinh@yahoo.cn>
  * @copyright Twin Huang
  * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2009-11-20 01:12:01 utf-8 中文
- * @since     2009-11-24 18:47:32 utf-8 中文
+ * @version   2009-11-20 01:12:01
+ * @since     2009-11-24 18:47:32
  */
 
 // 防止直接访问导致错误
@@ -39,7 +39,7 @@
 <!--{JS}-->
 <!--{CSS}-->
 <?php
-$rsc = Qwin_Class::run('-rsc');
+$rsc = Qwin::run('-rsc');
 $rsc->load('js/jquery/core/jquery')
     ->load('jquery/ui/core')
     ->load('jquery/theme/' . qw('Qwin_Hepler_Util')->getStyle())
@@ -51,7 +51,7 @@ $rsc->load('js/jquery/core/jquery')
     ->load('jquery/plugin/qui')
     ->load('jquery/ui/tabs');
 
-$ses = Qwin_Class::run('-ses');
+$ses = Qwin::run('-ses');
 $loginState = $ses->get('member');
 $qurl = array(
     'nca' => qw('-url')->nca,

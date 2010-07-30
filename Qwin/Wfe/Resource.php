@@ -1,32 +1,29 @@
 <?php
 /**
- * RS 的名称
+ * Resource
  *
- * RS 的简要介绍
+ * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
- * Copyright (c) 2009 Twin. All rights reserved.
- * 
- * LICENSE:
- * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- * @author    Twin Huang <twinh@yahoo.cn>
- * @copyright Twin Huang
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2009-11-20 16:39:01 utf-8 中文
- * @since     2009-11-24 20:45:11 utf-8 中文
- * @todo      即时加载与加入wfe类数组中, 多版本文件支持,如 jQuery, 不同类型支持,如压缩.
+ * @package     Qwin
+ * @subpackage  Wfe
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @version     $Id$
+ * @since       2009-11-24 20:45:11
+ * @todo        即时加载与加入wfe类数组中, 多版本文件支持,如 jQuery, 不同类型支持,如压缩.
  */
 
 require_once 'Qwin/Wfe.php';
@@ -40,7 +37,7 @@ class Qwin_Wfe_Resource extends Qwin_Wfe
     function __construct()
     {
         // resource path
-        $this->_path = Qwin_Class::run('-str')->toUrlSeparator(RESOURCE_PATH);
+        $this->_path = Qwin::run('-str')->toUrlSeparator(RESOURCE_PATH);
     }
     /*
     // 加载jquery插件
@@ -91,7 +88,7 @@ class Qwin_Wfe_Resource extends Qwin_Wfe
         $path_end .= '.js';
         array_unshift($path, $this->_path);
         $path = implode('/', $path);
-        Qwin_Class::run('-js')->add($path);
+        Qwin::run('-js')->add($path);
         return $this;
     }
     
@@ -106,7 +103,7 @@ class Qwin_Wfe_Resource extends Qwin_Wfe
         $path_end .= '.css';
         array_unshift($path, $this->_path);
         $path = implode('/', $path);
-        Qwin_Class::run('-css')->add($path);
+        Qwin::run('-css')->add($path);
         return $this;
     }
     

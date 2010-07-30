@@ -24,8 +24,8 @@
  * @author    Twin Huang <twinh@yahoo.cn>
  * @copyright Twin Huang
  * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2009-11-21 13:42 utf-8 中文
- * @since     2009-11-21 13:42 utf-8 中文
+ * @version   2009-11-21 13:42
+ * @since     2009-11-21 13:42
  */
 
 class Admin_Controller_Setting extends Qwin_Miku_Controller
@@ -37,7 +37,7 @@ class Admin_Controller_Setting extends Qwin_Miku_Controller
     {
         if(!$_POST)
         {
-            $db = Qwin_Class::run('-db');
+            $db = Qwin::run('-db');
             $table = $db->getList('SHOW TABLES');
             foreach($table as $key => $val)
             {
@@ -59,7 +59,7 @@ class Admin_Controller_Setting extends Qwin_Miku_Controller
             $this->__cp_content = 'Resource/View/Element/AdminForm';
             $this->loadView(qw('-ini')->load('Resource/View/AdminControlPanel', false));
         } else {
-            $gpc = Qwin_Class::run('-gpc');
+            $gpc = Qwin::run('-gpc');
             $url = url(
                 array($this->__query['namespace'], $this->__query['controller'], 'Add'),
                 array(
@@ -67,15 +67,15 @@ class Admin_Controller_Setting extends Qwin_Miku_Controller
                     'form_view_type' => 'tab',
                 )
             );
-            Qwin_Class::run('-url')->to($url);
+            Qwin::run('-url')->to($url);
         }
     }
 
     // 添加
     function actionAdd()
     {
-        $db = Qwin_Class::run('-db');
-        $gpc = Qwin_Class::run('-gpc');
+        $db = Qwin::run('-db');
+        $gpc = Qwin::run('-gpc');
 
         if(!$_POST)
         {
@@ -88,11 +88,11 @@ class Admin_Controller_Setting extends Qwin_Miku_Controller
 
             }
 
-            $gpc = Qwin_Class::run('-gpc');
+            $gpc = Qwin::run('-gpc');
             $table = $gpc->g('table');
             if(!in_array($table, $table_arr))
             {
-                Qwin_Class::run('QMsg')->show('Table ' . $table . ' is not exists');
+                Qwin::run('QMsg')->show('Table ' . $table . ' is not exists');
             }
             $sql = "DESCRIBE " . $table;
             $sql_data = $db->getList($sql);
@@ -216,7 +216,7 @@ class Admin_Controller_Setting extends Qwin_Miku_Controller
                     }
                 }
             }
-            $set['field'] = Qwin_Class::run('Qwin_Helper_Array')->toPhpCode2($set['field'], '            ');
+            $set['field'] = Qwin::run('Qwin_Helper_Array')->toPhpCode2($set['field'], '            ');
             $set['title'] = $gpc->p('title');
             $set['table'] = $gpc->p('table');
             $set['namespace'] = ucfirst($gpc->p('namespace'));
@@ -241,7 +241,7 @@ class Admin_Controller_Setting extends Qwin_Miku_Controller
             //{
                 file_put_contents($ctrl_file_path, $ctrl_file_data);
             //}
-            Qwin_Class::run('-url')->to(url(array($this->__query['namespace'], $this->__query['controller'])));
+            Qwin::run('-url')->to(url(array($this->__query['namespace'], $this->__query['controller'])));
         }
     }
 

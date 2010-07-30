@@ -1,32 +1,29 @@
 <?php
 /**
- * class 的名称
+ * 类管理器
  *
- * class 的简要介绍
+ * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
- * Copyright (c) 2009 Twin. All rights reserved.
- * 
- * LICENSE:
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * @author    Twin Huang <twinh@yahoo.cn>
- * @copyright Twin Huang
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2010-02-20 15:21 utf-8 中文
- * @since     2010-02-20 15:21 utf-8 中文
- * @todo      父类,接口等的类的加载问题
+ * @package     Qwin
+ * @subpackage  Class
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @version     $Id$
+ * @since       2010-02-20 15:21
+ * @todo        父类,接口等的类的加载问题
  */
 
 class Qwin_Class
@@ -43,7 +40,7 @@ class Qwin_Class
      *
      * @var array
      */
-    private static $_found_file = array();
+    private static $_foundFile = array();
     
     /**
      * 类与文件名存放的数组,对应关系的 class => file
@@ -71,43 +68,35 @@ class Qwin_Class
      *
      * @var string
      */
-    private static $_cacheFile = '';
+    private static $_cacheFile;
     
     /**
      * 类名映射,用于简化输入类名
      *
      */
-    private static $_class_map = array();
+    private static $_classMap = array();
 
     /**
      * 类库的路径
      * @var string
      */
     public static $libPath;
-    
+
     /**
-     * 初始化类缓存文件路径
-     * 
-     * @param string/null $cacheFile 类缓存文件路径
+     * 设置缓存文件
+     * @param string $cacheFile
+     * @return bool
      */
-    function init($cacheFile = NULL)
+    public function setCacheFile($cacheFile)
     {
-        // 默认加入 3 个路径
-        self::$_path = array(
-            QWIN_PATH => 10,
-            RESOURCE_PATH . DS . 'php' => 10,
-            ROOT_PATH => 5,
-        );
-        if(NULL != $cacheFile && file_exists($cacheFile))
+        self::$_cacheFile = $cacheFile;
+        if(file_exists($cacheFile))
         {
-            self::$_cacheFile = $cacheFile;
-        } else {
-            self::$_cacheFile = ROOT_PATH . DS . 'Cache/Php/System/class.php';
+            self::$_classCache = require self::$_cacheFile;
+            return true;
         }
-        self::$_classCache = require self::$_cacheFile;
+        return false;
     }
-    
-    
     
     /**
      * 增加类与类缩写的对应关系
@@ -121,15 +110,15 @@ class Qwin_Class
         {
             foreach($key as $real_key => $real_calss_name)
             {
-                self::$_class_map[$real_key] = $real_calss_name;
+                self::$_classMap[$real_key] = $real_calss_name;
             }
         } else {
-            self::$_class_map[$key] = $class_name;
+            self::$_classMap[$key] = $class_name;
         }
     }
 
     /**
-     * 
+     * 增加初始的类
      * 
      * @param unknown_type $name
      * @param unknown_type $class
@@ -144,22 +133,30 @@ class Qwin_Class
      * 获得一个类的实例化
      *
      * @todo 初始化时多参数的实现
+     * @todo 先后的次序
      */
     public static function run($name, $param = array())
     {
-        isset(self::$_class_map[$name]) && $name = self::$_class_map[$name];
+        isset(self::$_classMap[$name]) && $name = self::$_classMap[$name];
         // 因为 php 类名不区分大小写
         //$name = strtolower($name);
         // 已经实例化过
         if(isset(self::$_instanceClass[$name]))
         {
             return self::$_instanceClass[$name];
+
+        // 类存在,或者通过自动加载取得
+        } elseif(class_exists($name)) {
+             self::$_instanceClass[$name] = new $name;
+             return self::$_instanceClass[$name];
+        
         // 加载文件,实例化
         } elseif(array_key_exists($name, self::$_classCache)) {
             require_once self::$_classCache[$name];
             self::$_instanceClass[$name] = new $name($param);
             return self::$_instanceClass[$name];
         }
+        
         // 没有找到
         return NULL;
     }
@@ -223,6 +220,19 @@ class Qwin_Class
             self::$_path[$path] = $depth;
         }
     }
+
+    /**
+     * 增加多个路径
+     *
+     * @param array $pathSet 路径组
+     */
+    public function addMultiPath(array $pathSet)
+    {
+        foreach($pathSet as $key => $depth)
+        {
+            self::addPath($key, $depth);
+        }
+    }
     
     /**
      * 删除路径
@@ -277,7 +287,7 @@ class Qwin_Class
                         $path_info = pathinfo($path_tmp);
                         if(isset($path_info['extension']) && in_array($path_info['extension'], self::$_fileExt))
                         {
-                            self::$_found_file[] = $path_tmp;
+                            self::$_foundFile[] = $path_tmp;
                             self::_getClassByFile($path_tmp);
                         }                        
                     } else {
@@ -349,15 +359,35 @@ class Qwin_Class
         return call_user_func_array($function, $set);
     }    
 
+    /**
+     * 获取类库的路径
+     *
+     * @return string 类库路径
+     */
     public static function getLibPath()
     {
-        if(!isset(self::$libPath))
+        if(isset(self::$libPath))
         {
-            self::$libPath = realpath(dirname(__FILE__) . '/..') . DIRECTORY_SEPARATOR;
+            return self::$libPath;
         }
+        self::$libPath = realpath(dirname(__FILE__) . '/..') . DIRECTORY_SEPARATOR;
         return self::$libPath;
     }
 
+    /**
+     * 注册自动加载类
+     */
+    public static function setAutoload()
+    {
+        spl_autoload_register(array(self, 'autoload'));
+    }
+
+    /**
+     * 自动加载类的方法,适用各类按标注方法命名的类库
+     *
+     * @param string $className
+     * @return bool 是否加载了类
+     */
     public static function autoload($className)
     {
        $classPath = self::getLibPath() . str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
@@ -367,5 +397,27 @@ class Qwin_Class
            return true;
        }
        return false;
+    }
+
+    /**
+     * 输入各静态变量
+     */
+    public static function debug()
+    {
+        echo '<pre>';
+
+        echo '<h1>Paths & Depths</h1>';
+        print_r(self::$_path);
+
+        echo '<h1>Found Files</h1>';
+        print_r(self::$_foundFile);
+
+        echo '<h1>Classes Cache Array</h1>';
+        print_r(self::$_classCache);
+
+        echo '<h1>Classes Map</h1>';
+        print_r(self::$_classMap);
+
+        echo '</pre>';
     }
 }

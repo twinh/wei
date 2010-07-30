@@ -1,31 +1,28 @@
 <?php
 /**
- * controller 的名称
+ * Controller
  *
- * controller 的简要介绍
+ * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
- * Copyright (c) 2009 Twin. All rights reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * LICENSE:
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * @author    Twin Huang <twinh@yahoo.cn>
- * @copyright Twin Huang
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2009-11-01 23:20:01 utf-8 中文
- * @since     2009-11-24 20:45:11 utf-8 中文
+ * @package     Qwin
+ * @subpackage  Miku
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @version     $Id$
+ * @since       2009-11-24 20:45:11
  */
 
 class Qwin_Miku_Controller
@@ -117,7 +114,7 @@ class Qwin_Miku_Controller
             $__view_file = $set;
         }
         // 加载文件,并销毁多余变量
-        //if(Qwin_Class::run('-file')->isExist($__view_file))
+        //if(Qwin::run('-file')->isExist($__view_file))
         if(file_exists($__view_file))
         {
             unset($set, $set_tmp, $i);
@@ -160,7 +157,7 @@ class Qwin_Miku_Controller
      */
     public function t($code)
     {
-        //!isset($this->lang) && $this->lang = Qwin_Class::run('-c')->lang;
+        //!isset($this->lang) && $this->lang = Qwin::run('-c')->lang;
         if(isset($this->lang[$code]))
         {
             return $this->lang[$code];
@@ -182,7 +179,7 @@ class Qwin_Miku_Controller
     {
         if('Qwin_' == substr($name, 0, 5))
         {
-            return Qwin_Class::run($name);
+            return Qwin::run($name);
         }
         return null;
     }

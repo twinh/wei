@@ -1,31 +1,28 @@
 <?php
 /**
- * qinit 的名称
+ * Init
  *
- * qinit 的简要介绍
+ * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
- * Copyright (c) 2009 Twin. All rights reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * LICENSE:
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * @author    Twin Huang <twinh@yahoo.cn>
- * @copyright Twin Huang
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2009-10-31 01:19:04 utf-8 中文
- * @since     2009-11-24 20:45:11 utf-8 中文
+ * @package     Qwin
+ * @subpackage  Miku
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @version     $Id$
+ * @since       2009-11-24 20:45:11
  */
 
 
@@ -35,7 +32,7 @@ class Qwin_Miku_Init
      * 存放加载了的命名空间的名称,用于检查是否加载过
      * @var array
      */
-    private $_is_namespace_loaded = array();
+    private $_isNamespaceLoaded = array();
 
     /**
      * 由命名空间,模块,控制器,动作组成的配置数组
@@ -53,7 +50,7 @@ class Qwin_Miku_Init
      * 是否加载了404页面的标识
      * @var bool
      */
-    private $_is_load_404 = false;
+    private $_isLoad404 = false;
     
     /**
      * 配置数组
@@ -71,25 +68,16 @@ class Qwin_Miku_Init
     public function __construct($config, $set = NULL)
     {
         $this->_config = $config;
-        // 增加框架目录作为加载路径
-        set_include_path(get_include_path() . PATH_SEPARATOR . dirname(QWIN_PATH));
-        
-        // 加载类管理类,并初始化
-        require_once QWIN_PATH . '/Class.php';
-        spl_autoload_register(array('Qwin_Class', 'autoload'));
-        Qwin_Class::init();
-        // 更新类名及文件的对应关系
-        //if(isset($_GET['_update']))
-        {
-            Qwin_Class::update();
-        }
+
+        // 加载框架主类,设置自动加载类
+        require_once QWIN_LIB_PATH . '/Qwin.php';
+        Qwin::setAutoload();
+
         // 注册初始化类
-        Qwin_Class::addMap(array(
+        Qwin::addMap(array(
             '-ini'  =>  __CLASS__,
             '-url'  => 'Qwin_Url',
-            '-gpc'  => 'Qwin_Request',
             '-arr'  => 'Qwin_Helper_Array',
-            '-gpc'  => 'Qwin_Request',
             // 当前命名空间类
             '-n'    => '',
             // 当前控制器类
@@ -97,7 +85,7 @@ class Qwin_Miku_Init
             // 当前模型类
             '-m'    => '',
         ));
-        Qwin_Class::addClass(__CLASS__, $this);
+        Qwin::addClass(__CLASS__, $this);
         
         // 设置错误提示输出等级
         error_reporting($config['error_type']);
@@ -114,16 +102,9 @@ class Qwin_Miku_Init
 
         // 关闭魔术引用
         ini_set('magic_quotes_runtime', 0);
-        /*if (!get_magic_quotes_gpc())
-        {
-            Qwin_Class::run('-arr')->multiMap($_POST, 'addslashes');
-            Qwin_Class::run('-arr')->multiMap($_GET, 'addslashes');
-            Qwin_Class::run('-arr')->multiMap($_COOKIE, 'addslashes');
-        }*/
-        //Qwin_Class::run('-arr')->multiMap($_FILES, 'addslashes');
-
+        
         // 初始化 url 参数,必须在转义后
-        Qwin_Class::run('-url');
+        Qwin::run('-url');
         $this->_loadNmcv($set);
     }
 
@@ -136,16 +117,11 @@ class Qwin_Miku_Init
     {
         // TODO
         // 转换配置数组
-        $url_set = Qwin_Class::run('-url')->getNca(array('namespace', 'module', 'controller', 'action'));
+        $url_set = Qwin::run('-url')->getNca(array('namespace', 'module', 'controller', 'action'));
         foreach($url_set as $key => $val)
         {
             !isset($set[$key]) && $set[$key] = $val ? $val : 'Default';
             $set[$key] = $this->secureFileName(ucfirst($set[$key]));
-        }
-        if('Qwin' == $set['namespace'])
-        {
-            require_once 'Qwin/Miku/Init/Exception.php';
-            throw new Qwin_Miku_Init_Exception('Namespace should not be "Qwin".');
         }
 
         $this->_set = &$set;
@@ -168,18 +144,20 @@ class Qwin_Miku_Init
      */
     private function _loadNamespace($set, $type = 'main')
     {
+        if(!in_array($set['namespace'], $this->_config['allowedNamespace']))
+
         $namespace_name = $set['namespace'] . '_Namespace';
-        if(!isset($this->_is_namespace_loaded[$set['namespace']]))
+        if(!isset($this->_isNamespaceLoaded[$set['namespace']]))
         {
             //if('main' == $type)
             //{
-                Qwin_Class::addMap('-n', $namespace_name);
-                $this->_namespace = Qwin_Class::run('-n');
+                Qwin::addMap('-n', $namespace_name);
+                $this->_namespace = Qwin::run('-n');
             //}
             // 执行 beforeLoad 方法,使程序可自由扩展
             // 比如,在该函数中加入 acl 访问控制, 缓存控制等
             $this->_loadNamespaceMethod('beforeLoad');
-            $this->_is_namespace_loaded[$set['namespace']] = true;
+            $this->_isNamespaceLoaded[$set['namespace']] = true;
         }
     }
 
@@ -206,7 +184,7 @@ class Qwin_Miku_Init
     private function _loadModule($set)
     {
         $class = $set['namespace'] . '_' . $set['module'] . '_Module';
-        return Qwin_Class::run($class);
+        return Qwin::run($class);
     }
 
     /**
@@ -220,12 +198,12 @@ class Qwin_Miku_Init
         /**
          * 构建控制器的文件并加载
          */
-        Qwin_Class::load('Qwin_Miku_Controller');
-        Qwin_Class::load('Default_Controller');
-        Qwin_Class::load('Default_Metadata');
+        Qwin::load('Qwin_Miku_Controller');
+        Qwin::load('Default_Controller');
+        Qwin::load('Default_Metadata');
         $controller_name = $this->getClassName('Controller', $set);
         $action = 'action' . $set['action'];
-        $controller = Qwin_Class::run($controller_name);
+        $controller = Qwin::run($controller_name);
         /**
          * 控制器和方法均不存在
          */
@@ -237,9 +215,9 @@ class Qwin_Miku_Init
                 $set['module'] = 'HttpError';
                 $set['controller'] = 'Default';
                 $set['action'] = '404';
-                if(false == $this->_is_load_404)
+                if(false == $this->_isLoad404)
                 {
-                    $this->_is_load_404 = true;
+                    $this->_isLoad404 = true;
                 } else {
                     $set['namespace'] = 'Default';;
                 }
@@ -248,7 +226,7 @@ class Qwin_Miku_Init
             } else {
                 $controller_name = 'Qwin_Miku_Controller';
                 $action = '__error';
-                $controller = Qwin_Class::run($controller_name);
+                $controller = Qwin::run($controller_name);
             }
         }
         
@@ -256,8 +234,8 @@ class Qwin_Miku_Init
          * 控制器初始化完毕,加载命名空间类的 onLoad 方法,可在其中对控制器进行管理
          */
         // 方便外部调用
-        Qwin_Class::addMap('-c', $controller_name);
-        Qwin_Class::addClass($controller_name, $controller);
+        Qwin::addMap('-c', $controller_name);
+        Qwin::addClass($controller_name, $controller);
         $controller->__query = $set;
         $this->_loadNamespaceMethod('onLoad');
         call_user_func(array($controller, $action));
@@ -273,7 +251,7 @@ class Qwin_Miku_Init
     private function _loadView($set, $controller = NULL)
     {
         // 加载视图
-        NULL == $controller && $controller = Qwin_Class::run('-c');
+        NULL == $controller && $controller = Qwin::run('-c');
         $controller->loadView($set);
     }
     
@@ -327,7 +305,7 @@ class Qwin_Miku_Init
         // 加载控制器
         $controller_name = $set['namespace'] . '_Controller_' . $set['controller'];
         $action = 'subAction' . $set['action'];
-        $controller = Qwin_Class::run($controller_name);
+        $controller = Qwin::run($controller_name);
         if(NULL != $controller)
         {
             call_user_func(array($controller, $action));
@@ -372,7 +350,7 @@ class Qwin_Miku_Init
 
 function qw($class, $param = NULL)
 {
-    return Qwin_Class::run($class, $param);
+    return Qwin::run($class, $param);
 }
 
 function qwForm($param, $param_2 = NULL)

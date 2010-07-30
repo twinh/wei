@@ -24,15 +24,15 @@
  * @author    Twin Huang <twinh@yahoo.cn>
  * @copyright Twin Huang
  * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2010-01-31 23:49 utf-8 中文
- * @since     2010-01-31 23:49 utf-8 中文
+ * @version   2010-01-31 23:49
+ * @since     2010-01-31 23:49
  */
 
 class Admin_Controller_Sidebar extends Qwin_Miku_Controller
 {
     function subActionDefault()
     {
-        $menu_list = Qwin_Class::run('Qwin_Cache_List')->getCache('admin_menu');
+        $menu_list = Qwin::run('Qwin_Cache_List')->getCache('admin_menu');
         $this->__view = array(
             'menu_list' => $menu_list,
         );

@@ -30,8 +30,8 @@ class Project_Helper_Cache
 {
     public function setFileCacheBySetting($setting)
     {
-        $ctrler = Qwin_Class::run('-c');
-        $fileCacheObj = Qwin_Class::run('Qwin_Cache_File');
+        $ctrler = Qwin::run('-c');
+        $fileCacheObj = Qwin::run('Qwin_Cache_File');
         $fileCacheObj->connect(ROOT_PATH . '/Cache/');
         /**
          * 去除无关的键名
@@ -54,6 +54,6 @@ class Project_Helper_Cache
     public function getFileCacheBySetting($setting)
     {
         $cacheName = md5(implode('-', $setting));
-        return Qwin_Class::run('Qwin_Cache_File')->get($cacheName);
+        return Qwin::run('Qwin_Cache_File')->get($cacheName);
     }
 }

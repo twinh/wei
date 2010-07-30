@@ -33,7 +33,7 @@ class ${namespace}_Controller_${controller} extends Qwin_Miku_Controller
      */
     function actionDefault()
     {
-        return Qwin_Class::run('Qwin_Action_List');
+        return Qwin::run('Qwin_Action_List');
     }
 
     /**
@@ -41,7 +41,7 @@ class ${namespace}_Controller_${controller} extends Qwin_Miku_Controller
      */
     function actionAdd()
     {
-        return Qwin_Class::run('Qwin_Action_Add');
+        return Qwin::run('Qwin_Action_Add');
     }
 
     /**
@@ -49,7 +49,7 @@ class ${namespace}_Controller_${controller} extends Qwin_Miku_Controller
      */
     function actionEdit()
     {
-        return Qwin_Class::run('Qwin_Action_Edit');
+        return Qwin::run('Qwin_Action_Edit');
     }
 
     /**
@@ -57,7 +57,7 @@ class ${namespace}_Controller_${controller} extends Qwin_Miku_Controller
      */
     function actionDelete()
     {
-        return Qwin_Class::run('Qwin_Action_Delete');
+        return Qwin::run('Qwin_Action_Delete');
     }
 
     /**
@@ -65,8 +65,8 @@ class ${namespace}_Controller_${controller} extends Qwin_Miku_Controller
      */
     function actionJsonList()
     {
-        Qwin_Class::load('Qwin_Converter_Time');
-        return Qwin_Class::run('Qwin_Action_JsonList');
+        Qwin::load('Qwin_Converter_Time');
+        return Qwin::run('Qwin_Action_JsonList');
     }
 
     /**
@@ -74,7 +74,7 @@ class ${namespace}_Controller_${controller} extends Qwin_Miku_Controller
      */
     function actionShow()
     {
-        return Qwin_Class::run('Qwin_Action_Show');
+        return Qwin::run('Qwin_Action_Show');
     }
 
     /**
@@ -82,6 +82,6 @@ class ${namespace}_Controller_${controller} extends Qwin_Miku_Controller
      */
     function actionFilter()
     {
-        return Qwin_Class::run('Qwin_Action_Filter');
+        return Qwin::run('Qwin_Action_Filter');
     }
 }

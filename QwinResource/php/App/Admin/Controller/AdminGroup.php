@@ -24,8 +24,8 @@
  * @author    Twin Huang <twinh@yahoo.cn>
  * @copyright Twin Huang
  * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2009-11-21 13:17 utf-8 中文
- * @since     2009-11-21 13:17 utf-8 中文
+ * @version   2009-11-21 13:17
+ * @since     2009-11-21 13:17
  */
 
 class Admin_Controller_Group extends Qwin_Miku_Controller
@@ -35,7 +35,7 @@ class Admin_Controller_Group extends Qwin_Miku_Controller
      */
     function actionDefault()
     {
-        return Qwin_Class::run('Qwin_Action_List');
+        return Qwin::run('Qwin_Action_List');
     }
 
     /**
@@ -43,7 +43,7 @@ class Admin_Controller_Group extends Qwin_Miku_Controller
      */
     function actionAdd()
     {
-        return Qwin_Class::run('Qwin_Action_Add');
+        return Qwin::run('Qwin_Action_Add');
     }
 
     /**
@@ -51,7 +51,7 @@ class Admin_Controller_Group extends Qwin_Miku_Controller
      */
     function actionEdit()
     {
-        return Qwin_Class::run('Qwin_Action_Edit');
+        return Qwin::run('Qwin_Action_Edit');
     }
 
     /**
@@ -59,7 +59,7 @@ class Admin_Controller_Group extends Qwin_Miku_Controller
      */
     function actionDelete()
     {
-        return Qwin_Class::run('Qwin_Action_Delete');
+        return Qwin::run('Qwin_Action_Delete');
     }
 
     /**
@@ -67,7 +67,7 @@ class Admin_Controller_Group extends Qwin_Miku_Controller
      */
     function actionJsonList()
     {
-        return Qwin_Class::run('Qwin_Action_JsonList');
+        return Qwin::run('Qwin_Action_JsonList');
     }
 
     /**
@@ -75,7 +75,7 @@ class Admin_Controller_Group extends Qwin_Miku_Controller
      */
     function actionShow()
     {
-        return Qwin_Class::run('Qwin_Action_Show');
+        return Qwin::run('Qwin_Action_Show');
     }
 
     /**
@@ -83,7 +83,7 @@ class Admin_Controller_Group extends Qwin_Miku_Controller
      */
     function actionFilter()
     {
-        return Qwin_Class::run('Qwin_Action_Filter');
+        return Qwin::run('Qwin_Action_Filter');
     }
 
 

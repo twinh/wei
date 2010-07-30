@@ -1,64 +1,62 @@
 <?php
 /**
- * qinit 的名称
+ * 请求处理
  *
- * qinit 的简要介绍
+ * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
- * Copyright (c) 2009 Twin. All rights reserved.
- * 
- * LICENSE:
- * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- * @author    Twin Huang <twinh@yahoo.cn>
- * @copyright Twin Huang
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2010-02-13 23:02 utf-8 中文
- * @since     2010-02-13 23:02 utf-8 中文
+ * @package     Qwin
+ * @subpackage  Request
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @version     $Id$
+ * @since       2010-02-13 23:02
  */
 
 class Qwin_Request
 {
-        /**
-     * 获取 url 查询字符串中的值,注意,如果使用了自定义的url分割符,那就不是 $_GET 中的键名和值
-     * @param string $key url查询的字符串中的键名
+    /**
+     * 获取 $_GET 数组中的值
+     *
+     * @param string $name url查询的字符串中的键名
      * @return mixed 键名对应的值
      */
-    function g($key)
+    public function g($name)
     {
-        return qw('-url')->g($key);
+        return isset($_GET[$name]) ? $_GET[$name] : NULL;
     }
     
     /**
      * 获取 $_POST 数组中的值
-     * @param string $key $_POST 数组对应的键名
+     * @param string $name $_POST 数组对应的键名
      * @return mixed 键名对应的值
      */
-    function p($key)
+    public function p($name)
     {
-        return isset($_POST[$key]) ? $_POST[$key] : NULL;
+        return isset($_POST[$name]) ? $_POST[$name] : NULL;
     }
     
     /**
      * 获取 $_REQUEST 数组中的值
      *
-     * @param string $key $_REQUEST 数组对应的键名
+     * @param string $name $_REQUEST 数组对应的键名
      * @return mixed 键名对应的值
      */
-    function r($key)
+    public function r($name)
     {
-        return isset($_REQUEST[$key]) ? $_REQUEST[$key] : NULL;
+        return isset($_REQUEST[$name]) ? $_REQUEST[$name] : NULL;
     }
     
     /**
@@ -67,48 +65,72 @@ class Qwin_Request
      * @param string $key $_COOKIE 数组对应的键名
      * @return mixed 键名对应的值
      */
-    function c($key)
+    public function c($name)
     {
-        return isset($_COOKIE[$key]) ? $_COOKIE[$key] : NULL;
+        return isset($_COOKIE[$name]) ? $_COOKIE[$name] : NULL;
     }
 
+    /**
+     * 获取 $_GET 数组中的值
+     *
+     * @param arary $nameArr 键名数组
+     * @param array
+     */
+    public function get(array $nameArr)
+    {
+        $arr = array();
+        foreach ($nameArr as $name)
+        {
+            $arr[$name] = $this->g($name);
+        }
+        return $arr;
+    }
+    
     /**
      * 获取 $_POST 数组中的值
      *
      * @param arary $arr 键名数组
-     * @param mixed
+     * @param array
      */
-    function get($arr)
+    public function post(array $nameArr)
     {
-        return qw('-url')->get($arr);
+        $arr = array();
+        foreach ($nameArr as $name)
+        {
+            $arr[$name] = $this->p($name);
+        }
+        return $arr;
     }
-    
+
     /**
-     * 获取 url 查询字符串中的值,注意,直接传入 $_GET 是不安全的
+     * 获取 $_REQUEST 数组中的值
      *
      * @param arary $arr 键名数组
-     * @param mixed
+     * @param array
      */
-    function post($arr)
+    public function request(array $nameArr)
     {
-        $arr = qw('-arr')->set($arr);
-        foreach ($arr as $key => $val)
+        $arr = array();
+        foreach ($nameArr as $name)
         {
-            $arr_2[$val] = self::p($val);
+            $arr[$name] = $this->r($name);
         }
-        return $arr_2;
+        return $arr;
     }
-    
+
     /**
-     * 合并 $this->get $this->post,详情查看对应方法
+     * 获取 $_COOKIE 数组中的值
      *
-     * @param array $keys 键名
-     * @param string $method 方法,在 get 和 post 中二选一
-     * @param mixed
+     * @param arary $arr 键名数组
+     * @param array
      */
-    function gp($keys, $method = 'get')
+    public function cookie(array $nameArr)
     {
-        $method = $method == 'get' ? 'get' : 'post';
-        $this->method($keys);
+        $arr = array();
+        foreach ($nameArr as $name)
+        {
+            $arr[$name] = $this->c($name);
+        }
+        return $arr;
     }
 }
