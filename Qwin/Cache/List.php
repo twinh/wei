@@ -23,7 +23,7 @@
  * @copyright Twin Huang
  * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version   2010-3-7 15:55:50
- * @since     2010-3-7 15:55:50 utf-8 中文
+ * @since     2010-3-7 15:55:50
  */
 
 /**
@@ -67,9 +67,9 @@ class Qwin_Cache_List extends Qwin_Cache
 
     function setCache($name)
     {
-        $self = Qwin_Class::run('-c');
-        $query = Qwin_Class::run('-qry');
-        $db = Qwin_Class::run('-db');
+        $self = Qwin::run('-c');
+        $query = Qwin::run('-qry');
+        $db = Qwin::run('-db');
 
         $sql = $query->getList('');
         $data = $db->getList($sql);

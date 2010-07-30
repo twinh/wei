@@ -22,8 +22,8 @@
  * @author    Twin Huang <twinh@yahoo.cn>
  * @copyright Twin Huang
  * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2010-5-24 7:40:48 utf-8 中文
- * @since     2010-5-24 7:40:48 utf-8 中文
+ * @version   2010-5-24 7:40:48
+ * @since     2010-5-24 7:40:48
  */
 
 // 防止直接访问导致错误
@@ -37,7 +37,7 @@
 <!--{JS}-->
 <!--{CSS}-->
 <?php
-$rsc = Qwin_Class::run('-rsc');
+$rsc = Qwin::run('-rsc');
 $rsc->load('js/jquery/core/jquery')
     ->load('jquery/ui/core')
     ->load('jquery/theme/' . qw('Qwin_Hepler_Util')->getStyle())

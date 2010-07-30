@@ -36,7 +36,7 @@ class Project_Hepler_Config
 
     function  __construct()
     {
-        $this->_cache = Qwin_Class::run('Qwin_Cache_List')->getCache('Config');
+        $this->_cache = Qwin::run('Qwin_Cache_List')->getCache('Config');
     }
 
     public function get($name)
@@ -53,5 +53,5 @@ class Project_Hepler_Config
 
 function C($name)
 {
-    echo Qwin_Class::run('Project_Hepler_Config')->get($name);
+    echo Qwin::run('Project_Hepler_Config')->get($name);
 }

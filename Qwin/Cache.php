@@ -2,29 +2,28 @@
 /**
  * Cache
  *
- * Copyright (c) 2009-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
- * LICENSE:
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * @author    Twin Huang <Twin Huang>
- * @copyright Twin Huang
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2010-3-12 15:44:19
- * @since     2010-3-12 15:44:19 utf-8 中文
- * $todo      允许自定义缓存引擎
+ * @package     Qwin
+ * @subpackage  Cache
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @version     $Id$
+ * @since       2010-3-12 15:44:19
+ * $todo        允许自定义缓存引擎
  */
 
 class Qwin_Cache
@@ -123,7 +122,7 @@ class Qwin_Cache
             /**
              * @todo 不存在时,继续判断
              */
-            return Qwin_Class::load('Qwin_Cache_' . $engine);
+            return Qwin::load('Qwin_Cache_' . $engine);
         }
         if(file_exists('Qwin/Cache/' . $engine . '.php'))
         {
@@ -138,13 +137,13 @@ class Qwin_Cache
 
     function writeArr($arr, $path, $name = '')
     {
-        $arr = Qwin_Class::run('Qwin_Helper_Array')->tophpCode($arr);
+        $arr = Qwin::run('Qwin_Helper_Array')->tophpCode($arr);
         if('' != $name)
         {
             $file_str = "<?php\r\n\$$name = $arr;\r\n";
         } else {
             $file_str = "<?php\r\nreturn $arr;\r\n";
         }
-        Qwin_Class::run('Qwin_Helper_File')->write($path, $file_str);
+        Qwin::run('Qwin_Helper_File')->write($path, $file_str);
     }
 }

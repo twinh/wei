@@ -24,8 +24,8 @@
  * @author    Twin Huang <twinh@yahoo.cn>
  * @copyright Twin Huang
  * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2009-11-21 13:18 utf-8 中文
- * @since     2009-11-21 13:18 utf-8 中文
+ * @version   2009-11-21 13:18
+ * @since     2009-11-21 13:18
  * @todo      is_eval 的安全问题
  */
 
@@ -42,43 +42,43 @@ class Admin_Controller_Menu extends Qwin_Miku_Controller
     // 列表
     function actionDefault()
     {
-        return Qwin_Class::run('Qwin_Action_List');
+        return Qwin::run('Qwin_Action_List');
     }
 
     // 添加
     function actionAdd()
     {
-        return Qwin_Class::run('Qwin_Action_Add');
+        return Qwin::run('Qwin_Action_Add');
     }
 
     // 编辑
     function actionEdit()
     {
-        return Qwin_Class::run('Qwin_Action_Edit');
+        return Qwin::run('Qwin_Action_Edit');
     }
 
     // 删除
     function actionDelete()
     {
-        return Qwin_Class::run('Qwin_Action_Edit');
+        return Qwin::run('Qwin_Action_Edit');
     }
 
     // json 数据
     function actionJsonList()
     {
-        return Qwin_Class::run('Qwin_Action_JsonList');
+        return Qwin::run('Qwin_Action_JsonList');
     }
 
     // 查看
     function actionShow()
     {
-        return Qwin_Class::run('Qwin_Action_Show');
+        return Qwin::run('Qwin_Action_Show');
     }
 
     // 筛选
     function actionFilter()
     {
-        return Qwin_Class::run('Qwin_Action_Filter');
+        return Qwin::run('Qwin_Action_Filter');
     }
 
     /**
@@ -87,10 +87,10 @@ class Admin_Controller_Menu extends Qwin_Miku_Controller
      */
     function onAfterDb()
     {
-        $self = Qwin_Class::run('-c');
-        $query = Qwin_Class::run('-qry');
-        $db = Qwin_Class::run('-db');
-        $cache = Qwin_Class::run('Qwin_Cache_List');
+        $self = Qwin::run('-c');
+        $query = Qwin::run('-qry');
+        $db = Qwin::run('-db');
+        $cache = Qwin::run('Qwin_Cache_List');
 
         $query_arr = array(
             'ORDER' => '`order` ASC, `id` DESC',

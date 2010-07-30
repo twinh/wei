@@ -2,31 +2,28 @@
 /**
  * jQuery 插件与表单
  *
- * 
+ * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
- * Copyright (c) 2009 Twin. All rights reserved.
- * 
- * LICENSE:
- * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- * @author    Twin Huang <twinh@yahoo.cn>
- * @copyright Twin Huang
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2009-11-21 20:09 utf-8 中文
- * @since     2009-11-21 20:09 utf-8 中文
- * @todo      is_eval 的安全问题
+ * @package     Qwin
+ * @subpackage  Form
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @version     $Id$
+ * @since       2009-11-21 20:09
+ * @todo        is_eval 的安全问题
  */
 
 class Qwin_Form_ElementExt_JQuery extends Qwin_Form
@@ -36,9 +33,9 @@ class Qwin_Form_ElementExt_JQuery extends Qwin_Form
      */
     function datepicker($pub_set, $pri_set, $value, $data)
     {
-        $js = Qwin_Class::run('-js');
-        $html = Qwin_Class::run('-html');
-        $rsc = Qwin_Class::run('-rsc');
+        $js = Qwin::run('-js');
+        $html = Qwin::run('-html');
+        $rsc = Qwin::run('-rsc');
 
         // 初始化 js 代码组
         $js->newJsCodeGroup($pub_set['name']);
@@ -61,8 +58,8 @@ class Qwin_Form_ElementExt_JQuery extends Qwin_Form
      */
     function ajaxUpload($pub_set, $pri_set, $value, $data)
     {
-        $js = Qwin_Class::run('-js');
-        $rsc = Qwin_Class::run('-rsc')
+        $js = Qwin::run('-js');
+        $rsc = Qwin::run('-rsc')
             ->load('jquery/ui/dialog')
             ->load('jquery/plugin/ajaxupload');
 
@@ -79,16 +76,16 @@ class Qwin_Form_ElementExt_JQuery extends Qwin_Form
      */
     function fileTree($pub_set, $pri_set, $value, $data)
     {
-        $js = Qwin_Class::run('-js');
-        $rsc = Qwin_Class::run('-rsc')
+        $js = Qwin::run('-js');
+        $rsc = Qwin::run('-rsc')
             ->load('jquery/ui/dialog')
             ->load('jquery/plugin/qfiletree');
 
         // TODO 置于Qwin_Form类中
-        $set = Qwin_Class::run('-arr')->decodeArray($pri_set['_typeExt']);
+        $set = Qwin::run('-arr')->decodeArray($pri_set['_typeExt']);
         if(!empty($set['fileTree']))
         {
-            $code = '$("#' . $pub_set['id'] . '").QFileTree(' . Qwin_Class::run('-arr')->toJsObject($set['fileTree']) . ');';
+            $code = '$("#' . $pub_set['id'] . '").QFileTree(' . Qwin::run('-arr')->toJsObject($set['fileTree']) . ');';
         } else {
             $code = '$("#' . $pub_set['id'] . '").QFileTree({
             filetree : {

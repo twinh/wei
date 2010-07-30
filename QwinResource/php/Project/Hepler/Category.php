@@ -33,7 +33,7 @@ class Project_Hepler_Category
 
     function  __construct()
     {
-        Qwin_Class::load('Qwin_Tree');
+        Qwin::load('Qwin_Tree');
     }
 
     public function getTreeResource($set, $parent = NULL, $keyArr = array('id', 'parent_id', 'name'), $isAddPrefix = true)
@@ -47,14 +47,14 @@ class Project_Hepler_Category
         if(!isset($this->_fileCache[$name]))
         {
             // TODO 使用文件缓存
-            $this->_fileCache[$name] = Qwin_Class::run('-c')
+            $this->_fileCache[$name] = Qwin::run('-c')
                 ->meta
                 ->getQuery($set)
                 ->execute()
                 ->toArray();
             /*
             // 获取文件缓存
-            $cacheObj = Qwin_Class::run('Project_Helper_Cache');
+            $cacheObj = Qwin::run('Project_Helper_Cache');
             $this->_fileCache[$name] = $cacheObj->getFileCacheBySetting($set);*/
             /**
              * 设置文件缓存,不论页面运行多少次,只会在第一次执行

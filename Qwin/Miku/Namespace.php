@@ -2,45 +2,43 @@
 /**
  * Namespace
  *
- * Copyright (c) 2009-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
- * LICENSE:
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * @author    Twin Huang <Twin Huang>
- * @copyright Twin Huang
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2010-4-6 20:47:47
- * @since     2010-4-6 20:47:47 utf-8 中文
+ * @package     Qwin
+ * @subpackage  Namespace
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @version     $Id$
+ * @since       2010-4-6 20:47:47
  */
 
 class Qwin_Miku_Namespace
 {
     public function beforeLoad($set = null, $config = null)
     {
-        $ini = Qwin_Class::run('-ini');
+        $ini = Qwin::run('-ini');
         $config = $ini->getConfig();
 
         $this->_setupSession($config);
-        !defined('TIMESTAMP') && define('TIMESTAMP', time());
 
         // 打开缓冲区
         ob_start();
 
         // 增加类的对应关系
-        Qwin_Class::addMap(array(
+        Qwin::addMap(array(
             // 权限控制
             '-acl'  => 'Qwin_Acl',
 
@@ -92,31 +90,31 @@ class Qwin_Miku_Namespace
 
         // 加载表单生成类
         // 表单基本类型,富文本编辑器, jQuery 相关的插件
-        Qwin_Class::run('-form')
+        Qwin::run('-form')
             ->add('Qwin_Form_Element_Base')
             ->addExt('Qwin_Form_ElementExt_Editor')
             ->addExt('Qwin_Form_ElementExt_JQuery');
 
         // 加载按钮生成类
         // 部分常用按钮
-        Qwin_Class::run('-btn')->add('Qwin_Form_Button_JQuery');
+        Qwin::run('-btn')->add('Qwin_Form_Button_JQuery');
     }
 
     public function onLoad($set = null, $config = null)
     {
-        $ini = Qwin_Class::run('-ini');
-        $controller = Qwin_Class::run('-c');
+        $ini = Qwin::run('-ini');
+        $controller = Qwin::run('-c');
         // 加载配置文件
         
-        Qwin_Class::load('Qwin_Miku_Metadata');
+        Qwin::load('Qwin_Miku_Metadata');
         $metadataName = $ini->getClassName('Metadata', $set);
-        $metadata = Qwin_Class::run($metadataName);
+        $metadata = Qwin::run($metadataName);
         if(NULL == $metadata)
         {
             $metadataName = 'Qwin_Miku_Metadata';
-            $metadata = Qwin_Class::run($metadataName);
+            $metadata = Qwin::run($metadataName);
         }
-        Qwin_Class::addMap('-s', $metadataName);
+        Qwin::addMap('-s', $metadataName);
         // TODO 是否要包含在控制器中?
         $controller->__meta = $metadata->defaultMetadata();
 
@@ -131,13 +129,13 @@ class Qwin_Miku_Namespace
 
         // 获取模型类名称
         $modelName = $ini->getClassName('Model', $set);
-        $model = Qwin_Class::run($modelName);
+        $model = Qwin::run($modelName);
         if(NULL == $model)
         {
             $modelName = 'Qwin_Miku_Model';
-            $model = Qwin_Class::run($modelName);
+            $model = Qwin::run($modelName);
         }
-        Qwin_Class::addMap('-model', $modelName);
+        Qwin::addMap('-model', $modelName);
         $controller->model = $model;
         if(isset($controller->__meta['db']['table']))
         {
@@ -158,17 +156,17 @@ class Qwin_Miku_Namespace
             }
         }
         echo "Total time: " . $time  . "\n";*/
-        $controller = Qwin_Class::run('-c');
+        $controller = Qwin::run('-c');
 
         $js_lang = 'Qwin.Lang = ';
-        $js_lang .= Qwin_Class::run('-arr')->toJsObject($controller->lang);
+        $js_lang .= Qwin::run('-arr')->toJsObject($controller->lang);
         $js_lang .= ';';
-        Qwin_Class::run('-js')->addJs('lang', $js_lang);
+        Qwin::run('-js')->addJs('lang', $js_lang);
         $output = ob_get_contents();
         '' != $output && ob_end_clean();
-        $html = Qwin_Class::run('-html')->packAll();
-        $js =  Qwin_Class::run('-js')->packAll();
-        $css = Qwin_Class::run('-css')->packAll();
+        $html = Qwin::run('-html')->packAll();
+        $js =  Qwin::run('-js')->packAll();
+        $css = Qwin::run('-css')->packAll();
         $output = str_replace(
             array('<!--{CSS}-->', '<!--{JS}-->'),
             array($css, $html . $js),
@@ -187,15 +185,15 @@ class Qwin_Miku_Namespace
     {
         // TODO default language
         // 获取语言名称
-        $ini = Qwin_Class::run('-ini');
-        $url = Qwin_Class::run('-url');
-        $controller = Qwin_Class::run('-c');
+        $ini = Qwin::run('-ini');
+        $url = Qwin::run('-url');
+        $controller = Qwin::run('-c');
 
         $lang = '';
         // 按优先级排列语言的数组
         $lang_arr = array(
             $url->g('lang'),
-            Qwin_Class::run('-ses')->get('lang'),
+            Qwin::run('-ses')->get('lang'),
             $config['i18n']['language'],
         );
         foreach($lang_arr as $val)
@@ -206,7 +204,7 @@ class Qwin_Miku_Namespace
                 break;
             }
         }
-        Qwin_Class::run('-ses')->set('lang', $lang);
+        Qwin::run('-ses')->set('lang', $lang);
         //$controller->lang_name = $lang;
         $controller->meta->lang = $lang;
 
@@ -240,8 +238,8 @@ class Qwin_Miku_Namespace
      */
     private function _setupSession($config)
     {
-        Qwin_Class::addMap('-ses', 'Qwin_Session');
+        Qwin::addMap('-ses', 'Qwin_Session');
         $namespace = md5($_SERVER['SERVER_NAME'] . $config['project']['name']);
-        Qwin_Class::run('-ses', $namespace);
+        Qwin::run('-ses', $namespace);
     }
 }

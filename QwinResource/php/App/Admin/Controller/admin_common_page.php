@@ -24,8 +24,8 @@
  * @author    Twin Huang <twinh@yahoo.cn>
  * @copyright Twin Huang
  * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2009-11-21 13:02 utf-8 中文
- * @since     2009-11-21 13:02 utf-8 中文
+ * @version   2009-11-21 13:02
+ * @since     2009-11-21 13:02
  */
 
 class Controller_Admin_Common_page extends QW_Controller
@@ -34,43 +34,43 @@ class Controller_Admin_Common_page extends QW_Controller
 	// 列表
 	function actionDefault()
 	{
-		return Qwin_Class::run('Qwin_Action_List');
+		return Qwin::run('Qwin_Action_List');
 	}
 
 	// 添加
 	function actionAdd()
 	{
-		return Qwin_Class::run('Qwin_Action_Add');
+		return Qwin::run('Qwin_Action_Add');
 	}
 
 	// 编辑
 	function actionEdit()
 	{
-		return Qwin_Class::run('Qwin_Action_Edit');
+		return Qwin::run('Qwin_Action_Edit');
 	}
 
 	// 删除
 	function actionDelete()
 	{
-		return Qwin_Class::run('Qwin_Action_Delete');
+		return Qwin::run('Qwin_Action_Delete');
 	}
 
 	// json 数据
 	function actionJsonList()
 	{
-		return Qwin_Class::run('Qwin_Action_JsonList');
+		return Qwin::run('Qwin_Action_JsonList');
 	}
 
 	// 查看
 	function actionShow()
 	{
-		return Qwin_Class::run('Qwin_Action_Show');
+		return Qwin::run('Qwin_Action_Show');
 	}
 
 	// 筛选
 	function actionFilter()
 	{
-		return Qwin_Class::run('Qwin_Action_Filter');
+		return Qwin::run('Qwin_Action_Filter');
 	}
 
 	function converListOperate($value, $data)

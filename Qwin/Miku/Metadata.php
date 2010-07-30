@@ -1,31 +1,28 @@
 <?php
 /**
- * setting 的名称
+ * Metadata
  *
- * setting 的简要介绍
+ * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
- * Copyright (c) 2009 Twin. All rights reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * LICENSE:
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * @author    Twin Huang <twinh@yahoo.cn>
- * @copyright Twin Huang
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2009-11-01 23:20:01 utf-8 中文
- * @since     2009-11-24 20:45:11 utf-8 中文
+ * @package     Qwin
+ * @subpackage  Miku
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @version     $Id$
+ * @since       2009-11-24 20:45:11
  */
 
 class Qwin_Miku_Metadata extends Qwin_Metadata
@@ -90,14 +87,14 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
     public function converSingleData(&$set, $action, $row, $isUrlQuery = false)
     {
         // TODO
-        $str = Qwin_Class::run('-str');
-        $self = Qwin_Class::run('-c');
+        $str = Qwin::run('-str');
+        $self = Qwin::run('-c');
         $action = strtolower($action);
         $row_copy = $row;
 
         // fixed 2010-06-27 添加操作时,清空其他主键的值
         // TODO 整理
-        $urlAction = Qwin_Class::run('-gpc')->g('action');
+        $urlAction = Qwin::run('-gpc')->g('action');
 
         foreach($set as $field => $val)
         {
@@ -124,10 +121,10 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
                      * $conver[0][0]为类名,尝试加载该类
                      * @todo 静态调用和动态调用
                      */
-                    //Qwin_Class::load($conver[0][0]);
+                    //Qwin::load($conver[0][0]);
                     if(!is_object($conver[0][0]))
                     {
-                        $conver[0][0] = Qwin_Class::run($conver[0][0]);
+                        $conver[0][0] = Qwin::run($conver[0][0]);
                     }
                     if(!method_exists($conver[0][0], $conver[0][1]))
                     {
@@ -187,7 +184,7 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
         {
             if(empty($this->lang))
             {
-                $config = Qwin_Class::run('-ini')->getConfig();
+                $config = Qwin::run('-ini')->getConfig();
                 $this->lang = $config['i18n']['language'];
             }
         }
@@ -206,7 +203,7 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
         if(!isset($this->_cache['common_class'][$lang][$name]))
         {
             
-            $this->_cache['common_class'][$lang][$name] = Qwin_Class::run('Qwin_Cache_CommonClass')
+            $this->_cache['common_class'][$lang][$name] = Qwin::run('Qwin_Cache_CommonClass')
                 ->getCache($name, $lang);
         }
         return $this->_cache['common_class'][$lang][$name];
@@ -222,7 +219,7 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
             // 初始化模型
             if(!isset($this->_modelObjct[$model['name']]))
             {
-                $this->_modelObjct[$model['name']] = Qwin_Class::run($model['name']);
+                $this->_modelObjct[$model['name']] = Qwin::run($model['name']);
             }
             // 加载Metadata
             $this->loadMetadataToMetaExt($model['metadata'], $model['name']);
@@ -237,8 +234,8 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
      */
     public function connectModel($mainModelName, $mainModelMetadata)
     {
-        $config = Qwin_Class::run('-ini')->getConfig();
-        $modelObject = Qwin_Class::run($mainModelName);
+        $config = Qwin::run('-ini')->getConfig();
+        $modelObject = Qwin::run($mainModelName);
 
         $query = Doctrine_Query::create()
            ->from($mainModelName . ' t');
@@ -283,8 +280,8 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
      */
     public function connetMetadata(&$meta)
     {
-        $str = Qwin_Class::run('Qwin_Converter_String');
-        $c = Qwin_Class::run('-c');
+        $str = Qwin::run('Qwin_Converter_String');
+        $c = Qwin::run('-c');
         foreach($meta['field'] as $name =>$fieldMeta)
         {
             // 删除只读项
@@ -376,7 +373,7 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
      */
     public function fillData($meta, $query, $data)
     {
-        $gpc = Qwin_Class::run('-gpc');
+        $gpc = Qwin::run('-gpc');
         $dbData = array();
         foreach($meta['field'] as $fieldName => $field)
         {
@@ -427,9 +424,9 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
     public function validateData($meta, $data)
     {
         // 初始验证类
-        $validator = Qwin_Class::run('Qwin_Validator');
+        $validator = Qwin::run('Qwin_Validator');
         $validator->add('Qwin_Validator_Common');
-        $arr = Qwin_Class::run('-arr');
+        $arr = Qwin::run('-arr');
         
         // 加载验证信息
         $validatorMessage1 = $this->getCommonClassList('validator_message', 'rsc');
@@ -460,7 +457,7 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
                     {
                         $msg = $this->format($validatorMessage[$method], $msgParam);
                         $msg = $this->t('MSG_ERROR_FIELD') . $field['basic']['title'] . '\n' . $this->t('MSG_ERROR_MSG') . $msg;
-                        Qwin_Class::run('Qwin_Helper_Js')->show($msg);
+                        Qwin::run('Qwin_Helper_Js')->show($msg);
                     }
                 }
             }
@@ -541,7 +538,7 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
      */
     public function t($code)
     {
-        !isset($this->langData) && $this->langData = Qwin_Class::run('-c')->lang;
+        !isset($this->langData) && $this->langData = Qwin::run('-c')->lang;
         if(isset($this->langData[$code]))
         {
             return $this->langData[$code];
@@ -555,7 +552,7 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
         $data = array();
         foreach($set as $val)
         {
-            $data[$val['form']['name']] = Qwin_Class::run('-str')->set($val[$type[0]][$type[1]]);
+            $data[$val['form']['name']] = Qwin::run('-str')->set($val[$type[0]][$type[1]]);
         }
         return $data;
     }
@@ -570,8 +567,8 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
     */
     public function getSettingList($set, $allow_attr = array(), $ban_attr = array())
     {
-        $allow_attr = Qwin_Class::run('-arr')->set($allow_attr);
-        $ban_attr = Qwin_Class::run('-arr')->set($ban_attr);
+        $allow_attr = Qwin::run('-arr')->set($allow_attr);
+        $ban_attr = Qwin::run('-arr')->set($ban_attr);
 
         // 根据提供的 allow, ban 属性列表,生成比较的数组
         $temp_arr = array();
@@ -586,7 +583,7 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
         $data = array();
         foreach($set as $val)
         {
-            if(true == Qwin_Class::run('-arr')->isSubset($temp_arr, $val['attr']))
+            if(true == Qwin::run('-arr')->isSubset($temp_arr, $val['attr']))
             {
                 $data[$val['form']['name']] = $val['form']['name'];
                 //$data[] = $val['form']['name'];
@@ -617,7 +614,7 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
     {
         if(!isset($this->_cache['class'][$name]))
         {
-            require Qwin_Class::run('ArrayCache')->getClassPath($name);
+            require Qwin::run('ArrayCache')->getClassPath($name);
             $this->_cache['class'][$name] = &$_CACHE['class'][$name];
         }
         return $this->_cache['class'][$name];
@@ -638,7 +635,7 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
      */
     public function loadSettingFile($controller, $namespace = 'default')
     {
-        require_once ROOT_PATH . Qwin_Class::run('-str')->toPathSeparator('\app\\' . $namespace . '\setting\\' . $controller . '.php');
+        require_once ROOT_PATH . Qwin::run('-str')->toPathSeparator('\app\\' . $namespace . '\setting\\' . $controller . '.php');
         $name = 'Setting_' . $namespace . '_' . $controller;
         $class = new $name;
         return $class->setting();
@@ -653,7 +650,7 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
      */
     public function getInitalOrder($table, $field = 'order', $increment = 5, $where = NULL)
     {
-        $mainModelName = Qwin_Class::run('-ini')->getClassName('Model', Qwin_Class::run('-c')->__query);
+        $mainModelName = Qwin::run('-ini')->getClassName('Model', Qwin::run('-c')->__query);
         $query = $this->query[$mainModelName]
             ->select('Max(`' .  $field . '`) as max_order');
         if(NULL != $where)
@@ -674,15 +671,15 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
      */
     public function addHit($table, $id, $field = 'hit', $num = 1)
     {
-        Qwin_Class::run('-qry')->setTable($table);
+        Qwin::run('-qry')->setTable($table);
 
-        $sql = "UPDATE " . Qwin_Class::run('-qry')->getTable() . " SET `$field` = $field+$num WHERE `id` = '$id'; ";
-        Qwin_Class::run('-db')->Query($sql);
+        $sql = "UPDATE " . Qwin::run('-qry')->getTable() . " SET `$field` = $field+$num WHERE `id` = '$id'; ";
+        Qwin::run('-db')->Query($sql);
     }
 
     public function getUrlList($field, $url_data)
     {
-        Qwin_Class::run('-arr')->set($url_data);
+        Qwin::run('-arr')->set($url_data);
         $data = array();
         foreach($url_data as $key => $val)
         {
@@ -727,7 +724,7 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
      */
     public function groupingSettingArr($field_arr)
     {
-        $action = Qwin_Class::run('-c')->__query['action'];
+        $action = Qwin::run('-c')->__query['action'];
         $new_arr = array();
         foreach($field_arr as $key => $val)
         {
@@ -856,7 +853,7 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
         $pos = strpos($data, '{0}');
         if(false !== $pos)
         {
-            $repalce = Qwin_Class::run('-arr')->set($repalce);
+            $repalce = Qwin::run('-arr')->set($repalce);
             $search = array();
             $count = count($repalce);
             for($i = 0;$i < $count; $i++)
@@ -887,7 +884,7 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
 
     public function metadataToModel($meta, $model)
     {
-        $config = Qwin_Class::run('-ini')->getConfig();
+        $config = Qwin::run('-ini')->getConfig();
         // 设置数据表
         $model->setTableName($config['db']['prefix'] . $meta['db']['table']);
          // 数据库查询的字段数组
@@ -901,13 +898,13 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
 
     public function getQuery($set)
     {
-        $ini = Qwin_Class::run('-ini');
+        $ini = Qwin::run('-ini');
         $metaClassName = $ini->getClassName('Metadata', $set);
         $ctrlerClassName = $ini->getClassName('Controller', $set);
         $modelClassName = $ini->getClassName('Model', $set);
         $meta = $this->loadMetadataToMetaExt($metaClassName, $modelClassName);
         // 加载主模型类
-        $model = Qwin_Class::run($modelClassName);
+        $model = Qwin::run($modelClassName);
         $this->metadataToModel($meta, $model);
 
         // 加载关联模型,元数据
@@ -926,9 +923,9 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
     {
         if(!isset($this->metaExt[$modelClassName]))
         {
-            $this->metaExt[$modelClassName] = Qwin_Class::run($metaClassName)->defaultMetadata();
+            $this->metaExt[$modelClassName] = Qwin::run($metaClassName)->defaultMetadata();
             // 语言转换
-            $this->metaExt[$modelClassName] = $this->converLang($this->metaExt[$modelClassName], Qwin_Class::run('-c')->lang, true);
+            $this->metaExt[$modelClassName] = $this->converLang($this->metaExt[$modelClassName], Qwin::run('-c')->lang, true);
         }
         return $this->metaExt[$modelClassName];
     }
@@ -944,8 +941,8 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
      */
     public function addOrderToQuery($meta, $query)
     {
-        $arr = Qwin_Class::run('-arr');
-        $gpc = Qwin_Class::run('-gpc');
+        $arr = Qwin::run('-arr');
+        $gpc = Qwin::run('-gpc');
         //$alias = $query->getRootAlias() . '.';
         $alias = 't.';
 
@@ -980,8 +977,8 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
 
     public function addWhereToQuery($meta, $query)
     {
-        $arr = Qwin_Class::run('-arr');
-        $gpc = Qwin_Class::run('-gpc');
+        $arr = Qwin::run('-arr');
+        $gpc = Qwin::run('-gpc');
         $alias = 't.';
         $searchTypeArr = array(
             'eq' => '=',
