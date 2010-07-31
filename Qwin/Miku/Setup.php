@@ -23,18 +23,11 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2009-11-24 20:45:11
- * @todo        只运行运行一次
+ * @todo        只运行一次
  */
 
-
-class Qwin_Miku_Init
+class Qwin_Miku_Setup
 {
-    /**
-     * 存放加载了的命名空间的名称,用于检查是否加载过
-     * @var array
-     */
-    //private $_isNamespaceLoaded = array();
-
     /**
      * 由命名空间,模块,控制器,行为组成的配置数组
      * @var array
@@ -77,28 +70,24 @@ class Qwin_Miku_Init
     protected $_request;
 
     /**
-     * 初始化
+     * 解析配置,初始化并构建程序
      *
      * @param array $config
      * @param array $set
      * @todo 配置
      */
-    public function __construct($config, $set = NULL)
+    public function __construct($config, $set = null)
     {
         $this->_config = $config;
 
         // 加载框架主类,设置自动加载类
         require_once QWIN_LIB_PATH . '/Qwin.php';
         Qwin::setAutoload();
+        Qwin::setCacheFile(ROOT_PATH . '/Cache/Php/System/class.php');
 
         $this->_request = Qwin::run('Qwin_Request');
 
         // 注册初始化类
-        Qwin::addMap(array(
-            '-ini'  =>  __CLASS__,
-            '-url'  => 'Qwin_Url',
-            '-arr'  => 'Qwin_Helper_Array',
-        ));
         Qwin::addClass(__CLASS__, $this);
 
         /**
@@ -121,7 +110,7 @@ class Qwin_Miku_Init
         ini_set('magic_quotes_runtime', 0);
         
         // 初始化 url 参数,必须在转义后
-        Qwin::run('-url');
+        Qwin::run('Qwin_Url');
 
         /**
          * 通过配置数据和Url参数初始化系统配置
@@ -139,40 +128,34 @@ class Qwin_Miku_Init
         {
             if(!isset($set[$field]))
             {
-                $set[$field] = NULL != $urlSet[$field] ? $urlSet[$field] : 'Default';
+                $set[$field] = null != $urlSet[$field] ? $urlSet[$field] : 'Default';
             }
         }
-
-        /**
-         * 预先加载控制父类
-         * 当命名空间,模块类不在时,允许通过控制器类加载视图
-         */
-        $this->_parentController = Qwin::run('Qwin_Miku_Controller');
         
         /**
          * 加载命名空间
          * 如果是配置文件中不允许的命名空间,则抛出异常
-         * @todo 命名空间是否只允许加载一次 $this->_isNamespaceLoaded;
          */
-        if(!in_array($this->_set['namespace'], $this->_config['allowedNamespace']))
+        if(!in_array($set['namespace'], $this->_config['allowedNamespace']))
         {
-            $this->_parentController->onNamespaceNotExists($set, $this->_config);
+            require_once 'Qwin/Miku/Setup/Exception.php';
+            throw new Qwin_Miku_Setup_Exception('The namespace ' . $set['namespace'] . ' is not allowed.');
         }
-        
-        // 初始命名空间类,并加入类管理器中
+
+        /**
+         * 初始命名空间类,并加入类管理器中
+         */
         $namespaceClass = $set['namespace'] . '_Namespace';
         $this->_namespace = Qwin::run($namespaceClass);
+        null == $this->_namespace && $this->_onNamespaceNotExists($set['namespace']);
         Qwin::addMap('-namespace', $namespaceClass);
-
-        // 执行beforeLoad方法,运行自由扩展
-        // 比如,在该函数中加入访问控制, 缓存控制等
-        $this->_loadNamespaceMethod('beforeLoad');
 
         /**
          * 初始模块类,并加入类管理器中
          */
         $moduleClass = $set['namespace'] . '_' . $set['module'] . '_Module';
         $this->_module = Qwin::run($moduleClass);
+        null == $this->_module && $this->_onModuleNotExists($set['module']);
         Qwin::addMap('-module', $moduleClass);
 
         /**
@@ -180,11 +163,11 @@ class Qwin_Miku_Init
          */
         $controllerClass = $this->getClassName('Controller', $set);
         $this->_controller = Qwin::run($controllerClass);
-
-        // 控制器不存在
-        if(NULL == $this->_controller)
+        if(null == $this->_controller)
         {
-            $this->_parentController->onControllerNotExists($set, $this->_config);
+            $controllerClass = 'Qwin_Miku_Controller';
+            $this->_controller = Qwin::run('Qwin_Miku_Controller');
+            $this->_onControllerNotExists($set['controller']);
         }
         Qwin::addMap('-controller', $controllerClass);
 
@@ -192,163 +175,46 @@ class Qwin_Miku_Init
          * 执行指定的行为
          */
         $action = 'action' . $set['action'];
-        if(method_exists($this->_controller, $name))
+        if(method_exists($this->_controller, $action))
         {
             call_user_func_array(
-                array($this->_controller, $name),
+                array($this->_controller, $action),
                 array(&$set, &$this->_config)
             );
         } else {
-            $this->_parentController->onControllerNotExists($set, $this->_config);
+            $this->_onActionNotExists($set['action']);
         }
-
+        
         return true;
     }
 
-        /**
-     * 加载控制器文件
-     *
-     * @param array $set 配置数组
-     * @return null
-     */
-    private function _loadController($set)
-    {
-        /**
-         * 构建控制器的文件并加载
-         */
-        $controller_name = $this->getClassName('Controller', $set);
-        $action = 'action' . $set['action'];
-        $controller = Qwin::run($controller_name);
-        /**
-         * 控制器和方法均不存在
-         */
-        if(null == $controller || !method_exists($controller, $action))
-        {
-            // 加载当前命名空间的HttpError模块
-            if('Default' != $set['namespace'])
-            {
-                $set['module'] = 'HttpError';
-                $set['controller'] = 'Default';
-                $set['action'] = '404';
-                if(false == $this->_isLoad404)
-                {
-                    $this->_isLoad404 = true;
-                } else {
-                    $set['namespace'] = 'Default';;
-                }
-                $this->_loadNmcv($set);
-                return true;
-            } else {
-                $controller_name = 'Qwin_Miku_Controller';
-                $action = '__error';
-                $controller = Qwin::run($controller_name);
-            }
-        }
-
-        /**
-         * 控制器初始化完毕,加载命名空间类的 onLoad 方法,可在其中对控制器进行管理
-         */
-        // 方便外部调用
-        Qwin::addMap('-c', $controller_name);
-        Qwin::addClass($controller_name, $controller);
-        $controller->__query = $set;
-        $this->_loadNamespaceMethod('onLoad');
-        call_user_func(array($controller, $action));
-    }
-
     /**
-     * 加载命名空间(n), 控制器(c), 视图(v)
+     * 获取网站配置数组
      * 
-     * @param array $set 配置数组
-     */
-    private function _loadNmcv($set = NULL)
-    {
-        /**
-         * 通过配置参数和url参数获取配置数组
-         */
-        
-        
-    
-        // 加载控制器
-        $this->_loadController($set);
-        // 加载视图
-        $this->_loadView($set);
-        $this->_loadNamespaceMethod('afterLoad');
-    }
-
-
-
-    /**
-     * 加载命名空间类中的方法
-     *
-     * @param string $name 方法的名称
-     */
-    private function _loadNamespaceMethod($name)
-    {
-        method_exists($this->_namespace, $name) && 
-        call_user_func_array(
-            array($this->_namespace, $name),
-            array(&$this->_set, &$this->_config)
-        );
-    }
-
-
-
-    /**
-     * 加载视图文件
-     *
-     * @param array $set 配置数组
-     * @param null/object $class 控制器类
-     * @return null
-     */
-    private function _loadView($set, $controller = NULL)
-    {
-        // 加载视图
-        NULL == $controller && $controller = Qwin::run('-c');
-        $controller->loadView($set);
-    }
-    
-    /**
-     * 加载 php 文件
-     * @param string $path 加载文件的伪路径
-     * @param bool $is_load 是否加载,是则直接加载,否则返回文件路径
-     * @todo '*'通配符. 路径加解码方法 encodePath & decodePath
-     */
-    public static function load($path, $is_loaded = true)
-    {
-        $path = explode('/', $path);
-        switch($path[0])
-        {
-            case '' :
-            case 'Framework' :
-                $path[0] = QWIN_PATH . '/library';
-                break;
-            case 'Resource' :
-                $path[0] = RESOURCE_PATH . '/php';
-                break;
-            case 'App' :
-                $path[0] = ROOT_PATH;
-                break;
-        }
-        foreach($path as &$val)
-        {
-            $val == '' && $val = 'default';
-        }
-        $file = implode('/', $path) . '.php';
-        if(true == $is_loaded)
-        {
-            return require $file;
-        }
-        return $file;
-    }
-
-    /**
-     * 获取配置数组
-     * @return array
+     * @return array 网站配置数组
      */
     public function getConfig()
     {
         return $this->_config;
+    }
+
+    /**
+     * 设置网站配置数组
+     */
+    public function setConfig($config)
+    {
+        $this->_config = $config;
+        return $this;
+    }
+
+    /**
+     * 获取配置数组
+     *
+     * @return array 配置数组
+     */
+    public function getSet()
+    {
+        return $this->_set;
     }
 
     /**
@@ -359,29 +225,62 @@ class Qwin_Miku_Init
      */
     public function getClassName($addition, $set)
     {
-        return $set['namespace'] . '_' . $set['module']
-                . '_' . $addition . '_' . $set['controller'];
+        return $set['namespace'] . '_' . $set['module'] . '_' . $addition . '_' . $set['controller'];
     }
-}
 
-function qw($class, $param = NULL)
-{
-    return Qwin::run($class, $param);
-}
+    /**
+     * 当找不到命名空间类时,执行改方法
+     *
+     * @param string|null $name 命名空间名称
+     * @return boolen 方法执行情况
+     */
+    protected function _onNamespaceNotExists($name = null)
+    {
+        return false;
+    }
 
-function qwForm($param, $param_2 = NULL)
-{
-    return qw('-form')->auto($param, $param_2);
-}
+    /**
+     * 当找不到模块类时,执行该方法
+     *
+     * @param string|null $name 模块名称
+     * @return boolen 方法执行情况
+     */
+    protected function _onModuleNotExists($name = null)
+    {
+        return false;
+    }
 
-function p($a)
-{
-    echo '<p><pre>';
-    qw('Qwin_Debug')->p($a);
-    echo '</pre><p>';
-}
+    /**
+     * 当找不到控制器时,执行该方法
+     *
+     * @param string|null $name 控制器名称
+     * @return boolen 方法执行情况
+     */
+    protected function _onControllerNotExists($name = null)
+    {
+        return false;
+    }
 
-function e($msg = '')
-{
-    qw('Qwin_Debug')->e($msg);
+    /**
+     * 当找不到行为时,执行该方法
+     *
+     * @param string|null $name 行为名称
+     * @return boolen 方法执行情况
+     */
+    protected function _onActionNotExists($name = null)
+    {
+        return false;
+    }
+
+    public function debug()
+    {
+        $namesapce = null == $this->_namespace ? 'null' : get_class($this->_namespace);
+        $module = null == $this->_module ? 'null' : get_class($this->_module);
+        $controller = null == $this->_controller ? 'null' : get_class($this->_controller);
+
+        echo '<p>The Namespace is <strong>' . $namesapce . '</strong></p>';
+        echo '<p>The Module is <strong>' . $module . '</strong></p>';
+        echo '<p>The Controller is <strong>' . $controller . '</strong></p>';
+        echo '<p>The Action is <strong>' . $this->_set['action'] . '</strong></p>';
+    }
 }
