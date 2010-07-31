@@ -24,8 +24,8 @@
  * @author    Twin Huang <twinh@yahoo.cn>
  * @copyright Twin Huang
  * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2010-02-26 22:44 utf-8 中文
- * @since     2010-02-26 22:44 utf-8 中文
+ * @version   2010-02-26 22:44
+ * @since     2010-02-26 22:44
  */
 ?>
 <script type="text/javascript">

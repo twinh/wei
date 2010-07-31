@@ -23,7 +23,7 @@
  * @copyright Twin Huang
  * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version   2010-3-21 15:08:00
- * @since     2010-3-21 15:08:00 utf-8 中文
+ * @since     2010-3-21 15:08:00
  */
 ?>
 <script type="text/javascript">
