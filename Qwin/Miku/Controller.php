@@ -107,7 +107,7 @@ class Qwin_Miku_Controller
                 !isset($set[$i]) && $set[$i] = 'Default';
             }
             // 加载视图
-            //NULL == $controller && $controller = $this;
+            //null == $controller && $controller = $this;
             $__view_file = ROOT_PATH . DS .'app' . DS . $set[0] . DS . 'View'
                        . DS . $set[1] . DS . $set[2] . '.php';
         } elseif($this->Qwin_Helper_File->isExist($set)){
@@ -182,21 +182,5 @@ class Qwin_Miku_Controller
             return Qwin::run($name);
         }
         return null;
-    }
-
-    public function onNamespaceNotExists($set, $config)
-    {
-        require_once 'Qwin/Miku/Controller/Exception.php';
-        throw new Qwin_Miku_Controller_Exception('The namespace ' . $set['namespace'] . ' is not allowed.');
-    }
-
-    public function onModuleNotExists($set, $config)
-    {
-        return true;
-    }
-
-    public function onControllerNotExists($set, $config)
-    {
-        
     }
 }

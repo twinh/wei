@@ -106,7 +106,7 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
             // fixed 2010-06-27 
             if('Add' == $urlAction && in_array($field, $this->_modelPrimaryKey))
             {
-                $row[$field] = NULL;
+                $row[$field] = null;
             }
             $conver = $str->set($val['conversion'][$action]);
             $name = $val['form']['name'];
@@ -367,7 +367,7 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
     /**
      * 填充数据到模型中
      * 如果未设置某字段的值,表示不更改
-     * 如果设置了某字段的值,且为null,对应数据库的NULL
+     * 如果设置了某字段的值,且为null,对应数据库的null
      * 其他值对应其他值.
      * @todo isset == false 的变量,如何知道是否为false.
      */
@@ -379,9 +379,9 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
         {
             if(isset($data[$fieldName]))
             {
-                if('NULL' == $data[$fieldName])
+                if('null' == $data[$fieldName])
                 {
-                    $data[$fieldName] = NULL;
+                    $data[$fieldName] = null;
                 }
                 // 主元数据
                 if(!isset($field['form']['_old_name']))
@@ -648,12 +648,12 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
      * @param string $field 顺序的字段名称
      * @param int $increment 顺序增量
      */
-    public function getInitalOrder($table, $field = 'order', $increment = 5, $where = NULL)
+    public function getInitalOrder($table, $field = 'order', $increment = 5, $where = null)
     {
         $mainModelName = Qwin::run('-ini')->getClassName('Model', Qwin::run('-c')->__query);
         $query = $this->query[$mainModelName]
             ->select('Max(`' .  $field . '`) as max_order');
-        if(NULL != $where)
+        if(null != $where)
         {
             call_user_func_array(array($query, 'where'), $where);
         }
