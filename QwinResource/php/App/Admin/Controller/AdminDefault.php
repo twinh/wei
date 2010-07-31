@@ -24,8 +24,8 @@
  * @author    Twin Huang <twinh@yahoo.cn>
  * @copyright Twin Huang
  * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2009-11-21 13:07 utf-8 中文
- * @since     2009-11-21 13:07 utf-8 中文
+ * @version   2009-11-21 13:07
+ * @since     2009-11-21 13:07
  */
 
 class Admin_Controller_Default extends Qwin_Miku_Controller

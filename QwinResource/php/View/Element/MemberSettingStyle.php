@@ -22,8 +22,8 @@
  * @author    Twin Huang <twinh@yahoo.cn>
  * @copyright Twin Huang
  * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2010-5-23 0:34:08 utf-8 中文
- * @since     2010-5-23 0:34:08 utf-8 中文
+ * @version   2010-5-23 0:34:08
+ * @since     2010-5-23 0:34:08
  */
 // 防止直接访问导致错误
 !defined('QWIN_PATH') && exit('Forbidden');

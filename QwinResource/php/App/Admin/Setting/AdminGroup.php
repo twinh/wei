@@ -24,8 +24,8 @@
  * @author    Twin Huang <twinh@yahoo.cn>
  * @copyright Twin Huang
  * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2009-11-21 15:54 utf-8 中文
- * @since     2009-11-21 15:54 utf-8 中文
+ * @version   2009-11-21 15:54
+ * @since     2009-11-21 15:54
  */
 
 class Admin_Setting_Group extends Qwin_Miku_Setting

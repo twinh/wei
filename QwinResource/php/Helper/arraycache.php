@@ -24,8 +24,8 @@
  * @author    Twin Huang <twinh@yahoo.cn>
  * @copyright Twin Huang
  * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2009-02-18 00:00:00 utf-8 中文
- * @since     2009-11-24 20:45:11 utf-8 中文
+ * @version   2009-02-18 00:00:00
+ * @since     2009-11-24 20:45:11
  * @todo      去除通用分类缓存(因为已有),作为针对一般数据型表的缓存
  */
 

@@ -22,8 +22,8 @@
  * @author    Twin Huang <twinh@yahoo.cn>
  * @copyright Twin Huang
  * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2009-03-08 utf-8 中文
- * @since     2009-11-21 17:25 utf-8 中文
+ * @version   2009-03-08
+ * @since     2009-11-21 17:25
  */
 
 class Page
