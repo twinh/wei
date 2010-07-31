@@ -22,8 +22,8 @@
  * @author    Twin Huang <twinh@yahoo.cn>
  * @copyright Twin Huang
  * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2009-12-18 00:25 utf-8 中文
- * @since     2009-12-18 00:25 utf-8 中文
+ * @version   2009-12-18 00:25
+ * @since     2009-12-18 00:25
  * @todo      cache, more..
  */
 

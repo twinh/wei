@@ -36,7 +36,7 @@ class Project_Hepler_Category
         Qwin::load('Qwin_Tree');
     }
 
-    public function getTreeResource($set, $parent = NULL, $keyArr = array('id', 'parent_id', 'name'), $isAddPrefix = true)
+    public function getTreeResource($set, $parent = null, $keyArr = array('id', 'parent_id', 'name'), $isAddPrefix = true)
     {
         $name = md5(implode('-', $set));
 
@@ -59,7 +59,7 @@ class Project_Hepler_Category
             /**
              * 设置文件缓存,不论页面运行多少次,只会在第一次执行
              */
-            /*if(NULL == $this->_fileCache[$name])
+            /*if(null == $this->_fileCache[$name])
             {
                 $this->_fileCache[$name] = $cacheObj->setFileCacheBySetting($set);
             }*/
@@ -80,7 +80,7 @@ class Project_Hepler_Category
         $treeData = array();
         $tree = new Qwin_Tree();
         $tree
-            ->setParentDefaultValue(NULL)
+            ->setParentDefaultValue(null)
             ->setId($keyArr[0])
             ->setParentId($keyArr[1])
             ->setName($keyArr[2]);
@@ -113,7 +113,7 @@ class Project_Hepler_Category
         return $this->_resourceCache[$resourceName];
     }
 
-    public function convertTreeResource($code, $set, $parent = NULL, $keyArr = array('id', 'parent_id', 'name'), $isAddPrefix = true)
+    public function convertTreeResource($code, $set, $parent = null, $keyArr = array('id', 'parent_id', 'name'), $isAddPrefix = true)
     {
         $cache = $this->getTreeResource($set, $parent, $keyArr, $isAddPrefix);
         if(!isset($cache[$code]))

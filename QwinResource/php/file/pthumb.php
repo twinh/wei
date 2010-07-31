@@ -49,9 +49,9 @@ class pThumb {
 	}
 	
 	# rotate the image
-	function pRotate($degrees, $mode=NULL, $bgcolor=NULL){
-		if($mode!=NULL) $this->rotMode=strtoupper($mode);
-		if($bgcolor!=NULL) $this->rotColor=$bgcolor;
+	function pRotate($degrees, $mode=null, $bgcolor=null){
+		if($mode!=null) $this->rotMode=strtoupper($mode);
+		if($bgcolor!=null) $this->rotColor=$bgcolor;
 		
 		$bg=base_convert($this->rotColor, 16, 10);
 		$img=$this->image;
@@ -94,10 +94,10 @@ class pThumb {
 	}
 	
 	# create a thumb
-	function pCreate($img, $maxwidth=NULL, $maxheight=NULL, $quality=NULL){
-		if($maxwidth!=NULL) $this->maxWidth=$maxwidth;
-		if($maxheight!=NULL) $this->maxHeight=$maxheight;
-		if($quality!=NULL) $this->quality=$quality;
+	function pCreate($img, $maxwidth=null, $maxheight=null, $quality=null){
+		if($maxwidth!=null) $this->maxWidth=$maxwidth;
+		if($maxheight!=null) $this->maxHeight=$maxheight;
+		if($quality!=null) $this->quality=$quality;
 
 		if(file_exists($img)){			
 			$this->imageName=basename($img);
@@ -148,7 +148,7 @@ class pThumb {
 			case "JPEG":
 			case "JPG":
 				header("Content-Type: image/jpeg");
-				imagejpeg($this->image, NULL, $this->quality);
+				imagejpeg($this->image, null, $this->quality);
 				break;
 			case "GIF":
 				header("Content-Type: image/gif");

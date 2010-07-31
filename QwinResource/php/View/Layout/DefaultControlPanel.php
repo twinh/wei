@@ -96,7 +96,7 @@ $menu = require_once ROOT_PATH . '/Cache/Php/List/AdminMenu.php';
     <ul>
 <?php
 foreach($menu as $key => $val){
-    if(NULL == $val['category_id']){
+    if(null == $val['category_id']){
 ?>
         <li><a href="#menu-<?php echo $val['id']?>"><?php echo $val['title']?></a></li>
 <?php
