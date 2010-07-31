@@ -53,7 +53,7 @@ class Qwin_Helper_Array
     }
 
     // 转换为 js 对象
-    function toJsObject($qData, $t = NULL)
+    function toJsObject($qData, $t = null)
     {
         $cData = '';
         if(is_array($qData))
@@ -77,7 +77,7 @@ class Qwin_Helper_Array
         } elseif(is_bool) {
             $cData .= $qData ? 'true' : 'false';
         } else {
-            $cData .= 'NULL';
+            $cData .= 'null';
         }
         /*$cData = '';
 
@@ -103,7 +103,7 @@ class Qwin_Helper_Array
         } elseif(is_bool) {
             $cData .= $qData ? 'true' : 'false';
         } else {
-            $cData .= 'NULL';
+            $cData .= 'null';
         }*/
 
         return $cData;
@@ -128,7 +128,7 @@ class Qwin_Helper_Array
         } elseif (is_bool($input)) {
             $output .= $input ? 'true' : 'false';
         } else {
-            $output .= 'NULL';
+            $output .= 'null';
         }
         return $output;
     }
@@ -152,7 +152,7 @@ class Qwin_Helper_Array
         } elseif (is_bool($input)) {
             $output .= $input ? 'true' : 'false';
         } else {
-            $output .= 'NULL';
+            $output .= 'null';
         }
         return $output;
     }
@@ -177,7 +177,7 @@ class Qwin_Helper_Array
         } elseif (is_bool($input)) {
             $output .= $input ? 'true' : 'false';
         } else {
-            $output .= 'NULL';
+            $output .= 'null';
         }
         return $output;
     }
@@ -339,7 +339,7 @@ class Qwin_Helper_Array
         {
             return $next;
         }
-        return NULL;
+        return null;
     }
 
     public function getPrevKey($name, $data)
@@ -357,7 +357,7 @@ class Qwin_Helper_Array
         {
             return $prev;
         }
-        return NULL;
+        return null;
     }
 
     /**

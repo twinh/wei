@@ -77,7 +77,7 @@ class Qwin_Metadata_Manager
             self::$_metadataObj[$className]->setMetadata();
             return self::$_metadataObj[$className];
         }
-        return NULL;
+        return null;
     }
 }
 

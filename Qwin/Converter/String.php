@@ -177,7 +177,7 @@ class Qwin_Converter_String
      * @param  $val 任意值,如果值存在,直接返回该值,否则产生一个新的Uuid
      * @return <type> Uuid
      */
-    public function getUuid($val = NULL)
+    public function getUuid($val = null)
     {
         if($val)
         {

@@ -163,7 +163,7 @@ class Qwin_Tree
             $this->_child[$data[$this->_id]] = array();
         }
         // 允许没有父分类,没有父分类则为一级分类
-        !isset($data[$this->_parentId]) && $data[$this->_parentId] = NULL;
+        !isset($data[$this->_parentId]) && $data[$this->_parentId] = null;
         $this->_child[$data[$this->_parentId]][] = $data[$this->_id];
 
         // 设置父树数组
@@ -217,9 +217,9 @@ class Qwin_Tree
     /**
      * 设置节点所在的层次
      */
-    public function setLayer($list = NULL)
+    public function setLayer($list = null)
     {
-        if(NULL == $list)
+        if(null == $list)
         {
             $this->getAllList($list);
         }

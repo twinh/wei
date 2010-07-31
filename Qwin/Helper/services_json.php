@@ -125,7 +125,7 @@ class Services_JSON
     *                                   instead of objects in decode().
     *                           - SERVICES_JSON_SUPPRESS_ERRORS:  error suppression.
     *                                   Values which can't be encoded (e.g. resources)
-    *                                   appear as NULL instead of throwing errors.
+    *                                   appear as null instead of throwing errors.
     *                                   By default, a deeply-nested resource will
     *                                   bubble up with an error, so all return values
     *                                   from encode() should be checked with isError()
@@ -240,7 +240,7 @@ class Services_JSON
             case 'boolean':
                 return $var ? 'true' : 'false';
 
-            case 'NULL':
+            case 'null':
                 return 'null';
 
             case 'integer':

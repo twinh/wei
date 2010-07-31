@@ -61,7 +61,7 @@ class Qwin_Cache
      * @param int $expireTime 过期时间
      * @return bool 是否设置成功
      */
-    public function set($name, $var = NULL, $expireTime = 0)
+    public function set($name, $var = null, $expireTime = 0)
     {
         $this->_expireTime = $expireTime;
         $this->_errorCode = -1;
@@ -75,7 +75,7 @@ class Qwin_Cache
      */
     public function get($name)
     {
-        return NULL;
+        return null;
     }
 
     public function isExpire($name)

@@ -34,17 +34,17 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
                 'title' => 'LBL_FIELD_TITLE',
                 'descrip' => '',
                 'order' => 0,
-                'group' => NULL,
+                'group' => null,
             ),
             'form' => array(
-                '_type' => NULL,
-                '_typeExt' => NULL,
-                '_resource' => NULL,
-                '_resourceGetter' => NULL,
-                '_icon' => NULL,
-                'name' => NULL,
-                'id' => NULL,
-                'value' => NULL,
+                '_type' => null,
+                '_typeExt' => null,
+                '_resource' => null,
+                '_resourceGetter' => null,
+                '_icon' => null,
+                'name' => null,
+                'id' => null,
+                'value' => null,
             ),
             'attr' => array(
                 'isUrlQuery' => false,
@@ -54,10 +54,10 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
                 'isReadonly' => false,
             ),
             'conversion' => array(
-                'add' => NULL,
-                'edit' => NULL,
-                'list' => NULL,
-                'db' => NULL,
+                'add' => null,
+                'edit' => null,
+                'list' => null,
+                'db' => null,
             ),
             'validation' => array(
 
@@ -77,7 +77,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
      * @param 非法的属性组成的数组
      * @return array 符合要求的的域组成的数组
      */
-    public function getAttrList(array $allowAttr, array $banAttr = NULL)
+    public function getAttrList(array $allowAttr, array $banAttr = null)
     {
         //$allowAttr = (array)$allowAttr;
         //$banAttr = (array)$banAttr;

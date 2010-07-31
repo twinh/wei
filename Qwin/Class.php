@@ -104,7 +104,7 @@ class Qwin_Class
      * @param array/string $key 对应关系的数组/类缩写
      * @param null/string $class_name 当 $key 是数组时,该值为空/类名
      */
-    public static function addMap($key, $class_name = NULL)
+    public static function addMap($key, $class_name = null)
     {
         if(is_array($key))
         {
@@ -135,11 +135,13 @@ class Qwin_Class
      * @todo 初始化时多参数的实现
      * @todo 先后的次序
      */
-    public static function run($name, $param = array())
+    public static function run($name, $param = null)
     {
         isset(self::$_classMap[$name]) && $name = self::$_classMap[$name];
+
         // 因为 php 类名不区分大小写
         //$name = strtolower($name);
+
         // 已经实例化过
         if(isset(self::$_instanceClass[$name]))
         {
@@ -147,7 +149,7 @@ class Qwin_Class
 
         // 类存在,或者通过自动加载取得
         } elseif(class_exists($name)) {
-             self::$_instanceClass[$name] = new $name;
+             self::$_instanceClass[$name] = new $name($param);
              return self::$_instanceClass[$name];
         
         // 加载文件,实例化
@@ -158,7 +160,7 @@ class Qwin_Class
         }
         
         // 没有找到
-        return NULL;
+        return null;
     }
     
     /**
@@ -325,7 +327,7 @@ class Qwin_Class
     {
         if(!is_array($set) || empty($set))
         {
-            return NULL;
+            return null;
         }
         /**
          * 配置数组是类和方法
@@ -342,7 +344,7 @@ class Qwin_Class
             }
             if(!method_exists($set[0][0], $set[0][1]))
             {
-                return NULL;
+                return null;
             }
         /**
          * 配置数组是函数
@@ -350,7 +352,7 @@ class Qwin_Class
         } else {
             if(!function_exists($conver[0]))
             {
-                return NULL;
+                return null;
             }
         }
         // 第一个是方法/函数名
@@ -379,6 +381,7 @@ class Qwin_Class
      */
     public static function setAutoload()
     {
+        set_include_path(get_include_path() . PATH_SEPARATOR . dirname(dirname(__FILE__)));
         spl_autoload_register(array(self, 'autoload'));
     }
 
@@ -400,7 +403,7 @@ class Qwin_Class
     }
 
     /**
-     * 输入各静态变量
+     * 调试,输入各静态变量
      */
     public static function debug()
     {

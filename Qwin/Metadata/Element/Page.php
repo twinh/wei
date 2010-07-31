@@ -30,7 +30,7 @@ class Qwin_Metadata_Element_Page extends Qwin_Metadata_Element_Abstract
     public function getSampleData()
     {
         return array(
-            'title' => NULL,
+            'title' => null,
             'rowNum' => 10,
         );
     }

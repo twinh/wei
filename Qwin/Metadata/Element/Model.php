@@ -31,13 +31,13 @@ class Qwin_Metadata_Element_Model extends Qwin_Metadata_Element_Abstract
     {
         return array(
             // 模型类名
-            'name' => NULL,
-            'asName' => NULL,
+            'name' => null,
+            'asName' => null,
             // Metadata 中包含模型字段,表名,关系的定义,
-            'metadata' => NULL,
+            'metadata' => null,
             'type' => 'hasOne',
             'local' => 'id',
-            'foreign' => NULL,
+            'foreign' => null,
         );
     }
 }
