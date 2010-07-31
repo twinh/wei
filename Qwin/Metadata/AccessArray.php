@@ -40,7 +40,7 @@ abstract class Qwin_Metadata_AccessArray implements ArrayAccess
         {
             return $this->_data[$name];
         }
-        return NULL;
+        return null;
     }
 
     public function offsetExists($offset)
@@ -54,7 +54,7 @@ abstract class Qwin_Metadata_AccessArray implements ArrayAccess
         {
             return $this->_data[$offset];
         }
-        return NULL;
+        return null;
     }
 
     public function offsetSet($offset, $value)

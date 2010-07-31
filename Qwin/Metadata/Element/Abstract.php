@@ -31,7 +31,7 @@ abstract class Qwin_Metadata_Element_Abstract extends Qwin_Metadata_AccessArray
 
     public function getSampleData()
     {
-        return NULL;
+        return null;
     }
     
     /**

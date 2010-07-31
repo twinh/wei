@@ -62,7 +62,7 @@ class Qwin_Cache_List extends Qwin_Cache
         {
             return require $this->_path . $name . '.php';
         }
-        return NULL;
+        return null;
     }
 
     function setCache($name)

@@ -157,7 +157,7 @@ class FastJSON {
             case    'integer':
                     $result = $result !== null ? strftime('%Y-%m-%dT%H:%M:%S', $params) : strval($params);
                     break;
-            case    'NULL':
+            case    'null':
                     $result = 'null';
                     break;
             case    'string':
@@ -225,7 +225,7 @@ class FastJSON {
      *
      *    FastJSON::encode(params:*):String
      *
-     * @param    *        Array, Boolean, Float, Int, Object, String or NULL variable.
+     * @param    *        Array, Boolean, Float, Int, Object, String or null variable.
      * @return    String        JSON genric object rappresentation
      *                or empty string if param is not compatible.
      *

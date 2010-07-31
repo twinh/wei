@@ -35,7 +35,7 @@ class Qwin_Request
      */
     public function g($name)
     {
-        return isset($_GET[$name]) ? $_GET[$name] : NULL;
+        return isset($_GET[$name]) ? $_GET[$name] : null;
     }
     
     /**
@@ -45,7 +45,7 @@ class Qwin_Request
      */
     public function p($name)
     {
-        return isset($_POST[$name]) ? $_POST[$name] : NULL;
+        return isset($_POST[$name]) ? $_POST[$name] : null;
     }
     
     /**
@@ -56,7 +56,7 @@ class Qwin_Request
      */
     public function r($name)
     {
-        return isset($_REQUEST[$name]) ? $_REQUEST[$name] : NULL;
+        return isset($_REQUEST[$name]) ? $_REQUEST[$name] : null;
     }
     
     /**
@@ -67,7 +67,7 @@ class Qwin_Request
      */
     public function c($name)
     {
-        return isset($_COOKIE[$name]) ? $_COOKIE[$name] : NULL;
+        return isset($_COOKIE[$name]) ? $_COOKIE[$name] : null;
     }
 
     /**

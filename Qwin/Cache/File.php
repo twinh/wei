@@ -51,7 +51,7 @@ class Qwin_Cache_File extends Qwin_Cache
         return false;
     }
 
-    public function set($name, $var = NULL, $expireTime = 0)
+    public function set($name, $var = null, $expireTime = 0)
     {
         $filePath = $this->_path . $name . '.php';
         $var = '<?php return \'' . serialize($var) . '\';';
@@ -65,7 +65,7 @@ class Qwin_Cache_File extends Qwin_Cache
         {
             return unserialize(require $filePath);
         }
-        return NULL;
+        return null;
     }
 
     public function setExpireTime()

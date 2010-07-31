@@ -209,7 +209,7 @@ class Qwin_Url
      */
     public function g($key)
     {
-        return isset($this->_get[$key]) ? $this->_get[$key] : NULL;
+        return isset($this->_get[$key]) ? $this->_get[$key] : null;
     }
     
     /**
@@ -256,7 +256,7 @@ class Qwin_Url
      * @param mixed $key_arr 如果 $key_arr 是数组,则以数组的键名作为返回的 nca 的数组的键名
      * @rturn array $set nca数组
      */
-    public function getNca($key_arr = NULL)
+    public function getNca($key_arr = null)
     {
         if(is_array($key_arr))
         {
@@ -290,7 +290,7 @@ class Qwin_Url
      * @param array $$addition 附加url参数
      * @return string $url
      */
-    public function auto($set, $addition = NULL)
+    public function auto($set, $addition = null)
     {
         if(is_array($set))
         {
