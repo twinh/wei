@@ -24,8 +24,8 @@
  * @author    Twin Huang <twinh@yahoo.cn>
  * @copyright Twin Huang
  * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   20110-02-18 13:5 utf-8 中文
- * @since     20110-02-18 13:59 utf-8 中文
+ * @version   20110-02-18 13:5
+ * @since     20110-02-18 13:59
  * @todo      radio 赋值问题
  */
 
