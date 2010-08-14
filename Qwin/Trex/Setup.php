@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Miku
+ * @subpackage  Trex
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -26,8 +26,13 @@
  * @todo        只运行一次
  */
 
-class Qwin_Miku_Setup
+class Qwin_Trex_Setup
 {
+    /**
+     * 指定加载的命名空间的名称
+     */
+    //const DEFAULT_NAMESPACE = 'Trex';
+
     /**
      * 由命名空间,模块,控制器,行为组成的配置数组
      * @var array
@@ -84,7 +89,7 @@ class Qwin_Miku_Setup
         require_once QWIN_LIB_PATH . '/Qwin.php';
         Qwin::setAutoload();
         Qwin::setCacheFile(ROOT_PATH . '/Cache/Php/System/class.php');
-
+        
         $this->_request = Qwin::run('Qwin_Request');
 
         // 注册初始化类
@@ -94,7 +99,7 @@ class Qwin_Miku_Setup
          * 根据配置数组设置初始化各设置
          */
         // 设置错误提示输出等级
-        error_reporting($config['error_type']);
+        error_reporting($config['errorType']);
 
         // 设置会话类型及启动
         if($config['session']['setup'])
@@ -110,7 +115,7 @@ class Qwin_Miku_Setup
         ini_set('magic_quotes_runtime', 0);
         
         // 初始化 url 参数,必须在转义后
-        Qwin::run('Qwin_Url');
+        //Qwin::run('Qwin_Url');
 
         /**
          * 通过配置数据和Url参数初始化系统配置
@@ -138,8 +143,8 @@ class Qwin_Miku_Setup
          */
         if(!in_array($set['namespace'], $this->_config['allowedNamespace']))
         {
-            require_once 'Qwin/Miku/Setup/Exception.php';
-            throw new Qwin_Miku_Setup_Exception('The namespace ' . $set['namespace'] . ' is not allowed.');
+            require_once 'Qwin/Trex/Setup/Exception.php';
+            throw new Qwin_Trex_Setup_Exception('The namespace ' . $set['namespace'] . ' is not allowed.');
         }
 
         /**
@@ -165,8 +170,8 @@ class Qwin_Miku_Setup
         $this->_controller = Qwin::run($controllerClass);
         if(null == $this->_controller)
         {
-            $controllerClass = 'Qwin_Miku_Controller';
-            $this->_controller = Qwin::run('Qwin_Miku_Controller');
+            $controllerClass = 'Qwin_Trex_Controller';
+            $this->_controller = Qwin::run('Qwin_Trex_Controller');
             $this->_onControllerNotExists($set['controller']);
         }
         Qwin::addMap('-controller', $controllerClass);
@@ -184,8 +189,11 @@ class Qwin_Miku_Setup
         } else {
             $this->_onActionNotExists($set['action']);
         }
-        
-        return true;
+
+        /**
+         * 加载视图
+         */
+        return $this->_controller->loadView()->display();
     }
 
     /**
@@ -218,7 +226,8 @@ class Qwin_Miku_Setup
     }
 
     /**
-     * 获取应用中类名
+     * 获取标准的类名
+     *
      * @param string $addition 附加的字符串
      * @param array $set 配置数组
      * @return string 类名

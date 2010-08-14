@@ -335,7 +335,7 @@ class Qwin_Class
         if(is_array($set[0]))
         {
             /**
-             * $conver[0][0]为类名,尝试加载该类
+             * $convert[0][0]为类名,尝试加载该类
              * @todo 静态调用和动态调用
              */
             if(!is_object($set[0][0]))
@@ -350,7 +350,7 @@ class Qwin_Class
          * 配置数组是函数
          */
         } else {
-            if(!function_exists($conver[0]))
+            if(!function_exists($convert[0]))
             {
                 return null;
             }
@@ -359,7 +359,22 @@ class Qwin_Class
         $function = $set[0];
         array_shift($set);
         return call_user_func_array($function, $set);
-    }    
+    }
+
+    public static function isCallable($set)
+    {
+        if(is_array($set))
+        {
+            // 静态类
+            if(is_string($set[0]))
+            {
+                self::load($set[0]);
+            }
+            return method_exists($set[0], $set[1]);
+        } elseif(function_exists($set)) {
+            return true;
+        }
+    }
 
     /**
      * 获取类库的路径

@@ -359,7 +359,7 @@ class Qwin_File_Upload
 		$this->original_file_name = $FILE_NAME;
 
 		//-------------------------------------------------
-		// Convert file name?
+		// convert file name?
 		// In any case, file name is WITHOUT extension
 		//-------------------------------------------------
 

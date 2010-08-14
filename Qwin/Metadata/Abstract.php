@@ -25,7 +25,7 @@
  * @since       2010-7-27 15:41:46
  */
 
-abstract class Qwin_Metadata_AccessArray implements ArrayAccess
+abstract class Qwin_Metadata_Abstract implements ArrayAccess, Iterator
 {
     protected $_data;
 
@@ -65,5 +65,30 @@ abstract class Qwin_Metadata_AccessArray implements ArrayAccess
     public function offsetUnset($offset)
     {
         unset($this->_data[$offset]);
+    }
+
+    public function next()
+    {
+        return next($this->_data);
+    }
+
+    public function key()
+    {
+        return key($this->_data);
+    }
+
+    public function valid()
+    {
+        return $this->current() !== false;
+    }
+
+    public function rewind()
+    {
+        reset($this->_data);
+    }
+
+    public function current()
+    {
+        return current($this->_data);
     }
 }

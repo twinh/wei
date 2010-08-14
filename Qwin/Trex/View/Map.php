@@ -1,6 +1,6 @@
 <?php
 /**
- * Exception
+ * Map
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,19 +17,32 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Trex
+ * @subpackage  
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-07-31 23:51:41
+ * @since       2010-08-08 2:19:23
  */
 
-/**
- * @see Qwin_Exception
- */
-require_once 'Qwin/Exception.php';
-
-class Qwin_Trex_Setup_Exception extends Qwin_Exception
+class Qwin_Trex_View_Map extends Qwin_Trex_View
 {
+    public function display()
+    {
+        $data = $this->data;
+
+        echo '<style type="text/css">
+                table {border-collapse: collapse;border-spacing: 0;}
+                td{white-space: nowrap;}
+              </style>';
+        echo '<table cellpadding="4" cellspacing="4" width="100%" border="1">';
+        foreach($data as $key => $value)
+        {
+            echo '<tr>',
+                 '<td>' . $key . '</td>',
+                 '<td>' . $value . '</td>',
+                 '</tr>';
+        }
+        echo '</table>';
+    }
 }

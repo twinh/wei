@@ -25,13 +25,18 @@
  * @since       2010-7-26 14:14:35
  */
 
-abstract class Qwin_Metadata_Element_Abstract extends Qwin_Metadata_AccessArray
+abstract class Qwin_Metadata_Element_Abstract extends Qwin_Metadata_Abstract
 {
     protected $_data = array();
 
     public function getSampleData()
     {
         return null;
+    }
+
+    public function getData()
+    {
+        return $this->_data;
     }
     
     /**
@@ -59,7 +64,7 @@ abstract class Qwin_Metadata_Element_Abstract extends Qwin_Metadata_AccessArray
      */
     protected function _format($metadata)
     {
-        return $metadata + $this->getSampleData();
+        return $this->_multiArrayMerge($this->getSampleData(), $metadata);
     }
     
     /**
@@ -82,5 +87,20 @@ abstract class Qwin_Metadata_Element_Abstract extends Qwin_Metadata_AccessArray
             $this->_data[$key] = $this->_format($row);
         }
         return $this;
+    }
+
+    protected function _multiArrayMerge($array1, $array2)
+    {
+        foreach($array2 as $key => $val)
+        {
+            if(is_array($val))
+            {
+                !isset($array1[$key]) && $array1[$key] = array();
+                $array1[$key] = $this->_multiArrayMerge($array1[$key], $val);
+            } else {
+                $array1[$key] = $val;
+            }
+        }
+        return $array1;
     }
 }

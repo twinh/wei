@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Converter
+ * @subpackage  converter
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,9 +25,9 @@
  * @since       2009-11-24 20:45:11
  */
 
-class Qwin_Converter_String
+class Qwin_converter_String
 {
-    function converString($msg,$isurl=null){
+    function convertString($msg,$isurl=null){
         $msg = preg_replace('/[\\x00-\\x08\\x0B\\x0C\\x0E-\\x1F]/','',$msg);
         $msg = str_replace(array("\0","%00","\r"),'',$msg);
         empty($isurl) && $msg = preg_replace("/&(?!(#[0-9]+|[a-z]+);)/si",'&amp;',$msg);

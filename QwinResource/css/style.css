@@ -1,131 +1,144 @@
 @charset "utf-8";
 /* Basic
 ----------------------------------*/
-*{margin:0; padding:0}
-html{overflow-y:scroll;}
-body{margin:0 auto; padding:0;font-size:62.5%;}
-ul, li, h5, h4, p{list-style:none}
-img{border:0}
-a{text-decoration:none}
-.c{clear:both}
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	font-size: 62.5%;
+	overflow-y: scroll;	
+	margin: 0 auto; 
+}
+li{
+	list-style: none;
+}
+img{
+	border: 0;
+}
+a{
+	text-decoration: none;
+}
+
+/* 常用样式
+----------------------------------*/
+.clear{
+	clear: both;
+}
+
+/* 页顶浮动栏
+----------------------------------*/
+#ui-top-floating-bar{
+	position: fixed;
+	width: 100%;
+	top: 0;
+	z-index: 999;
+	height: 4em;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	-moz-opacity: 0.9;
+	opacity: 0.9;
+	filter: alpha(opacity=90);
+	overflow: hidden;
+}
+/* 和下方设置足够大的距离,当链接的数目多至不只一行时,能够被正确隐藏 */
+#ui-top-floating-bar ul li{
+	height: 2em;
+	float: left;
+	margin: .4em .6em 2em .6em;
+}
+#ui-top-floating-bar ul li a{
+	font-size: 1.2em;
+}
+#ui-top-floating-bar ul li a span.ui-icon{
+	height: 1.4em;
+}
+
+/* 页底浮动栏
+----------------------------------*/
+#ui-bottom-floating-botton{
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	z-index: 999;
+}
 
 /* Header
 ----------------------------------*/
 .ui-header{
-    margin-top:0.2em;
-    clear:both;
+    margin-top: 0.2em;
+    clear: both;
 }
 div.ui-header-logo{
-    margin:0 0 .2em .65em;
-    font-weight:bold;
-    font-size:3em;
-    background:none;
-    border:none;
+    margin: 0 0 .2em .65em;
+    font-weight: bold;
+    font-size: 3em;
+    background: none;
+    border: none;
 }
 .ui-header-shortcut{
-    float:right;
-    margin:0 .8em .8em 0;
-    font-size:1.2em;
-    background:none;
-    border:none;
+    float: right;
+    margin: -0.7em 0 .8em 0;
+    font-size: 1.2em;
 }
 .ui-header-shortcut a{
-    margin:.2em;
+	padding: .4em 1em;
+	display: block;
+	float: left;
 }
-/* Navigation Bar
-----------------------------------*/
-div.ui-navigation-bar{
-    -moz-border-radius:0;
-    -webkit-border-radius:0;
-    padding:.2em 0;
-    border-left:0;
-    border-right:0;
+.ui-header-shortcut a.ui-header-shortcut-last-anchor{
+	border-right: none;
 }
-div.ui-navigation-bar .ui-tabs-nav{
-    -moz-border-radius:0;
-    -webkit-border-radius:0;
-    border-left:0;
-    border-right:0;
-    padding-left:1em;
-}
-div.ui-navigation-bar .ui-tabs-panel {
-    padding:.4em 1.4em .2em 1.2em;
-}
-.ui-navigation-bar .ui-tabs-panel a{
-    font-size:1.1em;
-    padding:.3em .8em;
-}
-.ui-navigation-bar .ui-tabs-panel a:hover{
-    border:none;
-    font-weight:normal;
-}
-.ui-navigation-bar .ui-tabs-nav li.ui-tabs-selected a, 
-.ui-navigation-bar .ui-tabs-nav li.ui-state-disabled a,
-.ui-navigation-bar .ui-tabs-nav li.ui-state-processing a {
-    cursor:pointer;
-}
+
 /* Main
 ----------------------------------*/
 .ui-main{
-    margin:.8em .8em 0 .8em;
-    clear:both;
+    width: 950px;
+	margin: 0 auto;
+	padding: 5em 0 0;
 }
-.ui-main-leftbar{
-    float: left;
-    width:19.4em;
-    height:100%;
-}
-.ui-main-content{
-    display:inline-block;
-}
+
 /* Footer
 ----------------------------------*/
 .ui-footer{
-    background:none;
-    border:none;
+    background: none;
+    border: none;
 }
 .ui-copyright {
-    font-size:1.2em;
-    height:4em;
-    line-height:4em;
-    width:100%;
-    text-align:center;
-    clear:both;
+    font-size: 1.2em;
+    height: 4em;
+    line-height: 4em;
+    width: 100%;
+    text-align: center;
+    clear: both;
 }
 .ui-copyright a {
-    font-weight:bold;
+    font-weight: bold;
 }
 div.ui-copyright{
-    background:none;
-    border:none;
-    font-weight:normal;
+    background: none;
+    border: none;
+    font-weight: normal;
 }
 /* Box
 ----------------------------------*/
-.ui-box{margin-bottom:.5em;padding:.2em .2em .15em .2em;}
-.ui-box .ui-box-titlebar {position:relative;}
-.ui-box .ui-box-title{float:left;padding:5px 18px 3px .7em;font-size:1.3em;display:block;}
-.ui-box .ui-box-title-icon{position:absolute; right:.3em; top:50%; width:19px; margin:-10px 0 0 0; padding:1px; height:18px;cursor:pointer}
-.ui-box .ui-box-title-icon span{display:block; margin:1px}
-.ui-box .ui-box-title-icon:hover, .ui-box .ui-box-title-icon:focus{padding:0}
-.ui-box .ui-box-content{border:0;background:none; overflow:auto; font-size:1em;}
-
-/* Sidebar
-----------------------------------*/
-/* 修复在 Dot Luv 主题下,Sidebar 出现y滚动条的问题 */
-.ui-siderbar .ui-box-content ul {margin:1px; overflow-y:hidden;}
-.ui-siderbar{width:180px;}
-.ui-siderbar .ui-box-content .ui-sidebar-list {padding:0 .1em .3em .6em; font-weight:normal; border-top:0; border-left:0; border-right:0;}
-.ui-siderbar ul li a{display:block; font-size:1.1em; line-height:1.6em; height:1.6em; padding:.3em .3em 0 .3em; text-align:left;}
+.ui-box{margin-bottom: .5em;padding: .2em .2em .15em .2em;}
+.ui-box .ui-box-titlebar {position: relative;}
+.ui-box .ui-box-title{float: left;padding: 5px 18px 3px .7em;font-size: 1.3em;display: block;}
+.ui-box .ui-box-title-icon{position: absolute; right: .3em; top: 50%; width: 19px; margin: -10px 0 0 0; padding: 1px; height: 18px;cursor: pointer}
+.ui-box .ui-box-title-icon span{display: block; margin: 1px}
+.ui-box .ui-box-title-icon: hover, .ui-box .ui-box-title-icon: focus{padding: 0}
+.ui-box .ui-box-content{border: 0;background: none; overflow: auto; font-size: 1em;}
 
 /* Layout
 ----------------------------------*/
 div.ui-layout-pane {
     padding: 5px;
-    background-image:none;
+    background-image: none;
 }
 .ui-layout-west {
-    overflow:hidden;
+    overflow: hidden;
 }
 .ui-layout-center {
     overflow-y: scroll;
@@ -133,113 +146,117 @@ div.ui-layout-pane {
 
 /* Form (Add, Edit Action & Show Action)
 ----------------------------------*/
+.ui-operation-field{
+	margin: 1em 0;
+}
 .ui-form{
-    width:auto;
+    width: auto;
 }
 .ui-form .ui-form-content form{
-    padding:0 2em 2em 2em;
+    padding: 0 2em 2em 2em;
 }
 /* 表单中的一行 */
 .ui-form .ui-form-content .ui-block-common{
-    clear:both;
-    height:100%;
-    font-weight:normal;
-    border:0;
-    padding:.5em 0 .5em 1em;
-    display:table;
+    clear: both;
+    height: 100%;
+    font-weight: normal;
+    border: 0;
+    padding: .5em 0 .5em 1em;
+    display: table;
 }
-/* input:hidden 的行 */
+/* input: hidden 的行 */
 .ui-form .ui-form-content .ui-block-hidden {
-    display:none;
+    display: none;
 }
 .ui-form .ui-form-content .ui-block-common .ui-label-common,
 .ui-form .ui-form-content .ui-block-common .ui-field-state,
 .ui-form .ui-form-content .ui-block-common .ui-field-common,
 .ui-form .ui-form-content .ui-block-common .ui-icon-common
 {
-    float:left;
+    float: left;
 }
 .ui-form .ui-form-content fieldset {
     padding-bottom: .5em;
-    margin-top: 2em;
+    margin-bottom: 2em;
     background: none;
 }
 .ui-form .ui-form-content legend {
-    font-size:1.5em;
-    font-weight:bold;
-    line-height:120%;
-    padding:0 .3em;
+    font-size: 1.5em;
+    font-weight: bold;
+    line-height: 120%;
+    padding: 0 .3em;
     cursor: pointer;
-    background:none;
-    border:0;
+    background: none;
+    border: 0;
 }
+/*
 .ui-form .ui-form-content .ui-label-common {
-    width:100px;
-    background:none;
-    border:0;
+    width: 100px;
+    background: none;
+    border: 0;
 }
 .ui-form .ui-form-content .ui-label-common label{
-    font-size:1.3em;
-    line-height:2em;
+    font-size: 1.3em;
+    line-height: 2em;
     float: right;
     padding-right: .4em;
-}
+}*/
 .ui-form .ui-form-content .ui-field-common {
-    width:400px;
+    width: 400px;
 }
 .ui-form .ui-form-content .ui-field-data-common {
-    font-size:1.3em;
-    line-height:2em;
+    font-size: 1.3em;
+    line-height: 2em;
 }
 .ui-form .ui-form-content .ui-field-common input {
-    margin-right:5px;
-    font-size:1.1em;
+    margin-right: 5px;
+    font-size: 1.1em;
 }
 .ui-form .ui-form-content .ui-field-common label {
-    margin-right:5px;
-    font-size:1.1em;
-    margin-top:.3em;
+    margin-right: 5px;
+    font-size: 1.1em;
+    margin-top: .3em;
 }
 .ui-form .ui-form-content .ui-block-common .ui-field-text input,
 .ui-form .ui-form-content .ui-block-common .ui-field-password input {
-    width:380px;
-    padding:.4em 0 .4em .5em;/* for ie & ff */
-    line-height:1.5em;/* for ie */
-    font-weight:normal;
+    width: 380px;
+    padding: .4em 0 .4em .5em;/* for ie & ff */
+    line-height: 1.5em;/* for ie */
+    font-weight: normal;
 }
 .ui-form .ui-form-content .ui-block-common .ui-field-checkbox input,
 .ui-form .ui-form-content .ui-block-common .ui-field-radio input {
-    margin-top:.4em;
+    margin-top: .4em;
 }
 /* 表单按钮区域 */
 .ui-form .ui-form-content .ui-block-common .ui-field-operation input {
-    float:right;
+    float: right;
 }
 .ui-form .ui-form-content .ui-block-common .ui-field-select select {
-    width:200px;
-    height:2em;
-    font-size:1.1em;
-    line-height:2em;
+    width: 200px;
+    height: 2em;
+    font-size: 1.1em;
+    line-height: 2em;
 }
 .ui-form .ui-form-content .ui-block-common .ui-field-textarea textarea {
-    width:380px;
-    height:8em;
-    font-size:1.1em;
-    line-height:2em;
-    padding:.2em .4em;
-    font-weight:normal;
+    width: 380px;
+    height: 8em;
+    font-size: 1.1em;
+    line-height: 2em;
+    padding: .2em .4em;
+    font-weight: normal;
     overflow-y: auto;
 }
 .ui-form .ui-form-content .ui-block-common .ui-icon-common {
-    background:none;
-    border:0;
+    background: none;
+    border: 0;
 }
 .ui-form .ui-form-content .ui-block-common .ui-icon-common a {
     padding: 1px;
     width: 20px;
     height: 19px;
-    float:left;
-    margin:0 0 .2em .2em;
+    float: left;
+    margin: 0 0 .2em .2em;
 }
 .ui-form .ui-form-content .ui-block-common .ui-icon-common a .ui-icon {
     display: block;
@@ -247,71 +264,115 @@ div.ui-layout-pane {
     cursor: pointer;
 }
 .ui-form .ui-form-content .ui-block-common .ui-tip-common{
-    display:none;
+    display: none;
 }
 .ui-form .ui-form-content .ui-block-common .ui-field-operation .ui-form-button {
-    padding:.4em .8em .5em;/* ff */
-    cursor:pointer;
+    padding: .4em .8em .5em;/* ff */
+    cursor: pointer;
     text-align: center;
-    font-size:1.1em;
+    font-size: 1.1em;
 }
 * html .ui-form .ui-form-content .ui-block-common .ui-field-operation .ui-form-button{
-    padding:.3em;/* ie6 */
+    padding: .3em;/* ie6 */
 }
 *+ html .ui-form .ui-form-content .ui-block-common .ui-field-operation .ui-form-button {
-    padding:.3em;/* ie7 */
+    padding: .3em;/* ie7 */
 }
 /* 防止ck编辑器下部变形 */
 .cke_editor .cke_contents fieldset{ 
-    margin:0;
+    margin: 0;
+}
+
+/* Tables in the Form
+----------------------------------*/
+.ui-table{
+	border-collapse: collapse;
+	border-spacing: 0;
+	margin: .2em 0 2em;
+}
+.ui-table td{
+	padding: .2em;
+}
+.ui-table .ui-label-common{
+	text-align: right;
+	font-size:1.3em;
+	font-weight: normal;
+    line-height:2em;
+}
+.ui-table .ui-field-text input,
+.ui-table .ui-field-password input{
+	width: 60%;
+	padding:.4em 0 .4em .5em;/* for ie & ff */
+    line-height:1.5em;/* for ie */
+    font-weight:normal;
+	font-size:1.1em;
+}
+.ui-table .ui-field-checkbox input,
+.ui-table .ui-field-radio input {
+    margin-top:.4em;
+}
+.ui-table .ui-field-select select {
+    width:61.1%;
+    height:2em;
+    font-size:1.1em;
+    line-height:2em;
+}
+.ui-table .ui-field-textarea textarea{
+	width: 59.6%;
+    height: 8em;
+    font-size: 1.1em;
+    line-height: 2em;
+    padding: .2em .4em;
+    font-weight: normal;
+    overflow-y: auto;
 }
 
 /* Tabs in the Form
 ----------------------------------*/
-.ui-form-content form.ui-widget{ font-size:1em;}
-.ui-form-content .ui-tabs .ui-tabs-nav { list-style: none; position: relative; padding:0; background:none; border: none; margin-left:-2.1em;}
-.ui-form-content .ui-tabs .ui-tabs-panel { padding: 0; display: block; border-width: 0; background: none; margin:-1em 0 0; clear:both;}
-.ui-form-content .ui-tabs fieldset{ border:none;}
+.ui-form-content form.ui-widget{ font-size: 1em;}
+.ui-form-content .ui-tabs .ui-tabs-nav { list-style: none; position: relative; padding: 0; background: none; border: none; margin-left: -2.1em;}
+.ui-form-content .ui-tabs .ui-tabs-panel { padding: 0; display: block; border-width: 0; background: none; margin: -1em 0 0; clear: both;}
+.ui-form-content .ui-tabs fieldset{ border: none;}
 .ui-form-content .ui-tabs legend{ display: none;}
-.ui-form-content .ui-tabs .ui-block-common{margin-left:-1em;}
+.ui-form-content .ui-tabs .ui-block-common{margin-left: -1em;}
 
 /* List
 ----------------------------------*/
 .ui-list .ui-list-content{
-    height:auto;
+    height: auto;
 }
 .ui-list .ui-list-content dl{
-    font-size:1.2em;
+    font-size: 1.2em;
 }
 .ui-list .ui-list-content dl dt{
-    width:50%;
-    float:left;
-    padding:.5em 0 .5em 1em;
-    border-left:none;
-    border-right:none;
-    border-top:none;
+    width: 50%;
+    float: left;
+    padding: .5em 0 .5em 1em;
+    border-left: none;
+    border-right: none;
+    border-top: none;
 }
 .ui-list .ui-list-content dl dd{
-    padding:.5em 0 .5em 1em;
-    border-left:none;
-    border-right:none;
-    border-top:none;
+    padding: .5em 0 .5em 1em;
+    border-left: none;
+    border-right: none;
+    border-top: none;
 }
 
 /* Error Box
 ----------------------------------*/
 .ui-error-box{
-    width:auto;
+    width: auto;
 }
 .ui-error-box .ui-error-box-content{
-    padding:2em;
+    padding: 2em;
 }
 
 /* Datepicker
 ----------------------------------*/
 /* make it looks more better */
 .ui-datepicker{
-    font-size:1.2em;
+    font-size: 1.2em;
 }
 .ui-tabs .ui-tabs-nav li a{
 	font-size: 1.1em;

@@ -29,9 +29,9 @@
 /**
  * @see Qwin_Metadata_AccessArray
  */
-require_once 'Qwin/Metadata/AccessArray';
+require_once 'Qwin/Metadata/Abstract.php';
 
-abstract class Qwin_Metadata extends Qwin_Metadata_AccessArray
+abstract class Qwin_Metadata extends Qwin_Metadata_Abstract
 {
     /**
      * 原始数据,未经过格式转换

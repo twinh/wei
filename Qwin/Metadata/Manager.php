@@ -71,10 +71,10 @@ class Qwin_Metadata_Manager
         {
             return self::$_metadataObj[$className];
         }
-        if(class_exists($className, true))
+        if(class_exists($className))
         {
             self::$_metadataObj[$className] = new $className;
-            self::$_metadataObj[$className]->setMetadata();
+            //self::$_metadataObj[$className]->setMetadata();
             return self::$_metadataObj[$className];
         }
         return null;
