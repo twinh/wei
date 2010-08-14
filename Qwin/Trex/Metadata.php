@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Miku
+ * @subpackage  Trex
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,7 +25,7 @@
  * @since       2009-11-24 20:45:11
  */
 
-class Qwin_Miku_Metadata extends Qwin_Metadata
+class Qwin_Trex_Metadata extends Qwin_Metadata
 {
     /*
      * 数据缓存,分几种,分别是 category, common_class list
@@ -61,18 +61,306 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
      */
     public $lang;
 
-    function  __construct() {
-        //p(get_class_methods($this));exit;
+    /**
+     * 数据表前缀
+     * @var string
+     */
+    public $tablePrefix;
+
+    public function toDoctrine(Qwin_Metadata $meta, Doctrine_Record $model)
+    {
+        $model->setTableName($meta->tablePrefix . $meta->db['table']);
+        $queryField = $meta->field->getAttrList('isSqlQuery');
+        foreach($meta->field as $field)
+        {
+            $model->hasColumn($field['form']['name']);
+        }
     }
 
     /**
-     * 当配置类不存在的时候,使用的配置数组来自该方法
+     * 获取数据表前缀,方便调用
      *
-     * @return array
+     * @return string 表前缀
      */
-    public function defaultMetadata()
+    public function getTablePrefix()
     {
-        return array();
+        if(null == $this->tablePrefix)
+        {
+            $config = Qwin::run('-ini')->getConfig();
+            $mainAdapter = $config['database']['mainAdapter'];
+            $this->tablePrefix = $config['database']['adapter'][$mainAdapter]['prefix'];
+        }
+        return $this->tablePrefix;
+    }
+
+    /**
+     * 获取标准的类名
+     *
+     * @param string $addition 附加的字符串
+     * @param array $set 配置数组
+     * @return string 类名
+     */
+    public function getClassName($addition, $set)
+    {
+        return $set['namespace'] . '_' . $set['module'] . '_' . $addition . '_' . $set['controller'];
+    }
+
+    /**
+     * 获取Doctrine的查询对象
+     *
+     * @param array $set 配置
+     * @param boolen $isJoinModel 是否连接关联的模块
+     * @return object Doctrine_Record 查询对象
+     * @todo 缓存$query
+     */
+    public function getDoctrineQuery($set, $isJoinModel = true)
+    {
+        /**
+         * 初始元数据和模型主类
+         */
+        $metaName = $this->getClassName('Metadata', $set);
+        Qwin::load($metaName);
+        $metaObj = Qwin_Metadata_Manager::get($metaName);
+        $queryField = $metaObj->field->getAttrList('isSqlQuery');
+
+        $modelName = $this->getClassName('Model', $set);
+        $modelObj = Qwin::run($modelName);
+        $modelObj->setTableName($this->getTablePrefix() . $metaObj['db']['table']);
+        foreach($queryField as $field)
+        {
+            $modelObj->hasColumn($field);
+        }
+
+        /**
+         * 初始化Doctrine查询
+         */
+        $query = Doctrine_Query::create()->from($modelName);
+
+        /**
+         * 加载其他关联的类
+         */
+        if($isJoinModel)
+        {
+            foreach($metaObj['model'] as $model)
+            {
+                Qwin::load($model['metadata']);
+                $linkedMetaObj = Qwin_Metadata_Manager::get($model['metadata']);
+                $queryField = $linkedMetaObj->field->getAttrList('isSqlQuery');
+
+                $linkedModelObj = Qwin::run($model['name']);
+                $linkedModelObj->setTableName($this->getTablePrefix() . $linkedMetaObj['db']['table']);
+                foreach($queryField as $field)
+                {
+                    $linkedModelObj->hasColumn($field);
+                }
+
+                // 设置模型关系
+                call_user_func(
+                    array($modelObj, 'hasOne'),
+                    $model['name'] . ' as ' . $model['asName'],
+                        array(
+                            'local' => $model['local'],
+                            'foreign' => $model['foreign']
+                        )
+                );
+                $query->leftJoin($modelName . '.' . $model['asName'] . ' ' . $model['asName']);
+            }
+        }
+        return $query;
+    }
+
+    /**
+     * 将主元数据关联的元数据加入到主元数据中
+     *
+     * @param Qwin_Metadata $meta 主元数据
+     */
+    public function connectRelatedMetadata(Qwin_Metadata $meta)
+    {
+        $mainMetaField = clone $meta['field'];
+        foreach($meta['model'] as $model)
+        {
+            Qwin::load($model['metadata']);
+            $relatedMeta = Qwin_Metadata_Manager::get($model['metadata']);
+            $tmpMeta = array();
+            foreach($relatedMeta['field'] as $field)
+            {
+                // 存储原来的名称
+                $field['form']['_oldName'] = $field['form']['name'];
+                $field['form']['_arrayName'] = $model['asName'] . '[' . $field['form']['name'] . ']';
+                $field['form']['name'] = $model['asName'] . '_' . $field['form']['name'];
+                if(!isset($field['form']['id']))
+                {
+                    $field['form']['id'] = str_replace('_', '-', $field['form']['name']);
+                }
+                $tmpMeta[$field['form']['name']] = $field;
+            }
+            $mainMetaField->addData($tmpMeta);
+        }
+        return $mainMetaField;
+    }
+
+    /**
+     * 为Doctrine查询对象增加查询语句
+     *
+     * @param Qwin_Metadata $meta
+     * @param Doctrine_Query $query
+     * @return Qwin_Metadata 当前类
+     * @todo 是否要将主类加入到$meta['model']数组中,减少代码重复
+     */
+    public function addSelectToQuery(Qwin_Metadata $meta, Doctrine_Query $query)
+    {
+        /**
+         * 设置主类的查询语句
+         */
+        // 调整主键的属性,因为查询时至少需要选择一列
+        $primaryKey = $meta['db']['primaryKey'];
+        $meta->field
+             //->setAttr($primaryKey, 'isList', true)
+             ->setAttr($primaryKey, 'isSqlField', true)
+             ->setAttr($primaryKey, 'isSqlQuery', true);
+        
+        $queryField = $meta->field->getAttrList('isSqlQuery');
+        $query->select(implode(', ', $queryField));
+
+        /**
+         * 设置关联类的查询语句
+         */
+        foreach($meta['model'] as $model)
+        {
+            Qwin::load($model['metadata']);
+            $linkedMetaObj = Qwin_Metadata_Manager::get($model['metadata']);
+
+            // 调整主键的属性,因为查询时至少需要选择一列
+            $primaryKey = $linkedMetaObj['db']['primaryKey'];
+            $linkedMetaObj->field
+                          ->setAttr($primaryKey, 'isSqlField', true)
+                          ->setAttr($primaryKey, 'isSqlQuery', true);
+            
+            $queryField = $linkedMetaObj->field->getAttrList('isSqlQuery');
+            foreach($queryField as $field)
+            {
+                $query->addSelect($model['asName'] . '.' . $field);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * 为Doctrine查询对象增加排序语句,优先级为Url地址 > 元数据 > 主键,addOrderToDoctrineQuery的缩写
+     * 
+     * @param Qwin_Metadata $meta
+     * @param Doctrine_Query $query
+     * @return Qwin_Metadata 当前类
+     * @todo 关联元数据的排序
+     * @todo 允许自定义Url的键名
+     * @todo 允许多个排序字段
+     * @todo 将Url查询并入到元数据中,即元数据中的order数组是动态的
+     */
+    public function addOrderToQuery(Qwin_Metadata $meta, Doctrine_Query $query)
+    {
+        $request = Qwin::run('Qwin_Request');
+        $arrayHepler = Qwin::run('Qwin_Helper_Array');
+        $alias = $query->getRootAlias() . '.';
+
+        // 排序字段名和排序类型
+        $orderField = $request->g('orderField');
+        $orderType = strtoupper($request->g('orderType'));
+
+        // 数据表字段的域
+        $queryField = $meta->field->getAttrList('isSqlQuery');
+
+        if(in_array($orderField, $queryField))
+        {
+            $orderType = $arrayHepler->forceInArray($orderType, array('DESC', 'ASC'));
+            $query->orderBy($alias . $orderField . ' ' .  $orderType);
+        } elseif(isset($meta['db']['order']) && !empty($meta['db']['order'])) {
+            $orderTempArr = array();
+            foreach($meta['db']['order'] as $fieldSet)
+            {
+                $fieldSet[1] = $arrayHepler->forceInArray($fieldSet[1], array('DESC', 'ASC'));
+                $orderTempArr[] = $alias . $fieldSet[0] . ' ' . $fieldSet[1];
+            }
+            $query->orderBy(implode(', ', $orderTempArr));
+        } else {
+            $query->orderBy($alias . $meta['db']['primaryKey'] . ' DESC');
+        }
+        return $this;
+    }
+
+    /**
+     * 为Doctrine查询对象增加查找语句,优先级为Url地址 > 元数据
+     *
+     * @param Qwin_Metadata $meta
+     * @param Doctrine_Query $query
+     * @return Qwin_Metadata 当前类
+     * @todo 补全第二类情况
+     * @todo 完善查询类型
+     * @todo 同addOrderToDoctrineQuery
+     */
+    public function addWhereToQuery(Qwin_Metadata $meta, Doctrine_Query $query)
+    {
+        $request = Qwin::run('Qwin_Request');
+        $arrayHepler = Qwin::run('Qwin_Helper_Array');
+        $alias = $query->getRootAlias() . '.';
+
+        // 'eq','ne','lt','le','gt','ge','bw','bn','in','ni','ew','en','cn','nc'
+        $searchTypeArr = array(
+            'eq' => '=',
+            'ne' => '<>',
+            'lt' => '<',
+            'le' => '<=',
+            'gt' => '>',
+            'ge' => '>=',
+            //'cn' => 'like',
+            //'nc' => 'not like'
+        );
+
+        $searchField = $request->g('searchField');
+        $searchType = $request->g('searchType');
+        $searchValue = $request->g('searchValue');
+
+        // 数据表字段的域
+        $queryField = $meta->field->getAttrList('isSqlQuery');
+
+        if(in_array($searchField, $queryField))
+        {
+            $searchType = $arrayHepler->forceInArray($searchType, array_keys($searchTypeArr));
+            $query->where($alias . $searchField . ' ' . $searchTypeArr[$searchType] . ' ?', $searchValue);
+        } elseif(isset($meta['db']['where']) && !empty($meta['db']['where'])) {
+
+        }
+        return $this;
+    }
+
+    /**
+     * 为Doctrine查询对象增加查找语句,优先级为Url地址 > 元数据
+     *
+     * @param Qwin_Metadata $meta
+     * @param Doctrine_Query $query
+     * @param string $rowName Url中,列数的键名
+     * @return Qwin_Metadata 当前类
+     * @todo 分开为Limit和Offset
+     */
+    public function addLimitToQuery(Qwin_Metadata $meta, Doctrine_Query $query, $rowName = 'row', $pageName = 'page')
+    {
+        $request = Qwin::run('Qwin_Request');
+        $rowNum = intval($request->g($rowName));
+        if($rowNum <= 0)
+        {
+            $rowNum = $meta['db']['limit'];
+        // 最多同时读取500条记录
+        } elseif($rowNum > 500) {
+            $rowNum = 500;
+        }
+        $query->limit($rowNum);
+
+        // Offset
+        $nowPage = intval($request->g($pageName));
+        $nowPage <= 0 && $nowPage = 1;
+        $offset = ($nowPage - 1) * $rowNum;
+        $query->offset($offset);
+
+        return $this;
     }
 
     /**
@@ -84,17 +372,69 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
      * @todo 是否要必要支持多个转换函数/方法, 增加缓存,减少重复判断等
      * @todo 对于非当前控制器下, $self 的问题
      */
-    public function converSingleData(&$set, $action, $row, $isUrlQuery = false)
+    public function convertSingleData($meta, $action, $row, $isUrlQuery = false)
     {
-        // TODO
-        $str = Qwin::run('-str');
-        $self = Qwin::run('-c');
+        /**
+         * 初始化数据
+         * 控制器对象,行为,数据副本
+         */
+        $ctrler = Qwin::run('-controller');
         $action = strtolower($action);
-        $row_copy = $row;
+        $rowCopy = $row;
 
+        foreach($meta as $field => $set)
+        {
+            $name = $set['form']['name'];
+            !isset($row[$name]) && $row[$name] = null;
+
+            /**
+             * 使用元数据的转换器进行转换
+             */
+            if(isset($set['converter'][$action]) && is_array($set['converter'][$action]))
+            {
+                $param = $set['converter'][$action];
+                if(Qwin::isCallable($param[0]))
+                {
+                    $method = $param[0];
+                    $param[0] = $row[$name];
+                    // TODO 静态调用和动态调用
+                    if(!is_object($method[0]) && !function_exists($method))
+                    {
+                        $method[0] = Qwin::run($method[0]);
+                    }
+                    $row[$name] = call_user_func_array($method, $param);
+                    continue;
+                }
+            }
+
+            /**
+             * 使用控制器中的方法进行转换
+             */
+            $methodName = str_replace(array('_', '-'), '', 'convert' . $action . $name);
+            if(method_exists($ctrler, $methodName))
+            {
+                $row[$name] = call_user_func_array(
+                    array($ctrler, $methodName),
+                    array($row[$name], $name, $row, $rowCopy)
+                );
+            }
+
+            /**
+             * 增加Url查询
+             * @todo 是否应该出现在此
+             */
+            if(true == $isUrlQuery && $set['attr']['isUrlQuery'])
+            {
+                $row[$name] .= '#';
+                //$row[$name] = '<a href="' . url(array($self->__query['namespace'], $self->__query['module'], $self->__query['controller']), array('searchField' => $name, 'searchValue' => $row_copy[$name])) . '">' . $row[$name] . '</a>';
+            }
+        }
+        return $row;
+/*
+ *
         // fixed 2010-06-27 添加操作时,清空其他主键的值
         // TODO 整理
-        $urlAction = Qwin::run('-gpc')->g('action');
+        //$urlAction = Qwin::run('-gpc')->g('action');
 
         foreach($set as $field => $val)
         {
@@ -108,74 +448,39 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
             {
                 $row[$field] = null;
             }
-            $conver = $str->set($val['conversion'][$action]);
-            $name = $val['form']['name'];
-            $str->set($row[$name]);
-            $str->set($row_copy[$name]);
-            if(is_array($conver))
-            {
-                // 判断方法/函数是否存在
-                if(is_array($conver[0]))
-                {
-                    /**
-                     * $conver[0][0]为类名,尝试加载该类
-                     * @todo 静态调用和动态调用
-                     */
-                    //Qwin::load($conver[0][0]);
-                    if(!is_object($conver[0][0]))
-                    {
-                        $conver[0][0] = Qwin::run($conver[0][0]);
-                    }
-                    if(!method_exists($conver[0][0], $conver[0][1]))
-                    {
-                        continue;
-                    }
-                } else {
-                    if(!function_exists($conver[0]))
-                    {
-                        continue;
-                    }
-                }
-                // 第一个是方法/函数名
-                $function = $conver[0];
-                // 转换数据
-                $conver[0] = $row[$name];
-                $row[$name] = call_user_func_array($function, $conver);
-            }// else {
-                $method_name = str_replace(array('_', '-'), '', 'conver' . $action . $name);
-                if(method_exists($self, $method_name))
-                {
-                    $row[$name] = call_user_func_array(
-                        array($self, $method_name),
-                        array($row[$name], $name, $row, $row_copy)
-                    );
-                }
-            //}
-            // 将转换结果加入元数据中,方便引用
-            $set[$field]['form']['_value'] = $row[$name];
-            // 转换 url
-            if(true == $isUrlQuery && isset($val['list']['isUrlQuery']) && true == $val['list']['isUrlQuery'])
-            {
-                $row[$name] = '<a href="' . url(array($self->__query['namespace'], $self->__query['module'], $self->__query['controller']), array('searchField' => $name, 'searchValue' => $row_copy[$name])) . '">' . $row[$name] . '</a>';
-            }
-        }
-        return $row;
+            
+        }*/
     }
 
     /**
      * 数据转换,用于 list 等三位数组的数据
      *
-     * @param array $set 配置数组的字段子数组 $this->__meta['field']
+     * @param array $meta 配置数组的字段子数组
      * @param string $action Action 的名称,一般为 list
      * @praam array $data 三维数组,一般是从数据库取出的数组
      */
-    public function converMultiData($set, $action, $data, $isUrlQuery = true)
+    public function convertMultiData($meta, $action, $data, $isUrlQuery = true)
     {
         foreach($data as &$row)
         {
-            $row = $this->converSingleData($set, $action, $row, $isUrlQuery);
+            $row = $this->convertSingleData($meta, $action, $row, $isUrlQuery);
         }
         return $data;
+    }
+
+    public function getShowMetadata(Qwin_Metadata $meta, Doctrine_Record $record)
+    {
+        foreach($meta['field'] as &$field)
+        {
+            if(false == $field['attr']['isShow'])
+            {
+                unset($field);
+                continue;
+            }
+            
+        }
+        $showField = $meta->field->getAttrList('isSqlQuery', 'isShow');
+        p($showField);exit;
     }
 
     public function setLang($lang = null)
@@ -224,108 +529,15 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
             // 加载Metadata
             $this->loadMetadataToMetaExt($model['metadata'], $model['name']);
         }
-    }
-    
-    /**
-     * 连接和元数据和模型,方便控制器通过模型取数据
-     * @param array $mainModelName 主模型名称
-     * @param array $mainModelMetadata 主元数据的模型键,如$meta['model']
-     * @return object
-     */
-    public function connectModel($mainModelName, $mainModelMetadata)
-    {
-        $config = Qwin::run('-ini')->getConfig();
-        $modelObject = Qwin::run($mainModelName);
+    }  
 
-        $query = Doctrine_Query::create()
-           ->from($mainModelName . ' t');
-        
-        foreach($mainModelMetadata as $model)
-        {
-            // 设置数据表
-            $this->_modelObjct[$model['name']]->setTableName($config['db']['prefix'] . $this->metaExt[$model['name']]['db']['table']);
-            // 设置字段关系
-            $queryField = $this->getSettingList($this->metaExt[$model['name']]['field'], 'isSqlQuery');
-            foreach($queryField as $field)
-            {
-                $this->_modelObjct[$model['name']]->hasColumn($field);
-            }
-            // 设置模型关系
-            /**
-             * @todo $model['type'] 合法性检查
-             * @todo asName 可选
-             */
-            call_user_func(
-                array($modelObject, 'hasOne'),
-                $model['name'] . ' as ' . $model['asName'],
-                    array(
-                        'local' => $model['local'],
-                        'foreign' => $model['foreign']
-                    )
-            );
-            $query->leftJoin('t.' . $model['asName']);
-        }
-        if(!isset($this->query[$mainModelName]))
-        {
-            $this->query[$mainModelName] = $query;
-        }
-        return $query;
-    }
-
-    /**
-     * 将关联控制器的元数据加入到主控制器的元数据中,转换id
-     * @param array $meta 配置元数据数组
-     * @param array $dbData
-     * @todo  是否需要销毁数组
-     */
-    public function connetMetadata(&$meta)
-    {
-        $str = Qwin::run('Qwin_Converter_String');
-        $c = Qwin::run('-c');
-        foreach($meta['field'] as $name =>$fieldMeta)
-        {
-            // 删除只读项
-            if('Edit' == $c->__query['action'] && isset($fieldMeta['list']['isReadonly']) && true == $fieldMeta['list']['isReadonly'])
-            {
-                unset($meta['field'][$name]);
-                continue;
-            }
-            if(!isset($fieldMeta['form']['id']))
-            {
-                $meta['field'][$name]['form']['id'] = str_replace('_', '-', $fieldMeta['form']['name']);
-            }
-        }
-        foreach($meta['model'] as $model)
-        {
-            $tmpMeta = array();
-            $this->_modelPrimaryKey[] = $model['asName'] . '_' . $model['local'];
-            $this->_foreignKey[] = $model['asName'] . '_' . $model['foreign'];
-            foreach($this->metaExt[$model['name']]['field'] as $name => $fieldMeta)
-            {
-                // 跳过只读项
-                if('Edit' == $c->__query['action'] && isset($fieldMeta['list']['isReadonly']) && true == $fieldMeta['list']['isReadonly'])
-                {
-                    continue;
-                }
-                // 存储原来的名称
-                $fieldMeta['form']['_old_name'] = $fieldMeta['form']['name'];
-                // 利用asName作为前缀,以后可通过asName加密
-                $fieldMeta['form']['name'] = $model['asName'] . '_' . $fieldMeta['form']['name'];
-                $fieldMeta['form']['id'] = str_replace('_', '-', $fieldMeta['form']['name']);
-                $tmpMeta[$fieldMeta['form']['name']] = $fieldMeta;
-            }
-            $meta['field'] += $tmpMeta;
-        }
-        return $meta;
-    }
-
-    public function converDataToSingle($data)
+    public function convertDataToSingle($data)
     {
         if(isset($data[0]))
         {
             foreach($data as $key => $row)
             {
-                $data[$key] = $this->converDataToSingle($row);
+                $data[$key] = $this->convertDataToSingle($row);
             }
         } else {
             foreach($data as $key => $val)
@@ -435,12 +647,12 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
         
         foreach($meta as $field)
         {
-            if(isset($field['validation']['rule']))
+            if(isset($field['validator']['rule']))
             {
-                $field['validation']['rule'] = $this->makeRequiredAtFront($field['validation']['rule']);
+                $field['validator']['rule'] = $this->makeRequiredAtFront($field['validator']['rule']);
                 // 转换为数组
-                $arr->set($field['validation']['rule']);
-                foreach($field['validation']['rule'] as $method => $param)
+                $arr->set($field['validator']['rule']);
+                foreach($field['validator']['rule'] as $method => $param)
                 {
                     $arr->set($param);
                     // 用于错误提示
@@ -488,7 +700,7 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
      * @param array $lang 语言数据
      * @return array 元数据
      */
-    public function converLang($set, $lang, $addTitle = false)
+    public function convertLang($set, $lang, $addTitle = false)
     {
         if(!isset($set['field']))
         {
@@ -599,7 +811,7 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
      * @param string $name 分类名称
      * @return string 分类的值
      */
-    function converCommonClass($code, $name, $lang = null)
+    function convertCommonClass($code, $name, $lang = null)
     {
         null == $lang && $this->setLang() && $lang = $this->lang;
         $this->getCommonClassList($name, $lang);
@@ -691,32 +903,6 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
         return $data;
     }
 
-    
-
-    /**
-     * 根据 order 从小到大排序
-     *
-     * @param array $field_arr $this->__meta['field']
-     * @todo 转为QArray类的n维数组排序
-     */
-    public function orderSettingArr(&$field_arr)
-    {
-        $new_arr = array();
-        foreach($field_arr as $key => $val)
-        {
-            $temp_arr[$key] = isset($val['basic']['order']) && is_numeric($val['basic']['order']) ? $val['basic']['order'] : 0;
-        }
-        // 倒序再排列,因为 asort 会使导致倒序
-        $temp_arr = array_reverse($temp_arr);
-        asort($temp_arr);
-        foreach($temp_arr as $key => $val)
-        {
-            $new_arr[$key] = $field_arr[$key];
-        }
-        $field_arr = $new_arr;
-        return $field_arr;
-    }
-
     /**
      * 分组(主要用于 Add,Edit,Show)
      *
@@ -751,7 +937,7 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
     }
 
     // TODO !!
-    public function converUrlQuery2($data, $sql_data)
+    public function convertUrlQuery2($data, $sql_data)
     {
         foreach($data as $key => $val)
         {
@@ -794,17 +980,17 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
                 }
             }
             // 读取验证信息
-            $validation = &$field['validation'];
-            if(isset($validation['rule']) && 0 != count($validation['rule']))
+            $validator = &$field['validator'];
+            if(isset($validator['rule']) && 0 != count($validator['rule']))
             {
-                $validation['rule'] = $this->makeRequiredAtFront($validation['rule']);
-                foreach($validation['rule'] as $method => $val)
+                $validator['rule'] = $this->makeRequiredAtFront($validator['rule']);
+                foreach($validator['rule'] as $method => $val)
                 {
-                    if(isset($validation['message'][$method]) && '' != $validation['message'][$method])
+                    if(isset($validator['message'][$method]) && '' != $validator['message'][$method])
                     {
                         $tipData[$field['form']['name']][] = array(
                             'icon' => 'ui-icon-alert',
-                            'data' => $validation['message'][$method],
+                            'data' => $validator['message'][$method],
                             'id' => 'validator-method-' . $method,
                         );
                     // 错误消息为空,需加载默认消息
@@ -925,88 +1111,9 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
         {
             $this->metaExt[$modelClassName] = Qwin::run($metaClassName)->defaultMetadata();
             // 语言转换
-            $this->metaExt[$modelClassName] = $this->converLang($this->metaExt[$modelClassName], Qwin::run('-c')->lang, true);
+            $this->metaExt[$modelClassName] = $this->convertLang($this->metaExt[$modelClassName], Qwin::run('-c')->lang, true);
         }
         return $this->metaExt[$modelClassName];
-    }
-
-    /**
-     * 为$query增加排序,优先级为url > 元数据 > 主键
-     * @param array $meta 配置元数据
-     * @param object $query Dcotrine查询对象
-     * @return object Dcotrine查询对象
-     * @todo 字段间隔标志
-     * @todo 关联模块的排序
-     * @todo orderField 冲突 ?namespace=Admin&module=Member&controller=Member&orderField=username&action=JsonList&_search=false&nd=1275278100347&row=10&page=1&orderField=id&orderType=desc
-     */
-    public function addOrderToQuery($meta, $query)
-    {
-        $arr = Qwin::run('-arr');
-        $gpc = Qwin::run('-gpc');
-        //$alias = $query->getRootAlias() . '.';
-        $alias = 't.';
-
-        // 排序字段名和排序类型
-        $urlOrderField = $gpc->g('urlOrderField');
-        $urlOrderType = $gpc->g('urlOrderType');
-        $orderField = $gpc->g('orderField');
-        $orderType = strtoupper($gpc->g('orderType'));
-
-        // 数据表字段的域
-        $sqlField = $this->getSettingList($meta['field'], 'isSqlField');
-        if(in_array($urlOrderField, $sqlField))
-        {
-            $urlOrderType = $arr->forceInArray($urlOrderType, array('DESC', 'ASC'));
-            $query->orderBy($alias . $urlOrderField . ' ' .  $urlOrderType);
-        } elseif(in_array($orderField, $sqlField)) {
-            $orderType = $arr->forceInArray($orderType, array('DESC', 'ASC'));
-            $query->orderBy($alias . $orderField . ' ' .  $orderType);
-        } elseif(isset($meta['db']['order']) && !empty($meta['db']['order'])) {
-            $orderTempArr = array();
-            foreach($meta['db']['order'] as $fieldSet)
-            {
-                $fieldSet[1] = $arr->forceInArray($fieldSet[1], array('DESC', 'ASC'));
-                $orderTempArr[] = $alias . $fieldSet[0] . ' ' . $fieldSet[1];
-            }
-            $query->orderBy(implode(', ', $orderTempArr));
-        } else {
-            $query->orderBy($alias . $meta['db']['primaryKey'] . ' DESC');
-        }
-        return $query;
-    }
-
-    public function addWhereToQuery($meta, $query)
-    {
-        $arr = Qwin::run('-arr');
-        $gpc = Qwin::run('-gpc');
-        $alias = 't.';
-        $searchTypeArr = array(
-            'eq' => '=',
-            'ne' => '<>',
-            'lt' => '<',
-            'le' => '<=',
-            'gt' => '>',
-            'ge' => '>=',
-            //'cn' => 'like',
-            //'nc' => 'not like'
-        );
-
-        $searchField = $gpc->g('searchField');
-        $searchType = $gpc->g('searchType');
-        $searchValue = $gpc->g('searchValue');
-
-        // 数据表字段的域
-        $sqlField = $this->getSettingList($meta['field'], 'isSqlField');        
-        if(in_array($searchField, $sqlField))
-        {
-            $searchType = $arr->forceInArray($searchType, array_keys($searchTypeArr));
-            $query->where($alias . $searchField . ' ' . $searchTypeArr[$searchType] . ' ?', $searchValue);
-        } elseif(isset($meta['db']['where']) && !empty($meta['db']['where'])) {
-            
-        }
-        //是’eq’,'ne’,'lt’,'le’,'gt’,'ge’,'bw’,'bn’,'in’,'ni’,'ew’,'en’,'cn’,'nc’，
-        
-        return $query;
     }
 
     /**
@@ -1017,7 +1124,7 @@ class Qwin_Miku_Metadata extends Qwin_Metadata
      * @return array 表单资源数组
      * @todo 以conver开头的方法,可能会出现冲突
      */
-    public function converDbDataToFormResource($data, $key, $key2)
+    public function convertDbDataToFormResource($data, $key, $key2)
     {
         $resource = array();
         foreach($data as  $row)

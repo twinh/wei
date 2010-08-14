@@ -40,4 +40,9 @@ class Qwin_Metadata_Element_Model extends Qwin_Metadata_Element_Abstract
             'foreign' => null,
         );
     }
+
+    public function format()
+    {
+        return $this->_formatAsArray();
+    }
 }

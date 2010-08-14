@@ -38,9 +38,9 @@ class Qwin_JQuery_Validator
         $validator_rule = array();
         foreach($set as $field)
         {
-            if(isset($field['validation']['rule']))
+            if(isset($field['validator']['rule']))
             {
-                $validator_rule[$field['form']['name']] = $field['validation']['rule'];
+                $validator_rule[$field['form']['name']] = $field['validator']['rule'];
             }
         }
         return Qwin::run('-arr')->jsonEncode($validator_rule);

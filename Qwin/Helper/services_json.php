@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * Converts to and from JSON format.
+ * converts to and from JSON format.
  *
  * JSON (JavaScript Object Notation) is a lightweight data-interchange
  * format. It is easy for humans to read and write. It is easy for machines
@@ -92,7 +92,7 @@ define('SERVICES_JSON_LOOSE_TYPE', 16);
 define('SERVICES_JSON_SUPPRESS_ERRORS', 32);
 
 /**
- * Converts to and from JSON format.
+ * converts to and from JSON format.
  *
  * Brief example of use:
  *

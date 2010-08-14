@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Miku
+ * @subpackage  Trex
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,6 +25,6 @@
  * @since       2010-4-17 15:50:02
  */
 
-class Qwin_Miku_Module
+class Qwin_Trex_Module
 {
 }

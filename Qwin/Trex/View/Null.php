@@ -1,6 +1,6 @@
 <?php
 /**
- * Qwin
+ * Null
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,19 +16,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @author    Twin Huang <twinh@yahoo.cn>
- * @copyright Twin Huang
- * @license   http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version   $Id$
- * @since     2010-4-26 10:39:18
+ * @package     Qwin
+ * @subpackage  
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @version     $Id$
+ * @since       2010-08-06 21:47:23
  */
 
-/**
- * @see Qwin_Class
- */
-require_once 'Qwin/Class.php';
-
-class Qwin extends Qwin_Class
+class Qwin_Trex_View_Null extends Qwin_Trex_View
 {
-    const VERSION = null;
+    public function display()
+    {
+        return null;
+    }
 }

@@ -27,6 +27,24 @@
 
 class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
 {
+    /**
+     * 排序的大小,用于自动生成排序值
+     * @var int
+     */
+    protected $_order = 0;
+
+    /**
+     * 排序的每次递增的数量
+     * @var int
+     */
+    protected $_orderLength = 20;
+
+    /**
+     * 查找属性的缓存数组
+     * @var array
+     */
+    protected $_attrCache = array();
+
     public function getSampleData()
     {
         return array(
@@ -34,7 +52,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
                 'title' => 'LBL_FIELD_TITLE',
                 'descrip' => '',
                 'order' => 0,
-                'group' => null,
+                'group' => 'LBL_GROUP_BASIC_DATA',
             ),
             'form' => array(
                 '_type' => null,
@@ -42,24 +60,25 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
                 '_resource' => null,
                 '_resourceGetter' => null,
                 '_icon' => null,
+                '_value' => '',
                 'name' => null,
                 'id' => null,
-                'value' => null,
             ),
             'attr' => array(
-                'isUrlQuery' => false,
-                'isList' => false,
-                'isSqlField' => false,
-                'isSqlQuery' => false,
-                'isReadonly' => false,
+                'isUrlQuery' => 1,
+                'isList' => 1,
+                'isSqlField' => 1,
+                'isSqlQuery' => 1,
+                'isReadonly' => 0,
+                'isShow' => 1,
             ),
-            'conversion' => array(
+            'converter' => array(
                 'add' => null,
                 'edit' => null,
                 'list' => null,
                 'db' => null,
             ),
-            'validation' => array(
+            'validator' => array(
 
             ),
         );
@@ -70,6 +89,31 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         return $this->_formatAsArray();
     }
 
+    protected function _format($metadata)
+    {
+        if(!isset($metadata['basic']))
+        {
+            $metadata['basic'] = array();
+        }
+
+        // 设置名称
+        if(!isset($metadata['basic']['title']))
+        {
+            $metadata['basic']['title'] = 'LBL_FIELD_' . strtoupper($metadata['form']['name']);
+        }
+
+        // 设置排序
+        if(!isset($metadata['basic']['order']))
+        {
+            $metadata['basic']['order'] = $this->_order;
+            $this->_order += $this->_orderLength;
+        } else {
+            $metadata['basic']['order'] = (int)$metadata['basic']['order'];
+        }
+        
+        return $this->_multiArrayMerge($this->getSampleData(), $metadata);
+    }
+
     /**
      * 筛选符合属性的域
      *
@@ -77,19 +121,27 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
      * @param 非法的属性组成的数组
      * @return array 符合要求的的域组成的数组
      */
-    public function getAttrList(array $allowAttr, array $banAttr = null)
+    public function getAttrList($allowAttr, $banAttr = null)
     {
-        //$allowAttr = (array)$allowAttr;
-        //$banAttr = (array)$banAttr;
+        $allowAttr = (array)$allowAttr;
+        $banAttr = (array)$banAttr;
+
+        // 查找是否已有该属性的缓存数据
+        $cacheName = implode('|', $allowAttr) . '-' . implode('', $banAttr);
+        if(isset($this->_attrCache[$cacheName]))
+        {
+            return $this->_attrCache[$cacheName];
+        }
+
         $tmpArr = array();
         $result = array();
         foreach($allowAttr as $attr)
         {
-            $tmpArr[$attr] = true;
+            $tmpArr[$attr] = 1;
         }
         foreach($banAttr as $attr)
         {
-            $tmpArr[$attr] = false;
+            $tmpArr[$attr] = 0;
         }
         foreach($this->_data as $field)
         {
@@ -98,12 +150,47 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
                 $result[$field['form']['name']] = $field['form']['name'];
             }
         }
+        // 加入缓存中
+        $this->_attrCache[$cacheName] = $result;
         return $result;
     }
 
-    public function toDoctrine()
+    /**
+     * 设置指定域的属性
+     *
+     * @param string $field 域的名称
+     * @param string $attr 属性的名称
+     * @param mixed $value 属性的值
+     * @return Qwin_Metadata_Element_Field 当前类
+     */
+    public function setAttr($field, $attr, $value)
     {
-        
+        $this->_data[$field]['attr'][$attr] = $value;
+        return $this;
+    }
+
+    /**
+     * 根据域中的order从小到大排序
+     * 
+     * @return Qwin_Metadata_Element_Field 当前类
+     * @todo 转为n维数组排序
+     */
+    public function order()
+    {
+        $newArr = array();
+        foreach($this->_data as $key => $val)
+        {
+            $tempArr[$key] = $val['basic']['order'];
+        }
+        // 倒序再排列,因为 asort 会使导致倒序
+        $tempArr = array_reverse($tempArr);
+        asort($tempArr);
+        foreach($tempArr as $key => $val)
+        {
+            $newArr[$key] = $this->_data[$key];
+        }
+        $this->_data = $newArr;
+        return $this;
     }
 
     public function addValidator()
@@ -112,11 +199,6 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
     }
 
     public function addValidatorRule()
-    {
-
-    }
-
-    public function setAttr()
     {
 
     }

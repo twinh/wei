@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Miku
+ * @subpackage  Trex
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,119 +25,107 @@
  * @since       2009-11-24 20:45:11
  */
 
-class Qwin_Miku_Controller
+class Qwin_Trex_Controller
 {
     /**
      * 行为重置时,用于保存原来行为的名称
      * @var string
      */
-    private $_prev_action;
+    private $_lastAction;
 
     /**
      * 模型对象
      * @var object
      */
-    public $model;
+    protected $_model;
 
     /**
      * 元数据对象
      * @var object
      */
-    public $meta;
+    protected $_meta;
 
     /**
-     * 加载 404 页面失败时见执行此方法
-     *
-     * @todo rename to actionError ?
+     * 视图配置
      */
-    function __error()
-    {
-        echo 'Cannot find the 404 page in the namespace "' . $this->__query['namespace'] . '"!';
-    }
+    protected $_view = array(
+        'class' => 'Qwin_Trex_View_Null',
+        'data' => null,
+        'element' => null,
+        'layout' => null,
+    );
 
     /**
-     * 转换 action
+     * 设置新的行为
      *
-     * @param string $new_action 新的行为名称
-     * @return null
+     * @param string $newAction 新的行为名称
+     * @return object 当前类
      */
-    public function setAction($new_action)
+    public function setAction($newAction)
     {
-        $this->_prev_action = $this->__query['action'];
-        $this->__query['action'] = $new_action;
+        $this->_lastAction = $this->_set['action'];
+        $this->_set['action'] = $newAction;
         return $this;
     }
 
     /**
-     * 恢复 action
+     * 恢复为上一个行为
      *
      * @return string Action 的名称
+     * @return object 当前类
      */
     public function resetAction()
     {
-        $this->__query['action'] = $this->_prev_action;
+        $this->_set['action'] = $this->_lastAction;
         return $this;
     }
-    
+
     /**
-     * 加载视图
+     * 根据视图配置加载视图类
      *
-     * @param array $set 视图的nca数组 $set = array('namespace', 'controller' 'action')
-     * @param bool/array $is_extract 如果是布尔型,且为真,则导出数组$this->__view;如果是数字,则导出自己
-     * @param string
-     * @todo layout & element 的实现,模板的扩展
+     * @param string $class 新的视图类名
+     * @return object 视图类
+     * @todo 类的检查
      */
-    function loadView($set)
+    public function loadView($class = null)
     {
-        // 构造文件路径
-        if(is_array($set))
+        Qwin::load($class);
+        if(null != $class && class_exists($class))
         {
-            // 兼容两种模式
-            if(isset($set['namespace']))
-            {
-                $set_tmp = array(
-                    0 => $set['namespace'],
-                    1 => $set['controller'],
-                    2 => $set['action'],
-                );
-                $set = $set_tmp;
-            }
-            for($i = 0; $i <= 2; $i++)
-            {
-                !isset($set[$i]) && $set[$i] = 'Default';
-            }
-            // 加载视图
-            //null == $controller && $controller = $this;
-            $__view_file = ROOT_PATH . DS .'app' . DS . $set[0] . DS . 'View'
-                       . DS . $set[1] . DS . $set[2] . '.php';
-        } elseif($this->Qwin_Helper_File->isExist($set)){
-            $__view_file = $set;
+            $this->_view['class'] = $class;
         }
-        // 加载文件,并销毁多余变量
-        //if(Qwin::run('-file')->isExist($__view_file))
-        if(file_exists($__view_file))
-        {
-            unset($set, $set_tmp, $i);
-            @extract($this->__view, EXTR_OVERWRITE);
-            require_once $__view_file;
-        }
-        //return $this;
+        $view = Qwin::run($this->_view['class']);
+        isset($this->_view['data']) && $view->setVarList($this->_view['data']);
+        isset($this->_view['element']) && $view->setElementList($this->_view['element']);
+        isset($this->_view['layout']) && $view->setLayout($this->_view['layout']);
+        return $view;
     }
 
-    public function loadViewElement($code)
+    public function setView($type, $data = null)
     {
-        if(!isset($this->__view_element[$code]))
+        $argv = func_get_args();
+        switch ($type)
         {
-            require_once 'Qwin/Miku/Controller/Exception.php';
-            throw new Qwin_Miku_Controller_Exception('The view element "' .  $code . '" isn\'t setted.');
+            case 'alert' :
+                $this->_view['class'] = 'Qwin_Trex_View_Alert';
+                $this->_view['data']['message'] = $argv[1];
+                $this->_view['data']['method'] = isset($argv[2]) ? $argv[2] : null;
+                break;
+            case 'text' :
+                $this->_view['class'] = 'Qwin_Trex_View_Text';
+                $this->_view['data']['data'] = $argv[1];
+                break;
+            default :
+                break;
         }
-        return $this->__view_element[$code];
+        return true;
     }
 
     /**
      * 执行 on 方法
      * 
      * @param string $method
+     * @return object 当前类
      */
     public function executeOnFunction($method)
     {
@@ -147,10 +135,12 @@ class Qwin_Miku_Controller
             array_shift($args);
             call_user_func_array(array($this, 'on' . $method), $args);
         }
+        return $this;
     }
 
     /**
      * 翻译单独一个代号
+     * 
      * @param string $code 要翻译的代号
      * @return string 如果存在该代号,返回翻译值,否则返回原代号
      * TODO 是否应该放在控制器中
