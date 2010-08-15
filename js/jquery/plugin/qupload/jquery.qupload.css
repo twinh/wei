@@ -1,0 +1,25 @@
+@charset "utf-8";
+/* CSS Document */
+#qupload_dialog{
+	display:none;
+}
+.qupload_message_box{
+	text-align:left;
+	height:20px;
+	font-size:13px;
+	line-height:16px;
+	margin:10px 0 0 0;
+}
+.qupload_message_icon{
+	float:left;
+}
+.qupload_form_box{
+	margin:20px 0 0 0;
+}
+#qupload_target{
+	display:none;
+}
+#qupload_field_name{
+	height:24px;
+	line-height:24px;
+}
