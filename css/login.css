@@ -1,0 +1,44 @@
+.ui-line{
+	padding:.15em;
+}
+.ui-login-panel{
+	width:360px;
+	margin:4em auto
+}
+.ui-form{
+	width:360px;
+}
+.ui-form .ui-form-content form{
+	padding:1em;
+}
+.login-input input {
+    width:160px;
+    padding:.4em 0 .4em .5em;/* for ie & ff */
+    line-height:1.5em;/* for ie */
+    font-weight:normal;
+}
+.login-label{
+    margin-right:5px;
+    font-size:1.1em;
+    margin-top:.1em;
+	text-align:right;
+}
+.ui-form .ui-form-content .ui-login-operation{
+    clear: both;
+	margin:0;
+}
+.ui-form .ui-form-content .ui-field-common{
+    width: auto;
+}
+.ui-form .ui-form-content .ui-field-common .ui-form-button {
+    padding:.4em .8em .5em;/* ff */
+    cursor:pointer;
+    text-align: center;
+    font-size:1.1em;
+}
+* html .ui-form .ui-form-content .ui-field-common .ui-form-button{
+    padding:.3em;/* ie6 */
+}
+*+ html .ui-form .ui-form-content .ui-field-common .ui-form-button {
+    padding:.3em;/* ie7 */
+}
