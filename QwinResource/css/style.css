@@ -79,7 +79,7 @@ div.ui-header-logo{
 }
 .ui-header-shortcut{
     float: right;
-    margin: -0.7em 0 .8em 0;
+    margin: .4em .6em 2em .6em;
     font-size: 1.2em;
 }
 .ui-header-shortcut a{

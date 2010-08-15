@@ -54,7 +54,7 @@ class Qwin_JQuery_JqGrid
         $col_name_arr = array();
         foreach($this->_set['field'] as $val)
         { 
-            if($val['list']['isList'] == true)
+            if($val['attr']['isList'] == true)
             {
                 $col_setting_arr[] = array(
                     'name' => $val['form']['name'],

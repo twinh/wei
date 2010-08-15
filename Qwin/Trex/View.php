@@ -153,11 +153,31 @@ abstract class Qwin_Trex_View extends Qwin_Metadata_Abstract
     }
 
     /**
-     * 输出视图
+     * 输出页眉
+     *
+     * @return boolen
+     */
+    public function displayHeader()
+    {
+        return false;
+    }
+
+    /**
+     * 输出主视图,例如
      * 
      * @return boolen
      */
     public function display()
+    {
+        return false;
+    }
+
+    /**
+     * 输出页脚
+     *
+     * @return boolen
+     */
+    public function displayFooter()
     {
         return false;
     }
