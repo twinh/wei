@@ -1,0 +1,12 @@
+#qthumb_dialog{
+	
+}
+#qthumb_dialog p{
+	margin:20px 10px;
+}
+#qthumb_dialog p .qthumb_input{
+	width:120px;
+}
+#qthumb_width{
+	margin-top:20px;
+}
