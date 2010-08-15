@@ -215,7 +215,7 @@ class Qwin_Class
      * @param int $depth 查找的深度
      * @retutn object $this
      */
-    public function addPath($path, $depth = 3)
+    public static function addPath($path, $depth = 3)
     {
         if(is_dir($path) && !array_key_exists($path, self::$_path))
         {
@@ -228,7 +228,7 @@ class Qwin_Class
      *
      * @param array $pathSet 路径组
      */
-    public function addMultiPath(array $pathSet)
+    public static function addMultiPath(array $pathSet)
     {
         foreach($pathSet as $key => $depth)
         {
@@ -254,7 +254,7 @@ class Qwin_Class
      *
      * @todo QInit, QFile 的加载问题
      */
-    public function update()
+    public static function update()
     {
         self::$_classCache = array();
         foreach(self::$_path as $path => $depth)
@@ -270,7 +270,7 @@ class Qwin_Class
      * @param string $path 文件路径
      * @param int $depth 查找的深度,即多少层文件夹
      */
-    private function _findClassByPath($path, $depth)
+    private static function _findClassByPath($path, $depth)
     {
         if($depth == 0)
             return false;
@@ -305,7 +305,7 @@ class Qwin_Class
      * @param string $file 文件路径
      * @todo 对于加密的文件
      */
-    private function _getClassByFile($file)
+    private static function _getClassByFile($file)
     {
         $data = file_get_contents($file);
         preg_match_all ("/class\s(\w+)[\s|\n]*[\w|\s]*{/i", $data, $class_arr);
