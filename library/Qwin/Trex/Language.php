@@ -1,6 +1,6 @@
 <?php
 /**
- * View
+ * Language
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,26 +16,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Default
- * @subpackage  View
+ * @package     Qwin
+ * @subpackage  
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-14 11:12:00
+ * @since       2010-08-16 18:41:13
  */
 
-class Default_View extends Qwin_Trex_View
+class Qwin_Trex_Language extends Qwin_Metadata_Abstract
 {
+    /**
+     * 语言转换数据
+     * @var array
+     */
+    protected $_data = array();
+
     public function __construct()
     {
-        $this->_theme = Qwin::run('-ini')->getConfig('interface.theme');
-        $this->_layout = QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/layout/common-control-panel.php';
+        
     }
 
-
-    public function display()
+    /**
+     * 翻译一个字符串
+     *
+     * @param string $name
+     * @return string|null
+     */
+    public function t($name = null)
     {
-        require_once $this->_layout;
+        if(isset($this->_data[$name]))
+        {
+            return $this->_data[$name];
+        }
+        return null;
     }
 }

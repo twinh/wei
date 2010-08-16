@@ -74,7 +74,7 @@ class Qwin_Helper_Array
             $cData .= $qData;
         } elseif(is_numeric($qData)) {
             $cData .= "'" . $qData . "'";
-        } elseif(is_bool) {
+        } elseif(is_bool($qData)) {
             $cData .= $qData ? 'true' : 'false';
         } else {
             $cData .= 'null';

@@ -31,12 +31,35 @@ class Qwin_Metadata_Element_Page extends Qwin_Metadata_Element_Abstract
     {
         return array(
             'title' => null,
-            'rowNum' => 10,
+            'description' => null,
         );
     }
 
     public function setTitle()
     {
         
+    }
+
+    /**
+     * 转换语言
+     *
+     * @param array $language 用于转换的语言
+     * @return Qwin_Metadata_Element_Field 当前类
+     */
+    public function translate($language)
+    {
+        $this->_data['titleCode'] = $this->_data['title'];
+        if(isset($language[$this->_data['title']]))
+        {
+            $this->_data['title'] = $language[$this->_data['title']];
+        }
+
+        $this->_data['descriptionCode'] = $this->_data['description'];
+        if(isset($language[$this->_data['description']]))
+        {
+            $this->_data['description'] = $language[$this->_data['description']];
+        }
+
+        return $this;
     }
 }

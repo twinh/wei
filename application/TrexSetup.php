@@ -25,8 +25,57 @@
 
 class TrexSetup extends Qwin_Trex_Setup
 {
-    public function __construct($config, $set = null)
+    protected function _onControllerLoad(Qwin_Trex_Controller $controller)
     {
-        parent::__construct($config, $set);
+        /*$request = Qwin::run('Qwin_Request');
+        $session = Qwin::run('Qwin_Session');
+        $lang = null;
+
+        /**
+         * 获取语言
+         *
+        // 按优先级排列语言的数组
+        $langList = array(
+            $request->g('language'),
+            $session->get('language'),
+            $this->_config['interface']['language'],
+        );
+        foreach($langList as $val)
+        {
+            if(null != $val)
+            {
+                $lang = $val;
+                break;
+            }
+        }
+        $session->set('language', $lang);
+
+        /**
+         * 加载项目语言
+         *
+        $langFile = QWIN_ROOT_PATH . '/common/language/' . $lang . '.php';
+        if(file_exists($langFile))
+        {
+            $controller->language = require_once $langFile;
+        } else {
+            $langFile = QWIN_ROOT_PATH . '/common/lang/' . $this->_config['interface']['language'] . '.php';
+            $controller->lang = require_once $langFile;
+        }
+
+        // 加载当前模块语言
+        $moduleLangFile = QWIN_ROOT_PATH . '/App/' . $set['namespace'] . '/' . $set['module'] . '/Lang/' . $lang . '.php';
+        if(file_exists($module_lang_file))
+        {
+            $controller->lang += require_once $module_lang_file;
+        } else {
+            $module_lang_file = QWIN_ROOT_PATH . '/App/' . $set['namespace'] . '/' . $set['module'] . '/Lang/' . $config['i18n']['language'] . '.php';
+            if(file_exists($module_lang_file))
+            {
+                $controller->lang += require_once $module_lang_file;
+            }
+        }
+
+        echo '加载完毕!<p>';
+        exit;*/
     }
 }

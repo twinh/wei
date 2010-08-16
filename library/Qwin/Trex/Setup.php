@@ -159,14 +159,21 @@ class Qwin_Trex_Setup
         $this->_namespace = Qwin::run($namespaceClass);
         null == $this->_namespace && $this->_onNamespaceNotExists($set['namespace']);
         Qwin::addMap('-namespace', $namespaceClass);
+        $this->_onNamespaceLoad($this->_namespace);
 
         /**
          * 初始模块类,并加入类管理器中
          */
         $moduleClass = $set['namespace'] . '_' . $set['module'] . '_Module';
         $this->_module = Qwin::run($moduleClass);
-        null == $this->_module && $this->_onModuleNotExists($set['module']);
+        if(null == $this->_module)
+        {
+            $moduleClass = 'Qwin_Trex_Module';
+            $this->_module = Qwin::run('Qwin_Trex_Module');
+            $this->_onModuleNotExists($set['module']);
+        }
         Qwin::addMap('-module', $moduleClass);
+        $this->_onModuleLoad($this->_module);
 
         /**
          * 初始控制器类,并加入类管理器中
@@ -180,6 +187,7 @@ class Qwin_Trex_Setup
             $this->_onControllerNotExists($set['controller']);
         }
         Qwin::addMap('-controller', $controllerClass);
+        $this->_onControllerLoad($this->_controller);
 
         /**
          * 执行指定的行为
@@ -296,6 +304,21 @@ class Qwin_Trex_Setup
      * @return boolen 方法执行情况
      */
     protected function _onActionNotExists($name = null)
+    {
+        return false;
+    }
+
+    protected function _onNamespaceLoad(Qwin_Trex_Namespace $namespace)
+    {
+        return false;
+    }
+
+    protected function _onModuleLoad(Qwin_Trex_Module $module)
+    {
+        return false;
+    }
+
+    protected function _onControllerLoad(Qwin_Trex_Controller $controller)
     {
         return false;
     }

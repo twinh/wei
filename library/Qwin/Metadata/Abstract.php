@@ -91,4 +91,26 @@ abstract class Qwin_Metadata_Abstract implements ArrayAccess, Iterator
     {
         return current($this->_data);
     }
+
+    /**
+     * 返回该对象的数组形式
+     *
+     * @return 返回该对象的数组形式
+     */
+    public function toArray()
+    {
+        return $this->_data;
+    }
+
+    /**
+     * 合并两个元数据
+     *
+     * @param Qwin_Metadata_Abstract $meta
+     * @return object 当前类
+     */
+    public function merge(Qwin_Metadata_Abstract $meta)
+    {
+        $this->_data += $meta->toArray();
+        return $this;
+    }
 }

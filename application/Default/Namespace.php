@@ -28,7 +28,7 @@
  * @since     2009-11-21 14:37 utf-8 中文
  */
 
-class Default_Namespace
+class Default_Namespace extends Qwin_Trex_Namespace
 {
     public function __construct()
     {
@@ -170,54 +170,5 @@ class Default_Namespace
      * @param array $set
      * @param array $cofig
      */
-/*    private function _loadLang($set = null, $config = null)
-    {
-        // TODO default language
-        // 获取语言名称
-        $ini = Qwin::run('-ini');
-        $url = Qwin::run('-url');
-        $controller = Qwin::run('-c');
-
-        $lang = '';
-        // 按优先级排列语言的数组
-        $lang_arr = array(
-            $url->g('lang'),
-            Qwin::run('-ses')->get('lang'),
-            $config['i18n']['language'],
-        );
-        foreach($lang_arr as $val)
-        {
-            if(null != $val)
-            {
-                $lang = $val;
-                break;
-            }
-        }
-        Qwin::run('-ses')->set('lang', $lang);
-        //$controller->lang_name = $lang;
-        $controller->meta->lang = $lang;
-
-        // 加载项目语言
-        $lang_file = QWIN_ROOT_PATH . '/Common/Lang/' . $lang . '.php';
-        if(file_exists($lang_file))
-        {
-            $controller->lang = require_once $lang_file;
-        } else {
-            $lang_file = QWIN_ROOT_PATH . '/Common/Lang/' . $config['i18n']['language'] . '.php';
-            $controller->lang = require_once $lang_file;
-        }
-
-        // 加载当前模块语言
-        $module_lang_file = QWIN_ROOT_PATH . '/App/' . $set['namespace'] . '/' . $set['module'] . '/Lang/' . $lang . '.php';
-        if(file_exists($module_lang_file))
-        {
-            $controller->lang += require_once $module_lang_file;
-        } else {
-            $module_lang_file = QWIN_ROOT_PATH . '/App/' . $set['namespace'] . '/' . $set['module'] . '/Lang/' . $config['i18n']['language'] . '.php';
-            if(file_exists($module_lang_file))
-            {
-                $controller->lang += require_once $module_lang_file;
-            }
-        }
-    }*/
+/*    */
 }

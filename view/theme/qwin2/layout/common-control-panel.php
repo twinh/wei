@@ -1,45 +1,12 @@
-<?php
-/**
- * header 的名称
- *
- * header 的简要介绍
- *
- * Copyright (c) 2009 Twin. All rights reserved.
- *
- * LICENSE:
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * @author    Twin Huang <twinh@yahoo.cn>
- * @copyright Twin Huang
- * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version   2009-11-20 01:12:01
- * @since     2009-11-24 18:47:32
- */
-
-// 防止直接访问导致错误
-!defined('QWIN_PATH') && exit('Forbidden');
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><?php echo $this->t('LBL_HTML_TITLE')?></title>
+<title><?php echo $lang->t('LBL_HTML_TITLE')?></title>
 <!--{JS}-->
 <!--{CSS}-->
 <?php
-$rsc = Qwin::run('-rsc');
+/*$rsc = Qwin::run('-rsc');
 $rsc->load('js/jquery/core/jquery')
     ->load('jquery/ui/core')
     ->load('jquery/theme/' . qw('Qwin_Hepler_Util')->getStyle())
@@ -57,127 +24,107 @@ $qurl = array(
     'nca' => qw('-url')->nca,
     'separator' => qw('-url')->separator,
     'extension' => qw('-url')->extension,
-);
-$menu = require_once QWIN_ROOT_PATH . '/Cache/Php/List/AdminMenu.php';
+);*/
+$qurl = null;
 ?>
+<script type="text/javascript" src="../resource/js/jquery/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="../resource/js/jquery/ui/minified/jquery-ui-1.8.4.custom.min.js"></script>
+<script type="text/javascript" src="../resource/js/qwin/common.js"></script>
+<script type="text/javascript" src="../resource/js/qwin/qwin.js"></script>
+<script type="text/javascript" src="../resource/js/qwin/url.js"></script>
+<script type="text/javascript" src="../resource/js/qwin/adjust_width.js"></script>
+<script type="text/javascript" src="../resource/js/jquery/ui/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="../resource/js/jquery/ui/button/ui.button.js"></script>
+<script type="text/javascript" src="../resource/js/jquery/plugin/qui/jquery.qui.js"></script>
+<script type="text/javascript" src="../resource/js/jquery/ui/tabs/ui.tabs.js"></script>
+<script type="text/javascript" src="../resource/js/jquery/plugin/jqgrid/i18n/grid.locale-en.js"></script>
+<script type="text/javascript" src="../resource/js/jquery/plugin/jqgrid/jquery.jqgrid.js"></script>
+<script type="text/javascript">
+Qwin.Lang = {'LBL_ACTION_LIST':'列表','LBL_ACTION_ADD':'添加','LBL_ACTION_EDIT':'编辑','LBL_ACTION_DELETE':'删除','LBL_ACTION_SHOW':'查看','LBL_ACTION_COPY':'复制','LBL_ACTION_FILTER':'筛选','LBL_ACTION_RETURN':'返回','LBL_ACTION_RESET':'重置','LBL_ACTION_SUBMIT':'提交','LBL_ACTION_APPLY':'应用','LBL_DEFAULT':'默认','LBL_OPERATION':'操作','LBL_SWITCH_DISPLAY_MODEL':'切换显示模式','LBL_SHORTCUT':'快捷方式','LBL_STYLE':'风格','LBL_THEME':'主题','LBL_WELCOME':'欢迎您','LBL_LOGOUT':'注销','LBL_TOOL':'工具','LBL_LANG':'语言','LBL_FIELD_ID':'编号','LBL_FIELD_NAME':'名称','LBL_FIELD_NAMESPACE':'命名空间','LBL_FIELD_TITLE':'标题','LBL_FIELD_OPERATION':'操作','LBL_FIELD_DATE_CREATED':'创建时间','LBL_FIELD_DATE_MODIFIED':'修改时间','LBL_FIELD_CAPTCHA':'验证码','LBL_FIELD_DESCRIPTION':'描述','LBL_FIELD_CONTENT':'内容','MSG_CHOOSE_ONLY_ONE_ROW':'请只选择一行!','MSG_CHOOSE_AT_LEASE_ONE_ROW':'请选择至少一行!','MSG_CONFIRM_TO_DELETE':'删除后将无法还原,确认?','MSG_ERROR_FIELD':'错误域: ','MSG_ERROR_MSG':'错误信息: ','MSG_NO_RECORD':'该记录不存在或已经被删除.','MSG_ERROR_CAPTCHA':'验证码错误','LBL_GROUP_BASIC_DATA':'基本资料','LBL_HTML_TITLE':'Content Management System - Powered by QWin Framework','LBL_FOOTER_COPYRIGHT':'Powered by <a>Qwin Framework</a>. Copyright &copy; 2009-2010 <a>Twin</a>. All rights reserved.','LBL_FIELD_PARENT_ID':'父分类','LBL_FIELD_ANCESTOR_ID':'祖先分类','LBL_FIELD_META':'Meta数据','LBL_FIELD_TO_URL':'跳转','LBL_FIELD_HIT':'人气','LBL_FIELD_PAGE_NAME':'页面名称','LBL_FIELD_CONTENT_PREVIEW':'内容预览','LBL_FIELD_CATEGORY_ID':'分类编号','LBL_FIELD_CATEGORY':'分类','LBL_FIELD_TEMPLATE':'模板','LBL_FIELD_AUTHOR':'作者','LBL_FIELD_THUMB':'缩略图','LBL_FIELD_ORDER':'顺序','LBL_FIELD_IS_POSTED':'是否发布','LBL_FIELD_IS_INDEX':'是否显示在首页','LBL_FIELD_JUMP_TO_URL':'跳转到','LBL_GROUP_PAGE_DATA':'页面资料','LBL_GROUP_SETTING_DATA':'配置资料','LBL_MODULE_ARTICLE':'文章','LBL_MODULE_ARTICLE_CATEGORY':'文章分类','LBL_ACTION_CREATE_HTML':'生成静态页面','MSG_TEMPLATE_NOT_EXISTS':'文章模板不存在,请返回修改!','LBL_CREATE_ALL_HMTL':'生成所有的静态页面','LBL_FIELD_AREA':'地区'};
+</script>
+
+<link rel="stylesheet" type="text/css" href="../resource/js/jquery/themes/redmond/jquery-ui-1.8.4.custom.css" />
+<link rel="stylesheet" type="text/css" href="../resource/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../resource/js/jquery/plugin/jqgrid/jquery.jqgrid.css" />
 </head>
 <body>
 <script type="text/javascript">
     jQuery.noConflict();
-    var _get = <?php echo qw('-arr')->toJsObject(qw('-url')->getGetArray());?>;
-    var qurl = <?php echo qw('-arr')->toJsObject($qurl);?>;
+	var _get = <?php echo $arrayHelper->toJsObject($_GET);?>;
+    var qurl = <?php echo $arrayHelper->toJsObject($qurl);?>;
     jQuery(function($) {
-        $("#ui-navigation-bar").tabs({
-            event: 'mouseover'
-        });
-        $('div.ui-navigation-bar .ui-tabs-panel a').qui();
-        c();
-        function c()
-        {
-            $('body')
-                .append('<div id="ui-temp-widget-tcontent" class="ui-widget-content"></div>')
-                .css('background-color', $('#ui-temp-widget-tcontent').css('background-color'));
-            //alert($('#ui-temp-widget-tcontent').css('background-color'))
-            $('#ui-temp-widget-tcontent').remove();
-        }
-        $('#ui-sidebar-content-tool li, #ui-sidebar-content-shortcut li').qui();
+		function getWidgetObject()
+		{
+			$('body').append('<div id="ui-temp-widget-tcontent" class="ui-widget-content ui-helper-hidden"></div>');
+			return $('#ui-temp-widget-tcontent');
+		}
+		
+		$widget = getWidgetObject();
+		/**
+		 * 设置背景颜色,让背景看起来更协调
+		 * @todo 允许自定义背景
+		 */
+		$('body').css('background-color', $widget.css('background-color'));
+		/**
+		 * 为各浏览器设置阴影
+		 * @todo IE浏览器下,阴影会造成盒子位移
+		 */
+		var $widgetShadowColor = $widget.css('border-top-color');
+		$('#ui-main, #ui-top-floating-bar, #ui-header-shortcut').css({
+			'-moz-box-shadow' : '0px 0px 10px ' + $widgetShadowColor,
+			'-webkit-box-shadow' : '0px 0px 10px ' + $widgetShadowColor,
+			'box-shadow' : '0px 0px 10px ' + $widgetShadowColor
+			//'filter' : 'progid:DXImageTransform.Microsoft.Shadow(color=' + $widgetShadowColor + ', Direction=135, Strength=3)'
+		});
+		
+		$('button, input:submit, input:reset, input:button, a.ui-anchor').button();
+		$('td.ui-field-radio, td.ui-field-checkbox').buttonset();
+		
+		$('#ui-header-shortcut a').qui({
+			click: true,
+			focus: true
+		});
+		$('#ui-header-shortcut a:first').addClass('ui-corner-bl');
+		$('#ui-header-shortcut a:last').addClass('ui-header-shortcut-last-anchor');
     });
 </script>
-<div id="ui-header" class="ui-header ui-widget">
-        <div class="ui-header-shortcut ui-widget-content">
-            <a href="#"><?php echo $this->t('LBL_WELCOME')?>, <?php echo $loginState['username']?>!</a>
-            <a href="<?php echo url(array($this->__query['namespace'], 'Member', 'Log', 'Logout'))?>">[<?php echo $this->t('LBL_LOGOUT')?>]</a>
-        </div>
-        <div class="ui-header-logo ui-widget-content">
-            <a href="">Qwin</a>
-        </div>
-</div>
-<div id="ui-navigation-bar" class="ui-navigation-bar">
-    <ul>
-<?php
-foreach($menu as $key => $val){
-    if(null == $val['category_id']){
-?>
-        <li><a href="#menu-<?php echo $val['id']?>"><?php echo $val['title']?></a></li>
-<?php
-    }
-}
-?>
+<div id="ui-top-floating-bar" class="ui-top-floating-bar ui-widget ui-widget-header">
+	<ul>
+    	<li><a class="ui-anchor ui-state-active" href="#Qwin">Qwin</a></li>
+        <li><a class="ui-anchor" href="#Article">Home</a></li>
+        <li><a class="ui-anchor" href="#Article">Article</a></li>
+        <li><a class="ui-anchor" href="#Picture">Picture</a></li>
+        <li><a class="ui-anchor" href="#Product">Product</a></li>
+        <li><a class="ui-anchor" href="#File Manager">File Manager</a></li>
+        <li><a class="ui-anchor" href="#Administrator">Administrator</a></li>
+        <li><a class="ui-anchor" href="#Administrator">Administrator</a></li>
+        <li><a class="ui-anchor" href="#Article">Add Your Link</a></li>
+        <li><a class="ui-anchor" href="#Article"><span class="ui-icon ui-icon-carat-1-w"></span></a></li>
+        <li><a class="ui-anchor" href="#Article"><span class="ui-icon ui-icon-carat-1-e"></span></a></li>
+        <li><a class="ui-anchor" href="#Article"><span class="ui-icon ui-icon-close"></span></a></li>
     </ul>
-<?php
-foreach($menu as $key => $val){
-    if(0 == $val['category_id'])
-    {
-?>
-    <div id="menu-<?php echo $val['id']?>">
-<?php
-        foreach($menu as $key2 => $val2){
-           if($val['id'] == $val2['category_id']){
-?>
-        <a href="<?php echo $val2['url']?>"><?php echo $val2['title']?></a>
-<?php
-           }
-        }
-?>
-    </div>
-<?php
-    }
-}
-?>
 </div>
-<div id="ui-main" class="ui-main">
-    <div id="ui-main-leftbar" class="ui-main-leftbar">
-        <!-- TODO tool(calender,world clock,calculator,page setting) -->
-        <div class="ui-siderbar ui-box ui-widget ui-widget-content ui-corner-all">
-            <div class="ui-sidebar-titlebar ui-box-titlebar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix" id="ui-sidebar-title-1">
-                <span class="ui-box-title"><?php echo $this->t('LBL_TOOL')?></span>
-                <a class="ui-sidebar-title-icon ui-box-title-icon ui-corner-all" name="#ui-sidebar-content-tool" href="javascript:void(0)">
-                    <span class="ui-icon ui-icon-circle-triangle-n">open/close</span>
-                </a>
-            </div>
-            <div class="ui-box-content ui-widget-content">
-                <ul id="ui-sidebar-content-tool">
-                    <li class="ui-sidebar-list ui-widget-content"><a href="<?php echo url(array($this->__query['namespace'], 'Member', 'Setting', 'SwitchStyle'))?>"><?php echo $this->t('LBL_STYLE')?></a></li>
-                    <li class="ui-sidebar-list ui-widget-content"><a href="<?php echo url(array($this->__query['namespace'], 'Member', 'Setting', 'SwitchLang'))?>"><?php echo $this->t('LBL_LANG')?></a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="ui-siderbar ui-box ui-widget ui-widget-content ui-corner-all">
-            <div class="ui-sidebar-titlebar ui-box-titlebar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix" id="ui-sidebar-title-1">
-                <span class="ui-box-title"><?php echo $this->t('LBL_SHORTCUT')?></span>
-                <a class="ui-sidebar-title-icon ui-box-title-icon ui-corner-all" name="#ui-sidebar-content-shortcut" href="javascript:void(0)">
-                    <span class="ui-icon ui-icon-circle-triangle-n">open/close</span>
-                </a>
-            </div>
-            <div class="ui-box-content ui-widget-content">
-                <ul id="ui-sidebar-content-shortcut">
-<?php
-if(isset($this->__meta['db']['table'])){
-?>
-                    <li class="ui-sidebar-list ui-widget-content"><a href="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller']))?>" target="_self"><?php echo $this->t('LBL_ACTION_LIST')?></a></li>
-                    <li class="ui-sidebar-list ui-widget-content"><a href="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], 'Add'))?>" target="_self"><?php echo $this->t('LBL_ACTION_ADD')?></a></li>
-<?php
-}
-if(isset($this->__meta['shortcut'])){
-foreach($this->__meta['shortcut'] as $shortcut){
-?>
-                    <li class="ui-sidebar-list ui-widget-content"><a href="<?php echo $shortcut['link']?>" target="_self"><?php echo $this->t($shortcut['name'])?></a></li>
-<?php
-}}
-?>
-                </ul>
-            </div>
-        </div>
-        <!-- TODO last viewed -->
+<div id="ui-bottom-floating-botton" class="ui-bottom-floating-botton"><a class="ui-anchor" href="#"><span class="ui-icon ui-icon-arrowthickstop-1-n"></span></a></div>
+<div id="ui-main" class="ui-main ui-widget-content ui-corner-all">
+  <div id="ui-header" class="ui-header ui-widget">
+    <div class="ui-header-shortcut" id="ui-header-shortcut">
+    	<a class="ui-state-default" href="#"><?php echo $lang->t('LBL_WELCOME')?>, twin!</a>
+        <a class="ui-state-default" href="?namespace=Default&module=Member&controller=Log&action=Logout"><?php echo $lang->t('LBL_LOGOUT')?></a>
+        <a class="ui-state-default" href="?namespace=Default&module=Member&controller=Log&action=Logout">Do more</a>
+        <a class="ui-state-default" href="?namespace=Default&module=Member&controller=Log&action=Logout">Next</a>
     </div>
-    </div>
-<div id="ui-main-content" class="ui-main-content">
+    <div class="ui-header-logo ui-widget-content"> <a href="">Trex</a> </div>
+  </div>
+  <script type="text/javascript">
+var validator_rule = {"title":{"required":true,"maxlength":200}};
+
+</script>
 <?php
-require_once $this->loadViewElement('content');
+require $this->getElement('content');
 ?>
-</div>
-<div class="ui-footer ui-widget">
-    <div class="ui-copyright ui-widget-content"><?php echo $this->t('LBL_FOOTER_COPYRIGHT')?></div>
+  <div class="ui-footer ui-widget">
+    <div class="ui-copyright ui-widget-content"><?php echo $lang->t('LBL_FOOTER_COPYRIGHT')?></div>
+  </div>
 </div>
 </body>
 </html>

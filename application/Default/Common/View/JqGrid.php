@@ -27,6 +27,12 @@
 
 class Default_Common_View_JqGrid extends Default_View
 {
+    public function  __construct()
+    {
+        parent::__construct();
+        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/common-list.php');
+    }
+
     public function display()
     {
         /**
@@ -34,6 +40,9 @@ class Default_Common_View_JqGrid extends Default_View
          */
         $primaryKey = $this->primaryKey;
         $meta = $this->meta;
+        $arrayHelper = Qwin::run('-arr');
+        $request = Qwin::run('Qwin_Request');
+        $lang = Qwin::run('-lang');
 
         /**
          * 数据转换
@@ -58,7 +67,9 @@ class Default_Common_View_JqGrid extends Default_View
                 $columnSetting[count($columnSetting) - 1]['hidden'] = true;
             }
         }
-
+        $columnName = $arrayHelper->jsonEncode($columnName);
+        $columnSetting = $arrayHelper->jsonEncode($columnSetting);
+        
         // 排序
         if(isset($meta['db']['order']) && !empty($meta['db']['order']))
         {
@@ -69,6 +80,18 @@ class Default_Common_View_JqGrid extends Default_View
             $sortOrder = 'DESC';
         }
 
+        /**
+         * @todo 当前页数,行数等信息的获取
+         */
+        $rowNum = intval($request->g('row'));
+        if($rowNum <= 0)
+        {
+            $rowNum = $this->meta['db']['limit'];
+        // 最多同时读取500条记录
+        } elseif($rowNum > 500) {
+            $rowNum = 500;
+        }
+        
         require_once $this->_layout;
     }
 }

@@ -103,4 +103,24 @@ abstract class Qwin_Metadata_Element_Abstract extends Qwin_Metadata_Abstract
         }
         return $array1;
     }
+
+    public function translateAll($language)
+    {
+        foreach($this->_data as $data)
+        {
+            $data->translate($language);
+        }
+        return $this;
+    }
+
+    /**
+     * 转换语言
+     *
+     * @param array $language 用于转换的语言
+     * @return object 当前类
+     */
+    public function translate($language)
+    {
+        return $this;
+    }
 }

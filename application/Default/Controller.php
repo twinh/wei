@@ -44,6 +44,18 @@ class Default_Controller extends Qwin_Trex_Controller
         $this->_isAllowVisited();
 
         /**
+         * 加载语言,同时将该命名空间下的通用模块语言类加入到当前模块的语言类下
+         */
+        $languageName = $this->getLanguage();
+        $commonLanguageName = $set['namespace'] . '_Common_Language_' . $languageName;
+        $languageName = $set['namespace'] . '_' . $set['module'] . '_Language_' . $languageName;
+        Qwin::load('Default_Language');
+        $this->_lang = Qwin::run($languageName);
+        $this->_commonLang = Qwin::run($commonLanguageName);       
+        $this->_lang->merge($this->_commonLang);
+        Qwin::addMap('-lang', $languageName);
+
+        /**
          * 加载元数据
          */
         $metadataName = $ini->getClassName('Metadata', $set);
@@ -56,6 +68,8 @@ class Default_Controller extends Qwin_Trex_Controller
             $this->_meta = Qwin::run($metadataName);
         }
         Qwin::addMap('-meta', $metadataName);
+        // 语言转换
+        $this->_meta->translate($this->_lang);
 
         /**
          * 加载模型
@@ -73,20 +87,6 @@ class Default_Controller extends Qwin_Trex_Controller
          * 加载视图父类
          */
         Qwin::load('Default_View');
-
-        /*
-
-        $controller->meta = $metadata;
-        // 语言转换
-        $this->_loadLang($set, $config);
-        $controller->__meta = $metadata->convertLang($controller->__meta, $controller->lang);
-
-        // 获取模型类名称
-        
-        if(isset($controller->__meta['db']['table']))
-        {
-            $controller->meta->metadataToModel($controller->__meta, $model);
-        }*/
     }
 
     /**
