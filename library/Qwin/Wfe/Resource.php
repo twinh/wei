@@ -37,27 +37,27 @@ class Qwin_Wfe_Resource extends Qwin_Wfe
     function __construct()
     {
         // resource path
-        $this->_path = Qwin::run('-str')->toUrlSeparator(RESOURCE_PATH);
+        $this->_path = Qwin::run('-str')->toUrlSeparator(QWIN_RESOURCE_PATH);
     }
     /*
     // 加载jquery插件
     qw('-rsc')->load('jquery/plugin/layout');
-    => RESOURCE_PATH . /js/jquery/plugin/layout/jquery.layout.js
+    => QWIN_RESOURCE_PATH . /js/jquery/plugin/layout/jquery.layout.js
     //如果 false 不自动加载css文件
-    && RESOURCE_PATH . /js/jquery/plugin/layout/jquery.layout.css
+    && QWIN_RESOURCE_PATH . /js/jquery/plugin/layout/jquery.layout.css
     
     qw('-rsc')->load('js/qwin/url');
-    => RESOURCE_PATH . /js/qwin/url.js
+    => QWIN_RESOURCE_PATH . /js/qwin/url.js
     
     qw('-rsc')->load('css/admin');
-    => RESOURCE_PATH . /css/admin.css
+    => QWIN_RESOURCE_PATH . /css/admin.css
     
     qw('-rsc')->load('js/ckeditor/');
-    => RESOURCE_PATH . /js/ckeditor/ckeditor.js
+    => QWIN_RESOURCE_PATH . /js/ckeditor/ckeditor.js
     
     虽然没有该文件
     qw('-rsc')->load('js/ckeditor');
-    => RESOURCE_PATH . /js/ckeditor.js
+    => QWIN_RESOURCE_PATH . /js/ckeditor.js
     */
     public function load($path)
     {

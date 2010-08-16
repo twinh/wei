@@ -489,8 +489,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         {
             if(empty($this->lang))
             {
-                $config = Qwin::run('-ini')->getConfig();
-                $this->lang = $config['i18n']['language'];
+                $this->lang = Qwin::run('-ini')->getConfig('interface.language');
             }
         }
         return true;
@@ -682,7 +681,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      */
     public function getNamespace()
     {
-        $file = scandir(ROOT_PATH . '/App');
+        $file = scandir(QWIN_ROOT_PATH . '/App');
         $folder = array();
         foreach($file as $val)
         {
@@ -847,7 +846,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      */
     public function loadSettingFile($controller, $namespace = 'default')
     {
-        require_once ROOT_PATH . Qwin::run('-str')->toPathSeparator('\app\\' . $namespace . '\setting\\' . $controller . '.php');
+        require_once QWIN_ROOT_PATH . Qwin::run('-str')->toPathSeparator('\app\\' . $namespace . '\setting\\' . $controller . '.php');
         $name = 'Setting_' . $namespace . '_' . $controller;
         $class = new $name;
         return $class->setting();

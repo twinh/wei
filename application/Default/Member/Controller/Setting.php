@@ -33,7 +33,7 @@ class Default_Member_Controller_Setting extends Qwin_Trex_Controller
         $ini = Qwin::run('-ini');
         // 初始化控制面板中心内容的视图变量数组,加载控制面板视图
         $this->__view_element = array(
-            'content' => RESOURCE_PATH . '/php/View/Element/MemberSettingLang.php',
+            'content' => QWIN_RESOURCE_PATH . '/php/View/Element/MemberSettingLang.php',
         );
         $this->loadView($ini->load('Resource/View/Layout/DefaultControlPanel', false));
     }
@@ -57,7 +57,7 @@ class Default_Member_Controller_Setting extends Qwin_Trex_Controller
 
         // 初始化控制面板中心内容的视图变量数组,加载控制面板视图
         $this->__view_element = array(
-            'content' => RESOURCE_PATH . '/php/View/Element/MemberSettingStyle.php',
+            'content' => QWIN_RESOURCE_PATH . '/php/View/Element/MemberSettingStyle.php',
         );
         $this->loadView($ini->load('Resource/View/Layout/DefaultControlPanel', false));
     }

@@ -39,7 +39,7 @@ class Qwin_Cache_CommonClass extends Qwin_Cache
     public function __construct()
     {
         $this->_table = 'common_class';
-        $this->_path = ROOT_PATH . '/Cache/php/CommonClass/';
+        $this->_path = QWIN_ROOT_PATH . '/Cache/php/CommonClass/';
         $this->_default_lang = 'en';
     }
     

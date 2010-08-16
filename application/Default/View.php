@@ -29,7 +29,7 @@ class Default_View extends Qwin_Trex_View
 {
     public function __construct()
     {
-        $this->_layout = RESOURCE_PATH . '/php/View/Layout/DefaultControlPanel.php';
+        $this->_layout = QWIN_RESOURCE_PATH . 'theme/view/layout/common-control-panel.php';
     }
 
 

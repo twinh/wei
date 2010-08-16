@@ -259,9 +259,12 @@ class Qwin_Class
         self::$_classCache = array();
         foreach(self::$_path as $path => $depth)
         {
+            $path = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
             self::_findClassByPath($path, $depth);
         }
-        self::run('Qwin_Helper_File')->writeArr(self::$_classCache, self::$_cacheFile);
+        $arr = Qwin::run('Qwin_Helper_Array')->tophpCode(self::$_classCache);
+        $fileContent = "<?php\r\nreturn $arr;\r\n ?>";
+        file_put_contents(self::$_cacheFile, $fileContent);
     }
     
     /**

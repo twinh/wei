@@ -126,4 +126,4 @@ foreach($set['field'] as $group_name => $group)
         </form>
     </div>
 </div>
-<script type="text/javascript" src="<?php echo RESOURCE_PATH?>/js/other/form.js"></script>
+<script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH?>/js/other/form.js"></script>

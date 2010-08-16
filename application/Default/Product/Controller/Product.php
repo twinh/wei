@@ -119,7 +119,7 @@ class Default_Product_Controller_Product extends Qwin_Trex_Controller
     {
         if(!isset($this->_articleCategory))
         {
-            $this->_articleCategory = require ROOT_PATH . '/Cache/Php/List/ProductCategory.php';
+            $this->_articleCategory = require QWIN_ROOT_PATH . '/Cache/Php/List/ProductCategory.php';
         }
         if(!isset($this->_articleCategory2))
         {
@@ -136,7 +136,7 @@ class Default_Product_Controller_Product extends Qwin_Trex_Controller
     {
         if(!isset($this->_articleCategory))
         {
-            $this->_articleCategory = require ROOT_PATH . '/Cache/Php/List/ProductCategory.php';
+            $this->_articleCategory = require QWIN_ROOT_PATH . '/Cache/Php/List/ProductCategory.php';
         }
         $data = &$this->_articleCategory;
         foreach($data as $row)

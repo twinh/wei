@@ -56,9 +56,9 @@ class Default_Namespace
         {
             // 加入类的路径
             Qwin::addMultiPath(array(
-                QWIN_PATH => 10,
-                RESOURCE_PATH . DS . 'php' => 10,
-                ROOT_PATH => 5,
+                QWIN_LIB_PATH => 10,
+                QWIN_RESOURCE_PATH . DS . 'application' => 10,
+                QWIN_ROOT_PATH . DS . 'application' => 10,
             ));
             Qwin::update();
         }
@@ -198,22 +198,22 @@ class Default_Namespace
         $controller->meta->lang = $lang;
 
         // 加载项目语言
-        $lang_file = ROOT_PATH . '/Common/Lang/' . $lang . '.php';
+        $lang_file = QWIN_ROOT_PATH . '/Common/Lang/' . $lang . '.php';
         if(file_exists($lang_file))
         {
             $controller->lang = require_once $lang_file;
         } else {
-            $lang_file = ROOT_PATH . '/Common/Lang/' . $config['i18n']['language'] . '.php';
+            $lang_file = QWIN_ROOT_PATH . '/Common/Lang/' . $config['i18n']['language'] . '.php';
             $controller->lang = require_once $lang_file;
         }
 
         // 加载当前模块语言
-        $module_lang_file = ROOT_PATH . '/App/' . $set['namespace'] . '/' . $set['module'] . '/Lang/' . $lang . '.php';
+        $module_lang_file = QWIN_ROOT_PATH . '/App/' . $set['namespace'] . '/' . $set['module'] . '/Lang/' . $lang . '.php';
         if(file_exists($module_lang_file))
         {
             $controller->lang += require_once $module_lang_file;
         } else {
-            $module_lang_file = ROOT_PATH . '/App/' . $set['namespace'] . '/' . $set['module'] . '/Lang/' . $config['i18n']['language'] . '.php';
+            $module_lang_file = QWIN_ROOT_PATH . '/App/' . $set['namespace'] . '/' . $set['module'] . '/Lang/' . $config['i18n']['language'] . '.php';
             if(file_exists($module_lang_file))
             {
                 $controller->lang += require_once $module_lang_file;
