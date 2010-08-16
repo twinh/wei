@@ -55,6 +55,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     protected $_foreignKey = array();
 
     protected $_modelPrimaryKey = array();
+    
     /**
      * 语言名称
      * @var string
@@ -466,6 +467,15 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             $row = $this->convertSingleData($meta, $action, $row, $isUrlQuery);
         }
         return $data;
+    }
+
+    public function translate(Qwin_Trex_Language $lang)
+    {
+        foreach($this->_data as $data)
+        {
+            $data->translate($lang);
+        }
+        return $this;
     }
 
     public function getShowMetadata(Qwin_Metadata $meta, Doctrine_Record $record)

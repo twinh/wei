@@ -34,12 +34,12 @@ qw('-rsc')->load('js/jquery/plugin/jqgrid/i18n/grid.locale-en');
 qw('-rsc')->load('jquery/plugin/jqgrid');
 ?>
 <div id="custom-jqgird-toolbar" class="ui-helper-hidden">
-    &nbsp;<a class="action-add" href="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], 'Add'))?>"><?php echo $this->t('LBL_ACTION_ADD')?></a>&nbsp;|&nbsp;
-    <a class="action-edit" href="javascript:void(0)"><?php echo $this->t('LBL_ACTION_EDIT')?></a>&nbsp;|&nbsp;
-    <a class="action-delete" href="javascript:void(0)"><?php echo $this->t('LBL_ACTION_DELETE')?></a>&nbsp;|&nbsp;
-    <a class="list_show_link" href="javascript:void(0)"><?php echo $this->t('LBL_ACTION_SHOW')?></a>&nbsp;|&nbsp;
-    <a class="action-clone" href="javascript:void(0)"><?php echo $this->t('LBL_ACTION_COPY')?></a>&nbsp;|&nbsp;
-    <!--<a class="action-filter" href="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], 'Filter'))?>"><?php echo $this->t('LBL_ACTION_FILTER')?></a>-->
+    &nbsp;<a class="action-add" href="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], 'Add'))?>"><?php echo $lang->t('LBL_ACTION_ADD')?></a>&nbsp;|&nbsp;
+    <a class="action-edit" href="javascript:void(0)"><?php echo $lang->t('LBL_ACTION_EDIT')?></a>&nbsp;|&nbsp;
+    <a class="action-delete" href="javascript:void(0)"><?php echo $lang->t('LBL_ACTION_DELETE')?></a>&nbsp;|&nbsp;
+    <a class="list_show_link" href="javascript:void(0)"><?php echo $lang->t('LBL_ACTION_SHOW')?></a>&nbsp;|&nbsp;
+    <a class="action-clone" href="javascript:void(0)"><?php echo $lang->t('LBL_ACTION_COPY')?></a>&nbsp;|&nbsp;
+    <!--<a class="action-filter" href="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], 'Filter'))?>"><?php echo $lang->t('LBL_ACTION_FILTER')?></a>-->
 </div>
 <table id="ui-jqgrid-table"></table>
 <div id="ui-jqgrid-page"></div>
@@ -47,18 +47,18 @@ qw('-rsc')->load('jquery/plugin/jqgrid');
 jQuery(function($){
     $.jgrid.no_legacy_api = true;
     $.jgrid.useJSON = true;
-    var primary_key = '<?php echo $primary_key?>';
+    var primary_key = '<?php echo $primaryKey?>';
     $("#ui-jqgrid-table").jqGrid({
-        url              : '<?php echo $json_url?>',
+        url              : '<?php echo $jsonUrl?>',
         datatype         : 'json',
-        colNames         : <?php echo $col_name?>,
-        colModel         : <?php echo $col_setting?>,
+        colNames         : <?php echo $columnName?>,
+        colModel         : <?php echo $columnSetting?>,
         rowNum           : <?php echo $rowNum?>,
         rowList          : [5, 10, 20, 30, 40, 50, 100],
         sortname         : '<?php echo $sortName?>',
         sortorder        : '<?php echo $sortOrder?>',
         // 标题
-        caption          : '<a href="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller']))?>"><?php echo $this->__meta['page']['title']?></a>',
+        caption          : '<a href="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller']))?>"><?php echo $meta['page']['title']?></a>',
         // 显示列的数目
         rownumbers       : true,
         // 允许多选

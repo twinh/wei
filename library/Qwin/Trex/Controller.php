@@ -46,6 +46,18 @@ class Qwin_Trex_Controller
     protected $_meta;
 
     /**
+     * 语言对象
+     * @var object
+     */
+    protected $_lang;
+
+    /**
+     * 语言的名称
+     * @var string
+     */
+    protected $_langName;
+
+    /**
      * 视图配置
      */
     protected $_view = array(
@@ -172,5 +184,45 @@ class Qwin_Trex_Controller
             return Qwin::run($name);
         }
         return null;
+    }
+
+    /**
+     * 获取语言的名称
+     *
+     * @return string 语言的名称
+     */
+    public function getLanguage()
+    {
+        if(null != $this->_langName)
+        {
+            return $this->_langName;
+        }
+        $request = Qwin::run('Qwin_Request');
+        $session = Qwin::run('Qwin_Session');
+        $lang = null;
+
+        // 按优先级排列语言的数组
+        $langList = array(
+            $request->g('language'),
+            $session->get('language'),
+            $this->_config['interface']['language'],
+        );
+        foreach($langList as $val)
+        {
+            if(null != $val)
+            {
+                $lang = $val;
+                break;
+            }
+        }
+
+        // 转换为类名格式
+        // TODO 正则替换
+        $lang = str_replace(array('-', '_'), '', $lang);
+        $lang = ucfirst(strtolower($lang));
+        
+        $session->set('language', $lang);
+        $this->_langName = $lang;
+        return $lang;
     }
 }

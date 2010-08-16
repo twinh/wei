@@ -50,7 +50,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         return array(
             'basic' => array(
                 'title' => 'LBL_FIELD_TITLE',
-                'descrip' => '',
+                'description' => array(),
                 'order' => 0,
                 'group' => 'LBL_GROUP_BASIC_DATA',
             ),
@@ -100,6 +100,16 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         if(!isset($metadata['basic']['title']))
         {
             $metadata['basic']['title'] = 'LBL_FIELD_' . strtoupper($metadata['form']['name']);
+        }
+
+        // 设置描述语句
+        if(!isset($metadata['basic']['description']))
+        {
+            $metadata['basic']['description'] = array();
+        }
+        elseif(!is_array($metadata['basic']['description']))
+        {
+            $metadata['basic']['description'] = array($metadata['basic']['description']);
         }
 
         // 设置排序
@@ -201,5 +211,44 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
     public function addValidatorRule()
     {
 
+    }
+
+    /**
+     * 转换语言
+     *
+     * @param array $language 用于转换的语言
+     * @return Qwin_Metadata_Element_Field 当前类
+     */
+    public function translate($language)
+    {
+        
+        foreach($this->_data as &$data)
+        {
+            // 转换标题
+            $data['basic']['titleCode'] = $data['basic']['title'];
+            if(isset($language[$data['basic']['title']]))
+            {
+                $data['basic']['title'] = $language[$data['basic']['title']];
+            }
+
+            // 转换描述
+            $data['basic']['descriptionCode'] = array();
+            foreach($data['basic']['description'] as $key => &$description)
+            {
+                $data['basic']['descriptionCode'][$key] = $description;
+                if(isset($language[$description]))
+                {
+                    $description = $language[$description];
+                }
+            }
+
+            // 转换分组
+            $data['basic']['groupCode'] = $data['basic']['group'];
+            if(isset($language[$data['basic']['group']]))
+            {
+                $data['basic']['group'] = $language[$data['basic']['group']];
+            }
+        }
+        return $this;
     }
 }

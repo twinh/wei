@@ -45,6 +45,12 @@ abstract class Qwin_Trex_View extends Qwin_Metadata_Abstract
      */
     protected $_layout;
 
+    /**
+     * 主题
+     * @var string
+     */
+    protected $_theme = 'default';
+
     public function __construct()
     {
         
@@ -141,6 +147,27 @@ abstract class Qwin_Trex_View extends Qwin_Metadata_Abstract
     }
 
     /**
+     * 加载视图元素
+     *
+     * @param <type> $name 视图元素的名称
+     */
+    public function loadElement($name)
+    {
+        require $this->_element[$name]['element'];
+    }
+
+    /**
+     * 获取视图元素
+     *
+     * @param string $name
+     * @return string 视图元素
+     */
+    public function getElement($name)
+    {
+        return $this->_element[$name]['element'];
+    }
+
+    /**
      * 设置布局文件的路径
      *
      * @param string $layout
@@ -180,5 +207,16 @@ abstract class Qwin_Trex_View extends Qwin_Metadata_Abstract
     public function displayFooter()
     {
         return false;
+    }
+
+    /**
+     *
+     * @param <type> $name
+     * @return <type>
+     * @todo ?
+     */
+    public function t($name)
+    {
+        return $name;
     }
 }

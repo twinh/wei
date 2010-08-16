@@ -1,6 +1,6 @@
 <?php
 /**
- * View
+ * Enus
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,26 +16,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Default
- * @subpackage  View
+ * @package     Qwin
+ * @subpackage  
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-14 11:12:00
+ * @since       2010-08-16 19:50:28
  */
 
-class Default_View extends Qwin_Trex_View
+class Default_Category_Language_Enus extends Default_Language
 {
     public function __construct()
     {
-        $this->_theme = Qwin::run('-ini')->getConfig('interface.theme');
-        $this->_layout = QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/layout/common-control-panel.php';
-    }
+        $this->_data += array(
+            'LBL_FIELD_PARENT_ID' => 'Parent Category',
+            'LBL_FIELD_TO_URL' => 'Jump to url',
+            'LBL_FIELD_ORDER' => 'Order',
+            'LBL_FIELD_IMAGE' => 'Image',
+            'LBL_FIELD_IMAGE_2' => 'Image 2',
+            'LBL_FIELD_SIGN' => 'Sign',
 
+            'LBL_ACTION_ADD_SUBCATEGORY' => 'Add Subcategory',
+            'LBL_ACTION_ADD_SPECIAL_ARTICLE' => 'Add Special Article',
+            'LBL_ACTION_VIEW_SPECIAL_ARTICLE' => 'Show Special Article',
+            'LBL_ACTION_VIEW_SPECIAL' => 'View Special',
 
-    public function display()
-    {
-        require_once $this->_layout;
+            'LBL_MODULE_CATEGORY' => 'Category',
+        );
     }
 }

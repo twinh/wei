@@ -27,7 +27,7 @@
  */
 
 /**
- * @see Qwin_Metadata_AccessArray
+ * @see Qwin_Metadata_Abstract
  */
 require_once 'Qwin/Metadata/Abstract.php';
 
@@ -37,7 +37,7 @@ abstract class Qwin_Metadata extends Qwin_Metadata_Abstract
      * 原始数据,未经过格式转换
      * @var array
      */
-    private $_originalData;
+    //private $_originalData;
 
     /**
      * 经过格式化转换的数据
@@ -74,7 +74,6 @@ abstract class Qwin_Metadata extends Qwin_Metadata_Abstract
             $this->_add($type, $row);
         }
     }
-
 
     /**
      * 为添加数据到元数据的某一类型中
@@ -113,9 +112,9 @@ abstract class Qwin_Metadata extends Qwin_Metadata_Abstract
     /**
      * 魔术方法,调用add,get,set三类方法
      *
-     * @param <type> $name
-     * @param <type> $args
-     * @return <type>
+     * @param 方法的名称 $name
+     * @param 参数 $args
+     * @return mixed 返回当前对象或错误信息
      */
     public function  __call($name, $args)
     {
@@ -123,11 +122,13 @@ abstract class Qwin_Metadata extends Qwin_Metadata_Abstract
         $type = substr($name, 3);
         if('add' == $action)
         {
-            $this->_add($type, $args[0]);
+            return $this->_add($type, $args[0]);
         } elseif('get' == $action) {
             return $this->_data[strtolower($type)];
-        } elseif('set' == $actiob) {
-            $this->_set($type, $args[0]);
+        } elseif('set' == $action) {
+            return $this->_set($type, $args[0]);
         }
+        require_once 'Qwin/Metadata/Exception.php';
+        throw new Qwin_Metadata_Exception('Call to undefined method ' . __CLASS__ . '::' . $name . '()');
     }
 }

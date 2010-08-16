@@ -1,6 +1,6 @@
 <?php
 /**
- * View
+ * Language
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,26 +16,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Default
- * @subpackage  View
+ * @package     Qwin
+ * @subpackage  
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-14 11:12:00
+ * @since       2010-08-16 18:40:20
  */
 
-class Default_View extends Qwin_Trex_View
+class Default_Language extends Qwin_Trex_Language
 {
     public function __construct()
     {
-        $this->_theme = Qwin::run('-ini')->getConfig('interface.theme');
-        $this->_layout = QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/layout/common-control-panel.php';
-    }
-
-
-    public function display()
-    {
-        require_once $this->_layout;
+        
     }
 }

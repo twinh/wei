@@ -1,6 +1,6 @@
 <?php
 /**
- * View
+ * Zhcn
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,26 +16,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Default
- * @subpackage  View
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-14 11:12:00
+ * @since       2010-08-16 19:36:00
  */
 
-class Default_View extends Qwin_Trex_View
+class Default_AdminMenu_Language_Zhcn extends Default_Language
 {
     public function __construct()
     {
-        $this->_theme = Qwin::run('-ini')->getConfig('interface.theme');
-        $this->_layout = QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/layout/common-control-panel.php';
-    }
+        $this->_data +=  array(
+            'LBL_FIELD_CATEGORY_ID' => '分类编号',
+            'LBL_FIELD_CATEGORY' => '分类',
+            'LBL_FIELD_URL' => '地址',
+            'LBL_FIELD_ORDER' => '顺序',
+            'LBL_FIELD_TARGET' => '链接目标',
 
-
-    public function display()
-    {
-        require_once $this->_layout;
+            'LBL_MODULE_ADMIN_MENU' => '后台菜单',
+        );
     }
 }
