@@ -101,7 +101,7 @@ class Default_Default_Controller_Default extends Qwin_Trex_Controller
         
 
         // 加载单变量
-        $singleVar = require ROOT_PATH . '/Cache/Php/List/SingleVar.php';
+        $singleVar = require QWIN_ROOT_PATH . '/Cache/Php/List/SingleVar.php';
 
         $this->__view = array(
             'joinInData' => &$joinInData,
@@ -114,8 +114,8 @@ class Default_Default_Controller_Default extends Qwin_Trex_Controller
         );
         // 初始化控制面板中心内容的视图变量数组,加载控制面板视图
         $this->__view_element = array(
-            'content' => ROOT_PATH . '/Public/template/index.php',
+            'content' => QWIN_ROOT_PATH . '/Public/template/index.php',
         );
-        $this->loadView(ROOT_PATH . '/Public/template/default.php');
+        $this->loadView(QWIN_ROOT_PATH . '/Public/template/default.php');
     }
 }

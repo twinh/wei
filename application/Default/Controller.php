@@ -74,48 +74,6 @@ class Default_Controller extends Qwin_Trex_Controller
          */
         Qwin::load('Default_View');
 
-        /*$form = Qwin::run('Qwin_Form');
-        foreach($this->_meta['field'] as $field)
-        {
-            echo '<li><b>' . $field['basic']['title'] .'</b>' . $form->auto($field['form']) . '</li>' . "\r\n";
-        }
-        exit;
-        // 连接相关的元数据,到主元数据中
-        //$this->_meta->connetDoctrine($this->_meta, $this->_model);
-
-
-
-        // 转换成Doctrine对象
-        //$this->_meta->toDoctrine($this->_meta, $this->_model);
-
-
-
-        // 如何管理其他
-        // 构建Doctrine的对象的几种情况
-        // 1. 根据metadata的field和db构建
-        // 2. 直接提供field和table构建
-        //
-        // 连接元数据的几种情况
-        // 1. 分解metadata的model链接
-        // 2. 提供类名连接?
-//Doctrine_Query::create()->
-
-        /*
-        $q = Doctrine_Query::create()
-    ->from('User u')
-    ->leftJoin('u.Phonenumbers p');
-
-echo $q->getSqlQuery();
-         */
-        //p($users);
-        //exit;
-
-
-
-
-
-
-        
         /*
 
         $controller->meta = $metadata;
@@ -367,7 +325,7 @@ echo $q->getSqlQuery();
 
             // 初始化控制面板中心内容的视图变量数组,加载控制面板视图
             $this->__view_element = array(
-                'content' => RESOURCE_PATH . '/php/View/Element/DefaultForm.php',
+                'content' => QWIN_RESOURCE_PATH . '/php/View/Element/DefaultForm.php',
             );
             $this->loadView($ini->load('Resource/View/Layout/DefaultControlPanel', false));
         } else {
@@ -505,7 +463,7 @@ echo $q->getSqlQuery();
 
             // 初始化控制面板中心内容的视图变量数组,加载控制面板视图
             $this->__view_element = array(
-                'content' => RESOURCE_PATH . '/php/View/Element/DefaultForm.php',
+                'content' => QWIN_RESOURCE_PATH . '/php/View/Element/DefaultForm.php',
             );
             $this->loadView($ini->load('Resource/View/Layout/DefaultControlPanel', false));
         } else {

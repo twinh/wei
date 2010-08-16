@@ -40,11 +40,11 @@ class Qwin_Form_ElementExt_Editor
         $js->newJqCodeGroup($pub_set['name']);
         
         // 配置 CKFinder
-        require_once RESOURCE_PATH . DS . 'js/ckfinder/qwin_interface.php';
+        require_once QWIN_RESOURCE_PATH . DS . 'js/ckfinder/qwin_interface.php';
         $qwin_interface = new QWin_CKFinder_Interface();
         // TODO param 2 登陆的标准
         $path = dirname($_SERVER['SCRIPT_NAME']) . '/Public/upload/';
-        // $path = '/' . basename(ROOT_PATH) . '/public/upload/';
+        // $path = '/' . basename(QWIN_ROOT_PATH) . '/public/upload/';
         $qwin_interface->setInterface($path, true);
         
         $rsc->load('js/ckeditor/');
@@ -52,7 +52,7 @@ class Qwin_Form_ElementExt_Editor
         
         qw('-str')->set($pri_set['_resource']);
         $code = 'var ckeditor = CKEDITOR.replace("' . $pub_set['id'] . '", ' . qw('-arr')->toJsObject($pri_set['_resource']) . ');';
-        $code .= 'CKFinder.SetupCKEditor(ckeditor, "' . qw('-str')->toUrlSeparator(RESOURCE_PATH) . '/js/ckfinder/" );';
+        $code .= 'CKFinder.SetupCKEditor(ckeditor, "' . qw('-str')->toUrlSeparator(QWIN_RESOURCE_PATH) . '/js/ckfinder/" );';
         $js->addJq($pub_set['name'], $code);
         
         return $data;

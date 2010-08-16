@@ -148,7 +148,7 @@ class Default_Category_Controller_Category extends Qwin_Trex_Controller
     {
         //Qwin::run('Project_Helper_Cache')->setFileCacheBySetting($this->__query);
         $fileCacheObj = Qwin::run('Qwin_Cache_File');
-        $fileCacheObj->connect(ROOT_PATH . '/Cache/');
+        $fileCacheObj->connect(QWIN_ROOT_PATH . '/Cache/');
         $setting = array_intersect_key($this->__query, array(
             'namespace' => '',
             'module' => '',
@@ -229,7 +229,7 @@ class Default_Category_Controller_Category extends Qwin_Trex_Controller
         // 获取缓存数据
         //$cateogryCache = Qwin::run('Qwin_Cache_List')->getCache('Category');
         $fileCacheObj = Qwin::run('Qwin_Cache_File');
-        $fileCacheObj->connect(ROOT_PATH . '/Cache/');
+        $fileCacheObj->connect(QWIN_ROOT_PATH . '/Cache/');
         $setting = array(
             'namespace' => 'Default',
             'module' => 'Category',

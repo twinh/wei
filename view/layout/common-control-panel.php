@@ -58,7 +58,7 @@ $qurl = array(
     'separator' => qw('-url')->separator,
     'extension' => qw('-url')->extension,
 );
-$menu = require_once ROOT_PATH . '/Cache/Php/List/AdminMenu.php';
+$menu = require_once QWIN_ROOT_PATH . '/Cache/Php/List/AdminMenu.php';
 ?>
 </head>
 <body>

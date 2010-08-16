@@ -98,7 +98,7 @@ $url = url(array($this->__query['namespace'], $this->__query['module'], $this->_
     ?>
             <li class="ui-widget-content ui-corner-all">
                 <a href="<?php echo $url?>">
-                    <img alt="<?php echo $row['name']?>" src="<?php echo RESOURCE_PATH?>/js/jquery/image/<?php echo $row['picture']?>" />
+                    <img alt="<?php echo $row['name']?>" src="<?php echo QWIN_RESOURCE_PATH?>/js/jquery/image/<?php echo $row['picture']?>" />
                 </a>
                 <p>
                     <a href="<?php echo url(array($this->__query['namespace'], 'Style', 'Theme', 'Edit'), array('id' => $row['id']))?>" title="<?php echo $this->t('LBL_ACTION_EDIT')?>"><?php echo $row['name']?></a>

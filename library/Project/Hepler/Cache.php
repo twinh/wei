@@ -32,7 +32,7 @@ class Project_Helper_Cache
     {
         $ctrler = Qwin::run('-c');
         $fileCacheObj = Qwin::run('Qwin_Cache_File');
-        $fileCacheObj->connect(ROOT_PATH . '/Cache/');
+        $fileCacheObj->connect(QWIN_ROOT_PATH . '/Cache/');
         /**
          * 去除无关的键名
          */

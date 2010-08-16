@@ -197,7 +197,7 @@ class Default_Article_Controller_Article extends Default_Controller
     {
         if(!isset($this->_articleCategory))
         {
-            $this->_articleCategory = require ROOT_PATH . '/Cache/Php/List/ArticleCategory.php';
+            $this->_articleCategory = require QWIN_ROOT_PATH . '/Cache/Php/List/ArticleCategory.php';
         }
         $data = &$this->_articleCategory;
         foreach($data as $row)

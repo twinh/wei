@@ -70,6 +70,11 @@ class Qwin_Trex_Setup
     protected $_config;
 
     /**
+     * 编码后的配置数组
+     */
+    protected $_encodedConfig;
+
+    /**
      * Qwin_Request对象
      */
     protected $_request;
@@ -88,7 +93,7 @@ class Qwin_Trex_Setup
         // 加载框架主类,设置自动加载类
         require_once QWIN_LIB_PATH . '/Qwin.php';
         Qwin::setAutoload();
-        Qwin::setCacheFile(ROOT_PATH . '/Cache/Php/System/class.php');
+        Qwin::setCacheFile(QWIN_ROOT_PATH . '/cache/php/class.php');
         
         $this->_request = Qwin::run('Qwin_Request');
 
@@ -109,7 +114,7 @@ class Qwin_Trex_Setup
         }
         
         // 默认时区
-        date_default_timezone_set($config['i18n']['timezone']);
+        date_default_timezone_set($config['interface']['timezone']);
 
         // 关闭魔术引用
         ini_set('magic_quotes_runtime', 0);
@@ -201,9 +206,23 @@ class Qwin_Trex_Setup
      * 
      * @return array 网站配置数组
      */
-    public function getConfig()
+    public function getConfig($name = null)
     {
-        return $this->_config;
+        if(isset($this->_encodedConfig[$name]))
+        {
+            return $this->_encodedConfig[$name];
+        }
+
+        $keyArray = explode('.', $name);
+        $tempConfig = $this->_config;
+        foreach($keyArray as $key)
+        {
+            if(isset($tempConfig[$key]))
+            {
+                $tempConfig = $tempConfig[$key];
+            }
+        }
+        return $this->_encodedConfig[$name] = $tempConfig;
     }
 
     /**
