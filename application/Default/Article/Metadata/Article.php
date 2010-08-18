@@ -32,6 +32,9 @@ class Default_Article_Metadata_Article extends Default_Metadata
             // 基本属性
             'field' => array(
                 'category_id' => array(
+                    'basic' => array(
+                        'title' => 'LBL_FIELD_CATEGORY_NAME',
+                    ),
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
@@ -73,6 +76,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
+                        'isShow' => 0,
                     ),
                     'converter' => array(
                         /*'attr' => array(
@@ -91,6 +95,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
+                        'isShow' => 0,
                     ),
                 ),
                 'title' => array(

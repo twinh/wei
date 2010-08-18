@@ -45,6 +45,7 @@ class Default_Article_Metadata_Detail extends Default_Metadata
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
+                        'isShow' => 0,
                     ),
                 ),
                 'article_id' => array(
@@ -67,7 +68,7 @@ class Default_Article_Metadata_Detail extends Default_Metadata
                     'basic' => array(
                         'title' => 'LBL_FIELD_CONTENT',
                         'order' => 50,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
+                        'group' => 'LBL_GROUP_DETAIL_DATA',
                     ),
                     'form' => array(
                         '_type' => 'textarea',
@@ -78,7 +79,7 @@ class Default_Article_Metadata_Detail extends Default_Metadata
                         'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
-                        'isSqlQuery' => 0,
+                        'isSqlQuery' => 1,
                     ),
                 ),
                 'meta' => array(

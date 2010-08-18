@@ -90,6 +90,9 @@ class Qwin_Trex_Setup
     {
         $this->_config = $config;
 
+        // 加载Qwin函数库
+        require_once QWIN_LIB_PATH . '/function/qwin.php';
+
         // 加载框架主类,设置自动加载类
         require_once QWIN_LIB_PATH . '/Qwin.php';
         Qwin::setAutoload();

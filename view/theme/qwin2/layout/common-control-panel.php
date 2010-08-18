@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><?php echo $lang->t('LBL_HTML_TITLE')?></title>
+<title><?php echo qw_lang('LBL_HTML_TITLE') ?></title>
 <!--{JS}-->
 <!--{CSS}-->
 <?php
@@ -112,10 +112,10 @@ Qwin.Lang = {'LBL_ACTION_LIST':'列表','LBL_ACTION_ADD':'添加','LBL_ACTION_ED
 <div id="ui-main" class="ui-main ui-widget-content ui-corner-all">
   <div id="ui-header" class="ui-header ui-widget">
     <div class="ui-header-shortcut" id="ui-header-shortcut">
-    	<a class="ui-state-default" href="#"><?php echo $lang->t('LBL_WELCOME')?>, twin!</a>
-        <a class="ui-state-default" href="?namespace=Default&module=Member&controller=Log&action=Logout"><?php echo $lang->t('LBL_LOGOUT')?></a>
+    	<a class="ui-state-default" href="#"><?php echo qw_lang('LBL_WELCOME') ?>, Twin!</a>
+        <a class="ui-state-default" href="?namespace=Default&module=Member&controller=Log&action=Logout"><?php echo qw_lang('LBL_LOGOUT') ?></a>
     </div>
-    <div class="ui-header-logo ui-widget-content"> <a href="">Qwin<sup>3.0Beta</sup></a> </div>
+    <div class="ui-header-logo ui-widget-content"> <a href=""><?php echo qw_lang('LBL_QWIN') ?><sup><?php echo qw_lang('LBL_QWIN_VERSION') ?></sup></a> </div>
   </div>
   <script type="text/javascript">
 var validator_rule = {"title":{"required":true,"maxlength":200}};
@@ -125,7 +125,7 @@ var validator_rule = {"title":{"required":true,"maxlength":200}};
 require $this->getElement('content');
 ?>
   <div class="ui-footer ui-widget">
-    <div class="ui-copyright ui-widget-content"><?php echo $lang->t('LBL_FOOTER_COPYRIGHT')?></div>
+    <div class="ui-copyright ui-widget-content"><?php echo qw_lang('LBL_FOOTER_COPYRIGHT') ?></div>
   </div>
 </div>
 </body>

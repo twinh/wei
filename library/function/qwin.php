@@ -25,14 +25,26 @@
  * @since       2010-08-18 10:28:04
  */
 
-/**
- * 保留函数,不执行任何内容
- *
- * @return boolen
- */
-function qw()
+function p($a)
 {
-    return true;
+    echo '<p><pre>';
+    qw('Qwin_Debug')->p($a);
+    echo '</pre><p>';
+}
+
+function e($msg = '')
+{
+    qw('Qwin_Debug')->e($msg);
+}
+
+/**
+ * 快速加载类
+ *
+ * @return obejct|null
+ */
+function qw($class, $param = null)
+{
+    return Qwin::run($class, $param);
 }
 
 /**
@@ -46,9 +58,9 @@ function qwin($name)
     return Qwin::run($name);
 }
 
-function qw_form()
+function qw_form($param, $param_2 = NULL)
 {
-
+    return qw('-form')->auto($param, $param_2);
 }
 
 function qw_button()
@@ -56,10 +68,26 @@ function qw_button()
     
 }
 
-function qw_url()
+function qw_url($array1, $array2 = null)
 {
+    static $url;
+    null == $url && $url = Qwin::run('-url');
+    return $url->createUrl($array1, $array2);
 
 }
 
+function qw_lang($name = null)
+{
+    static $lang;
+    null == $lang && $lang = Qwin::run('-lang');
+    return $lang->t($name);
+}
 
-
+function qw_null_text($data = null)
+{
+    if(null != $data)
+    {
+        return $data;
+    }
+    return '<em>(NULL)</em>';
+}

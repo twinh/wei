@@ -57,13 +57,14 @@ class Qwin_Url
     /**
      * 生成url地址
      *
-     * @param <type> $get
-     * @return <type>
+     * @param array $array1
+     * @return string 转换后的地址
      * @todo 地址重写
      */
-    public function createUrl($get)
+    public function createUrl($array1, $array2 = null)
     {
-        return '?' . $this->arrayKey2Url($get);
+        null != $array2 && $array1 = array_merge($array1, $array2);
+        return '?' . $this->arrayKey2Url($array1);
     }
 
     
