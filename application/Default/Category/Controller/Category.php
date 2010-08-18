@@ -74,7 +74,7 @@ class Default_Category_Controller_Category extends Qwin_Trex_Controller
 
         // 修改主键域配置,以适应jqgrid
         $meta['field'][$primaryKey]['list'] = array(
-            'isUrlQuery' => false,
+            'isListLink' => false,
             'isList' => true,
             'isSqlField' => true,
             'isSqlQuery' => true,

@@ -47,7 +47,7 @@ class Default_Member_Metadata_Detail extends Qwin_Trex_Metadata
                         'name' => 'id',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -67,7 +67,7 @@ class Default_Member_Metadata_Detail extends Qwin_Trex_Metadata
                         'name' => 'member_id',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -86,7 +86,7 @@ class Default_Member_Metadata_Detail extends Qwin_Trex_Metadata
                         'name' => 'nickname',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -112,7 +112,7 @@ class Default_Member_Metadata_Detail extends Qwin_Trex_Metadata
                         'name' => 'sex',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -138,7 +138,7 @@ class Default_Member_Metadata_Detail extends Qwin_Trex_Metadata
                         'name' => 'reg_time',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -159,7 +159,7 @@ class Default_Member_Metadata_Detail extends Qwin_Trex_Metadata
                         'name' => 'reg_ip',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -188,7 +188,7 @@ class Default_Member_Metadata_Detail extends Qwin_Trex_Metadata
                         'name' => 'theme_name',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -208,7 +208,7 @@ class Default_Member_Metadata_Detail extends Qwin_Trex_Metadata
                         'name' => 'lang',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,

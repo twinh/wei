@@ -47,7 +47,7 @@ class Default_Member_Metadata_Company extends Qwin_Trex_Metadata
                         'name' => 'id',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -67,7 +67,7 @@ class Default_Member_Metadata_Company extends Qwin_Trex_Metadata
                         'name' => 'member_id',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -87,7 +87,7 @@ class Default_Member_Metadata_Company extends Qwin_Trex_Metadata
                         'name' => 'company',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -118,7 +118,7 @@ class Default_Member_Metadata_Company extends Qwin_Trex_Metadata
                         'name' => 'customer_name',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -149,7 +149,7 @@ class Default_Member_Metadata_Company extends Qwin_Trex_Metadata
                         'name' => 'area',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -180,7 +180,7 @@ class Default_Member_Metadata_Company extends Qwin_Trex_Metadata
                         'name' => 'department',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -210,7 +210,7 @@ class Default_Member_Metadata_Company extends Qwin_Trex_Metadata
                         'name' => 'position',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -241,7 +241,7 @@ class Default_Member_Metadata_Company extends Qwin_Trex_Metadata
                         'name' => 'telephone',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -272,7 +272,7 @@ class Default_Member_Metadata_Company extends Qwin_Trex_Metadata
                         'name' => 'fax',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,

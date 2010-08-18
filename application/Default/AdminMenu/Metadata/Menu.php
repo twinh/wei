@@ -56,7 +56,7 @@ class Default_AdminMenu_Metadata_Menu extends Default_Metadata
                         'name' => 'category_id',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -88,7 +88,7 @@ class Default_AdminMenu_Metadata_Menu extends Default_Metadata
                         'name' => 'title',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 0,
+                        'isListLink' => 0,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -114,7 +114,7 @@ class Default_AdminMenu_Metadata_Menu extends Default_Metadata
                         'name' => 'url',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 0,
+                        'isListLink' => 0,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -140,7 +140,7 @@ class Default_AdminMenu_Metadata_Menu extends Default_Metadata
                         'name' => 'target',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -166,7 +166,7 @@ class Default_AdminMenu_Metadata_Menu extends Default_Metadata
                         'name' => 'order',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,

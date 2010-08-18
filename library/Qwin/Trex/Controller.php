@@ -151,28 +151,6 @@ class Qwin_Trex_Controller
     }
 
     /**
-     * 翻译单独一个代号
-     * 
-     * @param string $code 要翻译的代号
-     * @return string 如果存在该代号,返回翻译值,否则返回原代号
-     * TODO 是否应该放在控制器中
-     */
-    public function t($code)
-    {
-        //!isset($this->lang) && $this->lang = Qwin::run('-c')->lang;
-        if(isset($this->lang[$code]))
-        {
-            return $this->lang[$code];
-        }
-        return $code;
-    }
-
-    public function _()
-    {
-        
-    }
-
-    /**
      * 快速初始一个类
      * @param <type> $name
      * @return <type>
@@ -217,12 +195,34 @@ class Qwin_Trex_Controller
         }
 
         // 转换为类名格式
-        // TODO 正则替换
-        $lang = str_replace(array('-', '_'), '', $lang);
-        $lang = ucfirst(strtolower($lang));
+        $lang = $this->_toClassName($lang);
+
+        // 检查类是否存在
+        $set = $this->_set;
+        $langClass = $set['namespace'] . '_' . $set['module'] . '_Language_' . $lang;
+
+        // TODO 语言的加载
+        Qwin::load('Default_Language');
+        if(false == Qwin::load($langClass))
+        {
+            $lang = $this->_toClassName($this->_config['interface']['language']);
+        }
         
         $session->set('language', $lang);
         $this->_langName = $lang;
         return $lang;
+    }
+
+    /**
+     * 将字符串转换成标准的类名
+     *
+     * @param string $string 转换前的字符串
+     * @return 标准类名格式的字符串
+     * @todo 使用正则替换
+     */
+    protected function _toClassName($string)
+    {
+        $string = str_replace(array('-', '_'), '', $string);
+        return ucfirst(strtolower($string));
     }
 }

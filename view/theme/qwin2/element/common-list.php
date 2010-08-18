@@ -65,7 +65,8 @@ jQuery(function($){
         multiselect      : true,
         // 高度设置为100%,使表格不出现Y滚动条
         height           : '100%',
-        width            : 800,
+		// TODO 宽度自适应
+        width            : $('#ui-main').width() - 6,
         // 分页栏
         pager            : '#ui-jqgrid-page',
         // 分页栏右下角显示记录数
@@ -89,10 +90,6 @@ jQuery(function($){
             window.location.href = url;
             return false;
         },
-        // 加载之后
-        gridComplete     : setjqGridWidth,
-        // 点击页眉之后
-        afterHeaderClick : setjqGridWidth,
         // 各参数的对应关系
         prmNames         : {
             page   : 'page',
@@ -202,16 +199,5 @@ jQuery(function($){
         window.location.href = url;
         return false;
     });
-    // 火狐窗口缩小时不准确
-    $(window).resize(function(){
-        setjqGridWidth()
-    });
-
-    function setjqGridWidth()
-    {
-        var width = $('#ui-main').width() - $('#ui-main-leftbar').width() - 10;
-        $('#ui-jqgrid-table').jqGrid('setGridWidth', width);
-        $('#t_ui-jqgrid-table').css('width', width - 4);
-    }
 });
 </script>

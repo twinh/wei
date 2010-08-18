@@ -47,7 +47,7 @@ class System_Module_Metadata_Module extends Qwin_Trex_Metadata
                         'name' => 'id',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -67,7 +67,7 @@ class System_Module_Metadata_Module extends Qwin_Trex_Metadata
                         'name' => 'namespace',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -87,7 +87,7 @@ class System_Module_Metadata_Module extends Qwin_Trex_Metadata
                         'name' => 'name',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -107,7 +107,7 @@ class System_Module_Metadata_Module extends Qwin_Trex_Metadata
                         'name' => 'code',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -127,7 +127,7 @@ class System_Module_Metadata_Module extends Qwin_Trex_Metadata
                         'name' => 'author',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -147,7 +147,7 @@ class System_Module_Metadata_Module extends Qwin_Trex_Metadata
                         'name' => 'version',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -167,7 +167,7 @@ class System_Module_Metadata_Module extends Qwin_Trex_Metadata
                         'name' => 'license',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -187,7 +187,7 @@ class System_Module_Metadata_Module extends Qwin_Trex_Metadata
                         'name' => 'public_date',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -207,7 +207,7 @@ class System_Module_Metadata_Module extends Qwin_Trex_Metadata
                         'name' => 'install_date',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -227,7 +227,7 @@ class System_Module_Metadata_Module extends Qwin_Trex_Metadata
                         'name' => 'description',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,

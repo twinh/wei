@@ -51,8 +51,16 @@ class Default_Controller extends Qwin_Trex_Controller
         $languageName = $set['namespace'] . '_' . $set['module'] . '_Language_' . $languageName;
         Qwin::load('Default_Language');
         $this->_lang = Qwin::run($languageName);
-        $this->_commonLang = Qwin::run($commonLanguageName);       
-        $this->_lang->merge($this->_commonLang);
+        if(null == $this->_lang)
+        {
+            $languageName = 'Default_Language';
+            $this->_lang = Qwin::run($languageName);
+        }
+        $this->_commonLang = Qwin::run($commonLanguageName);
+        if(null != $this->_commonLang)
+        {
+            $this->_lang->merge($this->_commonLang);
+        }
         Qwin::addMap('-lang', $languageName);
 
         /**

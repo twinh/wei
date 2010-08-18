@@ -47,7 +47,7 @@ class Default_Member_Metadata_Member extends Qwin_Trex_Metadata
                         'name' => 'id',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -77,7 +77,7 @@ class Default_Member_Metadata_Member extends Qwin_Trex_Metadata
                         'name' => 'group_id',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -109,7 +109,7 @@ class Default_Member_Metadata_Member extends Qwin_Trex_Metadata
                         'name' => 'username',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -136,7 +136,7 @@ class Default_Member_Metadata_Member extends Qwin_Trex_Metadata
                         'name' => 'password',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -167,7 +167,7 @@ class Default_Member_Metadata_Member extends Qwin_Trex_Metadata
                         'name' => 'email',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -192,7 +192,7 @@ class Default_Member_Metadata_Member extends Qwin_Trex_Metadata
                         'name' => 'operation',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 0,
+                        'isListLink' => 0,
                         'isList' => 1,
                         'isSqlField' => 0,
                         'isSqlQuery' => 0,
@@ -261,7 +261,7 @@ class Default_Member_Metadata_Member extends Qwin_Trex_Metadata
                         'name' => 'id',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -281,7 +281,7 @@ class Default_Member_Metadata_Member extends Qwin_Trex_Metadata
                         'name' => 'old_password',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 0,
+                        'isListLink' => 0,
                         'isList' => 0,
                         'isSqlField' => 0,
                         'isSqlQuery' => 0,
@@ -307,7 +307,7 @@ class Default_Member_Metadata_Member extends Qwin_Trex_Metadata
                         'name' => 'password',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 0,
+                        'isListLink' => 0,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 0,
@@ -336,7 +336,7 @@ class Default_Member_Metadata_Member extends Qwin_Trex_Metadata
                         'name' => 'confirm_password',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 0,
+                        'isListLink' => 0,
                         'isList' => 0,
                         'isSqlField' => 0,
                         'isSqlQuery' => 0,

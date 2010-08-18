@@ -373,13 +373,14 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      * @todo 是否要必要支持多个转换函数/方法, 增加缓存,减少重复判断等
      * @todo 对于非当前控制器下, $self 的问题
      */
-    public function convertSingleData($meta, $action, $row, $isUrlQuery = false)
+    public function convertSingleData($meta, $action, $row, $isListLink = false)
     {
         /**
          * 初始化数据
          * 控制器对象,行为,数据副本
          */
         $ctrler = Qwin::run('-controller');
+        $url = Qwin::run('-url');
         $action = strtolower($action);
         $rowCopy = $row;
 
@@ -424,10 +425,10 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
              * 增加Url查询
              * @todo 是否应该出现在此
              */
-            if(true == $isUrlQuery && $set['attr']['isUrlQuery'])
+            if(true == $isListLink && $set['attr']['isListLink'])
             {
-                $row[$name] .= '#';
-                //$row[$name] = '<a href="' . url(array($self->__query['namespace'], $self->__query['module'], $self->__query['controller']), array('searchField' => $name, 'searchValue' => $row_copy[$name])) . '">' . $row[$name] . '</a>';
+                !isset($rowCopy[$name]) && $rowCopy[$name] = null;
+                $row[$name] = '<a href="' . $url->createUrl($ctrler->_set + array('searchField' => $name, 'searchValue' => $rowCopy[$name])) . '">' . $row[$name] . '</a>';
             }
         }
         return $row;
@@ -460,11 +461,11 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      * @param string $action Action 的名称,一般为 list
      * @praam array $data 三维数组,一般是从数据库取出的数组
      */
-    public function convertMultiData($meta, $action, $data, $isUrlQuery = true)
+    public function convertMultiData($meta, $action, $data, $isListLink = true)
     {
         foreach($data as &$row)
         {
-            $row = $this->convertSingleData($meta, $action, $row, $isUrlQuery);
+            $row = $this->convertSingleData($meta, $action, $row, $isListLink);
         }
         return $data;
     }
@@ -950,7 +951,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     {
         foreach($data as $key => $val)
         {
-            if(isset($this->__meta['field'][$key]['list']['isUrlQuery']) && $this->__meta['field'][$key]['list']['isUrlQuery'] == true)
+            if(isset($this->__meta['field'][$key]['list']['isListLink']) && $this->__meta['field'][$key]['list']['isListLink'] == true)
             {
                 $data[$key] = '<a href="' . url(array('admin', $this->__query['controller']), array(_S('url', '_DATA') . '%5B' . $key . '%5D' => $sql_data[$key])) . '">' . $val . '</a>';
             }

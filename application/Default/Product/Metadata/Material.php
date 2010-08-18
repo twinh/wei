@@ -47,7 +47,7 @@ class Default_Product_Metadata_Material extends Qwin_Trex_Metadata
                         'name' => 'id',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -67,7 +67,7 @@ class Default_Product_Metadata_Material extends Qwin_Trex_Metadata
                         'name' => 'name',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -94,7 +94,7 @@ class Default_Product_Metadata_Material extends Qwin_Trex_Metadata
                         'name' => 'thumb',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -114,7 +114,7 @@ class Default_Product_Metadata_Material extends Qwin_Trex_Metadata
                         'name' => 'description',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -134,7 +134,7 @@ class Default_Product_Metadata_Material extends Qwin_Trex_Metadata
                         'name' => 'order',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -154,7 +154,7 @@ class Default_Product_Metadata_Material extends Qwin_Trex_Metadata
                         'name' => 'date_created',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -175,7 +175,7 @@ class Default_Product_Metadata_Material extends Qwin_Trex_Metadata
                         'name' => 'date_modified',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -193,7 +193,7 @@ class Default_Product_Metadata_Material extends Qwin_Trex_Metadata
                         'name' => 'operation',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 0,
+                        'isListLink' => 0,
                         'isList' => 1,
                         'isSqlField' => 0,
                         'isSqlQuery' => 0,
