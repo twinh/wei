@@ -63,6 +63,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
                 '_value' => '',
                 'name' => null,
                 'id' => null,
+                'class' => null,
             ),
             'attr' => array(
                 'isListLink' => 0,
@@ -287,5 +288,34 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
             $groupList[$data['basic']['group']][$field] = $data['basic']['title'];
         }
         return $groupList;
+    }
+
+    public function getEditGroupList()
+    {
+        $groupList = array();
+        foreach($this->_data as $field => $data)
+        {
+            if(1 == $data['attr']['isReadonly'] || 'custom' == $data['form']['_type'])
+            {
+                continue;
+            }
+
+            if(!isset($groupList[$data['basic']['group']]))
+            {
+                $groupList[$data['basic']['group']] = array();
+            }
+            $groupList[$data['basic']['group']][$field] = $data['basic']['title'];
+        }
+        return $groupList;
+    }
+
+    public function addClass($field, $value)
+    {
+        if('' != $this->_data[$field]['form']['class'])
+        {
+            $value = ' ' . $value;
+        }
+        $this->_data[$field]['form']['class'] .= $value;
+        return $this;
     }
 }

@@ -37,7 +37,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
                     ),
                     'form' => array(
                         '_type' => 'select',
-                        '_resourceGetter' => array(
+                        /*'_resourceGetter' => array(
                             array('Project_Hepler_Category', 'getTreeResource'),
                             array(
                                 'namespace' => 'Default',
@@ -45,6 +45,13 @@ class Default_Article_Metadata_Article extends Default_Metadata
                                 'controller' => 'Category',
                             ),
                             'news'
+                        ),*/
+                        '_resource' => array(
+                            '0' => 'This is the first option',
+                            '2' => 'This is the first option',
+                            '3' => 'This is the first option',
+                            '4' => 'This is the first option',
+
                         ),
                         'name' => 'category_id',
                     ),

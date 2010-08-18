@@ -58,14 +58,18 @@ function qwin($name)
     return Qwin::run($name);
 }
 
-function qw_form($param, $param_2 = NULL)
+function qw_form($param, $param2 = null)
 {
-    return qw('-form')->auto($param, $param_2);
+    static $form;
+    null == $form && $form = Qwin::run('Qwin_Form');
+    return $form->render($param, $param2);
 }
 
-function qw_button()
+function qw_button($param, $param2 = null)
 {
-    
+    static $button;
+    null == $button && $button = Qwin::run('Qwin_Form_Button');
+    return $button->render($param, $param2);
 }
 
 function qw_url($array1, $array2 = null)

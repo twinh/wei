@@ -43,7 +43,7 @@ class Qwin_Form
     /**
      * 根据配置生成表单
      */
-    public function auto(&$set, $initData = null)
+    public function render(&$set, $initData = null)
     {
         $data = '';
         // 初始化数据
