@@ -28,7 +28,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
     public function  __construct()
     {
         parent::setMetadata();
-        $this->addAll(array(
+        $this->parseMetadata(array(
             // 基本属性
             'field' => array(
                 'category_id' => array(
@@ -99,7 +99,6 @@ class Default_Article_Metadata_Article extends Default_Metadata
                         'name' => 'title',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -111,11 +110,6 @@ class Default_Article_Metadata_Article extends Default_Metadata
                             'maxlength' => 200,
                         ),
                     ),
-                    'converter' => array(
-                        'list' => array(
-                            'test'
-                       )
-                    )
                 ),
                 'author' => array(
                     'form' => array(
@@ -162,7 +156,6 @@ class Default_Article_Metadata_Article extends Default_Metadata
                         'name' => 'hit',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -255,7 +248,6 @@ class Default_Article_Metadata_Article extends Default_Metadata
                         'name' => 'order',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,

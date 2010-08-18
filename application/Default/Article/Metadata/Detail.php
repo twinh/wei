@@ -30,7 +30,7 @@ class Default_Article_Metadata_Detail extends Default_Metadata
 {
     public function  __construct()
     {
-        $this->addAll(array(
+        $this->parseMetadata(array(
             'field' => array(
                 'id' => array(
                     'basic' => array(
@@ -58,8 +58,7 @@ class Default_Article_Metadata_Detail extends Default_Metadata
                         'name' => 'article_id',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 1,
+                        'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
                     ),

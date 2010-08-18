@@ -66,7 +66,7 @@ abstract class Qwin_Metadata extends Qwin_Metadata_Abstract
      * 
      * @param array $metadata
      */
-    public function addAll($metadata)
+    public function parseMetadata($metadata)
     {
         foreach($metadata as $key => $row)
         {

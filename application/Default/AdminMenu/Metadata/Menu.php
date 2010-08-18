@@ -31,7 +31,7 @@ class Default_AdminMenu_Metadata_Menu extends Default_Metadata
     public function setMetadata()
     {
         parent::setMetadata();
-        $this->addAll(array(
+        $this->parseMetadata(array(
             // 基本属性
             'field' => array(
                 'category_id' => array(

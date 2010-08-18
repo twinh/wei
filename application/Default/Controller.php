@@ -554,7 +554,33 @@ class Default_Controller extends Qwin_Trex_Controller
         }
     }
 
-    
+    /**
+     * 在列表操作下,设置记录添加时间的格式为年月日
+     *
+     * @param mixed 当前域的值
+     * @param string 当前域的名称
+     * @param array $data 已转换过的当前记录的值
+     * @param array $cpoyData 未转换过的当前记录的值
+     * @return string Y-m-d格式的日期
+     */
+    public function convertListDateCreated($value, $name, $data, $copyData)
+    {
+        return substr($value, 0, 10);
+    }
+
+    /**
+     * 在列表操作下,设置记录修改时间的格式为年月日
+     *
+     * @param mixed 当前域的值
+     * @param string 当前域的名称
+     * @param array $data 已转换过的当前记录的值
+     * @param array $cpoyData 未转换过的当前记录的值
+     * @return string Y-m-d格式的日期
+     */
+    public function convertListDateModified($value, $name, $data, $copyData)
+    {
+        return substr($value, 0, 10);
+    }
 
     /**
      * 在列表操作下,为操作域设置按钮
