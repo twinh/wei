@@ -65,7 +65,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
                 'id' => null,
             ),
             'attr' => array(
-                'isListLink' => 1,
+                'isListLink' => 0,
                 'isList' => 1,
                 'isSqlField' => 1,
                 'isSqlQuery' => 1,

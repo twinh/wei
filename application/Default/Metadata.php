@@ -48,7 +48,7 @@ class Default_Metadata extends Qwin_Trex_Metadata
                     'name' => 'date_created',
                 ),
                 'attr' => array(
-                    'isListLink' => 1,
+                    'isListLink' => 0,
                     'isList' => 1,
                     'isSqlField' => 1,
                     'isSqlQuery' => 1,
@@ -67,7 +67,7 @@ class Default_Metadata extends Qwin_Trex_Metadata
                     'name' => 'date_modified',
                 ),
                 'attr' => array(
-                    'isListLink' => 1,
+                    'isListLink' => 0,
                     'isList' => 1,
                     'isSqlField' => 1,
                     'isSqlQuery' => 1,
