@@ -42,7 +42,7 @@ class Qwin_Form_Button
         //}
     }
     
-    function auto($set)
+    function render($set)
     {
         if(!isset($set['_icon']))
         {

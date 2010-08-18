@@ -373,6 +373,53 @@ class Default_Controller extends Qwin_Trex_Controller
      */
     public function actionEdit()
     {
+        /**
+         * 初始化常用的变量
+         */
+        $meta = $this->_meta;
+        $primaryKey = $meta['db']['primaryKey'];
+        $id = $this->_request->g($primaryKey);
+        $query = $meta->getDoctrineQuery($this->_set);
+
+        if(null == $this->_request->p($meta['db']['primaryKey']))
+        {
+            /**
+             * 从模型获取数据
+             */
+            $result = $query->where($primaryKey . ' = ?', $id)->fetchOne();
+
+            /**
+             * 记录不存在,加载错误视图
+             */
+            if(false == $result)
+            {
+                return $this->setView('alert', 'MSG_NO_RECORD');
+            }
+
+            /**
+             * 处理数据
+             */
+            $relatedField = $meta->connectRelatedMetadata($this->_meta);
+            $relatedField->order();
+            $groupList = $relatedField->getEditGroupList();
+            $data = $result->toArray();
+            $data = $meta->convertDataToSingle($data);
+
+            /**
+             * 设置视图
+             */
+            $this->_view = array(
+                'class' => 'Default_Common_View_Form',
+                'data' => get_defined_vars(),
+            );
+        } else {
+            p($_POST);exit;
+        }
+
+        
+
+        
+        /*
         $query = $this->_meta->getDoctrineQuery($this->_set);
 
 
@@ -380,11 +427,10 @@ class Default_Controller extends Qwin_Trex_Controller
         $this->_request = Qwin::run('-gpc');
         $meta = &$this->_meta;
 
-        /**
          * 加载关联模型,元数据
          * 连接模型
          * 连接元数据
-         */
+         *
         $this->_meta->loadRelatedData($meta['model']);
         $modelName = $ini->getClassName('Model', $this->__query);
         $query = $this->_meta->connectModel($modelName, $meta['model']);
@@ -431,32 +477,9 @@ class Default_Controller extends Qwin_Trex_Controller
             }
 
 
-            $action = Qwin::run('-c')->__query['action'];
-        $new_arr = array();
-        foreach($field_arr as $key => $val)
-        {
-            !isset($val['basic']['group']) && $val['basic']['group'] = '';
-            // TODO array('List' => true, 'Edit' => true, 'Add' => false ?
-            if('Edit' == $action || 'Add' == $action)
-            {
-                if('custom' == $val['form']['_type'])
-                {
-                    $new_arr['_custom'][$key] = $val;
-                } else {
-                    $new_arr[$val['basic']['group']][$key] = $val;
-                }
-            } else {
-                if(isset($val['list']['isShow']) && false == $val['list']['isShow'])
-                {
-                    $new_arr['_custom'][$key] = $val;
-                } else {
-                    $new_arr[$val['basic']['group']][$key] = $val;
-                }
-            }
-        }
-        return $new_arr;
+      
             p($this->_meta->createLayoutArr($meta['field']));
-            exit;*/
+            exit;
 
             // 分组
             $meta['field'] = $this->_meta->groupingSettingArr($meta['field']);
@@ -492,7 +515,7 @@ class Default_Controller extends Qwin_Trex_Controller
              * 验证数据
              * 填充数据到模型中
              * 保存数据
-             */
+             
             $this->setAction('db');
             $data = $this->_meta->convertSingleData($meta['field'], $this->__query['action'], $_POST);
             $this->_meta->validateData($meta['field'], $data);
@@ -508,7 +531,7 @@ class Default_Controller extends Qwin_Trex_Controller
             } else {
                 Qwin::run('-url')->to(url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'])));
             }
-        }
+        }*/
     }
 
     /**

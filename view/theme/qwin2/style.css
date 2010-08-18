@@ -131,7 +131,7 @@ div.ui-copyright{
 .ui-box .ui-box-title{float: left;padding: 5px 18px 3px .7em;font-size: 1.3em;display: block;}
 .ui-box .ui-box-title-icon{position: absolute; right: .3em; top: 50%; width: 19px; margin: -10px 0 0 0; padding: 1px; height: 18px;cursor: pointer}
 .ui-box .ui-box-title-icon span{display: block; margin: 1px}
-.ui-box .ui-box-title-icon: hover, .ui-box .ui-box-title-icon: focus{padding: 0}
+.ui-box .ui-box-title-icon:hover, .ui-box .ui-box-title-icon:focus{padding: 0}
 .ui-box .ui-box-content{border: 0;background: none; overflow: auto; font-size: 1em;}
 
 /* Layout
@@ -299,26 +299,32 @@ div.ui-layout-pane {
 	font-weight: normal;
     line-height:2em;
 }
+.ui-table td.ui-field-common{
+	font-size: 1em;
+}
 .ui-table .ui-label-common{
 	text-align: right;
+	
 }
 .ui-table .ui-field-text input,
 .ui-table .ui-field-password input{
 	width: 60%;
-	padding:.4em 0 .4em .5em;/* for ie & ff */
+    padding:.4em 0 .4em .5em;/* for ie & ff */
     line-height:1.5em;/* for ie */
     font-weight:normal;
 	font-size:1.1em;
+    vertical-align: bottom;
 }
 .ui-table .ui-field-checkbox input,
 .ui-table .ui-field-radio input {
     margin-top:.4em;
 }
 .ui-table .ui-field-select select {
-    width:61.1%;
+    width:61%;
     height:2em;
     font-size:1.1em;
     line-height:2em;
+	padding: .2em 0 0;
 }
 .ui-table .ui-field-textarea textarea{
 	width: 59.6%;
@@ -328,8 +334,15 @@ div.ui-layout-pane {
     padding: .2em .4em;
     font-weight: normal;
     overflow-y: auto;
+    vertical-align: bottom;
 }
+.ui-table .ui-field-common button{
+    vertical-align: bottom;
+}
+.ui-table .ui-field-common button .ui-button-text{
+    padding: 0.4em 0.4em;
 
+}
 /* Tabs in the Form
 ----------------------------------*/
 .ui-form-content form.ui-widget{ font-size: 1em;}
