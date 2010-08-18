@@ -35,6 +35,7 @@ class Default_Controller extends Qwin_Trex_Controller
     {
         $ini = Qwin::run('-ini');
         $this->_request = Qwin::run('Qwin_Request');
+        $this->_url = Qwin::run('Qwin_Url');
         $set = $this->_set = $ini->getSet();
         $this->_config = $ini->getConfig();
        
@@ -558,32 +559,33 @@ class Default_Controller extends Qwin_Trex_Controller
     /**
      * 在列表操作下,为操作域设置按钮
      * 
-     * @param <type> 当前域的值
-     * @param <type> 当前域的名称
-     * @param <type> $data 已转换过的当前记录的值
-     * @param <type> $cpoyData 未转换过的当前记录的值
-     * @return <type> 当前域的新值
+     * @param mixed 当前域的值
+     * @param string 当前域的名称
+     * @param array $data 已转换过的当前记录的值
+     * @param array $cpoyData 未转换过的当前记录的值
+     * @return string 当前域的新值
+     * @todo 简化,重利用
      */
-    public function convertListOperation($val, $name, $data, $copyData)
+    public function convertListOperation($value, $name, $data, $copyData)
     {
-        return '操作区域';
-        /*return $this->_meta->getOperationLink(
-            $this->_meta['db']['primaryKey'],
-            $data[$this->_meta['db']['primaryKey']],
-            $this->__query
-        );*/
+        $primaryKey = $this->_meta['db']['primaryKey'];
+        $data = '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->_lang->t('LBL_ACTION_EDIT') .'" href="' . $this->_url->createUrl(array('action' => 'Edit', $primaryKey => $copyData[$primaryKey]) + $this->_set) . '"><span class="ui-icon ui-icon-tag"></span></a>'
+              . '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->_lang->t('LBL_ACTION_SHOW') .'" href="' . $this->_url->createUrl(array('action' => 'Show', $primaryKey => $copyData[$primaryKey]) + $this->_set) . '"><span class="ui-icon ui-icon-lightbulb"></span></a>'
+              . '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->_lang->t('LBL_ACTION_COPY') .'" href="' . $this->_url->createUrl(array('action' => 'Add', $primaryKey => $copyData[$primaryKey]) + $this->_set) . '"><span class="ui-icon ui-icon-transferthick-e-w"></span></a>'
+              . '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->_lang->t('LBL_ACTION_DELETE') .'" href="' . $this->_url->createUrl(array('action' => 'Delete', $primaryKey => $copyData[$primaryKey]) + $this->_set) . '" onclick="javascript:return confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE);"><span class="ui-icon ui-icon-closethick"></span></a>';
+        return $data;
     }
 
     /**
      * 在列表操作下,初始化排序域的值,依次按5递增
      *
-     * @param <type> 当前域的值
-     * @param <type> 当前域的名称
-     * @param <type> $data 已转换过的当前记录的值
-     * @param <type> $cpoyData 未转换过的当前记录的值
-     * @return <type> 当前域的新值
+     * @param mixed 当前域的值
+     * @param string 当前域的名称
+     * @param array $data 已转换过的当前记录的值
+     * @param array $cpoyData 未转换过的当前记录的值
+     * @return int 当前域的新值
      */
-    public function convertAddOrder($val, $name, $data, $copyData)
+    public function convertAddOrder($value, $name, $data, $copyData)
     {
         $class = Qwin::run('-ini')->getClassName('Model', $this->__query);
         return $this->_meta->getInitalOrder($class);
@@ -592,27 +594,27 @@ class Default_Controller extends Qwin_Trex_Controller
     /**
      * 在入库操作下,转换编号
      *
-     * @param <type> 当前域的值
-     * @param <type> 当前域的名称
-     * @param <type> $data 已转换过的当前记录的值
-     * @param <type> $cpoyData 未转换过的当前记录的值
-     * @return <type> 当前域的新值
+     * @param mixed 当前域的值
+     * @param string 当前域的名称
+     * @param array $data 已转换过的当前记录的值
+     * @param array $cpoyData 未转换过的当前记录的值
+     * @return string 当前域的新值
      */
-    public function convertDbId($val, $name, $data, $copyData)
+    public function convertDbId($value, $name, $data, $copyData)
     {
-        return Qwin::run('Qwin_converter_String')->getUuid($val);
+        return Qwin::run('Qwin_converter_String')->getUuid($value);
     }
 
     /**
      * 在入库操作下,转换创建时间
      *
-     * @param <type> 当前域的值
-     * @param <type> 当前域的名称
-     * @param <type> $data 已转换过的当前记录的值
-     * @param <type> $cpoyData 未转换过的当前记录的值
-     * @return <type> 当前域的新值
+     * @param mixed 当前域的值
+     * @param string 当前域的名称
+     * @param array $data 已转换过的当前记录的值
+     * @param array $cpoyData 未转换过的当前记录的值
+     * @return string 当前域的新值
      */
-    public function convertDbDateCreated($val, $name, $data, $copyData)
+    public function convertDbDateCreated($value, $name, $data, $copyData)
     {
         return date('Y-m-d H:i:s', TIMESTAMP);
     }
@@ -620,11 +622,11 @@ class Default_Controller extends Qwin_Trex_Controller
     /**
      * 在入库操作下,转换修改时间
      *
-     * @param <type> 当前域的值
-     * @param <type> 当前域的名称
-     * @param <type> $data 已转换过的当前记录的值
-     * @param <type> $cpoyData 未转换过的当前记录的值
-     * @return <type> 当前域的新值
+     * @param mixed 当前域的值
+     * @param string 当前域的名称
+     * @param array $data 已转换过的当前记录的值
+     * @param array $cpoyData 未转换过的当前记录的值
+     * @return string 当前域的新值
      */
     public function convertDbDateModified()
     {
@@ -634,15 +636,15 @@ class Default_Controller extends Qwin_Trex_Controller
     /**
      * 在入库操作下,转换分类的值
      *
-     * @param <type> 当前域的值
-     * @param <type> 当前域的名称
-     * @param <type> $data 已转换过的当前记录的值
-     * @param <type> $cpoyData 未转换过的当前记录的值
-     * @return <type> 当前域的新值
+     * @param mixed 当前域的值
+     * @param string 当前域的名称
+     * @param array $data 已转换过的当前记录的值
+     * @param array $cpoyData 未转换过的当前记录的值
+     * @return string 当前域的新值
      */
-    public function convertDbCategoryId($val)
+    public function convertDbCategoryId($value)
     {
-        '0' == $val && $val = NULL;
-        return $val;
+        '0' == $value && $value = NULL;
+        return $value;
     }
 }

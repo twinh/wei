@@ -1061,23 +1061,6 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         return $data;
     }
 
-    /**
-     *
-     * @param <type> $pk
-     * @param <type> $id
-     * @param <type> $query
-     * @return <type>
-     * @todo 优化, JQuery Button Creator
-     */
-    public function getOperationLink($pk, $id, $query)
-    {
-        $data = '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_EDIT') .'" href="' . url(array($query['namespace'], $query['module'], $query['controller'], 'Edit'), array($pk => $id)) . '"><span class="ui-icon ui-icon-tag"></span></a>';
-        $data .= '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_SHOW') .'" href="' . url(array($query['namespace'], $query['module'], $query['controller'], 'Show'), array($pk => $id)) . '"><span class="ui-icon ui-icon-lightbulb"></span></a>';
-        $data .= '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_COPY') .'" href="' . url(array($query['namespace'], $query['module'], $query['controller'], 'Add'), array($pk => $id)) . '"><span class="ui-icon ui-icon-transferthick-e-w"></span></a>';
-        $data .= '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_DELETE') .'" href="' . url(array($query['namespace'], $query['module'], $query['controller'], 'Delete'), array($pk => $id)) . '" onclick="javascript:return confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE);"><span class="ui-icon ui-icon-closethick"></span></a>';
-        return $data;
-    }
-
     public function metadataToModel($meta, $model)
     {
         $config = Qwin::run('-ini')->getConfig();
