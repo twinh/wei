@@ -57,7 +57,7 @@ class Default_Common_View_JqGrid extends Default_View
         $columnSetting = array();
         foreach($this->listField as $field)
         {
-            $columnName[] = $meta['field'][$field]['basic']['title'];
+            $columnName[] = $lang->t($meta['field'][$field]['basic']['title']);
             $columnSetting[] = array(
                 'name' => $field,
                 'index' => $field,

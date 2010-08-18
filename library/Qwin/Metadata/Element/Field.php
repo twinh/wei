@@ -251,4 +251,41 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         }
         return $this;
     }
+
+    /**
+     *
+     * @return <type>
+     */
+    public function getGroupList()
+    {
+        $groupList = array();
+        foreach($this->_data as $field => $data)
+        {
+            if(!isset($groupList[$data['basic']['group']]))
+            {
+                $groupList[$data['basic']['group']] = array();
+            }
+            $groupList[$data['basic']['group']][$field] = $data['basic']['title'];
+        }
+        return $groupList;
+    }
+
+    public function getShowGroupList()
+    {
+        $groupList = array();
+        foreach($this->_data as $field => $data)
+        {
+            if(0 == $data['attr']['isShow'])
+            {
+                continue;
+            }
+
+            if(!isset($groupList[$data['basic']['group']]))
+            {
+                $groupList[$data['basic']['group']] = array();
+            }
+            $groupList[$data['basic']['group']][$field] = $data['basic']['title'];
+        }
+        return $groupList;
+    }
 }

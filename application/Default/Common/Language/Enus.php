@@ -30,7 +30,11 @@ class Default_Common_Language_Enus extends Default_Language
         $this->_data += array(
             '' => 'NULL',
 
-            // action
+            // Qwin's information
+            'LBL_QWIN' => 'Qwin',
+            'LBL_QWIN_VERSION' => '3.0Beta',
+
+            // User's actions in browser
             'LBL_ACTION_LIST' => 'List',
             'LBL_ACTION_ADD' => 'Add',
             'LBL_ACTION_EDIT' => 'Edit',
@@ -42,6 +46,7 @@ class Default_Common_Language_Enus extends Default_Language
             'LBL_ACTION_RESET' => 'Reset',
             'LBL_ACTION_SUBMIT' => 'Submit',
             'LBL_ACTION_APPLY' => 'Apply',
+            'LBL_ACTION_RESTORE' => 'Restore',
 
             'LBL_DEFAULT' => 'Default',
             'LBL_OPERATION' => 'Operation',
@@ -70,9 +75,12 @@ class Default_Common_Language_Enus extends Default_Language
             'LBL_FIELD_CAPTCHA' => 'Captcha',
             'LBL_FIELD_DESCRIPTION' => 'Description',
             'LBL_FIELD_CONTENT' => 'Content',
+            'LBL_FIELD_CATEGORY_ID' => 'Category Id',
+            'LBL_FIELD_CATEGORY_NAME' => 'Category Name',
 
             // group
             'LBL_GROUP_BASIC_DATA' => 'Basic Data',
+            'LBL_GROUP_DETAIL_DATA' => 'Detail Data',
             'LBL_GROUP_DEFAULT_DATA' => 'Default Data',
             'LBL_SWITCH_DISPLAY_MODEL' => 'Switch display model',
 
@@ -84,6 +92,7 @@ class Default_Common_Language_Enus extends Default_Language
             'MSG_ERROR_CAPTCHA' => 'Captcha error.',
             'MSG_NO_RECORD' => 'The record isn\'t exists or has been deleted.',
             'MSG_OPERATED_SUCCESS' => 'Operated success!',
+            'MSG_FUNCTION_DEVELOPTING' => 'The function is developing.',
 
             'LBL_HTML_TITLE' => 'Content Management System - Powered by Qwin Framework',
             'LBL_FOOTER_COPYRIGHT' => 'Powered by <a>Qwin Framework</a>. Copyright &copy; 2009-2010 <a>Twin</a>. All rights reserved.',

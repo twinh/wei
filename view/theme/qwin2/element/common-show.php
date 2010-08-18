@@ -5,9 +5,9 @@
  * form 的简要介绍
  *
  * Copyright (c) 2009 Twin. All rights reserved.
- *
+ * 
  * LICENSE:
- *
+ * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -30,100 +30,57 @@
 
 // 防止直接访问导致错误
 !defined('QWIN_PATH') && exit('Forbidden');
+//qw('-rsc')->load('jquery/plugin/tip');
+//qw('-rsc')->load('jquery/plugin/validate');
+// TODO
+!isset($validator_rule) && $validator_rule = '""';
 ?>
 <script type="text/javascript">
-jQuery(function($){
-    // 返回
-    $('.action-return').click(function(){
-        history.go(-1);
-    });
-    // 编辑
-    $('.action-edit').click(function(){
-        var url = Qwin.url.auto({
-            0 : _get['namespace'],
-            1 : _get['module'],
-            2 : _get['controller'],
-            3 : 'Edit'
-        },{
-            <?php echo $primaryKey?> : '<?php echo $data[$primaryKey]?>'
-        });
-        window.location.href = url;
-    });
-
-    $(window).resize(function(){
-        qwinAdjustBox('#ui-form');
-    });
-    qwinAdjustBox('#ui-form');
-    function qwinAdjustBox(id)
-    {
-        // TODO 在chrome浏览器下,第一次加载,两者宽度一致
-        var width = $('#ui-main').width() - $('#ui-main-leftbar').width() - 10;
-        $(id).width(width);
-    }
-});
+var validator_rule = <?php echo $validator_rule?>;
 </script>
-<div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
-    <div class="ui-box-titlebar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix">
-        <span class="ui-box-title">
-            <a href="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller']))?>"><?php echo $this->__meta['page']['title']?></a>
-            <a href="javascript:void(0)" id="ui-tabs-button">[<?php echo $this->t('LBL_SWITCH_DISPLAY_MODEL')?>]</a>
-        </span>
-        <a class="ui-box-title-icon ui-corner-all" name=".ui-form-content" href="javascript:void(0)">
-            <span class="ui-icon  ui-icon-circle-triangle-n">open/close</span>
-        </a>
-    </div>
+<?php
+//qw('-rsc')->load('js/other/form');
+?>
+  <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
+    <div class="ui-box-titlebar ui-widget-header ui-helper-clearfix"> <span class="ui-box-title"> <a href="<?php echo qw_url($set, array('action' => 'Default')) ?>"><?php echo qw_lang($meta['page']['title']) ?></a></span> <a class="ui-box-title-icon ui-corner-all" name=".ui-form-content" href="javascript:void(0)"> <span class="ui-icon  ui-icon-circle-triangle-n">open/close</span> </a> </div>
     <div class="ui-form-content ui-box-content ui-widget-content">
-        <form id="post-form" name="form" method="post" action="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], $this->__query['action']))?>">
-<?php
-$i = 1;
-foreach($set['field'] as $group_name => $group)
-{
-    if($group_name == '_custom')
-    {
-        continue;
-    } elseif($group_name == ''){
-        $group_name = $this->t('LBL_DEFAULT');
-    }
-?>
-            <fieldset id="ui-fieldset-<?php echo $i?>" class="ui-widget-content ui-corner-all">
-                <legend><?php echo $group_name?></legend>
-                &nbsp;
-<?php
-    foreach($group as $field)
-    {
-        // 增加 jquery ui class
-        qw('-str')->set($field['form']['class']);
-        $field['form']['class'] .= ' ui-widget-content ui-corner-all';
-?>
-                <div class="ui-block-common ui-block-<?php echo $field['form']['_type']?>" id="ui-block-<?php echo $field['form']['name']?>">
-                    <div class="ui-widget-content ui-label-common ui-label-<?php echo $field['form']['_type']?>" id="ui-label-<?php echo $field['form']['id']?>">
-                        <label for="<?php echo $field['form']['id']?>"><?php echo $field['basic']['title']?>:</label>
-                    </div>
-                    <div class="ui-field-data-common ui-field-common ui-field-<?php echo $field['form']['_type']?>" id="ui-field-<?php echo $field['form']['id']?>">
-                        <?php echo $data[$field['form']['name']]?>
-                    </div>
-                </div>
-<?php
-    }
-?>
-            </fieldset>
-<?php
-    $i++;
-}
-?>
-            <fieldset id="ui-fieldset-<?php echo $i?>" class="ui-widget-content ui-corner-all">
-                <legend><?php echo $this->t('LBL_OPERATION')?></legend>
-                &nbsp;
-                    <div class="ui-block-common">
-                        <div class="ui-label-common ui-widget-content">&nbsp;</div>
-                        <div class="ui-field-common ui-field-operation" id="ui-field-operation">
-                            <input type="button" class="action-edit ui-form-button ui-state-default ui-corner-all" value="<?php echo $this->t('LBL_ACTION_EDIT')?>" />
-                            <input type="button" class="action-return ui-form-button ui-state-default ui-corner-all" value="<?php echo $this->t('LBL_ACTION_RETURN')?>" />
-                        </div>
-                        <div class="ui-icon-common ui-widget ui-helper-clearfix ui-state-default"> </div>
-                    </div>
-            </fieldset>
+        <form id="post-form" name="form" method="post" action="?namespace=Default&module=Article&controller=Article&action=Edit">
+        <div class="ui-operation-field">
+            <a class="ui-anchor" href="<?php echo qw_url($set, array('action' => 'Default')) ?>"><?php echo qw_lang('LBL_ACTION_LIST') ?></a>
+            <a class="ui-anchor" href="<?php echo qw_url($set, array('action' => 'Add')) ?>"><?php echo qw_lang('LBL_ACTION_ADD') ?></a>
+            <a class="ui-anchor" href="<?php echo qw_url($set, array('action' => 'Edit', $primaryKey => $data[$primaryKey])) ?>"><?php echo qw_lang('LBL_ACTION_EDIT') ?></a>
+            <a class="ui-anchor" href="<?php echo qw_url($set, array('action' => 'Delete', $primaryKey => $data[$primaryKey])) ?>" onclick="javascript:return confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE);"><?php echo qw_lang('LBL_ACTION_DELETE') ?></a>
+            <a class="ui-anchor" href="<?php echo qw_url($set, array('action' => 'Restore', $primaryKey => $data[$primaryKey])) ?>" onclick="alert(Qwin.Lang.MSG_FUNCTION_DEVELOPTING);return false;"><?php echo qw_lang('LBL_ACTION_RESTORE') ?></a>
+            <a class="ui-anchor" href="#" onclick="javascrip:return history.go(-1);"><?php echo qw_lang('LBL_ACTION_RETURN') ?></a>
+        </div>
+        <?php foreach($groupList as $group => $fieldList): ?>
+        <fieldset id="ui-fieldset-3" class="ui-widget-content ui-corner-all">
+          <legend><?php echo qw_lang($group) ?></legend>
+          <table class="ui-table" width="100%">
+            <tr>
+              <td width="12.5%"></td>
+              <td width="37.5%"></td>
+              <td width="12.5%"></td>
+              <td width="37.5%"></td>
+            </tr>
+            <?php foreach($fieldList as $fieldName => $field): ?>
+            <tr>
+              <td class="ui-label-common"><label for="title"><?php echo qw_lang($field) ?>:</label></td>
+              <td class="ui-field-text" colspan="3"><?php echo qw_null_text($data[$fieldName]) ?></td>
+            </tr>
+            <?php endforeach; ?>    
+          </table>
+        </fieldset>
+        <?php endforeach; ?>
+        <div class="ui-operation-field">
+            <a class="ui-anchor" href="<?php echo qw_url($set, array('action' => 'Default')) ?>"><?php echo qw_lang('LBL_ACTION_LIST') ?></a>
+            <a class="ui-anchor" href="<?php echo qw_url($set, array('action' => 'Add')) ?>"><?php echo qw_lang('LBL_ACTION_ADD') ?></a>
+            <a class="ui-anchor" href="<?php echo qw_url($set, array('action' => 'Edit', $primaryKey => $data[$primaryKey])) ?>"><?php echo qw_lang('LBL_ACTION_EDIT') ?></a>
+            <a class="ui-anchor" href="<?php echo qw_url($set, array('action' => 'Delete', $primaryKey => $data[$primaryKey])) ?>" onclick="javascript:return confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE);"><?php echo qw_lang('LBL_ACTION_DELETE') ?></a>
+            <a class="ui-anchor" href="<?php echo qw_url($set, array('action' => 'Restore', $primaryKey => $data[$primaryKey])) ?>" onclick="alert(Qwin.Lang.MSG_FUNCTION_DEVELOPTING);return false;"><?php echo qw_lang('LBL_ACTION_RESTORE') ?></a>
+            <a class="ui-anchor" href="#" onclick="javascrip:return history.go(-1);"><?php echo qw_lang('LBL_ACTION_RETURN') ?></a>
+        </div>
         </form>
     </div>
-</div>
+  </div>
 <script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH?>/js/other/form.js"></script>

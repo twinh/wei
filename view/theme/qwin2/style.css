@@ -155,7 +155,7 @@ div.ui-layout-pane {
 .ui-form{
     width: auto;
 }
-.ui-form .ui-form-content form{
+.ui-form .ui-form-content{
     padding: 0 2em 2em 2em;
 }
 /* 表单中的一行 */
@@ -295,12 +295,12 @@ div.ui-layout-pane {
 }
 .ui-table td{
 	padding: .2em;
-}
-.ui-table .ui-label-common{
-	text-align: right;
 	font-size:1.3em;
 	font-weight: normal;
     line-height:2em;
+}
+.ui-table .ui-label-common{
+	text-align: right;
 }
 .ui-table .ui-field-text input,
 .ui-table .ui-field-password input{

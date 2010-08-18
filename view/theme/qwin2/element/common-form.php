@@ -30,134 +30,75 @@
 
 // 防止直接访问导致错误
 !defined('QWIN_PATH') && exit('Forbidden');
-qw('-rsc')->load('jquery/plugin/tip');
-qw('-rsc')->load('jquery/plugin/validate');
+//qw('-rsc')->load('jquery/plugin/tip');
+//qw('-rsc')->load('jquery/plugin/validate');
 // TODO
 !isset($validator_rule) && $validator_rule = '""';
 ?>
 <script type="text/javascript">
 var validator_rule = <?php echo $validator_rule?>;
-<?php
-if(isset($form_view_type) && $form_view_type = 'tab')
-{
-?>
-jQuery(function($){
-    $('#ui-tabs-button').click();
-});
-<?php
-}
-?>
-jQuery(function($){
-    $(window).resize(function(){
-        qwinAdjustBox('#ui-form');
-    });
-    qwinAdjustBox('#ui-form');
-    function qwinAdjustBox(id)
-    {
-        // TODO 在chrome浏览器下,第一次加载,两者宽度一致
-        var width = $('#ui-main').width() - $('#ui-main-leftbar').width() - 10;
-        $(id).width(width);
-    }
-});
 </script>
 <?php
 //qw('-rsc')->load('js/other/form');
-qw('-rsc')->load('jquery/ui/tabs');
+//qw('-rsc')->load('jquery/ui/tabs');
 ?>
-<div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
-    <div class="ui-box-titlebar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix">
-        <span class="ui-box-title">
-            <a href="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller']))?>"><?php echo $this->__meta['page']['title']?></a>
-            <a href="javascript:void(0)" id="ui-tabs-button">[<?php echo $this->t('LBL_SWITCH_DISPLAY_MODEL')?>]</a>
-        </span>
-        <a class="ui-box-title-icon ui-corner-all" name=".ui-form-content" href="javascript:void(0)">
-            <span class="ui-icon  ui-icon-circle-triangle-n">open/close</span>
-        </a>
+<div class="ui-form-content ui-box-content ui-widget-content">
+        <div class="ui-operation-field">
+          <input type="submit" id="submit" value="Submit" />
+          <input type="reset" value="Reset" />
+          <input type="button" class="action-return" value="Return" />
+        </div>
+        <?php foreach($groupList as $group => $fieldList): ?>
+        <fieldset id="ui-fieldset-3" class="ui-widget-content ui-corner-all">
+          <legend>More More Data</legend>
+          <table class="ui-table" width="100%">
+            <tr>
+              <td width="12.5%"></td>
+              <td width="37.5%"></td>
+              <td width="12.5%"></td>
+              <td width="37.5%"></td>
+            </tr>
+            <tr>
+              <td class="ui-label-common"><label for="title">Title:</label></td>
+              <td class="ui-field-text" colspan="3"><input type="text" value="今年灏逸的新产品发布类型" name="title" id="title" class=" ui-widget-content ui-corner-all" /></td>
+            </tr>
+            <tr>
+              <td class="ui-label-common"><label for="title">Title:</label></td>
+              <td class="ui-field-textarea" colspan="3"><textarea name="content_preview" id="content-preview" class=" ui-widget-content ui-corner-all" ></textarea></td>
+            </tr>
+            <tr>
+              <td class="ui-label-common"><label for="title">Basic Data:</label></td>
+              <td class="ui-field-select" colspan="3"><select name="category_id" id="category-id" class=" ui-widget-content ui-corner-all" >
+                  <option value="a741ed15-0273-4742-a31e-462d28a235ab">单页面</option>
+                  <option value="21ef9f4c-878f-46b2-ba45-78b1a80614f2" selected="selected" >默认</option>
+                </select></td>
+            </tr>
+            <tr>
+              <td class="ui-label-common"><label for="title">Title:</label></td>
+              <td class="ui-field-checkbox" colspan="3"><input type="checkbox" id="Bold3" />
+                <label for="Bold3">Bold</label>
+                <input type="checkbox" id="Italic3" checked="checked" />
+                <label for="Italic3">Italic</label>
+                <input type="checkbox" id="Underline3" />
+                <label for="Underline3">Underline</label></td>
+            </tr>
+            <tr>
+              <td class="ui-label-common"><label for="title">Title:</label></td>
+              <td class="ui-field-radio" colspan="3"><input type="radio" id="Red5" name="color2" />
+                <label for="Red5">Red</label>
+                <input type="radio" id="Blue5" name="color2" />
+                <label for="Blue5">Blue</label>
+                <input type="radio" id="Green5" name="color2" />
+                <label for="Green5">Green</label></td>
+            </tr>
+          </table>
+        </fieldset>
+        <?php endforeach; ?>
+        <div class="ui-operation-field">
+          <input type="submit" id="submit" value="Submit" />
+          <input type="reset" value="Reset" />
+          <input type="button" class="action-return" value="Return" />
+        </div>
+      </form>
     </div>
-    <div class="ui-form-content ui-box-content ui-widget-content">
-        <form id="post-form" name="form" method="post" action="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], $this->__query['action']))?>">
-<?php
-$i = 1;
-foreach($set['field'] as $group_name => $group)
-{
-    if($group_name == '_custom')
-    {
-        continue;
-    } elseif($group_name == ''){
-        $group_name = $this->t('LBL_DEFAULT');
-    }
-?>
-            <fieldset id="ui-fieldset-<?php echo $i?>" class="ui-widget-content ui-corner-all">
-                <legend><?php echo $group_name?></legend>
-                &nbsp;
-<?php
-    foreach($group as $field)
-    {
-        // 增加 jquery ui class
-        qw('-str')->set($field['form']['class']);
-        $field['form']['class'] .= ' ui-widget-content ui-corner-all';
-?>
-                <div class="ui-block-common ui-block-<?php echo $field['form']['_type']?>" id="ui-block-<?php echo $field['form']['name']?>">
-                    <div class="ui-widget-content ui-label-common ui-label-<?php echo $field['form']['_type']?>" id="ui-label-<?php echo $field['form']['id']?>">
-                        <label for="<?php echo $field['form']['id']?>"><?php echo $field['basic']['title']?>:</label>
-                    </div>
-                    <div class="ui-field-common ui-field-<?php echo $field['form']['_type']?>" id="ui-field-<?php echo $field['form']['id']?>">
-                        <?php echo qwForm($field['form'], $data)?>
-                    </div>
-                    <div class="ui-icon-common ui-widget ui-helper-clearfix ui-state-highlight">
-<?php
-        // 显示提示信息的按钮
-        if(isset($tip_data[$field['form']['name']]))
-        {
-?>
-                        <a class="ui-state-default ui-corner-all icon-info-common" id="icon-info-<?php echo $field['form']['id']?>" href="javascript:void(0)">
-                            <span class="ui-icon ui-icon-info"></span>
-                        </a>
-<?php
-        }
-?>
-                        <?php echo qw('-btn')->auto($field['form'], $data)?>
-                    </div>
-                    <div class="ui-tip-common ui-tip-<?php echo $field['form']['id']?>" id="ui-tip-<?php echo $field['form']['id']?>">
-                        <ul>
-<?php
-        if(isset($tip_data[$field['form']['name']]))
-        {
-            foreach($tip_data[$field['form']['name']] as $tip)
-            {
-?>
-                            <li class="ui-tip-list" id="<?php echo $tip['id']?>"><span class="ui-icon <?php echo $tip['icon']?>"></span><?php echo $tip['data']?></li>
-<?php
-            }
-        }
-?>
-                        </ul>
-                    </div>
-                </div>
-<?php
-    }
-?>
-            </fieldset>
-<?php
-    $i++;
-}
-?>
-            <fieldset id="ui-fieldset-<?php echo $i?>" class="ui-widget-content ui-corner-all">
-                <legend><?php echo $this->t('LBL_OPERATION')?></legend>
-                &nbsp;
-                    <div class="ui-block-common">
-                        <div class="ui-label-common ui-widget-content">&nbsp;</div>
-                        <div class="ui-field-common ui-field-operation" id="ui-field-operation">
-                            <input type="hidden" name="_action" value="<?php echo $this->__query['action']?>" />
-                            <input type="hidden" name="_page" value="<?php echo $http_referer?>" />
-                            <input type="submit" class="ui-form-button ui-state-default ui-corner-all" id="submit" value="<?php echo $this->t('LBL_ACTION_SUBMIT')?>" />
-                            <input type="reset" class="ui-form-button ui-state-default ui-corner-all" value="<?php echo $this->t('LBL_ACTION_RESET')?>" />
-                            <input type="button" class="action-return ui-form-button ui-state-default ui-corner-all" value="<?php echo $this->t('LBL_ACTION_RETURN')?>" />
-                        </div>
-                        <div class="ui-icon-common ui-widget ui-helper-clearfix ui-state-default"> </div>
-                    </div>
-            </fieldset>
-        </form>
-    </div>
-</div>
 <script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH?>/js/other/form.js"></script>

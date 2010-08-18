@@ -30,15 +30,15 @@
 
 // 防止直接访问导致错误
 !defined('QWIN_PATH') && exit('Forbidden');
-qw('-rsc')->load('js/jquery/plugin/jqgrid/i18n/grid.locale-en');
-qw('-rsc')->load('jquery/plugin/jqgrid');
+//qw('-rsc')->load('js/jquery/plugin/jqgrid/i18n/grid.locale-en');
+//qw('-rsc')->load('jquery/plugin/jqgrid');
 ?>
 <div id="custom-jqgird-toolbar" class="ui-helper-hidden">
     &nbsp;<a class="action-add" href="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], 'Add'))?>"><?php echo $lang->t('LBL_ACTION_ADD')?></a>&nbsp;|&nbsp;
-    <a class="action-edit" href="javascript:void(0)"><?php echo $lang->t('LBL_ACTION_EDIT')?></a>&nbsp;|&nbsp;
-    <a class="action-delete" href="javascript:void(0)"><?php echo $lang->t('LBL_ACTION_DELETE')?></a>&nbsp;|&nbsp;
-    <a class="list_show_link" href="javascript:void(0)"><?php echo $lang->t('LBL_ACTION_SHOW')?></a>&nbsp;|&nbsp;
-    <a class="action-clone" href="javascript:void(0)"><?php echo $lang->t('LBL_ACTION_COPY')?></a>&nbsp;|&nbsp;
+    <a class="action-edit" href="javascript:void(0)"><?php echo qw_lang('LBL_ACTION_EDIT') ?></a>&nbsp;|&nbsp;
+    <a class="action-delete" href="javascript:void(0)"><?php echo qw_lang('LBL_ACTION_DELETE') ?></a>&nbsp;|&nbsp;
+    <a class="list_show_link" href="javascript:void(0)"><?php echo qw_lang('LBL_ACTION_SHOW') ?></a>&nbsp;|&nbsp;
+    <a class="action-clone" href="javascript:void(0)"><?php echo qw_lang('LBL_ACTION_COPY') ?></a>&nbsp;|&nbsp;
     <!--<a class="action-filter" href="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], 'Filter'))?>"><?php echo $lang->t('LBL_ACTION_FILTER')?></a>-->
 </div>
 <table id="ui-jqgrid-table"></table>
@@ -58,7 +58,7 @@ jQuery(function($){
         sortname         : '<?php echo $sortName?>',
         sortorder        : '<?php echo $sortOrder?>',
         // 标题
-        caption          : '<a href="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller']))?>"><?php echo $meta['page']['title']?></a>',
+        caption          : '<a href="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller']))?>"><?php echo qw_lang($meta['page']['title']) ?></a>',
         // 显示列的数目
         rownumbers       : true,
         // 允许多选
