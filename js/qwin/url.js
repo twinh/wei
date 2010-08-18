@@ -3,8 +3,9 @@ Qwin.extend({
     url : {
         auto : function(set, addition)
         {
+			return 1;
             // 返回的地址
-            var url = '';
+            /*var url = '';
             var set_2 = {};
             if('object' == typeof(set))
             {
@@ -21,7 +22,7 @@ Qwin.extend({
             } else {
                 url = set + '?' + this.arrayKey2Url(addition);
             }
-            return url;
+            return url;*/
         },
         arrayKey2Url : function(arr)
         {

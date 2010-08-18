@@ -43,7 +43,7 @@ class Default_Project_Metadata_Bug extends Qwin_Trex_Metadata
                         'name' => 'id',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -60,7 +60,7 @@ class Default_Project_Metadata_Bug extends Qwin_Trex_Metadata
                         'name' => 'project_id',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -77,7 +77,7 @@ class Default_Project_Metadata_Bug extends Qwin_Trex_Metadata
                         'name' => 'title',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -94,7 +94,7 @@ class Default_Project_Metadata_Bug extends Qwin_Trex_Metadata
                         'name' => 'title',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -111,7 +111,7 @@ class Default_Project_Metadata_Bug extends Qwin_Trex_Metadata
                         'name' => 'priority',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -128,7 +128,7 @@ class Default_Project_Metadata_Bug extends Qwin_Trex_Metadata
                         'name' => 'severity',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -145,7 +145,7 @@ class Default_Project_Metadata_Bug extends Qwin_Trex_Metadata
                         'name' => 'reproducibility',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -162,7 +162,7 @@ class Default_Project_Metadata_Bug extends Qwin_Trex_Metadata
                         'name' => 'status',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -179,7 +179,7 @@ class Default_Project_Metadata_Bug extends Qwin_Trex_Metadata
                         'name' => 'status',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -196,7 +196,7 @@ class Default_Project_Metadata_Bug extends Qwin_Trex_Metadata
                         'name' => 'created_by',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -214,7 +214,7 @@ class Default_Project_Metadata_Bug extends Qwin_Trex_Metadata
                         'name' => 'date_created',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -233,7 +233,7 @@ class Default_Project_Metadata_Bug extends Qwin_Trex_Metadata
                         'name' => 'date_modified',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -251,7 +251,7 @@ class Default_Project_Metadata_Bug extends Qwin_Trex_Metadata
                         'name' => 'operation',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 0,
+                        'isListLink' => 0,
                         'isList' => 1,
                         'isSqlField' => 0,
                         'isSqlQuery' => 0,

@@ -44,7 +44,7 @@ class Default_Member_Metadata_Log extends Qwin_Trex_Metadata
                         'name' => 'captcha',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 0,
                         'isSqlQuery' => 0,
@@ -67,7 +67,7 @@ class Default_Member_Metadata_Log extends Qwin_Trex_Metadata
                         'name' => 'username',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -90,7 +90,7 @@ class Default_Member_Metadata_Log extends Qwin_Trex_Metadata
                         'name' => 'password',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,

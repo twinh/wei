@@ -1,6 +1,6 @@
 <?php
 /**
- * Language
+ * qwin
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,19 +16,50 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Default
- * @subpackage  Language
+ * @package     Qwin
+ * @subpackage  Function
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-16 18:40:20
+ * @since       2010-08-18 10:28:04
  */
 
-class Default_Language extends Qwin_Trex_Language
+/**
+ * 保留函数,不执行任何内容
+ *
+ * @return boolen
+ */
+function qw()
 {
-    public function __construct()
-    {
-        
-    }
+    return true;
 }
+
+/**
+ * 快速加载类
+ *
+ * @param string $name
+ * @return object|null
+ */
+function qwin($name)
+{
+    return Qwin::run($name);
+}
+
+function qw_form()
+{
+
+}
+
+function qw_button()
+{
+    
+}
+
+function qw_url()
+{
+
+}
+
+
+

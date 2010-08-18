@@ -46,7 +46,7 @@ class Default_Link_Metadata_Link extends Qwin_Trex_Metadata
                         'name' => 'id',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => false,
+                        'isListLink' => false,
                         'isList' => true,
                         'isSqlField' => true,
                         'isSqlQuery ' => true,
@@ -73,7 +73,7 @@ class Default_Link_Metadata_Link extends Qwin_Trex_Metadata
                         ),
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -102,7 +102,7 @@ class Default_Link_Metadata_Link extends Qwin_Trex_Metadata
                         'name' => 'name',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 0,
+                        'isListLink' => 0,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -120,7 +120,7 @@ class Default_Link_Metadata_Link extends Qwin_Trex_Metadata
                         'name' => 'url',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 0,
+                        'isListLink' => 0,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -138,7 +138,7 @@ class Default_Link_Metadata_Link extends Qwin_Trex_Metadata
                         'name' => 'target',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 0,
+                        'isListLink' => 0,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -158,7 +158,7 @@ class Default_Link_Metadata_Link extends Qwin_Trex_Metadata
                         'name' => 'img_url',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 0,
+                        'isListLink' => 0,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -176,7 +176,7 @@ class Default_Link_Metadata_Link extends Qwin_Trex_Metadata
                         'name' => 'order',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 0,
+                        'isListLink' => 0,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -194,7 +194,7 @@ class Default_Link_Metadata_Link extends Qwin_Trex_Metadata
                         'name' => 'description',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 0,
+                        'isListLink' => 0,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -214,7 +214,7 @@ class Default_Link_Metadata_Link extends Qwin_Trex_Metadata
                         'name' => 'date_created',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 0,
+                        'isListLink' => 0,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -235,7 +235,7 @@ class Default_Link_Metadata_Link extends Qwin_Trex_Metadata
                         'name' => 'date_modified',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -254,7 +254,7 @@ class Default_Link_Metadata_Link extends Qwin_Trex_Metadata
                         'name' => 'operation',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 0,
                         'isSqlQuery' => 0,

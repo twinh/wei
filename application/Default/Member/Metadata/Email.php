@@ -47,7 +47,7 @@ class Default_Member_Metadata_Email extends Qwin_Trex_Metadata
                         'name' => 'id',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -67,7 +67,7 @@ class Default_Member_Metadata_Email extends Qwin_Trex_Metadata
                         'name' => 'foreign_id',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -87,7 +87,7 @@ class Default_Member_Metadata_Email extends Qwin_Trex_Metadata
                         'name' => 'email_address',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -113,7 +113,7 @@ class Default_Member_Metadata_Email extends Qwin_Trex_Metadata
                         'name' => 'remark',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,

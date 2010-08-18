@@ -47,7 +47,7 @@ class Default_Product_Metadata_Detail extends Qwin_Trex_Metadata
                         'name' => 'id',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -67,7 +67,7 @@ class Default_Product_Metadata_Detail extends Qwin_Trex_Metadata
                         'name' => 'product_id',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -87,7 +87,7 @@ class Default_Product_Metadata_Detail extends Qwin_Trex_Metadata
                         'name' => 'content',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -107,7 +107,7 @@ class Default_Product_Metadata_Detail extends Qwin_Trex_Metadata
                         'name' => 'meta',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,

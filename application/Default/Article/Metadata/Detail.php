@@ -41,7 +41,7 @@ class Default_Article_Metadata_Detail extends Default_Metadata
                         'name' => 'id',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -58,7 +58,7 @@ class Default_Article_Metadata_Detail extends Default_Metadata
                         'name' => 'article_id',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -76,7 +76,7 @@ class Default_Article_Metadata_Detail extends Default_Metadata
                         'name' => 'content',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 0,
@@ -93,7 +93,7 @@ class Default_Article_Metadata_Detail extends Default_Metadata
                         'name' => 'meta',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,

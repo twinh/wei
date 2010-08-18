@@ -1,6 +1,6 @@
 <?php
 /**
- * QwUrl 的名称
+ * Url
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -45,9 +45,28 @@ class Qwin_Url
     
     public function __construct()
     {
-        $this->_decodeUrl();
-        $this->mapUrl();
+        //$this->_decodeUrl();
+        //$this->mapUrl();
     }
+
+    public function parseUrl()
+    {
+        
+    }
+
+    /**
+     * 生成url地址
+     *
+     * @param <type> $get
+     * @return <type>
+     * @todo 地址重写
+     */
+    public function createUrl($get)
+    {
+        return '?' . $this->arrayKey2Url($get);
+    }
+
+    
     
     /**
      * 通过自定义url分隔符,解码查询字符串

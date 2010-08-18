@@ -46,7 +46,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
                         'name' => 'category_id',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -69,7 +69,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
                         'name' => 'category_2',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -87,7 +87,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
                         'name' => 'category_3',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -99,7 +99,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
                         'name' => 'title',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -123,7 +123,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
                         'name' => 'author',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -135,7 +135,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
                         'name' => 'jump_to_url',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -149,7 +149,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
                         'name' => 'thumb',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -162,7 +162,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
                         'name' => 'hit',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -174,7 +174,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
                         'name' => 'page_name',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -193,7 +193,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
                         'name' => 'template',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -206,7 +206,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
                         'name' => 'is_posted',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -225,7 +225,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
                         'name' => 'is_index',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -243,7 +243,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
                         'name' => 'content_preview',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -255,7 +255,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
                         'name' => 'order',
                     ),
                     'attr' => array(
-                        'isUrlQuery' => 1,
+                        'isListLink' => 1,
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
@@ -281,7 +281,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
                 'order' => array(
                     array('date_created', 'DESC'),
                 ),
-                'limit' => 10,
+                'limit' => 20,
             ),
             // 页面显示
             'page' => array(
