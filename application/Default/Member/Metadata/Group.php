@@ -83,7 +83,7 @@ class Default_Member_Metadata_Group extends Qwin_Trex_Metadata
                     'form' => array(
                         '_type' => 'text',
                         '_typeExt' => 'fileTree',
-                        '_icon' => 'ajaxUpload',
+                        '_button' => 'ajaxUpload',
                         '_value' => '',
                         'name' => 'image_path',
                     ),

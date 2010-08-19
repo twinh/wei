@@ -59,7 +59,8 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
                 '_typeExt' => null,
                 '_resource' => null,
                 '_resourceGetter' => null,
-                '_icon' => null,
+                '_button' => null,
+                '_buttonDetail' => array(),
                 '_value' => '',
                 'name' => null,
                 'id' => null,
@@ -121,6 +122,9 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         } else {
             $metadata['basic']['order'] = (int)$metadata['basic']['order'];
         }
+
+        // 转换按钮
+        $metadata['form'] = $this->_parseButtonSetting($metadata['form']);
         
         return $this->_multiArrayMerge($this->getSampleData(), $metadata);
     }
@@ -309,6 +313,14 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         return $groupList;
     }
 
+    /**
+     * 增加表单域的类名
+     *
+     * @param string $field 域的名称
+     * @param string $value 类名,多个类名用空格分开
+     * @return object 当前类
+     * @todo [重要]象数组一样自由赋值
+     */
     public function addClass($field, $value)
     {
         if('' != $this->_data[$field]['form']['class'])
@@ -317,5 +329,26 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         }
         $this->_data[$field]['form']['class'] .= $value;
         return $this;
+    }
+
+    public function _parseButtonSetting($form)
+    {
+        !isset($form['_buttonDetail']) && $form['_buttonDetail'] = array();
+        if(isset($form['_button']))
+        {
+            $newSetting = array();
+            !is_array($form['_button']) && $form['_button'] = array($form['_button']);
+            foreach($form['_button'] as $name => $setting)
+            {
+                /**
+                 * 默认的生成方法是render
+                 */
+                $newSetting[] = array(
+                    array($setting, 'render')
+                );
+            }
+            $form['_buttonDetail'] = array_merge($form['_buttonDetail'], $newSetting);
+        }
+        return $form;
     }
 }

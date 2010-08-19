@@ -87,6 +87,11 @@ function qw_lang($name = null)
     return $lang->t($name);
 }
 
+function qw_lang_to_js()
+{
+    return 'Qwin.Lang = ' . Qwin::run('-arr')->toJsObject(Qwin::run('-lang')->toArray()) . ';';
+}
+
 function qw_null_text($data = null)
 {
     if(null != $data)
@@ -94,4 +99,17 @@ function qw_null_text($data = null)
         return $data;
     }
     return '<em>(NULL)</em>';
+}
+
+function qw_jquery()
+{
+    static $jquery;
+    if(null == $jquery)
+    {
+        Qwin::addMap('-jquery', 'Qwin_Resource_JQuery');
+        $jquery = Qwin::run('-jquery')
+            ->setVersion('1.4.2')
+            ->setUiVersion('1.8.4');
+    }
+    return $jquery;
 }
