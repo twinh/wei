@@ -153,7 +153,7 @@ class Default_Link_Metadata_Link extends Qwin_Trex_Metadata
                     'form' => array(
                         '_type' => 'text',
                         '_typeExt' => 'fileTree',
-                        '_icon' => 'ajaxUpload',
+                        '_button' => 'ajaxUpload',
                         '_value' => '',
                         'name' => 'img_url',
                     ),

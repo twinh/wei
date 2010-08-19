@@ -335,7 +335,7 @@ class Qwin_Class
         /**
          * 配置数组是类和方法
          */
-        if(is_array($set[0]))
+        if(is_array($set[0]) && isset($set[0][0]) && isset($set[0][1]))
         {
             /**
              * $convert[0][0]为类名,尝试加载该类
@@ -352,11 +352,16 @@ class Qwin_Class
         /**
          * 配置数组是函数
          */
-        } else {
-            if(!function_exists($convert[0]))
+        } elseif(is_string($set[0])) {
+            if(!function_exists($set[0]))
             {
                 return null;
             }
+        /**
+         * 无法通过解析
+         */
+        } else {
+            return false;
         }
         // 第一个是方法/函数名
         $function = $set[0];

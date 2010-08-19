@@ -89,7 +89,7 @@ class Default_Product_Metadata_Material extends Qwin_Trex_Metadata
                     'form' => array(
                         '_type' => 'text',
                         '_typeExt' => 'fileTree',
-                        '_icon' => 'ajaxUpload',
+                        '_button' => 'ajaxUpload',
                         '_value' => '',
                         'name' => 'thumb',
                     ),

@@ -30,7 +30,7 @@ class Qwin_Form_Button
 {
     // 类集合
     private static $_class = array();
-        
+
     /**
      * 增加扩展类
      */
@@ -42,29 +42,16 @@ class Qwin_Form_Button
         //}
     }
     
-    function render($set)
+    function render($meta)
     {
-        if(!isset($set['_icon']))
+        $retult = '';
+        foreach($meta['_buttonDetail'] as $buttonSetting)
         {
-            return '';
+            // 增加默认参数
+            $buttonSetting[] = $meta;
+            $retult .= Qwin::callByArray($buttonSetting);
         }
-        $data = '';
-        $type_arr = qw('-arr')->decodeArray($set['_icon']);
-        foreach($type_arr as $method => $type_set)
-        {
-            $method = str_replace('_', '', $method);
-            foreach(self::$_class as $class)
-            {
-                if(method_exists(qw($class), $method))
-                {
-                    $data .= call_user_func_array(
-                        array(qw($class), $method),
-                        array($set, $type_set)
-                    );
-                }
-            }
-        }
-        return $data;
+        return $retult;
     }
     
     /**

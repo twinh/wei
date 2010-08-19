@@ -52,13 +52,13 @@ var validator_rule = <?php echo $validator_rule?>;
             <a class="ui-action-edit" href="<?php echo qw_url($set, array('action' => 'Edit', $primaryKey => $data[$primaryKey])) ?>"><?php echo qw_lang('LBL_ACTION_EDIT') ?></a>
             <a class="ui-action-show" href="<?php echo qw_url($set, array('action' => 'Show', $primaryKey => $data[$primaryKey])) ?>"><?php echo qw_lang('LBL_ACTION_SHOW') ?></a>
             <a class="ui-action-copy" href="<?php echo qw_url($set, array('action' => 'Add', $primaryKey => $data[$primaryKey])) ?>"><?php echo qw_lang('LBL_ACTION_COPY') ?></a>
-            <a class="ui-action-restore" href="<?php echo qw_url($set, array('action' => 'Restore', $primaryKey => $data[$primaryKey])) ?>" onclick="alert(Qwin.Lang.MSG_FUNCTION_DEVELOPTING);return false;"><?php echo qw_lang('LBL_ACTION_RESTORE') ?></a>
+            <!--<a class="ui-action-restore" href="<?php echo qw_url($set, array('action' => 'Restore', $primaryKey => $data[$primaryKey])) ?>" onclick="alert(Qwin.Lang.MSG_FUNCTION_DEVELOPTING);return false;"><?php echo qw_lang('LBL_ACTION_RESTORE') ?></a>-->
             <a class="ui-action-delete" href="<?php echo qw_url($set, array('action' => 'Delete', $primaryKey => $data[$primaryKey])) ?>" onclick="javascript:return confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE);"><?php echo qw_lang('LBL_ACTION_DELETE') ?></a>
             <a class="ui-action-return" href="#" onclick="javascript:return history.go(-1);"><?php echo qw_lang('LBL_ACTION_RETURN') ?></a>
             <br />
             <br />
-            <input class="ui-action-submit" type="submit" value="<?php echo qw_lang('LBL_ACTION_SUBMIT') ?>" />
-            <input class="ui-action-reset" type="reset" value="<?php echo qw_lang('LBL_ACTION_RESET') ?>" />
+            <button class="ui-action-submit" type="submit"><?php echo qw_lang('LBL_ACTION_SUBMIT') ?></button>
+            <button class="ui-action-reset" type="reset"><?php echo qw_lang('LBL_ACTION_RESET') ?></button>
         </div>
         <?php foreach($groupList as $group => $fieldList): ?>
         <fieldset id="ui-fieldset-3" class="ui-widget-content ui-corner-all">
@@ -76,20 +76,18 @@ var validator_rule = <?php echo $validator_rule?>;
                 $type = $relatedField[$fieldName]['form']['_type'];
             ?>
             <tr class="ui-block-<?php echo $type ?>">
-              <td class="ui-label-common"><label for="title"><?php echo qw_lang($field) ?>:</label></td>
+              <td class="ui-label-common"><label for="<?php echo $relatedField[$fieldName]['form']['id'] ?>"><?php echo qw_lang($field) ?>:</label></td>
               <td class="ui-field-common ui-field-<?php echo $type ?>" colspan="3">
-                <?php echo qw_form($relatedField[$fieldName]['form'], $data) //, qw_button($relatedField[$fieldName]['form'], $data) ?>
-                  <button><span class="ui-icon ui-icon-info"></span></button>
-                  <button><span class="ui-icon ui-icon-info"></span></button>
+                <?php echo qw_form($relatedField[$fieldName]['form'], $data) , qw_button($relatedField[$fieldName]['form'], $data) ?>
               </td>
             </tr>
             <?php endforeach; ?>
           </table>
         </fieldset>
         <?php endforeach; ?>
-        <div class="ui-operation-field">
-            <input class="ui-action-submit" type="submit" id="submit" value="<?php echo qw_lang('LBL_ACTION_SUBMIT') ?>" />
-            <input class="ui-action-reset" type="reset" value="<?php echo qw_lang('LBL_ACTION_RESET') ?>" />
+            <div class="ui-operation-field" id="abc">
+            <button class="ui-action-submit" type="submit"><?php echo qw_lang('LBL_ACTION_SUBMIT') ?></button>
+            <button class="ui-action-reset" type="reset"><?php echo qw_lang('LBL_ACTION_RESET') ?></button>
             <br />
             <br />
             <a class="ui-action-list" href="<?php echo qw_url($set, array('action' => 'Default')) ?>"><?php echo qw_lang('LBL_ACTION_LIST') ?></a>
@@ -97,7 +95,7 @@ var validator_rule = <?php echo $validator_rule?>;
             <a class="ui-action-edit" href="<?php echo qw_url($set, array('action' => 'Edit', $primaryKey => $data[$primaryKey])) ?>"><?php echo qw_lang('LBL_ACTION_EDIT') ?></a>
             <a class="ui-action-show" href="<?php echo qw_url($set, array('action' => 'Show', $primaryKey => $data[$primaryKey])) ?>"><?php echo qw_lang('LBL_ACTION_SHOW') ?></a>
             <a class="ui-action-copy" href="<?php echo qw_url($set, array('action' => 'Add', $primaryKey => $data[$primaryKey])) ?>"><?php echo qw_lang('LBL_ACTION_COPY') ?></a>
-            <a class="ui-action-restore" href="<?php echo qw_url($set, array('action' => 'Restore', $primaryKey => $data[$primaryKey])) ?>" onclick="alert(Qwin.Lang.MSG_FUNCTION_DEVELOPTING);return false;"><?php echo qw_lang('LBL_ACTION_RESTORE') ?></a>
+            <!--<a class="ui-action-restore" href="<?php echo qw_url($set, array('action' => 'Restore', $primaryKey => $data[$primaryKey])) ?>" onclick="alert(Qwin.Lang.MSG_FUNCTION_DEVELOPTING);return false;"><?php echo qw_lang('LBL_ACTION_RESTORE') ?></a>-->
             <a class="ui-action-delete" href="<?php echo qw_url($set, array('action' => 'Delete', $primaryKey => $data[$primaryKey])) ?>" onclick="javascript:return confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE);"><?php echo qw_lang('LBL_ACTION_DELETE') ?></a>
             <a class="ui-action-return" href="#" onclick="javascript:return history.go(-1);"><?php echo qw_lang('LBL_ACTION_RETURN') ?></a>
         </div>
@@ -105,3 +103,6 @@ var validator_rule = <?php echo $validator_rule?>;
     </div>
   </div>
 <script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH?>/js/other/form.js"></script>
+<script type="text/javascript">
+    jQuery('#abc').dialog();
+</script>

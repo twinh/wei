@@ -29,10 +29,47 @@ class Default_View extends Qwin_Trex_View
 {
     public function __construct()
     {
+        Qwin::addMap('-jquery', 'Qwin_Resource_JQuery');
+        $this->_jquery = Qwin::run('-jquery');
+        $this->_jquery->setTheme($this->getStyle());
+        
         $this->_theme = Qwin::run('-ini')->getConfig('interface.theme');
         $this->_layout = QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/layout/common-control-panel.php';
     }
 
+    /**
+     * 获取风格,风格为jQuery的主题
+     *
+     * @return string
+     */
+    public function getStyle()
+    {
+        if(isset($this->_style))
+        {
+            return $this->_style;
+        }
+
+        // 按优先级排列语言的数组
+        $styleList = array(
+            Qwin::run('Qwin_Request')->g('style'),
+            Qwin::run('Qwin_Session')->get('style'),
+            Qwin::run('-ini')->getConfig('interface.style'),
+        );
+        foreach($styleList as $val)
+        {
+            if(null != $val)
+            {
+                $style = $val;
+                break;
+            }
+        }
+
+        if(!file_exists(QWIN_RESOURCE_PATH . '/js/jquery/themes/' . $style))
+        {
+            $style = Qwin::run('-ini')->getConfig('interface.style');
+        }
+        return $this->_style = $style;
+    }
 
     public function display()
     {

@@ -138,6 +138,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
                 'jump_to_url' => array(
                     'form' => array(
                         '_type' => 'text',
+                        '_button' => 'fileTree',
                         'name' => 'jump_to_url',
                     ),
                     'attr' => array(
@@ -151,7 +152,27 @@ class Default_Article_Metadata_Article extends Default_Metadata
                     'form' => array(
                         '_type' => 'text',
                         '_typeExt' => 'fileTree',
-                        '_icon' => 'ajaxUpload',
+                        '_button' => array(
+                            'Qwin_Button_JQuery_fileTree',
+                            'ajaxUpload',
+                        ),
+                        '_buttonDetail' => array(
+                            array(
+                                'functionName',
+                                'param1',
+                                'param2',
+                            ),
+                            array(
+                                array('className'),
+                                'param1',
+                                'param2',
+                            ),
+                            array(
+                                array('className', 'render'),
+                                'param1',
+                                'param2',
+                            ),
+                        ),
                         'name' => 'thumb',
                     ),
                     'attr' => array(

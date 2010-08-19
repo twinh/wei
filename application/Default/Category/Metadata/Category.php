@@ -131,7 +131,7 @@ class Default_Category_Metadata_Category extends Qwin_Trex_Metadata
                     'form' => array(
                         '_type' => 'text',
                         '_typeExt' => 'fileTree',
-                        '_icon' => 'ajaxUpload',
+                        '_button' => 'ajaxUpload',
                         '_value' => '',
                         'name' => 'image',
                     ),
@@ -152,7 +152,7 @@ class Default_Category_Metadata_Category extends Qwin_Trex_Metadata
                     'form' => array(
                         '_type' => 'text',
                         '_typeExt' => 'fileTree',
-                        '_icon' => 'ajaxUpload',
+                        '_button' => 'ajaxUpload',
                         '_value' => '',
                         'name' => 'image_2',
                     ),

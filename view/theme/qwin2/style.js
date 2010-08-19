@@ -44,6 +44,6 @@ jQuery(function($){
     $('a.ui-action-controller').button({icons: {primary: 'ui-icon-triangle-1-e'},text: false});
 
     // TODO 图片无效
-    //$('input.ui-action-submit').button({icons: {primary: 'ui-icon-check'}});
-    //$('input.ui-action-reset').button({icons: {primary: 'ui-icon-check'}});
+    $('button.ui-action-submit').button({icons: {primary: 'ui-icon-check'}});
+    $('button.ui-action-reset').button({icons: {primary: 'ui-icon-arrowreturnthick-1-w'}});
 });
