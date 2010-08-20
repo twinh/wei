@@ -59,8 +59,8 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
                 '_typeExt' => null,
                 '_resource' => null,
                 '_resourceGetter' => null,
-                '_button' => null,
-                '_buttonDetail' => array(),
+                '_widget' => null,
+                '_widgetDetail' => array(),
                 '_value' => '',
                 'name' => null,
                 'id' => null,
@@ -130,7 +130,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         }
 
         // 转换按钮
-        $metadata['form'] = $this->_parseButtonSetting($metadata['form']);
+        $metadata['form'] = $this->_parseWidgetSetting($metadata['form']);
         
         return $this->_multiArrayMerge($this->getSampleData(), $metadata);
     }
@@ -337,15 +337,26 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         return $this;
     }
 
-    public function _parseButtonSetting($form)
+    /**
+     * 微件缩写的对应列表
+     * @var array
+     * @todo 微件
+     */
+    protected $_widgetMap = array(
+        'fileTree' => 'Qwin_Widget_JQuery_FileTree',
+        'ajaxUpload' => 'Qwin_Widget_JQuery_AjaxUpload',
+    );
+
+    public function _parseWidgetSetting($form)
     {
-        !isset($form['_buttonDetail']) && $form['_buttonDetail'] = array();
-        if(isset($form['_button']))
+        !isset($form['_widgetDetail']) && $form['_widgetDetail'] = array();
+        if(isset($form['_widget']))
         {
             $newSetting = array();
-            !is_array($form['_button']) && $form['_button'] = array($form['_button']);
-            foreach($form['_button'] as $name => $setting)
+            !is_array($form['_widget']) && $form['_widget'] = array($form['_widget']);
+            foreach($form['_widget'] as $name => $setting)
             {
+                isset($this->_widgetMap[$setting]) && $setting = $this->_widgetMap[$setting];
                 /**
                  * 默认的生成方法是render
                  */
@@ -353,7 +364,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
                     array($setting, 'render')
                 );
             }
-            $form['_buttonDetail'] = array_merge($form['_buttonDetail'], $newSetting);
+            $form['_widgetDetail'] = array_merge($form['_widgetDetail'], $newSetting);
         }
         return $form;
     }

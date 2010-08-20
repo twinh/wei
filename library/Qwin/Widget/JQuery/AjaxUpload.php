@@ -25,7 +25,7 @@
  * @since       2010-08-20 10:51:21
  */
 
-class Qwin_Button_JQuery_ajaxUpload
+class Qwin_Widget_JQuery_ajaxUpload
 {
     public function __construct()
     {

@@ -82,7 +82,6 @@ class Default_Namespace extends Qwin_Trex_Namespace
 
             // 表单生成
             '-form' => 'Qwin_Form',
-            '-btn'  => 'Qwin_Form_Button',
 
             '-str'  => 'Qwin_converter_String',
         ));
@@ -90,13 +89,8 @@ class Default_Namespace extends Qwin_Trex_Namespace
         /**
          * 加载表单,按钮生成类
          */
-        // 表单基本类型,富文本编辑器, jQuery 相关的插件
         Qwin::run('-form')
-            ->add('Qwin_Form_Element_Base')
-            ->addExt('Qwin_Form_ElementExt_Editor')
-            ->addExt('Qwin_Form_ElementExt_JQuery');
-        // 部分常用按钮
-        Qwin::run('-btn')->add('Qwin_Form_Button_JQuery');
+            ->add('Qwin_Form_Element_Base');
 
         /**
          * 数据库链接,使用的是Doctrine Orm

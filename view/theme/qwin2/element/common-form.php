@@ -78,7 +78,7 @@ var validator_rule = <?php echo $validator_rule?>;
             <tr class="ui-block-<?php echo $type ?>">
               <td class="ui-label-common"><label for="<?php echo $relatedField[$fieldName]['form']['id'] ?>"><?php echo qw_lang($field) ?>:</label></td>
               <td class="ui-field-common ui-field-<?php echo $type ?>" colspan="3">
-                <?php echo qw_form($relatedField[$fieldName]['form'], $data) , qw_button($relatedField[$fieldName]['form'], $data) ?>
+                <?php echo qw_form($relatedField[$fieldName]['form'], $data) , qw_widget($relatedField[$fieldName]['form'], $data) ?>
               </td>
             </tr>
             <?php endforeach; ?>
