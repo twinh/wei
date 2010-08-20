@@ -1,6 +1,6 @@
 <?php
 /**
- * 通用分类的表单扩展
+ * Widget
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,22 +17,31 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Form
+ * @subpackage  Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2009-11-21 13:18
+ * @since       2010-08-20 15:26:25
+ * @todo        形成一个规范的体系
  */
 
-
-class Qwin_Form_ElementExt_CommonClass extends Qwin_Form
+class Qwin_Widget
 {
-    
-    public function commonClassAutoType($pub_set, $pri_set, $value, $data)
+    public function __construct()
     {
-        require 'QwinView/Form/CommonClassAutoType.php';
         
-        return $data;
+    }
+
+    function render($meta)
+    {
+        $retult = '';
+        foreach($meta['_widget'] as $widgetSetting)
+        {
+            // 增加默认参数
+            $widgetSetting[] = $meta;
+            $retult .= Qwin::callByArray($widgetSetting);
+        }
+        return $retult;
     }
 }

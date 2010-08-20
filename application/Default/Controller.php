@@ -77,8 +77,6 @@ class Default_Controller extends Qwin_Trex_Controller
             $this->_meta = Qwin::run($metadataName);
         }
         Qwin::addMap('-meta', $metadataName);
-        // 语言转换
-        //$this->_meta->translate($this->_lang);
 
         /**
          * 加载模型
@@ -393,7 +391,7 @@ class Default_Controller extends Qwin_Trex_Controller
              */
             if(false == $result)
             {
-                return $this->setView('alert', 'MSG_NO_RECORD');
+                return $this->setView('alert', $this->_lang->t('MSG_NO_RECORD'));
             }
 
             /**
@@ -413,7 +411,40 @@ class Default_Controller extends Qwin_Trex_Controller
                 'data' => get_defined_vars(),
             );
         } else {
-            p($_POST);exit;
+            // 检查记录是否存在
+            // 根据url参数中的值,获取对应的数据库资料
+            $id = $this->_request->p($meta['db']['primaryKey']);
+            $query = $query->where($meta['db']['primaryKey'] . ' = ?', $id)->fetchOne();
+            if(false == $query)
+            {
+                return $this->setView('alert', $this->_lang->t('MSG_NO_RECORD'));
+            }
+
+            /**
+             * POST 操作下,设置action为db
+             * 转换数据
+             * 验证数据
+             * 填充数据到模型中
+             * 保存数据
+             */
+            $this->setAction('db');
+            $relatedField = $meta->connectRelatedMetadata($this->_meta);
+            $data = $this->_meta->convertSingleData($relatedField, 'db', $_POST);
+            $this->_meta->validateData($relatedField, $data);
+            p($data);exit;
+            $query = $this->_meta->fillData($meta, $query, $data);
+            $query->save();
+
+            // 在数据库操作之后,执行相应的 on 函数
+            $this->executeOnFunction('afterDb', $this->resetAction(), $data);
+            $url = urldecode($this->_request->p('_page'));
+            if($url)
+            {
+                Qwin::run('-url')->to($url);
+            } else {
+                Qwin::run('-url')->to(url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'])));
+            }
+
         }
 
         
@@ -666,7 +697,7 @@ class Default_Controller extends Qwin_Trex_Controller
      */
     public function convertDbDateCreated($value, $name, $data, $copyData)
     {
-        return date('Y-m-d H:i:s', TIMESTAMP);
+        return date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
     }
 
     /**
@@ -680,7 +711,7 @@ class Default_Controller extends Qwin_Trex_Controller
      */
     public function convertDbDateModified()
     {
-        return date('Y-m-d H:i:s', TIMESTAMP);
+        return date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
     }
 
     /**
