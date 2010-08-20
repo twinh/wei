@@ -189,7 +189,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
                 $field['form']['_oldName'] = $field['form']['name'];
                 $field['form']['_arrayName'] = $model['asName'] . '[' . $field['form']['name'] . ']';
                 $field['form']['name'] = $model['asName'] . '_' . $field['form']['name'];
-                if(!isset($field['form']['id']))
+                if($field['form']['_oldName'] == $field['form']['id'])
                 {
                     $field['form']['id'] = str_replace('_', '-', $field['form']['name']);
                 }
@@ -198,6 +198,27 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             $mainMetaField->addData($tmpMeta);
         }
         return $mainMetaField;
+    }
+
+    /**
+     * 计算两个数组的交集,键名来自第一个数组,值来自第二个数组
+     *
+     * @param array $array1 第一个参数数组
+     * @param array $array2
+     * @return array
+     */
+    public function intersect($array1, $array2)
+    {
+        foreach($array1 as $key)
+        {
+            if(isset($array2[$key]))
+            {
+                $array1[$key] = $array2[$key];
+            } else {
+                $array1[$key] = null;
+            }
+        }
+        return $array1;
     }
 
     /**
@@ -479,21 +500,6 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         return $this;
     }
 
-    public function getShowMetadata(Qwin_Metadata $meta, Doctrine_Record $record)
-    {
-        foreach($meta['field'] as &$field)
-        {
-            if(false == $field['attr']['isShow'])
-            {
-                unset($field);
-                continue;
-            }
-            
-        }
-        $showField = $meta->field->getAttrList('isSqlQuery', 'isShow');
-        p($showField);exit;
-    }
-
     public function setLang($lang = null)
     {
         if(null == $lang)
@@ -587,54 +593,31 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     }
 
     /**
-     * 填充数据到模型中
-     * 如果未设置某字段的值,表示不更改
-     * 如果设置了某字段的值,且为null,对应数据库的null
-     * 其他值对应其他值.
-     * @todo isset == false 的变量,如何知道是否为false.
+     * 还原一维数组为二维数组
+     *
+     * @param object $meta 转换过的元数据
+     * @param array $data 入库数据
+     * @return 新数据
      */
-    public function fillData($meta, $query, $data)
+    public function restoreData($meta, $data)
     {
-        $gpc = Qwin::run('-gpc');
-        $dbData = array();
-        foreach($meta['field'] as $fieldName => $field)
+        $newData = array();
+        foreach($meta as $key => $field)
         {
-            if(isset($data[$fieldName]))
+            if(!isset($data[$key]))
             {
-                if('null' == $data[$fieldName])
-                {
-                    $data[$fieldName] = null;
-                }
-                // 主元数据
-                if(!isset($field['form']['_old_name']))
-                {
-                    $field['list']['isSqlField'] && $query[$fieldName] = $data[$fieldName];
-                // 关联元数据
-                } else {
-                    //p($this->_foreignKey);
-                    // 强制外键的值和主键一致,主要用于Edit操作
-                    if(in_array($fieldName, $this->_foreignKey))
-                    {
-                        $data[$fieldName] = $data[$meta['db']['primaryKey']];
-                    }
-                    $modelName = str_replace('_' .$field['form']['_old_name'], '', $fieldName);
-                    // 一对一,有时另一个表没有对应数据,需要初始化该对象
-                    // TODO 使用 fromArray
-                    if(!isset($query[$modelName]))
-                    {
-                        foreach($meta['model'] as $model)
-                        {
-                            if($modelName == $model['asName'])
-                            {
-                                $query[$modelName] = new $model['name'];
-                            }
-                        }
-                    }
-                    $query[$modelName][$field['form']['_old_name']] = $data[$fieldName];
-                }
+                continue;
+            }
+            if(!isset($field['form']['_oldName']))
+            {
+                $newData[$key] = $data[$key];
+            } else {
+                $modelName = str_replace('_' .$field['form']['_oldName'], '', $key);
+                !isset($newData[$modelName]) && $newData[$modelName] = array();
+                $newData[$modelName][$field['form']['_oldName']] = $data[$key];
             }
         }
-        return $query;
+        return $newData;
     }
 
     /**
@@ -705,55 +688,6 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     }
 
     /**
-     * 翻译元数据中的名称
-     * @param array $set 元数据
-     * @param array $lang 语言数据
-     * @return array 元数据
-     */
-    public function convertLang($set, $lang, $addTitle = false)
-    {
-        if(!isset($set['field']))
-        {
-            return $set;
-        }
-        foreach($set['field'] as &$val)
-        {
-            // 转换字段名称
-            isset($lang[$val['basic']['title']])
-            && $val['basic']['title'] = $lang[$val['basic']['title']];
-
-            // 转换分组名称
-            if(isset($val['basic']['group']) && empty($val['basic']['group']))
-            {
-                $val['basic']['group'] = 'LBL_GROUP_BASIC_DATA';
-            }
-            isset($lang[$val['basic']['group']])
-            && $val['basic']['group'] = $lang[$val['basic']['group']];
-
-            // TODO 转换描述,不应该给转换数据结构
-            if(isset($val['basic']['descrip']) && !empty($val['basic']['descrip']))
-            {
-                if(!is_array($val['basic']['descrip']))
-                {
-                    $val['basic']['descrip'] = array($val['basic']['descrip']);
-                }
-                foreach($val['basic']['descrip'] as &$descrip)
-                {
-                    isset($lang[$descrip]) && $descrip = $lang[$descrip];
-                }
-            }
-
-            // 添加模块标题在字段标题之前
-            //true == $addTitle
-            //&& isset($lang[$set['page']['title']])
-            //&& $val['basic']['title'] = $lang[$set['page']['title']] . '- ' . $val['basic']['title'];
-        }
-        isset($lang[$set['page']['title']])
-        && $set['page']['title'] = $lang[$set['page']['title']];
-        return $set;
-    }
-
-    /**
      * 翻译单独一个代号
      * @param string $code 要翻译的代号
      * @return string 如果存在该代号,返回翻译值,否则返回原代号
@@ -766,52 +700,6 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             return $this->langData[$code];
         }
         return $code;
-    }
-
-    // 获得模型指定类型的值
-    public function getSettingValue($set, $type)
-    {
-        $data = array();
-        foreach($set as $val)
-        {
-            $data[$val['form']['name']] = Qwin::run('-str')->set($val[$type[0]][$type[1]]);
-        }
-        return $data;
-    }
-
-    /*
-    *  根据提供的2, 3参数,在模型配置数组中, 筛选出合适的 list 属性的值
-    *
-    * @param $set array 模型配置数组的field属性数组
-    * @param $allow_attr array 搜索list中值为true的属性
-    * @param $ban_attr array 搜索list中值为false的属性
-    * @todo 直接提供 temp_arr 参数比较
-    */
-    public function getSettingList($set, $allow_attr = array(), $ban_attr = array())
-    {
-        $allow_attr = Qwin::run('-arr')->set($allow_attr);
-        $ban_attr = Qwin::run('-arr')->set($ban_attr);
-
-        // 根据提供的 allow, ban 属性列表,生成比较的数组
-        $temp_arr = array();
-        foreach($allow_attr as $val)
-        {
-            $temp_arr[$val] = true;
-        }
-        foreach($ban_attr as $val)
-        {
-            $temp_arr[$val] = false;
-        }
-        $data = array();
-        foreach($set as $val)
-        {
-            if(true == Qwin::run('-arr')->isSubset($temp_arr, $val['attr']))
-            {
-                $data[$val['form']['name']] = $val['form']['name'];
-                //$data[] = $val['form']['name'];
-            }
-        }
-        return $data;
     }
 
     /**
@@ -850,43 +738,6 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     }
 
     /**
-     * 加载模型文件
-     *
-     * @param string $controller 控制器名称
-     * @param string $namespace 命名空间
-     */
-    public function loadSettingFile($controller, $namespace = 'default')
-    {
-        require_once QWIN_ROOT_PATH . Qwin::run('-str')->toPathSeparator('\app\\' . $namespace . '\setting\\' . $controller . '.php');
-        $name = 'Setting_' . $namespace . '_' . $controller;
-        $class = new $name;
-        return $class->setting();
-    }
-
-    /**
-     * 自动生成顺序值
-     *
-     * @param string $table 数据表名称
-     * @param string $field 顺序的字段名称
-     * @param int $increment 顺序增量
-     */
-    public function getInitalOrder($table, $field = 'order', $increment = 5, $where = null)
-    {
-        $mainModelName = Qwin::run('-ini')->getClassName('Model', Qwin::run('-c')->__query);
-        $query = $this->query[$mainModelName]
-            ->select('Max(`' .  $field . '`) as max_order');
-        if(null != $where)
-        {
-            call_user_func_array(array($query, 'where'), $where);
-        }
-        $data = $query
-            ->fetchOne()
-            ->toArray();
-        null == $data['max_order'] && $data['max_order'] = 0;
-        return null == $data['max_order'] ? $increment : $data['max_order'] + $increment;
-    }
-
-    /**
      * 增加点击
      *
      *
@@ -913,38 +764,6 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         return $data;
     }
 
-    /**
-     * 分组(主要用于 Add,Edit,Show)
-     *
-     * @todo custom 组
-     */
-    public function groupingSettingArr($field_arr)
-    {
-        $action = Qwin::run('-c')->__query['action'];
-        $new_arr = array();
-        foreach($field_arr as $key => $val)
-        {
-            !isset($val['basic']['group']) && $val['basic']['group'] = '';
-            // TODO array('List' => true, 'Edit' => true, 'Add' => false ?
-            if('Edit' == $action || 'Add' == $action)
-            {
-                if('custom' == $val['form']['_type'])
-                {
-                    $new_arr['_custom'][$key] = $val;
-                } else {
-                    $new_arr[$val['basic']['group']][$key] = $val;
-                }
-            } else {
-                if(isset($val['list']['isShow']) && false == $val['list']['isShow'])
-                {
-                    $new_arr['_custom'][$key] = $val;
-                } else {
-                    $new_arr[$val['basic']['group']][$key] = $val;
-                }
-            }
-        }
-        return $new_arr;
-    }
 
     // TODO !!
     public function convertUrlQuery2($data, $sql_data)

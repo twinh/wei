@@ -300,6 +300,25 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         return $groupList;
     }
 
+    public function getAddGroupList()
+    {
+        $groupList = array();
+        foreach($this->_data as $field => $data)
+        {
+            if('custom' == $data['form']['_type'])
+            {
+                continue;
+            }
+
+            if(!isset($groupList[$data['basic']['group']]))
+            {
+                $groupList[$data['basic']['group']] = array();
+            }
+            $groupList[$data['basic']['group']][$field] = $data['basic']['title'];
+        }
+        return $groupList;
+    }
+
     public function getEditGroupList()
     {
         $groupList = array();
@@ -345,8 +364,16 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
     protected $_widgetMap = array(
         'fileTree' => 'Qwin_Widget_JQuery_FileTree',
         'ajaxUpload' => 'Qwin_Widget_JQuery_AjaxUpload',
+        'CKEditor' => 'Qwin_Widget_Editor_CKEditor',
+        'datepicker' => 'Qwin_Widget_JQuery_Datepicker'
     );
 
+    /**
+     * 将微件配置转换为完整配置
+     *
+     * @param array $form
+     * @return array
+     */
     public function _parseWidgetSetting($form)
     {
         !isset($form['_widgetDetail']) && $form['_widgetDetail'] = array();
@@ -367,5 +394,15 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
             $form['_widgetDetail'] = array_merge($form['_widgetDetail'], $newSetting);
         }
         return $form;
+    }
+
+    public function getSecondLevelValue($type)
+    {
+        $newData = array();
+        foreach($this->_data as $data)
+        {
+            $newData[$data['form']['name']] = $data[$type[0]][$type[1]];
+        }
+        return $newData;
     }
 }

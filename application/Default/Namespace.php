@@ -135,34 +135,4 @@ class Default_Namespace extends Qwin_Trex_Namespace
         echo $output;
         unset($output);
     }
-
-    /*
-    public function afterLoad($set = null, $config = null)
-    {
-        $controller = Qwin::run('-c');
-
-        $js_lang = 'Qwin.Lang = ';
-        $js_lang .= Qwin::run('-arr')->toJsObject($controller->lang);
-        $js_lang .= ';';
-        Qwin::run('-js')->addJs('lang', $js_lang);
-        $output = ob_get_contents();
-        '' != $output && ob_end_clean();
-        $html = Qwin::run('-html')->packAll();
-        $js =  Qwin::run('-js')->packAll();
-        $css = Qwin::run('-css')->packAll();
-        $output = str_replace(
-            array('<!--{CSS}-->', '<!--{JS}-->'),
-            array($css, $html . $js),
-            $output
-        );
-        echo $output;
-        unset($output);
-    }
-*/
-    /**
-     * 加载语言
-     * @param array $set
-     * @param array $cofig
-     */
-/*    */
 }

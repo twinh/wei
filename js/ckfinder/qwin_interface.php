@@ -4,7 +4,7 @@
  
  TODO 验证时效
 */
-class QWin_CKFinder_Interface
+class Qwin_CKFinder_Interface
 {
 	private $_upload_path;
 	private $_is_checked;

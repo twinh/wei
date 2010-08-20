@@ -220,60 +220,8 @@ class Default_Controller extends Qwin_Trex_Controller
     /**
      * 添加记录
      */
-    public function actionAdd()
+    public function actionAdd2()
     {
-        
-        /*$query = $this->_meta->getDoctrineQuery($this->_set);
-
-        $modelName = $this->_meta->getClassName('Model', $this->_set);
-        $query = new $modelName;
-
-        $data = array(
-            'id' => 'test',
-            'category_id' => '21ef9f4c-878f-46b2-ba45-78b1a80614f2',
-            'category_2' => '',
-            'category_3' => '',
-            'title' => 'Another event',
-            'fff' => 'fsd',
-            'detail' => array(
-                'id' => 'test-conte',
-                'article_id' => 'test',
-                'content' => 'content',
-                'meta' => 'meta',
-                'lll' => 'lll',
-            )
-        );
-        $query->fromArray($data);
-
-        p($query);*/
-
-   /* [author] =>
-    [jump_to_url] =>
-    [thumb] =>
-    [hit] => 2
-    [page_name] =>
-    [template] =>
-    [is_posted] => 2001001
-    [is_index] => 2001001
-    [content_preview] =>
-    [order] => 75
-        );
-(
-
-    [detail] => Array
-        (
-            [id] => 36de3362-1748-48ab-8f08-666d7a7c8b58
-            [article_id] => 9c95c971-1602-4d36-91be-d039e20ee49e
-            [content] =>
-            [meta] =>
-        )
-
-)*/
-
-        
-        //$a = $query->fetchOne()->toArray();
-        //p($a);
-        //var_dump($q);
         exit;
         $ini = Qwin::run('-ini');
         $meta = &$this->_meta;
@@ -366,6 +314,62 @@ class Default_Controller extends Qwin_Trex_Controller
         }
     }
 
+    public function actionAdd()
+    {
+        /**
+         * 初始化常用的变量
+         */
+        $meta = $this->_meta;
+        $primaryKey = $meta['db']['primaryKey'];
+        $id = $this->_request->g($primaryKey);
+        $query = $meta->getDoctrineQuery($this->_set);
+        $relatedField = $meta->connectRelatedMetadata($this->_meta);
+
+        if(empty($_POST))
+        {
+            /**
+             * 三种模式　
+             * 1.复制,根据主键从模型获取初始值
+             * 2.从url获取值
+             * 3. 获取模型默认值
+             */
+            if(null != $id)
+            {
+                $result = $query->where($primaryKey . ' = ?', $id)->fetchOne();
+                if(false == $result)
+                {
+                    return $this->setView('alert', $this->_lang->t('MSG_NO_RECORD'));
+                }
+                $data = $result->toArray();
+            } else {
+                /**
+                 * 从配置元数据中取出表单初始值,再从url地址参数取出初始值,覆盖原值
+                 */
+                $data = $meta->field->getSecondLevelValue(array('form', '_value'));
+                //$data = Qwin::run('-url')->getInitalData($data);
+            }
+            unset($data[$primaryKey]);
+
+            /**
+             * 处理数据
+             */
+            $data = $meta->convertDataToSingle($data);
+            $data = $meta->convertSingleData($relatedField, $this->_set['action'], $data);
+            $relatedField->order();
+            $groupList = $relatedField->getAddGroupList();
+
+            /**
+             * 设置视图
+             */
+            $this->_view = array(
+                'class' => 'Default_Common_View_Form',
+                'data' => get_defined_vars(),
+            );
+        } else {
+            p($_POST);
+        }
+    }
+
     /**
      * 编辑记录
      */
@@ -382,13 +386,9 @@ class Default_Controller extends Qwin_Trex_Controller
         if(null == $this->_request->p($meta['db']['primaryKey']))
         {
             /**
-             * 从模型获取数据
+             * 从模型获取数据,如果记录不存在,加载错误视图
              */
             $result = $query->where($primaryKey . ' = ?', $id)->fetchOne();
-
-            /**
-             * 记录不存在,加载错误视图
-             */
             if(false == $result)
             {
                 return $this->setView('alert', $this->_lang->t('MSG_NO_RECORD'));
@@ -411,8 +411,9 @@ class Default_Controller extends Qwin_Trex_Controller
                 'data' => get_defined_vars(),
             );
         } else {
-            // 检查记录是否存在
-            // 根据url参数中的值,获取对应的数据库资料
+            /**
+             * 检查记录是否存在
+             */
             $id = $this->_request->p($meta['db']['primaryKey']);
             $query = $query->where($meta['db']['primaryKey'] . ' = ?', $id)->fetchOne();
             if(false == $query)
@@ -421,148 +422,38 @@ class Default_Controller extends Qwin_Trex_Controller
             }
 
             /**
-             * POST 操作下,设置action为db
-             * 转换数据
-             * 验证数据
-             * 填充数据到模型中
-             * 保存数据
+             * 设置行为为入库,连接元数据
              */
             $this->setAction('db');
-            $relatedField = $meta->connectRelatedMetadata($this->_meta);
-            $data = $this->_meta->convertSingleData($relatedField, 'db', $_POST);
-            $this->_meta->validateData($relatedField, $data);
-            p($data);exit;
-            $query = $this->_meta->fillData($meta, $query, $data);
-            $query->save();
-
-            // 在数据库操作之后,执行相应的 on 函数
-            $this->executeOnFunction('afterDb', $this->resetAction(), $data);
-            $url = urldecode($this->_request->p('_page'));
-            if($url)
-            {
-                Qwin::run('-url')->to($url);
-            } else {
-                Qwin::run('-url')->to(url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'])));
-            }
-
-        }
-
-        
-
-        
-        /*
-        $query = $this->_meta->getDoctrineQuery($this->_set);
-
-
-        $ini = Qwin::run('-ini');
-        $this->_request = Qwin::run('-gpc');
-        $meta = &$this->_meta;
-
-         * 加载关联模型,元数据
-         * 连接模型
-         * 连接元数据
-         *
-        $this->_meta->loadRelatedData($meta['model']);
-        $modelName = $ini->getClassName('Model', $this->__query);
-        $query = $this->_meta->connectModel($modelName, $meta['model']);
-        $meta = $this->_meta->connetMetadata($meta);
-
-        if(null == $this->_request->p($meta['db']['primaryKey']))
-        {
-            // 根据url参数中的值,获取对应的数据库资料
-            $id = $this->_request->g($meta['db']['primaryKey']);
-            $query = $query->where($meta['db']['primaryKey'] . ' = ?', $id)->fetchOne();
-            if(false == $query)
-            {
-                $this->Qwin_Helper_Js->show($this->t('MSG_NO_RECORD'));
-            }
-            p($query);exit;
-            $dbData = $query->toArray();
-            $dbData = $this->_meta->convertDataToSingle($dbData);
-
-            // 根据配置和控制器中的对应方法转换数据
-            $dbData = $this->_meta->convertSingleData($meta['field'], $this->__query['action'], $dbData);
-
-            $tip_data = $this->_meta->getTipData($meta['field']);
-
-            // 获取 jQuery Validate 的验证规则
-            $validator_rule = Qwin::run('Qwin_JQuery_Validator')->getRule($meta['field']);
-
-
-
-
-            // 排序
-            $meta['field'] = $this->_meta->orderSettingArr($meta['field']);
-
-            /*$groupSet = array();
-            // 取出所有的分组
-            foreach($meta['field'] as $field)
-            {
-                !isset($field['basic']['group']) && $field['basic']['group'] = 'LBL_GROUP_BASIC_DATA';
-            }
-            if('custom' == $field['form']['_type'])
-            {
-                $new_arr['_custom'][$key] = $val;
-            } else {
-                $new_arr[$val['basic']['group']][$key] = $val;
-            }
-
-
-      
-            p($this->_meta->createLayoutArr($meta['field']));
-            exit;
-
-            // 分组
-            $meta['field'] = $this->_meta->groupingSettingArr($meta['field']);
-
-            // 初始化视图变量数组
-            $this->__view = array(
-                'set' => &$meta,
-                'data' => $dbData,
-                'tip_data' => &$tip_data,
-                'tip_name' => &$tip_name,
-                'validator_rule' => &$validator_rule,
-                'http_referer' => urlencode(Qwin::run('-str')->set($_SERVER['HTTP_REFERER']))
-            );
-
-            // 初始化控制面板中心内容的视图变量数组,加载控制面板视图
-            $this->__view_element = array(
-                'content' => QWIN_RESOURCE_PATH . '/php/View/Element/DefaultForm.php',
-            );
-            $this->loadView($ini->load('Resource/View/Layout/DefaultControlPanel', false));
-        } else {
-            // 检查记录是否存在
-            // 根据url参数中的值,获取对应的数据库资料
-            $id = $this->_request->p($meta['db']['primaryKey']);
-            $query = $query->where($meta['db']['primaryKey'] . ' = ?', $id)->fetchOne();
-            if(false == $query)
-            {
-                $this->Qwin_Helper_Js->show($this->t('MSG_NO_RECORD'));
-            }
+            $relatedField = $meta->connectRelatedMetadata($meta);
 
             /**
-             * POST 操作下,设置action为db
-             * 转换数据
-             * 验证数据
-             * 填充数据到模型中
-             * 保存数据
-             
-            $this->setAction('db');
-            $data = $this->_meta->convertSingleData($meta['field'], $this->__query['action'], $_POST);
-            $this->_meta->validateData($meta['field'], $data);
-            $query = $this->_meta->fillData($meta, $query, $data);
-            $query->save();
+             * 取出需要入库的数据
+             */
+            $dblist = $relatedField->getAttrList(array('isSqlField'), array('isReadonly'));
+            $data = $meta->intersect($dblist, $_POST);
 
-            // 在数据库操作之后,执行相应的 on 函数
+            /**
+             * 转换,验证和还原
+             */
+            $data = $this->_meta->convertSingleData($relatedField, 'db', $_POST);
+            $this->_meta->validateData($relatedField, $data);
+            $data = $meta->restoreData($relatedField, $data);
+
+            /**
+             * 入库
+             */
+            $query->fromArray($data);
+            $query->save();
+            
+            /**
+             * 在数据库操作之后,执行相应的 on 函数,跳转到原来的页面或列表页
+             */
             $this->executeOnFunction('afterDb', $this->resetAction(), $data);
             $url = urldecode($this->_request->p('_page'));
-            if($url)
-            {
-                Qwin::run('-url')->to($url);
-            } else {
-                Qwin::run('-url')->to(url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'])));
-            }
-        }*/
+            '' == $url && $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Default'));
+            $this->setView('alert', $this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+        }
     }
 
     /**
@@ -668,8 +559,13 @@ class Default_Controller extends Qwin_Trex_Controller
      */
     public function convertAddOrder($value, $name, $data, $copyData)
     {
-        $class = Qwin::run('-ini')->getClassName('Model', $this->__query);
-        return $this->_meta->getInitalOrder($class);
+        $query = $this->_meta->getDoctrineQuery($this->_set);
+        $result = $query->select('Max(`order`) as max_order')->fetchOne();
+        if(false != $result)
+        {
+            return $result['max_order'];
+        }
+        return 0;
     }
 
     /**

@@ -72,7 +72,7 @@ class Default_Article_Metadata_Detail extends Default_Metadata
                     ),
                     'form' => array(
                         '_type' => 'textarea',
-                        '_typeExt' => 'ckeditor',
+                        '_widget' => 'CKEditor',
                         'name' => 'content',
                     ),
                     'attr' => array(
