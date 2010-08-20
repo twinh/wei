@@ -154,7 +154,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
                         '_typeExt' => 'fileTree',
                         '_button' => array(
                             'Qwin_Button_JQuery_fileTree',
-                            'ajaxUpload',
+                            'Qwin_Button_JQuery_ajaxUpload',
                         ),
                         '_buttonDetail' => array(
                             array(

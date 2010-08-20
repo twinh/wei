@@ -37,21 +37,23 @@ class Qwin_Button_JQuery_FileTree
         $jquery = Qwin::run('Qwin_Resource_JQuery');
         $buttonId = 'ui-button-filetree-' . $meta['name'];
 
+        $ajaxButtonId = 'ui-button-ajaxupload-' . $meta['name'];
+
         $code = $jquery->loadUi('position')
             . $jquery->loadUi('dialog')
             . $jquery->loadPlugin('qfiletree')
-            . '<button id="' . $buttonId . '" type="button">' . $meta['name'] . '</button>
+            . '<button id="' . $buttonId . '" type="button"><span class="ui-icon ui-icon-image">' . $meta['name'] . '</span></button>
               <script type="text/javascript">jQuery(function($){
                 $("#' . $buttonId . '").QFileTree({
                     input : "#' . $meta['name'] . '",
                     filetree : {
                         dblClickFolder : function(path){
                             $("#qfiletree_dialog").dialog("close");
-                            $("#ajax_upload_button_' . $meta['name'] . '").ajaxUpload({
+                            $("#' . $ajaxButtonId . '").ajaxUpload({
                                 input : "#' . $meta['name'] . '",
                                 path : path
                             });
-                            $("#ajax_upload_button_' . $meta['name'] . '").click();
+                            $("#' . $ajaxButtonId . '").click();
                         }
                     }
                 })});

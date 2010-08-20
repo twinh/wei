@@ -42,8 +42,14 @@ jQuery(function($){
     $('a.ui-action-delete').button({icons: {primary: 'ui-icon-trash'}});
     $('a.ui-action-return').button({icons: {primary: 'ui-icon-arrowthickstop-1-w'}});
     $('a.ui-action-controller').button({icons: {primary: 'ui-icon-triangle-1-e'},text: false});
-
-    // TODO 图片无效
     $('button.ui-action-submit').button({icons: {primary: 'ui-icon-check'}});
     $('button.ui-action-reset').button({icons: {primary: 'ui-icon-arrowreturnthick-1-w'}});
+
+    // 点击右下按钮,回到顶部
+    $('#ui-bottom-floating-botton').click(function(){
+        $('html, body').animate({
+            scrollTop: $("html").offset().top
+        }, 500);
+        return false;
+    })
 });

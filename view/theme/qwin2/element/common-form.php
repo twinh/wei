@@ -85,7 +85,7 @@ var validator_rule = <?php echo $validator_rule?>;
           </table>
         </fieldset>
         <?php endforeach; ?>
-            <div class="ui-operation-field" id="abc">
+            <div class="ui-operation-field">
             <button class="ui-action-submit" type="submit"><?php echo qw_lang('LBL_ACTION_SUBMIT') ?></button>
             <button class="ui-action-reset" type="reset"><?php echo qw_lang('LBL_ACTION_RESET') ?></button>
             <br />
@@ -103,6 +103,3 @@ var validator_rule = <?php echo $validator_rule?>;
     </div>
   </div>
 <script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH?>/js/other/form.js"></script>
-<script type="text/javascript">
-    jQuery('#abc').dialog();
-</script>

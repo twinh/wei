@@ -621,7 +621,7 @@ if(jQuery)(function($){
             // ajax upload 配置
             if(!o.ajaxupload) o.ajaxupload = {};
             // 上传地址
-            if(!o.ajaxupload.action) o.ajaxupload.action = '?namespace=Api&module=File&controller=Jquery&action=AjaxUpload';
+            if(!o.ajaxupload.action) o.ajaxupload.action = '?namespace=Default&module=File&controller=JQuery&action=AjaxUpload';
             if(!o.ajaxupload.responseType) o.ajaxupload.responseType = 'json';
             if(!o.ajaxupload.onComplete)
             {
@@ -634,7 +634,7 @@ if(jQuery)(function($){
                         file = decodeURIComponent(response.file_name);
                         // TODO 完善类型检查
                         // 表单
-                        if('' != $(_this).attr('type'))
+                        if('text' == $(_this).attr('type'))
                         {
                             $(_this).val(file);
                         // 指定表单
