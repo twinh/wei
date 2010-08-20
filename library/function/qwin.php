@@ -72,10 +72,11 @@ function qw_widget($param, $param2 = null)
     return $widget->render($param, $param2);
 }
 
-function qw_url($array1, $array2 = null)
+function qw_url($array1 = null, $array2 = null)
 {
     static $url;
     null == $url && $url = Qwin::run('-url');
+    null == $array1 && $array1 = Qwin::run('-ini')->getSet();
     return $url->createUrl($array1, $array2);
 
 }
@@ -112,4 +113,10 @@ function qw_jquery()
             ->setUiVersion('1.8.4');
     }
     return $jquery;
+}
+
+function qw_referer_page($page = null)
+{
+    !isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] = $page;
+    return urlencode($_SERVER['HTTP_REFERER']);
 }

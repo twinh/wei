@@ -183,13 +183,6 @@ class Default_Article_Metadata_Article extends Default_Metadata
                 'template' => array(
                     'form' => array(
                         '_type' => 'text',
-                        '_typeExt' => array(
-                            'fileTree' => array(
-                                'filetree' => array(
-                                    'root' => 'Public/template/',
-                                )
-                            ),
-                        ),
                         'name' => 'template',
                     ),
                     'attr' => array(
@@ -252,6 +245,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
                 'order' => array(
                     'form' => array(
                         '_type' => 'text',
+                        '_value' => 0,
                         'name' => 'order',
                     ),
                     'attr' => array(

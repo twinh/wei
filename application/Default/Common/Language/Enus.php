@@ -91,7 +91,7 @@ class Default_Common_Language_Enus extends Default_Language
             'MSG_ERROR_MSG' => 'Error message: ',
             'MSG_ERROR_CAPTCHA' => 'Captcha error.',
             'MSG_NO_RECORD' => 'The record isn\'t exists or has been deleted.',
-            'MSG_OPERATED_SUCCESS' => 'Operated success!',
+            'MSG_OPERATE_SUCCESSFULLY' => 'Operate successfully!',
             'MSG_FUNCTION_DEVELOPTING' => 'The function is developing.',
 
             'LBL_HTML_TITLE' => 'Content Management System - Powered by Qwin Framework',
@@ -99,3 +99,4 @@ class Default_Common_Language_Enus extends Default_Language
         );
     }
 }
+//

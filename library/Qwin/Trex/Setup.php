@@ -311,21 +311,42 @@ class Qwin_Trex_Setup
         return false;
     }
 
-    protected function _onNamespaceLoad(Qwin_Trex_Namespace $namespace)
+    /**
+     * 命名空间加载时执行该方法
+     *
+     * @param object|null $namespace
+     * @return boolen
+     */
+    protected function _onNamespaceLoad($namespace)
     {
         return false;
     }
 
-    protected function _onModuleLoad(Qwin_Trex_Module $module)
+    /**
+     * 模块加载时执行该方法
+     *
+     * @param object|null $module
+     * @return boolen
+     */
+    protected function _onModuleLoad($module)
     {
         return false;
     }
 
+    /**
+     * 控制器加载时,执行该方法
+     *
+     * @param object|null $controller
+     * @return boolen
+     */
     protected function _onControllerLoad(Qwin_Trex_Controller $controller)
     {
         return false;
     }
 
+    /**
+     * 输出调试信息
+     */
     public function debug()
     {
         $namesapce = null == $this->_namespace ? 'null' : get_class($this->_namespace);

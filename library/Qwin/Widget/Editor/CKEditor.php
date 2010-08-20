@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  
+ * @subpackage  Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,15 +25,31 @@
  * @since       2010-08-20 13:41:54
  */
 
-class Qwin_Form_Element_CKEditor
+class Qwin_Widget_Editor_CKEditor
 {
     public function __construct()
     {
         
     }
 
-    public function render()
+    public function render($meta)
     {
-        
+        $code = '<script type="text/javascript" src="' . QWIN_RESOURCE_PATH . '/js/ckeditor/ckeditor.js"></script>
+                 <script type="text/javascript" src="' . QWIN_RESOURCE_PATH . '/js/ckfinder/ckfinder.js"></script>
+                 <script type="text/javascript">
+                    var ckeditor = CKEDITOR.replace("' . $meta['id'] . '");
+                    CKFinder.SetupCKEditor(ckeditor, "' . QWIN_RESOURCE_PATH . '/js/ckfinder/" );
+                 </script>
+        ';
+
+        // 配置 CKFinder
+        require_once QWIN_RESOURCE_PATH . DS . 'js/ckfinder/qwin_interface.php';
+        $qwin_interface = new Qwin_CKFinder_Interface();
+        // TODO param 2 登陆的标准
+        $path = dirname($_SERVER['SCRIPT_NAME']) . '/upload/';
+        // $path = '/' . basename(QWIN_ROOT_PATH) . '/public/upload/';
+        $qwin_interface->setInterface($path, true);
+
+        return $code;
     }
 }

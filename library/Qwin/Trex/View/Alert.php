@@ -57,7 +57,7 @@ class Qwin_Trex_View_Alert extends Qwin_Trex_View
                 echo 'window.close();';
                 break;
             default :
-                echo 'window.location.href="' . $method . '";';
+                echo 'window.location.href="' . $data['method'] . '";';
                 break;
         }
         echo '</script>';
