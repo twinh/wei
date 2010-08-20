@@ -30,9 +30,9 @@
 
 // 防止直接访问导致错误
 !defined('QWIN_PATH') && exit('Forbidden');
-//qw('-rsc')->load('js/jquery/plugin/jqgrid/i18n/grid.locale-en');
-//qw('-rsc')->load('jquery/plugin/jqgrid');
 ?>
+<script type="text/javascript" src="../resource/js/jquery/plugin/jqgrid/i18n/grid.locale-en.js"></script>
+<?php echo $jquery->loadPlugin('jqgrid') ?>
 <div id="custom-jqgird-toolbar" class="ui-helper-hidden">
     &nbsp;<a class="action-add" href="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], 'Add'))?>"><?php echo $lang->t('LBL_ACTION_ADD')?></a>&nbsp;|&nbsp;
     <a class="action-edit" href="javascript:void(0)"><?php echo qw_lang('LBL_ACTION_EDIT') ?></a>&nbsp;|&nbsp;

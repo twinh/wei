@@ -400,7 +400,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
                     $method = $param[0];
                     $param[0] = $row[$name];
                     // TODO 静态调用和动态调用
-                    if(!is_object($method[0]) && !function_exists($method))
+                    if(!is_object($method[0]) && !function_exists($method[0]))
                     {
                         $method[0] = Qwin::run($method[0]);
                     }

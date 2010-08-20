@@ -42,6 +42,11 @@ a{
 	filter: alpha(opacity=90);
 	overflow: hidden;
 }
+/*
+#ui-top-floating-bar ul {
+    width:  950px;
+    margin: 0 auto;
+}*/
 /* 和下方设置足够大的距离,当链接的数目多至不只一行时,能够被正确隐藏 */
 #ui-top-floating-bar ul li{
 	height: 2em;

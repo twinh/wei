@@ -49,10 +49,11 @@ class Default_View extends Qwin_Trex_View
             return $this->_style;
         }
 
+        $session = Qwin::run('Qwin_Session');
         // 按优先级排列语言的数组
         $styleList = array(
             Qwin::run('Qwin_Request')->g('style'),
-            Qwin::run('Qwin_Session')->get('style'),
+            $session->get('style'),
             Qwin::run('-ini')->getConfig('interface.style'),
         );
         foreach($styleList as $val)
@@ -68,6 +69,7 @@ class Default_View extends Qwin_Trex_View
         {
             $style = Qwin::run('-ini')->getConfig('interface.style');
         }
+        $session->set('style', $style);
         return $this->_style = $style;
     }
 

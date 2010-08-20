@@ -47,9 +47,8 @@ class Project_Hepler_Category
         if(!isset($this->_fileCache[$name]))
         {
             // TODO 使用文件缓存
-            $this->_fileCache[$name] = Qwin::run('-c')
-                ->meta
-                ->getQuery($set)
+            $this->_fileCache[$name] = Qwin::run('-meta')
+                ->getDoctrineQuery($set)
                 ->execute()
                 ->toArray();
             /*
