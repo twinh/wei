@@ -3,8 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><?php echo qw_lang('LBL_HTML_TITLE') ?></title>
-<!--{JS}-->
-<!--{CSS}-->
+<link rel="stylesheet" type="text/css" href="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/qwin2/style.css" />
 <?php
 /*
 $ses = Qwin::run('-ses');
@@ -15,27 +14,20 @@ $qurl = array(
     'extension' => qw('-url')->extension,
 );*/
 $qurl = null;
-?>
-
-<link rel="stylesheet" type="text/css" href="../resource/view/theme/qwin2/style.css" />
-<?php
-
 $jquery = Qwin::run('-jquery');
-
 echo $jquery->loadTheme(),
     $jquery->loadCore(),
     $jquery->loadUi('core'),
     $jquery->loadUi('widget'),
     $jquery->loadUi('button'),
     $jquery->loadEffect('core'),
-    $jquery->loadPlugin('qui'),
-    $jquery->loadPlugin('jqgrid');
+    $jquery->loadPlugin('qui')
+    ;
 ?>
-<script type="text/javascript" src="../resource/js/qwin/common.js"></script>
-<script type="text/javascript" src="../resource/js/qwin/qwin.js"></script>
-<script type="text/javascript" src="../resource/js/qwin/url.js"></script>
-<script type="text/javascript" src="../resource/js/jquery/plugin/jqgrid/i18n/grid.locale-en.js"></script>
-<script type="text/javascript" src="../resource/view/theme/qwin2/style.js"></script>
+<script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH ?>/js/qwin/common.js"></script>
+<script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH ?>/js/qwin/qwin.js"></script>
+<script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH ?>/js/qwin/url.js"></script>
+<script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/qwin2/style.js"></script>
 </head>
 <body>
 <script type="text/javascript">
@@ -58,9 +50,6 @@ echo $jquery->loadTheme(),
         <li><a class="ui-anchor" href="#Administrator">Administrator</a></li>
         <li><a class="ui-anchor" href="#Administrator">Administrator</a></li>
         <li><a class="ui-anchor" href="#Article">Add Your Link</a></li>
-        <li><a class="ui-anchor" href="#Article"><span class="ui-icon ui-icon-carat-1-w"></span></a></li>
-        <li><a class="ui-anchor" href="#Article"><span class="ui-icon ui-icon-carat-1-e"></span></a></li>
-        <li><a class="ui-anchor" href="#Article"><span class="ui-icon ui-icon-close"></span></a></li>
     </ul>
 </div>
     <div id="ui-bottom-floating-botton" class="ui-bottom-floating-botton"><button><span class="ui-icon ui-icon-arrowthickstop-1-n"></span></button></div>
@@ -72,10 +61,6 @@ echo $jquery->loadTheme(),
     </div>
     <div class="ui-header-logo ui-widget-content"> <a href=""><?php echo qw_lang('LBL_QWIN') ?><sup><?php echo qw_lang('LBL_QWIN_VERSION') ?></sup></a> </div>
   </div>
-  <script type="text/javascript">
-var validator_rule = {"title":{"required":true,"maxlength":200}};
-
-</script>
 <?php
 require $this->getElement('content');
 ?>
