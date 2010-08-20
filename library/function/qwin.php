@@ -65,11 +65,11 @@ function qw_form($param, $param2 = null)
     return $form->render($param, $param2);
 }
 
-function qw_button($param, $param2 = null)
+function qw_widget($param, $param2 = null)
 {
-    static $button;
-    null == $button && $button = Qwin::run('Qwin_Form_Button');
-    return $button->render($param, $param2);
+    static $widget;
+    null == $widget && $widget = Qwin::run('Qwin_Widget');
+    return $widget->render($param, $param2);
 }
 
 function qw_url($array1, $array2 = null)

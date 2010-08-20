@@ -116,4 +116,45 @@ class Qwin_Form_ElementExt_JQuery extends Qwin_Form
         //echo 'combobox';
         return $data;
     }
+
+    public function fastCopy($type_set, $set)
+    {
+        /*$self = Qwin::run('-c');
+        $name = $set['name'];
+        $id = 'icon-button-fastcopy-' . $set['name'];
+        qw('-rsc')->load('jquery/plugin/fastcopy');
+
+        $html = '<a class="ui-state-default ui-corner-all icon-button-common" id="' . $id . '" href="javascript:void(0)">
+                <span class="ui-icon ui-icon-info"></span>
+                </a>';
+        $code = '$("#' . $id . '").click(function(){
+    $("#' . $name . '").FastCopy(' . qw('-arr')->toJsObject($type_set) . ');
+});';
+        $self->__js->addJq($set['name'], $code);
+        return $html;
+         *
+         */
+    }
+
+    public function qthmb($type_set, $set)
+    {
+        $self = qw('-ini')->getThis();
+        $name = $set['name'];
+        $id = 'icon-button-qthmb-' . $set['name'];
+        qw('-rsc')->load('jquery/plugin/fastcopy');
+
+        $html = '<a class="ui-state-default ui-corner-all icon-button-common" id="' . $id . '" href="javascript:void(0)">
+                <span class="ui-icon ui-icon-info"></span>
+                </a>';
+        $code = '$("#' . $id . '").QThumb({
+    input : "#' . $name . '"
+});';
+        $self->__js->addJq($set['name'], $code);
+        return $html;
+    }
+
+    public function captcha($set, $type_set)
+    {
+        require 'QwinView/Button/Capcha.php';
+    }
 }
