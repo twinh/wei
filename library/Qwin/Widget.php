@@ -36,7 +36,7 @@ class Qwin_Widget
     function render($meta)
     {
         $retult = '';
-        foreach($meta['_widget'] as $widgetSetting)
+        foreach($meta['_widgetDetail'] as $widgetSetting)
         {
             // 增加默认参数
             $widgetSetting[] = $meta;
