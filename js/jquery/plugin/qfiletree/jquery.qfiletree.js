@@ -156,7 +156,7 @@ if(jQuery)(function($){
 			{
 				o.seleted = function(file)
 				{
-					if(undefined != $(_this).attr('type'))
+					if('text' == $(_this).attr('type'))
 					{
 						$(_this).val(file);
 					// 指定表单
@@ -180,7 +180,7 @@ if(jQuery)(function($){
 			
 			// filetree 配置
 			if(!o.filetree) o.filetree = {};
-			if(!o.filetree.root) o.filetree.root = 'Public/upload/';
+			if(!o.filetree.root) o.filetree.root = 'upload/';
 			if(!o.filetree.script) o.filetree.script = '?namespace=Default&module=File&controller=JQuery&action=FileTree';
 			if(!o.filetree.dblClickFolder)
 			{

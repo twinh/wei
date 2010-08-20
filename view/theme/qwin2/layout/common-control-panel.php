@@ -63,7 +63,7 @@ echo $jquery->loadTheme(),
         <li><a class="ui-anchor" href="#Article"><span class="ui-icon ui-icon-close"></span></a></li>
     </ul>
 </div>
-<div id="ui-bottom-floating-botton" class="ui-bottom-floating-botton"><a class="ui-anchor" href="#"><span class="ui-icon ui-icon-arrowthickstop-1-n"></span></a></div>
+    <div id="ui-bottom-floating-botton" class="ui-bottom-floating-botton"><button><span class="ui-icon ui-icon-arrowthickstop-1-n"></span></button></div>
 <div id="ui-main" class="ui-main ui-widget-content ui-corner-all">
   <div id="ui-header" class="ui-header ui-widget">
     <div class="ui-header-shortcut" id="ui-header-shortcut">

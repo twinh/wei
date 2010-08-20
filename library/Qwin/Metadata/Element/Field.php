@@ -123,6 +123,12 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
             $metadata['basic']['order'] = (int)$metadata['basic']['order'];
         }
 
+        // 设置编号
+        if(!isset($metadata['form']['id']))
+        {
+            $metadata['form']['id'] = $metadata['form']['name'];
+        }
+
         // 转换按钮
         $metadata['form'] = $this->_parseButtonSetting($metadata['form']);
         
