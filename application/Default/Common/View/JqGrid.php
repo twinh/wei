@@ -40,6 +40,7 @@ class Default_Common_View_JqGrid extends Default_View
          */
         $primaryKey = $this->primaryKey;
         $meta = $this->meta;
+        $relatedField = $this->relatedField;
         $arrayHelper = Qwin::run('-arr');
         $request = Qwin::run('Qwin_Request');
         $lang = Qwin::run('-lang');
@@ -55,9 +56,10 @@ class Default_Common_View_JqGrid extends Default_View
         // 获取栏数据
         $columnName = array();
         $columnSetting = array();
+
         foreach($this->listField as $field)
         {
-            $columnName[] = $lang->t($meta['field'][$field]['basic']['title']);
+            $columnName[] = $lang->t($relatedField[$field]['basic']['title']);
             $columnSetting[] = array(
                 'name' => $field,
                 'index' => $field,

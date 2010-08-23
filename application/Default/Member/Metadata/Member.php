@@ -26,44 +26,17 @@
  * @since     2010-5-13 10:19:22 utf-8 中文
  */
 
-class Default_Member_Metadata_Member extends Qwin_Trex_Metadata
+class Default_Member_Metadata_Member extends Default_Metadata
 {
-    public function defaultMetadata()
+    public function  __construct()
     {
-        return array(
+        parent::setIdMetadata();
+        $this->parseMetadata(array(
             // 基本属性
             'field' => array(
-                'id' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_ID',
-                        'descrip' => '',
-                        'order' => 0,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
-                    'form' => array(
-                        '_type' => 'hidden',
-                        '_typeExt' => '',
-                        '_value' => '',
-                        'name' => 'id',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
-                    ),
-                ),
                 'group_id' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_GROUP_ID',
-                        'descrip' => '',
-                        'order' => 0,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
                         '_type' => 'select',
-                        '_typeExt' => '',
-                        '_value' => '',
                         '_resourceGetter' => array(
                             array('Project_Hepler_Category', 'getTreeResource'),
                             array(
@@ -75,12 +48,6 @@ class Default_Member_Metadata_Member extends Qwin_Trex_Metadata
                             array('id', NULL, 'name')
                         ),
                         'name' => 'group_id',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
                     ),
                     'converter' => array(
                         'attr' => array(
@@ -96,23 +63,10 @@ class Default_Member_Metadata_Member extends Qwin_Trex_Metadata
                     ),
                 ),
                 'username' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_USERNAME',
-                        'descrip' => '',
-                        'order' => 5,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
-                        '_type' => 'text',
-                        '_typeExt' => '',
-                        '_value' => '',
                         'name' => 'username',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
                         'isReadonly' => 1,
                     ),
                     'validator' => array(
@@ -123,28 +77,18 @@ class Default_Member_Metadata_Member extends Qwin_Trex_Metadata
                     ),
                 ),
                 'password' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_PASSWORD',
-                        'descrip' => '',
-                        'order' => 10,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
-                        '_type' => 'text',
-                        '_typeExt' => '',
-                        '_value' => '',
                         'name' => 'password',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
                         'isReadonly' => 1,
                         'isView' => 0,
                     ),
                     'converter' => array(
-                        'db' => array('md5')
+                        'db' => array(
+                            'md5'
+                        )
                     ),
                     'validator' => array(
                         'rule' => array(
@@ -154,23 +98,8 @@ class Default_Member_Metadata_Member extends Qwin_Trex_Metadata
                     ),
                 ),
                 'email' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_EMAIL',
-                        'descrip' => '',
-                        'order' => 15,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
-                        '_type' => 'text',
-                        '_typeExt' => '',
-                        '_value' => '',
                         'name' => 'email',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
                     ),
                     'validator' => array(
                         'rule' => array(
@@ -188,14 +117,12 @@ class Default_Member_Metadata_Member extends Qwin_Trex_Metadata
                     ),
                     'form' => array(
                         '_type' => 'custom',
-                        '_value' => '',
                         'name' => 'operation',
                     ),
                     'attr' => array(
                         'isListLink' => 0,
-                        'isList' => 1,
-                        'isSqlField' => 0,
-                        'isSqlQuery' => 0,
+                        'isDbField' => 0,
+                        'isDbQuery' => 0,
                         'isView' => 0,
                     ),
                 ),
@@ -228,18 +155,12 @@ class Default_Member_Metadata_Member extends Qwin_Trex_Metadata
                 'primaryKey' => 'id',
                 'order' => array(
                 ),
-                /*'where' => array(
-                    array('order', 'eq', '10'),
-                )*/
             ),
             // 页面显示
             'page' => array(
                 'title' => 'LBL_MODULE_MEMBER',
-                'rowNum' => 10,
             ),
-            'shortcut' => array(
-            )
-        );
+        ));
     }
 
     public function passwordMetadata()
@@ -263,8 +184,8 @@ class Default_Member_Metadata_Member extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
                 'old_password' => array(
@@ -283,8 +204,8 @@ class Default_Member_Metadata_Member extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 0,
                         'isList' => 0,
-                        'isSqlField' => 0,
-                        'isSqlQuery' => 0,
+                        'isDbField' => 0,
+                        'isDbQuery' => 0,
                     ),
                     'validator' => array(
                         'rule' => array(
@@ -309,8 +230,8 @@ class Default_Member_Metadata_Member extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 0,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 0,
+                        'isDbField' => 1,
+                        'isDbQuery' => 0,
                     ),
                     'converter' => array(
                         'db' => array('md5')
@@ -338,8 +259,8 @@ class Default_Member_Metadata_Member extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 0,
                         'isList' => 0,
-                        'isSqlField' => 0,
-                        'isSqlQuery' => 0,
+                        'isDbField' => 0,
+                        'isDbQuery' => 0,
                     ),
                     'validator' => array(
                         'rule' => array(

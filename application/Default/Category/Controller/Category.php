@@ -76,15 +76,15 @@ class Default_Category_Controller_Category extends Qwin_Trex_Controller
         $meta['field'][$primaryKey]['list'] = array(
             'isListLink' => false,
             'isList' => true,
-            'isSqlField' => true,
-            'isSqlQuery' => true,
+            'isDbField' => true,
+            'isDbQuery' => true,
         );
 
         // 显示在列表页的域
         $listField = $this->meta->getSettingList($meta['field'], 'isList');
         
         
-        $query = $this->meta->getQuery($this->__query);
+        $query = $this->meta->getQuery($this->_set);
         // 增加排序(order)语句
         $query = $this->meta->addOrderToQuery($meta, $query);
         // 增加查找(where)语句
@@ -146,10 +146,10 @@ class Default_Category_Controller_Category extends Qwin_Trex_Controller
 
     public function onAfterDb()
     {
-        //Qwin::run('Project_Helper_Cache')->setFileCacheBySetting($this->__query);
+        //Qwin::run('Project_Helper_Cache')->setFileCacheBySetting($this->_set);
         $fileCacheObj = Qwin::run('Qwin_Cache_File');
         $fileCacheObj->connect(QWIN_ROOT_PATH . '/Cache/');
-        $setting = array_intersect_key($this->__query, array(
+        $setting = array_intersect_key($this->_set, array(
             'namespace' => '',
             'module' => '',
             'controller' => '',
@@ -169,15 +169,15 @@ class Default_Category_Controller_Category extends Qwin_Trex_Controller
         $html = '';
         if('special' == $copyData['parent_id'])
         {
-            $html .= '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_ADD_SPECIAL_ARTICLE') .'" href="' . url(array( $this->__query['namespace'],  'Article',  'Article', 'Add'), array('sign' => $data['id'])) . '"><span class="ui-icon ui-icon-plus"></span></a>';
-            $html .= '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_VIEW_SPECIAL_ARTICLE') .'" href="' . url(array( $this->__query['namespace'],  'Article',  'Article'), array('searchField' => 'category_2', 'searchValue' => $data['id'])) . '"><span class="ui-icon ui-icon-note"></span></a>';
+            $html .= '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_ADD_SPECIAL_ARTICLE') .'" href="' . url(array( $this->_set['namespace'],  'Article',  'Article', 'Add'), array('sign' => $data['id'])) . '"><span class="ui-icon ui-icon-plus"></span></a>';
+            $html .= '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_VIEW_SPECIAL_ARTICLE') .'" href="' . url(array( $this->_set['namespace'],  'Article',  'Article'), array('searchField' => 'category_2', 'searchValue' => $data['id'])) . '"><span class="ui-icon ui-icon-note"></span></a>';
             $html .= '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_VIEW_SPECIAL') .'" target="_blank" href="Special.php?name=' . $data['sign'] . '"><span class="ui-icon ui-icon-gear"></span></a>';
         }
-        $html .= '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_ADD_SUBCATEGORY') .'" href="' . url(array( $this->__query['namespace'],  $this->__query['module'],  $this->__query['controller'], 'Add'), array('data[parent_id]' => $data[$this->__meta['db']['primaryKey']])) . '"><span class="ui-icon ui-icon-plusthick"></span></a>';
+        $html .= '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_ADD_SUBCATEGORY') .'" href="' . url(array( $this->_set['namespace'],  $this->_set['module'],  $this->_set['controller'], 'Add'), array('data[parent_id]' => $data[$this->__meta['db']['primaryKey']])) . '"><span class="ui-icon ui-icon-plusthick"></span></a>';
         $html .= $this->meta->getOperationLink(
             $this->__meta['db']['primaryKey'],
             $data[$this->__meta['db']['primaryKey']],
-            $this->__query
+            $this->_set
         );
         return $html;
     }
@@ -269,7 +269,7 @@ class Default_Category_Controller_Category extends Qwin_Trex_Controller
 
     public function convertAddOrder()
     {
-        $class = Qwin::run('-ini')->getClassName('Model', $this->__query);
+        $class = Qwin::run('-ini')->getClassName('Model', $this->_set);
         return $this->meta->getInitalOrder($class);
     }
 }

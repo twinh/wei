@@ -104,11 +104,11 @@ class Default_Member_Controller_Group extends Qwin_Trex_Controller
 
     public function convertListOperation($val, $name, $data, $cpoyData)
     {
-        //$html = '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_ADD_SUBCATEGORY') .'" href="' . url(array( $this->__query['namespace'],  $this->__query['module'],  $this->__query['controller'], 'AllocatePermission'), array($this->__meta['db']['primaryKey'] => $data[$this->__meta['db']['primaryKey']])) . '"><span class="ui-icon ui-icon-person"></span></a>';
+        //$html = '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_ADD_SUBCATEGORY') .'" href="' . url(array( $this->_set['namespace'],  $this->_set['module'],  $this->_set['controller'], 'AllocatePermission'), array($this->__meta['db']['primaryKey'] => $data[$this->__meta['db']['primaryKey']])) . '"><span class="ui-icon ui-icon-person"></span></a>';
         $html = $this->meta->getOperationLink(
             $this->__meta['db']['primaryKey'],
             $data[$this->__meta['db']['primaryKey']],
-            $this->__query
+            $this->_set
         );
         return $html;
         return $html;

@@ -24,19 +24,19 @@ echo $jquery->loadTheme(),
 <script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH ?>/js/qwin/qwin.js"></script>
 <script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH ?>/js/qwin/url.js"></script>
 <script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/qwin2/style.js"></script>
-</head>
-<body>
 <script type="text/javascript">
     jQuery.noConflict();
     <?php echo qw_lang_to_js() ?>
 	Qwin.get = <?php echo $arrayHelper->toJsObject($_GET);?>;
 </script>
+</head>
+<body>
 <div id="ui-top-floating-bar" class="ui-top-floating-bar ui-widget ui-widget-header">
 	<ul>
     	<li><a class="ui-anchor ui-state-active" href="#Qwin">Qwin</a></li>
-        <li><a class="ui-anchor" href="#Article">Home</a></li>
-        <li><a class="ui-anchor" href="#Article">Article</a></li>
-        <li><a class="ui-anchor" href="#Picture">Picture</a></li>
+        <li><a class="ui-anchor" href="<?php echo basename($_SERVER['SCRIPT_NAME']) ?>">Home</a></li>
+        <li><a class="ui-anchor" href="?module=Member&controller=Member">Member</a></li>
+        <li><a class="ui-anchor" href="?module=Article&controller=Article">Article</a></li>
         <li><a class="ui-anchor" href="#Product">Product</a></li>
         <li><a class="ui-anchor" href="#File Manager">File Manager</a></li>
         <li><a class="ui-anchor" href="#Administrator">Administrator</a></li>

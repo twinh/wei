@@ -75,7 +75,7 @@ jQuery(function($){
 <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
     <div class="ui-box-titlebar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix">
         <span class="ui-box-title">
-            <a href="<?php echo url(array($this->__query['namespace'], 'Style', 'Theme'))?>"><?php echo $this->t('LBL_LANG')?></a>
+            <a href="<?php echo url(array($this->_set['namespace'], 'Style', 'Theme'))?>"><?php echo $this->t('LBL_LANG')?></a>
         </span>
         <a class="ui-box-title-icon ui-corner-all" name=".ui-form-content" href="javascript:void(0)">
             <span class="ui-icon  ui-icon-circle-triangle-n">open/close</span>
@@ -84,7 +84,7 @@ jQuery(function($){
     <div class="ui-form-content ui-box-content ui-widget-content ui-theme-list">
         <div class="ui-widget-content ui-theme-operation ui-block-common">
             <div class="ui-field-common ui-field-operation">
-                <form method="post" name="form" action="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], 'ApplyLang'))?>">
+                <form method="post" name="form" action="<?php echo url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], 'ApplyLang'))?>">
                 <input type="submit" class="ui-form-button ui-state-default ui-corner-all" value="<?php echo $this->t('LBL_ACTION_APPLY')?>" title="<?php echo $this->t('LBL_APPLY_LANG')?>" />
                 <input type="button" class="action-return ui-form-button ui-state-default ui-corner-all" value="<?php echo $this->t('LBL_ACTION_RETURN')?>" />
                 </form>
@@ -94,19 +94,19 @@ jQuery(function($){
         <ul>
             <li class="ui-widget-content ui-corner-all">
                 <p>
-                    <a href="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], $this->__query['action']), array('lang' => 'zh-cn'));?>" title="<?php echo $this->t('LBL_ACTION_EDIT')?>">简体中文(zh-cn)</a>
+                    <a href="<?php echo url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], $this->_set['action']), array('lang' => 'zh-cn'));?>" title="<?php echo $this->t('LBL_ACTION_EDIT')?>">简体中文(zh-cn)</a>
                 </p>
             </li>
             <li class="ui-widget-content ui-corner-all">
                 <p>
-                    <a href="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], $this->__query['action']), array('lang' => 'en'));?>" title="<?php echo $this->t('LBL_ACTION_EDIT')?>">English(en)</a>
+                    <a href="<?php echo url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], $this->_set['action']), array('lang' => 'en'));?>" title="<?php echo $this->t('LBL_ACTION_EDIT')?>">English(en)</a>
                 </p>
             </li>
         </ul>
         <hr class="ui-line ui-widget-content" />
         <div class="ui-widget-content ui-theme-operation ui-block-common">
             <div class="ui-field-common ui-field-operation">
-                <form method="post" name="form" action="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], 'ApplyLang'))?>">
+                <form method="post" name="form" action="<?php echo url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], 'ApplyLang'))?>">
                 <input type="submit" class="ui-form-button ui-state-default ui-corner-all" value="<?php echo $this->t('LBL_ACTION_APPLY')?>" title="<?php echo $this->t('LBL_APPLY_LANG')?>" />
                 <input type="button" class="action-return ui-form-button ui-state-default ui-corner-all" value="<?php echo $this->t('LBL_ACTION_RETURN')?>" />
                 </form>

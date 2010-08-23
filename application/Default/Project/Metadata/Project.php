@@ -49,8 +49,8 @@ class Default_Project_Metadata_Project extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
                 'name' => array(
@@ -69,8 +69,8 @@ class Default_Project_Metadata_Project extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 0,
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'validator' => array(
                         'rule' => array(
@@ -95,8 +95,8 @@ class Default_Project_Metadata_Project extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 0,
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
                 'start_time' => array(
@@ -115,8 +115,8 @@ class Default_Project_Metadata_Project extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 0,
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
                 'planed_end_time' => array(
@@ -135,8 +135,8 @@ class Default_Project_Metadata_Project extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 0,
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
                 'end_time' => array(
@@ -155,8 +155,8 @@ class Default_Project_Metadata_Project extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 0,
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
                 'description' => array(
@@ -174,8 +174,8 @@ class Default_Project_Metadata_Project extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 0,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
                 'operation' => array(
@@ -192,8 +192,8 @@ class Default_Project_Metadata_Project extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 0,
                         'isList' => 1,
-                        'isSqlField' => 0,
-                        'isSqlQuery' => 0,
+                        'isDbField' => 0,
+                        'isDbQuery' => 0,
                         'isView' => 0,
                     ),
                 ),
@@ -213,8 +213,8 @@ class Default_Project_Metadata_Project extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                         'isReadonly' => 1,
                     ),
                 ),
@@ -234,8 +234,8 @@ class Default_Project_Metadata_Project extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
             ),

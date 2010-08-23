@@ -78,9 +78,9 @@ $qurl = array(
 <div class="ui-login-panel">
 	<div id="ui-main-content" class="ui-main-content" >
   <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
-    <div class="ui-box-titlebar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix"> <span class="ui-box-title"> <a href="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller']))?>"><?php echo $this->t('LBL_LOGIN_TITLE')?></a> </span> <a class="ui-box-title-icon ui-corner-all" name=".ui-form-content" href="javascript:void(0)"> <span class="ui-icon  ui-icon-circle-triangle-n">open/close</span> </a> </div>
+    <div class="ui-box-titlebar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix"> <span class="ui-box-title"> <a href="<?php echo url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller']))?>"><?php echo $this->t('LBL_LOGIN_TITLE')?></a> </span> <a class="ui-box-title-icon ui-corner-all" name=".ui-form-content" href="javascript:void(0)"> <span class="ui-icon  ui-icon-circle-triangle-n">open/close</span> </a> </div>
     <div class="ui-form-content ui-box-content ui-widget-content">
-      <form id="login-form" name="form" method="post" action="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], $this->__query['action']))?>">
+      <form id="login-form" name="form" method="post" action="<?php echo url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], $this->_set['action']))?>">
         <table width="100%" cellpadding="4" cellspacing="10">
         	<tr>
             	<td class="login-label" width="80"><?php echo $this->t('LBL_FIELD_USERNAME')?>:</td>
@@ -99,7 +99,7 @@ $qurl = array(
             	<td>&nbsp;</td>
             	<td colspan="2">
                         <div class="ui-field-common ui-login-operation">
-                            <input type="hidden" name="_action" value="<?php echo $this->__query['action']?>" />
+                            <input type="hidden" name="_action" value="<?php echo $this->_set['action']?>" />
                             <input type="hidden" name="_page" value="<?php echo $http_referer?>" />
                             <input type="submit" class="ui-form-button ui-state-default ui-corner-all" id="submit" value="<?php echo $this->t('LBL_ACTION_SUBMIT')?>" />
                             <input type="reset" class="ui-form-button ui-state-default ui-corner-all" value="<?php echo $this->t('LBL_ACTION_RESET')?>" />

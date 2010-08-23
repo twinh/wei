@@ -38,7 +38,7 @@ class Qwin_Metadata_Element_Db extends Qwin_Metadata_Element_Abstract
             'table' => null,
             'primaryKey' => 'id',
             'offset' => 0,
-            'limit' => 1,
+            'limit' => 10,
             'order' => array(),
             'where' => array(),
         );

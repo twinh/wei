@@ -28,9 +28,9 @@
 
 class Default_Member_Metadata_Company extends Qwin_Trex_Metadata
 {
-    public function defaultMetadata()
+    public function  __construct()
     {
-        return array(
+        $this->parseMetadata(array(
             // 基本属性
             'field' => array(
                 'id' => array(
@@ -49,8 +49,8 @@ class Default_Member_Metadata_Company extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
                 'member_id' => array(
@@ -69,8 +69,8 @@ class Default_Member_Metadata_Company extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
                 'company' => array(
@@ -89,8 +89,8 @@ class Default_Member_Metadata_Company extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'converter' => array(
                         'db' => array(
@@ -120,8 +120,8 @@ class Default_Member_Metadata_Company extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'converter' => array(
                         'db' => array(
@@ -151,8 +151,8 @@ class Default_Member_Metadata_Company extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'converter' => array(
                         'db' => array(
@@ -182,8 +182,8 @@ class Default_Member_Metadata_Company extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'converter' => array(
                         'db' => array(
@@ -212,8 +212,8 @@ class Default_Member_Metadata_Company extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'converter' => array(
                         'db' => array(
@@ -243,8 +243,8 @@ class Default_Member_Metadata_Company extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'converter' => array(
                         'db' => array(
@@ -274,8 +274,8 @@ class Default_Member_Metadata_Company extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'converter' => array(
                         'db' => array(
@@ -303,6 +303,6 @@ class Default_Member_Metadata_Company extends Qwin_Trex_Metadata
             ),
             'shortcut' => array(
             )
-        );
+        ));
     }
 }

@@ -17,4 +17,6 @@ Trex Todo List
 Qwin Future Feature
 	下载器
     	远程下载,不同协议下载等等
+    数组文件数据库
+        提供基本的查询,适用于少量数据的高速储存
 

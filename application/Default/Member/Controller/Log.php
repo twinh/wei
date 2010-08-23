@@ -55,7 +55,7 @@ class Default_Member_Controller_Log extends Qwin_Trex_Controller
             // 加载关联模型,元数据
             $this->meta->loadRelatedData($meta['model']);
             // 获取模型类名称
-            $modelName = $ini->getClassName('Model', $this->__query);
+            $modelName = $ini->getClassName('Model', $this->_set);
             $query = $this->meta->connectModel($modelName, $meta['model']);
             // POST 操作下,设置action为db
             $this->setAction('db');
@@ -72,7 +72,7 @@ class Default_Member_Controller_Log extends Qwin_Trex_Controller
              * 验证数据
              */
             $this->meta->connetMetadata($meta);
-            $data = $this->meta->convertSingleData($meta['field'], $this->__query['action'], $_POST);
+            $data = $this->meta->convertSingleData($meta['field'], $this->_set['action'], $_POST);
             $this->meta->validateData($meta['field'], $data);
             
             $set = array(
@@ -127,7 +127,7 @@ class Default_Member_Controller_Log extends Qwin_Trex_Controller
         {
             Qwin::run('-url')->to($url);
         } else {
-            Qwin::run('-url')->to(url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], 'Login')));
+            Qwin::run('-url')->to(url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], 'Login')));
         }
     }
 }

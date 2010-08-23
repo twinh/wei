@@ -33,7 +33,7 @@ class Default_Common_Language_Zhcn extends Default_Language
             'LBL_ACTION_ADD' => '添加',
             'LBL_ACTION_EDIT' => '编辑',
             'LBL_ACTION_DELETE' => '删除',
-            'LBL_ACTION_SHOW' => '查看',
+            'LBL_ACTION_View' => '查看',
             'LBL_ACTION_COPY' => '复制',
             'LBL_ACTION_FILTER' => '筛选',
             'LBL_ACTION_RETURN' => '返回',

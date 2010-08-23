@@ -58,8 +58,8 @@ class Default_AdminMenu_Metadata_Menu extends Default_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'converter' => array(
                         'attr' => array(
@@ -90,8 +90,8 @@ class Default_AdminMenu_Metadata_Menu extends Default_Metadata
                     'attr' => array(
                         'isListLink' => 0,
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'validator' => array(
                         'rule' => array(
@@ -116,8 +116,8 @@ class Default_AdminMenu_Metadata_Menu extends Default_Metadata
                     'attr' => array(
                         'isListLink' => 0,
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'validator' => array(
                         'rule' => array(
@@ -142,8 +142,8 @@ class Default_AdminMenu_Metadata_Menu extends Default_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'validator' => array(
                         'rule' => array(
@@ -168,8 +168,8 @@ class Default_AdminMenu_Metadata_Menu extends Default_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
             ),

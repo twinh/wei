@@ -69,8 +69,8 @@ class Default_Member_Controller_Setting extends Qwin_Trex_Controller
         $loginState = $ses->get('member');
         $style = Qwin::run('Qwin_Hepler_Util')->getStyle();
         $set = array(
-            'namespace' => $this->__query['namespace'],
-            'module' => $this->__query['module'],
+            'namespace' => $this->_set['namespace'],
+            'module' => $this->_set['module'],
             'controller' => 'Detail',
         );
         $metaName = $ini->getClassName('Metadata', $set);
@@ -83,7 +83,7 @@ class Default_Member_Controller_Setting extends Qwin_Trex_Controller
             ->set('theme_name', '?', $ses->get('style'))
             ->where('member_id = ?', $loginState['id'])
             ->execute();
-        Qwin::run('-url')->to(url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], 'SwitchStyle')));
+        Qwin::run('-url')->to(url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], 'SwitchStyle')));
     }
 
     public function actionApplyLang()
@@ -92,14 +92,14 @@ class Default_Member_Controller_Setting extends Qwin_Trex_Controller
         $ses = Qwin::run('-ses');
         $loginState = $ses->get('member');
         $set = array(
-            'namespace' => $this->__query['namespace'],
-            'module' => $this->__query['module'],
+            'namespace' => $this->_set['namespace'],
+            'module' => $this->_set['module'],
             'controller' => 'Member',
         );
         $query = $this->meta->getQuery($set);
         $query = $query->where('id = ?', $loginState['id'])->fetchOne();
         $query['detail']['lang'] = $ses->get('lang');
         $query['detail']->save();
-        Qwin::run('-url')->to(url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], 'SwitchLang')));
+        Qwin::run('-url')->to(url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], 'SwitchLang')));
     }
 }

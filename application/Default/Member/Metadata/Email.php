@@ -49,8 +49,8 @@ class Default_Member_Metadata_Email extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
                 'foreign_id' => array(
@@ -69,8 +69,8 @@ class Default_Member_Metadata_Email extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
                 'email_address' => array(
@@ -89,8 +89,8 @@ class Default_Member_Metadata_Email extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'validator' => array(
                         'rule' => array(
@@ -115,8 +115,8 @@ class Default_Member_Metadata_Email extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
             ),

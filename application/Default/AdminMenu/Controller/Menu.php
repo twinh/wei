@@ -30,7 +30,7 @@ class Default_AdminMenu_Controller_Menu extends Default_Controller
 {
     public function onAfterDb($action, $data)
     {
-        $query = $this->meta->getQuery($this->__query);
+        $query = $this->meta->getQuery($this->_set);
         $query->orderBy('order ASC');
         $data = $query->execute()->toArray();
         Qwin::run('Qwin_Cache_List')->writeCache($data, 'AdminMenu');

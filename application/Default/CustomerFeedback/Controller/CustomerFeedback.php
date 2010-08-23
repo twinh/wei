@@ -73,7 +73,7 @@ class Default_CustomerFeedback_Controller_CustomerFeedback extends Qwin_Trex_Con
     {
         $gpc = Qwin::run('-gpc');
         $meta = $this->__meta;
-        $query = $this->meta->getQuery($this->__query);
+        $query = $this->meta->getQuery($this->_set);
 
         // 根据url参数中的值,获取对应的数据库资料
         $id = $gpc->g($meta['db']['primaryKey']);
@@ -89,7 +89,7 @@ class Default_CustomerFeedback_Controller_CustomerFeedback extends Qwin_Trex_Con
             $query['is_processed'] = '2001002';
         }
         $query->save();
-        Qwin::run('Qwin_Helper_Js')->show($this->t('MSG_OPERATED_SUCCESS'), url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'])));
+        Qwin::run('Qwin_Helper_Js')->show($this->t('MSG_OPERATED_SUCCESS'), url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'])));
     }
 
     /**
@@ -112,8 +112,8 @@ class Default_CustomerFeedback_Controller_CustomerFeedback extends Qwin_Trex_Con
 
     public function convertListOperation($val, $name, $data, $cpoyData)
     {
-        $html = '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_CHANGE_STATUS') .'" href="' . url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], 'ChangeStatus'), array($this->__meta['db']['primaryKey'] => $data[$this->__meta['db']['primaryKey']])) . '"><span class="ui-icon ui-icon-check"></span></a>';
-        $html .= $this->meta->getOperationLink($this->__meta['db']['primaryKey'], $data[$this->__meta['db']['primaryKey']], $this->__query);
+        $html = '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_CHANGE_STATUS') .'" href="' . url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], 'ChangeStatus'), array($this->__meta['db']['primaryKey'] => $data[$this->__meta['db']['primaryKey']])) . '"><span class="ui-icon ui-icon-check"></span></a>';
+        $html .= $this->meta->getOperationLink($this->__meta['db']['primaryKey'], $data[$this->__meta['db']['primaryKey']], $this->_set);
         return $html;
     }
 
