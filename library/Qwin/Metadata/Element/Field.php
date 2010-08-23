@@ -72,7 +72,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
                 'isSqlField' => 1,
                 'isSqlQuery' => 1,
                 'isReadonly' => 0,
-                'isShow' => 1,
+                'isView' => 1,
             ),
             'converter' => array(
                 'add' => null,
@@ -286,7 +286,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         $groupList = array();
         foreach($this->_data as $field => $data)
         {
-            if(0 == $data['attr']['isShow'])
+            if(0 == $data['attr']['isView'])
             {
                 continue;
             }

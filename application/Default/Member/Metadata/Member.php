@@ -141,7 +141,7 @@ class Default_Member_Metadata_Member extends Qwin_Trex_Metadata
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
                         'isReadonly' => 1,
-                        'isShow' => 0,
+                        'isView' => 0,
                     ),
                     'converter' => array(
                         'db' => array('md5')
@@ -196,7 +196,7 @@ class Default_Member_Metadata_Member extends Qwin_Trex_Metadata
                         'isList' => 1,
                         'isSqlField' => 0,
                         'isSqlQuery' => 0,
-                        'isShow' => 0,
+                        'isView' => 0,
                     ),
                 ),
             ),

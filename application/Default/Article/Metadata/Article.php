@@ -76,7 +76,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
-                        'isShow' => 0,
+                        'isView' => 0,
                     ),
                     'converter' => array(
                         /*'attr' => array(
@@ -95,7 +95,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
-                        'isShow' => 0,
+                        'isView' => 0,
                     ),
                 ),
                 'title' => array(
@@ -107,7 +107,7 @@ class Default_Article_Metadata_Article extends Default_Metadata
                         'isList' => 1,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
-                        'isShow' => 1,
+                        'isView' => 1,
                     ),
                     'validator' => array(
                         'rule' => array(

@@ -86,7 +86,7 @@ class Default_Metadata extends Qwin_Trex_Metadata
                     'isList' => 1,
                     'isSqlField' => 0,
                     'isSqlQuery' => 0,
-                    'isShow' => 0,
+                    'isView' => 0,
                 ),
             ),
         ));
@@ -109,7 +109,7 @@ class Default_Metadata extends Qwin_Trex_Metadata
                 ),
                 'attr' => array(
                     'isListLink' => 0,
-                    'isList' => 0,
+                    'isList' => 1,
                     'isSqlField' => 1,
                     'isSqlQuery' => 1,
                 ),

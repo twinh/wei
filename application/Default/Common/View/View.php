@@ -23,12 +23,12 @@
  * @since       2010-08-18 13:57:31
  */
 
-class Default_Common_View_Show extends Default_View
+class Default_Common_View_View extends Default_View
 {
     public function __construct()
     {
         parent::__construct();
-        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/common-show.php');
+        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/common-view.php');
     }
 
     public function display()

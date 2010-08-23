@@ -1,6 +1,6 @@
 // Qwin 2010 1 20 中文
 var Qwin = {};
-// JQ
+// jQuery
 Qwin.extend = function() {
 	// copy reference to target object
 	var target = arguments[0] || {}, i = 1, length = arguments.length, deep = false, options, name, src, copy;
@@ -56,8 +56,3 @@ Qwin.extend = function() {
 	// Return the modified object
 	return target;
 };
-
-
-(function($){
-	
-})(jQuery);

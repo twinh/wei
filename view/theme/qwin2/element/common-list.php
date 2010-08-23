@@ -47,7 +47,7 @@
 jQuery(function($){
     $.jgrid.no_legacy_api = true;
     $.jgrid.useJSON = true;
-    var primary_key = '<?php echo $primaryKey?>';
+    var primaryKey = '<?php echo $primaryKey?>';
     $("#ui-jqgrid-table").jqGrid({
         url              : '<?php echo $jsonUrl?>',
         datatype         : 'json',
@@ -76,18 +76,13 @@ jQuery(function($){
         // 工具栏,设置在顶部
         toolbar          : [true, 'top'],
         // 双击查看详情
-        ondblClickRow    : function(row_id, row, col ,e)
+        ondblClickRow    : function(rowId, row, col ,e)
         {
-            var row_data = $("#ui-jqgrid-table").jqGrid('getRowData', row_id),
+            var rowData = $("#ui-jqgrid-table").jqGrid('getRowData', rowId),
                 addition = {};
-            addition[primary_key] = row_data[primary_key];
-            var url = Qwin.url.auto({
-                0 : _get['namespace'],
-                1 : _get['module'],
-                2 : _get['controller'],
-                3 : 'Show'
-            }, addition);
-            window.location.href = url;
+            addition['action'] = 'View';
+            addition[primaryKey] = rowData[primaryKey];
+            window.location.href = Qwin.url.createUrl(Qwin.get, addition);
             return false;
         },
         // 各参数的对应关系
@@ -109,94 +104,74 @@ jQuery(function($){
     });
     // 页眉工具栏
     $("#t_ui-jqgrid-table").append($('#custom-jqgird-toolbar').html());
+
     // 点击编辑按钮
     $('#t_ui-jqgrid-table a.action-edit').click(function(){
-        var row_arr = $('#ui-jqgrid-table').jqGrid('getGridParam','selarrrow');
-        if(row_arr.length != 1)
+        var rowList = $('#ui-jqgrid-table').jqGrid('getGridParam','selarrrow');
+        if(rowList.length != 1)
         {
             alert(Qwin.Lang.MSG_CHOOSE_ONLY_ONE_ROW);
             return false;
         }
-        var row_data = $("#ui-jqgrid-table").jqGrid('getRowData', row_arr[0]),
+        var rowData = $("#ui-jqgrid-table").jqGrid('getRowData', rowList[0]),
             addition = {};
-        addition[primary_key] = row_data[primary_key];
-        var url = Qwin.url.auto({
-            0 : _get['namespace'],
-            1 : _get['module'],
-            2 : _get['controller'],
-            3 : 'Edit'
-        }, addition);
-        window.location.href = url;
+        addition['action'] = 'Edit'
+        addition[primaryKey] = rowData[primaryKey];
+        window.location.href = Qwin.url.createUrl(Qwin.get, addition);
         return false;
     });
     // 点击删除按钮
+    // TODO 提示更多信息,包括id号,数目等
     $('#t_ui-jqgrid-table a.action-delete').click(function(){
-        var key_arr = new Array(),
-            row_arr = $('#ui-jqgrid-table').jqGrid('getGridParam','selarrrow');
-        if(row_arr.length == 0)
+        var keyList = new Array(),
+            rowList = $('#ui-jqgrid-table').jqGrid('getGridParam','selarrrow');
+        if(rowList.length == 0)
         {
             alert(Qwin.Lang.MSG_CHOOSE_AT_LEASE_ONE_ROW);
             return false;
         }
-        for(var i in row_arr)
+        for(var i in rowList)
         {
-            var row_data = $("#ui-jqgrid-table").jqGrid('getRowData', row_arr[i]);
-            key_arr[i] = row_data[primary_key];
+            var rowData = $("#ui-jqgrid-table").jqGrid('getRowData', rowList[i]);
+            keyList[i] = rowData[primaryKey];
         }
         var addition = {};
-        addition[primary_key] = key_arr.join(',');
+        addition['action'] = 'Delete';
+        addition[primaryKey] = keyList.join(',');
         if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE))
         {
-
-            var url = Qwin.url.auto({
-                0 : _get['namespace'],
-                1 : _get['module'],
-                2 : _get['controller'],
-                3 : 'Delete'
-            }, addition);
-            window.location.href = url;
-            return false;
+            window.location.href = Qwin.url.createUrl(Qwin.get, addition);
         }
         return false;
     });
     // 点击复制按钮
     $('#t_ui-jqgrid-table a.action-clone').click(function(){
-        var row_arr = $('#ui-jqgrid-table').jqGrid('getGridParam','selarrrow');
-        if(row_arr.length != 1)
+        var rowList = $('#ui-jqgrid-table').jqGrid('getGridParam','selarrrow');
+        if(rowList.length != 1)
         {
             alert(Qwin.Lang.MSG_CHOOSE_ONLY_ONE_ROW);
             return false;
         }
-        var row_data = $("#ui-jqgrid-table").jqGrid('getRowData', row_arr[0]),
+        var rowData = $("#ui-jqgrid-table").jqGrid('getRowData', rowList[0]),
             addition = {};
-        addition[primary_key] = row_data[primary_key];
-        var url = Qwin.url.auto({
-            0 : _get['namespace'],
-            1 : _get['module'],
-            2 : _get['controller'],
-            3 : 'Add'
-        }, addition);
-        window.location.href = url;
+        addition['action'] = 'Add';
+        addition[primaryKey] = rowData[primaryKey];
+        window.location.href = Qwin.url.createUrl(Qwin.get, addition);
         return false;
     });
     // 点击查看按钮
     $('#t_ui-jqgrid-table a.list_show_link').click(function(){
-        var row_arr = $('#ui-jqgrid-table').jqGrid('getGridParam','selarrrow');
-        if(row_arr.length != 1)
+        var rowList = $('#ui-jqgrid-table').jqGrid('getGridParam','selarrrow');
+        if(rowList.length != 1)
         {
             alert(Qwin.Lang.MSG_CHOOSE_ONLY_ONE_ROW);
             return false;
         }
-        var row_data = $("#ui-jqgrid-table").jqGrid('getRowData', row_arr[0]),
+        var rowData = $("#ui-jqgrid-table").jqGrid('getRowData', rowList[0]),
             addition = {};
-        addition[primary_key] = row_data[primary_key];
-        var url = Qwin.url.auto({
-            0 : _get['namespace'],
-            1 : _get['module'],
-            2 : _get['controller'],
-            3 : 'Show'
-        }, addition);
-        window.location.href = url;
+        addition['action'] = 'View';
+        addition[primaryKey] = rowData[primaryKey];
+        window.location.href = Qwin.url.createUrl(Qwin.get, addition);
         return false;
     });
 });

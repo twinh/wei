@@ -497,26 +497,13 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      * @param array $data add.edit等操作传过来的初始数据
      * @param int $mode
      */
-    public function getUrlData($data, $mode = 'ovwewrite')
+    public function getUrlData($data)
     {
-        !in_array($mode, $this->_inital_mode) && $mode = $this->_inital_mode[0];
-        // 覆盖 $data 的值
-        if($mode == $this->_inital_mode[0])
+        foreach($data as $key => $val)
         {
-            foreach($data as $key => $val)
+            if(isset($_GET['_data'][$key]) && '' != $_GET['_data'][$key])
             {
-                if(isset($this->_get['data'][$key]) && '' != $this->_get['data'][$key])
-                {
-                    $data[$key] = $this->_get['data'][$key];
-                }
-            }
-        } else {
-            foreach($data as $key => $val)
-            {
-                if('' == $val)
-                {
-                    $data[$key] = $this->_get['data'][$key];
-                }
+                $data[$key] = $_GET['_data'][$key];
             }
         }
         return $data;
@@ -663,6 +650,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         $validator = Qwin::run('Qwin_Validator');
         $validator->add('Qwin_Validator_Common');
         $arr = Qwin::run('-arr');
+        $lang = Qwin::run('-lang');
         
         // 加载验证信息
         $validatorMessage1 = $this->getCommonClassList('validator_message', 'rsc');
@@ -692,12 +680,28 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
                     if(false == $result)
                     {
                         $msg = $this->format($validatorMessage[$method], $msgParam);
-                        $msg = $this->t('MSG_ERROR_FIELD') . $field['basic']['title'] . '\n' . $this->t('MSG_ERROR_MSG') . $msg;
+                        $msg = $lang->t('MSG_ERROR_FIELD') . $lang->t($field['basic']['title']) . '\n' . $lang->t('MSG_ERROR_MSG') . $msg;
                         Qwin::run('Qwin_Helper_Js')->show($msg);
                     }
                 }
             }
         }
+    }
+
+    /**
+     * 设置外键的值,保证数据之间能正确关联
+     *
+     * @param Qwin_Metadata_Element_Model $modelList 模型配置元数据
+     * @param array $data 经过转换的用户提交的数据
+     * @return array 设置的后的值
+     */
+    public function setForeignKeyData($modelList, $data)
+    {
+        foreach($modelList as $model)
+        {
+            $data[$model['asName']][$model['foreign']] = $data[$model['local']];
+        }
+        return $data;
     }
 
     /**

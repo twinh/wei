@@ -1,35 +1,28 @@
 // JavaScript Document 中文 2010 1 20 - 30
+Qwin.urlSeparator = {
+    0: '&',
+    1: '='
+};
 Qwin.extend({
     url : {
-        auto : function(set, addition)
+        createUrl : function(array1, array2)
         {
-			return 1;
-            // 返回的地址
-            /*var url = '';
-            var set_2 = {};
-            if('object' == typeof(set))
+            // TODO: 合并数组1和2
+            if('undefined' != typeof(array2))
             {
-                for(var i = 0;i <= 3;i++)
+                for(var i in array2)
                 {
-                    if('undefined' == typeof(set[i]) || '' == set[i])
-                    {
-                        set_2[qurl['nca'][i]] = 'default';
-                    } else {
-                        set_2[qurl['nca'][i]] = set[i];
-                    }
+                    array1[i] = array2[i];
                 }
-                url = '?' + this.arrayKey2Url(set_2) + qurl['separator'][0] + this.arrayKey2Url(addition);
-            } else {
-                url = set + '?' + this.arrayKey2Url(addition);
             }
-            return url;*/
+            return '?' + this.arrayKey2Url(array1);
         },
         arrayKey2Url : function(arr)
         {
             var url = '';
             for(var i in arr)
             {
-                url += this.array2Url(arr[i], i) + qurl['separator'][0];
+                url += this.array2Url(arr[i], i) + Qwin.urlSeparator[0];
             }
             return url.slice(0, -1);
         },
@@ -42,18 +35,23 @@ Qwin.extend({
                 {
                     if('object' == typeof(arr[key]))
                     {
-                        url += this.array2Url(arr[key], name + '[' + key + ']') + qurl['separator'][0];
+                        url += this.array2Url(arr[key], name + '[' + key + ']') + Qwin.urlSeparator[0];
                     } else if(name) {
-                        url += name + '[' + key + ']' + qurl['separator'][1] + arr[key] + qurl['separator'][0];
+                        url += name + '[' + key + ']' + Qwin.urlSeparator[1] + arr[key] + Qwin.urlSeparator[0];
 
                     } else {
-                        url += name + qurl['separator'][1] + arr[key] + qurl['separator'][0];
+                        url += name + Qwin.urlSeparator[1] + arr[key] + Qwin.urlSeparator[0];
                     }
                 }
             } else {
-                return name + qurl['separator'][1] + arr;
+                return name + Qwin.urlSeparator[1] + arr;
             }
             return url.slice(0, -1);
         }
     }
 });
+
+function qw_url()
+{
+    //return Qwin.
+}
