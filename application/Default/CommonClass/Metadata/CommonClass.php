@@ -50,8 +50,8 @@ class Default_CommonClass_Metadata_CommonClass extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => false,
                         'isList' => true,
-                        'isSqlField' => true,
-                        'isSqlQuery ' => true,
+                        'isDbField' => true,
+                        'isDbQuery ' => true,
                     ),
                 ),
                 'type' => array(
@@ -79,8 +79,8 @@ class Default_CommonClass_Metadata_CommonClass extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 0,
                         'isList' => 0,
-                        'isSqlField' => 0,
-                        'isSqlQuery' => 0,
+                        'isDbField' => 0,
+                        'isDbQuery' => 0,
                     ),
                 ),
                 'code' => array(
@@ -98,8 +98,8 @@ class Default_CommonClass_Metadata_CommonClass extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
                 'var_name' => array(
@@ -116,8 +116,8 @@ class Default_CommonClass_Metadata_CommonClass extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
                 'order' => array(
@@ -135,8 +135,8 @@ class Default_CommonClass_Metadata_CommonClass extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
                 'value' => array(
@@ -165,8 +165,8 @@ class Default_CommonClass_Metadata_CommonClass extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
                 'operation' => array(
@@ -184,8 +184,8 @@ class Default_CommonClass_Metadata_CommonClass extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 1,
-                        'isSqlField' => 0,
-                        'isSqlQuery' => 0,
+                        'isDbField' => 0,
+                        'isDbQuery' => 0,
                     ),
                 ),
             ),

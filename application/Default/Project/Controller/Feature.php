@@ -94,7 +94,7 @@ class Default_Project_Controller_Feature extends Qwin_Trex_Controller
 
     public function convertListOperation($val, $name, $data, $cpoyData)
     {
-        $html = $this->meta->getOperationLink($this->__meta['db']['primaryKey'], $data[$this->__meta['db']['primaryKey']], $this->__query);
+        $html = $this->meta->getOperationLink($this->__meta['db']['primaryKey'], $data[$this->__meta['db']['primaryKey']], $this->_set);
         return $html;
     }
 }

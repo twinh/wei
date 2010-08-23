@@ -75,7 +75,7 @@ jQuery(function($){
 <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
     <div class="ui-box-titlebar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix">
         <span class="ui-box-title">
-            <a href="<?php echo url(array($this->__query['namespace'], 'Style', 'Theme'))?>"><?php echo $this->t('LBL_THEME')?></a>
+            <a href="<?php echo url(array($this->_set['namespace'], 'Style', 'Theme'))?>"><?php echo $this->t('LBL_THEME')?></a>
         </span>
         <a class="ui-box-title-icon ui-corner-all" name=".ui-form-content" href="javascript:void(0)">
             <span class="ui-icon  ui-icon-circle-triangle-n">open/close</span>
@@ -84,7 +84,7 @@ jQuery(function($){
     <div class="ui-form-content ui-box-content ui-widget-content ui-theme-list">
         <div class="ui-widget-content ui-theme-operation ui-block-common">
             <div class="ui-field-common ui-field-operation">
-                <form method="post" name="form" action="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], 'ApplyTheme'))?>">
+                <form method="post" name="form" action="<?php echo url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], 'ApplyTheme'))?>">
                 <input type="submit" class="ui-form-button ui-state-default ui-corner-all" value="<?php echo $this->t('LBL_ACTION_APPLY')?>" title="<?php echo $this->t('LBL_APPLY_THEME')?>" />
                 <input type="button" class="action-return ui-form-button ui-state-default ui-corner-all" value="<?php echo $this->t('LBL_ACTION_RETURN')?>" />
                 </form>
@@ -94,14 +94,14 @@ jQuery(function($){
         <ul>
 <?php
 foreach($theme as $row){
-$url = url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], $this->__query['action']), array('style' => $row['path_name']));
+$url = url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], $this->_set['action']), array('style' => $row['path_name']));
     ?>
             <li class="ui-widget-content ui-corner-all">
                 <a href="<?php echo $url?>">
                     <img alt="<?php echo $row['name']?>" src="<?php echo QWIN_RESOURCE_PATH?>/js/jquery/image/<?php echo $row['picture']?>" />
                 </a>
                 <p>
-                    <a href="<?php echo url(array($this->__query['namespace'], 'Style', 'Theme', 'Edit'), array('id' => $row['id']))?>" title="<?php echo $this->t('LBL_ACTION_EDIT')?>"><?php echo $row['name']?></a>
+                    <a href="<?php echo url(array($this->_set['namespace'], 'Style', 'Theme', 'Edit'), array('id' => $row['id']))?>" title="<?php echo $this->t('LBL_ACTION_EDIT')?>"><?php echo $row['name']?></a>
                    
                 </p>
             </li>
@@ -112,7 +112,7 @@ $url = url(array($this->__query['namespace'], $this->__query['module'], $this->_
         <hr class="ui-line ui-widget-content" />
         <div class="ui-widget-content ui-theme-operation ui-block-common">
             <div class="ui-field-common ui-field-operation">
-                <form method="post" name="form" action="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], 'ApplyTheme'))?>">
+                <form method="post" name="form" action="<?php echo url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], 'ApplyTheme'))?>">
                 <input type="submit" class="ui-form-button ui-state-default ui-corner-all" value="<?php echo $this->t('LBL_ACTION_APPLY')?>" title="<?php echo $this->t('LBL_APPLY_THEME')?>" />
                 <input type="button" class="action-return ui-form-button ui-state-default ui-corner-all" value="<?php echo $this->t('LBL_ACTION_RETURN')?>" />
                 </form>

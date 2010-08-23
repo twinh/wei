@@ -79,7 +79,7 @@ class Admin_Menu_Controller_Menu extends Qwin_Trex_Controller
 
     public function convertListOperation($val, $name, $data, $cpoyData)
     {
-        return $this->meta->getOperationLink($this->__meta['db']['primaryKey'], $data[$this->__meta['db']['primaryKey']], $this->__query);
+        return $this->meta->getOperationLink($this->__meta['db']['primaryKey'], $data[$this->__meta['db']['primaryKey']], $this->_set);
     }
 
     public function convertDbId($val)
@@ -89,7 +89,7 @@ class Admin_Menu_Controller_Menu extends Qwin_Trex_Controller
 
     public function convertAddOrder()
     {
-        $class = Qwin::run('-ini')->getClassName('Model', $this->__query);
+        $class = Qwin::run('-ini')->getClassName('Model', $this->_set);
         return $this->meta->getInitalOrder($class);
     }
 
@@ -111,7 +111,7 @@ class Admin_Menu_Controller_Menu extends Qwin_Trex_Controller
 
     public function onAfterDb($action, $data)
     {
-        $query = $this->meta->getQuery($this->__query);
+        $query = $this->meta->getQuery($this->_set);
         $data = $query->orderBy('order ASC')->execute()->toArray();
         Qwin::run('Qwin_Cache_List')->writeCache($data, 'Menu');
     }

@@ -89,7 +89,7 @@ class Default_Product_Controller_Color extends Qwin_Trex_Controller
 
     public function convertListOperation($val, $name, $data, $cpoyData)
     {
-        $html = $this->meta->getOperationLink($this->__meta['db']['primaryKey'], $data[$this->__meta['db']['primaryKey']], $this->__query);
+        $html = $this->meta->getOperationLink($this->__meta['db']['primaryKey'], $data[$this->__meta['db']['primaryKey']], $this->_set);
         return $html;
     }
 
@@ -100,7 +100,7 @@ class Default_Product_Controller_Color extends Qwin_Trex_Controller
 
     public function convertAddOrder()
     {
-        $class = Qwin::run('-ini')->getClassName('Model', $this->__query);
+        $class = Qwin::run('-ini')->getClassName('Model', $this->_set);
         return $this->meta->getInitalOrder($class);
     }
 }

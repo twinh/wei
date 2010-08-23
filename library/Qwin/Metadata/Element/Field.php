@@ -55,10 +55,11 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
                 'group' => 'LBL_GROUP_BASIC_DATA',
             ),
             'form' => array(
-                '_type' => null,
+                '_type' => 'text',
                 '_typeExt' => null,
                 '_resource' => null,
                 '_resourceGetter' => null,
+                //'_resourceFormFile' => null,
                 '_widget' => null,
                 '_widgetDetail' => array(),
                 '_value' => '',
@@ -69,8 +70,8 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
             'attr' => array(
                 'isListLink' => 0,
                 'isList' => 1,
-                'isSqlField' => 1,
-                'isSqlQuery' => 1,
+                'isDbField' => 1,
+                'isDbQuery' => 1,
                 'isReadonly' => 0,
                 'isView' => 1,
             ),
@@ -264,8 +265,9 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
     }
 
     /**
+     * 获取分组的对应列表
      *
-     * @return <type>
+     * @return array 分组列表
      */
     public function getGroupList()
     {
@@ -281,7 +283,12 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         return $groupList;
     }
 
-    public function getShowGroupList()
+    /**
+     * 获取显示数据页面的分组列表
+     *
+     * @return array 分组列表
+     */
+    public function getViewGroupList()
     {
         $groupList = array();
         foreach($this->_data as $field => $data)
@@ -300,6 +307,11 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         return $groupList;
     }
 
+    /**
+     * 获取添加操作的分组列表
+     *
+     * @return array 分组列表
+     */
     public function getAddGroupList()
     {
         $groupList = array();
@@ -319,6 +331,11 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         return $groupList;
     }
 
+    /**
+     * 获取编辑操作的分组列表
+     *
+     * @return array 分组列表
+     */
     public function getEditGroupList()
     {
         $groupList = array();
@@ -337,7 +354,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         }
         return $groupList;
     }
-
+    
     /**
      * 增加表单域的类名
      *

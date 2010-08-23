@@ -42,7 +42,7 @@ class Default_Article_Controller_Article extends Default_Controller
         // 加载关联模型,元数据
         $this->meta->loadRelatedData($meta['model']);
         // 获取模型类名称
-        $modelName = $ini->getClassName('Model', $this->__query);
+        $modelName = $ini->getClassName('Model', $this->_set);
         $query = $this->meta->connectModel($modelName, $meta['model']);
         $meta = $this->meta->connetMetadata($meta);
 
@@ -58,7 +58,7 @@ class Default_Article_Controller_Article extends Default_Controller
         }
         $dbData = $query->toArray();
         // 根据配置和控制器中的对应方法转换数据
-        $dbData = $this->meta->convertSingleData($meta['field'], $this->__query['action'], $dbData);
+        $dbData = $this->meta->convertSingleData($meta['field'], $this->_set['action'], $dbData);
 
         $this->createHtml($dbData);
 
@@ -74,7 +74,7 @@ class Default_Article_Controller_Article extends Default_Controller
 
     /*public function actionCreateAllHtml()
     {
-        $query = $this->meta->getQuery($this->__query);
+        $query = $this->meta->getQuery($this->_set);
         $dbData = $query->execute()->toArray();
         foreach($dbData as $data)
         {
@@ -84,7 +84,7 @@ class Default_Article_Controller_Article extends Default_Controller
         //{
         //    $url = $_SERVER['HTTP_REFERER'];
         //} else {
-            $url = url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller']));
+            $url = url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller']));
         //}
         Qwin::run('Qwin_Helper_Js')->show($this->t('MSG_OPERATED_SUCCESS'), $url);
     }*/
@@ -94,7 +94,7 @@ class Default_Article_Controller_Article extends Default_Controller
         // 检查模板文件是否存在
         if(!file_exists($data['template']))
         {
-            Qwin::run('Qwin_Helper_Js')->show($this->t('MSG_TEMPLATE_NOT_EXISTS'), url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], 'Edit'), array('id' => $data['id'])));
+            Qwin::run('Qwin_Helper_Js')->show($this->t('MSG_TEMPLATE_NOT_EXISTS'), url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], 'Edit'), array('id' => $data['id'])));
         }
         if(!empty($data['page_name']))
         {
@@ -183,8 +183,8 @@ class Default_Article_Controller_Article extends Default_Controller
 
     /*public function convertListOperation($val, $name, $data, $cpoyData)
     {
-        $html = $this->meta->getOperationLink($this->__meta['db']['primaryKey'], $data[$this->__meta['db']['primaryKey']], $this->__query);
-        //$html .= '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_CREATE_HTML') .'" href="' . url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], 'Html'), array($this->__meta['db']['primaryKey'] => $data[$this->__meta['db']['primaryKey']])) . '"><span class="ui-icon ui-icon-print"></span></a>';
+        $html = $this->meta->getOperationLink($this->__meta['db']['primaryKey'], $data[$this->__meta['db']['primaryKey']], $this->_set);
+        //$html .= '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_CREATE_HTML') .'" href="' . url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], 'Html'), array($this->__meta['db']['primaryKey'] => $data[$this->__meta['db']['primaryKey']])) . '"><span class="ui-icon ui-icon-print"></span></a>';
         return $html;
     }*/
 

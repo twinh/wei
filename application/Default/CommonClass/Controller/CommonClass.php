@@ -87,7 +87,7 @@ class Default_CommonClass_Controller_CommonClass extends Qwin_Trex_Controller
     public function actionGetMaxCode()
     {
         $type_id = substr(intval(Qwin::run('-gpc')->g('type_id')), 0, 1);
-        $query = $this->meta->getQuery($this->__query);
+        $query = $this->meta->getQuery($this->_set);
         $query->select('MAX(code) as max_code')
             ->where('LEFT(code, 1) = ?', $type_id);
         $data = $query->fetchOne()->toArray();
@@ -150,14 +150,14 @@ class Default_CommonClass_Controller_CommonClass extends Qwin_Trex_Controller
     {
         $code = substr(intval(Qwin::run('-gpc')->g('code')), 0, 4);
         $where = array('LEFT(code, 4) = ?', $code);
-        $class = Qwin::run('-ini')->getClassName('Model', $this->__query);
+        $class = Qwin::run('-ini')->getClassName('Model', $this->_set);
         return $this->meta->getInitalOrder($class, 'order', 5, $where);
     }
 
     public function convertAddCode($field)
     {
         $code = intval(Qwin::run('-gpc')->g('code')) ;
-        $query = $this->meta->getQuery($this->__query);
+        $query = $this->meta->getQuery($this->_set);
         // 添加已有分类的下一个
         if(4 <= strlen($code))
         {
@@ -202,10 +202,10 @@ class Default_CommonClass_Controller_CommonClass extends Qwin_Trex_Controller
     public function convertListOperation($val, $name, $data, $cpoyData)
     {
         $html = '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_ADD_NEXT') .'" href="' . url(
-                array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], 'Add'),
+                array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], 'Add'),
                 array('code' => $cpoyData['code'])
             ) . '"><span class="ui-icon ui-icon-plusthick"></span></a>';
-        $html .= $this->meta->getOperationLink($this->__meta['db']['primaryKey'], $data[$this->__meta['db']['primaryKey']], $this->__query);
+        $html .= $this->meta->getOperationLink($this->__meta['db']['primaryKey'], $data[$this->__meta['db']['primaryKey']], $this->_set);
         return $html;
     }
 }

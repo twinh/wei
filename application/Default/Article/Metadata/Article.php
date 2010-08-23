@@ -51,8 +51,8 @@ class Default_Article_Metadata_Article extends Default_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'converter' => array(
                         'list' => array(
@@ -74,8 +74,8 @@ class Default_Article_Metadata_Article extends Default_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                         'isView' => 0,
                     ),
                     'converter' => array(
@@ -93,8 +93,8 @@ class Default_Article_Metadata_Article extends Default_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                         'isView' => 0,
                     ),
                 ),
@@ -105,8 +105,8 @@ class Default_Article_Metadata_Article extends Default_Metadata
                     ),
                     'attr' => array(
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                         'isView' => 1,
                     ),
                     'validator' => array(
@@ -124,8 +124,8 @@ class Default_Article_Metadata_Article extends Default_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
                 'jump_to_url' => array(
@@ -136,8 +136,8 @@ class Default_Article_Metadata_Article extends Default_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
                 'thumb' => array(
@@ -152,8 +152,8 @@ class Default_Article_Metadata_Article extends Default_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
                 'hit' => array(
@@ -164,8 +164,8 @@ class Default_Article_Metadata_Article extends Default_Metadata
                     ),
                     'attr' => array(
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
                 'page_name' => array(
@@ -176,8 +176,8 @@ class Default_Article_Metadata_Article extends Default_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
                 'template' => array(
@@ -188,8 +188,8 @@ class Default_Article_Metadata_Article extends Default_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
                 'is_posted' => array(
@@ -201,8 +201,8 @@ class Default_Article_Metadata_Article extends Default_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'converter' => array(
                         'attr' => array(
@@ -220,8 +220,8 @@ class Default_Article_Metadata_Article extends Default_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'converter' => array(
                         'attr' => array(
@@ -238,8 +238,8 @@ class Default_Article_Metadata_Article extends Default_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
                 'order' => array(
@@ -250,8 +250,8 @@ class Default_Article_Metadata_Article extends Default_Metadata
                     ),
                     'attr' => array(
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
             ),

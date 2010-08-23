@@ -26,32 +26,8 @@
  * @since     2010-5-13 10:17:58 utf-8 中文
  */
 
-class Default_Member_Controller_Member extends Qwin_Trex_Controller
+class Default_Member_Controller_Member extends Default_Controller
 {
-    /**
-     * 列表
-     */
-    public function actionDefault()
-    {
-        return Qwin::run('Qwin_Trex_Action_List');
-    }
-
-    /**
-     * 添加
-     */
-    public function actionAdd()
-    {
-        return Qwin::run('Qwin_Trex_Action_Add');
-    }
-
-    /**
-     * 编辑
-     */
-    public function actionEdit()
-    {
-        return Qwin::run('Qwin_Trex_Action_Edit');
-    }
-
     /**
      * 编辑密码
      * @return object 实例化编辑操作
@@ -125,7 +101,7 @@ class Default_Member_Controller_Member extends Qwin_Trex_Controller
 
     public function isUsernameExists($username)
     {
-        $query = $this->meta->getQuery($this->__query);
+        $query = $this->_meta->getDoctrineQuery($this->_set);
         $result = $query->where('username = ?', $username)
             ->fetchOne();
         if(false != $result)
@@ -143,16 +119,16 @@ class Default_Member_Controller_Member extends Qwin_Trex_Controller
         return Qwin::run('Qwin_Trex_Action_Filter');
     }*/
 
-    public function convertListOperation($val, $name, $data, $cpoyData)
+    /*public function convertListOperation($val, $name, $data, $cpoyData)
     {
-        $html = '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_EDIT_PASSWORD') .'" href="' . url(array( $this->__query['namespace'],  $this->__query['module'],  $this->__query['controller'], 'EditPassword'), array('id' => $data[$this->__meta['db']['primaryKey']])) . '"><span class="ui-icon ui-icon-key"></span></a>';
+        $html = '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_EDIT_PASSWORD') .'" href="' . url(array( $this->_set['namespace'],  $this->_set['module'],  $this->_set['controller'], 'EditPassword'), array('id' => $data[$this->__meta['db']['primaryKey']])) . '"><span class="ui-icon ui-icon-key"></span></a>';
         $html .= $this->meta->getOperationLink(
             $this->__meta['db']['primaryKey'],
             $data[$this->__meta['db']['primaryKey']],
-            $this->__query
+            $this->_set
         );
         return $html;
-    }
+    }*/
 
     public function convertEditPasswordPassword()
     {
@@ -161,7 +137,7 @@ class Default_Member_Controller_Member extends Qwin_Trex_Controller
 
     public function convertDbOldPassword($val, $name, $data)
     {
-        $query = $this->meta->getQuery($this->__query);
+        $query = $this->meta->getDoctrineQuery($this->_set);
         $result = $query->where('id = ?', $data['id'])
             ->fetchOne();
         if(md5($val) != $result['password'])
@@ -170,12 +146,7 @@ class Default_Member_Controller_Member extends Qwin_Trex_Controller
         }
         return $val;
     }
-
-    public function convertDbId($val)
-    {
-        return $this->Qwin_converter_String->getUuid($val);
-    }
-
+    
     public function convertDbUsername($val)
     {
         if(true == $this->isUsernameExists($val))
@@ -197,7 +168,7 @@ class Default_Member_Controller_Member extends Qwin_Trex_Controller
 
     public function convertDbDetailRegTime()
     {
-        return date('Y-m-d H:i:s', TIMESTAMP);
+        return date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
     }
     
     public function convertDbEmailAddressId($val)

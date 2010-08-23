@@ -204,7 +204,7 @@ class Default_Controller extends Qwin_Trex_Controller
          */
         $relatedField = $meta->connectRelatedMetadata($this->_meta);
         $relatedField->order();
-        $groupList = $relatedField->getShowGroupList();
+        $groupList = $relatedField->getViewGroupList();
         $data = $result->toArray();
         $data = $meta->convertDataToSingle($data);
 
@@ -283,7 +283,7 @@ class Default_Controller extends Qwin_Trex_Controller
             /**
              * 取出需要入库的数据
              */
-            $dblist = $relatedField->getAttrList('isSqlField');
+            $dblist = $relatedField->getAttrList('isDbField');
             $data = $meta->intersect($dblist, $_POST);
 
             /**
@@ -369,17 +369,21 @@ class Default_Controller extends Qwin_Trex_Controller
              */
             $this->setAction('db');
             $relatedField = $meta->connectRelatedMetadata($meta);
+            $editField = $relatedField->getAttrList('isDbField', 'isReadonly');
+            //p($editField);
 
             /**
              * 取出需要入库的数据
              */
-            $dblist = $relatedField->getAttrList(array('isSqlField'), array('isReadonly'));
+            $dblist = $relatedField->getAttrList(array('isDbField'), array('isReadonly'));
             $data = $meta->intersect($dblist, $_POST);
+//p($data);
 
             /**
              * 转换,验证和还原
              */
             $data = $this->_meta->convertSingleData($relatedField, 'db', $_POST);
+            //p($data);exit;
             $this->_meta->validateData($relatedField, $data);
             $data = $meta->restoreData($relatedField, $data);
 
@@ -483,7 +487,7 @@ class Default_Controller extends Qwin_Trex_Controller
     {
         $primaryKey = $this->_meta['db']['primaryKey'];
         $data = '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->_lang->t('LBL_ACTION_EDIT') .'" href="' . $this->_url->createUrl($this->_set, array('action' => 'Edit', $primaryKey => $copyData[$primaryKey])) . '"><span class="ui-icon ui-icon-tag">Edit</span></a>'
-              . '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->_lang->t('LBL_ACTION_SHOW') .'" href="' . $this->_url->createUrl($this->_set, array('action' => 'Show', $primaryKey => $copyData[$primaryKey])) . '"><span class="ui-icon ui-icon-lightbulb">Show</span></a>'
+              . '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->_lang->t('LBL_ACTION_VIEW') .'" href="' . $this->_url->createUrl($this->_set, array('action' => 'View', $primaryKey => $copyData[$primaryKey])) . '"><span class="ui-icon ui-icon-lightbulb">View</span></a>'
               . '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->_lang->t('LBL_ACTION_COPY') .'" href="' . $this->_url->createUrl($this->_set, array('action' => 'Add', $primaryKey => $copyData[$primaryKey])) . '"><span class="ui-icon ui-icon-transferthick-e-w">Clone</span></a>'
               . '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->_lang->t('LBL_ACTION_DELETE') .'" href="' . $this->_url->createUrl($this->_set, array('action' => 'Delete', $primaryKey => $copyData[$primaryKey])) . '" onclick="javascript:return confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE);"><span class="ui-icon ui-icon-closethick">Delete</span></a>';
         return $data;

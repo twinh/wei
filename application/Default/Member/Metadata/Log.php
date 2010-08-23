@@ -46,8 +46,8 @@ class Default_Member_Metadata_Log extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 0,
-                        'isSqlQuery' => 0,
+                        'isDbField' => 0,
+                        'isDbQuery' => 0,
                     ),
                     'validator' => array(
                         'rule' => array(
@@ -69,8 +69,8 @@ class Default_Member_Metadata_Log extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'validator' => array(
                         'rule' => array(
@@ -92,8 +92,8 @@ class Default_Member_Metadata_Log extends Qwin_Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'validator' => array(
                         'rule' => array(

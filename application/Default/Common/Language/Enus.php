@@ -39,7 +39,7 @@ class Default_Common_Language_Enus extends Default_Language
             'LBL_ACTION_ADD' => 'Add',
             'LBL_ACTION_EDIT' => 'Edit',
             'LBL_ACTION_DELETE' => 'Delete',
-            'LBL_ACTION_SHOW' => 'Show',
+            'LBL_ACTION_VIEW' => 'View',
             'LBL_ACTION_COPY' => 'Copy',
             'LBL_ACTION_FILTER' => 'Filter',
             'LBL_ACTION_RETURN' => 'Return',

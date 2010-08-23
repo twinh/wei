@@ -50,8 +50,8 @@ class Default_Metadata extends Qwin_Trex_Metadata
                 'attr' => array(
                     'isListLink' => 0,
                     'isList' => 1,
-                    'isSqlField' => 1,
-                    'isSqlQuery' => 1,
+                    'isDbField' => 1,
+                    'isDbQuery' => 1,
                     'isReadonly' => 1,
                 ),
             ),
@@ -69,24 +69,8 @@ class Default_Metadata extends Qwin_Trex_Metadata
                 'attr' => array(
                     'isListLink' => 0,
                     'isList' => 1,
-                    'isSqlField' => 1,
-                    'isSqlQuery' => 1,
-                ),
-            ),
-            'operation' => array(
-                'basic' => array(
-                    'order' => 1040,
-                ),
-                'form' => array(
-                    '_type' => 'custom',
-                    'name' => 'operation',
-                ),
-                'attr' => array(
-                    'isListLink' => 0,
-                    'isList' => 1,
-                    'isSqlField' => 0,
-                    'isSqlQuery' => 0,
-                    'isView' => 0,
+                    'isDbField' => 1,
+                    'isDbQuery' => 1,
                 ),
             ),
         ));
@@ -110,9 +94,29 @@ class Default_Metadata extends Qwin_Trex_Metadata
                 'attr' => array(
                     'isListLink' => 0,
                     'isList' => 1,
-                    'isSqlField' => 1,
-                    'isSqlQuery' => 1,
+                    'isDbField' => 1,
+                    'isDbQuery' => 1,
                 ),
+            ),
+        ));
+    }
+
+    public function setOperationMetadata()
+    {
+        $this->addField(array(
+            'basic' => array(
+                'order' => 1040,
+            ),
+            'form' => array(
+                '_type' => 'custom',
+                'name' => 'operation',
+            ),
+            'attr' => array(
+                'isListLink' => 0,
+                'isList' => 1,
+                'isDbField' => 0,
+                'isDbQuery' => 0,
+                'isView' => 0,
             ),
         ));
     }

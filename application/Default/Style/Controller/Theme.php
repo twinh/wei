@@ -102,6 +102,6 @@ class Default_Style_Controller_Theme extends Qwin_Trex_Controller
 
     public function convertListOperation($val, $name, $data, $cpoyData)
     {
-        return $this->meta->getOperationLink($this->__meta['db']['primaryKey'], $data[$this->__meta['db']['primaryKey']], $this->__query);
+        return $this->meta->getOperationLink($this->__meta['db']['primaryKey'], $data[$this->__meta['db']['primaryKey']], $this->_set);
     }
 }

@@ -49,8 +49,8 @@ class Default_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metad
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                 ),
                 'company' => array(
@@ -69,8 +69,8 @@ class Default_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metad
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'converter' => array(
                         'db' => array(
@@ -100,8 +100,8 @@ class Default_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metad
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'converter' => array(
                         'db' => array(
@@ -131,8 +131,8 @@ class Default_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metad
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'converter' => array(
                         'db' => array(
@@ -161,8 +161,8 @@ class Default_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metad
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'converter' => array(
                         'db' => array(
@@ -191,8 +191,8 @@ class Default_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metad
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'converter' => array(
                         'db' => array(
@@ -221,8 +221,8 @@ class Default_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metad
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'converter' => array(
                         'db' => array(
@@ -252,8 +252,8 @@ class Default_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metad
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'validator' => array(
                         'rule' => array(
@@ -279,8 +279,8 @@ class Default_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metad
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'converter' => array(
                         'db' => array(
@@ -318,8 +318,8 @@ class Default_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metad
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'converter' => array(
                         'db' => array(
@@ -348,8 +348,8 @@ class Default_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metad
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                         'isReadonly' => 1,
                     ),
                     'converter' => array(
@@ -382,8 +382,8 @@ class Default_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metad
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'converter' => array(
                         'db' => array(
@@ -413,8 +413,8 @@ class Default_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metad
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                     ),
                     'converter' => array(
                         'attr' => array(
@@ -439,8 +439,8 @@ class Default_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metad
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 1,
-                        'isSqlField' => 1,
-                        'isSqlQuery' => 1,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
                         'isReadonly' => 1,
                     ),
                 ),
@@ -458,8 +458,8 @@ class Default_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metad
                     'attr' => array(
                         'isListLink' => 0,
                         'isList' => 1,
-                        'isSqlField' => 0,
-                        'isSqlQuery' => 0,
+                        'isDbField' => 0,
+                        'isDbQuery' => 0,
                         'isView' => 0,
                     ),
                 ),

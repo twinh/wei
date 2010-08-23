@@ -79,7 +79,7 @@ class Default_Config_Controller_Config extends Qwin_Trex_Controller
 
     public function onAfterDb()
     {
-        $query = $this->meta->getQuery($this->__query);
+        $query = $this->meta->getQuery($this->_set);
         $data = $query->execute()->toArray();
         $cache = array();
         foreach($data as $row)
@@ -106,6 +106,6 @@ class Default_Config_Controller_Config extends Qwin_Trex_Controller
 
     public function convertListOperation($val, $name, $data, $cpoyData)
     {
-        return $this->meta->getOperationLink($this->__meta['db']['primaryKey'], $data[$this->__meta['db']['primaryKey']], $this->__query);
+        return $this->meta->getOperationLink($this->__meta['db']['primaryKey'], $data[$this->__meta['db']['primaryKey']], $this->_set);
     }
 }

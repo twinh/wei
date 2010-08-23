@@ -71,7 +71,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     public function toDoctrine(Qwin_Metadata $meta, Doctrine_Record $model)
     {
         $model->setTableName($meta->tablePrefix . $meta->db['table']);
-        $queryField = $meta->field->getAttrList('isSqlQuery');
+        $queryField = $meta->field->getAttrList('isDbQuery');
         foreach($meta->field as $field)
         {
             $model->hasColumn($field['form']['name']);
@@ -122,7 +122,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         $metaName = $this->getClassName('Metadata', $set);
         Qwin::load($metaName);
         $metaObj = Qwin_Metadata_Manager::get($metaName);
-        $queryField = $metaObj->field->getAttrList('isSqlQuery');
+        $queryField = $metaObj->field->getAttrList('isDbQuery');
 
         $modelName = $this->getClassName('Model', $set);
         $modelObj = Qwin::run($modelName);
@@ -146,7 +146,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             {
                 Qwin::load($model['metadata']);
                 $linkedMetaObj = Qwin_Metadata_Manager::get($model['metadata']);
-                $queryField = $linkedMetaObj->field->getAttrList('isSqlQuery');
+                $queryField = $linkedMetaObj->field->getAttrList('isDbQuery');
 
                 $linkedModelObj = Qwin::run($model['name']);
                 $linkedModelObj->setTableName($this->getTablePrefix() . $linkedMetaObj['db']['table']);
@@ -238,10 +238,10 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         $primaryKey = $meta['db']['primaryKey'];
         $meta->field
              //->setAttr($primaryKey, 'isList', true)
-             ->setAttr($primaryKey, 'isSqlField', true)
-             ->setAttr($primaryKey, 'isSqlQuery', true);
+             ->setAttr($primaryKey, 'isDbField', true)
+             ->setAttr($primaryKey, 'isDbQuery', true);
         
-        $queryField = $meta->field->getAttrList('isSqlQuery');
+        $queryField = $meta->field->getAttrList('isDbQuery');
         $query->select(implode(', ', $queryField));
 
         /**
@@ -255,10 +255,10 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             // 调整主键的属性,因为查询时至少需要选择一列
             $primaryKey = $linkedMetaObj['db']['primaryKey'];
             $linkedMetaObj->field
-                          ->setAttr($primaryKey, 'isSqlField', true)
-                          ->setAttr($primaryKey, 'isSqlQuery', true);
+                          ->setAttr($primaryKey, 'isDbField', true)
+                          ->setAttr($primaryKey, 'isDbQuery', true);
             
-            $queryField = $linkedMetaObj->field->getAttrList('isSqlQuery');
+            $queryField = $linkedMetaObj->field->getAttrList('isDbQuery');
             foreach($queryField as $field)
             {
                 $query->addSelect($model['asName'] . '.' . $field);
@@ -289,7 +289,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         $orderType = strtoupper($request->g('orderType'));
 
         // 数据表字段的域
-        $queryField = $meta->field->getAttrList('isSqlQuery');
+        $queryField = $meta->field->getAttrList('isDbQuery');
 
         if(in_array($orderField, $queryField))
         {
@@ -342,7 +342,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         $searchValue = $request->g('searchValue');
 
         // 数据表字段的域
-        $queryField = $meta->field->getAttrList('isSqlQuery');
+        $queryField = $meta->field->getAttrList('isDbQuery');
 
         if(in_array($searchField, $queryField))
         {
@@ -416,9 +416,15 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             if(isset($set['converter'][$action]) && is_array($set['converter'][$action]))
             {
                 $param = $set['converter'][$action];
+                // TODO 逻辑分清
                 if(Qwin::isCallable($param[0]))
                 {
                     $method = $param[0];
+                    if(is_string($method))
+                    {
+                        $row[$name] = call_user_func_array($method, $param);
+                        continue;
+                    }
                     $param[0] = $row[$name];
                     // TODO 静态调用和动态调用
                     if(!is_object($method[0]) && !function_exists($method[0]))
@@ -462,7 +468,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         foreach($set as $field => $val)
         {
             // 防止对非数据库字段域进行转换,导致入库出错
-            if('db' == $action && false == $val['list']['isSqlField'])
+            if('db' == $action && false == $val['list']['isDbField'])
             {
                 continue;
             }
@@ -807,7 +813,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         {
             if(isset($this->__meta['field'][$key]['list']['isListLink']) && $this->__meta['field'][$key]['list']['isListLink'] == true)
             {
-                $data[$key] = '<a href="' . url(array('admin', $this->__query['controller']), array(_S('url', '_DATA') . '%5B' . $key . '%5D' => $sql_data[$key])) . '">' . $val . '</a>';
+                $data[$key] = '<a href="' . url(array('admin', $this->_set['controller']), array(_S('url', '_DATA') . '%5B' . $key . '%5D' => $sql_data[$key])) . '">' . $val . '</a>';
             }
         }
         return $data;
@@ -921,7 +927,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         // 设置数据表
         $model->setTableName($config['db']['prefix'] . $meta['db']['table']);
          // 数据库查询的字段数组
-        $fieldList = $this->getSettingList($meta['field'], 'isSqlQuery');
+        $fieldList = $this->getSettingList($meta['field'], 'isDbQuery');
         foreach($fieldList as $val)
         {
             $model->hasColumn($val);
