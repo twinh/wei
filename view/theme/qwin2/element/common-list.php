@@ -31,15 +31,15 @@
 // 防止直接访问导致错误
 !defined('QWIN_PATH') && exit('Forbidden');
 ?>
-<script type="text/javascript" src="../resource/js/jquery/plugin/jqgrid/i18n/grid.locale-en.js"></script>
+<script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH ?>/js/jquery/plugin/jqgrid/i18n/grid.locale-en.js"></script>
 <?php echo $jquery->loadPlugin('jqgrid') ?>
 <div id="custom-jqgird-toolbar" class="ui-helper-hidden">
-    &nbsp;<a class="action-add" href="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], 'Add'))?>"><?php echo $lang->t('LBL_ACTION_ADD')?></a>&nbsp;|&nbsp;
+    &nbsp;<a class="action-add" href="<?php echo qw_url($set, array('action' => 'Add')) ?>"><?php echo $lang->t('LBL_ACTION_ADD')?></a>&nbsp;|&nbsp;
     <a class="action-edit" href="javascript:void(0)"><?php echo qw_lang('LBL_ACTION_EDIT') ?></a>&nbsp;|&nbsp;
     <a class="action-delete" href="javascript:void(0)"><?php echo qw_lang('LBL_ACTION_DELETE') ?></a>&nbsp;|&nbsp;
     <a class="list_show_link" href="javascript:void(0)"><?php echo qw_lang('LBL_ACTION_SHOW') ?></a>&nbsp;|&nbsp;
     <a class="action-clone" href="javascript:void(0)"><?php echo qw_lang('LBL_ACTION_COPY') ?></a>&nbsp;|&nbsp;
-    <!--<a class="action-filter" href="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'], 'Filter'))?>"><?php echo $lang->t('LBL_ACTION_FILTER')?></a>-->
+    <!--<a class="action-filter" href="Add"><?php echo $lang->t('LBL_ACTION_FILTER')?></a>-->
 </div>
 <table id="ui-jqgrid-table"></table>
 <div id="ui-jqgrid-page"></div>
@@ -58,7 +58,7 @@ jQuery(function($){
         sortname         : '<?php echo $sortName?>',
         sortorder        : '<?php echo $sortOrder?>',
         // 标题
-        caption          : '<a href="<?php echo url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller']))?>"><?php echo qw_lang($meta['page']['title']) ?></a>',
+        caption          : '<a href="<?php echo qw_url() ?>"><?php echo qw_lang($meta['page']['title']) ?></a>',
         // 显示列的数目
         rownumbers       : true,
         // 允许多选

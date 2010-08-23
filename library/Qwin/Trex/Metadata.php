@@ -491,6 +491,37 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         return $data;
     }
 
+    /**
+     * 获取 url 中的数据
+     *
+     * @param array $data add.edit等操作传过来的初始数据
+     * @param int $mode
+     */
+    public function getUrlData($data, $mode = 'ovwewrite')
+    {
+        !in_array($mode, $this->_inital_mode) && $mode = $this->_inital_mode[0];
+        // 覆盖 $data 的值
+        if($mode == $this->_inital_mode[0])
+        {
+            foreach($data as $key => $val)
+            {
+                if(isset($this->_get['data'][$key]) && '' != $this->_get['data'][$key])
+                {
+                    $data[$key] = $this->_get['data'][$key];
+                }
+            }
+        } else {
+            foreach($data as $key => $val)
+            {
+                if('' == $val)
+                {
+                    $data[$key] = $this->_get['data'][$key];
+                }
+            }
+        }
+        return $data;
+    }
+
     public function translate(Qwin_Trex_Language $lang)
     {
         foreach($this->_data as $data)

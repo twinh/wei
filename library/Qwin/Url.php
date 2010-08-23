@@ -386,37 +386,6 @@ class Qwin_Url
     }
     
     /**
-     * 获取 url 中的数据
-     *
-     * @param array $data add.edit等操作传过来的初始数据
-     * @param int $mode 
-     */
-    public function getInitalData($data, $mode = 'ovwewrite')
-    {
-        !in_array($mode, $this->_inital_mode) && $mode = $this->_inital_mode[0];
-        // 覆盖 $data 的值
-        if($mode == $this->_inital_mode[0])
-        {
-            foreach($data as $key => $val)
-            {
-                if(isset($this->_get['data'][$key]) && '' != $this->_get['data'][$key])
-                {
-                    $data[$key] = $this->_get['data'][$key];
-                }
-            }
-        } else {
-            foreach($data as $key => $val)
-            {
-                if('' == $val)
-                {
-                    $data[$key] = $this->_get['data'][$key];
-                }
-            }
-        }
-        return $data;
-    }
-    
-    /**
      * 设置 $_get 的值
      * 
      * @todo 完善多种设置形式
@@ -431,9 +400,4 @@ class Qwin_Url
      * @link http://hi.baidu.com/lukin/blog/item/a82df3039c21fded09fa93c9.html
      * @todo 重写或整理
      */     
-}
-
-function url($array, $argvs = array())
-{
-     return qw('-url')->auto($array, $argvs);
 }
