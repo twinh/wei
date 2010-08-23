@@ -176,7 +176,7 @@ class Default_Controller extends Qwin_Trex_Controller
     /**
      * 显示单独一条数据
      */
-    public function actionShow()
+    public function actionView()
     {
         /**
          * 初始化常用的变量
@@ -212,108 +212,16 @@ class Default_Controller extends Qwin_Trex_Controller
          * 设置视图
          */
         $this->_view = array(
-            'class' => 'Default_Common_View_Show',
+            'class' => 'Default_Common_View_View',
             'data' => get_defined_vars(),
         );
     }
 
     /**
-     * 添加记录
+     * 根据元数据,生成添加视图和处理添加操作
+     *
+     * @return array 视图配置数组
      */
-    public function actionAdd2()
-    {
-        exit;
-        $ini = Qwin::run('-ini');
-        $meta = &$this->_meta;
-
-
-        // 加载关联模型,元数据
-        $this->_meta->loadRelatedData($meta['model']);
-        // 获取模型类名称
-        $modelName = $ini->getClassName('Model', $this->__query);
-        $query = $this->_meta->connectModel($modelName, $meta['model']);
-        $meta = $this->_meta->connetMetadata($meta);
-
-        if(!$_POST)
-        {
-            // 三种模式　1.复制(根据主键获取初始值) 2.从url获取值 3. 获取模型默认值
-            // 1. 复制
-            // 根据url参数中的值,获取对应的数据库资料
-            $id = $this->_request->g($meta['db']['primaryKey']);
-            if(null != $id)
-            {
-                $query = $query->where($meta['db']['primaryKey'] . ' = ?', $id)->fetchOne();
-                if(false == $query)
-                {
-                    $this->Qwin_Helper_Js->show($this->t('MSG_NO_RECORD'));
-                }
-                $data = $query->toArray();
-            // url + 模型默认值
-            } else {
-                // 从模型配置数组中取出表单初始值
-                $data = $this->_meta->getSettingValue($meta['field'], array('form', '_value'));
-                // 从url地址参数取出初始值,覆盖原值
-                $data = Qwin::run('-url')->getInitalData($data);
-            }
-            unset($data[$meta['db']['primaryKey']]);
-
-            $data = $this->_meta->convertDataToSingle($data);
-            // 根据配置和控制器中的对应方法转换数据
-            //$data = $this->_meta->convertSingleData($meta['field'], $this->__query['action'], $data);
-            $tip_data = $this->_meta->getTipData($meta['field']);
-
-            // 获取 jQuery Validate 的验证规则
-            $validator_rule = Qwin::run('Qwin_JQuery_Validator')->getRule($meta['field']);
-            // 排序
-            $meta['field'] = $this->_meta->orderSettingArr($meta['field']);
-            // 分组
-            $meta['field'] = $this->_meta->groupingSettingArr($meta['field']);
-
-            // 初始化视图变量数组
-            $this->__view = array(
-                'set' => $meta,
-                'data' => $data,
-                'tip_data' => &$tip_data,
-                'tip_name' => &$tip_name,
-                'validator_rule' => &$validator_rule,
-                'http_referer' => urlencode(Qwin::run('-str')->set($_SERVER['HTTP_REFERER']))
-            );
-
-            // 初始化控制面板中心内容的视图变量数组,加载控制面板视图
-            $this->__view_element = array(
-                'content' => QWIN_RESOURCE_PATH . '/php/View/Element/DefaultForm.php',
-            );
-            $this->loadView($ini->load('Resource/View/Layout/DefaultControlPanel', false));
-        } else {
-            // POST 操作下,设置action为db
-            $this->setAction('db');
-
-            // 获取模型类名称
-            $modelName = $ini->getClassName('Model', $this->__query);
-            $query = new $modelName;
-            /**
-             * 转换数据
-             * 验证数据
-             * 填充数据到模型中
-             * 保存数据
-             */
-            $data = $this->_meta->convertSingleData($meta['field'], $this->__query['action'], $_POST);
-            $this->_meta->validateData($meta['field'], $data);
-            $query = $this->_meta->fillData($meta, $query, $data);
-            $query->save();
-
-            // 在数据库操作之后,执行相应的 on 函数
-            $this->executeOnFunction('afterDb', $this->resetAction(), $data);
-            $url = urldecode($this->_request->p('_page'));
-            if($url)
-            {
-                Qwin::run('-url')->to($url);
-            } else {
-                Qwin::run('-url')->to(url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'])));
-            }
-        }
-    }
-
     public function actionAdd()
     {
         /**
@@ -366,7 +274,42 @@ class Default_Controller extends Qwin_Trex_Controller
                 'data' => get_defined_vars(),
             );
         } else {
-            p($_POST);
+            /**
+             * 设置行为为入库,连接元数据
+             */
+            $this->setAction('db');
+            $relatedField = $meta->connectRelatedMetadata($meta);
+
+            /**
+             * 取出需要入库的数据
+             */
+            $dblist = $relatedField->getAttrList('isSqlField');
+            $data = $meta->intersect($dblist, $_POST);
+
+            /**
+             * 转换,验证和还原
+             */
+            $data = $this->_meta->convertSingleData($relatedField, 'db', $_POST);
+            $this->_meta->validateData($relatedField, $data);
+            $data = $meta->restoreData($relatedField, $data);
+            $data = $meta->setForeignKeyData($meta['model'], $data);
+
+            /**
+             * 入库
+             */
+            $ini = Qwin::run('-ini');
+            $modelName = $ini->getClassName('Model', $this->_set);
+            $query = new $modelName;
+            $query->fromArray($data);
+            $query->save();
+
+            /**
+             * 在数据库操作之后,执行相应的 on 函数,跳转到原来的页面或列表页
+             */
+            $this->executeOnFunction('afterDb', $this->resetAction(), $data);
+            $url = urldecode($this->_request->p('_page'));
+            '' == $url && $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Default'));
+            $this->setView('alert', $this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }
 
@@ -462,17 +405,13 @@ class Default_Controller extends Qwin_Trex_Controller
     public function actionDelete()
     {
         $ini = Qwin::run('-ini');
-        $this->_request = Qwin::run('-gpc');
-        $meta = &$this->_meta;
+        $this->_request = Qwin::run('Qwin_Request');
+        $meta = $this->_meta;
 
         $id = $this->_request->g($meta['db']['primaryKey']);
         $id = explode(',', $id);
 
-        // 加载关联模型,元数据
-        $this->_meta->loadRelatedData($meta['model']);
-        // 获取模型类名称
-        $modelName = $ini->getClassName('Model', $this->__query);
-        $query = $this->_meta->connectModel($modelName, $meta['model']);
+        $query = $meta->getDoctrineQuery($this->_set);
         $alias = $query->getRootAlias() . '.';
         $object = $query
             //->select($modelName . '.' . $meta['db']['primaryKey'])
@@ -485,19 +424,21 @@ class Default_Controller extends Qwin_Trex_Controller
         {
             foreach($meta['model'] as $model)
             {
-                $object[$key][$model['asName']]->delete();
+                if(isset($object[$key][$model['asName']]))
+                {
+                    $object[$key][$model['asName']]->delete();
+                }
             }
             $object[$key]->delete();
         }
 
-        $this->executeOnFunction('afterDb', $this->resetAction(), array());
-        $url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
-        if($url)
-        {
-            Qwin::run('-url')->to($url);
-        } else {
-            Qwin::run('-url')->to(url(array($this->__query['namespace'], $this->__query['module'], $this->__query['controller'])));
-        }
+        /**
+         * 在数据库操作之后,执行相应的 on 函数,跳转到原来的页面或列表页
+         */
+        $this->executeOnFunction('afterDb', 'delete', array());
+        $url = urldecode($this->_request->p('_page'));
+        '' == $url && $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Default'));
+        $this->setView('alert', $this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
     }
 
     /**
@@ -541,10 +482,10 @@ class Default_Controller extends Qwin_Trex_Controller
     public function convertListOperation($value, $name, $data, $copyData)
     {
         $primaryKey = $this->_meta['db']['primaryKey'];
-        $data = '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->_lang->t('LBL_ACTION_EDIT') .'" href="' . $this->_url->createUrl($this->_set, array('action' => 'Edit', $primaryKey => $copyData[$primaryKey])) . '"><span class="ui-icon ui-icon-tag"></span></a>'
-              . '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->_lang->t('LBL_ACTION_SHOW') .'" href="' . $this->_url->createUrl($this->_set, array('action' => 'Show', $primaryKey => $copyData[$primaryKey])) . '"><span class="ui-icon ui-icon-lightbulb"></span></a>'
-              . '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->_lang->t('LBL_ACTION_COPY') .'" href="' . $this->_url->createUrl($this->_set, array('action' => 'Add', $primaryKey => $copyData[$primaryKey])) . '"><span class="ui-icon ui-icon-transferthick-e-w"></span></a>'
-              . '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->_lang->t('LBL_ACTION_DELETE') .'" href="' . $this->_url->createUrl($this->_set, array('action' => 'Delete', $primaryKey => $copyData[$primaryKey])) . '" onclick="javascript:return confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE);"><span class="ui-icon ui-icon-closethick"></span></a>';
+        $data = '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->_lang->t('LBL_ACTION_EDIT') .'" href="' . $this->_url->createUrl($this->_set, array('action' => 'Edit', $primaryKey => $copyData[$primaryKey])) . '"><span class="ui-icon ui-icon-tag">Edit</span></a>'
+              . '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->_lang->t('LBL_ACTION_SHOW') .'" href="' . $this->_url->createUrl($this->_set, array('action' => 'Show', $primaryKey => $copyData[$primaryKey])) . '"><span class="ui-icon ui-icon-lightbulb">Show</span></a>'
+              . '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->_lang->t('LBL_ACTION_COPY') .'" href="' . $this->_url->createUrl($this->_set, array('action' => 'Add', $primaryKey => $copyData[$primaryKey])) . '"><span class="ui-icon ui-icon-transferthick-e-w">Clone</span></a>'
+              . '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->_lang->t('LBL_ACTION_DELETE') .'" href="' . $this->_url->createUrl($this->_set, array('action' => 'Delete', $primaryKey => $copyData[$primaryKey])) . '" onclick="javascript:return confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE);"><span class="ui-icon ui-icon-closethick">Delete</span></a>';
         return $data;
     }
 

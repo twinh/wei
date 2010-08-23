@@ -45,7 +45,7 @@ class Default_Article_Metadata_Detail extends Default_Metadata
                         'isList' => 0,
                         'isSqlField' => 1,
                         'isSqlQuery' => 1,
-                        'isShow' => 0,
+                        'isView' => 0,
                     ),
                 ),
                 'article_id' => array(

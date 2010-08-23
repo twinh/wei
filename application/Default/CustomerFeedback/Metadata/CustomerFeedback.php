@@ -460,7 +460,7 @@ class Default_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metad
                         'isList' => 1,
                         'isSqlField' => 0,
                         'isSqlQuery' => 0,
-                        'isShow' => 0,
+                        'isView' => 0,
                     ),
                 ),
             ),

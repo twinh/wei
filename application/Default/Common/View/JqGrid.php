@@ -49,8 +49,7 @@ class Default_Common_View_JqGrid extends Default_View
          * 数据转换
          */
         // 获取json数据的链接
-        $urlGet = $_GET;
-        $urlGet['action'] = 'List';
+        $urlGet = array('action' => 'List') + $_GET;
         $jsonUrl = '?' . Qwin::run('-url')->arrayKey2Url($urlGet);
 
         // 获取栏数据

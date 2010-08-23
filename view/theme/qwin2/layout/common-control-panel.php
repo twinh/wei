@@ -8,11 +8,7 @@
 /*
 $ses = Qwin::run('-ses');
 $loginState = $ses->get('member');
-$qurl = array(
-    'nca' => qw('-url')->nca,
-    'separator' => qw('-url')->separator,
-    'extension' => qw('-url')->extension,
-);*/
+ */
 $qurl = null;
 $jquery = Qwin::run('-jquery');
 echo $jquery->loadTheme(),
@@ -33,11 +29,7 @@ echo $jquery->loadTheme(),
 <script type="text/javascript">
     jQuery.noConflict();
     <?php echo qw_lang_to_js() ?>
-	var _get = <?php echo $arrayHelper->toJsObject($_GET);?>;
-    var qurl = <?php echo $arrayHelper->toJsObject($qurl);?>;
-    jQuery(function($) {
-		
-    });
+	Qwin.get = <?php echo $arrayHelper->toJsObject($_GET);?>;
 </script>
 <div id="ui-top-floating-bar" class="ui-top-floating-bar ui-widget ui-widget-header">
 	<ul>

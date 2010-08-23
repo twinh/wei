@@ -283,7 +283,7 @@ class Default_Job_Metadata_Job extends Qwin_Trex_Metadata
                         'isList' => 1,
                         'isSqlField' => 0,
                         'isSqlQuery' => 0,
-                        'isShow' => 0,
+                        'isView' => 0,
                     ),
                 ),
             ),

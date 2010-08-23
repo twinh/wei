@@ -445,7 +445,7 @@ class Default_Product_Metadata_Product extends Qwin_Trex_Metadata
                         'isList' => 1,
                         'isSqlField' => 0,
                         'isSqlQuery' => 0,
-                        'isShow' => 0,
+                        'isView' => 0,
                     ),
                 ),
             ),

@@ -190,7 +190,7 @@ class Default_Config_Metadata_Config extends Qwin_Trex_Metadata
                         'isList' => 1,
                         'isSqlField' => 0,
                         'isSqlQuery' => 0,
-                        'isShow' => 0,
+                        'isView' => 0,
                     ),
                 ),
             ),
@@ -213,6 +213,43 @@ class Default_Config_Metadata_Config extends Qwin_Trex_Metadata
                 'rowNum' => 10,
             ),
             'shortcut' => array(
+            )
+        );
+    }
+
+    public function fileMetadata()
+    {
+        return array(
+            'field' => array(
+                'id' => array(
+                    'basic' => array(
+                        'title' => 'LBL_FIELD_TITLE',
+                    ),
+                    'form' => array(
+                        '_type' => 'text',
+                    ),
+                    'attr' => array(
+                        'isFileField' => true,
+                    ),
+                ),
+                'name' => array(
+                    'basic' => array(
+                        'title' => 'LBL_FIELD_TITLE',
+                    ),
+                    'form' => array(
+                        '_type' => 'text',
+                    ),
+                    'attr' => array(
+                        'isFileField' => true,
+                    ),
+                )
+            ),
+            'model' => array(
+
+            ),
+            'file' => array(
+                'path' => 'config.php',
+                'varname' => 'config',
             )
         );
     }
