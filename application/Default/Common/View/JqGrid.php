@@ -16,8 +16,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  
+ * @package     Default
+ * @subpackage  Common
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -43,6 +43,7 @@ class Default_Common_View_JqGrid extends Default_View
         $arrayHelper = Qwin::run('-arr');
         $request = Qwin::run('Qwin_Request');
         $lang = Qwin::run('-lang');
+        $set = Qwin::run('-ini')->getSet();
 
         /**
          * 数据转换

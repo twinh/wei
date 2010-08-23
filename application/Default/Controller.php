@@ -346,7 +346,7 @@ class Default_Controller extends Qwin_Trex_Controller
                  * 从配置元数据中取出表单初始值,再从url地址参数取出初始值,覆盖原值
                  */
                 $data = $meta->field->getSecondLevelValue(array('form', '_value'));
-                //$data = Qwin::run('-url')->getInitalData($data);
+                $data = $meta->getUrlData($data);
             }
             unset($data[$primaryKey]);
 
