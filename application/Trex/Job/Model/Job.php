@@ -26,6 +26,6 @@
  * @since     2010-7-18 10:39:50
  */
 
-class Default_Job_Model_Job extends Doctrine_Record
+class Trex_Job_Model_Job extends Doctrine_Record
 {
 }

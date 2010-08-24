@@ -26,7 +26,7 @@
  * @since     2010-5-13 10:19:22 utf-8 中文
  */
 
-class Default_Member_Metadata_Member extends Default_Metadata
+class Trex_Member_Metadata_Member extends Trex_Metadata
 {
     public function  __construct()
     {
@@ -131,20 +131,20 @@ class Default_Member_Metadata_Member extends Default_Metadata
             'model' => array(
                 array(
                     // 模型类名
-                    'name' => 'Default_Member_Model_Detail',
+                    'name' => 'Trex_Member_Model_Detail',
                     'asName' => 'detail',
                     // Metadata 中包含模型字段,表名,关系的定义,
-                    'metadata' => 'Default_Member_Metadata_Detail',
+                    'metadata' => 'Trex_Member_Metadata_Detail',
                     'type' => 'hasOne',
                     'local' => 'id',
                     'foreign' => 'member_id',
                 ),
                 array(
                     // 模型类名
-                    'name' => 'Default_Member_Model_Company',
+                    'name' => 'Trex_Member_Model_Company',
                     'asName' => 'company',
                     // Metadata 中包含模型字段,表名,关系的定义,
-                    'metadata' => 'Default_Member_Metadata_Company',
+                    'metadata' => 'Trex_Member_Metadata_Company',
                     'type' => 'hasOne',
                     'local' => 'id',
                     'foreign' => 'member_id',

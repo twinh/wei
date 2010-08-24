@@ -23,7 +23,7 @@
  * @since       2010-08-16 19:36:00
  */
 
-class Default_AdminMenu_Language_Zhcn extends Default_Language
+class Trex_AdminMenu_Language_Zhcn extends Trex_Language
 {
     public function __construct()
     {

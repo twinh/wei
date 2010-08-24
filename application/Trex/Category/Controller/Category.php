@@ -26,7 +26,7 @@
  * @since     2010-7-12 17:01:37
  */
 
-class Default_Category_Controller_Category extends Qwin_Trex_Controller
+class Trex_Category_Controller_Category extends Qwin_Trex_Controller
 {
     /**
      * 列表

@@ -26,7 +26,7 @@
  * @since     2010-5-22 23:58:30 utf-8 中文
  */
 
-class Default_Member_Controller_Setting extends Qwin_Trex_Controller
+class Trex_Member_Controller_Setting extends Qwin_Trex_Controller
 {
     public function actionSwitchLang()
     {

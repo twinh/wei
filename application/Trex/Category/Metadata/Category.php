@@ -26,7 +26,7 @@
  * @since     2010-7-12 16:52:28
  */
 
-class Default_Category_Metadata_Category extends Default_Metadata
+class Trex_Category_Metadata_Category extends Trex_Metadata
 {
     public function  __construct()
     {
@@ -39,7 +39,7 @@ class Default_Category_Metadata_Category extends Default_Metadata
                         '_type' => 'select',
                         '_value' => '',
                         '_resourceGetter' => array(
-                            array('Default_Category_Controller_Category', 'getCategoryResource'),
+                            array('Trex_Category_Controller_Category', 'getCategoryResource'),
                         ),
                         'name' => 'parent_id',
                     ),

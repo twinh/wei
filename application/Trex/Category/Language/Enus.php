@@ -25,7 +25,7 @@
  * @since       2010-08-16 19:50:28
  */
 
-class Default_Category_Language_Enus extends Default_Language
+class Trex_Category_Language_Enus extends Trex_Language
 {
     public function __construct()
     {

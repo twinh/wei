@@ -25,7 +25,7 @@
  * @since       2010-08-06 11:13:29
  */
 
-class Default_Article_View_List extends Default_View
+class Trex_Article_View_List extends Trex_View
 {
     public function __construct()
     {

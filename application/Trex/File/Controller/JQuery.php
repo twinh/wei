@@ -26,7 +26,7 @@
  * @since     2010-5-27 7:56:33 utf-8 中文
  */
 
-class Default_File_Controller_JQuery extends Qwin_Trex_Controller
+class Trex_File_Controller_JQuery extends Qwin_Trex_Controller
 {
     public function actionAjaxUpload()
     {

@@ -26,6 +26,6 @@
  * @since     2010-7-9 16:16:45
  */
 
-class Default_Project_Model_Bug extends Doctrine_Record
+class Trex_Project_Model_Bug extends Doctrine_Record
 {
 }

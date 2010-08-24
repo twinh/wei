@@ -26,7 +26,7 @@
  * @since     2010-6-12 11:25:10 utf-8 中文
  */
 
-class Default_Project_Controller_Project extends Qwin_Trex_Controller
+class Trex_Project_Controller_Project extends Qwin_Trex_Controller
 {
     /**
      * 列表

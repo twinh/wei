@@ -26,7 +26,7 @@
  * @since     2010-06-07
  */
 
-class Default_Default_Controller_Default extends Qwin_Trex_Controller
+class Trex_Trex_Controller_Default extends Qwin_Trex_Controller
 {
     public function actionIndex()
     {

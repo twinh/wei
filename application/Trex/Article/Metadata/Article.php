@@ -23,7 +23,7 @@
  * @since       2010-5-26 22:52:49
  */
 
-class Default_Article_Metadata_Article extends Default_Metadata
+class Trex_Article_Metadata_Article extends Trex_Metadata
 {
     public function  __construct()
     {
@@ -259,10 +259,10 @@ class Default_Article_Metadata_Article extends Default_Metadata
             'model' => array(
                 array(
                     // 模型类名
-                    'name' => 'Default_Article_Model_Detail',
+                    'name' => 'Trex_Article_Model_Detail',
                     'asName' => 'detail',
                     // Metadata 中包含模型字段,表名,关系的定义,
-                    'metadata' => 'Default_Article_Metadata_Detail',
+                    'metadata' => 'Trex_Article_Metadata_Detail',
                     'type' => 'hasOne',
                     'local' => 'id',
                     'foreign' => 'article_id',

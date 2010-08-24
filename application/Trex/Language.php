@@ -25,7 +25,7 @@
  * @since       2010-08-16 18:40:20
  */
 
-class Default_Language extends Qwin_Trex_Language
+class Trex_Language extends Qwin_Trex_Language
 {
     public function __construct()
     {

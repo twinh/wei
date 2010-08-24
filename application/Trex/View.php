@@ -25,7 +25,7 @@
  * @since       2010-08-14 11:12:00
  */
 
-class Default_View extends Qwin_Trex_View
+class Trex_View extends Qwin_Trex_View
 {
     public function __construct()
     {

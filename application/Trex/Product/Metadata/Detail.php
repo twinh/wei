@@ -26,7 +26,7 @@
  * @since     2010-06-07
  */
 
-class Default_Product_Metadata_Detail extends Qwin_Trex_Metadata
+class Trex_Product_Metadata_Detail extends Qwin_Trex_Metadata
 {
     public function defaultMetadata()
     {

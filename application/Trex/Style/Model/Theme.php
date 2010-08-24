@@ -26,6 +26,6 @@
  * @since     2010-5-23 7:26:40 utf-8 中文
  */
 
-class Default_Style_Model_Theme extends Doctrine_Record
+class Trex_Style_Model_Theme extends Doctrine_Record
 {
 }

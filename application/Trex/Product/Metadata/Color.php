@@ -26,7 +26,7 @@
  * @since     2010-7-19 18:18:41
  */
 
-class Default_Product_Metadata_Color extends Qwin_Trex_Metadata
+class Trex_Product_Metadata_Color extends Qwin_Trex_Metadata
 {
     public function defaultMetadata()
     {

@@ -26,7 +26,7 @@
  * @since     2010-5-26 22:52:49 utf-8 中文
  */
 
-class Default_Product_Metadata_Product extends Qwin_Trex_Metadata
+class Trex_Product_Metadata_Product extends Qwin_Trex_Metadata
 {
     public function defaultMetadata()
     {
@@ -453,10 +453,10 @@ class Default_Product_Metadata_Product extends Qwin_Trex_Metadata
             'model' => array(
                 array(
                     // 模型类名
-                    'name' => 'Default_Product_Model_Detail',
+                    'name' => 'Trex_Product_Model_Detail',
                     'asName' => 'detail',
                     // Metadata 中包含模型字段,表名,关系的定义,
-                    'metadata' => 'Default_Product_Metadata_Detail',
+                    'metadata' => 'Trex_Product_Metadata_Detail',
                     'type' => 'hasOne',
                     'local' => 'id',
                     'foreign' => 'product_id',

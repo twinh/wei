@@ -25,6 +25,6 @@
  * @since       2010-08-04 13:40:02
  */
 
-class Default_Setup extends Qwin_Trex_Setup
+class Trex_Setup extends Qwin_Trex_Setup
 {
 }

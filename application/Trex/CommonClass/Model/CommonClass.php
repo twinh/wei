@@ -26,6 +26,6 @@
  * @since     2010-6-10 8:31:30 utf-8 中文
  */
 
-class Default_CommonClass_Model_CommonClass extends Doctrine_Record
+class Trex_CommonClass_Model_CommonClass extends Doctrine_Record
 {
 }

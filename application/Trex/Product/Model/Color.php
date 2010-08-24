@@ -26,6 +26,6 @@
  * @since     2010-7-19 18:17:50
  */
 
-class Default_Product_Model_Color extends Doctrine_Record
+class Trex_Product_Model_Color extends Doctrine_Record
 {
 }

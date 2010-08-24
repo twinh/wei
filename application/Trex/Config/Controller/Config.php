@@ -26,7 +26,7 @@
  * @since     2010-06-02
  */
 
-class Default_Config_Controller_Config extends Qwin_Trex_Controller
+class Trex_Config_Controller_Config extends Qwin_Trex_Controller
 {
     /**
      * 列表

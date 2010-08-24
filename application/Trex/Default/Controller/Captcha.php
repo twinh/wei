@@ -26,7 +26,7 @@
  * @since     2010-5-24 9:47:32 utf-8 中文
  */
 
-class Default_Default_Controller_Captcha
+class Trex_Trex_Controller_Captcha
 {
     public function actionCaptcha()
     {

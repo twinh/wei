@@ -26,7 +26,7 @@
  * @since     2010-06-07
  */
 
-class Default_Product_Controller_Product extends Qwin_Trex_Controller
+class Trex_Product_Controller_Product extends Qwin_Trex_Controller
 {
     /**
      * 列表

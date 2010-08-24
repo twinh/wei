@@ -26,7 +26,7 @@
  * @since     2010-4-17 14:02:35 utf-8 中文
  */
 
-class Default_Article_Controller_Article extends Default_Controller
+class Trex_Article_Controller_Article extends Trex_Controller
 {
 
     /**

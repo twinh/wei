@@ -28,7 +28,7 @@
  * @since     2009-11-21 12:18 utf-8 中文
  */
 
-class Default_CommonClass_Controller_CommonClass extends Qwin_Trex_Controller
+class Trex_CommonClass_Controller_CommonClass extends Qwin_Trex_Controller
 {
     /**
      * 列表

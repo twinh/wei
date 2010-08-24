@@ -25,7 +25,7 @@
  * @since       2010-08-14 15:32:17
  */
 
-class Default_Common_View_JqGrid extends Default_View
+class Trex_Common_View_JqGrid extends Trex_View
 {
     public function  __construct()
     {

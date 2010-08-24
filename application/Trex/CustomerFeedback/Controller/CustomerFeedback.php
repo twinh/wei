@@ -26,7 +26,7 @@
  * @since     2010-7-18 13:57:13
  */
 
-class Default_CustomerFeedback_Controller_CustomerFeedback extends Qwin_Trex_Controller
+class Trex_CustomerFeedback_Controller_CustomerFeedback extends Qwin_Trex_Controller
 {
     /**
      * 列表

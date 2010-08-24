@@ -28,7 +28,7 @@
  * @since     2009-11-21 14:37 utf-8 中文
  */
 
-class Default_Namespace extends Qwin_Trex_Namespace
+class Trex_Namespace extends Qwin_Trex_Namespace
 {
     public function __construct()
     {
@@ -121,7 +121,7 @@ class Default_Namespace extends Qwin_Trex_Namespace
 
 
             // 加载部分父类
-            Qwin::load('Default_Controller');
+            Qwin::load('Trex_Controller');
         } 
     }
 
