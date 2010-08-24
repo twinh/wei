@@ -109,7 +109,7 @@ class Trex_Controller extends Qwin_Trex_Controller
     /**
      * 默认首页
      */
-    public function actionDefault()
+    public function actionIndex()
     {
         /**
          * 初始化常用的变量
@@ -207,6 +207,7 @@ class Trex_Controller extends Qwin_Trex_Controller
         $groupList = $relatedField->getViewGroupList();
         $data = $result->toArray();
         $data = $meta->convertDataToSingle($data);
+        $data = $meta->convertSingleData($relatedField, $this->_set['action'], $data);
 
         /**
          * 设置视图

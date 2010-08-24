@@ -26,152 +26,38 @@
  * @since     2010-7-15 14:49:16
  */
 
-class Trex_Member_Metadata_Group extends Qwin_Trex_Metadata
+class Trex_Member_Metadata_Group extends Trex_Metadata
 {
     public function __construct()
     {
+        $this->setCommonMetadata();
         $this->parseMetadata(array(
             // 基本属性
             'field' => array(
-                'id' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_ID',
-                        'descrip' => '',
-                        'order' => 0,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
-                    'form' => array(
-                        '_type' => 'hidden',
-                        '_typeExt' => '',
-                        '_value' => '',
-                        'name' => 'id',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
-                    ),
-                ),
                 'name' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_NAME',
-                        'descrip' => '',
-                        'order' => 20,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
-                        '_type' => 'text',
-                        '_typeExt' => '',
-                        '_value' => '',
                         'name' => 'name',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                 ),
                 'image_path' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_IMAGE_PATH',
-                        'descrip' => '',
-                        'order' => 40,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
-                        '_type' => 'text',
-                        '_typeExt' => 'fileTree',
-                        '_button' => 'ajaxUpload',
-                        '_value' => '',
+                        '_widget' => array(
+                            'fileTree',
+                            'ajaxUpload'
+                        ),
                         'name' => 'image_path',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
                         'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                 ),
                 'description' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_DESCRIPTION',
-                        'descrip' => '',
-                        'order' => 60,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
                         '_type' => 'textarea',
-                        '_typeExt' => '',
-                        '_value' => '',
                         'name' => 'description',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
                         'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
-                    ),
-                ),
-                'date_created' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_DATE_CREATED',
-                        'descrip' => '',
-                        'order' => 80,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
-                    'form' => array(
-                        '_type' => 'custom',
-                        '_typeExt' => '',
-                        '_value' => '',
-                        'name' => 'date_created',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
-                        'isReadonly' => 1,
-                    ),
-                ),
-                'date_modified' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_DATE_MODIFIED',
-                        'descrip' => '',
-                        'order' => 100,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
-                    'form' => array(
-                        '_type' => 'custom',
-                        '_typeExt' => '',
-                        '_value' => '',
-                        'name' => 'date_modified',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
-                    ),
-                ),
-                'operation' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_OPERATION',
-                        'order' => 999,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
-                    'form' => array(
-                        '_type' => 'custom',
-                        '_value' => '',
-                        'name' => 'operation',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 0,
-                        'isList' => 1,
-                        'isDbField' => 0,
-                        'isDbQuery' => 0,
-                        'isView' => 0,
                     ),
                 ),
             ),
@@ -181,7 +67,6 @@ class Trex_Member_Metadata_Group extends Qwin_Trex_Metadata
             ),
             'db' => array(
                 'table' => 'member_group',
-                'primaryKey' => 'id',
                 'order' => array(
                     array('date_created', 'DESC'),
                 ),
@@ -189,10 +74,7 @@ class Trex_Member_Metadata_Group extends Qwin_Trex_Metadata
             // 页面显示
             'page' => array(
                 'title' => 'LBL_MODULE_MEMBER_GROUP',
-                'rowNum' => 10,
             ),
-            'shortcut' => array(
-            )
         ));
     }
 }

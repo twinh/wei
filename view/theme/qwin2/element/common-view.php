@@ -32,14 +32,13 @@
 !defined('QWIN_PATH') && exit('Forbidden');
 //qw('-rsc')->load('jquery/plugin/tip');
 //qw('-rsc')->load('jquery/plugin/validate');
-//qw('-rsc')->load('js/other/form');
 ?>
   <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
-    <div class="ui-box-titlebar ui-widget-header ui-helper-clearfix"> <span class="ui-box-title"> <a href="<?php echo qw_url($set, array('action' => 'Default')) ?>"><?php echo qw_lang($meta['page']['title']) ?></a></span> <a class="ui-box-title-icon ui-corner-all" name=".ui-form-content" href="javascript:void(0)"> <span class="ui-icon  ui-icon-circle-triangle-n">open/close</span> </a> </div>
+    <div class="ui-box-titlebar ui-widget-header ui-helper-clearfix"> <span class="ui-box-title"> <a href="<?php echo qw_url($set, array('action' => 'Index')) ?>"><?php echo qw_lang($meta['page']['title']) ?></a></span> <a class="ui-box-title-icon ui-corner-all" name=".ui-form-content" href="javascript:void(0)"> <span class="ui-icon  ui-icon-circle-triangle-n">open/close</span> </a> </div>
     <div class="ui-form-content ui-box-content ui-widget-content">
-        <form id="post-form" name="form" method="post" action="?namespace=Default&module=Article&controller=Article&action=Edit">
+        <form id="post-form" name="form" method="post" action="">
         <div class="ui-operation-field">
-            <a class="ui-action-list" href="<?php echo qw_url($set, array('action' => 'Default')) ?>"><?php echo qw_lang('LBL_ACTION_LIST') ?></a>
+            <a class="ui-action-list" href="<?php echo qw_url($set, array('action' => 'Index')) ?>"><?php echo qw_lang('LBL_ACTION_LIST') ?></a>
             <a class="ui-action-add" href="<?php echo qw_url($set, array('action' => 'Add')) ?>"><?php echo qw_lang('LBL_ACTION_ADD') ?></a>
             <a class="ui-action-edit" href="<?php echo qw_url($set, array('action' => 'Edit', $primaryKey => $data[$primaryKey])) ?>"><?php echo qw_lang('LBL_ACTION_EDIT') ?></a>
             <a class="ui-action-show" href="<?php echo qw_url($set, array('action' => 'View', $primaryKey => $data[$primaryKey])) ?>"><?php echo qw_lang('LBL_ACTION_VIEW') ?></a>
@@ -68,7 +67,7 @@
         </fieldset>
         <?php endforeach; ?>
         <div class="ui-operation-field">
-            <a class="ui-action-list" href="<?php echo qw_url($set, array('action' => 'Default')) ?>"><?php echo qw_lang('LBL_ACTION_LIST') ?></a>
+            <a class="ui-action-list" href="<?php echo qw_url($set, array('action' => 'Index')) ?>"><?php echo qw_lang('LBL_ACTION_LIST') ?></a>
             <a class="ui-action-add" href="<?php echo qw_url($set, array('action' => 'Add')) ?>"><?php echo qw_lang('LBL_ACTION_ADD') ?></a>
             <a class="ui-action-edit" href="<?php echo qw_url($set, array('action' => 'Edit', $primaryKey => $data[$primaryKey])) ?>"><?php echo qw_lang('LBL_ACTION_EDIT') ?></a>
             <a class="ui-action-show" href="<?php echo qw_url($set, array('action' => 'View', $primaryKey => $data[$primaryKey])) ?>"><?php echo qw_lang('LBL_ACTION_VIEW') ?></a>

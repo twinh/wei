@@ -32,6 +32,12 @@ class Qwin_Widget_JQuery_FileTree
 
     }
 
+    /**
+     * 生成文件树
+     *
+     * @param array $meta 域的元数据
+     * @return string 文件树代码
+     */
     public function render($meta)
     {
         $jquery = Qwin::run('Qwin_Resource_JQuery');

@@ -380,6 +380,10 @@ div.ui-layout-pane {
     border-top: none;
 }
 
+.ui-view-message{
+    padding: .2em;
+}
+
 /* Error Box
 ----------------------------------*/
 .ui-error-box{

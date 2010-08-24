@@ -39,11 +39,12 @@ class Qwin_Metadata_Element_Db extends Qwin_Metadata_Element_Abstract
             'primaryKey' => 'id',
             'offset' => 0,
             'limit' => 10,
-            'order' => array(),
+            'order' => array(
+             ),
             'where' => array(),
         );
     }
-
+ 
     /**
      * 获取数据表名称,不包含前缀
      *

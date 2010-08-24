@@ -181,7 +181,7 @@ if(jQuery)(function($){
 			// filetree 配置
 			if(!o.filetree) o.filetree = {};
 			if(!o.filetree.root) o.filetree.root = 'upload/';
-			if(!o.filetree.script) o.filetree.script = '?namespace=Default&module=File&controller=JQuery&action=FileTree';
+			if(!o.filetree.script) o.filetree.script = '?module=File&controller=JQuery&action=FileTree';
 			if(!o.filetree.dblClickFolder)
 			{
 				o.filetree.dblClickFolder = function(path)

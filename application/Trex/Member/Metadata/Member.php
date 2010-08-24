@@ -30,8 +30,9 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
 {
     public function  __construct()
     {
-        parent::setIdMetadata();
-        $this->parseMetadata(array(
+        $this->setIdMetadata()
+             ->setOperationMetadata()
+             ->parseMetadata(array(
             // 基本属性
             'field' => array(
                 'group_id' => array(
@@ -40,7 +41,7 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                         '_resourceGetter' => array(
                             array('Project_Hepler_Category', 'getTreeResource'),
                             array(
-                                'namespace' => 'Default',
+                                'namespace' => 'Trex',
                                 'module' => 'Member',
                                 'controller' => 'Group',
                             ),
@@ -49,11 +50,14 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                         ),
                         'name' => 'group_id',
                     ),
+                    'attr' => array(
+                        'isListLink' => 1,
+                    ),
                     'converter' => array(
-                        'attr' => array(
+                        'list' => array(
                             array('Project_Hepler_Category', 'convertTreeResource'),
                             array(
-                                'namespace' => 'Default',
+                                'namespace' => 'Trex',
                                 'module' => 'Member',
                                 'controller' => 'Group',
                             ),
@@ -109,23 +113,6 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                         ),
                     ),
                 ),
-                'operation' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_OPERATION',
-                        'order' => 999,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
-                    'form' => array(
-                        '_type' => 'custom',
-                        'name' => 'operation',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 0,
-                        'isDbField' => 0,
-                        'isDbQuery' => 0,
-                        'isView' => 0,
-                    ),
-                ),
             ),
             // 表之间的联系
             'model' => array(
@@ -152,9 +139,6 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
             ),
             'db' => array(
                 'table' => 'member',
-                'primaryKey' => 'id',
-                'order' => array(
-                ),
             ),
             // 页面显示
             'page' => array(

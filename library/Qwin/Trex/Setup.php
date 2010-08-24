@@ -131,17 +131,18 @@ class Qwin_Trex_Setup
          */
         $this->_set = &$set;
         $defaultSet = array(
-            'namespace',
-            'module',
-            'controller',
-            'action',
+            'namespace' => 'Trex',
+            'module' => 'Index',
+            'controller' => 'Index',
+            'action' => 'Index',
         );
-        $urlSet = $this->_request->get($defaultSet);
-        foreach($defaultSet as $field)
+
+        $urlSet = $this->_request->get(array_keys($defaultSet));
+        foreach($defaultSet as $key => $field)
         {
-            if(!isset($set[$field]))
+            if(!isset($set[$key]))
             {
-                $set[$field] = null != $urlSet[$field] ? $urlSet[$field] : 'Default';
+                $set[$key] = null != $urlSet[$key] ? $urlSet[$key] : $defaultSet[$key];
             }
         }
         

@@ -27,7 +27,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
 {
     public function  __construct()
     {
-        parent::setMetadata();
+        $this->setCommonMetadata();
         $this->parseMetadata(array(
             // 基本属性
             'field' => array(
@@ -40,7 +40,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         '_resourceGetter' => array(
                             array('Project_Hepler_Category', 'getTreeResource'),
                             array(
-                                'namespace' => 'Default',
+                                'namespace' => 'Trex',
                                 'module' => 'Category',
                                 'controller' => 'Category',
                             ),
@@ -58,7 +58,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         'list' => array(
                             array('Project_Hepler_Category', 'convertTreeResource'),
                             array(
-                                'namespace' => 'Default',
+                                'namespace' => 'Trex',
                                 'module' => 'Category',
                                 'controller' => 'Category',
                             ),

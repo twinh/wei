@@ -94,6 +94,8 @@ class Trex_Common_Language_Enus extends Trex_Language
             'MSG_OPERATE_SUCCESSFULLY' => 'Operate successfully!',
             'MSG_FUNCTION_DEVELOPTING' => 'The function is developing.',
 
+            'MSG_FILE_NOT_EXISTS' => 'The file is not exists',
+
             'LBL_HTML_TITLE' => 'Content Management System - Powered by Qwin Framework',
             'LBL_FOOTER_COPYRIGHT' => 'Powered by <a>Qwin Framework</a>. Copyright &copy; 2009-2010 <a>Twin</a>. All rights reserved.',
         );
