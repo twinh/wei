@@ -175,7 +175,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      *
      * @param Qwin_Metadata $meta 主元数据
      */
-    public function connectRelatedMetadata(Qwin_Metadata $meta)
+    public function connectMetadata(Qwin_Metadata $meta)
     {
         $mainMetaField = clone $meta['field'];
         foreach($meta['model'] as $model)

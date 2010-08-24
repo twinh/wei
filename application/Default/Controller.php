@@ -120,7 +120,7 @@ class Default_Controller extends Qwin_Trex_Controller
         /**
          * 处理数据
          */
-        $relatedField = $meta->connectRelatedMetadata($this->_meta);
+        $relatedField = $meta->connectMetadata($this->_meta);
         $relatedField->order();
         $listField = $relatedField->getAttrList('isList');
 
@@ -158,7 +158,7 @@ class Default_Controller extends Qwin_Trex_Controller
         /**
          * 处理数据
          */
-        $relatedField = $meta->connectRelatedMetadata($this->_meta);
+        $relatedField = $meta->connectMetadata($this->_meta);
         $relatedField->order();
         $data = $meta->convertDataToSingle($data);
         $data = $this->_meta->convertMultiData($relatedField, 'list', $data);
@@ -202,7 +202,7 @@ class Default_Controller extends Qwin_Trex_Controller
         /**
          * 处理数据
          */
-        $relatedField = $meta->connectRelatedMetadata($this->_meta);
+        $relatedField = $meta->connectMetadata($this->_meta);
         $relatedField->order();
         $groupList = $relatedField->getViewGroupList();
         $data = $result->toArray();
@@ -231,7 +231,7 @@ class Default_Controller extends Qwin_Trex_Controller
         $primaryKey = $meta['db']['primaryKey'];
         $id = $this->_request->g($primaryKey);
         $query = $meta->getDoctrineQuery($this->_set);
-        $relatedField = $meta->connectRelatedMetadata($this->_meta);
+        $relatedField = $meta->connectMetadata($this->_meta);
 
         if(empty($_POST))
         {
@@ -278,7 +278,7 @@ class Default_Controller extends Qwin_Trex_Controller
              * 设置行为为入库,连接元数据
              */
             $this->setAction('db');
-            $relatedField = $meta->connectRelatedMetadata($meta);
+            $relatedField = $meta->connectMetadata($meta);
 
             /**
              * 取出需要入库的数据
@@ -322,6 +322,7 @@ class Default_Controller extends Qwin_Trex_Controller
          * 初始化常用的变量
          */
         $meta = $this->_meta;
+        $actionMeta = $meta->getEditMetadata();
         $primaryKey = $meta['db']['primaryKey'];
         $id = $this->_request->g($primaryKey);
         $query = $meta->getDoctrineQuery($this->_set);
@@ -340,7 +341,7 @@ class Default_Controller extends Qwin_Trex_Controller
             /**
              * 处理数据
              */
-            $relatedField = $meta->connectRelatedMetadata($this->_meta);
+            $relatedField = $meta->connectMetadata($this->_meta);
             $relatedField->order();
             $groupList = $relatedField->getEditGroupList();
             $data = $result->toArray();
@@ -368,7 +369,7 @@ class Default_Controller extends Qwin_Trex_Controller
              * 设置行为为入库,连接元数据
              */
             $this->setAction('db');
-            $relatedField = $meta->connectRelatedMetadata($meta);
+            $relatedField = $meta->connectMetadata($meta);
             $editField = $relatedField->getAttrList('isDbField', 'isReadonly');
             //p($editField);
 
