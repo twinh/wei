@@ -43,7 +43,7 @@ var validator_rule = <?php echo $validator_rule?>;
     <div class="ui-form-content ui-box-content ui-widget-content">
         <form id="post-form" name="form" method="post" action="<?php echo qw_url()?>">
         <div class="ui-operation-field">
-            <a class="ui-action-list" href="<?php echo qw_url($set, array('action' => 'Default')) ?>"><?php echo qw_lang('LBL_ACTION_LIST') ?></a>
+            <a class="ui-action-list" href="<?php echo qw_url($set, array('action' => 'Index')) ?>"><?php echo qw_lang('LBL_ACTION_LIST') ?></a>
             <a class="ui-action-add" href="<?php echo qw_url($set, array('action' => 'Add')) ?>"><?php echo qw_lang('LBL_ACTION_ADD') ?></a>
             <?php if(isset($data[$primaryKey])): ?>
             <a class="ui-action-edit" href="<?php echo qw_url($set, array('action' => 'Edit', $primaryKey => $data[$primaryKey])) ?>"><?php echo qw_lang('LBL_ACTION_EDIT') ?></a>
@@ -89,7 +89,7 @@ var validator_rule = <?php echo $validator_rule?>;
             <button class="ui-action-reset" type="reset"><?php echo qw_lang('LBL_ACTION_RESET') ?></button>
             <br />
             <br />
-            <a class="ui-action-list" href="<?php echo qw_url($set, array('action' => 'Default')) ?>"><?php echo qw_lang('LBL_ACTION_LIST') ?></a>
+            <a class="ui-action-list" href="<?php echo qw_url($set, array('action' => 'Index')) ?>"><?php echo qw_lang('LBL_ACTION_LIST') ?></a>
             <a class="ui-action-add" href="<?php echo qw_url($set, array('action' => 'Add')) ?>"><?php echo qw_lang('LBL_ACTION_ADD') ?></a>
             <?php if(isset($data[$primaryKey])): ?>
             <a class="ui-action-edit" href="<?php echo qw_url($set, array('action' => 'Edit', $primaryKey => $data[$primaryKey])) ?>"><?php echo qw_lang('LBL_ACTION_EDIT') ?></a>

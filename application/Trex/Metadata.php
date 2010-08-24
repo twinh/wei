@@ -31,16 +31,52 @@ class Trex_Metadata extends Qwin_Trex_Metadata
     /**
      * 设置基本的元数据,包括编号,创建时间,修改时间和操作.
      */
-    public function setMetadata()
+    public function setCommonMetadata()
     {
-        $this->setIdMetadata();
-        $this->setOperationMetadata();
+        $this->setIdMetadata()
+             ->setDateMetadata()
+             ->setOperationMetadata();
+    }
+
+    /**
+     * 设置编号域的元数据配置,编号是最为常见的域
+     *
+     * @return obejct 当前类
+     */
+    public function setIdMetadata()
+    {
+        $this->addField(array(
+            'id' => array(
+                'basic' => array(
+                    'order' => -1,
+                ),
+                'form' => array(
+                    '_type' => 'hidden',
+                    'name' => 'id',
+                ),
+                'attr' => array(
+                    'isListLink' => 0,
+                    'isList' => 1,
+                    'isDbField' => 1,
+                    'isDbQuery' => 1,
+                    'isReadonly' => 0,
+                ),
+            ),
+        ));
+        return $this;
+    }
+
+    /**
+     * 设置日期的元数据配置,主要包括创建日期,修改日期两项
+     *
+     * @return object 当前类
+     */
+    public function setDateMetadata()
+    {
         $this->addField(array(
             'date_created' => array(
                 'basic' => array(
-                    'title' => 'LBL_FIELD_DATE_CREATED',
                     'order' => 1000,
-                    'group' => 'LBL_GROUP_BASIC_DATA',
                 ),
                 'form' => array(
                     '_type' => 'custom',
@@ -75,34 +111,14 @@ class Trex_Metadata extends Qwin_Trex_Metadata
                 ),
             ),
         ));
+        return $this;
     }
 
     /**
-     * 设置编号的元数据,编号是最为常见的域
+     * 设置操作域的元数据配置,操作域主要用于列表
+     *
+     * @return obejct 当前类
      */
-    public function setIdMetadata()
-    {
-        $this->addField(array(
-            'id' => array(
-                'basic' => array(
-                    'title' => 'LBL_FIELD_ID',
-                    'order' => -1,
-                ),
-                'form' => array(
-                    '_type' => 'hidden',
-                    'name' => 'id',
-                ),
-                'attr' => array(
-                    'isListLink' => 0,
-                    'isList' => 1,
-                    'isDbField' => 1,
-                    'isDbQuery' => 1,
-                    'isReadonly' => 0,
-                ),
-            ),
-        ));
-    }
-
     public function setOperationMetadata()
     {
         $this->addField(array(
@@ -123,5 +139,6 @@ class Trex_Metadata extends Qwin_Trex_Metadata
                 ),
             ),
         ));
+        return $this;
     }
 }

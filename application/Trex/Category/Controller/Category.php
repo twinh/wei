@@ -26,45 +26,12 @@
  * @since     2010-7-12 17:01:37
  */
 
-class Trex_Category_Controller_Category extends Qwin_Trex_Controller
+class Trex_Category_Controller_Category extends Trex_Controller
 {
-    /**
-     * 列表
-     */
-    public function actionDefault()
-    {
-        return Qwin::run('Qwin_Trex_Action_List');
-    }
-
-    /**
-     * 添加
-     */
-    public function actionAdd()
-    {
-        return Qwin::run('Qwin_Trex_Action_Add');
-    }
-
-    /**
-     * 编辑
-     */
-    public function actionEdit()
-    {
-        return Qwin::run('Qwin_Trex_Action_Edit');
-    }
-
-    /**
-     * 删除
-     * @todo 删除时应该将自分类也删除,不残留在数据库 or 提供一个清理函数,清理数据库中无关联的数据
-     */
-    public function actionDelete()
-    {
-        return Qwin::run('Qwin_Trex_Action_Delete');
-    }
-
     /**
      * 列表的 json 数据
      */
-    public function actionJsonList()
+    public function actionList()
     {
         $gpc = Qwin::run('-gpc');
         $meta = &$this->__meta;
@@ -135,15 +102,6 @@ class Trex_Category_Controller_Category extends Qwin_Trex_Controller
         echo Qwin::run('-arr')->jsonEncode($json_data);
     }
 
-    /**
-     * 查看
-     */
-    public function actionShow()
-    {
-        return Qwin::run('Qwin_Trex_Action_Show');
-    }
-
-
     public function onAfterDb()
     {
         //Qwin::run('Project_Helper_Cache')->setFileCacheBySetting($this->_set);
@@ -182,11 +140,6 @@ class Trex_Category_Controller_Category extends Qwin_Trex_Controller
         return $html;
     }
 
-    public function convertDbId($val)
-    {
-        return $this->Qwin_converter_String->getUuid($val);
-    }
-
     public function convertListName($val, $name, $data, $copyData)
     {
         if(NULL != $copyData['parent_id'])
@@ -207,17 +160,7 @@ class Trex_Category_Controller_Category extends Qwin_Trex_Controller
         }
         return $val;
     }
-
-    public function convertDbDateCreated()
-    {
-        return date('Y-m-d H:i:s', TIMESTAMP);
-    }
-
-    public function convertDbDateModified()
-    {
-        return date('Y-m-d H:i:s', TIMESTAMP);
-    }
-
+    
     public function convertDbParentId($val, $name, $data)
     {
         '0' == $val && $val = 'NULL';

@@ -54,7 +54,7 @@ class Qwin_Metadata_Manager
      *
      * @param <type> $name
      * @param <type> $metadata
-     * @example $metadataManager->set('Default_Article_Metadata_Article', $meta->defaultMetadata);
+     * @example $metadataManager->set('Trex_Article_Metadata_Article', $meta->defaultMetadata);
      */
     public function set($name, $metadata)
     {
@@ -65,19 +65,34 @@ class Qwin_Metadata_Manager
         }
     }
 
+    /**
+     * 加载一个元数据类
+     *
+     * @param string $className 类名称
+     * @return object 元数据类对象
+     */
     public static function get($className)
     {
         if(isset(self::$_metadataObj[$className]))
         {
             return self::$_metadataObj[$className];
         }
+
         if(class_exists($className))
         {
-            self::$_metadataObj[$className] = new $className;
-            //self::$_metadataObj[$className]->setMetadata();
-            return self::$_metadataObj[$className];
+            if(is_subclass_of($className, 'Qwin_Metadata'))
+            {
+                self::$_metadataObj[$className] = new $className;
+                //self::$_metadataObj[$className]->setMetadata();
+                return self::$_metadataObj[$className];
+            }
+
+            require_once 'Qwin/Trex/Metadata/Exception.php';
+            throw new Qwin_Trex_Metadata_Exception('The class ' . $className . ' is not the sub class of Qwin_Metadat');
         }
-        return null;
+
+        require_once 'Qwin/Trex/Metadata/Exception.php';
+        throw new Qwin_Trex_Metadata_Exception('Can not find the class ' . $className);
     }
 }
 
