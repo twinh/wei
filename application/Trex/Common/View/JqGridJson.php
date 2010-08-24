@@ -49,7 +49,7 @@ class Trex_Common_View_JqGridJson extends Trex_View
             }
             $i++;
         }
-
+        
         /**
          * @todo 当前页数,行数等信息的获取
          */

@@ -341,6 +341,7 @@ class Trex_Controller extends Qwin_Trex_Controller
             $groupList = $relatedField->getEditGroupList();
             $data = $result->toArray();
             $data = $meta->convertDataToSingle($data);
+            $data = $meta->convertSingleData($relatedField, $this->_set['action'], $data);
 
             /**
              * 设置视图
@@ -555,5 +556,12 @@ class Trex_Controller extends Qwin_Trex_Controller
     {
         '0' == $value && $value = NULL;
         return $value;
+    }
+
+    public function setRedirectView($message, $method = null)
+    {
+        $this->_view['class'] = 'Trex_Common_View_Redirect';
+        $this->_view['data']['message'] = $message;
+        $this->_view['data']['method'] = $method;
     }
 }

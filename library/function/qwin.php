@@ -120,3 +120,8 @@ function qw_referer_page($page = null)
     !isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] = $page;
     return urlencode($_SERVER['HTTP_REFERER']);
 }
+
+function qw_title_decorator($title, $fontStyle = null, $color = null)
+{
+    return Qwin_Helper_Html::titleDecorator($title, $fontStyle, $color);
+}

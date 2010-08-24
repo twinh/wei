@@ -116,7 +116,7 @@ class Qwin_Form_Element_Base extends Qwin_Form
         {
             $value = explode('|', $value);
         }
-        $i = 0;
+        $i = 1;
         $data = '';
         $pub_set['name'] .= '[]';
         foreach($pri_set['_resource'] as $key => $val)
@@ -124,10 +124,10 @@ class Qwin_Form_Element_Base extends Qwin_Form
             $pub_set['value'] = $key;
             // 备份原始 id
             $origin_id = $pub_set['id'];
-            if($i != 0)
-            {
+            //if($i != 0)
+            //{
                 $pub_set['id'] .= '-' . $i;
-            }
+            //}
             $attr = parent::_getAttr($pub_set);
             if(in_array($key, $value))
             {
@@ -153,17 +153,17 @@ class Qwin_Form_Element_Base extends Qwin_Form
      */
     public function radio($pub_set, $pri_set, $value)
     {
-        $i = 0;
+        $i = 1;
         $data = '';
         foreach($pri_set['_resource'] as $key => $val)
         {
             $pub_set['value'] = $key;
             // 备份原始 id
             $origin_id = $pub_set['id'];
-            if($i != 0)
-            {
-                $pub_set['id'] .= '_' . $i;
-            }
+            //if($i != 0)
+            //{
+                $pub_set['id'] .= '-' . $i;
+            //}
             $attr = parent::_getAttr($pub_set);
             $is_checked = $value == $key ? ' checked="checked" ' : '';
             $data .= '<input type="radio" ' . $attr . $is_checked . '/><label for="' . $pub_set['id'] . '">' . $val . '</label>';

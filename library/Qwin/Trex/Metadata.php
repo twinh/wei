@@ -463,7 +463,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             {
                 $newRow[$name] = call_user_func_array(
                     array($ctrler, $methodName),
-                    array($row[$name], $name, $row, $rowCopy)
+                    array($row[$name], $name, $newRow, $rowCopy)
                 );
             }
 

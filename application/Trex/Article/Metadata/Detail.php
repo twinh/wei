@@ -83,20 +83,42 @@ class Trex_Article_Metadata_Detail extends Trex_Metadata
                     ),
                 ),
                 'meta' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_META',
-                        'order' => 60,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
-                        '_type' => 'hidden',
+                        '_type' => 'custom',
                         'name' => 'meta',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
-                        'isDbQuery' => 1,
+                        'isView' => 0,
+                    ),
+                ),
+                'meta_keywords' => array(
+                    'basic' => array(
+                        'group' => 'LBL_GROUP_META_DATA',
+                    ),
+                    'form' => array(
+                        '_type' => 'text',
+                        'name' => 'meta_keywords',
+                    ),
+                    'attr' => array(
+                        'isList' => 0,
+                        'isDbField' => 0,
+                        'isDbQuery' => 0,
+                    ),
+                ),
+                'meta_description' => array(
+                    'basic' => array(
+                        'group' => 'LBL_GROUP_META_DATA',
+                    ),
+                    'form' => array(
+                        '_type' => 'text',
+                        'name' => 'meta_description',
+                    ),
+                    'attr' => array(
+                        'isList' => 0,
+                        'isDbField' => 0,
+                        'isDbQuery' => 0,
                     ),
                 ),
             ),
