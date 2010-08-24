@@ -163,7 +163,7 @@ class Trex_Article_Controller_Article extends Trex_Controller
         }
     }
 
-    public function convertEditCategoryId($val, $name, $data)
+    /*public function convertEditCategoryId($val, $name, $data)
     {
         // 专题
         if(NULL != $data['category_2'])
@@ -179,7 +179,7 @@ class Trex_Article_Controller_Article extends Trex_Controller
             );
         }
         return $val;
-    }
+    }*/
 
     /*public function convertListOperation($val, $name, $data, $cpoyData)
     {
@@ -188,9 +188,78 @@ class Trex_Article_Controller_Article extends Trex_Controller
         return $html;
     }*/
 
+    public function convertViewTitle($value, $name, $data, $copyData)
+    {
+        return Qwin_Helper_Html::titleDecorator($value, $copyData['title_style'], $copyData['title_color']);
+    }
+
+    public function convertEditTitleStyle($value, $name, $data, $copyData)
+    {
+        return explode('|', $value);
+    }
+
+    public function convertEditTitleColor($value, $name, $data, $copyData)
+    {
+        null == $value && $value = 'NULL';
+        return $value;
+    }
+
+    /**
+     *
+     * @todo 检查
+     */
+    public function convertDbTitleStyle($value, $name, $data, $copyData)
+    {
+        return implode('|', (array)$value);
+    }
+
+    public function convertDbTitleColor($value, $name, $data, $copyData)
+    {
+        'NULL' == $value && $value = null;
+        return $value;
+    }
+
     public function convertDbDetailId($val)
     {
         return $this->Qwin_converter_String->getUuid($val);
+    }
+
+    public function convertDbDetailMeta($value, $name, $data, $copyData)
+    {
+        return serialize(array(
+            'keywords' => $copyData['detail_meta_keywords'],
+            'description' => $copyData['detail_meta_description'],
+        ));
+    }
+
+    public function convertEditDetailMeta($value, $name, $data, $copyData)
+    {
+        return unserialize($value);
+    }
+
+    public function convertEditDetailMetaKeywords($value, $name, $data, $copyData)
+    {
+        return $data['detail_meta']['keywords'];
+    }
+
+    public function convertEditDetailMetaDescription($value, $name, $data, $copyData)
+    {
+        return $data['detail_meta']['description'];
+    }
+
+    public function convertViewDetailMeta($value, $name, $data, $copyData)
+    {
+        return unserialize($value);
+    }
+
+    public function convertViewDetailMetaKeywords($value, $name, $data, $copyData)
+    {
+        return $data['detail_meta']['keywords'];
+    }
+
+    public function convertViewDetailMetaDescription($value, $name, $data, $copyData)
+    {
+        return $data['detail_meta']['description'];
     }
 
     public function getCategoryIdResource()

@@ -46,9 +46,15 @@ class Trex_Article_Language_Enus extends Trex_Language
             'LBL_FIELD_IS_POSTED' => 'Posted?',
             'LBL_FIELD_IS_INDEX' => 'Show in index?',
             'LBL_FIELD_JUMP_TO_URL' => 'Jump To Url',
+            'LBL_FIELD_SHORT_TITLE' => 'Short Title',
+            'LBL_FIELD_META_KEYWORDS' => 'Keywords',
+            'LBL_FIELD_META_DESCRIPTION' => 'Description',
+            'LBL_FIELD_TITLE_STYLE' => 'Title Style',
+            'LBL_FIELD_TITLE_COLOR' => 'Title Color',
 
             'LBL_GROUP_PAGE_DATA' => 'Page Data',
             'LBL_GROUP_SETTING_DATA' => 'Setting Data',
+            'LBL_GROUP_META_DATA' => 'Seo Data',
 
             'LBL_MODULE_ARTICLE' => 'Article',
             'LBL_MODULE_ARTICLE_CATEGORY' => 'Article Category',

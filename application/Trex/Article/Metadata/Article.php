@@ -100,19 +100,57 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                 ),
                 'title' => array(
                     'form' => array(
-                        '_type' => 'text',
                         'name' => 'title',
-                    ),
-                    'attr' => array(
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
-                        'isView' => 1,
                     ),
                     'validator' => array(
                         'rule' => array(
                             'required' => true,
                             'maxlength' => 200,
+                        ),
+                    ),
+                ),
+                'title_style' => array(
+                    'form' => array(
+                        '_type' => 'checkbox',
+                        '_resource' => array(
+                            'b' => '<strong>粗体</strong>',
+                            'i' => '<em>斜体</em>',
+                            'u' => '<u>下划线</u>',
+                        ),
+                        'name' => 'title_style',
+                    ),
+                    'attr' => array(
+                        'isList' => 0,
+                        'isView' => 0,
+                    ),
+                ),
+                'title_color' => array(
+                    'form' => array(
+                        '_type' => 'radio',
+                        '_resource' => array(
+                            'NULL' => 'Blank',
+                            'red' => '<span style="color:red">Red</span>',
+                            'blue' => '<span style="color:blue">Blue</span>',
+                            'green' => '<span style="color:green">Green</span>',
+                        ),
+                        '_value' => 'NULL',
+                        'name' => 'title_color',
+                    ),
+                    'attr' => array(
+                        'isList' => 0,
+                        'isView' => 0,
+                    ),
+                ),
+                'short_title' => array(
+                    'form' => array(
+                        'name' => 'short_title',
+                    ),
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
+                    'validator' => array(
+                        'rule' => array(
+                            'maxlength' => 20,
                         ),
                     ),
                 ),
@@ -169,27 +207,25 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     ),
                 ),
                 'page_name' => array(
+                    'basic' => array(
+                        'group' => 'LBL_GROUP_PAGE_DATA',
+                    ),
                     'form' => array(
-                        '_type' => 'text',
                         'name' => 'page_name',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
                         'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                 ),
                 'template' => array(
+                    'basic' => array(
+                        'group' => 'LBL_GROUP_PAGE_DATA',
+                    ),
                     'form' => array(
-                        '_type' => 'text',
                         'name' => 'template',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
                         'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                 ),
                 'is_posted' => array(
