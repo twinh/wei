@@ -422,4 +422,40 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         }
         return $newData;
     }
+
+    /**
+     * 获取编辑操作入库的域对象
+     *
+     * @return Qwin_Metadata_Element_Field 域对象
+     */
+    public function getEditDbField()
+    {
+        foreach($this->_data as $field => $meta)
+        {
+            if(1 == $meta['attr']['isDbField'] && 0 == $meta['attr']['isReadonly'])
+            {
+                $fieldMetadata[$field] = $meta;
+            }
+        }
+        $fieldObejct = new Qwin_Metadata_Element_Field();
+        return $fieldObejct->fromArray($fieldMetadata);
+    }
+
+    /**
+     * 获取添加操作入库的域对象
+     *
+     * @return Qwin_Metadata_Element_Field 域对象
+     */
+    public function getAddDbField()
+    {
+        foreach($this->_data as $field => $meta)
+        {
+            if(1 == $meta['attr']['isDbField'])
+            {
+                $fieldMetadata[$field] = $meta;
+            }
+        }
+        $fieldObejct = new Qwin_Metadata_Element_Field();
+        return $fieldObejct->fromArray($fieldMetadata);
+    }
 }

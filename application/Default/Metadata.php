@@ -34,6 +34,7 @@ class Default_Metadata extends Qwin_Trex_Metadata
     public function setMetadata()
     {
         $this->setIdMetadata();
+        $this->setOperationMetadata();
         $this->addField(array(
             'date_created' => array(
                 'basic' => array(
@@ -96,6 +97,7 @@ class Default_Metadata extends Qwin_Trex_Metadata
                     'isList' => 1,
                     'isDbField' => 1,
                     'isDbQuery' => 1,
+                    'isReadonly' => 0,
                 ),
             ),
         ));
@@ -104,19 +106,21 @@ class Default_Metadata extends Qwin_Trex_Metadata
     public function setOperationMetadata()
     {
         $this->addField(array(
-            'basic' => array(
-                'order' => 1040,
-            ),
-            'form' => array(
-                '_type' => 'custom',
-                'name' => 'operation',
-            ),
-            'attr' => array(
-                'isListLink' => 0,
-                'isList' => 1,
-                'isDbField' => 0,
-                'isDbQuery' => 0,
-                'isView' => 0,
+            'operation' => array(
+                'basic' => array(
+                    'order' => 1040,
+                ),
+                'form' => array(
+                    '_type' => 'custom',
+                    'name' => 'operation',
+                ),
+                'attr' => array(
+                    'isListLink' => 0,
+                    'isList' => 1,
+                    'isDbField' => 0,
+                    'isDbQuery' => 0,
+                    'isView' => 0,
+                ),
             ),
         ));
     }

@@ -279,19 +279,14 @@ class Default_Controller extends Qwin_Trex_Controller
              */
             $this->setAction('db');
             $relatedField = $meta->connectMetadata($meta);
-
-            /**
-             * 取出需要入库的数据
-             */
-            $dblist = $relatedField->getAttrList('isDbField');
-            $data = $meta->intersect($dblist, $_POST);
+            $addDbField = $relatedField->getAddDbField();
 
             /**
              * 转换,验证和还原
              */
-            $data = $this->_meta->convertSingleData($relatedField, 'db', $_POST);
-            $this->_meta->validateData($relatedField, $data);
-            $data = $meta->restoreData($relatedField, $data);
+            $data = $this->_meta->convertSingleData($addDbField, 'db', $_POST);
+            $this->_meta->validateData($addDbField, $data);
+            $data = $meta->restoreData($addDbField, $data);
             $data = $meta->setForeignKeyData($meta['model'], $data);
 
             /**
@@ -322,7 +317,6 @@ class Default_Controller extends Qwin_Trex_Controller
          * 初始化常用的变量
          */
         $meta = $this->_meta;
-        $actionMeta = $meta->getEditMetadata();
         $primaryKey = $meta['db']['primaryKey'];
         $id = $this->_request->g($primaryKey);
         $query = $meta->getDoctrineQuery($this->_set);
@@ -370,23 +364,14 @@ class Default_Controller extends Qwin_Trex_Controller
              */
             $this->setAction('db');
             $relatedField = $meta->connectMetadata($meta);
-            $editField = $relatedField->getAttrList('isDbField', 'isReadonly');
-            //p($editField);
-
-            /**
-             * 取出需要入库的数据
-             */
-            $dblist = $relatedField->getAttrList(array('isDbField'), array('isReadonly'));
-            $data = $meta->intersect($dblist, $_POST);
-//p($data);
-
+            $editDbField = $relatedField->getEditDbField();
+            
             /**
              * 转换,验证和还原
              */
-            $data = $this->_meta->convertSingleData($relatedField, 'db', $_POST);
-            //p($data);exit;
-            $this->_meta->validateData($relatedField, $data);
-            $data = $meta->restoreData($relatedField, $data);
+            $data = $meta->convertSingleData($editDbField, 'db', $_POST);
+            $this->_meta->validateData($editDbField, $data);
+            $data = $meta->restoreData($editDbField, $data);
 
             /**
              * 入库
@@ -400,7 +385,7 @@ class Default_Controller extends Qwin_Trex_Controller
             $this->executeOnFunction('afterDb', $this->resetAction(), $data);
             $url = urldecode($this->_request->p('_page'));
             '' == $url && $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Default'));
-            $this->setView('alert', $this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+            return $this->setView('alert', $this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }
 

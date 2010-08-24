@@ -37,7 +37,7 @@
     &nbsp;<a class="action-add" href="<?php echo qw_url($set, array('action' => 'Add')) ?>"><?php echo $lang->t('LBL_ACTION_ADD')?></a>&nbsp;|&nbsp;
     <a class="action-edit" href="javascript:void(0)"><?php echo qw_lang('LBL_ACTION_EDIT') ?></a>&nbsp;|&nbsp;
     <a class="action-delete" href="javascript:void(0)"><?php echo qw_lang('LBL_ACTION_DELETE') ?></a>&nbsp;|&nbsp;
-    <a class="list_show_link" href="javascript:void(0)"><?php echo qw_lang('LBL_ACTION_SHOW') ?></a>&nbsp;|&nbsp;
+    <a class="list_show_link" href="javascript:void(0)"><?php echo qw_lang('LBL_ACTION_VIEW') ?></a>&nbsp;|&nbsp;
     <a class="action-clone" href="javascript:void(0)"><?php echo qw_lang('LBL_ACTION_COPY') ?></a>&nbsp;|&nbsp;
     <!--<a class="action-filter" href="Add"><?php echo $lang->t('LBL_ACTION_FILTER')?></a>-->
 </div>

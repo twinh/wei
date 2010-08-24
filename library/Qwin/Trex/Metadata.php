@@ -403,12 +403,31 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         $ctrler = Qwin::run('-controller');
         $url = Qwin::run('-url');
         $action = strtolower($action);
+
+        /**
+         * 数据副本,可从此获取原数据,主要用于回调方法的的参数
+         */
         $rowCopy = $row;
+
+        /**
+         * 新的数据,本方法将返回该数组
+         */
+        $newRow = array();
 
         foreach($meta as $field => $set)
         {
             $name = $set['form']['name'];
-            !isset($row[$name]) && $row[$name] = null;
+
+            /**
+             * 初始化两数组的值,如果不存在,则设为空
+             */
+            if(isset($row[$name]))
+            {
+                $newRow[$name] = $row[$name];
+            } else {
+                $newRow[$name] = null;
+                $row[$name] = null;
+            }
 
             /**
              * 使用元数据的转换器进行转换
@@ -422,7 +441,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
                     $method = $param[0];
                     if(is_string($method))
                     {
-                        $row[$name] = call_user_func_array($method, $param);
+                        $newRow[$name] = call_user_func_array($method, $param);
                         continue;
                     }
                     $param[0] = $row[$name];
@@ -431,7 +450,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
                     {
                         $method[0] = Qwin::run($method[0]);
                     }
-                    $row[$name] = call_user_func_array($method, $param);
+                    $newRow[$name] = call_user_func_array($method, $param);
                     continue;
                 }
             }
@@ -442,7 +461,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             $methodName = str_replace(array('_', '-'), '', 'convert' . $action . $name);
             if(method_exists($ctrler, $methodName))
             {
-                $row[$name] = call_user_func_array(
+                $newRow[$name] = call_user_func_array(
                     array($ctrler, $methodName),
                     array($row[$name], $name, $row, $rowCopy)
                 );
@@ -455,30 +474,10 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             if(true == $isListLink && $set['attr']['isListLink'])
             {
                 !isset($rowCopy[$name]) && $rowCopy[$name] = null;
-                $row[$name] = '<a href="' . $url->createUrl($ctrler->_set + array('searchField' => $name, 'searchValue' => $rowCopy[$name])) . '">' . $row[$name] . '</a>';
+                $newRow[$name] = '<a href="' . $url->createUrl($ctrler->_set + array('searchField' => $name, 'searchValue' => $rowCopy[$name])) . '">' . $newRow[$name] . '</a>';
             }
         }
-        return $row;
-/*
- *
-        // fixed 2010-06-27 添加操作时,清空其他主键的值
-        // TODO 整理
-        //$urlAction = Qwin::run('-gpc')->g('action');
-
-        foreach($set as $field => $val)
-        {
-            // 防止对非数据库字段域进行转换,导致入库出错
-            if('db' == $action && false == $val['list']['isDbField'])
-            {
-                continue;
-            }
-            // fixed 2010-06-27 
-            if('Add' == $urlAction && in_array($field, $this->_modelPrimaryKey))
-            {
-                $row[$field] = null;
-            }
-            
-        }*/
+        return $newRow;
     }
 
     /**

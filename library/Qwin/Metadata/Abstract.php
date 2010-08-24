@@ -103,6 +103,18 @@ abstract class Qwin_Metadata_Abstract implements ArrayAccess, Iterator
     }
 
     /**
+     * 将数组加入该对象中
+     *
+     * @param array $data 要加入对象的数组
+     * @return object 当前类
+     */
+    public function fromArray($data)
+    {
+        $this->_data = $data;
+        return $this;
+    }
+
+    /**
      * 合并两个元数据
      *
      * @param Qwin_Metadata_Abstract $meta
