@@ -26,6 +26,6 @@
  * @since     2010-06-02
  */
 
-class Default_Config_Model_Config extends Doctrine_Record
+class Trex_Config_Model_Config extends Doctrine_Record
 {    
 }

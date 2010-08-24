@@ -26,7 +26,7 @@
  * @since     2010-7-9 14:53:13
  */
 
-class Default_Project_Controller_Bug extends Qwin_Trex_Controller
+class Trex_Project_Controller_Bug extends Qwin_Trex_Controller
 {
     /**
      * 列表

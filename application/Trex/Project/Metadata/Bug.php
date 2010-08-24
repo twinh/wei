@@ -26,7 +26,7 @@
  * @since     2010-7-9 14:58:27
  */
 
-class Default_Project_Metadata_Bug extends Qwin_Trex_Metadata
+class Trex_Project_Metadata_Bug extends Qwin_Trex_Metadata
 {
     public function defaultMetadata()
     {

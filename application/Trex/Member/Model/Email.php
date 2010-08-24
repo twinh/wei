@@ -26,6 +26,6 @@
  * @since     2010-5-16 9:28:21 utf-8 中文
  */
 
-class Default_Member_Model_Email extends Doctrine_Record
+class Trex_Member_Model_Email extends Doctrine_Record
 {
 }

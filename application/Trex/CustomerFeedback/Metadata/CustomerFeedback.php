@@ -26,7 +26,7 @@
  * @since     2010-7-18 13:59:21
  */
 
-class Default_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metadata
+class Trex_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metadata
 {
     public function defaultMetadata()
     {

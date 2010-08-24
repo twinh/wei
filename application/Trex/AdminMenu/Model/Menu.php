@@ -26,6 +26,6 @@
  * @since     2010-5-25 8:10:46 utf-8 中文
  */
 
-class Default_AdminMenu_Model_Menu extends Doctrine_Record
+class Trex_AdminMenu_Model_Menu extends Doctrine_Record
 {
 }

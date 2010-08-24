@@ -26,7 +26,7 @@
  * @since     2010-7-20 7:58:07
  */
 
-class Default_Member_Metadata_Company extends Qwin_Trex_Metadata
+class Trex_Member_Metadata_Company extends Qwin_Trex_Metadata
 {
     public function  __construct()
     {

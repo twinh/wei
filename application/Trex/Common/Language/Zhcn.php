@@ -23,7 +23,7 @@
  * @since       2010-08-16 19:09:43
  */
 
-class Default_Common_Language_Zhcn extends Default_Language
+class Trex_Common_Language_Zhcn extends Trex_Language
 {
     public function __construct()
     {

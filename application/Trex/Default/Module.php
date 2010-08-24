@@ -25,7 +25,7 @@
  * @since       2010-07-31 1:04:27
  */
 
-class Default_Default_Module
+class Trex_Trex_Module
 {
     public function __construct()
     {

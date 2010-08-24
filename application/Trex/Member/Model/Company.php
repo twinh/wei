@@ -26,7 +26,7 @@
  * @since     2010-7-20 8:01:26
  */
 
-class Default_Member_Model_Company extends Doctrine_Record
+class Trex_Member_Model_Company extends Doctrine_Record
 {
     
 }

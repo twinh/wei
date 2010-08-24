@@ -26,7 +26,7 @@
  * @since     2010-5-23 7:20:55 utf-8 中文
  */
 
-class Default_Style_Controller_Theme extends Qwin_Trex_Controller
+class Trex_Style_Controller_Theme extends Qwin_Trex_Controller
 {
     /**
      * 列表

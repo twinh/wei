@@ -26,7 +26,7 @@
  * @since     2010-6-17 9:54:00 utf-8 中文
  */
 
-class Default_Link_Metadata_Link extends Qwin_Trex_Metadata
+class Trex_Link_Metadata_Link extends Qwin_Trex_Metadata
 {
     public function defaultMetadata()
     {

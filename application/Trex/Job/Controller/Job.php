@@ -26,7 +26,7 @@
  * @since     2010-7-18 10:19:53
  */
 
-class Default_Job_Controller_Job extends Qwin_Trex_Controller
+class Trex_Job_Controller_Job extends Qwin_Trex_Controller
 {
     /**
      * 列表

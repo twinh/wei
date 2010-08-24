@@ -26,7 +26,7 @@
  * @since     2010-7-28 17:26:04
  */
 
-class Default_Metadata extends Qwin_Trex_Metadata
+class Trex_Metadata extends Qwin_Trex_Metadata
 {
     /**
      * 设置基本的元数据,包括编号,创建时间,修改时间和操作.

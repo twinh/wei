@@ -23,7 +23,7 @@
  * @since       2010-08-16 19:46:35
  */
 
-class Default_AdminMenu_Language_Enus extends Default_Language
+class Trex_AdminMenu_Language_Enus extends Trex_Language
 {
     public function __construct()
     {

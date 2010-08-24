@@ -26,7 +26,7 @@
  * @since     2010-5-27 0:13:24 utf-8 中文
  */
 
-class Default_Article_Metadata_Detail extends Default_Metadata
+class Trex_Article_Metadata_Detail extends Trex_Metadata
 {
     public function  __construct()
     {

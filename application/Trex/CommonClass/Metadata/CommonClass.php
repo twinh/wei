@@ -28,7 +28,7 @@
  * @since     2009-11-21 15:21 utf-8 中文
  */
 
-class Default_CommonClass_Metadata_CommonClass extends Qwin_Trex_Metadata
+class Trex_CommonClass_Metadata_CommonClass extends Qwin_Trex_Metadata
 {
     public function defaultMetadata()
     {

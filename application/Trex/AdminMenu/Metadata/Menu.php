@@ -26,7 +26,7 @@
  * @since     2010-5-25 8:00:36 utf-8 中文
  */
 
-class Default_AdminMenu_Metadata_Menu extends Default_Metadata
+class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
 {
     public function setMetadata()
     {

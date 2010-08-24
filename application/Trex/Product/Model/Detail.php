@@ -26,6 +26,6 @@
  * @since     2010-5-27 0:12:55 utf-8 中文
  */
 
-class Default_Product_Model_Detail extends Doctrine_Record
+class Trex_Product_Model_Detail extends Doctrine_Record
 {
 }

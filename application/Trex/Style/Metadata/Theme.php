@@ -26,7 +26,7 @@
  * @since     2010-5-23 7:21:44 utf-8 中文
  */
 
-class Default_Style_Metadata_Theme extends Qwin_Trex_Metadata
+class Trex_Style_Metadata_Theme extends Qwin_Trex_Metadata
 {
     public function defaultMetadata()
     {

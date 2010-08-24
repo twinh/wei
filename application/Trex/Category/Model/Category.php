@@ -26,6 +26,6 @@
  * @since     2010-7-12 16:51:41
  */
 
-class Default_Category_Model_Category extends Doctrine_Record
+class Trex_Category_Model_Category extends Doctrine_Record
 {
 }

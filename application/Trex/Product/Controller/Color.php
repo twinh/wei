@@ -26,7 +26,7 @@
  * @since     2010-7-19 18:17:09
  */
 
-class Default_Product_Controller_Color extends Qwin_Trex_Controller
+class Trex_Product_Controller_Color extends Qwin_Trex_Controller
 {
     /**
      * 列表

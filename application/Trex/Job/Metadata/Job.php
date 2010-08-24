@@ -26,7 +26,7 @@
  * @since     2010-7-18 10:32:28
  */
 
-class Default_Job_Metadata_Job extends Qwin_Trex_Metadata
+class Trex_Job_Metadata_Job extends Qwin_Trex_Metadata
 {
     public function defaultMetadata()
     {

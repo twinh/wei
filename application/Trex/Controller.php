@@ -26,7 +26,7 @@
  * @since     2010-7-28 15:19:18
  */
 
-class Default_Controller extends Qwin_Trex_Controller
+class Trex_Controller extends Qwin_Trex_Controller
 {
     /**
      * 初始化各类和数据
@@ -50,11 +50,11 @@ class Default_Controller extends Qwin_Trex_Controller
         $languageName = $this->getLanguage();
         $commonLanguageName = $set['namespace'] . '_Common_Language_' . $languageName;
         $languageName = $set['namespace'] . '_' . $set['module'] . '_Language_' . $languageName;
-        Qwin::load('Default_Language');
+        Qwin::load('Trex_Language');
         $this->_lang = Qwin::run($languageName);
         if(null == $this->_lang)
         {
-            $languageName = 'Default_Language';
+            $languageName = 'Trex_Language';
             $this->_lang = Qwin::run($languageName);
         }
         $this->_commonLang = Qwin::run($commonLanguageName);
@@ -68,12 +68,12 @@ class Default_Controller extends Qwin_Trex_Controller
          * 加载元数据
          */
         $metadataName = $ini->getClassName('Metadata', $set);
-        Qwin::load('Default_Metadata');
+        Qwin::load('Trex_Metadata');
         Qwin::load($metadataName);
         $this->_meta = Qwin_Metadata_Manager::get($metadataName);
         if(null == $this->_meta)
         {
-            $metadataName = 'Default_Metadata';
+            $metadataName = 'Trex_Metadata';
             $this->_meta = Qwin::run($metadataName);
         }
         Qwin::addMap('-meta', $metadataName);
@@ -93,7 +93,7 @@ class Default_Controller extends Qwin_Trex_Controller
         /**
          * 加载视图父类
          */
-        Qwin::load('Default_View');
+        Qwin::load('Trex_View');
     }
 
     /**
@@ -128,7 +128,7 @@ class Default_Controller extends Qwin_Trex_Controller
          * 设置视图
          */
         $this->_view = array(
-            'class' => 'Default_Common_View_JqGrid',
+            'class' => 'Trex_Common_View_JqGrid',
             'data' => get_defined_vars(),
         );
     }
@@ -168,7 +168,7 @@ class Default_Controller extends Qwin_Trex_Controller
          * 设置视图
          */
         $this->_view = array(
-            'class' => 'Default_Common_View_JqGridJson',
+            'class' => 'Trex_Common_View_JqGridJson',
             'data' => get_defined_vars(),
         );
     }
@@ -212,7 +212,7 @@ class Default_Controller extends Qwin_Trex_Controller
          * 设置视图
          */
         $this->_view = array(
-            'class' => 'Default_Common_View_View',
+            'class' => 'Trex_Common_View_View',
             'data' => get_defined_vars(),
         );
     }
@@ -270,7 +270,7 @@ class Default_Controller extends Qwin_Trex_Controller
              * 设置视图
              */
             $this->_view = array(
-                'class' => 'Default_Common_View_Form',
+                'class' => 'Trex_Common_View_Form',
                 'data' => get_defined_vars(),
             );
         } else {
@@ -345,7 +345,7 @@ class Default_Controller extends Qwin_Trex_Controller
              * 设置视图
              */
             $this->_view = array(
-                'class' => 'Default_Common_View_Form',
+                'class' => 'Trex_Common_View_Form',
                 'data' => get_defined_vars(),
             );
         } else {

@@ -26,7 +26,7 @@
  * @since     2010-7-9 10:37:30
  */
 
-class Default_Project_Model_Feature extends Doctrine_Record
+class Trex_Project_Model_Feature extends Doctrine_Record
 {
 
 }

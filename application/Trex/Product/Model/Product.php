@@ -26,7 +26,7 @@
  * @since     2010-06-07
  */
 
-class Default_Product_Model_Product extends Doctrine_Record
+class Trex_Product_Model_Product extends Doctrine_Record
 {
 
 }

@@ -23,7 +23,7 @@
  * @since       2010-08-18 20:19:19
  */
 
-class Default_Common_View_Form extends Default_View
+class Trex_Common_View_Form extends Trex_View
 {
     public function __construct()
     {

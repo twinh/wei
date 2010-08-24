@@ -26,7 +26,7 @@
  * @since     2010-5-16 9:29:03 utf-8 中文
  */
 
-class Default_Member_Metadata_Email extends Qwin_Trex_Metadata
+class Trex_Member_Metadata_Email extends Qwin_Trex_Metadata
 {
     public function defaultMetadata()
     {

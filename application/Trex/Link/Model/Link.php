@@ -26,6 +26,6 @@
  * @since     2010-6-17 9:51:50 utf-8 中文
  */
 
-class Default_Link_Model_Link extends Doctrine_Record
+class Trex_Link_Model_Link extends Doctrine_Record
 {
 }
