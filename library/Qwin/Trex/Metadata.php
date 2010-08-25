@@ -434,25 +434,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
              */
             if(isset($set['converter'][$action]) && is_array($set['converter'][$action]))
             {
-                $param = $set['converter'][$action];
-                // TODO 逻辑分清
-                if(Qwin::isCallable($param[0]))
-                {
-                    $method = $param[0];
-                    if(is_string($method))
-                    {
-                        $newRow[$name] = call_user_func_array($method, $param);
-                        continue;
-                    }
-                    $param[0] = $row[$name];
-                    // TODO 静态调用和动态调用
-                    if(!is_object($method[0]) && !function_exists($method[0]))
-                    {
-                        $method[0] = Qwin::run($method[0]);
-                    }
-                    $newRow[$name] = call_user_func_array($method, $param);
-                    continue;
-                }
+                $newRow[$name] = $this->convert($set['converter'][$action], $row[$name]);
             }
 
             /**
@@ -478,6 +460,21 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             }
         }
         return $newRow;
+    }
+
+    /**
+     * 根据配置转换一个值
+     *
+     * @param array $set 数组配置
+     * @param mixed  要转换的值
+     * @return mixed 转换结果
+     */
+    public function convert($set, $value)
+    {
+        array_unshift($set, null);
+        $set[0] = $set[1];
+        $set[1] = $value;
+        return Qwin::callByArray($set, $value);
     }
 
     /**
