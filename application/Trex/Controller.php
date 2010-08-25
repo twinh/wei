@@ -474,10 +474,10 @@ class Trex_Controller extends Qwin_Trex_Controller
     public function convertListOperation($value, $name, $data, $copyData)
     {
         $primaryKey = $this->_meta['db']['primaryKey'];
-        $data = '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->_lang->t('LBL_ACTION_EDIT') .'" href="' . $this->_url->createUrl($this->_set, array('action' => 'Edit', $primaryKey => $copyData[$primaryKey])) . '"><span class="ui-icon ui-icon-tag">Edit</span></a>'
-              . '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->_lang->t('LBL_ACTION_VIEW') .'" href="' . $this->_url->createUrl($this->_set, array('action' => 'View', $primaryKey => $copyData[$primaryKey])) . '"><span class="ui-icon ui-icon-lightbulb">View</span></a>'
-              . '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->_lang->t('LBL_ACTION_COPY') .'" href="' . $this->_url->createUrl($this->_set, array('action' => 'Add', $primaryKey => $copyData[$primaryKey])) . '"><span class="ui-icon ui-icon-transferthick-e-w">Clone</span></a>'
-              . '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->_lang->t('LBL_ACTION_DELETE') .'" href="' . $this->_url->createUrl($this->_set, array('action' => 'Delete', $primaryKey => $copyData[$primaryKey])) . '" onclick="javascript:return confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE);"><span class="ui-icon ui-icon-closethick">Delete</span></a>';
+        $data  = Qwin_Helper_Html::jQueryButton($this->_url->createUrl($this->_set, array('action' => 'Edit', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_EDIT'), 'ui-icon-tag')
+              . Qwin_Helper_Html::jQueryButton($this->_url->createUrl($this->_set, array('action' => 'View', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_VIEW'), 'ui-icon-lightbulb')
+              . Qwin_Helper_Html::jQueryButton($this->_url->createUrl($this->_set, array('action' => 'Add', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_COPY'), 'ui-icon-transferthick-e-w')
+              . Qwin_Helper_Html::jQueryButton('javascript:if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE)){window.location=\'' . $this->_url->createUrl($this->_set, array('action' => 'Delete', $primaryKey => $copyData[$primaryKey])) . '\';}', $this->_lang->t('LBL_ACTION_DELETE'), 'ui-icon-closethick');
         return $data;
     }
 
