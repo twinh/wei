@@ -79,12 +79,6 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         'isDbQuery' => 1,
                         'isView' => 0,
                     ),
-                    'converter' => array(
-                        /*'attr' => array(
-                            array($this, 'convertCommonClass'),
-                            'province'
-                        )*/
-                    ),
                 ),
                 'category_3' => array(
                     'form' => array(
@@ -243,7 +237,10 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     ),
                     'form' => array(
                         '_type' => 'select',
-                        '_resource' => $this->getCommonClassList('yes_or_no'),
+                        '_resourceGetter' => array(
+                            array('Project_Helper_CommonClass', 'get'),
+                            'yes_or_no',
+                        ),
                         'name' => 'is_posted',
                     ),
                     'attr' => array(
@@ -253,10 +250,10 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         'isDbQuery' => 1,
                     ),
                     'converter' => array(
-                        'attr' => array(
-                            array($this, 'convertCommonClass'),
-                            'yes_or_no'
-                        )
+                        'list' => array(
+                            array('Project_Helper_CommonClass', 'convert'),
+                            'yes_or_no',
+                        ),
                     ),
                 ),
                 'is_index' => array(
@@ -265,20 +262,23 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     ),
                     'form' => array(
                         '_type' => 'select',
-                        '_resource' => $this->getCommonClassList('yes_or_no'),
+                        '_resourceGetter' => array(
+                            array('Project_Helper_CommonClass', 'get'),
+                            'yes_or_no',
+                        ),
                         'name' => 'is_index',
                     ),
                     'attr' => array(
                         'isListLink' => 1,
-                        'isList' => 0,
+                        'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
                     ),
                     'converter' => array(
-                        'attr' => array(
-                            array($this, 'convertCommonClass'),
-                            'yes_or_no'
-                        )
+                        'list' => array(
+                            array('Project_Helper_CommonClass', 'convert'),
+                            'yes_or_no',
+                        ),
                     ),
                 ),
                 'content_preview' => array(
@@ -295,11 +295,12 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                 ),
                 'date_created' => array(
                     'basic' => array(
-                        'title' => 'LBL_POST_DATA',
+                        'title' => 'LBL_FIELD_POST_DATA',
                         'group' => 'LBL_GROUP_DETAIL_DATA'
                     ),
                     'form' => array(
                         '_type' => 'text',
+                        '_widget' => 'datepicker',
                         'name' => 'date_created',
                     ),
                     'attr' => array(

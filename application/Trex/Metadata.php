@@ -33,7 +33,7 @@ class Trex_Metadata extends Qwin_Trex_Metadata
      */
     public function setCommonMetadata()
     {
-        $this->setIdMetadata()
+         return $this->setIdMetadata()
              ->setDateMetadata()
              ->setOperationMetadata();
     }
