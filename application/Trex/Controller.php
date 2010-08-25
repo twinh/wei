@@ -161,6 +161,13 @@ class Trex_Controller extends Qwin_Trex_Controller
         $relatedField = $meta->connectMetadata($this->_meta);
         $relatedField->order();
         $data = $meta->convertDataToSingle($data);
+
+        // TODO
+        if(method_exists($this, 'dataConverter'))
+        {
+            $data = $this->dataConverter($data);
+        }
+
         $data = $this->_meta->convertMultiData($relatedField, 'list', $data);
         $listField = $relatedField->getAttrList('isList');
 

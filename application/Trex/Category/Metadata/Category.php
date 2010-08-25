@@ -30,31 +30,24 @@ class Trex_Category_Metadata_Category extends Trex_Metadata
 {
     public function  __construct()
     {
-        parent::setMetadata();
+        parent::setCommonMetadata();
         $this->parseMetadata(array(
             // 基本属性
             'field' => array(
                 'parent_id' => array(
                     'form' => array(
                         '_type' => 'select',
-                        '_value' => '',
                         '_resourceGetter' => array(
                             array('Trex_Category_Controller_Category', 'getCategoryResource'),
                         ),
                         'name' => 'parent_id',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
                         'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                 ),
                 'name' => array(
                     'form' => array(
-                        '_type' => 'text',
-                        '_typeExt' => '',
-                        '_value' => '',
                         'name' => 'name',
                     ),
                     'attr' => array(

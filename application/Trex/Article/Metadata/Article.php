@@ -27,8 +27,9 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
 {
     public function  __construct()
     {
-        $this->setCommonMetadata();
-        $this->parseMetadata(array(
+        $this->setIdMetadata()
+             ->setOperationMetadata()
+             ->parseMetadata(array(
             // 基本属性
             'field' => array(
                 'category_id' => array(
@@ -166,21 +167,8 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         'isDbQuery' => 1,
                     ),
                 ),
-                'jump_to_url' => array(
-                    'form' => array(
-                        '_type' => 'text',
-                        'name' => 'jump_to_url',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
-                    ),
-                ),
                 'thumb' => array(
                     'form' => array(
-                        '_type' => 'text',
                         '_widget' => array(
                             'fileTree',
                             'ajaxUpload'
@@ -194,16 +182,37 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         'isDbQuery' => 1,
                     ),
                 ),
-                'hit' => array(
+                'jump_to_url' => array(
+                    'basic' => array(
+                        'group' => 'LBL_GROUP_DETAIL_DATA',
+                    ),
                     'form' => array(
-                        '_type' => 'hidden',
+                        '_type' => 'text',
+                        'name' => 'jump_to_url',
+                    ),
+                    'attr' => array(
+                        'isListLink' => 1,
+                        'isList' => 0,
+                        'isDbField' => 1,
+                        'isDbQuery' => 1,
+                    ),
+                ),
+                'hit' => array(
+                    'basic' => array(
+                        'group' => 'LBL_GROUP_DETAIL_DATA'
+                    ),
+                    'form' => array(
                         '_value' => 0,
                         'name' => 'hit',
                     ),
-                    'attr' => array(
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
+                ),
+                'order' => array(
+                    'basic' => array(
+                        'group' => 'LBL_GROUP_DETAIL_DATA'
+                    ),
+                    'form' => array(
+                        '_value' => 0,
+                        'name' => 'order',
                     ),
                 ),
                 'page_name' => array(
@@ -229,6 +238,9 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     ),
                 ),
                 'is_posted' => array(
+                    'basic' => array(
+                        'group' => 'LBL_GROUP_DETAIL_DATA',
+                    ),
                     'form' => array(
                         '_type' => 'select',
                         '_resource' => $this->getCommonClassList('yes_or_no'),
@@ -248,6 +260,9 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     ),
                 ),
                 'is_index' => array(
+                    'basic' => array(
+                        'group' => 'LBL_GROUP_DETAIL_DATA',
+                    ),
                     'form' => array(
                         '_type' => 'select',
                         '_resource' => $this->getCommonClassList('yes_or_no'),
@@ -278,16 +293,23 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         'isDbQuery' => 1,
                     ),
                 ),
-                'order' => array(
+                'date_created' => array(
+                    'basic' => array(
+                        'title' => 'LBL_POST_DATA',
+                        'group' => 'LBL_GROUP_DETAIL_DATA'
+                    ),
                     'form' => array(
                         '_type' => 'text',
-                        '_value' => 0,
-                        'name' => 'order',
+                        'name' => 'date_created',
                     ),
                     'attr' => array(
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
+                        //'isReadonly' => 1,
+                    ),
+                ),
+                'date_modified' => array(
+                    'form' => array(
+                        '_type' => 'custom',
+                        'name' => 'date_modified',
                     ),
                 ),
             ),

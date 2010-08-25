@@ -28,78 +28,24 @@
 
 class Trex_Category_Controller_Category extends Trex_Controller
 {
-    /**
-     * 列表的 json 数据
-     */
-    public function actionList()
+    public function dataConverter($data)
     {
-        $gpc = Qwin::run('-gpc');
-        $meta = &$this->__meta;
-        $primaryKey = $meta['db']['primaryKey'];
-        $nowPage = 1;
-        $rowNum = 10000;
-
-        // 修改主键域配置,以适应jqgrid
-        $meta['field'][$primaryKey]['list'] = array(
-            'isListLink' => false,
-            'isList' => true,
-            'isDbField' => true,
-            'isDbQuery' => true,
-        );
-
-        // 显示在列表页的域
-        $listField = $this->meta->getSettingList($meta['field'], 'isList');
-        
-        
-        $query = $this->meta->getQuery($this->_set);
-        // 增加排序(order)语句
-        $query = $this->meta->addOrderToQuery($meta, $query);
-        // 增加查找(where)语句
-        $query = $this->meta->addWhereToQuery($meta, $query);
-        $dbData = $query->execute()->toArray();
-        $count = $query->count();
-
         $treeData = array();
         $tree = Qwin::run('Qwin_Tree');
         $tree->setDataType('ARRAY');
-        // TODO
-        $tree->setParentDefaultValue($gpc->g('parentValue'));
-        foreach($dbData as $row)
+        $tree->setParentDefaultValue($this->_request->g('parentValue'));
+        foreach($data as $row)
         {
             $tree->addNode($row);
         }
-        
+
         $tree->getAllList($treeData);
         $tree->setLayer($treeData);
-        
         foreach($treeData as $id)
         {
-            $data[] = $tree->getValue($id);
+            $newData[] = $tree->getValue($id);
         }
-        // 根据配置和控制器中的对应方法转换数据
-        $data = $this->meta->convertMultiData($meta['field'], 'list', $data);
-
-        
-        $i = 0;
-        $jqgridData = array();
-        foreach($data as $row)
-        {
-            $jqgridData[$i][$primaryKey] = $row[$primaryKey];
-            foreach($listField as $field)
-            {
-                $jqgridData[$i]['cell'][] = $row[$field];
-            }
-            $i++;
-        }
-        
-        $json_data = array(
-            'page' => $nowPage,
-            // 总页面数
-            'total' => ceil($count / $rowNum),
-            'records' => $count,
-            'rows' => $jqgridData,
-        );
-        echo Qwin::run('-arr')->jsonEncode($json_data);
+        return $newData;
     }
 
     public function onAfterDb()
@@ -122,21 +68,12 @@ class Trex_Category_Controller_Category extends Trex_Controller
         $fileCacheObj->set($cacheName, $data);
     }
 
-    public function convertListOperation($val, $name, $data, $copyData)
+    public function convertListOperation($value, $name, $data, $copyData)
     {
-        $html = '';
-        if('special' == $copyData['parent_id'])
-        {
-            $html .= '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_ADD_SPECIAL_ARTICLE') .'" href="' . url(array( $this->_set['namespace'],  'Article',  'Article', 'Add'), array('sign' => $data['id'])) . '"><span class="ui-icon ui-icon-plus"></span></a>';
-            $html .= '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_VIEW_SPECIAL_ARTICLE') .'" href="' . url(array( $this->_set['namespace'],  'Article',  'Article'), array('searchField' => 'category_2', 'searchValue' => $data['id'])) . '"><span class="ui-icon ui-icon-note"></span></a>';
-            $html .= '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_VIEW_SPECIAL') .'" target="_blank" href="Special.php?name=' . $data['sign'] . '"><span class="ui-icon ui-icon-gear"></span></a>';
-        }
-        $html .= '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_ADD_SUBCATEGORY') .'" href="' . url(array( $this->_set['namespace'],  $this->_set['module'],  $this->_set['controller'], 'Add'), array('data[parent_id]' => $data[$this->__meta['db']['primaryKey']])) . '"><span class="ui-icon ui-icon-plusthick"></span></a>';
-        $html .= $this->meta->getOperationLink(
-            $this->__meta['db']['primaryKey'],
-            $data[$this->__meta['db']['primaryKey']],
-            $this->_set
-        );
+        $primaryKey = $this->_meta['db']['primaryKey'];
+        $url = $this->_url->createUrl($this->_set, array('action' => 'Add', '_data[parent_id]' => $data[$primaryKey]));
+        $html = Qwin_Helper_Html::jQueryButton($url, $this->_lang->t('LBL_ACTION_ADD_SUBCATEGORY'), 'ui-icon-plusthick')
+              . parent::convertListOperation($value, $name, $data, $copyData);
         return $html;
     }
 
@@ -208,11 +145,5 @@ class Trex_Category_Controller_Category extends Trex_Controller
             }
         }
         return $categoryResource;
-    }
-
-    public function convertAddOrder()
-    {
-        $class = Qwin::run('-ini')->getClassName('Model', $this->_set);
-        return $this->meta->getInitalOrder($class);
     }
 }
