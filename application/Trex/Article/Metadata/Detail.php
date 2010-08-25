@@ -30,45 +30,21 @@ class Trex_Article_Metadata_Detail extends Trex_Metadata
 {
     public function  __construct()
     {
-        $this->parseMetadata(array(
+        $this->setIdMetadata()
+             ->parseMetadata(array(
             'field' => array(
-                'id' => array(
-                    'basic' => array(
-                        'order' => 20,
-                    ),
-                    'form' => array(
-                        '_type' => 'hidden',
-                        'name' => 'id',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
-                        'isView' => 0,
-                    ),
-                ),
                 'article_id' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_ID',
-                        'order' => 20,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
                         '_type' => 'hidden',
                         'name' => 'article_id',
                     ),
                     'attr' => array(
                         'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                 ),
                 'content' => array(
                     'basic' => array(
-                        'title' => 'LBL_FIELD_CONTENT',
-                        'order' => 50,
-                        'group' => 'LBL_GROUP_DETAIL_DATA',
+                        'order' => 400,
                     ),
                     'form' => array(
                         '_type' => 'textarea',
@@ -76,10 +52,7 @@ class Trex_Article_Metadata_Detail extends Trex_Metadata
                         'name' => 'content',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
                         'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                 ),
                 'meta' => array(

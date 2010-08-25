@@ -80,8 +80,6 @@ class Trex_Metadata extends Qwin_Trex_Metadata
                 ),
                 'form' => array(
                     '_type' => 'custom',
-                    '_typeExt' => '',
-                    '_value' => '',
                     'name' => 'date_created',
                 ),
                 'attr' => array(
