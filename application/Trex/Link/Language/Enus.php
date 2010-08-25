@@ -25,7 +25,7 @@
  * @since       2010-08-25 19:01:42
  */
 
-class Trex_Link_Controller_Enus extends Trex_Language
+class Trex_Link_Language_Enus extends Trex_Language
 {
     public function __construct()
     {
