@@ -27,11 +27,14 @@
 
 class Qwin_Helper_Html
 {
-    public function __construct()
-    {
-        
-    }
-
+    /**
+     * 为标题增加样式
+     *
+     * @param string $title
+     * @param string $fontStyle 字体样式,用|隔开,如 i|u|b
+     * @param sting $color 合法的颜色值,如 red,#000
+     * @return string 转换过的标题
+     */
     public static function titleDecorator($title, $fontStyle = null, $color = null)
     {
         $style = '';
@@ -58,5 +61,11 @@ class Qwin_Helper_Html
             $style .= ' color: ' . $color;
         }
         return '<span style="'. $style . '">' . $title . '</span>';
+    }
+
+    public static function jQueryButton($href, $title = null, $icon = 'ui-icon-info')
+    {
+        return '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="'
+              . $title . '" href="' . $href . '"><span class="ui-icon ' . $icon .  '">' . $title . '</span></a>';
     }
 }
