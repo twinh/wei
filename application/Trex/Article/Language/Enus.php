@@ -51,6 +51,7 @@ class Trex_Article_Language_Enus extends Trex_Language
             'LBL_FIELD_META_DESCRIPTION' => 'Description',
             'LBL_FIELD_TITLE_STYLE' => 'Title Style',
             'LBL_FIELD_TITLE_COLOR' => 'Title Color',
+            'LBL_FIELD_POST_DATA' => 'Post Date',
 
             'LBL_GROUP_PAGE_DATA' => 'Page Data',
             'LBL_GROUP_SETTING_DATA' => 'Setting Data',

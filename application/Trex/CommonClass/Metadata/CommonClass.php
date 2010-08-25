@@ -28,33 +28,46 @@
  * @since     2009-11-21 15:21 utf-8 中文
  */
 
-class Trex_CommonClass_Metadata_CommonClass extends Qwin_Trex_Metadata
+class Trex_CommonClass_Metadata_CommonClass extends Trex_Metadata
 {
-    public function defaultMetadata()
+    public function  __construct()
     {
-        return array(
-            // 基本属性
-            'field' => array(
-                'id' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_ID',
-                        'descrip' => '',
-                        'order' => 5,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
+        $this->setCommonMetadata()
+            ->parseMetadata(
+            array(
+                // 基本属性
+                'field' => array(
+                    'language' => array(
+                        'form' => array(
+                            'name' => 'language',
+                        ),
                     ),
-                    'form' => array(
-                        '_type' => 'hidden',
-                        '_value' => '',
-                        'name' => 'id',
+                    'sign' => array(
+                        'form' => array(
+                            'name' => 'sign',
+                        ),
                     ),
-                    'attr' => array(
-                        'isListLink' => false,
-                        'isList' => true,
-                        'isDbField' => true,
-                        'isDbQuery ' => true,
+                    'code' => array(
+                        'form' => array(
+                            '_type' => 'textarea',
+                            'name' => 'code',
+                        ),
                     ),
                 ),
-                'type' => array(
+                'model' => array(),
+                'db' => array(
+                    'table' => 'common_class',
+                    'primaryKey' => 'id',
+                    'order' => array(
+                        array('date_created', 'DESC'),
+                    ),
+                    'limit' => 20,
+                ),
+                // 页面显示
+                'page' => array(
+                    'title' => 'LBL_MODULE_COMMONCLASS',
+                ),
+                /*'type' => array(
                     'basic' => array(
                         'title' => 'LBL_FIELD_TYPE',
                         'descrip' => array(
@@ -168,42 +181,7 @@ class Trex_CommonClass_Metadata_CommonClass extends Qwin_Trex_Metadata
                         'isDbField' => 1,
                         'isDbQuery' => 1,
                     ),
-                ),
-                'operation' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_OPERATION',
-                        'descrip' => '',
-                        'order' => 45,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
-                    'form' => array(
-                        '_type' => 'custom',
-                        '_value' => '',
-                        'name' => 'operation',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 0,
-                        'isDbQuery' => 0,
-                    ),
-                ),
-            ),
-            // 表之间的联系
-            'model' => array(
-
-            ),
-            'db' => array(
-                'table' => 'common_class',
-                'primaryKey' => 'id',
-            ),
-            // 页面显示
-            'page' => array(
-                'title' => 'LBL_MODULE_COMMON_CLASS',
-                'rowNum' => 10,
-            ),
-            'shortcut' => array(
-            )
-        );
+                ),*/
+         ));
     }
 }

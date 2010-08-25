@@ -28,8 +28,63 @@
 
 class Project_Helper_CommonClass
 {
+    /**
+     * 语言标识
+     * @var string
+     */
+    protected $_language;
+
+    /**
+     * 数据缓存
+     * @var array
+     */
+    protected $_data;
+
+
     function __construct()
     {
         
+    }
+
+    public function get($name)
+    {
+        if(!isset($this->_language))
+        {
+            $lang = Qwin::run('-controller')->getLanguage();
+            $this->_language = Qwin::run('Qwin_Language')->toStandardStyle($lang);
+        }
+
+        if(!isset($this->_data[$this->_language]))
+        {
+            $this->_data[$this->_language] = array();
+            if(!isset($this->_data[$this->_language][$name]))
+            {
+                $this->_data[$this->_language][$name] = require QWIN_ROOT_PATH . '/cache/common_class/' . $this->_language . '/' . $name . '.php';
+            }
+        }
+        return $this->_data[$this->_language][$name];
+    }
+
+    public function convert($value, $name)
+    {
+        $data = $this->get($name);
+        if(isset($data[$value]))
+        {
+            return $data[$value];
+        }
+        return $value;
+    }
+
+    public function write($data)
+    {
+        $codeList = array();
+        $code = explode("\r\n", $data['code']);
+        foreach($code as &$item)
+        {
+             $tmp = explode(':', trim($item));
+             $codeList[$tmp[0]] = $tmp[1];
+        }
+        $cachePath = QWIN_ROOT_PATH . '/cache/common_class/' . $data['language'] . '/' . $data['sign'] . '.php';
+        Qwin_Helper_File::writeAsArray($codeList, $cachePath);
     }
 }

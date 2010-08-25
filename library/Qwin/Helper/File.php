@@ -27,39 +27,34 @@
 
 class Qwin_Helper_File
 {    
-    // 写入文件
-    function write($filename,$data,$method='rb+',$iflock=1,$check=0,$chmod=1){
-        $check && strpos($filename,'..')!==false && exit('Forbidden');
-        touch($filename);
-        $handle = fopen($filename,$method);
-        $iflock && flock($handle,LOCK_EX);
-        fwrite($handle,$data);
-        $method=='rb+' && ftruncate($handle,strlen($data));
-        fclose($handle);
-        $chmod && @chmod($filename,0777);
-    }
-    
-    function writeArr($arr, $path, $name = '')
+    public static function writeAsArray($code, $path, $name = '')
     {
-        $arr = Qwin::run('Qwin_Helper_Array')->tophpCode($arr);
+        $path = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
+        self::makePath($path);
+
+        $code = Qwin::run('Qwin_Helper_Array')->tophpCode($code);
         if('' != $name)
         {
-            $file_str = "<?php\r\n\$$name = $arr;\r\n?>";
+            $fileData = "<?php\r\n\$$name = $code;";
         } else {
-            $file_str = "<?php\r\nreturn $arr;\r\n ?>";
+            $fileData = "<?php\r\nreturn $code;";
         }
-        self::write($path, $file_str);
+        file_put_contents($path, $fileData);
     }
 
-    function read($filename,$method='rb'){
-        //strpos($filename,'..')!==false && exit('Forbidden');
-        $filedata = '';
-        if ($handle = @fopen($filename,$method)) {
-            flock($handle,LOCK_SH);
-            $filedata = @fread($handle,filesize($filename));
-            fclose($handle);
+    public static function makePath($path)
+    {
+        $pathArray = explode(DIRECTORY_SEPARATOR, $path);
+        unset($pathArray[count($pathArray) - 1]);
+        $pathTemp = '';
+        foreach($pathArray as $path)
+        {
+            $pathTemp .= $path . DIRECTORY_SEPARATOR;
+            if(!is_dir($pathTemp))
+            {
+                mkdir($pathTemp);
+            }
         }
-        return $filedata;
     }
     
     /*

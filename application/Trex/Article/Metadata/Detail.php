@@ -30,9 +30,18 @@ class Trex_Article_Metadata_Detail extends Trex_Metadata
 {
     public function  __construct()
     {
-        $this->setIdMetadata()
+        $this//->setIdMetadata()
              ->parseMetadata(array(
             'field' => array(
+                'id' => array(
+                    'form' => array(
+                        '_type' => 'hidden',
+                        'name' => 'id',
+                    ),
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
+                ),
                 'article_id' => array(
                     'form' => array(
                         '_type' => 'hidden',

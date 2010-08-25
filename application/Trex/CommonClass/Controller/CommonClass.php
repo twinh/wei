@@ -28,65 +28,14 @@
  * @since     2009-11-21 12:18 utf-8 中文
  */
 
-class Trex_CommonClass_Controller_CommonClass extends Qwin_Trex_Controller
+class Trex_CommonClass_Controller_CommonClass extends Trex_Controller
 {
-    /**
-     * 列表
-     */
-    public function actionDefault()
-    {
-        return Qwin::run('Qwin_Trex_Action_List');
-    }
-
-    /**
-     * 添加
-     */
-    public function actionAdd()
-    {
-        Qwin::run('-form')->addExt('Qwin_Form_ElementExt_CommonClass');
-        return Qwin::run('Qwin_Trex_Action_Add');
-    }
-
-    /**
-     * 编辑
-     */
-    public function actionEdit()
-    {
-        Qwin::run('-form')->addExt('Qwin_Form_ElementExt_CommonClass');
-        return Qwin::run('Qwin_Trex_Action_Edit');
-    }
-
-    /**
-     * 删除
-     */
-    public function actionDelete()
-    {
-        return Qwin::run('Qwin_Trex_Action_Delete');
-    }
-
-    /**
-     * 列表的 json 数据
-     */
-    public function actionJsonList()
-    {
-        Qwin::load('Qwin_converter_Time');
-        return Qwin::run('Qwin_Trex_Action_JsonList');
-    }
-
-    /**
-     * 查看
-     */
-    public function actionShow()
-    {
-        return Qwin::run('Qwin_Trex_Action_Show');
-    }
-
     /**
      * 获取指定类型(type_id)的最大值
      */
     public function actionGetMaxCode()
     {
-        $type_id = substr(intval(Qwin::run('-gpc')->g('type_id')), 0, 1);
+        $type_id = substr(intval($this->_request->g('type_id')), 0, 1);
         $query = $this->meta->getQuery($this->_set);
         $query->select('MAX(code) as max_code')
             ->where('LEFT(code, 1) = ?', $type_id);
@@ -106,25 +55,11 @@ class Trex_CommonClass_Controller_CommonClass extends Qwin_Trex_Controller
      */
     public function onAfterDb($action, $data)
     {
-        Qwin::run('Qwin_Cache_CommonClass')->setCache($data['code']);
+        Qwin::run('Project_Helper_CommonClass')->write($data);
     }
-
-    public function convertListValue($val)
-    {
-        $ses = Qwin::run(('-ses'));
-        $lang = $ses->get('lang');
-        $val = unserialize($val);
-        // TODO implode
-        if(isset($val->$lang))
-        {
-            return $val->$lang;
-        }
-    }
-
+    
     /**
-     * edit 转换函数
-     * @todo 字段域的只读性
-     */
+
     public function convertEditCode($val, $name, $row, $row_copy)
     {
         // 删除"类型"域
@@ -143,20 +78,9 @@ class Trex_CommonClass_Controller_CommonClass extends Qwin_Trex_Controller
         return Qwin::run('-arr')->jsonEncode($val);
     }
 
-    /**
-     * add 转换函数
-     */
-    public function convertAddOrder()
-    {
-        $code = substr(intval(Qwin::run('-gpc')->g('code')), 0, 4);
-        $where = array('LEFT(code, 4) = ?', $code);
-        $class = Qwin::run('-ini')->getClassName('Model', $this->_set);
-        return $this->meta->getInitalOrder($class, 'order', 5, $where);
-    }
-
     public function convertAddCode($field)
     {
-        $code = intval(Qwin::run('-gpc')->g('code')) ;
+        $code = intval($this->_request->g('code')) ;
         $query = $this->meta->getQuery($this->_set);
         // 添加已有分类的下一个
         if(4 <= strlen($code))
@@ -186,7 +110,7 @@ class Trex_CommonClass_Controller_CommonClass extends Qwin_Trex_Controller
         } else {
             return 1001000;
         }
-    }
+    }*/
 
     /**
      * db 转换函数
@@ -199,7 +123,7 @@ class Trex_CommonClass_Controller_CommonClass extends Qwin_Trex_Controller
         return serialize($data);
     }
 
-    public function convertListOperation($val, $name, $data, $cpoyData)
+    /*public function convertListOperation($val, $name, $data, $cpoyData)
     {
         $html = '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_ADD_NEXT') .'" href="' . url(
                 array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], 'Add'),
@@ -207,5 +131,5 @@ class Trex_CommonClass_Controller_CommonClass extends Qwin_Trex_Controller
             ) . '"><span class="ui-icon ui-icon-plusthick"></span></a>';
         $html .= $this->meta->getOperationLink($this->__meta['db']['primaryKey'], $data[$this->__meta['db']['primaryKey']], $this->_set);
         return $html;
-    }
+    }*/
 }
