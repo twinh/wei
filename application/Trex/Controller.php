@@ -67,7 +67,6 @@ class Trex_Controller extends Qwin_Trex_Controller
          * 加载元数据
          */
         $metadataName = $ini->getClassName('Metadata', $set);
-        //Qwin::load('Trex_Metadata');
         Qwin::load($metadataName);
         $this->_meta = Qwin_Metadata_Manager::get($metadataName);
         if(null == $this->_meta)
@@ -153,6 +152,7 @@ class Trex_Controller extends Qwin_Trex_Controller
              ->addLimitToQuery($meta, $query);
         $data = $query->execute()->toArray();
         $count = count($data);
+        $totalRecord = $query->count();
         
         /**
          * 处理数据

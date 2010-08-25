@@ -28,9 +28,9 @@
 
 class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
 {
-    public function setMetadata()
+    public function  __construct()
     {
-        parent::setMetadata();
+        $this->setCommonMetadata();
         $this->parseMetadata(array(
             // 基本属性
             'field' => array(
@@ -46,7 +46,7 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                         '_resourceGetter' => array(
                             array('Project_Hepler_Category', 'getTreeResource'),
                             array(
-                                'namespace' => 'Default',
+                                'namespace' => 'Trex',
                                 'module' => 'AdminMenu',
                                 'controller' => 'Menu',
                             ),
@@ -62,10 +62,10 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                         'isDbQuery' => 1,
                     ),
                     'converter' => array(
-                        'attr' => array(
+                        'list' => array(
                             array('Project_Hepler_Category', 'convertTreeResource'),
                             array(
-                                'namespace' => 'Default',
+                                'namespace' => 'Trex',
                                 'module' => 'AdminMenu',
                                 'controller' => 'Menu',
                             ),
@@ -186,10 +186,7 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
             // 页面显示
             'page' => array(
                 'title' => 'LBL_MODULE_ADMIN_MENU',
-                'rowNum' => 10,
             ),
-            'shortcut' => array(
-            )
         ));
     }
 }

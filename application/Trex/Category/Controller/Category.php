@@ -52,14 +52,14 @@ class Trex_Category_Controller_Category extends Trex_Controller
     {
         //Qwin::run('Project_Helper_Cache')->setFileCacheBySetting($this->_set);
         $fileCacheObj = Qwin::run('Qwin_Cache_File');
-        $fileCacheObj->connect(QWIN_ROOT_PATH . '/Cache/');
+        $fileCacheObj->connect(QWIN_ROOT_PATH . '/cache/');
         $setting = array_intersect_key($this->_set, array(
             'namespace' => '',
             'module' => '',
             'controller' => '',
         ));
 
-        $data = $this->meta->getQuery($setting)
+        $data = $this->_meta->getDoctrineQuery($setting)
             ->orderBy('order ASC')
             ->execute()
             ->toArray();
@@ -109,7 +109,7 @@ class Trex_Category_Controller_Category extends Trex_Controller
         // 获取缓存数据
         //$cateogryCache = Qwin::run('Qwin_Cache_List')->getCache('Category');
         $fileCacheObj = Qwin::run('Qwin_Cache_File');
-        $fileCacheObj->connect(QWIN_ROOT_PATH . '/Cache/');
+        $fileCacheObj->connect(QWIN_ROOT_PATH . '/cache/');
         $setting = array(
             'namespace' => 'Default',
             'module' => 'Category',
@@ -120,7 +120,6 @@ class Trex_Category_Controller_Category extends Trex_Controller
 
         // 转换为树
         $treeData = array();
-        Qwin::load('Qwin_Tree');
         $tree = new Qwin_Tree();
         $tree->setParentDefaultValue(NULL);
         foreach($cateogryCache as $row)

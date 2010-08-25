@@ -50,12 +50,6 @@ class Trex_Category_Metadata_Category extends Trex_Metadata
                     'form' => array(
                         'name' => 'name',
                     ),
-                    'attr' => array(
-                        'isListLink' => 0,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
-                    ),
                     'validator' => array(
                         'rule' => array(
                             'required' => true,
@@ -65,88 +59,54 @@ class Trex_Category_Metadata_Category extends Trex_Metadata
                 ),
                 'sign' => array(
                     'form' => array(
-                        '_type' => 'text',
-                        '_typeExt' => '',
-                        '_value' => '',
                         'name' => 'sign',
                     ),
                     'attr' => array(
-                        'isListLink' => 0,
                         'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                 ),
                 'image' => array(
                     'form' => array(
-                        '_type' => 'text',
-                        '_typeExt' => 'fileTree',
-                        '_button' => 'ajaxUpload',
-                        '_value' => '',
+                        '_widget' => array(
+                            'fileTree', 'ajaxUpload',
+                        ),
                         'name' => 'image',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
                         'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                 ),
                 'image_2' => array(
                     'form' => array(
-                        '_type' => 'text',
-                        '_typeExt' => 'fileTree',
-                        '_button' => 'ajaxUpload',
-                        '_value' => '',
+                        '_widget' => array(
+                            'fileTree', 'ajaxUpload',
+                        ),
                         'name' => 'image_2',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
                         'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                 ),
                 'order' => array(
                     'form' => array(
-                        '_type' => 'text',
-                        '_typeExt' => '',
-                        '_value' => '',
                         'name' => 'order',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                 ),
                 'to_url' => array(
                     'form' => array(
-                        '_type' => 'text',
-                        '_typeExt' => '',
-                        '_value' => '',
                         'name' => 'to_url',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
                         'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                 ),
                 'description' => array(
                     'form' => array(
                         '_type' => 'textarea',
-                        '_typeExt' => '',
-                        '_value' => '',
                         'name' => 'description',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
                         'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                 ),
             ),
@@ -156,18 +116,16 @@ class Trex_Category_Metadata_Category extends Trex_Metadata
             ),
             'db' => array(
                 'table' => 'category',
-                'primaryKey' => 'id',
                 'order' => array(
                     array('order', 'ASC'),
                     array('date_created', 'DESC'),
                 ),
+                'limit' => 100,
             ),
             // 页面显示
             'page' => array(
                 'title' => 'LBL_MODULE_CATEGORY',
             ),
-            'shortcut' => array(
-            )
         ));
     }
 }
