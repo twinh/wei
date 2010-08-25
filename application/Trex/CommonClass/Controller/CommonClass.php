@@ -31,86 +31,12 @@
 class Trex_CommonClass_Controller_CommonClass extends Trex_Controller
 {
     /**
-     * 获取指定类型(type_id)的最大值
-     */
-    public function actionGetMaxCode()
-    {
-        $type_id = substr(intval($this->_request->g('type_id')), 0, 1);
-        $query = $this->meta->getQuery($this->_set);
-        $query->select('MAX(code) as max_code')
-            ->where('LEFT(code, 1) = ?', $type_id);
-        $data = $query->fetchOne()->toArray();
-        if($data['max_code'])
-        {
-            $max_code = substr($data['max_code'], 0, 4);
-            $code = $max_code + 1 . '000';
-        } else {
-            $code = $type_id . '001000';
-        }
-        echo $code;
-    }
-
-    /**
      * on 函数
      */
     public function onAfterDb($action, $data)
     {
         Qwin::run('Project_Helper_CommonClass')->write($data);
     }
-    
-    /**
-
-    public function convertEditCode($val, $name, $row, $row_copy)
-    {
-        // 删除"类型"域
-        unset($this->__meta['field']['type']);
-        $this->__meta['field']['code']['form']['readonly'] = 'readonly';
-        if(substr($row_copy['code'], 4) != '000')
-        {
-            $this->__meta['field']['var_name']['form']['_type'] = 'hidden';
-        }
-        return $val;
-    }
-
-    public function convertEditValue($val)
-    {
-        $val = @unserialize($val);
-        return Qwin::run('-arr')->jsonEncode($val);
-    }
-
-    public function convertAddCode($field)
-    {
-        $code = intval($this->_request->g('code')) ;
-        $query = $this->meta->getQuery($this->_set);
-        // 添加已有分类的下一个
-        if(4 <= strlen($code))
-        {
-            $category = substr($code, 0, 4);
-            $query->select('MAX(code) as max_code')
-                ->where('LEFT(code, 4) = ?', $category);
-            $data = $query->fetchOne()->toArray();
-            // 已存在该分类
-            if($data['max_code'])
-            {
-                // 删除"类型"域
-                unset($this->__meta['field']['type']);
-                // 删除"变量名称"域,因为"变量名称"只在第一个分类,即作为父分类时需要添加
-                unset($this->__meta['field']['var_name']);
-                return $data['max_code'] + 1;
-            }
-        }
-
-        // 添加新的分类
-        $query->select('MAX(code) as max_code');
-        $data = $query->fetchOne()->toArray();
-        if($data['max_code'])
-        {
-            $max_code = substr($data['max_code'], 0, 4);
-            return $max_code + 1 . '000';
-        } else {
-            return 1001000;
-        }
-    }*/
 
     /**
      * db 转换函数
@@ -123,13 +49,12 @@ class Trex_CommonClass_Controller_CommonClass extends Trex_Controller
         return serialize($data);
     }
 
-    /*public function convertListOperation($val, $name, $data, $cpoyData)
+    public function convertListOperation($value, $name, $data, $copyData)
     {
-        $html = '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_ADD_NEXT') .'" href="' . url(
-                array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], 'Add'),
-                array('code' => $cpoyData['code'])
-            ) . '"><span class="ui-icon ui-icon-plusthick"></span></a>';
-        $html .= $this->meta->getOperationLink($this->__meta['db']['primaryKey'], $data[$this->__meta['db']['primaryKey']], $this->_set);
+        $primaryKey = $this->_meta['db']['primaryKey'];
+        $url = $this->_url->createUrl($this->_set, array('action' => 'Add', '_data[sign]' => $data['sign']));
+        $html = Qwin_Helper_Html::jQueryButton($url, $this->_lang->t('LBL_ACTION_ADD_NEXT'), 'ui-icon-plusthick')
+              . parent::convertListOperation($value, $name, $data, $copyData);
         return $html;
-    }*/
+    }
 }

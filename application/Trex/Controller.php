@@ -50,7 +50,6 @@ class Trex_Controller extends Qwin_Trex_Controller
         $languageName = $this->getLanguage();
         $commonLanguageName = $set['namespace'] . '_Common_Language_' . $languageName;
         $languageName = $set['namespace'] . '_' . $set['module'] . '_Language_' . $languageName;
-        Qwin::load('Trex_Language');
         $this->_lang = Qwin::run($languageName);
         if(null == $this->_lang)
         {
@@ -68,7 +67,7 @@ class Trex_Controller extends Qwin_Trex_Controller
          * 加载元数据
          */
         $metadataName = $ini->getClassName('Metadata', $set);
-        Qwin::load('Trex_Metadata');
+        //Qwin::load('Trex_Metadata');
         Qwin::load($metadataName);
         $this->_meta = Qwin_Metadata_Manager::get($metadataName);
         if(null == $this->_meta)

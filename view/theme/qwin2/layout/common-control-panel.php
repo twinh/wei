@@ -39,7 +39,8 @@ echo $jquery->loadTheme(),
         <li><a class="ui-anchor" href="?module=Member&controller=Group">Member Group</a></li>
         <li><a class="ui-anchor" href="?module=Category&controller=Category">Category</a></li>
         <li><a class="ui-anchor" href="?module=Article&controller=Article">Article</a></li>
-        <li><a class="ui-anchor" href="?module=CommonClass&controller=CommonClass">CommonClass</a></li>
+        <li><a class="ui-anchor" href="?module=CommonClass&controller=CommonClass">Common Class</a></li>
+        <li><a class="ui-anchor" href="?module=Link&controller=Link">Link</a></li>
         <li><a class="ui-anchor" href="#Article">Add Your Link</a></li>
     </ul>
 </div>
