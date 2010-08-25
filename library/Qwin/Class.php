@@ -326,11 +326,11 @@ class Qwin_Class
      *
      * @param array $set
      */
-    public static function callByArray($set)
+    public static function callByArray($set, $value = null)
     {
         if(!is_array($set) || empty($set))
         {
-            return null;
+            return $value;
         }
         /**
          * 配置数组是类和方法
@@ -347,7 +347,7 @@ class Qwin_Class
             }
             if(!method_exists($set[0][0], $set[0][1]))
             {
-                return null;
+                return $value;
             }
         /**
          * 配置数组是函数
@@ -355,13 +355,13 @@ class Qwin_Class
         } elseif(is_string($set[0])) {
             if(!function_exists($set[0]))
             {
-                return null;
+                return $value;
             }
         /**
          * 无法通过解析
          */
         } else {
-            return false;
+            return $value;
         }
         // 第一个是方法/函数名
         $function = $set[0];
