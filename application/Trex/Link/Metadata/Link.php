@@ -26,38 +26,15 @@
  * @since     2010-6-17 9:54:00 utf-8 中文
  */
 
-class Trex_Link_Metadata_Link extends Qwin_Trex_Metadata
+class Trex_Link_Metadata_Link extends Trex_Metadata
 {
-    public function defaultMetadata()
+    public function  __construct()
     {
-        return array(
+        $this->setCommonMetadata();
+        $this->parseMetadata(array(
             // 基本属性
             'field' => array(
-                'id' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_ID',
-                        'descrip' => '',
-                        'order' => 5,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
-                    'form' => array(
-                        '_type' => 'hidden',
-                        '_value' => '',
-                        'name' => 'id',
-                    ),
-                    'attr' => array(
-                        'isListLink' => false,
-                        'isList' => true,
-                        'isDbField' => true,
-                        'isDbQuery ' => true,
-                    ),
-                ),
                 'category_id' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_CATEGORY_ID',
-                        'order' => 10,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
                         '_type' => 'select',
                         '_value' => '',
@@ -65,7 +42,7 @@ class Trex_Link_Metadata_Link extends Qwin_Trex_Metadata
                         '_resourceGetter' => array(
                             array('Project_Hepler_Category', 'getTreeResource'),
                             array(
-                                'namespace' => 'Default',
+                                'namespace' => 'Trex',
                                 'module' => 'Category',
                                 'controller' => 'Category',
                             ),
@@ -74,15 +51,12 @@ class Trex_Link_Metadata_Link extends Qwin_Trex_Metadata
                     ),
                     'attr' => array(
                         'isListLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                     'converter' => array(
                         'attr' => array(
                             array('Project_Hepler_Category', 'convertTreeResource'),
                             array(
-                                'namespace' => 'Default',
+                                'namespace' => 'Trex',
                                 'module' => 'Category',
                                 'controller' => 'Category',
                             ),
@@ -91,183 +65,69 @@ class Trex_Link_Metadata_Link extends Qwin_Trex_Metadata
                     ),
                 ),
                 'name' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_NAME',
-                        'order' => 15,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
-                        '_type' => 'text',
-                        '_value' => '',
                         'name' => 'name',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 0,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                 ),
                 'url' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_URL',
-                        'order' => 20,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
-                        '_type' => 'text',
                         '_value' => 'http://',
                         'name' => 'url',
                     ),
-                    'attr' => array(
-                        'isListLink' => 0,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
-                    ),
                 ),
                 'target' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_TARGET',
-                        'order' => 22,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
-                        '_type' => 'text',
                         '_value' => '_self',
                         'name' => 'target',
                     ),
-                    'attr' => array(
-                        'isListLink' => 0,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
-                    ),
                 ),
                 'img_url' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_IMG_URL',
-                        'order' => 25,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
                         '_type' => 'text',
-                        '_typeExt' => 'fileTree',
-                        '_button' => 'ajaxUpload',
-                        '_value' => '',
+                        '_widget' => array(
+                            'fileTree', 'ajaxUpload',
+                        ),
                         'name' => 'img_url',
                     ),
                     'attr' => array(
-                        'isListLink' => 0,
                         'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                 ),
                 'order' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_ORDER',
-                        'descrip' => '',
-                        'order' => 30,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
-                        '_type' => 'text',
                         'name' => 'order',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 0,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                 ),
                 'description' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_DESCRIPTION',
-                        'descrip' => '',
-                        'order' => 35,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
                         '_type' => 'textarea',
                         'name' => 'description',
                     ),
                     'attr' => array(
-                        'isListLink' => 0,
                         'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                 ),
                 'date_created' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_DATE_CREATED',
-                        'descrip' => '',
-                        'order' => 40,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
                         '_type' => 'custom',
-                        '_typeExt' => '',
-                        '_value' => '',
                         'name' => 'date_created',
                     ),
                     'attr' => array(
-                        'isListLink' => 0,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                         'isReadonly' => 1,
                     ),
                 ),
                 'date_modified' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_DATE_MODIFIED',
-                        'descrip' => '',
-                        'order' => 45,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
                         '_type' => 'custom',
-                        '_typeExt' => '',
-                        '_value' => '',
                         'name' => 'date_modified',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
-                    ),
-                ),
-                'operation' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_OPERATION',
-                        'descrip' => '',
-                        'order' => 45,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
-                    'form' => array(
-                        '_type' => 'custom',
-                        '_value' => '',
-                        'name' => 'operation',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 0,
-                        'isDbQuery' => 0,
                     ),
                 ),
             ),
             // 表之间的联系
             'model' => array(
-
             ),
             'db' => array(
                 'table' => 'link',
-                'primaryKey' => 'id',
                 'order' => array(
                     array('date_created', 'DESC')
                 )
@@ -275,10 +135,7 @@ class Trex_Link_Metadata_Link extends Qwin_Trex_Metadata
             // 页面显示
             'page' => array(
                 'title' => 'LBL_MODULE_LINK',
-                'rowNum' => 10,
-            ),
-            'shortcut' => array(
             )
-        );
+         ));
     }
 }

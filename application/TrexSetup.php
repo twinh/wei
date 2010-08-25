@@ -25,57 +25,36 @@
 
 class TrexSetup extends Qwin_Trex_Setup
 {
-    protected function _onControllerLoad(Qwin_Trex_Controller $controller)
+    protected $_appPath;
+
+    public function  __construct($config, $set)
     {
-        /*$request = Qwin::run('Qwin_Request');
-        $session = Qwin::run('Qwin_Session');
-        $lang = null;
+        parent::__construct($config, $set);
+    }
 
-        /**
-         * 获取语言
-         *
-        // 按优先级排列语言的数组
-        $langList = array(
-            $request->g('language'),
-            $session->get('language'),
-            $this->_config['interface']['language'],
-        );
-        foreach($langList as $val)
+    public function getAppPath()
+    {
+        if(isset($this->_appPath))
         {
-            if(null != $val)
-            {
-                $lang = $val;
-                break;
-            }
+            return $this->_appPath;
         }
-        $session->set('language', $lang);
+        $this->_appPath = dirname(__FILE__) . DIRECTORY_SEPARATOR;
+        return $this->_appPath;
+    }
 
-        /**
-         * 加载项目语言
-         *
-        $langFile = QWIN_ROOT_PATH . '/common/language/' . $lang . '.php';
-        if(file_exists($langFile))
-        {
-            $controller->language = require_once $langFile;
-        } else {
-            $langFile = QWIN_ROOT_PATH . '/common/lang/' . $this->_config['interface']['language'] . '.php';
-            $controller->lang = require_once $langFile;
-        }
+    public function autoload($className)
+    {
+       $classPath = $this->getAppPath() . str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
+       if(file_exists($classPath))
+       {
+           require $classPath;
+           return true;
+       }
+       return false;
+    }
 
-        // 加载当前模块语言
-        $moduleLangFile = QWIN_ROOT_PATH . '/App/' . $set['namespace'] . '/' . $set['module'] . '/Lang/' . $lang . '.php';
-        if(file_exists($module_lang_file))
-        {
-            $controller->lang += require_once $module_lang_file;
-        } else {
-            $module_lang_file = QWIN_ROOT_PATH . '/App/' . $set['namespace'] . '/' . $set['module'] . '/Lang/' . $config['i18n']['language'] . '.php';
-            if(file_exists($module_lang_file))
-            {
-                $controller->lang += require_once $module_lang_file;
-            }
-        }
-
-        echo '加载完毕!<p>';
-        exit;*/
+    protected function _onNamespaceLoad()
+    {
+        spl_autoload_register(array($this, 'autoload'));
     }
 }
