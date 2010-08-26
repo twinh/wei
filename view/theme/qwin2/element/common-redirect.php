@@ -25,17 +25,6 @@
  * @since       2010-08-26 11:01:20
  */
 ?>
-<style type="text/css">
-.ui-message-content{ padding:  2em;}
-.ui-message-content p{
-    padding:  1em;
-    font-size:  1.2em;
-}
-.ui-message-operation{
-    padding: 1em;
-    text-align: right;
-}
-</style>
 <div class="ui-box ui-widget ui-widget-content ui-corner-all">
     <div class="ui-box-titlebar ui-widget-header ui-helper-clearfix">
         <span class="ui-box-title"><?php echo qw_lang('LBL_MESSAGE') ?></span>
@@ -43,15 +32,30 @@
     <div class="ui-message-content ui-box-content ui-widget-content">
         <div class="ui-state-highlight ui-corner-all">
             <p>
-            <span class="ui-icon ui-icon-info" style="float: left;"></span>
-            <?php echo $message ?>
+                <span class="ui-icon ui-icon-info"></span>
+                <?php echo $message ?>
             </p>
+        <?php
+            if(isset($url)) :
+        ?>
+            <p>
+                <span class="ui-icon ui-icon-info"></span>
+                <?php echo qw_lang('MSG_CLICK_TO_REDIRECT') ?>
+            </p>
+            <script type="text/javascript">
+            window.setTimeout(function(){
+                window.location.href = '<?php echo $url ?>';
+            }, 3000);
+            </script>
+        <?php
+            endif;
+        ?>
         </div>
         <div class="ui-message-operation">
         <?php
             if(isset($url)) :
         ?>
-            <a class="ui-action-redirect" href="<?php echo $url ?>"><?php echo qw_lang('LBL_CLICK_TO_REDIRECT') ?></a>
+            <a class="ui-action-redirect" href="<?php echo $url ?>"><?php echo qw_lang('LBL_ACTION_REDIRECT') ?></a>
         <?php
             endif;
         ?>

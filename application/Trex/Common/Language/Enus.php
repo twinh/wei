@@ -48,7 +48,6 @@ class Trex_Common_Language_Enus extends Trex_Language
             'LBL_ACTION_APPLY' => 'Apply',
             'LBL_ACTION_RESTORE' => 'Restore',
             'LBL_ACTION_REDIRECT' => 'Redirect',
-            'LBL_CLICK_TO_REDIRECT' => 'Click to redirect the new page at once.',
 
             'LBL_DEFAULT' => 'Default',
             'LBL_OPERATION' => 'Operation',
@@ -96,6 +95,8 @@ class Trex_Common_Language_Enus extends Trex_Language
             'MSG_NO_RECORD' => 'The record isn\'t exists or has been deleted.',
             'MSG_OPERATE_SUCCESSFULLY' => 'Operate successfully!',
             'MSG_FUNCTION_DEVELOPTING' => 'The function is developing.',
+            'MSG_CLICK_TO_REDIRECT' => 'It is going to redirect to a new page in 3 seconds, click the "Redirect" button to redirect at once.',
+            // 3秒后跳转到新的页面,点击"跳转"按钮直接跳转.
 
             'MSG_FILE_NOT_EXISTS' => 'The file is not exists',
 
@@ -104,4 +105,3 @@ class Trex_Common_Language_Enus extends Trex_Language
         );
     }
 }
-//
