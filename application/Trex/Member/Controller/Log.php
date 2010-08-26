@@ -27,7 +27,7 @@
  * @todo      标准化,一次取出该用户的全部资料,方便数据设置
  */
 
-class Trex_Member_Controller_Log extends Qwin_Trex_Controller
+class Trex_Member_Controller_Log extends Trex_Controller
 {
     public function actionLogin()
     {

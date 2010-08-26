@@ -26,7 +26,7 @@
  * @since     2010-7-15 14:43:28
  */
 
-class Trex_Member_Controller_Group extends Trex_Controller
+class Trex_Member_Controller_Group extends Trex_ActionController
 {
     public function actionAllocatePermission()
     {

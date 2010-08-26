@@ -26,6 +26,6 @@
  * @since     2010-6-17 9:50:16 utf-8 中文
  */
 
-class Trex_Link_Controller_Link extends Trex_Controller
+class Trex_Link_Controller_Link extends Trex_ActionController
 {
 }

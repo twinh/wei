@@ -26,7 +26,7 @@
  * @since     2010-5-13 10:17:58 utf-8 中文
  */
 
-class Trex_Member_Controller_Member extends Trex_Controller
+class Trex_Member_Controller_Member extends Trex_ActionController
 {
     /**
      * 编辑密码

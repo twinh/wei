@@ -28,7 +28,7 @@
  * @since     2009-11-21 12:18 utf-8 中文
  */
 
-class Trex_CommonClass_Controller_CommonClass extends Trex_Controller
+class Trex_CommonClass_Controller_CommonClass extends Trex_ActionController
 {
     /**
      * on 函数

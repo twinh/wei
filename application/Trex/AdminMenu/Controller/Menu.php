@@ -26,7 +26,7 @@
  * @since     2010-5-25 7:59:33 utf-8 中文
  */
 
-class Trex_AdminMenu_Controller_Menu extends Trex_Controller
+class Trex_AdminMenu_Controller_Menu extends Trex_ActionController
 {
     public function onAfterDb($action, $data)
     {
