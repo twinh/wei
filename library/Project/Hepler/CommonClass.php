@@ -61,7 +61,7 @@ class Project_Helper_CommonClass
 
         if(!isset($this->_data[$this->_language][$name]))
         {
-            $this->_data[$this->_language][$name] = require QWIN_ROOT_PATH . '/cache/common_class/' . $this->_language . '/' . $name . '.php';
+            $this->_data[$this->_language][$name] = require QWIN_RESOURCE_PATH . '/class/' . $this->_language . '/' . $name . '.php';
         }
         return $this->_data[$this->_language][$name];
     }
@@ -85,7 +85,7 @@ class Project_Helper_CommonClass
              $tmp = explode(':', trim($item));
              $codeList[$tmp[0]] = $tmp[1];
         }
-        $cachePath = QWIN_ROOT_PATH . '/cache/common_class/' . $data['language'] . '/' . $data['sign'] . '.php';
+        $cachePath = QWIN_RESOURCE_PATH . '/class/' . $data['language'] . '/' . $data['sign'] . '.php';
         Qwin_Helper_File::writeAsArray($codeList, $cachePath);
     }
 }
