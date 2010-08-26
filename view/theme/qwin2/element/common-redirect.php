@@ -44,7 +44,7 @@
             </p>
             <script type="text/javascript">
             window.setTimeout(function(){
-                window.location.href = '<?php echo $url ?>';
+                window.location.href = '<?php echo str_replace('\'', '\\\'', $url) ?>';
             }, 3000);
             </script>
         <?php

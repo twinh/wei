@@ -51,7 +51,7 @@ class Trex_Common_View_JqGrid extends Trex_View
          */
         // 获取json数据的链接
         $urlGet = array('action' => 'List') + $_GET;
-        $jsonUrl = '?' . Qwin::run('-url')->arrayKey2Url($urlGet);
+        $jsonUrl = str_replace('\'', '\\\'', '?' . Qwin::run('-url')->arrayKey2Url($urlGet));
 
         // 获取栏数据
         $columnName = array();
