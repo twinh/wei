@@ -1,6 +1,6 @@
 <?php
 /**
- * Config
+ * Enus
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -22,20 +22,17 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-06-02
+ * @since       2010-08-26 17:25:12
  */
 
-class Trex_Config_Controller_Config extends Trex_ActionController
+class Trex_Config_Language_Enus extends Trex_Language
 {
-    public function onAfterDb()
+    public function __construct()
     {
-        $query = $this->meta->getQuery($this->_set);
-        $data = $query->execute()->toArray();
-        $cache = array();
-        foreach($data as $row)
-        {
-            $cache[$row['name']] = $row['value'];
-        }
-        Qwin::run('Qwin_Cache_List')->writeCache($cache, 'Config');
+        $this ->_data += array(
+            'LBL_FIELD_VALUE' => 'Value',
+
+            'LBL_MODULE_CONFIG' => 'Config',
+        );
     }
 }
