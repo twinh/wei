@@ -1,6 +1,6 @@
 <?php
 /**
- * Common Class
+ * Zhcn
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -22,9 +22,23 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-06-10 08:31:30
+ * @since       2010-08-26 17:20:56
  */
 
-class Trex_CommonClass_Model_CommonClass extends Trex_Model
+class Trex_CommonClass_Language_Zhcn extends Trex_Language
 {
+    public function __construct()
+    {
+        $this->_data += array(
+            'LBL_FIELD_CODE' => '代码',
+            'LBL_FIELD_VALUE' => '值',
+            'LBL_FIELD_VAR_NAME' => '变量名称',
+            'LBL_FIELD_TYPE' => '类型',
+
+            'LBL_ACTION_ADD_NEXT' => '添加下一个分类',
+
+            'LBL_MODULE_COMMON_CLASS' => '通用分类',
+
+        );
+    }
 }
