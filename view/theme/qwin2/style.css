@@ -403,3 +403,18 @@ div.ui-layout-pane {
 	font-size: 1.1em;
 	font-weight: bold;
 }
+
+/* Message
+----------------------------------*/
+.ui-message-content{ padding:  2em;}
+.ui-message-content p{
+    padding:  .8em;
+    font-size:  1.2em;
+}
+.ui-message-content p span{
+    float: left;
+}
+.ui-message-operation{
+    padding: 1em;
+    text-align: right;
+}
