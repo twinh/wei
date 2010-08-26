@@ -47,6 +47,8 @@ class Trex_Common_Language_Enus extends Trex_Language
             'LBL_ACTION_SUBMIT' => 'Submit',
             'LBL_ACTION_APPLY' => 'Apply',
             'LBL_ACTION_RESTORE' => 'Restore',
+            'LBL_ACTION_REDIRECT' => 'Redirect',
+            'LBL_CLICK_TO_REDIRECT' => 'Click to redirect the new page at once.',
 
             'LBL_DEFAULT' => 'Default',
             'LBL_OPERATION' => 'Operation',
@@ -63,6 +65,7 @@ class Trex_Common_Language_Enus extends Trex_Language
             'LBL_LOGOUT' => 'Logout',
             'LBL_TOOL' => 'Tool',
             'LBL_LANG' => 'Language',
+            'LBL_MESSAGE' => 'Message',
 
             // field
             'LBL_FIELD_ID' => 'ID',

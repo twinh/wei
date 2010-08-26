@@ -35,6 +35,11 @@ class Trex_View extends Qwin_Trex_View
         
         $this->_theme = Qwin::run('-ini')->getConfig('interface.theme');
         $this->_layout = QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/layout/common-control-panel.php';
+
+        /**
+         * 加载页眉导航的缓存
+         */
+        $this->adminMenu = Qwin::run('Qwin_Cache_List')->getCache('AdminMenu');
     }
 
     /**

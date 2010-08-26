@@ -89,6 +89,7 @@ class Project_Hepler_Category
         }
         $tree->getAllList($treeData, $parent);
 
+        $this->_resourceCache[$resourceName]['NULL'] = '';
         // 添加前缀
         if($isAddPrefix)
         {
@@ -109,6 +110,7 @@ class Project_Hepler_Category
                 $this->_resourceCache[$resourceName][$id] = $tree->getValue($id);
             }
         }
+
         return $this->_resourceCache[$resourceName];
     }
 

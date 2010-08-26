@@ -35,22 +35,23 @@ class Trex_Member_Controller_Log extends Qwin_Trex_Controller
         $ini = Qwin::run('-ini');
         $gpc = Qwin::run('-gpc');
         $js = Qwin::run('Qwin_Helper_Js');
-        $meta = &$this->__meta;
+        $meta = $this->_meta;
 
-        $loginState = $ses->get('member');
+        /*$loginState = $ses->get('member');
         if(isset($loginState['login']) && true == $loginState['login'])
         {
             $js->show($this->t('MSG_LOGINED'));
-        }
+        }*/
 
-        if(!$_POST)
+        if(empty($_POST))
         {
-            // 初始化视图变量数组
-            $this->__view = array(
-                'http_referer' => urlencode(Qwin::run('-str')->set($_SERVER['HTTP_REFERER']))
+            /**
+             * 设置视图,加载登陆界面
+             */
+            $this->_view = array(
+                'class' => 'Trex_Member_View_Login',
+                'data' => get_defined_vars(),
             );
-
-            $this->loadView($ini->load('Resource/View/Layout/LoginPanel', false));$ini = Qwin::run('-ini');
         } else {
             // 加载关联模型,元数据
             $this->meta->loadRelatedData($meta['model']);

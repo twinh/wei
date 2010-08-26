@@ -33,43 +33,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><?php echo $this->t('LBL_HTML_TITLE')?></title>
-<!--{JS}-->
-<!--{CSS}-->
+<title><?php echo qw_lang('LBL_HTML_TITLE')?></title>
 <?php
-$rsc = Qwin::run('-rsc');
-$rsc->load('js/jquery/core/jquery')
-    ->load('jquery/ui/core')
-    ->load('jquery/theme/' . qw('Qwin_Hepler_Util')->getStyle())
-    ->load('js/other/common')
-    ->load('css/style')
-    ->load('css/login')
-    ->load('js/other/qwin')
-    ->load('js/other/url')
-    ->load('jquery/plugin/qui');
-$qurl = array(
-    'nca' => qw('-url')->nca,
-    'separator' => qw('-url')->separator,
-    'extension' => qw('-url')->extension,
-);
+$qurl = null;
+$jquery = Qwin::run('-jquery');
+echo $jquery->loadTheme(),
+    $jquery->loadCore(),
+    $jquery->loadUi('core'),
+    $jquery->loadUi('widget'),
+    $jquery->loadUi('button'),
+    $jquery->loadEffect('core'),
+    $jquery->loadPlugin('qui')
+    ;
 ?>
 </head>
 <body>
 <script type="text/javascript">
     jQuery.noConflict();
-    var _get = <?php echo qw('-arr')->toJsObject(qw('-url')->getGetArray());?>;
-    var qurl = <?php echo qw('-arr')->toJsObject($qurl);?>;
-    jQuery(function($) {
-        c();
-        function c()
-        {
-            $('body')
-                .append('<div id="ui-temp-widget-tcontent" class="ui-widget-content"></div>')
-                .css('background-color', $('#ui-temp-widget-tcontent').css('background-color'));
-            $('#ui-temp-widget-tcontent').remove();
-        }
-		$('#login-form input').qui();
-    });
 </script>
 <div id="ui-header" class="ui-header ui-widget">
   <div class="ui-header-logo ui-widget-content"> <a href="">Qwin</a> </div>
@@ -80,18 +60,18 @@ $qurl = array(
   <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
     <div class="ui-box-titlebar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix"> <span class="ui-box-title"> <a href="<?php echo url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller']))?>"><?php echo $this->t('LBL_LOGIN_TITLE')?></a> </span> <a class="ui-box-title-icon ui-corner-all" name=".ui-form-content" href="javascript:void(0)"> <span class="ui-icon  ui-icon-circle-triangle-n">open/close</span> </a> </div>
     <div class="ui-form-content ui-box-content ui-widget-content">
-      <form id="login-form" name="form" method="post" action="<?php echo url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], $this->_set['action']))?>">
+      <form id="login-form" name="form" method="post" action="">
         <table width="100%" cellpadding="4" cellspacing="10">
         	<tr>
-            	<td class="login-label" width="80"><?php echo $this->t('LBL_FIELD_USERNAME')?>:</td>
+                <td class="login-label" width="80"><?php echo qw_lang('LBL_FIELD_USERNAME')?>:</td>
                 <td class="login-input" colspan="2"><input type="text" value="" name="username" id="username" class=" ui-widget-content ui-corner-all" /></td>
             </tr>
             <tr>
-            	<td class="login-label"><?php echo $this->t('LBL_FIELD_PASSWORD')?>:</td>
+            	<td class="login-label"><?php echo qw_lang('LBL_FIELD_PASSWORD')?>:</td>
                 <td class="login-input" colspan="2"><input type="password" value="" name="password" id="password" class=" ui-widget-content ui-corner-all" /></td>
             </tr>
             <tr>
-            	<td class="login-label"><?php echo $this->t('LBL_FIELD_CAPTCHA')?>:</td>
+            	<td class="login-label"><?php echo qw_lang('LBL_FIELD_CAPTCHA')?>:</td>
                 <td class="login-input"><input type="text" value="" name="captcha" id="captcha" class=" ui-widget-content ui-corner-all" /></td>
                 <td><img class="login-captcha" src="?_entrance=Captcha" /></td>
             </tr>
@@ -101,8 +81,8 @@ $qurl = array(
                         <div class="ui-field-common ui-login-operation">
                             <input type="hidden" name="_action" value="<?php echo $this->_set['action']?>" />
                             <input type="hidden" name="_page" value="<?php echo $http_referer?>" />
-                            <input type="submit" class="ui-form-button ui-state-default ui-corner-all" id="submit" value="<?php echo $this->t('LBL_ACTION_SUBMIT')?>" />
-                            <input type="reset" class="ui-form-button ui-state-default ui-corner-all" value="<?php echo $this->t('LBL_ACTION_RESET')?>" />
+                            <input type="submit" class="ui-form-button ui-state-default ui-corner-all" id="submit" value="<?php echo qw_lang('LBL_ACTION_SUBMIT')?>" />
+                            <input type="reset" class="ui-form-button ui-state-default ui-corner-all" value="<?php echo qw_lang('LBL_ACTION_RESET')?>" />
                         </div>
                 </td>
             </tr>

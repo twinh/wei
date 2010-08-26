@@ -31,6 +31,7 @@ class Trex_Category_Controller_Category extends Trex_Controller
     public function dataConverter($data)
     {
         $treeData = array();
+        $newData = array();
         $tree = Qwin::run('Qwin_Tree');
         $tree->setDataType('ARRAY');
         $tree->setParentDefaultValue($this->_request->g('parentValue'));
@@ -111,7 +112,7 @@ class Trex_Category_Controller_Category extends Trex_Controller
         $fileCacheObj = Qwin::run('Qwin_Cache_File');
         $fileCacheObj->connect(QWIN_ROOT_PATH . '/cache/');
         $setting = array(
-            'namespace' => 'Default',
+            'namespace' => 'Trex',
             'module' => 'Category',
             'controller' => 'Category',
         );

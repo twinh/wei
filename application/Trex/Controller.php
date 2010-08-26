@@ -67,7 +67,6 @@ class Trex_Controller extends Qwin_Trex_Controller
          * 加载元数据
          */
         $metadataName = $ini->getClassName('Metadata', $set);
-        Qwin::load($metadataName);
         $this->_meta = Qwin_Metadata_Manager::get($metadataName);
         if(null == $this->_meta)
         {
@@ -87,11 +86,6 @@ class Trex_Controller extends Qwin_Trex_Controller
             $this->_model = Qwin::run($modelName);
         }
         Qwin::addMap('-model', $modelName);
-
-        /**
-         * 加载视图父类
-         */
-        Qwin::load('Trex_View');
     }
 
     /**
@@ -202,7 +196,7 @@ class Trex_Controller extends Qwin_Trex_Controller
          */
         if(false == $result)
         {
-            return $this->setView('alert', 'MSG_NO_RECORD');
+            return $this->setRedirectView($this->_lang->t('MSG_NO_RECORD'));
         }
 
         /**
@@ -253,7 +247,7 @@ class Trex_Controller extends Qwin_Trex_Controller
                 $result = $query->where($primaryKey . ' = ?', $id)->fetchOne();
                 if(false == $result)
                 {
-                    return $this->setView('alert', $this->_lang->t('MSG_NO_RECORD'));
+                    return $this->setRedirectView($this->_lang->t('MSG_NO_RECORD'));
                 }
                 $data = $result->toArray();
             } else {
@@ -311,7 +305,7 @@ class Trex_Controller extends Qwin_Trex_Controller
             $this->executeOnFunction('afterDb', $this->resetAction(), $data);
             $url = urldecode($this->_request->p('_page'));
             '' == $url && $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Default'));
-            $this->setView('alert', $this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+            $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }
 
@@ -336,7 +330,7 @@ class Trex_Controller extends Qwin_Trex_Controller
             $result = $query->where($primaryKey . ' = ?', $id)->fetchOne();
             if(false == $result)
             {
-                return $this->setView('alert', $this->_lang->t('MSG_NO_RECORD'));
+                return $this->setRedirectView($this->_lang->t('MSG_NO_RECORD'));
             }
 
             /**
@@ -364,7 +358,7 @@ class Trex_Controller extends Qwin_Trex_Controller
             $query = $query->where($meta['db']['primaryKey'] . ' = ?', $id)->fetchOne();
             if(false == $query)
             {
-                return $this->setView('alert', $this->_lang->t('MSG_NO_RECORD'));
+                return $this->setRedirectView($this->_lang->t('MSG_NO_RECORD'));
             }
 
             /**
@@ -383,6 +377,7 @@ class Trex_Controller extends Qwin_Trex_Controller
 
             /**
              * 入库
+             * @todo 设置 null 值
              */
             $query->fromArray($data);
             $query->save();
@@ -393,7 +388,7 @@ class Trex_Controller extends Qwin_Trex_Controller
             $this->executeOnFunction('afterDb', $this->resetAction(), $data);
             $url = urldecode($this->_request->p('_page'));
             '' == $url && $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Default'));
-            return $this->setView('alert', $this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+            return $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }
 
@@ -435,8 +430,8 @@ class Trex_Controller extends Qwin_Trex_Controller
          */
         $this->executeOnFunction('afterDb', 'delete', array());
         $url = urldecode($this->_request->p('_page'));
-        '' == $url && $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Default'));
-        $this->setView('alert', $this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+        '' == $url && $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Index'));
+        $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
     }
 
     /**
@@ -560,7 +555,7 @@ class Trex_Controller extends Qwin_Trex_Controller
      */
     public function convertDbCategoryId($value)
     {
-        '0' == $value && $value = NULL;
+        '0' == $value && $value = null;
         return $value;
     }
 

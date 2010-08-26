@@ -53,14 +53,14 @@ class Trex_Link_Metadata_Link extends Trex_Metadata
                         'isListLink' => 1,
                     ),
                     'converter' => array(
-                        'attr' => array(
+                        'list' => array(
                             array('Project_Hepler_Category', 'convertTreeResource'),
                             array(
                                 'namespace' => 'Trex',
                                 'module' => 'Category',
                                 'controller' => 'Category',
                             ),
-                            'news'
+                            'link'
                         ),
                     ),
                 ),
