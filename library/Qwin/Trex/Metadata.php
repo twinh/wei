@@ -423,6 +423,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
              */
             if(isset($row[$name]))
             {
+                'NULL' == $row[$name] && $row[$name] = null;
                 $newRow[$name] = $row[$name];
             } else {
                 $newRow[$name] = null;
@@ -624,10 +625,10 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         $newData = array();
         foreach($meta as $key => $field)
         {
-            if(!isset($data[$key]))
+            /*if(!isset($data[$key]))
             {
                 continue;
-            }
+            }*/
             if(!isset($field['form']['_oldName']))
             {
                 $newData[$key] = $data[$key];
@@ -929,24 +930,6 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             $model->hasColumn($val);
         }
         return $model;
-    }
-
-    public function getQuery($set)
-    {
-        $ini = Qwin::run('-ini');
-        $metaClassName = $ini->getClassName('Metadata', $set);
-        $ctrlerClassName = $ini->getClassName('Controller', $set);
-        $modelClassName = $ini->getClassName('Model', $set);
-        $meta = $this->loadMetadataToMetaExt($metaClassName, $modelClassName);
-        // 加载主模型类
-        $model = Qwin::run($modelClassName);
-        $this->metadataToModel($meta, $model);
-
-        // 加载关联模型,元数据
-        $this->loadRelatedData($meta['model']);
-        // 获取模型类名称
-        $query = $this->connectModel($modelClassName, $meta['model']);
-        return $query;
     }
 
     /**

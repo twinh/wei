@@ -44,6 +44,7 @@ jQuery(function($){
     $('a.ui-action-controller').button({icons: {primary: 'ui-icon-triangle-1-e'},text: false});
     $('button.ui-action-submit').button({icons: {primary: 'ui-icon-check'}});
     $('button.ui-action-reset').button({icons: {primary: 'ui-icon-arrowreturnthick-1-w'}});
+    $('a.ui-action-redirect').button({icons: {primary: 'ui-icon-arrowthickstop-1-e'}});
 
     // 点击右下按钮,回到顶部
     $('#ui-bottom-floating-botton').click(function(){

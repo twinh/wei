@@ -45,7 +45,7 @@
             <a class="ui-action-copy" href="<?php echo qw_url($set, array('action' => 'Add', $primaryKey => $data[$primaryKey])) ?>"><?php echo qw_lang('LBL_ACTION_COPY') ?></a>
             <!--<a class="ui-action-restore" href="<?php echo qw_url($set, array('action' => 'Restore', $primaryKey => $data[$primaryKey])) ?>" onclick="alert(Qwin.Lang.MSG_FUNCTION_DEVELOPTING);return false;"><?php echo qw_lang('LBL_ACTION_RESTORE') ?></a>-->
             <a class="ui-action-delete" href="<?php echo qw_url($set, array('action' => 'Delete', $primaryKey => $data[$primaryKey])) ?>" onclick="javascript:return confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE);"><?php echo qw_lang('LBL_ACTION_DELETE') ?></a>
-            <a class="ui-action-return" href="#" onclick="javascript:return history.go(-1);"><?php echo qw_lang('LBL_ACTION_RETURN') ?></a>
+            <a class="ui-action-return" href="javascript:history.go(-1);"><?php echo qw_lang('LBL_ACTION_RETURN') ?></a>
         </div>
         <?php foreach($groupList as $group => $fieldList): ?>
         <fieldset id="ui-fieldset-3" class="ui-widget-content ui-corner-all">
@@ -74,7 +74,7 @@
             <a class="ui-action-copy" href="<?php echo qw_url($set, array('action' => 'Add', $primaryKey => $data[$primaryKey])) ?>"><?php echo qw_lang('LBL_ACTION_COPY') ?></a>
             <!--<a class="ui-action-restore" href="<?php echo qw_url($set, array('action' => 'Restore', $primaryKey => $data[$primaryKey])) ?>" onclick="alert(Qwin.Lang.MSG_FUNCTION_DEVELOPTING);return false;"><?php echo qw_lang('LBL_ACTION_RESTORE') ?></a>-->
             <a class="ui-action-delete" href="<?php echo qw_url($set, array('action' => 'Delete', $primaryKey => $data[$primaryKey])) ?>" onclick="javascript:return confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE);"><?php echo qw_lang('LBL_ACTION_DELETE') ?></a>
-            <a class="ui-action-return" href="#" onclick="javascript:return history.go(-1);"><?php echo qw_lang('LBL_ACTION_RETURN') ?></a>
+            <a class="ui-action-return" href="javascript:history.go(-1);"><?php echo qw_lang('LBL_ACTION_RETURN') ?></a>
         </div>
         </form>
     </div>

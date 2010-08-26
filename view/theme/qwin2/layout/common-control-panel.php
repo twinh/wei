@@ -33,25 +33,26 @@ echo $jquery->loadTheme(),
 <body>
 <div id="ui-top-floating-bar" class="ui-top-floating-bar ui-widget ui-widget-header">
 	<ul>
-    	<li><a class="ui-anchor ui-state-active" href="#Qwin">Qwin</a></li>
-        <li><a class="ui-anchor" href="<?php echo basename($_SERVER['SCRIPT_NAME']) ?>">Home</a></li>
-        <li><a class="ui-anchor" href="?module=Member&controller=Member">Member</a></li>
-        <li><a class="ui-anchor" href="?module=Member&controller=Group">Member Group</a></li>
-        <li><a class="ui-anchor" href="?module=Category&controller=Category">Category</a></li>
-        <li><a class="ui-anchor" href="?module=Article&controller=Article">Article</a></li>
-        <li><a class="ui-anchor" href="?module=CommonClass&controller=CommonClass">Common Class</a></li>
-        <li><a class="ui-anchor" href="?module=Link&controller=Link">Link</a></li>
-        <li><a class="ui-anchor" href="#Article">Add Your Link</a></li>
+    	<li><a class="ui-anchor ui-state-active" href="?"><?php echo qw_lang('LBL_QWIN') ?></a></li>
+        <?php
+        foreach($this->adminMenu as $menu) :
+            if(null == $menu['category_id']):
+        ?>
+        <li><a class="ui-anchor" href="<?php echo $menu['url'] ?>"><?php echo $menu['title'] ?></a></li>
+        <?php
+            endif;
+        endforeach;
+        ?>
     </ul>
 </div>
     <div id="ui-bottom-floating-botton" class="ui-bottom-floating-botton"><button><span class="ui-icon ui-icon-arrowthickstop-1-n"></span></button></div>
 <div id="ui-main" class="ui-main ui-widget-content ui-corner-all">
   <div id="ui-header" class="ui-header ui-widget">
     <div class="ui-header-shortcut" id="ui-header-shortcut">
-    	<a class="ui-state-default" href="#"><?php echo qw_lang('LBL_WELCOME') ?>, Twin!</a>
+    	<a class="ui-state-default" href="?"><?php echo qw_lang('LBL_WELCOME') ?>, Twin!</a>
         <a class="ui-state-default" href="?namespace=Default&module=Member&controller=Log&action=Logout"><?php echo qw_lang('LBL_LOGOUT') ?></a>
     </div>
-    <div class="ui-header-logo ui-widget-content"> <a href=""><?php echo qw_lang('LBL_QWIN') ?><sup><?php echo qw_lang('LBL_QWIN_VERSION') ?></sup></a> </div>
+    <div class="ui-header-logo ui-widget-content"> <a href="?"><?php echo qw_lang('LBL_QWIN') ?><sup><?php echo qw_lang('LBL_QWIN_VERSION') ?></sup></a> </div>
   </div>
 <?php
 require $this->getElement('content');

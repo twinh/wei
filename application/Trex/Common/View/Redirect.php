@@ -30,43 +30,29 @@ class Trex_Common_View_Redirect extends Trex_View
     public function __construct()
     {
         parent::__construct();
-        $this->_layout = QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/layout/redirect.php';
+        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/common-redirect.php');
     }
 
     public function display()
     {
+        $arrayHelper = Qwin::run('-arr');
         $message = $this->message;
 
-        require $this->_layout;
-        /*$data = $this->_data;
-        $message = str_replace(array('"'), array('\"'), $data['message']);
-
-        echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>' . $message . '</title>
-</head>
-<body>';
-
-        echo '<script type="text/javascript">alert("' . $message . '");';
-        switch($data['method'])
+        switch($this->method)
         {
             case null :
             case '' :
             case 'goback' :
-                echo 'history.go(-1);';
+                //echo 'history.go(-1);';
                 break;
             case 'close' :
-                echo 'window.close();';
+                //echo 'window.close();';
                 break;
             default :
-                echo 'window.location.href="' . $data['method'] . '";';
+                $url = $this->method;
                 break;
         }
-        echo '</script>';
-        echo '</body></html>';
 
-        return $this;*/
+        require $this->_layout;
     }
 }

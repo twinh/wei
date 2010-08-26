@@ -35,11 +35,6 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
             // 基本属性
             'field' => array(
                 'category_id' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_CATEGORY',
-                        'order' => 5,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
                         '_type' => 'select',
 
@@ -50,16 +45,13 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                                 'module' => 'AdminMenu',
                                 'controller' => 'Menu',
                             ),
-                            NULL,
+                            null,
                             array('id', 'category_id', 'title'),
                         ),
                         'name' => 'category_id',
                     ),
                     'attr' => array(
                         'isListLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                     'converter' => array(
                         'list' => array(
@@ -75,23 +67,8 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                     ),
                 ),
                 'title' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_TITLE',
-
-                        'order' => 10,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
-                        '_type' => 'text',
-                        '_typeExt' => '',
-
                         'name' => 'title',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 0,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                     'validator' => array(
                         'rule' => array(
@@ -101,16 +78,7 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                     ),
                 ),
                 'url' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_URL',
-
-                        'order' => 15,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
-                        '_type' => 'text',
-                        '_typeExt' => '',
-
                         'name' => 'url',
                     ),
                     'attr' => array(
@@ -127,23 +95,12 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                     ),
                 ),
                 'target' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_TARGET',
-
-                        'order' => 20,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
-                        '_type' => 'text',
-                        '_typeExt' => '',
                         '_value' => '_self',
                         'name' => 'target',
                     ),
                     'attr' => array(
                         'isListLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                     'validator' => array(
                         'rule' => array(
@@ -153,23 +110,11 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                     ),
                 ),
                 'order' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_ORDER',
-
-                        'order' => 25,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
-                        '_type' => 'text',
-                        '_typeExt' => '',
-
                         'name' => 'order',
                     ),
                     'attr' => array(
                         'isListLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                 ),
             ),
@@ -178,9 +123,8 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
             ),
             'db' => array(
                 'table' => 'admin_menu',
-                'primaryKey' => 'id',
                 'order' => array(
-                    array('date_created', 'DESC')
+                    array('order', 'ASC')
                 )
             ),
             // 页面显示

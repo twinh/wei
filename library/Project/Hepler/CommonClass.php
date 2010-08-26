@@ -57,10 +57,11 @@ class Project_Helper_CommonClass
         if(!isset($this->_data[$this->_language]))
         {
             $this->_data[$this->_language] = array();
-            if(!isset($this->_data[$this->_language][$name]))
-            {
-                $this->_data[$this->_language][$name] = require QWIN_ROOT_PATH . '/cache/common_class/' . $this->_language . '/' . $name . '.php';
-            }
+        }
+
+        if(!isset($this->_data[$this->_language][$name]))
+        {
+            $this->_data[$this->_language][$name] = require QWIN_ROOT_PATH . '/cache/common_class/' . $this->_language . '/' . $name . '.php';
         }
         return $this->_data[$this->_language][$name];
     }

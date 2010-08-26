@@ -107,10 +107,9 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                 'title_style' => array(
                     'form' => array(
                         '_type' => 'checkbox',
-                        '_resource' => array(
-                            'b' => '<strong>粗体</strong>',
-                            'i' => '<em>斜体</em>',
-                            'u' => '<u>下划线</u>',
+                        '_resourceGetter' => array(
+                            array('Project_Helper_CommonClass', 'get'),
+                            'font-style',
                         ),
                         'name' => 'title_style',
                     ),
@@ -122,11 +121,9 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                 'title_color' => array(
                     'form' => array(
                         '_type' => 'radio',
-                        '_resource' => array(
-                            'NULL' => 'Blank',
-                            'red' => '<span style="color:red">Red</span>',
-                            'blue' => '<span style="color:blue">Blue</span>',
-                            'green' => '<span style="color:green">Green</span>',
+                        '_resourceGetter' => array(
+                            array('Project_Helper_CommonClass', 'get'),
+                            'font-color',
                         ),
                         '_value' => 'NULL',
                         'name' => 'title_color',
@@ -239,7 +236,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         '_type' => 'select',
                         '_resourceGetter' => array(
                             array('Project_Helper_CommonClass', 'get'),
-                            'yes_or_no',
+                            'yes-or-no',
                         ),
                         'name' => 'is_posted',
                     ),
@@ -252,7 +249,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     'converter' => array(
                         'list' => array(
                             array('Project_Helper_CommonClass', 'convert'),
-                            'yes_or_no',
+                            'yes-or-no',
                         ),
                     ),
                 ),
@@ -264,7 +261,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         '_type' => 'select',
                         '_resourceGetter' => array(
                             array('Project_Helper_CommonClass', 'get'),
-                            'yes_or_no',
+                            'yes-or-no',
                         ),
                         'name' => 'is_index',
                     ),
@@ -277,7 +274,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     'converter' => array(
                         'list' => array(
                             array('Project_Helper_CommonClass', 'convert'),
-                            'yes_or_no',
+                            'yes-or-no',
                         ),
                     ),
                 ),

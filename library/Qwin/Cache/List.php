@@ -38,7 +38,7 @@ class Qwin_Cache_List extends Qwin_Cache
 
     function __construct()
     {
-        $this->_path = QWIN_ROOT_PATH . '/Cache/Php/List/';
+        $this->_path = QWIN_ROOT_PATH . '/cache/php/list/';
     }
 
     /**

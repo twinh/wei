@@ -144,6 +144,6 @@ class Qwin_Cache
         } else {
             $file_str = "<?php\r\nreturn $arr;\r\n";
         }
-        Qwin::run('Qwin_Helper_File')->write($path, $file_str);
+        file_put_contents($path, $file_str);
     }
 }

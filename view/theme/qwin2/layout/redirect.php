@@ -32,6 +32,7 @@
 <title>提示信息</title>
 </head>
 <body>
+    
     <h2>提示信息</h2>
     <div class="ui-message-content">
         <?php echo $message?><br />
