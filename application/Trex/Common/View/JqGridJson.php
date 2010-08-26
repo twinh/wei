@@ -72,7 +72,7 @@ class Trex_Common_View_JqGridJson extends Trex_View
             'page' => $nowPage,
             // 总页面数
             'total' => ceil($this->totalRecord / $rowNum),
-            'records' => $this->count,
+            'records' => $this->totalRecord,
             'rows' => $rowData,
         );
         echo Qwin::run('-arr')->jsonEncode($jsonData);
