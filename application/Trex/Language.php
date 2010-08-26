@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Default
+ * @package     Trex
  * @subpackage  Language
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
