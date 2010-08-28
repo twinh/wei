@@ -83,7 +83,7 @@ class Trex_Member_Language_Enus extends Trex_Language
             'MSG_LOGOUTED' => 'You have logout',
             'MSG_NOT_LOGIN' => 'You have not login',
             'MSG_USERNAME_EXISTS' => 'the username has existed.',
-            'MSG_OLD_PASSWORD_NOT_CORRECT' => 'the old password is not correct.',
+            'MSG_OLD_PASSWORD_NOT_CORRECT' => 'The old password is not correct.',
             'MSG_MEMBER_NOT_ALLOW_DELETE' => 'System member is not allowed to delete.',
             'MSG_GUEST_NOT_ALLOW_EDIT_PASSWORD' => 'It is not allowed to edit guest member\'s password.',
         );

@@ -34,14 +34,12 @@ class Trex_Member_Controller_Member extends Trex_ActionController
      */
     public function actionEditPassword()
     {
-        $gpc = Qwin::run('-gpc');
-        if('guest' == $gpc->g('id') || 'guest' == $gpc->p('id'))
+        if('guest' == $this->_request->g('id') || 'guest' == $this->_request->p('id'))
         {
-            Qwin::run('Qwin_Helper_Js')->show($this->t('MSG_GUEST_NOT_ALLOW_EDIT_PASSWORD'));
+            return $this->setRedirectView($this->_lang->t('MSG_GUEST_NOT_ALLOW_EDIT_PASSWORD'));
         }
-        $this->__meta = $this->meta->passwordMetadata();
-        $this->__meta = $this->meta->convertLang($this->__meta, $this->lang);
-        return Qwin::run('Qwin_Trex_Action_Edit');
+        $this->_meta = Qwin_Metadata_Manager::get('Trex_Member_Metadata_Password');
+        parent::actionEdit();
     }
 
     /**
@@ -49,38 +47,21 @@ class Trex_Member_Controller_Member extends Trex_ActionController
      */
     public function actionDelete()
     {
-        $id = $_GET['id'];
-        $idArr = explode(',', $id);
+        $id = $this->_request->g('id');
+        $idList = explode(',', $id);
 
         /**
          * @todo 是否在数据库增加一个字段,作为不允许删除的标志
          */
-        $banIdArr = array(
+        $banIdList = array(
             'guest', 'admin'
         );
-        $result = array_intersect($idArr, $banIdArr);
+        $result = array_intersect($idList, $banIdList);
         if(!empty($result))
         {
-            Qwin::run('Qwin_Helper_Js')->show($this->t('MSG_GUEST_NOT_ALLOW_EDIT_PASSWORD'));
+            return $this->setRedirectView($this->_lang->t('MSG_NOT_ALLOW_DELETE'));
         }
-        return Qwin::run('Qwin_Trex_Action_Delete');
-    }
-
-    /**
-     * 列表的 json 数据
-     */
-    public function actionJsonList()
-    {
-        Qwin::load('Qwin_converter_Time');
-        return Qwin::run('Qwin_Trex_Action_JsonList');
-    }
-
-    /**
-     * 查看
-     */
-    public function actionShow()
-    {
-        return Qwin::run('Qwin_Trex_Action_Show');
+        parent::actionDelete();
     }
 
     /**
@@ -110,40 +91,38 @@ class Trex_Member_Controller_Member extends Trex_ActionController
         return $result;
     }
 
-    /**
-     * 筛选
-     */
-    /*public function actionFilter()
+    public function convertListOperation($value, $name, $data, $copyData)
     {
-        return Qwin::run('Qwin_Trex_Action_Filter');
-    }*/
-
-    /*public function convertListOperation($val, $name, $data, $cpoyData)
-    {
-        $html = '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_EDIT_PASSWORD') .'" href="' . url(array( $this->_set['namespace'],  $this->_set['module'],  $this->_set['controller'], 'EditPassword'), array('id' => $data[$this->__meta['db']['primaryKey']])) . '"><span class="ui-icon ui-icon-key"></span></a>';
-        $html .= $this->meta->getOperationLink(
-            $this->__meta['db']['primaryKey'],
-            $data[$this->__meta['db']['primaryKey']],
-            $this->_set
-        );
+        $primaryKey = $this->_meta['db']['primaryKey'];
+        $html = Qwin_Helper_Html::jQueryButton($this->_url->createUrl($this->_set, array('action' => 'EditPassword', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_EDIT_PASSWORD'), 'ui-icon-key');
+        $html .= parent::convertListOperation($value, $name, $data, $copyData);
         return $html;
-    }*/
+    }
 
+    /**
+     * 修改密码时,将原密码置空
+     *
+     * @return string 空字符串
+     */
     public function convertEditPasswordPassword()
     {
         return '';
     }
 
-    public function convertDbOldPassword($val, $name, $data)
+    public function convertDbOldPassword($value, $name, $data, $copyData)
     {
-        $query = $this->meta->getDoctrineQuery($this->_set);
+        $query = $this->_meta->getDoctrineQuery($this->_set);
         $result = $query->where('id = ?', $data['id'])
             ->fetchOne();
-        if(md5($val) != $result['password'])
+        if(md5($value) != $result['password'])
         {
-            Qwin::run('Qwin_Helper_Js')->show($this->t('MSG_OLD_PASSWORD_NOT_CORRECT'));
+            $this->setRedirectView($this->_lang->t('MSG_OLD_PASSWORD_NOT_CORRECT'))
+                    ->loadView()
+                    ->display();
+            // TODO 是否合法
+            exit();
         }
-        return $val;
+        return $value;
     }
     
     public function convertDbUsername($val)
@@ -153,11 +132,6 @@ class Trex_Member_Controller_Member extends Trex_ActionController
             $this->Qwin_Helper_Js->show($this->t('MSG_USERNAME_EXISTS'));
         }
         return $val;
-    }
-    
-    public function convertDbDetailId($val)
-    {
-        return $this->Qwin_converter_String->getUuid($val);
     }
 
     public function convertDbCompanyId($val)
@@ -170,8 +144,15 @@ class Trex_Member_Controller_Member extends Trex_ActionController
         return date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
     }
     
-    public function convertDbEmailAddressId($val)
+    /*public function onAfterDb($action, $data)
     {
-        return $this->Qwin_converter_String->getUuid($val);
-    }
+        if('EditPassword' == $action)
+        {
+            $url = Qwin::run('-url')->createUrl(array('module' => 'Member', 'controller' => 'Log', 'action' => 'Logout'));
+            $this->setRedirectView('LOGIN', $url)
+                    ->loadView()
+                    ->display();
+            exit();
+        }
+    }*/
 }

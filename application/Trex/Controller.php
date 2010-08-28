@@ -134,5 +134,6 @@ class Trex_Controller extends Qwin_Trex_Controller
         $this->_view['class'] = 'Trex_Common_View_Redirect';
         $this->_view['data']['message'] = $message;
         $this->_view['data']['method'] = $method;
+        return $this;
     }
 }

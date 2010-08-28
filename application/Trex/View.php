@@ -81,5 +81,6 @@ class Trex_View extends Qwin_Trex_View
     public function display()
     {
         require_once $this->_layout;
+        return $this;
     }
 }
