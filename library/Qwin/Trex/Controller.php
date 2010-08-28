@@ -89,7 +89,7 @@ class Qwin_Trex_Controller
     public function resetAction()
     {
         $this->_set['action'] = $this->_lastAction;
-        return $this;
+        return $this->_set['action'];
     }
 
     /**

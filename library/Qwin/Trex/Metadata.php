@@ -683,7 +683,11 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
                     if(false == $result)
                     {
                         $msg = $this->format($validatorMessage[$method], $msgParam);
-                        $msg = $lang->t('MSG_ERROR_FIELD') . $lang->t($field['basic']['title']) . '\n' . $lang->t('MSG_ERROR_MSG') . $msg;
+                        $msg = $lang->t('MSG_ERROR_FIELD') . $lang->t($field['basic']['title']) . '<br />' . $lang->t('MSG_ERROR_MSG') . $msg;
+                        Qwin::run('-controller')->setRedirectView($msg)
+                                ->loadView()
+                                ->display();
+                        exit();
                         Qwin::run('Qwin_Helper_Js')->show($msg);
                     }
                 }

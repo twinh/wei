@@ -308,8 +308,8 @@ class Trex_ActionController extends Trex_Controller
             /**
              * 转换,验证和还原
              */
-            $data = $meta->convertSingleData($editDbField, 'db', $_POST);
-            $this->_meta->validateData($editDbField, $data);
+            $data = $meta->convertSingleData($relatedField, 'db', $_POST);
+            $this->_meta->validateData($relatedField, $data);
             $data = $meta->restoreData($editDbField, $data);
 
             /**

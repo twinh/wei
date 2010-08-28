@@ -106,7 +106,10 @@ class Trex_Member_Metadata_Detail extends Trex_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_typeExt' => '',
-                        '_resource' => $this->getCommonClassList('gender'),
+                        '_resourceGetter' => array(
+                            array('Project_Helper_CommonClass', 'get'),
+                            'sex',
+                        ),
                         '_value' => '',
                         'name' => 'sex',
                     ),
@@ -117,9 +120,9 @@ class Trex_Member_Metadata_Detail extends Trex_Metadata
                         'isDbQuery' => 1,
                     ),
                     'converter' => array(
-                        'attr' => array(
-                            array($this, 'convertCommonClass'),
-                            'gender'
+                        'list' => array(
+                            array('Project_Helper_CommonClass', 'convert'),
+                            'sex',
                         )
                     ),
                 ),

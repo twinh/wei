@@ -99,6 +99,7 @@ class Trex_Common_Language_Enus extends Trex_Language
             'MSG_FUNCTION_DEVELOPTING' => 'The function is developing.',
             'MSG_CLICK_TO_REDIRECT' => 'It is going to redirect to a new page in 3 seconds, click the "Redirect" button to redirect at once.',
             // 3秒后跳转到新的页面,点击"跳转"按钮直接跳转.
+            'MSG_NOT_ALLOW_DELETE' =>'It is not allowed to delete the member.',
 
             'MSG_FILE_NOT_EXISTS' => 'The file is not exists',
 

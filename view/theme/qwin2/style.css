@@ -410,6 +410,7 @@ div.ui-layout-pane {
 .ui-message-content p{
     padding:  .8em;
     font-size:  1.2em;
+    line-height: 1.4em;
 }
 .ui-message-content p span{
     float: left;
