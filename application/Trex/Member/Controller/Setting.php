@@ -28,6 +28,20 @@
 
 class Trex_Member_Controller_Setting extends Trex_Controller
 {
+    /**
+     * 用户中心
+     */
+    public function actionIndex()
+    {
+        /**
+         * 设置视图
+         */
+        $this->_view = array(
+            'class' => 'Trex_Member_View_Center',
+            'data' => get_defined_vars(),
+        );
+    }
+
     public function actionSwitchLanguage()
     {
         if(empty($_POST))

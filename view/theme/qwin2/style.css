@@ -39,7 +39,7 @@ a{
 	border-right: none;
 	-moz-opacity: 0.9;
 	opacity: 0.9;
-	filter: alpha(opacity=90);
+	filter: alpha('opacity=90');
 	overflow: hidden;
 }
 /*
@@ -421,13 +421,16 @@ div.ui-layout-pane {
 
 /* Theme Switch Page
 ----------------------------------*/
-.ui-theme-list ul{
+.ui-image-list ul{
     padding: 1em;
 }
-.ui-theme-list ul li{
+.ui-image-list ul li{
     padding: 1em;
     margin: 1em;
     float: left;
+}
+.ui-image-list ul li h3{
+    padding: 1em;
 }
 .ui-form .ui-form-content .ui-theme-operation{
     float: left;

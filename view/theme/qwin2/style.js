@@ -36,7 +36,7 @@ jQuery(function($){
     $('a.ui-action-list').button({icons: {primary: 'ui-icon-note'}});
     $('a.ui-action-add').button({icons: {primary: 'ui-icon-plusthick'}});
     $('a.ui-action-edit').button({icons: {primary: 'ui-icon-tag'}});
-    $('a.ui-action-show').button({icons: {primary: 'ui-icon-lightbulb'}});
+    $('a.ui-action-view').button({icons: {primary: 'ui-icon-lightbulb'}});
     $('a.ui-action-copy').button({icons: {primary: 'ui-icon-transferthick-e-w'}});
     $('a.ui-action-restore').button({icons: {primary: 'ui-icon-arrowreturnthick-1-w'}});
     $('a.ui-action-delete').button({icons: {primary: 'ui-icon-trash'}});

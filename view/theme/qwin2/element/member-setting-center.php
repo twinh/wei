@@ -1,6 +1,6 @@
 <?php
 /**
- * 主题设置
+ * 用户设置中心
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -22,20 +22,21 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-05-23 00:34:08
+ * @since       2010-08-28 19:29:07
  */
 // 防止直接访问导致错误
 !defined('QWIN_PATH') && exit('Forbidden');
 ?>
 <script type="text/javascript">
-jQuery(function($){
-    $('div.ui-theme-list ul li').qui();
-});
+    jQuery(function($){
+        $('a.ui-action-switch-style').button({icons: {primary: 'ui-icon-calculator'}});
+        $('a.ui-action-switch-language').button({icons: {primary: 'ui-icon-script'}});
+    })
 </script>
 <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
     <div class="ui-box-titlebar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix">
         <span class="ui-box-title">
-            <a href="<?php echo qw_url(array('module' => 'Style', 'controller' => 'Theme')) ?>"><?php echo qw_lang('LBL_THEME')?></a>
+            <?php echo qw_lang('LBL_LANGUAGE')?>
         </span>
         <a class="ui-box-title-icon ui-corner-all" name=".ui-form-content" href="javascript:void(0)">
             <span class="ui-icon  ui-icon-circle-triangle-n">open/close</span>
@@ -43,35 +44,17 @@ jQuery(function($){
     </div>
     <form action="" method="post">
     <div class="ui-form-content ui-box-content ui-widget-content ui-image-list">
-        <div class="ui-theme-operation ui-operation-field">
-            <button class="ui-action-submit" type="submit"><?php echo qw_lang('LBL_ACTION_SUBMIT') ?></button>
-            <a class="ui-action-return" href="javascript:history.go(-1);"><?php echo qw_lang('LBL_ACTION_RETURN') ?></a>
-            <input type="hidden" name="_submit" value="1" />
-        </div>
-        <hr class="ui-line ui-widget-content" />
         <ul>
-<?php
-foreach($theme as $row){
-    $url = qw_url($this->_set, array('style' => $row['path_name']));
-?>
-            <li class="ui-widget-content ui-corner-all">
-                <a href="<?php echo $url?>">
-                    <img alt="<?php echo $row['name']?>" src="<?php echo QWIN_RESOURCE_PATH?>/js/jquery/image/<?php echo $row['picture']?>" />
-                </a>
-                <p>
-                    <a href="<?php echo qw_url(array('module' => 'Style', 'controller' => 'Theme', 'action' => 'Edit', 'id' => $row['id'])) ?>" title="<?php echo qw_lang('LBL_ACTION_EDIT')?>"><?php echo $row['name']?></a>
-                   
-                </p>
+            <li>
+                    <a class="ui-action-view" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Member', 'action' => 'View', 'id' => $member['id'])) ?>">View Data</a>
+                    <a class="ui-action-edit" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Member', 'action' => 'Edit', 'id' => $member['id'])) ?>">Edit Data</a>
+                    <a class="ui-action-edit" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Member', 'action' => 'EditPassword', 'id' => $member['id'])) ?>">Edit Password</a>
+                    <a class="ui-action-switch-style" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Setting', 'action' => 'SwitchStyle')) ?>">Switch Style</a>
+                    <a class="ui-action-switch-language" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Setting', 'action' => 'SwitchLanguage')) ?>">Switch Language</a>
+                    <a class="ui-action-return" href="javascript:history.go(-1);">Return</a>
             </li>
-<?php
-}
-?>
         </ul>
         <hr class="ui-line ui-widget-content" />
-        <div class="ui-theme-operation ui-operation-field">
-            <button class="ui-action-submit" type="submit"><?php echo qw_lang('LBL_ACTION_SUBMIT') ?></button>
-            <a class="ui-action-return" href="javascript:history.go(-1);"><?php echo qw_lang('LBL_ACTION_RETURN') ?></a>
-        </div>
     </div>
     </form>
 </div>
