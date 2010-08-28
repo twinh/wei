@@ -68,4 +68,12 @@ class Qwin_Helper_Html
         return '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="'
               . $title . '" href="' . $href . '"><span class="ui-icon ' . $icon .  '">' . $title . '</span></a>';
     }
+
+    public static function img($src, $title = null, $width = null, $height = null, $additionAttr = null)
+    {
+        null == $title && $title = $src;
+        null != $width && $width = ' width="' . $width . '"';
+        null != $height && $height = ' height="' . $height . '"';
+        return '<img src="' . $src . '" alt="' . $title . '"' . $width . $height . ' />';
+    }
 }

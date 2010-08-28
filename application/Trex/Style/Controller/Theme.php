@@ -26,82 +26,11 @@
  * @since     2010-5-23 7:20:55 utf-8 中文
  */
 
-class Trex_Style_Controller_Theme extends Qwin_Trex_Controller
+class Trex_Style_Controller_Theme extends Trex_ActionController
 {
-    /**
-     * 列表
-     */
-    public function actionDefault()
+    public function convertViewPicture($value, $name, $data, $copyData)
     {
-        return Qwin::run('Qwin_Trex_Action_List');
-    }
-
-    /**
-     * 添加
-     */
-    public function actionAdd()
-    {
-        return Qwin::run('Qwin_Trex_Action_Add');
-    }
-
-    /**
-     * 编辑
-     */
-    public function actionEdit()
-    {
-        return Qwin::run('Qwin_Trex_Action_Edit');
-    }
-
-    /**
-     * 删除
-     */
-    public function actionDelete()
-    {
-        return Qwin::run('Qwin_Trex_Action_Delete');
-    }
-
-    /**
-     * 列表的 json 数据
-     */
-    public function actionJsonList()
-    {
-        Qwin::load('Qwin_converter_Time');
-        return Qwin::run('Qwin_Trex_Action_JsonList');
-    }
-
-    /**
-     * 查看
-     */
-    public function actionShow()
-    {
-        return Qwin::run('Qwin_Trex_Action_Show');
-    }
-
-    /**
-     * 筛选
-     */
-    /*public function actionFilter()
-    {
-        return Qwin::run('Qwin_Trex_Action_Filter');
-    }*/
-
-    public function convertDbId($val)
-    {
-        return $this->Qwin_converter_String->getUuid($val);
-    }
-
-    public function convertDbDateCreated()
-    {
-        return date('Y-m-d H:i:s', TIMESTAMP);
-    }
-
-    public function convertDbDateModified()
-    {
-        return date('Y-m-d H:i:s', TIMESTAMP);
-    }
-
-    public function convertListOperation($val, $name, $data, $cpoyData)
-    {
-        return $this->meta->getOperationLink($this->__meta['db']['primaryKey'], $data[$this->__meta['db']['primaryKey']], $this->_set);
+        $value = QWIN_RESOURCE_PATH . '/js/jquery/image/' . $value;
+        return Qwin_Helper_Html::img($value, $copyData['name']);
     }
 }

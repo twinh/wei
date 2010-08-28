@@ -22,11 +22,46 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-5-22 23:58:30
+ * @since       2010-05-22 23:58:30
+ * @todo        区分theme和style
  */
 
-class Trex_Member_Controller_Setting extends Qwin_Trex_Controller
+class Trex_Member_Controller_Setting extends Trex_Controller
 {
+    public function actionSwitchLanguage()
+    {
+        if(empty($_POST))
+        {
+            $urlLanguage = $this->_request->g('language');
+            /**
+             * 设置视图
+             */
+            $this->_view = array(
+                'class' => 'Trex_Member_View_Language',
+                'data' => get_defined_vars(),
+            );
+        } else {
+            $ses = Qwin::run('-ses');
+
+            $member = $ses->get('member');
+            $language = $ses->get('language');
+            $language = Qwin::run('Qwin_Language')->toStandardStyle($language);
+            
+            $result = $this->_meta
+                    ->getDoctrineQuery(array(
+                        'namespace' => 'Trex',
+                        'module' => 'Member',
+                        'controller' => 'Member',
+                    ))
+                    ->where('id = ?', $member['id'])
+                    ->fetchOne();
+            $result['detail']['language'] = $language;
+            $result->save();
+            $url = Qwin::run('-url')->createUrl($this->_set);
+            $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+        }
+    }
+
     public function actionSwitchLang()
     {
         $ini = Qwin::run('-ini');
@@ -39,50 +74,43 @@ class Trex_Member_Controller_Setting extends Qwin_Trex_Controller
 
     public function actionSwitchStyle()
     {
-        $ini = Qwin::run('-ini');
+        if(empty($_POST))
+        {
+            $theme = $this->_meta
+                ->getDoctrineQuery(array(
+                    'namespace' => 'Trex',
+                    'module' => 'Style',
+                    'controller' => 'Theme',
+                ))
+                ->execute()
+                ->toArray();
+            $urlTheme = $this->_request->g('style');
 
-        $set = array(
-            'namespace' => 'Default',
-            'module' => 'Style',
-            'controller' => 'Theme',
-        );
-        $query = $this->meta->getQuery($set);
-        $theme = $query->execute()->toArray();
-
-        // 初始化视图变量数组
-        $this->__view = array(
-            'theme' => &$theme
-        );
-
-        // 初始化控制面板中心内容的视图变量数组,加载控制面板视图
-        $this->__view_element = array(
-            'content' => QWIN_RESOURCE_PATH . '/php/View/Element/MemberSettingStyle.php',
-        );
-        $this->loadView($ini->load('Resource/View/Layout/DefaultControlPanel', false));
-    }
-
-    public function actionApplyTheme()
-    {
-        $ini = Qwin::run('-ini');
-        $ses = Qwin::run('-ses');
-        $loginState = $ses->get('member');
-        $style = Qwin::run('Qwin_Hepler_Util')->getStyle();
-        $set = array(
-            'namespace' => $this->_set['namespace'],
-            'module' => $this->_set['module'],
-            'controller' => 'Detail',
-        );
-        $metaName = $ini->getClassName('Metadata', $set);
-        $modelName = $ini->getClassName('Model', $set);
-        $this->__meta = Qwin::run($metaName)->defaultMetadata();
-        $this->meta->metadataToModel($this->__meta, Qwin::run($modelName));
-
-        $q = Doctrine_Query::create()
-            ->update($modelName)
-            ->set('theme_name', '?', $ses->get('style'))
-            ->where('member_id = ?', $loginState['id'])
-            ->execute();
-        Qwin::run('-url')->to(url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], 'SwitchStyle')));
+            /**
+             * 设置视图
+             */
+            $this->_view = array(
+                'class' => 'Trex_Member_View_Theme',
+                'data' => get_defined_vars(),
+            );
+        } else {
+            $ses = Qwin::run('-ses');
+            $member = $ses->get('member');
+            $theme = $ses->get('style');
+            
+            $result = $this->_meta
+                    ->getDoctrineQuery(array(
+                        'namespace' => 'Trex',
+                        'module' => 'Member',
+                        'controller' => 'Member',
+                    ))
+                    ->where('id = ?', $member['id'])
+                    ->fetchOne();
+            $result['detail']['theme'] = $theme;
+            $result->save();
+            $url = Qwin::run('-url')->createUrl($this->_set);
+            $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+        } 
     }
 
     public function actionApplyLang()

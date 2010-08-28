@@ -27,7 +27,6 @@
 
 class Trex_Member_Language_Enus extends Trex_Language
 {
-
     public function __construct()
     {
         $this->_data += array(
@@ -67,6 +66,7 @@ class Trex_Member_Language_Enus extends Trex_Language
             'LBL_MODULE_MEMBER_GROUP' => 'Member Group',
 
             'LBL_THEME' => 'Theme',
+            'LBL_LANGUAGE' => 'Language',
 
             'LBL_APPLY_THEME' => 'Apply the theme to personal setting',
             'LBL_APPLY_LANG' => 'Apply the language to personal setting',
@@ -76,6 +76,7 @@ class Trex_Member_Language_Enus extends Trex_Language
 
             'MSG_ERROR_USERNAME_PASSWORD' => 'username or password error',
             'MSG_LOGINED' => 'You have login',
+            'MSG_LOGOUTED' => 'You have logout',
             'MSG_NOT_LOGIN' => 'You have not login',
             'MSG_USERNAME_EXISTS' => 'the username has existed.',
             'MSG_OLD_PASSWORD_NOT_CORRECT' => 'the old password is not correct.',

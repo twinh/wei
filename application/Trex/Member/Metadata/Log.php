@@ -27,23 +27,41 @@
 
 class Trex_Member_Metadata_Log extends Qwin_Trex_Metadata
 {
-    public function defaultMetadata()
+    public function  __construct()
     {
-        return array(
+        $this->parseMetadata(array(
             // 基本属性
             'field' => array(
-                'captcha' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_CAPTCHA',
-                        'group' => '',
-                    ),
+                'username' => array(
                     'form' => array(
-                        '_type' => 'text',
-                        '_value' => '',
+                        'name' => 'username',
+                    ),
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
+                    'validator' => array(
+                        'rule' => array(
+                            'required' => true,
+                        ),
+                    ),
+                ),
+                'password' => array(
+                    'form' => array(
+                        'name' => 'password',
+                    ),
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
+                    'converter' => array(
+                        'db' => array('md5')
+                    )
+                ),
+                /*
+                'captcha' => array(
+                    'form' => array(
                         'name' => 'captcha',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
                         'isList' => 0,
                         'isDbField' => 0,
                         'isDbQuery' => 0,
@@ -53,72 +71,18 @@ class Trex_Member_Metadata_Log extends Qwin_Trex_Metadata
                             'required' => true,
                         ),
                     ),
-                ),
-                'username' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_USERNAME',
-                        'group' => '',
-                    ),
-                    'form' => array(
-                        '_type' => 'text',
-                        '_typeExt' => '',
-                        '_value' => '',
-                        'name' => 'username',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
-                    ),
-                    'validator' => array(
-                        'rule' => array(
-                            'required' => true,
-                        ),
-                    ),
-                ),
-                'password' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_PASSWORD',
-                        'group' => '',
-                    ),
-                    'form' => array(
-                        '_type' => 'text',
-                        '_typeExt' => '',
-                        '_value' => '',
-                        'name' => 'password',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
-                    ),
-                    'validator' => array(
-                        'rule' => array(
-                            'required' => true,
-                        ),
-                    ),
-                    'converter' => array(
-                        'db' => array('md5')
-                    )
-                ),
-            ),
-            // 附加属性
-            'fieldExt' => array(
-                'key' => 'id',
+                ),*/
             ),
             'model' => array(
 
             ),
             'db' => array(
                 'table' => 'member',
-                'primaryKey' => 'id',
             ),
             // 页面显示
             'page' => array(
                 'title' => 'LBL_MODULE_TITLE',
             ),
-        );
+        ));
     }
 }

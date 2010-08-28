@@ -9,7 +9,7 @@
 	width:360px;
 }
 .ui-form .ui-form-content form{
-	padding:1em;
+	padding: .8em;
 }
 .login-input input {
     width:160px;
@@ -30,15 +30,6 @@
 .ui-form .ui-form-content .ui-field-common{
     width: auto;
 }
-.ui-form .ui-form-content .ui-field-common .ui-form-button {
-    padding:.4em .8em .5em;/* ff */
-    cursor:pointer;
-    text-align: center;
-    font-size:1.1em;
-}
-* html .ui-form .ui-form-content .ui-field-common .ui-form-button{
-    padding:.3em;/* ie6 */
-}
-*+ html .ui-form .ui-form-content .ui-field-common .ui-form-button {
-    padding:.3em;/* ie7 */
+#login-captcha{
+    cursor: pointer;
 }

@@ -418,3 +418,24 @@ div.ui-layout-pane {
     padding: 1em;
     text-align: right;
 }
+
+/* Theme Switch Page
+----------------------------------*/
+.ui-theme-list ul{
+    padding: 1em;
+}
+.ui-theme-list ul li{
+    padding: 1em;
+    margin: 1em;
+    float: left;
+}
+.ui-form .ui-form-content .ui-theme-operation{
+    float: left;
+    clear: both;
+    padding: 1em 0 1em 2em;
+}
+.ui-line{
+    clear: both;
+    width: auto;
+    margin: 0 2em;
+}

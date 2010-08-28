@@ -201,9 +201,7 @@ class Qwin_Trex_Controller
         $set = $this->_set;
         $langClass = $set['namespace'] . '_' . $set['module'] . '_Language_' . $lang;
 
-        // TODO 语言的加载
-        Qwin::load('Trex_Language');
-        if(false == Qwin::load($langClass))
+        if(!class_exists($langClass))
         {
             $lang = $this->_toClassName($this->_config['interface']['language']);
         }

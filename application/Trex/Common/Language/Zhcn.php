@@ -30,6 +30,12 @@ class Trex_Common_Language_Zhcn extends Trex_Language
     public function __construct()
     {
         $this->_data += array(
+            '' => 'NULL',
+
+            // Qwin's information
+            'LBL_QWIN' => 'Qwin',
+            'LBL_QWIN_VERSION' => '3.0Beta',
+
             // action
             'LBL_ACTION_LIST' => '列表',
             'LBL_ACTION_ADD' => '添加',
@@ -42,6 +48,8 @@ class Trex_Common_Language_Zhcn extends Trex_Language
             'LBL_ACTION_RESET' => '重置',
             'LBL_ACTION_SUBMIT' => '提交',
             'LBL_ACTION_APPLY' => '应用',
+            'LBL_ACTION_RESTORE' => 'Restore',
+            'LBL_ACTION_REDIRECT' => '跳转',
 
             'LBL_DEFAULT' => '默认',
             'LBL_OPERATION' => '操作',

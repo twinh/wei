@@ -34,6 +34,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><?php echo qw_lang('LBL_HTML_TITLE')?></title>
+<link rel="stylesheet" type="text/css" href="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/qwin2/style.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/qwin2/login.css" />
 <?php
 $qurl = null;
 $jquery = Qwin::run('-jquery');
@@ -47,9 +49,17 @@ echo $jquery->loadTheme(),
     ;
 ?>
 </head>
+<script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/qwin2/style.js"></script>
 <body>
 <script type="text/javascript">
     jQuery.noConflict();
+    jQuery(function($){
+        var capthca = $('#login-captcha');
+        var captchaScr = capthca.attr('src');
+        capthca.click(function(){
+            capthca.attr('src', captchaScr + '&' + new Date());
+        });
+    });
 </script>
 <div id="ui-header" class="ui-header ui-widget">
   <div class="ui-header-logo ui-widget-content"> <a href="">Qwin</a> </div>
@@ -58,29 +68,29 @@ echo $jquery->loadTheme(),
 <div class="ui-login-panel">
 	<div id="ui-main-content" class="ui-main-content" >
   <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
-    <div class="ui-box-titlebar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix"> <span class="ui-box-title"> <a href="<?php echo url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller']))?>"><?php echo $this->t('LBL_LOGIN_TITLE')?></a> </span> <a class="ui-box-title-icon ui-corner-all" name=".ui-form-content" href="javascript:void(0)"> <span class="ui-icon  ui-icon-circle-triangle-n">open/close</span> </a> </div>
+    <div class="ui-box-titlebar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix"> <span class="ui-box-title"> <a href=""><?php echo qw_lang('LBL_LOGIN_TITLE')?></a> </span> </div>
     <div class="ui-form-content ui-box-content ui-widget-content">
       <form id="login-form" name="form" method="post" action="">
         <table width="100%" cellpadding="4" cellspacing="10">
         	<tr>
-                <td class="login-label" width="80"><?php echo qw_lang('LBL_FIELD_USERNAME')?>:</td>
-                <td class="login-input" colspan="2"><input type="text" value="" name="username" id="username" class=" ui-widget-content ui-corner-all" /></td>
+                <td class="login-label" width="60"><label for="username"><?php echo qw_lang('LBL_FIELD_USERNAME')?>:</label></td>
+                <td class="login-input" colspan="2"><input type="text" value="" name="username" id="username" class="ui-widget-content ui-corner-all" /></td>
             </tr>
             <tr>
-            	<td class="login-label"><?php echo qw_lang('LBL_FIELD_PASSWORD')?>:</td>
-                <td class="login-input" colspan="2"><input type="password" value="" name="password" id="password" class=" ui-widget-content ui-corner-all" /></td>
+            	<td class="login-label"><label for="password"><?php echo qw_lang('LBL_FIELD_PASSWORD')?>:</label></td>
+                <td class="login-input" colspan="2"><input type="password" value="" name="password" id="password" class="ui-widget-content ui-corner-all" /></td>
             </tr>
             <tr>
-            	<td class="login-label"><?php echo qw_lang('LBL_FIELD_CAPTCHA')?>:</td>
-                <td class="login-input"><input type="text" value="" name="captcha" id="captcha" class=" ui-widget-content ui-corner-all" /></td>
-                <td><img class="login-captcha" src="?_entrance=Captcha" /></td>
+            	<td class="login-label"><label for="captcha"><?php echo qw_lang('LBL_FIELD_CAPTCHA')?>:</label></td>
+                <td class="login-input"><input type="text" value="" name="captcha" id="captcha" class="ui-widget-content ui-corner-all" /></td>
+                <td><img class="login-captcha" id="login-captcha" alt="captcha image" src="?_entrance=captcha" /></td>
             </tr>
             <tr>
             	<td>&nbsp;</td>
             	<td colspan="2">
                         <div class="ui-field-common ui-login-operation">
                             <input type="hidden" name="_action" value="<?php echo $this->_set['action']?>" />
-                            <input type="hidden" name="_page" value="<?php echo $http_referer?>" />
+                            <input type="hidden" name="_page" value="<?php echo qw_referer_page() ?>" />
                             <input type="submit" class="ui-form-button ui-state-default ui-corner-all" id="submit" value="<?php echo qw_lang('LBL_ACTION_SUBMIT')?>" />
                             <input type="reset" class="ui-form-button ui-state-default ui-corner-all" value="<?php echo qw_lang('LBL_ACTION_RESET')?>" />
                         </div>
@@ -90,11 +100,10 @@ echo $jquery->loadTheme(),
       </form>
     </div>
   </div>
-
 </div>
 </div>
 <div class="ui-footer ui-widget">
-  <div class="ui-copyright ui-widget-content"><?php echo $this->t('LBL_FOOTER_COPYRIGHT')?></div>
+  <div class="ui-copyright ui-widget-content"><?php echo qw_lang('LBL_FOOTER_COPYRIGHT')?></div>
 </div>
 </body>
 </html>
