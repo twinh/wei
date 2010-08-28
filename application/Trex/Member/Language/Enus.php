@@ -67,9 +67,13 @@ class Trex_Member_Language_Enus extends Trex_Language
 
             'LBL_THEME' => 'Theme',
             'LBL_LANGUAGE' => 'Language',
+            'LBL_VIEW_DATA' => 'View Data',
+            'LBL_EDIT_DATA' => 'Edit Data',
+            'LBL_EDIT_PASSWORD' => 'Edit Password',
+            'LBL_SWITCH_STYLE' => 'Switch Style',
+            'LBL_SWITCH_LANGUAGE' => 'Switch Language',
 
-            'LBL_APPLY_THEME' => 'Apply the theme to personal setting',
-            'LBL_APPLY_LANG' => 'Apply the language to personal setting',
+            
             'LBL_LOGIN_TITLE' => 'Welcome to use the system',
 
             'LBL_ACTION_EDIT_PASSWORD' => 'Edit password',
