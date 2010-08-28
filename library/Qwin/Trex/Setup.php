@@ -298,7 +298,7 @@ class Qwin_Trex_Setup
      */
     protected function _onControllerNotExists($name = null)
     {
-        return false;
+        exit('The controller: ' . $this->_set['controller'] . ' is not exists');
     }
 
     /**
@@ -309,7 +309,7 @@ class Qwin_Trex_Setup
      */
     protected function _onActionNotExists($name = null)
     {
-        return false;
+        exit('The action: ' . $this->_set['action'] . ' is not exists');
     }
 
     /**
@@ -340,7 +340,7 @@ class Qwin_Trex_Setup
      * @param object|null $controller
      * @return boolen
      */
-    protected function _onControllerLoad(Qwin_Trex_Controller $controller)
+    protected function _onControllerLoad($controller)
     {
         return false;
     }

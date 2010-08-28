@@ -173,7 +173,7 @@ class Trex_Member_Metadata_Detail extends Trex_Metadata
                         )
                     )
                 ),
-                'theme_name' => array(
+                'theme' => array(
                     'basic' => array(
                         'title' => 'LBL_FIELD_THEME_NAME',
                         'descrip' => '',
@@ -184,7 +184,7 @@ class Trex_Member_Metadata_Detail extends Trex_Metadata
                         '_type' => 'custom',
                         '_typeExt' => '',
                         '_value' => 'base',
-                        'name' => 'theme_name',
+                        'name' => 'theme',
                     ),
                     'attr' => array(
                         'isListLink' => 1,
@@ -193,7 +193,7 @@ class Trex_Member_Metadata_Detail extends Trex_Metadata
                         'isDbQuery' => 1,
                     ),
                 ),
-                'lang' => array(
+                'language' => array(
                     'basic' => array(
                         'title' => 'LBL_FIELD_LANG',
                         'descrip' => '',
@@ -204,7 +204,7 @@ class Trex_Member_Metadata_Detail extends Trex_Metadata
                         '_type' => 'custom',
                         '_typeExt' => '',
                         '_value' => 'en',
-                        'name' => 'lang',
+                        'name' => 'language',
                     ),
                     'attr' => array(
                         'isListLink' => 1,

@@ -69,9 +69,10 @@ class Trex_Controller extends Qwin_Trex_Controller
          * 加载元数据
          */
         $metadataName = $ini->getClassName('Metadata', $set);
-        $this->_meta = Qwin_Metadata_Manager::get($metadataName);
-        if(null == $this->_meta)
+        if(class_exists($metadataName))
         {
+            $this->_meta = Qwin_Metadata_Manager::get($metadataName);
+        } else {
             $metadataName = 'Trex_Metadata';
             $this->_meta = Qwin::run($metadataName);
         }
@@ -97,6 +98,34 @@ class Trex_Controller extends Qwin_Trex_Controller
      */
     private function _isAllowVisited()
     {
+        // 除了登陆页面之外,其他页面都得设置访问权限
+        $allowSet = array(
+            array(
+                'namespace' => 'Trex',
+                'module' => 'Member',
+                'controller' => 'Log',
+                'action' => 'Login',
+            ),
+            array(
+                'namespace' => 'Trex',
+                'module' => 'Trex',
+                'controller' => 'Captcha',
+                'action' => 'Index',
+            ),
+        );
+
+        if(!in_array($this->_set, $allowSet))
+        {
+            if(null == Qwin::run('-ses')->get('member'))
+            {
+                $url = Qwin::run('-url');
+                $url->to($url->createUrl(array(
+                    'module' => 'Member',
+                    'controller' => 'Log',
+                    'action' => 'Login',
+                )));
+            }
+        }
         return true;
     }
 

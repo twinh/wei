@@ -35,11 +35,13 @@ class Trex_Member_Controller_Log extends Trex_Controller
         $js = Qwin::run('Qwin_Helper_Js');
         $meta = $this->_meta;
 
-        /*$loginState = $ses->get('member');
-        if(isset($loginState['login']) && true == $loginState['login'])
+        /**
+         * 提示已经登陆的信息
+         */
+        if(null !== $ses->get('member'))
         {
-            $js->show($this->t('MSG_LOGINED'));
-        }*/
+            return $this->setRedirectView($this->_lang->t('MSG_LOGINED'));
+        }
 
         if(empty($_POST))
         {
@@ -51,58 +53,53 @@ class Trex_Member_Controller_Log extends Trex_Controller
                 'data' => get_defined_vars(),
             );
         } else {
-            // 加载关联模型,元数据
-            $this->meta->loadRelatedData($meta['model']);
-            // 获取模型类名称
-            $modelName = $ini->getClassName('Model', $this->_set);
-            $query = $this->meta->connectModel($modelName, $meta['model']);
-            // POST 操作下,设置action为db
-            $this->setAction('db');
-
-            // 首先检查验证码
-            if($ses->get('captcha') != $_POST['captcha'])
-            {
-                $msg = $this->t('MSG_ERROR_FIELD') . $this->t('LBL_FIELD_CAPTCHA') . '\n' . $this->t('MSG_ERROR_MSG') . $this->t('MSG_ERROR_CAPTCHA');
-                $js->show($msg);
-            }
             /**
-             * 连接元数据
-             * 转换数据
-             * 验证数据
+             * 检查验证码
              */
-            $this->meta->connetMetadata($meta);
-            $data = $this->meta->convertSingleData($meta['field'], $this->_set['action'], $_POST);
-            $this->meta->validateData($meta['field'], $data);
-            
+            if($ses->get('captcha') != $this->_request->p('captcha'))
+            {
+                $message = $this->_lang->t('MSG_ERROR_FIELD') . $this->_lang->t('LBL_FIELD_CAPTCHA') . '\n' . $this->_lang->t('MSG_ERROR_MSG') . $this->_lang->t('MSG_ERROR_CAPTCHA');
+                $js->show($message);
+            }
+
+            /**
+             * 转换,检验其他数据
+             */
+            $data = $meta->convertSingleData($meta['field'], 'db', $_POST);
+            $meta->validateData($meta['field'], $data);
+
+            /**
+             * 从数据库中查询数据,建议是否存在此用户
+             */
             $set = array(
-                'namespace' => 'Default',
+                'namespace' => 'Trex',
                 'module' => 'Member',
                 'controller' => 'Member',
             );
-            $query = $this->meta->getQuery($set);
-            $query = $query
+            $query = $meta->getDoctrineQuery($set);
+            $result = $query
                 ->where('username = ? AND password = ?', array($data['username'], $data['password']))
                 ->fetchOne();
-            if(false == $query)
+            if(false == $result)
             {
-                $js->show($this->t('MSG_ERROR_USERNAME_PASSWORD'));
+                $ses->set('member', null);
+                $js->show($this->_lang->t('MSG_ERROR_USERNAME_PASSWORD'));
             }
-            $dbData = $query->toArray();
-            $ses->set('member',  array(
-                'login' => true,
-                'username' => $data['username'],
-                'id' => $dbData['id'],
-            ));
-            $ses->set('style', $dbData['detail']['theme_name']);
-            $ses->set('lang', $dbData['detail']['lang']);
+            
+            /**
+             * 验证通过,设置登陆数据到session
+             */
+            $member = $result->toArray();
+            $ses->set('member',  $member);
+            $ses->set('style', $member['detail']['theme']);
+            $ses->set('language', $member['detail']['language']);
 
-            $url = urldecode($gpc->p('_page'));
-            if($url)
-            {
-                Qwin::run('-url')->to($url);
-            } else {
-                Qwin::run('-url')->to('?');
-            }
+            /**
+             * 跳转到上一页或默认首页
+             */
+            $url = urldecode($this->_request->p('_page'));
+            '' == $url && $url = '?';
+            $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }
 
@@ -110,23 +107,29 @@ class Trex_Member_Controller_Log extends Trex_Controller
     {
         $ses = Qwin::run('-ses');
         $js = Qwin::run('Qwin_Helper_Js');
-        $loginState = $ses->get('member');
-        if(isset($loginState['login']) && true == $loginState['login'])
+
+        /**
+         * 提示未登陆的信息
+         */
+        if(null === $ses->get('member'))
         {
-            $ses->set('member', array(
-                'login' => false,
-                'username' => null,
-                'id' => null
+            $url = Qwin::run('Qwin_Url')->createUrl(array(
+                'module' => 'Member',
+                'controller' => 'Log',
+                'action' => 'Login'
             ));
-        } else {
-            $js->show($this->t('MSG_NOT_LOGIN'));
+            $js->show($this->_lang->t('MSG_NOT_LOGIN'), $url);
         }
-        $url = Qwin::run('-str')->set($_SERVER['HTTP_REFERER']);
-        if($url)
-        {
-            Qwin::run('-url')->to($url);
-        } else {
-            Qwin::run('-url')->to(url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], 'Login')));
-        }
+
+        /**
+         * 清除登陆状态
+         */
+        $ses->set('member', null);
+
+        /**
+         * 跳转回上一页或默认首页
+         */
+        !isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] = '?';
+        return $this->setView('alert', $this->_lang->t('MSG_LOGOUTED'), $_SERVER['HTTP_REFERER']);
     }
 }

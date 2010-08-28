@@ -55,7 +55,7 @@ class Qwin_Language
         return str_replace(array('-', '_'), '', $language);
     }
 
-    public function tostandardStyle($language)
+    public function toStandardStyle($language)
     {
         $language2 = strtolower($language);
         if(isset($this->_closeLanguage[$language2]))
