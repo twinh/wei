@@ -46,11 +46,11 @@
     <div class="ui-form-content ui-box-content ui-widget-content ui-image-list">
         <ul>
             <li>
-                    <a class="ui-action-view" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Member', 'action' => 'View', 'id' => $member['id'])) ?>">View Data</a>
-                    <a class="ui-action-edit" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Member', 'action' => 'Edit', 'id' => $member['id'])) ?>">Edit Data</a>
-                    <a class="ui-action-edit" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Member', 'action' => 'EditPassword', 'id' => $member['id'])) ?>">Edit Password</a>
-                    <a class="ui-action-switch-style" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Setting', 'action' => 'SwitchStyle')) ?>">Switch Style</a>
-                    <a class="ui-action-switch-language" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Setting', 'action' => 'SwitchLanguage')) ?>">Switch Language</a>
+                    <a class="ui-action-view" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Member', 'action' => 'View', 'id' => $member['id'])) ?>"><?php echo qw_lang('LBL_VIEW_DATA')?></a>
+                    <a class="ui-action-edit" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Member', 'action' => 'Edit', 'id' => $member['id'])) ?>"><?php echo qw_lang('LBL_EDIT_DATA')?></a>
+                    <a class="ui-action-edit" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Member', 'action' => 'EditPassword', 'id' => $member['id'])) ?>"><?php echo qw_lang('LBL_EDIT_PASSWORD')?></a>
+                    <a class="ui-action-switch-style" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Setting', 'action' => 'SwitchStyle')) ?>"><?php echo qw_lang('LBL_SWITCH_STYLE')?></a>
+                    <a class="ui-action-switch-language" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Setting', 'action' => 'SwitchLanguage')) ?>"><?php echo qw_lang('LBL_SWITCH_LANGUAGE')?></a>
                     <a class="ui-action-return" href="javascript:history.go(-1);">Return</a>
             </li>
         </ul>
