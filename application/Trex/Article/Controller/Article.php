@@ -179,12 +179,10 @@ class Trex_Article_Controller_Article extends Trex_ActionController
         return $val;
     }*/
 
-    /*public function convertListOperation($val, $name, $data, $cpoyData)
+    public function convertListTitle($value, $name, $data, $copyData)
     {
-        $html = $this->meta->getOperationLink($this->__meta['db']['primaryKey'], $data[$this->__meta['db']['primaryKey']], $this->_set);
-        //$html .= '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_CREATE_HTML') .'" href="' . url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], 'Html'), array($this->__meta['db']['primaryKey'] => $data[$this->__meta['db']['primaryKey']])) . '"><span class="ui-icon ui-icon-print"></span></a>';
-        return $html;
-    }*/
+        return Qwin_Helper_Html::titleDecorator($value, $copyData['title_style'], $copyData['title_color']);
+    }
 
     public function convertViewTitle($value, $name, $data, $copyData)
     {
@@ -215,11 +213,6 @@ class Trex_Article_Controller_Article extends Trex_ActionController
     {
         'NULL' == $value && $value = null;
         return $value;
-    }
-
-    public function convertDbDetailId($val)
-    {
-        return $this->Qwin_converter_String->getUuid($val);
     }
 
     public function convertDbDetailMeta($value, $name, $data, $copyData)

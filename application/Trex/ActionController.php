@@ -98,8 +98,8 @@ class Trex_ActionController extends Trex_Controller
             $data = $this->dataConverter($data);
         }
 
-        $data = $this->_meta->convertMultiData($relatedField, 'list', $data);
         $listField = $relatedField->getAttrList('isList');
+        $data = $this->_meta->convertMultiData($listField, $relatedField, 'list', $data);
 
         /**
          * 设置视图
@@ -144,7 +144,7 @@ class Trex_ActionController extends Trex_Controller
         $groupList = $relatedField->getViewGroupList();
         $data = $result->toArray();
         $data = $meta->convertDataToSingle($data);
-        $data = $meta->convertSingleData($relatedField, $this->_set['action'], $data);
+        $data = $meta->convertSingleData($relatedField, $relatedField, $this->_set['action'], $data);
 
         /**
          * 设置视图
@@ -157,8 +157,6 @@ class Trex_ActionController extends Trex_Controller
 
     /**
      * 根据元数据,生成添加视图和处理添加操作
-     *
-     * @return array 视图配置数组
      */
     public function actionAdd()
     {
@@ -200,14 +198,14 @@ class Trex_ActionController extends Trex_Controller
              * 处理数据
              */
             $data = $meta->convertDataToSingle($data);
-            $data = $meta->convertSingleData($relatedField, $this->_set['action'], $data);
+            $data = $meta->convertSingleData($relatedField, $relatedField, $this->_set['action'], $data);
             $relatedField->order();
             $groupList = $relatedField->getAddGroupList();
 
             /**
              * 设置视图
              */
-            $this->_view = array(
+            return $this->_view = array(
                 'class' => 'Trex_Common_View_Form',
                 'data' => get_defined_vars(),
             );
@@ -217,14 +215,14 @@ class Trex_ActionController extends Trex_Controller
              */
             $this->setAction('db');
             $relatedField = $meta->connectMetadata($meta);
-            $addDbField = $relatedField->getAddDbField();
+            $addDbField = $relatedField->getAttrList('isDbField');
 
             /**
              * 转换,验证和还原
              */
-            $data = $this->_meta->convertSingleData($addDbField, 'db', $_POST);
+            $data = $this->_meta->convertSingleData($relatedField, $relatedField, 'db', $_POST);
             $this->_meta->validateData($addDbField, $data);
-            $data = $meta->restoreData($addDbField, $data);
+            $data = $meta->restoreData($relatedField, $data);
             $data = $meta->setForeignKeyData($meta['model'], $data);
 
             /**
@@ -242,7 +240,7 @@ class Trex_ActionController extends Trex_Controller
             $this->executeOnFunction('afterDb', $this->resetAction(), $data);
             $url = urldecode($this->_request->p('_page'));
             '' == $url && $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Default'));
-            $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+            return $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }
 
@@ -278,7 +276,7 @@ class Trex_ActionController extends Trex_Controller
             $groupList = $relatedField->getEditGroupList();
             $data = $result->toArray();
             $data = $meta->convertDataToSingle($data);
-            $data = $meta->convertSingleData($relatedField, $this->_set['action'], $data);
+            $data = $meta->convertSingleData($relatedField, $relatedField, $this->_set['action'], $data);
 
             /**
              * 设置视图
@@ -303,14 +301,14 @@ class Trex_ActionController extends Trex_Controller
              */
             $this->setAction('db');
             $relatedField = $meta->connectMetadata($meta);
-            $editDbField = $relatedField->getEditDbField();
+            $editDbField = $relatedField->getAttrList('isDbField', 'isReadonly');
 
             /**
              * 转换,验证和还原
              */
-            $data = $meta->convertSingleData($relatedField, 'db', $_POST);
-            $this->_meta->validateData($relatedField, $data);
-            $data = $meta->restoreData($editDbField, $data);
+            $data = $meta->convertSingleData($relatedField, $relatedField, 'db', $_POST);
+            $this->_meta->validateData($relatedField, $data + $_POST);
+            $data = $meta->restoreData($relatedField, $data);
 
             /**
              * 入库
@@ -449,6 +447,20 @@ class Trex_ActionController extends Trex_Controller
      * @return string 当前域的新值
      */
     public function convertDbId($value, $name, $data, $copyData)
+    {
+        return Qwin::run('Qwin_converter_String')->getUuid($value);
+    }
+
+    /**
+     * 在入库操作下,转换详细信息的编号
+     *
+     * @param mixed 当前域的值
+     * @param string 当前域的名称
+     * @param array $data 已转换过的当前记录的值
+     * @param array $cpoyData 未转换过的当前记录的值
+     * @return string 当前域的新值
+     */
+    public function convertDbDetailId($value, $name, $data, $copyData)
     {
         return Qwin::run('Qwin_converter_String')->getUuid($value);
     }

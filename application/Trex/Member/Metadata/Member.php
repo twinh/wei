@@ -136,6 +136,12 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                     'foreign' => 'member_id',
                 ),
             ),
+            // 以显示作为目的的模型
+            'linkModel' => array(
+                array(
+                    'name' => 'Trex_Member_Model_Detail',
+                ),
+            ),
             'db' => array(
                 'table' => 'member',
             ),
