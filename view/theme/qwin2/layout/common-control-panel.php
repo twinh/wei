@@ -31,13 +31,29 @@ echo $jquery->loadTheme(),
 <body>
 <div id="ui-top-floating-bar" class="ui-top-floating-bar ui-widget ui-widget-header">
 	<ul>
-    	<li><a class="ui-anchor ui-state-active" href="?"><?php echo qw_lang('LBL_QWIN') ?></a></li>
+    	<li class="ui-top-bar-list">
+            <a href="?" class="ui-widget ui-state-active ui-corner-all"><?php echo qw_lang('LBL_QWIN') ?></a>
+        </li>
         <?php
         foreach($this->adminMenu as $menu) :
-            if(null == $menu['category_id']):
+            if(null == $menu['category_id']) :
         ?>
-        <li><a class="ui-anchor" href="<?php echo $menu['url'] ?>"><?php echo $menu['title'] ?></a></li>
-        <?php
+        <li class="ui-top-bar-list">
+            <a href="<?php echo $menu['url'] ?>" target="<?php echo $menu['target'] ?>" class="ui-widget ui-state-default ui-corner-all"><?php echo $menu['title'] ?></a>
+            <ul class="ui-state-hover ui-corner-bottom ui-corner-tr">
+                <?php
+                foreach($this->adminMenu as $subMenu) :
+                    if($menu['id'] == $subMenu['category_id']) :
+                ?>
+                <li><a href="<?php echo $subMenu['url'] ?>" target="<?php echo $subMenu['target'] ?>"><?php echo $subMenu['title'] ?></a></li>
+                    
+                <?php
+                    endif;
+                endforeach;
+                ?>
+            </ul>
+        </li>
+        <?php  
             endif;
         endforeach;
         ?>

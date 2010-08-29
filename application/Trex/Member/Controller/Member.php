@@ -91,6 +91,7 @@ class Trex_Member_Controller_Member extends Trex_ActionController
         return $result;
     }
 
+
     public function convertListOperation($value, $name, $data, $copyData)
     {
         $primaryKey = $this->_meta['db']['primaryKey'];

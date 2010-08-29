@@ -38,6 +38,8 @@ class Qwin_Metadata_Element_Model extends Qwin_Metadata_Element_Abstract
             'type' => 'hasOne',
             'local' => 'id',
             'foreign' => null,
+            'aim' => 'db',
+            'viewMap' => array(),
         );
     }
 
