@@ -65,7 +65,7 @@ class Trex_Member_Controller_Log extends Trex_Controller
             /**
              * 转换,检验其他数据
              */
-            $data = $meta->convertSingleData($meta['field'], 'db', $_POST);
+            $data = $meta->convertSingleData($meta['field'], $meta['field'], 'db', $_POST);
             $meta->validateData($meta['field'], $data);
 
             /**

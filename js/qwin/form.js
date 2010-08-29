@@ -1,10 +1,10 @@
 jQuery(function($){
     $('div.ui-icon-common a').qui();
 
-    $('#post-form > fieldset > legend').click(function(){
+    $('fieldset > legend').click(function(){
         var id = $(this).parent().attr('id');
-        $('#' + id + ' > div:not(.ui-block-hidden)').toggle();
-            //$('#' + id + ' > div:not(.ui-block-hidden)').slideToggle('fast');
+        var tableId = id.replace(/fieldset/, 'table')
+        $('#' + tableId).toggle();
     });
 
     // 操作区域不添加 focus 事件
@@ -12,12 +12,8 @@ jQuery(function($){
     //$('#ui-field-operation input.ui-form-button').qui();
 	$('table.ui-table input:text, table.ui-table textarea').qui();
 
-    // 返回
-    $('.action-return').click(function(){
-        history.go(-1);
-    });
 
-    $('.icon-info-common').each(function(){
+    /*$('.icon-info-common').each(function(){
         //icon-info-id
         var id = this.id.slice(10);
         if('' != $('#ui-tip-' + id + ' ul').html())
@@ -106,5 +102,5 @@ jQuery(function($){
             // 移除按钮
             $('#ui-tabs-button-next, #ui-tabs-button-previous, #qw-form-tab-nav').remove();
             form_tab.tabs('destroy');
-    });
+    });*/
 });

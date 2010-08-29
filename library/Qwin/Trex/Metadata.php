@@ -394,7 +394,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      * @todo 是否要必要支持多个转换函数/方法, 增加缓存,减少重复判断等
      * @todo 对于非当前控制器下, $self 的问题
      */
-    public function convertSingleData($meta, $action, $row, $isListLink = false)
+    public function convertSingleData($fieldList ,$meta, $action, $row, $isListLink = false)
     {
         /**
          * 初始化数据
@@ -414,9 +414,10 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
          */
         $newRow = array();
 
-        foreach($meta as $field => $set)
+        // $fieldSet/$fieldName
+        foreach($fieldList as $field => $filedSet)
         {
-            $name = $set['form']['name'];
+            $name = $meta[$field]['form']['name'];
 
             /**
              * 初始化两数组的值,如果不存在,则设为空
@@ -433,9 +434,9 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             /**
              * 使用元数据的转换器进行转换
              */
-            if(isset($set['converter'][$action]) && is_array($set['converter'][$action]))
+            if(isset($meta[$field]['converter'][$action]) && is_array($meta[$field]['converter'][$action]))
             {
-                $newRow[$name] = $this->convert($set['converter'][$action], $row[$name]);
+                $newRow[$name] = $this->convert($meta[$field]['converter'][$action], $row[$name]);
             }
 
             /**
@@ -454,12 +455,13 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
              * 增加Url查询
              * @todo 是否应该出现在此
              */
-            if(true == $isListLink && $set['attr']['isListLink'])
+            if(true == $isListLink && $meta[$field]['attr']['isListLink'])
             {
                 !isset($rowCopy[$name]) && $rowCopy[$name] = null;
                 $newRow[$name] = '<a href="' . $url->createUrl($ctrler->_set + array('searchField' => $name, 'searchValue' => $rowCopy[$name])) . '">' . $newRow[$name] . '</a>';
             }
         }
+
         return $newRow;
     }
 
@@ -485,11 +487,11 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      * @param string $action Action 的名称,一般为 list
      * @praam array $data 三维数组,一般是从数据库取出的数组
      */
-    public function convertMultiData($meta, $action, $data, $isListLink = true)
+    public function convertMultiData($fieldList, $meta, $action, $data, $isListLink = true)
     {
         foreach($data as &$row)
         {
-            $row = $this->convertSingleData($meta, $action, $row, $isListLink);
+            $row = $this->convertSingleData($fieldList, $meta, $action, $row, $isListLink);
         }
         return $data;
     }
@@ -622,13 +624,12 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      */
     public function restoreData($meta, $data)
     {
-        $newData = array();
         foreach($meta as $key => $field)
         {
-            /*if(!isset($data[$key]))
+            if(!isset($data[$key]))
             {
                 continue;
-            }*/
+            }
             if(!isset($field['form']['_oldName']))
             {
                 $newData[$key] = $data[$key];

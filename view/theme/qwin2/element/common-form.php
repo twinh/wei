@@ -56,9 +56,9 @@ var validator_rule = <?php echo $validator_rule?>;
             <button class="ui-action-reset" type="reset"><?php echo qw_lang('LBL_ACTION_RESET') ?></button>
         </div>
         <?php foreach($groupList as $group => $fieldList): ?>
-        <fieldset id="ui-fieldset-3" class="ui-widget-content ui-corner-all">
+        <fieldset id="ui-fieldset-<?php echo $group ?>" class="ui-widget-content ui-corner-all">
           <legend><?php echo qw_lang($group) ?></legend>
-          <table class="ui-table" width="100%">
+          <table class="ui-table" id="ui-table-<?php echo $group ?>" width="100%">
             <tr>
               <td width="12.5%"></td>
               <td width="37.5%"></td>
@@ -100,4 +100,4 @@ var validator_rule = <?php echo $validator_rule?>;
         </form>
     </div>
   </div>
-<script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH?>/js/other/form.js"></script>
+<script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH?>/js/qwin/form.js"></script>

@@ -93,6 +93,16 @@ class Qwin_Trex_Controller
     }
 
     /**
+     * 获取上一个行为名称,一般是原行为
+     *
+     * @return string
+     */
+    public function getLastAction()
+    {
+        return $this->_lastAction;
+    }
+
+    /**
      * 根据视图配置加载视图类
      *
      * @param string $class 新的视图类名

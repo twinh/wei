@@ -85,8 +85,8 @@ class Trex_Member_Metadata_Detail extends Trex_Metadata
                         'name' => 'nickname',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 1,
+                        'isListLink' => 0,
+                        'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
                     ),
@@ -190,8 +190,8 @@ class Trex_Member_Metadata_Detail extends Trex_Metadata
                         'name' => 'theme',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 1,
+                        'isListLink' => 0,
+                        'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
                     ),
@@ -210,8 +210,8 @@ class Trex_Member_Metadata_Detail extends Trex_Metadata
                         'name' => 'language',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 1,
+                        'isListLink' => 0,
+                        'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
                     ),

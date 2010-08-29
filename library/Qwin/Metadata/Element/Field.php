@@ -344,7 +344,8 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         {
             if(1 == $data['attr']['isReadonly'] || 'custom' == $data['form']['_type'])
             {
-                continue;
+                $this->_data[$field]['form']['_type'] = 'hidden';
+                //continue;
             }
 
             if(!isset($groupList[$data['basic']['group']]))
@@ -422,24 +423,6 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
             $newData[$data['form']['name']] = $data[$type[0]][$type[1]];
         }
         return $newData;
-    }
-
-    /**
-     * 获取编辑操作入库的域对象
-     *
-     * @return Qwin_Metadata_Element_Field 域对象
-     */
-    public function getEditDbField()
-    {
-        foreach($this->_data as $field => $meta)
-        {
-            if(1 == $meta['attr']['isDbField'] && 0 == $meta['attr']['isReadonly'])
-            {
-                $fieldMetadata[$field] = $meta;
-            }
-        }
-        $fieldObejct = new Qwin_Metadata_Element_Field();
-        return $fieldObejct->fromArray($fieldMetadata);
     }
 
     /**

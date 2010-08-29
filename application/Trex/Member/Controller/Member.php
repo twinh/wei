@@ -125,13 +125,16 @@ class Trex_Member_Controller_Member extends Trex_ActionController
         return $value;
     }
     
-    public function convertDbUsername($val)
+    public function convertDbUsername($value)
     {
-        if(true == $this->isUsernameExists($val))
+        if('Add' == $this->getLastAction() && $this->isUsernameExists($value))
         {
-            $this->Qwin_Helper_Js->show($this->t('MSG_USERNAME_EXISTS'));
+            $this->setRedirectView($this->_lang->t('MSG_USERNAME_EXISTS'))
+                    ->loadView()
+                    ->display();
+            exit;
         }
-        return $val;
+        return $value;
     }
 
     public function convertDbCompanyId($val)
