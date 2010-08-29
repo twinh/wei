@@ -180,6 +180,11 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         $mainMetaField = clone $meta['field'];
         foreach($meta['model'] as $model)
         {
+            // 不连接显示型模型
+            if('view' == $model['aim'])
+            {
+                continue;
+            }
             Qwin::load($model['metadata']);
             $relatedMeta = Qwin_Metadata_Manager::get($model['metadata']);
             $tmpMeta = array();
@@ -394,7 +399,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      * @todo 是否要必要支持多个转换函数/方法, 增加缓存,减少重复判断等
      * @todo 对于非当前控制器下, $self 的问题
      */
-    public function convertSingleData($fieldList ,$meta, $action, $row, $isListLink = false)
+    public function convertSingleData($fieldList, $meta, $action, $row, $isView = false, $modelList = null)
     {
         /**
          * 初始化数据
@@ -413,6 +418,20 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
          * 新的数据,本方法将返回该数组
          */
         $newRow = array();
+
+        if(true == $isView)
+        {
+            foreach($modelList as $model)
+            {
+                if('view' == $model['aim'])
+                {
+                    foreach($model['viewMap'] as $localField => $foreignField)
+                    {
+                        $row[$localField] = $row[$model['asName'] . '_' . $foreignField];
+                    }
+                }
+            }
+        }
 
         // $fieldSet/$fieldName
         foreach($fieldList as $field => $filedSet)
@@ -455,10 +474,10 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
              * 增加Url查询
              * @todo 是否应该出现在此
              */
-            if(true == $isListLink && $meta[$field]['attr']['isListLink'])
+            if(true == $isView && $meta[$field]['attr']['isListLink'])
             {
                 !isset($rowCopy[$name]) && $rowCopy[$name] = null;
-                $newRow[$name] = '<a href="' . $url->createUrl($ctrler->_set + array('searchField' => $name, 'searchValue' => $rowCopy[$name])) . '">' . $newRow[$name] . '</a>';
+                $newRow[$name] = '<a href="' . $url->createUrl($ctrler->_set, array('action' => 'Index', 'searchField' => $name, 'searchValue' => $rowCopy[$name])) . '">' . $newRow[$name] . '</a>';
             }
         }
 
@@ -487,11 +506,11 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      * @param string $action Action 的名称,一般为 list
      * @praam array $data 三维数组,一般是从数据库取出的数组
      */
-    public function convertMultiData($fieldList, $meta, $action, $data, $isListLink = true)
+    public function convertMultiData($fieldList, $meta, $action, $data, $isView = true, $modelList = null)
     {
         foreach($data as &$row)
         {
-            $row = $this->convertSingleData($fieldList, $meta, $action, $row, $isListLink);
+            $row = $this->convertSingleData($fieldList, $meta, $action, $row, $isView, $modelList);
         }
         return $data;
     }

@@ -51,17 +51,6 @@ class Trex_Link_Metadata_Link extends Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                     ),
-                    'converter' => array(
-                        'list' => array(
-                            array('Project_Hepler_Category', 'convertTreeResource'),
-                            array(
-                                'namespace' => 'Trex',
-                                'module' => 'Category',
-                                'controller' => 'Category',
-                            ),
-                            'link'
-                        ),
-                    ),
                 ),
                 'name' => array(
                     'form' => array(
@@ -124,6 +113,17 @@ class Trex_Link_Metadata_Link extends Trex_Metadata
             ),
             // 表之间的联系
             'model' => array(
+                array(
+                    'name' => 'Trex_Category_Model_Category',
+                    'asName' => 'category',
+                    'metadata' => 'Trex_Category_Metadata_Category',
+                    'local' => 'category_id',
+                    'foreign' => 'id',
+                    'aim' => 'view',
+                    'viewMap' => array(
+                        'category_id' => 'name',
+                    ),
+                ),
             ),
             'db' => array(
                 'table' => 'link',

@@ -52,18 +52,6 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                     ),
-                    'converter' => array(
-                        'list' => array(
-                            array('Project_Hepler_Category', 'convertTreeResource'),
-                            array(
-                                'namespace' => 'Trex',
-                                'module' => 'Member',
-                                'controller' => 'Group',
-                            ),
-                            NULL,
-                            array('id', NULL, 'name')
-                        ),
-                    ),
                 ),
                 'username' => array(
                     'form' => array(
@@ -125,7 +113,7 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                     'local' => 'id',
                     'foreign' => 'member_id',
                 ),
-                array(
+                /*array(
                     // 模型类名
                     'name' => 'Trex_Member_Model_Company',
                     'asName' => 'company',
@@ -134,12 +122,18 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                     'type' => 'hasOne',
                     'local' => 'id',
                     'foreign' => 'member_id',
-                ),
-            ),
-            // 以显示作为目的的模型
-            'linkModel' => array(
+                ),*/
                 array(
-                    'name' => 'Trex_Member_Model_Detail',
+                    'name' => 'Trex_Member_Model_Group',
+                    'asName' => 'group',
+                    'metadata' => 'Trex_Member_Metadata_Group',
+                    'type' => 'hasOne',
+                    'local' => 'group_id',
+                    'foreign' => 'id',
+                    'aim' => 'view',
+                    'viewMap' => array(
+                        'group_id' => 'name',
+                    ),
                 ),
             ),
             'db' => array(

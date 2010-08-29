@@ -29,18 +29,17 @@ a{
 /* 页顶浮动栏
 ----------------------------------*/
 #ui-top-floating-bar{
-	position: fixed;
-	width: 100%;
-	top: 0;
-	z-index: 999;
-	height: 4em;
-	border-top: none;
-	border-left: none;
-	border-right: none;
-	-moz-opacity: 0.9;
-	opacity: 0.9;
-	filter: alpha('opacity=90');
-	overflow: hidden;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 999;
+    height: 4em;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    -moz-opacity: 0.9;
+    opacity: 0.9;
+    filter: alpha('opacity=90');
 }
 /*
 #ui-top-floating-bar ul {
@@ -49,15 +48,34 @@ a{
 }*/
 /* 和下方设置足够大的距离,当链接的数目多至不只一行时,能够被正确隐藏 */
 #ui-top-floating-bar ul li{
-	height: 2em;
-	float: left;
-	margin: .4em .6em 2em .6em;
+    height: 2em;
+    float: left;
+    margin: 1.2em .6em 2em .6em;
 }
 #ui-top-floating-bar ul li a{
-	font-size: 1.2em;
+    font-size: 1.2em;
+    padding: .5em 1em;
+    z-index: 99;
 }
 #ui-top-floating-bar ul li a span.ui-icon{
-	height: 1.4em;
+    height: 1.4em;
+}
+#ui-top-floating-bar ul li ul{
+    display: none;
+    margin: .6em 0 0 0;
+    position: absolute;
+    z-index: 10;
+}
+#ui-top-floating-bar ul li ul li{
+    clear: both;
+    margin: 0;
+    padding: .6em 0 .3em;
+    width: 100%;
+}
+#ui-top-floating-bar ul li ul li a{
+    width: 100%;
+    display: block;
+    padding: 0 1em;
 }
 
 /* 页底浮动栏

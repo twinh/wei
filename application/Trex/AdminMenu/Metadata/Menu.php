@@ -122,7 +122,7 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
             'db' => array(
                 'table' => 'admin_menu',
                 'order' => array(
-                    array('order', 'ASC')
+                    array('order', 'DESC')
                 )
             ),
             // 页面显示

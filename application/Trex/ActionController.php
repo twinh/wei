@@ -99,7 +99,7 @@ class Trex_ActionController extends Trex_Controller
         }
 
         $listField = $relatedField->getAttrList('isList');
-        $data = $this->_meta->convertMultiData($listField, $relatedField, 'list', $data);
+        $data = $this->_meta->convertMultiData($listField, $relatedField, 'list', $data, true, $meta['model']);
 
         /**
          * 设置视图
@@ -144,7 +144,7 @@ class Trex_ActionController extends Trex_Controller
         $groupList = $relatedField->getViewGroupList();
         $data = $result->toArray();
         $data = $meta->convertDataToSingle($data);
-        $data = $meta->convertSingleData($relatedField, $relatedField, $this->_set['action'], $data);
+        $data = $meta->convertSingleData($relatedField, $relatedField, $this->_set['action'], $data, true, $meta['model']);
 
         /**
          * 设置视图
@@ -432,7 +432,7 @@ class Trex_ActionController extends Trex_Controller
         $result = $query->select('Max(`order`) as max_order')->fetchOne();
         if(false != $result)
         {
-            return $result['max_order'];
+            return $result['max_order'] + 20;
         }
         return 0;
     }

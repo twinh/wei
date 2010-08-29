@@ -53,4 +53,31 @@ jQuery(function($){
         }, 500);
         return false;
     })
+
+    // 页眉导航
+    $('#ui-top-floating-bar ul li.ui-top-bar-list').hover(
+        function(){
+            $(this)
+                .find('a:first')
+                .removeClass('ui-corner-all')
+                .addClass('ui-state-hover ui-corner-top');
+            $(this)
+                .find('ul')
+                .show();
+            $(this).find('li').hover(
+                function(){
+                    $(this).addClass('ui-state-active').css('border', 'none')
+                },function(){
+                    $(this).removeClass('ui-state-active');
+            });
+        },function(){
+            $(this)
+                .find('a:first')
+                .removeClass('ui-state-hover ui-corner-top')
+                .addClass('ui-corner-all');
+            $(this)
+                .find('ul')
+                .hide();
+        }
+    );
 });
