@@ -26,252 +26,189 @@
  * @since     2010-7-9 14:58:27
  */
 
-class Trex_Project_Metadata_Bug extends Qwin_Trex_Metadata
+class Trex_Project_Metadata_Bug extends Trex_Metadata
 {
-    public function defaultMetadata()
+    public function __construct()
     {
-        return array(
+        $this->setCommonMetadata();
+        $this->parseMetadata(array(
             'field' => array(
-                'id' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_ID',
-                        'order' => 0,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
-                    'form' => array(
-                        '_type' => 'hidden',
-                        'name' => 'id',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
-                    ),
-                ),
                 'project_id' => array(
                     'basic' => array(
-                        'title' => 'LBL_FIELD_PROJECT',
-                        'order' => 5,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
+                        'title' => 'LBL_FIELD_PROJECT_NAME'
                     ),
                     'form' => array(
-                        '_type' => 'text',
-                        'name' => 'project_id',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
+                        '_type' => 'select',
+                        '_resourceGetter' => array(
+                            array('Project_Hepler_Category', 'getTreeResource'),
+                            array(
+                                'namespace' => 'Trex',
+                                'module' => 'Project',
+                                'controller' => 'Project',
+                            ),
+                            NULL,
+                            array('id', 'parent_id', 'name')
+                        ),
                     ),
                 ),
                 'title' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_TITLE',
-                        'order' => 10,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
-                    'form' => array(
-                        '_type' => 'text',
-                        'name' => 'title',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
-                    ),
-                ),
-                'title' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_TITLE',
-                        'order' => 15,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
-                    'form' => array(
-                        '_type' => 'text',
-                        'name' => 'title',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
-                    ),
+
                 ),
                 'priority' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_PRIORITY',
-                        'order' => 20,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
-                        '_type' => 'text',
-                        'name' => 'priority',
+                        '_type' => 'select',
+                        '_resourceGetter' => array(
+                            array('Project_Helper_CommonClass', 'get'),
+                            'level-status',
+                        ),
                     ),
-                    'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
+                    'converter' => array(
+                        'list' => array(
+                            array('Project_Helper_CommonClass', 'convert'),
+                            'level-status',
+                        ),
+                        'view' => array(
+                            array('Project_Helper_CommonClass', 'convert'),
+                            'level-status',
+                        ),
                     ),
                 ),
                 'severity' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_SEVERITY',
-                        'order' => 25,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
-                        '_type' => 'text',
-                        'name' => 'severity',
+                        '_type' => 'select',
+                        '_resourceGetter' => array(
+                            array('Project_Helper_CommonClass', 'get'),
+                            'level-status',
+                        ),
                     ),
-                    'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
+                    'converter' => array(
+                        'list' => array(
+                            array('Project_Helper_CommonClass', 'convert'),
+                            'level-status',
+                        ),
+                        'view' => array(
+                            array('Project_Helper_CommonClass', 'convert'),
+                            'level-status',
+                        ),
                     ),
                 ),
                 'reproducibility' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_REPRODUCIBILITY',
-                        'order' => 30,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
-                        '_type' => 'text',
-                        'name' => 'reproducibility',
+                        '_type' => 'select',
+                        '_resourceGetter' => array(
+                            array('Project_Helper_CommonClass', 'get'),
+                            'level-status',
+                        ),
                     ),
                     'attr' => array(
                         'isListLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
+                    ),
+                    'converter' => array(
+                        'list' => array(
+                            array('Project_Helper_CommonClass', 'convert'),
+                            'level-status',
+                        ),
+                        'view' => array(
+                            array('Project_Helper_CommonClass', 'convert'),
+                            'level-status',
+                        ),
                     ),
                 ),
                 'status' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_STATUS',
-                        'order' => 35,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
                     'form' => array(
-                        '_type' => 'text',
-                        'name' => 'status',
+                        '_type' => 'select',
+                        '_resourceGetter' => array(
+                            array('Project_Helper_CommonClass', 'get'),
+                            'bug-status',
+                        ),
                     ),
                     'attr' => array(
                         'isListLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
+                    ),
+                    'converter' => array(
+                        'list' => array(
+                            array('Project_Helper_CommonClass', 'convert'),
+                            'bug-status',
+                        ),
                     ),
                 ),
-                'status' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_STATUS',
-                        'order' => 40,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
+                'description' => array(
                     'form' => array(
-                        '_type' => 'text',
-                        'name' => 'status',
+                        '_type' => 'textarea',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
+                        'isList' => 0,
                     ),
                 ),
                 'created_by' => array(
                     'basic' => array(
-                        'title' => 'LBL_FIELD_CREATED_BY',
-                        'order' => 45,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
+                        'title' => 'LBL_FIELD_CREATOR'
                     ),
                     'form' => array(
-                        '_type' => 'text',
-                        'name' => 'created_by',
+                        '_type' => 'custom',
                     ),
                     'attr' => array(
                         'isListLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                         'isReadonly' => 1,
                     ),
                 ),
-                'date_created' => array(
+                'modified_by' => array(
                     'basic' => array(
-                        'title' => 'LBL_FIELD_DATE_CREATED',
-                        'order' => 50,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
+                        'title' => 'LBL_FIELD_MODIFIER'
                     ),
                     'form' => array(
                         '_type' => 'custom',
-                        'name' => 'date_created',
                     ),
                     'attr' => array(
                         'isListLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
-                        'isReadonly' => 1,
-                    ),
-                ),
-                'date_modified' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_DATE_MODIFIED',
-                        'descrip' => '',
-                        'order' => 55,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
-                    'form' => array(
-                        '_type' => 'custom',
-                        'name' => 'date_modified',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
-                    ),
-                ),
-                'operation' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_OPERATION',
-                        'order' => 999,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
-                    'form' => array(
-                        '_type' => 'custom',
-                        '_value' => '',
-                        'name' => 'operation',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 0,
-                        'isList' => 1,
-                        'isDbField' => 0,
-                        'isDbQuery' => 0,
                     ),
                 ),
             ),
             'model' => array(
-
+                array(
+                    'name' => 'Trex_Project_Model_Project',
+                    'asName' => 'project',
+                    'metadata' => 'Trex_Project_Metadata_Project',
+                    'type' => 'hasOne',
+                    'local' => 'project_id',
+                    'foreign' => 'id',
+                    'aim' => 'view',
+                    'viewMap' => array(
+                        'project_id' => 'name',
+                    ),
+                ),
+                array(
+                    'name' => 'Trex_Member_Model_Member',
+                    'asName' => 'member',
+                    'metadata' => 'Trex_Member_Metadata_Member',
+                    'local' => 'created_by',
+                    'foreign' => 'id',
+                    'aim' => 'view',
+                    'viewMap' => array(
+                        'created_by' => 'username',
+                    ),
+                ),
+                array(
+                    'name' => 'Trex_Member_Model_Member',
+                    'asName' => 'member2',
+                    'metadata' => 'Trex_Member_Metadata_Member',
+                    'local' => 'modified_by',
+                    'foreign' => 'id',
+                    'aim' => 'view',
+                    'viewMap' => array(
+                        'modified_by' => 'username',
+                    ),
+                ),
             ),
             'db' => array(
                 'table' => 'project_bug',
-                'primaryKey' => 'id',
                 'order' => array(
                     array('date_created', 'DESC')
                 ),
             ),
             'page' => array(
                 'title' => 'LBL_MODULE_PROJECT_BUG',
-                'rowNum' => 10,
             ),
-        );
+        ));
     }
 }

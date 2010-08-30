@@ -40,6 +40,7 @@ class Trex_Controller extends Qwin_Trex_Controller
         $this->_url = Qwin::run('Qwin_Url');
         $set = $this->_set = $ini->getSet();
         $this->_config = $ini->getConfig();
+        $this->_member = Qwin::run('Qwin_Session')->get('member');
        
         /**
          * 访问控制

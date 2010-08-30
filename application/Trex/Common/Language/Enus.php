@@ -67,6 +67,7 @@ class Trex_Common_Language_Enus extends Trex_Language
             'LBL_TOOL' => 'Tool',
             'LBL_LANG' => 'Language',
             'LBL_MESSAGE' => 'Message',
+            'LBL_MEMBER_CENTER' => 'Member Center',
 
             // field
             'LBL_FIELD_ID' => 'ID',
@@ -81,6 +82,9 @@ class Trex_Common_Language_Enus extends Trex_Language
             'LBL_FIELD_CONTENT' => 'Content',
             'LBL_FIELD_CATEGORY_ID' => 'Category Id',
             'LBL_FIELD_CATEGORY_NAME' => 'Category Name',
+            'LBL_FIELD_CREATOR' => 'Creator',
+            'LBL_FIELD_MODIFIER' => 'Modifiter',
+            'LBL_FIELD_SUMMARY' => 'Summary',
 
             // group
             'LBL_GROUP_BASIC_DATA' => 'Basic Data',

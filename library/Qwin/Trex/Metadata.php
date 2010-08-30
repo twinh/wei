@@ -427,7 +427,9 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
                 {
                     foreach($model['viewMap'] as $localField => $foreignField)
                     {
-                        $row[$localField] = $row[$model['asName'] . '_' . $foreignField];
+                        $tempKey = $model['asName'] . '_' . $foreignField;
+                        !isset($row[$tempKey]) && $row[$tempKey] = '';
+                        $row[$localField] = $row[$tempKey];
                     }
                 }
             }

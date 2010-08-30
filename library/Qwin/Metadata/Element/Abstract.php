@@ -62,7 +62,7 @@ abstract class Qwin_Metadata_Element_Abstract extends Qwin_Metadata_Abstract
      * @param <type> $metadata
      * @return <type>
      */
-    protected function _format($metadata)
+    protected function _format($metadata, $name = null)
     {
         return $this->_multiArrayMerge($this->getSampleData(), $metadata);
     }
@@ -84,7 +84,7 @@ abstract class Qwin_Metadata_Element_Abstract extends Qwin_Metadata_Abstract
     {
         foreach($this->_data as $key => $row)
         {
-            $this->_data[$key] = $this->_format($row);
+            $this->_data[$key] = $this->_format($row, $key);
         }
         return $this;
     }

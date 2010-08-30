@@ -93,8 +93,34 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         return $this->_formatAsArray();
     }
 
-    protected function _format($metadata)
+    protected function _format($metadata, $name = null)
     {
+        // 转换成数组
+        if(is_string($metadata))
+        {
+            $metadata = array(
+                'form' => array(
+                    'name' => $metadata,
+                )
+            );
+        // 初始化名称
+        } else {
+            if(!isset($metadata['form']))
+            {
+                $metadata['form'] = array();
+            }
+            if(!isset($metadata['form']['name']))
+            {
+                if(null != $name)
+                {
+                    $metadata['form']['name'] = $name;
+                } else {
+                    require_once 'Qwin/Metadata/Element/Field/Exception.php';
+                    throw new Qwin_Metadata_Element_Field_Exception('The name value is not defined.');
+                }
+            }
+        }
+
         if(!isset($metadata['basic']))
         {
             $metadata['basic'] = array();
