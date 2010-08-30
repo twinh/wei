@@ -36,7 +36,7 @@
 <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
     <div class="ui-box-titlebar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix">
         <span class="ui-box-title">
-            <?php echo qw_lang('LBL_LANGUAGE')?>
+            <?php echo qw_lang('LBL_MEMBER_CENTER')?>
         </span>
         <a class="ui-box-title-icon ui-corner-all" name=".ui-form-content" href="javascript:void(0)">
             <span class="ui-icon  ui-icon-circle-triangle-n">open/close</span>
@@ -51,7 +51,7 @@
                     <a class="ui-action-edit" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Member', 'action' => 'EditPassword', 'id' => $member['id'])) ?>"><?php echo qw_lang('LBL_EDIT_PASSWORD')?></a>
                     <a class="ui-action-switch-style" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Setting', 'action' => 'SwitchStyle')) ?>"><?php echo qw_lang('LBL_SWITCH_STYLE')?></a>
                     <a class="ui-action-switch-language" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Setting', 'action' => 'SwitchLanguage')) ?>"><?php echo qw_lang('LBL_SWITCH_LANGUAGE')?></a>
-                    <a class="ui-action-return" href="javascript:history.go(-1);">Return</a>
+                    <a class="ui-action-return" href="javascript:history.go(-1);"><?php echo qw_lang('LBL_ACTION_RETURN') ?></a>
             </li>
         </ul>
         <hr class="ui-line ui-widget-content" />

@@ -105,12 +105,10 @@ class Trex_Member_Metadata_Detail extends Trex_Metadata
                     ),
                     'form' => array(
                         '_type' => 'select',
-                        '_typeExt' => '',
                         '_resourceGetter' => array(
                             array('Project_Helper_CommonClass', 'get'),
                             'sex',
                         ),
-                        '_value' => '',
                         'name' => 'sex',
                     ),
                     'attr' => array(

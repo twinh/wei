@@ -507,4 +507,14 @@ class Trex_ActionController extends Trex_Controller
         '0' == $value && $value = null;
         return $value;
     }
+
+    public function convertDbCreatedBy($value, $name, $data, $copyData)
+    {
+        return $this->_member['id'];
+    }
+
+    public function convertDbModifiedBy($value, $name, $data, $copyData)
+    {
+        return $this->_member['id'];
+    }
 }

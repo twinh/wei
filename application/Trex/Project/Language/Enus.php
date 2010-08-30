@@ -26,21 +26,28 @@
  * @since     2010-7-9 10:50:03
  */
 
-return array(
-    'LBL_FIELD_START_TIME' => 'Start Time',
-    'LBL_FIELD_PLANED_END_TIME' => 'Planed End Time',
-    'LBL_FIELD_END_TIME' => 'End Time',
-    'LBL_FIELD_CODE' => 'Code',
-    'LBL_FIELD_FROM' => 'From',
+class Trex_Project_Language_Enus extends Trex_Language
+{
+    public function __construct()
+    {
+        $this->_data += array(
+            'LBL_FIELD_START_TIME' => 'Start Time',
+            'LBL_FIELD_PLANED_END_TIME' => 'Planed End Time',
+            'LBL_FIELD_END_TIME' => 'End Time',
+            'LBL_FIELD_CODE' => 'Code',
+            'LBL_FIELD_FROM' => 'From',
 
-    'LBL_FIELD_PROJECT' => 'Project',
-    'LBL_FIELD_PRIORITY' => 'Priority',
-    'LBL_FIELD_SEVERITY' => 'Severity',
-    'LBL_FIELD_REPRODUCIBILITY' => 'Reproducibility',
-    'LBL_FIELD_STATUS' => 'Status',
-    'LBL_FIELD_CREATED_BY' => 'Created By',
+            'LBL_FIELD_PROJECT_NAME' => 'Project Name',
+            'LBL_FIELD_PROJECT' => 'Project',
+            'LBL_FIELD_PRIORITY' => 'Priority',
+            'LBL_FIELD_SEVERITY' => 'Severity',
+            'LBL_FIELD_REPRODUCIBILITY' => 'Reproducibility',
+            'LBL_FIELD_STATUS' => 'Status',
+            'LBL_FIELD_CREATED_BY' => 'Created By',
 
-    'LBL_MODULE_PROJECT' => 'Project',
-    'LBL_MODULE_PROJECT_FEATURE' => 'Feature',
-    'LBL_MODULE_PROJECT_BUG' => 'Bug',
-);
+            'LBL_MODULE_PROJECT' => 'Project',
+            'LBL_MODULE_PROJECT_FEATURE' => 'Feature',
+            'LBL_MODULE_PROJECT_BUG' => 'Bug',
+        );
+    }
+}
