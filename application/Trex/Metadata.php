@@ -128,7 +128,6 @@ class Trex_Metadata extends Qwin_Trex_Metadata
                 ),
                 'form' => array(
                     '_type' => 'custom',
-                    'name' => 'operation',
                 ),
                 'attr' => array(
                     'isListLink' => 0,

@@ -34,6 +34,9 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
         $this->parseMetadata(array(
             'field' => array(
                 'parent_id' => array(
+                    'basic' => array(
+                        'title' => 'LBL_FIELD_PARENT_PROJECT_NAME',
+                    ),
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
@@ -48,6 +51,9 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
                         ),
                         'name' => 'parent_id',
                     ),
+                    'attr' => array(
+                        'isListLink' => 1,
+                    ),
                 ),
                 'name' => array(
                     'form' => array(
@@ -61,8 +67,27 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
                     ),
                 ),
                 'code' => array(
+                ),
+                'status' => array(
                     'form' => array(
-                        'name' => 'code',
+                        '_type' => 'select',
+                        '_resourceGetter' => array(
+                            array('Project_Helper_CommonClass', 'get'),
+                            'project-status',
+                        ),
+                    ),
+                    'attr' => array(
+                        'isListLink' => 1,
+                    ),
+                    'converter' => array(
+                        'list' => array(
+                            array('Project_Helper_CommonClass', 'convert'),
+                            'project-status',
+                        ),
+                        'view' => array(
+                            array('Project_Helper_CommonClass', 'convert'),
+                            'project-status',
+                        ),
                     ),
                 ),
                 'start_time' => array(
@@ -110,9 +135,31 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
                         'parent_id' => 'name',
                     ),
                 ),
+                array(
+                    'name' => 'Trex_Project_Model_Status',
+                    'asName' => 'status',
+                    'metadata' => 'Trex_Project_Metadata_Status',
+                    'type' => 'hasOne',
+                    'local' => 'id',
+                    'foreign' => 'project_id',
+                    'aim' => 'relatedDb',
+                    'dbMap' => array(
+                        'id' => 'project_id',
+                        'status' => 'status',
+                        'date_modified' => 'date_created',
+                    ),
+                    'set' => array(
+                        'namespace' => 'Trex',
+                        'module' => 'Project',
+                        'controller' => 'Status',
+                    ),
+                ),
             ),
             'db' => array(
                 'table' => 'project',
+                'order' => array(
+                    array('date_created', 'DESC'),
+                ),
             ),
             // 页面显示
             'page' => array(

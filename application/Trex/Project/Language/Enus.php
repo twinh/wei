@@ -36,6 +36,8 @@ class Trex_Project_Language_Enus extends Trex_Language
             'LBL_FIELD_END_TIME' => 'End Time',
             'LBL_FIELD_CODE' => 'Code',
             'LBL_FIELD_FROM' => 'From',
+            'LBL_FIELD_PARENT_PROJECT_NAME' => 'Parent Project',
+            'LBL_FIELD_STATUS_OPERATION' => 'Status Operation',
 
             'LBL_FIELD_PROJECT_NAME' => 'Project Name',
             'LBL_FIELD_PROJECT' => 'Project',
@@ -45,7 +47,12 @@ class Trex_Project_Language_Enus extends Trex_Language
             'LBL_FIELD_STATUS' => 'Status',
             'LBL_FIELD_CREATED_BY' => 'Created By',
 
+            'LBL_ACTION_ADD_BUG' => 'Add Bug',
+            'LBL_ACTION_EDIT_STATUS' => 'Edit Status',
+            'LBL_ACTION_VIEW_STATUS' => 'View Status',
+
             'LBL_MODULE_PROJECT' => 'Project',
+            'LBL_MODULE_PROJECT_STATUS' => 'Project Status',
             'LBL_MODULE_PROJECT_FEATURE' => 'Feature',
             'LBL_MODULE_PROJECT_BUG' => 'Bug',
         );

@@ -226,6 +226,11 @@ class Trex_ActionController extends Trex_Controller
             $data = $meta->setForeignKeyData($meta['model'], $data);
 
             /**
+             * 保存关联模型的数据
+             */
+            $meta->saveRelatedDbData($meta, $data, $query);
+
+            /**
              * 入库
              */
             $ini = Qwin::run('-ini');
@@ -308,7 +313,12 @@ class Trex_ActionController extends Trex_Controller
              */
             $data = $meta->convertSingleData($relatedField, $relatedField, 'db', $_POST);
             $this->_meta->validateData($relatedField, $data + $_POST);
-            $data = $meta->restoreData($relatedField, $data);
+            $data = $meta->restoreData($editDbField, $data);
+
+            /**
+             * 保存关联模型的数据
+             */
+            $meta->saveRelatedDbData($meta, $data, $query);
 
             /**
              * 入库
@@ -348,11 +358,13 @@ class Trex_ActionController extends Trex_Controller
 
         // TODO $object->delete();
         // TODO 统计删除数
+        // TODO 删除数据关联的模块
         foreach($object as $key => $val)
         {
             foreach($meta['model'] as $model)
             {
-                if(isset($object[$key][$model['asName']]))
+                // 不删除视图模块的记录
+                if(isset($object[$key][$model['asName']]) && 'db' == $model['aim'])
                 {
                     $object[$key][$model['asName']]->delete();
                 }

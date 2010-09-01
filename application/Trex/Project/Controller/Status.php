@@ -26,10 +26,10 @@
  * @since     2010-6-12 19:49:37 utf-8 中文
  */
 
-class State
+class Trex_Project_Controller_Status extends Trex_ActionController
 {
-    public function __construct()
+    public function convertListDateCreated($value, $name, $data, $copyData)
     {
-
+        return $value;
     }
 }

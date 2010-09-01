@@ -74,7 +74,7 @@ class Trex_Member_Metadata_Log extends Qwin_Trex_Metadata
                 ),*/
             ),
             'model' => array(
-
+                
             ),
             'db' => array(
                 'table' => 'member',

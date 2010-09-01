@@ -120,10 +120,8 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
          * 初始元数据和模型主类
          */
         $metaName = $this->getClassName('Metadata', $set);
-        Qwin::load($metaName);
         $metaObj = Qwin_Metadata_Manager::get($metaName);
-        $queryField = $metaObj->field->getAttrList('isDbQuery');
-
+        $queryField = $metaObj->field->getAttrList(array('isDbField', 'isDbQuery'));
         $modelName = $this->getClassName('Model', $set);
         $modelObj = Qwin::run($modelName);
         $modelObj->setTableName($this->getTablePrefix() . $metaObj['db']['table']);
@@ -144,9 +142,14 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         {
             foreach($metaObj['model'] as $model)
             {
+                // 不连接数据关联的模型
+                if('relatedDb' == $model['aim'])
+                {
+                    continue;
+                }
                 Qwin::load($model['metadata']);
                 $linkedMetaObj = Qwin_Metadata_Manager::get($model['metadata']);
-                $queryField = $linkedMetaObj->field->getAttrList('isDbQuery');
+                $queryField = $linkedMetaObj->field->getAttrList(array('isDbField', 'isDbQuery'));
 
                 $linkedModelObj = Qwin::run($model['name']);
                 $linkedModelObj->setTableName($this->getTablePrefix() . $linkedMetaObj['db']['table']);
@@ -181,7 +184,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         foreach($meta['model'] as $model)
         {
             // 不连接显示型模型
-            if('view' == $model['aim'])
+            if('db' != $model['aim'])
             {
                 continue;
             }
@@ -246,7 +249,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
              ->setAttr($primaryKey, 'isDbField', true)
              ->setAttr($primaryKey, 'isDbQuery', true);
         
-        $queryField = $meta->field->getAttrList('isDbQuery');
+        $queryField = $meta->field->getAttrList(array('isDbQuery', 'isDbField'));
         $query->select(implode(', ', $queryField));
 
         /**
@@ -263,7 +266,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
                           ->setAttr($primaryKey, 'isDbField', true)
                           ->setAttr($primaryKey, 'isDbQuery', true);
             
-            $queryField = $linkedMetaObj->field->getAttrList('isDbQuery');
+            $queryField = $linkedMetaObj->field->getAttrList(array('isDbQuery', 'isDbField'));
             foreach($queryField as $field)
             {
                 $query->addSelect($model['asName'] . '.' . $field);
@@ -728,7 +731,10 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     {
         foreach($modelList as $model)
         {
-            $data[$model['asName']][$model['foreign']] = $data[$model['local']];
+            if('db' == $model['aim'])
+            {
+                $data[$model['asName']][$model['foreign']] = $data[$model['local']];
+            }
         }
         return $data;
     }
@@ -1016,5 +1022,58 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             $tmpCol == $x++ && $x = 0;
         }
         return $layoutArr;
+    }
+
+    public function saveRelatedDbData($meta, $data, $query)
+    {
+        $ctrler = Qwin::run('-controller');
+        foreach($meta['model'] as $model)
+        {
+            if('relatedDb' == $model['aim'])
+            {
+                /*
+                 * 检验是否要保存数据
+                 */
+                $method = 'isSave' . $model['asName'] . 'Data';
+                if(!method_exists($ctrler, $method)
+                    || false === call_user_func_array(
+                        array($ctrler, $method),
+                        array($data, $query)
+                        )){
+                    return false;
+                }
+                    
+                $relatedData = array();
+                foreach($model['dbMap'] as $localField => $foreignField)
+                {
+                    $relatedData[$foreignField] = $data[$localField];
+                }
+                $relatedDbMeta = Qwin_Metadata_Manager::get($model['metadata']);
+                // TODO 补全其他转换方式,分离该过程
+                $copyData = $relatedData;
+                foreach($relatedDbMeta['field'] as $name => $field)
+                {
+                    $methodName = str_replace(array('_', '-'), '', 'convertdb' .  $model['asName'] . $name);
+                    if(method_exists($ctrler, $methodName))
+                    {
+                        !isset($relatedData[$name]) && $relatedData[$name] = null;
+                        $relatedData[$name] = call_user_func_array(
+                            array($ctrler, $methodName),
+                            array($relatedData[$name], $name, $relatedData, $copyData)
+                        );
+                    }
+                }
+
+                /**
+                 * 保存数据
+                 */
+                $relatedDbQuery = $meta->getDoctrineQuery($model['set']);
+                $ini = Qwin::run('-ini');
+                $modelName = $ini->getClassName('Model', $model['set']);
+                $relatedDbQuery = new $modelName;
+                $relatedDbQuery->fromArray($relatedData);
+                $relatedDbQuery->save();
+            }
+        }       
     }
 }

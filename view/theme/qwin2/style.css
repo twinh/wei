@@ -329,6 +329,9 @@ div.ui-layout-pane {
 	text-align: right;
 	
 }
+.ui-table td.ui-field-plain{
+    font-size: 1.3em;
+}
 .ui-table .ui-field-text input,
 .ui-table .ui-field-password input{
 	width: 60%;
