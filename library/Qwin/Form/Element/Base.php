@@ -30,6 +30,11 @@ require_once 'Qwin/Form.php';
 
 class Qwin_Form_Element_Base extends Qwin_Form
 {
+    public function plain($pub_set, $pri_set, $value)
+    {
+        return $value;
+    }
+
     /**
      * 创建文本域
      *

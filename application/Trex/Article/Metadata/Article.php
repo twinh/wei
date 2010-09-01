@@ -292,7 +292,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         'name' => 'date_created',
                     ),
                     'attr' => array(
-                        //'isReadonly' => 1,
+                        'isReadonly' => 1,
                     ),
                 ),
                 'date_modified' => array(

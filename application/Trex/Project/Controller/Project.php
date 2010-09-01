@@ -37,4 +37,26 @@ class Trex_Project_Controller_Project extends Trex_ActionController
     {
         return substr($value, 0, 10);
     }
+
+    public function convertListOperation($value, $name, $data, $copyData)
+    {
+        $primaryKey = $this->_meta['db']['primaryKey'];
+        return Qwin_Helper_Html::jQueryButton($this->_url->createUrl($this->_set, array('controller' => 'Bug', 'action' => 'Add', '_data[project_id]' => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_ADD_BUG'), 'ui-icon-plusthick')
+                . Qwin_Helper_Html::jQueryButton($this->_url->createUrl($this->_set, array('controller' => 'Status', 'action' => 'Index', 'searchField' => 'project_id', 'searchValue' => $copyData['id'])), $this->_lang->t('LBL_ACTION_VIEW_STATUS'), 'ui-icon-lightbulb')
+                . parent::convertListOperation($value, $name, $data, $copyData);
+    }
+
+    public function convertDbStatusId($value, $name, $data, $copyData)
+    {
+        return Qwin::run('Qwin_converter_String')->getUuid($value);
+    }
+
+    public function isSaveStatusData($data, $query)
+    {
+        if(isset($data['status']) && isset($query->status) && $data['status'] == $query['status'])
+        {
+            return false;
+        }
+        return true;
+    }
 }
