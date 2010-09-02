@@ -106,7 +106,7 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                 array(
                     // 模型类名
                     'name' => 'Trex_Member_Model_Detail',
-                    'asName' => 'detail',
+                    'alias' => 'detail',
                     // Metadata 中包含模型字段,表名,关系的定义,
                     'metadata' => 'Trex_Member_Metadata_Detail',
                     'type' => 'hasOne',
@@ -116,7 +116,7 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                 /*array(
                     // 模型类名
                     'name' => 'Trex_Member_Model_Company',
-                    'asName' => 'company',
+                    'alias' => 'company',
                     // Metadata 中包含模型字段,表名,关系的定义,
                     'metadata' => 'Trex_Member_Metadata_Company',
                     'type' => 'hasOne',
@@ -125,7 +125,7 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                 ),*/
                 array(
                     'name' => 'Trex_Member_Model_Group',
-                    'asName' => 'group',
+                    'alias' => 'group',
                     'metadata' => 'Trex_Member_Metadata_Group',
                     'type' => 'hasOne',
                     'local' => 'group_id',
@@ -137,7 +137,7 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                 ),
                 /*array(
                     'name' => 'Trex_Member_Model_Log',
-                    'asName' => 'status',
+                    'alias' => 'status',
                     'metadata' => 'Trex_Project_Metadata_Status',
                     'type' => 'hasOne',
                     'local' => 'id',

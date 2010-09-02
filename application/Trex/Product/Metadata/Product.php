@@ -454,7 +454,7 @@ class Trex_Product_Metadata_Product extends Qwin_Trex_Metadata
                 array(
                     // 模型类名
                     'name' => 'Trex_Product_Model_Detail',
-                    'asName' => 'detail',
+                    'alias' => 'detail',
                     // Metadata 中包含模型字段,表名,关系的定义,
                     'metadata' => 'Trex_Product_Metadata_Detail',
                     'type' => 'hasOne',

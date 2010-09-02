@@ -30,6 +30,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
     public function  __construct()
     {
         $this->setIdMetadata()
+             ->setDateMetadata()
              ->setOperationMetadata()
              ->parseMetadata(array(
             // 基本属性
@@ -281,7 +282,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         'isDbQuery' => 1,
                     ),
                 ),
-                'date_created' => array(
+                /*'date_created' => array(
                     'basic' => array(
                         'title' => 'LBL_FIELD_POST_DATA',
                         'group' => 'LBL_GROUP_DETAIL_DATA'
@@ -300,14 +301,14 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         '_type' => 'custom',
                         'name' => 'date_modified',
                     ),
-                ),
+                ),*/
             ),
             // 表之间的联系
             'model' => array(
                 array(
                     // 模型类名
                     'name' => 'Trex_Article_Model_Detail',
-                    'asName' => 'detail',
+                    'alias' => 'detail',
                     // Metadata 中包含模型字段,表名,关系的定义,
                     'metadata' => 'Trex_Article_Metadata_Detail',
                     'type' => 'hasOne',
@@ -316,7 +317,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                 ),
                 array(
                     'name' => 'Trex_Category_Model_Category',
-                    'asName' => 'category',
+                    'alias' => 'category',
                     'metadata' => 'Trex_Category_Metadata_Category',
                     'local' => 'category_id',
                     'foreign' => 'id',

@@ -115,7 +115,7 @@ class Trex_Link_Metadata_Link extends Trex_Metadata
             'model' => array(
                 array(
                     'name' => 'Trex_Category_Model_Category',
-                    'asName' => 'category',
+                    'alias' => 'category',
                     'metadata' => 'Trex_Category_Metadata_Category',
                     'local' => 'category_id',
                     'foreign' => 'id',

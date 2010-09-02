@@ -85,7 +85,7 @@ class Trex_Project_Metadata_Status extends Trex_Metadata
             'model' => array(
                 array(
                     'name' => 'Trex_Project_Model_Project',
-                    'asName' => 'project',
+                    'alias' => 'project',
                     'metadata' => 'Trex_Project_Metadata_Project',
                     'type' => 'hasOne',
                     'local' => 'project_id',

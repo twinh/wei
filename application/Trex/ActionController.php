@@ -364,9 +364,9 @@ class Trex_ActionController extends Trex_Controller
             foreach($meta['model'] as $model)
             {
                 // 不删除视图模块的记录
-                if(isset($object[$key][$model['asName']]) && 'db' == $model['aim'])
+                if(isset($object[$key][$model['alias']]) && 'db' == $model['aim'])
                 {
-                    $object[$key][$model['asName']]->delete();
+                    $object[$key][$model['alias']]->delete();
                 }
             }
             $object[$key]->delete();
@@ -441,7 +441,10 @@ class Trex_ActionController extends Trex_Controller
     public function convertAddOrder($value, $name, $data, $copyData)
     {
         $query = $this->_meta->getDoctrineQuery($this->_set);
-        $result = $query->select('Max(`order`) as max_order')->fetchOne();
+        $result = $query
+            ->select($this->_meta['db']['primaryKey'] . ', order')
+            ->orderBy('order DESC')
+            ->fetchOne();
         if(false != $result)
         {
             return $result['max_order'] + 20;
