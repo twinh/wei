@@ -125,7 +125,7 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
             'model' => array(
                 array(
                     'name' => 'Trex_Project_Model_Project',
-                    'asName' => 'project',
+                    'alias' => 'project',
                     'metadata' => 'Trex_Project_Metadata_Project',
                     'type' => 'hasOne',
                     'local' => 'parent_id',
@@ -137,7 +137,7 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
                 ),
                 array(
                     'name' => 'Trex_Project_Model_Status',
-                    'asName' => 'status',
+                    'alias' => 'status',
                     'metadata' => 'Trex_Project_Metadata_Status',
                     'type' => 'hasOne',
                     'local' => 'id',

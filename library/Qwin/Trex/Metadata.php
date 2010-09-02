@@ -161,13 +161,13 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
                 // 设置模型关系
                 call_user_func(
                     array($modelObj, 'hasOne'),
-                    $model['name'] . ' as ' . $model['asName'],
+                    $model['name'] . ' as ' . $model['alias'],
                         array(
                             'local' => $model['local'],
                             'foreign' => $model['foreign']
                         )
                 );
-                $query->leftJoin($modelName . '.' . $model['asName'] . ' ' . $model['asName']);
+                $query->leftJoin($modelName . '.' . $model['alias'] . ' ' . $model['alias']);
             }
         }
         return $query;
@@ -195,8 +195,8 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             {
                 // 存储原来的名称
                 $field['form']['_oldName'] = $field['form']['name'];
-                $field['form']['_arrayName'] = $model['asName'] . '[' . $field['form']['name'] . ']';
-                $field['form']['name'] = $model['asName'] . '_' . $field['form']['name'];
+                $field['form']['_arrayName'] = $model['alias'] . '[' . $field['form']['name'] . ']';
+                $field['form']['name'] = $model['alias'] . '_' . $field['form']['name'];
                 if($field['form']['_oldName'] == $field['form']['id'])
                 {
                     $field['form']['id'] = str_replace('_', '-', $field['form']['name']);
@@ -269,7 +269,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             $queryField = $linkedMetaObj->field->getAttrList(array('isDbQuery', 'isDbField'));
             foreach($queryField as $field)
             {
-                $query->addSelect($model['asName'] . '.' . $field);
+                $query->addSelect($model['alias'] . '.' . $field);
             }
         }
         return $this;
@@ -430,7 +430,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
                 {
                     foreach($model['viewMap'] as $localField => $foreignField)
                     {
-                        $tempKey = $model['asName'] . '_' . $foreignField;
+                        $tempKey = $model['alias'] . '_' . $foreignField;
                         !isset($row[$tempKey]) && $row[$tempKey] = '';
                         $row[$localField] = $row[$tempKey];
                     }
@@ -624,15 +624,15 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             {
                 foreach($dbData as $key => $row)
                 {
-                    $dbData[$key][$model['asName'] . '_' . $fieldMeta['form']['name']] = $str->set($dbData[$key][$model['asName']][$fieldMeta['form']['name']]);
-                    unset($dbData[$key][$model['asName']][$fieldMeta['form']['name']]);
+                    $dbData[$key][$model['alias'] . '_' . $fieldMeta['form']['name']] = $str->set($dbData[$key][$model['alias']][$fieldMeta['form']['name']]);
+                    unset($dbData[$key][$model['alias']][$fieldMeta['form']['name']]);
                 }
             // 二维数组(Edit/Add/Clone)
             } else {
-                if(isset($dbData[$model['asName']]))
+                if(isset($dbData[$model['alias']]))
                 {
-                    $dbData[$model['asName'] . '_' . $fieldMeta['form']['name']] = $dbData[$model['asName']][$fieldMeta['form']['name']];
-                    unset($dbData[$model['asName']][$fieldMeta['form']['name']]);
+                    $dbData[$model['alias'] . '_' . $fieldMeta['form']['name']] = $dbData[$model['alias']][$fieldMeta['form']['name']];
+                    unset($dbData[$model['alias']][$fieldMeta['form']['name']]);
                 }
             }
         //}
@@ -733,7 +733,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         {
             if('db' == $model['aim'])
             {
-                $data[$model['asName']][$model['foreign']] = $data[$model['local']];
+                $data[$model['alias']][$model['foreign']] = $data[$model['local']];
             }
         }
         return $data;
@@ -1034,7 +1034,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
                 /*
                  * 检验是否要保存数据
                  */
-                $method = 'isSave' . $model['asName'] . 'Data';
+                $method = 'isSave' . $model['alias'] . 'Data';
                 if(!method_exists($ctrler, $method)
                     || false === call_user_func_array(
                         array($ctrler, $method),
@@ -1053,7 +1053,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
                 $copyData = $relatedData;
                 foreach($relatedDbMeta['field'] as $name => $field)
                 {
-                    $methodName = str_replace(array('_', '-'), '', 'convertdb' .  $model['asName'] . $name);
+                    $methodName = str_replace(array('_', '-'), '', 'convertdb' .  $model['alias'] . $name);
                     if(method_exists($ctrler, $methodName))
                     {
                         !isset($relatedData[$name]) && $relatedData[$name] = null;

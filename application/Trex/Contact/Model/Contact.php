@@ -1,6 +1,6 @@
 <?php
 /**
- * Model
+ * Contact
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,35 +16,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  Metadata
+ * @package     Trex
+ * @subpackage  Contact
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-7-27 12:37:11
+ * @since       2010-09-01 11:07:46
  */
 
-class Qwin_Metadata_Element_Model extends Qwin_Metadata_Element_Abstract
+class Trex_Contact_Model_Contact extends Trex_Model
 {
-    public function getSampleData()
-    {
-        return array(
-            // 模型类名
-            'name' => null,
-            'alias' => null,
-            // Metadata 中包含模型字段,表名,关系的定义,
-            'metadata' => null,
-            'type' => 'hasOne',
-            'local' => 'id',
-            'foreign' => null,
-            'aim' => 'db',
-            'viewMap' => array(),
-        );
-    }
-
-    public function format()
-    {
-        return $this->_formatAsArray();
-    }
 }

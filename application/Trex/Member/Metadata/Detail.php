@@ -220,7 +220,7 @@ class Trex_Member_Metadata_Detail extends Trex_Metadata
                 array(
                     // 模型类名
                     'name' => 'Trex_Member_Model_Detail',
-                    'asName' => 'detail',
+                    'alias' => 'detail',
                     // Metadata 中包含模型字段,表名,关系的定义,
                     'metadata' => 'Trex_Member_Metadata_Detail',
                     'type' => 'hasOne',
