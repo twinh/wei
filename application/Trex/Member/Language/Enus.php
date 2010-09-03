@@ -55,6 +55,13 @@ class Trex_Member_Language_Enus extends Trex_Language
             'LBL_FIELD_POSITION' => 'Position',
             'LBL_FIELD_TELEPHONE' => 'Telephone',
             'LBL_FIELD_FAX' => 'Fax',
+            'LBL_FIELD_QQ' => 'QQ',
+            'LBL_FIELD_MOBILE' => 'Mobile',
+            'LBL_FIELD_BIRTHDAY' => 'Birthday',
+            'LBL_FIELD_POSTCODE' => 'Postcode',
+            'LBL_FIELD_MEMBER_ID' => 'Member Id',
+            'LBL_FIELD_THEME' => 'Theme',
+            'LBL_FIELD_LANGUAGE' => 'Language',
 
             'LBL_GROUP_BASIC_DATA' => 'Basic Data',
             'LBL_GROUP_DETAIL_DATA' => 'Detail Data',

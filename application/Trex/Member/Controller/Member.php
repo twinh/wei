@@ -142,11 +142,6 @@ class Trex_Member_Controller_Member extends Trex_ActionController
     {
         return $this->Qwin_converter_String->getUuid($val);
     }
-
-    public function convertDbDetailRegTime()
-    {
-        return date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
-    }
     
     /*public function onAfterDb($action, $data)
     {

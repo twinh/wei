@@ -84,6 +84,8 @@ class Trex_Common_Language_Enus extends Trex_Language
             'LBL_FIELD_CATEGORY_NAME' => 'Category Name',
             'LBL_FIELD_CREATOR' => 'Creator',
             'LBL_FIELD_MODIFIER' => 'Modifiter',
+            'LBL_FIELD_CREATED_BY' => 'Created By',
+            'LBL_FIELD_MODIFIED_BY' => 'Modified By',
             'LBL_FIELD_SUMMARY' => 'Summary',
 
             // group
