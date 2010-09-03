@@ -169,11 +169,10 @@ class Trex_Project_Metadata_Bug extends Trex_Metadata
                     'name' => 'Trex_Project_Model_Project',
                     'alias' => 'project',
                     'metadata' => 'Trex_Project_Metadata_Project',
-                    'type' => 'hasOne',
                     'local' => 'project_id',
                     'foreign' => 'id',
-                    'aim' => 'view',
-                    'viewMap' => array(
+                    'type' => 'view',
+                    'fieldMap' => array(
                         'project_id' => 'name',
                     ),
                 ),
@@ -183,8 +182,8 @@ class Trex_Project_Metadata_Bug extends Trex_Metadata
                     'metadata' => 'Trex_Member_Metadata_Member',
                     'local' => 'created_by',
                     'foreign' => 'id',
-                    'aim' => 'view',
-                    'viewMap' => array(
+                    'type' => 'view',
+                    'fieldMap' => array(
                         'created_by' => 'username',
                     ),
                 ),
@@ -194,8 +193,8 @@ class Trex_Project_Metadata_Bug extends Trex_Metadata
                     'metadata' => 'Trex_Member_Metadata_Member',
                     'local' => 'modified_by',
                     'foreign' => 'id',
-                    'aim' => 'view',
-                    'viewMap' => array(
+                    'type' => 'view',
+                    'fieldMap' => array(
                         'modified_by' => 'username',
                     ),
                 ),

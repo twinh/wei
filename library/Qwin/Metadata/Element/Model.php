@@ -35,11 +35,11 @@ class Qwin_Metadata_Element_Model extends Qwin_Metadata_Element_Abstract
             'alias' => null,
             // Metadata 中包含模型字段,表名,关系的定义,
             'metadata' => null,
-            'type' => 'hasOne',
+            'relation' => 'hasOne',
             'local' => 'id',
             'foreign' => null,
-            'aim' => 'db',
-            'viewMap' => array(),
+            'type' => 'db',
+            'fieldMap' => array(),
         );
     }
 

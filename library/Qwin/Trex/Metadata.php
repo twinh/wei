@@ -143,7 +143,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             foreach($metaObj['model'] as $model)
             {
                 // 不连接数据关联的模型
-                if('relatedDb' == $model['aim'])
+                if('relatedDb' == $model['type'])
                 {
                     continue;
                 }
@@ -184,7 +184,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         foreach($meta['model'] as $model)
         {
             // 不连接显示型模型
-            if('db' != $model['aim'])
+            if('db' != $model['type'])
             {
                 continue;
             }
@@ -426,7 +426,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         {
             foreach($modelList as $model)
             {
-                if('view' == $model['aim'])
+                if('view' == $model['type'])
                 {
                     foreach($model['viewMap'] as $localField => $foreignField)
                     {
@@ -731,7 +731,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     {
         foreach($modelList as $model)
         {
-            if('db' == $model['aim'])
+            if('db' == $model['type'])
             {
                 $data[$model['alias']][$model['foreign']] = $data[$model['local']];
             }
@@ -1029,7 +1029,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         $ctrler = Qwin::run('-controller');
         foreach($meta['model'] as $model)
         {
-            if('relatedDb' == $model['aim'])
+            if('relatedDb' == $model['type'])
             {
                 /*
                  * 检验是否要保存数据

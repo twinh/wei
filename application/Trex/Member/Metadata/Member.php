@@ -130,8 +130,8 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                     'type' => 'hasOne',
                     'local' => 'group_id',
                     'foreign' => 'id',
-                    'aim' => 'view',
-                    'viewMap' => array(
+                    'type' => 'view',
+                    'fieldMap' => array(
                         'group_id' => 'name',
                     ),
                 ),
@@ -142,8 +142,8 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                     'type' => 'hasOne',
                     'local' => 'id',
                     'foreign' => 'project_id',
-                    'aim' => 'relatedDb',
-                    'dbMap' => array(
+                    'type' => 'relatedDb',
+                    'fieldMap' => array(
                         'id' => 'project_id',
                         'status' => 'status',
                         'date_modified' => 'date_created',

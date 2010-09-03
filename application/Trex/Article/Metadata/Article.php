@@ -48,7 +48,6 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                             ),
                             'article'
                         ),
-                        'name' => 'category_id',
                     ),
                     'attr' => array(
                         'isListLink' => 1,
@@ -60,7 +59,6 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                 'category_2' => array(
                     'form' => array(
                         '_type' => 'hidden',
-                        'name' => 'category_2',
                     ),
                     'attr' => array(
                         'isListLink' => 1,
@@ -73,7 +71,6 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                 'category_3' => array(
                     'form' => array(
                         '_type' => 'hidden',
-                        'name' => 'category_3',
                     ),
                     'attr' => array(
                         'isListLink' => 1,
@@ -84,9 +81,6 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     ),
                 ),
                 'title' => array(
-                    'form' => array(
-                        'name' => 'title',
-                    ),
                     'validator' => array(
                         'rule' => array(
                             'required' => true,
@@ -101,7 +95,6 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                             array('Project_Helper_CommonClass', 'get'),
                             'font-style',
                         ),
-                        'name' => 'title_style',
                     ),
                     'attr' => array(
                         'isList' => 0,
@@ -116,7 +109,6 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                             'font-color',
                         ),
                         '_value' => 'NULL',
-                        'name' => 'title_color',
                     ),
                     'attr' => array(
                         'isList' => 0,
@@ -124,9 +116,6 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     ),
                 ),
                 'short_title' => array(
-                    'form' => array(
-                        'name' => 'short_title',
-                    ),
                     'attr' => array(
                         'isList' => 0,
                     ),
@@ -137,10 +126,6 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     ),
                 ),
                 'author' => array(
-                    'form' => array(
-                        '_type' => 'text',
-                        'name' => 'author',
-                    ),
                     'attr' => array(
                         'isListLink' => 1,
                         'isList' => 0,
@@ -154,7 +139,6 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                             'fileTree',
                             'ajaxUpload'
                         ),
-                        'name' => 'thumb',
                     ),
                     'attr' => array(
                         'isListLink' => 1,
@@ -169,7 +153,6 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     ),
                     'form' => array(
                         '_type' => 'text',
-                        'name' => 'jump_to_url',
                     ),
                     'attr' => array(
                         'isListLink' => 1,
@@ -184,7 +167,6 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     ),
                     'form' => array(
                         '_value' => 0,
-                        'name' => 'hit',
                     ),
                 ),
                 'order' => array(
@@ -193,15 +175,11 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     ),
                     'form' => array(
                         '_value' => 0,
-                        'name' => 'order',
                     ),
                 ),
                 'page_name' => array(
                     'basic' => array(
                         'group' => 'LBL_GROUP_PAGE_DATA',
-                    ),
-                    'form' => array(
-                        'name' => 'page_name',
                     ),
                     'attr' => array(
                         'isList' => 0,
@@ -210,9 +188,6 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                 'template' => array(
                     'basic' => array(
                         'group' => 'LBL_GROUP_PAGE_DATA',
-                    ),
-                    'form' => array(
-                        'name' => 'template',
                     ),
                     'attr' => array(
                         'isList' => 0,
@@ -228,7 +203,6 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                             array('Project_Helper_CommonClass', 'get'),
                             'yes-or-no',
                         ),
-                        'name' => 'is_posted',
                     ),
                     'attr' => array(
                         'isListLink' => 1,
@@ -253,7 +227,6 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                             array('Project_Helper_CommonClass', 'get'),
                             'yes-or-no',
                         ),
-                        'name' => 'is_index',
                     ),
                     'attr' => array(
                         'isListLink' => 1,
@@ -271,7 +244,6 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                 'content_preview' => array(
                     'form' => array(
                         '_type' => 'textarea',
-                        'name' => 'content_preview',
                     ),
                     'attr' => array(
                         'isListLink' => 1,
@@ -304,10 +276,8 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
             // 表之间的联系
             'model' => array(
                 array(
-                    // 模型类名
                     'name' => 'Trex_Article_Model_Detail',
                     'alias' => 'detail',
-                    // Metadata 中包含模型字段,表名,关系的定义,
                     'metadata' => 'Trex_Article_Metadata_Detail',
                     'type' => 'hasOne',
                     'local' => 'id',
@@ -319,8 +289,8 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     'metadata' => 'Trex_Category_Metadata_Category',
                     'local' => 'category_id',
                     'foreign' => 'id',
-                    'aim' => 'view',
-                    'viewMap' => array(
+                    'type' => 'view',
+                    'fieldMap' => array(
                         'category_id' => 'name',
                     ),
                 ),

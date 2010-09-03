@@ -364,7 +364,7 @@ class Trex_ActionController extends Trex_Controller
             foreach($meta['model'] as $model)
             {
                 // 不删除视图模块的记录
-                if(isset($object[$key][$model['alias']]) && 'db' == $model['aim'])
+                if(isset($object[$key][$model['alias']]) && 'db' == $model['type'])
                 {
                     $object[$key][$model['alias']]->delete();
                 }
