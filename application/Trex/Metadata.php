@@ -76,38 +76,46 @@ class Trex_Metadata extends Qwin_Trex_Metadata
     public function setDateMetadata()
     {
         $this->addField(array(
-            'date_created' => array(
+            'created_by' => array(
                 'basic' => array(
-                    'order' => 1000,
+                    'order' => 1020,
                 ),
                 'form' => array(
                     '_type' => 'custom',
-                    'name' => 'date_created',
                 ),
                 'attr' => array(
-                    'isListLink' => 0,
-                    'isList' => 1,
-                    'isDbField' => 1,
-                    'isDbQuery' => 1,
+                    'isList' => 0,
+                    'isReadonly' => 1,
+                ),
+            ),
+            'modified_by' => array(
+                'basic' => array(
+                    'order' => 1040,
+                ),
+                'form' => array(
+                    '_type' => 'custom',
+                ),
+                'attr' => array(
+                    'isList' => 0,
+                ),
+            ),
+            'date_created' => array(
+                'basic' => array(
+                    'order' => 1060,
+                ),
+                'form' => array(
+                    '_type' => 'custom',
+                ),
+                'attr' => array(
                     'isReadonly' => 1,
                 ),
             ),
             'date_modified' => array(
                 'basic' => array(
-                    'title' => 'LBL_FIELD_DATE_MODIFIED',
-                    'descrip' => '',
-                    'order' => 1020,
-                    'group' => 'LBL_GROUP_BASIC_DATA',
+                    'order' => 1080,
                 ),
                 'form' => array(
                     '_type' => 'custom',
-                    'name' => 'date_modified',
-                ),
-                'attr' => array(
-                    'isListLink' => 0,
-                    'isList' => 1,
-                    'isDbField' => 1,
-                    'isDbQuery' => 1,
                 ),
             ),
         ));
@@ -124,7 +132,7 @@ class Trex_Metadata extends Qwin_Trex_Metadata
         $this->addField(array(
             'operation' => array(
                 'basic' => array(
-                    'order' => 1040,
+                    'order' => 1100,
                 ),
                 'form' => array(
                     '_type' => 'custom',

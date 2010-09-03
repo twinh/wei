@@ -29,9 +29,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
 {
     public function  __construct()
     {
-        $this->setIdMetadata()
-             ->setDateMetadata()
-             ->setOperationMetadata()
+        $this->setCommonMetadata()
              ->parseMetadata(array(
             // 基本属性
             'field' => array(
@@ -48,7 +46,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                                 'module' => 'Category',
                                 'controller' => 'Category',
                             ),
-                            'news'
+                            'article'
                         ),
                         'name' => 'category_id',
                     ),

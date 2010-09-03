@@ -39,7 +39,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
      */
     protected $_orderLength = 20;
 
-    /**
+   /**
      * 查找属性的缓存数组
      * @var array
      */
@@ -202,6 +202,12 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         // 加入缓存中
         $this->_attrCache[$cacheName] = $result;
         return $result;
+    }
+
+    public function setField($name, $data)
+    {
+        $this->_data[$name] = $this->_multiArrayMerge($this->_data[$name], $data);
+        return $this;
     }
 
     /**

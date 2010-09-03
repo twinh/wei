@@ -34,61 +34,34 @@ class Trex_Member_Metadata_Detail extends Trex_Metadata
             'field' => array(
                 'id' => array(
                     'basic' => array(
-                        'title' => 'LBL_FIELD_ID',
-                        'descrip' => '',
-                        'order' => 50,
                         'group' => 'LBL_GROUP_DETAIL_DATA',
                     ),
                     'form' => array(
                         '_type' => 'hidden',
-                        '_typeExt' => '',
-                        '_value' => '',
-                        'name' => 'id',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
                         'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                 ),
                 'member_id' => array(
                     'basic' => array(
-                        'title' => 'LBL_FIELD_ID',
-                        'descrip' => '',
-                        'order' => 55,
                         'group' => 'LBL_GROUP_DETAIL_DATA',
                     ),
                     'form' => array(
                         '_type' => 'hidden',
-                        '_typeExt' => '',
-                        '_value' => '',
-                        'name' => 'member_id',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
                         'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                 ),
                 'nickname' => array(
                     'basic' => array(
-                        'title' => 'LBL_FIELD_NICKNAME',
-                        'descrip' => '',
-                        'order' => 60,
                         'group' => 'LBL_GROUP_DETAIL_DATA',
                     ),
                     'form' => array(
-                        '_type' => 'text',
-                        '_typeExt' => '',
-                        'name' => 'nickname',
                     ),
                     'attr' => array(
-                        'isListLink' => 0,
                         'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                     'validator' => array(
                         'rule' => array(
@@ -98,9 +71,6 @@ class Trex_Member_Metadata_Detail extends Trex_Metadata
                 ),
                 'sex' => array(
                     'basic' => array(
-                        'title' => 'LBL_FIELD_SEX',
-                        'descrip' => '',
-                        'order' => 65,
                         'group' => 'LBL_GROUP_DETAIL_DATA',
                     ),
                     'form' => array(
@@ -113,9 +83,6 @@ class Trex_Member_Metadata_Detail extends Trex_Metadata
                     ),
                     'attr' => array(
                         'isListLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                     'converter' => array(
                         'list' => array(
@@ -124,45 +91,16 @@ class Trex_Member_Metadata_Detail extends Trex_Metadata
                         )
                     ),
                 ),
-                'reg_time' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_REG_TIME',
-                        'descrip' => '',
-                        'order' => 70,
-                        'group' => 'LBL_GROUP_DETAIL_DATA',
-                    ),
-                    'form' => array(
-                        '_type' => 'custom',
-                        '_typeExt' => '',
-                        '_value' => '',
-                        'name' => 'reg_time',
-                    ),
-                    'attr' => array(
-                        'isListLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
-                        'isReadonly' => 1,
-                    ),
-                ),
                 'reg_ip' => array(
                     'basic' => array(
-                        'title' => 'LBL_FIELD_REG_IP',
-                        'descrip' => '',
-                        'order' => 75,
                         'group' => 'LBL_GROUP_DETAIL_DATA',
                     ),
                     'form' => array(
                         '_type' => 'custom',
-                        '_typeExt' => '',
-                        '_value' => '',
                         'name' => 'reg_ip',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
                         'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                         'isReadonly' => 1,
                     ),
                     'converter' => array(
@@ -174,44 +112,77 @@ class Trex_Member_Metadata_Detail extends Trex_Metadata
                         )
                     )
                 ),
+                'qq' => array(
+                    'basic' => array(
+                        'group' => 'LBL_GROUP_DETAIL_DATA',
+                    ),
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
+                ),
+                'telephone' => array(
+                    'basic' => array(
+                        'group' => 'LBL_GROUP_DETAIL_DATA',
+                    ),
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
+                ),
+                'qq' => array(
+                    'basic' => array(
+                        'group' => 'LBL_GROUP_DETAIL_DATA',
+                    ),
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
+                ),
+                'mobile' => array(
+                    'basic' => array(
+                        'group' => 'LBL_GROUP_DETAIL_DATA',
+                    ),
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
+                ),
+                'birthday' => array(
+                    'basic' => array(
+                        'group' => 'LBL_GROUP_DETAIL_DATA',
+                    ),
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
+                ),
+                'postcode' => array(
+                    'basic' => array(
+                        'group' => 'LBL_GROUP_DETAIL_DATA',
+                    ),
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
+                ),
                 'theme' => array(
                     'basic' => array(
-                        'title' => 'LBL_FIELD_THEME_NAME',
-                        'descrip' => '',
-                        'order' => 80,
                         'group' => 'LBL_GROUP_DETAIL_DATA',
                     ),
                     'form' => array(
                         '_type' => 'custom',
-                        '_typeExt' => '',
                         '_value' => 'base',
-                        'name' => 'theme',
                     ),
                     'attr' => array(
-                        'isListLink' => 0,
                         'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                 ),
                 'language' => array(
                     'basic' => array(
-                        'title' => 'LBL_FIELD_LANG',
-                        'descrip' => '',
-                        'order' => 85,
                         'group' => 'LBL_GROUP_DETAIL_DATA',
                     ),
                     'form' => array(
                         '_type' => 'custom',
-                        '_typeExt' => '',
                         '_value' => 'en',
                         'name' => 'language',
                     ),
                     'attr' => array(
-                        'isListLink' => 0,
                         'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                 ),
             ),
@@ -230,19 +201,11 @@ class Trex_Member_Metadata_Detail extends Trex_Metadata
             ),
             'db' => array(
                 'table' => 'member_detail',
-                'primaryKey' => 'id',
             ),
             // 页面显示
             'page' => array(
                 'title' => 'LBL_MODULE_MEMBER_DETAIL',
-                'rowNum' => 10,
             ),
-            'shortcut' => array(
-                array(
-                    'name' => '快速添加2',
-                    'link' => 'http://bbbb',
-                )
-            )
         ));
     }
 }
