@@ -646,21 +646,21 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      * @param array $data 入库数据
      * @return 新数据
      */
-    public function restoreData($meta, $data)
+    public function restoreData($restoreMeta, $meta, $data)
     {
-        foreach($meta as $key => $field)
+        foreach($restoreMeta as $key => $field)
         {
             if(!isset($data[$key]))
             {
                 continue;
             }
-            if(!isset($field['form']['_oldName']))
+            if(!isset($meta[$key]['form']['_oldName']))
             {
                 $newData[$key] = $data[$key];
             } else {
-                $modelName = str_replace('_' .$field['form']['_oldName'], '', $key);
+                $modelName = str_replace('_' . $meta[$key]['form']['_oldName'], '', $key);
                 !isset($newData[$modelName]) && $newData[$modelName] = array();
-                $newData[$modelName][$field['form']['_oldName']] = $data[$key];
+                $newData[$modelName][$meta[$key]['form']['_oldName']] = $data[$key];
             }
         }
         return $newData;

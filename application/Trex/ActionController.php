@@ -222,7 +222,7 @@ class Trex_ActionController extends Trex_Controller
              */
             $data = $this->_meta->convertSingleData($relatedField, $relatedField, 'db', $_POST);
             $this->_meta->validateData($addDbField, $data);
-            $data = $meta->restoreData($relatedField, $data);
+            $data = $meta->restoreData($relatedField, $relatedField, $data);
             $data = $meta->setForeignKeyData($meta['model'], $data);
 
             /**
@@ -313,7 +313,7 @@ class Trex_ActionController extends Trex_Controller
              */
             $data = $meta->convertSingleData($relatedField, $relatedField, 'db', $_POST);
             $this->_meta->validateData($relatedField, $data + $_POST);
-            $data = $meta->restoreData($editDbField, $data);
+            $data = $meta->restoreData($editDbField, $relatedField, $data);
 
             /**
              * 保存关联模型的数据
@@ -447,7 +447,7 @@ class Trex_ActionController extends Trex_Controller
             ->fetchOne();
         if(false != $result)
         {
-            return $result['max_order'] + 20;
+            return $result['order'] + 20;
         }
         return 0;
     }
