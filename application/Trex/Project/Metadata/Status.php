@@ -90,8 +90,8 @@ class Trex_Project_Metadata_Status extends Trex_Metadata
                     'type' => 'hasOne',
                     'local' => 'project_id',
                     'foreign' => 'id',
-                    'aim' => 'view',
-                    'viewMap' => array(
+                    'type' => 'view',
+                    'fieldMap' => array(
                         'project_id' => 'name',
                     ),
                 ),

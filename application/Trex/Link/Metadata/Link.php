@@ -119,8 +119,8 @@ class Trex_Link_Metadata_Link extends Trex_Metadata
                     'metadata' => 'Trex_Category_Metadata_Category',
                     'local' => 'category_id',
                     'foreign' => 'id',
-                    'aim' => 'view',
-                    'viewMap' => array(
+                    'type' => 'view',
+                    'fieldMap' => array(
                         'category_id' => 'name',
                     ),
                 ),
