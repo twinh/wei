@@ -428,7 +428,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             {
                 if('view' == $model['type'])
                 {
-                    foreach($model['viewMap'] as $localField => $foreignField)
+                    foreach($model['fieldMap'] as $localField => $foreignField)
                     {
                         $tempKey = $model['alias'] . '_' . $foreignField;
                         !isset($row[$tempKey]) && $row[$tempKey] = '';
@@ -1044,7 +1044,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
                 }
                     
                 $relatedData = array();
-                foreach($model['dbMap'] as $localField => $foreignField)
+                foreach($model['fieldMap'] as $localField => $foreignField)
                 {
                     $relatedData[$foreignField] = $data[$localField];
                 }
