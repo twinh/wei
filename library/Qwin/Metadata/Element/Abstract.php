@@ -45,13 +45,8 @@ abstract class Qwin_Metadata_Element_Abstract extends Qwin_Metadata_Abstract
         $tempData = &$this->_data;
         foreach($keyList as $key)
         {
-            if(isset($tempData[$key]))
-            {
-                $tempData = &$tempData[$key];
-            } else {
-                // 找不到该键名
-                return false;
-            }
+            !isset($tempData[$key]) && $tempData[$key] = array();
+            $tempData = &$tempData[$key];
         }
         $tempData = $value;
         return $this;

@@ -64,9 +64,15 @@ class Trex_Common_View_JqGrid extends Trex_View
                 'name' => $field,
                 'index' => $field,
             );
+            // 隐藏主键
             if($primaryKey == $field)
             {
                 $columnSetting[count($columnSetting) - 1]['hidden'] = true;
+            }
+            // 宽度控制
+            if(isset($relatedField[$field]['list']) && isset($relatedField[$field]['list']['width']))
+            {
+                $columnSetting[count($columnSetting) - 1]['width'] = $relatedField[$field]['list']['width'];
             }
         }
         $columnName = $arrayHelper->jsonEncode($columnName);

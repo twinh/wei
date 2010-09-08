@@ -139,7 +139,6 @@ class Trex_Metadata extends Qwin_Trex_Metadata
                 ),
                 'attr' => array(
                     'isListLink' => 0,
-                    'isList' => 1,
                     'isDbField' => 0,
                     'isDbQuery' => 0,
                     'isView' => 0,
