@@ -47,18 +47,37 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
                                 'controller' => 'Project',
                             ),
                             NULL,
-                            array('id', NULL, 'name')
+                            array('id', 'parent_id', 'name')
                         ),
-                        'name' => 'parent_id',
                     ),
                     'attr' => array(
                         'isListLink' => 1,
                     ),
                 ),
-                'name' => array(
-                    'form' => array(
-                        'name' => 'name',
+                'introducer' => array(
+                    'attr' => array(
+                        'isList' => 0,
                     ),
+                ),
+                'customer_id' => array(
+                    'form' => array(
+                        '_type' => 'select',
+                        '_resourceGetter' => array(
+                            array('Project_Hepler_Category', 'getTreeResource'),
+                            array(
+                                'namespace' => 'Trex',
+                                'module' => 'Customer',
+                                'controller' => 'Customer',
+                            ),
+                            NULL,
+                            array('id', NULL, 'name')
+                        ),
+                    ),
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
+                ),
+                'name' => array(
                     'validator' => array(
                         'rule' => array(
                             'required' => true,
@@ -67,6 +86,12 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
                     ),
                 ),
                 'code' => array(
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
+                ),
+                'money' => array(
+
                 ),
                 'status' => array(
                     'form' => array(
@@ -93,31 +118,35 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
                 'start_time' => array(
                     'form' => array(
                         '_widget' => 'datepicker',
-                        'name' => 'start_time',
                     ),
                 ),
                 'planed_end_time' => array(
                     'form' => array(
                         '_widget' => 'datepicker',
-                        'name' => 'planed_end_time',
                     ),
                 ),
                 'end_time' => array(
                     'form' => array(
                         '_widget' => 'datepicker',
-                        'name' => 'end_time',
+                    ),
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
+                ),
+                'delay_reason' => array(
+                    'form' => array(
+                        '_type' => 'textarea',
+                    ),
+                    'attr' => array(
+                        'isList' => 0,
                     ),
                 ),
                 'description' => array(
                     'form' => array(
                         '_type' => 'textarea',
-                        'name' => 'description',
                     ),
                     'attr' => array(
-                        'isListLink' => 0,
                         'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                 ),
             ),
@@ -127,7 +156,6 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
                     'name' => 'Trex_Project_Model_Project',
                     'alias' => 'project',
                     'metadata' => 'Trex_Project_Metadata_Project',
-                    'type' => 'hasOne',
                     'local' => 'parent_id',
                     'foreign' => 'id',
                     'type' => 'view',
@@ -139,7 +167,6 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
                     'name' => 'Trex_Project_Model_Status',
                     'alias' => 'status',
                     'metadata' => 'Trex_Project_Metadata_Status',
-                    'type' => 'hasOne',
                     'local' => 'id',
                     'foreign' => 'project_id',
                     'type' => 'relatedDb',
@@ -158,7 +185,7 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
             'db' => array(
                 'table' => 'project',
                 'order' => array(
-                    array('date_created', 'DESC'),
+                    array('start_time', 'DESC'),
                 ),
             ),
             // 页面显示
@@ -168,5 +195,7 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
             'shortcut' => array(
             )
         ));
+        $this->field->set('date_created.attr.isList', 0);
+        $this->field->set('date_modified.attr.isList', 0);
     }
 }
