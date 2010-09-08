@@ -279,7 +279,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     'name' => 'Trex_Article_Model_Detail',
                     'alias' => 'detail',
                     'metadata' => 'Trex_Article_Metadata_Detail',
-                    'type' => 'hasOne',
+                    'type' => 'db',
                     'local' => 'id',
                     'foreign' => 'article_id',
                 ),

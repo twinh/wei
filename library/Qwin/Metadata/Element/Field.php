@@ -31,13 +31,13 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
      * 排序的大小,用于自动生成排序值
      * @var int
      */
-    protected $_order = 0;
+    //protected $_order = 0;
 
     /**
      * 排序的每次递增的数量
      * @var int
      */
-    protected $_orderLength = 20;
+    //protected $_orderLength = 20;
 
    /**
      * 查找属性的缓存数组
@@ -145,8 +145,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         // 设置排序
         if(!isset($metadata['basic']['order']))
         {
-            $metadata['basic']['order'] = $this->_order;
-            $this->_order += $this->_orderLength;
+            $metadata['basic']['order'] = Qwin_Metadata_Element_Field_Order::getOrder();
         } else {
             $metadata['basic']['order'] = (int)$metadata['basic']['order'];
         }

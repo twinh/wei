@@ -123,4 +123,13 @@ abstract class Qwin_Metadata_Element_Abstract extends Qwin_Metadata_Abstract
     {
         return $this;
     }
+
+    public function unlink($key)
+    {
+        if(isset($this->_data[$key]))
+        {
+            unset($this->_data[$key]);
+        }
+        return $this;
+    }
 }

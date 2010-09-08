@@ -1,6 +1,6 @@
 <?php
 /**
- * Enus
+ * Order
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,21 +17,21 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  
+ * @subpackage  Metadata
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-01 11:27:43
+ * @since       2010-09-08 9:45:22
  */
 
-class Trex_Contact_Language_Enus extends Trex_Language
+class Qwin_Metadata_Element_Field_Order
 {
-    public function __construct()
-    {
-        return $this->_data += array(
+    public static $order = 0;
+    public static $orderLength = 20;
 
-            'LBL_MODULE_CONTACT' => 'Contact',
-        );
+    public static function getOrder()
+    {
+        return self::$order = self::$order + self::$orderLength;
     }
 }

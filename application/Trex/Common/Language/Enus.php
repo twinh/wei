@@ -111,6 +111,19 @@ class Trex_Common_Language_Enus extends Trex_Language
 
             'LBL_HTML_TITLE' => 'Content Management System - Powered by Qwin Framework',
             'LBL_FOOTER_COPYRIGHT' => 'Powered by <a>Qwin Framework</a>. Copyright &copy; 2009-2010 <a>Twin</a>. All rights reserved.',
+
+
+            // TODO 加载其他模块时,同时加载他们的语言类
+            'LBL_FIELD_FIRST_NAME' => 'First Name',
+            'LBL_FIELD_LAST_NAME' => 'Last Name',
+            'LBL_FIELD_NICKNAME' => 'Nickname',
+            'LBL_FIELD_PHOTO' => 'Photo',
+            'LBL_FIELD_RELATION' => 'Relation',
+            'LBL_FIELD_BIRTHDAY' => 'Birthday',
+            'LBL_FIELD_EMAIL' => 'Email',
+            'LBL_FIELD_TELEPHONE' => 'Telephone',
+            'LBL_FIELD_MOBILE' => 'Mobile',
+            'LBL_FIELD_SEX' => 'Sex',
         );
     }
 }
