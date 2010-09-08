@@ -81,8 +81,10 @@ abstract class Qwin_Metadata extends Qwin_Metadata_Abstract
      * @param string $type
      * @param mixed $data
      */
-    private function _add($type, $data, $overwrite = false)
+    private function _add($type, $data)
     {
+        //echo $type . '<p>';
+        //p($data);
         if(!in_array($type, $this->_banType))
         {
             $name = strtolower($type);
@@ -96,15 +98,7 @@ abstract class Qwin_Metadata extends Qwin_Metadata_Abstract
                 {
                     $this->_data[$name] = new $class;
                 }
-                if(false == $overwrite)
-                {
-                    //$this->_originalData[$name] += $data;
-                    // TODO 仅对新数据进行格式化
-                    $this->_data[$name]->addData($data)->format();
-                } else {
-                    //$this->_originalData[$name] = $data;
-                    $this->_data[$name]->setData($data)->format();
-                }
+                $this->_data[$name]->addData($data)->format();
             }
         }
     }

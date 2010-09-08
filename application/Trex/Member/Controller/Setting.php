@@ -69,7 +69,7 @@ class Trex_Member_Controller_Setting extends Trex_Controller
                     ))
                     ->where('id = ?', $member['id'])
                     ->fetchOne();
-            $result['detail']['language'] = $language;
+            $result['language'] = $language;
             $result->save();
             $url = Qwin::run('-url')->createUrl($this->_set);
             $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
@@ -120,7 +120,7 @@ class Trex_Member_Controller_Setting extends Trex_Controller
                     ))
                     ->where('id = ?', $member['id'])
                     ->fetchOne();
-            $result['detail']['theme'] = $theme;
+            $result['theme'] = $theme;
             $result->save();
             $url = Qwin::run('-url')->createUrl($this->_set);
             $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
@@ -139,8 +139,8 @@ class Trex_Member_Controller_Setting extends Trex_Controller
         );
         $query = $this->meta->getQuery($set);
         $query = $query->where('id = ?', $loginState['id'])->fetchOne();
-        $query['detail']['lang'] = $ses->get('lang');
-        $query['detail']->save();
+        $query['lang'] = $ses->get('lang');
+        $query->save();
         Qwin::run('-url')->to(url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], 'SwitchLang')));
     }
 }

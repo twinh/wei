@@ -70,7 +70,7 @@ class Trex_Common_Language_Enus extends Trex_Language
             'LBL_MEMBER_CENTER' => 'Member Center',
 
             // field
-            'LBL_FIELD_ID' => 'ID',
+            'LBL_FIELD_ID' => 'Id',
             'LBL_FIELD_NAME' => 'Name',
             'LBL_FIELD_NAMESPACE' => 'Namespace',
             'LBL_FIELD_TITLE' => 'Title',
@@ -114,6 +114,7 @@ class Trex_Common_Language_Enus extends Trex_Language
 
 
             // TODO 加载其他模块时,同时加载他们的语言类
+            'LBL_FIELD_CONTACT_ID' => 'Contact Id',
             'LBL_FIELD_FIRST_NAME' => 'First Name',
             'LBL_FIELD_LAST_NAME' => 'Last Name',
             'LBL_FIELD_NICKNAME' => 'Nickname',

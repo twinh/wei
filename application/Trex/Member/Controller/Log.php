@@ -91,8 +91,8 @@ class Trex_Member_Controller_Log extends Trex_Controller
              */
             $member = $result->toArray();
             $ses->set('member',  $member);
-            $ses->set('style', $member['detail']['theme']);
-            $ses->set('language', $member['detail']['language']);
+            $ses->set('style', $member['theme']);
+            $ses->set('language', $member['language']);
 
             /**
              * 跳转到上一页或默认首页

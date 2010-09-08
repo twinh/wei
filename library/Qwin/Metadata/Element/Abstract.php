@@ -38,6 +38,41 @@ abstract class Qwin_Metadata_Element_Abstract extends Qwin_Metadata_Abstract
     {
         return $this->_data;
     }
+
+    public function set($key, $value, $delimiter = '.')
+    {
+        $keyList = explode($delimiter, $key);
+        $tempData = &$this->_data;
+        foreach($keyList as $key)
+        {
+            if(isset($tempData[$key]))
+            {
+                $tempData = &$tempData[$key];
+            } else {
+                // 找不到该键名
+                return false;
+            }
+        }
+        $tempData = $value;
+        return $this;
+    }
+
+    public function get($key, $value, $delimiter = '.')
+    {
+        $keyList = explode($delimiter, $key);
+        $tempData = &$this->_data;
+        foreach($keyList as $key)
+        {
+            if(isset($tempData[$key]))
+            {
+                $tempData = &$tempData[$key];
+            } else {
+                // 找不到该键名
+                return false;
+            }
+        }
+        return $tempData;
+    }
     
     /**
      * 设置数据

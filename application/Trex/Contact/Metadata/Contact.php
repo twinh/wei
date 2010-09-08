@@ -61,9 +61,12 @@ class Trex_Contact_Metadata_Contact extends Trex_Metadata
                         ),
                     ),
                 ),
-                'relation' => array(
+                'related_module' => array(
+                    'form' => array(
+                        '_type' => 'hidden',
+                    ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isList' => 0,
                     ),
                 ),
                 'birthday' => array(
@@ -79,6 +82,16 @@ class Trex_Contact_Metadata_Contact extends Trex_Metadata
                 ),
                 'mobile' => array(
 
+                ),
+                'date_created' => array(
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
+                ),
+                'date_modified' => array(
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
                 ),
             ),
             'model' => array(

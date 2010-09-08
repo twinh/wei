@@ -45,6 +45,11 @@ class Trex_Common_View_JqGridJson extends Trex_View
             $rowData[$i][$primaryKey] = $row[$primaryKey];
             foreach($this->listField as $field)
             {
+                if(null == $row[$field])
+                {
+                    // 使列表 null 类型数据能正确显示
+                    $row[$field] = '<em>(null)<em>';
+                }
                 $rowData[$i]['cell'][] = $row[$field];
             }
             $i++;
