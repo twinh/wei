@@ -91,7 +91,6 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
                     ),
                 ),
                 'money' => array(
-
                 ),
                 'status' => array(
                     'form' => array(
@@ -195,6 +194,7 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
             'shortcut' => array(
             )
         ));
+        $this->field->set('operation.list.width', 200);
         $this->field->set('date_created.attr.isList', 0);
         $this->field->set('date_modified.attr.isList', 0);
     }

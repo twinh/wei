@@ -42,6 +42,7 @@ class Trex_Project_Language_Enus extends Trex_Language
             'LBL_FIELD_CUSTOMER_ID' => 'Customer Id',
             'LBL_FIELD_MONEY' => 'Money',
             'LBL_FIELD_DELAY_REASON' => 'Delay Reason',
+            'LBL_FIELD_MORE_OPERATION' => 'More Operation',
 
             'LBL_FIELD_PROJECT_NAME' => 'Project Name',
             'LBL_FIELD_PROJECT' => 'Project',
