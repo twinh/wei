@@ -47,16 +47,20 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                             NULL,
                             array('id', NULL, 'name')
                         ),
-                        'name' => 'group_id',
                     ),
                     'attr' => array(
                         'isListLink' => 1,
                     ),
                 ),
-                'username' => array(
+                'contact_id' => array(
                     'form' => array(
-                        'name' => 'username',
+                        '_type' => 'hidden',
                     ),
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
+                ),
+                'username' => array(
                     'attr' => array(
                         'isReadonly' => 1,
                     ),
@@ -68,9 +72,6 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                     ),
                 ),
                 'password' => array(
-                    'form' => array(
-                        'name' => 'password',
-                    ),
                     'attr' => array(
                         'isList' => 0,
                         'isReadonly' => 1,
@@ -89,9 +90,6 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                     ),
                 ),
                 'email' => array(
-                    'form' => array(
-                        'name' => 'email',
-                    ),
                     'validator' => array(
                         'rule' => array(
                             'required' => true,
@@ -100,17 +98,30 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                         ),
                     ),
                 ),
+                'reg_ip' => array(
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
+                ),
+                'theme' => array(
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
+                ),
+                'language' => array(
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
+                ),
             ),
             // 表之间的联系
             'model' => array(
-                array(
-                    // 模型类名
-                    'name' => 'Trex_Member_Model_Detail',
-                    'alias' => 'detail',
-                    // Metadata 中包含模型字段,表名,关系的定义,
-                    'metadata' => 'Trex_Member_Metadata_Detail',
-                    'local' => 'id',
-                    'foreign' => 'member_id',
+                'contact' => array(
+                    'name' => 'Trex_Contact_Model_Contact',
+                    'alias' => 'contact',
+                    'metadata' => 'Trex_Contact_Metadata_Contact',
+                    'local' => 'contact_id',
+                    'foreign' => 'id',
                 ),
                 /*array(
                     // 模型类名

@@ -41,6 +41,17 @@ class Trex_Contact_Metadata_Contact extends Trex_Metadata
                 'nickname' => array(
 
                 ),
+                'photo' => array(
+                    'form' => array(
+                        '_widget' => array(
+                            'fileTree',
+                            'ajaxUpload',
+                        ),
+                    ),
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
+                ),
                 'sex' => array(
                     'form' => array(
                         '_type' => 'select',
@@ -63,7 +74,10 @@ class Trex_Contact_Metadata_Contact extends Trex_Metadata
                 'email' => array(
 
                 ),
-                'phone' => array(
+                'telephone' => array(
+
+                ),
+                'mobile' => array(
 
                 ),
             ),

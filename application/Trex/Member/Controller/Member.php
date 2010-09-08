@@ -27,6 +27,18 @@
 
 class Trex_Member_Controller_Member extends Trex_ActionController
 {
+    public function actionIndex()
+    {
+        $this->_meta->model->unlink('contact');
+        parent::actionIndex();
+    }
+
+    public function actionList()
+    {
+        $this->_meta->model->unlink('contact');
+        parent::actionList();
+    }
+
     /**
      * 编辑密码
      * @return object 实例化编辑操作
@@ -154,4 +166,14 @@ class Trex_Member_Controller_Member extends Trex_ActionController
             exit();
         }
     }*/
+
+    public function convertDbContactCreatedBy($value, $name, $data, $copyData)
+    {
+        return $this->_member['id'];
+    }
+
+    public function convertDbContactModifiedBy($value, $name, $data, $copyData)
+    {
+        return $this->_member['id'];
+    }
 }

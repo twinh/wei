@@ -20,3 +20,8 @@ Qwin Future Feature
     数组文件数据库
         提供基本的查询,适用于少量数据的高速储存
 
+Qwin 4.0 Preview
+    模型之间的自由连接
+    db,view,relatedDb多种类型结合
+    模型连接中,域的自由配置
+
