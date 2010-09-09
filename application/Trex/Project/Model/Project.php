@@ -25,6 +25,6 @@
  * @since       2010-06-12 17:17:04
  */
 
-class Trex_Project_Model_Project extends Doctrine_Record
+class Trex_Project_Model_Project extends Trex_Model
 {
 }

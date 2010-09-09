@@ -26,6 +26,6 @@
  * @since     2010-7-18 13:58:36
  */
 
-class Trex_CustomerFeedback_Model_CustomerFeedback extends Doctrine_Record
+class Trex_CustomerFeedback_Model_CustomerFeedback extends Trex_Model
 {
 }
