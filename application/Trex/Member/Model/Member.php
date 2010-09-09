@@ -25,6 +25,6 @@
  * @since       2010-05-13 10:33:32
  */
 
-class Trex_Member_Model_Member extends Doctrine_Record
+class Trex_Member_Model_Member extends Trex_Model
 {
 }
