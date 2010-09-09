@@ -1046,7 +1046,14 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
                 $relatedData = array();
                 foreach($model['fieldMap'] as $localField => $foreignField)
                 {
-                    $relatedData[$foreignField] = $data[$localField];
+                    if(isset($data[$localField]))
+                    {
+                        $relatedData[$foreignField] = $data[$localField];
+                    } elseif(isset($_POST[$localField])) {
+                        $relatedData[$foreignField] = $_POST[$localField];
+                    } else {
+                        $relatedData[$foreignField] = null;
+                    }
                 }
                 $relatedDbMeta = Qwin_Metadata_Manager::get($model['metadata']);
                 // TODO 补全其他转换方式,分离该过程

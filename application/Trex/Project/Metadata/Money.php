@@ -1,6 +1,6 @@
 <?php
 /**
- * Status
+ * Money
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -22,14 +22,14 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-31 9:41:37
+ * @since       2010-09-09 8:49:19
  */
 
-class Trex_Project_Metadata_Status extends Trex_Metadata
+class Trex_Project_Metadata_Money extends Trex_Metadata
 {
     public function __construct()
     {
-        $this->setIdMetadata();
+        $this->setCommonMetadata();
         $this->parseMetadata(array(
             'field' => array(
                 'project_id' => array(
@@ -37,53 +37,43 @@ class Trex_Project_Metadata_Status extends Trex_Metadata
                         'title' => 'LBL_FIELD_PROJECT_NAME',
                     ),
                     'form' => array(
-                        '_type' => 'hidden',
+                        '_type' => 'select',
+                        '_resourceGetter' => array(
+                            array('Project_Hepler_Category', 'getTreeResource'),
+                            array(
+                                'namespace' => 'Trex',
+                                'module' => 'Project',
+                                'controller' => 'Project',
+                            ),
+                            NULL,
+                            array('id', 'parent_id', 'name')
+                        ),
                     ),
                     'attr' => array(
                         'isListLink' => 1,
                     ),
                 ),
-                'project_name' => array(
-                    'form' => array(
-                        '_type' => 'plain',
-                    ),
-                    'attr' => array(
-                        'isList' => 0,
-                        'isView' => 0,
-                        'isDbField' => 0,
-                    ),
-                ),
-                'status' => array(
+                'type' => array(
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
                             array('Project_Helper_CommonClass', 'get'),
-                            'project-status',
+                            'money-direction',
                         ),
                     ),
                     'converter' => array(
                         'list' => array(
                             array('Project_Helper_CommonClass', 'convert'),
-                            'project-status',
-                        ),
-                        'view' => array(
-                            array('Project_Helper_CommonClass', 'convert'),
-                            'project-status',
+                            'money-direction',
                         ),
                     ),
                 ),
-                'date_created' => array(
-                    'form' => array(
-                        '_type' => 'custom',
-                        'name' => 'date_created',
-                    ),
-                    'attr' => array(
-                        'isReadonly' => 1,
-                    ),
+                'amount' => array(
+
                 ),
-                'description' => array(
+                'date' => array(
                     'form' => array(
-                        '_type' => 'textarea',
+                        '_widget' => 'datepicker'
                     ),
                 ),
             ),
@@ -92,7 +82,6 @@ class Trex_Project_Metadata_Status extends Trex_Metadata
                     'name' => 'Trex_Project_Model_Project',
                     'alias' => 'project',
                     'metadata' => 'Trex_Project_Metadata_Project',
-                    'type' => 'hasOne',
                     'local' => 'project_id',
                     'foreign' => 'id',
                     'type' => 'view',
@@ -102,13 +91,10 @@ class Trex_Project_Metadata_Status extends Trex_Metadata
                 ),
             ),
             'db' => array(
-                'table' => 'project_status',
-                'order' => array(
-                    array('date_created', 'ASC'),
-                ),
+                'table' => 'project_money',
             ),
             'page' => array(
-                'title' => 'LBL_MODULE_PROJECT_STATUS',
+                'title' => 'LBL_MODULE_PROJECT_MONEY',
             ),
         ));
     }

@@ -51,6 +51,24 @@ class Trex_Project_Metadata_Bug extends Trex_Metadata
                         ),
                     ),
                 ),
+                'feedback_id' => array(
+                    'basic' => array(
+                        'title' => 'LBL_FIELD_FEEDBACK_NAME'
+                    ),
+                    'form' => array(
+                        '_type' => 'select',
+                        '_resourceGetter' => array(
+                            array('Project_Hepler_Category', 'getTreeResource'),
+                            array(
+                                'namespace' => 'Trex',
+                                'module' => 'Project',
+                                'controller' => 'Feedback',
+                            ),
+                            NULL,
+                            array('id', NULL, 'title')
+                        ),
+                    ),
+                ),
                 'title' => array(
 
                 ),
