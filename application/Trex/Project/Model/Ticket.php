@@ -1,6 +1,6 @@
 <?php
 /**
- * Status
+ * Bug
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -22,13 +22,9 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-06-12 19:49:37
+ * @since       2010-07-09 16:16:45
  */
 
-class Trex_Project_Controller_Status extends Trex_ActionController
+class Trex_Project_Model_Bug extends Doctrine_Record
 {
-    public function convertListDateCreated($value, $name, $data, $copyData)
-    {
-        return $value;
-    }
 }
