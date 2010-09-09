@@ -42,7 +42,11 @@ class Trex_Project_Language_Enus extends Trex_Language
             'LBL_FIELD_CUSTOMER_ID' => 'Customer Id',
             'LBL_FIELD_MONEY' => 'Money',
             'LBL_FIELD_DELAY_REASON' => 'Delay Reason',
-            'LBL_FIELD_MORE_OPERATION' => 'More Operation',
+            'LBL_FIELD_STATUS_DESCRIPTION' => 'Status Description',
+            'LBL_FIELD_TYPE' => 'Direction Type',
+            'LBL_FIELD_AMOUNT' => 'Amount',
+            'LBL_FIELD_DATE' => 'Date',
+            'LBL_FIELD_FEEDBACK_NAME' => 'Feedback Name',
 
             'LBL_FIELD_PROJECT_NAME' => 'Project Name',
             'LBL_FIELD_PROJECT' => 'Project',
@@ -60,6 +64,8 @@ class Trex_Project_Language_Enus extends Trex_Language
             'LBL_MODULE_PROJECT_STATUS' => 'Project Status',
             'LBL_MODULE_PROJECT_FEATURE' => 'Feature',
             'LBL_MODULE_PROJECT_BUG' => 'Bug',
+            'LBL_MODULE_PROJECT_MONEY' => 'Money',
+            'LBL_MODULE_PROJECT_FEEDBACK' => 'Feedback',
         );
     }
 }

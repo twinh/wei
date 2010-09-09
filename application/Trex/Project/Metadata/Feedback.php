@@ -1,6 +1,6 @@
 <?php
 /**
- * Status
+ * Feedback
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,20 +16,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Trex
- * @subpackage  Project
+ * @package     Qwin
+ * @subpackage  
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-31 9:41:37
+ * @since       2010-09-09 10:32:37
  */
 
-class Trex_Project_Metadata_Status extends Trex_Metadata
+class Trex_Project_Metadata_Feedback extends Trex_Metadata
 {
     public function __construct()
     {
-        $this->setIdMetadata();
+        $this->setCommonMetadata();
         $this->parseMetadata(array(
             'field' => array(
                 'project_id' => array(
@@ -37,53 +37,46 @@ class Trex_Project_Metadata_Status extends Trex_Metadata
                         'title' => 'LBL_FIELD_PROJECT_NAME',
                     ),
                     'form' => array(
-                        '_type' => 'hidden',
+                        '_type' => 'select',
+                        '_resourceGetter' => array(
+                            array('Project_Hepler_Category', 'getTreeResource'),
+                            array(
+                                'namespace' => 'Trex',
+                                'module' => 'Project',
+                                'controller' => 'Project',
+                            ),
+                            NULL,
+                            array('id', 'parent_id', 'name')
+                        ),
                     ),
                     'attr' => array(
                         'isListLink' => 1,
                     ),
                 ),
-                'project_name' => array(
-                    'form' => array(
-                        '_type' => 'plain',
-                    ),
-                    'attr' => array(
-                        'isList' => 0,
-                        'isView' => 0,
-                        'isDbField' => 0,
-                    ),
-                ),
-                'status' => array(
+                'type' => array(
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
                             array('Project_Helper_CommonClass', 'get'),
-                            'project-status',
+                            'project-feedback-type',
                         ),
                     ),
                     'converter' => array(
                         'list' => array(
                             array('Project_Helper_CommonClass', 'convert'),
-                            'project-status',
-                        ),
-                        'view' => array(
-                            array('Project_Helper_CommonClass', 'convert'),
-                            'project-status',
+                            'project-feedback-type',
                         ),
                     ),
                 ),
-                'date_created' => array(
-                    'form' => array(
-                        '_type' => 'custom',
-                        'name' => 'date_created',
-                    ),
-                    'attr' => array(
-                        'isReadonly' => 1,
-                    ),
+                'title' => array(
+
                 ),
                 'description' => array(
                     'form' => array(
                         '_type' => 'textarea',
+                    ),
+                    'attr' => array(
+                        'isList' => 0,
                     ),
                 ),
             ),
@@ -92,7 +85,6 @@ class Trex_Project_Metadata_Status extends Trex_Metadata
                     'name' => 'Trex_Project_Model_Project',
                     'alias' => 'project',
                     'metadata' => 'Trex_Project_Metadata_Project',
-                    'type' => 'hasOne',
                     'local' => 'project_id',
                     'foreign' => 'id',
                     'type' => 'view',
@@ -102,14 +94,14 @@ class Trex_Project_Metadata_Status extends Trex_Metadata
                 ),
             ),
             'db' => array(
-                'table' => 'project_status',
+                'table' => 'project_feedback',
                 'order' => array(
-                    array('date_created', 'ASC'),
-                ),
+                    array('date_created', 'DESC')
+                )
             ),
             'page' => array(
-                'title' => 'LBL_MODULE_PROJECT_STATUS',
-            ),
+                'title' => 'LBL_MODULE_PROJECT_FEEDBACK',
+            )
         ));
     }
 }

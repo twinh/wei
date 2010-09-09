@@ -107,5 +107,6 @@ class Trex_Contact_Metadata_Contact extends Trex_Metadata
                 'title' => 'LBL_MODULE_CONTACT',
             ),
         ));
+        $this->field->set('operation.list.width', 200);
     }
 }

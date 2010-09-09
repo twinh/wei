@@ -114,6 +114,12 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
                         ),
                     ),
                 ),
+                'status_description' => array(
+                    'attr' => array(
+                        'isList' => 0,
+                        'isDbField' => 0,
+                    ),
+                ),
                 'start_time' => array(
                     'form' => array(
                         '_widget' => 'datepicker',
@@ -173,6 +179,7 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
                         'id' => 'project_id',
                         'status' => 'status',
                         'date_modified' => 'date_created',
+                        'status_description' => 'description',
                     ),
                     'set' => array(
                         'namespace' => 'Trex',
