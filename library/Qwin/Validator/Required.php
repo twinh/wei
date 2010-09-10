@@ -1,6 +1,6 @@
 <?php
 /**
- * Feedback
+ * Required
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,15 +16,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Trex
- * @subpackage  Project
+ * @package     Qwin
+ * @subpackage  Validator
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-09 10:31:43
+ * @since       2010-09-10 17:11:14
  */
 
-class Trex_Project_Controller_Feedback extends Trex_ActionController
+class Qwin_Validator_Required extends Qwin_Validator_Abstract
 {
+    public function __construct()
+    {
+        
+    }
 }

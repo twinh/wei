@@ -221,7 +221,15 @@ class Trex_ActionController extends Trex_Controller
              * 转换,验证和还原
              */
             $data = $this->_meta->convertSingleData($relatedField, $relatedField, 'db', $_POST);
-            $this->_meta->validateData($addDbField, $data);
+            if(false == $meta->validateData($relatedField, $data + $_POST))
+            {
+                $message = $this->_lang->t('MSG_ERROR_FIELD')
+                    . $this->_lang->t($relatedField[$this->_validatorField]['basic']['title'])
+                    . '<br />'
+                    . $this->_lang->t('MSG_ERROR_MSG')
+                    . $this->_lang->t($this->_validatorMessage);
+                return $this->setRedirectView($message);
+            }
             $data = $meta->restoreData($relatedField, $relatedField, $data);
             $data = $meta->setForeignKeyData($meta['model'], $data);
 
@@ -244,7 +252,7 @@ class Trex_ActionController extends Trex_Controller
              */
             $this->executeOnFunction('afterDb', $this->resetAction(), $data);
             $url = urldecode($this->_request->p('_page'));
-            '' == $url && $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Default'));
+            '' == $url && $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Index'));
             return $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }
@@ -312,7 +320,14 @@ class Trex_ActionController extends Trex_Controller
              * 转换,验证和还原
              */
             $data = $meta->convertSingleData($relatedField, $relatedField, 'db', $_POST);
-            $this->_meta->validateData($relatedField, $data + $_POST);
+            if(false == $meta->validateData($relatedField, $data + $_POST))
+            {
+                $message = $this->_lang->t('MSG_ERROR_FIELD')
+                    . $this->_lang->t($relatedField[$this->_validatorField]['basic']['title'])
+                    . '<br />'
+                    . $this->_lang->t($this->_validatorMessage);
+                return $this->setRedirectView($message);
+            }
             $data = $meta->restoreData($editDbField, $relatedField, $data);
 
             /**
@@ -332,7 +347,7 @@ class Trex_ActionController extends Trex_Controller
              */
             $this->executeOnFunction('afterDb', $this->resetAction(), $data);
             $url = urldecode($this->_request->p('_page'));
-            '' == $url && $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Default'));
+            '' == $url && $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Index'));
             return $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }

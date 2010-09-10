@@ -40,7 +40,7 @@ class Trex_Project_Controller_Project extends Trex_ActionController
     public function convertListOperation($value, $name, $data, $copyData)
     {
         $primaryKey = $this->_meta['db']['primaryKey'];
-        return Qwin_Helper_Html::jQueryButton($this->_url->createUrl($this->_set, array('controller' => 'Bug', 'action' => 'Add', '_data[project_id]' => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_ADD_BUG'), 'ui-icon-plusthick')
+        return Qwin_Helper_Html::jQueryButton($this->_url->createUrl($this->_set, array('controller' => 'Ticket', 'action' => 'Add', '_data[project_id]' => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_ADD_TICKET'), 'ui-icon-plusthick')
                 . Qwin_Helper_Html::jQueryButton($this->_url->createUrl($this->_set, array('controller' => 'Status', 'action' => 'Index', 'searchField' => 'project_id', 'searchValue' => $copyData['id'])), $this->_lang->t('LBL_ACTION_VIEW_STATUS'), 'ui-icon-lightbulb')
                 . parent::convertListOperation($value, $name, $data, $copyData);
     }

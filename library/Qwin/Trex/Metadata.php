@@ -668,56 +668,47 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
 
     /**
      * 数据验证
-     *
-     * @todo 是否使用单独的助手类,和 jQuery 验证插件配套
-     * @todo 象转换一样,允许使用自身的方法, validatePassword
      */
     public function validateData($meta, $data)
     {
-        // 初始验证类
-        $validator = Qwin::run('Qwin_Validator');
-        $validator->add('Qwin_Validator_Common');
-        $arr = Qwin::run('-arr');
-        $lang = Qwin::run('-lang');
-        
-        // 加载验证信息
-        $validatorMessage1 = $this->getCommonClassList('validator_message', 'rsc');
-        $validatorMessage2 = $this->getCommonClassList('validator_message');
-        $validatorMessage = array_combine($validatorMessage1, $validatorMessage2);
-        
+        $isPassed = true;
+        $controller = Qwin::run('-controller');
+
         foreach($meta as $field)
         {
-            if(isset($field['validator']['rule']))
+            // 根据控制器中的数据进行验证
+            $name = $field['form']['name'];
+            $method = 'validate' . $name;
+            if(method_exists($controller, $method))
             {
-                $field['validator']['rule'] = $this->makeRequiredAtFront($field['validator']['rule']);
-                // 转换为数组
-                $arr->set($field['validator']['rule']);
-                foreach($field['validator']['rule'] as $method => $param)
+                if(false === call_user_func_array(
+                    array($controller, $method),
+                    array($data[$name], $name, $data)
+                )){
+                    $isPassed = false;
+                    break;
+                }
+            }
+
+            // 根据元数据进行验证
+            if(empty($field['validator']))
+            {
+                continue;
+            }
+            foreach($field['validator'] as $validator)
+            {
+                array_unshift($validator, null);
+                $validator[0] = $validator[1];
+                $validator[1] = $data[$name];
+                $isPassed = Qwin::callByArray($validator);
+                if(false === $isPassed)
                 {
-                    $arr->set($param);
-                    // 用于错误提示
-                    $msgParam = $param;
-                    if(isset($data[$field['form']['name']]))
-                    {
-                        $val = $data[$field['form']['name']];
-                    } else {
-                        $val = null;
-                    }
-                    array_unshift($param, $val);
-                    $result = $validator->call($method, $param);
-                    if(false == $result)
-                    {
-                        $msg = $this->format($validatorMessage[$method], $msgParam);
-                        $msg = $lang->t('MSG_ERROR_FIELD') . $lang->t($field['basic']['title']) . '<br />' . $lang->t('MSG_ERROR_MSG') . $msg;
-                        Qwin::run('-controller')->setRedirectView($msg)
-                                ->loadView()
-                                ->display();
-                        exit();
-                        Qwin::run('Qwin_Helper_Js')->show($msg);
-                    }
+                    $controller->setValidatorMessage($name, array_pop($validator));
+                    break 2;
                 }
             }
         }
+        return $isPassed;
     }
 
     /**

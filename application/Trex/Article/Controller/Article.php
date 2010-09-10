@@ -252,28 +252,4 @@ class Trex_Article_Controller_Article extends Trex_ActionController
     {
         return $data['detail_meta']['description'];
     }
-
-    public function getCategoryIdResource()
-    {
-        if(!isset($this->_articleCategory))
-        {
-            $this->_articleCategory = require QWIN_ROOT_PATH . '/Cache/Php/List/ArticleCategory.php';
-        }
-        $data = &$this->_articleCategory;
-        foreach($data as $row)
-        {
-            if(null == $row['parent_id'])
-            {
-                $category[$row['id']] = $row['name'];
-                foreach($data as $row2)
-                {
-                    if($row2['parent_id'] == $row['id'])
-                    {
-                        $category[$row2['id']] = '|-' . $row2['name'];
-                    }
-                }
-            }
-        }
-        return $category;
-    }
 }

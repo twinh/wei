@@ -42,7 +42,7 @@ class Trex_Project_Language_Enus extends Trex_Language
             'LBL_FIELD_MONEY' => 'Money',
             'LBL_FIELD_DELAY_REASON' => 'Delay Reason',
             'LBL_FIELD_STATUS_DESCRIPTION' => 'Status Description',
-            'LBL_FIELD_TYPE' => 'Direction Type',
+            'LBL_FIELD_TYPE' => 'Type',
             'LBL_FIELD_AMOUNT' => 'Amount',
             'LBL_FIELD_DATE' => 'Date',
             'LBL_FIELD_FEEDBACK_NAME' => 'Feedback Name',
@@ -55,14 +55,16 @@ class Trex_Project_Language_Enus extends Trex_Language
             'LBL_FIELD_STATUS' => 'Status',
             'LBL_FIELD_CREATED_BY' => 'Created By',
 
-            'LBL_ACTION_ADD_BUG' => 'Add Bug',
+            'LBL_ACTION_ADD_TICKET' => 'Add Ticket',
             'LBL_ACTION_EDIT_STATUS' => 'Edit Status',
             'LBL_ACTION_VIEW_STATUS' => 'View Status',
+
+            'LBL_GROUP_STATUS_DATA' => 'Status Data',
 
             'LBL_MODULE_PROJECT' => 'Project',
             'LBL_MODULE_PROJECT_STATUS' => 'Project Status',
             'LBL_MODULE_PROJECT_FEATURE' => 'Feature',
-            'LBL_MODULE_PROJECT_BUG' => 'Bug',
+            'LBL_MODULE_PROJECT_TICKET' => 'Ticket',
             'LBL_MODULE_PROJECT_MONEY' => 'Money',
             'LBL_MODULE_PROJECT_FEEDBACK' => 'Feedback',
         );

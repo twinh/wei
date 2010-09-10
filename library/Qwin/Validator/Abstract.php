@@ -1,6 +1,6 @@
 <?php
 /**
- * Bug
+ * Abstract
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,15 +16,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Trex
- * @subpackage  Project
+ * @package     Qwin
+ * @subpackage  Validator
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-07-09 16:16:45
+ * @since       2010-09-10 17:12:42
  */
 
-class Trex_Project_Model_Ticket extends Doctrine_Record
+abstract class Qwin_Validator_Abstract
 {
 }

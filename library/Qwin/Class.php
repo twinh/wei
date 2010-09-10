@@ -440,7 +440,7 @@ class Qwin_Class
 
         echo '<h1>Classes Cache Array</h1>';
         print_r(self::$_classCache);
-
+        
         echo '<h1>Classes Map</h1>';
         print_r(self::$_classMap);
 

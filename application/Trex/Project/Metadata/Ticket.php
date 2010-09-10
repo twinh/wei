@@ -25,7 +25,7 @@
  * @since       2010-07-09 14:58:27
  */
 
-class Trex_Project_Metadata_Bug extends Trex_Metadata
+class Trex_Project_Metadata_Ticket extends Trex_Metadata
 {
     public function __construct()
     {
@@ -50,26 +50,27 @@ class Trex_Project_Metadata_Bug extends Trex_Metadata
                         ),
                     ),
                 ),
-                'feedback_id' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_FEEDBACK_NAME'
-                    ),
+                'title' => array(
+
+                ),
+                'type' => array(
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Hepler_Category', 'getTreeResource'),
-                            array(
-                                'namespace' => 'Trex',
-                                'module' => 'Project',
-                                'controller' => 'Feedback',
-                            ),
-                            NULL,
-                            array('id', NULL, 'title')
+                            array('Project_Helper_CommonClass', 'get'),
+                            'ticket-type',
                         ),
                     ),
-                ),
-                'title' => array(
-
+                    'converter' => array(
+                        'list' => array(
+                            array('Project_Helper_CommonClass', 'convert'),
+                            'ticket-type',
+                        ),
+                        'view' => array(
+                            array('Project_Helper_CommonClass', 'convert'),
+                            'ticket-type',
+                        ),
+                    ),
                 ),
                 'priority' => array(
                     'form' => array(
@@ -136,7 +137,7 @@ class Trex_Project_Metadata_Bug extends Trex_Metadata
                         '_type' => 'select',
                         '_resourceGetter' => array(
                             array('Project_Helper_CommonClass', 'get'),
-                            'bug-status',
+                            'ticket-status',
                         ),
                     ),
                     'attr' => array(
@@ -145,7 +146,11 @@ class Trex_Project_Metadata_Bug extends Trex_Metadata
                     'converter' => array(
                         'list' => array(
                             array('Project_Helper_CommonClass', 'convert'),
-                            'bug-status',
+                            'ticket-status',
+                        ),
+                        'view' => array(
+                            array('Project_Helper_CommonClass', 'convert'),
+                            'ticket-status',
                         ),
                     ),
                 ),
@@ -217,14 +222,15 @@ class Trex_Project_Metadata_Bug extends Trex_Metadata
                 ),
             ),
             'db' => array(
-                'table' => 'project_bug',
+                'table' => 'project_ticket',
                 'order' => array(
                     array('date_created', 'DESC')
                 ),
             ),
             'page' => array(
-                'title' => 'LBL_MODULE_PROJECT_BUG',
+                'title' => 'LBL_MODULE_PROJECT_TICKET',
             ),
         ));
+        $this->field->set('operation.list.width', 180);
     }
 }

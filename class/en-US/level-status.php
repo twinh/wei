@@ -1,6 +1,9 @@
 <?php
 return array(
-	10 => 'Low',
-	40 => 'Normal',
-	70 => 'High',
+	0 => 'Unknown',
+	1 => 'Very Low',
+	3 => 'Low',
+	5 => 'Normal',
+	7 => 'High',
+	9 => 'Very High',
 );
