@@ -69,10 +69,8 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                         'name' => 'title',
                     ),
                     'validator' => array(
-                        'rule' => array(
-                            'required' => true,
-                            'maxlength' => 40,
-                        ),
+                        'required',
+                        'maxlength,40',
                     ),
                 ),
                 'url' => array(

@@ -162,4 +162,13 @@ abstract class Qwin_Metadata_Element_Abstract extends Qwin_Metadata_Abstract
         }
         return $this;
     }
+
+    public function unlinkList(array $list)
+    {
+        foreach($list as $key)
+        {
+            $this->unlink($key);
+        }
+        return $this;
+    }
 }

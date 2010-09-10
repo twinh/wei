@@ -158,6 +158,12 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
 
         // 转换按钮
         $metadata['form'] = $this->_parseWidgetSetting($metadata['form']);
+
+        if(!isset($metadata['validator']))
+        {
+            $metadata['validator'] = array();
+        }
+        $metadata['validator'] = Qwin::run('Qwin_Metadata_Element_Field_Validator')->parse($metadata['validator']);
         
         return $this->_multiArrayMerge($this->getSampleData(), $metadata);
     }
@@ -455,22 +461,17 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         }
         return $newData;
     }
-
+    
     /**
-     * 获取添加操作入库的域对象
+     * 设置验证缩写名称和数组的对应关系
      *
-     * @return Qwin_Metadata_Element_Field 域对象
+     * @param string $name 缩写
+     * @param array $value 全数组
+     * @return 当前类
      */
-    public function getAddDbField()
+    public function setValidatorMap($name, $value)
     {
-        foreach($this->_data as $field => $meta)
-        {
-            if(1 == $meta['attr']['isDbField'])
-            {
-                $fieldMetadata[$field] = $meta;
-            }
-        }
-        $fieldObejct = new Qwin_Metadata_Element_Field();
-        return $fieldObejct->fromArray($fieldMetadata);
+        $this->_validatorMap[$name] = $value;
+        return $this;
     }
 }

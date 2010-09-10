@@ -25,6 +25,17 @@
  * @since       2010-07-09 14:53:13
  */
 
-class Trex_Project_Controller_Bug extends Trex_ActionController
+class Trex_Project_Controller_Ticket extends Trex_ActionController
 {
+    /**
+     * 简洁模式
+     */
+    public function actionSimpleAdd()
+    {
+        $this->setAction('Add');
+        $this->_meta->field->unlinkList(array(
+            'type', 'priority', 'severity', 'reproducibility', 'status',
+        ));
+        parent::actionAdd();
+    }
 }

@@ -92,6 +92,9 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
                 'money' => array(
                 ),
                 'status' => array(
+                    'basic' => array(
+                        'group' => 'LBL_GROUP_STATUS_DATA',
+                    ),
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
@@ -114,6 +117,9 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
                     ),
                 ),
                 'status_description' => array(
+                    'basic' => array(
+                        'group' => 'LBL_GROUP_STATUS_DATA',
+                    ),
                     'attr' => array(
                         'isList' => 0,
                         'isDbField' => 0,
@@ -156,7 +162,7 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
             ),
             // 表之间的联系
             'model' => array(
-                array(
+                'project' => array(
                     'name' => 'Trex_Project_Model_Project',
                     'alias' => 'project',
                     'metadata' => 'Trex_Project_Metadata_Project',
@@ -167,7 +173,7 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
                         'parent_id' => 'name',
                     ),
                 ),
-                array(
+                'status' => array(
                     'name' => 'Trex_Project_Model_Status',
                     'alias' => 'status',
                     'metadata' => 'Trex_Project_Metadata_Status',
@@ -179,6 +185,7 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
                         'status' => 'status',
                         'date_modified' => 'date_created',
                         'status_description' => 'description',
+                        'created_by' => 'created_by',
                     ),
                     'set' => array(
                         'namespace' => 'Trex',
@@ -193,12 +200,9 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
                     array('start_time', 'DESC'),
                 ),
             ),
-            // 页面显示
             'page' => array(
                 'title' => 'LBL_MODULE_PROJECT',
             ),
-            'shortcut' => array(
-            )
         ));
         $this->field->set('operation.list.width', 200);
         $this->field->set('date_created.attr.isList', 0);

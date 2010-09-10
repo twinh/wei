@@ -83,8 +83,6 @@ abstract class Qwin_Metadata extends Qwin_Metadata_Abstract
      */
     private function _add($type, $data)
     {
-        //echo $type . '<p>';
-        //p($data);
         if(!in_array($type, $this->_banType))
         {
             $name = strtolower($type);

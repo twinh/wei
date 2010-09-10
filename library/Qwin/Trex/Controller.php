@@ -57,6 +57,10 @@ class Qwin_Trex_Controller
      */
     protected $_langName;
 
+    protected $_validatorMessage;
+
+    protected $_validatorField;
+
     /**
      * 视图配置
      */
@@ -66,6 +70,13 @@ class Qwin_Trex_Controller
         'element' => null,
         'layout' => null,
     );
+
+    public function setValidatorMessage($field = null, $message = null)
+    {
+        $this->_validatorField = $field;
+        $this->_validatorMessage = $message;
+        return $this;
+    }
 
     /**
      * 设置新的行为

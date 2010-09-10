@@ -99,7 +99,7 @@ function qw_null_text($data = null)
     {
         return $data;
     }
-    return '<em>(NULL)</em>';
+    return '<em>(null)</em>';
 }
 
 function qw_jquery()

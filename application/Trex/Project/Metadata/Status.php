@@ -72,10 +72,17 @@ class Trex_Project_Metadata_Status extends Trex_Metadata
                         ),
                     ),
                 ),
+                'created_by' => array(
+                    'form' => array(
+                        '_type' => 'custom',
+                    ),
+                    'attr' => array(
+                        'isReadonly' => 1,
+                    ),
+                ),
                 'date_created' => array(
                     'form' => array(
                         '_type' => 'custom',
-                        'name' => 'date_created',
                     ),
                     'attr' => array(
                         'isReadonly' => 1,
@@ -98,6 +105,17 @@ class Trex_Project_Metadata_Status extends Trex_Metadata
                     'type' => 'view',
                     'fieldMap' => array(
                         'project_id' => 'name',
+                    ),
+                ),
+                'member' => array(
+                    'name' => 'Trex_Member_Model_Member',
+                    'alias' => 'member',
+                    'metadata' => 'Trex_Member_Metadata_Member',
+                    'local' => 'created_by',
+                    'foreign' => 'id',
+                    'type' => 'view',
+                    'fieldMap' => array(
+                        'created_by' => 'username',
                     ),
                 ),
             ),

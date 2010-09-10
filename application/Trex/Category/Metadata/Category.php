@@ -50,10 +50,8 @@ class Trex_Category_Metadata_Category extends Trex_Metadata
                         'name' => 'name',
                     ),
                     'validator' => array(
-                        'rule' => array(
-                            'required' => true,
-                            'maxlength' => 40,
-                        ),
+                        'required',
+                        'maxlength,40',
                     ),
                 ),
                 'sign' => array(
