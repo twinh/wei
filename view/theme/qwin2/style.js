@@ -23,7 +23,7 @@ jQuery(function($){
         //'filter' : 'progid:DXImageTransform.Microsoft.Shadow(color=' + $widgetShadowColor + ', Direction=135, Strength=3)'
     });
 
-    $('button, input:submit, input:reset, input:button, a.ui-anchor').button();
+    $('button:not(.ui-button-none), input:submit, input:reset, input:button, a.ui-anchor').button();
     $('td.ui-field-radio, td.ui-field-checkbox').buttonset();
 
     $('#ui-header-shortcut a').qui({
@@ -33,11 +33,9 @@ jQuery(function($){
     $('#ui-header-shortcut a:first').addClass('ui-corner-bl');
     $('#ui-header-shortcut a:last').addClass('ui-header-shortcut-last-anchor');
 
-    $('div.ui-operation-field a').qui();
+    $('div.ui-operation-field a, div.ui-operation-field button').qui();
 
     $('a.ui-action-controller').button({icons: {primary: 'ui-icon-triangle-1-e'},text: false});
-    $('button.ui-action-submit').button({icons: {primary: 'ui-icon-check'}});
-    $('button.ui-action-reset').button({icons: {primary: 'ui-icon-arrowreturnthick-1-w'}});
     $('a.ui-action-redirect').button({icons: {primary: 'ui-icon-arrowthickstop-1-e'}});
 
     // 点击右下按钮,回到顶部
@@ -74,4 +72,24 @@ jQuery(function($){
                 .hide();
         }
     );
+
+    // 点击盒子右上角,显示或隐藏盒子内容
+    $('a.ui-box-title-icon')
+        .qui()
+        .click(function(){
+            // 切换按钮
+            var icon_obj = $(this).find('span');
+            if(icon_obj.hasClass('ui-icon-circle-triangle-n'))
+            {
+                icon_obj.removeClass("ui-icon-circle-triangle-n").addClass("ui-icon-circle-triangle-s");
+            } else {
+                icon_obj.removeClass("ui-icon-circle-triangle-s").addClass("ui-icon-circle-triangle-n");
+            }
+            // 显示/隐藏指定内容
+            var name = $(this).attr('name');
+            if('' != name)
+            {
+                $(name).slideToggle('fast');
+            }
+	});
 });
