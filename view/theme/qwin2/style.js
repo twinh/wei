@@ -33,10 +33,9 @@ jQuery(function($){
     $('#ui-header-shortcut a:first').addClass('ui-corner-bl');
     $('#ui-header-shortcut a:last').addClass('ui-header-shortcut-last-anchor');
 
-    $('div.ui-operation-field a, div.ui-operation-field button').qui();
+    $('div.ui-message-operation a, div.ui-operation-field a, div.ui-operation-field button').qui();
 
     $('a.ui-action-controller').button({icons: {primary: 'ui-icon-triangle-1-e'},text: false});
-    $('a.ui-action-redirect').button({icons: {primary: 'ui-icon-arrowthickstop-1-e'}});
 
     // 点击右下按钮,回到顶部
     $('#ui-bottom-floating-botton').click(function(){
