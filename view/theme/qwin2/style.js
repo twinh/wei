@@ -33,14 +33,8 @@ jQuery(function($){
     $('#ui-header-shortcut a:first').addClass('ui-corner-bl');
     $('#ui-header-shortcut a:last').addClass('ui-header-shortcut-last-anchor');
 
-    $('a.ui-action-list').button({icons: {primary: 'ui-icon-note'}});
-    $('a.ui-action-add').button({icons: {primary: 'ui-icon-plusthick'}});
-    $('a.ui-action-edit').button({icons: {primary: 'ui-icon-tag'}});
-    $('a.ui-action-view').button({icons: {primary: 'ui-icon-lightbulb'}});
-    $('a.ui-action-copy').button({icons: {primary: 'ui-icon-transferthick-e-w'}});
-    $('a.ui-action-restore').button({icons: {primary: 'ui-icon-arrowreturnthick-1-w'}});
-    $('a.ui-action-delete').button({icons: {primary: 'ui-icon-trash'}});
-    $('a.ui-action-return').button({icons: {primary: 'ui-icon-arrowthickstop-1-w'}});
+    $('div.ui-operation-field a').qui();
+
     $('a.ui-action-controller').button({icons: {primary: 'ui-icon-triangle-1-e'},text: false});
     $('button.ui-action-submit').button({icons: {primary: 'ui-icon-check'}});
     $('button.ui-action-reset').button({icons: {primary: 'ui-icon-arrowreturnthick-1-w'}});

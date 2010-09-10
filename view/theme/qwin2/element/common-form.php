@@ -40,16 +40,17 @@ var validator_rule = <?php echo $validator_rule?>;
     <div class="ui-form-content ui-box-content ui-widget-content">
         <form id="post-form" name="form" method="post" action="<?php echo qw_url()?>">
         <div class="ui-operation-field">
-            <a class="ui-action-list" href="<?php echo qw_url($set, array('action' => 'Index')) ?>"><?php echo qw_lang('LBL_ACTION_LIST') ?></a>
-            <a class="ui-action-add" href="<?php echo qw_url($set, array('action' => 'Add')) ?>"><?php echo qw_lang('LBL_ACTION_ADD') ?></a>
-            <?php if(isset($data[$primaryKey])): ?>
-            <a class="ui-action-edit" href="<?php echo qw_url($set, array('action' => 'Edit', $primaryKey => $data[$primaryKey])) ?>"><?php echo qw_lang('LBL_ACTION_EDIT') ?></a>
-            <a class="ui-action-view" href="<?php echo qw_url($set, array('action' => 'View', $primaryKey => $data[$primaryKey])) ?>"><?php echo qw_lang('LBL_ACTION_VIEW') ?></a>
-            <a class="ui-action-copy" href="<?php echo qw_url($set, array('action' => 'Add', $primaryKey => $data[$primaryKey])) ?>"><?php echo qw_lang('LBL_ACTION_COPY') ?></a>
-            <!--<a class="ui-action-restore" href="<?php echo qw_url($set, array('action' => 'Restore', $primaryKey => $data[$primaryKey])) ?>" onclick="alert(Qwin.Lang.MSG_FUNCTION_DEVELOPTING);return false;"><?php echo qw_lang('LBL_ACTION_RESTORE') ?></a>-->
-            <a class="ui-action-delete" href="<?php echo qw_url($set, array('action' => 'Delete', $primaryKey => $data[$primaryKey])) ?>" onclick="javascript:return confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE);"><?php echo qw_lang('LBL_ACTION_DELETE') ?></a>
-            <?php endif ?>
-            <a class="ui-action-return" href="javascript:history.go(-1);"><?php echo qw_lang('LBL_ACTION_RETURN') ?></a>
+            <?php
+            echo qw_jquery_link(qw_url($set, array('action' => 'Index')), qw_lang('LBL_ACTION_LIST'), 'ui-icon-note'),
+                 qw_jquery_link(qw_url($set, array('action' => 'Add')), qw_lang('LBL_ACTION_ADD'), 'ui-icon-plusthick');
+            if(isset($data[$primaryKey])):
+                echo qw_jquery_link(qw_url($set, array('action' => 'Edit', $primaryKey => $data[$primaryKey])), qw_lang('LBL_ACTION_EDIT'), 'ui-icon-tag'),
+                     qw_jquery_link(qw_url($set, array('action' => 'View', $primaryKey => $data[$primaryKey])), qw_lang('LBL_ACTION_VIEW'), 'ui-icon-lightbulb'),
+                     qw_jquery_link(qw_url($set, array('action' => 'Add', $primaryKey => $data[$primaryKey])), qw_lang('LBL_ACTION_COPY'), 'ui-icon-transferthick-e-w'),
+                     qw_jquery_link('javascript:if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE)){window.location=\'' . qw_url($set, array('action' => 'Delete', $primaryKey => $data[$primaryKey])) . '\'};', qw_lang('LBL_ACTION_DELETE'), 'ui-icon-trash');
+            endif;
+            echo qw_jquery_link('javascript:history.go(-1);', qw_lang('LBL_ACTION_RETURN'), 'ui-icon-trash');
+            ?>
             <br />
             <br />
             <button class="ui-action-submit" type="submit"><?php echo qw_lang('LBL_ACTION_SUBMIT') ?></button>
@@ -86,16 +87,17 @@ var validator_rule = <?php echo $validator_rule?>;
             <button class="ui-action-reset" type="reset"><?php echo qw_lang('LBL_ACTION_RESET') ?></button>
             <br />
             <br />
-            <a class="ui-action-list" href="<?php echo qw_url($set, array('action' => 'Index')) ?>"><?php echo qw_lang('LBL_ACTION_LIST') ?></a>
-            <a class="ui-action-add" href="<?php echo qw_url($set, array('action' => 'Add')) ?>"><?php echo qw_lang('LBL_ACTION_ADD') ?></a>
-            <?php if(isset($data[$primaryKey])): ?>
-            <a class="ui-action-edit" href="<?php echo qw_url($set, array('action' => 'Edit', $primaryKey => $data[$primaryKey])) ?>"><?php echo qw_lang('LBL_ACTION_EDIT') ?></a>
-            <a class="ui-action-view" href="<?php echo qw_url($set, array('action' => 'View', $primaryKey => $data[$primaryKey])) ?>"><?php echo qw_lang('LBL_ACTION_VIEW') ?></a>
-            <a class="ui-action-copy" href="<?php echo qw_url($set, array('action' => 'Add', $primaryKey => $data[$primaryKey])) ?>"><?php echo qw_lang('LBL_ACTION_COPY') ?></a>
-            <!--<a class="ui-action-restore" href="<?php echo qw_url($set, array('action' => 'Restore', $primaryKey => $data[$primaryKey])) ?>" onclick="alert(Qwin.Lang.MSG_FUNCTION_DEVELOPTING);return false;"><?php echo qw_lang('LBL_ACTION_RESTORE') ?></a>-->
-            <a class="ui-action-delete" href="<?php echo qw_url($set, array('action' => 'Delete', $primaryKey => $data[$primaryKey])) ?>" onclick="javascript:return confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE);"><?php echo qw_lang('LBL_ACTION_DELETE') ?></a>
-            <?php endif ?>
-            <a class="ui-action-return" href="javascript:history.go(-1);"><?php echo qw_lang('LBL_ACTION_RETURN') ?></a>
+            <?php
+            echo qw_jquery_link(qw_url($set, array('action' => 'Index')), qw_lang('LBL_ACTION_LIST'), 'ui-icon-note'),
+                 qw_jquery_link(qw_url($set, array('action' => 'Add')), qw_lang('LBL_ACTION_ADD'), 'ui-icon-plusthick');
+            if(isset($data[$primaryKey])):
+                echo qw_jquery_link(qw_url($set, array('action' => 'Edit', $primaryKey => $data[$primaryKey])), qw_lang('LBL_ACTION_EDIT'), 'ui-icon-tag'),
+                     qw_jquery_link(qw_url($set, array('action' => 'View', $primaryKey => $data[$primaryKey])), qw_lang('LBL_ACTION_VIEW'), 'ui-icon-lightbulb'),
+                     qw_jquery_link(qw_url($set, array('action' => 'Add', $primaryKey => $data[$primaryKey])), qw_lang('LBL_ACTION_COPY'), 'ui-icon-transferthick-e-w'),
+                     qw_jquery_link('javascript:if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE)){window.location=\'' . qw_url($set, array('action' => 'Delete', $primaryKey => $data[$primaryKey])) . '\'};', qw_lang('LBL_ACTION_DELETE'), 'ui-icon-trash');
+            endif;
+            echo qw_jquery_link('javascript:history.go(-1);', qw_lang('LBL_ACTION_RETURN'), 'ui-icon-trash');
+            ?>
         </div>
         </form>
     </div>
