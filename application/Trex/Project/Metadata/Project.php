@@ -78,10 +78,7 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
                 ),
                 'name' => array(
                     'validator' => array(
-                        'rule' => array(
-                            'required' => true,
-                            'maxlength' => 200,
-                        ),
+                        'required',
                     ),
                 ),
                 'code' => array(
