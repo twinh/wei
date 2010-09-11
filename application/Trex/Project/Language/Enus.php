@@ -30,8 +30,8 @@ class Trex_Project_Language_Enus extends Trex_Language
     public function __construct()
     {
         $this->_data += array(
-            'LBL_FIELD_START_TIME' => 'Start Time',
-            'LBL_FIELD_PLANED_END_TIME' => 'Planed End Time',
+            'LBL_FIELD_START_DATE' => 'Start Date',
+            'LBL_FIELD_PLANED_END_DATE' => 'Planed End Date',
             'LBL_FIELD_END_TIME' => 'End Time',
             'LBL_FIELD_CODE' => 'Code',
             'LBL_FIELD_FROM' => 'From',
@@ -60,6 +60,7 @@ class Trex_Project_Language_Enus extends Trex_Language
             'LBL_ACTION_VIEW_STATUS' => 'View Status',
 
             'LBL_GROUP_STATUS_DATA' => 'Status Data',
+            'LBL_GROUP_BUSINESS_DATA' => 'Business Data',
 
             'LBL_MODULE_PROJECT' => 'Project',
             'LBL_MODULE_PROJECT_STATUS' => 'Project Status',
@@ -67,6 +68,7 @@ class Trex_Project_Language_Enus extends Trex_Language
             'LBL_MODULE_PROJECT_TICKET' => 'Ticket',
             'LBL_MODULE_PROJECT_MONEY' => 'Money',
             'LBL_MODULE_PROJECT_FEEDBACK' => 'Feedback',
+            'LBL_MODULE_PROJECT_DOCUMENT' => 'Document',
         );
     }
 }

@@ -53,12 +53,28 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
                         'isListLink' => 1,
                     ),
                 ),
+                'name' => array(
+                    'validator' => array(
+                        'required',
+                    ),
+                ),
+                'code' => array(
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
+                ),
                 'introducer' => array(
+                    'basic' => array(
+                        'group' => 'LBL_GROUP_BUSINESS_DATA',
+                    ),
                     'attr' => array(
                         'isList' => 0,
                     ),
                 ),
                 'customer_id' => array(
+                    'basic' => array(
+                        'group' => 'LBL_GROUP_BUSINESS_DATA',
+                    ),
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
@@ -76,17 +92,10 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
                         'isList' => 0,
                     ),
                 ),
-                'name' => array(
-                    'validator' => array(
-                        'required',
-                    ),
-                ),
-                'code' => array(
-                    'attr' => array(
-                        'isList' => 0,
-                    ),
-                ),
                 'money' => array(
+                    'basic' => array(
+                        'group' => 'LBL_GROUP_BUSINESS_DATA',
+                    ),
                 ),
                 'status' => array(
                     'basic' => array(
@@ -122,12 +131,12 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
                         'isDbField' => 0,
                     ),
                 ),
-                'start_time' => array(
+                'start_date' => array(
                     'form' => array(
                         '_widget' => 'datepicker',
                     ),
                 ),
-                'planed_end_time' => array(
+                'planed_end_date' => array(
                     'form' => array(
                         '_widget' => 'datepicker',
                     ),
@@ -194,7 +203,7 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
             'db' => array(
                 'table' => 'project',
                 'order' => array(
-                    array('start_time', 'DESC'),
+                    array('start_date', 'DESC'),
                 ),
             ),
             'page' => array(
