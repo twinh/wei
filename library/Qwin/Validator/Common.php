@@ -39,7 +39,6 @@ class Qwin_Validator_Common extends Qwin_Validator_Abstract
 
     public function maxlength($value, $param)
     {
-        echo $value . $param;
         return strlen($value) <= $param;
     }
 

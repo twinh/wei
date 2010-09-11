@@ -133,6 +133,9 @@ class Trex_Project_Metadata_Ticket extends Trex_Metadata
                     ),
                 ),
                 'status' => array(
+                    'basic' => array(
+                        'group' => 'LBL_GROUP_STATUS_DATA',
+                    ),
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
@@ -152,6 +155,15 @@ class Trex_Project_Metadata_Ticket extends Trex_Metadata
                             array('Project_Helper_CommonClass', 'convert'),
                             'ticket-status',
                         ),
+                    ),
+                ),
+                'status_description' => array(
+                    'basic' => array(
+                        'group' => 'LBL_GROUP_STATUS_DATA',
+                    ),
+                    'attr' => array(
+                        'isList' => 0,
+                        'isDbField' => 0,
                     ),
                 ),
                 'description' => array(
@@ -218,6 +230,26 @@ class Trex_Project_Metadata_Ticket extends Trex_Metadata
                     'type' => 'view',
                     'fieldMap' => array(
                         'modified_by' => 'username',
+                    ),
+                ),
+                'status' => array(
+                    'name' => 'Trex_Project_Model_TicketStatus',
+                    'alias' => 'status',
+                    'metadata' => 'Trex_Project_Metadata_TicketStatus',
+                    'local' => 'id',
+                    'foreign' => 'project_id',
+                    'type' => 'relatedDb',
+                    'fieldMap' => array(
+                        'id' => 'ticket_id',
+                        'status' => 'status',
+                        'date_modified' => 'date_created',
+                        'status_description' => 'description',
+                        'created_by' => 'created_by',
+                    ),
+                    'set' => array(
+                        'namespace' => 'Trex',
+                        'module' => 'Project',
+                        'controller' => 'TicketStatus',
                     ),
                 ),
             ),

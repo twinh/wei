@@ -38,4 +38,18 @@ class Trex_Project_Controller_Ticket extends Trex_ActionController
         ));
         parent::actionAdd();
     }
+
+    public function convertDbStatusId($value, $name, $data, $copyData)
+    {
+        return Qwin::run('Qwin_converter_String')->getUuid($value);
+    }
+
+    public function isSaveStatusData($data, $query)
+    {
+        if(isset($data['status']) && isset($query->status) && $data['status'] == $query['status'])
+        {
+            return false;
+        }
+        return true;
+    }
 }
