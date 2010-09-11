@@ -1,6 +1,6 @@
 <?php
 /**
- * Enus
+ * TicketStatus
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,23 +17,14 @@
  * limitations under the License.
  *
  * @package     Trex
- * @subpackage  Contact
+ * @subpackage  Projcet
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-01 11:27:43
+ * @since       2010-09-11 18:46:44
  */
 
-class Trex_Contact_Language_Enus extends Trex_Language
+class Trex_Project_Controller_TicketStatus extends Trex_ActionController
 {
-    public function __construct()
-    {
-        return $this->_data += array(
-
-            'LBL_FIELD_RELATED_MODULE' => 'Related Module',
-
-            'LBL_MODULE_CONTACT' => 'Contact',
-        );
-    }
 }

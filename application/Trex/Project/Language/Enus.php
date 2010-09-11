@@ -53,7 +53,7 @@ class Trex_Project_Language_Enus extends Trex_Language
             'LBL_FIELD_SEVERITY' => 'Severity',
             'LBL_FIELD_REPRODUCIBILITY' => 'Reproducibility',
             'LBL_FIELD_STATUS' => 'Status',
-            'LBL_FIELD_CREATED_BY' => 'Created By',
+            'LBL_FIELD_TICKET_NAME' => 'Ticket Name',
 
             'LBL_ACTION_ADD_TICKET' => 'Add Ticket',
             'LBL_ACTION_EDIT_STATUS' => 'Edit Status',
@@ -64,11 +64,12 @@ class Trex_Project_Language_Enus extends Trex_Language
 
             'LBL_MODULE_PROJECT' => 'Project',
             'LBL_MODULE_PROJECT_STATUS' => 'Project Status',
-            'LBL_MODULE_PROJECT_FEATURE' => 'Feature',
-            'LBL_MODULE_PROJECT_TICKET' => 'Ticket',
-            'LBL_MODULE_PROJECT_MONEY' => 'Money',
-            'LBL_MODULE_PROJECT_FEEDBACK' => 'Feedback',
-            'LBL_MODULE_PROJECT_DOCUMENT' => 'Document',
+            'LBL_MODULE_PROJECT_FEATURE' => 'Project Feature',
+            'LBL_MODULE_PROJECT_TICKET' => 'Project Ticket',
+            'LBL_MODULE_PROJECT_MONEY' => 'Project Money',
+            'LBL_MODULE_PROJECT_FEEDBACK' => 'Project Feedback',
+            'LBL_MODULE_PROJECT_DOCUMENT' => 'Project Document',
+            'LBL_MODULE_PROJECT_TICKET_STATUS' => 'Project Ticket Status',
         );
     }
 }

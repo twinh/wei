@@ -1072,6 +1072,6 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
                 $relatedDbQuery->fromArray($relatedData);
                 $relatedDbQuery->save();
             }
-        }       
+        }
     }
 }
