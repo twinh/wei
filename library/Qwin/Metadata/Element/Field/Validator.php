@@ -39,7 +39,7 @@ class Qwin_Metadata_Element_Field_Validator extends Qwin_Metadata_Abstract
             'rangelength',
         ),
         'maxlength' => array(
-            array('Qwin_Validator_Common', 'rangelength'),
+            array('Qwin_Validator_Common', 'maxlength'),
             0,
             'maxlength',
         ),

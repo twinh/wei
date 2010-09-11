@@ -84,10 +84,8 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                         'isDbQuery' => 1,
                     ),
                     'validator' => array(
-                        'rule' => array(
-                            'required' => true,
-                            'maxlength' => 400,
-                        ),
+                        'required',
+                        'maxlength,256',
                     ),
                 ),
                 'target' => array(
@@ -99,10 +97,8 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                         'isListLink' => 1,
                     ),
                     'validator' => array(
-                        'rule' => array(
-                            'required' => true,
-                            'maxlength' => 20,
-                        ),
+                        'required',
+                        'maxlength,16',
                     ),
                 ),
                 'order' => array(
