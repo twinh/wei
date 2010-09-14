@@ -36,8 +36,12 @@ class Trex_Member_Controller_Setting extends Trex_Controller
         /**
          * 设置视图
          */
+        $theme = Qwin::run('-ini')->getConfig('interface.theme');
         $this->_view = array(
-            'class' => 'Trex_Member_View_Center',
+            'class' => 'Trex_View',
+            'element' => array(
+                array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/member-setting-center.php'),
+            ),
             'data' => get_defined_vars(),
         );
     }

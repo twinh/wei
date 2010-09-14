@@ -40,9 +40,7 @@ class Trex_Member_Metadata_Log extends Qwin_Trex_Metadata
                         'isList' => 0,
                     ),
                     'validator' => array(
-                        'rule' => array(
-                            'required' => true,
-                        ),
+                        'required'
                     ),
                 ),
                 'password' => array(

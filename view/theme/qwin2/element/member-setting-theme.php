@@ -29,7 +29,7 @@
 ?>
 <script type="text/javascript">
 jQuery(function($){
-    $('div.ui-theme-list ul li').qui();
+    $('div.ui-image-list ul li').qui();
 });
 </script>
 <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
@@ -44,8 +44,8 @@ jQuery(function($){
     <form action="" method="post">
     <div class="ui-form-content ui-box-content ui-widget-content ui-image-list">
         <div class="ui-theme-operation ui-operation-field">
-            <button class="ui-action-submit" type="submit"><?php echo qw_lang('LBL_ACTION_SUBMIT') ?></button>
-            <a class="ui-action-return" href="javascript:history.go(-1);"><?php echo qw_lang('LBL_ACTION_RETURN') ?></a>
+            <?php echo qw_jquery_button('submit', qw_lang('LBL_ACTION_SUBMIT'), 'ui-icon-check') ?>
+            <?php echo qw_jquery_link('javascript:history.go(-1);', qw_lang('LBL_ACTION_RETURN'), 'ui-icon-arrowthickstop-1-w') ?>
             <input type="hidden" name="_submit" value="1" />
         </div>
         <hr class="ui-line ui-widget-content" />
@@ -69,8 +69,8 @@ foreach($theme as $row){
         </ul>
         <hr class="ui-line ui-widget-content" />
         <div class="ui-theme-operation ui-operation-field">
-            <button class="ui-action-submit" type="submit"><?php echo qw_lang('LBL_ACTION_SUBMIT') ?></button>
-            <a class="ui-action-return" href="javascript:history.go(-1);"><?php echo qw_lang('LBL_ACTION_RETURN') ?></a>
+            <?php echo qw_jquery_button('submit', qw_lang('LBL_ACTION_SUBMIT'), 'ui-icon-check') ?>
+            <?php echo qw_jquery_link('javascript:history.go(-1);', qw_lang('LBL_ACTION_RETURN'), 'ui-icon-arrowthickstop-1-w') ?>
         </div>
     </div>
     </form>

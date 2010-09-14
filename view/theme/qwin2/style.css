@@ -172,6 +172,10 @@ div.ui-layout-pane {
 
 /* Form (Add, Edit Action & Show Action)
 ----------------------------------*/
+.ui-form-error-message{
+    padding: .4em .4em .48em .4em;
+    vertical-align: text-bottom
+}
 .ui-operation-field{
 	margin: 1em 0;
 }
@@ -207,7 +211,7 @@ div.ui-layout-pane {
     background: none;
 }
 .ui-form .ui-form-content legend {
-    font-size: 1.5em;
+    font-size: 1.3em;
     font-weight: bold;
     line-height: 120%;
     padding: 0 .3em;
@@ -215,18 +219,7 @@ div.ui-layout-pane {
     background: none;
     border: 0;
 }
-/*
-.ui-form .ui-form-content .ui-label-common {
-    width: 100px;
-    background: none;
-    border: 0;
-}
-.ui-form .ui-form-content .ui-label-common label{
-    font-size: 1.3em;
-    line-height: 2em;
-    float: right;
-    padding-right: .4em;
-}*/
+
 .ui-form .ui-form-content .ui-field-common {
     width: 400px;
 }
@@ -311,29 +304,29 @@ div.ui-layout-pane {
 
 /* Tables in the Form
 ----------------------------------*/
-.ui-table{
+.ui-form-table{
 	border-collapse: collapse;
 	border-spacing: 0;
 	margin: .2em 0 2em;
 }
-.ui-table td{
+.ui-form-table td{
 	padding: .2em;
 	font-size:1.3em;
 	font-weight: normal;
     line-height:2em;
 }
-.ui-table td.ui-field-common{
+.ui-form-table td.ui-field-common{
 	font-size: 1em;
 }
-.ui-table .ui-label-common{
+.ui-form-table .ui-label-common{
 	text-align: right;
 	
 }
-.ui-table td.ui-field-plain{
+.ui-form-table td.ui-field-plain{
     font-size: 1.3em;
 }
-.ui-table .ui-field-text input,
-.ui-table .ui-field-password input{
+.ui-form-table .ui-field-text input,
+.ui-form-table .ui-field-password input{
 	width: 60%;
     padding:.4em 0 .4em .5em;/* for ie & ff */
     line-height:1.5em;/* for ie */
@@ -341,18 +334,18 @@ div.ui-layout-pane {
 	font-size:1.1em;
     vertical-align: bottom;
 }
-.ui-table .ui-field-checkbox input,
-.ui-table .ui-field-radio input {
+.ui-form-table .ui-field-checkbox input,
+.ui-form-table .ui-field-radio input {
     margin-top:.4em;
 }
-.ui-table .ui-field-select select {
+.ui-form-table .ui-field-select select {
     width:61%;
     height:2em;
     font-size:1.1em;
     line-height:2em;
 	padding: .2em 0 0;
 }
-.ui-table .ui-field-textarea textarea{
+.ui-form-table .ui-field-textarea textarea{
 	width: 59.6%;
     height: 8em;
     font-size: 1.1em;
@@ -362,12 +355,22 @@ div.ui-layout-pane {
     overflow-y: auto;
     vertical-align: bottom;
 }
-.ui-table .ui-field-common button{
+.ui-form-table .ui-field-common button{
     vertical-align: bottom;
 }
-.ui-table .ui-field-common button .ui-button-text{
+.ui-form-table .ui-field-common button .ui-button-text{
     padding: 0.4em 0.4em;
 
+}
+.ui-form-table .ui-field-common label.error {
+    cursor:pointer;
+    display:inline-block;
+    margin-right:0.1em;
+    overflow:visible;
+    padding:0;
+    position:relative;
+    text-align:center;
+    text-decoration:none !important;
 }
 /* Tabs in the Form
 ----------------------------------*/
@@ -443,7 +446,7 @@ div.ui-layout-pane {
 
 /* Theme Switch Page
 ----------------------------------*/
-.ui-image-list ul{
+.ui-image-list{
     padding: 1em;
 }
 .ui-image-list ul li{
@@ -463,4 +466,36 @@ div.ui-layout-pane {
     clear: both;
     width: auto;
     margin: 0 2em;
+}
+
+/* Table
+----------------------------------*/
+.ui-table{
+    margin: 1em 0;
+    padding: 1px;
+    width: 100%;
+}
+.ui-table td{
+    padding: .2em;
+	font-size:1em;
+	font-weight: normal;
+    line-height:2em;
+
+    border-right-width: 1px;
+    border-right-color: inherit;
+    border-right-style: solid;
+
+    border-bottom-width: 1px;
+    border-bottom-color: inherit;
+    border-bottom-style: solid;
+}
+.ui-table td.ui-state-default{
+    text-align: center;
+    border-left: none;
+    border-top: none;
+}
+.ui-table .ui-table-header td{
+    font-weight: bold;
+    text-indent: .6em;
+    border-right: none;
 }

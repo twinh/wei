@@ -30,11 +30,6 @@
 
 class Trex_ActionController extends Trex_Controller
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     /**
      * 默认首页
      */
@@ -168,6 +163,9 @@ class Trex_ActionController extends Trex_Controller
         $id = $this->_request->g($primaryKey);
         $query = $meta->getDoctrineQuery($this->_set);
         $relatedField = $meta->connectMetadata($this->_meta);
+        Qwin::run('Qwin_Class_Extension')
+            ->setNamespace('validator')
+            ->addClass('Qwin_Validator_JQuery');
 
         if(empty($_POST))
         {
@@ -221,13 +219,13 @@ class Trex_ActionController extends Trex_Controller
              * 转换,验证和还原
              */
             $data = $this->_meta->convertSingleData($relatedField, $relatedField, 'db', $_POST);
-            if(false == $meta->validateData($relatedField, $data + $_POST))
+            $validateResult = $meta->validateArray($relatedField, $data + $_POST, $this);
+            if(true !== $validateResult)
             {
                 $message = $this->_lang->t('MSG_ERROR_FIELD')
-                    . $this->_lang->t($relatedField[$this->_validatorField]['basic']['title'])
+                    . $this->_lang->t($relatedField[$validateResult->field]['basic']['title'])
                     . '<br />'
-                    . $this->_lang->t('MSG_ERROR_MSG')
-                    . $this->_lang->t($this->_validatorMessage);
+                    . $this->_lang->t($validateResult->message);
                 return $this->setRedirectView($message);
             }
             $data = $meta->restoreData($relatedField, $relatedField, $data);
@@ -269,6 +267,9 @@ class Trex_ActionController extends Trex_Controller
         $primaryKey = $meta['db']['primaryKey'];
         $id = $this->_request->g($primaryKey);
         $query = $meta->getDoctrineQuery($this->_set);
+        Qwin::run('Qwin_Class_Extension')
+            ->setNamespace('validator')
+            ->addClass('Qwin_Validator_JQuery');
 
         if(null == $this->_request->p($meta['db']['primaryKey']))
         {
@@ -320,12 +321,13 @@ class Trex_ActionController extends Trex_Controller
              * 转换,验证和还原
              */
             $data = $meta->convertSingleData($relatedField, $relatedField, 'db', $_POST);
-            if(false == $meta->validateData($relatedField, $data + $_POST))
+            $validateResult = $meta->validateArray($relatedField, $data + $_POST, $this);
+            if(true !== $validateResult)
             {
                 $message = $this->_lang->t('MSG_ERROR_FIELD')
-                    . $this->_lang->t($relatedField[$this->_validatorField]['basic']['title'])
+                    . $this->_lang->t($relatedField[$validateResult->field]['basic']['title'])
                     . '<br />'
-                    . $this->_lang->t($this->_validatorMessage);
+                    . $this->_lang->t($validateResult->message);
                 return $this->setRedirectView($message);
             }
             $data = $meta->restoreData($editDbField, $relatedField, $data);

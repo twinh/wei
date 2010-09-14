@@ -1,6 +1,6 @@
 <?php
 /**
- * Module
+ * ApplicationStructure
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,15 +16,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Trex
- * @subpackage  Module
+ * @package     Qwin
+ * @subpackage  
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-04-17 15:23:13
+ * @since       2010-09-11 21:41:42
  */
 
-class Trex_Module_Controller_Module extends Trex_ActionController
+class Trex_Management_Model_ApplicationStructure extends Trex_Model
 {
 }

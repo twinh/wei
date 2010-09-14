@@ -48,10 +48,8 @@ class Trex_Member_Metadata_Password extends Trex_Metadata
                         'isDbQuery' => 0,
                     ),
                     'validator' => array(
-                        'rule' => array(
-                            'required' => true,
-                            'rangelength' => array(5, 40),
-                        ),
+                        'required',
+                        'rangelength,5,40',
                     ),
                 ),
                 'password' => array(
@@ -67,10 +65,8 @@ class Trex_Member_Metadata_Password extends Trex_Metadata
                         'db' => array('md5')
                     ),
                     'validator' => array(
-                        'rule' => array(
-                            'required' => true,
-                            'rangelength' => array(5, 40),
-                        ),
+                        'required',
+                        'rangelength,5,40',
                     ),
                 ),
                 'confirm_password' => array(
@@ -83,10 +79,8 @@ class Trex_Member_Metadata_Password extends Trex_Metadata
                         'isDbQuery' => 0,
                     ),
                     'validator' => array(
-                        'rule' => array(
-                            'required' => true,
-                            'equalTo' => '#password'
-                        ),
+                        'required',
+                        'equalTo,#password',
                     ),
                 ),
             ),

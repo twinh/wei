@@ -25,7 +25,7 @@
  * @since       2010-04-29 04:49:37
  */
 
-class Qwin_Hepler_Util
+class Qwin_Helper_Util
 {
     public function getStyle()
     {
@@ -48,7 +48,7 @@ class Qwin_Hepler_Util
         return $style;
     }
 
-    public function getIp()
+    public static function getIp()
     {
         if (isset($HTTP_SERVER_VARS["HTTP_X_FORWARDED_FOR"]))
         {

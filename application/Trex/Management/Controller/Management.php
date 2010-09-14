@@ -1,6 +1,6 @@
 <?php
 /**
- * Form
+ * Management
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,36 +17,25 @@
  * limitations under the License.
  *
  * @package     Trex
- * @subpackage  Common
+ * @subpackage  Management
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-18 20:19:19
+ * @since       2010-09-11 21:40:07
  */
 
-class Trex_Common_View_Form extends Trex_View
+class Trex_Management_Controller_Management extends Trex_Controller
 {
-    public function __construct()
+    public function actionIndex()
     {
-        parent::__construct();
-        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/common-form.php');
-    }
-
-    public function display()
-    {
-        /**
-         * 初始化变量,方便调用
-         */
-        $primaryKey = $this->primaryKey;
-        $meta = $this->meta;
-        $relatedField = $this->relatedField;
-        $arrayHelper = Qwin::run('-arr');
-        $groupList = $this->_data['groupList'];
-        $data = $this->data;
-        $set = Qwin::run('-ini')->getSet();
-        $jQueryValidateCode = $arrayHelper->jsonEncode($meta->getJQueryValidateCode($relatedField));
-
-        require_once $this->_layout;
+        $theme = Qwin::run('-ini')->getConfig('interface.theme');
+        $this->_view = array(
+            'class' => 'Trex_View',
+            'element' => array(
+                array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/management.php'),
+            ),
+            'data' => get_defined_vars(),
+        );
     }
 }

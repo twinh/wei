@@ -1,6 +1,6 @@
 <?php
 /**
- * Contact
+ * ApplicationStructure
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,117 +16,89 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Trex
- * @subpackage  Contact
+ * @package     Qwin
+ * @subpackage  
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-01 11:10:20
+ * @since       2010-09-11 21:41:36
  */
 
-class Trex_Contact_Metadata_Contact extends Trex_Metadata
+class Trex_Management_Metadata_ApplicationStructure extends Trex_Metadata
 {
     public function __construct()
     {
-        $this->setCommonMetadata();
+        //$this->setCommonMetadata();
         $this->parseMetadata(array(
             'field' => array(
-                'first_name' => array(
+                'namespace' => array(
 
                 ),
-                'last_name' => array(
-
-                ),
-                'nickname' => array(
-
-                ),
-                'photo' => array(
+                /*'parent_id' => array(
+                    'basic' => array(
+                        'title' => 'LBL_FIELD_PARENT_NAME',
+                    ),
                     'form' => array(
-                        '_widget' => array(
-                            'fileTree',
-                            'ajaxUpload',
+                        '_type' => 'select',
+                        '_resourceGetter' => array(
+                            array('Project_Hepler_Category', 'getTreeResource'),
+                            array(
+                                'namespace' => 'Trex',
+                                'module' => 'Management',
+                                'controller' => 'ApplicationStructure',
+                            ),
+                            NULL,
+                            array('id', 'parent_id', 'name')
                         ),
                     ),
                     'attr' => array(
                         'isList' => 0,
                     ),
                 ),
-                'sex' => array(
+                'type' => array(
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
                             array('Project_Helper_CommonClass', 'get'),
-                            'sex',
+                            'application-structure',
                         ),
                     ),
                     'converter' => array(
                         'list' => array(
                             array('Project_Helper_CommonClass', 'convert'),
-                            'sex',
+                            'application-structure',
                         ),
                         'view' => array(
                             array('Project_Helper_CommonClass', 'convert'),
-                            'sex',
+                            'application-structure',
                         ),
                     ),
                     'attr' => array(
                         'isListLink' => 1,
                     ),
                 ),
-                'related_module' => array(
-                    'form' => array(
-                        '_type' => 'hidden',
-                    ),
-                    'attr' => array(
-                        'isList' => 0,
-                    ),
-                ),
-                'birthday' => array(
-                    'form' => array(
-                        '_widget' => 'datepicker',
-                    )
-                ),
-                'email' => array(
+                'name' => array(
 
                 ),
-                'telephone' => array(
-                    'attr' => array(
-                        'isList' => 0,
+                'description' => array(
+                    'form' => array(
+                        '_type' => 'textarea',
                     ),
-                ),
-                'mobile' => array(
-                    'attr' => array(
-                        'isList' => 0,
-                    ),
-                ),
-                'homepage' => array(
-                    'attr' => array(
-                        'isList' => 0,
-                    ),
-                ),
-                'address' => array(
-                    'attr' => array(
-                        'isList' => 0,
-                    ),
-                ),
+                ),*/
             ),
             'model' => array(
 
             ),
             'db' => array(
-                'table' => 'contact',
+                'table' => 'management_application_structure',
                 'order' => array(
-                    array('date_created', 'ASC'),
-                )
+                    array('date_created', 'DESC'),
+                ),
             ),
             'page' => array(
-                'title' => 'LBL_MODULE_CONTACT',
+                'title' => 'LBL_MANAGEMENT_APPLICATION_STRUCTURE',
             ),
         ));
-        $this
-            ->field
-            ->set('date_created.attr.isList', 0)
-            ->set('date_modified.attr.isList', 0);
     }
 }

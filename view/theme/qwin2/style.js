@@ -33,7 +33,9 @@ jQuery(function($){
     $('#ui-header-shortcut a:first').addClass('ui-corner-bl');
     $('#ui-header-shortcut a:last').addClass('ui-header-shortcut-last-anchor');
 
-    $('div.ui-message-operation a, div.ui-operation-field a, div.ui-operation-field button').qui();
+    //$('div.ui-message-operation a, div.ui-operation-field a, div.ui-operation-field button').qui();
+    $('button.ui-button, a.ui-button').qui();
+    $('table.ui-form-table input:text, table.ui-table textarea').qui();
 
     $('a.ui-action-controller').button({icons: {primary: 'ui-icon-triangle-1-e'},text: false});
 

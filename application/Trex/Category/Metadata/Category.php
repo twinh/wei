@@ -34,6 +34,9 @@ class Trex_Category_Metadata_Category extends Trex_Metadata
             // 基本属性
             'field' => array(
                 'parent_id' => array(
+                    'basic' => array(
+                        'title' => 'LBL_FIELD_PARENT_NAME',
+                    ),
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(

@@ -50,6 +50,7 @@ class Trex_Common_Language_Enus extends Trex_Language
             'LBL_ACTION_APPLY' => 'Apply',
             'LBL_ACTION_RESTORE' => 'Restore',
             'LBL_ACTION_REDIRECT' => 'Redirect',
+            'LBL_ACTION_UPDATE' => 'Update',
 
             'LBL_DEFAULT' => 'Default',
             'LBL_OPERATION' => 'Operation',
@@ -68,6 +69,7 @@ class Trex_Common_Language_Enus extends Trex_Language
             'LBL_LANG' => 'Language',
             'LBL_MESSAGE' => 'Message',
             'LBL_MEMBER_CENTER' => 'Member Center',
+            'LBL_MANAGEMENT' => 'Management',
 
             // field
             'LBL_FIELD_ID' => 'Id',
@@ -87,6 +89,9 @@ class Trex_Common_Language_Enus extends Trex_Language
             'LBL_FIELD_CREATED_BY' => 'Created By',
             'LBL_FIELD_MODIFIED_BY' => 'Modified By',
             'LBL_FIELD_SUMMARY' => 'Summary',
+            'LBL_FIELD_TYPE' => 'Type',
+            'LBL_FIELD_PARENT_NAME' => 'Parent Name',
+            'LBL_FIELD_PARENT_ID' => 'Parent Id',
 
             // group
             'LBL_GROUP_BASIC_DATA' => 'Basic Data',
@@ -125,6 +130,10 @@ class Trex_Common_Language_Enus extends Trex_Language
             'LBL_FIELD_TELEPHONE' => 'Telephone',
             'LBL_FIELD_MOBILE' => 'Mobile',
             'LBL_FIELD_SEX' => 'Sex',
+            'LBL_FIELD_HOMEPAGE' => 'Homepage',
+            'LBL_FIELD_ADDRESS' => 'Address',
+
+            'MSG_VALIDATOR_EMAIL' => 'Please enter a valid email address.',
         );
     }
 }
