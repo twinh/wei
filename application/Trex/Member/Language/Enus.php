@@ -62,6 +62,7 @@ class Trex_Member_Language_Enus extends Trex_Language
             'LBL_FIELD_MEMBER_ID' => 'Member Id',
             'LBL_FIELD_THEME' => 'Theme',
             'LBL_FIELD_LANGUAGE' => 'Language',
+            'LBL_FIELD_IP' => 'Ip',
 
             'LBL_GROUP_BASIC_DATA' => 'Basic Data',
             'LBL_GROUP_DETAIL_DATA' => 'Detail Data',
@@ -71,6 +72,7 @@ class Trex_Member_Language_Enus extends Trex_Language
             'LBL_MODULE_MEMBER' => 'Member',
             'LBL_MODULE_MEMBER_DETAIL' => 'Member Detail',
             'LBL_MODULE_MEMBER_GROUP' => 'Member Group',
+            'LBL_MODULE_MEMBER_LOGINLOG' => 'Member Login Log',
 
             'LBL_THEME' => 'Theme',
             'LBL_LANGUAGE' => 'Language',
@@ -79,6 +81,7 @@ class Trex_Member_Language_Enus extends Trex_Language
             'LBL_EDIT_PASSWORD' => 'Edit Password',
             'LBL_SWITCH_STYLE' => 'Switch Style',
             'LBL_SWITCH_LANGUAGE' => 'Switch Language',
+            'LBL_ACTION_ALLOCATE_PERMISSION' => 'Allocate Permission',
 
             
             'LBL_LOGIN_TITLE' => 'Welcome to use the system',
@@ -93,6 +96,7 @@ class Trex_Member_Language_Enus extends Trex_Language
             'MSG_OLD_PASSWORD_NOT_CORRECT' => 'The old password is not correct.',
             'MSG_MEMBER_NOT_ALLOW_DELETE' => 'System member is not allowed to delete.',
             'MSG_GUEST_NOT_ALLOW_EDIT_PASSWORD' => 'It is not allowed to edit guest member\'s password.',
+            'MSG_PERMISSION_NOT_ENOUGH' => 'Your permission is not enough to view/operate this page',
         );
     }
 }

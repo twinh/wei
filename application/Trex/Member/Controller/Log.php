@@ -38,7 +38,8 @@ class Trex_Member_Controller_Log extends Trex_Controller
         /**
          * 提示已经登陆的信息
          */
-        if(null !== $ses->get('member'))
+        $member = $ses->get('member');
+        if('guest' != $member['username'])
         {
             return $this->setRedirectView($this->_lang->t('MSG_LOGINED'));
         }
@@ -93,6 +94,21 @@ class Trex_Member_Controller_Log extends Trex_Controller
             $ses->set('member',  $member);
             $ses->set('style', $member['theme']);
             $ses->set('language', $member['language']);
+
+            /**
+             * 增加登陆记录
+             */
+            $logQuery = $meta->getDoctrineQuery(array(
+                'namespace' => 'Trex',
+                'module' => 'Member',
+                'controller' => 'LoginLog',
+            ));
+            $logQuery = new Trex_Member_Model_LoginLog();
+            $logQuery['id'] = Qwin::run('Qwin_converter_String')->getUuid();
+            $logQuery['member_id'] = $member['id'];
+            $logQuery['ip'] = Qwin_Helper_Util::getIp();
+            $logQuery['date_created'] = date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
+            $logQuery->save();
 
             /**
              * 跳转到上一页或默认首页

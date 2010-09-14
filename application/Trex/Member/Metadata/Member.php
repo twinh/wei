@@ -65,10 +65,8 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                         'isReadonly' => 1,
                     ),
                     'validator' => array(
-                        'rule' => array(
-                            'required' => true,
-                            'maxlength' => 40,
-                        ),
+                        'required',
+                        'maxlength,40',
                     ),
                 ),
                 'password' => array(
@@ -83,19 +81,15 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                         )
                     ),
                     'validator' => array(
-                        'rule' => array(
-                            'required' => true,
-                            'maxlength' => 40,
-                        ),
+                        'required',
+                        'maxlength,40',
                     ),
                 ),
                 'email' => array(
                     'validator' => array(
-                        'rule' => array(
-                            'required' => true,
-                            'email' => true,
-                            'maxlength' => 400,
-                        ),
+                        'required',
+                        'email',
+                        'maxlength,256',
                     ),
                 ),
                 'reg_ip' => array(

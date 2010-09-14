@@ -27,13 +27,75 @@
 
 class Trex_Member_Controller_Group extends Trex_ActionController
 {
+    /**
+     * 分配权限
+     *
+     * @return 当前类
+     * @todo 预定权限分配模式,提供一键分配
+     * @todo 全选,反选
+     * @todo 当父分类被选择时,子分类全选
+     */
     public function actionAllocatePermission()
     {
-        if(!$_POST)
+        /**
+         * 初始化常用的变量
+         */
+        $meta = $this->_meta;
+        $primaryKey = $meta['db']['primaryKey'];
+        $id = $this->_request->g($primaryKey);
+
+        /**
+         * 从模型获取数据
+         */
+        $query = $meta->getDoctrineQuery($this->_set);
+        $result = $query->where($primaryKey . ' = ?', $id)->fetchOne();
+
+        /**
+         * 记录不存在,加载错误视图
+         */
+        if(false == $result)
         {
-            
+            return $this->setRedirectView($this->_lang->t('MSG_NO_RECORD'));
+        }
+
+        if(empty($_POST))
+        {
+            $permission = unserialize($result['permission']);
+            $appStructure = require QWIN_ROOT_PATH . '/cache/php/application-structure.php';
+            $theme = Qwin::run('-ini')->getConfig('interface.theme');
+            $this->_view = array(
+                'class' => 'Trex_View',
+                'element' => array(
+                    array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/member-permission.php'),
+                ),
+                'data' => get_defined_vars(),
+            );
         } else {
-            
+            $permission = (array)$this->_request->p('permission');
+            /**
+             * 剔除子项
+             */
+            foreach($permission as $nameString => $value)
+            {
+                $tempName = '';
+                $nameList = explode('|', $nameString);
+                array_pop($nameList);
+                foreach($nameList as $name)
+                {
+                    '' != $tempName && $tempName .= '|';
+                    $tempName .= $name;
+                    if(isset($permission[$tempName]))
+                    {
+                        unset($permission[$nameString]);
+                        break;
+                    }
+                }
+
+            }
+            $result['permission'] = serialize($permission);
+            $result->save();
+            $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Index'));
+            return $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }
 
@@ -46,14 +108,11 @@ class Trex_Member_Controller_Group extends Trex_ActionController
         return $value . '<em>(' . $this->_lang->t('MSG_FILE_NOT_EXISTS') . ')</em>';
     }
 
-    /*public function convertListOperation($val, $name, $data, $cpoyData)
+    public function convertListOperation($value, $name, $data, $copyData)
     {
-        //$html = '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="' . $this->t('LBL_ACTION_ADD_SUBCATEGORY') .'" href="' . url(array( $this->_set['namespace'],  $this->_set['module'],  $this->_set['controller'], 'AllocatePermission'), array($this->__meta['db']['primaryKey'] => $data[$this->__meta['db']['primaryKey']])) . '"><span class="ui-icon ui-icon-person"></span></a>';
-        $html = $this->meta->getOperationLink(
-            $this->__meta['db']['primaryKey'],
-            $data[$this->__meta['db']['primaryKey']],
-            $this->_set
-        );
+        $primaryKey = $this->_meta['db']['primaryKey'];
+        $html = Qwin_Helper_Html::jQueryButton($this->_url->createUrl($this->_set, array('action' => 'AllocatePermission', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_ALLOCATE_PERMISSION'), 'ui-icon-person');
+        $html .= parent::convertListOperation($value, $name, $data, $copyData);
         return $html;
-    }*/
+    }
 }

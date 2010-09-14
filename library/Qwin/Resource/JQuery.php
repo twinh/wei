@@ -163,7 +163,11 @@ class Qwin_Resource_JQuery extends Qwin_Resource
         $cssFile = $file . '.css';
         if(true == $isWrap)
         {
-            return $this->wrapAsCssFile($cssFile) . $this->wrapAsFile($jsFile);
+            if(file_exists($cssFile))
+            {
+                return $this->wrapAsCssFile($cssFile) . $this->wrapAsFile($jsFile);
+            }
+            return $this->wrapAsFile($jsFile);
         }
         return $jsFile;
     }

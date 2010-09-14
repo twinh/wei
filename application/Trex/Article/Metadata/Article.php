@@ -82,7 +82,10 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                 ),
                 'title' => array(
                     'validator' => array(
-                        'required',
+                        'rule' => array(
+                            'required' => true,
+                            'minlength' => 10,
+                        ),
                     ),
                 ),
                 'title_style' => array(
@@ -117,9 +120,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         'isList' => 0,
                     ),
                     'validator' => array(
-                        'rule' => array(
-                            'maxlength' => 20,
-                        ),
+                        'maxlength,20',
                     ),
                 ),
                 'author' => array(

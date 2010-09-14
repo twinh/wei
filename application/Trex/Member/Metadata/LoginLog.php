@@ -1,6 +1,6 @@
 <?php
 /**
- * Group
+ * LoginLog
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,67 +16,56 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Trex
- * @subpackage  Member
+ * @package     Qwin
+ * @subpackage  
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-07-15 14:49:16
+ * @since       2010-09-13 11:20:21
  */
 
-class Trex_Member_Metadata_Group extends Trex_Metadata
+class Trex_Member_Metadata_LoginLog extends Trex_Metadata
 {
     public function __construct()
     {
-        $this->setCommonMetadata();
+        $this->setIdMetadata();
         $this->parseMetadata(array(
-            // 基本属性
             'field' => array(
-                'name' => array(
-                ),
-                'image_path' => array(
-                    'form' => array(
-                        '_widget' => array(
-                            'fileTree',
-                            'ajaxUpload'
-                        ),
-                    ),
+                'member_id' => array(
                     'attr' => array(
-                        'isList' => 0,
-                    ),
+                        'isListLink' => 1,
+                    )
                 ),
-                'description' => array(
-                    'form' => array(
-                        '_type' => 'textarea',
-                    ),
-                    'attr' => array(
-                        'isList' => 0,
-                    ),
+                'ip' => array(
+
                 ),
-                'permission' => array(
-                    'form' => array(
-                        '_type' => 'hidden',
-                    ),
-                    'attr' => array(
-                        'isList' => 0,
-                    ),
+                'date_created' => array(
+
                 ),
             ),
-            // 表之间的联系
             'model' => array(
-
+                'member' => array(
+                    'name' => 'Trex_Member_Model_Member',
+                    'alias' => 'status',
+                    'metadata' => 'Trex_Member_Metadata_Member',
+                    'local' => 'member_id',
+                    'foreign' => 'id',
+                    'type' => 'view',
+                    'fieldMap' => array(
+                        'member_id' => 'username',
+                    ),
+                ),
             ),
             'db' => array(
-                'table' => 'member_group',
+                'table' => 'member_loginlog',
                 'order' => array(
                     array('date_created', 'DESC'),
                 ),
             ),
-            // 页面显示
             'page' => array(
-                'title' => 'LBL_MODULE_MEMBER_GROUP',
-            ),
+                'title' => 'LBL_MODULE_MEMBER_LOGINLOG',
+            )
         ));
     }
 }

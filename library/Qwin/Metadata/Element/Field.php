@@ -83,7 +83,8 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
                 'view' => null,
             ),
             'validator' => array(
-
+                'rule' => array(),
+                'message' => array(),
             ),
         );
     }
@@ -159,11 +160,24 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         // 转换按钮
         $metadata['form'] = $this->_parseWidgetSetting($metadata['form']);
 
+        // 初始验证器和补全验证信息
         if(!isset($metadata['validator']))
         {
-            $metadata['validator'] = array();
+            $metadata['validator'] = array(
+                'rule' => array(),
+                'message' => array(),
+            );
         }
-        $metadata['validator'] = Qwin::run('Qwin_Metadata_Element_Field_Validator')->parse($metadata['validator']);
+        elseif(!empty($metadata['validator']['rule']))
+        {
+            foreach($metadata['validator']['rule'] as $key => $rule)
+            {
+                if(!isset($metadata['validator']['message'][$key]))
+                {
+                    $metadata['validator']['message'][$key] = 'MSG_VALIDATOR_' . strtoupper($key);
+                }
+            }
+        }
         
         return $this->_multiArrayMerge($this->getSampleData(), $metadata);
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Form
+ * LoginLog
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,36 +17,14 @@
  * limitations under the License.
  *
  * @package     Trex
- * @subpackage  Common
+ * @subpackage  Member
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-18 20:19:19
+ * @since       2010-09-13 11:20:50
  */
 
-class Trex_Common_View_Form extends Trex_View
+class Trex_Member_Model_LoginLog extends Trex_Model
 {
-    public function __construct()
-    {
-        parent::__construct();
-        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/common-form.php');
-    }
-
-    public function display()
-    {
-        /**
-         * 初始化变量,方便调用
-         */
-        $primaryKey = $this->primaryKey;
-        $meta = $this->meta;
-        $relatedField = $this->relatedField;
-        $arrayHelper = Qwin::run('-arr');
-        $groupList = $this->_data['groupList'];
-        $data = $this->data;
-        $set = Qwin::run('-ini')->getSet();
-        $jQueryValidateCode = $arrayHelper->jsonEncode($meta->getJQueryValidateCode($relatedField));
-
-        require_once $this->_layout;
-    }
 }

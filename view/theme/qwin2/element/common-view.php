@@ -48,7 +48,7 @@
         <?php foreach($groupList as $group => $fieldList): ?>
         <fieldset id="ui-fieldset-<?php echo $group ?>" class="ui-widget-content ui-corner-all">
           <legend><?php echo qw_lang($group) ?></legend>
-          <table class="ui-table" id="ui-table-<?php echo $group ?>" width="100%">
+          <table class="ui-form-table" id="ui-form-table-<?php echo $group ?>" width="100%">
             <tr>
               <td width="12.5%"></td>
               <td width="37.5%"></td>

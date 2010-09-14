@@ -33,8 +33,27 @@ class Trex_Controller extends Qwin_Trex_Controller
     /**
      * 初始化各类和数据
      */
-    public function __construct()
+    public function __construct($option = null)
     {
+        /**
+         * 根据配置选择性加载语言,元数据,模型
+         * @todo 对$option进行详细检查
+         */
+        if(null == $option)
+        {
+            $option = array(
+                'language' => true,
+                'metadata' => true,
+                'model' => true,
+            );
+        } elseif(false == $option) {
+            $option = array(
+                'language' => false,
+                'metadata' => false,
+                'model' => false,
+            );
+        }
+
         $ini = Qwin::run('-ini');
         $this->_request = Qwin::run('Qwin_Request');
         $this->_url = Qwin::run('Qwin_Url');
@@ -43,53 +62,62 @@ class Trex_Controller extends Qwin_Trex_Controller
         $this->_member = Qwin::run('Qwin_Session')->get('member');
        
         /**
-         * 访问控制
-         */
-        $this->_isAllowVisited();
-
-        /**
          * 加载语言,同时将该命名空间下的通用模块语言类加入到当前模块的语言类下
          */
-        $languageName = $this->getLanguage();
-        $commonLanguageName = $set['namespace'] . '_Common_Language_' . $languageName;
-        $languageName = $set['namespace'] . '_' . $set['module'] . '_Language_' . $languageName;
-        $this->_lang = Qwin::run($languageName);
-        if(null == $this->_lang)
+        if($option['language'])
         {
-            $languageName = 'Trex_Language';
+            $languageName = $this->getLanguage();
+            $commonLanguageName = $set['namespace'] . '_Common_Language_' . $languageName;
+            $languageName = $set['namespace'] . '_' . $set['module'] . '_Language_' . $languageName;
             $this->_lang = Qwin::run($languageName);
+            if(null == $this->_lang)
+            {
+                $languageName = 'Trex_Language';
+                $this->_lang = Qwin::run($languageName);
+            }
+            $this->_commonLang = Qwin::run($commonLanguageName);
+            if(null != $this->_commonLang)
+            {
+                $this->_lang->merge($this->_commonLang);
+            }
+            Qwin::addMap('-lang', $languageName);
         }
-        $this->_commonLang = Qwin::run($commonLanguageName);
-        if(null != $this->_commonLang)
-        {
-            $this->_lang->merge($this->_commonLang);
-        }
-        Qwin::addMap('-lang', $languageName);
 
         /**
          * 加载元数据
          */
-        $metadataName = $ini->getClassName('Metadata', $set);
-        if(class_exists($metadataName))
+        if($option['metadata'])
         {
-            $this->_meta = Qwin_Metadata_Manager::get($metadataName);
-        } else {
-            $metadataName = 'Trex_Metadata';
-            $this->_meta = Qwin::run($metadataName);
+            $metadataName = $ini->getClassName('Metadata', $set);
+            if(class_exists($metadataName))
+            {
+                $this->_meta = Qwin_Metadata_Manager::get($metadataName);
+            } else {
+                $metadataName = 'Trex_Metadata';
+                $this->_meta = Qwin::run($metadataName);
+            }
+            Qwin::addMap('-meta', $metadataName);
         }
-        Qwin::addMap('-meta', $metadataName);
 
         /**
          * 加载模型
          */
-        $modelName = $ini->getClassName('Model', $set);
-        $this->_model = Qwin::run($modelName);
-        if(null == $this->_model)
+        if($option['model'])
         {
-            $modelName = 'Qwin_Trex_Model';
+            $modelName = $ini->getClassName('Model', $set);
             $this->_model = Qwin::run($modelName);
+            if(null == $this->_model)
+            {
+                $modelName = 'Qwin_Trex_Model';
+                $this->_model = Qwin::run($modelName);
+            }
+            Qwin::addMap('-model', $modelName);
         }
-        Qwin::addMap('-model', $modelName);
+
+         /**
+         * 访问控制
+         */
+        $this->_isAllowVisited();
     }
 
     /**
@@ -99,35 +127,65 @@ class Trex_Controller extends Qwin_Trex_Controller
      */
     private function _isAllowVisited()
     {
-        // 除了登陆页面之外,其他页面都得设置访问权限
-        $allowSet = array(
-            array(
+        $ses  = Qwin::run('-ses');
+        $member = $ses->get('member');
+
+        // 未登陆则默认使用游客账号
+        if(null == $member)
+        {
+            $set = array(
                 'namespace' => 'Trex',
                 'module' => 'Member',
-                'controller' => 'Log',
-                'action' => 'Login',
-            ),
-            array(
-                'namespace' => 'Trex',
-                'module' => 'Trex',
-                'controller' => 'Captcha',
-                'action' => 'Index',
-            ),
-        );
-
-        if(!in_array($this->_set, $allowSet))
+                'controller' => 'Member',
+            );
+            $query =$this->_meta->getDoctrineQuery($set);
+            $result = $query
+                ->where('username = ?', 'guest')
+                ->fetchOne();
+            $member = $result->toArray();
+            
+            $ses->set('member',  $member);
+            $ses->set('permisson', $member['group']['permission']);
+            $ses->set('style', $member['theme']);
+            $ses->set('language', $member['language']);
+        }
+        
+        // 逐层权限判断
+        $set = $this->_set;
+        $permission = unserialize($member['group']['permission']);
+        if(isset($permission[$set['namespace']]))
         {
-            if(null == Qwin::run('-ses')->get('member'))
-            {
-                $url = Qwin::run('-url');
-                $url->to($url->createUrl(array(
+            return true;
+        }
+        if(isset($permission[$set['namespace'] . '|' . $set['module']]))
+        {
+            return true;
+        }
+        if(isset($permission[$set['namespace'] . '|' . $set['module'] . '|' . $set['controller']]))
+        {
+            return true;
+        }
+        if(isset($permission[$set['namespace'] . '|' . $set['module'] . '|' . $set['controller'] . '|' . $set['action']]))
+        {
+            return true;
+        }
+
+        if('guest' == $member['username'])
+        {
+            $url = Qwin::run('-url');
+            $url->to($url->createUrl(array(
                     'module' => 'Member',
                     'controller' => 'Log',
                     'action' => 'Login',
                 )));
-            }
+        } else {
+            $this
+                ->setRedirectView($this->_lang->t('MSG_PERMISSION_NOT_ENOUGH'))
+                ->loadView()
+                ->display();
+            exit;
         }
-        return true;
+        return false;
     }
 
     public function setRedirectView($message, $method = null)

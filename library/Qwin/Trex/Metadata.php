@@ -594,6 +594,12 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         }
     }  
 
+    /**
+     * 将多维数组转换为一维
+     *
+     * @param array $data 多维数组
+     * @return array 一维数组
+     */
     public function convertDataToSingle($data)
     {
         if(isset($data[0]))
@@ -616,27 +622,6 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             }
         }
         return $data;
-        /*
-        //if(!empty($dbData))
-        //{
-            // 三维数组(JsonList)
-            if(isset($dbData[0]) && is_array($dbData[0]))
-            {
-                foreach($dbData as $key => $row)
-                {
-                    $dbData[$key][$model['alias'] . '_' . $fieldMeta['form']['name']] = $str->set($dbData[$key][$model['alias']][$fieldMeta['form']['name']]);
-                    unset($dbData[$key][$model['alias']][$fieldMeta['form']['name']]);
-                }
-            // 二维数组(Edit/Add/Clone)
-            } else {
-                if(isset($dbData[$model['alias']]))
-                {
-                    $dbData[$model['alias'] . '_' . $fieldMeta['form']['name']] = $dbData[$model['alias']][$fieldMeta['form']['name']];
-                    unset($dbData[$model['alias']][$fieldMeta['form']['name']]);
-                }
-            }
-        //}
-        //*/
     }
 
     /**
@@ -667,48 +652,116 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     }
 
     /**
-     * 数据验证
+     * 验证一个域的数据
+     *
+     * @param string $name 域的名称
+     * @param string $validator 域的验证配置
+     * @param string $data 包含各域的值的数组,例如从数据库取出或客户端提交的数据
+     * @param object $controller 控制器对象
+     * @return boolen 是否通过验证
      */
-    public function validateData($meta, $data)
+    public function validateOne($name, $validator, $data = null, $controller = null)
     {
-        $isPassed = true;
-        $controller = Qwin::run('-controller');
-
-        foreach($meta as $field)
+        // 使用默认的控制器类
+        if(null == $controller)
         {
-            // 根据控制器中的数据进行验证
-            $name = $field['form']['name'];
-            $method = 'validate' . $name;
-            if(method_exists($controller, $method))
-            {
-                if(false === call_user_func_array(
-                    array($controller, $method),
-                    array($data[$name], $name, $data)
-                )){
-                    $isPassed = false;
-                    break;
-                }
-            }
+            $controller = Qwin::run('-controller');
+        }
 
-            // 根据元数据进行验证
-            if(empty($field['validator']))
+        // 根据控制器的方法进行验证
+        $method = 'validate' . $name;
+        $result = Qwin::callByArray(array(
+            array($controller, $method),
+            $data[$name],
+            $name,
+            $data,
+        ));
+        // 除了返回错误的对象外,其他都认为是验证通过
+        if(is_object($result) && 'Qwin_Validator_Result' == get_class($result))
+        {
+            return $result;
+        }
+
+        // 根据元数据进行验证
+        if(empty($validator['rule']))
+        {
+            return true;
+        }
+        $ext = Qwin::run('Qwin_Class_Extension');
+        foreach($validator['rule'] as $rule => $param)
+        {
+            $class = $ext->getClass($rule);
+            if(false == $class)
+            {
+                return true;
+            }
+            $array = array(
+                array($class, $rule),
+                $data[$name],
+                $param,
+            );
+            if(false === Qwin::callByArray($array))
+            {
+                return new Qwin_Validator_Result(false, $name, $validator['message'][$rule]);
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 验证一组域的数据
+     *
+     * @param array $fieldMeta 域的元数组
+     * @param array $data 包含各域的值的数组,例如从数据库取出或客户端提交的数据
+     * @param object $controller 控制器对象
+     * @return boolen 是否通过验证
+     */
+    public function validateArray($fieldMeta, $data, $controller = null)
+    {
+        // 使用默认的控制器类
+        if(null == $controller)
+        {
+            $controller = Qwin::run('-controller');
+        }
+
+        // 逐个进行验证,只有有一个验证失败,即返回失败信息
+        foreach($fieldMeta as $field)
+        {
+            $result = $this->validateOne($field['form']['name'], $field['validator'], $data, $controller);
+            // 返回错误信息
+            if(is_object($result) && 'Qwin_Validator_Result' == get_class($result))
+            {
+                return $result;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 将域的元数据转换成jQuery Validate 的验证代码
+     *
+     * @param <type> $fieldMeta
+     * @return <type>
+     */
+    public function getJQueryValidateCode($fieldMeta)
+    {
+        $validation = array(
+            'rules' => array(),
+            'messages' => array(),
+        );
+        foreach($fieldMeta as $name => $field)
+        {
+            if(empty($field['validator']['rule']))
             {
                 continue;
             }
-            foreach($field['validator'] as $validator)
+            foreach($field['validator']['rule'] as $key => $rule)
             {
-                array_unshift($validator, null);
-                $validator[0] = $validator[1];
-                $validator[1] = $data[$name];
-                $isPassed = Qwin::callByArray($validator);
-                if(false === $isPassed)
-                {
-                    $controller->setValidatorMessage($name, array_pop($validator));
-                    break 2;
-                }
+                $validation['rules'][$name][$key] = $rule;
+                $validation['messages'][$name][$key] = $field['validator']['message'][$key];
             }
         }
-        return $isPassed;
+        return $validation;
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 /**
- * Center
+ * Enus
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,24 +17,24 @@
  * limitations under the License.
  *
  * @package     Trex
- * @subpackage  Member
+ * @subpackage  Management
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-28 19:27:32
+ * @since       2010-09-11 22:02:40
  */
 
-class Trex_Member_View_Center extends Trex_View
+class Trex_Management_Language_Enus extends Trex_Language
 {
-    public function __construct()
+    public function  __construct()
     {
-        parent::__construct();
-        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/member-setting-center.php');
-    }
+        $this->_data += array(
+            'LBL_MODULE_APPLICATION_STRUCTURE' => 'Application Structure',
 
-    public function display()
-    {
-        require $this->_layout;
+            'LBL_ACTION_UPDATE_APPLICATION_STRUCTURE' => 'Update Application Structure File',
+
+            'LBL_MANAGEMENT' => 'Management',
+        );
     }
 }

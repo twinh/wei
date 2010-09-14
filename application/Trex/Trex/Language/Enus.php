@@ -1,6 +1,6 @@
 <?php
 /**
- * Required
+ * Enus
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,18 +17,15 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Validator
+ * @subpackage  
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-10 17:11:14
+ * @since       2010-09-11 21:35:37
  */
 
-class Qwin_Validator_Required extends Qwin_Validator_Abstract
+class Trex_Trex_Language_Enus extends Trex_Language
 {
-    public function __construct()
-    {
-        
-    }
+    
 }

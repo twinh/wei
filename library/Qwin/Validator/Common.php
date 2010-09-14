@@ -27,45 +27,5 @@
 
 class Qwin_Validator_Common extends Qwin_Validator_Abstract
 {
-    public function required($value)
-    {
-        return '' != trim($value);
-    }
-
-    public function minlength($value, $param)
-    {
-        return strlen($value) >= $param;
-    }
-
-    public function maxlength($value, $param)
-    {
-        return strlen($value) <= $param;
-    }
-
-    public function rangelength($value, $param1, $param2)
-    {
-        $len = strlen($value);
-        return $len >= $param1 && $len <= $param2;
-    }
-
-    public function equalTo($value, $param)
-    {
-        $param = strtr($param, array('#' => '', '.' => ''));
-        if(isset($_POST[$param]))
-        {
-            return $_POST[$param] == $value;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @param <type> $value
-     * @return <type>
-     * @todo ereg
-     */
-    public function email($value)
-    {
-        return @ereg("^[-a-zA-Z0-9_\.]+\@([0-9A-Za-z][0-9A-Za-z-]+\.)+[A-Za-z]{2,5}$", $value);
-    }
+   
 }
