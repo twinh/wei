@@ -133,7 +133,10 @@ class Trex_Common_Language_Enus extends Trex_Language
             'LBL_FIELD_HOMEPAGE' => 'Homepage',
             'LBL_FIELD_ADDRESS' => 'Address',
 
+            'MSG_VALIDATOR_REQUIRED' => 'This field is required.',
             'MSG_VALIDATOR_EMAIL' => 'Please enter a valid email address.',
+            'MSG_VALIDATOR_MINLENGTH' => 'Please enter at least {0} characters.',
+            'MSG_VALIDATOR_RANGELENGTH' => 'Please enter a value between {0} and {1} characters long.',
         );
     }
 }

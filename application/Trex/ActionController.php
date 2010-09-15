@@ -225,7 +225,8 @@ class Trex_ActionController extends Trex_Controller
                 $message = $this->_lang->t('MSG_ERROR_FIELD')
                     . $this->_lang->t($relatedField[$validateResult->field]['basic']['title'])
                     . '<br />'
-                    . $this->_lang->t($validateResult->message);
+                    . $this->_lang->t('MSG_ERROR_MSG')
+                    . $meta->format($this->_lang->t($validateResult->message), $validateResult->param);
                 return $this->setRedirectView($message);
             }
             $data = $meta->restoreData($relatedField, $relatedField, $data);
@@ -322,12 +323,14 @@ class Trex_ActionController extends Trex_Controller
              */
             $data = $meta->convertSingleData($relatedField, $relatedField, 'db', $_POST);
             $validateResult = $meta->validateArray($relatedField, $data + $_POST, $this);
+            // TODO 转变为一个方法
             if(true !== $validateResult)
             {
                 $message = $this->_lang->t('MSG_ERROR_FIELD')
                     . $this->_lang->t($relatedField[$validateResult->field]['basic']['title'])
                     . '<br />'
-                    . $this->_lang->t($validateResult->message);
+                    . $this->_lang->t('MSG_ERROR_MSG')
+                    . $meta->format($this->_lang->t($validateResult->message), $validateResult->param);
                 return $this->setRedirectView($message);
             }
             $data = $meta->restoreData($editDbField, $relatedField, $data);

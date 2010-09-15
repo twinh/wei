@@ -35,65 +35,7 @@ jQuery(function($){
 	
 
 
-    /*$('.icon-info-common').each(function(){
-        //icon-info-id
-        var id = this.id.slice(10);
-        if('' != $('#ui-tip-' + id + ' ul').html())
-        {
-            $('#ui-tip-' + id).tip({
-                object: '#icon-info-' + id
-            });
-            $(this).click(function(){
-                $('#ui-tip-' + id).tip('open');
-            });
-        }
-    });
-
-    $('.ui-form-tip .ui-form-tip-content ul li').qui();
-
-    // 验证
-    if('undefined' != typeof(validator_rule))
-    {
-        $.each($.validator.messages, function(rule, val){
-            $.validator.messages[rule] = rule;
-        });
-        var validator = $("#post-form").validate({
-            rules: validator_rule,
-            showErrors: function(self, errorMap)
-            {
-                // 关闭所有提示
-                // TODO 简化
-                $('.icon-info-common').each(function(){
-                    //icon-info-id
-                    var id = this.id.slice(10);
-                    if('' != $('#ui-tip-' + id + ' ul').html())
-                    {
-                        $('#icon-info-' + id).find('span:last').not('.ui-icon-info').removeClass().addClass('ui-icon ui-icon-circle-check');
-                        $('#ui-tip-' + id).tip('close');
-                    }
-                });
-                // 移除所有错误的信息
-                // TODO 精确化?
-                $('.ui-tip-list').removeClass('ui-state-error');
-                for(var i in errorMap)
-                {
-                    var id = errorMap[i]['element'].id
-                        error_id = $('#validator-' + id + '-' + errorMap[i]['message']);
-                    // 显示错误信息
-                    $('#ui-tip-' + id).tip('open');
-                    // 错误信息高亮,显示"×",表示不通过
-                    error_id.addClass('ui-state-error').find('span').removeClass().addClass('ui-icon ui-icon-circle-close');
-                    // 通过信息(过滤属于提示信息的条目,即包含类ui-icon-info)打勾,显示'√',表示通过.
-                    error_id.prevAll().find('span').not('.ui-icon-info').removeClass().addClass('ui-icon ui-icon-circle-check');
-                    // 未验证信息,显示"-",表示拒绝
-                    error_id.nextAll().find('span').removeClass().addClass('ui-icon ui-icon-circle-minus');
-                }
-            },
-            submitHandler: function(form){
-                form.submit();
-            }
-        });
-    }
+    /*
 
     // 表单浏览模式 tabs 和 fieldset
     var qw_form = $('#post-form'),

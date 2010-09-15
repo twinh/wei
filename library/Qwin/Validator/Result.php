@@ -52,20 +52,27 @@ class Qwin_Validator_Result
     protected $_code;
 
     /**
+     * 验证方法的参数,主要用于对验证信息的动态转换
+     * @var mixed
+     */
+    protected $_param;
+
+    /**
      * 键名列表
      * @var array
      */
     protected $_keyList = array(
-        'result', 'field', 'message', 'code',
+        'result', 'field', 'message', 'code', 'param',
     );
 
 
-    public function __construct($result, $field, $message, $code = null)
+    public function __construct($result, $field, $message, $code = null, $param = null)
     {
         $this->_result = (bool)$result;
         $this->_field = $field;
         $this->_message = $message;
         $this->_code = $code;
+        $this->_param = $param;
     }
 
     public function  __get($name)

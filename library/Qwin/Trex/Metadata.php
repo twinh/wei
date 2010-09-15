@@ -658,7 +658,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      * @param string $validator 域的验证配置
      * @param string $data 包含各域的值的数组,例如从数据库取出或客户端提交的数据
      * @param object $controller 控制器对象
-     * @return boolen 是否通过验证
+     * @return true/Qwin_Validator_Result true表示通过验证,Qwin_Validator_Result表示不通过,对象中包含错误信息
      */
     public function validateOne($name, $validator, $data = null, $controller = null)
     {
@@ -702,7 +702,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             );
             if(false === Qwin::callByArray($array))
             {
-                return new Qwin_Validator_Result(false, $name, $validator['message'][$rule]);
+                return new Qwin_Validator_Result(false, $name, $validator['message'][$rule], 0, $param);
             }
         }
         return true;
