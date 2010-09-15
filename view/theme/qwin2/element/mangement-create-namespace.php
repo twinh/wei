@@ -29,6 +29,7 @@
 $groupList = $this->groupList;
 $relatedField = $this->relatedField;
 $data = array();
+$jQueryValidateCode = $this->jQueryValidateCode;
 ?>
 <script type="text/javascript">
 jQuery(function($){
@@ -53,52 +54,20 @@ jQuery(function($){
         <table class="ui-table ui-widget-content ui-corner-all" cellpadding="0" cellspacing="0">
             <tr class="ui-widget-header ui-table-header">
                 <td colspan="3" class="ui-corner-top">
-                    Value Limit
+                    <?php echo qw_lang('LBL_FORM_VALUE_ADVICE') ?>
                 </td>
             </tr>
             <tr class="ui-widget-content">
-                <td class="ui-state-default">Name</td>
-                <td class="ui-state-default">Type</td>
-                <td class="ui-state-default">Vaule</td>
+                <td class="ui-state-default"><?php echo qw_lang('LBL_FIELD') ?></td>
+                <td class="ui-state-default"><?php echo qw_lang('LBL_TYPE') ?></td>
+                <td class="ui-state-default"><?php echo qw_lang('LBL_VALUE') ?></td>
             </tr>
             <tr class="ui-widget-content">
-                <td width="25%">Namespace</td>
-                <td class=""> NOT IN</td>
-                <td class="">Trex, System, Common</td>
+                <td width="25%"><?php echo qw_lang('LBL_FIELD_NAMESPACE') ?></td>
+                <td class=""><?php echo qw_lang('LBL_TYPE_NOT_IN') ?></td>
+                <td class=""><?php echo $this->banNamespace ?></td>
             </tr>
         </table>
-        <!--<table class="ui-table ui-widget-content ui-corner-all" cellpadding="0" cellspacing="0">
-            <tr class="ui-widget-header ui-table-header">
-                <td colspan="3" class="ui-corner-top">
-                    Table Header
-                </td>
-            </tr>
-            <tr class="ui-widget-content">
-                <td class="ui-state-default">&nbsp;</td>
-                <td class="ui-state-default">Group</td>
-                <td class="ui-state-default">Name</td>
-            </tr>
-            <tr class="ui-widget-content">
-                <td class="ui-state-default">#1</td>
-                <td class="">Trex, System, Common</td>
-                <td class="">Trex, System, Common</td>
-            </tr>
-            <tr class="ui-widget-content">
-                <td class="ui-state-default">#2</td>
-                <td class="">Trex, System, Common</td>
-                <td class="">Trex, System, Common</td>
-            </tr>
-            <tr class="ui-widget-content">
-                <td class="ui-state-default">#3</td>
-                <td class="">Trex, System, Common</td>
-                <td class="">Trex, System, Common</td>
-            </tr>
-            <tr class="ui-widget-content">
-                <td class="ui-state-default">&nbsp;</td>
-                <td class="ui-state-default">Group</td>
-                <td class="ui-state-default">Name</td>
-            </tr>
-        </table>-->
         <?php require QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/basic-form.php' ?>
     </div>
 </div>

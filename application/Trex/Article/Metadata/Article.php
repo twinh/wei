@@ -84,6 +84,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     'validator' => array(
                         'rule' => array(
                             'required' => true,
+                            'letterswithbasicpunc' => true,
                         ),
                     ),
                 ),
@@ -119,7 +120,9 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         'isList' => 0,
                     ),
                     'validator' => array(
-                        'maxlength,20',
+                        'rule' => array(
+                            'required' => true,
+                        ),
                     ),
                 ),
                 'author' => array(

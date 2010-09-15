@@ -150,6 +150,15 @@ class Trex_Common_Language_Enus extends Trex_Language
             'MSG_VALIDATOR_RANGE' => 'Please enter a value between {0} and {1}.',
             'MSG_VALIDATOR_MAX' => 'Please enter a value less than or equal to {0}.',
             'MSG_VALIDATOR_MIN' => 'Please enter a value greater than or equal to {0}.',
+
+            'MSG_VALIDATOR_PATHNAME' => 'Please enter a valid path name,without \\/:*?\"<>| .',
+
+
+            'LBL_FORM_VALUE_ADVICE' => 'Form value advice',
+            'LBL_FIELD' => 'Field',
+            'LBL_VALUE' => 'Value',
+            'LBL_TYPE' => 'Type',
+            'LBL_TYPE_NOT_IN' => 'Not in',
         );
     }
 }

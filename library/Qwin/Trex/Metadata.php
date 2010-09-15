@@ -670,6 +670,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
 
         // 根据控制器的方法进行验证
         $method = 'validate' . $name;
+        !isset($data[$name]) && $data[$name] = null;
         $result = Qwin::callByArray(array(
             array($controller, $method),
             $data[$name],

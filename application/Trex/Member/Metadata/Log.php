@@ -32,32 +32,10 @@ class Trex_Member_Metadata_Log extends Qwin_Trex_Metadata
         $this->parseMetadata(array(
             // 基本属性
             'field' => array(
-                'username' => array(
-                    'form' => array(
-                        'name' => 'username',
-                    ),
-                    'attr' => array(
-                        'isList' => 0,
-                    ),
-                    'validator' => array(
-                        'required'
-                    ),
-                ),
-                'password' => array(
-                    'form' => array(
-                        'name' => 'password',
-                    ),
-                    'attr' => array(
-                        'isList' => 0,
-                    ),
-                    'converter' => array(
-                        'db' => array('md5')
-                    )
-                ),
-                /*
                 'captcha' => array(
                     'form' => array(
-                        'name' => 'captcha',
+                        'class' => 'ui-widget-content ui-corner-all',
+                        'maxlength' => 4,
                     ),
                     'attr' => array(
                         'isList' => 0,
@@ -69,7 +47,37 @@ class Trex_Member_Metadata_Log extends Qwin_Trex_Metadata
                             'required' => true,
                         ),
                     ),
-                ),*/
+                ),
+                'username' => array(
+                    'form' => array(
+                        'class' => 'ui-widget-content ui-corner-all',
+                    ),
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
+                    'validator' => array(
+                        'rule' => array(
+                            'required' => true,
+                        ),
+                    ),
+                ),
+                'password' => array(
+                    'form' => array(
+                        '_type' => 'password',
+                        'class' => 'ui-widget-content ui-corner-all',
+                    ),
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
+                    'converter' => array(
+                        'db' => array('md5')
+                    ),
+                    'validator' => array(
+                        'rule' => array(
+                            'required' => true,
+                        ),
+                    ),
+                ),
             ),
             'model' => array(
                 

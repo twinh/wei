@@ -232,7 +232,7 @@ div.ui-layout-pane {
     font-size: 1.1em;
 }
 .ui-form .ui-form-content .ui-field-common label {
-    margin-right: 5px;
+    /*margin-right: 5px;*/
     font-size: 1.1em;
     margin-top: .3em;
 }

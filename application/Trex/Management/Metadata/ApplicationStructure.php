@@ -33,7 +33,12 @@ class Trex_Management_Metadata_ApplicationStructure extends Trex_Metadata
         $this->parseMetadata(array(
             'field' => array(
                 'namespace' => array(
-
+                    'validator' => array(
+                        'rule' => array(
+                            'required' => true,
+                            'pathName' => true,
+                        ),
+                    ),
                 ),
                 /*'parent_id' => array(
                     'basic' => array(

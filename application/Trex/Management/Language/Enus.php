@@ -33,6 +33,9 @@ class Trex_Management_Language_Enus extends Trex_Language
             'LBL_MODULE_APPLICATION_STRUCTURE' => 'Application Structure',
 
             'LBL_ACTION_UPDATE_APPLICATION_STRUCTURE' => 'Update Application Structure File',
+            'LBL_ACTION_CREATE_NAMESPACE' => 'Create Namespace',
+
+            'MSG_VALIDATOR_NAMESPACE_EXISTS' => 'The namespace is exists',
 
             'LBL_MANAGEMENT' => 'Management',
         );
