@@ -134,9 +134,22 @@ class Trex_Common_Language_Enus extends Trex_Language
             'LBL_FIELD_ADDRESS' => 'Address',
 
             'MSG_VALIDATOR_REQUIRED' => 'This field is required.',
+            'MSG_VALIDATOR_REMOTE' => 'Please fix this field.',
             'MSG_VALIDATOR_EMAIL' => 'Please enter a valid email address.',
+            'MSG_VALIDATOR_URL' => 'Please enter a valid URL.',
+            'MSG_VALIDATOR_DATE' => 'Please enter a valid date.',
+            'MSG_VALIDATOR_DATEISO' => 'Please enter a valid date (ISO).',
+            'MSG_VALIDATOR_NUMBER' => 'Please enter a valid number.',
+            'MSG_VALIDATOR_DIGITS' => 'Please enter only digits.',
+            'MSG_VALIDATOR_CREDITCARD' => 'Please enter a valid credit card number.',
+            'MSG_VALIDATOR_EQUALTO' => 'Please enter the same value again.',
+            'MSG_VALIDATOR_ACCEPT' => 'Please enter a value with a valid extension.',
+            'MSG_VALIDATOR_MAXLENGTH' => 'Please enter no more than {0} characters.',
             'MSG_VALIDATOR_MINLENGTH' => 'Please enter at least {0} characters.',
             'MSG_VALIDATOR_RANGELENGTH' => 'Please enter a value between {0} and {1} characters long.',
+            'MSG_VALIDATOR_RANGE' => 'Please enter a value between {0} and {1}.',
+            'MSG_VALIDATOR_MAX' => 'Please enter a value less than or equal to {0}.',
+            'MSG_VALIDATOR_MIN' => 'Please enter a value greater than or equal to {0}.',
         );
     }
 }

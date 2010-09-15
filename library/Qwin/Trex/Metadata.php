@@ -738,13 +738,14 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     }
 
     /**
-     * 将域的元数据转换成jQuery Validate 的验证代码
+     * 将域的元数据转换成jQuery Validate 的验证配置数组
      *
-     * @param <type> $fieldMeta
-     * @return <type>
+     * @param array $fieldMeta 域的元数据配置
+     * @return array jQuery Validate 的验证配置数组
      */
     public function getJQueryValidateCode($fieldMeta)
     {
+        $lang = Qwin::run('-lang');
         $validation = array(
             'rules' => array(),
             'messages' => array(),
@@ -755,10 +756,10 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             {
                 continue;
             }
-            foreach($field['validator']['rule'] as $key => $rule)
+            foreach($field['validator']['rule'] as $rule => $param)
             {
-                $validation['rules'][$name][$key] = $rule;
-                $validation['messages'][$name][$key] = $field['validator']['message'][$key];
+                $validation['rules'][$name][$rule] = $param;
+                $validation['messages'][$name][$rule] = $this->format($lang->t($field['validator']['message'][$rule]), $param);
             }
         }
         return $validation;
@@ -971,14 +972,15 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     }
 
     /**
-     * 模拟jquery.format转换数据
-     * @param string $data
-     * @param array $repalce
-     * @return string
-     * @todo 优化
+     * 模拟jquery.format转换数据,将{i}替换为$replace[i]的值
+     *
+     * @param string $data 代转换的数据
+     * @param array $repalce 转换的数组
+     * @return string 转换后的数据
      */
     public function format($data, $repalce)
     {
+        $repalce = (array)$repalce;
         $pos = strpos($data, '{0}');
         if(false !== $pos)
         {
