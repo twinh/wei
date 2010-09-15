@@ -59,7 +59,9 @@ class Trex_Controller extends Qwin_Trex_Controller
         $this->_url = Qwin::run('Qwin_Url');
         $set = $this->_set = $ini->getSet();
         $this->_config = $ini->getConfig();
-        $this->_member = Qwin::run('Qwin_Session')->get('member');
+        $this->_session = Qwin::run('Qwin_Session');
+        $this->_member = $this->_session->get('member');
+        
        
         /**
          * 加载语言,同时将该命名空间下的通用模块语言类加入到当前模块的语言类下

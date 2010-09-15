@@ -46,14 +46,17 @@ class Trex_Management_Controller_ApplicationStructure extends Trex_Controller
 
     public function actionCreateNamespace()
     {
+        $path = $this->_getAppPath();
         if(empty($_POST))
         {
             $groupList = $this->_meta->field->getGroupList();
             $relatedField = $this->_meta->field;
+            $namespace = $this->_getNamespace($path);
+            $banNamespace = implode(',', $namespace);
 
             $theme = Qwin::run('-ini')->getConfig('interface.theme');
-            $path = $this->_getAppPath();
-            $namespace = $this->_getNamespace($path);
+            
+            $jQueryValidateCode = Qwin::run('-arr')->jsonEncode($this->_meta->getJQueryValidateCode($relatedField));
             $this->_view = array(
                 'class' => 'Trex_View',
                 'element' => array(
@@ -62,7 +65,20 @@ class Trex_Management_Controller_ApplicationStructure extends Trex_Controller
                 'data' => get_defined_vars(),
             );
         } else {
-            p($_POST);
+            $validateResult = $this->_meta->validateArray($this->_meta['field'], $_POST, $this);
+            if(true !== $validateResult)
+            {
+                $message = $this->_lang->t('MSG_ERROR_FIELD')
+                    . $this->_lang->t($this->_meta['field'][$validateResult->field]['basic']['title'])
+                    . '<br />'
+                    . $this->_lang->t('MSG_ERROR_MSG')
+                    . $this->_meta->format($this->_lang->t($validateResult->message), $validateResult->param);
+                return $this->setRedirectView($message);
+            }
+            mkdir($path . '/' . $_POST['namespace']);
+
+            $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Index'));
+            return $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
         
     }
@@ -87,6 +103,17 @@ class Trex_Management_Controller_ApplicationStructure extends Trex_Controller
 
         $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Index'));
         $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+    }
+
+    public function validateNamespace($value, $name, $data)
+    {
+        $path = $this->_getAppPath();
+        $namesapceList = $this->_getNamespace($path);
+        if(!in_array($value, $namesapceList))
+        {
+            return true;
+        }
+        return new Qwin_Validator_Result(false, 'namespace', 'MSG_VALIDATOR_NAMESPACE_EXISTS');
     }
 
     /**
@@ -116,10 +143,10 @@ class Trex_Management_Controller_ApplicationStructure extends Trex_Controller
     }
 
     /**
-     * 根据应用的路径和提供的命名空间,找出所有的模块,忽略以.和_开头的命名空间
+     * 根据应用的路径和提供的命名空间数组,找出所有的模块,忽略以.和_开头的命名空间
      *
      * @param string $path 应用的路径
-     * @param array $namespace 命名空间数组,一般由$this->_getNamespace()获取
+     * @param array $namespaceList 命名空间数组,一般由$this->_getNamespace()获取
      * @return array 模块数组
      */
     private function _getModule($path, $namespaceList)
@@ -144,6 +171,13 @@ class Trex_Management_Controller_ApplicationStructure extends Trex_Controller
         return $module;
     }
 
+    /**
+     * 根据应用的路径和提供的模块数组,找出所有的控制器
+     *
+     * @param string $path 应用的路径
+     * @param array $moduleList 模块数组,一般由$this->_getModule()获取
+     * @return array 控制器数组
+     */
     private function _getController($path, $moduleList)
     {
         $controller = array();
@@ -164,6 +198,13 @@ class Trex_Management_Controller_ApplicationStructure extends Trex_Controller
         return $controller;
     }
 
+    /**
+     * 根据应用的路径和提供的控制器数组,找出所有的行为
+     *
+     * @param string $path 应用的路径
+     * @param array $moduleList 控制器数组,一般由$this->_getController()获取
+     * @return array 行为数组
+     */
     private function _getAction($path, $controllerList)
     {
         $action = array();

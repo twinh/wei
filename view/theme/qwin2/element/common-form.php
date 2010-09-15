@@ -26,11 +26,7 @@
  */
 // 防止直接访问导致错误
 !defined('QWIN_PATH') && exit('Forbidden');
-echo $jquery->loadPlugin('validate');
 ?>
-<script type="text/javascript">
-var jQueryValidateCode = <?php echo $jQueryValidateCode?>;
-</script>
   <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
     <div class="ui-box-titlebar ui-widget-header ui-helper-clearfix"> <span class="ui-box-title"> <a href="<?php echo qw_url($set, array('action' => 'Index')) ?>"><?php echo qw_lang($meta['page']['title']) ?></a></span> <a class="ui-box-title-icon ui-corner-all" name=".ui-form-content" href="javascript:void(0)"> <span class="ui-icon  ui-icon-circle-triangle-n">open/close</span> </a> </div>
     <div class="ui-form-content ui-box-content ui-widget-content">
@@ -63,4 +59,3 @@ var jQueryValidateCode = <?php echo $jQueryValidateCode?>;
         </div>
     </div>
   </div>
-<script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH?>/js/qwin/form.js"></script>

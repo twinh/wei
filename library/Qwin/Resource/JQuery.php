@@ -151,7 +151,7 @@ class Qwin_Resource_JQuery extends Qwin_Resource
         return $file;
     }
 
-    public function loadPlugin($name, $isWrap = true)
+    public function loadPlugin($name, $type = null, $isWrap = true)
     {
         if(isset($this->_isLoad['plugin'][$name]))
         {
@@ -159,7 +159,14 @@ class Qwin_Resource_JQuery extends Qwin_Resource
         }
         $this->_isLoad['plugin'][$name] = true;
         $file = $this->_typePath . '/plugin/' . $name . '/jquery.' . $name;
-        $jsFile = $file . '.js';
+
+        if(null == $type)
+        {
+            $jsFile = $file . '.js';
+        } else {
+            $jsFile = $file . '.' . $type . '.js';
+        }
+
         $cssFile = $file . '.css';
         if(true == $isWrap)
         {

@@ -24,7 +24,12 @@
  * @version     $Id$
  * @since       2010-09-13 14:44:01
  */
+!isset($jQueryValidateCode) && $jQueryValidateCode = '{"rules":[],"messages":[]};';
+echo $jquery->loadPlugin('validate', 'qwin');
 ?>
+<script type="text/javascript">
+var jQueryValidateCode = <?php echo $jQueryValidateCode?>;
+</script>
         <form id="post-form" name="form" method="post" action="<?php echo qw_url()?>">
         <div class="ui-operation-field">
             <?php echo qw_jquery_button('submit', qw_lang('LBL_ACTION_SUBMIT'), 'ui-icon-check') ?>
@@ -60,3 +65,4 @@
             <?php echo qw_jquery_button('reset', qw_lang('LBL_ACTION_RESET'), 'ui-icon-arrowreturnthick-1-w') ?>
         </div>
         </form>
+<script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH?>/js/qwin/form.js"></script>
