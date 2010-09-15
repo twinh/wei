@@ -84,7 +84,6 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     'validator' => array(
                         'rule' => array(
                             'required' => true,
-                            'rangelength' => array(5, 10),
                         ),
                     ),
                 ),
