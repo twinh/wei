@@ -25,10 +25,143 @@
  * @since       2010-09-16 17:11:16
  */
 
-class Module
+class Trex_Management_Controller_Module extends Trex_Controller
 {
-    public function __construct()
+    /**
+     * Qwin_Trex_Application对象
+     * @var object
+     */
+    protected $_app;
+
+    /**
+     * 应用目录的路径
+     * @var string
+     */
+    protected $_path;
+
+    /**
+     * 命名空间列表
+     * @var array
+     */
+    protected $_namespaceList;
+
+    /**
+     * 当前的命名空间
+     * @var string
+     */
+    protected $_namespace;
+
+    /**
+     * 当前命名空间的模块列表
+     * @var array
+     */
+    protected $_moduleList;
+
+    /**
+     * 命名空间是否存在
+     * @var boolen
+     */
+    protected $_isNamespaceExists;
+
+    public function  __construct()
     {
-        
+        $this->_app = Qwin::run('Qwin_Trex_Application');
+        $this->_path = $this->_app->getDefultPath();
+
+        // 初始化部分常用对象
+        parent::__construct();
+
+        // 检查命名空间是否存在
+        $this->_namespaceList = $this->_app->getNamespace($this->_path);
+        $this->_namespace = $this->_request->r('namespace_value');
+        if(!in_array($this->_namespace, $this->_namespaceList))
+        {
+            $this->_isNamespaceExists = false;
+        }
+
+        $allModule = $this->_app->getModule($this->_path, $this->_namespaceList);
+
+        $this->_moduleList = empty($allModule[$this->_namespace]) ? array() : $allModule[$this->_namespace];
+    }
+
+    /**
+     * 查看指定命名空间的模块列表
+     *
+     * @return object 当前类
+     */
+    public function actionIndex()
+    {
+        if(false === $this->_isNamespaceExists)
+        {
+            return $this->setRedirectView($this->_lang->t('MSG_NAMESAPCE_NOT_EXISTS'));
+        }
+
+        $meta = $this->_meta;
+        $theme = Qwin::run('-ini')->getConfig('interface.theme');
+        $namespace = $this->_namespace;
+
+        // 构建数组
+        $data = array();
+        foreach($this->_moduleList as $key => $value)
+        {
+            $data[] = array(
+                'id' => $key + 1,
+                'module' => $value,
+            );
+        }
+        $listField = $meta['field']->getAttrList('isList');
+        $data = $meta->convertMultiData($listField, $meta['field'], 'list', $data, false);
+
+        $this->_view = array(
+            'class' => 'Trex_View',
+            'element' => array(
+                array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/mangement-module-list.php'),
+            ),
+            'data' => get_defined_vars(),
+        );
+    }
+
+    public function actionAdd()
+    {
+        if(empty($_POST))
+        {
+            $groupList = $this->_meta->field->getAddGroupList();
+            $relatedField = $this->_meta->field;
+            $relatedField->set('namespace_value.form._value', $this->_namespace);
+            $banModule = implode(',', $this->_moduleList);
+
+            $theme = Qwin::run('-ini')->getConfig('interface.theme');
+
+            $jQueryValidateCode = Qwin::run('-arr')->jsonEncode($this->_meta->getJQueryValidateCode($relatedField));
+            $this->_view = array(
+                'class' => 'Trex_View',
+                'element' => array(
+                    array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/management-add-module.php'),
+                ),
+                'data' => get_defined_vars(),
+            );
+        } else {
+            $module = $this->_request->p('module');
+            
+            if(false === $this->_isNamespaceExists)
+            {
+                return $this->setRedirectView($this->_lang->t('MSG_NAMESAPCE_NOT_EXISTS'));
+            }
+
+            if(in_array($module, $this->_moduleList))
+            {
+                return $this->setRedirectView($this->_lang->t('MSG_MODULE_EXISTS'));
+            }
+
+            // 创建模块,同时创建默认目录结构
+            $path = $this->_path . '/' . $this->_namespace . '/' . $module;
+            mkdir($path);
+            mkdir($path . '/Controller');
+            mkdir($path . '/Metadata');
+            mkdir($path . '/Model');
+            mkdir($path . '/Language');
+
+            // 创建默认控制器,元数据;类,模型类,语言包
+        }
     }
 }

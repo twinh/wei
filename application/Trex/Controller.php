@@ -31,6 +31,62 @@
 class Trex_Controller extends Qwin_Trex_Controller
 {
     /**
+     * Qwin_Request对象
+     * @var object
+     */
+    protected $_request;
+
+    /**
+     * Qwin_Url对象
+     * @var object
+     */
+    protected $_url;
+
+    /**
+     * 应用配置数组
+     * @var array
+     * @todo 标准化
+     */
+    protected $_set;
+
+    /**
+     * 全局配置数组
+     * @var array
+     */
+    protected $_config;
+
+    /**
+     * 会话对象
+     * @var object
+     */
+    protected $_session;
+
+    /**
+     * 用户数据数组
+     * @var array
+     */
+    protected $_member;
+
+    /**
+     * Qwin_Trex_Language语言子对象
+     * @var object
+     */
+    protected $_lang;
+
+    /**
+     * Qwin_Trex_Metadata元数据子对象
+     * @var object
+     */
+    protected $_meta;
+
+
+    /**
+     * Qwin_Trex_Model模型子对象
+     * @var object
+     */
+    protected $_model;
+
+    /**
      * 初始化各类和数据
      */
     public function __construct($option = null)
