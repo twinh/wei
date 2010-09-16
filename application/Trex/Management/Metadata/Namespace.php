@@ -1,6 +1,6 @@
 <?php
 /**
- * ApplicationStructure
+ * Namespace
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,16 +16,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  
+ * @package     Trex
+ * @subpackage  Management
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-11 21:41:36
+ * @since       2010-09-16 16:15:23
  */
 
-class Trex_Management_Metadata_ApplicationStructure extends Trex_Metadata
+class Trex_Management_Metadata_Namespace extends Trex_Metadata
 {
     public function __construct()
     {
@@ -46,14 +46,15 @@ class Trex_Management_Metadata_ApplicationStructure extends Trex_Metadata
 
             ),
             'db' => array(
-                'table' => 'management_application_structure',
+                'table' => 'namespace',
                 'order' => array(
                     array('date_created', 'DESC'),
                 ),
             ),
             'page' => array(
-                'title' => 'LBL_MANAGEMENT_APPLICATION_STRUCTURE',
+                'title' => 'LBL_MODULE_NAMESPACE',
             ),
         ));
     }
 }
+

@@ -474,6 +474,7 @@ div.ui-layout-pane {
     margin: 1em 0;
     padding: 1px;
     width: 100%;
+    font-size: 1.1em;
 }
 .ui-table td{
     padding: .2em;
@@ -498,4 +499,18 @@ div.ui-layout-pane {
     font-weight: bold;
     text-indent: .6em;
     border-right: none;
+}
+/* 2010-05-21 */
+.ui-table td a.ui-jqgrid-icon{
+	cursor:pointer;
+	float:left;
+	margin:2px;
+	width:19px;
+	height:19px;
+}
+.ui-table td a.ui-jqgrid-icon span{
+	display:block; margin:1px
+}
+.ui-table .ui-table-toolbar td{
+    text-align: left;
 }

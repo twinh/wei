@@ -84,7 +84,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     'validator' => array(
                         'rule' => array(
                             'required' => true,
-                            'letterswithbasicpunc' => true,
+                            'username' => true,
                         ),
                     ),
                 ),
