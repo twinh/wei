@@ -32,6 +32,9 @@ class Trex_Management_Language_Enus extends Trex_Language
         $this->_data += array(
             'LBL_MODULE_APPLICATION_STRUCTURE' => 'Application Structure',
 
+
+            'LBL_FIELD_MODULE' => 'Module',
+
             'LBL_ACTION_UPDATE_APPLICATION_STRUCTURE' => 'Update Application Structure File',
             'LBL_ACTION_CREATE_NAMESPACE' => 'Create Namespace',
             'LBL_ACTION_ADD_MODULE' => 'Add Module',
@@ -40,9 +43,12 @@ class Trex_Management_Language_Enus extends Trex_Language
             'MSG_VALIDATOR_NAMESPACE_EXISTS' => 'The namespace is exists.',
             'MSG_NAMESAPCE_NOT_EXISTS' => 'The namespace is not exists.',
             'MSG_NAMESPACE_NOT_EMPTY' => 'The namespace folder is not empty, can not be delete.',
+            'MSG_MODULE_EMPTY' => 'The namespace does not contain any module.',
+            'MSG_MODULE_EXISTS' => 'The module is exitst',
 
             'LBL_MANAGEMENT' => 'Management',
             'LBL_NAMESPACE' => 'Namespace',
+            'LBL_MODULE' => 'Module',
         );
     }
 }

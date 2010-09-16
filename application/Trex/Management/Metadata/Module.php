@@ -1,6 +1,6 @@
 <?php
 /**
- * Namespace
+ * Module
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -22,10 +22,10 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-16 16:15:23
+ * @since       2010-09-17 0:33:03
  */
 
-class Trex_Management_Metadata_Namespace extends Trex_Metadata
+class Trex_Management_Metadata_Module extends Trex_Metadata
 {
     public function __construct()
     {
@@ -33,7 +33,12 @@ class Trex_Management_Metadata_Namespace extends Trex_Metadata
         $this->setOperationMetadata();
         $this->parseMetadata(array(
             'field' => array(
-                'namespace' => array(
+                'namespace_value' => array(
+                    'form' => array(
+                        '_type' => 'hidden',
+                    )
+                ),
+                'module' => array(
                     'validator' => array(
                         'rule' => array(
                             'required' => true,
@@ -45,7 +50,7 @@ class Trex_Management_Metadata_Namespace extends Trex_Metadata
             'model' => array(
             ),
             'db' => array(
-                'table' => 'namespace',
+                'table' => 'module',
             ),
             'page' => array(
                 'title' => 'LBL_MODULE_NAMESPACE',
@@ -53,4 +58,3 @@ class Trex_Management_Metadata_Namespace extends Trex_Metadata
         ));
     }
 }
-
