@@ -31,7 +31,7 @@
 <script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH ?>/js/jquery/plugin/jqgrid/i18n/grid.locale-en.js"></script>
 <?php echo $jquery->loadPlugin('jqgrid') ?>
 <div id="custom-jqgird-toolbar" class="ui-helper-hidden">
-    &nbsp;<a class="action-add" href="<?php echo qw_url($set, array('action' => 'Add')) ?>"><?php echo $lang->t('LBL_ACTION_ADD')?></a>&nbsp;|&nbsp;
+    &nbsp;<a class="action-add" href="<?php echo qw_url($set, array('action' => 'Add')) ?>"><?php echo qw_lang('LBL_ACTION_ADD')?></a>&nbsp;|&nbsp;
     <a class="action-edit" href="javascript:void(0)"><?php echo qw_lang('LBL_ACTION_EDIT') ?></a>&nbsp;|&nbsp;
     <a class="action-delete" href="javascript:void(0)"><?php echo qw_lang('LBL_ACTION_DELETE') ?></a>&nbsp;|&nbsp;
     <a class="list_show_link" href="javascript:void(0)"><?php echo qw_lang('LBL_ACTION_VIEW') ?></a>&nbsp;|&nbsp;

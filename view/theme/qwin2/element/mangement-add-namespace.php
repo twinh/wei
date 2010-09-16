@@ -31,20 +31,10 @@ $relatedField = $this->relatedField;
 $data = array();
 $jQueryValidateCode = $this->jQueryValidateCode;
 ?>
-<script type="text/javascript">
-jQuery(function($){
-    $('table.ui-table tr').not('.ui-table-header').qui();
-    $('table.ui-table td.ui-state-default').qui();
-
-})
-</script>
-<style type="text/css">
-
-</style>
 <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
     <div class="ui-box-titlebar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix">
         <span class="ui-box-title">
-            <?php echo qw_lang('LBL_MODULE_APPLICATION_STRUCTURE')?>
+            <?php echo qw_lang('LBL_NAMESPACE')?>
         </span>
         <a class="ui-box-title-icon ui-corner-all" name=".ui-form-content" href="javascript:void(0)">
             <span class="ui-icon  ui-icon-circle-triangle-n">open/close</span>

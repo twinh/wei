@@ -1,6 +1,6 @@
 <?php
 /**
- * Enus
+ * Module
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -22,27 +22,13 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-11 22:02:40
+ * @since       2010-09-16 17:11:16
  */
 
-class Trex_Management_Language_Enus extends Trex_Language
+class Module
 {
-    public function  __construct()
+    public function __construct()
     {
-        $this->_data += array(
-            'LBL_MODULE_APPLICATION_STRUCTURE' => 'Application Structure',
-
-            'LBL_ACTION_UPDATE_APPLICATION_STRUCTURE' => 'Update Application Structure File',
-            'LBL_ACTION_CREATE_NAMESPACE' => 'Create Namespace',
-            'LBL_ACTION_ADD_MODULE' => 'Add Module',
-            'LBL_ACTION_VIEW_MODULE' => 'View Module',
-
-            'MSG_VALIDATOR_NAMESPACE_EXISTS' => 'The namespace is exists.',
-            'MSG_NAMESAPCE_NOT_EXISTS' => 'The namespace is not exists.',
-            'MSG_NAMESPACE_NOT_EMPTY' => 'The namespace folder is not empty, can not be delete.',
-
-            'LBL_MANAGEMENT' => 'Management',
-            'LBL_NAMESPACE' => 'Namespace',
-        );
+        
     }
 }
