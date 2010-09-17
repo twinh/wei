@@ -125,20 +125,14 @@ class Trex_Controller extends Qwin_Trex_Controller
         if($option['language'])
         {
             $languageName = $this->getLanguage();
-            $commonLanguageName = $set['namespace'] . '_Common_Language_' . $languageName;
-            $languageName = $set['namespace'] . '_' . $set['module'] . '_Language_' . $languageName;
-            $this->_lang = Qwin::run($languageName);
+            $languageClass = $set['namespace'] . '_' . $set['module'] . '_Language_' . $languageName;
+            $this->_lang = Qwin::run($languageClass);
             if(null == $this->_lang)
             {
-                $languageName = 'Trex_Language';
-                $this->_lang = Qwin::run($languageName);
+                $languageClass = 'Trex_Language' . $languageName;
+                $this->_lang = Qwin::run($languageClass);
             }
-            $this->_commonLang = Qwin::run($commonLanguageName);
-            if(null != $this->_commonLang)
-            {
-                $this->_lang->merge($this->_commonLang);
-            }
-            Qwin::addMap('-lang', $languageName);
+            Qwin::addMap('-lang', $languageClass);
         }
 
         /**
