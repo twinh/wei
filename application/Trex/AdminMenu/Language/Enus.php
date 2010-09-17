@@ -25,10 +25,11 @@
  * @since       2010-08-16 19:46:35
  */
 
-class Trex_AdminMenu_Language_Enus extends Trex_Language
+class Trex_AdminMenu_Language_Enus extends Trex_Language_Enus
 {
     public function __construct()
     {
+        parent::__construct();
         $this->_data += array(
             'LBL_FIELD_CATEGORY_ID' => 'Category Id',
             'LBL_FIELD_CATEGORY' => 'Category',

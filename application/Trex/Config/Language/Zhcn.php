@@ -25,10 +25,11 @@
  * @since       2010-08-26 17:26:18
  */
 
-class Trex_Config_Language_Zhcn extends Trex_Language
+class Trex_Config_Language_Zhcn extends Trex_Language_Zhcn
 {
     public function __construct()
     {
+        parent::__construct();
         $this->_data += array(
             'LBL_FIELD_VALUE' => '值',
 

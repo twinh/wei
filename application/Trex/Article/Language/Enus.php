@@ -25,10 +25,11 @@
  * @since       2010-08-16 19:03:38
  */
 
-class Trex_Article_Language_Enus extends Trex_Language
+class Trex_Article_Language_Enus extends Trex_Language_Enus
 {
     public function __construct()
     {
+        parent::__construct();
         $this->_data +=  array(
             'LBL_FIELD_PARENT_ID' => 'Parent Id',
             'LBL_FIELD_ANCESTOR_ID' => 'Ancestor Id',

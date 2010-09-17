@@ -25,10 +25,11 @@
  * @since       2010-08-16 19:36:00
  */
 
-class Trex_AdminMenu_Language_Zhcn extends Trex_Language
+class Trex_AdminMenu_Language_Zhcn extends Trex_Language_Zhcn
 {
     public function __construct()
     {
+        parent::__construct();
         $this->_data +=  array(
             'LBL_FIELD_CATEGORY_ID' => '分类编号',
             'LBL_FIELD_CATEGORY' => '分类',

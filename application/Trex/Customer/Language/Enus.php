@@ -25,10 +25,11 @@
  * @since       2010-09-08 11:39:26
  */
 
-class Trex_Customer_Language_Enus extends Trex_Language
+class Trex_Customer_Language_Enus extends Trex_Language_Enus
 {
     public function __construct()
     {
+        parent::__construct();
         $this->_data += array(
             'LBL_MODULE_CUSTOMER' => 'Customer',
         );

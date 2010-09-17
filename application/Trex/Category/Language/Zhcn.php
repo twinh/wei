@@ -25,10 +25,11 @@
  * @since       2010-08-16 19:48:24
  */
 
-class Trex_Category_Language_Zhcn extends Trex_Language
+class Trex_Category_Language_Zhcn extends Trex_Language_Zhcn
 {
     public function __construct()
     {
+        parent::__construct();
         $this->_data += array(
             'LBL_FIELD_PARENT_ID' => '父分类',
             'LBL_FIELD_TO_URL' => '跳转到',
