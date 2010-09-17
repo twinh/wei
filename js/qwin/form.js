@@ -7,26 +7,29 @@ jQuery(function($){
         $('#' + tableId).toggle();
     });
 
-    $('#post-form').validate({
-		rules: jQueryValidateCode.rules,
-        messages: jQueryValidateCode.messages,
-        //errorClass: 'ui-state-error',
-        errorPlacement: function(error, element) {
-            error.appendTo( element.parent());
-        },
-        success: function(label) {
-            label.addClass('ui-icon ui-icon-check').html('check!');
-		},
-        submitHandler: function(form){
-            form.submit();
-        },
-        highlight: function(input){
-            $(input).addClass('ui-state-highlight');
-        },
-        unhighlight: function(input){
-            $(input).removeClass('ui-state-highlight');
-        }
-	});
+    if(undefined != $.validate)
+    {
+        $('#post-form').validate({
+            rules: jQueryValidateCode.rules,
+            messages: jQueryValidateCode.messages,
+            //errorClass: 'ui-state-error',
+            errorPlacement: function(error, element) {
+                error.appendTo( element.parent());
+            },
+            success: function(label) {
+                label.addClass('ui-icon ui-icon-check').html('check!');
+            },
+            submitHandler: function(form){
+                form.submit();
+            },
+            highlight: function(input){
+                $(input).addClass('ui-state-highlight');
+            },
+            unhighlight: function(input){
+                $(input).removeClass('ui-state-highlight');
+            }
+        });
+    }
 
     // 操作区域不添加 focus 事件
     //$('#post-form div.ui-field-common').find('input, textarea').not('.ui-form-button').qui({focus: true});

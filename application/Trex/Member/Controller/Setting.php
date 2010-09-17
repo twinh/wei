@@ -46,16 +46,24 @@ class Trex_Member_Controller_Setting extends Trex_Controller
         );
     }
 
+    /**
+     * 切换语言
+     */
     public function actionSwitchLanguage()
     {
         if(empty($_POST))
         {
             $urlLanguage = $this->_request->g('language');
+            $theme = Qwin::run('-ini')->getConfig('interface.theme');
+            
             /**
              * 设置视图
              */
             $this->_view = array(
-                'class' => 'Trex_Member_View_Language',
+                'class' => 'Trex_View',
+                'element' => array(
+                    array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/member/setting-language.php'),
+                ),
                 'data' => get_defined_vars(),
             );
         } else {
@@ -80,6 +88,9 @@ class Trex_Member_Controller_Setting extends Trex_Controller
         }
     }
 
+    /**
+     * 切换风格
+     */
     public function actionSwitchStyle()
     {
         if(empty($_POST))
@@ -93,12 +104,16 @@ class Trex_Member_Controller_Setting extends Trex_Controller
                 ->execute()
                 ->toArray();
             $urlTheme = $this->_request->g('style');
+            $theme2 = Qwin::run('-ini')->getConfig('interface.theme');
 
             /**
              * 设置视图
              */
             $this->_view = array(
-                'class' => 'Trex_Member_View_Theme',
+                'class' => 'Trex_View',
+                'element' => array(
+                    array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme2 . '/element/member/setting-theme.php'),
+                ),
                 'data' => get_defined_vars(),
             );
         } else {

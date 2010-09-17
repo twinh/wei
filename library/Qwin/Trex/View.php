@@ -208,15 +208,4 @@ abstract class Qwin_Trex_View extends Qwin_Metadata_Abstract
     {
         return false;
     }
-
-    /**
-     *
-     * @param <type> $name
-     * @return <type>
-     * @todo ?
-     */
-    public function t($name)
-    {
-        return $name;
-    }
 }

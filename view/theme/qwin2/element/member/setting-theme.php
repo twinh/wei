@@ -52,7 +52,7 @@ jQuery(function($){
         <ul>
 <?php
 foreach($theme as $row){
-    $url = qw_url($this->_set, array('style' => $row['path_name']));
+    $url = qw_url($set, array('style' => $row['path_name']));
 ?>
             <li class="ui-widget-content ui-corner-all">
                 <a href="<?php echo $url?>">

@@ -27,8 +27,4 @@
 
 class Trex_Language extends Qwin_Trex_Language
 {
-    public function __construct()
-    {
-        
-    }
 }
