@@ -25,10 +25,11 @@
  * @since       2010-09-01 11:27:43
  */
 
-class Trex_Contact_Language_Enus extends Trex_Language
+class Trex_Contact_Language_Enus extends Trex_Language_Enus
 {
     public function __construct()
     {
+        parent::__construct();
         return $this->_data += array(
 
             'LBL_FIELD_RELATED_MODULE' => 'Related Module',

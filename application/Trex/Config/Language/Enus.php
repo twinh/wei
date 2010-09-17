@@ -25,10 +25,11 @@
  * @since       2010-08-26 17:25:12
  */
 
-class Trex_Config_Language_Enus extends Trex_Language
+class Trex_Config_Language_Enus extends Trex_Language_Enus
 {
     public function __construct()
     {
+        parent::__construct();
         $this ->_data += array(
             'LBL_FIELD_VALUE' => 'Value',
 
