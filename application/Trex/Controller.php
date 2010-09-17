@@ -47,7 +47,7 @@ class Trex_Controller extends Qwin_Trex_Controller
      * @var array
      * @todo 标准化
      */
-    protected $_set;
+    //protected $_set;
 
     /**
      * 全局配置数组

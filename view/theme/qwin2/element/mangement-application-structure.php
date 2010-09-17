@@ -41,7 +41,8 @@
         <ul>
             <li>
                     <?php echo qw_jquery_link(qw_url(array('module' => 'Management', 'controller' => 'ApplicationStructure', 'action' => 'Update')), qw_lang('LBL_ACTION_UPDATE_APPLICATION_STRUCTURE'), 'ui-icon-refresh') ?>
-                    <?php echo qw_jquery_link(qw_url(array('module' => 'Management', 'controller' => 'ApplicationStructure', 'action' => 'CreateNamespace')), qw_lang('LBL_ACTION_CREATE_NAMESPACE'), 'ui-icon-refresh') ?>
+                    <?php echo qw_jquery_link(qw_url(array('module' => 'Management', 'controller' => 'Namespace')), qw_lang('LBL_ACTION_NAMESPACE_LIST'), 'ui-icon-script') ?>
+                    <?php echo qw_jquery_link(qw_url(array('module' => 'Management', 'controller' => 'Namespace', 'action' => 'Add')), qw_lang('LBL_ACTION_ADD_NAMESPACE'), 'ui-icon-plus') ?>
                     <?php echo qw_jquery_link('javascript:history.go(-1);', qw_lang('LBL_ACTION_RETURN'), 'ui-icon-arrowthickstop-1-w') ?>
             </li>
         </ul>

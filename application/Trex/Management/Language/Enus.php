@@ -36,7 +36,8 @@ class Trex_Management_Language_Enus extends Trex_Language
             'LBL_FIELD_MODULE' => 'Module',
 
             'LBL_ACTION_UPDATE_APPLICATION_STRUCTURE' => 'Update Application Structure File',
-            'LBL_ACTION_CREATE_NAMESPACE' => 'Create Namespace',
+            'LBL_ACTION_ADD_NAMESPACE' => 'Add Namespace',
+            'LBL_ACTION_NAMESPACE_LIST' => 'Namespace List',
             'LBL_ACTION_ADD_MODULE' => 'Add Module',
             'LBL_ACTION_VIEW_MODULE' => 'View Module',
 
