@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Trex
- * @subpackage  Trex
+ * @subpackage  Management
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -45,11 +45,12 @@ class Trex_Management_Controller_ApplicationStructure extends Trex_Controller
      */
     public function actionUpdate()
     {
-        $path = $this->_getAppPath();
-        $namespace = $this->_getNamespace($path);
-        $module = $this->_getModule($path, $namespace);
-        $controller = $this->_getController($path, $module);
-        $action = $this->_getAction($path, $controller);
+        $app = Qwin::run('Qwin_Trex_Application');
+        $path = $app->getDefultPath();
+        $namespace = $app->getNamespace($path);
+        $module = $app->getModule($path, $namespace);
+        $controller = $app->getController($path, $module);
+        $action = $app->getAction($path, $controller);
 
         Qwin_Helper_File::writeAsArray($action, QWIN_ROOT_PATH . '/cache/php/application-structure.php');
 

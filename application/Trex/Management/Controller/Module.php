@@ -148,6 +148,7 @@ class Trex_Management_Controller_Module extends Trex_Controller
                 return $this->setRedirectView($this->_lang->t('MSG_NAMESAPCE_NOT_EXISTS'));
             }
 
+            // 模块已存在
             if(in_array($module, $this->_moduleList))
             {
                 return $this->setRedirectView($this->_lang->t('MSG_MODULE_EXISTS'));
@@ -161,7 +162,15 @@ class Trex_Management_Controller_Module extends Trex_Controller
             mkdir($path . '/Model');
             mkdir($path . '/Language');
 
-            // 创建默认控制器,元数据;类,模型类,语言包
+            // 创建默认控制器,元数据,模型,语言类
+            $applicationFile = Qwin::run('Project_Helper_ApplicationFile');
+            $applicationFile->createControllerFile($this->_namespace, $module);
+            $applicationFile->createMetadataFile($this->_namespace, $module);
+            $applicationFile->createModelFile($this->_namespace, $module);
+            $applicationFile->createLanguageFile($this->_namespace, $module, $this->getLanguage());
+
+            $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Index', 'namespace_value' => $this->_namespace));
+            return $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }
 }

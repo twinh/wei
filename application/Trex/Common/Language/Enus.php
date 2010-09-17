@@ -132,6 +132,7 @@ class Trex_Common_Language_Enus extends Trex_Language
             'LBL_FIELD_SEX' => 'Sex',
             'LBL_FIELD_HOMEPAGE' => 'Homepage',
             'LBL_FIELD_ADDRESS' => 'Address',
+            'LBL_FIELD_RELATED_MODULE' => 'Related Module',
 
             'MSG_VALIDATOR_REQUIRED' => 'This field is required.',
             'MSG_VALIDATOR_REMOTE' => 'Please fix this field.',

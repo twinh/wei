@@ -61,7 +61,7 @@ class Qwin_Url
      * @return string 转换后的地址
      * @todo 地址重写
      */
-    public function createUrl($array1, $array2 = null)
+    public function createUrl(array $array1, $array2 = null)
     {
         null != $array2 && $array1 = array_merge($array1, $array2);
         return '?' . $this->arrayKey2Url($array1);
