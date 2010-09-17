@@ -25,10 +25,11 @@
  * @since       2010-08-23 17:24:04
  */
 
-class Trex_Member_Language_Enus extends Trex_Language
+class Trex_Member_Language_Enus extends Trex_Language_Enus
 {
     public function __construct()
     {
+        parent::__construct();
         $this->_data += array(
             'LBL_FIELD_GROUP_ID' => 'Group',
             'LBL_FIELD_USERNAME' => 'Username',

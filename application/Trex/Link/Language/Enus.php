@@ -25,10 +25,11 @@
  * @since       2010-08-25 19:01:42
  */
 
-class Trex_Link_Language_Enus extends Trex_Language
+class Trex_Link_Language_Enus extends Trex_Language_Enus
 {
     public function __construct()
     {
+        parent::__construct();
         $this->_data += array(
             'LBL_FIELD_CATEGORY_ID' => 'Category Name',
             'LBL_FIELD_URL' => 'Url',

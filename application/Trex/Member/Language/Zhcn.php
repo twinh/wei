@@ -25,10 +25,11 @@
  * @since       2010-05-19 13:49:27
  */
 
-class Trex_Member_Language_Zhcn extends Trex_Language
+class Trex_Member_Language_Zhcn extends Trex_Language_Zhcn
 {
     public function __construct()
     {
+        parent::__construct();
         $this->_data += array(
             'LBL_FIELD_USERNAME' => '用户名',
             'LBL_FIELD_PASSWORD' => '密码',

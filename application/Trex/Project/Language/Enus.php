@@ -25,10 +25,11 @@
  * @since       2010-07-09 10:50:03
  */
 
-class Trex_Project_Language_Enus extends Trex_Language
+class Trex_Project_Language_Enus extends Trex_Language_Enus
 {
     public function __construct()
     {
+        parent::__construct();
         $this->_data += array(
             'LBL_FIELD_START_DATE' => 'Start Date',
             'LBL_FIELD_PLANED_END_DATE' => 'Planed End Date',
