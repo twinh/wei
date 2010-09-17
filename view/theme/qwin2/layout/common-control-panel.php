@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/qwin2/style.css" />
 <?php
 $member = Qwin::run('-ses')->get('member');
-$qurl = null;
+$nickname = isset($member['contact']) ? $member['contact']['nickname'] : $member['username'];
 $jquery = Qwin::run('-jquery');
 $arrayHelper = Qwin::run('-arr');
 echo $jquery->loadTheme(),
@@ -62,7 +62,7 @@ echo $jquery->loadTheme(),
 <div id="ui-main" class="ui-main ui-widget-content ui-corner-all">
   <div id="ui-header" class="ui-header ui-widget">
     <div class="ui-header-shortcut" id="ui-header-shortcut">
-    	<a class="ui-state-default" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Setting')) ?>"><?php echo qw_lang('LBL_WELCOME') ?>, <?php echo $member['contact']['nickname'] ?>!</a>
+    	<a class="ui-state-default" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Setting')) ?>"><?php echo qw_lang('LBL_WELCOME') ?>, <?php echo $nickname ?>!</a>
         <a class="ui-state-default" href="<?php echo qw_url(array('module' => 'Management', 'controller' => 'Management')) ?>"><?php echo qw_lang('LBL_MANAGEMENT') ?></a>
         <?php
         if('guest' == $member['username']):

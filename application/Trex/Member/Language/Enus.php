@@ -97,7 +97,6 @@ class Trex_Member_Language_Enus extends Trex_Language_Enus
             'MSG_OLD_PASSWORD_NOT_CORRECT' => 'The old password is not correct.',
             'MSG_MEMBER_NOT_ALLOW_DELETE' => 'System member is not allowed to delete.',
             'MSG_GUEST_NOT_ALLOW_EDIT_PASSWORD' => 'It is not allowed to edit guest member\'s password.',
-            'MSG_PERMISSION_NOT_ENOUGH' => 'Your permission is not enough to view/operate this page',
         );
     }
 }

@@ -25,6 +25,7 @@
  * @since       2010-09-13 14:44:01
  */
 !isset($jQueryValidateCode) && $jQueryValidateCode = '{"rules":[],"messages":[]};';
+!isset($data) && $data = array();
 echo $jquery->loadPlugin('validate', 'qwin');
 ?>
 <script type="text/javascript">

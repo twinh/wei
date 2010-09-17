@@ -116,6 +116,7 @@ class Trex_Language_Enus extends Trex_Language
 
             'LBL_HTML_TITLE' => 'Management System - Powered by Qwin Framework',
             'LBL_FOOTER_COPYRIGHT' => 'Powered by <a>Qwin Framework</a>. Copyright &copy; 2009-2010 <a>Twin</a>. All rights reserved.',
+            'MSG_PERMISSION_NOT_ENOUGH' => 'Your permission is not enough to view/operate this page',
 
 
             // TODO 加载其他模块时,同时加载他们的语言类

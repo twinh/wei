@@ -26,10 +26,6 @@
  */
 // 防止直接访问导致错误
 !defined('QWIN_PATH') && exit('Forbidden');
-$groupList = $this->groupList;
-$relatedField = $this->relatedField;
-$data = array();
-$jQueryValidateCode = $this->jQueryValidateCode;
 ?>
 <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
     <div class="ui-box-titlebar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix">
@@ -55,9 +51,9 @@ $jQueryValidateCode = $this->jQueryValidateCode;
             <tr class="ui-widget-content">
                 <td width="25%"><?php echo qw_lang('LBL_FIELD_MODULE') ?></td>
                 <td class=""><?php echo qw_lang('LBL_TYPE_NOT_IN') ?></td>
-                <td class=""><?php echo $this->banModule ?></td>
+                <td class=""><?php echo $banModule ?></td>
             </tr>
         </table>-->
-        <?php require QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/basic/form.php' ?>
+        <?php require QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/basic/form.php' ?>
     </div>
 </div>

@@ -63,8 +63,8 @@
         <div class="ui-permission-list">
             <table>
             <?php
-            foreach($this->appStructure as $namespace => $moduleList):
-                if(isset($this->permission[$namespace])):
+            foreach($appStructure as $namespace => $moduleList):
+                if(isset($permission[$namespace])):
                     $checked = ' checked="checked" ';
                 else :
                     $checked = '';
@@ -77,7 +77,7 @@
                 </tr>
             <?php
                 foreach($moduleList as $module => $controllerList):
-                    if(isset($this->permission[$namespace . '|' . $module])):
+                    if(isset($permission[$namespace . '|' . $module])):
                         $checked = ' checked="checked" ';
                     else :
                         $checked = '';
@@ -90,7 +90,7 @@
                 </tr>
             <?php
                     foreach($controllerList as $controller => $actionList):
-                        if(isset($this->permission[$namespace . '|' . $module . '|' . $controller])):
+                        if(isset($permission[$namespace . '|' . $module . '|' . $controller])):
                             $checked = ' checked="checked" ';
                         else :
                             $checked = '';
@@ -105,7 +105,7 @@
                     <td class="ui-field-checkbox">
             <?php
                         foreach($actionList as $action):
-                            if(isset($this->permission[$namespace . '|' . $module . '|' . $controller . '|' . $action])):
+                            if(isset($permission[$namespace . '|' . $module . '|' . $controller . '|' . $action])):
                                 $checked = ' checked="checked" ';
                             else :
                                 $checked = '';
