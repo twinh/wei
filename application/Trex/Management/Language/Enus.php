@@ -25,10 +25,11 @@
  * @since       2010-09-11 22:02:40
  */
 
-class Trex_Management_Language_Enus extends Trex_Language
+class Trex_Management_Language_Enus extends Trex_Language_Enus
 {
     public function  __construct()
     {
+        parent::__construct();
         $this->_data += array(
             'LBL_MODULE_APPLICATION_STRUCTURE' => 'Application Structure',
 

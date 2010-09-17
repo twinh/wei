@@ -25,10 +25,11 @@
  * @since       2010-08-27 15:34:07
  */
 
-class Trex_Style_Language_Enus extends Trex_Language
+class Trex_Style_Language_Enus extends Trex_Language_Enus
 {
     public function __construct()
     {
+        parent::__construct();
         $this->_data += array(
             'LBL_FIELD_PATH_NAME' => 'Path Name',
             'LBL_FIELD_PICTURE' => 'Picture',

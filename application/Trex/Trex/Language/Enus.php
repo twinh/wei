@@ -25,7 +25,7 @@
  * @since       2010-09-11 21:35:37
  */
 
-class Trex_Trex_Language_Enus extends Trex_Language
+class Trex_Trex_Language_Enus extends Trex_Language_Enus
 {
     
 }
