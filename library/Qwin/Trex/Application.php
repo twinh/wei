@@ -109,6 +109,11 @@ class Qwin_Trex_Application
         {
             foreach($moduleList2 as $module)
             {
+                // 伪模块或不完整模块不包含Controller目录
+                if(!is_dir($path . '/' . $namespace . '/' . $module . '/Controller'))
+                {
+                    continue;
+                }
                 foreach(scandir($path . '/' . $namespace . '/' . $module . '/Controller') as $file)
                 {
                     $name = basename($file, '.php');
