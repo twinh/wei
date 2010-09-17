@@ -30,7 +30,7 @@ class Trex_Member_View_Language extends Trex_View
     public function __construct()
     {
         parent::__construct();
-        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/member-setting-language.php');
+        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/member/setting-language.php');
     }
 
     public function display()

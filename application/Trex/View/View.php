@@ -25,12 +25,12 @@
  * @since       2010-09-17 18:24:58
  */
 
-class Trex_Common_View extends Trex_View
+class Trex_View_View extends Trex_View
 {
     public function __construct()
     {
         parent::__construct();
-        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/common-view.php');
+        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/common/view.php');
     }
 
     public function display()

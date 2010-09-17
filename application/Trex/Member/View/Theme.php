@@ -30,7 +30,7 @@ class Trex_Member_View_Theme extends Trex_View
     public function __construct()
     {
         parent::__construct();
-        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/member-setting-theme.php');
+        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/member/setting-theme.php');
     }
 
     public function display()

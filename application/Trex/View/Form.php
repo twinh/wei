@@ -30,7 +30,7 @@ class Trex_View_Form extends Trex_View
     public function __construct()
     {
         parent::__construct();
-        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/common-form.php');
+        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/common/form.php');
     }
 
     public function display()

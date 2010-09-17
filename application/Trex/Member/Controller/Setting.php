@@ -40,7 +40,7 @@ class Trex_Member_Controller_Setting extends Trex_Controller
         $this->_view = array(
             'class' => 'Trex_View',
             'element' => array(
-                array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/member-setting-center.php'),
+                array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/member/setting-center.php'),
             ),
             'data' => get_defined_vars(),
         );
@@ -78,16 +78,6 @@ class Trex_Member_Controller_Setting extends Trex_Controller
             $url = Qwin::run('-url')->createUrl($this->_set);
             $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
-    }
-
-    public function actionSwitchLang()
-    {
-        $ini = Qwin::run('-ini');
-        // 初始化控制面板中心内容的视图变量数组,加载控制面板视图
-        $this->__view_element = array(
-            'content' => QWIN_RESOURCE_PATH . '/php/View/Element/MemberSettingLang.php',
-        );
-        $this->loadView($ini->load('Resource/View/Layout/DefaultControlPanel', false));
     }
 
     public function actionSwitchStyle()
