@@ -52,7 +52,7 @@ class Trex_ActionController extends Trex_Controller
          * 设置视图
          */
         $this->_view = array(
-            'class' => 'Trex_Common_View_JqGrid',
+            'class' => 'Trex_View_JqGrid',
             'data' => get_defined_vars(),
         );
     }
@@ -100,7 +100,7 @@ class Trex_ActionController extends Trex_Controller
          * 设置视图
          */
         $this->_view = array(
-            'class' => 'Trex_Common_View_JqGridJson',
+            'class' => 'Trex_View_JqGridJson',
             'data' => get_defined_vars(),
         );
     }
@@ -145,7 +145,7 @@ class Trex_ActionController extends Trex_Controller
          * 设置视图
          */
         $this->_view = array(
-            'class' => 'Trex_Common_View_View',
+            'class' => 'Trex_View_View',
             'data' => get_defined_vars(),
         );
     }
@@ -204,7 +204,7 @@ class Trex_ActionController extends Trex_Controller
              * 设置视图
              */
             return $this->_view = array(
-                'class' => 'Trex_Common_View_Form',
+                'class' => 'Trex_View_Form',
                 'data' => get_defined_vars(),
             );
         } else {
@@ -297,7 +297,7 @@ class Trex_ActionController extends Trex_Controller
              * 设置视图
              */
             $this->_view = array(
-                'class' => 'Trex_Common_View_Form',
+                'class' => 'Trex_View_Form',
                 'data' => get_defined_vars(),
             );
         } else {
