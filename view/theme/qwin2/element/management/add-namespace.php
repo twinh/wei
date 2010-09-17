@@ -58,6 +58,6 @@ $jQueryValidateCode = $this->jQueryValidateCode;
                 <td class=""><?php echo $this->banNamespace ?></td>
             </tr>
         </table>
-        <?php require QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/basic-form.php' ?>
+        <?php require QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/basic/form.php' ?>
     </div>
 </div>

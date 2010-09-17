@@ -60,7 +60,7 @@ class Trex_Management_Controller_Namespace extends Trex_Controller
         $this->_view = array(
             'class' => 'Trex_View',
             'element' => array(
-                array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/mangement-namespace-list.php'),
+                array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/management/namespace-list.php'),
             ),
             'data' => get_defined_vars(),
         );
@@ -87,7 +87,7 @@ class Trex_Management_Controller_Namespace extends Trex_Controller
             $this->_view = array(
                 'class' => 'Trex_View',
                 'element' => array(
-                    array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/mangement-add-namespace.php'),
+                    array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/management/add-namespace.php'),
                 ),
                 'data' => get_defined_vars(),
             );

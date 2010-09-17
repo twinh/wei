@@ -30,7 +30,7 @@ class Trex_View_Redirect extends Trex_View
     public function __construct()
     {
         parent::__construct();
-        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/common-redirect.php');
+        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/common/redirect.php');
     }
 
     public function display()

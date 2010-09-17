@@ -115,7 +115,7 @@ class Trex_Management_Controller_Module extends Trex_Controller
         $this->_view = array(
             'class' => 'Trex_View',
             'element' => array(
-                array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/mangement-module-list.php'),
+                array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/management/module-list.php'),
             ),
             'data' => get_defined_vars(),
         );
@@ -136,7 +136,7 @@ class Trex_Management_Controller_Module extends Trex_Controller
             $this->_view = array(
                 'class' => 'Trex_View',
                 'element' => array(
-                    array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/management-add-module.php'),
+                    array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/management/add-module.php'),
                 ),
                 'data' => get_defined_vars(),
             );
