@@ -1,6 +1,6 @@
 <?php
 /**
- * Enus
+ * Clip
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,23 +17,13 @@
  * limitations under the License.
  *
  * @package     Trex
- * @subpackage  Config
+ * @subpackage  Clip
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-26 17:25:12
  */
 
-class Trex_Config_Language_Enus extends Trex_Language_Enus
+class Trex_Clip_Model_Clip extends Trex_Model
 {
-    public function __construct()
-    {
-        parent::__construct();
-        $this ->_data += array(
-            'LBL_FIELD_VALUE' => 'Value',
-
-            'LBL_MODULE_CONFIG' => 'Config',
-        );
-    }
 }

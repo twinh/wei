@@ -288,6 +288,8 @@ class Trex_ActionController extends Trex_Controller
              */
             $relatedField = $meta->connectMetadata($this->_meta);
             $relatedField->order();
+            // TODO
+            $this->relatedField = $relatedField;
             $groupList = $relatedField->getEditGroupList();
             $data = $result->toArray();
             $data = $meta->convertDataToSingle($data);
