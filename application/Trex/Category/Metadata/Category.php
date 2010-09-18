@@ -31,7 +31,6 @@ class Trex_Category_Metadata_Category extends Trex_Metadata
     {
         parent::setCommonMetadata();
         $this->parseMetadata(array(
-            // 基本属性
             'field' => array(
                 'parent_id' => array(
                     'basic' => array(
@@ -110,7 +109,6 @@ class Trex_Category_Metadata_Category extends Trex_Metadata
                     ),
                 ),
             ),
-            // 表之间的联系
             'model' => array(
 
             ),
@@ -122,7 +120,6 @@ class Trex_Category_Metadata_Category extends Trex_Metadata
                 ),
                 'limit' => 100,
             ),
-            // 页面显示
             'page' => array(
                 'title' => 'LBL_MODULE_CATEGORY',
             ),

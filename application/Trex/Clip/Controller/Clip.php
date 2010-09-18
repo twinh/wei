@@ -1,6 +1,6 @@
 <?php
 /**
- * Config
+ * Clip
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Trex
- * @subpackage  Config
+ * @subpackage  Clip
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,17 +25,38 @@
  * @since       2010-06-02
  */
 
-class Trex_Config_Controller_Config extends Trex_ActionController
+class Trex_Clip_Controller_Clip extends Trex_ActionController
 {
+    public function actionEdit()
+    {
+        
+        parent::actionEdit();
+    }
+
     public function onAfterDb()
     {
-        $query = $this->meta->getQuery($this->_set);
+        $query = $this->_meta->getDoctrineQuery($this->_set);
         $data = $query->execute()->toArray();
         $cache = array();
         foreach($data as $row)
         {
             $cache[$row['name']] = $row['value'];
         }
-        Qwin::run('Qwin_Cache_List')->writeCache($cache, 'Config');
+        Qwin::run('Qwin_Cache_List')->writeCache($cache, 'clip');
+    }
+
+    public function convertEditValue($value, $name, $data, $copyData)
+    {
+        $this->relatedField->set('value.form._type', $copyData['form_type']);
+        // TODO
+        if('CKEditor' == $copyData['form_widget'])
+        {
+            $this->relatedField->set('value.form._widgetDetail', array(
+                array(
+                    array('Qwin_Widget_Editor_CKEditor', 'render'),
+                ),
+            ));
+        }
+        return $value;
     }
 }

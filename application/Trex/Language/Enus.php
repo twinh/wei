@@ -92,6 +92,7 @@ class Trex_Language_Enus extends Trex_Language
             'LBL_FIELD_TYPE' => 'Type',
             'LBL_FIELD_PARENT_NAME' => 'Parent Name',
             'LBL_FIELD_PARENT_ID' => 'Parent Id',
+            'LBL_FIELD_VALUE' => 'Value',
 
             // group
             'LBL_GROUP_BASIC_DATA' => 'Basic Data',

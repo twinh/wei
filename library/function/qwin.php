@@ -140,3 +140,17 @@ function qw_jquery_operation_button($url, $title, $icon)
 {
     return Qwin_Helper_Html::jQueryButton($url, $title, $icon);
 }
+
+function qw_clip($name)
+{
+    static $clip;
+    if(null == $clip)
+    {
+        $clip  = require_once QWIN_ROOT_PATH . '/cache/php/list/clip.php';
+    }
+    if(isset($clip[$name]))
+    {
+        return $clip[$name];
+    }
+    return $name;
+}
