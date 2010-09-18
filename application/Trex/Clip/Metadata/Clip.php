@@ -41,6 +41,13 @@ class Trex_Clip_Metadata_Clip extends Trex_Metadata
                     ),
                 ),
                 'value' => array(
+                    /*'form' => array(
+                        '_type' => 'textarea',
+                        '_widget' => 'CKEditor',
+                    ),*/
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
                 ),
                 'description' => array(
 
