@@ -155,6 +155,7 @@ class Trex_Language_Enus extends Trex_Language
             'MSG_VALIDATOR_MIN' => 'Please enter a value greater than or equal to {0}.',
 
             'MSG_VALIDATOR_PATHNAME' => 'Please enter a valid path name,without \\/:*?\"<>| .',
+            'MSG_VALIDATOR_NOTNULL' => 'This field is required.',
 
 
             'LBL_FORM_VALUE_ADVICE' => 'Form value advice',

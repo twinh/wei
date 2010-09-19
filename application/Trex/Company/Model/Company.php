@@ -1,6 +1,6 @@
 <?php
 /**
- * Ticket
+ * Company
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,39 +17,14 @@
  * limitations under the License.
  *
  * @package     Trex
- * @subpackage  Project
+ * @subpackage  Company
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-07-09 14:53:13
+ * @since       2010-09-18 23:15:46
  */
 
-class Trex_Project_Controller_Ticket extends Trex_ActionController
+class Trex_Company_Model_Company extends Trex_Model
 {
-    /**
-     * 简洁模式
-     */
-    public function actionSimpleAdd()
-    {
-        $this->setAction('Add');
-        $this->_meta->field->unlink(array(
-            'type', 'priority', 'severity', 'reproducibility', 'status',
-        ));
-        parent::actionAdd();
-    }
-
-    public function convertDbStatusId($value, $name, $data, $copyData)
-    {
-        return Qwin::run('Qwin_converter_String')->getUuid($value);
-    }
-
-    public function isSaveStatusData($data, $query)
-    {
-        if(isset($data['status']) && isset($query->status) && $data['status'] == $query['status'])
-        {
-            return false;
-        }
-        return true;
-    }
 }

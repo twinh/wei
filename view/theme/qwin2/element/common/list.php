@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Trex
- * @subpackage  Member
+ * @subpackage  View
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -31,11 +31,12 @@
 <script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH ?>/js/jquery/plugin/jqgrid/i18n/grid.locale-en.js"></script>
 <?php echo $jquery->loadPlugin('jqgrid') ?>
 <div id="custom-jqgird-toolbar" class="ui-helper-hidden">
-    &nbsp;<a class="action-add" href="<?php echo qw_url($set, array('action' => 'Add')) ?>"><?php echo qw_lang('LBL_ACTION_ADD')?></a>&nbsp;|&nbsp;
-    <a class="action-edit" href="javascript:void(0)"><?php echo qw_lang('LBL_ACTION_EDIT') ?></a>&nbsp;|&nbsp;
-    <a class="action-delete" href="javascript:void(0)"><?php echo qw_lang('LBL_ACTION_DELETE') ?></a>&nbsp;|&nbsp;
-    <a class="list_show_link" href="javascript:void(0)"><?php echo qw_lang('LBL_ACTION_VIEW') ?></a>&nbsp;|&nbsp;
-    <a class="action-clone" href="javascript:void(0)"><?php echo qw_lang('LBL_ACTION_COPY') ?></a>&nbsp;|&nbsp;
+    <?php
+    echo qw_jquery_link(qw_url($set, array('action' => 'Add')), qw_lang('LBL_ACTION_ADD'), 'ui-icon-plus'),
+         qw_jquery_link('javascript:;', qw_lang('LBL_ACTION_DELETE'), 'ui-icon-trash', 'action-delete'),
+         qw_jquery_link(qw_url($set, array('action' => 'Index')), qw_lang('LBL_ACTION_LIST'), 'ui-icon-calculator'),
+        $customLink
+    ?>
     <!--<a class="action-filter" href="Add"><?php echo $lang->t('LBL_ACTION_FILTER')?></a>-->
 </div>
 <table id="ui-jqgrid-table"></table>
@@ -102,21 +103,11 @@ jQuery(function($){
     // 页眉工具栏
     $("#t_ui-jqgrid-table").append($('#custom-jqgird-toolbar').html());
 
-    // 点击编辑按钮
-    $('#t_ui-jqgrid-table a.action-edit').click(function(){
-        var rowList = $('#ui-jqgrid-table').jqGrid('getGridParam','selarrrow');
-        if(rowList.length != 1)
-        {
-            alert(Qwin.Lang.MSG_CHOOSE_ONLY_ONE_ROW);
-            return false;
-        }
-        var rowData = $("#ui-jqgrid-table").jqGrid('getRowData', rowList[0]),
-            addition = {};
-        addition['action'] = 'Edit'
-        addition[primaryKey] = rowData[primaryKey];
-        window.location.href = Qwin.url.createUrl(Qwin.get, addition);
-        return false;
+    $('#t_ui-jqgrid-table a').qui({
+        click: true,
+        focus: true
     });
+
     // 点击删除按钮
     // TODO 提示更多信息,包括id号,数目等
     $('#t_ui-jqgrid-table a.action-delete').click(function(){
@@ -139,36 +130,6 @@ jQuery(function($){
         {
             window.location.href = Qwin.url.createUrl(Qwin.get, addition);
         }
-        return false;
-    });
-    // 点击复制按钮
-    $('#t_ui-jqgrid-table a.action-clone').click(function(){
-        var rowList = $('#ui-jqgrid-table').jqGrid('getGridParam','selarrrow');
-        if(rowList.length != 1)
-        {
-            alert(Qwin.Lang.MSG_CHOOSE_ONLY_ONE_ROW);
-            return false;
-        }
-        var rowData = $("#ui-jqgrid-table").jqGrid('getRowData', rowList[0]),
-            addition = {};
-        addition['action'] = 'Add';
-        addition[primaryKey] = rowData[primaryKey];
-        window.location.href = Qwin.url.createUrl(Qwin.get, addition);
-        return false;
-    });
-    // 点击查看按钮
-    $('#t_ui-jqgrid-table a.list_show_link').click(function(){
-        var rowList = $('#ui-jqgrid-table').jqGrid('getGridParam','selarrrow');
-        if(rowList.length != 1)
-        {
-            alert(Qwin.Lang.MSG_CHOOSE_ONLY_ONE_ROW);
-            return false;
-        }
-        var rowData = $("#ui-jqgrid-table").jqGrid('getRowData', rowList[0]),
-            addition = {};
-        addition['action'] = 'View';
-        addition[primaryKey] = rowData[primaryKey];
-        window.location.href = Qwin.url.createUrl(Qwin.get, addition);
         return false;
     });
 });

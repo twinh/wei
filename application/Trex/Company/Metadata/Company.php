@@ -52,9 +52,19 @@ class Trex_Company_Metadata_Company extends Trex_Metadata
                     'attr' => array(
                         'isListLink' => 1,
                     ),
+                    'validator' => array(
+                        'rule' => array(
+                            'required' => true,
+                            'notNull' => true,
+                        ),
+                    ),
                 ),
                 'name' => array(
-
+                    'validator' => array(
+                        'rule' => array(
+                            'required' => true,
+                        )
+                    ),
                 ),
                 'industry' => array(
                     'form' => array(
@@ -120,6 +130,9 @@ class Trex_Company_Metadata_Company extends Trex_Metadata
                     'form' => array(
                         '_type' => 'textarea',
                     ),
+                    'attr' => array(
+                        'isList' => 0
+                    ),
                 ),
             ),
             'model' => array(
@@ -145,5 +158,6 @@ class Trex_Company_Metadata_Company extends Trex_Metadata
                 'title' => 'LBL_MODULE_COMPANY',
             ),
         ));
+        $this->field->set('operation.list.width', 180);
     }
 }

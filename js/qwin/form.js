@@ -7,7 +7,7 @@ jQuery(function($){
         $('#' + tableId).toggle();
     });
 
-    if(undefined != $.validate)
+    if(undefined != $.validator)
     {
         $('#post-form').validate({
             rules: jQueryValidateCode.rules,

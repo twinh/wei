@@ -45,6 +45,7 @@ class Trex_View_JqGrid extends Trex_View
         $request = Qwin::run('Qwin_Request');
         $lang = Qwin::run('-lang');
         $set = Qwin::run('-ini')->getSet();
+        $customLink = $this->customLink;
 
         /**
          * 数据转换

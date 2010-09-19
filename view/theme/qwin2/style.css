@@ -514,3 +514,8 @@ div.ui-layout-pane {
 .ui-table .ui-table-toolbar td{
     text-align: left;
 }
+
+#post-form .ui-view-button{
+    font-size: .85em;
+    
+}

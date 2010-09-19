@@ -142,6 +142,17 @@ jQuery.validator.addMethod('idCardCn', function(value, element){
 }, 'Please enter the right chinese zip code.');
 
 /**
+ * 验证不为空值
+ *
+ * @param value 从表单获取的值
+ * @param object 表单对象
+ * @return boolen 验证结果
+ */
+jQuery.validator.addMethod('notNull', function(value, element){
+    return this.optional(element) || 'NULL' != value;
+}, 'This field is required.');
+
+/**
  * 验证ip地址
  *
  * @param value 从表单获取的值

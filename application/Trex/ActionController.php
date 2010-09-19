@@ -47,6 +47,7 @@ class Trex_ActionController extends Trex_Controller
         $relatedField = $meta->connectMetadata($this->_meta);
         $relatedField->order();
         $listField = $relatedField->getAttrList('isList');
+        $customLink = $this->createCustomLink();
 
         /**
          * 设置视图
@@ -401,6 +402,12 @@ class Trex_ActionController extends Trex_Controller
         $url = urldecode($this->_request->p('_page'));
         '' == $url && $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Index'));
         $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+    }
+
+    
+    public function createCustomLink()
+    {
+        return null;
     }
 
     /**

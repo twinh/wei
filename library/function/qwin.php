@@ -126,9 +126,9 @@ function qw_title_decorator($title, $fontStyle = null, $color = null)
     return Qwin_Helper_Html::titleDecorator($title, $fontStyle, $color);
 }
 
-function qw_jquery_link($url, $title, $icon)
+function qw_jquery_link($url, $title, $icon, $aClass = null)
 {
-    return '<a href="' . $url . '" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ' . $icon . '"></span><span class="ui-button-text">' . $title . '</span></a>' . "\r\n";
+    return Qwin_Helper_Html::jQueryLink($url, $title, $icon, $aClass);
 }
 
 function qw_jquery_button($type, $title, $icon)

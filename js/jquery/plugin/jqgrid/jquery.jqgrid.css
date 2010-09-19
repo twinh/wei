@@ -23,10 +23,11 @@
 	padding:.5em .3em .3em 1em;/*border:1px solid;/* ie */
 }
 #t_ui-jqgrid-table{
-	padding:.4em 0 0;
+    padding: .4em 0 .9em;
+    border-top: none;
 }
 #t_ui-jqgrid-table a{
-	font-size:1.2em;
+    
 }
 /* 2010-05-21 */
 .ui-jqgrid tr.jqgrow td a.ui-jqgrid-icon{

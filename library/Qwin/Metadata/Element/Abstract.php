@@ -154,20 +154,41 @@ abstract class Qwin_Metadata_Element_Abstract extends Qwin_Metadata_Abstract
         return $this;
     }
 
-    public function unlink($key)
+    /**
+     * 删除参数指定的键名
+     *
+     * @param array|string $data
+     * @return object 当前对象
+     */
+    public function unlink($data)
     {
-        if(isset($this->_data[$key]))
+        $data = (array)$data;
+        foreach($data as $key)
         {
-            unset($this->_data[$key]);
+            if(isset($this->_data[$key]))
+            {
+                unset($this->_data[$key]);
+            }
         }
         return $this;
     }
 
-    public function unlinkList(array $list)
+    /**
+     * 删除除了参数中定义的键名
+     *
+     * @param array|string $data
+     * @return object 当前对象
+     * @todo 通过php数组函数优化
+     */
+    public function unlinkExcept($data)
     {
-        foreach($list as $key)
+        $data = (array)$data;
+        foreach($this->_data as $key => $value)
         {
-            $this->unlink($key);
+            if(!in_array($key, $data))
+            {
+                unset($this->_data[$key]);
+            }
         }
         return $this;
     }
