@@ -5,9 +5,13 @@
     margin: 0;
     padding: 0;
 }
+/* 让火狐一直显示右边滚动条 */
+html{
+    overflow-y: scroll;
+}
 body{
     font-size: 62.5%;
-    overflow-y: scroll;    
+    
     margin: 0 auto;
 }
 li{
@@ -32,6 +36,7 @@ a{
     position: fixed;
     width: 100%;
     top: 0;
+    left: 0;
     z-index: 999;
     height: 4em;
     border-top: none;
@@ -50,7 +55,7 @@ a{
 #ui-top-floating-bar ul li{
     height: 2em;
     float: left;
-    margin: 1.2em .6em 2em .6em;
+    padding: 1.2em .6em 2em .6em;
 }
 #ui-top-floating-bar ul li a{
     font-size: 1.2em;
@@ -64,7 +69,6 @@ a{
     display: none;
     margin: .6em 0 0 0;
     position: absolute;
-    z-index: 10;
 }
 #ui-top-floating-bar ul li ul li{
     clear: both;

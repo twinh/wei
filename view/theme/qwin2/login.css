@@ -2,12 +2,10 @@
 	padding:.15em;
 }
 .ui-login-panel{
-	width:360px;
+	width:400px;
 	margin:4em auto
 }
-.ui-form{
-	width:360px;
-}
+
 .ui-form .ui-form-content form{
 	padding: .8em;
 }

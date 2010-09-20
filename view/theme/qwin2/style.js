@@ -44,9 +44,7 @@ jQuery(function($){
 
     // 点击右下按钮,回到顶部
     $('#ui-bottom-floating-botton').click(function(){
-        $('html, body').animate({
-            scrollTop: $("html").offset().top
-        }, 500);
+        $('html').animate({scrollTop:0}, 700);
         return false;
     })
 
