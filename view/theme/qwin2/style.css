@@ -2,28 +2,28 @@
 /* Basic
 ----------------------------------*/
 *{
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 body{
-	font-size: 62.5%;
-	overflow-y: scroll;	
-	margin: 0 auto; 
+    font-size: 62.5%;
+    overflow-y: scroll;    
+    margin: 0 auto;
 }
 li{
-	list-style: none;
+    list-style: none;
 }
 img{
-	border: 0;
+    border: 0;
 }
 a{
-	text-decoration: none;
+    text-decoration: none;
 }
 
 /* 常用样式
 ----------------------------------*/
 .clear{
-	clear: both;
+    clear: both;
 }
 
 /* 页顶浮动栏
@@ -81,10 +81,10 @@ a{
 /* 页底浮动栏
 ----------------------------------*/
 #ui-bottom-floating-botton{
-	position: fixed;
-	bottom: 0;
-	right: 0;
-	z-index: 999;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 999;
 }
 
 /* Header
@@ -101,7 +101,7 @@ div.ui-header-logo{
     border: none;
 }
 .ui-header-logo a sup{
-	font-size: 0.4em;
+    font-size: 0.4em;
 }
 .ui-header-shortcut{
     float: right;
@@ -109,20 +109,20 @@ div.ui-header-logo{
     font-size: 1.2em;
 }
 .ui-header-shortcut a{
-	padding: .4em 1em;
-	display: block;
-	float: left;
+    padding: .4em 1em;
+    display: block;
+    float: left;
 }
 .ui-header-shortcut a.ui-header-shortcut-last-anchor{
-	border-right: none;
+    border-right: none;
 }
 
 /* Main
 ----------------------------------*/
 .ui-main{
     width: 950px;
-	margin: 0 auto;
-	padding: 5em 0 0;
+    margin: 0 auto;
+    padding: 5em 0 0;
 }
 
 /* Footer
@@ -177,7 +177,7 @@ div.ui-layout-pane {
     vertical-align: text-bottom
 }
 .ui-operation-field{
-	margin: 1em 0;
+    margin: 1em 0;
 }
 .ui-form{
     width: auto;
@@ -305,33 +305,33 @@ div.ui-layout-pane {
 /* Tables in the Form
 ----------------------------------*/
 .ui-form-table{
-	border-collapse: collapse;
-	border-spacing: 0;
-	margin: .2em 0 2em;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: .2em 0 2em;
 }
 .ui-form-table td{
-	padding: .2em;
-	font-size:1.3em;
-	font-weight: normal;
+    padding: .2em;
+    font-size:1.3em;
+    font-weight: normal;
     line-height:2em;
 }
 .ui-form-table td.ui-field-common{
-	font-size: 1em;
+    font-size: 1em;
 }
 .ui-form-table .ui-label-common{
-	text-align: right;
-	
+    text-align: right;
+
 }
 .ui-form-table td.ui-field-plain{
     font-size: 1.3em;
 }
 .ui-form-table .ui-field-text input,
 .ui-form-table .ui-field-password input{
-	width: 60%;
+    width: 60%;
     padding:.4em 0 .4em .5em;/* for ie & ff */
     line-height:1.5em;/* for ie */
     font-weight:normal;
-	font-size:1.1em;
+    font-size:1.1em;
     vertical-align: bottom;
 }
 .ui-form-table .ui-field-checkbox input,
@@ -343,10 +343,10 @@ div.ui-layout-pane {
     height:2em;
     font-size:1.1em;
     line-height:2em;
-	padding: .2em 0 0;
+    padding: .2em 0 0;
 }
 .ui-form-table .ui-field-textarea textarea{
-	width: 59.6%;
+    width: 59.6%;
     height: 8em;
     font-size: 1.1em;
     line-height: 2em;
@@ -424,8 +424,8 @@ div.ui-layout-pane {
     font-size: 1.2em;
 }
 .ui-tabs .ui-tabs-nav li a{
-	font-size: 1.1em;
-	font-weight: bold;
+    font-size: 1.1em;
+    font-weight: bold;
 }
 
 /* Message
@@ -478,8 +478,8 @@ div.ui-layout-pane {
 }
 .ui-table td{
     padding: .2em;
-	font-size:1em;
-	font-weight: normal;
+    font-size:1em;
+    font-weight: normal;
     line-height:2em;
 
     border-right-width: 1px;
@@ -502,14 +502,14 @@ div.ui-layout-pane {
 }
 /* 2010-05-21 */
 .ui-table td a.ui-jqgrid-icon{
-	cursor:pointer;
-	float:left;
-	margin:2px;
-	width:19px;
-	height:19px;
+    cursor:pointer;
+    float:left;
+    margin:2px;
+    width:19px;
+    height:19px;
 }
 .ui-table td a.ui-jqgrid-icon span{
-	display:block; margin:1px
+    display:block; margin:1px
 }
 .ui-table .ui-table-toolbar td{
     text-align: left;
