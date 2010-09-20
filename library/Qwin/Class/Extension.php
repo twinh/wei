@@ -47,7 +47,7 @@ class Qwin_Class_Extension
      * 设置当前命名空间
      *
      * @param string $name 存在的命名空间名称
-     * @return object 当前类
+     * @return object 当前对象
      */
     public function setCurrentNamespace($name)
     {
@@ -64,7 +64,7 @@ class Qwin_Class_Extension
      * 为当前的命名空间增加一个类
      *
      * @param string $class 存在的类名
-     * @return obejct 当前类
+     * @return obejct 当前对象
      */
     public function addClass($class)
     {
@@ -84,7 +84,7 @@ class Qwin_Class_Extension
      *
      * @param string $class 类名
      * @param string $method 方法名
-     * @return object 当前类
+     * @return object 当前对象
      */
     public function setMethod($class, $method)
     {

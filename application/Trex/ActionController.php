@@ -178,7 +178,7 @@ class Trex_ActionController extends Trex_Controller
              */
             if(null != $id)
             {
-                $result = $query->where($primaryKey . ' = ?', $id)->fetchOne();
+                $this->_result = $result = $query->where($primaryKey . ' = ?', $id)->fetchOne();
                 if(false == $result)
                 {
                     return $this->setRedirectView($this->_lang->t('MSG_NO_RECORD'));
@@ -243,9 +243,9 @@ class Trex_ActionController extends Trex_Controller
              */
             $ini = Qwin::run('-ini');
             $modelName = $ini->getClassName('Model', $this->_set);
-            $query = new $modelName;
-            $query->fromArray($data);
-            $query->save();
+            $this->_result = new $modelName;
+            $this->_result->fromArray($data);
+            $this->_result->save();
 
             /**
              * 在数据库操作之后,执行相应的 on 函数,跳转到原来的页面或列表页
@@ -268,11 +268,11 @@ class Trex_ActionController extends Trex_Controller
         $meta = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
         $id = $this->_request->g($primaryKey);
-        $query = $meta->getDoctrineQuery($this->_set);
+        $this->_query = $query = $meta->getDoctrineQuery($this->_set);
         Qwin::run('Qwin_Class_Extension')
             ->setNamespace('validator')
             ->addClass('Qwin_Validator_JQuery');
-
+        
         if(null == $this->_request->p($meta['db']['primaryKey']))
         {
             /**
@@ -308,8 +308,8 @@ class Trex_ActionController extends Trex_Controller
              * 检查记录是否存在
              */
             $id = $this->_request->p($meta['db']['primaryKey']);
-            $query = $query->where($meta['db']['primaryKey'] . ' = ?', $id)->fetchOne();
-            if(false == $query)
+            $this->_result = $result = $query->where($meta['db']['primaryKey'] . ' = ?', $id)->fetchOne();
+            if(false == $result)
             {
                 return $this->setRedirectView($this->_lang->t('MSG_NO_RECORD'));
             }
@@ -341,14 +341,14 @@ class Trex_ActionController extends Trex_Controller
             /**
              * 保存关联模型的数据
              */
-            $meta->saveRelatedDbData($meta, $data, $query);
+            $meta->saveRelatedDbData($meta, $data, $result);
 
             /**
              * 入库
              * @todo 设置 null 值
              */
-            $query->fromArray($data);
-            $query->save();
+            $result->fromArray($data);
+            $result->save();
 
             /**
              * 在数据库操作之后,执行相应的 on 函数,跳转到原来的页面或列表页
@@ -398,7 +398,7 @@ class Trex_ActionController extends Trex_Controller
         /**
          * 在数据库操作之后,执行相应的 on 函数,跳转到原来的页面或列表页
          */
-        $this->executeOnFunction('afterDb', 'delete', array());
+        $this->executeOnFunction('afterDb', 'Delete', array());
         $url = urldecode($this->_request->p('_page'));
         '' == $url && $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Index'));
         $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);

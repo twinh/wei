@@ -88,6 +88,11 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         );
     }
 
+    /**
+     * 以数组的形式递归格式化数据
+     *
+     * @return object 当前对象
+     */
     public function format()
     {
         return $this->_formatAsArray();
@@ -234,7 +239,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
      * @param string $field 域的名称
      * @param string $attr 属性的名称
      * @param mixed $value 属性的值
-     * @return Qwin_Metadata_Element_Field 当前类
+     * @return Qwin_Metadata_Element_Field 当前对象
      */
     public function setAttr($field, $attr, $value)
     {
@@ -245,7 +250,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
     /**
      * 根据域中的order从小到大排序
      * 
-     * @return Qwin_Metadata_Element_Field 当前类
+     * @return Qwin_Metadata_Element_Field 当前对象
      * @todo 转为n维数组排序
      */
     public function order()
@@ -280,7 +285,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
      * 转换语言
      *
      * @param array $language 用于转换的语言
-     * @return Qwin_Metadata_Element_Field 当前类
+     * @return Qwin_Metadata_Element_Field 当前对象
      */
     public function translate($language)
     {
@@ -412,7 +417,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
      *
      * @param string $field 域的名称
      * @param string $value 类名,多个类名用空格分开
-     * @return object 当前类
+     * @return object 当前对象
      * @todo [重要]象数组一样自由赋值
      */
     public function addClass($field, $value)
@@ -480,11 +485,52 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
      *
      * @param string $name 缩写
      * @param array $value 全数组
-     * @return 当前类
+     * @return object 当前对象
      */
     public function setValidatorMap($name, $value)
     {
         $this->_validatorMap[$name] = $value;
+        return $this;
+    }
+
+    /**
+     * 设置指定域为只读
+     *
+     * @param array|string $data
+     * @return object 当前对象
+     */
+    public function setReadonly($data)
+    {
+        $data = (array)$data;
+        foreach($data as $key)
+        {
+            if(0 == $this->_data[$key]['attr']['isReadonly'])
+            {
+                $this->_data[$key]['attr']['isReadonly'] = 1;
+                $this->_data[$key]['form']['_type'] = 'hidden';
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * 设置除了参数中定义的键名外为只读
+     *
+     * @param array|string $data
+     * @return object 当前对象
+     * @todo 通过php数组函数优化
+     */
+    public function setReadonlyExcept($data)
+    {
+        $data = (array)$data;
+        foreach($this->_data as $key => $value)
+        {
+            if(!in_array($key, $data) && 0 == $this->_data[$key]['attr']['isReadonly'])
+            {
+                $this->_data[$key]['attr']['isReadonly'] = 1;
+                $this->_data[$key]['form']['_type'] = 'hidden';
+            }
+        }
         return $this;
     }
 }

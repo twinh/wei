@@ -30,7 +30,7 @@ class Trex_Member_Controller_Group extends Trex_ActionController
     /**
      * 分配权限
      *
-     * @return 当前类
+     * @return 当前对象
      * @todo 预定权限分配模式,提供一键分配
      * @todo 全选,反选
      * @todo 当父分类被选择时,子分类全选

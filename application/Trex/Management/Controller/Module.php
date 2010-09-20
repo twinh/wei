@@ -87,7 +87,7 @@ class Trex_Management_Controller_Module extends Trex_Controller
     /**
      * 查看指定命名空间的模块列表
      *
-     * @return object 当前类
+     * @return object 当前对象
      */
     public function actionIndex()
     {

@@ -36,14 +36,15 @@ class Trex_Metadata extends Qwin_Trex_Metadata
     public function setCommonMetadata()
     {
          return $this->setIdMetadata()
-             ->setDateMetadata()
+             ->setCreatedData()
+             ->setModifiedData()
              ->setOperationMetadata();
     }
 
     /**
      * 设置编号域的元数据配置,编号是最为常见的域
      *
-     * @return obejct 当前类
+     * @return obejct 当前对象
      */
     public function setIdMetadata()
     {
@@ -69,11 +70,11 @@ class Trex_Metadata extends Qwin_Trex_Metadata
     }
 
     /**
-     * 设置日期的元数据配置,主要包括创建日期,修改日期两项
+     * 设置创建域,包括创建人和创建时间
      *
-     * @return object 当前类
+     * @return object 当前对象
      */
-    public function setDateMetadata()
+    public function setCreatedData()
     {
         $this->addField(array(
             'created_by' => array(
@@ -88,17 +89,6 @@ class Trex_Metadata extends Qwin_Trex_Metadata
                     'isReadonly' => 1,
                 ),
             ),
-            'modified_by' => array(
-                'basic' => array(
-                    'order' => 1040,
-                ),
-                'form' => array(
-                    '_type' => 'custom',
-                ),
-                'attr' => array(
-                    'isList' => 0,
-                ),
-            ),
             'date_created' => array(
                 'basic' => array(
                     'order' => 1060,
@@ -108,6 +98,29 @@ class Trex_Metadata extends Qwin_Trex_Metadata
                 ),
                 'attr' => array(
                     'isReadonly' => 1,
+                ),
+            ),
+        ));
+        return $this;
+    }
+
+    /**
+     * 设置修改域,包括修改人和修改时间
+     *
+     * @return object 当前对象
+     */
+    public function setModifiedData()
+    {
+        $this->addField(array(
+            'modified_by' => array(
+                'basic' => array(
+                    'order' => 1040,
+                ),
+                'form' => array(
+                    '_type' => 'custom',
+                ),
+                'attr' => array(
+                    'isList' => 0,
                 ),
             ),
             'date_modified' => array(
@@ -125,7 +138,7 @@ class Trex_Metadata extends Qwin_Trex_Metadata
     /**
      * 设置操作域的元数据配置,操作域主要用于列表
      *
-     * @return obejct 当前类
+     * @return obejct 当前对象
      */
     public function setOperationMetadata()
     {

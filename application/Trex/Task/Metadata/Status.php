@@ -112,7 +112,7 @@ class Trex_Task_Metadata_Status extends Trex_Metadata
             'db' => array(
                 'table' => 'task_status',
                 'order' => array(
-                    array('date_created', 'ASC'),
+                    array('date_created', 'DESC'),
                 ),
             ),
             'page' => array(

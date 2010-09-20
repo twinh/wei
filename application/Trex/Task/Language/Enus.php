@@ -35,10 +35,20 @@ class Trex_Task_Language_Enus extends Trex_Language_Enus
             'LBL_FIELD_ASSIGN_TO' => 'Assign To',
             'LBL_FIELD_ASSIGN_BY' => 'Assign By',
             'LBL_FIELD_TASK_NAME' => 'Task name',
+            'LBL_FIELD_IS_POST_EMAIL' => 'Post Email?',
 
 
             'LBL_ACTION_ASSIGN_TO' => 'Assign to',
             'LBL_ACTION_RESOLVED' => 'I have resolved the task.',
+            'LBL_ACTION_CHECKED' => 'I have checked the task.',
+            'LBL_ACTION_CLOSED' => 'Close the task.',
+
+
+            'MSG_NOT_ASSIGN_TO_YOU' => 'The task is not assign to you.',
+            'MSG_NOT_ASSIGN_BY_YOU' => 'The task is not assign by you.',
+            'MSG_TASK_HAS_ASSIGNED' => 'The task has been assigned.',
+            'MSG_NOT_CREATED_BY_YOU' => 'Ths task is not created by you.',
+            'MSG_NOT_FOLLOW_FLOW' => 'Do you forget anything to do before this?',
 
             'LBL_MODULE_TASK' => 'Task',
             'LBL_MODULE_TASK_STATUS' => 'Task Status',

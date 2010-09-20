@@ -106,7 +106,7 @@ abstract class Qwin_Metadata_Abstract implements ArrayAccess, Iterator
      * 将数组加入该对象中
      *
      * @param array $data 要加入对象的数组
-     * @return object 当前类
+     * @return object 当前对象
      */
     public function fromArray($data)
     {
@@ -118,7 +118,7 @@ abstract class Qwin_Metadata_Abstract implements ArrayAccess, Iterator
      * 合并两个元数据
      *
      * @param Qwin_Metadata_Abstract $meta
-     * @return object 当前类
+     * @return object 当前对象
      */
     public function merge(Qwin_Metadata_Abstract $meta)
     {

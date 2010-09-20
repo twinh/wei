@@ -89,6 +89,19 @@ class Trex_Task_Metadata_Task extends Trex_Metadata
                         ),
                     ),
                 ),
+                'is_post_email' => array(
+                    'form' => array(
+                        '_type' => 'checkbox',
+                        '_resourceGetter' => array(
+                            array('Project_Helper_CommonClass', 'get'),
+                            'yes',
+                        ),
+                        '_value' => 1,
+                    ),
+                    'attr' => array(
+                        'isDbField' => 0,
+                    ),
+                ),
                 'assign_by' => array(
                     'form' => array(
                         '_type' => 'hidden',
@@ -155,12 +168,31 @@ class Trex_Task_Metadata_Task extends Trex_Metadata
                         'status' => 'status',
                         'date_modified' => 'date_created',
                         'status_description' => 'description',
-                        'created_by' => 'created_by',
+                        'modified_by' => 'created_by',
                     ),
                     'set' => array(
                         'namespace' => 'Trex',
                         'module' => 'Task',
                         'controller' => 'Status',
+                    ),
+                ),
+                'email' => array(
+                    'name' => 'Trex_Email_Model_Email',
+                    'alias' => 'email',
+                    'metadata' => 'Trex_Email_Metadata_Email',
+                    'local' => 'id',
+                    'foreign' => 'foreign_id',
+                    'type' => 'relatedDb',
+                    'fieldMap' => array(
+                        'id' => 'foreign_id',
+                        'name' => 'subject',
+                        'date_modified' => 'date_created',
+                        'modified_by' => 'created_by',
+                    ),
+                    'set' => array(
+                        'namespace' => 'Trex',
+                        'module' => 'Email',
+                        'controller' => 'Email',
                     ),
                 ),
             ),

@@ -82,7 +82,7 @@ class Qwin_Trex_Controller
      * 设置新的行为
      *
      * @param string $newAction 新的行为名称
-     * @return object 当前类
+     * @return object 当前对象
      */
     public function setAction($newAction)
     {
@@ -95,7 +95,7 @@ class Qwin_Trex_Controller
      * 恢复为上一个行为
      *
      * @return string Action 的名称
-     * @return object 当前类
+     * @return object 当前对象
      */
     public function resetAction()
     {
@@ -158,7 +158,7 @@ class Qwin_Trex_Controller
      * 执行 on 方法
      * 
      * @param string $method
-     * @return object 当前类
+     * @return object 当前对象
      */
     public function executeOnFunction($method)
     {

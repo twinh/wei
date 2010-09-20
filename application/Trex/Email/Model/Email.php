@@ -1,6 +1,6 @@
 <?php
 /**
- * Status
+ * Email
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,18 +17,14 @@
  * limitations under the License.
  *
  * @package     Trex
- * @subpackage  Task
+ * @subpackage  Email
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-19 15:36:34
+ * @since       2010-09-20 10:37:51
  */
 
-class Trex_Task_Controller_Status extends Trex_ActionController
+class Trex_Email_Model_Email extends Trex_Model
 {
-    public function convertListDateCreated($value, $name, $data, $copyData)
-    {
-        return $value;
-    }
 }

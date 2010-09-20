@@ -44,7 +44,7 @@ class Qwin_Metadata_Element_Page extends Qwin_Metadata_Element_Abstract
      * 转换语言
      *
      * @param array $language 用于转换的语言
-     * @return Qwin_Metadata_Element_Field 当前类
+     * @return Qwin_Metadata_Element_Field 当前对象
      */
     public function translate($language)
     {
