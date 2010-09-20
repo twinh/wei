@@ -415,6 +415,11 @@ class Trex_Task_Controller_Task extends Trex_ActionController
         return 'Twin Huang';
     }
 
+    public function convertDbEmailSubject($value, $name, $data, $copyData)
+    {
+        return '您有一份新的任务需要完成:' . $this->_result['name'];
+    }
+
     public function convertDbEmailContent($value, $name, $data, $copyData)
     {
         $content = file_get_contents(QWIN_RESOURCE_PATH . '/template/email/task.tpl');
@@ -468,7 +473,7 @@ class Trex_Task_Controller_Task extends Trex_ActionController
         $mail->CharSet = 'utf-8';
         $mail->IsHTML(true);
 
-        $mail->Subject = $this->_result['name'];
+        $mail->Subject = $data['subject'];
         $mail->Body    = $content;
 
         //$mail->AltBody = "This is the body in plain text for non-HTML mail clients";
