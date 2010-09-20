@@ -479,7 +479,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
              * 增加Url查询
              * @todo 是否应该出现在此
              */
-            if(true == $isView && $meta[$field]['attr']['isListLink'])
+            if(true == $isView && $meta[$field]['attr']['isLink'])
             {
                 !isset($rowCopy[$name]) && $rowCopy[$name] = null;
                 $newRow[$name] = '<a href="' . $url->createUrl($ctrler->_set, array('action' => 'Index', 'searchField' => $name, 'searchValue' => $rowCopy[$name])) . '">' . $newRow[$name] . '</a>';
@@ -886,7 +886,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     {
         foreach($data as $key => $val)
         {
-            if(isset($this->__meta['field'][$key]['list']['isListLink']) && $this->__meta['field'][$key]['list']['isListLink'] == true)
+            if(isset($this->__meta['field'][$key]['list']['isLink']) && $this->__meta['field'][$key]['list']['isLink'] == true)
             {
                 $data[$key] = '<a href="' . url(array('admin', $this->_set['controller']), array(_S('url', '_DATA') . '%5B' . $key . '%5D' => $sql_data[$key])) . '">' . $val . '</a>';
             }

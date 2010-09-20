@@ -34,7 +34,7 @@ class Trex_Member_Metadata_LoginLog extends Trex_Metadata
             'field' => array(
                 'member_id' => array(
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                     )
                 ),
                 'ip' => array(

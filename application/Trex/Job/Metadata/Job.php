@@ -46,7 +46,7 @@ class Trex_Job_Metadata_Job extends Qwin_Trex_Metadata
                         'name' => 'id',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -66,7 +66,7 @@ class Trex_Job_Metadata_Job extends Qwin_Trex_Metadata
                         'name' => 'title',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -92,7 +92,7 @@ class Trex_Job_Metadata_Job extends Qwin_Trex_Metadata
                         'name' => 'description',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -116,7 +116,7 @@ class Trex_Job_Metadata_Job extends Qwin_Trex_Metadata
                         'name' => 'working_place',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -135,7 +135,7 @@ class Trex_Job_Metadata_Job extends Qwin_Trex_Metadata
                         'name' => 'number',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -154,7 +154,7 @@ class Trex_Job_Metadata_Job extends Qwin_Trex_Metadata
                         'name' => 'responsibility',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -173,7 +173,7 @@ class Trex_Job_Metadata_Job extends Qwin_Trex_Metadata
                         'name' => 'qualification',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -193,7 +193,7 @@ class Trex_Job_Metadata_Job extends Qwin_Trex_Metadata
                         'name' => 'enabled',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -219,7 +219,7 @@ class Trex_Job_Metadata_Job extends Qwin_Trex_Metadata
                         'name' => 'order',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -239,7 +239,7 @@ class Trex_Job_Metadata_Job extends Qwin_Trex_Metadata
                         'name' => 'date_created',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -260,7 +260,7 @@ class Trex_Job_Metadata_Job extends Qwin_Trex_Metadata
                         'name' => 'date_modified',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -278,7 +278,7 @@ class Trex_Job_Metadata_Job extends Qwin_Trex_Metadata
                         'name' => 'operation',
                     ),
                     'attr' => array(
-                        'isListLink' => 0,
+                        'isLink' => 0,
                         'isList' => 1,
                         'isDbField' => 0,
                         'isDbQuery' => 0,

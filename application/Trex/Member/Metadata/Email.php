@@ -46,7 +46,7 @@ class Trex_Member_Metadata_Email extends Qwin_Trex_Metadata
                         'name' => 'id',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -66,7 +66,7 @@ class Trex_Member_Metadata_Email extends Qwin_Trex_Metadata
                         'name' => 'foreign_id',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -86,7 +86,7 @@ class Trex_Member_Metadata_Email extends Qwin_Trex_Metadata
                         'name' => 'email_address',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -112,7 +112,7 @@ class Trex_Member_Metadata_Email extends Qwin_Trex_Metadata
                         'name' => 'remark',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,

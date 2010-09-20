@@ -50,7 +50,7 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
                         ),
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                     ),
                 ),
                 'name' => array(
@@ -109,7 +109,7 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
                         ),
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                     ),
                     'converter' => array(
                         'list' => array(

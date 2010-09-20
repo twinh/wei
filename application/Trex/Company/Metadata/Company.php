@@ -50,7 +50,7 @@ class Trex_Company_Metadata_Company extends Trex_Metadata
                         ),
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                     ),
                     'validator' => array(
                         'rule' => array(

@@ -47,7 +47,7 @@ class Trex_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metadata
                         'name' => 'id',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -67,7 +67,7 @@ class Trex_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metadata
                         'name' => 'company',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -98,7 +98,7 @@ class Trex_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metadata
                         'name' => 'customer_name',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -129,7 +129,7 @@ class Trex_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metadata
                         'name' => 'area',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -159,7 +159,7 @@ class Trex_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metadata
                         'name' => 'department',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -189,7 +189,7 @@ class Trex_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metadata
                         'name' => 'position',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -219,7 +219,7 @@ class Trex_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metadata
                         'name' => 'telephone',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -250,7 +250,7 @@ class Trex_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metadata
                         'name' => 'email',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -277,7 +277,7 @@ class Trex_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metadata
                         'name' => 'fax',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -316,7 +316,7 @@ class Trex_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metadata
                         'name' => 'interested_product',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -346,7 +346,7 @@ class Trex_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metadata
                         'name' => 'ip',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -380,7 +380,7 @@ class Trex_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metadata
                         'name' => 'message',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -411,7 +411,7 @@ class Trex_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metadata
                         'name' => 'is_processed',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -437,7 +437,7 @@ class Trex_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metadata
                         'name' => 'date_created',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -456,7 +456,7 @@ class Trex_CustomerFeedback_Metadata_CustomerFeedback extends Qwin_Trex_Metadata
                         'name' => 'operation',
                     ),
                     'attr' => array(
-                        'isListLink' => 0,
+                        'isLink' => 0,
                         'isList' => 1,
                         'isDbField' => 0,
                         'isDbQuery' => 0,

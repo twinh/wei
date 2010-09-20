@@ -40,7 +40,7 @@ class Trex_Project_Metadata_TicketStatus extends Trex_Metadata
                         '_type' => 'hidden',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                     ),
                 ),
                 'ticket_name' => array(

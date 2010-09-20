@@ -47,7 +47,7 @@ class Trex_Product_Metadata_Color extends Qwin_Trex_Metadata
                         'name' => 'id',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -74,7 +74,7 @@ class Trex_Product_Metadata_Color extends Qwin_Trex_Metadata
                         'name' => 'category_id',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -105,7 +105,7 @@ class Trex_Product_Metadata_Color extends Qwin_Trex_Metadata
                         'name' => 'name',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -126,7 +126,7 @@ class Trex_Product_Metadata_Color extends Qwin_Trex_Metadata
                         'name' => 'image',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -147,7 +147,7 @@ class Trex_Product_Metadata_Color extends Qwin_Trex_Metadata
                         'name' => 'image_2',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -167,7 +167,7 @@ class Trex_Product_Metadata_Color extends Qwin_Trex_Metadata
                         'name' => 'order',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -187,7 +187,7 @@ class Trex_Product_Metadata_Color extends Qwin_Trex_Metadata
                         'name' => 'date_created',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -208,7 +208,7 @@ class Trex_Product_Metadata_Color extends Qwin_Trex_Metadata
                         'name' => 'date_modified',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -226,7 +226,7 @@ class Trex_Product_Metadata_Color extends Qwin_Trex_Metadata
                         'name' => 'operation',
                     ),
                     'attr' => array(
-                        'isListLink' => 0,
+                        'isLink' => 0,
                         'isList' => 1,
                         'isDbField' => 0,
                         'isDbQuery' => 0,

@@ -49,7 +49,7 @@ class Trex_Link_Metadata_Link extends Trex_Metadata
                         ),
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                     ),
                 ),
                 'name' => array(

@@ -50,7 +50,7 @@ class Trex_Project_Metadata_Money extends Trex_Metadata
                         ),
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                     ),
                 ),
                 'type' => array(

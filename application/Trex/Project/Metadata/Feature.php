@@ -42,7 +42,7 @@ class Trex_Project_Metadata_Feature extends Trex_Metadata
                         'name' => 'from',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                     ),
                 ),
                 'description' => array(

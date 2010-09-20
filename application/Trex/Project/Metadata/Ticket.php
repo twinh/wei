@@ -119,7 +119,7 @@ class Trex_Project_Metadata_Ticket extends Trex_Metadata
                         ),
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                     ),
                     'converter' => array(
                         'list' => array(
@@ -144,7 +144,7 @@ class Trex_Project_Metadata_Ticket extends Trex_Metadata
                         ),
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                     ),
                     'converter' => array(
                         'list' => array(
@@ -182,7 +182,7 @@ class Trex_Project_Metadata_Ticket extends Trex_Metadata
                         '_type' => 'custom',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isReadonly' => 1,
                     ),
                 ),
@@ -194,7 +194,7 @@ class Trex_Project_Metadata_Ticket extends Trex_Metadata
                         '_type' => 'custom',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                     ),
                 ),
             ),

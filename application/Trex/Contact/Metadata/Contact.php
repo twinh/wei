@@ -71,7 +71,7 @@ class Trex_Contact_Metadata_Contact extends Trex_Metadata
                         ),
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                     ),
                 ),
                 'related_module' => array(

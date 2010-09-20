@@ -63,7 +63,7 @@ class Trex_Task_Metadata_Task extends Trex_Metadata
                         ),
                     ),
                     'attr' => array(
-                        //'isListLink' => 1,
+                        //'isLink' => 1,
                     ),
                 ),
                 'assign_to' => array(
@@ -81,7 +81,7 @@ class Trex_Task_Metadata_Task extends Trex_Metadata
                         ),
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                     ),
                     'validator' => array(
                         'rule' => array(
@@ -108,7 +108,7 @@ class Trex_Task_Metadata_Task extends Trex_Metadata
                         '_type' => 'hidden',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                     ),
                 ),
             ),
