@@ -1,6 +1,6 @@
 <?php
 /**
- * Link
+ * Zhcn
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,21 +17,27 @@
  * limitations under the License.
  *
  * @package     Trex
- * @subpackage  Link
+ * @subpackage  Company
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-06-17 09:51:19
+ * @since       2010-09-20 17:06:32
  */
 
-return array(
-    'LBL_FIELD_CATEGORY_ID' => '分类',
-    'LBL_FIELD_URL' => '目标地址',
-    'LBL_FIELD_IMG_URL' => '图片地址',
-    'LBL_FIELD_ORDER' => '顺序',
-    'LBL_FIELD_TARGET' => '目标',
+class Trex_Company_Language_Zhcn extends Trex_Language_Zhcn
+{
+    public function  __construct()
+    {
+        parent::__construct();
+        $this->_data += array(
+            'LBL_FIELD_INDUSTRY' => '行业',
+            'LBL_FIELD_NATURE' => '属性',
+            'LBL_FIELD_SIZE' => '规模',
+            'LBL_FIELD_MEMBER_ID' => '用户编号',
+            'LBL_FIELD_MEMBER_NAME' => '用户名称',
 
-    'LBL_MODULE_LINK' => '链接',
-    'LBL_MODULE_LINK_CATEGORY' => '链接分类',
-);
+            'LBL_MODULE_COMPANY' => '公司',
+        );
+    }
+}

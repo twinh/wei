@@ -88,7 +88,7 @@ class Qwin_Helper_Array
             $cData .= "{\r\n";
             foreach($qData as $key => $val)
             {
-                $cData .= $t."\t" . self::toJsObject($key, $t."\t") . " : " . self::toJsObject($val, $t."\t");
+                $cData .= $t."    " . self::toJsObject($key, $t."    ") . " : " . self::toJsObject($val, $t."    ");
                 $i != $iCount && $cData .= ",";
                 $cData .= "\r\n";
                 $i++;
@@ -115,7 +115,7 @@ class Qwin_Helper_Array
         if (is_array($input)) {
             $output .= "array(\r\n";
             foreach ($input as $key => $value) {
-                $output .= $t."\t".self::toPhpCode($key,$t."\t").' => '.self::toPhpCode($value,$t."\t");
+                $output .= $t."    ".self::toPhpCode($key,$t."    ").' => '.self::toPhpCode($value,$t."    ");
                 $output .= ",\r\n";
             }
             $output .= $t.')';

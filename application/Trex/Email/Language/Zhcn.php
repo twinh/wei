@@ -16,27 +16,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Trex
- * @subpackage  Config
+ * @package     Qwin
+ * @subpackage  
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-26 17:26:18
+ * @since       2010-09-20 17:09:38
  */
 
-class Trex_Clip_Language_Zhcn extends Trex_Language_Zhcn
+class Trex_Email_Language_Zhcn extends Trex_Language_Zhcn
 {
-    public function __construct()
+    public function  __construct()
     {
         parent::__construct();
         $this->_data += array(
-            'LBL_FIELD_VALUE' => '值',
+            'LBL_FIELD_FROM' => '来自',
+            'LBL_FIELD_FROM_NAME' => '发件人',
+            'LBL_FIELD_TO' => '发至',
+            'LBL_FIELD_TO_NAME' => '收件人',
+            'LBL_FIELD_SUBJECT' => '标题',
+            'LBL_FIELD_RESULT' => '发送结果',
 
-            'LBL_FIELD_FORM_TYPE' => '表单类型',
-            'LBL_FIELD_FORM_WIDGET' => '表单微件',
-            'LBL_MODULE_CLIP' => '碎片',
+            'LBL_ACTION_POST' => '发布',
 
+            'LBL_MODULE_EMAIL' => '邮件',
         );
     }
 }

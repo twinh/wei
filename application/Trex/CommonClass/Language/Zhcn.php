@@ -38,7 +38,9 @@ class Trex_CommonClass_Language_Zhcn extends Trex_Language_Zhcn
 
             'LBL_ACTION_ADD_NEXT' => '添加下一个分类',
 
-            'LBL_MODULE_COMMON_CLASS' => '通用分类',
+            'LBL_MODULE_COMMONCLASS' => '通用分类',
+            'LBL_FIELD_LANGUAGE' => '语言',
+            'LBL_FIELD_SIGN' => '标识',
 
         );
     }

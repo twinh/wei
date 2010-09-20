@@ -17,26 +17,21 @@
  * limitations under the License.
  *
  * @package     Trex
- * @subpackage  Config
+ * @subpackage  Customer
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-26 17:26:18
+ * @since       2010-09-20 17:08:17
  */
 
-class Trex_Clip_Language_Zhcn extends Trex_Language_Zhcn
+class Trex_Customer_Language_Enus extends Trex_Language_Enus
 {
     public function __construct()
     {
         parent::__construct();
         $this->_data += array(
-            'LBL_FIELD_VALUE' => '值',
-
-            'LBL_FIELD_FORM_TYPE' => '表单类型',
-            'LBL_FIELD_FORM_WIDGET' => '表单微件',
-            'LBL_MODULE_CLIP' => '碎片',
-
+            'LBL_MODULE_CUSTOMER' => '客户',
         );
     }
 }

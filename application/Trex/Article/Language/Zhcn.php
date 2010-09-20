@@ -61,6 +61,15 @@ class Trex_Article_Language_Zhcn extends Trex_Language_Zhcn
             'LBL_CREATE_ALL_HMTL' => '生成所有的静态页面',
 
             'LBL_FIELD_AREA' => '地区',
+
+            'LBL_FIELD_SHORT_TITLE' => '简短标题',
+            'LBL_FIELD_META_KEYWORDS' => '关键字',
+            'LBL_FIELD_META_DESCRIPTION' => '描述',
+            'LBL_FIELD_TITLE_STYLE' => '标题样式',
+            'LBL_FIELD_TITLE_COLOR' => '标题颜色',
+            'LBL_FIELD_POST_DATA' => '发布日期',
+            'LBL_FIELD_ARTICLE_ID' => '文章编号',
+            'LBL_GROUP_META_DATA' => 'Seo资料',
         );
     }
 }

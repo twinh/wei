@@ -78,6 +78,24 @@ class Trex_Member_Language_Zhcn extends Trex_Language_Zhcn
             'MSG_OLD_PASSWORD_NOT_CORRECT' => '旧密码不正确',
             'MSG_MEMBER_NOT_ALLOW_DELETE' => '不允许删除系统用户',
             'MSG_GUEST_NOT_ALLOW_EDIT_PASSWORD' => '不允许修改客户密码',
+
+            'LBL_FIELD_IMAGE_PATH' => '图像路径',
+            'LBL_FIELD_QQ' => 'QQ',
+            'LBL_FIELD_POSTCODE' => '邮编',
+            'LBL_FIELD_MEMBER_ID' => '用户编号',
+            'LBL_FIELD_THEME' => '主题',
+            'LBL_FIELD_LANGUAGE' => '语言',
+            'LBL_FIELD_IP' => 'Ip',
+            'LBL_MODULE_MEMBER_GROUP' => '用户组',
+            'LBL_MODULE_MEMBER_LOGINLOG' => '用户登陆记录',
+            'LBL_VIEW_DATA' => '查看个人资料',
+            'LBL_EDIT_DATA' => '编辑个人资料',
+            'LBL_EDIT_PASSWORD' => '修改密码',
+            'LBL_SWITCH_STYLE' => '切换风格',
+            'LBL_SWITCH_LANGUAGE' => '切换语言',
+            'LBL_ACTION_ALLOCATE_PERMISSION' => '分配权限',
+            'LBL_ACTION_EDIT_PASSWORD' => '修改密码',
+            'MSG_LOGOUTED' => '您已登出.',
         );
     }
 }
