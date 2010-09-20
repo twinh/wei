@@ -42,7 +42,8 @@ class Trex_Task_Metadata_Task extends Trex_Metadata
                 ),
                 'description' => array(
                     'form' => array(
-                        '_type' => 'textarea'
+                        '_type' => 'textarea',
+                        '_widget' => 'CKEditor',
                     ),
                     'attr' => array(
                         'isList' => 0,
