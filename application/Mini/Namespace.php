@@ -1,6 +1,6 @@
 <?php
 /**
- * Module
+ * Namesapce
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,24 +16,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  
+ * @package     Mini
+ * @subpackage  Mini
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-04 10:57:07
+ * @since       2010-08-04 10:59:31
  */
 
-class Nothing_Default_Module
+class Mini_Namespace
 {
     public function __construct()
     {
-        echo '加载了模块<p>';
+        echo '<p>加载了命名空间</p>';
     }
 
     public function  __destruct()
     {
-        echo '销毁了模块<p>';
+        echo '<p>销毁了命名空间</p>';
     }
 }

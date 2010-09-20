@@ -23,15 +23,21 @@
  * @since       2010-08-04 10:58:17
  */
 
-class Nothing_Default_Controller_Default
+class Mini_Index_Controller_Index
 {
     public function __construct()
     {
-        echo '加载了控制器<p>';
+        echo '<p>加载了控制器</p>';
+    }
+
+    public function actionIndex()
+    {
+        echo '<p>加载了默认首页</p>';
+        echo '<p style="color: green;">该命名空间展示的是Qwin框架的基本加载流程.</p>';
     }
 
     public function  __destruct()
     {
-        echo '销毁了控制器<p>';
+        echo '<p>销毁了控制器</p>';
     }
 }
