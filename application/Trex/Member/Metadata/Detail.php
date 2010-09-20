@@ -82,7 +82,7 @@ class Trex_Member_Metadata_Detail extends Trex_Metadata
                         'name' => 'sex',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                     ),
                     'converter' => array(
                         'list' => array(

@@ -50,7 +50,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         ),
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -61,7 +61,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         '_type' => 'hidden',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -73,7 +73,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         '_type' => 'hidden',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -127,7 +127,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                 ),
                 'author' => array(
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -141,7 +141,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         ),
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -155,7 +155,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         '_type' => 'text',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -205,7 +205,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         ),
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -229,7 +229,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         ),
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -246,7 +246,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         '_type' => 'textarea',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,

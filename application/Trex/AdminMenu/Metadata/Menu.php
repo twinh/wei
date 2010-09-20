@@ -49,7 +49,7 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                         'name' => 'category_id',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                     ),
                     'converter' => array(
                         'list' => array(
@@ -78,7 +78,7 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                         'name' => 'url',
                     ),
                     'attr' => array(
-                        'isListLink' => 0,
+                        'isLink' => 0,
                         'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -94,7 +94,7 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                         'name' => 'target',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                     ),
                     'validator' => array(
                         'required',
@@ -106,7 +106,7 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                         'name' => 'order',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                     ),
                 ),
             ),

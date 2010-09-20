@@ -40,7 +40,7 @@ class Trex_Task_Metadata_Status extends Trex_Metadata
                         '_type' => 'hidden',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                     ),
                 ),
                 'status' => array(

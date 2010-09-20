@@ -58,7 +58,7 @@ class Trex_Metadata extends Qwin_Trex_Metadata
                     'name' => 'id',
                 ),
                 'attr' => array(
-                    'isListLink' => 0,
+                    'isLink' => 0,
                     'isList' => 1,
                     'isDbField' => 1,
                     'isDbQuery' => 1,
@@ -151,7 +151,7 @@ class Trex_Metadata extends Qwin_Trex_Metadata
                     '_type' => 'custom',
                 ),
                 'attr' => array(
-                    'isListLink' => 0,
+                    'isLink' => 0,
                     'isDbField' => 0,
                     'isDbQuery' => 0,
                     'isView' => 0,

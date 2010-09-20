@@ -49,7 +49,7 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                         ),
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                     ),
                 ),
                 'contact_id' => array(

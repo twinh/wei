@@ -50,7 +50,7 @@ class Trex_Project_Metadata_Document extends Trex_Metadata
                         ),
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                     ),
                 ),
                 'title' => array(

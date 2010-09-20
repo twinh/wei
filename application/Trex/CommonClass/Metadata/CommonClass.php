@@ -87,7 +87,7 @@ class Trex_CommonClass_Metadata_CommonClass extends Trex_Metadata
                         'name' => 'type',
                     ),
                     'attr' => array(
-                        'isListLink' => 0,
+                        'isLink' => 0,
                         'isList' => 0,
                         'isDbField' => 0,
                         'isDbQuery' => 0,
@@ -106,7 +106,7 @@ class Trex_CommonClass_Metadata_CommonClass extends Trex_Metadata
                         'readonly' => 'readonly'
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -124,7 +124,7 @@ class Trex_CommonClass_Metadata_CommonClass extends Trex_Metadata
                         'name' => 'var_name',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -143,7 +143,7 @@ class Trex_CommonClass_Metadata_CommonClass extends Trex_Metadata
                         'name' => 'order',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
@@ -173,7 +173,7 @@ class Trex_CommonClass_Metadata_CommonClass extends Trex_Metadata
                         'name' => 'value',
                     ),
                     'attr' => array(
-                        'isListLink' => 1,
+                        'isLink' => 1,
                         'isList' => 1,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
