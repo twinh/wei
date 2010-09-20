@@ -1,5 +1,5 @@
 <?php
 return array(
-	0 => 'Expenditure',
-	1 => 'Income',
+    0 => 'Expenditure',
+    1 => 'Income',
 );

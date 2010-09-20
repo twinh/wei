@@ -1,4 +1,4 @@
 <?php
 return array(
-	1 => 'Yes',
+    1 => 'Yes',
 );
