@@ -185,7 +185,6 @@ class Trex_Task_Metadata_Task extends Trex_Metadata
                     'type' => 'relatedDb',
                     'fieldMap' => array(
                         'id' => 'foreign_id',
-                        'name' => 'subject',
                         'date_modified' => 'date_created',
                         'modified_by' => 'created_by',
                     ),
