@@ -144,7 +144,7 @@ class Trex_Task_Controller_Task extends Trex_ActionController
     public function actionEdit()
     {
         $this->_meta['field']->unlink(array(
-            'assign_to', 'assign_by',
+            'assign_to', 'assign_by', 'is_post_email',
         ));
         $this->_meta['model']->unlink(array(
             'assign_to', 'assign_by',
@@ -437,7 +437,7 @@ class Trex_Task_Controller_Task extends Trex_ActionController
             date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']),
             $data['from_name'] . '&lt;' . $data['from'] . '&gt;',
             $data['to_name'] . '&lt;' . $data['to'] . '&gt;',
-            'http://' . $_SERVER['SERVER_NAME'] . '/' . $_SERVER['SCRIPT_NAME'] . $this->_url->createUrl($this->_set, array('action' => 'View', 'id' => $data['foreign_id'])),
+            'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['SCRIPT_NAME'] . $this->_url->createUrl($this->_set, array('action' => 'View', 'id' => $data['foreign_id'])),
         );
         $content = str_replace($search, $replace, $content);
 
