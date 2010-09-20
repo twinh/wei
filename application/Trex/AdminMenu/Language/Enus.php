@@ -31,7 +31,6 @@ class Trex_AdminMenu_Language_Enus extends Trex_Language_Enus
     {
         parent::__construct();
         $this->_data += array(
-            'LBL_FIELD_CATEGORY_ID' => 'Category Id',
             'LBL_FIELD_CATEGORY' => 'Category',
             'LBL_FIELD_URL' => 'Url',
             'LBL_FIELD_ORDER' => 'Order',

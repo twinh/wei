@@ -19,6 +19,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
+ * @package     Trex
+ * @subpackage  Style
  * @author    Twin Huang <twinh@yahoo.cn>
  * @copyright Twin Huang
  * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
@@ -26,10 +28,17 @@
  * @since     2010-5-23 7:29:38 utf-8 中文
  */
 
-return array(
-    'LBL_FIELD_PATH_NAME' => '路径名称',
-    'LBL_FIELD_PICTURE' => '图片',
+class Trex_Style_Language_Enus extends Trex_Language_Enus
+{
+    public function __construct()
+    {
+        parent::__construct();
+        $this->_data += array(
+            'LBL_FIELD_PATH_NAME' => '路径名称',
+            'LBL_FIELD_PICTURE' => '图片',
 
-    'LBL_MODULE_THEME' => '主题',
+            'LBL_MODULE_THEME' => '主题',
 
-);
+        );
+    }
+}

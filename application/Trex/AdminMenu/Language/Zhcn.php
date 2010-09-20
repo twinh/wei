@@ -31,7 +31,6 @@ class Trex_AdminMenu_Language_Zhcn extends Trex_Language_Zhcn
     {
         parent::__construct();
         $this->_data +=  array(
-            'LBL_FIELD_CATEGORY_ID' => '分类编号',
             'LBL_FIELD_CATEGORY' => '分类',
             'LBL_FIELD_URL' => '地址',
             'LBL_FIELD_ORDER' => '顺序',
