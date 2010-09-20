@@ -1,6 +1,6 @@
 <?php
 /**
- * Namesapce
+ * Module
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -22,18 +22,18 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-04 10:59:31
+ * @since       2010-08-04 10:57:07
  */
 
-class Nothing_Namespace
+class Mini_Index_Module
 {
     public function __construct()
     {
-        echo '加载了命名空间<p>';
+        echo '<p>加载了模块</p>';
     }
 
     public function  __destruct()
     {
-        echo '销毁了命名空间<p>';
+        echo '<p>销毁了模块</p>';
     }
 }

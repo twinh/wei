@@ -210,7 +210,11 @@ class Qwin_Trex_Setup
         /**
          * 加载视图
          */
-        return $this->_controller->loadView()->display();
+        if(method_exists($this->_controller, 'loadView'))
+        {
+            $this->_controller->loadView()->display();
+        }
+        return true;
     }
 
     /**
