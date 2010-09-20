@@ -122,7 +122,7 @@ class Trex_Project_Metadata_Status extends Trex_Metadata
             'db' => array(
                 'table' => 'project_status',
                 'order' => array(
-                    array('date_created', 'ASC'),
+                    array('date_created', 'DESC'),
                 ),
             ),
             'page' => array(

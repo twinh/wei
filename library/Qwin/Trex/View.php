@@ -60,7 +60,7 @@ abstract class Qwin_Trex_View extends Qwin_Metadata_Abstract
      * 通过setVar设置一组变量
      *
      * @param array $list 变量组
-     * @return object 当前类
+     * @return object 当前对象
      */
     public function setVarList(array $list)
     {
@@ -76,7 +76,7 @@ abstract class Qwin_Trex_View extends Qwin_Metadata_Abstract
      *
      * @param string $name 变量名称
      * @param mixed $value 变量的值
-     * @return object 当前类
+     * @return object 当前对象
      */
     public function setVar($name, $value)
     {
@@ -88,7 +88,7 @@ abstract class Qwin_Trex_View extends Qwin_Metadata_Abstract
      * 销毁一个变量
      *
      * @param string $name 变量名称
-     * @return object 当前类
+     * @return object 当前对象
      */
     public function unsetVar($name)
     {
@@ -103,7 +103,7 @@ abstract class Qwin_Trex_View extends Qwin_Metadata_Abstract
      * 通过setElement设置一组视图元素
      *
      * @param array $list 视图元素组
-     * @return 当前类
+     * @return object 当前对象
      */
     public function setElementList(array $list)
     {
@@ -120,7 +120,7 @@ abstract class Qwin_Trex_View extends Qwin_Metadata_Abstract
      * @param string $name 名称
      * @param mixed $element 视图元素的内容
      * @param boolen $isFile 是否为文件,如果不是文件,则为代码段
-     * @return object 当前类
+     * @return object 当前对象
      */
     public function setElement($name, $element, $isFile = true)
     {
@@ -135,7 +135,7 @@ abstract class Qwin_Trex_View extends Qwin_Metadata_Abstract
      * 销毁视图元素
      *
      * @param string $name
-     * @return object 当前类
+     * @return object 当前对象
      */
     public function unsetElement($name)
     {
@@ -171,7 +171,7 @@ abstract class Qwin_Trex_View extends Qwin_Metadata_Abstract
      * 设置布局文件的路径
      *
      * @param string $layout
-     * @return object 当前类
+     * @return object 当前对象
      */
     public function setLayout($layout)
     {

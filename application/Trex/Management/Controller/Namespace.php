@@ -37,7 +37,7 @@ class Trex_Management_Controller_Namespace extends Trex_Controller
     /**
      * 查看命名空间列表
      *
-     * @return object 当前类
+     * @return object 当前对象
      */
     public function actionIndex()
     {
@@ -69,7 +69,7 @@ class Trex_Management_Controller_Namespace extends Trex_Controller
     /**
      * 创建命名空间
      *
-     * @return object 当前类
+     * @return object 当前对象
      */
     public function actionAdd()
     {

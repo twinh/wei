@@ -30,7 +30,7 @@ class Qwin_Trex_View_Alert extends Qwin_Trex_View
     /**
      * 显示js对话框视图
      *
-     * @return object 当前类
+     * @return object 当前对象
      */
     public function display()
     {

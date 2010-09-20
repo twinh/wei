@@ -234,7 +234,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      *
      * @param Qwin_Metadata $meta
      * @param Doctrine_Query $query
-     * @return Qwin_Metadata 当前类
+     * @return object 当前对象
      * @todo 是否要将主类加入到$meta['model']数组中,减少代码重复
      */
     public function addSelectToQuery(Qwin_Metadata $meta, Doctrine_Query $query)
@@ -280,7 +280,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      * 
      * @param Qwin_Metadata $meta
      * @param Doctrine_Query $query
-     * @return Qwin_Metadata 当前类
+     * @return object 当前对象
      * @todo 关联元数据的排序
      * @todo 允许自定义Url的键名
      * @todo 允许多个排序字段
@@ -322,7 +322,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      *
      * @param Qwin_Metadata $meta
      * @param Doctrine_Query $query
-     * @return Qwin_Metadata 当前类
+     * @return object 当前对象
      * @todo 补全第二类情况
      * @todo 完善查询类型
      * @todo 同addOrderToDoctrineQuery
@@ -368,7 +368,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      * @param Qwin_Metadata $meta
      * @param Doctrine_Query $query
      * @param string $rowName Url中,列数的键名
-     * @return Qwin_Metadata 当前类
+     * @return object 当前对象
      * @todo 分开为Limit和Offset
      */
     public function addLimitToQuery(Qwin_Metadata $meta, Doctrine_Query $query, $rowName = 'row', $pageName = 'page')

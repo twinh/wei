@@ -147,7 +147,7 @@ abstract class Qwin_Metadata_Element_Abstract extends Qwin_Metadata_Abstract
      * 转换语言
      *
      * @param array $language 用于转换的语言
-     * @return object 当前类
+     * @return object 当前对象
      */
     public function translate($language)
     {
