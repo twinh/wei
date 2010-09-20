@@ -100,6 +100,7 @@ class Trex_Task_Metadata_Task extends Trex_Metadata
                     ),
                     'attr' => array(
                         'isDbField' => 0,
+                        'isList' => 0,
                     ),
                 ),
                 'assign_by' => array(
