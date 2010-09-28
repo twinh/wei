@@ -39,6 +39,7 @@ class Trex_Article_Metadata_Detail extends Trex_Metadata
                     ),
                     'attr' => array(
                         'isList' => 0,
+                        'isView' => 0,
                     ),
                 ),
                 'article_id' => array(
@@ -48,6 +49,7 @@ class Trex_Article_Metadata_Detail extends Trex_Metadata
                     ),
                     'attr' => array(
                         'isList' => 0,
+                        'isView' => 0,
                     ),
                 ),
                 'content' => array(
