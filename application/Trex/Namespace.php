@@ -46,8 +46,7 @@ class Trex_Namespace extends Qwin_Trex_Namespace
         /**
          * 打开缓冲区
          */
-        ob_start();
-        
+        ob_start(); 
 
         /**
          * 更新类库缓存文件
@@ -91,7 +90,7 @@ class Trex_Namespace extends Qwin_Trex_Namespace
          */
         Qwin::run('-form')
             ->add('Qwin_Form_Element_Base');
-
+       
         /**
          * 数据库链接,使用的是Doctrine Orm
          * @todo 助手类
@@ -107,6 +106,10 @@ class Trex_Namespace extends Qwin_Trex_Namespace
             // 更新配置数据
             Qwin::run('-ini')->setConfig($config);
 
+            // TEST 0924
+            //registerConnectionDriver
+            Doctrine_Manager::getInstance()->registerConnectionDriver('padb', 'Doctrine_Connection_Padb');
+
             //require_once(QWIN_LIB_PATH . '/Doctrine.php');
             //spl_autoload_register(array('Doctrine', 'autoload'));
             $databaseSet = $config['database']['adapter'][$config['database']['mainAdapter']];
@@ -118,11 +121,7 @@ class Trex_Namespace extends Qwin_Trex_Namespace
             $conn = Doctrine_Manager::connection($adapter, $config['project']['name']);
             $conn->setAttribute(Doctrine_Core::ATTR_QUOTE_IDENTIFIER, true);
             $conn->setCharset($databaseSet['charset']);
-
-
-            // 加载部分父类
-            Qwin::load('Trex_Controller');
-        } 
+        }
     }
 
     public function  __destruct()
