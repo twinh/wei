@@ -536,9 +536,28 @@ class Qwin_Padb_Query
         return $this->_exe->execute($this->_standardQuery);
     }
 
+
+    protected $_data;
+    protected $_fetchCount;
     public function fetch()
     {
-        return $this->execute();
+        if(null == $this->_data)
+        {
+            $this->_data = $this->execute();
+            $this->_fetchCount = -1;
+        }
+        $this->_fetchCount++;
+        if(isset($this->_data[$this->_fetchCount]))
+        {
+            return $this->_data[$this->_fetchCount];
+        } else {
+            return false;
+        }
+    }
+
+    public function closeCursor()
+    {
+        return $this;
     }
 
     public function fetchAll()
