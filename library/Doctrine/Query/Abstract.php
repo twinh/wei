@@ -1741,7 +1741,6 @@ abstract class Doctrine_Query_Abstract
      */
     public function orderBy($orderby)
     {
-        p($orderby);
         return $this->_addDqlQueryPart('orderby', $orderby);
     }
 

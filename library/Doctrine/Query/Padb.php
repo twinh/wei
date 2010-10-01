@@ -110,7 +110,7 @@ class Doctrine_Query_Padb extends Doctrine_Query
      * @param array $params
      * @return Doctrine_Collection            the root collection
      */
-    public function execute($params = array(), $hydrationMode = Doctrine_Core::HYDRATE_NONE)
+    public function execute($params = array(), $hydrationMode = 'padb')
     {
         // Clean any possible processed params
         $this->_execParams = array();
@@ -161,15 +161,8 @@ class Doctrine_Query_Padb extends Doctrine_Query
         if ($this->getConnection()->getAttribute(Doctrine_Core::ATTR_AUTO_FREE_QUERY_OBJECTS)) {
             $this->free();
         }
-
-        $this->_lastData = $result;
         
-        if(false === $result)
-        {
-            return $result;
-        } else {
-            return $this;
-        }
+        return $result;
     }
 
     /**
@@ -180,27 +173,14 @@ class Doctrine_Query_Padb extends Doctrine_Query
         return $this->_query;
     }
 
-    /**
-     * @todo 实现真正的toArray
-     */
-    public function toArray()
-    {
-        return $this->_lastData;
-    }
-
     public function count()
     {
         return $this->_query->count();
     }
 
-    public function fetchOne($params = array(), $hydrationMode = Doctrine_Core::HYDRATE_NONE)
+    public function fetchOne($params = array(), $hydrationMode = 'padb')
     {
         $this->_query->limit(1);
-        $result = $this->execute($params, $hydrationMode);
-        if(false != $result)
-        {
-            $this->_lastData = $this->_lastData[0];
-        }
-        return $this;
+        return parent::fetchOne($params, $hydrationMode);
     }
 }

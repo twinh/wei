@@ -108,8 +108,10 @@ class Trex_Namespace extends Qwin_Trex_Namespace
 
             // TEST 0924
             //registerConnectionDriver
-            Doctrine_Manager::getInstance()->registerConnectionDriver('padb', 'Doctrine_Connection_Padb');
-            Doctrine_Manager::getInstance()->setAttribute(Doctrine_Core::ATTR_QUERY_CLASS, 'Doctrine_Query_Padb');
+            $manager = Doctrine_Manager::getInstance();
+            $manager->registerConnectionDriver('padb', 'Doctrine_Connection_Padb');
+            $manager->setAttribute(Doctrine_Core::ATTR_QUERY_CLASS, 'Doctrine_Query_Padb');
+            $manager->registerHydrator('padb', 'Doctrine_Hydrator_Padb');
 
             //require_once(QWIN_LIB_PATH . '/Doctrine.php');
             //spl_autoload_register(array('Doctrine', 'autoload'));
