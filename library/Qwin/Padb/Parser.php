@@ -110,6 +110,11 @@ class Qwin_Padb_Parser
      */
     public function select($fieldList)
     {
+        if(empty($fieldList))
+        {
+            return array('*');
+        }
+
         $allField = array();
         foreach($fieldList as $field)
         {
@@ -164,28 +169,35 @@ class Qwin_Padb_Parser
             // 连接操作符
             if($key >= 1 && $key <= $lastOpPosition && 1 == $key % 2)
             {
-                $value = strtoupper($value);
-                if(!in_array($value, array('AND', 'OR')))
+                $value[0] = strtoupper($value[0]);
+                if(!in_array($value[0], array('AND', 'OR')))
                 {
                     throw new Qwin_Padb_Parser_Exception('The link operator should be "AND" or "OR".');
                     //$value = $this->_deafultSetting['operator'];
                 }
             } else {
+                $isPass = false;
                 foreach($this->_operator as $operator)
                 {
                     // 存在合法的操作符,对查询内容进行解析
-                    $position = strpos($value, $operator);
+                    $position = strpos($value[0], $operator);
                     if(false !== $position)
                     {
-                        $field = trim(substr($value, 0, $position));
-                        $value = trim(substr($value, $position + strlen($operator)));
-                        $value = array($field, $operator, $value);
+                        $field = trim(substr($value[0], 0, $position));
+                        $value[0] = trim(substr($value[0], $position + strlen($operator)));
+                        // TODO 多个参数
+                        if('?' == $value[0])
+                        {
+                            $value[0] = $value[1];
+                        }
+                        $value = array($field, $operator, $value[0]);
+                        $isPass = true;
                         break;
                     }
                 }
                 // 不包含任何操作符,抛出异常
                 // 是否需要详细检查?
-                if(!is_array($value))
+                if(false == $isPass)
                 {
                     throw new Qwin_Padb_Parser_Exception('The where clause does not contain a operator. The clause is ' . $value . '.');
                 }
@@ -204,6 +216,12 @@ class Qwin_Padb_Parser
     public function orderBy($condition)
     {
         $orderBy = array();
+
+        if(empty($condition))
+        {
+            return $orderBy;
+        }
+
         $condition = explode(',', $condition);
         foreach($condition as $set)
         {

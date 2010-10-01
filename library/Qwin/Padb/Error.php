@@ -36,7 +36,7 @@ class Qwin_Padb_Error
         110 => 'Can not find database "%s".',
         111 => 'No database selected.',
         112 => 'The table "%s" is not exists.',
-        113 => 'Unknown field "%s" in table "%s".',
+        113 => 'Unknown field "%s" in table "%s" and the "%s" clause.',
         114 => 'The primary key\'s value "%s" is exists.',
         115 => 'The database "%s" is exists.',
         116 => 'Can not create the databse: "%s"',

@@ -280,11 +280,24 @@ class Qwin_Padb_Query
      * @param string $data 选择的字段域,多个域由,隔开
      * @return object 当前对象
      */
-    public function select($data)
+    public function select($data = null)
     {
         $this->_query['type'] = Qwin_Padb::METHOD_SELECT;
         // 清空原有数组
         $this->_query['select'] = array();
+        $this->_query['select'][] = $data;
+        return $this;
+    }
+
+    /**
+     * 增加选择操作的字段
+     *
+     * @param string $data 选择的字段域,多个域由,隔开
+     * @return object 当前对象
+     */
+    public function addSelect($data)
+    {
+        $this->_query['type'] = Qwin_Padb::METHOD_SELECT;
         $this->_query['select'][] = $data;
         return $this;
     }
@@ -332,10 +345,10 @@ class Qwin_Padb_Query
      * @param string $condition 查询条件
      * @return object 当前对象
      */
-    public function where($condition)
+    public function where($condition, $param = array())
     {
         $this->_query['where'] = array();
-        $this->_query['where'][] = $condition;
+        $this->_query['where'][] = array($condition, $param);
         return $this;
     }
 
@@ -502,8 +515,7 @@ class Qwin_Padb_Query
             case Qwin_Padb::METHOD_UPDATE:
             case Qwin_Padb::METHOD_DELETE:
                 $parser = $this->_parser;
-                $parser = $parser::getInstance();
-                $this->_standardQuery = $parser->parse($this->_query);
+                $this->_standardQuery = $parser::getInstance()->parse($this->_query);
                 break;
 
             case Qwin_Padb::METHOD_OTHER:
@@ -518,7 +530,30 @@ class Qwin_Padb_Query
             default:
                 return array();
         }
+
+        // 重置查询类型
+        $this->_query['type'] = Qwin_Padb::METHOD_SELECT;
         return $this->_exe->execute($this->_standardQuery);
+    }
+
+    public function fetch()
+    {
+        return $this->execute();
+    }
+
+    public function fetchAll()
+    {
+        return $this->execute();
+    }
+
+    public function count()
+    {
+        return $this->_exe->getLastCount();
+    }
+
+    public function issetFrom()
+    {
+        return !empty($this->_query['from']);
     }
 }
 /*
