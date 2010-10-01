@@ -109,10 +109,14 @@ class Trex_Namespace extends Qwin_Trex_Namespace
             // TEST 0924
             //registerConnectionDriver
             Doctrine_Manager::getInstance()->registerConnectionDriver('padb', 'Doctrine_Connection_Padb');
+            Doctrine_Manager::getInstance()->setAttribute(Doctrine_Core::ATTR_QUERY_CLASS, 'Doctrine_Query_Padb');
 
             //require_once(QWIN_LIB_PATH . '/Doctrine.php');
             //spl_autoload_register(array('Doctrine', 'autoload'));
             $databaseSet = $config['database']['adapter'][$config['database']['mainAdapter']];
+
+            $databaseSet['type'] = 'padb';
+            $databaseSet['server'] = 'E:\Work\Website\padb';
             $adapter = $databaseSet['type'] . '://'
                      . $databaseSet['username'] . ':'
                      . $databaseSet['password'] . '@'

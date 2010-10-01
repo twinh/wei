@@ -65,6 +65,12 @@ class Qwin_Padb_Execute
     protected $_tablePostfix = '_data.php';
 
     /**
+     * 最后一个select查询获取是总数
+     * @var int
+     */
+    protected $_lastCount;
+
+    /**
      * 查询语句的类型
      * @var int
      */
@@ -182,6 +188,8 @@ class Qwin_Padb_Execute
         {
             return false;
         }
+        // TODO 缓存等
+        $this->_lastCount = count($data);
 
         // 排序
         $data = $this->_executeOrderBy($data, $fieldNumMap, $q['orderBy'], $q['from']);
@@ -200,7 +208,7 @@ class Qwin_Padb_Execute
             return false;
         }
 
-        return $data;
+        return Qwin_Padb_Array::resetKey($data);
     }
 
     protected function _getRowData($table)
@@ -280,7 +288,7 @@ class Qwin_Padb_Execute
             if(!isset($fieldNumMap[$field]))
             {
                 $this->_errorCode = 113;
-                $this->_errorParam = array($field, $q['from']);
+                $this->_errorParam = array($field, $q['from'], 'UPDATE');
                 return false;
             }
             foreach($data as $key => $row)
@@ -331,7 +339,7 @@ class Qwin_Padb_Execute
             if(!isset($fieldNumMap[$value[0]]))
             {
                 $this->_errorCode = 113;
-                $this->_errorParam = array($value[0], $q['from']);
+                $this->_errorParam = array($value[0], $q['from'], 'INSERT');
                 return false;
             }
             foreach($newRow as $key => $value2)
@@ -419,7 +427,7 @@ class Qwin_Padb_Execute
                 if(!isset($fieldNumMap[$field]))
                 {
                     $this->_errorCode = 113;
-                    $this->_errorParam = array($field, $table);
+                    $this->_errorParam = array($field, $table, 'SELECT');
                     return false;
                 }
                 $selectField[] = $fieldNumMap[$field];
@@ -457,7 +465,7 @@ class Qwin_Padb_Execute
             if(!isset($fieldNumMap[$order[0]]))
             {
                 $this->_errorCode = 113;
-                $this->_errorParam = array($order[0], $table);
+                $this->_errorParam = array($order[0], $table, 'Order By');
                 return false;
             }
             $data = Qwin_Padb_Array::orderBy($data, $fieldNumMap[$order[0]], $order[1]);
@@ -488,7 +496,7 @@ class Qwin_Padb_Execute
                 if(!isset($fieldNumMap[$where[0]]))
                 {
                     $this->_errorCode = 113;
-                    $this->_errorParam = array($where[0], $table);
+                    $this->_errorParam = array($where[0], $table, 'WHERE');
                     return false;
                 }
                 $where[0] = $fieldNumMap[$where[0]];
@@ -787,5 +795,10 @@ class Qwin_Padb_Execute
             }
         }
         return true;
+    }
+
+    public function getLastCount()
+    {
+        return $this->_lastCount;
     }
 }

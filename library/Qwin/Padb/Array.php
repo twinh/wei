@@ -73,4 +73,21 @@ class Qwin_Padb_Array
         }
         return $output;
     }
+
+    /**
+     * 重置数组的键名,由0开始
+     *
+     * @param array $array
+     * @return array
+     * @todo 是否能使用函数更简化操作
+     */
+    public static function resetKey($array)
+    {
+        $result = array();
+        foreach($array as $value)
+        {
+            $result[] = $value;
+        }
+        return $result;
+    }
 }

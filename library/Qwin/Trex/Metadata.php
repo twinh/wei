@@ -290,7 +290,8 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     {
         $request = Qwin::run('Qwin_Request');
         $arrayHepler = Qwin::run('Qwin_Helper_Array');
-        $alias = $query->getRootAlias() . '.';
+        $alias = $query->getRootAlias();
+        '' != $alias && $alias .= '.';
 
         // 排序字段名和排序类型
         $orderField = $request->g('orderField');

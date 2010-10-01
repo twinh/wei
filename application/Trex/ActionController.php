@@ -72,7 +72,7 @@ class Trex_ActionController extends Trex_Controller
         /**
          * 从模型获取数据
          */
-        $query = $meta->getDoctrineQuery($this->_set);
+        $query = $meta->getDoctrineQuery($this->_set);        
         $meta->addSelectToQuery($meta, $query)
              ->addOrderToQuery($meta, $query)
              ->addWhereToQuery($meta, $query)
@@ -123,7 +123,7 @@ class Trex_ActionController extends Trex_Controller
          */
         $query = $meta->getDoctrineQuery($this->_set);
         $result = $query->where($primaryKey . ' = ?', $id)->fetchOne();
-
+        
         /**
          * 记录不存在,加载错误视图
          */
