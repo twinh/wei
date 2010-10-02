@@ -349,8 +349,7 @@ class Trex_ActionController extends Trex_Controller
              */
             $result->fromArray($data);
             $result->save();
-            echo 234;
-exit;
+
             /**
              * 在数据库操作之后,执行相应的 on 函数,跳转到原来的页面或列表页
              */

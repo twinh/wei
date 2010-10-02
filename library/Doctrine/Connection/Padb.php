@@ -32,36 +32,81 @@ class Doctrine_Connection_Padb extends Doctrine_Connection_Common
      */
     protected $driverName = 'Padb';
 
+    /**
+     * Qwin_Padb_Connection连接对象
+     * @var object
+     */
+    protected $_conn;
+
+    /**
+     * Qwin_Padb_Query查询对象
+     * @var object
+     */
+    protected $_query;
+
     public function connect()
     {
-        $connected = parent::connect();
+        if ($this->isConnected) {
+            return false;
+        }
 
-        Doctrine_Manager::getInstance()
-                ->setAttribute(Doctrine_Core::ATTR_QUERY_CLASS, 'Qwin_Padb_Query');
+        $config = str_replace('\\', '/', $this->options['dsn']);
 
-        return $connected;
+        $pos = strrpos($config, '/');
+        $database = substr($config, $pos + 1);
+
+        $rootPos = strrpos($config, '@');
+        $root = substr($config, $rootPos + 1, $pos - strlen($config));
+
+        $this->_conn = new Qwin_Padb_Connection($root);
+        $this->_query = new Qwin_Padb_Query($this->_conn);
+        $this->_query->selectDatabase($database);
+        
+        //$connected = parent::connect();
+        Doctrine_Manager::getInstance()->setAttribute(Doctrine_Core::ATTR_QUERY_CLASS, 'Doctrine_Query_Padb');
+
+        $this->dbh = new Doctrine_Adapter_Padb();
+        $this->isConnected = true;
+
+        return $this->_conn->isConnect();
     }
 
     /**
-     * 设置字符类型呢
+     * 获取Padb查询对象
+     *
+     * @return objct Padb查询对象
+     */
+    public function getPadbQuery()
+    {
+        return $this->_query;
+    }
+
+    /**
+     * 设置字符类型,Padb不支持字符类型
      *
      * @param string $charset 字符类型
      */
     public function setCharset($charset)
     {
-        $this->exec(array(
-            array(null, 'setCharset'),
-            array($charset),
-        ));
-        $this->dbh->_conn->setCharset($charset);
         parent::setCharset($charset);
     }
 
-    /*public function __call($name, $arguments)
+    public function update(Doctrine_Table $table, array $fields, array $identifier)
     {
-        $this->exec(array(
-            array(null, $name),
-            $arguments,
-        ));
-    }*/
+        if (empty($fields)) {
+            return false;
+        }
+
+        $this->_query->update($table->getTableName());
+        foreach($fields as $field => $value)
+        {
+            $this->_query->set($field, '?', $value);
+        }
+        foreach($identifier as $key => $value)
+        {
+            $this->_query->where($key . ' = ' . $value);
+        }
+
+        return $this->_query->execute();
+    }
 }

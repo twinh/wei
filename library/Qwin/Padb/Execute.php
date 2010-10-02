@@ -314,7 +314,9 @@ class Qwin_Padb_Execute
                 $data[$key] = $row;
             }
         }
-        $this->_updateDataFile($data, $q['from']);
+        
+        $rowData['data'] = $data + $rowData['data'];
+        $this->_updateDataFile($rowData['data'], $q['from']);
         return $data;
     }
 
