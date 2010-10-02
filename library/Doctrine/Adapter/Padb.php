@@ -47,27 +47,6 @@ class Doctrine_Adapter_Padb implements Doctrine_Adapter_Interface
      */
     protected $_database;
 
-    public function __construct($config = array(), $username = null, $password = null)
-    {
-        $dsn = $this->_parseDsn($config);
-        $this->_conn = new Qwin_Padb_Connection($this->_rootPath, $username, $password);
-        $this->_conn->selectDatabase($this->_database);
-    }
-
-    /**
-     * Parse the dsn string, set root path and current database
-     *
-     * @param string $config 配置字符串
-     * @return object 当前对象
-     */
-    protected function _parseDsn($config)
-    {
-        $partList = explode('/', $config);
-        $this->_database = array_pop($partList);
-        $this->_rootPath = array_pop($partList);
-        return $this;
-    }
-
     /**
      * Prepare a query statement
      *
@@ -84,7 +63,7 @@ class Doctrine_Adapter_Padb implements Doctrine_Adapter_Interface
      */
     public function query($queryString)
     {
-        echo 'execute' . $queryString;
+        echo 'Query:' . p($queryString);
     }
 
     /**
@@ -95,6 +74,7 @@ class Doctrine_Adapter_Padb implements Doctrine_Adapter_Interface
      */
     public function quote($input)
     {
+        echo 'Quote:' . p($input);
         return $input;
     }
 
@@ -105,7 +85,7 @@ class Doctrine_Adapter_Padb implements Doctrine_Adapter_Interface
      */
     public function exec($setting)
     {
-        //return $this->_query->call($setting);
+        echo 'Exec:' . p($setting);
     }
 
     /**
@@ -120,17 +100,17 @@ class Doctrine_Adapter_Padb implements Doctrine_Adapter_Interface
     
     public function beginTransaction()
     {
-        throw new Doctrine_Adapter_Exception("unsupported");
+        return false;
     }
     
     public function commit()
     {
-        throw new Doctrine_Adapter_Exception("unsupported");
+        return false;
     }
 
     public function rollBack()
     {
-        throw new Doctrine_Adapter_Exception("unsupported");
+        return false;
     }
 
     public function errorCode()
