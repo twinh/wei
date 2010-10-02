@@ -40,7 +40,7 @@ class Doctrine_Connection_Padb extends Doctrine_Connection_Common
 
     /**
      * Qwin_Padb_Query查询对象
-     * @var object
+     * @var Qwin_Padb_Query
      */
     protected $_query;
 
@@ -107,6 +107,18 @@ class Doctrine_Connection_Padb extends Doctrine_Connection_Common
             $this->_query->where($key . ' = ' . $value);
         }
 
+        return $this->_query->execute();
+    }
+
+    public function insert(Doctrine_Table $table, array $fields)
+    {
+        $tableName = $table->getTableName();
+
+        $this->_query->insert($table->getTableName());
+        foreach($fields as $field => $value)
+        {
+            $this->_query->value($field, $value);
+        }
         return $this->_query->execute();
     }
 }

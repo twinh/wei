@@ -352,9 +352,13 @@ class Qwin_Padb_Execute
                 }
             }
         }
-       
+
+        
+        $primaryKey = $schema[Qwin_Padb::SCHEMA_PRIMARY_KEY];
+        $primaryKeyNum = $fieldNumMap[$primaryKey];
+        $primaryKeyValue = $newRow[$primaryKeyNum];
+
         // 判断主键是否重复
-        $primaryKeyValue = $newRow[$schema[Qwin_Padb::SCHEMA_PRIMARY_KEY]];
         if(isset($data[$primaryKeyValue]))
         {
             $this->_errorCode = 114;
