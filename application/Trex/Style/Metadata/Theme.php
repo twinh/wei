@@ -35,9 +35,6 @@ class Trex_Style_Metadata_Theme extends Trex_Metadata
             // 基本属性
             'field' => array(
                 'name' => array(
-                    'form' => array(
-                        'name' => 'name',
-                    ),
                     'validator' => array(
                         'rule' => array(
                             'required' => true,
@@ -46,9 +43,6 @@ class Trex_Style_Metadata_Theme extends Trex_Metadata
                     ),
                 ),
                 'path_name' => array(
-                    'form' => array(
-                        'name' => 'path_name',
-                    ),
                     'validator' => array(
                         'rule' => array(
                             'required' => true,
@@ -57,12 +51,6 @@ class Trex_Style_Metadata_Theme extends Trex_Metadata
                     ),
                 ),
                 'picture' => array(
-                    'form' => array(
-                        '_type' => 'text',
-                        '_typeExt' => '',
-                        '_value' => '',
-                        'name' => 'picture',
-                    ),
                     'validator' => array(
                         'rule' => array(
                             'required' => true,
@@ -71,12 +59,17 @@ class Trex_Style_Metadata_Theme extends Trex_Metadata
                     ),
                 ),
             ),
-            'model' => array(),
+            'model' => array(
+                
+            ),
             'db' => array(
+                'type' => 'padb',
                 'table' => 'theme',
                 'limit' => 20,
+                'order' => array(
+                    array('date_created', 'DESC'),
+                )
             ),
-            // 页面显示
             'page' => array(
                 'title' => 'LBL_MODULE_THEME',
             ),

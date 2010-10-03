@@ -95,6 +95,23 @@ class Trex_Namespace extends Qwin_Trex_Namespace
          * 数据库链接,使用的是Doctrine Orm
          * @todo 助手类
          */
+        $manager = Doctrine_Manager::getInstance();
+        
+        // 连接padb数据库
+        if(isset($config['database']['adapter']['padb']))
+        {
+            $manager->registerConnectionDriver('padb', 'Doctrine_Connection_Padb');
+            $manager->registerHydrator('padb', 'Doctrine_Hydrator_Padb');
+            $padb = $config['database']['adapter']['padb'];
+            $adapter = $padb['type'] . '://'
+                     . $padb['username'] . ':'
+                     . $padb['password'] . '@'
+                     . $padb['server'] . '/'
+                     . $padb['database'];
+            $conn = Doctrine_Manager::connection($adapter, 'padb');
+        }
+
+        // 连接其他数据库
         if($config['database']['setup'])
         {
             if(isset($_SERVER['SERVER_ADDR']) && $_SERVER['SERVER_ADDR'] == '127.0.0.1')
@@ -106,19 +123,7 @@ class Trex_Namespace extends Qwin_Trex_Namespace
             // 更新配置数据
             Qwin::run('-ini')->setConfig($config);
 
-            // TEST 0924
-            //registerConnectionDriver
-            $manager = Doctrine_Manager::getInstance();
-            $manager->registerConnectionDriver('padb', 'Doctrine_Connection_Padb');
-            $manager->setAttribute(Doctrine_Core::ATTR_QUERY_CLASS, 'Doctrine_Query_Padb');
-            $manager->registerHydrator('padb', 'Doctrine_Hydrator_Padb');
-
-            //require_once(QWIN_LIB_PATH . '/Doctrine.php');
-            //spl_autoload_register(array('Doctrine', 'autoload'));
             $databaseSet = $config['database']['adapter'][$config['database']['mainAdapter']];
-
-            $databaseSet['type'] = 'padb';
-            $databaseSet['server'] = 'E:\Work\Website\padb';
             $adapter = $databaseSet['type'] . '://'
                      . $databaseSet['username'] . ':'
                      . $databaseSet['password'] . '@'

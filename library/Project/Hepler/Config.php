@@ -28,30 +28,11 @@
 
 class Project_Hepler_Config
 {
-    /**
-     * 配置缓存数组
-     * @var array
-     */
-    private $_cache;
-
-    function  __construct()
+    public static function getInstance($config = null)
     {
-        $this->_cache = Qwin::run('Qwin_Cache_List')->getCache('Config');
+        if ( ! isset(self::$_instance)) {
+            self::$_instance = new self();
+        }
+        return self::$_instance;
     }
-
-    public function get($name)
-    {
-        return $this->_cache[$name];
-    }
-
-    public function set($name, $value)
-    {
-        $this->_cache[$name] = $value;
-        return $this;
-    }
-}
-
-function C($name)
-{
-    echo Qwin::run('Project_Hepler_Config')->get($name);
 }

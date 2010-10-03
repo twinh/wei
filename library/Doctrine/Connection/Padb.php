@@ -63,8 +63,6 @@ class Doctrine_Connection_Padb extends Doctrine_Connection_Common
         $this->_query->selectDatabase($database);
         
         //$connected = parent::connect();
-        Doctrine_Manager::getInstance()->setAttribute(Doctrine_Core::ATTR_QUERY_CLASS, 'Doctrine_Query_Padb');
-
         $this->dbh = new Doctrine_Adapter_Padb();
         $this->isConnected = true;
 
