@@ -35,6 +35,7 @@ class Qwin_Metadata_Element_Db extends Qwin_Metadata_Element_Abstract
     public function getSampleData()
     {
         return array(
+            'type' => 'sql',
             'table' => null,
             'primaryKey' => 'id',
             'offset' => 0,

@@ -116,7 +116,6 @@ class Doctrine_Query_Padb extends Doctrine_Query
     {
         return $this->_query->getErrorCode();
     }
-    
 
     /**
      * execute

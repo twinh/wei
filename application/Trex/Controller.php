@@ -152,6 +152,14 @@ class Trex_Controller extends Qwin_Trex_Controller
         }
 
         /**
+         * 根据元数据定义的数据库,选择对应的连接类型
+         */
+        if('padb' == $this->_meta['db']['type'])
+        {
+            Doctrine_Manager::getInstance()->setCurrentConnection('padb');
+        }
+
+        /**
          * 加载模型
          */
         if($option['model'])

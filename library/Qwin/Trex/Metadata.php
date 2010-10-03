@@ -83,7 +83,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      *
      * @return string 表前缀
      */
-    public function getTablePrefix()
+    public function getTablePrefix($adapter = null)
     {
         if(null == $this->tablePrefix)
         {
@@ -119,12 +119,23 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         /**
          * 初始元数据和模型主类
          */
+        $manager = Doctrine_Manager::getInstance();
         $metaName = $this->getClassName('Metadata', $set);
         $metaObj = Qwin_Metadata_Manager::get($metaName);
+
+        // TODO 表前缀等..
+        if('padb' == $metaObj['db']['type'])
+        {
+            $manager->setCurrentConnection('padb');
+            $tablePrefix = '';
+        } else {
+            $tablePrefix = $this->getTablePrefix();
+        }
+
         $queryField = $metaObj->field->getAttrList(array('isDbField', 'isDbQuery'));
         $modelName = $this->getClassName('Model', $set);
         $modelObj = Qwin::run($modelName);
-        $modelObj->setTableName($this->getTablePrefix() . $metaObj['db']['table']);
+        $modelObj->setTableName($tablePrefix . $metaObj['db']['table']);
         foreach($queryField as $field)
         {
             $modelObj->hasColumn($field);
@@ -133,7 +144,15 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         /**
          * 初始化Doctrine查询
          */
-        $query = Doctrine_Query::create()->from($modelName);
+        $connObject = null;
+        $queryClass = null;
+        if('padb' == $metaObj['db']['type'])
+        {
+            $connObject = $manager->getConnection('padb');
+            $queryClass = 'Doctrine_Query_Padb';
+        }
+
+        $query = Doctrine_Query::create($connObject, $queryClass)->from($modelName);
 
         /**
          * 加载其他关联的类
