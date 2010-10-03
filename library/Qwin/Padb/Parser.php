@@ -49,10 +49,11 @@ class Qwin_Padb_Parser
         '=',
         '>',
         '<',
+        'NOT IN',
+        'IN'
         //'IS',
         //'LIKE',
         //'REGEXP',
-        //'IN',
     );
 
     /**
@@ -61,7 +62,10 @@ class Qwin_Padb_Parser
      */
     protected static $_instance;
 
-
+    /**
+     * 字段之间的操作符
+     * @var array
+     */
     protected $_setOperator = array(
         '+',
         '-',

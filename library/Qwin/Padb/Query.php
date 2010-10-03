@@ -358,10 +358,14 @@ class Qwin_Padb_Query
      * @param string $condition 查询条件
      * @return object 当前对象
      */
-    public function andWhere($condition)
+    public function andWhere($condition, $param = array())
     {
+        if(empty($this->_query['where']))
+        {
+            return $this->where($condition, $param);
+        }
         $this->_query['where'][] = 'AND';
-        $this->_query['where'][] = $condition;
+        $this->_query['where'][] = array($condition, $param);
         return $this;
     }
 
@@ -407,8 +411,10 @@ class Qwin_Padb_Query
      * @return object 当前对象
      * @todo todo
      */
-    public function whereIn($condition)
+    public function whereIn($field, $param = array())
     {
+        $this->_query['where'] = array();
+        $this->_query['where'][] = array($field . ' IN ? ', $param);
         return $this;
     }
 
@@ -419,8 +425,10 @@ class Qwin_Padb_Query
      * @return object 当前对象
      * @todo todo
      */
-    public function whereNotIn($condition)
+    public function whereNotIn($field, $param = array())
     {
+        $this->_query['where'] = array();
+        $this->_query['where'][] = array($field . ' NOT IN ? ', $param);
         return $this;
     }
 
@@ -433,6 +441,8 @@ class Qwin_Padb_Query
      */
     public function andWhereIn($condition)
     {
+        $this->_query['where'][] = 'AND';
+        $this->_query['where'][] = array($field . ' IN ? ', $param);
         return $this;
     }
 
@@ -445,6 +455,8 @@ class Qwin_Padb_Query
      */
     public function andWhereNotIn($condition)
     {
+        $this->_query['where'][] = 'AND';
+        $this->_query['where'][] = array($field . ' NOT IN ? ', $param);
         return $this;
     }
 

@@ -86,6 +86,21 @@ class Doctrine_Query_Padb extends Doctrine_Query
         return $this;
     }
 
+    /**
+     * 设置Where In查询
+     *
+     * @param <type> $field
+     * @param <type> $param
+     * @param <type> $not
+     * @return <type>
+     * @todo $not
+     */
+    public function whereIn($field, $param = array(), $not = false)
+    {
+        $this->_query->whereIn($field, $param);
+        return $this;
+    }
+
     public function limit($limit)
     {
         $this->_query->limit($limit);
