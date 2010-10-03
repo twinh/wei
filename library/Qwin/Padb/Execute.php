@@ -255,8 +255,12 @@ class Qwin_Padb_Execute
         {
             return false;
         }
-
+        
         $data = array_diff_key($rowData['data'], $data);
+
+        // 更新原始数据,TODO作为一个方法
+        $this->_rawData[$q['from']]['data'] = $data;
+
         return $this->_updateDataFile($data, $q['from']);
     }
 
@@ -646,22 +650,75 @@ class Qwin_Padb_Execute
             case '=':
                 $data = $this->_filterEqData($data, $where[0], $where[2]);
                 break;
+            
             case '>':
                 $data = $this->_filterGtData($data, $where[0], $where[2]);
                 break;
+
             case '<':
                 $data = $this->_filterLtData($data, $where[0], $where[2]);
                 break;
+
             case '>=':
                 $data = $this->_filterGeData($data, $where[0], $where[2]);
                 break;
+
             case '<=':
                 $data = $this->_filterLeData($data, $where[0], $where[2]);
                 break;
+
             case '!=':
             case '<>':
                 $data = $this->_filterNeData($data, $where[0], $where[2]);
                 break;
+
+            case 'IN':
+                $data = $this->_filterInData($data, $where[0], $where[2]);
+                break;
+
+            case 'NOT IN':
+                $data = $this->_filterNotInData($data, $where[0], $where[2]);
+                break;
+        }
+        return $data;
+    }
+
+    /**
+     * 筛选出属于某范围的值的数据
+     *
+     * @param array $data 从数据库取出的数据
+     * @param int $field 键名编号
+     * @param string|int $value 做比较的值
+     * @return array 筛选后的数据
+     */
+    public function _filterInData($data, $field, $value)
+    {
+        foreach($data as $key => $row)
+        {
+            if(!in_array($row[$field], $value))
+            {
+                unset($data[$key]);
+            }
+        }
+        return $data;
+    }
+
+    /**
+     * 筛选出不属于某范围的值的数据
+     *
+     * @param array $data 从数据库取出的数据
+     * @param int $field 键名编号
+     * @param string|int $value 做比较的值
+     * @return array 筛选后的数据
+     */
+    public function _filterNotInData($data, $field, $value)
+    {
+        foreach($data as $key => $row)
+        {
+            if(in_array($row[$field], $value))
+            {
+                unset($data[$key]);
+            }
         }
         return $data;
     }

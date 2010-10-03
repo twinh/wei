@@ -112,13 +112,60 @@ class Doctrine_Connection_Padb extends Doctrine_Connection_Common
 
     public function insert(Doctrine_Table $table, array $fields)
     {
-        $tableName = $table->getTableName();
-
         $this->_query->insert($table->getTableName());
         foreach($fields as $field => $value)
         {
             $this->_query->value($field, $value);
         }
         return $this->_query->execute();
+    }
+
+    public function delete(Doctrine_Table $table, array $identifier)
+    {
+        $this->_query->delete($table->getTableName());
+        foreach($identifier as $field => $value)
+        {
+            $this->_query->where($field .' = ' . $value);
+        }
+        return $this->_query->execute();
+    }
+
+    public function exec($query, array $params = array())
+    {
+        $this->connect();
+
+        // 删除操作
+        // 说明:Doctrine在删除操作中并未使用到connection类的delete方法,需在此进行判断
+        if('DELETE' == substr($query, 0, 6))
+        {
+            $tables = $this->getTables();
+            $table = $tables[key($tables)];
+            $identifier = $table->getIdentifier();
+            return $this->delete($table, array($identifier => $params[0]));
+        }
+
+        try {
+            if ( ! empty($params)) {
+                $stmt = $this->prepare($query);
+                $stmt->execute($params);
+
+                return $stmt->rowCount();
+            } else {
+                $event = new Doctrine_Event($this, Doctrine_Event::CONN_EXEC, $query, $params);
+
+                $this->getAttribute(Doctrine_Core::ATTR_LISTENER)->preExec($event);
+                if ( ! $event->skipOperation) {
+                    $count = $this->dbh->exec($query);
+
+                    $this->_count++;
+                }
+                $this->getAttribute(Doctrine_Core::ATTR_LISTENER)->postExec($event);
+
+                return $count;
+            }
+        } catch (Doctrine_Adapter_Exception $e) {
+        } catch (PDOException $e) { }
+
+        $this->rethrowException($e, $this, $query);
     }
 }

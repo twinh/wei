@@ -373,7 +373,10 @@ class Trex_ActionController extends Trex_Controller
         $id = explode(',', $id);
 
         $query = $meta->getDoctrineQuery($this->_set);
-        $alias = $query->getRootAlias() . '.';
+
+        $alias = $query->getRootAlias();
+        '' != $alias && $alias .= '.';
+
         $object = $query
             //->select($modelName . '.' . $meta['db']['primaryKey'])
             ->whereIn($alias . $meta['db']['primaryKey'], $id)
@@ -382,7 +385,7 @@ class Trex_ActionController extends Trex_Controller
         // TODO $object->delete();
         // TODO 统计删除数
         // TODO 删除数据关联的模块
-        foreach($object as $key => $val)
+        foreach($object as $key => $value)
         {
             foreach($meta['model'] as $model)
             {
@@ -392,7 +395,7 @@ class Trex_ActionController extends Trex_Controller
                     $object[$key][$model['alias']]->delete();
                 }
             }
-            $object[$key]->delete();
+            $value->delete();
         }
 
         /**

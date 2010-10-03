@@ -55,7 +55,7 @@ class Doctrine_Adapter_Padb implements Doctrine_Adapter_Interface
      */
     public function prepare($prepareString)
     {
-        throw new Doctrine_Adapter_Exception("unsupported");
+        return false;
     }
 
     /**
