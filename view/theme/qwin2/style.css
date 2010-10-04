@@ -154,7 +154,7 @@ div.ui-copyright{
 /* Box
 ----------------------------------*/
 .ui-box{margin-bottom: .5em;padding: .2em .2em .15em .2em;}
-.ui-box .ui-box-titlebar {position: relative;}
+.ui-box .ui-box-titlebar {position: relative; width:100%}
 .ui-box .ui-box-title{float: left;padding: 5px 18px 3px .7em;font-size: 1.3em;display: block;}
 .ui-box .ui-box-title-icon{position: absolute; right: .3em; top: 50%; width: 19px; margin: -10px 0 0 0; padding: 1px; height: 18px;cursor: pointer}
 .ui-box .ui-box-title-icon span{display: block; margin: 1px}
@@ -522,4 +522,26 @@ div.ui-layout-pane {
 #post-form .ui-view-button{
     font-size: .85em;
     
+}
+
+#ui-popup {
+	padding: 0;
+}
+#ui-jqgrid-table{
+	width: 600px;
+}
+
+#ui-popup-main #gbox_ui-jqgrid-table{
+    -moz-border-radius: 0;
+    border-top: none;
+}
+
+.ui-popup-content .ui-widget-header{
+    border-bottom: none;
+    -moz-border-radius-bottomleft: 0;
+    -webkit-border-bottom-left-radius: 0;
+    border-bottom-left-radius: 0;
+    -moz-border-radius-bottomright: 0;
+    -webkit-border-bottom-right-radius: 0;
+    border-bottom-right-radius: 0;
 }

@@ -30,7 +30,9 @@ class Trex_Language_Enus extends Trex_Language
     public function __construct()
     {
         $this->_data += array(
+            
             '' => 'NULL',
+            'LBL_BLANK' => '',
 
             // Qwin's information
             'LBL_QWIN' => 'Qwin',
@@ -164,6 +166,10 @@ class Trex_Language_Enus extends Trex_Language
             'LBL_VALUE' => 'Value',
             'LBL_TYPE' => 'Type',
             'LBL_TYPE_NOT_IN' => 'Not in',
+
+            'LBL_SELECTED' => 'Selected',
+            'LBL_NOT_SELECTED' => 'Not selected',
+            'LBL_READONLY' => 'Readonly',
         );
     }
 }

@@ -46,7 +46,7 @@ class Trex_ActionController extends Trex_Controller
          */
         $relatedField = $meta->connectMetadata($this->_meta);
         $relatedField->order();
-        $listField = $relatedField->getAttrList('isList');
+        $listField = $meta->getListField($relatedField);
         $customLink = $this->createCustomLink();
 
         /**
@@ -54,6 +54,30 @@ class Trex_ActionController extends Trex_Controller
          */
         $this->_view = array(
             'class' => 'Trex_View_JqGrid',
+            'data' => get_defined_vars(),
+        );
+    }
+
+    public function actionPopup()
+    {
+        /**
+         * 初始化常用的变量
+         */
+        $meta = $this->_meta;
+        $primaryKey = $meta['db']['primaryKey'];
+
+        /**
+         * 处理数据
+         */
+        $relatedField = $meta->connectMetadata($this->_meta);
+        $relatedField->order();
+        $listField = $meta->getListField($relatedField);
+
+        /**
+         * 设置视图
+         */
+        $this->_view = array(
+            'class' => 'Trex_View_Popup',
             'data' => get_defined_vars(),
         );
     }
@@ -94,8 +118,12 @@ class Trex_ActionController extends Trex_Controller
             $data = $this->dataConverter($data);
         }
 
-        $listField = $relatedField->getAttrList('isList');
-        $data = $this->_meta->convertMultiData($listField, $relatedField, 'list', $data, true, $meta['model']);
+        $listField = $meta->getListField($relatedField);
+        
+        // 允许通过参数改变转换方法
+        $convertAs = $this->_request->g('_as');
+        null == $convertAs && $convertAs = 'list';
+        $data = $this->_meta->convertMultiData($listField, $relatedField, $convertAs, $data, true, $meta['model']);
 
         /**
          * 设置视图
@@ -460,6 +488,13 @@ class Trex_ActionController extends Trex_Controller
               . Qwin_Helper_Html::jQueryButton('javascript:if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE)){window.location=\'' . $this->_url->createUrl($this->_set, array('action' => 'Delete', $primaryKey => $copyData[$primaryKey])) . '\';}', $this->_lang->t('LBL_ACTION_DELETE'), 'ui-icon-closethick');
         return $data;
     }
+
+    /*public function convertPopupOperation($value, $name, $data, $copyData)
+    {
+        $primaryKey = $this->_meta['db']['primaryKey'];
+        $data  = Qwin_Helper_Html::jQueryButton($this->_url->createUrl($this->_set, array('action' => 'Edit', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_EDIT'), 'ui-icon-check');
+        return $data;
+    }*/
 
     /**
      * 在列表操作下,初始化排序域的值,依次按5递增

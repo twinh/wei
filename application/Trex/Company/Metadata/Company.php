@@ -37,16 +37,23 @@ class Trex_Company_Metadata_Company extends Trex_Metadata
                         'title' => 'LBL_FIELD_MEMBER_NAME',
                     ),
                     'form' => array(
-                        '_type' => 'select',
-                        '_resourceGetter' => array(
-                            array('Project_Hepler_Category', 'getTreeResource'),
+                        '_type' => 'text',
+                        '_widgetDetail' => array(
                             array(
-                                'namespace' => 'Trex',
-                                'module' => 'Member',
-                                'controller' => 'Member',
+                                array('Qwin_Widget_JQuery_PopupGrid', 'render'),
+                                'LBL_MODULE_MEMBER',
+                                array(
+                                    'namespace' => 'Trex',
+                                    'module' => 'Member',
+                                    'controller' => 'Member',
+                                    'action' => 'Popup',
+                                    '_list' => 'id,group_id,username,email',
+                                ),
+                                array(
+                                    'username',
+                                    'id'
+                                ),
                             ),
-                            null,
-                            array('id', null, 'username'),
                         ),
                     ),
                     'attr' => array(

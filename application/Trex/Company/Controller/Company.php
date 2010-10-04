@@ -27,4 +27,14 @@
 
 class Trex_Company_Controller_Company extends Trex_ActionController
 {
+    public function convertEditMemberId($value, $name, $data, $copyData)
+    {
+        $member = $this->_meta->getDoctrineQuery(array(
+            'namespace' => 'Trex',
+            'module' => 'Member',
+            'controller' => 'Member',
+        ), false)->where('id = ?', $value)->fetchOne();
+        $this->relatedField->set('member_id.form._value2', $member['username']);
+        return $value;
+    }
 }

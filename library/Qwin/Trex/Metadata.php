@@ -228,6 +228,40 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     }
 
     /**
+     * 获取列表域
+     *
+     * @param <type> $field
+     * @param <type> $name
+     * @return <type>
+     * @todo id必选
+     */
+    public function getListField($field, $name = '_list')
+    {
+        $request = Qwin::run('Qwin_Request');
+        $custromList = $request->g($name);
+
+        $listField = $field->getAttrList('isList');
+        $result = array();
+        
+        if(null == $custromList)
+        {
+            return $listField;
+        } else {
+            $custromList = explode(',', $custromList);
+            foreach($custromList as $value)
+            {
+                in_array($value, $listField) && $result[$value] = $value;
+            }
+        }
+
+        if(!empty($result))
+        {
+            return $result;
+        }
+        return $listField;
+    }
+
+    /**
      * 计算两个数组的交集,键名来自第一个数组,值来自第二个数组
      *
      * @param array $array1 第一个参数数组

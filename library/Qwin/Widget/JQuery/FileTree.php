@@ -67,31 +67,3 @@ class Qwin_Widget_JQuery_FileTree
         return $code;
     }
 }
-/**
-$js = Qwin::run('-js');
-        $rsc = Qwin::run('-rsc')
-            ->load('jquery/ui/dialog')
-            ->load('jquery/plugin/qfiletree');
-        $id = 'icon-button-filetree-' . $set['id'];
-
-        $html = '<a class="ui-state-default ui-corner-all icon-button-common" id="' . $id . '" href="javascript:void(0)">
-                <span class="ui-icon ui-icon-info"></span>
-                </a>';
-        $code = '$("#' . $id . '").QFileTree({
-        input : "#' . $set['name'] . '",
-        filetree : {
-            dblClickFolder : function(path){
-                $("#qfiletree_dialog").dialog("close");
-                $("#ajax_upload_button_' . $set['name'] . '").ajaxUpload({
-                    input : "#' . $set['name'] . '",
-                    path : path
-                });
-                $("#ajax_upload_button_' . $set['name'] . '").click();
-            }
-        }
-    });
-                    ';
-        $js->addJq($set['name'], $code);
-
-        return $html;
- */
