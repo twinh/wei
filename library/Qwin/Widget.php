@@ -39,7 +39,9 @@ class Qwin_Widget
         foreach($meta['_widgetDetail'] as $widgetSetting)
         {
             // 增加默认参数
-            $widgetSetting[] = $meta;
+            array_unshift($widgetSetting, $widgetSetting[0]);
+            $widgetSetting[1] = $meta;
+
             $retult .= Qwin::callByArray($widgetSetting);
         }
         return $retult;

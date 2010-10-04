@@ -120,6 +120,10 @@ class Trex_Project_Metadata_Project extends Trex_Metadata
                             array('Project_Helper_CommonClass', 'convert'),
                             'project-status',
                         ),
+                        'popup' => array(
+                            array('Project_Helper_CommonClass', 'convert'),
+                            'project-status',
+                        ),
                     ),
                 ),
                 'status_description' => array(

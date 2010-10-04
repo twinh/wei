@@ -38,6 +38,7 @@ class Trex_Company_Language_Enus extends Trex_Language_Enus
             'LBL_FIELD_MEMBER_NAME' => 'Member Name',
 
             'LBL_MODULE_COMPANY' => 'Company',
+            'LBL_MODULE_MEMBER' => 'Member',
         );
     }
 }
