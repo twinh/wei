@@ -25,14 +25,21 @@
  * @since       2010-07-18 10:43:44
  */
 
-return array(
-    'LBL_FIELD_SHORT_DESCRIPTION' => 'Short Description',
-    'LBL_FIELD_WORKING_PLACE' => 'Working Place',
-    'LBL_FIELD_NUMBER' => 'Number',
-    'LBL_FIELD_RESPONSIBILITY' => 'Responsibility',
-    'LBL_FIELD_QUALIFICATION' => 'Qualification',
-    'LBL_FIELD_ENABLED' => 'Enabled?',
-    'LBL_FIELD_ORDER' => 'Order',
+class Trex_Job_Language_Enus extends Trex_Language_Enus
+{
+    public function __construct()
+    {
+        parent::__construct();
+        $this->_data += array(
+            'LBL_FIELD_SHORT_DESCRIPTION' => 'Short Description',
+            'LBL_FIELD_WORKING_PLACE' => 'Working Place',
+            'LBL_FIELD_NUMBER' => 'Number',
+            'LBL_FIELD_RESPONSIBILITY' => 'Responsibility',
+            'LBL_FIELD_QUALIFICATION' => 'Qualification',
+            'LBL_FIELD_ENABLED' => 'Enabled?',
+            'LBL_FIELD_ORDER' => 'Order',
 
-    'LBL_MODULE_JOB' => 'Job',
-);
+            'LBL_MODULE_JOB' => 'Job',
+        );
+    }
+}

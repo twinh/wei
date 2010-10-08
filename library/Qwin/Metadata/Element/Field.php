@@ -182,6 +182,16 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
                 }
             }
         }
+
+        // 转换转换器的配置,使不同的行为之间允许共享转换器
+        !isset($metadata['converter']) && $metadata['converter'] = array();
+        foreach($metadata['converter'] as $key => $value)
+        {
+            if(is_string($value) && isset($metadata['converter'][$value]))
+            {
+                $metadata['converter'][$key] = $metadata['converter'][$value];
+            }
+        }
         
         return $this->_multiArrayMerge($this->getSampleData(), $metadata);
     }

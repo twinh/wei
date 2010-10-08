@@ -25,81 +25,15 @@
  * @since       2010-07-18 10:19:53
  */
 
-class Trex_Job_Controller_Job extends Qwin_Trex_Controller
+class Trex_Job_Controller_Job extends Trex_ActionController
 {
-    /**
-     * 列表
-     */
-    public function actionDefault()
+    public function convertListSalary($value, $name, $row, $copyRow)
     {
-        return Qwin::run('Qwin_Trex_Action_List');
+        return $copyRow['salary_from'] . '-' . $copyRow['salary_to'];
     }
 
-    /**
-     * 添加
-     */
-    public function actionAdd()
+    public function convertViewSalary($value, $name, $row, $copyRow)
     {
-        return Qwin::run('Qwin_Trex_Action_Add');
-    }
-
-    /**
-     * 编辑
-     */
-    public function actionEdit()
-    {
-        return Qwin::run('Qwin_Trex_Action_Edit');
-    }
-
-    /**
-     * 删除
-     */
-    public function actionDelete()
-    {
-        return Qwin::run('Qwin_Trex_Action_Delete');
-    }
-
-    /**
-     * 列表的 json 数据
-     */
-    public function actionJsonList()
-    {
-        Qwin::load('Qwin_converter_Time');
-        return Qwin::run('Qwin_Trex_Action_JsonList');
-    }
-
-    /**
-     * 查看
-     */
-    public function actionShow()
-    {
-        return Qwin::run('Qwin_Trex_Action_Show');
-    }
-
-     public function convertDbDateCreated()
-    {
-        return date('Y-m-d H:i:s', TIMESTAMP);
-    }
-
-    public function convertDbDateModified()
-    {
-        return date('Y-m-d H:i:s', TIMESTAMP);
-    }
-
-    public function convertListOperation($val, $name, $data, $cpoyData)
-    {
-        $html = $this->meta->getOperationLink($this->__meta['db']['primaryKey'], $data[$this->__meta['db']['primaryKey']], $this->_set);
-        return $html;
-    }
-
-    public function convertDbId($val)
-    {
-        return $this->Qwin_converter_String->getUuid($val);
-    }
-
-    public function convertAddOrder()
-    {
-        $class = Qwin::run('-ini')->getClassName('Model', $this->_set);
-        return $this->meta->getInitalOrder($class);
+        return $copyRow['salary_from'] . '-' . $copyRow['salary_to'];
     }
 }
