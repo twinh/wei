@@ -27,6 +27,21 @@
 
 class Trex_Company_Controller_Company extends Trex_ActionController
 {
+    public function actionMyCompany()
+    {
+        $_GET['searchField'] = 'member_id';
+        $_GET['searchValue'] = $this->_member['id'];
+        $this->_meta['page']['title'] = 'LBL_MODULE_MY_COMPANY';
+        parent::actionIndex();
+    }
+
+    public function createCustomLink()
+    {
+        $html = parent::createCustomLink();
+        $html = Qwin_Helper_Html::jQueryLink($this->_url->createUrl($this->_set, array('action' => 'MyCompany')), $this->_lang->t('LBL_MODULE_MY_COMPANY'), 'ui-icon-script');
+        return $html;
+    }
+
     public function convertEditMemberId($value, $name, $data, $copyData)
     {
         $member = $this->_meta->getDoctrineQuery(array(

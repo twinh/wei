@@ -32,7 +32,34 @@ class Trex_Job_Metadata_Job extends Trex_Metadata
         $this->setCommonMetadata();
         $this->parseMetadata(array(
             'field' => array(
-                
+                'related_id' => array(
+                    'basic' => array(
+                        'title' => 'LBL_FIELD_COMPANY_NAME',
+                    ),
+                    'form' => array(
+                        '_type' => 'text',
+                        '_widgetDetail' => array(
+                            array(
+                                array('Qwin_Widget_JQuery_PopupGrid', 'render'),
+                                'LBL_MODULE_COMPANY',
+                                array(
+                                    'namespace' => 'Trex',
+                                    'module' => 'Company',
+                                    'controller' => 'Company',
+                                    'action' => 'Popup',
+                                    '_list' => 'id,name',
+                                ),
+                                array(
+                                    'name',
+                                    'id'
+                                ),
+                            ),
+                        ),
+                    ),
+                    'attr' => array(
+                        'isLink' => 1,
+                    ),
+                ),
                 'type' => array(
                     'form' => array(
                         '_type' => 'select',
@@ -50,6 +77,9 @@ class Trex_Job_Metadata_Job extends Trex_Metadata
                             'job_type',
                         ),
                         'view' => 'list'
+                    ),
+                    'attr' => array(
+                        'isLink' => 1,
                     ),
                 ),
                 'work_type' => array(
@@ -70,14 +100,27 @@ class Trex_Job_Metadata_Job extends Trex_Metadata
                         ),
                         'view' => 'list'
                     ),
+                    'attr' => array(
+                        'isLink' => 1,
+                    ),
                 ),
                 'title' => array(
-
+                    'validator' => array(
+                        'rule' => array(
+                            'required' => true,
+                            'byteRangeLength' => array(4, 16),
+                        ),
+                    ),
                 ),
                 'number' => array(
                     'form' => array(
                         'maxlength' => 3
-                    )
+                    ),
+                    'validator' => array(
+                        'rule' => array(
+                            'nonnegativeInteger' => true,
+                        ),
+                    ),
                 ),
                 'education' => array(
                     'form' => array(
@@ -96,6 +139,9 @@ class Trex_Job_Metadata_Job extends Trex_Metadata
                             'job_education',
                         ),
                         'view' => 'list'
+                    ),
+                    'attr' => array(
+                        'isLink' => 1,
                     ),
                 ),
                 'work_seniority' => array(
@@ -122,11 +168,21 @@ class Trex_Job_Metadata_Job extends Trex_Metadata
                         'isList' => false,
                         'isView' => false,
                     ),
+                    'validator' => array(
+                        'rule' => array(
+                            'nonnegativeInteger' => true,
+                        ),
+                    ),
                 ),
                 'salary_to' => array(
                     'attr' => array(
                         'isList' => false,
                         'isView' => false,
+                    ),
+                    'validator' => array(
+                        'rule' => array(
+                            'nonnegativeInteger' => true,
+                        ),
                     ),
                 ),
                 'salary' => array(
@@ -151,16 +207,42 @@ class Trex_Job_Metadata_Job extends Trex_Metadata
                     ),
                 ),
                 'contacter' => array(
-
+                    'validator' => array(
+                        'rule' => array(
+                            'required' => true,
+                            'byteRangeLength' => array(2, 16),
+                        ),
+                    ),
                 ),
                 'phone' => array(
-
+                    'validator' => array(
+                        'rule' => array(
+                            'required' => true,
+                            'byteRangeLength' => array(6, 16),
+                        ),
+                    ),
                 ),
                 'email' => array(
-
+                    'validator' => array(
+                        'rule' => array(
+                            'required' => true,
+                            'email' => true,
+                        ),
+                    ),
                 ),
             ),
             'model' => array(
+                'company' => array(
+                    'name' => 'Trex_Company_Model_Company',
+                    'alias' => 'company',
+                    'metadata' => 'Trex_Company_Metadata_Company',
+                    'local' => 'related_id',
+                    'foreign' => 'id',
+                    'type' => 'view',
+                    'fieldMap' => array(
+                        'related_id' => 'name',
+                    ),
+                ),
             ),
             'db' => array(
                 'table' => 'job',

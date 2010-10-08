@@ -1,6 +1,6 @@
 <?php
 /**
- * Zhcn
+ * menu_index
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,30 +16,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Trex
- * @subpackage  Company
+ * @package     Qwin
+ * @subpackage  
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-20 17:06:32
+ * @since       2010-10-08 20:31:37
  */
-
-class Trex_Company_Language_Zhcn extends Trex_Language_Zhcn
-{
-    public function  __construct()
-    {
-        parent::__construct();
-        $this->_data += array(
-            'LBL_FIELD_INDUSTRY' => '行业',
-            'LBL_FIELD_NATURE' => '属性',
-            'LBL_FIELD_SIZE' => '规模',
-            'LBL_FIELD_MEMBER_ID' => '用户编号',
-            'LBL_FIELD_MEMBER_NAME' => '用户名称',
-
-            'LBL_MODULE_MY_COMPANY' => '我的公司',
-
-            'LBL_MODULE_COMPANY' => '公司',
-        );
-    }
-}
