@@ -25,14 +25,27 @@
  * @since       2010-07-20 11:34:03
  */
 
-return array(
-    'LBL_FIELD_SHORT_DESCRIPTION' => '简要描述',
-    'LBL_FIELD_WORKING_PLACE' => '工作地点',
-    'LBL_FIELD_NUMBER' => '数量',
-    'LBL_FIELD_RESPONSIBILITY' => '岗位职责',
-    'LBL_FIELD_QUALIFICATION' => '任职资格',
-    'LBL_FIELD_ENABLED' => '是否有效',
-    'LBL_FIELD_ORDER' => '顺序',
+class Trex_Job_Language_Zhcn extends Trex_Language_Zhcn
+{
+    public function __construct()
+    {
+        parent::__construct();
+        $this->_data = array(
+            'LBL_FIELD_TYPE' => '职位类别',
+            'LBL_FIELD_WORK_TYPE' => '职位类型',
+            'LBL_FIELD_TITLE' => '职位名称',
+            'LBL_FIELD_NUMBER' => '招聘人数',
+            'LBL_FIELD_EDUCATION' => '学历要求',
+            'LBL_FIELD_WORK_SENIORITY' => '工作年限',
+            'LBL_FIELD_SALARY' => '薪资范围',
+            'LBL_FIELD_SALARY_FROM' => '薪资范围(从)',
+            'LBL_FIELD_SALARY_TO' => '薪资范围(到)',
+            'LBL_FIELD_WORKING_PLACE' => '工作地点',
+            'LBL_FIELD_DESCRIPTION' => '补充说明',
+            'LBL_FIELD_CONTACTER' => '联系人',
+            'LBL_FIELD_PHONE' => '手机或电话',
 
-    'LBL_MODULE_JOB' => '招聘',
-);
+            'LBL_MODULE_JOB' => '兼职招聘',
+        ) + $this->_data;
+    }
+}
