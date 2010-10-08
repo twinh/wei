@@ -31,7 +31,8 @@ class Trex_Job_Language_Zhcn extends Trex_Language_Zhcn
     {
         parent::__construct();
         $this->_data = array(
-            'LBL_FIELD_TYPE' => '职位类别',
+            'LBL_FIELD_COMPANY_NAME' => '公司',
+            'LBL_FIELD_TYPE' => '工作类别',
             'LBL_FIELD_WORK_TYPE' => '职位类型',
             'LBL_FIELD_TITLE' => '职位名称',
             'LBL_FIELD_NUMBER' => '招聘人数',
@@ -44,6 +45,9 @@ class Trex_Job_Language_Zhcn extends Trex_Language_Zhcn
             'LBL_FIELD_DESCRIPTION' => '补充说明',
             'LBL_FIELD_CONTACTER' => '联系人',
             'LBL_FIELD_PHONE' => '手机或电话',
+
+            'LBL_NUMBER_SEVERAL' => '若干',
+            'LBL_SALARY_NEGOTIABLE' => '面议',
 
             'LBL_MODULE_JOB' => '兼职招聘',
         ) + $this->_data;

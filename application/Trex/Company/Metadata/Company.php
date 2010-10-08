@@ -86,10 +86,7 @@ class Trex_Company_Metadata_Company extends Trex_Metadata
                             array('Project_Helper_CommonClass', 'convert'),
                             'company-industry',
                         ),
-                        'view' => array(
-                            array('Project_Helper_CommonClass', 'convert'),
-                            'company-industry',
-                        )
+                        'view' => 'list',
                     ),
                 ),
                 'nature' => array(
@@ -105,10 +102,7 @@ class Trex_Company_Metadata_Company extends Trex_Metadata
                             array('Project_Helper_CommonClass', 'convert'),
                             'company-nature',
                         ),
-                        'view' => array(
-                            array('Project_Helper_CommonClass', 'convert'),
-                            'company-nature',
-                        )
+                        'view' => 'list'
                     ),
                 ),
                 'size' => array(

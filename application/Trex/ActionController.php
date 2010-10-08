@@ -96,7 +96,7 @@ class Trex_ActionController extends Trex_Controller
         /**
          * 从模型获取数据
          */
-        $query = $meta->getDoctrineQuery($this->_set);        
+        $query = $meta->getDoctrineQuery($this->_set);
         $meta->addSelectToQuery($meta, $query)
              ->addOrderToQuery($meta, $query)
              ->addWhereToQuery($meta, $query)

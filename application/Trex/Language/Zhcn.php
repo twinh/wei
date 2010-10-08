@@ -131,6 +131,8 @@ class Trex_Language_Zhcn extends Trex_Language
             'MSG_VALIDATOR_MAXLENGTH' => '请输入长度最多是 {0} 的字符串.',
             'MSG_VALIDATOR_MINLENGTH' => '请输入长度最少是 {0} 的字符串.',
             'MSG_VALIDATOR_RANGELENGTH' => '请输入长度在 {0} 和 {1} 之间的字符串.',
+            'MSG_VALIDATOR_BYTERANGELENGTH' => '请输入长度在 {0} 和 {1} 之间的字符串.',
+            'MSG_VALIDATOR_NONNEGATIVEINTEGER' => '请输入非负正整数',
             'MSG_VALIDATOR_RANGE' => '请输入在 {0} 和 {1} 之间的值.',
             'MSG_VALIDATOR_MAX' => '请输入小于或等于 {0} 的值.',
             'MSG_VALIDATOR_MIN' => '请输入大于或等于 {0} 的值.',
@@ -141,6 +143,11 @@ class Trex_Language_Zhcn extends Trex_Language
             'LBL_VALUE' => '值',
             'LBL_TYPE' => '类型',
             'LBL_TYPE_NOT_IN' => '不包含',
+
+            'LBL_SELECTED' => '已选择',
+            'LBL_NOT_SELECTED' => '未选择',
+            'LBL_READONLY' => '只读',
+            'LBL_PERSONAL' => '个人',
         );
     }
 }

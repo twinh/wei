@@ -230,9 +230,24 @@ jQuery.validator.addMethod("nowhitespace", function(value, element) {
 }, "No white space please");
 
 // 整数,如 1, 2, -1
-jQuery.validator.addMethod("integer", function(value, element) {
+jQuery.validator.addMethod('integer', function(value, element) {
 	return this.optional(element) || /^-?\d+$/.test(value);
 }, "A positive or negative non-decimal number please");
+
+// 正数
+jQuery.validator.addMethod('positiveInteger', function(value, element) {
+	return this.optional(element) || /^[1-9][0-9]*$/.test(value);
+}, '');
+
+// 非负数
+jQuery.validator.addMethod('nonnegativeInteger', function(value, element) {
+	return this.optional(element) || (/^[0-9]+$/.test(value) && '' != value);
+}, '');
+
+// 大于lessthan
+/*jQuery.validator.addMethod('greaterThan', function(value, element, param) {
+	return this.optional(element) || value >= param;
+}, '');*/
 
 // 字符验证
  jQuery.validator.addMethod("stringCheck", function(value, element) {

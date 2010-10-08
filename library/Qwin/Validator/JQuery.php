@@ -22,7 +22,7 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-14 9:30:39
+ * @since       2010-09-14 09:30:39
  */
 
 class Qwin_Validator_JQuery extends Qwin_Validator_Abstract
@@ -71,6 +71,20 @@ class Qwin_Validator_JQuery extends Qwin_Validator_Abstract
      * @return boolen 是否通过验证
      */
     public function rangelength($value, $param)
+    {
+        $len = strlen($value);
+        return $len >= $param[0] && $len <= $param[1];
+    }
+
+    /**
+     * 验证长度应该在$param1和$param2之间
+     *
+     * @param string $value
+     * @param int $param1 最小长度
+     * @param int $param2 最大长度
+     * @return boolen 是否通过验证
+     */
+    public function byteRangeLength($value, $param)
     {
         $len = strlen($value);
         return $len >= $param[0] && $len <= $param[1];
