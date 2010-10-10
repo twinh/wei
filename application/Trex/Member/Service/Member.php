@@ -1,6 +1,6 @@
 <?php
 /**
- * Zhcn
+ * Member
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,29 +17,28 @@
  * limitations under the License.
  *
  * @package     Trex
- * @subpackage  Company
+ * @subpackage  Service
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-20 17:06:32
+ * @since       2010-10-09 15:31:55
  */
 
-class Trex_Company_Language_Zhcn extends Trex_Language_Zhcn
+class Trex_Member_Service_Member extends Trex_Service
 {
-    public function  __construct()
+    public function doLogin()
     {
-        parent::__construct();
-        $this->_data += array(
-            'LBL_FIELD_INDUSTRY' => '所属行业',
-            'LBL_FIELD_NATURE' => '公司性质',
-            'LBL_FIELD_SIZE' => '公司规模',
-            'LBL_FIELD_MEMBER_ID' => '用户编号',
-            'LBL_FIELD_MEMBER_NAME' => '用户名称',
+        
+    }
 
-            'LBL_MODULE_MY_COMPANY' => '我的公司',
+    public function doLogout()
+    {
+        
+    }
 
-            'LBL_MODULE_COMPANY' => '公司',
-        );
+    public function doLoginLog()
+    {
+        
     }
 }

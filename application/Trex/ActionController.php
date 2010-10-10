@@ -31,31 +31,26 @@
 class Trex_ActionController extends Trex_Controller
 {
     /**
-     * 默认首页
+     * 控制器默认首页,Trex命名空间的默认首页是数据列表
+     *
+     * @return array 服务处理结果
      */
     public function actionIndex()
     {
         /**
-         * 初始化常用的变量
+         * @see Trex_Service_Index $_config
          */
-        $meta = $this->_meta;
-        $primaryKey = $meta['db']['primaryKey'];
-
-        /**
-         * 处理数据
-         */
-        $relatedField = $meta->connectMetadata($this->_meta);
-        $relatedField->order();
-        $listField = $meta->getListField($relatedField);
-        $customLink = $this->createCustomLink();
-
-        /**
-         * 设置视图
-         */
-        $this->_view = array(
-            'class' => 'Trex_View_JqGrid',
-            'data' => get_defined_vars(),
+        $config = array(
+            'set' => $this->_set,
+            'data' => array(
+            ),
+            'trigger' => array(
+                'beforeViewLoad' => array(
+                    array($this, 'createCustomLink'),
+                ),
+            ),
         );
+        return Qwin::run('Trex_Service_Index')->process($config);
     }
 
     public function actionPopup()
@@ -83,55 +78,25 @@ class Trex_ActionController extends Trex_Controller
     }
 
     /**
-     * 列表页
+     * 列表页,显示列表数据,操作链接等
+     *
+     * @return array 服务处理结果
      */
     public function actionList()
     {
         /**
-         * 初始化常用的变量
+         * @see Trex_Service_List $_config
          */
-        $meta = $this->_meta;
-        $primaryKey = $meta['db']['primaryKey'];
-
-        /**
-         * 从模型获取数据
-         */
-        $query = $meta->getDoctrineQuery($this->_set);
-        $meta->addSelectToQuery($meta, $query)
-             ->addOrderToQuery($meta, $query)
-             ->addWhereToQuery($meta, $query)
-             ->addLimitToQuery($meta, $query);
-        $data = $query->execute()->toArray();
-        $count = count($data);
-        $totalRecord = $query->count();
-
-        /**
-         * 处理数据
-         */
-        $relatedField = $meta->connectMetadata($this->_meta);
-        $relatedField->order();
-        $data = $meta->convertDataToSingle($data);
-
-        // TODO
-        if(method_exists($this, 'dataConverter'))
-        {
-            $data = $this->dataConverter($data);
-        }
-
-        $listField = $meta->getListField($relatedField);
-        
-        // 允许通过参数改变转换方法
-        $convertAs = $this->_request->g('_as');
-        null == $convertAs && $convertAs = 'list';
-        $data = $this->_meta->convertMultiData($listField, $relatedField, $convertAs, $data, true, $meta['model']);
-
-        /**
-         * 设置视图
-         */
-        $this->_view = array(
-            'class' => 'Trex_View_JqGridJson',
-            'data' => get_defined_vars(),
+        $config = array(
+            'set' => $this->_set,
+            'data' => array(
+                'order' => $this->_meta->getUrlOrder(),
+                'where' => $this->_meta->getUrlWhere(),
+                'offset' => $this->_meta->getUrlOffset(),
+                'limit' => $this->_meta->getUrlLimit(),
+            ),
         );
+        return Qwin::run('Trex_Service_List')->process($config);
     }
 
     /**

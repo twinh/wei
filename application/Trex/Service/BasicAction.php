@@ -1,0 +1,109 @@
+<?php
+/**
+ * BasicAction
+ *
+ * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * @package     Trex
+ * @subpackage  Service
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @version     $Id$
+ * @since       2010-10-09 21:44:58
+ */
+
+class Trex_Service_BasicAction extends Trex_Service
+{
+    /**
+     * 根据应用结构配置,加载语言,元数据,模型等
+     *
+     * @param array $set 应用结构配置
+     * @see Trex_Service_BasicAction $_set
+     */
+    protected function process(array $config = null)
+    {
+        $ini = Qwin::run('-ini');
+        $this->_request = Qwin::run('Qwin_Request');
+        $this->_url = Qwin::run('Qwin_Url');
+        $set = $this->_set = $ini->getSet();
+        $this->_config = $ini->getConfig();
+        $this->_session = Qwin::run('Qwin_Session');
+        $this->_member = $this->_session->get('member');
+
+        /**
+         * 加载语言
+         */
+        $languageResult = Qwin::run('Trex_Service_Language')->getLanguage($set);
+        $languageName = $languageResult['data'];
+        $languageClass = $set['namespace'] . '_' . $set['module'] . '_Language_' . $languageName;
+        $this->_lang = Qwin::run($languageClass);
+        if(null == $this->_lang)
+        {
+            $languageClass = 'Trex_Language' . $languageName;
+            $this->_lang = Qwin::run($languageClass);
+        }
+        Qwin::addMap('-lang', $languageClass);
+
+        /**
+         * 加载元数据
+         */
+        $metadataName = $ini->getClassName('Metadata', $set);
+        if(class_exists($metadataName))
+        {
+            $this->_meta = Qwin_Metadata_Manager::get($metadataName);
+        } else {
+            $metadataName = 'Trex_Metadata';
+            $this->_meta = Qwin::run($metadataName);
+        }
+        Qwin::addMap('-meta', $metadataName);
+
+        /**
+         * 根据元数据定义的数据库,选择对应的连接类型
+         */
+        if('padb' == $this->_meta['db']['type'])
+        {
+            Doctrine_Manager::getInstance()->setCurrentConnection('padb');
+        }
+
+        /**
+         * 加载模型
+         */
+        $modelName = $ini->getClassName('Model', $set);
+        $this->_model = Qwin::run($modelName);
+        if(null == $this->_model)
+        {
+            $modelName = 'Qwin_Trex_Model';
+            $this->_model = Qwin::run($modelName);
+        }
+        Qwin::addMap('-model', $modelName);
+
+        return $this;
+    }
+
+    public function loadView($class = null)
+    {
+        Qwin::load($class);
+        if(null != $class && class_exists($class))
+        {
+            $this->_view['class'] = $class;
+        }
+        $view = Qwin::run($this->_view['class']);
+        isset($this->_view['data']) && $view->setVarList($this->_view['data']);
+        isset($this->_view['element']) && $view->setElementList($this->_view['element']);
+        isset($this->_view['layout']) && $view->setLayout($this->_view['layout']);
+        return $view;
+    }
+}

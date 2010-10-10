@@ -119,6 +119,13 @@ abstract class Qwin_Metadata_Element_Abstract extends Qwin_Metadata_Abstract
         return $this;
     }
 
+    /**
+     * 合并多维数组
+     *
+     * @param array $array1
+     * @param array $array2
+     * @return array
+     */
     protected function _multiArrayMerge($array1, $array2)
     {
         foreach($array2 as $key => $val)

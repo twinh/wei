@@ -328,122 +328,282 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         return $this;
     }
 
+
     /**
-     * 为Doctrine查询对象增加排序语句,优先级为Url地址 > 元数据 > 主键,addOrderToDoctrineQuery的缩写
+     * 获取Url中的排序配置,对字段域不做验证,字段域的验证应该是交给服务执行的.
+     *
+     * @param string $fieldName 字段域的名称
+     * @param string $typeName 排序的名称
+     * @return array 标准元数据的排序配置
+     */
+    public function getUrlOrder($fieldName = 'orderField', $typeName = 'orderType')
+    {
+        $request = Qwin::run('Qwin_Request');
+
+        $orderField = $request->g('orderField');
+
+        // 地址未设置排序
+        if(null == $orderField)
+        {
+            return array();
+        }
+
+        $orderType = strtoupper($request->g('orderType'));
+        $typeOption = array('DESC', 'ASC');
+        if(!in_array($orderType, $typeOption))
+        {
+            $orderType = $typeOption[0];
+        }
+
+        return array(
+            array($orderField, $orderType),
+        );
+    }
+
+    /**
+     * 获取Url中的查找配置,对字段域和操作符不做验证
+     *
+     * @param string $fieldName 字段域的名称
+     * @param string $valueName 搜索值的名称
+     * @param string $operName 操作符的名称
+     * @return array 标准元数据的搜索配置
+     * @todo 高级复杂搜索配置
+     */
+    public function getUrlWhere($fieldName = 'searchField', $valueName = 'searchString', $operName = 'searchOper')
+    {
+        $request = Qwin::run('Qwin_Request');
+
+        $searchField = $request->g($fieldName);
+        if(null == $searchField)
+        {
+            return array();
+        }
+
+        $searchValue = $request->g($valueName);
+        $searchOper  = $request->g($operName);
+        return array(
+            array($searchField, $searchValue, $searchOper),
+        );
+    }
+    
+    /**
+     * 获取Url中的偏移配置
+     *
+     * @param string $limitName 字段域的名称,应该与getUrlOffset中的rowName一致
+     * @return int 标准元数据的限制配置
+     * @todo 最大值允许配置
+     */
+    public function getUrlLimit($limitName = 'rowNum')
+    {
+        $request = Qwin::run('Qwin_Request');
+        $limit = $request->g($limitName);
+        500 < $limit && $limit = 500;
+
+        return $request->g($limitName);
+    }
+
+    /**
+     * 获取Url中的限制配置
+     *
+     * @param string $limitName 字段域的名称,应该与getUrlOffset中的rowName一致
+     * @return int 标准元数据的限制配置
+     * @todo 最大值允许配置
+     */
+    public function getUrlOffset($pageName = 'page', $limitName = 'rowNum')
+    {
+        $request = Qwin::run('Qwin_Request');
+        $page = $request->g($pageName);
+        $limit = $request->g($limitName);
+        500 < $limit && $limit = 500;
+        $offset = ($page - 1) * $limit;
+
+        return $offset;
+    }
+
+    /**
+     * 为Doctrine查询对象增加排序语句
      * 
      * @param Qwin_Metadata $meta
      * @param Doctrine_Query $query
+     * @param array|null $addition 附加的排序配置
      * @return object 当前对象
      * @todo 关联元数据的排序
-     * @todo 允许自定义Url的键名
-     * @todo 允许多个排序字段
-     * @todo 将Url查询并入到元数据中,即元数据中的order数组是动态的
      */
-    public function addOrderToQuery(Qwin_Metadata $meta, Doctrine_Query $query)
+    public function addOrderToQuery(Qwin_Metadata $meta, Doctrine_Query $query, array $addition = null)
     {
-        $request = Qwin::run('Qwin_Request');
-        $arrayHepler = Qwin::run('Qwin_Helper_Array');
+        $order = null != $addition ? $addition : $meta['db']['order'];
+
         $alias = $query->getRootAlias();
         '' != $alias && $alias .= '.';
 
-        // 排序字段名和排序类型
-        $orderField = $request->g('orderField');
-        $orderType = strtoupper($request->g('orderType'));
-
         // 数据表字段的域
-        $queryField = $meta->field->getAttrList('isDbQuery');
+        $queryField = $meta['field']->getAttrList('isDbQuery');
+        $orderType = array('DESC', 'ASC');
 
-        if(in_array($orderField, $queryField))
+        foreach($order as $fieldSet)
         {
-            $orderType = $arrayHepler->forceInArray($orderType, array('DESC', 'ASC'));
-            $query->orderBy($alias . $orderField . ' ' .  $orderType);
-        } elseif(isset($meta['db']['order']) && !empty($meta['db']['order'])) {
-            $orderTempArr = array();
-            foreach($meta['db']['order'] as $fieldSet)
+            // 不被允许的域名称
+            if(!in_array($fieldSet[0], $queryField))
             {
-                $fieldSet[1] = $arrayHepler->forceInArray($fieldSet[1], array('DESC', 'ASC'));
-                $orderTempArr[] = $alias . $fieldSet[0] . ' ' . $fieldSet[1];
+                continue;
             }
-            $query->orderBy(implode(', ', $orderTempArr));
-        } else {
-            $query->orderBy($alias . $meta['db']['primaryKey'] . ' DESC');
+            $fieldSet[1] = strtoupper($fieldSet[1]);
+            if(!in_array($fieldSet[1], $orderType))
+            {
+                $fieldSet[1] = $orderType[0];
+            }
+            $query->addOrderBy($alias . $fieldSet[0] . ' ' .  $fieldSet[1]);
         }
         return $this;
     }
 
     /**
-     * 为Doctrine查询对象增加查找语句,优先级为Url地址 > 元数据
+     * 为Doctrine查询对象增加查找语句
      *
      * @param Qwin_Metadata $meta
      * @param Doctrine_Query $query
+     * @param array|null $addition 附加的排序配置
      * @return object 当前对象
-     * @todo 补全第二类情况
      * @todo 完善查询类型
-     * @todo 同addOrderToDoctrineQuery
+     * @todo 复杂查询
      */
-    public function addWhereToQuery(Qwin_Metadata $meta, Doctrine_Query $query)
+    public function addWhereToQuery(Qwin_Metadata $meta, Doctrine_Query $query, array $addition = null)
     {
-        $request = Qwin::run('Qwin_Request');
-        $arrayHepler = Qwin::run('Qwin_Helper_Array');
-        $alias = $query->getRootAlias() . '.';
+        $search = null != $addition ? $addition : $meta['db']['where'];
 
-        // 'eq','ne','lt','le','gt','ge','bw','bn','in','ni','ew','en','cn','nc'
-        $searchTypeArr = array(
+        $alias = $query->getRootAlias();
+        '' != $alias && $alias .= '.';
+
+        // 数据表字段的域
+        $queryField = $meta['field']->getAttrList('isDbQuery');
+        // TODO　是否使用%s替换
+        $searchType = array(
             'eq' => '=',
             'ne' => '<>',
             'lt' => '<',
             'le' => '<=',
             'gt' => '>',
             'ge' => '>=',
-            //'cn' => 'like',
-            //'nc' => 'not like'
+            'bw' => 'LIKE',
+            'bn' => 'NOT LINK',
+            'in' => 'IN',
+			'ni' => 'NOT IN',
+            'ew' => 'LIKE',
+            'en' => 'NOT LIKE',
+            'cn' => 'LIKE',
+            'nc' => 'NOT LIKE',
         );
-
-        $searchField = $request->g('searchField');
-        $searchType = $request->g('searchType');
-        $searchValue = $request->g('searchValue');
-
-        // 数据表字段的域
-        $queryField = $meta->field->getAttrList('isDbQuery');
-
-        if(in_array($searchField, $queryField))
+        
+        foreach($search as $fieldSet)
         {
-            $searchType = $arrayHepler->forceInArray($searchType, array_keys($searchTypeArr));
-            $query->where($alias . $searchField . ' ' . $searchTypeArr[$searchType] . ' ?', $searchValue);
-        } elseif(isset($meta['db']['where']) && !empty($meta['db']['where'])) {
-
+            // 不被允许的域名称
+            if(!in_array($fieldSet[0], $queryField))
+            {
+                continue;
+            }
+            if(!isset($fieldSet[2]))
+            {
+                $fieldSet[2] = key($searchType);
+            } else {
+                $fieldSet[2] = strtolower($fieldSet[2]);
+                !isset($searchType[$fieldSet[2]]) && $fieldSet[2] = key($searchType);
+            }
+            switch($fieldSet[2])
+            {
+                case 'bw':
+                case 'bn':
+                    $value = '%' . $this->_escapeWildcard($fieldSet[1]);
+                    break;
+                case 'ew':
+                case 'en':
+                    $value = $this->_escapeWildcard($fieldSet[1]) . '%';
+                    break;
+                case 'cn':
+                case 'nc':
+                    $value = '%' . $this->_escapeWildcard($fieldSet[1]) . '%';
+                    $value = '%' . $this->_escapeWildcard($fieldSet[1]) . '%';
+                    break;
+                /*case 'in':
+                case 'ni':
+                    $value = is_array($fieldSet[1]) ? $fieldSet[1] : array($fieldSet[1]);
+                    break;
+                /*case 'eq':
+                case 'ne':
+                case 'lt':
+                case 'le':
+                case 'gt':
+                case 'ge':*/
+                default:
+                    $value = $fieldSet[1];
+                    break;
+            }
+            if('in' == $fieldSet[2] || 'ni' == $fieldSet[2])
+            {
+                $valueSign = '(?)';
+            } else {
+                $valueSign = '?';
+            }
+            $query->andWhere($alias . $fieldSet[0] . ' ' . $searchType[$fieldSet[2]] . ' ' . $valueSign, $fieldSet[1]);
         }
         return $this;
     }
 
     /**
-     * 为Doctrine查询对象增加查找语句,优先级为Url地址 > 元数据
+     * 转义LIKE语言中的通配符%和_
+     *
+     * @param string $value
+     * @return string
+     * @todo 其他通配符[]
+     * @todo 其他数据库是否支持
+     */
+    protected function _escapeWildcard($value)
+    {
+        return strtr($value, array('%' => '\%', '_' => '\_'));
+    }
+
+    /**
+     * 为Doctrine查询对象增加偏移语句
      *
      * @param Qwin_Metadata $meta
      * @param Doctrine_Query $query
-     * @param string $rowName Url中,列数的键名
+     * @param int|null $addition 附加的偏移配置
      * @return object 当前对象
-     * @todo 分开为Limit和Offset
      */
-    public function addLimitToQuery(Qwin_Metadata $meta, Doctrine_Query $query, $rowName = 'row', $pageName = 'page')
+    public function addOffsetToQuery(Qwin_Metadata $meta, Doctrine_Query $query, $addition = null)
     {
-        $request = Qwin::run('Qwin_Request');
-        $rowNum = intval($request->g($rowName));
-        if($rowNum <= 0)
+        $offset = 0;
+        if(null != $addition)
         {
-            $rowNum = $meta['db']['limit'];
-        // 最多同时读取500条记录
-        } elseif($rowNum > 500) {
-            $rowNum = 500;
+            $addition = intval($addition);
+            if(0 < $addition)
+            {
+                $offset = $addition;
+            }
         }
-        $query->limit($rowNum);
-
-        // Offset
-        $nowPage = intval($request->g($pageName));
-        $nowPage <= 0 && $nowPage = 1;
-        $offset = ($nowPage - 1) * $rowNum;
         $query->offset($offset);
+        return $this;
+    }
 
+    /**
+     * 为Doctrine查询对象增加限制语句
+     *
+     * @param Qwin_Metadata $meta
+     * @param Doctrine_Query $query
+     * @param int|null $addition 附加的限制配置
+     * @return object 当前对象
+     */
+    public function addLimitToQuery(Qwin_Metadata $meta, Doctrine_Query $query, $addition = null)
+    {
+        $limit = 0;
+        if(null != $addition)
+        {
+            $addition = intval($addition);
+            if(0 < $addition)
+            {
+                $limit = $addition;
+            }
+        }
+        $query->limit($limit);
         return $this;
     }
 

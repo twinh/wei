@@ -92,6 +92,11 @@ class Trex_Controller extends Qwin_Trex_Controller
     public function __construct($option = null)
     {
         /**
+         * 元数据管理助手,负责元数据的获取和转换
+         */
+        $this->_meta = Qwin::run('Qwin_Trex_Metadata');
+        
+        /**
          * 根据配置选择性加载语言,元数据,模型
          * @todo 对$option进行详细检查
          */
@@ -124,7 +129,8 @@ class Trex_Controller extends Qwin_Trex_Controller
          */
         if($option['language'])
         {
-            $languageName = $this->getLanguage();
+            $languageResult = Qwin::run('Trex_Service_Language')->getLanguage($set);
+            $languageName = $languageResult['data'];
             $languageClass = $set['namespace'] . '_' . $set['module'] . '_Language_' . $languageName;
             $this->_lang = Qwin::run($languageClass);
             if(null == $this->_lang)
@@ -185,7 +191,7 @@ class Trex_Controller extends Qwin_Trex_Controller
      *
      * @return boolen
      */
-    private function _isAllowVisited()
+    protected function _isAllowVisited()
     {
         $ses  = Qwin::run('-ses');
         $member = $ses->get('member');

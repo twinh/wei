@@ -120,11 +120,11 @@ class Qwin_Class
     /**
      * 增加初始的类
      * 
-     * @param unknown_type $name
-     * @param unknown_type $class
+     * @param string $name
+     * @param object $class
      * @return unknown_type
      */
-    public static function addClass($name, &$class)
+    public static function addClass($name, $class)
     {
         self::$_instanceClass[$name] = $class;
     }

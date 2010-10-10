@@ -59,4 +59,18 @@ class Trex_Job_Controller_Job extends Trex_ActionController
         }
         return $value;
     }
+
+    public function convertEditRelatedId($value, $name, $data, $copyData)
+    {
+        if(null != $value)
+        {
+            $company = $this->_meta->getDoctrineQuery(array(
+                'namespace' => 'Trex',
+                'module' => 'Company',
+                'controller' => 'Company',
+            ), false)->where('id = ?', $value)->fetchOne();
+            $this->relatedField->set('related_id.form._value2', $company['name']);
+        }
+        return $value;
+    }
 }
