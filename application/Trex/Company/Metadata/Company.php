@@ -88,6 +88,11 @@ class Trex_Company_Metadata_Company extends Trex_Metadata
                         ),
                         'view' => 'list',
                     ),
+                    'validator' => array(
+                        'rule' => array(
+                            'required' => true,
+                        )
+                    ),
                 ),
                 'nature' => array(
                     'form' => array(
@@ -103,6 +108,11 @@ class Trex_Company_Metadata_Company extends Trex_Metadata
                             'company-nature',
                         ),
                         'view' => 'list'
+                    ),
+                    'validator' => array(
+                        'rule' => array(
+                            'required' => true,
+                        )
                     ),
                 ),
                 'size' => array(
@@ -123,9 +133,18 @@ class Trex_Company_Metadata_Company extends Trex_Metadata
                             'company-size',
                         )
                     ),
+                    'validator' => array(
+                        'rule' => array(
+                            'required' => true,
+                        )
+                    ),
                 ),
                 'address' => array(
-
+                    'validator' => array(
+                        'rule' => array(
+                            'required' => true,
+                        )
+                    ),
                 ),
                 'description' => array(
                     'form' => array(

@@ -129,7 +129,9 @@ class Trex_Link_Metadata_Link extends Trex_Metadata
                 'table' => 'link',
                 'order' => array(
                     array('date_created', 'DESC')
-                )
+                ),
+                'where' => array(
+                ),
             ),
             // 页面显示
             'page' => array(
