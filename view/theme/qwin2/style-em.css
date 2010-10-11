@@ -10,7 +10,8 @@ html{
     overflow-y: scroll;
 }
 body{
-    font-size: 62%;
+    font-size: 62.5%;
+    
     margin: 0 auto;
 }
 li{

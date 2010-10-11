@@ -31,6 +31,7 @@ class Trex_Service_Index extends Trex_Service_BasicAction
         'set' => array(),
         'data' => array(),
         'trigger' => array(
+            'list' => array(),
             'beforeViewLoad' => array(),
         ),
         'view' => array(
@@ -53,7 +54,7 @@ class Trex_Service_Index extends Trex_Service_BasicAction
         // 处理数据
         $relatedField = $meta->connectMetadata($this->_meta);
         $relatedField->order();
-        $listField = $meta->getListField($relatedField);
+        $listField = $meta->getListField($relatedField, $meta, $config['data']['list']);
 
         // 自定义链接
         $customLink = $this->executeTrigger('beforeViewLoad', $config);

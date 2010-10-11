@@ -87,6 +87,12 @@ class Trex_Controller extends Qwin_Trex_Controller
     protected $_model;
 
     /**
+     * 元数据助手,负责元数据的获取,转换,检查等
+     * @var Qwin_Trex_Metadata
+     */
+    protected $_metaHepler;
+
+    /**
      * 初始化各类和数据
      */
     public function __construct($option = null)
@@ -179,6 +185,8 @@ class Trex_Controller extends Qwin_Trex_Controller
             }
             Qwin::addMap('-model', $modelName);
         }
+
+        $this->_metaHepler = Qwin::run('Qwin_Trex_Metadata');
 
          /**
          * 访问控制
