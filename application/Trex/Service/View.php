@@ -28,7 +28,7 @@
 class Trex_Service_View extends Trex_Service_BasicAction
 {
     /**
-     * 该服务的基本配置
+     * 服务的基本配置
      * @var array
      */
     protected $_config = array(
@@ -46,8 +46,8 @@ class Trex_Service_View extends Trex_Service_BasicAction
         'trigger' => array(
         ),
         'view' => array(
-            'isLoad' => true,
-            'class' => 'Trex_View_JqGridJson',
+            'class' => 'Trex_View_View',
+            'display' => true,
         ),
     );
 
@@ -87,7 +87,7 @@ class Trex_Service_View extends Trex_Service_BasicAction
                 'result' => false,
                 'message' => $this->_lang->t('MSG_NO_RECORD'),
             );
-            if($config['view']['isLoad'])
+            if($config['view']['display'])
             {
                 $this->setRedirectView($result['message'])
                     ->loadView()
@@ -120,7 +120,7 @@ class Trex_Service_View extends Trex_Service_BasicAction
             'data' => get_defined_vars(),
         );
 
-        if($config['view']['isLoad'])
+        if($config['view']['display'])
         {
             $this->loadView()->display();
         }

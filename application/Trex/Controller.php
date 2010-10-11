@@ -34,13 +34,13 @@ class Trex_Controller extends Qwin_Trex_Controller
      * Qwin_Request对象
      * @var object
      */
-    protected $_request;
+    public $request;
 
     /**
      * Qwin_Url对象
      * @var object
      */
-    protected $_url;
+    public $url;
 
     /**
      * 应用配置数组
@@ -90,103 +90,36 @@ class Trex_Controller extends Qwin_Trex_Controller
      * 元数据助手,负责元数据的获取,转换,检查等
      * @var Qwin_Trex_Metadata
      */
-    protected $_metaHepler;
+    public $metaHelper;
 
     /**
      * 初始化各类和数据
      */
     public function __construct($option = null)
     {
-        /**
-         * 元数据管理助手,负责元数据的获取和转换
-         */
-        $this->_meta = Qwin::run('Qwin_Trex_Metadata');
-        
-        /**
-         * 根据配置选择性加载语言,元数据,模型
-         * @todo 对$option进行详细检查
-         */
-        if(null == $option)
-        {
-            $option = array(
-                'language' => true,
-                'metadata' => true,
-                'model' => true,
-            );
-        } elseif(false == $option) {
-            $option = array(
-                'language' => false,
-                'metadata' => false,
-                'model' => false,
-            );
-        }
-
         $ini = Qwin::run('-ini');
-        $this->_request = Qwin::run('Qwin_Request');
-        $this->_url = Qwin::run('Qwin_Url');
+        $this->request = Qwin::run('Qwin_Request');
+        $this->url = Qwin::run('Qwin_Url');
         $set = $this->_set = $ini->getSet();
         $this->_config = $ini->getConfig();
         $this->_session = Qwin::run('Qwin_Session');
         $this->_member = $this->_session->get('member');
-        
-       
-        /**
-         * 加载语言,同时将该命名空间下的通用模块语言类加入到当前模块的语言类下
-         */
-        if($option['language'])
+
+        // 元数据管理助手,负责元数据的获取和转换
+        $this->metaHelper = Qwin::run('Qwin_Trex_Metadata');
+
+        $languageResult = Qwin::run('Trex_Service_Language')->getLanguage($set);
+        $languageName = $languageResult['data'];
+        $languageClass = $set['namespace'] . '_' . $set['module'] . '_Language_' . $languageName;
+        $this->_lang = Qwin::run($languageClass);
+        if(null == $this->_lang)
         {
-            $languageResult = Qwin::run('Trex_Service_Language')->getLanguage($set);
-            $languageName = $languageResult['data'];
-            $languageClass = $set['namespace'] . '_' . $set['module'] . '_Language_' . $languageName;
+            $languageClass = 'Trex_Language' . $languageName;
             $this->_lang = Qwin::run($languageClass);
-            if(null == $this->_lang)
-            {
-                $languageClass = 'Trex_Language' . $languageName;
-                $this->_lang = Qwin::run($languageClass);
-            }
-            Qwin::addMap('-lang', $languageClass);
         }
+        Qwin::addMap('-lang', $languageClass);
 
-        /**
-         * 加载元数据
-         */
-        if($option['metadata'])
-        {
-            $metadataName = $ini->getClassName('Metadata', $set);
-            if(class_exists($metadataName))
-            {
-                $this->_meta = Qwin_Metadata_Manager::get($metadataName);
-            } else {
-                $metadataName = 'Trex_Metadata';
-                $this->_meta = Qwin::run($metadataName);
-            }
-            Qwin::addMap('-meta', $metadataName);
-        }
-
-        /**
-         * 根据元数据定义的数据库,选择对应的连接类型
-         */
-        if('padb' == $this->_meta['db']['type'])
-        {
-            Doctrine_Manager::getInstance()->setCurrentConnection('padb');
-        }
-
-        /**
-         * 加载模型
-         */
-        if($option['model'])
-        {
-            $modelName = $ini->getClassName('Model', $set);
-            $this->_model = Qwin::run($modelName);
-            if(null == $this->_model)
-            {
-                $modelName = 'Qwin_Trex_Model';
-                $this->_model = Qwin::run($modelName);
-            }
-            Qwin::addMap('-model', $modelName);
-        }
-
-        $this->_metaHepler = Qwin::run('Qwin_Trex_Metadata');
+        $this->_meta = $this->metaHelper->getMetadataBySet($set);
 
          /**
          * 访问控制
@@ -201,7 +134,7 @@ class Trex_Controller extends Qwin_Trex_Controller
      */
     protected function _isAllowVisited()
     {
-        $ses  = Qwin::run('-ses');
+        $ses = Qwin::run('-ses');
         $member = $ses->get('member');
 
         // 未登陆则默认使用游客账号

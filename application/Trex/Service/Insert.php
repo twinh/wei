@@ -1,6 +1,6 @@
 <?php
 /**
- * Update
+ * Insert
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -22,15 +22,11 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-10-11 11:55:35
+ * @since       2010-10-11 22:31:44
  */
 
-class Trex_Service_Update extends Trex_Service_BasicAction
+class Trex_Service_Insert extends Trex_Service_BasicAction
 {
-    /**
-     * 该服务的基本配置
-     * @var array
-     */
     protected $_config = array(
         'set' => array(
             'namespace' => null,
@@ -42,19 +38,16 @@ class Trex_Service_Update extends Trex_Service_BasicAction
             'db' => null,
         ),
         'trigger' => array(
-            'beforeConvert' => array(),
-            'afterDb' => array(),
         ),
         'view' => array(
-            'class' => 'Trex_View_JqGridJson',
+            'class' => null,
             'display' => true,
-            'url' => null,
         ),
     );
 
     public function process(array $config = null)
     {
-         // 初始配置
+        // 初始配置
         $config = $this->_multiArrayMerge($this->_config, $config);
 
         // 通过父类,加载语言,元数据,模型等
@@ -64,41 +57,19 @@ class Trex_Service_Update extends Trex_Service_BasicAction
         $metaHelper = Qwin::run('Qwin_Trex_Metadata');
         $meta = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
-        $primaryKeyValue = isset($config['data']['db'][$primaryKey]) ? $config['data']['db'][$primaryKey] : null;
+        $query = $meta->getDoctrineQuery($this->_set);
+        $relatedField = $meta->connectMetadata($this->_meta);
         Qwin::run('Qwin_Class_Extension')
             ->setNamespace('validator')
             ->addClass('Qwin_Validator_JQuery');
 
-        
-        // 从模型获取数据
-        $query = $meta->getDoctrineQuery($this->_set);
-        $result = $query->where($primaryKey . ' = ?', $primaryKeyValue)->fetchOne();
-
-        // 记录不存在,加载错误视图
-        if(false == $result)
-        {
-            $return = array(
-                'result' => false,
-                'message' => $this->_lang->t('MSG_NO_RECORD'),
-            );
-            if($config['view']['display'])
-            {
-                $this->setRedirectView($result['message'])
-                    ->loadView()
-                    ->display();
-            }
-            return $return;
-        }
-        
         // 设置行为为入库,连接元数据
-        //$this->setAction('db');
         $relatedField = $meta->connectMetadata($meta);
-        $editDbField = $relatedField->getAttrList('isDbField', 'isReadonly');
+        $addDbField = $relatedField->getAttrList('isDbField');
 
         // 转换,验证和还原
-        $data = $meta->convertSingleData($relatedField, $relatedField, 'db', $_POST);
+        $data = $this->_meta->convertSingleData($relatedField, $relatedField, 'db', $_POST);
         $validateResult = $meta->validateArray($relatedField, $data + $_POST, $this);
-        // TODO 转变为一个方法
         if(true !== $validateResult)
         {
             $message = $this->_lang->t('MSG_ERROR_FIELD')
@@ -118,19 +89,20 @@ class Trex_Service_Update extends Trex_Service_BasicAction
             }
             return $return;
         }
-        $data = $meta->restoreData($editDbField, $relatedField, $data);
+        $data = $meta->restoreData($relatedField, $relatedField, $data);
+        $data = $meta->setForeignKeyData($meta['model'], $data);
 
         // 保存关联模型的数据
-        $meta->saveRelatedDbData($meta, $data, $result);
+        $meta->saveRelatedDbData($meta, $data, $query);
 
-        /**
-         * 入库
-         * @todo 设置 null 值
-         */
-        $result->fromArray($data);
-        $result->save();
+        // 入库
+        $ini = Qwin::run('-ini');
+        $modelName = $ini->getClassName('Model', $this->_set);
+        $this->_result = new $modelName;
+        $this->_result->fromArray($data);
+        $this->_result->save();
 
-        // 入库后,执行绑定事件
+        // 在数据库操作之后,执行相应的 on 函数,跳转到原来的页面或列表页
         $config['trigger']['afterDb'][1] = $data;
         $this->executeTrigger('afterDb', $config);
         $url = urldecode($this->_request->p('_page'));

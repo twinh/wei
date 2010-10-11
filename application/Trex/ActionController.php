@@ -79,25 +79,24 @@ class Trex_ActionController extends Trex_Controller
     }
 
     /**
-     * 列表页,显示列表数据,操作链接等
+     * 查看多条记录,以列表的形式展示
      *
      * @return array 服务处理结果
      */
     public function actionList()
     {
-        $request = Qwin::run('Qwin_Request');
         /**
          * @see Trex_Service_List $_config
          */
         $config = array(
             'set' => $this->_set,
             'data' => array(
-                'list' => $this->_metaHepler->getUrlListField(),
-                'order' => $this->_metaHepler->getUrlOrder(),
-                'where' => $this->_metaHepler->getUrlWhere(),
-                'offset'=> $this->_metaHepler->getUrlOffset(),
-                'limit' => $this->_metaHepler->getUrlLimit(),
-                'converAsAction'=> $request->g('_as'),
+                'list' => $this->metaHelper->getUrlListField(),
+                'order' => $this->metaHelper->getUrlOrder(),
+                'where' => $this->metaHelper->getUrlWhere(),
+                'offset'=> $this->metaHelper->getUrlOffset(),
+                'limit' => $this->metaHelper->getUrlLimit(),
+                'converAsAction'=> $this->request->g('_as'),
             ),
             'trigger' => array(
                 'dataConverter' => array(
@@ -109,7 +108,7 @@ class Trex_ActionController extends Trex_Controller
     }
 
     /**
-     * 查看页,显示一条数据
+     * 查看一条记录
      *
      * @return array 服务处理结果
      */
@@ -121,120 +120,55 @@ class Trex_ActionController extends Trex_Controller
         $config = array(
             'set' => $this->_set,
             'data' => array(
-                'primaryKeyValue' => $this->_metaHepler->getUrlPrimaryKeyValue($this->_set),
+                'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_set),
             ),
         );
         return Qwin::run('Trex_Service_View')->process($config);
     }
 
     /**
-     * 根据元数据,生成添加视图和处理添加操作
+     * 添加记录
+     *
+     * @return array 服务处理结果
      */
     public function actionAdd()
     {
-        /**
-         * 初始化常用的变量
-         */
-        $meta = $this->_meta;
-        $primaryKey = $meta['db']['primaryKey'];
-        $id = $this->_request->g($primaryKey);
-        $query = $meta->getDoctrineQuery($this->_set);
-        $relatedField = $meta->connectMetadata($this->_meta);
-        Qwin::run('Qwin_Class_Extension')
-            ->setNamespace('validator')
-            ->addClass('Qwin_Validator_JQuery');
-
         if(empty($_POST))
         {
             /**
-             * 三种模式　
-             * 1.复制,根据主键从模型获取初始值
-             * 2.从url获取值
-             * 3. 获取模型默认值
+             * @see Trex_Service_View $_config
              */
-            if(null != $id)
-            {
-                $this->_result = $result = $query->where($primaryKey . ' = ?', $id)->fetchOne();
-                if(false == $result)
-                {
-                    return $this->setRedirectView($this->_lang->t('MSG_NO_RECORD'));
-                }
-                $data = $result->toArray();
-            } else {
-                /**
-                 * 从配置元数据中取出表单初始值,再从url地址参数取出初始值,覆盖原值
-                 */
-                $data = $meta->field->getSecondLevelValue(array('form', '_value'));
-                $data = $meta->getUrlData($data);
-            }
-            unset($data[$primaryKey]);
-
-            /**
-             * 处理数据
-             */
-            $data = $meta->convertDataToSingle($data);
-            $data = $meta->convertSingleData($relatedField, $relatedField, $this->_set['action'], $data);
-            $relatedField->order();
-            $groupList = $relatedField->getAddGroupList();
-
-            /**
-             * 设置视图
-             */
-            return $this->_view = array(
-                'class' => 'Trex_View_Form',
-                'data' => get_defined_vars(),
+            $config = array(
+                'set' => $this->_set,
+                'data' => array(
+                    'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_set),
+                ),
+                'view' => array(
+                    'class' => 'Trex_View_Form',
+                ),
             );
+            return Qwin::run('Trex_Service_Form')->process($config);
         } else {
             /**
-             * 设置行为为入库,连接元数据
+             * @see Trex_Service_Insert $_config
              */
-            $this->setAction('db');
-            $relatedField = $meta->connectMetadata($meta);
-            $addDbField = $relatedField->getAttrList('isDbField');
-
-            /**
-             * 转换,验证和还原
-             */
-            $data = $this->_meta->convertSingleData($relatedField, $relatedField, 'db', $_POST);
-            $validateResult = $meta->validateArray($relatedField, $data + $_POST, $this);
-            if(true !== $validateResult)
-            {
-                $message = $this->_lang->t('MSG_ERROR_FIELD')
-                    . $this->_lang->t($relatedField[$validateResult->field]['basic']['title'])
-                    . '<br />'
-                    . $this->_lang->t('MSG_ERROR_MSG')
-                    . $meta->format($this->_lang->t($validateResult->message), $validateResult->param);
-                return $this->setRedirectView($message);
-            }
-            $data = $meta->restoreData($relatedField, $relatedField, $data);
-            $data = $meta->setForeignKeyData($meta['model'], $data);
-
-            /**
-             * 保存关联模型的数据
-             */
-            $meta->saveRelatedDbData($meta, $data, $query);
-
-            /**
-             * 入库
-             */
-            $ini = Qwin::run('-ini');
-            $modelName = $ini->getClassName('Model', $this->_set);
-            $this->_result = new $modelName;
-            $this->_result->fromArray($data);
-            $this->_result->save();
-
-            /**
-             * 在数据库操作之后,执行相应的 on 函数,跳转到原来的页面或列表页
-             */
-            $this->executeOnFunction('afterDb', $this->resetAction(), $data);
-            $url = urldecode($this->_request->p('_page'));
-            '' == $url && $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Index'));
-            return $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+            $config = array(
+                'set' => $this->_set,
+                'data' => array(
+                    'db' => $_POST,
+                ),
+                'trigger' => array(
+                    'afterDb' => array($this, 'onAfterDb'),
+                ),
+            );
+            return Qwin::run('Trex_Service_Insert')->process($config);
         }
     }
 
     /**
      * 编辑记录
+     *
+     * @return array 服务处理结果
      */
     public function actionEdit()
     {
@@ -246,7 +180,7 @@ class Trex_ActionController extends Trex_Controller
             $config = array(
                 'set' => $this->_set,
                 'data' => array(
-                    'primaryKeyValue' => $this->_metaHepler->getUrlPrimaryKeyValue($this->_set),
+                    'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_set),
                     'convertAsAction' => 'edit',
                     'isLink' => false,
                 ),
@@ -274,52 +208,31 @@ class Trex_ActionController extends Trex_Controller
 
     /**
      * 删除记录
+     *
+     * @return array 服务处理结果
      */
     public function actionDelete()
     {
-        $ini = Qwin::run('-ini');
-        $this->_request = Qwin::run('Qwin_Request');
-        $meta = $this->_meta;
-
-        $id = $this->_request->g($meta['db']['primaryKey']);
-        $id = explode(',', $id);
-
-        $query = $meta->getDoctrineQuery($this->_set);
-
-        $alias = $query->getRootAlias();
-        '' != $alias && $alias .= '.';
-
-        $object = $query
-            //->select($modelName . '.' . $meta['db']['primaryKey'])
-            ->whereIn($alias . $meta['db']['primaryKey'], $id)
-            ->execute();
-
-        // TODO $object->delete();
-        // TODO 统计删除数
-        // TODO 删除数据关联的模块
-        foreach($object as $key => $value)
-        {
-            foreach($meta['model'] as $model)
-            {
-                // 不删除视图模块的记录
-                if(isset($object[$key][$model['alias']]) && 'db' == $model['type'])
-                {
-                    $object[$key][$model['alias']]->delete();
-                }
-            }
-            $value->delete();
-        }
-
         /**
-         * 在数据库操作之后,执行相应的 on 函数,跳转到原来的页面或列表页
+         * @see Trex_Service_Delete $_config
          */
-        $this->executeOnFunction('afterDb', 'Delete', array());
-        $url = urldecode($this->_request->p('_page'));
-        '' == $url && $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Index'));
-        $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+        $config = array(
+            'set' => $this->_set,
+            'data' => array(
+                'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_set),
+            ),
+            'trigger' => array(
+                'afterDb' => array($this, 'onAfterDb'),
+            ),
+        );
+        return Qwin::run('Trex_Service_Delete')->process($config);
     }
 
-    
+    /**
+     * 创建在列表页显示的自定义链接
+     * @return null
+     * @todo 标准化
+     */
     public function createCustomLink()
     {
         return null;
@@ -365,18 +278,18 @@ class Trex_ActionController extends Trex_Controller
      */
     public function convertListOperation($value, $name, $data, $copyData)
     {
-        $primaryKey = $this->_meta['db']['primaryKey'];
-        $data  = Qwin_Helper_Html::jQueryButton($this->_url->createUrl($this->_set, array('action' => 'Edit', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_EDIT'), 'ui-icon-tag')
-              . Qwin_Helper_Html::jQueryButton($this->_url->createUrl($this->_set, array('action' => 'View', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_VIEW'), 'ui-icon-lightbulb')
-              . Qwin_Helper_Html::jQueryButton($this->_url->createUrl($this->_set, array('action' => 'Add', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_COPY'), 'ui-icon-transferthick-e-w')
-              . Qwin_Helper_Html::jQueryButton('javascript:if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE)){window.location=\'' . $this->_url->createUrl($this->_set, array('action' => 'Delete', $primaryKey => $copyData[$primaryKey])) . '\';}', $this->_lang->t('LBL_ACTION_DELETE'), 'ui-icon-closethick');
+        $primaryKey = $this->metaHelper->getPrimaryKeyName($this->_set);
+        $data  = Qwin_Helper_Html::jQueryButton($this->url->createUrl($this->_set, array('action' => 'Edit', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_EDIT'), 'ui-icon-tag')
+              . Qwin_Helper_Html::jQueryButton($this->url->createUrl($this->_set, array('action' => 'View', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_VIEW'), 'ui-icon-lightbulb')
+              . Qwin_Helper_Html::jQueryButton($this->url->createUrl($this->_set, array('action' => 'Add', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_COPY'), 'ui-icon-transferthick-e-w')
+              . Qwin_Helper_Html::jQueryButton('javascript:if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE)){window.location=\'' . $this->url->createUrl($this->_set, array('action' => 'Delete', $primaryKey => $copyData[$primaryKey])) . '\';}', $this->_lang->t('LBL_ACTION_DELETE'), 'ui-icon-closethick');
         return $data;
     }
 
     /*public function convertPopupOperation($value, $name, $data, $copyData)
     {
         $primaryKey = $this->_meta['db']['primaryKey'];
-        $data  = Qwin_Helper_Html::jQueryButton($this->_url->createUrl($this->_set, array('action' => 'Edit', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_EDIT'), 'ui-icon-check');
+        $data  = Qwin_Helper_Html::jQueryButton($this->url->createUrl($this->_set, array('action' => 'Edit', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_EDIT'), 'ui-icon-check');
         return $data;
     }*/
 

@@ -58,10 +58,7 @@ class Trex_Task_Metadata_Task extends Trex_Metadata
                             array('Project_Helper_CommonClass', 'convert'),
                             'task-status',
                         ),
-                        'view' => array(
-                            array('Project_Helper_CommonClass', 'convert'),
-                            'task-status',
-                        ),
+                        'view' => 'list'
                     ),
                     'attr' => array(
                         //'isLink' => 1,

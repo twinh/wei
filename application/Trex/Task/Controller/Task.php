@@ -53,7 +53,7 @@ class Trex_Task_Controller_Task extends Trex_ActionController
 
     public function actionListMyNewTask()
     {
-        //..
+        // TODO
     }
 
     /**

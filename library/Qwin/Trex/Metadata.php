@@ -437,15 +437,36 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      */
     public function getUrlPrimaryKeyValue(array $set)
     {
-        $ini = Qwin::run('-ini');
         $request = Qwin::run('Qwin_Request');
+        $primaryKey = $this->getPrimaryKeyName($set);
+        return $request->g($primaryKey);
+    }
+
+    public function getPrimaryKeyName(array $set)
+    {
+        $ini = Qwin::run('-ini');
         $metadataName = $ini->getClassName('Metadata', $set);
         if(!class_exists($metadataName))
         {
             return null;
         }
         $meta = Qwin_Metadata_Manager::get($metadataName);
-        return $request->g($meta['db']['primaryKey']);
+        return $meta['db']['primaryKey'];
+    }
+
+    public function getMetadataBySet(array $set)
+    {
+        $ini = Qwin::run('-ini');
+        $metadataName = $ini->getClassName('Metadata', $set);
+        if(class_exists($metadataName))
+        {
+            $meta = Qwin_Metadata_Manager::get($metadataName);
+        } else {
+            $metadataName = 'Trex_Metadata';
+            $meta = Qwin::run($metadataName);
+        }
+        Qwin::addMap('-meta', $metadataName);
+        return $meta;
     }
 
     /**
@@ -1037,41 +1058,6 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             return $this->langData[$code];
         }
         return $code;
-    }
-
-    /**
-     * 根据代码转换出通用分类对应的值
-     *
-     * @param int $code 分类代码值
-     * @param string $name 分类名称
-     * @return string 分类的值
-     */
-    function convertCommonClass($code, $name, $lang = null)
-    {
-        null == $lang && $this->setLang() && $lang = $this->lang;
-        $this->getCommonClassList($name, $lang);
-        if(isset($this->_cache['common_class'][$lang][$name][$code]))
-        {
-            return $this->_cache['common_class'][$lang][$name][$code];
-        }
-        return '-';
-    }
-    
-    /*function getClassList($name)
-    {
-        if(!isset($this->_cache['class'][$name]))
-        {
-            require Qwin::run('ArrayCache')->getClassPath($name);
-            $this->_cache['class'][$name] = &$_CACHE['class'][$name];
-        }
-        return $this->_cache['class'][$name];
-    }*/
-
-    function setCache($name, $data, $type = 'class')
-    {
-        $arr = array('class', 'cc');
-        !in_array($type, $arr) && $type = $arr[0];
-        $this->_cache[$type][$name] = $data;
     }
 
     /**
