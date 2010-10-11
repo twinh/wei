@@ -28,20 +28,25 @@
 class Trex_Service_Index extends Trex_Service_BasicAction
 {
     protected $_config = array(
-        'set' => array(),
+        'set' => array(
+            'namespace' => null,
+            'module' => null,
+            'controller' => null,
+            'action' => null,
+        ),
         'data' => array(),
         'trigger' => array(
-            'list' => array(),
             'beforeViewLoad' => array(),
         ),
         'view' => array(
-            'isLoad' => true,
             'class' => 'Trex_View_JqGrid',
+            'display' => true,
         ),
     );
     
     public function process(array $config = null)
     {
+        // 合并配置
         $config = $this->_multiArrayMerge($this->_config, $config);
 
         // 通过父类,加载语言,元数据,模型等
@@ -64,7 +69,7 @@ class Trex_Service_Index extends Trex_Service_BasicAction
             'class' => $config['view']['class'],
             'data' => get_defined_vars(),
         );
-        if($config['view']['isLoad'])
+        if($config['view']['display'])
         {
             $this->loadView()->display();
         }

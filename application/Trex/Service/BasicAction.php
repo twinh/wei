@@ -28,24 +28,49 @@
 class Trex_Service_BasicAction extends Trex_Service
 {
     /**
+     * Qwin_Url
+     * @var Qwin_Url
+     */
+    public $url;
+
+    /**
+     * Qwin_Session
+     * @var Qwin_Session
+     */
+    public $session;
+
+    /**
+     * Qwin_Request
+     * @var Qwin_Request
+     */
+    public $request;
+
+    /**
+     * 元数据助手,负责元数据的获取,转换,检查等
+     * @var Qwin_Trex_Metadata
+     */
+    public $metaHelper;
+
+    /**
      * 根据应用结构配置,加载语言,元数据,模型等
      *
      * @param array $set 应用结构配置
      * @see Trex_Service_BasicAction $_set
+     * @todo 是否需要对$config进行检查或转换
      */
     protected function process(array $config = null)
     {
-        $ini = Qwin::run('-ini');
-        $this->_request = Qwin::run('Qwin_Request');
-        $this->_url = Qwin::run('Qwin_Url');
-        $set = $this->_set = $ini->getSet();
-        $this->_config = $ini->getConfig();
-        $this->_session = Qwin::run('Qwin_Session');
-        $this->_member = $this->_session->get('member');
-
-        /**
-         * 加载语言
-         */
+        // 初始化常用的变量
+        $this->request      = Qwin::run('Qwin_Request');
+        $this->url          = Qwin::run('Qwin_Url');
+        $this->session      = Qwin::run('Qwin_Session');
+        $this->metaHelper   = Qwin::run('Qwin_Trex_Metadata');
+        $ini                = Qwin::run('-ini');
+        $set                = $this->_set = $config;
+        $this->_config      = $ini->getConfig();
+        $this->_member      = $this->session->get('member');
+        
+        // 加载语言
         $languageResult = Qwin::run('Trex_Service_Language')->getLanguage($set);
         $languageName = $languageResult['data'];
         $languageClass = $set['namespace'] . '_' . $set['module'] . '_Language_' . $languageName;
@@ -57,30 +82,15 @@ class Trex_Service_BasicAction extends Trex_Service
         }
         Qwin::addMap('-lang', $languageClass);
 
-        /**
-         * 加载元数据
-         */
-        $metadataName = $ini->getClassName('Metadata', $set);
-        if(class_exists($metadataName))
-        {
-            $this->_meta = Qwin_Metadata_Manager::get($metadataName);
-        } else {
-            $metadataName = 'Trex_Metadata';
-            $this->_meta = Qwin::run($metadataName);
-        }
-        Qwin::addMap('-meta', $metadataName);
+        $this->_meta = $this->metaHelper->getMetadataBySet($set);
 
-        /**
-         * 根据元数据定义的数据库,选择对应的连接类型
-         */
+        // 根据元数据定义的数据库,选择对应的连接类型
         if('padb' == $this->_meta['db']['type'])
         {
             Doctrine_Manager::getInstance()->setCurrentConnection('padb');
         }
 
-        /**
-         * 加载模型
-         */
+        // 加载模型
         $modelName = $ini->getClassName('Model', $set);
         $this->_model = Qwin::run($modelName);
         if(null == $this->_model)
