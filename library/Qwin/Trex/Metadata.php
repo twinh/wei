@@ -230,34 +230,25 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     /**
      * 获取列表域
      *
-     * @param <type> $field
-     * @param <type> $name
-     * @return <type>
-     * @todo id必选
+     * @param Qwin_Metadata $meta 元数据对象
+     * @param array|null $addition 附加的显示域
+     * @return array
+     * @todo 缩减参数$field, $meta
      */
-    public function getListField($field, $name = '_list')
+    public function getListField(Qwin_Metadata_Element_Field $field, Qwin_Metadata $meta, array $addition = null)
     {
-        $request = Qwin::run('Qwin_Request');
-        $custromList = $request->g($name);
-
         $listField = $field->getAttrList('isList');
-        $result = array();
-        
-        if(null == $custromList)
+        if(!empty($addition))
         {
-            return $listField;
-        } else {
-            $custromList = explode(',', $custromList);
-            foreach($custromList as $value)
+            $listField = array_intersect($listField, $addition);
+            // 附加主键
+            $primaryKey = $meta['db']['primaryKey'];
+            if(!in_array($primaryKey, $listField))
             {
-                in_array($value, $listField) && $result[$value] = $value;
+                $listField[] = $primaryKey;
             }
         }
-
-        if(!empty($result))
-        {
-            return $result;
-        }
+        
         return $listField;
     }
 
@@ -418,6 +409,43 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         $offset = ($page - 1) * $limit;
 
         return $offset;
+    }
+
+    /**
+     * 获取Url中的显示域的配置
+     *
+     * @param string $listName 键名
+     * @param string $delimiter 分隔符
+     * @return array
+     */
+    public function getUrlListField($listName = 'listName', $delimiter = ',')
+    {
+        $request = Qwin::run('Qwin_Request');
+        $list = $request->g($listName);
+        if(null != $list)
+        {
+            $list = explode($delimiter, $list);
+        }
+        return $list;
+    }
+
+    /**
+     * 获取Url中元数据主键的值
+     *
+     * @param array $set 应用结构配置
+     * @return null|string 值
+     */
+    public function getUrlPrimaryKeyValue(array $set)
+    {
+        $ini = Qwin::run('-ini');
+        $request = Qwin::run('Qwin_Request');
+        $metadataName = $ini->getClassName('Metadata', $set);
+        if(!class_exists($metadataName))
+        {
+            return null;
+        }
+        $meta = Qwin_Metadata_Manager::get($metadataName);
+        return $request->g($meta['db']['primaryKey']);
     }
 
     /**
@@ -750,27 +778,6 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             }
         }
         return $data;
-    }
-
-    public function translate(Qwin_Trex_Language $lang)
-    {
-        foreach($this->_data as $data)
-        {
-            $data->translate($lang);
-        }
-        return $this;
-    }
-
-    public function setLang($lang = null)
-    {
-        if(null == $lang)
-        {
-            if(empty($this->lang))
-            {
-                $this->lang = Qwin::run('-ini')->getConfig('interface.language');
-            }
-        }
-        return true;
     }
 
     /**

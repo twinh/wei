@@ -1,6 +1,6 @@
 <?php
 /**
- * List
+ * View
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -22,10 +22,10 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-10-09 21:20:47
+ * @since       2010-10-11 10:35:49
  */
 
-class Trex_Service_List extends Trex_Service_BasicAction
+class Trex_Service_View extends Trex_Service_BasicAction
 {
     /**
      * 该服务的基本配置
@@ -38,29 +38,29 @@ class Trex_Service_List extends Trex_Service_BasicAction
             'controller' => null,
             'action' => null,
         ),
-        // TODO 是否需要选择性加载类
-        'loadOption' => array(
-            'language' => true,
-            'metadata' => true,
-            'model' => true,
-        ),
         'data' => array(
-            'list' => array(),
-            'order' => array(),
-            'where' => array(),
-            'offset' => null,
-            'limit' => null,
-            'filter' => array(),
-            'convertAsAction' => 'list',
+            'primaryKeyValue' => null,
+            'convertAsAction' => 'view',
             'isLink' => true
         ),
         'trigger' => array(
-            'dataConverter' => array(),
         ),
         'view' => array(
             'isLoad' => true,
             'class' => 'Trex_View_JqGridJson',
         ),
+    );
+
+    /**
+     * 处理结果的配置
+     * @var array
+     */
+    protected $_result = array(
+        'result' => true,
+        'message' => null,
+        'step' => null,
+        'view' => null,
+        'data' => null,
     );
 
     public function process(array $config = null)
@@ -73,39 +73,48 @@ class Trex_Service_List extends Trex_Service_BasicAction
 
         // 初始化常用的变量
         $metaHelper = Qwin::run('Qwin_Trex_Metadata');
-        $meta       = $this->_meta;
+        $meta = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
 
         // 从模型获取数据
         $query = $meta->getDoctrineQuery($this->_set);
-        $metaHelper
-            ->addSelectToQuery($meta, $query)
-            ->addOrderToQuery($meta, $query, $config['data']['order'])
-            ->addWhereToQuery($meta, $query, $config['data']['where'])
-            ->addOffsetToQuery($meta, $query, $config['data']['offset'])
-            ->addLimitToQuery($meta, $query, $config['data']['limit']);
-        $data = $query->execute()->toArray();
-        $count = count($data);
-        $totalRecord = $query->count();
+        $result = $query->where($primaryKey . ' = ?', $config['data']['primaryKeyValue'])->fetchOne();
 
-        /**
-         * 处理数据
-         */
+        // 记录不存在,加载错误视图
+        if(false == $result)
+        {
+            $result = array(
+                'result' => false,
+                'message' => $this->_lang->t('MSG_NO_RECORD'),
+            );
+            if($config['view']['isLoad'])
+            {
+                $this->setRedirectView($result['message'])
+                    ->loadView()
+                    ->display();
+            }
+            return $result;
+        }
+
+        // 处理数据
         $relatedField = $meta->connectMetadata($this->_meta);
         $relatedField->order();
-        $data = $meta->convertDataToSingle($data);
 
-        $config['trigger']['dataConverter'][1] = $data;
-        $tempData = $this->executeTrigger('dataConverter', $config);
-        null != $tempData && $data = $tempData;
-
-        $listField = $meta->getListField($relatedField, $meta, $config['data']['list']);
+        // 根据行为,获取对应的分组列表
+        $methodName = 'get' . $config['data']['convertAsAction'] . 'GroupList';
+        if(method_exists($relatedField, $methodName))
+        {
+            $groupList = call_user_func(array($relatedField, $methodName));
+        } else {
+            $groupList = $relatedField->getGroupList();
+        }
         
-        $data = $this->_meta->convertMultiData($listField, $relatedField, $config['data']['convertAsAction'], $data, $config['data']['isLink'], $meta['model']);
 
-        /**
-         * 设置视图
-         */
+        $data = $result->toArray();
+        $data = $meta->convertDataToSingle($data);
+        $data = $meta->convertSingleData($relatedField, $relatedField, $config['data']['convertAsAction'], $data, $config['data']['isLink'], $meta['model']);
+
+        // 设置视图
         $this->_view = array(
             'class' => $config['view']['class'],
             'data' => get_defined_vars(),
@@ -115,7 +124,6 @@ class Trex_Service_List extends Trex_Service_BasicAction
         {
             $this->loadView()->display();
         }
-
         return array(
             'result' => true,
             'view' => $this->_view,

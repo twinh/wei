@@ -36,8 +36,6 @@ class Trex_Link_Metadata_Link extends Trex_Metadata
                 'category_id' => array(
                     'form' => array(
                         '_type' => 'select',
-                        '_value' => '',
-                        'name' => 'category_id',
                         '_resourceGetter' => array(
                             array('Project_Hepler_Category', 'getTreeResource'),
                             array(
@@ -53,20 +51,15 @@ class Trex_Link_Metadata_Link extends Trex_Metadata
                     ),
                 ),
                 'name' => array(
-                    'form' => array(
-                        'name' => 'name',
-                    ),
                 ),
                 'url' => array(
                     'form' => array(
                         '_value' => 'http://',
-                        'name' => 'url',
                     ),
                 ),
                 'target' => array(
                     'form' => array(
                         '_value' => '_self',
-                        'name' => 'target',
                     ),
                 ),
                 'img_url' => array(
@@ -75,21 +68,16 @@ class Trex_Link_Metadata_Link extends Trex_Metadata
                         '_widget' => array(
                             'fileTree', 'ajaxUpload',
                         ),
-                        'name' => 'img_url',
                     ),
                     'attr' => array(
                         'isList' => 0,
                     ),
                 ),
                 'order' => array(
-                    'form' => array(
-                        'name' => 'order',
-                    ),
                 ),
                 'description' => array(
                     'form' => array(
                         '_type' => 'textarea',
-                        'name' => 'description',
                     ),
                     'attr' => array(
                         'isList' => 0,
@@ -98,7 +86,6 @@ class Trex_Link_Metadata_Link extends Trex_Metadata
                 'date_created' => array(
                     'form' => array(
                         '_type' => 'custom',
-                        'name' => 'date_created',
                     ),
                     'attr' => array(
                         'isReadonly' => 1,
@@ -107,7 +94,6 @@ class Trex_Link_Metadata_Link extends Trex_Metadata
                 'date_modified' => array(
                     'form' => array(
                         '_type' => 'custom',
-                        'name' => 'date_modified',
                     ),
                 ),
             ),

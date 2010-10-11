@@ -43,6 +43,7 @@ class Trex_ActionController extends Trex_Controller
         $config = array(
             'set' => $this->_set,
             'data' => array(
+                'list' => $this->_meta->getUrlListField(),
             ),
             'trigger' => array(
                 'beforeViewLoad' => array(
@@ -84,64 +85,46 @@ class Trex_ActionController extends Trex_Controller
      */
     public function actionList()
     {
+        $request = Qwin::run('Qwin_Request');
         /**
          * @see Trex_Service_List $_config
          */
         $config = array(
             'set' => $this->_set,
             'data' => array(
-                'order' => $this->_meta->getUrlOrder(),
-                'where' => $this->_meta->getUrlWhere(),
-                'offset' => $this->_meta->getUrlOffset(),
-                'limit' => $this->_meta->getUrlLimit(),
+                'list' => $this->_metaHepler->getUrlListField(),
+                'order' => $this->_metaHepler->getUrlOrder(),
+                'where' => $this->_metaHepler->getUrlWhere(),
+                'offset'=> $this->_metaHepler->getUrlOffset(),
+                'limit' => $this->_metaHepler->getUrlLimit(),
+                'converAsAction'=> $request->g('_as'),
+            ),
+            'trigger' => array(
+                'dataConverter' => array(
+                    array($this, 'dataConverter'),
+                ),
             ),
         );
         return Qwin::run('Trex_Service_List')->process($config);
     }
 
     /**
-     * 显示单独一条数据
+     * 查看页,显示一条数据
+     *
+     * @return array 服务处理结果
      */
     public function actionView()
     {
         /**
-         * 初始化常用的变量
+         * @see Trex_Service_View $_config
          */
-        $meta = $this->_meta;
-        $primaryKey = $meta['db']['primaryKey'];
-        $id = $this->_request->g($primaryKey);
-
-        /**
-         * 从模型获取数据
-         */
-        $query = $meta->getDoctrineQuery($this->_set);
-        $result = $query->where($primaryKey . ' = ?', $id)->fetchOne();
-        
-        /**
-         * 记录不存在,加载错误视图
-         */
-        if(false == $result)
-        {
-            return $this->setRedirectView($this->_lang->t('MSG_NO_RECORD'));
-        }
-
-        /**
-         * 处理数据
-         */
-        $relatedField = $meta->connectMetadata($this->_meta);
-        $relatedField->order();
-        $groupList = $relatedField->getViewGroupList();
-        $data = $result->toArray();
-        $data = $meta->convertDataToSingle($data);
-        $data = $meta->convertSingleData($relatedField, $relatedField, $this->_set['action'], $data, true, $meta['model']);
-
-        /**
-         * 设置视图
-         */
-        $this->_view = array(
-            'class' => 'Trex_View_View',
-            'data' => get_defined_vars(),
+        $config = array(
+            'set' => $this->_set,
+            'data' => array(
+                'primaryKeyValue' => $this->_metaHepler->getUrlPrimaryKeyValue($this->_set),
+            ),
         );
+        return Qwin::run('Trex_Service_View')->process($config);
     }
 
     /**
@@ -255,101 +238,37 @@ class Trex_ActionController extends Trex_Controller
      */
     public function actionEdit()
     {
-        /**
-         * 初始化常用的变量
-         */
-        $meta = $this->_meta;
-        $primaryKey = $meta['db']['primaryKey'];
-        $id = $this->_request->g($primaryKey);
-        $this->_query = $query = $meta->getDoctrineQuery($this->_set);
-        Qwin::run('Qwin_Class_Extension')
-            ->setNamespace('validator')
-            ->addClass('Qwin_Validator_JQuery');
-        
-        if(null == $this->_request->p($meta['db']['primaryKey']))
+        if(empty($_POST))
         {
             /**
-             * 从模型获取数据,如果记录不存在,加载错误视图
+             * @see Trex_Service_View $_config
              */
-            $result = $query->where($primaryKey . ' = ?', $id)->fetchOne();
-            if(false == $result)
-            {
-                return $this->setRedirectView($this->_lang->t('MSG_NO_RECORD'));
-            }
-
-            /**
-             * 处理数据
-             */
-            $relatedField = $meta->connectMetadata($this->_meta);
-            $relatedField->order();
-            // TODO
-            $this->relatedField = $relatedField;
-            $groupList = $relatedField->getEditGroupList();
-            $data = $result->toArray();
-            $data = $meta->convertDataToSingle($data);
-            $data = $meta->convertSingleData($relatedField, $relatedField, $this->_set['action'], $data);
-
-            /**
-             * 设置视图
-             */
-            $this->_view = array(
-                'class' => 'Trex_View_Form',
-                'data' => get_defined_vars(),
+            $config = array(
+                'set' => $this->_set,
+                'data' => array(
+                    'primaryKeyValue' => $this->_metaHepler->getUrlPrimaryKeyValue($this->_set),
+                    'convertAsAction' => 'edit',
+                    'isLink' => false,
+                ),
+                'view' => array(
+                    'class' => 'Trex_View_Form',
+                ),
             );
+            return Qwin::run('Trex_Service_View')->process($config);
         } else {
             /**
-             * 检查记录是否存在
+             * @see Trex_Service_Update $_config
              */
-            $id = $this->_request->p($meta['db']['primaryKey']);
-            $this->_result = $result = $query->where($meta['db']['primaryKey'] . ' = ?', $id)->fetchOne();
-            if(false == $result)
-            {
-                return $this->setRedirectView($this->_lang->t('MSG_NO_RECORD'));
-            }
-
-            /**
-             * 设置行为为入库,连接元数据
-             */
-            $this->setAction('db');
-            $relatedField = $meta->connectMetadata($meta);
-            $editDbField = $relatedField->getAttrList('isDbField', 'isReadonly');
-
-            /**
-             * 转换,验证和还原
-             */
-            $data = $meta->convertSingleData($relatedField, $relatedField, 'db', $_POST);
-            $validateResult = $meta->validateArray($relatedField, $data + $_POST, $this);
-            // TODO 转变为一个方法
-            if(true !== $validateResult)
-            {
-                $message = $this->_lang->t('MSG_ERROR_FIELD')
-                    . $this->_lang->t($relatedField[$validateResult->field]['basic']['title'])
-                    . '<br />'
-                    . $this->_lang->t('MSG_ERROR_MSG')
-                    . $meta->format($this->_lang->t($validateResult->message), $validateResult->param);
-                return $this->setRedirectView($message);
-            }
-            $data = $meta->restoreData($editDbField, $relatedField, $data);
-
-            /**
-             * 保存关联模型的数据
-             */
-            $meta->saveRelatedDbData($meta, $data, $result);
-
-            /**
-             * 入库
-             * @todo 设置 null 值
-             */
-            $result->fromArray($data);
-            $result->save();
-
-            /**
-             * 在数据库操作之后,执行相应的 on 函数,跳转到原来的页面或列表页
-             */
-            $this->executeOnFunction('afterDb', $this->resetAction(), $data);
-            $url = urldecode($this->_request->p('_page'));
-            '' == $url && $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Index'));
-            return $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+            $config = array(
+                'set' => $this->_set,
+                'data' => array(
+                    'db' => $_POST,
+                ),
+                'trigger' => array(
+                    'afterDb' => array($this, 'onAfterDb'),
+                ),
+            );
+            return Qwin::run('Trex_Service_Update')->process($config);
         }
     }
 
