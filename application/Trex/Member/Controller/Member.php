@@ -46,7 +46,7 @@ class Trex_Member_Controller_Member extends Trex_ActionController
      */
     public function actionEditPassword()
     {
-        if('guest' == $this->_request->g('id') || 'guest' == $this->_request->p('id'))
+        if('guest' == $this->request->g('id') || 'guest' == $this->request->p('id'))
         {
             return $this->setRedirectView($this->_lang->t('MSG_GUEST_NOT_ALLOW_EDIT_PASSWORD'));
         }
@@ -59,7 +59,7 @@ class Trex_Member_Controller_Member extends Trex_ActionController
      */
     public function actionDelete()
     {
-        $id = $this->_request->g('id');
+        $id = $this->request->g('id');
         $idList = explode(',', $id);
 
         /**
@@ -107,7 +107,7 @@ class Trex_Member_Controller_Member extends Trex_ActionController
     public function convertListOperation($value, $name, $data, $copyData)
     {
         $primaryKey = $this->_meta['db']['primaryKey'];
-        $html = Qwin_Helper_Html::jQueryButton($this->_url->createUrl($this->_set, array('action' => 'EditPassword', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_EDIT_PASSWORD'), 'ui-icon-key');
+        $html = Qwin_Helper_Html::jQueryButton($this->url->createUrl($this->_set, array('action' => 'EditPassword', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_EDIT_PASSWORD'), 'ui-icon-key');
         $html .= parent::convertListOperation($value, $name, $data, $copyData);
         return $html;
     }

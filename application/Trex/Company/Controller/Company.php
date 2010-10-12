@@ -30,7 +30,7 @@ class Trex_Company_Controller_Company extends Trex_ActionController
     public function actionMyCompany()
     {
         $_GET['searchField'] = 'member_id';
-        $_GET['searchValue'] = $this->_member['id'];
+        $_GET['searchValue'] = $this->member['id'];
         $this->_meta['page']['title'] = 'LBL_MODULE_MY_COMPANY';
         parent::actionIndex();
     }
@@ -38,7 +38,7 @@ class Trex_Company_Controller_Company extends Trex_ActionController
     public function createCustomLink()
     {
         $html = parent::createCustomLink();
-        $html = Qwin_Helper_Html::jQueryLink($this->_url->createUrl($this->_set, array('action' => 'MyCompany')), $this->_lang->t('LBL_MODULE_MY_COMPANY'), 'ui-icon-script');
+        $html = Qwin_Helper_Html::jQueryLink($this->url->createUrl($this->_set, array('action' => 'MyCompany')), $this->_lang->t('LBL_MODULE_MY_COMPANY'), 'ui-icon-script');
         return $html;
     }
 

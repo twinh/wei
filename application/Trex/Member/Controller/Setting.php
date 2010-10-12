@@ -53,7 +53,7 @@ class Trex_Member_Controller_Setting extends Trex_Controller
     {
         if(empty($_POST))
         {
-            $urlLanguage = $this->_request->g('language');
+            $urlLanguage = $this->request->g('language');
             $theme = Qwin::run('-ini')->getConfig('interface.theme');
             
             /**
@@ -103,7 +103,7 @@ class Trex_Member_Controller_Setting extends Trex_Controller
                 ))
                 ->execute()
                 ->toArray();
-            $urlTheme = $this->_request->g('style');
+            $urlTheme = $this->request->g('style');
             $theme2 = Qwin::run('-ini')->getConfig('interface.theme');
 
             /**

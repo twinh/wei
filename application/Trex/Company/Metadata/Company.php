@@ -47,7 +47,7 @@ class Trex_Company_Metadata_Company extends Trex_Metadata
                                     'module' => 'Member',
                                     'controller' => 'Member',
                                     'action' => 'Popup',
-                                    '_list' => 'id,group_id,username,email',
+                                    'listName' => 'id,group_id,username,email',
                                 ),
                                 array(
                                     'username',

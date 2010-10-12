@@ -35,30 +35,22 @@ class Trex_CommonClass_Metadata_CommonClass extends Trex_Metadata
                 // 基本属性
                 'field' => array(
                     'language' => array(
-                        'form' => array(
-                            'name' => 'language',
-                        ),
                     ),
                     'sign' => array(
-                        'form' => array(
-                            'name' => 'sign',
-                        ),
                     ),
                     'code' => array(
                         'form' => array(
                             '_type' => 'textarea',
-                            'name' => 'code',
                         ),
                     ),
                 ),
                 'model' => array(),
                 'db' => array(
                     'table' => 'common_class',
-                    'primaryKey' => 'id',
                     'order' => array(
                         array('date_created', 'DESC'),
                     ),
-                    'limit' => 20,
+                    'limit' => 10,
                 ),
                 // 页面显示
                 'page' => array(

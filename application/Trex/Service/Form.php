@@ -64,7 +64,7 @@ class Trex_Service_Form extends Trex_Service_BasicAction
         $primaryKey = $meta['db']['primaryKey'];
         $primaryKeyValue = $config['data']['primaryKeyValue'];
         
-        $id = $this->_request->g($primaryKey);
+        $id = $this->request->g($primaryKey);
         $query = $meta->getDoctrineQuery($this->_set);
         $relatedField = $meta->connectMetadata($this->_meta);
 
@@ -87,9 +87,7 @@ class Trex_Service_Form extends Trex_Service_BasicAction
                 );
                 if($config['view']['display'])
                 {
-                    $this->setRedirectView($return['message'])
-                        ->loadView()
-                        ->display();
+                    $this->setRedirectView($return['message']);
                 }
                 return $return;
             }

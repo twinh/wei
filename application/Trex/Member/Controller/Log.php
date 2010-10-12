@@ -36,11 +36,11 @@ class Trex_Member_Controller_Log extends Trex_Controller
         /**
          * 提示已经登陆的信息
          */
-        $member = $this->_session->get('member');
-        if('guest' != $member['username'])
+        $member = $this->session->get('member');
+        /*if('guest' != $member['username'])
         {
             return $this->setRedirectView($this->_lang->t('MSG_LOGINED'));
-        }
+        }*/
 
         if(empty($_POST))
         {
@@ -52,86 +52,26 @@ class Trex_Member_Controller_Log extends Trex_Controller
                 'data' => get_defined_vars(),
             );
         } else {
-            // 加载验证类
-            Qwin::run('Qwin_Class_Extension')
-                ->setNamespace('validator')
-                ->addClass('Qwin_Validator_JQuery');
-            // 验证
-            $validateResult = $meta->validateArray($meta['field'], $_POST, $this);
-            if(true !== $validateResult)
-            {
-                $message = $this->_lang->t('MSG_ERROR_FIELD')
-                    . $this->_lang->t($meta['field'][$validateResult->field]['basic']['title'])
-                    . '\r\n'
-                    . $this->_lang->t('MSG_ERROR_MSG')
-                    . $meta->format($this->_lang->t($validateResult->message), $validateResult->param);
-                $js->show($message);
-            }
-
-            /**
-             * 验证通过,设置登陆数据到session
-             */
-            $member = $this->_member;
-            $this->_session->set('member',  $member);
-            $this->_session->set('style', $member['theme']);
-            $this->_session->set('language', $member['language']);
-
-            /**
-             * 增加登陆记录
-             */
-            $logQuery = $meta->getDoctrineQuery(array(
-                'namespace' => 'Trex',
-                'module' => 'Member',
-                'controller' => 'LoginLog',
+            return Qwin::run('Trex_Member_Service_Login')->process(array(
+                'set' => $this->_set,
+                'data' => array(
+                    'db' => $_POST,
+                ),
+                'this' => $this,
             ));
-            $logQuery = new Trex_Member_Model_LoginLog();
-            $logQuery['id'] = Qwin::run('Qwin_converter_String')->getUuid();
-            $logQuery['member_id'] = $member['id'];
-            $logQuery['ip'] = Qwin_Helper_Util::getIp();
-            $logQuery['date_created'] = date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
-            $logQuery->save();
-
-            /**
-             * 跳转到上一页或默认首页
-             */
-            $url = urldecode($this->_request->p('_page'));
-            '' == $url && $url = '?';
-            $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }
 
     public function actionLogout()
     {
-        $js = Qwin::run('Qwin_Helper_Js');
-
-        /**
-         * 提示未登陆的信息
-         */
-        if(null === $this->_session->get('member'))
-        {
-            $url = Qwin::run('Qwin_Url')->createUrl(array(
-                'module' => 'Member',
-                'controller' => 'Log',
-                'action' => 'Login'
-            ));
-            $js->show($this->_lang->t('MSG_NOT_LOGIN'), $url);
-        }
-
-        /**
-         * 清除登陆状态
-         */
-        $this->_session->set('member', null);
-
-        /**
-         * 跳转回上一页或默认首页
-         */
-        !isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] = '?';
-        return $this->setView('alert', $this->_lang->t('MSG_LOGOUTED'), $_SERVER['HTTP_REFERER']);
+        return Qwin::run('Trex_Member_Service_Logout')->process(array(
+            'set' => $this->_set,
+        ));
     }
 
     public function validateCaptcha($value, $name, $data)
     {
-        if($value == $this->_session->get('captcha'))
+        if($value == $this->session->get('captcha'))
         {
             return true;
         }
@@ -152,10 +92,11 @@ class Trex_Member_Controller_Log extends Trex_Controller
             ->fetchOne();
         if(false != $result)
         {
-            $this->_member = $result->toArray();
+            $this->member = $result->toArray();
+            unset($this->member['password']);
             return true;
         }
-        $this->_session->set('member', null);
+        $this->session->set('member', null);
         return new Qwin_Validator_Result(false, 'password', 'MSG_ERROR_USERNAME_PASSWORD');
     }
 }

@@ -96,6 +96,7 @@ class Trex_Member_Language_Zhcn extends Trex_Language_Zhcn
             'LBL_ACTION_ALLOCATE_PERMISSION' => '分配权限',
             'LBL_ACTION_EDIT_PASSWORD' => '修改密码',
             'MSG_LOGOUTED' => '您已登出.',
+            'LBL_LOGIN' => '登录',
         );
     }
 }

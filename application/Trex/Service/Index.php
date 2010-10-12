@@ -27,6 +27,10 @@
 
 class Trex_Service_Index extends Trex_Service_BasicAction
 {
+    /**
+     * 服务的基本配置
+     * @var array
+     */
     protected $_config = array(
         'set' => array(
             'namespace' => null,

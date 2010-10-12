@@ -42,7 +42,7 @@ class Trex_Member_Controller_Group extends Trex_ActionController
          */
         $meta = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
-        $id = $this->_request->g($primaryKey);
+        $id = $this->request->g($primaryKey);
 
         /**
          * 从模型获取数据
@@ -71,7 +71,7 @@ class Trex_Member_Controller_Group extends Trex_ActionController
                 'data' => get_defined_vars(),
             );
         } else {
-            $permission = (array)$this->_request->p('permission');
+            $permission = (array)$this->request->p('permission');
             /**
              * 剔除子项
              */
@@ -111,7 +111,7 @@ class Trex_Member_Controller_Group extends Trex_ActionController
     public function convertListOperation($value, $name, $data, $copyData)
     {
         $primaryKey = $this->_meta['db']['primaryKey'];
-        $html = Qwin_Helper_Html::jQueryButton($this->_url->createUrl($this->_set, array('action' => 'AllocatePermission', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_ALLOCATE_PERMISSION'), 'ui-icon-person');
+        $html = Qwin_Helper_Html::jQueryButton($this->url->createUrl($this->_set, array('action' => 'AllocatePermission', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_ALLOCATE_PERMISSION'), 'ui-icon-person');
         $html .= parent::convertListOperation($value, $name, $data, $copyData);
         return $html;
     }

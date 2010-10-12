@@ -28,7 +28,7 @@
 class Trex_Service_List extends Trex_Service_BasicAction
 {
     /**
-     * 该服务的基本配置
+     * 服务的基本配置
      * @var array
      */
     protected $_config = array(

@@ -28,7 +28,7 @@
 class Trex_Service_Update extends Trex_Service_BasicAction
 {
     /**
-     * 该服务的基本配置
+     * 服务的基本配置
      * @var array
      */
     protected $_config = array(
@@ -54,7 +54,7 @@ class Trex_Service_Update extends Trex_Service_BasicAction
 
     public function process(array $config = null)
     {
-         // 初始配置
+        // 初始配置
         $config = $this->_multiArrayMerge($this->_config, $config);
 
         // 通过父类,加载语言,元数据,模型等
@@ -83,15 +83,12 @@ class Trex_Service_Update extends Trex_Service_BasicAction
             );
             if($config['view']['display'])
             {
-                $this->setRedirectView($result['message'])
-                    ->loadView()
-                    ->display();
+                $this->setRedirectView($result['message']);
             }
             return $return;
         }
         
         // 设置行为为入库,连接元数据
-        //$this->setAction('db');
         $relatedField = $meta->connectMetadata($meta);
         $editDbField = $relatedField->getAttrList('isDbField', 'isReadonly');
 
@@ -112,9 +109,7 @@ class Trex_Service_Update extends Trex_Service_BasicAction
             );
             if($config['view']['display'])
             {
-                $this->setRedirectView($message)
-                    ->loadView()
-                    ->display();
+                $this->setRedirectView($message);
             }
             return $return;
         }
@@ -133,7 +128,7 @@ class Trex_Service_Update extends Trex_Service_BasicAction
         // 入库后,执行绑定事件
         $config['trigger']['afterDb'][1] = $data;
         $this->executeTrigger('afterDb', $config);
-        $url = urldecode($this->_request->p('_page'));
+        $url = urldecode($this->request->p('_page'));
         '' == $url && $url = $this->url->createUrl($this->_set, array('action' => 'Index'));
 
         $return = array(
@@ -143,9 +138,7 @@ class Trex_Service_Update extends Trex_Service_BasicAction
         );
         if($config['view']['display'])
         {
-            $this->setRedirectView($return['message'], $url)
-                ->loadView()
-                ->display();
+            $this->setRedirectView($return['message'], $url);
         }
         return $return;
     }

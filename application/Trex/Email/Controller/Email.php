@@ -52,10 +52,10 @@ class Trex_Email_Controller_Email extends Trex_ActionController
     public function createCustomLink()
     {
         return parent::createCustomLink()
-               . Qwin_Helper_Html::jQueryLink($this->_url->createUrl($this->_set, array('action' => 'Post')), $this->_lang->t('LBL_ACTION_POST'), 'ui-icon-script');
+               . Qwin_Helper_Html::jQueryLink($this->url->createUrl($this->_set, array('action' => 'Post')), $this->_lang->t('LBL_ACTION_POST'), 'ui-icon-script');
     }
 
-    public function onAfterDb($action, $data)
+    public function onAfterDb($data)
     {
         if('Post' == $this->getLastAction())
         {

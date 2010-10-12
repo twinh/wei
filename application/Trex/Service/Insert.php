@@ -27,6 +27,10 @@
 
 class Trex_Service_Insert extends Trex_Service_BasicAction
 {
+    /**
+     * 服务的基本配置
+     * @var array
+     */
     protected $_config = array(
         'set' => array(
             'namespace' => null,
@@ -83,9 +87,7 @@ class Trex_Service_Insert extends Trex_Service_BasicAction
             );
             if($config['view']['display'])
             {
-                $this->setRedirectView($message)
-                    ->loadView()
-                    ->display();
+                $this->setRedirectView($message);
             }
             return $return;
         }
@@ -105,7 +107,7 @@ class Trex_Service_Insert extends Trex_Service_BasicAction
         // 在数据库操作之后,执行相应的 on 函数,跳转到原来的页面或列表页
         $config['trigger']['afterDb'][1] = $data;
         $this->executeTrigger('afterDb', $config);
-        $url = urldecode($this->_request->p('_page'));
+        $url = urldecode($this->request->p('_page'));
         '' == $url && $url = $this->url->createUrl($this->_set, array('action' => 'Index'));
 
         $return = array(
@@ -115,9 +117,7 @@ class Trex_Service_Insert extends Trex_Service_BasicAction
         );
         if($config['view']['display'])
         {
-            $this->setRedirectView($return['message'], $url)
-                ->loadView()
-                ->display();
+            $this->setRedirectView($return['message'], $url);
         }
         return $return;
     }

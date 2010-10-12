@@ -4,23 +4,24 @@
 /* Grid for qwin 2010-01-30
 ----------------------------------*/
 .ui-jqgrid-title a{
-	font-size:1.2em;
+	font-size: 14px;
 }
 #ui-jqgrid-table{
-	font-size:1.2em;
+	font-size: 12px;
 }
 #ui-jqgrid-table td{
 	height:2.4em;
 }
 .ui-jqgrid .ui-jqgrid-htable th{
 	height:2.4em;
-	font-size:1.2em;
+	font-size: 12px;
 }
 .ui-jqgrid{
 	padding:2px;
 }
 .ui-jqgrid .ui-jqgrid-titlebar{
-	padding:.5em .3em .3em 1em;/*border:1px solid;/* ie */
+    padding: 4px 3px 4px 10px;
+	/*border:1px solid;/* ie */
 }
 #t_ui-jqgrid-table{
     padding: .4em 0 .9em;
@@ -38,5 +39,6 @@
 	height:19px;
 }
 .ui-jqgrid tr.jqgrow td a.ui-jqgrid-icon span{
-	display:block; margin:1px
+	display:block;
+    margin:1px
 }
