@@ -84,11 +84,16 @@ class Trex_Service
         return null;
     }
 
-    public function setRedirectView($message, $method = null)
+    public function setRedirectView($message, $method = null, $dispaly = true)
     {
         $this->_view['class'] = 'Trex_View_Redirect';
         $this->_view['data']['message'] = $message;
         $this->_view['data']['method'] = $method;
-        return $this;
+
+        if(true != $dispaly)
+        {
+            return $this;
+        }
+        return $this->loadView()->display();
     }
 }

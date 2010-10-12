@@ -89,9 +89,7 @@ class Trex_Service_View extends Trex_Service_BasicAction
             );
             if($config['view']['display'])
             {
-                $this->setRedirectView($result['message'])
-                    ->loadView()
-                    ->display();
+                $this->setRedirectView($result['message']);
             }
             return $result;
         }

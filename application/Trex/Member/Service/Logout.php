@@ -1,6 +1,6 @@
 <?php
 /**
- * Delete
+ * Logout
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,16 +16,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Trex
- * @subpackage  Service
+ * @package     Qwin
+ * @subpackage  
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-10-11 23:31:25
+ * @since       2010-10-12 14:04:48
  */
 
-class Trex_Service_Delete extends Trex_Service_BasicAction
+class Trex_Member_Service_Logout extends Trex_Service_BasicAction
 {
     /**
      * 服务的基本配置
@@ -39,13 +39,9 @@ class Trex_Service_Delete extends Trex_Service_BasicAction
             'action' => null,
         ),
         'data' => array(
-            'primaryKeyValue' => null,
-        ),
-        'trigger' => array(
-            'afterDb' => null,
+            'checkLogin' => true,
         ),
         'view' => array(
-            'class' => null,
             'display' => true,
         ),
     );
@@ -60,50 +56,44 @@ class Trex_Service_Delete extends Trex_Service_BasicAction
 
         // 初始化常用的变量
         $metaHelper = Qwin::run('Qwin_Trex_Metadata');
-        $meta = $this->_meta;
-        $primaryKey = explode(',', $config['data']['primaryKeyValue']);
+        $member     = $this->session->get('member');
 
-        $query = $meta->getDoctrineQuery($this->_set);
-
-        $alias = $query->getRootAlias();
-        '' != $alias && $alias .= '.';
-
-        $object = $query
-            //->select($modelName . '.' . $meta['db']['primaryKey'])
-            ->whereIn($alias . $meta['db']['primaryKey'], $primaryKey)
-            ->execute();
-
-        // TODO $object->delete();
-        // TODO 统计删除数
-        // TODO 删除数据关联的模块
-        foreach($object as $key => $value)
+        // 检查是否登陆
+        if($config['data']['checkLogin'])
         {
-            foreach($meta['model'] as $model)
+            if(null === $member)
             {
-                // 不删除视图模块的记录
-                if(isset($object[$key][$model['alias']]) && 'db' == $model['type'])
+                $url = $this->url->createUrl(array(
+                    'module' => 'Member',
+                    'controller' => 'Log',
+                    'action' => 'Login'
+                ));
+                $return = array(
+                    'result' => false,
+                    'message' => $this->_lang->t('MSG_NOT_LOGIN'),
+                    'method' => '',
+                );
+                if($config['view']['display'])
                 {
-                    $object[$key][$model['alias']]->delete();
+                    $this->setRedirectView($return['message']);
                 }
+                return $return;
             }
-            $value->delete();
         }
 
-        // 在数据库操作之后,执行相应的 on 函数,跳转到原来的页面或列表页
-        $config['trigger']['afterDb'][1] = $object;
-        $this->executeTrigger('afterDb', $config);
-        
-        $url = urldecode($this->request->p('_page'));
-        '' == $url && $url = $this->url->createUrl($this->_set, array('action' => 'Index'));
+        // 清除登陆状态
+        $this->session->set('member', null);
 
+        // 跳转回上一页或默认首页
+        $url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '?';
         $return = array(
             'result' => true,
-            'message' => $this->_lang->t('MSG_OPERATE_SUCCESSFULLY'),
+            'message' => $this->_lang->t('MSG_LOGOUTED'),
             'url' => $url,
-        );
+        );     
         if($config['view']['display'])
         {
-            $this->setRedirectView($return['message'], $url);
+            $this->setRedirectView($return['message'], $return['url']);
         }
         return $return;
     }

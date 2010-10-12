@@ -30,7 +30,7 @@ class Trex_CommonClass_Controller_CommonClass extends Trex_ActionController
     /**
      * on 函数
      */
-    public function onAfterDb($action, $data)
+    public function onAfterDb($data)
     {
         Qwin::run('Project_Helper_CommonClass')->write($data);
     }
@@ -49,7 +49,7 @@ class Trex_CommonClass_Controller_CommonClass extends Trex_ActionController
     public function convertListOperation($value, $name, $data, $copyData)
     {
         $primaryKey = $this->_meta['db']['primaryKey'];
-        $url = $this->_url->createUrl($this->_set, array('action' => 'Add', '_data[sign]' => $data['sign']));
+        $url = $this->url->createUrl($this->_set, array('action' => 'Add', '_data[sign]' => $data['sign']));
         $html = Qwin_Helper_Html::jQueryButton($url, $this->_lang->t('LBL_ACTION_ADD_NEXT'), 'ui-icon-plusthick')
               . parent::convertListOperation($value, $name, $data, $copyData);
         return $html;

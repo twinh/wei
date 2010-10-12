@@ -33,7 +33,7 @@ class Trex_Category_Controller_Category extends Trex_ActionController
         $newData = array();
         $tree = Qwin::run('Qwin_Tree');
         $tree->setDataType('ARRAY');
-        $tree->setParentDefaultValue($this->_request->g('parentValue'));
+        $tree->setParentDefaultValue($this->request->g('parentValue'));
         foreach($data as $row)
         {
             $tree->addNode($row);
@@ -71,7 +71,7 @@ class Trex_Category_Controller_Category extends Trex_ActionController
     public function convertListOperation($value, $name, $data, $copyData)
     {
         $primaryKey = $this->_meta['db']['primaryKey'];
-        $url = $this->_url->createUrl($this->_set, array('action' => 'Add', '_data[parent_id]' => $data[$primaryKey]));
+        $url = $this->url->createUrl($this->_set, array('action' => 'Add', '_data[parent_id]' => $data[$primaryKey]));
         $html = Qwin_Helper_Html::jQueryButton($url, $this->_lang->t('LBL_ACTION_ADD_SUBCATEGORY'), 'ui-icon-plusthick')
               . parent::convertListOperation($value, $name, $data, $copyData);
         return $html;

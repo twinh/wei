@@ -35,7 +35,7 @@ class Trex_Task_Controller_Task extends Trex_ActionController
     public function actionListAssignToMe()
     {
         $_GET['searchField'] = 'assign_to';
-        $_GET['searchValue'] = $this->_member['id'];
+        $_GET['searchValue'] = $this->member['id'];
         $this->_meta['page']['title'] = 'LBL_MODULE_TASK_ASSIGN_TO_ME';
         parent::actionIndex();
     }
@@ -46,7 +46,7 @@ class Trex_Task_Controller_Task extends Trex_ActionController
     public function actionListAssignByMe()
     {
         $_GET['searchField'] = 'assign_by';
-        $_GET['searchValue'] = $this->_member['id'];
+        $_GET['searchValue'] = $this->member['id'];
         $this->_meta['page']['title'] = 'LBL_MODULE_TASK_ASSIGN_BY_ME';
         parent::actionIndex();
     }
@@ -87,8 +87,8 @@ class Trex_Task_Controller_Task extends Trex_ActionController
         $primaryKey = $this->_meta['db']['primaryKey'];
 
         // TODO
-        $_POST[$primaryKey] = $this->_request->g($primaryKey);
-        $_POST['modified_by'] = $this->_member['id'];
+        $_POST[$primaryKey] = $this->request->g($primaryKey);
+        $_POST['modified_by'] = $this->member['id'];
 
         // 删除无关键名
         $exceptKey = array($primaryKey, 'status', 'assign_to', 'date_modified', 'modified_by');
@@ -107,8 +107,8 @@ class Trex_Task_Controller_Task extends Trex_ActionController
         $primaryKey = $this->_meta['db']['primaryKey'];
 
         // TODO
-        $_POST[$primaryKey] = $this->_request->g($primaryKey);
-        $_POST['modified_by'] = $this->_member['id'];
+        $_POST[$primaryKey] = $this->request->g($primaryKey);
+        $_POST['modified_by'] = $this->member['id'];
 
         // 删除无关键名
         $exceptKey = array($primaryKey, 'status', 'assign_by', 'date_modified', 'modified_by');
@@ -127,8 +127,8 @@ class Trex_Task_Controller_Task extends Trex_ActionController
         $primaryKey = $this->_meta['db']['primaryKey'];
 
         // TODO
-        $_POST[$primaryKey] = $this->_request->g($primaryKey);
-        $_POST['modified_by'] = $this->_member['id'];
+        $_POST[$primaryKey] = $this->request->g($primaryKey);
+        $_POST['modified_by'] = $this->member['id'];
 
         // 删除无关键名
         $exceptKey = array($primaryKey, 'status', 'date_modified', 'modified_by', 'created_by');
@@ -155,8 +155,8 @@ class Trex_Task_Controller_Task extends Trex_ActionController
     public function createCustomLink()
     {
         $html = parent::createCustomLink();
-        $html = Qwin_Helper_Html::jQueryLink($this->_url->createUrl($this->_set, array('action' => 'ListAssignToMe')), $this->_lang->t('LBL_MODULE_TASK_ASSIGN_TO_ME'), 'ui-icon-script')
-              . Qwin_Helper_Html::jQueryLink($this->_url->createUrl($this->_set, array('action' => 'ListAssignByMe')), $this->_lang->t('LBL_MODULE_TASK_ASSIGN_BY_ME'), 'ui-icon-script');
+        $html = Qwin_Helper_Html::jQueryLink($this->url->createUrl($this->_set, array('action' => 'ListAssignToMe')), $this->_lang->t('LBL_MODULE_TASK_ASSIGN_TO_ME'), 'ui-icon-script')
+              . Qwin_Helper_Html::jQueryLink($this->url->createUrl($this->_set, array('action' => 'ListAssignByMe')), $this->_lang->t('LBL_MODULE_TASK_ASSIGN_BY_ME'), 'ui-icon-script');
         return $html;
     }
 
@@ -185,7 +185,7 @@ class Trex_Task_Controller_Task extends Trex_ActionController
      */
     public function convertDbAssignBy($value, $name, $data, $copyData)
     {
-        return $this->_member['id'];
+        return $this->member['id'];
     }
 
     public function convertDbStatus($value, $name, $data, $copyData)
@@ -221,7 +221,7 @@ class Trex_Task_Controller_Task extends Trex_ActionController
                     exit;
                 }
                 // 不属于当前用户的任务,无法解决
-                if($this->_result['assign_to'] != $this->_member['id'])
+                if($this->_result['assign_to'] != $this->member['id'])
                 {
                     $this
                         ->setRedirectView($this->_lang->t('MSG_NOT_ASSIGN_TO_YOU'))
@@ -242,7 +242,7 @@ class Trex_Task_Controller_Task extends Trex_ActionController
                         ->display();
                     exit;
                 }
-                if($this->_result['assign_by'] != $this->_member['id'])
+                if($this->_result['assign_by'] != $this->member['id'])
                 {
                     $this
                         ->setRedirectView($this->_lang->t('MSG_NOT_ASSIGN_BY_YOU'))
@@ -263,7 +263,7 @@ class Trex_Task_Controller_Task extends Trex_ActionController
                         ->display();
                     exit;
                 }
-                if($this->_result['created_by'] != $this->_member['id'])
+                if($this->_result['created_by'] != $this->member['id'])
                 {
                     $this
                         ->setRedirectView($this->_lang->t('MSG_NOT_CREATED_BY_YOU'))
@@ -296,30 +296,30 @@ class Trex_Task_Controller_Task extends Trex_ActionController
         {
             case 3:
                 // 你是被分配的人
-                if($copyData['assign_to'] == $this->_member['id'])
+                if($copyData['assign_to'] == $this->member['id'])
                 {
                     $value = Qwin::run('Project_Helper_CommonClass')->convert($value, 'task-status')
                            . ' '
-                           . Qwin_Helper_Html::jQueryLink($this->_url->createUrl($this->_set, array('action' => 'Resolve', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_RESOLVED'), 'ui-icon-check', 'ui-view-button');
+                           . Qwin_Helper_Html::jQueryLink($this->url->createUrl($this->_set, array('action' => 'Resolve', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_RESOLVED'), 'ui-icon-check', 'ui-view-button');
                 }
                 break;
 
             case 5:
                 // 你是分配该任务的人
-                if($copyData['assign_by'] == $this->_member['id'])
+                if($copyData['assign_by'] == $this->member['id'])
                 {
                     $value = Qwin::run('Project_Helper_CommonClass')->convert($value, 'task-status')
                            . ' '
-                           . Qwin_Helper_Html::jQueryLink($this->_url->createUrl($this->_set, array('action' => 'Check', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_CHECKED'), 'ui-icon-check', 'ui-view-button');
+                           . Qwin_Helper_Html::jQueryLink($this->url->createUrl($this->_set, array('action' => 'Check', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_CHECKED'), 'ui-icon-check', 'ui-view-button');
                 }
                 break;
 
             case 7:
-                if($copyData['created_by'] == $this->_member['id'])
+                if($copyData['created_by'] == $this->member['id'])
                 {
                     $value = Qwin::run('Project_Helper_CommonClass')->convert($value, 'task-status')
                            . ' '
-                           . Qwin_Helper_Html::jQueryLink($this->_url->createUrl($this->_set, array('action' => 'Close', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_CLOSED'), 'ui-icon-check', 'ui-view-button');
+                           . Qwin_Helper_Html::jQueryLink($this->url->createUrl($this->_set, array('action' => 'Close', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_CLOSED'), 'ui-icon-check', 'ui-view-button');
                 }
                 break;
         }
@@ -332,13 +332,13 @@ class Trex_Task_Controller_Task extends Trex_ActionController
         $html = '';
         if(1 == $copyData['status'])
         {
-            $html  = Qwin_Helper_Html::jQueryButton($this->_url->createUrl($this->_set, array('action' => 'AssignTo', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_ASSIGN_TO'), 'ui-icon-person');
+            $html  = Qwin_Helper_Html::jQueryButton($this->url->createUrl($this->_set, array('action' => 'AssignTo', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_ASSIGN_TO'), 'ui-icon-person');
         }
         $html .= parent::convertListOperation($value, $name, $data, $copyData);
         return $html;
     }
 
-    public function onAfterDb($action, $data)
+    public function onAfterDb($data)
     {
         
         /*if('AssignTo' == $this->getLastAction() && null != $post && 1 == $post[0])
@@ -437,7 +437,7 @@ class Trex_Task_Controller_Task extends Trex_ActionController
             date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']),
             $data['from_name'] . '&lt;' . $data['from'] . '&gt;',
             $data['to_name'] . '&lt;' . $data['to'] . '&gt;',
-            'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['SCRIPT_NAME'] . $this->_url->createUrl($this->_set, array('action' => 'View', 'id' => $data['foreign_id'])),
+            'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['SCRIPT_NAME'] . $this->url->createUrl($this->_set, array('action' => 'View', 'id' => $data['foreign_id'])),
         );
         $content = str_replace($search, $replace, $content);
 
@@ -502,7 +502,7 @@ class Trex_Task_Controller_Task extends Trex_ActionController
 
     public function isSaveEmailData($data, $query)
     {
-        $post = $this->_request->p('is_post_email');
+        $post = $this->request->p('is_post_email');
         if('AssignTo' == $this->getLastAction() && null != $post && 1 == $post[0])
         {
             return true;

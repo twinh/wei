@@ -27,7 +27,7 @@
 
 class Trex_AdminMenu_Controller_Menu extends Trex_ActionController
 {
-    public function onAfterDb($action, $data)
+    public function onAfterDb($data)
     {
         $query = $this->_meta->getDoctrineQuery($this->_set);
         $query->orderBy('order ASC');

@@ -29,8 +29,8 @@ class Trex_Management_Controller_Language extends Trex_Controller
 {
     public function actionIndex()
     {
-        $class1 = $this->_request->g('class1');
-        $class2 = $this->_request->g('class2');
+        $class1 = $this->request->g('class1');
+        $class2 = $this->request->g('class2');
 
         $object1 = Qwin::run($class1);
         if(!is_subclass_of($object1, 'Trex_Language'))

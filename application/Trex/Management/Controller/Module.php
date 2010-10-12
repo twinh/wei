@@ -73,7 +73,7 @@ class Trex_Management_Controller_Module extends Trex_Controller
 
         // 检查命名空间是否存在
         $this->_namespaceList = $this->_app->getNamespace($this->_path);
-        $this->_namespace = $this->_request->r('namespace_value');
+        $this->_namespace = $this->request->r('namespace_value');
         if(!in_array($this->_namespace, $this->_namespaceList))
         {
             $this->_isNamespaceExists = false;
@@ -141,7 +141,7 @@ class Trex_Management_Controller_Module extends Trex_Controller
                 'data' => get_defined_vars(),
             );
         } else {
-            $module = $this->_request->p('module');
+            $module = $this->request->p('module');
             
             if(false === $this->_isNamespaceExists)
             {

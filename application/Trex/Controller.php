@@ -59,13 +59,13 @@ class Trex_Controller extends Qwin_Trex_Controller
      * 会话对象
      * @var object
      */
-    protected $_session;
+    protected $session;
 
     /**
      * 用户数据数组
      * @var array
      */
-    protected $_member;
+    public $member;
 
     /**
      * Qwin_Trex_Language语言子对象
@@ -102,8 +102,8 @@ class Trex_Controller extends Qwin_Trex_Controller
         $this->url = Qwin::run('Qwin_Url');
         $set = $this->_set = $ini->getSet();
         $this->_config = $ini->getConfig();
-        $this->_session = Qwin::run('Qwin_Session');
-        $this->_member = $this->_session->get('member');
+        $this->session = Qwin::run('Qwin_Session');
+        $this->member = $this->session->get('member');
 
         // 元数据管理助手,负责元数据的获取和转换
         $this->metaHelper = Qwin::run('Qwin_Trex_Metadata');
@@ -134,7 +134,7 @@ class Trex_Controller extends Qwin_Trex_Controller
      */
     protected function _isAllowVisited()
     {
-        $ses = Qwin::run('-ses');
+        $ses = $this->session;
         $member = $ses->get('member');
 
         // 未登陆则默认使用游客账号
@@ -156,11 +156,11 @@ class Trex_Controller extends Qwin_Trex_Controller
             $ses->set('style', $member['theme']);
             $ses->set('language', $member['language']);
         }
-        
+
         // 逐层权限判断
         $set = $this->_set;
         $permission = unserialize($member['group']['permission']);
-        if(isset($permission[$set['namespace']]))
+        /*if(isset($permission[$set['namespace']]))
         {
             return true;
         }
@@ -191,7 +191,7 @@ class Trex_Controller extends Qwin_Trex_Controller
                 ->loadView()
                 ->display();
             exit;
-        }
+        }*/
         return false;
     }
 

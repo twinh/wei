@@ -43,7 +43,7 @@ class Trex_ActionController extends Trex_Controller
         $config = array(
             'set' => $this->_set,
             'data' => array(
-                'list' => $this->_meta->getUrlListField(),
+                'list' => $this->metaHelper->getUrlListField(),
             ),
             'trigger' => array(
                 'beforeViewLoad' => array(
@@ -57,25 +57,18 @@ class Trex_ActionController extends Trex_Controller
     public function actionPopup()
     {
         /**
-         * 初始化常用的变量
+         * @see Trex_Service_Index $_config
          */
-        $meta = $this->_meta;
-        $primaryKey = $meta['db']['primaryKey'];
-
-        /**
-         * 处理数据
-         */
-        $relatedField = $meta->connectMetadata($this->_meta);
-        $relatedField->order();
-        $listField = $meta->getListField($relatedField);
-
-        /**
-         * 设置视图
-         */
-        $this->_view = array(
-            'class' => 'Trex_View_Popup',
-            'data' => get_defined_vars(),
+        $config = array(
+            'set' => $this->_set,
+            'data' => array(
+                'list' => $this->metaHelper->getUrlListField(),
+            ),
+            'view' => array(
+                'class' => 'Trex_View_Popup',
+            ),
         );
+        return Qwin::run('Trex_Service_Index')->process($config);
     }
 
     /**
@@ -158,7 +151,9 @@ class Trex_ActionController extends Trex_Controller
                     'db' => $_POST,
                 ),
                 'trigger' => array(
-                    'afterDb' => array($this, 'onAfterDb'),
+                    'afterDb' => array(
+                        array($this, 'onAfterDb'),
+                    ),
                 ),
             );
             return Qwin::run('Trex_Service_Insert')->process($config);
@@ -199,7 +194,9 @@ class Trex_ActionController extends Trex_Controller
                     'db' => $_POST,
                 ),
                 'trigger' => array(
-                    'afterDb' => array($this, 'onAfterDb'),
+                    'afterDb' => array(
+                        array($this, 'onAfterDb'),
+                    ),
                 ),
             );
             return Qwin::run('Trex_Service_Update')->process($config);
@@ -222,7 +219,9 @@ class Trex_ActionController extends Trex_Controller
                 'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_set),
             ),
             'trigger' => array(
-                'afterDb' => array($this, 'onAfterDb'),
+                'afterDb' => array(
+                    array($this, 'onAfterDb'),
+                ),
             ),
         );
         return Qwin::run('Trex_Service_Delete')->process($config);
@@ -304,7 +303,7 @@ class Trex_ActionController extends Trex_Controller
      */
     public function convertAddOrder($value, $name, $data, $copyData)
     {
-        $query = $this->_meta->getDoctrineQuery($this->_set);
+        $query = $this->metaHelper->getDoctrineQuery($this->_set);
         $result = $query
             ->select($this->_meta['db']['primaryKey'] . ', order')
             ->orderBy('order DESC')
@@ -389,12 +388,12 @@ class Trex_ActionController extends Trex_Controller
 
     public function convertDbCreatedBy($value, $name, $data, $copyData)
     {
-        return $this->_member['id'];
+        return $this->member['id'];
     }
 
     public function convertDbModifiedBy($value, $name, $data, $copyData)
     {
-        return $this->_member['id'];
+        return $this->member['id'];
     }
 
     public function convertDbContactId($value, $name, $data, $copyData)
@@ -404,12 +403,12 @@ class Trex_ActionController extends Trex_Controller
 
     public function convertDbContactCreatedBy($value, $name, $data, $copyData)
     {
-        return $this->_member['id'];
+        return $this->member['id'];
     }
 
     public function convertDbContactModifiedBy($value, $name, $data, $copyData)
     {
-        return $this->_member['id'];
+        return $this->member['id'];
     }
 
     public function convertDbContactDateCreated()

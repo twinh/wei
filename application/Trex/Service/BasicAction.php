@@ -68,7 +68,7 @@ class Trex_Service_BasicAction extends Trex_Service
         $ini                = Qwin::run('-ini');
         $set                = $this->_set = $config;
         $this->_config      = $ini->getConfig();
-        $this->_member      = $this->session->get('member');
+        $this->member      = $this->session->get('member');
         
         // 加载语言
         $languageResult = Qwin::run('Trex_Service_Language')->getLanguage($set);
@@ -115,5 +115,27 @@ class Trex_Service_BasicAction extends Trex_Service
         isset($this->_view['element']) && $view->setElementList($this->_view['element']);
         isset($this->_view['layout']) && $view->setLayout($this->_view['layout']);
         return $view;
+    }
+
+    /**
+     * 显示验证错误的信息,当验证结果不为true时调用该方法
+     *
+     * @param Qwin_Validator_Result $result 验证结果
+     * @param Qwin_Metadata $meta 元数据
+     * @param boolen $dispaly 是否显示错误视图
+     * @return string 错误信息
+     */
+    public function showValidateError(Qwin_Validator_Result $result, Qwin_Metadata $meta, $dispaly = true)
+    {
+        $message = $this->_lang->t('MSG_ERROR_FIELD')
+                . $this->_lang->t($meta['field'][$result->field]['basic']['title'])
+                . '<br />'
+                . $this->_lang->t('MSG_ERROR_MSG')
+                . $meta->format($this->_lang->t($result->message), $result->param);
+        if($dispaly)
+        {
+            $this->setRedirectView($message);
+        }
+        return $message;
     }
 }

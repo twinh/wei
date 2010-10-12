@@ -144,8 +144,8 @@ class Trex_Management_Controller_Namespace extends Trex_Controller
      */
     public function convertListOperation($value, $name, $data, $copyData)
     {
-        return Qwin_Helper_Html::jQueryButton($this->_url->createUrl($this->_set, array('controller' => 'Module', 'action' => 'Index', 'namespace_value' => $copyData['namespace'])), $this->_lang->t('LBL_ACTION_VIEW_MODULE'), 'ui-icon-lightbulb')
-            . Qwin_Helper_Html::jQueryButton($this->_url->createUrl($this->_set, array('controller' => 'Module', 'action' => 'Add', 'namespace_value' => $copyData['namespace'])), $this->_lang->t('LBL_ACTION_ADD_MODULE'), 'ui-icon-plus')
-            . Qwin_Helper_Html::jQueryButton('javascript:if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE)){window.location=\'' . $this->_url->createUrl($this->_set, array('action' => 'Delete', 'namespace_value' => $copyData['namespace'])) . '\';}', $this->_lang->t('LBL_ACTION_DELETE'), 'ui-icon-closethick');
+        return Qwin_Helper_Html::jQueryButton($this->url->createUrl($this->_set, array('controller' => 'Module', 'action' => 'Index', 'namespace_value' => $copyData['namespace'])), $this->_lang->t('LBL_ACTION_VIEW_MODULE'), 'ui-icon-lightbulb')
+            . Qwin_Helper_Html::jQueryButton($this->url->createUrl($this->_set, array('controller' => 'Module', 'action' => 'Add', 'namespace_value' => $copyData['namespace'])), $this->_lang->t('LBL_ACTION_ADD_MODULE'), 'ui-icon-plus')
+            . Qwin_Helper_Html::jQueryButton('javascript:if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE)){window.location=\'' . $this->url->createUrl($this->_set, array('action' => 'Delete', 'namespace_value' => $copyData['namespace'])) . '\';}', $this->_lang->t('LBL_ACTION_DELETE'), 'ui-icon-closethick');
     }
 }

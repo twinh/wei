@@ -27,12 +27,6 @@
 
 class Trex_Clip_Controller_Clip extends Trex_ActionController
 {
-    public function actionEdit()
-    {
-        
-        parent::actionEdit();
-    }
-
     public function onAfterDb()
     {
         $query = $this->_meta->getDoctrineQuery($this->_set);
