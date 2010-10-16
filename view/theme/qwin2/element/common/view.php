@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Trex
- * @subpackage  Common
+ * @subpackage  View
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -45,25 +45,36 @@
             echo qw_jquery_link('javascript:history.go(-1);', qw_lang('LBL_ACTION_RETURN'), 'ui-icon-arrowthickstop-1-w');
             ?>
         </div>
-        <?php foreach($groupList as $group => $fieldList): ?>
-        <fieldset id="ui-fieldset-<?php echo $group ?>" class="ui-widget-content ui-corner-all">
-          <legend><?php echo qw_lang($group) ?></legend>
-          <table class="ui-form-table" id="ui-form-table-<?php echo $group ?>" width="100%">
-            <tr>
-              <td width="12.5%"></td>
-              <td width="37.5%"></td>
-              <td width="12.5%"></td>
-              <td width="37.5%"></td>
-            </tr>
-            <?php foreach($fieldList as $fieldName => $field): ?>
-            <tr>
-              <td class="ui-label-common"><label for="title"><?php echo qw_lang($field) ?>:</label></td>
-              <td class="ui-field-text" colspan="3"><?php echo qw_null_text($data[$fieldName]) ?></td>
-            </tr>
-            <?php endforeach; ?>    
-          </table>
+        <?php foreach($layout as $groupKey => $fieldList): ?>
+        <fieldset id="ui-fieldset-<?php echo $groupKey ?>" class="ui-widget-content ui-corner-all">
+            <legend><?php echo qw_lang($group[$groupKey]) ?></legend>
+            <table class="ui-form-table" id="ui-form-table-<?php echo $groupKey ?>" width="100%">
+                <tr>
+                  <td width="12.5%"></td>
+                  <td width="37.5%"></td>
+                  <td width="12.5%"></td>
+                  <td width="37.5%"></td>
+                </tr>
+                <?php
+                // TODO
+                foreach($fieldList as $field):
+                    if(!is_array($field)):
+                        $tempData = $data;
+                        $tempMeta = $meta;
+                    else:
+                        $tempData = $data[$field[0]];
+                        $tempMeta = $meta['metadata'][$field[0]];
+                        $field = $field[1];
+                    endif;
+                ?>
+                <tr>
+                  <td class="ui-label-common"><label><?php echo qw_lang($tempMeta['field'][$field]['basic']['title']) ?>:</label></td>
+                  <td class="ui-field-text" colspan="3"><?php echo qw_null_text($tempData[$field]) ?></td>
+                </tr>
+                <?php endforeach ?>
+            </table>
         </fieldset>
-        <?php endforeach; ?>
+        <?php endforeach ?>
         <div class="ui-operation-field">
             <?php
             echo qw_jquery_link(qw_url($set, array('action' => 'Index')), qw_lang('LBL_ACTION_LIST'), 'ui-icon-note'),

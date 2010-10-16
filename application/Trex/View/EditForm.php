@@ -1,6 +1,6 @@
 <?php
 /**
- * View
+ * EditForm
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,21 +16,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Trex
- * @subpackage  View
+ * @package     Qwin
+ * @subpackage  
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-17 18:24:58
+ * @since       2010-10-14 17:38:02
  */
 
-class Trex_View_View extends Trex_View
+class Trex_View_EditForm extends Trex_View
 {
     public function __construct()
     {
         parent::__construct();
-        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/common/view.php');
+        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/common/form.php');
     }
 
     public function display()
@@ -38,13 +38,14 @@ class Trex_View_View extends Trex_View
         // 初始化变量,方便调用
         $primaryKey = $this->primaryKey;
         $meta = $this->meta;
+        $metaHelper = $this->metaHelper;
         $arrayHelper = Qwin::run('-arr');
         $data = $this->data;
         $set = Qwin::run('-ini')->getSet();
-        $layout = $this->metaHelper->getViewLayout($meta);
+        $layout = $metaHelper->getEditLayout($meta);
         $group = $meta['group'];
+        $jQueryValidateCode = $arrayHelper->jsonEncode($metaHelper->getJQueryValidateCode($meta));
 
         require_once $this->_layout;
     }
 }
-

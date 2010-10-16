@@ -131,7 +131,7 @@ class Trex_Service_BasicAction extends Trex_Service
                 . $this->_lang->t($meta['field'][$result->field]['basic']['title'])
                 . '<br />'
                 . $this->_lang->t('MSG_ERROR_MSG')
-                . $meta->format($this->_lang->t($result->message), $result->param);
+                . $this->metaHelper->format($this->_lang->t($result->message), $result->param);
         if($dispaly)
         {
             $this->setRedirectView($message);

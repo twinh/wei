@@ -1,6 +1,6 @@
 <?php
 /**
- * View
+ * Group
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,35 +16,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Trex
- * @subpackage  View
+ * @package     Qwin
+ * @subpackage  Group
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-17 18:24:58
+ * @since       2010-10-14 11:54:56
  */
 
-class Trex_View_View extends Trex_View
+class Qwin_Metadata_Element_Group extends Qwin_Metadata_Element_Abstract
 {
-    public function __construct()
+    public function getSampleData()
     {
-        parent::__construct();
-        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/common/view.php');
-    }
-
-    public function display()
-    {
-        // 初始化变量,方便调用
-        $primaryKey = $this->primaryKey;
-        $meta = $this->meta;
-        $arrayHelper = Qwin::run('-arr');
-        $data = $this->data;
-        $set = Qwin::run('-ini')->getSet();
-        $layout = $this->metaHelper->getViewLayout($meta);
-        $group = $meta['group'];
-
-        require_once $this->_layout;
+        return array(
+            0 => 'LBL_GROUP_BASIC_DATA',
+        );
     }
 }
 

@@ -40,15 +40,17 @@ class Trex_Service_View extends Trex_Service_BasicAction
         ),
         'data' => array(
             'primaryKeyValue' => null,
-            'convertAsAction' => 'view',
-            'isLink' => true
+            'asAction' => 'view',
+            'isLink' => true,
+            'isView' => true,
         ),
-        'trigger' => array(
+        'callback' => array(
         ),
         'view' => array(
             'class' => 'Trex_View_View',
             'display' => true,
         ),
+        'this' => null,
     );
 
     /**
@@ -72,12 +74,13 @@ class Trex_Service_View extends Trex_Service_BasicAction
         parent::process($config['set']);
 
         // 初始化常用的变量
-        $metaHelper = Qwin::run('Qwin_Trex_Metadata');
+        $metaHelper = $this->metaHelper;
         $meta = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
 
         // 从模型获取数据
-        $query = $meta->getDoctrineQuery($this->_set);
+        $metaHelper->loadRelatedMetadata($meta, 'db');
+        $query = $metaHelper->getDoctrineQuery($this->_set);
         $result = $query->where($primaryKey . ' = ?', $config['data']['primaryKeyValue'])->fetchOne();
 
         // 记录不存在,加载错误视图
@@ -94,24 +97,9 @@ class Trex_Service_View extends Trex_Service_BasicAction
             return $result;
         }
 
-        // 处理数据
-        $relatedField = $meta->connectMetadata($this->_meta);
-        $relatedField->order();
-
-        // 根据行为,获取对应的分组列表
-        $methodName = 'get' . $config['data']['convertAsAction'] . 'GroupList';
-        if(method_exists($relatedField, $methodName))
-        {
-            $groupList = call_user_func(array($relatedField, $methodName));
-        } else {
-            $groupList = $relatedField->getGroupList();
-        }
-        
-
         $data = $result->toArray();
-        $data = $meta->convertDataToSingle($data);
-        $data = $meta->convertSingleData($relatedField, $relatedField, $config['data']['convertAsAction'], $data, $config['data']['isLink'], $meta['model']);
-
+        $data = $metaHelper->convertOne($data, $config['data']['asAction'], $meta, $config['this'], $config['data']['isView']);
+                
         // 设置视图
         $this->_view = array(
             'class' => $config['view']['class'],

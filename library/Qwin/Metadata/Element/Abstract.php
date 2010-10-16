@@ -99,6 +99,8 @@ abstract class Qwin_Metadata_Element_Abstract extends Qwin_Metadata_Abstract
     
     /**
      * 将数据作为一个整体进行格式化,例如,为数据赋予NULL值等
+     *
+     * @return 当前对象
      */
     public function format()
     {
@@ -109,8 +111,10 @@ abstract class Qwin_Metadata_Element_Abstract extends Qwin_Metadata_Abstract
     
     /**
      * 将数据作为一个以为数组进行格式化,用于field,model等键名
+     *
+     * @return object 当前对象
      */
-    protected  function _formatAsArray()
+    protected function _formatAsArray()
     {
         foreach($this->_data as $key => $row)
         {

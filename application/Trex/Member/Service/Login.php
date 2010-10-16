@@ -47,17 +47,15 @@ class Trex_Member_Service_Login extends Trex_Service_BasicAction
             'checkIsLogin' => true,
             'checkCaptcha' => true,
             'checkQuestion' => false,
-            'logInLog' = true,
+            'loginLog' => true,
         ),
-        'trigger' => array(
-            'afterLoggedIn ' => array(
-                
-            ),
+        'callback' => array(
+            'afterLoggedIn' => array(),
         ),
         'view' => array(
-            'class' => '',
             'display' => true,
         ),
+        'this' => null,
     );
 
     public function process(array $config = null)
@@ -97,7 +95,7 @@ class Trex_Member_Service_Login extends Trex_Service_BasicAction
         Qwin::run('Qwin_Class_Extension')
             ->setNamespace('validator')
             ->addClass('Qwin_Validator_JQuery');
-        $validateResult = $meta->validateArray($meta['field'], $config['data']['db'], $config['this']);
+        $validateResult = $metaHelper->validateArray($meta['field'], $config['data']['db'], $config['this']);
         if(true !== $validateResult)
         {
             $message = $this->showValidateError($validateResult, $meta, $config['view']['display']);
@@ -115,12 +113,44 @@ class Trex_Member_Service_Login extends Trex_Service_BasicAction
         $this->session->set('language', $member['language']);
 
         // 已登陆
-        $this->executeTrigger('afterLoggedIn', $config);
+        $this->executeCallback('afterLoggedIn', $config);
+
+        if($config['data']['loginLog'])
+        {
+            /**
+             * @see Trex_Service_Insert $_config
+             */
+            $logConfig = array(
+                'set' => array(
+                    'namespace' => 'Trex',
+                    'module' => 'Member',
+                    'controller' => 'LoginLog',
+                ),
+                'data' => array(
+                    'db' => array(
+                        'member_id' => $member['id'],
+                    ),
+                ),
+                'view' => array(
+                    'display' => false,
+                ),
+            );
+            $logResult = Qwin::run('Trex_Service_Insert')->process($logConfig);
+            if(!$logResult['result'])
+            {
+                if($config['view']['display'])
+                {
+                    $this->setRedirectView($logResult['message']);
+                }
+                return $logResult;
+            }
+        }
+        echo 123;exit;
 
         /**
          * 增加登陆记录
          */
-        $logQuery = $meta->getDoctrineQuery(array(
+        $logQuery = $metaHelper->getDoctrineQuery(array(
             'namespace' => 'Trex',
             'module' => 'Member',
             'controller' => 'LoginLog',

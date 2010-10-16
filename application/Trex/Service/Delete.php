@@ -41,7 +41,7 @@ class Trex_Service_Delete extends Trex_Service_BasicAction
         'data' => array(
             'primaryKeyValue' => null,
         ),
-        'trigger' => array(
+        'callback' => array(
             'afterDb' => null,
         ),
         'view' => array(
@@ -63,7 +63,7 @@ class Trex_Service_Delete extends Trex_Service_BasicAction
         $meta = $this->_meta;
         $primaryKey = explode(',', $config['data']['primaryKeyValue']);
 
-        $query = $meta->getDoctrineQuery($this->_set);
+        $query = $metaHelper->getDoctrineQuery($this->_set);
 
         $alias = $query->getRootAlias();
         '' != $alias && $alias .= '.';
@@ -90,8 +90,8 @@ class Trex_Service_Delete extends Trex_Service_BasicAction
         }
 
         // 在数据库操作之后,执行相应的 on 函数,跳转到原来的页面或列表页
-        $config['trigger']['afterDb'][1] = $object;
-        $this->executeTrigger('afterDb', $config);
+        $config['callback']['afterDb'][1] = $object;
+        $this->executeCallback('afterDb', $config);
         
         $url = urldecode($this->request->p('_page'));
         '' == $url && $url = $this->url->createUrl($this->_set, array('action' => 'Index'));

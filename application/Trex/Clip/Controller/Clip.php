@@ -41,11 +41,11 @@ class Trex_Clip_Controller_Clip extends Trex_ActionController
 
     public function convertEditValue($value, $name, $data, $copyData)
     {
-        $this->relatedField->set('value.form._type', $copyData['form_type']);
+        $this->_meta['field']->set('value.form._type', $copyData['form_type']);
         // TODO
         if('CKEditor' == $copyData['form_widget'])
         {
-            $this->relatedField->set('value.form._widgetDetail', array(
+            $this->_meta['field']->set('value.form._widgetDetail', array(
                 array(
                     array('Qwin_Widget_Editor_CKEditor', 'render'),
                 ),

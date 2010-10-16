@@ -85,8 +85,8 @@ jQuery(function($){
         },
         // 各参数的对应关系
         prmNames         : {
-            page   : 'page',
-            rows   : 'row',
+            page   : '<?php echo $controller->pageName ?>',
+            rows   : '<?php echo $controller->limitName ?>',
             sort   : 'orderField',
             order  : 'orderType',
             search : '_search',

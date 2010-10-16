@@ -56,7 +56,7 @@ class Trex_Article_Controller_Article extends Trex_ActionController
         }
         $dbData = $query->toArray();
         // 根据配置和控制器中的对应方法转换数据
-        $dbData = $this->meta->convertSingleData($meta['field'], $this->_set['action'], $dbData);
+        $dbData = $this->meta->convertOne($meta['field'], $this->_set['action'], $dbData);
 
         $this->createHtml($dbData);
 
@@ -213,43 +213,5 @@ class Trex_Article_Controller_Article extends Trex_ActionController
     {
         'NULL' == $value && $value = null;
         return $value;
-    }
-
-    public function convertDbDetailMeta($value, $name, $data, $copyData)
-    {
-        return serialize(array(
-            'keywords' => $copyData['detail_meta_keywords'],
-            'description' => $copyData['detail_meta_description'],
-        ));
-    }
-
-    public function convertEditDetailMeta($value, $name, $data, $copyData)
-    {
-        return unserialize($value);
-    }
-
-    public function convertEditDetailMetaKeywords($value, $name, $data, $copyData)
-    {
-        return $data['detail_meta']['keywords'];
-    }
-
-    public function convertEditDetailMetaDescription($value, $name, $data, $copyData)
-    {
-        return $data['detail_meta']['description'];
-    }
-
-    public function convertViewDetailMeta($value, $name, $data, $copyData)
-    {
-        return unserialize($value);
-    }
-
-    public function convertViewDetailMetaKeywords($value, $name, $data, $copyData)
-    {
-        return $data['detail_meta']['keywords'];
-    }
-
-    public function convertViewDetailMetaDescription($value, $name, $data, $copyData)
-    {
-        return $data['detail_meta']['description'];
     }
 }

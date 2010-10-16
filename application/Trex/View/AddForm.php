@@ -25,7 +25,7 @@
  * @since       2010-09-17 18:14:58
  */
 
-class Trex_View_Form extends Trex_View
+class Trex_View_AddForm extends Trex_View
 {
     public function __construct()
     {
@@ -35,17 +35,16 @@ class Trex_View_Form extends Trex_View
 
     public function display()
     {
-        /**
-         * 初始化变量,方便调用
-         */
+        // 初始化变量,方便调用
         $primaryKey = $this->primaryKey;
         $meta = $this->meta;
-        $relatedField = $this->relatedField;
+        $metaHelper = $this->metaHelper;
         $arrayHelper = Qwin::run('-arr');
-        $groupList = $this->_data['groupList'];
         $data = $this->data;
         $set = Qwin::run('-ini')->getSet();
-        $jQueryValidateCode = $arrayHelper->jsonEncode($meta->getJQueryValidateCode($relatedField));
+        $layout = $metaHelper->getAddLayout($meta);
+        $group = $meta['group'];
+        $jQueryValidateCode = $arrayHelper->jsonEncode($metaHelper->getJQueryValidateCode($meta));
 
         require_once $this->_layout;
     }

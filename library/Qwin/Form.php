@@ -141,12 +141,13 @@ class Qwin_Form
             $set['_resource'] = Qwin::callByArray($set['_resourceGetter']);
         }
 
-        // 获取初始值
-        if(!isset($initData[$set['name']]))
+        if(isset($initData[$set['name']]))
+        {
+            $this->_value = $initData[$set['name']];
+        }
+        else
         {
             $this->_value = $set['_value'];
-        } else {
-            $this->_value = $initData[$set['name']];
         }
         
         // 获取id

@@ -26,36 +26,7 @@
  */
 
 class Qwin_Trex_Metadata extends Qwin_Metadata
-{
-    /*
-     * 数据缓存,分几种,分别是 category, common_class list
-     */
-    private $_cache = array();
-    
-    /**
-     * 各个模型实例化对象的数组
-     * @var array
-     * @todo 相同名称模型的独立性
-     */
-    protected $_modelObjct = array();
-
-    /**
-     * 各个控制器的元数据
-     * @var array
-     * @todo 访问控制
-     */
-    public $metaExt = array();
-
-    public $query = array();
-
-    /**
-     * 由外键组成的数组
-     * @var array
-     */
-    protected $_foreignKey = array();
-
-    protected $_modelPrimaryKey = array();
-    
+{   
     /**
      * 语言名称
      * @var string
@@ -103,6 +74,8 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      */
     public function getClassName($addition, $set)
     {
+        // TODO !!
+        !isset($set['namespace']) && $set['namespace'] = 'Trex';
         return $set['namespace'] . '_' . $set['module'] . '_' . $addition . '_' . $set['controller'];
     }
 
@@ -228,31 +201,6 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     }
 
     /**
-     * 获取列表域
-     *
-     * @param Qwin_Metadata $meta 元数据对象
-     * @param array|null $addition 附加的显示域
-     * @return array
-     * @todo 缩减参数$field, $meta
-     */
-    public function getListField(Qwin_Metadata_Element_Field $field, Qwin_Metadata $meta, array $addition = null)
-    {
-        $listField = $field->getAttrList('isList');
-        if(!empty($addition))
-        {
-            $listField = array_intersect($listField, $addition);
-            // 附加主键
-            $primaryKey = $meta['db']['primaryKey'];
-            if(!in_array($primaryKey, $listField))
-            {
-                $listField[] = $primaryKey;
-            }
-        }
-        
-        return $listField;
-    }
-
-    /**
      * 计算两个数组的交集,键名来自第一个数组,值来自第二个数组
      *
      * @param array $array1 第一个参数数组
@@ -355,12 +303,12 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      * 获取Url中的查找配置,对字段域和操作符不做验证
      *
      * @param string $fieldName 字段域的名称
-     * @param string $valueName 搜索值的名称
+     * @param string $valueName 搜索值的名称(searchString)
      * @param string $operName 操作符的名称
      * @return array 标准元数据的搜索配置
      * @todo 高级复杂搜索配置
      */
-    public function getUrlWhere($fieldName = 'searchField', $valueName = 'searchString', $operName = 'searchOper')
+    public function getUrlWhere($fieldName = 'searchField', $valueName = 'searchValue', $operName = 'searchOper')
     {
         $request = Qwin::run('Qwin_Request');
 
@@ -390,7 +338,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         $limit = $request->g($limitName);
         500 < $limit && $limit = 500;
 
-        return $request->g($limitName);
+        return $limit;
     }
 
     /**
@@ -425,6 +373,17 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         if(null != $list)
         {
             $list = explode($delimiter, $list);
+            foreach($list as $key => $value)
+            {
+                $pos = strpos($value, '.');
+                if(false !== $pos)
+                {
+                    $list[$key] = array(
+                        substr($value, 0, $pos),
+                        substr($value, $pos + 1),
+                    );
+                }
+            }
         }
         return $list;
     }
@@ -656,100 +615,222 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         return $this;
     }
 
+    public function addMetadataToQuery(Qwin_Metadata $meta, $name, $query)
+    {
+        if(!isset($meta['model'][$name]))
+        {
+            return false;
+        }
+        $relatedModel = Qwin::run($meta['model'][$name]['name']);
+        $relatedMeta = Qwin_Metadata_Manager::get($meta['model'][$name]['metadata']);
+
+        // 设置字段
+        $queryField = $relatedMeta['field']->getAttrList(array('isDbField', 'isDbQuery'));
+        foreach($queryField as $field)
+        {
+            $relatedModel->hasColumn($field);
+        }
+        
+        // 设置模型关系
+        call_user_func(
+            array($relatedModel, 'hasOne'),
+            $meta['model'][$name]['name'] . ' as ' . $meta['model'][$name]['alias'],
+                array(
+                    'local' => $meta['model'][$name]['local'],
+                    'foreign' => $meta['model'][$name]['foreign']
+                )
+        );
+        
+
+        $query->leftJoin('Trex_Article_Model_Article' . '.' . $meta['model'][$name]['alias'] . ' ' . $meta['model'][$name]['alias']);
+return true;
+        /*$config = Qwin::run('-ini')->getConfig();
+        // 设置数据表
+        $model->setTableName($config['db']['prefix'] . $meta['db']['table']);
+         // 数据库查询的字段数组
+        $fieldList = $this->getSettingList($meta['field'], 'isDbQuery');
+        foreach($fieldList as $val)
+        {
+            $model->hasColumn($val);
+        }
+        return $model;*/
+        
+
+        foreach($metaObj['model'] as $model)
+        {
+            // 不连接数据关联的模型
+            if('relatedDb' == $model['type'])
+            {
+                continue;
+            }
+            Qwin::load($model['metadata']);
+            $linkedMetaObj = Qwin_Metadata_Manager::get($model['metadata']);
+            $queryField = $linkedMetaObj->field->getAttrList(array('isDbField', 'isDbQuery'));
+
+            $linkedModelObj = Qwin::run($model['name']);
+            $linkedModelObj->setTableName($this->getTablePrefix() . $linkedMetaObj['db']['table']);
+            foreach($queryField as $field)
+            {
+                $linkedModelObj->hasColumn($field);
+            }
+
+            // 设置模型关系
+            call_user_func(
+                array($modelObj, 'hasOne'),
+                $model['name'] . ' as ' . $model['alias'],
+                    array(
+                        'local' => $model['local'],
+                        'foreign' => $model['foreign']
+                    )
+            );
+            $query->leftJoin($modelName . '.' . $model['alias'] . ' ' . $model['alias']);
+        }
+    }
+
+    /**
+     * 加载关联的元数据,即对model键名中的元数据进行初始化
+     * 不在元数据初始化时加载,是为了减少不必要的资源消耗
+     *
+     * @param Qwin_Metadata $meta 元数据对象
+     * @param mixed $modelType 加载的模型类型
+     * @return object 当前对象
+     */
+    public function loadRelatedMetadata(Qwin_Metadata $meta, $modelType = null)
+    {
+        if(is_string($modelType))
+        {
+            $modelType = array($modelType);
+        }
+        foreach($meta['model'] as $name => $model)
+        {
+            // 已加载
+            if(isset($meta['metadata'][$name]))
+            {
+                continue;
+            }
+            if(null == $modelType || in_array($model['type'], $modelType))
+            {
+                $meta['metadata'][$name] = Qwin_Metadata_Manager::get($model['metadata']);
+            }
+        }
+        return $this;
+    }
+
+    public function getFormFieldMetadata(Qwin_Metadata $meta)
+    {
+       
+        $mainMetaField = clone $meta['field'];
+        $formField = new Qwin_Metadata_Element_Field();
+        // 创建一个纯字段的元数据,用于表单
+        foreach($meta['metadata'] as $name => $relatedMeta)
+        {
+            $tmpMeta = array();
+            foreach($relatedMeta['field'] as $field)
+            {
+                // 存储原来的名称
+                $field['form']['_oldName'] = $field['form']['name'];
+                $field['form']['_arrayName'] = $name . '[' . $field['form']['name'] . ']';
+                $field['form']['name'] = $name . '[' . $field['form']['name'] . ']';//$name . '_' . $field['form']['name'];
+                if($field['form']['_oldName'] == $field['form']['id'])
+                {
+                    $field['form']['id'] = str_replace('_', '-', $field['form']['name']);
+                }
+                $tmpMeta[$field['form']['name']] = $field;
+            }
+            $mainMetaField->addData($tmpMeta);
+        }
+        p($mainMetaField);exit;
+        return $mainMetaField;
+    }
+
     /**
      * 数据转换,用于 edit 等二维数组的数据
+     * 该方法包含两部分的转换,一个是元数据的转换配置,一个是控制器的转换方法
      *
-     * @param array $set 配置数组的字段子数组 $this->__meta['field']
-     * @param string $action Action 的名称,一般为  add, edit, show
-     * @param array $data 二维数组,一般是从数据库取出的数组
-     * @todo 是否要必要支持多个转换函数/方法, 增加缓存,减少重复判断等
-     * @todo 对于非当前控制器下, $self 的问题
+     * @param array $data 准备转换的数据
+     * @param string $action 转换的行为,例如Add,Edit
+     * @param Qwin_Metadata $meta 元数据
+     * @param Qwin_Trex_Controller $controller 控制器
+     * @return array 经过转换的数据
      */
-    public function convertSingleData($fieldList, $meta, $action, $row, $isView = false, $modelList = null)
+    public function convertOne($data, $action,
+        Qwin_Metadata $meta = null,
+        Qwin_Trex_Controller $controller = null, $isView = false)
     {
-        /**
-         * 初始化数据
-         * 控制器对象,行为,数据副本
-         */
-        $ctrler = Qwin::run('-controller');
-        $url = Qwin::run('-url');
+        null == $meta && $meta = Qwin::run('-meta');
+        $dataCopy = $data;
         $action = strtolower($action);
+        $url = Qwin_Class::run('Qwin_Url');
 
-        /**
-         * 数据副本,可从此获取原数据,主要用于回调方法的的参数
-         */
-        $rowCopy = $row;
-
-        /**
-         * 新的数据,本方法将返回该数组
-         */
-        $newRow = array();
-
-        if(true == $isView)
+        // TODO 1.链接问题 2.模块之间的转换
+        if($isView)
         {
-            foreach($modelList as $model)
+            foreach($meta['model'] as $model)
             {
                 if('view' == $model['type'])
                 {
                     foreach($model['fieldMap'] as $localField => $foreignField)
                     {
-                        $tempKey = $model['alias'] . '_' . $foreignField;
-                        !isset($row[$tempKey]) && $row[$tempKey] = '';
-                        $row[$localField] = $row[$tempKey];
+                        !isset($data[$model['alias']][$foreignField]) && $data[$model['alias']][$foreignField] = '';
+                        $data[$localField] = $data[$model['alias']][$foreignField];
                     }
                 }
             }
         }
-
-        // $fieldSet/$fieldName
-        foreach($fieldList as $field => $filedSet)
+        
+        // 对自身域进行转换
+        foreach($meta['field'] as $field)
         {
-            $name = $meta[$field]['form']['name'];
+            $name = $field['form']['name'];
 
-            /**
-             * 初始化两数组的值,如果不存在,则设为空
-             */
-            if(isset($row[$name]))
+            // 初始化两数组的值,如果不存在,则设为空
+            if(isset($data[$name]))
             {
-                'NULL' == $row[$name] && $row[$name] = null;
-                $newRow[$name] = $row[$name];
+                'NULL' == $data[$name] && $data[$name] = null;
+                $newData[$name] = $data[$name];
             } else {
-                $newRow[$name] = null;
-                $row[$name] = null;
+                $newData[$name] = $data[$name] = null;
             }
 
-            /**
-             * 使用元数据的转换器进行转换
-             */
-            if(isset($meta[$field]['converter'][$action]) && is_array($meta[$field]['converter'][$action]))
+            // 根据元数据中转换器的配置进行转换
+            if(isset($field['converter'][$action]) && is_array($field['converter'][$action]))
             {
-                $newRow[$name] = $this->convert($meta[$field]['converter'][$action], $row[$name]);
+                $newData[$name] = $this->convert($field['converter'][$action], $data[$name]);
             }
 
-            /**
-             * 使用控制器中的方法进行转换
-             */
-            $methodName = str_replace(array('_', '-'), '', 'convert' . $action . $name);
-            if(method_exists($ctrler, $methodName))
+            // 使用控制器中的方法进行转换
+            if(null != $controller)
             {
-                $newRow[$name] = call_user_func_array(
-                    array($ctrler, $methodName),
-                    array($newRow[$name], $name, $newRow, $rowCopy)
-                );
+                $methodName = str_replace(array('_', '-'), '', 'convert' . $action . $name);
+                if(method_exists($controller, $methodName))
+                {
+                    $newData[$name] = call_user_func_array(
+                        array($controller, $methodName),
+                        array($newData[$name], $name, $newData, $dataCopy)
+                    );
+                }
             }
 
             /**
              * 增加Url查询
              * @todo 是否应该出现在此
              */
-            if(true == $isView && $meta[$field]['attr']['isLink'])
+            if(true == $isView && $meta['field'][$name]['attr']['isLink'] && null != $controller)
             {
-                !isset($rowCopy[$name]) && $rowCopy[$name] = null;
-                $newRow[$name] = '<a href="' . $url->createUrl($ctrler->_set, array('action' => 'Index', 'searchField' => $name, 'searchValue' => $rowCopy[$name])) . '">' . $newRow[$name] . '</a>';
+                !isset($dataCopy[$name]) && $dataCopy[$name] = null;
+                $newData[$name] = '<a href="' . $url->createUrl($controller->_set, array('action' => 'Index', 'searchField' => $name, 'searchValue' => $dataCopy[$name])) . '">' . $newData[$name] . '</a>';
             }
         }
 
-        return $newRow;
+        // 对关联域进行转换
+        foreach($meta['metadata'] as $name => $relatedMeta)
+        {
+            !isset($data[$name]) && $data[$name] = array();
+            $controller = Qwin::run($meta['model'][$name]['controller']);
+            $newData[$name] = $this->convertOne($data[$name], $action, $relatedMeta, $controller);
+        }
+
+        return $newData;
     }
 
     /**
@@ -770,15 +851,20 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     /**
      * 数据转换,用于 list 等三位数组的数据
      *
-     * @param array $meta 配置数组的字段子数组
-     * @param string $action Action 的名称,一般为 list
-     * @praam array $data 三维数组,一般是从数据库取出的数组
+     * @param array $data 准备转换的数据
+     * @param string $action 转换的行为,例如Add,Edit
+     * @param Qwin_Metadata $meta 元数据
+     * @param Qwin_Trex_Controller $controller 控制器
+     * @return array 经过转换的数据
      */
-    public function convertMultiData($fieldList, $meta, $action, $data, $isView = true, $modelList = null)
+    public function convertArray($data, $action,
+        Qwin_Metadata $meta = null,
+        Qwin_Trex_Controller $controller = null,
+        $isView = false)
     {
         foreach($data as &$row)
         {
-            $row = $this->convertSingleData($fieldList, $meta, $action, $row, $isView, $modelList);
+            $row = $this->convertOne($row, $action, $meta, $controller, $isView);
         }
         return $data;
     }
@@ -801,40 +887,272 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         return $data;
     }
 
-    /**
-     * 获取通用分类的数据
-     *
-     * @param string $name 分类名称
-     * @return 分类数据
-     */
-    public function getCommonClassList($name, $lang = null)
+    public function getDefaultLayout($meta, array $layout = null, $relatedName = false)
     {
-        null == $lang && $this->setLang() && $lang = $this->lang;
-        if(!isset($this->_cache['common_class'][$lang][$name]))
+        foreach($meta['field'] as $name => $field)
         {
+            $group = $field['basic']['group'];
+            if(!isset($layout[$group]))
+            {
+                $layout[$group] = array();
+            }
+
+            // 使用order作为键名
+            $order = $field['basic']['order'];
+            while(isset($layout[$group][$order]))
+            {
+                $order++;
+            }
             
-            $this->_cache['common_class'][$lang][$name] = Qwin::run('Qwin_Cache_CommonClass')
-                ->getCache($name, $lang);
+            if(!$relatedName)
+            {
+                $layout[$group][$order] = $field['form']['name'];
+            } else {
+                $layout[$group][$order] = array(
+                     $relatedName, $field['form']['name'],
+                );
+            }
         }
-        return $this->_cache['common_class'][$lang][$name];
+        foreach($meta['metadata'] as $key => $relatedMeta)
+        {
+            if('db' == $meta['model'][$key]['type'])
+            {
+                $layout = $this->getDefaultLayout($relatedMeta, $layout, $key);
+            }
+        }
+
+        // 根据键名排序
+        if(!$relatedName)
+        {
+            array_walk($layout, 'ksort');
+        }
+
+        return $layout;
     }
 
-    /**
-     * 根据主配置元数据,加载相关模型类和元数据类,同时转换关联元数据的语言
-     */
-    public function loadRelatedData($modelMetadata, $ctrler = null)
+    public function getViewLayout($meta, array $layout = null, $relatedName = false)
     {
-        foreach($modelMetadata as $model)
+        foreach($meta['field'] as $name => $field)
         {
-            // 初始化模型
-            if(!isset($this->_modelObjct[$model['name']]))
+            if(0 == $field['attr']['isView'])
             {
-                $this->_modelObjct[$model['name']] = Qwin::run($model['name']);
+                continue;
             }
-            // 加载Metadata
-            $this->loadMetadataToMetaExt($model['metadata'], $model['name']);
+            
+            $group = $field['basic']['group'];
+            if(!isset($layout[$group]))
+            {
+                $layout[$group] = array();
+            }
+
+            // 使用order作为键名
+            $order = $field['basic']['order'];
+            while(isset($layout[$group][$order]))
+            {
+                $order++;
+            }
+
+            if(!$relatedName)
+            {
+                $layout[$group][$order] = $field['form']['name'];
+            } else {
+                $layout[$group][$order] = array(
+                     $relatedName, $field['form']['name'],
+                );
+            }
         }
-    }  
+        foreach($meta['metadata'] as $key => $relatedMeta)
+        {
+            if('db' == $meta['model'][$key]['type'])
+            {
+                $layout = $this->getViewLayout($relatedMeta, $layout, $key);
+            }
+        }
+
+        // 根据键名排序
+        if(!$relatedName)
+        {
+            array_walk($layout, 'ksort');
+        }
+
+        return $layout;
+    }
+
+    public function getEditLayout($meta, array $layout = null, $relatedName = false)
+    {
+        foreach($meta['field'] as $name => $field)
+        {
+            if(1 == $field['attr']['isReadonly'] || 'custom' == $field['form']['_type'])
+            {
+                // TODO
+                $meta['field']->set($name . '.form._type', 'hidden');
+                //continue;
+            }
+
+            $group = $field['basic']['group'];
+            if(!isset($layout[$group]))
+            {
+                $layout[$group] = array();
+            }
+
+            // 使用order作为键名
+            $order = $field['basic']['order'];
+            while(isset($layout[$group][$order]))
+            {
+                $order++;
+            }
+
+            if(!$relatedName)
+            {
+                $layout[$group][$order] = $field['form']['name'];
+            } else {
+                $layout[$group][$order] = array(
+                     $relatedName, $field['form']['name'],
+                );
+            }
+        }
+        foreach($meta['metadata'] as $key => $relatedMeta)
+        {
+            if('db' == $meta['model'][$key]['type'])
+            {
+                $layout = $this->getEditLayout($relatedMeta, $layout, $key);
+            }
+        }
+
+        // 根据键名排序
+        if(!$relatedName)
+        {
+            array_walk($layout, 'ksort');
+        }
+
+        return $layout;
+    }
+
+    public function getListLayout(Qwin_Metadata $meta, array $layout = null, $relatedName = false)
+    {
+        null == $layout && $layout = array();
+        foreach($meta['field'] as $name => $field)
+        {
+            if(1 != $field['attr']['isList'])
+            {
+                continue;
+            }
+
+            // 使用order作为键名
+            $order = $field['basic']['order'];
+            while(isset($layout[$order]))
+            {
+                $order++;
+            }
+
+            if(!$relatedName)
+            {
+                $layout[$order] = $field['form']['name'];
+            } else {
+                $layout[$order] = array(
+                     $relatedName, $field['form']['name'],
+                );
+            }
+        }
+
+        foreach($meta['metadata'] as $name => $relatedMeta)
+        {
+            if('db' == $meta['model'][$name]['type'])
+            {
+                $layout += $this->getListLayout($relatedMeta, $layout, $name);
+            }
+        }
+
+        // 根据键名排序
+        if(!$relatedName)
+        {
+            ksort($layout);
+        }
+
+        return $layout;
+    }
+
+    public function convertTojqGridData($data, $primaryKey, $layout)
+    {
+        $i = 0;
+        $rowData = array();
+        $nullData = '<em>(null)<em>';
+        foreach($data as $row)
+        {
+            $rowData[$i][$primaryKey] = $row[$primaryKey];
+            foreach($layout as $field)
+            {
+                if(is_array($field))
+                {
+                    if(isset($row[$field[0]][$field[1]]))
+                    {
+                        $rowValue = $row[$field[0]][$field[1]];
+                    } else {
+                        // 使列表 null 类型数据能正确显示
+                        $rowValue = $nullData;
+                    }
+                } else {
+                    if(isset($row[$field]))
+                    {
+                        $rowValue = $row[$field];
+                    } else {
+                        $rowValue = $nullData;
+                    }
+                }
+                $rowData[$i]['cell'][] = $rowValue;
+            }
+            $i++;
+        }
+        return $rowData;
+    }
+
+    public function getAddLayout($meta, array $layout = null, $relatedName = false)
+    {
+        foreach($meta['field'] as $name => $field)
+        {
+            if('custom' == $field['form']['_type'])
+            {
+                continue;
+            }
+
+            $group = $field['basic']['group'];
+            if(!isset($layout[$group]))
+            {
+                $layout[$group] = array();
+            }
+
+            // 使用order作为键名
+            $order = $field['basic']['order'];
+            while(isset($layout[$group][$order]))
+            {
+                $order++;
+            }
+
+            if(!$relatedName)
+            {
+                $layout[$group][$order] = $field['form']['name'];
+            } else {
+                $layout[$group][$order] = array(
+                     $relatedName, $field['form']['name'],
+                );
+            }
+        }
+        foreach($meta['metadata'] as $key => $relatedMeta)
+        {
+            if('db' == $meta['model'][$key]['type'])
+            {
+                $layout = $this->getAddLayout($relatedMeta, $layout, $key);
+            }
+        }
+
+        // 根据键名排序
+        if(!$relatedName)
+        {
+            array_walk($layout, 'ksort');
+        }
+
+        return $layout;
+    }
 
     /**
      * 将多维数组转换为一维
@@ -897,32 +1215,29 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      * 验证一个域的数据
      *
      * @param string $name 域的名称
-     * @param string $validator 域的验证配置
+     * @param string $meta 域的验证配置
      * @param string $data 包含各域的值的数组,例如从数据库取出或客户端提交的数据
      * @param object $controller 控制器对象
      * @return true/Qwin_Validator_Result true表示通过验证,Qwin_Validator_Result表示不通过,对象中包含错误信息
      */
-    public function validateOne($name, $validator, $data = null, $controller = null)
+    public function validateOne($name, $data, $validator, Qwin_Trex_Controller $controller = null)
     {
-        // 使用默认的控制器类
-        if(null == $controller)
-        {
-            $controller = Qwin::run('-controller');
-        }
-
         // 根据控制器的方法进行验证
-        $method = 'validate' . $name;
-        !isset($data[$name]) && $data[$name] = null;
-        $result = Qwin::callByArray(array(
-            array($controller, $method),
-            $data[$name],
-            $name,
-            $data,
-        ));
-        // 除了返回错误的对象外,其他都认为是验证通过
-        if(is_object($result) && 'Qwin_Validator_Result' == get_class($result))
+        if(null != $controller)
         {
-            return $result;
+            $method = 'validate' . $name;
+            !isset($data[$name]) && $data[$name] = null;
+            $result = Qwin::callByArray(array(
+                array($controller, $method),
+                $data[$name],
+                $name,
+                $data,
+            ));
+            // 除了返回错误的对象外,其他都认为是验证通过
+            if(is_object($result) && 'Qwin_Validator_Result' == get_class($result))
+            {
+                return $result;
+            }
         }
 
         // 根据元数据进行验证
@@ -954,29 +1269,37 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     /**
      * 验证一组域的数据
      *
-     * @param array $fieldMeta 域的元数组
-     * @param array $data 包含各域的值的数组,例如从数据库取出或客户端提交的数据
+     * @param array $data 验证的数据
+     * @param array $data 元数据对象
      * @param object $controller 控制器对象
-     * @return boolen 是否通过验证
+     * @return true|Qwin_Validate_Result 是否通过验证,true表示通过,Qwin_Validate_Result对象是包含错误信息的返回结果
      */
-    public function validateArray($fieldMeta, $data, $controller = null)
+    public function validateArray($data, Qwin_Metadata $meta = null, Qwin_Trex_Controller $controller = null)
     {
-        // 使用默认的控制器类
-        if(null == $controller)
+        // 验证自身域
+        foreach($meta['field'] as $field)
         {
-            $controller = Qwin::run('-controller');
-        }
-
-        // 逐个进行验证,只有有一个验证失败,即返回失败信息
-        foreach($fieldMeta as $field)
-        {
-            $result = $this->validateOne($field['form']['name'], $field['validator'], $data, $controller);
+            $result = $this->validateOne($field['form']['name'], $data, $field['validator'], $controller);
             // 返回错误信息
-            if(is_object($result) && 'Qwin_Validator_Result' == get_class($result))
+            if(true !== $result)
             {
                 return $result;
             }
         }
+
+        // 验证关联域
+        foreach($meta['metadata'] as $name => $relatedMeta)
+        {
+            !isset($data[$name]) && $data[$name] = array();
+            $controller = Qwin::run($meta['model'][$name]['controller']);
+            $result = $this->validateArray($data[$name], $relatedMeta, $controller);
+            // 返回错误信息
+            if(true !== $result)
+            {
+                return $result;
+            }
+        }
+        
         return true;
     }
 
@@ -1009,6 +1332,29 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     }
 
     /**
+     * 删除只读键的值
+     *
+     * @param array $data
+     * @param Qwin_Metadata $meta 元数据对象
+     * @return array
+     */
+    public function deleteReadonlyValue($data, Qwin_Metadata $meta)
+    {
+        foreach($meta['field'] as $field)
+        {
+            if($field['attr']['isReadonly'])
+            {
+                unset($data[$field['form']['name']]);
+            }
+        }
+        foreach($meta['metadata'] as $name => $relatedMeta)
+        {
+            $this->deleteReadonlyValue($data[$name], $relatedMeta);
+        }
+        return $data;
+    }
+
+    /**
      * 设置外键的值,保证数据之间能正确关联
      *
      * @param Qwin_Metadata_Element_Model $modelList 模型配置元数据
@@ -1028,36 +1374,30 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     }
 
     /**
-     * 获取命名空间数组
+     * 删除主键的的值
      *
+     * @param array $data
+     * @param Qwin_Metadata $meta 元数据对象
+     * @return array
      */
-    public function getNamespace()
+    public function unsetPrimaryKeyValue($data, Qwin_Metadata $meta)
     {
-        $file = scandir(QWIN_ROOT_PATH . '/App');
-        $folder = array();
-        foreach($file as $val)
+        $primaryKey = $meta['db']['primaryKey'];
+        if(isset($data[$primaryKey]))
         {
-            if('.' != $val && '..' != $val)
+            $data[$primaryKey] = null;
+            //unset($data[$primaryKey]);
+        }
+        foreach($meta['metadata'] as $name => $relatedMeta)
+        {
+            $primaryKey = $relatedMeta['db']['primaryKey'];
+            if(isset($data[$name][$primaryKey]))
             {
-                $folder[$val] = $val;
+                $data[$name][$primaryKey] = null;
+                //unset($data[$name][$primaryKey]);
             }
         }
-        return $folder;
-    }
-
-    /**
-     * 翻译单独一个代号
-     * @param string $code 要翻译的代号
-     * @return string 如果存在该代号,返回翻译值,否则返回原代号
-     */
-    public function t($code)
-    {
-        !isset($this->langData) && $this->langData = Qwin::run('-c')->lang;
-        if(isset($this->langData[$code]))
-        {
-            return $this->langData[$code];
-        }
-        return $code;
+        return $data;
     }
 
     /**
@@ -1216,22 +1556,6 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             $model->hasColumn($val);
         }
         return $model;
-    }
-
-    /**
-     * 加载元数据到metaExt数组中
-     *
-     * @todo 控制器的语言
-     */
-    public function loadMetadataToMetaExt($metaClassName, $modelClassName)
-    {
-        if(!isset($this->metaExt[$modelClassName]))
-        {
-            $this->metaExt[$modelClassName] = Qwin::run($metaClassName)->defaultMetadata();
-            // 语言转换
-            $this->metaExt[$modelClassName] = $this->convertLang($this->metaExt[$modelClassName], Qwin::run('-c')->lang, true);
-        }
-        return $this->metaExt[$modelClassName];
     }
 
     /**

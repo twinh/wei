@@ -39,7 +39,7 @@ class Trex_Service_Index extends Trex_Service_BasicAction
             'action' => null,
         ),
         'data' => array(),
-        'trigger' => array(
+        'callback' => array(
             'beforeViewLoad' => array(),
         ),
         'view' => array(
@@ -59,14 +59,17 @@ class Trex_Service_Index extends Trex_Service_BasicAction
         // 初始化常用的变量
         $meta = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
+        $metaHelper = $this->metaHelper;
+        $metaHelper->loadRelatedMetadata($meta, 'db');
 
-        // 处理数据
-        $relatedField = $meta->connectMetadata($this->_meta);
-        $relatedField->order();
-        $listField = $meta->getListField($relatedField, $meta, $config['data']['list']);
+        $layout = $metaHelper->getListLayout($meta);
+        if(null != $config['data']['list'])
+        {
+            $layout = array_intersect($layout, (array)$config['data']['list']);
+        }
 
         // 自定义链接
-        $customLink = $this->executeTrigger('beforeViewLoad', $config);
+        $customLink = $this->executeCallback('beforeViewLoad', $config);
         
         // 设置视图
         $this->_view = array(
