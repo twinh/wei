@@ -149,7 +149,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                 ),
                 'jump_to_url' => array(
                     'basic' => array(
-                        'group' => 'LBL_GROUP_DETAIL_DATA',
+                        'group' => 1,
                     ),
                     'form' => array(
                         '_type' => 'text',
@@ -163,7 +163,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                 ),
                 'hit' => array(
                     'basic' => array(
-                        'group' => 'LBL_GROUP_DETAIL_DATA'
+                        'group' => 1
                     ),
                     'form' => array(
                         '_value' => 0,
@@ -171,7 +171,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                 ),
                 'order' => array(
                     'basic' => array(
-                        'group' => 'LBL_GROUP_DETAIL_DATA'
+                        'group' => 1
                     ),
                     'form' => array(
                         '_value' => 0,
@@ -179,7 +179,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                 ),
                 'page_name' => array(
                     'basic' => array(
-                        'group' => 'LBL_GROUP_PAGE_DATA',
+                        'group' => 2,
                     ),
                     'attr' => array(
                         'isList' => 0,
@@ -187,7 +187,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                 ),
                 'template' => array(
                     'basic' => array(
-                        'group' => 'LBL_GROUP_PAGE_DATA',
+                        'group' => 2,
                     ),
                     'attr' => array(
                         'isList' => 0,
@@ -195,7 +195,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                 ),
                 'is_posted' => array(
                     'basic' => array(
-                        'group' => 'LBL_GROUP_DETAIL_DATA',
+                        'group' => 1,
                     ),
                     'form' => array(
                         '_type' => 'select',
@@ -219,7 +219,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                 ),
                 'is_index' => array(
                     'basic' => array(
-                        'group' => 'LBL_GROUP_DETAIL_DATA',
+                        'group' => 1,
                     ),
                     'form' => array(
                         '_type' => 'select',
@@ -255,7 +255,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                 /*'date_created' => array(
                     'basic' => array(
                         'title' => 'LBL_FIELD_POST_DATA',
-                        'group' => 'LBL_GROUP_DETAIL_DATA'
+                        'group' => 1
                     ),
                     'form' => array(
                         '_type' => 'text',
@@ -273,17 +273,24 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     ),
                 ),*/
             ),
-            // 表之间的联系
+            'group' => array(
+                0 => 'LBL_GROUP_BASIC_DATA',
+                1 => 'LBL_GROUP_DETAIL_DATA',
+                2 => 'LBL_GROUP_PAGE_DATA',
+                3 => 'LBL_GROUP_META_DATA',
+            ),
             'model' => array(
-                array(
-                    'name' => 'Trex_Article_Model_Detail',
+                'detail' => array(
                     'alias' => 'detail',
-                    'metadata' => 'Trex_Article_Metadata_Detail',
                     'type' => 'db',
                     'local' => 'id',
                     'foreign' => 'article_id',
+                    'set' => array(
+                        'module' => 'Article',
+                        'controller' => 'Detail',
+                    ),
                 ),
-                array(
+                'category' => array(
                     'name' => 'Trex_Category_Model_Category',
                     'alias' => 'category',
                     'metadata' => 'Trex_Category_Metadata_Category',
@@ -294,6 +301,9 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         'category_id' => 'name',
                     ),
                 ),
+            ),
+            'metadata' => array(
+
             ),
             'db' => array(
                 'table' => 'article',

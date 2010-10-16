@@ -52,7 +52,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
                 'title' => 'LBL_FIELD_TITLE',
                 'description' => array(),
                 'order' => 0,
-                'group' => 'LBL_GROUP_BASIC_DATA',
+                'group' => 0,
             ),
             'form' => array(
                 '_type' => 'text',
@@ -330,96 +330,16 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         return $this;
     }
 
-    /**
-     * 获取分组的对应列表
-     *
-     * @return array 分组列表
-     */
-    public function getGroupList()
+    public function convertReadonlyToHidden()
     {
-        $groupList = array();
-        foreach($this->_data as $field => $data)
-        {
-            if(!isset($groupList[$data['basic']['group']]))
-            {
-                $groupList[$data['basic']['group']] = array();
-            }
-            $groupList[$data['basic']['group']][$field] = $data['basic']['title'];
-        }
-        return $groupList;
-    }
-
-    /**
-     * 获取显示数据页面的分组列表
-     *
-     * @return array 分组列表
-     */
-    public function getViewGroupList()
-    {
-        $groupList = array();
-        foreach($this->_data as $field => $data)
-        {
-            if(0 == $data['attr']['isView'])
-            {
-                continue;
-            }
-
-            if(!isset($groupList[$data['basic']['group']]))
-            {
-                $groupList[$data['basic']['group']] = array();
-            }
-            $groupList[$data['basic']['group']][$field] = $data['basic']['title'];
-        }
-        return $groupList;
-    }
-
-    /**
-     * 获取添加操作的分组列表
-     *
-     * @return array 分组列表
-     */
-    public function getAddGroupList()
-    {
-        $groupList = array();
-        foreach($this->_data as $field => $data)
-        {
-            if('custom' == $data['form']['_type'])
-            {
-                continue;
-            }
-
-            if(!isset($groupList[$data['basic']['group']]))
-            {
-                $groupList[$data['basic']['group']] = array();
-            }
-            $groupList[$data['basic']['group']][$field] = $data['basic']['title'];
-        }
-        return $groupList;
-    }
-
-    /**
-     * 获取编辑操作的分组列表
-     *
-     * @return array 分组列表
-     */
-    public function getEditGroupList()
-    {
-        $groupList = array();
         foreach($this->_data as $field => $data)
         {
             if(1 == $data['attr']['isReadonly'] || 'custom' == $data['form']['_type'])
             {
                 $this->_data[$field]['form']['_type'] = 'hidden';
-                //continue;
             }
-
-            if(!isset($groupList[$data['basic']['group']]))
-            {
-                $groupList[$data['basic']['group']] = array();
-            }
-            $groupList[$data['basic']['group']][$field] = $data['basic']['title'];
         }
-        return $groupList;
+        return $this;
     }
     
     /**
@@ -519,6 +439,39 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
                 $this->_data[$key]['attr']['isReadonly'] = 1;
                 $this->_data[$key]['form']['_type'] = 'hidden';
             }
+        }
+        return $this;
+    }
+
+    /**
+     * 为元数据表单名称增加组名,如name将转换为group[name]
+     *
+     * @param string $name 组名
+     * @return object 当前对象
+     */
+    public function setFormGroupName($name)
+    {
+        foreach($this->_data as $key => $value)
+        {
+            $this->_data[$key]['form']['_oldName'] = $this->_data[$key]['form']['_name'];
+            $this->_data[$key]['form']['id'] = $name . '_' . $this->_data[$key]['form']['_name'];
+            $this->_data[$key]['form']['_name'] = $name . '[' . $this->_data[$key]['form']['_name'] . ']';
+        }
+        return $this;
+    }
+
+     /**
+     * 为元数据表单名称增加前缀
+     *
+     * @param string $name 前缀
+     * @return object 当前对象
+     */
+    public function setFormPrefixName($name)
+    {
+        foreach($this->_data as $key => $value)
+        {
+            $this->_data[$key]['form']['_oldName'] = $this->_data[$key]['form']['_name'];
+            $this->_data[$key]['form']['_name'] = $name . $this->_data[$key]['form']['_name'];
         }
         return $this;
     }

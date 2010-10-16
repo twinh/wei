@@ -75,11 +75,11 @@ class Trex_Service
      * @param array $config 服务的配置
      * @return mixed
      */
-    public function executeTrigger($name, $config)
+    public function executeCallback($name, $config)
     {
-        if(null != $config['trigger'][$name])
+        if(null != $config['callback'][$name])
         {
-            return Qwin::callByArray($config['trigger'][$name]);
+            return Qwin::callByArray($config['callback'][$name]);
         }
         return null;
     }

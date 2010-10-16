@@ -78,7 +78,7 @@ class Trex_Article_Metadata_Detail extends Trex_Metadata
                 ),
                 'meta_keywords' => array(
                     'basic' => array(
-                        'group' => 'LBL_GROUP_META_DATA',
+                        'group' => 3,
                     ),
                     'form' => array(
                         '_type' => 'text',
@@ -92,7 +92,7 @@ class Trex_Article_Metadata_Detail extends Trex_Metadata
                 ),
                 'meta_description' => array(
                     'basic' => array(
-                        'group' => 'LBL_GROUP_META_DATA',
+                        'group' => 3,
                     ),
                     'form' => array(
                         '_type' => 'text',
@@ -106,6 +106,7 @@ class Trex_Article_Metadata_Detail extends Trex_Metadata
                 ),
             ),
             'model' => array(),
+            'metadata' => array(),
             'db' => array(
                 'table' => 'article_detail',
                 'primaryKey' => 'id',

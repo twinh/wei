@@ -34,17 +34,40 @@ class Qwin_Metadata_Element_Model extends Qwin_Metadata_Element_Abstract
             'name' => null,
             'alias' => null,
             // Metadata 中包含模型字段,表名,关系的定义,
+            'controller' => null,
             'metadata' => null,
             'relation' => 'hasOne',
             'local' => 'id',
             'foreign' => null,
             'type' => 'db',
             'fieldMap' => array(),
+            'set' => array(
+                'namespace' => null,
+                'module' => null,
+                'controller' => null,
+            ),
         );
     }
 
     public function format()
     {
-        return $this->_formatAsArray();
+        $metaHepler = Qwin::run('Qwin_Trex_Metadata');
+        foreach($this->_data as $key => $row)
+        {
+            $this->_data[$key] = $this->_format($row, $key);
+            if(null == $this->_data[$key]['name'])
+            {
+                $this->_data[$key]['name'] = $metaHepler->getClassName('Model', $this->_data[$key]['set']);
+            }
+            if(null == $this->_data[$key]['metadata'])
+            {
+                $this->_data[$key]['metadata'] = $metaHepler->getClassName('Metadata', $this->_data[$key]['set']);
+            }
+            if(null == $this->_data[$key]['controller'])
+            {
+                $this->_data[$key]['controller'] = $metaHepler->getClassName('Controller', $this->_data[$key]['set']);
+            }
+        }
+        return $this;
     }
 }

@@ -69,7 +69,7 @@ class Trex_Job_Controller_Job extends Trex_ActionController
                 'module' => 'Company',
                 'controller' => 'Company',
             ), false)->where('id = ?', $value)->fetchOne();
-            $this->relatedField->set('related_id.form._value2', $company['name']);
+            $this->_meta['field']->set('related_id.form._value2', $company['name']);
         }
         return $value;
     }

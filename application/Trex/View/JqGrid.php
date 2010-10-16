@@ -35,32 +35,32 @@ class Trex_View_JqGrid extends Trex_View
 
     public function display()
     {
-        /**
-         * 初始变量,方便调用
-         */
+        // 初始变量,方便调用
         $primaryKey = $this->primaryKey;
         $meta = $this->meta;
-        $relatedField = $this->relatedField;
+        $metaHepler = $this->metaHelper;
         $arrayHelper = Qwin::run('-arr');
         $request = Qwin::run('Qwin_Request');
         $lang = Qwin::run('-lang');
         $set = Qwin::run('-ini')->getSet();
         $customLink = $this->customLink;
-
-        /**
-         * 数据转换
-         */
+        
         // 获取json数据的链接
-        $urlGet = array('action' => 'List') + $_GET;
-        $jsonUrl = str_replace('\'', '\\\'', '?' . Qwin::run('-url')->arrayKey2Url($urlGet));
+        $jsonUrl = str_replace('\'', '\\\'', '?' . Qwin::run('-url')->arrayKey2Url(array('action' => 'List') + $_GET));
 
         // 获取栏数据
         $columnName = array();
         $columnSetting = array();
-
-        foreach($this->listField as $field)
+        foreach($this->layout as $field)
         {
-            $columnName[] = $lang->t($relatedField[$field]['basic']['title']);
+            if(is_array($field))
+            {
+                $fieldMeta = $meta['metadata'][$field[0]]['field'][$field[1]];
+                $field = $field[0] . '_' . $field[1];                
+            } else {
+                $fieldMeta = $meta['field'][$field];
+            }
+            $columnName[] = $lang->t($fieldMeta['basic']['title']);
             $columnSetting[] = array(
                 'name' => $field,
                 'index' => $field,
@@ -71,14 +71,14 @@ class Trex_View_JqGrid extends Trex_View
                 $columnSetting[count($columnSetting) - 1]['hidden'] = true;
             }
             // 宽度控制
-            if(isset($relatedField[$field]['list']) && isset($relatedField[$field]['list']['width']))
+            if(isset($fieldMeta['list']) && isset($fieldMeta['list']['width']))
             {
-                $columnSetting[count($columnSetting) - 1]['width'] = $relatedField[$field]['list']['width'];
+                $columnSetting[count($columnSetting) - 1]['width'] = $fieldMeta['list']['width'];
             }
         }
         $columnName = $arrayHelper->jsonEncode($columnName);
         $columnSetting = $arrayHelper->jsonEncode($columnSetting);
-
+        
         // 排序
         if(isset($meta['db']['order']) && !empty($meta['db']['order']))
         {
@@ -92,7 +92,8 @@ class Trex_View_JqGrid extends Trex_View
         /**
          * @todo 当前页数,行数等信息的获取
          */
-        $rowNum = intval($request->g('row'));
+        $controller = $this->_data['config']['this'];
+        $rowNum = intval($request->g($controller->limitName));
         if($rowNum <= 0)
         {
             $rowNum = $this->meta['db']['limit'];

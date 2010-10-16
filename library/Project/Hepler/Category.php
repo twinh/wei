@@ -47,7 +47,7 @@ class Project_Hepler_Category
         if(!isset($this->_fileCache[$name]))
         {
             // TODO 使用文件缓存
-            $this->_fileCache[$name] = Qwin::run('-meta')
+            $this->_fileCache[$name] = Qwin::run('Qwin_Trex_Metadata')
                 ->getDoctrineQuery($set)
                 ->execute()
                 ->toArray();

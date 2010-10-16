@@ -41,14 +41,21 @@ class Trex_Service_Insert extends Trex_Service_BasicAction
         'data' => array(
             'db' => null,
         ),
-        'trigger' => array(
+        'callback' => array(
         ),
         'view' => array(
             'class' => null,
             'display' => true,
+            'url' => null,
         ),
     );
 
+    /**
+     * 根据配置,执行插入数据操作
+     *
+     * @param array $config 配置
+     * @todo 检查是否存在数据
+     */
     public function process(array $config = null)
     {
         // 初始配置
@@ -61,55 +68,47 @@ class Trex_Service_Insert extends Trex_Service_BasicAction
         $metaHelper = Qwin::run('Qwin_Trex_Metadata');
         $meta = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
-        $query = $meta->getDoctrineQuery($this->_set);
-        $relatedField = $meta->connectMetadata($this->_meta);
+        $query = $metaHelper->getDoctrineQuery($this->_set);
+        $metaHelper->loadRelatedMetadata($meta, 'db');
         Qwin::run('Qwin_Class_Extension')
             ->setNamespace('validator')
             ->addClass('Qwin_Validator_JQuery');
 
-        // 设置行为为入库,连接元数据
-        $relatedField = $meta->connectMetadata($meta);
-        $addDbField = $relatedField->getAttrList('isDbField');
-
-        // 转换,验证和还原
-        $data = $this->_meta->convertSingleData($relatedField, $relatedField, 'db', $_POST);
-        $validateResult = $meta->validateArray($relatedField, $data + $_POST, $this);
+        // 转换,验证
+        $data = $metaHelper->unsetPrimaryKeyValue($config['data']['db'], $meta);
+        $data = $metaHelper->convertOne($data, 'db', $meta, $config['this']);
+        $data = $metaHelper->setForeignKeyData($meta['model'], $data);
+        $validateResult = $metaHelper->validateArray($data + $_POST, $meta, $config['this']);
         if(true !== $validateResult)
         {
-            $message = $this->_lang->t('MSG_ERROR_FIELD')
-                . $this->_lang->t($relatedField[$validateResult->field]['basic']['title'])
-                . '<br />'
-                . $this->_lang->t('MSG_ERROR_MSG')
-                . $meta->format($this->_lang->t($validateResult->message), $validateResult->param);
+            $message = $this->showValidateError($validateResult, $meta, $config['view']['display']);
             $return = array(
                 'result' => false,
                 'message' => $message,
             );
-            if($config['view']['display'])
-            {
-                $this->setRedirectView($message);
-            }
             return $return;
         }
-        $data = $meta->restoreData($relatedField, $relatedField, $data);
-        $data = $meta->setForeignKeyData($meta['model'], $data);
-
+        
         // 保存关联模型的数据
-        $meta->saveRelatedDbData($meta, $data, $query);
+        //$metaHelper->saveRelatedDbData($meta, $data, $query);
 
         // 入库
-        $ini = Qwin::run('-ini');
-        $modelName = $ini->getClassName('Model', $this->_set);
+        $modelName = $metaHelper->getClassName('Model', $this->_set);
         $this->_result = new $modelName;
         $this->_result->fromArray($data);
         $this->_result->save();
 
         // 在数据库操作之后,执行相应的 on 函数,跳转到原来的页面或列表页
-        $config['trigger']['afterDb'][1] = $data;
-        $this->executeTrigger('afterDb', $config);
-        $url = urldecode($this->request->p('_page'));
-        '' == $url && $url = $this->url->createUrl($this->_set, array('action' => 'Index'));
+        $config['callback']['afterDb'][1] = $data;
+        $this->executeCallback('afterDb', $config);
 
+        // 设置视图数据
+        if($config['view']['url'])
+        {
+            $url = $config['view']['url'];
+        } else {
+            $url = $this->url->createUrl($this->_set, array('action' => 'Index'));
+        }
         $return = array(
             'result' => true,
             'message' => $this->_lang->t('MSG_OPERATE_SUCCESSFULLY'),

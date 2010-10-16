@@ -40,14 +40,15 @@ class Trex_Service_Form extends Trex_Service_BasicAction
         ),
         'data' => array(
             'primaryKeyValue' => null,
-            'convertAsAction' => 'add',
+            'asAction' => 'add',
         ),
-        'trigger' => array(
+        'callback' => array(
         ),
         'view' => array(
-            'class' => 'Trex_View_View',
+            'class' => 'Trex_View_AddForm',
             'display' => true,
         ),
+        'this' => null,
     );
 
     public function process(array $config = null)
@@ -63,10 +64,9 @@ class Trex_Service_Form extends Trex_Service_BasicAction
         $meta = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
         $primaryKeyValue = $config['data']['primaryKeyValue'];
-        
-        $id = $this->request->g($primaryKey);
-        $query = $meta->getDoctrineQuery($this->_set);
-        $relatedField = $meta->connectMetadata($this->_meta);
+
+        $metaHelper->loadRelatedMetadata($meta, 'db');
+        $query = $metaHelper->getDoctrineQuery($this->_set);
 
         /**
          * 三种模式　
@@ -95,15 +95,12 @@ class Trex_Service_Form extends Trex_Service_BasicAction
         } else {
             // 从配置元数据中取出表单初始值,再从url地址参数取出初始值,覆盖原值
             $data = $meta['field']->getSecondLevelValue(array('form', '_value'));
-            $data = $meta->getUrlData($data);
+            $data = $metaHelper->getUrlData($data);
         }
         unset($data[$primaryKey]);
 
         // 处理数据
-        $data = $meta->convertDataToSingle($data);
-        $data = $meta->convertSingleData($relatedField, $relatedField, $config['data']['convertAsAction'], $data);
-        $relatedField->order();
-        $groupList = $relatedField->getAddGroupList();
+        $data = $metaHelper->convertOne($data, $config['data']['asAction'], $meta, $config['this']);
 
         // 设置视图
         $this->_view = array(

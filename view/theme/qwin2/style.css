@@ -197,7 +197,8 @@ div.ui-layout-pane {
     display: table;
 }
 /* input: hidden 的行 */
-.ui-form .ui-form-content .ui-block-hidden {
+.ui-form .ui-form-content .ui-block-hidden,
+.ui-form .ui-form-content .ui-block-custom {
     display: none;
 }
 .ui-form .ui-form-content .ui-block-common .ui-label-common,

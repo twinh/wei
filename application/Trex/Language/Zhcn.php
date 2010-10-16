@@ -148,6 +148,7 @@ class Trex_Language_Zhcn extends Trex_Language
             'LBL_NOT_SELECTED' => '未选择',
             'LBL_READONLY' => '只读',
             'LBL_PERSONAL' => '个人',
+            'LBL_LOGIN' => '登录',
         );
     }
 }

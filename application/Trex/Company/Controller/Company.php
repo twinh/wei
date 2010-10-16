@@ -49,7 +49,7 @@ class Trex_Company_Controller_Company extends Trex_ActionController
             'module' => 'Member',
             'controller' => 'Member',
         ), false)->where('id = ?', $value)->fetchOne();
-        $this->relatedField->set('member_id.form._value2', $member['username']);
+        $this->_meta['field']->set('member_id.form._value2', $member['username']);
         return $value;
     }
 }

@@ -29,39 +29,21 @@ class Trex_View_JqGridJson extends Trex_View
 {
     public function display()
     {
-        /**
-         * 初始变量,方便调用
-         */
+        // 初始变量,方便调用
         $primaryKey = $this->primaryKey;
         $request = Qwin::run('Qwin_Request');
+        $data = $this->data;
 
-        /**
-         * 转换为jqGrid的行数据
-         */
-        $i = 0;
-        $rowData = array();
-        foreach($this->data as $key => $row)
-        {
-            $rowData[$i][$primaryKey] = $row[$primaryKey];
-            foreach($this->listField as $field)
-            {
-                if(null == $row[$field])
-                {
-                    // 使列表 null 类型数据能正确显示
-                    $row[$field] = '<em>(null)<em>';
-                }
-                $rowData[$i]['cell'][] = $row[$field];
-            }
-            $i++;
-        }
+        // 转换为jqGrid的行数据
+        $data = $this->metaHelper->convertTojqGridData($data, $primaryKey, $this->layout);
 
         /**
          * @todo 当前页数,行数等信息的获取
          */
-        $nowPage = intval($request->g('page'));
+        $controller = $this->_data['config']['this'];
+        $nowPage = intval($request->g($controller->pageName));
         $nowPage <= 0 && $nowPage = 1;
-
-        $rowNum = intval($request->g('row'));
+        $rowNum = intval($request->g($controller->limitName));
         if($rowNum <= 0)
         {
             $rowNum = $this->meta['db']['limit'];
@@ -70,15 +52,13 @@ class Trex_View_JqGridJson extends Trex_View
             $rowNum = 500;
         }
 
-        /**
-         * 输出json数据
-         */
+        // 输出json数据
         $jsonData = array(
             'page' => $nowPage,
             // 总页面数
             'total' => ceil($this->totalRecord / $rowNum),
             'records' => $this->totalRecord,
-            'rows' => $rowData,
+            'rows' => $data,
         );
         echo Qwin::run('-arr')->jsonEncode($jsonData);
     }

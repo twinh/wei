@@ -41,7 +41,7 @@ class Trex_Service_Update extends Trex_Service_BasicAction
         'data' => array(
             'db' => null,
         ),
-        'trigger' => array(
+        'callback' => array(
             'beforeConvert' => array(),
             'afterDb' => array(),
         ),
@@ -50,6 +50,7 @@ class Trex_Service_Update extends Trex_Service_BasicAction
             'display' => true,
             'url' => null,
         ),
+        'this' => null
     );
 
     public function process(array $config = null)
@@ -65,13 +66,13 @@ class Trex_Service_Update extends Trex_Service_BasicAction
         $meta = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
         $primaryKeyValue = isset($config['data']['db'][$primaryKey]) ? $config['data']['db'][$primaryKey] : null;
+        $metaHelper->loadRelatedMetadata($meta, 'db');
         Qwin::run('Qwin_Class_Extension')
             ->setNamespace('validator')
             ->addClass('Qwin_Validator_JQuery');
-
         
         // 从模型获取数据
-        $query = $meta->getDoctrineQuery($this->_set);
+        $query = $metaHelper->getDoctrineQuery($this->_set);
         $result = $query->where($primaryKey . ' = ?', $primaryKeyValue)->fetchOne();
 
         // 记录不存在,加载错误视图
@@ -87,50 +88,40 @@ class Trex_Service_Update extends Trex_Service_BasicAction
             }
             return $return;
         }
-        
-        // 设置行为为入库,连接元数据
-        $relatedField = $meta->connectMetadata($meta);
-        $editDbField = $relatedField->getAttrList('isDbField', 'isReadonly');
 
-        // 转换,验证和还原
-        $data = $meta->convertSingleData($relatedField, $relatedField, 'db', $_POST);
-        $validateResult = $meta->validateArray($relatedField, $data + $_POST, $this);
-        // TODO 转变为一个方法
+        // 转换,验证
+        $data = $metaHelper->convertOne($config['data']['db'], 'db', $meta, $config['this']);
+        $validateResult = $metaHelper->validateArray($data + $_POST, $meta, $config['this']);
         if(true !== $validateResult)
         {
-            $message = $this->_lang->t('MSG_ERROR_FIELD')
-                . $this->_lang->t($relatedField[$validateResult->field]['basic']['title'])
-                . '<br />'
-                . $this->_lang->t('MSG_ERROR_MSG')
-                . $meta->format($this->_lang->t($validateResult->message), $validateResult->param);
+            $message = $this->showValidateError($validateResult, $meta, $config['view']['display']);
             $return = array(
                 'result' => false,
                 'message' => $message,
             );
-            if($config['view']['display'])
-            {
-                $this->setRedirectView($message);
-            }
             return $return;
         }
-        $data = $meta->restoreData($editDbField, $relatedField, $data);
 
-        // 保存关联模型的数据
-        $meta->saveRelatedDbData($meta, $data, $result);
+        //$metaHelper->saveRelatedDbData($meta, $data, $result);
 
-        /**
-         * 入库
-         * @todo 设置 null 值
-         */
+        // 删除只读域的值
+        $data = $metaHelper->deleteReadonlyValue($data, $meta);
+
+        // 保存到数据库
         $result->fromArray($data);
         $result->save();
 
         // 入库后,执行绑定事件
-        $config['trigger']['afterDb'][1] = $data;
-        $this->executeTrigger('afterDb', $config);
-        $url = urldecode($this->request->p('_page'));
-        '' == $url && $url = $this->url->createUrl($this->_set, array('action' => 'Index'));
+        $config['callback']['afterDb'][1] = $data;
+        $this->executeCallback('afterDb', $config);
 
+        // 设置视图数据
+        if($config['view']['url'])
+        {
+            $url = $config['view']['url'];
+        } else {
+            $url = $this->url->createUrl($this->_set, array('action' => 'Index'));
+        }
         $return = array(
             'result' => true,
             'message' => $this->_lang->t('MSG_OPERATE_SUCCESSFULLY'),

@@ -110,7 +110,7 @@ class Trex_Management_Controller_Module extends Trex_Controller
             );
         }
         $listField = $meta['field']->getAttrList('isList');
-        $data = $meta->convertMultiData($listField, $meta['field'], 'list', $data, false);
+        $data = $metaHelper->convertArray($listField, $meta['field'], 'list', $data, false);
 
         $this->_view = array(
             'class' => 'Trex_View',
@@ -126,13 +126,13 @@ class Trex_Management_Controller_Module extends Trex_Controller
         if(empty($_POST))
         {
             $groupList = $this->_meta->field->getAddGroupList();
-            $relatedField = $this->_meta->field;
-            $relatedField->set('namespace_value.form._value', $this->_namespace);
+            $meta['field'] = $this->_meta->field;
+            $meta['field']->set('namespace_value.form._value', $this->_namespace);
             $banModule = implode(',', $this->_moduleList);
 
             $theme = Qwin::run('-ini')->getConfig('interface.theme');
 
-            $jQueryValidateCode = Qwin::run('-arr')->jsonEncode($this->_meta->getJQueryValidateCode($relatedField));
+            $jQueryValidateCode = Qwin::run('-arr')->jsonEncode($this->_meta->getJQueryValidateCode($meta['field']));
             $this->_view = array(
                 'class' => 'Trex_View',
                 'element' => array(

@@ -30,6 +30,9 @@
 
 class Trex_ActionController extends Trex_Controller
 {
+    public $pageName = 'page';
+    public $limitName = 'rowNum';
+
     /**
      * 控制器默认首页,Trex命名空间的默认首页是数据列表
      *
@@ -45,15 +48,21 @@ class Trex_ActionController extends Trex_Controller
             'data' => array(
                 'list' => $this->metaHelper->getUrlListField(),
             ),
-            'trigger' => array(
+            'callback' => array(
                 'beforeViewLoad' => array(
                     array($this, 'createCustomLink'),
                 ),
             ),
+            'this' => $this,
         );
         return Qwin::run('Trex_Service_Index')->process($config);
     }
 
+    /**
+     * 弹出窗口
+     *
+     * @return array 服务处理结果
+     */
     public function actionPopup()
     {
         /**
@@ -67,6 +76,7 @@ class Trex_ActionController extends Trex_Controller
             'view' => array(
                 'class' => 'Trex_View_Popup',
             ),
+            'this' => $this,
         );
         return Qwin::run('Trex_Service_Index')->process($config);
     }
@@ -87,15 +97,16 @@ class Trex_ActionController extends Trex_Controller
                 'list' => $this->metaHelper->getUrlListField(),
                 'order' => $this->metaHelper->getUrlOrder(),
                 'where' => $this->metaHelper->getUrlWhere(),
-                'offset'=> $this->metaHelper->getUrlOffset(),
-                'limit' => $this->metaHelper->getUrlLimit(),
+                'offset'=> $this->metaHelper->getUrlOffset($this->pageName, $this->limitName),
+                'limit' => $this->metaHelper->getUrlLimit($this->limitName),
                 'converAsAction'=> $this->request->g('_as'),
             ),
-            'trigger' => array(
+            'callback' => array(
                 'dataConverter' => array(
                     array($this, 'dataConverter'),
                 ),
             ),
+            'this' => $this,
         );
         return Qwin::run('Trex_Service_List')->process($config);
     }
@@ -115,6 +126,7 @@ class Trex_ActionController extends Trex_Controller
             'data' => array(
                 'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_set),
             ),
+            'this' => $this,
         );
         return Qwin::run('Trex_Service_View')->process($config);
     }
@@ -136,9 +148,7 @@ class Trex_ActionController extends Trex_Controller
                 'data' => array(
                     'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_set),
                 ),
-                'view' => array(
-                    'class' => 'Trex_View_Form',
-                ),
+                'this' => $this,
             );
             return Qwin::run('Trex_Service_Form')->process($config);
         } else {
@@ -150,11 +160,15 @@ class Trex_ActionController extends Trex_Controller
                 'data' => array(
                     'db' => $_POST,
                 ),
-                'trigger' => array(
+                'callback' => array(
                     'afterDb' => array(
                         array($this, 'onAfterDb'),
                     ),
                 ),
+                'view' => array(
+                    'url' => urldecode($this->request->p('_page')),
+                ),
+                'this' => $this,
             );
             return Qwin::run('Trex_Service_Insert')->process($config);
         }
@@ -176,12 +190,14 @@ class Trex_ActionController extends Trex_Controller
                 'set' => $this->_set,
                 'data' => array(
                     'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_set),
-                    'convertAsAction' => 'edit',
+                    'asAction' => 'edit',
                     'isLink' => false,
+                    'isView' => false,
                 ),
                 'view' => array(
-                    'class' => 'Trex_View_Form',
+                    'class' => 'Trex_View_EditForm',
                 ),
+                'this' => $this,
             );
             return Qwin::run('Trex_Service_View')->process($config);
         } else {
@@ -193,11 +209,15 @@ class Trex_ActionController extends Trex_Controller
                 'data' => array(
                     'db' => $_POST,
                 ),
-                'trigger' => array(
+                'callback' => array(
                     'afterDb' => array(
                         array($this, 'onAfterDb'),
                     ),
                 ),
+                'view' => array(
+                    'url' => urldecode($this->request->p('_page')),
+                ),
+                'this' => $this,
             );
             return Qwin::run('Trex_Service_Update')->process($config);
         }
@@ -218,11 +238,12 @@ class Trex_ActionController extends Trex_Controller
             'data' => array(
                 'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_set),
             ),
-            'trigger' => array(
+            'callback' => array(
                 'afterDb' => array(
                     array($this, 'onAfterDb'),
                 ),
             ),
+            'this' => $this,
         );
         return Qwin::run('Trex_Service_Delete')->process($config);
     }
@@ -285,13 +306,6 @@ class Trex_ActionController extends Trex_Controller
         return $data;
     }
 
-    /*public function convertPopupOperation($value, $name, $data, $copyData)
-    {
-        $primaryKey = $this->_meta['db']['primaryKey'];
-        $data  = Qwin_Helper_Html::jQueryButton($this->url->createUrl($this->_set, array('action' => 'Edit', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_EDIT'), 'ui-icon-check');
-        return $data;
-    }*/
-
     /**
      * 在列表操作下,初始化排序域的值,依次按5递增
      *
@@ -325,20 +339,6 @@ class Trex_ActionController extends Trex_Controller
      * @return string 当前域的新值
      */
     public function convertDbId($value, $name, $data, $copyData)
-    {
-        return Qwin::run('Qwin_converter_String')->getUuid($value);
-    }
-
-    /**
-     * 在入库操作下,转换详细信息的编号
-     *
-     * @param mixed 当前域的值
-     * @param string 当前域的名称
-     * @param array $data 已转换过的当前记录的值
-     * @param array $cpoyData 未转换过的当前记录的值
-     * @return string 当前域的新值
-     */
-    public function convertDbDetailId($value, $name, $data, $copyData)
     {
         return Qwin::run('Qwin_converter_String')->getUuid($value);
     }

@@ -27,7 +27,7 @@
 
 abstract class Qwin_Metadata_Abstract implements ArrayAccess, Iterator
 {
-    protected $_data;
+    protected $_data = array();
 
     public function __set($name, $value)
     {
