@@ -32,7 +32,7 @@ class Trex_Task_Controller_Task extends Trex_ActionController
     /**
      * 查看分配给我的任务
      */
-    public function actionListAssignToMe()
+    public function actionListAssignToMe() 
     {
         $_GET['searchField'] = 'assign_to';
         $_GET['searchValue'] = $this->member['id'];

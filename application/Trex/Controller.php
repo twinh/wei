@@ -136,6 +136,7 @@ class Trex_Controller extends Qwin_Trex_Controller
     {
         $ses = $this->session;
         $member = $ses->get('member');
+        $metaHelper = Qwin::run('Qwin_Trex_Metadata');
 
         // 未登陆则默认使用游客账号
         if(null == $member)
@@ -145,7 +146,7 @@ class Trex_Controller extends Qwin_Trex_Controller
                 'module' => 'Member',
                 'controller' => 'Member',
             );
-            $query =$this->_meta->getDoctrineQuery($set);
+            $query = $metaHelper->getDoctrineQuery($set);
             $result = $query
                 ->where('username = ?', 'guest')
                 ->fetchOne();
@@ -160,7 +161,7 @@ class Trex_Controller extends Qwin_Trex_Controller
         // 逐层权限判断
         $set = $this->_set;
         $permission = unserialize($member['group']['permission']);
-        /*if(isset($permission[$set['namespace']]))
+        if(isset($permission[$set['namespace']]))
         {
             return true;
         }
@@ -191,7 +192,7 @@ class Trex_Controller extends Qwin_Trex_Controller
                 ->loadView()
                 ->display();
             exit;
-        }*/
+        }
         return false;
     }
 

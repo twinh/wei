@@ -28,7 +28,7 @@
 
 class Trex_Task_Metadata_Task extends Trex_Metadata
 {
-    public function  __construct()
+    public function  __construct() 
     {
         $this->setCommonMetadata();
         $this->parseMetadata(array(

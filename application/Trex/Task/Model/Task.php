@@ -27,4 +27,5 @@
 
 class Trex_Task_Model_Task extends Trex_Model
 {
+    
 }

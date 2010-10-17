@@ -64,7 +64,7 @@ class Trex_Job_Controller_Job extends Trex_ActionController
     {
         if(null != $value)
         {
-            $company = $this->_meta->getDoctrineQuery(array(
+            $company = $this->metaHelper->getDoctrineQuery(array(
                 'namespace' => 'Trex',
                 'module' => 'Company',
                 'controller' => 'Company',
