@@ -35,7 +35,6 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                 'category_id' => array(
                     'form' => array(
                         '_type' => 'select',
-
                         '_resourceGetter' => array(
                             array('Project_Hepler_Category', 'getTreeResource'),
                             array(
@@ -46,7 +45,6 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                             null,
                             array('id', 'category_id', 'title'),
                         ),
-                        'name' => 'category_id',
                     ),
                     'attr' => array(
                         'isLink' => 1,
@@ -62,21 +60,16 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                             NULL,
                             array('id', 'category_id', 'title'),
                         ),
+                        'view' => 'list',
                     ),
                 ),
                 'title' => array(
-                    'form' => array(
-                        'name' => 'title',
-                    ),
                     'validator' => array(
                         'required',
                         'maxlength,40',
                     ),
                 ),
                 'url' => array(
-                    'form' => array(
-                        'name' => 'url',
-                    ),
                     'attr' => array(
                         'isLink' => 0,
                         'isList' => 1,
@@ -91,7 +84,6 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                 'target' => array(
                     'form' => array(
                         '_value' => '_self',
-                        'name' => 'target',
                     ),
                     'attr' => array(
                         'isLink' => 1,
@@ -102,16 +94,40 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                     ),
                 ),
                 'order' => array(
-                    'form' => array(
-                        'name' => 'order',
-                    ),
                     'attr' => array(
                         'isLink' => 1,
                     ),
                 ),
             ),
-            // 表之间的联系
+            'group' => array(
+            ),
             'model' => array(
+                'creator' => array(
+                    'set' => array(
+                        'module' => 'Member',
+                        'controller' => 'Member',
+                    ),
+                    'alias' => 'creator',
+                    'local' => 'created_by',
+                    'type' => 'view',
+                    'fieldMap' => array(
+                        'created_by' => 'username',
+                    ),
+                ),
+                'modifier' => array(
+                    'set' => array(
+                        'module' => 'Member',
+                        'controller' => 'Member',
+                    ),
+                    'alias' => 'modifier',
+                    'local' => 'modified_by',
+                    'type' => 'view',
+                    'fieldMap' => array(
+                        'modified_by' => 'username',
+                    ),
+                ),
+            ),
+            'metadata' => array(
             ),
             'db' => array(
                 'table' => 'admin_menu',
@@ -119,7 +135,6 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                     array('order', 'DESC')
                 )
             ),
-            // 页面显示
             'page' => array(
                 'title' => 'LBL_MODULE_ADMIN_MENU',
             ),
