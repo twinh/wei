@@ -108,6 +108,9 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                     ),
                 ),
             ),
+            'group' => array(
+
+            ),
             // 表之间的联系
             'model' => array(
                 'contact' => array(
@@ -157,6 +160,9 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                         'controller' => 'Status',
                     ),
                 ),*/
+            ),
+            'metadata' => array(
+
             ),
             'db' => array(
                 'table' => 'member',

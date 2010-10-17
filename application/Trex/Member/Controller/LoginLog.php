@@ -27,6 +27,11 @@
 
 class Trex_Member_Controller_LoginLog extends Trex_ActionController
 {
+    public function actionMyLoginLog()
+    {
+        
+    }
+
     public function convertDbIp($value, $name, $data, $copyData)
     {
         return Qwin_Helper_Util::getIp();
