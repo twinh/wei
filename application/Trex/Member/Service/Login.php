@@ -54,6 +54,7 @@ class Trex_Member_Service_Login extends Trex_Service_BasicAction
         ),
         'view' => array(
             'display' => true,
+            'url' => null,
         ),
         'this' => null,
     );
@@ -95,7 +96,7 @@ class Trex_Member_Service_Login extends Trex_Service_BasicAction
         Qwin::run('Qwin_Class_Extension')
             ->setNamespace('validator')
             ->addClass('Qwin_Validator_JQuery');
-        $validateResult = $metaHelper->validateArray($meta['field'], $config['data']['db'], $config['this']);
+        $validateResult = $metaHelper->validateArray($config['data']['db'], $meta, $config['this']);
         if(true !== $validateResult)
         {
             $message = $this->showValidateError($validateResult, $meta, $config['view']['display']);
@@ -107,7 +108,7 @@ class Trex_Member_Service_Login extends Trex_Service_BasicAction
         }
 
         // 验证通过,设置登陆数据到session
-        $member = $this->member;
+        $member = $config['this']->member;
         $this->session->set('member',  $member);
         $this->session->set('style', $member['theme']);
         $this->session->set('language', $member['language']);
@@ -145,28 +146,23 @@ class Trex_Member_Service_Login extends Trex_Service_BasicAction
                 return $logResult;
             }
         }
-        echo 123;exit;
 
-        /**
-         * 增加登陆记录
-         */
-        $logQuery = $metaHelper->getDoctrineQuery(array(
-            'namespace' => 'Trex',
-            'module' => 'Member',
-            'controller' => 'LoginLog',
-        ));
-        $logQuery = new Trex_Member_Model_LoginLog();
-        $logQuery['id'] = Qwin::run('Qwin_converter_String')->getUuid();
-        $logQuery['member_id'] = $member['id'];
-        $logQuery['ip'] = Qwin_Helper_Util::getIp();
-        $logQuery['date_created'] = date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
-        $logQuery->save();
-
-        /**
-         * 跳转到上一页或默认首页
-         */
-        $url = urldecode($this->request->p('_page'));
-        '' == $url && $url = '?';
-        $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+        // 设置视图数据
+        if($config['view']['url'])
+        {
+            $url = $config['view']['url'];
+        } else {
+            $url = $this->url->createUrl($this->_set, array('action' => 'Index'));
+        }
+        $return = array(
+            'result' => true,
+            'message' => $this->_lang->t('MSG_OPERATE_SUCCESSFULLY'),
+            'url' => $url,
+        );
+        if($config['view']['display'])
+        {
+            $this->setRedirectView($return['message'], $url);
+        }
+        return $return;
     }
 }

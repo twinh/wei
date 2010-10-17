@@ -48,6 +48,7 @@ class Trex_Service_Insert extends Trex_Service_BasicAction
             'display' => true,
             'url' => null,
         ),
+        'this' => null
     );
 
     /**
@@ -60,12 +61,16 @@ class Trex_Service_Insert extends Trex_Service_BasicAction
     {
         // 初始配置
         $config = $this->_multiArrayMerge($this->_config, $config);
+        $metaHelper = Qwin::run('Qwin_Trex_Metadata');
+        if(null == $config['this'])
+        {
+            $config['this'] = Qwin::run($metaHelper->getClassName('Controller', $config['set']));
+        }
 
         // 通过父类,加载语言,元数据,模型等
         parent::process($config['set']);
 
         // 初始化常用的变量
-        $metaHelper = Qwin::run('Qwin_Trex_Metadata');
         $meta = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
         $query = $metaHelper->getDoctrineQuery($this->_set);
@@ -88,7 +93,7 @@ class Trex_Service_Insert extends Trex_Service_BasicAction
             );
             return $return;
         }
-        
+
         // 保存关联模型的数据
         //$metaHelper->saveRelatedDbData($meta, $data, $query);
 
@@ -99,8 +104,11 @@ class Trex_Service_Insert extends Trex_Service_BasicAction
         $this->_result->save();
 
         // 在数据库操作之后,执行相应的 on 函数,跳转到原来的页面或列表页
-        $config['callback']['afterDb'][1] = $data;
-        $this->executeCallback('afterDb', $config);
+        if(isset($config['callback']['afterDb']))
+        {
+            $config['callback']['afterDb'][1] = $data;
+            $this->executeCallback('afterDb', $config);
+        }
 
         // 设置视图数据
         if($config['view']['url'])

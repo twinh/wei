@@ -16,8 +16,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  
+ * @package     Trex
+ * @subpackage  Member
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -27,6 +27,11 @@
 
 class Trex_Member_Controller_LoginLog extends Trex_ActionController
 {
+    public function convertDbIp($value, $name, $data, $copyData)
+    {
+        return Qwin_Helper_Util::getIp();
+    }
+
     public function convertListDateCreated($value, $name, $data, $copyData)
     {
         return $value;
