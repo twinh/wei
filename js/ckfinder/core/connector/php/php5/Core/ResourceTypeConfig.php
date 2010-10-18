@@ -3,13 +3,14 @@
  * CKFinder
  * ========
  * http://ckfinder.com
- * Copyright (C) 2007-2009, CKSource - Frederico Knabben. All rights reserved.
+ * Copyright (C) 2007-2010, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
  * modifying or distribute this file or part of its contents. The contents of
  * this file is part of the Source Code of CKFinder.
  */
+if (!defined('IN_CKFINDER')) exit;
 
 /**
  * @package CKFinder
@@ -69,13 +70,6 @@ class CKFinder_Connector_Core_ResourceTypeConfig
      */
     private $_deniedExtensions = array();
     /**
-     * Default view
-     *
-     * @var string
-     * @access private
-     */
-    private $_defaultView = "Thumbnails";
-    /**
      * used for CKFinder_Connector_Core_Config object caching
      *
      * @var CKFinder_Connector_Core_Config
@@ -121,7 +115,7 @@ class CKFinder_Connector_Core_ResourceTypeConfig
 
         if (isset($resourceTypeNode["allowedExtensions"])) {
             if (is_array($resourceTypeNode["allowedExtensions"])) {
-                foreach ($resourceTypeNode["allowedExtensions"] as $extension) {
+                foreach ($resourceTypeNode["allowedExtensions"] as $e) {
                     $this->_allowedExtensions[] = strtolower(trim((string)$e));
                 }
             }
@@ -152,17 +146,6 @@ class CKFinder_Connector_Core_ResourceTypeConfig
                     }
                 }
             }
-        }
-
-        $_view = "";
-        if (isset($resourceTypeNode["defaultView"])) {
-            $_view = $resourceTypeNode["defaultView"];
-        }
-        if (!strlen($_view) && isset($GLOBALS['config']['DefaultDisplaySettings']['view'])) {
-            $_view = $GLOBALS['config']['DefaultDisplaySettings']['view'];
-        }
-        if ($_view == "List") {
-            $this->_defaultView = "List";
         }
     }
 
@@ -230,17 +213,6 @@ class CKFinder_Connector_Core_ResourceTypeConfig
     public function getDeniedExtensions()
     {
         return $this->_deniedExtensions;
-    }
-
-    /**
-     * Get default view
-     *
-     * @access public
-     * @return string
-     */
-    public function getDefaultView()
-    {
-        return $this->_defaultView;
     }
 
     /**
@@ -333,6 +305,28 @@ class CKFinder_Connector_Core_ResourceTypeConfig
         $regex = $this->_config->getHideFilesRegex();
         if ($regex) {
             return preg_match($regex, $fileName);
+        }
+
+        return false;
+    }
+
+    /**
+     * Check given path
+     * Return true if path contains folder name that matches hidden folder names list
+     *
+     * @param string $folderName
+     * @access public
+     * @return boolean
+     */
+    public function checkIsHiddenPath($path)
+    {
+        $_clientPathParts = explode("/", trim($path, "/"));
+        if ($_clientPathParts) {
+            foreach ($_clientPathParts as $_part) {
+                if ($this->checkIsHiddenFolder($_part)) {
+                    return true;
+                }
+            }
         }
 
         return false;

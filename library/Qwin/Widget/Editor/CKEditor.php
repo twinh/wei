@@ -38,7 +38,7 @@ class Qwin_Widget_Editor_CKEditor
                  <script type="text/javascript" src="' . QWIN_RESOURCE_PATH . '/js/ckfinder/ckfinder.js"></script>
                  <script type="text/javascript">
                     var ckeditor = CKEDITOR.replace("' . $meta['id'] . '");
-                    CKFinder.SetupCKEditor(ckeditor, "' . QWIN_RESOURCE_PATH . '/js/ckfinder/" );
+                    CKFinder.setupCKEditor(ckeditor, "' . QWIN_RESOURCE_PATH . '/js/ckfinder/" );
                  </script>
         ';
 

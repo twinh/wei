@@ -3,13 +3,14 @@
 * CKFinder
 * ========
 * http://ckfinder.com
-* Copyright (C) 2007-2009, CKSource - Frederico Knabben. All rights reserved.
+* Copyright (C) 2007-2010, CKSource - Frederico Knabben. All rights reserved.
 *
 * The software, this file and its contents are subject to the CKFinder
 * License. Please read the license.txt file before using, installing, copying,
 * modifying or distribute this file or part of its contents. The contents of
 * this file is part of the Source Code of CKFinder.
 */
+if (!defined('IN_CKFINDER')) exit;
 
 /**
  * @package CKFinder
@@ -222,7 +223,8 @@ class CKFinder_Connector_Utils_Misc
     */
     public static function mbBasename($file)
     {
-        return end(explode('/', str_replace("\\", "/", $file)));
+        $explode = explode('/', str_replace("\\", "/", $file));
+        return end($explode);
     }
 
     /**

@@ -11,9 +11,8 @@
  * Other settings may be left with their default values, or used to control
  * advanced features of CKFinder.
  */
-// ╪сть QWin ╫с©з
 require 'qwin_interface.php';
-$qwin_interface = new QWin_CKFinder_Interface();
+$qwin_interface = new Qwin_CKFinder_Interface();
 /**
  * This function must check the user session to be sure that he/she is
  * authorized to upload and access files in the File Browser.
@@ -22,22 +21,31 @@ $qwin_interface = new QWin_CKFinder_Interface();
  */
 function CheckAuthentication()
 {
-	//WARNING : DO NOT simply return "true". By doing so, you are allowing
-	//"anyone" to upload and list the files in your server. You must implement
-	//some kind of session validation here. Even something very simple as...
+	// WARNING : DO NOT simply return "true". By doing so, you are allowing
+	// "anyone" to upload and list the files in your server. You must implement
+	// some kind of session validation here. Even something very simple as...
 
 	// return isset($_SESSION['IsAuthorized']) && $_SESSION['IsAuthorized'];
 
-	//... where $_SESSION['IsAuthorized'] is set to "true" as soon as the
-	//user logs in your system.
+	// ... where $_SESSION['IsAuthorized'] is set to "true" as soon as the
+	// user logs in your system. To be able to use session variables don't
+	// forget to add session_start() at the top of this file.
+
 	global $qwin_interface;
-	return $qwin_interface->isChecked();
+    return $qwin_interface->isChecked();
 }
 
 // LicenseKey : Paste your license key here. If left blank, CKFinder will be
 // fully functional, in demo mode.
 $config['LicenseName'] = '';
 $config['LicenseKey'] = '';
+
+/*
+ Uncomment lines below to enable PHP error reporting and displaying PHP errors.
+ Do not do this on a production server. Might be helpful when debugging why CKFinder does not work as expected.
+*/
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
 
 /*
 To make it easy to configure CKFinder, the $baseUrl and $baseDir can be used.
@@ -66,7 +74,9 @@ Examples:
 	$baseDir = '/home/login/public_html/ckfinder/files/';
 	$baseDir = 'C:/SiteDir/CKFinder/userfiles/';
 
-	// Or you may let CKFinder discover the path, based on $baseUrl:
+	// Or you may let CKFinder discover the path, based on $baseUrl.
+	// WARNING: resolveUrl() *will not work* if $baseUrl does not start with a slash ("/"),
+	// for example if $baseDir is set to  http://example.com/ckfinder/files/
 	$baseDir = resolveUrl($baseUrl);
 
 ATTENTION: The trailing slash is required.
@@ -82,8 +92,8 @@ Thumbnails : thumbnails settings. All thumbnails will end up in the same
 directory, no matter the resource type.
 */
 $config['Thumbnails'] = Array(
-		'url' => $baseUrl . '_thumb',
-		'directory' => $baseDir . '_thumb',
+		'url' => $baseUrl . '_thumbs',
+		'directory' => $baseDir . '_thumbs',
 		'enabled' => true,
 		'directAccess' => false,
 		'maxWidth' => 100,
@@ -148,6 +158,12 @@ $config['AccessControl'][] = Array(
 		'resourceType' => 'Images',
 		'folder' => '/Logos',
 
+		'folderView' => true,
+		'folderCreate' => true,
+		'folderRename' => true,
+		'folderDelete' => true,
+
+		'fileView' => true,
 		'fileUpload' => false,
 		'fileRename' => false,
 		'fileDelete' => false);
@@ -174,18 +190,18 @@ $config['DefaultResourceTypes'] = '';
 
 $config['ResourceType'][] = Array(
 		'name' => 'Files',				// Single quotes not allowed
-		'url' => $baseUrl . 'file',
-		'directory' => $baseDir . 'file',
+		'url' => $baseUrl . 'files',
+		'directory' => $baseDir . 'files',
 		'maxSize' => 0,
-		'allowedExtensions' => '7z,aiff,asf,avi,bmp,csv,doc,fla,flv,gif,gz,gzip,jpeg,jpg,mid,mov,mp3,mp4,mpc,mpeg,mpg,ods,odt,pdf,png,ppt,pxd,qt,ram,rar,rm,rmi,rmvb,rtf,sdc,sitd,swf,sxc,sxw,tar,tgz,tif,tiff,txt,vsd,wav,wma,wmv,xls,zip',
+		'allowedExtensions' => '7z,aiff,asf,avi,bmp,csv,doc,docx,fla,flv,gif,gz,gzip,jpeg,jpg,mid,mov,mp3,mp4,mpc,mpeg,mpg,ods,odt,pdf,png,ppt,pptx,pxd,qt,ram,rar,rm,rmi,rmvb,rtf,sdc,sitd,swf,sxc,sxw,tar,tgz,tif,tiff,txt,vsd,wav,wma,wmv,xls,xlsx,zip',
 		'deniedExtensions' => '');
 
 $config['ResourceType'][] = Array(
 		'name' => 'Images',
-		'url' => $baseUrl . 'image',
-		'directory' => $baseDir . 'image',
-		'maxSize' => 0,
-		'allowedExtensions' => 'bmp,gif,jpeg,jpg,png',
+		'url' => $baseUrl . 'images',
+		'directory' => $baseDir . 'images',
+		'maxSize' => "16M",
+		'allowedExtensions' => 'bmp,gif,jpeg,jpg,png,avi,iso,mp3',
 		'deniedExtensions' => '');
 
 $config['ResourceType'][] = Array(
@@ -276,3 +292,18 @@ See comments above.
 Used when creating folders that does not exist.
 */
 $config['ChmodFolders'] = 0755 ;
+
+/*
+Force ASCII names for files and folders.
+If enabled, characters with diactric marks, like ц╔, ц╓, ц╤, д┤, д█, д▒, е║
+will be automatically converted to ASCII letters.
+*/
+$config['ForceAscii'] = false;
+
+
+include_once "plugins/imageresize/plugin.php";
+include_once "plugins/fileeditor/plugin.php";
+
+$config['plugin_imageresize']['smallThumb'] = '90x90';
+$config['plugin_imageresize']['mediumThumb'] = '120x120';
+$config['plugin_imageresize']['largeThumb'] = '180x180';

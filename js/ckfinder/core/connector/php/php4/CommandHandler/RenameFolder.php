@@ -3,13 +3,14 @@
  * CKFinder
  * ========
  * http://ckfinder.com
- * Copyright (C) 2007-2009, CKSource - Frederico Knabben. All rights reserved.
+ * Copyright (C) 2007-2010, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
  * modifying or distribute this file or part of its contents. The contents of
  * this file is part of the Source Code of CKFinder.
  */
+if (!defined('IN_CKFINDER')) exit;
 
 /**
  * @package CKFinder
@@ -47,6 +48,10 @@ class CKFinder_Connector_CommandHandler_RenameFolder extends CKFinder_Connector_
      */
     function buildXml()
     {
+        if (empty($_POST['CKFinderCommand']) || $_POST['CKFinderCommand'] != 'true') {
+            $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_INVALID_REQUEST);
+        }
+
         if (!$this->_currentFolder->checkAcl(CKFINDER_CONNECTOR_ACL_FOLDER_RENAME)) {
             $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_UNAUTHORIZED);
         }
@@ -57,6 +62,10 @@ class CKFinder_Connector_CommandHandler_RenameFolder extends CKFinder_Connector_
 
         $newFolderName = CKFinder_Connector_Utils_FileSystem::convertToFilesystemEncoding($_GET["NewFolderName"]);
         $resourceTypeInfo = $this->_currentFolder->getResourceTypeConfig();
+        $_config =& CKFinder_Connector_Core_Factory::getInstance("Core_Config");
+        if ($_config->forceAscii()) {
+            $newFolderName = CKFinder_Connector_Utils_FileSystem::convertToAscii($newFolderName);
+        }
 
         if (!CKFinder_Connector_Utils_FileSystem::checkFileName($newFolderName) || $resourceTypeInfo->checkIsHiddenFolder($newFolderName)) {
             $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_INVALID_NAME);
@@ -77,7 +86,7 @@ class CKFinder_Connector_CommandHandler_RenameFolder extends CKFinder_Connector_
         //let's calculate new folder name
         $newFolderPath = dirname($oldFolderPath).DIRECTORY_SEPARATOR.$newFolderName.DIRECTORY_SEPARATOR;
 
-        if (file_exists($newFolderPath)) {
+        if (file_exists(rtrim($newFolderPath, DIRECTORY_SEPARATOR))) {
             $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_ALREADY_EXIST);
         }
 

@@ -1,10 +1,10 @@
 CKFinder License
 ================
 http://ckfinder.com
-Copyright (C) 2007-2009, CKSource - Frederico Knabben. All rights reserved.
+Copyright (C) 2007-2010, CKSource - Frederico Knabben. All rights reserved.
 
 This license (the "License") is a legal agreement between you (either an
-individual or a single entity) and Frederico Knabben ("CKSource")
+individual or a single entity) and CKSource - Frederico Knabben ("CKSource")
 covering the use, installation, copying or distribution of CKFinder.
 
 Please read the license terms below. If you do not agree to all of the terms
@@ -41,7 +41,7 @@ License are entirely and exclusively reserved to and by CKSource. CKFinder is
 protected by applicable national and international laws and treaties.
 
 You may use, install, copy and distribute CKFinder solely as expressly provided
-in this License. You may not rent, lease, loan, sublicense, modify, translate,
+in this License. You may not rent, lease, loan, sub-license, modify, translate,
 reverse engineer, decompile, disassemble, or create derivative works based on,
 CKFinder, in whole or in part, nor permit anyone else to do so. You may not
 make access to CKFinder available to others in connection with a service
@@ -59,9 +59,8 @@ following models, which restricts your rights of usage and integration of
 CKFinder under the terms of this license:
 
     a. Web Site: you may integrate CKFinder in one web site (the "Web Site").
-       The Web Site domain URL must be specified at the moment of the purchase.
-       The license will not be valid for sub-domains of the specified Web Site
-       domain URL.
+       The Web Site URL must be specified at the moment of the purchase.
+       The license will not be valid for sub-domains of the specified Web Site URL.
 
     b. Corporate Web Sites: you may integrate CKFinder in any number of web
        sites owned or produced by you ("Corporate Web Sites). The license will
@@ -78,7 +77,7 @@ License fees may be different depending on the license model.
 4. License Validity
 
 This license is valid only if the Web Site, Corporate Web Sites or Product is a
-work that uses CKFinder, and doesn�t go in competition with CKFinder in the
+work that uses CKFinder, and doesn't go in competition with CKFinder in the
 marketplace.
 
 5. Unlicensed Copies

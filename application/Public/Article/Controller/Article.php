@@ -190,7 +190,8 @@ class Public_Article_Controller_Article extends Public_Controller
     public function _getLastArticle()
     {
         return $this->_query
-            ->removeDqlQueryPart('where')
+            //->removeDqlQueryPart('where')
+            ->where('category_id != ?', 'basic-page')
             ->orderBy('date_created DESC')
             ->limit(6)
             ->execute();
@@ -199,7 +200,8 @@ class Public_Article_Controller_Article extends Public_Controller
     public function _getHotArticle()
     {
         return $this->_query
-            ->removeDqlQueryPart('where')
+            //->removeDqlQueryPart('where')
+            ->where('category_id != ?', 'basic-page')
             ->orderBy('hit DESC')
             ->limit(6)
             ->execute();

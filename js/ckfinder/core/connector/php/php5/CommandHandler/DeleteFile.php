@@ -3,13 +3,14 @@
  * CKFinder
  * ========
  * http://ckfinder.com
- * Copyright (C) 2007-2009, CKSource - Frederico Knabben. All rights reserved.
+ * Copyright (C) 2007-2010, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
  * modifying or distribute this file or part of its contents. The contents of
  * this file is part of the Source Code of CKFinder.
  */
+if (!defined('IN_CKFINDER')) exit;
 
 /**
  * @package CKFinder
@@ -47,6 +48,10 @@ class CKFinder_Connector_CommandHandler_DeleteFile extends CKFinder_Connector_Co
      */
     protected function buildXml()
     {
+        if (empty($_POST['CKFinderCommand']) || $_POST['CKFinderCommand'] != 'true') {
+            $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_INVALID_REQUEST);
+        }
+
         if (!$this->_currentFolder->checkAcl(CKFINDER_CONNECTOR_ACL_FILE_DELETE)) {
             $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_UNAUTHORIZED);
         }

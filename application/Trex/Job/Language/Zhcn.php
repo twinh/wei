@@ -46,6 +46,7 @@ class Trex_Job_Language_Zhcn extends Trex_Language_Zhcn
             'LBL_FIELD_CONTACTER' => '联系人',
             'LBL_FIELD_PHONE' => '手机或电话',
             'LBL_FIELD_AREA' => '区域',
+            'LBL_FIELD_IS_RECOMMEND' => '推荐',
 
             'LBL_NUMBER_SEVERAL' => '若干',
             'LBL_SALARY_NEGOTIABLE' => '面议',

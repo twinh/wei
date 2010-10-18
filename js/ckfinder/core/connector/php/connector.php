@@ -3,7 +3,7 @@
  * CKFinder
  * ========
  * http://ckfinder.com
- * Copyright (C) 2007-2009, CKSource - Frederico Knabben. All rights reserved.
+ * Copyright (C) 2007-2010, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -18,6 +18,18 @@
  * @subpackage Connector
  * @copyright CKSource - Frederico Knabben
  */
+
+/**
+ * Protect against sending warnings to the browser.
+ * Comment out this line during debugging.
+ */
+// error_reporting(0);
+
+/**
+ * Protect against sending content before all HTTP headers are sent (#186).
+ */
+ob_start();
+
 /**
  * define required constants
  */
@@ -38,7 +50,10 @@ require_once CKFINDER_CONNECTOR_LIB_DIR . "/Core/Factory.php";
  * utils class
  */
 require_once CKFINDER_CONNECTOR_LIB_DIR . "/Utils/Misc.php";
-
+/**
+ * hooks class
+ */
+require_once CKFINDER_CONNECTOR_LIB_DIR . "/Core/Hooks.php";
 /**
  * Simple function required by config.php - discover the server side path
  * to the directory relative to the "$baseUrl" attribute
@@ -60,6 +75,9 @@ $utilsSecurity->getRidOfMagicQuotes();
  * $config must be initialised
  */
 $config = array();
+$config['Hooks'] = array();
+$config['Plugins'] = array();
+
 /**
  * read config file
  */
