@@ -1,6 +1,6 @@
 <?php
 /**
- * Zhcn
+ * Form
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,31 +17,36 @@
  * limitations under the License.
  *
  * @package     Trex
- * @subpackage  Company
+ * @subpackage  View
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-20 17:06:32
+ * @since       2010-09-17 18:14:58
  */
 
-class Trex_Company_Language_Zhcn extends Trex_Language_Zhcn
+class Trex_View_Form extends Trex_View
 {
-    public function  __construct()
+    public function __construct()
     {
         parent::__construct();
-        $this->_data += array(
-            'LBL_FIELD_INDUSTRY' => '所属行业',
-            'LBL_FIELD_NATURE' => '公司性质',
-            'LBL_FIELD_SIZE' => '公司规模',
-            'LBL_FIELD_MEMBER_ID' => '用户编号',
-            'LBL_FIELD_MEMBER_NAME' => '用户名称',
-            'LBL_FIELD_CONTACTER' => '联系人',
-            'LBL_FIELD_PHONE' => '联系电话',
+        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/common/form.php');
+    }
 
-            'LBL_MODULE_MY_COMPANY' => '我的公司',
+    public function display()
+    {
+        /**
+         * 初始化变量,方便调用
+         */
+        $primaryKey = $this->primaryKey;
+        $meta = $this->meta;
+        $relatedField = $this->relatedField;
+        $arrayHelper = Qwin::run('-arr');
+        $groupList = $this->_data['groupList'];
+        $data = $this->data;
+        $set = Qwin::run('-ini')->getSet();
+        $jQueryValidateCode = $arrayHelper->jsonEncode($meta->getJQueryValidateCode($relatedField));
 
-            'LBL_MODULE_COMPANY' => '公司',
-        );
+        require_once $this->_layout;
     }
 }

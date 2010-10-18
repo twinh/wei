@@ -27,16 +27,6 @@
 
 class Trex_Job_Controller_Job extends Trex_ActionController
 {
-    public function convertListRelatedId($value, $name, $row, $copyRow)
-    {
-        if(null == $value)
-        {
-            return $this->_lang->t('LBL_PERSONAL');
-        }
-        return $value;
-    }
-
-
     public function convertListSalary($value, $name, $row, $copyRow)
     {
         if(0 == $copyRow['salary_from'] && 0 == $copyRow['salary_to'])
@@ -48,6 +38,10 @@ class Trex_Job_Controller_Job extends Trex_ActionController
 
     public function convertViewSalary($value, $name, $row, $copyRow)
     {
+        if(0 == $copyRow['salary_from'] && 0 == $copyRow['salary_to'])
+        {
+            return $this->_lang->t('LBL_SALARY_NEGOTIABLE');
+        }
         return $copyRow['salary_from'] . '-' . $copyRow['salary_to'];
     }
 
@@ -72,5 +66,15 @@ class Trex_Job_Controller_Job extends Trex_ActionController
             $this->_meta['field']->set('related_id.form._value2', $company['name']);
         }
         return $value;
+    }
+
+    public function convertDbDescription($value, $name, $data, $copyData)
+    {
+        return nl2br($value);
+    }
+
+    public function convertEditDescription($value, $name, $data, $copyData)
+    {
+        return str_replace('<br />', '', $value);
     }
 }

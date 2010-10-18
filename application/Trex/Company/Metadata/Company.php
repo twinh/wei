@@ -139,6 +139,15 @@ class Trex_Company_Metadata_Company extends Trex_Metadata
                         )
                     ),
                 ),
+                'contacter' => array(
+
+                ),
+                'phone' => array(
+
+                ),
+                'email' => array(
+
+                ),
                 'address' => array(
                     'validator' => array(
                         'rule' => array(
@@ -155,6 +164,9 @@ class Trex_Company_Metadata_Company extends Trex_Metadata
                     ),
                 ),
             ),
+            'group' => array(
+
+            ),
             'model' => array(
                 'member' => array(
                     'name' => 'Trex_Member_Model_Member',
@@ -167,6 +179,9 @@ class Trex_Company_Metadata_Company extends Trex_Metadata
                         'member_id' => 'username',
                     ),
                 ),
+            ),
+            'metadata' => array(
+
             ),
             'db' => array(
                 'table' => 'company',

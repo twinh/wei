@@ -32,7 +32,7 @@ class Project_Hepler_Page
         
     }
 
-    public static function create($page)
+    public static function create(array $page)
     {
         $pageSample = array(
             'url' => null,

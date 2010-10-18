@@ -28,7 +28,7 @@
  * @since     2010-5-23 7:29:38 utf-8 中文
  */
 
-class Trex_Style_Language_Enus extends Trex_Language_Enus
+class Trex_Style_Language_Zhcn extends Trex_Language_Zhcn
 {
     public function __construct()
     {

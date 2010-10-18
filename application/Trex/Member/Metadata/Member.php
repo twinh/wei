@@ -58,6 +58,7 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                     ),
                     'attr' => array(
                         'isList' => 0,
+                        'isView' => 0,
                     ),
                 ),
                 'username' => array(

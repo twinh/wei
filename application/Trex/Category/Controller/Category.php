@@ -59,7 +59,7 @@ class Trex_Category_Controller_Category extends Trex_ActionController
             'controller' => '',
         ));
 
-        $data = $this->_meta->getDoctrineQuery($setting)
+        $data = $this->metaHelper->getDoctrineQuery($setting)
             ->orderBy('order ASC')
             ->execute()
             ->toArray();

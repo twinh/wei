@@ -59,13 +59,18 @@ class Trex_Job_Metadata_Job extends Trex_Metadata
                     'attr' => array(
                         'isLink' => 1,
                     ),
+                    'validator' => array(
+                        'rule' => array(
+                            'required' => true,
+                        ),
+                    ),
                 ),
-                'type' => array(
+                'area' => array(
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
                             array('Project_Helper_CommonClass', 'get'),
-                            'job_type',
+                            'job-area',
                         ),
                     ),
                     'attr' => array(
@@ -74,7 +79,29 @@ class Trex_Job_Metadata_Job extends Trex_Metadata
                     'converter' => array(
                         'list' => array(
                             array('Project_Helper_CommonClass', 'convert'),
-                            'job_type',
+                            'job-area',
+                        ),
+                        'view' => 'list'
+                    ),
+                    'attr' => array(
+                        'isLink' => 1,
+                    ),
+                ),
+                'type' => array(
+                    'form' => array(
+                        '_type' => 'select',
+                        '_resourceGetter' => array(
+                            array('Project_Helper_CommonClass', 'get'),
+                            'job-type',
+                        ),
+                    ),
+                    'attr' => array(
+                        'isLink' => true,
+                    ),
+                    'converter' => array(
+                        'list' => array(
+                            array('Project_Helper_CommonClass', 'convert'),
+                            'job-type',
                         ),
                         'view' => 'list'
                     ),
@@ -87,7 +114,7 @@ class Trex_Job_Metadata_Job extends Trex_Metadata
                         '_type' => 'select',
                         '_resourceGetter' => array(
                             array('Project_Helper_CommonClass', 'get'),
-                            'work_type',
+                            'work-type',
                         ),
                     ),
                     'attr' => array(
@@ -96,7 +123,7 @@ class Trex_Job_Metadata_Job extends Trex_Metadata
                     'converter' => array(
                         'list' => array(
                             array('Project_Helper_CommonClass', 'convert'),
-                            'work_type',
+                            'work-type',
                         ),
                         'view' => 'list'
                     ),
@@ -127,7 +154,7 @@ class Trex_Job_Metadata_Job extends Trex_Metadata
                         '_type' => 'select',
                         '_resourceGetter' => array(
                             array('Project_Helper_CommonClass', 'get'),
-                            'job_education',
+                            'job-education',
                         ),
                     ),
                     'attr' => array(
@@ -136,7 +163,7 @@ class Trex_Job_Metadata_Job extends Trex_Metadata
                     'converter' => array(
                         'list' => array(
                             array('Project_Helper_CommonClass', 'convert'),
-                            'job_education',
+                            'job-education',
                         ),
                         'view' => 'list'
                     ),
@@ -158,7 +185,7 @@ class Trex_Job_Metadata_Job extends Trex_Metadata
                     'converter' => array(
                         'list' => array(
                             array('Project_Helper_CommonClass', 'convert'),
-                            'work_seniority',
+                            'work-seniority',
                         ),
                         'view' => 'list'
                     ),
@@ -231,6 +258,9 @@ class Trex_Job_Metadata_Job extends Trex_Metadata
                     ),
                 ),
             ),
+            'group' => array(
+
+            ),
             'model' => array(
                 'company' => array(
                     'name' => 'Trex_Company_Model_Company',
@@ -241,6 +271,18 @@ class Trex_Job_Metadata_Job extends Trex_Metadata
                     'type' => 'view',
                     'fieldMap' => array(
                         'related_id' => 'name',
+                    ),
+                ),
+                'creator' => array(
+                    'set' => array(
+                        'module' => 'Member',
+                        'controller' => 'Member',
+                    ),
+                    'alias' => 'creator',
+                    'local' => 'created_by',
+                    'type' => 'view',
+                    'fieldMap' => array(
+                        'created_by' => 'username',
                     ),
                 ),
             ),

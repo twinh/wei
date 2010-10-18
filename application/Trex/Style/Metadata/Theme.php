@@ -63,7 +63,7 @@ class Trex_Style_Metadata_Theme extends Trex_Metadata
                 
             ),
             'db' => array(
-                'type' => 'padb',
+                //'type' => 'padb',
                 'table' => 'theme',
                 'limit' => 20,
                 'order' => array(

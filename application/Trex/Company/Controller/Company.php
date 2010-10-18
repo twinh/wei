@@ -44,12 +44,22 @@ class Trex_Company_Controller_Company extends Trex_ActionController
 
     public function convertEditMemberId($value, $name, $data, $copyData)
     {
-        $member = $this->_meta->getDoctrineQuery(array(
+        $member = $this->metaHelper->getDoctrineQuery(array(
             'namespace' => 'Trex',
             'module' => 'Member',
             'controller' => 'Member',
         ), false)->where('id = ?', $value)->fetchOne();
         $this->_meta['field']->set('member_id.form._value2', $member['username']);
         return $value;
+    }
+
+    public function convertDbDescription($value, $name, $data, $copyData)
+    {
+        return nl2br($value);
+    }
+
+    public function convertEditDescription($value, $name, $data, $copyData)
+    {
+        return str_replace('<br />', '', $value);
     }
 }

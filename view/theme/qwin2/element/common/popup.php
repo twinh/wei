@@ -42,7 +42,7 @@ jQuery(function($){
     var primaryKey = '<?php echo $primaryKey?>';
     var jqgridObj = $("#ui-jqgrid-table");
     jqgridObj.jqGrid({
-        url              : 'manager.php<?php echo $jsonUrl?>',
+        url              : '<?php echo $jsonUrl?>',
         datatype         : 'json',
         colNames         : <?php echo $columnName?>,
         colModel         : <?php echo $columnSetting?>,
