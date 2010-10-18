@@ -77,7 +77,7 @@ class Trex_Member_Language_Zhcn extends Trex_Language_Zhcn
 
             'MSG_OLD_PASSWORD_NOT_CORRECT' => '旧密码不正确',
             'MSG_MEMBER_NOT_ALLOW_DELETE' => '不允许删除系统用户',
-            'MSG_GUEST_NOT_ALLOW_EDIT_PASSWORD' => '不允许修改客户密码',
+            'MSG_GUEST_NOT_ALLOW_EDIT_PASSWORD' => '不允许修改游客密码',
 
             'LBL_FIELD_IMAGE_PATH' => '图像路径',
             'LBL_FIELD_QQ' => 'QQ',

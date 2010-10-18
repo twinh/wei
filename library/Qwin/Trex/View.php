@@ -105,9 +105,9 @@ abstract class Qwin_Trex_View extends Qwin_Metadata_Abstract
      * @param array $list 视图元素组
      * @return object 当前对象
      */
-    public function setElementList(array $list)
+    public function setElementList($list)
     {
-        foreach($list as $element)
+        foreach($list as $name => $element)
         {
             call_user_func_array(array($this, 'setElement'), $element);
         }

@@ -551,7 +551,22 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             } else {
                 $valueSign = '?';
             }
-            $query->andWhere($alias . $fieldSet[0] . ' ' . $searchType[$fieldSet[2]] . ' ' . $valueSign, $fieldSet[1]);
+
+            // null and not null
+            if(null == $value)
+            {
+                if('eq' == $fieldSet[2])
+                {
+                    $query->andWhere($alias . $fieldSet[0] . ' IS NULL');
+                    continue;
+                }
+                elseif('ne' == $fieldSet[2])
+                {
+                    $query->andWhere($alias . $fieldSet[0] . ' IS NOT NULL');
+                    continue;
+                }
+            }
+            $query->andWhere($alias . $fieldSet[0] . ' ' . $searchType[$fieldSet[2]] . ' ' . $valueSign, $value);
         }
         return $this;
     }

@@ -127,6 +127,7 @@ class Trex_Contact_Metadata_Contact extends Trex_Metadata
         $this
             ->field
             ->set('date_created.attr.isList', 0)
-            ->set('date_modified.attr.isList', 0);
+            ->set('date_modified.attr.isList', 0)
+            ->set('id.attr.isView', 0);
     }
 }

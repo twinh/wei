@@ -46,10 +46,11 @@ class Trex_Service_List extends Trex_Service_BasicAction
             'limit' => null,
             'filter' => array(),
             'asAction' => 'list',
-            'isLink' => true
+            'isLink' => true,
+            'convert' => true,
         ),
         'callback' => array(
-            'dataConverter' => array(),
+            'dataConverter' => null,
         ),
         'view' => array(
             'class' => 'Trex_View_JqGridJson',
@@ -62,12 +63,16 @@ class Trex_Service_List extends Trex_Service_BasicAction
     {
         // 初始配置
         $config = $this->_multiArrayMerge($this->_config, $config);
+        $metaHelper = Qwin::run('Qwin_Trex_Metadata');
+        if(null == $config['this'])
+        {
+            $config['this'] = Qwin::run($metaHelper->getClassName('Controller', $config['set']));
+        }
 
         // 通过父类,加载语言,元数据,模型等
         parent::process($config['set']);
 
         // 初始化常用的变量
-        $metaHelper = Qwin::run('Qwin_Trex_Metadata');
         $meta       = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
         $metaHelper->loadRelatedMetadata($meta, 'db');
@@ -80,15 +85,21 @@ class Trex_Service_List extends Trex_Service_BasicAction
             ->addWhereToQuery($meta, $query, $config['data']['where'])
             ->addOffsetToQuery($meta, $query, $config['data']['offset'])
             ->addLimitToQuery($meta, $query, $config['data']['limit']);
-        $data = $query->execute()->toArray();
+        $dbData = $data = $query->execute()->toArray();
         $count = count($data);
         $totalRecord = $query->count();
 
         // 执行回调函数,转换数据
-        $config['callback']['dataConverter'][1] = $data;
-        $tempData = $this->executeCallback('dataConverter', $config);
-        null != $tempData && $data = $tempData;
-        $data = $metaHelper->convertArray($data, $config['data']['asAction'], $meta, $config['this'], true);
+        if(isset($config['callback']['dataConverter']))
+        {
+            $config['callback']['dataConverter'][1] = $data;
+            $tempData = $this->executeCallback('dataConverter', $config);
+            null != $tempData && $data = $tempData;
+        }
+        if($config['data']['convert'])
+        {
+            $data = $metaHelper->convertArray($data, $config['data']['asAction'], $meta, $config['this'], $config['data']['isLink']);
+        }
 
         // 获取布局
         $layout = $metaHelper->getListLayout($meta);
@@ -111,6 +122,7 @@ class Trex_Service_List extends Trex_Service_BasicAction
             'result' => true,
             'view' => $this->_view,
             'data' => $data,
+            'dbData' => $dbData,
         );
     }
 }

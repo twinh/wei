@@ -55,7 +55,7 @@ class Trex_Management_Controller_Namespace extends Trex_Controller
             );
         }
         $listField = $meta['field']->getAttrList('isList');
-        $data = $metaHelper->convertArray($listField, $meta['field'], 'list', $data, false);
+        $data = $this->metaHelper->convertArray($listField, $meta['field'], 'list', $data, false);
 
         $this->_view = array(
             'class' => 'Trex_View',

@@ -56,9 +56,7 @@ class Trex_Member_Controller_Setting extends Trex_Controller
             $urlLanguage = $this->request->g('language');
             $theme = Qwin::run('-ini')->getConfig('interface.theme');
             
-            /**
-             * 设置视图
-             */
+            // 设置视图
             $this->_view = array(
                 'class' => 'Trex_View',
                 'element' => array(
@@ -73,7 +71,7 @@ class Trex_Member_Controller_Setting extends Trex_Controller
             $language = $ses->get('language');
             $language = Qwin::run('Qwin_Language')->toStandardStyle($language);
             
-            $result = $this->_meta
+            $result = $this->metaHelper
                     ->getDoctrineQuery(array(
                         'namespace' => 'Trex',
                         'module' => 'Member',
@@ -95,7 +93,7 @@ class Trex_Member_Controller_Setting extends Trex_Controller
     {
         if(empty($_POST))
         {
-            $theme = $this->_meta
+            $theme = $this->metaHelper
                 ->getDoctrineQuery(array(
                     'namespace' => 'Trex',
                     'module' => 'Style',
@@ -106,9 +104,7 @@ class Trex_Member_Controller_Setting extends Trex_Controller
             $urlTheme = $this->request->g('style');
             $theme2 = Qwin::run('-ini')->getConfig('interface.theme');
 
-            /**
-             * 设置视图
-             */
+            // 设置视图
             $this->_view = array(
                 'class' => 'Trex_View',
                 'element' => array(
@@ -121,7 +117,7 @@ class Trex_Member_Controller_Setting extends Trex_Controller
             $member = $ses->get('member');
             $theme = $ses->get('style');
             
-            $result = $this->_meta
+            $result = $this->metaHelper
                     ->getDoctrineQuery(array(
                         'namespace' => 'Trex',
                         'module' => 'Member',
@@ -134,22 +130,5 @@ class Trex_Member_Controller_Setting extends Trex_Controller
             $url = Qwin::run('-url')->createUrl($this->_set);
             $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         } 
-    }
-
-    public function actionApplyLang()
-    {
-        $ini = Qwin::run('-ini');
-        $ses = Qwin::run('-ses');
-        $loginState = $ses->get('member');
-        $set = array(
-            'namespace' => $this->_set['namespace'],
-            'module' => $this->_set['module'],
-            'controller' => 'Member',
-        );
-        $query = $this->meta->getQuery($set);
-        $query = $query->where('id = ?', $loginState['id'])->fetchOne();
-        $query['lang'] = $ses->get('lang');
-        $query->save();
-        Qwin::run('-url')->to(url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], 'SwitchLang')));
     }
 }
