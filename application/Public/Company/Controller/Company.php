@@ -81,6 +81,13 @@ class Public_Company_Controller_Company extends Public_Controller
             {
                 $row['number'] = '若干';
             }
+            // 推荐
+            if(1 == $row['is_recommend'])
+            {
+                $row['is_recommend_text'] = '<span style="color:red">[荐]</span>';
+            } else {
+                $row['is_recommend_text'] = '';
+            }
             // 学历
             $row['education'] = $education[$row['education']];
             $row['date_modified'] = substr($row['date_modified'], 0, 10);

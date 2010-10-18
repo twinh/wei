@@ -135,6 +135,15 @@ class Public_Job_Controller_Job extends Public_Controller
             {
                 $row['number'] = '若干';
             }
+
+            // 推荐
+            if(1 == $row['is_recommend'])
+            {
+                $row['is_recommend_text'] = '<span style="color:red">[荐]</span>';
+            } else {
+                $row['is_recommend_text'] = '';
+            }
+
             // 学历
             $row['education'] = $education[$row['education']];
             // 地区
@@ -187,6 +196,13 @@ class Public_Job_Controller_Job extends Public_Controller
         } else {
             $data['salary'] = $data['salary_from'] . '-' . $data['salary_to'] . '元/月';
         }
+        // 推荐
+        if(1 == $data['is_recommend'])
+        {
+            $data['is_recommend_text'] = '<span style="color:red">[荐]</span>';
+        } else {
+            $data['is_recommend_text'] = '';
+        }
         // 更新日期
         $data['date_modified'] = substr($data['date_modified'], 0, 10);
 
@@ -212,6 +228,13 @@ class Public_Job_Controller_Job extends Public_Controller
             if(0 == $row['number'])
             {
                 $row['number'] = '若干';
+            }
+            // 推荐
+            if(1 == $row['is_recommend'])
+            {
+                $row['is_recommend_text'] = '<span style="color:red">[荐]</span>';
+            } else {
+                $row['is_recommend_text'] = '';
             }
             // 学历
             $row['education'] = $education[$row['education']];

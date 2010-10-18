@@ -131,6 +131,28 @@ class Trex_Job_Metadata_Job extends Trex_Metadata
                         'isLink' => 1,
                     ),
                 ),
+                'is_recommend' => array(
+                     'form' => array(
+                        '_type' => 'select',
+                        '_resourceGetter' => array(
+                            array('Project_Helper_CommonClass', 'get'),
+                            'yes-or-no',
+                        ),
+                    ),
+                    'attr' => array(
+                        'isLink' => true,
+                    ),
+                    'converter' => array(
+                        'list' => array(
+                            array('Project_Helper_CommonClass', 'convert'),
+                            'yes-or-no',
+                        ),
+                        'view' => 'list'
+                    ),
+                    'attr' => array(
+                        'isLink' => 1,
+                    ),
+                ),
                 'title' => array(
                     'validator' => array(
                         'rule' => array(

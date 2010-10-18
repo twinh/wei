@@ -3,13 +3,14 @@
  * CKFinder
  * ========
  * http://ckfinder.com
- * Copyright (C) 2007-2009, CKSource - Frederico Knabben. All rights reserved.
+ * Copyright (C) 2007-2010, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
  * modifying or distribute this file or part of its contents. The contents of
  * this file is part of the Source Code of CKFinder.
  */
+if (!defined('IN_CKFINDER')) exit;
 
 /**
  * @package CKFinder
@@ -54,6 +55,7 @@ class CKFinder_Connector_ErrorHandler_QuickUpload extends CKFinder_Connector_Err
 		 * because PHP has problems with including files that contain BOM character.
 		 * Having BOM character after <script> tag causes a javascript error.
 		 */
+        echo "<script type=\"text/javascript\">";
         if (!empty($_GET['CKEditor'])) {
             $errorMessage = CKFinder_Connector_Utils_Misc::getErrorMessage($number, $sFileName);
 
@@ -63,11 +65,9 @@ class CKFinder_Connector_ErrorHandler_QuickUpload extends CKFinder_Connector_Err
             }
 
             $funcNum = preg_replace("/[^0-9]/", "", $_GET['CKEditorFuncNum']);
-	        echo "<script type=\"text/javascript\">";
             echo "window.parent.CKEDITOR.tools.callFunction($funcNum, '" . str_replace("'", "\\'", $sFileUrl . $sFileName) . "', '" .str_replace("'", "\\'", $errorMessage). "');";
         }
         else {
-        	echo "<script type=\"text/javascript\">";
             if (!$uploaded) {
                 echo "window.parent.OnUploadCompleted(" . $number . ", '', '', '') ;";
             } else {

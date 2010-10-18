@@ -3,7 +3,7 @@
  * CKFinder
  * ========
  * http://ckfinder.com
- * Copyright (C) 2007-2009, CKSource - Frederico Knabben. All rights reserved.
+ * Copyright (C) 2007-2010, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
@@ -26,6 +26,7 @@ class CKFinder
 	public $ClassName = '' ;
 	public $Id = '' ;
 	public $StartupPath ;
+	public $ResourceType ;
 	public $RememberLastFolder = true ;
 	public $StartupFolderExpanded = false ;
 
@@ -55,7 +56,7 @@ class CKFinder
 		$id = $this->Id ;
 		if ( !empty( $id ) )
 			$id = ' id="' . $id . '"' ;
-			
+
 		return '<iframe src="' . $this->_BuildUrl() . '" width="' . $this->Width . '" ' .
 			'height="' . $this->Height . '"' . $className . $id . ' frameborder="0" scrolling="no"></iframe>' ;
 	}
@@ -78,7 +79,7 @@ class CKFinder
 		if ( !empty( $this->SelectFunction ) )
 			$qs .= '?action=js&amp;func=' . $this->SelectFunction ;
 
-		if ( !empty( $this->SelectFunctionData ) ) 
+		if ( !empty( $this->SelectFunctionData ) )
 		{
 			$qs .= $qs ? "&amp;" : "?" ;
 			$qs .= 'data=' . rawurlencode($this->SelectFunctionData) ;
@@ -93,7 +94,7 @@ class CKFinder
 		{
 			$qs .= $qs ? "&amp;" : "?" ;
 			$qs .= 'thumbFunc=' . ( !empty( $this->SelectThumbnailFunction ) ? $this->SelectThumbnailFunction : $this->SelectFunction ) ;
-			
+
 			if ( !empty( $this->SelectThumbnailFunctionData ) )
 				$qs .= '&amp;tdata=' . rawurlencode( $this->SelectThumbnailFunctionData ) ;
 			else if ( empty( $this->SelectThumbnailFunction ) && !empty( $this->SelectFunctionData ) )
@@ -104,6 +105,12 @@ class CKFinder
 		{
 			$qs .= ( $qs ? "&amp;" : "?" ) ;
 			$qs .= "start=" . urlencode( $this->StartupPath . ( $this->StartupFolderExpanded ? ':1' : ':0' ) ) ;
+		}
+
+		if ( !empty( $this->ResourceType ) )
+		{
+			$qs .= ( $qs ? "&amp;" : "?" ) ;
+			$qs .= "type=" . urlencode( $this->ResourceType ) ;
 		}
 
 		if ( !$this->RememberLastFolder )
@@ -117,7 +124,7 @@ class CKFinder
 			$qs .= ( $qs ? "&amp;" : "?" ) ;
 			$qs .= "id=" . urlencode( $this->Id ) ;
 		}
-		
+
 		return $url . $qs ;
 	}
 
@@ -137,18 +144,18 @@ class CKFinder
 		$ckfinder = new CKFinder( $basePath ) ;
 		$ckfinder->SetupFCKeditorObject( $editorObj, $imageType, $flashType );
 	}
-	
+
 	// Non-static method of attaching CKFinder to FCKeditor
 	public function SetupFCKeditorObject( &$editorObj, $imageType = null, $flashType = null )
 	{
 		$url = $this->BasePath ;
-		
+
 		// If it is a path relative to the current page.
 		if ( isset($url[0]) && $url[0] != '/' )
 		{
 			$url = substr( $_SERVER[ 'REQUEST_URI' ], 0, strrpos( $_SERVER[ 'REQUEST_URI' ], '/' ) + 1 ) . $url ;
 		}
-		
+
 		$url = $this->_BuildUrl( $url ) ;
 		$qs = ( strpos($url, "?") !== false ) ? "&" : "?" ;
 
@@ -170,10 +177,55 @@ class CKFinder
 		$editorObj->Config['LinkBrowserURL'] = $url ;
 		$editorObj->Config['ImageBrowserURL'] = $url . $qs . 'type=' . ( empty( $imageType ) ? 'Images' : $imageType ) ;
 		$editorObj->Config['FlashBrowserURL'] = $url . $qs . 'type=' . ( empty( $flashType ) ? 'Flash' : $flashType ) ;
-		
+
 		$dir = substr( $url, 0, strrpos( $url, "/" ) + 1 ) ;
 		$editorObj->Config['LinkUploadURL'] = $dir . urlencode( 'core/connector/php/connector.php?command=QuickUpload&type=Files' ) ;
 		$editorObj->Config['ImageUploadURL'] = $dir . urlencode( 'core/connector/php/connector.php?command=QuickUpload&type=') . ( empty( $imageType ) ? 'Images' : $imageType ) ;
 		$editorObj->Config['FlashUploadURL'] = $dir . urlencode( 'core/connector/php/connector.php?command=QuickUpload&type=') . ( empty( $flashType ) ? 'Flash' : $flashType ) ;
+	}
+
+	// Static "SetupCKEditor".
+	public static function SetupCKEditor( &$editorObj, $basePath = CKFINDER_DEFAULT_BASEPATH, $imageType = null, $flashType = null )
+	{
+		if ( empty( $basePath ) )
+			$basePath = CKFINDER_DEFAULT_BASEPATH ;
+
+		$ckfinder = new CKFinder( $basePath ) ;
+		$ckfinder->SetupCKEditorObject( $editorObj, $imageType, $flashType );
+	}
+
+	// Non-static method of attaching CKFinder to CKEditor
+	public function SetupCKEditorObject( &$editorObj, $imageType = null, $flashType = null )
+	{
+		$url = $this->BasePath ;
+
+		// If it is a path relative to the current page.
+		if ( isset($url[0]) && $url[0] != '/' )
+		{
+			$url = substr( $_SERVER[ 'REQUEST_URI' ], 0, strrpos( $_SERVER[ 'REQUEST_URI' ], '/' ) + 1 ) . $url ;
+		}
+
+		$url = $this->_BuildUrl( $url ) ;
+		$qs = ( strpos($url, "?") !== false ) ? "&" : "?" ;
+
+		if ( $this->Width !== '100%' && is_numeric( str_ireplace( "px", "", $this->Width ) ) )
+		{
+			$width = intval( $this->Width );
+			$editorObj->config['filebrowserWindowWidth'] = $width ;
+		}
+		if ( $this->Height !== 400 && is_numeric( str_ireplace( "px", "", $this->Height ) ) )
+		{
+			$height = intval( $this->Height );
+			$editorObj->config['filebrowserWindowHeight'] = $height ;
+		}
+
+		$editorObj->config['filebrowserBrowseUrl'] = $url ;
+		$editorObj->config['filebrowserImageBrowseUrl'] = $url . $qs . 'type=' . ( empty( $imageType ) ? 'Images' : $imageType ) ;
+		$editorObj->config['filebrowserFlashBrowseUrl'] = $url . $qs . 'type=' . ( empty( $flashType ) ? 'Flash' : $flashType ) ;
+
+		$dir = substr( $url, 0, strrpos( $url, "/" ) + 1 ) ;
+		$editorObj->config['filebrowserUploadUrl'] = $dir . 'core/connector/php/connector.php?command=QuickUpload&type=Files' ;
+		$editorObj->config['filebrowserImageUploadUrl'] = $dir . 'core/connector/php/connector.php?command=QuickUpload&type=' . ( empty( $imageType ) ? 'Images' : $imageType ) ;
+		$editorObj->config['filebrowserFlashUploadUrl'] = $dir . 'core/connector/php/connector.php?command=QuickUpload&type=' . ( empty( $flashType ) ? 'Flash' : $flashType ) ;
 	}
 }

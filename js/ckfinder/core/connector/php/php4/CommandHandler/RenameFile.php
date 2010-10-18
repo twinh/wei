@@ -3,13 +3,14 @@
 * CKFinder
 * ========
 * http://ckfinder.com
-* Copyright (C) 2007-2009, CKSource - Frederico Knabben. All rights reserved.
+* Copyright (C) 2007-2010, CKSource - Frederico Knabben. All rights reserved.
 *
 * The software, this file and its contents are subject to the CKFinder
 * License. Please read the license.txt file before using, installing, copying,
 * modifying or distribute this file or part of its contents. The contents of
 * this file is part of the Source Code of CKFinder.
 */
+if (!defined('IN_CKFINDER')) exit;
 
 /**
  * @package CKFinder
@@ -47,6 +48,10 @@ class CKFinder_Connector_CommandHandler_RenameFile extends CKFinder_Connector_Co
      */
     function buildXml()
     {
+        if (empty($_POST['CKFinderCommand']) || $_POST['CKFinderCommand'] != 'true') {
+            $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_INVALID_REQUEST);
+        }
+
         if (!$this->_currentFolder->checkAcl(CKFINDER_CONNECTOR_ACL_FILE_RENAME)) {
             $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_UNAUTHORIZED);
         }
@@ -58,6 +63,7 @@ class CKFinder_Connector_CommandHandler_RenameFile extends CKFinder_Connector_Co
             $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_INVALID_NAME);
         }
 
+        $_config =& CKFinder_Connector_Core_Factory::getInstance("Core_Config");
         $fileName = CKFinder_Connector_Utils_FileSystem::convertToFilesystemEncoding($_GET["fileName"]);
         $newFileName = CKFinder_Connector_Utils_FileSystem::convertToFilesystemEncoding($_GET["newFileName"]);
 
@@ -82,6 +88,9 @@ class CKFinder_Connector_CommandHandler_RenameFile extends CKFinder_Connector_Co
             $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_INVALID_REQUEST);
         }
 
+        if ($_config->forceAscii()) {
+            $newFileName = CKFinder_Connector_Utils_FileSystem::convertToAscii($newFileName);
+        }
         $filePath = CKFinder_Connector_Utils_FileSystem::combinePaths($this->_currentFolder->getServerPath(), $fileName);
         $newFilePath = CKFinder_Connector_Utils_FileSystem::combinePaths($this->_currentFolder->getServerPath(), $newFileName);
 
@@ -97,6 +106,9 @@ class CKFinder_Connector_CommandHandler_RenameFile extends CKFinder_Connector_Co
 
         if (!is_writable($filePath)) {
             $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_ACCESS_DENIED);
+        }
+        if (file_exists($newFilePath)) {
+            $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_ALREADY_EXIST);
         }
 
         $bMoved = @rename($filePath, $newFilePath);

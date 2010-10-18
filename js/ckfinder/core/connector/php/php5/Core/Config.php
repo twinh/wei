@@ -3,13 +3,14 @@
  * CKFinder
  * ========
  * http://ckfinder.com
- * Copyright (C) 2007-2009, CKSource - Frederico Knabben. All rights reserved.
+ * Copyright (C) 2007-2010, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
  * modifying or distribute this file or part of its contents. The contents of
  * this file is part of the Source Code of CKFinder.
  */
+if (!defined('IN_CKFINDER')) exit;
 
 /**
  * @package CKFinder
@@ -170,6 +171,13 @@ class CKFinder_Connector_Core_Config
      * @access private
      */
     private $_hideFiles = array(".*");
+    /**
+     * If set to true, force ASCII names
+     *
+     * @var boolean
+     * @access private
+     */
+    private $_forceAscii = false;
 
     function __construct()
     {
@@ -218,6 +226,17 @@ class CKFinder_Connector_Core_Config
     public function getHtmlExtensions()
     {
         return $this->_htmlExtensions;
+    }
+
+    /**
+	 * Get "forceAscii" value
+	 *
+	 * @access public
+	 * @return array
+	 */
+    public function forceAscii()
+    {
+        return $this->_forceAscii;
     }
 
     /**
@@ -466,6 +485,9 @@ class CKFinder_Connector_Core_Config
         }
         if (isset($GLOBALS['config']['CheckSizeAfterScaling'])) {
             $this->_checkSizeAfterScaling = CKFinder_Connector_Utils_Misc::booleanValue($GLOBALS['config']['CheckSizeAfterScaling']);
+        }
+        if (isset($GLOBALS['config']['ForceAscii'])) {
+            $this->_forceAscii = CKFinder_Connector_Utils_Misc::booleanValue($GLOBALS['config']['ForceAscii']);
         }
         if (isset($GLOBALS['config']['HtmlExtensions'])) {
             $this->_htmlExtensions = (array)$GLOBALS['config']['HtmlExtensions'];

@@ -3,13 +3,14 @@
  * CKFinder
  * ========
  * http://ckfinder.com
- * Copyright (C) 2007-2009, CKSource - Frederico Knabben. All rights reserved.
+ * Copyright (C) 2007-2010, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
  * modifying or distribute this file or part of its contents. The contents of
  * this file is part of the Source Code of CKFinder.
  */
+if (!defined('IN_CKFINDER')) exit;
 
 /**
  * @package CKFinder
@@ -70,6 +71,16 @@ class Ckfinder_Connector_Utils_XmlNode
         }
     }
 
+    function getChild($name)
+    {
+        foreach ($this->_childNodes as $i => $node) {
+            if ($node->_name == $name) {
+                return $this->_childNodes[$i];
+            }
+        }
+        return null;
+    }
+
     /**
      * Add attribute
      *
@@ -80,6 +91,41 @@ class Ckfinder_Connector_Utils_XmlNode
     public function addAttribute($name, $value)
     {
         $this->_attributes[$name] = $value;
+    }
+
+    /**
+     * Get attribute value
+     *
+     * @param string $name
+     * @access public
+     */
+    public function getAttribute($name)
+    {
+        return $this->_attributes[$name];
+    }
+
+    /**
+     * Set element value
+     *
+     * @param string $name
+     * @param string $value
+     * @access public
+     */
+    public function setValue($value)
+    {
+        $this->_value = $value;
+    }
+
+    /**
+     * Get element value
+     *
+     * @param string $name
+     * @param string $value
+     * @access public
+     */
+    public function getValue()
+    {
+        return $this->_value;
     }
 
     /**

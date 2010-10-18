@@ -3,13 +3,14 @@
  * CKFinder
  * ========
  * http://ckfinder.com
- * Copyright (C) 2007-2009, CKSource - Frederico Knabben. All rights reserved.
+ * Copyright (C) 2007-2010, CKSource - Frederico Knabben. All rights reserved.
  *
  * The software, this file and its contents are subject to the CKFinder
  * License. Please read the license.txt file before using, installing, copying,
  * modifying or distribute this file or part of its contents. The contents of
  * this file is part of the Source Code of CKFinder.
  */
+if (!defined('IN_CKFINDER')) exit;
 
 /**
  * @package CKFinder
@@ -43,6 +44,7 @@ class CKFinder_Connector_CommandHandler_FileUpload extends CKFinder_Connector_Co
     {
         $iErrorNumber = CKFINDER_CONNECTOR_ERROR_NONE;
 
+        $_config =& CKFinder_Connector_Core_Factory::getInstance("Core_Config");
         $oRegistry =& CKFinder_Connector_Core_Factory::getInstance("Core_Registry");
         $oRegistry->set("FileUpload_fileName", "unknown file");
 
@@ -52,13 +54,19 @@ class CKFinder_Connector_CommandHandler_FileUpload extends CKFinder_Connector_Co
             $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_UPLOADED_INVALID);
         }
 
-        $sFileName = CKFinder_Connector_Utils_FileSystem::convertToFilesystemEncoding(CKFinder_Connector_Utils_Misc::mbBasename($uploadedFile['name']));
+        $sUnsafeFileName = CKFinder_Connector_Utils_FileSystem::convertToFilesystemEncoding(CKFinder_Connector_Utils_Misc::mbBasename($uploadedFile['name']));
+        $sFileName = str_replace(array(":", "*", "?", "|", "/"), "_", $sUnsafeFileName);
+        if ($_config->forceAscii()) {
+            $sFileName = CKFinder_Connector_Utils_FileSystem::convertToAscii($sFileName);
+        }
+        if ($sFileName != $sUnsafeFileName) {
+          $iErrorNumber = CKFINDER_CONNECTOR_ERROR_UPLOADED_INVALID_NAME_RENAMED;
+        }
         $oRegistry->set("FileUpload_fileName", $sFileName);
 
         $this->checkConnector();
         $this->checkRequest();
 
-        $_config =& CKFinder_Connector_Core_Factory::getInstance("Core_Config");
         if (!$this->_currentFolder->checkAcl(CKFINDER_CONNECTOR_ACL_FILE_UPLOAD)) {
             $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_UNAUTHORIZED);
         }
@@ -75,6 +83,7 @@ class CKFinder_Connector_CommandHandler_FileUpload extends CKFinder_Connector_Co
 
         $sFileNameOrginal = $sFileName;
         $oRegistry->set("FileUpload_fileName", $sFileName);
+        $oRegistry->set("FileUpload_url", $this->_currentFolder->getUrl());
 
         $maxSize = $resourceTypeInfo->getMaxSize();
         if (!$_config->checkSizeAfterScaling() && $maxSize && $uploadedFile['size']>$maxSize) {
@@ -183,8 +192,10 @@ class CKFinder_Connector_CommandHandler_FileUpload extends CKFinder_Connector_Co
                 $this->_errorHandler->throwError(CKFINDER_CONNECTOR_ERROR_UPLOADED_TOO_BIG);
             }
             else {
-                $this->_errorHandler->throwError($iErrorNumber, true);
+                $this->_errorHandler->throwError($iErrorNumber, true, false);
             }
         }
+
+        CKFinder_Connector_Core_Hooks::run('AfterFileUpload', array(&$this->_currentFolder, &$uploadedFile, &$sFilePath));
     }
 }

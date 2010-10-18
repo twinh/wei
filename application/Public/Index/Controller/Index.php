@@ -40,6 +40,7 @@ class Public_Index_Controller_Index extends Public_Controller
 
         // 最新资讯
         $lastArticle = $articleQuery
+            ->where('category_id != ?', 'basic-page')
             ->orderBy('date_created DESC')
             ->limit(9)
             ->fetchArray();
