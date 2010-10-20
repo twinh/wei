@@ -43,6 +43,7 @@ class Trex_Service_View extends Trex_Service_BasicAction
             'asAction' => 'view',
             'isLink' => true,
             'isView' => true,
+            'meta' => null,
         ),
         'callback' => array(
         ),
@@ -69,6 +70,10 @@ class Trex_Service_View extends Trex_Service_BasicAction
     {
         // 初始配置
         $config = $this->_multiArrayMerge($this->_config, $config);
+        if(isset($config['data']['meta']))
+        {
+            $this->_meta = $config['data']['meta'];
+        }
 
         // 通过父类,加载语言,元数据,模型等
         parent::process($config['set']);

@@ -55,8 +55,9 @@ class Trex_Management_Controller_Namespace extends Trex_Controller
             );
         }
         $listField = $meta['field']->getAttrList('isList');
-        $data = $this->metaHelper->convertArray($listField, $meta['field'], 'list', $data, false);
+        $data = $this->metaHelper->convertArray($data, 'list', $meta, $this);
 
+        // 设置视图
         $this->_view = array(
             'class' => 'Trex_View',
             'element' => array(
@@ -76,7 +77,7 @@ class Trex_Management_Controller_Namespace extends Trex_Controller
         $app = Qwin::run('Qwin_Trex_Application');
         if(empty($_POST))
         {
-            $groupList = $this->_meta->field->getAddGroupList();
+            $layout = $this->metaHelper->getAddLayout($meta);
             $meta['field'] = $this->_meta->field;
             $namespace = $this->_app->getNamespace($this->_path);
             $banNamespace = implode(',', $namespace);

@@ -54,7 +54,13 @@ class Trex_Metadata extends Qwin_Metadata
                     'order' => -1,
                 ),
                 'form' => array(
-                    '_type' => 'hidden',
+                    //'_type' => 'hidden',
+                    '_type' => 'text',
+                    '_widgetDetail' => array(
+                        array(
+                            array('Qwin_Widget_JQuery_CustomValue', 'render'),
+                        ),
+                    ),
                     'name' => 'id',
                 ),
                 'attr' => array(

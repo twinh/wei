@@ -51,7 +51,44 @@ class Trex_Member_Controller_Member extends Trex_ActionController
             return $this->setRedirectView($this->_lang->t('MSG_GUEST_NOT_ALLOW_EDIT_PASSWORD'));
         }
         $this->_meta = Qwin_Metadata_Manager::get('Trex_Member_Metadata_Password');
-        parent::actionEdit();
+
+        if(empty($_POST))
+        {
+            /**
+             * @see Trex_Service_View $_config
+             */
+            $config = array(
+                'set' => $this->_set,
+                'data' => array(
+                    'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_set),
+                    'asAction' => 'editpassword',
+                    'meta' => $this->_meta,
+                    'isLink' => false,
+                    'isView' => false,
+                ),
+                'view' => array(
+                    'class' => 'Trex_View_EditForm',
+                ),
+                'this' => $this,
+            );
+            return Qwin::run('Trex_Service_View')->process($config);
+        } else {
+            /**
+             * @see Trex_Service_Update $_config
+             */
+            $config = array(
+                'set' => $this->_set,
+                'data' => array(
+                    'db' => $_POST,
+                    'meta' => $this->_meta,
+                ),
+                'view' => array(
+                    'url' => urldecode($this->request->p('_page')),
+                ),
+                'this' => $this,
+            );
+            return Qwin::run('Trex_Service_Update')->process($config);
+        }
     }
 
     /**
@@ -124,7 +161,7 @@ class Trex_Member_Controller_Member extends Trex_ActionController
 
     public function convertDbOldPassword($value, $name, $data, $copyData)
     {
-        $query = $this->_meta->getDoctrineQuery($this->_set);
+        $query = $this->metaHelper->getDoctrineQuery($this->_set);
         $result = $query->where('id = ?', $data['id'])
             ->fetchOne();
         if(md5($value) != $result['password'])
