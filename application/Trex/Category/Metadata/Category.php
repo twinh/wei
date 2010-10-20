@@ -109,7 +109,13 @@ class Trex_Category_Metadata_Category extends Trex_Metadata
                     ),
                 ),
             ),
+            'group' => array(
+
+            ),
             'model' => array(
+
+            ),
+            'metadata' => array(
 
             ),
             'db' => array(

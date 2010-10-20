@@ -57,6 +57,10 @@ class Trex_Service_Update extends Trex_Service_BasicAction
     {
         // 初始配置
         $config = $this->_multiArrayMerge($this->_config, $config);
+        if(isset($config['data']['meta']))
+        {
+            $this->_meta = $config['data']['meta'];
+        }
 
         // 通过父类,加载语言,元数据,模型等
         parent::process($config['set']);
@@ -84,7 +88,7 @@ class Trex_Service_Update extends Trex_Service_BasicAction
             );
             if($config['view']['display'])
             {
-                $this->setRedirectView($result['message']);
+                $this->setRedirectView($return['message']);
             }
             return $return;
         }
@@ -112,8 +116,11 @@ class Trex_Service_Update extends Trex_Service_BasicAction
         $result->save();
 
         // 入库后,执行绑定事件
-        $config['callback']['afterDb'][1] = $data;
-        $this->executeCallback('afterDb', $config);
+        if(!empty($config['callback']['afterDb']))
+        {
+            $config['callback']['afterDb'][1] = $data;
+            $this->executeCallback('afterDb', $config);
+        }
 
         // 设置视图数据
         if($config['view']['url'])

@@ -81,6 +81,25 @@ class Trex_Service_Insert extends Trex_Service_BasicAction
 
         // 转换,验证
         $data = $metaHelper->unsetPrimaryKeyValue($config['data']['db'], $meta);
+
+        // 检查记录是否存在,存在则提示
+        if(null != $data[$primaryKey])
+        {
+            $result = $query->where($primaryKey . ' = ?', $data[$primaryKey])->fetchOne();
+            if(false != $result)
+            {
+                $return = array(
+                    'result' => false,
+                    'message' => $this->_lang->t('MSG_RECORD_EXISTS'),
+                );
+                if($config['view']['display'])
+                {
+                    $this->setRedirectView($return['message']);
+                }
+                return $return;
+            }
+        }
+
         $data = $metaHelper->convertOne($data, 'db', $meta, $config['this']);
         $data = $metaHelper->setForeignKeyData($meta['model'], $data);
         $validateResult = $metaHelper->validateArray($data + $_POST, $meta, $config['this']);

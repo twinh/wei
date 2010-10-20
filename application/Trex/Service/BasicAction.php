@@ -82,7 +82,10 @@ class Trex_Service_BasicAction extends Trex_Service
         }
         Qwin::addMap('-lang', $languageClass);
 
-        $this->_meta = $this->metaHelper->getMetadataBySet($set);
+        if(!isset($this->_meta))
+        {
+            $this->_meta = $this->metaHelper->getMetadataBySet($set);
+        }
 
         // 根据元数据定义的数据库,选择对应的连接类型
         if('padb' == $this->_meta['db']['type'])
@@ -127,8 +130,14 @@ class Trex_Service_BasicAction extends Trex_Service
      */
     public function showValidateError(Qwin_Validator_Result $result, Qwin_Metadata $meta, $dispaly = true)
     {
+        if(!is_array($result->field))
+        {
+            $fieldTitle = $this->_lang->t($meta['field'][$result->field]['basic']['title']);
+        } else {
+            $fieldTitle = $this->_lang->t($meta['metadata'][$result->field[0]]['field'][$result->field[1]]['basic']['title']);
+        }
         $message = $this->_lang->t('MSG_ERROR_FIELD')
-                . $this->_lang->t($meta['field'][$result->field]['basic']['title'])
+                . $fieldTitle
                 . '<br />'
                 . $this->_lang->t('MSG_ERROR_MSG')
                 . $this->metaHelper->format($this->_lang->t($result->message), $result->param);

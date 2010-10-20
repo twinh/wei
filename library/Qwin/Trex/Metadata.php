@@ -1311,6 +1311,7 @@ return true;
             // 返回错误信息
             if(true !== $result)
             {
+                $result->field = array($name, $result->field);
                 return $result;
             }
         }
@@ -1324,14 +1325,14 @@ return true;
      * @param array $fieldMeta 域的元数据配置
      * @return array jQuery Validate 的验证配置数组
      */
-    public function getJQueryValidateCode($fieldMeta)
+    public function getJQueryValidateCode($meta, $relatedName = false)
     {
         $lang = Qwin::run('-lang');
         $validation = array(
             'rules' => array(),
             'messages' => array(),
         );
-        foreach($fieldMeta as $name => $field)
+        foreach($meta['field'] as $name => $field)
         {
             if(empty($field['validator']['rule']))
             {
@@ -1339,10 +1340,27 @@ return true;
             }
             foreach($field['validator']['rule'] as $rule => $param)
             {
+                if($relatedName)
+                {
+                    $name = $relatedName . '[' . $name . ']';
+                }
                 $validation['rules'][$name][$rule] = $param;
                 $validation['messages'][$name][$rule] = $this->format($lang->t($field['validator']['message'][$rule]), $param);
             }
         }
+
+        // 关联元数据
+        /*foreach($meta['model'] as $model)
+        {
+            if('db' != $model['type'])
+            {
+                continue;
+            }
+            $relatedMeta = Qwin_Metadata_Manager::get($model['metadata']);
+            $tempValidation = $this->getJQueryValidateCode($relatedMeta, $model['alias']);
+            $validation['rules'] += $tempValidation['rules'];
+            $validation['messages'] += $tempValidation['messages'];
+        }*/
         return $validation;
     }
 
@@ -1398,11 +1416,12 @@ return true;
     public function unsetPrimaryKeyValue($data, Qwin_Metadata $meta)
     {
         $primaryKey = $meta['db']['primaryKey'];
-        if(isset($data[$primaryKey]))
+        // 允许自定义主键的值
+        /*if(isset($data[$primaryKey]))
         {
             $data[$primaryKey] = null;
             //unset($data[$primaryKey]);
-        }
+        }*/
         foreach($meta['metadata'] as $name => $relatedMeta)
         {
             $primaryKey = $relatedMeta['db']['primaryKey'];

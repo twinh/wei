@@ -164,9 +164,7 @@ class Trex_Company_Metadata_Company extends Trex_Metadata
                     ),
                 ),
             ),
-            'group' => array(
-
-            ),
+            'group' => array(),
             'model' => array(
                 'member' => array(
                     'name' => 'Trex_Member_Model_Member',
@@ -180,9 +178,7 @@ class Trex_Company_Metadata_Company extends Trex_Metadata
                     ),
                 ),
             ),
-            'metadata' => array(
-
-            ),
+            'metadata' => array(),
             'db' => array(
                 'table' => 'company',
                 'order' => array(

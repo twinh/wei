@@ -119,11 +119,6 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     'attr' => array(
                         'isList' => 0,
                     ),
-                    'validator' => array(
-                        'rule' => array(
-                            'required' => true,
-                        ),
-                    ),
                 ),
                 'author' => array(
                     'attr' => array(

@@ -110,7 +110,7 @@ class Trex_Management_Controller_Module extends Trex_Controller
             );
         }
         $listField = $meta['field']->getAttrList('isList');
-        $data = $metaHelper->convertArray($listField, $meta['field'], 'list', $data, false);
+        $data = $this->metaHelper->convertArray($data, 'list', $meta, $this);
 
         $this->_view = array(
             'class' => 'Trex_View',
@@ -125,7 +125,7 @@ class Trex_Management_Controller_Module extends Trex_Controller
     {
         if(empty($_POST))
         {
-            $groupList = $this->_meta->field->getAddGroupList();
+            $layout = $this->metaHelper->getAddLayout($meta);
             $meta['field'] = $this->_meta->field;
             $meta['field']->set('namespace_value.form._value', $this->_namespace);
             $banModule = implode(',', $this->_moduleList);

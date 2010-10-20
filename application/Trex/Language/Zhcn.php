@@ -72,6 +72,7 @@ class Trex_Language_Zhcn extends Trex_Language
             'MSG_ERROR_FIELD' => '错误域: ',
             'MSG_ERROR_MSG' => '错误信息: ',
             'MSG_NO_RECORD' => '该记录不存在或已经被删除.',
+            'MSG_RECORD_EXISTS' => '该记录已存在',
             'MSG_ERROR_CAPTCHA' => '验证码错误',
             'LBL_GROUP_BASIC_DATA' => '基本资料',
             'LBL_HTML_TITLE' => 'Management System - Powered by QWin Framework',
