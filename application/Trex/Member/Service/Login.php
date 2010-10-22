@@ -152,7 +152,7 @@ class Trex_Member_Service_Login extends Trex_Service_BasicAction
         {
             $url = $config['view']['url'];
         } else {
-            $url = $this->url->createUrl($this->_set, array('action' => 'Index'));
+            $url = '?';
         }
         $return = array(
             'result' => true,

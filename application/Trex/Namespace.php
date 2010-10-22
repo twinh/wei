@@ -132,6 +132,7 @@ class Trex_Namespace extends Qwin_Trex_Namespace
             $conn = Doctrine_Manager::connection($adapter, $config['project']['name']);
             $conn->setAttribute(Doctrine_Core::ATTR_QUOTE_IDENTIFIER, true);
             $conn->setCharset($databaseSet['charset']);
+            //$conn->setCollate('utf8_general_ci');
         }
     }
 

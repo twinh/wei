@@ -32,7 +32,7 @@ class Trex_Language_Zhcn extends Trex_Language
         $this->_data += array(
             '' => 'NULL',
             'LBL_QWIN' => 'Qwin',
-            'LBL_QWIN_VERSION' => '3.0Beta',
+            'LBL_QWIN_VERSION' => '',
             'LBL_ACTION_LIST' => '列表',
             'LBL_ACTION_ADD' => '添加',
             'LBL_ACTION_EDIT' => '编辑',

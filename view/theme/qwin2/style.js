@@ -10,7 +10,11 @@ jQuery(function($){
      * 设置背景颜色,让背景看起来更协调
      * @todo 允许自定义背景
      */
-    //$('body').css('background-color', $widget.css('background-color'));
+	 if('transparent' == $('body').css('background-color'))
+	 {
+		 $('body').css('background-color', $widget.css('background-color'));
+	 }
+	 
     /**
      * 为各浏览器设置阴影
      * @todo IE浏览器下,阴影会造成盒子位移

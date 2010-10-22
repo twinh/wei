@@ -25,7 +25,7 @@
  * @since       2010-09-20 17:07:30
  */
 
-class Trex_Contact_Language_Enus extends Trex_Language_Enus
+class Trex_Contact_Language_Zhcn extends Trex_Language_Zhcn
 {
     public function __construct()
     {

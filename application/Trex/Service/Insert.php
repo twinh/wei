@@ -83,7 +83,7 @@ class Trex_Service_Insert extends Trex_Service_BasicAction
         $data = $metaHelper->unsetPrimaryKeyValue($config['data']['db'], $meta);
 
         // 检查记录是否存在,存在则提示
-        if(null != $data[$primaryKey])
+        if(isset($data[$primaryKey]))
         {
             $result = $query->where($primaryKey . ' = ?', $data[$primaryKey])->fetchOne();
             if(false != $result)
