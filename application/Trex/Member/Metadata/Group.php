@@ -60,11 +60,17 @@ class Trex_Member_Metadata_Group extends Trex_Metadata
                     ),
                     'attr' => array(
                         'isList' => 0,
+                        'isView' => 0,
                     ),
                 ),
             ),
-            // 表之间的联系
+            'group' => array(
+
+            ),
             'model' => array(
+
+            ),
+            'metadata' => array(
 
             ),
             'db' => array(

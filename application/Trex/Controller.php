@@ -120,7 +120,7 @@ class Trex_Controller extends Qwin_Trex_Controller
         Qwin::addMap('-lang', $languageClass);
 
         $this->_meta = $this->metaHelper->getMetadataBySet($set);
-
+        
          /**
          * 访问控制
          */

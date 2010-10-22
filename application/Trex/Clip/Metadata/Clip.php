@@ -65,7 +65,13 @@ class Trex_Clip_Metadata_Clip extends Trex_Metadata
 
                 ),
             ),
+            'group' => array(
+
+            ),
             'model' => array(
+
+            ),
+            'metadata' => array(
 
             ),
             'db' => array(

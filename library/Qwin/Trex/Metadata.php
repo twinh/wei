@@ -26,13 +26,7 @@
  */
 
 class Qwin_Trex_Metadata extends Qwin_Metadata
-{   
-    /**
-     * 语言名称
-     * @var string
-     */
-    public $lang;
-
+{
     /**
      * 数据表前缀
      * @var string

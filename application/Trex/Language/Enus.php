@@ -36,7 +36,7 @@ class Trex_Language_Enus extends Trex_Language
 
             // Qwin's information
             'LBL_QWIN' => 'Qwin',
-            'LBL_QWIN_VERSION' => '3.0Beta',
+            'LBL_QWIN_VERSION' => '',
 
             // User's actions in browser
             'LBL_ACTION_LIST' => 'List',
