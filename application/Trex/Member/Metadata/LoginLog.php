@@ -44,6 +44,9 @@ class Trex_Member_Metadata_LoginLog extends Trex_Metadata
 
                 ),
             ),
+            'group' => array(
+
+            ),
             'model' => array(
                 'member' => array(
                     'name' => 'Trex_Member_Model_Member',
@@ -56,6 +59,9 @@ class Trex_Member_Metadata_LoginLog extends Trex_Metadata
                         'member_id' => 'username',
                     ),
                 ),
+            ),
+            'metadata' => array(
+
             ),
             'db' => array(
                 'table' => 'member_loginlog',

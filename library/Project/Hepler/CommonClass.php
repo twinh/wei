@@ -89,4 +89,16 @@ class Project_Helper_CommonClass
         $cachePath = QWIN_RESOURCE_PATH . '/class/' . $data['language'] . '/' . $data['sign'] . '.php';
         Qwin_Helper_File::writeAsArray($codeList, $cachePath);
     }
+
+    public function delete($data)
+    {
+        foreach($data as $row)
+        {
+            $cachePath = QWIN_RESOURCE_PATH . '/class/' . $row['language'] . '/' . $row['sign'] . '.php';
+            if(file_exists($cachePath))
+            {
+                unlink($cachePath);
+            }
+        }
+    }
 }

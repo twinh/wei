@@ -36,21 +36,21 @@ class Trex_Namespace extends Qwin_Trex_Namespace
         $this->_config = $ini->getConfig();
         $config = &$this->_config;
 
-        /**
-         * 设置会话
-         */
+        // 设置页面编码
+        if(isset($config['interface']['charset']))
+        {
+            header('Content-Type: text/html; charset=' . $config['interface']['charset']);
+        }
+
+        // 设置会话
         Qwin::addMap('-ses', 'Qwin_Session');
         $namespace = md5($_SERVER['SERVER_NAME'] . $this->_config['project']['name']);
         Qwin::run('-ses', $namespace);
 
-        /**
-         * 打开缓冲区
-         */
-        ob_start(); 
+        // 打开缓冲区
+        ob_start();
 
-        /**
-         * 更新类库缓存文件
-         */
+        // 更新类库缓存文件
         if(isset($_GET['_update']))
         {
             // 加入类的路径
@@ -62,9 +62,7 @@ class Trex_Namespace extends Qwin_Trex_Namespace
             Qwin::update();
         }
 
-        /**
-         * 设置类的对应关系
-         */
+        // 设置类的对应关系
         Qwin::addMap(array(
             // 权限控制
             '-acl'  => 'Qwin_Acl',

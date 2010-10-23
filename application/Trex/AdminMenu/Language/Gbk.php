@@ -1,6 +1,6 @@
 <?php
 /**
- * CustomValue
+ * Gbk
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,40 +16,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  
+ * @package     Trex
+ * @subpackage  AdminMenu
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-10-19 10:44:04
+ * @since       2010-10-22 9:55:39
  */
 
-class Qwin_Widget_JQuery_CustomValue
+class Trex_AdminMenu_Language_Gbk extends Trex_Language_Gbk
 {
     public function __construct()
     {
+        parent::__construct();
+        $this->_data +=  array(
+            'LBL_FIELD_CATEGORY' => '分类',
+            'LBL_FIELD_URL' => '地址',
+            'LBL_FIELD_ORDER' => '顺序',
+            'LBL_FIELD_TARGET' => '链接目标',
 
-    }
-
-    public function render($meta)
-    {
-        $jquery = Qwin::run('Qwin_Resource_JQuery');
-        $buttonId = 'ui-button-ajaxupload-' . $meta['name'];
-
-        $code = $jquery->loadPlugin('customvalue')
-            . '<script type="text/javascript">
-                jQuery(function($){
-                    $("#' . $meta['id'] . '").customValue({
-                        language : {
-                            LBL_READONLY: Qwin.Lang.LBL_READONLY,
-                            LBL_CUSTOM_VALUE: Qwin.Lang.LBL_CUSTOM_VALUE,
-                            LBL_CANCEL: Qwin.Lang.LBL_CANCEL
-                        }
-                    });
-                });
-                </script>';
-        return $code;
+            'LBL_MODULE_ADMIN_MENU' => '后台菜单',
+        );
     }
 }
-

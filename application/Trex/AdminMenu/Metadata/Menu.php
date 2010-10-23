@@ -133,7 +133,8 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                 'table' => 'admin_menu',
                 'order' => array(
                     array('order', 'DESC')
-                )
+                ),
+                'limit' => 20,
             ),
             'page' => array(
                 'title' => 'LBL_MODULE_ADMIN_MENU',

@@ -32,7 +32,13 @@ class Trex_CommonClass_Controller_CommonClass extends Trex_ActionController
      */
     public function onAfterDb($data)
     {
-        Qwin::run('Project_Helper_CommonClass')->write($data);
+        $commonClass = Qwin::run('Project_Helper_CommonClass');
+        if('delete' != strtolower($this->_set['action']))
+        {
+            $commonClass->write($data);
+        } else {
+            //$commonClass->delete($data);
+        }
     }
 
     /**

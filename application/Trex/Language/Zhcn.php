@@ -150,6 +150,13 @@ class Trex_Language_Zhcn extends Trex_Language
             'LBL_READONLY' => '只读',
             'LBL_PERSONAL' => '个人',
             'LBL_LOGIN' => '登录',
+			
+			'LBL_LANG_GBK' => '简体中文(Zh-cn,Gbk)',
+			'LBL_LANG_ZHCN' => '简体中文(Zh-cn,Utf-8)',
+			'LBL_LANG_ENUS' => '英文(En-us)',
+			
+			'LBL_CANCEL' => '取消',
+			'LBL_CUSTOM_VALUE' => '自定义值',
         );
     }
 }

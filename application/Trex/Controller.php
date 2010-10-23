@@ -114,7 +114,7 @@ class Trex_Controller extends Qwin_Trex_Controller
         $this->_lang = Qwin::run($languageClass);
         if(null == $this->_lang)
         {
-            $languageClass = 'Trex_Language' . $languageName;
+            $languageClass = 'Trex_Language_' . $languageName;
             $this->_lang = Qwin::run($languageClass);
         }
         Qwin::addMap('-lang', $languageClass);
@@ -124,7 +124,7 @@ class Trex_Controller extends Qwin_Trex_Controller
          /**
          * 访问控制
          */
-        $this->_isAllowVisited();
+        //$this->_isAllowVisited();
     }
 
     /**
