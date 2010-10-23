@@ -649,7 +649,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
               . ' SET ' . implode(', ', $set)
               . ' WHERE ' . implode(' = ? AND ', $this->quoteMultipleIdentifier($table->getIdentifierColumnNames()))
               . ' = ?';
-
+        
         return $this->exec($sql, $params);
     }
 

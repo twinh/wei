@@ -77,7 +77,7 @@ class Trex_Service_BasicAction extends Trex_Service
         $this->_lang = Qwin::run($languageClass);
         if(null == $this->_lang)
         {
-            $languageClass = 'Trex_Language' . $languageName;
+            $languageClass = 'Trex_Language_' . $languageName;
             $this->_lang = Qwin::run($languageClass);
         }
         Qwin::addMap('-lang', $languageClass);

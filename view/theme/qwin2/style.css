@@ -209,8 +209,7 @@ div.ui-layout-pane {
     float: left;
 }
 .ui-form .ui-form-content fieldset {
-    padding-bottom: .5em;
-    margin-bottom: 2em;
+    padding: 5px 0;
     background: none;
 }
 .ui-form .ui-form-content legend {
@@ -322,6 +321,9 @@ div.ui-layout-pane {
     line-height: 15px;/* for ie */
     font-weight:normal;
     vertical-align: bottom;
+}
+.ui-form-table .ui-field-text-small input{
+	width: 22%;
 }
 .ui-form-table .ui-field-checkbox input,
 .ui-form-table .ui-field-radio input {

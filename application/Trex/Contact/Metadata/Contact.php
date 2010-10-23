@@ -65,10 +65,7 @@ class Trex_Contact_Metadata_Contact extends Trex_Metadata
                             array('Project_Helper_CommonClass', 'convert'),
                             'sex',
                         ),
-                        'view' => array(
-                            array('Project_Helper_CommonClass', 'convert'),
-                            'sex',
-                        ),
+                        'view' => 'list',
                     ),
                     'attr' => array(
                         'isLink' => 1,

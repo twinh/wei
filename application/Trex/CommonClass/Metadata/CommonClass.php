@@ -44,7 +44,15 @@ class Trex_CommonClass_Metadata_CommonClass extends Trex_Metadata
                         ),
                     ),
                 ),
-                'model' => array(),
+                'group' => array(
+
+                ),
+                'model' => array(
+
+                ),
+                'metadata' => array(
+
+                ),
                 'db' => array(
                     'table' => 'common_class',
                     'order' => array(
@@ -56,121 +64,6 @@ class Trex_CommonClass_Metadata_CommonClass extends Trex_Metadata
                 'page' => array(
                     'title' => 'LBL_MODULE_COMMONCLASS',
                 ),
-                /*'type' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_TYPE',
-                        'descrip' => array(
-                            '括号中表示<strong>代码</strong>的起始数字',
-                            '<strong>代码</strong>域只读,由<strong>类型</strong>控制',
-                        ),
-                        'order' => 10,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
-                    'form' => array(
-                        '_type' => 'radio',
-                        '_typeExt' => 'common_class_auto_type',
-                        '_value' => 1,
-                        '_resource' => array(
-                            1 => '系统(1)',
-                            2 => '常用(2)',
-                            3 => '项目(3)',
-                            4 => '其他(4-9)'
-                        ),
-                        'name' => 'type',
-                    ),
-                    'attr' => array(
-                        'isLink' => 0,
-                        'isList' => 0,
-                        'isDbField' => 0,
-                        'isDbQuery' => 0,
-                    ),
-                ),
-                'code' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_CODE',
-                        'order' => 20,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
-                    'form' => array(
-                        '_type' => 'text',
-                        '_value' => '',
-                        'name' => 'code',
-                        'readonly' => 'readonly'
-                    ),
-                    'attr' => array(
-                        'isLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
-                    ),
-                ),
-                'var_name' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_VAR_NAME',
-                        'order' => 25,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
-                    'form' => array(
-                        '_type' => 'text',
-                        '_value' => '',
-                        'name' => 'var_name',
-                    ),
-                    'attr' => array(
-                        'isLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
-                    ),
-                ),
-                'order' => array(
-                    'basic' => array(
-                        'title' => '顺序',
-                        'descrip' => '',
-                        'order' => 30,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
-                    'form' => array(
-                        '_type' => 'text',
-                        '_value' => '0',
-                        'name' => 'order',
-                    ),
-                    'attr' => array(
-                        'isLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
-                    ),
-                ),
-                'value' => array(
-                    'basic' => array(
-                        'title' => 'LBL_FIELD_VALUE',
-                        'descrip' => array(
-                            '<strong>名称</strong>可以自行添加多种语言',
-                            '在 mapEditor 中,Key 指语言对应的代码,value 值对应的语言的值',
-                        ),
-                        'order' => 35,
-                        'group' => 'LBL_GROUP_BASIC_DATA',
-                    ),
-                    'form' => array(
-                        '_type' => 'textarea',
-                        '_typeExt' => array(
-                            'mapeditor' => array(
-                                'data' => array(
-                                    'en' => '',
-                                    'zh-cn' => '',
-                                ),
-                            ),
-                        ),
-                        '_value' => '',
-                        'name' => 'value',
-                    ),
-                    'attr' => array(
-                        'isLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
-                    ),
-                ),*/
          ));
     }
 }

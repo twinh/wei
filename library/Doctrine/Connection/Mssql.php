@@ -327,6 +327,8 @@ class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
      */
     public function exec($query, array $params = array())
     {
+        return parent::exec($query, $params);
+        // 中文会导致查询为空
         if(! empty($params)) {
             $query = $this->replaceBoundParamsWithInlineValuesInQuery($query, $params);
         }

@@ -103,6 +103,8 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         $modelName = $this->getClassName('Model', $set);
         $modelObj = Qwin::run($modelName);
         $modelObj->setTableName($tablePrefix . $metaObj['db']['table']);
+
+        //$manager->setAttribute(Doctrine::ATTR_DEFAULT_IDENTIFIER_OPTIONS, array('name' => $metaObj['db']['primaryKey']));
         foreach($queryField as $field)
         {
             $modelObj->hasColumn($field);

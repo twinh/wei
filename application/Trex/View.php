@@ -30,6 +30,7 @@ class Trex_View extends Qwin_Trex_View
     public function __construct()
     {
         Qwin::addMap('-jquery', 'Qwin_Resource_JQuery');
+        $this->_config = Qwin::run('-ini')->getConfig();
         $this->_jquery = Qwin::run('-jquery');
         $this->_jquery->setTheme($this->getStyle());
         

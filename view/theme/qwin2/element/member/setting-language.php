@@ -46,8 +46,9 @@
         <hr class="ui-line ui-widget-content" />
         <ul>
             <li>
-                    <a class="ui-anchor" href="<?php echo qw_url($set, array('language' => 'zh-CN')) ?>" title="简体中文(zh-CN)">简体中文(zh-CN)</a>
-                    <a class="ui-anchor" href="<?php echo qw_url($set, array('language' => 'en-US')) ?>" title="English(en-US)">English(en-US)</a>
+                    <a class="ui-anchor" href="<?php echo qw_url($set, array('language' => 'zh-CN')) ?>"><?php echo qw_lang('LBL_LANG_ZHCN') ?></a>
+                    <a class="ui-anchor" href="<?php echo qw_url($set, array('language' => 'Gbk')) ?>"><?php echo qw_lang('LBL_LANG_GBK') ?></a>
+                    <a class="ui-anchor" href="<?php echo qw_url($set, array('language' => 'en-US')) ?>"><?php echo qw_lang('LBL_LANG_ENUS') ?></a>
             </li>
         </ul>
         <hr class="ui-line ui-widget-content" />

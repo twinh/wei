@@ -269,7 +269,8 @@ class Trex_ActionController extends Trex_Controller
      */
     public function convertListDateCreated($value, $name, $data, $copyData)
     {
-        return substr($value, 0, 10);
+        return $value;
+        return date('Y-m-d', strtotime($value));
     }
 
     /**
@@ -283,7 +284,8 @@ class Trex_ActionController extends Trex_Controller
      */
     public function convertListDateModified($value, $name, $data, $copyData)
     {
-        return substr($value, 0, 10);
+        return $value;
+        return date('Y-m-d', strtotime($value));
     }
 
     /**

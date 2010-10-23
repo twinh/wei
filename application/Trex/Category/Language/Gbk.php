@@ -1,6 +1,6 @@
 <?php
 /**
- * CustomValue
+ * Gbk
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,40 +16,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  
+ * @package     Trex
+ * @subpackage  Category
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-10-19 10:44:04
+ * @since       2010-10-22 11:02:35
  */
 
-class Qwin_Widget_JQuery_CustomValue
+class Trex_Category_Language_Gbk extends Trex_Language_Gbk
 {
     public function __construct()
     {
+        parent::__construct();
+        $this->_data += array(
+            'LBL_FIELD_PARENT_ID' => '父分类',
+            'LBL_FIELD_TO_URL' => '跳转到',
+            'LBL_FIELD_ORDER' => '顺序',
+            'LBL_FIELD_IMAGE' => '图像',
+            'LBL_FIELD_IMAGE_2' => '图像2',
+            'LBL_FIELD_SIGN' => '唯一标识',
 
-    }
+            'LBL_ACTION_ADD_SUBCATEGORY' => '添加子分类',
+            'LBL_ACTION_ADD_SPECIAL_ARTICLE' => '添加专题文章',
+            'LBL_ACTION_VIEW_SPECIAL_ARTICLE' => '查看专题文章',
+            'LBL_ACTION_VIEW_SPECIAL' => '查看专题',
 
-    public function render($meta)
-    {
-        $jquery = Qwin::run('Qwin_Resource_JQuery');
-        $buttonId = 'ui-button-ajaxupload-' . $meta['name'];
-
-        $code = $jquery->loadPlugin('customvalue')
-            . '<script type="text/javascript">
-                jQuery(function($){
-                    $("#' . $meta['id'] . '").customValue({
-                        language : {
-                            LBL_READONLY: Qwin.Lang.LBL_READONLY,
-                            LBL_CUSTOM_VALUE: Qwin.Lang.LBL_CUSTOM_VALUE,
-                            LBL_CANCEL: Qwin.Lang.LBL_CANCEL
-                        }
-                    });
-                });
-                </script>';
-        return $code;
+            'LBL_MODULE_CATEGORY' => '栏目',
+        );
     }
 }
-
