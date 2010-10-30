@@ -77,8 +77,13 @@ class Trex_Management_Controller_Namespace extends Trex_Controller
         $app = Qwin::run('Qwin_Trex_Application');
         if(empty($_POST))
         {
-            $layout = $this->metaHelper->getAddLayout($meta);
-            $meta['field'] = $this->_meta->field;
+            // 初始化常用的变量
+            $metaHelper = Qwin::run('Qwin_Trex_Metadata');
+            $meta = $this->_meta;
+            $primaryKey = $meta['db']['primaryKey'];
+            $primaryKeyValue = $config['data']['primaryKeyValue'];
+
+            $metaHelper->loadRelatedMetadata($meta, 'db');
             $namespace = $this->_app->getNamespace($this->_path);
             $banNamespace = implode(',', $namespace);
 

@@ -157,6 +157,9 @@ class Trex_Language_Zhcn extends Trex_Language
 			
 			'LBL_CANCEL' => '取消',
 			'LBL_CUSTOM_VALUE' => '自定义值',
+			
+			'LBL_TREE_PREFIX_1' => '┃',
+			'LBL_TREE_PREFIX_2' => '┣',
         );
     }
 }

@@ -107,8 +107,8 @@ abstract class Doctrine_Hydrator_Graph extends Doctrine_Hydrator_Abstract
                 }
             }
             $activeRootIdentifier = null;
-        } else { 
-            $data = $stmt->fetch(Doctrine_Core::FETCH_ASSOC); 
+        } else {
+            $data = $stmt->fetch(Doctrine_Core::FETCH_ASSOC);
             if ( ! $data) { 
                 return $result; 
             }

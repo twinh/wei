@@ -22,7 +22,7 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-5-26 22:19:56
+ * @since       2010-05-26 22:19:56
  * @todo        根据分类找出其所有子类, 根据子类找出其父类
  */
 

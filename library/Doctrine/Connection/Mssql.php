@@ -311,6 +311,8 @@ class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
      */
     public function execute($query, array $params = array())
     {
+        /// !!!
+        return parent::execute($query, $params);
         if(! empty($params)) {
             $query = $this->replaceBoundParamsWithInlineValuesInQuery($query, $params);
         }

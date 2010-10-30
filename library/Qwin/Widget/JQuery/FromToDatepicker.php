@@ -1,6 +1,6 @@
 <?php
 /**
- * Datepicker
+ * FromToDatepicker
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -22,26 +22,41 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-20 17:21:33
+ * @since       2010-10-30 18:19:02
  */
 
-class Qwin_Widget_JQuery_Datepicker
+class Qwin_Widget_JQuery_FromToDatepicker
 {
     public function __construct()
     {
-        
+
     }
 
-    public function render($meta)
+    public function render($meta, $id)
     {
         $jquery = Qwin::run('Qwin_Resource_JQuery');
-        $buttonId = 'ui-button-datepicker-' . $meta['name'];
 
         $code = $jquery->loadUi('datepicker')
             . '<script type="text/javascript">
-                jQuery("#' . $meta['id'] . '").datepicker({dateFormat: "yy-mm-dd"});
+    jQuery(function($){
+        var dates = $( "#' . $id[0] . ', #' . $id[1] . '" ).datepicker({
+            dateFormat: "yy-mm-dd",
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 2,
+            onSelect: function( selectedDate ) {
+                var option = this.id == "' . $id[0] . '" ? "minDate" : "maxDate",
+                    instance = $( this ).data( "datepicker" );
+                    date = $.datepicker.parseDate(
+                        instance.settings.dateFormat ||
+                        $.datepicker._defaults.dateFormat,
+                        selectedDate, instance.settings );
+                dates.not( this ).datepicker( "option", option, date );
+            }
+        });
+    });
                </script>';
-
         return $code;
     }
 }
+

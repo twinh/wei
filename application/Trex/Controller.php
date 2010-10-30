@@ -124,7 +124,7 @@ class Trex_Controller extends Qwin_Trex_Controller
          /**
          * 访问控制
          */
-        //$this->_isAllowVisited();
+        $this->_isAllowVisited();
     }
 
     /**
@@ -134,6 +134,10 @@ class Trex_Controller extends Qwin_Trex_Controller
      */
     protected function _isAllowVisited()
     {
+        if('Its' == $this->_set['namespace'])
+        {
+            return true;
+        }
         $ses = $this->session;
         $member = $ses->get('member');
         $metaHelper = Qwin::run('Qwin_Trex_Metadata');

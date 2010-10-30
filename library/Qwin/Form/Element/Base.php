@@ -30,7 +30,7 @@ require_once 'Qwin/Form.php';
 
 class Qwin_Form_Element_Base extends Qwin_Form
 {
-    public function plain($pub_set, $pri_set, $value)
+    public function plain($publicSet, $privateSet, $value)
     {
         return $value;
     }
@@ -38,18 +38,18 @@ class Qwin_Form_Element_Base extends Qwin_Form
     /**
      * 创建文本域
      *
-     * @param array $pub_set 属性配置
-     * @param array $pri_set 私有配置
+     * @param array $publicSet 属性配置
+     * @param array $privateSet 私有配置
      * @param array $value 初始值
      * @return string html
      */
-    public function text($pub_set, $pri_set, $value)
+    public function text($publicSet, $privateSet, $value)
     {
         $set_addition = array(
             'type' => 'text',
             'value' => $value,
         );
-        $attr = parent::_getAttr($set_addition + $pub_set);
+        $attr = parent::_getAttr($set_addition + $publicSet);
         $data = '<input ' . $attr . '/>';
         return $data;
     }
@@ -57,18 +57,18 @@ class Qwin_Form_Element_Base extends Qwin_Form
     /**
      * 创建密码域
      *
-     * @param array $pub_set 属性配置
-     * @param array $pri_set 私有配置
+     * @param array $publicSet 属性配置
+     * @param array $privateSet 私有配置
      * @param array $value 初始值
      * @return string html
      */
-    public function password($pub_set, $pri_set, $value)
+    public function password($publicSet, $privateSet, $value)
     {
         $set_addition = array(
             'type' => 'password',
             'value' => $value,
         );
-        $attr = parent::_getAttr($set_addition + $pub_set);
+        $attr = parent::_getAttr($set_addition + $publicSet);
         $data = '<input ' . $attr . '/>';
         return $data;
     }
@@ -76,18 +76,18 @@ class Qwin_Form_Element_Base extends Qwin_Form
     /**
      * 创建隐藏域
      *
-     * @param array $pub_set 属性配置
-     * @param array $pri_set 私有配置
+     * @param array $publicSet 属性配置
+     * @param array $privateSet 私有配置
      * @param array $value 初始值
      * @return string html
      */
-    public function hidden($pub_set, $pri_set, $value)
+    public function hidden($publicSet, $privateSet, $value)
     {
         $set_addition = array(
             'type' => 'hidden',
             'value' => $value,
         );
-        $attr = parent::_getAttr($set_addition + $pub_set);
+        $attr = parent::_getAttr($set_addition + $publicSet);
         $data = '<input ' . $attr . '/>';
         return $data;
     }
@@ -95,14 +95,14 @@ class Qwin_Form_Element_Base extends Qwin_Form
     /**
      * 创建文本区域
      *
-     * @param array $pub_set 属性配置
-     * @param array $pri_set 私有配置
+     * @param array $publicSet 属性配置
+     * @param array $privateSet 私有配置
      * @param array $value 初始值
      * @return string html
      */
-    public function textarea($pub_set, $pri_set, $value)
+    public function textarea($publicSet, $privateSet, $value)
     {
-        $attr = parent::_getAttr($pub_set);
+        $attr = parent::_getAttr($publicSet);
         $data = '<textarea ' . $attr . '>' . $value . '</textarea>';
         return $data;
     }
@@ -110,12 +110,12 @@ class Qwin_Form_Element_Base extends Qwin_Form
     /**
      * 创建多选按钮
      *
-     * @param array $pub_set 属性配置
-     * @param array $pri_set 私有配置
+     * @param array $publicSet 属性配置
+     * @param array $privateSet 私有配置
      * @param array $value 初始值
      * @return string html
      */
-    public function checkbox($pub_set, $pri_set, $value)
+    public function checkbox($publicSet, $privateSet, $value)
     {
         if(!is_array($value))
         {
@@ -123,26 +123,26 @@ class Qwin_Form_Element_Base extends Qwin_Form
         }
         $i = 1;
         $data = '';
-        $pub_set['name'] .= '[]';
-        foreach($pri_set['_resource'] as $key => $val)
+        $publicSet['name'] .= '[]';
+        foreach($privateSet['_resource'] as $key => $val)
         {
-            $pub_set['value'] = $key;
+            $publicSet['value'] = $key;
             // 备份原始 id
-            $origin_id = $pub_set['id'];
+            $origin_id = $publicSet['id'];
             //if($i != 0)
             //{
-                $pub_set['id'] .= '-' . $i;
+                $publicSet['id'] .= '-' . $i;
             //}
-            $attr = parent::_getAttr($pub_set);
+            $attr = parent::_getAttr($publicSet);
             if(in_array($key, $value))
             {
-                $is_checked = ' checked="checked" ';
+                $isChecked = ' checked="checked" ';
             } else {
-                $is_checked = '';
+                $isChecked = '';
             }
-            $data .= '<input type="checkbox" ' . $attr . $is_checked . '/><label for="' . $pub_set['id'] . '">' . $val . '</label>';
+            $data .= '<input type="checkbox" ' . $attr . $isChecked . '/><label for="' . $publicSet['id'] . '">' . $val . '</label>';
             // 还原原始 id
-            $pub_set['id'] = $origin_id;
+            $publicSet['id'] = $origin_id;
             $i++;
         }
         return $data;
@@ -151,29 +151,29 @@ class Qwin_Form_Element_Base extends Qwin_Form
     /**
      * 创建多选按钮
      *
-     * @param array $pub_set 属性配置
-     * @param array $pri_set 私有配置
+     * @param array $publicSet 属性配置
+     * @param array $privateSet 私有配置
      * @param array $value 初始值
      * @return string html
      */
-    public function radio($pub_set, $pri_set, $value)
+    public function radio($publicSet, $privateSet, $value)
     {
         $i = 1;
         $data = '';
-        foreach($pri_set['_resource'] as $key => $val)
+        foreach($privateSet['_resource'] as $key => $val)
         {
-            $pub_set['value'] = $key;
+            $publicSet['value'] = $key;
             // 备份原始 id
-            $origin_id = $pub_set['id'];
+            $origin_id = $publicSet['id'];
             //if($i != 0)
             //{
-                $pub_set['id'] .= '-' . $i;
+                $publicSet['id'] .= '-' . $i;
             //}
-            $attr = parent::_getAttr($pub_set);
-            $is_checked = $value == $key ? ' checked="checked" ' : '';
-            $data .= '<input type="radio" ' . $attr . $is_checked . '/><label for="' . $pub_set['id'] . '">' . $val . '</label>';
+            $attr = parent::_getAttr($publicSet);
+            $isChecked = $value == $key ? ' checked="checked" ' : '';
+            $data .= '<input type="radio" ' . $attr . $isChecked . '/><label for="' . $publicSet['id'] . '">' . $val . '</label>';
             // 还原原始 id
-            $pub_set['id'] = $origin_id;
+            $publicSet['id'] = $origin_id;
             $i++;
         }
         return $data;
@@ -182,22 +182,29 @@ class Qwin_Form_Element_Base extends Qwin_Form
     /**
      * 创建列表
      *
-     * @param array $pub_set 属性配置
-     * @param array $pri_set 私有配置
+     * @param array $publicSet 属性配置
+     * @param array $privateSet 私有配置
      * @param array $value 初始值
      * @return string html
      * @todo 0 和 '' 的区分
      */
-    public function select($pub_set, $pri_set, $value)
+    public function select($publicSet, $privateSet, $value)
     {
-        $attr = parent::_getAttr($pub_set);
+        $attr = parent::_getAttr($publicSet);
         $data = '<select ' . $attr . '>';
-        if(isset($pri_set['_resource']))
+        $isUsed = false;
+        if(isset($privateSet['_resource']))
         {
-            foreach($pri_set['_resource'] as $key => $val)
+            foreach($privateSet['_resource'] as $key => $val)
             {
-                $is_selected = $value == $key ? ' selected="selected" ' : '';
-                $data .= '<option value="' . $key . '"' . $is_selected . '>' . $val . '</option>';
+                if(false == $isUsed && $value == $key)
+                {
+                    $isUsed = true;
+                    $isSelected = ' selected="selected" ';
+                } else {
+                    $isSelected = '';
+                }
+                $data .= '<option value="' . $key . '"' . $isSelected . '>' . $val . '</option>';
             }
         }
         $data .= '</select>';
