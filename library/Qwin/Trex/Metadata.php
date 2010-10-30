@@ -314,11 +314,25 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             return array();
         }
 
+        $searchSet = array();
         $searchValue = $request->g($valueName);
         $searchOper  = $request->g($operName);
-        return array(
-            array($searchField, $searchValue, $searchOper),
-        );
+        if(!is_array($searchField))
+        {
+            $searchSet[] = array($searchField, $searchValue, $searchOper);
+        } else {
+            foreach($searchField as $key => $value)
+            {
+                !isset($searchValue[$key]) && $searchValue[$key] = null;
+                !isset($searchOper[$key]) && $searchOper[$key] = null;
+                $searchSet[] = array(
+                    $searchField[$key],
+                    $searchValue[$key],
+                    $searchOper[$key],
+                );
+            }
+        }
+        return $searchSet;
     }
     
     /**

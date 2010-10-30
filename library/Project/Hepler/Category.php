@@ -31,11 +31,6 @@ class Project_Hepler_Category
     private $_resourceCache;
     private $_fileCache;
 
-    function  __construct()
-    {
-        Qwin::load('Qwin_Tree');
-    }
-
     public function getTreeResource($set, $parent = null, $keyArr = array('id', 'parent_id', 'name'), $isAddPrefix = true)
     {
         $name = md5(implode('-', $set));
@@ -93,13 +88,16 @@ class Project_Hepler_Category
         // 添加前缀
         if($isAddPrefix)
         {
+            $lang = Qwin::run('-lang');
+            $prefix1 = $lang->t('LBL_TREE_PREFIX_1');
+            $prefix2 = $lang->t('LBL_TREE_PREFIX_2');
             $tree->setLayer($treeData);
             foreach($treeData as $id)
             {
                 $layer = $tree->getLayer($id);
                 if(0 != $layer)
                 {
-                    $this->_resourceCache[$resourceName][$id] = str_repeat('┃', $layer - 1) . '┣' . $tree->getValue($id);
+                    $this->_resourceCache[$resourceName][$id] = str_repeat($prefix1, $layer - 1) . $prefix2 . $tree->getValue($id);
                 } else {
                     $this->_resourceCache[$resourceName][$id] = $tree->getValue($id);
                 }

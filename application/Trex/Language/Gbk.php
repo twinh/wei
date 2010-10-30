@@ -97,6 +97,7 @@ class Trex_Language_Gbk extends Trex_Language
             'LBL_GROUP_DETAIL_DATA' => '详细资料',
             'LBL_GROUP_DEFAULT_DATA' => '默认资料',
             'MSG_OPERATE_SUCCESSFULLY' => '操作成功!',
+			'MSG_SEARCH_SUCCESSFULLY' => '查询成功,现在将跳转到结果页面!',
             'MSG_FUNCTION_DEVELOPTING' => '功能尚在开发中.',
             'MSG_CLICK_TO_REDIRECT' => '3秒后跳转到新的页面,点击"跳转"按钮直接跳转.',
             'MSG_NOT_ALLOW_DELETE' => '不允许删除该用户.',
@@ -158,6 +159,9 @@ class Trex_Language_Gbk extends Trex_Language
 			
 			'LBL_CANCEL' => '取消',
 			'LBL_CUSTOM_VALUE' => '自定义值',
+			
+			'LBL_TREE_PREFIX_1' => '┃',
+			'LBL_TREE_PREFIX_2' => '┣',
         );
     }
 }

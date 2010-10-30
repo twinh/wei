@@ -170,6 +170,8 @@ class Trex_Language_Enus extends Trex_Language
             'LBL_SELECTED' => 'Selected',
             'LBL_NOT_SELECTED' => 'Not selected',
             'LBL_READONLY' => 'Readonly',
+            'LBL_CUSTOM_VALUE' => 'Custom Value',
+            'LBL_CANCEL' => 'Cancel',
         );
     }
 }

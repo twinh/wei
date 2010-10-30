@@ -42,7 +42,13 @@ class Trex_Management_Metadata_Namespace extends Trex_Metadata
                     ),
                 ),
             ),
+            'group' => array(
+
+            ),
             'model' => array(
+            ),
+            'metadata' => array(
+
             ),
             'db' => array(
                 'table' => 'namespace',
