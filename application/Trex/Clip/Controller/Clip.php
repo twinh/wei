@@ -29,7 +29,7 @@ class Trex_Clip_Controller_Clip extends Trex_ActionController
 {
     public function onAfterDb()
     {
-        $query = $this->_meta->getDoctrineQuery($this->_set);
+        $query = $this->metaHelper->getDoctrineQuery($this->_set);
         $data = $query->execute()->toArray();
         $cache = array();
         foreach($data as $row)

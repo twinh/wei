@@ -27,21 +27,23 @@
 
 class Qwin_Widget_JQuery_Datepicker
 {
-    public function __construct()
-    {
-        
-    }
-
     public function render($meta)
     {
         $jquery = Qwin::run('Qwin_Resource_JQuery');
-        $buttonId = 'ui-button-datepicker-' . $meta['name'];
+        $cssPacker = Qwin::run('Qwin_Packer_Css');
+        $jsPacker = Qwin::run('Qwin_Packer_Js');
 
-        $code = $jquery->loadUi('datepicker')
-            . '<script type="text/javascript">
-                jQuery("#' . $meta['id'] . '").datepicker({dateFormat: "yy-mm-dd"});
+        $datepickerFile = $jquery->loadUi('datepicker', false);
+        $cssPacker->add($datepickerFile['css']);
+        $jsPacker->add($datepickerFile['js']);
+
+        $buttonId = 'ui-button-datepicker-' . $meta['id'];
+
+        $code = '<script type="text/javascript">
+                jQuery(function($){
+                    $("#' . $meta['id'] . '").datepicker({dateFormat: "yy-mm-dd"});
+                });
                </script>';
-
         return $code;
     }
 }

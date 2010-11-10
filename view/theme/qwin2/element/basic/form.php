@@ -26,7 +26,9 @@
  */
 !isset($jQueryValidateCode) && $jQueryValidateCode = '{"rules":[],"messages":[]};';
 !isset($data) && $data = array();
-echo $jquery->loadPlugin('validate', 'qwin');
+$jQueryFile['validate'] = $jquery->loadPlugin('validate', 'qwin', false);
+$jsPacker
+    ->add($jQueryFile['validate']['js']);
 ?>
 <script type="text/javascript">
 var jQueryValidateCode = <?php echo $jQueryValidateCode?>;
@@ -84,4 +86,6 @@ var jQueryValidateCode = <?php echo $jQueryValidateCode?>;
             <?php echo qw_jquery_button('reset', qw_lang('LBL_ACTION_RESET'), 'ui-icon-arrowreturnthick-1-w') ?>
         </div>
         </form>
-<script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH?>/js/qwin/form.js"></script>
+<?php
+$jsPacker->add(QWIN_RESOURCE_PATH . '/js/qwin/form.js');
+?>

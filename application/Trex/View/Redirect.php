@@ -53,6 +53,7 @@ class Trex_View_Redirect extends Trex_View
                 break;
         }
 
+        extract($this->_data, EXTR_OVERWRITE);
         require $this->_layout;
     }
 }

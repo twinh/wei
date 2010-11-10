@@ -74,6 +74,10 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
                 'isReadonly' => 0,
                 'isView' => 1,
             ),
+            'db' => array(
+                'type' => 'string',
+                'length' => null,
+            ),
             'converter' => array(
                 'add' => null,
                 'edit' => null,

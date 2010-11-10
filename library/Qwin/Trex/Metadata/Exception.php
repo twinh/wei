@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  
+ * @subpackage  Metadata
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License

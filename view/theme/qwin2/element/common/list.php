@@ -27,17 +27,15 @@
 
 // 防止直接访问导致错误
 !defined('QWIN_PATH') && exit('Forbidden');
+$jQueryFile['jqgrid'] = $jquery->loadPlugin('jqgrid', null, false);
+$cssPacker
+    ->add($jQueryFile['jqgrid']['css']);
+$jsPacker
+    ->add(QWIN_RESOURCE_PATH . '/js/jquery/plugin/jqgrid/i18n/grid.locale-en.js')
+    ->add($jQueryFile['jqgrid']['js'])
 ?>
-<script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH ?>/js/jquery/plugin/jqgrid/i18n/grid.locale-en.js"></script>
-<?php echo $jquery->loadPlugin('jqgrid') ?>
 <div id="custom-jqgird-toolbar" class="ui-helper-hidden">
-    <?php
-    echo qw_jquery_link(qw_url($set, array('action' => 'Add')), qw_lang('LBL_ACTION_ADD'), 'ui-icon-plus'),
-         qw_jquery_link('javascript:;', qw_lang('LBL_ACTION_DELETE'), 'ui-icon-trash', 'action-delete'),
-         qw_jquery_link(qw_url($set, array('action' => 'Index')), qw_lang('LBL_ACTION_LIST'), 'ui-icon-calculator'),
-        $customLink
-    ?>
-    <!--<a class="action-filter" href="Add"><?php echo $lang->t('LBL_ACTION_FILTER')?></a>-->
+    <?php echo $customLink ?>
 </div>
 <table id="ui-jqgrid-table"></table>
 <div id="ui-jqgrid-page"></div>
@@ -63,8 +61,7 @@ jQuery(function($){
         multiselect      : true,
         // 高度设置为100%,使表格不出现Y滚动条
         height           : '100%',
-		// TODO 宽度自适应
-        width            : $('#ui-main').width() - 6,
+        autowidth        : true,
         // 分页栏
         pager            : '#ui-jqgrid-page',
         // 分页栏右下角显示记录数

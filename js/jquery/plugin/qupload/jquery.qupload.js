@@ -46,7 +46,7 @@ if(jQuery)(function($){
 			if(!o.dialog)
 			{
 				o.dialog = {
-					title : 'QUpload 文件上传',
+					title : 'File Upload',
 					width : 400,
 					autoOpen : false,
 					bgiframe : true,

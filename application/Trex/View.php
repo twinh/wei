@@ -29,10 +29,30 @@ class Trex_View extends Qwin_Trex_View
 {
     public function __construct()
     {
-        Qwin::addMap('-jquery', 'Qwin_Resource_JQuery');
+        // 获取配置
         $this->_config = Qwin::run('-ini')->getConfig();
-        $this->_jquery = Qwin::run('-jquery');
-        $this->_jquery->setTheme($this->getStyle());
+
+        $packerPath = QWIN_ROOT_PATH . '/cache/packer';
+
+        // 设置css打包
+        $cssPacker = Qwin::run('Qwin_Packer_Css');
+        $cssPacker->setCachePath($packerPath)
+            ->setCacheAge($this->_config['expiredTime'])
+            ->setPathCacheAge($this->_config['expiredTime']);
+
+        // 设置js打包
+        $jsPacker = Qwin::run('Qwin_Packer_Js');
+        $jsPacker->setCachePath($packerPath)
+            ->setCacheAge($this->_config['expiredTime'])
+            ->setPathCacheAge($this->_config['expiredTime']);
+
+        $this->_data['cssPacker'] = $cssPacker;
+        $this->_data['jsPacker'] = $jsPacker;
+
+        $jquery = Qwin::run('Qwin_Resource_JQuery');
+        $this->_data['jquery'] = $jquery;
+
+        $jquery->setTheme($this->getStyle());
         
         $this->_theme = Qwin::run('-ini')->getConfig('interface.theme');
         $this->_layout = QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/layout/common-control-panel.php';
@@ -45,6 +65,8 @@ class Trex_View extends Qwin_Trex_View
          * 加载页眉导航的缓存
          */
         $this->adminMenu = Qwin::run('Qwin_Cache_List')->getCache('AdminMenu');
+
+        $this->_data['lastViewedItem'] = Qwin::run('Qwin_Session')->get('lastViewedItem');
     }
 
     /**

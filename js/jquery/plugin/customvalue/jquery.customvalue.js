@@ -37,6 +37,9 @@
         var id = _this.attr('id');
         _this.hide().after('<button id="ui-button-customValue-' + id + '" type="button">' + opts.language.LBL_CUSTOM_VALUE + '</button>'
             + '<button id="ui-button-customValue-cancel-' + id + '" class="ui-helper-hidden" type="button">' + opts.language.LBL_CANCEL + '</button>');
+        
+
+
         var setObj = $('#ui-button-customValue-' + id);
         var cancelObj = $('#ui-button-customValue-cancel-' + id);
         setObj.button().click(function(){
@@ -54,9 +57,9 @@
 
     $.fn.customValue.defaults = {
         language : {
-            LBL_READONLY: '只读',
-            LBL_CUSTOM_VALUE: '自定义值',
-            LBL_CANCEL: '取消'
+            LBL_READONLY: 'Readonly',
+            LBL_CUSTOM_VALUE: 'Custom value',
+            LBL_CANCEL: 'Cancel'
         }
     }
 })(jQuery);

@@ -35,9 +35,14 @@ class Qwin_Widget_JQuery_FromToDatepicker
     public function render($meta, $id)
     {
         $jquery = Qwin::run('Qwin_Resource_JQuery');
+        $cssPacker = Qwin::run('Qwin_Packer_Css');
+        $jsPacker = Qwin::run('Qwin_Packer_Js');
 
-        $code = $jquery->loadUi('datepicker')
-            . '<script type="text/javascript">
+        $datepickerFile = $jquery->loadUi('datepicker', false);
+        $cssPacker->add($datepickerFile['css']);
+        $jsPacker->add($datepickerFile['js']);
+
+        $code = '<script type="text/javascript">
     jQuery(function($){
         var dates = $( "#' . $id[0] . ', #' . $id[1] . '" ).datepicker({
             dateFormat: "yy-mm-dd",

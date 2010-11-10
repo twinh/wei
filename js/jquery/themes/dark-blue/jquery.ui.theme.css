@@ -8,13 +8,6 @@
  * http://docs.jquery.com/UI/Theming/API
  */
 
-body{
-	/*background:url(images/bg.gif) #226cc5 repeat-x 50% top;*/
-}
-#ui-main{
-	padding-left: 4px;
-	padding-right: 4px;
-}
 /* Layout helpers
 ----------------------------------*/
 .ui-helper-hidden { display: none; }

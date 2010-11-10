@@ -44,6 +44,7 @@ class Trex_View_View extends Trex_View
         $layout = $this->metaHelper->getViewLayout($meta);
         $group = $meta['group'];
 
+        extract($this->_data, EXTR_OVERWRITE);
         require_once $this->_layout;
     }
 }

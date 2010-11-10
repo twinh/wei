@@ -66,8 +66,10 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                         'isReadonly' => 1,
                     ),
                     'validator' => array(
-                        'required',
-                        'maxlength,40',
+                        'rule' => array(
+                            'required' => true,
+                            'maxlength' => 40,
+                        ),
                     ),
                 ),
                 'password' => array(
@@ -82,15 +84,19 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                         )
                     ),
                     'validator' => array(
-                        'required',
-                        'maxlength,40',
+                        'rule' => array(
+                            'required' => true,
+                            'maxlength' => 40,
+                        ),
                     ),
                 ),
                 'email' => array(
                     'validator' => array(
-                        'required',
-                        'email',
-                        'maxlength,256',
+                        'rule' => array(
+                            'required' => true,
+                            'email' => true,
+                            'maxlength' => 256,
+                        ),
                     ),
                 ),
                 'reg_ip' => array(
@@ -167,6 +173,9 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
             ),
             'db' => array(
                 'table' => 'member',
+                'nameKey' => array(
+                    'username',
+                ),
             ),
             // 页面显示
             'page' => array(

@@ -90,6 +90,9 @@ class Trex_Metadata extends Qwin_Metadata
                 'form' => array(
                     '_type' => 'custom',
                 ),
+                'db' => array(
+                    'type' => 'date',
+                ),
                 'attr' => array(
                     'isList' => 0,
                     'isReadonly' => 1,
@@ -101,6 +104,9 @@ class Trex_Metadata extends Qwin_Metadata
                 ),
                 'form' => array(
                     '_type' => 'custom',
+                ),
+                'db' => array(
+                    'type' => 'date',
                 ),
                 'attr' => array(
                     'isReadonly' => 1,

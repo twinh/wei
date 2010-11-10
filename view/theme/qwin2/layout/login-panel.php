@@ -34,28 +34,41 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->_config['interface']['charset'] ?>" />
 <title><?php echo qw_lang('LBL_HTML_TITLE')?></title>
-<link rel="stylesheet" type="text/css" href="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/qwin2/style.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/qwin2/login.css" />
 <?php
-$jquery = Qwin::run('-jquery');
-echo $jquery->loadTheme(),
-    $jquery->loadCore(),
-    $jquery->loadUi('core'),
-    $jquery->loadUi('widget'),
-    $jquery->loadUi('button'),
-    $jquery->loadEffect('core'),
-    $jquery->loadPlugin('qui')
-    ;
+$jQueryFile = array(
+    'core' => $jquery->loadUi('core', false),
+    'widget' => $jquery->loadUi('widget', false),
+    'button' => $jquery->loadUi('button', false),
+    'coreEffect' => $jquery->loadEffect('core', false),
+    'qui' => $jquery->loadPlugin('qui', null, false),
+);
+$cssPacker
+    ->add(QWIN_RESOURCE_PATH . '/view/theme/qwin2/style.css')
+    ->add(QWIN_RESOURCE_PATH . '/view/theme/qwin2/login.css')
+    ->add($jquery->loadTheme(null, false))
+    ->add($jQueryFile['core']['css'])
+    ->add($jQueryFile['widget']['css'])
+    ->add($jQueryFile['button']['css'])
+    ->add($jQueryFile['qui']['css']);
+$jsPacker
+    ->add($jquery->loadCore(false))
+    ->add(QWIN_RESOURCE_PATH . '/view/theme/qwin2/style.js')
+    ->add($jQueryFile['core']['js'])
+    ->add($jQueryFile['widget']['js'])
+    ->add($jQueryFile['button']['js'])
+    ->add($jQueryFile['coreEffect'])
+    ->add($jQueryFile['qui']['js']);
 ?>
+<link rel="stylesheet" type="text/css" media="all" href="file.php?name=css&type=text/css" />
+<script type="text/javascript" src="file.php?name=js&type=application/javascript"></script>
 </head>
-<script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/qwin2/style.js"></script>
 <body>
 <script type="text/javascript">
     jQuery.noConflict();
     jQuery(function($){
         var capthca = $('#login-captcha');
         var captchaScr = capthca.attr('src');
-        capthca.click(function(){
+        capthca.qui().click(function(){
             capthca.attr('src', captchaScr + '&' + new Date());
         });
     });
@@ -82,7 +95,7 @@ echo $jquery->loadTheme(),
             <tr>
             	<td class="login-label"><label for="captcha"><?php echo qw_lang('LBL_FIELD_CAPTCHA')?>:</label></td>
                 <td class="login-input"><?php echo qw_form($this->meta['field']['captcha']['form'], $_POST) ?></td>
-                <td><img class="login-captcha" id="login-captcha" alt="captcha image" src="?_entrance=captcha" /></td>
+                <td><img class="login-captcha ui-state-default ui-corner-all" id="login-captcha" alt="captcha image" src="?_entrance=captcha" /></td>
             </tr>
             <tr>
             	<td>&nbsp;</td>

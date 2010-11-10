@@ -14,22 +14,11 @@ jQuery(function($){
 	 {
 		 $('body').css('background-color', $widget.css('background-color'));
 	 }
-	 
-    /**
-     * 为各浏览器设置阴影
-     * @todo IE浏览器下,阴影会造成盒子位移
-     */
-    var $widgetShadowColor = $widget.css('border-top-color');
-    $('#ui-main, #ui-top-floating-bar, #ui-header-shortcut').css({
-        '-moz-box-shadow' : '0px 0px 10px ' + $widgetShadowColor,
-        '-webkit-box-shadow' : '0px 0px 10px ' + $widgetShadowColor,
-        'box-shadow' : '0px 0px 10px ' + $widgetShadowColor
-        //'filter' : 'progid:DXImageTransform.Microsoft.Shadow(color=' + $widgetShadowColor + ', Direction=135, Strength=3)'
-    });
-
+	
     $('button:not(.ui-button-none), input:submit, input:reset, input:button, a.ui-anchor').button();
     $('td.ui-field-radio, td.ui-field-checkbox').buttonset();
 
+    $('#ui-main-left ul li').qui();
     $('#ui-header-shortcut a').qui({
         click: true,
         focus: true
@@ -55,29 +44,32 @@ jQuery(function($){
     // 页眉导航
     $('#ui-top-floating-bar ul li.ui-top-bar-list').hover(
         function(){
-            $(this)
-                .find('a:first')
-                .removeClass('ui-corner-all')
-                .addClass('ui-state-hover ui-corner-top');
-            $(this)
-                .find('ul')
-                .show();
-            $(this).find('li').hover(
-                function(){
-                    $(this).addClass('ui-state-active').css('border', 'none')
-                },function(){
-                    $(this).removeClass('ui-state-active');
-            });
+            var firstAnchor = $(this).find('a:first');
+            var ul = $(this).find('ul');
+
+            firstAnchor.addClass('ui-state-hover');
+            if('' != $.trim(ul.html())){
+                firstAnchor
+                    .removeClass('ui-corner-all')
+                    .addClass('ui-corner-top');
+                ul.show();
+            }
         },function(){
-            $(this)
-                .find('a:first')
+            var firstAnchor = $(this).find('a:first');
+            var ul = $(this).find('ul');
+            
+            firstAnchor
                 .removeClass('ui-state-hover ui-corner-top')
                 .addClass('ui-corner-all');
-            $(this)
-                .find('ul')
-                .hide();
+            ul.hide();
         }
-    );
+    )
+    .find('li').hover(
+        function(){
+            $(this).addClass('ui-state-active').css('border', 'none')
+        },function(){
+            $(this).removeClass('ui-state-active');
+    });
 
     // 点击盒子右上角,显示或隐藏盒子内容
     $('a.ui-box-title-icon')

@@ -38,19 +38,31 @@ class TrexSetup extends Qwin_Trex_Setup
         {
             return $this->_appPath;
         }
-        $this->_appPath = dirname(__FILE__) . DIRECTORY_SEPARATOR;
+        $path = array(
+            realpath(QWIN_RESOURCE_PATH . '/application/') . DIRECTORY_SEPARATOR,
+            realpath(QWIN_ROOT_PATH . '/application/') . DIRECTORY_SEPARATOR,
+        );
+        // TODO !!!
+        if($path[0] == $path[1])
+        {
+            unset($path[1]);
+        }
+        $this->_appPath = $path;
         return $this->_appPath;
     }
 
     public function autoload($className)
     {
-       $classPath = $this->getAppPath() . str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
-       if(file_exists($classPath))
-       {
-           require $classPath;
-           return true;
-       }
-       return false;
+        foreach($this->getAppPath() as $appPath)
+        {
+            $classPath = $appPath . str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
+            if(file_exists($classPath))
+            {
+                require $classPath;
+                return true;
+            }
+        }
+        return false;
     }
 
     protected function _onNamespaceLoad()

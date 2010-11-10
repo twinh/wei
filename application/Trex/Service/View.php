@@ -83,6 +83,12 @@ class Trex_Service_View extends Trex_Service_BasicAction
         $meta = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
 
+        // TODO
+        if('integer' == $meta['field'][$primaryKey]['db']['type'])
+        {
+            $config['data']['primaryKeyValue'] = (integer)$config['data']['primaryKeyValue'];
+        }
+
         // 从模型获取数据
         $metaHelper->loadRelatedMetadata($meta, 'db');
         $query = $metaHelper->getDoctrineQuery($this->_set);
@@ -101,6 +107,10 @@ class Trex_Service_View extends Trex_Service_BasicAction
             }
             return $result;
         }
+
+        // TODO 插件?
+        // 添加到最近查看项
+        $metaHelper->setLastViewedItem($meta, $result);
 
         $data = $result->toArray();
         $data = $metaHelper->convertOne($data, $config['data']['asAction'], $meta, $config['this'], $config['data']['isView']);

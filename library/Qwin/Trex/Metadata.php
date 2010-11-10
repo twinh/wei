@@ -99,7 +99,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             $tablePrefix = $this->getTablePrefix();
         }
 
-        $queryField = $metaObj->field->getAttrList(array('isDbField', 'isDbQuery'));
+        $queryField = $metaObj['field']->getAttrList(array('isDbField', 'isDbQuery'));
         $modelName = $this->getClassName('Model', $set);
         $modelObj = Qwin::run($modelName);
         $modelObj->setTableName($tablePrefix . $metaObj['db']['table']);
@@ -107,7 +107,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         //$manager->setAttribute(Doctrine::ATTR_DEFAULT_IDENTIFIER_OPTIONS, array('name' => $metaObj['db']['primaryKey']));
         foreach($queryField as $field)
         {
-            $modelObj->hasColumn($field);
+            $modelObj->hasColumn($field, $metaObj['field'][$field]['db']['type'], $metaObj['field'][$field]['db']['length']);
         }
 
         /**
@@ -817,6 +817,18 @@ return true;
                 $newData[$name] = $data[$name] = null;
             }
 
+            // TODO 可选
+            // 类型转换
+            if(null != $newData[$name])
+            {
+                if('string' == $field['db']['type'])
+                {
+                    $newData[$name] = (string)$newData[$name];
+                } elseif('integer' == $field['db']['type']) {
+                    $newData[$name] = (int)$newData[$name];
+                }
+            }
+
             // 根据元数据中转换器的配置进行转换
             if(isset($field['converter'][$action]) && is_array($field['converter'][$action]))
             {
@@ -1234,6 +1246,37 @@ return true;
             }
         }
         return $newData;
+    }
+
+    public function setLastViewedItem($meta, $result)
+    {
+        if(empty($meta['db']['nameKey']))
+        {
+            return false;
+        }
+
+        $session = Qwin::run('Qwin_Session');
+        $lang = Qwin::run('-lang');
+        
+        $item = $session->get('lastViewedItem');
+        $key = get_class($meta) . $result[$meta['db']['primaryKey']];
+
+        // 最多保存10项
+        if(10 <= count($item))
+        {
+            array_pop($item);
+        }
+
+        // 加到第一项
+        $item = array(
+            $key => array(
+            'title' => '[' . $lang->t($meta['page']['title']) .  ']' . $result[$meta['db']['nameKey'][0]],
+            'href' => $_SERVER['REQUEST_URI'],
+            )
+        ) + $item;
+        
+        $session->set('lastViewedItem', $item);
+        return true;
     }
 
     /**

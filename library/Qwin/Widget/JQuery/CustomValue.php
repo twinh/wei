@@ -35,10 +35,14 @@ class Qwin_Widget_JQuery_CustomValue
     public function render($meta)
     {
         $jquery = Qwin::run('Qwin_Resource_JQuery');
-        $buttonId = 'ui-button-ajaxupload-' . $meta['name'];
+        $cssPacker = Qwin::run('Qwin_Packer_Css');
+        $jsPacker = Qwin::run('Qwin_Packer_Js');
+        
+        $file = $jquery->loadPlugin('customvalue', null, false);
+        $cssPacker->add($file['css']);
+        $jsPacker->add($file['js']);
 
-        $code = $jquery->loadPlugin('customvalue')
-            . '<script type="text/javascript">
+        $code = '<script type="text/javascript">
                 jQuery(function($){
                     $("#' . $meta['id'] . '").customValue({
                         language : {

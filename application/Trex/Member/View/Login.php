@@ -32,9 +32,4 @@ class Trex_Member_View_Login extends Trex_View
         parent::__construct();
         $this->_layout = QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/layout/login-panel.php';
     }
-
-    public function display()
-    {
-        require $this->_layout;
-    }
 }

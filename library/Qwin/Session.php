@@ -36,6 +36,10 @@ class Qwin_Session
     
     public function __construct($namespace = 'Default')
     {
+        if(!session_id())
+        {
+            session_start();
+        }
         $this->setNamespace($namespace);
     }
 

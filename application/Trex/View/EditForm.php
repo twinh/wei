@@ -46,6 +46,7 @@ class Trex_View_EditForm extends Trex_View
         $group = $meta['group'];
         $jQueryValidateCode = $arrayHelper->jsonEncode($metaHelper->getJQueryValidateCode($meta));
 
+        extract($this->_data, EXTR_OVERWRITE);
         require_once $this->_layout;
     }
 }

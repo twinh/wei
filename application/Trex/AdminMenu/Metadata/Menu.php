@@ -65,8 +65,10 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                 ),
                 'title' => array(
                     'validator' => array(
-                        'required',
-                        'maxlength,40',
+                        'rule' => array(
+                            'required' => true,
+                            'maxlength' => 40,
+                        ),
                     ),
                 ),
                 'url' => array(
@@ -77,8 +79,10 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                         'isDbQuery' => 1,
                     ),
                     'validator' => array(
-                        'required',
-                        'maxlength,256',
+                        'rule' => array(
+                            'required' => true,
+                            'maxlength' => 256,
+                        ),
                     ),
                 ),
                 'target' => array(
@@ -89,8 +93,10 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                         'isLink' => 1,
                     ),
                     'validator' => array(
-                        'required',
-                        'maxlength,16',
+                        'rule' => array(
+                            'required' => true,
+                            'maxlength' => 16,
+                        ),
                     ),
                 ),
                 'order' => array(
@@ -135,6 +141,9 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                     array('order', 'DESC')
                 ),
                 'limit' => 20,
+                'nameKey' => array(
+                    'title'
+                ),
             ),
             'page' => array(
                 'title' => 'LBL_MODULE_ADMIN_MENU',

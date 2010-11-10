@@ -35,7 +35,7 @@ if(jQuery) (function($){
 	$.extend($.fn, {
 		fileTree: function(o, h) {
 			// Defaults
-			if( !o ) var o = {};
+			if( !o ) o = {};
 			if( o.root == undefined ) o.root = '/';
 			if( o.script == undefined ) o.script = 'jqueryFileTree.php';
 			if( o.folderEvent == undefined ) o.folderEvent = 'click';
@@ -64,9 +64,9 @@ if(jQuery) (function($){
 				}
 				
 				function bindTree(t) {
-					// 双击
+					// 双击执行绑定事件
 					$(t).find('LI.directory')
-					.attr('title', '双击执行绑定事件');
+					.attr('title', 'Double click');
 					
 					$(t).find('LI.directory A')
 					.bind('dblclick', function(){
@@ -149,7 +149,7 @@ if(jQuery)(function($){
 	$.extend($.fn, {
 		QFileTree: function(o){
 			var _this = this;
-			if(!o) var o = {};
+			if(!o) o = {};
 			// 自己配置
 			if(!o.type) o.type = 'click';
 			if(!o.seleted)
@@ -163,7 +163,7 @@ if(jQuery)(function($){
 					} else if(undefined != o.input) {
 						$(o.input).val(file);
 					} else {
-						alert('选择的文件为: ' + file);
+						alert('The file you seleted is: ' + file);
 					}
 					$('#qfiletree_dialog').dialog('close');
 				}
@@ -171,7 +171,7 @@ if(jQuery)(function($){
 			
 			// 对话框配置
 			if(!o.dialog) o.dialog = {};
-			if(!o.dialog.title) o.dialog.title = 'QFileTree 树形文件浏览器';
+			if(!o.dialog.title) o.dialog.title = 'File Tree Browser';
 			if(!o.dialog.width) o.dialog.width = 300;
 			if(!o.dialog.height) o.dialog.height = 300;
 			if(!o.dialog.bgiframe) o.dialog.bgiframe = true;
