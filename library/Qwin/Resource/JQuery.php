@@ -133,7 +133,10 @@ class Qwin_Resource_JQuery extends Qwin_Resource
             }
             return $this->wrapAsFile($file);
         }
-        return $file;
+        return array(
+            'js' => $file,
+            'css' => $cssFile
+        );
     }
 
     public function loadEffect($name, $isWrap = true)
@@ -176,7 +179,10 @@ class Qwin_Resource_JQuery extends Qwin_Resource
             }
             return $this->wrapAsFile($jsFile);
         }
-        return $jsFile;
+        return array(
+            'js' => $jsFile,
+            'css' => $cssFile,
+        );
     }
 
     public function loadTheme($name = null, $isWrap = true)

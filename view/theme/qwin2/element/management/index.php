@@ -37,13 +37,12 @@
         </a>
     </div>
     <form action="" method="post">
-    <div class="ui-form-content ui-box-content ui-widget-content ui-image-list">
-        <ul>
-            <li>
+    <div class="ui-form-content ui-box-content ui-widget-content">
+        <div class="ui-operation-field">
                     <?php echo qw_jquery_link(qw_url(array('module' => 'Management', 'controller' => 'ApplicationStructure')), qw_lang('LBL_MODULE_APPLICATION_STRUCTURE'), 'ui-icon-script') ?>
                     <?php echo qw_jquery_link('javascript:history.go(-1);', qw_lang('LBL_ACTION_RETURN'), 'ui-icon-arrowthickstop-1-w') ?>
-            </li>
-        </ul>
+            </div>
+        <div class="ui-space-10px"></div>
         <hr class="ui-line ui-widget-content" />
     </div>
     </form>

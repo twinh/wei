@@ -34,10 +34,19 @@ class Qwin_Trex_Application
      *
      * @return string 资源库中的应用目录路径
      * @todo 分清资源库和网站的应用目录
+     * @todo !!!不应包含在该类中
      */
     public function getDefultPath()
     {
         return QWIN_RESOURCE_PATH . '/application';
+    }
+
+    /**
+     * @todo !!!不应包含在该类中
+     */
+    public function getRootAppPath()
+    {
+        return QWIN_ROOT_PATH . '/application';
     }
 
     /**

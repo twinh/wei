@@ -611,13 +611,13 @@ if(jQuery)(function($){
     $.extend($.fn, {
         ajaxUpload : function(o){
             var _this = this;
-            if(!o) var o = {};
+            if(!o) o = {};
             // 自身配置
             // 表单输入框的名称
             // o.input
             // 文件上传后的保存路径,仅作为指示
             // o.path
-            if(!o.path) o.path = '默认';
+            if(!o.path) o.path = 'Default';
             // ajax upload 配置
             if(!o.ajaxupload) o.ajaxupload = {};
             // 上传地址
@@ -641,7 +641,7 @@ if(jQuery)(function($){
                         } else if(undefined != o.input) {
                             $(o.input).val(file);
                         } else {
-                            alert('上传的文件为: ' + file);
+                            alert('The upload file is: ' + file);
                         }
                         $('#ajaxupload_dialog').dialog('close');
                     }
@@ -650,7 +650,7 @@ if(jQuery)(function($){
 
             // 对话框配置
             if(!o.dialog) o.dialog = {};
-            if(!o.dialog.title) o.dialog.title = 'AjaxUpload 文件上传管理器';
+            if(!o.dialog.title) o.dialog.title = 'Ajax File Upload Manager';
             if(!o.dialog.width) o.dialog.width = 300;
             if(!o.dialog.height) o.dialog.height = 300;
             if(!o.dialog.bgiframe) o.dialog.bgiframe = true;

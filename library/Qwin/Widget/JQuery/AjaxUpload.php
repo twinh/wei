@@ -35,12 +35,24 @@ class Qwin_Widget_JQuery_ajaxUpload
     public function render($meta)
     {
         $jquery = Qwin::run('Qwin_Resource_JQuery');
-        $buttonId = 'ui-button-ajaxupload-' . $meta['name'];
+        $cssPacker = Qwin::run('Qwin_Packer_Css');
+        $jsPacker = Qwin::run('Qwin_Packer_Js');
 
-        $code = $jquery->loadUi('position')
-            . $jquery->loadUi('dialog')
-            . $jquery->loadPlugin('ajaxupload')
-            . '<button id="' . $buttonId . '" type="button"><span class="ui-icon ui-icon-arrowthickstop-1-n">' . $meta['name'] . '</span></button>
+        $positionFile = $jquery->loadUi('position', false);
+        $dialogFile = $jquery->loadUi('dialog', false);
+        $ajaxUploadFile = $jquery->loadPlugin('ajaxupload', null, false);
+        $cssPacker
+            ->add($positionFile['css'])
+            ->add($dialogFile['css'])
+            ->add($ajaxUploadFile['css']);
+        $jsPacker
+            ->add($positionFile['js'])
+            ->add($dialogFile['js'])
+            ->add($ajaxUploadFile['js']);
+
+        $buttonId = 'ui-button-ajaxupload-' . $meta['id'];
+
+        $code = '<button id="' . $buttonId . '" type="button"><span class="ui-icon ui-icon-arrowthickstop-1-n">' . $meta['id'] . '</span></button>
                 <script type="text/javascript">jQuery(function($){
                     $("#' . $buttonId . '").ajaxUpload({
                         input : "#' . $meta['id'] . '"

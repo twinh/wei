@@ -172,6 +172,11 @@ class Trex_Language_Enus extends Trex_Language
             'LBL_READONLY' => 'Readonly',
             'LBL_CUSTOM_VALUE' => 'Custom Value',
             'LBL_CANCEL' => 'Cancel',
+
+            'LBL_HOME' => 'Home',
+
+            'LBL_TREE_PREFIX_1' => '┃',
+			'LBL_TREE_PREFIX_2' => '┣',
         );
     }
 }

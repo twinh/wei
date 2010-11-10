@@ -3,24 +3,42 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->_config['interface']['charset'] ?>" />
 <title><?php echo qw_lang('LBL_HTML_TITLE') ?></title>
-<link rel="stylesheet" type="text/css" href="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/qwin2/style.css" />
+<!-- Qwin_Packer_Css -->
+<!-- Qwin_Packer_Js -->
 <?php
 $member = Qwin::run('-ses')->get('member');
 $nickname = isset($member['contact']) ? $member['contact']['nickname'] : $member['username'];
-$jquery = Qwin::run('-jquery');
 $arrayHelper = Qwin::run('-arr');
-echo $jquery->loadTheme(),
-    $jquery->loadCore(),
-    $jquery->loadUi('core'),
-    $jquery->loadUi('widget'),
-    $jquery->loadUi('button'),
-    $jquery->loadEffect('core'),
-    $jquery->loadPlugin('qui')
-    ;
+$jQueryFile = array(
+    'core' => $jquery->loadUi('core', false),
+    'widget' => $jquery->loadUi('widget', false),
+    'button' => $jquery->loadUi('button', false),
+    'coreEffect' => $jquery->loadEffect('core', false),
+    'qui' => $jquery->loadPlugin('qui', null, false),
+    'pngFix' => $jquery->loadPlugin('pngFix', null, false),
+);
+$cssPacker
+    ->add($jquery->loadTheme(null, false))
+    ->add(QWIN_RESOURCE_PATH . '/view/theme/qwin2/style.css')
+    ->add($jQueryFile['core']['css'])
+    ->add($jQueryFile['widget']['css'])
+    ->add($jQueryFile['button']['css'])
+    ->add($jQueryFile['qui']['css']);
+$jsPacker
+    ->add($jquery->loadCore(false))
+    ->add(QWIN_RESOURCE_PATH . '/js/qwin/qwin.js')
+    ->add(QWIN_RESOURCE_PATH . '/js/qwin/url.js')
+    ->add(QWIN_RESOURCE_PATH . '/view/theme/qwin2/style.js')
+    ->add($jQueryFile['core']['js'])
+    ->add($jQueryFile['widget']['js'])
+    ->add($jQueryFile['button']['js'])
+    ->add($jQueryFile['coreEffect'])
+    ->add($jQueryFile['qui']['js'])
+    ->add($jQueryFile['pngFix']['js']);
 ?>
-<script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH ?>/js/qwin/qwin.js"></script>
-<script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH ?>/js/qwin/url.js"></script>
-<script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/qwin2/style.js"></script>
+<!--[if IE 6]>
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/qwin2/style-ie6.css" />
+<![endif]-->
 <script type="text/javascript">
     jQuery.noConflict();
     <?php echo qw_lang_to_js() ?>
@@ -58,7 +76,7 @@ echo $jquery->loadTheme(),
         ?>
     </ul>
 </div>
-    <div id="ui-bottom-floating-botton" class="ui-bottom-floating-botton"><button><span class="ui-icon ui-icon-arrowthickstop-1-n"></span></button></div>
+<div id="ui-bottom-floating-botton" class="ui-bottom-floating-botton"><button><span class="ui-icon ui-icon-arrowthickstop-1-n"></span></button></div>
 <div id="ui-main" class="ui-main ui-widget-content ui-corner-all">
   <div id="ui-header" class="ui-header ui-widget">
     <div class="ui-header-shortcut" id="ui-header-shortcut">
@@ -78,9 +96,42 @@ echo $jquery->loadTheme(),
     </div>
     <div class="ui-header-logo ui-widget-content"> <a href="?"><?php echo qw_lang('LBL_QWIN') ?><sup><?php echo qw_lang('LBL_QWIN_VERSION') ?></sup></a> </div>
   </div>
+<table id="ui-main-table">
+    <tr>
+        <td id="ui-main-left">
+        <div class="ui-siderbar ui-box ui-widget ui-widget-content ui-corner-all">
+            <div class="ui-sidebar-titlebar ui-box-titlebar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix" id="ui-sidebar-title-1">
+                <span class="ui-box-title"><?php echo qw_lang('LBL_LAST_VIEWED_ITEM') ?></span>
+                <a class="ui-sidebar-title-icon ui-box-title-icon ui-corner-all" name="#ui-sidebar-content-last" href="javascript:void(0)">
+                    <span class="ui-icon ui-icon-circle-triangle-n">open/close</span>
+                </a>
+            </div>
+            <div class="ui-box-content ui-widget-content">
+                <ul id="ui-sidebar-content-last">
+                <?php
+                if(empty($lastViewedItem)):
+                ?>
+                    <li class="ui-sidebar-list ui-widget-content"><a><?php echo qw_lang('MSG_NO_LAST_VIEWED_LOG') ?></a></li>
+                <?php
+                else:
+                    foreach($lastViewedItem as $row):
+                ?>
+                    <li class="ui-sidebar-list ui-widget-content"><a href="<?php echo $row['href'] ?>"><?php echo $row['title'] ?></a></li>
+                <?php
+                    endforeach;
+                endif;
+                ?>
+                </ul>
+            </div>
+        </div>
+        </td>
+        <td id="ui-main-right">
 <?php
 require $this->getElement('content');
 ?>
+        </td>
+    </tr>
+</table>
   <div class="ui-footer ui-widget">
     <div class="ui-copyright ui-widget-content"><?php echo qw_lang('LBL_FOOTER_COPYRIGHT') ?></div>
   </div>

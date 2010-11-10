@@ -141,6 +141,18 @@ class Trex_Namespace extends Qwin_Trex_Namespace
          */
         $output = ob_get_contents();
         '' != $output && ob_end_clean();
+
+        // TODO
+        $search = array(
+            '<!-- Qwin_Packer_Css -->',
+            '<!-- Qwin_Packer_Js -->',
+        );
+        $replace = array(
+            Qwin::run('Qwin_Packer_Css')->pack()->getHtmlTag(),
+            Qwin::run('Qwin_Packer_Js')->pack()->getHtmlTag(),
+        );
+        $output = str_replace($search, $replace, $output);
+
         echo $output;
         unset($output);
     }

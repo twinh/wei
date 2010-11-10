@@ -29,7 +29,7 @@ class Trex_AdminMenu_Controller_Menu extends Trex_ActionController
 {
     public function onAfterDb($data)
     {
-        $query = $this->metaHelper->getDoctrineQuery($this->_set);
+        $query = $this->metaHelper->getDoctrineQuery($this->_set, false);
         $query->orderBy('order ASC');
         $data = $query->execute()->toArray();
         Qwin::run('Qwin_Cache_List')->writeCache($data, 'AdminMenu');

@@ -78,6 +78,9 @@ class Trex_Member_Metadata_Group extends Trex_Metadata
                 'order' => array(
                     array('date_created', 'DESC'),
                 ),
+                'nameKey' => array(
+                    'name',
+                ),
             ),
             // 页面显示
             'page' => array(

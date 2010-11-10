@@ -405,8 +405,11 @@ class Qwin_Class
     public static function setAutoload()
     {
         set_include_path(get_include_path() . PATH_SEPARATOR . dirname(dirname(__FILE__)));
-        spl_autoload_register(array(self, 'autoload'));
+        // self::getInstance()
+        spl_autoload_register(array('self', 'autoload'));
     }
+
+    //public function
 
     /**
      * 自动加载类的方法,适用各类按标注方法命名的类库

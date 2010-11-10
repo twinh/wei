@@ -97,7 +97,9 @@ class Trex_Link_Metadata_Link extends Trex_Metadata
                     ),
                 ),
             ),
-            // 表之间的联系
+            'group' => array(
+
+            ),
             'model' => array(
                 array(
                     'name' => 'Trex_Category_Model_Category',
@@ -111,6 +113,9 @@ class Trex_Link_Metadata_Link extends Trex_Metadata
                     ),
                 ),
             ),
+            'metadata' => array(
+
+            ),
             'db' => array(
                 'table' => 'link',
                 'order' => array(
@@ -119,7 +124,6 @@ class Trex_Link_Metadata_Link extends Trex_Metadata
                 'where' => array(
                 ),
             ),
-            // 页面显示
             'page' => array(
                 'title' => 'LBL_MODULE_LINK',
             )

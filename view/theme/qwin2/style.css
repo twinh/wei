@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* Basic
 ----------------------------------*/
-*{
+body,div,ul,ol,li,h1,h2,h3,h4,h5,h6,form,fieldset,input,textarea,p,th,td, hr {
     margin: 0;
     padding: 0;
 }
@@ -12,6 +12,7 @@ html{
 body{
     font-size: 12px;
     margin: 0 auto;
+    min-width: 900px;
 }
 li{
     list-style: none;
@@ -45,39 +46,29 @@ a{
     opacity: 0.9;
     filter: alpha('opacity=90');*/
 }
-/*
-#ui-top-floating-bar ul {
-    width:  950px;
-    margin: 0 auto;
-}*/
-/* 和下方设置足够大的距离,当链接的数目多至不只一行时,能够被正确隐藏 */
-#ui-top-floating-bar ul li{
-    height: 20px;
+
+/* http://chrisjean.com/2009/09/30/fix-width-auto-floated-elements-in-ie-6/ */
+#ui-top-floating-bar ul li {
     float: left;
-    padding: 12px 6px 0 6px;
+    white-space: nowrap;
+    margin: 5px 5px 0 5px;
+    width: auto;
+    _width: 0;
 }
-#ui-top-floating-bar ul li a{
-    padding: 6px 12px;
-    z-index: 99;
-}
-#ui-top-floating-bar ul li a span.ui-icon{
-    height: 14px;
+#ui-top-floating-bar ul li a {
+    display: block;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 8px;
 }
 #ui-top-floating-bar ul li ul{
     display: none;
-    margin: 6px 0 0 0;
     position: absolute;
 }
 #ui-top-floating-bar ul li ul li{
     clear: both;
     margin: 0;
-    padding: 6px 0 3px;
     width: 100%;
-}
-#ui-top-floating-bar ul li ul li a{
-    width: 100%;
-    display: block;
-    padding: 0 10px;
 }
 
 /* 页底浮动栏
@@ -92,22 +83,22 @@ a{
 /* Header
 ----------------------------------*/
 .ui-header{
-    margin-top: 10px;
     clear: both;
 }
 div.ui-header-logo{
-    margin: 0 0 8px 26px;
+    margin: 10px 0 8px 21px;
     font-weight: bold;
     font-size: 32px;
     background: none;
     border: none;
+    float: left;
 }
 .ui-header-logo a sup{
     font-size: 12px;
 }
 .ui-header-shortcut{
     float: right;
-    margin: -10px 0 20px 6px;
+    margin: 0 0 20px 6px;
 }
 .ui-header .ui-header-shortcut a{
     padding: 6px 12px;
@@ -115,15 +106,54 @@ div.ui-header-logo{
     float: left;
     font-weight: normal;
     font-size: 12px;
+    line-height: 14px;
+    height:  14px;
 }
 .ui-header-shortcut a.ui-header-shortcut-last-anchor{
     border-right: none;
 }
 
+/* Sidebar
+----------------------------------*/
+/* 修复在 Dot Luv 主题下,Sidebar 出现y滚动条的问题 */
+.ui-siderbar .ui-box-content ul {
+    margin: 1px;
+    overflow-y: hidden;
+}
+.ui-siderbar{
+    width: 94%;
+}
+.ui-siderbar .ui-box-content .ui-sidebar-list {
+    padding:0 1px 3px 6px;
+    font-weight:normal;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+.ui-siderbar ul li a{
+    display: block;
+    line-height: 16px;
+    height: 16px;
+    padding: 3px 3px 0 3px;
+    text-align: left;
+}
+
+#ui-main-table{
+    width: 100%;
+    padding: 0 8px;
+}
+#ui-main-left{
+    width: 200px;
+    vertical-align: top;
+}
+#ui-main-right{
+    width: auto;
+    vertical-align: top;
+}
+
 /* Main
 ----------------------------------*/
 .ui-main{
-    width: 950px;
     margin: 0 auto;
     padding: 38px 0 0;
 }
@@ -135,8 +165,8 @@ div.ui-header-logo{
     border: none;
 }
 .ui-copyright {
-    height: 4em;
-    line-height: 4em;
+    height: 40px;
+    line-height: 40px;
     width: 100%;
     text-align: center;
     clear: both;
@@ -151,51 +181,71 @@ div.ui-copyright{
 }
 /* Box
 ----------------------------------*/
-.ui-box{margin-bottom: .5em;padding: .2em .2em .15em .2em;}
-.ui-box .ui-box-titlebar {position: relative; width:100%}
-.ui-box .ui-box-title{float: left;padding: 5px 18px 3px .7em;font-size: 14px;display: block;}
-.ui-box .ui-box-title-icon{position: absolute; right: .3em; top: 50%; width: 19px; margin: -10px 0 0 0; padding: 1px; height: 18px;cursor: pointer}
-.ui-box .ui-box-title-icon span{display: block; margin: 1px}
-.ui-box .ui-box-title-icon:hover, .ui-box .ui-box-title-icon:focus{padding: 0}
-.ui-box .ui-box-content{border: 0;background: none; overflow: auto;}
-
-/* Layout
-----------------------------------*/
-div.ui-layout-pane {
-    padding: 5px;
-    background-image: none;
+.ui-box{
+    margin-bottom: 5px;
+    padding: 2px 4px 2px 2px;
 }
-.ui-layout-west {
-    overflow: hidden;
+.ui-box .ui-box-titlebar {
+    position: relative;
+    width: 100%;
 }
-.ui-layout-center {
-    overflow-y: scroll;
+.ui-box .ui-box-title{
+    float: left;
+    padding: 5px 18px 3px 7px;
+    font-size: 14px;
+    display: block;
+}
+.ui-box .ui-box-title-icon{
+    position: absolute;
+    right: 3px;
+    top: 50%;
+    width: 19px;
+    margin: -10px 0 0 0;
+    padding: 1px;
+    height: 18px;
+    cursor: pointer;
+}
+.ui-box .ui-box-title-icon span{
+    display: block;
+    margin: 1px;
+}
+.ui-box .ui-box-title-icon:hover, .ui-box .ui-box-title-icon:focus{
+    padding: 0;
+}
+.ui-box .ui-box-content{
+    border: 0;
+    background: none;
+    overflow: auto;
 }
 
 /* Form (Add, Edit Action & Show Action)
 ----------------------------------*/
 .ui-form-error-message{
-    padding: .4em .4em .48em .4em;
+    padding: 4px 4px 4.8px 4px;
     vertical-align: text-bottom
 }
 .ui-operation-field{
-    margin: 1em 0;
+    padding: 5px;
+}
+.ui-operation-field-top{
+    margin: 10px 0 0;
+}
+.ui-operation-field-bottom{
+    margin: 0 0 10px;
+}
+.ui-operation-field-all{
+    margin: 10px 0;
+}
+.ui-operation-content{
+    margin: 20px 5px;
 }
 .ui-form{
     width: auto;
 }
 .ui-form .ui-form-content{
-    padding: 0 2em 2em 2em;
+    padding: 15px;
 }
-/* 表单中的一行 */
-.ui-form .ui-form-content .ui-block-common{
-    clear: both;
-    height: 100%;
-    font-weight: normal;
-    border: 0;
-    padding: .5em 0 .5em 1em;
-    display: table;
-}
+
 /* input: hidden 的行 */
 .ui-form .ui-form-content .ui-block-hidden,
 .ui-form .ui-form-content .ui-block-custom {
@@ -209,89 +259,29 @@ div.ui-layout-pane {
     float: left;
 }
 .ui-form .ui-form-content fieldset {
-    padding: 5px 0;
+    margin: 5px;
+    padding-left: 5px;
     background: none;
 }
 .ui-form .ui-form-content legend {
     font-size: 14px;
     font-weight: bold;
     line-height: 120%;
-    padding: 0 .3em;
+    padding: 0 3px;
     cursor: pointer;
     background: none;
     border: 0;
 }
 
-.ui-form .ui-form-content .ui-field-common {
-    width: 400px;
-}
 .ui-form .ui-form-content .ui-field-data-common {
-    line-height: 2em;
+    line-height: 20px;
 }
 .ui-form .ui-form-content .ui-field-common input {
     margin-right: 5px;
 }
 .ui-form .ui-form-content .ui-field-common label {
     /*margin-right: 5px;*/
-    margin-top: .3em;
-}
-.ui-form .ui-form-content .ui-block-common .ui-field-text input,
-.ui-form .ui-form-content .ui-block-common .ui-field-password input {
-    width: 380px;
-    padding: .4em 0 .4em .5em;/* for ie & ff */
-    line-height: 1.5em;/* for ie */
-    font-weight: normal;
-}
-.ui-form .ui-form-content .ui-block-common .ui-field-checkbox input,
-.ui-form .ui-form-content .ui-block-common .ui-field-radio input {
-    margin-top: .4em;
-}
-/* 表单按钮区域 */
-.ui-form .ui-form-content .ui-block-common .ui-field-operation input {
-    float: right;
-}
-.ui-form .ui-form-content .ui-block-common .ui-field-select select {
-    width: 200px;
-    height: 2em;
-    line-height: 2em;
-}
-.ui-form .ui-form-content .ui-block-common .ui-field-textarea textarea {
-    width: 380px;
-    height: 8em;
-    line-height: 2em;
-    padding: .2em .4em;
-    font-weight: normal;
-    overflow-y: auto;
-}
-.ui-form .ui-form-content .ui-block-common .ui-icon-common {
-    background: none;
-    border: 0;
-}
-.ui-form .ui-form-content .ui-block-common .ui-icon-common a {
-    padding: 1px;
-    width: 20px;
-    height: 19px;
-    float: left;
-    margin: 0 0 .2em .2em;
-}
-.ui-form .ui-form-content .ui-block-common .ui-icon-common a .ui-icon {
-    display: block;
-    margin: 2px;
-    cursor: pointer;
-}
-.ui-form .ui-form-content .ui-block-common .ui-tip-common{
-    display: none;
-}
-.ui-form .ui-form-content .ui-block-common .ui-field-operation .ui-form-button {
-    padding: .4em .8em .5em;/* ff */
-    cursor: pointer;
-    text-align: center;
-}
-* html .ui-form .ui-form-content .ui-block-common .ui-field-operation .ui-form-button{
-    padding: .3em;/* ie6 */
-}
-*+ html .ui-form .ui-form-content .ui-block-common .ui-field-operation .ui-form-button {
-    padding: .3em;/* ie7 */
+    margin-top: 3px;
 }
 /* 防止ck编辑器下部变形 */
 .cke_editor .cke_contents fieldset{ 
@@ -330,10 +320,10 @@ div.ui-layout-pane {
     margin-top: 4px;
 }
 .ui-form-table .ui-field-select select {
-    width:61%;
-    height:2em;
-    line-height:2em;
-    padding: .2em 0 0;
+    width: 61%;
+    height: 24px;
+    line-height: 24px;
+    padding: 2px 0 0;
 }
 .ui-form-table .ui-field-textarea textarea{
     width: 59.6%;
@@ -443,14 +433,15 @@ div.ui-layout-pane {
 }
 .ui-line{
     clear: both;
-    width: auto;
-    margin: 0 2em;
+    margin: 5px;
+}
+.ui-space-10px{
+    height: 10px;
 }
 
 /* Table
 ----------------------------------*/
 .ui-table{
-    margin: 1em 0;
     padding: 1px;
     width: 100%;
 }

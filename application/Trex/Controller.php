@@ -164,7 +164,7 @@ class Trex_Controller extends Qwin_Trex_Controller
 
         // 逐层权限判断
         $set = $this->_set;
-        $permission = unserialize($member['group']['permission']);
+        $permission = @unserialize($member['group']['permission']);
         if(isset($permission[$set['namespace']]))
         {
             return true;

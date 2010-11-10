@@ -27,11 +27,6 @@
 
 class Qwin_Widget_JQuery_FileTree
 {
-    public function __construct()
-    {
-
-    }
-
     /**
      * 生成文件树
      *
@@ -41,22 +36,34 @@ class Qwin_Widget_JQuery_FileTree
     public function render($meta)
     {
         $jquery = Qwin::run('Qwin_Resource_JQuery');
-        $buttonId = 'ui-button-filetree-' . $meta['name'];
+        $cssPacker = Qwin::run('Qwin_Packer_Css');
+        $jsPacker = Qwin::run('Qwin_Packer_Js');
 
-        $ajaxButtonId = 'ui-button-ajaxupload-' . $meta['name'];
+        $positionFile = $jquery->loadUi('position', false);
+        $dialogFile = $jquery->loadUi('dialog', false);
+        $qFileTreeFile = $jquery->loadPlugin('qfiletree', null, false);
 
-        $code = $jquery->loadUi('position')
-            . $jquery->loadUi('dialog')
-            . $jquery->loadPlugin('qfiletree')
-            . '<button id="' . $buttonId . '" type="button"><span class="ui-icon ui-icon-image">' . $meta['name'] . '</span></button>
+        $cssPacker
+            ->add($positionFile['css'])
+            ->add($dialogFile['css'])
+            ->add($qFileTreeFile['css']);
+        $jsPacker
+            ->add($positionFile['js'])
+            ->add($dialogFile['js'])
+            ->add($qFileTreeFile['js']);
+
+        $buttonId = 'ui-button-filetree-' . $meta['id'];
+        $ajaxButtonId = 'ui-button-ajaxupload-' . $meta['id'];
+
+        $code = '<button id="' . $buttonId . '" type="button"><span class="ui-icon ui-icon-image">' . $meta['id'] . '</span></button>
               <script type="text/javascript">jQuery(function($){
                 $("#' . $buttonId . '").QFileTree({
-                    input : "#' . $meta['name'] . '",
+                    input : "#' . $meta['id'] . '",
                     filetree : {
                         dblClickFolder : function(path){
                             $("#qfiletree_dialog").dialog("close");
                             $("#' . $ajaxButtonId . '").ajaxUpload({
-                                input : "#' . $meta['name'] . '",
+                                input : "#' . $meta['id'] . '",
                                 path : path
                             });
                             $("#' . $ajaxButtonId . '").click();

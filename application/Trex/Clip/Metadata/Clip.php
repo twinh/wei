@@ -62,7 +62,9 @@ class Trex_Clip_Metadata_Clip extends Trex_Metadata
                     ),
                 ),
                 'form_widget' => array(
-
+                    'attr' => array(
+                        'isList' => 0,
+                    ),
                 ),
             ),
             'group' => array(
