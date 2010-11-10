@@ -162,6 +162,8 @@ class Trex_Language_Gbk extends Trex_Language
 			
 			'LBL_TREE_PREFIX_1' => '┃',
 			'LBL_TREE_PREFIX_2' => '┣',
+			'LBL_LAST_VIEWED_ITEM' => '最近查看项',
+			'MSG_NO_LAST_VIEWED_LOG' => '暂时没有查看记录',
         );
     }
 }
