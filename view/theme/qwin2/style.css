@@ -121,7 +121,7 @@ div.ui-header-logo{
     overflow-y: hidden;
 }
 .ui-siderbar{
-    width: 94%;
+    width: 186px;
 }
 .ui-siderbar .ui-box-content .ui-sidebar-list {
     padding:0 1px 3px 6px;
@@ -390,9 +390,6 @@ div.ui-copyright{
 /* Datepicker
 ----------------------------------*/
 /* make it looks more better */
-.ui-datepicker{
-    font-size: 1.2em;
-}
 .ui-tabs .ui-tabs-nav li a{
     font-size: 1.1em;
     font-weight: bold;
@@ -446,9 +443,9 @@ div.ui-copyright{
     width: 100%;
 }
 .ui-table td{
-    padding: .2em;
+    padding: 2px;
     font-weight: normal;
-    line-height:2em;
+    line-height: 20px;
 
     border-right-width: 1px;
     border-right-color: inherit;
@@ -465,7 +462,7 @@ div.ui-copyright{
 }
 .ui-table .ui-table-header td{
     font-weight: bold;
-    text-indent: .6em;
+    text-indent: 6px;
     border-right: none;
 }
 /* 2010-05-21 */
