@@ -126,9 +126,9 @@ function qw_title_decorator($title, $fontStyle = null, $color = null)
     return Qwin_Helper_Html::titleDecorator($title, $fontStyle, $color);
 }
 
-function qw_jquery_link($url, $title, $icon, $aClass = null)
+function qw_jquery_link($url, $title, $icon, $aClass = null, $target = '_self')
 {
-    return Qwin_Helper_Html::jQueryLink($url, $title, $icon, $aClass);
+    return Qwin_Helper_Html::jQueryLink($url, $title, $icon, $aClass, $target);
 }
 
 function qw_jquery_button($type, $title, $icon)
