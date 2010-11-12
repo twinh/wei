@@ -134,6 +134,7 @@ div.ui-header-logo{
     display: block;
     line-height: 16px;
     height: 16px;
+    overflow: hidden;
     padding: 3px 3px 0 3px;
     text-align: left;
 }
