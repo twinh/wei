@@ -94,7 +94,12 @@ $jsPacker
         endif;
         ?>
     </div>
-    <div class="ui-header-logo ui-widget-content"> <a href="?"><?php echo qw_lang('LBL_QWIN') ?><sup><?php echo qw_lang('LBL_QWIN_VERSION') ?></sup></a> </div>
+    <div class="ui-header-logo ui-widget-content">
+        <a href="?">
+            <img src="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/qwin2/image/logo.gif" alt="logo" />
+            <img src="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/qwin2/image/common.gif" alt="logo" />
+        </a>
+    </div>
   </div>
 <table id="ui-main-table">
     <tr>

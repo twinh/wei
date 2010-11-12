@@ -93,6 +93,9 @@ div.ui-header-logo{
     border: none;
     float: left;
 }
+.ui-header-logo a img{
+    vertical-align: middle;
+}
 .ui-header-logo a sup{
     font-size: 12px;
 }
