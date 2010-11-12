@@ -302,7 +302,9 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
             ),
             'db' => array(
                 'table' => 'article',
-                'primaryKey' => 'id',
+                'nameKey' => array(
+                    'title',
+                ),
                 'order' => array(
                     array('date_created', 'DESC'),
                 ),

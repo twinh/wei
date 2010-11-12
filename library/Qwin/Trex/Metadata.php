@@ -1258,7 +1258,7 @@ return true;
         $session = Qwin::run('Qwin_Session');
         $lang = Qwin::run('-lang');
         
-        $item = $session->get('lastViewedItem');
+        $item = (array)$session->get('lastViewedItem');
         $key = get_class($meta) . $result[$meta['db']['primaryKey']];
 
         // 最多保存10项

@@ -34,6 +34,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->_config['interface']['charset'] ?>" />
 <title><?php echo qw_lang('LBL_HTML_TITLE')?></title>
+<!-- Qwin_Packer_Css -->
+<!-- Qwin_Packer_Js -->
 <?php
 $jQueryFile = array(
     'core' => $jquery->loadUi('core', false),
@@ -59,8 +61,6 @@ $jsPacker
     ->add($jQueryFile['coreEffect'])
     ->add($jQueryFile['qui']['js']);
 ?>
-<link rel="stylesheet" type="text/css" media="all" href="file.php?name=css&type=text/css" />
-<script type="text/javascript" src="file.php?name=js&type=application/javascript"></script>
 </head>
 <body>
 <script type="text/javascript">
