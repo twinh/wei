@@ -47,7 +47,6 @@ class Qwin_Widget_Editor_CKEditor
         $qwin_interface = new Qwin_CKFinder_Interface();
         // TODO param 2 登陆的标准
         $path = dirname($_SERVER['SCRIPT_NAME']) . '/upload/';
-        // $path = '/' . basename(QWIN_ROOT_PATH) . '/public/upload/';
         $qwin_interface->setInterface($path, true);
 
         return $code;

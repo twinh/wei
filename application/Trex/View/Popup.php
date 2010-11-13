@@ -100,6 +100,7 @@ class Trex_View_Popup extends Trex_View
             $rowNum = 500;
         }
 
+        extract($this->_data, EXTR_OVERWRITE);
         require_once $this->_layout;
     }
 }

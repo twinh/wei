@@ -27,7 +27,6 @@
 
 // 防止直接访问导致错误
 !defined('QWIN_PATH') && exit('Forbidden');
-$jquery = Qwin::run('-jquery');
 ?>
 <script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH ?>/js/jquery/plugin/jqgrid/i18n/grid.locale-en.js"></script>
 <?php echo $jquery->loadPlugin('jqgrid') ?>
