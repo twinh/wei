@@ -146,6 +146,12 @@ class Qwin_Packer_Basic
      */
     public function pack($name = null, $rebuild = false)
     {
+        // 空则不打包
+        if(empty($this->_file))
+        {
+            return $this;
+        }
+
         if(null == $name)
         {
             $name = $this->md5();
