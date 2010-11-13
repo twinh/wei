@@ -32,7 +32,7 @@ $cssPacker
     ->add($jQueryFile['jqgrid']['css']);
 $jsPacker
     ->add(QWIN_RESOURCE_PATH . '/js/jquery/plugin/jqgrid/i18n/grid.locale-en.js')
-    ->add($jQueryFile['jqgrid']['js'])
+    ->add($jQueryFile['jqgrid']['js']);
 ?>
 <div id="custom-jqgird-toolbar" class="ui-helper-hidden">
     <?php echo $customLink ?>
