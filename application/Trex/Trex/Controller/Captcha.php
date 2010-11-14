@@ -34,4 +34,9 @@ class Trex_Trex_Controller_Captcha extends Qwin_Trex_Controller
         Qwin::load('Project_Helper_Captcha');
         return Project_Helper_Captcha::create($number);
     }
+
+    public function actionCheck()
+    {
+        
+    }
 }

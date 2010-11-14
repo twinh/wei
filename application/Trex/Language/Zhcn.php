@@ -139,6 +139,8 @@ class Trex_Language_Zhcn extends Trex_Language
             'MSG_VALIDATOR_MIN' => '请输入大于或等于 {0} 的值.',
             'MSG_VALIDATOR_PATHNAME' => '请输入合法的路径名称,不包含 \\/:*?\\"<>| .',
             'MSG_VALIDATOR_NOTNULL' => '该项是必填的.',
+            'MSG_VALIDATOR_USERNAME' => '用户名只能使用数字,字母,下划线.',
+            'MSG_VALIDATOR_FIXEDLENGTH' => '请输入长度为 {0} 的字符串.',
             'LBL_FORM_VALUE_ADVICE' => '表单赋值建议',
             'LBL_FIELD' => '域',
             'LBL_VALUE' => '值',

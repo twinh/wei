@@ -144,6 +144,8 @@ class Qwin_Trex_Setup
             {
                 $set[$key] = null != $urlSet[$key] ? $urlSet[$key] : $defaultSet[$key];
             }
+            // TODO 过滤非法字符
+            $set[$key] = str_replace('-', '', $set[$key]);
         }
         
         /**
