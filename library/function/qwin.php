@@ -146,7 +146,7 @@ function qw_clip($name)
     static $clip;
     if(null == $clip)
     {
-        $clip  = require_once QWIN_ROOT_PATH . '/cache/php/list/clip.php';
+        $clip  = require QWIN_ROOT_PATH . '/cache/php/list/clip.php';
     }
     if(isset($clip[$name]))
     {
