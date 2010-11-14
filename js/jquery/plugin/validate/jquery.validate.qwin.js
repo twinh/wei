@@ -164,16 +164,29 @@ jQuery.validator.addMethod('ip', function(value, element){
     return true;
 }, 'Please enter the right chinese zip code.');
 
-
-jQuery.validator.addMethod('username', function(value, element, param) {
-    if(undefined == typeof(param))
-    {
-        param = [3, 16, 0];
-    }
-    //var regx = '/^[a-zA-Z][a-zA-Z0-9_]{' + param[0] +',' + param[1] +'}$/';
-    //return this.optional(element) || regx.test(value);
-    return true;
+/**
+ * 验证用户名,字母,数字,下划线
+ *
+ * @param value 从表单获取的值
+ * @param object 表单对象
+ * @return boolen 验证结果
+ */
+jQuery.validator.addMethod('username', function(value, element) {
+    return this.optional(element) || /^[a-zA-Z0-9_]+$/.test(value);
+    //return this.optional(element) || /^(?!_)(?!.*?_$)[a-zA-Z0-9_]+$/.test(value);
 }, 'Please enter the right username.');
+
+/**
+ * 验证长度
+ *
+ * @param value 从表单获取的值
+ * @param object 表单对象
+ * @return boolen 验证结果
+ */
+jQuery.validator.addMethod('fixedLength', function(value, element, param) {
+    return this.optional(element) || value.length == param;
+}, 'Please enter the right value.');
+
 
 /**
  * @see http://www.javaeye.com/topic/255168

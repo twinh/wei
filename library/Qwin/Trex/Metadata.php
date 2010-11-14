@@ -1377,6 +1377,7 @@ return true;
      *
      * @param array $fieldMeta 域的元数据配置
      * @return array jQuery Validate 的验证配置数组
+     * @todo 语言为可选
      */
     public function getJQueryValidateCode($meta, $relatedName = false)
     {
