@@ -256,7 +256,7 @@ class Trex_ActionController extends Trex_Controller
     public function createCustomLink()
     {
         return Qwin_Helper_Html::jQueryLink($this->url->createUrl($this->_set, array('action' => 'Add')), $this->_lang->t('LBL_ACTION_ADD'), 'ui-icon-plus')
-             . Qwin_Helper_Html::jQueryLink('javascript:;', $this->_lang->t('LBL_ACTION_DELETE'), 'ui-icon-trash')
+             . Qwin_Helper_Html::jQueryLink('javascript:;', $this->_lang->t('LBL_ACTION_DELETE'), 'ui-icon-trash', 'action-delete')
              . Qwin_Helper_Html::jQueryLink($this->url->createUrl($this->_set, array('action' => 'Index')), $this->_lang->t('LBL_ACTION_LIST'), 'ui-icon-note');
     }
 
