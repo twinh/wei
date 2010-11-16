@@ -29,8 +29,7 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
 {
     public function  __construct()
     {
-        $this->setIdMetadata()
-             ->setOperationMetadata()
+        $this->setCommonMetadata()
              ->parseMetadata(array(
             // 基本属性
             'field' => array(

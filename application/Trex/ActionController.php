@@ -392,36 +392,18 @@ class Trex_ActionController extends Trex_Controller
 
     public function convertDbCreatedBy($value, $name, $data, $copyData)
     {
-        return $this->member['id'];
+        $member = Qwin::run('Qwin_Session')->get('member');
+        return $member['id'];
     }
 
     public function convertDbModifiedBy($value, $name, $data, $copyData)
     {
-        return $this->member['id'];
+        $member = Qwin::run('Qwin_Session')->get('member');
+        return $member['id'];
     }
 
     public function convertDbContactId($value, $name, $data, $copyData)
     {
         return Qwin::run('Qwin_converter_String')->getUuid($value);
-    }
-
-    public function convertDbContactCreatedBy($value, $name, $data, $copyData)
-    {
-        return $this->member['id'];
-    }
-
-    public function convertDbContactModifiedBy($value, $name, $data, $copyData)
-    {
-        return $this->member['id'];
-    }
-
-    public function convertDbContactDateCreated()
-    {
-        return date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
-    }
-
-    public function convertDbContactDateModified()
-    {
-        return date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
     }
 }

@@ -106,7 +106,7 @@ class Trex_Member_Service_Login extends Trex_Service_BasicAction
             );
             return $return;
         }
-
+        
         // 验证通过,设置登陆数据到session
         $member = $config['this']->member;
         $this->session->set('member',  $member);
