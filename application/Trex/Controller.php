@@ -97,6 +97,10 @@ class Trex_Controller extends Qwin_Trex_Controller
      */
     public function __construct($option = null)
     {
+        if(false === $option)
+        {
+            return true;
+        }
         $ini = Qwin::run('-ini');
         $this->request = Qwin::run('Qwin_Request');
         $this->url = Qwin::run('Qwin_Url');

@@ -71,7 +71,7 @@ class Trex_Member_Controller_Log extends Trex_Controller
 
     public function validateCaptcha($value, $name, $data)
     {
-        if($value == $this->session->get('captcha'))
+        if($value == Qwin::run('Qwin_Session')->get('captcha'))
         {
             return true;
         }
@@ -81,8 +81,7 @@ class Trex_Member_Controller_Log extends Trex_Controller
     public function validatePassword($value, $name, $data)
     {
         $value = md5($value);
-        $result = $this
-            ->_meta
+        $result = Qwin::run('Qwin_Trex_Metadata')
             ->getDoctrineQuery(array(
                 'namespace' => 'Trex',
                 'module' => 'Member',
@@ -96,7 +95,7 @@ class Trex_Member_Controller_Log extends Trex_Controller
             unset($this->member['password']);
             return true;
         }
-        $this->session->set('member', null);
+        Qwin::run('Qwin_Session')->set('member', null);
         return new Qwin_Validator_Result(false, 'password', 'MSG_ERROR_USERNAME_PASSWORD');
     }
 }
