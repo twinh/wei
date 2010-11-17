@@ -27,7 +27,7 @@
 
 class Trex_Member_Metadata_Password extends Trex_Metadata
 {
-    public function __construct()
+    public function setMetadata()
     {
         $this->parseMetadata(array(
             // 基本属性
@@ -101,5 +101,30 @@ class Trex_Member_Metadata_Password extends Trex_Metadata
                 'title' => 'LBL_MODULE_MEMBER',
             ),
         ));
+    }
+
+    /**
+     * 修改密码时,将原密码置空
+     *
+     * @return string 空字符串
+     */
+    public function convertEditPasswordPassword()
+    {
+        return '';
+    }
+
+    public function validateOldPassword($value, $name, $data)
+    {
+        $set = $this->getSetFromClass();
+        $lang = Qwin::run('-lang');
+        $query = $this->metaHelper->getDoctrineQuery($set);
+        $result = $query
+            ->where('id = ?', $data['id'])
+            ->fetchOne();
+        if(md5($value) != $result['password'])
+        {
+            return new Qwin_Validator_Result(false, $name, 'MSG_OLD_PASSWORD_NOT_CORRECT');
+        }
+        return true;
     }
 }

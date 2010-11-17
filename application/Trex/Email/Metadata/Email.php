@@ -27,7 +27,7 @@
 
 class Trex_Email_Metadata_Email extends Trex_Metadata
 {
-    public function  __construct()
+    public function setMetadata()
     {
         $this->setIdMetadata()
             ->setCreatedData()
@@ -76,7 +76,13 @@ class Trex_Email_Metadata_Email extends Trex_Metadata
 
                 ),
             ),
+            'group' => array(
+
+            ),
             'model' => array(
+
+            ),
+            'metadata' => array(
 
             ),
             'db' => array(
@@ -89,5 +95,15 @@ class Trex_Email_Metadata_Email extends Trex_Metadata
                 'title' => 'LBL_MODULE_EMAIL',
             ),
         ));
+    }
+
+    public function convertListTo($value, $name, $data, $copyData)
+    {
+        return $copyData['to_name'] . '&lt;' . $copyData['to'] . '&gt;';
+    }
+
+    public function convertListFrom($value, $name, $data, $copyData)
+    {
+        return $copyData['from_name'] . '&lt;' . $copyData['from'] . '&gt;';
     }
 }

@@ -6,7 +6,7 @@
 <!-- Qwin_Packer_Css -->
 <!-- Qwin_Packer_Js -->
 <?php
-$member = Qwin::run('-ses')->get('member');
+$member = Qwin::run('-session')->get('member');
 $nickname = isset($member['contact']) ? $member['contact']['nickname'] : $member['username'];
 $arrayHelper = Qwin::run('-arr');
 $jQueryFile = array(

@@ -27,7 +27,7 @@
 
 class Trex_Member_Metadata_Member extends Trex_Metadata
 {
-    public function  __construct()
+    public function  setMetadata()
     {
         $this->setCommonMetadata()
              ->parseMetadata(array(
@@ -147,25 +147,6 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                         'group_id' => 'name',
                     ),
                 ),
-                /*array(
-                    'name' => 'Trex_Member_Model_Log',
-                    'alias' => 'status',
-                    'metadata' => 'Trex_Project_Metadata_Status',
-                    'type' => 'hasOne',
-                    'local' => 'id',
-                    'foreign' => 'project_id',
-                    'type' => 'relatedDb',
-                    'fieldMap' => array(
-                        'id' => 'project_id',
-                        'status' => 'status',
-                        'date_modified' => 'date_created',
-                    ),
-                    'set' => array(
-                        'namespace' => 'Trex',
-                        'module' => 'Project',
-                        'controller' => 'Status',
-                    ),
-                ),*/
             ),
             'metadata' => array(
 

@@ -43,9 +43,8 @@ class Trex_Namespace extends Qwin_Trex_Namespace
         }
 
         // 设置会话
-        Qwin::addMap('-ses', 'Qwin_Session');
         $namespace = md5($_SERVER['SERVER_NAME'] . $this->_config['project']['name']);
-        Qwin::run('-ses', $namespace);
+        Qwin::run('-session', $namespace);
 
         // 打开缓冲区
         ob_start();
@@ -64,10 +63,7 @@ class Trex_Namespace extends Qwin_Trex_Namespace
 
         // 设置类的对应关系
         Qwin::addMap(array(
-            // 权限控制
-            '-acl'  => 'Qwin_Acl',
             '-arr'  => 'Qwin_Helper_Array',
-            '-url'  => 'Qwin_Url',
             '-ini'  => 'Qwin_Trex_Setup',
 
             // 前端数据处理
@@ -77,17 +73,8 @@ class Trex_Namespace extends Qwin_Trex_Namespace
             '-html' => 'Qwin_Wfe_Html',
             '-rsc'  => 'Qwin_Wfe_Resource',
 
-            // 表单生成
-            '-form' => 'Qwin_Form',
-
-            '-str'  => 'Qwin_converter_String',
+            '-str'  => 'Qwin_Converter_String',
         ));
-
-        /**
-         * 加载表单,按钮生成类
-         */
-        Qwin::run('-form')
-            ->add('Qwin_Form_Element_Base');
        
         /**
          * 数据库链接,使用的是Doctrine Orm

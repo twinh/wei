@@ -79,8 +79,14 @@ class Trex_Member_Metadata_Log extends Qwin_Trex_Metadata
                     ),
                 ),
             ),
+            'group' => array(
+
+            ),
             'model' => array(
                 
+            ),
+            'metadata' => array(
+
             ),
             'db' => array(
                 'table' => 'member',
@@ -90,5 +96,37 @@ class Trex_Member_Metadata_Log extends Qwin_Trex_Metadata
                 'title' => 'LBL_MODULE_TITLE',
             ),
         ));
+    }
+
+    public function validateCaptcha($value, $name, $data)
+    {
+        if($value == Qwin::run('-session')->get('captcha'))
+        {
+            return true;
+        }
+        return new Qwin_Validator_Result(false, $name, 'MSG_ERROR_CAPTCHA');
+    }
+
+    public function validatePassword($value, $name, $data)
+    {
+        $value = md5($value);
+        $result = Qwin::run('Qwin_Trex_Metadata')
+            ->getDoctrineQuery(array(
+                'namespace' => 'Trex',
+                'module' => 'Member',
+                'controller' => 'Member',
+            ))
+            ->where('username = ? AND password = ?', array($data['username'], $value))
+            ->fetchOne();
+        if(false != $result)
+        {
+            $member = $result->toArray();
+            unset($member['password']);
+            // 加入到元数据中,方便调用
+            $this->member = $member;
+            return true;
+        }
+        Qwin::run('-session')->set('member', null);
+        return new Qwin_Validator_Result(false, 'password', 'MSG_ERROR_USERNAME_PASSWORD');
     }
 }

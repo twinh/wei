@@ -45,6 +45,8 @@ abstract class Qwin_Metadata extends Qwin_Metadata_Abstract
      */
     protected $_data;
 
+    
+
     /**
      * 不允许的元数据键名
      * @var array
@@ -68,8 +70,6 @@ abstract class Qwin_Metadata extends Qwin_Metadata_Abstract
      */
     public function parseMetadata($metadata)
     {
-        // TODO !!!
-        !isset($metadata['metadata']) && $metadata['metadata'] = array();
         foreach($metadata as $key => $row)
         {
             $type = ucfirst(strtolower($key));

@@ -61,7 +61,7 @@ class Qwin_Class
      *
      * @var array
      */
-    private static $_instanceClass = array();
+    private static $_instancedClass = array();
     
     /**
      * 类缓存文件的路径
@@ -83,6 +83,14 @@ class Qwin_Class
     public static $libPath;
 
     /**
+     *
+     * @var <type>
+     */
+    public static $shortTagMap = array(
+        '-' => 'Qwin_',
+    );
+
+    /**
      * 设置缓存文件
      * @param string $cacheFile
      * @return bool
@@ -101,8 +109,8 @@ class Qwin_Class
     /**
      * 增加类与类缩写的对应关系
      * 
-     * @param array/string $key 对应关系的数组/类缩写
-     * @param null/string $class_name 当 $key 是数组时,该值为空/类名
+     * @param array|string $key 对应关系的数组/类缩写
+     * @param null|string $class_name 当 $key 是数组时,该值为空/类名
      */
     public static function addMap($key, $class_name = null)
     {
@@ -126,37 +134,49 @@ class Qwin_Class
      */
     public static function addClass($name, $class)
     {
-        self::$_instanceClass[$name] = $class;
+        self::$_instancedClass[$name] = $class;
     }
     
     /**
      * 获得一个类的实例化
      *
-     * @todo 初始化时多参数的实现
-     * @todo 先后的次序
+     * @todo 初始化时多参数的实现 
      */
-    public static function run($name, $param = null)
+    public static function run($name, $param1 = null, $param2 = null, $param3 = null)
     {
-        isset(self::$_classMap[$name]) && $name = self::$_classMap[$name];
-
         // 因为 php 类名不区分大小写
         //$name = strtolower($name);
+        
+        // 转换类名映射
+        if(isset(self::$_classMap[$name])) {
+            $name = self::$_classMap[$name];
+        }
 
         // 已经实例化过
-        if(isset(self::$_instanceClass[$name]))
-        {
-            return self::$_instanceClass[$name];
+        if(isset(self::$_instancedClass[$name])) {
+            return self::$_instancedClass[$name];
 
         // 类存在,或者通过自动加载取得
         } elseif(class_exists($name)) {
-             self::$_instanceClass[$name] = new $name($param);
-             return self::$_instanceClass[$name];
-        
+             self::$_instancedClass[$name] = new $name($param1, $param2, $param3);
+             return self::$_instancedClass[$name];
+
+        // 类可能是短标签形式,对短标签进行转换
+        } elseif(isset(self::$shortTagMap[$name[0]])) {
+            $realName = self::$shortTagMap[$name[0]] . substr($name, 1);
+            $result = self::run($realName, $param1, $param2, $param3);
+            // 如果存在此类,将短标签加入到映射中
+            if(null != $result)
+            {
+                self::$_classMap[$name] = $realName;
+            }
+            return $result;
+
         // 加载文件,实例化
         } elseif(array_key_exists($name, self::$_classCache)) {
             require_once self::$_classCache[$name];
-            self::$_instanceClass[$name] = new $name($param);
-            return self::$_instanceClass[$name];
+            self::$_instancedClass[$name] = new $name($param1, $param2, $param3);
+            return self::$_instancedClass[$name];
         }
         
         // 没有找到
@@ -312,10 +332,8 @@ class Qwin_Class
     {
         $data = file_get_contents($file);
         preg_match_all ("/class\s(\w+)[\s|\n]*[\w|\s]*{/i", $data, $class_arr);
-        if(0 != count($class_arr[1]))
-        {
-            foreach($class_arr[1] as $class)
-            {
+        if(0 != count($class_arr[1])) {
+            foreach($class_arr[1] as $class) {
                 self::$_classCache[$class] = $file;
                 //self::$_classCache[strtolower($class)] = $file;
             }
@@ -325,6 +343,7 @@ class Qwin_Class
     /**
      *
      * @param array $set
+     * @param mixed 如果不可调用时,将返回该值
      */
     public static function callByArray($set, $value = null)
     {

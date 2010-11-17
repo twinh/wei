@@ -36,8 +36,7 @@ abstract class Qwin_Metadata_Abstract implements ArrayAccess, Iterator
 
     public function __get($name)
     {
-        if(isset($this->_data[$name]))
-        {
+        if (isset($this->_data[$name])) {
             return $this->_data[$name];
         }
         return null;
@@ -50,8 +49,7 @@ abstract class Qwin_Metadata_Abstract implements ArrayAccess, Iterator
 
     public function offsetGet($offset)
     {
-        if(isset($this->_data[$offset]))
-        {
+        if (isset($this->_data[$offset])) {
             return $this->_data[$offset];
         }
         return null;

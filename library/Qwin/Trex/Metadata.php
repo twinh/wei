@@ -770,24 +770,19 @@ return true;
 
     /**
      * 数据转换,用于 edit 等二维数组的数据
-     * 该方法包含两部分的转换,一个是元数据的转换配置,一个是控制器的转换方法
+     * 该方法包含两部分的转换,一个是元数据的转换配置,一个是转换器的转换方法
      *
      * @param array $data 准备转换的数据
      * @param string $action 转换的行为,例如Add,Edit
      * @param Qwin_Metadata $meta 元数据
-     * @param Qwin_Trex_Controller $controller 控制器
+     * @param object $convertObject 转换器的对象,默认是元数据自身
      * @return array 经过转换的数据
      */
-    public function convertOne($data, $action,
-        Qwin_Metadata $meta = null,
-        Qwin_Trex_Controller $controller = null, $isView = false)
+    public function convertOne($data, $action, Qwin_Metadata $meta, $convertObject = null, $isView = false)
     {
-        null == $meta && $meta = Qwin::run('-meta');
         $dataCopy = $data;
         $action = strtolower($action);
-        $url = Qwin_Class::run('Qwin_Url');
 
-        // TODO 1.链接问题 2.模块之间的转换
         if($isView)
         {
             foreach($meta['model'] as $model)
@@ -817,7 +812,6 @@ return true;
                 $newData[$name] = $data[$name] = null;
             }
 
-            // TODO 可选
             // 类型转换
             if(null != $newData[$name])
             {
@@ -835,27 +829,26 @@ return true;
                 $newData[$name] = $this->convert($field['converter'][$action], $data[$name]);
             }
 
-            // 使用控制器中的方法进行转换
-            if(null != $controller)
+            // 使用转换器中的方法进行转换
+            if(null != $convertObject)
             {
                 $methodName = str_replace(array('_', '-'), '', 'convert' . $action . $name);
-                if(method_exists($controller, $methodName))
+                if(method_exists($convertObject, $methodName))
                 {
                     $newData[$name] = call_user_func_array(
-                        array($controller, $methodName),
+                        array($convertObject, $methodName),
                         array($newData[$name], $name, $newData, $dataCopy)
                     );
                 }
-            }
 
-            /**
-             * 增加Url查询
-             * @todo 是否应该出现在此
-             */
-            if(true == $isView && $meta['field'][$name]['attr']['isLink'] && null != $controller)
-            {
-                !isset($dataCopy[$name]) && $dataCopy[$name] = null;
-                $newData[$name] = '<a href="' . $url->createUrl($controller->_set, array('action' => 'Index', 'searchField' => $name, 'searchValue' => $dataCopy[$name])) . '">' . $newData[$name] . '</a>';
+                // 转换链接
+                if(1 == $field['attr']['isLink'] && method_exists($convertObject, 'setIsLink'))
+                {
+                    $newData[$name] = call_user_func_array(
+                        array($convertObject, 'setIsLink'),
+                        array($newData[$name], $name, $newData, $dataCopy, $action)
+                    );
+                }
             }
         }
 
@@ -863,8 +856,7 @@ return true;
         foreach($meta['metadata'] as $name => $relatedMeta)
         {
             !isset($data[$name]) && $data[$name] = array();
-            $controller = Qwin::run($meta['model'][$name]['controller']);
-            $newData[$name] = $this->convertOne($data[$name], $action, $relatedMeta, $controller);
+            $newData[$name] = $this->convertOne($data[$name], $action, $relatedMeta, $relatedMeta);
         }
 
         return $newData;
@@ -891,17 +883,14 @@ return true;
      * @param array $data 准备转换的数据
      * @param string $action 转换的行为,例如Add,Edit
      * @param Qwin_Metadata $meta 元数据
-     * @param Qwin_Trex_Controller $controller 控制器
+     * @param object $convertObject 转换器的对象,默认是元数据自身
      * @return array 经过转换的数据
      */
-    public function convertArray($data, $action,
-        Qwin_Metadata $meta = null,
-        Qwin_Trex_Controller $controller = null,
-        $isView = false)
+    public function convertArray($data, $action, Qwin_Metadata $meta, $convertObject = null, $isView = false)
     {
         foreach($data as &$row)
         {
-            $row = $this->convertOne($row, $action, $meta, $controller, $isView);
+            $row = $this->convertOne($row, $action, $meta, $convertObject, $isView);
         }
         return $data;
     }
@@ -1285,25 +1274,23 @@ return true;
      * @param string $name 域的名称
      * @param string $meta 域的验证配置
      * @param string $data 包含各域的值的数组,例如从数据库取出或客户端提交的数据
-     * @param object $controller 控制器对象
+     * @param object|null $validateObj 验证器对象
      * @return true/Qwin_Validator_Result true表示通过验证,Qwin_Validator_Result表示不通过,对象中包含错误信息
      */
-    public function validateOne($name, $data, $validator, Qwin_Trex_Controller $controller = null)
+    public function validateOne($name, $data, $validator, $validateObj = null)
     {
-        // 根据控制器的方法进行验证
-        if(null != $controller)
-        {
-            $method = 'validate' . $name;
+        // 根据验证器的方法进行验证
+        if (null != $validateObj) {
+            $method = 'validate' . str_replace(array('_', '-'), '', $name);
             !isset($data[$name]) && $data[$name] = null;
             $result = Qwin::callByArray(array(
-                array($controller, $method),
+                array($validateObj, $method),
                 $data[$name],
                 $name,
                 $data,
             ));
             // 除了返回错误的对象外,其他都认为是验证通过
-            if(is_object($result) && 'Qwin_Validator_Result' == get_class($result))
-            {
+            if (is_object($result) && 'Qwin_Validator_Result' == get_class($result)) {
                 return $result;
             }
         }
@@ -1339,15 +1326,15 @@ return true;
      *
      * @param array $data 验证的数据
      * @param array $data 元数据对象
-     * @param object $controller 控制器对象
+     * @param object|null $validateObj 转换器对象
      * @return true|Qwin_Validate_Result 是否通过验证,true表示通过,Qwin_Validate_Result对象是包含错误信息的返回结果
      */
-    public function validateArray($data, Qwin_Metadata $meta = null, Qwin_Trex_Controller $controller = null)
+    public function validateArray($data, Qwin_Metadata $meta, $validateObj = null)
     {
         // 验证自身域
         foreach($meta['field'] as $field)
         {
-            $result = $this->validateOne($field['form']['name'], $data, $field['validator'], $controller);
+            $result = $this->validateOne($field['form']['name'], $data, $field['validator'], $validateObj);
             // 返回错误信息
             if(true !== $result)
             {
@@ -1359,8 +1346,7 @@ return true;
         foreach($meta['metadata'] as $name => $relatedMeta)
         {
             !isset($data[$name]) && $data[$name] = array();
-            $controller = Qwin::run($meta['model'][$name]['controller']);
-            $result = $this->validateArray($data[$name], $relatedMeta, $controller);
+            $result = $this->validateArray($data[$name], $relatedMeta, $relatedMeta);
             // 返回错误信息
             if(true !== $result)
             {

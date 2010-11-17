@@ -100,7 +100,7 @@ class Trex_Service_Form extends Trex_Service_BasicAction
         unset($data[$primaryKey]);
 
         // 处理数据
-        $data = $metaHelper->convertOne($data, $config['data']['asAction'], $meta, $config['this']);
+        $data = $metaHelper->convertOne($data, $config['data']['asAction'], $meta, $meta);
 
         // 设置视图
         $this->_view = array(

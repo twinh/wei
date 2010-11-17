@@ -27,7 +27,7 @@
 
 class Trex_Link_Metadata_Link extends Trex_Metadata
 {
-    public function  __construct()
+    public function  setMetadata()
     {
         $this->setCommonMetadata();
         $this->parseMetadata(array(
