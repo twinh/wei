@@ -108,7 +108,13 @@ class Trex_Contact_Metadata_Contact extends Trex_Metadata
                     ),
                 ),
             ),
+            'group' => array(
+
+            ),
             'model' => array(
+
+            ),
+            'metadata' => array(
 
             ),
             'db' => array(

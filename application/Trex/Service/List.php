@@ -46,7 +46,7 @@ class Trex_Service_List extends Trex_Service_BasicAction
             'limit' => null,
             'filter' => array(),
             'asAction' => 'list',
-            'isLink' => true,
+            'isView' => true,
             'convert' => true,
         ),
         'callback' => array(
@@ -96,9 +96,11 @@ class Trex_Service_List extends Trex_Service_BasicAction
             $tempData = $this->executeCallback('dataConverter', $config);
             null != $tempData && $data = $tempData;
         }
+
+        // 对数据进行转换
         if($config['data']['convert'])
         {
-            $data = $metaHelper->convertArray($data, $config['data']['asAction'], $meta, $config['this'], $config['data']['isLink']);
+            $data = $metaHelper->convertArray($data, $config['data']['asAction'], $meta, $meta, $config['data']['isView']);
         }
 
         // 获取布局

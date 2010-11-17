@@ -29,6 +29,11 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
 {
     public function  __construct()
     {
+        parent::__construct();
+    }
+
+    public function setMetadata()
+    {
         $this->setCommonMetadata()
              ->parseMetadata(array(
             // 基本属性
@@ -51,9 +56,6 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     ),
                     'attr' => array(
                         'isLink' => 1,
-                        'isList' => 1,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                     ),
                 ),
                 'category_2' => array(
@@ -63,8 +65,6 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     'attr' => array(
                         'isLink' => 1,
                         'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                         'isView' => 0,
                     ),
                 ),
@@ -75,8 +75,6 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     'attr' => array(
                         'isLink' => 1,
                         'isList' => 0,
-                        'isDbField' => 1,
-                        'isDbQuery' => 1,
                         'isView' => 0,
                     ),
                 ),
@@ -84,7 +82,6 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     'validator' => array(
                         'rule' => array(
                             'required' => true,
-                            'username' => true,
                         ),
                     ),
                 ),
@@ -317,5 +314,84 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
             'shortcut' => array(
             )
         ));
+    }
+
+    public function convertAddCategoryId($val, $name, $data, $copyData)
+    {
+        if(isset($_GET['sign']))
+        {
+            $this->__meta['field']['category_id']['form']['_resourceGetter'] = array(
+                array('Project_Hepler_Category', 'getTreeResource'),
+                array(
+                    'namespace' => 'Default',
+                    'module' => 'Category',
+                    'controller' => 'Category',
+                ),
+                $_GET['sign']
+            );
+        }
+        return $val;
+    }
+
+    public function convertAddCategory2()
+    {
+        if(isset($_GET['sign']))
+        {
+            return $_GET['sign'];
+        }
+    }
+
+    /*public function convertEditCategoryId($val, $name, $data)
+    {
+        // 专题
+        if(NULL != $data['category_2'])
+        {
+            $this->__meta['field']['category_id']['form']['_resourceGetter'] = array(
+                array('Project_Hepler_Category', 'getTreeResource'),
+                array(
+                    'namespace' => 'Default',
+                    'module' => 'Category',
+                    'controller' => 'Category',
+                ),
+                $data['category_2']
+            );
+        }
+        return $val;
+    }*/
+
+    public function convertListTitle($value, $name, $data, $copyData)
+    {
+        return Qwin_Helper_Html::titleDecorator($value, $copyData['title_style'], $copyData['title_color']);
+    }
+
+    public function convertViewTitle($value, $name, $data, $copyData)
+    {
+        return Qwin_Helper_Html::titleDecorator($value, $copyData['title_style'], $copyData['title_color']);
+    }
+
+    public function convertEditTitleStyle($value, $name, $data, $copyData)
+    {
+        return explode('|', $value);
+    }
+
+    public function convertEditTitleColor($value, $name, $data, $copyData)
+    {
+        null == $value && $value = 'NULL';
+        return $value;
+    }
+
+    /**
+     *
+     * @todo 检查
+     */
+    public function convertDbTitleStyle($value, $name, $data, $copyData)
+    {
+        return implode('|', (array)$value);
+    }
+
+    public function convertDbTitleColor($value, $name, $data, $copyData)
+    {
+        'NULL' == $value && $value = null;
+        return $value;
     }
 }

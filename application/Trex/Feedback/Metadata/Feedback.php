@@ -27,7 +27,7 @@
 
 class Trex_Feedback_Metadata_Feedback extends Trex_Metadata
 {
-    public function __construct()
+    public function setMetadata()
     {
         $this->setIdMetadata();
         $this->parseMetadata(array(

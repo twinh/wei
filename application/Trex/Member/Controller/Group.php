@@ -97,22 +97,5 @@ class Trex_Member_Controller_Group extends Trex_ActionController
             $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Index'));
             return $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
-    }
-
-    public function convertViewImagePath($value)
-    {
-        if(file_exists($value))
-        {
-            return '<img src="' . $value . '" />';
-        }
-        return $value . '<em>(' . $this->_lang->t('MSG_FILE_NOT_EXISTS') . ')</em>';
-    }
-
-    public function convertListOperation($value, $name, $data, $copyData)
-    {
-        $primaryKey = $this->_meta['db']['primaryKey'];
-        $html = Qwin_Helper_Html::jQueryButton($this->url->createUrl($this->_set, array('action' => 'AllocatePermission', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_ALLOCATE_PERMISSION'), 'ui-icon-person');
-        $html .= parent::convertListOperation($value, $name, $data, $copyData);
-        return $html;
-    }
+    }    
 }

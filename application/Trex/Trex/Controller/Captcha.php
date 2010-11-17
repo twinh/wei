@@ -16,8 +16,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  
+ * @package     Trex
+ * @subpackage  Trex
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -30,7 +30,7 @@ class Trex_Trex_Controller_Captcha extends Qwin_Trex_Controller
     public function actionIndex()
     {
         $number = mt_rand(1000,9999);
-        Qwin_Class::run('-ses')->set('captcha', $number);
+        Qwin_Class::run('-session')->set('captcha', $number);
         Qwin::load('Project_Helper_Captcha');
         return Project_Helper_Captcha::create($number);
     }

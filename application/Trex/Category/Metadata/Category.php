@@ -27,7 +27,7 @@
 
 class Trex_Category_Metadata_Category extends Trex_Metadata
 {
-    public function  __construct()
+    public function  setMetadata()
     {
         parent::setCommonMetadata();
         $this->parseMetadata(array(
@@ -130,5 +130,44 @@ class Trex_Category_Metadata_Category extends Trex_Metadata
                 'title' => 'LBL_MODULE_CATEGORY',
             ),
         ));
+    }
+
+    public function convertListOperation($value, $name, $data, $copyData)
+    {
+        $primaryKey = $this->db['primaryKey'];
+        $url = Qwin::run('-url');
+        $lang = Qwin::run('-lang');
+        $set = $this->getSetFromClass();
+        $link = $url->createUrl($set, array('action' => 'Add', '_data[parent_id]' => $data[$primaryKey]));
+        $html = Qwin_Helper_Html::jQueryButton($link, $lang->t('LBL_ACTION_ADD_SUBCATEGORY'), 'ui-icon-plusthick')
+              . parent::convertListOperation($value, $name, $data, $copyData);
+        return $html;
+    }
+
+    public function convertListName($val, $name, $data, $copyData)
+    {
+        if(NULL != $copyData['parent_id'])
+        {
+            // 缓存Tree对象
+            if(!isset($this->treeObj))
+            {
+                $this->treeObj = Qwin::run('Qwin_Tree');
+            }
+            $layer = $this->treeObj->getLayer($data['id']);
+            // 只有一层
+            if(0 >= $layer)
+            {
+                return $val;
+            } else {
+                return str_repeat('┃', $layer - 1) . '┣' . $val;
+            }
+        }
+        return $val;
+    }
+
+    public function convertDbParentId($val, $name, $data)
+    {
+        '0' == $val && $val = 'NULL';
+        return $val;
     }
 }

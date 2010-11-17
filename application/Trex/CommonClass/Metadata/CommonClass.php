@@ -27,7 +27,7 @@
 
 class Trex_CommonClass_Metadata_CommonClass extends Trex_Metadata
 {
-    public function  __construct()
+    public function  setMetadata()
     {
         $this->setCommonMetadata()
             ->parseMetadata(
@@ -65,5 +65,28 @@ class Trex_CommonClass_Metadata_CommonClass extends Trex_Metadata
                     'title' => 'LBL_MODULE_COMMONCLASS',
                 ),
          ));
+    }
+
+    /**
+     * db 转换函数
+     * @todo 转义还原, map的安全检查,结构应该是二维 stdClass
+     */
+    public function convertDbValue($val, $name, $row, $row_copy)
+    {
+        $val = str_replace('\"', '"', $val);
+        $data = Qwin::run('-arr')->jsonDecode($val, 'pear');
+        return serialize($data);
+    }
+
+    public function convertListOperation($value, $name, $data, $copyData)
+    {
+        $primaryKey = $this->db['primaryKey'];
+        $url = Qwin::run('-url');
+        $lang = Qwin::run('-lang');
+        $set = $this->getSetFromClass();
+        $link = $url->createUrl($set, array('action' => 'Add', '_data[sign]' => $copyData['sign']));
+        $html = Qwin_Helper_Html::jQueryButton($link, $lang->t('LBL_ACTION_ADD_NEXT'), 'ui-icon-plusthick')
+              . parent::convertListOperation($value, $name, $data, $copyData);
+        return $html;
     }
 }

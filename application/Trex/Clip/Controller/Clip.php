@@ -38,19 +38,4 @@ class Trex_Clip_Controller_Clip extends Trex_ActionController
         }
         Qwin::run('Qwin_Cache_List')->writeCache($cache, 'clip');
     }
-
-    public function convertEditValue($value, $name, $data, $copyData)
-    {
-        $this->_meta['field']->set('value.form._type', $copyData['form_type']);
-        // TODO
-        if('CKEditor' == $copyData['form_widget'])
-        {
-            $this->_meta['field']->set('value.form._widgetDetail', array(
-                array(
-                    array('Qwin_Widget_Editor_CKEditor', 'render'),
-                ),
-            ));
-        }
-        return $value;
-    }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Manager
+ * 元数据管理器
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -25,44 +25,34 @@
  * @since       2010-7-26 13:15:23
  */
 
-/**
- * metadata数据管理器
- */
-
 class Qwin_Metadata_Manager
 {
     /**
      * 存放所有元数据
-     * @var <type>
+     * @var array
      */
     private $_data;
 
     /**
-     * 存放所有元数据的原始数据
-     * @var <type>
-     */
-    private $_originalData;
-
-    /**
-     * 存储各metada实例化的数组
-     * @var <type>
+     * 存储各元数据实例化对象的数组
+     * @var array
      */
     private static $_metadataObj;
 
     /**
      * 将一组元数据加入管理器中
      *
-     * @param <type> $name
-     * @param <type> $metadata
+     * @param string $name
+     * @param Qwin_Metadata $metadata
      * @example $metadataManager->set('Trex_Article_Metadata_Article', $meta->defaultMetadata);
      */
     public function set($name, $metadata)
     {
-        if(!isset($_originalData[$name]))
+        if(!isset($this->_data[$name]))
         {
             $this->_data[$name] = $metadata;
-            $this->_originalData = $metadata;
         }
+        return $this;
     }
 
     /**
@@ -83,12 +73,12 @@ class Qwin_Metadata_Manager
             if(is_subclass_of($className, 'Qwin_Metadata'))
             {
                 self::$_metadataObj[$className] = new $className;
-                //self::$_metadataObj[$className]->setMetadata();
+                self::$_metadataObj[$className]->setMetadata();
                 return self::$_metadataObj[$className];
             }
 
             require_once 'Qwin/Trex/Metadata/Exception.php';
-            throw new Qwin_Trex_Metadata_Exception('The class ' . $className . ' is not the sub class of Qwin_Metadat');
+            throw new Qwin_Trex_Metadata_Exception('The class ' . $className . ' is not the sub class of Qwin_Metadata');
         }
 
         require_once 'Qwin/Trex/Metadata/Exception.php';

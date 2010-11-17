@@ -96,7 +96,7 @@ class Trex_Member_Service_Login extends Trex_Service_BasicAction
         Qwin::run('Qwin_Class_Extension')
             ->setNamespace('validator')
             ->addClass('Qwin_Validator_JQuery');
-        $validateResult = $metaHelper->validateArray($config['data']['db'], $meta, $config['this']);
+        $validateResult = $metaHelper->validateArray($config['data']['db'], $meta, $meta);
         if(true !== $validateResult)
         {
             $message = $this->showValidateError($validateResult, $meta, $config['view']['display']);
@@ -108,7 +108,7 @@ class Trex_Member_Service_Login extends Trex_Service_BasicAction
         }
         
         // 验证通过,设置登陆数据到session
-        $member = $config['this']->member;
+        $member = $meta->member;
         $this->session->set('member',  $member);
         $this->session->set('style', $member['theme']);
         $this->session->set('language', $member['language']);

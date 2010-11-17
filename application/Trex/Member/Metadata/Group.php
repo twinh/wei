@@ -27,7 +27,7 @@
 
 class Trex_Member_Metadata_Group extends Trex_Metadata
 {
-    public function __construct()
+    public function setMetadata()
     {
         $this->setCommonMetadata();
         $this->parseMetadata(array(
@@ -87,5 +87,25 @@ class Trex_Member_Metadata_Group extends Trex_Metadata
                 'title' => 'LBL_MODULE_MEMBER_GROUP',
             ),
         ));
+    }
+
+    public function convertViewImagePath($value)
+    {
+        if(file_exists($value))
+        {
+            return '<img src="' . $value . '" />';
+        }
+        return $value . '<em>(' . $this->_lang->t('MSG_FILE_NOT_EXISTS') . ')</em>';
+    }
+
+    public function convertListOperation($value, $name, $data, $copyData)
+    {
+        $primaryKey = $this->db['primaryKey'];
+        $url = Qwin::run('-url');
+        $lang = Qwin::run('-lang');
+        $set = $this->getSetFromClass();
+        $html = Qwin_Helper_Html::jQueryButton($url->createUrl($set, array('action' => 'AllocatePermission', $primaryKey => $copyData[$primaryKey])), $lang->t('LBL_ACTION_ALLOCATE_PERMISSION'), 'ui-icon-person')
+              . parent::convertListOperation($value, $name, $data, $copyData);
+        return $html;
     }
 }

@@ -113,7 +113,7 @@ class Trex_Service_View extends Trex_Service_BasicAction
         $metaHelper->setLastViewedItem($meta, $result);
 
         $data = $result->toArray();
-        $data = $metaHelper->convertOne($data, $config['data']['asAction'], $meta, $config['this'], $config['data']['isView']);
+        $data = $metaHelper->convertOne($data, $config['data']['asAction'], $meta, $meta, $config['data']['isView']);
                 
         // 设置视图
         $this->_view = array(

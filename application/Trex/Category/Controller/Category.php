@@ -50,7 +50,6 @@ class Trex_Category_Controller_Category extends Trex_ActionController
 
     public function onAfterDb()
     {
-        //Qwin::run('Project_Helper_Cache')->setFileCacheBySetting($this->_set);
         $fileCacheObj = Qwin::run('Qwin_Cache_File');
         $fileCacheObj->connect(QWIN_ROOT_PATH . '/cache/');
         $setting = array_intersect_key($this->_set, array(
@@ -66,42 +65,6 @@ class Trex_Category_Controller_Category extends Trex_ActionController
 
         $cacheName = md5(implode('-', $setting));
         $fileCacheObj->set($cacheName, $data);
-    }
-
-    public function convertListOperation($value, $name, $data, $copyData)
-    {
-        $primaryKey = $this->_meta['db']['primaryKey'];
-        $url = $this->url->createUrl($this->_set, array('action' => 'Add', '_data[parent_id]' => $data[$primaryKey]));
-        $html = Qwin_Helper_Html::jQueryButton($url, $this->_lang->t('LBL_ACTION_ADD_SUBCATEGORY'), 'ui-icon-plusthick')
-              . parent::convertListOperation($value, $name, $data, $copyData);
-        return $html;
-    }
-
-    public function convertListName($val, $name, $data, $copyData)
-    {
-        if(NULL != $copyData['parent_id'])
-        {
-            // 缓存Tree对象
-            if(!isset($this->treeObj))
-            {
-                $this->treeObj = Qwin::run('Qwin_Tree');
-            }
-            $layer = $this->treeObj->getLayer($data['id']);
-            // 只有一层
-            if(0 >= $layer)
-            {
-                return $val;
-            } else {
-                return str_repeat('┃', $layer - 1) . '┣' . $val;
-            }
-        }
-        return $val;
-    }
-    
-    public function convertDbParentId($val, $name, $data)
-    {
-        '0' == $val && $val = 'NULL';
-        return $val;
     }
 
     public function getCategoryResource()

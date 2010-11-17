@@ -148,32 +148,6 @@ class Trex_Member_Controller_Member extends Trex_ActionController
         $html .= parent::convertListOperation($value, $name, $data, $copyData);
         return $html;
     }
-
-    /**
-     * 修改密码时,将原密码置空
-     *
-     * @return string 空字符串
-     */
-    public function convertEditPasswordPassword()
-    {
-        return '';
-    }
-
-    public function convertDbOldPassword($value, $name, $data, $copyData)
-    {
-        $query = $this->metaHelper->getDoctrineQuery($this->_set);
-        $result = $query->where('id = ?', $data['id'])
-            ->fetchOne();
-        if(md5($value) != $result['password'])
-        {
-            $this->setRedirectView($this->_lang->t('MSG_OLD_PASSWORD_NOT_CORRECT'))
-                    ->loadView()
-                    ->display();
-            // TODO 是否合法
-            exit();
-        }
-        return $value;
-    }
     
     public function convertDbUsername($value)
     {

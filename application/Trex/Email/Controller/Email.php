@@ -39,16 +39,6 @@ class Trex_Email_Controller_Email extends Trex_ActionController
         parent::actionAdd();
     }
 
-    public function convertListTo($value, $name, $data, $copyData)
-    {
-        return $copyData['to_name'] . '&lt;' . $copyData['to'] . '&gt;';
-    }
-
-    public function convertListFrom($value, $name, $data, $copyData)
-    {
-        return $copyData['from_name'] . '&lt;' . $copyData['from'] . '&gt;';
-    }
-
     public function createCustomLink()
     {
         return parent::createCustomLink()

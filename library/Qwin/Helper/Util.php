@@ -27,57 +27,52 @@
 
 class Qwin_Helper_Util
 {
-    public function getStyle()
-    {
-        $config = Qwin::run('-ini')->getConfig();
-        $configStyle = $config['interface']['style'];
-        $styleArr = array(
-                Qwin::run('-url')->g('style'),
-                Qwin::run('-ses')->get('style'),
-                $configStyle,
-        );
-        foreach($styleArr as $val)
-        {
-            if(null != $val)
-            {
-                $style = $val;
-                break;
-            }
-        }
-        Qwin::run('-ses')->set('style', $style);
-        return $style;
-    }
-
+    /**
+     * 获取Ip地址
+     *
+     * @return string Ip地址
+     */
     public static function getIp()
     {
-        if (isset($HTTP_SERVER_VARS["HTTP_X_FORWARDED_FOR"]))
-        {
-            $ip = $HTTP_SERVER_VARS["HTTP_X_FORWARDED_FOR"];
-        }
-        elseif (isset($HTTP_SERVER_VARS["HTTP_CLIENT_IP"]))
-        {
-            $ip = $HTTP_SERVER_VARS["HTTP_CLIENT_IP"];
-        }
-        elseif (isset($HTTP_SERVER_VARS["REMOTE_ADDR"]))
-        {
-            $ip = $HTTP_SERVER_VARS["REMOTE_ADDR"];
-        }
-        elseif (getenv("HTTP_X_FORWARDED_FOR"))
-        {
-            $ip = getenv("HTTP_X_FORWARDED_FOR");
-        }
-        elseif (getenv("HTTP_CLIENT_IP"))
-        {
-            $ip = getenv("HTTP_CLIENT_IP");
-        }
-        elseif (getenv("REMOTE_ADDR"))
-        {
-            $ip = getenv("REMOTE_ADDR");
-        }
-        else
-        {
-            $ip = "Unknown";
+        if (isset($HTTP_SERVER_VARS['HTTP_X_FORWARDED_FOR'])) {
+            $ip = $HTTP_SERVER_VARS['HTTP_X_FORWARDED_FOR'];
+        } elseif (isset($HTTP_SERVER_VARS['HTTP_CLIENT_IP'])) {
+            $ip = $HTTP_SERVER_VARS['HTTP_CLIENT_IP'];
+        } elseif (isset($HTTP_SERVER_VARS['REMOTE_ADDR'])) {
+            $ip = $HTTP_SERVER_VARS['REMOTE_ADDR'];
+        } elseif (getenv('HTTP_X_FORWARDED_FOR')) {
+            $ip = getenv('HTTP_X_FORWARDED_FOR');
+        } elseif (getenv('HTTP_CLIENT_IP')) {
+            $ip = getenv('HTTP_CLIENT_IP');
+        } elseif (getenv('REMOTE_ADDR')) {
+            $ip = getenv('REMOTE_ADDR');
+        } else {
+            $ip = 'Unknown';
         }
         return $ip;
+    }
+
+    /**
+     * 产生一个UUID号
+     *
+     * @return string UUID
+     */
+    public static function getUuid()
+    {
+        return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+            // 32 bits for "time_low"
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+            // 16 bits for "time_mid"
+            mt_rand(0, 0xffff),
+            // 16 bits for "time_hi_and_version",
+            // four most significant bits holds version number 4
+            mt_rand(0, 0x0fff) | 0x4000,
+            // 16 bits, 8 bits for "clk_seq_hi_res",
+            // 8 bits for "clk_seq_low",
+            // two most significant bits holds zero and one for variant DCE1.1
+            mt_rand(0, 0x3fff) | 0x8000,
+            // 48 bits for "node"
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+        );
     }
 }

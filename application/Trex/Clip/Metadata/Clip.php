@@ -27,7 +27,7 @@
 
 class Trex_Clip_Metadata_Clip extends Trex_Metadata
 {
-    public function  __construct()
+    public function setMetadata()
     {
         $this->setCommonMetadata();
         $this->parseMetadata(array(
@@ -48,6 +48,11 @@ class Trex_Clip_Metadata_Clip extends Trex_Metadata
                     'attr' => array(
                         'isList' => 0,
                     ),
+                    'converter' => array(
+                        'edit' => array(
+                            array('Qwin_Converter_String', 'secureCode')
+                        ),
+                    ),
                 ),
                 'description' => array(
 
@@ -62,6 +67,9 @@ class Trex_Clip_Metadata_Clip extends Trex_Metadata
                     ),
                 ),
                 'form_widget' => array(
+                    'form' => array(
+                        '_type' => 'hidden',
+                    ),
                     'attr' => array(
                         'isList' => 0,
                     ),
@@ -86,5 +94,20 @@ class Trex_Clip_Metadata_Clip extends Trex_Metadata
                 'title' => 'LBL_MODULE_CLIP',
             ),
         ));
+    }
+
+    public function convertEditValue($value, $name, $data, $copyData)
+    {
+        $this->field->set('value.form._type', $copyData['form_type']);
+        // TODO
+        if('CKEditor' == $copyData['form_widget'])
+        {
+            $this->field->set('value.form._widgetDetail', array(
+                array(
+                    array('Qwin_Widget_Editor_CKEditor', 'render'),
+                ),
+            ));
+        }
+        return $value;
     }
 }

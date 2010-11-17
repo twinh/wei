@@ -38,7 +38,14 @@ class Qwin_Form
     private $_privateSet = array();
     // 表单的值
     private $_value;
-    
+
+    /**
+     * 默认添加基本的表单元素控件
+     */
+    public function  __construct()
+    {
+        $this->add('Qwin_Form_Element_Base');
+    }
     
     /**
      * 根据配置生成表单
@@ -49,7 +56,6 @@ class Qwin_Form
         // 初始化数据
         $this->_init($set, $initData);
         $data = $this->_callType();
-        $data = $this->_callExtType($data);
         return $data;
     }
     
@@ -61,15 +67,6 @@ class Qwin_Form
     public function add($className)
     {
         $this->_class[$className] = $className;
-        return $this;
-    }
-    
-    /**
-     * 增加表单扩展的 扩展类,不检查类是否存在,类的检查在  _callExtType 中
-     */
-    public function addExt($className)
-    {
-        $this->_extClass[$className] = $className;
         return $this;
     }
     
@@ -86,39 +83,9 @@ class Qwin_Form
             if(method_exists(qw($val), $type))
             {
                 $data = call_user_func_array(
-                    array(qw($val), $type), 
+                    array(Qwin::run($val), $type),
                     array($this->_publicSet, $this->_privateSet, $this->_value)
                 );
-            }
-        }
-        return $data;
-    }
-    
-    /**
-     * 执行对应的表单类型的扩展 的方法
-     *
-     * @todo 缓存类中的方法,多对多对应
-     */
-    private function _callExtType($data)
-    {
-        if(!isset($this->_privateSet['_typeExt']))
-        {
-            return $data;
-        }
-        $type_arr = qw('-arr')->decodeArray($this->_privateSet['_typeExt']);
-        foreach($type_arr as $method => $set)
-        {
-            $method = str_replace('_', '', $method);
-            foreach($this->_extClass as $class)
-            {
-                $class = Qwin::run($class);
-                if(method_exists($class, $method))
-                {
-                    return call_user_func_array(
-                        array($class, $method),
-                        array($this->_publicSet, $this->_privateSet, $this->_value, $data)
-                    );
-                }
             }
         }
         return $data;
@@ -136,30 +103,23 @@ class Qwin_Form
         $this->_publicSet = array();
 
         // 转换表单资源
-        if(isset($set['_resourceGetter']))
-        {
+        if(isset($set['_resourceGetter'])) {
             $set['_resource'] = Qwin::callByArray($set['_resourceGetter']);
         }
 
-        if(isset($initData[$set['name']]))
-        {
+        if(isset($initData[$set['name']])) {
             $this->_value = $initData[$set['name']];
-        }
-        else
-        {
+        } else {
             $this->_value = $set['_value'];
         }
         
         // 获取id
-        if(!isset($set['id']))
-        {
+        if(!isset($set['id'])) {
             $set['id'] = preg_replace("/(\w*)\[(\w+)\]/", "$1-$2", $set['name']);
         }
         
-        foreach($set as $key => $val)
-        {
-            if(substr($key, 0, 1) == '_')
-            {
+        foreach($set as $key => $val) {
+            if(substr($key, 0, 1) == '_') {
                 $this->_privateSet[$key] = $val;
             } else {
                 $this->_publicSet[$key] = $val;
@@ -176,8 +136,7 @@ class Qwin_Form
     protected function _getAttr($set)
     {
         $attr = '';
-        foreach($set as $key => $val)
-        {
+        foreach($set as $key => $val) {
             $attr .= $key . '="' . $val . '" ';
         }
         return $attr;

@@ -59,33 +59,12 @@ class Trex_Article_Controller_Article extends Trex_ActionController
         $dbData = $this->meta->convertOne($meta['field'], $this->_set['action'], $dbData);
 
         $this->createHtml($dbData);
-
-        if(isset($_SERVER['HTTP_REFERER']))
-        {
-            $url = $_SERVER['HTTP_REFERER'];
-        } else {
-            $url = url(array($self->__query['namespace'], $self->__query['module'], $self->__query['controller']));
-        }
-        Qwin::run('Qwin_Helper_Js')->show($this->t('MSG_OPERATED_SUCCESS'), $url);
         
-    }*/
+    }
 
-    /*public function actionCreateAllHtml()
+    public function actionCreateAllHtml()
     {
-        $query = $this->meta->getQuery($this->_set);
-        $dbData = $query->execute()->toArray();
-        foreach($dbData as $data)
-        {
-            $this->createHtml($data);
-        }
-        //if(isset($_SERVER['HTTP_REFERER']))
-        //{
-        //    $url = $_SERVER['HTTP_REFERER'];
-        //} else {
-            $url = url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller']));
-        //}
-        Qwin::run('Qwin_Helper_Js')->show($this->t('MSG_OPERATED_SUCCESS'), $url);
-    }*/
+    }
 
     public function createHtml($data)
     {
@@ -117,101 +96,5 @@ class Trex_Article_Controller_Article extends Trex_ActionController
         $output = ob_get_contents();
         '' != $output && ob_end_clean();
         file_put_contents($path, $output);
-    }
-
-    /*public function convertListId($val)
-    {
-        if(isset($_GET['searchField']) && 'category_2' == $_GET['searchField'])
-        {
-            $this->__meta['field']['category_id']['converter']['list'] = array(
-                array('Project_Hepler_Category', 'convertTreeResource'),
-                array(
-                    'namespace' => 'Default',
-                    'module' => 'Category',
-                    'controller' => 'Category',
-                ),
-                $_GET['searchValue']
-            );
-        }
-        return $val;
     }*/
-
-    public function convertAddCategoryId($val, $name, $data, $copyData)
-    {
-        if(isset($_GET['sign']))
-        {
-            $this->__meta['field']['category_id']['form']['_resourceGetter'] = array(
-                array('Project_Hepler_Category', 'getTreeResource'),
-                array(
-                    'namespace' => 'Default',
-                    'module' => 'Category',
-                    'controller' => 'Category',
-                ),
-                $_GET['sign']
-            );
-        }
-        return $val;
-    }
-
-    public function convertAddCategory2()
-    {
-        if(isset($_GET['sign']))
-        {
-            return $_GET['sign'];
-        }
-    }
-
-    /*public function convertEditCategoryId($val, $name, $data)
-    {
-        // 专题
-        if(NULL != $data['category_2'])
-        {
-            $this->__meta['field']['category_id']['form']['_resourceGetter'] = array(
-                array('Project_Hepler_Category', 'getTreeResource'),
-                array(
-                    'namespace' => 'Default',
-                    'module' => 'Category',
-                    'controller' => 'Category',
-                ),
-                $data['category_2']
-            );
-        }
-        return $val;
-    }*/
-
-    public function convertListTitle($value, $name, $data, $copyData)
-    {
-        return Qwin_Helper_Html::titleDecorator($value, $copyData['title_style'], $copyData['title_color']);
-    }
-
-    public function convertViewTitle($value, $name, $data, $copyData)
-    {
-        return Qwin_Helper_Html::titleDecorator($value, $copyData['title_style'], $copyData['title_color']);
-    }
-
-    public function convertEditTitleStyle($value, $name, $data, $copyData)
-    {
-        return explode('|', $value);
-    }
-
-    public function convertEditTitleColor($value, $name, $data, $copyData)
-    {
-        null == $value && $value = 'NULL';
-        return $value;
-    }
-
-    /**
-     *
-     * @todo 检查
-     */
-    public function convertDbTitleStyle($value, $name, $data, $copyData)
-    {
-        return implode('|', (array)$value);
-    }
-
-    public function convertDbTitleColor($value, $name, $data, $copyData)
-    {
-        'NULL' == $value && $value = null;
-        return $value;
-    }
 }

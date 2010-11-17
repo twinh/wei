@@ -100,9 +100,9 @@ class Trex_Service_Insert extends Trex_Service_BasicAction
             }
         }
 
-        $data = $metaHelper->convertOne($data, 'db', $meta, $config['this']);
+        $data = $metaHelper->convertOne($data, 'db', $meta, $meta);
         $data = $metaHelper->setForeignKeyData($meta['model'], $data);
-        $validateResult = $metaHelper->validateArray($data + $_POST, $meta, $config['this']);
+        $validateResult = $metaHelper->validateArray($data + $_POST, $meta, $meta);
         if(true !== $validateResult)
         {
             $message = $this->showValidateError($validateResult, $meta, $config['view']['display']);
