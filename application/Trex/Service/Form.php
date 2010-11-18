@@ -66,8 +66,12 @@ class Trex_Service_Form extends Trex_Service_BasicAction
         $primaryKeyValue = $config['data']['primaryKeyValue'];
 
         $metaHelper->loadRelatedMetadata($meta, 'db');
-        $query = $metaHelper->getDoctrineQuery($this->_set);
 
+        $modelClass = $metaHelper->getClass('Model', $this->_set);
+        $query = $metaHelper->getDoctrine($meta, $modelClass, array('type' => array('db')));
+p($query->execute()->toArray());exit;
+        $query = $metaHelper->getDoctrineQuery($this->_set);
+        
         /**
          * 三种模式　
          * 1.复制,根据主键从模型获取初始值
@@ -100,7 +104,7 @@ class Trex_Service_Form extends Trex_Service_BasicAction
         unset($data[$primaryKey]);
 
         // 处理数据
-        $data = $metaHelper->convertOne($data, $config['data']['asAction'], $meta, $meta);
+        $data = $metaHelper->convertOne($data, $config['data']['asAction'], $meta, $meta, array('view' => false));
 
         // 设置视图
         $this->_view = array(

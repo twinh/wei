@@ -470,4 +470,25 @@ class Qwin_Helper_Array
         }
         return $newArr;
     }
+
+     /**
+     * 计算两个数组的交集,键名来自第一个数组,值来自第二个数组
+     *
+     * @param array $array1 第一个参数数组
+     * @param array $array2
+     * @return array
+     */
+    public function intersect($array1, $array2)
+    {
+        foreach($array1 as $key)
+        {
+            if(isset($array2[$key]))
+            {
+                $array1[$key] = $array2[$key];
+            } else {
+                $array1[$key] = null;
+            }
+        }
+        return $array1;
+    }
 }
