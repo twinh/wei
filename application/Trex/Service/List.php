@@ -100,7 +100,7 @@ class Trex_Service_List extends Trex_Service_BasicAction
         // 对数据进行转换
         if($config['data']['convert'])
         {
-            $data = $metaHelper->convertArray($data, $config['data']['asAction'], $meta, $meta, $config['data']['isView']);
+            $data = $metaHelper->convertArray($data, $config['data']['asAction'], $meta, $meta, array('view' => $config['data']['isView']));
         }
 
         // 获取布局

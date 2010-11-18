@@ -41,7 +41,6 @@ class Trex_Service_View extends Trex_Service_BasicAction
         'data' => array(
             'primaryKeyValue' => null,
             'asAction' => 'view',
-            'isLink' => true,
             'isView' => true,
             'meta' => null,
         ),
@@ -113,7 +112,7 @@ class Trex_Service_View extends Trex_Service_BasicAction
         $metaHelper->setLastViewedItem($meta, $result);
 
         $data = $result->toArray();
-        $data = $metaHelper->convertOne($data, $config['data']['asAction'], $meta, $meta, $config['data']['isView']);
+        $data = $metaHelper->convertOne($data, $config['data']['asAction'], $meta, $meta, array('view' => $config['data']['isView']));
                 
         // 设置视图
         $this->_view = array(

@@ -94,7 +94,7 @@ class Trex_Service_Update extends Trex_Service_BasicAction
         }
 
         // 转换,验证
-        $data = $metaHelper->convertOne($config['data']['db'], 'db', $meta, $meta);
+        $data = $metaHelper->convertOne($config['data']['db'], 'db', $meta, $meta, array('view' => false));
         $validateResult = $metaHelper->validateArray($data + $_POST, $meta, $meta);
         if(true !== $validateResult)
         {

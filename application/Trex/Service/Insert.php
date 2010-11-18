@@ -100,7 +100,7 @@ class Trex_Service_Insert extends Trex_Service_BasicAction
             }
         }
 
-        $data = $metaHelper->convertOne($data, 'db', $meta, $meta);
+        $data = $metaHelper->convertOne($data, 'db', $meta, $meta, array('view' => false));
         $data = $metaHelper->setForeignKeyData($meta['model'], $data);
         $validateResult = $metaHelper->validateArray($data + $_POST, $meta, $meta);
         if(true !== $validateResult)

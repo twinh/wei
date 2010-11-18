@@ -28,6 +28,59 @@
 class Qwin_Trex_Metadata extends Qwin_Metadata
 {
     /**
+     * @var array $_convertOption   数据转换的选项
+     *
+     *      -- view                 是否根据视图类关联模型的配置进行转换
+     *                              提示,如果转换的数据作为表单的值显示,应该禁止改选项
+     *
+     *      -- null                 是否将NULL字符串转换为null类型
+     *
+     *      -- type                 是否进行强类型的转换,类型定义在['fieldName]['db']['type']
+     *
+     *      -- meta                 是否使用元数据的converter配置进行转换
+     *
+     *      -- converter            是否使用转换器进行转换
+     *
+     *      -- relatedMeta          是否转换关联的元数据
+     */
+    protected $_convertOption = array(
+        'view'          => true,
+        'null'          => true,
+        'type'          => true,
+        'meta'          => true,
+        'converter'     => true,
+        'link'          => true,
+        'relatedMeta'   => true,
+    );
+
+    /**
+     * @var array $_validateOption  数据验证的选项
+     *
+     *      -- meta                 是否根据元数据的验证配置进行转换
+     *
+     *      -- validator            是否根据验证器进行验证
+     *
+     */
+    protected $_validateOption = array(
+        'meta'          => true,
+        'validator'     => true,
+    );
+
+    /**
+     *
+     * @var array $_queryOption 查询对象的选项
+     *
+     *      -- model                 模型的别名组成的数组
+     *
+     *      -- type                  模型的类型组成的数组
+     *
+     */
+    protected $_queryOption = array(
+        'model'         => array(),
+        'type'          => array(),
+    );
+
+    /**
      * 数据表前缀
      * @var string
      */
@@ -74,149 +127,79 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     }
 
     /**
-     * 获取Doctrine的查询对象
+     * 将元数据的域定义,数据表定义加入模型中
      *
-     * @param array $set 配置
-     * @param boolen $isJoinModel 是否连接关联的模块
-     * @return object Doctrine_Record 查询对象
-     * @todo 缓存$query
+     * @param Qwin_Metadata $meta 元数据对象
+     * @param Doctrine_Record $model Doctrine对象
+     * @return Qwin_Trex_Metadata 当前对象
      */
-    public function getDoctrineQuery($set, $isJoinModel = true)
+    public function metadataToModel(Qwin_Metadata $meta, Doctrine_Record $model)
     {
-        /**
-         * 初始元数据和模型主类
-         */
-        $manager = Doctrine_Manager::getInstance();
-        $metaName = $this->getClassName('Metadata', $set);
-        $metaObj = Qwin_Metadata_Manager::get($metaName);
+        $tablePrefix = $this->getTablePrefix();
 
-        // TODO 表前缀等..
-        if('padb' == $metaObj['db']['type'])
+        // 设置数据表
+        $model->setTableName($tablePrefix . $meta['db']['table']);
+
+        // 设置字段
+        $fieldList = $meta['field']->getAttrList(array('isDbField', 'isDbQuery'));
+        foreach($fieldList as $field)
         {
-            $manager->setCurrentConnection('padb');
-            $tablePrefix = '';
-        } else {
-            $tablePrefix = $this->getTablePrefix();
+            $model->hasColumn($field);
+        }
+        return $this;
+    }
+
+    /**
+     * 通过元数据配置,获取Doctrine的查询对象
+     *
+     * @param Qwin_Metadata $meta 元数据配置
+     * @param Doctrine_Record $model 模型对象
+     * @return Doctrine_Query 查询对象
+     * @todo 缓存查询对象,模型对象
+     * @todo padb问题
+     */
+    public function getDoctrineQuery(Qwin_Metadata $meta, Doctrine_Record $model, $option = false)
+    {
+        $joinModel = array();
+        // 取出要关联的模块
+        if (false != $option) {
+            $option = array_merge($this->_queryOption, $option);
+            foreach ($meta['model'] as $modelName => $modelSet) {
+                if (in_array($modelName, $option['model']) || in_array($modelSet['type'], $option['type'])) {
+                    $joinModel[$modelName] = $modelName;
+                }
+            }            
         }
 
-        $queryField = $metaObj['field']->getAttrList(array('isDbField', 'isDbQuery'));
+        // 自身的转换
+        $set = $meta->getSetFromClass();
         $modelName = $this->getClassName('Model', $set);
-        $modelObj = Qwin::run($modelName);
-        $modelObj->setTableName($tablePrefix . $metaObj['db']['table']);
+        $modelObject = Qwin::run($modelName);
+        $this->metadataToModel($meta, $modelObject);
+        $query = Doctrine_Query::create()->from($modelName);
 
-        //$manager->setAttribute(Doctrine::ATTR_DEFAULT_IDENTIFIER_OPTIONS, array('name' => $metaObj['db']['primaryKey']));
-        foreach($queryField as $field)
-        {
-            $modelObj->hasColumn($field, $metaObj['field'][$field]['db']['type'], $metaObj['field'][$field]['db']['length']);
-        }
+        // 关联模型的转换
+        foreach ($joinModel as $joinModelName) {
+            // 该模型的设置
+            $modelSet = $meta['model'][$joinModelName];
+            $relatedMetaObject = Qwin_Metadata_Manager::get($modelSet['metadata']);
+            $relatedModelObejct = Qwin::run($modelSet['name']);
+            $this->metadataToModel($relatedMetaObject, $relatedModelObejct);
 
-        /**
-         * 初始化Doctrine查询
-         */
-        $connObject = null;
-        $queryClass = null;
-        if('padb' == $metaObj['db']['type'])
-        {
-            $connObject = $manager->getConnection('padb');
-            $queryClass = 'Doctrine_Query_Padb';
-        }
-
-        $query = Doctrine_Query::create($connObject, $queryClass)->from($modelName);
-
-        /**
-         * 加载其他关联的类
-         */
-        if($isJoinModel)
-        {
-            foreach($metaObj['model'] as $model)
-            {
-                // 不连接数据关联的模型
-                if('relatedDb' == $model['type'])
-                {
-                    continue;
-                }
-                Qwin::load($model['metadata']);
-                $linkedMetaObj = Qwin_Metadata_Manager::get($model['metadata']);
-                $queryField = $linkedMetaObj->field->getAttrList(array('isDbField', 'isDbQuery'));
-
-                $linkedModelObj = Qwin::run($model['name']);
-                $linkedModelObj->setTableName($this->getTablePrefix() . $linkedMetaObj['db']['table']);
-                foreach($queryField as $field)
-                {
-                    $linkedModelObj->hasColumn($field);
-                }
-
-                // 设置模型关系
-                call_user_func(
-                    array($modelObj, 'hasOne'),
-                    $model['name'] . ' as ' . $model['alias'],
-                        array(
-                            'local' => $model['local'],
-                            'foreign' => $model['foreign']
-                        )
-                );
-                $query->leftJoin($modelName . '.' . $model['alias'] . ' ' . $model['alias']);
-            }
+            // 设置模型关系
+            call_user_func(
+                array($modelObject, 'hasOne'),
+                $modelSet['name'] . ' as ' . $modelSet['alias'],
+                array(
+                    'local' => $modelSet['local'],
+                    'foreign' => $modelSet['foreign']
+                )
+            );
+            $query->leftJoin($modelName . '.' . $modelSet['alias'] . ' ' . $modelSet['alias']);
         }
         return $query;
     }
-
-    /**
-     * 将主元数据关联的元数据加入到主元数据中
-     *
-     * @param Qwin_Metadata $meta 主元数据
-     */
-    public function connectMetadata(Qwin_Metadata $meta)
-    {
-        $mainMetaField = clone $meta['field'];
-        foreach($meta['model'] as $model)
-        {
-            // 不连接显示型模型
-            if('db' != $model['type'])
-            {
-                continue;
-            }
-            Qwin::load($model['metadata']);
-            $relatedMeta = Qwin_Metadata_Manager::get($model['metadata']);
-            $tmpMeta = array();
-            foreach($relatedMeta['field'] as $field)
-            {
-                // 存储原来的名称
-                $field['form']['_oldName'] = $field['form']['name'];
-                $field['form']['_arrayName'] = $model['alias'] . '[' . $field['form']['name'] . ']';
-                $field['form']['name'] = $model['alias'] . '_' . $field['form']['name'];
-                if($field['form']['_oldName'] == $field['form']['id'])
-                {
-                    $field['form']['id'] = str_replace('_', '-', $field['form']['name']);
-                }
-                $tmpMeta[$field['form']['name']] = $field;
-            }
-            $mainMetaField->addData($tmpMeta);
-        }
-        return $mainMetaField;
-    }
-
-    /**
-     * 计算两个数组的交集,键名来自第一个数组,值来自第二个数组
-     *
-     * @param array $array1 第一个参数数组
-     * @param array $array2
-     * @return array
-     */
-    public function intersect($array1, $array2)
-    {
-        foreach($array1 as $key)
-        {
-            if(isset($array2[$key]))
-            {
-                $array1[$key] = $array2[$key];
-            } else {
-                $array1[$key] = null;
-            }
-        }
-        return $array1;
-    }
-
+    
     /**
      * 为Doctrine查询对象增加查询语句
      *
@@ -778,19 +761,16 @@ return true;
      * @param object $convertObject 转换器的对象,默认是元数据自身
      * @return array 经过转换的数据
      */
-    public function convertOne($data, $action, Qwin_Metadata $meta, $convertObject = null, $isView = false)
+    public function convertOne($data, $action, Qwin_Metadata $meta, $convertObject = null, $option = array())
     {
+        $option = array_merge($this->_convertOption, $option);
         $dataCopy = $data;
         $action = strtolower($action);
 
-        if($isView)
-        {
-            foreach($meta['model'] as $model)
-            {
-                if('view' == $model['type'])
-                {
-                    foreach($model['fieldMap'] as $localField => $foreignField)
-                    {
+        if ($option['view']) {
+            foreach ($meta['model'] as $model) {
+                if ('view' == $model['type']) {
+                    foreach ($model['fieldMap'] as $localField => $foreignField) {
                         !isset($data[$model['alias']][$foreignField]) && $data[$model['alias']][$foreignField] = '';
                         $data[$localField] = $data[$model['alias']][$foreignField];
                     }
@@ -799,13 +779,11 @@ return true;
         }
         
         // 对自身域进行转换
-        foreach($meta['field'] as $field)
-        {
+        foreach ($meta['field'] as $field) {
             $name = $field['form']['name'];
 
             // 初始化两数组的值,如果不存在,则设为空
-            if(isset($data[$name]))
-            {
+            if (isset($data[$name])) {
                 'NULL' == $data[$name] && $data[$name] = null;
                 $newData[$name] = $data[$name];
             } else {
@@ -813,52 +791,51 @@ return true;
             }
 
             // 类型转换
-            if(null != $newData[$name])
-            {
-                if('string' == $field['db']['type'])
-                {
-                    $newData[$name] = (string)$newData[$name];
-                } elseif('integer' == $field['db']['type']) {
-                    $newData[$name] = (int)$newData[$name];
+            if ($option['type']) {
+                if (null != $newData[$name]) {
+                    if ('string' == $field['db']['type']) {
+                        $newData[$name] = (string)$newData[$name];
+                    } elseif ('integer' == $field['db']['type']) {
+                        $newData[$name] = (int)$newData[$name];
+                    }
                 }
             }
 
             // 根据元数据中转换器的配置进行转换
-            if(isset($field['converter'][$action]) && is_array($field['converter'][$action]))
-            {
+            if ($option['meta'] && isset($field['converter'][$action]) && is_array($field['converter'][$action])) {
                 $newData[$name] = $this->convert($field['converter'][$action], $data[$name]);
             }
 
             // 使用转换器中的方法进行转换
-            if(null != $convertObject)
-            {
+            if ($option['converter'] && null != $convertObject) {
                 $methodName = str_replace(array('_', '-'), '', 'convert' . $action . $name);
-                if(method_exists($convertObject, $methodName))
-                {
+                if (method_exists($convertObject, $methodName)) {
                     $newData[$name] = call_user_func_array(
                         array($convertObject, $methodName),
                         array($newData[$name], $name, $newData, $dataCopy)
                     );
                 }
+            }
 
-                // 转换链接
-                if(1 == $field['attr']['isLink'] && method_exists($convertObject, 'setIsLink'))
-                {
-                    $newData[$name] = call_user_func_array(
-                        array($convertObject, 'setIsLink'),
-                        array($newData[$name], $name, $newData, $dataCopy, $action)
-                    );
-                }
+            // 转换链接
+            if($option['link'] && 1 == $field['attr']['isLink'] && method_exists($convertObject, 'setIsLink')) {
+                $newData[$name] = call_user_func_array(
+                    array($convertObject, 'setIsLink'),
+                    array($newData[$name], $name, $newData, $dataCopy, $action)
+                );
             }
         }
 
         // 对关联域进行转换
-        foreach($meta['metadata'] as $name => $relatedMeta)
-        {
-            !isset($data[$name]) && $data[$name] = array();
-            $newData[$name] = $this->convertOne($data[$name], $action, $relatedMeta, $relatedMeta);
+        if ($option['relatedMeta']) {
+            foreach ($meta['metadata'] as $name => $relatedMeta) {
+                !isset($data[$name]) && $data[$name] = array();
+                // 不继续转换关联元数据
+                $option['relatedMeta'] = false;
+                $newData[$name] = $this->convertOne($data[$name], $action, $relatedMeta, $relatedMeta, $option);
+            }
         }
-
+        
         return $newData;
     }
 
@@ -1277,10 +1254,12 @@ return true;
      * @param object|null $validateObj 验证器对象
      * @return true/Qwin_Validator_Result true表示通过验证,Qwin_Validator_Result表示不通过,对象中包含错误信息
      */
-    public function validateOne($name, $data, $validator, $validateObj = null)
+    public function validateOne($name, $data, $validator, $validateObj = null, $option = array())
     {
+        $option = array_merge($this->_validateOption, $option);
+
         // 根据验证器的方法进行验证
-        if (null != $validateObj) {
+        if ($option['validator'] && null != $validateObj) {
             $method = 'validate' . str_replace(array('_', '-'), '', $name);
             !isset($data[$name]) && $data[$name] = null;
             $result = Qwin::callByArray(array(
@@ -1296,7 +1275,7 @@ return true;
         }
 
         // 根据元数据进行验证
-        if(empty($validator['rule']))
+        if(!$option['validator'] || empty($validator['rule']))
         {
             return true;
         }
@@ -1500,85 +1479,6 @@ return true;
         }
         return $data;
     }
-
-
-    // TODO !!
-    public function convertUrlQuery2($data, $sql_data)
-    {
-        foreach($data as $key => $val)
-        {
-            if(isset($this->__meta['field'][$key]['list']['isLink']) && $this->__meta['field'][$key]['list']['isLink'] == true)
-            {
-                $data[$key] = '<a href="' . url(array('admin', $this->_set['controller']), array(_S('url', '_DATA') . '%5B' . $key . '%5D' => $sql_data[$key])) . '">' . $val . '</a>';
-            }
-        }
-        return $data;
-    }
-
-    public function getTipData($set)
-    {
-        $validatorMessage1 = $this->getCommonClassList('validator_message', 'rsc');
-        $validatorMessage2 = $this->getCommonClassList('validator_message');
-        $validatorMessage = array_combine($validatorMessage1, $validatorMessage2);
-
-        $tipData = array();
-        foreach($set as $field)
-        {
-            // 读取域描述
-            if(isset($field['basic']['descrip']) && '' != $field['basic']['descrip'])
-            {
-                if(is_array($field['basic']['descrip']))
-                {
-                    foreach($field['basic']['descrip'] as $tip)
-                    {
-                        $tipData[$field['form']['name']][] = array(
-                            'icon' => 'ui-icon-info',
-                            'data' => $tip,
-                            'id' => '',
-                        );
-                    }
-                } else {
-                    $tipData[$field['form']['name']][] = array(
-                        'icon' => 'ui-icon-info',
-                        'data' => $field['basic']['descrip'],
-                        'id' => '',
-                    );
-                }
-            }
-            // 读取验证信息
-            $validator = &$field['validator'];
-            if(isset($validator['rule']) && 0 != count($validator['rule']))
-            {
-                $validator['rule'] = $this->makeRequiredAtFront($validator['rule']);
-                foreach($validator['rule'] as $method => $val)
-                {
-                    if(isset($validator['message'][$method]) && '' != $validator['message'][$method])
-                    {
-                        $tipData[$field['form']['name']][] = array(
-                            'icon' => 'ui-icon-alert',
-                            'data' => $validator['message'][$method],
-                            'id' => 'validator-method-' . $method,
-                        );
-                    // 错误消息为空,需加载默认消息
-                    } else {
-                        $msg = '';
-                        if(isset($validatorMessage[$method]))
-                        {
-                            $msg = $validatorMessage[$method];
-                        }
-                        $msg = $this->format($msg, $val);
-                        $tipData[$field['form']['name']][] = array(
-                            'icon' => 'ui-icon-alert',
-                            'data' => $msg,
-                            'id' => 'validator-' . $field['form']['name'] . '-' . $method,
-                        );
-                    }
-                }
-            }
-        }
-        return $tipData;
-    }
-
     public function makeRequiredAtFront($rule)
     {
         // 将必填项放在数组第一位
@@ -1616,20 +1516,6 @@ return true;
             $data = str_replace($search, $repalce, $data);
         }
         return $data;
-    }
-
-    public function metadataToModel($meta, $model)
-    {
-        $config = Qwin::run('-ini')->getConfig();
-        // 设置数据表
-        $model->setTableName($config['db']['prefix'] . $meta['db']['table']);
-         // 数据库查询的字段数组
-        $fieldList = $this->getSettingList($meta['field'], 'isDbQuery');
-        foreach($fieldList as $val)
-        {
-            $model->hasColumn($val);
-        }
-        return $model;
     }
 
     /**
