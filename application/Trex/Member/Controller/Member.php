@@ -130,7 +130,7 @@ class Trex_Member_Controller_Member extends Trex_ActionController
 
     public function isUsernameExists($username)
     {
-        $query = $this->_meta->getDoctrineQuery($this->_set);
+        $query = $this->_meta->getQueryBySet($this->_set);
         $result = $query->where('username = ?', $username)
             ->fetchOne();
         if(false != $result)

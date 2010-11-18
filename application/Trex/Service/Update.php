@@ -70,13 +70,16 @@ class Trex_Service_Update extends Trex_Service_BasicAction
         $meta = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
         $primaryKeyValue = isset($config['data']['db'][$primaryKey]) ? $config['data']['db'][$primaryKey] : null;
-        $metaHelper->loadRelatedMetadata($meta, 'db');
         Qwin::run('Qwin_Class_Extension')
             ->setNamespace('validator')
             ->addClass('Qwin_Validator_JQuery');
         
         // 从模型获取数据
-        $query = $metaHelper->getDoctrineQuery($this->_set);
+        $query = $metaHelper->getQueryBySet($this->_set, array(
+            'type' => array(
+                'db'
+            ),
+        ));
         $result = $query->where($primaryKey . ' = ?', $primaryKeyValue)->fetchOne();
 
         // 记录不存在,加载错误视图

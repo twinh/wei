@@ -138,8 +138,8 @@ class Trex_Controller extends Qwin_Trex_Controller
      */
     protected function _isAllowVisited()
     {
-        $ses = $this->session;
-        $member = $ses->get('member');
+        $session = $this->session;
+        $member = $session->get('member');
         $metaHelper = Qwin::run('Qwin_Trex_Metadata');
 
         // 未登陆则默认使用游客账号
@@ -150,16 +150,17 @@ class Trex_Controller extends Qwin_Trex_Controller
                 'module' => 'Member',
                 'controller' => 'Member',
             );
-            $query = $metaHelper->getDoctrineQuery($set);
-            $result = $query
+            $result = $metaHelper
+                ->getQueryBySet($set)
                 ->where('username = ?', 'guest')
                 ->fetchOne();
             $member = $result->toArray();
             
-            $ses->set('member',  $member);
-            $ses->set('permisson', $member['group']['permission']);
-            $ses->set('style', $member['theme']);
-            $ses->set('language', $member['language']);
+            $session
+                ->set('member',  $member)
+                ->set('permisson', $member['group']['permission'])
+                ->set('style', $member['theme'])
+                ->set('language', $member['language']);
         }
 
         // 逐层权限判断

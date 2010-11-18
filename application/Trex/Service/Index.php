@@ -60,7 +60,6 @@ class Trex_Service_Index extends Trex_Service_BasicAction
         $meta = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
         $metaHelper = $this->metaHelper;
-        $metaHelper->loadRelatedMetadata($meta, 'db');
 
         $layout = $metaHelper->getListLayout($meta);
         if(null != $config['data']['list'])

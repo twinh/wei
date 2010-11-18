@@ -83,7 +83,6 @@ class Trex_Management_Controller_Namespace extends Trex_Controller
             $primaryKey = $meta['db']['primaryKey'];
             $primaryKeyValue = $config['data']['primaryKeyValue'];
 
-            $metaHelper->loadRelatedMetadata($meta, 'db');
             $namespace = $this->_app->getNamespace($this->_path);
             $banNamespace = implode(',', $namespace);
 

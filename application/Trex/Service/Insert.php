@@ -73,8 +73,11 @@ class Trex_Service_Insert extends Trex_Service_BasicAction
         // 初始化常用的变量
         $meta = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
-        $query = $metaHelper->getDoctrineQuery($this->_set);
-        $metaHelper->loadRelatedMetadata($meta, 'db');
+        $query = $metaHelper->getQueryBySet($this->_set, array(
+            'type' => array(
+                'db'
+            ),
+        ));
         Qwin::run('Qwin_Class_Extension')
             ->setNamespace('validator')
             ->addClass('Qwin_Validator_JQuery');

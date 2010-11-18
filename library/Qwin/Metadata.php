@@ -56,7 +56,7 @@ abstract class Qwin_Metadata extends Qwin_Metadata_Abstract
     /**
      * 设置元数据
      *
-     * @return object 当前对象
+     * @return Qwin_Metadata 当前对象
      */
     public function setMetadata()
     {
@@ -67,14 +67,15 @@ abstract class Qwin_Metadata extends Qwin_Metadata_Abstract
      * 添加一组元数据
      * 
      * @param array $metadata
+     * @return Qwin_Metadata 当前对象
      */
     public function parseMetadata($metadata)
     {
-        foreach($metadata as $key => $row)
-        {
+        foreach ($metadata as $key => $row) {
             $type = ucfirst(strtolower($key));
             $this->_add($type, $row);
         }
+        return $this;
     }
 
     /**
@@ -85,17 +86,14 @@ abstract class Qwin_Metadata extends Qwin_Metadata_Abstract
      */
     private function _add($type, $data)
     {
-        if(!in_array($type, $this->_banType))
-        {
+        if (!in_array($type, $this->_banType)) {
             $name = strtolower($type);
             $class = 'Qwin_Metadata_Element_' . $type;
-            if(class_exists($class))
-            {
+            if (class_exists($class)) {
                 // 加入到原始数据中
                 //!isset($this->_originalData[$name]) && $this->_originalData[$name] = array();
                 // 加入到数据中
-                if(!isset($this->_data[$name]))
-                {
+                if (!isset($this->_data[$name])) {
                     $this->_data[$name] = new $class;
                 }
                 $this->_data[$name]->addData($data)->format();
@@ -114,12 +112,11 @@ abstract class Qwin_Metadata extends Qwin_Metadata_Abstract
     {
         $action = substr($name, 0, 3);
         $type = substr($name, 3);
-        if('add' == $action)
-        {
+        if ('add' == $action) {
             return $this->_add($type, $args[0]);
-        } elseif('get' == $action) {
-            return $this->_data[strtolower($type)];
-        } elseif('set' == $action) {
+        } elseif ('get' == $action && isset($this->_data[$type])) {
+            return $this->_data[$type];
+        } elseif ('set' == $action) {
             return $this->_set($type, $args[0]);
         }
         require_once 'Qwin/Metadata/Exception.php';

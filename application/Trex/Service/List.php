@@ -73,12 +73,16 @@ class Trex_Service_List extends Trex_Service_BasicAction
         parent::process($config['set']);
 
         // 初始化常用的变量
+        $set        = $this->_set;
         $meta       = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
-        $metaHelper->loadRelatedMetadata($meta, 'db');
 
         // 从模型获取数据
-        $query = $metaHelper->getDoctrineQuery($this->_set);
+        $query = $metaHelper->getQueryBySet($set, array(
+            'type' => array(
+                'db', 'view'
+            ),
+        ));
         $metaHelper
             ->addSelectToQuery($meta, $query)
             ->addOrderToQuery($meta, $query, $config['data']['order'])

@@ -65,12 +65,9 @@ class Trex_Service_Form extends Trex_Service_BasicAction
         $primaryKey = $meta['db']['primaryKey'];
         $primaryKeyValue = $config['data']['primaryKeyValue'];
 
-        $metaHelper->loadRelatedMetadata($meta, 'db');
-
-        $modelClass = $metaHelper->getClass('Model', $this->_set);
-        $query = $metaHelper->getDoctrine($meta, $modelClass, array('type' => array('db')));
-p($query->execute()->toArray());exit;
-        $query = $metaHelper->getDoctrineQuery($this->_set);
+        $modelClass = $metaHelper->getClassName('Model', $this->_set);
+        $model = Qwin::run($modelClass);
+        $query = $metaHelper->getQuery($meta, $model, array('type' => array('db')));
         
         /**
          * 三种模式　
