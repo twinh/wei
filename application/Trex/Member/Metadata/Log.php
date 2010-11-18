@@ -111,7 +111,7 @@ class Trex_Member_Metadata_Log extends Qwin_Trex_Metadata
     {
         $value = md5($value);
         $result = Qwin::run('Qwin_Trex_Metadata')
-            ->getDoctrineQuery(array(
+            ->getQueryBySet(array(
                 'namespace' => 'Trex',
                 'module' => 'Member',
                 'controller' => 'Member',

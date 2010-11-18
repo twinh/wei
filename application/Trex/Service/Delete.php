@@ -63,7 +63,7 @@ class Trex_Service_Delete extends Trex_Service_BasicAction
         $meta = $this->_meta;
         $primaryKey = explode(',', $config['data']['primaryKeyValue']);
 
-        $query = $metaHelper->getDoctrineQuery($this->_set);
+        $query = $metaHelper->getQueryBy($this->_set);
 
         $alias = $query->getRootAlias();
         '' != $alias && $alias .= '.';

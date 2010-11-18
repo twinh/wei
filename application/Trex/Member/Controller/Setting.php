@@ -65,14 +65,12 @@ class Trex_Member_Controller_Setting extends Trex_Controller
                 'data' => get_defined_vars(),
             );
         } else {
-            $ses = Qwin::run('-ses');
-
             $member = $ses->get('member');
             $language = $ses->get('language');
             $language = Qwin::run('Qwin_Language')->toStandardStyle($language);
             
             $result = $this->metaHelper
-                    ->getDoctrineQuery(array(
+                    ->getQueryBySet(array(
                         'namespace' => 'Trex',
                         'module' => 'Member',
                         'controller' => 'Member',

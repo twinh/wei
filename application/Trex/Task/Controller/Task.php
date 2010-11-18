@@ -388,15 +388,16 @@ class Trex_Task_Controller_Task extends Trex_ActionController
 
     public function convertDbEmailTo($value, $name, $data, $copyData)
     {
+        $set = array(
+            'namespace' => 'Trex',
+            'module' => 'Member',
+            'controller' => 'Member',
+        );
         $this->_emailMember = $this
-                ->_meta
-                ->getDoctrineQuery(array(
-                    'namespace' => 'Trex',
-                    'module' => 'Member',
-                    'controller' => 'Member',
-                ))
-                ->where('id = ?', $_POST['assign_to'])
-                ->fetchOne();
+            ->metaHelper
+            ->getQueryBySet($set)
+            ->where('id = ?', $_POST['assign_to'])
+            ->fetchOne();
         return $this->_emailMember['email'];
     }
 

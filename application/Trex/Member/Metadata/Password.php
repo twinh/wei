@@ -117,7 +117,7 @@ class Trex_Member_Metadata_Password extends Trex_Metadata
     {
         $set = $this->getSetFromClass();
         $lang = Qwin::run('-lang');
-        $query = $this->metaHelper->getDoctrineQuery($set);
+        $query = $this->metaHelper->getQueryBy($set);
         $result = $query
             ->where('id = ?', $data['id'])
             ->fetchOne();

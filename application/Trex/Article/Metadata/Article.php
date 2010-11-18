@@ -97,6 +97,9 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         'isList' => 0,
                         'isView' => 0,
                     ),
+                    'db' => array(
+                        'type' => 'array',
+                    ),
                 ),
                 'title_color' => array(
                     'form' => array(

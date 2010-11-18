@@ -298,10 +298,9 @@ class Trex_Metadata extends Qwin_Metadata
      */
     public function convertAddOrder($value, $name, $data, $copyData)
     {
-        $set = $this->getSetFromClass();
-        $query = $this->metaHelper->getDoctrineQuery($set);
+        $query = $this->metaHelper->getQuery($this);
         $result = $query
-            ->select($this->_meta['db']['primaryKey'] . ', order')
+            ->select($this->db['primaryKey'] . ', order')
             ->orderBy('order DESC')
             ->fetchOne();
         if(false != $result)

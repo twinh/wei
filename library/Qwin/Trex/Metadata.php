@@ -23,6 +23,7 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2009-11-24 20:45:11
+ * @todo        分离出验证类,转换类,Doctrine处理类等
  */
 
 class Qwin_Trex_Metadata extends Qwin_Metadata
@@ -84,17 +85,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      * 数据表前缀
      * @var string
      */
-    public $tablePrefix;
-
-    public function toDoctrine(Qwin_Metadata $meta, Doctrine_Record $model)
-    {
-        $model->setTableName($meta->tablePrefix . $meta->db['table']);
-        $queryField = $meta->field->getAttrList('isDbQuery');
-        foreach($meta->field as $field)
-        {
-            $model->hasColumn($field['form']['name']);
-        }
-    }
+    protected $_tablePrefix;
 
     /**
      * 获取数据表前缀,方便调用
@@ -103,13 +94,16 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      */
     public function getTablePrefix($adapter = null)
     {
-        if(null == $this->tablePrefix)
+        if(null != $this->_tablePrefix)
         {
-            $config = Qwin::run('-ini')->getConfig();
-            $mainAdapter = $config['database']['mainAdapter'];
-            $this->tablePrefix = $config['database']['adapter'][$mainAdapter]['prefix'];
+            return $this->_tablePrefix;
         }
-        return $this->tablePrefix;
+        if (null == $adapter) {
+            $config = Qwin::run('-ini')->getConfig();
+            $adapter = $config['database']['mainAdapter'];
+        }
+        $this->_tablePrefix = $config['database']['adapter'][$adapter]['prefix'];
+        return $this->_tablePrefix;
     }
 
     /**
@@ -142,11 +136,24 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
 
         // 设置字段
         $fieldList = $meta['field']->getAttrList(array('isDbField', 'isDbQuery'));
-        foreach($fieldList as $field)
-        {
+        foreach ($fieldList as $field) {
             $model->hasColumn($field);
         }
         return $this;
+    }
+
+    /**
+     * 根据元数据配置,获取Doctrine的查询对象
+     *
+     * @param array $set 元数据配置
+     */
+    public function getQueryBySet($set, $option = false)
+    {
+        $metaClass  = $this->getClassName('Metadata', $set);
+        $modelClass = $this->getClassName('Model', $set);
+        $meta       = Qwin_Metadata_Manager::get($metaClass);
+        $model      = Qwin::run($modelClass);
+        return $this->getQuery($meta, $model, $option);
     }
 
     /**
@@ -158,8 +165,17 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      * @todo 缓存查询对象,模型对象
      * @todo padb问题
      */
-    public function getDoctrineQuery(Qwin_Metadata $meta, Doctrine_Record $model, $option = false)
+    public function getQuery(Qwin_Metadata $meta, Doctrine_Record $model = null, $option = false)
     {
+        // 未定义模型,则初始化关联模型
+        if (null == $model) {
+            $set = $meta->getSetFromClass();
+            $modelClass = $this->getClassName('Model', $set);
+            $model = Qwin::run($modelClass);
+        } else {
+            $modelClass = get_class($model);
+        }
+
         $joinModel = array();
         // 取出要关联的模块
         if (false != $option) {
@@ -172,11 +188,9 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         }
 
         // 自身的转换
-        $set = $meta->getSetFromClass();
-        $modelName = $this->getClassName('Model', $set);
-        $modelObject = Qwin::run($modelName);
-        $this->metadataToModel($meta, $modelObject);
-        $query = Doctrine_Query::create()->from($modelName);
+        $this->metadataToModel($meta, $model);
+        $query = Doctrine_Query::create()->from($modelClass);
+
 
         // 关联模型的转换
         foreach ($joinModel as $joinModelName) {
@@ -188,14 +202,14 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
 
             // 设置模型关系
             call_user_func(
-                array($modelObject, 'hasOne'),
+                array($model, 'hasOne'),
                 $modelSet['name'] . ' as ' . $modelSet['alias'],
                 array(
                     'local' => $modelSet['local'],
                     'foreign' => $modelSet['foreign']
                 )
             );
-            $query->leftJoin($modelName . '.' . $modelSet['alias'] . ' ' . $modelSet['alias']);
+            $query->leftJoin($modelClass . '.' . $modelSet['alias'] . ' ' . $modelSet['alias']);
         }
         return $query;
     }
@@ -226,8 +240,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         /**
          * 设置关联类的查询语句
          */
-        foreach($meta['model'] as $model)
-        {
+        foreach ($meta['model'] as $model) {
             Qwin::load($model['metadata']);
             $linkedMetaObj = Qwin_Metadata_Manager::get($model['metadata']);
 
@@ -238,8 +251,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
                           ->setAttr($primaryKey, 'isDbQuery', true);
             
             $queryField = $linkedMetaObj->field->getAttrList(array('isDbQuery', 'isDbField'));
-            foreach($queryField as $field)
-            {
+            foreach ($queryField as $field) {
                 $query->addSelect($model['alias'] . '.' . $field);
             }
         }
@@ -256,20 +268,18 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      */
     public function getUrlOrder($fieldName = 'orderField', $typeName = 'orderType')
     {
-        $request = Qwin::run('Qwin_Request');
+        $request = Qwin::run('-request');
 
         $orderField = $request->g('orderField');
 
         // 地址未设置排序
-        if(null == $orderField)
-        {
+        if (null == $orderField) {
             return array();
         }
 
         $orderType = strtoupper($request->g('orderType'));
         $typeOption = array('DESC', 'ASC');
-        if(!in_array($orderType, $typeOption))
-        {
+        if (!in_array($orderType, $typeOption)) {
             $orderType = $typeOption[0];
         }
 
@@ -292,20 +302,17 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         $request = Qwin::run('Qwin_Request');
 
         $searchField = $request->g($fieldName);
-        if(null == $searchField)
-        {
+        if (null == $searchField) {
             return array();
         }
 
         $searchSet = array();
         $searchValue = $request->g($valueName);
         $searchOper  = $request->g($operName);
-        if(!is_array($searchField))
-        {
+        if (!is_array($searchField)) {
             $searchSet[] = array($searchField, $searchValue, $searchOper);
         } else {
-            foreach($searchField as $key => $value)
-            {
+            foreach ($searchField as $key => $value) {
                 !isset($searchValue[$key]) && $searchValue[$key] = null;
                 !isset($searchOper[$key]) && $searchOper[$key] = null;
                 $searchSet[] = array(
@@ -363,14 +370,11 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     {
         $request = Qwin::run('Qwin_Request');
         $list = $request->g($listName);
-        if(null != $list)
-        {
+        if (null != $list) {
             $list = explode($delimiter, $list);
-            foreach($list as $key => $value)
-            {
+            foreach ($list as $key => $value) {
                 $pos = strpos($value, '.');
-                if(false !== $pos)
-                {
+                if (false !== $pos) {
                     $list[$key] = array(
                         substr($value, 0, $pos),
                         substr($value, $pos + 1),
@@ -398,8 +402,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     {
         $ini = Qwin::run('-ini');
         $metadataName = $ini->getClassName('Metadata', $set);
-        if(!class_exists($metadataName))
-        {
+        if (!class_exists($metadataName)) {
             return null;
         }
         $meta = Qwin_Metadata_Manager::get($metadataName);
@@ -410,8 +413,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     {
         $ini = Qwin::run('-ini');
         $metadataName = $ini->getClassName('Metadata', $set);
-        if(class_exists($metadataName))
-        {
+        if (class_exists($metadataName)) {
             $meta = Qwin_Metadata_Manager::get($metadataName);
         } else {
             $metadataName = 'Trex_Metadata';
@@ -441,16 +443,13 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         $queryField = $meta['field']->getAttrList('isDbQuery');
         $orderType = array('DESC', 'ASC');
 
-        foreach($order as $fieldSet)
-        {
+        foreach ($order as $fieldSet) {
             // 不被允许的域名称
-            if(!in_array($fieldSet[0], $queryField))
-            {
+            if (!in_array($fieldSet[0], $queryField)) {
                 continue;
             }
             $fieldSet[1] = strtoupper($fieldSet[1]);
-            if(!in_array($fieldSet[1], $orderType))
-            {
+            if (!in_array($fieldSet[1], $orderType)) {
                 $fieldSet[1] = $orderType[0];
             }
             $query->addOrderBy($alias . $fieldSet[0] . ' ' .  $fieldSet[1]);
@@ -495,22 +494,18 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             'nc' => 'NOT LIKE',
         );
         
-        foreach($search as $fieldSet)
-        {
+        foreach ($search as $fieldSet) {
             // 不被允许的域名称
-            if(!in_array($fieldSet[0], $queryField))
-            {
+            if (!in_array($fieldSet[0], $queryField)) {
                 continue;
             }
-            if(!isset($fieldSet[2]))
-            {
+            if (!isset($fieldSet[2])) {
                 $fieldSet[2] = key($searchType);
             } else {
                 $fieldSet[2] = strtolower($fieldSet[2]);
                 !isset($searchType[$fieldSet[2]]) && $fieldSet[2] = key($searchType);
             }
-            switch($fieldSet[2])
-            {
+            switch ($fieldSet[2]) {
                 case 'bw':
                 case 'bn':
                     $value = '%' . $this->_escapeWildcard($fieldSet[1]);
@@ -538,23 +533,18 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
                     $value = $fieldSet[1];
                     break;
             }
-            if('in' == $fieldSet[2] || 'ni' == $fieldSet[2])
-            {
+            if ('in' == $fieldSet[2] || 'ni' == $fieldSet[2]) {
                 $valueSign = '(?)';
             } else {
                 $valueSign = '?';
             }
 
             // null and not null
-            if(null == $value)
-            {
-                if('eq' == $fieldSet[2])
-                {
+            if(null == $value) {
+                if ('eq' == $fieldSet[2]) {
                     $query->andWhere($alias . $fieldSet[0] . ' IS NULL');
                     continue;
-                }
-                elseif('ne' == $fieldSet[2])
-                {
+                } elseif ('ne' == $fieldSet[2]) {
                     $query->andWhere($alias . $fieldSet[0] . ' IS NOT NULL');
                     continue;
                 }
@@ -588,11 +578,9 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     public function addOffsetToQuery(Qwin_Metadata $meta, Doctrine_Query $query, $addition = null)
     {
         $offset = 0;
-        if(null != $addition)
-        {
+        if (null != $addition) {
             $addition = intval($addition);
-            if(0 < $addition)
-            {
+            if (0 < $addition) {
                 $offset = $addition;
             }
         }
@@ -611,144 +599,14 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     public function addLimitToQuery(Qwin_Metadata $meta, Doctrine_Query $query, $addition = null)
     {
         $limit = 0;
-        if(null != $addition)
-        {
+        if (null != $addition) {
             $addition = intval($addition);
-            if(0 < $addition)
-            {
+            if (0 < $addition) {
                 $limit = $addition;
             }
         }
         $query->limit($limit);
         return $this;
-    }
-
-    public function addMetadataToQuery(Qwin_Metadata $meta, $name, $query)
-    {
-        if(!isset($meta['model'][$name]))
-        {
-            return false;
-        }
-        $relatedModel = Qwin::run($meta['model'][$name]['name']);
-        $relatedMeta = Qwin_Metadata_Manager::get($meta['model'][$name]['metadata']);
-
-        // 设置字段
-        $queryField = $relatedMeta['field']->getAttrList(array('isDbField', 'isDbQuery'));
-        foreach($queryField as $field)
-        {
-            $relatedModel->hasColumn($field);
-        }
-        
-        // 设置模型关系
-        call_user_func(
-            array($relatedModel, 'hasOne'),
-            $meta['model'][$name]['name'] . ' as ' . $meta['model'][$name]['alias'],
-                array(
-                    'local' => $meta['model'][$name]['local'],
-                    'foreign' => $meta['model'][$name]['foreign']
-                )
-        );
-        
-
-        $query->leftJoin('Trex_Article_Model_Article' . '.' . $meta['model'][$name]['alias'] . ' ' . $meta['model'][$name]['alias']);
-return true;
-        /*$config = Qwin::run('-ini')->getConfig();
-        // 设置数据表
-        $model->setTableName($config['db']['prefix'] . $meta['db']['table']);
-         // 数据库查询的字段数组
-        $fieldList = $this->getSettingList($meta['field'], 'isDbQuery');
-        foreach($fieldList as $val)
-        {
-            $model->hasColumn($val);
-        }
-        return $model;*/
-        
-
-        foreach($metaObj['model'] as $model)
-        {
-            // 不连接数据关联的模型
-            if('relatedDb' == $model['type'])
-            {
-                continue;
-            }
-            Qwin::load($model['metadata']);
-            $linkedMetaObj = Qwin_Metadata_Manager::get($model['metadata']);
-            $queryField = $linkedMetaObj->field->getAttrList(array('isDbField', 'isDbQuery'));
-
-            $linkedModelObj = Qwin::run($model['name']);
-            $linkedModelObj->setTableName($this->getTablePrefix() . $linkedMetaObj['db']['table']);
-            foreach($queryField as $field)
-            {
-                $linkedModelObj->hasColumn($field);
-            }
-
-            // 设置模型关系
-            call_user_func(
-                array($modelObj, 'hasOne'),
-                $model['name'] . ' as ' . $model['alias'],
-                    array(
-                        'local' => $model['local'],
-                        'foreign' => $model['foreign']
-                    )
-            );
-            $query->leftJoin($modelName . '.' . $model['alias'] . ' ' . $model['alias']);
-        }
-    }
-
-    /**
-     * 加载关联的元数据,即对model键名中的元数据进行初始化
-     * 不在元数据初始化时加载,是为了减少不必要的资源消耗
-     *
-     * @param Qwin_Metadata $meta 元数据对象
-     * @param mixed $modelType 加载的模型类型
-     * @return object 当前对象
-     */
-    public function loadRelatedMetadata(Qwin_Metadata $meta, $modelType = null)
-    {
-        if(is_string($modelType))
-        {
-            $modelType = array($modelType);
-        }
-        foreach($meta['model'] as $name => $model)
-        {
-            // 已加载
-            if(isset($meta['metadata'][$name]))
-            {
-                continue;
-            }
-            if(null == $modelType || in_array($model['type'], $modelType))
-            {
-                $meta['metadata'][$name] = Qwin_Metadata_Manager::get($model['metadata']);
-            }
-        }
-        return $this;
-    }
-
-    public function getFormFieldMetadata(Qwin_Metadata $meta)
-    {
-       
-        $mainMetaField = clone $meta['field'];
-        $formField = new Qwin_Metadata_Element_Field();
-        // 创建一个纯字段的元数据,用于表单
-        foreach($meta['metadata'] as $name => $relatedMeta)
-        {
-            $tmpMeta = array();
-            foreach($relatedMeta['field'] as $field)
-            {
-                // 存储原来的名称
-                $field['form']['_oldName'] = $field['form']['name'];
-                $field['form']['_arrayName'] = $name . '[' . $field['form']['name'] . ']';
-                $field['form']['name'] = $name . '[' . $field['form']['name'] . ']';//$name . '_' . $field['form']['name'];
-                if($field['form']['_oldName'] == $field['form']['id'])
-                {
-                    $field['form']['id'] = str_replace('_', '-', $field['form']['name']);
-                }
-                $tmpMeta[$field['form']['name']] = $field;
-            }
-            $mainMetaField->addData($tmpMeta);
-        }
-        p($mainMetaField);exit;
-        return $mainMetaField;
     }
 
     /**
@@ -797,6 +655,10 @@ return true;
                         $newData[$name] = (string)$newData[$name];
                     } elseif ('integer' == $field['db']['type']) {
                         $newData[$name] = (int)$newData[$name];
+                    } elseif ('float' == $field['db']['type']) {
+                        $newData[$name] = (float)$newData[$name];
+                    } elseif ('array' == $field['db']['type']) {
+                        $newData[$name] = (array)$newData[$name];
                     }
                 }
             }
@@ -818,7 +680,7 @@ return true;
             }
 
             // 转换链接
-            if($option['link'] && 1 == $field['attr']['isLink'] && method_exists($convertObject, 'setIsLink')) {
+            if ($option['link'] && 1 == $field['attr']['isLink'] && method_exists($convertObject, 'setIsLink')) {
                 $newData[$name] = call_user_func_array(
                     array($convertObject, 'setIsLink'),
                     array($newData[$name], $name, $newData, $dataCopy, $action)
@@ -826,9 +688,9 @@ return true;
             }
         }
 
-        // 对关联域进行转换
+        // 对db类型的关联元数据进行转换
         if ($option['relatedMeta']) {
-            foreach ($meta['metadata'] as $name => $relatedMeta) {
+            foreach ($this->getModelMetadataByType($meta, 'db') as $name => $relatedMeta) {
                 !isset($data[$name]) && $data[$name] = array();
                 // 不继续转换关联元数据
                 $option['relatedMeta'] = false;
@@ -865,11 +727,24 @@ return true;
      */
     public function convertArray($data, $action, Qwin_Metadata $meta, $convertObject = null, $isView = false)
     {
-        foreach($data as &$row)
-        {
+        foreach ($data as &$row) {
             $row = $this->convertOne($row, $action, $meta, $convertObject, $isView);
         }
         return $data;
+    }
+    
+    public function getModelMetadataByType($meta, $type)
+    {
+        $result = array();
+        foreach ($meta['model'] as $name => $model) {
+            if ($model['enabled'] && $type == $model['type']) {
+                if (!isset($meta['metadata'][$name])) {
+                    $meta['metadata'][$name] = Qwin_Metadata_Manager::get($model['metadata']);
+                }
+                $result[$name] = $meta['metadata'][$name];
+            }
+        }
+        return $result;
     }
 
     /**
@@ -880,10 +755,8 @@ return true;
      */
     public function getUrlData($data)
     {
-        foreach($data as $key => $val)
-        {
-            if(isset($_GET['_data'][$key]) && '' != $_GET['_data'][$key])
-            {
+        foreach ($data as $key => $val) {
+            if (isset($_GET['_data'][$key]) && '' != $_GET['_data'][$key]) {
                 $data[$key] = $_GET['_data'][$key];
             }
         }
@@ -892,23 +765,19 @@ return true;
 
     public function getDefaultLayout($meta, array $layout = null, $relatedName = false)
     {
-        foreach($meta['field'] as $name => $field)
-        {
+        foreach ($meta['field'] as $name => $field) {
             $group = $field['basic']['group'];
-            if(!isset($layout[$group]))
-            {
+            if (!isset($layout[$group])) {
                 $layout[$group] = array();
             }
 
             // 使用order作为键名
             $order = $field['basic']['order'];
-            while(isset($layout[$group][$order]))
-            {
+            while (isset($layout[$group][$order])) {
                 $order++;
             }
             
-            if(!$relatedName)
-            {
+            if (!$relatedName) {
                 $layout[$group][$order] = $field['form']['name'];
             } else {
                 $layout[$group][$order] = array(
@@ -916,17 +785,12 @@ return true;
                 );
             }
         }
-        foreach($meta['metadata'] as $key => $relatedMeta)
-        {
-            if('db' == $meta['model'][$key]['type'])
-            {
-                $layout = $this->getDefaultLayout($relatedMeta, $layout, $key);
-            }
+        foreach ($this->getModelMetadataByType($meta, 'db') as $key => $relatedMeta) {
+             $layout = $this->getDefaultLayout($relatedMeta, $layout, $key);
         }
 
         // 根据键名排序
-        if(!$relatedName)
-        {
+        if (!$relatedName) {
             array_walk($layout, 'ksort');
         }
 
@@ -935,28 +799,23 @@ return true;
 
     public function getViewLayout($meta, array $layout = null, $relatedName = false)
     {
-        foreach($meta['field'] as $name => $field)
-        {
-            if(0 == $field['attr']['isView'])
-            {
+        foreach ($meta['field'] as $name => $field) {
+            if (0 == $field['attr']['isView']) {
                 continue;
             }
             
             $group = $field['basic']['group'];
-            if(!isset($layout[$group]))
-            {
+            if (!isset($layout[$group])) {
                 $layout[$group] = array();
             }
 
             // 使用order作为键名
             $order = $field['basic']['order'];
-            while(isset($layout[$group][$order]))
-            {
+            while (isset($layout[$group][$order])) {
                 $order++;
             }
 
-            if(!$relatedName)
-            {
+            if (!$relatedName) {
                 $layout[$group][$order] = $field['form']['name'];
             } else {
                 $layout[$group][$order] = array(
@@ -964,17 +823,12 @@ return true;
                 );
             }
         }
-        foreach($meta['metadata'] as $key => $relatedMeta)
-        {
-            if('db' == $meta['model'][$key]['type'])
-            {
-                $layout = $this->getViewLayout($relatedMeta, $layout, $key);
-            }
+        foreach ($this->getModelMetadataByType($meta, 'db') as $key => $relatedMeta) {
+            $layout = $this->getViewLayout($relatedMeta, $layout, $key);
         }
 
         // 根据键名排序
-        if(!$relatedName)
-        {
+        if (!$relatedName) {
             array_walk($layout, 'ksort');
         }
 
@@ -983,30 +837,25 @@ return true;
 
     public function getEditLayout($meta, array $layout = null, $relatedName = false)
     {
-        foreach($meta['field'] as $name => $field)
-        {
-            if(1 == $field['attr']['isReadonly'] || 'custom' == $field['form']['_type'])
-            {
+        foreach($meta['field'] as $name => $field) {
+            if (1 == $field['attr']['isReadonly'] || 'custom' == $field['form']['_type']) {
                 // TODO
                 $meta['field']->set($name . '.form._type', 'hidden');
                 //continue;
             }
 
             $group = $field['basic']['group'];
-            if(!isset($layout[$group]))
-            {
+            if (!isset($layout[$group])) {
                 $layout[$group] = array();
             }
 
             // 使用order作为键名
             $order = $field['basic']['order'];
-            while(isset($layout[$group][$order]))
-            {
+            while (isset($layout[$group][$order])) {
                 $order++;
             }
 
-            if(!$relatedName)
-            {
+            if (!$relatedName) {
                 $layout[$group][$order] = $field['form']['name'];
             } else {
                 $layout[$group][$order] = array(
@@ -1014,17 +863,12 @@ return true;
                 );
             }
         }
-        foreach($meta['metadata'] as $key => $relatedMeta)
-        {
-            if('db' == $meta['model'][$key]['type'])
-            {
-                $layout = $this->getEditLayout($relatedMeta, $layout, $key);
-            }
+        foreach($this->getModelMetadataByType($meta, 'db') as $key => $relatedMeta) {
+            $layout = $this->getEditLayout($relatedMeta, $layout, $key);
         }
 
         // 根据键名排序
-        if(!$relatedName)
-        {
+        if (!$relatedName) {
             array_walk($layout, 'ksort');
         }
 
@@ -1034,22 +878,18 @@ return true;
     public function getListLayout(Qwin_Metadata $meta, array $layout = null, $relatedName = false)
     {
         null == $layout && $layout = array();
-        foreach($meta['field'] as $name => $field)
-        {
-            if(1 != $field['attr']['isList'])
-            {
+        foreach ($meta['field'] as $name => $field) {
+            if (1 != $field['attr']['isList']) {
                 continue;
             }
 
             // 使用order作为键名
             $order = $field['basic']['order'];
-            while(isset($layout[$order]))
-            {
+            while (isset($layout[$order])) {
                 $order++;
             }
 
-            if(!$relatedName)
-            {
+            if (!$relatedName) {
                 $layout[$order] = $field['form']['name'];
             } else {
                 $layout[$order] = array(
@@ -1058,17 +898,12 @@ return true;
             }
         }
 
-        foreach($meta['metadata'] as $name => $relatedMeta)
-        {
-            if('db' == $meta['model'][$name]['type'])
-            {
-                $layout += $this->getListLayout($relatedMeta, $layout, $name);
-            }
+        foreach ($this->getModelMetadataByType($meta, 'db') as $name => $relatedMeta) {
+            $layout += $this->getListLayout($relatedMeta, $layout, $name);
         }
 
         // 根据键名排序
-        if(!$relatedName)
-        {
+        if (!$relatedName) {
             ksort($layout);
         }
 
@@ -1080,23 +915,18 @@ return true;
         $i = 0;
         $rowData = array();
         $nullData = '<em>(null)<em>';
-        foreach($data as $row)
-        {
+        foreach ($data as $row) {
             $rowData[$i][$primaryKey] = $row[$primaryKey];
-            foreach($layout as $field)
-            {
-                if(is_array($field))
-                {
-                    if(isset($row[$field[0]][$field[1]]))
-                    {
+            foreach($layout as $field) {
+                if (is_array($field)) {
+                    if (isset($row[$field[0]][$field[1]])) {
                         $rowValue = $row[$field[0]][$field[1]];
                     } else {
                         // 使列表 null 类型数据能正确显示
                         $rowValue = $nullData;
                     }
                 } else {
-                    if(isset($row[$field]))
-                    {
+                    if (isset($row[$field])) {
                         $rowValue = $row[$field];
                     } else {
                         $rowValue = $nullData;
@@ -1111,28 +941,23 @@ return true;
 
     public function getAddLayout($meta, array $layout = null, $relatedName = false)
     {
-        foreach($meta['field'] as $name => $field)
-        {
-            if('custom' == $field['form']['_type'])
-            {
+        foreach ($meta['field'] as $name => $field) {
+            if('custom' == $field['form']['_type']) {
                 continue;
             }
 
             $group = $field['basic']['group'];
-            if(!isset($layout[$group]))
-            {
+            if (!isset($layout[$group])) {
                 $layout[$group] = array();
             }
 
             // 使用order作为键名
             $order = $field['basic']['order'];
-            while(isset($layout[$group][$order]))
-            {
+            while (isset($layout[$group][$order])) {
                 $order++;
             }
 
-            if(!$relatedName)
-            {
+            if (!$relatedName) {
                 $layout[$group][$order] = $field['form']['name'];
             } else {
                 $layout[$group][$order] = array(
@@ -1140,96 +965,34 @@ return true;
                 );
             }
         }
-        foreach($meta['metadata'] as $key => $relatedMeta)
-        {
-            if('db' == $meta['model'][$key]['type'])
-            {
+        foreach ($this->getModelMetadataByType($meta, 'db') as $key => $relatedMeta) {
+            if ('db' == $meta['model'][$key]['type']) {
                 $layout = $this->getAddLayout($relatedMeta, $layout, $key);
             }
         }
 
         // 根据键名排序
-        if(!$relatedName)
-        {
+        if (!$relatedName) {
             array_walk($layout, 'ksort');
         }
 
         return $layout;
     }
 
-    /**
-     * 将多维数组转换为一维
-     *
-     * @param array $data 多维数组
-     * @return array 一维数组
-     */
-    public function convertDataToSingle($data)
-    {
-        if(isset($data[0]))
-        {
-            foreach($data as $key => $row)
-            {
-                $data[$key] = $this->convertDataToSingle($row);
-            }
-        } else {
-            foreach($data as $key => $val)
-            {
-                if(is_array($val))
-                {
-                    foreach($val as $key2 => $val2)
-                    {
-                        $data[$key . '_' . $key2] = $val2;
-                    }
-                    unset($data[$key]);
-                }
-            }
-        }
-        return $data;
-    }
-
-    /**
-     * 还原一维数组为二维数组
-     *
-     * @param object $meta 转换过的元数据
-     * @param array $data 入库数据
-     * @return 新数据
-     */
-    public function restoreData($restoreMeta, $meta, $data)
-    {
-        foreach($restoreMeta as $key => $field)
-        {
-            if(!isset($data[$key]))
-            {
-                continue;
-            }
-            if(!isset($meta[$key]['form']['_oldName']))
-            {
-                $newData[$key] = $data[$key];
-            } else {
-                $modelName = str_replace('_' . $meta[$key]['form']['_oldName'], '', $key);
-                !isset($newData[$modelName]) && $newData[$modelName] = array();
-                $newData[$modelName][$meta[$key]['form']['_oldName']] = $data[$key];
-            }
-        }
-        return $newData;
-    }
-
     public function setLastViewedItem($meta, $result)
     {
-        if(empty($meta['db']['nameKey']))
-        {
+        if (empty($meta['db']['nameKey'])) {
             return false;
         }
 
-        $session = Qwin::run('Qwin_Session');
+        $session = Qwin::run('-session');
         $lang = Qwin::run('-lang');
         
         $item = (array)$session->get('lastViewedItem');
         $key = get_class($meta) . $result[$meta['db']['primaryKey']];
 
         // 最多保存10项
-        if(10 <= count($item))
-        {
+        if (10 <= count($item)) {
             array_pop($item);
         }
 
@@ -1280,11 +1043,9 @@ return true;
             return true;
         }
         $ext = Qwin::run('Qwin_Class_Extension');
-        foreach($validator['rule'] as $rule => $param)
-        {
+        foreach ($validator['rule'] as $rule => $param) {
             $class = $ext->getClass($rule);
-            if(false == $class)
-            {
+            if (false == $class) {
                 return true;
             }
             $array = array(
@@ -1292,8 +1053,7 @@ return true;
                 $data[$name],
                 $param,
             );
-            if(false === Qwin::callByArray($array))
-            {
+            if (false === Qwin::callByArray($array)) {
                 return new Qwin_Validator_Result(false, $name, $validator['message'][$rule], 0, $param);
             }
         }
@@ -1311,24 +1071,20 @@ return true;
     public function validateArray($data, Qwin_Metadata $meta, $validateObj = null)
     {
         // 验证自身域
-        foreach($meta['field'] as $field)
-        {
+        foreach ($meta['field'] as $field) {
             $result = $this->validateOne($field['form']['name'], $data, $field['validator'], $validateObj);
             // 返回错误信息
-            if(true !== $result)
-            {
+            if (true !== $result) {
                 return $result;
             }
         }
 
         // 验证关联域
-        foreach($meta['metadata'] as $name => $relatedMeta)
-        {
+        foreach ($this->getModelMetadataByType($meta, 'db') as $name => $relatedMeta) {
             !isset($data[$name]) && $data[$name] = array();
             $result = $this->validateArray($data[$name], $relatedMeta, $relatedMeta);
             // 返回错误信息
-            if(true !== $result)
-            {
+            if (true !== $result) {
                 $result->field = array($name, $result->field);
                 return $result;
             }
@@ -1351,16 +1107,12 @@ return true;
             'rules' => array(),
             'messages' => array(),
         );
-        foreach($meta['field'] as $name => $field)
-        {
-            if(empty($field['validator']['rule']))
-            {
+        foreach ($meta['field'] as $name => $field) {
+            if (empty($field['validator']['rule'])) {
                 continue;
             }
-            foreach($field['validator']['rule'] as $rule => $param)
-            {
-                if($relatedName)
-                {
+            foreach($field['validator']['rule'] as $rule => $param) {
+                if ($relatedName) {
                     $name = $relatedName . '[' . $name . ']';
                 }
                 $validation['rules'][$name][$rule] = $param;
@@ -1392,15 +1144,12 @@ return true;
      */
     public function deleteReadonlyValue($data, Qwin_Metadata $meta)
     {
-        foreach($meta['field'] as $field)
-        {
-            if($field['attr']['isReadonly'])
-            {
+        foreach ($meta['field'] as $field) {
+            if ($field['attr']['isReadonly']) {
                 unset($data[$field['form']['name']]);
             }
         }
-        foreach($meta['metadata'] as $name => $relatedMeta)
-        {
+        foreach ($this->getModelMetadataByType($meta, 'db') as $name => $relatedMeta) {
             $this->deleteReadonlyValue($data[$name], $relatedMeta);
         }
         return $data;
@@ -1415,10 +1164,8 @@ return true;
      */
     public function setForeignKeyData($modelList, $data)
     {
-        foreach($modelList as $model)
-        {
-            if('db' == $model['type'])
-            {
+        foreach ($modelList as $model) {
+            if ('db' == $model['type']) {
                 $data[$model['alias']][$model['foreign']] = $data[$model['local']];
             }
         }
@@ -1441,11 +1188,9 @@ return true;
             $data[$primaryKey] = null;
             //unset($data[$primaryKey]);
         }*/
-        foreach($meta['metadata'] as $name => $relatedMeta)
-        {
+        foreach ($this->getModelMetadataByType($meta, 'db') as $name => $relatedMeta) {
             $primaryKey = $relatedMeta['db']['primaryKey'];
-            if(isset($data[$name][$primaryKey]))
-            {
+            if (isset($data[$name][$primaryKey])) {
                 $data[$name][$primaryKey] = null;
                 //unset($data[$name][$primaryKey]);
             }
@@ -1453,27 +1198,12 @@ return true;
         return $data;
     }
 
-    /**
-     * 增加点击
-     *
-     *
-     */
-    public function addHit($table, $id, $field = 'hit', $num = 1)
-    {
-        Qwin::run('-qry')->setTable($table);
-
-        $sql = "UPDATE " . Qwin::run('-qry')->getTable() . " SET `$field` = $field+$num WHERE `id` = '$id'; ";
-        Qwin::run('-db')->Query($sql);
-    }
-
     public function getUrlList($field, $url_data)
     {
         Qwin::run('-arr')->set($url_data);
         $data = array();
-        foreach($url_data as $key => $val)
-        {
-            if('' != $val && isset($url_data[$field[$key]['form']['name']]))
-            {
+        foreach ($url_data as $key => $val) {
+            if ('' != $val && isset($url_data[$field[$key]['form']['name']])) {
                 $data[$field[$key]['form']['name']] = $field[$key]['form']['name'];
             }
         }
@@ -1482,8 +1212,7 @@ return true;
     public function makeRequiredAtFront($rule)
     {
         // 将必填项放在数组第一位
-        if(array_key_exists('required', $rule))
-        {
+        if (array_key_exists('required', $rule)) {
             $tmpArr = array(
                 'required' => true,
             );
@@ -1504,13 +1233,11 @@ return true;
     {
         $repalce = (array)$repalce;
         $pos = strpos($data, '{0}');
-        if(false !== $pos)
-        {
+        if (false !== $pos) {
             $repalce = Qwin::run('-arr')->set($repalce);
             $search = array();
             $count = count($repalce);
-            for($i = 0;$i < $count; $i++)
-            {
+            for ($i = 0;$i < $count; $i++) {
                 $search[$i] = '{' . $i . '}';
             }
             $data = str_replace($search, $repalce, $data);
@@ -1529,8 +1256,7 @@ return true;
     public function convertDbDataToFormResource($data, $key, $key2)
     {
         $resource = array();
-        foreach($data as  $row)
-        {
+        foreach ($data as  $row) {
             $resource[$row[$key]] = $row[$key2];
         }
         return $resource;
@@ -1543,16 +1269,13 @@ return true;
         $y = -1;
         $tmpCol = $col - 1;
         $banType = array('hidden', 'custom');
-        foreach($fieldArr as $field)
-        {
+        foreach ($fieldArr as $field) {
             // 隐藏域不占空间
-            if(in_array($field['form']['_type'], $banType))
-            {
+            if (in_array($field['form']['_type'], $banType)) {
                 continue;
             }
             // 初始化数组
-            if(0 == $x)
-            {
+            if (0 == $x) {
                 $y++;
                 $layoutArr[$y] = array();
             }
@@ -1565,15 +1288,13 @@ return true;
     public function saveRelatedDbData($meta, $data, $query)
     {
         $ctrler = Qwin::run('-controller');
-        foreach($meta['model'] as $model)
-        {
-            if('relatedDb' == $model['type'])
-            {
+        foreach ($meta['model'] as $model) {
+            if ('relatedDb' == $model['type']) {
                 /*
                  * 检验是否要保存数据
                  */
                 $method = 'isSave' . $model['alias'] . 'Data';
-                if(!method_exists($ctrler, $method)
+                if (!method_exists($ctrler, $method)
                     || false === call_user_func_array(
                         array($ctrler, $method),
                         array($data, $query)
@@ -1582,12 +1303,10 @@ return true;
                 }
                     
                 $relatedData = array();
-                foreach($model['fieldMap'] as $localField => $foreignField)
-                {
-                    if(isset($data[$localField]))
-                    {
+                foreach ($model['fieldMap'] as $localField => $foreignField) {
+                    if (isset($data[$localField])) {
                         $relatedData[$foreignField] = $data[$localField];
-                    } elseif(isset($_POST[$localField])) {
+                    } elseif (isset($_POST[$localField])) {
                         $relatedData[$foreignField] = $_POST[$localField];
                     } else {
                         $relatedData[$foreignField] = null;
@@ -1596,11 +1315,9 @@ return true;
                 $relatedDbMeta = Qwin_Metadata_Manager::get($model['metadata']);
                 // TODO 补全其他转换方式,分离该过程
                 $copyData = $relatedData;
-                foreach($relatedDbMeta['field'] as $name => $field)
-                {
+                foreach ($relatedDbMeta['field'] as $name => $field) {
                     $methodName = str_replace(array('_', '-'), '', 'convertdb' .  $model['alias'] . $name);
-                    if(method_exists($ctrler, $methodName))
-                    {
+                    if (method_exists($ctrler, $methodName)) {
                         !isset($relatedData[$name]) && $relatedData[$name] = null;
                         $relatedData[$name] = call_user_func_array(
                             array($ctrler, $methodName),
@@ -1612,7 +1329,7 @@ return true;
                 /**
                  * 保存数据
                  */
-                $relatedDbQuery = $meta->getDoctrineQuery($model['set']);
+                $relatedDbQuery = $meta->getQuery($model['set']);
                 $ini = Qwin::run('-ini');
                 $modelName = $ini->getClassName('Model', $model['set']);
                 $relatedDbQuery = new $modelName;
