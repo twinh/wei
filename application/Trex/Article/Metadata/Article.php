@@ -374,7 +374,10 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
 
     public function convertEditTitleStyle($value, $name, $data, $copyData)
     {
-        return explode('|', $value);
+        if (is_array($value)) {
+            return explode('|', $value[0]);
+        }
+        return $value;
     }
 
     public function convertEditTitleColor($value, $name, $data, $copyData)

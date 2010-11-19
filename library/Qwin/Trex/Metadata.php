@@ -178,7 +178,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
 
         $joinModel = array();
         !is_array($name) && $name = array($name);
-        !is_array($type) && $name = array($type);
+        !is_array($type) && $type = array($type);
         // 取出要关联的模块
         if (!empty($name) || !empty($type)) {
             foreach ($meta['model'] as $modelName => $modelSet) {
