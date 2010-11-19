@@ -76,10 +76,10 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      *      -- type                  模型的类型组成的数组
      *
      */
-    protected $_queryOption = array(
+    /*protected $_queryOption = array(
         'model'         => array(),
         'type'          => array(),
-    );
+    );*/
 
     /**
      * 数据表前缀
@@ -147,13 +147,13 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      *
      * @param array $set 元数据配置
      */
-    public function getQueryBySet($set, $option = false)
+    public function getQueryBySet($set, $type = array(), $name = array())
     {
         $metaClass  = $this->getClassName('Metadata', $set);
         $modelClass = $this->getClassName('Model', $set);
         $meta       = Qwin_Metadata_Manager::get($metaClass);
         $model      = Qwin::run($modelClass);
-        return $this->getQuery($meta, $model, $option);
+        return $this->getQuery($meta, $model, $type, $name);
     }
 
     /**
@@ -165,7 +165,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      * @todo 缓存查询对象,模型对象
      * @todo padb问题
      */
-    public function getQuery(Qwin_Metadata $meta, Doctrine_Record $model = null, $option = false)
+    public function getQuery(Qwin_Metadata $meta, Doctrine_Record $model = null, $type = array(), $name = array())
     {
         // 未定义模型,则初始化关联模型
         if (null == $model) {
@@ -177,14 +177,15 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         }
 
         $joinModel = array();
+        !is_array($name) && $name = array($name);
+        !is_array($type) && $name = array($type);
         // 取出要关联的模块
-        if (false != $option) {
-            $option = array_merge($this->_queryOption, $option);
+        if (!empty($name) || !empty($type)) {
             foreach ($meta['model'] as $modelName => $modelSet) {
-                if (in_array($modelName, $option['model']) || in_array($modelSet['type'], $option['type'])) {
+                if (in_array($modelName, $name) || in_array($modelSet['type'], $type)) {
                     $joinModel[$modelName] = $modelName;
                 }
-            }            
+            }
         }
 
         // 自身的转换

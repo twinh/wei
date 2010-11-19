@@ -89,12 +89,7 @@ class Trex_Service_View extends Trex_Service_BasicAction
         }
 
         // 从模型获取数据
-        $queryOption = array(
-            'type' => array(
-                'db', 'view',
-            ),
-        );
-        $query = $metaHelper->getQueryBySet($this->_set, $queryOption);
+        $query = $metaHelper->getQueryBySet($this->_set, array('db', 'view'));
         $result = $query->where($primaryKey . ' = ?', $config['data']['primaryKeyValue'])->fetchOne();
 
         // 记录不存在,加载错误视图

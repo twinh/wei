@@ -63,7 +63,7 @@ class Trex_Service_Delete extends Trex_Service_BasicAction
         $meta = $this->_meta;
         $primaryKey = explode(',', $config['data']['primaryKeyValue']);
 
-        $query = $metaHelper->getQueryBy($this->_set);
+        $query = $metaHelper->getQueryBySet($this->_set, 'db');
 
         $alias = $query->getRootAlias();
         '' != $alias && $alias .= '.';
@@ -80,11 +80,7 @@ class Trex_Service_Delete extends Trex_Service_BasicAction
         {
             foreach($meta['model'] as $model)
             {
-                // 不删除视图模块的记录
-                if(isset($object[$key][$model['alias']]) && 'db' == $model['type'])
-                {
-                    $object[$key][$model['alias']]->delete();
-                }
+                $object[$key][$model['alias']]->delete();
             }
             $value->delete();
         }
