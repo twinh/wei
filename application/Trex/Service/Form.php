@@ -67,7 +67,7 @@ class Trex_Service_Form extends Trex_Service_BasicAction
 
         $modelClass = $metaHelper->getClassName('Model', $this->_set);
         $model = Qwin::run($modelClass);
-        $query = $metaHelper->getQuery($meta, 'db');
+        $query = $metaHelper->getQuery($meta, $model, 'db');
         
         /**
          * 三种模式　

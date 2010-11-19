@@ -76,11 +76,12 @@ class Trex_Service_Delete extends Trex_Service_BasicAction
         // TODO $object->delete();
         // TODO 统计删除数
         // TODO 删除数据关联的模块
-        foreach($object as $key => $value)
-        {
-            foreach($meta['model'] as $model)
-            {
-                $object[$key][$model['alias']]->delete();
+        foreach ($object as $key => $value) {
+            foreach ($meta['model'] as $model) {
+                if (isset($object[$key][$model['alias']])) {
+                    $object[$key][$model['alias']]->delete();
+                }
+                
             }
             $value->delete();
         }
