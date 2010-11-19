@@ -140,32 +140,6 @@ class Trex_Member_Controller_Member extends Trex_ActionController
         return $result;
     }
 
-
-    public function convertListOperation($value, $name, $data, $copyData)
-    {
-        $primaryKey = $this->_meta['db']['primaryKey'];
-        $html = Qwin_Helper_Html::jQueryButton($this->url->createUrl($this->_set, array('action' => 'EditPassword', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_EDIT_PASSWORD'), 'ui-icon-key');
-        $html .= parent::convertListOperation($value, $name, $data, $copyData);
-        return $html;
-    }
-    
-    public function convertDbUsername($value)
-    {
-        if('Add' == $this->getLastAction() && $this->isUsernameExists($value))
-        {
-            $this->setRedirectView($this->_lang->t('MSG_USERNAME_EXISTS'))
-                    ->loadView()
-                    ->display();
-            exit;
-        }
-        return $value;
-    }
-
-    public function convertDbCompanyId($val)
-    {
-        return $this->Qwin_converter_String->getUuid($val);
-    }
-    
     /*public function onAfterDb($action, $data)
     {
         if('EditPassword' == $action)

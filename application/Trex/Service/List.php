@@ -78,11 +78,7 @@ class Trex_Service_List extends Trex_Service_BasicAction
         $primaryKey = $meta['db']['primaryKey'];
 
         // 从模型获取数据
-        $query = $metaHelper->getQueryBySet($set, array(
-            'type' => array(
-                'db', 'view'
-            ),
-        ));
+        $query = $metaHelper->getQueryBySet($set, array('db', 'view'));
         $metaHelper
             ->addSelectToQuery($meta, $query)
             ->addOrderToQuery($meta, $query, $config['data']['order'])

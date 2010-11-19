@@ -163,4 +163,27 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
             ),
         ));
     }
+
+    public function convertListOperation($value, $name, $data, $copyData)
+    {
+        $primaryKey = $this->db['primaryKey'];
+        $url = Qwin::run('-url');
+        $lang = Qwin::run('-lang');
+        $set = $this->getSetFromClass();
+        $html = Qwin_Helper_Html::jQueryButton($url->createUrl($set, array('action' => 'EditPassword', $primaryKey => $copyData[$primaryKey])), $lang->t('LBL_ACTION_EDIT_PASSWORD'), 'ui-icon-key')
+              . parent::convertListOperation($value, $name, $data, $copyData);
+        return $html;
+    }
+
+    public function convertDbUsername($value)
+    {
+        if('Add' == $this->getLastAction() && $this->isUsernameExists($value))
+        {
+            $this->setRedirectView($this->_lang->t('MSG_USERNAME_EXISTS'))
+                    ->loadView()
+                    ->display();
+            exit;
+        }
+        return $value;
+    }
 }

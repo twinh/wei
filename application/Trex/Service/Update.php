@@ -75,11 +75,7 @@ class Trex_Service_Update extends Trex_Service_BasicAction
             ->addClass('Qwin_Validator_JQuery');
         
         // 从模型获取数据
-        $query = $metaHelper->getQueryBySet($this->_set, array(
-            'type' => array(
-                'db'
-            ),
-        ));
+        $query = $metaHelper->getQueryBySet($this->_set, 'db');
         $result = $query->where($primaryKey . ' = ?', $primaryKeyValue)->fetchOne();
 
         // 记录不存在,加载错误视图

@@ -151,7 +151,7 @@ class Trex_Controller extends Qwin_Trex_Controller
                 'controller' => 'Member',
             );
             $result = $metaHelper
-                ->getQueryBySet($set)
+                ->getQueryBySet($set, array('db', 'view'))
                 ->where('username = ?', 'guest')
                 ->fetchOne();
             $member = $result->toArray();

@@ -115,7 +115,7 @@ class Trex_Member_Metadata_Log extends Qwin_Trex_Metadata
                 'namespace' => 'Trex',
                 'module' => 'Member',
                 'controller' => 'Member',
-            ))
+            ), array('db', 'view'))
             ->where('username = ? AND password = ?', array($data['username'], $value))
             ->fetchOne();
         if(false != $result)
