@@ -26,7 +26,7 @@
 
 class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
 {
-    public function  __construct()
+    public function  setMetadata()
     {
         $this->setCommonMetadata();
         $this->parseMetadata(array(

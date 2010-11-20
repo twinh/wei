@@ -35,6 +35,9 @@ class Trex_CommonClass_Metadata_CommonClass extends Trex_Metadata
                 // 基本属性
                 'field' => array(
                     'language' => array(
+                        'attr' => array(
+                            'isLink' => 1,
+                        ),
                     ),
                     'sign' => array(
                     ),
