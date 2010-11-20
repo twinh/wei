@@ -268,7 +268,7 @@ jQuery.validator.addMethod('nonnegativeInteger', function(value, element) {
  }, '');
  
  // 中文字两个字节 请确保输入的值在3-15个字节之间(一个中文字算2个字节)
- jQuery.validator.addMethod("byteRangeLength", function(value, element, param) {
+ jQuery.validator.addMethod('byteRangeLength', function(value, element, param) {
      var length = value.length;
      for(var i = 0; i < value.length; i++){
          if(value.charCodeAt(i) > 127){
