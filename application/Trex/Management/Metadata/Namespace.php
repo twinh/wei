@@ -41,6 +41,9 @@ class Trex_Management_Metadata_Namespace extends Trex_Metadata
                         ),
                     ),
                 ),
+                'path' => array(
+
+                ),
             ),
             'group' => array(
 
@@ -57,6 +60,26 @@ class Trex_Management_Metadata_Namespace extends Trex_Metadata
                 'title' => 'LBL_MODULE_NAMESPACE',
             ),
         ));
+    }
+
+     /**
+     * 在列表操作下,为操作域设置按钮
+     *
+     * @param mixed 当前域的值
+     * @param string 当前域的名称
+     * @param array $data 已转换过的当前记录的值
+     * @param array $cpoyData 未转换过的当前记录的值
+     * @return string 当前域的新值
+     */
+    public function convertListOperation($value, $name, $data, $copyData)
+    {
+        $primaryKey = $this->db['primaryKey'];
+        $url = Qwin::run('-url');
+        $lang = Qwin::run('-lang');
+        $set = $this->getSetFromClass();
+        return Qwin_Helper_Html::jQueryButton($url->createUrl($set, array('controller' => 'Module', 'action' => 'Index', 'namespace_value' => $copyData['namespace'])), $lang->t('LBL_ACTION_VIEW_MODULE'), 'ui-icon-lightbulb')
+            . Qwin_Helper_Html::jQueryButton($url->createUrl($set, array('controller' => 'Module', 'action' => 'Add', 'namespace_value' => $copyData['namespace'])), $lang->t('LBL_ACTION_ADD_MODULE'), 'ui-icon-plus')
+            . Qwin_Helper_Html::jQueryButton('javascript:if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE)){window.location=\'' . $url->createUrl($set, array('action' => 'Delete', 'namespace_value' => $copyData['namespace'])) . '\';}', $lang->t('LBL_ACTION_DELETE'), 'ui-icon-closethick');
     }
 }
 

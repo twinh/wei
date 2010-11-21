@@ -47,6 +47,7 @@ class Trex_Member_Language_Zhcn extends Trex_Language_Zhcn
             'LBL_FIELD_NEW_PASSWORD' => '新密码',
             'LBL_FIELD_OLD_PASSWORD' => '旧密码',
             'LBL_FIELD_CONFIRM_PASSWORD' => '确认密码',
+            'LBL_FIELD_MONEY' => '金额',
 
             'LBL_FIELD_COMPANY' => '公司全称',
             'LBL_FIELD_CUSTOMER_NAME' => '客户姓名',

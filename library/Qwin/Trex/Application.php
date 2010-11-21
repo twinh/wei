@@ -38,7 +38,7 @@ class Qwin_Trex_Application
      */
     public function getDefultPath()
     {
-        return QWIN_RESOURCE_PATH . '/application';
+        return realpath(QWIN_RESOURCE_PATH . '/application');
     }
 
     /**
@@ -46,7 +46,7 @@ class Qwin_Trex_Application
      */
     public function getRootAppPath()
     {
-        return QWIN_ROOT_PATH . '/application';
+        return realpath(QWIN_ROOT_PATH . '/application');
     }
 
     /**

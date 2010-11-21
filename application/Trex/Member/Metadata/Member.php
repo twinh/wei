@@ -113,6 +113,9 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                         'isList' => 0,
                     ),
                 ),
+                'money' => array(
+
+                ),
             ),
             'group' => array(
 
