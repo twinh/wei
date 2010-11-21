@@ -92,7 +92,7 @@ class Trex_Member_Controller_Setting extends Trex_Controller
         if(empty($_POST))
         {
             $theme = $this->metaHelper
-                ->getDoctrineQuery(array(
+                ->getQueryBySet(array(
                     'namespace' => 'Trex',
                     'module' => 'Style',
                     'controller' => 'Theme',
@@ -116,7 +116,7 @@ class Trex_Member_Controller_Setting extends Trex_Controller
             $theme = $ses->get('style');
             
             $result = $this->metaHelper
-                    ->getDoctrineQuery(array(
+                    ->getQueryBySet(array(
                         'namespace' => 'Trex',
                         'module' => 'Member',
                         'controller' => 'Member',

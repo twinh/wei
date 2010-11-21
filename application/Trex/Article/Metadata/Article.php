@@ -84,6 +84,9 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                             'required' => true,
                         ),
                     ),
+                    'list' => array(
+                        'width' => '300',
+                    ),
                 ),
                 'title_style' => array(
                     'form' => array(
@@ -225,7 +228,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     ),
                     'attr' => array(
                         'isLink' => 1,
-                        'isList' => 1,
+                        'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
                     ),

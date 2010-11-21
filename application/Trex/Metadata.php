@@ -172,6 +172,7 @@ class Trex_Metadata extends Qwin_Metadata
                     'type' => 'date',
                 ),
                 'attr' => array(
+                    'isList' => 0,
                     'isReadonly' => 1,
                 ),
             ),

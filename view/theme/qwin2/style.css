@@ -42,9 +42,9 @@ a{
     border-top: none;
     border-left: none;
     border-right: none;
-    /*-moz-opacity: 0.9;
+    -moz-opacity: 0.9;
     opacity: 0.9;
-    filter: alpha('opacity=90');*/
+    filter: alpha('opacity=90');
 }
 
 /* http://chrisjean.com/2009/09/30/fix-width-auto-floated-elements-in-ie-6/ */
@@ -510,4 +510,13 @@ div.ui-copyright{
 .ui-button .ui-button-text {
     font-size: 12px;
     font-weight: normal;
+}
+.qw-icon-plus{
+	background: url(./../../resource/image/plus_16.png) 0 0 no-repeat;
+    width: 16px; height: 16px;
+    display: block;
+    text-indent:-99999px;
+    overflow: hidden;
+    float: left;
+    margin: 4px;
 }
