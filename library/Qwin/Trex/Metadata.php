@@ -726,10 +726,10 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      * @param object $convertObject 转换器的对象,默认是元数据自身
      * @return array 经过转换的数据
      */
-    public function convertArray($data, $action, Qwin_Metadata $meta, $convertObject = null, $isView = false)
+    public function convertArray($data, $action, Qwin_Metadata $meta, $convertObject = null, $option = array())
     {
         foreach ($data as &$row) {
-            $row = $this->convertOne($row, $action, $meta, $convertObject, $isView);
+            $row = $this->convertOne($row, $action, $meta, $convertObject, $option);
         }
         return $data;
     }

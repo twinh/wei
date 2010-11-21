@@ -31,6 +31,7 @@ class Trex_Management_Controller_Namespace extends Trex_Controller
     {
         $this->_app = Qwin::run('Qwin_Trex_Application');
         $this->_path = $this->_app->getDefultPath();
+        $this->_rootAppPath = $this->_app->getRootAppPath();
         parent::__construct();
     }
 
@@ -43,19 +44,25 @@ class Trex_Management_Controller_Namespace extends Trex_Controller
     {
         $meta = $this->_meta;
         $theme = Qwin::run('-ini')->getConfig('interface.theme');
-        $namespace = $this->_app->getNamespace($this->_path);
+        $namespace[$this->_path] = $this->_app->getNamespace($this->_path);
+        $namespace[$this->_rootAppPath] = $this->_app->getNamespace($this->_rootAppPath);
 
         // 构建数组
         $data = array();
-        foreach($namespace as $key => $value)
+        $key = 1;
+        foreach($namespace as $path => $value)
         {
-            $data[] = array(
-                'id' => $key + 1,
-                'namespace' => $value,
-            );
+            foreach($value as $name)
+            {
+                $data[] = array(
+                    'id' => $key++,
+                    'namespace' => $name,
+                    'path' => $path,
+                );
+            }
         }
         $listField = $meta['field']->getAttrList('isList');
-        $data = $this->metaHelper->convertArray($data, 'list', $meta, $this);
+        $data = $this->metaHelper->convertArray($data, 'list', $meta, $meta);
 
         // 设置视图
         $this->_view = array(
@@ -136,21 +143,5 @@ class Trex_Management_Controller_Namespace extends Trex_Controller
         rmdir($path);
         $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Index'));
         return $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
-    }
-
-    /**
-     * 在列表操作下,为操作域设置按钮
-     *
-     * @param mixed 当前域的值
-     * @param string 当前域的名称
-     * @param array $data 已转换过的当前记录的值
-     * @param array $cpoyData 未转换过的当前记录的值
-     * @return string 当前域的新值
-     */
-    public function convertListOperation($value, $name, $data, $copyData)
-    {
-        return Qwin_Helper_Html::jQueryButton($this->url->createUrl($this->_set, array('controller' => 'Module', 'action' => 'Index', 'namespace_value' => $copyData['namespace'])), $this->_lang->t('LBL_ACTION_VIEW_MODULE'), 'ui-icon-lightbulb')
-            . Qwin_Helper_Html::jQueryButton($this->url->createUrl($this->_set, array('controller' => 'Module', 'action' => 'Add', 'namespace_value' => $copyData['namespace'])), $this->_lang->t('LBL_ACTION_ADD_MODULE'), 'ui-icon-plus')
-            . Qwin_Helper_Html::jQueryButton('javascript:if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE)){window.location=\'' . $this->url->createUrl($this->_set, array('action' => 'Delete', 'namespace_value' => $copyData['namespace'])) . '\';}', $this->_lang->t('LBL_ACTION_DELETE'), 'ui-icon-closethick');
     }
 }

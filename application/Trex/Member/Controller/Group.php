@@ -47,7 +47,7 @@ class Trex_Member_Controller_Group extends Trex_ActionController
         /**
          * 从模型获取数据
          */
-        $query = $this->metaHelper->getByQuerySet($this->_set);
+        $query = $this->metaHelper->getQueryBySet($this->_set);
         $result = $query->where($primaryKey . ' = ?', $id)->fetchOne();
 
         /**

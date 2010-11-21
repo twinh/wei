@@ -125,6 +125,7 @@ class Trex_Service_Insert extends Trex_Service_BasicAction
         if(isset($config['callback']['afterDb']))
         {
             $config['callback']['afterDb'][1] = $data;
+            $config['callback']['afterDb'][2] = null;
             $this->executeCallback('afterDb', $config);
         }
 

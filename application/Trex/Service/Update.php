@@ -91,6 +91,8 @@ class Trex_Service_Update extends Trex_Service_BasicAction
             }
             return $return;
         }
+        // 原始数据
+        $rawData = $result->toArray();
 
         // 转换,验证
         $data = $metaHelper->convertOne($config['data']['db'], 'db', $meta, $meta, array('view' => false));
@@ -118,6 +120,7 @@ class Trex_Service_Update extends Trex_Service_BasicAction
         if(!empty($config['callback']['afterDb']))
         {
             $config['callback']['afterDb'][1] = $data;
+            $config['callback']['afterDb'][2] = $rawData;
             $this->executeCallback('afterDb', $config);
         }
 
