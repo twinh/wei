@@ -63,7 +63,6 @@ $jsPacker
                     if($menu['id'] == $subMenu['category_id']) :
                 ?>
                 <li><a href="<?php echo $subMenu['url'] ?>" target="<?php echo $subMenu['target'] ?>"><?php echo $subMenu['title'] ?></a></li>
-                    
                 <?php
                     endif;
                 endforeach;

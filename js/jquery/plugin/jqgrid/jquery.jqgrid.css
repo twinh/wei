@@ -26,6 +26,7 @@
 #t_ui-jqgrid-table{
     padding: .4em 0 .9em;
     border-top: none;
+    /*height: auto;*/
 }
 #t_ui-jqgrid-table a{
     
@@ -41,4 +42,7 @@
 .ui-jqgrid tr.jqgrow td a.ui-jqgrid-icon span{
 	display:block;
     margin:1px
+}
+.ui-jqgrid tr.ui-row-ltr td{
+    border-right: none;
 }
