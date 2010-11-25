@@ -102,11 +102,11 @@ class Trex_Controller extends Qwin_Trex_Controller
             return true;
         }
         $ini = Qwin::run('-ini');
-        $this->request = Qwin::run('Qwin_Request');
-        $this->url = Qwin::run('Qwin_Url');
+        $this->request = Qwin::run('-request');
+        $this->url = Qwin::run('-url');
         $set = $this->_set = $ini->getSet();
         $this->_config = $ini->getConfig();
-        $this->session = Qwin::run('Qwin_Session');
+        $this->session = Qwin::run('-session');
         $this->member = $this->session->get('member');
 
         // 元数据管理助手,负责元数据的获取和转换
