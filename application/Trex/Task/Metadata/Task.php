@@ -68,7 +68,7 @@ class Trex_Task_Metadata_Task extends Trex_Metadata
                      'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Hepler_Category', 'getTreeResource'),
+                            array('Project_Helper_Category', 'getTreeResource'),
                             array(
                                 'namespace' => 'Trex',
                                 'module' => 'Member',

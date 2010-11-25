@@ -36,7 +36,7 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Hepler_Category', 'getTreeResource'),
+                            array('Project_Helper_Category', 'getTreeResource'),
                             array(
                                 'namespace' => 'Trex',
                                 'module' => 'AdminMenu',
@@ -51,7 +51,7 @@ class Trex_AdminMenu_Metadata_Menu extends Trex_Metadata
                     ),
                     'converter' => array(
                         'list' => array(
-                            array('Project_Hepler_Category', 'convertTreeResource'),
+                            array('Project_Helper_Category', 'convertTreeResource'),
                             array(
                                 'namespace' => 'Trex',
                                 'module' => 'AdminMenu',

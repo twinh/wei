@@ -45,7 +45,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Hepler_Category', 'getTreeResource'),
+                            array('Project_Helper_Category', 'getTreeResource'),
                             array(
                                 'namespace' => 'Trex',
                                 'module' => 'Category',
@@ -327,7 +327,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
         if(isset($_GET['sign']))
         {
             $this->__meta['field']['category_id']['form']['_resourceGetter'] = array(
-                array('Project_Hepler_Category', 'getTreeResource'),
+                array('Project_Helper_Category', 'getTreeResource'),
                 array(
                     'namespace' => 'Default',
                     'module' => 'Category',
@@ -353,7 +353,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
         if(NULL != $data['category_2'])
         {
             $this->__meta['field']['category_id']['form']['_resourceGetter'] = array(
-                array('Project_Hepler_Category', 'getTreeResource'),
+                array('Project_Helper_Category', 'getTreeResource'),
                 array(
                     'namespace' => 'Default',
                     'module' => 'Category',
