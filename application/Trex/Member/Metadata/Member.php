@@ -37,7 +37,7 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Hepler_Category', 'getTreeResource'),
+                            array('Project_Helper_Category', 'getTreeResource'),
                             array(
                                 'namespace' => 'Trex',
                                 'module' => 'Member',
@@ -49,6 +49,11 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
                     ),
                     'attr' => array(
                         'isLink' => 1,
+                    ),
+                    'validator' => array(
+                        'rule' => array(
+                            'notNull' => true,
+                        ),
                     ),
                 ),
                 'contact_id' => array(
@@ -178,15 +183,33 @@ class Trex_Member_Metadata_Member extends Trex_Metadata
         return $html;
     }
 
-    public function convertDbUsername($value)
+    public function validateUsername($value, $name)
     {
-        if('Add' == $this->getLastAction() && $this->isUsernameExists($value))
-        {
-            $this->setRedirectView($this->_lang->t('MSG_USERNAME_EXISTS'))
-                    ->loadView()
-                    ->display();
-            exit;
+        $set = Qwin::run('-ini')->getSet();
+        if ('Edit' == $set['action']) {
+            return true;
         }
-        return $value;
+        $set = $this->getSetFromClass();
+        $lang = Qwin::run('-lang');
+        $result = $this->isUsernameExists($value);
+
+        if(true === $result)
+        {
+            return new Qwin_Validator_Result(false, $name, 'MSG_USERNAME_EXISTS');
+        }
+        return true;
+    }
+
+    public function isUsernameExists($username)
+    {
+        $set = $this->getSetFromClass();
+        $query = $this->metaHelper->getQueryBySet($set);
+        $result = $query->where('username = ?', $username)
+            ->fetchOne();
+        if(false != $result)
+        {
+            $result = true;
+        }
+        return $result;
     }
 }

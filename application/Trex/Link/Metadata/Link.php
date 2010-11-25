@@ -37,7 +37,7 @@ class Trex_Link_Metadata_Link extends Trex_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Hepler_Category', 'getTreeResource'),
+                            array('Project_Helper_Category', 'getTreeResource'),
                             array(
                                 'namespace' => 'Trex',
                                 'module' => 'Category',

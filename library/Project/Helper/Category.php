@@ -26,7 +26,7 @@
  * @since     2010-7-17 9:41:38
  */
 
-class Project_Hepler_Category
+class Project_Helper_Category
 {
     private $_resourceCache;
     private $_fileCache;
