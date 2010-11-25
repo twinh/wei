@@ -231,4 +231,36 @@ class Qwin_Packer_Basic
         }
         return false;
     }
+
+    public function output($name)
+    {
+        // 检查是否过期,过期则重新获取内容
+        $packedFile = $this->_cachePath . '/' .  $name . '.php';
+        //echo $_SERVER['HTTP_IF_MODIFIED_SINCE'] . '<p>';
+        //echo gmdate('D, d M Y H:i:s', filemtime($packedFile)) . ' GMT';exit;
+        if(!file_exists($packedFile)                                                // 缓存文件不存在
+            || 0 == $this->_cacheAge                                                // 设置缓存时间为0,即强制更新
+            || $_SERVER['REQUEST_TIME'] - filemtime($packedFile) > $this->_cacheAge // 缓存存在但是已经过期
+            || empty($_SERVER['HTTP_IF_MODIFIED_SINCE']))                            // 未设置修改时间,即初次浏览
+            //|| $_SERVER['HTTP_IF_MODIFIED_SINCE'] != gmdate('D, d M Y H:i:s', filemtime($packedFile)) . ' GMT') // TODO
+        {
+            $output = $this->getCache($name);
+            $size = strlen($output);
+
+            if ($size > 0) {
+                header('Cache-Control: private');
+                header('Pragma: cache');
+                header('Connection: close');
+                header('Last-Modified: ' . gmdate('D, d M Y H:i:s', filemtime($packedFile)) . ' GMT');
+                header('ETag: ' . $name);
+            }
+
+            header("Content-Length: ". $size);
+
+            echo $output;
+        } else {
+            header('HTTP/1.1 304 Not Modified');
+            header("Connection: close");
+        }
+    }
 }

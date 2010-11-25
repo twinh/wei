@@ -1039,7 +1039,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         }
 
         // 根据元数据进行验证
-        if(!$option['validator'] || empty($validator['rule']))
+        if(!$option['meta'] || empty($validator['rule']))
         {
             return true;
         }

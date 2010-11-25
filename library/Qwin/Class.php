@@ -95,7 +95,7 @@ class Qwin_Class
      * @param string $cacheFile
      * @return bool
      */
-    public function setCacheFile($cacheFile)
+    public static function setCacheFile($cacheFile)
     {
         self::$_cacheFile = $cacheFile;
         if(file_exists($cacheFile))
@@ -118,10 +118,12 @@ class Qwin_Class
         {
             foreach($key as $real_key => $real_calss_name)
             {
-                self::$_classMap[$real_key] = $real_calss_name;
+                $real_key = strtolower($real_key);
+                self::$_classMap[$real_key] = strtolower($real_calss_name);
             }
         } else {
-            self::$_classMap[$key] = $class_name;
+            $key = strtolower($key);
+            self::$_classMap[$key] = strtolower($class_name);
         }
     }
 
@@ -134,6 +136,7 @@ class Qwin_Class
      */
     public static function addClass($name, $class)
     {
+        $name = strtolower($name);
         self::$_instancedClass[$name] = $class;
     }
     
@@ -145,7 +148,7 @@ class Qwin_Class
     public static function run($name, $param1 = null, $param2 = null, $param3 = null)
     {
         // 因为 php 类名不区分大小写
-        //$name = strtolower($name);
+        $name = strtolower($name);
         
         // 转换类名映射
         if(isset(self::$_classMap[$name])) {
@@ -168,7 +171,7 @@ class Qwin_Class
             // 如果存在此类,将短标签加入到映射中
             if(null != $result)
             {
-                self::$_classMap[$name] = $realName;
+                self::$_classMap[$name] = strtolower($realName);
             }
             return $result;
 
@@ -334,8 +337,8 @@ class Qwin_Class
         preg_match_all ("/class\s(\w+)[\s|\n]*[\w|\s]*{/i", $data, $class_arr);
         if(0 != count($class_arr[1])) {
             foreach($class_arr[1] as $class) {
-                self::$_classCache[$class] = $file;
-                //self::$_classCache[strtolower($class)] = $file;
+                //self::$_classCache[$class] = $file;
+                self::$_classCache[strtolower($class)] = $file;
             }
         }
     }
