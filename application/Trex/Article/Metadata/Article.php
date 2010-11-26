@@ -27,11 +27,6 @@
 
 class Trex_Article_Metadata_Article extends Trex_Metadata
 {
-    public function  __construct()
-    {
-        parent::__construct();
-    }
-
     public function setMetadata()
     {
         $this->setCommonMetadata()

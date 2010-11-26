@@ -58,7 +58,7 @@ class Trex_Category_Controller_Category extends Trex_ActionController
             'controller' => '',
         ));
 
-        $data = $this->metaHelper->getQueryBy($setting)
+        $data = $this->metaHelper->getQueryBySet($setting)
             ->orderBy('order ASC')
             ->execute()
             ->toArray();
