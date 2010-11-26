@@ -98,7 +98,7 @@ class Qwin_Trex_Setup
         Qwin::setAutoload();
         Qwin::setCacheFile(QWIN_ROOT_PATH . '/cache/php/class.php');
         
-        $this->_request = Qwin::run('Qwin_Request');
+        $this->_request = Qwin::run('-request');
 
         // 注册初始化类
         Qwin::addClass(__CLASS__, $this);

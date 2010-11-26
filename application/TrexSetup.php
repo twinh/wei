@@ -29,6 +29,7 @@ class TrexSetup extends Qwin_Trex_Setup
 
     public function  __construct($config, $set)
     {
+        spl_autoload_register(array($this, 'autoload'));
         parent::__construct($config, $set);
     }
 
@@ -63,10 +64,5 @@ class TrexSetup extends Qwin_Trex_Setup
             }
         }
         return false;
-    }
-
-    protected function _onNamespaceLoad()
-    {
-        spl_autoload_register(array($this, 'autoload'));
     }
 }

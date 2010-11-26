@@ -56,14 +56,6 @@ class Trex_Category_Metadata_Category extends Trex_Metadata
                         'maxlength,40',
                     ),
                 ),
-                'sign' => array(
-                    'form' => array(
-                        'name' => 'sign',
-                    ),
-                    'attr' => array(
-                        'isList' => 0,
-                    ),
-                ),
                 'image' => array(
                     'form' => array(
                         '_widget' => array(
