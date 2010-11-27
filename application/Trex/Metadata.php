@@ -246,7 +246,7 @@ class Trex_Metadata extends Qwin_Metadata
      * @param array $cpoyData 未转换过的当前记录的值
      * @return string Y-m-d格式的日期
      */
-    public function convertListDateCreated($value, $name, $data, $copyData)
+    public function convertListDateCreated($value, $name, $data, $dataCopy)
     {
         return date('Y-m-d', strtotime($value));
     }
@@ -260,7 +260,7 @@ class Trex_Metadata extends Qwin_Metadata
      * @param array $cpoyData 未转换过的当前记录的值
      * @return string Y-m-d格式的日期
      */
-    public function convertListDateModified($value, $name, $data, $copyData)
+    public function convertListDateModified($value, $name, $data, $dataCopy)
     {
         return date('Y-m-d', strtotime($value));
     }
@@ -275,16 +275,16 @@ class Trex_Metadata extends Qwin_Metadata
      * @return string 当前域的新值
      * @todo 简化,重利用
      */
-    public function convertListOperation($value, $name, $data, $copyData)
+    public function convertListOperation($value, $name, $data, $dataCopy)
     {
         $primaryKey = $this->db['primaryKey'];
         $url = Qwin::run('-url');
         $lang = Qwin::run('-lang');
         $set = $this->getSetFromClass();
-        $data  = Qwin_Helper_Html::jQueryButton($url->createUrl($set, array('action' => 'Edit', $primaryKey => $copyData[$primaryKey])), $lang->t('LBL_ACTION_EDIT'), 'ui-icon-tag')
-              . Qwin_Helper_Html::jQueryButton($url->createUrl($set, array('action' => 'View', $primaryKey => $copyData[$primaryKey])), $lang->t('LBL_ACTION_VIEW'), 'ui-icon-lightbulb')
-              . Qwin_Helper_Html::jQueryButton($url->createUrl($set, array('action' => 'Add', $primaryKey => $copyData[$primaryKey])), $lang->t('LBL_ACTION_COPY'), 'ui-icon-transferthick-e-w')
-              . Qwin_Helper_Html::jQueryButton('javascript:if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE)){window.location=\'' . $url->createUrl($set, array('action' => 'Delete', $primaryKey => $copyData[$primaryKey])) . '\';}', $lang->t('LBL_ACTION_DELETE'), 'ui-icon-closethick');
+        $data  = Qwin_Helper_Html::jQueryButton($url->createUrl($set, array('action' => 'Edit', $primaryKey => $dataCopy[$primaryKey])), $lang->t('LBL_ACTION_EDIT'), 'ui-icon-tag')
+              . Qwin_Helper_Html::jQueryButton($url->createUrl($set, array('action' => 'View', $primaryKey => $dataCopy[$primaryKey])), $lang->t('LBL_ACTION_VIEW'), 'ui-icon-lightbulb')
+              . Qwin_Helper_Html::jQueryButton($url->createUrl($set, array('action' => 'Add', $primaryKey => $dataCopy[$primaryKey])), $lang->t('LBL_ACTION_COPY'), 'ui-icon-transferthick-e-w')
+              . Qwin_Helper_Html::jQueryButton('javascript:if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE)){window.location=\'' . $url->createUrl($set, array('action' => 'Delete', $primaryKey => $dataCopy[$primaryKey])) . '\';}', $lang->t('LBL_ACTION_DELETE'), 'ui-icon-closethick');
         return $data;
     }
 
@@ -297,7 +297,7 @@ class Trex_Metadata extends Qwin_Metadata
      * @param array $cpoyData 未转换过的当前记录的值
      * @return int 当前域的新值
      */
-    public function convertAddOrder($value, $name, $data, $copyData)
+    public function convertAddOrder($value, $name, $data, $dataCopy)
     {
         $query = $this->metaHelper->getQuery($this);
         $result = $query
@@ -320,7 +320,7 @@ class Trex_Metadata extends Qwin_Metadata
      * @param array $cpoyData 未转换过的当前记录的值
      * @return string 当前域的新值
      */
-    public function convertDbId($value, $name, $data, $copyData)
+    public function convertDbId($value, $name, $data, $dataCopy)
     {
         if(null == $value)
         {
@@ -338,7 +338,7 @@ class Trex_Metadata extends Qwin_Metadata
      * @param array $cpoyData 未转换过的当前记录的值
      * @return string 当前域的新值
      */
-    public function convertDbDateCreated($value, $name, $data, $copyData)
+    public function convertDbDateCreated($value, $name, $data, $dataCopy)
     {
         return date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
     }
@@ -372,13 +372,13 @@ class Trex_Metadata extends Qwin_Metadata
         return $value;
     }
 
-    public function convertDbCreatedBy($value, $name, $data, $copyData)
+    public function convertDbCreatedBy($value, $name, $data, $dataCopy)
     {
         $member = Qwin::run('Qwin_Session')->get('member');
         return $member['id'];
     }
 
-    public function convertDbModifiedBy($value, $name, $data, $copyData)
+    public function convertDbModifiedBy($value, $name, $data, $dataCopy)
     {
         $member = Qwin::run('Qwin_Session')->get('member');
         return $member['id'];

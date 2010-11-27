@@ -95,6 +95,25 @@ class Trex_File_Controller_JQuery extends Qwin_Trex_Controller
         echo Qwin::run('-arr')->jsonEncode($arr, 'pear');
     }
 
+    public function actionUploadify()
+    {
+        $str = Qwin::run('Qwin_converter_String');
+        // 加载上传类
+        $upload = Qwin::run('Qwin_File_Upload');
+        $upload->upload_form_field = 'Filedata';
+        $upload->max_file_size = '10000000';
+        $upload->allowed_file_ext = array(
+            'gif', 'jpg', 'jpeg', 'png', 'bmp',
+        );
+        $upload->make_script_safe = 1;
+
+        // 获取上传路径
+        $upload->out_file_dir = './upload';
+        $upload->out_file_name = time();
+        $upload->upload_process();
+        echo iconv('GBK', 'UTF-8', $str->toUrlSeparator($upload->saved_upload_name));
+    }
+
     public function actionFileTree()
     {
         //

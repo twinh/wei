@@ -54,6 +54,17 @@ class Qwin_Form_Element_Base extends Qwin_Form
         return $data;
     }
 
+    public function file($publicSet, $privateSet, $value)
+    {
+        $set_addition = array(
+            'type' => 'file',
+            'value' => $value,
+        );
+        $attr = parent::_getAttr($set_addition + $publicSet);
+        $data = '<input ' . $attr . '/>';
+        return $data;
+    }
+
     /**
      * 创建密码域
      *
