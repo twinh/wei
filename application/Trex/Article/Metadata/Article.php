@@ -159,7 +159,7 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                         'group' => 1
                     ),
                     'form' => array(
-                        '_value' => 0,
+                        '_value' => '0',
                     ),
                 ),
                 'order' => array(

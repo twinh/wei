@@ -13,6 +13,7 @@ $jQueryFile = array(
     'core' => $jquery->loadUi('core', false),
     'widget' => $jquery->loadUi('widget', false),
     'button' => $jquery->loadUi('button', false),
+    'tabs' => $jquery->loadUi('tabs', false),
     'coreEffect' => $jquery->loadEffect('core', false),
     'qui' => $jquery->loadPlugin('qui', null, false),
     'pngFix' => $jquery->loadPlugin('pngFix', null, false),
@@ -23,6 +24,7 @@ $cssPacker
     ->add($jQueryFile['core']['css'])
     ->add($jQueryFile['widget']['css'])
     ->add($jQueryFile['button']['css'])
+    ->add($jQueryFile['tabs']['css'])
     ->add($jQueryFile['qui']['css']);
 $jsPacker
     ->add($jquery->loadCore(false))
@@ -32,6 +34,7 @@ $jsPacker
     ->add($jQueryFile['core']['js'])
     ->add($jQueryFile['widget']['js'])
     ->add($jQueryFile['button']['js'])
+    ->add($jQueryFile['tabs']['js'])
     ->add($jQueryFile['coreEffect'])
     ->add($jQueryFile['qui']['js'])
     ->add($jQueryFile['pngFix']['js']);
@@ -46,35 +49,6 @@ $jsPacker
 </script>
 </head>
 <body>
-<div id="ui-top-floating-bar" class="ui-top-floating-bar ui-widget ui-widget-header">
-	<ul>
-    	<li class="ui-top-bar-list">
-            <a href="?" class="ui-widget ui-state-active ui-corner-all"><?php echo qw_lang('LBL_QWIN') ?></a>
-        </li>
-        <?php
-        foreach($this->adminMenu as $menu) :
-            if(null == $menu['category_id']) :
-        ?>
-        <li class="ui-top-bar-list">
-            <a href="<?php echo $menu['url'] ?>" target="<?php echo $menu['target'] ?>" class="ui-widget ui-state-default ui-corner-all"><?php echo $menu['title'] ?></a>
-            <ul class="ui-state-hover ui-corner-bottom ui-corner-tr">
-                <?php
-                foreach($this->adminMenu as $subMenu) :
-                    if($menu['id'] == $subMenu['category_id']) :
-                ?>
-                <li><a href="<?php echo $subMenu['url'] ?>" target="<?php echo $subMenu['target'] ?>"><?php echo $subMenu['title'] ?></a></li>
-                <?php
-                    endif;
-                endforeach;
-                ?>
-            </ul>
-        </li>
-        <?php  
-            endif;
-        endforeach;
-        ?>
-    </ul>
-</div>
 <div id="ui-bottom-floating-botton" class="ui-bottom-floating-botton"><button><span class="ui-icon ui-icon-arrowthickstop-1-n"></span></button></div>
 <div id="ui-main" class="ui-main ui-widget-content ui-corner-all">
   <div id="ui-header" class="ui-header ui-widget">
@@ -100,6 +74,46 @@ $jsPacker
         </a>
     </div>
   </div>
+  <div class="clear"></div>
+  <div id="ui-navigation-bar" class="ui-navigation-bar">
+    <ul>
+    <?php
+    foreach($this->adminMenu as $menu):
+        if(null == $menu['category_id']):
+    ?>
+        <li><a href="#menu-<?php echo $menu['id'] ?>"><?php echo $menu['title'] ?></a></li>
+    <?php
+        endif;
+    endforeach;
+    ?>
+    </ul>
+    <?php
+    foreach($this->adminMenu as $menu):
+        if(null == $menu['category_id']):
+    ?>
+    <div id="menu-<?php echo $menu['id'] ?>">
+    <?php
+        foreach($this->adminMenu as $subMenu):
+            if($menu['id'] == $subMenu['category_id']):
+    ?>
+        <a href="<?php echo $subMenu['url'] ?>"><?php echo $subMenu['title'] ?></a>
+    <?php
+            endif;
+        endforeach;
+    ?>
+    </div>
+    <?php
+        endif;
+    endforeach;
+    ?>
+  </div>
+  <script type="text/javascript">
+  // 提前加载(当页面数据量大时,会在加载瞬间出现没有样式的代码)
+  jQuery("div.ui-navigation-bar").tabs({
+    event: 'mouseover'
+  });
+  jQuery('div.ui-navigation-bar .ui-tabs-panel a').qui();
+  </script>
 <table id="ui-main-table">
     <tr>
         <td id="ui-main-left">
