@@ -80,6 +80,46 @@ a{
     z-index: 999;
 }
 
+
+/* Navigation Bar
+----------------------------------*/
+div.ui-navigation-bar{
+    -moz-border-radius:0;
+    -webkit-border-radius:0;
+    padding:.2em 0;
+    border-left:0;
+    border-right:0;
+}
+div.ui-navigation-bar .ui-tabs-nav{
+    -moz-border-radius:0;
+    -webkit-border-radius:0;
+    border-left:0;
+    border-right:0;
+    padding-left: 10px;
+}
+.ui-navigation-bar ul li a{
+     cursor:pointer;
+}
+div.ui-navigation-bar .ui-tabs-panel {
+    padding: 3px;
+    height: 16px;
+    margin-left: 16px;
+}
+.ui-navigation-bar .ui-tabs-panel a{
+    font-size: 12px;
+    padding: 3px 8px;
+}
+.ui-navigation-bar .ui-tabs-panel a:hover{
+    border:none;
+    font-weight:normal;
+}
+.ui-navigation-bar .ui-tabs-nav li.ui-tabs-selected a,
+.ui-navigation-bar .ui-tabs-nav li.ui-state-disabled a,
+.ui-navigation-bar .ui-tabs-nav li.ui-state-processing a {
+    cursor:pointer;
+}
+
+
 /* Header
 ----------------------------------*/
 .ui-header{
@@ -111,6 +151,7 @@ div.ui-header-logo{
     font-size: 12px;
     line-height: 14px;
     height:  14px;
+    border-top: none;
 }
 .ui-header-shortcut a.ui-header-shortcut-last-anchor{
     border-right: none;
@@ -145,6 +186,7 @@ div.ui-header-logo{
 #ui-main-table{
     width: 100%;
     padding: 0 8px;
+    margin: 8px 0 0;
 }
 #ui-main-left{
     width: 200px;
@@ -159,7 +201,7 @@ div.ui-header-logo{
 ----------------------------------*/
 .ui-main{
     margin: 0 auto;
-    padding: 38px 0 0;
+    border: none;
 }
 
 /* Footer
@@ -389,14 +431,6 @@ div.ui-copyright{
 }
 .ui-error-box .ui-error-box-content{
     padding: 2em;
-}
-
-/* Datepicker
-----------------------------------*/
-/* make it looks more better */
-.ui-tabs .ui-tabs-nav li a{
-    font-size: 1.1em;
-    font-weight: bold;
 }
 
 /* Message

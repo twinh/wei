@@ -111,7 +111,7 @@ class Trex_Member_Controller_Setting extends Trex_Controller
                 'data' => get_defined_vars(),
             );
         } else {
-            $ses = Qwin::run('-ses');
+            $ses = Qwin::run('-session');
             $member = $ses->get('member');
             $theme = $ses->get('style');
             
