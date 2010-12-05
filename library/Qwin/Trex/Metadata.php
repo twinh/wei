@@ -748,6 +748,16 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         return $result;
     }
 
+    public function getModelMetadataByAlias($meta, $name)
+    {
+        if (!isset($meta['metadata'][$name])) {
+            return $meta['metadata'][$name];
+        }
+        $metaName = $meta['model'][$name]['metadata'];
+        $meta['metadata'][$name] = Qwin_Metadata_Manager::get($metaName);
+        return $meta['metadata'][$name];
+    }
+
     /**
      * 获取 url 中的数据
      *
@@ -977,6 +987,141 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             array_walk($layout, 'ksort');
         }
 
+        return $layout;
+    }
+
+    /**
+     * 排列元数据
+     *
+     * @param Qwin_Trex_Metadata $meta 元数据
+     * @param array $orderedField 经过排列的域
+     * @param string|false $relatedName 元数据关联模型的元数据名称,如果是主元数据,则为false
+     * @return array 以顺序为键名,以域的名称为值的数组
+     */
+    public function orderField($meta, array $orderedField = null, $relatedName = false)
+    {
+        foreach ($meta['field'] as $name => $field) {
+            // 使用order作为键名
+            $order = $field['basic']['order'];
+            while (isset($orderedField[$order])) {
+                $order++;
+            }
+
+            if (!$relatedName) {
+                $orderedField[$order] = array(
+                    null, $field['form']['name'],
+                );
+            } else {
+                $orderedField[$order] = array(
+                     $relatedName, $field['form']['name'],
+                );
+            }
+        }
+
+        foreach ($this->getModelMetadataByType($meta, 'db') as $key => $relatedMeta) {
+            if ('db' == $meta['model'][$key]['type']) {
+                $orderedField = $this->orderField($relatedMeta, $orderedField, $key);
+            }
+        }
+
+        // 根据键名排序
+        if (!$relatedName) {
+            ksort($orderedField);
+        }
+
+        return $orderedField;
+    }
+
+    /**
+     * 占一格,后面的补上
+     */
+    const ONE_CELL          = 1;
+
+    /**
+     * 占一行,后面的换行
+     */
+    const ONE_ROW           = 2;
+
+    /**
+     * 占一格,后面的换行
+     */
+    const ONE_CELL_FULL_ROW = 3;
+
+
+    public function getTableLayout($meta, $orderedField, $action = 'add')
+    {
+        // -1储存隐藏域
+        $layout = array(
+            -1 => array(), 
+        );
+        
+        // 布局指示器
+        $pointer = array();
+
+        foreach ($orderedField as $field) {
+            if (null == $field[0]) {
+                $tempMeta = $meta;
+            } else {
+                $tempMeta = $this->getModelMetadataByAlias($meta, $field[0]);
+            }
+
+            // 将隐藏域加入第一个布局中
+            if ('hidden' == $tempMeta['field'][$field[1]]['form']['_type']) {
+                $layout[-1][] = array($field[0], $tempMeta['field'][$field[1]]['form']['name']);
+                continue;
+            }
+            $group = $tempMeta['field'][$field[1]]['basic']['group'];
+            $name = $tempMeta['field'][$field[1]]['form']['name'];
+            if (!isset($layout[$group])) {
+                $layout[$group] = array();
+                $pointer[$group] = false;
+            }
+
+            if (isset($tempMeta['field'][$field[1]]['basic']['layout'])) {
+                $fieldLayout = $tempMeta['field'][$field[1]]['basic']['layout'];
+            } else {
+                $fieldLayout = null;
+            }
+
+            // 占一格,自动填补向左填补
+            // 如果最后一个元素满2个子元素,则继续创建新的元素,否则,加入元素中,还需排除一行的情况
+            if (!isset($fieldLayout) || 1 == $fieldLayout) {
+                $count = count($layout[$group]) - 1;
+                if (self::ONE_ROW != $pointer[$group] && isset($layout[$group][$count]) && 2 != count($layout[$group][$count])) {
+                    $layout[$group][$count][] = array($field[0], $name);
+                } else {
+                    $layout[$group][] = array(
+                        array($field[0], $name),
+                    );
+                    $pointer[$group] = false;
+                }
+            }
+
+            // 独自占满一行
+            if (2 == $fieldLayout) {
+                $layout[$group][] = array(
+                    array($field[0], $name),
+                );
+                $pointer[$group] = self::ONE_ROW;
+                continue;
+            }
+
+            // 占一格,但是后面为空
+            if (3 == $fieldLayout) {
+                $layout[$group][] = array(
+                    array($field[0], $name), '',
+                );
+                continue;
+            }
+
+            // 占一格,右边
+            if (4 == $fieldLayout) {
+                $layout[$group][] = array(
+                    '', array($field[0], $name),
+                );
+                continue;
+            }
+        }
         return $layout;
     }
 
@@ -1261,29 +1406,6 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             $resource[$row[$key]] = $row[$key2];
         }
         return $resource;
-    }
-
-    function createLayoutArr($fieldArr, $col = 2)
-    {
-        $layoutArr = array();
-        $x = 0;
-        $y = -1;
-        $tmpCol = $col - 1;
-        $banType = array('hidden', 'custom');
-        foreach ($fieldArr as $field) {
-            // 隐藏域不占空间
-            if (in_array($field['form']['_type'], $banType)) {
-                continue;
-            }
-            // 初始化数组
-            if (0 == $x) {
-                $y++;
-                $layoutArr[$y] = array();
-            }
-            $layoutArr[$y][$x] = $field['form']['name'];
-            $tmpCol == $x++ && $x = 0;
-        }
-        return $layoutArr;
     }
 
     public function saveRelatedDbData($meta, $data, $query)

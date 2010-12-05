@@ -74,6 +74,9 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     ),
                 ),
                 'title' => array(
+                    'basic' => array(
+                        'layout' => 2,
+                    ),
                     'validator' => array(
                         'rule' => array(
                             'required' => true,
@@ -235,6 +238,9 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                     ),
                 ),
                 'content_preview' => array(
+                    'basic' => array(
+                        'layout' => 2,
+                    ),
                     'form' => array(
                         '_type' => 'textarea',
                     ),
@@ -271,6 +277,9 @@ class Trex_Article_Metadata_Article extends Trex_Metadata
                 1 => 'LBL_GROUP_DETAIL_DATA',
                 2 => 'LBL_GROUP_PAGE_DATA',
                 3 => 'LBL_GROUP_META_DATA',
+            ),
+            'layout' => array(
+
             ),
             'model' => array(
                 'detail' => array(

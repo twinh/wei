@@ -115,6 +115,7 @@ class Trex_Metadata extends Qwin_Metadata
             'id' => array(
                 'basic' => array(
                     'order' => -1,
+                    'layout' => 2,
                 ),
                 'form' => array(
                     //'_type' => 'hidden',
