@@ -55,6 +55,7 @@ class Trex_Article_Metadata_Detail extends Trex_Metadata
                 'content' => array(
                     'basic' => array(
                         'order' => 400,
+                        'layout' => 2,
                     ),
                     'form' => array(
                         '_type' => 'textarea',

@@ -42,7 +42,10 @@ class Trex_View_EditForm extends Trex_View
         $arrayHelper = Qwin::run('-arr');
         $data = $this->data;
         $set = Qwin::run('-ini')->getSet();
-        $layout = $metaHelper->getEditLayout($meta);
+
+        $orderedFeid = $metaHelper->orderField($meta);
+        $layout = $metaHelper->getTableLayout($meta, $orderedFeid, 'edit');
+
         $group = $meta['group'];
         $jQueryValidateCode = $arrayHelper->jsonEncode($metaHelper->getJQueryValidateCode($meta));
 
