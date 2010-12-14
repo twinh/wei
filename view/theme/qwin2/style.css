@@ -33,18 +33,12 @@ a{
 /* 页顶浮动栏
 ----------------------------------*/
 #ui-top-floating-bar{
-    position: fixed;
     width: 100%;
     top: 0;
     left: 0;
-    z-index: 999;
     height: 40px;
-    border-top: none;
     border-left: none;
     border-right: none;
-    -moz-opacity: 0.9;
-    opacity: 0.9;
-    filter: alpha('opacity=90');
 }
 
 /* http://chrisjean.com/2009/09/30/fix-width-auto-floated-elements-in-ie-6/ */
@@ -64,6 +58,7 @@ a{
 #ui-top-floating-bar ul li ul{
     display: none;
     position: absolute;
+    z-index: 999;
 }
 #ui-top-floating-bar ul li ul li{
     clear: both;
@@ -484,6 +479,7 @@ div.ui-copyright{
     padding: 2px;
     font-weight: normal;
     line-height: 20px;
+    font-size: 12px;
 
     border-right-width: 1px;
     border-right-color: inherit;
@@ -502,6 +498,7 @@ div.ui-copyright{
     font-weight: bold;
     text-indent: 6px;
     border-right: none;
+    font-size: 14px;
 }
 /* 2010-05-21 */
 .ui-table td a.ui-jqgrid-icon{

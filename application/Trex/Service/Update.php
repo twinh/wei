@@ -94,8 +94,12 @@ class Trex_Service_Update extends Trex_Service_BasicAction
         // 原始数据
         $rawData = $result->toArray();
 
+        // 补全数据
+        $data = $metaHelper->fillDbData($config['data']['db'], $rawData);
+
+        // TODO 如果值是从数据库来的,没有经过更改,则可以不进行验证转换
         // 转换,验证
-        $data = $metaHelper->convertOne($config['data']['db'], 'db', $meta, $meta, array('view' => false));
+        $data = $metaHelper->convertOne($data, 'db', $meta, $meta, array('view' => false));
         $validateResult = $metaHelper->validateArray($data + $_POST, $meta, $meta);
         if(true !== $validateResult)
         {
