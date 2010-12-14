@@ -99,6 +99,7 @@ abstract class Qwin_Metadata extends Qwin_Metadata_Abstract
                 $this->_data[$name]->addData($data)->format();
             }
         }
+        return $this;
     }
 
     /**

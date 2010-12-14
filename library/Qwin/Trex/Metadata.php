@@ -410,6 +410,12 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         return $meta['db']['primaryKey'];
     }
 
+    /**
+     * 根据应用结构配置获取元数据
+     *
+     * @param array $set 应用结构配置
+     * @return Trex_Metadata
+     */
     public function getMetadataBySet(array $set)
     {
         $ini = Qwin::run('-ini');
@@ -736,6 +742,9 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     
     public function getModelMetadataByType($meta, $type)
     {
+        if (!isset($meta['model'])) {
+            return array();
+        }
         $result = array();
         foreach ($meta['model'] as $name => $model) {
             if ($model['enabled'] && $type == $model['type']) {
@@ -846,46 +855,6 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         return $layout;
     }
 
-    public function getEditLayout($meta, array $layout = null, $relatedName = false)
-    {
-        foreach($meta['field'] as $name => $field) {
-            if (1 == $field['attr']['isReadonly'] || 'custom' == $field['form']['_type']) {
-                // TODO
-                $meta['field']->set($name . '.form._type', 'hidden');
-                //continue;
-            }
-
-            $group = $field['basic']['group'];
-            if (!isset($layout[$group])) {
-                $layout[$group] = array();
-            }
-
-            // 使用order作为键名
-            $order = $field['basic']['order'];
-            while (isset($layout[$group][$order])) {
-                $order++;
-            }
-
-            if (!$relatedName) {
-                $layout[$group][$order] = $field['form']['name'];
-            } else {
-                $layout[$group][$order] = array(
-                     $relatedName, $field['form']['name'],
-                );
-            }
-        }
-        foreach($this->getModelMetadataByType($meta, 'db') as $key => $relatedMeta) {
-            $layout = $this->getEditLayout($relatedMeta, $layout, $key);
-        }
-
-        // 根据键名排序
-        if (!$relatedName) {
-            array_walk($layout, 'ksort');
-        }
-
-        return $layout;
-    }
-
     public function getListLayout(Qwin_Metadata $meta, array $layout = null, $relatedName = false)
     {
         null == $layout && $layout = array();
@@ -950,46 +919,6 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         return $rowData;
     }
 
-    public function getAddLayout($meta, array $layout = null, $relatedName = false)
-    {
-        foreach ($meta['field'] as $name => $field) {
-            if('custom' == $field['form']['_type']) {
-                continue;
-            }
-
-            $group = $field['basic']['group'];
-            if (!isset($layout[$group])) {
-                $layout[$group] = array();
-            }
-
-            // 使用order作为键名
-            $order = $field['basic']['order'];
-            while (isset($layout[$group][$order])) {
-                $order++;
-            }
-
-            if (!$relatedName) {
-                $layout[$group][$order] = $field['form']['name'];
-            } else {
-                $layout[$group][$order] = array(
-                     $relatedName, $field['form']['name'],
-                );
-            }
-        }
-        foreach ($this->getModelMetadataByType($meta, 'db') as $key => $relatedMeta) {
-            if ('db' == $meta['model'][$key]['type']) {
-                $layout = $this->getAddLayout($relatedMeta, $layout, $key);
-            }
-        }
-
-        // 根据键名排序
-        if (!$relatedName) {
-            array_walk($layout, 'ksort');
-        }
-
-        return $layout;
-    }
-
     /**
      * 排列元数据
      *
@@ -1032,6 +961,24 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         return $orderedField;
     }
 
+    public function callbackAddLayout($field)
+    {
+        if('custom' == $field['form']['_type']) {
+            return true;
+        }
+        return false;
+    }
+
+    public function callbackEditLayout($field)
+    {
+        if (1 == $field['attr']['isReadonly'] || 'custom' == $field['form']['_type']) {
+            return true;
+            // TODO
+            //$meta['field']->set($name . '.form._type', 'hidden');
+        }
+        return false;
+    }
+
     /**
      * 占一格,后面的补上
      */
@@ -1048,7 +995,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     const ONE_CELL_FULL_ROW = 3;
 
 
-    public function getTableLayout($meta, $orderedField, $action = 'add')
+    public function getTableLayout($meta, $orderedField, $action = 'add', $defaultLayout = 2)
     {
         // -1储存隐藏域
         $layout = array(
@@ -1070,6 +1017,16 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
                 $layout[-1][] = array($field[0], $tempMeta['field'][$field[1]]['form']['name']);
                 continue;
             }
+
+            // 通过回调方法自定义处理
+            $methodName = 'callback' . $action . 'Layout';
+            if(method_exists($this, $methodName)) {
+                if (call_user_func_array(array($this, $methodName), array($tempMeta['field'][$field[1]]))) {
+                    $layout[-1][] = array($field[0], $tempMeta['field'][$field[1]]['form']['name']);
+                    continue;
+                }
+            }
+
             $group = $tempMeta['field'][$field[1]]['basic']['group'];
             $name = $tempMeta['field'][$field[1]]['form']['name'];
             if (!isset($layout[$group])) {
@@ -1080,7 +1037,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             if (isset($tempMeta['field'][$field[1]]['basic']['layout'])) {
                 $fieldLayout = $tempMeta['field'][$field[1]]['basic']['layout'];
             } else {
-                $fieldLayout = null;
+                $fieldLayout = $defaultLayout;
             }
 
             // 占一格,自动填补向左填补
@@ -1406,6 +1363,20 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
             $resource[$row[$key]] = $row[$key2];
         }
         return $resource;
+    }
+
+    public function fillDbData($data, $dbData)
+    {
+        foreach ($dbData as $field => $value) {
+            if (!is_array($value)) {
+                if (!array_key_exists($field, $data)) {
+                    $data[$field] = $value;
+                }
+            } else {
+               $data[$field] = $this->fillDbData($data[$field], $dbData[$field]);
+            }
+        }
+        return $data;
     }
 
     public function saveRelatedDbData($meta, $data, $query)

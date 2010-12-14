@@ -42,7 +42,11 @@ class Trex_View_AddForm extends Trex_View
         $arrayHelper = Qwin::run('-arr');
         $data = $this->data;
         $set = Qwin::run('-ini')->getSet();
-        $layout = $metaHelper->getAddLayout($meta);
+
+        $orderedFeid = $metaHelper->orderField($meta);
+        $layout = $metaHelper->getTableLayout($meta, $orderedFeid, 'add');
+
+        //$layout = $metaHelper->getAddLayout($meta);
         $group = $meta['group'];
         $jQueryValidateCode = $arrayHelper->jsonEncode($metaHelper->getJQueryValidateCode($meta));
 

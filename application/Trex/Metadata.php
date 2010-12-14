@@ -300,6 +300,7 @@ class Trex_Metadata extends Qwin_Metadata
      */
     public function convertAddOrder($value, $name, $data, $dataCopy)
     {
+        return 50;
         $query = $this->metaHelper->getQuery($this);
         $result = $query
             ->select($this->db['primaryKey'] . ', order')

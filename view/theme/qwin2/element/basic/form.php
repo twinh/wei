@@ -95,13 +95,13 @@ var jQueryValidateCode = <?php echo $jQueryValidateCode?>;
                                 $tempMeta = $meta;
                                 $tempData = $data;
                                 $formSet = $tempMeta['field'][$fieldCell[1]]['form'];
-                                $formSet['_value'] = $tempData[$formSet['name']];
+                                $formSet['_value'] = isset($tempData[$formSet['name']]) ? $tempData[$formSet['name']] : null;
                             else:
                                 $tempMeta = $meta['metadata'][$fieldCell[0]];
                                 $tempData = $data[$fieldCell[0]];
                                 $formSet = $tempMeta['field'][$fieldCell[1]]['form'];
 
-                                $formSet['_value'] = $tempData[$formSet['name']];
+                                $formSet['_value'] = isset($tempData[$formSet['name']]) ? $tempData[$formSet['name']] : null;
                                 $formSet['id'] = $fieldCell[0] . '_' . $formSet['name'];
                                 $formSet['name'] = $fieldCell[0] . '[' . $formSet['name'] . ']';
                             endif;

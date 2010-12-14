@@ -64,10 +64,10 @@ class Qwin_Trex_Setup
     protected $_controller;
 
     /**
-     * 配置数组
+     * 全局配置数组
      * @var array
      */
-    protected $_config;
+    protected $config;
 
     /**
      * 编码后的配置数组
@@ -88,8 +88,6 @@ class Qwin_Trex_Setup
      */
     public function __construct($config, $set = null)
     {
-        $this->_config = $config;
-
         // 加载Qwin函数库
         require_once QWIN_LIB_PATH . '/function/qwin.php';
 
@@ -99,6 +97,7 @@ class Qwin_Trex_Setup
         Qwin::setCacheFile(QWIN_ROOT_PATH . '/cache/php/class.php');
         
         $this->_request = Qwin::run('-request');
+        $this->config = Qwin::run('-config', $config);
 
         // 注册初始化类
         Qwin::addClass(__CLASS__, $this);
@@ -152,7 +151,7 @@ class Qwin_Trex_Setup
          * 加载命名空间
          * 如果是配置文件中不允许的命名空间,则抛出异常
          */
-        if(!in_array($set['namespace'], $this->_config['allowedNamespace']))
+        if(!in_array($set['namespace'], $this->config['allowedNamespace']->toArray()))
         {
             require_once 'Qwin/Trex/Setup/Exception.php';
             throw new Qwin_Trex_Setup_Exception('The namespace ' . $set['namespace'] . ' is not allowed.');
@@ -203,7 +202,7 @@ class Qwin_Trex_Setup
         {
             call_user_func_array(
                 array($this->_controller, $action),
-                array(&$set, &$this->_config)
+                array(&$set, &$this->config)
             );
         } else {
             $this->_onActionNotExists($set['action']);
@@ -232,7 +231,7 @@ class Qwin_Trex_Setup
         }
 
         $keyArray = explode('.', $name);
-        $tempConfig = $this->_config;
+        $tempConfig = $this->config;
         foreach($keyArray as $key)
         {
             if(isset($tempConfig[$key]))
@@ -248,7 +247,7 @@ class Qwin_Trex_Setup
      */
     public function setConfig($config)
     {
-        $this->_config = $config;
+        $this->config = $config;
         return $this;
     }
 
