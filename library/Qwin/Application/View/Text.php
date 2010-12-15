@@ -1,6 +1,6 @@
 <?php
 /**
- * 快速初始Doctrine对象
+ * Text
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,23 +17,26 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Hepler
+ * @subpackage  
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-05 11:37:22
+ * @since       2010-08-07 15:52:02
  */
 
-class Qwin_Helper_Doctrine
+class Qwin_Application_View_Text extends Qwin_Application_View
 {
-    public function arrayToRecord()
+    /**
+     * 输出纯文本
+     */
+    public function display()
     {
-        
-    }
-
-    public function createdFromArray($set)
-    {
-        
+        if(isset($this->_data['data']))
+        {
+            echo $this->_data['data'];
+        } else {
+            echo 'Does not set the \'data\' key.';
+        }
     }
 }

@@ -29,17 +29,25 @@ class Qwin_Helper_File
 {    
     public static function writeAsArray($code, $path, $name = '')
     {
+        // 创建路径
         $path = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
         self::makePath($path);
 
-        $code = Qwin::run('Qwin_Helper_Array')->tophpCode($code);
+        // 上传
+        $code = var_export($code, true);
         if('' != $name)
         {
             $fileData = "<?php\r\n\$$name = $code;";
         } else {
             $fileData = "<?php\r\nreturn $code;";
         }
-        file_put_contents($path, $fileData);
+        
+        $result = file_put_contents($path, $fileData);
+        if (false === $result) {
+            throw new Qwin_Helper_Exception('Can not write file "' . $path . '"');
+        }
+        
+        return true;
     }
 
     public static function makePath($path)
@@ -116,5 +124,4 @@ class Qwin_Helper_File
         }
         return false;
     }
-
 }

@@ -25,13 +25,11 @@
  * @since       2010-3-21 23:20:37
  */
 
-class Qwin_converter_Time
+class Qwin_Converter_Time
 {
     static function date($data, $format = 'Y-m-d')
     {
         return date($format, $data);
     }
-
-    
 }
 

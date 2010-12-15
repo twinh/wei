@@ -52,7 +52,7 @@ class Qwin_Metadata_Element_Model extends Qwin_Metadata_Element_Abstract
 
     public function format()
     {
-        $metaHepler = Qwin::run('Qwin_Trex_Metadata');
+        $metaHepler = Qwin::run('Qwin_Application_Metadata');
         foreach($this->_data as $key => $row)
         {
             $this->_data[$key] = $this->_format($row, $key);

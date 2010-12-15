@@ -1,6 +1,6 @@
 <?php
 /**
- * Exception
+ * Namespace
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,19 +17,14 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Metadata
+ * @subpackage  Application
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-24 10:57:29
+ * @since       2010-08-16 15:45:02
  */
 
-/**
- * @see Qwin_Exception
- */
-require_once 'Qwin/Exception.php';
-
-class Qwin_Trex_Metadata_Exception extends Qwin_Exception
+class Qwin_Application_Namespace
 {
 }

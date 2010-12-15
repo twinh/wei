@@ -1,6 +1,6 @@
 <?php
-/**
- * Text
+ /**
+ * Module
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,26 +17,14 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  
+ * @subpackage  Application
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-07 15:52:02
+ * @since       2010-4-17 15:50:02
  */
 
-class Qwin_Trex_View_Text extends Qwin_Trex_View
+class Qwin_Application_Module
 {
-    /**
-     * 输出纯文本
-     */
-    public function display()
-    {
-        if(isset($this->_data['data']))
-        {
-            echo $this->_data['data'];
-        } else {
-            echo 'Does not set the \'data\' key.';
-        }
-    }
 }

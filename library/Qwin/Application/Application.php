@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Trex
+ * @subpackage  Application
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,7 +25,7 @@
  * @since       2010-09-16 16:18:45
  */
 
-class Qwin_Trex_Application
+class Qwin_Application_Application
 {
     protected $_path;
 
@@ -164,7 +164,7 @@ class Qwin_Trex_Application
                             if('action' == substr($method, 0, 6))
                             {
                                 $actionName = substr($method, 6);
-//                                $method = new ReflectionMethod('Trex_Article_Controller_Article', 'actionIndex');
+//                                $method = new ReflectionMethod('Application_Article_Controller_Article', 'actionIndex');
 //                                preg_match("/\/\*\*[\s]+\*\s(.+?)[\s]+\*/i", $doc, $matches);
 //                                p($matches);
                                 $action[$namespace][$module][$controller][] = $actionName;

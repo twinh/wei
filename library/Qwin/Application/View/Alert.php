@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Trex
+ * @subpackage  Application
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,7 +25,7 @@
  * @since       2010-08-07 15:03:26
  */
 
-class Qwin_Trex_View_Alert extends Qwin_Trex_View
+class Qwin_Application_View_Alert extends Qwin_Application_View
 {
     /**
      * 显示js对话框视图

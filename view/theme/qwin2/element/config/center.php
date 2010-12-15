@@ -33,7 +33,7 @@
                 </td>
             </tr>
             <tr class="ui-widget-content">
-                <td class="ui-state-default" width="20%"><?php echo qw_lang('LBL_FIELD_NAME') ?></td>
+                <td class="ui-state-default" width="20%"><?php echo qw_lang('LBL_FIELD_TITLE') ?></td>
                 <td class="ui-state-default"><?php echo qw_lang('LBL_FIELD_DESCRIPTION') ?></td>
                 <td class="ui-state-default" width="10%"><?php echo qw_lang('LBL_FIELD_OPERATION') ?></td>
             </tr>
@@ -41,9 +41,9 @@
             foreach($data as $row):
             ?>
             <tr class="ui-widget-content">
-                <td class="ui-state-default"><?php echo $row['name'] ?></td>
+                <td class="ui-state-default"><?php echo $row['title'] ?></td>
                 <td><?php echo $row['description'] ?></td>
-                <td><?php echo qw_jquery_operation_button($url->createUrl($set, array('controller' => 'Config', 'action' => 'Render', 'groupId' => $row['unique'])), $lang->t('LBL_ACTION_EDIT'), 'ui-icon-tag') ?></td>
+                <td><?php echo qw_jquery_operation_button($url->createUrl($set, array('controller' => 'Config', 'action' => 'Render', 'groupId' => $row['form_name'])), $lang->t('LBL_ACTION_EDIT'), 'ui-icon-tag') ?></td>
             </tr>
             <?php
             endforeach;

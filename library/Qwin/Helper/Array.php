@@ -28,7 +28,7 @@
 class Qwin_Helper_Array
 {
 
-    function set(&$value)
+    public static function set(&$value)
     {
         !is_array($value) && $value = array($value);
 
@@ -36,7 +36,7 @@ class Qwin_Helper_Array
     }
 
     // 多维数组 array_map
-    function multiMap(&$array, $fn_name)
+    public static function multiMap(&$array, $fn_name)
     {
         if (is_array($array))
         {
@@ -53,7 +53,7 @@ class Qwin_Helper_Array
     }
 
     // 转换为 js 对象
-    function toJsObject($qData, $t = null)
+    public static function toJsObject($qData, $t = null)
     {
         $cData = '';
         if(is_array($qData))
@@ -109,86 +109,13 @@ class Qwin_Helper_Array
         return $cData;
     }
 
-    // 转换为 php 数组代码
-    function toPhpCode($input,$t = null){
-        $output = '';
-        if (is_array($input)) {
-            $output .= "array(\r\n";
-            foreach ($input as $key => $value) {
-                $output .= $t."    ".self::toPhpCode($key,$t."    ").' => '.self::toPhpCode($value,$t."    ");
-                $output .= ",\r\n";
-            }
-            $output .= $t.')';
-        } elseif (is_string($input)) {
-            $output .= "'".str_replace(array("\\","'"),array("\\\\","\'"),$input)."'";
-        } elseif (is_int($input)) {
-            $output .= $input;
-        } elseif ( is_double($input)) {
-            $output .= "'".(string)$input."'";
-        } elseif (is_bool($input)) {
-            $output .= $input ? 'true' : 'false';
-        } else {
-            $output .= 'null';
-        }
-        return $output;
-    }
-
-    function toPhpCode2($input,$t = null)
-    {
-        $output = '';
-        if (is_array($input)) {
-            $output .= "array(\n";
-            foreach ($input as $key => $value) {
-                $output .= $t."    ".self::toPhpCode2($key,$t."    ").' => '.self::toPhpCode2($value,$t."    ");
-                $output .= ",\n";
-            }
-            $output .= $t.')';
-        } elseif (is_string($input)) {
-            $output .= "'".str_replace(array("\\","'"),array("\\\\","\'"),$input)."'";
-        } elseif (is_int($input)) {
-            $output .= $input;
-        } elseif ( is_double($input)) {
-            $output .= "'".(string)$input."'";
-        } elseif (is_bool($input)) {
-            $output .= $input ? 'true' : 'false';
-        } else {
-            $output .= 'null';
-        }
-        return $output;
-    }
-
-
-    function getPhpArray($input)
-    {
-        $output = '';
-        if (is_array($input)) {
-            $output .= "array(";
-            foreach ($input as $key => $value) {
-                $output .= self::toPhpCode($key).' => '.self::getPhpArray($value);
-                $output .= ",";
-            }
-            $output .= ')';
-        } elseif (is_string($input)) {
-            $output .= "'".str_replace(array("\\","'"),array("\\\\","\'"),$input)."'";
-        } elseif (is_int($input)) {
-            $output .= $input;
-        } elseif ( is_double($input)) {
-            $output .= "'".(string)$input."'";
-        } elseif (is_bool($input)) {
-            $output .= $input ? 'true' : 'false';
-        } else {
-            $output .= 'null';
-        }
-        return $output;
-    }
-
     /**
      * 删除二维数组中的指定键名
      *
      * @param array $data array 二维数组,一般是从数据库读出
      * @param array $key_arr array 删除的键名
      */
-    function unsetKeyInDyadicArray($data, $key_arr)
+    public static function unsetKeyInDyadicArray($data, $key_arr)
     {
         $data2 = array();
 
@@ -205,7 +132,7 @@ class Qwin_Helper_Array
      *
      * @todo rename
      */
-    function getArrayByKeyArray($data, $key_arr)
+    public static function getArrayByKeyArray($data, $key_arr)
     {
         $data_2 = array();
 
@@ -228,7 +155,7 @@ class Qwin_Helper_Array
      * @return bool
      * @todo 按键名比较,不按键名比较的几种方式
      */
-    function isSubset($arr_1, $arr_2)
+    public static function isSubset($arr_1, $arr_2)
     {
         return array_intersect_assoc($arr_1, $arr_2) == $arr_1;
     }
@@ -242,7 +169,7 @@ class Qwin_Helper_Array
      * @param array $type 排列好的二级数组
      * @todo 可以指定排列顺序,由小到大和由大到小
      */
-    function orderBy($list, $order_key = 'order', $type = 4)
+    public static function orderBy($list, $order_key = 'order', $type = 4)
     {
         if(0 == count($list))
         {
@@ -263,7 +190,7 @@ class Qwin_Helper_Array
      * @see http://gggeek.altervista.org/sw/article_20061113.html
      * @todo 编码问题, pear and fast
      */
-    function jsonEncode($data, $type = 'fast')
+    public static function jsonEncode($data, $type = 'fast')
     {
         switch($type)
         {
@@ -296,7 +223,7 @@ class Qwin_Helper_Array
      *
      *
      */
-    public function jsonDecode($data, $type = 'pear')
+    public static function jsonDecode($data, $type = 'pear')
     {
         switch($type)
         {
@@ -321,7 +248,7 @@ class Qwin_Helper_Array
         return $data;
     }
 
-    public function getNextKey($name, $data)
+    public static function getNextKey($name, $data)
     {
         foreach($data as $key => $val)
         {
@@ -342,7 +269,7 @@ class Qwin_Helper_Array
         return null;
     }
 
-    public function getPrevKey($name, $data)
+    public static function getPrevKey($name, $data)
     {
         foreach($data as $key => $val)
         {
@@ -364,7 +291,7 @@ class Qwin_Helper_Array
      * 按大写字母分割字符串
      *
      */
-    function explodeByUppercase($data)
+    public static function explodeByUppercase($data)
     {
         $arr = array();
         $len = strlen($data);
@@ -382,13 +309,16 @@ class Qwin_Helper_Array
     }
 
     /**
-     *
-     *
+     * 强制提供值作为数组的一项
+     * 
+     * @param mixed $value 提供的值
+     * @param array $array 数组
+     * @return mixed
      */
-    public function forceInArray($val, $arr)
+    public static function forceInArray($value, array $array)
     {
-        !in_array($val, $arr) && $val = $arr[0];
-        return $val;
+        !in_array($value, $array) && $value = $array[key($array)];
+        return $value;
     }
 
     /*
@@ -411,7 +341,7 @@ class Qwin_Helper_Array
     /**
      * 解码数组,统一数组键名不为数字,方便调用
      */
-    public function decodeArray($arr)
+    public static function decodeArray($arr)
     {
         self::set($arr);
         foreach($arr as $key => $val)
@@ -433,7 +363,7 @@ class Qwin_Helper_Array
      * @param string prefix 或者 suffix 或其他,表示前后缀
      * @param array 转换了的数组
      */
-    public function extendKey($arr, $fix, $type = 'prefix')
+    public static function extendKey($arr, $fix, $type = 'prefix')
     {
         if($type == 'prefix')
         {
@@ -453,7 +383,7 @@ class Qwin_Helper_Array
      * @param <type> $arr
      * @return <type>
      */
-    public function multiToSingle($arr)
+    public static function multiToSingle($arr)
     {
         $newArr = array();
         foreach($arr as $key => $val)
@@ -478,7 +408,7 @@ class Qwin_Helper_Array
      * @param array $array2
      * @return array
      */
-    public function intersect($array1, $array2)
+    public static function intersect($array1, $array2)
     {
         foreach($array1 as $key)
         {

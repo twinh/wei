@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Trex
+ * @subpackage  Application
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -26,7 +26,7 @@
  * @todo        分离出验证类,转换类,Doctrine处理类等
  */
 
-class Qwin_Trex_Metadata extends Qwin_Metadata
+class Qwin_Application_Metadata extends Qwin_Metadata
 {
     /**
      * @var array $_convertOption   数据转换的选项
@@ -116,7 +116,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     public function getClassName($addition, $set)
     {
         // TODO !!
-        !isset($set['namespace']) && $set['namespace'] = 'Trex';
+        !isset($set['namespace']) && $set['namespace'] = 'Application';
         return $set['namespace'] . '_' . $set['module'] . '_' . $addition . '_' . $set['controller'];
     }
 
@@ -125,7 +125,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      *
      * @param Qwin_Metadata $meta 元数据对象
      * @param Doctrine_Record $model Doctrine对象
-     * @return Qwin_Trex_Metadata 当前对象
+     * @return Qwin_Application_Metadata 当前对象
      */
     public function metadataToModel(Qwin_Metadata $meta, Doctrine_Record $model)
     {
@@ -414,7 +414,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
      * 根据应用结构配置获取元数据
      *
      * @param array $set 应用结构配置
-     * @return Trex_Metadata
+     * @return Application_Metadata
      */
     public function getMetadataBySet(array $set)
     {
@@ -423,7 +423,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
         if (class_exists($metadataName)) {
             $meta = Qwin_Metadata_Manager::get($metadataName);
         } else {
-            $metadataName = 'Trex_Metadata';
+            $metadataName = 'Application_Metadata';
             $meta = Qwin::run($metadataName);
         }
         Qwin::addMap('-meta', $metadataName);
@@ -922,7 +922,7 @@ class Qwin_Trex_Metadata extends Qwin_Metadata
     /**
      * 排列元数据
      *
-     * @param Qwin_Trex_Metadata $meta 元数据
+     * @param Qwin_Application_Metadata $meta 元数据
      * @param array $orderedField 经过排列的域
      * @param string|false $relatedName 元数据关联模型的元数据名称,如果是主元数据,则为false
      * @return array 以顺序为键名,以域的名称为值的数组

@@ -1,6 +1,6 @@
 <?php
 /**
- * Redirect
+ * Null
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -22,13 +22,13 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-20 20:11:14
+ * @since       2010-08-06 21:47:23
  */
 
-class Qwin_Trex_View_Redirect extends Qwin_Trex_View
+class Qwin_Application_View_Null extends Qwin_Application_View
 {
-    public function __construct()
+    public function display()
     {
-        
+        return null;
     }
 }

@@ -90,7 +90,7 @@ function qw_lang($name = null)
 
 function qw_lang_to_js()
 {
-    return 'Qwin.Lang = ' . Qwin::run('-arr')->toJsObject(Qwin::run('-lang')->toArray()) . ';';
+    return 'Qwin.Lang = ' . Qwin_Helper_Array::toJsObject(Qwin::run('-lang')->toArray()) . ';';
 }
 
 function qw_null_text($data = null)
