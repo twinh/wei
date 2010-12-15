@@ -42,7 +42,7 @@ class Project_Helper_Category
         if(!isset($this->_fileCache[$name]))
         {
             // TODO 使用文件缓存
-            $metaHelper = Qwin::run('Qwin_Trex_Metadata');
+            $metaHelper = Qwin::run('Qwin_Application_Metadata');
             $metaClass  = $metaHelper->getClassName('Metadata', $set);
             $modelClass = $metaHelper->getClassName('Model', $set);
             $meta       = Qwin_Metadata_Manager::get($metaClass);

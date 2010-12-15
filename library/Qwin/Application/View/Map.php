@@ -1,6 +1,6 @@
 <?php
 /**
- * Null
+ * Map
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -22,13 +22,27 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-06 21:47:23
+ * @since       2010-08-08 2:19:23
  */
 
-class Qwin_Trex_View_Null extends Qwin_Trex_View
+class Qwin_Application_View_Map extends Qwin_Application_View
 {
     public function display()
     {
-        return null;
+        $data = $this->data;
+
+        echo '<style type="text/css">
+                table {border-collapse: collapse;border-spacing: 0;}
+                td{white-space: nowrap;}
+              </style>';
+        echo '<table cellpadding="4" cellspacing="4" width="100%" border="1">';
+        foreach($data as $key => $value)
+        {
+            echo '<tr>',
+                 '<td>' . $key . '</td>',
+                 '<td>' . $value . '</td>',
+                 '</tr>';
+        }
+        echo '</table>';
     }
 }

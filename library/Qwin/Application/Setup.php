@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Trex
+ * @subpackage  Application
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -26,12 +26,12 @@
  * @todo        只运行一次
  */
 
-class Qwin_Trex_Setup
+class Qwin_Application_Setup
 {
     /**
      * 指定加载的命名空间的名称
      */
-    //const DEFAULT_NAMESPACE = 'Trex';
+    //const DEFAULT_NAMESPACE = 'Application';
 
     /**
      * 由命名空间,模块,控制器,行为组成的配置数组
@@ -120,17 +120,14 @@ class Qwin_Trex_Setup
 
         // 关闭魔术引用
         ini_set('magic_quotes_runtime', 0);
-        
-        // 初始化 url 参数,必须在转义后
-        //Qwin::run('Qwin_Url');
-
+       
         /**
          * 通过配置数据和Url参数初始化系统配置
          * 系统配置包括命名空间,模块,控制器,行为
          */
         $this->_set = &$set;
         $defaultSet = array(
-            'namespace' => 'Trex',
+            'namespace' => 'Common',
             'module' => 'Index',
             'controller' => 'Index',
             'action' => 'Index',
@@ -146,15 +143,15 @@ class Qwin_Trex_Setup
             // TODO 过滤非法字符
             $set[$key] = str_replace('-', '', $set[$key]);
         }
-        
+
         /**
          * 加载命名空间
          * 如果是配置文件中不允许的命名空间,则抛出异常
          */
         if(!in_array($set['namespace'], $this->config['allowedNamespace']->toArray()))
         {
-            require_once 'Qwin/Trex/Setup/Exception.php';
-            throw new Qwin_Trex_Setup_Exception('The namespace ' . $set['namespace'] . ' is not allowed.');
+            require_once 'Qwin/Application/Setup/Exception.php';
+            throw new Qwin_Application_Setup_Exception('The namespace ' . $set['namespace'] . ' is not allowed.');
         }
 
         /**
@@ -173,8 +170,8 @@ class Qwin_Trex_Setup
         $this->_module = Qwin::run($moduleClass);
         if(null == $this->_module)
         {
-            $moduleClass = 'Qwin_Trex_Module';
-            $this->_module = Qwin::run('Qwin_Trex_Module');
+            $moduleClass = 'Qwin_Application_Module';
+            $this->_module = Qwin::run('Qwin_Application_Module');
             $this->_onModuleNotExists($set['module']);
         }
         Qwin::addMap('-module', $moduleClass);
@@ -187,8 +184,8 @@ class Qwin_Trex_Setup
         $this->_controller = Qwin::run($controllerClass);
         if(null == $this->_controller)
         {
-            $controllerClass = 'Qwin_Trex_Controller';
-            $this->_controller = Qwin::run('Qwin_Trex_Controller');
+            $controllerClass = 'Qwin_Application_Controller';
+            $this->_controller = Qwin::run('Qwin_Application_Controller');
             $this->_onControllerNotExists($set['controller']);
         }
         Qwin::addMap('-controller', $controllerClass);

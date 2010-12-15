@@ -50,7 +50,7 @@ class Project_Helper_CommonClass
     {
         if(!isset($this->_language))
         {
-            $languageResult = Qwin::run('Trex_Service_Language')->getLanguage();
+            $languageResult = Qwin::run('Common_Service_Language')->getLanguage();
             $languageName = $languageResult['data'];
             $this->_language = Qwin::run('Qwin_Language')->toStandardStyle($languageName);
         }

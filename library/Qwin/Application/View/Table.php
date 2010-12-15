@@ -1,6 +1,6 @@
 <?php
 /**
- * Map
+ * Table
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,31 +17,43 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  
+ * @subpackage  Application
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-08 2:19:23
+ * @since       2010-08-06 20:40:08
  */
 
-class Qwin_Trex_View_Map extends Qwin_Trex_View
+class Qwin_Application_View_Table extends Qwin_Application_View
 {
     public function display()
     {
         $data = $this->data;
-
         echo '<style type="text/css">
                 table {border-collapse: collapse;border-spacing: 0;}
                 td{white-space: nowrap;}
               </style>';
         echo '<table cellpadding="4" cellspacing="4" width="100%" border="1">';
-        foreach($data as $key => $value)
+        if(isset($data[0]))
         {
-            echo '<tr>',
-                 '<td>' . $key . '</td>',
-                 '<td>' . $value . '</td>',
-                 '</tr>';
+            echo '<tr>';
+            foreach($data[0] as $key => $value)
+            {
+                echo '<th>' . $key . '</th>';
+            }
+            echo '</tr>';
+        } else {
+            echo '<tr><td>There is no data to display.</td></tr>';
+        }
+        foreach($data as $key => $row)
+        {
+            echo '<tr>';
+            foreach($row as $key => $value)
+            {
+                echo '<td>' . $value . '</td>';
+            }
+            echo '</tr>';
         }
         echo '</table>';
     }

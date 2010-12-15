@@ -1,6 +1,6 @@
 <?php
  /**
- * Module
+ * Model
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,14 +17,14 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Trex
+ * @subpackage  Application
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-4-17 15:50:02
+ * @since       2010-4-17 15:49:35
  */
 
-class Qwin_Trex_Module
+class Qwin_Application_Model
 {
 }

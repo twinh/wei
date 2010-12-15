@@ -1,6 +1,6 @@
 <?php
 /**
- * Language
+ * Exception
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,39 +17,19 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  
+ * @subpackage  Application
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-16 18:41:13
+ * @since       2010-07-31 23:51:41
  */
 
-class Qwin_Trex_Language extends Qwin_Metadata_Abstract
+/**
+ * @see Qwin_Exception
+ */
+require_once 'Qwin/Exception.php';
+
+class Qwin_Application_Setup_Exception extends Qwin_Exception
 {
-    /**
-     * 语言转换数据
-     * @var array
-     */
-    protected $_data = array();
-
-    public function __construct()
-    {
-        
-    }
-
-    /**
-     * 翻译一个字符串
-     *
-     * @param string $name
-     * @return string|null
-     */
-    public function t($name = null)
-    {
-        if(isset($this->_data[$name]))
-        {
-            return $this->_data[$name];
-        }
-        return $name;
-    }
 }

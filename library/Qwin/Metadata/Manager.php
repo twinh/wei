@@ -44,7 +44,7 @@ class Qwin_Metadata_Manager
      *
      * @param string $name
      * @param Qwin_Metadata $metadata
-     * @example $metadataManager->set('Trex_Article_Metadata_Article', $meta->defaultMetadata);
+     * @example $metadataManager->set('Application_Article_Metadata_Article', $meta->defaultMetadata);
      */
     public function set($name, $metadata)
     {
@@ -77,12 +77,12 @@ class Qwin_Metadata_Manager
                 return self::$_metadataObj[$className];
             }
 
-            require_once 'Qwin/Trex/Metadata/Exception.php';
-            throw new Qwin_Trex_Metadata_Exception('The class ' . $className . ' is not the sub class of Qwin_Metadata');
+            require_once 'Qwin/Application/Metadata/Exception.php';
+            throw new Qwin_Application_Metadata_Exception('The class ' . $className . ' is not the sub class of Qwin_Metadata');
         }
 
-        require_once 'Qwin/Trex/Metadata/Exception.php';
-        throw new Qwin_Trex_Metadata_Exception('Can not find the class ' . $className);
+        require_once 'Qwin/Application/Metadata/Exception.php';
+        throw new Qwin_Application_Metadata_Exception('Can not find the class ' . $className);
     }
 }
 

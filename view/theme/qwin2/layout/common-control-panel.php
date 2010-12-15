@@ -8,7 +8,6 @@
 <?php
 $member = Qwin::run('-session')->get('member');
 $nickname = isset($member['contact']) ? $member['contact']['nickname'] : $member['username'];
-$arrayHelper = Qwin::run('-arr');
 $jQueryFile = array(
     'core' => $jquery->loadUi('core', false),
     'widget' => $jquery->loadUi('widget', false),
@@ -42,7 +41,7 @@ $jsPacker
 <script type="text/javascript">
     jQuery.noConflict();
     <?php echo qw_lang_to_js() ?>
-	Qwin.get = <?php echo $arrayHelper->toJsObject($_GET);?>;
+	Qwin.get = <?php echo Qwin_Helper_Array::toJsObject($_GET);?>;
 </script>
 </head>
 <body>

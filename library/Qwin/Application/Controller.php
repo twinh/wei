@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Trex
+ * @subpackage  Application
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,7 +25,7 @@
  * @since       2009-11-24 20:45:11
  */
 
-class Qwin_Trex_Controller
+class Qwin_Application_Controller
 {
     /**
      * 行为重置时,用于保存原来行为的名称
@@ -65,7 +65,7 @@ class Qwin_Trex_Controller
      * 视图配置
      */
     protected $_view = array(
-        'class' => 'Qwin_Trex_View_Null',
+        'class' => 'Qwin_Application_View_Null',
         'data' => null,
         'element' => null,
         'layout' => null,
@@ -140,12 +140,12 @@ class Qwin_Trex_Controller
         switch ($type)
         {
             case 'alert' :
-                $this->_view['class'] = 'Qwin_Trex_View_Alert';
+                $this->_view['class'] = 'Qwin_Application_View_Alert';
                 $this->_view['data']['message'] = $argv[1];
                 $this->_view['data']['method'] = isset($argv[2]) ? $argv[2] : null;
                 break;
             case 'text' :
-                $this->_view['class'] = 'Qwin_Trex_View_Text';
+                $this->_view['class'] = 'Qwin_Application_View_Text';
                 $this->_view['data']['data'] = $argv[1];
                 break;
             default :

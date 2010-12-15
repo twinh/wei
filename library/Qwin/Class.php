@@ -285,8 +285,7 @@ class Qwin_Class
             $path = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
             self::_findClassByPath($path, $depth);
         }
-        $arr = Qwin::run('Qwin_Helper_Array')->tophpCode(self::$_classCache);
-        $fileContent = "<?php\r\nreturn $arr;\r\n ?>";
+        $fileContent = "<?php\r\nreturn " . var_export(self::$_classCache, true) . ";\r\n ?>";
         file_put_contents(self::$_cacheFile, $fileContent);
     }
     

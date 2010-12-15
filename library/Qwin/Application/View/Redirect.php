@@ -1,6 +1,6 @@
 <?php
- /**
- * Model
+/**
+ * Redirect
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,14 +17,18 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Trex
+ * @subpackage  
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-4-17 15:49:35
+ * @since       2010-08-20 20:11:14
  */
 
-class Qwin_Trex_Model
+class Qwin_Application_View_Redirect extends Qwin_Application_View
 {
+    public function __construct()
+    {
+        
+    }
 }
