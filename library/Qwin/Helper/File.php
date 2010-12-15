@@ -37,9 +37,9 @@ class Qwin_Helper_File
         $code = var_export($code, true);
         if('' != $name)
         {
-            $fileData = "<?php\r\n\$$name = $code;";
+            $fileData = "<?php\n\$$name = $code;";
         } else {
-            $fileData = "<?php\r\nreturn $code;";
+            $fileData = "<?php\nreturn $code;";
         }
         
         $result = file_put_contents($path, $fileData);
