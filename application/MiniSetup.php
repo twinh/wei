@@ -23,7 +23,7 @@
  * @since       2010-08-04 17:02:15
  */
 
-class MiniSetup extends Qwin_Trex_Setup
+class MiniSetup extends Qwin_Common_Setup
 {
     public function __construct($config, $set)
     {
