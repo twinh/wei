@@ -53,7 +53,10 @@ class Common_View extends Qwin_Application_View
 
 
         // 获取配置
-        $this->_config = Qwin::run('-ini')->getConfig();
+        $ini = Qwin::run('-ini');
+        $this->_config = $ini->getConfig();
+        $set = $ini->getSet();
+        
 
         $packerPath = QWIN_ROOT_PATH . '/cache/packer';
 
@@ -83,18 +86,18 @@ class Common_View extends Qwin_Application_View
             'resource' => QWIN_RESOURCE_PATH . '/view/theme/',
             'suffix' => '.php',
             'theme' => $this->_theme,
-            'style' => 'default',
-            'namespace' => 'Common',
-            'module' => 'Common',
-            'controller' => 'Common',
-            'action' => 'Common',
+            'style' => $this->getStyle(),
+            'namespace' => $set['namespace'],
+            'module' => $set['module'],
+            'controller' => $set['controller'],
+            'action' => $set['action'],
             'defaultModule' => 'Common',
-            'defaultController' => 'Commmon',
+            'defaultController' => 'Common',
         );
         $this->setTagList($tagList);
 
         // 部分视图常用变量
-        $this->_data['set'] = Qwin::run('-ini')->getSet();
+        $this->_data['set'] = $set;
         $this->_data['theme'] = $this->_theme;
 
         /**

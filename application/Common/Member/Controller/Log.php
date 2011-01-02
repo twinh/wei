@@ -48,7 +48,7 @@ class Common_Member_Controller_Log extends Common_Controller
              * 设置视图,加载登陆界面
              */
             $this->_view = array(
-                'class' => 'Common_Member_View_Login',
+                'class' => 'Common_View',
                 'data' => get_defined_vars(),
             );
         } else {

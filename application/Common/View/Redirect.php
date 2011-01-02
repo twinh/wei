@@ -30,10 +30,10 @@ class Common_View_Redirect extends Common_View
     public function __construct()
     {
         parent::__construct();
-        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/common/redirect.php');
+        $this->setElement('content', '<resource><theme>/<namespace>/element/<defaultModule>/<defaultController>/redirect<suffix>');
     }
 
-    public function display()
+    public function preDisplay()
     {
         $message = $this->message;
 
@@ -52,7 +52,6 @@ class Common_View_Redirect extends Common_View
                 break;
         }
 
-        extract($this->_data, EXTR_OVERWRITE);
-        require $this->_layout;
+        $this->_data += get_defined_vars();
     }
 }

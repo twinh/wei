@@ -32,7 +32,7 @@ class Common_Controller extends Qwin_Application_Controller
 {
     /**
      * Qwin_Request对象
-     * @var object
+     * @var Qwin_Request
      */
     public $request;
 

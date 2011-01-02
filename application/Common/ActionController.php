@@ -41,23 +41,46 @@ class Common_ActionController extends Common_Controller
     public function actionIndex()
     {
         
-
-        /**
-         * @see Common_Service_Index $_config
-         */
-        $config = array(
-            'set' => $this->_set,
-            'data' => array(
-                'list' => $this->metaHelper->getUrlListField(),
-            ),
-            'callback' => array(
-                'beforeViewLoad' => array(
-                    array($this, 'createCustomLink'),
+        if (null == $this->request->g('json')) {
+            /**
+             * @see Common_Service_Index $_config
+             */
+            $config = array(
+                'set' => $this->_set,
+                'data' => array(
+                    'list' => $this->metaHelper->getUrlListField(),
                 ),
-            ),
-            'this' => $this,
-        );
-        return Qwin::run('Common_Service_Index')->process($config);
+                'callback' => array(
+                    'beforeViewLoad' => array(
+                        array($this, 'createCustomLink'),
+                    ),
+                ),
+                'this' => $this,
+            );
+            return Qwin::run('Common_Service_Index')->process($config);
+        } else {
+            /**
+             * @see Common_Service_List $_config
+             */
+            $config = array(
+                'set' => $this->_set,
+                'data' => array(
+                    'list' => $this->metaHelper->getUrlListField(),
+                    'order' => $this->metaHelper->getUrlOrder(),
+                    'where' => $this->metaHelper->getUrlWhere(),
+                    'offset'=> $this->metaHelper->getUrlOffset($this->pageName, $this->limitName),
+                    'limit' => $this->metaHelper->getUrlLimit($this->limitName),
+                    'converAsAction'=> $this->request->g('_as'),
+                ),
+                'callback' => array(
+                    'dataConverter' => array(
+                        array($this, 'dataConverter'),
+                    ),
+                ),
+                'this' => $this,
+            );
+            return Qwin::run('Common_Service_List')->process($config);
+        }
     }
 
     /**
@@ -81,36 +104,6 @@ class Common_ActionController extends Common_Controller
             'this' => $this,
         );
         return Qwin::run('Common_Service_Index')->process($config);
-    }
-
-    /**
-     * 查看多条记录,以列表的形式展示
-     *
-     * @return array 服务处理结果
-     */
-    public function actionList()
-    {
-        /**
-         * @see Common_Service_List $_config
-         */
-        $config = array(
-            'set' => $this->_set,
-            'data' => array(
-                'list' => $this->metaHelper->getUrlListField(),
-                'order' => $this->metaHelper->getUrlOrder(),
-                'where' => $this->metaHelper->getUrlWhere(),
-                'offset'=> $this->metaHelper->getUrlOffset($this->pageName, $this->limitName),
-                'limit' => $this->metaHelper->getUrlLimit($this->limitName),
-                'converAsAction'=> $this->request->g('_as'),
-            ),
-            'callback' => array(
-                'dataConverter' => array(
-                    array($this, 'dataConverter'),
-                ),
-            ),
-            'this' => $this,
-        );
-        return Qwin::run('Common_Service_List')->process($config);
     }
 
     /**

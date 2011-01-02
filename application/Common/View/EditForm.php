@@ -30,10 +30,10 @@ class Common_View_EditForm extends Common_View
     public function __construct()
     {
         parent::__construct();
-        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/common/form.php');
+        $this->setElement('content', '<resource><theme>/<namespace>/element/<defaultModule>/<defaultController>/form<suffix>');
     }
 
-    public function display()
+    public function preDisplay()
     {
         // 初始化变量,方便调用
         $primaryKey = $this->primaryKey;
@@ -48,7 +48,6 @@ class Common_View_EditForm extends Common_View
         $group = $meta['group'];
         $jQueryValidateCode = Qwin_Helper_Array::jsonEncode($metaHelper->getJQueryValidateCode($meta));
 
-        extract($this->_data, EXTR_OVERWRITE);
-        require_once $this->_layout;
+        $this->_data += get_defined_vars();
     }
 }
