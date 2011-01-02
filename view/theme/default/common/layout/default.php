@@ -65,8 +65,8 @@ $jsPacker
     </div>
     <div class="ui-header-logo ui-widget-content">
         <a href="?">
-            <img src="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/qwin2/image/logo.gif" alt="logo" />
-            <img src="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/qwin2/image/common.gif" alt="logo" />
+            <img src="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/default/common/image/logo.gif" alt="logo" />
+            <img src="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/default/common/image/common.gif" alt="logo" />
         </a>
     </div>
   </div>

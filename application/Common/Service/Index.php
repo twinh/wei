@@ -46,6 +46,7 @@ class Common_Service_Index extends Common_Service_BasicAction
             'class' => 'Common_View_JqGrid',
             'display' => true,
         ),
+        'this' => null,
     );
     
     public function process(array $config = null)
@@ -71,18 +72,18 @@ class Common_Service_Index extends Common_Service_BasicAction
         $customLink = $this->executeCallback('beforeViewLoad', $config);
         
         // 设置视图
-        $this->_view = array(
+        $view = array(
             'class' => $config['view']['class'],
             'data' => get_defined_vars(),
         );
         if($config['view']['display'])
         {
-            $this->loadView()->display();
+            $config['this']->loadView($view)->display();
         }
         
         return array(
             'result' => true,
-            'view' => $this->_view,
+            'view' => $view,
         );
     }
 }

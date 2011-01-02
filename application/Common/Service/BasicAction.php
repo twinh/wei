@@ -106,20 +106,6 @@ class Common_Service_BasicAction extends Common_Service
         return $this;
     }
 
-    public function loadView($class = null)
-    {
-        Qwin::load($class);
-        if(null != $class && class_exists($class))
-        {
-            $this->_view['class'] = $class;
-        }
-        $view = Qwin::run($this->_view['class']);
-        isset($this->_view['data']) && $view->setVarList($this->_view['data']);
-        isset($this->_view['element']) && $view->setElementList($this->_view['element']);
-        isset($this->_view['layout']) && $view->setLayout($this->_view['layout']);
-        return $view;
-    }
-
     /**
      * 显示验证错误的信息,当验证结果不为true时调用该方法
      *

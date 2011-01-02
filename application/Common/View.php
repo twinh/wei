@@ -51,13 +51,11 @@ class Common_View extends Qwin_Application_View
         // 设置默认视图
         $this->setElement('content', $element);
 
-
         // 获取配置
         $ini = Qwin::run('-ini');
         $this->_config = $ini->getConfig();
         $set = $ini->getSet();
         
-
         $packerPath = QWIN_ROOT_PATH . '/cache/packer';
 
         // 设置css打包

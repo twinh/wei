@@ -88,7 +88,7 @@ class Common_Service_Form extends Common_Service_BasicAction
                 );
                 if($config['view']['display'])
                 {
-                    $this->setRedirectView($return['message']);
+                    $config['this']->setRedirectView($return['message']);
                 }
                 return $return;
             }
@@ -104,18 +104,17 @@ class Common_Service_Form extends Common_Service_BasicAction
         $data = $metaHelper->convertOne($data, $config['data']['asAction'], $meta, $meta, array('view' => false));
 
         // 设置视图
-        $this->_view = array(
+        $view = array(
             'class' => $config['view']['class'],
             'data' => get_defined_vars(),
         );
-
         if($config['view']['display'])
         {
-            $this->loadView()->display();
+            $config['this']->loadView($view)->display();
         }
         return array(
             'result' => true,
-            'view' => $this->_view,
+            'view' => $view,
             'data' => $data,
         );
     }
