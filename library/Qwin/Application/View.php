@@ -23,6 +23,9 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2010-08-06 19:25:40
+ * @todo        视图元素允许为代码段或以其他形式出现?
+ * @todo        css,js等如何加载?
+ * @todo        是否需要分为几个对象 $tihs->tag, $this->layout, $this->element...
  */
 
 abstract class Qwin_Application_View extends Qwin_Metadata_Abstract
@@ -46,33 +49,41 @@ abstract class Qwin_Application_View extends Qwin_Metadata_Abstract
     protected $_layout;
 
     /**
-     * 主题
-     * @var string
+     * 标签,表示变量标识符,用于布局和视图元素的路径中
+     * @var array
      */
-    protected $_theme = 'default';
-
-    public function __construct()
-    {
-        
-    }
+    protected $_tag = array(
+        'theme' => 'default',
+        'style' => 'default',
+    );
 
     /**
-     * 通过setVar设置一组变量
+     * 标签名称,用于替换标签,格式为 <标签的键名>
+     * @var array
+     * @todo 目前采用的是用空间换取时间的方式,是否有更好的方法加速标签替换
+     */
+    protected $_tagName = array(
+        'theme' => '<theme>',
+        'style' => '<style>'
+    );
+
+    /**
+     * 设置一组变量
      *
-     * @param array $list 变量组
+     * @param array $list 变量组,键名为变量名称,值为变量的值
      * @return object 当前对象
      */
     public function setVarList(array $list)
     {
         foreach($list as $key => $var)
         {
-            $this->setVar($key, $var);
+            $this->_data[$key] = $var;
         }
         return $this;
     }
 
     /**
-     * 设置变量
+     * 设置一个变量
      *
      * @param string $name 变量名称
      * @param mixed $value 变量的值
@@ -92,43 +103,89 @@ abstract class Qwin_Application_View extends Qwin_Metadata_Abstract
      */
     public function unsetVar($name)
     {
-        if(isset($this->_data[$name]))
-        {
+        if (isset($this->_data[$name])) {
             unset($this->_data[$name]);
         }
         return $this;
     }
 
     /**
-     * 通过setElement设置一组视图元素
+     * 获取变量的值
      *
-     * @param array $list 视图元素组
-     * @return object 当前对象
+     * @param string $name
+     * @return mixed 变量的值
      */
-    public function setElementList($list)
+    public function getVar($name)
     {
-        foreach($list as $name => $element)
-        {
-            call_user_func_array(array($this, 'setElement'), $element);
+        return isset($this->_data[$name]) ? $this->_data[$name] : null;
+    }
+
+    /**
+     * 清空变量
+     *
+     * @return Qwin_Application_View 当前对象
+     */
+    public function clearVar()
+    {
+        $this->_data = array();
+        return $this;
+    }
+
+    /**
+     * 设置一组视图元素
+     *
+     * @param array $list 视图元素组,键名为视图名称,值为视图的值
+     * @return Qwin_Application_View 当前对象
+     */
+    public function setElementList(array $list)
+    {
+        foreach ($list as $key => $value) {
+            !is_array($value) && $value = array($value);
+            $this->_element[$key] = $value;
         }
         return $this;
     }
 
     /**
-     * 设置视图元素
+     * 设置一个视图元素
      *
-     * @param string $name 名称
-     * @param mixed $element 视图元素的内容
-     * @param boolen $isFile 是否为文件,如果不是文件,则为代码段
-     * @return object 当前对象
+     * @param string $name 视图元素的名称
+     * @param string|mixed $element 视图元素的路径
+     * @return Qwin_Application_View 当前对象
      */
-    public function setElement($name, $element, $isFile = true)
+    public function setElement($name, $element)
     {
-        $this->_element[$name] = array(
-            'element' => $element,
-            'type' => $isFile ? 'file' : 'code',
-        );
+        !is_array($element) && $element = array($element);
+        $this->_element[$name] = $element;
         return $this;
+    }
+
+
+    /**
+     * 获取未处理的视图元素
+     *
+     * @param string $name
+     * @return string 视图元素
+     */
+    public function getRawElement($name)
+    {
+        return $this->_element[$name];
+    }
+
+    public function getElement($name)
+    {
+        if (!isset($this->_element[$name])) {
+            throw new Qwin_Application_View_Exception('Undefined element name: ' . $name);
+        }
+        $pathCahce = array();
+        foreach ($this->_element[$name] as $path) {
+            $path = $this->decodePath($path);
+            if (is_file($path)) {
+                return $path;
+            }
+            $pathCahce[] = $path;
+        }
+        throw new Qwin_Application_View_Exception('All of the element files are not exists: ' . implode(';', $pathCahce));
     }
 
     /**
@@ -139,73 +196,180 @@ abstract class Qwin_Application_View extends Qwin_Metadata_Abstract
      */
     public function unsetElement($name)
     {
-        if(isset($this->_element[$name]))
-        {
+        if (isset($this->_element[$name])) {
             unset($this->_element[$name]);
         }
         return $this;
     }
 
     /**
-     * 加载视图元素
+     * 清空视图元素数组
      *
-     * @param <type> $name 视图元素的名称
+     * @return Qwin_Application_View 当前对象
      */
-    public function loadElement($name)
+    public function clearElement()
     {
-        require $this->_element[$name]['element'];
+        $this->_element = array();
+        return $this;
     }
 
     /**
-     * 获取视图元素
+     * 设置布局文件的路径,布局可以为一个或多个,多个将按照键名优先级和存在性选择
      *
-     * @param string $name
-     * @return string 视图元素
-     */
-    public function getElement($name)
-    {
-        return $this->_element[$name]['element'];
-    }
-
-    /**
-     * 设置布局文件的路径
-     *
-     * @param string $layout
+     * @param string|array $layout
      * @return object 当前对象
      */
     public function setLayout($layout)
     {
+        !is_array($layout) && $layout = array($layout);
         $this->_layout = $layout;
         return $this;
     }
 
     /**
-     * 输出页眉
+     * 获取未处理的布局配置
      *
-     * @return boolen
+     * @return array 布局配置
      */
-    public function displayHeader()
+    public function getRawLayout()
     {
-        return false;
+        return $this->_layout;
     }
 
     /**
-     * 输出主视图,例如
-     * 
-     * @return boolen
+     * 获取经过解码的布局路径
+     *
+     * @return string
+     */
+    public function getLayout()
+    {
+        $pathCahce = array();
+        foreach ($this->_layout as $path) {
+            $path = $this->decodePath($path);
+            if (is_file($path)) {
+                return $path;
+            }
+            $pathCahce[] = $path;
+        }
+        throw new Qwin_Application_View_Exception('All of the layout files are not exists: ' . implode(';', $pathCahce));
+    }
+    
+    /**
+     * 视图展示之前,用于视图数据处理,构建等
+     *
+     * @return Common_View 当前对象
+     */
+    public function preDisplay()
+    {
+        return $this;
+    }
+
+    /**
+     * 展示视图
+     *
+     * @return Qwin_Application_View 当前对象
      */
     public function display()
     {
-        return false;
+        return $this;
     }
 
     /**
-     * 输出页脚
+     * 视图展示之后,用于视图数据的回调处理等
      *
-     * @return boolen
+     * @return Common_View 当前对象
      */
-    public function displayFooter()
+    public function afterDisplay()
     {
-        return false;
+        return $this;
+    }
+
+    /**
+     * 获取一个标签的值
+     *
+     * @param string $name 标签名称
+     * @return 标签的值
+     */
+    public function getTag($name)
+    {
+        return isset($this->_tag[$name]) ? $this->_tag[$name] : null;
+    }
+
+    /**
+     * 设置一个标签的值
+     *
+     * @param string $name 标签名称
+     * @param mixed $value 标签的值
+     * @return Qwin_Application_View 当前对象
+     */
+    public function setTag($name, $value)
+    {
+        $this->_tag[$name] = $value;
+        $this->_tagName[$name] = '<' . $name . '>';
+        return $this;
+    }
+
+    /**
+     * 设置一组标签的值
+     *
+     * @param array $array 标签数组,键名表示标签名称,值表示标签的值
+     * @return Qwin_Application_View 当前对象
+     */
+    public function setTagList(array $array)
+    {
+        foreach ($array as $key => $value) {
+            // 视图文件名应该是小写和-组成
+            $this->_tag[$key] = strtolower($value);
+            $this->_tagName[$key] = '<' . $key . '>';
+        }
+        return $this;
+    }
+
+    /**
+     * 获取标签数组
+     *
+     * @return array  标签数组
+     */
+    public function getTagList()
+    {
+        return $this->_tag;
+    }
+
+    /**
+     * 删除一个标签
+     *
+     * @param string $name 标签名称
+     * @return Qwin_Application_View 当前对象
+     */
+    public function unsetTag($name)
+    {
+        if (isset($this->_tag[$name])) {
+            unset($this->_tag[$name]);
+            unset($this->_tagName[$name]);
+        }
+        return $this;
+    }
+
+    /**
+     * 清空标签数组
+     *
+     * @return Qwin_Application_View 当前对象
+     */
+    public function clearTag()
+    {
+        $this->_tag = array();
+        $this->_tagName = array();
+        return $this;
+    }
+
+    /**
+     * 根据标签设置将标签路径解码为真实路径
+     *
+     * @param string $path 路径
+     * @return 真实路径
+     */
+    public function decodePath($path)
+    {
+        return str_replace($this->_tagName, $this->_tag, $path);
     }
 }

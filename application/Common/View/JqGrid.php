@@ -30,10 +30,10 @@ class Common_View_JqGrid extends Common_View
     public function  __construct()
     {
         parent::__construct();
-        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/common/list.php');
+        $this->setElement('content', '<resource>/<theme>/<namespace>/element/common/list<suffix>');
     }
 
-    public function display()
+    public function preDisplay()
     {
         // 初始变量,方便调用
         $primaryKey = $this->primaryKey;
@@ -100,8 +100,6 @@ class Common_View_JqGrid extends Common_View
         } elseif($rowNum > 500) {
             $rowNum = 500;
         }
-
-        extract($this->_data, EXTR_OVERWRITE);
-        require_once $this->_layout;
+        $this->_data += get_defined_vars();
     }
 }

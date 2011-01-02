@@ -18,7 +18,7 @@ $jQueryFile = array(
 );
 $cssPacker
     ->add($jquery->loadTheme(null, false))
-    ->add(QWIN_RESOURCE_PATH . '/view/theme/qwin2/style.css')
+    ->add(QWIN_RESOURCE_PATH . '/view/theme/default/common/style/style.css')
     ->add($jQueryFile['core']['css'])
     ->add($jQueryFile['widget']['css'])
     ->add($jQueryFile['button']['css'])
@@ -36,7 +36,7 @@ $jsPacker
     ->add($jQueryFile['pngFix']['js']);
 ?>
 <!--[if IE 6]>
-<link rel="stylesheet" type="text/css" media="all" href="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/qwin2/style-ie6.css" />
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo QWIN_RESOURCE_PATH ?>/vview/theme/default/common/style/style-ie6.css" />
 <![endif]-->
 <script type="text/javascript">
     jQuery.noConflict();
