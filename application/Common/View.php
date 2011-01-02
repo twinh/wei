@@ -97,13 +97,6 @@ class Common_View extends Qwin_Application_View
         // 部分视图常用变量
         $this->_data['set'] = $set;
         $this->_data['theme'] = $this->_theme;
-
-        /**
-         * 加载页眉导航的缓存
-         */
-        $this->adminMenu = Qwin::run('Qwin_Cache_List')->getCache('AdminMenu');
-
-        $this->_data['lastViewedItem'] = Qwin::run('Qwin_Session')->get('lastViewedItem');
     }
 
     /**

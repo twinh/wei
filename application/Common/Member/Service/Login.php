@@ -99,7 +99,7 @@ class Common_Member_Service_Login extends Common_Service_BasicAction
         $validateResult = $metaHelper->validateArray($config['data']['db'], $meta, $meta);
         if(true !== $validateResult)
         {
-            $message = $this->showValidateError($validateResult, $meta, $config['view']['display']);
+            $message = $config['this']->showValidateError($validateResult, $meta, $config['view']['display']);
             $return = array(
                 'result' => false,
                 'message' => $message,
