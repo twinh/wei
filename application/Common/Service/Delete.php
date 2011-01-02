@@ -100,7 +100,7 @@ class Common_Service_Delete extends Common_Service_BasicAction
         );
         if($config['view']['display'])
         {
-            $this->setRedirectView($return['message'], $url);
+            $config['this']->setRedirectView($return['message'], $url);
         }
         return $return;
     }

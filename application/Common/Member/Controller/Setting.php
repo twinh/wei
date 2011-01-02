@@ -38,10 +38,6 @@ class Common_Member_Controller_Setting extends Common_Controller
          */
         $theme = Qwin::run('-ini')->getConfig('interface.theme');
         $this->_view = array(
-            'class' => 'Common_View',
-            'element' => array(
-                array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/member/setting-center.php'),
-            ),
             'data' => get_defined_vars(),
         );
     }
@@ -91,7 +87,7 @@ class Common_Member_Controller_Setting extends Common_Controller
     {
         if(empty($_POST))
         {
-            $theme = $this->metaHelper
+            $data = $this->metaHelper
                 ->getQueryBySet(array(
                     'namespace' => 'Common',
                     'module' => 'Style',
@@ -104,10 +100,6 @@ class Common_Member_Controller_Setting extends Common_Controller
 
             // 设置视图
             $this->_view = array(
-                'class' => 'Common_View',
-                'element' => array(
-                    array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme2 . '/element/member/setting-theme.php'),
-                ),
                 'data' => get_defined_vars(),
             );
         } else {

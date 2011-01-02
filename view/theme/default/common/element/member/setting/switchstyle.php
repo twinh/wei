@@ -51,7 +51,7 @@ jQuery(function($){
         <hr class="ui-line ui-widget-content" />
         <ul>
 <?php
-foreach($theme as $row){
+foreach($data as $row){
     $url = qw_url($set, array('style' => $row['path_name']));
 ?>
             <li class="ui-widget-content ui-corner-all">

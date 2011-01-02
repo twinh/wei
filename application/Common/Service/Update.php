@@ -87,7 +87,7 @@ class Common_Service_Update extends Common_Service_BasicAction
             );
             if($config['view']['display'])
             {
-                $this->setRedirectView($return['message']);
+                $config['this']->setRedirectView($return['message']);
             }
             return $return;
         }
@@ -142,7 +142,7 @@ class Common_Service_Update extends Common_Service_BasicAction
         );
         if($config['view']['display'])
         {
-            $this->setRedirectView($return['message'], $url);
+            $config['this']->setRedirectView($return['message'], $url);
         }
         return $return;
     }

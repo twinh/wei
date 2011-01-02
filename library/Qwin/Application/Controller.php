@@ -62,14 +62,35 @@ class Qwin_Application_Controller
     protected $_validatorField;
 
     /**
-     * 视图配置
+     *
+     * @var array $_viewOption  视图配置
+     *
+     *      -- display          是否要加载视图
+     *
+     *      -- loaded           是否已经加载了视图
+     *
+     *      -- class            视图类名
+     *
+     *      -- layout           视图布局
+     *
+     *      -- element          视图元素
+     *
+     *      -- data             视图数据
      */
-    protected $_view = array(
-        'class' => 'Qwin_Application_View_Null',
-        'data' => null,
-        'element' => null,
-        'layout' => null,
+    protected $_viewOption = array(
+        'display'   => true,
+        'loaded'    => false,
+        'class'     => 'Qwin_Application_View_Null',
+        'layout'    => array(),
+        'element'   => array(),
+        'data'      => array(),
     );
+
+    /**
+     * 视图配置
+     * @var array
+     */
+    protected $_view = array();
 
     public function setValidatorMessage($field = null, $message = null)
     {
@@ -116,42 +137,32 @@ class Qwin_Application_Controller
     /**
      * 根据视图配置加载视图类
      *
-     * @param string $class 新的视图类名
-     * @return object 视图类
-     * @todo 类的检查
+     * @param array $view 视图配置
+     * @return object 视图对象
      */
-    public function loadView($class = null)
+    public function loadView(array $view = null)
     {
-        Qwin::load($class);
-        if(null != $class && class_exists($class))
-        {
-            $this->_view['class'] = $class;
+        // 默认只加载一次
+        if ($this->_viewOption['loaded']) {
+            return false;
         }
-        $view = Qwin::run($this->_view['class']);
-        isset($this->_view['data']) && $view->setVarList($this->_view['data']);
-        isset($this->_view['element']) && $view->setElementList($this->_view['element']);
-        isset($this->_view['layout']) && $view->setLayout($this->_view['layout']);
-        return $view;
-    }
+        $this->_viewOption['loaded'] = true;
 
-    public function setView($type, $data = null)
-    {
-        $argv = func_get_args();
-        switch ($type)
-        {
-            case 'alert' :
-                $this->_view['class'] = 'Qwin_Application_View_Alert';
-                $this->_view['data']['message'] = $argv[1];
-                $this->_view['data']['method'] = isset($argv[2]) ? $argv[2] : null;
-                break;
-            case 'text' :
-                $this->_view['class'] = 'Qwin_Application_View_Text';
-                $this->_view['data']['data'] = $argv[1];
-                break;
-            default :
-                break;
+        // 合并视图配置
+        $view = (array)$view;
+        $this->_view = array_merge($this->_viewOption, $this->_view, $view);
+
+        // 加载视图
+        $view = Qwin::run($this->_view['class']);
+        if (null == $view) {
+            throw new Qwin_Application_Controller_Exception('The view class ' . $this->_view['class'] . 'is not exists');
         }
-        return true;
+
+        // 设置视图
+        !empty($this->_view['data']) && $view->mergeVarData($this->_view['data']);
+        !empty($this->_view['element']) && $view->setElementList($this->_view['element']);
+        !empty($this->_view['layout']) && $view->setLayout($this->_view['layout']);
+        return $view;
     }
 
     /**

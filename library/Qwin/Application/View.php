@@ -83,6 +83,18 @@ abstract class Qwin_Application_View extends Qwin_Metadata_Abstract
     }
 
     /**
+     * 设置变量数组
+     *
+     * @param array $data 变量数组
+     * @return Qwin_Application_View 当前对象
+     */
+    public function mergeVarData(array $data)
+    {
+        $this->_data += $data;
+        return $this;
+    }
+
+    /**
      * 设置一个变量
      *
      * @param string $name 变量名称

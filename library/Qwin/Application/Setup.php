@@ -109,8 +109,7 @@ class Qwin_Application_Setup
         error_reporting($config['errorType']);
 
         // 设置会话类型及启动
-        if($config['session']['setup'])
-        {
+        if ($config['session']['setup']) {
             session_cache_limiter($config['session']['type']);
             session_start();
         }
@@ -134,10 +133,8 @@ class Qwin_Application_Setup
         );
 
         $urlSet = $this->_request->get(array_keys($defaultSet));
-        foreach($defaultSet as $key => $field)
-        {
-            if(!isset($set[$key]))
-            {
+        foreach ($defaultSet as $key => $field) {
+            if (!isset($set[$key])) {
                 $set[$key] = null != $urlSet[$key] ? $urlSet[$key] : $defaultSet[$key];
             }
             // TODO 过滤非法字符
@@ -148,8 +145,7 @@ class Qwin_Application_Setup
          * 加载命名空间
          * 如果是配置文件中不允许的命名空间,则抛出异常
          */
-        if(!in_array($set['namespace'], $this->config['allowedNamespace']->toArray()))
-        {
+        if (!in_array($set['namespace'], $this->config['allowedNamespace']->toArray())) {
             require_once 'Qwin/Application/Setup/Exception.php';
             throw new Qwin_Application_Setup_Exception('The namespace ' . $set['namespace'] . ' is not allowed.');
         }
@@ -168,8 +164,7 @@ class Qwin_Application_Setup
          */
         $moduleClass = $set['namespace'] . '_' . $set['module'] . '_Module';
         $this->_module = Qwin::run($moduleClass);
-        if(null == $this->_module)
-        {
+        if (null == $this->_module) {
             $moduleClass = 'Qwin_Application_Module';
             $this->_module = Qwin::run('Qwin_Application_Module');
             $this->_onModuleNotExists($set['module']);
@@ -182,8 +177,7 @@ class Qwin_Application_Setup
          */
         $controllerClass = $this->getClassName('Controller', $set);
         $this->_controller = Qwin::run($controllerClass);
-        if(null == $this->_controller)
-        {
+        if (null == $this->_controller) {
             $controllerClass = 'Qwin_Application_Controller';
             $this->_controller = Qwin::run('Qwin_Application_Controller');
             $this->_onControllerNotExists($set['controller']);
@@ -191,12 +185,9 @@ class Qwin_Application_Setup
         Qwin::addMap('-controller', $controllerClass);
         $this->_onControllerLoad($this->_controller);
 
-        /**
-         * 执行指定的行为
-         */
+        // 执行指定的行为
         $action = 'action' . $set['action'];
-        if(method_exists($this->_controller, $action))
-        {
+        if (method_exists($this->_controller, $action)) {
             call_user_func_array(
                 array($this->_controller, $action),
                 array(&$set, &$this->config)
@@ -205,12 +196,12 @@ class Qwin_Application_Setup
             $this->_onActionNotExists($set['action']);
         }
 
-        /**
-         * 加载视图
-         */
-        if(method_exists($this->_controller, 'loadView'))
-        {
-            $this->_controller->loadView()->display();
+        // 加载视图
+        if (method_exists($this->_controller, 'loadView')) {
+            $view = $this->_controller->loadView();
+            if (method_exists($view, 'display')) {
+                $view->display();
+            }
         }
         return true;
     }
@@ -222,17 +213,14 @@ class Qwin_Application_Setup
      */
     public function getConfig($name = null)
     {
-        if(isset($this->_encodedConfig[$name]))
-        {
+        if (isset($this->_encodedConfig[$name])) {
             return $this->_encodedConfig[$name];
         }
 
         $keyArray = explode('.', $name);
         $tempConfig = $this->config;
-        foreach($keyArray as $key)
-        {
-            if(isset($tempConfig[$key]))
-            {
+        foreach ($keyArray as $key) {
+            if (isset($tempConfig[$key])) {
                 $tempConfig = $tempConfig[$key];
             }
         }

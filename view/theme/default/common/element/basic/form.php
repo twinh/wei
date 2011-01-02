@@ -38,7 +38,7 @@ var jQueryValidateCode = <?php echo $jQueryValidateCode?>;
             <?php echo qw_jquery_button('submit', qw_lang('LBL_ACTION_SUBMIT'), 'ui-icon-check') ?>
             <?php echo qw_jquery_button('reset', qw_lang('LBL_ACTION_RESET'), 'ui-icon-arrowreturnthick-1-w') ?>
         </div>
-        <div class="ui-helper-hidden2">
+        <div class="ui-helper-hidden">
             <?php
             // TODO 逻辑分离
             // 将隐藏域单独分开
