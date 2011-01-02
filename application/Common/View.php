@@ -23,12 +23,35 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2010-08-14 11:12:00
+ * @todo        是否需要一种简洁的加载模式与之相辅相成
+ *              例如 $this->setViewPath('resource-path/view/theme')
+ *                       ->setTheme('default')
+ *                       ->loadView('namespace-module-controller-action');
  */
 
 class Common_View extends Qwin_Application_View
 {
     public function __construct()
     {
+        // 布局的选择次序为 自定义视图 > 行为级 > 控制器级 > 模块级 > 默认(命名空间级)
+        $layout = array(
+            '<resource><theme>/<namespace>/layout/<module>-<controller>-<action><suffix>',
+            '<resource><theme>/<namespace>/layout/<module>-<controller><suffix>',
+            '<resource><theme>/<namespace>/layout/<module><suffix>',
+            '<resource><theme>/<namespace>/layout/default<suffix>',
+        );
+        $this->setLayout($layout);
+
+        // 默认视图元素的选择次序为 自定义视图 > 当前行为视图 > 默认模块视图 > 默认视图
+        $element = array(
+            '<resource><theme>/<namespace>/element/<module>/<controller>/<action><suffix>',
+            '<resource><theme>/<namespace>/element/<defaultModule>/<defaultController>/<action><suffix>',
+            '<resource><theme>/<namespace>/element/default<suffix>',
+        );
+        // 设置默认视图
+        $this->setElement('content', $element);
+
+
         // 获取配置
         $this->_config = Qwin::run('-ini')->getConfig();
 
@@ -55,7 +78,20 @@ class Common_View extends Qwin_Application_View
         $jquery->setTheme($this->getStyle());
         
         $this->_theme = Qwin::run('-ini')->getConfig('interface.theme');
-        $this->_layout = QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/layout/common-control-panel.php';
+
+        $tagList = array(
+            'resource' => QWIN_RESOURCE_PATH . '/view/theme/',
+            'suffix' => '.php',
+            'theme' => $this->_theme,
+            'style' => 'default',
+            'namespace' => 'Common',
+            'module' => 'Common',
+            'controller' => 'Common',
+            'action' => 'Common',
+            'defaultModule' => 'Common',
+            'defaultController' => 'Commmon',
+        );
+        $this->setTagList($tagList);
 
         // 部分视图常用变量
         $this->_data['set'] = Qwin::run('-ini')->getSet();
@@ -107,8 +143,31 @@ class Common_View extends Qwin_Application_View
 
     public function display()
     {
+        $this->preDisplay();
         extract($this->_data, EXTR_OVERWRITE);
-        require_once $this->_layout;
+        require $this->getLayout();
+        $this->afterDisplay();
         return $this;
+    }
+
+    public function afterDisplay()
+    {
+        // 获取缓冲数据,输出并清理
+        $output = ob_get_contents();
+        '' != $output && ob_end_clean();
+
+        // TODO
+        $search = array(
+            '<!-- Qwin_Packer_Css -->',
+            '<!-- Qwin_Packer_Js -->',
+        );
+        $replace = array(
+            Qwin::run('Qwin_Packer_Css')->pack()->getHtmlTag(),
+            Qwin::run('Qwin_Packer_Js')->pack()->getHtmlTag(),
+        );
+        $output = str_replace($search, $replace, $output);
+
+        echo $output;
+        unset($output);
     }
 }

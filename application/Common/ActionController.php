@@ -40,6 +40,8 @@ class Common_ActionController extends Common_Controller
      */
     public function actionIndex()
     {
+        
+
         /**
          * @see Common_Service_Index $_config
          */
