@@ -104,7 +104,7 @@ class Common_Service_Insert extends Common_Service_BasicAction
         $validateResult = $metaHelper->validateArray($data + $_POST, $meta, $meta);
         if(true !== $validateResult)
         {
-            $message = $this->showValidateError($validateResult, $meta, $config['view']['display']);
+            $message = $config['this']->showValidateError($validateResult, $meta, $config['view']['display']);
             $return = array(
                 'result' => false,
                 'message' => $message,

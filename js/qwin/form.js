@@ -9,7 +9,6 @@ jQuery(function($){
 
     if(undefined != $.validator)
     {
-        return 1;
         $('#post-form').validate({
             rules: jQueryValidateCode.rules,
             messages: jQueryValidateCode.messages,

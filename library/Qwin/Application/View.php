@@ -384,4 +384,28 @@ abstract class Qwin_Application_View extends Qwin_Metadata_Abstract
     {
         return str_replace($this->_tagName, $this->_tag, $path);
     }
+
+    /**
+     * 加载一个微件
+     *
+     * @param string $name 微件的类名
+     * @param mixed $param 参数
+     * @return string 视图路径
+     * @todo 规范化
+     * @toto 类检查
+     * @todo 允许多种返回类型
+     * @todo 变量跨域
+     */
+    public function getWidget($name, $param = null)
+    {
+        if (!class_exists($name)) {
+            throw new Qwin_Application_View_Exception('The widget class "' . $name . '" is not exists.');
+        }
+        $object = new $name;
+        $file = $object->render($param, $this);
+        if (!is_file($file)) {
+           throw new Qwin_Application_View_Exception('The widget class should return a available file path.');
+        }
+        return $file;
+    }
 }

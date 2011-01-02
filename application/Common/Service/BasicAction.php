@@ -105,32 +105,4 @@ class Common_Service_BasicAction extends Common_Service
 
         return $this;
     }
-
-    /**
-     * 显示验证错误的信息,当验证结果不为true时调用该方法
-     *
-     * @param Qwin_Validator_Result $result 验证结果
-     * @param Qwin_Metadata $meta 元数据
-     * @param boolen $dispaly 是否显示错误视图
-     * @return string 错误信息
-     */
-    public function showValidateError(Qwin_Validator_Result $result, Qwin_Metadata $meta, $dispaly = true)
-    {
-        if(!is_array($result->field))
-        {
-            $fieldTitle = $this->_lang->t($meta['field'][$result->field]['basic']['title']);
-        } else {
-            $fieldTitle = $this->_lang->t($meta['metadata'][$result->field[0]]['field'][$result->field[1]]['basic']['title']);
-        }
-        $message = $this->_lang->t('MSG_ERROR_FIELD')
-                . $fieldTitle
-                . '<br />'
-                . $this->_lang->t('MSG_ERROR_MSG')
-                . $this->metaHelper->format($this->_lang->t($result->message), $result->param);
-        if($dispaly)
-        {
-            $this->setRedirectView($message);
-        }
-        return $message;
-    }
 }

@@ -71,63 +71,12 @@ $jsPacker
     </div>
   </div>
   <div class="clear"></div>
-<div id="ui-top-floating-bar" class="ui-top-floating-bar ui-widget ui-widget-header">
-	<ul>
-    	<li class="ui-top-bar-list">
-            <a href="?" class="ui-widget ui-state-active ui-corner-all"><?php echo qw_lang('LBL_QWIN') ?></a>
-        </li>
-        <?php
-        foreach($this->adminMenu as $menu) :
-            if(null == $menu['category_id']) :
-        ?>
-        <li class="ui-top-bar-list">
-            <a href="<?php echo $menu['url'] ?>" target="<?php echo $menu['target'] ?>" class="ui-widget ui-state-default ui-corner-all"><?php echo $menu['title'] ?></a>
-            <ul class="ui-state-hover ui-corner-bottom ui-corner-tr">
-                <?php
-                foreach($this->adminMenu as $subMenu) :
-                    if($menu['id'] == $subMenu['category_id']) :
-                ?>
-                <li><a href="<?php echo $subMenu['url'] ?>" target="<?php echo $subMenu['target'] ?>"><?php echo $subMenu['title'] ?></a></li>
-
-                <?php
-                    endif;
-                endforeach;
-                ?>
-            </ul>
-        </li>
-        <?php
-            endif;
-        endforeach;
-        ?>
-    </ul>
-</div>
+<?php require $this->getWidget('Common_Widget_NavigationBar') ?>
 <table id="ui-main-table">
     <tr>
         <td id="ui-main-left">
         <div class="ui-siderbar ui-box ui-widget ui-widget-content ui-corner-all">
-            <div class="ui-sidebar-titlebar ui-box-titlebar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix" id="ui-sidebar-title-1">
-                <span class="ui-box-title"><?php echo qw_lang('LBL_LAST_VIEWED_ITEM') ?></span>
-                <a class="ui-sidebar-title-icon ui-box-title-icon ui-corner-all" name="#ui-sidebar-content-last" href="javascript:void(0)">
-                    <span class="ui-icon ui-icon-circle-triangle-n">open/close</span>
-                </a>
-            </div>
-            <div class="ui-box-content ui-widget-content">
-                <ul id="ui-sidebar-content-last">
-                <?php
-                if(empty($lastViewedItem)):
-                ?>
-                    <li class="ui-sidebar-list ui-widget-content"><a><?php echo qw_lang('MSG_NO_LAST_VIEWED_LOG') ?></a></li>
-                <?php
-                else:
-                    foreach($lastViewedItem as $row):
-                ?>
-                    <li class="ui-sidebar-list ui-widget-content"><a href="<?php echo $row['href'] ?>"><?php echo $row['title'] ?></a></li>
-                <?php
-                    endforeach;
-                endif;
-                ?>
-                </ul>
-            </div>
+        <?php require $this->getWidget('Common_Widget_ViewedItem') ?>
         </div>
         </td>
         <td id="ui-main-right">
