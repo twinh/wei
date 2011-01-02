@@ -1337,7 +1337,6 @@ class Qwin_Application_Metadata extends Qwin_Metadata
         $repalce = (array)$repalce;
         $pos = strpos($data, '{0}');
         if (false !== $pos) {
-            $repalce = Qwin::run('-arr')->set($repalce);
             $search = array();
             $count = count($repalce);
             for ($i = 0;$i < $count; $i++) {

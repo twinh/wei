@@ -50,7 +50,7 @@
             echo qw_jquery_link('javascript:history.go(-1);', qw_lang('LBL_ACTION_RETURN'), 'ui-icon-arrowthickstop-1-w');
             ?>
         </div>
-        <?php require QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/basic/form.php' ?>
+        <?php require $this->decodePath('<resource><theme>/<namespace>/element/basic/form<suffix>') ?>
         <div class="ui-operation-field">
             <?php
             echo qw_jquery_link(qw_url($set, array('action' => 'Index')), qw_lang('LBL_ACTION_LIST'), 'ui-icon-note'),

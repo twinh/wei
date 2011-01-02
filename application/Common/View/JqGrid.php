@@ -27,12 +27,6 @@
 
 class Common_View_JqGrid extends Common_View
 {
-    public function  __construct()
-    {
-        parent::__construct();
-        $this->setElement('content', '<resource>/<theme>/<namespace>/element/common/list<suffix>');
-    }
-
     public function preDisplay()
     {
         // 初始变量,方便调用
@@ -45,7 +39,7 @@ class Common_View_JqGrid extends Common_View
         $customLink = $this->customLink;
         
         // 获取json数据的链接
-        $jsonUrl = str_replace('\'', '\\\'', '?' . Qwin::run('-url')->arrayKey2Url(array('action' => 'List') + $_GET));
+        $jsonUrl = str_replace('\'', '\\\'', '?' . Qwin::run('-url')->arrayKey2Url(array('json' => '1') + $_GET));
 
         // 获取栏数据
         $columnName = array();

@@ -45,8 +45,8 @@ $jQueryFile = array(
     'qui' => $jquery->loadPlugin('qui', null, false),
 );
 $cssPacker
-    ->add(QWIN_RESOURCE_PATH . '/view/theme/qwin2/style.css')
-    ->add(QWIN_RESOURCE_PATH . '/view/theme/qwin2/login.css')
+    ->add(QWIN_RESOURCE_PATH . '/view/theme/default/common/style/style.css')
+    ->add(QWIN_RESOURCE_PATH . '/view/theme/default/common/style/login.css')
     ->add($jquery->loadTheme(null, false))
     ->add($jQueryFile['core']['css'])
     ->add($jQueryFile['widget']['css'])
@@ -54,7 +54,7 @@ $cssPacker
     ->add($jQueryFile['qui']['css']);
 $jsPacker
     ->add($jquery->loadCore(false))
-    ->add(QWIN_RESOURCE_PATH . '/view/theme/qwin2/style.js')
+    ->add(QWIN_RESOURCE_PATH . '/view/theme/default/common/script/style.js')
     ->add($jQueryFile['core']['js'])
     ->add($jQueryFile['widget']['js'])
     ->add($jQueryFile['button']['js'])
