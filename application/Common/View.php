@@ -48,8 +48,16 @@ class Common_View extends Qwin_Application_View
             '<resource><theme>/<namespace>/element/<defaultModule>/<defaultController>/<action><suffix>',
             '<resource><theme>/<namespace>/element/default<suffix>',
         );
-        // 设置默认视图
+        // 设置默认内容视图
         $this->setElement('content', $element);
+
+        // 当前行为的左栏操作视图
+        $actionElement = array(
+            '<resource><theme>/<namespace>/element/<module>/<controller>/<action>-sidebar<suffix>',
+            '<resource><theme>/<namespace>/element/<defaultModule>/<defaultController>/<defaultAction>-sidebar<suffix>',
+        );
+        // 设置当前行为的左栏操作视图
+        $this->setElement('actionOperation', $actionElement);
 
         // 获取配置
         $ini = Qwin::run('-ini');
@@ -91,6 +99,7 @@ class Common_View extends Qwin_Application_View
             'action' => $set['action'],
             'defaultModule' => 'Common',
             'defaultController' => 'Common',
+            'defaultAction' => 'Common',
         );
         $this->setTagList($tagList);
 

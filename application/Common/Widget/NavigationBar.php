@@ -29,12 +29,9 @@ class Common_Widget_NavigationBar extends Common_Widget
 {
     public function render($param, $view)
     {
-        /**
-         * 加载页眉导航的缓存
-         */
+        // 加载页眉导航的缓存
         $navigationData = Qwin::run('Qwin_Cache_List')->getCache('AdminMenu');
-        $view->setVar('navigationData', $navigationData);
 
-        return $view->decodePath('<resource><theme>/<namespace>/element/widget/navigation-bar<suffix>');
+        require $view->decodePath('<resource><theme>/<namespace>/element/widget/navigation-bar<suffix>');
     }
 }
