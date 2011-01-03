@@ -33,13 +33,12 @@ jQuery(function($){
 });
 </script>
 <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
-    <div class="ui-box-titlebar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix">
-        <span class="ui-box-title">
-            <a href="<?php echo qw_url(array('module' => 'Style', 'controller' => 'Theme')) ?>"><?php echo qw_lang('LBL_THEME')?></a>
-        </span>
-        <a class="ui-box-title-icon ui-corner-all" name=".ui-form-content" href="javascript:void(0)">
-            <span class="ui-icon  ui-icon-circle-triangle-n">open/close</span>
-        </a>
+    <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
+	<div class="ui-box-header">
+    	<img class="ui-box-header-icon" src="<?php echo QWIN_RESOURCE_PATH ?>/image/label_32.png" />
+        <a href="<?php echo qw_url(array('module' => 'Style', 'controller' => 'Theme')) ?>"><?php echo qw_lang('LBL_THEME')?></a>
+        &raquo;
+        <a href="#">列表</a>
     </div>
     <form action="" method="post">
     <div class="ui-form-content ui-box-content ui-widget-content ui-image-list">
