@@ -30,109 +30,25 @@ a{
     clear: both;
 }
 
-/* 页顶浮动栏
-----------------------------------*/
-#ui-top-floating-bar{
-    width: 100%;
-    top: 0;
-    left: 0;
-    height: 40px;
-    border-left: none;
-    border-right: none;
-}
-
-/* http://chrisjean.com/2009/09/30/fix-width-auto-floated-elements-in-ie-6/ */
-#ui-top-floating-bar ul li {
-    float: left;
-    white-space: nowrap;
-    margin: 5px 5px 0 5px;
-    width: auto;
-    _width: 0;
-}
-#ui-top-floating-bar ul li a {
-    display: block;
-    height: 28px;
-    line-height: 28px;
-    padding: 0 8px;
-}
-#ui-top-floating-bar ul li ul{
-    display: none;
-    position: absolute;
-    z-index: 999;
-}
-#ui-top-floating-bar ul li ul li{
-    clear: both;
-    margin: 0;
-    width: 100%;
-}
-
-/* 页底浮动栏
-----------------------------------*/
-#ui-bottom-floating-botton{
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    z-index: 999;
-}
-
-
-/* Navigation Bar
-----------------------------------*/
-div.ui-navigation-bar{
-    -moz-border-radius:0;
-    -webkit-border-radius:0;
-    padding:.2em 0;
-    border-left:0;
-    border-right:0;
-}
-div.ui-navigation-bar .ui-tabs-nav{
-    -moz-border-radius:0;
-    -webkit-border-radius:0;
-    border-left:0;
-    border-right:0;
-    padding-left: 10px;
-}
-.ui-navigation-bar ul li a{
-     cursor:pointer;
-}
-div.ui-navigation-bar .ui-tabs-panel {
-    padding: 3px;
-    height: 16px;
-    margin-left: 16px;
-}
-.ui-navigation-bar .ui-tabs-panel a{
-    font-size: 12px;
-    padding: 3px 8px;
-}
-.ui-navigation-bar .ui-tabs-panel a:hover{
-    border:none;
-    font-weight:normal;
-}
-.ui-navigation-bar .ui-tabs-nav li.ui-tabs-selected a,
-.ui-navigation-bar .ui-tabs-nav li.ui-state-disabled a,
-.ui-navigation-bar .ui-tabs-nav li.ui-state-processing a {
-    cursor:pointer;
-}
-
-
 /* Header
 ----------------------------------*/
 .ui-header{
     clear: both;
 }
 div.ui-header-logo{
-    margin: 10px 0 8px 21px;
+	width: 200px;
     font-weight: bold;
     font-size: 32px;
     background: none;
-    border: none;
+	height: 55px;
+	border: none;
     float: left;
+	overflow: hidden;
 }
 .ui-header-logo a img{
     vertical-align: middle;
-}
-.ui-header-logo a sup{
-    font-size: 12px;
+	margin: 12px 0 0 12px;
+	height: 40px;
 }
 .ui-header-shortcut{
     float: right;
@@ -145,51 +61,98 @@ div.ui-header-logo{
     font-weight: normal;
     font-size: 12px;
     line-height: 14px;
-    height:  14px;
+    height: 14px;
     border-top: none;
 }
 .ui-header-shortcut a.ui-header-shortcut-last-anchor{
     border-right: none;
 }
 
-/* Sidebar
+/* Navigation Bar
 ----------------------------------*/
-/* 修复在 Dot Luv 主题下,Sidebar 出现y滚动条的问题 */
-.ui-siderbar .ui-box-content ul {
-    margin: 1px;
-    overflow-y: hidden;
+.ui-navigation-bar{
+    border-left :0;
+    border-right: 0;
+    border-bottom: 0;
 }
-.ui-siderbar{
-    width: 186px;
+.ui-navigation-bar ul{
+    border: 0;
+    z-index: 999;
 }
-.ui-siderbar .ui-box-content .ui-sidebar-list {
-    padding:0 1px 3px 6px;
-    font-weight:normal;
+.ui-navigation-bar ul.ui-widget-content{
+	margin: 30px 0 0 0;
+	float: left;
+}
+.ui-navigation-bar ul li{
+    width: auto;
+    float: left;
+}
+.ui-navigation-bar ul li.ui-state-hover,
+.ui-navigation-bar ul li.ui-state-active {
+    border-bottom: 0;
+}
+.ui-navigation-bar ul li a{
+    padding: 5px 16px;
+    display: block;
+}
+.ui-navigation-bar ul li ul.ui-widget-content{
     border-top: 0;
+    display: none;
+    width: 100%;
+    float: left;
+}
+.ui-navigation-bar div.ui-widget-content{
+    margin-top: -1px;
+    z-index: 998px;
     border-left: 0;
     border-right: 0;
 }
-.ui-siderbar ul li a{
+.ui-navigation-bar .ui-navigation-content{
+    height: 26px;
+	margin-left: 200px;
+}
+.ui-navigation-bar .ui-navigation-content ul li{
+}
+
+
+/* Sidebar
+----------------------------------*/
+.ui-widget-content .ui-sidebar-header{
+	height: 30px;
+	border: 0;
+	line-height: 30px;
+	background-image: none;
+}
+.ui-sidebar-header a{
+	text-indent: 32px;
+	display: block;
+	background-position: 10px 7px;
+}
+.ui-sidebar-content-2{
+	margin-top: 30px;
+}
+.ui-sidebar-content ul li {
+    margin:3px 3px 3px 6px;
+    font-weight:normal;
+    border: 0;
+}
+.ui-sidebar-content ul li:hover{
+	border: 0;
+}
+.ui-sidebar-content ul li a{
     display: block;
-    line-height: 16px;
-    height: 16px;
+    line-height: 24px;
+    height: 24px;
     overflow: hidden;
     padding: 3px 3px 0 3px;
     text-align: left;
 }
-
-#ui-main-table{
-    width: 100%;
-    padding: 0 8px;
-    margin: 8px 0 0;
+.ui-sidebar-content ul li a.ui-iconx{
+	background-position: 5px 6px;
+	text-indent: 24px;
 }
-#ui-main-left{
-    width: 200px;
-    vertical-align: top;
-}
-#ui-main-right{
-    width: auto;
-    vertical-align: top;
+.ui-sidebar-content ul li a:hover{
+	border: 0;
 }
 
 /* Main
@@ -197,61 +160,65 @@ div.ui-header-logo{
 .ui-main{
     margin: 0 auto;
     border: none;
+	margin-bottom: 20px;
+}
+#ui-main-table{
+    width: 100%;
+}
+#ui-main-left{
+    width: 198px;
+    vertical-align: top;
+}
+#ui-main-middle{
+	width: 4px;
+	border-top: none;
+}
+#ui-main-right{
+    width: auto;
+    vertical-align: top;
 }
 
 /* Footer
 ----------------------------------*/
-.ui-footer{
-    background: none;
-    border: none;
-}
-.ui-copyright {
-    height: 40px;
-    line-height: 40px;
-    width: 100%;
-    text-align: center;
-    clear: both;
-}
-.ui-copyright a {
-    font-weight: bold;
-}
-div.ui-copyright{
-    background: none;
-    border: none;
-    font-weight: normal;
+#ui-floating-footer{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 999;
+	width: 100%;
+	height: 20px;
+	text-align: right;
+	line-height: 20px;
+	border-left: 0;
+	border-right: 0;
+	font-weight: normal;
 }
 /* Box
 ----------------------------------*/
 .ui-box{
     margin-bottom: 5px;
-    padding: 2px 4px 2px 2px;
+	border: none;
 }
-.ui-box .ui-box-titlebar {
-    position: relative;
+.ui-box .ui-box-header {
     width: 100%;
+	border: none;
+	height: 40px;
+	line-height: 40px;
+	text-indent: 16px;
+}
+.ui-box .ui-box-header .ui-box-header-icon{
+	vertical-align: middle;
+}
+.ui-box .ui-box-header a{
+	font-size: 14px;
+	font-weight: bold;
 }
 .ui-box .ui-box-title{
     float: left;
     padding: 5px 18px 3px 7px;
     font-size: 14px;
     display: block;
-}
-.ui-box .ui-box-title-icon{
-    position: absolute;
-    right: 3px;
-    top: 50%;
-    width: 19px;
-    margin: -10px 0 0 0;
-    padding: 1px;
-    height: 18px;
-    cursor: pointer;
-}
-.ui-box .ui-box-title-icon span{
-    display: block;
-    margin: 1px;
-}
-.ui-box .ui-box-title-icon:hover, .ui-box .ui-box-title-icon:focus{
-    padding: 0;
+	
 }
 .ui-box .ui-box-content{
     border: 0;
@@ -284,7 +251,7 @@ div.ui-copyright{
     width: auto;
 }
 .ui-form .ui-form-content{
-    padding: 15px;
+    padding: 0 10px;
 }
 
 /* input: hidden 的行 */
@@ -354,7 +321,7 @@ div.ui-copyright{
     vertical-align: bottom;
 }
 .ui-form-table .ui-field-text-small input{
-	width: 22%;
+    width: 22%;
 }
 .ui-form-table .ui-field-checkbox input,
 .ui-form-table .ui-field-radio input {
@@ -517,10 +484,10 @@ div.ui-copyright{
 }
 
 #ui-popup {
-	padding: 0;
+    padding: 0;
 }
 #ui-jqgrid-table{
-	width: 600px;
+    width: 600px;
 }
 
 #ui-popup-main #gbox_ui-jqgrid-table{
@@ -543,7 +510,7 @@ div.ui-copyright{
     font-weight: normal;
 }
 .qw-icon-plus{
-	background: url(./../../resource/image/plus_16.png) 0 0 no-repeat;
+    background: url(./../../resource/image/plus_16.png) 0 0 no-repeat;
     width: 16px; height: 16px;
     display: block;
     text-indent:-99999px;

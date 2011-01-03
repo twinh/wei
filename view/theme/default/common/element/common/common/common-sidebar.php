@@ -1,6 +1,6 @@
 <?php
 /**
- * viewed-item
+ * common-sidebar
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,32 +16,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ * @package     Common
+ * @subpackage  View
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-03 01:29:49
+ * @since       2011-01-04 02:47:27
  */
 ?>
-<div class="ui-sidebar-header ui-state-default"> 
-	<a class="ui-iconx ui-iconx-clock-16" href="javascript:;"><?php echo qw_lang('LBL_LAST_VIEWED_ITEM') ?></a>
-</div>
-<div class="ui-sidebar-content">
-    <ul>
-	<?php
-    if(empty($lastViewedItem)):
-    ?>
-        <li><a><?php echo qw_lang('MSG_NO_LAST_VIEWED_LOG') ?></a></li>
-	<?php
-    else:
-        foreach($lastViewedItem as $row):
-    ?>
-        <li>
-        	<a href="<?php echo $row['href'] ?>"><?php echo $row['title'] ?></a>
-        </li>
-    <?php
-        endforeach;
-    endif;
-    ?>
+<div class="ui-sidebar-content ui-sidebar-content-2">
+	<ul>
+        <li><a class="ui-iconx ui-iconx-address-16" href="#">添加文章</a></li>
+        <li><a class="ui-iconx ui-iconx-monitor-16" href="#">添加新闻</a></li>
     </ul>
 </div>
