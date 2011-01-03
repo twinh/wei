@@ -36,7 +36,7 @@ jQuery(function($){
     $('a.ui-action-controller').button({icons: {primary: 'ui-icon-triangle-1-e'},text: false});
 
     // 点击右下按钮,回到顶部
-    $('#ui-bottom-floating-botton').click(function(){
+    $('#ui-footer-arrow').click(function(){
         $('html').animate({scrollTop:0}, 700);
         return false;
     })

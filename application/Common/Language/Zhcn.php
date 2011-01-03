@@ -76,7 +76,7 @@ class Common_Language_Zhcn extends Common_Language
             'MSG_ERROR_CAPTCHA' => '验证码错误',
             'LBL_GROUP_BASIC_DATA' => '基本资料',
             'LBL_HTML_TITLE' => 'Management System - Powered by Qwin Framework',
-            'LBL_FOOTER_COPYRIGHT' => 'Powered by Qwin Framework. Copyright © 2008-2010 Twin. All rights reserved.',
+            'LBL_FOOTER_COPYRIGHT' => 'Powered by Qwin Framework, Version ' . Qwin::VERSION . '. Copyright © 2008-2010 Twin. All rights reserved.',
             'LBL_ACTION_VIEW' => '查看',
             'LBL_ACTION_UPDATE' => '更新',
             'LBL_LAST_VIEWED' => '最近查看',
@@ -153,19 +153,19 @@ class Common_Language_Zhcn extends Common_Language
             'LBL_READONLY' => '只读',
             'LBL_PERSONAL' => '个人',
             'LBL_LOGIN' => '登录',
-			
-			'LBL_LANG_GBK' => '简体中文(Zh-cn,Gbk)',
-			'LBL_LANG_ZHCN' => '简体中文(Zh-cn,Utf-8)',
-			'LBL_LANG_ENUS' => '英文(En-us)',
-			
-			'LBL_CANCEL' => '取消',
-			'LBL_CUSTOM_VALUE' => '自定义值',
-			
-			'LBL_TREE_PREFIX_1' => '┃',
-			'LBL_TREE_PREFIX_2' => '┣',
+
+            'LBL_LANG_GBK' => '简体中文(Zh-cn,Gbk)',
+            'LBL_LANG_ZHCN' => '简体中文(Zh-cn,Utf-8)',
+            'LBL_LANG_ENUS' => '英文(En-us)',
+            
+            'LBL_CANCEL' => '取消',
+            'LBL_CUSTOM_VALUE' => '自定义值',
+
+            'LBL_TREE_PREFIX_1' => '┃',
+            'LBL_TREE_PREFIX_2' => '┣',
 
             'LBL_LAST_VIEWED_ITEM' => '最近查看项',
-			'MSG_NO_LAST_VIEWED_LOG' => '暂时没有查看记录',
+            'MSG_NO_LAST_VIEWED_LOG' => '暂时没有查看记录',
         );
     }
 }
