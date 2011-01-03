@@ -87,10 +87,11 @@ $jsPacker
         </td>
     </tr>
 </table>
-<div id="ui-floating-footer" class="ui-state-default">
-    <?php echo qw_lang('LBL_FOOTER_COPYRIGHT') ?>&nbsp;系统时间是 2010-01-03 17:26:25
-	<!--<button><span class="ui-icon ui-icon-arrowthickstop-1-n"></span></button>-->
 </div>
+<div id="ui-floating-footer" class="ui-state-default">
+	<div id="ui-footer-arrow" class="ui-icon ui-icon-arrowthickstop-1-n"></div>
+	<div class="ui-footer-time"></div>
+    <div class="ui-copyright"><?php echo qw_lang('LBL_FOOTER_COPYRIGHT') ?></div>
 </div>
 </body>
 </html>

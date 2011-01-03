@@ -30,5 +30,5 @@ require_once 'Qwin/Class.php';
 
 class Qwin extends Qwin_Class
 {
-    const VERSION = '0.5';
+    const VERSION = '0.6.0';
 }

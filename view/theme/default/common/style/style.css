@@ -193,6 +193,17 @@ div.ui-header-logo{
 	border-right: 0;
 	font-weight: normal;
 }
+#ui-footer-arrow{
+	float: right;
+	width: 20px;
+	margin: 2px 0 0 2px;
+}
+.ui-footer-time{
+	float: right;
+}
+.ui-copyright{
+	text-align: center;
+}
 /* Box
 ----------------------------------*/
 .ui-box{
