@@ -34,11 +34,25 @@ $jsPacker
     ->add(QWIN_RESOURCE_PATH . '/js/jquery/plugin/jqgrid/i18n/grid.locale-en.js')
     ->add($jQueryFile['jqgrid']['js']);
 ?>
-<div id="custom-jqgird-toolbar" class="ui-helper-hidden">
-    <?php echo $customLink ?>
+<div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
+	<div class="ui-box-header">
+    	<img class="ui-box-header-icon" src="<?php echo QWIN_RESOURCE_PATH ?>/image/label_32.png" />
+        <a href="<?php echo qw_url($set, array('action' => 'Index')) ?>"><?php echo qw_lang($meta['page']['title']) ?></a>
+        &raquo;
+        <a href="#">列表</a>
+        &raquo;
+        <a href="#">我的<?php echo qw_lang($meta['page']['title']) ?></a>
+    </div>
+    <div class="ui-form-content ui-box-content ui-widget-content">
+        <div class="ui-operation-field">
+        	<?php echo $customLink ?>
+        </div>
+        <div class="ui-operation-field">
+    	<table id="ui-jqgrid-table"></table>
+    	<div id="ui-jqgrid-page"></div>
+        </div>
+    </div>
 </div>
-<table id="ui-jqgrid-table"></table>
-<div id="ui-jqgrid-page"></div>
 <script type="text/javascript">
 jQuery(function($){
     $.jgrid.no_legacy_api = true;
@@ -54,7 +68,7 @@ jQuery(function($){
         sortname         : '<?php echo $sortName?>',
         sortorder        : '<?php echo $sortOrder?>',
         // 标题
-        caption          : '<a href="<?php echo qw_url() ?>"><?php echo qw_lang($meta['page']['title']) ?></a>',
+        //caption          : '<a href="<?php echo qw_url() ?>"><?php echo qw_lang($meta['page']['title']) ?></a>',
         // 显示列的数目
         rownumbers       : true,
         // 允许多选
@@ -68,8 +82,6 @@ jQuery(function($){
         viewrecords      : true,
         // 列宽度改变改变时,不改变表格宽度,从而不出现滚动条
         forceFit         : true,
-        // 工具栏,设置在顶部
-        toolbar          : [true, 'top'],
         // 双击查看详情
         ondblClickRow    : function(rowId, row, col ,e)
         {
@@ -97,17 +109,10 @@ jQuery(function($){
         del : false,
         search : false
     });
-    // 页眉工具栏
-    $("#t_ui-jqgrid-table").append($('#custom-jqgird-toolbar').html());
-
-    $('#t_ui-jqgrid-table a').qui({
-        click: true,
-        focus: true
-    });
 
     // 点击删除按钮
     // TODO 提示更多信息,包括id号,数目等
-    $('#t_ui-jqgrid-table a.action-delete').click(function(){
+    $('a.action-delete').click(function(){
         var keyList = new Array(),
             rowList = $('#ui-jqgrid-table').jqGrid('getGridParam','selarrrow');
         if(rowList.length == 0)

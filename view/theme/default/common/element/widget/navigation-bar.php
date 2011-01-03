@@ -23,33 +23,47 @@
  * @since       2011-01-03 01:17:46
  */
 ?>
-<div id="ui-top-floating-bar" class="ui-top-floating-bar ui-widget ui-widget-header">
-	<ul>
-    	<li class="ui-top-bar-list">
-            <a href="?" class="ui-widget ui-state-active ui-corner-all"><?php echo qw_lang('LBL_QWIN') ?></a>
-        </li>
-        <?php
-        foreach($this->_data['navigationData'] as $menu) :
-            if(null == $menu['category_id']) :
-        ?>
-        <li class="ui-top-bar-list">
-            <a href="<?php echo $menu['url'] ?>" target="<?php echo $menu['target'] ?>" class="ui-widget ui-state-default ui-corner-all"><?php echo $menu['title'] ?></a>
-            <ul class="ui-state-hover ui-corner-bottom ui-corner-tr">
-                <?php
-                foreach($this->adminMenu as $subMenu) :
-                    if($menu['id'] == $subMenu['category_id']) :
-                ?>
-                <li><a href="<?php echo $subMenu['url'] ?>" target="<?php echo $subMenu['target'] ?>"><?php echo $subMenu['title'] ?></a></li>
+<script type="text/javascript">
+jQuery(function($){
+    $('#ui-navigation-bar ul li.ui-widget').hover(
+    function(){
+        // 隐藏其他选项卡的内容
+        $('ul.ui-navigation-content').html($(this).find('ul').html());
 
+        // 激活当前选项卡,同时使其他选项卡恢复默认状态
+        $('#ui-navigation-bar ul li.ui-widget').addClass('ui-state-default').removeClass('ui-state-hover');
+        $(this).addClass('ui-state-hover');
+    },function(){
+    });
+});
+</script>
+<div id="ui-navigation-bar" class="ui-navigation-bar">
+    <ul class="ui-widget-content">
+        <li class="ui-widget ui-state-active ui-corner-top"> <a href="?"><?php echo qw_lang('LBL_QWIN') ?></a> </li>
+        <?php
+        foreach ($navigationData as $menu) :
+            if (null == $menu['category_id']) :
+        ?>
+                <li class="ui-widget ui-state-default ui-corner-top"> <a href="<?php echo $menu['url'] ?>" target="<?php echo $menu['target'] ?>"><?php echo $menu['title'] ?></a>
+                    <ul class="ui-widget-content">
                 <?php
+                foreach ($navigationData as $subMenu) :
+                    if ($menu['id'] == $subMenu['category_id']) :
+                ?>
+                        <li><a href="<?php echo $subMenu['url'] ?>" target="<?php echo $subMenu['target'] ?>"><?php echo $subMenu['title'] ?></a></li>
+                <?php
+                        endif;
+                    endforeach;
+                ?>
+                </ul>
+            </li>
+        <?php
                     endif;
                 endforeach;
-                ?>
-            </ul>
-        </li>
-        <?php
-            endif;
-        endforeach;
         ?>
     </ul>
+    <div class="clear"></div>
+    <div class="ui-widget-content ui-state-default">
+        <ul class="ui-navigation-content"></ul>
+    </div>
 </div>

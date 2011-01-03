@@ -94,4 +94,12 @@ jQuery(function($){
     $('table.ui-table tr').not('.ui-table-header').qui();
     $('table.ui-table td.ui-state-default').qui();
     $('table.ui-table td a.ui-jqgrid-icon').qui();
+	
+	// 修复中间栏不能达到最大高度的问题
+	fixMainTableHeight();
+	function fixMainTableHeight()
+	{
+		var height = $(window).height() - $('#ui-main-table').offset().top - $('#ui-floating-footer').height();
+		$('#ui-main-table').css('height', height);
+	}
 });

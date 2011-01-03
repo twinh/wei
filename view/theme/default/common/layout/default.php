@@ -22,7 +22,8 @@ $cssPacker
     ->add($jQueryFile['core']['css'])
     ->add($jQueryFile['widget']['css'])
     ->add($jQueryFile['button']['css'])
-    ->add($jQueryFile['qui']['css']);
+    ->add($jQueryFile['qui']['css'])
+	->add(QWIN_RESOURCE_PATH . '/image/iconx.css');
 $jsPacker
     ->add($jquery->loadCore(false))
     ->add(QWIN_RESOURCE_PATH . '/js/qwin/qwin.js')
@@ -42,10 +43,14 @@ $jsPacker
     jQuery.noConflict();
     <?php echo qw_lang_to_js() ?>
 	Qwin.get = <?php echo Qwin_Helper_Array::toJsObject($_GET);?>;
+	jQuery(function($){
+		$('#ui-main-middle').qui().click(function(){
+			$("#ui-main-left").animate({width: 'toggle'}, 500);
+		});
+	});
 </script>
 </head>
 <body>
-<div id="ui-bottom-floating-botton" class="ui-bottom-floating-botton"><button><span class="ui-icon ui-icon-arrowthickstop-1-n"></span></button></div>
 <div id="ui-main" class="ui-main ui-widget-content ui-corner-all">
   <div id="ui-header" class="ui-header ui-widget">
     <div class="ui-header-shortcut" id="ui-header-shortcut">
@@ -65,30 +70,27 @@ $jsPacker
     </div>
     <div class="ui-header-logo ui-widget-content">
         <a href="?">
-            <img src="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/default/common/image/logo.gif" alt="logo" />
-            <img src="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/default/common/image/common.gif" alt="logo" />
+            <img src="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/default/common/image/logo.png" alt="logo" />
         </a>
     </div>
-  </div>
-  <div class="clear"></div>
-<?php require $this->getWidget('Common_Widget_NavigationBar') ?>
-<table id="ui-main-table">
+    <?php $this->loadWidget('Common_Widget_NavigationBar') ?>
+    </div>
+<table id="ui-main-table" border="0" cellpadding="0" cellspacing="0">
     <tr>
         <td id="ui-main-left">
-        <div class="ui-siderbar ui-box ui-widget ui-widget-content ui-corner-all">
-        <?php require $this->getWidget('Common_Widget_ViewedItem') ?>
-        </div>
+        <?php $this->loadWidget('Common_Widget_ViewedItem') ?>
+        <?php require $this->getElement('actionOperation') ?>
         </td>
+        <td id="ui-main-middle" class="ui-state-default"></td>
         <td id="ui-main-right">
-<?php
-require $this->getElement('content');
-?>
+        <?php require $this->getElement('content') ?>
         </td>
     </tr>
 </table>
-  <div class="ui-footer ui-widget">
-    <div class="ui-copyright ui-widget-content"><?php echo qw_lang('LBL_FOOTER_COPYRIGHT') ?></div>
-  </div>
+<div id="ui-floating-footer" class="ui-state-default">
+    <?php echo qw_lang('LBL_FOOTER_COPYRIGHT') ?>&nbsp;系统时间是 2010-01-03 17:26:25
+	<!--<button><span class="ui-icon ui-icon-arrowthickstop-1-n"></span></button>-->
+</div>
 </div>
 </body>
 </html>
