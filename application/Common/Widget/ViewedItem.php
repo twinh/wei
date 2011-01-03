@@ -16,8 +16,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  
+ * @package     Common
+ * @subpackage  Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -32,6 +32,6 @@ class Common_Widget_ViewedItem extends Common_Widget
         $lastViewedItem = Qwin::run('-session')->get('lastViewedItem');
         $view->setVar('lastViewedItem', $lastViewedItem);
 
-        return $view->decodePath('<resource><theme>/<namespace>/element/widget/viewed-item<suffix>');
+        require $view->decodePath('<resource><theme>/<namespace>/element/widget/viewed-item<suffix>');
     }
 }

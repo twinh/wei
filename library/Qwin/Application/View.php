@@ -396,16 +396,19 @@ abstract class Qwin_Application_View extends Qwin_Metadata_Abstract
      * @todo 允许多种返回类型
      * @todo 变量跨域
      */
-    public function getWidget($name, $param = null)
+    public function loadWidget($name, $param = null)
     {
         if (!class_exists($name)) {
             throw new Qwin_Application_View_Exception('The widget class "' . $name . '" is not exists.');
         }
         $object = new $name;
+        return $object->render($param, $this);
+        /*
         $file = $object->render($param, $this);
         if (!is_file($file)) {
            throw new Qwin_Application_View_Exception('The widget class should return a available file path.');
         }
         return $file;
+         */
     }
 }
