@@ -30,11 +30,14 @@ class Common_View_Redirect extends Common_View
     public function __construct()
     {
         parent::__construct();
-        $this->setElement('content', '<resource><theme>/<namespace>/element/<defaultModule>/<defaultController>/redirect<suffix>');
+        $this->setLayout('<resource><theme>/<defaultNamespace>/layout/default<suffix>');
+        $this->setElement('content', '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>/redirect<suffix>');
     }
 
     public function preDisplay()
     {
+        $meta['page']['title'] = 'LBL_REDIRECT';
+        $meta['page']['icon'] = 'info';
         $message = $this->message;
 
         switch($this->method)

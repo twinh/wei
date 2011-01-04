@@ -118,13 +118,13 @@ class Common_Metadata extends Qwin_Metadata
                     'layout' => 2,
                 ),
                 'form' => array(
-                    //'_type' => 'hidden',
-                    '_type' => 'text',
+                    '_type' => 'hidden',
+                    /*'_type' => 'text',
                     '_widgetDetail' => array(
                         array(
                             array('Qwin_Widget_JQuery_CustomValue', 'render'),
                         ),
-                    ),
+                    ),*/
                     'name' => 'id',
                 ),
                 'attr' => array(

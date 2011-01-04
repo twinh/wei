@@ -28,8 +28,8 @@
 !defined('QWIN_PATH') && exit('Forbidden');
 ?>
   <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
-  	<div class="ui-box-header">
-    	<?php $this->loadWidget('Common_Widget_Header') ?>
+    <div class="ui-box-header">
+        <?php $this->loadWidget('Common_Widget_Header') ?>
     </div>
     <div class="ui-form-content ui-box-content ui-widget-content">
         <div class="ui-operation-field">
@@ -45,7 +45,7 @@
             echo qw_jquery_link('javascript:history.go(-1);', qw_lang('LBL_ACTION_RETURN'), 'ui-icon-arrowthickstop-1-w');
             ?>
         </div>
-        <?php require $this->decodePath('<resource><theme>/<namespace>/element/basic/form<suffix>') ?>
+        <?php require $this->decodePath('<resource><theme>/<defaultNamespace>/element/basic/form<suffix>') ?>
         <div class="ui-operation-field">
             <?php
             echo qw_jquery_link(qw_url($set, array('action' => 'Index')), qw_lang('LBL_ACTION_LIST'), 'ui-icon-note'),

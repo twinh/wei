@@ -10,11 +10,11 @@ jQuery(function($){
      * 设置背景颜色,让背景看起来更协调
      * @todo 允许自定义背景
      */
-	 if('transparent' == $('body').css('background-color'))
-	 {
-		 $('body').css('background-color', $widget.css('background-color'));
-	 }
-	
+     if('transparent' == $('body').css('background-color'))
+     {
+         $('body').css('background-color', $widget.css('background-color'));
+     }
+
     $('button:not(.ui-button-none), input:submit, input:reset, input:button, a.ui-anchor').button();
     $('td.ui-field-radio, td.ui-field-checkbox').buttonset();
 
@@ -89,21 +89,25 @@ jQuery(function($){
             {
                 $(name).slideToggle('fast');
             }
-	});
+    });
 
     $('table.ui-table tr').not('.ui-table-header').qui();
     $('table.ui-table td.ui-state-default').qui();
     $('table.ui-table td a.ui-jqgrid-icon').qui();
-	
-	// 修复中间栏不能达到最大高度的问题
-	fixMainTableHeight();
-	function fixMainTableHeight()
-	{
-		var height = $(window).height() - $('#ui-main-table').offset().top - $('#ui-floating-footer').height();
-		$('#ui-main-table').css('height', height);
-	}
-	
-	$('#ui-main-middle').qui().click(function(){
-		$("#ui-main-left").animate({width: 'toggle'}, 500);
-	});
+
+    // 修复中间栏不能达到最大高度的问题
+    fixMainTableHeight();
+    function fixMainTableHeight()
+    {
+        if (!document.getElementById('ui-main-table')) {
+           return false;
+        }
+        var height = $(window).height() - $('#ui-main-table').offset().top - $('#ui-floating-footer').height();
+        $('#ui-main-table').css('height', height);
+        return true;
+    }
+
+    $('#ui-main-middle').qui().click(function(){
+        $("#ui-main-left").animate({width: 'toggle'}, 500);
+    });
 });

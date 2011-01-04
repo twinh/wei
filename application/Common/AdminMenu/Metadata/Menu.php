@@ -26,7 +26,7 @@
 
 class Common_AdminMenu_Metadata_Menu extends Common_Metadata
 {
-    public function  setMetadata()
+    public function setMetadata()
     {
         $this->setCommonMetadata();
         $this->parseMetadata(array(

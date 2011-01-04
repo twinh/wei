@@ -30,7 +30,9 @@ class Common_View_EditForm extends Common_View
     public function __construct()
     {
         parent::__construct();
-        $this->setElement('content', '<resource><theme>/<namespace>/element/<defaultModule>/<defaultController>/form<suffix>');
+        $this->setElement('content', array(
+            '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>/form<suffix>',
+        ));
     }
 
     public function preDisplay()
@@ -43,7 +45,7 @@ class Common_View_EditForm extends Common_View
         $set = Qwin::run('-ini')->getSet();
 
         $orderedFeid = $metaHelper->orderField($meta);
-        $layout = $metaHelper->getTableLayout($meta, $orderedFeid, 'edit');
+        $layout = $metaHelper->getTableLayout($meta, $orderedFeid, 'edit', $meta['page']['tableLayout']);
 
         $group = $meta['group'];
         $jQueryValidateCode = Qwin_Helper_Array::jsonEncode($metaHelper->getJQueryValidateCode($meta));

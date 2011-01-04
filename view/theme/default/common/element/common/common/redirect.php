@@ -26,9 +26,9 @@
  */
 ?>
 <div class="ui-box ui-widget ui-widget-content ui-corner-all">
-    <div class="ui-box-titlebar ui-widget-header ui-helper-clearfix">
-        <span class="ui-box-title"><?php echo qw_lang('LBL_MESSAGE') ?></span>
-        <a class="ui-box-title-icon ui-corner-all" name=".ui-message-content" href="javascript:void(0)"> <span class="ui-icon  ui-icon-circle-triangle-n">open/close</span> </a> </div>
+	<div class="ui-box-header">
+    	<?php $this->loadWidget('Common_Widget_Header') ?>
+    </div>
     <div class="ui-message-content ui-box-content ui-widget-content">
         <div class="ui-state-highlight ui-corner-all">
             <p>

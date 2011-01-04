@@ -99,7 +99,7 @@ function qw_null_text($data = null)
     {
         return $data;
     }
-    return '<em>(null)</em>';
+    return '<em>(' . qw_lang('LBL_NULL') .')</em>';
 }
 
 function qw_jquery()

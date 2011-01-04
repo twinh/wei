@@ -168,6 +168,7 @@ class Common_Member_Metadata_Member extends Common_Metadata
             // 页面显示
             'page' => array(
                 'title' => 'LBL_MODULE_MEMBER',
+                'icon' => 'user',
             ),
         ));
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Gbk
+ * Customer
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,27 +16,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-11-01 19:51:01
+ * @since       2011-01-04 23:15:49
  */
 
-class Common_Clip_Language_Gbk extends Common_Language_Gbk
+class Crm_Customer_Model_Customer extends Common_Model
 {
-    public function __construct()
-    {
-        parent::__construct();
-        $this->_data += array(
-            'LBL_FIELD_VALUE' => '值',
-
-            'LBL_FIELD_FORM_TYPE' => '表单类型',
-            'LBL_FIELD_FORM_WIDGET' => '表单微件',
-            'LBL_MODULE_CLIP' => '碎片',
-
-        );
-    }
 }

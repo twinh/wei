@@ -48,7 +48,6 @@ class Common_Member_Controller_Log extends Common_Controller
              * 设置视图,加载登陆界面
              */
             $this->_view = array(
-                'class' => 'Common_View',
                 'data' => get_defined_vars(),
             );
         } else {
@@ -66,6 +65,7 @@ class Common_Member_Controller_Log extends Common_Controller
     {
         return Qwin::run('Common_Member_Service_Logout')->process(array(
             'set' => $this->_set,
+            'this' => $this,
         ));
     }
 }

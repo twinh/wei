@@ -29,7 +29,9 @@
 !defined('QWIN_PATH') && exit('Forbidden');
 ?>
   <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
-    <div class="ui-box-titlebar ui-widget-header ui-helper-clearfix"> <span class="ui-box-title"> <a href="<?php echo qw_url($set, array('action' => 'Index')) ?>"><?php echo qw_lang($meta['page']['title']) ?></a></span> <a class="ui-box-title-icon ui-corner-all" name=".ui-form-content" href="javascript:void(0)"> <span class="ui-icon  ui-icon-circle-triangle-n">open/close</span> </a> </div>
+    <div class="ui-box-header">
+        <?php $this->loadWidget('Common_Widget_Header') ?>
+    </div>
     <div class="ui-form-content ui-box-content ui-widget-content">
         <form id="post-form" name="form" method="post" action="">
         <div class="ui-operation-field">

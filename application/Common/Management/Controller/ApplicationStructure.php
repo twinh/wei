@@ -29,12 +29,8 @@ class Common_Management_Controller_ApplicationStructure extends Common_Controlle
 {
     public function actionIndex()
     {
-        $theme = Qwin::run('-ini')->getConfig('interface.theme');
+        $meta = $this->_meta;
         $this->_view = array(
-            'class' => 'Common_View',
-            'element' => array(
-                array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/management/application-structure.php'),
-            ),
             'data' => get_defined_vars(),
         );
     }

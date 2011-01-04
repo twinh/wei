@@ -27,7 +27,7 @@
 ?>
 <div class="ui-sidebar-content ui-sidebar-content-2">
 	<ul>
-        <li><a class="ui-iconx ui-iconx-address-16" href="#">添加文章</a></li>
-        <li><a class="ui-iconx ui-iconx-monitor-16" href="#">添加新闻</a></li>
+        <li><a class="ui-iconx ui-iconx-monitor-16" href="#">更多操作,敬请期待</a></li>
+        <li><a class="ui-iconx ui-iconx-monitor-16" href="#">更多操作,敬请期待</a></li>
     </ul>
 </div>

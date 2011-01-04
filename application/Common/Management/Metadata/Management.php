@@ -1,6 +1,6 @@
 <?php
 /**
- * Zhcn
+ * Management
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,26 +17,23 @@
  * limitations under the License.
  *
  * @package     Common
- * @subpackage  Config
+ * @subpackage  Management
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-26 17:26:18
+ * @since       2011-01-04 21:18:36
  */
 
-class Common_Clip_Language_Zhcn extends Common_Language_Zhcn
+class Common_Management_Metadata_Management extends Common_Metadata
 {
-    public function __construct()
+    public function setMetadata()
     {
-        parent::__construct();
-        $this->_data += array(
-            'LBL_FIELD_VALUE' => '值',
-
-            'LBL_FIELD_FORM_TYPE' => '表单类型',
-            'LBL_FIELD_FORM_WIDGET' => '表单微件',
-            'LBL_MODULE_CLIP' => '碎片',
-
-        );
+        $this->parseMetadata(array(
+            'page' => array(
+                'title' => 'LBL_MODULE_MANAGEMENT',
+                'icon' => 'gear',
+            ),
+         ));
     }
 }

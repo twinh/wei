@@ -48,7 +48,7 @@ class Common_Management_Language_Zhcn extends Common_Language_Zhcn
             'MSG_MODULE_EMPTY' => '该命名空间不包含任何模块.',
             'MSG_MODULE_EXISTS' => '模块已存在.',
 
-            'LBL_MANAGEMENT' => '管理',
+            'LBL_MODULE_MANAGEMENT' => '管理',
             'LBL_NAMESPACE' => '命名空间',
             'LBL_MODULE' => '模块',
         );

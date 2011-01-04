@@ -27,6 +27,14 @@
 
 class Common_View_JqGrid extends Common_View
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setElement('content', array(
+            '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>/index<suffix>',
+        ));
+    }
+    
     public function preDisplay()
     {
         // 初始变量,方便调用
