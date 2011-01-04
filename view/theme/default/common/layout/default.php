@@ -79,7 +79,7 @@ $jsPacker
     <tr>
         <td id="ui-main-left">
         <?php $this->loadWidget('Common_Widget_ViewedItem') ?>
-        <?php require $this->getElement('actionOperation') ?>
+        <?php require $this->getElement('sidebar') ?>
         </td>
         <td id="ui-main-middle" class="ui-state-default"></td>
         <td id="ui-main-right">

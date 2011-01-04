@@ -321,6 +321,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
             // 页面显示
             'page' => array(
                 'title' => 'LBL_MODULE_ARTICLE',
+                'icon' => 'document',
             ),
             'shortcut' => array(
             )

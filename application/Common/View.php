@@ -34,30 +34,31 @@ class Common_View extends Qwin_Application_View
     public function __construct()
     {
         // 布局的选择次序为 自定义视图 > 行为级 > 控制器级 > 模块级 > 默认(命名空间级)
-        $layout = array(
+        $this->setLayout(array(
             '<resource><theme>/<namespace>/layout/<module>-<controller>-<action><suffix>',
             '<resource><theme>/<namespace>/layout/<module>-<controller><suffix>',
             '<resource><theme>/<namespace>/layout/<module><suffix>',
             '<resource><theme>/<namespace>/layout/default<suffix>',
-        );
-        $this->setLayout($layout);
+        ));
 
         // 默认视图元素的选择次序为 自定义视图 > 当前行为视图 > 默认模块视图 > 默认视图
-        $element = array(
+        $this->setElement('content', array(
             '<resource><theme>/<namespace>/element/<module>/<controller>/<action><suffix>',
             '<resource><theme>/<namespace>/element/<defaultModule>/<defaultController>/<action><suffix>',
             '<resource><theme>/<namespace>/element/default<suffix>',
-        );
-        // 设置默认内容视图
-        $this->setElement('content', $element);
+        ));
 
         // 当前行为的左栏操作视图
-        $actionElement = array(
+        $this->setElement('sidebar', array(
             '<resource><theme>/<namespace>/element/<module>/<controller>/<action>-sidebar<suffix>',
             '<resource><theme>/<namespace>/element/<defaultModule>/<defaultController>/<defaultAction>-sidebar<suffix>',
-        );
-        // 设置当前行为的左栏操作视图
-        $this->setElement('actionOperation', $actionElement);
+        ));
+
+        // 当前行为的页眉标题视图
+        $this->setElement('header', array(
+            '<resource><theme>/<namespace>/element/<module>/<controller>/<action>-header<suffix>',
+            '<resource><theme>/<namespace>/element/<defaultModule>/<defaultController>/<defaultAction>-header<suffix>',
+        ));
 
         // 获取配置
         $ini = Qwin::run('-ini');

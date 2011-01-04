@@ -29,12 +29,7 @@
 ?>
   <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
   	<div class="ui-box-header">
-    	<img class="ui-box-header-icon" src="<?php echo QWIN_RESOURCE_PATH ?>/image/address_32.png" />
-        <a href="<?php echo qw_url($set, array('action' => 'Index')) ?>"><?php echo qw_lang($meta['page']['title']) ?></a>
-        &raquo;
-        <a href="#">列表</a>
-        &raquo;
-        <a href="#">我的<?php echo qw_lang($meta['page']['title']) ?></a>
+    	<?php $this->loadWidget('Common_Widget_Header') ?>
     </div>
     <div class="ui-form-content ui-box-content ui-widget-content">
         <div class="ui-operation-field">
