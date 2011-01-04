@@ -28,16 +28,12 @@
 !defined('QWIN_PATH') && exit('Forbidden');
 ?>
 <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
-    <div class="ui-box-titlebar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix">
-        <span class="ui-box-title">
-            <?php echo qw_lang('LBL_MANAGEMENT')?>
-        </span>
-        <a class="ui-box-title-icon ui-corner-all" name=".ui-form-content" href="javascript:void(0)">
-            <span class="ui-icon  ui-icon-circle-triangle-n">open/close</span>
-        </a>
+	<div class="ui-box-header">
+    	<?php $this->loadWidget('Common_Widget_Header') ?>
     </div>
     <form action="" method="post">
     <div class="ui-form-content ui-box-content ui-widget-content">
+    	<div class="ui-space-10px"></div>
         <div class="ui-operation-field">
                     <?php echo qw_jquery_link(qw_url(array('module' => 'Management', 'controller' => 'ApplicationStructure')), qw_lang('LBL_MODULE_APPLICATION_STRUCTURE'), 'ui-icon-script') ?>
                     <?php echo qw_jquery_link('javascript:history.go(-1);', qw_lang('LBL_ACTION_RETURN'), 'ui-icon-arrowthickstop-1-w') ?>
