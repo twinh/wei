@@ -79,6 +79,7 @@ class Common_Language_Zhcn extends Common_Language
             'LBL_FOOTER_COPYRIGHT' => 'Powered by Qwin Framework, Version ' . Qwin::VERSION . '. Copyright © 2008-2010 Twin. All rights reserved.',
             'LBL_ACTION_VIEW' => '查看',
             'LBL_ACTION_UPDATE' => '更新',
+            'LBL_ACTION_INDEX' => '列表',
             'LBL_LAST_VIEWED' => '最近查看',
             'LBL_MESSAGE' => '提示信息',
             'LBL_MEMBER_CENTER' => '用户中心',

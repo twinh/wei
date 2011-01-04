@@ -31,6 +31,7 @@ class Qwin_Metadata_Element_Page extends Qwin_Metadata_Element_Abstract
     {
         return array(
             'title' => null,
+            'icon' => 'document',
             'description' => null,
         );
     }

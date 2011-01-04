@@ -36,18 +36,15 @@ $jsPacker
 ?>
 <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
 	<div class="ui-box-header">
-    	<img class="ui-box-header-icon" src="<?php echo QWIN_RESOURCE_PATH ?>/image/label_32.png" />
-        <a href="<?php echo qw_url($set, array('action' => 'Index')) ?>"><?php echo qw_lang($meta['page']['title']) ?></a>
-        &raquo;
-        <a href="#">列表</a>
-        &raquo;
-        <a href="#">我的<?php echo qw_lang($meta['page']['title']) ?></a>
+    	<?php $this->loadWidget('Common_Widget_Header') ?>
     </div>
     <div class="ui-form-content ui-box-content ui-widget-content">
         <div class="ui-operation-field">
-        	<?php echo $customLink ?>
-        </div>
-        <div class="ui-operation-field">
+        <div id="custom-jqgird-toolbar" class="ui-helper-hidden">
+        	<div class="ui-jqgrid-top">
+				<?php echo $customLink ?>
+			</div>
+         </div>
     	<table id="ui-jqgrid-table"></table>
     	<div id="ui-jqgrid-page"></div>
         </div>
@@ -92,6 +89,8 @@ jQuery(function($){
             window.location.href = Qwin.url.createUrl(Qwin.get, addition);
             return false;
         },
+		// 工具栏,设置在顶部
+        toolbar          : [true, 'top'],
         // 各参数的对应关系
         prmNames         : {
             page   : '<?php echo $controller->pageName ?>',
@@ -108,6 +107,14 @@ jQuery(function($){
         edit : false,
         del : false,
         search : false
+    });
+	
+	// 页眉工具栏
+    $("#t_ui-jqgrid-table").append($('#custom-jqgird-toolbar').html());
+
+    $('#t_ui-jqgrid-table a').qui({
+        click: true,
+        focus: true
     });
 
     // 点击删除按钮
@@ -134,5 +141,7 @@ jQuery(function($){
         }
         return false;
     });
+	
+	$('#ui-jqgrid-table tr:nth-child(1) td:nth-child(2)').addClass("highlight");
 });
 </script>

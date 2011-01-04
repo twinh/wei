@@ -52,6 +52,7 @@ class Common_Article_Language_Zhcn extends Common_Language_Zhcn
             'LBL_GROUP_PAGE_DATA' => '页面资料',
             'LBL_GROUP_SETTING_DATA' => '配置资料',
 
+            'LBL_CONTROLLER_ARTICLE' => '文章',
             'LBL_MODULE_ARTICLE' => '文章',
             'LBL_MODULE_ARTICLE_CATEGORY' => '文章分类',
 
