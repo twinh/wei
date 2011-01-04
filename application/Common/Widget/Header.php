@@ -40,17 +40,21 @@ class Common_Widget_Header extends Common_Widget
         $icon = QWIN_RESOURCE_PATH . '/image/' . $view['meta']['page']['icon'] . '_32.png';
         !file_exists($icon) && $icon = null;
 
-        // 如果模块和控制器相同,不显示模块
+        $header .= '<a href="' . $url->createUrl(array_diff_key($set, array('action' => ''))) . '">' . $lang->t($view['meta']['page']['title']) . '</a>';
+
+        /*// 如果模块和控制器相同,不显示模块
         if ($set['module'] != $set['controller']) {
             $header .= '<a href="' . $url->createUrl($set) . '">' . $lang->t('LBL_MODULE_' . strtoupper($set['module'])) . '</a>&nbsp;&raquo;&nbsp;';
         }
 
         // 控制器
         $header .= '<a href="' . $url->createUrl(array_diff_key($set, array('action' => ''))) . '">' . $lang->t('LBL_CONTROLLER_' . strtoupper($set['controller'])) . '</a>&nbsp;&raquo;&nbsp;';
-
-        // 行为
-        $header .= '<a href="' . $url->createUrl($_GET) . '">' . $lang->t('LBL_ACTION_' . strtoupper($set['action'])) . '</a>';
+        */
+        // 行为 todo 允许自定义
+        if ('Index' != $set['action']) {
+            $header .= '&nbsp;&raquo;&nbsp;<a href="' . $url->createUrl($_GET) . '">' . $lang->t('LBL_ACTION_' . strtoupper($set['action'])) . '</a>';
+        }
         
-        require $view->decodePath('<resource><theme>/<namespace>/element/widget/header<suffix>');
+        require $view->decodePath('<resource><theme>/<defaultNamespace>/element/widget/header<suffix>');
     }
 }

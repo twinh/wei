@@ -44,6 +44,7 @@ class Common_Member_Service_Logout extends Common_Service_BasicAction
         'view' => array(
             'display' => true,
         ),
+        'this' => null,
     );
 
     public function process(array $config = null)
@@ -75,7 +76,7 @@ class Common_Member_Service_Logout extends Common_Service_BasicAction
                 );
                 if($config['view']['display'])
                 {
-                    $this->setRedirectView($return['message']);
+                    $config['this']->setRedirectView($return['message']);
                 }
                 return $return;
             }
@@ -93,7 +94,7 @@ class Common_Member_Service_Logout extends Common_Service_BasicAction
         );     
         if($config['view']['display'])
         {
-            $this->setRedirectView($return['message'], $return['url']);
+            $config['this']->setRedirectView($return['message'], $return['url']);
         }
         return $return;
     }

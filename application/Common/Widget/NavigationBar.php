@@ -32,6 +32,10 @@ class Common_Widget_NavigationBar extends Common_Widget
         // 加载页眉导航的缓存
         $navigationData = Qwin::run('Qwin_Cache_List')->getCache('AdminMenu');
 
-        require $view->decodePath('<resource><theme>/<namespace>/element/widget/navigation-bar<suffix>');
+        // 页面名称
+        $queryString = empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING'];
+        $pageUrl = basename($_SERVER['PHP_SELF']) . $queryString;
+
+        require $view->decodePath('<resource><theme>/<defaultNamespace>/element/widget/navigation-bar<suffix>');
     }
 }

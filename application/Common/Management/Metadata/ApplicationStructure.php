@@ -52,7 +52,8 @@ class Common_Management_Metadata_ApplicationStructure extends Common_Metadata
                 ),
             ),
             'page' => array(
-                'title' => 'LBL_MANAGEMENT_APPLICATION_STRUCTURE',
+                'title' => 'LBL_MODULE_APPLICATION_STRUCTURE',
+                'icon' => 'gear',
             ),
         ));
     }

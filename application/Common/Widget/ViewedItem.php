@@ -32,6 +32,6 @@ class Common_Widget_ViewedItem extends Common_Widget
         $lastViewedItem = Qwin::run('-session')->get('lastViewedItem');
         $view->setVar('lastViewedItem', $lastViewedItem);
 
-        require $view->decodePath('<resource><theme>/<namespace>/element/widget/viewed-item<suffix>');
+        require $view->decodePath('<resource><theme>/<defaultNamespace>/element/widget/viewed-item<suffix>');
     }
 }

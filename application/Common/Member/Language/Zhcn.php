@@ -64,6 +64,7 @@ class Common_Member_Language_Zhcn extends Common_Language_Zhcn
 
             'LBL_MODULE_MEMBER' => '用户',
             'LBL_MODULE_MEMBER_DETAIL' => '用户详细',
+            'LBL_MODULE_MEMBER_SETTING' => '用户配置',
 
             'LBL_THEME' => '主题',
             'LBL_LANGUAGE' => '语言',

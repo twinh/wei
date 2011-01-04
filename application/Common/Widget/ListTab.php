@@ -64,7 +64,7 @@ class Common_Widget_ListTab extends Common_Widget
         $class = $set['namespace'] . '_' . $set['module'] . '_Widget_ListTab';
         if(class_exists($class)) {
             $object = new $class;
-            $file = $view->decodePath('<resource><theme>/<namespace>/element/<module>/<controller>/<action>-tab<suffix>');
+            $file = $view->decodePath('<resource><theme>/<defaultNamespace>/element/<module>/<controller>/<action>-tab<suffix>');
             return $object->render(array(
                 'tab' => $tab,
                 'file' => $file,
@@ -89,7 +89,7 @@ class Common_Widget_ListTab extends Common_Widget
             $output .= Qwin_Helper_Html::jQueryLink($row['url'], $row['title'], $row['icon'], $row['class'], $row['target'], $row['id']);
         }
         if ($echo) {
-            require $view->decodePath('<resource><theme>/<namespace>/element/basic/output<suffix>');
+            require $view->decodePath('<resource><theme>/<defaultNamespace>/element/basic/output<suffix>');
         } else {
             return $output;
         }

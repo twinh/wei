@@ -30,7 +30,7 @@ class Common_View_AddForm extends Common_View
     public function __construct()
     {
         parent::__construct();
-        $this->setElement('content', '<resource><theme>/<namespace>/element/<defaultModule>/<defaultController>/form<suffix>');
+        $this->setElement('content', '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>/form<suffix>');
     }
 
     public function preDisplay()
@@ -43,7 +43,7 @@ class Common_View_AddForm extends Common_View
         $set = Qwin::run('-ini')->getSet();
 
         $orderedFeid = $metaHelper->orderField($meta);
-        $layout = $metaHelper->getTableLayout($meta, $orderedFeid, 'add');
+        $layout = $metaHelper->getTableLayout($meta, $orderedFeid, 'add', $meta['page']['tableLayout']);
 
         //$layout = $metaHelper->getAddLayout($meta);
         $group = $meta['group'];

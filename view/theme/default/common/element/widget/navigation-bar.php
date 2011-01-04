@@ -26,15 +26,24 @@
 <script type="text/javascript">
 jQuery(function($){
     $('#ui-navigation-bar ul li.ui-widget').hover(
-    function(){
-        // 隐藏其他选项卡的内容
-        $('ul.ui-navigation-content').html($(this).find('ul').html());
+        function(){
+            // 隐藏其他选项卡的内容
+            $('ul.ui-navigation-content').html($(this).find('ul').html());
 
-        // 激活当前选项卡,同时使其他选项卡恢复默认状态
-        $('#ui-navigation-bar ul li.ui-widget').addClass('ui-state-default').removeClass('ui-state-hover');
-        $(this).addClass('ui-state-hover');
-    },function(){
+            // 激活当前选项卡,同时使其他选项卡恢复默认状态
+            $('#ui-navigation-bar ul li.ui-widget').addClass('ui-state-default').removeClass('ui-state-hover');
+            $(this).addClass('ui-state-hover');
+        },function(){
     });
+    var current = $('#ui-navigation-bar ul li.ui-naviagtion-bar-current');
+    var currentClass = current.attr('class');
+    if (undefined != currentClass) {
+        if ('ui-naviagtion-bar-current' == currentClass) {
+            current = current.parent().parent();
+        }
+        current.addClass('ui-state-hover');
+        $('ul.ui-navigation-content').html(current.find('ul').html());
+    }
 });
 </script>
 <div id="ui-navigation-bar" class="ui-navigation-bar">
@@ -43,14 +52,24 @@ jQuery(function($){
         <?php
         foreach ($navigationData as $menu) :
             if (null == $menu['category_id']) :
+                if ($menu['url'] == $queryString) :
+                    $class = ' ui-naviagtion-bar-current';
+                else:
+                    $class = '';
+                endif;
         ?>
-                <li class="ui-widget ui-state-default ui-corner-top"> <a href="<?php echo $menu['url'] ?>" target="<?php echo $menu['target'] ?>"><?php echo $menu['title'] ?></a>
+                <li class="ui-widget ui-state-default ui-corner-top<?php echo $class ?>"> <a href="<?php echo $menu['url'] ?>" target="<?php echo $menu['target'] ?>"><?php echo $menu['title'] ?></a>
                     <ul class="ui-widget-content">
                 <?php
                 foreach ($navigationData as $subMenu) :
                     if ($menu['id'] == $subMenu['category_id']) :
+                        if ($subMenu['url'] == $queryString) :
+                            $class = ' class="ui-naviagtion-bar-current"';
+                        else:
+                            $class = '';
+                        endif;
                 ?>
-                        <li><a href="<?php echo $subMenu['url'] ?>" target="<?php echo $subMenu['target'] ?>"><?php echo $subMenu['title'] ?></a></li>
+                        <li<?php echo $class?>><a href="<?php echo $subMenu['url'] ?>" target="<?php echo $subMenu['target'] ?>"><?php echo $subMenu['title'] ?></a></li>
                 <?php
                         endif;
                     endforeach;

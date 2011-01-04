@@ -39,19 +39,20 @@ class Common_View extends Qwin_Application_View
             '<resource><theme>/<namespace>/layout/<module>-<controller><suffix>',
             '<resource><theme>/<namespace>/layout/<module><suffix>',
             '<resource><theme>/<namespace>/layout/default<suffix>',
+            '<resource><theme>/<defaultNamespace>/layout/default<suffix>',
         ));
 
         // 默认视图元素的选择次序为 自定义视图 > 当前行为视图 > 默认模块视图 > 默认视图
         $this->setElement('content', array(
             '<resource><theme>/<namespace>/element/<module>/<controller>/<action><suffix>',
-            '<resource><theme>/<namespace>/element/<defaultModule>/<defaultController>/<action><suffix>',
+            '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>/<action><suffix>',
             '<resource><theme>/<namespace>/element/default<suffix>',
         ));
 
         // 当前行为的左栏操作视图
         $this->setElement('sidebar', array(
             '<resource><theme>/<namespace>/element/<module>/<controller>/<action>-sidebar<suffix>',
-            '<resource><theme>/<namespace>/element/<defaultModule>/<defaultController>/<defaultAction>-sidebar<suffix>',
+            '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>/<defaultAction>-sidebar<suffix>',
         ));
 
         // 当前行为的页眉标题视图
@@ -98,6 +99,7 @@ class Common_View extends Qwin_Application_View
             'module' => $set['module'],
             'controller' => $set['controller'],
             'action' => $set['action'],
+            'defaultNamespace' => 'Common',
             'defaultModule' => 'Common',
             'defaultController' => 'Common',
             'defaultAction' => 'Common',

@@ -1,6 +1,6 @@
 <?php
 /**
- * Enus
+ * Customer
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,25 +16,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
- * @subpackage  Clip
+ * @package     Crm
+ * @subpackage  Customer
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-26 17:25:12
+ * @since       2011-01-04 22:54:41
  */
 
-class Common_Clip_Language_Enus extends Common_Language_Enus
+class Crm_Customer_Controller_Customer extends Common_ActionController
 {
-    public function __construct()
+    public function actionLead()
     {
-        parent::__construct();
-        $this ->_data += array(
-            'LBL_FIELD_FORM_TYPE' => 'Form Type',
-            'LBL_FIELD_FORM_WIDGET' => 'Form Widget',
-
-            'LBL_MODULE_CLIP' => 'Clip',
-        );
+        $_GET['searchField'] = 'state';
+        $_GET['searchValue'] = 1;
+        parent::actionIndex();
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Clip
+ * Company
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,26 +16,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
- * @subpackage  Clip
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-06-02
+ * @since       2011-01-05 00:09:49
  */
 
-class Common_Clip_Controller_Clip extends Common_ActionController
+class Crm_Company_Model_Company extends Common_Model
 {
-    public function onAfterDb()
-    {
-        $query = $this->metaHelper->getQuery($this->_meta);
-        $data = $query->execute()->toArray();
-        $cache = array();
-        foreach($data as $row)
-        {
-            $cache[$row['name']] = $row['value'];
-        }
-        Qwin::run('Qwin_Cache_List')->writeCache($cache, 'clip');
-    }
 }

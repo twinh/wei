@@ -115,8 +115,10 @@ class Qwin_Application_Metadata extends Qwin_Metadata
      */
     public function getClassName($addition, $set)
     {
-        // TODO !!
-        !isset($set['namespace']) && $set['namespace'] = 'Application';
+        if (!isset($set['namespace'])) {
+            $configSet = Qwin::run('-ini')->getSet();
+            $set['namespace'] = $configSet['namespace'];
+        }
         return $set['namespace'] . '_' . $set['module'] . '_' . $addition . '_' . $set['controller'];
     }
 
@@ -892,9 +894,10 @@ class Qwin_Application_Metadata extends Qwin_Metadata
 
     public function convertTojqGridData($data, $primaryKey, $layout)
     {
+        $lang = Qwin::run('-lang');
         $i = 0;
         $rowData = array();
-        $nullData = '<em>(null)<em>';
+        $nullData = '<em>(' . $lang->t('LBL_NULL') .')<em>';
         foreach ($data as $row) {
             $rowData[$i][$primaryKey] = $row[$primaryKey];
             foreach($layout as $field) {
@@ -1079,6 +1082,18 @@ class Qwin_Application_Metadata extends Qwin_Metadata
                 continue;
             }
         }
+
+        // 修复最后一个的位置
+        // TODO 后面确实为一行的情况
+        foreach ($layout as $key => $value) {
+            if (-1 != $key) {
+                $count = count($value) - 1;
+                if (2 != count($value[$count])) {
+                    $layout[$key][$count][] = '';
+                }
+            }
+        }
+
         return $layout;
     }
 

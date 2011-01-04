@@ -33,10 +33,8 @@ class Common_Member_Controller_Setting extends Common_Controller
      */
     public function actionIndex()
     {
-        /**
-         * 设置视图
-         */
-        $theme = Qwin::run('-ini')->getConfig('interface.theme');
+        $meta = $this->_meta;
+        // 设置视图
         $this->_view = array(
             'data' => get_defined_vars(),
         );

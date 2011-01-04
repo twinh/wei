@@ -1,6 +1,6 @@
 <?php
 /**
- * Clip
+ * Setting
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,13 +17,23 @@
  * limitations under the License.
  *
  * @package     Common
- * @subpackage  Clip
+ * @subpackage  Member
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
+ * @since       2011-01-04 21:09:40
  */
 
-class Common_Clip_Model_Clip extends Common_Model
+class Common_Member_Metadata_Setting extends Common_Metadata
 {
+    public function  setMetadata()
+    {
+        $this->parseMetadata(array(
+            'page' => array(
+                'title' => 'LBL_MODULE_MEMBER_SETTING',
+                'icon' => 'user',
+            ),
+         ));
+    }
 }

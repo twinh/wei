@@ -137,7 +137,7 @@ class Qwin_Cache
 
     function writeArr($arr, $path, $name = '')
     {
-        $arr = Qwin::run('Qwin_Helper_Array')->tophpCode($arr);
+        $arr = var_export($arr, true);
         if('' != $name)
         {
             $file_str = "<?php\r\n\$$name = $arr;\r\n";
