@@ -1,6 +1,6 @@
 <?php
 /**
- * header
+ * output
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -22,14 +22,9 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-04 15:53:16
+ * @since       2011-01-04 17:42:36
  */
-?>
-<?php
-if($icon):
-?>
-<img class="ui-box-header-icon" src="<?php echo $icon ?>" alt="<?php echo $view['meta']['page']['icon'] ?>" />&nbsp;
-<?php
-endif;
-echo $header;
-?>
+
+if (isset($output)) {
+    echo($output);
+}

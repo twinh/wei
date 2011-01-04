@@ -102,4 +102,8 @@ jQuery(function($){
 		var height = $(window).height() - $('#ui-main-table').offset().top - $('#ui-floating-footer').height();
 		$('#ui-main-table').css('height', height);
 	}
+	
+	$('#ui-main-middle').qui().click(function(){
+		$("#ui-main-left").animate({width: 'toggle'}, 500);
+	});
 });

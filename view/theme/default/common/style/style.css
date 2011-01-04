@@ -529,3 +529,7 @@ div.ui-header-logo{
     float: left;
     margin: 4px;
 }
+
+.ui-widget, .ui-widget-content {
+	font-size: 12px;
+}

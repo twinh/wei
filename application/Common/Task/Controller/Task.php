@@ -152,14 +152,6 @@ class Common_Task_Controller_Task extends Common_ActionController
         parent::actionEdit();
     }
 
-    public function createCustomLink()
-    {
-        $html = parent::createCustomLink();
-        $html = Qwin_Helper_Html::jQueryLink($this->url->createUrl($this->_set, array('action' => 'ListAssignToMe')), $this->_lang->t('LBL_MODULE_TASK_ASSIGN_TO_ME'), 'ui-icon-script')
-              . Qwin_Helper_Html::jQueryLink($this->url->createUrl($this->_set, array('action' => 'ListAssignByMe')), $this->_lang->t('LBL_MODULE_TASK_ASSIGN_BY_ME'), 'ui-icon-script');
-        return $html;
-    }
-
     public function convertAssignToStatus($value, $name, $data, $copyData)
     {
         // 该任务已经分配

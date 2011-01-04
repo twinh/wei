@@ -42,7 +42,7 @@ $jsPacker
         <div class="ui-operation-field">
         <div id="custom-jqgird-toolbar" class="ui-helper-hidden">
         	<div class="ui-jqgrid-top">
-				<?php echo $customLink ?>
+				<?php echo $this->loadWidget('Common_Widget_ListTab') ?>
 			</div>
          </div>
     	<table id="ui-jqgrid-table"></table>

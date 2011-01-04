@@ -1,6 +1,6 @@
 <?php
 /**
- * header
+ * index-tab
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -22,14 +22,27 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-04 15:53:16
+ * @since       2011-01-04 17:25:06
  */
-?>
-<?php
-if($icon):
-?>
-<img class="ui-box-header-icon" src="<?php echo $icon ?>" alt="<?php echo $view['meta']['page']['icon'] ?>" />&nbsp;
-<?php
-endif;
-echo $header;
-?>
+
+$tabSetting[] = array(
+    'url' => $url->createUrl($set, array('action' => 'ListAssignToMe')),
+    'title' => $lang->t('LBL_MODULE_TASK_ASSIGN_TO_ME'),
+    'icon' => 'ui-icon-script',
+    'target' => null,
+    'id' => null,
+    'class' => null,
+);
+$tabSetting[] = array(
+    'url' => $url->createUrl($set, array('action' => 'ListAssignByMe')),
+    'title' => $lang->t('LBL_MODULE_TASK_ASSIGN_BY_ME'),
+    'icon' => 'ui-icon-script',
+    'target' => null,
+    'id' => null,
+    'class' => null,
+);
+$output = '';
+foreach ($tabSetting as $tab) {
+    $output .= Qwin_Helper_Html::jQueryLink($tab['url'], $tab['title'], $tab['icon'], $tab['class'], $tab['target'], $tab['id']);
+}
+echo $output;
