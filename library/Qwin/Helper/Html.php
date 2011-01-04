@@ -77,8 +77,9 @@ class Qwin_Helper_Html
         return '<img src="' . $src . '" alt="' . $title . '"' . $width . $height . ' />';
     }
 
-    public static function jQueryLink($url, $title, $icon, $aClass = null, $target = '_self')
+    public static function jQueryLink($url, $title, $icon, $aClass = null, $target = '_self', $id = null)
     {
-        return '<a target="' . $target . '" href="' . $url . '" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary ' . $aClass . '" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ' . $icon . '"></span><span class="ui-button-text">' . $title . '</span></a>' . "\r\n";
+        isset($id) && $id = ' id=' . $id . '"';
+        return '<a' . $id .' target="' . $target . '" href="' . $url . '" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary ' . $aClass . '" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ' . $icon . '"></span><span class="ui-button-text">' . $title . '</span></a>' . "\r\n";
     }
 }

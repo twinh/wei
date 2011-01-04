@@ -50,11 +50,6 @@ class Common_ActionController extends Common_Controller
                 'data' => array(
                     'list' => $this->metaHelper->getUrlListField(),
                 ),
-                'callback' => array(
-                    'beforeViewLoad' => array(
-                        array($this, 'createCustomLink'),
-                    ),
-                ),
                 'this' => $this,
             );
             return Qwin::run('Common_Service_Index')->process($config);
@@ -241,17 +236,5 @@ class Common_ActionController extends Common_Controller
             'this' => $this,
         );
         return Qwin::run('Common_Service_Delete')->process($config);
-    }
-
-    /**
-     * 创建在列表页显示的自定义链接
-     * @return string
-     * @todo 标准化
-     */
-    public function createCustomLink()
-    {
-        return Qwin_Helper_Html::jQueryLink($this->url->createUrl($this->_set, array('action' => 'Add')), $this->_lang->t('LBL_ACTION_ADD'), 'ui-icon-plus')
-             . Qwin_Helper_Html::jQueryLink('javascript:;', $this->_lang->t('LBL_ACTION_DELETE'), 'ui-icon-trash', 'action-delete')
-             . Qwin_Helper_Html::jQueryLink($this->url->createUrl($this->_set, array('action' => 'Index')), $this->_lang->t('LBL_ACTION_LIST'), 'ui-icon-note');
     }
 }

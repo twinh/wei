@@ -147,6 +147,7 @@ class Common_Config_Metadata_Config extends Common_Metadata
             ),
             'page' => array(
                 'title' => 'LBL_MODULE_CONFIG',
+                'icon' => 'gear',
             ),
         ));
     }

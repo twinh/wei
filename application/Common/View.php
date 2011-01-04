@@ -87,7 +87,7 @@ class Common_View extends Qwin_Application_View
 
         $jquery->setTheme($this->getStyle());
         
-        $this->_theme = Qwin::run('-ini')->getConfig('interface.theme');
+        $this->_theme = $ini->getConfig('interface.theme');
 
         $tagList = array(
             'resource' => QWIN_RESOURCE_PATH . '/view/theme/',

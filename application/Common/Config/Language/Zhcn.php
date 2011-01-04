@@ -43,6 +43,7 @@ class Common_Config_Language_Zhcn extends Common_Language_Zhcn
 
             'LBL_CONFIG_CENTER' => '配置中心',
 
+            'LBL_CONTROLLER_CONFIG' => '配置',
             'LBL_MODULE_CONFIG' => '配置',
             'LBL_MODULE_CONFIG_GROUP' => '配置分组',
         );

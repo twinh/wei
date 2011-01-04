@@ -67,9 +67,6 @@ class Common_Service_Index extends Common_Service_BasicAction
         {
             $layout = array_intersect($layout, (array)$config['data']['list']);
         }
-
-        // 自定义链接
-        $customLink = $this->executeCallback('beforeViewLoad', $config);
         
         // 设置视图
         $view = array(

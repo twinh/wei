@@ -46,10 +46,10 @@ class Common_Widget_Header extends Common_Widget
         }
 
         // 控制器
-        $header .= '<a href="' . $url->createUrl($set) . '">' . $lang->t('LBL_CONTROLLER_' . strtoupper($set['controller'])) . '</a>&nbsp;&raquo;&nbsp;';
+        $header .= '<a href="' . $url->createUrl(array_diff_key($set, array('action' => ''))) . '">' . $lang->t('LBL_CONTROLLER_' . strtoupper($set['controller'])) . '</a>&nbsp;&raquo;&nbsp;';
 
         // 行为
-        $header .= '<a href="' . $url->createUrl($set) . '">' . $lang->t('LBL_ACTION_' . strtoupper($set['action'])) . '</a>';
+        $header .= '<a href="' . $url->createUrl($_GET) . '">' . $lang->t('LBL_ACTION_' . strtoupper($set['action'])) . '</a>';
         
         require $view->decodePath('<resource><theme>/<namespace>/element/widget/header<suffix>');
     }

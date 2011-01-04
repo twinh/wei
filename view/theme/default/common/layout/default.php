@@ -43,11 +43,6 @@ $jsPacker
     jQuery.noConflict();
     <?php echo qw_lang_to_js() ?>
 	Qwin.get = <?php echo Qwin_Helper_Array::toJsObject($_GET);?>;
-	jQuery(function($){
-		$('#ui-main-middle').qui().click(function(){
-			$("#ui-main-left").animate({width: 'toggle'}, 500);
-		});
-	});
 </script>
 </head>
 <body>
