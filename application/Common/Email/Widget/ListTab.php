@@ -1,6 +1,6 @@
 <?php
 /**
- * list-tab
+ * ListTab
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,25 +16,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
- * @subpackage  View
+ * @package     Qwin
+ * @subpackage  
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-04 17:20:53
+ * @since       2011-01-04 19:57:49
  */
 
-$tabSetting[] = array(
-    'url' => $url->createUrl($set, array('action' => 'Post')),
-    'title' => $lang->t('LBL_ACTION_POST'),
-    'icon' => 'ui-icon-script',
-    'target' => null,
-    'id' => null,
-    'class' => null,
-);
-$output = '';
-foreach ($tabSetting as $tab) {
-    $output .= Qwin_Helper_Html::jQueryLink($tab['url'], $tab['title'], $tab['icon'], $tab['class'], $tab['target'], $tab['id']);
+class Common_Email_Widget_ListTab extends Common_Widget
+{
+    public function render($param, $view)
+    {
+        $set = $view['set'];
+        $url = Qwin::run('-url');
+        $lang = Qwin::run('-lang');
+
+        $param['tab'][] = array(
+            'url' => $url->createUrl($set, array('action' => 'Post')),
+            'title' => $lang->t('LBL_ACTION_POST'),
+            'icon' => 'ui-icon-script',
+            'target' => null,
+            'id' => null,
+            'class' => null,
+        );
+        $param['object']->renderTab($param['tab'], $view);
+    }
 }
-echo $output;

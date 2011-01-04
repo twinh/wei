@@ -33,7 +33,7 @@ class Common_Widget_ListTab extends Common_Widget
         $url = Qwin::run('-url');
         $lang = Qwin::run('-lang');
         
-        $tabSetting = array(
+        $tab = array(
             array(
                 'url' => $url->createUrl($set, array('action' => 'Add')),
                 'title' => $lang->t('LBL_ACTION_ADD'),
@@ -59,17 +59,39 @@ class Common_Widget_ListTab extends Common_Widget
                 'class' => null,
             ),
         );
-        
+
         // 如果当前行为存在选项卡视图,加载该视图,否则直接输出默认选项卡内容
-        $actionListTab = $view->decodePath('<resource><theme>/<namespace>/element/<module>/<controller>/<action>-tab<suffix>');
-        if (is_file($actionListTab)) {
-            require $actionListTab;
+        $class = $set['namespace'] . '_' . $set['module'] . '_Widget_ListTab';
+        if(class_exists($class)) {
+            $object = new $class;
+            $file = $view->decodePath('<resource><theme>/<namespace>/element/<module>/<controller>/<action>-tab<suffix>');
+            return $object->render(array(
+                'tab' => $tab,
+                'file' => $file,
+                'object' => $this,
+            ), $view);
         } else {
-            $output = '';
-            foreach ($tabSetting as $tab) {
-                $output .= Qwin_Helper_Html::jQueryLink($tab['url'], $tab['title'], $tab['icon'], $tab['class'], $tab['target'], $tab['id']);
-            }
+            $this->renderTab($tab, $view);
+        }
+    }
+
+    /**
+     * 输出选项卡视图
+     *
+     * @param object $view 视图对象
+     * @param bool $echo 是否输出视图
+     * @return string
+     */
+    public function renderTab($tab, $view, $echo = true)
+    {
+        $output = '';
+        foreach ($tab as $row) {
+            $output .= Qwin_Helper_Html::jQueryLink($row['url'], $row['title'], $row['icon'], $row['class'], $row['target'], $row['id']);
+        }
+        if ($echo) {
             require $view->decodePath('<resource><theme>/<namespace>/element/basic/output<suffix>');
+        } else {
+            return $output;
         }
     }
 }
