@@ -34,6 +34,9 @@ class Common_Member_Metadata_Group extends Common_Metadata
             // 基本属性
             'field' => array(
                 'name' => array(
+                    'attr' => array(
+                        'isList' => 1,
+                    ),
                 ),
                 'image_path' => array(
                     'form' => array(
@@ -42,16 +45,10 @@ class Common_Member_Metadata_Group extends Common_Metadata
                             'ajaxUpload'
                         ),
                     ),
-                    'attr' => array(
-                        'isList' => 0,
-                    ),
                 ),
                 'description' => array(
                     'form' => array(
                         '_type' => 'textarea',
-                    ),
-                    'attr' => array(
-                        'isList' => 0,
                     ),
                 ),
                 'permission' => array(

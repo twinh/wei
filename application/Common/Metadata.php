@@ -104,6 +104,17 @@ class Common_Metadata extends Qwin_Metadata
             ->setOperationMetadata();
     }
 
+    public function setAdvancedMetadata()
+    {
+        return $this
+            ->setIdMetadata()
+            ->setCreatedData()
+            ->setModifiedData()
+            ->setAssignToMetadata()
+            ->setIsDeletedMetadata()
+            ->setOperationMetadata();
+    }
+
     /**
      * 设置编号域的元数据配置,编号是最为常见的域
      *
@@ -158,7 +169,6 @@ class Common_Metadata extends Qwin_Metadata
                     'type' => 'date',
                 ),
                 'attr' => array(
-                    'isList' => 0,
                     'isReadonly' => 1,
                 ),
             ),
@@ -173,7 +183,6 @@ class Common_Metadata extends Qwin_Metadata
                     'type' => 'date',
                 ),
                 'attr' => array(
-                    'isList' => 0,
                     'isReadonly' => 1,
                 ),
             ),
@@ -196,9 +205,6 @@ class Common_Metadata extends Qwin_Metadata
                 'form' => array(
                     '_type' => 'custom',
                 ),
-                'attr' => array(
-                    'isList' => 0,
-                ),
             ),
             'date_modified' => array(
                 'basic' => array(
@@ -206,6 +212,9 @@ class Common_Metadata extends Qwin_Metadata
                 ),
                 'form' => array(
                     '_type' => 'custom',
+                ),
+                'attr' => array(
+                    'isList' => 1,
                 ),
             ),
         ));
@@ -232,6 +241,47 @@ class Common_Metadata extends Qwin_Metadata
                     'isDbField' => 0,
                     'isDbQuery' => 0,
                     'isView' => 0,
+                    'isList' => 1,
+                ),
+            ),
+        ));
+        return $this;
+    }
+
+    public function setAssignToMetadata()
+    {
+        $this->addField(array(
+            'assign_to' => array(
+                'basic' => array(
+                    'order' => 1100,
+                ),
+                'form' => array(
+                    '_type' => 'text',
+                ),
+                'attr' => array(
+                    'isLink' => 0,
+                    'isList' => 0,
+                ),
+            ),
+        ));
+        return $this;
+    }
+
+    public function setIsDeletedMetadata()
+    {
+        $this->addField(array(
+            'is_deleted' => array(
+                'basic' => array(
+                    'order' => 1105,
+                ),
+                'form' => array(
+                    '_type' => 'custom',
+                ),
+                'attr' => array(
+                    'isLink' => 0,
+                    'isList' => 0,
+                    'isView' => 0,
+                    'isReadonly' => 1,
                 ),
             ),
         ));
@@ -384,6 +434,11 @@ class Common_Metadata extends Qwin_Metadata
     {
         $member = Qwin::run('Qwin_Session')->get('member');
         return $member['id'];
+    }
+
+    public function convertDbIsDeleted($value, $name, $data, $dataCopy)
+    {
+        return 0;
     }
 
     public function setIsLink($value, $name, $data, $dataCopy, $action)

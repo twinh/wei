@@ -49,6 +49,7 @@ class Common_Member_Metadata_Member extends Common_Metadata
                     ),
                     'attr' => array(
                         'isLink' => 1,
+                        'isList' => 1,
                     ),
                     'validator' => array(
                         'rule' => array(
@@ -61,12 +62,12 @@ class Common_Member_Metadata_Member extends Common_Metadata
                         '_type' => 'hidden',
                     ),
                     'attr' => array(
-                        'isList' => 0,
                         'isView' => 0,
                     ),
                 ),
                 'username' => array(
                     'attr' => array(
+                        'isList' => 1,
                         'isReadonly' => 1,
                     ),
                     'validator' => array(
@@ -78,7 +79,6 @@ class Common_Member_Metadata_Member extends Common_Metadata
                 ),
                 'password' => array(
                     'attr' => array(
-                        'isList' => 0,
                         'isReadonly' => 1,
                         'isView' => 0,
                     ),
@@ -95,6 +95,9 @@ class Common_Member_Metadata_Member extends Common_Metadata
                     ),
                 ),
                 'email' => array(
+                    'attr' => array(
+                        'isList' => 1,
+                    ),
                     'validator' => array(
                         'rule' => array(
                             'required' => true,
@@ -104,19 +107,10 @@ class Common_Member_Metadata_Member extends Common_Metadata
                     ),
                 ),
                 'reg_ip' => array(
-                    'attr' => array(
-                        'isList' => 0,
-                    ),
                 ),
                 'theme' => array(
-                    'attr' => array(
-                        'isList' => 0,
-                    ),
                 ),
                 'language' => array(
-                    'attr' => array(
-                        'isList' => 0,
-                    ),
                 ),
                 'money' => array(
 

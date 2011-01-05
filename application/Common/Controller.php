@@ -140,7 +140,6 @@ class Common_Controller extends Qwin_Application_Controller
      */
     protected function _isAllowVisited()
     {
-        return true;
         $session = $this->session;
         $member = $session->get('member');
         $metaHelper = Qwin::run('Qwin_Application_Metadata');

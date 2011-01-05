@@ -66,6 +66,9 @@ class Common_Member_Language_Zhcn extends Common_Language_Zhcn
             'LBL_MODULE_MEMBER_DETAIL' => '用户详细',
             'LBL_MODULE_MEMBER_SETTING' => '用户配置',
 
+            'LBL_ACTION_LOGIN' => '登陆',
+            'LBL_ACTION_LOGOUT' => '注销',
+
             'LBL_THEME' => '主题',
             'LBL_LANGUAGE' => '语言',
 
@@ -95,7 +98,7 @@ class Common_Member_Language_Zhcn extends Common_Language_Zhcn
             'LBL_EDIT_PASSWORD' => '修改密码',
             'LBL_SWITCH_STYLE' => '切换风格',
             'LBL_SWITCH_LANGUAGE' => '切换语言',
-            'LBL_ACTION_ALLOCATE_PERMISSION' => '分配权限',
+            'LBL_ACTION_ALLOCATEPERMISSION' => '分配权限',
             'LBL_ACTION_EDIT_PASSWORD' => '修改密码',
             'MSG_LOGOUTED' => '您已登出.',
             'LBL_LOGIN' => '登录',

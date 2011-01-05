@@ -1084,11 +1084,19 @@ class Qwin_Application_Metadata extends Qwin_Metadata
         }
 
         // 修复最后一个的位置
-        // TODO 后面确实为一行的情况
         foreach ($layout as $key => $value) {
-            if (-1 != $key) {
-                $count = count($value) - 1;
-                if (2 != count($value[$count])) {
+            if (-1 == $key) {
+                continue;
+            }
+            $count = count($value) - 1;
+            if (2 != count($value[$count])) {
+                // 检查是否为占满一行的
+                if (null != $value[$count][0][0]) {
+                    $tempMeta = $this->getModelMetadataByAlias($meta, $value[$count][0][0]);
+                } else {
+                    $tempMeta = $meta;
+                }
+                if (!isset($tempMeta['field'][$value[$count][0][1]]['basic']['layout']) || 2 != $tempMeta['field'][$value[$count][0][1]]['basic']['layout']) {
                     $layout[$key][$count][] = '';
                 }
             }

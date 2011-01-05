@@ -84,10 +84,11 @@ class Common_Language_Zhcn extends Common_Language
             'LBL_FIELD_PARENT_ID' => '父编号',
             'LBL_FIELD_VALUE' => '值',
             'LBL_FIELD_UNIQUE' => '唯一标识',
+            'LBL_FIELD_STATUS' => '状态',
 
             // 分组
             'LBL_GROUP_BASIC_DATA' => '基本资料',
-            'LBL_GROUP_DESCRIPTION_DATA' => '详细描述',
+            'LBL_GROUP_DESCRIPTION_DATA' => '描述资料',
 
             // 错误信息
             'MSG_CHOOSE_ONLY_ONE_ROW' => '请只选择一行!',
