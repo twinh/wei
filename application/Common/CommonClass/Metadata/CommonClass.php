@@ -32,18 +32,24 @@ class Common_CommonClass_Metadata_CommonClass extends Common_Metadata
         $this->setCommonMetadata()
             ->parseMetadata(
             array(
-                // 基本属性
                 'field' => array(
                     'language' => array(
                         'attr' => array(
                             'isLink' => 1,
+                            'isList' => 1,
                         ),
                     ),
                     'sign' => array(
+                        'attr' => array(
+                            'isList' => 1,
+                        ),
                     ),
                     'code' => array(
                         'form' => array(
                             '_type' => 'textarea',
+                        ),
+                        'attr' => array(
+                            'isList' => 1,
                         ),
                     ),
                 ),

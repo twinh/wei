@@ -74,7 +74,11 @@ $jsPacker
     });
 </script>
 <div id="ui-header" class="ui-header ui-widget">
-  <div class="ui-header-logo ui-widget-content"> <a href="">Qwin</a> </div>
+  <div class="ui-header-logo ui-widget-content">
+      <a href="?">
+        <img src="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/default/common/image/logo.png" alt="logo" />
+    </a>
+  </div>
 </div>
 <div class="ui-line ui-widget-content">&nbsp;</div>
 <div class="ui-login-panel">

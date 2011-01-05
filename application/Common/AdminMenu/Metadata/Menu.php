@@ -47,6 +47,7 @@ class Common_AdminMenu_Metadata_Menu extends Common_Metadata
                         ),
                     ),
                     'attr' => array(
+                        'isList' => 1,
                         'isLink' => 1,
                     ),
                     'converter' => array(
@@ -64,6 +65,9 @@ class Common_AdminMenu_Metadata_Menu extends Common_Metadata
                     ),
                 ),
                 'title' => array(
+                    'attr' => array(
+                        'isList' => 1,
+                    ),
                     'validator' => array(
                         'rule' => array(
                             'required' => true,
@@ -91,6 +95,7 @@ class Common_AdminMenu_Metadata_Menu extends Common_Metadata
                     ),
                     'attr' => array(
                         'isLink' => 1,
+                        'isList' => 1,
                     ),
                     'validator' => array(
                         'rule' => array(
@@ -101,6 +106,7 @@ class Common_AdminMenu_Metadata_Menu extends Common_Metadata
                 ),
                 'order' => array(
                     'attr' => array(
+                        'isList' => 1,
                         'isLink' => 1,
                     ),
                 ),

@@ -27,7 +27,7 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
 {
     public function setMetadata()
     {
-        $this->setCommonMetadata()
+        $this->setAdvancedMetadata()
             ->parseMetadata(array(
                 'field' => array(
                     'name' => array(
@@ -38,9 +38,7 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                         ),
                     ),
                     'number' => array(
-                        'attr' => array(
-                            'isList' => 0,
-                        ),
+                        
                     ),
                     'sex' => array(
                         'form' => array(
@@ -59,6 +57,7 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                         ),
                         'attr' => array(
                             'isLink' => 1,
+                            'isList' => 1,
                         ),
                     ),
                     'type' => array(
@@ -78,6 +77,7 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                         ),
                         'attr' => array(
                             'isLink' => 1,
+                            'isList' => 1,
                         ),
                     ),
                     'source' => array(
@@ -97,6 +97,7 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                         ),
                         'attr' => array(
                             'isLink' => 1,
+                            'isList' => 1,
                         ),
                     ),
                     'grade' => array(
@@ -116,54 +117,50 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                         ),
                         'attr' => array(
                             'isLink' => 1,
+                            'isList' => 1,
                         ),
                     ),
-                    'state' => array(
+                    'status' => array(
                         'form' => array(
                             '_type' => 'select',
                             '_resourceGetter' => array(
                                 array('Project_Helper_CommonClass', 'get'),
-                                'customer-state',
+                                'customer-status',
                             ),
+                        ),
+                        'attr' => array(
+                            'isLink' => 1,
+                            'isList' => 1,
                         ),
                         'converter' => array(
                             'list' => array(
                                 array('Project_Helper_CommonClass', 'convert'),
-                                'customer-state',
+                                'customer-status',
                             ),
                             'view' => 'list',
-                        ),
-                        'attr' => array(
-                            'isLink' => 1,
                         ),
                     ),
                     'email' => array(
                         'basic' => array(
                             'group' => 1,
                         ),
+                        'attr' => array(
+                            'isList' => 1,
+                        ),
                     ),
                     'qq' => array(
                         'basic' => array(
                             'group' => 1,
-                        ),
-                        'attr' => array(
-                            'isList' => 0,
                         ),
                     ),
                     'msn' => array(
                         'basic' => array(
                             'group' => 1,
                         ),
-                        'attr' => array(
-                            'isList' => 0,
-                        ),
                     ),
                     'skype' => array(
                         'basic' => array(
                             'group' => 1,
-                        ),
-                        'attr' => array(
-                            'isList' => 0,
                         ),
                     ),
                     'office_phone' => array(
@@ -175,133 +172,82 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                         'basic' => array(
                             'group' => 1,
                         ),
-                        'attr' => array(
-                            'isList' => 0,
-                        ),
                     ),
                     'fax' => array(
                         'basic' => array(
                             'group' => 1,
-                        ),
-                        'attr' => array(
-                            'isList' => 0,
                         ),
                     ),
                     'website' => array(
                         'basic' => array(
                             'group' => 1,
                         ),
-                        'attr' => array(
-                            'isList' => 0,
-                        ),
                     ),
                     'company_id' => array(
-                        'attr' => array(
-                            'isList' => 0,
-                        ),
                     ),
                     'bill_country' => array(
                         'basic' => array(
                             'group' => 3,
-                        ),
-                        'attr' => array(
-                            'isList' => 0,
                         ),
                     ),
                     'ship_country' => array(
                         'basic' => array(
                             'group' => 3,
                         ),
-                        'attr' => array(
-                            'isList' => 0,
-                        ),
                     ),
                     'bill_province' => array(
                         'basic' => array(
                             'group' => 3,
-                        ),
-                        'attr' => array(
-                            'isList' => 0,
                         ),
                     ),
                     'ship_province' => array(
                         'basic' => array(
                             'group' => 3,
                         ),
-                        'attr' => array(
-                            'isList' => 0,
-                        ),
                     ),
                     'bill_city' => array(
                         'basic' => array(
                             'group' => 3,
-                        ),
-                        'attr' => array(
-                            'isList' => 0,
                         ),
                     ),
                     'ship_city' => array(
                         'basic' => array(
                             'group' => 3,
                         ),
-                        'attr' => array(
-                            'isList' => 0,
-                        ),
                     ),
                     'bill_street' => array(
                         'basic' => array(
                             'group' => 3,
-                        ),
-                        'attr' => array(
-                            'isList' => 0,
                         ),
                     ),
                     'ship_street' => array(
                         'basic' => array(
                             'group' => 3,
                         ),
-                        'attr' => array(
-                            'isList' => 0,
-                        ),
                     ),
                     'bill_zip' => array(
                         'basic' => array(
                             'group' => 3,
-                        ),
-                        'attr' => array(
-                            'isList' => 0,
                         ),
                     ),
                     'ship_zip' => array(
                         'basic' => array(
                             'group' => 3,
                         ),
-                        'attr' => array(
-                            'isList' => 0,
-                        ),
                     ),
                     'bank_name' => array(
                         'basic' => array(
                             'group' => 4,
-                        ),
-                        'attr' => array(
-                            'isList' => 0,
                         ),
                     ),
                     'bank_account_name' => array(
                         'basic' => array(
                             'group' => 4,
                         ),
-                        'attr' => array(
-                            'isList' => 0,
-                        ),
                     ),
                     'bank_account_id' => array(
                         'basic' => array(
                             'group' => 4,
-                        ),
-                        'attr' => array(
-                            'isList' => 0,
                         ),
                     ),
                     'payment_type' => array(
@@ -324,25 +270,11 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                         ),
                         'attr' => array(
                             'isLink' => 1,
-                            'isList' => 0,
                         ),
                     ),
                     'payment_credit' => array(
                         'basic' => array(
                             'group' => 4,
-                        ),
-                        'attr' => array(
-                            'isList' => 0,
-                        ),
-                    ),
-                    'assign_to' => array(
-                        'attr' => array(
-                            'isList' => 0,
-                        ),
-                    ),
-                    'is_deleted' => array(
-                        'form' => array(
-                            '_type' => 'hidden',
                         ),
                         'attr' => array(
                             'isList' => 0,
