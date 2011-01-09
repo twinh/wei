@@ -47,8 +47,9 @@ class Common_Member_Controller_Setting extends Common_Controller
     {
         if(empty($_POST))
         {
+            $meta = $this->_meta;
             $urlLanguage = $this->request->g('language');
-            $theme = Qwin::run('-ini')->getConfig('interface.theme');
+            $theme = $this->config['interface']['theme'];
             
             // 设置视图
             $this->_view = array(
@@ -73,7 +74,7 @@ class Common_Member_Controller_Setting extends Common_Controller
                     ->fetchOne();
             $result['language'] = $language;
             $result->save();
-            $url = Qwin::run('-url')->createUrl($this->_set);
+            $url = Qwin::run('-url')->createUrl($this->_asc);
             $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }
@@ -85,6 +86,7 @@ class Common_Member_Controller_Setting extends Common_Controller
     {
         if(empty($_POST))
         {
+            $meta = $this->_meta;
             $data = $this->metaHelper
                 ->getQueryBySet(array(
                     'namespace' => 'Common',
@@ -94,7 +96,7 @@ class Common_Member_Controller_Setting extends Common_Controller
                 ->execute()
                 ->toArray();
             $urlTheme = $this->request->g('style');
-            $theme2 = Qwin::run('-ini')->getConfig('interface.theme');
+            $theme2 = $this->config['interface']['theme'];
 
             // 设置视图
             $this->_view = array(
@@ -115,7 +117,7 @@ class Common_Member_Controller_Setting extends Common_Controller
                     ->fetchOne();
             $result['theme'] = $theme;
             $result->save();
-            $url = Qwin::run('-url')->createUrl($this->_set);
+            $url = Qwin::run('-url')->createUrl($this->_asc);
             $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         } 
     }

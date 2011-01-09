@@ -99,7 +99,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
             return $this->_tablePrefix;
         }
         if (null == $adapter) {
-            $config = Qwin::run('-ini')->getConfig();
+            $config = Qwin::run('-config');
             $adapter = $config['database']['mainAdapter'];
         }
         $this->_tablePrefix = $config['database']['adapter'][$adapter]['prefix'];
@@ -110,16 +110,18 @@ class Qwin_Application_Metadata extends Qwin_Metadata
      * 获取标准的类名
      *
      * @param string $addition 附加的字符串
-     * @param array $set 配置数组
+     * @param array $asc 配置数组
      * @return string 类名
      */
-    public function getClassName($addition, $set)
+    public function getClassName($addition, $asc)
     {
-        if (!isset($set['namespace'])) {
-            $configSet = Qwin::run('-ini')->getSet();
-            $set['namespace'] = $configSet['namespace'];
+        if (!isset($asc['namespace'])) {
+            if (!isset($this->config)) {
+                $this->config = Qwin::run('-config');
+            }
+            $asc['namespace'] = $this->config['asc']['namespace'];
         }
-        return $set['namespace'] . '_' . $set['module'] . '_' . $addition . '_' . $set['controller'];
+        return $asc['namespace'] . '_' . $asc['module'] . '_' . $addition . '_' . $asc['controller'];
     }
 
     /**
@@ -147,12 +149,12 @@ class Qwin_Application_Metadata extends Qwin_Metadata
     /**
      * 根据元数据配置,获取Doctrine的查询对象
      *
-     * @param array $set 元数据配置
+     * @param array $asc 元数据配置
      */
-    public function getQueryBySet($set, $type = array(), $name = array())
+    public function getQueryBySet($asc, $type = array(), $name = array())
     {
-        $metaClass  = $this->getClassName('Metadata', $set);
-        $modelClass = $this->getClassName('Model', $set);
+        $metaClass  = $this->getClassName('Metadata', $asc);
+        $modelClass = $this->getClassName('Model', $asc);
         $meta       = Qwin_Metadata_Manager::get($metaClass);
         $model      = Qwin::run($modelClass);
         return $this->getQuery($meta, $model, $type, $name);
@@ -171,8 +173,8 @@ class Qwin_Application_Metadata extends Qwin_Metadata
     {
         // 未定义模型,则初始化关联模型
         if (null == $model) {
-            $set = $meta->getSetFromClass();
-            $modelClass = $this->getClassName('Model', $set);
+            $asc = $meta->getSetFromClass();
+            $modelClass = $this->getClassName('Model', $asc);
             $model = Qwin::run($modelClass);
         } else {
             $modelClass = get_class($model);
@@ -391,20 +393,19 @@ class Qwin_Application_Metadata extends Qwin_Metadata
     /**
      * 获取Url中元数据主键的值
      *
-     * @param array $set 应用结构配置
+     * @param array $asc 应用结构配置
      * @return null|string 值
      */
-    public function getUrlPrimaryKeyValue(array $set)
+    public function getUrlPrimaryKeyValue(array $asc)
     {
         $request = Qwin::run('Qwin_Request');
-        $primaryKey = $this->getPrimaryKeyName($set);
+        $primaryKey = $this->getPrimaryKeyName($asc);
         return $request->g($primaryKey);
     }
 
-    public function getPrimaryKeyName(array $set)
+    public function getPrimaryKeyName(array $asc)
     {
-        $ini = Qwin::run('-ini');
-        $metadataName = $ini->getClassName('Metadata', $set);
+        $metadataName = $this->getClassName('Metadata', $asc);
         if (!class_exists($metadataName)) {
             return null;
         }
@@ -415,13 +416,12 @@ class Qwin_Application_Metadata extends Qwin_Metadata
     /**
      * 根据应用结构配置获取元数据
      *
-     * @param array $set 应用结构配置
+     * @param array $asc 应用结构配置
      * @return Application_Metadata
      */
-    public function getMetadataBySet(array $set)
+    public function getMetadataBySet($asc)
     {
-        $ini = Qwin::run('-ini');
-        $metadataName = $ini->getClassName('Metadata', $set);
+        $metadataName = $this->getClassName('Metadata', $asc);
         if (class_exists($metadataName)) {
             $meta = Qwin_Metadata_Manager::get($metadataName);
         } else {

@@ -30,9 +30,9 @@
 ?>
 <script type="text/javascript">
 jQuery(function($){
-    $('#icon-info-<?php echo $set['name']?> div.ui-form-tip-content ul').prepend('<li><img id="button-capcha-<?php echo $set['name']?>" src="" style="display:block;cursor:pointer; margin-left:4px;" /></li>');
-    var capcha = $('#button-capcha-<?php echo $set['name']?>');
-	$('#<?php echo $set['name']?>').one('focus', function(){
+    $('#icon-info-<?php echo $asc['name']?> div.ui-form-tip-content ul').prepend('<li><img id="button-capcha-<?php echo $asc['name']?>" src="" style="display:block;cursor:pointer; margin-left:4px;" /></li>');
+    var capcha = $('#button-capcha-<?php echo $asc['name']?>');
+	$('#<?php echo $asc['name']?>').one('focus', function(){
 		loadCapcha();
 	});
 	// 加载验证码之后显示图片
@@ -48,8 +48,8 @@ jQuery(function($){
 		capcha.attr('src', 'captcha.php?t=' + new Date());
 	}
 
-    $('#<?php echo $set['name']?>').focus(function(){
-        $('#ui-tip-<?php echo $set['name']?>').tip('open');
+    $('#<?php echo $asc['name']?>').focus(function(){
+        $('#ui-tip-<?php echo $asc['name']?>').tip('open');
     });
 });
 </script>

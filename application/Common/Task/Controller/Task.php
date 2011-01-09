@@ -292,7 +292,7 @@ class Common_Task_Controller_Task extends Common_ActionController
                 {
                     $value = Qwin::run('Project_Helper_CommonClass')->convert($value, 'task-status')
                            . ' '
-                           . Qwin_Helper_Html::jQueryLink($this->url->createUrl($this->_set, array('action' => 'Resolve', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_RESOLVED'), 'ui-icon-check', 'ui-view-button');
+                           . Qwin_Helper_Html::jQueryLink($this->url->createUrl($this->_asc, array('action' => 'Resolve', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_RESOLVED'), 'ui-icon-check', 'ui-view-button');
                 }
                 break;
 
@@ -302,7 +302,7 @@ class Common_Task_Controller_Task extends Common_ActionController
                 {
                     $value = Qwin::run('Project_Helper_CommonClass')->convert($value, 'task-status')
                            . ' '
-                           . Qwin_Helper_Html::jQueryLink($this->url->createUrl($this->_set, array('action' => 'Check', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_CHECKED'), 'ui-icon-check', 'ui-view-button');
+                           . Qwin_Helper_Html::jQueryLink($this->url->createUrl($this->_asc, array('action' => 'Check', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_CHECKED'), 'ui-icon-check', 'ui-view-button');
                 }
                 break;
 
@@ -311,7 +311,7 @@ class Common_Task_Controller_Task extends Common_ActionController
                 {
                     $value = Qwin::run('Project_Helper_CommonClass')->convert($value, 'task-status')
                            . ' '
-                           . Qwin_Helper_Html::jQueryLink($this->url->createUrl($this->_set, array('action' => 'Close', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_CLOSED'), 'ui-icon-check', 'ui-view-button');
+                           . Qwin_Helper_Html::jQueryLink($this->url->createUrl($this->_asc, array('action' => 'Close', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_CLOSED'), 'ui-icon-check', 'ui-view-button');
                 }
                 break;
         }
@@ -324,7 +324,7 @@ class Common_Task_Controller_Task extends Common_ActionController
         $html = '';
         if(1 == $copyData['status'])
         {
-            $html  = Qwin_Helper_Html::jQueryButton($this->url->createUrl($this->_set, array('action' => 'AssignTo', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_ASSIGN_TO'), 'ui-icon-person');
+            $html  = Qwin_Helper_Html::jQueryButton($this->url->createUrl($this->_asc, array('action' => 'AssignTo', $primaryKey => $copyData[$primaryKey])), $this->_lang->t('LBL_ACTION_ASSIGN_TO'), 'ui-icon-person');
         }
         $html .= parent::convertListOperation($value, $name, $data, $copyData);
         return $html;
@@ -430,7 +430,7 @@ class Common_Task_Controller_Task extends Common_ActionController
             date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']),
             $data['from_name'] . '&lt;' . $data['from'] . '&gt;',
             $data['to_name'] . '&lt;' . $data['to'] . '&gt;',
-            'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['SCRIPT_NAME'] . $this->url->createUrl($this->_set, array('action' => 'View', 'id' => $data['foreign_id'])),
+            'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['SCRIPT_NAME'] . $this->url->createUrl($this->_asc, array('action' => 'View', 'id' => $data['foreign_id'])),
         );
         $content = str_replace($search, $replace, $content);
 

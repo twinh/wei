@@ -57,31 +57,32 @@ class Common_Metadata extends Qwin_Metadata
      */
     public function getSetFromClass()
     {
-        return Qwin::run('-ini')->getSet();
-        if(null != $this->_set)
+        $config = Qwin::run('-config');
+        return $config['asc'];
+        if(null != $this->_asc)
         {
-            return $this->_set;
+            return $this->_asc;
         }
         
         $name = get_class();
         // 必需是子类的名称才有set结构
         if($name == 'Common_Metadata') {
-            $this->_set = array();
+            $this->_asc = array();
         } else {
             $name = explode('_', $name);
             // 名称不是合法的set结构
             if(4 != count($name) || 'Metadata' != $name[2])
             {
-                $this->_set = array();
+                $this->_asc = array();
             } else {
-                $this->_set = array(
+                $this->_asc = array(
                     'namespace' => $name[0],
                     'module' => $name[1],
                     'controller' => $name[3],
                 );
             }
         }
-        return $this->_set;
+        return $this->_asc;
     }
 
     /**

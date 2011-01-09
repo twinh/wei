@@ -52,7 +52,7 @@ class Common_Member_Controller_Log extends Common_Controller
             );
         } else {
             return Qwin::run('Common_Member_Service_Login')->process(array(
-                'set' => $this->_set,
+                'set' => $this->_asc,
                 'data' => array(
                     'db' => $_POST,
                 ),
@@ -64,7 +64,7 @@ class Common_Member_Controller_Log extends Common_Controller
     public function actionLogout()
     {
         return Qwin::run('Common_Member_Service_Logout')->process(array(
-            'set' => $this->_set,
+            'set' => $this->_asc,
             'this' => $this,
         ));
     }

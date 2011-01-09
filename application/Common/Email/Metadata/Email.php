@@ -35,6 +35,9 @@ class Common_Email_Metadata_Email extends Common_Metadata
         $this->parseMetadata(array(
             'field' => array(
                 'from' => array(
+                    'attr' => array(
+                        'isList' => 1,
+                    ),
                     'validator' => array(
                         'rule' => array(
                             'required' => true,
@@ -43,11 +46,12 @@ class Common_Email_Metadata_Email extends Common_Metadata
                     ),
                 ),
                 'from_name' => array(
-                    'attr' => array(
-                        'isList' => 0,
-                    ),
+                    
                 ),
                 'to' => array(
+                    'attr' => array(
+                        'isList' => 1,
+                    ),
                     'validator' => array(
                         'rule' => array(
                             'required' => true,
@@ -56,24 +60,22 @@ class Common_Email_Metadata_Email extends Common_Metadata
                     ),
                 ),
                 'to_name' => array(
-                    'attr' => array(
-                        'isList' => 0,
-                    ),
                 ),
                 'subject' => array(
-
+                    'attr' => array(
+                        'isList' => 1,
+                    ),
                 ),
                 'content' => array(
                     'form' => array(
                         '_type' => 'textarea',
                         '_widget' => 'CKEditor',
                     ),
-                    'attr' => array(
-                        'isList' => 0,
-                    ),
                 ),
                 'result' => array(
-
+                    'attr' => array(
+                        'isList' => 1,
+                    ),
                 ),
             ),
             'group' => array(

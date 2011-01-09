@@ -73,12 +73,12 @@ class Common_Service_List extends Common_Service_BasicAction
         parent::process($config['set']);
 
         // 初始化常用的变量
-        $set        = $this->_set;
+        $asc        = $this->config['asc'];
         $meta       = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
 
         // 从模型获取数据
-        $query = $metaHelper->getQueryBySet($set, array('db', 'view'));
+        $query = $metaHelper->getQueryBySet($asc, array('db', 'view'));
         $metaHelper
             ->addSelectToQuery($meta, $query)
             ->addOrderToQuery($meta, $query, $config['data']['order'])

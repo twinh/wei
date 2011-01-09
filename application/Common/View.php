@@ -62,9 +62,7 @@ class Common_View extends Qwin_Application_View
         ));
 
         // 获取配置
-        $ini = Qwin::run('-ini');
-        $this->_config = $ini->getConfig();
-        $set = $ini->getSet();
+        $config = Qwin::run('-config');
         
         $packerPath = QWIN_ROOT_PATH . '/cache/packer';
 
@@ -88,27 +86,25 @@ class Common_View extends Qwin_Application_View
 
         $jquery->setTheme($this->getStyle());
         
-        $this->_theme = $ini->getConfig('interface.theme');
-
-        $tagList = array(
+        $this->setTagList(array(
             'resource' => QWIN_RESOURCE_PATH . '/view/theme/',
             'suffix' => '.php',
-            'theme' => $this->_theme,
+            'theme' => $config['interface']['theme'],
             'style' => $this->getStyle(),
-            'namespace' => $set['namespace'],
-            'module' => $set['module'],
-            'controller' => $set['controller'],
-            'action' => $set['action'],
-            'defaultNamespace' => 'Common',
-            'defaultModule' => 'Common',
-            'defaultController' => 'Common',
-            'defaultAction' => 'Common',
-        );
-        $this->setTagList($tagList);
+            'namespace' => $config['asc']['namespace'],
+            'module' => $config['asc']['module'],
+            'controller' => $config['asc']['controller'],
+            'action' => $config['asc']['action'],
+            'defaultNamespace' => $config['defaultAsc']['namespace'],
+            'defaultModule' => $config['defaultAsc']['module'],
+            'defaultController' => $config['defaultAsc']['controller'],
+            'defaultAction' => 'Common',//$config['defaultAsc']['action'],
+        ));
 
         // 部分视图常用变量
-        $this->_data['set'] = $set;
-        $this->_data['theme'] = $this->_theme;
+        $this->_data['config'] = $config;
+        $this->_data['asc'] = $config['asc'];
+        $this->_data['theme'] = $config['interface']['theme'];
     }
 
     /**
@@ -128,7 +124,7 @@ class Common_View extends Qwin_Application_View
         $styleList = array(
             Qwin::run('Qwin_Request')->g('style'),
             $session->get('style'),
-            Qwin::run('-ini')->getConfig('interface.style'),
+            $this->config['interface']['style'],
         );
         foreach($styleList as $val)
         {
@@ -141,7 +137,7 @@ class Common_View extends Qwin_Application_View
 
         if(!file_exists(QWIN_RESOURCE_PATH . '/js/jquery/themes/' . $style))
         {
-            $style = Qwin::run('-ini')->getConfig('interface.style');
+            $style = $this->config['interface']['style'];
         }
         $session->set('style', $style);
         return $this->_style = $style;

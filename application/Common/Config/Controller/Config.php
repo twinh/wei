@@ -39,6 +39,7 @@ class Common_Config_Controller_Config extends Common_ActionController
         $formData = $metaHelper
             ->getQuery($this->_meta)
             ->where('group_id = ?', $groupId)
+            ->andWhere('is_enabled = 1')
             ->execute()
             ->toArray();
         if (empty($formData)) {
@@ -112,7 +113,7 @@ class Common_Config_Controller_Config extends Common_ActionController
             $globalConfig[$groupId] = $data;
             Qwin_Helper_File::writeAsArray($globalConfig, $path);
             
-            $url = $this->url->createUrl($this->_set, array('action' => 'Index'));
+            $url = $this->url->createUrl($this->_asc, array('action' => 'Index'));
             $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }
@@ -127,6 +128,7 @@ class Common_Config_Controller_Config extends Common_ActionController
         $metaHelper = $this->metaHelper;
         $url = Qwin::run('-url');
         $lang = Qwin::run('-lang');
+        $meta = $this->_meta;
 
         // 分组的数据
         $data = $metaHelper
@@ -135,16 +137,12 @@ class Common_Config_Controller_Config extends Common_ActionController
                 'module' => 'Config',
                 'controller' => 'Group',
             ))
+            ->where('is_enabled = 1')
             ->orderBy('order DESC, date_modified DESC')
             ->execute()
             ->toArray();
 
-        $theme = Qwin::run('-ini')->getConfig('interface.theme');
         $this->_view = array(
-            'class' => 'Common_View',
-            'element' => array(
-                array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/config/center.php'),
-            ),
             'data' => get_defined_vars(),
         );
     }

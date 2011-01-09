@@ -32,11 +32,16 @@ class Common_View_View extends Common_View
         // 初始化变量,方便调用
         $primaryKey = $this->primaryKey;
         $meta = $this->meta;
+        $metaHelper = $this->metaHelper;
         $data = $this->data;
-        $set = Qwin::run('-ini')->getSet();
-        $layout = $this->metaHelper->getViewLayout($meta);
+        $config = Qwin::run('-config');
+        $asc = $config['asc'];
+
+        $orderedFeid = $metaHelper->orderField($meta);
+        $layout = $metaHelper->getTableLayout($meta, $orderedFeid, 'view', $meta['page']['tableLayout']);
+
         $group = $meta['group'];
 
-        $this->_data += get_defined_vars();
+        $this->_data = get_defined_vars() + $this->_data;
     }
 }

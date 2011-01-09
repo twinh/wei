@@ -27,6 +27,8 @@
 
 class Common_Service_BasicAction extends Common_Service
 {
+    protected $_asc;
+
     /**
      * Qwin_Url
      * @var Qwin_Url
@@ -54,26 +56,25 @@ class Common_Service_BasicAction extends Common_Service
     /**
      * 根据应用结构配置,加载语言,元数据,模型等
      *
-     * @param array $set 应用结构配置
+     * @param array $asc 应用结构配置
      * @see Common_Service_BasicAction $_set
      * @todo 是否需要对$config进行检查或转换
      */
     protected function process(array $config = null)
     {
         // 初始化常用的变量
-        $this->request      = Qwin::run('Qwin_Request');
-        $this->url          = Qwin::run('Qwin_Url');
-        $this->session      = Qwin::run('Qwin_Session');
+        $this->request      = Qwin::run('-request');
+        $this->url          = Qwin::run('-url');
+        $this->session      = Qwin::run('-session');
         $this->metaHelper   = Qwin::run('Qwin_Application_Metadata');
-        $ini                = Qwin::run('-ini');
-        $set                = $this->_set = $config;
-        $this->_config      = $ini->getConfig();
-        $this->member      = $this->session->get('member');
+        $this->config       = Qwin::run('-config');
+        $asc                = $this->_asc = $this->config['asc'];
+        $this->member       = $this->session->get('member');
         
         // 加载语言
-        $languageResult = Qwin::run('Common_Service_Language')->getLanguage($set);
+        $languageResult = Qwin::run('Common_Service_Language')->getLanguage($asc);
         $languageName = $languageResult['data'];
-        $languageClass = $set['namespace'] . '_' . $set['module'] . '_Language_' . $languageName;
+        $languageClass = $asc['namespace'] . '_' . $asc['module'] . '_Language_' . $languageName;
         $this->_lang = Qwin::run($languageClass);
         if(null == $this->_lang)
         {
@@ -84,7 +85,7 @@ class Common_Service_BasicAction extends Common_Service
 
         if(!isset($this->_meta))
         {
-            $this->_meta = $this->metaHelper->getMetadataBySet($set);
+            $this->_meta = $this->metaHelper->getMetadataBySet($asc);
         }
 
         // 根据元数据定义的数据库,选择对应的连接类型
@@ -94,7 +95,7 @@ class Common_Service_BasicAction extends Common_Service
         }
 
         // 加载模型
-        $modelName = $ini->getClassName('Model', $set);
+        $modelName = $this->metaHelper->getClassName('Model', $asc);
         $this->_model = Qwin::run($modelName);
         if(null == $this->_model)
         {

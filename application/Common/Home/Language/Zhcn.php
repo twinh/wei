@@ -1,6 +1,6 @@
 <?php
 /**
- * AdminMenu
+ * Zhcn
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,22 +16,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
- * @subpackage  AdminMenu
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-05-25 07:59:33
+ * @since       2011-01-09 09:49:53
  */
 
-class Common_AdminMenu_Controller_Menu extends Common_ActionController
+class Common_Home_Language_Zhcn extends Common_Language_Zhcn
 {
-    public function onAfterDb($data)
+    public function __construct()
     {
-        $query = $this->metaHelper->getQueryBySet($this->_asc);
-        $query->orderBy('order ASC');
-        $data = $query->execute()->toArray();
-        Qwin::run('Qwin_Cache_List')->writeCache($data, 'AdminMenu');
+        parent::__construct();
+        $this->_data += array(
+            'LBL_MODULE_HOME' => '主页',
+
+            'LBL_ACTION_UPDATELOG' => '更新记录',
+        );
     }
 }

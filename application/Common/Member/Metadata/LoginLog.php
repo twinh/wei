@@ -35,13 +35,18 @@ class Common_Member_Metadata_LoginLog extends Common_Metadata
                 'member_id' => array(
                     'attr' => array(
                         'isLink' => 1,
-                    )
+                        'isList' => 1,
+                    ),
                 ),
                 'ip' => array(
-
+                    'attr' => array(
+                        'isList' => 1,
+                    ),
                 ),
                 'date_created' => array(
-
+                    'attr' => array(
+                        'isList' => 1,
+                    ),
                 ),
             ),
             'group' => array(

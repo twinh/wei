@@ -100,6 +100,8 @@ class Common_Member_Language_Zhcn extends Common_Language_Zhcn
             'LBL_SWITCH_LANGUAGE' => '切换语言',
             'LBL_ACTION_ALLOCATEPERMISSION' => '分配权限',
             'LBL_ACTION_EDIT_PASSWORD' => '修改密码',
+            'LBL_ACTION_SWITCHLANGUAGE' => '切换语言',
+            'LBL_ACTION_SWITCHSTYLE' => '切换风格',
             'MSG_LOGOUTED' => '您已登出.',
             'LBL_LOGIN' => '登录',
         );

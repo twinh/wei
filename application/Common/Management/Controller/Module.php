@@ -169,7 +169,7 @@ class Common_Management_Controller_Module extends Common_Controller
             $applicationFile->createModelFile($this->_namespace, $module);
             $applicationFile->createLanguageFile($this->_namespace, $module, $this->getLanguage());
 
-            $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Index', 'namespace_value' => $this->_namespace));
+            $url = Qwin::run('-url')->createUrl($this->_asc, array('action' => 'Index', 'namespace_value' => $this->_namespace));
             return $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }

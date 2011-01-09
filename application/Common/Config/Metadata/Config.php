@@ -46,10 +46,20 @@ class Common_Config_Metadata_Config extends Common_Metadata
                             array('form_name', null, 'title')
                         ),
                     ),
+                    'attr' => array(
+                        'isList' => 1,
+                        'isLink' => 1,
+                    ),
                 ),
                 'form_label' => array(
+                    'attr' => array(
+                        'isList' => 1,
+                    ),
                 ),
                 'form_name' => array(
+                    'attr' => array(
+                        'isList' => 1,
+                    ),
                     /*'validator' => array(
                         'rule' => array(
                             'required' => true,
@@ -57,10 +67,27 @@ class Common_Config_Metadata_Config extends Common_Metadata
                         ),
                     ),*/
                 ),
-                'value' => array(
-                    'attr' => array(
-                        'isList' => 0,
+                'is_enabled' => array(
+                    'form' => array(
+                        '_type' => 'select',
+                        '_value' => 1,
+                        '_resourceGetter' => array(
+                            array('Project_Helper_CommonClass', 'get'),
+                            'yes-or-no',
+                        ),
                     ),
+                    'attr' => array(
+                        'isList' => 1,
+                    ),
+                    'converter' => array(
+                        'list' => array(
+                            array('Project_Helper_CommonClass', 'convert'),
+                            'yes-or-no',
+                        ),
+                        'view' => 'list',
+                    ),
+                ),
+                'value' => array(
                     'converter' => array(
                         'edit' => array(
                             array('Qwin_Converter_String', 'secureCode')
@@ -68,14 +95,13 @@ class Common_Config_Metadata_Config extends Common_Metadata
                     ),
                 ),
                 'order' => array(
-
+                    'attr' => array(
+                        'isList' => 1,
+                    ),
                 ),
                 'description' => array(
                     'form' => array(
                         '_type' => 'textarea',
-                    ),
-                    'attr' => array(
-                        'isList' => 0,
                     ),
                 ),
                 'form_type' => array(
@@ -88,6 +114,9 @@ class Common_Config_Metadata_Config extends Common_Metadata
                             array('Project_Helper_CommonClass', 'get'),
                             'form-type',
                         ),
+                    ),
+                    'attr' => array(
+                        'isList' => 1,
                     ),
                     'converter' => array(
                         'list' => array(
@@ -104,16 +133,10 @@ class Common_Config_Metadata_Config extends Common_Metadata
                     'form' => array(
                         '_type' => 'textarea',
                     ),
-                    'attr' => array(
-                        'isList' => 0,
-                    ),
                 ),
                 'form_widget' => array(
                     'basic' => array(
                         'group' => 1,
-                    ),
-                    'attr' => array(
-                        'isList' => 0,
                     ),
                 ),
             ),
@@ -132,7 +155,7 @@ class Common_Config_Metadata_Config extends Common_Metadata
                     'foreign' => 'form_name',
                     'type' => 'view',
                     'fieldMap' => array(
-                        'group_id' => 'name',
+                        'group_id' => 'title',
                     ),
                 ),
             ),

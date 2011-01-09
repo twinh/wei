@@ -63,7 +63,7 @@ class Common_Service_Delete extends Common_Service_BasicAction
         $meta = $this->_meta;
         $primaryKey = explode(',', $config['data']['primaryKeyValue']);
 
-        $query = $metaHelper->getQueryBySet($this->_set, 'db');
+        $query = $metaHelper->getQueryBySet($this->_asc, 'db');
 
         $alias = $query->getRootAlias();
         '' != $alias && $alias .= '.';
@@ -91,7 +91,7 @@ class Common_Service_Delete extends Common_Service_BasicAction
         $this->executeCallback('afterDb', $config);
         
         $url = urldecode($this->request->p('_page'));
-        '' == $url && $url = $this->url->createUrl($this->_set, array('action' => 'Index'));
+        '' == $url && $url = $this->url->createUrl($this->_asc, array('action' => 'Index'));
 
         $return = array(
             'result' => true,

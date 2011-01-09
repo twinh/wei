@@ -36,7 +36,7 @@
             </tr>
             <tr class="ui-widget-content ui-table-toolbar">
                 <td class="ui-state-default" colspan="4">
-                    <!--&nbsp;<a class="action-add" href="<?php echo qw_url($set, array('action' => 'Add')) ?>"><?php echo qw_lang('LBL_ACTION_ADD')?></a>-->
+                    <!--&nbsp;<a class="action-add" href="<?php echo qw_url($asc, array('action' => 'Add')) ?>"><?php echo qw_lang('LBL_ACTION_ADD')?></a>-->
                 </td>
             </tr>
             <tr class="ui-widget-content">
