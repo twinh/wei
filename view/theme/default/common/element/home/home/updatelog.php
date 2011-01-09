@@ -32,13 +32,14 @@
     height: 28px;
     line-height: 28px;
     font-size: 14px;
+    margin-top: 10px;
 }
 .ui-updatelog ul li{
     font-weight: normal;
     height: 24px;
     line-height: 24px;
     font-size: 12px;
-    margin-left: 30px;
+    margin: 0 0 0 30px;
     list-style: decimal;
 }
 </style>
@@ -62,12 +63,10 @@
                 <li>[应用]更新配置模块,表单域和分组允许启用和禁用</li>
                 <li>[框架]调整应用目录结构配置,进行标准化控制</li>
             </ul>
-            <li class="ui-updatelog-preview">v1.0.2 预览</li>
+            <li class="ui-updatelog-preview">v1.0.2 预计更新内容</li>
             <ul>
-                <li>[应用]增加更新记录</li>
-                <li>[应用]调整多个模块列表和页眉显示问题</li>
-                <li>[应用]更新配置模块,表单域和分组允许启用和禁用</li>
-                <li>[框架]调整应用目录结构配置,进行标准化控制</li>
+                <li>[应用]回收站</li>
+                <li>[应用]模块互联</li>
             </ul>
         </ul>
     </div>
