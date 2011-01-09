@@ -40,15 +40,15 @@ class Common_View_AddForm extends Common_View
         $meta = $this->meta;
         $metaHelper = $this->metaHelper;
         $data = $this->data;
-        $set = Qwin::run('-ini')->getSet();
+        $config = Qwin::run('-config');
+        $asc = $config['asc'];
 
         $orderedFeid = $metaHelper->orderField($meta);
         $layout = $metaHelper->getTableLayout($meta, $orderedFeid, 'add', $meta['page']['tableLayout']);
 
-        //$layout = $metaHelper->getAddLayout($meta);
         $group = $meta['group'];
         $jQueryValidateCode = Qwin_Helper_Array::jsonEncode($metaHelper->getJQueryValidateCode($meta));
 
-        $this->_data += get_defined_vars();
+        $this->_data = get_defined_vars() + $this->_data;
     }
 }

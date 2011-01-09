@@ -29,12 +29,12 @@ class Common_Email_Widget_ListTab extends Common_Widget
 {
     public function render($param, $view)
     {
-        $set = $view['set'];
+        $asc = $view['asc'];
         $url = Qwin::run('-url');
         $lang = Qwin::run('-lang');
 
         $param['tab'][] = array(
-            'url' => $url->createUrl($set, array('action' => 'Post')),
+            'url' => $url->createUrl($asc, array('action' => 'Post')),
             'title' => $lang->t('LBL_ACTION_POST'),
             'icon' => 'ui-icon-script',
             'target' => null,

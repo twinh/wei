@@ -180,11 +180,12 @@ class Common_Member_Metadata_Member extends Common_Metadata
 
     public function validateUsername($value, $name)
     {
-        $set = Qwin::run('-ini')->getSet();
-        if ('Edit' == $set['action']) {
+        $config = Qwin::run('-config');
+        $asc = $config['asc'];
+        if ('Edit' == $asc['action']) {
             return true;
         }
-        $set = $this->getSetFromClass();
+        $asc = $this->getSetFromClass();
         $lang = Qwin::run('-lang');
         $result = $this->isUsernameExists($value);
 

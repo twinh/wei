@@ -33,12 +33,8 @@ jQuery(function($){
 });
 </script>
 <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
-    <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
-	<div class="ui-box-header">
-    	<img class="ui-box-header-icon" src="<?php echo QWIN_RESOURCE_PATH ?>/image/label_32.png" />
-        <a href="<?php echo qw_url(array('module' => 'Style', 'controller' => 'Theme')) ?>"><?php echo qw_lang('LBL_THEME')?></a>
-        &raquo;
-        <a href="#">列表</a>
+    <div class="ui-box-header">
+        <?php $this->loadWidget('Common_Widget_Header') ?>
     </div>
     <form action="" method="post">
     <div class="ui-form-content ui-box-content ui-widget-content ui-image-list">
@@ -51,7 +47,7 @@ jQuery(function($){
         <ul>
 <?php
 foreach($data as $row){
-    $url = qw_url($set, array('style' => $row['path_name']));
+    $url = qw_url($asc, array('style' => $row['path_name']));
 ?>
             <li class="ui-widget-content ui-corner-all">
                 <a href="<?php echo $url?>">

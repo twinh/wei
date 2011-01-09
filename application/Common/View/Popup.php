@@ -40,7 +40,8 @@ class Common_View_Popup extends Common_View
         $meta = $this->meta;
         $request = Qwin::run('Qwin_Request');
         $lang = Qwin::run('-lang');
-        $set = Qwin::run('-ini')->getSet();
+        $config = Qwin::run('-config');
+        $asc = $config['asc'];
 
         // 获取json数据的链接
         $jsonUrl = str_replace('\'', '\\\'', '?' . Qwin::run('-url')->arrayKey2Url(array('action' => 'List') + $_GET));

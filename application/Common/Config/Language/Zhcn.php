@@ -38,10 +38,11 @@ class Common_Config_Language_Zhcn extends Common_Language_Zhcn
             'LBL_FIELD_FORM_NAME' => '表单名称',
             'LBL_FIELD_FORM_LABEL' => '表单标题',
             'LBL_FIELD_FORM_RESOURCE' => '表单资源',
+            'LBL_FIELD_IS_ENABLED' => '是否启用',
 
             'LBL_GROUP_FORM_SETTING' => '表单配置',
 
-            'LBL_CONFIG_CENTER' => '配置中心',
+            'LBL_ACTION_CENTER' => '配置中心',
 
             'LBL_CONTROLLER_CONFIG' => '配置',
             'LBL_MODULE_CONFIG' => '配置',

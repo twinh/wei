@@ -64,7 +64,7 @@ class Common_Management_Controller_ApplicationStructure extends Common_Controlle
 
         Qwin_Helper_File::writeAsArray($action, QWIN_ROOT_PATH . '/cache/php/application-structure.php');
 
-        $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Index'));
+        $url = Qwin::run('-url')->createUrl($this->_asc, array('action' => 'Index'));
         $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
     }
 

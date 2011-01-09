@@ -40,7 +40,8 @@ class Common_View_JqGridJson extends Common_View
         /**
          * @todo 当前页数,行数等信息的获取
          */
-        $controller = $this->_data['config']['this'];
+        //$controller = $this->_data['config']['this'];
+        $controller = Qwin::run('-controller');
         $nowPage = intval($request->g($controller->pageName));
         $nowPage <= 0 && $nowPage = 1;
         $rowNum = intval($request->g($controller->limitName));

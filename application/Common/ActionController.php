@@ -46,7 +46,7 @@ class Common_ActionController extends Common_Controller
              * @see Common_Service_Index $_config
              */
             $config = array(
-                'set' => $this->_set,
+                'set' => $this->_asc,
                 'data' => array(
                     'list' => $this->metaHelper->getUrlListField(),
                 ),
@@ -58,7 +58,7 @@ class Common_ActionController extends Common_Controller
              * @see Common_Service_List $_config
              */
             $config = array(
-                'set' => $this->_set,
+                'set' => $this->_asc,
                 'data' => array(
                     'list' => $this->metaHelper->getUrlListField(),
                     'order' => $this->metaHelper->getUrlOrder(),
@@ -89,7 +89,7 @@ class Common_ActionController extends Common_Controller
          * @see Common_Service_Index $_config
          */
         $config = array(
-            'set' => $this->_set,
+            'set' => $this->_asc,
             'data' => array(
                 'list' => $this->metaHelper->getUrlListField(),
             ),
@@ -112,9 +112,9 @@ class Common_ActionController extends Common_Controller
          * @see Common_Service_View $_config
          */
         $config = array(
-            'set' => $this->_set,
+            'set' => $this->_asc,
             'data' => array(
-                'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_set),
+                'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_asc),
             ),
             'this' => $this,
         );
@@ -134,9 +134,9 @@ class Common_ActionController extends Common_Controller
              * @see Common_Service_View $_config
              */
             $config = array(
-                'set' => $this->_set,
+                'set' => $this->_asc,
                 'data' => array(
-                    'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_set),
+                    'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_asc),
                 ),
                 'this' => $this,
             );
@@ -146,7 +146,7 @@ class Common_ActionController extends Common_Controller
              * @see Common_Service_Insert $_config
              */
             $config = array(
-                'set' => $this->_set,
+                'set' => $this->_asc,
                 'data' => array(
                     'db' => $_POST,
                 ),
@@ -177,9 +177,9 @@ class Common_ActionController extends Common_Controller
              * @see Common_Service_View $_config
              */
             $config = array(
-                'set' => $this->_set,
+                'set' => $this->_asc,
                 'data' => array(
-                    'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_set),
+                    'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_asc),
                     'asAction' => 'edit',
                     'isLink' => false,
                     'isView' => false,
@@ -195,7 +195,7 @@ class Common_ActionController extends Common_Controller
              * @see Common_Service_Update $_config
              */
             $config = array(
-                'set' => $this->_set,
+                'set' => $this->_asc,
                 'data' => array(
                     'db' => $_POST,
                 ),
@@ -224,9 +224,9 @@ class Common_ActionController extends Common_Controller
          * @see Common_Service_Delete $_config
          */
         $config = array(
-            'set' => $this->_set,
+            'set' => $this->_asc,
             'data' => array(
-                'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_set),
+                'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_asc),
             ),
             'callback' => array(
                 'afterDb' => array(

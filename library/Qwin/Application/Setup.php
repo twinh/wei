@@ -29,17 +29,6 @@
 class Qwin_Application_Setup
 {
     /**
-     * 指定加载的命名空间的名称
-     */
-    //const DEFAULT_NAMESPACE = 'Application';
-
-    /**
-     * 由命名空间,模块,控制器,行为组成的配置数组
-     * @var array
-     */
-    protected $_set = array();
-
-    /**
      * 控制器父类的实例化对象
      * @var object
      */
@@ -64,30 +53,29 @@ class Qwin_Application_Setup
     protected $_controller;
 
     /**
-     * 全局配置数组
-     * @var array
+     * 全局配置
+     * @var Qwin_Config
      */
     protected $config;
 
     /**
-     * 编码后的配置数组
+     * 用户请求对象
+     * @var Qwin_Request
      */
-    protected $_encodedConfig;
-
-    /**
-     * Qwin_Request对象
-     */
-    protected $_request;
+    protected $request;
 
     /**
      * 解析配置,初始化并构建程序
      *
      * @param array $config
-     * @param array $set
+     * @param array $asc
      * @todo 配置
      */
-    public function __construct($config, $set = null)
+    public function __construct($config, $asc = null)
     {
+        $globalConfig = require_once QWIN_ROOT_PATH . '/common/config/global.php';
+        $config = array_merge($config, $globalConfig);
+
         // 加载Qwin函数库
         require_once QWIN_LIB_PATH . '/function/qwin.php';
 
@@ -96,11 +84,12 @@ class Qwin_Application_Setup
         Qwin::setAutoload();
         Qwin::setCacheFile(QWIN_ROOT_PATH . '/cache/php/class.php');
         
-        $this->_request = Qwin::run('-request');
-        $this->config = Qwin::run('-config', $config);
+        $this->request = Qwin::run('-request');
+        $config = $this->config = Qwin::run('-config', $config);
 
         // 注册初始化类
         Qwin::addClass(__CLASS__, $this);
+        Qwin::addClass('-setup', $this);
 
         /**
          * 根据配置数组设置初始化各设置
@@ -124,50 +113,43 @@ class Qwin_Application_Setup
          * 通过配置数据和Url参数初始化系统配置
          * 系统配置包括命名空间,模块,控制器,行为
          */
-        $this->_set = &$set;
-        $defaultSet = array(
-            'namespace' => 'Common',
-            'module' => 'Index',
-            'controller' => 'Index',
-            'action' => 'Index',
-        );
-
-        $urlSet = $this->_request->get(array_keys($defaultSet));
-        foreach ($defaultSet as $key => $field) {
-            if (!isset($set[$key])) {
-                $set[$key] = null != $urlSet[$key] ? $urlSet[$key] : $defaultSet[$key];
+        $asc = array();
+        $urlAsc = $this->request->get(array_keys($config['defaultAsc']->toArray()));
+        foreach ($config['defaultAsc'] as $key => $field) {
+            if (!isset($asc[$key])) {
+                $asc[$key] = null != $urlAsc[$key] ? $urlAsc[$key] : $config['defaultAsc'][$key];
             }
             // TODO 过滤非法字符
-            $set[$key] = str_replace('-', '', $set[$key]);
+            $asc[$key] = str_replace('-', '', $asc[$key]);
         }
+        $config['asc'] = $asc;
 
         /**
          * 加载命名空间
          * 如果是配置文件中不允许的命名空间,则抛出异常
          */
-        if (!in_array($set['namespace'], $this->config['allowedNamespace']->toArray())) {
-            require_once 'Qwin/Application/Setup/Exception.php';
-            throw new Qwin_Application_Setup_Exception('The namespace ' . $set['namespace'] . ' is not allowed.');
+        if (!in_array($asc['namespace'], $config['allowedNamespace']->toArray())) {
+            exit('The namespace ' . $asc['namespace'] . ' is not allowed.');
         }
 
         /**
          * 初始命名空间类,并加入类管理器中
          */
-        $namespaceClass = $set['namespace'] . '_Namespace';
+        $namespaceClass = $asc['namespace'] . '_Namespace';
         $this->_namespace = Qwin::run($namespaceClass);
-        null == $this->_namespace && $this->_onNamespaceNotExists($set['namespace']);
+        null == $this->_namespace && $this->_onNamespaceNotExists($asc['namespace']);
         Qwin::addMap('-namespace', $namespaceClass);
         $this->_onNamespaceLoad($this->_namespace);
 
         /**
          * 初始模块类,并加入类管理器中
          */
-        $moduleClass = $set['namespace'] . '_' . $set['module'] . '_Module';
+        $moduleClass = $config['asc']['namespace'] . '_' . $config['asc']['module'] . '_Module';
         $this->_module = Qwin::run($moduleClass);
         if (null == $this->_module) {
             $moduleClass = 'Qwin_Application_Module';
             $this->_module = Qwin::run('Qwin_Application_Module');
-            $this->_onModuleNotExists($set['module']);
+            $this->_onModuleNotExists($asc['module']);
         }
         Qwin::addMap('-module', $moduleClass);
         $this->_onModuleLoad($this->_module);
@@ -175,25 +157,25 @@ class Qwin_Application_Setup
         /**
          * 初始控制器类,并加入类管理器中
          */
-        $controllerClass = $this->getClassName('Controller', $set);
+        $controllerClass = $this->getClassName('Controller', $config['asc']);
         $this->_controller = Qwin::run($controllerClass);
         if (null == $this->_controller) {
             $controllerClass = 'Qwin_Application_Controller';
             $this->_controller = Qwin::run('Qwin_Application_Controller');
-            $this->_onControllerNotExists($set['controller']);
+            $this->_onControllerNotExists($asc['controller']);
         }
         Qwin::addMap('-controller', $controllerClass);
         $this->_onControllerLoad($this->_controller);
 
         // 执行指定的行为
-        $action = 'action' . $set['action'];
+        $action = 'action' . $asc['action'];
         if (method_exists($this->_controller, $action)) {
             call_user_func_array(
                 array($this->_controller, $action),
-                array(&$set, &$this->config)
+                array(&$asc, &$this->config)
             );
         } else {
-            $this->_onActionNotExists($set['action']);
+            $this->_onActionNotExists($asc['action']);
         }
 
         // 加载视图
@@ -204,46 +186,6 @@ class Qwin_Application_Setup
             }
         }
         return true;
-    }
-
-    /**
-     * 获取网站配置数组
-     * 
-     * @return array 网站配置数组
-     */
-    public function getConfig($name = null)
-    {
-        if (isset($this->_encodedConfig[$name])) {
-            return $this->_encodedConfig[$name];
-        }
-
-        $keyArray = explode('.', $name);
-        $tempConfig = $this->config;
-        foreach ($keyArray as $key) {
-            if (isset($tempConfig[$key])) {
-                $tempConfig = $tempConfig[$key];
-            }
-        }
-        return $this->_encodedConfig[$name] = $tempConfig;
-    }
-
-    /**
-     * 设置网站配置数组
-     */
-    public function setConfig($config)
-    {
-        $this->config = $config;
-        return $this;
-    }
-
-    /**
-     * 获取配置数组
-     *
-     * @return array 配置数组
-     */
-    public function getSet()
-    {
-        return $this->_set;
     }
 
     /**
@@ -288,7 +230,7 @@ class Qwin_Application_Setup
      */
     protected function _onControllerNotExists($name = null)
     {
-        exit('The controller: ' . $this->_set['controller'] . ' is not exists');
+        exit('The controller: ' . $this->config['asc']['controller'] . ' is not exists');
     }
 
     /**
@@ -299,7 +241,7 @@ class Qwin_Application_Setup
      */
     protected function _onActionNotExists($name = null)
     {
-        exit('The action: ' . $this->_set['action'] . ' is not exists');
+        exit('The action: ' . $this->config['asc']['action'] . ' is not exists');
     }
 
     /**
@@ -347,6 +289,6 @@ class Qwin_Application_Setup
         echo '<p>The Namespace is <strong>' . $namesapce . '</strong></p>';
         echo '<p>The Module is <strong>' . $module . '</strong></p>';
         echo '<p>The Controller is <strong>' . $controller . '</strong></p>';
-        echo '<p>The Action is <strong>' . $this->_set['action'] . '</strong></p>';
+        echo '<p>The Action is <strong>' . $this->config['asc']['action'] . '</strong></p>';
     }
 }

@@ -32,7 +32,7 @@ class Common_Config_Metadata_Group extends Common_Metadata
         $this->setCommonMetadata();
         $this->parseMetadata(array(
             'field' => array(
-                'parent_id' => array(
+                /*'parent_id' => array(
                     'basic' => array(
                         'title' => 'LBL_FIELD_PARENT_NAME',
                     ),
@@ -51,20 +51,50 @@ class Common_Config_Metadata_Group extends Common_Metadata
                     ),
                     'attr' => array(
                         'isLink' => 1,
+                        'isList' => 1,
+                    ),
+                ),*/
+                'title' => array(
+                    'attr' => array(
+                        'isList' => 1,
                     ),
                 ),
-                'title' => array(
-
-                ),
                 'form_name' => array(
-
+                    'attr' => array(
+                        'isList' => 1,
+                    ),
+                ),
+                'is_enabled' => array(
+                    'form' => array(
+                        '_type' => 'select',
+                        '_value' => 1,
+                        '_resourceGetter' => array(
+                            array('Project_Helper_CommonClass', 'get'),
+                            'yes-or-no',
+                        ),
+                    ),
+                    'attr' => array(
+                        'isList' => 1,
+                    ),
+                    'converter' => array(
+                        'list' => array(
+                            array('Project_Helper_CommonClass', 'convert'),
+                            'yes-or-no',
+                        ),
+                        'view' => 'list',
+                    ),
                 ),
                 'order' => array(
-
+                    'attr' => array(
+                        'isList' => 1,
+                    ),
                 ),
                 'description' => array(
                     'form' => array(
                         '_type' => 'textarea',
+                    ),
+                    'attr' => array(
+                        'isList' => 1,
                     ),
                 ),
             ),

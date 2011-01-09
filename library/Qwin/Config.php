@@ -35,7 +35,6 @@ class Qwin_Config extends Qwin_Metadata_Abstract
             } else {
                 $this->_data[$key] = $value;
             }
-
         }
     }
 }

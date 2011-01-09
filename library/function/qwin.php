@@ -32,11 +32,6 @@ function p($a)
     echo '</pre><p>';
 }
 
-function e($msg = '')
-{
-    qw('Qwin_Debug')->e($msg);
-}
-
 /**
  * 快速加载类
  *
@@ -74,9 +69,12 @@ function qw_widget($param, $param2 = null)
 
 function qw_url($array1 = null, $array2 = null)
 {
-    static $url;
+    static $url, $config;
     null == $url && $url = Qwin::run('-url');
-    null == $array1 && $array1 = Qwin::run('-ini')->getSet();
+    if (null == $array1) {
+        null == $config && $config = Qwin::run('-config');
+        $array1 = $config['asc'];
+    }
     return $url->createUrl($array1, $array2);
 
 }

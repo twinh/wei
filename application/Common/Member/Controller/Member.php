@@ -58,9 +58,9 @@ class Common_Member_Controller_Member extends Common_ActionController
              * @see Common_Service_View $_config
              */
             $config = array(
-                'set' => $this->_set,
+                'set' => $this->_asc,
                 'data' => array(
-                    'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_set),
+                    'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_asc),
                     'asAction' => 'editpassword',
                     'meta' => $this->_meta,
                     'isLink' => false,
@@ -77,7 +77,7 @@ class Common_Member_Controller_Member extends Common_ActionController
              * @see Common_Service_Update $_config
              */
             $config = array(
-                'set' => $this->_set,
+                'set' => $this->_asc,
                 'data' => array(
                     'db' => $_POST,
                     'meta' => $this->_meta,
@@ -130,7 +130,7 @@ class Common_Member_Controller_Member extends Common_ActionController
 
     public function isUsernameExists($username)
     {
-        $query = $this->_meta->getQueryBySet($this->_set);
+        $query = $this->_meta->getQueryBySet($this->_asc);
         $result = $query->where('username = ?', $username)
             ->fetchOne();
         if(false != $result)

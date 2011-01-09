@@ -73,7 +73,7 @@ class Common_Service_Insert extends Common_Service_BasicAction
         // 初始化常用的变量
         $meta = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
-        $query = $metaHelper->getQueryBySet($this->_set, 'db');
+        $query = $metaHelper->getQueryBySet($this->_asc, 'db');
         Qwin::run('Qwin_Class_Extension')
             ->setNamespace('validator')
             ->addClass('Qwin_Validator_JQuery');
@@ -116,7 +116,7 @@ class Common_Service_Insert extends Common_Service_BasicAction
         //$metaHelper->saveRelatedDbData($meta, $data, $query);
 
         // 入库
-        $modelName = $metaHelper->getClassName('Model', $this->_set);
+        $modelName = $metaHelper->getClassName('Model', $this->_asc);
         $this->_result = new $modelName;
         $this->_result->fromArray($data);
         $this->_result->save();
@@ -134,7 +134,7 @@ class Common_Service_Insert extends Common_Service_BasicAction
         {
             $url = $config['view']['url'];
         } else {
-            $url = $this->url->createUrl($this->_set, array('action' => 'Index'));
+            $url = $this->url->createUrl($this->_asc, array('action' => 'Index'));
         }
         $return = array(
             'result' => true,

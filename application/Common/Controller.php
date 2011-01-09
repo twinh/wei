@@ -30,6 +30,8 @@
 
 class Common_Controller extends Qwin_Application_Controller
 {
+    protected $_asc;
+
     /**
      * Qwin_Request对象
      * @var Qwin_Request
@@ -43,17 +45,10 @@ class Common_Controller extends Qwin_Application_Controller
     public $url;
 
     /**
-     * 应用配置数组
-     * @var array
-     * @todo 标准化
-     */
-    //protected $_set;
-
-    /**
      * 全局配置数组
      * @var array
      */
-    protected $_config;
+    protected $config;
 
     /**
      * 会话对象
@@ -104,17 +99,17 @@ class Common_Controller extends Qwin_Application_Controller
         $ini = Qwin::run('-ini');
         $this->request = Qwin::run('-request');
         $this->url = Qwin::run('-url');
-        $set = $this->_set = $ini->getSet();
-        $this->_config = $ini->getConfig();
+        $this->config = Qwin::run('-config');
+        $this->_asc = $this->config['asc'];
         $this->session = Qwin::run('-session');
         $this->member = $this->session->get('member');
 
         // 元数据管理助手,负责元数据的获取和转换
         $this->metaHelper = Qwin::run('Qwin_Application_Metadata');
 
-        $languageResult = Qwin::run('Common_Service_Language')->getLanguage($set);
+        $languageResult = Qwin::run('Common_Service_Language')->getLanguage($this->config['asc']);
         $languageName = $languageResult['data'];
-        $languageClass = $set['namespace'] . '_' . $set['module'] . '_Language_' . $languageName;
+        $languageClass = $this->config['asc']['namespace'] . '_' . $this->config['asc']['module'] . '_Language_' . $languageName;
         $this->_lang = Qwin::run($languageClass);
         if(null == $this->_lang)
         {
@@ -123,7 +118,7 @@ class Common_Controller extends Qwin_Application_Controller
         }
         Qwin::addMap('-lang', $languageClass);
 
-        $this->_meta = $this->metaHelper->getMetadataBySet($set);
+        $this->_meta = $this->metaHelper->getMetadataBySet($this->config['asc']);
 
         $this->_viewOption['class'] = 'Common_View';
 
@@ -147,13 +142,13 @@ class Common_Controller extends Qwin_Application_Controller
         // 未登陆则默认使用游客账号
         if(null == $member)
         {
-            $set = array(
+            $asc = array(
                 'namespace' => 'Common',
                 'module' => 'Member',
                 'controller' => 'Member',
             );
             $result = $metaHelper
-                ->getQueryBySet($set, array('db', 'view'))
+                ->getQueryBySet($asc, array('db', 'view'))
                 ->where('username = ?', 'guest')
                 ->fetchOne();
             $member = $result->toArray();
@@ -166,21 +161,21 @@ class Common_Controller extends Qwin_Application_Controller
         }
 
         // 逐层权限判断
-        $set = $this->_set;
+        $asc = $this->config['asc'];
         $permission = @unserialize($member['group']['permission']);
-        if(isset($permission[$set['namespace']]))
+        if(isset($permission[$asc['namespace']]))
         {
             return true;
         }
-        if(isset($permission[$set['namespace'] . '|' . $set['module']]))
+        if(isset($permission[$asc['namespace'] . '|' . $asc['module']]))
         {
             return true;
         }
-        if(isset($permission[$set['namespace'] . '|' . $set['module'] . '|' . $set['controller']]))
+        if(isset($permission[$asc['namespace'] . '|' . $asc['module'] . '|' . $asc['controller']]))
         {
             return true;
         }
-        if(isset($permission[$set['namespace'] . '|' . $set['module'] . '|' . $set['controller'] . '|' . $set['action']]))
+        if(isset($permission[$asc['namespace'] . '|' . $asc['module'] . '|' . $asc['controller'] . '|' . $asc['action']]))
         {
             return true;
         }

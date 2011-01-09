@@ -47,7 +47,7 @@ class Common_Member_Controller_Group extends Common_ActionController
         /**
          * 从模型获取数据
          */
-        $query = $this->metaHelper->getQueryBySet($this->_set);
+        $query = $this->metaHelper->getQueryBySet($this->_asc);
         $result = $query->where($primaryKey . ' = ?', $id)->fetchOne();
 
         /**
@@ -62,12 +62,7 @@ class Common_Member_Controller_Group extends Common_ActionController
         {
             $permission = unserialize($result['permission']);
             $appStructure = require QWIN_ROOT_PATH . '/cache/php/application-structure.php';
-            $theme = Qwin::run('-ini')->getConfig('interface.theme');
             $this->_view = array(
-                'class' => 'Common_View',
-                'element' => array(
-                    array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/member/permission.php'),
-                ),
                 'data' => get_defined_vars(),
             );
         } else {
@@ -94,7 +89,7 @@ class Common_Member_Controller_Group extends Common_ActionController
             }
             $result['permission'] = serialize($permission);
             $result->save();
-            $url = Qwin::run('-url')->createUrl($this->_set, array('action' => 'Index'));
+            $url = Qwin::run('-url')->createUrl($this->_asc, array('action' => 'Index'));
             return $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }    

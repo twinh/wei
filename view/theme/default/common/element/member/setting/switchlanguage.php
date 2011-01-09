@@ -28,13 +28,8 @@
 !defined('QWIN_PATH') && exit('Forbidden');
 ?>
 <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
-    <div class="ui-box-titlebar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix">
-        <span class="ui-box-title">
-            <?php echo qw_lang('LBL_LANGUAGE')?>
-        </span>
-        <a class="ui-box-title-icon ui-corner-all" name=".ui-form-content" href="javascript:void(0)">
-            <span class="ui-icon  ui-icon-circle-triangle-n">open/close</span>
-        </a>
+    <div class="ui-box-header">
+        <?php $this->loadWidget('Common_Widget_Header') ?>
     </div>
     <form action="" method="post">
     <div class="ui-form-content ui-box-content ui-widget-content">
@@ -46,9 +41,9 @@
         <div class="ui-space-10px"></div>
         <hr class="ui-line ui-widget-content" />
         <div class="ui-operation-content">
-            <a class="ui-anchor" href="<?php echo qw_url($set, array('language' => 'zh-CN')) ?>"><?php echo qw_lang('LBL_LANG_ZHCN') ?></a>
-            <a class="ui-anchor" href="<?php echo qw_url($set, array('language' => 'Gbk')) ?>"><?php echo qw_lang('LBL_LANG_GBK') ?></a>
-            <a class="ui-anchor" href="<?php echo qw_url($set, array('language' => 'en-US')) ?>"><?php echo qw_lang('LBL_LANG_ENUS') ?></a>
+            <a class="ui-anchor" href="<?php echo qw_url($asc, array('language' => 'zh-CN')) ?>"><?php echo qw_lang('LBL_LANG_ZHCN') ?></a>
+            <a class="ui-anchor" href="<?php echo qw_url($asc, array('language' => 'Gbk')) ?>"><?php echo qw_lang('LBL_LANG_GBK') ?></a>
+            <a class="ui-anchor" href="<?php echo qw_url($asc, array('language' => 'en-US')) ?>"><?php echo qw_lang('LBL_LANG_ENUS') ?></a>
         </div>
         <hr class="ui-line ui-widget-content" />
         <div class="ui-space-10px"></div>

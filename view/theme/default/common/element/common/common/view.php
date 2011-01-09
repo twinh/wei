@@ -36,18 +36,44 @@
         <form id="post-form" name="form" method="post" action="">
         <div class="ui-operation-field">
             <?php
-            echo qw_jquery_link(qw_url($set, array('action' => 'Index')), qw_lang('LBL_ACTION_LIST'), 'ui-icon-note'),
-                 qw_jquery_link(qw_url($set, array('action' => 'Add')), qw_lang('LBL_ACTION_ADD'), 'ui-icon-plusthick');
+            echo qw_jquery_link(qw_url($asc, array('action' => 'Index')), qw_lang('LBL_ACTION_LIST'), 'ui-icon-note'),
+                 qw_jquery_link(qw_url($asc, array('action' => 'Add')), qw_lang('LBL_ACTION_ADD'), 'ui-icon-plusthick');
             if(isset($data[$primaryKey])):
-                echo qw_jquery_link(qw_url($set, array('action' => 'Edit', $primaryKey => $data[$primaryKey])), qw_lang('LBL_ACTION_EDIT'), 'ui-icon-tag'),
-                     qw_jquery_link(qw_url($set, array('action' => 'View', $primaryKey => $data[$primaryKey])), qw_lang('LBL_ACTION_VIEW'), 'ui-icon-lightbulb'),
-                     qw_jquery_link(qw_url($set, array('action' => 'Add', $primaryKey => $data[$primaryKey])), qw_lang('LBL_ACTION_COPY'), 'ui-icon-transferthick-e-w'),
-                     qw_jquery_link('javascript:if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE)){window.location=\'' . qw_url($set, array('action' => 'Delete', $primaryKey => $data[$primaryKey])) . '\'};', qw_lang('LBL_ACTION_DELETE'), 'ui-icon-trash');
+                echo qw_jquery_link(qw_url($asc, array('action' => 'Edit', $primaryKey => $data[$primaryKey])), qw_lang('LBL_ACTION_EDIT'), 'ui-icon-tag'),
+                     qw_jquery_link(qw_url($asc, array('action' => 'View', $primaryKey => $data[$primaryKey])), qw_lang('LBL_ACTION_VIEW'), 'ui-icon-lightbulb'),
+                     qw_jquery_link(qw_url($asc, array('action' => 'Add', $primaryKey => $data[$primaryKey])), qw_lang('LBL_ACTION_COPY'), 'ui-icon-transferthick-e-w'),
+                     qw_jquery_link('javascript:if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE)){window.location=\'' . qw_url($asc, array('action' => 'Delete', $primaryKey => $data[$primaryKey])) . '\'};', qw_lang('LBL_ACTION_DELETE'), 'ui-icon-trash');
             endif;
             echo qw_jquery_link('javascript:history.go(-1);', qw_lang('LBL_ACTION_RETURN'), 'ui-icon-arrowthickstop-1-w');
             ?>
         </div>
-        <?php foreach($layout as $groupKey => $fieldList): ?>
+        <div class="ui-helper-hidden">
+            <?php
+            // TODO 逻辑分离
+            // 将隐藏域单独分开
+            if(isset($layout[-1])):
+                foreach($layout[-1] as $field):
+                    if(null == $field[0]):
+                        $tempMeta = $meta;
+                        $tempData = $data;
+                        $formSet = $tempMeta['field'][$field[1]]['form'];
+                        $formSet['_value'] = $tempData[$formSet['name']];
+                    else:
+                        $tempMeta = $meta['metadata'][$field[0]];
+                        $tempData = $data[$field[0]];
+                        $formSet = $tempMeta['field'][$field[1]]['form'];
+
+                        $formSet['_value'] = $tempData[$formSet['name']];
+                        $formSet['id'] = $field[0] . '_' . $formSet['name'];
+                        $formSet['name'] = $field[0] . '[' . $formSet['name'] . ']';
+                    endif;
+                    echo qw_form($formSet, $tempData);
+                endforeach;
+                unset($layout[-1]);
+            endif;
+            ?>
+        </div>
+        <?php foreach($layout as $groupKey => $fieldGroup): ?>
         <fieldset id="ui-fieldset-<?php echo $groupKey ?>" class="ui-widget-content ui-corner-all">
             <legend><?php echo qw_lang($group[$groupKey]) ?></legend>
             <table class="ui-form-table" id="ui-form-table-<?php echo $groupKey ?>" width="100%">
@@ -58,34 +84,63 @@
                   <td width="37.5%"></td>
                 </tr>
                 <?php
-                // TODO
-                foreach($fieldList as $field):
-                    if(!is_array($field)):
-                        $tempData = $data;
-                        $tempMeta = $meta;
-                    else:
-                        $tempData = $data[$field[0]];
-                        $tempMeta = $meta['metadata'][$field[0]];
-                        $field = $field[1];
-                    endif;
+                foreach($fieldGroup as $fieldRow):
                 ?>
                 <tr>
-                  <td class="ui-label-common"><label><?php echo qw_lang($tempMeta['field'][$field]['basic']['title']) ?>:</label></td>
-                  <td class="ui-field-text" colspan="3"><?php echo qw_null_text($tempData[$field]) ?></td>
+                    <?php
+                    if(1 == count($fieldRow)):
+                        $colspan = ' colspan="3"';
+                    else:
+                        $colspan = '';
+                    endif;
+                    foreach($fieldRow as $fieldCell):
+                        if('' == $fieldCell):
+                    ?>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <?php
+                        else:
+                            if(null == $fieldCell[0]):
+                                $tempMeta = $meta;
+                                $tempData = $data;
+                                $formSet = $tempMeta['field'][$fieldCell[1]]['form'];
+                                $formSet['_value'] = isset($tempData[$formSet['name']]) ? $tempData[$formSet['name']] : null;
+                            else:
+                                $tempMeta = $meta['metadata'][$fieldCell[0]];
+                                $tempData = $data[$fieldCell[0]];
+                                $formSet = $tempMeta['field'][$fieldCell[1]]['form'];
+
+                                $formSet['_value'] = isset($tempData[$formSet['name']]) ? $tempData[$formSet['name']] : null;
+                                $formSet['id'] = $fieldCell[0] . '_' . $formSet['name'];
+                                $formSet['name'] = $fieldCell[0] . '[' . $formSet['name'] . ']';
+                            endif;
+                            $formSet['class'] .= ' ui-widget-content ui-corner-all';
+                            $type = $tempMeta['field'][$fieldCell[1]]['form']['_type'];
+                    ?>
+                    <td class="ui-label-common"><label for="<?php echo $tempMeta['field'][$fieldCell[1]]['form']['id'] ?>"><?php echo qw_lang($tempMeta['field'][$fieldCell[1]]['basic']['title']) ?>:</label></td>
+                    <td class="ui-field-common ui-field-<?php echo $type ?>"<?php echo $colspan ?>>
+                      <?php echo qw_null_text($tempData[$fieldCell[1]]) ?>
+                    </td>
+                    <?php
+                        endif;
+                    endforeach;
+                    ?>
                 </tr>
-                <?php endforeach ?>
+                <?php
+                endforeach;
+                ?>
             </table>
         </fieldset>
         <?php endforeach ?>
         <div class="ui-operation-field">
             <?php
-            echo qw_jquery_link(qw_url($set, array('action' => 'Index')), qw_lang('LBL_ACTION_LIST'), 'ui-icon-note'),
-                 qw_jquery_link(qw_url($set, array('action' => 'Add')), qw_lang('LBL_ACTION_ADD'), 'ui-icon-plusthick');
+            echo qw_jquery_link(qw_url($asc, array('action' => 'Index')), qw_lang('LBL_ACTION_LIST'), 'ui-icon-note'),
+                 qw_jquery_link(qw_url($asc, array('action' => 'Add')), qw_lang('LBL_ACTION_ADD'), 'ui-icon-plusthick');
             if(isset($data[$primaryKey])):
-                echo qw_jquery_link(qw_url($set, array('action' => 'Edit', $primaryKey => $data[$primaryKey])), qw_lang('LBL_ACTION_EDIT'), 'ui-icon-tag'),
-                     qw_jquery_link(qw_url($set, array('action' => 'View', $primaryKey => $data[$primaryKey])), qw_lang('LBL_ACTION_VIEW'), 'ui-icon-lightbulb'),
-                     qw_jquery_link(qw_url($set, array('action' => 'Add', $primaryKey => $data[$primaryKey])), qw_lang('LBL_ACTION_COPY'), 'ui-icon-transferthick-e-w'),
-                     qw_jquery_link('javascript:if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE)){window.location=\'' . qw_url($set, array('action' => 'Delete', $primaryKey => $data[$primaryKey])) . '\'};', qw_lang('LBL_ACTION_DELETE'), 'ui-icon-trash');
+                echo qw_jquery_link(qw_url($asc, array('action' => 'Edit', $primaryKey => $data[$primaryKey])), qw_lang('LBL_ACTION_EDIT'), 'ui-icon-tag'),
+                     qw_jquery_link(qw_url($asc, array('action' => 'View', $primaryKey => $data[$primaryKey])), qw_lang('LBL_ACTION_VIEW'), 'ui-icon-lightbulb'),
+                     qw_jquery_link(qw_url($asc, array('action' => 'Add', $primaryKey => $data[$primaryKey])), qw_lang('LBL_ACTION_COPY'), 'ui-icon-transferthick-e-w'),
+                     qw_jquery_link('javascript:if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE)){window.location=\'' . qw_url($asc, array('action' => 'Delete', $primaryKey => $data[$primaryKey])) . '\'};', qw_lang('LBL_ACTION_DELETE'), 'ui-icon-trash');
             endif;
             echo qw_jquery_link('javascript:history.go(-1);', qw_lang('LBL_ACTION_RETURN'), 'ui-icon-arrowthickstop-1-w');
             ?>

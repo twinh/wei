@@ -89,7 +89,7 @@ class Common_Service_View extends Common_Service_BasicAction
         }
 
         // 从模型获取数据
-        $query = $metaHelper->getQueryBySet($this->_set, array('db', 'view'));
+        $query = $metaHelper->getQueryBySet($this->_asc, array('db', 'view'));
         $result = $query->where($primaryKey . ' = ?', $config['data']['primaryKeyValue'])->fetchOne();
 
         // 记录不存在,加载错误视图

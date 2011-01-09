@@ -45,7 +45,7 @@ class Common_Service_Language extends Common_Service
      * @param array $config
      * @return array 服务结果
      */
-    public function getLanguage(array $config = null)
+    public function getLanguage($config = null)
     {
         if(null == $this->_language)
         {
@@ -66,10 +66,9 @@ class Common_Service_Language extends Common_Service
      */
     public function _getLanguage($config)
     {
-        
-        $request    = Qwin::run('Qwin_Request');
-        $session    = Qwin::run('Qwin_Session');
-        $webConfig  = Qwin::run('-ini')->getConfig();
+        $request    = Qwin::run('-request');
+        $session    = Qwin::run('-session');
+        $webConfig  = Qwin::run('-config');
         $language   = null;
 
         // 按优先级排列语言的数组
@@ -78,6 +77,7 @@ class Common_Service_Language extends Common_Service
             $session->get('language'),
             $webConfig['interface']['language'],
         );
+
         foreach($languageList as $value)
         {
             if(null != $value)

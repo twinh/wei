@@ -1,6 +1,6 @@
 <?php
 /**
- * Form
+ * Home
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,36 +16,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
- * @subpackage  View
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-17 18:14:58
+ * @since       2011-01-09 09:42:41
  */
 
-class Common_View_Form extends Common_View
+class Common_Home_Controller_Home extends Common_Controller
 {
-    public function __construct()
+    public function actionUpdateLog()
     {
-        parent::__construct();
-        $this->setElement('content', QWIN_RESOURCE_PATH . '/view/theme/' . $this->_theme . '/element/common/form.php');
-    }
-
-    public function display()
-    {
-        /**
-         * 初始化变量,方便调用
-         */
-        $primaryKey = $this->primaryKey;
-        $meta = $this->meta;
-        $relatedField = $this->relatedField;
-        $groupList = $this->_data['groupList'];
-        $data = $this->data;
-        $set = Qwin::run('-ini')->getSet();
-        $jQueryValidateCode = Qwin_Helper_Array::jsonEncode($meta->getJQueryValidateCode($relatedField));
-
-        require_once $this->_layout;
+        $meta['page']['icon'] = 'clipboard';
+        $meta['page']['title'] = 'LBL_MODULE_HOME';
+        $this->_view = array(
+            'data' => get_defined_vars(),
+        );
     }
 }

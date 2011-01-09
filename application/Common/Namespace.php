@@ -32,9 +32,7 @@ class Common_Namespace extends Qwin_Application_Namespace
 {
     public function __construct()
     {
-        $ini = Qwin::run('Qwin_Application_Setup');
-        $this->_config = $ini->getConfig();
-        $config = &$this->_config;
+        $config = Qwin::run('-config');
 
         // 设置页面编码
         if(isset($config['interface']['charset']))
@@ -43,16 +41,11 @@ class Common_Namespace extends Qwin_Application_Namespace
         }
 
         // 设置会话
-        $namespace = md5($_SERVER['SERVER_NAME'] . $this->_config['project']['name']);
+        $namespace = md5($_SERVER['SERVER_NAME'] . $config['project']['name']);
         Qwin::run('-session', $namespace);
 
         // 打开缓冲区
         ob_start();
-
-        // 设置类的对应关系
-        Qwin::addMap(array(
-            '-ini'  => 'Qwin_Application_Setup',
-        ));
        
         /**
          * 数据库链接,使用的是Doctrine Orm
@@ -83,8 +76,6 @@ class Common_Namespace extends Qwin_Application_Namespace
             } else {
                 $config['database']['mainAdapter'] = 'web';
             }
-            // 更新配置数据
-            Qwin::run('-ini')->setConfig($config);
 
             $databaseSet = $config['database']['adapter'][$config['database']['mainAdapter']];
             $adapter = $databaseSet['type'] . '://'

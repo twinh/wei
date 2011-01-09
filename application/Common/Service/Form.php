@@ -65,7 +65,7 @@ class Common_Service_Form extends Common_Service_BasicAction
         $primaryKey = $meta['db']['primaryKey'];
         $primaryKeyValue = $config['data']['primaryKeyValue'];
 
-        $modelClass = $metaHelper->getClassName('Model', $this->_set);
+        $modelClass = $metaHelper->getClassName('Model', $this->_asc);
         $model = Qwin::run($modelClass);
         $query = $metaHelper->getQuery($meta, $model, 'db');
         

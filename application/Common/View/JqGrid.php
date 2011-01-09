@@ -43,9 +43,10 @@ class Common_View_JqGrid extends Common_View
         $metaHepler = $this->metaHelper;
         $request = Qwin::run('-request');
         $lang = Qwin::run('-lang');
-        $set = Qwin::run('-ini')->getSet();
+        $config = Qwin::run('-config');
+        $asc = $config['asc'];
         $customLink = $this->customLink;
-        
+
         // 获取json数据的链接
         $jsonUrl = str_replace('\'', '\\\'', '?' . Qwin::run('-url')->arrayKey2Url(array('json' => '1') + $_GET));
 
@@ -93,7 +94,8 @@ class Common_View_JqGrid extends Common_View
         /**
          * @todo 当前页数,行数等信息的获取
          */
-        $controller = $this->_data['config']['this'];
+        //$controller = $this->_data['config']['this'];
+        $controller = Qwin::run('-controller');
         $rowNum = intval($request->g($controller->limitName));
         if($rowNum <= 0)
         {
@@ -102,6 +104,6 @@ class Common_View_JqGrid extends Common_View
         } elseif($rowNum > 500) {
             $rowNum = 500;
         }
-        $this->_data += get_defined_vars();
+        $this->_data = get_defined_vars() + $this->_data;
     }
 }

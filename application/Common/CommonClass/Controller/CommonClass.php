@@ -33,7 +33,7 @@ class Common_CommonClass_Controller_CommonClass extends Common_ActionController
     public function onAfterDb($data)
     {
         $commonClass = Qwin::run('Project_Helper_CommonClass');
-        if('delete' != strtolower($this->_set['action']))
+        if('delete' != strtolower($this->_asc['action']))
         {
             $commonClass->write($data);
         } else {

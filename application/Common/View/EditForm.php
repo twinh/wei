@@ -42,7 +42,8 @@ class Common_View_EditForm extends Common_View
         $meta = $this->meta;
         $metaHelper = $this->metaHelper;
         $data = $this->data;
-        $set = Qwin::run('-ini')->getSet();
+        $config = Qwin::run('-config');
+        $asc = $config['asc'];
 
         $orderedFeid = $metaHelper->orderField($meta);
         $layout = $metaHelper->getTableLayout($meta, $orderedFeid, 'edit', $meta['page']['tableLayout']);
@@ -50,6 +51,6 @@ class Common_View_EditForm extends Common_View
         $group = $meta['group'];
         $jQueryValidateCode = Qwin_Helper_Array::jsonEncode($metaHelper->getJQueryValidateCode($meta));
 
-        $this->_data += get_defined_vars();
+        $this->_data = get_defined_vars() + $this->_data;
     }
 }
