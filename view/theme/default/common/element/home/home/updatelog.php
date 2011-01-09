@@ -52,11 +52,11 @@
         <div class="ui-operation-field"> 
         </div>
         <ul class="ui-updatelog">
-            <li>v1.0.0 2010.01.05</li>
+            <li>v1.0.0 2011.01.05</li>
             <ul>
                 <li>[应用]完成基本的程序架构设计和模块</li>
             </ul>
-            <li>v1.0.1 2010.01.09</li>
+            <li>v1.0.1 2011.01.09</li>
             <ul>
                 <li>[应用]增加更新记录</li>
                 <li>[应用]调整多个模块列表和页眉显示问题</li>

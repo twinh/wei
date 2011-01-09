@@ -113,7 +113,6 @@ class Qwin_Application_Setup
          * 通过配置数据和Url参数初始化系统配置
          * 系统配置包括命名空间,模块,控制器,行为
          */
-        $asc = array();
         $urlAsc = $this->request->get(array_keys($config['defaultAsc']->toArray()));
         foreach ($config['defaultAsc'] as $key => $field) {
             if (!isset($asc[$key])) {
