@@ -31,7 +31,7 @@ class Common_Home_Language_Zhcn extends Common_Language_Zhcn
         $this->_data += array(
             'LBL_MODULE_HOME' => '主页',
 
-            'LBL_ACTION_UPDATELOG' => '更新记录',
+            'LBL_ACTION_UPDATELOG' => '更新日志',
         );
     }
 }
