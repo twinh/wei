@@ -114,9 +114,11 @@ class Common_View extends Qwin_Application_View
      */
     public function getStyle()
     {
-        if(isset($this->_style))
-        {
+        if (isset($this->_style)) {
             return $this->_style;
+        }
+        if (!isset($this->config)) {
+            $this->config = Qwin::run('-config');
         }
 
         $session = Qwin::run('Qwin_Session');
@@ -126,17 +128,14 @@ class Common_View extends Qwin_Application_View
             $session->get('style'),
             $this->config['interface']['style'],
         );
-        foreach($styleList as $val)
-        {
-            if(null != $val)
-            {
+        foreach ($styleList as $val) {
+            if (null != $val) {
                 $style = $val;
                 break;
             }
         }
 
-        if(!file_exists(QWIN_RESOURCE_PATH . '/js/jquery/themes/' . $style))
-        {
+        if (!file_exists(QWIN_RESOURCE_PATH . '/js/jquery/themes/' . $style)) {
             $style = $this->config['interface']['style'];
         }
         $session->set('style', $style);
