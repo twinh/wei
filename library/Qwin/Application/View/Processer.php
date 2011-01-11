@@ -1,6 +1,6 @@
 <?php
 /**
- * Zhcn
+ * Processer
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,22 +16,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
- * @subpackage  Contact
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-20 17:07:30
+ * @since       2011-01-11 00:06:26
  */
 
-class Common_Contact_Language_Zhcn extends Common_Language_Zhcn
+class Qwin_Application_View_Processer
 {
-    public function __construct()
+    public function __construct(Qwin_Application_View $view)
     {
-        parent::__construct();
-        return $this->_data += array(
-            'LBL_MODULE_CONTACT' => '联系人',
-        );
+        return $this;
     }
 }

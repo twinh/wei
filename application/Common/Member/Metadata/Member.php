@@ -57,14 +57,6 @@ class Common_Member_Metadata_Member extends Common_Metadata
                         ),
                     ),
                 ),
-                'contact_id' => array(
-                    'form' => array(
-                        '_type' => 'hidden',
-                    ),
-                    'attr' => array(
-                        'isView' => 0,
-                    ),
-                ),
                 'username' => array(
                     'attr' => array(
                         'isList' => 1,
@@ -76,6 +68,12 @@ class Common_Member_Metadata_Member extends Common_Metadata
                             'maxlength' => 40,
                         ),
                     ),
+                ),
+                'first_name' => array(
+
+                ),
+                'last_name' => array(
+
                 ),
                 'password' => array(
                     'attr' => array(
@@ -106,39 +104,87 @@ class Common_Member_Metadata_Member extends Common_Metadata
                         ),
                     ),
                 ),
+                'photo' => array(
+                    'form' => array(
+                        '_widget' => array(
+                            'fileTree',
+                            'ajaxUpload',
+                        ),
+                    ),
+                ),
+                'sex' => array(
+                    'form' => array(
+                        '_type' => 'select',
+                        '_resourceGetter' => array(
+                            array('Project_Helper_CommonClass', 'get'),
+                            'sex',
+                        ),
+                    ),
+                    'converter' => array(
+                        'list' => array(
+                            array('Project_Helper_CommonClass', 'convert'),
+                            'sex',
+                        ),
+                        'view' => 'list',
+                    ),
+                    'attr' => array(
+                        'isLink' => 1,
+                    ),
+                ),
+                'birthday' => array(
+                    'form' => array(
+                        '_widget' => 'datepicker',
+                    )
+                ),
                 'reg_ip' => array(
+                    'basic' => array(
+                        'group' => 1,
+                    ),
                 ),
                 'theme' => array(
+                    'basic' => array(
+                        'group' => 1,
+                    ),
                 ),
                 'language' => array(
+                    'basic' => array(
+                        'group' => 1,
+                    ),
+                    'form' => array(
+                        '_type' => 'select',
+                        '_resourceGetter' => array(
+                            array('Project_Helper_CommonClass', 'get'),
+                            'language',
+                        ),
+                    ),
                 ),
-                'money' => array(
-
+                'telephone' => array(
+                    'basic' => array(
+                        'group' => 1,
+                    ),
+                ),
+                'mobile' => array(
+                    'basic' => array(
+                        'group' => 1,
+                    ),
+                ),
+                'homepage' => array(
+                    'basic' => array(
+                        'group' => 1,
+                    ),
+                ),
+                'address' => array(
+                    'basic' => array(
+                        'group' => 1,
+                    ),
                 ),
             ),
             'group' => array(
-
+                0 => 'LBL_GROUP_BASIC_DATA',
+                1 => 'LBL_GROUP_DETAIL_DATA',
             ),
-            // 表之间的联系
             'model' => array(
-                'contact' => array(
-                    'name' => 'Common_Contact_Model_Contact',
-                    'alias' => 'contact',
-                    'metadata' => 'Common_Contact_Metadata_Contact',
-                    'local' => 'contact_id',
-                    'foreign' => 'id',
-                ),
-                /*array(
-                    // 模型类名
-                    'name' => 'Common_Member_Model_Company',
-                    'alias' => 'company',
-                    // Metadata 中包含模型字段,表名,关系的定义,
-                    'metadata' => 'Common_Member_Metadata_Company',
-                    'type' => 'hasOne',
-                    'local' => 'id',
-                    'foreign' => 'member_id',
-                ),*/
-                array(
+                'group' => array(
                     'name' => 'Common_Member_Model_Group',
                     'alias' => 'group',
                     'metadata' => 'Common_Member_Metadata_Group',
@@ -155,7 +201,7 @@ class Common_Member_Metadata_Member extends Common_Metadata
             ),
             'db' => array(
                 'table' => 'member',
-                'nameKey' => array(
+                'nameField' => array(
                     'username',
                 ),
             ),
@@ -163,6 +209,7 @@ class Common_Member_Metadata_Member extends Common_Metadata
             'page' => array(
                 'title' => 'LBL_MODULE_MEMBER',
                 'icon' => 'user',
+                'tableLayout' => 1,
             ),
         ));
     }
@@ -172,7 +219,7 @@ class Common_Member_Metadata_Member extends Common_Metadata
         $primaryKey = $this->db['primaryKey'];
         $url = Qwin::run('-url');
         $lang = Qwin::run('-lang');
-        $set = $this->getSetFromClass();
+        $set = $this->getAscFromClass();
         $html = Qwin_Helper_Html::jQueryButton($url->createUrl($set, array('action' => 'EditPassword', $primaryKey => $copyData[$primaryKey])), $lang->t('LBL_ACTION_EDIT_PASSWORD'), 'ui-icon-key')
               . parent::convertListOperation($value, $name, $data, $copyData);
         return $html;
@@ -185,7 +232,7 @@ class Common_Member_Metadata_Member extends Common_Metadata
         if ('Edit' == $asc['action']) {
             return true;
         }
-        $asc = $this->getSetFromClass();
+        $asc = $this->getAscFromClass();
         $lang = Qwin::run('-lang');
         $result = $this->isUsernameExists($value);
 
@@ -198,8 +245,8 @@ class Common_Member_Metadata_Member extends Common_Metadata
 
     public function isUsernameExists($username)
     {
-        $set = $this->getSetFromClass();
-        $query = $this->metaHelper->getQueryBySet($set);
+        $set = $this->getAscFromClass();
+        $query = $this->metaHelper->getQueryByAsc($set);
         $result = $query->where('username = ?', $username)
             ->fetchOne();
         if(false != $result)
@@ -207,5 +254,10 @@ class Common_Member_Metadata_Member extends Common_Metadata
             $result = true;
         }
         return $result;
+    }
+
+    public function getLanguageResource()
+    {
+        
     }
 }

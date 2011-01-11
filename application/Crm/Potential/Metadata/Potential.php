@@ -165,11 +165,16 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                 'order' => array(
                     'date_created', 'DESC',
                 ),
+                'defaultWhere' => array(
+                    array('is_deleted', 0),
+                ),
             ),
             'page' => array(
                 'title' => 'LBL_MODULE_POTENTIAL',
                 'icon' => 'buy',
                 'tableLayout' => 1,
+                'useRecycleBin' => true,
+                'mainField' => 'name',
             ),
         ));
     }

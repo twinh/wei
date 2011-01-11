@@ -63,31 +63,76 @@ class Common_Service_Delete extends Common_Service_BasicAction
         $meta = $this->_meta;
         $primaryKey = explode(',', $config['data']['primaryKeyValue']);
 
-        $query = $metaHelper->getQueryBySet($this->_asc, 'db');
-
+        $query = $metaHelper->getQueryByAsc($this->_asc, 'db');
         $alias = $query->getRootAlias();
         '' != $alias && $alias .= '.';
-
-        $object = $query
+        $resultList = $query
             //->select($modelName . '.' . $meta['db']['primaryKey'])
             ->whereIn($alias . $meta['db']['primaryKey'], $primaryKey)
             ->execute();
 
-        // TODO $object->delete();
-        // TODO 统计删除数
-        // TODO 删除数据关联的模块
-        foreach ($object as $key => $value) {
-            foreach ($meta['model'] as $model) {
-                if (isset($object[$key][$model['alias']])) {
-                    $object[$key][$model['alias']]->delete();
+        // 分两种情况 1使用回收站 2直接删除
+        // 使用回收站应符合三个条件 1启用回收站功能 2存在标识域is_deleted
+        if ($meta['page']['useRecycleBin'] && isset($meta['field']['is_deleted'])) {
+            foreach ($resultList as $key => $result) {
+                // 设置删除标志
+                $result['is_deleted'] = 1;
+                $result->save();
+
+                // 获取记录标题,不存在则用编号代替
+                if (!empty($meta['page']['mainField'])) {
+                    $name = $result[$meta['page']['mainField']];
+                } elseif (method_exists($meta, 'getMainFieldValue')) {
+                    $name = $meta->getMainFieldValue($result);
+                } else {
+                    $name = $result[$meta['db']['primaryKey']];
                 }
-                
+
+                // 加入回收站
+                $InsertSetting = array(
+                    'set' => array(
+                        'namespace' => 'Common',
+                        'module' => 'RecycleBin',
+                        'controller' => 'RecycleBin',
+                    ),
+                    'data' => array(
+                        'db' => array(
+                            'name' => $name,
+                            'type' => $this->_asc['namespace'] . '.' . $this->_asc['module'] . '.' . $this->_asc['controller'],
+                            'type_id' => $result[$meta['db']['primaryKey']],
+                        ),
+                    ),
+                    'view' => array(
+                        'display' => false,
+                    ),
+                    'this' => $config['this'],
+                );
+                $sevice = new Common_Service_Insert();
+                $result = $sevice->process($InsertSetting);
+                /*
+                 * todo 结果判断
+                 * if ($result['result']) {
+                    continue;
+                } else {
+                    $this->view->setRedirectView();
+                }*/
             }
-            $value->delete();
+        } else {
+            // TODO $resultList->delete();
+            // TODO 统计删除数
+            // TODO 删除数据关联的模块
+            foreach ($resultList as $key => $result) {
+                foreach ($meta['model'] as $model) {
+                    if (isset($resultList[$key][$model['alias']])) {
+                        $resultList[$key][$model['alias']]->delete();
+                    }
+                }
+                $result->delete();
+            }
         }
 
         // 在数据库操作之后,执行相应的 on 函数,跳转到原来的页面或列表页
-        $config['callback']['afterDb'][1] = $object;
+        $config['callback']['afterDb'][1] = $resultList;
         $this->executeCallback('afterDb', $config);
         
         $url = urldecode($this->request->p('_page'));
@@ -100,7 +145,7 @@ class Common_Service_Delete extends Common_Service_BasicAction
         );
         if($config['view']['display'])
         {
-            $config['this']->setRedirectView($return['message'], $url);
+            $this->view->setRedirectView($return['message'], $url);
         }
         return $return;
     }

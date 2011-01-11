@@ -75,7 +75,7 @@ class Common_Service_Update extends Common_Service_BasicAction
             ->addClass('Qwin_Validator_JQuery');
         
         // 从模型获取数据
-        $query = $metaHelper->getQueryBySet($this->_asc, 'db');
+        $query = $metaHelper->getQueryByAsc($this->_asc, 'db');
         $result = $query->where($primaryKey . ' = ?', $primaryKeyValue)->fetchOne();
 
         // 记录不存在,加载错误视图
@@ -87,7 +87,7 @@ class Common_Service_Update extends Common_Service_BasicAction
             );
             if($config['view']['display'])
             {
-                $config['this']->setRedirectView($return['message']);
+                $this->view->setRedirectView($return['message']);
             }
             return $return;
         }
@@ -142,7 +142,7 @@ class Common_Service_Update extends Common_Service_BasicAction
         );
         if($config['view']['display'])
         {
-            $config['this']->setRedirectView($return['message'], $url);
+            $this->view->setRedirectView($return['message'], $url);
         }
         return $return;
     }

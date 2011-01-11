@@ -115,9 +115,9 @@ class Common_Member_Metadata_Password extends Common_Metadata
 
     public function validateOldPassword($value, $name, $data)
     {
-        $set = $this->getSetFromClass();
+        $set = $this->getAscFromClass();
         $lang = Qwin::run('-lang');
-        $query = $this->metaHelper->getQueryBySet($set);
+        $query = $this->metaHelper->getQueryByAsc($set);
         $result = $query
             ->where('id = ?', $data['id'])
             ->fetchOne();

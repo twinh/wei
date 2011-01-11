@@ -68,8 +68,9 @@ class Common_Service_BasicAction extends Common_Service
         $this->session      = Qwin::run('-session');
         $this->metaHelper   = Qwin::run('Qwin_Application_Metadata');
         $this->config       = Qwin::run('-config');
-        $asc                = $this->_asc = $this->config['asc'];
+        $this->_asc         = $asc = $config;
         $this->member       = $this->session->get('member');
+        $this->view         = Qwin::run('-view');
         
         // 加载语言
         $languageResult = Qwin::run('Common_Service_Language')->getLanguage($asc);
@@ -85,7 +86,7 @@ class Common_Service_BasicAction extends Common_Service
 
         if(!isset($this->_meta))
         {
-            $this->_meta = $this->metaHelper->getMetadataBySet($asc);
+            $this->_meta = $this->metaHelper->getMetadataByAsc($asc);
         }
 
         // 根据元数据定义的数据库,选择对应的连接类型

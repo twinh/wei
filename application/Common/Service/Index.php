@@ -63,19 +63,19 @@ class Common_Service_Index extends Common_Service_BasicAction
         $metaHelper = $this->metaHelper;
 
         $layout = $metaHelper->getListLayout($meta);
-        if(null != $config['data']['list'])
-        {
+        if (null != $config['data']['list']) {
             $layout = array_intersect($layout, (array)$config['data']['list']);
         }
-        
+
         // 设置视图
         $view = array(
             'class' => $config['view']['class'],
             'data' => get_defined_vars(),
         );
-        if($config['view']['display'])
-        {
-            $config['this']->loadView($view)->display();
+        if ($config['view']['display']) {
+            $this->view
+                ->setDataList($view['data'])
+                ->setProcesser($view['class']);
         }
         
         return array(

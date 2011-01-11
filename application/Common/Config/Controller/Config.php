@@ -43,12 +43,12 @@ class Common_Config_Controller_Config extends Common_ActionController
             ->execute()
             ->toArray();
         if (empty($formData)) {
-           return $this->setRedirectView($this->_lang->t('MSG_NO_RECORD'));
+           return $this->view->setRedirectView($this->_lang->t('MSG_NO_RECORD'));
         }
         
         // 构建域分组
         $groupResult = $metaHelper
-            ->getQueryBySet(array(
+            ->getQueryByAsc(array(
                 'namespace' => 'Common',
                 'module' => 'Config',
                 'controller' => 'Group',
@@ -91,7 +91,7 @@ class Common_Config_Controller_Config extends Common_ActionController
             $data[$row['form_name']] = $row['value'];
         }
         $meta = $metaHelper
-            ->getMetadataBySet(array(
+            ->getMetadataByAsc(array(
                 'namespace' => 'Common',
                 'module' => 'Config',
                 'controller' => 'Temp',
@@ -114,7 +114,7 @@ class Common_Config_Controller_Config extends Common_ActionController
             Qwin_Helper_File::writeAsArray($globalConfig, $path);
             
             $url = $this->url->createUrl($this->_asc, array('action' => 'Index'));
-            $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+            $this->view->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }
     
@@ -132,7 +132,7 @@ class Common_Config_Controller_Config extends Common_ActionController
 
         // 分组的数据
         $data = $metaHelper
-            ->getQueryBySet(array(
+            ->getQueryByAsc(array(
                 'namespace' => 'Common',
                 'module' => 'Config',
                 'controller' => 'Group',

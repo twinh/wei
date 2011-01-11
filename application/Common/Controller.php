@@ -88,21 +88,26 @@ class Common_Controller extends Qwin_Application_Controller
     public $metaHelper;
 
     /**
+     * 视图对象
+     * @var Qwin_Application_View
+     */
+    public $view;
+
+    /**
      * 初始化各类和数据
      */
     public function __construct($option = null)
     {
-        if(false === $option)
-        {
+        if (false === $option) {
             return true;
         }
-        $ini = Qwin::run('-ini');
-        $this->request = Qwin::run('-request');
-        $this->url = Qwin::run('-url');
-        $this->config = Qwin::run('-config');
-        $this->_asc = $this->config['asc'];
-        $this->session = Qwin::run('-session');
-        $this->member = $this->session->get('member');
+        $this->request  = Qwin::run('-request');
+        $this->url      = Qwin::run('-url');
+        $this->config   = Qwin::run('-config');
+        $this->_asc     = $this->config['asc'];
+        $this->session  = Qwin::run('-session');
+        $this->member   = $this->session->get('member');
+        $this->view     = Qwin::run('-view');
 
         // 元数据管理助手,负责元数据的获取和转换
         $this->metaHelper = Qwin::run('Qwin_Application_Metadata');
@@ -118,7 +123,7 @@ class Common_Controller extends Qwin_Application_Controller
         }
         Qwin::addMap('-lang', $languageClass);
 
-        $this->_meta = $this->metaHelper->getMetadataBySet($this->config['asc']);
+        $this->_meta = $this->metaHelper->getMetadataByAsc($this->config['asc']);
 
         $this->_viewOption['class'] = 'Common_View';
 
@@ -148,7 +153,7 @@ class Common_Controller extends Qwin_Application_Controller
                 'controller' => 'Member',
             );
             $result = $metaHelper
-                ->getQueryBySet($asc, array('db', 'view'))
+                ->getQueryByAsc($asc, array('db', 'view'))
                 ->where('username = ?', 'guest')
                 ->fetchOne();
             $member = $result->toArray();
@@ -190,20 +195,12 @@ class Common_Controller extends Qwin_Application_Controller
                 )));
         } else {
             $this
-                ->setRedirectView($this->_lang->t('MSG_PERMISSION_NOT_ENOUGH'))
+                ->view->setRedirectView($this->_lang->t('MSG_PERMISSION_NOT_ENOUGH'))
                 ->loadView()
                 ->display();
             exit;
         }
         return false;
-    }
-
-    public function setRedirectView($message, $method = null)
-    {
-        $this->_view['class'] = 'Common_View_Redirect';
-        $this->_view['data']['message'] = $message;
-        $this->_view['data']['method'] = $method;
-        return $this;
     }
 
     /**
@@ -229,7 +226,7 @@ class Common_Controller extends Qwin_Application_Controller
                 . $this->metaHelper->format($this->_lang->t($result->message), $result->param);
         if($dispaly)
         {
-            $this->setRedirectView($message);
+            $this->view->setRedirectView($message);
         }
         return $message;
     }

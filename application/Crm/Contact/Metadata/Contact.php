@@ -32,7 +32,7 @@ class Crm_Contact_Metadata_Contact extends Common_Metadata
             'field' => array(
                 'last_name' => array(
                     'attr' => array(
-                        'isList' => 1,
+                        'isView' => 0,
                     ),
                     'validator' => array(
                         'rule' => array(
@@ -41,7 +41,19 @@ class Crm_Contact_Metadata_Contact extends Common_Metadata
                     ),
                 ),
                 'first_name' => array(
-                    
+                    'attr' => array(
+                        'isView' => 0,
+                    ),
+                ),
+                'full_name' => array(
+                    'form' => array(
+                        '_type' => 'hidden',
+                    ),
+                    'attr' => array(
+                        'isList' => 1,
+                        'isView' => 1,
+                        'isDbField' => 0,
+                    ),
                 ),
                 'nickname' => array(
                     
@@ -248,22 +260,35 @@ class Crm_Contact_Metadata_Contact extends Common_Metadata
 
             ),
             'db' => array(
-                'table' => 'contact2',
+                'table' => 'contact',
                 'order' => array(
                     array('date_created', 'DESC'),
+                ),
+                'defaultWhere' => array(
+                    array('is_deleted', 0),
                 ),
             ),
             'page' => array(
                 'title' => 'LBL_MODULE_CONTACT',
                 'icon' => 'address',
                 'tableLayout' => 1,
+                'useRecycleBin' => true,
             ),
         ));
     }
 
-    public function convertListLastName($value, $name, $data, $dataCopy)
+    public function convertListFullName($value, $name, $data, $dataCopy)
     {
-        
-        return $value . $dataCopy['first_name'];
+        return $dataCopy['last_name'] . $dataCopy['first_name'];
+    }
+
+    public function convertViewFullName($value, $name, $data, $dataCopy)
+    {
+        return $dataCopy['last_name'] . $dataCopy['first_name'];
+    }
+
+    public function getMainFieldValue($data)
+    {
+        return $data['last_name'] . $data['first_name'];
     }
 }

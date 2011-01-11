@@ -35,7 +35,6 @@ class Common_Management_Controller_ApplicationStructure extends Common_Controlle
         );
     }
 
-
     /**
      * 更新应用目录结构缓存文件,权限分配页面可以根据应用目录的结构进行权限分配
      */
@@ -65,7 +64,7 @@ class Common_Management_Controller_ApplicationStructure extends Common_Controlle
         Qwin_Helper_File::writeAsArray($action, QWIN_ROOT_PATH . '/cache/php/application-structure.php');
 
         $url = Qwin::run('-url')->createUrl($this->_asc, array('action' => 'Index'));
-        $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+        $this->view->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
     }
 
     public function validateNamespace($value, $name, $data)

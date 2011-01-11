@@ -28,7 +28,7 @@
  * @todo        是否需要分为几个对象 $tihs->tag, $this->layout, $this->element...
  */
 
-abstract class Qwin_Application_View extends Qwin_Metadata_Abstract
+class Qwin_Application_View extends Qwin_Metadata_Abstract
 {
     /**
      * 变量数组
@@ -47,6 +47,18 @@ abstract class Qwin_Application_View extends Qwin_Metadata_Abstract
      * @var string
      */
     protected $_layout;
+
+    /**
+     * 视图处理器类
+     * @var Qwin_Application_View_Processer
+     */
+    protected $_processer;
+
+    /**
+     * 视图是否已展示
+     * @var boolen
+     */
+    protected $_displayed = false;
 
     /**
      * 标签,表示变量标识符,用于布局和视图元素的路径中
@@ -73,27 +85,12 @@ abstract class Qwin_Application_View extends Qwin_Metadata_Abstract
      * @param array $list 变量组,键名为变量名称,值为变量的值
      * @return object 当前对象
      */
-    public function setVarList(array $list)
+    public function setDataList(array $list)
     {
-        foreach($list as $key => $var)
-        {
-            $this->_data[$key] = $var;
-        }
+        $this->_data += $list;
         return $this;
     }
-
-    /**
-     * 设置变量数组
-     *
-     * @param array $data 变量数组
-     * @return Qwin_Application_View 当前对象
-     */
-    public function mergeVarData(array $data)
-    {
-        $this->_data += $data;
-        return $this;
-    }
-
+    
     /**
      * 设置一个变量
      *
@@ -101,7 +98,7 @@ abstract class Qwin_Application_View extends Qwin_Metadata_Abstract
      * @param mixed $value 变量的值
      * @return object 当前对象
      */
-    public function setVar($name, $value)
+    public function setData($name, $value)
     {
         $this->_data[$name] = $value;
         return $this;
@@ -113,7 +110,7 @@ abstract class Qwin_Application_View extends Qwin_Metadata_Abstract
      * @param string $name 变量名称
      * @return object 当前对象
      */
-    public function unsetVar($name)
+    public function unsetData($name)
     {
         if (isset($this->_data[$name])) {
             unset($this->_data[$name]);
@@ -127,7 +124,7 @@ abstract class Qwin_Application_View extends Qwin_Metadata_Abstract
      * @param string $name
      * @return mixed 变量的值
      */
-    public function getVar($name)
+    public function getData($name)
     {
         return isset($this->_data[$name]) ? $this->_data[$name] : null;
     }
@@ -137,7 +134,7 @@ abstract class Qwin_Application_View extends Qwin_Metadata_Abstract
      *
      * @return Qwin_Application_View 当前对象
      */
-    public function clearVar()
+    public function clearData()
     {
         $this->_data = array();
         return $this;
@@ -171,7 +168,6 @@ abstract class Qwin_Application_View extends Qwin_Metadata_Abstract
         $this->_element[$name] = $element;
         return $this;
     }
-
 
     /**
      * 获取未处理的视图元素
@@ -273,6 +269,10 @@ abstract class Qwin_Application_View extends Qwin_Metadata_Abstract
      */
     public function preDisplay()
     {
+        // 将视图交给处理器处理
+        if (isset($this->_processer)) {
+            $process = Qwin::run($this->_processer, $this);
+        }
         return $this;
     }
 
@@ -283,6 +283,9 @@ abstract class Qwin_Application_View extends Qwin_Metadata_Abstract
      */
     public function display()
     {
+        if ($this->_displayed) {
+            return false;
+        }
         return $this;
     }
 
@@ -300,7 +303,7 @@ abstract class Qwin_Application_View extends Qwin_Metadata_Abstract
      * 获取一个标签的值
      *
      * @param string $name 标签名称
-     * @return 标签的值
+     * @return string 标签的值
      */
     public function getTag($name)
     {
@@ -378,11 +381,42 @@ abstract class Qwin_Application_View extends Qwin_Metadata_Abstract
      * 根据标签设置将标签路径解码为真实路径
      *
      * @param string $path 路径
-     * @return 真实路径
+     * @return string 真实路径
      */
     public function decodePath($path)
     {
         return str_replace($this->_tagName, $this->_tag, $path);
+    }
+
+    /**
+     * 设置视图处理器类
+     *
+     * @param string $class 处理器类名
+     */
+    public function setProcesser($class)
+    {
+        $this->_processer = $class;
+    }
+
+    /**
+     * 设置视图已展示
+     *
+     * @return Qwin_Application_View 当前对象
+     */
+    public function setDisplayed()
+    {
+        $this->_displayed = true;
+        return $this;
+    }
+
+    /**
+     * 视图是否已展示
+     *
+     * @return boolen
+     */
+    public function isDisplayed()
+    {
+        return $this->_displayed;
     }
 
     /**

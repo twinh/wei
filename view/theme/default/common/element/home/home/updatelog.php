@@ -63,10 +63,9 @@
                 <li>[应用]更新配置模块,表单域和分组允许启用和禁用</li>
                 <li>[框架]调整应用目录结构配置,进行标准化控制</li>
             </ul>
-            <li class="ui-updatelog-preview">v1.0.2 预计更新内容</li>
+            <li class="ui-updatelog-preview">v1.0.2 2011.01.10</li>
             <ul>
-                <li>[应用]回收站</li>
-                <li>[应用]模块互联</li>
+                <li>[应用]增加回收站模块</li>
             </ul>
         </ul>
     </div>

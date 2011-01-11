@@ -112,12 +112,12 @@ class Common_Management_Controller_Namespace extends Common_Controller
                     . '<br />'
                     . $this->_lang->t('MSG_ERROR_MSG')
                     . $this->_meta->format($this->_lang->t($validateResult->message), $validateResult->param);
-                return $this->setRedirectView($message);
+                return $this->view->setRedirectView($message);
             }
             mkdir($this->_path . '/' . $_POST['namespace']);
 
             $url = Qwin::run('-url')->createUrl($this->_asc, array('action' => 'Index'));
-            return $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+            return $this->view->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }
 
@@ -129,19 +129,19 @@ class Common_Management_Controller_Namespace extends Common_Controller
         // 不存在的目录
         if(!is_dir($path))
         {
-            return $this->setRedirectView($this->_lang->t('MSG_NAMESAPCE_NOT_EXISTS'));
+            return $this->view->setRedirectView($this->_lang->t('MSG_NAMESAPCE_NOT_EXISTS'));
         }
 
         // 目录不为空
         $file = scandir($path);
         if(array('.', '..') != $file)
         {
-            return $this->setRedirectView($this->_lang->t('MSG_NAMESPACE_NOT_EMPTY'));
+            return $this->view->setRedirectView($this->_lang->t('MSG_NAMESPACE_NOT_EMPTY'));
         }
 
         // 删除目录,跳转回列表页
         rmdir($path);
         $url = Qwin::run('-url')->createUrl($this->_asc, array('action' => 'Index'));
-        return $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+        return $this->view->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
     }
 }

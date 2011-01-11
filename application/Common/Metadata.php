@@ -46,6 +46,7 @@ class Common_Metadata extends Qwin_Metadata
 
     public function  __construct()
     {
+        $this->url = Qwin::run('-url');
         $this->metaHelper = Qwin::run('Qwin_Application_Metadata');
     }
 
@@ -55,7 +56,7 @@ class Common_Metadata extends Qwin_Metadata
      * @return array 配置
      * @todo 应该允许自定义set
      */
-    public function getSetFromClass()
+    public function getAscFromClass()
     {
         $config = Qwin::run('-config');
         return $config['asc'];
@@ -258,6 +259,22 @@ class Common_Metadata extends Qwin_Metadata
                 ),
                 'form' => array(
                     '_type' => 'text',
+                    '_widgetDetail' => array(
+                        array(
+                            array('Qwin_Widget_JQuery_PopupGrid', 'render'),
+                            'LBL_MODULE_MEMBER',
+                            array(
+                                'namespace' => 'Common',
+                                'module' => 'Member',
+                                'controller' => 'Member',
+                                'qwList' => 'id,group_id,username,email',
+                            ),
+                            array(
+                                'username',
+                                'id'
+                            ),
+                        ),
+                    ),
                 ),
                 'attr' => array(
                     'isLink' => 0,
@@ -325,19 +342,65 @@ class Common_Metadata extends Qwin_Metadata
      * @param array $data 已转换过的当前记录的值
      * @param array $cpoyData 未转换过的当前记录的值
      * @return string 当前域的新值
-     * @todo 简化,重利用
+     * @todo 简化,重利用,是否需要用微件的形式
      */
     public function convertListOperation($value, $name, $data, $dataCopy)
     {
         $primaryKey = $this->db['primaryKey'];
         $url = Qwin::run('-url');
         $lang = Qwin::run('-lang');
-        $set = $this->getSetFromClass();
-        $data  = Qwin_Helper_Html::jQueryButton($url->createUrl($set, array('action' => 'Edit', $primaryKey => $dataCopy[$primaryKey])), $lang->t('LBL_ACTION_EDIT'), 'ui-icon-tag')
-              . Qwin_Helper_Html::jQueryButton($url->createUrl($set, array('action' => 'View', $primaryKey => $dataCopy[$primaryKey])), $lang->t('LBL_ACTION_VIEW'), 'ui-icon-lightbulb')
-              . Qwin_Helper_Html::jQueryButton($url->createUrl($set, array('action' => 'Add', $primaryKey => $dataCopy[$primaryKey])), $lang->t('LBL_ACTION_COPY'), 'ui-icon-transferthick-e-w')
-              . Qwin_Helper_Html::jQueryButton('javascript:if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE)){window.location=\'' . $url->createUrl($set, array('action' => 'Delete', $primaryKey => $dataCopy[$primaryKey])) . '\';}', $lang->t('LBL_ACTION_DELETE'), 'ui-icon-closethick');
-        return $data;
+        $asc = $this->getAscFromClass();
+        if (!isset($this->controller)) {
+            $this->controller = Qwin::run($this->metaHelper->getClassName('Controller', $asc));
+            $this->forbiddenAction = $this->controller->getForbiddenAction();
+        }
+        // 不为禁用的行为设置链接
+        $operation = array();
+        if (!in_array('edit', $this->forbiddenAction)) {
+            $operation['edit'] = array(
+                'url'   => $url->createUrl($asc, array('action' => 'Edit', $primaryKey => $dataCopy[$primaryKey])),
+                'title' => $lang->t('LBL_ACTION_EDIT'),
+                'icon'  => 'ui-icon-tag',
+            );
+        }
+        if (!in_array('view', $this->forbiddenAction)) {
+            $operation['view'] = array(
+                'url'   => $url->createUrl($asc, array('action' => 'View', $primaryKey => $dataCopy[$primaryKey])),
+                'title' => $lang->t('LBL_ACTION_VIEW'),
+                'icon'  => 'ui-icon-lightbulb',
+            );
+        }
+        if (!in_array('add', $this->forbiddenAction)) {
+            $operation['add'] = array(
+                'url'   => $url->createUrl($asc, array('action' => 'Add', $primaryKey => $dataCopy[$primaryKey])),
+                'title' => $lang->t('LBL_ACTION_COPY'),
+                'icon'  => 'ui-icon-transferthick-e-w',
+            );
+        }
+        if (!in_array('delete', $this->forbiddenAction)) {
+            if (!isset($this->page['useRecycleBin'])) {
+                $icon = 'ui-icon-close';
+                $jsLang = 'MSG_CONFIRM_TO_DELETE';
+            } else {
+                $icon = 'ui-icon-trash';
+                $jsLang = 'MSG_CONFIRM_TO_DELETE_TO_TRASH';
+            }
+            $operation['delete'] = array(
+                'url'   => 'javascript:if(confirm(Qwin.Lang.' . $jsLang . ')){window.location=\'' . $url->createUrl($asc, array('action' => 'Delete', $primaryKey => $dataCopy[$primaryKey])) . '\';}',
+                'title' => $lang->t('LBL_ACTION_DELETE'),
+                'icon'  => $icon,
+            );
+            
+        }
+        if (5 != func_num_args()) {
+            $data = '';
+            foreach ($operation as $row) {
+                $data .= Qwin_Helper_Html::jQueryButton($row['url'], $row['title'], $row['icon']);
+            }
+            return $data;
+        } else {
+            return $operation;
+        }
     }
 
     /**
@@ -445,9 +508,9 @@ class Common_Metadata extends Qwin_Metadata
     public function setIsLink($value, $name, $data, $dataCopy, $action)
     {
         if (in_array($action, $this->_linkAction)) {
-            $set = $this->getSetFromClass();
+            $asc = $this->getAscFromClass();
             !isset($this->url) && $this->url = Qwin::run('-url');
-            $value = '<a href="' . $this->url->createUrl($set, array('action' => 'Index', 'searchField' => $name, 'searchValue' => $dataCopy[$name])) . '">' . $value . '</a>';
+            $value = '<a href="' . $this->url->createUrl($asc, array('action' => 'Index', 'searchField' => $name, 'searchValue' => $dataCopy[$name])) . '">' . $value . '</a>';
         }
         return $value;
     }

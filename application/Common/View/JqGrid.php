@@ -25,27 +25,19 @@
  * @since       2010-09-17 18:15:51
  */
 
-class Common_View_JqGrid extends Common_View
-{
-    public function __construct()
-    {
-        parent::__construct();
-        $this->setElement('content', array(
-            '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>/index<suffix>',
-        ));
-    }
-    
-    public function preDisplay()
+class Common_View_JqGrid extends Qwin_Application_View_Processer
+{   
+    public function __construct(Qwin_Application_View $view)
     {
         // 初始变量,方便调用
-        $primaryKey = $this->primaryKey;
-        $meta = $this->meta;
-        $metaHepler = $this->metaHelper;
+        $primaryKey = $view->primaryKey;
+        $meta = $view->meta;
+        $metaHepler = $view->metaHelper;
         $request = Qwin::run('-request');
         $lang = Qwin::run('-lang');
         $config = Qwin::run('-config');
         $asc = $config['asc'];
-        $customLink = $this->customLink;
+        $customLink = $view->customLink;
 
         // 获取json数据的链接
         $jsonUrl = str_replace('\'', '\\\'', '?' . Qwin::run('-url')->arrayKey2Url(array('json' => '1') + $_GET));
@@ -53,7 +45,7 @@ class Common_View_JqGrid extends Common_View
         // 获取栏数据
         $columnName = array();
         $columnSetting = array();
-        foreach($this->layout as $field)
+        foreach($view->layout as $field)
         {
             if(is_array($field))
             {
@@ -99,11 +91,11 @@ class Common_View_JqGrid extends Common_View
         $rowNum = intval($request->g($controller->limitName));
         if($rowNum <= 0)
         {
-            $rowNum = $this->meta['db']['limit'];
+            $rowNum = $view->meta['db']['limit'];
         // 最多同时读取500条记录
         } elseif($rowNum > 500) {
             $rowNum = 500;
         }
-        $this->_data = get_defined_vars() + $this->_data;
+        $view->setDataList(get_defined_vars());
     }
 }

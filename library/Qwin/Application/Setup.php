@@ -48,7 +48,7 @@ class Qwin_Application_Setup
 
     /**
      * 控制器的实例化对象
-     * @var object
+     * @var Qwin_Application_Controller
      */
     protected $_controller;
 
@@ -63,6 +63,12 @@ class Qwin_Application_Setup
      * @var Qwin_Request
      */
     protected $request;
+
+    /**
+     * 视图对象
+     * @var Qwin_Application_View
+     */
+    public $view;
 
     /**
      * 解析配置,初始化并构建程序
@@ -125,11 +131,26 @@ class Qwin_Application_Setup
 
         /**
          * 加载命名空间
-         * 如果是配置文件中不允许的命名空间,则抛出异常
+         * 如果是配置文件中不允许的命名空间,则提示错误
          */
         if (!in_array($asc['namespace'], $config['allowedNamespace']->toArray())) {
             exit('The namespace ' . $asc['namespace'] . ' is not allowed.');
         }
+
+        /**
+         * 加载视图
+         */
+        $viewClass = $asc['namespace'] . '_View';
+        $this->view = Qwin::run($viewClass);
+        if (null == $this->view) {
+            if ($asc['namespace'] != $config['defaultAsc']['namespace']) {
+                $viewClass = $config['defaultAsc']['namespace'] . '_View';
+            } else {
+                $viewClass = 'Qwin_Application_View';
+            }
+            $this->view = Qwin::run($viewClass);
+        }
+        Qwin::addMap('-view', $viewClass);
 
         /**
          * 初始命名空间类,并加入类管理器中
@@ -168,7 +189,7 @@ class Qwin_Application_Setup
 
         // 执行指定的行为
         $action = 'action' . $asc['action'];
-        if (method_exists($this->_controller, $action)) {
+        if (method_exists($this->_controller, $action) && !in_array(strtolower($asc['action']), $this->_controller->getForbiddenAction())) {
             call_user_func_array(
                 array($this->_controller, $action),
                 array(&$asc, &$this->config)
@@ -178,12 +199,13 @@ class Qwin_Application_Setup
         }
 
         // 加载视图
-        if (method_exists($this->_controller, 'loadView')) {
+        $this->view->display();
+        /*if (method_exists($this->_controller, 'loadView')) {
             $view = $this->_controller->loadView();
             if (method_exists($view, 'display')) {
                 $view->display();
             }
-        }
+        }*/
         return true;
     }
 
@@ -191,12 +213,12 @@ class Qwin_Application_Setup
      * 获取标准的类名
      *
      * @param string $addition 附加的字符串
-     * @param array $set 配置数组
+     * @param array $asc 配置数组
      * @return string 类名
      */
-    public function getClassName($addition, $set)
+    public function getClassName($addition, $asc)
     {
-        return $set['namespace'] . '_' . $set['module'] . '_' . $addition . '_' . $set['controller'];
+        return $asc['namespace'] . '_' . $asc['module'] . '_' . $addition . '_' . $asc['controller'];
     }
 
     /**

@@ -51,9 +51,14 @@ class Common_Category_Metadata_Category extends Common_Metadata
                     'form' => array(
                         'name' => 'name',
                     ),
+                    'attr' => array(
+                        'isList' => 1,
+                    ),
                     'validator' => array(
-                        'required',
-                        'maxlength,40',
+                        'rule' => array(
+                            'required' => true,
+                            'maxlength' => 40,
+                        ),
                     ),
                 ),
                 'image' => array(
@@ -63,9 +68,6 @@ class Common_Category_Metadata_Category extends Common_Metadata
                         ),
                         'name' => 'image',
                     ),
-                    'attr' => array(
-                        'isList' => 0,
-                    ),
                 ),
                 'image_2' => array(
                     'form' => array(
@@ -74,30 +76,24 @@ class Common_Category_Metadata_Category extends Common_Metadata
                         ),
                         'name' => 'image_2',
                     ),
-                    'attr' => array(
-                        'isList' => 0,
-                    ),
                 ),
                 'order' => array(
                     'form' => array(
                         'name' => 'order',
+                    ),
+                    'attr' => array(
+                        'isList' => 1,
                     ),
                 ),
                 'to_url' => array(
                     'form' => array(
                         'name' => 'to_url',
                     ),
-                    'attr' => array(
-                        'isList' => 0,
-                    ),
                 ),
                 'description' => array(
                     'form' => array(
                         '_type' => 'textarea',
                         'name' => 'description',
-                    ),
-                    'attr' => array(
-                        'isList' => 0,
                     ),
                 ),
             ),
@@ -129,7 +125,7 @@ class Common_Category_Metadata_Category extends Common_Metadata
         $primaryKey = $this->db['primaryKey'];
         $url = Qwin::run('-url');
         $lang = Qwin::run('-lang');
-        $set = $this->getSetFromClass();
+        $set = $this->getAscFromClass();
         $link = $url->createUrl($set, array('action' => 'Add', '_data[parent_id]' => $data[$primaryKey]));
         $html = Qwin_Helper_Html::jQueryButton($link, $lang->t('LBL_ACTION_ADD_SUBCATEGORY'), 'ui-icon-plusthick')
               . parent::convertListOperation($value, $name, $data, $copyData);

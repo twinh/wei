@@ -73,7 +73,7 @@ class Common_Service_Insert extends Common_Service_BasicAction
         // 初始化常用的变量
         $meta = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
-        $query = $metaHelper->getQueryBySet($this->_asc, 'db');
+        $query = $metaHelper->getQueryByAsc($this->_asc, 'db');
         Qwin::run('Qwin_Class_Extension')
             ->setNamespace('validator')
             ->addClass('Qwin_Validator_JQuery');
@@ -93,7 +93,7 @@ class Common_Service_Insert extends Common_Service_BasicAction
                 );
                 if($config['view']['display'])
                 {
-                    $config['this']->setRedirectView($return['message']);
+                    $this->view->setRedirectView($return['message']);
                 }
                 return $return;
             }
@@ -143,7 +143,7 @@ class Common_Service_Insert extends Common_Service_BasicAction
         );
         if($config['view']['display'])
         {
-            $config['this']->setRedirectView($return['message'], $url);
+            $this->view->setRedirectView($return['message'], $url);
         }
         return $return;
     }

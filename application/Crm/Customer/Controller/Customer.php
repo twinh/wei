@@ -27,10 +27,4 @@
 
 class Crm_Customer_Controller_Customer extends Common_ActionController
 {
-    public function actionLead()
-    {
-        $_GET['searchField'] = 'state';
-        $_GET['searchValue'] = 1;
-        parent::actionIndex();
-    }
 }

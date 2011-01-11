@@ -48,7 +48,7 @@ class Common_Member_Controller_Member extends Common_ActionController
     {
         if('guest' == $this->request->g('id') || 'guest' == $this->request->p('id'))
         {
-            return $this->setRedirectView($this->_lang->t('MSG_GUEST_NOT_ALLOW_EDIT_PASSWORD'));
+            return $this->view->setRedirectView($this->_lang->t('MSG_GUEST_NOT_ALLOW_EDIT_PASSWORD'));
         }
         $this->_meta = Qwin_Metadata_Manager::get('Common_Member_Metadata_Password');
 
@@ -108,7 +108,7 @@ class Common_Member_Controller_Member extends Common_ActionController
         $result = array_intersect($idList, $banIdList);
         if(!empty($result))
         {
-            return $this->setRedirectView($this->_lang->t('MSG_NOT_ALLOW_DELETE'));
+            return $this->view->setRedirectView($this->_lang->t('MSG_NOT_ALLOW_DELETE'));
         }
         parent::actionDelete();
     }
@@ -130,7 +130,7 @@ class Common_Member_Controller_Member extends Common_ActionController
 
     public function isUsernameExists($username)
     {
-        $query = $this->_meta->getQueryBySet($this->_asc);
+        $query = $this->_meta->getQueryByAsc($this->_asc);
         $result = $query->where('username = ?', $username)
             ->fetchOne();
         if(false != $result)
@@ -145,7 +145,7 @@ class Common_Member_Controller_Member extends Common_ActionController
         if('EditPassword' == $action)
         {
             $url = Qwin::run('-url')->createUrl(array('module' => 'Member', 'controller' => 'Log', 'action' => 'Logout'));
-            $this->setRedirectView('LOGIN', $url)
+            $this->view->setRedirectView('LOGIN', $url)
                     ->loadView()
                     ->display();
             exit();

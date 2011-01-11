@@ -32,6 +32,7 @@ class Common_ActionController extends Common_Controller
 {
     public $pageName = 'page';
     public $limitName = 'rowNum';
+    public $defaultAction = 'Index';
 
     /**
      * 控制器默认首页,Common命名空间的默认首页是数据列表
@@ -40,24 +41,18 @@ class Common_ActionController extends Common_Controller
      */
     public function actionIndex()
     {
-        
         if (null == $this->request->g('json')) {
-            /**
-             * @see Common_Service_Index $_config
-             */
-            $config = array(
+            $service = new Common_Service_Index();
+            return $service->process(array(
                 'set' => $this->_asc,
                 'data' => array(
                     'list' => $this->metaHelper->getUrlListField(),
                 ),
                 'this' => $this,
-            );
-            return Qwin::run('Common_Service_Index')->process($config);
+            ));
         } else {
-            /**
-             * @see Common_Service_List $_config
-             */
-            $config = array(
+            $service = new Common_Service_List();
+            return $service->process(array(
                 'set' => $this->_asc,
                 'data' => array(
                     'list' => $this->metaHelper->getUrlListField(),
@@ -73,8 +68,7 @@ class Common_ActionController extends Common_Controller
                     ),
                 ),
                 'this' => $this,
-            );
-            return Qwin::run('Common_Service_List')->process($config);
+            ));
         }
     }
 

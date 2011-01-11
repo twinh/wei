@@ -85,6 +85,14 @@ class Common_Language_Zhcn extends Common_Language
             'LBL_FIELD_VALUE' => '值',
             'LBL_FIELD_UNIQUE' => '唯一标识',
             'LBL_FIELD_STATUS' => '状态',
+            'LBL_FIELD_BIRTHDAY' => '生日',
+            'LBL_FIELD_EMAIL' => '邮箱',
+            'LBL_FIELD_FULL_NAME' => '名称',
+            'LBL_FIELD_LAST_NAME' => '姓',
+            'LBL_FIELD_FIRST_NAME' => '名',
+            'LBL_FIELD_NICKNAME' => '昵称',
+            'LBL_FIELD_PHOTO' => '照片',
+            'LBL_FIELD_SEX' => '性别',
 
             // 分组
             'LBL_GROUP_BASIC_DATA' => '基本资料',
@@ -93,7 +101,8 @@ class Common_Language_Zhcn extends Common_Language
             // 错误信息
             'MSG_CHOOSE_ONLY_ONE_ROW' => '请只选择一行!',
             'MSG_CHOOSE_AT_LEASE_ONE_ROW' => '请选择至少一行!',
-            'MSG_CONFIRM_TO_DELETE' => '删除后将无法还原,确认?',
+            'MSG_CONFIRM_TO_DELETE' => '记录删除后将无法还原,确认?',
+            'MSG_CONFIRM_TO_DELETE_TO_TRASH' => '记录将移入回收站,确认?',
             'MSG_ERROR_FIELD' => '错误域: ',
             'MSG_ERROR_MSG' => '错误信息: ',
             'MSG_NO_RECORD' => '该记录不存在或已经被删除.',
@@ -120,20 +129,6 @@ class Common_Language_Zhcn extends Common_Language
             'MSG_NOT_ALLOW_DELETE' => '不允许删除该用户.',
             'MSG_FILE_NOT_EXISTS' => '文件不存在',
             'MSG_PERMISSION_NOT_ENOUGH' => '您不够权限查看或操作该页面.',
-            'LBL_FIELD_CONTACT_ID' => '联系人编号',
-            'LBL_FIELD_FIRST_NAME' => '名称',
-            'LBL_FIELD_LAST_NAME' => '姓',
-            'LBL_FIELD_NICKNAME' => '昵称',
-            'LBL_FIELD_PHOTO' => '照片',
-            'LBL_FIELD_RELATION' => '关系',
-            'LBL_FIELD_BIRTHDAY' => '生日',
-            'LBL_FIELD_EMAIL' => '邮件',
-            'LBL_FIELD_TELEPHONE' => '电话',
-            'LBL_FIELD_MOBILE' => '手机',
-            'LBL_FIELD_SEX' => '性别',
-            'LBL_FIELD_HOMEPAGE' => '主页',
-            'LBL_FIELD_ADDRESS' => '地址',
-            'LBL_FIELD_RELATED_MODULE' => '相关模块',
             'LBL_FIELD_ORDER' => '顺序',
             
             'MSG_VALIDATOR_REQUIRED' => '该项是必填的.',
@@ -183,6 +178,8 @@ class Common_Language_Zhcn extends Common_Language
 
             'LBL_LAST_VIEWED_ITEM' => '最近查看项',
             'MSG_NO_LAST_VIEWED_LOG' => '暂时没有查看记录',
+
+            'LBL_MODULE_RECYCLEBIN' => '回收站',
         );
     }
 }

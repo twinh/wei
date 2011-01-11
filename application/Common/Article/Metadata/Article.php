@@ -310,7 +310,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
             ),
             'db' => array(
                 'table' => 'article',
-                'nameKey' => array(
+                'nameField' => array(
                     'title',
                 ),
                 'order' => array(

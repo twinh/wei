@@ -55,6 +55,10 @@ jQuery(function($){
     $.jgrid.no_legacy_api = true;
     $.jgrid.useJSON = true;
     var primaryKey = '<?php echo $primaryKey?>';
+	
+	Qwin.App = {};
+	Qwin.App.primaryKey = primaryKey;
+	
     $("#ui-jqgrid-table").jqGrid({
         url              : '<?php echo $jsonUrl?>',
         datatype         : 'json',
@@ -110,7 +114,7 @@ jQuery(function($){
     });
 	
 	// 页眉工具栏
-    $("#t_ui-jqgrid-table").append($('#custom-jqgird-toolbar').html());
+    $('#custom-jqgird-toolbar').appendTo("#t_ui-jqgrid-table").removeClass('ui-helper-hidden');
 
     $('#t_ui-jqgrid-table a').qui({
         click: true,
@@ -118,8 +122,7 @@ jQuery(function($){
     });
 
     // 点击删除按钮
-    // TODO 提示更多信息,包括id号,数目等
-    $('a.action-delete').click(function(){
+    $('#action-delete').click(function(){
         var keyList = new Array(),
             rowList = $('#ui-jqgrid-table').jqGrid('getGridParam','selarrrow');
         if(rowList.length == 0)
@@ -141,7 +144,5 @@ jQuery(function($){
         }
         return false;
     });
-	
-	$('#ui-jqgrid-table tr:nth-child(1) td:nth-child(2)').addClass("highlight");
 });
 </script>

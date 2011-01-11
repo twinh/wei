@@ -38,7 +38,6 @@ class Qwin_Metadata_Element_Db extends Qwin_Metadata_Element_Abstract
             'type' => 'sql',
             'table' => null,
             'primaryKey' => 'id',
-            'nameKey' => array(),
             'offset' => 0,
             'limit' => 10,
             'order' => array(),
