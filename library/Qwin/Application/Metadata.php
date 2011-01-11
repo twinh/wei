@@ -151,7 +151,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
      *
      * @param array $asc 元数据配置
      */
-    public function getQueryBySet($asc, $type = array(), $name = array())
+    public function getQueryByAsc($asc, $type = array(), $name = array())
     {
         $metaClass  = $this->getClassName('Metadata', $asc);
         $modelClass = $this->getClassName('Model', $asc);
@@ -173,7 +173,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
     {
         // 未定义模型,则初始化关联模型
         if (null == $model) {
-            $asc = $meta->getSetFromClass();
+            $asc = $meta->getAscFromClass();
             $modelClass = $this->getClassName('Model', $asc);
             $model = Qwin::run($modelClass);
         } else {
@@ -196,6 +196,10 @@ class Qwin_Application_Metadata extends Qwin_Metadata
         $this->metadataToModel($meta, $model);
         $query = Doctrine_Query::create()->from($modelClass);
 
+        // 增加默认查询
+        if (!empty($meta['db']['defaultWhere'])) {
+            $this->addWhereToQuery($meta, $query, $meta['db']['defaultWhere']);
+        }
 
         // 关联模型的转换
         foreach ($joinModel as $joinModelName) {
@@ -371,9 +375,9 @@ class Qwin_Application_Metadata extends Qwin_Metadata
      * @param string $delimiter 分隔符
      * @return array
      */
-    public function getUrlListField($listName = 'listName', $delimiter = ',')
+    public function getUrlListField($listName = 'qwList', $delimiter = ',')
     {
-        $request = Qwin::run('Qwin_Request');
+        $request = Qwin::run('-request');
         $list = $request->g($listName);
         if (null != $list) {
             $list = explode($delimiter, $list);
@@ -398,7 +402,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
      */
     public function getUrlPrimaryKeyValue(array $asc)
     {
-        $request = Qwin::run('Qwin_Request');
+        $request = Qwin::run('-request');
         $primaryKey = $this->getPrimaryKeyName($asc);
         return $request->g($primaryKey);
     }
@@ -419,7 +423,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
      * @param array $asc 应用结构配置
      * @return Application_Metadata
      */
-    public function getMetadataBySet($asc)
+    public function getMetadataByAsc($asc)
     {
         $metadataName = $this->getClassName('Metadata', $asc);
         if (class_exists($metadataName)) {
@@ -496,7 +500,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
             'bw' => 'LIKE',
             'bn' => 'NOT LINK',
             'in' => 'IN',
-			'ni' => 'NOT IN',
+            'ni' => 'NOT IN',
             'ew' => 'LIKE',
             'en' => 'NOT LIKE',
             'cn' => 'LIKE',
@@ -549,7 +553,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
             }
 
             // null and not null
-            if(null == $value) {
+            if(null === $value) {
                 if ('eq' == $fieldSet[2]) {
                     $query->andWhere($alias . $fieldSet[0] . ' IS NULL');
                     continue;
@@ -1107,7 +1111,11 @@ class Qwin_Application_Metadata extends Qwin_Metadata
 
     public function setLastViewedItem($meta, $result)
     {
-        if (empty($meta['db']['nameKey'])) {
+        if (!empty($meta['page']['mainField'])) {
+            $title = $result[$meta['page']['mainField']];
+        } elseif (method_exists($meta, 'getMainFieldValue')) {
+            $title = $meta->getMainFieldValue($result);
+        } else {
             return false;
         }
 
@@ -1117,15 +1125,15 @@ class Qwin_Application_Metadata extends Qwin_Metadata
         $item = (array)$session->get('lastViewedItem');
         $key = get_class($meta) . $result[$meta['db']['primaryKey']];
 
-        // 最多保存10项
-        if (10 <= count($item)) {
+        // 最多保存8项 TODO 转换为微件,插件.
+        if (8 <= count($item)) {
             array_pop($item);
         }
 
         // 加到第一项
         $item = array(
             $key => array(
-            'title' => '[' . $lang->t($meta['page']['title']) .  ']' . $result[$meta['db']['nameKey'][0]],
+            'title' => '[' . $lang->t($meta['page']['title']) .  ']' . $title,
             'href' => $_SERVER['REQUEST_URI'],
             )
         ) + $item;

@@ -39,7 +39,7 @@ class Common_Widget_ListTab extends Common_Widget
                 'title' => $lang->t('LBL_ACTION_ADD'),
                 'icon' => 'ui-icon-plus',
                 'target' => null,
-                'id' => null,
+                'id' => 'action-add',
                 'class' => null,
             ),
             array(
@@ -47,15 +47,15 @@ class Common_Widget_ListTab extends Common_Widget
                 'title' => $lang->t('LBL_ACTION_DELETE'),
                 'icon' => 'ui-icon-trash',
                 'target' => null,
-                'id' => null,
-                'class' => 'action-delete',
+                'id' => 'action-delete',
+                'class' => null,
             ),
             array(
                 'url' => $url->createUrl($asc, array('action' => 'Index')),
                 'title' => $lang->t('LBL_ACTION_LIST'),
                 'icon' => 'ui-icon-note',
                 'target' => null,
-                'id' => null,
+                'id' => 'action-list',
                 'class' => null,
             ),
         );

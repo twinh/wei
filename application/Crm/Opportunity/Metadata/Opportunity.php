@@ -193,11 +193,16 @@ class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
                 'order' => array(
                     array('date_created', 'DESC')
                 ),
+                'defaultWhere' => array(
+                    array('is_deleted', 0),
+                ),
             ),
             'page' => array(
                 'title' => 'LBL_MODULE_OPPORTUNITY',
                 'icon' => 'present',
                 'tableLayout' => 1,
+                'useRecycleBin' => true,
+                'mainField' => 'name',
             ),
         ));
     }

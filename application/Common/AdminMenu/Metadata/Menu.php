@@ -147,7 +147,7 @@ class Common_AdminMenu_Metadata_Menu extends Common_Metadata
                     array('order', 'DESC')
                 ),
                 'limit' => 20,
-                'nameKey' => array(
+                'nameField' => array(
                     'title'
                 ),
             ),

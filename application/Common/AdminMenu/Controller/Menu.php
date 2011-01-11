@@ -29,7 +29,7 @@ class Common_AdminMenu_Controller_Menu extends Common_ActionController
 {
     public function onAfterDb($data)
     {
-        $query = $this->metaHelper->getQueryBySet($this->_asc);
+        $query = $this->metaHelper->getQueryByAsc($this->_asc);
         $query->orderBy('order ASC');
         $data = $query->execute()->toArray();
         Qwin::run('Qwin_Cache_List')->writeCache($data, 'AdminMenu');

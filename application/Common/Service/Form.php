@@ -88,7 +88,7 @@ class Common_Service_Form extends Common_Service_BasicAction
                 );
                 if($config['view']['display'])
                 {
-                    $config['this']->setRedirectView($return['message']);
+                    $this->view->setRedirectView($return['message']);
                 }
                 return $return;
             }
@@ -110,7 +110,9 @@ class Common_Service_Form extends Common_Service_BasicAction
         );
         if($config['view']['display'])
         {
-            $config['this']->loadView($view)->display();
+            $this->view
+                ->setDataList($view['data'])
+                ->setProcesser($view['class']);
         }
         return array(
             'result' => true,

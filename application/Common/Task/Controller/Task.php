@@ -387,7 +387,7 @@ class Common_Task_Controller_Task extends Common_ActionController
         );
         $this->_emailMember = $this
             ->metaHelper
-            ->getQueryBySet($set)
+            ->getQueryByAsc($set)
             ->where('id = ?', $_POST['assign_to'])
             ->fetchOne();
         return $this->_emailMember['email'];

@@ -89,7 +89,7 @@ class Common_Service_View extends Common_Service_BasicAction
         }
 
         // 从模型获取数据
-        $query = $metaHelper->getQueryBySet($this->_asc, array('db', 'view'));
+        $query = $metaHelper->getQueryByAsc($this->_asc, array('db', 'view'));
         $result = $query->where($primaryKey . ' = ?', $config['data']['primaryKeyValue'])->fetchOne();
 
         // 记录不存在,加载错误视图
@@ -101,7 +101,7 @@ class Common_Service_View extends Common_Service_BasicAction
             );
             if($config['view']['display'])
             {
-                $config['this']->setRedirectView($result['message']);
+                $this->view->setRedirectView($result['message']);
             }
             return $result;
         }
@@ -120,7 +120,9 @@ class Common_Service_View extends Common_Service_BasicAction
         );
         if($config['view']['display'])
         {
-            $config['this']->loadView($view)->display();
+            $this->view
+                ->setDataList($view['data'])
+                ->setProcesser($view['class']);
         }
         return array(
             'result' => true,

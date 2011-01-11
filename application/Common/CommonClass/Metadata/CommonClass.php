@@ -92,7 +92,7 @@ class Common_CommonClass_Metadata_CommonClass extends Common_Metadata
         $primaryKey = $this->db['primaryKey'];
         $url = Qwin::run('-url');
         $lang = Qwin::run('-lang');
-        $set = $this->getSetFromClass();
+        $set = $this->getAscFromClass();
         $link = $url->createUrl($set, array('action' => 'Add', '_data[sign]' => $copyData['sign']));
         $html = Qwin_Helper_Html::jQueryButton($link, $lang->t('LBL_ACTION_ADD_NEXT'), 'ui-icon-plusthick')
               . parent::convertListOperation($value, $name, $data, $copyData);

@@ -87,10 +87,43 @@ class Qwin_Application_Controller
     );
 
     /**
+     * 禁用的行为列表
+     * 当行为被禁用时,无法通过外部进行访问
+     * 通过禁用行为,可以用于精确的
+     *
+     * @var array
+     */
+    protected $_forbiddenAction = array();
+
+    /**
      * 视图配置
      * @var array
      */
     protected $_view = array();
+
+    /**
+     * 获取禁用的行为列表
+     *
+     * @return array
+     */
+    public function getForbiddenAction()
+    {
+        return $this->_forbiddenAction;
+    }
+
+    /**
+     * 设置禁用行为
+     *
+     * @param string $action 行为名称,即方法名去除'action'标识
+     * @return Qwin_Application_Controller 当前对象
+     */
+    public function setForbiddenAction($action)
+    {
+        if (method_exists($this, 'action' . $action)) {
+            $this->_forbiddenAction[] = strtolower($action);
+        }
+        return $this;
+    }
 
     public function setValidatorMessage($field = null, $message = null)
     {
@@ -132,37 +165,6 @@ class Qwin_Application_Controller
     public function getLastAction()
     {
         return $this->_lastAction;
-    }
-
-    /**
-     * 根据视图配置加载视图类
-     *
-     * @param array $view 视图配置
-     * @return object 视图对象
-     */
-    public function loadView(array $view = null)
-    {
-        // 默认只加载一次
-        if ($this->_viewOption['loaded']) {
-            return false;
-        }
-        $this->_viewOption['loaded'] = true;
-
-        // 合并视图配置
-        $view = (array)$view;
-        $this->_view = array_merge($this->_viewOption, $this->_view, $view);
-
-        // 加载视图
-        $view = Qwin::run($this->_view['class']);
-        if (null == $view) {
-            throw new Qwin_Application_Controller_Exception('The view class ' . $this->_view['class'] . 'is not exists');
-        }
-
-        // 设置视图
-        !empty($this->_view['data']) && $view->mergeVarData($this->_view['data']);
-        !empty($this->_view['element']) && $view->setElementList($this->_view['element']);
-        !empty($this->_view['layout']) && $view->setLayout($this->_view['layout']);
-        return $view;
     }
 
     /**

@@ -145,6 +145,9 @@ class Common_View extends Qwin_Application_View
     public function display()
     {
         $this->preDisplay();
+        if ($this->_displayed) {
+            return false;
+        }
         extract($this->_data, EXTR_OVERWRITE);
         require $this->getLayout();
         $this->afterDisplay();
@@ -170,5 +173,13 @@ class Common_View extends Qwin_Application_View
 
         echo $output;
         unset($output);
+    }
+
+    public function setRedirectView($message, $method = null)
+    {
+        $this->setProcesser('Common_View_Redirect');
+        $this->setData('message', $message);
+        $this->setData('method', $method);
+        return $this;
     }
 }

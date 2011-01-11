@@ -27,7 +27,6 @@
 ?>
 <div class="ui-sidebar-content ui-sidebar-content-2">
 	<ul>
-        <li><a class="ui-iconx ui-iconx-monitor-16" href="#">更多操作,敬请期待</a></li>
-        <li><a class="ui-iconx ui-iconx-monitor-16" href="#">更多操作,敬请期待</a></li>
+        <li><a class="ui-iconx ui-iconx-trash-16" href="<?php echo qw_url(array('namespace' => 'Common', 'module' => 'RecycleBin', 'controller' => 'RecycleBin')) ?>"><?php echo qw_lang('LBL_MODULE_RECYCLEBIN') ?></a></li>
     </ul>
 </div>

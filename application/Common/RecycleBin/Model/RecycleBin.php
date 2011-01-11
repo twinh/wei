@@ -1,6 +1,6 @@
 <?php
 /**
- * Enus
+ * RecycleBin
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,25 +16,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
- * @subpackage  Contact
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-01 11:27:43
+ * @since       2011-01-09 15:29:06
  */
 
-class Common_Contact_Language_Enus extends Common_Language_Enus
+class Common_RecycleBin_Model_RecycleBin extends Common_Model
 {
-    public function __construct()
-    {
-        parent::__construct();
-        return $this->_data += array(
-
-            'LBL_FIELD_RELATED_MODULE' => 'Related Module',
-
-            'LBL_MODULE_CONTACT' => 'Contact',
-        );
-    }
 }

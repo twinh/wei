@@ -34,6 +34,7 @@ class Qwin_Metadata_Element_Page extends Qwin_Metadata_Element_Abstract
             'icon' => 'document',
             'description' => null,
             'tableLayout' => 2,
+            'mainField' => null,
         );
     }
 

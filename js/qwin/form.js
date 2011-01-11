@@ -2,9 +2,7 @@ jQuery(function($){
     $('div.ui-icon-common a').qui();
 
     $('fieldset > legend').click(function(){
-        var id = $(this).parent().attr('id');
-        var tableId = id.replace(/fieldset/, 'table')
-        $('#' + tableId).toggle();
+        $(this).next().toggle();
     });
 
     if(undefined != $.validator)

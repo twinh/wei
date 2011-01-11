@@ -58,7 +58,7 @@ class Common_Category_Controller_Category extends Common_ActionController
             'controller' => '',
         ));
 
-        $data = $this->metaHelper->getQueryBySet($setting)
+        $data = $this->metaHelper->getQueryByAsc($setting)
             ->orderBy('order ASC')
             ->execute()
             ->toArray();

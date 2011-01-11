@@ -75,7 +75,7 @@ class Common_Member_Metadata_Group extends Common_Metadata
                 'order' => array(
                     array('date_created', 'DESC'),
                 ),
-                'nameKey' => array(
+                'nameField' => array(
                     'name',
                 ),
             ),
@@ -100,7 +100,7 @@ class Common_Member_Metadata_Group extends Common_Metadata
         $primaryKey = $this->db['primaryKey'];
         $url = Qwin::run('-url');
         $lang = Qwin::run('-lang');
-        $set = $this->getSetFromClass();
+        $set = $this->getAscFromClass();
         $html = Qwin_Helper_Html::jQueryButton($url->createUrl($set, array('action' => 'AllocatePermission', $primaryKey => $copyData[$primaryKey])), $lang->t('LBL_ACTION_ALLOCATE_PERMISSION'), 'ui-icon-person')
               . parent::convertListOperation($value, $name, $data, $copyData);
         return $html;

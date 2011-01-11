@@ -29,29 +29,22 @@ class Common_Member_Controller_Log extends Common_Controller
 {
     public function actionLogin()
     {
-        $ini = Qwin::run('-ini');
         $js = Qwin::run('Qwin_Helper_Js');
         $meta = $this->_meta;
 
-        /**
-         * 提示已经登陆的信息
-         */
-        $member = $this->session->get('member');
-        /*if('guest' != $member['username'])
-        {
-            return $this->setRedirectView($this->_lang->t('MSG_LOGINED'));
+        // 提示已经登陆的信息
+        /*$member = $this->session->get('member');
+        if ('guest' != $member['username']) {
+            return $this->view->setRedirectView($this->_lang->t('MSG_LOGINED'));
         }*/
 
+        // 设置视图,加载登陆界面
         if(empty($_POST))
         {
-            /**
-             * 设置视图,加载登陆界面
-             */
-            $this->_view = array(
-                'data' => get_defined_vars(),
-            );
+            $this->view->setDataList(get_defined_vars());
         } else {
-            return Qwin::run('Common_Member_Service_Login')->process(array(
+            $service = new Common_Member_Service_Login();
+            $service->process(array(
                 'set' => $this->_asc,
                 'data' => array(
                     'db' => $_POST,

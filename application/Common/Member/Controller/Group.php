@@ -47,7 +47,7 @@ class Common_Member_Controller_Group extends Common_ActionController
         /**
          * 从模型获取数据
          */
-        $query = $this->metaHelper->getQueryBySet($this->_asc);
+        $query = $this->metaHelper->getQueryByAsc($this->_asc);
         $result = $query->where($primaryKey . ' = ?', $id)->fetchOne();
 
         /**
@@ -55,7 +55,7 @@ class Common_Member_Controller_Group extends Common_ActionController
          */
         if(false == $result)
         {
-            return $this->setRedirectView($this->_lang->t('MSG_NO_RECORD'));
+            return $this->view->setRedirectView($this->_lang->t('MSG_NO_RECORD'));
         }
 
         if(empty($_POST))
@@ -90,7 +90,7 @@ class Common_Member_Controller_Group extends Common_ActionController
             $result['permission'] = serialize($permission);
             $result->save();
             $url = Qwin::run('-url')->createUrl($this->_asc, array('action' => 'Index'));
-            return $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+            return $this->view->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }    
 }

@@ -54,6 +54,7 @@ class Crm_Contact_Language_Zhcn extends Common_Language_Zhcn
             'LBL_FIELD_OTHER_STREET' => '其他地址',
             'LBL_FIELD_OTHER_POSTBOX' => '其他信箱',
             'LBL_FIELD_OTHER_ZIP' => '其他邮政编码',
+            'LBL_FIELD_MOBILE' => '手机',
 
             'LBL_GROUP_ADDRESS_DATA' => '地址资料',
             'LBL_GROUP_CONTACT_DATA' => '联系资料',

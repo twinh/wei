@@ -65,7 +65,7 @@ class Common_Member_Controller_Setting extends Common_Controller
             $language = Qwin::run('Qwin_Language')->toStandardStyle($language);
             
             $result = $this->metaHelper
-                    ->getQueryBySet(array(
+                    ->getQueryByAsc(array(
                         'namespace' => 'Common',
                         'module' => 'Member',
                         'controller' => 'Member',
@@ -75,7 +75,7 @@ class Common_Member_Controller_Setting extends Common_Controller
             $result['language'] = $language;
             $result->save();
             $url = Qwin::run('-url')->createUrl($this->_asc);
-            $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+            $this->view->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }
 
@@ -88,7 +88,7 @@ class Common_Member_Controller_Setting extends Common_Controller
         {
             $meta = $this->_meta;
             $data = $this->metaHelper
-                ->getQueryBySet(array(
+                ->getQueryByAsc(array(
                     'namespace' => 'Common',
                     'module' => 'Style',
                     'controller' => 'Theme',
@@ -108,7 +108,7 @@ class Common_Member_Controller_Setting extends Common_Controller
             $theme = $ses->get('style');
             
             $result = $this->metaHelper
-                    ->getQueryBySet(array(
+                    ->getQueryByAsc(array(
                         'namespace' => 'Common',
                         'module' => 'Member',
                         'controller' => 'Member',
@@ -118,7 +118,7 @@ class Common_Member_Controller_Setting extends Common_Controller
             $result['theme'] = $theme;
             $result->save();
             $url = Qwin::run('-url')->createUrl($this->_asc);
-            $this->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+            $this->view->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         } 
     }
 }

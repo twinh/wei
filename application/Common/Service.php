@@ -83,17 +83,4 @@ class Common_Service
         }
         return null;
     }
-
-    public function setRedirectView($message, $method = null, $dispaly = true)
-    {
-        $this->_view['class'] = 'Common_View_Redirect';
-        $this->_view['data']['message'] = $message;
-        $this->_view['data']['method'] = $method;
-
-        if(true != $dispaly)
-        {
-            return $this;
-        }
-        return $this->loadView()->display();
-    }
 }

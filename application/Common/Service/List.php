@@ -64,8 +64,7 @@ class Common_Service_List extends Common_Service_BasicAction
         // 初始配置
         $config = $this->_multiArrayMerge($this->_config, $config);
         $metaHelper = Qwin::run('Qwin_Application_Metadata');
-        if(null == $config['this'])
-        {
+        if (null == $config['this']) {
             $config['this'] = Qwin::run($metaHelper->getClassName('Controller', $config['set']));
         }
 
@@ -78,7 +77,7 @@ class Common_Service_List extends Common_Service_BasicAction
         $primaryKey = $meta['db']['primaryKey'];
 
         // 从模型获取数据
-        $query = $metaHelper->getQueryBySet($asc, array('db', 'view'));
+        $query = $metaHelper->getQueryByAsc($asc, array('db', 'view'));
         $metaHelper
             ->addSelectToQuery($meta, $query)
             ->addOrderToQuery($meta, $query, $config['data']['order'])
@@ -90,23 +89,20 @@ class Common_Service_List extends Common_Service_BasicAction
         $totalRecord = $query->count();
 
         // 执行回调函数,转换数据
-        if(isset($config['callback']['dataConverter']))
-        {
+        if (isset($config['callback']['dataConverter'])) {
             $config['callback']['dataConverter'][1] = $data;
             $tempData = $this->executeCallback('dataConverter', $config);
             null != $tempData && $data = $tempData;
         }
 
         // 对数据进行转换
-        if($config['data']['convert'])
-        {
+        if ($config['data']['convert']) {
             $data = $metaHelper->convertArray($data, $config['data']['asAction'], $meta, $meta, array('view' => $config['data']['isView']));
         }
 
         // 获取布局
         $layout = $metaHelper->getListLayout($meta);
-        if(null != $config['data']['list'])
-        {
+        if (null != $config['data']['list']) {
             $layout = array_intersect($layout, (array)$config['data']['list']);
         }
 
@@ -115,9 +111,10 @@ class Common_Service_List extends Common_Service_BasicAction
             'class' => $config['view']['class'],
             'data' => get_defined_vars(),
         );
-        if($config['view']['display'])
-        {
-            $config['this']->loadView($view)->display();
+        if ($config['view']['display']) {
+            $this->view
+                ->setDataList($view['data'])
+                ->setProcesser($view['class']);
         }
         return array(
             'result' => true,
