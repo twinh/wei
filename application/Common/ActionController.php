@@ -30,8 +30,6 @@
 
 class Common_ActionController extends Common_Controller
 {
-    public $pageName = 'page';
-    public $limitName = 'rowNum';
     public $defaultAction = 'Index';
 
     /**
@@ -41,25 +39,26 @@ class Common_ActionController extends Common_Controller
      */
     public function actionIndex()
     {
-        if (null == $this->request->g('json')) {
+        $request = $this->request;
+        if (null == $request->g('json')) {
             $service = new Common_Service_Index();
-            return $service->process(array(
+            $service->process(array(
                 'set' => $this->_asc,
                 'data' => array(
-                    'list' => $this->metaHelper->getUrlListField(),
+                    'list' => $request->getListField(),
                 ),
                 'this' => $this,
             ));
         } else {
             $service = new Common_Service_List();
-            return $service->process(array(
+            $service->process(array(
                 'set' => $this->_asc,
                 'data' => array(
-                    'list' => $this->metaHelper->getUrlListField(),
-                    'order' => $this->metaHelper->getUrlOrder(),
-                    'where' => $this->metaHelper->getUrlWhere(),
-                    'offset'=> $this->metaHelper->getUrlOffset($this->pageName, $this->limitName),
-                    'limit' => $this->metaHelper->getUrlLimit($this->limitName),
+                    'list' => $request->getListField(),
+                    'order' => $request->getOrder(),
+                    'where' => $request->getWhere(),
+                    'offset'=> $request->getOffset(),
+                    'limit' => $request->getLimit(),
                     'converAsAction'=> $this->request->g('_as'),
                 ),
                 'callback' => array(
@@ -79,20 +78,17 @@ class Common_ActionController extends Common_Controller
      */
     public function actionPopup()
     {
-        /**
-         * @see Common_Service_Index $_config
-         */
-        $config = array(
+        $service = new Common_Service_Index();
+        $service->process(array(
             'set' => $this->_asc,
             'data' => array(
-                'list' => $this->metaHelper->getUrlListField(),
+                'list' => $this->metaHelper->getListField(),
             ),
             'view' => array(
                 'class' => 'Common_View_Popup',
             ),
             'this' => $this,
-        );
-        return Qwin::run('Common_Service_Index')->process($config);
+        ));
     }
 
     /**
@@ -102,17 +98,14 @@ class Common_ActionController extends Common_Controller
      */
     public function actionView()
     {
-        /**
-         * @see Common_Service_View $_config
-         */
-        $config = array(
+        $service = new Common_Service_View();
+        $service->process(array(
             'set' => $this->_asc,
             'data' => array(
                 'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_asc),
             ),
             'this' => $this,
-        );
-        return Qwin::run('Common_Service_View')->process($config);
+        ));
     }
 
     /**

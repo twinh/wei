@@ -90,6 +90,11 @@ class Qwin_Class
         '-' => 'Qwin_',
     );
 
+    public static function setShortTag($tag, $value)
+    {
+        self::$shortTagMap[$tag] = $value;
+    }
+
     /**
      * 设置缓存文件
      * @param string $cacheFile

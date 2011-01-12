@@ -32,11 +32,11 @@ class Common_Namespace extends Qwin_Application_Namespace
 {
     public function __construct()
     {
+        Qwin::setShortTag('#', 'Common_');
         $config = Qwin::run('-config');
 
         // 设置页面编码
-        if(isset($config['interface']['charset']))
-        {
+        if (isset($config['interface']['charset'])) {
             header('Content-Type: text/html; charset=' . $config['interface']['charset']);
         }
 

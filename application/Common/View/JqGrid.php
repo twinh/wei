@@ -31,71 +31,86 @@ class Common_View_JqGrid extends Qwin_Application_View_Processer
     {
         // 初始变量,方便调用
         $primaryKey = $view->primaryKey;
-        $meta = $view->meta;
+        $meta       = $view->meta;
         $metaHepler = $view->metaHelper;
-        $request = Qwin::run('-request');
-        $lang = Qwin::run('-lang');
-        $config = Qwin::run('-config');
-        $asc = $config['asc'];
-        $customLink = $view->customLink;
+        $request    = Qwin::run('#request');
+        $lang       = Qwin::run('-lang');
+        $config     = Qwin::run('-config');
+        $url        = Qwin::run('-url');
+        $asc        = $config['asc'];
 
-        // 获取json数据的链接
-        $jsonUrl = str_replace('\'', '\\\'', '?' . Qwin::run('-url')->arrayKey2Url(array('json' => '1') + $_GET));
+        /**
+         * @var array $jgrid            jgrid 配置,不与js完全一致
+         *
+         *      -- url                  获取json数据的链接
+         *
+         *      -- colNames             列的名称
+         *
+         *      -- colModel             列的模型
+         *
+         *      -- sortname             排序的域名称
+         *
+         *      -- sortorder            排序的域类型
+         *
+         *      -- rowNum               每列显示数目
+         *
+         *      -- page                 分页的查询名称
+         *
+         *      -- rows                 每页显示数目的查询名称
+         *
+         *      -- sort                 排序域查询的名称
+         *
+         *      -- order                排序类型的查询名称
+         *
+         *      -- search               搜索的查询名称
+         */
+        $jgrid = array();
+        $jgrid['url'] = str_replace('\'', '\\\'', '?' . $url->arrayKey2Url(array('json' => '1') + $_GET));
 
         // 获取栏数据
-        $columnName = array();
-        $columnSetting = array();
-        foreach($view->layout as $field)
-        {
-            if(is_array($field))
-            {
+        $jgrid['colNames'] = array();
+        $jgrid['colModel'] = array();
+        foreach ($view->layout as $field) {
+            if (is_array($field)) {
                 $fieldMeta = $meta['metadata'][$field[0]]['field'][$field[1]];
                 $field = $field[0] . '_' . $field[1];                
             } else {
                 $fieldMeta = $meta['field'][$field];
             }
-            $columnName[] = $lang->t($fieldMeta['basic']['title']);
-            $columnSetting[] = array(
+            $jgrid['colNames'][] = $lang->t($fieldMeta['basic']['title']);
+            $jgrid['colModel'][] = array(
                 'name' => $field,
                 'index' => $field,
             );
             // 隐藏主键
-            if($primaryKey == $field)
-            {
-                $columnSetting[count($columnSetting) - 1]['hidden'] = true;
+            if ($primaryKey == $field) {
+                $jgrid['colModel'][count($jgrid['colModel']) - 1]['hidden'] = true;
             }
             // 宽度控制
-            if(isset($fieldMeta['list']) && isset($fieldMeta['list']['width']))
-            {
-                $columnSetting[count($columnSetting) - 1]['width'] = $fieldMeta['list']['width'];
+            if (isset($fieldMeta['list']) && isset($fieldMeta['list']['width'])) {
+                $jgrid['colModel'][count($jgrid['colModel']) - 1]['width'] = $fieldMeta['list']['width'];
             }
         }
-        $columnName = Qwin_Helper_Array::jsonEncode($columnName);
-        $columnSetting = Qwin_Helper_Array::jsonEncode($columnSetting);
+        $jgrid['colNames'] = Qwin_Helper_Array::jsonEncode($jgrid['colNames']);
+        $jgrid['colModel'] = Qwin_Helper_Array::jsonEncode($jgrid['colModel']);
         
         // 排序
-        if(isset($meta['db']['order']) && !empty($meta['db']['order']))
-        {
-            $sortName = $meta['db']['order'][0][0];
-            $sortOrder = $meta['db']['order'][0][1];
+        if(!empty($meta['db']['order'])) {
+            $jgrid['sortname']  = $meta['db']['order'][0][0];
+            $jgrid['sortorder'] = $meta['db']['order'][0][1];
         } else {
-            $sortName = $primaryKey;
-            $sortOrder = 'DESC';
+            $jgrid['sortname']  = $primaryKey;
+            $jgrid['sortorder'] = 'DESC';
         }
 
-        /**
-         * @todo 当前页数,行数等信息的获取
-         */
-        //$controller = $this->_data['config']['this'];
-        $controller = Qwin::run('-controller');
-        $rowNum = intval($request->g($controller->limitName));
-        if($rowNum <= 0)
-        {
-            $rowNum = $view->meta['db']['limit'];
-        // 最多同时读取500条记录
-        } elseif($rowNum > 500) {
-            $rowNum = 500;
-        }
+        $jgrid['rowNum']    = $request->getLimit();
+        $jgrid['rowNum']    <= 0 && $jgrid['rowNum'] = $view->meta['db']['limit'];
+        $jgrid['page']      = $request->getOption('page');
+        $jgrid['rows']      = $request->getOption('row');
+        $jgrid['sort']      = $request->getOption('orderField');
+        $jgrid['order']     = $request->getOption('orderType');
+        $jgrid['search']    = $request->getOption('search');
+
         $view->setDataList(get_defined_vars());
     }
 }
