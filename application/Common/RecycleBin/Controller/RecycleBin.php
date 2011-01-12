@@ -53,7 +53,7 @@ class Common_RecycleBin_Controller_RecycleBin extends Common_ActionController
         $service->process(array(
             'asc' => $this->_asc,
             'data' => array(
-                'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_asc),
+                'primaryKeyValue' => $this->request->getPrimaryKeyValue($this->_asc),
                 'type' => $this->request->g('type'),
             ),
             'this' => $this,

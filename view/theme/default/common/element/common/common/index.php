@@ -60,16 +60,26 @@ jQuery(function($){
 	Qwin.App.primaryKey = primaryKey;
 	
     $("#ui-jqgrid-table").jqGrid({
-        url              : '<?php echo $jsonUrl?>',
+        url              : '<?php echo $jgrid['url'] ?>',
         datatype         : 'json',
-        colNames         : <?php echo $columnName?>,
-        colModel         : <?php echo $columnSetting?>,
-        rowNum           : <?php echo $rowNum?>,
+        colNames         : <?php echo $jgrid['colNames'] ?>,
+        colModel         : <?php echo $jgrid['colModel'] ?>,
+        rowNum           : <?php echo $jgrid['rowNum']?>,
         rowList          : [5, 10, 20, 30, 40, 50, 100],
-        sortname         : '<?php echo $sortName?>',
-        sortorder        : '<?php echo $sortOrder?>',
+        sortname         : '<?php echo $jgrid['sortname']?>',
+        sortorder        : '<?php echo $jgrid['sortorder']?>',
         // 标题
-        //caption          : '<a href="<?php echo qw_url() ?>"><?php echo qw_lang($meta['page']['title']) ?></a>',
+        //caption          : '<?php echo qw_lang($meta['page']['title']) ?>',
+        // 各参数的对应关系
+        prmNames         : {
+            page    : '<?php echo $jgrid['page'] ?>',
+            rows    : '<?php echo $jgrid['rows'] ?>',
+            sort    : '<?php echo $jgrid['sort'] ?>',
+            order   : '<?php echo $jgrid['order'] ?>',
+            search  : '<?php echo $jgrid['search'] ?>',
+            nd      : 'nd',
+            npage   : null
+        },
         // 显示列的数目
         rownumbers       : true,
         // 允许多选
@@ -94,17 +104,7 @@ jQuery(function($){
             return false;
         },
 		// 工具栏,设置在顶部
-        toolbar          : [true, 'top'],
-        // 各参数的对应关系
-        prmNames         : {
-            page   : '<?php echo $controller->pageName ?>',
-            rows   : '<?php echo $controller->limitName ?>',
-            sort   : 'orderField',
-            order  : 'orderType',
-            search : '_search',
-            nd     : 'nd',
-            npage  : null
-        }
+        toolbar          : [true, 'top']
     // 只显示刷新按钮
     }).jqGrid('navGrid','#ui-jqgrid-page',{
         add : false,

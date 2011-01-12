@@ -267,146 +267,6 @@ class Qwin_Application_Metadata extends Qwin_Metadata
         return $this;
     }
 
-
-    /**
-     * 获取Url中的排序配置,对字段域不做验证,字段域的验证应该是交给服务执行的.
-     *
-     * @param string $fieldName 字段域的名称
-     * @param string $typeName 排序的名称
-     * @return array 标准元数据的排序配置
-     */
-    public function getUrlOrder($fieldName = 'orderField', $typeName = 'orderType')
-    {
-        $request = Qwin::run('-request');
-
-        $orderField = $request->g('orderField');
-
-        // 地址未设置排序
-        if (null == $orderField) {
-            return array();
-        }
-
-        $orderType = strtoupper($request->g('orderType'));
-        $typeOption = array('DESC', 'ASC');
-        if (!in_array($orderType, $typeOption)) {
-            $orderType = $typeOption[0];
-        }
-
-        return array(
-            array($orderField, $orderType),
-        );
-    }
-
-    /**
-     * 获取Url中的查找配置,对字段域和操作符不做验证
-     *
-     * @param string $fieldName 字段域的名称
-     * @param string $valueName 搜索值的名称(searchString)
-     * @param string $operName 操作符的名称
-     * @return array 标准元数据的搜索配置
-     * @todo 高级复杂搜索配置
-     */
-    public function getUrlWhere($fieldName = 'searchField', $valueName = 'searchValue', $operName = 'searchOper')
-    {
-        $request = Qwin::run('Qwin_Request');
-
-        $searchField = $request->g($fieldName);
-        if (null == $searchField) {
-            return array();
-        }
-
-        $searchSet = array();
-        $searchValue = $request->g($valueName);
-        $searchOper  = $request->g($operName);
-        if (!is_array($searchField)) {
-            $searchSet[] = array($searchField, $searchValue, $searchOper);
-        } else {
-            foreach ($searchField as $key => $value) {
-                !isset($searchValue[$key]) && $searchValue[$key] = null;
-                !isset($searchOper[$key]) && $searchOper[$key] = null;
-                $searchSet[] = array(
-                    $searchField[$key],
-                    $searchValue[$key],
-                    $searchOper[$key],
-                );
-            }
-        }
-        return $searchSet;
-    }
-    
-    /**
-     * 获取Url中的偏移配置
-     *
-     * @param string $limitName 字段域的名称,应该与getUrlOffset中的rowName一致
-     * @return int 标准元数据的限制配置
-     * @todo 最大值允许配置
-     */
-    public function getUrlLimit($limitName = 'rowNum')
-    {
-        $request = Qwin::run('Qwin_Request');
-        $limit = $request->g($limitName);
-        500 < $limit && $limit = 500;
-
-        return $limit;
-    }
-
-    /**
-     * 获取Url中的限制配置
-     *
-     * @param string $limitName 字段域的名称,应该与getUrlOffset中的rowName一致
-     * @return int 标准元数据的限制配置
-     * @todo 最大值允许配置
-     */
-    public function getUrlOffset($pageName = 'page', $limitName = 'rowNum')
-    {
-        $request = Qwin::run('Qwin_Request');
-        $page = $request->g($pageName);
-        $limit = $request->g($limitName);
-        500 < $limit && $limit = 500;
-        $offset = ($page - 1) * $limit;
-
-        return $offset;
-    }
-
-    /**
-     * 获取Url中的显示域的配置
-     *
-     * @param string $listName 键名
-     * @param string $delimiter 分隔符
-     * @return array
-     */
-    public function getUrlListField($listName = 'qwList', $delimiter = ',')
-    {
-        $request = Qwin::run('-request');
-        $list = $request->g($listName);
-        if (null != $list) {
-            $list = explode($delimiter, $list);
-            foreach ($list as $key => $value) {
-                $pos = strpos($value, '.');
-                if (false !== $pos) {
-                    $list[$key] = array(
-                        substr($value, 0, $pos),
-                        substr($value, $pos + 1),
-                    );
-                }
-            }
-        }
-        return $list;
-    }
-
-    /**
-     * 获取Url中元数据主键的值
-     *
-     * @param array $asc 应用结构配置
-     * @return null|string 值
-     */
-    public function getUrlPrimaryKeyValue(array $asc)
-    {
-        $request = Qwin::run('-request');
-        $primaryKey = $this->getPrimaryKeyName($asc);
-        return $request->g($primaryKey);
-    }
-
     public function getPrimaryKeyName(array $asc)
     {
         $metadataName = $this->getClassName('Metadata', $asc);
@@ -771,22 +631,6 @@ class Qwin_Application_Metadata extends Qwin_Metadata
         $metaName = $meta['model'][$name]['metadata'];
         $meta['metadata'][$name] = Qwin_Metadata_Manager::get($metaName);
         return $meta['metadata'][$name];
-    }
-
-    /**
-     * 获取 url 中的数据
-     *
-     * @param array $data add.edit等操作传过来的初始数据
-     * @param int $mode
-     */
-    public function getUrlData($data)
-    {
-        foreach ($data as $key => $val) {
-            if (isset($_GET['_data'][$key]) && '' != $_GET['_data'][$key]) {
-                $data[$key] = $_GET['_data'][$key];
-            }
-        }
-        return $data;
     }
 
     public function getDefaultLayout($meta, array $layout = null, $relatedName = false)
@@ -1332,17 +1176,6 @@ class Qwin_Application_Metadata extends Qwin_Metadata
         return $data;
     }
 
-    public function getUrlList($field, $url_data)
-    {
-        Qwin::run('-arr')->set($url_data);
-        $data = array();
-        foreach ($url_data as $key => $val) {
-            if ('' != $val && isset($url_data[$field[$key]['form']['name']])) {
-                $data[$field[$key]['form']['name']] = $field[$key]['form']['name'];
-            }
-        }
-        return $data;
-    }
     public function makeRequiredAtFront($rule)
     {
         // 将必填项放在数组第一位

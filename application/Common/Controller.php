@@ -34,7 +34,7 @@ class Common_Controller extends Qwin_Application_Controller
 
     /**
      * Qwin_Request对象
-     * @var Qwin_Request
+     * @var Common_Request
      */
     public $request;
 
@@ -101,7 +101,7 @@ class Common_Controller extends Qwin_Application_Controller
         if (false === $option) {
             return true;
         }
-        $this->request  = Qwin::run('-request');
+        $this->request  = Qwin::run('#request');
         $this->url      = Qwin::run('-url');
         $this->config   = Qwin::run('-config');
         $this->_asc     = $this->config['asc'];
