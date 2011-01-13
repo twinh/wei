@@ -83,8 +83,6 @@ class Common_View extends Qwin_Application_View
 
         $jquery = Qwin::run('Qwin_Resource_JQuery');
         $this->_data['jquery'] = $jquery;
-
-        $jquery->setTheme($this->getStyle());
         
         $this->setTagList(array(
             'resource'          => QWIN_RESOURCE_PATH . '/view/theme/',
@@ -124,7 +122,7 @@ class Common_View extends Qwin_Application_View
         $session = Qwin::run('Qwin_Session');
         // 按优先级排列语言的数组
         $styleList = array(
-            Qwin::run('Qwin_Request')->g('style'),
+            Qwin::run('-request')->g('style'),
             $session->get('style'),
             $this->config['interface']['style'],
         );
@@ -135,7 +133,7 @@ class Common_View extends Qwin_Application_View
             }
         }
 
-        if (!file_exists(QWIN_RESOURCE_PATH . '/js/jquery/themes/' . $style)) {
+        if (!file_exists(QWIN_RESOURCE_PATH . '/view/style/' . $style)) {
             $style = $this->config['interface']['style'];
         }
         $session->set('style', $style);

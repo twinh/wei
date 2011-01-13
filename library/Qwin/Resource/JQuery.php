@@ -95,12 +95,6 @@ class Qwin_Resource_JQuery extends Qwin_Resource
         return $this;
     }
 
-    public function setTheme($name)
-    {
-        $this->_theme = $name;
-        return $this;
-    }
-
     public function loadCore($isWrap = true)
     {
         if(isset($this->_isLoad['core']['core']))
@@ -183,20 +177,6 @@ class Qwin_Resource_JQuery extends Qwin_Resource
             'js' => $jsFile,
             'css' => $cssFile,
         );
-    }
-
-    public function loadTheme($name = null, $isWrap = true)
-    {
-        if(null == $name)
-        {
-            $name = $this->_theme;
-        }
-        $file = $this->_typePath . '/themes/' . $name . '/jquery.ui.theme.css';
-        if(true == $isWrap)
-        {
-            return $this->wrapAsCssFile($file);
-        }
-        return $file;
     }
 
     public function wrapCode($code)
