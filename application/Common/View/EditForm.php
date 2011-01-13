@@ -30,7 +30,7 @@ class Common_View_EditForm extends Qwin_Application_View_Processer
     public function __construct(Qwin_Application_View $view)
     {
         $view->setElement('content', array(
-            '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>/form<suffix>',
+            '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>-form<suffix>',
         ));
         
         // 初始化变量,方便调用

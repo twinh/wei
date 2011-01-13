@@ -44,21 +44,21 @@ class Common_View extends Qwin_Application_View
 
         // 默认视图元素的选择次序为 自定义视图 > 当前行为视图 > 默认模块视图 > 默认视图
         $this->setElement('content', array(
-            '<resource><theme>/<namespace>/element/<module>/<controller>/<action><suffix>',
-            '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>/<action><suffix>',
+            '<resource><theme>/<namespace>/element/<module>/<controller>-<action><suffix>',
+            '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>-<action><suffix>',
             '<resource><theme>/<namespace>/element/default<suffix>',
         ));
 
         // 当前行为的左栏操作视图
         $this->setElement('sidebar', array(
             '<resource><theme>/<namespace>/element/<module>/<controller>/<action>-sidebar<suffix>',
-            '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>/<defaultAction>-sidebar<suffix>',
+            '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>-<defaultAction>-sidebar<suffix>',
         ));
 
         // 当前行为的页眉标题视图
         $this->setElement('header', array(
             '<resource><theme>/<namespace>/element/<module>/<controller>/<action>-header<suffix>',
-            '<resource><theme>/<namespace>/element/<defaultModule>/<defaultController>/<defaultAction>-header<suffix>',
+            '<resource><theme>/<namespace>/element/<defaultModule>/<defaultController>-<defaultAction>-header<suffix>',
         ));
 
         // 获取配置
