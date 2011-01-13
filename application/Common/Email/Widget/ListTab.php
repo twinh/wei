@@ -33,7 +33,7 @@ class Common_Email_Widget_ListTab extends Common_Widget
         $url = Qwin::run('-url');
         $lang = Qwin::run('-lang');
 
-        $param['tab'][] = array(
+        $param['tab']['post'] = array(
             'url' => $url->createUrl($asc, array('action' => 'Post')),
             'title' => $lang->t('LBL_ACTION_POST'),
             'icon' => 'ui-icon-script',

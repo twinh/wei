@@ -124,9 +124,7 @@ class Common_Controller extends Qwin_Application_Controller
         Qwin::addMap('-lang', $languageClass);
 
         $this->_meta = $this->metaHelper->getMetadataByAsc($this->config['asc']);
-
-        $this->_viewOption['class'] = 'Common_View';
-
+        
          /**
          * 访问控制
          */

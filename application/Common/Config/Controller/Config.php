@@ -99,11 +99,8 @@ class Common_Config_Controller_Config extends Common_ActionController
             ->parseMetadata($configMeta);
         
         if (empty($_POST)) {
-            // 设置视图
-            return $this->_view = array(
-                'class' => 'Common_View_EditForm',
-                'data' => get_defined_vars(),
-            );
+            $this->view->setDataList(get_defined_vars());
+            $this->view->setProcesser('Common_View_EditForm');
         } else {
             // 保存结果
             $data = $metaHelper->convertOne($_POST, 'db', $meta, $meta, array('view' => false));
@@ -142,8 +139,6 @@ class Common_Config_Controller_Config extends Common_ActionController
             ->execute()
             ->toArray();
 
-        $this->_view = array(
-            'data' => get_defined_vars(),
-        );
+        $this->view->setDataList(get_defined_vars());
     }
 }
