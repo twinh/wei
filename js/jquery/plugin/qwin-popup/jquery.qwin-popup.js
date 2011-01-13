@@ -65,7 +65,7 @@
         dialog: {
             position: ['center', 80],
             height: 'auto',
-            width: 600,
+            width: 800,
             modal: true,
             dialogClass: 'ui-popup-content'
         }
