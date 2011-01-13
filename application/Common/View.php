@@ -87,18 +87,18 @@ class Common_View extends Qwin_Application_View
         $jquery->setTheme($this->getStyle());
         
         $this->setTagList(array(
-            'resource' => QWIN_RESOURCE_PATH . '/view/theme/',
-            'suffix' => '.php',
-            'theme' => $config['interface']['theme'],
-            'style' => $this->getStyle(),
-            'namespace' => $config['asc']['namespace'],
-            'module' => $config['asc']['module'],
-            'controller' => $config['asc']['controller'],
-            'action' => $config['asc']['action'],
-            'defaultNamespace' => $config['defaultAsc']['namespace'],
-            'defaultModule' => $config['defaultAsc']['module'],
+            'resource'          => QWIN_RESOURCE_PATH . '/view/theme/',
+            'suffix'            => '.php',
+            'theme'             => $config['interface']['theme'],
+            'style'             => $this->getStyle(),
+            'namespace'         => $config['asc']['namespace'],
+            'module'            => $config['asc']['module'],
+            'controller'        => $config['asc']['controller'],
+            'action'            => $config['asc']['action'],
+            'defaultNamespace'  => $config['defaultAsc']['namespace'],
+            'defaultModule'     => $config['defaultAsc']['module'],
             'defaultController' => $config['defaultAsc']['controller'],
-            'defaultAction' => 'Common',//$config['defaultAsc']['action'],
+            'defaultAction'     => 'Common',//$config['defaultAsc']['action'],
         ));
 
         // 部分视图常用变量
@@ -149,7 +149,17 @@ class Common_View extends Qwin_Application_View
             return false;
         }
         extract($this->_data, EXTR_OVERWRITE);
-        require $this->getLayout();
+
+        $request = Qwin::run('#request');
+        $isAjax = $request->g('qw-ajax');
+
+        // TODO js重载等
+        if (!$isAjax) {
+            require $this->getLayout();
+        } else {
+            require $this->getElement('content');
+        }
+        
         $this->afterDisplay();
         return $this;
     }
@@ -161,16 +171,10 @@ class Common_View extends Qwin_Application_View
         '' != $output && ob_end_clean();
 
         // TODO
-        $search = array(
-            '<!-- Qwin_Packer_Css -->',
-            '<!-- Qwin_Packer_Js -->',
-        );
-        $replace = array(
-            Qwin::run('Qwin_Packer_Css')->pack()->getHtmlTag(),
-            Qwin::run('Qwin_Packer_Js')->pack()->getHtmlTag(),
-        );
-        $output = str_replace($search, $replace, $output);
-
+        $search = '<!-- qwin-packer-sign -->';
+        $replace = Qwin::run('Qwin_Packer_Css')->pack()->getHtmlTag() . "\r\n" .
+                   Qwin::run('Qwin_Packer_Js')->pack()->getHtmlTag();
+        $output = Qwin_Converter_String::replaceFirst($search, $replace, $output);
         echo $output;
         unset($output);
     }

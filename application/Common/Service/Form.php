@@ -76,18 +76,15 @@ class Common_Service_Form extends Common_Service_BasicAction
          * 3. 获取模型默认值
          * TODO 可配置化
          */
-        if(null != $primaryKeyValue)
-        {
+        if (null != $primaryKeyValue) {
             $this->_result = $result = $query->where($primaryKey . ' = ?', $primaryKeyValue)->fetchOne();
             // 记录不存在,加载错误视图
-            if(false == $result)
-            {
+            if (false == $result) {
                 $return = array(
                     'result' => false,
                     'message' => $this->_lang->t('MSG_NO_RECORD'),
                 );
-                if($config['view']['display'])
-                {
+                if ($config['view']['display']) {
                     $this->view->setRedirectView($return['message']);
                 }
                 return $return;
@@ -96,7 +93,7 @@ class Common_Service_Form extends Common_Service_BasicAction
         } else {
             // 从配置元数据中取出表单初始值,再从url地址参数取出初始值,覆盖原值
             $data = $meta['field']->getSecondLevelValue(array('form', '_value'));
-            $data = $metaHelper->getUrlData($data);
+            //$data = $metaHelper->getUrlData($data);
         }
         unset($data[$primaryKey]);
 
@@ -108,8 +105,7 @@ class Common_Service_Form extends Common_Service_BasicAction
             'class' => $config['view']['class'],
             'data' => get_defined_vars(),
         );
-        if($config['view']['display'])
-        {
+        if ($config['view']['display']) {
             $this->view
                 ->setDataList($view['data'])
                 ->setProcesser($view['class']);

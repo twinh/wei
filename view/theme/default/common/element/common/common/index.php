@@ -23,6 +23,7 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2009-11-24 18:47:32
+ * @todo        !!!!!!!! jqrid生成
  */
 
 // 防止直接访问导致错误
@@ -33,6 +34,22 @@ $cssPacker
 $jsPacker
     ->add(QWIN_RESOURCE_PATH . '/js/jquery/plugin/jqgrid/i18n/grid.locale-en.js')
     ->add($jQueryFile['jqgrid']['js']);
+?>
+<!-- qwin-packer-sign -->
+<?php
+if ($isPopup) :
+    $jgrid['multiselect'] = 0;
+    $jgrid['width'] = 600;
+?>
+<style type="text/css">
+#t_ui-jqgrid-table{
+    display : none;
+}
+</style>
+<table id="ui-jqgrid-table"></table>
+<div id="ui-jqgrid-page"></div>
+<?php
+else :
 ?>
 <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
 	<div class="ui-box-header">
@@ -50,6 +67,9 @@ $jsPacker
         </div>
     </div>
 </div>
+<?php
+endif;
+?>
 <script type="text/javascript">
 jQuery(function($){
     $.jgrid.no_legacy_api = true;
@@ -58,8 +78,8 @@ jQuery(function($){
 	
 	Qwin.App = {};
 	Qwin.App.primaryKey = primaryKey;
-	
-    $("#ui-jqgrid-table").jqGrid({
+	var jqgridObj = $("#ui-jqgrid-table");
+    jqgridObj.jqGrid({
         url              : '<?php echo $jgrid['url'] ?>',
         datatype         : 'json',
         colNames         : <?php echo $jgrid['colNames'] ?>,
@@ -76,17 +96,27 @@ jQuery(function($){
             rows    : '<?php echo $jgrid['rows'] ?>',
             sort    : '<?php echo $jgrid['sort'] ?>',
             order   : '<?php echo $jgrid['order'] ?>',
-            search  : '<?php echo $jgrid['search'] ?>',
+            search  : '_search',
             nd      : 'nd',
             npage   : null
         },
         // 显示列的数目
         rownumbers       : true,
         // 允许多选
-        multiselect      : true,
+        multiselect      : <?php echo $jgrid['multiselect'] ?>,
         // 高度设置为100%,使表格不出现Y滚动条
         height           : '100%',
+        <?php
+        if (isset($jgrid['width'])) :
+        ?>
+        width            : '<?php echo $jgrid['width'] ?>',
+        <?php
+        else :
+        ?>
         autowidth        : true,
+        <?php
+        endif;
+        ?>
         // 分页栏
         pager            : '#ui-jqgrid-page',
         // 分页栏右下角显示记录数
@@ -96,12 +126,25 @@ jQuery(function($){
         // 双击查看详情
         ondblClickRow    : function(rowId, row, col ,e)
         {
+            <?php
+            if ($isPopup) :
+            ?>
+            var rowData = jqgridObj.jqGrid('getRowData', rowId);
+            $($.popupOpts.valueInput).val(rowData[$.popupOpts.valueColumn]);
+            $($.popupOpts.viewInput).val(rowData[$.popupOpts.viewColumn] + '(' + Qwin.Lang['LBL_SELECTED'] + ', ' + Qwin.Lang['LBL_READONLY'] + ')');
+            $.popupOpts.obj.dialog('close');
+            <?php
+            else :
+            ?>
             var rowData = $("#ui-jqgrid-table").jqGrid('getRowData', rowId),
                 addition = {};
             addition['action'] = 'View';
             addition[primaryKey] = rowData[primaryKey];
             window.location.href = Qwin.url.createUrl(Qwin.get, addition);
             return false;
+            <?php
+            endif;
+            ?>
         },
 		// 工具栏,设置在顶部
         toolbar          : [true, 'top']

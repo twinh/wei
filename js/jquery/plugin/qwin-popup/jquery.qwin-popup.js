@@ -27,8 +27,7 @@
     $.fn.qwinPopup = function(options) {
         var opts = $.extend({}, $.fn.qwinPopup.defaults, options);
         // 设置窗口标题
-        if(null != opts.title)
-        {
+        if (null != opts.title) {
             opts.dialog.title = opts.title;
         }
 
@@ -64,8 +63,9 @@
         viewColumn: 'name',
         valueColumn: 'id',
         dialog: {
+            position: ['center', 80],
             height: 'auto',
-            width: 'auto',
+            width: 600,
             modal: true,
             dialogClass: 'ui-popup-content'
         }

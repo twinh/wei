@@ -267,7 +267,7 @@ class Common_Metadata extends Qwin_Metadata
                                 'namespace' => 'Common',
                                 'module' => 'Member',
                                 'controller' => 'Member',
-                                'qwList' => 'id,group_id,username,email',
+                                'qw-list' => 'id,group_id,username,email',
                             ),
                             array(
                                 'username',
@@ -279,6 +279,11 @@ class Common_Metadata extends Qwin_Metadata
                 'attr' => array(
                     'isLink' => 0,
                     'isList' => 0,
+                ),
+                'validator' => array(
+                    'rule' => array(
+                        'required' => true,
+                    ),
                 ),
             ),
         ));
@@ -503,6 +508,22 @@ class Common_Metadata extends Qwin_Metadata
     public function convertDbIsDeleted($value, $name, $data, $dataCopy)
     {
         return 0;
+    }
+
+    public function convertEditAssignTo($value, $name, $data, $dataCopy)
+    {
+        $member = $this
+            ->metaHelper
+            // $this->model['receiver']['set']
+            ->getQueryByAsc(array(
+                'namespace' => 'Common',
+                'module' => 'Member',
+                'controller' => 'Member',
+            ))
+            ->where('id = ?', $value)
+            ->fetchOne();
+        $this->field->set('assign_to.form._value2', $member['username']);
+        return $value;
     }
 
     public function setIsLink($value, $name, $data, $dataCopy, $action)

@@ -58,6 +58,7 @@ class Common_Language_Zhcn extends Common_Language
             'LBL_LANG' => '语言',
             'LBL_NULL' => '未填写',
             'LBL_REDIRECT' => '跳转中',
+            'LBL_PLEASE_SELECT' => '请选择',
 
             // 域
             'LBL_FIELD_ID' => '编号',
@@ -180,6 +181,7 @@ class Common_Language_Zhcn extends Common_Language
             'MSG_NO_LAST_VIEWED_LOG' => '暂时没有查看记录',
 
             'LBL_MODULE_RECYCLEBIN' => '回收站',
+            'LBL_MODULE_MEMBER' => '用户',
         );
     }
 }

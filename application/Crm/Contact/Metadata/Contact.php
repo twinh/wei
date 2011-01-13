@@ -254,7 +254,20 @@ class Crm_Contact_Metadata_Contact extends Common_Metadata
 
             ),
             'model' => array(
-
+                'receiver' => array(
+                    'alias' => 'receiver',
+                    'type' => 'view',
+                    'local' => 'assign_to',
+                    'foreign' => 'id',
+                    'fieldMap' => array(
+                        'assign_to' => 'username',
+                    ),
+                    'set' => array(
+                        'namespace' => 'Common',
+                        'module' => 'Member',
+                        'controller' => 'Member',
+                    ),
+                ),
             ),
             'metadata' => array(
 

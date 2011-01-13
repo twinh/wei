@@ -55,17 +55,17 @@ class Common_Request extends Qwin_Request
      *      -- maxRow               列表页最大显示行数
      */
     protected $_option = array(
-        'id'            => 'qwId',
-        'page'          => 'qwPage',
-        'list'          => 'qwList',
-        'row'           => 'qwRow',
-        'order'         => 'qwOrder',
-        'orderField'    => 'qwOrderField',
-        'orderType'     => 'qwOrderType',
-        'search'        => 'qwSearch',
-        'searchField'   => 'qwSearchField',
-        'searchValue'   => 'qwSearchValue',
-        'searchOper'    => 'qwSearchOper',
+        'id'            => 'qw-id',
+        'page'          => 'qw-page',
+        'list'          => 'qw-list',
+        'row'           => 'qw-row',
+        'order'         => 'qw-order',
+        'orderField'    => 'qw-order-field',
+        'orderType'     => 'qw-order-type',
+        'search'        => 'qw-search',
+        'searchField'   => 'qw-search-field',
+        'searchValue'   => 'qw-search-value',
+        'searchOper'    => 'qw-search-oper',
 
         'maxRow'        => 500,
     );
@@ -231,15 +231,16 @@ class Common_Request extends Qwin_Request
     }
 
     /**
-     * 获取Url中元数据主键的值
+     * 获取请求中元数据主键的值
      *
      * @uses Qwin_Application_Metadata
      * @param array $asc 应用结构配置
      * @return null|string 值
      */
-    public function getUrlPrimaryKeyValue(array $asc)
+    public function getPrimaryKeyValue(array $asc)
     {
-        $primaryKey = $this->getPrimaryKeyName($asc);
+        $metaHelper = Qwin::run('Qwin_Application_Metadata');
+        $primaryKey = $metaHelper->getPrimaryKeyName($asc);
         return $this->g($primaryKey);
     }
 

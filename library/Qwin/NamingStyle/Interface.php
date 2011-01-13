@@ -1,6 +1,6 @@
 <?php
 /**
- * Management
+ * Interface
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,20 +16,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
- * @subpackage  Management
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-11 21:40:07
+ * @since       2011-01-12 19:19:42
  */
 
-class Common_Management_Controller_Management extends Common_Controller
+interface Qwin_NamingStyle_Interface
 {
-    public function actionIndex()
-    {
-        $meta = $this->_meta;
-        $this->view->setDataList(get_defined_vars());
-    }
+    /**
+     * 将字符串以当前风格解码为源
+     *
+     * @param string $name 名称
+     * @return array 源
+     */
+    public static function decode($name);
+
+    /**
+     * 将源编码为当前风格的字符串
+     *
+     * @param array $source 源
+     * @return string 名称
+     */
+    public static function encode(array $source);
 }

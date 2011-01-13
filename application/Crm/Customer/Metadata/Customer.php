@@ -296,16 +296,20 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
 
             ),
             'model' => array(
-                /*'company' => array(
-                    'alias' => 'detail',
-                    'type' => 'db',
-                    'local' => 'company_id',
-                    'set' => array(
-                        'namespace' => 'Crm',
-                        'module' => 'Company',
-                        'controller' => 'Company',
+                'receiver' => array(
+                    'alias' => 'receiver',
+                    'type' => 'view',
+                    'local' => 'assign_to',
+                    'foreign' => 'id',
+                    'fieldMap' => array(
+                        'assign_to' => 'username',
                     ),
-                ),*/
+                    'set' => array(
+                        'namespace' => 'Common',
+                        'module' => 'Member',
+                        'controller' => 'Member',
+                    ),
+                ),
             ),
             'metadata' => array(
 

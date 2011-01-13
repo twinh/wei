@@ -83,8 +83,7 @@ class Common_Service_View extends Common_Service_BasicAction
         $primaryKey = $meta['db']['primaryKey'];
 
         // TODO
-        if('integer' == $meta['field'][$primaryKey]['db']['type'])
-        {
+        if('integer' == $meta['field'][$primaryKey]['db']['type']) {
             $config['data']['primaryKeyValue'] = (integer)$config['data']['primaryKeyValue'];
         }
 
@@ -112,7 +111,7 @@ class Common_Service_View extends Common_Service_BasicAction
 
         $data = $result->toArray();
         $data = $metaHelper->convertOne($data, $config['data']['asAction'], $meta, $meta, array('view' => $config['data']['isView']));
-                
+
         // 设置视图
         $view = array(
             'class' => $config['view']['class'],

@@ -3,18 +3,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $config['interface']['charset'] ?>" />
 <title><?php echo qw_lang('LBL_HTML_TITLE') ?></title>
-<!-- Qwin_Packer_Css -->
-<!-- Qwin_Packer_Js -->
+<!-- qwin-packer-sign -->
 <?php
 $member = Qwin::run('-session')->get('member');
 $nickname = isset($member['contact']) ? $member['contact']['nickname'] : $member['username'];
 $jQueryFile = array(
-    'core' => $jquery->loadUi('core', false),
-    'widget' => $jquery->loadUi('widget', false),
-    'button' => $jquery->loadUi('button', false),
-    'coreEffect' => $jquery->loadEffect('core', false),
-    'qui' => $jquery->loadPlugin('qui', null, false),
-    'pngFix' => $jquery->loadPlugin('pngFix', null, false),
+    'core'          => $jquery->loadUi('core', false),
+    'widget'        => $jquery->loadUi('widget', false),
+    'button'        => $jquery->loadUi('button', false),
+    'coreEffect'    => $jquery->loadEffect('core', false),
+    'qui'           => $jquery->loadPlugin('qui', null, false),
 );
 $cssPacker
     ->add($jquery->loadTheme(null, false))
@@ -33,8 +31,7 @@ $jsPacker
     ->add($jQueryFile['widget']['js'])
     ->add($jQueryFile['button']['js'])
     ->add($jQueryFile['coreEffect'])
-    ->add($jQueryFile['qui']['js'])
-    ->add($jQueryFile['pngFix']['js']);
+    ->add($jQueryFile['qui']['js']);
 ?>
 <!--[if IE 6]>
 <link rel="stylesheet" type="text/css" media="all" href="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/default/common/style/style-ie6.css" />
