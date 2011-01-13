@@ -1,6 +1,6 @@
 <?php
 /**
- * Home
+ * form-link
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -20,15 +20,9 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-09 09:42:41
+ * @since       2011-01-13 19:47:35
  */
-
-class Common_Home_Controller_Home extends Common_Controller
-{
-    public function actionUpdateLog()
-    {
-        $meta['page']['icon'] = 'clipboard';
-        $meta['page']['title'] = 'LBL_MODULE_HOME';
-        $this->view->setDataList(get_defined_vars());
-    }
-}
+?>
+<div class="ui-operation-field">
+    <?php echo $output ?>
+</div>

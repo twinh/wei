@@ -27,6 +27,7 @@
 
 // 防止直接访问导致错误
 !defined('QWIN_PATH') && exit('Forbidden');
+$jsPacker->add(QWIN_RESOURCE_PATH . '/js/qwin/form.js');
 ?>
   <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
     <div class="ui-box-header">
@@ -34,19 +35,7 @@
     </div>
     <div class="ui-form-content ui-box-content ui-widget-content">
         <form id="post-form" name="form" method="post" action="">
-        <div class="ui-operation-field">
-            <?php
-            echo qw_jquery_link(qw_url($asc, array('action' => 'Index')), qw_lang('LBL_ACTION_LIST'), 'ui-icon-note'),
-                 qw_jquery_link(qw_url($asc, array('action' => 'Add')), qw_lang('LBL_ACTION_ADD'), 'ui-icon-plusthick');
-            if(isset($data[$primaryKey])):
-                echo qw_jquery_link(qw_url($asc, array('action' => 'Edit', $primaryKey => $data[$primaryKey])), qw_lang('LBL_ACTION_EDIT'), 'ui-icon-tag'),
-                     qw_jquery_link(qw_url($asc, array('action' => 'View', $primaryKey => $data[$primaryKey])), qw_lang('LBL_ACTION_VIEW'), 'ui-icon-lightbulb'),
-                     qw_jquery_link(qw_url($asc, array('action' => 'Add', $primaryKey => $data[$primaryKey])), qw_lang('LBL_ACTION_COPY'), 'ui-icon-transferthick-e-w'),
-                     qw_jquery_link('javascript:if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE)){window.location=\'' . qw_url($asc, array('action' => 'Delete', $primaryKey => $data[$primaryKey])) . '\'};', qw_lang('LBL_ACTION_DELETE'), 'ui-icon-trash');
-            endif;
-            echo qw_jquery_link('javascript:history.go(-1);', qw_lang('LBL_ACTION_RETURN'), 'ui-icon-arrowthickstop-1-w');
-            ?>
-        </div>
+        <?php $this->loadWidget('Common_Widget_FormLink', array($data, $primaryKey)) ?>
         <div class="ui-helper-hidden">
             <?php
             // TODO 逻辑分离
@@ -132,20 +121,7 @@
             </table>
         </fieldset>
         <?php endforeach ?>
-        <div class="ui-operation-field">
-            <?php
-            echo qw_jquery_link(qw_url($asc, array('action' => 'Index')), qw_lang('LBL_ACTION_LIST'), 'ui-icon-note'),
-                 qw_jquery_link(qw_url($asc, array('action' => 'Add')), qw_lang('LBL_ACTION_ADD'), 'ui-icon-plusthick');
-            if(isset($data[$primaryKey])):
-                echo qw_jquery_link(qw_url($asc, array('action' => 'Edit', $primaryKey => $data[$primaryKey])), qw_lang('LBL_ACTION_EDIT'), 'ui-icon-tag'),
-                     qw_jquery_link(qw_url($asc, array('action' => 'View', $primaryKey => $data[$primaryKey])), qw_lang('LBL_ACTION_VIEW'), 'ui-icon-lightbulb'),
-                     qw_jquery_link(qw_url($asc, array('action' => 'Add', $primaryKey => $data[$primaryKey])), qw_lang('LBL_ACTION_COPY'), 'ui-icon-transferthick-e-w'),
-                     qw_jquery_link('javascript:if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE)){window.location=\'' . qw_url($asc, array('action' => 'Delete', $primaryKey => $data[$primaryKey])) . '\'};', qw_lang('LBL_ACTION_DELETE'), 'ui-icon-trash');
-            endif;
-            echo qw_jquery_link('javascript:history.go(-1);', qw_lang('LBL_ACTION_RETURN'), 'ui-icon-arrowthickstop-1-w');
-            ?>
-        </div>
+        <div class="ui-operation-field"></div>
         </form>
     </div>
   </div>
-<script type="text/javascript" src="<?php echo QWIN_RESOURCE_PATH?>/js/qwin/form.js"></script>

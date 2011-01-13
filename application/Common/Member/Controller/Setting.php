@@ -34,10 +34,7 @@ class Common_Member_Controller_Setting extends Common_Controller
     public function actionIndex()
     {
         $meta = $this->_meta;
-        // 设置视图
-        $this->_view = array(
-            'data' => get_defined_vars(),
-        );
+        $this->view->setDataList(get_defined_vars());
     }
 
     /**
@@ -50,15 +47,8 @@ class Common_Member_Controller_Setting extends Common_Controller
             $meta = $this->_meta;
             $urlLanguage = $this->request->g('language');
             $theme = $this->config['interface']['theme'];
-            
-            // 设置视图
-            $this->_view = array(
-                'class' => 'Common_View',
-                'element' => array(
-                    array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/member/setting-language.php'),
-                ),
-                'data' => get_defined_vars(),
-            );
+
+            $this->view->setDataList(get_defined_vars());
         } else {
             $member = $ses->get('member');
             $language = $ses->get('language');
@@ -98,10 +88,7 @@ class Common_Member_Controller_Setting extends Common_Controller
             $urlTheme = $this->request->g('style');
             $theme2 = $this->config['interface']['theme'];
 
-            // 设置视图
-            $this->_view = array(
-                'data' => get_defined_vars(),
-            );
+            $this->view->setDataList(get_defined_vars());
         } else {
             $ses = Qwin::run('-session');
             $member = $ses->get('member');
