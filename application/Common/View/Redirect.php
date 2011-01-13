@@ -30,7 +30,7 @@ class Common_View_Redirect extends Qwin_Application_View_Processer
     public function __construct(Qwin_Application_View $view)
     {
         $view->setLayout('<resource><theme>/<defaultNamespace>/layout/default<suffix>');
-        $view->setElement('content', '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>/redirect<suffix>');
+        $view->setElement('content', '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>-redirect<suffix>');
         $meta['page']['title'] = 'LBL_REDIRECT';
         $meta['page']['icon'] = 'info';
         $message = $view->message;
