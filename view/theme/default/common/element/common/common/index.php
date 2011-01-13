@@ -39,11 +39,14 @@ $jsPacker
 <?php
 if ($isPopup) :
     $jgrid['multiselect'] = 0;
-    $jgrid['width'] = 600;
+    $jgrid['width'] = 800;
 ?>
 <style type="text/css">
 #t_ui-jqgrid-table{
     display : none;
+}
+.ui-jqgrid{
+    padding: 0;
 }
 </style>
 <table id="ui-jqgrid-table"></table>
