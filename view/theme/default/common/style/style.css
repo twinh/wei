@@ -160,7 +160,6 @@ div.ui-header-logo{
 .ui-main{
     margin: 0 auto;
     border: none;
-	margin-bottom: 20px;
 }
 #ui-main-table{
     width: 100%;
@@ -177,6 +176,7 @@ div.ui-header-logo{
 #ui-main-right{
     width: auto;
     vertical-align: top;
+    padding-bottom: 20px;
 }
 
 /* Footer

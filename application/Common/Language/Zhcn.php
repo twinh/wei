@@ -182,6 +182,8 @@ class Common_Language_Zhcn extends Common_Language
 
             'LBL_MODULE_RECYCLEBIN' => '回收站',
             'LBL_MODULE_MEMBER' => '用户',
+            'LBL_MODULE_CUSTOMER' => '客户',
+            ''
         );
     }
 }

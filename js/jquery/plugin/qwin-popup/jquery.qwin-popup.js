@@ -36,8 +36,7 @@
 
         // 点击弹出窗口,显示内容
         this.click(function(){
-            if($('#ui-popup').html() == null)
-			{
+            if($('#ui-popup').html() == null) {
 				$('body').append('<div id="ui-popup"></div>');
 			}
             var popupObj = $('#ui-popup');
