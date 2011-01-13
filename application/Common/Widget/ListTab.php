@@ -32,33 +32,53 @@ class Common_Widget_ListTab extends Common_Widget
         $asc = $view['asc'];
         $url = Qwin::run('-url');
         $lang = Qwin::run('-lang');
+        $controller = Qwin::run('-controller');
+        $forbiddenAction = $controller->getForbiddenAction();
+        $tab = array();
         
-        $tab = array(
-            array(
-                'url' => $url->createUrl($asc, array('action' => 'Add')),
-                'title' => $lang->t('LBL_ACTION_ADD'),
-                'icon' => 'ui-icon-plus',
-                'target' => null,
-                'id' => 'action-add',
-                'class' => null,
-            ),
-            array(
-                'url' => 'javascript:;',
-                'title' => $lang->t('LBL_ACTION_DELETE'),
-                'icon' => 'ui-icon-trash',
-                'target' => null,
-                'id' => 'action-delete',
-                'class' => null,
-            ),
-            array(
+        if (!in_array('add', $forbiddenAction)) {
+            $tab['add'] = array(
+                'url'       => $url->createUrl($asc, array('action' => 'Add')),
+                'title'     => $lang->t('LBL_ACTION_ADD'),
+                'icon'      => 'ui-icon-plus',
+                'target'    => null,
+                'id'        => 'action-add',
+                'class'     => null,
+            );
+        }
+        
+        if (!in_array('delete', $forbiddenAction)) {
+            $tab['delete'] = array(
+                'url'       => 'javascript:;',
+                'title'     => $lang->t('LBL_ACTION_DELETE'),
+                'icon'      => 'ui-icon-trash',
+                'target'    => null,
+                'id'        => 'action-delete',
+                'class'     => null,
+            );
+        }
+
+        if (!in_array('delete', $forbiddenAction)) {
+            $tab['delete'] = array(
+                'url'       => 'javascript:;',
+                'title'     => $lang->t('LBL_ACTION_DELETE'),
+                'icon'      => 'ui-icon-trash',
+                'target'    => null,
+                'id'        => 'action-delete',
+                'class'     => null,
+            );
+        }
+
+        if (!in_array('list', $forbiddenAction)) {
+            $tab['list'] = array(
                 'url' => $url->createUrl($asc, array('action' => 'Index')),
                 'title' => $lang->t('LBL_ACTION_LIST'),
                 'icon' => 'ui-icon-note',
                 'target' => null,
                 'id' => 'action-list',
                 'class' => null,
-            ),
-        );
+            );
+        }
 
         // 如果当前行为存在选项卡视图,加载该视图,否则直接输出默认选项卡内容
         $class = $asc['namespace'] . '_' . $asc['module'] . '_Widget_ListTab';

@@ -62,31 +62,6 @@ class Qwin_Application_Controller
     protected $_validatorField;
 
     /**
-     *
-     * @var array $_viewOption  视图配置
-     *
-     *      -- display          是否要加载视图
-     *
-     *      -- loaded           是否已经加载了视图
-     *
-     *      -- class            视图类名
-     *
-     *      -- layout           视图布局
-     *
-     *      -- element          视图元素
-     *
-     *      -- data             视图数据
-     */
-    protected $_viewOption = array(
-        'display'   => true,
-        'loaded'    => false,
-        'class'     => 'Qwin_Application_View_Null',
-        'layout'    => array(),
-        'element'   => array(),
-        'data'      => array(),
-    );
-
-    /**
      * 禁用的行为列表
      * 当行为被禁用时,无法通过外部进行访问
      * 通过禁用行为,可以用于精确的
@@ -94,12 +69,6 @@ class Qwin_Application_Controller
      * @var array
      */
     protected $_forbiddenAction = array();
-
-    /**
-     * 视图配置
-     * @var array
-     */
-    protected $_view = array();
 
     /**
      * 获取禁用的行为列表

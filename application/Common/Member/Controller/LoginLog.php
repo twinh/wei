@@ -27,8 +27,7 @@
 
 class Common_Member_Controller_LoginLog extends Common_ActionController
 {
-    public function actionMyLoginLog()
-    {
-        
-    }
+    protected $_forbiddenAction = array(
+        'add',  'edit', 'delete'
+    );
 }
