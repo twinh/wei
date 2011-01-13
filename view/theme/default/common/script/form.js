@@ -28,11 +28,7 @@ jQuery(function($){
             }
         });
     }
-
-    // 复制上方操作域到下方
-    var content = $('div.ui-form-content');
-    content.find('div.ui-operation-field:last').append(content.find('div.ui-operation-field:first').html());
-
+    
     // 操作区域不添加 focus 事件
     //$('#post-form div.ui-field-common').find('input, textarea').not('.ui-form-button').qui({focus: true});
     //$('#ui-field-operation input.ui-form-button').qui();

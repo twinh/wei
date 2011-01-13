@@ -26,14 +26,19 @@
  */
 // 防止直接访问导致错误
 !defined('QWIN_PATH') && exit('Forbidden');
+$operationField =  $this->loadWidget('Common_Widget_FormLink', array($data, $primaryKey));
 ?>
 <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
 <div class="ui-box-header">
     <?php $this->loadWidget('Common_Widget_Header') ?>
 </div>
 <div class="ui-form-content ui-box-content ui-widget-content">
-    <?php $this->loadWidget('Common_Widget_FormLink', array($data, $primaryKey)) ?>
+    <div class="ui-operation-field">
+        <?php echo $operationField ?>
+    </div>
     <?php require $this->decodePath('<resource><theme>/<defaultNamespace>/element/basic/form<suffix>') ?>
-    <div class="ui-operation-field"></div>
+    <div class="ui-operation-field">
+        <?php echo $operationField ?>
+    </div>
 </div>
 </div>

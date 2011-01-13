@@ -515,7 +515,8 @@ class Qwin_Application_Metadata extends Qwin_Metadata
 
             // 初始化两数组的值,如果不存在,则设为空
             if (isset($data[$name])) {
-                'NULL' == $data[$name] && $data[$name] = null;
+                'NULL' === $data[$name] && $data[$name] = null;
+                '' === $data[$name] && $data[$name] = null;
                 $newData[$name] = $data[$name];
             } else {
                 $newData[$name] = $data[$name] = null;

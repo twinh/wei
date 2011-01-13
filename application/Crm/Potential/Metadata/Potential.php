@@ -51,6 +51,26 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                     ),
                 ),
                 'customer_id' => array(
+                    'basic' => array(
+                        'title' => 'LBL_MODULE_CUSTOMER',
+                    ),
+                    'form' => array(
+                        '_widgetDetail' => array(
+                            array(
+                                array('Qwin_Widget_JQuery_PopupGrid', 'render'),
+                                'LBL_MODULE_CUSTOMER',
+                                array(
+                                    'namespace' => 'Crm',
+                                    'module' => 'Customer',
+                                    'controller' => 'Customer',
+                                    'qw-list' => 'id,name,birthday,email,source',
+                                ),
+                                array(
+                                    'name', 'id'
+                                ),
+                            ),
+                        ),
+                    ),
                     'validator' => array(
                         'rule' => array(
                             'required' => true,

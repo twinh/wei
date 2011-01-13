@@ -105,8 +105,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
     protected function _format($metadata, $name = null)
     {
         // 转换成数组
-        if(is_string($metadata))
-        {
+        if (is_string($metadata)) {
             $metadata = array(
                 'form' => array(
                     'name' => $metadata,
@@ -114,14 +113,11 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
             );
         // 初始化名称
         } else {
-            if(!isset($metadata['form']))
-            {
+            if (!isset($metadata['form'])) {
                 $metadata['form'] = array();
             }
-            if(!isset($metadata['form']['name']))
-            {
-                if(null != $name)
-                {
+            if (!isset($metadata['form']['name'])) {
+                if (null != $name) {
                     $metadata['form']['name'] = $name;
                 } else {
                     require_once 'Qwin/Metadata/Element/Field/Exception.php';
@@ -130,38 +126,31 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
             }
         }
 
-        if(!isset($metadata['basic']))
-        {
+        if (!isset($metadata['basic'])) {
             $metadata['basic'] = array();
         }
-
+        
         // 设置名称
-        if(!isset($metadata['basic']['title']))
-        {
+        if (!isset($metadata['basic']['title'])) {
             $metadata['basic']['title'] = 'LBL_FIELD_' . strtoupper($metadata['form']['name']);
         }
 
         // 设置描述语句
-        if(!isset($metadata['basic']['description']))
-        {
+        if (!isset($metadata['basic']['description'])) {
             $metadata['basic']['description'] = array();
-        }
-        elseif(!is_array($metadata['basic']['description']))
-        {
+        } elseif(!is_array($metadata['basic']['description'])) {
             $metadata['basic']['description'] = array($metadata['basic']['description']);
         }
 
         // 设置排序
-        if(!isset($metadata['basic']['order']))
-        {
+        if (!isset($metadata['basic']['order'])) {
             $metadata['basic']['order'] = Qwin_Metadata_Element_Field_Order::getOrder();
         } else {
             $metadata['basic']['order'] = (int)$metadata['basic']['order'];
         }
 
         // 设置编号
-        if(!isset($metadata['form']['id']))
-        {
+        if (!isset($metadata['form']['id'])) {
             $metadata['form']['id'] = $metadata['form']['name'];
         }
 
@@ -169,19 +158,14 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         $metadata['form'] = $this->_parseWidgetSetting($metadata['form']);
 
         // 初始验证器和补全验证信息
-        if(!isset($metadata['validator']))
-        {
+        if(!isset($metadata['validator'])) {
             $metadata['validator'] = array(
                 'rule' => array(),
                 'message' => array(),
             );
-        }
-        elseif(!empty($metadata['validator']['rule']))
-        {
-            foreach($metadata['validator']['rule'] as $key => $rule)
-            {
-                if(!isset($metadata['validator']['message'][$key]))
-                {
+        } elseif(!empty($metadata['validator']['rule'])) {
+            foreach ($metadata['validator']['rule'] as $key => $rule) {
+                if (!isset($metadata['validator']['message'][$key])) {
                     $metadata['validator']['message'][$key] = 'MSG_VALIDATOR_' . strtoupper($key);
                 }
             }
@@ -189,10 +173,8 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
 
         // 转换转换器的配置,使不同的行为之间允许共享转换器
         !isset($metadata['converter']) && $metadata['converter'] = array();
-        foreach($metadata['converter'] as $key => $value)
-        {
-            if(is_string($value) && isset($metadata['converter'][$value]))
-            {
+        foreach ($metadata['converter'] as $key => $value) {
+            if (is_string($value) && isset($metadata['converter'][$value])) {
                 $metadata['converter'][$key] = $metadata['converter'][$value];
             }
         }
@@ -214,25 +196,20 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
 
         // 查找是否已有该属性的缓存数据
         $cacheName = implode('|', $allowAttr) . '-' . implode('', $banAttr);
-        if(isset($this->_attrCache[$cacheName]))
-        {
+        if (isset($this->_attrCache[$cacheName])) {
             return $this->_attrCache[$cacheName];
         }
 
         $tmpArr = array();
         $result = array();
-        foreach($allowAttr as $attr)
-        {
+        foreach ($allowAttr as $attr) {
             $tmpArr[$attr] = 1;
         }
-        foreach($banAttr as $attr)
-        {
+        foreach ($banAttr as $attr) {
             $tmpArr[$attr] = 0;
         }
-        foreach($this->_data as $field)
-        {
-            if($tmpArr == array_intersect_assoc($tmpArr, $field['attr']))
-            {
+        foreach ($this->_data as $field) {
+            if ($tmpArr == array_intersect_assoc($tmpArr, $field['attr'])) {
                 $result[$field['form']['name']] = $field['form']['name'];
             }
         }
@@ -270,15 +247,13 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
     public function order()
     {
         $newArr = array();
-        foreach($this->_data as $key => $val)
-        {
+        foreach ($this->_data as $key => $val) {
             $tempArr[$key] = $val['basic']['order'];
         }
         // 倒序再排列,因为 asort 会使导致倒序
         $tempArr = array_reverse($tempArr);
         asort($tempArr);
-        foreach($tempArr as $key => $val)
-        {
+        foreach ($tempArr as $key => $val) {
             $newArr[$key] = $this->_data[$key];
         }
         $this->_data = $newArr;
@@ -304,19 +279,16 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
     public function translate($language)
     {
         
-        foreach($this->_data as &$data)
-        {
+        foreach($this->_data as &$data) {
             // 转换标题
             $data['basic']['titleCode'] = $data['basic']['title'];
-            if(isset($language[$data['basic']['title']]))
-            {
+            if (isset($language[$data['basic']['title']])) {
                 $data['basic']['title'] = $language[$data['basic']['title']];
             }
 
             // 转换描述
             $data['basic']['descriptionCode'] = array();
-            foreach($data['basic']['description'] as $key => &$description)
-            {
+            foreach ($data['basic']['description'] as $key => &$description) {
                 $data['basic']['descriptionCode'][$key] = $description;
                 if(isset($language[$description]))
                 {
@@ -326,8 +298,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
 
             // 转换分组
             $data['basic']['groupCode'] = $data['basic']['group'];
-            if(isset($language[$data['basic']['group']]))
-            {
+            if (isset($language[$data['basic']['group']])) {
                 $data['basic']['group'] = $language[$data['basic']['group']];
             }
         }
@@ -336,10 +307,8 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
 
     public function convertReadonlyToHidden()
     {
-        foreach($this->_data as $field => $data)
-        {
-            if(1 == $data['attr']['isReadonly'] || 'custom' == $data['form']['_type'])
-            {
+        foreach ($this->_data as $field => $data) {
+            if (1 == $data['attr']['isReadonly'] || 'custom' == $data['form']['_type']) {
                 $this->_data[$field]['form']['_type'] = 'hidden';
             }
         }
@@ -356,8 +325,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
      */
     public function addClass($field, $value)
     {
-        if('' != $this->_data[$field]['form']['class'])
-        {
+        if ('' != $this->_data[$field]['form']['class']) {
             $value = ' ' . $value;
         }
         $this->_data[$field]['form']['class'] .= $value;
@@ -385,12 +353,10 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
     public function _parseWidgetSetting($form)
     {
         !isset($form['_widgetDetail']) && $form['_widgetDetail'] = array();
-        if(isset($form['_widget']))
-        {
+        if (isset($form['_widget'])) {
             $newSetting = array();
             !is_array($form['_widget']) && $form['_widget'] = array($form['_widget']);
-            foreach($form['_widget'] as $name => $setting)
-            {
+            foreach ($form['_widget'] as $name => $setting) {
                 isset($this->_widgetMap[$setting]) && $setting = $this->_widgetMap[$setting];
                 /**
                  * 默认的生成方法是render
@@ -407,8 +373,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
     public function getSecondLevelValue($type)
     {
         $newData = array();
-        foreach($this->_data as $data)
-        {
+        foreach ($this->_data as $data) {
             $newData[$data['form']['name']] = $data[$type[0]][$type[1]];
         }
         return $newData;
@@ -436,10 +401,8 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
     public function setReadonly($data)
     {
         $data = (array)$data;
-        foreach($data as $key)
-        {
-            if(0 == $this->_data[$key]['attr']['isReadonly'])
-            {
+        foreach ($data as $key) {
+            if (0 == $this->_data[$key]['attr']['isReadonly']) {
                 $this->_data[$key]['attr']['isReadonly'] = 1;
                 $this->_data[$key]['form']['_type'] = 'hidden';
             }
@@ -455,8 +418,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
      */
     public function setFormGroupName($name)
     {
-        foreach($this->_data as $key => $value)
-        {
+        foreach ($this->_data as $key => $value) {
             $this->_data[$key]['form']['_oldName'] = $this->_data[$key]['form']['_name'];
             $this->_data[$key]['form']['id'] = $name . '_' . $this->_data[$key]['form']['_name'];
             $this->_data[$key]['form']['_name'] = $name . '[' . $this->_data[$key]['form']['_name'] . ']';
@@ -472,8 +434,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
      */
     public function setFormPrefixName($name)
     {
-        foreach($this->_data as $key => $value)
-        {
+        foreach ($this->_data as $key => $value) {
             $this->_data[$key]['form']['_oldName'] = $this->_data[$key]['form']['_name'];
             $this->_data[$key]['form']['_name'] = $name . $this->_data[$key]['form']['_name'];
         }
@@ -490,10 +451,8 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
     public function setReadonlyExcept($data)
     {
         $data = (array)$data;
-        foreach($this->_data as $key => $value)
-        {
-            if(!in_array($key, $data) && 0 == $this->_data[$key]['attr']['isReadonly'])
-            {
+        foreach ($this->_data as $key => $value) {
+            if (!in_array($key, $data) && 0 == $this->_data[$key]['attr']['isReadonly']) {
                 $this->_data[$key]['attr']['isReadonly'] = 1;
                 $this->_data[$key]['form']['_type'] = 'hidden';
             }

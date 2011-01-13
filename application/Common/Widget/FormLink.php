@@ -104,7 +104,7 @@ class Common_Widget_FormLink extends Common_Widget
                 'param'     => $param,
             ), $view);
         } else {
-            $this->renderLink($link, $view);
+            return $this->renderLink($link, $view, false);
         }
     }
 
@@ -122,7 +122,7 @@ class Common_Widget_FormLink extends Common_Widget
             $output .= Qwin_Helper_Html::jQueryLink($row['url'], $row['title'], $row['icon']);
         }
         if ($echo) {
-            require $view->decodePath('<resource><theme>/<defaultNamespace>/element/widget/form-link<suffix>');
+            require $view->decodePath('<resource><theme>/<defaultNamespace>/element/basic/output<suffix>');
         } else {
             return $output;
         }

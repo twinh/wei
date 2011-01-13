@@ -110,7 +110,26 @@ class Crm_Contact_Metadata_Contact extends Common_Metadata
                 ),
                 'parent_id' => array(
                     'basic' => array(
+                        'title' => 'LBL_FIELD_SUPERIOR',
                         'group' => 1,
+                    ),
+                    'form' => array(
+                        '_widgetDetail' => array(
+                            array(
+                                array('Qwin_Widget_JQuery_PopupGrid', 'render'),
+                                'LBL_MODULE_CONTACT',
+                                array(
+                                    'namespace' => 'Crm',
+                                    'module' => 'Contact',
+                                    'controller' => 'Contact',
+                                    'qw-list' => 'id,full_name,birthday,email,source',
+                                ),
+                                array(
+                                    'full_name',
+                                    'id'
+                                ),
+                            ),
+                        ),
                     ),
                 ),
                 'title' => array(
@@ -254,6 +273,19 @@ class Crm_Contact_Metadata_Contact extends Common_Metadata
 
             ),
             'model' => array(
+                'parent' => array(
+                    'alias' => 'parent',
+                    'type' => 'view',
+                    'local' => 'parent_id',
+                    'fieldMap' => array(
+                        'parent_id' => 'full_name',
+                    ),
+                    'set' => array(
+                        'namespace' => 'Crm',
+                        'module' => 'Contact',
+                        'controller' => 'Contact',
+                    ),
+                ),
                 'receiver' => array(
                     'alias' => 'receiver',
                     'type' => 'view',
