@@ -28,7 +28,8 @@
 !isset($data) && $data = array();
 $jQueryFile['validate'] = $jquery->loadPlugin('validate', 'qwin', false);
 $jsPacker
-    ->add($jQueryFile['validate']['js']);
+    ->add($jQueryFile['validate']['js'])
+    ->add(QWIN_RESOURCE_PATH . '/js/qwin/form.js');
 ?>
 <script type="text/javascript">
 var jQueryValidateCode = <?php echo $jQueryValidateCode?>;
@@ -129,6 +130,3 @@ var jQueryValidateCode = <?php echo $jQueryValidateCode?>;
             <?php echo qw_jquery_button('reset', qw_lang('LBL_ACTION_RESET'), 'ui-icon-arrowreturnthick-1-w') ?>
         </div>
         </form>
-<?php
-$jsPacker->add(QWIN_RESOURCE_PATH . '/js/qwin/form.js');
-?>
