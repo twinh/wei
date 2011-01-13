@@ -53,18 +53,14 @@ class Common_Member_Controller_Group extends Common_ActionController
         /**
          * 记录不存在,加载错误视图
          */
-        if(false == $result)
-        {
+        if (false == $result) {
             return $this->view->setRedirectView($this->_lang->t('MSG_NO_RECORD'));
         }
 
-        if(empty($_POST))
-        {
+        if (empty($_POST)) {
             $permission = unserialize($result['permission']);
             $appStructure = require QWIN_ROOT_PATH . '/cache/php/application-structure.php';
-            $this->_view = array(
-                'data' => get_defined_vars(),
-            );
+            $this->view->setDataList(get_defined_vars());
         } else {
             $permission = (array)$this->request->p('permission');
             /**

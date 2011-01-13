@@ -182,4 +182,13 @@ class Qwin_Converter_String
     {
         return explode($code, $str);
     }
+
+    public static function replaceFirst($needle, $replace, $haystack)
+    {
+        $pos = strpos($haystack, $needle);
+        if ($pos === false) {
+            return $haystack;
+        }
+        return substr_replace($haystack, $replace, $pos, strlen($needle));
+    }
 }

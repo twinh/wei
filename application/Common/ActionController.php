@@ -40,16 +40,7 @@ class Common_ActionController extends Common_Controller
     public function actionIndex()
     {
         $request = $this->request;
-        if (null == $request->g('json')) {
-            $service = new Common_Service_Index();
-            $service->process(array(
-                'set' => $this->_asc,
-                'data' => array(
-                    'list' => $request->getListField(),
-                ),
-                'this' => $this,
-            ));
-        } else {
+        if ($request->g('json')) {
             $service = new Common_Service_List();
             $service->process(array(
                 'set' => $this->_asc,
@@ -68,27 +59,17 @@ class Common_ActionController extends Common_Controller
                 ),
                 'this' => $this,
             ));
+        } else {
+            $service = new Common_Service_Index();
+            $service->process(array(
+                'set' => $this->_asc,
+                'data' => array(
+                    'list' => $request->getListField(),
+                    'isPopup' => $request->g('qw-popup'),
+                ),
+                'this' => $this,
+            ));
         }
-    }
-
-    /**
-     * 弹出窗口
-     *
-     * @return array 服务处理结果
-     */
-    public function actionPopup()
-    {
-        $service = new Common_Service_Index();
-        $service->process(array(
-            'set' => $this->_asc,
-            'data' => array(
-                'list' => $this->metaHelper->getListField(),
-            ),
-            'view' => array(
-                'class' => 'Common_View_Popup',
-            ),
-            'this' => $this,
-        ));
     }
 
     /**
@@ -102,7 +83,7 @@ class Common_ActionController extends Common_Controller
         $service->process(array(
             'set' => $this->_asc,
             'data' => array(
-                'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_asc),
+                'primaryKeyValue' => $this->request->getPrimaryKeyValue($this->_asc),
             ),
             'this' => $this,
         ));
@@ -123,7 +104,7 @@ class Common_ActionController extends Common_Controller
             $config = array(
                 'set' => $this->_asc,
                 'data' => array(
-                    'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_asc),
+                    'primaryKeyValue' => $this->request->getPrimaryKeyValue($this->_asc),
                 ),
                 'this' => $this,
             );
@@ -166,7 +147,7 @@ class Common_ActionController extends Common_Controller
             $config = array(
                 'set' => $this->_asc,
                 'data' => array(
-                    'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_asc),
+                    'primaryKeyValue' => $this->request->getPrimaryKeyValue($this->_asc),
                     'asAction' => 'edit',
                     'isLink' => false,
                     'isView' => false,
@@ -207,13 +188,11 @@ class Common_ActionController extends Common_Controller
      */
     public function actionDelete()
     {
-        /**
-         * @see Common_Service_Delete $_config
-         */
-        $config = array(
+        $service = new Common_Service_Delete();
+        return $service->process(array(
             'set' => $this->_asc,
             'data' => array(
-                'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_asc),
+                'primaryKeyValue' => $this->request->getPrimaryKeyValue($this->_asc),
             ),
             'callback' => array(
                 'afterDb' => array(
@@ -221,7 +200,6 @@ class Common_ActionController extends Common_Controller
                 ),
             ),
             'this' => $this,
-        );
-        return Qwin::run('Common_Service_Delete')->process($config);
+        ));
     }
 }

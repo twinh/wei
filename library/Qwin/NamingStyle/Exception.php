@@ -1,6 +1,6 @@
 <?php
 /**
- * Management
+ * Exception
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,20 +16,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
- * @subpackage  Management
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-11 21:40:07
+ * @since       2011-01-12 21:16:43
  */
 
-class Common_Management_Controller_Management extends Common_Controller
+class Qwin_NamingStyle_Exception extends Qwin_Exception
 {
-    public function actionIndex()
-    {
-        $meta = $this->_meta;
-        $this->view->setDataList(get_defined_vars());
-    }
 }

@@ -38,7 +38,10 @@ class Common_Service_Index extends Common_Service_BasicAction
             'controller' => null,
             'action' => null,
         ),
-        'data' => array(),
+        'data' => array(
+            'list' => array(),
+            'isPopup' => false,
+        ),
         'callback' => array(
             'beforeViewLoad' => array(),
         ),
@@ -66,6 +69,9 @@ class Common_Service_Index extends Common_Service_BasicAction
         if (null != $config['data']['list']) {
             $layout = array_intersect($layout, (array)$config['data']['list']);
         }
+
+        // 是否以弹出框形式显示
+        $isPopup = $config['data']['isPopup'];
 
         // 设置视图
         $view = array(

@@ -35,14 +35,19 @@ class Qwin_Widget_JQuery_PopupGrid
      */
     public function render($meta, $title, $url, $viewField)
     {
-
         $lang = Qwin::run('-lang');
         $jquery = Qwin::run('Qwin_Resource_JQuery');
         $id = $meta['id'];
+        $view = Qwin::run('-view');
+        $cssPacker = Qwin::run('Qwin_Packer_Css');
+        $jsPacker = Qwin::run('Qwin_Packer_Js');
+
+        $url['qw-popup'] = 1;
+        $url['qw-ajax'] = 1;
+        $title = $lang->t('LBL_PLEASE_SELECT') . $lang->t($title);
 
         // 设置新的表单属性
-        foreach(array('name', 'id') as $value)
-        {
+        foreach (array('name', 'id') as $value) {
             $meta[$value] .= '_value';
         }
         $meta['readonly'] = 'readonly';
@@ -56,34 +61,7 @@ class Qwin_Widget_JQuery_PopupGrid
             $selected = $lang->t('LBL_NOT_SELECTED');
         }
         $meta['_value'] .= '(' . $selected . ', ' . $lang->t('LBL_READONLY') . ')';
-        
-        $title = $lang->t($title);
-        $url = Qwin::run('Qwin_Url')->createUrl($url);
-        $code = $jquery->loadUi('position')
-            . $jquery->loadUi('dialog')
-            . $jquery->loadPlugin('qwin-popup')
-            . Qwin::run('Qwin_Form')->render($meta)
-            . '<button id="ui-button-qwin-popup-' . $id . '" type="button"><span class="ui-icon ui-icon-calculator">' . $meta['name'] . '</span></button>
-               <button id="ui-button-qwin-popup-' . $id . '-clear" type="button"><span class="ui-icon ui-icon-arrowreturnthick-1-w">' . $meta['name'] . '</span></button>
-               <script type="text/javascript">
-                jQuery(function($){
-                    $("#' . $id . '").hide();
-                    $("#ui-button-qwin-popup-' . $id . '").qwinPopup({
-                        title: "' . $title . '",
-                        url: "' . $url . '",
-                        viewInput: "#' . $meta['id'] . '",
-                        valueInput: "#' . $id . '",
-                        viewColumn: "' . $viewField[0] .'",
-                        valueColumn: "' . $viewField[1] . '"
-                    });
-                    $("#ui-button-qwin-popup-' . $id . '-clear").click(function(){
-                        $("#' . $id . '").val("");
-                        $("#' . $meta['id'] . '").val("(' . $lang->t('LBL_NOT_SELECTED') . ', ' . $lang->t('LBL_READONLY') . ')");
-                    });
-                })
-                </script>'
-        ;
-        
-        return $code;
+
+        require QWIN_RESOURCE_PATH . '/view/widget/jquery-popupgrid.php';
     }
 }

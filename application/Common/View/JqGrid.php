@@ -63,6 +63,8 @@ class Common_View_JqGrid extends Qwin_Application_View_Processer
          *      -- order                排序类型的查询名称
          *
          *      -- search               搜索的查询名称
+         *
+         *      -- multiselect          是否允许多选
          */
         $jgrid = array();
         $jgrid['url'] = str_replace('\'', '\\\'', '?' . $url->arrayKey2Url(array('json' => '1') + $_GET));
@@ -103,13 +105,14 @@ class Common_View_JqGrid extends Qwin_Application_View_Processer
             $jgrid['sortorder'] = 'DESC';
         }
 
-        $jgrid['rowNum']    = $request->getLimit();
-        $jgrid['rowNum']    <= 0 && $jgrid['rowNum'] = $view->meta['db']['limit'];
-        $jgrid['page']      = $request->getOption('page');
-        $jgrid['rows']      = $request->getOption('row');
-        $jgrid['sort']      = $request->getOption('orderField');
-        $jgrid['order']     = $request->getOption('orderType');
-        $jgrid['search']    = $request->getOption('search');
+        $jgrid['rowNum']        = $request->getLimit();
+        $jgrid['rowNum']        <= 0 && $jgrid['rowNum'] = $view->meta['db']['limit'];
+        $jgrid['page']          = $request->getOption('page');
+        $jgrid['rows']          = $request->getOption('row');
+        $jgrid['sort']          = $request->getOption('orderField');
+        $jgrid['order']         = $request->getOption('orderType');
+        $jgrid['search']        = $request->getOption('search');
+        $jgrid['multiselect']   = true;
 
         $view->setDataList(get_defined_vars());
     }
