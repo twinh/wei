@@ -60,8 +60,7 @@ class Common_Metadata extends Qwin_Metadata
     {
         $config = Qwin::run('-config');
         return $config['asc'];
-        if(null != $this->_asc)
-        {
+        if (null != $this->_asc) {
             return $this->_asc;
         }
         
