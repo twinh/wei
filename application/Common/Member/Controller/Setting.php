@@ -76,17 +76,11 @@ class Common_Member_Controller_Setting extends Common_Controller
     {
         if(empty($_POST))
         {
+            $model = $this->metaHelper->getClassName('Model', $this->_asc);
+            $this->_model = Qwin::run($model);
+            $styles = $this->_model->getStyles();
+            $path = $this->_model->getPath();
             $meta = $this->_meta;
-            $data = $this->metaHelper
-                ->getQueryByAsc(array(
-                    'namespace' => 'Common',
-                    'module' => 'Style',
-                    'controller' => 'Theme',
-                ))
-                ->execute()
-                ->toArray();
-            $urlTheme = $this->request->g('style');
-            $theme2 = $this->config['interface']['theme'];
 
             $this->view->setDataList(get_defined_vars());
         } else {

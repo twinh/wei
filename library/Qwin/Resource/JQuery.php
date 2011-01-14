@@ -117,8 +117,8 @@ class Qwin_Resource_JQuery extends Qwin_Resource
             return null;
         }
         $this->_isLoad['ui'][$name] = true;
-        $file = $this->_typePath . '/ui/minified/jquery.ui.' . $name . '.min.js';
-        $cssFile = $this->_typePath . '/themes/smoothness/jquery.ui.' . $name . '.css';
+        $file = $this->_typePath . '/ui/jquery.ui.' . $name . '.min.js';
+        $cssFile = $this->_typePath . '/ui/jquery.ui.' . $name . '.css';
         if(true == $isWrap)
         {
             if(file_exists($cssFile))
@@ -140,7 +140,7 @@ class Qwin_Resource_JQuery extends Qwin_Resource
             return null;
         }
         $this->_isLoad['effect'][$name] = true;
-        $file = $this->_typePath . '/ui/minified/jquery.effects.' . $name . '.min.js';
+        $file = $this->_typePath . '/effects/jquery.effects.' . $name . '.min.js';
         if(true == $isWrap)
         {
             return $this->wrapAsFile($file);
@@ -155,7 +155,7 @@ class Qwin_Resource_JQuery extends Qwin_Resource
             return null;
         }
         $this->_isLoad['plugin'][$name] = true;
-        $file = $this->_typePath . '/plugin/' . $name . '/jquery.' . $name;
+        $file = $this->_typePath . '/plugins/' . $name . '/jquery.' . $name;
 
         if(null == $type)
         {

@@ -15,7 +15,7 @@ $jQueryFile = array(
     'qui'           => $jquery->loadPlugin('qui', null, false),
 );
 $cssPacker
-    ->add(QWIN_RESOURCE_PATH . '/view/style/' . $this->_style . '/jquery-ui.css')
+    ->add(QWIN_RESOURCE_PATH . '/view/style/' . $this->_style . '/jquery.ui.theme.css')
     ->add(QWIN_RESOURCE_PATH . '/view/theme/default/common/style/style.css')
     ->add($jQueryFile['core']['css'])
     ->add($jQueryFile['widget']['css'])

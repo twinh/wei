@@ -46,7 +46,7 @@ $jQueryFile = array(
 $cssPacker
     ->add(QWIN_RESOURCE_PATH . '/view/theme/default/common/style/style.css')
     ->add(QWIN_RESOURCE_PATH . '/view/theme/default/common/style/login.css')
-    ->add(QWIN_RESOURCE_PATH . '/view/style/' . $this->_style . '/jquery-ui.css')
+    ->add(QWIN_RESOURCE_PATH . '/view/style/' . $this->_style . '/jquery.ui.theme.css')
     ->add($jQueryFile['core']['css'])
     ->add($jQueryFile['widget']['css'])
     ->add($jQueryFile['button']['css'])
