@@ -46,15 +46,16 @@ jQuery(function($){
         <hr class="ui-line ui-widget-content" />
         <ul>
 <?php
-foreach($data as $row){
-    $url = qw_url($asc, array('style' => $row['path_name']));
+foreach($styles as $row){
+    $image = $path . '/' . $row['path'] . '/images/' . $row['image'];
+    $url = qw_url($asc, array('style' => $row['path']));
 ?>
             <li class="ui-widget-content ui-corner-all">
                 <a href="<?php echo $url?>">
-                    <img alt="<?php echo $row['name']?>" src="<?php echo QWIN_RESOURCE_PATH?>/js/jquery/image/<?php echo $row['picture']?>" />
+                    <img alt="<?php echo $row['name']?>" src="<?php echo $image ?>" />
                 </a>
                 <p>
-                    <a href="<?php echo qw_url(array('module' => 'Style', 'controller' => 'Theme', 'action' => 'Edit', 'id' => $row['id'])) ?>" title="<?php echo qw_lang('LBL_ACTION_EDIT')?>"><?php echo $row['name']?></a>
+                    <a href="<?php echo $url ?>" title="<"><?php echo $row['name']?></a>
                    
                 </p>
             </li>

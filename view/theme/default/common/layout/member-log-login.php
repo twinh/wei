@@ -34,8 +34,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->_config['interface']['charset'] ?>" />
 <title><?php echo qw_lang('LBL_HTML_TITLE')?></title>
-<!-- Qwin_Packer_Css -->
-<!-- Qwin_Packer_Js -->
+<!-- qwin-packer-sign -->
 <?php
 $jQueryFile = array(
     'core' => $jquery->loadUi('core', false),
@@ -47,7 +46,7 @@ $jQueryFile = array(
 $cssPacker
     ->add(QWIN_RESOURCE_PATH . '/view/theme/default/common/style/style.css')
     ->add(QWIN_RESOURCE_PATH . '/view/theme/default/common/style/login.css')
-    ->add($jquery->loadTheme(null, false))
+    ->add(QWIN_RESOURCE_PATH . '/view/style/' . $this->_style . '/jquery-ui.css')
     ->add($jQueryFile['core']['css'])
     ->add($jQueryFile['widget']['css'])
     ->add($jQueryFile['button']['css'])
