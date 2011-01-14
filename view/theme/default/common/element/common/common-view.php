@@ -28,6 +28,7 @@
 // 防止直接访问导致错误
 !defined('QWIN_PATH') && exit('Forbidden');
 $jsPacker->add(QWIN_RESOURCE_PATH . '/js/qwin/form.js');
+$operationField =  $this->loadWidget('Common_Widget_FormLink', array($data, $primaryKey));
 ?>
   <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
     <div class="ui-box-header">
@@ -35,7 +36,9 @@ $jsPacker->add(QWIN_RESOURCE_PATH . '/js/qwin/form.js');
     </div>
     <div class="ui-form-content ui-box-content ui-widget-content">
         <form id="post-form" name="form" method="post" action="">
-        <?php $this->loadWidget('Common_Widget_FormLink', array($data, $primaryKey)) ?>
+        <div class="ui-operation-field">
+            <?php echo $operationField ?>
+        </div>
         <div class="ui-helper-hidden">
             <?php
             // TODO 逻辑分离
@@ -121,7 +124,9 @@ $jsPacker->add(QWIN_RESOURCE_PATH . '/js/qwin/form.js');
             </table>
         </fieldset>
         <?php endforeach ?>
-        <div class="ui-operation-field"></div>
+        <div class="ui-operation-field">
+            <?php echo $operationField ?>
+        </div>
         </form>
     </div>
   </div>

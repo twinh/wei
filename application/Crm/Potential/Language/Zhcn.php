@@ -36,6 +36,9 @@ class Crm_Potential_Language_Zhcn extends Common_Language_Zhcn
             'LBL_FIELD_EXPECTED_REVENUE' => '期望收益',
             'LBL_FIELD_SOURCE' => '来源',
             'LBL_FIELD_CAMPAIGN_ID' => '市场活动编号',
+            'LBL_FIELD_CAMPAIGN' => '市场活动',
+            'LBL_FIELD_CONTACT_ID' => '联系人编号',
+            'LBL_FIELD_CONTACT' => '联系人',
 
             'LBL_GROUP_RELATED_DATA' => '关联资料',
 

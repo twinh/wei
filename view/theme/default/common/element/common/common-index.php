@@ -53,7 +53,11 @@ if ($isPopup) :
 <div id="ui-jqgrid-page"></div>
 <?php
 else :
+// TODO jgrid导致宽度不正确
 ?>
+<style type="text/css">
+    #ui-main-left{width:202px;}
+</style>
 <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
 	<div class="ui-box-header">
     	<?php $this->loadWidget('Common_Widget_Header') ?>
@@ -130,12 +134,13 @@ jQuery(function($){
         ondblClickRow    : function(rowId, row, col ,e)
         {
             <?php
+            // 弹出窗口,通过url获取当前弹出框的唯一编号
             if ($isPopup) :
             ?>
             var rowData = jqgridObj.jqGrid('getRowData', rowId);
-            $($.popupOpts.valueInput).val(rowData[$.popupOpts.valueColumn]);
-            $($.popupOpts.viewInput).val(rowData[$.popupOpts.viewColumn] + '(' + Qwin.Lang['LBL_SELECTED'] + ', ' + Qwin.Lang['LBL_READONLY'] + ')');
-            $.popupOpts.obj.dialog('close');
+            $('<?php echo $popup['valueInput'] ?>').val(rowData['<?php echo $popup['valueColumn'] ?>']);
+            $('<?php echo $popup['viewInput'] ?>').val(rowData['<?php echo $popup['viewColumn'] ?>'] + '(' + Qwin.Lang['LBL_SELECTED'] + ', ' + Qwin.Lang['LBL_READONLY'] + ')');
+            $('#ui-popup').dialog('close');
             <?php
             else :
             ?>

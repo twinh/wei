@@ -114,6 +114,16 @@ class Common_View_JqGrid extends Qwin_Application_View_Processer
         $jgrid['search']        = $request->getOption('search');
         $jgrid['multiselect']   = true;
 
+        // 弹出窗口配置
+        if ($view['isPopup']) {
+            $popup = array(
+                'valueInput' => $request->r('qw-popup-value-input'),
+                'viewInput' => $request->r('qw-popup-view-input'),
+                'valueColumn' => $request->r('qw-popup-value-column'),
+                'viewColumn' => $request->r('qw-popup-view-column'),
+            );
+        }
+
         $view->setDataList(get_defined_vars());
     }
 }

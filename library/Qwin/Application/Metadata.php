@@ -831,6 +831,14 @@ class Qwin_Application_Metadata extends Qwin_Metadata
         return false;
     }
 
+    public function callbackViewLayout($field)
+    {
+        if (0 == $field['attr']['isView']) {
+            return true;
+        }
+        return false;
+    }
+
     /**
      * 占一格,后面的补上
      */
@@ -873,7 +881,8 @@ class Qwin_Application_Metadata extends Qwin_Metadata
             // 通过回调方法自定义处理
             $methodName = 'callback' . $action . 'Layout';
             if(method_exists($this, $methodName)) {
-                if (call_user_func_array(array($this, $methodName), array($tempMeta['field'][$field[1]]))) {
+                $result = call_user_func_array(array($this, $methodName), array($tempMeta['field'][$field[1]]));
+                if (true === $result) {
                     $layout[-1][] = array($field[0], $tempMeta['field'][$field[1]]['form']['name']);
                     continue;
                 }

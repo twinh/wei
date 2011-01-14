@@ -34,6 +34,13 @@ class Common_CommonClass_Metadata_CommonClass extends Common_Metadata
             array(
                 'field' => array(
                     'language' => array(
+                        'form' => array(
+                            '_type' => 'select',
+                            '_resourceGetter' => array(
+                                array('Project_Helper_CommonClass', 'get'),
+                                'language',
+                            ),
+                        ),
                         'attr' => array(
                             'isLink' => 1,
                             'isList' => 1,
@@ -85,17 +92,5 @@ class Common_CommonClass_Metadata_CommonClass extends Common_Metadata
         $val = str_replace('\"', '"', $val);
         $data = Qwin::run('-arr')->jsonDecode($val, 'pear');
         return serialize($data);
-    }
-
-    public function convertListOperation($value, $name, $data, $copyData)
-    {
-        $primaryKey = $this->db['primaryKey'];
-        $url = Qwin::run('-url');
-        $lang = Qwin::run('-lang');
-        $set = $this->getAscFromClass();
-        $link = $url->createUrl($set, array('action' => 'Add', '_data[sign]' => $copyData['sign']));
-        $html = Qwin_Helper_Html::jQueryButton($link, $lang->t('LBL_ACTION_ADD_NEXT'), 'ui-icon-plusthick')
-              . parent::convertListOperation($value, $name, $data, $copyData);
-        return $html;
     }
 }
