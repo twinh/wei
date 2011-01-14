@@ -62,7 +62,26 @@ class Crm_Contact_Metadata_Contact extends Common_Metadata
                     
                 ),
                 'customer_id' => array(
-                    
+                    'basic' => array(
+                        'title' => 'LBL_MODULE_CUSTOMER',
+                    ),
+                    'form' => array(
+                        '_widgetDetail' => array(
+                            array(
+                                array('Qwin_Widget_JQuery_PopupGrid', 'render'),
+                                'LBL_MODULE_CUSTOMER',
+                                array(
+                                    'namespace' => 'Crm',
+                                    'module' => 'Customer',
+                                    'controller' => 'Customer',
+                                    'qw-list' => 'id,name,birthday,email,source',
+                                ),
+                                array(
+                                    'name', 'id'
+                                ),
+                            ),
+                        ),
+                    ),
                 ),
                 'photo' => array(
                     'form' => array(
@@ -320,6 +339,18 @@ class Crm_Contact_Metadata_Contact extends Common_Metadata
                 'useRecycleBin' => true,
             ),
         ));
+    }
+
+    public function convertEditCustomerId($value, $name, $data, $dataCopy)
+    {
+        Crm_Helper::convertPopupCustomer($value, $name, 'name', $this);
+        return $value;
+    }
+
+    public function convertEditParentId($value, $name, $data, $dataCopy)
+    {
+        Crm_Helper::convertPopupContact($value, $name, '', $this);
+        return $value;
     }
 
     public function convertListFullName($value, $name, $data, $dataCopy)

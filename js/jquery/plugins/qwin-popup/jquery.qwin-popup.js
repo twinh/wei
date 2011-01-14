@@ -22,7 +22,7 @@
  * @since       2010-10-04 0:13:44
  * @todo        理清过程,标准化插件
  */
-// 需jquery dialog, jqgrid
+// 需jQuery dialog, jqgrid
 (function($) {
     $.fn.qwinPopup = function(options) {
         var opts = $.extend({}, $.fn.qwinPopup.defaults, options);
@@ -31,20 +31,21 @@
             opts.dialog.title = opts.title;
         }
 
-        // 方便外部调用
-        $.popupOpts = opts;
-
         // 点击弹出窗口,显示内容
         this.click(function(){
             if($('#ui-popup').html() == null) {
 				$('body').append('<div id="ui-popup"></div>');
 			}
             var popupObj = $('#ui-popup');
-            $.popupOpts.obj = popupObj;
             popupObj.load(
                 opts.url,
-                {},
-                function (){
+                {
+                    'qw-popup-value-input': opts.valueInput,
+                    'qw-popup-view-input': opts.viewInput,
+                    'qw-popup-value-column': opts.valueColumn,
+                    'qw-popup-view-column': opts.viewColumn
+                },
+                function(){
 					popupObj.dialog(opts.dialog);
                 }
             );
@@ -53,15 +54,13 @@
     };
 
     $.fn.qwinPopup.defaults = {
-        title: null,
-        url: 'htt://www.google.com',
-        // 表单域
-        viewInput: null,
-        valueInput: null,
-        // Pop窗口栏
-        viewColumn: 'name',
-        valueColumn: 'id',
-        dialog: {
+        title: null, // 弹出对话框显示的标题
+        url: null, // 弹出对话框内容的地址
+        viewInput: null, // 显示选中数据的输入框
+        valueInput: null, // 显示选中数据的值的输入框
+        viewColumn: 'name', // 弹出窗口的列表域名称
+        valueColumn: 'id', // 弹出窗口的列表域的值
+        dialog: { // jQuery 对话框的配置
             position: ['center', 80],
             height: 'auto',
             width: 800,

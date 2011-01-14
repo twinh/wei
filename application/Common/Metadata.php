@@ -511,17 +511,7 @@ class Common_Metadata extends Qwin_Metadata
 
     public function convertEditAssignTo($value, $name, $data, $dataCopy)
     {
-        $member = $this
-            ->metaHelper
-            // $this->model['receiver']['set']
-            ->getQueryByAsc(array(
-                'namespace' => 'Common',
-                'module' => 'Member',
-                'controller' => 'Member',
-            ))
-            ->where('id = ?', $value)
-            ->fetchOne();
-        $this->field->set('assign_to.form._value2', $member['username']);
+        Crm_Helper::convertPopupMember($value, $name, 'username', $this);
         return $value;
     }
 
@@ -530,7 +520,9 @@ class Common_Metadata extends Qwin_Metadata
         if (in_array($action, $this->_linkAction)) {
             $asc = $this->getAscFromClass();
             !isset($this->url) && $this->url = Qwin::run('-url');
-            $value = '<a href="' . $this->url->createUrl($asc, array('action' => 'Index', 'searchField' => $name, 'searchValue' => $dataCopy[$name])) . '">' . $value . '</a>';
+            $name = str_replace(':', '\:', $name);
+            $dataCopy[$name] = str_replace(':', '\:', $name);
+            $value = '<a href="' . $this->url->createUrl($asc, array('action' => 'Index', 'qw-search' => $name . ':' . $dataCopy[$name])) . '">' . $value . '</a>';
         }
         return $value;
     }

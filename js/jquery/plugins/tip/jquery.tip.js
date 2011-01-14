@@ -99,7 +99,7 @@ $.widget('ui.tip', {
         {
             html += '<div class="arrow-line-' + i + ' ' + options.bgClass + '"><!-- --></div>';
         }
-        for(var i = 9; i >= 1; i--)
+        for(i = 9; i >= 1; i--)
         {
             html += '<div class="arrow-line-' + i + ' ' + options.bgClass + '"><!-- --></div>';
         }

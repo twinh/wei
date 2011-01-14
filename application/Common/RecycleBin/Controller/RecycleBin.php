@@ -25,9 +25,16 @@
 
 class Common_RecycleBin_Controller_RecycleBin extends Common_ActionController
 {
-    protected $_forbiddenAction = array(
+    /**
+     * 禁用行为
+     * @var array
+     * @todo 使用和父类同样的访问级别会被覆盖?
+     */
+    public $_forbiddenAction = array(
         'add', 'edit',
     );
+
+    protected $_validatorMessage;
     
     /**
      * 还原回收站记录

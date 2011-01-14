@@ -81,7 +81,21 @@ class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
                     ),
                 ),
                 'parent_id' => array(
-                    
+                    'form' => array(
+                        '_widgetDetail' => array(
+                            array(
+                                array('Qwin_Widget_JQuery_PopupGrid', 'render'),
+                                'LBL_MODULE_OPPORTUNITY',
+                                array(
+                                    'namespace' => 'Crm',
+                                    'module' => 'Opportunity',
+                                    'controller' => 'Opportunity',
+                                    'qw-list' => 'id,name,status,type,start_time,end_time',
+                                ),
+                                array('name', 'id'),
+                            ),
+                        ),
+                    ),
                 ),
                 'start_time' => array(
                     'form' => array(
@@ -218,5 +232,11 @@ class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
                 'mainField' => 'name',
             ),
         ));
+    }
+
+    public function convertEditParentId($value, $name, $data, $dataCopy)
+    {
+        Crm_Helper::convertPopupOpportunity($value, $name, 'name', $this);
+        return $value;
     }
 }

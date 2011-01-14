@@ -148,12 +148,44 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                 ),
                 'campaign_id' => array(
                     'basic' => array(
+                        'title' => 'LBL_FIELD_CAMPAIGN',
                         'group' => 1,
+                    ),
+                    'form' => array(
+                        '_widgetDetail' => array(
+                            array(
+                                array('Qwin_Widget_JQuery_PopupGrid', 'render'),
+                                'LBL_MODULE_OPPORTUNITY',
+                                array(
+                                    'namespace' => 'Crm',
+                                    'module' => 'Opportunity',
+                                    'controller' => 'Opportunity',
+                                    'qw-list' => 'id,name,status,type,start_time,end_time',
+                                ),
+                                array('name', 'id'),
+                            ),
+                        ),
                     ),
                 ),
                 'contact_id' => array(
                     'basic' => array(
+                        'title' => 'LBL_FIELD_CONTACT',
                         'group' => 1,
+                    ),
+                    'form' => array(
+                        '_widgetDetail' => array(
+                            array(
+                                array('Qwin_Widget_JQuery_PopupGrid', 'render'),
+                                'LBL_FIELD_CONTACT',
+                                array(
+                                    'namespace' => 'Crm',
+                                    'module' => 'Contact',
+                                    'controller' => 'Contact',
+                                    'qw-list' => 'id,full_name,email,source,birthday',
+                                ),
+                                array('full_name', 'id'),
+                            ),
+                        ),
                     ),
                 ),
                 'description' => array(
@@ -210,5 +242,23 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                 'mainField' => 'name',
             ),
         ));
+    }
+
+    public function convertEditCustomerId($value, $name, $data, $dataCopy)
+    {
+        Crm_Helper::convertPopupCustomer($value, $name, 'name', $this);
+        return $value;
+    }
+
+    public function convertEditCampaignId($value, $name, $data, $dataCopy)
+    {
+        Crm_Helper::convertPopupOpportunity($value, $name, 'name', $this);
+        return $value;
+    }
+
+    public function convertEditContactId($value, $name, $data, $dataCopy)
+    {
+        Crm_Helper::convertPopupContact($value, $name, 'first_name', $this);
+        return $value;
     }
 }
