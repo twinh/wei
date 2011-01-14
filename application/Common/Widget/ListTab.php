@@ -46,23 +46,20 @@ class Common_Widget_ListTab extends Common_Widget
                 'class'     => null,
             );
         }
-        
-        if (!in_array('delete', $forbiddenAction)) {
-            $tab['delete'] = array(
-                'url'       => 'javascript:;',
-                'title'     => $lang->t('LBL_ACTION_DELETE'),
-                'icon'      => 'ui-icon-trash',
-                'target'    => null,
-                'id'        => 'action-delete',
-                'class'     => null,
-            );
-        }
 
+        // TODO jsLang
         if (!in_array('delete', $forbiddenAction)) {
+            if (!isset($view['meta']['page']['useRecycleBin'])) {
+                $icon = 'ui-icon-close';
+                $jsLang = 'MSG_CONFIRM_TO_DELETE';
+            } else {
+                $icon = 'ui-icon-trash';
+                $jsLang = 'MSG_CONFIRM_TO_DELETE_TO_TRASH';
+            }
             $tab['delete'] = array(
                 'url'       => 'javascript:;',
                 'title'     => $lang->t('LBL_ACTION_DELETE'),
-                'icon'      => 'ui-icon-trash',
+                'icon'      => $icon,
                 'target'    => null,
                 'id'        => 'action-delete',
                 'class'     => null,
