@@ -32,7 +32,7 @@ class Common_RecycleBin_Widget_ListTab extends Common_Widget
         $lang = Qwin::run('-lang');
 
         // 替换添加,删除的链接
-        $param['tab'][0] = array(
+        $param['tab']['restore'] = array(
             'url' => $url->createUrl($asc, array('action' => 'Restore')),
             'title' => $lang->t('LBL_ACTION_RESTORE'),
             'icon' => 'ui-icon-arrowreturnthick-1-w',
@@ -40,15 +40,20 @@ class Common_RecycleBin_Widget_ListTab extends Common_Widget
             'id' => 'action-restore',
             'class' => null,
         );
-        $param['tab'][1]['icon'] = 'ui-icon-close';
-        $param['tab'][3] = $param['tab'][2];
-        $param['tab'][2] = array(
+        $param['tab']['empty'] = array(
             'url' => $url->createUrl($asc, array('action' => 'Empty')),
             'title' => $lang->t('LBL_ACTION_EMPTY'),
             'icon' => 'ui-icon-closethick',
             'target' => null,
             'id' => 'action-empty',
             'class' => null,
+        );
+
+        $param['tab'] = array(
+            'list' => $param['tab']['list'],
+            'restore' => $param['tab']['restore'],
+            'delete' => $param['tab']['delete'],
+            'empty' => $param['tab']['empty'],
         );
 
         $param['object']->renderTab($param['tab'], $view);
