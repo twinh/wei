@@ -38,40 +38,15 @@ class Common_View_JqGrid extends Qwin_Application_View_Processer
         $config     = Qwin::run('-config');
         $url        = Qwin::run('-url');
         $asc        = $config['asc'];
+        $jqGridHepler = new Common_Helper_JqGrid();
 
-        /**
-         * @var array $jgrid            jgrid 配置,不与js完全一致
-         *
-         *      -- url                  获取json数据的链接
-         *
-         *      -- colNames             列的名称
-         *
-         *      -- colModel             列的模型
-         *
-         *      -- sortname             排序的域名称
-         *
-         *      -- sortorder            排序的域类型
-         *
-         *      -- rowNum               每列显示数目
-         *
-         *      -- page                 分页的查询名称
-         *
-         *      -- rows                 每页显示数目的查询名称
-         *
-         *      -- sort                 排序域查询的名称
-         *
-         *      -- order                排序类型的查询名称
-         *
-         *      -- search               搜索的查询名称
-         *
-         *      -- multiselect          是否允许多选
-         */
-        $jgrid = array();
-        $jgrid['url'] = str_replace('\'', '\\\'', '?' . $url->arrayKey2Url(array('json' => '1') + $_GET));
+        
+        $jqGrid = array();
+        $jqGrid['url'] = '?' . $url->arrayKey2Url(array('json' => '1') + $_GET);
 
         // 获取栏数据
-        $jgrid['colNames'] = array();
-        $jgrid['colModel'] = array();
+        $jqGrid['colNames'] = array();
+        $jqGrid['colModel'] = array();
         foreach ($view->layout as $field) {
             if (is_array($field)) {
                 $fieldMeta = $meta['metadata'][$field[0]]['field'][$field[1]];
@@ -79,40 +54,41 @@ class Common_View_JqGrid extends Qwin_Application_View_Processer
             } else {
                 $fieldMeta = $meta['field'][$field];
             }
-            $jgrid['colNames'][] = $lang->t($fieldMeta['basic']['title']);
-            $jgrid['colModel'][] = array(
+            $jqGrid['colNames'][] = $lang->t($fieldMeta['basic']['title']);
+            $jqGrid['colModel'][] = array(
                 'name' => $field,
                 'index' => $field,
             );
             // 隐藏主键
             if ($primaryKey == $field) {
-                $jgrid['colModel'][count($jgrid['colModel']) - 1]['hidden'] = true;
+                $jqGrid['colModel'][count($jqGrid['colModel']) - 1]['hidden'] = true;
             }
             // 宽度控制
             if (isset($fieldMeta['list']) && isset($fieldMeta['list']['width'])) {
-                $jgrid['colModel'][count($jgrid['colModel']) - 1]['width'] = $fieldMeta['list']['width'];
+                $jqGrid['colModel'][count($jqGrid['colModel']) - 1]['width'] = $fieldMeta['list']['width'];
             }
         }
-        $jgrid['colNames'] = Qwin_Helper_Array::jsonEncode($jgrid['colNames']);
-        $jgrid['colModel'] = Qwin_Helper_Array::jsonEncode($jgrid['colModel']);
         
         // 排序
         if(!empty($meta['db']['order'])) {
-            $jgrid['sortname']  = $meta['db']['order'][0][0];
-            $jgrid['sortorder'] = $meta['db']['order'][0][1];
+            $jqGrid['sortname']  = $meta['db']['order'][0][0];
+            $jqGrid['sortorder'] = $meta['db']['order'][0][1];
         } else {
-            $jgrid['sortname']  = $primaryKey;
-            $jgrid['sortorder'] = 'DESC';
+            $jqGrid['sortname']  = $primaryKey;
+            $jqGrid['sortorder'] = 'DESC';
         }
 
-        $jgrid['rowNum']        = $request->getLimit();
-        $jgrid['rowNum']        <= 0 && $jgrid['rowNum'] = $view->meta['db']['limit'];
-        $jgrid['page']          = $request->getOption('page');
-        $jgrid['rows']          = $request->getOption('row');
-        $jgrid['sort']          = $request->getOption('orderField');
-        $jgrid['order']         = $request->getOption('orderType');
-        $jgrid['search']        = $request->getOption('search');
-        $jgrid['multiselect']   = true;
+        $jqGrid['datatype']      = 'json';
+        $jqGrid['rowNum']        = $request->getLimit();
+        $jqGrid['rowNum']        <= 0 && $jqGrid['rowNum'] = $view->meta['db']['limit'];
+        $jqGrid['prmNames'] = array(
+            'page'              => $request->getOption('page'),
+            'rows'              => $request->getOption('row'),
+            'sort'              => $request->getOption('orderField'),
+            'order'             => $request->getOption('orderType'),
+            'search'            => $request->getOption('search'),
+        );
+        $jqGrid['pager']         = '#ui-jqgrid-page';
 
         // 弹出窗口配置
         if ($view['isPopup']) {
@@ -122,7 +98,13 @@ class Common_View_JqGrid extends Qwin_Application_View_Processer
                 'valueColumn' => $request->r('qw-popup-value-column'),
                 'viewColumn' => $request->r('qw-popup-view-column'),
             );
+            $jqGrid['multiselect'] = false;
+            $jqGrid['autowidth'] = false;
+            $jqGrid['width'] = 800;
         }
+
+        $jqGrid = $jqGridHepler->render($jqGrid);
+        $jqGridJson = Qwin_Helper_Array::jsonEncode($jqGrid);
 
         $view->setDataList(get_defined_vars());
     }

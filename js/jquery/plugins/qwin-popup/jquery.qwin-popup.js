@@ -36,19 +36,15 @@
             if($('#ui-popup').html() == null) {
 				$('body').append('<div id="ui-popup"></div>');
 			}
-            var popupObj = $('#ui-popup');
-            popupObj.load(
-                opts.url,
-                {
-                    'qw-popup-value-input': opts.valueInput,
-                    'qw-popup-view-input': opts.viewInput,
-                    'qw-popup-value-column': opts.valueColumn,
-                    'qw-popup-view-column': opts.viewColumn
-                },
-                function(){
-					popupObj.dialog(opts.dialog);
-                }
-            );
+            $('#ui-popup')
+                .html('')
+                .dialog(opts.dialog)
+                .load(opts.url, {
+                        'qw-popup-value-input': opts.valueInput,
+                        'qw-popup-view-input': opts.viewInput,
+                        'qw-popup-value-column': opts.valueColumn,
+                        'qw-popup-view-column': opts.viewColumn
+                });
         });
         return this;
     };

@@ -1,5 +1,6 @@
 // Qwin 2010 1 20 中文
 var Qwin = {};
+Qwin.App = {};
 // jQuery
 Qwin.extend = function() {
 	// copy reference to target object

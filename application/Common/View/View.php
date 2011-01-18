@@ -35,11 +35,53 @@ class Common_View_View extends Qwin_Application_View_Processer
         $metaHelper = $view->metaHelper;
         $data = $view->data;
         $config = Qwin::run('-config');
+        $url = Qwin::run('-url');
         $asc = $config['asc'];
+        $lang = Qwin::run('-lang');
 
         $orderedFeid = $metaHelper->orderField($meta);
         $layout = $metaHelper->getTableLayout($meta, $orderedFeid, 'view', $meta['page']['tableLayout']);
 
+        // 关联列表的数据配置
+        //$relatedListConfig = $metaHelper->getRelatedListConfig($meta);
+        /*$relatedListMetaList = $metaHelper->getModelMetadataByType($meta, 'relatedList');
+        // 构建每一个的jqgrid数据
+        $jgrid = array();
+        foreach ($relatedListMetaList as $alias => $relatedMeta) {
+            $jgridTmp = array();
+            $model = $meta['model'][$alias];
+            $jgridTmp['url'] = '?' . $url->arrayKey2Url(array('json' => '1') + $model['set'] + array('qw-search' => $model['foreign'] . ':' . $data[$model['local']]));
+            $jgridTmp['url'] = str_replace('\'', '\\\'', $jgridTmp['url']);
+
+            $layout = $metaHelper->getListLayout($relatedMeta);
+            foreach ($layout as $field) {
+                if (is_array($field)) {
+                    $fieldMeta = $relatedMeta['metadata'][$field[0]]['field'][$field[1]];
+                    $field = $field[0] . '_' . $field[1];
+                } else {
+                    $fieldMeta = $relatedMeta['field'][$field];
+                }
+                $jgridTmp['colNames'][] = $lang->t($fieldMeta['basic']['title']);
+                $jgridTmp['colModel'][] = array(
+                    'name' => $field,
+                    'index' => $field,
+                );
+                // 隐藏主键
+                if ($primaryKey == $field) {
+                    $jgridTmp['colModel'][count($jgridTmp['colModel']) - 1]['hidden'] = true;
+                }
+                // 宽度控制
+                if (isset($fieldMeta['list']) && isset($fieldMeta['list']['width'])) {
+                    $jgridTmp['colModel'][count($jgridTmp['colModel']) - 1]['width'] = $fieldMeta['list']['width'];
+                }
+            }
+            $jgridTmp['colNames'] = Qwin_Helper_Array::jsonEncode($jgridTmp['colNames']);
+            $jgridTmp['colModel'] = Qwin_Helper_Array::jsonEncode($jgridTmp['colModel']);
+
+            $jgrid[$alias] = $jgridTmp;
+        }
+        //p($jgrid);exit;
+        */
         $group = $meta['group'];
 
         $view->setDataList(get_defined_vars());
