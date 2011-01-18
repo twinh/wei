@@ -44,7 +44,7 @@ class Common_View_View extends Qwin_Application_View_Processer
 
         // 关联列表的数据配置
         //$relatedListConfig = $metaHelper->getRelatedListConfig($meta);
-        /*$relatedListMetaList = $metaHelper->getModelMetadataByType($meta, 'relatedList');
+        $relatedListMetaList = $metaHelper->getModelMetadataByType($meta, 'relatedList');
         // 构建每一个的jqgrid数据
         $jgrid = array();
         foreach ($relatedListMetaList as $alias => $relatedMeta) {
@@ -80,8 +80,7 @@ class Common_View_View extends Qwin_Application_View_Processer
 
             $jgrid[$alias] = $jgridTmp;
         }
-        //p($jgrid);exit;
-        */
+        p($jgrid);exit;
         $group = $meta['group'];
 
         $view->setDataList(get_defined_vars());

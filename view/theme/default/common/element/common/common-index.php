@@ -37,8 +37,8 @@ if ($isPopup) :
     padding: 0;
 }
 </style>
-<table id="ui-jqgrid-table"></table>
-<div id="ui-jqgrid-page"></div>
+<table id="<?php echo $jqGrid['objectString'] ?>"></table>
+<div id="<?php echo $jqGrid['pagerString'] ?>"></div>
 <?php
 else :
 // TODO jgrid导致宽度不正确

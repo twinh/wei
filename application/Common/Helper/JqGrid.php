@@ -25,11 +25,6 @@
 
 class Common_Helper_JqGrid
 {
-    public function __construct()
-    {
-        
-    }
-
     /**
      * @var array $jgrid            jgrid 配置,不与js完全一致
      *
@@ -113,6 +108,12 @@ class Common_Helper_JqGrid
         
     );
 
+    /**
+     * 合并配置选项
+     *
+     * @param array $option 配置选项
+     * @return array
+     */
     public function render(array $option)
     {
         $option = $option + $this->_defaultOption;
@@ -120,6 +121,37 @@ class Common_Helper_JqGrid
         $option['objectString'] = substr($option['object'], 1);
         $option['toolbarObjectString'] = substr($option['toolbarObject'], 1);
         $option['pagerString'] = substr($option['pager'], 1);
+        return $option;
+    }
+
+    public function getColByListLayout($layout, $meta, $lang)
+    {
+        $option = array(
+            'colNames' => array(),
+            'colModel' => array(),
+        );
+        $primaryKey = $meta['db']['primaryKey'];
+        foreach ($layout as $field) {
+            if (is_array($field)) {
+                $fieldMeta = $meta['metadata'][$field[0]]['field'][$field[1]];
+                $field = $field[0] . '_' . $field[1];
+            } else {
+                $fieldMeta = $meta['field'][$field];
+            }
+            $option['colNames'][] = $lang->t($fieldMeta['basic']['title']);
+            $option['colModel'][] = array(
+                'name' => $field,
+                'index' => $field,
+            );
+            // 隐藏主键
+            if ($primaryKey == $field) {
+                $option['colModel'][count($option['colModel']) - 1]['hidden'] = true;
+            }
+            // 宽度控制
+            if (isset($fieldMeta['list']) && isset($fieldMeta['list']['width'])) {
+                $option['colModel'][count($option['colModel']) - 1]['width'] = $fieldMeta['list']['width'];
+            }
+        }
         return $option;
     }
 }
