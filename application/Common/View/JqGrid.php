@@ -30,46 +30,26 @@ class Common_View_JqGrid extends Qwin_Application_View_Processer
     public function __construct(Qwin_Application_View $view)
     {
         // 初始变量,方便调用
-        $primaryKey = $view->primaryKey;
-        $meta       = $view->meta;
-        $metaHepler = $view->metaHelper;
-        $request    = Qwin::run('#request');
-        $lang       = Qwin::run('-lang');
-        $config     = Qwin::run('-config');
-        $url        = Qwin::run('-url');
-        $asc        = $config['asc'];
-        $jqGridHepler = new Common_Helper_JqGrid();
-
+        $primaryKey     = $view->primaryKey;
+        $meta           = $view->meta;
+        $metaHepler     = $view->metaHelper;
+        $request        = Qwin::run('#request');
+        $lang           = Qwin::run('-lang');
+        $config         = Qwin::run('-config');
+        $url            = Qwin::run('-url');
+        $asc            = $config['asc'];
+        $jqGridHepler   = new Common_Helper_JqGrid();
+        $jqGrid         = array();
         
-        $jqGrid = array();
+        // 获取json数据的地址
         $jqGrid['url'] = '?' . $url->arrayKey2Url(array('json' => '1') + $_GET);
 
         // 获取栏数据
-        $jqGrid['colNames'] = array();
-        $jqGrid['colModel'] = array();
-        foreach ($view->layout as $field) {
-            if (is_array($field)) {
-                $fieldMeta = $meta['metadata'][$field[0]]['field'][$field[1]];
-                $field = $field[0] . '_' . $field[1];                
-            } else {
-                $fieldMeta = $meta['field'][$field];
-            }
-            $jqGrid['colNames'][] = $lang->t($fieldMeta['basic']['title']);
-            $jqGrid['colModel'][] = array(
-                'name' => $field,
-                'index' => $field,
-            );
-            // 隐藏主键
-            if ($primaryKey == $field) {
-                $jqGrid['colModel'][count($jqGrid['colModel']) - 1]['hidden'] = true;
-            }
-            // 宽度控制
-            if (isset($fieldMeta['list']) && isset($fieldMeta['list']['width'])) {
-                $jqGrid['colModel'][count($jqGrid['colModel']) - 1]['width'] = $fieldMeta['list']['width'];
-            }
-        }
+        $col = $jqGridHepler->getColByListLayout($view['layout'], $meta, $lang);
+        $jqGrid['colNames'] = $col['colNames'];
+        $jqGrid['colModel'] = $col['colModel'];
         
-        // 排序
+        // 设置排序
         if(!empty($meta['db']['order'])) {
             $jqGrid['sortname']  = $meta['db']['order'][0][0];
             $jqGrid['sortorder'] = $meta['db']['order'][0][1];
@@ -78,29 +58,28 @@ class Common_View_JqGrid extends Qwin_Application_View_Processer
             $jqGrid['sortorder'] = 'DESC';
         }
 
-        $jqGrid['datatype']      = 'json';
+        // 设置Url参数的名称
         $jqGrid['rowNum']        = $request->getLimit();
-        $jqGrid['rowNum']        <= 0 && $jqGrid['rowNum'] = $view->meta['db']['limit'];
+        $jqGrid['rowNum']        <= 0 && $jqGrid['rowNum'] = $meta['db']['limit'];
         $jqGrid['prmNames'] = array(
             'page'              => $request->getOption('page'),
             'rows'              => $request->getOption('row'),
             'sort'              => $request->getOption('orderField'),
             'order'             => $request->getOption('orderType'),
-            'search'            => $request->getOption('search'),
+            'search'            => '_search',
         );
-        $jqGrid['pager']         = '#ui-jqgrid-page';
 
-        // 弹出窗口配置
+        // 设置弹出窗口属性
         if ($view['isPopup']) {
             $popup = array(
-                'valueInput' => $request->r('qw-popup-value-input'),
-                'viewInput' => $request->r('qw-popup-view-input'),
-                'valueColumn' => $request->r('qw-popup-value-column'),
-                'viewColumn' => $request->r('qw-popup-view-column'),
+                'valueInput'    => $request->r('qw-popup-value-input'),
+                'viewInput'     => $request->r('qw-popup-view-input'),
+                'valueColumn'   => $request->r('qw-popup-value-column'),
+                'viewColumn'    => $request->r('qw-popup-view-column'),
             );
-            $jqGrid['multiselect'] = false;
-            $jqGrid['autowidth'] = false;
-            $jqGrid['width'] = 800;
+            $jqGrid['multiselect']  = false;
+            $jqGrid['autowidth']    = false;
+            $jqGrid['width']        = 800;
         }
 
         $jqGrid = $jqGridHepler->render($jqGrid);

@@ -521,7 +521,7 @@ class Common_Metadata extends Qwin_Metadata
             $asc = $this->getAscFromClass();
             !isset($this->url) && $this->url = Qwin::run('-url');
             $name = str_replace(':', '\:', $name);
-            $dataCopy[$name] = str_replace(':', '\:', $name);
+            $dataCopy[$name] = str_replace(':', '\:', $dataCopy[$name]);
             $value = '<a href="' . $this->url->createUrl($asc, array('action' => 'Index', 'qw-search' => $name . ':' . $dataCopy[$name])) . '">' . $value . '</a>';
         }
         return $value;
