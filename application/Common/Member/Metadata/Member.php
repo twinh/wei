@@ -255,9 +255,4 @@ class Common_Member_Metadata_Member extends Common_Metadata
         }
         return $result;
     }
-
-    public function getLanguageResource()
-    {
-        
-    }
 }

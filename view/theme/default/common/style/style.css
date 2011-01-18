@@ -239,6 +239,9 @@ div.ui-header-logo{
 div.ui-box-tab{
 	 padding: 5px;
 }
+div.ui-box-tab .ui-tabs-panel{
+    padding: 0;
+}
 
 /* Form (Add, Edit Action & Show Action)
 ----------------------------------*/

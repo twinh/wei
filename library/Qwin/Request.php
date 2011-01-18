@@ -25,8 +25,13 @@
  * @since       2010-02-13 23:02
  */
 
-class Qwin_Request
+class Qwin_Request extends Qwin_Metadata_Abstract
 {
+    public function  __construct()
+    {
+        $this->_data = $_REQUEST;
+    }
+
     /**
      * 获取 $_GET 数组中的值
      *
@@ -46,17 +51,6 @@ class Qwin_Request
     public function p($name)
     {
         return isset($_POST[$name]) ? $_POST[$name] : null;
-    }
-    
-    /**
-     * 获取 $_REQUEST 数组中的值
-     *
-     * @param string $name $_REQUEST 数组对应的键名
-     * @return mixed 键名对应的值
-     */
-    public function r($name)
-    {
-        return isset($_REQUEST[$name]) ? $_REQUEST[$name] : null;
     }
     
     /**

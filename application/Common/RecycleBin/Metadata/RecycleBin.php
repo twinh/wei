@@ -107,18 +107,9 @@ class Common_RecycleBin_Metadata_RecycleBin extends Common_Metadata
             'controller' => $value[2],
         );
         $metadata = $this->metaHelper->getMetadataByAsc($asc);
-
-        // 加载语言 TODO !!
-        $languageResult = Qwin::run('Common_Service_Language')->getLanguage($asc);
-        $languageName = $languageResult['data'];
-        $languageClass = $asc['namespace'] . '_' . $asc['module'] . '_Language_' . $languageName;
-        $language = Qwin::run($languageClass);
-        if(null == $language)
-        {
-            $languageClass = 'Common_Language_' . $languageName;
-            $language = Qwin::run($languageClass);
-        }
-        return Qwin_Helper_Html::link($this->url->createUrl($asc), $language->t($metadata['page']['title']));
+        $lang = Qwin::run('Common_Helper_Language')->getObjectByAsc($asc);
+        
+        return Qwin_Helper_Html::link($this->url->createUrl($asc), $lang->t($metadata['page']['title']));
     }
 
     public function convertDbDeletedAt($value, $name, $data, $dataCopy)

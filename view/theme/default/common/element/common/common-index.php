@@ -37,35 +37,23 @@ if ($isPopup) :
     padding: 0;
 }
 </style>
-<table id="<?php echo $jqGrid['objectString'] ?>"></table>
-<div id="<?php echo $jqGrid['pagerString'] ?>"></div>
+<?php require $this->decodePath('<resource><theme>/<defaultNamespace>/element/basic/jqgird<suffix>') ?>
 <?php
 else :
-// TODO jgrid导致宽度不正确
 ?>
-<style type="text/css">
-    #ui-main-left{width:202px;}
-</style>
 <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
 	<div class="ui-box-header">
     	<?php $this->loadWidget('Common_Widget_Header') ?>
     </div>
     <div class="ui-form-content ui-box-content ui-widget-content">
         <div class="ui-operation-field">
-        <div id="<?php echo $jqGrid['toolbarObjectString'] ?>" class="ui-helper-hidden">
-        	<div class="ui-jqgrid-top">
-				<?php echo $this->loadWidget('Common_Widget_ListTab') ?>
-			</div>
-         </div>
-    	<table id="<?php echo $jqGrid['objectString'] ?>"></table>
-    	<div id="<?php echo $jqGrid['pagerString'] ?>"></div>
+        <?php require $this->decodePath('<resource><theme>/<defaultNamespace>/element/basic/jqgird<suffix>') ?>
         </div>
     </div>
 </div>
 <?php
 endif;
 ?>
-<?php require $this->decodePath('<resource><theme>/<defaultNamespace>/element/basic/jqgird<suffix>') ?>
 <script type="text/javascript">
 jQuery(function($){
     

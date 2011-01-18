@@ -30,6 +30,13 @@ $jsPacker
     ->add(QWIN_RESOURCE_PATH . '/js/jquery/plugins/jqgrid/i18n/grid.locale-en.js')
     ->add($jQueryFile['jqgrid']['js']);
 ?>
+<div id="<?php echo $jqGrid['toolbarObjectString'] ?>" class="ui-helper-hidden">
+    <div class="ui-jqgrid-top">
+        <?php echo $this->loadWidget('Common_Widget_ListTab') ?>
+    </div>
+</div>
+<table id="<?php echo $jqGrid['objectString'] ?>"></table>
+<div id="<?php echo $jqGrid['pagerString'] ?>"></div>
 <script type="text/javascript">
 jQuery(function($){
     var jqGrid = <?php echo $jqGridJson?>;
@@ -37,7 +44,7 @@ jQuery(function($){
     var primaryKey = '<?php echo $primaryKey?>';
 	Qwin.App.primaryKey = primaryKey;
 
-    <?php if (!$isPopup) : ?>
+    <?php if (!isset($isPopup)) : ?>
     jqGrid.ondblClickRow = function(rowId, iRow, iCol, e){
         var rowData = $(jqGrid.object).jqGrid('getRowData', rowId),
             addition = {};
@@ -70,6 +77,8 @@ jQuery(function($){
         click: true,
         focus: true
     });
+
+    $(jqGrid.object).jqGrid('setGridWidth', $('#ui-box-tab').width() - 4).trigger("reloadGrid")
 
     // 点击删除按钮
     $('#action-delete').click(function(){

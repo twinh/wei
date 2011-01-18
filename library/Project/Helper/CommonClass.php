@@ -32,7 +32,7 @@ class Project_Helper_CommonClass
      * 语言标识
      * @var string
      */
-    protected $_language;
+    protected $_lang;
 
     /**
      * 数据缓存
@@ -40,31 +40,25 @@ class Project_Helper_CommonClass
      */
     protected $_data;
 
-
-    function __construct()
-    {
-        
-    }
-
     public function get($name)
     {
-        if(!isset($this->_language))
+        if(!isset($this->_lang))
         {
-            $languageResult = Qwin::run('Common_Service_Language')->getLanguage();
-            $languageName = $languageResult['data'];
-            $this->_language = Qwin::run('Qwin_Language')->toStandardStyle($languageName);
+            $config = Qwin::run('-config');
+            $languageName = Qwin::run('Common_Helper_Language')->getName($config['asc']);
+            $this->_lang = Qwin::run('Qwin_Language')->toStandardStyle($languageName);
         }
 
-        if(!isset($this->_data[$this->_language]))
+        if(!isset($this->_data[$this->_lang]))
         {
-            $this->_data[$this->_language] = array();
+            $this->_data[$this->_lang] = array();
         }
 
-        if(!isset($this->_data[$this->_language][$name]))
+        if(!isset($this->_data[$this->_lang][$name]))
         {
-            $this->_data[$this->_language][$name] = require QWIN_RESOURCE_PATH . '/class/' . $this->_language . '/' . $name . '.php';
+            $this->_data[$this->_lang][$name] = require QWIN_RESOURCE_PATH . '/class/' . $this->_lang . '/' . $name . '.php';
         }
-        return $this->_data[$this->_language][$name];
+        return $this->_data[$this->_lang][$name];
     }
 
     public function convert($value, $name)

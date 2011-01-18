@@ -112,18 +112,12 @@ class Common_Controller extends Qwin_Application_Controller
         // 元数据管理助手,负责元数据的获取和转换
         $this->metaHelper = Qwin::run('Qwin_Application_Metadata');
 
-        $languageResult = Qwin::run('Common_Service_Language')->getLanguage($this->config['asc']);
-        $languageName = $languageResult['data'];
-        $languageClass = $this->config['asc']['namespace'] . '_' . $this->config['asc']['module'] . '_Language_' . $languageName;
-        $this->_lang = Qwin::run($languageClass);
-        if(null == $this->_lang)
-        {
-            $languageClass = 'Common_Language_' . $languageName;
-            $this->_lang = Qwin::run($languageClass);
-        }
-        Qwin::addMap('-lang', $languageClass);
+        // 加载语言
+        $langHelper = Qwin::run('Common_Helper_Language');
+        $this->_lang = $langHelper->getObjectByAsc($this->_asc);
+        Qwin::addMap('-lang', get_class($this->_lang));
 
-        $this->_meta = $this->metaHelper->getMetadataByAsc($this->config['asc']);
+        $this->_meta = $this->metaHelper->getMetadataByAsc($this->_asc);
         
          /**
          * 访问控制

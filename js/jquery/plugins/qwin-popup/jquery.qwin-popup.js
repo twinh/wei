@@ -40,10 +40,10 @@
                 .html('')
                 .dialog(opts.dialog)
                 .load(opts.url, {
-                        'qw-popup-value-input': opts.valueInput,
-                        'qw-popup-view-input': opts.viewInput,
-                        'qw-popup-value-column': opts.valueColumn,
-                        'qw-popup-view-column': opts.viewColumn
+                    'qw-popup-value-input': opts.valueInput,
+                    'qw-popup-view-input': opts.viewInput,
+                    'qw-popup-value-column': opts.valueColumn,
+                    'qw-popup-view-column': opts.viewColumn
                 });
         });
         return this;

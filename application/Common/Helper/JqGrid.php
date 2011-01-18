@@ -105,7 +105,6 @@ class Common_Helper_JqGrid
         ),
         'toolbarObject' => '#ui-jqgrid-toolbar',
         'object'        => '#ui-jqgrid-table',
-        
     );
 
     /**
