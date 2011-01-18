@@ -230,12 +230,14 @@ div.ui-header-logo{
     padding: 5px 18px 3px 7px;
     font-size: 14px;
     display: block;
-	
 }
 .ui-box .ui-box-content{
     border: 0;
     background: none;
     overflow: auto;
+}
+div.ui-box-tab{
+	 padding: 5px;
 }
 
 /* Form (Add, Edit Action & Show Action)
@@ -531,6 +533,7 @@ div.ui-header-logo{
     margin: 4px;
 }
 
+/* 保持大小一致 */
 .ui-widget, .ui-widget-content {
 	font-size: 12px;
 }

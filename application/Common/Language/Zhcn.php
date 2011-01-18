@@ -184,7 +184,7 @@ class Common_Language_Zhcn extends Common_Language
             'LBL_MODULE_MEMBER' => '用户',
             'LBL_MODULE_CUSTOMER' => '客户',
             'LBL_MODULE_OPPORTUNITY' => '商机',
-            ''
+            'LBL_MODULE_CONTACT' => '联系人',
         );
     }
 }

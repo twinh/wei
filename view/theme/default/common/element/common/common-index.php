@@ -23,23 +23,11 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2009-11-24 18:47:32
- * @todo        !!!!!!!! jqrid生成
  */
-
-// 防止直接访问导致错误
-!defined('QWIN_PATH') && exit('Forbidden');
-$jQueryFile['jqgrid'] = $jquery->loadPlugin('jqgrid', null, false);
-$cssPacker
-    ->add($jQueryFile['jqgrid']['css']);
-$jsPacker
-    ->add(QWIN_RESOURCE_PATH . '/js/jquery/plugins/jqgrid/i18n/grid.locale-en.js')
-    ->add($jQueryFile['jqgrid']['js']);
 ?>
 <!-- qwin-packer-sign -->
 <?php
 if ($isPopup) :
-    $jgrid['multiselect'] = 0;
-    $jgrid['width'] = 800;
 ?>
 <style type="text/css">
 #t_ui-jqgrid-table{
@@ -64,136 +52,22 @@ else :
     </div>
     <div class="ui-form-content ui-box-content ui-widget-content">
         <div class="ui-operation-field">
-        <div id="custom-jqgird-toolbar" class="ui-helper-hidden">
+        <div id="<?php echo $jqGrid['toolbarObjectString'] ?>" class="ui-helper-hidden">
         	<div class="ui-jqgrid-top">
 				<?php echo $this->loadWidget('Common_Widget_ListTab') ?>
 			</div>
          </div>
-    	<table id="ui-jqgrid-table"></table>
-    	<div id="ui-jqgrid-page"></div>
+    	<table id="<?php echo $jqGrid['objectString'] ?>"></table>
+    	<div id="<?php echo $jqGrid['pagerString'] ?>"></div>
         </div>
     </div>
 </div>
 <?php
 endif;
 ?>
+<?php require $this->decodePath('<resource><theme>/<defaultNamespace>/element/basic/jqgird<suffix>') ?>
 <script type="text/javascript">
 jQuery(function($){
-    $.jgrid.no_legacy_api = true;
-    $.jgrid.useJSON = true;
-    var primaryKey = '<?php echo $primaryKey?>';
-	
-	Qwin.App = {};
-	Qwin.App.primaryKey = primaryKey;
-	var jqgridObj = $("#ui-jqgrid-table");
-    jqgridObj.jqGrid({
-        url              : '<?php echo $jgrid['url'] ?>',
-        datatype         : 'json',
-        colNames         : <?php echo $jgrid['colNames'] ?>,
-        colModel         : <?php echo $jgrid['colModel'] ?>,
-        rowNum           : <?php echo $jgrid['rowNum']?>,
-        rowList          : [5, 10, 20, 30, 40, 50, 100],
-        sortname         : '<?php echo $jgrid['sortname']?>',
-        sortorder        : '<?php echo $jgrid['sortorder']?>',
-        // 标题
-        //caption          : '<?php echo qw_lang($meta['page']['title']) ?>',
-        // 各参数的对应关系
-        prmNames         : {
-            page    : '<?php echo $jgrid['page'] ?>',
-            rows    : '<?php echo $jgrid['rows'] ?>',
-            sort    : '<?php echo $jgrid['sort'] ?>',
-            order   : '<?php echo $jgrid['order'] ?>',
-            search  : '_search',
-            nd      : 'nd',
-            npage   : null
-        },
-        // 显示列的数目
-        rownumbers       : true,
-        // 允许多选
-        multiselect      : <?php echo $jgrid['multiselect'] ?>,
-        // 高度设置为100%,使表格不出现Y滚动条
-        height           : '100%',
-        <?php
-        if (isset($jgrid['width'])) :
-        ?>
-        width            : '<?php echo $jgrid['width'] ?>',
-        <?php
-        else :
-        ?>
-        autowidth        : true,
-        <?php
-        endif;
-        ?>
-        // 分页栏
-        pager            : '#ui-jqgrid-page',
-        // 分页栏右下角显示记录数
-        viewrecords      : true,
-        // 列宽度改变改变时,不改变表格宽度,从而不出现滚动条
-        forceFit         : true,
-        // 双击查看详情
-        ondblClickRow    : function(rowId, row, col ,e)
-        {
-            <?php
-            // 弹出窗口,通过url获取当前弹出框的唯一编号
-            if ($isPopup) :
-            ?>
-            var rowData = jqgridObj.jqGrid('getRowData', rowId);
-            $('<?php echo $popup['valueInput'] ?>').val(rowData['<?php echo $popup['valueColumn'] ?>']);
-            $('<?php echo $popup['viewInput'] ?>').val(rowData['<?php echo $popup['viewColumn'] ?>'] + '(' + Qwin.Lang['LBL_SELECTED'] + ', ' + Qwin.Lang['LBL_READONLY'] + ')');
-            $('#ui-popup').dialog('close');
-            <?php
-            else :
-            ?>
-            var rowData = $("#ui-jqgrid-table").jqGrid('getRowData', rowId),
-                addition = {};
-            addition['action'] = 'View';
-            addition[primaryKey] = rowData[primaryKey];
-            window.location.href = Qwin.url.createUrl(Qwin.get, addition);
-            return false;
-            <?php
-            endif;
-            ?>
-        },
-		// 工具栏,设置在顶部
-        toolbar          : [true, 'top']
-    // 只显示刷新按钮
-    }).jqGrid('navGrid','#ui-jqgrid-page',{
-        add : false,
-        edit : false,
-        del : false,
-        search : false
-    });
-	
-	// 页眉工具栏
-    $('#custom-jqgird-toolbar').appendTo("#t_ui-jqgrid-table").removeClass('ui-helper-hidden');
-
-    $('#t_ui-jqgrid-table a').qui({
-        click: true,
-        focus: true
-    });
-
-    // 点击删除按钮
-    $('#action-delete').click(function(){
-        var keyList = new Array(),
-            rowList = $('#ui-jqgrid-table').jqGrid('getGridParam','selarrrow');
-        if(rowList.length == 0)
-        {
-            alert(Qwin.Lang.MSG_CHOOSE_AT_LEASE_ONE_ROW);
-            return false;
-        }
-        for(var i in rowList)
-        {
-            var rowData = $("#ui-jqgrid-table").jqGrid('getRowData', rowList[i]);
-            keyList[i] = rowData[primaryKey];
-        }
-        var addition = {};
-        addition['action'] = 'Delete';
-        addition[primaryKey] = keyList.join(',');
-        if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE))
-        {
-            window.location.href = Qwin.url.createUrl(Qwin.get, addition);
-        }
-        return false;
-    });
+    
 });
 </script>

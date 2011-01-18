@@ -1305,4 +1305,9 @@ class Qwin_Application_Metadata extends Qwin_Metadata
             }
         }
     }
+
+    public function getRelatedListConfig($meta)
+    {
+        
+    }
 }

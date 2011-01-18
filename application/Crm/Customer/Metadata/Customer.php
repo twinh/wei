@@ -300,7 +300,6 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                     'alias' => 'receiver',
                     'type' => 'view',
                     'local' => 'assign_to',
-                    'foreign' => 'id',
                     'fieldMap' => array(
                         'assign_to' => 'username',
                     ),
@@ -308,6 +307,20 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                         'namespace' => 'Common',
                         'module' => 'Member',
                         'controller' => 'Member',
+                    ),
+                ),
+                'care' => array(
+                    'alias' => 'care',
+                    'type' => 'relatedList',
+                    'relation' => 'hasMany',
+                    'foreign' => 'customer_id',
+                    'fieldMap' => array(
+                        'id' => 'name',
+                    ),
+                    'set' => array(
+                        'namespace' => 'Crm',
+                        'module' => 'Customer',
+                        'controller' => 'Care',
                     ),
                 ),
             ),

@@ -64,6 +64,12 @@ class Crm_Customer_Language_Zhcn extends Common_Language_Zhcn
             'LBL_ACTION_LEAD' => '潜在客户',
 
             'LBL_MODULE_CUSTOMER' => '客户',
+
+            'LBL_FIELD_CARE_AT' => '关怀时间',
+            'LBL_FIELD_CUSTOMER_ID' => '客户编号',
+            'LBL_FIELD_FEEDBACK' => '反馈内容',
+
+            'LBL_MODULE_CUSTOMERCARE' => '客户关怀',
         );
     }
 }
