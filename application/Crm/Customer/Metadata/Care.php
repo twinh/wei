@@ -39,6 +39,9 @@ class Crm_Customer_Metadata_Care extends Common_Metadata
                     'attr' => array(
                         'isList' => 1,
                     ),
+                    'form' => array(
+                        '_widget' => 'datepicker',
+                    ),
                 ),
                 'customer_id' => array(
                     'basic' => array(

@@ -25,9 +25,12 @@
 
 class Crm_Customer_Language_Zhcn extends Common_Language_Zhcn
 {
-    public function __construct()
+    public function __construct($loadParent = true)
     {
-        parent::__construct();
+        if (false !== $loadParent) {
+            parent::__construct();
+        }
+        
         $this->_data += array(
             'LBL_FIELD_NUMBER' => '编号',
             'LBL_FIELD_SOURCE' => '来源',

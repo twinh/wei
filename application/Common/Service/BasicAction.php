@@ -73,25 +73,17 @@ class Common_Service_BasicAction extends Common_Service
         $this->view         = Qwin::run('-view');
         
         // 加载语言
-        $languageResult = Qwin::run('Common_Service_Language')->getLanguage($asc);
-        $languageName = $languageResult['data'];
-        $languageClass = $asc['namespace'] . '_' . $asc['module'] . '_Language_' . $languageName;
-        $this->_lang = Qwin::run($languageClass);
-        if(null == $this->_lang)
-        {
-            $languageClass = 'Common_Language_' . $languageName;
-            $this->_lang = Qwin::run($languageClass);
-        }
-        Qwin::addMap('-lang', $languageClass);
+        $langHelper = Qwin::run('Common_Helper_Language');
+        $this->_lang = $langHelper->getObjectByAsc($this->_asc);
+        // ??是否合适
+        Qwin::addMap('-lang', get_class($this->_lang));
 
-        if(!isset($this->_meta))
-        {
+        if (!isset($this->_meta)) {
             $this->_meta = $this->metaHelper->getMetadataByAsc($asc);
         }
 
         // 根据元数据定义的数据库,选择对应的连接类型
-        if('padb' == $this->_meta['db']['type'])
-        {
+        if ('padb' == $this->_meta['db']['type']) {
             Doctrine_Manager::getInstance()->setCurrentConnection('padb');
         }
 

@@ -18,9 +18,6 @@
 	height: 25px;
 	font-size: 12px;
 }
-.ui-jqgrid{
-	padding:2px;
-}
 .ui-jqgrid .ui-jqgrid-titlebar{
     padding: 4px 3px 4px 10px;
 	/*border:1px solid;/* ie */

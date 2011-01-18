@@ -50,6 +50,8 @@ class Common_Request extends Qwin_Request
      *
      *      -- searchOper           单域查找操作符,如eq,lt,gt
      *
+     *      -- lang                 语言名称,如Zh-cn,en-US
+     *
      *      其他选项
      *
      *      -- maxRow               列表页最大显示行数
@@ -66,6 +68,7 @@ class Common_Request extends Qwin_Request
         'searchField'   => 'qw-search-field',
         'searchValue'   => 'qw-search-value',
         'searchOper'    => 'qw-search-oper',
+        'lang'          => 'qw-lang',
 
         'maxRow'        => 500,
     );
@@ -244,6 +247,11 @@ class Common_Request extends Qwin_Request
         return $this->g($primaryKey);
     }
 
+    public function getLang($name = null)
+    {
+        null == $name && $name = $this->_option['lang'];
+        return $this[$name];
+    }
 
     /**
      * 获取 url 中的数据

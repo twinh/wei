@@ -317,6 +317,9 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                     'fieldMap' => array(
                         'id' => 'name',
                     ),
+                    'list' => array(
+                        'id', 'name', 'care_at', 'type'
+                    ),
                     'set' => array(
                         'namespace' => 'Crm',
                         'module' => 'Customer',
