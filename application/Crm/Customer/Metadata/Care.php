@@ -96,13 +96,13 @@ class Crm_Customer_Metadata_Care extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Helper_Option', 'get'),
+                            array('Common_Helper_Option', 'get'),
                             'customer-care-type',
                         ),
                     ),
                     'converter' => array(
                         'list' => array(
-                            array('Project_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'convert'),
                             'customer-care-type',
                         ),
                         'view' => 'list',

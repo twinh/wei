@@ -81,7 +81,7 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Helper_Option', 'get'),
+                            array('Common_Helper_Option', 'get'),
                             'potential-status',
                         ),
                     ),
@@ -91,7 +91,7 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                     ),
                     'converter' => array(
                         'list' => array(
-                            array('Project_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'convert'),
                             'potential-status',
                         ),
                         'view' => 'list',
@@ -101,7 +101,7 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Helper_Option', 'get'),
+                            array('Common_Helper_Option', 'get'),
                             'potential-type',
                         ),
                     ),
@@ -111,7 +111,7 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                     ),
                     'converter' => array(
                         'list' => array(
-                            array('Project_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'convert'),
                             'potential-type',
                         ),
                         'view' => 'list',
@@ -130,7 +130,7 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Helper_Option', 'get'),
+                            array('Common_Helper_Option', 'get'),
                             'customer-source',
                         ),
                     ),
@@ -140,7 +140,7 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                     ),
                     'converter' => array(
                         'list' => array(
-                            array('Project_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'convert'),
                             'customer-source',
                         ),
                         'view' => 'list',
