@@ -36,6 +36,13 @@ class Common_Option_Language_Zhcn extends Common_Language_Zhcn
             'LBL_FIELD_VAR_NAME' => '变量名称',
             'LBL_FIELD_TYPE' => '类型',
 
+            'LBL_OPTION_EDITOR_VALUE' => '值',
+            'LBL_OPTION_EDITOR_NAME' => '名称',
+            'LBL_OPTION_EDITOR_COLOR' => '颜色',
+            'LBL_OPTION_EDITOR_STYLE' => '附加Css样式',
+            'LBL_OPTION_EDITOR_OPER' => '操作',
+            'LBL_OPTION_EDITOR_ADD' => '添加选项',
+
             'LBL_ACTION_ADD_NEXT' => '添加下一个分类',
 
             'LBL_MODULE_OPTION' => '选项',
