@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Common
- * @subpackage  CommonClass
+ * @subpackage  Option
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,7 +25,7 @@
  * @since       2010-08-25 15:46:35
  */
 
-class Common_CommonClass_Language_Enus extends Common_Language_Enus
+class Common_Option_Language_Enus extends Common_Language_Enus
 {
     public function __construct()
     {

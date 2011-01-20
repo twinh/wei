@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Common
- * @subpackage  CommonClass
+ * @subpackage  Option
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,6 +25,6 @@
  * @since       2010-06-10 08:31:30
  */
 
-class Common_CommonClass_Model_CommonClass extends Common_Model
+class Common_Option_Model_Option extends Common_Model
 {
 }

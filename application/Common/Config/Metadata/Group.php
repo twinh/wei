@@ -69,7 +69,7 @@ class Common_Config_Metadata_Group extends Common_Metadata
                         '_type' => 'select',
                         '_value' => 1,
                         '_resourceGetter' => array(
-                            array('Project_Helper_CommonClass', 'get'),
+                            array('Project_Helper_Option', 'get'),
                             'yes-or-no',
                         ),
                     ),
@@ -78,7 +78,7 @@ class Common_Config_Metadata_Group extends Common_Metadata
                     ),
                     'converter' => array(
                         'list' => array(
-                            array('Project_Helper_CommonClass', 'convert'),
+                            array('Project_Helper_Option', 'convert'),
                             'yes-or-no',
                         ),
                         'view' => 'list',

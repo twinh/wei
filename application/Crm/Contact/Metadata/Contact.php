@@ -111,13 +111,13 @@ class Crm_Contact_Metadata_Contact extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Helper_CommonClass', 'get'),
+                            array('Project_Helper_Option', 'get'),
                             'customer-source',
                         ),
                     ),
                     'converter' => array(
                         'list' => array(
-                            array('Project_Helper_CommonClass', 'convert'),
+                            array('Project_Helper_Option', 'convert'),
                             'customer-source',
                         ),
                         'view' => 'list',

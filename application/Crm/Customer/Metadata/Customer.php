@@ -47,13 +47,13 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Helper_CommonClass', 'get'),
+                            array('Project_Helper_Option', 'get'),
                             'sex',
                         ),
                     ),
                     'converter' => array(
                         'list' => array(
-                            array('Project_Helper_CommonClass', 'convert'),
+                            array('Project_Helper_Option', 'convert'),
                             'sex',
                         ),
                         'view' => 'list',
@@ -67,13 +67,13 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Helper_CommonClass', 'get'),
+                            array('Project_Helper_Option', 'get'),
                             'customer-type',
                         ),
                     ),
                     'converter' => array(
                         'list' => array(
-                            array('Project_Helper_CommonClass', 'convert'),
+                            array('Project_Helper_Option', 'convert'),
                             'customer-type',
                         ),
                         'view' => 'list',
@@ -87,13 +87,13 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Helper_CommonClass', 'get'),
+                            array('Project_Helper_Option', 'get'),
                             'customer-source',
                         ),
                     ),
                     'converter' => array(
                         'list' => array(
-                            array('Project_Helper_CommonClass', 'convert'),
+                            array('Project_Helper_Option', 'convert'),
                             'customer-source',
                         ),
                         'view' => 'list',
@@ -107,13 +107,13 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Helper_CommonClass', 'get'),
+                            array('Project_Helper_Option', 'get'),
                             'customer-grade',
                         ),
                     ),
                     'converter' => array(
                         'list' => array(
-                            array('Project_Helper_CommonClass', 'convert'),
+                            array('Project_Helper_Option', 'convert'),
                             'customer-grade',
                         ),
                         'view' => 'list',
@@ -127,7 +127,7 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Helper_CommonClass', 'get'),
+                            array('Project_Helper_Option', 'get'),
                             'customer-status',
                         ),
                     ),
@@ -137,7 +137,7 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                     ),
                     'converter' => array(
                         'list' => array(
-                            array('Project_Helper_CommonClass', 'convert'),
+                            array('Project_Helper_Option', 'convert'),
                             'customer-status',
                         ),
                         'view' => 'list',
@@ -260,13 +260,13 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Helper_CommonClass', 'get'),
+                            array('Project_Helper_Option', 'get'),
                             'payment-type',
                         ),
                     ),
                     'converter' => array(
                         'list' => array(
-                            array('Project_Helper_CommonClass', 'convert'),
+                            array('Project_Helper_Option', 'convert'),
                             'payment-type',
                         ),
                         'view' => 'list',

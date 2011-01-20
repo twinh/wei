@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Common
- * @subpackage  CommonClass
+ * @subpackage  Option
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,14 +25,14 @@
  * @since       2009-11-21 12:18:00
  */
 
-class Common_CommonClass_Controller_CommonClass extends Common_ActionController
+class Common_Option_Controller_Option extends Common_ActionController
 {
     /**
      * on 函数
      */
     public function onAfterDb($data)
     {
-        $commonClass = Qwin::run('Project_Helper_CommonClass');
+        $commonClass = Qwin::run('Project_Helper_Option');
         if('delete' != strtolower($this->_asc['action']))
         {
             $commonClass->write($data);
