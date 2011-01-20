@@ -44,7 +44,7 @@ class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Helper_Option', 'get'),
+                            array('Common_Helper_Option', 'get'),
                             'opportunity-status',
                         ),
                     ),
@@ -54,7 +54,7 @@ class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
                     ),
                     'converter' => array(
                         'list' => array(
-                            array('Project_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'convert'),
                             'opportunity-status',
                         ),
                         'view' => 'list',
@@ -64,7 +64,7 @@ class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Helper_Option', 'get'),
+                            array('Common_Helper_Option', 'get'),
                             'opportunity-type',
                         ),
                     ),
@@ -74,7 +74,7 @@ class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
                     ),
                     'converter' => array(
                         'list' => array(
-                            array('Project_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'convert'),
                             'opportunity-type',
                         ),
                         'view' => 'list',

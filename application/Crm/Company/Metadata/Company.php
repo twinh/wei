@@ -81,13 +81,13 @@ class Crm_Company_Metadata_Company extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Helper_Option', 'get'),
+                            array('Common_Helper_Option', 'get'),
                             'company-industry',
                         ),
                     ),
                     'converter' => array(
                         'list' => array(
-                            array('Project_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'convert'),
                             'company-industry',
                         ),
                         'view' => 'list',
@@ -105,13 +105,13 @@ class Crm_Company_Metadata_Company extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Helper_Option', 'get'),
+                            array('Common_Helper_Option', 'get'),
                             'company-nature',
                         ),
                     ),
                     'converter' => array(
                         'list' => array(
-                            array('Project_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'convert'),
                             'company-nature',
                         ),
                         'view' => 'list'
@@ -129,17 +129,17 @@ class Crm_Company_Metadata_Company extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Helper_Option', 'get'),
+                            array('Common_Helper_Option', 'get'),
                             'company-size',
                         ),
                     ),
                     'converter' => array(
                         'list' => array(
-                            array('Project_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'convert'),
                             'company-size',
                         ),
                         'view' => array(
-                            array('Project_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'convert'),
                             'company-size',
                         )
                     ),
