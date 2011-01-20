@@ -90,7 +90,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
                     'form' => array(
                         '_type' => 'checkbox',
                         '_resourceGetter' => array(
-                            array('Project_Helper_Option', 'get'),
+                            array('Common_Helper_Option', 'get'),
                             'font-style',
                         ),
                     ),
@@ -106,7 +106,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
                     'form' => array(
                         '_type' => 'radio',
                         '_resourceGetter' => array(
-                            array('Project_Helper_Option', 'get'),
+                            array('Common_Helper_Option', 'get'),
                             'font-color',
                         ),
                         '_value' => 'NULL',
@@ -196,7 +196,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Helper_Option', 'get'),
+                            array('Common_Helper_Option', 'get'),
                             'yes-or-no',
                         ),
                     ),
@@ -208,7 +208,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
                     ),
                     'converter' => array(
                         'list' => array(
-                            array('Project_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'convert'),
                             'yes-or-no',
                         ),
                     ),
@@ -220,7 +220,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Helper_Option', 'get'),
+                            array('Common_Helper_Option', 'get'),
                             'yes-or-no',
                         ),
                     ),
@@ -232,7 +232,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
                     ),
                     'converter' => array(
                         'list' => array(
-                            array('Project_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'convert'),
                             'yes-or-no',
                         ),
                     ),
