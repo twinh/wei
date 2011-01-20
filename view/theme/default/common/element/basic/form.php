@@ -29,7 +29,7 @@
 $jQueryFile['validate'] = $jquery->loadPlugin('validate', 'qwin', false);
 $jsPacker
     ->add($jQueryFile['validate']['js'])
-    ->add(QWIN_RESOURCE_PATH . '/js/qwin/form.js');
+    ->add(QWIN_RESOURCE_PATH . '/view/theme/default/common/script/form.js');
 ?>
 <script type="text/javascript">
 var jQueryValidateCode = <?php echo $jQueryValidateCode?>;
@@ -59,7 +59,7 @@ var jQueryValidateCode = <?php echo $jQueryValidateCode?>;
                         $formSet['id'] = $field[0] . '_' . $formSet['name'];
                         $formSet['name'] = $field[0] . '[' . $formSet['name'] . ']';
                     endif;
-                    echo qw_form($formSet, $tempData);
+                    echo qw_form($formSet, $tempData[$formSet['name']]);
                 endforeach;
                 unset($layout[-1]);
             endif;
@@ -111,7 +111,7 @@ var jQueryValidateCode = <?php echo $jQueryValidateCode?>;
                     ?>
                     <td class="ui-label-common"><label for="<?php echo $tempMeta['field'][$fieldCell[1]]['form']['id'] ?>"><?php echo qw_lang($tempMeta['field'][$fieldCell[1]]['basic']['title']) ?>:</label></td>
                     <td class="ui-field-common ui-field-<?php echo $type ?>"<?php echo $colspan ?>>
-                      <?php echo qw_form($formSet, $tempData) , qw_widget($formSet, $tempData) ?>
+                      <?php echo qw_form($formSet, $tempData[$fieldCell[1]]) , qw_widget($formSet, $tempData) ?>
                     </td>
                     <?php
                         endif;
