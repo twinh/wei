@@ -27,29 +27,66 @@
  */
 class Common_Widget_ListTab extends Common_Widget
 {
+    /**
+     * 生成列表选项卡
+     *
+     * @param array $param      参数
+     *
+     *      -- asc              当前选项卡的应用配置结构
+     *
+     *      -- url              当前选项卡查询组成的请求字符串
+     *
+     * @param <type> $view      视图对象
+     * @return array
+     * @todo Asc和Url的选择
+     */
     public function render($param, $view)
     {
-        $asc = $view['asc'];
         $url = Qwin::run('-url');
         $lang = Qwin::run('-lang');
-        $controller = Qwin::run('-controller');
-        $forbiddenAction = $controller->getForbiddenAction();
         $tab = array();
-        
+
+        // 获取应用结构配置
+        if (isset($param['asc'])) {
+            $asc = $param['asc'];
+        } else {
+            $asc = $view['asc'];
+        }
+        $ascString = strtolower(implode('-', $asc));
+        parse_str($param['url'], $get);
+
+        // 获取禁用的行为
+        $controllerClass = $view['metaHelper']->getClassName('Controller', $asc);
+        $classVar = get_class_vars($controllerClass);
+        if (isset($classVar['_forbiddenAction'])) {
+            $forbiddenAction = $classVar['_forbiddenAction'];
+        } else {
+            $forbiddenAction = array();
+        }
+
         if (!in_array('add', $forbiddenAction)) {
             $tab['add'] = array(
-                'url'       => $url->createUrl($asc, array('action' => 'Add')),
+                'url'       => $url->createUrl($get, array('action' => 'Add')),
                 'title'     => $lang->t('LBL_ACTION_ADD'),
                 'icon'      => 'ui-icon-plus',
                 'target'    => null,
-                'id'        => 'action-add',
-                'class'     => null,
+                'id'        => 'action-' . $ascString . '-add',
+                'class'     => 'action-add',
+            );
+            $tab['copy'] = array(
+                'url'   => $url->createUrl($asc, array('action' => 'Add')),
+                'title' => $lang->t('LBL_ACTION_COPY'),
+                'icon'  => 'ui-icon-transferthick-e-w',
+                'target'    => null,
+                'id'        => 'action-' . $ascString . '-copy',
+                'class'     => 'action-copy',
             );
         }
 
         // TODO jsLang
         if (!in_array('delete', $forbiddenAction)) {
-            if (!isset($view['meta']['page']['useRecycleBin'])) {
+            $meta = $view['metaHelper']->getMetadataByAsc($asc);
+            if (!isset($meta['page']['useRecycleBin'])) {
                 $icon = 'ui-icon-close';
                 $jsLang = 'MSG_CONFIRM_TO_DELETE';
             } else {
@@ -61,8 +98,8 @@ class Common_Widget_ListTab extends Common_Widget
                 'title'     => $lang->t('LBL_ACTION_DELETE'),
                 'icon'      => $icon,
                 'target'    => null,
-                'id'        => 'action-delete',
-                'class'     => null,
+                'id'        => 'action-' . $ascString . '-delete',
+                'class'     => 'action-delete',
             );
         }
 
@@ -72,8 +109,8 @@ class Common_Widget_ListTab extends Common_Widget
                 'title' => $lang->t('LBL_ACTION_LIST'),
                 'icon' => 'ui-icon-note',
                 'target' => null,
-                'id' => 'action-list',
-                'class' => null,
+                'id' => 'action-' . $ascString . '-list',
+                'class' => 'action-list',
             );
         }
 

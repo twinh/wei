@@ -41,6 +41,7 @@ class Common_Service_Form extends Common_Service_BasicAction
         'data' => array(
             'primaryKeyValue' => null,
             'asAction' => 'add',
+            'initalData' => array(),
         ),
         'callback' => array(
         ),
@@ -68,34 +69,27 @@ class Common_Service_Form extends Common_Service_BasicAction
         $modelClass = $metaHelper->getClassName('Model', $this->_asc);
         $model = Qwin::run($modelClass);
         $query = $metaHelper->getQuery($meta, $model, 'db');
-        
+
         /**
-         * 三种模式　
-         * 1.复制,根据主键从模型获取初始值
-         * 2.从url获取值
-         * 3. 获取模型默认值
-         * TODO 可配置化
+         * 空值 < 元数据表单初始值 < 根据主键取值 < 配置初始值(一般是从url中获取)
          */
+        // 从元数据表单配置取值
+        $formInitalData = $meta['field']->getFormValue();
+
+        // 根据主键取值
+        $copyRecordData = array();
         if (null != $primaryKeyValue) {
             $this->_result = $result = $query->where($primaryKey . ' = ?', $primaryKeyValue)->fetchOne();
-            // 记录不存在,加载错误视图
-            if (false == $result) {
-                $return = array(
-                    'result' => false,
-                    'message' => $this->_lang->t('MSG_NO_RECORD'),
-                );
-                if ($config['view']['display']) {
-                    $this->view->setRedirectView($return['message']);
+            if (false !== $result) {
+                // 删除null值
+                foreach ($result as $name => $value) {
+                    null !== $value && $copyRecordData[$name] = $value;
                 }
-                return $return;
             }
-            $data = $result->toArray();
-        } else {
-            // 从配置元数据中取出表单初始值,再从url地址参数取出初始值,覆盖原值
-            $data = $meta['field']->getSecondLevelValue(array('form', '_value'));
-            //$data = $metaHelper->getUrlData($data);
         }
-        unset($data[$primaryKey]);
+
+        // 合并数据
+        $data = array_merge($formInitalData, $copyRecordData, $config['data']['initalData']);
 
         // 处理数据
         $data = $metaHelper->convertOne($data, $config['data']['asAction'], $meta, $meta, array('view' => false));

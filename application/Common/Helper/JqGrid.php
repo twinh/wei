@@ -89,10 +89,10 @@ class Common_Helper_JqGrid
         'height'        => '100%',
         'width'         => 'auto',
         'autowidth'     => true,
-        'pager'         => '#ui-jqgrid-page',
         'viewrecords'   => true,
         'forceFit'      => true,
-        'toolbar'       => array(true, 'top'),
+        'toolbar'       => false,
+        //'toolbar'       => array(true, 'top'),
         //'ondblClickRow' => null,
         'prmNames'      => array(
             'page'      => 'page',
@@ -103,8 +103,12 @@ class Common_Helper_JqGrid
             'nd'        => 'nd',
             'npage'     => 'npage'
         ),
+        'emptyrecords'  => 'MSG_NO_RECORDS',
+        'pager'         => '#ui-jqgrid-page',
         'toolbarObject' => '#ui-jqgrid-toolbar',
         'object'        => '#ui-jqgrid-table',
+        'asc'           => array(),
+        'ascString'     => null,
     );
 
     /**
@@ -113,13 +117,17 @@ class Common_Helper_JqGrid
      * @param array $option 配置选项
      * @return array
      */
-    public function render(array $option)
+    public function render(array $option, $lang = false)
     {
         $option = $option + $this->_defaultOption;
         // 只进行简单转换
         $option['objectString'] = substr($option['object'], 1);
         $option['toolbarObjectString'] = substr($option['toolbarObject'], 1);
         $option['pagerString'] = substr($option['pager'], 1);
+        null == $option['ascString'] && $option['ascString'] = strtolower(implode('-', $option['asc']));
+
+        false == $lang && $lang = Qwin::run('-lang');
+        $option['emptyrecords'] = $lang[$option['emptyrecords']];
         return $option;
     }
 

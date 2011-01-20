@@ -66,6 +66,11 @@ class Common_View_View extends Qwin_Application_View_Processer
             if (null != $model['list']) {
                 $listLayout = array_intersect($listLayout, (array)$model['list']);
             }
+            // 删除外键域,外键域显示的内容即为当前视图的内容
+            $key = array_search($model['foreign'], $listLayout);
+            if (false !== $key) {
+                unset($listLayout[$key]);
+            }
             $listLayoutQuery = implode(',', $listLayout);
             $col = $jqGridHepler->getColByListLayout($listLayout, $relatedMeta, $lang);
             $jqGrid['colNames'] = $col['colNames'];
@@ -101,8 +106,13 @@ class Common_View_View extends Qwin_Application_View_Processer
                 'search'            => '_search',
             );*/
 
-            //
-            $jqGrid['toolbar'] = false;
+            // 设置独立的编号以区分
+            //$jqGrid['toolbar']          = false;
+            $jqGrid['object']           = '#ui-' . $alias . '-table' ;
+            $jqGrid['toolbarObject']    = '#ui-' . $alias . '-toolbar' ;
+            $jqGrid['pager']            = '#ui-' . $alias . '-page' ;
+
+            $jqGrid['asc']              = $relatedAsc;
 
             $jqGrid = $jqGridHepler->render($jqGrid);
             $jqGridList[$alias] = $jqGrid;

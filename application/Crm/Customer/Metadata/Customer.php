@@ -318,12 +318,26 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                         'id' => 'name',
                     ),
                     'list' => array(
-                        'id', 'name', 'care_at', 'type'
+                        //'id', 'name', 'care_at', 'type'
                     ),
                     'set' => array(
                         'namespace' => 'Crm',
                         'module' => 'Customer',
                         'controller' => 'Care',
+                    ),
+                ),
+                'contacts' => array(
+                    'alias' => 'contacts',
+                    'type' => 'relatedList',
+                    'relation' => 'hasMany',
+                    'foreign' => 'customer_id',
+                    'fieldMap' => array(
+                        'id' => 'full_name',
+                    ),
+                    'set' => array(
+                        'namespace' => 'Crm',
+                        'module' => 'Contact',
+                        'controller' => 'Contact',
                     ),
                 ),
             ),

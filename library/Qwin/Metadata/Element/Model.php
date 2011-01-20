@@ -42,6 +42,7 @@ class Qwin_Metadata_Element_Model extends Qwin_Metadata_Element_Abstract
             'type' => 'db',
             'enabled' => true,
             'fieldMap' => array(),
+            'list'  => array(),
             'set' => array(
                 'namespace' => null,
                 'module' => null,

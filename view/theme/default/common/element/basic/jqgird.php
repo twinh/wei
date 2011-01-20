@@ -30,11 +30,11 @@ $jsPacker
     ->add(QWIN_RESOURCE_PATH . '/js/jquery/plugins/jqgrid/i18n/grid.locale-en.js')
     ->add($jQueryFile['jqgrid']['js']);
 ?>
-<div id="<?php echo $jqGrid['toolbarObjectString'] ?>" class="ui-helper-hidden">
-    <div class="ui-jqgrid-top">
-        <?php echo $this->loadWidget('Common_Widget_ListTab') ?>
-    </div>
+
+<div class="ui-jqgrid-top">
+    <?php echo $this->loadWidget('Common_Widget_ListTab', array('asc' => $jqGrid['asc'], 'url' => $jqGrid['url'])) ?>
 </div>
+<div class="clear"></div>
 <table id="<?php echo $jqGrid['objectString'] ?>"></table>
 <div id="<?php echo $jqGrid['pagerString'] ?>"></div>
 <script type="text/javascript">
@@ -71,26 +71,19 @@ jQuery(function($){
             search : false
         });
 
-	// 页眉工具栏
-    $(jqGrid.toolbarObject).appendTo('#t_' + jqGrid.objectString).removeClass('ui-helper-hidden');
-    $('#t_' + jqGrid.object + ' a').qui({
-        click: true,
-        focus: true
-    });
-
-    $(jqGrid.object).jqGrid('setGridWidth', $('#ui-box-tab').width() - 4).trigger("reloadGrid")
+    if (document.getElementById('ui-box-tab')) {
+        $(jqGrid.object).jqGrid('setGridWidth', $('#ui-box-tab').width() - 30);
+    }
 
     // 点击删除按钮
-    $('#action-delete').click(function(){
+    $('#action-<?php echo $jqGrid['ascString'] ?>-delete').click(function(){
         var keyList = new Array(),
             rowList = $(jqGrid.object).jqGrid('getGridParam','selarrrow');
-        if(rowList.length == 0)
-        {
+        if (rowList.length == 0) {
             alert(Qwin.Lang.MSG_CHOOSE_AT_LEASE_ONE_ROW);
             return false;
         }
-        for(var i in rowList)
-        {
+        for (var i in rowList) {
             var rowData = $(jqGrid.object).jqGrid('getRowData', rowList[i]);
             keyList[i] = rowData[primaryKey];
         }
@@ -103,5 +96,22 @@ jQuery(function($){
         }
         return false;
     });
+
+    // 点击复制按钮
+    $('#action-<?php echo $jqGrid['ascString'] ?>-copy').click(function(){
+        var rowList = $(jqGrid.object).jqGrid('getGridParam','selarrrow');
+        if (rowList.length != 1) {
+            alert(Qwin.Lang.MSG_CHOOSE_ONLY_ONE_ROW);
+            return false;
+        }
+        var rowData = $(jqGrid.object).jqGrid('getRowData', rowList[0]);
+        var url = $(this).attr('href') + '&' + primaryKey + '=' + rowData[primaryKey];
+        window.location.href = url;
+        return false;
+    });
+
+    // 样式调整
+    $('.ui-jqgrid').width($('.ui-jqgrid').width() - 2).addClass('ui-state-default');
+    $('table.ui-jqgrid-htable tr.ui-jqgrid-labels th:last').css('border-right', 'none');
 });
 </script>

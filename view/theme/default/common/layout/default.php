@@ -45,26 +45,26 @@ $jsPacker
 <body>
 <div id="ui-main" class="ui-main ui-widget-content ui-corner-all">
   <div id="ui-header" class="ui-header ui-widget">
-    <div class="ui-header-shortcut" id="ui-header-shortcut">
-    	<a class="ui-state-default" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Setting')) ?>"><?php echo qw_lang('LBL_WELCOME') ?>, <?php echo $nickname ?>!</a>
-        <a class="ui-state-default" href="<?php echo qw_url(array('module' => 'Management', 'controller' => 'Management')) ?>"><?php echo qw_lang('LBL_MANAGEMENT') ?></a>
-        <?php
-        if('guest' == $member['username']):
-        ?>
-        <a class="ui-state-default" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Log', 'action' => 'Login')) ?>"><?php echo qw_lang('LBL_LOGIN') ?></a>
-        <?php
-        else :
-        ?>
-        <a class="ui-state-default" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Log', 'action' => 'Logout')) ?>"><?php echo qw_lang('LBL_LOGOUT') ?></a>
-        <?php
-        endif;
-        ?>
-    </div>
+            <div class="ui-header-shortcut" id="ui-header-shortcut">
+                <a class="ui-state-default" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Setting')) ?>"><?php echo qw_lang('LBL_WELCOME') ?>, <?php echo $nickname ?>!</a>
+                <a class="ui-state-default" href="<?php echo qw_url(array('module' => 'Management', 'controller' => 'Management')) ?>"><?php echo qw_lang('LBL_MANAGEMENT') ?></a>
+                <?php
+                if('guest' == $member['username']):
+                ?>
+                <a class="ui-state-default" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Log', 'action' => 'Login')) ?>"><?php echo qw_lang('LBL_LOGIN') ?></a>
+                <?php
+                else :
+                ?>
+                <a class="ui-state-default" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Log', 'action' => 'Logout')) ?>"><?php echo qw_lang('LBL_LOGOUT') ?></a>
+                <?php
+                endif;
+                ?>
+            </div>
     <div class="ui-header-logo ui-widget-content">
         <a href="?">
             <img src="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/default/common/image/logo.png" alt="logo" />
         </a>
-    </div>
+            </div>
     <?php $this->loadWidget('Common_Widget_NavigationBar') ?>
     </div>
 <table id="ui-main-table" border="0" cellpadding="0" cellspacing="0">
