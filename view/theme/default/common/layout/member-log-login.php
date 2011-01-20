@@ -89,7 +89,7 @@ $jsPacker
         <table width="100%" cellpadding="4" cellspacing="10">
         	<tr>
                 <td class="login-label" width="60"><label for="username"><?php echo qw_lang('LBL_FIELD_USERNAME')?>:</label></td>
-                <td class="login-input" colspan="2"><?php echo qw_form($this->meta['field']['username']['form'], $_POST) ?></td>
+                <td class="login-input" colspan="2"><?php echo qw_form($this->meta['field']['username']['form'], $request['username']) ?></td>
             </tr>
             <tr>
             	<td class="login-label"><label for="password"><?php echo qw_lang('LBL_FIELD_PASSWORD')?>:</label></td>
@@ -97,7 +97,7 @@ $jsPacker
             </tr>
             <tr>
             	<td class="login-label"><label for="captcha"><?php echo qw_lang('LBL_FIELD_CAPTCHA')?>:</label></td>
-                <td class="login-input"><?php echo qw_form($this->meta['field']['captcha']['form'], $_POST) ?></td>
+                <td class="login-input"><?php echo qw_form($this->meta['field']['captcha']['form'], $request['captcha']) ?></td>
                 <td><img class="login-captcha ui-state-default ui-corner-all" id="login-captcha" alt="captcha image" src="?_entrance=captcha" /></td>
             </tr>
             <tr>
