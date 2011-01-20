@@ -45,7 +45,9 @@ class Common_Member_Controller_Setting extends Common_Controller
         if(empty($_POST))
         {
             $meta = $this->_meta;
-            $urlLanguage = $this->request->g('language');
+            $langName = $this->request->getOption('lang');
+            $urlLanguage = $this->request[$langName];
+            
             $theme = $this->config['interface']['theme'];
 
             $this->view->setDataList(get_defined_vars());

@@ -51,7 +51,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
             'basic' => array(
                 'title' => 'LBL_FIELD_TITLE',
                 'description' => array(),
-                'order' => 0,
+                'order' => 50,
                 'group' => 0,
             ),
             'form' => array(
@@ -140,13 +140,6 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
             $metadata['basic']['description'] = array();
         } elseif(!is_array($metadata['basic']['description'])) {
             $metadata['basic']['description'] = array($metadata['basic']['description']);
-        }
-
-        // 设置排序
-        if (!isset($metadata['basic']['order'])) {
-            $metadata['basic']['order'] = Qwin_Metadata_Element_Field_Order::getOrder();
-        } else {
-            $metadata['basic']['order'] = (int)$metadata['basic']['order'];
         }
 
         // 设置编号
@@ -458,5 +451,19 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
             }
         }
         return $this;
+    }
+
+    /**
+     * 获取表单配置中的初始值
+     *
+     * @return array
+     */
+    public function getFormValue()
+    {
+        $data = array();
+        foreach ($this->_data as $name => $field) {
+            $data[$name] = $field['form']['_value'];
+        }
+        return $data;
     }
 }

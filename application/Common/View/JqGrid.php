@@ -40,6 +40,9 @@ class Common_View_JqGrid extends Qwin_Application_View_Processer
         $asc            = $config['asc'];
         $jqGridHepler   = new Common_Helper_JqGrid();
         $jqGrid         = array();
+
+        // 设置应用结构配置
+        $jqGrid['asc'] = $asc;
         
         // 获取json数据的地址
         $jqGrid['url'] = '?' . $url->arrayKey2Url(array('json' => '1') + $_GET);
@@ -72,10 +75,10 @@ class Common_View_JqGrid extends Qwin_Application_View_Processer
         // 设置弹出窗口属性
         if ($view['isPopup']) {
             $popup = array(
-                'valueInput'    => $request->r('qw-popup-value-input'),
-                'viewInput'     => $request->r('qw-popup-view-input'),
-                'valueColumn'   => $request->r('qw-popup-value-column'),
-                'viewColumn'    => $request->r('qw-popup-view-column'),
+                'valueInput'    => $request['qw-popup-value-input'],
+                'viewInput'     => $request['qw-popup-view-input'],
+                'valueColumn'   => $request['qw-popup-value-column'],
+                'viewColumn'    => $request['qw-popup-view-column'],
             );
             $jqGrid['multiselect']  = false;
             $jqGrid['autowidth']    = false;

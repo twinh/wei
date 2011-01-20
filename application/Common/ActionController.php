@@ -42,7 +42,7 @@ class Common_ActionController extends Common_Controller
         $request = $this->request;
         if ($request->g('json')) {
             $service = new Common_Service_List();
-            $service->process(array(
+            return $service->process(array(
                 'set' => $this->_asc,
                 'data' => array(
                     'list' => $request->getListField(),
@@ -61,7 +61,7 @@ class Common_ActionController extends Common_Controller
             ));
         } else {
             $service = new Common_Service_Index();
-            $service->process(array(
+            return $service->process(array(
                 'set' => $this->_asc,
                 'data' => array(
                     'list' => $request->getListField(),
@@ -80,7 +80,7 @@ class Common_ActionController extends Common_Controller
     public function actionView()
     {
         $service = new Common_Service_View();
-        $service->process(array(
+        return $service->process(array(
             'set' => $this->_asc,
             'data' => array(
                 'primaryKeyValue' => $this->request->getPrimaryKeyValue($this->_asc),
@@ -96,24 +96,19 @@ class Common_ActionController extends Common_Controller
      */
     public function actionAdd()
     {
-        if(empty($_POST))
-        {
-            /**
-             * @see Common_Service_View $_config
-             */
-            $config = array(
+        if (empty($_POST)) {
+            $service = new Common_Service_Form();
+            return $service->process(array(
                 'set' => $this->_asc,
                 'data' => array(
                     'primaryKeyValue' => $this->request->getPrimaryKeyValue($this->_asc),
+                    'initalData' => $this->request->getInitialData(),
                 ),
                 'this' => $this,
-            );
-            return Qwin::run('Common_Service_Form')->process($config);
+            ));
         } else {
-            /**
-             * @see Common_Service_Insert $_config
-             */
-            $config = array(
+            $service = new Common_Service_Insert();
+            return $service->process(array(
                 'set' => $this->_asc,
                 'data' => array(
                     'db' => $_POST,
@@ -127,8 +122,7 @@ class Common_ActionController extends Common_Controller
                     'url' => urldecode($this->request->p('_page')),
                 ),
                 'this' => $this,
-            );
-            return Qwin::run('Common_Service_Insert')->process($config);
+            ));
         }
     }
 
@@ -139,12 +133,9 @@ class Common_ActionController extends Common_Controller
      */
     public function actionEdit()
     {
-        if(empty($_POST))
-        {
-            /**
-             * @see Common_Service_View $_config
-             */
-            $config = array(
+        if (empty($_POST)) {
+            $service = new Common_Service_View();
+            return $service->process(array(
                 'set' => $this->_asc,
                 'data' => array(
                     'primaryKeyValue' => $this->request->getPrimaryKeyValue($this->_asc),
@@ -156,13 +147,10 @@ class Common_ActionController extends Common_Controller
                     'class' => 'Common_View_EditForm',
                 ),
                 'this' => $this,
-            );
-            return Qwin::run('Common_Service_View')->process($config);
+            ));
         } else {
-            /**
-             * @see Common_Service_Update $_config
-             */
-            $config = array(
+            $service = new Common_Service_Update();
+            return $service->process(array(
                 'set' => $this->_asc,
                 'data' => array(
                     'db' => $_POST,
@@ -176,8 +164,7 @@ class Common_ActionController extends Common_Controller
                     'url' => urldecode($this->request->p('_page')),
                 ),
                 'this' => $this,
-            );
-            return Qwin::run('Common_Service_Update')->process($config);
+            ));
         }
     }
 

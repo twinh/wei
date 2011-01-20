@@ -137,6 +137,7 @@ class Crm_Customer_Metadata_Care extends Common_Metadata
                     ),
                     'form' => array(
                         '_type' => 'textarea',
+                        '_value' => 'lala',
                     ),
                 ),
             ),

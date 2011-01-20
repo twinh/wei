@@ -374,13 +374,13 @@ class Common_Metadata extends Qwin_Metadata
                 'icon'  => 'ui-icon-lightbulb',
             );
         }
-        if (!in_array('add', $this->forbiddenAction)) {
+        /*if (!in_array('add', $this->forbiddenAction)) {
             $operation['add'] = array(
                 'url'   => $url->createUrl($asc, array('action' => 'Add', $primaryKey => $dataCopy[$primaryKey])),
                 'title' => $lang->t('LBL_ACTION_COPY'),
                 'icon'  => 'ui-icon-transferthick-e-w',
             );
-        }
+        }*/
         if (!in_array('delete', $this->forbiddenAction)) {
             if (!isset($this->page['useRecycleBin'])) {
                 $icon = 'ui-icon-close';

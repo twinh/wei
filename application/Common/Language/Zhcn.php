@@ -99,6 +99,9 @@ class Common_Language_Zhcn extends Common_Language
             'LBL_GROUP_BASIC_DATA' => '基本资料',
             'LBL_GROUP_DESCRIPTION_DATA' => '描述资料',
 
+            // 选项卡
+            'LBL_TAB_DATA' => '资料',
+
             // 错误信息
             'MSG_CHOOSE_ONLY_ONE_ROW' => '请只选择一行!',
             'MSG_CHOOSE_AT_LEASE_ONE_ROW' => '请选择至少一行!',
@@ -130,6 +133,7 @@ class Common_Language_Zhcn extends Common_Language
             'MSG_NOT_ALLOW_DELETE' => '不允许删除该用户.',
             'MSG_FILE_NOT_EXISTS' => '文件不存在',
             'MSG_PERMISSION_NOT_ENOUGH' => '您不够权限查看或操作该页面.',
+            'MSG_NO_RECORDS' => '抱歉,未查找到任何数据!',
             'LBL_FIELD_ORDER' => '顺序',
             
             'MSG_VALIDATOR_REQUIRED' => '该项是必填的.',

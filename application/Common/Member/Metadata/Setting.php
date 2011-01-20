@@ -27,7 +27,7 @@
 
 class Common_Member_Metadata_Setting extends Common_Metadata
 {
-    public function  setMetadata()
+    public function setMetadata()
     {
         $this->parseMetadata(array(
             'page' => array(

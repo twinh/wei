@@ -41,9 +41,8 @@
         <div class="ui-space-10px"></div>
         <hr class="ui-line ui-widget-content" />
         <div class="ui-operation-content">
-            <a class="ui-anchor" href="<?php echo qw_url($asc, array('language' => 'zh-CN')) ?>"><?php echo qw_lang('LBL_LANG_ZHCN') ?></a>
-            <a class="ui-anchor" href="<?php echo qw_url($asc, array('language' => 'Gbk')) ?>"><?php echo qw_lang('LBL_LANG_GBK') ?></a>
-            <a class="ui-anchor" href="<?php echo qw_url($asc, array('language' => 'en-US')) ?>"><?php echo qw_lang('LBL_LANG_ENUS') ?></a>
+            <a class="ui-anchor" href="<?php echo qw_url($asc, array($langName => 'zh-CN')) ?>"><?php echo qw_lang('LBL_LANG_ZHCN') ?></a>
+            <a class="ui-anchor" href="<?php echo qw_url($asc, array($langName => 'en-US')) ?>"><?php echo qw_lang('LBL_LANG_ENUS') ?></a>
         </div>
         <hr class="ui-line ui-widget-content" />
         <div class="ui-space-10px"></div>

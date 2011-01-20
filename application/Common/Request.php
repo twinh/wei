@@ -254,19 +254,20 @@ class Common_Request extends Qwin_Request
     }
 
     /**
-     * 获取 url 中的数据
+     * 获取用户请求中的初始数据,主要用于添加操作
      *
-     * @param array $data add.edit等操作传过来的初始数据
-     * @param int $mode
+     * @param string $search 请求的名称
+     * @return array
      */
-    public function getUrlData($data)
+    public function getInitialData($search = null)
     {
-        foreach ($data as $key => $val) {
-            if (isset($_GET['_data'][$key]) && '' != $_GET['_data'][$key]) {
-                $data[$key] = $_GET['_data'][$key];
-            }
+        // 字符串类型查找,如 qwSearch=title:me:eq,id:5:gt
+        null == $search && $search = $this->_option['search'];
+        $searchValue = $this->g($search);
+        if (null != $searchValue) {
+            return $this->splitToInitalData($searchValue);
         }
-        return $data;
+        return array();
     }
 
     /**
@@ -286,5 +287,19 @@ class Common_Request extends Qwin_Request
             }
         }
         return $data;
+    }
+
+    public function splitToInitalData($data)
+    {
+        $result = array();
+        $data = preg_split('/(?<!\\\\)\,/', $data, -1, PREG_SPLIT_DELIM_CAPTURE);
+        foreach ($data as &$row) {
+            $row = strtr($row, array('\,' => ','));
+            $row = preg_split('/(?<!\\\\)\:/', $row, -1, PREG_SPLIT_DELIM_CAPTURE);
+            if (isset($row[0]) && isset($row[1])) {
+                $result[$row[0]] = strtr($row[1], array('\:' => ':'));
+            }
+        }
+        return $result;
     }
 }

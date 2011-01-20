@@ -1,10 +1,11 @@
 @charset "utf-8";
 /* Basic
 ----------------------------------*/
-body,div,ul,ol,li,h1,h2,h3,h4,h5,h6,form,fieldset,input,textarea,p,th,td, hr {
+body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,fieldset,p,blockquote,input,textarea,p,th,td,hr {
     margin: 0;
     padding: 0;
 }
+*{outline:none}
 /* 让火狐一直显示右边滚动条 */
 html{
     overflow-y: scroll;
@@ -14,9 +15,12 @@ body{
     margin: 0 auto;
     min-width: 900px;
 }
-li{
+ol,ul,li{
     list-style: none;
 }
+/*table {
+    border-spacing: 0;
+}*/
 img{
     border: 0;
 }
@@ -103,7 +107,7 @@ div.ui-header-logo{
 }
 .ui-navigation-bar div.ui-widget-content{
     margin-top: -1px;
-    z-index: 998px;
+    z-index: 998;
     border-left: 0;
     border-right: 0;
 }
@@ -240,7 +244,14 @@ div.ui-box-tab{
 	 padding: 5px;
 }
 div.ui-box-tab .ui-tabs-panel{
-    padding: 0;
+    padding: 15px 10px;
+}
+#ui-tab-1{
+    padding: 5px;
+}
+.ui-tabs-panel .ui-jqgrid .ui-jqgrid-top{
+    float: right;
+    margin-right: 20px;
 }
 
 /* Form (Add, Edit Action & Show Action)
@@ -539,4 +550,20 @@ div.ui-box-tab .ui-tabs-panel{
 /* 保持大小一致 */
 .ui-widget, .ui-widget-content {
 	font-size: 12px;
+}
+
+.ui-jqgrid-top a.ui-state-default{
+	float: left;
+    -moz-border-radius-bottomleft: 0;
+    -webkit-border-bottom-left-radius: 0;
+    border-bottom-left-radius: 0;
+    -moz-border-radius-bottomright: 0;
+    -webkit-border-bottom-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: none;
+	/*margin-bottom: -1px;
+    z-index: 9999;*/
+}
+.ui-jqgrid-top {
+    margin-left: 30px;
 }

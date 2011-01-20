@@ -84,5 +84,5 @@ jQuery(function($){
     <div class="clear"></div>
     <div class="ui-widget-content ui-state-default">
         <ul class="ui-navigation-content"></ul>
-    </div>
+</div>
 </div>

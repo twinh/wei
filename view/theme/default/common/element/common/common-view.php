@@ -36,9 +36,7 @@ $operationField =  $this->loadWidget('Common_Widget_FormLink', array($data, $pri
 ?>
 <script>
 	jQuery(function($) {
-		$( "#ui-box-tab" ).tabs({
-
-		});
+		$( "#ui-box-tab" ).tabs();
 	});
 	</script>
 
@@ -62,7 +60,7 @@ $operationField =  $this->loadWidget('Common_Widget_FormLink', array($data, $pri
         </div>
         <div id="ui-box-tab" class="ui-box-tab">
         <ul>
-            <li><a href="#tabs-1">客户资料</a></li>
+            <li><a href="#ui-tab-1"><?php echo $lang[$meta['page']['title']] . $lang['LBL_TAB_DATA'] ?></a></li>
         <?php
         foreach($tabTitle as $alias => $title):
         ?>
@@ -71,7 +69,7 @@ $operationField =  $this->loadWidget('Common_Widget_FormLink', array($data, $pri
         endforeach;
         ?>
         </ul>
-	<div id="tabs-1">
+    <div id="ui-tab-1">
         <?php foreach($layout as $groupKey => $fieldGroup): ?>
         <fieldset id="ui-fieldset-<?php echo $groupKey ?>" class="ui-widget-content ui-corner-all">
             <legend><?php echo qw_lang($group[$groupKey]) ?></legend>
@@ -131,6 +129,9 @@ $operationField =  $this->loadWidget('Common_Widget_FormLink', array($data, $pri
             </table>
         </fieldset>
         <?php endforeach ?>
+        <div id="ui-buttom-operation-field" class="ui-operation-field">
+            <?php echo $operationField ?>
+        </div>
 	</div>
     <?php
     foreach($jqGridList as $alias => $jqGrid):
@@ -143,9 +144,6 @@ $operationField =  $this->loadWidget('Common_Widget_FormLink', array($data, $pri
     endforeach;
     ?>
 </div>
-        <div class="ui-operation-field">
-            <?php echo $operationField ?>
-        </div>
         </form>
     </div>
   </div>
