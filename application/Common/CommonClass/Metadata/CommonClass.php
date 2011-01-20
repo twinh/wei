@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Common
- * @subpackage  CommonClass
+ * @subpackage  Option
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,7 +25,7 @@
  * @since       2009-11-21 15:21:00
  */
 
-class Common_CommonClass_Metadata_CommonClass extends Common_Metadata
+class Common_Option_Metadata_Option extends Common_Metadata
 {
     public function  setMetadata()
     {
@@ -37,7 +37,7 @@ class Common_CommonClass_Metadata_CommonClass extends Common_Metadata
                         'form' => array(
                             '_type' => 'select',
                             '_resourceGetter' => array(
-                                array('Project_Helper_CommonClass', 'get'),
+                                array('Project_Helper_Option', 'get'),
                                 'language',
                             ),
                         ),

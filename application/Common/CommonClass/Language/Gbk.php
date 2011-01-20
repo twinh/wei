@@ -25,7 +25,7 @@
  * @since       2010-10-22 10:46:03
  */
 
-class Common_CommonClass_Language_Gbk extends Common_Language_Gbk
+class Common_Option_Language_Gbk extends Common_Language_Gbk
 {
     public function __construct()
     {

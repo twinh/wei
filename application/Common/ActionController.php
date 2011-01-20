@@ -96,6 +96,26 @@ class Common_ActionController extends Common_Controller
      */
     public function actionAdd()
     {
+        // 1. value:name
+        // 2.
+        $resource = array(
+            1 => '男',
+            2 => '女',
+        );
+        $resource = array(
+            array(
+                'name' => '男',
+                'color' => 2,
+                'style' => 'font-size:12px..',
+            ),
+            array(
+                'name' => '女',
+                'value' => 2,
+                'color' => 'green',
+                'style' => 'font-size:12px..',
+            ),
+        );
+        $resourceType;
         if (empty($_POST)) {
             $service = new Common_Service_Form();
             return $service->process(array(

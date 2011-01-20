@@ -116,13 +116,13 @@ class Common_Member_Metadata_Member extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Helper_CommonClass', 'get'),
+                            array('Project_Helper_Option', 'get'),
                             'sex',
                         ),
                     ),
                     'converter' => array(
                         'list' => array(
-                            array('Project_Helper_CommonClass', 'convert'),
+                            array('Project_Helper_Option', 'convert'),
                             'sex',
                         ),
                         'view' => 'list',
@@ -153,7 +153,7 @@ class Common_Member_Metadata_Member extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Helper_CommonClass', 'get'),
+                            array('Project_Helper_Option', 'get'),
                             'language',
                         ),
                     ),

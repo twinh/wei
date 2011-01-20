@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Common
- * @subpackage  CommonClass
+ * @subpackage  Option
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,7 +25,7 @@
  * @since       2010-08-26 17:20:56
  */
 
-class Common_CommonClass_Language_Zhcn extends Common_Language_Zhcn
+class Common_Option_Language_Zhcn extends Common_Language_Zhcn
 {
     public function __construct()
     {
