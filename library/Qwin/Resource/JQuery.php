@@ -75,8 +75,7 @@ class Qwin_Resource_JQuery extends Qwin_Resource
     {
         parent::__construct();
         $this->_typePath = $this->_rootPath . '/js/jquery';
-        $this->_version = '1.4.2';
-        $this->_uiVersion = '1.8.4';
+        $this->_version = '1.4.4';
 
         $this->_isLoad = array(
             'core', 'theme', 'ui', 'effect', 'plugin',
@@ -86,12 +85,6 @@ class Qwin_Resource_JQuery extends Qwin_Resource
     public function setVersion($version)
     {
         $this->_version = $version;
-        return $this;
-    }
-
-    public function setUiVersion($version)
-    {
-        $this->_uiVersion = $version;
         return $this;
     }
 

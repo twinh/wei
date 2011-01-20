@@ -50,11 +50,11 @@ class Qwin_Form
     /**
      * 根据配置生成表单
      */
-    public function render(&$set, $initData = null)
+    public function render(&$set, $value = null)
     {
         $data = '';
         // 初始化数据
-        $this->_init($set, $initData);
+        $this->_init($set, $value);
         $data = $this->_callType();
         return $data;
     }
@@ -96,25 +96,25 @@ class Qwin_Form
      *
      *
      */
-    private function _init($set, $initData = null)
+    private function _init($set, $value = null)
     {
         // 置空
         $this->_privateSet = array();
         $this->_publicSet = array();
 
         // 转换表单资源
-        if(isset($set['_resourceGetter'])) {
+        if (isset($set['_resourceGetter'])) {
             $set['_resource'] = Qwin::callByArray($set['_resourceGetter']);
         }
 
-        if(isset($initData[$set['name']])) {
-            $this->_value = $initData[$set['name']];
+        if (isset($value)) {
+            $this->_value = $value;
         } else {
             $this->_value = $set['_value'];
         }
         
         // 获取id
-        if(!isset($set['id'])) {
+        if (!isset($set['id'])) {
             $set['id'] = preg_replace("/(\w*)\[(\w+)\]/", "$1-$2", $set['name']);
         }
         

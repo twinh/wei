@@ -942,7 +942,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
         }
 
         // 修复最后一个的位置
-        foreach ($layout as $key => $value) {
+        /*foreach ($layout as $key => $value) {
             if (-1 == $key) {
                 continue;
             }
@@ -958,7 +958,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
                     $layout[$key][$count][] = '';
                 }
             }
-        }
+        }*/
 
         return $layout;
     }
