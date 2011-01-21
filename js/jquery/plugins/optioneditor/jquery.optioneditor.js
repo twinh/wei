@@ -22,6 +22,12 @@
  * @since       2011-01-20 21:12:58
  */
 jQuery(function($){
+    jQuery.fn.outerHTML = function(s) {
+        return (s)
+            ? this.before(s).remove()
+            : jQuery('<p>').append(this.eq(0).clone()).html();
+    }
+    
     // 绑定删除按钮
     $('#ui-optioneditor-sortable .ui-optioneditor-oper a')
         .qui()
@@ -68,17 +74,22 @@ jQuery(function($){
     function addItem()
     {
         // 替换所有表单的名称
-        var html = $('.ui-optioneditor li:first').clone().html();
+        var html = $('.ui-optioneditor li:first').clone().outerHTML();
         var rand = Math.floor(Math.random() * 10000);
         html = html.replace(/name=\"(\w+)+\[(.+?)\]\[(.+?)\]\"/g, 'name="$1[' + rand + '][$3]"');
-        clearItemForm($(html))
+        var item = clearItemForm($(html))
             .hide()
             .appendTo($('#ui-optioneditor-sortable'))
             .slideDown()
+        item
             .find('input')
+            .qui()
             .bind('mousedown.ui-disableSelection selectstart.ui-disableSelection', function(e){
                 e.stopImmediatePropagation();
-            });        
+            });
+        item
+            .find('a')
+            .qui();
     }
 
     // 排列

@@ -39,6 +39,7 @@ class Common_Widget_ListTab extends Common_Widget
      * @param <type> $view      视图对象
      * @return array
      * @todo Asc和Url的选择
+     * @todo ListTab, FormLink等存在重复的情况,应考虑如何合并
      */
     public function render($param, $view)
     {

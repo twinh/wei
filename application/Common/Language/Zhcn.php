@@ -59,6 +59,8 @@ class Common_Language_Zhcn extends Common_Language
             'LBL_NULL' => '未填写',
             'LBL_REDIRECT' => '跳转中',
             'LBL_PLEASE_SELECT' => '请选择',
+            'LBL_OPTION_NULL' => '无',
+            'LBL_OPTION_SELECT' => '请选择',
 
             // 域
             'LBL_FIELD_ID' => '编号',

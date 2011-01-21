@@ -204,21 +204,53 @@ class Qwin_Form_Element_Base extends Qwin_Form
         $attr = parent::_getAttr($publicSet);
         $data = '<select ' . $attr . '>';
         $isUsed = false;
-        if(isset($privateSet['_resource']))
-        {
-            foreach($privateSet['_resource'] as $key => $val)
-            {
-                if(false == $isUsed && $value == $key)
-                {
+        if (isset($privateSet['_resource'])) {
+            // 转换资源
+            $resource = $this->convertResource($privateSet['_resource']);
+            foreach($resource as $option) {
+                // 附加颜色到样式中
+                null != $option['color'] && $option['style'] = 'color:' . $option['color'] . ';' . $option['style'];
+                null != $option['style'] && $option['style'] = ' style="' . $option['style'] . '"';
+                if(false == $isUsed && $value == $option['value']) {
                     $isUsed = true;
                     $isSelected = ' selected="selected" ';
                 } else {
                     $isSelected = '';
                 }
-                $data .= '<option value="' . $key . '"' . $isSelected . '>' . $val . '</option>';
+                $data .= '<option' . $option['style'] . ' value="' . $option['value'] . '"' . $isSelected . '>' . $option['name'] . '</option>';
             }
         }
         $data .= '</select>';
         return $data;
+    }
+
+    /**
+     * 转换资源为选项模块的形式
+     *
+     * @param array $resource
+     * @param array $option 配置选项
+     * @return array
+     * @todo 耦合?
+     */
+    public function convertResource($resource, $option = null)
+    {
+        // 认定为选项模块的选项
+        $element = $resource[key($resource)];
+        if (is_array($element)) {
+            return $resource;
+        }
+
+        // 否则,认定为value=>name的形式
+        $return = array();
+        foreach($resource as $value => $name) {
+            $return[$value] = array(
+                'value' => $value,
+                'name' => $name,
+                'color' => null,
+                'style' => null,
+            );
+        }
+
+        return $return;
     }
 }

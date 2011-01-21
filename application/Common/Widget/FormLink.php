@@ -79,10 +79,18 @@ class Common_Widget_FormLink extends Common_Widget
             }
 
              if (!in_array('delete', $forbiddenAction)) {
+                $meta = $view['metaHelper']->getMetadataByAsc($asc);
+                if (!isset($meta['page']['useRecycleBin'])) {
+                    $icon = 'ui-icon-close';
+                    $jsLang = 'MSG_CONFIRM_TO_DELETE';
+                } else {
+                    $icon = 'ui-icon-trash';
+                    $jsLang = 'MSG_CONFIRM_TO_DELETE_TO_TRASH';
+                }
                  $link['delete'] = array(
-                    'url'   => 'javascript:if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE)){window.location=\'' . $url->createUrl($asc, array('action' => 'Delete', $primaryKey => $data[$primaryKey])) . '\'};',
+                    'url'   => 'javascript:if(confirm(Qwin.Lang.' . $jsLang . ')){window.location=\'' . $url->createUrl($asc, array('action' => 'Delete', $primaryKey => $data[$primaryKey])) . '\'};',
                     'title' => $lang->t('LBL_ACTION_DELETE'),
-                    'icon'  => 'ui-icon-trash',
+                    'icon'  => $icon,
                 );
              }
         }

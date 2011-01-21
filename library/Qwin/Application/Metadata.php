@@ -523,7 +523,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
             }
 
             // 类型转换
-            if ($option['type']) {
+            if ($option['type'] && $field['db']['type']) {
                 if (null != $newData[$name]) {
                     if ('string' == $field['db']['type']) {
                         $newData[$name] = (string)$newData[$name];
