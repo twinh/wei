@@ -9,26 +9,26 @@ QUI is short for Quick UI
         if(opts.hover)
         {
             this.hover(
-                function(){ $(this).addClass("ui-state-hover"); },
-                function(){ $(this).removeClass("ui-state-hover");
+                function(){ $(this).addClass('ui-state-hover'); },
+                function(){ $(this).removeClass('ui-state-hover');
             })
         }
 
         if(opts.click)
         {
             this.mousedown(function(){
-                $(this).addClass("ui-state-active");
+                $(this).addClass('ui-state-active');
             }).mouseup(function(){
-                $(this).removeClass("ui-state-active");
+                $(this).removeClass('ui-state-active');
             });
         }
 
         if(opts.focus)
         {
             this.focus(function(){
-                $(this).addClass("ui-state-active");
+                $(this).addClass('ui-state-active');
             }).blur(function(){
-                $(this).removeClass("ui-state-active");
+                $(this).removeClass('ui-state-active');
             });
         }
         return this;
