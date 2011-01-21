@@ -36,11 +36,10 @@ class Common_Option_Metadata_Code extends Common_Metadata
                 'color' => array(
                     'form' => array(
                         '_type' => 'select',
-                        '_resource' => array(
-                            '' => '无',
-                            'red' => 'red',
-                            'blue' => 'blue',
-                            'green' => 'green',
+                        '_resourceGetter' => array(
+                            array('Common_Helper_Option', 'get'),
+                            'css-color',
+                            'NULL',
                         ),
                     ),
                 ),
