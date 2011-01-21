@@ -30,38 +30,11 @@
 class Qwin_Resource_JQuery extends Qwin_Resource
 {
     /**
-     * jQuery的版本
-     * @var string
-     * @todo available
-     */
-    protected $_version;
-
-    /**
-     * jQuery UI库的版本
-     * @var string
-     * @todo available
-     */
-    protected $_uiVersion;
-
-    /**
-     * jQuery的合法版本
-     * @var array
-     * @todo available
-     */
-    protected $_allowVersion;
-
-    /**
      * 是否加载压缩过的脚本文件
      * @var boolen
      * @todo available
      */
     protected $_isLoadMiniFile = true;
-
-    /**
-     * jQuery UI库的合法版本
-     * @var strubg
-     */
-    protected $_allowUiVersion;
     
     /**
      * 主题名称
@@ -75,17 +48,10 @@ class Qwin_Resource_JQuery extends Qwin_Resource
     {
         parent::__construct();
         $this->_typePath = $this->_rootPath . '/js/jquery';
-        $this->_version = '1.4.4';
 
         $this->_isLoad = array(
             'core', 'theme', 'ui', 'effect', 'plugin',
         );
-    }
-
-    public function setVersion($version)
-    {
-        $this->_version = $version;
-        return $this;
     }
 
     public function loadCore($isWrap = true)
@@ -95,7 +61,7 @@ class Qwin_Resource_JQuery extends Qwin_Resource
             return null;
         }
         $this->_isLoad['core']['core'] = true;
-        $file = $this->_typePath . '/jquery-' . $this->_version . '.min.js';
+        $file = $this->_typePath . '/jquery.js';
         if(true == $isWrap)
         {
             return $this->wrapAsFile($file);
