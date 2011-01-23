@@ -31,33 +31,27 @@ class Common_View_JqGridJson extends Qwin_Application_View_Processer
     {
         // 初始变量,方便调用
         $primaryKey = $view->primaryKey;
-        $request = Qwin::run('Qwin_Request');
+        $request = Qwin::run('#request');
         $data = $view->data;
+        $jqGridHelper = new Common_Helper_JqGrid();
 
         // 转换为jqGrid的行数据
-        $data = $view->metaHelper->convertTojqGridData($data, $primaryKey, $view->layout);
+        $data = $jqGridHelper->convertRowData($data, $primaryKey, $view['layout']);
 
         /**
-         * @todo 当前页数,行数等信息的获取
+         * @var array       jqGrid的Json数据数组
+         *
+         *      -- page     当前页面数
+         *
+         *      -- total    总页面数
+         *
+         *      -- records  总记录数
+         *
+         *      -- rows     记录信息
          */
-        //$controller = $view->_data['config']['this'];
-        $controller = Qwin::run('-controller');
-        $nowPage = intval($request->g($controller->pageName));
-        $nowPage <= 0 && $nowPage = 1;
-        $rowNum = intval($request->g($controller->limitName));
-        if($rowNum <= 0)
-        {
-            $rowNum = $view->meta['db']['limit'];
-        // 最多同时读取500条记录
-        } elseif($rowNum > 500) {
-            $rowNum = 500;
-        }
-
-        // 输出json数据
         $jsonData = array(
-            'page' => $nowPage,
-            // 总页面数
-            'total' => ceil($view->totalRecord / $rowNum),
+            'page' => $request->getPage(),
+            'total' => ceil($view->totalRecord / $request->getLimit()),
             'records' => $view->totalRecord,
             'rows' => $data,
         );

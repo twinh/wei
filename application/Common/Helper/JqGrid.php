@@ -131,6 +131,14 @@ class Common_Helper_JqGrid
         return $option;
     }
 
+    /**
+     * 根据列表布局数组,获取栏目配置
+     *
+     * @param array $layout 列表布局数组
+     * @param Qwin_Metadata $meta 元数据
+     * @param Common_Language $lang 语言对象
+     * @return array 栏目配置
+     */
     public function getColByListLayout($layout, $meta, $lang)
     {
         $option = array(
@@ -160,5 +168,43 @@ class Common_Helper_JqGrid
             }
         }
         return $option;
+    }
+
+    /**
+     *  转换为jqGrid的行数据
+     *
+     * @param <type> $data
+     * @param <type> $primaryKey
+     * @param <type> $layout
+     * @return string
+     */
+    public function convertRowData($data, $primaryKey, $layout)
+    {
+        $lang = Qwin::run('-lang');
+        $i = 0;
+        $rowData = array();
+        $nullData = '<em>(' . $lang->t('LBL_NULL') .')<em>';
+        foreach ($data as $row) {
+            $rowData[$i][$primaryKey] = $row[$primaryKey];
+            foreach($layout as $field) {
+                if (is_array($field)) {
+                    if (isset($row[$field[0]][$field[1]])) {
+                        $rowValue = $row[$field[0]][$field[1]];
+                    } else {
+                        // 使列表 null 类型数据能正确显示
+                        $rowValue = $nullData;
+                    }
+                } else {
+                    if (isset($row[$field])) {
+                        $rowValue = $row[$field];
+                    } else {
+                        $rowValue = $nullData;
+                    }
+                }
+                $rowData[$i]['cell'][] = $rowValue;
+            }
+            $i++;
+        }
+        return $rowData;
     }
 }

@@ -198,12 +198,17 @@ class Common_Request extends Qwin_Request
         null == $pageName && $pageName = $this->_option['page'];
         null == $limitName && $limitName = $this->_option['row'];
         
-        $page = $this->g($pageName);
+        $page = $this->getPage($pageName);
         $limit = $this->getLimit($limitName);
         return ($page - 1) * $limit;
     }
 
-    
+    public function getPage($pageName = null)
+    {
+        null == $pageName && $pageName = $this->_option['page'];
+        $page = intval($this->g($pageName));
+        return $page > 0 ? $page : 1;
+    }
 
     /**
      * 获取请求中显示域的配置

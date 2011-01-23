@@ -33,7 +33,7 @@ class Common_Config_Controller_Config extends Common_ActionController
         $request = $this->request;
         $metaHelper = $this->metaHelper;
         
-        $groupId = $request->r('groupId');
+        $groupId = $request->g('groupId');
         
         // 获取当前分组的所有表单项
         $formData = $metaHelper

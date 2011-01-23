@@ -1,6 +1,6 @@
 <?php
 /**
- * Attachment
+ * Exception
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -20,9 +20,9 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-18 11:21:02
+ * @since       2011-01-24 01:13:32
  */
 
-class Crm_Attachment_Controller_Attachment extends Common_ActionController
+class Qwin_Url_Router_Exception extends Exception
 {
 }
