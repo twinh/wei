@@ -741,36 +741,6 @@ class Qwin_Application_Metadata extends Qwin_Metadata
         return $layout;
     }
 
-    public function convertTojqGridData($data, $primaryKey, $layout)
-    {
-        $lang = Qwin::run('-lang');
-        $i = 0;
-        $rowData = array();
-        $nullData = '<em>(' . $lang->t('LBL_NULL') .')<em>';
-        foreach ($data as $row) {
-            $rowData[$i][$primaryKey] = $row[$primaryKey];
-            foreach($layout as $field) {
-                if (is_array($field)) {
-                    if (isset($row[$field[0]][$field[1]])) {
-                        $rowValue = $row[$field[0]][$field[1]];
-                    } else {
-                        // 使列表 null 类型数据能正确显示
-                        $rowValue = $nullData;
-                    }
-                } else {
-                    if (isset($row[$field])) {
-                        $rowValue = $row[$field];
-                    } else {
-                        $rowValue = $nullData;
-                    }
-                }
-                $rowData[$i]['cell'][] = $rowValue;
-            }
-            $i++;
-        }
-        return $rowData;
-    }
-
     /**
      * 排列元数据
      *

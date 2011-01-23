@@ -10,11 +10,12 @@ jQuery(function($){
      * 设置背景颜色,让背景看起来更协调
      * @todo 允许自定义背景
      */
-     if('transparent' == $('body').css('background-color'))
-     {
-         $('body').css('background-color', $widget.css('background-color'));
-     }
+    if('transparent' == $('body').css('background-color'))
+    {
+        $('body').css('background-color', $widget.css('background-color'));
+    }
 
+    // 为按钮增加样式
     $('button:not(.ui-button-none), input:submit, input:reset, input:button, a.ui-anchor').button();
     $('td.ui-field-radio, td.ui-field-checkbox').buttonset();
 
@@ -110,4 +111,16 @@ jQuery(function($){
     $('#ui-main-middle').qui().click(function(){
         $("#ui-main-left").animate({width: 'toggle'}, 500);
     });
+
+    //
+    /*if ($.browser.mozilla) {
+        function fixSelectStyle(obj) {
+            obj.attr('style', obj.find('option:selected').attr('style'));
+        }
+        $('select').each(function(){
+             fixSelectStyle($(this));
+        }).change(function(){
+            fixSelectStyle($(this));
+        });
+    }*/
 });
