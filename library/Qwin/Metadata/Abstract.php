@@ -97,7 +97,21 @@ abstract class Qwin_Metadata_Abstract implements ArrayAccess, Iterator
      */
     public function toArray()
     {
-        return $this->_data;
+        return $this->_toArray($this->_data);
+    }
+
+
+    protected function _toArray($data)
+    {
+        $result = array();
+        foreach ($data as $key => $value) {
+            if (is_object($value) && is_subclass_of($value, __CLASS__)) {
+                $result[$key] = $this->_toArray($value);
+            } else {
+                $result[$key] = $value;
+            }
+        }
+        return $result;
     }
 
     /**

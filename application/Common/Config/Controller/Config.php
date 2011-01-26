@@ -99,7 +99,7 @@ class Common_Config_Controller_Config extends Common_ActionController
             ->parseMetadata($configMeta);
         
         if (empty($_POST)) {
-            $this->view->setDataList(get_defined_vars());
+            $this->view->assignList(get_defined_vars());
             $this->view->setProcesser('Common_View_EditForm');
         } else {
             // 保存结果
@@ -110,7 +110,7 @@ class Common_Config_Controller_Config extends Common_ActionController
             $globalConfig[$groupId] = $data;
             Qwin_Helper_File::writeAsArray($globalConfig, $path);
             
-            $url = $this->url->createUrl($this->_asc, array('action' => 'Index'));
+            $url = $this->url->url($this->_asc, array('action' => 'Index'));
             $this->view->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }
@@ -139,6 +139,6 @@ class Common_Config_Controller_Config extends Common_ActionController
             ->execute()
             ->toArray();
 
-        $this->view->setDataList(get_defined_vars());
+        $this->view->assignList(get_defined_vars());
     }
 }

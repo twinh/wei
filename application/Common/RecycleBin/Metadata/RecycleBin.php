@@ -109,7 +109,7 @@ class Common_RecycleBin_Metadata_RecycleBin extends Common_Metadata
         $metadata = $this->metaHelper->getMetadataByAsc($asc);
         $lang = Qwin::run('Common_Helper_Language')->getObjectByAsc($asc);
         
-        return Qwin_Helper_Html::link($this->url->createUrl($asc), $lang->t($metadata['page']['title']));
+        return Qwin_Helper_Html::link($this->url->url($asc), $lang->t($metadata['page']['title']));
     }
 
     public function convertDbDeletedAt($value, $name, $data, $dataCopy)
@@ -131,7 +131,7 @@ class Common_RecycleBin_Metadata_RecycleBin extends Common_Metadata
         $asc = $this->getAscFromClass();
         $operation = array();
         $operation['restore'] = array(
-            'url' => 'javascript:if(confirm(Qwin.Lang.MSG_CONFIRM_TO_RESTORE)){window.location=\'' . $url->createUrl($asc, array('action' => 'Restore', $primaryKey => $dataCopy[$primaryKey])) . '\';}',
+            'url' => 'javascript:if(confirm(Qwin.Lang.MSG_CONFIRM_TO_RESTORE)){window.location=\'' . $url->url($asc, array('action' => 'Restore', $primaryKey => $dataCopy[$primaryKey])) . '\';}',
             'title' => $lang->t('LBL_ACTION_RESTORE'),
             'icon' => 'ui-icon-arrowreturnthick-1-w',
         );

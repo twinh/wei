@@ -64,7 +64,7 @@ class Common_Member_Service_Logout extends Common_Service_BasicAction
         {
             if(null === $member)
             {
-                $url = $this->url->createUrl(array(
+                $url = $this->url->url(array(
                     'module' => 'Member',
                     'controller' => 'Log',
                     'action' => 'Login'

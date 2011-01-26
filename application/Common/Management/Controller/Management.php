@@ -30,6 +30,6 @@ class Common_Management_Controller_Management extends Common_Controller
     public function actionIndex()
     {
         $meta = $this->_meta;
-        $this->view->setDataList(get_defined_vars());
+        $this->view->assignList(get_defined_vars());
     }
 }

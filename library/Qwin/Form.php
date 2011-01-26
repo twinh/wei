@@ -80,7 +80,7 @@ class Qwin_Form
         $type = str_replace('_', '', $this->_privateSet['_type']);
         foreach($this->_class as $val)
         {
-            if(method_exists(qw($val), $type))
+            if(method_exists(Qwin::run($val), $type))
             {
                 $data = call_user_func_array(
                     array(Qwin::run($val), $type),

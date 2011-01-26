@@ -362,21 +362,21 @@ class Common_Metadata extends Qwin_Metadata
         $operation = array();
         if (!in_array('edit', $this->forbiddenAction)) {
             $operation['edit'] = array(
-                'url'   => $url->createUrl($asc, array('action' => 'Edit', $primaryKey => $dataCopy[$primaryKey])),
+                'url'   => $url->url($asc, array('action' => 'Edit', $primaryKey => $dataCopy[$primaryKey])),
                 'title' => $lang->t('LBL_ACTION_EDIT'),
                 'icon'  => 'ui-icon-tag',
             );
         }
         if (!in_array('view', $this->forbiddenAction)) {
             $operation['view'] = array(
-                'url'   => $url->createUrl($asc, array('action' => 'View', $primaryKey => $dataCopy[$primaryKey])),
+                'url'   => $url->url($asc, array('action' => 'View', $primaryKey => $dataCopy[$primaryKey])),
                 'title' => $lang->t('LBL_ACTION_VIEW'),
                 'icon'  => 'ui-icon-lightbulb',
             );
         }
         /*if (!in_array('add', $this->forbiddenAction)) {
             $operation['add'] = array(
-                'url'   => $url->createUrl($asc, array('action' => 'Add', $primaryKey => $dataCopy[$primaryKey])),
+                'url'   => $url->url($asc, array('action' => 'Add', $primaryKey => $dataCopy[$primaryKey])),
                 'title' => $lang->t('LBL_ACTION_COPY'),
                 'icon'  => 'ui-icon-transferthick-e-w',
             );
@@ -390,7 +390,7 @@ class Common_Metadata extends Qwin_Metadata
                 $jsLang = 'MSG_CONFIRM_TO_DELETE_TO_TRASH';
             }
             $operation['delete'] = array(
-                'url'   => 'javascript:if(confirm(Qwin.Lang.' . $jsLang . ')){window.location=\'' . $url->createUrl($asc, array('action' => 'Delete', $primaryKey => $dataCopy[$primaryKey])) . '\';}',
+                'url'   => 'javascript:if(confirm(Qwin.Lang.' . $jsLang . ')){window.location=\'' . $url->url($asc, array('action' => 'Delete', $primaryKey => $dataCopy[$primaryKey])) . '\';}',
                 'title' => $lang->t('LBL_ACTION_DELETE'),
                 'icon'  => $icon,
             );
@@ -522,7 +522,7 @@ class Common_Metadata extends Qwin_Metadata
             !isset($this->url) && $this->url = Qwin::run('-url');
             $name = str_replace(':', '\:', $name);
             $dataCopy[$name] = str_replace(':', '\:', $dataCopy[$name]);
-            $value = '<a href="' . $this->url->createUrl($asc, array('action' => 'Index', 'qw-search' => $name . ':' . $dataCopy[$name])) . '">' . $value . '</a>';
+            $value = '<a href="' . $this->url->url($asc, array('action' => 'Index', 'qw-search' => $name . ':' . $dataCopy[$name])) . '">' . $value . '</a>';
         }
         return $value;
     }

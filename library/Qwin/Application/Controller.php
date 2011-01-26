@@ -70,6 +70,11 @@ class Qwin_Application_Controller
      */
     protected $_forbiddenAction = array();
 
+    public function __construct()
+    {
+        
+    }
+
     /**
      * 获取禁用的行为列表
      *
@@ -153,17 +158,8 @@ class Qwin_Application_Controller
         return $this;
     }
 
-    /**
-     * 快速初始一个类
-     * @param <type> $name
-     * @return <type>
-     */
-    public function __get($name)
+    public function getHelper($name, $namespace = null)
     {
-        if('Qwin_' == substr($name, 0, 5))
-        {
-            return Qwin::run($name);
-        }
-        return null;
+        return false;
     }
 }

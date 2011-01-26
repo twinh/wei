@@ -116,7 +116,7 @@ class Common_Management_Controller_Namespace extends Common_Controller
             }
             mkdir($this->_path . '/' . $_POST['namespace']);
 
-            $url = Qwin::run('-url')->createUrl($this->_asc, array('action' => 'Index'));
+            $url = Qwin::run('-url')->url($this->_asc, array('action' => 'Index'));
             return $this->view->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }
@@ -141,7 +141,7 @@ class Common_Management_Controller_Namespace extends Common_Controller
 
         // 删除目录,跳转回列表页
         rmdir($path);
-        $url = Qwin::run('-url')->createUrl($this->_asc, array('action' => 'Index'));
+        $url = Qwin::run('-url')->url($this->_asc, array('action' => 'Index'));
         return $this->view->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
     }
 }

@@ -21,7 +21,7 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2011-01-24 01:05:28
- * @todo        是否需要实现路由器抽象类
+ * @todo        是否需要实现路由器抽象类,接口类
  * @todo        是否需要实现参数占位符(问号参数和命名参数)
  * @todo        是否需要实现域名模式等
  */
@@ -58,6 +58,16 @@ class Qwin_Url_Router
      * @var mixed
      */
     protected $_parsedRoute = false;
+
+    protected $_search = array(
+        '\\/', '\\-', '\\$', '\\(',  '\\)', '\\*',  '\\+', '\\.', '\\[',
+        '\\]', '\\?', '\\\\', '\\^', '\\{', '\\}', '\\|',
+    );
+    
+    protected $_replace = array(
+        '/', '-', '$', '(', ')', '*',  '+', '.', '[',
+        ']', '?', '\\', '^', '{', '}', '|',
+    );
 
     /**
      * 添加一条路由,参数多的路由器应该优先添加
@@ -150,7 +160,7 @@ class Qwin_Url_Router
             // 合并各值,优先级为 默认值 > 配置值
             $get = array_combine($router['match'], $match) + $router['default'];
 
-            // todo 新旧版的php对http_build_query函数的改动是否会造成错误
+            // todo 新旧版的php对http_build_query函数的改动是否会造成差异
             $query = strtr(urldecode(http_build_query($get)), array('&amp;' => '&'));
             parse_str($query, $get);
 
@@ -161,6 +171,51 @@ class Qwin_Url_Router
         return false;
     }
 
+    public function build($data)
+    {
+        $url = '';
+        
+        // 根据提供的数据,找出和的路由match键名包含在$data中
+        foreach ($this->_data as $route) {
+            // 交集等于匹配键名数组才意味着匹配的可能性
+            $filp = array_flip($route['match']);
+            if (count($filp) != count(array_intersect_key($data, $filp))) {
+                continue;
+            }
+
+            $tmpData = array_merge($route['default'], $data);
+
+            // 提取正则的模式部分
+            $pattern = substr($route['pattern'], 2, -2);
+
+            // 按()分割
+            $partList = preg_split('/\((.+?)\)/i', $pattern);
+            
+            // 补全匹配键名数组,并倒序,方便对可选模式(?)的处理
+            $match = array_reverse(array_values(array_pad($route['match'], count($partList), null)));
+            $partList = array_reverse($partList);
+
+            $url = '';
+            foreach ($partList as $key => $part) {
+                // 前面部分可选
+                if (isset($part[0]) && '?' == $part[0]) {
+                    if (!isset($tmpData[$match[$key]])) {
+                        $part = substr($part, 1);
+                        $url = str_replace($this->_search, $this->_replace, $part) . $url;
+                        unset($tmpData[$match[$key]]);
+                    }
+                } else {
+                    !isset($tmpData[$match[$key]]) && $tmpData[$match[$key]] = '';
+                    $url = str_replace($this->_search, $this->_replace, $part) . $tmpData[$match[$key]] . $url;
+                    unset($tmpData[$match[$key]]);
+                }
+            }
+            $data = $tmpData;
+            break;
+        }
+        return $url . '?' . strtr(urldecode(http_build_query($data)), array('&amp;' => '&'));
+    }
+    
     /**
      * 获取上一条成功解析的路由
      *

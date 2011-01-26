@@ -29,11 +29,11 @@ class Mini_Namespace
 {
     public function __construct()
     {
-        echo '<p>加载了命名空间</p>';
+        //echo '<p>加载了命名空间</p>';
     }
 
     public function  __destruct()
     {
-        echo '<p>销毁了命名空间</p>';
+        //echo '<p>销毁了命名空间</p>';
     }
 }

@@ -77,7 +77,7 @@ class Common_View_View extends Qwin_Application_View_Processer
             $jqGrid['colModel'] = $col['colModel'];
 
             // 获取json数据的地址
-            $jqGrid['url'] = '?' . $url->arrayKey2Url(array('json' => '1') + $model['set'] + array('qw-search' => $model['foreign'] . ':' . $data[$model['local']]) + array('qw-list' => $listLayoutQuery));
+            $jqGrid['url'] = $url->url(array('json' => '1') + $model['set'] + array('qw-search' => $model['foreign'] . ':' . $data[$model['local']]) + array('qw-list' => $listLayoutQuery));
 
             // 设置排序
             if(!empty($relatedMeta['db']['order'])) {
@@ -120,6 +120,6 @@ class Common_View_View extends Qwin_Application_View_Processer
         }
         $group = $meta['group'];
 
-        $view->setDataList(get_defined_vars());
+        $view->assignList(get_defined_vars());
     }
 }

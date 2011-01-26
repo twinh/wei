@@ -126,7 +126,7 @@ class Common_Category_Metadata_Category extends Common_Metadata
         $url = Qwin::run('-url');
         $lang = Qwin::run('-lang');
         $set = $this->getAscFromClass();
-        $link = $url->createUrl($set, array('action' => 'Add', '_data[parent_id]' => $data[$primaryKey]));
+        $link = $url->url($set, array('action' => 'Add', '_data[parent_id]' => $data[$primaryKey]));
         $html = Qwin_Helper_Html::jQueryButton($link, $lang->t('LBL_ACTION_ADD_SUBCATEGORY'), 'ui-icon-plusthick')
               . parent::convertListOperation($value, $name, $data, $copyData);
         return $html;

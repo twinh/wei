@@ -179,12 +179,11 @@ class Common_Controller extends Qwin_Application_Controller
 
         if('guest' == $member['username'])
         {
-            $url = Qwin::run('-url');
-            $url->to($url->createUrl(array(
-                    'module' => 'Member',
-                    'controller' => 'Log',
-                    'action' => 'Login',
-                )));
+            $this->view->jump($this->url->url(array(
+                'module' => 'Member',
+                'controller' => 'Log',
+                'action' => 'Login',
+            )));
         } else {
             $this->view->setRedirectView($this->_lang->t('MSG_PERMISSION_NOT_ENOUGH'));
         }

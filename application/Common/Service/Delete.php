@@ -136,7 +136,7 @@ class Common_Service_Delete extends Common_Service_BasicAction
         $this->executeCallback('afterDb', $config);
         
         $url = urldecode($this->request->p('_page'));
-        '' == $url && $url = $this->url->createUrl($this->_asc, array('action' => 'Index'));
+        '' == $url && $url = $this->url->url($this->_asc, array('action' => 'Index'));
 
         $return = array(
             'result' => true,

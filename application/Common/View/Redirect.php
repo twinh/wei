@@ -49,6 +49,6 @@ class Common_View_Redirect extends Qwin_Application_View_Processer
                 $url = $view->method;
                 break;
         }
-        $view->setDataList(get_defined_vars());
+        $view->assignList(get_defined_vars());
     }
 }

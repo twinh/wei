@@ -184,4 +184,11 @@ class Common_View extends Qwin_Application_View
         $this->setData('method', $method);
         return $this;
     }
+
+    public function jump($url)
+    {
+        $this->setProcesser('Common_View_Jump');
+        $this->setData('url', $url);
+        return $this;
+    }
 }
