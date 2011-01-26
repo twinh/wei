@@ -41,7 +41,7 @@ class Common_Member_Controller_Log extends Common_Controller
         // 设置视图,加载登陆界面
         if(empty($_POST))
         {
-            $this->view->setDataList(get_defined_vars());
+            $this->view->assignList(get_defined_vars());
         } else {
             $service = new Common_Member_Service_Login();
             $service->process(array(

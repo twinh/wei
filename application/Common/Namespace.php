@@ -32,13 +32,26 @@ class Common_Namespace extends Qwin_Application_Namespace
 {
     public function __construct()
     {
-        Qwin::setShortTag('#', 'Common_');
         $config = Qwin::run('-config');
+        
+        // 设置会话类型及启动
+        if ($config['session']['enable']) {
+            session_cache_limiter($config['session']['type']);
+            session_start();
+        }
+
+        // 默认时区
+        date_default_timezone_set($config['interface']['timezone']);
+
+        // 关闭魔术引用
+        ini_set('magic_quotes_runtime', 0);
+
+        Qwin::setShortTag('#', 'Common_');
 
         // 设置页面编码
-        if (isset($config['interface']['charset'])) {
+        /*if (isset($config['interface']['charset'])) {
             header('Content-Type: text/html; charset=' . $config['interface']['charset']);
-        }
+        }*/
 
         // 设置会话
         $namespace = md5($_SERVER['SERVER_NAME'] . $config['project']['name']);
@@ -46,7 +59,13 @@ class Common_Namespace extends Qwin_Application_Namespace
 
         // 打开缓冲区
         ob_start();
-       
+
+        if ($config['router']['enable']) {
+            $router = Qwin::run('Qwin_Url_Router');
+            $router->addList($config['router']['list']->toArray());
+            $url = Qwin::run('-url', $router);
+        }
+
         /**
          * 数据库链接,使用的是Doctrine Orm
          * @todo 助手类

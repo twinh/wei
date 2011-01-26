@@ -30,7 +30,7 @@ class Common_Management_Controller_ApplicationStructure extends Common_Controlle
     public function actionIndex()
     {
         $meta = $this->_meta;
-        $this->view->setDataList(get_defined_vars());
+        $this->view->assignList(get_defined_vars());
     }
 
     /**
@@ -61,7 +61,7 @@ class Common_Management_Controller_ApplicationStructure extends Common_Controlle
 
         Qwin_Helper_File::writeAsArray($action, QWIN_ROOT_PATH . '/cache/php/application-structure.php');
 
-        $url = Qwin::run('-url')->createUrl($this->_asc, array('action' => 'Index'));
+        $url = Qwin::run('-url')->url($this->_asc, array('action' => 'Index'));
         $this->view->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
     }
 

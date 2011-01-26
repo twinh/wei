@@ -28,7 +28,7 @@
 function p($a)
 {
     echo '<p><pre>';
-    qw('Qwin_Debug')->p($a);
+    Qwin::run('Qwin_Debug')->p($a);
     echo '</pre><p>';
 }
 
@@ -39,7 +39,7 @@ function p($a)
  */
 function qw($class, $param = null)
 {
-    return Qwin::run($class, $param);
+    //return Qwin::run($class, $param);
 }
 
 /**
@@ -67,14 +67,15 @@ function qw_widget($param, $param2 = null)
     return $widget->render($param, $param2);
 }
 
-function qw_url($array1 = null, $array2 = null)
+function qw_url(array $data = null)
 {
-    static $url, $config;
+    return Qwin::run('-url')->url($data);
+    /*static $url, $config;
     null == $url && $url = Qwin::run('-url');
     if (null == $array1) {
         null == $config && $config = Qwin::run('-config');
         $array1 = $config['asc'];
-    }
+    }*/
     return $url->createUrl($array1, $array2);
 
 }

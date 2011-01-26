@@ -46,6 +46,6 @@ class Common_View_AddForm extends Qwin_Application_View_Processer
         $group = $meta['group'];
         $jQueryValidateCode = Qwin_Helper_Array::jsonEncode($metaHelper->getJQueryValidateCode($meta));
 
-        $view->setDataList(get_defined_vars());
+        $view->assignList(get_defined_vars());
     }
 }

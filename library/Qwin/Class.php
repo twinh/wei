@@ -76,11 +76,7 @@ class Qwin_Class
      */
     private static $_classMap = array();
 
-    /**
-     * 类库的路径
-     * @var string
-     */
-    public static $libPath;
+    protected static $_autoloadPath = array();
 
     /**
      *
@@ -152,6 +148,9 @@ class Qwin_Class
      */
     public static function run($name, $param1 = null, $param2 = null, $param3 = null)
     {
+        if (!is_string($name)) {
+            return $name;
+        }
         // 因为 php 类名不区分大小写
         $name = strtolower($name);
         
@@ -411,31 +410,26 @@ class Qwin_Class
     }
 
     /**
-     * 获取类库的路径
-     *
-     * @return string 类库路径
-     */
-    public static function getLibPath()
-    {
-        if(isset(self::$libPath))
-        {
-            return self::$libPath;
-        }
-        self::$libPath = realpath(dirname(__FILE__) . '/..') . DIRECTORY_SEPARATOR;
-        return self::$libPath;
-    }
-
-    /**
      * 注册自动加载类
+     *
+     * @param array|string $pathList 自动加载的初始路径
      */
-    public static function setAutoload()
+    public static function setAutoload($pathList = null)
     {
+        // 设置自动加载的路径
+        if (!is_array($pathList)) {
+            $pathList[] = $pathList;
+        }
+        $pathList[] = dirname(dirname(__FILE__));
+        foreach ($pathList as $path) {
+            self::$_autoloadPath[] = realpath($path) . DIRECTORY_SEPARATOR;
+        }
+        self::$_autoloadPath = array_unique(self::$_autoloadPath);
+
+        // 将类库加入加载路径中
         set_include_path(get_include_path() . PATH_SEPARATOR . dirname(dirname(__FILE__)));
-        // self::getInstance()
         spl_autoload_register(array('self', 'autoload'));
     }
-
-    //public function
 
     /**
      * 自动加载类的方法,适用各类按标注方法命名的类库
@@ -445,13 +439,15 @@ class Qwin_Class
      */
     public static function autoload($className)
     {
-       $classPath = self::getLibPath() . str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
-       if(file_exists($classPath))
-       {
-           require $classPath;
-           return true;
-       }
-       return false;
+        foreach(self::$_autoloadPath as $path)
+        {
+            $path = $path . str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
+            if (file_exists($path)) {
+                require $path;
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

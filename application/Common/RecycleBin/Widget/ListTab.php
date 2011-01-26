@@ -33,7 +33,7 @@ class Common_RecycleBin_Widget_ListTab extends Common_Widget
 
         // 替换添加,删除的链接
         $param['tab']['restore'] = array(
-            'url' => $url->createUrl($asc, array('action' => 'Restore')),
+            'url' => $url->url($asc, array('action' => 'Restore')),
             'title' => $lang->t('LBL_ACTION_RESTORE'),
             'icon' => 'ui-icon-arrowreturnthick-1-w',
             'target' => null,
@@ -41,7 +41,7 @@ class Common_RecycleBin_Widget_ListTab extends Common_Widget
             'class' => null,
         );
         $param['tab']['empty'] = array(
-            'url' => $url->createUrl($asc, array('action' => 'Empty')),
+            'url' => $url->url($asc, array('action' => 'Empty')),
             'title' => $lang->t('LBL_ACTION_EMPTY'),
             'icon' => 'ui-icon-closethick',
             'target' => null,

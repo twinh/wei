@@ -101,7 +101,7 @@ class Common_Member_Metadata_Group extends Common_Metadata
         $url = Qwin::run('-url');
         $lang = Qwin::run('-lang');
         $set = $this->getAscFromClass();
-        $html = Qwin_Helper_Html::jQueryButton($url->createUrl($set, array('action' => 'AllocatePermission', $primaryKey => $copyData[$primaryKey])), $lang->t('LBL_ACTION_ALLOCATE_PERMISSION'), 'ui-icon-person')
+        $html = Qwin_Helper_Html::jQueryButton($url->url($set, array('action' => 'AllocatePermission', $primaryKey => $copyData[$primaryKey])), $lang->t('LBL_ACTION_ALLOCATE_PERMISSION'), 'ui-icon-person')
               . parent::convertListOperation($value, $name, $data, $copyData);
         return $html;
     }

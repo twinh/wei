@@ -80,7 +80,7 @@ class Common_Service_Index extends Common_Service_BasicAction
         );
         if ($config['view']['display']) {
             $this->view
-                ->setDataList($view['data'])
+                ->assignList($view['data'])
                 ->setProcesser($view['class']);
         }
         

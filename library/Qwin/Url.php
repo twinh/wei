@@ -39,21 +39,43 @@ class Qwin_Url
      */
     protected $_routerTmp;
 
+    protected $_processer;
+
+    /**
+     * 初始化,按需引入路由器对象
+     *
+     * @param Qwin_Url_Router $router 路由器
+     */
     public function __construct(Qwin_Url_Router $router = null)
     {
         $this->_router = $router;
     }
 
     /**
-     * 构建url查询字符串
+     * 构建url查询字符串,功能类似http_build_query
      *
-     * @param array $data
-     * @param <type> $prefix
-     * @return <type>
+     * @param array $data url数组,如$_GET
+     * @return string
      */
-    public function build(array $data, $prefix = null)
+    public function url(array $data = null)
     {
-        return http_build_query($data, $prefix);
+        // TODO 是否应该引入Qwin_Request
+        if (null == $data) {
+            $data = $_GET;
+        }
+
+        // 对传入的多个参数进行合并
+        if (1 < func_num_args ()) {
+            $data = array();
+            foreach(func_get_args() as $arg) {
+                $data = array_merge($data, $arg);
+            }
+        }
+
+        if ($this->_router) {
+            return $this->_router->build($data);
+        }
+        return '?' . strtr(urldecode(http_build_query($data)), array('&amp;' => '&'));;
     }
 
     /**
@@ -69,9 +91,8 @@ class Qwin_Url
         }
         if ($this->_router) {
             return $this->_router->parse($url);
-        } else {
-            return parse_str($url);
         }
+        return parse_str($url);
     }
 
     /**

@@ -67,7 +67,7 @@ class Common_Widget_ListTab extends Common_Widget
 
         if (!in_array('add', $forbiddenAction)) {
             $tab['add'] = array(
-                'url'       => $url->createUrl($get, array('action' => 'Add')),
+                'url'       => $url->url($get, array('action' => 'Add')),
                 'title'     => $lang->t('LBL_ACTION_ADD'),
                 'icon'      => 'ui-icon-plus',
                 'target'    => null,
@@ -75,7 +75,7 @@ class Common_Widget_ListTab extends Common_Widget
                 'class'     => 'action-add',
             );
             $tab['copy'] = array(
-                'url'   => $url->createUrl($asc, array('action' => 'Add')),
+                'url'   => $url->url($asc, array('action' => 'Add')),
                 'title' => $lang->t('LBL_ACTION_COPY'),
                 'icon'  => 'ui-icon-transferthick-e-w',
                 'target'    => null,
@@ -106,7 +106,7 @@ class Common_Widget_ListTab extends Common_Widget
 
         if (!in_array('list', $forbiddenAction)) {
             $tab['list'] = array(
-                'url' => $url->createUrl($asc, array('action' => 'Index')),
+                'url' => $url->url($asc, array('action' => 'Index')),
                 'title' => $lang->t('LBL_ACTION_LIST'),
                 'icon' => 'ui-icon-note',
                 'target' => null,

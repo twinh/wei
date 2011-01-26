@@ -36,7 +36,7 @@ class Common_Widget_FormLink extends Common_Widget
 
         if (!in_array('index', $forbiddenAction)) {
             $link['index'] = array(
-                'url'   => $url->createUrl($asc, array('action' => 'Index')),
+                'url'   => $url->url($asc, array('action' => 'Index')),
                 'title' => $lang->t('LBL_ACTION_LIST'),
                 'icon'  => 'ui-icon-note',
             );
@@ -44,7 +44,7 @@ class Common_Widget_FormLink extends Common_Widget
 
         if (!in_array('add', $forbiddenAction)) {
             $link['add'] = array(
-                'url'   => $url->createUrl($asc, array('action' => 'Add')),
+                'url'   => $url->url($asc, array('action' => 'Add')),
                 'title' => $lang->t('LBL_ACTION_ADD'),
                 'icon'  => 'ui-icon-plus',
             );
@@ -56,7 +56,7 @@ class Common_Widget_FormLink extends Common_Widget
         if (isset($param[0][$param[1]])) {
             if (!in_array('edit', $forbiddenAction)) {
                 $link['edit'] = array(
-                    'url'   => $url->createUrl($asc, array('action' => 'Edit', $primaryKey => $data[$primaryKey])),
+                    'url'   => $url->url($asc, array('action' => 'Edit', $primaryKey => $data[$primaryKey])),
                     'title' => $lang->t('LBL_ACTION_EDIT'),
                     'icon'  => 'ui-icon-tag',
                 );
@@ -64,7 +64,7 @@ class Common_Widget_FormLink extends Common_Widget
 
             if (!in_array('view', $forbiddenAction)) {
                 $link['view'] = array(
-                    'url'   => $url->createUrl($asc, array('action' => 'View', $primaryKey => $data[$primaryKey])),
+                    'url'   => $url->url($asc, array('action' => 'View', $primaryKey => $data[$primaryKey])),
                     'title' => $lang->t('LBL_ACTION_VIEW'),
                     'icon'  => 'ui-icon-lightbulb',
                 );
@@ -72,7 +72,7 @@ class Common_Widget_FormLink extends Common_Widget
 
             if (!in_array('add', $forbiddenAction)) {
                 $link['copy'] = array(
-                    'url'   => $url->createUrl($asc, array('action' => 'Add', $primaryKey => $data[$primaryKey])),
+                    'url'   => $url->url($asc, array('action' => 'Add', $primaryKey => $data[$primaryKey])),
                     'title' => $lang->t('LBL_ACTION_COPY'),
                     'icon'  => 'ui-icon-transferthick-e-w',
                 );
@@ -88,7 +88,7 @@ class Common_Widget_FormLink extends Common_Widget
                     $jsLang = 'MSG_CONFIRM_TO_DELETE_TO_TRASH';
                 }
                  $link['delete'] = array(
-                    'url'   => 'javascript:if(confirm(Qwin.Lang.' . $jsLang . ')){window.location=\'' . $url->createUrl($asc, array('action' => 'Delete', $primaryKey => $data[$primaryKey])) . '\'};',
+                    'url'   => 'javascript:if(confirm(Qwin.Lang.' . $jsLang . ')){window.location=\'' . $url->url($asc, array('action' => 'Delete', $primaryKey => $data[$primaryKey])) . '\'};',
                     'title' => $lang->t('LBL_ACTION_DELETE'),
                     'icon'  => $icon,
                 );

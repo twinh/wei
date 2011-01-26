@@ -113,7 +113,7 @@ class Common_Service_List extends Common_Service_BasicAction
         );
         if ($config['view']['display']) {
             $this->view
-                ->setDataList($view['data'])
+                ->assignList($view['data'])
                 ->setProcesser($view['class']);
         }
         return array(

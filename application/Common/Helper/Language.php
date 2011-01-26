@@ -86,7 +86,7 @@ class Common_Helper_Language
      * @param array $asc 应用结构配置
      * @return string
      */
-    public function getName(array $asc)
+    public function getName($asc)
     {
         if (isset($this->_name)) {
             return $this->_name;

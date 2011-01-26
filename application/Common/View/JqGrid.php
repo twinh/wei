@@ -45,7 +45,7 @@ class Common_View_JqGrid extends Qwin_Application_View_Processer
         $jqGrid['asc'] = $asc;
         
         // 获取json数据的地址
-        $jqGrid['url'] = '?' . $url->arrayKey2Url(array('json' => '1') + $_GET);
+        $jqGrid['url'] = $url->url(array('json' => '1') + $_GET);
 
         // 获取栏数据
         $col = $jqGridHepler->getColByListLayout($view['layout'], $meta, $lang);
@@ -88,6 +88,6 @@ class Common_View_JqGrid extends Qwin_Application_View_Processer
         $jqGrid = $jqGridHepler->render($jqGrid);
         $jqGridJson = Qwin_Helper_Array::jsonEncode($jqGrid);
 
-        $view->setDataList(get_defined_vars());
+        $view->assignList(get_defined_vars());
     }
 }

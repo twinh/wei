@@ -93,7 +93,7 @@ class Common_RecycleBin_Service_Delete extends Common_Service_BasicAction
             $obejct->delete();
         }
 
-        $url = $this->url->createUrl($this->_asc, array('action' => 'Index'));
+        $url = $this->url->url($this->_asc, array('action' => 'Index'));
         $return = array(
             'result' => true,
             'message' => $lang->t('MSG_OPERATE_SUCCESSFULLY'),

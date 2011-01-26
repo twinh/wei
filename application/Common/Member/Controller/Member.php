@@ -132,7 +132,7 @@ class Common_Member_Controller_Member extends Common_ActionController
     {
         if('EditPassword' == $action)
         {
-            $url = Qwin::run('-url')->createUrl(array('module' => 'Member', 'controller' => 'Log', 'action' => 'Logout'));
+            $url = Qwin::run('-url')->url(array('module' => 'Member', 'controller' => 'Log', 'action' => 'Logout'));
             $this->view->setRedirectView('LOGIN', $url)
                     ->loadView()
                     ->display();

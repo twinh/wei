@@ -40,21 +40,21 @@ class Common_Widget_Header extends Common_Widget
         $icon = QWIN_RESOURCE_PATH . '/image/' . $view['meta']['page']['icon'] . '_32.png';
         !file_exists($icon) && $icon = null;
 
-        $header .= '<a href="' . $url->createUrl(array_diff_key($asc, array('action' => ''))) . '">' . $lang->t($view['meta']['page']['title']) . '</a>';
+        $header .= '<a href="' . $url->url(array_diff_key($asc, array('action' => ''))) . '">' . $lang->t($view['meta']['page']['title']) . '</a>';
 
         /*// 如果模块和控制器相同,不显示模块
         if ($asc['module'] != $asc['controller']) {
-            $header .= '<a href="' . $url->createUrl($asc) . '">' . $lang->t('LBL_MODULE_' . strtoupper($asc['module'])) . '</a>&nbsp;&raquo;&nbsp;';
+            $header .= '<a href="' . $url->url($asc) . '">' . $lang->t('LBL_MODULE_' . strtoupper($asc['module'])) . '</a>&nbsp;&raquo;&nbsp;';
         }
 
         // 控制器
-        $header .= '<a href="' . $url->createUrl(array_diff_key($asc, array('action' => ''))) . '">' . $lang->t('LBL_CONTROLLER_' . strtoupper($asc['controller'])) . '</a>&nbsp;&raquo;&nbsp;';
+        $header .= '<a href="' . $url->url(array_diff_key($asc, array('action' => ''))) . '">' . $lang->t('LBL_CONTROLLER_' . strtoupper($asc['controller'])) . '</a>&nbsp;&raquo;&nbsp;';
         */
         // 行为 todo 允许自定义
         $actionLabel = 'LBL_ACTION_' . strtoupper($asc['action']);
         $actionHeader = $lang->t($actionLabel);
         if ($actionLabel != $actionHeader) {
-            $header .= '&nbsp;&raquo;&nbsp;<a href="' . $url->createUrl($_GET) . '">' . $lang->t('LBL_ACTION_' . strtoupper($asc['action'])) . '</a>';
+            $header .= '&nbsp;&raquo;&nbsp;<a href="' . $url->url($_GET) . '">' . $lang->t('LBL_ACTION_' . strtoupper($asc['action'])) . '</a>';
         }
         
         require $view->decodePath('<resource><theme>/<defaultNamespace>/element/widget/header<suffix>');

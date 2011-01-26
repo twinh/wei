@@ -134,7 +134,7 @@ class Common_Service_Insert extends Common_Service_BasicAction
         {
             $url = $config['view']['url'];
         } else {
-            $url = $this->url->createUrl($this->_asc, array('action' => 'Index'));
+            $url = $this->url->url($this->_asc, array('action' => 'Index'));
         }
         $return = array(
             'result' => true,

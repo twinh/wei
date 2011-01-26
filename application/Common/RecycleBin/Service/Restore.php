@@ -102,7 +102,7 @@ class Common_RecycleBin_Service_Restore extends Common_Service_BasicAction
         }
         // TODO log 总共查询 11 条记录,找到10 条记录,其中找到 8 条源纪录,7 条删除状态正常,1条状态异常,已还原7条
 
-        $url = $this->url->createUrl($this->_asc, array('action' => 'Index'));
+        $url = $this->url->url($this->_asc, array('action' => 'Index'));
         $return = array(
             'result' => true,
             'message' => $lang->t('MSG_OPERATE_SUCCESSFULLY'),
