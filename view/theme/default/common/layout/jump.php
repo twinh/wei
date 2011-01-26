@@ -1,6 +1,6 @@
 <?php
 /**
- * Map
+ * jump
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,33 +16,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-08 2:19:23
+ * @since       2011-01-25 22:06:55
  */
-
-class Qwin_Application_View_Map extends Qwin_Application_View
-{
-    public function display()
-    {
-        $data = $this->data;
-
-        echo '<style type="text/css">
-                table {border-collapse: collapse;border-spacing: 0;}
-                td{white-space: nowrap;}
-              </style>';
-        echo '<table cellpadding="4" cellspacing="4" width="100%" border="1">';
-        foreach($data as $key => $value)
-        {
-            echo '<tr>',
-                 '<td>' . $key . '</td>',
-                 '<td>' . $value . '</td>',
-                 '</tr>';
-        }
-        echo '</table>';
-    }
-}
+?>
+<script type="text/javascript">
+window.location.href = "<?php echo $url ?>";
+</script>
+<?php
+exit;
