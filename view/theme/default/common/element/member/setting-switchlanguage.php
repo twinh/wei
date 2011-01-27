@@ -34,8 +34,8 @@
     <form action="" method="post">
     <div class="ui-form-content ui-box-content ui-widget-content">
         <div class="ui-operation-field">
-            <?php echo qw_jquery_button('submit', qw_lang('LBL_ACTION_SUBMIT'), 'ui-icon-check') ?>
-            <?php echo qw_jquery_link('javascript:history.go(-1);', qw_lang('LBL_ACTION_RETURN'), 'ui-icon-arrowthickstop-1-w') ?>
+            <?php echo qw_jQuery_button('submit', qw_lang('LBL_ACTION_SUBMIT'), 'ui-icon-check') ?>
+            <?php echo qw_jQuery_link('javascript:history.go(-1);', qw_lang('LBL_ACTION_RETURN'), 'ui-icon-arrowthickstop-1-w') ?>
             <input type="hidden" name="_submit" value="1" />
         </div>
         <div class="ui-space-10px"></div>
@@ -47,8 +47,8 @@
         <hr class="ui-line ui-widget-content" />
         <div class="ui-space-10px"></div>
         <div class="ui-operation-field">
-            <?php echo qw_jquery_button('submit', qw_lang('LBL_ACTION_SUBMIT'), 'ui-icon-check') ?>
-            <?php echo qw_jquery_link('javascript:history.go(-1);', qw_lang('LBL_ACTION_RETURN'), 'ui-icon-arrowthickstop-1-w') ?>
+            <?php echo qw_jQuery_button('submit', qw_lang('LBL_ACTION_SUBMIT'), 'ui-icon-check') ?>
+            <?php echo qw_jQuery_link('javascript:history.go(-1);', qw_lang('LBL_ACTION_RETURN'), 'ui-icon-arrowthickstop-1-w') ?>
         </div>
     </div>
     </form>

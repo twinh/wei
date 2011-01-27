@@ -8,14 +8,14 @@
 $member = Qwin::run('-session')->get('member');
 $nickname = isset($member['contact']) ? $member['contact']['nickname'] : $member['username'];
 $jQueryFile = array(
-    'core'          => $jquery->loadUi('core', false),
-    'widget'        => $jquery->loadUi('widget', false),
-    'button'        => $jquery->loadUi('button', false),
-    'coreEffect'    => $jquery->loadEffect('core', false),
-    'qui'           => $jquery->loadPlugin('qui', null, false),
+    'core'          => $jQuery->loadUi('core', false),
+    'widget'        => $jQuery->loadUi('widget', false),
+    'button'        => $jQuery->loadUi('button', false),
+    'coreEffect'    => $jQuery->loadEffect('core', false),
+    'qui'           => $jQuery->loadPlugin('qui', null, false),
 );
 $cssPacker
-    ->add(QWIN_RESOURCE_PATH . '/view/style/' . $this->_style . '/jquery.ui.theme.css')
+    ->add(QWIN_RESOURCE_PATH . '/view/style/' . $this->_style . '/jQuery.ui.theme.css')
     ->add(QWIN_RESOURCE_PATH . '/view/theme/default/common/style/style.css')
     ->add($jQueryFile['core']['css'])
     ->add($jQueryFile['widget']['css'])
@@ -23,7 +23,7 @@ $cssPacker
     ->add($jQueryFile['qui']['css'])
 	->add(QWIN_RESOURCE_PATH . '/image/iconx.css');
 $jsPacker
-    ->add($jquery->loadCore(false))
+    ->add($jQuery->loadCore(false))
     ->add(QWIN_RESOURCE_PATH . '/js/qwin/qwin.js')
     ->add(QWIN_RESOURCE_PATH . '/js/qwin/url.js')
     ->add(QWIN_RESOURCE_PATH . '/view/theme/default/common/script/style.js')

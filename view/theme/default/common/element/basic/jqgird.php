@@ -23,11 +23,11 @@
  * @since       2011-01-18 15:12:06
  */
 
-$jQueryFile['jqgrid'] = $jquery->loadPlugin('jqgrid', null, false);
+$jQueryFile['jqgrid'] = $jQuery->loadPlugin('jqgrid', null, false);
 $cssPacker
     ->add($jQueryFile['jqgrid']['css']);
 $jsPacker
-    ->add(QWIN_RESOURCE_PATH . '/js/jquery/plugins/jqgrid/i18n/grid.locale-en.js')
+    ->add(QWIN_RESOURCE_PATH . '/js/jQuery/plugins/jqgrid/i18n/grid.locale-en.js')
     ->add($jQueryFile['jqgrid']['js']);
 ?>
 

@@ -41,15 +41,14 @@ class Common_Member_Controller_Log extends Common_Controller
         // 设置视图,加载登陆界面
         if(empty($_POST))
         {
-            $this->view->assignList(get_defined_vars());
+            $this->view->assign(get_defined_vars());
         } else {
             $service = new Common_Member_Service_Login();
             $service->process(array(
-                'set' => $this->_asc,
+                'asc' => $this->_asc,
                 'data' => array(
                     'db' => $_POST,
                 ),
-                'this' => $this,
             ));
         }
     }
@@ -57,7 +56,7 @@ class Common_Member_Controller_Log extends Common_Controller
     public function actionLogout()
     {
         return Qwin::run('Common_Member_Service_Logout')->process(array(
-            'set' => $this->_asc,
+            'asc' => $this->_asc,
             'this' => $this,
         ));
     }

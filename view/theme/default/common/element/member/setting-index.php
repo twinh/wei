@@ -36,13 +36,13 @@
     	<div class="ui-space-10px"></div>
         <div class="ui-operation-field">
         <?php 
-        echo qw_jquery_link(qw_url(array('module' => 'Member', 'controller' => 'Member', 'action' => 'View', 'id' => $member['id'])), qw_lang('LBL_VIEW_DATA'), 'ui-icon-lightbulb'),
-             qw_jquery_link(qw_url(array('module' => 'Member', 'controller' => 'Member', 'action' => 'Edit', 'id' => $member['id'])), qw_lang('LBL_EDIT_DATA'), 'ui-icon-tag'),
-             qw_jquery_link(qw_url(array('module' => 'Member', 'controller' => 'Member', 'action' => 'EditPassword', 'id' => $member['id'])), qw_lang('LBL_EDIT_PASSWORD'), 'ui-icon-key'),
-             qw_jquery_link(qw_url(array('module' => 'Member', 'controller' => 'LoginLog', 'searchField' => 'member_id', 'searchValue' => $member['id'])), qw_lang('LBL_MODULE_MEMBER_LOGINLOG'), 'ui-icon-script'),
-             qw_jquery_link(qw_url(array('module' => 'Member', 'controller' => 'Setting', 'action' => 'SwitchStyle')), qw_lang('LBL_SWITCH_STYLE'), 'ui-icon-calculator'),
-             qw_jquery_link(qw_url(array('module' => 'Member', 'controller' => 'Setting', 'action' => 'SwitchLanguage')), qw_lang('LBL_SWITCH_LANGUAGE'), 'ui-icon-script'),
-             qw_jquery_link('javascript:history.go(-1);', qw_lang('LBL_ACTION_RETURN'), 'ui-icon-arrowthickstop-1-w')
+        echo qw_jQuery_link(qw_url(array('module' => 'Member', 'controller' => 'Member', 'action' => 'View', 'id' => $member['id'])), qw_lang('LBL_VIEW_DATA'), 'ui-icon-lightbulb'),
+             qw_jQuery_link(qw_url(array('module' => 'Member', 'controller' => 'Member', 'action' => 'Edit', 'id' => $member['id'])), qw_lang('LBL_EDIT_DATA'), 'ui-icon-tag'),
+             qw_jQuery_link(qw_url(array('module' => 'Member', 'controller' => 'Member', 'action' => 'EditPassword', 'id' => $member['id'])), qw_lang('LBL_EDIT_PASSWORD'), 'ui-icon-key'),
+             qw_jQuery_link(qw_url(array('module' => 'Member', 'controller' => 'LoginLog', 'searchField' => 'member_id', 'searchValue' => $member['id'])), qw_lang('LBL_MODULE_MEMBER_LOGINLOG'), 'ui-icon-script'),
+             qw_jQuery_link(qw_url(array('module' => 'Member', 'controller' => 'Setting', 'action' => 'SwitchStyle')), qw_lang('LBL_SWITCH_STYLE'), 'ui-icon-calculator'),
+             qw_jQuery_link(qw_url(array('module' => 'Member', 'controller' => 'Setting', 'action' => 'SwitchLanguage')), qw_lang('LBL_SWITCH_LANGUAGE'), 'ui-icon-script'),
+             qw_jQuery_link('javascript:history.go(-1);', qw_lang('LBL_ACTION_RETURN'), 'ui-icon-arrowthickstop-1-w')
         ?>
         </div>
         <div class="ui-space-10px"></div>

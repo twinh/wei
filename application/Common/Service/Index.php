@@ -31,8 +31,8 @@ class Common_Service_Index extends Common_Service_BasicAction
      * 服务的基本配置
      * @var array
      */
-    protected $_config = array(
-        'set' => array(
+    protected $_option = array(
+        'asc' => array(
             'namespace' => null,
             'module' => null,
             'controller' => null,
@@ -49,16 +49,15 @@ class Common_Service_Index extends Common_Service_BasicAction
             'class' => 'Common_View_JqGrid',
             'display' => true,
         ),
-        'this' => null,
     );
     
-    public function process(array $config = null)
+    public function process(array $option = null)
     {
         // 合并配置
-        $config = $this->_multiArrayMerge($this->_config, $config);
+        $option = $this->_multiArrayMerge($this->_option, $option);
 
         // 通过父类,加载语言,元数据,模型等
-        parent::process($config['set']);
+        parent::process($option['asc']);
 
         // 初始化常用的变量
         $meta = $this->_meta;
@@ -66,22 +65,21 @@ class Common_Service_Index extends Common_Service_BasicAction
         $metaHelper = $this->metaHelper;
 
         $layout = $metaHelper->getListLayout($meta);
-        if (null != $config['data']['list']) {
-            $layout = array_intersect($layout, (array)$config['data']['list']);
+        if (null != $option['data']['list']) {
+            $layout = array_intersect($layout, (array)$option['data']['list']);
         }
 
         // 是否以弹出框形式显示
-        $isPopup = $config['data']['isPopup'];
+        $isPopup = $option['data']['isPopup'];
 
         // 设置视图
         $view = array(
-            'class' => $config['view']['class'],
+            'class' => $option['view']['class'],
             'data' => get_defined_vars(),
         );
-        if ($config['view']['display']) {
-            $this->view
-                ->assignList($view['data'])
-                ->setProcesser($view['class']);
+        if ($option['view']['display']) {
+            $viewObject = new $option['view']['class'];
+            $viewObject->assign($view['data']);
         }
         
         return array(

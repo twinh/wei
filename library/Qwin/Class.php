@@ -69,27 +69,8 @@ class Qwin_Class
      * @var string
      */
     private static $_cacheFile;
-    
-    /**
-     * 类名映射,用于简化输入类名
-     *
-     */
-    private static $_classMap = array();
 
     protected static $_autoloadPath = array();
-
-    /**
-     *
-     * @var <type>
-     */
-    public static $shortTagMap = array(
-        '-' => 'Qwin_',
-    );
-
-    public static function setShortTag($tag, $value)
-    {
-        self::$shortTagMap[$tag] = $value;
-    }
 
     /**
      * 设置缓存文件
@@ -140,56 +121,7 @@ class Qwin_Class
         $name = strtolower($name);
         self::$_instancedClass[$name] = $class;
     }
-    
-    /**
-     * 获得一个类的实例化
-     *
-     * @todo 初始化时多参数的实现 
-     */
-    public static function run($name, $param1 = null, $param2 = null, $param3 = null)
-    {
-        if (!is_string($name)) {
-            return $name;
-        }
-        // 因为 php 类名不区分大小写
-        $name = strtolower($name);
-        
-        // 转换类名映射
-        if(isset(self::$_classMap[$name])) {
-            $name = self::$_classMap[$name];
-        }
 
-        // 已经实例化过
-        if(isset(self::$_instancedClass[$name])) {
-            return self::$_instancedClass[$name];
-
-        // 类存在,或者通过自动加载取得
-        } elseif(class_exists($name)) {
-             self::$_instancedClass[$name] = new $name($param1, $param2, $param3);
-             return self::$_instancedClass[$name];
-
-        // 类可能是短标签形式,对短标签进行转换
-        } elseif(isset(self::$shortTagMap[$name[0]])) {
-            $realName = self::$shortTagMap[$name[0]] . substr($name, 1);
-            $result = self::run($realName, $param1, $param2, $param3);
-            // 如果存在此类,将短标签加入到映射中
-            if(null != $result)
-            {
-                self::$_classMap[$name] = strtolower($realName);
-            }
-            return $result;
-
-        // 加载文件,实例化
-        } elseif(array_key_exists($name, self::$_classCache)) {
-            require_once self::$_classCache[$name];
-            self::$_instancedClass[$name] = new $name($param1, $param2, $param3);
-            return self::$_instancedClass[$name];
-        }
-        
-        // 没有找到
-        return null;
-    }
-    
     /**
      * 加载类文件,不初始化
      * 
@@ -204,35 +136,6 @@ class Qwin_Class
             return true;
         }
         return false;
-    }
-    
-    /**
-     * 增加类文件的后缀
-     *
-     * @param string $ext 文件后缀名,不带"."
-     * @return object $this
-     */
-    public function addExt($ext)
-    {
-        if(!in_array($ext, self::$_fileExt))
-        {
-            self::$_fileExt[] = $ext;
-        }
-    }
-    
-    /**
-     * 删除类文件后缀
-     *
-     * @param string $ext 文件后缀名,不带"."
-     * @return object $this
-     */
-    public function delExt($ext)
-    {
-        if(in_array($ext, self::$_fileExt))
-        {
-            $tmp_ext = array_flip(self::$_fileExt);
-            unset(self::$_fileExt[$tmp_ext[$ext]]);
-        }
     }
     
     /**
@@ -368,7 +271,7 @@ class Qwin_Class
              */
             if(!is_object($set[0][0]))
             {
-                $set[0][0] = self::run($set[0][0]);
+                $set[0][0] = Qwin::run($set[0][0]);
             }
             if(!method_exists($set[0][0], $set[0][1]))
             {

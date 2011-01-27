@@ -37,22 +37,22 @@
 <!-- qwin-packer-sign -->
 <?php
 $jQueryFile = array(
-    'core' => $jquery->loadUi('core', false),
-    'widget' => $jquery->loadUi('widget', false),
-    'button' => $jquery->loadUi('button', false),
-    'coreEffect' => $jquery->loadEffect('core', false),
-    'qui' => $jquery->loadPlugin('qui', null, false),
+    'core' => $jQuery->loadUi('core', false),
+    'widget' => $jQuery->loadUi('widget', false),
+    'button' => $jQuery->loadUi('button', false),
+    'coreEffect' => $jQuery->loadEffect('core', false),
+    'qui' => $jQuery->loadPlugin('qui', null, false),
 );
 $cssPacker
     ->add(QWIN_RESOURCE_PATH . '/view/theme/default/common/style/style.css')
     ->add(QWIN_RESOURCE_PATH . '/view/theme/default/common/style/login.css')
-    ->add(QWIN_RESOURCE_PATH . '/view/style/' . $this->_style . '/jquery.ui.theme.css')
+    ->add(QWIN_RESOURCE_PATH . '/view/style/' . $this->_style . '/jQuery.ui.theme.css')
     ->add($jQueryFile['core']['css'])
     ->add($jQueryFile['widget']['css'])
     ->add($jQueryFile['button']['css'])
     ->add($jQueryFile['qui']['css']);
 $jsPacker
-    ->add($jquery->loadCore(false))
+    ->add($jQuery->loadCore(false))
     ->add(QWIN_RESOURCE_PATH . '/view/theme/default/common/script/style.js')
     ->add($jQueryFile['core']['js'])
     ->add($jQueryFile['widget']['js'])

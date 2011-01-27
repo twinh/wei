@@ -62,7 +62,7 @@ class Common_Namespace extends Qwin_Application_Namespace
 
         if ($config['router']['enable']) {
             $router = Qwin::run('Qwin_Url_Router');
-            $router->addList($config['router']['list']->toArray());
+            $router->addList($config['router']['list']);
             $url = Qwin::run('-url', $router);
         }
 
@@ -91,12 +91,12 @@ class Common_Namespace extends Qwin_Application_Namespace
         {
             if(isset($_SERVER['SERVER_ADDR']) && $_SERVER['SERVER_ADDR'] == '127.0.0.1')
             {
-                $config['database']['mainAdapter'] = 'localhost';
+                $mainAdapter = 'localhost';
             } else {
-                $config['database']['mainAdapter'] = 'web';
+                $mainAdapter = 'web';
             }
 
-            $databaseSet = $config['database']['adapter'][$config['database']['mainAdapter']];
+            $databaseSet = $config['database']['adapter'][$mainAdapter];
             $adapter = $databaseSet['type'] . '://'
                      . $databaseSet['username'] . ':'
                      . $databaseSet['password'] . '@'

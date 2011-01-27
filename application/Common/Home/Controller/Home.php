@@ -29,6 +29,6 @@ class Common_Home_Controller_Home extends Common_Controller
     {
         $meta['page']['icon'] = 'clipboard';
         $meta['page']['title'] = 'LBL_MODULE_HOME';
-        $this->view->assignList(get_defined_vars());
+        $this->view->assign(get_defined_vars());
     }
 }

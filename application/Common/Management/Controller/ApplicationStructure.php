@@ -30,7 +30,7 @@ class Common_Management_Controller_ApplicationStructure extends Common_Controlle
     public function actionIndex()
     {
         $meta = $this->_meta;
-        $this->view->assignList(get_defined_vars());
+        $this->view->assign(get_defined_vars());
     }
 
     /**

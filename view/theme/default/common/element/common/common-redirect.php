@@ -54,9 +54,9 @@
         <div class="ui-message-operation">
         <?php
         if(isset($url)) :
-            echo qw_jquery_link($url, qw_lang('LBL_ACTION_REDIRECT'), 'ui-icon-arrowthickstop-1-e');
+            echo qw_jQuery_link($url, qw_lang('LBL_ACTION_REDIRECT'), 'ui-icon-arrowthickstop-1-e');
         endif;
-        echo qw_jquery_link('javascript:history.go(-1);', qw_lang('LBL_ACTION_RETURN'), 'ui-icon-arrowthickstop-1-w') ?>
+        echo qw_jQuery_link('javascript:history.go(-1);', qw_lang('LBL_ACTION_RETURN'), 'ui-icon-arrowthickstop-1-w') ?>
         </div>
     </div>
 </div>

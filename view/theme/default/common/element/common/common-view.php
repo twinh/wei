@@ -27,7 +27,7 @@
 
 // 防止直接访问导致错误
 !defined('QWIN_PATH') && exit('Forbidden');
-$jQueryFile['tabs'] = $jquery->loadUi('tabs', false);
+$jQueryFile['tabs'] = $jQuery->loadUi('tabs', false);
 $cssPacker->add($jQueryFile['tabs']['css']);
 $jsPacker
 	->add($jQueryFile['tabs']['js'])

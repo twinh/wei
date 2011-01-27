@@ -23,10 +23,9 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2009-11-24 20:45:11
- * @todo        只允许一个实例化,或者是允许多个实例化
  */
 
-class Qwin_Application_Startup
+class Qwin_Application_Manager
 {
     /**
      * 启动器的实例化对象
@@ -36,10 +35,10 @@ class Qwin_Application_Startup
     protected static $_instance;
 
     /**
-     * 应用是否已加载,即调用过dispatch方法
+     * 应用是否已加载,即调用过startup方法
      * @var boolen
      */
-    protected $_dispatched = false;
+    protected $_isLoad = false;
     
     /**
      * 全局配置
@@ -113,7 +112,7 @@ class Qwin_Application_Startup
      * @param array $config 配置选项
      * @return Qwin_Application_Startup 当前对象
      */
-    public function dispatch($config)
+    public function startup($config)
     {
         // 设置加载标识
         if ($this->_isLoad) {
@@ -129,14 +128,18 @@ class Qwin_Application_Startup
         error_reporting($config['errorType']);
 
         // 加载框架主类,设置自动加载类
-        require_once QWIN_LIB_PATH . '/Qwin.php';
-        Qwin::setAutoload($config['applicationDir']);
-        Qwin::setCacheFile(QWIN_ROOT_PATH . '/cache/php/class.php');
+        require_once QWIN_LIB_PATH . '/Qwin/Class.php';
+        Qwin_Class::setAutoload($config['applicationDir']);
+        Qwin_Class::setCacheFile(QWIN_ROOT_PATH . '/cache/php/class.php');
         // 加载Qwin函数库
         require_once QWIN_LIB_PATH . '/function/qwin.php';
 
-        $this->_config = Qwin::run('-config', $config);
+        Qwin::setShortTag('@', 'Qwin_Application_');
 
+        $config = Qwin::run('@config', array($config));
+        Qwin::set('-config', $config);
+        $this->_config = $config;
+        
         // 启动Url路由
         $router = null;
         if ($config['router']['enable']) {
@@ -147,6 +150,7 @@ class Qwin_Application_Startup
 
         // 加载视图
         $this->_view = Qwin::run($this->_option['viewClass']);
+        Qwin::set('-view', $this->_view);
 
         // 通过配置数据和Url参数初始化系统配置(包括命名空间,模块,控制器,行为等)
         foreach ($config['defaultAsc'] as $name => $value) {
@@ -256,17 +260,10 @@ class Qwin_Application_Startup
 
     public function getView(array $asc = null)
     {
-        $viewClass = $asc['namespace'] . '_View';
-        $this->view = Qwin::run($viewClass);
-        if (null == $this->view) {
-            if ($asc['namespace'] != $config['defaultAsc']['namespace']) {
-                $viewClass = $config['defaultAsc']['namespace'] . '_View';
-            } else {
-                $viewClass = 'Qwin_Application_View';
-            }
-            $this->view = Qwin::run($viewClass);
+        if (null == $asc) {
+            return $this->_module;
         }
-        Qwin::addMap('-view', $viewClass);
+        return Qwin::run($this->getClass('view', $asc));
     }
     
     /**

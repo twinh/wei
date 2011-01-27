@@ -31,8 +31,8 @@ class Common_Service_List extends Common_Service_BasicAction
      * 服务的基本配置
      * @var array
      */
-    protected $_config = array(
-        'set' => array(
+    protected $_option = array(
+        'asc' => array(
             'namespace' => null,
             'module' => null,
             'controller' => null,
@@ -59,17 +59,17 @@ class Common_Service_List extends Common_Service_BasicAction
         'this' => null,
     );
 
-    public function process(array $config = null)
+    public function process(array $option = null)
     {
         // 初始配置
-        $config = $this->_multiArrayMerge($this->_config, $config);
+        $option = $this->_multiArrayMerge($this->_option, $option);
         $metaHelper = Qwin::run('Qwin_Application_Metadata');
-        if (null == $config['this']) {
-            $config['this'] = Qwin::run($metaHelper->getClassName('Controller', $config['set']));
+        if (null == $option['this']) {
+            $option['this'] = Qwin::run($metaHelper->getClassName('Controller', $option['asc']));
         }
 
         // 通过父类,加载语言,元数据,模型等
-        parent::process($config['set']);
+        parent::process($option['asc']);
 
         // 初始化常用的变量
         $asc        = $this->config['asc'];
@@ -80,41 +80,41 @@ class Common_Service_List extends Common_Service_BasicAction
         $query = $metaHelper->getQueryByAsc($asc, array('db', 'view'));
         $metaHelper
             ->addSelectToQuery($meta, $query)
-            ->addOrderToQuery($meta, $query, $config['data']['order'])
-            ->addWhereToQuery($meta, $query, $config['data']['where'])
-            ->addOffsetToQuery($meta, $query, $config['data']['offset'])
-            ->addLimitToQuery($meta, $query, $config['data']['limit']);
+            ->addOrderToQuery($meta, $query, $option['data']['order'])
+            ->addWhereToQuery($meta, $query, $option['data']['where'])
+            ->addOffsetToQuery($meta, $query, $option['data']['offset'])
+            ->addLimitToQuery($meta, $query, $option['data']['limit']);
         $dbData = $data = $query->execute()->toArray();
         $count = count($data);
         $totalRecord = $query->count();
 
         // 执行回调函数,转换数据
-        if (isset($config['callback']['dataConverter'])) {
-            $config['callback']['dataConverter'][1] = $data;
-            $tempData = $this->executeCallback('dataConverter', $config);
+        if (isset($option['callback']['dataConverter'])) {
+            $option['callback']['dataConverter'][1] = $data;
+            $tempData = $this->executeCallback('dataConverter', $option);
             null != $tempData && $data = $tempData;
         }
 
         // 对数据进行转换
-        if ($config['data']['convert']) {
-            $data = $metaHelper->convertArray($data, $config['data']['asAction'], $meta, $meta, array('view' => $config['data']['isView']));
+        if ($option['data']['convert']) {
+            $data = $metaHelper->convertArray($data, $option['data']['asAction'], $meta, $meta, array('view' => $option['data']['isView']));
         }
 
         // 获取布局
         $layout = $metaHelper->getListLayout($meta);
-        if (null != $config['data']['list']) {
-            $layout = array_intersect($layout, (array)$config['data']['list']);
+        if (null != $option['data']['list']) {
+            $layout = array_intersect($layout, (array)$option['data']['list']);
         }
 
         // 设置视图
         $view = array(
-            'class' => $config['view']['class'],
+            'class' => $option['view']['class'],
             'data' => get_defined_vars(),
         );
-        if ($config['view']['display']) {
-            $this->view
-                ->assignList($view['data'])
-                ->setProcesser($view['class']);
+
+        if ($option['view']['display']) {
+            $viewObject = new $option['view']['class'];
+            $viewObject->assign($view['data']);
         }
         return array(
             'result' => true,

@@ -32,7 +32,7 @@ class Common_Member_Service_Login extends Common_Service_BasicAction
      * @var array
      */
     protected $_config = array(
-        'set' => array(
+        'asc' => array(
             'namespace' => null,
             'module' => null,
             'controller' => null,
@@ -56,7 +56,6 @@ class Common_Member_Service_Login extends Common_Service_BasicAction
             'display' => true,
             'url' => null,
         ),
-        'this' => null,
     );
 
     public function process(array $config = null)
