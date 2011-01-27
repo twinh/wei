@@ -1,6 +1,6 @@
 <?php
 /**
- * Null
+ * Config
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,19 +16,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-06 21:47:23
+ * @since       2011-01-27 13:02:54
  */
 
-class Qwin_Application_View_Null extends Qwin_Application_View
+class Qwin_Application_Config extends ArrayObject
 {
-    public function display()
+    public function __construct($array = array(), $flag = parent::ARRAY_AS_PROPS)
     {
-        return null;
+        parent::__construct($array, $flag);
     }
 }

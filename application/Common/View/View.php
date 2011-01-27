@@ -120,6 +120,6 @@ class Common_View_View extends Qwin_Application_View_Processer
         }
         $group = $meta['group'];
 
-        $view->assignList(get_defined_vars());
+        $view->assign(get_defined_vars());
     }
 }

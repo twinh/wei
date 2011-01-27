@@ -25,18 +25,18 @@
  * @since       2010-09-17 18:16:36
  */
 
-class Common_View_JqGridJson extends Qwin_Application_View_Processer
+class Common_View_JqGridJson extends Common_View
 {
-    public function __construct(Qwin_Application_View $view)
+    public function preDisplay()
     {
         // 初始变量,方便调用
-        $primaryKey = $view->primaryKey;
+        $primaryKey = $this->primaryKey;
         $request = Qwin::run('#request');
-        $data = $view->data;
+        $data = $this->data;
         $jqGridHelper = new Common_Helper_JqGrid();
 
         // 转换为jqGrid的行数据
-        $data = $jqGridHelper->convertRowData($data, $primaryKey, $view['layout']);
+        $data = $jqGridHelper->convertRowData($data, $primaryKey, $this['layout']);
 
         /**
          * @var array       jqGrid的Json数据数组
@@ -51,13 +51,13 @@ class Common_View_JqGridJson extends Qwin_Application_View_Processer
          */
         $jsonData = array(
             'page' => $request->getPage(),
-            'total' => ceil($view->totalRecord / $request->getLimit()),
-            'records' => $view->totalRecord,
+            'total' => ceil($this->totalRecord / $request->getLimit()),
+            'records' => $this->totalRecord,
             'rows' => $data,
         );
 
         // TODO 输出型视图
         echo Qwin_Helper_Array::jsonEncode($jsonData);
-        $view->setDisplayed();
+        $this->setDisplayed();
     }
 }

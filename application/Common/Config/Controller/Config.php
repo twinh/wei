@@ -99,7 +99,7 @@ class Common_Config_Controller_Config extends Common_ActionController
             ->parseMetadata($configMeta);
         
         if (empty($_POST)) {
-            $this->view->assignList(get_defined_vars());
+            $this->view->assign(get_defined_vars());
             $this->view->setProcesser('Common_View_EditForm');
         } else {
             // 保存结果
@@ -139,6 +139,6 @@ class Common_Config_Controller_Config extends Common_ActionController
             ->execute()
             ->toArray();
 
-        $this->view->assignList(get_defined_vars());
+        $this->view->assign(get_defined_vars());
     }
 }

@@ -29,10 +29,12 @@
  *                       ->loadView('namespace-module-controller-action');
  */
 
-class Common_View extends Qwin_Application_View
+class Common_View extends Qwin_Application_View_Abstract
 {
     public function __construct()
     {
+        Qwin::set('-view', $this);
+
         // 布局的选择次序为 自定义视图 > 行为级 > 控制器级 > 模块级 > 默认(命名空间级)
         $this->setLayout(array(
             '<resource><theme>/<namespace>/layout/<module>-<controller>-<action><suffix>',
@@ -69,20 +71,20 @@ class Common_View extends Qwin_Application_View
         // 设置css打包
         $cssPacker = Qwin::run('Qwin_Packer_Css');
         $cssPacker->setCachePath($packerPath)
-            ->setCacheAge($this->_config['expiredTime'])
-            ->setPathCacheAge($this->_config['expiredTime']);
+            ->setCacheAge($config['expiredTime'])
+            ->setPathCacheAge($config['expiredTime']);
 
         // 设置js打包
         $jsPacker = Qwin::run('Qwin_Packer_Js');
         $jsPacker->setCachePath($packerPath)
-            ->setCacheAge($this->_config['expiredTime'])
-            ->setPathCacheAge($this->_config['expiredTime']);
+            ->setCacheAge($config['expiredTime'])
+            ->setPathCacheAge($config['expiredTime']);
 
-        $this->_data['cssPacker'] = $cssPacker;
-        $this->_data['jsPacker'] = $jsPacker;
+        $this->assign('jsPacker', $jsPacker);
+        $this->assign('cssPacker', $cssPacker);
 
-        $jquery = Qwin::run('Qwin_Resource_JQuery');
-        $this->_data['jquery'] = $jquery;
+        $jQuery = Qwin::run('Qwin_Resource_JQuery');
+        $this->assign('jQuery', $jQuery);
         
         $this->setTagList(array(
             'resource'          => QWIN_RESOURCE_PATH . '/view/theme/',
@@ -180,15 +182,15 @@ class Common_View extends Qwin_Application_View
     public function setRedirectView($message, $method = null)
     {
         $this->setProcesser('Common_View_Redirect');
-        $this->setData('message', $message);
-        $this->setData('method', $method);
+        $this->assign('message', $message);
+        $this->assign('method', $method);
         return $this;
     }
 
     public function jump($url)
     {
-        $this->setProcesser('Common_View_Jump');
-        $this->setData('url', $url);
+        $this->setLayout('<resource><theme>/<defaultNamespace>/layout/jump<suffix>');
+        $this->assign('url', $url);
         return $this;
     }
 }

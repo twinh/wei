@@ -1,6 +1,6 @@
 <?php
 /**
- * jquery-popupgrid
+ * jQuery-popupgrid
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -24,9 +24,9 @@
  */
 
 $jQueryFile = array(
-    'position' => $jquery->loadUi('position', false),
-    'dialog' => $jquery->loadUi('dialog', false),
-    'qwinPopup' => $jquery->loadPlugin('qwin-popup', null, false),
+    'position' => $jQuery->loadUi('position', false),
+    'dialog' => $jQuery->loadUi('dialog', false),
+    'qwinPopup' => $jQuery->loadPlugin('qwin-popup', null, false),
 );
 $cssPacker
     ->add($jQueryFile['position']['css'])

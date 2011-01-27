@@ -26,13 +26,13 @@
  * @todo        是否需要分为几个对象 $tihs->tag, $this->layout, $this->element...
  */
 
-abstract class Qwin_Application_View_Abstract
+abstract class Qwin_Application_View_Abstract extends Qwin_Metadata_Abstract
 {
     /**
      * 变量数组
      * @var array
      */
-    protected $_data;
+    protected $_data = array();
 
     /**
      * 视图元素数组
@@ -45,12 +45,6 @@ abstract class Qwin_Application_View_Abstract
      * @var string
      */
     protected $_layout;
-
-    /**
-     * 视图处理器类
-     * @var Qwin_Application_View_Processer
-     */
-    protected $_processer;
 
     /**
      * 视图是否已展示
@@ -78,19 +72,7 @@ abstract class Qwin_Application_View_Abstract
     );
 
     /**
-     * 设置一组变量
-     *
-     * @param array $list 变量组,键名为变量名称,值为变量的值
-     * @return object 当前对象
-     */
-    public function assignList(array $list)
-    {
-        $this->_data += $list;
-        return $this;
-    }
-
-    /**
-     * 设置一个变量
+     * 设置变量
      *
      * @param string $name 变量名称
      * @param mixed $value 变量的值
@@ -99,7 +81,7 @@ abstract class Qwin_Application_View_Abstract
     public function assign($name, $value = null)
     {
         if (is_array($name)) {
-            $this->assignList($name);
+            $this->_data += $name;
         } else {
             $this->_data[$name] = $value;
         }
@@ -278,10 +260,6 @@ abstract class Qwin_Application_View_Abstract
      */
     public function preDisplay()
     {
-        // 将视图交给处理器处理
-        if (isset($this->_processer)) {
-            $process = Qwin::run($this->_processer, $this);
-        }
         return $this;
     }
 
@@ -398,16 +376,6 @@ abstract class Qwin_Application_View_Abstract
     }
 
     /**
-     * 设置视图处理器类
-     *
-     * @param string $class 处理器类名
-     */
-    public function setProcesser($class)
-    {
-        $this->_processer = $class;
-    }
-
-    /**
      * 设置视图已展示
      *
      * @return Qwin_Application_View 当前对象
@@ -453,15 +421,5 @@ abstract class Qwin_Application_View_Abstract
         }
         return $file;
          */
-    }
-
-    public function redirect()
-    {
-        
-    }
-
-    public function jump()
-    {
-        
     }
 }

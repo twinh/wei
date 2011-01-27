@@ -72,9 +72,9 @@ foreach ($codeMeta['field'] as $field => $value) {
         <tr>
             <td>
                 <input id="ui-optioneditor-number" type="text" class="ui-widget-content ui-corner-all" value="1">
-                <?php echo qw_jquery_link('javascript:;', $lang['LBL_OPTION_EDITOR_ADD'], 'ui-icon-plus', 'ui-optioneditor-button')?>
-                <!--<?php echo qw_jquery_link('javascript:;', '重置顺序', 'ui-icon-plus', 'ui-optioneditor-reset')?>-->
-                <!--<?php echo qw_jquery_link('javascript:;', '按值排序', 'ui-icon-plus', 'ui-optioneditor-order')?>-->
+                <?php echo qw_jQuery_link('javascript:;', $lang['LBL_OPTION_EDITOR_ADD'], 'ui-icon-plus', 'ui-optioneditor-button')?>
+                <!--<?php echo qw_jQuery_link('javascript:;', '重置顺序', 'ui-icon-plus', 'ui-optioneditor-reset')?>-->
+                <!--<?php echo qw_jQuery_link('javascript:;', '按值排序', 'ui-icon-plus', 'ui-optioneditor-order')?>-->
             </td>
         </tr>
     </table>

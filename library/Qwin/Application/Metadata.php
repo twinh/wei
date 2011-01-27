@@ -250,7 +250,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
          * 设置关联类的查询语句
          */
         foreach ($meta['model'] as $model) {
-            Qwin::load($model['metadata']);
+            //Qwin_Class::load($model['metadata']);
             $linkedMetaObj = Qwin_Metadata_Manager::get($model['metadata']);
 
             // 调整主键的属性,因为查询时至少需要选择一列
@@ -292,7 +292,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
             $metadataName = 'Application_Metadata';
             $meta = Qwin::run($metadataName);
         }
-        Qwin::addMap('-meta', $metadataName);
+        Qwin::set('-meta', $metadataName);
         return $meta;
     }
 
@@ -587,7 +587,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
         array_unshift($set, null);
         $set[0] = $set[1];
         $set[1] = $value;
-        return Qwin::callByArray($set, $value);
+        return Qwin_Class::callByArray($set, $value);
     }
 
     /**

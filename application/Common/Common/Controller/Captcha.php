@@ -31,7 +31,6 @@ class Common_Common_Controller_Captcha extends Qwin_Application_Controller
     {
         $number = mt_rand(1000,9999);
         Qwin_Class::run('-session')->set('captcha', $number);
-        Qwin::load('Project_Helper_Captcha');
         return Project_Helper_Captcha::create($number);
     }
 

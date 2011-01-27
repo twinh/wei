@@ -34,7 +34,7 @@ class Common_Member_Controller_Setting extends Common_Controller
     public function actionIndex()
     {
         $meta = $this->_meta;
-        $this->view->assignList(get_defined_vars());
+        $this->view->assign(get_defined_vars());
     }
 
     /**
@@ -50,7 +50,7 @@ class Common_Member_Controller_Setting extends Common_Controller
             
             $theme = $this->config['interface']['theme'];
 
-            $this->view->assignList(get_defined_vars());
+            $this->view->assign(get_defined_vars());
         } else {
             $member = $ses->get('member');
             $language = $ses->get('language');
@@ -84,7 +84,7 @@ class Common_Member_Controller_Setting extends Common_Controller
             $path = $this->_model->getPath();
             $meta = $this->_meta;
 
-            $this->view->assignList(get_defined_vars());
+            $this->view->assign(get_defined_vars());
         } else {
             $ses = Qwin::run('-session');
             $member = $ses->get('member');

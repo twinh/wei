@@ -43,7 +43,7 @@ class Common_ActionController extends Common_Controller
         if ($request->g('json')) {
             $service = new Common_Service_List();
             return $service->process(array(
-                'set' => $this->_asc,
+                'asc' => $this->_asc,
                 'data' => array(
                     'list' => $request->getListField(),
                     'order' => $request->getOrder(),
@@ -57,12 +57,11 @@ class Common_ActionController extends Common_Controller
                         array($this, 'dataConverter'),
                     ),
                 ),
-                'this' => $this,
             ));
         } else {
             $service = new Common_Service_Index();
             return $service->process(array(
-                'set' => $this->_asc,
+                'asc' => $this->_asc,
                 'data' => array(
                     'list' => $request->getListField(),
                     'isPopup' => $request->g('qw-popup'),

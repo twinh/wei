@@ -28,21 +28,6 @@
 class Common_Service
 {
     /**
-     * 未知错误
-     */
-    const ERROR_UNKNOWN     = 1;
-
-    /**
-     * 用户配置错误
-     */
-    const ERROR_CONFIG      = 2;
-
-    /**
-     * 验证错误
-     */
-    const ERROR_VALIDATE    = 3;
-
-    /**
      * 将第二个数组合并到第一个上
      *
      * @param array $array1
@@ -79,7 +64,7 @@ class Common_Service
     {
         if(null != $config['callback'][$name])
         {
-            return Qwin::callByArray($config['callback'][$name]);
+            return Qwin_Class::callByArray($config['callback'][$name]);
         }
         return null;
     }

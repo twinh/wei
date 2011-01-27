@@ -25,14 +25,14 @@
  * @since       2010-09-17 18:15:51
  */
 
-class Common_View_JqGrid extends Qwin_Application_View_Processer
+class Common_View_JqGrid extends Common_View
 {   
-    public function __construct(Qwin_Application_View $view)
+    public function preDisplay()
     {
         // 初始变量,方便调用
-        $primaryKey     = $view->primaryKey;
-        $meta           = $view->meta;
-        $metaHepler     = $view->metaHelper;
+        $primaryKey     = $this->primaryKey;
+        $meta           = $this->meta;
+        $metaHepler     = $this->metaHelper;
         $request        = Qwin::run('#request');
         $lang           = Qwin::run('-lang');
         $config         = Qwin::run('-config');
@@ -48,7 +48,7 @@ class Common_View_JqGrid extends Qwin_Application_View_Processer
         $jqGrid['url'] = $url->url(array('json' => '1') + $_GET);
 
         // 获取栏数据
-        $col = $jqGridHepler->getColByListLayout($view['layout'], $meta, $lang);
+        $col = $jqGridHepler->getColByListLayout($this->layout, $meta, $lang);
         $jqGrid['colNames'] = $col['colNames'];
         $jqGrid['colModel'] = $col['colModel'];
         
@@ -73,7 +73,7 @@ class Common_View_JqGrid extends Qwin_Application_View_Processer
         );
 
         // 设置弹出窗口属性
-        if ($view['isPopup']) {
+        if ($this->isPopup) {
             $popup = array(
                 'valueInput'    => $request['qw-popup-value-input'],
                 'viewInput'     => $request['qw-popup-view-input'],
@@ -88,6 +88,6 @@ class Common_View_JqGrid extends Qwin_Application_View_Processer
         $jqGrid = $jqGridHepler->render($jqGrid);
         $jqGridJson = Qwin_Helper_Array::jsonEncode($jqGrid);
 
-        $view->assignList(get_defined_vars());
+        $this->assign(get_defined_vars());
     }
 }

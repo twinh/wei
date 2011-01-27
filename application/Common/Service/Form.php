@@ -101,7 +101,7 @@ class Common_Service_Form extends Common_Service_BasicAction
         );
         if ($config['view']['display']) {
             $this->view
-                ->assignList($view['data'])
+                ->assign($view['data'])
                 ->setProcesser($view['class']);
         }
         return array(

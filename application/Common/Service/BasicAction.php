@@ -60,7 +60,7 @@ class Common_Service_BasicAction extends Common_Service
      * @see Common_Service_BasicAction $_set
      * @todo 是否需要对$config进行检查或转换
      */
-    protected function process(array $config = null)
+    protected function process(array $option = null)
     {
         // 初始化常用的变量
         $this->request      = Qwin::run('-request');
@@ -68,15 +68,13 @@ class Common_Service_BasicAction extends Common_Service
         $this->session      = Qwin::run('-session');
         $this->metaHelper   = Qwin::run('Qwin_Application_Metadata');
         $this->config       = Qwin::run('-config');
-        $this->_asc         = $asc = $config;
+        $this->_asc         = $asc = $option;
         $this->member       = $this->session->get('member');
-        $this->view         = Qwin::run('-view');
         
         // 加载语言
         $langHelper = Qwin::run('Common_Helper_Language');
         $this->_lang = $langHelper->getObjectByAsc($this->_asc);
-        // ??是否合适
-        Qwin::addMap('-lang', get_class($this->_lang));
+        Qwin::setMap('-lang', get_class($this->_lang));
 
         if (!isset($this->_meta)) {
             $this->_meta = $this->metaHelper->getMetadataByAsc($asc);
@@ -95,7 +93,7 @@ class Common_Service_BasicAction extends Common_Service
             $modelName = 'Qwin_Application_Model';
             $this->_model = Qwin::run($modelName);
         }
-        Qwin::addMap('-model', $modelName);
+        Qwin::setMap('-model', $modelName);
 
         return $this;
     }

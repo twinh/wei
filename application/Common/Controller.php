@@ -115,14 +115,14 @@ class Common_Controller extends Qwin_Application_Controller
         // 加载语言
         $langHelper = Qwin::run('Common_Helper_Language');
         $this->_lang = $langHelper->getObjectByAsc($this->_asc);
-        Qwin::addMap('-lang', get_class($this->_lang));
+        Qwin::setMap('-lang', get_class($this->_lang));
 
         $this->_meta = $this->metaHelper->getMetadataByAsc($this->_asc);
         
          /**
          * 访问控制
          */
-        $this->_isAllowVisited();
+        //$this->_isAllowVisited();
     }
 
     /**
@@ -179,7 +179,7 @@ class Common_Controller extends Qwin_Application_Controller
 
         if('guest' == $member['username'])
         {
-            $this->view->jump($this->url->url(array(
+            Qwin::run('#view')->jump($this->url->url(array(
                 'module' => 'Member',
                 'controller' => 'Log',
                 'action' => 'Login',
