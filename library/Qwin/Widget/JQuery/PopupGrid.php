@@ -35,8 +35,9 @@ class Qwin_Widget_JQuery_PopupGrid
      */
     public function render($meta, $title, $url, $viewField)
     {
+        $manager = Qwin::run('-manager');
         $lang = Qwin::run('-lang');
-        $jquery = Qwin::run('Qwin_Resource_JQuery');
+        $jQuery = $manager->getHelper('JQuery', 'Common');
         $id = $meta['id'];
         $view = Qwin::run('-view');
         $cssPacker = Qwin::run('Qwin_Packer_Css');
