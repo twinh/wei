@@ -138,7 +138,7 @@ class Qwin_App_Manager
 
         $config = Qwin::run('@config', array($config));
         Qwin::set('-config', $config);
-        $this->_config = $config;
+        $this->_config = &$config;
         
         // 启动Url路由
         $router = null;
@@ -157,6 +157,7 @@ class Qwin_App_Manager
             $asc[$name] = isset($_GET[$name]) ? $_GET[$name] :  $value;
             $asc[$name] = basename(str_replace('_', '', $asc[$name]));
         }
+        $config['asc'] = $asc;
 
         // 检查命名空间是否存在
         if (!in_array($asc['namespace'], $this->getValidNamespace())) {
