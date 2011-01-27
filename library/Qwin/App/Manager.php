@@ -25,12 +25,12 @@
  * @since       2009-11-24 20:45:11
  */
 
-class Qwin_Application_Manager
+class Qwin_App_Manager
 {
     /**
      * 启动器的实例化对象
      *
-     * @var Qwin_Application_Setup
+     * @var Qwin_App_Setup
      */
     protected static $_instance;
 
@@ -51,30 +51,30 @@ class Qwin_Application_Manager
      * @var array
      */
     protected $_option = array(
-        'viewClass' => 'Qwin_Application_View',
+        'viewClass' => 'Qwin_App_View',
     );
 
     /**
      * 视图的实例化对象
-     * @var Qwin_Application_View
+     * @var Qwin_App_View
      */
     protected $_view;
     
     /**
      * 命名空间的实例化对象
-     * @var Qwin_Application_Namespace
+     * @var Qwin_App_Namespace
      */
     protected $_namespace;
 
     /**
      * 模块的实例化对象
-     * @var Qwin_Application_Module
+     * @var Qwin_App_Module
      */
     protected $_module;
 
     /**
      * 控制器的实例化对象
-     * @var Qwin_Application_Controller
+     * @var Qwin_App_Controller
      */
     protected $_controller;
 
@@ -95,7 +95,7 @@ class Qwin_Application_Manager
     /**
      * 获取当前类的实例化对象(单例模式)
      *
-     * @return Qwin_Application_Setup
+     * @return Qwin_App_Manager
      */
     public static function getInstance()
     {
@@ -110,7 +110,7 @@ class Qwin_Application_Manager
      * 本方法定义了应用程序的加载流程,按顺序为命名空间,模块,控制器,行为.
      * 
      * @param array $config 配置选项
-     * @return Qwin_Application_Startup 当前对象
+     * @return Qwin_App_Startup 当前对象
      */
     public function startup($config)
     {
@@ -129,12 +129,12 @@ class Qwin_Application_Manager
 
         // 加载框架主类,设置自动加载类
         require_once QWIN_LIB_PATH . '/Qwin/Class.php';
-        Qwin_Class::setAutoload($config['applicationDir']);
+        Qwin_Class::setAutoload($config['appPath']);
         Qwin_Class::setCacheFile(QWIN_ROOT_PATH . '/cache/php/class.php');
         // 加载Qwin函数库
         require_once QWIN_LIB_PATH . '/function/qwin.php';
 
-        Qwin::setShortTag('@', 'Qwin_Application_');
+        Qwin::setShortTag('@', 'Qwin_App_');
 
         $config = Qwin::run('@config', array($config));
         Qwin::set('-config', $config);
@@ -203,7 +203,7 @@ class Qwin_Application_Manager
             return $this->_validNamespace;
         }
         $this->_validNamespace = array();
-        foreach ($this->_config['applicationDir'] as $dir) {
+        foreach ($this->_config['appPath'] as $dir) {
             if (!is_dir($dir)) {
                 continue;
             }
@@ -220,7 +220,7 @@ class Qwin_Application_Manager
      * 获取命名空间对象
      *
      * @param array $asc 应用结构配置
-     * @return Qwin_Application_Namespace
+     * @return Qwin_App_Namespace
      */
     public function getNamespace(array $asc = null)
     {
@@ -234,7 +234,7 @@ class Qwin_Application_Manager
      * 获取模块对象
      *
      * @param array $asc 应用结构配置
-     * @return Qwin_Application_Module
+     * @return Qwin_App_Module
      */
     public function getModule(array $asc = null)
     {
@@ -248,7 +248,7 @@ class Qwin_Application_Manager
      * 获取控制器
      *
      * @param array $asc 应用结构配置
-     * @return Qwin_Application_Controller
+     * @return Qwin_App_Controller
      */
     public function getController(array $asc = null)
     {

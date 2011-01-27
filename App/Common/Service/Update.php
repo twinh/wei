@@ -66,7 +66,7 @@ class Common_Service_Update extends Common_Service_BasicAction
         parent::process($config['set']);
 
         // 初始化常用的变量
-        $metaHelper = Qwin::run('Qwin_Application_Metadata');
+        $metaHelper = Qwin::run('Qwin_App_Metadata');
         $meta = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
         $primaryKeyValue = isset($config['data']['db'][$primaryKey]) ? $config['data']['db'][$primaryKey] : null;

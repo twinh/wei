@@ -25,9 +25,9 @@
  * @since       2010-09-17 18:14:58
  */
 
-class Common_View_AddForm extends Qwin_Application_View_Processer
+class Common_View_AddForm extends Qwin_App_View_Processer
 {
-    public function __construct(Qwin_Application_View $view)
+    public function __construct(Qwin_App_View $view)
     {
 
         $view->setElement('content', '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>-form<suffix>');

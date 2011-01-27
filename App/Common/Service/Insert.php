@@ -61,7 +61,7 @@ class Common_Service_Insert extends Common_Service_BasicAction
     {
         // 初始配置
         $config = $this->_multiArrayMerge($this->_config, $config);
-        $metaHelper = Qwin::run('Qwin_Application_Metadata');
+        $metaHelper = Qwin::run('Qwin_App_Metadata');
         if(null == $config['this'])
         {
             $config['this'] = Qwin::run($metaHelper->getClassName('Controller', $config['set']));

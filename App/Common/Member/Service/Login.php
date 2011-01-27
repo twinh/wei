@@ -67,7 +67,7 @@ class Common_Member_Service_Login extends Common_Service_BasicAction
         parent::process($config['set']);
 
         // 初始化常用的变量
-        $metaHelper = Qwin::run('Qwin_Application_Metadata');
+        $metaHelper = Qwin::run('Qwin_App_Metadata');
         $member     = $this->session->get('member');
         $meta       = $this->_meta;
 

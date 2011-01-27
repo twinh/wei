@@ -49,7 +49,7 @@ class Common_Service_BasicAction extends Common_Service
 
     /**
      * 元数据助手,负责元数据的获取,转换,检查等
-     * @var Qwin_Application_Metadata
+     * @var Qwin_App_Metadata
      */
     public $metaHelper;
 
@@ -66,7 +66,7 @@ class Common_Service_BasicAction extends Common_Service
         $this->request      = Qwin::run('-request');
         $this->url          = Qwin::run('-url');
         $this->session      = Qwin::run('-session');
-        $this->metaHelper   = Qwin::run('Qwin_Application_Metadata');
+        $this->metaHelper   = Qwin::run('Qwin_App_Metadata');
         $this->config       = Qwin::run('-config');
         $this->_asc         = $asc = $option;
         $this->member       = $this->session->get('member');
@@ -90,7 +90,7 @@ class Common_Service_BasicAction extends Common_Service
         $this->_model = Qwin::run($modelName);
         if(null == $this->_model)
         {
-            $modelName = 'Qwin_Application_Model';
+            $modelName = 'Qwin_App_Model';
             $this->_model = Qwin::run($modelName);
         }
         Qwin::setMap('-model', $modelName);

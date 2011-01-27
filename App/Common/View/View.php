@@ -25,9 +25,9 @@
  * @since       2010-09-17 18:24:58
  */
 
-class Common_View_View extends Qwin_Application_View_Processer
+class Common_View_View extends Qwin_App_View_Processer
 {
-    public function __construct(Qwin_Application_View $view)
+    public function __construct(Qwin_App_View $view)
     {
         // 初始化变量,方便调用
         $primaryKey     = $view->primaryKey;

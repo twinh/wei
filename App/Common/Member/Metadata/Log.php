@@ -25,7 +25,7 @@
  * @since       2010-05-24 07:52:43
  */
 
-class Common_Member_Metadata_Log extends Qwin_Application_Metadata
+class Common_Member_Metadata_Log extends Qwin_App_Metadata
 {
     public function  __construct()
     {
@@ -110,7 +110,7 @@ class Common_Member_Metadata_Log extends Qwin_Application_Metadata
     public function validatePassword($value, $name, $data)
     {
         $value = md5($value);
-        $result = Qwin::run('Qwin_Application_Metadata')
+        $result = Qwin::run('Qwin_App_Metadata')
             ->getQueryByAsc(array(
                 'namespace' => 'Common',
                 'module' => 'Member',

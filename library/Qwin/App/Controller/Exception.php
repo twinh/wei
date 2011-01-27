@@ -30,6 +30,6 @@
  */
 require_once 'Qwin/Exception.php';
 
-class Qwin_Application_Controller_Exception extends Qwin_Exception
+class Qwin_App_Controller_Exception extends Qwin_Exception
 {
 }
