@@ -29,7 +29,7 @@
  *                       ->loadView('namespace-module-controller-action');
  */
 
-class Common_View extends Qwin_Application_View_Abstract
+class Common_View extends Qwin_App_View_Abstract
 {
     public function __construct()
     {

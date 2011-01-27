@@ -25,7 +25,7 @@
  * @since       2010-08-07 15:52:02
  */
 
-class Qwin_Application_View_Text extends Qwin_Application_View
+class Qwin_App_View_Text extends Qwin_App_View
 {
     /**
      * 输出纯文本

@@ -25,7 +25,7 @@
  * @since       2009-11-24 20:45:11
  */
 
-class Qwin_Application_Controller
+class Qwin_App_Controller
 {
     /**
      * 行为重置时,用于保存原来行为的名称
@@ -89,7 +89,7 @@ class Qwin_Application_Controller
      * 设置禁用行为
      *
      * @param string $action 行为名称,即方法名去除'action'标识
-     * @return Qwin_Application_Controller 当前对象
+     * @return Qwin_App_Controller 当前对象
      */
     public function setForbiddenAction($action)
     {

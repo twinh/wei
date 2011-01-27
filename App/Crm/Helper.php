@@ -27,7 +27,7 @@ class Crm_Helper
 {
     public static function convertPopupMember($value, $name, $viewName, $meta)
     {
-        $data = Qwin::run('Qwin_Application_Metadata')
+        $data = Qwin::run('Qwin_App_Metadata')
             ->getQueryByAsc(array(
                 'namespace' => 'Common',
                 'module' => 'Member',
@@ -40,7 +40,7 @@ class Crm_Helper
 
     public static function convertPopupContact($value, $name, $viewName, $meta)
     {
-        $data = Qwin::run('Qwin_Application_Metadata')
+        $data = Qwin::run('Qwin_App_Metadata')
             ->getQueryByAsc(array(
                 'namespace' => 'Crm',
                 'module' => 'Contact',
@@ -53,7 +53,7 @@ class Crm_Helper
 
     public static function convertPopupCustomer($value, $name, $viewName, $meta)
     {
-        $data = Qwin::run('Qwin_Application_Metadata')
+        $data = Qwin::run('Qwin_App_Metadata')
             ->getQueryByAsc(array(
                 'namespace' => 'Crm',
                 'module' => 'Customer',
@@ -66,7 +66,7 @@ class Crm_Helper
 
     public static function convertPopupOpportunity($value, $name, $viewName, $meta)
     {
-        $data = Qwin::run('Qwin_Application_Metadata')
+        $data = Qwin::run('Qwin_App_Metadata')
             ->getQueryByAsc(array(
                 'namespace' => 'Crm',
                 'module' => 'Opportunity',

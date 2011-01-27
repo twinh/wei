@@ -25,9 +25,9 @@
  * @since       2010-10-14 17:38:02
  */
 
-class Common_View_EditForm extends Qwin_Application_View_Processer
+class Common_View_EditForm extends Qwin_App_View_Processer
 {
-    public function __construct(Qwin_Application_View $view)
+    public function __construct(Qwin_App_View $view)
     {
         $view->setElement('content', array(
             '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>-form<suffix>',

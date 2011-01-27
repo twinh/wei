@@ -63,7 +63,7 @@ class Common_Service_List extends Common_Service_BasicAction
     {
         // 初始配置
         $option = $this->_multiArrayMerge($this->_option, $option);
-        $metaHelper = Qwin::run('Qwin_Application_Metadata');
+        $metaHelper = Qwin::run('Qwin_App_Metadata');
         if (null == $option['this']) {
             $option['this'] = Qwin::run($metaHelper->getClassName('Controller', $option['asc']));
         }

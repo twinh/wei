@@ -28,7 +28,7 @@
  * @since       2009-11-21 14:37
  */
 
-class Common_Namespace extends Qwin_Application_Namespace
+class Common_Namespace extends Qwin_App_Namespace
 {
     public function __construct()
     {

@@ -25,6 +25,6 @@
  * @since       2010-08-04 13:40:02
  */
 
-class Common_Setup extends Qwin_Application_Setup
+class Common_Setup extends Qwin_App_Setup
 {
 }

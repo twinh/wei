@@ -40,14 +40,14 @@ class Common_Metadata extends Qwin_Metadata
 
     /**
      * 元数据助手类,负责一系列的转换工作
-     * @var Qwin_Application_Metadata
+     * @var Qwin_App_Metadata
      */
     public $metaHelper;
 
     public function  __construct()
     {
         $this->url = Qwin::run('-url');
-        $this->metaHelper = Qwin::run('Qwin_Application_Metadata');
+        $this->metaHelper = Qwin::run('Qwin_App_Metadata');
     }
 
     /**

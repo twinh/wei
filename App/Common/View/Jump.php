@@ -23,9 +23,9 @@
  * @since       2011-01-25 22:10:07
  */
 
-class Common_View_Jump extends Qwin_Application_View_Processer
+class Common_View_Jump extends Qwin_App_View_Processer
 {
-    public function __construct(Qwin_Application_View $view)
+    public function __construct(Qwin_App_View $view)
     {
         $view->setLayout('<resource><theme>/<defaultNamespace>/layout/jump<suffix>');
 

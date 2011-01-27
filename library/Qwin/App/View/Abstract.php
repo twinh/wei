@@ -26,7 +26,7 @@
  * @todo        是否需要分为几个对象 $tihs->tag, $this->layout, $this->element...
  */
 
-abstract class Qwin_Application_View_Abstract extends Qwin_Metadata_Abstract
+abstract class Qwin_App_View_Abstract extends Qwin_Metadata_Abstract
 {
     /**
      * 变量数组
@@ -123,7 +123,7 @@ abstract class Qwin_Application_View_Abstract extends Qwin_Metadata_Abstract
     /**
      * 清空变量
      *
-     * @return Qwin_Application_View 当前对象
+     * @return Qwin_App_View 当前对象
      */
     public function clearData()
     {
@@ -135,7 +135,7 @@ abstract class Qwin_Application_View_Abstract extends Qwin_Metadata_Abstract
      * 设置一组视图元素
      *
      * @param array $list 视图元素组,键名为视图名称,值为视图的值
-     * @return Qwin_Application_View 当前对象
+     * @return Qwin_App_View 当前对象
      */
     public function setElementList(array $list)
     {
@@ -151,7 +151,7 @@ abstract class Qwin_Application_View_Abstract extends Qwin_Metadata_Abstract
      *
      * @param string $name 视图元素的名称
      * @param string|mixed $element 视图元素的路径
-     * @return Qwin_Application_View 当前对象
+     * @return Qwin_App_View 当前对象
      */
     public function setElement($name, $element)
     {
@@ -174,7 +174,7 @@ abstract class Qwin_Application_View_Abstract extends Qwin_Metadata_Abstract
     public function getElement($name)
     {
         if (!isset($this->_element[$name])) {
-            throw new Qwin_Application_View_Exception('Undefined element name: ' . $name);
+            throw new Qwin_App_View_Exception('Undefined element name: ' . $name);
         }
         $pathCahce = array();
         foreach ($this->_element[$name] as $path) {
@@ -184,7 +184,7 @@ abstract class Qwin_Application_View_Abstract extends Qwin_Metadata_Abstract
             }
             $pathCahce[] = $path;
         }
-        throw new Qwin_Application_View_Exception('All of the element files are not exists: ' . implode(';', $pathCahce));
+        throw new Qwin_App_View_Exception('All of the element files are not exists: ' . implode(';', $pathCahce));
     }
 
     /**
@@ -204,7 +204,7 @@ abstract class Qwin_Application_View_Abstract extends Qwin_Metadata_Abstract
     /**
      * 清空视图元素数组
      *
-     * @return Qwin_Application_View 当前对象
+     * @return Qwin_App_View 当前对象
      */
     public function clearElement()
     {
@@ -250,7 +250,7 @@ abstract class Qwin_Application_View_Abstract extends Qwin_Metadata_Abstract
             }
             $pathCahce[] = $path;
         }
-        throw new Qwin_Application_View_Exception('All of the layout files are not exists: ' . implode(';', $pathCahce));
+        throw new Qwin_App_View_Exception('All of the layout files are not exists: ' . implode(';', $pathCahce));
     }
 
     /**
@@ -266,7 +266,7 @@ abstract class Qwin_Application_View_Abstract extends Qwin_Metadata_Abstract
     /**
      * 展示视图
      *
-     * @return Qwin_Application_View 当前对象
+     * @return Qwin_App_View 当前对象
      */
     public function display()
     {
@@ -302,7 +302,7 @@ abstract class Qwin_Application_View_Abstract extends Qwin_Metadata_Abstract
      *
      * @param string $name 标签名称
      * @param mixed $value 标签的值
-     * @return Qwin_Application_View 当前对象
+     * @return Qwin_App_View 当前对象
      */
     public function setTag($name, $value)
     {
@@ -315,7 +315,7 @@ abstract class Qwin_Application_View_Abstract extends Qwin_Metadata_Abstract
      * 设置一组标签的值
      *
      * @param array $array 标签数组,键名表示标签名称,值表示标签的值
-     * @return Qwin_Application_View 当前对象
+     * @return Qwin_App_View 当前对象
      */
     public function setTagList(array $array)
     {
@@ -341,7 +341,7 @@ abstract class Qwin_Application_View_Abstract extends Qwin_Metadata_Abstract
      * 删除一个标签
      *
      * @param string $name 标签名称
-     * @return Qwin_Application_View 当前对象
+     * @return Qwin_App_View 当前对象
      */
     public function unsetTag($name)
     {
@@ -355,7 +355,7 @@ abstract class Qwin_Application_View_Abstract extends Qwin_Metadata_Abstract
     /**
      * 清空标签数组
      *
-     * @return Qwin_Application_View 当前对象
+     * @return Qwin_App_View 当前对象
      */
     public function clearTag()
     {
@@ -378,7 +378,7 @@ abstract class Qwin_Application_View_Abstract extends Qwin_Metadata_Abstract
     /**
      * 设置视图已展示
      *
-     * @return Qwin_Application_View 当前对象
+     * @return Qwin_App_View 当前对象
      */
     public function setDisplayed()
     {
@@ -410,14 +410,14 @@ abstract class Qwin_Application_View_Abstract extends Qwin_Metadata_Abstract
     public function loadWidget($name, $param = null)
     {
         if (!class_exists($name)) {
-            throw new Qwin_Application_View_Exception('The widget class "' . $name . '" is not exists.');
+            throw new Qwin_App_View_Exception('The widget class "' . $name . '" is not exists.');
         }
         $object = new $name;
         return $object->render($param, $this);
         /*
         $file = $object->render($param, $this);
         if (!is_file($file)) {
-           throw new Qwin_Application_View_Exception('The widget class should return a available file path.');
+           throw new Qwin_App_View_Exception('The widget class should return a available file path.');
         }
         return $file;
          */
