@@ -92,7 +92,8 @@ class Qwin_Url
         if ($this->_router) {
             return $this->_router->parse($url);
         }
-        return parse_str($url);
+        parse_str($url, $get);
+        return $get;
     }
 
     /**

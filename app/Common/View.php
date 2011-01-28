@@ -35,6 +35,10 @@ class Common_View extends Qwin_App_View_Abstract
     {
         Qwin::set('-view', $this);
 
+        // 加载jQuery助手
+        $jQueryRoot = QWIN_RESOURCE_PATH . '/js/jquery';
+        $jQuery = Qwin::run('Qwin_Helper_JQuery', $jQueryRoot, '-jquery');
+
         // 布局的选择次序为 自定义视图 > 行为级 > 控制器级 > 模块级 > 默认(命名空间级)
         $this->setLayout(array(
             '<resource><theme>/<namespace>/layout/<module>-<controller>-<action><suffix>',
@@ -83,7 +87,8 @@ class Common_View extends Qwin_App_View_Abstract
         $this->assign('jsPacker', $jsPacker);
         $this->assign('cssPacker', $cssPacker);
 
-        $jQuery = Qwin::run('Qwin_Resource_JQuery');
+        $manager = Qwin::run('-manager');
+        
         $this->assign('jQuery', $jQuery);
         
         $this->setTagList(array(
@@ -98,7 +103,7 @@ class Common_View extends Qwin_App_View_Abstract
             'defaultNamespace'  => $config['defaultAsc']['namespace'],
             'defaultModule'     => $config['defaultAsc']['module'],
             'defaultController' => $config['defaultAsc']['controller'],
-            'defaultAction'     => 'Common',//$config['defaultAsc']['action'],
+            'defaultAction'     => $config['defaultAsc']['action'],
         ));
 
         // 部分视图常用变量
@@ -142,7 +147,12 @@ class Common_View extends Qwin_App_View_Abstract
         return $this->_style = $style;
     }
 
-    public function display()
+    /**
+     * 展示视图
+     * 
+     * @return Common_View
+     */
+    public function display($layout = null, array $data = null)
     {
         $this->preDisplay();
         if ($this->_displayed) {
@@ -179,9 +189,8 @@ class Common_View extends Qwin_App_View_Abstract
         unset($output);
     }
 
-    public function setRedirectView($message, $method = null)
+    public function redirect($message, $method = null)
     {
-        $this->setProcesser('Common_View_Redirect');
         $this->assign('message', $message);
         $this->assign('method', $method);
         return $this;

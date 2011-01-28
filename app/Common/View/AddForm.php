@@ -25,18 +25,17 @@
  * @since       2010-09-17 18:14:58
  */
 
-class Common_View_AddForm extends Qwin_App_View_Processer
+class Common_View_AddForm extends Common_View
 {
-    public function __construct(Qwin_App_View $view)
+    public function preDisplay()
     {
-
-        $view->setElement('content', '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>-form<suffix>');
+        $this->setElement('content', '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>-form<suffix>');
 
         // 初始化变量,方便调用
-        $primaryKey = $view->primaryKey;
-        $meta = $view->meta;
-        $metaHelper = $view->metaHelper;
-        $data = $view->data;
+        $primaryKey = $this->primaryKey;
+        $meta = $this->meta;
+        $metaHelper = $this->metaHelper;
+        $data = $this->data;
         $config = Qwin::run('-config');
         $asc = $config['asc'];
 
@@ -46,6 +45,6 @@ class Common_View_AddForm extends Qwin_App_View_Processer
         $group = $meta['group'];
         $jQueryValidateCode = Qwin_Helper_Array::jsonEncode($metaHelper->getJQueryValidateCode($meta));
 
-        $view->assign(get_defined_vars());
+        $this->assign(get_defined_vars());
     }
 }

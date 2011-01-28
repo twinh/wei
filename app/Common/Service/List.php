@@ -107,20 +107,19 @@ class Common_Service_List extends Common_Service_BasicAction
         }
 
         // 设置视图
-        $view = array(
-            'class' => $option['view']['class'],
-            'data' => get_defined_vars(),
-        );
-
-        if ($option['view']['display']) {
-            $viewObject = new $option['view']['class'];
-            $viewObject->assign($view['data']);
-        }
-        return array(
+        $result = array(
             'result' => true,
-            'view' => $view,
+            'view' => array(
+                'class' => $option['view']['class'],
+                'data' => get_defined_vars(),
+            ),
             'data' => $data,
-            'dbData' => $dbData,
         );
+        // 加载视图
+        if ($option['view']['display']) {
+            $view = Qwin::run($option['view']['class']);
+            $view->assign($result['view']['data']);
+        }
+        return $view;
     }
 }

@@ -32,7 +32,7 @@ class Common_Service_Update extends Common_Service_BasicAction
      * @var array
      */
     protected $_config = array(
-        'set' => array(
+        'asc' => array(
             'namespace' => null,
             'module' => null,
             'controller' => null,
@@ -53,23 +53,23 @@ class Common_Service_Update extends Common_Service_BasicAction
         'this' => null
     );
 
-    public function process(array $config = null)
+    public function process(array $option = null)
     {
         // 初始配置
-        $config = $this->_multiArrayMerge($this->_config, $config);
-        if(isset($config['data']['meta']))
+        $option = $this->_multiArrayMerge($this->_option, $option);
+        if(isset($option['data']['meta']))
         {
-            $this->_meta = $config['data']['meta'];
+            $this->_meta = $option['data']['meta'];
         }
 
         // 通过父类,加载语言,元数据,模型等
-        parent::process($config['set']);
+        parent::process($option['asc']);
 
         // 初始化常用的变量
         $metaHelper = Qwin::run('Qwin_App_Metadata');
         $meta = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
-        $primaryKeyValue = isset($config['data']['db'][$primaryKey]) ? $config['data']['db'][$primaryKey] : null;
+        $primaryKeyValue = isset($option['data']['db'][$primaryKey]) ? $option['data']['db'][$primaryKey] : null;
         Qwin::run('Qwin_Class_Extension')
             ->setNamespace('validator')
             ->addClass('Qwin_Validator_JQuery');
@@ -85,7 +85,7 @@ class Common_Service_Update extends Common_Service_BasicAction
                 'result' => false,
                 'message' => $this->_lang->t('MSG_NO_RECORD'),
             );
-            if($config['view']['display'])
+            if($option['view']['display'])
             {
                 $this->view->setRedirectView($return['message']);
             }
@@ -95,7 +95,7 @@ class Common_Service_Update extends Common_Service_BasicAction
         $rawData = $result->toArray();
 
         // 补全数据
-        $data = $metaHelper->fillDbData($config['data']['db'], $rawData);
+        $data = $metaHelper->fillDbData($option['data']['db'], $rawData);
 
         // TODO 如果值是从数据库来的,没有经过更改,则可以不进行验证转换
         // 转换,验证
@@ -103,7 +103,7 @@ class Common_Service_Update extends Common_Service_BasicAction
         $validateResult = $metaHelper->validateArray($data + $_POST, $meta, $meta);
         if(true !== $validateResult)
         {
-            $message = $config['this']->showValidateError($validateResult, $meta, $config['view']['display']);
+            $message = $option['this']->showValidateError($validateResult, $meta, $option['view']['display']);
             $return = array(
                 'result' => false,
                 'message' => $message,
@@ -121,17 +121,17 @@ class Common_Service_Update extends Common_Service_BasicAction
         $result->save();
 
         // 入库后,执行绑定事件
-        if(!empty($config['callback']['afterDb']))
+        if(!empty($option['callback']['afterDb']))
         {
-            $config['callback']['afterDb'][1] = $data;
-            $config['callback']['afterDb'][2] = $rawData;
-            $this->executeCallback('afterDb', $config);
+            $option['callback']['afterDb'][1] = $data;
+            $option['callback']['afterDb'][2] = $rawData;
+            $this->executeCallback('afterDb', $option);
         }
 
         // 设置视图数据
-        if($config['view']['url'])
+        if($option['view']['url'])
         {
-            $url = $config['view']['url'];
+            $url = $option['view']['url'];
         } else {
             $url = $this->url->url($this->_asc, array('action' => 'Index'));
         }
@@ -140,7 +140,7 @@ class Common_Service_Update extends Common_Service_BasicAction
             'message' => $this->_lang->t('MSG_OPERATE_SUCCESSFULLY'),
             'url' => $url,
         );
-        if($config['view']['display'])
+        if($option['view']['display'])
         {
             $this->view->setRedirectView($return['message'], $url);
         }

@@ -79,11 +79,6 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
                 'length' => null,
             ),
             'converter' => array(
-                'add' => null,
-                'edit' => null,
-                'list' => null,
-                'db' => null,
-                'view' => null,
             ),
             'validator' => array(
                 'rule' => array(),

@@ -31,8 +31,8 @@ class Common_Service_View extends Common_Service_BasicAction
      * 服务的基本配置
      * @var array
      */
-    protected $_config = array(
-        'set' => array(
+    protected $_option = array(
+        'asc' => array(
             'namespace' => null,
             'module' => null,
             'controller' => null,
@@ -65,17 +65,17 @@ class Common_Service_View extends Common_Service_BasicAction
         'data' => null,
     );
 
-    public function process(array $config = null)
+    public function process(array $option = null)
     {
         // 初始配置
-        $config = $this->_multiArrayMerge($this->_config, $config);
-        if(isset($config['data']['meta']))
+        $option = $this->_multiArrayMerge($this->_option, $option);
+        if(isset($option['data']['meta']))
         {
-            $this->_meta = $config['data']['meta'];
+            $this->_meta = $option['data']['meta'];
         }
 
         // 通过父类,加载语言,元数据,模型等
-        parent::process($config['set']);
+        parent::process($option['asc']);
 
         // 初始化常用的变量
         $metaHelper = $this->metaHelper;
@@ -84,12 +84,12 @@ class Common_Service_View extends Common_Service_BasicAction
 
         // TODO
         if('integer' == $meta['field'][$primaryKey]['db']['type']) {
-            $config['data']['primaryKeyValue'] = (integer)$config['data']['primaryKeyValue'];
+            $option['data']['primaryKeyValue'] = (integer)$option['data']['primaryKeyValue'];
         }
 
         // 从模型获取数据
         $query = $metaHelper->getQueryByAsc($this->_asc, array('db', 'view'));
-        $result = $query->where($primaryKey . ' = ?', $config['data']['primaryKeyValue'])->fetchOne();
+        $result = $query->where($primaryKey . ' = ?', $option['data']['primaryKeyValue'])->fetchOne();
 
         // 记录不存在,加载错误视图
         if(false == $result)
@@ -98,7 +98,7 @@ class Common_Service_View extends Common_Service_BasicAction
                 'result' => false,
                 'message' => $this->_lang->t('MSG_NO_RECORD'),
             );
-            if($config['view']['display'])
+            if($option['view']['display'])
             {
                 $this->view->setRedirectView($result['message']);
             }
@@ -110,23 +110,22 @@ class Common_Service_View extends Common_Service_BasicAction
         $metaHelper->setLastViewedItem($meta, $result);
 
         $data = $result->toArray();
-        $data = $metaHelper->convertOne($data, $config['data']['asAction'], $meta, $meta, array('view' => $config['data']['isView']));
+        $data = $metaHelper->convertOne($data, $option['data']['asAction'], $meta, $meta, array('view' => $option['data']['isView']));
 
         // 设置视图
-        $view = array(
-            'class' => $config['view']['class'],
-            'data' => get_defined_vars(),
-        );
-        if($config['view']['display'])
-        {
-            $this->view
-                ->assign($view['data'])
-                ->setProcesser($view['class']);
-        }
-        return array(
+        $result = array(
             'result' => true,
-            'view' => $view,
+            'view' => array(
+                'class' => $option['view']['class'],
+                'data' => get_defined_vars(),
+            ),
             'data' => $data,
         );
+        // 加载视图
+        if ($option['view']['display']) {
+            $view = Qwin::run($option['view']['class']);
+            $view->assign($result['view']['data']);
+        }
+        return $view;
     }
 }

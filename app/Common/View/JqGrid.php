@@ -30,6 +30,7 @@ class Common_View_JqGrid extends Common_View
     public function preDisplay()
     {
         // 初始变量,方便调用
+        $manager        = Qwin::run('-manager');
         $primaryKey     = $this->primaryKey;
         $meta           = $this->meta;
         $metaHepler     = $this->metaHelper;
@@ -38,7 +39,7 @@ class Common_View_JqGrid extends Common_View
         $config         = Qwin::run('-config');
         $url            = Qwin::run('-url');
         $asc            = $config['asc'];
-        $jqGridHepler   = new Common_Helper_JqGrid();
+        $jqGridHepler   = $manager->getHelper('JqGrid', 'Common');
         $jqGrid         = array();
 
         // 设置应用结构配置
