@@ -31,8 +31,8 @@ class Common_Service_Form extends Common_Service_BasicAction
      * 服务的基本配置
      * @var array
      */
-    protected $_config = array(
-        'set' => array(
+    protected $_option = array(
+        'asc' => array(
             'namespace' => null,
             'module' => null,
             'controller' => null,
@@ -52,19 +52,19 @@ class Common_Service_Form extends Common_Service_BasicAction
         'this' => null,
     );
 
-    public function process(array $config = null)
+    public function process(array $option = null)
     {
         // 初始配置
-        $config = $this->_multiArrayMerge($this->_config, $config);
+        $option = $this->_multiArrayMerge($this->_option, $option);
 
         // 通过父类,加载语言,元数据,模型等
-        parent::process($config['set']);
+        parent::process($option['asc']);
 
         // 初始化常用的变量
         $metaHelper = Qwin::run('Qwin_App_Metadata');
         $meta = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
-        $primaryKeyValue = $config['data']['primaryKeyValue'];
+        $primaryKeyValue = $option['data']['primaryKeyValue'];
 
         $modelClass = $metaHelper->getClassName('Model', $this->_asc);
         $model = Qwin::run($modelClass);
@@ -89,25 +89,25 @@ class Common_Service_Form extends Common_Service_BasicAction
         }
 
         // 合并数据
-        $data = array_merge($formInitalData, $copyRecordData, $config['data']['initalData']);
+        $data = array_merge($formInitalData, $copyRecordData, $option['data']['initalData']);
 
         // 处理数据
-        $data = $metaHelper->convertOne($data, $config['data']['asAction'], $meta, $meta, array('view' => false));
+        $data = $metaHelper->convertOne($data, $option['data']['asAction'], $meta, $meta, array('view' => false));
 
         // 设置视图
-        $view = array(
-            'class' => $config['view']['class'],
-            'data' => get_defined_vars(),
-        );
-        if ($config['view']['display']) {
-            $this->view
-                ->assign($view['data'])
-                ->setProcesser($view['class']);
-        }
-        return array(
+        $result = array(
             'result' => true,
-            'view' => $view,
+            'view' => array(
+                'class' => $option['view']['class'],
+                'data' => get_defined_vars(),
+            ),
             'data' => $data,
         );
+        // 加载视图
+        if ($option['view']['display']) {
+            $view = Qwin::run($option['view']['class']);
+            $view->assign($result['view']['data']);
+        }
+        return $view;
     }
 }

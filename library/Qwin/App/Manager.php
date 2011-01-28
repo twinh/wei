@@ -139,6 +139,9 @@ class Qwin_App_Manager
         $config = Qwin::run('@config', array($config));
         Qwin::set('-config', $config);
         $this->_config = &$config;
+
+        // 注册当前类
+        Qwin::set('-manager', $this);
         
         // 启动Url路由
         $router = null;
@@ -151,12 +154,18 @@ class Qwin_App_Manager
         // 加载视图
         $this->_view = Qwin::run($this->_option['viewClass']);
         Qwin::set('-view', $this->_view);
-
+        
         // 通过配置数据和Url参数初始化系统配置(包括命名空间,模块,控制器,行为等)
+        if (empty($_SERVER['QUERY_STRING'])) {
+            $_GET = $url->parse($config['index']['url']);
+        }
         foreach ($config['defaultAsc'] as $name => $value) {
             $asc[$name] = isset($_GET[$name]) ? $_GET[$name] :  $value;
             $asc[$name] = basename(str_replace('_', '', $asc[$name]));
         }
+        empty($asc['module']) && $asc['module'] = $asc['controller'];
+        empty($asc['controller']) && $asc['controller'] = $asc['module'];
+        
         $config['asc'] = $asc;
 
         // 检查命名空间是否存在
@@ -254,7 +263,7 @@ class Qwin_App_Manager
     public function getController(array $asc = null)
     {
         if (null == $asc) {
-            return $this->_module;
+            return $this->_controller;
         }
         return Qwin::run($this->getClass('controller', $asc));
     }
@@ -265,6 +274,11 @@ class Qwin_App_Manager
             return $this->_module;
         }
         return Qwin::run($this->getClass('view', $asc));
+    }
+
+    public function getModel(array $asc = null)
+    {
+        
     }
     
     /**
@@ -295,9 +309,20 @@ class Qwin_App_Manager
 
     }
 
-    public function getHelper()
+    /**
+     * 获取助手类
+     *
+     * @param string $name 助手类名称
+     * @param string $namespace 助手类所在的命名空间
+     * @return object 助手类对象
+     */
+    public function getHelper($name, $namespace = null)
     {
-
+        if (null == $namespace) {
+            $namespace = $this->config['asc']['namespace'];
+        }
+        $class = $namespace . '_Helper_' . $name;
+        return Qwin::run($class);
     }
 
     public function getWidget()
@@ -308,20 +333,5 @@ class Qwin_App_Manager
     public function getService()
     {
         
-    }
-    
-    /**
-     * 输出调试信息
-     */
-    public function debug()
-    {
-        $namesapce = null == $this->_namespace ? 'null' : get_class($this->_namespace);
-        $module = null == $this->_module ? 'null' : get_class($this->_module);
-        $controller = null == $this->_controller ? 'null' : get_class($this->_controller);
-
-        echo '<p>The Namespace is <strong>' . $namesapce . '</strong></p>';
-        echo '<p>The Module is <strong>' . $module . '</strong></p>';
-        echo '<p>The Controller is <strong>' . $controller . '</strong></p>';
-        echo '<p>The Action is <strong>' . $this->_config['asc']['action'] . '</strong></p>';
     }
 }

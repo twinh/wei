@@ -87,27 +87,6 @@ class Qwin_Class
         }
         return false;
     }
-    
-    /**
-     * 增加类与类缩写的对应关系
-     * 
-     * @param array|string $key 对应关系的数组/类缩写
-     * @param null|string $class_name 当 $key 是数组时,该值为空/类名
-     */
-    public static function addMap($key, $class_name = null)
-    {
-        if(is_array($key))
-        {
-            foreach($key as $real_key => $real_calss_name)
-            {
-                $real_key = strtolower($real_key);
-                self::$_classMap[$real_key] = strtolower($real_calss_name);
-            }
-        } else {
-            $key = strtolower($key);
-            self::$_classMap[$key] = strtolower($class_name);
-        }
-    }
 
     /**
      * 增加初始的类

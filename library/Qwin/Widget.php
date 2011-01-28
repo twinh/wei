@@ -26,24 +26,43 @@
  * @todo        形成一个规范的体系
  */
 
-class Qwin_Widget
+abstract class Qwin_Widget
 {
-    public function __construct()
+    /**
+     * 配置选项
+     *
+     * @var array
+     */
+    protected $_option = array();
+
+    abstract public function render($option);
+
+    /**
+     * 获取配置选项
+     *
+     * @param string $name 配置名称
+     * @return mixed
+     */
+    public function getOption($name = null)
     {
-        
+        if (null == $name) {
+            return $this->_option;
+        }
+        return isset($this->_option[$name]) ? $this->_option[$name] : null;
     }
 
-    function render($meta)
+    /**
+     * 生成属性字符串
+     *
+     * @param array $option 属性数组,键名表示属性名称,值表示属性值
+     * @return string 属性字符串
+     */
+    public function renderAttr($option)
     {
-        $retult = '';
-        foreach($meta['_widgetDetail'] as $widgetSetting)
-        {
-            // 增加默认参数
-            array_unshift($widgetSetting, $widgetSetting[0]);
-            $widgetSetting[1] = $meta;
-
-            $retult .= Qwin::callByArray($widgetSetting);
+        $attr = '';
+        foreach ($option as $name => $value) {
+            $attr .= $name . '="' . htmlspecialchars($value) . '" ';
         }
-        return $retult;
+        return $attr;
     }
 }

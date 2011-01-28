@@ -28,7 +28,7 @@
 function p($a)
 {
     echo '<p><pre>';
-    Qwin::run('Qwin_Debug')->p($a);
+    print_r($a);
     echo '</pre><p>';
 }
 
@@ -53,18 +53,18 @@ function qwin($name)
     return Qwin::run($name);
 }
 
-function qw_form($param, $param2 = null)
+function qw_form($option, $view = null)
 {
     static $form;
-    null == $form && $form = Qwin::run('Qwin_Form');
-    return $form->render($param, $param2);
+    null == $form && $form = Qwin::run('Qwin_Widget_Form');
+    return $form->render($option, $view);
 }
 
 function qw_widget($param, $param2 = null)
 {
-    static $widget;
+    /*static $widget;
     null == $widget && $widget = Qwin::run('Qwin_Widget');
-    return $widget->render($param, $param2);
+    return $widget->render($param, $param2);*/
 }
 
 function qw_url(array $data = null)
@@ -94,24 +94,10 @@ function qw_lang_to_js()
 
 function qw_null_text($data = null)
 {
-    if(null != $data)
-    {
+    if (null != $data) {
         return $data;
     }
     return '<em>(' . qw_lang('LBL_NULL') .')</em>';
-}
-
-function qw_jquery()
-{
-    static $jquery;
-    if(null == $jquery)
-    {
-        Qwin::addMap('-jquery', 'Qwin_Resource_JQuery');
-        $jquery = Qwin::run('-jquery')
-            ->setVersion('1.4.2')
-            ->setUiVersion('1.8.4');
-    }
-    return $jquery;
 }
 
 function qw_referer_page($page = null)
@@ -138,18 +124,4 @@ function qw_jquery_button($type, $title, $icon)
 function qw_jquery_operation_button($url, $title, $icon)
 {
     return Qwin_Helper_Html::jQueryButton($url, $title, $icon);
-}
-
-function qw_clip($name)
-{
-    static $clip;
-    if(null == $clip)
-    {
-        $clip  = require QWIN_ROOT_PATH . '/cache/php/list/clip.php';
-    }
-    if(isset($clip[$name]))
-    {
-        return $clip[$name];
-    }
-    return $name;
 }

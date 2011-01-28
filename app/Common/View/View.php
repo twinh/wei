@@ -25,15 +25,15 @@
  * @since       2010-09-17 18:24:58
  */
 
-class Common_View_View extends Qwin_App_View_Processer
+class Common_View_View extends Common_View
 {
-    public function __construct(Qwin_App_View $view)
+    public function  preDisplay()
     {
         // 初始化变量,方便调用
-        $primaryKey     = $view->primaryKey;
-        $meta           = $view->meta;
-        $metaHelper     = $view->metaHelper;
-        $data           = $view->data;
+        $primaryKey     = $this->primaryKey;
+        $meta           = $this->meta;
+        $metaHelper     = $this->metaHelper;
+        $data           = $this->data;
         $request        = Qwin::run('#request');
         $config         = Qwin::run('-config');
         $url            = Qwin::run('-url');
@@ -120,6 +120,6 @@ class Common_View_View extends Qwin_App_View_Processer
         }
         $group = $meta['group'];
 
-        $view->assign(get_defined_vars());
+        $this->assign(get_defined_vars());
     }
 }

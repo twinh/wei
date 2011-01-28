@@ -30,8 +30,6 @@
 
 class Common_ActionController extends Common_Controller
 {
-    public $defaultAction = 'Index';
-
     /**
      * 控制器默认首页,Common命名空间的默认首页是数据列表
      *
@@ -66,7 +64,6 @@ class Common_ActionController extends Common_Controller
                     'list' => $request->getListField(),
                     'isPopup' => $request->g('qw-popup'),
                 ),
-                'this' => $this,
             ));
         }
     }
@@ -80,11 +77,10 @@ class Common_ActionController extends Common_Controller
     {
         $service = new Common_Service_View();
         return $service->process(array(
-            'set' => $this->_asc,
+            'asc' => $this->_asc,
             'data' => array(
                 'primaryKeyValue' => $this->request->getPrimaryKeyValue($this->_asc),
             ),
-            'this' => $this,
         ));
     }
 
@@ -95,40 +91,19 @@ class Common_ActionController extends Common_Controller
      */
     public function actionAdd()
     {
-        // 1. value:name
-        // 2.
-        $resource = array(
-            1 => '男',
-            2 => '女',
-        );
-        $resource = array(
-            array(
-                'name' => '男',
-                'color' => 2,
-                'style' => 'font-size:12px..',
-            ),
-            array(
-                'name' => '女',
-                'value' => 2,
-                'color' => 'green',
-                'style' => 'font-size:12px..',
-            ),
-        );
-        $resourceType;
         if (empty($_POST)) {
             $service = new Common_Service_Form();
             return $service->process(array(
-                'set' => $this->_asc,
+                'asc' => $this->_asc,
                 'data' => array(
                     'primaryKeyValue' => $this->request->getPrimaryKeyValue($this->_asc),
                     'initalData' => $this->request->getInitialData(),
-                ),
-                'this' => $this,
+                )
             ));
         } else {
             $service = new Common_Service_Insert();
             return $service->process(array(
-                'set' => $this->_asc,
+                'asc' => $this->_asc,
                 'data' => array(
                     'db' => $_POST,
                 ),
@@ -140,7 +115,6 @@ class Common_ActionController extends Common_Controller
                 'view' => array(
                     'url' => urldecode($this->request->p('_page')),
                 ),
-                'this' => $this,
             ));
         }
     }
@@ -155,7 +129,7 @@ class Common_ActionController extends Common_Controller
         if (empty($_POST)) {
             $service = new Common_Service_View();
             return $service->process(array(
-                'set' => $this->_asc,
+                'asc' => $this->_asc,
                 'data' => array(
                     'primaryKeyValue' => $this->request->getPrimaryKeyValue($this->_asc),
                     'asAction' => 'edit',
@@ -165,12 +139,11 @@ class Common_ActionController extends Common_Controller
                 'view' => array(
                     'class' => 'Common_View_EditForm',
                 ),
-                'this' => $this,
             ));
         } else {
             $service = new Common_Service_Update();
             return $service->process(array(
-                'set' => $this->_asc,
+                'asc' => $this->_asc,
                 'data' => array(
                     'db' => $_POST,
                 ),
@@ -182,7 +155,6 @@ class Common_ActionController extends Common_Controller
                 'view' => array(
                     'url' => urldecode($this->request->p('_page')),
                 ),
-                'this' => $this,
             ));
         }
     }
@@ -196,7 +168,7 @@ class Common_ActionController extends Common_Controller
     {
         $service = new Common_Service_Delete();
         return $service->process(array(
-            'set' => $this->_asc,
+            'asc' => $this->_asc,
             'data' => array(
                 'primaryKeyValue' => $this->request->getPrimaryKeyValue($this->_asc),
             ),
@@ -205,7 +177,6 @@ class Common_ActionController extends Common_Controller
                     array($this, 'onAfterDb'),
                 ),
             ),
-            'this' => $this,
         ));
     }
 }
