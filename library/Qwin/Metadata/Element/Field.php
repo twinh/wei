@@ -59,8 +59,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
                 '_resource' => null,
                 '_resourceGetter' => null,
                 //'_resourceFormFile' => null,
-                '_widget' => null,
-                '_widgetDetail' => array(),
+                '_extend' => null,
                 '_value' => '',
                 'name' => null,
                 'id' => null,
@@ -141,9 +140,6 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         if (!isset($metadata['form']['id'])) {
             $metadata['form']['id'] = $metadata['form']['name'];
         }
-
-        // 转换按钮
-        $metadata['form'] = $this->_parseWidgetSetting($metadata['form']);
 
         // 初始验证器和补全验证信息
         if(!isset($metadata['validator'])) {
@@ -318,44 +314,6 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         }
         $this->_data[$field]['form']['class'] .= $value;
         return $this;
-    }
-
-    /**
-     * 微件缩写的对应列表
-     * @var array
-     * @todo 微件
-     */
-    protected $_widgetMap = array(
-        'fileTree' => 'Qwin_Widget_JQuery_FileTree',
-        'ajaxUpload' => 'Qwin_Widget_JQuery_AjaxUpload',
-        'CKEditor' => 'Qwin_Widget_Editor_CKEditor',
-        'datepicker' => 'Qwin_Widget_JQuery_Datepicker'
-    );
-
-    /**
-     * 将微件配置转换为完整配置
-     *
-     * @param array $form
-     * @return array
-     */
-    public function _parseWidgetSetting($form)
-    {
-        !isset($form['_widgetDetail']) && $form['_widgetDetail'] = array();
-        if (isset($form['_widget'])) {
-            $newSetting = array();
-            !is_array($form['_widget']) && $form['_widget'] = array($form['_widget']);
-            foreach ($form['_widget'] as $name => $setting) {
-                isset($this->_widgetMap[$setting]) && $setting = $this->_widgetMap[$setting];
-                /**
-                 * 默认的生成方法是render
-                 */
-                $newSetting[] = array(
-                    array($setting, 'render')
-                );
-            }
-            $form['_widgetDetail'] = array_merge($form['_widgetDetail'], $newSetting);
-        }
-        return $form;
     }
 
     public function getSecondLevelValue($type)

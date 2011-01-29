@@ -28,10 +28,9 @@
 // 防止直接访问导致错误
 !defined('QWIN_PATH') && exit('Forbidden');
 $jQueryFile['tabs'] = $jQuery->loadUi('tabs', false);
-$cssPacker->add($jQueryFile['tabs']['css']);
-$jsPacker
-	->add($jQueryFile['tabs']['js'])
-	->add(QWIN_RESOURCE_PATH . '/view/theme/default/common/script/form.js');
+$minify->addCss($jQueryFile['tabs']['css'])
+	->addJs($jQueryFile['tabs']['js'])
+	->addJs(QWIN_RESOURCE_PATH . '/view/theme/default/common/script/form.js');
 $operationField =  $this->loadWidget('Common_Widget_FormLink', array($data, $primaryKey));
 ?>
 <script>

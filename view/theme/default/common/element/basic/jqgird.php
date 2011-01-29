@@ -26,7 +26,7 @@
 $jQueryFile['jqgrid'] = $jQuery->loadPlugin('jqgrid', null, false);
 $minify
     ->addCss($jQueryFile['jqgrid']['css'])
-    ->addJs(QWIN_RESOURCE_PATH . '/js/jQuery/plugins/jqgrid/i18n/grid.locale-en.js')
+    ->addJs(QWIN_RESOURCE_PATH . '/widget/jquery/plugins/jqgrid/i18n/grid.locale-en.js')
     ->addJs($jQueryFile['jqgrid']['js']);
 ?>
 
