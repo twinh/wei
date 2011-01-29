@@ -35,10 +35,11 @@ class Common_View extends Qwin_App_View_Abstract
     {
         Qwin::set('-view', $this);
         $manager = Qwin::run('-manager');
+        $widget = Qwin_Widget::getInstance();
+        $widget->setRootPath(QWIN_RESOURCE_PATH . '/widget');
 
-        // 加载jQuery助手
-        $jQueryRoot = QWIN_RESOURCE_PATH . '/js/jquery';
-        $jQuery = Qwin::run('Qwin_Helper_JQuery', $jQueryRoot, '-jquery');
+        // 加载jQuery微件
+        $jQuery = $widget->get('jquery');
 
         // 布局的选择次序为 自定义视图 > 行为级 > 控制器级 > 模块级 > 默认(命名空间级)
         $this->setLayout(array(
@@ -173,8 +174,6 @@ class Common_View extends Qwin_App_View_Abstract
 
         // TODO
         $search = '<!-- qwin-packer-sign -->';
-        /*$replace = Qwin::run('Qwin_Packer_Css')->pack()->getHtmlTag() . "\r\n" .
-                   Qwin::run('Qwin_Packer_Js')->pack()->getHtmlTag();*/
         $output = Qwin_Converter_String::replaceFirst($search, $replace, $output);
         echo $output;
         unset($output);

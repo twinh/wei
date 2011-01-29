@@ -133,7 +133,7 @@ class Qwin_App_Manager
         Qwin_Class::setCacheFile(QWIN_ROOT_PATH . '/cache/php/class.php');
         // 加载Qwin函数库
         require_once QWIN_LIB_PATH . '/function/qwin.php';
-
+        
         Qwin::setShortTag('@', 'Qwin_App_');
         
         $config = Qwin::run('@config', array($config));

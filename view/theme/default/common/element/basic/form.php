@@ -27,9 +27,9 @@
 !isset($jQueryValidateCode) && $jQueryValidateCode = '{"rules":[],"messages":[]};';
 !isset($data) && $data = array();
 $jQueryFile['validate'] = $jQuery->loadPlugin('validate', 'qwin', false);
-$jsPacker
-    ->add($jQueryFile['validate']['js'])
-    ->add(QWIN_RESOURCE_PATH . '/view/theme/default/common/script/form.js');
+$minify
+    ->addJs($jQueryFile['validate']['js'])
+    ->addJs(QWIN_RESOURCE_PATH . '/view/theme/default/common/script/form.js');
 ?>
 <script type="text/javascript">
 var jQueryValidateCode = <?php echo $jQueryValidateCode?>;
@@ -111,7 +111,7 @@ var jQueryValidateCode = <?php echo $jQueryValidateCode?>;
                     ?>
                     <td class="ui-label-common"><label for="<?php echo $tempMeta['field'][$fieldCell[1]]['form']['id'] ?>"><?php echo qw_lang($tempMeta['field'][$fieldCell[1]]['basic']['title']) ?>:</label></td>
                     <td class="ui-field-common ui-field-<?php echo $type ?>"<?php echo $colspan ?>>
-                      <?php echo qw_form($formSet, $tempData[$fieldCell[1]]) , qw_widget($formSet, $tempData) ?>
+                      <?php echo qw_form($formSet, $tempData[$fieldCell[1]]) , qw_form_extend($formSet) ?>
                     </td>
                     <?php
                         endif;

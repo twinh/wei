@@ -23,7 +23,7 @@
  * @since       2011-01-27 22:57:22
  */
 
-class Qwin_Widget_Form extends Qwin_Widget
+class Qwin_Widget_Form extends Qwin_Widget_Abstract
 {
     protected $_option = array(
         '_type' => null,
@@ -62,6 +62,9 @@ class Qwin_Widget_Form extends Qwin_Widget
         switch ($private['_type']) {
             case 'text' :
                 return $this->renderText($public, $private);
+
+            case 'textarea' :
+                return $this->renderTextarea($public, $private);
 
             case 'hidden' :
                 return $this->renderHidden($public, $private);

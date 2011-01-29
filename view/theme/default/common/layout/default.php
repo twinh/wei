@@ -15,7 +15,7 @@ $jQueryFile = array(
     'qui'           => $jQuery->loadPlugin('qui', null, false),
 );
 $minify
-    ->addCss(QWIN_RESOURCE_PATH . '/view/style/' . $this->_style . '/jQuery.ui.theme.css')
+    ->addCss(QWIN_RESOURCE_PATH . '/view/style/' . $this->_style . '/jquery.ui.theme.css')
     ->addCss(QWIN_RESOURCE_PATH . '/view/theme/default/common/style/style.css')
     ->addCss($jQueryFile['core']['css'])
     ->addCss($jQueryFile['widget']['css'])

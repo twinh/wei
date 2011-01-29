@@ -26,59 +26,92 @@
  * @todo        形成一个规范的体系
  */
 
-abstract class Qwin_Widget
+class Qwin_Widget
 {
     /**
-     * 配置选项
+     * 启动器的实例化对象
      *
+     * @var Qwin_App_Setup
+     */
+    protected static $_instance;
+
+    /**
+     * 微件目录
+     * @var string
+     */
+    protected $_rootPath;
+
+    /**
+     * 已信任的微件列表
      * @var array
      */
-    protected $_option = array();
-
-    abstract public function render($option);
-
-    public function install()
+    protected $_trusted = array();
+    
+    /**
+     * 构造方法,不允许继承,也不允许实例化
+     */
+    final protected function __construct()
     {
-        return true;
-    }
-
-    public function uninstall()
-    {
-        return true;
     }
 
     /**
-     * 获取配置选项
+     * 获取当前类的实例化对象(单例模式)
      *
-     * @param string $name 配置名称
-     * @return mixed
+     * @return Qwin_Widget
      */
-    public function getOption($name = null)
+    public static function getInstance()
     {
-        if (null == $name) {
-            return $this->_option;
+        if (!isset(self::$_instance)) {
+            self::$_instance = new self();
         }
-        return isset($this->_option[$name]) ? $this->_option[$name] : null;
+        return self::$_instance;
+    }
+
+    public function setRootPath($path)
+    {
+        $this->_rootPath = $path;
+        return $this;
     }
 
     /**
-     * 生成属性字符串
+     * 获取一个微件的实例化对象
      *
-     * @param array $option 属性数组,键名表示属性名称,值表示属性值
-     * @return string 属性字符串
+     * @param string $name 微件类名称,不带Widget_前缀
+     * @return Qwin_Widget_Abstarct
      */
-    public function renderAttr($option)
+    public function get($name)
     {
-        $attr = '';
-        foreach ($option as $name => $value) {
-            $attr .= $name . '="' . htmlspecialchars($value) . '" ';
+        if (false == $this->isExists($name)) {
+            throw new Qwin_Widget_Exception('Can not find the widget : "' . $name . '"');
         }
-        return $attr;
+
+        $class = 'Widget_' . ucfirst($name);
+
+        return Qwin::run($class);
     }
 
-    protected function getRootPath()
+    public function isExists($name)
     {
-        
-        p($_SERVER);
+        // 已经检测过
+        if (isset($this->_trusted[$name])) {
+            return true;
+        }
+
+        // 查看主文件是否存在
+        $file = $this->_rootPath . '/' . $name . '/' . $name . '.php';
+        if (!file_exists($file)) {
+            return false;
+        }
+
+        // 加载并查看类是否存在
+        require_once $file;
+        $class = 'Widget_' . ucfirst($name);
+        if (!class_exists($class)) {
+            return false;
+        }
+
+        // 加入信任列表中
+        $this->_trusted[$name] = true;
+        return true;
     }
 }

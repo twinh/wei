@@ -25,7 +25,7 @@
 
 class Qwin
 {
-    const VERSION = '0.6.0';
+    const VERSION = '0.6.9';
 
     /**
      * 类名映射

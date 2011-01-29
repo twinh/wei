@@ -60,11 +60,28 @@ function qw_form($option, $view = null)
     return $form->render($option, $view);
 }
 
-function qw_widget($param, $param2 = null)
+function qw_form_extend($option, $form = null)
 {
-    /*static $widget;
-    null == $widget && $widget = Qwin::run('Qwin_Widget');
-    return $widget->render($param, $param2);*/
+    static $widget;
+    if (null == $option['_extend']) {
+        return false;
+    }
+
+    null == $widget && $widget = Qwin_Widget::getInstance();
+    $result = '';
+    foreach ($option['_extend'] as $callback) {
+        $widgetName = array_shift($callback);
+        if ($widget->isExists($widgetName)) {
+            $param = array(
+                'option' => $callback,
+                'form' => $option,
+            );
+            $result .= $widget->get($widgetName)->render($param);
+        } else {
+            $result .= Qwin_Class::callByArray($callback);
+        }
+    }
+    return $result;
 }
 
 function qw_url(array $data = null)
