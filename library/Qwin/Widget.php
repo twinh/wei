@@ -37,6 +37,16 @@ abstract class Qwin_Widget
 
     abstract public function render($option);
 
+    public function install()
+    {
+        return true;
+    }
+
+    public function uninstall()
+    {
+        return true;
+    }
+
     /**
      * 获取配置选项
      *
@@ -64,5 +74,11 @@ abstract class Qwin_Widget
             $attr .= $name . '="' . htmlspecialchars($value) . '" ';
         }
         return $attr;
+    }
+
+    protected function getRootPath()
+    {
+        
+        p($_SERVER);
     }
 }

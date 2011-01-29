@@ -24,11 +24,10 @@
  */
 
 $jQueryFile['jqgrid'] = $jQuery->loadPlugin('jqgrid', null, false);
-$cssPacker
-    ->add($jQueryFile['jqgrid']['css']);
-$jsPacker
-    ->add(QWIN_RESOURCE_PATH . '/js/jQuery/plugins/jqgrid/i18n/grid.locale-en.js')
-    ->add($jQueryFile['jqgrid']['js']);
+$minify
+    ->addCss($jQueryFile['jqgrid']['css'])
+    ->addJs(QWIN_RESOURCE_PATH . '/js/jQuery/plugins/jqgrid/i18n/grid.locale-en.js')
+    ->addJs($jQueryFile['jqgrid']['js']);
 ?>
 
 <div class="ui-jqgrid-top">

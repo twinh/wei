@@ -34,6 +34,7 @@ class Common_View extends Qwin_App_View_Abstract
     public function __construct()
     {
         Qwin::set('-view', $this);
+        $manager = Qwin::run('-manager');
 
         // 加载jQuery助手
         $jQueryRoot = QWIN_RESOURCE_PATH . '/js/jquery';
@@ -69,26 +70,9 @@ class Common_View extends Qwin_App_View_Abstract
 
         // 获取配置
         $config = Qwin::run('-config');
-        
-        $packerPath = QWIN_ROOT_PATH . '/cache/packer';
 
-        // 设置css打包
-        $cssPacker = Qwin::run('Qwin_Packer_Css');
-        $cssPacker->setCachePath($packerPath)
-            ->setCacheAge($config['expiredTime'])
-            ->setPathCacheAge($config['expiredTime']);
-
-        // 设置js打包
-        $jsPacker = Qwin::run('Qwin_Packer_Js');
-        $jsPacker->setCachePath($packerPath)
-            ->setCacheAge($config['expiredTime'])
-            ->setPathCacheAge($config['expiredTime']);
-
-        $this->assign('jsPacker', $jsPacker);
-        $this->assign('cssPacker', $cssPacker);
-
-        $manager = Qwin::run('-manager');
-        
+        $minify = $manager->getHelper('Minify', 'Common');
+        $this->assign('minify', $minify);
         $this->assign('jQuery', $jQuery);
         
         $this->setTagList(array(
@@ -180,10 +164,17 @@ class Common_View extends Qwin_App_View_Abstract
         $output = ob_get_contents();
         '' != $output && ob_end_clean();
 
+        $url = Qwin::run('-url');
+        $minify = $this->minify;
+        $jsUrl = array('namespace' => 'Mini', 'g' => $minify->packJs());
+        $cssUrl =  array('g' => $minify->packCss()) + $jsUrl;
+        $replace = Qwin_Util_Html::jsTag($url->url($jsUrl))
+                 . Qwin_Util_Html::cssLinkTag($url->url($cssUrl));
+
         // TODO
         $search = '<!-- qwin-packer-sign -->';
-        $replace = Qwin::run('Qwin_Packer_Css')->pack()->getHtmlTag() . "\r\n" .
-                   Qwin::run('Qwin_Packer_Js')->pack()->getHtmlTag();
+        /*$replace = Qwin::run('Qwin_Packer_Css')->pack()->getHtmlTag() . "\r\n" .
+                   Qwin::run('Qwin_Packer_Js')->pack()->getHtmlTag();*/
         $output = Qwin_Converter_String::replaceFirst($search, $replace, $output);
         echo $output;
         unset($output);
