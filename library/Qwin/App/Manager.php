@@ -135,7 +135,7 @@ class Qwin_App_Manager
         require_once QWIN_LIB_PATH . '/function/qwin.php';
 
         Qwin::setShortTag('@', 'Qwin_App_');
-
+        
         $config = Qwin::run('@config', array($config));
         Qwin::set('-config', $config);
         $this->_config = &$config;

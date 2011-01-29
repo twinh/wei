@@ -27,9 +27,7 @@ class Mini_Common_Controller_Common extends Qwin_App_Controller
 {
     public function actionIndex()
     {
-        $this->getHelper('Minify');
-
-        $_GET['g'] = 'qwin';
+        ini_set('zlib.output_compression', '0');
 
         $min_errorLogger = true;
         $min_allowDebugFlag = true;
@@ -41,16 +39,13 @@ class Mini_Common_Controller_Common extends Qwin_App_Controller
         $min_symlinks = array();
         $min_uploaderHoursBehind = 0;
         $min_libPath = dirname(__FILE__) . '/lib';
-        ini_set('zlib.output_compression', '0');
-        $min_cachePath = QWIN_ROOT_PATH . '/cache/mini/';
+        
+        $min_cachePath = QWIN_ROOT_PATH . '/cache/mini';
 
         define('MINIFY_MIN_DIR', dirname(__FILE__));
 
         Minify::$uploaderHoursBehind = $min_uploaderHoursBehind;
-        Minify::setCache(
-            isset($min_cachePath) ? $min_cachePath : ''
-            ,$min_cacheFileLocking
-        );
+        Minify::setCache($min_cachePath, $min_cacheFileLocking);
 
         if ($min_documentRoot) {
             $_SERVER['DOCUMENT_ROOT'] = $min_documentRoot;
@@ -88,15 +83,15 @@ class Mini_Common_Controller_Common extends Qwin_App_Controller
             $min_serveOptions['maxAge'] = 31536000;
         }
 
-
-        $min_serveOptions['minApp']['groups'] = array(
-            'qwin' => array(
-                'E:\work\website\crm\min\builder\_index.js'
-            ),
-            'css' => array(
-
-            ),
-        );
+        $request = Qwin::run('-request');
+        $name = $request->g('g');
+        $minifyHelper = Qwin::run('-manager')->getHelper('Minify', 'Common');
+        $file = $minifyHelper->getCacheFile($name);
+        if (file_exists($file)) {
+            $min_serveOptions['minApp']['groups'][$name] = require $file;
+        } else {
+            exit('');
+        }
 
         // serve!
         Minify::serve('MinApp', $min_serveOptions);
