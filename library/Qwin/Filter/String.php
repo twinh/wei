@@ -25,7 +25,7 @@
  * @since       2009-11-24 20:45:11
  */
 
-class Qwin_filterer_String
+class Qwin_Filter_String
 {
     function filterString($msg,$isurl=null){
         $msg = preg_replace('/[\\x00-\\x08\\x0B\\x0C\\x0E-\\x1F]/','',$msg);
