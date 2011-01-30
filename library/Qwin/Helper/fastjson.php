@@ -7,44 +7,44 @@
  * ---------------------------------------
  * This class is about two time faster than Pear Service_JSON class.
  * This class is probably not powerful as Service_JSON but it has
- * no dependencies and converts correctly ASCII range 0x00 - 0x1F too.
- * There's any string convertion, just regular RFC specific characters are converted
+ * no dependencies and filters correctly ASCII range 0x00 - 0x1F too.
+ * There's any string filterion, just regular RFC specific characters are filtered
  * into \u00XX string.
  * To don't have problems with other chars try to use utf8_encode($json_encoded_string).
  * To recieve correctly JSON strings from JavaScript use encodeURIComponent then
- * use, if is necessary, utef8_decode before JS to PHP convertion.
+ * use, if is necessary, utef8_decode before JS to PHP filterion.
  * decode method doesn't returns a standard object class but You can
- * create the corret class directly with FastJSON::convert method
+ * create the corret class directly with FastJSON::filter method
  * and with them You can manage JS Date objects too.
  * ---------------------------------------
  * Summary of static public methods
  *
- *     convert
+ *     filter
  *            extra, special method
  *
  *    decode
- *            converts a valid JSON string
+ *            filters a valid JSON string
  *            into a native PHP variable
  *
  *    encode
- *            converts a native php variable
+ *            filters a native php variable
  *            into a valid JSON string
  * ---------------------------------------
  *
- * Special FastJSON::convert method Informations
+ * Special FastJSON::filter method Informations
  * _______________________________________
  * --------------------------------------- 
  * This method is used by FastJSON::encode method but should be used
- * to do these convertions too:
+ * to do these filterions too:
  *
  * - JSON string to time() integer:
  *
- *        FastJSON::convert(decodedDate:String):time()
+ *        FastJSON::filter(decodedDate:String):time()
  *
  *    If You recieve a date string rappresentation You
- *    could convert into respective time() integer.
+ *    could filter into respective time() integer.
  *    Example:
- *        FastJSON::convert(FastJSON::decode($clienttime));
+ *        FastJSON::filter(FastJSON::decode($clienttime));
  *        // i.e. $clienttime = 2006-11-09T14:42:30
  *        // returned time will be an integer useful with gmdate or date
  *        // to create, for example, this string
@@ -52,18 +52,18 @@
  *
  * - time() to JSON string:
  *
- *        FastJSON::convert(time():Int32, true:Boolean):JSON Date String format
+ *        FastJSON::filter(time():Int32, true:Boolean):JSON Date String format
  *
  *    You could send server time() informations and send them to clients.
  *    Example:
- *        FastJSON::convert(time(), true);
+ *        FastJSON::filter(time(), true);
  *        // i.e. 2006-11-09T14:42:30
  *
  * - associative array to generic class:
  *
- *        FastJSON::convert(array(params=>values), new GenericClass):new Instance of GenericClass
+ *        FastJSON::filter(array(params=>values), new GenericClass):new Instance of GenericClass
  *
- *    With a decoded JSON object You could convert them
+ *    With a decoded JSON object You could filter them
  *    into a new instance of your Generic Class.
  *    Example:
  *        class MyClass {
@@ -84,7 +84,7 @@
  *        // $decoded instanceof Object    => true
  *        // $decoded instanceof MyClass    => false
  *        
- *        $decoded = FastJSON::convert($decoded, new MyClass("example"));
+ *        $decoded = FastJSON::filter($decoded, new MyClass("example"));
  *        // $decoded instanceof Object    => true
  *        // $decoded instanceof MyClass    => true
  *
@@ -94,7 +94,7 @@
  *
  * @author        Andrea Giammarchi
  * @site        http://www.devpro.it/
- * @version        0.4 [fixed string convertion problems, add stdClass optional convertion instead of associative array (used by default)]
+ * @version        0.4 [fixed string filterion problems, add stdClass optional filterion instead of associative array (used by default)]
  * @requires        anything
  * @compatibility    PHP >= 4
  * @license
@@ -130,16 +130,16 @@ class FastJSON {
     /**
      * public static method
      *
-     *    FastJSON::convert(params:* [, result:Instance]):*
+     *    FastJSON::filter(params:* [, result:Instance]):*
      *
      * @param    *        String or Object
      * @param    Instance    optional new generic class instance if first
      *                parameter is an object.
      * @return    *        time() value or new Instance with object parameters.
      *
-     * @note    please read Special FastJSON::convert method Informations
+     * @note    please read Special FastJSON::filter method Informations
      */
-    function convert($params, $result = null){
+    function filter($params, $result = null){
         switch(gettype($params)){
             case    'array':
                     $tmp = array();
@@ -190,7 +190,7 @@ class FastJSON {
      *
      * @param    String    valid JSON encoded string
      * @param    Bolean    uses stdClass instead of associative array if params contains objects (default false)
-     * @return    *    converted variable or null
+     * @return    *    filtered variable or null
      *                is params is not a JSON compatible string.
      * @note    This method works in an optimist way. If JSON string is not valid
      *         the code execution will die using exit.
@@ -250,7 +250,7 @@ class FastJSON {
                         $result = '['.implode(',', $keys).']';
                     }
                     else
-                        $result = FastJSON::convert($decode);
+                        $result = FastJSON::filter($decode);
                     break;
             case    'string':
                     $replacement = FastJSON::__getStaticReplacement();
@@ -258,7 +258,7 @@ class FastJSON {
                     break;
             default:
                     if(!is_callable($decode))
-                        $result = FastJSON::convert($decode);
+                        $result = FastJSON::filter($decode);
                     break;
         }
         return $result;

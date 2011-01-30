@@ -100,9 +100,9 @@ class Crm_Customer_Metadata_Care extends Common_Metadata
                             'customer-care-type',
                         ),
                     ),
-                    'converter' => array(
+                    'filterer' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'filter'),
                             'customer-care-type',
                         ),
                         'view' => 'list',
@@ -185,15 +185,15 @@ class Crm_Customer_Metadata_Care extends Common_Metadata
         ));
     }
 
-    public function convertEditCustomerId($value, $name, $data, $dataCopy)
+    public function filterEditCustomerId($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::convertPopupCustomer($value, $name, 'name', $this);
+        Crm_Helper::filterPopupCustomer($value, $name, 'name', $this);
         return $value;
     }
 
-    public function convertEditContactId($value, $name, $data, $dataCopy)
+    public function filterEditContactId($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::convertPopupContact($value, $name, '', $this);
+        Crm_Helper::filterPopupContact($value, $name, '', $this);
         return $value;
     }
 }

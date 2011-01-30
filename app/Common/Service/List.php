@@ -47,10 +47,10 @@ class Common_Service_List extends Common_Service_BasicAction
             'filter' => array(),
             'asAction' => 'list',
             'isView' => true,
-            'convert' => true,
+            'filter' => true,
         ),
         'callback' => array(
-            'dataConverter' => null,
+            'datafilterer' => null,
         ),
         'view' => array(
             'class' => 'Common_View_JqGridJson',
@@ -89,15 +89,15 @@ class Common_Service_List extends Common_Service_BasicAction
         $totalRecord = $query->count();
 
         // 执行回调函数,转换数据
-        if (isset($option['callback']['dataConverter'])) {
-            $option['callback']['dataConverter'][1] = $data;
-            $tempData = $this->executeCallback('dataConverter', $option);
+        if (isset($option['callback']['datafilterer'])) {
+            $option['callback']['datafilterer'][1] = $data;
+            $tempData = $this->executeCallback('datafilterer', $option);
             null != $tempData && $data = $tempData;
         }
 
         // 对数据进行转换
-        if ($option['data']['convert']) {
-            $data = $metaHelper->convertArray($data, $option['data']['asAction'], $meta, $meta, array('view' => $option['data']['isView']));
+        if ($option['data']['filter']) {
+            $data = $metaHelper->filterArray($data, $option['data']['asAction'], $meta, $meta, array('view' => $option['data']['isView']));
         }
 
         // 获取布局

@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * converts to and from JSON format.
+ * filters to and from JSON format.
  *
  * JSON (JavaScript Object Notation) is a lightweight data-interchange
  * format. It is easy for humans to read and write. It is easy for machines
@@ -92,7 +92,7 @@ define('SERVICES_JSON_LOOSE_TYPE', 16);
 define('SERVICES_JSON_SUPPRESS_ERRORS', 32);
 
 /**
- * converts to and from JSON format.
+ * filters to and from JSON format.
  *
  * Brief example of use:
  *
@@ -100,7 +100,7 @@ define('SERVICES_JSON_SUPPRESS_ERRORS', 32);
  * // create a new instance of Services_JSON
  * $json = new Services_JSON();
  *
- * // convert a complexe value to JSON notation, and send it to the browser
+ * // filter a complexe value to JSON notation, and send it to the browser
  * $value = array('foo', 'bar', array(1, 2, 'baz'), array(3, array(4)));
  * $output = $json->encode($value);
  *
@@ -136,9 +136,9 @@ class Services_JSON
     }
 
    /**
-    * convert a string from one UTF-16 char to one UTF-8 char
+    * filter a string from one UTF-16 char to one UTF-8 char
     *
-    * Normally should be handled by mb_convert_encoding, but
+    * Normally should be handled by mb_filter_encoding, but
     * provides a slower PHP-only method for installations
     * that lack the multibye string extension.
     *
@@ -149,8 +149,8 @@ class Services_JSON
     function utf162utf8($utf16)
     {
         // oh please oh please oh please oh please oh please
-        if(function_exists('mb_convert_encoding')) {
-            return mb_convert_encoding($utf16, 'UTF-8', 'UTF-16');
+        if(function_exists('mb_filter_encoding')) {
+            return mb_filter_encoding($utf16, 'UTF-8', 'UTF-16');
         }
 
         $bytes = (ord($utf16{0}) << 8) | ord($utf16{1});
@@ -180,9 +180,9 @@ class Services_JSON
     }
 
    /**
-    * convert a string from one UTF-8 char to one UTF-16 char
+    * filter a string from one UTF-8 char to one UTF-16 char
     *
-    * Normally should be handled by mb_convert_encoding, but
+    * Normally should be handled by mb_filter_encoding, but
     * provides a slower PHP-only method for installations
     * that lack the multibye string extension.
     *
@@ -193,8 +193,8 @@ class Services_JSON
     function utf82utf16($utf8)
     {
         // oh please oh please oh please oh please oh please
-        if(function_exists('mb_convert_encoding')) {
-            return mb_convert_encoding($utf8, 'UTF-16', 'UTF-8');
+        if(function_exists('mb_filter_encoding')) {
+            return mb_filter_encoding($utf8, 'UTF-16', 'UTF-8');
         }
 
         switch(strlen($utf8)) {

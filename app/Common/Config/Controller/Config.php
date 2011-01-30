@@ -103,7 +103,7 @@ class Common_Config_Controller_Config extends Common_ActionController
             $this->view->setProcesser('Common_View_EditForm');
         } else {
             // 保存结果
-            $data = $metaHelper->convertOne($_POST, 'db', $meta, $meta, array('view' => false));
+            $data = $metaHelper->filterOne($_POST, 'db', $meta, $meta, array('view' => false));
             unset($data['groupId']);
             $path = QWIN_ROOT_PATH . '/common/config/global.php';
             $globalConfig = require $path;

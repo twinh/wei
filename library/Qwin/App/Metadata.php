@@ -29,7 +29,7 @@
 class Qwin_App_Metadata extends Qwin_Metadata
 {
     /**
-     * @var array $_convertOption   数据转换的选项
+     * @var array $_filterOption   数据转换的选项
      *
      *      -- view                 是否根据视图类关联模型的配置进行转换
      *                              提示,如果转换的数据作为表单的值显示,应该禁止改选项
@@ -38,18 +38,18 @@ class Qwin_App_Metadata extends Qwin_Metadata
      *
      *      -- type                 是否进行强类型的转换,类型定义在['fieldName]['db']['type']
      *
-     *      -- meta                 是否使用元数据的converter配置进行转换
+     *      -- meta                 是否使用元数据的filterer配置进行转换
      *
-     *      -- converter            是否使用转换器进行转换
+     *      -- filterer            是否使用转换器进行转换
      *
      *      -- relatedMeta          是否转换关联的元数据
      */
-    protected $_convertOption = array(
+    protected $_filterOption = array(
         'view'          => true,
         'null'          => true,
         'type'          => true,
         'meta'          => true,
-        'converter'     => true,
+        'filterer'     => true,
         'link'          => true,
         'relatedMeta'   => true,
     );
@@ -489,12 +489,12 @@ class Qwin_App_Metadata extends Qwin_Metadata
      * @param array $data 准备转换的数据
      * @param string $action 转换的行为,例如Add,Edit
      * @param Qwin_Metadata $meta 元数据
-     * @param object $convertObject 转换器的对象,默认是元数据自身
+     * @param object $filterObject 转换器的对象,默认是元数据自身
      * @return array 经过转换的数据
      */
-    public function convertOne($data, $action, Qwin_Metadata $meta, $convertObject = null, $option = array())
+    public function filterOne($data, $action, Qwin_Metadata $meta, $filterObject = null, $option = array())
     {
-        $option = array_merge($this->_convertOption, $option);
+        $option = array_merge($this->_filterOption, $option);
         $dataCopy = $data;
         $action = strtolower($action);
 
@@ -538,25 +538,25 @@ class Qwin_App_Metadata extends Qwin_Metadata
             }
 
             // 根据元数据中转换器的配置进行转换
-            if ($option['meta'] && isset($field['converter'][$action]) && is_array($field['converter'][$action])) {
-                $newData[$name] = $this->convert($field['converter'][$action], $data[$name]);
+            if ($option['meta'] && isset($field['filterer'][$action]) && is_array($field['filterer'][$action])) {
+                $newData[$name] = $this->filter($field['filterer'][$action], $data[$name]);
             }
 
             // 使用转换器中的方法进行转换
-            if ($option['converter'] && null != $convertObject) {
-                $methodName = str_replace(array('_', '-'), '', 'convert' . $action . $name);
-                if (method_exists($convertObject, $methodName)) {
+            if ($option['filterer'] && null != $filterObject) {
+                $methodName = str_replace(array('_', '-'), '', 'filter' . $action . $name);
+                if (method_exists($filterObject, $methodName)) {
                     $newData[$name] = call_user_func_array(
-                        array($convertObject, $methodName),
+                        array($filterObject, $methodName),
                         array($newData[$name], $name, $newData, $dataCopy)
                     );
                 }
             }
 
             // 转换链接
-            if ($option['link'] && 1 == $field['attr']['isLink'] && method_exists($convertObject, 'setIsLink')) {
+            if ($option['link'] && 1 == $field['attr']['isLink'] && method_exists($filterObject, 'setIsLink')) {
                 $newData[$name] = call_user_func_array(
-                    array($convertObject, 'setIsLink'),
+                    array($filterObject, 'setIsLink'),
                     array($newData[$name], $name, $newData, $dataCopy, $action)
                 );
             }
@@ -568,7 +568,7 @@ class Qwin_App_Metadata extends Qwin_Metadata
                 !isset($data[$name]) && $data[$name] = array();
                 // 不继续转换关联元数据
                 $option['relatedMeta'] = false;
-                $newData[$name] = $this->convertOne($data[$name], $action, $relatedMeta, $relatedMeta, $option);
+                $newData[$name] = $this->filterOne($data[$name], $action, $relatedMeta, $relatedMeta, $option);
             }
         }
         
@@ -582,7 +582,7 @@ class Qwin_App_Metadata extends Qwin_Metadata
      * @param mixed  要转换的值
      * @return mixed 转换结果
      */
-    public function convert($set, $value)
+    public function filter($set, $value)
     {
         array_unshift($set, null);
         $set[0] = $set[1];
@@ -596,13 +596,13 @@ class Qwin_App_Metadata extends Qwin_Metadata
      * @param array $data 准备转换的数据
      * @param string $action 转换的行为,例如Add,Edit
      * @param Qwin_Metadata $meta 元数据
-     * @param object $convertObject 转换器的对象,默认是元数据自身
+     * @param object $filterObject 转换器的对象,默认是元数据自身
      * @return array 经过转换的数据
      */
-    public function convertArray($data, $action, Qwin_Metadata $meta, $convertObject = null, $option = array())
+    public function filterArray($data, $action, Qwin_Metadata $meta, $filterObject = null, $option = array())
     {
         foreach ($data as &$row) {
-            $row = $this->convertOne($row, $action, $meta, $convertObject, $option);
+            $row = $this->filterOne($row, $action, $meta, $filterObject, $option);
         }
         return $data;
     }
@@ -1199,7 +1199,7 @@ class Qwin_App_Metadata extends Qwin_Metadata
      * @return array 表单资源数组
      * @todo 以conver开头的方法,可能会出现冲突
      */
-    public function convertDbDataToFormResource($data, $key, $key2)
+    public function filterDbDataToFormResource($data, $key, $key2)
     {
         $resource = array();
         foreach ($data as  $row) {
@@ -1253,7 +1253,7 @@ class Qwin_App_Metadata extends Qwin_Metadata
                 // TODO 补全其他转换方式,分离该过程
                 $copyData = $relatedData;
                 foreach ($relatedDbMeta['field'] as $name => $field) {
-                    $methodName = str_replace(array('_', '-'), '', 'convertdb' .  $model['alias'] . $name);
+                    $methodName = str_replace(array('_', '-'), '', 'filterdb' .  $model['alias'] . $name);
                     if (method_exists($ctrler, $methodName)) {
                         !isset($relatedData[$name]) && $relatedData[$name] = null;
                         $relatedData[$name] = call_user_func_array(

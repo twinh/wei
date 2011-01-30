@@ -42,7 +42,7 @@ class Common_Service_Update extends Common_Service_BasicAction
             'db' => null,
         ),
         'callback' => array(
-            'beforeConvert' => array(),
+            'beforefilter' => array(),
             'afterDb' => array(),
         ),
         'view' => array(
@@ -99,7 +99,7 @@ class Common_Service_Update extends Common_Service_BasicAction
 
         // TODO 如果值是从数据库来的,没有经过更改,则可以不进行验证转换
         // 转换,验证
-        $data = $metaHelper->convertOne($data, 'db', $meta, $meta, array('view' => false));
+        $data = $metaHelper->filterOne($data, 'db', $meta, $meta, array('view' => false));
         $validateResult = $metaHelper->validateArray($data + $_POST, $meta, $meta);
         if(true !== $validateResult)
         {

@@ -89,9 +89,9 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                         'isLink' => 1,
                         'isList' => 1,
                     ),
-                    'converter' => array(
+                    'filterer' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'filter'),
                             'potential-status',
                         ),
                         'view' => 'list',
@@ -109,9 +109,9 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                         'isLink' => 1,
                         'isList' => 1,
                     ),
-                    'converter' => array(
+                    'filterer' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'filter'),
                             'potential-type',
                         ),
                         'view' => 'list',
@@ -138,9 +138,9 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                         'isLink' => 1,
                         'isList' => 1,
                     ),
-                    'converter' => array(
+                    'filterer' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'filter'),
                             'customer-source',
                         ),
                         'view' => 'list',
@@ -244,21 +244,21 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
         ));
     }
 
-    public function convertEditCustomerId($value, $name, $data, $dataCopy)
+    public function filterEditCustomerId($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::convertPopupCustomer($value, $name, 'name', $this);
+        Crm_Helper::filterPopupCustomer($value, $name, 'name', $this);
         return $value;
     }
 
-    public function convertEditCampaignId($value, $name, $data, $dataCopy)
+    public function filterEditCampaignId($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::convertPopupOpportunity($value, $name, 'name', $this);
+        Crm_Helper::filterPopupOpportunity($value, $name, 'name', $this);
         return $value;
     }
 
-    public function convertEditContactId($value, $name, $data, $dataCopy)
+    public function filterEditContactId($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::convertPopupContact($value, $name, 'first_name', $this);
+        Crm_Helper::filterPopupContact($value, $name, 'first_name', $this);
         return $value;
     }
 }

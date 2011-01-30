@@ -79,18 +79,18 @@ class Common_Config_Metadata_Config extends Common_Metadata
                     'attr' => array(
                         'isList' => 1,
                     ),
-                    'converter' => array(
+                    'filterer' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'filter'),
                             'yes-or-no',
                         ),
                         'view' => 'list',
                     ),
                 ),
                 'value' => array(
-                    'converter' => array(
+                    'filterer' => array(
                         'edit' => array(
-                            array('Qwin_Converter_String', 'secureCode')
+                            array('Qwin_filterer_String', 'secureCode')
                         ),
                     ),
                 ),
@@ -118,9 +118,9 @@ class Common_Config_Metadata_Config extends Common_Metadata
                     'attr' => array(
                         'isList' => 1,
                     ),
-                    'converter' => array(
+                    'filterer' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'filter'),
                             'form-type',
                         ),
                         'view' => 'list',
@@ -175,7 +175,7 @@ class Common_Config_Metadata_Config extends Common_Metadata
         ));
     }
 
-    /*public function convertEditValue($value, $name, $data, $copyData)
+    /*public function filterEditValue($value, $name, $data, $copyData)
     {
         $this->field->set('value.form._type', $copyData['form_type']);
         // TODO

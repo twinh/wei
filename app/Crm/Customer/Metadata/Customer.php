@@ -51,9 +51,9 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                             'sex',
                         ),
                     ),
-                    'converter' => array(
+                    'filterer' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'filter'),
                             'sex',
                         ),
                         'view' => 'list',
@@ -71,9 +71,9 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                             'customer-type',
                         ),
                     ),
-                    'converter' => array(
+                    'filterer' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'filter'),
                             'customer-type',
                         ),
                         'view' => 'list',
@@ -91,9 +91,9 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                             'customer-source',
                         ),
                     ),
-                    'converter' => array(
+                    'filterer' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'filter'),
                             'customer-source',
                         ),
                         'view' => 'list',
@@ -111,9 +111,9 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                             'customer-grade',
                         ),
                     ),
-                    'converter' => array(
+                    'filterer' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'filter'),
                             'customer-grade',
                         ),
                         'view' => 'list',
@@ -135,9 +135,9 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                         'isLink' => 1,
                         'isList' => 1,
                     ),
-                    'converter' => array(
+                    'filterer' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'filter'),
                             'customer-status',
                         ),
                         'view' => 'list',
@@ -264,9 +264,9 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                             'payment-type',
                         ),
                     ),
-                    'converter' => array(
+                    'filterer' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'filter'),
                             'payment-type',
                         ),
                         'view' => 'list',
@@ -365,7 +365,7 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
         ));
     }
 
-    public function convertAddNumber($value, $name, $data, $dataCopy)
+    public function filterAddNumber($value, $name, $data, $dataCopy)
     {
         $count = $this->metaHelper->getQuery($this)->count() + 1;
         return $this['page']['letter'] . str_pad($count, 6, '0', STR_PAD_LEFT);

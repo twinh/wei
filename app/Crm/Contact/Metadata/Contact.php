@@ -115,9 +115,9 @@ class Crm_Contact_Metadata_Contact extends Common_Metadata
                             'customer-source',
                         ),
                     ),
-                    'converter' => array(
+                    'filterer' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'filter'),
                             'customer-source',
                         ),
                         'view' => 'list',
@@ -341,24 +341,24 @@ class Crm_Contact_Metadata_Contact extends Common_Metadata
         ));
     }
 
-    public function convertEditCustomerId($value, $name, $data, $dataCopy)
+    public function filterEditCustomerId($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::convertPopupCustomer($value, $name, 'name', $this);
+        Crm_Helper::filterPopupCustomer($value, $name, 'name', $this);
         return $value;
     }
 
-    public function convertEditParentId($value, $name, $data, $dataCopy)
+    public function filterEditParentId($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::convertPopupContact($value, $name, '', $this);
+        Crm_Helper::filterPopupContact($value, $name, '', $this);
         return $value;
     }
 
-    public function convertListFullName($value, $name, $data, $dataCopy)
+    public function filterListFullName($value, $name, $data, $dataCopy)
     {
         return $dataCopy['last_name'] . $dataCopy['first_name'];
     }
 
-    public function convertViewFullName($value, $name, $data, $dataCopy)
+    public function filterViewFullName($value, $name, $data, $dataCopy)
     {
         return $dataCopy['last_name'] . $dataCopy['first_name'];
     }

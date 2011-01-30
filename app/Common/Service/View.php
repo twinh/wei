@@ -110,7 +110,7 @@ class Common_Service_View extends Common_Service_BasicAction
         $metaHelper->setLastViewedItem($meta, $result);
 
         $data = $result->toArray();
-        $data = $metaHelper->convertOne($data, $option['data']['asAction'], $meta, $meta, array('view' => $option['data']['isView']));
+        $data = $metaHelper->filterOne($data, $option['data']['asAction'], $meta, $meta, array('view' => $option['data']['isView']));
 
         // 设置视图
         $result = array(

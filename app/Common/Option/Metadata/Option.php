@@ -113,7 +113,7 @@ class Common_Option_Metadata_Option extends Common_Metadata
      * @return string 经过序列化的代码
      * @todo 样式,颜色的安全检查
      */
-    public function convertDbCode($value, $name, $data, $dataCopy)
+    public function filterDbCode($value, $name, $data, $dataCopy)
     {
         !is_array($value) && $value = array();
         $return = array();
@@ -130,7 +130,7 @@ class Common_Option_Metadata_Option extends Common_Metadata
         return serialize($return);
     }
 
-    public function convertEditCode($value, $name, $data, $dataCopy)
+    public function filterEditCode($value, $name, $data, $dataCopy)
     {
         $value = @unserialize($value);
         !is_array($value) && $value = array(
@@ -139,14 +139,14 @@ class Common_Option_Metadata_Option extends Common_Metadata
         return $value;
     }
 
-    public function convertAddCode($value, $name, $data, $dataCopy)
+    public function filterAddCode($value, $name, $data, $dataCopy)
     {
         return array(
             $this->_codeSample
         );
     }
 
-    public function convertListCode($value, $name, $data, $dataCopy)
+    public function filterListCode($value, $name, $data, $dataCopy)
     {
         $value = @unserialize($value);
         !is_array($value) && $value = array();
@@ -157,8 +157,8 @@ class Common_Option_Metadata_Option extends Common_Metadata
         return implode(',', $nameList);
     }
 
-    public function convertViewCode($value, $name, $data, $dataCopy)
+    public function filterViewCode($value, $name, $data, $dataCopy)
     {
-        return $this->convertListCode($value, $name, $data, $dataCopy);
+        return $this->filterListCode($value, $name, $data, $dataCopy);
     }
 }

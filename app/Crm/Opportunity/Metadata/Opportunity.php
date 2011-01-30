@@ -52,9 +52,9 @@ class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
                         'isLink' => 1,
                         'isList' => 1,
                     ),
-                    'converter' => array(
+                    'filterer' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'filter'),
                             'opportunity-status',
                         ),
                         'view' => 'list',
@@ -72,9 +72,9 @@ class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
                         'isLink' => 1,
                         'isList' => 1,
                     ),
-                    'converter' => array(
+                    'filterer' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'filter'),
                             'opportunity-type',
                         ),
                         'view' => 'list',
@@ -234,9 +234,9 @@ class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
         ));
     }
 
-    public function convertEditParentId($value, $name, $data, $dataCopy)
+    public function filterEditParentId($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::convertPopupOpportunity($value, $name, 'name', $this);
+        Crm_Helper::filterPopupOpportunity($value, $name, 'name', $this);
         return $value;
     }
 }

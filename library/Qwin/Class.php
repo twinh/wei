@@ -245,7 +245,7 @@ class Qwin_Class
         if(is_array($set[0]) && isset($set[0][0]) && isset($set[0][1]))
         {
             /**
-             * $convert[0][0]为类名,尝试加载该类
+             * $filter[0][0]为类名,尝试加载该类
              * @todo 静态调用和动态调用
              */
             if(!is_object($set[0][0]))

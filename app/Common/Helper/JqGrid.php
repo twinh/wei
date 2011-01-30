@@ -178,7 +178,7 @@ class Common_Helper_JqGrid
      * @param <type> $layout
      * @return string
      */
-    public function convertRowData($data, $primaryKey, $layout)
+    public function filterRowData($data, $primaryKey, $layout)
     {
         $lang = Qwin::run('-lang');
         $i = 0;

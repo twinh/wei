@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  converter
+ * @subpackage  filterer
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,7 +25,7 @@
  * @since       2010-3-21 23:20:37
  */
 
-class Qwin_Converter_Time
+class Qwin_filterer_Time
 {
     static function date($data, $format = 'Y-m-d')
     {

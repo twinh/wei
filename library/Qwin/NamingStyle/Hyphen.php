@@ -53,7 +53,7 @@ class Qwin_NamingStyle_Hyphen implements Qwin_NamingStyle_Interface
      * @param string $name 名称
      * @return string 驼峰命名风格名称
      */
-    public static function convertToLowerCamel($name)
+    public static function filterToLowerCamel($name)
     {
         $name = implode('', array_map('ucfirst', explode('-', $name)));
         $name[0] = strtolower($name[0]);
@@ -66,7 +66,7 @@ class Qwin_NamingStyle_Hyphen implements Qwin_NamingStyle_Interface
      * @param string $name 名称
      * @return string 下划线命名风格名称
      */
-    public static function convertToUnderscore($name)
+    public static function filterToUnderscore($name)
     {
         return strtr($name, '-', '_');
     }

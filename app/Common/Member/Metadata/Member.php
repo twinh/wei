@@ -80,7 +80,7 @@ class Common_Member_Metadata_Member extends Common_Metadata
                         'isReadonly' => 1,
                         'isView' => 0,
                     ),
-                    'converter' => array(
+                    'filterer' => array(
                         'db' => array(
                             'md5'
                         )
@@ -120,9 +120,9 @@ class Common_Member_Metadata_Member extends Common_Metadata
                             'sex',
                         ),
                     ),
-                    'converter' => array(
+                    'filterer' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'convert'),
+                            array('Common_Helper_Option', 'filter'),
                             'sex',
                         ),
                         'view' => 'list',
@@ -214,14 +214,14 @@ class Common_Member_Metadata_Member extends Common_Metadata
         ));
     }
 
-    public function convertListOperation($value, $name, $data, $copyData)
+    public function filterListOperation($value, $name, $data, $copyData)
     {
         $primaryKey = $this->db['primaryKey'];
         $url = Qwin::run('-url');
         $lang = Qwin::run('-lang');
         $set = $this->getAscFromClass();
         $html = Qwin_Helper_Html::jQueryButton($url->url($set, array('action' => 'EditPassword', $primaryKey => $copyData[$primaryKey])), $lang->t('LBL_ACTION_EDIT_PASSWORD'), 'ui-icon-key')
-              . parent::convertListOperation($value, $name, $data, $copyData);
+              . parent::filterListOperation($value, $name, $data, $copyData);
         return $html;
     }
 

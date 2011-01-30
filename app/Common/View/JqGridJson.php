@@ -36,7 +36,7 @@ class Common_View_JqGridJson extends Common_View
         $jqGridHelper = new Common_Helper_JqGrid();
 
         // 转换为jqGrid的行数据
-        $data = $jqGridHelper->convertRowData($data, $primaryKey, $this['layout']);
+        $data = $jqGridHelper->filterRowData($data, $primaryKey, $this['layout']);
 
         /**
          * @var array       jqGrid的Json数据数组

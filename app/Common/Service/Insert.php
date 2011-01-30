@@ -99,7 +99,7 @@ class Common_Service_Insert extends Common_Service_BasicAction
             }
         }
 
-        $data = $metaHelper->convertOne($data, 'db', $meta, $meta, array('view' => false));
+        $data = $metaHelper->filterOne($data, 'db', $meta, $meta, array('view' => false));
         $data = $metaHelper->setForeignKeyData($meta['model'], $data);
         $validateResult = $metaHelper->validateArray($data + $_POST, $meta, $meta);
         if(true !== $validateResult)

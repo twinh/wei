@@ -36,7 +36,7 @@ class Qwin_NamingStyle
      * 转换器对应数组(类名)
      * @var array
      */
-    protected $_converter = array(
+    protected $_filterer = array(
         self::LOWER_CAMEL   => 'Qwin_NamingStyle_LowerCamel',
         self::UNDERSCORE    => 'Qwin_NamingStyle_Underscore',
         self::HYPHEN        => 'Qwin_NamingStyle_Hyphen',
@@ -52,14 +52,14 @@ class Qwin_NamingStyle
         self::HYPHEN        => 'Hyphen',
     );
 
-    public function convert($data, $from, $to)
+    public function filter($data, $from, $to)
     {
-        if (isset($this->_converter[$from]) && isset($this->_case[$to])) {
-            return call_user_func(array($this->_converter[$from], 'convertTo' . $this->_case[$to]), $data);
+        if (isset($this->_filterer[$from]) && isset($this->_case[$to])) {
+            return call_user_func(array($this->_filterer[$from], 'filterTo' . $this->_case[$to]), $data);
         }
 
-        if (!isset($this->_converter[$from])) {
-            throw new Qwin_NamingStyle_Exception('The converter "' . $from . '" is not defined.');
+        if (!isset($this->_filterer[$from])) {
+            throw new Qwin_NamingStyle_Exception('The filterer "' . $from . '" is not defined.');
         }
 
         if (!isset($this->_case[$to])) {
