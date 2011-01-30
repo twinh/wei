@@ -25,7 +25,7 @@
  * @since       2010-3-21 23:20:37
  */
 
-class Qwin_filterer_Time
+class Qwin_Filter_Time
 {
     static function date($data, $format = 'Y-m-d')
     {
