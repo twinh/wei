@@ -319,7 +319,7 @@ class Common_Metadata extends Qwin_Metadata
      * @param array $cpoyData 未转换过的当前记录的值
      * @return string Y-m-d格式的日期
      */
-    public function convertListDateCreated($value, $name, $data, $dataCopy)
+    public function filterListDateCreated($value, $name, $data, $dataCopy)
     {
         return date('Y-m-d', strtotime($value));
     }
@@ -333,7 +333,7 @@ class Common_Metadata extends Qwin_Metadata
      * @param array $cpoyData 未转换过的当前记录的值
      * @return string Y-m-d格式的日期
      */
-    public function convertListDateModified($value, $name, $data, $dataCopy)
+    public function filterListDateModified($value, $name, $data, $dataCopy)
     {
         return date('Y-m-d', strtotime($value));
     }
@@ -348,7 +348,7 @@ class Common_Metadata extends Qwin_Metadata
      * @return string 当前域的新值
      * @todo 简化,重利用,是否需要用微件的形式
      */
-    public function convertListOperation($value, $name, $data, $dataCopy)
+    public function filterListOperation($value, $name, $data, $dataCopy)
     {
         $primaryKey = $this->db['primaryKey'];
         $url = Qwin::run('-url');
@@ -416,7 +416,7 @@ class Common_Metadata extends Qwin_Metadata
      * @param array $cpoyData 未转换过的当前记录的值
      * @return int 当前域的新值
      */
-    public function convertAddOrder($value, $name, $data, $dataCopy)
+    public function filterAddOrder($value, $name, $data, $dataCopy)
     {
         return 50;
         $query = $this->metaHelper->getQuery($this);
@@ -440,7 +440,7 @@ class Common_Metadata extends Qwin_Metadata
      * @param array $cpoyData 未转换过的当前记录的值
      * @return string 当前域的新值
      */
-    public function convertDbId($value, $name, $data, $dataCopy)
+    public function filterDbId($value, $name, $data, $dataCopy)
     {
         if(null == $value)
         {
@@ -458,7 +458,7 @@ class Common_Metadata extends Qwin_Metadata
      * @param array $cpoyData 未转换过的当前记录的值
      * @return string 当前域的新值
      */
-    public function convertDbDateCreated($value, $name, $data, $dataCopy)
+    public function filterDbDateCreated($value, $name, $data, $dataCopy)
     {
         return date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
     }
@@ -472,7 +472,7 @@ class Common_Metadata extends Qwin_Metadata
      * @param array $cpoyData 未转换过的当前记录的值
      * @return string 当前域的新值
      */
-    public function convertDbDateModified()
+    public function filterDbDateModified()
     {
         return date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
     }
@@ -486,32 +486,32 @@ class Common_Metadata extends Qwin_Metadata
      * @param array $cpoyData 未转换过的当前记录的值
      * @return string 当前域的新值
      */
-    public function convertDbCategoryId($value)
+    public function filterDbCategoryId($value)
     {
         '0' == $value && $value = null;
         return $value;
     }
 
-    public function convertDbCreatedBy($value, $name, $data, $dataCopy)
+    public function filterDbCreatedBy($value, $name, $data, $dataCopy)
     {
         $member = Qwin::run('Qwin_Session')->get('member');
         return $member['id'];
     }
 
-    public function convertDbModifiedBy($value, $name, $data, $dataCopy)
+    public function filterDbModifiedBy($value, $name, $data, $dataCopy)
     {
         $member = Qwin::run('Qwin_Session')->get('member');
         return $member['id'];
     }
 
-    public function convertDbIsDeleted($value, $name, $data, $dataCopy)
+    public function filterDbIsDeleted($value, $name, $data, $dataCopy)
     {
         return 0;
     }
 
-    public function convertEditAssignTo($value, $name, $data, $dataCopy)
+    public function filterEditAssignTo($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::convertPopupMember($value, $name, 'username', $this);
+        Crm_Helper::filterPopupMember($value, $name, 'username', $this);
         return $value;
     }
 

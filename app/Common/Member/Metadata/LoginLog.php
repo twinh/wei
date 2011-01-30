@@ -80,12 +80,12 @@ class Common_Member_Metadata_LoginLog extends Common_Metadata
         ));
     }
 
-    public function convertDbIp($value, $name, $data, $copyData)
+    public function filterDbIp($value, $name, $data, $copyData)
     {
         return Qwin_Helper_Util::getIp();
     }
 
-    public function convertListDateCreated($value, $name, $data, $copyData)
+    public function filterListDateCreated($value, $name, $data, $copyData)
     {
         return $value;
     }

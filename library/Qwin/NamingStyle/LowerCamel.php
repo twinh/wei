@@ -66,7 +66,7 @@ class Qwin_NamingStyle_LowerCamel implements Qwin_NamingStyle_Interface
      * @param string $name 名称
      * @return string 下划线命名风格名称
      */
-    public static function convertToHyphen($name)
+    public static function filterToHyphen($name)
     {
         return strtolower(preg_replace('/([a-z])([A-Z])/', '$1-$2', $name));
     }
@@ -77,7 +77,7 @@ class Qwin_NamingStyle_LowerCamel implements Qwin_NamingStyle_Interface
      * @param string $name 名称
      * @return string 下划线命名风格名称
      */
-    public static function convertToUnderscore($name)
+    public static function filterToUnderscore($name)
     {
         return strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $name));
     }

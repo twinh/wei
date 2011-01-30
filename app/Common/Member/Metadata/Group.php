@@ -86,7 +86,7 @@ class Common_Member_Metadata_Group extends Common_Metadata
         ));
     }
 
-    public function convertViewImagePath($value)
+    public function filterViewImagePath($value)
     {
         if(file_exists($value))
         {
@@ -95,14 +95,14 @@ class Common_Member_Metadata_Group extends Common_Metadata
         return $value . '<em>(' . $this->_lang->t('MSG_FILE_NOT_EXISTS') . ')</em>';
     }
 
-    public function convertListOperation($value, $name, $data, $copyData)
+    public function filterListOperation($value, $name, $data, $copyData)
     {
         $primaryKey = $this->db['primaryKey'];
         $url = Qwin::run('-url');
         $lang = Qwin::run('-lang');
         $set = $this->getAscFromClass();
         $html = Qwin_Helper_Html::jQueryButton($url->url($set, array('action' => 'AllocatePermission', $primaryKey => $copyData[$primaryKey])), $lang->t('LBL_ACTION_ALLOCATE_PERMISSION'), 'ui-icon-person')
-              . parent::convertListOperation($value, $name, $data, $copyData);
+              . parent::filterListOperation($value, $name, $data, $copyData);
         return $html;
     }
 }

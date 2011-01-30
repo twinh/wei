@@ -98,7 +98,7 @@ class Common_RecycleBin_Metadata_RecycleBin extends Common_Metadata
         ));
     }
 
-    public function convertListType($value, $name, $data, $dataCopy)
+    public function filterListType($value, $name, $data, $dataCopy)
     {
         $value = explode('.', $value);
         $asc = array(
@@ -112,18 +112,18 @@ class Common_RecycleBin_Metadata_RecycleBin extends Common_Metadata
         return Qwin_Helper_Html::link($this->url->url($asc), $lang->t($metadata['page']['title']));
     }
 
-    public function convertDbDeletedAt($value, $name, $data, $dataCopy)
+    public function filterDbDeletedAt($value, $name, $data, $dataCopy)
     {
         return date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
     }
 
-    public function convertDbDeletedBy($value, $name, $data, $dataCopy)
+    public function filterDbDeletedBy($value, $name, $data, $dataCopy)
     {
         $member = Qwin::run('-session')->get('member');
         return $member['id'];
     }
 
-    public function convertListOperation($value, $name, $data, $dataCopy)
+    public function filterListOperation($value, $name, $data, $dataCopy)
     {
         $primaryKey = $this->db['primaryKey'];
         $url = Qwin::run('-url');
@@ -135,7 +135,7 @@ class Common_RecycleBin_Metadata_RecycleBin extends Common_Metadata
             'title' => $lang->t('LBL_ACTION_RESTORE'),
             'icon' => 'ui-icon-arrowreturnthick-1-w',
         );
-        $operation += parent::convertListOperation($value, $name, $data, $dataCopy, true);
+        $operation += parent::filterListOperation($value, $name, $data, $dataCopy, true);
         $data = '';
         foreach ($operation as $row) {
             $data .= Qwin_Helper_Html::jQueryButton($row['url'], $row['title'], $row['icon']);

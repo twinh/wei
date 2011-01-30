@@ -62,7 +62,7 @@ class Common_Management_Controller_Namespace extends Common_Controller
             }
         }
         $listField = $meta['field']->getAttrList('isList');
-        $data = $this->metaHelper->convertArray($data, 'list', $meta, $meta);
+        $data = $this->metaHelper->filterArray($data, 'list', $meta, $meta);
 
         // 设置视图
         $this->_view = array(

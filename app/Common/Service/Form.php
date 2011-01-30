@@ -92,7 +92,7 @@ class Common_Service_Form extends Common_Service_BasicAction
         $data = array_merge($formInitalData, $copyRecordData, $option['data']['initalData']);
 
         // 处理数据
-        $data = $metaHelper->convertOne($data, $option['data']['asAction'], $meta, $meta, array('view' => false));
+        $data = $metaHelper->filterOne($data, $option['data']['asAction'], $meta, $meta, array('view' => false));
 
         // 设置视图
         $result = array(

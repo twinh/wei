@@ -27,7 +27,7 @@
 
 class Common_Category_Controller_Category extends Common_ActionController
 {
-    public function dataConverter($data)
+    public function datafilterer($data)
     {
         $treeData = array();
         $newData = array();

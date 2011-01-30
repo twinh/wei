@@ -63,7 +63,7 @@ class Common_Member_Metadata_Password extends Common_Metadata
                         'isDbField' => 1,
                         'isDbQuery' => 0,
                     ),
-                    'converter' => array(
+                    'filterer' => array(
                         'db' => array('md5')
                     ),
                     'validator' => array(
@@ -108,7 +108,7 @@ class Common_Member_Metadata_Password extends Common_Metadata
      *
      * @return string 空字符串
      */
-    public function convertEditPasswordPassword()
+    public function filterEditPasswordPassword()
     {
         return '';
     }

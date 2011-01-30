@@ -71,7 +71,7 @@ class Common_Management_Metadata_Namespace extends Common_Metadata
      * @param array $cpoyData 未转换过的当前记录的值
      * @return string 当前域的新值
      */
-    public function convertListOperation($value, $name, $data, $copyData)
+    public function filterListOperation($value, $name, $data, $copyData)
     {
         $primaryKey = $this->db['primaryKey'];
         $url = Qwin::run('-url');

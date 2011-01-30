@@ -262,7 +262,7 @@ class Qwin_Widget_Form extends Qwin_Widget_Abstract
         $isUsed = false;
         if (isset($private['_resource'])) {
             // 转换资源
-            $resource = $this->convertResource($private['_resource']);
+            $resource = $this->filterResource($private['_resource']);
             foreach($resource as $option) {
                 // 附加颜色到样式中
                 null != $option['color'] && $option['style'] = 'color:' . $option['color'] . ';' . $option['style'];
@@ -288,7 +288,7 @@ class Qwin_Widget_Form extends Qwin_Widget_Abstract
      * @return array
      * @todo 耦合?
      */
-    public function convertResource($resource, $option = null)
+    public function filterResource($resource, $option = null)
     {
         // 认定为选项模块的选项
         $element = $resource[key($resource)];

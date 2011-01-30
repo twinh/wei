@@ -77,7 +77,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
                 'type' => 'string',
                 'length' => null,
             ),
-            'converter' => array(
+            'filterer' => array(
             ),
             'validator' => array(
                 'rule' => array(),
@@ -156,10 +156,10 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         }
 
         // 转换转换器的配置,使不同的行为之间允许共享转换器
-        !isset($metadata['converter']) && $metadata['converter'] = array();
-        foreach ($metadata['converter'] as $key => $value) {
-            if (is_string($value) && isset($metadata['converter'][$value])) {
-                $metadata['converter'][$key] = $metadata['converter'][$value];
+        !isset($metadata['filterer']) && $metadata['filterer'] = array();
+        foreach ($metadata['filterer'] as $key => $value) {
+            if (is_string($value) && isset($metadata['filterer'][$value])) {
+                $metadata['filterer'][$key] = $metadata['filterer'][$value];
             }
         }
         
@@ -289,7 +289,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         return $this;
     }
 
-    public function convertReadonlyToHidden()
+    public function filterReadonlyToHidden()
     {
         foreach ($this->_data as $field => $data) {
             if (1 == $data['attr']['isReadonly'] || 'custom' == $data['form']['_type']) {

@@ -51,8 +51,8 @@ class Common_ActionController extends Common_Controller
                     'converAsAction'=> $this->request->g('_as'),
                 ),
                 'callback' => array(
-                    'dataConverter' => array(
-                        array($this, 'dataConverter'),
+                    'datafilterer' => array(
+                        array($this, 'datafilterer'),
                     ),
                 ),
             ));
