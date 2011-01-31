@@ -248,9 +248,9 @@ class Widget_JqGrid extends Qwin_Widget_Abstract
     /**
      *  转换为jqGrid的行数据
      *
-     * @param <type> $data
-     * @param <type> $primaryKey
-     * @param <type> $layout
+     * @param array $data 原始数据
+     * @param string $primaryKey
+     * @param array $layout
      * @return string
      */
     public function filterRowData($data, $primaryKey, $layout)
