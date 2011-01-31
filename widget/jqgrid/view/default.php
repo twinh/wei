@@ -1,6 +1,6 @@
 <?php
 /**
- * JqGridJson
+ * default
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,34 +16,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
- * @subpackage  View
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-17 18:16:36
+ * @since       2011-01-31 14:20:01
  */
+?>
 
-class Common_View_JqGridJson extends Common_View
-{
-    public function preDisplay()
-    {
-        // 初始变量,方便调用
-        $request = Qwin::run('#request');
-        $jqGridWidget = $this->widget->get('jqgrid');
+<table id="<?php echo $option['id'] ?>"></table>
+<div id="<?php echo $option['pager'] ?>"></div>
+<script type="text/javascript">
+jQuery(function($){
+    var jqGrid = <?php echo $jqGridJson?>;
+    $('#<?php echo $option['id'] ?>')
+        .jqGrid(jqGrid)
+        .jqGrid('navGrid', jqGrid.pager,{
+            add : false,
+            edit : false,
+            del : false,
+            search : false
+        });
 
-        $jqGridWidget->renderJson(array(
-            'data'          => $this->data,
-            'layout'        => $this->layout,
-            'primaryKey'    => $this->primaryKey,
-            'option'        => array(
-                'page'      => $request->getPage(),
-                'total'     => ceil($this->totalRecord / $request->getLimit()),
-                'records'   => $this->totalRecord,
-            ),
-        ));
-
-        $this->setDisplayed();
-    }
-}
+    // 样式调整
+    $('.ui-jqgrid').width($('.ui-jqgrid').width() - 2).addClass('ui-state-default');
+    $('table.ui-jqgrid-htable tr.ui-jqgrid-labels th:last').css('border-right', 'none');
+});
+</script>

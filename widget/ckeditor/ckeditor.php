@@ -23,7 +23,6 @@
  * @since       2011-01-28 23:51:45
  */
 
-
 class Widget_CKEditor extends Qwin_Widget_Abstract
 {
     public function render($option)

@@ -15,22 +15,22 @@ $jQueryFile = array(
     'qui'           => $jQuery->loadPlugin('qui', null, false),
 );
 $minify
-    ->addCss(QWIN_RESOURCE_PATH . '/view/style/' . $this->_style . '/jquery.ui.theme.css')
-    ->addCss(QWIN_RESOURCE_PATH . '/view/theme/default/common/style/style.css')
-    ->addCss($jQueryFile['core']['css'])
-    ->addCss($jQueryFile['widget']['css'])
-    ->addCss($jQueryFile['button']['css'])
-    ->addCss($jQueryFile['qui']['css'])
-	->addCss(QWIN_RESOURCE_PATH . '/image/iconx.css')
-    ->addJs($jQuery->loadCore(false))
-    ->addJs(QWIN_RESOURCE_PATH . '/js/qwin/qwin.js')
-    ->addJs(QWIN_RESOURCE_PATH . '/js/qwin/url.js')
-    ->addJs(QWIN_RESOURCE_PATH . '/view/theme/default/common/script/style.js')
-    ->addJs($jQueryFile['core']['js'])
-    ->addJs($jQueryFile['widget']['js'])
-    ->addJs($jQueryFile['button']['js'])
-    ->addJs($jQueryFile['coreEffect'])
-    ->addJs($jQueryFile['qui']['js']);
+    ->add(QWIN_RESOURCE_PATH . '/view/style/' . $this->_style . '/jquery.ui.theme.css')
+    ->add(QWIN_RESOURCE_PATH . '/view/theme/default/common/style/style.css')
+    ->add($jQueryFile['core']['css'])
+    ->add($jQueryFile['widget']['css'])
+    ->add($jQueryFile['button']['css'])
+    ->add($jQueryFile['qui']['css'])
+	->add(QWIN_RESOURCE_PATH . '/image/iconx.css')
+    ->add($jQuery->loadCore(false))
+    ->add(QWIN_RESOURCE_PATH . '/js/qwin/qwin.js')
+    ->add(QWIN_RESOURCE_PATH . '/js/qwin/url.js')
+    ->add(QWIN_RESOURCE_PATH . '/view/theme/default/common/script/style.js')
+    ->add($jQueryFile['core']['js'])
+    ->add($jQueryFile['widget']['js'])
+    ->add($jQueryFile['button']['js'])
+    ->add($jQueryFile['coreEffect'])
+    ->add($jQueryFile['qui']['js']);
 ?>
 <!--[if IE 6]>
 <link rel="stylesheet" type="text/css" media="all" href="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/default/common/style/style-ie6.css" />
