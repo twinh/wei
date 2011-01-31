@@ -139,6 +139,9 @@ class Common_Metadata extends Qwin_Metadata
                     ),*/
                     'name' => 'id',
                 ),
+                'list' => array(
+                    'hide' => true,
+                ),
                 'attr' => array(
                     'isLink' => 0,
                     'isList' => 1,
