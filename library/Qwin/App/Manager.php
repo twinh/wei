@@ -288,9 +288,11 @@ class Qwin_App_Manager
      * @param array $asc 应用结构配置
      * @return string 类名
      */
-    public function getClass($type, $asc)
+    public function getClass($type, array $asc)
     {
         switch ($type) {
+            case 'metadata' :
+                return $asc['namespace'] . '_' . $asc['module'] . '_Metadata_' . $asc['controller'];
             case 'namespace' :
                 return $asc['namespace'] . '_Namespace';
             case 'view' :
@@ -307,6 +309,17 @@ class Qwin_App_Manager
     public function getMetadata()
     {
 
+    }
+
+    public function getMetadataByAsc(array $asc)
+    {
+        $name = $this->getClass('metadata', $asc);
+        if (class_exists($name)) {
+            $metadata = Qwin_Metadata_Manager::get($name);
+        } else {
+            $metadata = null;
+        }
+        return $metadata;
     }
 
     /**

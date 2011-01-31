@@ -37,6 +37,7 @@ class Common_View extends Qwin_App_View_Abstract
         $manager = Qwin::run('-manager');
         $widget = Qwin_Widget::getInstance();
         $widget->setRootPath(QWIN_RESOURCE_PATH . '/widget');
+        $this->assign('widget', $widget);
 
         // 加载jQuery微件
         $jQuery = $widget->get('jquery');
@@ -72,7 +73,7 @@ class Common_View extends Qwin_App_View_Abstract
         // 获取配置
         $config = Qwin::run('-config');
 
-        $minify = $manager->getHelper('Minify', 'Common');
+        $minify = $widget->get('minify');
         $this->assign('minify', $minify);
         $this->assign('jQuery', $jQuery);
         
@@ -167,8 +168,8 @@ class Common_View extends Qwin_App_View_Abstract
 
         $url = Qwin::run('-url');
         $minify = $this->minify;
-        $jsUrl = array('namespace' => 'Mini', 'g' => $minify->packJs());
-        $cssUrl =  array('g' => $minify->packCss()) + $jsUrl;
+        $jsUrl = array('namespace' => 'Mini', 'g' => $minify->pack('js'));
+        $cssUrl =  array('g' => $minify->pack('css')) + $jsUrl;
         $replace = Qwin_Util_Html::jsTag($url->url($jsUrl))
                  . Qwin_Util_Html::cssLinkTag($url->url($cssUrl));
 

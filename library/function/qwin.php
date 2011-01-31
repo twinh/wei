@@ -25,6 +25,13 @@
  * @since       2010-08-18 10:28:04
  */
 
+function d($a = null, $exit = true)
+{
+    var_dump($a);
+    if ($exit) {
+        exit;
+    }
+}
 function p($a)
 {
     echo '<p><pre>';

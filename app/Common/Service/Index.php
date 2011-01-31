@@ -64,10 +64,7 @@ class Common_Service_Index extends Common_Service_BasicAction
         $primaryKey = $meta['db']['primaryKey'];
         $metaHelper = $this->metaHelper;
 
-        $layout = $metaHelper->getListLayout($meta);
-        if (null != $option['data']['list']) {
-            $layout = array_intersect($layout, (array)$option['data']['list']);
-        }
+        $listField = $option['data']['list'];
 
         // 是否以弹出框形式显示
         $isPopup = $option['data']['isPopup'];

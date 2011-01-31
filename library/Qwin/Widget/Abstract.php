@@ -38,7 +38,18 @@ abstract class Qwin_Widget_Abstract
      */
     protected $_rootPath;
 
+    /*
+     * 微件单例对象
+     * @var Qwin_Widget
+     */
+    protected $_widget;
+
     abstract public function render($option);
+
+    public function  __construct()
+    {
+        $this->_widget = Qwin_Widget::getInstance();
+    }
 
     public function install()
     {
@@ -132,5 +143,28 @@ abstract class Qwin_Widget_Abstract
             }
         }
         return implode('/', $relPath);
+    }
+
+    /**
+     * 合并两个数组
+     *
+     * @param array $array1 数组1
+     * @param array $array2 数组2
+     * @return array
+     */
+    protected function merge(array $array1 = null, array $array2 = null)
+    {
+        if (null == $array2) {
+            return $array1;
+        }
+        foreach ($array2 as $key => $val) {
+            if (is_array($val)) {
+                !isset($array1[$key]) && $array1[$key] = array();
+                $array1[$key] = $this->merge($array1[$key], $val);
+            } else {
+                $array1[$key] = $val;
+            }
+        }
+        return $array1;
     }
 }

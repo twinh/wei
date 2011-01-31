@@ -25,9 +25,9 @@
 
 $jQueryFile['jqgrid'] = $jQuery->loadPlugin('jqgrid', null, false);
 $minify
-    ->addCss($jQueryFile['jqgrid']['css'])
-    ->addJs(QWIN_RESOURCE_PATH . '/widget/jquery/plugins/jqgrid/i18n/grid.locale-en.js')
-    ->addJs($jQueryFile['jqgrid']['js']);
+    ->add($jQueryFile['jqgrid']['css'])
+    ->add(QWIN_RESOURCE_PATH . '/widget/jquery/plugins/jqgrid/i18n/grid.locale-en.js')
+    ->add($jQueryFile['jqgrid']['js']);
 ?>
 
 <div class="ui-jqgrid-top">

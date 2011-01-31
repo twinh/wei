@@ -49,7 +49,7 @@ class Common_Helper_Minify
         return $this;
     }
 
-    public function addCss($file)
+    public function add($file)
     {
         if (file_exists($file)) {
             $this->_css[] = $file;

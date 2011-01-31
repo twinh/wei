@@ -90,6 +90,12 @@ class Qwin_Widget
         return Qwin::run($class);
     }
 
+    /**
+     * 检查微件是否存在
+     *
+     * @param string $name
+     * @return boolen
+     */
     public function isExists($name)
     {
         // 已经检测过

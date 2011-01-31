@@ -47,7 +47,11 @@ else :
     </div>
     <div class="ui-form-content ui-box-content ui-widget-content">
         <div class="ui-operation-field">
-        <?php require $this->decodePath('<resource><theme>/<defaultNamespace>/element/basic/jqgird<suffix>') ?>
+        <div class="ui-jqgrid-top">
+            <?php echo $this->loadWidget('Common_Widget_ListTab', array('asc' => $jqGrid['asc'], 'url' => $jqGrid['option']['url'])) ?>
+        </div>
+        <div class="clear"></div>
+        <?php $jqGridWidget->render($jqGrid) ?>
         </div>
     </div>
 </div>

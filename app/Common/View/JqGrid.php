@@ -39,38 +39,42 @@ class Common_View_JqGrid extends Common_View
         $config         = Qwin::run('-config');
         $url            = Qwin::run('-url');
         $asc            = $config['asc'];
-        $jqGridHepler   = $manager->getHelper('JqGrid', 'Common');
-        $jqGrid         = array();
 
-        // 设置应用结构配置
-        $jqGrid['asc'] = $asc;
-        
+        $jqGridWidget = $this->widget->get('jqgrid');
+
+        $option         = array();
+      
         // 获取json数据的地址
-        $jqGrid['url'] = $url->url(array('json' => '1') + $_GET);
+        $option['url'] = $url->url(array('json' => '1') + $_GET);
 
-        // 获取栏数据
-        $col = $jqGridHepler->getColByListLayout($this->layout, $meta, $lang);
-        $jqGrid['colNames'] = $col['colNames'];
-        $jqGrid['colModel'] = $col['colModel'];
+        // 获取并合并布局
+        $layout = $this->metaHelper->getListLayout($meta);
+        if ($this->listField) {
+            $layout = array_intersect($layout, (array)$this->listField);
+        }
+
+        // 根据布局获取栏数据
+        $col = $jqGridWidget->getColByListLayout($layout, $meta, $lang);
+        $option['colNames'] = $col['colNames'];
+        $option['colModel'] = $col['colModel'];
         
         // 设置排序
         if(!empty($meta['db']['order'])) {
-            $jqGrid['sortname']  = $meta['db']['order'][0][0];
-            $jqGrid['sortorder'] = $meta['db']['order'][0][1];
+            $option['sortname']  = $meta['db']['order'][0][0];
+            $option['sortorder'] = $meta['db']['order'][0][1];
         } else {
-            $jqGrid['sortname']  = $primaryKey;
-            $jqGrid['sortorder'] = 'DESC';
+            $option['sortname']  = $primaryKey;
+            $option['sortorder'] = 'DESC';
         }
 
         // 设置Url参数的名称
-        $jqGrid['rowNum']        = $request->getLimit();
-        $jqGrid['rowNum']        <= 0 && $jqGrid['rowNum'] = $meta['db']['limit'];
-        $jqGrid['prmNames'] = array(
+        $option['rowNum']        = $request->getLimit();
+        $option['rowNum']        <= 0 && $option['rowNum'] = $meta['db']['limit'];
+        $option['prmNames'] = array(
             'page'              => $request->getOption('page'),
             'rows'              => $request->getOption('row'),
             'sort'              => $request->getOption('orderField'),
             'order'             => $request->getOption('orderType'),
-            'search'            => '_search',
         );
 
         // 设置弹出窗口属性
@@ -81,14 +85,16 @@ class Common_View_JqGrid extends Common_View
                 'valueColumn'   => $request['qw-popup-value-column'],
                 'viewColumn'    => $request['qw-popup-view-column'],
             );
-            $jqGrid['multiselect']  = false;
-            $jqGrid['autowidth']    = false;
-            $jqGrid['width']        = 800;
+            $option['multiselect']  = false;
+            $option['autowidth']    = false;
+            $option['width']        = 800;
         }
 
-        $jqGrid = $jqGridHepler->render($jqGrid);
-        $jqGridJson = Qwin_Helper_Array::jsonEncode($jqGrid);
-
+        $jqGrid = array(
+            'asc'    => $asc,
+            'option' => $option,
+        );
+        
         $this->assign(get_defined_vars());
     }
 }
