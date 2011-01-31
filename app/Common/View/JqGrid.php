@@ -39,6 +39,7 @@ class Common_View_JqGrid extends Common_View
         $config         = Qwin::run('-config');
         $url            = Qwin::run('-url');
         $asc            = $config['asc'];
+        $ascString      = strtolower(implode('-', $asc));
 
         $jqGridWidget = $this->widget->get('jqgrid');
 
@@ -91,6 +92,7 @@ class Common_View_JqGrid extends Common_View
         }
 
         $jqGrid = array(
+            'id'     => $ascString,
             'asc'    => $asc,
             'option' => $option,
         );

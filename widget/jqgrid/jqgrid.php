@@ -181,7 +181,6 @@ class Widget_JqGrid extends Qwin_Widget_Abstract
 
         // 获取jqGrid与其分页的id号
         $option['pager'] = substr($option['option']['pager'], 1);
-        null == $option['ascString'] && $option['ascString'] = strtolower(implode('-', $option['asc']));
 
         $jqGrid = $option['option'];
         $jqGridJson = Qwin_Helper_Array::jsonEncode($jqGrid);

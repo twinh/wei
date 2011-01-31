@@ -29,6 +29,8 @@
 <script type="text/javascript">
 jQuery(function($){
     var jqGrid = <?php echo $jqGridJson?>;
+    // todo 如何在php代码中表示js function
+    jqGrid.ondblClickRow = function(){};
     $('#<?php echo $option['id'] ?>')
         .jqGrid(jqGrid)
         .jqGrid('navGrid', jqGrid.pager,{
@@ -39,7 +41,8 @@ jQuery(function($){
         });
 
     // 样式调整
-    $('.ui-jqgrid').width($('.ui-jqgrid').width() - 2).addClass('ui-state-default');
+    var gboxId = '#gbox_<?php echo $option['id'] ?>';
+    $(gboxId).width($(gboxId).width() - 2).addClass('ui-state-default');
     $('table.ui-jqgrid-htable tr.ui-jqgrid-labels th:last').css('border-right', 'none');
 });
 </script>

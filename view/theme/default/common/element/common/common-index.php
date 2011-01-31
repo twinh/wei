@@ -60,6 +60,41 @@ endif;
 ?>
 <script type="text/javascript">
 jQuery(function($){
-    
+    var primaryKey = '<?php echo $primaryKey?>';
+
+    // 点击删除按钮
+    $('#action-<?php echo $ascString ?>-delete').click(function(){
+        var keyList = new Array(),
+            rowList = $('#<?php echo $jqGrid['id'] ?>').jqGrid('getGridParam','selarrrow');
+        if (rowList.length == 0) {
+            alert(Qwin.Lang.MSG_CHOOSE_AT_LEASE_ONE_ROW);
+            return false;
+        }
+        for (var i in rowList) {
+            var rowData = $('#<?php echo $jqGrid['id'] ?>').jqGrid('getRowData', rowList[i]);
+            keyList[i] = rowData[primaryKey];
+        }
+        var addition = {};
+        addition['action'] = 'Delete';
+        addition[primaryKey] = keyList.join(',');
+        if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE))
+        {
+            window.location.href = Qwin.url.createUrl(Qwin.get, addition);
+        }
+        return false;
+    });
+
+    // 点击复制按钮
+    $('#action-<?php echo $ascString ?>-copy').click(function(){
+        var rowList = $('#<?php echo $jqGrid['id'] ?>').jqGrid('getGridParam','selarrrow');
+        if (rowList.length != 1) {
+            alert(Qwin.Lang.MSG_CHOOSE_ONLY_ONE_ROW);
+            return false;
+        }
+        var rowData = $('#<?php echo $jqGrid['id'] ?>').jqGrid('getRowData', rowList[0]);
+        var url = $(this).attr('href') + '&' + primaryKey + '=' + rowData[primaryKey];
+        window.location.href = url;
+        return false;
+    });
 });
 </script>
