@@ -50,7 +50,7 @@ class Common_Service_List extends Common_Service_BasicAction
             'filter' => true,
         ),
         'callback' => array(
-            'datafilterer' => null,
+            'datafilter' => null,
         ),
         'view' => array(
             'class' => 'Common_View_JqGridJson',
@@ -89,9 +89,9 @@ class Common_Service_List extends Common_Service_BasicAction
         $totalRecord = $query->count();
 
         // 执行回调函数,转换数据
-        if (isset($option['callback']['datafilterer'])) {
-            $option['callback']['datafilterer'][1] = $data;
-            $tempData = $this->executeCallback('datafilterer', $option);
+        if (isset($option['callback']['datafilter'])) {
+            $option['callback']['datafilter'][1] = $data;
+            $tempData = $this->executeCallback('datafilter', $option);
             null != $tempData && $data = $tempData;
         }
 

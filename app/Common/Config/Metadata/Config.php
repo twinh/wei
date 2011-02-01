@@ -79,7 +79,7 @@ class Common_Config_Metadata_Config extends Common_Metadata
                     'attr' => array(
                         'isList' => 1,
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'list' => array(
                             array('Common_Helper_Option', 'filter'),
                             'yes-or-no',
@@ -88,9 +88,9 @@ class Common_Config_Metadata_Config extends Common_Metadata
                     ),
                 ),
                 'value' => array(
-                    'filterer' => array(
+                    'filter' => array(
                         'edit' => array(
-                            array('Qwin_filterer_String', 'secureCode')
+                            array('Qwin_filter_String', 'secureCode')
                         ),
                     ),
                 ),
@@ -118,7 +118,7 @@ class Common_Config_Metadata_Config extends Common_Metadata
                     'attr' => array(
                         'isList' => 1,
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'list' => array(
                             array('Common_Helper_Option', 'filter'),
                             'form-type',

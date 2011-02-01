@@ -206,7 +206,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
                         'isDbField' => 1,
                         'isDbQuery' => 1,
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'list' => array(
                             array('Common_Helper_Option', 'filter'),
                             'yes-or-no',
@@ -230,7 +230,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
                         'isDbField' => 1,
                         'isDbQuery' => 1,
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'list' => array(
                             array('Common_Helper_Option', 'filter'),
                             'yes-or-no',

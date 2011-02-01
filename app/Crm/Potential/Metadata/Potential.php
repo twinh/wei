@@ -89,7 +89,7 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                         'isLink' => 1,
                         'isList' => 1,
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'list' => array(
                             array('Common_Helper_Option', 'filter'),
                             'potential-status',
@@ -109,7 +109,7 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                         'isLink' => 1,
                         'isList' => 1,
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'list' => array(
                             array('Common_Helper_Option', 'filter'),
                             'potential-type',
@@ -138,7 +138,7 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                         'isLink' => 1,
                         'isList' => 1,
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'list' => array(
                             array('Common_Helper_Option', 'filter'),
                             'customer-source',

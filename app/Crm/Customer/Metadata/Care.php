@@ -100,7 +100,7 @@ class Crm_Customer_Metadata_Care extends Common_Metadata
                             'customer-care-type',
                         ),
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'list' => array(
                             array('Common_Helper_Option', 'filter'),
                             'customer-care-type',

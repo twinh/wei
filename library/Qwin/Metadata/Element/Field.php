@@ -77,7 +77,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
                 'type' => 'string',
                 'length' => null,
             ),
-            'filterer' => array(
+            'filter' => array(
             ),
             'validator' => array(
                 'rule' => array(),
@@ -156,10 +156,10 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         }
 
         // 转换转换器的配置,使不同的行为之间允许共享转换器
-        !isset($metadata['filterer']) && $metadata['filterer'] = array();
-        foreach ($metadata['filterer'] as $key => $value) {
-            if (is_string($value) && isset($metadata['filterer'][$value])) {
-                $metadata['filterer'][$key] = $metadata['filterer'][$value];
+        !isset($metadata['filter']) && $metadata['filter'] = array();
+        foreach ($metadata['filter'] as $key => $value) {
+            if (is_string($value) && isset($metadata['filter'][$value])) {
+                $metadata['filter'][$key] = $metadata['filter'][$value];
             }
         }
         

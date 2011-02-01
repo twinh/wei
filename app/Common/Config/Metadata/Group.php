@@ -76,7 +76,7 @@ class Common_Config_Metadata_Group extends Common_Metadata
                     'attr' => array(
                         'isList' => 1,
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'list' => array(
                             array('Common_Helper_Option', 'filter'),
                             'yes-or-no',

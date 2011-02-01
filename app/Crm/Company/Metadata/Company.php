@@ -85,7 +85,7 @@ class Crm_Company_Metadata_Company extends Common_Metadata
                             'company-industry',
                         ),
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'list' => array(
                             array('Common_Helper_Option', 'filter'),
                             'company-industry',
@@ -109,7 +109,7 @@ class Crm_Company_Metadata_Company extends Common_Metadata
                             'company-nature',
                         ),
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'list' => array(
                             array('Common_Helper_Option', 'filter'),
                             'company-nature',
@@ -133,7 +133,7 @@ class Crm_Company_Metadata_Company extends Common_Metadata
                             'company-size',
                         ),
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'list' => array(
                             array('Common_Helper_Option', 'filter'),
                             'company-size',

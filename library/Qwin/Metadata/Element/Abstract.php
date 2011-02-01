@@ -132,10 +132,8 @@ abstract class Qwin_Metadata_Element_Abstract extends Qwin_Metadata_Abstract
      */
     protected function _multiArrayMerge($array1, $array2)
     {
-        foreach($array2 as $key => $val)
-        {
-            if(is_array($val))
-            {
+        foreach($array2 as $key => $val) {
+            if (is_array($val)) {
                 !isset($array1[$key]) && $array1[$key] = array();
                 $array1[$key] = $this->_multiArrayMerge($array1[$key], $val);
             } else {
