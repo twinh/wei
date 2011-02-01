@@ -127,6 +127,9 @@ class Qwin_App_Manager
         // 设置错误提示的输出等级
         error_reporting($config['errorType']);
 
+        // 默认时区
+        date_default_timezone_set($config['timezone']);
+
         // 加载框架主类,设置自动加载类
         require_once QWIN_LIB_PATH . '/Qwin/Class.php';
         Qwin_Class::setAutoload($config['appPath']);

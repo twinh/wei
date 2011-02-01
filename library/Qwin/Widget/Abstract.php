@@ -96,7 +96,7 @@ abstract class Qwin_Widget_Abstract
      * @param string $file 应为常量 __FILE__
      * @return string
      */
-    protected function getRootPath($file)
+    protected function getRootPath($__FILE__)
     {
         if (!isset($this->_rootPath)) {
             if (isset($_SERVER['SCRIPT_FILENAME'])) {
@@ -104,7 +104,7 @@ abstract class Qwin_Widget_Abstract
             } else {
                 $realPath = realpath('./') ;
             }
-            $file = (str_replace('\\', '/', $file));
+            $file = (str_replace('\\', '/', $__FILE__));
             $this->_rootPath = dirname($this->getRelativePath($realPath, $file));
         }
         return $this->_rootPath;

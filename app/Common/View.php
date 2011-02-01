@@ -36,7 +36,6 @@ class Common_View extends Qwin_App_View_Abstract
         Qwin::set('-view', $this);
         $manager = Qwin::run('-manager');
         $widget = Qwin_Widget::getInstance();
-        $widget->setRootPath(QWIN_RESOURCE_PATH . '/widget');
         $this->assign('widget', $widget);
 
         // 加载jQuery微件
