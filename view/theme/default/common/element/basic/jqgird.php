@@ -22,68 +22,51 @@
  * @version     $Id$
  * @since       2011-01-18 15:12:06
  */
-
-$jQueryFile['jqgrid'] = $jQuery->loadPlugin('jqgrid', null, false);
-$minify
-    ->add($jQueryFile['jqgrid']['css'])
-    ->add(QWIN_RESOURCE_PATH . '/widget/jquery/plugins/jqgrid/i18n/grid.locale-en.js')
-    ->add($jQueryFile['jqgrid']['js']);
 ?>
-
 <div class="ui-jqgrid-top">
-    <?php echo $this->loadWidget('Common_Widget_ListTab', array('asc' => $jqGrid['asc'], 'url' => $jqGrid['url'])) ?>
+    <?php echo $this->loadWidget('Common_Widget_ListTab', array('asc' => $jqGrid['asc'], 'url' => $jqGrid['option']['url'])) ?>
 </div>
 <div class="clear"></div>
-<table id="<?php echo $jqGrid['objectString'] ?>"></table>
-<div id="<?php echo $jqGrid['pagerString'] ?>"></div>
+<?php $jqGridWidget->render($jqGrid) ?>
 <script type="text/javascript">
 jQuery(function($){
-    var jqGrid = <?php echo $jqGridJson?>;
-    jqGrid.ondblClickRow = function(){};
     var primaryKey = '<?php echo $primaryKey?>';
-	Qwin.App.primaryKey = primaryKey;
+    var jqGridObj = $('#<?php echo $jqGrid['id'] ?>');
 
     <?php if (!isset($isPopup)) : ?>
-    jqGrid.ondblClickRow = function(rowId, iRow, iCol, e){
-        var rowData = $(jqGrid.object).jqGrid('getRowData', rowId),
-            addition = {};
-        addition['action'] = 'View';
-        addition[primaryKey] = rowData[primaryKey];
-        window.location.href = Qwin.url.createUrl(Qwin.get, addition);
-        return false;
-    }
+    jqGridObj.jqGrid('setGridParam',{
+        ondblClickRow: function(rowId, iRow, iCol, e){
+            var rowData = jqGridObj.jqGrid('getRowData', rowId),
+                addition = {};
+            addition['action'] = 'View';
+            addition[primaryKey] = rowData[primaryKey];
+            window.location.href = Qwin.url.createUrl(Qwin.get, addition);
+            return false;
+    }});
     <?php else : ?>
-    jqGrid.ondblClickRow = function(rowId, iRow, iCol, e){
-        var rowData = $(jqGrid.object).jqGrid('getRowData', rowId);
-        $('<?php echo $popup['valueInput'] ?>').val(rowData['<?php echo $popup['valueColumn'] ?>']);
-        $('<?php echo $popup['viewInput'] ?>').val(rowData['<?php echo $popup['viewColumn'] ?>'] + '(' + Qwin.Lang['LBL_SELECTED'] + ', ' + Qwin.Lang['LBL_READONLY'] + ')');
-        $('#ui-popup').dialog('close');
-    }
+    jqGridObj.jqGrid('setGridParam',{
+        ondblClickRow: function(rowId, iRow, iCol, e){
+            var rowData = jqGridObj.jqGrid('getRowData', rowId);
+            $('<?php echo $popup['valueInput'] ?>').val(rowData['<?php echo $popup['valueColumn'] ?>']);
+            $('<?php echo $popup['viewInput'] ?>').val(rowData['<?php echo $popup['viewColumn'] ?>'] + '(' + Qwin.Lang['LBL_SELECTED'] + ', ' + Qwin.Lang['LBL_READONLY'] + ')');
+            $('#ui-popup').dialog('close');
+    }});
     <?php endif; ?>
-
-    $(jqGrid.object)
-        .jqGrid(jqGrid)
-        .jqGrid('navGrid', jqGrid.pager,{
-            add : false,
-            edit : false,
-            del : false,
-            search : false
-        });
 
     if (document.getElementById('ui-box-tab')) {
         $(jqGrid.object).jqGrid('setGridWidth', $('#ui-box-tab').width() - 30);
     }
 
     // 点击删除按钮
-    $('#action-<?php echo $jqGrid['ascString'] ?>-delete').click(function(){
+    $('#action-<?php echo $ascString ?>-delete').click(function(){
         var keyList = new Array(),
-            rowList = $(jqGrid.object).jqGrid('getGridParam','selarrrow');
+            rowList = jqGridObj.jqGrid('getGridParam','selarrrow');
         if (rowList.length == 0) {
             alert(Qwin.Lang.MSG_CHOOSE_AT_LEASE_ONE_ROW);
             return false;
         }
         for (var i in rowList) {
-            var rowData = $(jqGrid.object).jqGrid('getRowData', rowList[i]);
+            var rowData = jqGridObj.jqGrid('getRowData', rowList[i]);
             keyList[i] = rowData[primaryKey];
         }
         var addition = {};
@@ -97,20 +80,16 @@ jQuery(function($){
     });
 
     // 点击复制按钮
-    $('#action-<?php echo $jqGrid['ascString'] ?>-copy').click(function(){
-        var rowList = $(jqGrid.object).jqGrid('getGridParam','selarrrow');
+    $('#action-<?php echo $ascString ?>-copy').click(function(){
+        var rowList = jqGridObj.jqGrid('getGridParam','selarrrow');
         if (rowList.length != 1) {
             alert(Qwin.Lang.MSG_CHOOSE_ONLY_ONE_ROW);
             return false;
         }
-        var rowData = $(jqGrid.object).jqGrid('getRowData', rowList[0]);
+        var rowData = jqGridObj.jqGrid('getRowData', rowList[0]);
         var url = $(this).attr('href') + '&' + primaryKey + '=' + rowData[primaryKey];
         window.location.href = url;
         return false;
     });
-
-    // 样式调整
-    $('.ui-jqgrid').width($('.ui-jqgrid').width() - 2).addClass('ui-state-default');
-    $('table.ui-jqgrid-htable tr.ui-jqgrid-labels th:last').css('border-right', 'none');
 });
 </script>
