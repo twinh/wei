@@ -33,15 +33,21 @@ class Common_Namespace extends Qwin_App_Namespace
     public function __construct()
     {
         $config = Qwin::run('-config');
+
+        // 启动widget
+        $widget = Qwin_Widget::getInstance();
+        $widget->setRootPath(QWIN_RESOURCE_PATH . '/widget');
+
+        // 加载log4php
+        /* @var $log Logger */
+        $log = $widget->get('log4php');
+        $log->debug('The asc is ' . implode('/', $config['asc']));
         
         // 设置会话类型及启动
         if ($config['session']['enable']) {
             session_cache_limiter($config['session']['type']);
             session_start();
         }
-
-        // 默认时区
-        date_default_timezone_set($config['interface']['timezone']);
 
         // 关闭魔术引用
         ini_set('magic_quotes_runtime', 0);
