@@ -80,7 +80,7 @@ class Common_Member_Metadata_Member extends Common_Metadata
                         'isReadonly' => 1,
                         'isView' => 0,
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'db' => array(
                             'md5'
                         )
@@ -120,7 +120,7 @@ class Common_Member_Metadata_Member extends Common_Metadata
                             'sex',
                         ),
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'list' => array(
                             array('Common_Helper_Option', 'filter'),
                             'sex',

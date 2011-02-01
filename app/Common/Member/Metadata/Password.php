@@ -63,7 +63,7 @@ class Common_Member_Metadata_Password extends Common_Metadata
                         'isDbField' => 1,
                         'isDbQuery' => 0,
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'db' => array('md5')
                     ),
                     'validator' => array(

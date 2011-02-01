@@ -50,7 +50,7 @@ class Common_AdminMenu_Metadata_Menu extends Common_Metadata
                         'isList' => 1,
                         'isLink' => 1,
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'list' => array(
                             array('Project_Helper_Category', 'filterTreeResource'),
                             array(

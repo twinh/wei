@@ -115,7 +115,7 @@ class Crm_Contact_Metadata_Contact extends Common_Metadata
                             'customer-source',
                         ),
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'list' => array(
                             array('Common_Helper_Option', 'filter'),
                             'customer-source',

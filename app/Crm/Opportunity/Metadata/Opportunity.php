@@ -52,7 +52,7 @@ class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
                         'isLink' => 1,
                         'isList' => 1,
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'list' => array(
                             array('Common_Helper_Option', 'filter'),
                             'opportunity-status',
@@ -72,7 +72,7 @@ class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
                         'isLink' => 1,
                         'isList' => 1,
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'list' => array(
                             array('Common_Helper_Option', 'filter'),
                             'opportunity-type',

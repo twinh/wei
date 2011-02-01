@@ -51,7 +51,7 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                             'sex',
                         ),
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'list' => array(
                             array('Common_Helper_Option', 'filter'),
                             'sex',
@@ -71,7 +71,7 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                             'customer-type',
                         ),
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'list' => array(
                             array('Common_Helper_Option', 'filter'),
                             'customer-type',
@@ -91,7 +91,7 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                             'customer-source',
                         ),
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'list' => array(
                             array('Common_Helper_Option', 'filter'),
                             'customer-source',
@@ -111,7 +111,7 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                             'customer-grade',
                         ),
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'list' => array(
                             array('Common_Helper_Option', 'filter'),
                             'customer-grade',
@@ -135,7 +135,7 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                         'isLink' => 1,
                         'isList' => 1,
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'list' => array(
                             array('Common_Helper_Option', 'filter'),
                             'customer-status',
@@ -264,7 +264,7 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                             'payment-type',
                         ),
                     ),
-                    'filterer' => array(
+                    'filter' => array(
                         'list' => array(
                             array('Common_Helper_Option', 'filter'),
                             'payment-type',

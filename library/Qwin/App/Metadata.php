@@ -38,9 +38,9 @@ class Qwin_App_Metadata extends Qwin_Metadata
      *
      *      -- type                 是否进行强类型的转换,类型定义在['fieldName]['db']['type']
      *
-     *      -- meta                 是否使用元数据的filterer配置进行转换
+     *      -- meta                 是否使用元数据的filter配置进行转换
      *
-     *      -- filterer            是否使用转换器进行转换
+     *      -- filter            是否使用转换器进行转换
      *
      *      -- relatedMeta          是否转换关联的元数据
      */
@@ -49,7 +49,7 @@ class Qwin_App_Metadata extends Qwin_Metadata
         'null'          => true,
         'type'          => true,
         'meta'          => true,
-        'filterer'     => true,
+        'filter'     => true,
         'link'          => true,
         'relatedMeta'   => true,
     );
@@ -538,12 +538,12 @@ class Qwin_App_Metadata extends Qwin_Metadata
             }
 
             // 根据元数据中转换器的配置进行转换
-            if ($option['meta'] && isset($field['filterer'][$action]) && is_array($field['filterer'][$action])) {
-                $newData[$name] = $this->filter($field['filterer'][$action], $data[$name]);
+            if ($option['meta'] && isset($field['filter'][$action]) && is_array($field['filter'][$action])) {
+                $newData[$name] = $this->filter($field['filter'][$action], $data[$name]);
             }
 
             // 使用转换器中的方法进行转换
-            if ($option['filterer'] && null != $filterObject) {
+            if ($option['filter'] && null != $filterObject) {
                 $methodName = str_replace(array('_', '-'), '', 'filter' . $action . $name);
                 if (method_exists($filterObject, $methodName)) {
                     $newData[$name] = call_user_func_array(
