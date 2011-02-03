@@ -25,7 +25,19 @@
  * @since       2010-4-18 15:42:08
  */
 
+/**
+ * @see Qwin_Exception
+ */
+require_once 'Qwin/Exception.php';
+
+/**
+ * Flow exception
+ *
+ * @package     Qwin
+ * @subpackage  Url
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ */
 class Qwin_Url_Exception extends Qwin_Exception
 {
-
 }

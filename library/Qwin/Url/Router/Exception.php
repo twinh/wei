@@ -23,6 +23,19 @@
  * @since       2011-01-24 01:13:32
  */
 
-class Qwin_Url_Router_Exception extends Exception
+/**
+ * @see Qwin_Exception
+ */
+require_once 'Qwin/Exception.php';
+
+/**
+ * Flow exception
+ *
+ * @package     Qwin
+ * @subpackage  Url
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ */
+class Qwin_Url_Router_Exception extends Qwin_Exception
 {
 }

@@ -29,6 +29,6 @@ class Qwin_Exception extends Exception
 {
     public function __construct($msg = '', $code = 0)
     {
-        parent::__construct($msg, (int) $code);
+        parent::__construct($msg, (int)$code);
     }
 }

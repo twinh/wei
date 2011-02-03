@@ -30,6 +30,14 @@
  */
 require_once 'Qwin/Exception.php';
 
+/**
+ * Flow exception
+ *
+ * @package     Qwin
+ * @subpackage  Metadata
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ */
 class Qwin_Metadata_Exception extends Qwin_Exception
 {
 }
