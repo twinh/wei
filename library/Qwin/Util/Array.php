@@ -25,7 +25,7 @@
  * @since       2009-11-24 20:45:11
  */
 
-class Qwin_Helper_Array
+class Qwin_Util_Array
 {
 
     public static function set(&$value)

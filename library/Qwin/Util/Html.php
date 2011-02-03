@@ -34,4 +34,67 @@ class Qwin_Util_Html
     {
         return '<link rel="stylesheet" type="text/css" href="' . htmlspecialchars($file) . '" />';
     }
+
+    /**
+     * 为标题增加样式
+     *
+     * @param string $title
+     * @param string $fontStyle 字体样式,用|隔开,如 i|u|b
+     * @param sting $color 合法的颜色值,如 red,#000
+     * @return string 转换过的标题
+     */
+    public static function titleDecorator($title, $fontStyle = null, $color = null)
+    {
+        $style = '';
+        $fontStyle = explode('|', $fontStyle);
+        foreach($fontStyle as $type)
+        {
+            switch($type)
+            {
+                case 'b' :
+                    $style .= ' font-weight:  bold;';
+                    break;
+                case 'i' :
+                    $style .= ' font-style: italic;';
+                    break;
+                case 'u' :
+                    $style .= ' text-decoration:  underline;';
+                    break;
+                default :
+                    break;
+            }
+        }
+        if(null != $color)
+        {
+            $style .= ' color: ' . $color;
+        }
+        return '<span style="'. $style . '">' . $title . '</span>';
+    }
+
+    public static function jQueryButton($href, $title = null, $icon = 'ui-icon-info')
+    {
+        return '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="'
+              . $title . '" href="' . $href . '"><span class="ui-icon ' . $icon .  '">' . $title . '</span></a>';
+    }
+
+    public static function img($src, $title = null, $width = null, $height = null, $additionAttr = null)
+    {
+        null == $title && $title = $src;
+        null != $width && $width = ' width="' . $width . '"';
+        null != $height && $height = ' height="' . $height . '"';
+        return '<img src="' . $src . '" alt="' . $title . '"' . $width . $height . ' />';
+    }
+
+    public static function link($url, $title = null, $target = null)
+    {
+        null == $title && $title = $url;
+        null != $target && $target = ' target="' . $target . '"';
+        return '<a' . $target . ' href="' . $url . '">' . $title . '</a>';
+    }
+
+    public static function jQueryLink($url, $title, $icon, $aClass = null, $target = '_self', $id = null)
+    {
+        isset($id) && $id = ' id="' . $id . '"';
+        return '<a' . $id .' target="' . $target . '" href="' . $url . '" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary ' . $aClass . '" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ' . $icon . '"></span><span class="ui-button-text">' . $title . '</span></a>' . "\r\n";
+    }
 }
