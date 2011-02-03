@@ -23,6 +23,19 @@
  * @since       2011-01-12 21:16:43
  */
 
+/**
+ * @see Qwin_Exception
+ */
+require_once 'Qwin/Exception.php';
+
+/**
+ * Flow exception
+ *
+ * @package     Qwin
+ * @subpackage  NamingStyle
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ */
 class Qwin_NamingStyle_Exception extends Qwin_Exception
 {
 }

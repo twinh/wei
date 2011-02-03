@@ -1,6 +1,6 @@
 <?php
 /**
- * Advice
+ * Exception
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,38 +16,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  Validator
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-16 11:23:58
+ * @since       v0.6.9 2011-02-03 20:51:09
  */
 
-class Qwin_Validator_Advice
+/**
+ * @see Qwin_Exception
+ */
+require_once 'Qwin/Exception.php';
+
+/**
+ * Flow exception
+ *
+ * @package     Qwin
+ * @subpackage  Flow
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ */
+class Qwin_Flow_Exception extends Qwin_Exception
 {
-    protected $_type = array(
-        'equal to',
-        'greater than',
-        'less than',
-        'in',
-        'not in',
-        'longer than',
-        'shorter than',
-    );
-
-    public function __construct()
-    {
-        
-    }
-
-    public function get($field)
-    {
-        return array(
-            'field' => $field,
-            'type' => '',
-            'value' => '',
-        );
-    }
 }
