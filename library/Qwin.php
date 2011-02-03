@@ -191,4 +191,20 @@ class Qwin
         }
         self::$_map[$name] = strtolower($realName);
     }
+
+    public static function widget($name)
+    {
+        
+    }
+
+    /**
+     * 设置一个钩子
+     *
+     * @param string $name 钩子名称
+     * @param array $param 钩子参数
+     */
+    public static function hook($name, array $param = null)
+    {
+        
+    }
 }
