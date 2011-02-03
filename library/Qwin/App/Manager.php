@@ -205,11 +205,6 @@ class Qwin_App_Manager
         return $this;
     }
 
-    public function set()
-    {
-        echo 'call: set';
-    }
-
     /**
      * 从项目目录中获取合法的命名空间名称
      *

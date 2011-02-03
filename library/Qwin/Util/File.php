@@ -25,7 +25,7 @@
  * @since       2009-11-24 20:45:11
  */
 
-class Qwin_Helper_File
+class Qwin_Util_File
 {    
     public static function writeAsArray($code, $path, $name = '')
     {
