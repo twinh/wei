@@ -47,85 +47,52 @@ class Qwin_Util_Array
         return $array;
     }
 
-    // 转换为 js 对象
-    public static function toJsObject($qData, $t = null)
-    {
-        $cData = '';
-        if(is_array($qData))
-        {
-            $iCount = count($qData);
-            $i = 1;
-            $cData .= "{";
-            foreach($qData as $key => $val)
-            {
-                $cData .= self::toJsObject($key) . ":" . self::toJsObject($val);
-                $i != $iCount && $cData .= ",";
-                $i++;
-            }
-            $cData .= "}";
-        } elseif(is_string($qData)) {
-            $cData .= "'" . str_replace(array("\\","'"),array("\\\\","\'"),$qData) . "'";
-        } elseif(is_int($qData)) {
-            $cData .= $qData;
-        } elseif(is_numeric($qData)) {
-            $cData .= "'" . $qData . "'";
-        } elseif(is_bool($qData)) {
-            $cData .= $qData ? 'true' : 'false';
-        } else {
-            $cData .= 'null';
-        }
-        return $cData;
-    }
-
     /**
-     * 删除二维数组中的指定键名
+     * 删除数组中指定的键名
      *
-     * @param array $data array 二维数组,一般是从数据库读出
-     * @param array $key_arr array 删除的键名
+     * @param array $data 二维数组,一般是从数据库读出
+     * @param array $keyList 删除的键名
+     * @return array
      */
-    public static function unsetKeyInDyadicArray($data, $key_arr)
+    public static function unsetByKey(array $data, array $keyList)
     {
-        $data2 = array();
-
-        $key_arr = array_flip($key_arr);
-        foreach($data as $key => $val)
-        {
-            $data2[$key] = array_diff_key($val, $key_arr);
+        $temp = array();
+        $keyList = array_flip($keyList);
+        foreach($data as $key => $value) {
+            $temp[$key] = array_diff_key($value, $keyList);
         }
-
-        return $data2;
+        return $temp;
     }
 
     /**
+     * 获取由指定的键名组成的数组
      *
-     * @todo rename
+     * @param array $data 二维数组,一般是从数据库读出
+     * @param array $keyList 指定的键名
+     * @return array
      */
-    public static function getArrayByKeyArray($data, $key_arr)
+    public static function filterByKey(array $data, array $keyList)
     {
-        $data_2 = array();
-
-        $key_arr = array_flip($key_arr);
-        foreach($data as $key => $val)
-        {
-            $data_2[$key] = array_intersect_key($val, $key_arr);
+        $temp = array();
+        $keyList = array_flip($keyList);
+        foreach($data as $key => $value) {
+            $temp[$key] = array_intersect_key($value, $keyList);
         }
-        return $data_2;
+        return $temp;
     }
 
-    // 提供需要的键名..
-
     /**
-     * 判断一数组是不是二数组的子集
+     * 判断数组1是不是数组2的子集
      *
-     * @param array $arr_1
-     * @param array $arr_2
+     * @param array $array1 数组1
+     * @param array $array2 数组2
      * @param string $type
      * @return bool
      * @todo 按键名比较,不按键名比较的几种方式
      */
-    public static function isSubset($arr_1, $arr_2)
+    public static function isSubset($array1, $array2)
     {
-        return array_intersect_assoc($arr_1, $arr_2) == $arr_1;
+        return array_intersect_assoc($array1, $array2) == $array1;
     }
 
     /**
@@ -137,124 +104,58 @@ class Qwin_Util_Array
      * @param array $type 排列好的二级数组
      * @todo 可以指定排列顺序,由小到大和由大到小
      */
-    public static function orderBy($list, $order_key = 'order', $type = 4)
+    public static function orderBy($list, $keyName = 'order', $type = SORT_DESC)
     {
-        if(0 == count($list))
-        {
+        if (0 == count($list)) {
             return $list;
         }
         $list2 = array();
-        foreach($list as $key => $val)
-        {
-            $list2[$key] = $val[$order_key];
+        foreach ($list as $key => $value) {
+            $list2[$key] = $val[$keyName];
         }
         array_multisort($list2, $type, $list);
         return $list;
     }
 
     /**
-     * 对变量进行 JSON 编码
-     *
-     * @see http://gggeek.altervista.org/sw/article_20061113.html
+     * Json 编码
+     * @param mixed $data
+     * @return mixed
      */
     public static function jsonEncode($data)
     {
+        return json_encode($data);
         require_once 'fastjson.php';
         return FastJSON::encode($data);
     }
 
     /**
-     *
-     *
+     * Json 解码
+     * 
+     * @param string $data
+     * @return mixed
      */
-    public static function jsonDecode($data, $type = 'pear')
+    public static function jsonDecode($data)
     {
-        switch($type)
-        {
-            case 'php' :
-                if(function_exists('json_decode'))
-                {
-                    $data = json_decode($data);
-                    break;
-                }
-            case 'pear' :
-                require_once 'services_json.php';
-                $value = new Services_JSON();
-                $data = $value->decode($data);
-                break;
-            case 'fast' :
-            default :
-                require_once 'fastjson.php';
-                $value = new FastJSON();
-                $data = $value->decode($data);
-                break;
-        }
-        return $data;
-    }
-
-    public static function getNextKey($name, $data)
-    {
-        foreach($data as $key => $val)
-        {
-            $next = $key;
-            if($is_break)
-            {
-                break;
-            }
-            if($key == $name)
-            {
-                $is_break = true;
-            }
-        }
-        if($is_break && $next != $name)
-        {
-            return $next;
-        }
-        return null;
-    }
-
-    public static function getPrevKey($name, $data)
-    {
-        foreach($data as $key => $val)
-        {
-            if($key == $name)
-            {
-                $is_break = true;
-                break;
-            }
-            $prev = $key;
-        }
-        if($is_break)
-        {
-            return $prev;
-        }
-        return null;
+        require_once 'services_json.php';
+        $value = new Services_JSON();
+        return $value->decode($data);
     }
 
     /**
      * 按大写字母分割字符串
      *
+     * @param string $data 字符串
+     * @return array
      */
-    public static function explodeByUppercase($data)
+    public static function explodeByUpper($data)
     {
-        $arr = array();
-        $len = strlen($data);
-        $j = 0;
-        for($i = 0;$i < $len;$i++)
-        {
-            // 该字母时大写
-            if(strtoupper($data[$i]) == $data[$i])
-            {
-                $j++;
-            }
-            $arr[$j] .= $data[$i];
-        }
-        return $arr;
+        return preg_split('/(?<!^)(?=[A-Z])/', (string)$data);
     }
 
     /**
      * 强制提供值作为数组的一项
-     * 
+     *
      * @param mixed $value 提供的值
      * @param array $array 数组
      * @return mixed
@@ -265,35 +166,81 @@ class Qwin_Util_Array
         return $value;
     }
 
-    /*
-    $arr = array(
-        'datepicker',
-        'colorpicker' => array(
-            'width' => 200,
-            'height' => 100,
-        )
-    );
-    =>
-    $arr = array(
-        'colorpicker' => array(
-            'width' => 200,
-            'height' => 100,
-        ),
-        'datepicker' => '',
-    );
-    */
+    /**
+     * 获取数组下一个键名
+     *
+     * @param string|int $searchKey 当前键名
+     * @param array $array 数组
+     * @return string|int 键名
+     * @see http://www.webmasterworld.com/php/3321169.htm
+     */
+    public static function getNextKey($searchKey, $array)
+    {
+        $nextKey = false;
+        $isFound = false;
+        foreach($array as $key => $value) {
+            if ($isFound) {
+                $nextKey = $key;
+                break;
+            }
+            if ($key == $searchKey) {
+                $isFound = true;
+            }
+        }
+        return $nextKey;
+    }
+
+    /**
+     * 获取数组上一个键名
+     *
+     * @param string|int $searchKey 当前键名
+     * @param array $array 数组
+     * @return string|int 键名
+     */
+    public static function getPrevKey($searchKey, $array)
+    {
+        $prevKey = false;
+        $isFound = false;
+        foreach($array as $key => $value) {
+            if ($isFound) {
+                break;
+            }
+            if ($key == $searchKey) {
+                $isFound = true;
+            } else {
+                $prevKey = $key;
+            }
+        }
+        return $prevKey;
+    }
+
     /**
      * 解码数组,统一数组键名不为数字,方便调用
+     *
+     * @param string $array
+     * @return array
+     * @example $array = array(
+     *              'datepicker',
+     *              'colorpicker' => array(
+     *                  'width' => 200,
+     *                  'height' => 100,
+     *              )
+     *          );
+     *          => $array = array(
+     *              'datepicker' => array(
+     *              ),
+     *              'colorpicker' => array(
+     *                  'width' => 200,
+     *                  'height' => 100,
+     *              )
+     *          );
      */
-    public static function decodeArray($arr)
+    public static function decodeArray($array)
     {
-        self::set($arr);
-        foreach($arr as $key => $val)
-        {
-            if(is_numeric($key))
-            {
-                $arr[$val] = '';
-                unset($arr[$key]);
+        foreach($array as $key => $val) {
+            if (is_numeric($key)) {
+                $array[$val] = array();
+                unset($array[$key]);
             }
         }
         return $arr;
@@ -309,8 +256,7 @@ class Qwin_Util_Array
      */
     public static function extendKey($arr, $fix, $type = 'prefix')
     {
-        if($type == 'prefix')
-        {
+        if ($type == 'prefix') {
             $func_return = '"' . $fix . '".$val';
         } else {
             $func_return = '$val."' . $fix . '"';
@@ -322,29 +268,6 @@ class Qwin_Util_Array
         return array_combine($key_arr, $arr);
     }
 
-    /**
-     * 转换成一维数组
-     * @param <type> $arr
-     * @return <type>
-     */
-    public static function multiToSingle($arr)
-    {
-        $newArr = array();
-        foreach($arr as $key => $val)
-        {
-            if(!is_array($val))
-            {
-                $newArr[$key] = $val;
-            } else {
-                foreach($val as $key2 => $val2)
-                {
-                    $newArr[$key . '_' . $key2] = $val2;
-                }
-            }
-        }
-        return $newArr;
-    }
-
      /**
      * 计算两个数组的交集,键名来自第一个数组,值来自第二个数组
      *
@@ -354,10 +277,8 @@ class Qwin_Util_Array
      */
     public static function intersect($array1, $array2)
     {
-        foreach($array1 as $key)
-        {
-            if(isset($array2[$key]))
-            {
+        foreach ($array1 as $key) {
+            if (isset($array2[$key])) {
                 $array1[$key] = $array2[$key];
             } else {
                 $array1[$key] = null;
