@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Metadata
+ * @subpackage  Session
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -30,7 +30,14 @@
  */
 require_once 'Qwin/Exception.php';
 
+/**
+ * Flow exception
+ *
+ * @package     Qwin
+ * @subpackage  Session
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ */
 class Qwin_Session_Exception extends Qwin_Exception
 {
-
 }

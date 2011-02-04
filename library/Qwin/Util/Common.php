@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Metadata
+ * @subpackage  Util
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -56,8 +56,9 @@ class Qwin_Helper_Util
      * 产生一个UUID号
      *
      * @return string UUID
+     * @see http://stackoverflow.com/questions/2040240/php-function-to-generate-v4-uuid
      */
-    public static function getUuid()
+    public static function uuid()
     {
         return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
             // 32 bits for "time_low"

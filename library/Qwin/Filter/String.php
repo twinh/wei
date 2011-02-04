@@ -161,17 +161,6 @@ class Qwin_Filter_String
     }
     
 
-    /**
-     * 设置一个变量
-     * @param mixed $var
-     * @return <type>
-     */
-    public function set(&$var)
-    {
-        !isset($var) && $var = '';
-        return $var;
-    }
-
     public function implode($arr, $code)
     {
         !is_array($arr) && $arr = array($arr);
