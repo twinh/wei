@@ -16,6 +16,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ * @package     Qwin
+ * @subpackage  Util
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,32 +27,43 @@
 
 class Qwin_Util_Html
 {
+    /**
+     * 生成Js链接
+     *
+     * @param string $file 文件路径
+     * @return string
+     */
     public static function jsTag($file)
     {
         return '<script type="text/javascript" src="' . htmlspecialchars($file) . '"></script>';
     }
 
-    public static function cssLinkTag($file)
+    /**
+     * 生成Css链接
+     *
+     * @param string $file 文件路径
+     * @param string $media 媒介类型
+     * @return string
+     */
+    public static function cssLinkTag($file, $media = 'all')
     {
-        return '<link rel="stylesheet" type="text/css" href="' . htmlspecialchars($file) . '" />';
+        return '<link rel="stylesheet" type="text/css" media="' . $media . '" href="' . htmlspecialchars($file) . '" />';
     }
 
     /**
-     * 为标题增加样式
+     * 为文字增加样式
      *
      * @param string $title
      * @param string $fontStyle 字体样式,用|隔开,如 i|u|b
      * @param sting $color 合法的颜色值,如 red,#000
      * @return string 转换过的标题
      */
-    public static function titleDecorator($title, $fontStyle = null, $color = null)
+    public static function decorateWord($word, $fontStyle = null, $color = null)
     {
         $style = '';
-        $fontStyle = explode('|', $fontStyle);
-        foreach($fontStyle as $type)
-        {
-            switch($type)
-            {
+        $fontStyle = explode('|', (string)$fontStyle);
+        foreach($fontStyle as $type) {
+            switch ($type) {
                 case 'b' :
                     $style .= ' font-weight:  bold;';
                     break;
@@ -64,37 +77,42 @@ class Qwin_Util_Html
                     break;
             }
         }
-        if(null != $color)
-        {
+        if($color) {
             $style .= ' color: ' . $color;
         }
-        return '<span style="'. $style . '">' . $title . '</span>';
+        return '<span style="'. $style . '">' . $word . '</span>';
     }
 
-    public static function jQueryButton($href, $title = null, $icon = 'ui-icon-info')
+    /**
+     * 创建一个图片标签
+     *
+     * @param string $src 图片地址
+     * @param string $alt 图片描述
+     * @param string $width 图片宽度
+     * @param string $height 图片高度
+     * @param string $attr 附加属性
+     * @return string
+     */
+    public static function img($src, $alt = null, $width = null, $height = null, $attr = null)
     {
-        return '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="'
-              . $title . '" href="' . $href . '"><span class="ui-icon ' . $icon .  '">' . $title . '</span></a>';
+        null != $alt    && $attr .= ' alt="' . $alt . '"';
+        null != $width  && $attr .= ' width="' . $width . '"';
+        null != $height && $attr .= ' height="' . $height . '"';
+        return '<img src="' . $src . $attr . ' />';
     }
 
-    public static function img($src, $title = null, $width = null, $height = null, $additionAttr = null)
-    {
-        null == $title && $title = $src;
-        null != $width && $width = ' width="' . $width . '"';
-        null != $height && $height = ' height="' . $height . '"';
-        return '<img src="' . $src . '" alt="' . $title . '"' . $width . $height . ' />';
-    }
-
+    /**
+     * 创建一个链接
+     *
+     * @param string $url 链接地址
+     * @param string $title 文字
+     * @param string $target 打开的窗口目标
+     * @return string
+     */
     public static function link($url, $title = null, $target = null)
     {
         null == $title && $title = $url;
         null != $target && $target = ' target="' . $target . '"';
         return '<a' . $target . ' href="' . $url . '">' . $title . '</a>';
-    }
-
-    public static function jQueryLink($url, $title, $icon, $aClass = null, $target = '_self', $id = null)
-    {
-        isset($id) && $id = ' id="' . $id . '"';
-        return '<a' . $id .' target="' . $target . '" href="' . $url . '" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary ' . $aClass . '" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ' . $icon . '"></span><span class="ui-button-text">' . $title . '</span></a>' . "\r\n";
     }
 }
