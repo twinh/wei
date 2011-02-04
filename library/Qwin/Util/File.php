@@ -25,41 +25,60 @@
  * @since       2009-11-24 20:45:11
  */
 
+/**
+ * 确定系统类型
+ */
+if (!defined('IN_WIN')) {
+    if (substr(PHP_OS, 0, 3) == 'WIN') {
+        defiend('IN_WIN', true);
+    } else {
+        defiend('IN_WIN', false);
+    }
+}
+
 class Qwin_Util_File
-{    
-    public static function writeAsArray($code, $path, $name = '')
+{
+    /**
+     * 将内容以数组的形式写入文件中
+     *
+     * @param mixed $code 内容
+     * @param string $path 路径,如果不存在,会自动创建
+     * @param string|null $name 如果存在,则以此作为数组名字
+     * @return <type> 
+     */
+    public static function writeAsArray($code, $path, $name = null)
     {
         // 创建路径
-        $path = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
         self::makePath($path);
 
-        // 上传
         $code = var_export($code, true);
-        if('' != $name)
-        {
-            $fileData = "<?php\n\$$name = $code;";
+        if (!$name) {
+            $code = "<?php\n\$$name = $code;";
         } else {
-            $fileData = "<?php\nreturn $code;";
+            $code = "<?php\nreturn $code;";
         }
         
-        $result = file_put_contents($path, $fileData);
-        if (false === $result) {
-            throw new Qwin_Helper_Exception('Can not write file "' . $path . '"');
+        if (!file_put_contents($path, $code)) {
+            throw new Qwin_Util_Exception('Can not write into the file "' . $path . '"');
         }
         
         return true;
     }
 
+    /**
+     * 创建路径
+     *
+     * @param string $path 路径
+     */
     public static function makePath($path)
     {
+        $path = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
         $pathArray = explode(DIRECTORY_SEPARATOR, $path);
         unset($pathArray[count($pathArray) - 1]);
         $pathTemp = '';
-        foreach($pathArray as $path)
-        {
+        foreach ($pathArray as $path) {
             $pathTemp .= $path . DIRECTORY_SEPARATOR;
-            if(!is_dir($pathTemp))
-            {
+            if (!is_dir($pathTemp)) {
                 mkdir($pathTemp);
             }
         }
@@ -73,16 +92,14 @@ class Qwin_Util_File
     * @param $type string 回调函数作用的范围,包括 all, dir, file
     * @todo 限定数目等
     */
-    function scanPath($path, $callback, $level = 0, $type = 'all')
+    /*function scanPath($path, $callback, $level = 0, $type = 'all')
     {
         $file_arr = scandir($path);
-        foreach($file_arr as $val)
-        {
-            if($val == '.' || $val == '..')
-            {
+        foreach ($file_arr as $val) {
+            if ($val == '.' || $val == '..') {
                 continue;
             // 目录
-            } elseif(true == is_dir($path . DS . $val)) {
+            } elseif (true == is_dir($path . DS . $val)) {
                 self::_evalScanPathCallBack($callback, $val, $path);
                 self::scanPath($path . $val . DS, $callback);
             // 文件
@@ -90,36 +107,34 @@ class Qwin_Util_File
                 self::_evalScanPathCallBack($callback, $val, $path);
             }
         }        
-    }
+    }*/
     
     // 执行 scanPath 方法的回调函数
     // TODO 动态类 array($class, $method) 静态类 array('class', 'method');
-    private function _evalScanPathCallBack($callback, $file, $path)
+    /*private function _evalScanPathCallBack($callback, $file, $path)
     {
-        if(true == is_array($callback))
-        {
-            if(true == is_object($callback[0]))
-            {
+        if (true == is_array($callback)) {
+            if (true == is_object($callback[0])) {
                 $callback[0] = get_class($callback[0]);
             }
             return eval($callback[0] . '::' . $callback[1] . '("' . $file . '", "' . qw('-str')->decodeEvalVarCode($path) . '");');
         } else {
             return $callback($file, $path);
         }
-    }
+    }*/
     
     /**
-     * 区分大小写的文件存在判断
+     * 判断文件是否存在,区分名称大小写
      * 
      * @param string $file
      * @see thinkphp://Common/functions.php
      */
-    function isExist($file, $case = true) {
+    public function isExist($file, $case = true) {
         if(is_file($file)) {
-            //if(IS_WIN && C('APP_FILE_CASE')) {
+            if (IN_WIN) {
                 if(basename(realpath($file)) != basename($file))
                     return false;
-            //}
+            }
             return true;
         }
         return false;
