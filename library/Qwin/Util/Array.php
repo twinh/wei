@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Helper
+ * @subpackage  Util
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -27,29 +27,24 @@
 
 class Qwin_Util_Array
 {
-
-    public static function set(&$value)
+    /**
+     * 将回调函数作用到给定数组的各级单元上,功能同array_map
+     *
+     * @param array|string $callback 回调方法或函数
+     * @param array $array
+     * @return array
+     * @todo 支持多数组
+     */
+    public static function multiMap($callback, array $array)
     {
-        !is_array($value) && $value = array($value);
-
-        return $value;
-    }
-
-    // 多维数组 array_map
-    public static function multiMap(&$array, $fn_name)
-    {
-        if (is_array($array))
-        {
-            foreach ($array as $key => $value)
-            {
-                if (!is_array($value))
-                {
-                    $array[$key] = $fn_name($value);
-                } else {
-                    self::multiMap($array[$key], $fn_name);
-                }
+        foreach ($array as $key => $value) {
+            if (!is_array($value)) {
+                $array[$key] = call_user_func_array($callback, array($value));
+            } else {
+                $array[$key] = self::multiMap($callback, $array[$key]);
             }
         }
+        return $array;
     }
 
     // 转换为 js 对象
@@ -79,33 +74,6 @@ class Qwin_Util_Array
         } else {
             $cData .= 'null';
         }
-        /*$cData = '';
-
-        if(is_array($qData))
-        {
-            $iCount = count($qData);
-            $i = 1;
-            $cData .= "{\r\n";
-            foreach($qData as $key => $val)
-            {
-                $cData .= $t."    " . self::toJsObject($key, $t."    ") . " : " . self::toJsObject($val, $t."    ");
-                $i != $iCount && $cData .= ",";
-                $cData .= "\r\n";
-                $i++;
-            }
-            $cData .= $t . "}";
-        } elseif(is_string($qData)) {
-            $cData .= "'" . str_replace(array("\\","'"),array("\\\\","\'"),$qData) . "'";
-        } elseif(is_int($qData)) {
-            $cData .= $qData;
-        } elseif(is_numeric($qData)) {
-            $cData .= "'" . $qData . "'";
-        } elseif(is_bool) {
-            $cData .= $qData ? 'true' : 'false';
-        } else {
-            $cData .= 'null';
-        }*/
-
         return $cData;
     }
 
@@ -188,35 +156,11 @@ class Qwin_Util_Array
      * 对变量进行 JSON 编码
      *
      * @see http://gggeek.altervista.org/sw/article_20061113.html
-     * @todo 编码问题, pear and fast
      */
-    public static function jsonEncode($data, $type = 'fast')
+    public static function jsonEncode($data)
     {
-        switch($type)
-        {
-            case 'php' :
-                self::multiMap($data, 'urlencode');
-                $data = json_encode($data);
-                break;
-            case 'qwin' :
-                $data = self::toJsObject($data);
-                break;
-            case 'pear' :
-                require_once 'services_json.php';
-                $value = new Services_JSON();
-                self::multiMap($data, 'urlencode');
-                $data = $value->encode($data);
-                unset($value);
-                break;
-            // 编码正常
-            case 'fast' :
-            default :
-                require_once 'fastjson.php';
-                $value = new FastJSON();
-                $data = $value->encode($data);
-                break;
-        }
-        return $data;
+        require_once 'fastjson.php';
+        return FastJSON::encode($data);
     }
 
     /**
