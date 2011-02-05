@@ -57,6 +57,7 @@ class Qwin_Helper_Util
      *
      * @return string UUID
      * @see http://stackoverflow.com/questions/2040240/php-function-to-generate-v4-uuid
+     * @see http://php.net/manual/en/function.uniqid.php
      */
     public static function uuid()
     {

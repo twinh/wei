@@ -30,9 +30,9 @@
  */
 if (!defined('IN_WIN')) {
     if (substr(PHP_OS, 0, 3) == 'WIN') {
-        defiend('IN_WIN', true);
+        define('IN_WIN', true);
     } else {
-        defiend('IN_WIN', false);
+        define('IN_WIN', false);
     }
 }
 
