@@ -23,11 +23,11 @@
  * @since       2011-01-28 23:51:45
  */
 
-class Widget_CKEditor extends Qwin_Widget_Abstract
+class CKEditor_Widget extends Qwin_Widget_Abstract
 {
     public function render($option)
     {
         $path = $this->getRootPath(__FILE__);
-        require $path . '/view.php';
+        require $path . '/view/default.php';
     }
 }

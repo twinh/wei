@@ -23,7 +23,7 @@
  * @since       2011-02-01 16:29:46
  */
 
-class Widget_Log4php extends Qwin_Widget_Abstract
+class Log4php_Widget extends Qwin_Widget_Abstract
 {
     /**
      * 配置文件名称

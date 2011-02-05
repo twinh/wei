@@ -23,7 +23,7 @@
  * @since       2011-01-29 16:42:43
  */
 
-class Widget_JQuery extends Qwin_Widget_Abstract
+class JQuery_Widget extends Qwin_Widget_Abstract
 {
     public function __construct()
     {

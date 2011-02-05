@@ -108,7 +108,7 @@ class Common_Config_Controller_Config extends Common_ActionController
             $path = QWIN_ROOT_PATH . '/common/config/global.php';
             $globalConfig = require $path;
             $globalConfig[$groupId] = $data;
-            Qwin_Helper_File::writeAsArray($globalConfig, $path);
+            Qwin_Helper_File::writeArray($path, $globalConfig);
             
             $url = $this->url->url($this->_asc, array('action' => 'Index'));
             $this->view->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);

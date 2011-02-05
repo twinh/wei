@@ -373,12 +373,12 @@ class Common_Article_Metadata_Article extends Common_Metadata
 
     public function filterListTitle($value, $name, $data, $copyData)
     {
-        return Qwin_Helper_Html::titleDecorator($value, $copyData['title_style'], $copyData['title_color']);
+        return Qwin_Util_Html::titleDecorator($value, $copyData['title_style'], $copyData['title_color']);
     }
 
     public function filterViewTitle($value, $name, $data, $copyData)
     {
-        return Qwin_Helper_Html::titleDecorator($value, $copyData['title_style'], $copyData['title_color']);
+        return Qwin_Util_Html::titleDecorator($value, $copyData['title_style'], $copyData['title_color']);
     }
 
     public function filterEditTitleStyle($value, $name, $data, $copyData)

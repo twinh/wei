@@ -40,7 +40,6 @@ class Qwin_Flow
             } else {
                 $value = $this->_callFunction($callback, $value);
             }
-            echo $value . '<p>';
         }
         return $value;
     }

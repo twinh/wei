@@ -23,7 +23,7 @@
  * @since       v0.7.0 2011-01-18 15:24:53
  */
 
-class Widget_JqGrid extends Qwin_Widget_Abstract
+class JqGrid_Widget extends Qwin_Widget_Abstract
 {
     /**
      * @var array $_option          界面的配置选项
@@ -183,7 +183,7 @@ class Widget_JqGrid extends Qwin_Widget_Abstract
         $option['pager'] = substr($option['option']['pager'], 1);
 
         $jqGrid = $option['option'];
-        $jqGridJson = Qwin_Helper_Array::jsonEncode($jqGrid);
+        $jqGridJson = Qwin_Util_Array::jsonEncode($jqGrid);
 
         require $this->_rootPath . '/view/default.php';
     }
@@ -201,8 +201,7 @@ class Widget_JqGrid extends Qwin_Widget_Abstract
         // 转换为jqGrid的行数据
         $option['option']['rows'] = $this->filterRowData($option['data'], $option['primaryKey'], $option['layout']);
 
-        // TODO 输出型视图
-        echo Qwin_Helper_Array::jsonEncode($option['option']);
+        return json_encode($option['option']);
     }
 
     /**

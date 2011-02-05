@@ -174,7 +174,7 @@ class Common_View extends Qwin_App_View_Abstract
 
         // TODO
         $search = '<!-- qwin-packer-sign -->';
-        $output = Qwin_Filter_String::replaceFirst($search, $replace, $output);
+        $output = Qwin_Util_String::replaceFirst($search, $replace, $output);
         echo $output;
         unset($output);
     }
