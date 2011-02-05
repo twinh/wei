@@ -66,11 +66,6 @@ class Qwin_Filter_String
         return $str;
     }
     
-    static function date($data, $format = 'Y-m-d')
-    {
-        return date($format, $data);
-    }
-    
     // pw
     function secureCode($mixed,$isint=false,$istrim=false)
     {
@@ -109,7 +104,7 @@ class Qwin_Filter_String
         return $code;
     }
     
-    /**
+   /**
     * 将提供的字符串转化为安全文件名称
     *
     * @param string $path 文件名称
@@ -158,26 +153,5 @@ class Qwin_Filter_String
             $code .= $str[$num];
         }
         return $code;
-    }
-    
-
-    public function implode($arr, $code)
-    {
-        !is_array($arr) && $arr = array($arr);
-        return implode($code, $arr);
-    }
-
-    public function explode($str, $code)
-    {
-        return explode($code, $str);
-    }
-
-    public static function replaceFirst($needle, $replace, $haystack)
-    {
-        $pos = strpos($haystack, $needle);
-        if ($pos === false) {
-            return $haystack;
-        }
-        return substr_replace($haystack, $replace, $pos, strlen($needle));
     }
 }

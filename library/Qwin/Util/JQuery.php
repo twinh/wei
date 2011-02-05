@@ -27,6 +27,13 @@
 
 class Qwin_Util_JQuery
 {
+    public static function icon($href, $title, $icon = 'ui-icon-info')
+    {
+        return '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="'
+              . $title . '" href="' . $href . '"><span class="ui-icon ' . $icon
+              .  '">' . $title . '</span></a>';
+    }
+
     public static function link($url, $title = null, $icon = 'ui-icon-info', $aClass = null, $target = '_self', $id = null)
     {
         isset($id) && $id = ' id="' . $id . '"';
