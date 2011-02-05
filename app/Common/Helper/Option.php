@@ -77,7 +77,7 @@ class Common_Helper_Option
         } else {
             $this->_path = $cachePath;
         }
-        Qwin_Helper_File::makePath($this->_path);
+        Qwin_Util_File::makePath($this->_path);
 
         // 设置默认语言
         if (null == $defaultLang) {
@@ -146,7 +146,7 @@ class Common_Helper_Option
         if (false != $result) {
             $data = @unserialize($result['code']);
             $path = $this->_path . '/' . $lang . '/' . $sign . '.php';
-            Qwin_Helper_File::writeAsArray($data, $path);
+            Qwin_Util_File::writeArray($path, $data);
             return $data;
         }
         return array();
@@ -161,7 +161,7 @@ class Common_Helper_Option
     {
         $code = @unserialize($data['code']);
         $path = $this->_path . '/' . $data['language'] . '/' . $data['sign'] . '.php';
-        Qwin_Helper_File::writeAsArray($code, $path);
+        Qwin_Helper_File::writeArray($path, $code);
     }
 
     /**

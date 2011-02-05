@@ -41,27 +41,55 @@ class Qwin_Util_File
     /**
      * 将内容以数组的形式写入文件中
      *
-     * @param mixed $code 内容
+     * @param mixed $array 内容
      * @param string $path 路径,如果不存在,会自动创建
      * @param string|null $name 如果存在,则以此作为数组名字
      * @return <type> 
      */
-    public static function writeAsArray($code, $path, $name = null)
+    public static function writeArray($path, $array, $name = null)
     {
         // 创建路径
         self::makePath($path);
 
-        $code = var_export($code, true);
+        $array = var_export($array, true);
         if (!$name) {
-            $code = "<?php\n\$$name = $code;";
+            $array = "<?php\n\$$name = $array;";
         } else {
-            $code = "<?php\nreturn $code;";
+            $array = "<?php\nreturn $array;";
         }
         
-        if (!file_put_contents($path, $code)) {
+        if (!file_put_contents($path, $array)) {
             throw new Qwin_Util_Exception('Can not write into the file "' . $path . '"');
         }
         
+        return true;
+    }
+
+    /**
+     * 写入数组到已知数组的文件中
+     * 应注意可能导致读取错误
+     *
+     * @param string $path 文件路径
+     * @param array $array 数组
+     * @param array $name 数组写入的键名
+     * @return boolen
+     */
+    public static function appendArray($path, $array, $name = null)
+    {
+        if (!is_file($path)) {
+            return self::writeArray($path, $array, $name);
+        }
+        $code = null;
+        if ($name) {
+            $code .= var_export($name, true) . ' => ';
+        }
+        $code .= var_export($array, true) . ',' . PHP_EOL . ');';
+
+        // 打开文件,并移动指针到倒数第三位倒数几位分别是 "换行符);"
+        $fp = fopen($path, 'r+');
+        fseek($fp, -3, SEEK_END);
+        fwrite($fp, $code);
+        fclose($fp);
         return true;
     }
 

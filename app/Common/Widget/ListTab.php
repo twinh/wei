@@ -141,7 +141,7 @@ class Common_Widget_ListTab extends Common_Widget
     {
         $output = '';
         foreach ($tab as $row) {
-            $output .= Qwin_Helper_Html::jQueryLink($row['url'], $row['title'], $row['icon'], $row['class'], $row['target'], $row['id']);
+            $output .= Qwin_Util_JQuery::link($row['url'], $row['title'], $row['icon'], $row['class'], $row['target'], $row['id']);
         }
         if ($echo) {
             require $view->decodePath('<resource><theme>/<defaultNamespace>/element/basic/output<suffix>');

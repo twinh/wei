@@ -116,7 +116,7 @@ class Common_View_View extends Common_View
 
             $jqGrid = $jqGridHepler->render($jqGrid);
             $jqGridList[$alias] = $jqGrid;
-            $jqGridListJson[$alias] = Qwin_Helper_Array::jsonEncode($jqGrid);
+            $jqGridListJson[$alias] = Qwin_Util_Array::jsonEncode($jqGrid);
         }
         $group = $meta['group'];
 

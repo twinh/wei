@@ -402,7 +402,7 @@ class Common_Metadata extends Qwin_Metadata
         if (5 != func_num_args()) {
             $data = '';
             foreach ($operation as $row) {
-                $data .= Qwin_Helper_Html::jQueryButton($row['url'], $row['title'], $row['icon']);
+                $data .= Qwin_Util_JQuery::icon($row['url'], $row['title'], $row['icon']);
             }
             return $data;
         } else {

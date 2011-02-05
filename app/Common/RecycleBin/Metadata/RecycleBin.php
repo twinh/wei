@@ -109,7 +109,7 @@ class Common_RecycleBin_Metadata_RecycleBin extends Common_Metadata
         $metadata = $this->metaHelper->getMetadataByAsc($asc);
         $lang = Qwin::run('Common_Helper_Language')->getObjectByAsc($asc);
         
-        return Qwin_Helper_Html::link($this->url->url($asc), $lang->t($metadata['page']['title']));
+        return Qwin_Util_Html::link($this->url->url($asc), $lang->t($metadata['page']['title']));
     }
 
     public function filterDbDeletedAt($value, $name, $data, $dataCopy)
@@ -138,7 +138,7 @@ class Common_RecycleBin_Metadata_RecycleBin extends Common_Metadata
         $operation += parent::filterListOperation($value, $name, $data, $dataCopy, true);
         $data = '';
         foreach ($operation as $row) {
-            $data .= Qwin_Helper_Html::jQueryButton($row['url'], $row['title'], $row['icon']);
+            $data .= Qwin_Util_Html::jQueryButton($row['url'], $row['title'], $row['icon']);
         }
         return $data;
     }

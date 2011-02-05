@@ -197,6 +197,8 @@ class Qwin
         
     }
 
+    protected static $_hook = array();
+
     /**
      * 设置一个钩子
      *
@@ -204,6 +206,26 @@ class Qwin
      * @param array $param 钩子参数
      */
     public static function hook($name, array $param = null)
+    {
+        if (isset(self::$_hook[$name])) {
+            foreach (self::$_hook as $hook) {
+                self::callback($hook);
+            }
+        }
+    }
+
+    /**
+     * 为钩子增加回调结构
+     *
+     * @param string $name
+     * @param array|string $callback
+     */
+    public static function setHookCallback($name, $callback)
+    {
+        
+    }
+
+    protected static function _scanPath($path, array $callback, $depth = 1)
     {
         
     }

@@ -38,7 +38,7 @@ $minify
 <script type="text/javascript">
     jQuery.noConflict();
     <?php echo qw_lang_to_js() ?>
-	Qwin.get = <?php echo Qwin_Helper_Array::toJsObject($_GET);?>;
+	Qwin.get = <?php echo Qwin_Util_Array::jsonEncode($_GET);?>;
 </script>
 </head>
 <body>

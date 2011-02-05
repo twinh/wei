@@ -33,7 +33,7 @@ class Common_View_JqGridJson extends Common_View
         $request = Qwin::run('#request');
         $jqGridWidget = $this->widget->get('jqgrid');
 
-        $jqGridWidget->renderJson(array(
+        $json = $jqGridWidget->renderJson(array(
             'data'          => $this->data,
             'layout'        => $this->layout,
             'primaryKey'    => $this->primaryKey,
@@ -44,6 +44,8 @@ class Common_View_JqGridJson extends Common_View
             ),
         ));
 
+        // TODO 输出型视图
+        echo $json;
         $this->setDisplayed();
     }
 }

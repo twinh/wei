@@ -85,7 +85,7 @@ class Qwin_Widget
             throw new Qwin_Widget_Exception('Can not find the widget : "' . $name . '"');
         }
 
-        $class = 'Widget_' . ucfirst($name);
+        $class = ucfirst($name) . '_Widget';
 
         return Qwin::run($class);
     }
@@ -104,14 +104,14 @@ class Qwin_Widget
         }
 
         // 查看主文件是否存在
-        $file = $this->_rootPath . '/' . $name . '/' . $name . '.php';
+        $file = $this->_rootPath . '/' . $name . '/widget.php';
         if (!file_exists($file)) {
             return false;
         }
 
         // 加载并查看类是否存在
         require_once $file;
-        $class = 'Widget_' . ucfirst($name);
+        $class = ucfirst($name) . '_Widget';
         if (!class_exists($class)) {
             return false;
         }

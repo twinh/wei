@@ -43,7 +43,7 @@ class Common_View_AddForm extends Common_View
         $layout = $metaHelper->getTableLayout($meta, $orderedFeid, 'add', $meta['page']['tableLayout']);
 
         $group = $meta['group'];
-        $jQueryValidateCode = Qwin_Helper_Array::jsonEncode($metaHelper->getJQueryValidateCode($meta));
+        $jQueryValidateCode = Qwin_Util_Array::jsonEncode($metaHelper->getJQueryValidateCode($meta));
 
         $this->assign(get_defined_vars());
     }

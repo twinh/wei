@@ -23,7 +23,7 @@
  * @since       2011-01-31 14:24:51
  */
 
-class Widget_Minify extends Qwin_Widget_Abstract
+class Minify_Widget extends Qwin_Widget_Abstract
 {
     /**
      * 
