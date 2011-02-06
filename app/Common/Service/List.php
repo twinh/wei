@@ -63,9 +63,9 @@ class Common_Service_List extends Common_Service_BasicAction
     {
         // 初始配置
         $option = $this->_multiArrayMerge($this->_option, $option);
-        $metaHelper = Qwin::run('Qwin_App_Metadata');
+        $metaHelper = Qwin::call('Qwin_App_Metadata');
         if (null == $option['this']) {
-            $option['this'] = Qwin::run($metaHelper->getClassName('Controller', $option['asc']));
+            $option['this'] = Qwin::call($metaHelper->getClassName('Controller', $option['asc']));
         }
 
         // 通过父类,加载语言,元数据,模型等
@@ -117,7 +117,7 @@ class Common_Service_List extends Common_Service_BasicAction
         );
         // 加载视图
         if ($option['view']['display']) {
-            $view = Qwin::run($option['view']['class']);
+            $view = Qwin::call($option['view']['class']);
             $view->assign($result['view']['data']);
         }
         return $view;

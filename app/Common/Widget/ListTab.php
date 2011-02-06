@@ -43,8 +43,8 @@ class Common_Widget_ListTab extends Common_Widget
      */
     public function render($param, $view)
     {
-        $url = Qwin::run('-url');
-        $lang = Qwin::run('-lang');
+        $url = Qwin::call('-url');
+        $lang = Qwin::call('-lang');
         $tab = array();
 
         // 获取应用结构配置

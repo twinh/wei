@@ -107,7 +107,7 @@ class Common_RecycleBin_Metadata_RecycleBin extends Common_Metadata
             'controller' => $value[2],
         );
         $metadata = $this->metaHelper->getMetadataByAsc($asc);
-        $lang = Qwin::run('Common_Helper_Language')->getObjectByAsc($asc);
+        $lang = Qwin::call('Common_Helper_Language')->getObjectByAsc($asc);
         
         return Qwin_Util_Html::link($this->url->url($asc), $lang->t($metadata['page']['title']));
     }
@@ -119,15 +119,15 @@ class Common_RecycleBin_Metadata_RecycleBin extends Common_Metadata
 
     public function filterDbDeletedBy($value, $name, $data, $dataCopy)
     {
-        $member = Qwin::run('-session')->get('member');
+        $member = Qwin::call('-session')->get('member');
         return $member['id'];
     }
 
     public function filterListOperation($value, $name, $data, $dataCopy)
     {
         $primaryKey = $this->db['primaryKey'];
-        $url = Qwin::run('-url');
-        $lang = Qwin::run('-lang');
+        $url = Qwin::call('-url');
+        $lang = Qwin::call('-lang');
         $asc = $this->getAscFromClass();
         $operation = array();
         $operation['restore'] = array(

@@ -99,7 +99,7 @@ class Qwin_App_Metadata extends Qwin_Metadata
             return $this->_tablePrefix;
         }
         if (null == $adapter) {
-            $config = Qwin::run('-config');
+            $config = Qwin::call('-config');
             $adapter = $config['database']['mainAdapter'];
         }
         $this->_tablePrefix = $config['database']['adapter'][$adapter]['prefix'];
@@ -117,7 +117,7 @@ class Qwin_App_Metadata extends Qwin_Metadata
     {
         if (!isset($asc['namespace'])) {
             if (!isset($this->config)) {
-                $this->config = Qwin::run('-config');
+                $this->config = Qwin::call('-config');
             }
             $asc['namespace'] = $this->config['asc']['namespace'];
         }
@@ -156,7 +156,7 @@ class Qwin_App_Metadata extends Qwin_Metadata
         $metaClass  = $this->getClassName('Metadata', $asc);
         $modelClass = $this->getClassName('Model', $asc);
         $meta       = Qwin_Metadata_Manager::get($metaClass);
-        $model      = Qwin::run($modelClass);
+        $model      = Qwin::call($modelClass);
         return $this->getQuery($meta, $model, $type, $name);
     }
 
@@ -175,7 +175,7 @@ class Qwin_App_Metadata extends Qwin_Metadata
         if (null == $model) {
             $asc = $meta->getAscFromClass();
             $modelClass = $this->getClassName('Model', $asc);
-            $model = Qwin::run($modelClass);
+            $model = Qwin::call($modelClass);
         } else {
             $modelClass = get_class($model);
         }
@@ -206,7 +206,7 @@ class Qwin_App_Metadata extends Qwin_Metadata
             // 该模型的设置
             $modelSet = $meta['model'][$joinModelName];
             $relatedMetaObject = Qwin_Metadata_Manager::get($modelSet['metadata']);
-            $relatedModelObejct = Qwin::run($modelSet['name']);
+            $relatedModelObejct = Qwin::call($modelSet['name']);
             $this->metadataToModel($relatedMetaObject, $relatedModelObejct);
 
             // 设置模型关系
@@ -290,7 +290,7 @@ class Qwin_App_Metadata extends Qwin_Metadata
             $meta = Qwin_Metadata_Manager::get($metadataName);
         } else {
             $metadataName = 'Application_Metadata';
-            $meta = Qwin::run($metadataName);
+            $meta = Qwin::call($metadataName);
         }
         Qwin::set('-meta', $metadataName);
         return $meta;
@@ -943,8 +943,8 @@ class Qwin_App_Metadata extends Qwin_Metadata
             return false;
         }
 
-        $session = Qwin::run('-session');
-        $lang = Qwin::run('-lang');
+        $session = Qwin::call('-session');
+        $lang = Qwin::call('-lang');
         
         $item = (array)$session->get('lastViewedItem');
         $key = get_class($meta) . $result[$meta['db']['primaryKey']];
@@ -1000,7 +1000,7 @@ class Qwin_App_Metadata extends Qwin_Metadata
         {
             return true;
         }
-        $ext = Qwin::run('Qwin_Class_Extension');
+        $ext = Qwin::call('Qwin_Class_Extension');
         foreach ($validator['rule'] as $rule => $param) {
             $class = $ext->getClass($rule);
             if (false == $class) {
@@ -1060,7 +1060,7 @@ class Qwin_App_Metadata extends Qwin_Metadata
      */
     public function getJQueryValidateCode($meta, $relatedName = false)
     {
-        $lang = Qwin::run('-lang');
+        $lang = Qwin::call('-lang');
         $validation = array(
             'rules' => array(),
             'messages' => array(),
@@ -1224,7 +1224,7 @@ class Qwin_App_Metadata extends Qwin_Metadata
 
     public function saveRelatedDbData($meta, $data, $query)
     {
-        $ctrler = Qwin::run('-controller');
+        $ctrler = Qwin::call('-controller');
         foreach ($meta['model'] as $model) {
             if ('relatedDb' == $model['type']) {
                 /*
@@ -1267,7 +1267,7 @@ class Qwin_App_Metadata extends Qwin_Metadata
                  * 保存数据
                  */
                 $relatedDbQuery = $meta->getQuery($model['set']);
-                $ini = Qwin::run('-ini');
+                $ini = Qwin::call('-ini');
                 $modelName = $ini->getClassName('Model', $model['set']);
                 $relatedDbQuery = new $modelName;
                 $relatedDbQuery->fromArray($relatedData);

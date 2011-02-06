@@ -29,7 +29,7 @@ class Common_Management_Controller_Namespace extends Common_Controller
 {
     public function  __construct()
     {
-        $this->_app = Qwin::run('Qwin_App_Application');
+        $this->_app = Qwin::call('Qwin_App_Application');
         $this->_path = $this->_app->getDefultPath();
         $this->_rootAppPath = $this->_app->getRootAppPath();
         parent::__construct();
@@ -43,7 +43,7 @@ class Common_Management_Controller_Namespace extends Common_Controller
     public function actionIndex()
     {
         $meta = $this->_meta;
-        $theme = Qwin::run('-ini')->getConfig('interface.theme');
+        $theme = Qwin::call('-ini')->getConfig('interface.theme');
         $namespace[$this->_path] = $this->_app->getNamespace($this->_path);
         $namespace[$this->_rootAppPath] = $this->_app->getNamespace($this->_rootAppPath);
 
@@ -68,7 +68,7 @@ class Common_Management_Controller_Namespace extends Common_Controller
         $this->_view = array(
             'class' => 'Common_View',
             'element' => array(
-                array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/management/namespace-list.php'),
+                array('content', QWIN . '/view/theme/' . $theme . '/element/management/namespace-list.php'),
             ),
             'data' => get_defined_vars(),
         );
@@ -81,11 +81,11 @@ class Common_Management_Controller_Namespace extends Common_Controller
      */
     public function actionAdd()
     {
-        $app = Qwin::run('Qwin_App_Application');
+        $app = Qwin::call('Qwin_App_Application');
         if(empty($_POST))
         {
             // 初始化常用的变量
-            $metaHelper = Qwin::run('Qwin_App_Metadata');
+            $metaHelper = Qwin::call('Qwin_App_Metadata');
             $meta = $this->_meta;
             $primaryKey = $meta['db']['primaryKey'];
             $primaryKeyValue = $config['data']['primaryKeyValue'];
@@ -93,13 +93,13 @@ class Common_Management_Controller_Namespace extends Common_Controller
             $namespace = $this->_app->getNamespace($this->_path);
             $banNamespace = implode(',', $namespace);
 
-            $theme = Qwin::run('-ini')->getConfig('interface.theme');
+            $theme = Qwin::call('-ini')->getConfig('interface.theme');
 
-            $jQueryValidateCode = Qwin::run('-arr')->jsonEncode($this->_meta->getJQueryValidateCode($meta['field']));
+            $jQueryValidateCode = Qwin::call('-arr')->jsonEncode($this->_meta->getJQueryValidateCode($meta['field']));
             $this->_view = array(
                 'class' => 'Common_View',
                 'element' => array(
-                    array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/management/add-namespace.php'),
+                    array('content', QWIN . '/view/theme/' . $theme . '/element/management/add-namespace.php'),
                 ),
                 'data' => get_defined_vars(),
             );
@@ -116,7 +116,7 @@ class Common_Management_Controller_Namespace extends Common_Controller
             }
             mkdir($this->_path . '/' . $_POST['namespace']);
 
-            $url = Qwin::run('-url')->url($this->_asc, array('action' => 'Index'));
+            $url = Qwin::call('-url')->url($this->_asc, array('action' => 'Index'));
             return $this->view->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }
@@ -141,7 +141,7 @@ class Common_Management_Controller_Namespace extends Common_Controller
 
         // 删除目录,跳转回列表页
         rmdir($path);
-        $url = Qwin::run('-url')->url($this->_asc, array('action' => 'Index'));
+        $url = Qwin::call('-url')->url($this->_asc, array('action' => 'Index'));
         return $this->view->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
     }
 }

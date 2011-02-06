@@ -123,8 +123,8 @@ class Common_Config_Controller_Config extends Common_ActionController
     public function actionCenter()
     {
         $metaHelper = $this->metaHelper;
-        $url = Qwin::run('-url');
-        $lang = Qwin::run('-lang');
+        $url = Qwin::call('-url');
+        $lang = Qwin::call('-lang');
         $meta = $this->_meta;
 
         // 分组的数据

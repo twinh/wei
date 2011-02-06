@@ -30,7 +30,7 @@
 $jQueryFile['tabs'] = $jQuery->loadUi('tabs', false);
 $minify->add($jQueryFile['tabs']['css'])
 	->add($jQueryFile['tabs']['js'])
-	->add(QWIN_RESOURCE_PATH . '/view/theme/default/common/script/form.js');
+	->add(QWIN . '/view/theme/default/common/script/form.js');
 $operationField =  $this->loadWidget('Common_Widget_FormLink', array($data, $primaryKey));
 ?>
 <script>

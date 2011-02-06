@@ -52,7 +52,7 @@ class Qwin_Util_File
         self::makePath($path);
 
         $array = var_export($array, true);
-        if (!$name) {
+        if ($name) {
             $array = "<?php\n\$$name = $array;";
         } else {
             $array = "<?php\nreturn $array;";

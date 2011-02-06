@@ -29,8 +29,8 @@ class Common_Widget_FormLink extends Common_Widget
     {
         $manager = Qwin_App_Manager::getInstance();
         $asc = $view['asc'];
-        $url = Qwin::run('-url');
-        $lang = Qwin::run('-lang');
+        $url = Qwin::call('-url');
+        $lang = Qwin::call('-lang');
         $controller = $manager->getClass('controller', $asc);
         $varList = get_class_vars($controller);
         if (isset($varList['_forbiddenAction'])) {

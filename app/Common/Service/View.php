@@ -123,7 +123,7 @@ class Common_Service_View extends Common_Service_BasicAction
         );
         // 加载视图
         if ($option['view']['display']) {
-            $view = Qwin::run($option['view']['class']);
+            $view = Qwin::call($option['view']['class']);
             $view->assign($result['view']['data']);
         }
         return $view;

@@ -33,8 +33,8 @@ class Common_Article_Controller_Article extends Common_ActionController
      */
     /*public function actionHtml()
     {
-        $ini = Qwin::run('-ini');
-        $gpc = Qwin::run('-gpc');
+        $ini = Qwin::call('-ini');
+        $gpc = Qwin::call('-gpc');
         $meta = &$this->__meta;
 
         // 加载关联模型,元数据
@@ -71,7 +71,7 @@ class Common_Article_Controller_Article extends Common_ActionController
         // 检查模板文件是否存在
         if(!file_exists($data['template']))
         {
-            Qwin::run('Qwin_Helper_Js')->show($this->t('MSG_TEMPLATE_NOT_EXISTS'), url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], 'Edit'), array('id' => $data['id'])));
+            Qwin::call('Qwin_Helper_Js')->show($this->t('MSG_TEMPLATE_NOT_EXISTS'), url(array($this->_set['namespace'], $this->_set['module'], $this->_set['controller'], 'Edit'), array('id' => $data['id'])));
         }
         if(!empty($data['page_name']))
         {

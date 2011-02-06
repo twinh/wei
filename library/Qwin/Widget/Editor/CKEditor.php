@@ -34,16 +34,16 @@ class Qwin_Widget_Editor_CKEditor
 
     public function render($meta)
     {
-        $code = '<script type="text/javascript" src="' . QWIN_RESOURCE_PATH . '/js/ckeditor/ckeditor.js"></script>
-                 <script type="text/javascript" src="' . QWIN_RESOURCE_PATH . '/js/ckfinder/ckfinder.js"></script>
+        $code = '<script type="text/javascript" src="' . QWIN . '/js/ckeditor/ckeditor.js"></script>
+                 <script type="text/javascript" src="' . QWIN . '/js/ckfinder/ckfinder.js"></script>
                  <script type="text/javascript">
                     var ckeditor = CKEDITOR.replace("' . $meta['id'] . '");
-                    CKFinder.setupCKEditor(ckeditor, "' . QWIN_RESOURCE_PATH . '/js/ckfinder/" );
+                    CKFinder.setupCKEditor(ckeditor, "' . QWIN . '/js/ckfinder/" );
                  </script>
         ';
 
         // 配置 CKFinder
-        require_once QWIN_RESOURCE_PATH . DS . 'js/ckfinder/qwin_interface.php';
+        require_once QWIN . DS . 'js/ckfinder/qwin_interface.php';
         $qwin_interface = new Qwin_CKFinder_Interface();
         // TODO param 2 登陆的标准
         $path = dirname($_SERVER['SCRIPT_NAME']) . '/upload/';

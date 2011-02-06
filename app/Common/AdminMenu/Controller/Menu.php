@@ -32,6 +32,6 @@ class Common_AdminMenu_Controller_Menu extends Common_ActionController
         $query = $this->metaHelper->getQueryByAsc($this->_asc);
         $query->orderBy('order ASC');
         $data = $query->execute()->toArray();
-        Qwin::run('Qwin_Cache_List')->writeCache($data, 'AdminMenu');
+        Qwin::call('Qwin_Cache_List')->writeCache($data, 'AdminMenu');
     }
 }

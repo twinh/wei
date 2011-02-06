@@ -65,7 +65,7 @@ class Common_Management_Controller_Module extends Common_Controller
 
     public function  __construct()
     {
-        $this->_app = Qwin::run('Qwin_App_Application');
+        $this->_app = Qwin::call('Qwin_App_Application');
         $this->_path = $this->_app->getDefultPath();
 
         // 初始化部分常用对象
@@ -97,7 +97,7 @@ class Common_Management_Controller_Module extends Common_Controller
         }
 
         $meta = $this->_meta;
-        $theme = Qwin::run('-ini')->getConfig('interface.theme');
+        $theme = Qwin::call('-ini')->getConfig('interface.theme');
         $namespace = $this->_namespace;
 
         // 构建数组
@@ -115,7 +115,7 @@ class Common_Management_Controller_Module extends Common_Controller
         $this->_view = array(
             'class' => 'Common_View',
             'element' => array(
-                array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/management/module-list.php'),
+                array('content', QWIN . '/view/theme/' . $theme . '/element/management/module-list.php'),
             ),
             'data' => get_defined_vars(),
         );
@@ -130,13 +130,13 @@ class Common_Management_Controller_Module extends Common_Controller
             $meta['field']->set('namespace_value.form._value', $this->_namespace);
             $banModule = implode(',', $this->_moduleList);
 
-            $theme = Qwin::run('-ini')->getConfig('interface.theme');
+            $theme = Qwin::call('-ini')->getConfig('interface.theme');
 
-            $jQueryValidateCode = Qwin::run('-arr')->jsonEncode($this->_meta->getJQueryValidateCode($meta['field']));
+            $jQueryValidateCode = Qwin::call('-arr')->jsonEncode($this->_meta->getJQueryValidateCode($meta['field']));
             $this->_view = array(
                 'class' => 'Common_View',
                 'element' => array(
-                    array('content', QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/management/add-module.php'),
+                    array('content', QWIN . '/view/theme/' . $theme . '/element/management/add-module.php'),
                 ),
                 'data' => get_defined_vars(),
             );
@@ -163,13 +163,13 @@ class Common_Management_Controller_Module extends Common_Controller
             mkdir($path . '/Language');
 
             // 创建默认控制器,元数据,模型,语言类
-            $applicationFile = Qwin::run('Project_Helper_ApplicationFile');
+            $applicationFile = Qwin::call('Project_Helper_ApplicationFile');
             $applicationFile->createControllerFile($this->_namespace, $module);
             $applicationFile->createMetadataFile($this->_namespace, $module);
             $applicationFile->createModelFile($this->_namespace, $module);
             $applicationFile->createLanguageFile($this->_namespace, $module, $this->getLanguage());
 
-            $url = Qwin::run('-url')->url($this->_asc, array('action' => 'Index', 'namespace_value' => $this->_namespace));
+            $url = Qwin::call('-url')->url($this->_asc, array('action' => 'Index', 'namespace_value' => $this->_namespace));
             return $this->view->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }

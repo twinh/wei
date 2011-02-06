@@ -28,8 +28,8 @@ class Common_RecycleBin_Widget_ListTab extends Common_Widget
     public function render($param, $view)
     {
         $asc = $view['asc'];
-        $url = Qwin::run('-url');
-        $lang = Qwin::run('-lang');
+        $url = Qwin::call('-url');
+        $lang = Qwin::call('-lang');
 
         // 替换添加,删除的链接
         $param['tab']['restore'] = array(

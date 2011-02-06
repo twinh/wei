@@ -29,7 +29,7 @@ class Common_Member_Controller_Log extends Common_Controller
 {
     public function actionLogin()
     {
-        $js = Qwin::run('Qwin_Helper_Js');
+        $js = Qwin::call('Qwin_Helper_Js');
         $meta = $this->_meta;
 
         // 提示已经登陆的信息
@@ -55,7 +55,7 @@ class Common_Member_Controller_Log extends Common_Controller
 
     public function actionLogout()
     {
-        return Qwin::run('Common_Member_Service_Logout')->process(array(
+        return Qwin::call('Common_Member_Service_Logout')->process(array(
             'asc' => $this->_asc,
             'this' => $this,
         ));

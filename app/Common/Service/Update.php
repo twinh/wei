@@ -66,11 +66,11 @@ class Common_Service_Update extends Common_Service_BasicAction
         parent::process($option['asc']);
 
         // 初始化常用的变量
-        $metaHelper = Qwin::run('Qwin_App_Metadata');
+        $metaHelper = Qwin::call('Qwin_App_Metadata');
         $meta = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
         $primaryKeyValue = isset($option['data']['db'][$primaryKey]) ? $option['data']['db'][$primaryKey] : null;
-        Qwin::run('Qwin_Class_Extension')
+        Qwin::call('Qwin_Class_Extension')
             ->setNamespace('validator')
             ->addClass('Qwin_Validator_JQuery');
         

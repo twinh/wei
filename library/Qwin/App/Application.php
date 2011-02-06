@@ -38,7 +38,7 @@ class Qwin_App_Application
      */
     public function getDefultPath()
     {
-        return realpath(QWIN_RESOURCE_PATH . '/application');
+        return realpath(QWIN . '/application');
     }
 
     /**

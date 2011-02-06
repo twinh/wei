@@ -27,12 +27,12 @@ class Qwin_Widget_Editor_Option
 {
     public function render($meta)
     {
-        $lang = Qwin::run('-lang');
-        $jquery = Qwin::run('Qwin_Resource_JQuery');
+        $lang = Qwin::call('-lang');
+        $jquery = Qwin::call('Qwin_Resource_JQuery');
         $id = $meta['id'];
-        $view = Qwin::run('-view');
-        $cssPacker = Qwin::run('Qwin_Packer_Css');
-        $jsPacker = Qwin::run('Qwin_Packer_Js');
+        $view = Qwin::call('-view');
+        $cssPacker = Qwin::call('Qwin_Packer_Css');
+        $jsPacker = Qwin::call('Qwin_Packer_Js');
         $codeMeta = $view['metaHelper']->getMetadataByAsc(array(
             'namespace' => 'Common',
             'module' => 'Option',
@@ -53,9 +53,9 @@ class Qwin_Widget_Editor_Option
         $jsPacker
             ->add($jQueryFile['mouse']['js'])
             ->add($jQueryFile['sortable']['js'])
-            ->add(QWIN_RESOURCE_PATH . '/js/qwin/json2.js')
+            ->add(QWIN . '/js/qwin/json2.js')
             ->add($jQueryFile['optionEditor']['js']);
 
-        require QWIN_RESOURCE_PATH . '/view/widget/editor-option.php';
+        require QWIN . '/view/widget/editor-option.php';
     }
 }

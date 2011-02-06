@@ -123,8 +123,8 @@ class Common_Category_Metadata_Category extends Common_Metadata
     public function filterListOperation($value, $name, $data, $copyData)
     {
         $primaryKey = $this->db['primaryKey'];
-        $url = Qwin::run('-url');
-        $lang = Qwin::run('-lang');
+        $url = Qwin::call('-url');
+        $lang = Qwin::call('-lang');
         $set = $this->getAscFromClass();
         $link = $url->url($set, array('action' => 'Add', '_data[parent_id]' => $data[$primaryKey]));
         $html = Qwin_Util_Html::jQueryButton($link, $lang->t('LBL_ACTION_ADD_SUBCATEGORY'), 'ui-icon-plusthick')
@@ -139,7 +139,7 @@ class Common_Category_Metadata_Category extends Common_Metadata
             // 缓存Tree对象
             if(!isset($this->treeObj))
             {
-                $this->treeObj = Qwin::run('Qwin_Tree');
+                $this->treeObj = Qwin::call('Qwin_Tree');
             }
             $layer = $this->treeObj->getLayer($data['id']);
             // 只有一层

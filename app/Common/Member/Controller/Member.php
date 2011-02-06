@@ -59,7 +59,7 @@ class Common_Member_Controller_Member extends Common_ActionController
                 ),
                 'this' => $this,
             );
-            return Qwin::run('Common_Service_View')->process($config);
+            return Qwin::call('Common_Service_View')->process($config);
         } else {
             /**
              * @see Common_Service_Update $_config
@@ -75,7 +75,7 @@ class Common_Member_Controller_Member extends Common_ActionController
                 ),
                 'this' => $this,
             );
-            return Qwin::run('Common_Service_Update')->process($config);
+            return Qwin::call('Common_Service_Update')->process($config);
         }
     }
 
@@ -106,7 +106,7 @@ class Common_Member_Controller_Member extends Common_ActionController
      */
     public function actionIsUsernameExists()
     {
-        $username = Qwin::run('-gpc')->g('usesrname');
+        $username = Qwin::call('-gpc')->g('usesrname');
         if(true == $this->isUsernameExists($username))
         {
             echo 1;
@@ -132,7 +132,7 @@ class Common_Member_Controller_Member extends Common_ActionController
     {
         if('EditPassword' == $action)
         {
-            $url = Qwin::run('-url')->url(array('module' => 'Member', 'controller' => 'Log', 'action' => 'Logout'));
+            $url = Qwin::call('-url')->url(array('module' => 'Member', 'controller' => 'Log', 'action' => 'Logout'));
             $this->view->setRedirectView('LOGIN', $url)
                     ->loadView()
                     ->display();

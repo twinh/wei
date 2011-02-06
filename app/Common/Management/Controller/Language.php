@@ -32,12 +32,12 @@ class Common_Management_Controller_Language extends Common_Controller
         $class1 = $this->request->g('class1');
         $class2 = $this->request->g('class2');
 
-        $object1 = Qwin::run($class1);
+        $object1 = Qwin::call($class1);
         if(!is_subclass_of($object1, 'Common_Language'))
         {
             exit('类1不是语言类');
         }
-        $object2 = Qwin::run($class2);
+        $object2 = Qwin::call($class2);
         if(!is_subclass_of($object2, 'Common_Language'))
         {
             exit('类2不是语言类');

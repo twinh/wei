@@ -30,14 +30,14 @@ class Common_View_JqGrid extends Common_View
     public function preDisplay()
     {
         // 初始变量,方便调用
-        $manager        = Qwin::run('-manager');
+        $manager        = Qwin::call('-manager');
         $primaryKey     = $this->primaryKey;
         $meta           = $this->meta;
         $metaHepler     = $this->metaHelper;
-        $request        = Qwin::run('#request');
-        $lang           = Qwin::run('-lang');
-        $config         = Qwin::run('-config');
-        $url            = Qwin::run('-url');
+        $request        = Qwin::call('#request');
+        $lang           = Qwin::call('-lang');
+        $config         = Qwin::call('-config');
+        $url            = Qwin::call('-url');
         $asc            = $config['asc'];
         $ascString      = strtolower(implode('-', $asc));
 

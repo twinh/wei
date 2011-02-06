@@ -61,10 +61,10 @@ class Common_Service_Insert extends Common_Service_BasicAction
     {
         // 初始配置
         $config = $this->_multiArrayMerge($this->_config, $config);
-        $metaHelper = Qwin::run('Qwin_App_Metadata');
+        $metaHelper = Qwin::call('Qwin_App_Metadata');
         if(null == $config['this'])
         {
-            $config['this'] = Qwin::run($metaHelper->getClassName('Controller', $config['set']));
+            $config['this'] = Qwin::call($metaHelper->getClassName('Controller', $config['set']));
         }
 
         // 通过父类,加载语言,元数据,模型等
@@ -74,7 +74,7 @@ class Common_Service_Insert extends Common_Service_BasicAction
         $meta = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
         $query = $metaHelper->getQueryByAsc($this->_asc, 'db');
-        Qwin::run('Qwin_Class_Extension')
+        Qwin::call('Qwin_Class_Extension')
             ->setNamespace('validator')
             ->addClass('Qwin_Validator_JQuery');
 

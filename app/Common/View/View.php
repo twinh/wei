@@ -34,12 +34,12 @@ class Common_View_View extends Common_View
         $meta           = $this->meta;
         $metaHelper     = $this->metaHelper;
         $data           = $this->data;
-        $request        = Qwin::run('#request');
-        $config         = Qwin::run('-config');
-        $url            = Qwin::run('-url');
+        $request        = Qwin::call('#request');
+        $config         = Qwin::call('-config');
+        $url            = Qwin::call('-url');
         $asc            = $config['asc'];
-        $lang           = Qwin::run('-lang');
-        $langHelper     = Qwin::run('Common_Helper_Language');
+        $lang           = Qwin::call('-lang');
+        $langHelper     = Qwin::call('Common_Helper_Language');
         $jqGridHepler   = new Common_Helper_JqGrid();
         $jqGrid         = array();
 

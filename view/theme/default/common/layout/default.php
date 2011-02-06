@@ -5,7 +5,7 @@
 <title><?php echo qw_lang('LBL_HTML_TITLE') ?></title>
 <!-- qwin-packer-sign -->
 <?php
-$member = Qwin::run('-session')->get('member');
+$member = Qwin::call('-session')->get('member');
 $nickname = isset($member['contact']) ? $member['contact']['nickname'] : $member['username'];
 $jQueryFile = array(
     'core'          => $jQuery->loadUi('core', false),
@@ -15,17 +15,17 @@ $jQueryFile = array(
     'qui'           => $jQuery->loadPlugin('qui', null, false),
 );
 $minify
-    ->add(QWIN_RESOURCE_PATH . '/view/style/' . $this->_style . '/jquery.ui.theme.css')
-    ->add(QWIN_RESOURCE_PATH . '/view/theme/default/common/style/style.css')
+    ->add(QWIN . '/view/style/' . $this->_style . '/jquery.ui.theme.css')
+    ->add(QWIN . '/view/theme/default/common/style/style.css')
     ->add($jQueryFile['core']['css'])
     ->add($jQueryFile['widget']['css'])
     ->add($jQueryFile['button']['css'])
     ->add($jQueryFile['qui']['css'])
-	->add(QWIN_RESOURCE_PATH . '/image/iconx.css')
+	->add(QWIN . '/image/iconx.css')
     ->add($jQuery->loadCore(false))
-    ->add(QWIN_RESOURCE_PATH . '/js/qwin/qwin.js')
-    ->add(QWIN_RESOURCE_PATH . '/js/qwin/url.js')
-    ->add(QWIN_RESOURCE_PATH . '/view/theme/default/common/script/style.js')
+    ->add(QWIN . '/js/qwin/qwin.js')
+    ->add(QWIN . '/js/qwin/url.js')
+    ->add(QWIN . '/view/theme/default/common/script/style.js')
     ->add($jQueryFile['core']['js'])
     ->add($jQueryFile['widget']['js'])
     ->add($jQueryFile['button']['js'])
@@ -33,7 +33,7 @@ $minify
     ->add($jQueryFile['qui']['js']);
 ?>
 <!--[if IE 6]>
-<link rel="stylesheet" type="text/css" media="all" href="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/default/common/style/style-ie6.css" />
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo QWIN ?>/view/theme/default/common/style/style-ie6.css" />
 <![endif]-->
 <script type="text/javascript">
     jQuery.noConflict();
@@ -61,7 +61,7 @@ $minify
             </div>
     <div class="ui-header-logo ui-widget-content">
         <a href="?">
-            <img src="<?php echo QWIN_RESOURCE_PATH ?>/view/theme/default/common/image/logo.png" alt="logo" />
+            <img src="<?php echo QWIN ?>/view/theme/default/common/image/logo.png" alt="logo" />
         </a>
             </div>
     <?php $this->loadWidget('Common_Widget_NavigationBar') ?>

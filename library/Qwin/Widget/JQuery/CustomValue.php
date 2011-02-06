@@ -34,9 +34,9 @@ class Qwin_Widget_JQuery_CustomValue
 
     public function render($meta)
     {
-        $jquery = Qwin::run('Qwin_Resource_JQuery');
-        $cssPacker = Qwin::run('Qwin_Packer_Css');
-        $jsPacker = Qwin::run('Qwin_Packer_Js');
+        $jquery = Qwin::call('Qwin_Resource_JQuery');
+        $cssPacker = Qwin::call('Qwin_Packer_Css');
+        $jsPacker = Qwin::call('Qwin_Packer_Js');
         
         $file = $jquery->loadPlugin('customvalue', null, false);
         $cssPacker->add($file['css']);

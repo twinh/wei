@@ -29,7 +29,7 @@ class Common_File_Controller_JQuery extends Qwin_App_Controller
 {
     public function actionAjaxUpload()
     {
-        $str = Qwin::run('Qwin_filter_String');
+        $str = Qwin::call('Qwin_filter_String');
         // 是否有上传文件
         $name = 'userfile';
         !isset($_FILES[$name]) && exit('Forbidden');
@@ -48,7 +48,7 @@ class Common_File_Controller_JQuery extends Qwin_App_Controller
         }
 
         // 加载上传类
-        $upload = Qwin::run('Qwin_File_Upload');
+        $upload = Qwin::call('Qwin_File_Upload');
         $upload->upload_form_field = $name;
         $upload->max_file_size = '10000000';
         $upload->make_script_safe = 1;
@@ -86,20 +86,20 @@ class Common_File_Controller_JQuery extends Qwin_App_Controller
 
         $arr = array(
             'file_name' => iconv('GBK', 'UTF-8', $str->toUrlSeparator($upload->saved_upload_name)),
-            //'path' => Qwin::run('-str')->toUrlSeparator($upload->out_file_dir),
+            //'path' => Qwin::call('-str')->toUrlSeparator($upload->out_file_dir),
             'error' => array(
                 'num' => $upload->error_no,
                 'msg' => $error_msg,
             )
         );
-        echo Qwin::run('-arr')->jsonEncode($arr, 'pear');
+        echo Qwin::call('-arr')->jsonEncode($arr, 'pear');
     }
 
     public function actionUploadify()
     {
-        $str = Qwin::run('Qwin_filter_String');
+        $str = Qwin::call('Qwin_filter_String');
         // 加载上传类
-        $upload = Qwin::run('Qwin_File_Upload');
+        $upload = Qwin::call('Qwin_File_Upload');
         $upload->upload_form_field = 'Filedata';
         $upload->max_file_size = '10000000';
         $upload->allowed_file_ext = array(

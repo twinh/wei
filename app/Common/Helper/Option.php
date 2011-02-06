@@ -71,9 +71,10 @@ class Common_Helper_Option
 
     public function  __construct($cachePath = null, $defaultLang = null)
     {
+        $config = Qwin::call('-config');
         // 初始化路径
         if (null == $cachePath) {
-            $this->_path = QWIN_RESOURCE_PATH . '/cache/option';
+            $this->_path = $config['optionCachePath'];
         } else {
             $this->_path = $cachePath;
         }
@@ -81,15 +82,14 @@ class Common_Helper_Option
 
         // 设置默认语言
         if (null == $defaultLang) {
-            $config = Qwin::run('-config');
-            $lang = Qwin::run('Common_Helper_Language')->getName($config['asc']);
+            $lang = Qwin::call('Common_Helper_Language')->getName($config['asc']);
         } else {
             $lang = $defaultLang;
         }
-        $this->_lang = Qwin::run('-language')->toStandardStyle($lang);
+        $this->_lang = Qwin::call('-language')->toStandardStyle($lang);
 
         // 初始化附加选项
-        $lang = Qwin::run('-lang');
+        $lang = Qwin::call('-lang');
         foreach ($this->_defaultAddition as &$row) {
             $row['name'] = $lang[$row['name']];
         }
@@ -188,7 +188,7 @@ class Common_Helper_Option
         if (isset($this->_query)) {
             return $this->_query;
         }
-        $this->_query =  Qwin::run('Qwin_App_Metadata')->getQueryByAsc(array(
+        $this->_query =  Qwin::call('Qwin_App_Metadata')->getQueryByAsc(array(
             'namespace' => 'Common',
             'module' => 'Option',
             'controller' => 'Option',
@@ -215,7 +215,7 @@ class Common_Helper_Option
     {
         foreach($data as $row)
         {
-            $cachePath = QWIN_RESOURCE_PATH . '/class/' . $row['language'] . '/' . $row['sign'] . '.php';
+            $cachePath = QWIN . '/class/' . $row['language'] . '/' . $row['sign'] . '.php';
             if(file_exists($cachePath))
             {
                 unlink($cachePath);
