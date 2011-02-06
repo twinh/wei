@@ -30,8 +30,8 @@ class Common_Email_Widget_ListTab extends Common_Widget
     public function render($param, $view)
     {
         $asc = $view['asc'];
-        $url = Qwin::run('-url');
-        $lang = Qwin::run('-lang');
+        $url = Qwin::call('-url');
+        $lang = Qwin::call('-lang');
 
         $param['tab']['post'] = array(
             'url' => $url->url($asc, array('action' => 'Post')),

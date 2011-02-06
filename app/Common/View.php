@@ -34,7 +34,7 @@ class Common_View extends Qwin_App_View_Abstract
     public function __construct()
     {
         Qwin::set('-view', $this);
-        $manager = Qwin::run('-manager');
+        $manager = Qwin::call('-manager');
         $widget = Qwin_Widget::getInstance();
         $this->assign('widget', $widget);
 
@@ -70,14 +70,14 @@ class Common_View extends Qwin_App_View_Abstract
         ));
 
         // 获取配置
-        $config = Qwin::run('-config');
+        $config = Qwin::call('-config');
 
         $minify = $widget->get('minify');
         $this->assign('minify', $minify);
         $this->assign('jQuery', $jQuery);
         
         $this->setTagList(array(
-            'resource'          => QWIN_RESOURCE_PATH . '/view/theme/',
+            'resource'          => QWIN . '/view/theme/',
             'suffix'            => '.php',
             'theme'             => $config['interface']['theme'],
             'style'             => $this->getStyle(),
@@ -108,13 +108,13 @@ class Common_View extends Qwin_App_View_Abstract
             return $this->_style;
         }
         if (!isset($this->config)) {
-            $this->config = Qwin::run('-config');
+            $this->config = Qwin::call('-config');
         }
 
-        $session = Qwin::run('Qwin_Session');
+        $session = Qwin::call('Qwin_Session');
         // 按优先级排列语言的数组
         $styleList = array(
-            Qwin::run('-request')->g('style'),
+            Qwin::call('-request')->g('style'),
             $session->get('style'),
             $this->config['interface']['style'],
         );
@@ -125,7 +125,7 @@ class Common_View extends Qwin_App_View_Abstract
             }
         }
 
-        if (!file_exists(QWIN_RESOURCE_PATH . '/view/style/' . $style)) {
+        if (!file_exists(QWIN . '/view/style/' . $style)) {
             $style = $this->config['interface']['style'];
         }
         $session->set('style', $style);
@@ -145,7 +145,7 @@ class Common_View extends Qwin_App_View_Abstract
         }
         extract($this->_data, EXTR_OVERWRITE);
 
-        $request = Qwin::run('#request');
+        $request = Qwin::call('#request');
         $isAjax = $request->g('qw-ajax');
 
         // TODO js重载等
@@ -165,7 +165,7 @@ class Common_View extends Qwin_App_View_Abstract
         $output = ob_get_contents();
         '' != $output && ob_end_clean();
 
-        $url = Qwin::run('-url');
+        $url = Qwin::call('-url');
         $minify = $this->minify;
         $jsUrl = array('namespace' => 'Mini', 'g' => $minify->pack('js'));
         $cssUrl =  array('g' => $minify->pack('css')) + $jsUrl;

@@ -83,10 +83,10 @@ class Mini_Common_Controller_Common extends Qwin_App_Controller
             $min_serveOptions['maxAge'] = 31536000;
         }
 
-        $request = Qwin::run('-request');
+        $request = Qwin::call('-request');
         $name = $request->g('g');
         $widget = Qwin_Widget::getInstance();
-        $widget->setRootPath(QWIN_RESOURCE_PATH . '/widget');
+        $widget->setRootPath(QWIN . '/widget');
         $minifyWidget = $widget->get('minify');
         $file = $minifyWidget->getCacheFile($name);
         if (file_exists($file)) {

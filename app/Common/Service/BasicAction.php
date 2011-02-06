@@ -63,16 +63,16 @@ class Common_Service_BasicAction extends Common_Service
     protected function process(array $option = null)
     {
         // 初始化常用的变量
-        $this->request      = Qwin::run('-request');
-        $this->url          = Qwin::run('-url');
-        $this->session      = Qwin::run('-session');
-        $this->metaHelper   = Qwin::run('Qwin_App_Metadata');
-        $this->config       = Qwin::run('-config');
+        $this->request      = Qwin::call('-request');
+        $this->url          = Qwin::call('-url');
+        $this->session      = Qwin::call('-session');
+        $this->metaHelper   = Qwin::call('Qwin_App_Metadata');
+        $this->config       = Qwin::call('-config');
         $this->_asc         = $asc = $option;
         $this->member       = $this->session->get('member');
         
         // 加载语言
-        $langHelper = Qwin::run('Common_Helper_Language');
+        $langHelper = Qwin::call('Common_Helper_Language');
         $this->_lang = $langHelper->getObjectByAsc($this->_asc);
         Qwin::setMap('-lang', get_class($this->_lang));
 
@@ -87,11 +87,11 @@ class Common_Service_BasicAction extends Common_Service
 
         // 加载模型
         $modelName = $this->metaHelper->getClassName('Model', $asc);
-        $this->_model = Qwin::run($modelName);
+        $this->_model = Qwin::call($modelName);
         if(null == $this->_model)
         {
             $modelName = 'Qwin_App_Model';
-            $this->_model = Qwin::run($modelName);
+            $this->_model = Qwin::call($modelName);
         }
         Qwin::setMap('-model', $modelName);
 

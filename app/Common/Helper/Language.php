@@ -93,7 +93,7 @@ class Common_Helper_Language
         }
 
         // 用户请求
-        $request    = Qwin::run('#request');
+        $request    = Qwin::call('#request');
         $queryName = $request->getOption('lang');
         $name = $request[$queryName];
         $name = $this->isExists($asc, $name);
@@ -103,7 +103,7 @@ class Common_Helper_Language
         }
         
         // 会话中用户的配置
-        $session = Qwin::run('-session');
+        $session = Qwin::call('-session');
         $name = $session->$queryName;
         $name = $this->isExists($asc, $name);
         if (false != $name) {
@@ -112,7 +112,7 @@ class Common_Helper_Language
         }
 
         // 全局配置
-        $config = Qwin::run('-config');
+        $config = Qwin::call('-config');
         $name = $config['interface']['language'];
         $name = $this->isExists($asc, $name);
         if (false != $name) {

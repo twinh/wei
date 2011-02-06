@@ -250,7 +250,7 @@ class Qwin_Class
              */
             if(!is_object($set[0][0]))
             {
-                $set[0][0] = Qwin::run($set[0][0]);
+                $set[0][0] = Qwin::call($set[0][0]);
             }
             if(!method_exists($set[0][0], $set[0][1]))
             {

@@ -32,11 +32,11 @@ class Common_Namespace extends Qwin_App_Namespace
 {
     public function __construct()
     {
-        $config = Qwin::run('-config');
+        $config = Qwin::call('-config');
 
         // 启动widget
         $widget = Qwin_Widget::getInstance();
-        $widget->setRootPath(QWIN_RESOURCE_PATH . '/widget');
+        $widget->setRootPath(QWIN . '/widget');
 
         // 加载log4php
         /* @var $log Logger */
@@ -61,15 +61,15 @@ class Common_Namespace extends Qwin_App_Namespace
 
         // 设置会话
         $namespace = md5($_SERVER['SERVER_NAME'] . $config['project']['name']);
-        Qwin::run('-session', $namespace);
+        Qwin::call('-session', $namespace);
 
         // 打开缓冲区
         ob_start();
 
         if ($config['router']['enable']) {
-            $router = Qwin::run('Qwin_Url_Router');
+            $router = Qwin::call('Qwin_Url_Router');
             $router->addList($config['router']['list']);
-            $url = Qwin::run('-url', $router);
+            $url = Qwin::call('-url', $router);
         }
 
         /**

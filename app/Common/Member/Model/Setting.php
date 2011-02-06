@@ -33,7 +33,7 @@ class Common_Member_Model_Setting
 
     public function __construct()
     {
-        $this->_stylePath = QWIN_RESOURCE_PATH . '/view/style';
+        $this->_stylePath = QWIN . '/view/style';
     }
 
     public function getStyles($path = null)

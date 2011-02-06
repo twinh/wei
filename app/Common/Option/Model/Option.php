@@ -29,6 +29,6 @@ class Common_Option_Model_Option extends Common_Model
 {
     public function postSave($event)
     {
-        return Qwin::run('Common_Helper_Option')->setCache($this);
+        return Qwin::call('Common_Helper_Option')->setCache($this);
     }
 }

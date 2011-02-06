@@ -87,7 +87,7 @@ class Qwin_Widget
 
         $class = ucfirst($name) . '_Widget';
 
-        return Qwin::run($class);
+        return Qwin::call($class);
     }
 
     /**

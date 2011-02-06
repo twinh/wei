@@ -46,8 +46,8 @@ class Common_Metadata extends Qwin_Metadata
 
     public function  __construct()
     {
-        $this->url = Qwin::run('-url');
-        $this->metaHelper = Qwin::run('Qwin_App_Metadata');
+        $this->url = Qwin::call('-url');
+        $this->metaHelper = Qwin::call('Qwin_App_Metadata');
     }
 
     /**
@@ -58,7 +58,7 @@ class Common_Metadata extends Qwin_Metadata
      */
     public function getAscFromClass()
     {
-        $config = Qwin::run('-config');
+        $config = Qwin::call('-config');
         return $config['asc'];
         if (null != $this->_asc) {
             return $this->_asc;
@@ -354,11 +354,11 @@ class Common_Metadata extends Qwin_Metadata
     public function filterListOperation($value, $name, $data, $dataCopy)
     {
         $primaryKey = $this->db['primaryKey'];
-        $url = Qwin::run('-url');
-        $lang = Qwin::run('-lang');
+        $url = Qwin::call('-url');
+        $lang = Qwin::call('-lang');
         $asc = $this->getAscFromClass();
         if (!isset($this->controller)) {
-            $this->controller = Qwin::run($this->metaHelper->getClassName('Controller', $asc));
+            $this->controller = Qwin::call($this->metaHelper->getClassName('Controller', $asc));
             $this->forbiddenAction = $this->controller->getForbiddenAction();
         }
         // 不为禁用的行为设置链接
@@ -497,13 +497,13 @@ class Common_Metadata extends Qwin_Metadata
 
     public function filterDbCreatedBy($value, $name, $data, $dataCopy)
     {
-        $member = Qwin::run('Qwin_Session')->get('member');
+        $member = Qwin::call('Qwin_Session')->get('member');
         return $member['id'];
     }
 
     public function filterDbModifiedBy($value, $name, $data, $dataCopy)
     {
-        $member = Qwin::run('Qwin_Session')->get('member');
+        $member = Qwin::call('Qwin_Session')->get('member');
         return $member['id'];
     }
 
@@ -522,7 +522,7 @@ class Common_Metadata extends Qwin_Metadata
     {
         if (in_array($action, $this->_linkAction)) {
             $asc = $this->getAscFromClass();
-            !isset($this->url) && $this->url = Qwin::run('-url');
+            !isset($this->url) && $this->url = Qwin::call('-url');
             $name = str_replace(':', '\:', $name);
             $dataCopy[$name] = str_replace(':', '\:', $dataCopy[$name]);
             $value = '<a href="' . $this->url->url($asc, array('action' => 'Index', 'qw-search' => $name . ':' . $dataCopy[$name])) . '">' . $value . '</a>';

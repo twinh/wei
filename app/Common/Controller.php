@@ -101,19 +101,19 @@ class Common_Controller extends Qwin_App_Controller
         if (false === $option) {
             return true;
         }
-        $this->request  = Qwin::run('#request');
-        $this->url      = Qwin::run('-url');
-        $this->config   = Qwin::run('-config');
+        $this->request  = Qwin::call('#request');
+        $this->url      = Qwin::call('-url');
+        $this->config   = Qwin::call('-config');
         $this->_asc     = $this->config['asc'];
-        $this->session  = Qwin::run('-session');
+        $this->session  = Qwin::call('-session');
         $this->member   = $this->session->get('member');
-        $this->view     = Qwin::run('-view');
+        $this->view     = Qwin::call('-view');
 
         // 元数据管理助手,负责元数据的获取和转换
-        $this->metaHelper = Qwin::run('Qwin_App_Metadata');
+        $this->metaHelper = Qwin::call('Qwin_App_Metadata');
 
         // 加载语言
-        $langHelper = Qwin::run('Common_Helper_Language');
+        $langHelper = Qwin::call('Common_Helper_Language');
         $this->_lang = $langHelper->getObjectByAsc($this->_asc);
         Qwin::setMap('-lang', get_class($this->_lang));
 
@@ -134,7 +134,7 @@ class Common_Controller extends Qwin_App_Controller
     {
         $session = $this->session;
         $member = $session->get('member');
-        $metaHelper = Qwin::run('Qwin_App_Metadata');
+        $metaHelper = Qwin::call('Qwin_App_Metadata');
 
         // 未登陆则默认使用游客账号
         if(null == $member)
@@ -179,7 +179,7 @@ class Common_Controller extends Qwin_App_Controller
 
         if('guest' == $member['username'])
         {
-            Qwin::run('#view')->jump($this->url->url(array(
+            Qwin::call('#view')->jump($this->url->url(array(
                 'module' => 'Member',
                 'controller' => 'Log',
                 'action' => 'Login',

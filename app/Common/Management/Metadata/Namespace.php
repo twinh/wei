@@ -74,8 +74,8 @@ class Common_Management_Metadata_Namespace extends Common_Metadata
     public function filterListOperation($value, $name, $data, $copyData)
     {
         $primaryKey = $this->db['primaryKey'];
-        $url = Qwin::run('-url');
-        $lang = Qwin::run('-lang');
+        $url = Qwin::call('-url');
+        $lang = Qwin::call('-lang');
         $set = $this->getAscFromClass();
         return Qwin_Util_Html::jQueryButton($url->url($set, array('controller' => 'Module', 'action' => 'Index', 'namespace_value' => $copyData['namespace'])), $lang->t('LBL_ACTION_VIEW_MODULE'), 'ui-icon-lightbulb')
             . Qwin_Util_Html::jQueryButton($url->url($set, array('controller' => 'Module', 'action' => 'Add', 'namespace_value' => $copyData['namespace'])), $lang->t('LBL_ACTION_ADD_MODULE'), 'ui-icon-plus')

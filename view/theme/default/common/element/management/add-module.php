@@ -54,6 +54,6 @@
                 <td class=""><?php echo $banModule ?></td>
             </tr>
         </table>-->
-        <?php require QWIN_RESOURCE_PATH . '/view/theme/' . $theme . '/element/basic/form.php' ?>
+        <?php require QWIN . '/view/theme/' . $theme . '/element/basic/form.php' ?>
     </div>
 </div>

@@ -30,8 +30,8 @@ class Qwin_Widget_JQuery_Uploadify
     // TODO !!!
     public function render($meta)
     {
-        $jquery = Qwin::run('Qwin_Resource_JQuery');
-        $pluginPath = QWIN_RESOURCE_PATH . '/js/jquery/plugin/uploadify';
+        $jquery = Qwin::call('Qwin_Resource_JQuery');
+        $pluginPath = QWIN . '/js/jquery/plugin/uploadify';
 
         $addCode = '';
         if ('' != $meta['_value']) {

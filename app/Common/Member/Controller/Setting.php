@@ -54,7 +54,7 @@ class Common_Member_Controller_Setting extends Common_Controller
         } else {
             $member = $ses->get('member');
             $language = $ses->get('language');
-            $language = Qwin::run('Qwin_Language')->toStandardStyle($language);
+            $language = Qwin::call('Qwin_Language')->toStandardStyle($language);
             
             $result = $this->metaHelper
                     ->getQueryByAsc(array(
@@ -66,7 +66,7 @@ class Common_Member_Controller_Setting extends Common_Controller
                     ->fetchOne();
             $result['language'] = $language;
             $result->save();
-            $url = Qwin::run('-url')->url($this->_asc);
+            $url = Qwin::call('-url')->url($this->_asc);
             $this->view->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }
@@ -79,14 +79,14 @@ class Common_Member_Controller_Setting extends Common_Controller
         if(empty($_POST))
         {
             $model = $this->metaHelper->getClassName('Model', $this->_asc);
-            $this->_model = Qwin::run($model);
+            $this->_model = Qwin::call($model);
             $styles = $this->_model->getStyles();
             $path = $this->_model->getPath();
             $meta = $this->_meta;
 
             $this->view->assign(get_defined_vars());
         } else {
-            $ses = Qwin::run('-session');
+            $ses = Qwin::call('-session');
             $member = $ses->get('member');
             $theme = $ses->get('style');
             
@@ -100,7 +100,7 @@ class Common_Member_Controller_Setting extends Common_Controller
                     ->fetchOne();
             $result['theme'] = $theme;
             $result->save();
-            $url = Qwin::run('-url')->url($this->_asc);
+            $url = Qwin::call('-url')->url($this->_asc);
             $this->view->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         } 
     }

@@ -29,7 +29,7 @@
 $jQueryFile['validate'] = $jQuery->loadPlugin('validate', 'qwin', false);
 $minify
     ->add($jQueryFile['validate']['js'])
-    ->add(QWIN_RESOURCE_PATH . '/view/theme/default/common/script/form.js');
+    ->add(QWIN . '/view/theme/default/common/script/form.js');
 ?>
 <script type="text/javascript">
 var jQueryValidateCode = <?php echo $jQueryValidateCode?>;

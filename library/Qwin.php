@@ -28,6 +28,12 @@ class Qwin
     const VERSION = '0.6.9';
 
     /**
+     * 全局配置数组
+     * @var array
+     */
+    protected static $_config = array();
+
+    /**
      * 类名映射
      * @var array
      * @example self::$_map = array(
@@ -92,7 +98,7 @@ class Qwin
      * @param undefined|string|array 类初始化时的参数,将转换为数组
      * @return null|object 类对象或空
      */
-    public static function run($name)
+    public static function call($name)
     {
         // 键名只接受字符串
         if (!is_string($name) || empty($name)) {
@@ -121,7 +127,7 @@ class Qwin
         // 类可能是短标签形式,对短标签进行转换
         if (isset($name[0]) && isset(self::$_shortTag[$name[0]])) {
             $realName = self::$_shortTag[$name[0]] . substr($name, 1);
-            $result = call_user_func_array(array('self', 'run'), array(0 => $realName) + func_get_args());
+            $result = call_user_func_array(array('self', 'call'), array(0 => $realName) + func_get_args());
             // 如果存在此类,将短标签加入到映射中
             if (null != $result) {
                 self::$_map[$name] = strtolower($realName);
@@ -148,14 +154,17 @@ class Qwin
      */
     protected static function _instanceClass(array $arg)
     {
-        // 没有参数的情况下直接初始化,有参数的情况下使用类反射初始化
+        // 没有提供参数的情况下,尝试在配置中查找该类的参数,如果还是没有则直接初始化
         if (!isset($arg[1])) {
-            return new $arg[0];
-        } else {
-            $arg[1] = is_array($arg[1]) ? $arg[1] : array($arg[1]);
-            $reflection = new ReflectionClass($arg[0]);
-            return $reflection->newInstanceArgs($arg[1]);
+            if (!$config = self::config($arg[0])) {
+                return new $arg[0];
+            }
+            $arg[1] = $config;
         }
+        // 有参数的情况下使用类反射进行初始化
+        $arg[1] = is_array($arg[1]) ? $arg[1] : array($arg[1]);
+        $reflection = new ReflectionClass($arg[0]);
+        return $reflection->newInstanceArgs($arg[1]);
     }
 
     /**
@@ -197,36 +206,64 @@ class Qwin
         
     }
 
-    protected static $_hook = array();
+    protected $_hook;
+
 
     /**
      * 设置一个钩子
      *
      * @param string $name 钩子名称
      * @param array $param 钩子参数
+     * @uses Qwin_Hook
+     * @see Qwin_Hook
+     * @todo
      */
     public static function hook($name, array $param = null)
     {
-        if (isset(self::$_hook[$name])) {
-            foreach (self::$_hook as $hook) {
-                self::callback($hook);
-            }
+        if (!isset(self::$_hook)) {
+            $config = Qwin::call('-config');
+            self::$_hook = self::call('Qwin_Hook');
         }
     }
 
     /**
-     * 为钩子增加回调结构
+     * 获取/设置配置
      *
-     * @param string $name
-     * @param array|string $callback
+     * @param mixed $name
+     * @param mixed $param 配置内容
+     * @return mixed
+     * @example Qwin::config();                 // 获取所有配置
+     *          Qwin::config('className');      // 获取此项的配置,建议为类名
+     *          Qwin::config('array');          // 设定该数组为全局配置
+     *          Qwin::config('name', 'param');  // 设定项为name的配置为param
      */
-    public static function setHookCallback($name, $callback)
+    public static function config($name = null)
     {
-        
-    }
+        // 获取所有配置
+        if (null === $name ) {
+            return self::$_config;
+        }
 
-    protected static function _scanPath($path, array $callback, $depth = 1)
-    {
-        
+        // 获取某一对象的初始配置
+        /*if (is_object($name)) {
+            $name = get_class($name);
+        }*/
+
+        // 获取/设置某一项配置
+        if (is_scalar($name)) {
+            if (2 != func_num_args()) {
+                return isset(self::$_config[$name]) ? self::$_config[$name] : null;
+            } else {
+                return self::$_config[$name] = func_get_arg(1);
+            }
+        }
+
+        // 设置全局配置
+        if (is_array($name)) {
+            return self::$_config = $name;
+        }
+
+        // 不匹配任何操作
+        return null;
     }
 }

@@ -36,7 +36,7 @@ class Common_View_AddForm extends Common_View
         $meta = $this->meta;
         $metaHelper = $this->metaHelper;
         $data = $this->data;
-        $config = Qwin::run('-config');
+        $config = Qwin::call('-config');
         $asc = $config['asc'];
 
         $orderedFeid = $metaHelper->orderField($meta);

@@ -35,13 +35,13 @@ class Qwin_Widget_JQuery_PopupGrid
      */
     public function render($meta, $title, $url, $viewField)
     {
-        $manager = Qwin::run('-manager');
-        $lang = Qwin::run('-lang');
+        $manager = Qwin::call('-manager');
+        $lang = Qwin::call('-lang');
         $jQuery = $manager->getHelper('JQuery', 'Common');
         $id = $meta['id'];
-        $view = Qwin::run('-view');
-        $cssPacker = Qwin::run('Qwin_Packer_Css');
-        $jsPacker = Qwin::run('Qwin_Packer_Js');
+        $view = Qwin::call('-view');
+        $cssPacker = Qwin::call('Qwin_Packer_Css');
+        $jsPacker = Qwin::call('Qwin_Packer_Js');
 
         $url['qw-popup'] = 1;
         $url['qw-ajax'] = 1;
@@ -63,6 +63,6 @@ class Qwin_Widget_JQuery_PopupGrid
         }
         $meta['_value'] .= '(' . $selected . ', ' . $lang->t('LBL_READONLY') . ')';
 
-        require QWIN_RESOURCE_PATH . '/view/widget/jquery-popupgrid.php';
+        require QWIN . '/view/widget/jquery-popupgrid.php';
     }
 }

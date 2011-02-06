@@ -46,7 +46,7 @@ function p($a)
  */
 function qw($class, $param = null)
 {
-    //return Qwin::run($class, $param);
+    //return Qwin::call($class, $param);
 }
 
 /**
@@ -57,13 +57,13 @@ function qw($class, $param = null)
  */
 function qwin($name)
 {
-    return Qwin::run($name);
+    return Qwin::call($name);
 }
 
 function qw_form($option, $view = null)
 {
     static $form;
-    null == $form && $form = Qwin::run('Qwin_Widget_Form');
+    null == $form && $form = Qwin::call('Qwin_Widget_Form');
     return $form->render($option, $view);
 }
 
@@ -93,11 +93,11 @@ function qw_form_extend($option, $form = null)
 
 function qw_url(array $data = null)
 {
-    return Qwin::run('-url')->url($data);
+    return Qwin::call('-url')->url($data);
     /*static $url, $config;
-    null == $url && $url = Qwin::run('-url');
+    null == $url && $url = Qwin::call('-url');
     if (null == $array1) {
-        null == $config && $config = Qwin::run('-config');
+        null == $config && $config = Qwin::call('-config');
         $array1 = $config['asc'];
     }*/
     return $url->createUrl($array1, $array2);
@@ -107,13 +107,13 @@ function qw_url(array $data = null)
 function qw_lang($name = null)
 {
     static $lang;
-    null == $lang && $lang = Qwin::run('-lang');
+    null == $lang && $lang = Qwin::call('-lang');
     return $lang->t($name);
 }
 
 function qw_lang_to_js()
 {
-    return 'Qwin.Lang = ' . json_encode(Qwin::run('-lang')->toArray()) . ';';
+    return 'Qwin.Lang = ' . json_encode(Qwin::call('-lang')->toArray()) . ';';
 }
 
 function qw_null_text($data = null)

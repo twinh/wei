@@ -131,15 +131,13 @@ class Qwin_App_Manager
         date_default_timezone_set($config['timezone']);
 
         // 加载框架主类,设置自动加载类
-        require_once QWIN_LIB_PATH . '/Qwin/Class.php';
+        require_once QWIN . '/library/Qwin/Class.php';
         Qwin_Class::setAutoload($config['appPath']);
         Qwin_Class::setCacheFile(QWIN_ROOT_PATH . '/cache/php/class.php');
         // 加载Qwin函数库
-        require_once QWIN_LIB_PATH . '/function/qwin.php';
+        require_once QWIN . '/library/function/qwin.php';
 
-        Qwin::setShortTag('@', 'Qwin_App_');
-        
-        $config = Qwin::run('@config', array($config));
+        $config = Qwin::call('Qwin_App_Config', array($config));
         Qwin::set('-config', $config);
         $this->_config = &$config;
 
@@ -149,13 +147,13 @@ class Qwin_App_Manager
         // 启动Url路由
         $router = null;
         if ($config['router']['enable']) {
-            $router = Qwin::run('Qwin_Url_Router');
+            $router = Qwin::call('Qwin_Url_Router');
             $router->add($config['router']['list']);
         }
-        $url = Qwin::run('-url', $router);
+        $url = Qwin::call('-url', $router);
 
         // 加载视图
-        $this->_view = Qwin::run($this->_option['viewClass']);
+        $this->_view = Qwin::call($this->_option['viewClass']);
         Qwin::set('-view', $this->_view);
         
         // 通过配置数据和Url参数初始化系统配置(包括命名空间,模块,控制器,行为等)
@@ -200,7 +198,7 @@ class Qwin_App_Manager
         }
 
         // 使用Qwin获取视图对象并展示(因为此时视图对象可能已改变)
-        Qwin::run('-view')->display();
+        Qwin::call('-view')->display();
 
         return $this;
     }
@@ -240,7 +238,7 @@ class Qwin_App_Manager
         if (null == $asc) {
             return $this->_namespace;
         }
-        return Qwin::run($this->getClass('namespace', $asc));
+        return Qwin::call($this->getClass('namespace', $asc));
     }
 
     /**
@@ -254,7 +252,7 @@ class Qwin_App_Manager
         if (null == $asc) {
             return $this->_module;
         }
-        return Qwin::run($this->getClass('module', $asc));
+        return Qwin::call($this->getClass('module', $asc));
     }
 
     /**
@@ -268,7 +266,7 @@ class Qwin_App_Manager
         if (null == $asc) {
             return $this->_controller;
         }
-        return Qwin::run($this->getClass('controller', $asc));
+        return Qwin::call($this->getClass('controller', $asc));
     }
 
     public function getView(array $asc = null)
@@ -276,7 +274,7 @@ class Qwin_App_Manager
         if (null == $asc) {
             return $this->_module;
         }
-        return Qwin::run($this->getClass('view', $asc));
+        return Qwin::call($this->getClass('view', $asc));
     }
 
     public function getModel(array $asc = null)
@@ -338,7 +336,7 @@ class Qwin_App_Manager
             $namespace = $this->config['asc']['namespace'];
         }
         $class = $namespace . '_Helper_' . $name;
-        return Qwin::run($class);
+        return Qwin::call($class);
     }
 
     public function getWidget()

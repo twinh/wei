@@ -76,7 +76,7 @@ class Qwin_Metadata_Element_Db extends Qwin_Metadata_Element_Abstract
      */
     public function _getFullTable()
     {
-        $config = Qwin::run('-ini');
+        $config = Qwin::call('-ini');
         $this->_data['_table'] = $config['db']['prefix'] . $this->_data['table'];
         return $this->_data['_table'];
     }

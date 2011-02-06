@@ -27,7 +27,7 @@ class Crm_Helper
 {
     public static function filterPopupMember($value, $name, $viewName, $meta)
     {
-        $data = Qwin::run('Qwin_App_Metadata')
+        $data = Qwin::call('Qwin_App_Metadata')
             ->getQueryByAsc(array(
                 'namespace' => 'Common',
                 'module' => 'Member',
@@ -40,7 +40,7 @@ class Crm_Helper
 
     public static function filterPopupContact($value, $name, $viewName, $meta)
     {
-        $data = Qwin::run('Qwin_App_Metadata')
+        $data = Qwin::call('Qwin_App_Metadata')
             ->getQueryByAsc(array(
                 'namespace' => 'Crm',
                 'module' => 'Contact',
@@ -53,7 +53,7 @@ class Crm_Helper
 
     public static function filterPopupCustomer($value, $name, $viewName, $meta)
     {
-        $data = Qwin::run('Qwin_App_Metadata')
+        $data = Qwin::call('Qwin_App_Metadata')
             ->getQueryByAsc(array(
                 'namespace' => 'Crm',
                 'module' => 'Customer',
@@ -66,7 +66,7 @@ class Crm_Helper
 
     public static function filterPopupOpportunity($value, $name, $viewName, $meta)
     {
-        $data = Qwin::run('Qwin_App_Metadata')
+        $data = Qwin::call('Qwin_App_Metadata')
             ->getQueryByAsc(array(
                 'namespace' => 'Crm',
                 'module' => 'Opportunity',

@@ -72,7 +72,7 @@ class Qwin_Flow
         }
         // 根据操作符进行转换
         if ('->' == $callback[0][2]) {
-            !is_object($callback[0][0]) && $callback[0][0] = Qwin::run($callback[0][0]);
+            !is_object($callback[0][0]) && $callback[0][0] = Qwin::call($callback[0][0]);
         } else {
             is_object($callback[0][0]) && $callback[0][0] = get_class($callback[0][0]);
         }

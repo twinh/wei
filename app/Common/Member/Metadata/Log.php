@@ -100,7 +100,7 @@ class Common_Member_Metadata_Log extends Qwin_App_Metadata
 
     public function validateCaptcha($value, $name, $data)
     {
-        if($value == Qwin::run('-session')->get('captcha'))
+        if($value == Qwin::call('-session')->get('captcha'))
         {
             return true;
         }
@@ -110,7 +110,7 @@ class Common_Member_Metadata_Log extends Qwin_App_Metadata
     public function validatePassword($value, $name, $data)
     {
         $value = md5($value);
-        $result = Qwin::run('Qwin_App_Metadata')
+        $result = Qwin::call('Qwin_App_Metadata')
             ->getQueryByAsc(array(
                 'namespace' => 'Common',
                 'module' => 'Member',
@@ -126,7 +126,7 @@ class Common_Member_Metadata_Log extends Qwin_App_Metadata
             $this->member = $member;
             return true;
         }
-        Qwin::run('-session')->set('member', null);
+        Qwin::call('-session')->set('member', null);
         return new Qwin_Validator_Result(false, 'password', 'MSG_ERROR_USERNAME_PASSWORD');
     }
 }

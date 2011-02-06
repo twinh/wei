@@ -31,7 +31,7 @@ class Common_Category_Controller_Category extends Common_ActionController
     {
         $treeData = array();
         $newData = array();
-        $tree = Qwin::run('Qwin_Tree');
+        $tree = Qwin::call('Qwin_Tree');
         $tree->assignType('ARRAY');
         $tree->setParentDefaultValue($this->request->g('parentValue'));
         foreach($data as $row)
@@ -50,7 +50,7 @@ class Common_Category_Controller_Category extends Common_ActionController
 
     public function onAfterDb()
     {
-        $fileCacheObj = Qwin::run('Qwin_Cache_File');
+        $fileCacheObj = Qwin::call('Qwin_Cache_File');
         $fileCacheObj->connect(QWIN_ROOT_PATH . '/cache/');
         $setting = array_intersect_key($this->_asc, array(
             'namespace' => '',
@@ -70,8 +70,8 @@ class Common_Category_Controller_Category extends Common_ActionController
     public function getCategoryResource()
     {
         // 获取缓存数据
-        //$cateogryCache = Qwin::run('Qwin_Cache_List')->getCache('Category');
-        $fileCacheObj = Qwin::run('Qwin_Cache_File');
+        //$cateogryCache = Qwin::call('Qwin_Cache_List')->getCache('Category');
+        $fileCacheObj = Qwin::call('Qwin_Cache_File');
         $fileCacheObj->connect(QWIN_ROOT_PATH . '/cache/');
         $setting = array(
             'namespace' => 'Common',

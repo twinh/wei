@@ -38,7 +38,7 @@ class Common_Management_Controller_ApplicationStructure extends Common_Controlle
      */
     public function actionUpdate()
     {
-        $app = Qwin::run('Qwin_App_Application');
+        $app = Qwin::call('Qwin_App_Application');
 
         // TODO 多路径的支持
         $path = array(
@@ -61,7 +61,7 @@ class Common_Management_Controller_ApplicationStructure extends Common_Controlle
 
         Qwin_Helper_File::writeArray(QWIN_ROOT_PATH . '/cache/php/application-structure.php', $action);
 
-        $url = Qwin::run('-url')->url($this->_asc, array('action' => 'Index'));
+        $url = Qwin::call('-url')->url($this->_asc, array('action' => 'Index'));
         $this->view->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
     }
 

@@ -217,8 +217,8 @@ class Common_Member_Metadata_Member extends Common_Metadata
     public function filterListOperation($value, $name, $data, $copyData)
     {
         $primaryKey = $this->db['primaryKey'];
-        $url = Qwin::run('-url');
-        $lang = Qwin::run('-lang');
+        $url = Qwin::call('-url');
+        $lang = Qwin::call('-lang');
         $set = $this->getAscFromClass();
         $html = Qwin_Util_Html::jQueryButton($url->url($set, array('action' => 'EditPassword', $primaryKey => $copyData[$primaryKey])), $lang->t('LBL_ACTION_EDIT_PASSWORD'), 'ui-icon-key')
               . parent::filterListOperation($value, $name, $data, $copyData);
@@ -227,13 +227,13 @@ class Common_Member_Metadata_Member extends Common_Metadata
 
     public function validateUsername($value, $name)
     {
-        $config = Qwin::run('-config');
+        $config = Qwin::call('-config');
         $asc = $config['asc'];
         if ('Edit' == $asc['action']) {
             return true;
         }
         $asc = $this->getAscFromClass();
-        $lang = Qwin::run('-lang');
+        $lang = Qwin::call('-lang');
         $result = $this->isUsernameExists($value);
 
         if(true === $result)

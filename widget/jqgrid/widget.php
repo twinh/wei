@@ -175,7 +175,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
             ->add($this->_rootPath . '/source/i18n/grid.locale-en.js')
             ->add($this->_rootPath . '/source/jquery.jqgrid.js');
 
-        /*false == $lang && $lang = Qwin::run('-lang');
+        /*false == $lang && $lang = Qwin::call('-lang');
         $option['emptyrecords'] = $lang[$option['emptyrecords']];
         return $option;*/
 
@@ -253,7 +253,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
      */
     public function filterRowData($data, $primaryKey, $layout)
     {
-        $lang = Qwin::run('-lang');
+        $lang = Qwin::call('-lang');
         $i = 0;
         $rowData = array();
         $nullData = '<em>(' . $lang->t('LBL_NULL') .')<em>';

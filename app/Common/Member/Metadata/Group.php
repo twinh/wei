@@ -98,8 +98,8 @@ class Common_Member_Metadata_Group extends Common_Metadata
     public function filterListOperation($value, $name, $data, $copyData)
     {
         $primaryKey = $this->db['primaryKey'];
-        $url = Qwin::run('-url');
-        $lang = Qwin::run('-lang');
+        $url = Qwin::call('-url');
+        $lang = Qwin::call('-lang');
         $set = $this->getAscFromClass();
         $html = Qwin_Util_Html::jQueryButton($url->url($set, array('action' => 'AllocatePermission', $primaryKey => $copyData[$primaryKey])), $lang->t('LBL_ACTION_ALLOCATE_PERMISSION'), 'ui-icon-person')
               . parent::filterListOperation($value, $name, $data, $copyData);
