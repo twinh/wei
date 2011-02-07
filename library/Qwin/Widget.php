@@ -29,13 +29,6 @@
 class Qwin_Widget
 {
     /**
-     * 启动器的实例化对象
-     *
-     * @var Qwin_App_Setup
-     */
-    protected static $_instance;
-
-    /**
      * 微件目录
      * @var string
      */
@@ -46,27 +39,14 @@ class Qwin_Widget
      * @var array
      */
     protected $_trusted = array();
-    
-    /**
-     * 构造方法,不允许继承,也不允许实例化
-     */
-    final protected function __construct()
-    {
-    }
 
-    /**
-     * 获取当前类的实例化对象(单例模式)
-     *
-     * @return Qwin_Widget
-     */
-    public static function getInstance()
+    public function __construct($path)
     {
-        if (!isset(self::$_instance)) {
-            self::$_instance = new self();
+        if (is_dir($path)) {
+            $this->setRootPath($path);
         }
-        return self::$_instance;
     }
-
+    
     public function setRootPath($path)
     {
         $this->_rootPath = $path;

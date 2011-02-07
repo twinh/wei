@@ -35,7 +35,7 @@ class Common_View extends Qwin_App_View_Abstract
     {
         Qwin::set('-view', $this);
         $manager = Qwin::call('-manager');
-        $widget = Qwin_Widget::getInstance();
+        $widget = Qwin::call('Qwin_Widget');
         $this->assign('widget', $widget);
 
         // 加载jQuery微件

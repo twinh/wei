@@ -25,6 +25,19 @@
  * @since       2009-11-24 20:45:11
  */
 
+class t
+{
+    function  __construct($a, $b, $c) {
+        echo "<p>{$a}--{$b}--{$c}</p>";
+    }
+}
+class b
+{
+    function  __construct($a) {
+        d('what i get', 1);
+        d($a, 1);
+    }
+}
 class Qwin_App_Manager
 {
     /**
@@ -131,9 +144,10 @@ class Qwin_App_Manager
         date_default_timezone_set($config['timezone']);
 
         // 加载框架主类,设置自动加载类
-        require_once QWIN . '/library/Qwin/Class.php';
-        Qwin_Class::setAutoload($config['appPath']);
-        Qwin_Class::setCacheFile(QWIN_ROOT_PATH . '/cache/php/class.php');
+        require_once QWIN . '/library/Qwin.php';
+        Qwin::setOption($config['Qwin']);
+        Qwin::config($config);
+
         // 加载Qwin函数库
         require_once QWIN . '/library/function/qwin.php';
 

@@ -166,13 +166,13 @@ class Qwin_Hook
                 // 默认文件形式
                 if (isset($callback['file'])) {
                     require_once $callback['file'];
-                    return call_user_func_array(
+                    call_user_func_array(
                         array(Qwin::call($callback['class']), 'hook' . $name),
                         (array)$param
                     );
                 // 自定义回调结构形式
                 } else {
-                    return call_user_func_array($callback[0], array_merge($callback[1], $param));
+                    call_user_func_array($callback[0], array_merge($callback[1], $param));
                 }
             }
             

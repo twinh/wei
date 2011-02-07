@@ -34,13 +34,9 @@ class Common_Namespace extends Qwin_App_Namespace
     {
         $config = Qwin::call('-config');
 
-        // 启动widget
-        $widget = Qwin_Widget::getInstance();
-        $widget->setRootPath(QWIN . '/widget');
-
         // 加载log4php
         /* @var $log Logger */
-        $log = $widget->get('log4php');
+        $log = Qwin::widget('log4php');
         $log->debug('The asc is ' . implode('/', $config['asc']));
         
         // 设置会话类型及启动
