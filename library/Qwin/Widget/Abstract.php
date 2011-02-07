@@ -48,7 +48,7 @@ abstract class Qwin_Widget_Abstract
 
     public function  __construct()
     {
-        $this->_widget = Qwin_Widget::getInstance();
+        $this->_widget = Qwin::call('Qwin_Widget');
     }
 
     public function install()

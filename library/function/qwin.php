@@ -28,7 +28,7 @@
 function d($a = null, $exit = true)
 {
     var_dump($a);
-    if ($exit) {
+    if (true === $exit) {
         exit;
     }
 }
