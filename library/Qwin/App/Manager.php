@@ -25,19 +25,6 @@
  * @since       2009-11-24 20:45:11
  */
 
-class t
-{
-    function  __construct($a, $b, $c) {
-        echo "<p>{$a}--{$b}--{$c}</p>";
-    }
-}
-class b
-{
-    function  __construct($a) {
-        d('what i get', 1);
-        d($a, 1);
-    }
-}
 class Qwin_App_Manager
 {
     /**

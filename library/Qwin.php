@@ -1,13 +1,11 @@
 <?php
 /**
- * Qwin框架核心类,使用注册模式,包含的特性如下
+ * Qwin框架核心类,使用注册模式,统一管理全部资源(类对象,数组配置等等),包含的特性如下
  *  1. 类自动加载(autoload)
  *  2. 资源注册器(get,set)
  *  3. 类智能加载(call)(资源,短标签,原生态,短标签,映射,缓存)
- *  4. 类缓存控制(todo)
+ *  4. 类缓存控制
  *  5. 全局配置规划等
- *
- * ,为一注册器,统一管理全部资源(类对象,数组配置等等)
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -28,6 +26,7 @@
  * @license   http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version   $Id$
  * @since     2010-04-26 10:39:18
+ * @todo      其他缓存方式
  */
 
 class Qwin
@@ -50,6 +49,7 @@ class Qwin
      */
     protected static $_option = array(
         'cacheFile'     => null,
+        'lifetime'      => 86400,
         'autoloadPath'  => array(),
     );
 
@@ -305,7 +305,13 @@ class Qwin
      */
     public static function updateCacheFile()
     {
+        // 重建缓存文件 todo 优化
+        if (self::$_option['lifetime'] < $_SERVER['REQUEST_TIME'] - filemtime(self::$_option['cacheFile'])) {
+            file_put_contents(self::$_option['cacheFile'], '<?php' . PHP_EOL . 'return array (' . PHP_EOL . ');');
+        }
+
         if (!empty(self::$_classAppendCache)) {
+            // 构建数组
             $code = substr(var_export(self::$_classAppendCache, true), 7) . ';';
 
             // 打开文件,并移动指针到倒数第三位倒数几位分别是 "换行符);"
