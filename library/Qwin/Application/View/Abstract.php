@@ -304,23 +304,12 @@ abstract class Qwin_Application_View_Abstract extends Qwin_Metadata_Abstract
      * @param mixed $value 标签的值
      * @return Qwin_Application_View 当前对象
      */
-    public function setTag($name, $value)
+    public function setTag($name, $value = null)
     {
-        $this->_tag[$name] = $value;
-        $this->_tagName[$name] = '<' . $name . '>';
-        return $this;
-    }
-
-    /**
-     * 设置一组标签的值
-     *
-     * @param array $array 标签数组,键名表示标签名称,值表示标签的值
-     * @return Qwin_Application_View 当前对象
-     */
-    public function setTagList(array $array)
-    {
-        foreach ($array as $key => $value) {
-            // 视图文件名应该是小写和-组成
+        if (!is_array($name)) {
+            $name = array($name => $value);
+        }
+        foreach ($name as $key => $value) {
             $this->_tag[$key] = strtolower($value);
             $this->_tagName[$key] = '<' . $key . '>';
         }
