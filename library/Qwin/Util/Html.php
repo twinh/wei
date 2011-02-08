@@ -115,4 +115,19 @@ class Qwin_Util_Html
         null != $target && $target = ' target="' . $target . '"';
         return '<a' . $target . ' href="' . $url . '">' . $title . '</a>';
     }
+
+    /**
+     * 将文本转换成包含Html标签的代码
+     * 
+     * @param string $text 文本数据
+     * @return string 包含Html标签的代码
+     */
+    public static function textToHtml($text)
+    {
+        return str_replace(
+            array("\t"),
+            array('&nbsp;&nbsp;&nbsp;&nbsp;'),
+            nl2br($text)
+        );
+    }
 }
