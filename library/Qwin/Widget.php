@@ -85,7 +85,7 @@ class Qwin_Widget
 
         // 查看主文件是否存在
         $file = $this->_rootPath . '/' . $name . '/widget.php';
-        if (!file_exists($file)) {
+        if (!is_file($file)) {
             return false;
         }
 

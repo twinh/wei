@@ -80,7 +80,7 @@ class Qwin_Class
     public static function setCacheFile($cacheFile)
     {
         self::$_cacheFile = $cacheFile;
-        if(file_exists($cacheFile))
+        if(is_file($cacheFile))
         {
             self::$_classCache = require self::$_cacheFile;
             return true;
