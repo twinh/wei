@@ -58,8 +58,7 @@ class Common_Metadata extends Qwin_Metadata
      */
     public function getAscFromClass()
     {
-        $config = Qwin::call('-config');
-        return $config['asc'];
+        return Qwin::config('asc');
         if (null != $this->_asc) {
             return $this->_asc;
         }

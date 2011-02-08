@@ -37,7 +37,7 @@ class Qwin
      * 全局配置数组
      * @var array
      */
-    protected static $_config = array();
+    public static $_config = array();
 
     /**
      *
@@ -378,13 +378,14 @@ class Qwin
     /**
      * 获取/设置配置
      *
-     * @param mixed $name
+     * @param mixed $name 配置的值,多级用'/'分开
      * @param mixed $param 配置内容
      * @return mixed
      * @example Qwin::config();                 // 获取所有配置
      *          Qwin::config('className');      // 获取此项的配置,建议为类名
      *          Qwin::config('array');          // 设定该数组为全局配置
      *          Qwin::config('name', 'param');  // 设定项为name的配置为param
+     *          Qwin::config('key1/key2');      // 获取$config[key1][key2]的值
      */
     public static function config($name = null)
     {
@@ -395,15 +396,28 @@ class Qwin
 
         // 获取/设置某一项配置
         if (is_scalar($name)) {
-            if (2 == func_num_args()) {
-                return self::$_config[$name] = func_get_arg(1);
+            $temp = &self::$_config;
+            if (false !== strpos($name, '/')) {
+                $array = explode('/', $name);
+                $name = array_pop($array);
+                foreach ($array as $value) {
+                    if (isset($temp[$value])) {
+                        $temp = &$temp[$value];
+                    } else {
+                        return null;
+                    }
+                }
             }
-            return isset(self::$_config[$name]) ? self::$_config[$name] : null;
+
+            if (2 == func_num_args()) {
+                return $temp[$name] = func_get_arg(1);
+            }
+            return isset($temp[$name]) ? $temp[$name] : null;
         }
 
         // 设置全局配置
         if (is_array($name)) {
-            return self::$_config = $name;
+            return self::$_config = new ArrayObject($name, ArrayObject::ARRAY_AS_PROPS);
         }
 
         // 不匹配任何操作

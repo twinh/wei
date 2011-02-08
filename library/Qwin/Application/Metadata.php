@@ -99,7 +99,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
             return $this->_tablePrefix;
         }
         if (null == $adapter) {
-            $config = Qwin::call('-config');
+            $config = Qwin::config();
             $adapter = $config['database']['mainAdapter'];
         }
         $this->_tablePrefix = $config['database']['adapter'][$adapter]['prefix'];

@@ -35,7 +35,7 @@ class Common_View_View extends Common_View
         $metaHelper     = $this->metaHelper;
         $data           = $this->data;
         $request        = Qwin::call('#request');
-        $config         = Qwin::call('-config');
+        $config         = Qwin::config();
         $url            = Qwin::call('-url');
         $asc            = $config['asc'];
         $lang           = Qwin::call('-lang');

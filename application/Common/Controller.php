@@ -103,8 +103,7 @@ class Common_Controller extends Qwin_Application_Controller
         }
         $this->request  = Qwin::call('#request');
         $this->url      = Qwin::call('-url');
-        $this->config   = Qwin::call('-config');
-        $this->_asc     = $this->config['asc'];
+        $this->_asc     = Qwin::config('asc');
         $this->session  = Qwin::call('-session');
         $this->member   = $this->session->get('member');
         $this->view     = Qwin::call('-view');

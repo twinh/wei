@@ -138,10 +138,6 @@ class Qwin_Application_Manager
         // 加载Qwin函数库
         require_once QWIN . '/library/function/qwin.php';
 
-        $config = Qwin::call('Qwin_Application_Config', array($config));
-        Qwin::set('-config', $config);
-        $this->_config = &$config;
-
         // 注册当前类
         Qwin::set('-manager', $this);
         
@@ -215,7 +211,7 @@ class Qwin_Application_Manager
             return $this->_validNamespace;
         }
         $this->_validNamespace = array();
-        foreach ($this->_config['Qwin']['autoloadPath'] as $dir) {
+        foreach ((array)Qwin::config('Qwin/autoloadPath') as $dir) {
             if (!is_dir($dir)) {
                 continue;
             }

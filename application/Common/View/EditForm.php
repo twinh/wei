@@ -38,8 +38,7 @@ class Common_View_EditForm extends Common_View
         $meta = $this->meta;
         $metaHelper = $this->metaHelper;
         $data = $this->data;
-        $config = Qwin::call('-config');
-        $asc = $config['asc'];
+        $asc = Qwin::config('asc');
 
         $orderedFeid = $metaHelper->orderField($meta);
         $layout = $metaHelper->getTableLayout($meta, $orderedFeid, 'edit', $meta['page']['tableLayout']);

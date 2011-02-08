@@ -72,7 +72,7 @@ class Common_Service_List extends Common_Service_BasicAction
         parent::process($option['asc']);
 
         // 初始化常用的变量
-        $asc        = $this->config['asc'];
+        $asc        = Qwin::config('asc');
         $meta       = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
 

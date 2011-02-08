@@ -67,7 +67,6 @@ class Common_Service_BasicAction extends Common_Service
         $this->url          = Qwin::call('-url');
         $this->session      = Qwin::call('-session');
         $this->metaHelper   = Qwin::call('Qwin_Application_Metadata');
-        $this->config       = Qwin::call('-config');
         $this->_asc         = $asc = $option;
         $this->member       = $this->session->get('member');
         
