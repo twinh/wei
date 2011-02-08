@@ -29,7 +29,7 @@ class Qwin_Request extends Qwin_Metadata_Abstract
 {
     public function  __construct()
     {
-        $this->_data = $_REQUEST;
+        $this->_data = &$_REQUEST;
     }
 
     /**
