@@ -25,6 +25,6 @@
  * @since       2010-08-16 18:40:20
  */
 
-class Common_Language extends Qwin_App_Language
+class Common_Language extends Qwin_Application_Language
 {
 }

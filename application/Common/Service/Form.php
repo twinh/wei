@@ -61,7 +61,7 @@ class Common_Service_Form extends Common_Service_BasicAction
         parent::process($option['asc']);
 
         // 初始化常用的变量
-        $metaHelper = Qwin::call('Qwin_App_Metadata');
+        $metaHelper = Qwin::call('Qwin_Application_Metadata');
         $meta = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
         $primaryKeyValue = $option['data']['primaryKeyValue'];

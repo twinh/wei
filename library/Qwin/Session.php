@@ -33,38 +33,40 @@ class Qwin_Session
      * @var string
      */
     private $_namespace;
-    
-    public function __construct($namespace = 'Default')
+
+    /**
+     * @var array           配置选项
+     *
+     *      -- namespace    默认命名空间
+     *
+     *      -- limiter      见session_cache_limiter
+     *
+     *      -- expire       见expire
+     */
+    protected $_option = array(
+        'namespace' => 'default',
+        'limiter'   => 'private_no_expire, must-revalidate',
+        'expire'    => 86400,
+    );
+
+    public function __construct(array $option)
     {
-        if(!session_id())
-        {
+        $this->_option = array_merge($this->_option, $option);
+        if(!session_id()) {
+            session_cache_limiter($this->_option['limiter']);
+            session_cache_expire($this->_option['expire']);
             session_start();
         }
-        $this->setNamespace($namespace);
+        $this->setNamespace($this->_option['namespace']);
     }
 
     /**
      * 设置一个命名空间
+     *
      * @param string $namespace
      */
     public function setNamespace($namespace)
     {
-        if('' === $namespace)
-        {
-            /**
-             * @see Qwin_Session_Exception
-             */
-            require 'Qwin/Session/Exception.php';
-            throw new Qwin_Session_Exception('Session namespace should not be empty.');
-        }
-        //if(isset($_SESSION[$namespace]))
-        //{
-            /**
-             * @see Qwin_Session_Exception
-             */
-            //require 'Qwin/Session/Exception.php';
-            //throw new Qwin_Session_Exception('Session namespace have been setted.');
-        //}
         $this->_namespace = $namespace;
     }
 
@@ -87,22 +89,20 @@ class Qwin_Session
      */
     public function get($name)
     {
-        if(!isset($_SESSION[$this->_namespace][$name]))
-        {
-            return null;
-        }
-        return $_SESSION[$this->_namespace][$name];
+        return isset($_SESSION[$this->_namespace][$name]) ?
+               $_SESSION[$this->_namespace][$name] :
+               null;
     }
 
     /**
      * 切换命名空间,如果不存在,则设置一个新的命名空间
+     * 
      * @param string $namesapce
      * @return object
      */
     public function changeNamespace($namesapce)
     {
-        if(isset($_SESSION[$namesapce]))
-        {
+        if (isset($_SESSION[$namesapce])) {
             $this->_namespace = $namesapce;
         } else {
             $this->setNamespace($namespace);
@@ -116,8 +116,7 @@ class Qwin_Session
      */
     public function destroy($namespace = null)
     {
-        if(null != $namespace)
-        {
+        if (null != $namespace) {
             unset($_SESSION[$namespace]);
         } else {
             unset($_SESSION[$this->_namespace]);
@@ -125,10 +124,23 @@ class Qwin_Session
         //session_destroy();
     }
 
+    /**
+     * 获取一个会话值
+     *
+     * @param string $name 名称
+     * @return mixed
+     */
     public function  __get($name) {
         return $this->get($name);
     }
 
+    /**
+     * 设置一个会话值
+     *
+     * @param string $name 名称
+     * @param mixed $value 值
+     * @return Qwin_Session 当前对象
+     */
     public function  __set($name, $value) {
         return $this->set($name, $value);
     }

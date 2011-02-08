@@ -78,11 +78,11 @@ class Qwin_Metadata_Manager
             }
 
             require_once 'Qwin/App/Metadata/Exception.php';
-            throw new Qwin_App_Metadata_Exception('The class ' . $className . ' is not the sub class of Qwin_Metadata');
+            throw new Qwin_Application_Metadata_Exception('The class ' . $className . ' is not the sub class of Qwin_Metadata');
         }
 
         require_once 'Qwin/App/Metadata/Exception.php';
-        throw new Qwin_App_Metadata_Exception('Can not find the class ' . $className);
+        throw new Qwin_Application_Metadata_Exception('Can not find the class ' . $className);
     }
 }
 

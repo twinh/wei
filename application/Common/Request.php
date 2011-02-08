@@ -241,13 +241,13 @@ class Common_Request extends Qwin_Request
     /**
      * 获取请求中元数据主键的值
      *
-     * @uses Qwin_App_Metadata
+     * @uses Qwin_Application_Metadata
      * @param array $asc 应用结构配置
      * @return null|string 值
      */
     public function getPrimaryKeyValue(array $asc)
     {
-        $metaHelper = Qwin::call('Qwin_App_Metadata');
+        $metaHelper = Qwin::call('Qwin_Application_Metadata');
         $primaryKey = $metaHelper->getPrimaryKeyName($asc);
         return $this->g($primaryKey);
     }

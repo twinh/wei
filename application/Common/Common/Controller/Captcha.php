@@ -25,7 +25,7 @@
  * @since       2010-08-27 10:40:28
  */
 
-class Common_Common_Controller_Captcha extends Qwin_App_Controller
+class Common_Common_Controller_Captcha extends Qwin_Application_Controller
 {
     public function actionIndex()
     {

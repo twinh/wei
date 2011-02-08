@@ -25,7 +25,7 @@
  * @since       2010-05-27 07:56:33
  */
 
-class Common_File_Controller_JQuery extends Qwin_App_Controller
+class Common_File_Controller_JQuery extends Qwin_Application_Controller
 {
     public function actionAjaxUpload()
     {

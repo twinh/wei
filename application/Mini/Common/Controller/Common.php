@@ -23,7 +23,7 @@
  * @since       2011-01-24 18:40:36
  */
 
-class Mini_Common_Controller_Common extends Qwin_App_Controller
+class Mini_Common_Controller_Common extends Qwin_Application_Controller
 {
     public function actionIndex()
     {

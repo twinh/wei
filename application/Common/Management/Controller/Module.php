@@ -28,7 +28,7 @@
 class Common_Management_Controller_Module extends Common_Controller
 {
     /**
-     * Qwin_App_Application对象
+     * Qwin_Application_Application对象
      * @var object
      */
     protected $_app;
@@ -65,7 +65,7 @@ class Common_Management_Controller_Module extends Common_Controller
 
     public function  __construct()
     {
-        $this->_app = Qwin::call('Qwin_App_Application');
+        $this->_app = Qwin::call('Qwin_Application_Application');
         $this->_path = $this->_app->getDefultPath();
 
         // 初始化部分常用对象

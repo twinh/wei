@@ -25,6 +25,6 @@
  * @since       2010-4-17 15:49:35
  */
 
-class Qwin_App_Model
+class Qwin_Application_Model
 {
 }
