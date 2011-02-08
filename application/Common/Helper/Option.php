@@ -106,7 +106,7 @@ class Common_Helper_Option
         null == $lang && $lang = $this->_lang;
         !isset($this->_data[$lang]) && $this->_data[$lang] = array();
         $file = $this->_path . '/' . $lang . '/' . $name . '.php';
-        if (file_exists($file)) {
+        if (is_file($file)) {
             $this->_data[$lang][$name] = require $file;
         } else {
             $this->_data[$lang][$name] = $this->setCacheBySign($name, $lang);
@@ -210,11 +210,9 @@ class Common_Helper_Option
     
     public function delete($data)
     {
-        foreach($data as $row)
-        {
+        foreach($data as $row) {
             $cachePath = QWIN . '/class/' . $row['language'] . '/' . $row['sign'] . '.php';
-            if(file_exists($cachePath))
-            {
+            if(is_file($cachePath)) {
                 unlink($cachePath);
             }
         }

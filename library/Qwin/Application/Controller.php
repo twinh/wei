@@ -46,16 +46,6 @@ class Qwin_Application_Controller
     protected $_lang;
 
     /**
-     * 语言的名称
-     * @var string
-     */
-    protected $_langName;
-
-    protected $_validatorMessage;
-
-    protected $_validatorField;
-
-    /**
      * 禁用的行为列表
      * 当行为被禁用时,无法通过外部进行访问
      * 通过禁用行为,可以用于精确的
@@ -90,13 +80,6 @@ class Qwin_Application_Controller
         if (method_exists($this, 'action' . $action)) {
             $this->_forbiddenAction[] = strtolower($action);
         }
-        return $this;
-    }
-
-    public function setValidatorMessage($field = null, $message = null)
-    {
-        $this->_validatorField = $field;
-        $this->_validatorMessage = $message;
         return $this;
     }
 }

@@ -39,7 +39,7 @@ class Common_File_Controller_JQuery extends Qwin_Application_Controller
         // TODO安全性检查等
         // 获取想要上传到的目录名称
         $path = isset($_GET['path']) ? trim($_GET['path']) : 'upload';
-        if(null != $path && file_exists($path) && $default_path == substr($path, 0, 6))
+        if(null != $path && is_dir($path) && $default_path == substr($path, 0, 6))
         {
             $path = $str->toPathSeparator($path);
             DS == substr($path, -1, 1) && $path = substr($path, 0, -1);

@@ -852,7 +852,7 @@ class Qwin_Padb_Execute
         );
         foreach($fileList as $file)
         {
-            if(!file_exists($file))
+            if(!is_file($file))
             {
                 return false;
             }

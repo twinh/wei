@@ -125,7 +125,7 @@ class Common_View extends Qwin_Application_View_Abstract
             }
         }
 
-        if (!file_exists(QWIN . '/view/style/' . $style)) {
+        if (!is_dir(QWIN . '/view/style/' . $style)) {
             $style = $this->config['interface']['style'];
         }
         $session->set('style', $style);

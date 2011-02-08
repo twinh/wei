@@ -47,7 +47,7 @@ class Common_Member_Model_Setting
         // 如果存在配置文件,表示有效风格
         foreach ($files as $file) {
             $styleFile = $path . '/' . $file . '/config.php';
-            if (!file_exists($styleFile)) {
+            if (!is_file($styleFile)) {
                 continue;
             }
             $styles[] = (require $styleFile) + array(

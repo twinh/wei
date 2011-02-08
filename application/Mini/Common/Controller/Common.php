@@ -87,7 +87,7 @@ class Mini_Common_Controller_Common extends Qwin_Application_Controller
         $name = $request->g('g');
 
         $file = Qwin::widget('minify')->getCacheFile($name);
-        if (file_exists($file)) {
+        if (is_file($file)) {
             $min_serveOptions['minApp']['groups'][$name] = require $file;
         } else {
             exit('');

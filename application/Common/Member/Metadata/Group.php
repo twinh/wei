@@ -88,7 +88,7 @@ class Common_Member_Metadata_Group extends Common_Metadata
 
     public function filterViewImagePath($value)
     {
-        if(file_exists($value))
+        if(is_file($value))
         {
             return '<img src="' . $value . '" />';
         }

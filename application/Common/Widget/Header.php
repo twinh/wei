@@ -38,7 +38,7 @@ class Common_Widget_Header extends Common_Widget
         $header = '';
         
         $icon = QWIN . '/image/' . $view['meta']['page']['icon'] . '_32.png';
-        !file_exists($icon) && $icon = null;
+        !is_file($icon) && $icon = null;
 
         $header .= '<a href="' . $url->url(array_diff_key($asc, array('action' => ''))) . '">' . $lang->t($view['meta']['page']['title']) . '</a>';
 
