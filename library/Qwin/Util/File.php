@@ -25,19 +25,14 @@
  * @since       2009-11-24 20:45:11
  */
 
-/**
- * 确定系统类型
- */
-if (!defined('IN_WIN')) {
-    if (substr(PHP_OS, 0, 3) == 'WIN') {
-        define('IN_WIN', true);
-    } else {
-        define('IN_WIN', false);
-    }
-}
-
 class Qwin_Util_File
 {
+    /**
+     * 系统是否为Windows
+     * @var boolen|null
+     */
+    protected static $_inWin = null;
+
     /**
      * 将内容以数组的形式写入文件中
      *
@@ -155,16 +150,62 @@ class Qwin_Util_File
      * 判断文件是否存在,区分名称大小写
      * 
      * @param string $file
-     * @see thinkphp://Common/functions.php
      */
-    public function isExist($file, $case = true) {
-        if(is_file($file)) {
-            if (IN_WIN) {
-                if(basename(realpath($file)) != basename($file))
-                    return false;
-            }
-            return true;
+    public static function isExist($file, $case = true)
+    {
+        if(!is_file($file)) {
+            return false;
         }
-        return false;
+        if (self::_inWin() && basename(realpath($file)) != basename($file)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 检测系统是否为Windows
+     *
+     * @return boolen
+     */
+    protected static function _inWin()
+    {
+        if (null !== self::$_inWin) {
+            return self::$_inWin;
+        }
+        self::$_inWin = 'WIN' == substr(PHP_OS, 0, 3) ? true : false;
+        return self::$_inWin;
+    }
+
+    /**
+     * 过滤文件名中的非法字符
+     *
+     * @param string $name
+     * @return string
+     */
+    public static function filterName($name)
+    {
+        return str_replace(array('\\', '/', ':', '*', '<', '>', '?', '|'), '', $name);
+    }
+
+    /**
+     * 转换路径分隔符为网址路径
+     * 
+     * @param string $path 路径
+     * @return string 路径
+     */
+    public static function toUrlSeparator($path)
+    {
+        return strtr($path, array('\\' => '/'));
+    }
+
+    /**
+     * 转换路径为当前系统类型的路径
+     *
+     * @param string $path 路径
+     * @return string 路径
+     */
+    public static function toPathSeparator($path)
+    {
+        return str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
     }
 }

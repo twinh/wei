@@ -340,11 +340,6 @@ class Qwin_Application_Manager
         return Qwin::call($class);
     }
 
-    public function getWidget()
-    {
-        
-    }
-
     public function getService()
     {
         
