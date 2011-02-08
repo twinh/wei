@@ -112,7 +112,7 @@ class Qwin_App_Manager
      * @param array $config 配置选项
      * @return Qwin_App_Startup 当前对象
      */
-    public function startup($config)
+    public function startup(array $config)
     {
         // 设置加载标识
         if ($this->_isLoad) {
@@ -146,12 +146,12 @@ class Qwin_App_Manager
         Qwin::set('-manager', $this);
         
         // 启动Url路由
-        $router = null;
+        /*$router = null;
         if ($config['router']['enable']) {
             $router = Qwin::call('Qwin_Url_Router');
             $router->add($config['router']['list']);
         }
-        $url = Qwin::call('-url', $router);
+        $url = Qwin::call('-url', $router);*/
 
         // 加载视图
         $this->_view = Qwin::call($this->_option['viewClass']);
@@ -215,7 +215,7 @@ class Qwin_App_Manager
             return $this->_validNamespace;
         }
         $this->_validNamespace = array();
-        foreach ($this->_config['appPath'] as $dir) {
+        foreach ($this->_config['Qwin']['autoloadPath'] as $dir) {
             if (!is_dir($dir)) {
                 continue;
             }

@@ -62,11 +62,11 @@ class Common_Namespace extends Qwin_App_Namespace
         // 打开缓冲区
         ob_start();
 
-        if ($config['router']['enable']) {
+        /*if ($config['router']['enable']) {
             $router = Qwin::call('Qwin_Url_Router');
             $router->addList($config['router']['list']);
             $url = Qwin::call('-url', $router);
-        }
+        }*/
 
         /**
          * 数据库链接,使用的是Doctrine Orm
