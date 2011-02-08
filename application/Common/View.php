@@ -76,7 +76,7 @@ class Common_View extends Qwin_Application_View_Abstract
         $this->assign('minify', $minify);
         $this->assign('jQuery', $jQuery);
         
-        $this->setTagList(array(
+        $this->setTag(array(
             'resource'          => QWIN . '/view/theme/',
             'suffix'            => '.php',
             'theme'             => $config['interface']['theme'],
