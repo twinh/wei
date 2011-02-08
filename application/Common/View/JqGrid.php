@@ -36,9 +36,8 @@ class Common_View_JqGrid extends Common_View
         $metaHepler     = $this->metaHelper;
         $request        = Qwin::call('#request');
         $lang           = Qwin::call('-lang');
-        $config         = Qwin::call('-config');
         $url            = Qwin::call('-url');
-        $asc            = $config['asc'];
+        $asc            = Qwin::config('asc');
         $ascString      = strtolower(implode('-', $asc));
 
         $jqGridWidget = $this->widget->get('jqgrid');

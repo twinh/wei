@@ -32,7 +32,7 @@ class Common_Namespace extends Qwin_Application_Namespace
 {
     public function __construct()
     {
-        $config = Qwin::call('-config');
+        $config = Qwin::config();
 
         // 加载log4php
         /* @var $log Logger */

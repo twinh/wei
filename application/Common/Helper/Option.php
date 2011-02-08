@@ -71,18 +71,15 @@ class Common_Helper_Option
 
     public function  __construct($cachePath = null, $defaultLang = null)
     {
-        $config = Qwin::call('-config');
-        // 初始化路径
-        if (null == $cachePath) {
-            $this->_path = $config['optionCachePath'];
-        } else {
-            $this->_path = $cachePath;
+        if (!is_dir($cachePath)) {
+            throw new Qwin_Exception('The option path is not found.');
         }
-        Qwin_Util_File::makePath($this->_path);
+        // 初始化路径
+        $this->_path = $cachePath;
 
         // 设置默认语言
         if (null == $defaultLang) {
-            $lang = Qwin::call('Common_Helper_Language')->getName($config['asc']);
+            $lang = Qwin::call('Common_Helper_Language')->getName(Qwin::config('asc'));
         } else {
             $lang = $defaultLang;
         }

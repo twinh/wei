@@ -70,7 +70,7 @@ class Common_View extends Qwin_Application_View_Abstract
         ));
 
         // 获取配置
-        $config = Qwin::call('-config');
+        $config = Qwin::config();
 
         $minify = $widget->get('minify');
         $this->assign('minify', $minify);
@@ -108,7 +108,7 @@ class Common_View extends Qwin_Application_View_Abstract
             return $this->_style;
         }
         if (!isset($this->config)) {
-            $this->config = Qwin::call('-config');
+            $this->config = Qwin::config();
         }
 
         $session = Qwin::call('Qwin_Session');

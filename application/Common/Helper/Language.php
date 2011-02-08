@@ -111,9 +111,7 @@ class Common_Helper_Language
             return $name;
         }
 
-        // 全局配置
-        $config = Qwin::call('-config');
-        $name = $config['interface']['language'];
+        $name = Qwin::config('interface/language');
         $name = $this->isExists($asc, $name);
         if (false != $name) {
             $this->_name = $name;

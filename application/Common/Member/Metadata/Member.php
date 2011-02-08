@@ -227,9 +227,7 @@ class Common_Member_Metadata_Member extends Common_Metadata
 
     public function validateUsername($value, $name)
     {
-        $config = Qwin::call('-config');
-        $asc = $config['asc'];
-        if ('Edit' == $asc['action']) {
+        if ('Edit' == Qwin::config('asc/action')) {
             return true;
         }
         $asc = $this->getAscFromClass();
