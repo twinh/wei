@@ -34,7 +34,7 @@ class Qwin_Widget_Form extends Qwin_Widget_Abstract
      * 生成基本的表单元素
      *
      * @param array $option
-     * @param Qwin_App_View $view
+     * @param Qwin_Application_View $view
      */
     public function render($option, $view = null)
     {

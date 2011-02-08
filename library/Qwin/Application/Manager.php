@@ -25,12 +25,12 @@
  * @since       2009-11-24 20:45:11
  */
 
-class Qwin_App_Manager
+class Qwin_Application_Manager
 {
     /**
      * 启动器的实例化对象
      *
-     * @var Qwin_App_Setup
+     * @var Qwin_Application_Setup
      */
     protected static $_instance;
 
@@ -51,30 +51,30 @@ class Qwin_App_Manager
      * @var array
      */
     protected $_option = array(
-        'viewClass' => 'Qwin_App_View',
+        'viewClass' => 'Qwin_Application_View',
     );
 
     /**
      * 视图的实例化对象
-     * @var Qwin_App_View
+     * @var Qwin_Application_View
      */
     protected $_view;
     
     /**
      * 命名空间的实例化对象
-     * @var Qwin_App_Namespace
+     * @var Qwin_Application_Namespace
      */
     protected $_namespace;
 
     /**
      * 模块的实例化对象
-     * @var Qwin_App_Module
+     * @var Qwin_Application_Module
      */
     protected $_module;
 
     /**
      * 控制器的实例化对象
-     * @var Qwin_App_Controller
+     * @var Qwin_Application_Controller
      */
     protected $_controller;
 
@@ -95,7 +95,7 @@ class Qwin_App_Manager
     /**
      * 获取当前类的实例化对象(单例模式)
      *
-     * @return Qwin_App_Manager
+     * @return Qwin_Application_Manager
      */
     public static function getInstance()
     {
@@ -110,7 +110,7 @@ class Qwin_App_Manager
      * 本方法定义了应用程序的加载流程,按顺序为命名空间,模块,控制器,行为.
      * 
      * @param array $config 配置选项
-     * @return Qwin_App_Startup 当前对象
+     * @return Qwin_Application_Startup 当前对象
      */
     public function startup(array $config)
     {
@@ -138,7 +138,7 @@ class Qwin_App_Manager
         // 加载Qwin函数库
         require_once QWIN . '/library/function/qwin.php';
 
-        $config = Qwin::call('Qwin_App_Config', array($config));
+        $config = Qwin::call('Qwin_Application_Config', array($config));
         Qwin::set('-config', $config);
         $this->_config = &$config;
 
@@ -232,7 +232,7 @@ class Qwin_App_Manager
      * 获取命名空间对象
      *
      * @param array $asc 应用结构配置
-     * @return Qwin_App_Namespace
+     * @return Qwin_Application_Namespace
      */
     public function getNamespace(array $asc = null)
     {
@@ -246,7 +246,7 @@ class Qwin_App_Manager
      * 获取模块对象
      *
      * @param array $asc 应用结构配置
-     * @return Qwin_App_Module
+     * @return Qwin_Application_Module
      */
     public function getModule(array $asc = null)
     {
@@ -260,7 +260,7 @@ class Qwin_App_Manager
      * 获取控制器
      *
      * @param array $asc 应用结构配置
-     * @return Qwin_App_Controller
+     * @return Qwin_Application_Controller
      */
     public function getController(array $asc = null)
     {

@@ -38,7 +38,7 @@ class Common_Management_Controller_ApplicationStructure extends Common_Controlle
      */
     public function actionUpdate()
     {
-        $app = Qwin::call('Qwin_App_Application');
+        $app = Qwin::call('Qwin_Application_Application');
 
         // TODO 多路径的支持
         $path = array(

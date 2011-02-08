@@ -23,7 +23,7 @@
  * @since       2011-01-27 13:02:54
  */
 
-class Qwin_App_Config extends ArrayObject
+class Qwin_Application_Config extends ArrayObject
 {
     public function __construct($array = array(), $flag = parent::ARRAY_AS_PROPS)
     {

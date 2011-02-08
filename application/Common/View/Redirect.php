@@ -25,9 +25,9 @@
  * @since       2010-09-17 18:17:09
  */
 
-class Common_View_Redirect extends Qwin_App_View_Processer
+class Common_View_Redirect extends Qwin_Application_View_Processer
 {
-    public function __construct(Qwin_App_View $view)
+    public function __construct(Qwin_Application_View $view)
     {
         $view->setLayout('<resource><theme>/<defaultNamespace>/layout/default<suffix>');
         $view->setElement('content', '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>-redirect<suffix>');

@@ -29,7 +29,7 @@ class Common_Management_Controller_Namespace extends Common_Controller
 {
     public function  __construct()
     {
-        $this->_app = Qwin::call('Qwin_App_Application');
+        $this->_app = Qwin::call('Qwin_Application_Application');
         $this->_path = $this->_app->getDefultPath();
         $this->_rootAppPath = $this->_app->getRootAppPath();
         parent::__construct();
@@ -81,11 +81,11 @@ class Common_Management_Controller_Namespace extends Common_Controller
      */
     public function actionAdd()
     {
-        $app = Qwin::call('Qwin_App_Application');
+        $app = Qwin::call('Qwin_Application_Application');
         if(empty($_POST))
         {
             // 初始化常用的变量
-            $metaHelper = Qwin::call('Qwin_App_Metadata');
+            $metaHelper = Qwin::call('Qwin_Application_Metadata');
             $meta = $this->_meta;
             $primaryKey = $meta['db']['primaryKey'];
             $primaryKeyValue = $config['data']['primaryKeyValue'];

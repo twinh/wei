@@ -25,7 +25,7 @@
  * @since       2010-08-16 18:41:13
  */
 
-class Qwin_App_Language extends Qwin_Metadata_Abstract
+class Qwin_Application_Language extends Qwin_Metadata_Abstract
 {
     /**
      * 语言转换数据

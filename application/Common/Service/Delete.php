@@ -59,7 +59,7 @@ class Common_Service_Delete extends Common_Service_BasicAction
         parent::process($config['set']);
 
         // 初始化常用的变量
-        $metaHelper = Qwin::call('Qwin_App_Metadata');
+        $metaHelper = Qwin::call('Qwin_Application_Metadata');
         $meta = $this->_meta;
         $primaryKey = explode(',', $config['data']['primaryKeyValue']);
 

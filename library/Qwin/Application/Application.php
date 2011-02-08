@@ -25,7 +25,7 @@
  * @since       2010-09-16 16:18:45
  */
 
-class Qwin_App_Application
+class Qwin_Application_Application
 {
     protected $_path;
 

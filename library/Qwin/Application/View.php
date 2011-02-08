@@ -25,6 +25,6 @@
  * @since       2010-08-06 19:25:40
  */
 
-class Qwin_App_View extends Qwin_App_View_Abstract
+class Qwin_Application_View extends Qwin_Application_View_Abstract
 {
 }

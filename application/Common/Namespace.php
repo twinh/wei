@@ -28,7 +28,7 @@
  * @since       2009-11-21 14:37
  */
 
-class Common_Namespace extends Qwin_App_Namespace
+class Common_Namespace extends Qwin_Application_Namespace
 {
     public function __construct()
     {
@@ -39,12 +39,6 @@ class Common_Namespace extends Qwin_App_Namespace
         $log = Qwin::widget('log4php');
         $log->debug('The asc is ' . implode('/', $config['asc']));
         
-        // 设置会话类型及启动
-        if ($config['session']['enable']) {
-            session_cache_limiter($config['session']['type']);
-            session_start();
-        }
-
         // 关闭魔术引用
         ini_set('magic_quotes_runtime', 0);
 
@@ -54,10 +48,6 @@ class Common_Namespace extends Qwin_App_Namespace
         /*if (isset($config['interface']['charset'])) {
             header('Content-Type: text/html; charset=' . $config['interface']['charset']);
         }*/
-
-        // 设置会话
-        $namespace = md5($_SERVER['SERVER_NAME'] . $config['project']['name']);
-        Qwin::call('-session', $namespace);
 
         // 打开缓冲区
         ob_start();
@@ -104,7 +94,7 @@ class Common_Namespace extends Qwin_App_Namespace
                      . $databaseSet['password'] . '@'
                      . $databaseSet['server'] . '/'
                      . $databaseSet['database'];
-            $conn = Doctrine_Manager::connection($adapter, $config['project']['name']);
+            $conn = Doctrine_Manager::connection($adapter, $config['projectName']);
             $conn->setAttribute(Doctrine_Core::ATTR_QUOTE_IDENTIFIER, true);
             $conn->setCharset($databaseSet['charset']);
             //$conn->setCollate('utf8_general_ci');

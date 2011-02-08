@@ -27,7 +27,7 @@ class Common_Widget_FormLink extends Common_Widget
 {
     public function render($param, $view)
     {
-        $manager = Qwin_App_Manager::getInstance();
+        $manager = Qwin_Application_Manager::getInstance();
         $asc = $view['asc'];
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');

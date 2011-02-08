@@ -28,7 +28,7 @@
  * @since       2010-7-28 15:19:18
  */
 
-class Common_Controller extends Qwin_App_Controller
+class Common_Controller extends Qwin_Application_Controller
 {
     protected $_asc;
 
@@ -63,33 +63,33 @@ class Common_Controller extends Qwin_App_Controller
     public $member;
 
     /**
-     * Qwin_App_Language语言子对象
+     * Qwin_Application_Language语言子对象
      * @var object
      */
     protected $_lang;
 
     /**
-     * Qwin_App_Metadata元数据子对象
+     * Qwin_Application_Metadata元数据子对象
      * @var object
      */
     protected $_meta;
 
 
     /**
-     * Qwin_App_Model模型子对象
+     * Qwin_Application_Model模型子对象
      * @var object
      */
     protected $_model;
 
     /**
      * 元数据助手,负责元数据的获取,转换,检查等
-     * @var Qwin_App_Metadata
+     * @var Qwin_Application_Metadata
      */
     public $metaHelper;
 
     /**
      * 视图对象
-     * @var Qwin_App_View
+     * @var Qwin_Application_View
      */
     public $view;
 
@@ -110,7 +110,7 @@ class Common_Controller extends Qwin_App_Controller
         $this->view     = Qwin::call('-view');
 
         // 元数据管理助手,负责元数据的获取和转换
-        $this->metaHelper = Qwin::call('Qwin_App_Metadata');
+        $this->metaHelper = Qwin::call('Qwin_Application_Metadata');
 
         // 加载语言
         $langHelper = Qwin::call('Common_Helper_Language');
@@ -134,7 +134,7 @@ class Common_Controller extends Qwin_App_Controller
     {
         $session = $this->session;
         $member = $session->get('member');
-        $metaHelper = Qwin::call('Qwin_App_Metadata');
+        $metaHelper = Qwin::call('Qwin_Application_Metadata');
 
         // 未登陆则默认使用游客账号
         if(null == $member)
