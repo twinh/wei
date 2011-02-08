@@ -22,7 +22,7 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-4-17 15:50:02
+ * @since       2010-04-17 15:50:02
  */
 
 class Qwin_Application_Module

@@ -28,12 +28,6 @@
 class Qwin_Application_Controller
 {
     /**
-     * 行为重置时,用于保存原来行为的名称
-     * @var string
-     */
-    private $_lastAction;
-
-    /**
      * 模型对象
      * @var object
      */
@@ -104,62 +98,5 @@ class Qwin_Application_Controller
         $this->_validatorField = $field;
         $this->_validatorMessage = $message;
         return $this;
-    }
-
-    /**
-     * 设置新的行为
-     *
-     * @param string $newAction 新的行为名称
-     * @return object 当前对象
-     */
-    public function setAction($newAction)
-    {
-        $this->_lastAction = $this->_set['action'];
-        $this->_set['action'] = $newAction;
-        return $this;
-    }
-
-    /**
-     * 恢复为上一个行为
-     *
-     * @return string Action 的名称
-     * @return object 当前对象
-     */
-    public function resetAction()
-    {
-        $this->_set['action'] = $this->_lastAction;
-        return $this->_set['action'];
-    }
-
-    /**
-     * 获取上一个行为名称,一般是原行为
-     *
-     * @return string
-     */
-    public function getLastAction()
-    {
-        return $this->_lastAction;
-    }
-
-    /**
-     * 执行 on 方法
-     * 
-     * @param string $method
-     * @return object 当前对象
-     */
-    public function executeOnFunction($method)
-    {
-        if(method_exists($this, 'on' . $method))
-        {
-            $args = func_get_args();
-            array_shift($args);
-            call_user_func_array(array($this, 'on' . $method), $args);
-        }
-        return $this;
-    }
-
-    public function getHelper($name, $namespace = null)
-    {
-        return false;
     }
 }
