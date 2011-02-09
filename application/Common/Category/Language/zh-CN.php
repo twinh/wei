@@ -1,6 +1,6 @@
 <?php
 /**
- * Enus
+ * Zhcn
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,27 +17,26 @@
  * limitations under the License.
  *
  * @package     Common
- * @subpackage  Link
+ * @subpackage  Category
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-25 19:01:42
+ * @since       2010-08-16 19:48:24
  */
 
-class Common_Link_Language_Enus extends Common_Language_Enus
-{
-    public function __construct()
-    {
-        parent::__construct();
-        $this->_data += array(
-            'LBL_FIELD_CATEGORY_ID' => 'Category Name',
-            'LBL_FIELD_URL' => 'Url',
-            'LBL_FIELD_IMG_URL' => 'Image Url',
-            'LBL_FIELD_ORDER' => 'Order',
-            'LBL_FIELD_TARGET' => 'Target',
+return array(
+    'LBL_FIELD_PARENT_ID' => '父分类',
+    'LBL_FIELD_TO_URL' => '跳转到',
+    'LBL_FIELD_ORDER' => '顺序',
+    'LBL_FIELD_IMAGE' => '图像',
+    'LBL_FIELD_IMAGE_2' => '图像2',
+    'LBL_FIELD_SIGN' => '唯一标识',
 
-            'LBL_MODULE_LINK' => 'Link',
-        );
-    }
-}
+    'LBL_ACTION_ADD_SUBCATEGORY' => '添加子分类',
+    'LBL_ACTION_ADD_SPECIAL_ARTICLE' => '添加专题文章',
+    'LBL_ACTION_VIEW_SPECIAL_ARTICLE' => '查看专题文章',
+    'LBL_ACTION_VIEW_SPECIAL' => '查看专题',
+
+    'LBL_MODULE_CATEGORY' => '栏目',
+);

@@ -1,6 +1,6 @@
 <?php
 /**
- * Enus
+ * Zhcn
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,24 +16,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
- * @subpackage  Feedback
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-06 13:21:03
+ * @since       2011-01-09 09:49:53
  */
 
-class Common_Feedback_Language_Enus extends Common_Language_Enus
-{
-    public function __construct()
-    {
-        parent::__construct();
-        $this->_data += array(
-            'LBL_MODULE_FEEDBACK' => 'Feedback',
-            'LBL_FIELD_AUTHOR' => 'Author',
-            'LBL_FIELD_EMAIL' => 'Email',
-        );
-    }
-}
+return array(
+    'LBL_MODULE_HOME' => '主页',
+
+    'LBL_ACTION_UPDATELOG' => '更新日志',
+);

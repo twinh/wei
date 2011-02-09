@@ -23,26 +23,19 @@
  * @since       2011-01-05 16:06:45
  */
 
-class Crm_Potential_Language_Zhcn extends Common_Language_Zhcn
-{
-    public function __construct()
-    {
-        parent::__construct();
-        $this->_data += array(
-            'LBL_FIELD_CLOSING_DATE' => '预计成交日期',
-            'LBL_FIELD_CUSTOMER_ID' => '客户编号',
-            'LBL_FIELD_PROBABILITY' => '可能性(%)',
-            'LBL_FIELD_NEXT_STEP' => '下一步',
-            'LBL_FIELD_EXPECTED_REVENUE' => '期望收益',
-            'LBL_FIELD_SOURCE' => '来源',
-            'LBL_FIELD_CAMPAIGN_ID' => '市场活动编号',
-            'LBL_FIELD_CAMPAIGN' => '市场活动',
-            'LBL_FIELD_CONTACT_ID' => '联系人编号',
-            'LBL_FIELD_CONTACT' => '联系人',
+return array(
+    'LBL_FIELD_CLOSING_DATE' => '预计成交日期',
+    'LBL_FIELD_CUSTOMER_ID' => '客户编号',
+    'LBL_FIELD_PROBABILITY' => '可能性(%)',
+    'LBL_FIELD_NEXT_STEP' => '下一步',
+    'LBL_FIELD_EXPECTED_REVENUE' => '期望收益',
+    'LBL_FIELD_SOURCE' => '来源',
+    'LBL_FIELD_CAMPAIGN_ID' => '市场活动编号',
+    'LBL_FIELD_CAMPAIGN' => '市场活动',
+    'LBL_FIELD_CONTACT_ID' => '联系人编号',
+    'LBL_FIELD_CONTACT' => '联系人',
 
-            'LBL_GROUP_RELATED_DATA' => '关联资料',
+    'LBL_GROUP_RELATED_DATA' => '关联资料',
 
-            'LBL_MODULE_POTENTIAL' => '商机',
-        );
-    }
-}
+    'LBL_MODULE_POTENTIAL' => '商机',
+);

@@ -17,33 +17,20 @@
  * limitations under the License.
  *
  * @package     Common
- * @subpackage  Category
+ * @subpackage  AdminMenu
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-16 19:50:28
+ * @since       2010-08-16 19:46:35
  */
 
-class Common_Category_Language_Enus extends Common_Language_Enus
-{
-    public function __construct()
-    {
-        parent::__construct();
-        $this->_data += array(
-            'LBL_FIELD_PARENT_ID' => 'Parent Category',
-            'LBL_FIELD_TO_URL' => 'Jump to url',
-            'LBL_FIELD_ORDER' => 'Order',
-            'LBL_FIELD_IMAGE' => 'Image',
-            'LBL_FIELD_IMAGE_2' => 'Image 2',
-            'LBL_FIELD_SIGN' => 'Sign',
+return array(
+    'LBL_FIELD_CATEGORY' => 'Category',
+    'LBL_FIELD_URL' => 'Url',
+    'LBL_FIELD_ORDER' => 'Order',
+    'LBL_FIELD_TARGET' => 'Target',
 
-            'LBL_ACTION_ADD_SUBCATEGORY' => 'Add Subcategory',
-            'LBL_ACTION_ADD_SPECIAL_ARTICLE' => 'Add Special Article',
-            'LBL_ACTION_VIEW_SPECIAL_ARTICLE' => 'Show Special Article',
-            'LBL_ACTION_VIEW_SPECIAL' => 'View Special',
+    'LBL_MODULE_ADMIN_MENU' => 'Admin Menu',
+);
 
-            'LBL_MODULE_CATEGORY' => 'Category',
-        );
-    }
-}

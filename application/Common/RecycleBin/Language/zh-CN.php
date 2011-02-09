@@ -23,21 +23,14 @@
  * @since       2011-01-09 14:52:09
  */
 
-class Common_RecycleBin_Language_Zhcn extends Common_Language_Zhcn
-{
-    public function __construct()
-    {
-        parent::__construct();
-        $this->_data += array(
-            'LBL_MODULE_RECYCLEBIN' => '回收站',
+return array(
+    'LBL_MODULE_RECYCLEBIN' => '回收站',
 
-            'LBL_ACTION_EMPTY' => '清空',
+    'LBL_ACTION_EMPTY' => '清空',
 
-            'LBL_FIELD_DELETED_BY' => '删除者',
-            'LBL_FIELD_DELETED_AT' => '删除时间',
+    'LBL_FIELD_DELETED_BY' => '删除者',
+    'LBL_FIELD_DELETED_AT' => '删除时间',
 
-            'MSG_NO_SOURCE_RECORD' => '源记录已不存在,无法还原.',
-            'MSG_CONFIRM_TO_RESTORE' => '记录将还原,确认?',
-        );
-    }
-}
+    'MSG_NO_SOURCE_RECORD' => '源记录已不存在,无法还原.',
+    'MSG_CONFIRM_TO_RESTORE' => '记录将还原,确认?',
+);

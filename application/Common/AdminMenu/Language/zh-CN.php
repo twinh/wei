@@ -1,6 +1,6 @@
 <?php
 /**
- * Enus
+ * Zhcn
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,30 +17,19 @@
  * limitations under the License.
  *
  * @package     Common
- * @subpackage  Email
+ * @subpackage  AdminMenu
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-20 10:37:51
+ * @since       2010-08-16 19:36:00
  */
 
-class Common_Email_Language_Enus extends Common_Language_Enus
-{
-    public function  __construct()
-    {
-        parent::__construct();
-        $this->_data += array(
-            'LBL_FIELD_FROM' => 'From',
-            'LBL_FIELD_FROM_NAME' => 'From Name',
-            'LBL_FIELD_TO' => 'To',
-            'LBL_FIELD_TO_NAME' => 'To Name',
-            'LBL_FIELD_SUBJECT' => 'Subject',
-            'LBL_FIELD_RESULT' => 'Result',
+return array(
+    'LBL_FIELD_CATEGORY' => '分类',
+    'LBL_FIELD_URL' => '地址',
+    'LBL_FIELD_ORDER' => '顺序',
+    'LBL_FIELD_TARGET' => '链接目标',
 
-            'LBL_ACTION_POST' => 'Post',
-
-            'LBL_MODULE_EMAIL' => 'Email',
-        );
-    }
-}
+    'LBL_MODULE_ADMIN_MENU' => '后台菜单',
+);

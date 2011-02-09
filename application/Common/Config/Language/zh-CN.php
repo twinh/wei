@@ -17,33 +17,29 @@
  * limitations under the License.
  *
  * @package     Common
- * @subpackage  Category
+ * @subpackage  Language
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-16 19:48:24
+ * @since       2010-12-07 17:09:37
  */
 
-class Common_Category_Language_Zhcn extends Common_Language_Zhcn
-{
-    public function __construct()
-    {
-        parent::__construct();
-        $this->_data += array(
-            'LBL_FIELD_PARENT_ID' => '父分类',
-            'LBL_FIELD_TO_URL' => '跳转到',
-            'LBL_FIELD_ORDER' => '顺序',
-            'LBL_FIELD_IMAGE' => '图像',
-            'LBL_FIELD_IMAGE_2' => '图像2',
-            'LBL_FIELD_SIGN' => '唯一标识',
+return array(
+    'LBL_FIELD_GROUP_ID' => '分组编号',
+    'LBL_FIELD_FORM_TYPE' => '表单类型',
+    'LBL_FIELD_FORM_WIDGET' => '表单微件',
+    'LBL_FIELD_LABEL' => '名称',
+    'LBL_FIELD_FORM_NAME' => '表单名称',
+    'LBL_FIELD_FORM_LABEL' => '表单标题',
+    'LBL_FIELD_FORM_RESOURCE' => '表单资源',
+    'LBL_FIELD_IS_ENABLED' => '是否启用',
 
-            'LBL_ACTION_ADD_SUBCATEGORY' => '添加子分类',
-            'LBL_ACTION_ADD_SPECIAL_ARTICLE' => '添加专题文章',
-            'LBL_ACTION_VIEW_SPECIAL_ARTICLE' => '查看专题文章',
-            'LBL_ACTION_VIEW_SPECIAL' => '查看专题',
+    'LBL_GROUP_FORM_SETTING' => '表单配置',
 
-            'LBL_MODULE_CATEGORY' => '栏目',
-        );
-    }
-}
+    'LBL_ACTION_CENTER' => '配置中心',
+
+    'LBL_CONTROLLER_CONFIG' => '配置',
+    'LBL_MODULE_CONFIG' => '配置',
+    'LBL_MODULE_CONFIG_GROUP' => '配置分组',
+);
