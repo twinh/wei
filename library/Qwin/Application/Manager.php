@@ -79,12 +79,11 @@ class Qwin_Application_Manager
     protected $_controller;
 
     /**
-     * 合法的命名空间数组
+     * 命名空间数组,键名为命名空间名称,值为所在路径
      * @var array
      */
-    protected $_validNamespace;
+    protected $_namespaceList;
     
-
     /**
      * 构造方法,不允许继承,也不允许实例化
      */
@@ -167,10 +166,12 @@ class Qwin_Application_Manager
         $config['asc'] = $asc;
 
         // 检查命名空间是否存在
-        if (!in_array($asc['namespace'], $this->getValidNamespace())) {
-            exit('The namespace "' . $asc['namespace'] . '" is not exists.');
+        $namespaceList = $this->getNamespaceList();
+        if (!isset($namespaceList[$asc['namespace']])) {
+            return $this->_onNamespaceNotExists($asc);
         }
         $this->_namespace = $this->getNamespace($asc, $config);
+        Qwin::setMap('-namespace', $this->_namespace);
 
         // 加载模块
         $this->_module = $this->getModule($asc);
@@ -178,7 +179,7 @@ class Qwin_Application_Manager
         // 加载控制器
         $controller = $this->getController($asc);
         if (null == $controller) {
-            exit('The controller "' . $asc['controller'] . '" is not exists.');
+            return $this->_onControllerNotExists($asc);
         }
         $this->_controller = $controller;
 
@@ -191,7 +192,7 @@ class Qwin_Application_Manager
                 array(&$asc, &$this->_config)
             );
         } else {
-            exit('The action "' . $asc['action'] .  '" is not exists');
+            return $this->_onActionNotExists($asc);
         }
 
         // 使用Qwin获取视图对象并展示(因为此时视图对象可能已改变)
@@ -205,23 +206,22 @@ class Qwin_Application_Manager
      *
      * @return array
      */
-    public function getValidNamespace()
+    public function getNamespaceList()
     {
-        if (isset($this->_validNamespace)) {
-            return $this->_validNamespace;
-        }
-        $this->_validNamespace = array();
-        foreach ((array)Qwin::config('Qwin/autoloadPath') as $dir) {
-            if (!is_dir($dir)) {
-                continue;
-            }
-            foreach (scandir($dir) as $file) {
-                if ('.' != $file[0] && is_dir($dir . '/' . $file)) {
-                    $this->_validNamespace[] = $file;
+        if (!isset($this->_namespaceList)) {
+            $this->_namespaceList = array();
+            foreach ((array)Qwin::config('Qwin/autoloadPath') as $dir) {
+                if (!is_dir($dir)) {
+                    continue;
+                }
+                foreach (scandir($dir) as $file) {
+                    if ('.' != $file[0] && is_dir($dir . '/' . $file)) {
+                        $this->_namespaceList[$file] = $dir . '/' . $file;
+                    }
                 }
             }
         }
-        return $this->_validNamespace;
+        return $this->_namespaceList;
     }
 
     /**
@@ -339,5 +339,21 @@ class Qwin_Application_Manager
     public function getService()
     {
         
+    }
+
+
+    public function _onNamespaceNotExists($asc)
+    {
+        exit('The namespace "' . $asc['namespace'] . '" is not exists.');
+    }
+
+    public function _onControllerNotExists($asc)
+    {
+        exit('The controller "' . $asc['controller'] . '" is not exists.');
+    }
+
+    public function _onActionNotExists($asc)
+    {
+        exit('The action "' . $asc['action'] .  '" is not exists');
     }
 }

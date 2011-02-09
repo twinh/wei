@@ -22,49 +22,78 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-7-27 15:41:46
+ * @since       2010-07-27 15:41:46
  */
 
 abstract class Qwin_Metadata_Abstract implements ArrayAccess, Iterator
 {
     protected $_data = array();
 
+    /**
+     * 通过魔术方法设置一个属性的值
+     *
+     * @param string $name 名称
+     * @param mixed $value 值
+     */
     public function __set($name, $value)
     {
         $this->_data[$name] = $value;
     }
 
+    /**
+     * 通过魔术方法获取一个属性的值
+     *
+     * @param string $name 名称
+     * @return mixed
+     */
     public function __get($name)
     {
-        if (isset($this->_data[$name])) {
-            return $this->_data[$name];
-        }
-        return null;
+        return isset($this->_data[$name]) ? $this->_data[$name] : null;
     }
 
+    /**
+     * 检查索引是否存在
+     *
+     * @param string $offset 索引
+     * @return bool
+     */
     public function offsetExists($offset)
     {
         return isset($this->_data[$offset]);
     }
 
+    /**
+     * 获取索引的数据
+     *
+     * @param string $offset 索引
+     * @return mixed
+     */
     public function offsetGet($offset)
     {
-        if (isset($this->_data[$offset])) {
-            return $this->_data[$offset];
-        }
-        return null;
+        return isset($this->_data[$offset]) ? $this->_data[$offset] : null;
     }
 
+    /**
+     * 设置索引的值
+     *
+     * @param string $offset 索引
+     * @param mixed $value 值
+     */
     public function offsetSet($offset, $value)
     {
         $this->_data[$offset] = $value;
     }
 
+    /**
+     * 销毁一个索引
+     *
+     * @param string $offset 索引的名称
+     */
     public function offsetUnset($offset)
     {
         unset($this->_data[$offset]);
     }
-
+    
     public function next()
     {
         return next($this->_data);
@@ -77,7 +106,7 @@ abstract class Qwin_Metadata_Abstract implements ArrayAccess, Iterator
 
     public function valid()
     {
-        return $this->current() !== false;
+        return false !== $this->current();
     }
 
     public function rewind()

@@ -21,6 +21,7 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2011-01-11 21:48:08
+ * @todo        url空间 http://yourwebsite/?qw=[query-string]
  */
 
 class Common_Request extends Qwin_Request
@@ -57,18 +58,18 @@ class Common_Request extends Qwin_Request
      *      -- maxRow               列表页最大显示行数
      */
     protected $_option = array(
-        'id'            => 'qw-id',
-        'page'          => 'qw-page',
-        'list'          => 'qw-list',
-        'row'           => 'qw-row',
-        'order'         => 'qw-order',
-        'orderField'    => 'qw-order-field',
-        'orderType'     => 'qw-order-type',
-        'search'        => 'qw-search',
-        'searchField'   => 'qw-search-field',
-        'searchValue'   => 'qw-search-value',
-        'searchOper'    => 'qw-search-oper',
-        'lang'          => 'qw-lang',
+        'id'            => 'id',
+        'page'          => 'page',
+        'list'          => 'list',
+        'row'           => 'row',
+        'order'         => 'order',
+        'orderField'    => 'order-field',
+        'orderType'     => 'order-type',
+        'search'        => 'search',
+        'searchField'   => 'search-field',
+        'searchValue'   => 'search-value',
+        'searchOper'    => 'search-oper',
+        'lang'          => 'lang',
 
         'maxRow'        => 500,
     );

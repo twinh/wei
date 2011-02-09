@@ -70,11 +70,6 @@ class Common_Service_BasicAction extends Common_Service
         $this->_asc         = $asc = $option;
         $this->member       = $this->session->get('member');
         
-        // 加载语言
-        $langHelper = Qwin::call('Common_Helper_Language');
-        $this->_lang = $langHelper->getObjectByAsc($this->_asc);
-        Qwin::setMap('-lang', get_class($this->_lang));
-
         if (!isset($this->_meta)) {
             $this->_meta = $this->metaHelper->getMetadataByAsc($asc);
         }

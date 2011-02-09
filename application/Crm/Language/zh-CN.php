@@ -1,8 +1,8 @@
 <?php
 /**
- * Language
+ * zh-CN
  *
- * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
- * @subpackage  Language
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-16 18:40:20
+ * @since       2011-02-09 18:01:16
  */
 
-class Common_Language extends Qwin_Application_Language
-{
-}
+/* @var $this Qwin_Application_Language */
+$this->appendByNamespace('Common');
+return array();
