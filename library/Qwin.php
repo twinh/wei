@@ -270,6 +270,9 @@ class Qwin
         if (!is_string($name)) {
             throw new Qwin_Exception('The map name should be a sting.');
         }
+        if (is_object($realName)) {
+            $realName = get_class($realName);
+        }
         if (!is_string($realName)) {
             throw new Qwin_Exception('The map real name should be a sting.');
         }

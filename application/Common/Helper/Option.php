@@ -69,7 +69,7 @@ class Common_Helper_Option
     );
 
 
-    public function  __construct($cachePath = null, $defaultLang = null)
+    public function  __construct($cachePath = null)
     {
         if (!is_dir($cachePath)) {
             throw new Qwin_Exception('The option path is not found.');
@@ -77,16 +77,9 @@ class Common_Helper_Option
         // 初始化路径
         $this->_path = $cachePath;
 
-        // 设置默认语言
-        if (null == $defaultLang) {
-            $lang = Qwin::call('Common_Helper_Language')->getName(Qwin::config('asc'));
-        } else {
-            $lang = $defaultLang;
-        }
-        $this->_lang = Qwin::call('-language')->toStandardStyle($lang);
-
-        // 初始化附加选项
         $lang = Qwin::call('-lang');
+        // 初始化附加选项
+        $this->_lang = $lang->getName();
         foreach ($this->_defaultAddition as &$row) {
             $row['name'] = $lang[$row['name']];
         }

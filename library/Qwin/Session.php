@@ -26,7 +26,7 @@
  * @todo        session start
  */
 
-class Qwin_Session
+class Qwin_Session implements ArrayAccess
 {
     /**
      * 当前的命名空间
@@ -143,5 +143,48 @@ class Qwin_Session
      */
     public function  __set($name, $value) {
         return $this->set($name, $value);
+    }
+
+        /**
+     * 检查索引是否存在
+     *
+     * @param string $offset 索引
+     * @return bool
+     */
+    public function offsetExists($offset)
+    {
+        return isset($_SESSION[$this->_namespace][$offset]);
+    }
+
+    /**
+     * 获取索引的数据
+     *
+     * @param string $offset 索引
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return $this->get($offset);
+    }
+
+    /**
+     * 设置索引的值
+     *
+     * @param string $offset 索引
+     * @param mixed $value 值
+     */
+    public function offsetSet($offset, $value)
+    {
+        return $this->set($offset, $value);
+    }
+
+    /**
+     * 销毁一个索引
+     *
+     * @param string $offset 索引的名称
+     */
+    public function offsetUnset($offset)
+    {
+        unset($_SESSION[$this->_namespace][$offset]);
     }
 }

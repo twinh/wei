@@ -151,11 +151,12 @@ class Qwin_Util_File
      * 
      * @param string $file
      */
-    public static function isExist($file, $case = true)
+    public static function isExist($file)
     {
         if(!is_file($file)) {
             return false;
         }
+        // 如果是前面的路径不一致?
         if (self::_inWin() && basename(realpath($file)) != basename($file)) {
             return false;
         }
