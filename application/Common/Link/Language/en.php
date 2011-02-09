@@ -1,6 +1,6 @@
 <?php
 /**
- * Link
+ * Enus
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -22,20 +22,15 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-06-17 09:51:19
+ * @since       2010-08-25 19:01:42
  */
 
-class Common_Link_Language_Zhcn extends Common_Language_Zhcn
-{
-    public function __construct()
-    {
-        parent::__construct();
-        $this->_data += array(
-            'LBL_FIELD_URL' => '地址',
-            'LBL_FIELD_IMG_URL' => '图片地址',
-            'LBL_FIELD_TARGET' => '链接目标',
+return array(
+    'LBL_FIELD_CATEGORY_ID' => 'Category Name',
+    'LBL_FIELD_URL' => 'Url',
+    'LBL_FIELD_IMG_URL' => 'Image Url',
+    'LBL_FIELD_ORDER' => 'Order',
+    'LBL_FIELD_TARGET' => 'Target',
 
-            'LBL_MODULE_LINK' => '链接',
-        );
-    }
-}
+    'LBL_MODULE_LINK' => 'Link',
+);

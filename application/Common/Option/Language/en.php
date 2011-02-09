@@ -1,6 +1,6 @@
 <?php
 /**
- * Gbk
+ * Enus
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,26 +17,20 @@
  * limitations under the License.
  *
  * @package     Common
- * @subpackage  AdminMenu
+ * @subpackage  Option
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-10-22 9:55:39
+ * @since       2010-08-25 15:46:35
  */
 
-class Common_AdminMenu_Language_Gbk extends Common_Language_Gbk
-{
-    public function __construct()
-    {
-        parent::__construct();
-        $this->_data +=  array(
-            'LBL_FIELD_CATEGORY' => '分类',
-            'LBL_FIELD_URL' => '地址',
-            'LBL_FIELD_ORDER' => '顺序',
-            'LBL_FIELD_TARGET' => '链接目标',
+return array(
+    'LBL_FIELD_LANGUAGE' => 'Language',
+    'LBL_FIELD_SIGN' => 'Sign',
+    'LBL_FIELD_CODE' => 'Code',
 
-            'LBL_MODULE_ADMIN_MENU' => '后台菜单',
-        );
-    }
-}
+    'LBL_ACTION_ADD_NEXT' => 'Add Next Class',
+
+    'LBL_MODULE_COMMONCLASS' => 'Common Class',
+);

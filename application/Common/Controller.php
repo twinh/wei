@@ -112,7 +112,7 @@ class Common_Controller extends Qwin_Application_Controller
         $this->metaHelper = Qwin::call('Qwin_Application_Metadata');
 
         $this->_meta = $this->metaHelper->getMetadataByAsc($this->_asc);
-        
+
          /**
          * 访问控制
          */

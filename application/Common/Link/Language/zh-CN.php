@@ -1,6 +1,6 @@
 <?php
 /**
- * Zhcn
+ * Link
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,22 +16,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ * @package     Common
+ * @subpackage  Link
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-09 09:49:53
+ * @since       2010-06-17 09:51:19
  */
 
-class Common_Home_Language_Zhcn extends Common_Language_Zhcn
-{
-    public function __construct()
-    {
-        parent::__construct();
-        $this->_data += array(
-            'LBL_MODULE_HOME' => '主页',
+return array(
+    'LBL_FIELD_URL' => '地址',
+    'LBL_FIELD_IMG_URL' => '图片地址',
+    'LBL_FIELD_TARGET' => '链接目标',
 
-            'LBL_ACTION_UPDATELOG' => '更新日志',
-        );
-    }
-}
+    'LBL_MODULE_LINK' => '链接',
+);

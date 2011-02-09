@@ -17,26 +17,23 @@
  * limitations under the License.
  *
  * @package     Common
- * @subpackage  AdminMenu
+ * @subpackage  Email
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-16 19:46:35
+ * @since       2010-09-20 10:37:51
  */
 
-class Common_AdminMenu_Language_Enus extends Common_Language_Enus
-{
-    public function __construct()
-    {
-        parent::__construct();
-        $this->_data += array(
-            'LBL_FIELD_CATEGORY' => 'Category',
-            'LBL_FIELD_URL' => 'Url',
-            'LBL_FIELD_ORDER' => 'Order',
-            'LBL_FIELD_TARGET' => 'Target',
+return array(
+    'LBL_FIELD_FROM' => 'From',
+    'LBL_FIELD_FROM_NAME' => 'From Name',
+    'LBL_FIELD_TO' => 'To',
+    'LBL_FIELD_TO_NAME' => 'To Name',
+    'LBL_FIELD_SUBJECT' => 'Subject',
+    'LBL_FIELD_RESULT' => 'Result',
 
-            'LBL_MODULE_ADMIN_MENU' => 'Admin Menu',
-        );
-    }
-}
+    'LBL_ACTION_POST' => 'Post',
+
+    'LBL_MODULE_EMAIL' => 'Email',
+);

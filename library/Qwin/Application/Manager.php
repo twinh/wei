@@ -154,7 +154,7 @@ class Qwin_Application_Manager
         
         // 通过配置数据和Url参数初始化系统配置(包括命名空间,模块,控制器,行为等)
         if (empty($_SERVER['QUERY_STRING'])) {
-            $_GET = $url->parse($config['index']['url']);
+            //$_GET = $url->parse($config['index']['url']);
         }
         foreach ($config['defaultAsc'] as $name => $value) {
             $asc[$name] = isset($_GET[$name]) ? $_GET[$name] :  $value;
@@ -163,7 +163,7 @@ class Qwin_Application_Manager
         empty($asc['module']) && $asc['module'] = $asc['controller'];
         empty($asc['controller']) && $asc['controller'] = $asc['module'];
         
-        $config['asc'] = $asc;
+        Qwin::config('asc', $asc);
 
         // 检查命名空间是否存在
         $namespaceList = $this->getNamespaceList();

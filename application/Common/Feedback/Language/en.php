@@ -17,15 +17,16 @@
  * limitations under the License.
  *
  * @package     Common
- * @subpackage  Common
+ * @subpackage  Feedback
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-11 21:35:37
+ * @since       2010-09-06 13:21:03
  */
 
-class Common_Common_Language_Enus extends Common_Language_Enus
-{
-    
-}
+return array(
+    'LBL_MODULE_FEEDBACK' => 'Feedback',
+    'LBL_FIELD_AUTHOR' => 'Author',
+    'LBL_FIELD_EMAIL' => 'Email',
+);
