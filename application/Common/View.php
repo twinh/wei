@@ -143,8 +143,11 @@ class Common_View extends Qwin_Application_View_Abstract
 
     /**
      * 输出视图
-     * 
-     * @return Common_View
+     * 输出视图的情况:显示数据,信息提示,跳转.
+     *
+     * @param string $layout 布局路径
+     * @param array $data 数据
+     * @return Common_View 当前对象
      */
     public function display($layout = null, array $data = null)
     {
