@@ -81,10 +81,10 @@ class Common_View_JqGrid extends Common_View
         // 设置弹出窗口属性
         if ($this->isPopup) {
             $popup = array(
-                'valueInput'    => $request['qw-popup-value-input'],
-                'viewInput'     => $request['qw-popup-view-input'],
-                'valueColumn'   => $request['qw-popup-value-column'],
-                'viewColumn'    => $request['qw-popup-view-column'],
+                'valueInput'    => $request['popup-value-input'],
+                'viewInput'     => $request['popup-view-input'],
+                'valueColumn'   => $request['popup-value-column'],
+                'viewColumn'    => $request['popup-view-column'],
             );
             $option['multiselect']  = false;
             $option['autowidth']    = false;

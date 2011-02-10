@@ -38,7 +38,7 @@ class Common_ActionController extends Common_Controller
     public function actionIndex()
     {
         $request = $this->request;
-        if ($request->g('json')) {
+        if ($request->get('json')) {
             $service = new Common_Service_List();
             return $service->process(array(
                 'asc' => $this->_asc,
@@ -48,7 +48,7 @@ class Common_ActionController extends Common_Controller
                     'where' => $request->getWhere(),
                     'offset'=> $request->getOffset(),
                     'limit' => $request->getLimit(),
-                    'converAsAction'=> $this->request->g('_as'),
+                    'converAsAction'=> $this->request->get('_as'),
                 ),
                 'callback' => array(
                     'datafilter' => array(
@@ -62,7 +62,7 @@ class Common_ActionController extends Common_Controller
                 'asc' => $this->_asc,
                 'data' => array(
                     'list' => $request->getListField(),
-                    'isPopup' => $request->g('qw-popup'),
+                    'isPopup' => $request->get('popup'),
                 ),
             ));
         }
@@ -113,7 +113,7 @@ class Common_ActionController extends Common_Controller
                     ),
                 ),
                 'view' => array(
-                    'url' => urldecode($this->request->p('_page')),
+                    'url' => urldecode($this->request->post('_page')),
                 ),
             ));
         }
@@ -153,7 +153,7 @@ class Common_ActionController extends Common_Controller
                     ),
                 ),
                 'view' => array(
-                    'url' => urldecode($this->request->p('_page')),
+                    'url' => urldecode($this->request->post('_page')),
                 ),
             ));
         }

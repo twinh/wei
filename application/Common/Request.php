@@ -53,6 +53,14 @@ class Common_Request extends Qwin_Request
      *
      *      -- lang                 语言名称,如Zh-cn,en-US
      *
+     *      -- style                风格名称
+     *
+     *      -- theme                主题名称
+     *
+     *      -- ajax                 是否通过ajax请求
+     *
+     *      -- popup                是否以弹框形式请求
+     *
      *      其他选项
      *
      *      -- maxRow               列表页最大显示行数
@@ -110,7 +118,7 @@ class Common_Request extends Qwin_Request
     {
         // 字符串类型排序,如 qwOrder=id:desc,title:asc
         null == $order && $order = $this->_option['order'];
-        $orderValue = $this->g($order);
+        $orderValue = $this->get($order);
         if (null != $orderValue) {
             return $this->split($orderValue);
         }
@@ -119,13 +127,13 @@ class Common_Request extends Qwin_Request
         null == $fieldName && $fieldName = $this->_option['orderField'];
         null == $typeName && $typeName = $this->_option['orderType'];
 
-        $orderField = $this->g($fieldName);
+        $orderField = $this->get($fieldName);
         // 地址未设置排序
         if (null == $orderField) {
             return array();
         }
 
-        $orderType = strtoupper($this->g($typeName));
+        $orderType = strtoupper($this->get($typeName));
         $typeOption = array('DESC', 'ASC');
         if (!in_array($orderType, $typeOption)) {
             $orderType = $typeOption[0];
@@ -148,12 +156,12 @@ class Common_Request extends Qwin_Request
     {
         // 字符串类型查找,如 qwSearch=title:me:eq,id:5:gt
         null == $search && $search = $this->_option['search'];
-        $searchValue = $this->g($search);
+        $searchValue = $this->get($search);
         if (null != $searchValue) {
             return $this->split($searchValue);
         }
 
-        $searchField = $this->g($fieldName);
+        $searchField = $this->get($fieldName);
         if (null == $searchField) {
             return array();
         }
@@ -164,9 +172,9 @@ class Common_Request extends Qwin_Request
         null == $operName  && $operName  = $this->_option['searchOper'];
         
         return array(
-            $this->g($fieldName),
-            $this->g($valueName),
-            $this->g($operName),
+            $this->get($fieldName),
+            $this->get($valueName),
+            $this->get($operName),
         );
     }
 
@@ -183,7 +191,7 @@ class Common_Request extends Qwin_Request
             return $this->_limit;
         }
         null == $limitName && $limitName = $this->_option['row'];
-        $limit = $this->g($limitName);
+        $limit = $this->get($limitName);
         return $this->_limit = $this->_option['maxRow'] < $limit ? $this->_option['maxRow'] : $limit;
     }
 
@@ -207,7 +215,7 @@ class Common_Request extends Qwin_Request
     public function getPage($pageName = null)
     {
         null == $pageName && $pageName = $this->_option['page'];
-        $page = intval($this->g($pageName));
+        $page = intval($this->get($pageName));
         return $page > 0 ? $page : 1;
     }
 
@@ -223,7 +231,7 @@ class Common_Request extends Qwin_Request
         if (null == $listName) {
             $listName = $this->_option['list'];
         }
-        $list = $this->g($listName);
+        $list = $this->get($listName);
         if (null != $list) {
             $list = explode($delimiter, $list);
             foreach ($list as $key => $value) {
@@ -250,7 +258,7 @@ class Common_Request extends Qwin_Request
     {
         $metaHelper = Qwin::call('Qwin_Application_Metadata');
         $primaryKey = $metaHelper->getPrimaryKeyName($asc);
-        return $this->g($primaryKey);
+        return $this->get($primaryKey);
     }
 
     public function getLang($name = null)
@@ -269,7 +277,7 @@ class Common_Request extends Qwin_Request
     {
         // 字符串类型查找,如 qwSearch=title:me:eq,id:5:gt
         null == $search && $search = $this->_option['search'];
-        $searchValue = $this->g($search);
+        $searchValue = $this->get($search);
         if (null != $searchValue) {
             return $this->splitToInitalData($searchValue);
         }
@@ -307,5 +315,68 @@ class Common_Request extends Qwin_Request
             }
         }
         return $result;
+    }
+
+    /**
+     *
+     * Retrieves an **unfiltered** value by key from the [[Solar_Request::$request | ]] property,
+     * or an alternate default value if that key does not exist.
+     *
+     * @param string $key The $get key to retrieve the value of.
+     *
+     * @param string $alt The value to return if the key does not exist.
+     *
+     * @return mixed The value of $request[$key], or the alternate default
+     * value.
+     *
+     * @author Twin Huang
+     *
+     */
+    public function request($key = null, $alt = null)
+    {
+        return $this->_getValue('request', $key, $alt);
+    }
+
+    /**
+     * 检查索引是否存在
+     *
+     * @param string $offset 索引
+     * @return bool
+     */
+    public function offsetExists($offset)
+    {
+        return isset($_SESSION[$this->_namespace][$offset]);
+    }
+
+    /**
+     * 获取索引的数据
+     *
+     * @param string $offset 索引
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return $this->get($offset);
+    }
+
+    /**
+     * 设置索引的值
+     *
+     * @param string $offset 索引
+     * @param mixed $value 值
+     */
+    public function offsetSet($offset, $value)
+    {
+        return $this->set($offset, $value);
+    }
+
+    /**
+     * 销毁一个索引
+     *
+     * @param string $offset 索引的名称
+     */
+    public function offsetUnset($offset)
+    {
+        unset($_SESSION[$this->_namespace][$offset]);
     }
 }

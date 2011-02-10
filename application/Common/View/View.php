@@ -77,7 +77,7 @@ class Common_View_View extends Common_View
             $jqGrid['colModel'] = $col['colModel'];
 
             // 获取json数据的地址
-            $jqGrid['url'] = $url->url(array('json' => '1') + $model['set'] + array('qw-search' => $model['foreign'] . ':' . $data[$model['local']]) + array('qw-list' => $listLayoutQuery));
+            $jqGrid['url'] = $url->url(array('json' => '1') + $model['set'] + array('search' => $model['foreign'] . ':' . $data[$model['local']]) + array('list' => $listLayoutQuery));
 
             // 设置排序
             if(!empty($relatedMeta['db']['order'])) {
@@ -99,10 +99,10 @@ class Common_View_View extends Common_View
                 'search'            => '_search',
             );
             /*$jqGrid['prmNames'] = array(
-                'page'              => 'qw-' . $uniqueId . '-page',
-                'rows'              => 'qw-' . $uniqueId . '-row',
-                'sort'              => 'qw-' . $uniqueId . '-order-field',
-                'order'             => 'qw-' . $uniqueId . '-order-type',
+                'page'              => $uniqueId . '-page',
+                'rows'              => $uniqueId . '-row',
+                'sort'              => $uniqueId . '-order-field',
+                'order'             => $uniqueId . '-order-type',
                 'search'            => '_search',
             );*/
 

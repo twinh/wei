@@ -33,7 +33,7 @@ class Common_Category_Controller_Category extends Common_ActionController
         $newData = array();
         $tree = Qwin::call('Qwin_Tree');
         $tree->assignType('ARRAY');
-        $tree->setParentDefaultValue($this->request->g('parentValue'));
+        $tree->setParentDefaultValue($this->request->get('parentValue'));
         foreach($data as $row)
         {
             $tree->addNode($row);

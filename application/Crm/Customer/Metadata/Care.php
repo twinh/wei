@@ -56,7 +56,7 @@ class Crm_Customer_Metadata_Care extends Common_Metadata
                                     'namespace' => 'Crm',
                                     'module' => 'Customer',
                                     'controller' => 'Customer',
-                                    'qw-list' => 'id,name,birthday,email,source',
+                                    'list' => 'id,name,birthday,email,source',
                                 ),
                                 array(
                                     'name', 'id'
@@ -82,7 +82,7 @@ class Crm_Customer_Metadata_Care extends Common_Metadata
                                     'namespace' => 'Crm',
                                     'module' => 'Contact',
                                     'controller' => 'Contact',
-                                    'qw-list' => 'id,full_name,birthday,email,source',
+                                    'list' => 'id,full_name,birthday,email,source',
                                 ),
                                 array(
                                     'full_name',

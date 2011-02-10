@@ -84,7 +84,7 @@ class Mini_Common_Controller_Common extends Qwin_Application_Controller
         }
 
         $request = Qwin::call('-request');
-        $name = $request->g('g');
+        $name = $request->get('g');
 
         $file = Qwin::widget('minify')->getCacheFile($name);
         if (is_file($file)) {

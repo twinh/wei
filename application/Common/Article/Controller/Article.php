@@ -48,7 +48,7 @@ class Common_Article_Controller_Article extends Common_ActionController
         $this->setAction('List');
 
         // 根据url参数中的值,获取对应的数据库资料
-        $id = $gpc->g($meta['db']['primaryKey']);
+        $id = $gpc->get($meta['db']['primaryKey']);
         $query = $query->where($meta['db']['primaryKey'] . ' = ?', $id)->fetchOne();
         if(false == $query)
         {

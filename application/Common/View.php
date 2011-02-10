@@ -56,7 +56,7 @@ class Common_View extends Qwin_Application_View_Abstract
         $session = Qwin::call('-session');
         // 按优先级排列语言的数组
         $styleList = array(
-            Qwin::call('-request')->g('style'),
+            Qwin::call('-request')->get('style'),
             $session->get('style'),
             $this->config['style'],
         );

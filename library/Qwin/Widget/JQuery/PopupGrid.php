@@ -43,8 +43,8 @@ class Qwin_Widget_JQuery_PopupGrid
         $cssPacker = Qwin::call('Qwin_Packer_Css');
         $jsPacker = Qwin::call('Qwin_Packer_Js');
 
-        $url['qw-popup'] = 1;
-        $url['qw-ajax'] = 1;
+        $url['popup'] = 1;
+        $url['ajax'] = 1;
         $title = $lang->t('LBL_PLEASE_SELECT') . $lang->t($title);
 
         // 设置新的表单属性

@@ -268,7 +268,7 @@ class Common_Metadata extends Qwin_Metadata
                                 'namespace' => 'Common',
                                 'module' => 'Member',
                                 'controller' => 'Member',
-                                'qw-list' => 'id,group_id,username,email',
+                                'list' => 'id,group_id,username,email',
                             ),
                             array(
                                 'username',
@@ -524,7 +524,7 @@ class Common_Metadata extends Qwin_Metadata
             !isset($this->url) && $this->url = Qwin::call('-url');
             $name = str_replace(':', '\:', $name);
             $dataCopy[$name] = str_replace(':', '\:', $dataCopy[$name]);
-            $value = '<a href="' . $this->url->url($asc, array('action' => 'Index', 'qw-search' => $name . ':' . $dataCopy[$name])) . '">' . $value . '</a>';
+            $value = '<a href="' . $this->url->url($asc, array('action' => 'Index', 'search' => $name . ':' . $dataCopy[$name])) . '">' . $value . '</a>';
         }
         return $value;
     }
