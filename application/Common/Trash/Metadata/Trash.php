@@ -89,7 +89,7 @@ class Common_Trash_Metadata_Trash extends Common_Metadata
                 ),
             ),
             'page' => array(
-                'title' => 'LBL_MODULE_Trash',
+                'title' => 'LBL_MODULE_TRASH',
                 'icon' => 'trash',
             ),
         ));
