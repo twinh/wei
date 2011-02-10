@@ -103,9 +103,6 @@ class Common_Category_Metadata_Category extends Common_Metadata
             'model' => array(
 
             ),
-            'metadata' => array(
-
-            ),
             'db' => array(
                 'table' => 'category',
                 'order' => array(

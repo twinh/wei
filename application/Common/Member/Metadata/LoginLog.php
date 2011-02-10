@@ -54,14 +54,17 @@ class Common_Member_Metadata_LoginLog extends Common_Metadata
             ),
             'model' => array(
                 'member' => array(
-                    'name' => 'Common_Member_Model_Member',
                     'alias' => 'status',
-                    'metadata' => 'Common_Member_Metadata_Member',
                     'local' => 'member_id',
                     'foreign' => 'id',
                     'type' => 'view',
                     'fieldMap' => array(
                         'member_id' => 'username',
+                    ),
+                    'asc' => array(
+                        'namespace' => 'Common',
+                        'module' => 'Member',
+                        'controller' => 'Member'
                     ),
                 ),
             ),

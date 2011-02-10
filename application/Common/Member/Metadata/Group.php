@@ -67,9 +67,6 @@ class Common_Member_Metadata_Group extends Common_Metadata
             'model' => array(
 
             ),
-            'metadata' => array(
-
-            ),
             'db' => array(
                 'table' => 'member_group',
                 'order' => array(

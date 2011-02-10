@@ -189,18 +189,20 @@ class Crm_Company_Metadata_Company extends Common_Metadata
             'group' => array(),
             'model' => array(
                 'member' => array(
-                    'name' => 'Common_Member_Model_Member',
                     'alias' => 'member',
-                    'metadata' => 'Common_Member_Metadata_Member',
                     'local' => 'member_id',
                     'foreign' => 'id',
                     'type' => 'view',
                     'fieldMap' => array(
                         'member_id' => 'username',
                     ),
+                    'asc' => array(
+                        'namespace' => 'Common',
+                        'module' => 'Member',
+                        'controller' => 'Member',
+                    ),
                 ),
             ),
-            'metadata' => array(),
             'db' => array(
                 'table' => 'company',
                 'order' => array(

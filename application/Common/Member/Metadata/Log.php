@@ -85,9 +85,6 @@ class Common_Member_Metadata_Log extends Qwin_Application_Metadata
             'model' => array(
                 
             ),
-            'metadata' => array(
-
-            ),
             'db' => array(
                 'table' => 'member',
             ),

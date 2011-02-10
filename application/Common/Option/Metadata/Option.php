@@ -79,9 +79,6 @@ class Common_Option_Metadata_Option extends Common_Metadata
                 'model' => array(
 
                 ),
-                'metadata' => array(
-
-                ),
                 'db' => array(
                     'table' => 'option',
                     'order' => array(

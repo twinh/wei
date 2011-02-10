@@ -145,7 +145,7 @@ class Common_Config_Metadata_Config extends Common_Metadata
             ),
             'model' => array(
                 'group' => array(
-                    'set' => array(
+                    'asc' => array(
                         'namespace' => 'Common',
                         'module' => 'Config',
                         'controller' => 'Group',
@@ -158,9 +158,6 @@ class Common_Config_Metadata_Config extends Common_Metadata
                         'group_id' => 'title',
                     ),
                 ),
-            ),
-            'metadata' => array(
-
             ),
             'db' => array(
                 'table' => 'config',

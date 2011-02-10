@@ -205,14 +205,15 @@ class Qwin_Application_Metadata extends Qwin_Metadata
         foreach ($joinModel as $joinModelName) {
             // 该模型的设置
             $modelSet = $meta['model'][$joinModelName];
-            $relatedMetaObject = Qwin_Metadata_Manager::get($modelSet['metadata']);
-            $relatedModelObejct = Qwin::call($modelSet['name']);
+            $modelName = $this->getClassName('Model', $modelSet['asc']);
+            $relatedMetaObject = Qwin_Metadata_Manager::get($this->getClassName('Metadata', $modelSet['asc']));
+            $relatedModelObejct = Qwin::call($modelName);
             $this->metadataToModel($relatedMetaObject, $relatedModelObejct);
 
             // 设置模型关系
             call_user_func(
                 array($model, 'hasOne'),
-                $modelSet['name'] . ' as ' . $modelSet['alias'],
+                $modelName . ' as ' . $modelSet['alias'],
                 array(
                     'local' => $modelSet['local'],
                     'foreign' => $modelSet['foreign']
@@ -250,8 +251,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
          * 设置关联类的查询语句
          */
         foreach ($meta['model'] as $model) {
-            //Qwin_Class::load($model['metadata']);
-            $linkedMetaObj = Qwin_Metadata_Manager::get($model['metadata']);
+            $linkedMetaObj = Qwin_Metadata_Manager::get($this->getClassName('Metadata', $model['asc']));
 
             // 调整主键的属性,因为查询时至少需要选择一列
             $primaryKey = $linkedMetaObj['db']['primaryKey'];
@@ -626,12 +626,11 @@ class Qwin_Application_Metadata extends Qwin_Metadata
 
     public function getModelMetadataByAlias($meta, $name)
     {
-        if (!isset($meta['metadata'][$name])) {
-            return $meta['metadata'][$name];
+        if (isset($meta['model'][$name]['metadata'])) {
+            return $meta['model'][$name]['metadata'];
         }
-        $metaName = $meta['model'][$name]['metadata'];
-        $meta['metadata'][$name] = Qwin_Metadata_Manager::get($metaName);
-        return $meta['metadata'][$name];
+        $class = $this->getClassName('Metadata', $meta['model'][$name]['asc']);
+        return $meta['model'][$name]['metadata'] = Qwin_Metadata_Manager::get($class);
     }
 
     public function getDefaultLayout($meta, array $layout = null, $relatedName = false)

@@ -92,7 +92,6 @@ class Common_Member_Metadata_Password extends Common_Metadata
             ),
             'group' => array(),
             'model' => array(),
-            'metadata' => array(),
             'db' => array(
                 'table' => 'member',
             ),
