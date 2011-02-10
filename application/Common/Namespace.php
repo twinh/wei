@@ -47,7 +47,6 @@ class Common_Namespace extends Qwin_Application_Namespace
         // todo 修复命名混乱
         $request = Qwin::call('Common_Request');
         Qwin::set('-request', $request);
-        Qwin::set('#request', $request);
 
         // 设置语言类
         Qwin::setMap('-lang', 'Qwin_Application_Language');
