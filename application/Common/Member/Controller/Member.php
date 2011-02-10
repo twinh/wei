@@ -34,7 +34,7 @@ class Common_Member_Controller_Member extends Common_ActionController
      */
     public function actionEditPassword()
     {
-        if('guest' == $this->request->g('id') || 'guest' == $this->request->p('id'))
+        if('guest' == $this->request->get('id') || 'guest' == $this->request->post('id'))
         {
             return $this->view->setRedirectView($this->_lang->t('MSG_GUEST_NOT_ALLOW_EDIT_PASSWORD'));
         }
@@ -71,7 +71,7 @@ class Common_Member_Controller_Member extends Common_ActionController
                     'meta' => $this->_meta,
                 ),
                 'view' => array(
-                    'url' => urldecode($this->request->p('_page')),
+                    'url' => urldecode($this->request->post('_page')),
                 ),
                 'this' => $this,
             );
@@ -84,7 +84,7 @@ class Common_Member_Controller_Member extends Common_ActionController
      */
     public function actionDelete()
     {
-        $id = $this->request->g('id');
+        $id = $this->request->get('id');
         $idList = explode(',', $id);
 
         /**
@@ -106,7 +106,7 @@ class Common_Member_Controller_Member extends Common_ActionController
      */
     public function actionIsUsernameExists()
     {
-        $username = Qwin::call('-gpc')->g('usesrname');
+        $username = Qwin::call('-gpc')->get('usesrname');
         if(true == $this->isUsernameExists($username))
         {
             echo 1;

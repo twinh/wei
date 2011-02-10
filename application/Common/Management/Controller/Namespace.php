@@ -123,7 +123,7 @@ class Common_Management_Controller_Namespace extends Common_Controller
 
     public function actionDelete()
     {
-        $name = $this->_request->g('namespace_value');
+        $name = $this->_request->get('namespace_value');
         $path = $this->_path . '/' . $name;
         
         // 不存在的目录

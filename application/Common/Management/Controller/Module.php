@@ -141,7 +141,7 @@ class Common_Management_Controller_Module extends Common_Controller
                 'data' => get_defined_vars(),
             );
         } else {
-            $module = $this->request->p('module');
+            $module = $this->request->post('module');
             
             if(false === $this->_isNamespaceExists)
             {

@@ -90,7 +90,7 @@ class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
                                     'namespace' => 'Crm',
                                     'module' => 'Opportunity',
                                     'controller' => 'Opportunity',
-                                    'qw-list' => 'id,name,status,type,start_time,end_time',
+                                    'list' => 'id,name,status,type,start_time,end_time',
                                 ),
                                 array('name', 'id'),
                             ),

@@ -25,7 +25,7 @@
  * @since       2010-02-13 23:02
  */
 
-class Qwin_Request extends Qwin_Metadata_Abstract
+class Qwin_Request implements ArrayAccess
 {
     public function  __construct()
     {
@@ -33,98 +33,150 @@ class Qwin_Request extends Qwin_Metadata_Abstract
     }
 
     /**
-     * 获取 $_GET 数组中的值
+     * 获取$_GET中数组中的值
      *
-     * @param string $name url查询的字符串中的键名
-     * @return mixed 键名对应的值
+     * @param string|array $name 名称
+     * @return string|array
      */
-    public function g($name)
+    public function get($name)
     {
-        return isset($_GET[$name]) ? $_GET[$name] : null;
-    }
-    
-    /**
-     * 获取 $_POST 数组中的值
-     * @param string $name $_POST 数组对应的键名
-     * @return mixed 键名对应的值
-     */
-    public function p($name)
-    {
-        return isset($_POST[$name]) ? $_POST[$name] : null;
-    }
-    
-    /**
-     * 获取 $_COOKIE 数组中的值
-     *
-     * @param string $key $_COOKIE 数组对应的键名
-     * @return mixed 键名对应的值
-     */
-    public function c($name)
-    {
-        return isset($_COOKIE[$name]) ? $_COOKIE[$name] : null;
+        if (!is_array($name)) {
+            return isset($_GET[$name]) ? $_GET[$name] : null;
+        }
+        foreach($name as $key) {
+            $array[$key] = isset($_GET[$key]) ? $_GET[$key] : null;
+        }
+        return $array;
     }
 
     /**
-     * 获取 $_GET 数组中的值
+     * 获取$_POST中数组中的值
      *
-     * @param arary $nameArr 键名数组
-     * @param array
+     * @param string|array $name 名称
+     * @return string|array
      */
-    public function get(array $nameArr)
+    public function post($name)
     {
-        $arr = array();
-        foreach ($nameArr as $name)
-        {
-            $arr[$name] = $this->g($name);
+        if (!is_array($name)) {
+            return isset($_POST[$name]) ? $_POST[$name] : null;
         }
-        return $arr;
+        foreach($name as $key) {
+            $array[$key] = isset($_POST[$key]) ? $_POST[$key] : null;
+        }
+        return $array;
+    }
+
+    /**
+     * 获取$_COOKIE数组中的值
+     *
+     * @param string|array $name 名称
+     * @return string|array
+     */
+    public function cookie($name)
+    {
+        if (!is_array($name)) {
+            return isset($_COOKIE[$name]) ? $_COOKIE[$name] : null;
+        }
+        foreach($name as $key) {
+            $array[$key] = isset($_COOKIE[$key]) ? $_COOKIE[$key] : null;
+        }
+        return $array;
     }
     
     /**
-     * 获取 $_POST 数组中的值
+     * 获取$_REQUEST数组中的值
      *
      * @param arary $arr 键名数组
      * @param array
      */
-    public function post(array $nameArr)
+    public function request($name)
     {
-        $arr = array();
-        foreach ($nameArr as $name)
-        {
-            $arr[$name] = $this->p($name);
+        if (!is_array($name)) {
+            return isset($_REQUEST[$name]) ? $_REQUEST[$name] : null;
         }
-        return $arr;
+        foreach($name as $key) {
+            $array[$key] = isset($_REQUEST[$key]) ? $_REQUEST[$key] : null;
+        }
+        return $array;
     }
 
     /**
-     * 获取 $_REQUEST 数组中的值
+     * 获取$_REQUEST数组中的值
      *
      * @param arary $arr 键名数组
      * @param array
      */
-    public function request(array $nameArr)
+    public function server($name)
     {
-        $arr = array();
-        foreach ($nameArr as $name)
-        {
-            $arr[$name] = $this->r($name);
+        if (!is_array($name)) {
+            return isset($_SERVER[$name]) ? $_SERVER[$name] : null;
         }
-        return $arr;
+        foreach($name as $key) {
+            $array[$key] = isset($_SERVER[$key]) ? $_SERVER[$key] : null;
+        }
+        return $array;
     }
 
     /**
-     * 获取 $_COOKIE 数组中的值
+     * 请求方法是否为POST
      *
-     * @param arary $arr 键名数组
-     * @param array
+     * @return bool
      */
-    public function cookie(array $nameArr)
+    public function isPost()
     {
-        $arr = array();
-        foreach ($nameArr as $name)
-        {
-            $arr[$name] = $this->c($name);
-        }
-        return $arr;
+        return 'POST' == $this->server('REQUEST_METHOD');
+    }
+
+    /**
+     * 请求方法是否为GET
+     *
+     * @return bool
+     */
+    public function isGet()
+    {
+        return 'GET' == $this->server('REQUEST_METHOD');
+    }
+
+    /**
+     * 检查索引是否存在
+     *
+     * @param string $offset 索引
+     * @return bool
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->_data[$offset]);
+    }
+
+    /**
+     * 获取索引的数据
+     *
+     * @param string $offset 索引
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->_data[$offset]) ? $this->_data[$offset] : null;
+    }
+
+    /**
+     * 设置索引的值
+     *
+     * @param string $offset 索引
+     * @param mixed $value 值
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->_data[$offset] = $value;
+    }
+
+    /**
+     * 销毁一个索引
+     *
+     * @param string $offset 索引的名称
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->_data[$offset]);
     }
 }

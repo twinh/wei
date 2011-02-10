@@ -145,7 +145,7 @@ class Qwin_Session implements ArrayAccess
         return $this->set($name, $value);
     }
 
-        /**
+    /**
      * 检查索引是否存在
      *
      * @param string $offset 索引

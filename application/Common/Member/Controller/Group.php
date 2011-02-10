@@ -42,7 +42,7 @@ class Common_Member_Controller_Group extends Common_ActionController
          */
         $meta = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
-        $id = $this->request->g($primaryKey);
+        $id = $this->request->get($primaryKey);
 
         /**
          * 从模型获取数据
@@ -62,7 +62,7 @@ class Common_Member_Controller_Group extends Common_ActionController
             $appStructure = require QWIN_ROOT_PATH . '/cache/php/application-structure.php';
             $this->view->assign(get_defined_vars());
         } else {
-            $permission = (array)$this->request->p('permission');
+            $permission = (array)$this->request->post('permission');
             /**
              * 剔除子项
              */
