@@ -162,7 +162,7 @@ class Qwin
         if (isset($name[0]) && isset(self::$_shortTag[$name[0]])) {
             /* @var $name2 string 转换后的名称 */
             $name2 = self::$_shortTag[$name[0]] . substr($name, 1);
-            /* @var $name2 string 转换后的小写名称 */
+            /* @var $lower2 string 转换后的小写名称 */
             $lower2 = strtolower($name2);
             if (isset(self::$_data[$lower2])) {
                 self::$_data[$lower] = self::$_data[$lower2];

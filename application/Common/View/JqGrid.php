@@ -29,6 +29,7 @@ class Common_View_JqGrid extends Common_View
 {   
     public function preDisplay()
     {
+        parent::preDisplay();
         // 初始变量,方便调用
         $manager        = Qwin::call('-manager');
         $primaryKey     = $this->primaryKey;
