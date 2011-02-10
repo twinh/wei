@@ -101,7 +101,7 @@ class Common_Controller extends Qwin_Application_Controller
         if (false === $option) {
             return true;
         }
-        $this->request  = Qwin::call('#request');
+        $this->request  = Qwin::call('-request');
         $this->url      = Qwin::call('-url');
         $this->_asc     = Qwin::config('asc');
         $this->session  = Qwin::call('-session');

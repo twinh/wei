@@ -30,7 +30,7 @@ class Common_View_JqGridJson extends Common_View
     public function preDisplay()
     {
         // 初始变量,方便调用
-        $request = Qwin::call('#request');
+        $request = Qwin::call('-request');
         $jqGridWidget = Qwin::widget('jqgrid');
 
         $json = $jqGridWidget->renderJson(array(

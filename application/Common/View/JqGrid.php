@@ -35,7 +35,7 @@ class Common_View_JqGrid extends Common_View
         $primaryKey     = $this->primaryKey;
         $meta           = $this->meta;
         $metaHepler     = $this->metaHelper;
-        $request        = Qwin::call('#request');
+        $request        = Qwin::call('-request');
         $lang           = Qwin::call('-lang');
         $url            = Qwin::call('-url');
         $asc            = Qwin::config('asc');
