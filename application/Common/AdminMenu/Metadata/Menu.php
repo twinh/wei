@@ -115,7 +115,7 @@ class Common_AdminMenu_Metadata_Menu extends Common_Metadata
             ),
             'model' => array(
                 'creator' => array(
-                    'set' => array(
+                    'asc' => array(
                         'module' => 'Member',
                         'controller' => 'Member',
                     ),
@@ -127,7 +127,7 @@ class Common_AdminMenu_Metadata_Menu extends Common_Metadata
                     ),
                 ),
                 'modifier' => array(
-                    'set' => array(
+                    'asc' => array(
                         'module' => 'Member',
                         'controller' => 'Member',
                     ),
@@ -138,8 +138,6 @@ class Common_AdminMenu_Metadata_Menu extends Common_Metadata
                         'modified_by' => 'username',
                     ),
                 ),
-            ),
-            'metadata' => array(
             ),
             'db' => array(
                 'table' => 'admin_menu',

@@ -162,9 +162,6 @@ class Crm_Customer_Metadata_Care extends Common_Metadata
                     ),
                 ),
             ),
-            'metadata' => array(
-
-            ),
             'db' => array(
                 'table' => 'customer_care',
                 'order' => array(

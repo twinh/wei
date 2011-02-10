@@ -303,7 +303,7 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                     'fieldMap' => array(
                         'assign_to' => 'username',
                     ),
-                    'set' => array(
+                    'asc' => array(
                         'namespace' => 'Common',
                         'module' => 'Member',
                         'controller' => 'Member',
@@ -320,7 +320,7 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                     'list' => array(
                         //'id', 'name', 'care_at', 'type'
                     ),
-                    'set' => array(
+                    'asc' => array(
                         'namespace' => 'Crm',
                         'module' => 'Customer',
                         'controller' => 'Care',
@@ -334,15 +334,12 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                     'fieldMap' => array(
                         'id' => 'full_name',
                     ),
-                    'set' => array(
+                    'asc' => array(
                         'namespace' => 'Crm',
                         'module' => 'Contact',
                         'controller' => 'Contact',
                     ),
                 ),
-            ),
-            'metadata' => array(
-
             ),
             'db' => array(
                 'table' => 'customer',

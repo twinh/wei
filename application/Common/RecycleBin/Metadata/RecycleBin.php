@@ -68,7 +68,7 @@ class Common_RecycleBin_Metadata_RecycleBin extends Common_Metadata
             ),
             'model' => array(
                 'deleter' => array(
-                    'set' => array(
+                    'asc' => array(
                         'namespace' => 'Common',
                         'module' => 'Member',
                         'controller' => 'Member',
@@ -81,9 +81,6 @@ class Common_RecycleBin_Metadata_RecycleBin extends Common_Metadata
                         'deleted_by' => 'username',
                     ),''
                 ),
-            ),
-            'metadata' => array(
-
             ),
             'db' => array(
                 'table' => 'recyclebin',

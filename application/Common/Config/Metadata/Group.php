@@ -104,9 +104,6 @@ class Common_Config_Metadata_Group extends Common_Metadata
             'model' => array(
 
             ),
-            'metadata' => array(
-
-            ),
             'db' => array(
                 'table' => 'config_group',
             ),

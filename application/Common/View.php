@@ -53,12 +53,12 @@ class Common_View extends Qwin_Application_View_Abstract
             $this->config = Qwin::config();
         }
 
-        $session = Qwin::call('Qwin_Session');
+        $session = Qwin::call('-session');
         // 按优先级排列语言的数组
         $styleList = array(
             Qwin::call('-request')->g('style'),
             $session->get('style'),
-            $this->config['interface']['style'],
+            $this->config['style'],
         );
         foreach ($styleList as $val) {
             if (null != $val) {
@@ -68,7 +68,7 @@ class Common_View extends Qwin_Application_View_Abstract
         }
 
         if (!is_dir(QWIN . '/view/style/' . $style)) {
-            $style = $this->config['interface']['style'];
+            $style = $this->config['style'];
         }
         $session->set('style', $style);
         return $this->_style = $style;

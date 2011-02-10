@@ -313,15 +313,12 @@ class Crm_Contact_Metadata_Contact extends Common_Metadata
                     'fieldMap' => array(
                         'assign_to' => 'username',
                     ),
-                    'set' => array(
+                    'asc' => array(
                         'namespace' => 'Common',
                         'module' => 'Member',
                         'controller' => 'Member',
                     ),
                 ),
-            ),
-            'metadata' => array(
-
             ),
             'db' => array(
                 'table' => 'contact',

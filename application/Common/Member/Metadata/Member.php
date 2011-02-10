@@ -185,19 +185,19 @@ class Common_Member_Metadata_Member extends Common_Metadata
             ),
             'model' => array(
                 'group' => array(
-                    'name' => 'Common_Member_Model_Group',
                     'alias' => 'group',
-                    'metadata' => 'Common_Member_Metadata_Group',
                     'local' => 'group_id',
                     'foreign' => 'id',
                     'type' => 'view',
                     'fieldMap' => array(
                         'group_id' => 'name',
                     ),
+                    'asc' => array(
+                        'namespace' => 'Common',
+                        'module' => 'Member',
+                        'controller' => 'Group',
+                    ),
                 ),
-            ),
-            'metadata' => array(
-
             ),
             'db' => array(
                 'table' => 'member',

@@ -84,9 +84,6 @@ class Common_Email_Metadata_Email extends Common_Metadata
             'model' => array(
 
             ),
-            'metadata' => array(
-
-            ),
             'db' => array(
                 'table' => 'email',
                 'order' => array(
