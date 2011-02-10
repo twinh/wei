@@ -96,7 +96,7 @@ class Common_View extends Qwin_Application_View_Abstract
 
         // 设置标签
         $this->setTag(array(
-            'resource'          => QWIN . '/view/theme/',
+            'resource'          => QWIN . 'view/theme/',
             'suffix'            => '.php',
             'theme'             => $config['theme'],
             'style'             => $this->getStyle(),
@@ -105,8 +105,6 @@ class Common_View extends Qwin_Application_View_Abstract
             'controller'        => $config['asc']['controller'],
             'action'            => $config['asc']['action'],
             'defaultNamespace'  => $config['defaultAsc']['namespace'],
-            'defaultModule'     => $config['defaultAsc']['module'],
-            'defaultController' => $config['defaultAsc']['controller'],
             'defaultAction'     => $config['defaultAsc']['action'],
         ));
         
@@ -115,27 +113,27 @@ class Common_View extends Qwin_Application_View_Abstract
             '<resource><theme>/<namespace>/layout/<module>-<controller>-<action><suffix>',
             '<resource><theme>/<namespace>/layout/<module>-<controller><suffix>',
             '<resource><theme>/<namespace>/layout/<module><suffix>',
-            '<resource><theme>/<namespace>/layout/default<suffix>',
-            '<resource><theme>/<defaultNamespace>/layout/default<suffix>',
+            '<resource><theme>/<namespace>/layout/common<suffix>',
+            '<resource><theme>/<defaultNamespace>/layout/common<suffix>',
         ));
 
         // 默认视图元素的选择次序为 自定义视图 > 当前行为视图 > 默认模块视图 > 默认视图
         $this->setElement('content', array(
             '<resource><theme>/<namespace>/element/<module>/<controller>-<action><suffix>',
-            '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>-<action><suffix>',
-            '<resource><theme>/<namespace>/element/default<suffix>',
+            '<resource><theme>/<defaultNamespace>/element/common/<action><suffix>',
+            '<resource><theme>/<namespace>/element/common<suffix>',
         ));
 
         // 当前行为的左栏操作视图
         $this->setElement('sidebar', array(
             '<resource><theme>/<namespace>/element/<module>/<controller>/<action>-sidebar<suffix>',
-            '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>-<defaultAction>-sidebar<suffix>',
+            '<resource><theme>/<defaultNamespace>/element/common/sidebar<suffix>',
         ));
 
         // 当前行为的页眉标题视图
         $this->setElement('header', array(
             '<resource><theme>/<namespace>/element/<module>/<controller>/<action>-header<suffix>',
-            '<resource><theme>/<namespace>/element/<defaultModule>/<defaultController>-<defaultAction>-header<suffix>',
+            '<resource><theme>/<namespace>/element/common/header<suffix>',
         ));
 
         return $this;

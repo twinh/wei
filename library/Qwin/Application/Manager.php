@@ -113,7 +113,7 @@ class Qwin_Application_Manager
      */
     public function startup(array $config)
     {
-        // 设置加载标识
+        // 设置加载标识,防止二次加载
         if ($this->_isLoad) {
             return false;
         }
@@ -139,7 +139,12 @@ class Qwin_Application_Manager
 
         // 注册当前类
         Qwin::set('-manager', $this);
-        
+
+        // 跳转到默认首页
+        if (empty($_SERVER['QUERY_STRING'])) {
+            header('HTTP/1.1 301 Moved Permanently');
+            header('location: ' . $config['index']);
+        }
         // 启动Url路由
         /*$router = null;
         if ($config['router']['enable']) {
