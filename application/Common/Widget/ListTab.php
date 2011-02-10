@@ -87,7 +87,7 @@ class Common_Widget_ListTab extends Common_Widget
         // TODO jsLang
         if (!in_array('delete', $forbiddenAction)) {
             $meta = $view['metaHelper']->getMetadataByAsc($asc);
-            if (!isset($meta['page']['useRecycleBin'])) {
+            if (!isset($meta['page']['useTrash'])) {
                 $icon = 'ui-icon-close';
                 $jsLang = 'MSG_CONFIRM_TO_DELETE';
             } else {

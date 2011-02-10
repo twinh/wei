@@ -1,6 +1,6 @@
 <?php
 /**
- * RecycleBin
+ * Trash
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -23,6 +23,6 @@
  * @since       2011-01-09 15:29:06
  */
 
-class Common_RecycleBin_Model_RecycleBin extends Common_Model
+class Common_Trash_Model_Trash extends Common_Model
 {
 }

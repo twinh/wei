@@ -235,7 +235,7 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                 'title' => 'LBL_MODULE_POTENTIAL',
                 'icon' => 'buy',
                 'tableLayout' => 1,
-                'useRecycleBin' => true,
+                'useTrash' => true,
                 'mainField' => 'name',
             ),
         ));

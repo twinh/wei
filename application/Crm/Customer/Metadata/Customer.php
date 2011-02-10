@@ -355,7 +355,7 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                 'icon' => 'user',
                 'tableLayout' => 1,
                 'alias' => 'customer',
-                'useRecycleBin' => true,
+                'useTrash' => true,
                 'letter' => 'C',
                 'mainField' => 'name',
             ),

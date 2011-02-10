@@ -23,7 +23,7 @@
  * @since       2011-01-10 15:40:44
  */
 
-class Common_RecycleBin_Service_Restore extends Common_Service_BasicAction
+class Common_Trash_Service_Restore extends Common_Service_BasicAction
 {
     /**
      * 服务的基本配置
