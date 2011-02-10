@@ -31,70 +31,12 @@
 
 class Common_View extends Qwin_Application_View_Abstract
 {
+    /**
+     * 将当前视图对象加入注册器中
+     */
     public function __construct()
     {
         Qwin::set('-view', $this);
-        $manager = Qwin::call('-manager');
-        $widget = Qwin::call('Qwin_Widget');
-        $this->assign('widget', $widget);
-
-        // 加载jQuery微件
-        $jQuery = $widget->get('jquery');
-
-        // 布局的选择次序为 自定义视图 > 行为级 > 控制器级 > 模块级 > 默认(命名空间级)
-        $this->setLayout(array(
-            '<resource><theme>/<namespace>/layout/<module>-<controller>-<action><suffix>',
-            '<resource><theme>/<namespace>/layout/<module>-<controller><suffix>',
-            '<resource><theme>/<namespace>/layout/<module><suffix>',
-            '<resource><theme>/<namespace>/layout/default<suffix>',
-            '<resource><theme>/<defaultNamespace>/layout/default<suffix>',
-        ));
-
-        // 默认视图元素的选择次序为 自定义视图 > 当前行为视图 > 默认模块视图 > 默认视图
-        $this->setElement('content', array(
-            '<resource><theme>/<namespace>/element/<module>/<controller>-<action><suffix>',
-            '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>-<action><suffix>',
-            '<resource><theme>/<namespace>/element/default<suffix>',
-        ));
-
-        // 当前行为的左栏操作视图
-        $this->setElement('sidebar', array(
-            '<resource><theme>/<namespace>/element/<module>/<controller>/<action>-sidebar<suffix>',
-            '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>-<defaultAction>-sidebar<suffix>',
-        ));
-
-        // 当前行为的页眉标题视图
-        $this->setElement('header', array(
-            '<resource><theme>/<namespace>/element/<module>/<controller>/<action>-header<suffix>',
-            '<resource><theme>/<namespace>/element/<defaultModule>/<defaultController>-<defaultAction>-header<suffix>',
-        ));
-
-        // 获取配置
-        $config = Qwin::config();
-
-        $minify = $widget->get('minify');
-        $this->assign('minify', $minify);
-        $this->assign('jQuery', $jQuery);
-        
-        $this->setTag(array(
-            'resource'          => QWIN . '/view/theme/',
-            'suffix'            => '.php',
-            'theme'             => $config['interface']['theme'],
-            'style'             => $this->getStyle(),
-            'namespace'         => $config['asc']['namespace'],
-            'module'            => $config['asc']['module'],
-            'controller'        => $config['asc']['controller'],
-            'action'            => $config['asc']['action'],
-            'defaultNamespace'  => $config['defaultAsc']['namespace'],
-            'defaultModule'     => $config['defaultAsc']['module'],
-            'defaultController' => $config['defaultAsc']['controller'],
-            'defaultAction'     => $config['defaultAsc']['action'],
-        ));
-
-        // 部分视图常用变量
-        $this->_data['config'] = $config;
-        $this->_data['asc'] = $config['asc'];
-        $this->_data['theme'] = $config['interface']['theme'];
     }
 
     /**
@@ -133,22 +75,101 @@ class Common_View extends Qwin_Application_View_Abstract
     }
 
     /**
-     * 展示视图
+     * 数据预处理,设置变量,路径标签,视图布局,元素等
+     *
+     * @return Common_View 当前对象
+     */
+    public function preDisplay()
+    {
+        // 获取配置
+        $config = Qwin::config();
+
+        // 部分视图常用变量
+        $this->assign(array(
+            'widget'    => Qwin::call('-widget'),
+            'minify'    => Qwin::widget('minify'),
+            'jQuery'    => Qwin::widget('jquery'),
+            'config'    => $config,
+            'asc'       => $config['asc'],
+            'theme'     => $config['theme'],
+        ));
+
+        // 设置标签
+        $this->setTag(array(
+            'resource'          => QWIN . '/view/theme/',
+            'suffix'            => '.php',
+            'theme'             => $config['theme'],
+            'style'             => $this->getStyle(),
+            'namespace'         => $config['asc']['namespace'],
+            'module'            => $config['asc']['module'],
+            'controller'        => $config['asc']['controller'],
+            'action'            => $config['asc']['action'],
+            'defaultNamespace'  => $config['defaultAsc']['namespace'],
+            'defaultModule'     => $config['defaultAsc']['module'],
+            'defaultController' => $config['defaultAsc']['controller'],
+            'defaultAction'     => $config['defaultAsc']['action'],
+        ));
+        
+        // 布局的选择次序为 自定义视图 > 行为级 > 控制器级 > 模块级 > 默认(命名空间级)
+        $this->setLayout(array(
+            '<resource><theme>/<namespace>/layout/<module>-<controller>-<action><suffix>',
+            '<resource><theme>/<namespace>/layout/<module>-<controller><suffix>',
+            '<resource><theme>/<namespace>/layout/<module><suffix>',
+            '<resource><theme>/<namespace>/layout/default<suffix>',
+            '<resource><theme>/<defaultNamespace>/layout/default<suffix>',
+        ));
+
+        // 默认视图元素的选择次序为 自定义视图 > 当前行为视图 > 默认模块视图 > 默认视图
+        $this->setElement('content', array(
+            '<resource><theme>/<namespace>/element/<module>/<controller>-<action><suffix>',
+            '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>-<action><suffix>',
+            '<resource><theme>/<namespace>/element/default<suffix>',
+        ));
+
+        // 当前行为的左栏操作视图
+        $this->setElement('sidebar', array(
+            '<resource><theme>/<namespace>/element/<module>/<controller>/<action>-sidebar<suffix>',
+            '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>-<defaultAction>-sidebar<suffix>',
+        ));
+
+        // 当前行为的页眉标题视图
+        $this->setElement('header', array(
+            '<resource><theme>/<namespace>/element/<module>/<controller>/<action>-header<suffix>',
+            '<resource><theme>/<namespace>/element/<defaultModule>/<defaultController>-<defaultAction>-header<suffix>',
+        ));
+
+        return $this;
+    }
+
+    /**
+     * 输出视图
      * 
      * @return Common_View
      */
     public function display($layout = null, array $data = null)
     {
         $this->preDisplay();
+
+        // 不再输出视图,一般在preDisplay中设置该参数
         if ($this->_displayed) {
             return false;
         }
+
+        // 附加视图
+        if (isset($layout)) {
+            $this->_layout = array_shift($layout);
+        }
+
+        // 附加变量
+        if (!empty($data)) {
+            $this->assign($data);
+        }
         extract($this->_data, EXTR_OVERWRITE);
 
-        $request = Qwin::call('#request');
-        $isAjax = $request->g('qw-ajax');
+        $request = Qwin::call('-request');
+        $isAjax = $request['ajax'];
 
-        // TODO js重载等
+        // 加载布局
         if (!$isAjax) {
             require $this->getLayout();
         } else {
@@ -159,6 +180,11 @@ class Common_View extends Qwin_Application_View_Abstract
         return $this;
     }
 
+    /**
+     * 视图输出后的处理
+     *
+     * @return Common_View 当前对象
+     */
     public function afterDisplay()
     {
         // 获取缓冲数据,输出并清理
@@ -177,8 +203,16 @@ class Common_View extends Qwin_Application_View_Abstract
         $output = Qwin_Util_String::replaceFirst($search, $replace, $output);
         echo $output;
         unset($output);
+        return $this;
     }
 
+    /**
+     * 跳转
+     *
+     * @param string $message 提示信息
+     * @param string $method 方式
+     * @return Common_View 当前对象
+     */
     public function redirect($message, $method = null)
     {
         $this->assign('message', $message);
@@ -186,6 +220,12 @@ class Common_View extends Qwin_Application_View_Abstract
         return $this;
     }
 
+    /**
+     * 跳转
+     *
+     * @param string $url 地址
+     * @return Common_View 当前对象
+     */
     public function jump($url)
     {
         $this->setLayout('<resource><theme>/<defaultNamespace>/layout/jump<suffix>');
