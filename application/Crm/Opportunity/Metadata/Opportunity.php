@@ -225,7 +225,7 @@ class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
                 'title' => 'LBL_MODULE_OPPORTUNITY',
                 'icon' => 'present',
                 'tableLayout' => 1,
-                'useRecycleBin' => true,
+                'useTrash' => true,
                 'mainField' => 'name',
             ),
         ));

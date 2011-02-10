@@ -181,7 +181,7 @@ return array(
     'LBL_LAST_VIEWED_ITEM' => '最近查看项',
     'MSG_NO_LAST_VIEWED_LOG' => '暂时没有查看记录',
 
-    'LBL_MODULE_RECYCLEBIN' => '回收站',
+    'LBL_MODULE_Trash' => '回收站',
     'LBL_MODULE_MEMBER' => '用户',
     'LBL_MODULE_CUSTOMER' => '客户',
     'LBL_MODULE_OPPORTUNITY' => '商机',

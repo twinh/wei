@@ -333,7 +333,7 @@ class Crm_Contact_Metadata_Contact extends Common_Metadata
                 'title' => 'LBL_MODULE_CONTACT',
                 'icon' => 'address',
                 'tableLayout' => 1,
-                'useRecycleBin' => true,
+                'useTrash' => true,
             ),
         ));
     }

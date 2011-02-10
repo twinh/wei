@@ -384,7 +384,7 @@ class Common_Metadata extends Qwin_Metadata
             );
         }*/
         if (!in_array('delete', $this->forbiddenAction)) {
-            if (!isset($this->page['useRecycleBin'])) {
+            if (!isset($this->page['useTrash'])) {
                 $icon = 'ui-icon-close';
                 $jsLang = 'MSG_CONFIRM_TO_DELETE';
             } else {

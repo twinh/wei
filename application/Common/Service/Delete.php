@@ -73,7 +73,7 @@ class Common_Service_Delete extends Common_Service_BasicAction
 
         // 分两种情况 1使用回收站 2直接删除
         // 使用回收站应符合三个条件 1启用回收站功能 2存在标识域is_deleted
-        if ($meta['page']['useRecycleBin'] && isset($meta['field']['is_deleted'])) {
+        if ($meta['page']['useTrash'] && isset($meta['field']['is_deleted'])) {
             foreach ($resultList as $key => $result) {
                 // 设置删除标志
                 $result['is_deleted'] = 1;
@@ -92,8 +92,8 @@ class Common_Service_Delete extends Common_Service_BasicAction
                 $InsertSetting = array(
                     'set' => array(
                         'namespace' => 'Common',
-                        'module' => 'RecycleBin',
-                        'controller' => 'RecycleBin',
+                        'module' => 'Trash',
+                        'controller' => 'Trash',
                     ),
                     'data' => array(
                         'db' => array(

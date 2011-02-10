@@ -176,7 +176,7 @@ class Crm_Customer_Metadata_Care extends Common_Metadata
                 'icon' => 'user',
                 'tableLayout' => 1,
                 'alias' => 'customer',
-                'useRecycleBin' => true,
+                'useTrash' => true,
                 'mainField' => 'name',
             ),
         ));

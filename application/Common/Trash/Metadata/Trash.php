@@ -1,6 +1,6 @@
 <?php
 /**
- * RecycleBin
+ * Trash
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -23,7 +23,7 @@
  * @since       2011-01-09 14:48:52
  */
 
-class Common_RecycleBin_Metadata_RecycleBin extends Common_Metadata
+class Common_Trash_Metadata_Trash extends Common_Metadata
 {
     public function setMetadata()
     {
@@ -83,13 +83,13 @@ class Common_RecycleBin_Metadata_RecycleBin extends Common_Metadata
                 ),
             ),
             'db' => array(
-                'table' => 'recyclebin',
+                'table' => 'Trash',
                 'order' => array(
                     array('deleted_at', 'DESC'),
                 ),
             ),
             'page' => array(
-                'title' => 'LBL_MODULE_RECYCLEBIN',
+                'title' => 'LBL_MODULE_Trash',
                 'icon' => 'trash',
             ),
         ));

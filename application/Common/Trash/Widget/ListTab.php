@@ -23,7 +23,7 @@
  * @since       2011-01-09 15:35:03
  */
 
-class Common_RecycleBin_Widget_ListTab extends Common_Widget
+class Common_Trash_Widget_ListTab extends Common_Widget
 {
     public function render($param, $view)
     {

@@ -24,7 +24,7 @@
  */
 
 return array(
-    'LBL_MODULE_RECYCLEBIN' => '回收站',
+    'LBL_MODULE_TRASH' => '回收站',
 
     'LBL_ACTION_EMPTY' => '清空',
 
