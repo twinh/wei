@@ -91,7 +91,7 @@ class Common_ActionController extends Common_Controller
      */
     public function actionAdd()
     {
-        if (empty($_POST)) {
+        if (!$this->request->isPost()) {
             $service = new Common_Service_Form();
             return $service->process(array(
                 'asc' => $this->_asc,
@@ -101,7 +101,7 @@ class Common_ActionController extends Common_Controller
                 )
             ));
         } else {
-            $service = new Common_Service_Insert();
+            $service = new Common_Service_Add();
             return $service->process(array(
                 'asc' => $this->_asc,
                 'data' => array(
@@ -126,7 +126,7 @@ class Common_ActionController extends Common_Controller
      */
     public function actionEdit()
     {
-        if (empty($_POST)) {
+        if (!$this->request->isPost()) {
             $service = new Common_Service_View();
             return $service->process(array(
                 'asc' => $this->_asc,
@@ -141,7 +141,7 @@ class Common_ActionController extends Common_Controller
                 ),
             ));
         } else {
-            $service = new Common_Service_Update();
+            $service = new Common_Service_Edit();
             return $service->process(array(
                 'asc' => $this->_asc,
                 'data' => array(

@@ -46,7 +46,7 @@ class Common_Service_Form extends Common_Service_BasicAction
         'callback' => array(
         ),
         'view' => array(
-            'class' => 'Common_View_AddForm',
+            'class' => 'Common_View_Add',
             'display' => true,
         ),
         'this' => null,

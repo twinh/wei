@@ -42,12 +42,6 @@ class Common_Service_BasicAction extends Common_Service
     public $session;
 
     /**
-     * Qwin_Request
-     * @var Qwin_Request
-     */
-    public $request;
-
-    /**
      * 元数据助手,负责元数据的获取,转换,检查等
      * @var Qwin_Application_Metadata
      */
@@ -63,7 +57,6 @@ class Common_Service_BasicAction extends Common_Service
     protected function process(array $option = null)
     {
         // 初始化常用的变量
-        $this->request      = Qwin::call('-request');
         $this->url          = Qwin::call('-url');
         $this->session      = Qwin::call('-session');
         $this->metaHelper   = Qwin::call('Qwin_Application_Metadata');
