@@ -32,6 +32,13 @@
 class Common_View extends Qwin_Application_View_Abstract
 {
     /**
+     * 打包的标记,用于合并js,css标签
+     *
+     * @var string
+     */
+    protected $_packSign = '<!-- qwin-packer-sign -->';
+
+    /**
      * 将当前视图对象加入注册器中
      */
     public function __construct()
@@ -49,16 +56,14 @@ class Common_View extends Qwin_Application_View_Abstract
         if (isset($this->_style)) {
             return $this->_style;
         }
-        if (!isset($this->config)) {
-            $this->config = Qwin::config();
-        }
+        $config = Qwin::config();
 
         $session = Qwin::call('-session');
         // 按优先级排列语言的数组
         $styleList = array(
             Qwin::call('-request')->get('style'),
-            $session->get('style'),
-            $this->config['style'],
+            $session['style'],
+            $config['style'],
         );
         foreach ($styleList as $val) {
             if (null != $val) {
@@ -67,10 +72,10 @@ class Common_View extends Qwin_Application_View_Abstract
             }
         }
 
-        if (!is_dir(QWIN . '/view/style/' . $style)) {
-            $style = $this->config['style'];
+        if (!is_dir($config['resource'] . '/view/style/' . $style)) {
+            $style = $config['style'];
         }
-        $session->set('style', $style);
+        $session['style'] = $style;
         return $this->_style = $style;
     }
 
@@ -96,7 +101,7 @@ class Common_View extends Qwin_Application_View_Abstract
 
         // 设置标签
         $this->setTag(array(
-            'resource'          => QWIN . 'view/theme/',
+            'resource'          => $config['resource'] . 'view/theme/',
             'suffix'            => '.php',
             'theme'             => $config['theme'],
             'style'             => $this->getStyle(),
@@ -199,9 +204,7 @@ class Common_View extends Qwin_Application_View_Abstract
         $replace = Qwin_Util_Html::jsTag($url->url($jsUrl))
                  . Qwin_Util_Html::cssLinkTag($url->url($cssUrl));
 
-        // TODO
-        $search = '<!-- qwin-packer-sign -->';
-        $output = Qwin_Util_String::replaceFirst($search, $replace, $output);
+        $output = Qwin_Util_String::replaceFirst($this->getPackerSign(), $replace, $output);
         echo $output;
         unset($output);
         return $this;
@@ -232,5 +235,15 @@ class Common_View extends Qwin_Application_View_Abstract
         $this->setLayout('<resource><theme>/<defaultNamespace>/layout/jump<suffix>');
         $this->assign('url', $url);
         return $this;
+    }
+
+    /**
+     * 获取打包标记
+     *
+     * @return string
+     */
+    public function getPackerSign()
+    {
+        return $this->_packSign;
     }
 }

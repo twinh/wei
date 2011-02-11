@@ -51,7 +51,7 @@ class Common_Category_Controller_Category extends Common_ActionController
     public function onAfterDb()
     {
         $fileCacheObj = Qwin::call('Qwin_Cache_File');
-        $fileCacheObj->connect(QWIN_ROOT_PATH . '/cache/');
+        $fileCacheObj->connect(Qwin_ROOT_PATH . '/cache/');
         $setting = array_intersect_key($this->_asc, array(
             'namespace' => '',
             'module' => '',
@@ -72,7 +72,7 @@ class Common_Category_Controller_Category extends Common_ActionController
         // 获取缓存数据
         //$cateogryCache = Qwin::call('Qwin_Cache_List')->getCache('Category');
         $fileCacheObj = Qwin::call('Qwin_Cache_File');
-        $fileCacheObj->connect(QWIN_ROOT_PATH . '/cache/');
+        $fileCacheObj->connect(Qwin_ROOT_PATH . '/cache/');
         $setting = array(
             'namespace' => 'Common',
             'module' => 'Category',

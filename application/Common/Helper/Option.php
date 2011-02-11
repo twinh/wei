@@ -204,7 +204,7 @@ class Common_Helper_Option
     public function delete($data)
     {
         foreach($data as $row) {
-            $cachePath = QWIN . '/class/' . $row['language'] . '/' . $row['sign'] . '.php';
+            $cachePath = QWIN_PATH . '/class/' . $row['language'] . '/' . $row['sign'] . '.php';
             if(is_file($cachePath)) {
                 unlink($cachePath);
             }

@@ -25,7 +25,6 @@
  * @since       2009-11-24 18:47:32
  */
 // 防止直接访问导致错误
-!defined('QWIN_PATH') && exit('Forbidden');
 $operationField =  $this->loadWidget('Common_Widget_FormLink', array($data, $primaryKey));
 ?>
 <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">

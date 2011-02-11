@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
+ * @package     QWIN_PATH
  * @subpackage  
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -105,7 +105,7 @@ class Common_Config_Controller_Config extends Common_ActionController
             // 保存结果
             $data = $metaHelper->filterOne($_POST, 'db', $meta, $meta, array('view' => false));
             unset($data['groupId']);
-            $path = QWIN_ROOT_PATH . '/common/config/global.php';
+            $path = Qwin_ROOT_PATH . '/common/config/global.php';
             $globalConfig = require $path;
             $globalConfig[$groupId] = $data;
             Qwin_Helper_File::writeArray($path, $globalConfig);

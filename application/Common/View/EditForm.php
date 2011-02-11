@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
+ * @package     QWIN_PATH
  * @subpackage  
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -29,9 +29,8 @@ class Common_View_EditForm extends Common_View
 {
     public function  preDisplay()
     {
-        $this->setElement('content', array(
-            '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>-form<suffix>',
-        ));
+        parent::preDisplay();
+        $this->setElement('content', '<resource><theme>/<defaultNamespace>/element/common/form<suffix>');
         
         // 初始化变量,方便调用
         $primaryKey = $this->primaryKey;

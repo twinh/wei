@@ -115,7 +115,7 @@ class Common_Management_Controller_Module extends Common_Controller
         $this->_view = array(
             'class' => 'Common_View',
             'element' => array(
-                array('content', QWIN . '/view/theme/' . $theme . '/element/management/module-list.php'),
+                array('content', QWIN_PATH . '/view/theme/' . $theme . '/element/management/module-list.php'),
             ),
             'data' => get_defined_vars(),
         );
@@ -136,7 +136,7 @@ class Common_Management_Controller_Module extends Common_Controller
             $this->_view = array(
                 'class' => 'Common_View',
                 'element' => array(
-                    array('content', QWIN . '/view/theme/' . $theme . '/element/management/add-module.php'),
+                    array('content', QWIN_PATH . '/view/theme/' . $theme . '/element/management/add-module.php'),
                 ),
                 'data' => get_defined_vars(),
             );

@@ -29,7 +29,8 @@ class Common_View_AddForm extends Common_View
 {
     public function preDisplay()
     {
-        $this->setElement('content', '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>-form<suffix>');
+        parent::preDisplay();
+        $this->setElement('content', '<resource><theme>/<defaultNamespace>/element/common/form<suffix>');
 
         // 初始化变量,方便调用
         $primaryKey = $this->primaryKey;

@@ -29,9 +29,9 @@ return array(
     '' => 'NULL',
     'LBL_BLANK' => '',
 
-    // Qwin's information
-    'LBL_QWIN' => 'Qwin',
-    'LBL_QWIN_VERSION' => '',
+    // QWIN_PATH's information
+    'LBL_QWIN_PATH' => 'QWIN_PATH',
+    'LBL_Qwin_VERSION' => '',
 
     // User's actions in browser
     'LBL_ACTION_LIST' => 'List',
@@ -113,8 +113,8 @@ return array(
 
     'MSG_FILE_NOT_EXISTS' => 'The file is not exists',
 
-    'LBL_HTML_TITLE' => 'Management System - Powered by Qwin Framework',
-    'LBL_FOOTER_COPYRIGHT' => 'Powered by <a>Qwin Framework</a>. Copyright &copy; 2008-2010 <a>Twin</a>. All rights reserved.',
+    'LBL_HTML_TITLE' => 'Management System - Powered by QWIN_PATH Framework',
+    'LBL_FOOTER_COPYRIGHT' => 'Powered by <a>QWIN_PATH Framework</a>. Copyright &copy; 2008-2010 <a>Twin</a>. All rights reserved.',
     'MSG_PERMISSION_NOT_ENOUGH' => 'Your permission is not enough to view/operate this page',
 
 
