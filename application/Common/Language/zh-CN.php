@@ -112,8 +112,8 @@ return array(
 
 
 
-    'LBL_HTML_TITLE' => 'Management System - Powered by QWIN_PATH Framework',
-    'LBL_FOOTER_COPYRIGHT' => 'Powered by QWIN_PATH Framework, Version ' . Qwin::VERSION . '. Copyright © 2008-2010 Twin. All rights reserved.',
+    'LBL_HTML_TITLE' => 'Management System - Powered by Qwin Framework',
+    'LBL_FOOTER_COPYRIGHT' => 'Powered by Qwin Framework, Version ' . Qwin::VERSION . '. Copyright © 2008-2010 Twin. All rights reserved.',
     'LBL_ACTION_VIEW' => '查看',
     'LBL_ACTION_UPDATE' => '更新',
     'LBL_ACTION_INDEX' => '列表',
