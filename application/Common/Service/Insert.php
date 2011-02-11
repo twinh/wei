@@ -32,7 +32,7 @@ class Common_Service_Insert extends Common_Service_BasicAction
      * @var array
      */
     protected $_config = array(
-        'set' => array(
+        'asc' => array(
             'namespace' => null,
             'module' => null,
             'controller' => null,
@@ -64,11 +64,11 @@ class Common_Service_Insert extends Common_Service_BasicAction
         $metaHelper = Qwin::call('Qwin_Application_Metadata');
         if(null == $config['this'])
         {
-            $config['this'] = Qwin::call($metaHelper->getClassName('Controller', $config['set']));
+            $config['this'] = Qwin::call($metaHelper->getClassName('Controller', $config['asc']));
         }
 
         // 通过父类,加载语言,元数据,模型等
-        parent::process($config['set']);
+        parent::process($config['asc']);
 
         // 初始化常用的变量
         $meta = $this->_meta;
@@ -117,9 +117,9 @@ class Common_Service_Insert extends Common_Service_BasicAction
 
         // 入库
         $modelName = $metaHelper->getClassName('Model', $this->_asc);
-        $this->_result = new $modelName;
-        $this->_result->fromArray($data);
-        $this->_result->save();
+        $result = new $modelName;
+        $result->fromArray($data);
+        $result->save();
 
         // 在数据库操作之后,执行相应的 on 函数,跳转到原来的页面或列表页
         if(isset($config['callback']['afterDb']))

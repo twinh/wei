@@ -39,8 +39,7 @@ class Common_View_View extends Common_View
         $url            = Qwin::call('-url');
         $asc            = $config['asc'];
         $lang           = Qwin::call('-lang');
-        $langHelper     = Qwin::call('Common_Helper_Language');
-        $jqGridHepler   = new Common_Helper_JqGrid();
+        $jqGridWidget   = Qwin::widget('jqgrid');
         $jqGrid         = array();
 
         $orderedFeid = $metaHelper->orderField($meta);
@@ -54,12 +53,12 @@ class Common_View_View extends Common_View
         foreach ($relatedListMetaList as $alias => $relatedMeta) {
             $jqGrid = array();
             $model = $meta['model'][$alias];
-            $relatedAsc = $model['set'];
+            $relatedAsc = $model['asc'];
             $uniqueId = strtolower(implode('-', $relatedAsc));
             $relatedpPrimaryKey = $relatedMeta['db']['primaryKey'];
-            $relatedLang = $langHelper->getObjectByAsc($relatedAsc);
+            $lang->appendByAsc($relatedAsc);
 
-            $tabTitle[$alias] = $relatedLang[$relatedMeta['page']['title']];
+            $tabTitle[$alias] = $lang[$relatedMeta['page']['title']];
 
             // 获取栏数据
             $listLayout = $metaHelper->getListLayout($relatedMeta);

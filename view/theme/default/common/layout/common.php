@@ -3,8 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $config['interface']['charset'] ?>" />
 <title><?php echo qw_lang('LBL_HTML_TITLE') ?></title>
-<!-- qwin-packer-sign -->
 <?php
+echo $this->getPackerSign();
 $member = Qwin::call('-session')->get('member');
 $nickname = isset($member['contact']) ? $member['contact']['nickname'] : $member['username'];
 $jQueryFile = array(

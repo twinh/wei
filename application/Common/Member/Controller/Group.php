@@ -59,7 +59,7 @@ class Common_Member_Controller_Group extends Common_ActionController
 
         if (empty($_POST)) {
             $permission = unserialize($result['permission']);
-            $appStructure = require QWIN_ROOT_PATH . '/cache/php/application-structure.php';
+            $appStructure = require Qwin_ROOT_PATH . '/cache/php/application-structure.php';
             $this->view->assign(get_defined_vars());
         } else {
             $permission = (array)$this->request->post('permission');

@@ -37,7 +37,7 @@ class Common_Widget_Header extends Common_Widget
         // 图标 > 模块 > 控制器 > 行为
         $header = '';
         
-        $icon = QWIN . '/image/' . $view['meta']['page']['icon'] . '_32.png';
+        $icon = Qwin::config('resource') . 'image/' . $view['meta']['page']['icon'] . '_32.png';
         !is_file($icon) && $icon = null;
 
         $header .= '<a href="' . $url->url(array_diff_key($asc, array('action' => ''))) . '">' . $lang->t($view['meta']['page']['title']) . '</a>';

@@ -68,7 +68,7 @@ class Common_Management_Controller_Namespace extends Common_Controller
         $this->_view = array(
             'class' => 'Common_View',
             'element' => array(
-                array('content', QWIN . '/view/theme/' . $theme . '/element/management/namespace-list.php'),
+                array('content', QWIN_PATH . '/view/theme/' . $theme . '/element/management/namespace-list.php'),
             ),
             'data' => get_defined_vars(),
         );
@@ -99,7 +99,7 @@ class Common_Management_Controller_Namespace extends Common_Controller
             $this->_view = array(
                 'class' => 'Common_View',
                 'element' => array(
-                    array('content', QWIN . '/view/theme/' . $theme . '/element/management/add-namespace.php'),
+                    array('content', QWIN_PATH . '/view/theme/' . $theme . '/element/management/add-namespace.php'),
                 ),
                 'data' => get_defined_vars(),
             );

@@ -94,7 +94,7 @@ class Common_Widget_FormLink extends Common_Widget
                     $jsLang = 'MSG_CONFIRM_TO_DELETE_TO_TRASH';
                 }
                  $link['delete'] = array(
-                    'url'   => 'javascript:if(confirm(Qwin.Lang.' . $jsLang . ')){window.location=\'' . $url->url($asc, array('action' => 'Delete', $primaryKey => $data[$primaryKey])) . '\'};',
+                    'url'   => 'javascript:if(confirm(QWIN_PATH.Lang.' . $jsLang . ')){window.location=\'' . $url->url($asc, array('action' => 'Delete', $primaryKey => $data[$primaryKey])) . '\'};',
                     'title' => $lang->t('LBL_ACTION_DELETE'),
                     'icon'  => $icon,
                 );
@@ -133,7 +133,7 @@ class Common_Widget_FormLink extends Common_Widget
     {
         $output = '';
         foreach ($link as $row) {
-            $output .= Qwin_Util_Html::jQueryLink($row['url'], $row['title'], $row['icon']);
+            $output .= Qwin_Util_JQuery::link($row['url'], $row['title'], $row['icon']);
         }
         if ($echo) {
             require $view->decodePath('<resource><theme>/<defaultNamespace>/element/basic/output<suffix>');

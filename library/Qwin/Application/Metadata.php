@@ -607,7 +607,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
         return $data;
     }
     
-    public function getModelMetadataByType($meta, $type)
+    public function getModelMetadataByType($meta, $type = 'db')
     {
         if (!isset($meta['model'])) {
             return array();
@@ -615,10 +615,11 @@ class Qwin_Application_Metadata extends Qwin_Metadata
         $result = array();
         foreach ($meta['model'] as $name => $model) {
             if ($model['enabled'] && $type == $model['type']) {
-                if (!isset($meta['metadata'][$name])) {
-                    $meta['metadata'][$name] = Qwin_Metadata_Manager::get($model['metadata']);
+                if (!isset($model['metadata'])) {
+                    $metadataClass = $this->getClassName('Metadata', $model['asc']);
+                    $model['metadata'] = Qwin_Metadata_Manager::get($metadataClass);
                 }
-                $result[$name] = $meta['metadata'][$name];
+                $result[$name] = $model['metadata'];
             }
         }
         return $result;
