@@ -44,12 +44,11 @@ class Log4php_Widget extends Qwin_Widget_Abstract
      */
     public function __construct($file = null)
     {
-        $rootPath = $this->getRootPath(__FILE__);
-
+        $this->_rootPath = QWIN . 'widget/log4php/';
         // 加载配置文件
-        require_once $rootPath . '/source/Logger.php';
-        null == $file && $file = $this->_configFile;
-        Logger::configure($rootPath . '/' . $file);
+        require_once $this->_rootPath . 'source/Logger.php';
+        null == $file && $file = $this->_rootPath . $this->_configFile;
+        Logger::configure($file);
 
         // 初始化日志对象
         $this->_logger = Logger::getRootLogger();
@@ -65,6 +64,11 @@ class Log4php_Widget extends Qwin_Widget_Abstract
         $this->_logger->debug('** END ****' . PHP_EOL);
     }
 
+    /**
+     * 渲染微件
+     *
+     * @param mixed $option 配置选项
+     */
     public function render($option)
     {
         throw new Qwin_Widget_Exception('The "render" method should not be called in this widget.');

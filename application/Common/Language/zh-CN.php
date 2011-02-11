@@ -32,7 +32,7 @@ return array(
     'LBL_ACTION_ADD' => '添加',
     'LBL_ACTION_EDIT' => '编辑',
     'LBL_ACTION_DELETE' => '删除',
-    'LBL_ACTION_View' => '查看',
+    'LBL_ACTION_VIEW' => '查看',
     'LBL_ACTION_COPY' => '复制',
     'LBL_ACTION_FILTER' => '筛选',
     'LBL_ACTION_RETURN' => '返回',
@@ -117,7 +117,6 @@ return array(
     'LBL_ACTION_VIEW' => '查看',
     'LBL_ACTION_UPDATE' => '更新',
     'LBL_ACTION_INDEX' => '列表',
-    'LBL_LAST_VIEWED' => '最近查看',
     'LBL_MESSAGE' => '提示信息',
     'LBL_MEMBER_CENTER' => '用户中心',
     'LBL_MANAGEMENT' => '管理',
@@ -177,9 +176,6 @@ return array(
 
     'LBL_TREE_PREFIX_1' => '┃',
     'LBL_TREE_PREFIX_2' => '┣',
-
-    'LBL_LAST_VIEWED_ITEM' => '最近查看项',
-    'MSG_NO_LAST_VIEWED_LOG' => '暂时没有查看记录',
 
     'LBL_MODULE_TRASH' => '回收站',
     'LBL_MODULE_MEMBER' => '用户',

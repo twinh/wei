@@ -41,23 +41,14 @@ class Minify_Widget extends Qwin_Widget_Abstract
     );
 
     /**
-     * 缓存文件的路径
-     * @var string
-     */
-    protected $_cachePath;
-
-
-    /**
      * 初始化系统
      *
      * @param string $cachePath 缓存文件的路径
      */
     public function  __construct($cachePath = null)
     {
-        if (null != $cachePath) {
-            $this->_cachePath = $cachePath;
-        } else {
-            $this->_cachePath = QWIN_ROOT_PATH . '/cache/mini';
+        if ($cachePath) {
+            $this->setCachePath($cachePath);
         }
     }
 
@@ -100,7 +91,7 @@ class Minify_Widget extends Qwin_Widget_Abstract
         }
 
         $name = md5(implode('|', $this->_data[$extension]));
-        $fileName = $this->_cachePath . '/' . $name . '.php';
+        $fileName = $this->_cachePath . $name . '.php';
         if (file_exists($fileName)) {
             return $name;
         }
@@ -117,7 +108,7 @@ class Minify_Widget extends Qwin_Widget_Abstract
      */
     public function getCacheFile($name)
     {
-        $file = $this->_cachePath . '/' . $name . '.php';
+        $file = $this->_cachePath . $name . '.php';
         if (file_exists($file)) {
             return $file;
         }

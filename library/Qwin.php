@@ -448,8 +448,11 @@ class Qwin
      * @uses Qwin_Hook::call
      * @see Qwin_Hook
      */
-    public static function hook($name, array $param = null)
+    public static function hook($name)
     {
-        return self::call('Qwin_Hook')->call($name);
+        // 获取参数
+        $params = func_get_args();
+        array_shift($params);
+        return self::call('Qwin_Hook')->call($name, $params);
     }
 }

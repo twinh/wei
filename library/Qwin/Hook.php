@@ -33,6 +33,7 @@ class Qwin_Hook
     protected $_defaultOption = array(
         'path' => '../widget/',
         'cachePath' => '../cache/',
+        'lifetime' => 86400,
         /*'file' => 'hook.php',
         'depth' => 2,
         'class' => 'classPattern',
@@ -65,7 +66,11 @@ class Qwin_Hook
     {
         !empty($option) && $this->setOption($option);
         $cacheFile = $this->_option['cachePath'] . '/hook.php';
+
         if (is_file($cacheFile)) {
+            if ($this->_option['lifetime'] < $_SERVER['REQUEST_TIME'] - filemtime($cacheFile)) {
+                $this->update();
+            }
             $this->_data = (array) require $cacheFile;
         }
     }
@@ -131,9 +136,9 @@ class Qwin_Hook
             }
 
             // 是否继承父类
-            if ('Qwin_Hook_Abstract' != get_parent_class($class)) {
+            /*if ('Qwin_Hook_Abstract' != get_parent_class($class)) {
                 continue;
-            }
+            }*/
 
             // 获取类中的所有钩子方法,并加入到数据中
             $methodList = get_class_methods($class);
@@ -159,8 +164,10 @@ class Qwin_Hook
      * @param mixed $param 参数
      * @return Qwin_Hook 
      */
-    public function call($name, $param = array())
+    public function call($name, $param = null)
     {
+        $name = strtolower($name);
+        !is_array($param) && $param = array($param);
         if (isset($this->_data[$name])) {
             foreach ($this->_data[$name] as $callback) {
                 // 默认文件形式
@@ -168,11 +175,12 @@ class Qwin_Hook
                     require_once $callback['file'];
                     call_user_func_array(
                         array(Qwin::call($callback['class']), 'hook' . $name),
-                        (array)$param
+                        $param
                     );
                 // 自定义回调结构形式
                 } else {
-                    call_user_func_array($callback[0], array_merge($callback[1], $param));
+                    $callback[1] = isset($callback[1]) ? array_merge($callback[1], $param) : $param;
+                    call_user_func_array($callback[0], $callback[1]);
                 }
             }
             
