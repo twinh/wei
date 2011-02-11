@@ -38,9 +38,8 @@ class Mini_Common_Controller_Common extends Qwin_Application_Controller
         $min_serveOptions['minApp']['groupsOnly'] = false;
         $min_symlinks = array();
         $min_uploaderHoursBehind = 0;
-        $min_libPath = dirname(__FILE__) . '/lib';
         
-        $min_cachePath = QWIN_ROOT_PATH . '/cache/mini';
+        $min_cachePath = QWIN_ROOT_PATH . 'cache/mini';
 
         define('MINIFY_MIN_DIR', dirname(__FILE__));
 

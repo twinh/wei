@@ -105,9 +105,11 @@ class Common_Service_View extends Common_Service_BasicAction
             return $result;
         }
 
-        // TODO 插件?
-        // 添加到最近查看项
-        $metaHelper->setLastViewedItem($meta, $result);
+        // 设置钩子:取得数据
+        Qwin::hook('viewRecord', array(
+            'record' => $result,
+            'meta' => $meta,
+        ));
 
         $data = $result->toArray();
         $data = $metaHelper->filterOne($data, $option['data']['asAction'], $meta, $meta, array('view' => $option['data']['isView']));

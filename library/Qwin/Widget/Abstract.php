@@ -33,29 +33,57 @@ abstract class Qwin_Widget_Abstract
     protected $_option = array();
 
     /**
+     * 自动加载培训
+     *
+     * @var array
+     */
+    protected $_autoload = array(
+        'lang' => false,
+    );
+
+    /**
      * 微件的根目录
      * @var string
      */
     protected $_rootPath;
+    
+    /**
+     * 微件的缓存目录
+     * @var string
+     */
+    protected $_cachePath;
 
     /*
      * 微件单例对象
      * @var Qwin_Widget
      */
     protected $_widget;
-
+    
     abstract public function render($option);
 
+    /**
+     * 初始化
+     */
     public function  __construct()
     {
         $this->_widget = Qwin::call('Qwin_Widget');
     }
 
+    /**
+     * 安装微件
+     *
+     * @return bool
+     */
     public function install()
     {
         return true;
     }
 
+    /**
+     * 卸载微件
+     *
+     * @return bool
+     */
     public function uninstall()
     {
         return true;
@@ -91,58 +119,85 @@ abstract class Qwin_Widget_Abstract
     }
 
     /**
-     * 获取根目录
+     * 设置微件根路径
      *
-     * @param string $file 应为常量 __FILE__
+     * @param string $path 路径
+     * @return Qwin_Widget_Abstract 当前对象
+     */
+    public function setRootPath($path)
+    {
+        if (is_dir($path)) {
+            $this->_rootPath = $path;
+            return $this;
+        }
+        throw new Qwin_Widget_Exception('Path "' . $path . '" no found.');
+    }
+
+    /**
+     * 获取当前根目录
+     *
      * @return string
      */
-    protected function getRootPath($__FILE__)
+    public function getRootPath()
     {
-        if (!isset($this->_rootPath)) {
-            if (isset($_SERVER['SCRIPT_FILENAME'])) {
-                $realPath = $_SERVER['SCRIPT_FILENAME'];
-            } else {
-                $realPath = realpath('./') ;
-            }
-            $file = (str_replace('\\', '/', $__FILE__));
-            $this->_rootPath = dirname($this->getRelativePath($realPath, $file));
-        }
         return $this->_rootPath;
     }
 
     /**
-     * 获取第二个路径对于第一个路径的相对路径
+     * 加载语言
      *
-     * @param string $from 第一个路径
-     * @param string $to 第二个路径
-     * @return string
-     * @see http://stackoverflow.com/questions/2637945/getting-relative-path-from-absolute-path-in-php
+     * @return Qwin_Widget_Abstract 当前对象
+     * @todo 更合适的方式加载
      */
-    public function getRelativePath($from, $to)
+    public function loadLanguage()
     {
-        $from     = explode('/', $from);
-        $to       = explode('/', $to);
-        $relPath  = $to;
+        /* @var $lang Qwin_Application_Language */
+        $lang = Qwin::call('-lang');
+        $lang->appendByFile($this->_rootPath . 'language/' . $lang->getName() . '.php');
+        return $this;
+    }
 
-        foreach($from as $depth => $dir) {
-            // find first non-matching dir
-            if($dir === $to[$depth]) {
-                // ignore this directory
-                array_shift($relPath);
-            } else {
-                // get number of remaining dirs to $from
-                $remaining = count($from) - $depth;
-                if($remaining > 1) {
-                    // add traversals up to first matching dir
-                    $padLength = (count($relPath) + $remaining - 1) * -1;
-                    $relPath = array_pad($relPath, $padLength, '..');
-                    break;
-                } else {
-                    $relPath[0] = './' . $relPath[0];
-                }
-            }
+    /**
+     * 设置缓存路径
+     *
+     * @param string $path 路径
+     * @return Qwin_Widget_Abstract 当前对象
+     */
+    public function setCachePath($path)
+    {
+        if (is_dir($path)) {
+            $this->_cachePath = $path;
+            return $this;
         }
-        return implode('/', $relPath);
+        throw new Qwin_Widget_Exception('Path "' . $path . '" no found.');
+    }
+
+    /**
+     * 获取缓存路径
+     * 
+     * @return string
+     */
+    public function getCachePath()
+    {
+        return $this->_cachePath;
+    }
+
+    /**
+     * 自动加载部分常用类
+     *
+     * @param array $option 配置选项
+     * @return Qwin_Widget_Abstract 当前对象
+     * @todo 耦合.
+     */
+    public function autoload(array $option = null)
+    {
+        $this->_autoload = array_merge($this->_autoload, (array)$option);
+        if ($this->_autoload['lang']) {
+            /* @var $lang Qwin_Application_Language */
+            $lang = Qwin::call('-lang');
+            $lang->appendByFile($this->_rootPath . 'language/' . $lang->getName() . '.php');
+        }
+        return $this;
     }
 
     /**

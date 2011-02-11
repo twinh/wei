@@ -1,8 +1,8 @@
 <?php
 /**
- * ViewedItem
+ * zh-CN
  *
- * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,22 +16,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
- * @subpackage  Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-03 01:28:50
+ * @since       2011-02-11 14:46:52
  */
 
-class Common_Widget_ViewedItem extends Common_Widget
-{
-    public function render($param, $view)
-    {
-        $lastViewedItem = Qwin::call('-session')->get('lastViewedItem');
-        $view->assign('lastViewedItem', $lastViewedItem);
-
-        require $view->decodePath('<resource><theme>/<defaultNamespace>/element/widget/viewed-item<suffix>');
-    }
-}
+return array(
+    'LBL_VIEWED_RECORDS' => '最近查看记录',
+    'MSG_NO_VIEWED_RECORDS' => '暂时没有查看记录',
+);

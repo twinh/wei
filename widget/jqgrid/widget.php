@@ -185,7 +185,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
         $jqGrid = $option['option'];
         $jqGridJson = Qwin_Util_Array::jsonEncode($jqGrid);
 
-        require $this->_rootPath . '/view/default.php';
+        require '/view/default.php';
     }
 
     /**

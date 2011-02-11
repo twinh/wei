@@ -35,22 +35,38 @@ class Qwin_Widget
     protected $_rootPath;
 
     /**
-     * 已信任的微件列表
+     * 已加载的微件
      * @var array
      */
-    protected $_trusted = array();
+    protected $_loaded = array();
 
-    public function __construct($path)
+    /**
+     * 初始化
+     *
+     * @param string $path
+     * @return Qwin_Widget 当前对象
+     */
+    public function __construct($path = null)
     {
-        if (is_dir($path)) {
+        if ($path) {
             $this->setRootPath($path);
         }
     }
-    
+
+    /**
+     * 设置根路径
+     *
+     * @param string $path 路径
+     * @return Qwin_Widget 当前对象
+     */
     public function setRootPath($path)
     {
-        $this->_rootPath = $path;
-        return $this;
+        if (is_dir($path)) {
+            $this->_rootPath = $path;
+            return $this;
+        }
+        
+        throw new Qwin_Widget_Exception('Path "' . $path . '" not found.');
     }
 
     /**
@@ -61,43 +77,33 @@ class Qwin_Widget
      */
     public function get($name)
     {
-        if (false == $this->isExists($name)) {
-            throw new Qwin_Widget_Exception('Can not find the widget : "' . $name . '"');
-        }
-
-        $class = ucfirst($name) . '_Widget';
-
-        return Qwin::call($class);
-    }
-
-    /**
-     * 检查微件是否存在
-     *
-     * @param string $name
-     * @return boolen
-     */
-    public function isExists($name)
-    {
-        // 已经检测过
-        if (isset($this->_trusted[$name])) {
-            return true;
+        $lower = strtolower($name);
+        if (isset($this->_loaded[$lower])) {
+            return $this->_loaded[$lower];
         }
 
         // 查看主文件是否存在
-        $file = $this->_rootPath . '/' . $name . '/widget.php';
+        $file = $this->_rootPath . $lower . '/widget.php';
         if (!is_file($file)) {
             return false;
         }
 
         // 加载并查看类是否存在
         require_once $file;
-        $class = ucfirst($name) . '_Widget';
+        $class = $name . '_Widget';
         if (!class_exists($class)) {
             return false;
         }
 
-        // 加入信任列表中
-        $this->_trusted[$name] = true;
-        return true;
+        // 初始化类
+        /* @var $widget Qwin_Widget_Abstract */
+        $widget = Qwin::call($class);
+        $this->_loaded[$lower] = $widget;
+
+        // 设置根目录,自动加载
+        $widget->setRootPath($this->_rootPath . $lower . '/')
+               ->autoload();        
+
+        return $this->_loaded[$lower];
     }
 }

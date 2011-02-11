@@ -27,14 +27,26 @@
 
 class Qwin_Metadata_Element_Page extends Qwin_Metadata_Element_Abstract
 {
+    protected $a;
+
     public function getSampleData()
     {
         return array(
-            'title' => null,
-            'icon' => 'document',
-            'description' => null,
-            'tableLayout' => 2,
-            'mainField' => null,
+            'title'         => null,
+            'icon'          => 'document',
+            'description'   => null,
+            'tableLayout'   => 2,
+            'mainField'     => null,
+            'trash'         => array(
+                'enable'        => true,
+                'field'         => 'is_deleted',
+                'toggleFlag'    => array(0, 1),
+            ),
+            'log'           => array(
+                'enable'        => true,
+                'field'         => '',
+                'banField'      => '',
+            ),
         );
     }
 

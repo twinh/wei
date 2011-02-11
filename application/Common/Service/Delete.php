@@ -32,7 +32,7 @@ class Common_Service_Delete extends Common_Service_BasicAction
      * @var array
      */
     protected $_config = array(
-        'set' => array(
+        'asc' => array(
             'namespace' => null,
             'module' => null,
             'controller' => null,

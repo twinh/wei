@@ -245,10 +245,10 @@ class Qwin_Application_Language implements ArrayAccess
     }
 
     /**
-     * 通过应用结构配置加载语言
+     * 根据应用结构配置加载语言
      *
      * @param array $asc 应用结构配置
-     * @return Common_Language 当前对象
+     * @return Qwin_Application_Language|false 当前对象|失败
      */
     public function appendByAsc(array $asc)
     {
@@ -261,7 +261,12 @@ class Qwin_Application_Language implements ArrayAccess
         return false;
     }
 
-
+    /**
+     * 根据命名空间加载语言
+     *
+     * @param string $namespace
+     * @return Qwin_Application_Language|false 当前对象|失败
+     */
     public function appendByNamespace($namespace)
     {
         if (isset($this->_namespaceList[$namespace])) {
@@ -269,6 +274,20 @@ class Qwin_Application_Language implements ArrayAccess
             if (is_file($file)) {
                 return $this->_appendFile($file);
             }
+        }
+        return false;
+    }
+
+    /**
+     * 根据文件路径加载语言
+     *
+     * @param string $namespace
+     * @return Qwin_Application_Language|false 当前对象|失败
+     */
+    public function appendByFile($file)
+    {
+        if (is_file($file)) {
+            return $this->_appendFile($file);
         }
         return false;
     }

@@ -69,8 +69,7 @@ $minify
 <table id="ui-main-table" border="0" cellpadding="0" cellspacing="0">
     <tr>
         <td id="ui-main-left">
-        <?php //Qwin_Hook::call('xxx') ?>
-        <?php $this->loadWidget('Common_Widget_ViewedItem') ?>
+        <?php Qwin::hook('viewMainLeft', $this); ?>
         <?php require $this->getElement('sidebar') ?>
         </td>
         <td id="ui-main-middle" class="ui-state-default"></td>

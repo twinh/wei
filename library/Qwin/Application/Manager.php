@@ -144,7 +144,7 @@ class Qwin_Application_Manager
         if (empty($_SERVER['QUERY_STRING'])) {
             header('HTTP/1.1 301 Moved Permanently');
             header('location: ' . $config['index']);
-        }
+        }        
         // 启动Url路由
         /*$router = null;
         if ($config['router']['enable']) {

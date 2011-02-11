@@ -932,39 +932,6 @@ class Qwin_Application_Metadata extends Qwin_Metadata
         return $layout;
     }
 
-    public function setLastViewedItem($meta, $result)
-    {
-        if (!empty($meta['page']['mainField'])) {
-            $title = $result[$meta['page']['mainField']];
-        } elseif (method_exists($meta, 'getMainFieldValue')) {
-            $title = $meta->getMainFieldValue($result);
-        } else {
-            return false;
-        }
-
-        $session = Qwin::call('-session');
-        $lang = Qwin::call('-lang');
-        
-        $item = (array)$session->get('lastViewedItem');
-        $key = get_class($meta) . $result[$meta['db']['primaryKey']];
-
-        // 最多保存8项 TODO 转换为微件,插件.
-        if (8 <= count($item)) {
-            array_pop($item);
-        }
-
-        // 加到第一项
-        $item = array(
-            $key => array(
-            'title' => '[' . $lang->t($meta['page']['title']) .  ']' . $title,
-            'href' => $_SERVER['REQUEST_URI'],
-            )
-        ) + $item;
-        
-        $session->set('lastViewedItem', $item);
-        return true;
-    }
-
     /**
      * 验证一个域的数据
      *
