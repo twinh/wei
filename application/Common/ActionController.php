@@ -39,7 +39,7 @@ class Common_ActionController extends Common_Controller
     {
         $request = $this->request;
         if ($request->get('json')) {
-            $service = new Common_Service_List();
+            $service = new Common_Service_JsonList();
             return $service->process(array(
                 'asc' => $this->_asc,
                 'data' => array(
@@ -57,7 +57,7 @@ class Common_ActionController extends Common_Controller
                 ),
             ));
         } else {
-            $service = new Common_Service_Index();
+            $service = new Common_Service_List();
             return $service->process(array(
                 'asc' => $this->_asc,
                 'data' => array(
@@ -137,7 +137,7 @@ class Common_ActionController extends Common_Controller
                     'isView' => false,
                 ),
                 'view' => array(
-                    'class' => 'Common_View_EditForm',
+                    'class' => 'Common_View_Edit',
                 ),
             ));
         } else {
