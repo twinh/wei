@@ -25,6 +25,15 @@
 
 class ViewedRecords_Hook extends Qwin_Hook_Abstract
 {
+    /**
+     * 优先级
+     * @var array
+     */
+    protected $_priorities = array(
+        'ViewMainLeft' => 50,
+        'ViewRecord' => 50,
+    );
+
     protected $_option = array(
         'maxNum' => 8,
     );
@@ -53,7 +62,6 @@ class ViewedRecords_Hook extends Qwin_Hook_Abstract
         $viewRecords = (array)$session['viewedRecords'];
         $key = get_class($meta) . $record[$meta['db']['primaryKey']];
 
-        // 最多保存8项 TODO 转换为微件,插件.
         if ($this->_option['maxNum'] <= count($viewRecords)) {
             array_pop($viewRecords);
         }
