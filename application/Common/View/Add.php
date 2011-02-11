@@ -25,7 +25,7 @@
  * @since       2010-09-17 18:14:58
  */
 
-class Common_View_AddForm extends Common_View
+class Common_View_Add extends Common_View
 {
     public function preDisplay()
     {

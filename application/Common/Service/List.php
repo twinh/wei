@@ -1,6 +1,6 @@
 <?php
 /**
- * List
+ * Index
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -22,7 +22,7 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-10-09 21:20:47
+ * @since       2010-10-10 14:16:45
  */
 
 class Common_Service_List extends Common_Service_BasicAction
@@ -40,86 +40,48 @@ class Common_Service_List extends Common_Service_BasicAction
         ),
         'data' => array(
             'list' => array(),
-            'order' => array(),
-            'where' => array(),
-            'offset' => null,
-            'limit' => null,
-            'filter' => array(),
-            'asAction' => 'list',
-            'isView' => true,
-            'filter' => true,
+            'isPopup' => false,
         ),
         'callback' => array(
-            'datafilter' => null,
+            'beforeViewLoad' => array(),
         ),
         'view' => array(
-            'class' => 'Common_View_JqGridJson',
+            'class' => 'Common_View_List',
             'display' => true,
         ),
-        'this' => null,
     );
-
+    
     public function process(array $option = null)
     {
-        // 初始配置
+        // 合并配置
         $option = $this->_multiArrayMerge($this->_option, $option);
-        $metaHelper = Qwin::call('Qwin_Application_Metadata');
-        if (null == $option['this']) {
-            $option['this'] = Qwin::call($metaHelper->getClassName('Controller', $option['asc']));
-        }
 
         // 通过父类,加载语言,元数据,模型等
         parent::process($option['asc']);
 
         // 初始化常用的变量
-        $asc        = Qwin::config('asc');
-        $meta       = $this->_meta;
+        $meta = $this->_meta;
         $primaryKey = $meta['db']['primaryKey'];
+        $metaHelper = $this->metaHelper;
 
-        // 从模型获取数据
-        $query = $metaHelper->getQueryByAsc($asc, array('db', 'view'));
-        $metaHelper
-            ->addSelectToQuery($meta, $query)
-            ->addOrderToQuery($meta, $query, $option['data']['order'])
-            ->addWhereToQuery($meta, $query, $option['data']['where'])
-            ->addOffsetToQuery($meta, $query, $option['data']['offset'])
-            ->addLimitToQuery($meta, $query, $option['data']['limit']);
-        $dbData = $data = $query->execute()->toArray();
-        $count = count($data);
-        $totalRecord = $query->count();
+        $listField = $option['data']['list'];
 
-        // 执行回调函数,转换数据
-        if (isset($option['callback']['datafilter'])) {
-            $option['callback']['datafilter'][1] = $data;
-            $tempData = $this->executeCallback('datafilter', $option);
-            null != $tempData && $data = $tempData;
-        }
-
-        // 对数据进行转换
-        if ($option['data']['filter']) {
-            $data = $metaHelper->filterArray($data, $option['data']['asAction'], $meta, $meta, array('view' => $option['data']['isView']));
-        }
-
-        // 获取布局
-        $layout = $metaHelper->getListLayout($meta);
-        if (null != $option['data']['list']) {
-            $layout = array_intersect($layout, (array)$option['data']['list']);
-        }
+        // 是否以弹出框形式显示
+        $isPopup = $option['data']['isPopup'];
 
         // 设置视图
-        $result = array(
-            'result' => true,
-            'view' => array(
-                'class' => $option['view']['class'],
-                'data' => get_defined_vars(),
-            ),
-            'data' => $data,
+        $view = array(
+            'class' => $option['view']['class'],
+            'data' => get_defined_vars(),
         );
-        // 加载视图
         if ($option['view']['display']) {
-            $view = Qwin::call($option['view']['class']);
-            $view->assign($result['view']['data']);
+            $viewObject = new $option['view']['class'];
+            $viewObject->assign($view['data']);
         }
-        return $view;
+        
+        return array(
+            'result' => true,
+            'view' => $view,
+        );
     }
 }

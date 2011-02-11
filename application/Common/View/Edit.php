@@ -25,7 +25,7 @@
  * @since       2010-10-14 17:38:02
  */
 
-class Common_View_EditForm extends Common_View
+class Common_View_Edit extends Common_View
 {
     public function  preDisplay()
     {

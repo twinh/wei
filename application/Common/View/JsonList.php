@@ -25,7 +25,7 @@
  * @since       2010-09-17 18:16:36
  */
 
-class Common_View_JqGridJson extends Common_View
+class Common_View_JsonList extends Common_View
 {
     public function preDisplay()
     {
