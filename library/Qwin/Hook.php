@@ -70,8 +70,9 @@ class Qwin_Hook
         if (is_file($cacheFile)) {
             if ($this->_option['lifetime'] < $_SERVER['REQUEST_TIME'] - filemtime($cacheFile)) {
                 $this->update();
+            } else {
+                $this->_data = (array) require $cacheFile;
             }
-            $this->_data = (array) require $cacheFile;
         }
     }
 
@@ -123,7 +124,7 @@ class Qwin_Hook
         $pathList = scandir($this->_option['path']);
         foreach ($pathList as $path) {
             // 是否存在钩子文件
-            $file = $this->_option['path'] . '/' . $path . '/hook.php';
+            $file = $this->_option['path'] . $path . '/hook.php';
             if (!is_file($file)) {
                 continue;
             }
@@ -140,19 +141,35 @@ class Qwin_Hook
                 continue;
             }*/
 
-            // 获取类中的所有钩子方法,并加入到数据中
-            $methodList = get_class_methods($class);
-            foreach ($methodList as $method) {
+            $reflection = new ReflectionClass($class);
+            $properties = $reflection->getDefaultProperties();
+            $priorities = array_change_key_case($properties['_priorities']);
+            $methods    = get_class_methods($class);
+
+            foreach ($methods as $method) {
                 if ('hook' == substr($method, 0, 4)) {
                     $name = strtolower(substr($method, 4));
-                    // 效率或空间?
-                    $this->_data[$name][] = array(
+
+                    // 以优先级作为键名,当优先级相同时,往后递增
+                    // 当数量庞大时,应进行优化
+                    !isset($priorities[$name]) && $priorities[$name] = 50;
+                    while (isset($this->_data[$name][$priorities[$name]])) {
+                        $priorities[$name]++;
+                    }
+                    
+                    $this->_data[$name][$priorities[$name]] = array(
                         'file' => $file,
                         'class' => strtolower($class),
                     );
                 }
             }
         }
+
+        // 根据优先级排序
+        foreach ($this->_data as &$value) {
+            ksort($value);
+        }
+
         Qwin_Util_File::writeArray($this->_option['cachePath'] . '/hook.php', $this->_data);
         return $this;
     }

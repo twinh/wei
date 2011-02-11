@@ -27,4 +27,10 @@
 
 abstract class Qwin_Hook_Abstract
 {
+    /**
+     * 优先级,键名为钩子名称,不分大小写,值为数字,表示优先级,大的先执行
+     *
+     * @var string
+     */
+    protected $_priorities = array();
 }
