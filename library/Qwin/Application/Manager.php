@@ -116,7 +116,7 @@ class Qwin_Application_Manager
         require_once 'Benchmark/Timer.php';
         $t = new Benchmark_Timer();
         $t->start();
-
+        
         // 设置加载标识,防止二次加载
         if ($this->_isLoad) {
             return false;
