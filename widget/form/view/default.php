@@ -40,12 +40,10 @@ $minify->add($this->_rootPath . 'script/js.js');
 <fieldset id="ui-fieldset-<?php echo $groupKey ?>" class="ui-widget-content ui-corner-all">
     <legend><?php echo qw_lang($group[$groupKey]) ?></legend>
     <table class="ui-form-table" id="ui-form-table-<?php echo $groupKey ?>" width="100%">
-        <colgroup>
-        <col width="12.5%"></col>
-        <col width="37.5%"></col>
-        <col width="12.5%"></col>
-        <col width="37.5%"></col>
-        </colgroup>
+        <colgroup width="12.5%"></colgroup>
+        <colgroup width="37.5%"></colgroup>
+        <colgroup width="12.5%"></colgroup>
+        <colgroup width="37.5%"></colgroup>
         <?php
         foreach($fieldGroup as $row):
         ?>
