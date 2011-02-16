@@ -357,8 +357,8 @@ class Form_Widget extends Qwin_Widget_Abstract
         // 隐藏域的表单配置
         $hidden = array();
 
-        // 布局指示器
-        $pointer = array();
+        // 布局上一个布局类型
+        $prev = array();
 
         foreach ($orderedField as $field) {
             // 初始化元数据,表单,数据
@@ -395,76 +395,82 @@ class Form_Widget extends Qwin_Widget_Abstract
 
             $cell = array($meta['field'][$field[0]]['basic']['title'], $form);
             $group = $meta['field'][$field[0]]['basic']['group'];
-            $name = $meta['field'][$field[0]]['form']['name'];
             if (!isset($layout[$group])) {
                 $layout[$group] = array();
-                $pointer[$group] = false;
+                $prev[$group] = 2;
             }
 
             if (isset($meta['field'][$field[0]]['basic']['layout'])) {
-                $fieldLayout = $meta['field'][$field[0]]['basic']['layout'];
+                $type = $meta['field'][$field[0]]['basic']['layout'];
             } else {
-                $fieldLayout = $column;
+                $type = $column;
             }
 
-            // 占一格,自动填补向左填补
-            // 如果最后一个元素满2个子元素,则继续创建新的元素,否则,加入元素中,还需排除一行的情况
-            if (!isset($fieldLayout) || 1 == $fieldLayout) {
-                $count = count($layout[$group]) - 1;
-                if (2 != $pointer[$group] && isset($layout[$group][$count]) && 2 != count($layout[$group][$count])) {
-                    $layout[$group][$count][] = $cell;
-                } else {
+            // 占一格,自动向左填补
+            if (1 === $type) {
+                // 上一行为2,3,4
+                if (1 != $prev[$group]) {
                     $layout[$group][] = array(
                         $cell,
                     );
-                    $pointer[$group] = false;
+                } else {
+                    if (2 === count(end($layout[$group]))) {
+                        $layout[$group][] = array(
+                            $cell,
+                        );
+                    } else {
+                        $layout[$group][key($layout[$group])][] = $cell;
+                    }
                 }
-            }
-
-            // 独自占满一行
-            if (2 == $fieldLayout) {
-                $layout[$group][] = array(
-                    $cell,
-                );
-                $pointer[$group] = 2;
+                $prev[$group] = 1;
                 continue;
             }
 
-            // 占一格,但是后面为空
-            if (3 == $fieldLayout) {
-                $layout[$group][] = array(
-                    $cell, '',
-                );
-                continue;
+            // 补齐上一行末尾
+            if (1 === $prev[$group] && 1 === count(end($layout[$group]))) {
+                $key = key($layout[$group]);
+                $layout[$group][$key][] = '';
             }
 
-            // 占一格,右边
-            if (4 == $fieldLayout) {
-                $layout[$group][] = array(
-                    '', $cell,
-                );
-                continue;
+            // 根据不同类型设置布局
+            switch ($type) {
+                // 独自占满一行
+                case 2:
+                    $content = array(
+                        $cell,
+                    );
+                    break;
+
+                // 占一格,放在左边,右边为空
+                case 3:
+                    $content = array(
+                        $cell, '',
+                    );
+                    break;
+
+                // 占一格,放在右边,左边为空
+                case 4:
+                    $content = array(
+                        '', $cell,
+                    );
+                    break;
+
+                // 未知布局,直接忽略
+                default:
+                    continue;
+                    break;
             }
+            $layout[$group][] = $content;
+            $prev[$group] = $type;
         }
 
-        // 修复最后一个的位置
-        /*foreach ($layout as $key => $value) {
-            if (-1 == $key) {
-                continue;
+        // 修复最后一行末尾
+        foreach ($layout as $group => &$row) {
+            if (1 === $prev[$group] && 1 === count(end($row))) {
+                $key = key($row);
+                $row[$key][] = '';
             }
-            $count = count($value) - 1;
-            if (2 != count($value[$count])) {
-                // 检查是否为占满一行的
-                if (null != $value[$count][0][0]) {
-                    $meta = $this->getModelMetadataByAlias($meta, $value[$count][0][0]);
-                } else {
-                    $meta = $meta;
-                }
-                if (!isset($meta['field'][$value[$count][0][1]]['basic']['layout']) || 2 != $meta['field'][$value[$count][0][1]]['basic']['layout']) {
-                    $layout[$key][$count][] = '';
-                }
-            }
-        }*/
+        }
 
         return array(
             'hidden' => $hidden,

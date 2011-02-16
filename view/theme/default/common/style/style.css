@@ -282,18 +282,7 @@ div.ui-box-tab .ui-tabs-panel{
     padding: 0 10px;
 }
 
-/* input: hidden 的行 */
-.ui-form .ui-form-content .ui-block-hidden,
-.ui-form .ui-form-content .ui-block-custom {
-    display: none;
-}
-.ui-form .ui-form-content .ui-block-common .ui-label-common,
-.ui-form .ui-form-content .ui-block-common .ui-field-state,
-.ui-form .ui-form-content .ui-block-common .ui-field-common,
-.ui-form .ui-form-content .ui-block-common .ui-icon-common
-{
-    float: left;
-}
+
 .ui-form .ui-form-content fieldset {
     margin: 5px;
     padding-left: 5px;
@@ -309,16 +298,7 @@ div.ui-box-tab .ui-tabs-panel{
     border: 0;
 }
 
-.ui-form .ui-form-content .ui-field-data-common {
-    line-height: 20px;
-}
-.ui-form .ui-form-content .ui-field-common input {
-    margin-right: 5px;
-}
-.ui-form .ui-form-content .ui-field-common label {
-    /*margin-right: 5px;*/
-    margin-top: 3px;
-}
+
 /* 防止ck编辑器下部变形 */
 .cke_editor .cke_contents fieldset{ 
     margin: 0;
