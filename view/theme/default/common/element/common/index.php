@@ -27,7 +27,7 @@
 ?>
 <!-- qwin-packer-sign -->
 <?php
-if ($isPopup) :
+if ($request->isPopup()) :
 ?>
 <style type="text/css">
 #t_ui-jqgrid-table{

@@ -173,10 +173,9 @@ class Common_View extends Qwin_Application_View_Abstract
         extract($this->_data, EXTR_OVERWRITE);
 
         $request = Qwin::call('-request');
-        $isAjax = $request['ajax'];
 
         // 加载布局
-        if (!$isAjax) {
+        if (!$request->isAjax()) {
             require $this->getLayout();
         } else {
             require $this->getElement('content');
@@ -219,6 +218,7 @@ class Common_View extends Qwin_Application_View_Abstract
      */
     public function redirect($message, $method = null)
     {
+        echo $message;exit;
         $this->assign('message', $message);
         $this->assign('method', $method);
         return $this;

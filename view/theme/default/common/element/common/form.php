@@ -25,7 +25,6 @@
  * @since       2009-11-24 18:47:32
  */
 // 防止直接访问导致错误
-$operationField =  $this->loadWidget('Common_Widget_FormLink', array($data, $primaryKey));
 ?>
 <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
 <div class="ui-box-header">
@@ -35,7 +34,7 @@ $operationField =  $this->loadWidget('Common_Widget_FormLink', array($data, $pri
     <div class="ui-operation-field">
         <?php echo $operationField ?>
     </div>
-    <?php require $this->decodePath('<resource><theme>/<defaultNamespace>/element/basic/form<suffix>') ?>
+    <?php $formWidget->render($formOption); ?>
     <div class="ui-operation-field">
         <?php echo $operationField ?>
     </div>

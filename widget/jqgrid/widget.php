@@ -90,7 +90,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
             'colNames'      => array(),
             'colModel'      => array(),
             'sortname'      => null,
-            'sortorder'     => null,
+            'sortorder'     => 'DESC',
             'rowNum'        => 10,
             'rowList'       => array('5', '10', '20', '30', '40', '50', '100'),
             'caption'       => false,
@@ -108,9 +108,9 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
             'pager'         => '#ui-jqgrid-page',
             'prmNames'      => array(
                 'page'      => 'page',
-                'rows'      => 'rows',
-                'sort'      => 'sort',
-                'order'     => 'order',
+                'rows'      => 'row',
+                'sort'      => 'orderField',
+                'order'      => 'orderType',
                 'search'    => '_search',
                 'nd'        => 'nd',
                 'npage'     => 'npage'
@@ -148,15 +148,6 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
             'rows'          => array(),
         ),
     );
-
-    /**
-     * 初始化微件
-     */
-    public function  __construct()
-    {
-        parent::__construct();
-        $this->getRootPath(__FILE__);
-    }
  
     /**
      * 渲染jqGrid界面

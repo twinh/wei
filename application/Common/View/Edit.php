@@ -34,16 +34,22 @@ class Common_View_Edit extends Common_View
         
         // 初始化变量,方便调用
         $primaryKey = $this->primaryKey;
+
         $meta = $this->meta;
-        $metaHelper = $this->metaHelper;
         $data = $this->data;
         $asc = Qwin::config('asc');
 
-        $orderedFeid = $metaHelper->orderField($meta);
-        $layout = $metaHelper->getTableLayout($meta, $orderedFeid, 'edit', $meta['page']['tableLayout']);
+        /* @var $formWidget Form_Widget */
+        $formWidget = Qwin::widget('form');
+        $formOption = array(
+            'meta'  => $meta,
+            'action' => 'edit',
+            'data'  => $this->data,
+        );
+        
+        $jQueryValidateCode = Qwin_Util_Array::jsonEncode($meta->getJQueryValidateCode($meta));
 
-        $group = $meta['group'];
-        $jQueryValidateCode = Qwin_Util_Array::jsonEncode($metaHelper->getJQueryValidateCode($meta));
+        $operationField = $this->loadWidget('Common_Widget_FormLink', array($this->data, $primaryKey));
 
         $this->assign(get_defined_vars());
     }

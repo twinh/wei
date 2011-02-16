@@ -57,7 +57,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
             'form' => array(
                 '_type' => 'text',
                 '_resource' => null,
-                '_resourceGetter' => null,
+                //'_resourceGetter' => null,
                 //'_resourceFormFile' => null,
                 '_extend' => null,
                 '_value' => '',

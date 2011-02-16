@@ -293,7 +293,21 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                 5 => 'LBL_GROUP_DESCRIPTION_DATA'
             ),
             'layout' => array(
-
+                'list' => array(
+                    'id', 'name', 'dd',
+                ),
+                // 只读? 权限不够查看某字段(1往上并拢,2.留记号) isList ?
+                // 两种类型 1,针对每个域,设置多个属性, 2 针对多个域,建立一个属性表
+                'form' => array(
+                    'group1' => array(
+                        array('name', 'name2'),
+                        array('name3', 'name4'),
+                    ),
+                    'group2' => array(
+                        array('name', 'name2'),
+                        array('name3', 'name4'),
+                    ),
+                ),
             ),
             'model' => array(
                 'receiver' => array(

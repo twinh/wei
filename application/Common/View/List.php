@@ -32,9 +32,7 @@ class Common_View_List extends Common_View
         parent::preDisplay();
         // 初始变量,方便调用
         $manager        = Qwin::call('-manager');
-        $primaryKey     = $this->primaryKey;
         $meta           = $this->meta;
-        $metaHepler     = $this->metaHelper;
         $request        = Qwin::call('-request');
         $lang           = Qwin::call('-lang');
         $url            = Qwin::call('-url');
@@ -46,10 +44,10 @@ class Common_View_List extends Common_View
         $option         = array();
       
         // 获取json数据的地址
-        $option['url'] = $url->url(array('json' => '1') + $_GET);
+        $option['url'] = $url->url(array('json' => true) + $_GET);
 
         // 获取并合并布局
-        $layout = $this->metaHelper->getListLayout($meta);
+        $layout = $meta->getListLayout();
         if ($this->listField) {
             $layout = array_intersect($layout, (array)$this->listField);
         }
@@ -64,19 +62,12 @@ class Common_View_List extends Common_View
             $option['sortname']  = $meta['db']['order'][0][0];
             $option['sortorder'] = $meta['db']['order'][0][1];
         } else {
-            $option['sortname']  = $primaryKey;
-            $option['sortorder'] = 'DESC';
+            $option['sortname']  = $this->primaryKey;
         }
 
         // 设置Url参数的名称
         $option['rowNum']        = $request->getLimit();
         $option['rowNum']        <= 0 && $option['rowNum'] = $meta['db']['limit'];
-        $option['prmNames'] = array(
-            'page'              => $request->getOption('page'),
-            'rows'              => $request->getOption('row'),
-            'sort'              => $request->getOption('orderField'),
-            'order'             => $request->getOption('orderType'),
-        );
 
         // 设置弹出窗口属性
         if ($this->isPopup) {

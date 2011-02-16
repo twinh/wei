@@ -28,14 +28,44 @@
 class Common_Service
 {
     /**
+     * 内置的的操作结果
+     *
+     * @var array
+     */
+    protected $_commonResult = array(
+        -1  => 'Unknown error.',
+        0   => 'Unknown error.',
+        1   => 'Operation success.',
+        2   => 'Class "%s" not found.',
+        3   => '"%s" not defined.',
+        4   => 'View Class "%s" no found.',
+    );
+
+    /**
+     * 自定义的操作结果
+     *
+     * @var array
+     */
+    protected $_result = array();
+
+    /**
+     * 合并内置的和自定义的操作结果
+     */
+    public function  __construct()
+    {
+        $this->_result = $this->_result + $this->_commonResult;
+    }
+
+    /**
      * 将第二个数组合并到第一个上
      *
      * @param array $array1
      * @param array $array2
      * @return array 合并的数组
      */
-    protected function _multiArrayMerge(array $array1 = null, array $array2 = null)
+    /*protected function _multiArrayMerge(array $array1 = null, array $array2 = null)
     {
+        
         if(null == $array2)
         {
             return $array1;
@@ -51,21 +81,30 @@ class Common_Service
             }
         }
         return $array1;
-    }
+    }*/
 
     /**
-     * 执行触发器
+     * 返回服务的操作结果
      *
-     * @param string $name 触发器名称
-     * @param array $config 服务的配置
-     * @return mixed
+     * @param int $code 操作结果代码
+     * @param array $data 操作结果数据
+     * @return array 操作结果
      */
-    public function executeCallback($name, $config)
+    public function result($code = 1, $data = null)
     {
-        if(null != $config['callback'][$name])
-        {
-            return Qwin_Class::callByArray($config['callback'][$name]);
+        !isset($this->_result[$code]) && $code = -1;
+        $result = array();
+
+        if (1 == $code) {
+            return array(
+                'result'    => true,
+                'data'      => $data,
+            );
+        } else {
+            return array(
+                'result'    => false,
+                'data'      => sprintf($this->_result[$code], $data),
+            );
         }
-        return null;
     }
 }

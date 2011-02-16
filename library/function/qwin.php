@@ -32,11 +32,14 @@ function d($a = null, $exit = true)
         exit;
     }
 }
-function p($a)
+function p($a = null, $exit = true)
 {
     echo '<p><pre>';
     print_r($a);
     echo '</pre><p>';
+    if (true === $exit) {
+        exit;
+    }
 }
 
 /**
@@ -60,11 +63,11 @@ function qwin($name)
     return Qwin::call($name);
 }
 
-function qw_form($option, $view = null)
+function qw_form($option)
 {
     static $form;
-    null == $form && $form = Qwin::call('Qwin_Widget_Form');
-    return $form->render($option, $view);
+    null == $form && $form = Qwin::widget('form');
+    return $form->renderElement($option);
 }
 
 function qw_form_extend($option, $form = null)

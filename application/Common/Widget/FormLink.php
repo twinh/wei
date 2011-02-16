@@ -85,7 +85,7 @@ class Common_Widget_FormLink extends Common_Widget
             }
 
              if (!in_array('delete', $forbiddenAction)) {
-                $meta = $view['metaHelper']->getMetadataByAsc($asc);
+                $meta = $manager->getMetadataByAsc($asc);
                 if (!isset($meta['page']['useTrash'])) {
                     $icon = 'ui-icon-close';
                     $jsLang = 'MSG_CONFIRM_TO_DELETE';
