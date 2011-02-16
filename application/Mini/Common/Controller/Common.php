@@ -27,72 +27,42 @@ class Mini_Common_Controller_Common extends Qwin_Application_Controller
 {
     public function actionIndex()
     {
+        $config = Qwin::config();
         ini_set('zlib.output_compression', '0');
 
-        $min_errorLogger = true;
-        $min_allowDebugFlag = true;
-        $min_documentRoot = '';
-        $min_cacheFileLocking = true;
-        $min_serveOptions['bubbleCssImports'] = false;
-        $min_serveOptions['maxAge'] = 1800;
-        $min_serveOptions['minApp']['groupsOnly'] = false;
-        $min_symlinks = array();
-        $min_uploaderHoursBehind = 0;
-        
-        $min_cachePath = Qwin::config('root') . 'cache/mini';
+        $option['maxAge'] = 1800;
+        $option['minApp']['groupsOnly'] = true;
 
-        define('MINIFY_MIN_DIR', dirname(__FILE__));
-
-        Minify::$uploaderHoursBehind = $min_uploaderHoursBehind;
-        Minify::setCache($min_cachePath, $min_cacheFileLocking);
-
-        if ($min_documentRoot) {
-            $_SERVER['DOCUMENT_ROOT'] = $min_documentRoot;
-        } elseif (0 === stripos(PHP_OS, 'win')) {
-            Minify::setDocRoot(); // IIS may need help
+        // IIS may need help
+        if (0 === stripos(PHP_OS, 'win')) {
+            $_SERVER['DOCUMENT_ROOT'] = dirname($config['root']);
         }
 
-        $min_serveOptions['minifierOptions']['text/css']['symlinks'] = $min_symlinks;
-        // auto-add targets to allowDirs
-        foreach ($min_symlinks as $uri => $target) {
-            $min_serveOptions['minApp']['allowDirs'][] = $target;
+        // 设置缓存类型
+        $cachePath = $config['root'] . 'cache/minify';
+        Minify::setCache($cachePath);
+
+        // 调试
+        if ($config['debug']) {
+            $option['debug'] = true;
         }
 
-        if ($min_allowDebugFlag) {
-            if (! empty($_COOKIE['minDebug'])) {
-                foreach (preg_split('/\\s+/', $_COOKIE['minDebug']) as $debugUri) {
-                    if (false !== strpos($_SERVER['REQUEST_URI'], $debugUri)) {
-                        $min_serveOptions['debug'] = true;
-                        break;
-                    }
-                }
-            }
+        // 日志记录
+        if ($config['log']) {
+            Minify_Logger::setLogger(FirePHP::getInstance(true));
         }
 
-        if ($min_errorLogger) {
-            if (true === $min_errorLogger) {
-                Minify_Logger::setLogger(FirePHP::getInstance(true));
-            } else {
-                Minify_Logger::setLogger($min_errorLogger);
-            }
-        }
-
-        // check for URI versioning
-        if (preg_match('/&\\d/', $_SERVER['QUERY_STRING'])) {
-            $min_serveOptions['maxAge'] = 31536000;
-        }
-
+        // 获取文件
         $request = Qwin::call('-request');
         $name = $request->get('g');
-
         $file = Qwin::widget('minify')->getCacheFile($name);
-        if (is_file($file)) {
-            $min_serveOptions['minApp']['groups'][$name] = require $file;
-        } else {
-            exit('');
+        if (!is_file($file)) {
+            Qwin::widget('log4php')->info('minify file ' . $name . ' not found.');
+            exit;
         }
+        $option['minApp']['groups'][$name] = require $file;
 
         // serve!
-        Minify::serve('MinApp', $min_serveOptions);
+        Minify::serve('MinApp', $option);
     }
 }

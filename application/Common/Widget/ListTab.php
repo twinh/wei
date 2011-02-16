@@ -43,6 +43,7 @@ class Common_Widget_ListTab extends Common_Widget
      */
     public function render($param, $view)
     {
+        $manager = Qwin::call('-manager');
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
         $tab = array();
@@ -57,7 +58,7 @@ class Common_Widget_ListTab extends Common_Widget
         parse_str($param['url'], $get);
 
         // 获取禁用的行为
-        $controllerClass = $view['metaHelper']->getClassName('Controller', $asc);
+        $controllerClass = $manager->getClass('controller', $asc);
         $classVar = get_class_vars($controllerClass);
         if (isset($classVar['_forbiddenAction'])) {
             $forbiddenAction = $classVar['_forbiddenAction'];
@@ -86,7 +87,7 @@ class Common_Widget_ListTab extends Common_Widget
 
         // TODO jsLang
         if (!in_array('delete', $forbiddenAction)) {
-            $meta = $view['metaHelper']->getMetadataByAsc($asc);
+            $meta = $manager->getMetadataByAsc($asc);
             if (!isset($meta['page']['useTrash'])) {
                 $icon = 'ui-icon-close';
                 $jsLang = 'MSG_CONFIRM_TO_DELETE';

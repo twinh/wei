@@ -28,7 +28,7 @@
  * @since       2010-7-28 17:26:04
  */
 
-class Common_Metadata extends Qwin_Metadata
+class Common_Metadata extends Qwin_Application_Metadata
 {
     protected $_set;
 

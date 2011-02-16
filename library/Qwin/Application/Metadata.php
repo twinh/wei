@@ -198,7 +198,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
 
         // 增加默认查询
         if (!empty($meta['db']['defaultWhere'])) {
-            $this->addWhereToQuery($meta, $query, $meta['db']['defaultWhere']);
+            $this->addWhereToQuery($query, $meta['db']['defaultWhere']);
         }
 
         // 关联模型的转换
@@ -232,11 +232,12 @@ class Qwin_Application_Metadata extends Qwin_Metadata
      * @return object 当前对象
      * @todo 是否要将主类加入到$meta['model']数组中,减少代码重复
      */
-    public function addSelectToQuery(Qwin_Metadata $meta, Doctrine_Query $query)
+    public function addSelectToQuery(Doctrine_Query $query)
     {
         /**
          * 设置主类的查询语句
          */
+        $meta = $this;
         // 调整主键的属性,因为查询时至少需要选择一列
         $primaryKey = $meta['db']['primaryKey'];
         $meta->field
@@ -305,8 +306,9 @@ class Qwin_Application_Metadata extends Qwin_Metadata
      * @return object 当前对象
      * @todo 关联元数据的排序
      */
-    public function addOrderToQuery(Qwin_Metadata $meta, Doctrine_Query $query, array $addition = null)
+    public function addOrderToQuery(Doctrine_Query $query, array $addition = null)
     {
+        $meta = $this;
         $order = null != $addition ? $addition : $meta['db']['order'];
 
         $alias = $query->getRootAlias();
@@ -340,8 +342,9 @@ class Qwin_Application_Metadata extends Qwin_Metadata
      * @todo 完善查询类型
      * @todo 复杂查询
      */
-    public function addWhereToQuery(Qwin_Metadata $meta, Doctrine_Query $query, array $addition = null)
+    public function addWhereToQuery(Doctrine_Query $query, array $addition = null)
     {
+        $meta = $this;
         $search = null != $addition ? $addition : $meta['db']['where'];
 
         $alias = $query->getRootAlias();
@@ -448,8 +451,9 @@ class Qwin_Application_Metadata extends Qwin_Metadata
      * @param int|null $addition 附加的偏移配置
      * @return object 当前对象
      */
-    public function addOffsetToQuery(Qwin_Metadata $meta, Doctrine_Query $query, $addition = null)
+    public function addOffsetToQuery(Doctrine_Query $query, $addition = null)
     {
+        $meta = $this;
         $offset = 0;
         if (null != $addition) {
             $addition = intval($addition);
@@ -469,8 +473,9 @@ class Qwin_Application_Metadata extends Qwin_Metadata
      * @param int|null $addition 附加的限制配置
      * @return object 当前对象
      */
-    public function addLimitToQuery(Qwin_Metadata $meta, Doctrine_Query $query, $addition = null)
+    public function addLimitToQuery(Doctrine_Query $query, $addition = null)
     {
+        $meta = $this;
         $limit = 0;
         if (null != $addition) {
             $addition = intval($addition);
@@ -492,11 +497,12 @@ class Qwin_Application_Metadata extends Qwin_Metadata
      * @param object $filterObject 转换器的对象,默认是元数据自身
      * @return array 经过转换的数据
      */
-    public function filterOne($data, $action, Qwin_Metadata $meta, $filterObject = null, $option = array())
+    public function filterOne($data, $action, array $option = array())
     {
         $option = array_merge($this->_filterOption, $option);
         $dataCopy = $data;
         $action = strtolower($action);
+        $meta = $this;
 
         if ($option['view']) {
             foreach ($meta['model'] as $model) {
@@ -543,20 +549,20 @@ class Qwin_Application_Metadata extends Qwin_Metadata
             }
 
             // 使用转换器中的方法进行转换
-            if ($option['filter'] && null != $filterObject) {
+            if ($option['filter']) {
                 $methodName = str_replace(array('_', '-'), '', 'filter' . $action . $name);
-                if (method_exists($filterObject, $methodName)) {
+                if (method_exists($this, $methodName)) {
                     $newData[$name] = call_user_func_array(
-                        array($filterObject, $methodName),
+                        array($this, $methodName),
                         array($newData[$name], $name, $newData, $dataCopy)
                     );
                 }
             }
 
             // 转换链接
-            if ($option['link'] && 1 == $field['attr']['isLink'] && method_exists($filterObject, 'setIsLink')) {
+            if ($option['link'] && 1 == $field['attr']['isLink'] && method_exists($this, 'setIsLink')) {
                 $newData[$name] = call_user_func_array(
-                    array($filterObject, 'setIsLink'),
+                    array($this, 'setIsLink'),
                     array($newData[$name], $name, $newData, $dataCopy, $action)
                 );
             }
@@ -599,21 +605,21 @@ class Qwin_Application_Metadata extends Qwin_Metadata
      * @param object $filterObject 转换器的对象,默认是元数据自身
      * @return array 经过转换的数据
      */
-    public function filterArray($data, $action, Qwin_Metadata $meta, $filterObject = null, $option = array())
+    public function filterArray($data, $action, array $option = array())
     {
         foreach ($data as &$row) {
-            $row = $this->filterOne($row, $action, $meta, $filterObject, $option);
+            $row = $this->filterOne($row, $action, $option);
         }
         return $data;
     }
     
-    public function getModelMetadataByType($meta, $type = 'db')
+    public function getModelMetadataByType($type = 'db')
     {
-        if (!isset($meta['model'])) {
+        if (empty($this->model)) {
             return array();
         }
         $result = array();
-        foreach ($meta['model'] as $name => $model) {
+        foreach ($this->model as $name => $model) {
             if ($model['enabled'] && $type == $model['type']) {
                 if (!isset($model['metadata'])) {
                     $metadataClass = $this->getClassName('Metadata', $model['asc']);
@@ -706,10 +712,10 @@ class Qwin_Application_Metadata extends Qwin_Metadata
         return $layout;
     }
 
-    public function getListLayout(Qwin_Metadata $meta, array $layout = null, $relatedName = false)
+    public function getListLayout(array $layout = null, $relatedName = false)
     {
         null == $layout && $layout = array();
-        foreach ($meta['field'] as $name => $field) {
+        foreach ($this->field as $name => $field) {
             if (1 != $field['attr']['isList']) {
                 continue;
             }
@@ -729,7 +735,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
             }
         }
 
-        foreach ($this->getModelMetadataByType($meta, 'db') as $name => $relatedMeta) {
+        foreach ($this->getModelMetadataByType('db') as $name => $relatedMeta) {
             $layout += $this->getListLayout($relatedMeta, $layout, $name);
         }
 
@@ -737,198 +743,6 @@ class Qwin_Application_Metadata extends Qwin_Metadata
         if (!$relatedName) {
             ksort($layout);
         }
-
-        return $layout;
-    }
-
-    /**
-     * 排列元数据
-     *
-     * @param Qwin_Application_Metadata $meta 元数据
-     * @param array $orderedField 经过排列的域
-     * @param string|false $relatedName 元数据关联模型的元数据名称,如果是主元数据,则为false
-     * @return array 以顺序为键名,以域的名称为值的数组
-     */
-    public function orderField($meta, array $orderedField = null, $relatedName = false)
-    {
-        foreach ($meta['field'] as $name => $field) {
-            // 使用order作为键名
-            $order = $field['basic']['order'];
-            while (isset($orderedField[$order])) {
-                $order++;
-            }
-
-            if (!$relatedName) {
-                $orderedField[$order] = array(
-                    null, $field['form']['name'],
-                );
-            } else {
-                $orderedField[$order] = array(
-                     $relatedName, $field['form']['name'],
-                );
-            }
-        }
-
-        foreach ($this->getModelMetadataByType($meta, 'db') as $key => $relatedMeta) {
-            if ('db' == $meta['model'][$key]['type']) {
-                $orderedField = $this->orderField($relatedMeta, $orderedField, $key);
-            }
-        }
-
-        // 根据键名排序
-        if (!$relatedName) {
-            ksort($orderedField);
-        }
-
-        return $orderedField;
-    }
-
-    public function callbackAddLayout($field)
-    {
-        if('custom' == $field['form']['_type']) {
-            return true;
-        }
-        return false;
-    }
-
-    public function callbackEditLayout($field)
-    {
-        if (1 == $field['attr']['isReadonly'] || 'custom' == $field['form']['_type']) {
-            return true;
-            // TODO
-            //$meta['field']->set($name . '.form._type', 'hidden');
-        }
-        return false;
-    }
-
-    public function callbackViewLayout($field)
-    {
-        if (0 == $field['attr']['isView']) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * 占一格,后面的补上
-     */
-    const ONE_CELL          = 1;
-
-    /**
-     * 占一行,后面的换行
-     */
-    const ONE_ROW           = 2;
-
-    /**
-     * 占一格,后面的换行
-     */
-    const ONE_CELL_FULL_ROW = 3;
-
-
-    public function getTableLayout($meta, $orderedField, $action = 'add', $defaultLayout = 2)
-    {
-        // -1储存隐藏域
-        $layout = array(
-            -1 => array(), 
-        );
-        
-        // 布局指示器
-        $pointer = array();
-
-        foreach ($orderedField as $field) {
-            if (null == $field[0]) {
-                $tempMeta = $meta;
-            } else {
-                $tempMeta = $this->getModelMetadataByAlias($meta, $field[0]);
-            }
-
-            // 将隐藏域加入第一个布局中
-            if ('hidden' == $tempMeta['field'][$field[1]]['form']['_type']) {
-                $layout[-1][] = array($field[0], $tempMeta['field'][$field[1]]['form']['name']);
-                continue;
-            }
-
-            // 通过回调方法自定义处理
-            $methodName = 'callback' . $action . 'Layout';
-            if(method_exists($this, $methodName)) {
-                $result = call_user_func_array(array($this, $methodName), array($tempMeta['field'][$field[1]]));
-                if (true === $result) {
-                    $layout[-1][] = array($field[0], $tempMeta['field'][$field[1]]['form']['name']);
-                    continue;
-                }
-            }
-
-            $group = $tempMeta['field'][$field[1]]['basic']['group'];
-            $name = $tempMeta['field'][$field[1]]['form']['name'];
-            if (!isset($layout[$group])) {
-                $layout[$group] = array();
-                $pointer[$group] = false;
-            }
-
-            if (isset($tempMeta['field'][$field[1]]['basic']['layout'])) {
-                $fieldLayout = $tempMeta['field'][$field[1]]['basic']['layout'];
-            } else {
-                $fieldLayout = $defaultLayout;
-            }
-
-            // 占一格,自动填补向左填补
-            // 如果最后一个元素满2个子元素,则继续创建新的元素,否则,加入元素中,还需排除一行的情况
-            if (!isset($fieldLayout) || 1 == $fieldLayout) {
-                $count = count($layout[$group]) - 1;
-                if (self::ONE_ROW != $pointer[$group] && isset($layout[$group][$count]) && 2 != count($layout[$group][$count])) {
-                    $layout[$group][$count][] = array($field[0], $name);
-                } else {
-                    $layout[$group][] = array(
-                        array($field[0], $name),
-                    );
-                    $pointer[$group] = false;
-                }
-            }
-
-            // 独自占满一行
-            if (2 == $fieldLayout) {
-                $layout[$group][] = array(
-                    array($field[0], $name),
-                );
-                $pointer[$group] = self::ONE_ROW;
-                continue;
-            }
-
-            // 占一格,但是后面为空
-            if (3 == $fieldLayout) {
-                $layout[$group][] = array(
-                    array($field[0], $name), '',
-                );
-                continue;
-            }
-
-            // 占一格,右边
-            if (4 == $fieldLayout) {
-                $layout[$group][] = array(
-                    '', array($field[0], $name),
-                );
-                continue;
-            }
-        }
-
-        // 修复最后一个的位置
-        /*foreach ($layout as $key => $value) {
-            if (-1 == $key) {
-                continue;
-            }
-            $count = count($value) - 1;
-            if (2 != count($value[$count])) {
-                // 检查是否为占满一行的
-                if (null != $value[$count][0][0]) {
-                    $tempMeta = $this->getModelMetadataByAlias($meta, $value[$count][0][0]);
-                } else {
-                    $tempMeta = $meta;
-                }
-                if (!isset($tempMeta['field'][$value[$count][0][1]]['basic']['layout']) || 2 != $tempMeta['field'][$value[$count][0][1]]['basic']['layout']) {
-                    $layout[$key][$count][] = '';
-                }
-            }
-        }*/
 
         return $layout;
     }

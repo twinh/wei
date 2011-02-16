@@ -104,7 +104,7 @@ class Common_Trash_Metadata_Trash extends Common_Metadata
             'controller' => $value[2],
         );
         $metadata = $this->metaHelper->getMetadataByAsc($asc);
-        $lang = Qwin::call('Common_Helper_Language')->getObjectByAsc($asc);
+        $lang = Qwin::call('-lang');
         
         return Qwin_Util_Html::link($this->url->url($asc), $lang->t($metadata['page']['title']));
     }
@@ -135,7 +135,7 @@ class Common_Trash_Metadata_Trash extends Common_Metadata
         $operation += parent::filterListOperation($value, $name, $data, $dataCopy, true);
         $data = '';
         foreach ($operation as $row) {
-            $data .= Qwin_Util_Html::jQueryButton($row['url'], $row['title'], $row['icon']);
+            $data .= Qwin_Util_JQuery::icon($row['url'], $row['title'], $row['icon']);
         }
         return $data;
     }

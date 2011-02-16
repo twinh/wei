@@ -25,13 +25,13 @@
  * @since       2010-10-11 11:55:35
  */
 
-class Common_Service_Edit extends Common_Service_BasicAction
+class Common_Service_Edit extends Common_Service
 {
     /**
      * 服务的基本配置
      * @var array
      */
-    protected $_config = array(
+    protected $_option = array(
         'asc' => array(
             'namespace' => null,
             'module' => null,
@@ -42,7 +42,6 @@ class Common_Service_Edit extends Common_Service_BasicAction
             'db' => null,
         ),
         'callback' => array(
-            'beforefilter' => array(),
             'afterDb' => array(),
         ),
         'view' => array(
@@ -50,43 +49,31 @@ class Common_Service_Edit extends Common_Service_BasicAction
             'display' => true,
             'url' => null,
         ),
-        'this' => null
     );
 
     public function process(array $option = null)
     {
         // 初始配置
-        $option = $this->_multiArrayMerge($this->_option, $option);
-        if(isset($option['data']['meta']))
-        {
-            $this->_meta = $option['data']['meta'];
-        }
+        $option = array_merge($this->_option, $option);
+        /* @var $manager Qwin_Application_Manager */
+        $manager = Qwin::call('-manager');
 
-        // 通过父类,加载语言,元数据,模型等
-        parent::process($option['asc']);
-
-        // 初始化常用的变量
-        $metaHelper = Qwin::call('Qwin_Application_Metadata');
-        $meta = $this->_meta;
+        $meta = $manager->getMetadataByAsc($arc);
+        
         $primaryKey = $meta['db']['primaryKey'];
         $primaryKeyValue = isset($option['data']['db'][$primaryKey]) ? $option['data']['db'][$primaryKey] : null;
-        Qwin::call('Qwin_Class_Extension')
-            ->setNamespace('validator')
-            ->addClass('Qwin_Validator_JQuery');
         
         // 从模型获取数据
         $query = $metaHelper->getQueryByAsc($this->_asc, 'db');
         $result = $query->where($primaryKey . ' = ?', $primaryKeyValue)->fetchOne();
 
         // 记录不存在,加载错误视图
-        if(false == $result)
-        {
+        if (false == $result) {
             $return = array(
                 'result' => false,
                 'message' => $this->_lang->t('MSG_NO_RECORD'),
             );
-            if($option['view']['display'])
-            {
+            if ($option['view']['display']) {
                 $this->view->setRedirectView($return['message']);
             }
             return $return;

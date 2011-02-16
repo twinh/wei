@@ -25,32 +25,25 @@
  * @since       2010-10-11 10:35:49
  */
 
-class Common_Service_View extends Common_Service_BasicAction
+class Common_Service_View extends Common_Service
 {
     /**
      * 服务的基本配置
      * @var array
      */
     protected $_option = array(
-        'asc' => array(
-            'namespace' => null,
-            'module' => null,
-            'controller' => null,
-            'action' => null,
+        'asc'       => array(
+            'namespace'     => null,
+            'module'        => null,
+            'controller'    => null,
+            'action'        => null,
         ),
-        'data' => array(
-            'primaryKeyValue' => null,
-            'asAction' => 'view',
-            'isView' => true,
-            'meta' => null,
-        ),
-        'callback' => array(
-        ),
-        'view' => array(
-            'class' => 'Common_View_View',
-            'display' => true,
-        ),
-        'this' => null,
+        'value'     => null,
+        'asAction'  => 'view',
+        'isView'    => true,
+        'filter'    => true,
+        'display'   => true,
+        'viewClass' => 'Common_View_View',
     );
 
     /**
@@ -68,66 +61,52 @@ class Common_Service_View extends Common_Service_BasicAction
     public function process(array $option = null)
     {
         // 初始配置
-        $option = $this->_multiArrayMerge($this->_option, $option);
-        if(isset($option['data']['meta']))
-        {
-            $this->_meta = $option['data']['meta'];
-        }
-
-        // 通过父类,加载语言,元数据,模型等
-        parent::process($option['asc']);
-
-        // 初始化常用的变量
-        $metaHelper = $this->metaHelper;
-        $meta = $this->_meta;
+        $option     = array_merge($this->_option, $option);
+        $manager    = Qwin::call('-manager');
+        $meta       = $manager->getMetadataByAsc($option['asc']);
         $primaryKey = $meta['db']['primaryKey'];
 
-        // TODO
-        if('integer' == $meta['field'][$primaryKey]['db']['type']) {
-            $option['data']['primaryKeyValue'] = (integer)$option['data']['primaryKeyValue'];
-        }
-
         // 从模型获取数据
-        $query = $metaHelper->getQueryByAsc($this->_asc, array('db', 'view'));
-        $result = $query->where($primaryKey . ' = ?', $option['data']['primaryKeyValue'])->fetchOne();
+        $query = $meta->getQueryByAsc($option['asc'], array('db', 'view'));
+        $dbData = $query->where($primaryKey . ' = ?', $option['value'])->fetchOne();
 
         // 记录不存在,加载错误视图
-        if(false == $result)
-        {
+        if (false == $dbData) {
+            $lang = Qwin::call('-lang');
             $result = array(
                 'result' => false,
-                'message' => $this->_lang->t('MSG_NO_RECORD'),
+                'message' => $lang['MSG_NO_RECORD'],
             );
-            if($option['view']['display'])
-            {
-                $this->view->setRedirectView($result['message']);
+            if ($option['display']) {
+                return $this->view->redirect($result['data']);
+            } else {
+                return $result;
             }
-            return $result;
         }
 
         // 设置钩子:取得数据
         Qwin::hook('viewRecord', array(
-            'record' => $result,
+            'record' => $dbData,
             'meta' => $meta,
         ));
 
-        $data = $result->toArray();
-        $data = $metaHelper->filterOne($data, $option['data']['asAction'], $meta, $meta, array('view' => $option['data']['isView']));
+        // 对数据进行转换
+        if ($option['filter']) {
+            $data = $meta->filterOne($dbData->toArray(), $option['asAction'], array('view' => $option['isView']));
+        }
 
-        // 设置视图
+        // 设置返回结果
         $result = array(
             'result' => true,
-            'view' => array(
-                'class' => $option['view']['class'],
-                'data' => get_defined_vars(),
-            ),
-            'data' => $data,
+            'data' => get_defined_vars(),
         );
-        // 加载视图
-        if ($option['view']['display']) {
-            $view = Qwin::call($option['view']['class']);
-            $view->assign($result['view']['data']);
+
+        // 展示视图
+        if ($option['display']) {
+            $view = new $option['viewClass'];
+            return $view->assign($result['data']);
         }
-        return $view;
+
+        return $result;
     }
 }

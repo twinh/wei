@@ -113,6 +113,10 @@ class Qwin_Application_Manager
      */
     public function startup(array $config)
     {
+        require_once 'Benchmark/Timer.php';
+        $t = new Benchmark_Timer();
+        $t->start();
+
         // 设置加载标识,防止二次加载
         if ($this->_isLoad) {
             return false;
@@ -133,12 +137,13 @@ class Qwin_Application_Manager
         require_once QWIN . '/library/Qwin.php';
         Qwin::setOption($config['Qwin']);
         Qwin::config($config);
-
+        
         // 加载Qwin函数库
         require_once QWIN . '/library/function/qwin.php';
 
         // 注册当前类
         Qwin::set('-manager', $this);
+        Qwin::set('t', $t);
 
         // 跳转到默认首页
         if (empty($_SERVER['QUERY_STRING'])) {
@@ -177,7 +182,7 @@ class Qwin_Application_Manager
         }
         $this->_namespace = $this->getNamespace($asc, $config);
         Qwin::setMap('-namespace', $this->_namespace);
-
+        
         // 加载模块
         $this->_module = $this->getModule($asc);
 

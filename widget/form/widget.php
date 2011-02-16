@@ -1,8 +1,8 @@
 <?php
 /**
- * Form
+ * widget
  *
- * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,25 +20,55 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-27 22:57:22
+ * @since       v0.7.0 2011-02-16 01:09:01
  */
 
-class Qwin_Widget_Form extends Qwin_Widget_Abstract
+class Form_Widget extends Qwin_Widget_Abstract
 {
+    /**
+     * 表单配置
+     *
+     * @var array
+     */
     protected $_option = array(
+        'meta'      => null,
+        'action'    => 'add',
+        'column'    => 2,
+        'data'      => array(),
+    );
+
+    /**
+     * 表单元素的配置,不带下划线的为Html属性,否则为私有属性
+     * @var array
+     */
+    protected $_elementOption = array(
         '_type' => null,
         '_value' => null,
     );
 
-    /**
-     * 生成基本的表单元素
-     *
-     * @param array $option
-     * @param Qwin_Application_View $view
-     */
-    public function render($option, $view = null)
+    public function render($option)
     {
-        $option = array_merge($this->_option, $option);
+        // 合并选项
+        $option = $this->merge($this->_option, $option);
+        $meta = $option['meta'];
+        $data = $option['data'];
+        $minify = $this->_widget->get('minify');
+
+        $lang = Qwin::call('-lang');
+        $form = $this->getLayout($meta, 'edit', $meta['page']['tableLayout'], $data);
+        $group = $meta['group'];
+
+        require $this->_rootPath . 'view/default.php';
+    }
+
+    /**
+     * 生成表单元素的Html代码
+     *
+     * @return string
+     */
+    public function renderElement(array $option)
+    {
+        $option = array_merge($this->_elementOption, $option);
 
         $public = array();
         $private = array();
@@ -54,11 +84,12 @@ class Qwin_Widget_Form extends Qwin_Widget_Abstract
 
         //$set['id'] = preg_replace("/(\w*)\[(\w+)\]/", "$1-$2", $set['name']);
 
-        // 转换资源 
+        // 转换资源
         if (isset($private['_resourceGetter'])) {
             $private['_resource'] = Qwin_Class::callByArray($private['_resourceGetter']);
         }
 
+        // 根据类型,生成代码
         switch ($private['_type']) {
             case 'text' :
                 return $this->renderText($public, $private);
@@ -83,7 +114,7 @@ class Qwin_Widget_Form extends Qwin_Widget_Abstract
 
             case 'file' :
                 return $this->renderFile($public, $private);
-                
+
             default :
                 return '';
         }
@@ -308,5 +339,199 @@ class Qwin_Widget_Form extends Qwin_Widget_Abstract
         }
 
         return $return;
+    }
+
+    /**
+     * 获取表格布局
+     *
+     * @param Qwin_Metadata $meta 元数据
+     * @param string $action 小写的操作名称
+     * @param int $column 每行几栏,只能是1或2
+     */
+    public function getLayout(Qwin_Metadata $metaCopy, $action = 'add', $column = 2, array $dataCopy = array())
+    {
+        $orderedField = $this->getOrderedField($metaCopy);
+
+        $layout = array();
+
+        // 隐藏域的表单配置
+        $hidden = array();
+
+        // 布局指示器
+        $pointer = array();
+
+        foreach ($orderedField as $field) {
+            // 初始化元数据,表单,数据
+            if (null == $field[1]) {
+                $meta = $metaCopy;
+                $data = $dataCopy;
+                $form = $meta['field'][$field[0]]['form'];
+            } else {
+                $meta = $meta->getModelMetadataByAlias($meta, $field[1]);
+                $data = $dataCopy[$field[1]];
+                $form = $meta['field'][$field[0]]['form'];
+                $form['id'] = $field[1] . '_' . $form['name'];
+                $form['name'] = $field[1] . '[' . $form['name'] . ']';
+            }
+            //if (!isset($form['_value'])) {
+                $form['_value'] = isset($data[$form['name']]) ? $data[$form['name']] : null;
+            //}
+            
+            // 将隐藏域加入第一个布局中
+            if ('hidden' == $form['_type']) {
+                $hidden[] = $form;
+                continue;
+            }
+
+            // 通过回调方法自定义处理
+            $method = 'callback' . $action . 'Layout';
+            if(method_exists($this, $method)) {
+                $result = call_user_func_array(array($this, $method), array($meta['field'][$field[0]]));
+                if (true === $result) {
+                    $hidden[] = $form;
+                    continue;
+                }
+            }
+
+            $cell = array($meta['field'][$field[0]]['basic']['title'], $form);
+            $group = $meta['field'][$field[0]]['basic']['group'];
+            $name = $meta['field'][$field[0]]['form']['name'];
+            if (!isset($layout[$group])) {
+                $layout[$group] = array();
+                $pointer[$group] = false;
+            }
+
+            if (isset($meta['field'][$field[0]]['basic']['layout'])) {
+                $fieldLayout = $meta['field'][$field[0]]['basic']['layout'];
+            } else {
+                $fieldLayout = $column;
+            }
+
+            // 占一格,自动填补向左填补
+            // 如果最后一个元素满2个子元素,则继续创建新的元素,否则,加入元素中,还需排除一行的情况
+            if (!isset($fieldLayout) || 1 == $fieldLayout) {
+                $count = count($layout[$group]) - 1;
+                if (2 != $pointer[$group] && isset($layout[$group][$count]) && 2 != count($layout[$group][$count])) {
+                    $layout[$group][$count][] = $cell;
+                } else {
+                    $layout[$group][] = array(
+                        $cell,
+                    );
+                    $pointer[$group] = false;
+                }
+            }
+
+            // 独自占满一行
+            if (2 == $fieldLayout) {
+                $layout[$group][] = array(
+                    $cell,
+                );
+                $pointer[$group] = 2;
+                continue;
+            }
+
+            // 占一格,但是后面为空
+            if (3 == $fieldLayout) {
+                $layout[$group][] = array(
+                    $cell, '',
+                );
+                continue;
+            }
+
+            // 占一格,右边
+            if (4 == $fieldLayout) {
+                $layout[$group][] = array(
+                    '', $cell,
+                );
+                continue;
+            }
+        }
+
+        // 修复最后一个的位置
+        /*foreach ($layout as $key => $value) {
+            if (-1 == $key) {
+                continue;
+            }
+            $count = count($value) - 1;
+            if (2 != count($value[$count])) {
+                // 检查是否为占满一行的
+                if (null != $value[$count][0][0]) {
+                    $meta = $this->getModelMetadataByAlias($meta, $value[$count][0][0]);
+                } else {
+                    $meta = $meta;
+                }
+                if (!isset($meta['field'][$value[$count][0][1]]['basic']['layout']) || 2 != $meta['field'][$value[$count][0][1]]['basic']['layout']) {
+                    $layout[$key][$count][] = '';
+                }
+            }
+        }*/
+
+        return array(
+            'hidden' => $hidden,
+            'element' => $layout,
+        );
+    }
+
+    /**
+     * 排列元数据
+     *
+     * @param Qwin_Application_Metadata $meta 元数据
+     * @param array $orderedField 经过排列的域
+     * @param string|false $relatedName 元数据关联模型的元数据名称,如果是主元数据,则为false
+     * @return array 以顺序为键名,以域的名称为值的数组
+     */
+    public function getOrderedField(Qwin_Metadata $meta, array $orderedField = null, $relatedName = null)
+    {
+        foreach ($meta['field'] as $name => $field) {
+            // 使用order作为键名
+            $order = $field['basic']['order'];
+            while (isset($orderedField[$order])) {
+                $order++;
+            }
+
+            $orderedField[$order] = array(
+                $field['form']['name'], $relatedName,
+            );
+        }
+
+        // 获取关联元数据
+        foreach ($meta->getModelMetadataByType($meta, 'db') as $key => $relatedMeta) {
+            if ('db' == $meta['model'][$key]['type']) {
+                $relatedMeta = $this->getOrderedField($orderedField, $key);
+            }
+        }
+
+        // 根据键名排序
+        if (!$relatedName) {
+            ksort($orderedField);
+        }
+
+        return $orderedField;
+    }
+
+    public function callbackAddLayout($field)
+    {
+        if('custom' == $field['form']['_type']) {
+            return true;
+        }
+        return false;
+    }
+
+    public function callbackEditLayout($field)
+    {
+        if (1 == $field['attr']['isReadonly'] || 'custom' == $field['form']['_type']) {
+            return true;
+            // TODO
+            //$meta['field']->set($name . '.form._type', 'hidden');
+        }
+        return false;
+    }
+
+    public function callbackViewLayout($field)
+    {
+        if (0 == $field['attr']['isView']) {
+            return true;
+        }
+        return false;
     }
 }

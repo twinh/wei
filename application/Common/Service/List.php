@@ -25,63 +25,55 @@
  * @since       2010-10-10 14:16:45
  */
 
-class Common_Service_List extends Common_Service_BasicAction
+class Common_Service_List extends Common_Service
 {
     /**
      * 服务的基本配置
      * @var array
      */
     protected $_option = array(
-        'asc' => array(
+        'asc'       => array(
             'namespace' => null,
-            'module' => null,
-            'controller' => null,
-            'action' => null,
+            'module'    => null,
+            'controller'=> null,
+            'action'    => null,
         ),
-        'data' => array(
-            'list' => array(),
-            'isPopup' => false,
-        ),
-        'callback' => array(
-            'beforeViewLoad' => array(),
-        ),
-        'view' => array(
-            'class' => 'Common_View_List',
-            'display' => true,
-        ),
+        'list'      => array(),
+        'popup'     => false,
+        'display'   => true,
+        'viewClass' => 'Common_View_List',
     );
-    
+
+    /**
+     * 服务处理
+     *
+     * @param array $option 配置选项
+     * @return array 处理结果
+     */
     public function process(array $option = null)
     {
-        // 合并配置
-        $option = $this->_multiArrayMerge($this->_option, $option);
-
-        // 通过父类,加载语言,元数据,模型等
-        parent::process($option['asc']);
-
-        // 初始化常用的变量
-        $meta = $this->_meta;
+        // 初始配置
+        $option     = array_merge($this->_option, $option);
+        $manager    = Qwin::call('-manager');
+        $meta       = $manager->getMetadataByAsc($option['asc']);
         $primaryKey = $meta['db']['primaryKey'];
-        $metaHelper = $this->metaHelper;
-
-        $listField = $option['data']['list'];
+        $listField  = $option['list'];
 
         // 是否以弹出框形式显示
-        $isPopup = $option['data']['isPopup'];
+        $popup = $option['popup'];
 
-        // 设置视图
-        $view = array(
-            'class' => $option['view']['class'],
+        /// 设置返回结果
+        $result = array(
+            'result' => true,
             'data' => get_defined_vars(),
         );
-        if ($option['view']['display']) {
-            $viewObject = new $option['view']['class'];
-            $viewObject->assign($view['data']);
+
+        // 展示视图
+        if ($option['display']) {
+            $view = new $option['viewClass'];
+            return $view->assign($result['data']);
         }
-        
-        return array(
-            'result' => true,
-            'view' => $view,
-        );
+
+        return $result;
     }
 }

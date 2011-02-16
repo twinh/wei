@@ -318,65 +318,32 @@ class Common_Request extends Qwin_Request
     }
 
     /**
+     * 是否请求以Json数据显示
      *
-     * Retrieves an **unfiltered** value by key from the [[Solar_Request::$request | ]] property,
-     * or an alternate default value if that key does not exist.
-     *
-     * @param string $key The $get key to retrieve the value of.
-     *
-     * @param string $alt The value to return if the key does not exist.
-     *
-     * @return mixed The value of $request[$key], or the alternate default
-     * value.
-     *
-     * @author Twin Huang
-     *
-     */
-    public function request($key = null, $alt = null)
-    {
-        return $this->_getValue('request', $key, $alt);
-    }
-
-    /**
-     * 检查索引是否存在
-     *
-     * @param string $offset 索引
      * @return bool
      */
-    public function offsetExists($offset)
+    public function isJson()
     {
-        return isset($_SESSION[$this->_namespace][$offset]);
+        return (bool)$this->get('json');
     }
 
     /**
-     * 获取索引的数据
+     * 是否请求以弹出窗口的形式显示
      *
-     * @param string $offset 索引
-     * @return mixed
+     * @return bool
      */
-    public function offsetGet($offset)
+    public function isPopup()
     {
-        return $this->get($offset);
+        return (bool)$this->get('popup');
     }
 
     /**
-     * 设置索引的值
+     * 是否请求以弹出窗口的形式显示
      *
-     * @param string $offset 索引
-     * @param mixed $value 值
+     * @return bool
      */
-    public function offsetSet($offset, $value)
+    public function isAjax()
     {
-        return $this->set($offset, $value);
-    }
-
-    /**
-     * 销毁一个索引
-     *
-     * @param string $offset 索引的名称
-     */
-    public function offsetUnset($offset)
-    {
-        unset($_SESSION[$this->_namespace][$offset]);
+        return (bool)$this->get('ajax');
     }
 }

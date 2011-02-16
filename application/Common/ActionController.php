@@ -38,32 +38,22 @@ class Common_ActionController extends Common_Controller
     public function actionIndex()
     {
         $request = $this->request;
-        if ($request->get('json')) {
+        if ($request->isJson()) {
             $service = new Common_Service_JsonList();
             return $service->process(array(
-                'asc' => $this->_asc,
-                'data' => array(
-                    'list' => $request->getListField(),
-                    'order' => $request->getOrder(),
-                    'where' => $request->getWhere(),
-                    'offset'=> $request->getOffset(),
-                    'limit' => $request->getLimit(),
-                    'converAsAction'=> $this->request->get('_as'),
-                ),
-                'callback' => array(
-                    'datafilter' => array(
-                        array($this, 'datafilter'),
-                    ),
-                ),
+                'asc'   => $this->_asc,
+                'list'  => $request->getListField(),
+                'order' => $request->getOrder(),
+                'where' => $request->getWhere(),
+                'offset'=> $request->getOffset(),
+                'limit' => $request->getLimit(),
             ));
         } else {
             $service = new Common_Service_List();
             return $service->process(array(
-                'asc' => $this->_asc,
-                'data' => array(
-                    'list' => $request->getListField(),
-                    'isPopup' => $request->get('popup'),
-                ),
+                'asc'   => $this->_asc,
+                'list'  => $request->getListField(),
+                'popup' => $request['popup'],
             ));
         }
     }
@@ -129,16 +119,11 @@ class Common_ActionController extends Common_Controller
         if (!$this->request->isPost()) {
             $service = new Common_Service_View();
             return $service->process(array(
-                'asc' => $this->_asc,
-                'data' => array(
-                    'primaryKeyValue' => $this->request->getPrimaryKeyValue($this->_asc),
-                    'asAction' => 'edit',
-                    'isLink' => false,
-                    'isView' => false,
-                ),
-                'view' => array(
-                    'class' => 'Common_View_Edit',
-                ),
+                'asc'       => $this->_asc,
+                'value'     => $this->request->getPrimaryKeyValue($this->_asc),
+                'asAction'  => 'edit',
+                'isView'    => false,
+                'viewClass' => 'Common_View_Edit',
             ));
         } else {
             $service = new Common_Service_Edit();

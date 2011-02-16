@@ -33,14 +33,21 @@ class Common_View_JsonList extends Common_View
         $request = Qwin::call('-request');
         $jqGridWidget = Qwin::widget('jqgrid');
 
+        // 获取并合并布局
+        $layout = $this->meta->getListLayout();
+        if ($this->listField) {
+            $layout = array_intersect($layout, (array)$this->listField);
+        }
+
+        // 通过jqGrid微件获取数据
         $json = $jqGridWidget->renderJson(array(
             'data'          => $this->data,
-            'layout'        => $this->layout,
-            'primaryKey'    => $this->primaryKey,
+            'layout'        => $layout,
+            'primaryKey'    => $this->meta['db']['primaryKey'],
             'option'        => array(
                 'page'      => $request->getPage(),
-                'total'     => ceil($this->totalRecord / $request->getLimit()),
-                'records'   => $this->totalRecord,
+                'total'     => ceil($this->total / $request->getLimit()),
+                'records'   => $this->total,
             ),
         ));
 
