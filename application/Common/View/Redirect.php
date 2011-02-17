@@ -34,7 +34,7 @@ class Common_View_Redirect extends Common_View
         $this->setElement('content', '<resource><theme>/<defaultNamespace>/element/common/redirect<suffix>');
         $meta['page']['title'] = 'LBL_REDIRECT';
         $meta['page']['icon'] = 'info';
-        $url = '';
+        $url = null;
 
         switch ($this->method) {
             case null :
@@ -49,6 +49,9 @@ class Common_View_Redirect extends Common_View
                 $url = $this->method;
                 break;
         }
-        $this->assign('url', $url);
+        $this->assign(array(
+            'meta' => $meta,
+            'url' => $url,
+        ));
     }
 }

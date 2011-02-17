@@ -82,7 +82,7 @@ $minify
 <div id="ui-floating-footer" class="ui-state-default">
 	<div id="ui-footer-arrow" class="ui-icon ui-icon-arrowthickstop-1-n"></div>
 	<div class="ui-footer-time"></div>
-    <div class="ui-copyright ui-widget"><?php echo qw_lang('LBL_FOOTER_COPYRIGHT') ?></div>
+    <div class="ui-copyright ui-widget">Executed in <?php echo Qwin_Application::getInstance()->getEndTime() ?>(s). <?php echo qw_lang('LBL_FOOTER_COPYRIGHT') ?></div>
 </div>
 </body>
 </html>

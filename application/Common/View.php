@@ -183,6 +183,8 @@ class Common_View extends Qwin_Application_View
         }
         
         $this->afterDisplay();
+        $this->setDisplayed();
+        
         return $this;
     }
 
