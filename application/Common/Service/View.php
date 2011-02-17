@@ -62,8 +62,8 @@ class Common_Service_View extends Common_Service
     {
         // 初始配置
         $option     = array_merge($this->_option, $option);
-        $manager    = Qwin::call('-manager');
-        $meta       = $manager->getMetadataByAsc($option['asc']);
+        $app        = Qwin::call('-app');
+        $meta       = $app->getMetadataByAsc($option['asc']);
         $primaryKey = $meta['db']['primaryKey'];
 
         // 从模型获取数据

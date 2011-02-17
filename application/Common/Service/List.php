@@ -54,7 +54,7 @@ class Common_Service_List extends Common_Service
     {
         // 初始配置
         $option     = array_merge($this->_option, $option);
-        $manager    = Qwin::call('-manager');
+        $manager    = Qwin::call('-app');
         $meta       = $manager->getMetadataByAsc($option['asc']);
         $primaryKey = $meta['db']['primaryKey'];
         $listField  = $option['list'];

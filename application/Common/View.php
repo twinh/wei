@@ -29,7 +29,7 @@
  *                       ->loadView('namespace-module-controller-action');
  */
 
-class Common_View extends Qwin_Application_View_Abstract
+class Common_View extends Qwin_Application_View
 {
     /**
      * 打包的标记,用于合并js,css标签
@@ -43,6 +43,7 @@ class Common_View extends Qwin_Application_View_Abstract
      */
     public function __construct()
     {
+        Qwin::get('-app')->setView($this);
         Qwin::set('-view', $this);
     }
 

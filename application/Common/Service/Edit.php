@@ -55,8 +55,8 @@ class Common_Service_Edit extends Common_Service
     {
         // 初始配置
         $option = array_merge($this->_option, $option);
-        /* @var $manager Qwin_Application_Manager */
-        $manager = Qwin::call('-manager');
+        /* @var $manager Qwin_Application */
+        $manager = Qwin::call('-app');
 
         $meta = $manager->getMetadataByAsc($arc);
         

@@ -46,6 +46,12 @@ class Qwin_Application_Controller
     protected $_lang;
 
     /**
+     * 视图对象
+     * @var Qwin_Application_View
+     */
+    protected $_view;
+
+    /**
      * 禁用的行为列表
      * 当行为被禁用时,无法通过外部进行访问
      * 通过禁用行为,可以用于精确的
@@ -81,5 +87,19 @@ class Qwin_Application_Controller
             $this->_forbiddenAction[] = strtolower($action);
         }
         return $this;
+    }
+
+    /**
+     * 获取视图对象
+     *
+     * @param string $class 新的视图类名,可选
+     * @return Qwin_Application_View
+     */
+    public function getView($class = null)
+    {
+        if (isset($class) && class_exists($class)) {
+            $this->_view = new $class;
+        }
+        return $this->_view;
     }
 }
