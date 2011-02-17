@@ -85,7 +85,7 @@ class Qwin_Application_Manager
     protected $_namespaceList;
     
     /**
-     * 构造方法,不允许继承,也不允许实例化
+     * 构造方法,不允许继承,也不允许通过外部实例化
      */
     final protected function __construct()
     {
@@ -113,10 +113,6 @@ class Qwin_Application_Manager
      */
     public function startup(array $config)
     {
-        require_once 'Benchmark/Timer.php';
-        $t = new Benchmark_Timer();
-        $t->start();
-        
         // 设置加载标识,防止二次加载
         if ($this->_isLoad) {
             return false;
@@ -124,7 +120,7 @@ class Qwin_Application_Manager
         $this->_isLoad = true;
 
         // 合并配置
-        $globalConfig = require_once QWIN_ROOT_PATH . '/config/global.php';
+        $globalConfig = require_once $config['root'] . 'config/global.php';
         $config = array_merge($config, $globalConfig);
 
         // 设置错误提示的输出等级
@@ -143,7 +139,6 @@ class Qwin_Application_Manager
 
         // 注册当前类
         Qwin::set('-manager', $this);
-        Qwin::set('t', $t);
 
         // 跳转到默认首页
         if (empty($_SERVER['QUERY_STRING'])) {
@@ -159,7 +154,7 @@ class Qwin_Application_Manager
         $url = Qwin::call('-url', $router);*/
 
         // 加载视图
-        $this->_view = Qwin::call($this->_option['viewClass']);
+        $this->_view = new Qwin_Application_View();
         Qwin::set('-view', $this->_view);
         
         // 通过配置数据和Url参数初始化系统配置(包括命名空间,模块,控制器,行为等)
@@ -205,9 +200,11 @@ class Qwin_Application_Manager
             return $this->_onActionNotExists($asc);
         }
 
-        // 使用Qwin获取视图对象并展示(因为此时视图对象可能已改变)
-        Qwin::call('-view')->display();
-
+        // 展示视图
+        if (is_a($this->_view, 'Qwin_Application_View')) {
+            $this->_view->display();
+        }
+        
         return $this;
     }
 
@@ -346,11 +343,17 @@ class Qwin_Application_Manager
         return Qwin::call($class);
     }
 
-    public function getService()
+    /**
+     * 设置视图对象,方便第三方扩展
+     *
+     * @param object $view 视图对象,如Samrty,或
+     */
+    public function setView($view)
     {
-        
+        $this->_view = $view;
+        Qwin::set('-view', $view);
+        return $this;
     }
-
 
     public function _onNamespaceNotExists($asc)
     {

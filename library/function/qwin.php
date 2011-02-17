@@ -140,7 +140,7 @@ function qw_title_decorator($title, $fontStyle = null, $color = null)
 
 function qw_jquery_link($url, $title, $icon, $aClass = null, $target = '_self')
 {
-    return Qwin_Helper_Html::jQueryLink($url, $title, $icon, $aClass, $target);
+    return Qwin_Util_JQuery::link($url, $title, $icon, $aClass, $target);
 }
 
 function qw_jquery_button($type, $title, $icon)

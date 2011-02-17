@@ -22,8 +22,13 @@
  * @version     $Id$
  * @since       2011-02-16 14:14:21
  */
-$minify->add($this->_rootPath . 'script/js.js');
+$minify->add($this->_rootPath . 'script/js.js')
+       ->add($this->_rootPath . 'source/jquery.validate.pack.js');
+!isset($jQueryValidateCode) && $jQueryValidateCode = '{"rules":[],"messages":[]};';
 ?>
+<script type="text/javascript">
+var jQueryValidateCode = <?php echo $jQueryValidateCode?>;
+</script>
 <form id="post-form" name="form" method="post" action="<?php echo qw_url()?>">
 <div class="ui-operation-field">
     <?php echo qw_jquery_button('submit', qw_lang('LBL_ACTION_SUBMIT'), 'ui-icon-check') ?>

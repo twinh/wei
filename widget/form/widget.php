@@ -53,8 +53,8 @@ class Form_Widget extends Qwin_Widget_Abstract
         $meta = $option['meta'];
         $data = $option['data'];
         $minify = $this->_widget->get('minify');
-
         $lang = Qwin::call('-lang');
+        
         $form = $this->getLayout($meta, 'edit', $meta['page']['tableLayout'], $data);
         $group = $meta['group'];
 
@@ -118,6 +118,11 @@ class Form_Widget extends Qwin_Widget_Abstract
             default :
                 return '';
         }
+    }
+
+    public function renderElementExtend()
+    {
+        
     }
 
     /**
