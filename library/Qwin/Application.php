@@ -25,7 +25,7 @@
  * @since       2009-11-24 20:45:11
  */
 
-class Qwin_Application_Manager
+class Qwin_Application
 {
     /**
      * 启动器的实例化对象
@@ -138,7 +138,7 @@ class Qwin_Application_Manager
         require_once QWIN . '/library/function/qwin.php';
 
         // 注册当前类
-        Qwin::set('-manager', $this);
+        Qwin::set('-app', $this);
 
         // 跳转到默认首页
         if (empty($_SERVER['QUERY_STRING'])) {
@@ -201,7 +201,7 @@ class Qwin_Application_Manager
         }
 
         // 展示视图
-        if (is_a($this->_view, 'Qwin_Application_View')) {
+        if (is_subclass_of($this->_view, 'Common_View')) {
             $this->_view->display();
         }
         

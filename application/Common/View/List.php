@@ -31,7 +31,7 @@ class Common_View_List extends Common_View
     {
         parent::preDisplay();
         // 初始变量,方便调用
-        $manager        = Qwin::call('-manager');
+        $app            = Qwin::call('-app');
         $meta           = $this->meta;
         $request        = Qwin::call('-request');
         $lang           = Qwin::call('-lang');
