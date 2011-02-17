@@ -25,18 +25,18 @@
  * @since       2010-09-17 18:17:09
  */
 
-class Common_View_Redirect extends Qwin_Application_View_Processer
+class Common_View_Redirect extends Common_View
 {
-    public function __construct(Qwin_Application_View $view)
+    public function preDisplay()
     {
-        $view->setLayout('<resource><theme>/<defaultNamespace>/layout/default<suffix>');
-        $view->setElement('content', '<resource><theme>/<defaultNamespace>/element/<defaultModule>/<defaultController>-redirect<suffix>');
+        parent::preDisplay();
+        $this->setLayout('<resource><theme>/<defaultNamespace>/layout/common<suffix>');
+        $this->setElement('content', '<resource><theme>/<defaultNamespace>/element/common/redirect<suffix>');
         $meta['page']['title'] = 'LBL_REDIRECT';
         $meta['page']['icon'] = 'info';
-        $message = $view->message;
+        $url = '';
 
-        switch($view->method)
-        {
+        switch ($this->method) {
             case null :
             case '' :
             case 'goback' :
@@ -46,9 +46,9 @@ class Common_View_Redirect extends Qwin_Application_View_Processer
                 //echo 'window.close();';
                 break;
             default :
-                $url = $view->method;
+                $url = $this->method;
                 break;
         }
-        $view->assign(get_defined_vars());
+        $this->assign('url', $url);
     }
 }

@@ -218,9 +218,10 @@ class Common_View extends Qwin_Application_View_Abstract
      */
     public function redirect($message, $method = null)
     {
-        echo $message;exit;
-        $this->assign('message', $message);
-        $this->assign('method', $method);
+        $view = Qwin::call('Common_View_Redirect');
+        $view->assign('message', $message);
+        $view->assign('method', $method);
+        $view->display();
         return $this;
     }
 

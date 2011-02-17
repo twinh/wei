@@ -106,7 +106,8 @@ class Common_Controller extends Qwin_Application_Controller
         $this->_asc     = Qwin::config('asc');
         $this->session  = Qwin::call('-session');
         $this->member   = $this->session->get('member');
-        $this->view     = Qwin::call('-view');
+        $this->view     = Qwin::call('Common_View');
+        Qwin::set('-view', $this->view);
 
         // 元数据管理助手,负责元数据的获取和转换
         $this->metaHelper = Qwin::call('Qwin_Application_Metadata');

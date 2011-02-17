@@ -78,7 +78,7 @@ class Common_Service_View extends Common_Service
                 'message' => $lang['MSG_NO_RECORD'],
             );
             if ($option['display']) {
-                return $this->view->redirect($result['data']);
+                return Qwin::call('-view')->redirect($result['message']);
             } else {
                 return $result;
             }
