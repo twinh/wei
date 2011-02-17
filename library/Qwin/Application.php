@@ -83,6 +83,12 @@ class Qwin_Application
      * @var array
      */
     protected $_namespaceList;
+
+    /**
+     * 启动时间
+     * @var string
+     */
+    protected $_startTime;
     
     /**
      * 构造方法,不允许继承,也不允许通过外部实例化
@@ -94,7 +100,7 @@ class Qwin_Application
     /**
      * 获取当前类的实例化对象(单例模式)
      *
-     * @return Qwin_Application_Manager
+     * @return Qwin_Application
      */
     public static function getInstance()
     {
@@ -118,6 +124,9 @@ class Qwin_Application
             return false;
         }
         $this->_isLoad = true;
+
+        // 设置启动时间
+        $this->_startTime = microtime(true);
 
         // 合并配置
         $globalConfig = require_once $config['root'] . 'config/global.php';
@@ -351,8 +360,13 @@ class Qwin_Application
     public function setView($view)
     {
         $this->_view = $view;
-        Qwin::set('-view', $view);
+        //Qwin::set('-view', $view);
         return $this;
+    }
+
+    public function getEndTime()
+    {
+        return round((microtime(true) - $this->_startTime), 4);
     }
 
     public function _onNamespaceNotExists($asc)

@@ -43,9 +43,9 @@
                 <?php echo qw_lang('MSG_CLICK_TO_REDIRECT') ?>
             </p>
             <script type="text/javascript">
-            /*window.setTimeout(function(){
+            window.setTimeout(function(){
                 window.location.href = '<?php echo str_replace('\'', '\\\'', $url) ?>';
-            }, 3000);*/
+            }, 3000);
             </script>
         <?php
             endif;

@@ -191,7 +191,8 @@ class Common_Request extends Qwin_Request
             return $this->_limit;
         }
         null == $limitName && $limitName = $this->_option['row'];
-        $limit = $this->get($limitName);
+        $limit = intval($this->get($limitName));
+        0 == $limit && $limit = 10;
         return $this->_limit = $this->_option['maxRow'] < $limit ? $this->_option['maxRow'] : $limit;
     }
 
