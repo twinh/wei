@@ -25,12 +25,6 @@
 
 class JQuery_Widget extends Qwin_Widget_Abstract
 {
-    public function __construct()
-    {
-        // 获取微件根目录的相对路径
-        $this->getRootPath(__FILE__);
-    }
-
     public function render($option)
     {
         
