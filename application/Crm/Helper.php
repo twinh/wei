@@ -33,6 +33,7 @@ class Crm_Helper
                 'module' => 'Member',
                 'controller' => 'Member',
             ))
+            ->select($viewName)
             ->where('id = ?', $value)
             ->fetchOne();
         $meta['field']->set($name . '.form._value2', $data[$viewName]);

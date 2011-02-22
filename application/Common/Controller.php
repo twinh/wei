@@ -39,6 +39,13 @@ class Common_Controller extends Qwin_Application_Controller
     public $request;
 
     /**
+     *
+     *
+     * @var Qwin_Application
+     */
+    public $app;
+
+    /**
      * Qwin_Url对象
      * @var object
      */
@@ -96,11 +103,9 @@ class Common_Controller extends Qwin_Application_Controller
     /**
      * 初始化各类和数据
      */
-    public function __construct($option = null)
+    public function __construct()
     {
-        if (false === $option) {
-            return true;
-        }
+        $this->app      = Qwin::call('-app');
         $this->request  = Qwin::call('-request');
         $this->url      = Qwin::call('-url');
         $this->_asc     = Qwin::config('asc');
@@ -109,11 +114,7 @@ class Common_Controller extends Qwin_Application_Controller
         $this->view     = Qwin::call('Common_View');
         Qwin::set('-view', $this->view);
 
-        // 元数据管理助手,负责元数据的获取和转换
-        $this->metaHelper = Qwin::call('Qwin_Application_Metadata');
-
-        $this->_meta = $this->metaHelper->getMetadataByAsc($this->_asc);
-
+        $this->_meta = $this->app->getMetadataByAsc($this->_asc);
          /**
          * 访问控制
          */

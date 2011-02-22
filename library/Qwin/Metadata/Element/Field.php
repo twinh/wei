@@ -27,64 +27,49 @@
 
 class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
 {
-    /**
-     * 排序的大小,用于自动生成排序值
-     * @var int
-     */
-    //protected $_order = 0;
-
-    /**
-     * 排序的每次递增的数量
-     * @var int
-     */
-    //protected $_orderLength = 20;
-
    /**
      * 查找属性的缓存数组
      * @var array
      */
     protected $_attrCache = array();
 
-    public function getSampleData()
-    {
-        return array(
-            'basic' => array(
-                'title' => 'LBL_FIELD_TITLE',
-                'description' => array(),
-                'order' => 50,
-                'group' => 0,
-            ),
-            'form' => array(
-                '_type' => 'text',
-                '_resource' => null,
-                //'_resourceGetter' => null,
-                //'_resourceFormFile' => null,
-                '_extend' => null,
-                '_value' => '',
-                'name' => null,
-                'id' => null,
-                'class' => null,
-            ),
-            'attr' => array(
-                'isLink' => 0,
-                'isList' => 0,
-                'isDbField' => 1,
-                'isDbQuery' => 1,
-                'isReadonly' => 0,
-                'isView' => 1,
-            ),
-            'db' => array(
-                'type' => 'string',
-                'length' => null,
-            ),
-            'sanitiser' => array(
-            ),
-            'validator' => array(
-                'rule' => array(),
-                'message' => array(),
-            ),
-        );
-    }
+    protected $_sampleData = array(
+        'basic' => array(
+            'title' => 'LBL_FIELD_TITLE',
+            'description' => array(),
+            'order' => 50,
+            'group' => 0,
+        ),
+        'form' => array(
+            '_type' => 'text',
+            '_resource' => null,
+            //'_resourceGetter' => null,
+            //'_resourceFormFile' => null,
+            '_extend' => null,
+            '_value' => '',
+            'name' => null,
+            //'id' => null,
+            //'class' => null,
+        ),
+        'attr' => array(
+            'isLink' => 0,
+            'isList' => 0,
+            'isDbField' => 1,
+            'isDbQuery' => 1,
+            'isReadonly' => 0,
+            'isView' => 1,
+        ),
+        'db' => array(
+            'type' => 'string',
+            'length' => null,
+        ),
+        'sanitiser' => array(
+        ),
+        'validator' => array(
+            'rule' => array(),
+            'message' => array(),
+        ),
+    );
 
     /**
      * 以数组的形式递归格式化数据
@@ -98,25 +83,15 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
 
     protected function _format($metadata, $name = null)
     {
-        // 转换成数组
-        if (is_string($metadata)) {
-            $metadata = array(
-                'form' => array(
-                    'name' => $metadata,
-                )
-            );
-        // 初始化名称
-        } else {
-            if (!isset($metadata['form'])) {
-                $metadata['form'] = array();
-            }
-            if (!isset($metadata['form']['name'])) {
-                if (null != $name) {
-                    $metadata['form']['name'] = $name;
-                } else {
-                    require_once 'Qwin/Metadata/Element/Field/Exception.php';
-                    throw new Qwin_Metadata_Element_Field_Exception('The name value is not defined.');
-                }
+        if (!isset($metadata['form'])) {
+            $metadata['form'] = array();
+        }
+        if (!isset($metadata['form']['name'])) {
+            if (null != $name) {
+                $metadata['form']['name'] = $name;
+            } else {
+                require_once 'Qwin/Metadata/Element/Field/Exception.php';
+                throw new Qwin_Metadata_Element_Field_Exception('The name value is not defined.');
             }
         }
 
@@ -128,26 +103,13 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         if (!isset($metadata['basic']['title'])) {
             $metadata['basic']['title'] = 'LBL_FIELD_' . strtoupper($metadata['form']['name']);
         }
-
-        // 设置描述语句
-        if (!isset($metadata['basic']['description'])) {
-            $metadata['basic']['description'] = array();
-        } elseif(!is_array($metadata['basic']['description'])) {
-            $metadata['basic']['description'] = array($metadata['basic']['description']);
-        }
-
         // 设置编号
         if (!isset($metadata['form']['id'])) {
             $metadata['form']['id'] = $metadata['form']['name'];
         }
 
         // 初始验证器和补全验证信息
-        if(!isset($metadata['validator'])) {
-            $metadata['validator'] = array(
-                'rule' => array(),
-                'message' => array(),
-            );
-        } elseif(!empty($metadata['validator']['rule'])) {
+        if(isset($metadata['validator']) && !empty($metadata['validator']['rule'])) {
             foreach ($metadata['validator']['rule'] as $key => $rule) {
                 if (!isset($metadata['validator']['message'][$key])) {
                     $metadata['validator']['message'][$key] = 'MSG_VALIDATOR_' . strtoupper($key);
@@ -162,8 +124,16 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
                 $metadata['sanitiser'][$key] = $metadata['sanitiser'][$value];
             }
         }
-        
-        return $this->_multiArrayMerge($this->getSampleData(), $metadata);
+
+        $sampleData = $this->getSampleData();
+        foreach ($sampleData as $key => $row) {
+            if (isset($metadata[$key])) {
+                $metadata[$key] = array_merge($row, $metadata[$key]);
+            } else {
+                 $metadata[$key] = $row;
+            }
+        }
+        return $metadata;
     }
 
     /**
@@ -252,41 +222,6 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
     public function addValidatorRule()
     {
 
-    }
-
-    /**
-     * 转换语言
-     *
-     * @param array $language 用于转换的语言
-     * @return Qwin_Metadata_Element_Field 当前对象
-     */
-    public function translate($language)
-    {
-        
-        foreach($this->_data as &$data) {
-            // 转换标题
-            $data['basic']['titleCode'] = $data['basic']['title'];
-            if (isset($language[$data['basic']['title']])) {
-                $data['basic']['title'] = $language[$data['basic']['title']];
-            }
-
-            // 转换描述
-            $data['basic']['descriptionCode'] = array();
-            foreach ($data['basic']['description'] as $key => &$description) {
-                $data['basic']['descriptionCode'][$key] = $description;
-                if(isset($language[$description]))
-                {
-                    $description = $language[$description];
-                }
-            }
-
-            // 转换分组
-            $data['basic']['groupCode'] = $data['basic']['group'];
-            if (isset($language[$data['basic']['group']])) {
-                $data['basic']['group'] = $language[$data['basic']['group']];
-            }
-        }
-        return $this;
     }
 
     public function filterReadonlyToHidden()

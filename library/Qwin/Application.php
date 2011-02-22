@@ -51,7 +51,7 @@ class Qwin_Application
      * @var array
      */
     protected $_option = array(
-        'viewClass' => 'Qwin_Application_View',
+        
     );
 
     /**
@@ -186,7 +186,7 @@ class Qwin_Application
         }
         $this->_namespace = $this->getNamespace($asc, $config);
         Qwin::setMap('-namespace', $this->_namespace);
-        
+
         // 加载模块
         $this->_module = $this->getModule($asc);
 
@@ -330,12 +330,7 @@ class Qwin_Application
     public function getMetadataByAsc(array $asc)
     {
         $name = $this->getClass('metadata', $asc);
-        if (class_exists($name)) {
-            $metadata = Qwin_Metadata_Manager::get($name);
-        } else {
-            $metadata = null;
-        }
-        return $metadata;
+        return Qwin_Metadata_Manager::get($name);
     }
 
     /**

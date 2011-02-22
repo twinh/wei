@@ -27,23 +27,15 @@
 
 class Qwin_Metadata_Element_Db extends Qwin_Metadata_Element_Abstract
 {
-    /**
-     * 获取样本数据
-     *
-     * @return array
-     */
-    public function getSampleData()
-    {
-        return array(
-            'type' => 'sql',
-            'table' => null,
-            'primaryKey' => 'id',
-            'offset' => 0,
-            'limit' => 10,
-            'order' => array(),
-            'where' => array(),
-        );
-    }
+    protected $_sampleData = array(
+        'type' => 'sql',
+        'table' => null,
+        'primaryKey' => 'id',
+        'offset' => 0,
+        'limit' => 10,
+        'order' => array(),
+        'where' => array(),
+    );
  
     /**
      * 获取数据表名称,不包含前缀
@@ -53,31 +45,5 @@ class Qwin_Metadata_Element_Db extends Qwin_Metadata_Element_Abstract
     public function getTable()
     {
         return $this->_data['table'];
-    }
-
-    /**
-     * 获取整个数据表名称
-     *
-     * @return string 数据表名称
-     */
-    public function getFullTable()
-    {
-        if(isset($this->_data['_table']))
-        {
-            return $this->_data['_table'];
-        }
-        return $this->_getFullTable();
-    }
-
-    /**
-     * 获取整个数据表名称
-     *
-     * @return string 数据表名称
-     */
-    public function _getFullTable()
-    {
-        $config = Qwin::call('-ini');
-        $this->_data['_table'] = $config['db']['prefix'] . $this->_data['table'];
-        return $this->_data['_table'];
     }
 }

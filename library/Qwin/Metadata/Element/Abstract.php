@@ -27,11 +27,13 @@
 
 abstract class Qwin_Metadata_Element_Abstract extends Qwin_Metadata_Abstract
 {
+    protected $_sampleData = array();
+
     protected $_data = array();
 
     public function getSampleData()
     {
-        return null;
+        return $this->_sampleData;
     }
 
     public function getData()
@@ -149,17 +151,6 @@ abstract class Qwin_Metadata_Element_Abstract extends Qwin_Metadata_Abstract
         {
             $data->translate($language);
         }
-        return $this;
-    }
-
-    /**
-     * 转换语言
-     *
-     * @param array $language 用于转换的语言
-     * @return object 当前对象
-     */
-    public function translate($language)
-    {
         return $this;
     }
 
