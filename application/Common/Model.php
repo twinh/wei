@@ -28,6 +28,8 @@
  * @since       2010-7-28 17:26:42
  */
 
+require_once 'Doctrine/Record.php';
+
 class Common_Model extends Doctrine_Record
 {
 }

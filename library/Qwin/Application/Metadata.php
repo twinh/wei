@@ -26,6 +26,11 @@
  * @todo        分离出验证类,转换类,Doctrine处理类等
  */
 
+/**
+ * @see Qwin_Metadata_Abstract
+ */
+require_once 'Qwin/Metadata/Abstract.php';
+
 class Qwin_Application_Metadata extends Qwin_Metadata
 {
     /**
@@ -608,113 +613,6 @@ class Qwin_Application_Metadata extends Qwin_Metadata
         return $meta['model'][$name]['metadata'] = Qwin_Metadata_Manager::get($class);
     }
 
-    public function getDefaultLayout($meta, array $layout = null, $relatedName = false)
-    {
-        foreach ($meta['field'] as $name => $field) {
-            $group = $field['basic']['group'];
-            if (!isset($layout[$group])) {
-                $layout[$group] = array();
-            }
-
-            // 使用order作为键名
-            $order = $field['basic']['order'];
-            while (isset($layout[$group][$order])) {
-                $order++;
-            }
-            
-            if (!$relatedName) {
-                $layout[$group][$order] = $field['form']['name'];
-            } else {
-                $layout[$group][$order] = array(
-                     $relatedName, $field['form']['name'],
-                );
-            }
-        }
-        foreach ($this->getModelMetadataByType($meta, 'db') as $key => $relatedMeta) {
-             $layout = $this->getDefaultLayout($relatedMeta, $layout, $key);
-        }
-
-        // 根据键名排序
-        if (!$relatedName) {
-            array_walk($layout, 'ksort');
-        }
-
-        return $layout;
-    }
-
-    public function getViewLayout($meta, array $layout = null, $relatedName = false)
-    {
-        foreach ($meta['field'] as $name => $field) {
-            if (0 == $field['attr']['isView']) {
-                continue;
-            }
-            
-            $group = $field['basic']['group'];
-            if (!isset($layout[$group])) {
-                $layout[$group] = array();
-            }
-
-            // 使用order作为键名
-            $order = $field['basic']['order'];
-            while (isset($layout[$group][$order])) {
-                $order++;
-            }
-
-            if (!$relatedName) {
-                $layout[$group][$order] = $field['form']['name'];
-            } else {
-                $layout[$group][$order] = array(
-                     $relatedName, $field['form']['name'],
-                );
-            }
-        }
-        foreach ($this->getModelMetadataByType($meta, 'db') as $key => $relatedMeta) {
-            $layout = $this->getViewLayout($relatedMeta, $layout, $key);
-        }
-
-        // 根据键名排序
-        if (!$relatedName) {
-            array_walk($layout, 'ksort');
-        }
-
-        return $layout;
-    }
-
-    public function getListLayout(array $layout = null, $relatedName = false)
-    {
-        null == $layout && $layout = array();
-        foreach ($this->field as $name => $field) {
-            if (1 != $field['attr']['isList']) {
-                continue;
-            }
-
-            // 使用order作为键名
-            $order = $field['basic']['order'];
-            while (isset($layout[$order])) {
-                $order++;
-            }
-
-            if (!$relatedName) {
-                $layout[$order] = $field['form']['name'];
-            } else {
-                $layout[$order] = array(
-                     $relatedName, $field['form']['name'],
-                );
-            }
-        }
-
-        foreach ($this->getModelMetadataByType('db') as $name => $relatedMeta) {
-            $layout += $this->getListLayout($relatedMeta, $layout, $name);
-        }
-
-        // 根据键名排序
-        if (!$relatedName) {
-            ksort($layout);
-        }
-
-        return $layout;
-    }
-
     /**
      * 验证未通过的域信息
      * @var array
@@ -1001,31 +899,14 @@ class Qwin_Application_Metadata extends Qwin_Metadata
         return $data;
     }
 
-    /**
-     * 将数据库类的二维数组转换为表单资源数组
-     * @param array $data 从数据库或是缓存文件获取的数组
-     * @param string/int $key 第一个键名,作为资源的键名
-     * @param string/int $key2 第二个键名,作为资源值的键名
-     * @return array 表单资源数组
-     * @todo 以conver开头的方法,可能会出现冲突
-     */
-    public function filterDbDataToFormResource($data, $key, $key2)
-    {
-        $resource = array();
-        foreach ($data as  $row) {
-            $resource[$row[$key]] = $row[$key2];
-        }
-        return $resource;
-    }
-
-    public function saveRelatedDbData($meta, $data, $query)
+    /*public function saveRelatedDbData($meta, $data, $query)
     {
         $ctrler = Qwin::call('-controller');
         foreach ($meta['model'] as $model) {
             if ('relatedDb' == $model['type']) {
-                /*
-                 * 检验是否要保存数据
-                 */
+                
+                 // 检验是否要保存数据
+                 
                 $method = 'isSave' . $model['alias'] . 'Data';
                 if (!method_exists($ctrler, $method)
                     || false === call_user_func_array(
@@ -1059,9 +940,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
                     }
                 }
 
-                /**
-                 * 保存数据
-                 */
+                // 保存数据
                 $relatedDbQuery = $meta->getQuery($model['set']);
                 $ini = Qwin::call('-ini');
                 $modelName = $ini->getClassName('Model', $model['set']);
@@ -1070,7 +949,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
                 $relatedDbQuery->save();
             }
         }
-    }
+    }*/
 
     public function getRelatedListConfig($meta)
     {

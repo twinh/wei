@@ -27,26 +27,23 @@
 
 class Qwin_Metadata_Element_Model extends Qwin_Metadata_Element_Abstract
 {
-    public function getSampleData()
-    {
-        return array(
-            'alias' => null,
-            'metadata' => null,
-            'relation' => 'hasOne',
-            'local' => 'id',
-            'foreign' => 'id',
-            'type' => 'db',
-            'enabled' => true,
-            'fieldMap' => array(),
-            'list'  => array(),
-            'asc' => array(
-                'namespace' => null,
-                'module' => null,
-                'controller' => null,
-            ),
-        );
-    }
-
+    protected $_sampleData = array(
+        'alias' => null,
+        'metadata' => null,
+        'relation' => 'hasOne',
+        'local' => 'id',
+        'foreign' => 'id',
+        'type' => 'db',
+        'enabled' => true,
+        'fieldMap' => array(),
+        'list'  => array(),
+        'asc' => array(
+            'namespace' => null,
+            'module' => null,
+            'controller' => null,
+        ),
+    );
+    
     public function format()
     {
         foreach ($this->_data as $key => $row) {

@@ -54,27 +54,4 @@ class Qwin_Metadata_Element_Page extends Qwin_Metadata_Element_Abstract
     {
         
     }
-
-    /**
-     * 转换语言
-     *
-     * @param array $language 用于转换的语言
-     * @return Qwin_Metadata_Element_Field 当前对象
-     */
-    public function translate($language)
-    {
-        $this->_data['titleCode'] = $this->_data['title'];
-        if(isset($language[$this->_data['title']]))
-        {
-            $this->_data['title'] = $language[$this->_data['title']];
-        }
-
-        $this->_data['descriptionCode'] = $this->_data['description'];
-        if(isset($language[$this->_data['description']]))
-        {
-            $this->_data['description'] = $language[$this->_data['description']];
-        }
-
-        return $this;
-    }
 }

@@ -34,7 +34,7 @@ class Common_View_JsonList extends Common_View
         $jqGridWidget = Qwin::widget('jqgrid');
 
         // 获取并合并布局
-        $layout = $this->meta->getListLayout();
+        $layout = $jqGridWidget->getLayout($this->meta);
         if ($this->listField) {
             $layout = array_intersect($layout, (array)$this->listField);
         }

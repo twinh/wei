@@ -55,7 +55,7 @@ class Common_Service_Edit extends Common_Service
         $meta       = $app->getMetadataByAsc($option['asc']);
         $primaryKey = $meta['db']['primaryKey'];
         $primaryKeyValue = isset($option['data'][$primaryKey]) ? $option['data'][$primaryKey] : null;
-        
+
         // 从模型获取数据
         $query = $meta->getQueryByAsc($option['asc'], array('db', 'view'));
         $dbData = $query->where($primaryKey . ' = ?', $primaryKeyValue)->fetchOne();

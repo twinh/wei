@@ -28,6 +28,11 @@
  * @since       2010-7-28 17:26:04
  */
 
+/**
+ * @see Qwin_Application_Metadata
+ */
+require_once 'Qwin/Application/Metadata.php';
+
 class Common_Metadata extends Qwin_Application_Metadata
 {
     protected $_set;

@@ -35,16 +35,16 @@ class Common_Namespace extends Qwin_Application_Namespace
         $config = Qwin::config();
 
         // 加载log4php
-        /* @var $log Logger */
-        $log = Qwin::widget('log4php');
-        $log->debug('The asc is ' . implode('/', $config['asc']));
-        
+        if ($config['log']) {
+            /* @var $log Logger */
+            $log = Qwin::widget('log4php');
+            $log->debug('The asc is ' . implode('/', $config['asc']));
+        }
+
         // 关闭魔术引用
         ini_set('magic_quotes_runtime', 0);
 
-        Qwin::setShortTag('#', 'Common_');
-
-        // todo 修复命名混乱
+        // 设置用户请求对象
         $request = Qwin::call('Common_Request');
         Qwin::set('-request', $request);
 
@@ -65,12 +65,12 @@ class Common_Namespace extends Qwin_Application_Namespace
             $url = Qwin::call('-url', $router);
         }*/
 
+        // TODO 延迟连接!!!!
         /**
          * 数据库链接,使用的是Doctrine Orm
          * @todo 助手类
          */
         $manager = Doctrine_Manager::getInstance();
-        
         // 连接padb数据库
         if(isset($config['database']['adapter']['padb']))
         {
@@ -94,7 +94,6 @@ class Common_Namespace extends Qwin_Application_Namespace
             } else {
                 $mainAdapter = 'web';
             }
-
             $databaseSet = $config['database']['adapter'][$mainAdapter];
             $adapter = $databaseSet['type'] . '://'
                      . $databaseSet['username'] . ':'
