@@ -69,7 +69,7 @@ class Common_Member_Metadata_Log extends Qwin_Application_Metadata
                     'attr' => array(
                         'isList' => 0,
                     ),
-                    'filter' => array(
+                    'sanitiser' => array(
                         'db' => array('md5')
                     ),
                     'validator' => array(

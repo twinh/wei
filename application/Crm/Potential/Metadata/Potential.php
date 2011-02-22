@@ -89,9 +89,9 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                         'isLink' => 1,
                         'isList' => 1,
                     ),
-                    'filter' => array(
+                    'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'filter'),
+                            array('Common_Helper_Option', 'sanitise'),
                             'potential-status',
                         ),
                         'view' => 'list',
@@ -109,9 +109,9 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                         'isLink' => 1,
                         'isList' => 1,
                     ),
-                    'filter' => array(
+                    'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'filter'),
+                            array('Common_Helper_Option', 'sanitise'),
                             'potential-type',
                         ),
                         'view' => 'list',
@@ -138,9 +138,9 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                         'isLink' => 1,
                         'isList' => 1,
                     ),
-                    'filter' => array(
+                    'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'filter'),
+                            array('Common_Helper_Option', 'sanitise'),
                             'customer-source',
                         ),
                         'view' => 'list',
@@ -241,21 +241,21 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
         ));
     }
 
-    public function filterEditCustomerId($value, $name, $data, $dataCopy)
+    public function sanitiseEditCustomerId($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::filterPopupCustomer($value, $name, 'name', $this);
+        Crm_Helper::sanitisePopupCustomer($value, $name, 'name', $this);
         return $value;
     }
 
-    public function filterEditCampaignId($value, $name, $data, $dataCopy)
+    public function sanitiseEditCampaignId($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::filterPopupOpportunity($value, $name, 'name', $this);
+        Crm_Helper::sanitisePopupOpportunity($value, $name, 'name', $this);
         return $value;
     }
 
-    public function filterEditContactId($value, $name, $data, $dataCopy)
+    public function sanitiseEditContactId($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::filterPopupContact($value, $name, 'first_name', $this);
+        Crm_Helper::sanitisePopupContact($value, $name, 'first_name', $this);
         return $value;
     }
 }

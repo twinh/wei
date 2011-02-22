@@ -25,7 +25,7 @@
  * @since       2010-10-11 17:14:08
  */
 
-class Common_Service_Form extends Common_Service_BasicAction
+class Common_Service_Form extends Common_Service
 {
     /**
      * 服务的基本配置
@@ -38,37 +38,27 @@ class Common_Service_Form extends Common_Service_BasicAction
             'controller' => null,
             'action' => null,
         ),
-        'data' => array(
-            'primaryKeyValue' => null,
-            'asAction' => 'add',
-            'initalData' => array(),
-        ),
-        'callback' => array(
-        ),
-        'view' => array(
-            'class' => 'Common_View_Add',
-            'display' => true,
-        ),
-        'this' => null,
+        'id'        => null,
+        'initalData'=> array(),
+        'display'   => true,
+        'viewClass' => 'Common_View_Add',
     );
 
     public function process(array $option = null)
     {
         // 初始配置
-        $option = $this->_multiArrayMerge($this->_option, $option);
+        $option     = array_merge($this->_option, $option);
 
-        // 通过父类,加载语言,元数据,模型等
-        parent::process($option['asc']);
-
-        // 初始化常用的变量
-        $metaHelper = Qwin::call('Qwin_Application_Metadata');
-        $meta = $this->_meta;
+        /* @var $app Qwin_Application */
+        $app        = Qwin::call('-app');
+        
+        /* @var $meta Common_Metadata */
+        $meta       = $app->getMetadataByAsc($option['asc']);
         $primaryKey = $meta['db']['primaryKey'];
-        $primaryKeyValue = $option['data']['primaryKeyValue'];
+        $primaryKeyValue = $option['id'];
 
-        $modelClass = $metaHelper->getClassName('Model', $this->_asc);
-        $model = Qwin::call($modelClass);
-        $query = $metaHelper->getQuery($meta, $model, 'db');
+        // 从模型获取数据
+        $query = $meta->getQueryByAsc($option['asc']);
 
         /**
          * 空值 < 元数据表单初始值 < 根据主键取值 < 配置初始值(一般是从url中获取)
@@ -79,7 +69,7 @@ class Common_Service_Form extends Common_Service_BasicAction
         // 根据主键取值
         $copyRecordData = array();
         if (null != $primaryKeyValue) {
-            $this->_result = $result = $query->where($primaryKey . ' = ?', $primaryKeyValue)->fetchOne();
+            $result = $query->where($primaryKey . ' = ?', $primaryKeyValue)->fetchOne();
             if (false !== $result) {
                 // 删除null值
                 foreach ($result as $name => $value) {
@@ -89,25 +79,23 @@ class Common_Service_Form extends Common_Service_BasicAction
         }
 
         // 合并数据
-        $data = array_merge($formInitalData, $copyRecordData, $option['data']['initalData']);
+        $data = array_merge($formInitalData, $copyRecordData, $option['initalData']);
 
         // 处理数据
-        $data = $metaHelper->filterOne($data, $option['data']['asAction'], $meta, $meta, array('view' => false));
+        $data = $meta->sanitise($data, 'add', array('view' => false));
 
-        // 设置视图
+        // 设置返回结果
         $result = array(
             'result' => true,
-            'view' => array(
-                'class' => $option['view']['class'],
-                'data' => get_defined_vars(),
-            ),
-            'data' => $data,
+            'data' => get_defined_vars(),
         );
-        // 加载视图
-        if ($option['view']['display']) {
-            $view = Qwin::call($option['view']['class']);
-            $view->assign($result['view']['data']);
+
+        // 展示视图
+        if ($option['display']) {
+            $view = new $option['viewClass'];
+            return $view->assign($result['data']);
         }
-        return $view;
+
+        return $result;
     }
 }

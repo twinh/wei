@@ -50,9 +50,9 @@ class Common_AdminMenu_Metadata_Menu extends Common_Metadata
                         'isList' => 1,
                         'isLink' => 1,
                     ),
-                    'filter' => array(
+                    'sanitiser' => array(
                         'list' => array(
-                            array('Project_Helper_Category', 'filterTreeResource'),
+                            array('Project_Helper_Category', 'sanitiseTreeResource'),
                             array(
                                 'namespace' => 'Common',
                                 'module' => 'AdminMenu',

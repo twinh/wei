@@ -186,7 +186,7 @@ class Common_Helper_Option
         return $this->_query;
     }
 
-    public function filter($value, $name)
+    public function sanitise($value, $name)
     {
         $data = $this->get($name);        
         if (isset($data[$value])) {

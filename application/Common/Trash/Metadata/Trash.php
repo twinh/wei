@@ -95,7 +95,7 @@ class Common_Trash_Metadata_Trash extends Common_Metadata
         ));
     }
 
-    public function filterListType($value, $name, $data, $dataCopy)
+    public function sanitiseListType($value, $name, $data, $dataCopy)
     {
         $value = explode('.', $value);
         $asc = array(
@@ -109,18 +109,18 @@ class Common_Trash_Metadata_Trash extends Common_Metadata
         return Qwin_Util_Html::link($this->url->url($asc), $lang->t($metadata['page']['title']));
     }
 
-    public function filterDbDeletedAt($value, $name, $data, $dataCopy)
+    public function sanitiseDbDeletedAt($value, $name, $data, $dataCopy)
     {
         return date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
     }
 
-    public function filterDbDeletedBy($value, $name, $data, $dataCopy)
+    public function sanitiseDbDeletedBy($value, $name, $data, $dataCopy)
     {
         $member = Qwin::call('-session')->get('member');
         return $member['id'];
     }
 
-    public function filterListOperation($value, $name, $data, $dataCopy)
+    public function sanitiseListOperation($value, $name, $data, $dataCopy)
     {
         $primaryKey = $this->db['primaryKey'];
         $url = Qwin::call('-url');
@@ -132,7 +132,7 @@ class Common_Trash_Metadata_Trash extends Common_Metadata
             'title' => $lang->t('LBL_ACTION_RESTORE'),
             'icon' => 'ui-icon-arrowreturnthick-1-w',
         );
-        $operation += parent::filterListOperation($value, $name, $data, $dataCopy, true);
+        $operation += parent::sanitiseListOperation($value, $name, $data, $dataCopy, true);
         $data = '';
         foreach ($operation as $row) {
             $data .= Qwin_Util_JQuery::icon($row['url'], $row['title'], $row['icon']);

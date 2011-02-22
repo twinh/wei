@@ -56,7 +56,7 @@ class Common_Article_Controller_Article extends Common_ActionController
         }
         $dbData = $query->toArray();
         // 根据配置和控制器中的对应方法转换数据
-        $dbData = $this->meta->filterOne($meta['field'], $this->_set['action'], $dbData);
+        $dbData = $this->meta->sanitiseOne($meta['field'], $this->_set['action'], $dbData);
 
         $this->createHtml($dbData);
         

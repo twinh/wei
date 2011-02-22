@@ -52,9 +52,9 @@ class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
                         'isLink' => 1,
                         'isList' => 1,
                     ),
-                    'filter' => array(
+                    'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'filter'),
+                            array('Common_Helper_Option', 'sanitise'),
                             'opportunity-status',
                         ),
                         'view' => 'list',
@@ -72,9 +72,9 @@ class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
                         'isLink' => 1,
                         'isList' => 1,
                     ),
-                    'filter' => array(
+                    'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'filter'),
+                            array('Common_Helper_Option', 'sanitise'),
                             'opportunity-type',
                         ),
                         'view' => 'list',
@@ -231,9 +231,9 @@ class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
         ));
     }
 
-    public function filterEditParentId($value, $name, $data, $dataCopy)
+    public function sanitiseEditParentId($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::filterPopupOpportunity($value, $name, 'name', $this);
+        Crm_Helper::sanitisePopupOpportunity($value, $name, 'name', $this);
         return $value;
     }
 }

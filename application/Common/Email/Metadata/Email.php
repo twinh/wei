@@ -96,12 +96,12 @@ class Common_Email_Metadata_Email extends Common_Metadata
         ));
     }
 
-    public function filterListTo($value, $name, $data, $copyData)
+    public function sanitiseListTo($value, $name, $data, $copyData)
     {
         return $copyData['to_name'] . '&lt;' . $copyData['to'] . '&gt;';
     }
 
-    public function filterListFrom($value, $name, $data, $copyData)
+    public function sanitiseListFrom($value, $name, $data, $copyData)
     {
         return $copyData['from_name'] . '&lt;' . $copyData['from'] . '&gt;';
     }

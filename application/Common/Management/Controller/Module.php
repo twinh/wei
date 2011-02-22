@@ -110,7 +110,7 @@ class Common_Management_Controller_Module extends Common_Controller
             );
         }
         $listField = $meta['field']->getAttrList('isList');
-        $data = $this->metaHelper->filterArray($data, 'list', $meta, $this);
+        $data = $this->metaHelper->sanitiseArray($data, 'list', $meta, $this);
 
         $this->_view = array(
             'class' => 'Common_View',

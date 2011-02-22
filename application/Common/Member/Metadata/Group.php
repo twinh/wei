@@ -83,7 +83,7 @@ class Common_Member_Metadata_Group extends Common_Metadata
         ));
     }
 
-    public function filterViewImagePath($value)
+    public function sanitiseViewImagePath($value)
     {
         if(is_file($value))
         {
@@ -92,14 +92,14 @@ class Common_Member_Metadata_Group extends Common_Metadata
         return $value . '<em>(' . $this->_lang->t('MSG_FILE_NOT_EXISTS') . ')</em>';
     }
 
-    public function filterListOperation($value, $name, $data, $copyData)
+    public function sanitiseListOperation($value, $name, $data, $copyData)
     {
         $primaryKey = $this->db['primaryKey'];
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
         $set = $this->getAscFromClass();
         $html = Qwin_Util_Html::jQueryButton($url->url($set, array('action' => 'AllocatePermission', $primaryKey => $copyData[$primaryKey])), $lang->t('LBL_ACTION_ALLOCATE_PERMISSION'), 'ui-icon-person')
-              . parent::filterListOperation($value, $name, $data, $copyData);
+              . parent::sanitiseListOperation($value, $name, $data, $copyData);
         return $html;
     }
 }

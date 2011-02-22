@@ -53,4 +53,9 @@ class Qwin_Validator
         }
         return true;
     }
+
+    public function valid()
+    {
+        return true;
+    }
 }

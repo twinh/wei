@@ -31,43 +31,22 @@ class Common_View_List extends Common_View
     {
         parent::preDisplay();
         // 初始变量,方便调用
-        $app            = Qwin::call('-app');
-        $meta           = $this->meta;
-        $request        = Qwin::call('-request');
-        $lang           = Qwin::call('-lang');
-        $url            = Qwin::call('-url');
-        $asc            = Qwin::config('asc');
-        $ascString      = strtolower(implode('-', $asc));
+        $meta       = $this->meta;
+        $request    = Qwin::call('-request');
+        $lang       = Qwin::call('-lang');
+        $url        = Qwin::call('-url');
+        $asc        = Qwin::config('asc');
 
-        $jqGridWidget = $this->widget->get('jqgrid');
+        /* @var $jqGridWidget JqGrid_Widget */
+        $jqGridWidget   = $this->widget->get('jqgrid');
 
         $option         = array();
       
         // 获取json数据的地址
         $option['url'] = $url->url(array('json' => true) + $_GET);
 
-        // 获取并合并布局
-        $layout = $meta->getListLayout();
-        if ($this->listField) {
-            $layout = array_intersect($layout, (array)$this->listField);
-        }
-
-        // 根据布局获取栏数据
-        $col = $jqGridWidget->getColByListLayout($layout, $meta, $lang);
-        $option['colNames'] = $col['colNames'];
-        $option['colModel'] = $col['colModel'];
-        
-        // 设置排序
-        if(!empty($meta['db']['order'])) {
-            $option['sortname']  = $meta['db']['order'][0][0];
-            $option['sortorder'] = $meta['db']['order'][0][1];
-        } else {
-            $option['sortname']  = $this->primaryKey;
-        }
-
         // 设置Url参数的名称
         $option['rowNum']        = $request->getLimit();
-        $option['rowNum']        <= 0 && $option['rowNum'] = $meta['db']['limit'];
 
         // 设置弹出窗口属性
         if ($this->isPopup) {
@@ -83,9 +62,11 @@ class Common_View_List extends Common_View
         }
 
         $jqGrid = array(
-            'id'     => $ascString,
-            'asc'    => $asc,
-            'option' => $option,
+            'asc'       => $asc,
+            'ascId'     => strtolower(implode('-', $asc)),
+            'meta'      => $meta,
+            'layout'    => $this->list,
+            'option'    => $option,
         );
         
         $this->assign(get_defined_vars());

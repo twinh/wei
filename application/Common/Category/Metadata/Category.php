@@ -117,7 +117,7 @@ class Common_Category_Metadata_Category extends Common_Metadata
         ));
     }
 
-    public function filterListOperation($value, $name, $data, $copyData)
+    public function sanitiseListOperation($value, $name, $data, $copyData)
     {
         $primaryKey = $this->db['primaryKey'];
         $url = Qwin::call('-url');
@@ -125,11 +125,11 @@ class Common_Category_Metadata_Category extends Common_Metadata
         $set = $this->getAscFromClass();
         $link = $url->url($set, array('action' => 'Add', '_data[parent_id]' => $data[$primaryKey]));
         $html = Qwin_Util_Html::jQueryButton($link, $lang->t('LBL_ACTION_ADD_SUBCATEGORY'), 'ui-icon-plusthick')
-              . parent::filterListOperation($value, $name, $data, $copyData);
+              . parent::sanitiseListOperation($value, $name, $data, $copyData);
         return $html;
     }
 
-    public function filterListName($val, $name, $data, $copyData)
+    public function sanitiseListName($val, $name, $data, $copyData)
     {
         if(NULL != $copyData['parent_id'])
         {
@@ -150,7 +150,7 @@ class Common_Category_Metadata_Category extends Common_Metadata
         return $val;
     }
 
-    public function filterDbParentId($val, $name, $data)
+    public function sanitiseDbParentId($val, $name, $data)
     {
         '0' == $val && $val = 'NULL';
         return $val;

@@ -57,12 +57,14 @@ class Common_Service_List extends Common_Service
         $manager    = Qwin::call('-app');
         $meta       = $manager->getMetadataByAsc($option['asc']);
         $primaryKey = $meta['db']['primaryKey'];
-        $listField  = $option['list'];
+
+        // 显示哪些域
+        $list       = $option['list'];
 
         // 是否以弹出框形式显示
-        $popup = $option['popup'];
+        $popup      = $option['popup'];
 
-        /// 设置返回结果
+        // 设置返回结果
         $result = array(
             'result' => true,
             'data' => get_defined_vars(),

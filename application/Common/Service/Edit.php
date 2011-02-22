@@ -32,105 +32,82 @@ class Common_Service_Edit extends Common_Service
      * @var array
      */
     protected $_option = array(
-        'asc' => array(
-            'namespace' => null,
-            'module' => null,
-            'controller' => null,
-            'action' => null,
+        'asc'       => array(
+            'namespace'     => null,
+            'module'        => null,
+            'controller'    => null,
+            'action'        => null,
         ),
-        'data' => array(
-            'db' => null,
-        ),
-        'callback' => array(
-            'afterDb' => array(),
-        ),
-        'view' => array(
-            'class' => 'Common_View_JqGridJson',
-            'display' => true,
-            'url' => null,
-        ),
+        'data'      => array(),
+        'display'   => true,
+        'url'       => null,
     );
 
     public function process(array $option = null)
     {
         // 初始配置
-        $option = array_merge($this->_option, $option);
-        /* @var $manager Qwin_Application */
-        $manager = Qwin::call('-app');
-
-        $meta = $manager->getMetadataByAsc($arc);
+        $option     = array_merge($this->_option, $option);
         
+        /* @var $app Qwin_Application */
+        $app        = Qwin::call('-app');
+        
+        /* @var $meta Qwin_Application_Metadata */
+        $meta       = $app->getMetadataByAsc($option['asc']);
         $primaryKey = $meta['db']['primaryKey'];
-        $primaryKeyValue = isset($option['data']['db'][$primaryKey]) ? $option['data']['db'][$primaryKey] : null;
+        $primaryKeyValue = isset($option['data'][$primaryKey]) ? $option['data'][$primaryKey] : null;
         
         // 从模型获取数据
-        $query = $metaHelper->getQueryByAsc($this->_asc, 'db');
-        $result = $query->where($primaryKey . ' = ?', $primaryKeyValue)->fetchOne();
+        $query = $meta->getQueryByAsc($option['asc'], array('db', 'view'));
+        $dbData = $query->where($primaryKey . ' = ?', $primaryKeyValue)->fetchOne();
 
         // 记录不存在,加载错误视图
-        if (false == $result) {
-            $return = array(
+        if (false == $dbData) {
+            $lang = Qwin::call('-lang');
+            $result = array(
                 'result' => false,
-                'message' => $this->_lang->t('MSG_NO_RECORD'),
+                'message' => $lang['MSG_NO_RECORD'],
             );
-            if ($option['view']['display']) {
-                $this->view->setRedirectView($return['message']);
+            if ($option['display']) {
+                return Qwin::call('-view')->redirect($result['message']);
+            } else {
+                return $result;
             }
-            return $return;
         }
-        // 原始数据
-        $rawData = $result->toArray();
 
-        // 补全数据
-        $data = $metaHelper->fillDbData($option['data']['db'], $rawData);
+        // 获取改动过的数据
+        $data = $meta->filterEditData($dbData, $option['data']);
 
-        // TODO 如果值是从数据库来的,没有经过更改,则可以不进行验证转换
-        // 转换,验证
-        $data = $metaHelper->filterOne($data, 'db', $meta, $meta, array('view' => false));
-        $validateResult = $metaHelper->validateArray($data + $_POST, $meta, $meta);
-        if(true !== $validateResult)
-        {
-            $message = $option['this']->showValidateError($validateResult, $meta, $option['view']['display']);
-            $return = array(
+        // 转换数据
+        $data = $meta->sanitise($data, 'db');
+
+        // 验证数据
+        if (!$meta->validate($data)) {
+            $lang = Qwin::call('-lang');
+            $result = array(
                 'result' => false,
-                'message' => $message,
+                'message' => $meta->getInvalidMessage($lang),
             );
-            return $return;
+            if ($option['display']) {
+                return Qwin::call('-view')->redirect($result['message']);
+            } else {
+                return $result;
+            }
         }
 
-        //$metaHelper->saveRelatedDbData($meta, $data, $result);
+        // 填充并保存数据
+        $dbData->fromArray($data);
+        $dbData->save();
 
-        // 删除只读域的值
-        $data = $metaHelper->deleteReadonlyValue($data, $meta);
-
-        // 保存到数据库
-        $result->fromArray($data);
-        $result->save();
-
-        // 入库后,执行绑定事件
-        if(!empty($option['callback']['afterDb']))
-        {
-            $option['callback']['afterDb'][1] = $data;
-            $option['callback']['afterDb'][2] = $rawData;
-            $this->executeCallback('afterDb', $option);
+        // 展示视图
+        if ($option['display']) {
+            if (!$option['url']) {
+                $option['url'] = Qwin::call('-url')->url($option['asc'], array('action' => 'Index'));
+            }
+            return Qwin::call('-view')->redirect('MSG_OPERATE_SUCCESSFULLY', $option['url']);
         }
-
-        // 设置视图数据
-        if($option['view']['url'])
-        {
-            $url = $option['view']['url'];
-        } else {
-            $url = $this->url->url($this->_asc, array('action' => 'Index'));
-        }
-        $return = array(
+        return array(
             'result' => true,
-            'message' => $this->_lang->t('MSG_OPERATE_SUCCESSFULLY'),
-            'url' => $url,
+            'data' => get_defined_vars(),
         );
-        if($option['view']['display'])
-        {
-            $this->view->setRedirectView($return['message'], $url);
-        }
-        return $return;
     }
 }

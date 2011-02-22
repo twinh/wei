@@ -29,7 +29,7 @@ class Common_File_Controller_JQuery extends Qwin_Application_Controller
 {
     public function actionAjaxUpload()
     {
-        $str = Qwin::call('Qwin_filter_String');
+        $str = Qwin::call('Qwin_sanitise_String');
         // 是否有上传文件
         $name = 'userfile';
         !isset($_FILES[$name]) && exit('Forbidden');
@@ -97,7 +97,7 @@ class Common_File_Controller_JQuery extends Qwin_Application_Controller
 
     public function actionUploadify()
     {
-        $str = Qwin::call('Qwin_filter_String');
+        $str = Qwin::call('Qwin_sanitise_String');
         // 加载上传类
         $upload = Qwin::call('Qwin_File_Upload');
         $upload->upload_form_field = 'Filedata';

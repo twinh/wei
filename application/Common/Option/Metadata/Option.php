@@ -110,7 +110,7 @@ class Common_Option_Metadata_Option extends Common_Metadata
      * @return string 经过序列化的代码
      * @todo 样式,颜色的安全检查
      */
-    public function filterDbCode($value, $name, $data, $dataCopy)
+    public function sanitiseDbCode($value, $name, $data, $dataCopy)
     {
         !is_array($value) && $value = array();
         $return = array();
@@ -127,7 +127,7 @@ class Common_Option_Metadata_Option extends Common_Metadata
         return serialize($return);
     }
 
-    public function filterEditCode($value, $name, $data, $dataCopy)
+    public function sanitiseEditCode($value, $name, $data, $dataCopy)
     {
         $value = @unserialize($value);
         !is_array($value) && $value = array(
@@ -136,14 +136,14 @@ class Common_Option_Metadata_Option extends Common_Metadata
         return $value;
     }
 
-    public function filterAddCode($value, $name, $data, $dataCopy)
+    public function sanitiseAddCode($value, $name, $data, $dataCopy)
     {
         return array(
             $this->_codeSample
         );
     }
 
-    public function filterListCode($value, $name, $data, $dataCopy)
+    public function sanitiseListCode($value, $name, $data, $dataCopy)
     {
         $value = @unserialize($value);
         !is_array($value) && $value = array();
@@ -154,8 +154,8 @@ class Common_Option_Metadata_Option extends Common_Metadata
         return implode(',', $nameList);
     }
 
-    public function filterViewCode($value, $name, $data, $dataCopy)
+    public function sanitiseViewCode($value, $name, $data, $dataCopy)
     {
-        return $this->filterListCode($value, $name, $data, $dataCopy);
+        return $this->sanitiseListCode($value, $name, $data, $dataCopy);
     }
 }
