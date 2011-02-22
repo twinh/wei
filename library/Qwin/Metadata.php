@@ -45,7 +45,7 @@ abstract class Qwin_Metadata extends Qwin_Metadata_Abstract
      */
     protected $_data;
 
-    
+    protected $_id;
 
     /**
      * 不允许的元数据键名
@@ -122,5 +122,23 @@ abstract class Qwin_Metadata extends Qwin_Metadata_Abstract
         }
         require_once 'Qwin/Metadata/Exception.php';
         throw new Qwin_Metadata_Exception('Call to undefined method ' . __CLASS__ . '::' . $name . '()');
+    }
+
+    public function getId()
+    {
+        if (!isset($this->_id)) {
+            if (isset($this['db']['table'])) {
+                $this->_id = $this['db']['table'];
+            } else {
+                $this->_id = strtolower(get_class($this));
+            }
+        }
+        return $this->_id;
+    }
+
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
+        return $this;
     }
 }

@@ -313,6 +313,8 @@ class Qwin_Application
                 return $asc['namespace'] . '_View';
             case 'controller' :
                 return $asc['namespace'] . '_' . $asc['module'] . '_Controller_' . $asc['controller'];
+            case 'model' :
+                return $asc['namespace'] . '_' . $asc['module'] . '_Model_' . $asc['controller'];
             case 'module' :
                 return $asc['namespace'] . '_' . $asc['module'] . '_Module';
             default:

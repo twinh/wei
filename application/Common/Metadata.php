@@ -321,7 +321,7 @@ class Common_Metadata extends Qwin_Application_Metadata
      * @param array $cpoyData 未转换过的当前记录的值
      * @return string Y-m-d格式的日期
      */
-    public function filterListDateCreated($value, $name, $data, $dataCopy)
+    public function sanitiseListDateCreated($value, $name, $data, $dataCopy)
     {
         return date('Y-m-d', strtotime($value));
     }
@@ -335,7 +335,7 @@ class Common_Metadata extends Qwin_Application_Metadata
      * @param array $cpoyData 未转换过的当前记录的值
      * @return string Y-m-d格式的日期
      */
-    public function filterListDateModified($value, $name, $data, $dataCopy)
+    public function sanitiseListDateModified($value, $name, $data, $dataCopy)
     {
         return date('Y-m-d', strtotime($value));
     }
@@ -350,7 +350,7 @@ class Common_Metadata extends Qwin_Application_Metadata
      * @return string 当前域的新值
      * @todo 简化,重利用,是否需要用微件的形式
      */
-    public function filterListOperation($value, $name, $data, $dataCopy)
+    public function sanitiseListOperation($value, $name, $data, $dataCopy)
     {
         $primaryKey = $this->db['primaryKey'];
         $url = Qwin::call('-url');
@@ -418,7 +418,7 @@ class Common_Metadata extends Qwin_Application_Metadata
      * @param array $cpoyData 未转换过的当前记录的值
      * @return int 当前域的新值
      */
-    public function filterAddOrder($value, $name, $data, $dataCopy)
+    public function sanitiseAddOrder($value, $name, $data, $dataCopy)
     {
         return 50;
         $query = $this->metaHelper->getQuery($this);
@@ -442,11 +442,10 @@ class Common_Metadata extends Qwin_Application_Metadata
      * @param array $cpoyData 未转换过的当前记录的值
      * @return string 当前域的新值
      */
-    public function filterDbId($value, $name, $data, $dataCopy)
+    public function sanitiseDbId($value, $name, $data, $dataCopy)
     {
-        if(null == $value)
-        {
-            $value = Qwin_Helper_Util::getUuid();
+        if (null == $value) {
+            $value = Qwin_Util_String::uuid();
         }
         return $value;
     }
@@ -460,7 +459,7 @@ class Common_Metadata extends Qwin_Application_Metadata
      * @param array $cpoyData 未转换过的当前记录的值
      * @return string 当前域的新值
      */
-    public function filterDbDateCreated($value, $name, $data, $dataCopy)
+    public function sanitiseDbDateCreated($value, $name, $data, $dataCopy)
     {
         return date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
     }
@@ -474,7 +473,7 @@ class Common_Metadata extends Qwin_Application_Metadata
      * @param array $cpoyData 未转换过的当前记录的值
      * @return string 当前域的新值
      */
-    public function filterDbDateModified()
+    public function sanitiseDbDateModified()
     {
         return date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
     }
@@ -488,44 +487,44 @@ class Common_Metadata extends Qwin_Application_Metadata
      * @param array $cpoyData 未转换过的当前记录的值
      * @return string 当前域的新值
      */
-    public function filterDbCategoryId($value)
+    public function sanitiseDbCategoryId($value)
     {
         '0' == $value && $value = null;
         return $value;
     }
 
-    public function filterDbCreatedBy($value, $name, $data, $dataCopy)
+    public function sanitiseDbCreatedBy($value, $name, $data, $dataCopy)
     {
         $member = Qwin::call('Qwin_Session')->get('member');
         return $member['id'];
     }
 
-    public function filterDbModifiedBy($value, $name, $data, $dataCopy)
+    public function sanitiseDbModifiedBy($value, $name, $data, $dataCopy)
     {
         $member = Qwin::call('Qwin_Session')->get('member');
         return $member['id'];
     }
 
-    public function filterDbIsDeleted($value, $name, $data, $dataCopy)
+    public function sanitiseDbIsDeleted($value, $name, $data, $dataCopy)
     {
         return 0;
     }
 
-    public function filterEditAssignTo($value, $name, $data, $dataCopy)
+    public function sanitiseEditAssignTo($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::filterPopupMember($value, $name, 'username', $this);
+        Crm_Helper::sanitisePopupMember($value, $name, 'username', $this);
         return $value;
     }
 
     public function setIsLink($value, $name, $data, $dataCopy, $action)
     {
-        if (in_array($action, $this->_linkAction)) {
+        //if (in_array($action, $this->_linkAction)) {
             $asc = $this->getAscFromClass();
             !isset($this->url) && $this->url = Qwin::call('-url');
             $name = str_replace(':', '\:', $name);
             $dataCopy[$name] = str_replace(':', '\:', $dataCopy[$name]);
-            $value = '<a href="' . $this->url->url($asc, array('action' => 'Index', 'search' => $name . ':' . $dataCopy[$name])) . '">' . $value . '</a>';
-        }
+            $value = '<a href="' . $this->url->url($asc, array('action' => 'Index', 'search' => $name . ':' . $dataCopy[$name])) . '">' . $data[$name] . '</a>';
+        //}
         return $value;
     }
 }

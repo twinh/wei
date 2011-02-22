@@ -51,9 +51,9 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                             'sex',
                         ),
                     ),
-                    'filter' => array(
+                    'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'filter'),
+                            array('Common_Helper_Option', 'sanitise'),
                             'sex',
                         ),
                         'view' => 'list',
@@ -71,9 +71,9 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                             'customer-type',
                         ),
                     ),
-                    'filter' => array(
+                    'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'filter'),
+                            array('Common_Helper_Option', 'sanitise'),
                             'customer-type',
                         ),
                         'view' => 'list',
@@ -91,9 +91,9 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                             'customer-source',
                         ),
                     ),
-                    'filter' => array(
+                    'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'filter'),
+                            array('Common_Helper_Option', 'sanitise'),
                             'customer-source',
                         ),
                         'view' => 'list',
@@ -111,9 +111,9 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                             'customer-grade',
                         ),
                     ),
-                    'filter' => array(
+                    'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'filter'),
+                            array('Common_Helper_Option', 'sanitise'),
                             'customer-grade',
                         ),
                         'view' => 'list',
@@ -135,9 +135,9 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                         'isLink' => 1,
                         'isList' => 1,
                     ),
-                    'filter' => array(
+                    'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'filter'),
+                            array('Common_Helper_Option', 'sanitise'),
                             'customer-status',
                         ),
                         'view' => 'list',
@@ -149,6 +149,9 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                     ),
                     'attr' => array(
                         'isList' => 1,
+                        'isLink' => 1,
+                    ),
+                    'sanitiser' => array(
                     ),
                 ),
                 'qq' => array(
@@ -159,6 +162,8 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                 'msn' => array(
                     'basic' => array(
                         'group' => 1,
+                    ),
+                    'sanitiser' => array(
                     ),
                 ),
                 'skype' => array(
@@ -264,9 +269,9 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                             'payment-type',
                         ),
                     ),
-                    'filter' => array(
+                    'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'filter'),
+                            array('Common_Helper_Option', 'sanitise'),
                             'payment-type',
                         ),
                         'view' => 'list',
@@ -376,9 +381,9 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
         ));
     }
 
-    public function filterAddNumber($value, $name, $data, $dataCopy)
+    /*public function sanitiseAddNumber($value, $name, $data, $dataCopy)
     {
-        $count = $this->metaHelper->getQuery($this)->count() + 1;
+        $count = $this->_meta->getQuery($this)->count() + 1;
         return $this['page']['letter'] . str_pad($count, 6, '0', STR_PAD_LEFT);
-    }
+    }*/
 }

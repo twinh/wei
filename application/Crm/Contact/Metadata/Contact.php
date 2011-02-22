@@ -115,9 +115,9 @@ class Crm_Contact_Metadata_Contact extends Common_Metadata
                             'customer-source',
                         ),
                     ),
-                    'filter' => array(
+                    'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'filter'),
+                            array('Common_Helper_Option', 'sanitise'),
                             'customer-source',
                         ),
                         'view' => 'list',
@@ -299,7 +299,7 @@ class Crm_Contact_Metadata_Contact extends Common_Metadata
                     'fieldMap' => array(
                         'parent_id' => 'full_name',
                     ),
-                    'set' => array(
+                    'asc' => array(
                         'namespace' => 'Crm',
                         'module' => 'Contact',
                         'controller' => 'Contact',
@@ -338,24 +338,24 @@ class Crm_Contact_Metadata_Contact extends Common_Metadata
         ));
     }
 
-    public function filterEditCustomerId($value, $name, $data, $dataCopy)
+    public function sanitiseEditCustomerId($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::filterPopupCustomer($value, $name, 'name', $this);
+        Crm_Helper::sanitisePopupCustomer($value, $name, 'name', $this);
         return $value;
     }
 
-    public function filterEditParentId($value, $name, $data, $dataCopy)
+    public function sanitiseEditParentId($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::filterPopupContact($value, $name, '', $this);
+        Crm_Helper::sanitisePopupContact($value, $name, '', $this);
         return $value;
     }
 
-    public function filterListFullName($value, $name, $data, $dataCopy)
+    public function sanitiseListFullName($value, $name, $data, $dataCopy)
     {
         return $dataCopy['last_name'] . $dataCopy['first_name'];
     }
 
-    public function filterViewFullName($value, $name, $data, $dataCopy)
+    public function sanitiseViewFullName($value, $name, $data, $dataCopy)
     {
         return $dataCopy['last_name'] . $dataCopy['first_name'];
     }

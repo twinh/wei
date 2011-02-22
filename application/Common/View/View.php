@@ -29,39 +29,50 @@ class Common_View_View extends Common_View
 {
     public function  preDisplay()
     {
+        parent::preDisplay();
+        $this->setElement('content', '<resource><theme>/<defaultNamespace>/element/common/view<suffix>');
+
         // 初始化变量,方便调用
         $primaryKey     = $this->primaryKey;
         $meta           = $this->meta;
-        $metaHelper     = $this->metaHelper;
         $data           = $this->data;
         $request        = Qwin::call('-request');
         $config         = Qwin::config();
         $url            = Qwin::call('-url');
         $asc            = $config['asc'];
         $lang           = Qwin::call('-lang');
-        $jqGridWidget   = Qwin::widget('jqgrid');
-        $jqGrid         = array();
+        
+        /* @var $formWidget Form_Widget */
+        $formWidget = Qwin::widget('form');
+        $formOption = array(
+            'meta'      => $meta,
+            'action'    => 'view',
+            'data'      => $this->data,
+            'view'      => 'view.php',
+        );
 
-        $orderedFeid = $metaHelper->orderField($meta);
-        $layout = $metaHelper->getTableLayout($meta, $orderedFeid, 'view', $meta['page']['tableLayout']);
+        /* @var $jqGridWidget JqGrid_Widget */
+        $jqGridWidget   = Qwin::widget('jqgrid');
+        $jqGridOptions  = array();
 
         // 关联列表的数据配置
         //$relatedListConfig = $metaHelper->getRelatedListConfig($meta);
-        $relatedListMetaList = $metaHelper->getModelMetadataByType($meta, 'relatedList');
+        /* @var $meta Qwin_Application_Metadata */
+        $relatedListMetaList = $meta->getModelMetadataByType('relatedList');
+
         // 构建每一个的jqgrid数据
-        $jqGridList = $jqGridJsonList = $tabTitle = $moduleLang = array();
+        $jqGridList = $tabTitle = $moduleLang = array();
         foreach ($relatedListMetaList as $alias => $relatedMeta) {
             $jqGrid = array();
             $model = $meta['model'][$alias];
-            $relatedAsc = $model['asc'];
-            $uniqueId = strtolower(implode('-', $relatedAsc));
-            $relatedpPrimaryKey = $relatedMeta['db']['primaryKey'];
-            $lang->appendByAsc($relatedAsc);
+            
+            $lang->appendByAsc($model['asc']);
 
             $tabTitle[$alias] = $lang[$relatedMeta['page']['title']];
 
-            // 获取栏数据
-            $listLayout = $metaHelper->getListLayout($relatedMeta);
+            
+            // 获取并合并布局
+            $listLayout = $jqGridWidget->getLayout($relatedMeta);
             if (null != $model['list']) {
                 $listLayout = array_intersect($listLayout, (array)$model['list']);
             }
@@ -70,52 +81,27 @@ class Common_View_View extends Common_View
             if (false !== $key) {
                 unset($listLayout[$key]);
             }
-            $listLayoutQuery = implode(',', $listLayout);
-            $col = $jqGridHepler->getColByListLayout($listLayout, $relatedMeta, $lang);
-            $jqGrid['colNames'] = $col['colNames'];
-            $jqGrid['colModel'] = $col['colModel'];
+            $col = $jqGridWidget->getColByListLayout($listLayout, $relatedMeta, $lang);
+            $option['colNames'] = $col['colNames'];
+            $option['colModel'] = $col['colModel'];
 
             // 获取json数据的地址
-            $jqGrid['url'] = $url->url(array('json' => '1') + $model['set'] + array('search' => $model['foreign'] . ':' . $data[$model['local']]) + array('list' => $listLayoutQuery));
-
-            // 设置排序
-            if(!empty($relatedMeta['db']['order'])) {
-                $jqGrid['sortname']  = $relatedMeta['db']['order'][0][0];
-                $jqGrid['sortorder'] = $relatedMeta['db']['order'][0][1];
-            } else {
-                $jqGrid['sortname']  = $relatedpPrimaryKey;
-                $jqGrid['sortorder'] = 'DESC';
-            }
-
-            // 设置Url参数的名称
-            $jqGrid['rowNum']        = $request->getLimit();
-            $jqGrid['rowNum']        <= 0 && $jqGrid['rowNum'] = $meta['db']['limit'];
-            $jqGrid['prmNames'] = array(
-                'page'              => $request->getOption('page'),
-                'rows'              => $request->getOption('row'),
-                'sort'              => $request->getOption('orderField'),
-                'order'             => $request->getOption('orderType'),
-                'search'            => '_search',
+            $option['url'] = $url->url(
+                array('json' => '1')
+                + $model['asc']
+                + array('search' => $model['foreign'] . ':' . $data[$model['local']])
+                + array('list' => implode(',', $listLayout))
             );
-            /*$jqGrid['prmNames'] = array(
-                'page'              => $uniqueId . '-page',
-                'rows'              => $uniqueId . '-row',
-                'sort'              => $uniqueId . '-order-field',
-                'order'             => $uniqueId . '-order-type',
-                'search'            => '_search',
-            );*/
 
-            // 设置独立的编号以区分
-            //$jqGrid['toolbar']          = false;
-            $jqGrid['object']           = '#ui-' . $alias . '-table' ;
-            $jqGrid['toolbarObject']    = '#ui-' . $alias . '-toolbar' ;
-            $jqGrid['pager']            = '#ui-' . $alias . '-page' ;
+            $jqGrid = array(
+                'asc'       => $model['asc'],
+                'ascId'     => strtolower(implode('-', $model['asc'])),
+                'meta'      => $relatedMeta,
+                'layout'    => (array)$model['list'],
+                'option'    => $option,
+            );
 
-            $jqGrid['asc']              = $relatedAsc;
-
-            $jqGrid = $jqGridHepler->render($jqGrid);
             $jqGridList[$alias] = $jqGrid;
-            $jqGridListJson[$alias] = Qwin_Util_Array::jsonEncode($jqGrid);
         }
         $group = $meta['group'];
 

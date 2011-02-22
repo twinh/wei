@@ -122,7 +122,7 @@ class Common_Article_Metadata_Detail extends Common_Metadata
         ));
     }
 
-    public function filterDbMeta($value, $name, $data, $copyData)
+    public function sanitiseDbMeta($value, $name, $data, $copyData)
     {
         return serialize(array(
             'keywords' => $copyData['meta_keywords'],
@@ -130,32 +130,32 @@ class Common_Article_Metadata_Detail extends Common_Metadata
         ));
     }
 
-    public function filterEditMeta($value, $name, $data, $copyData)
+    public function sanitiseEditMeta($value, $name, $data, $copyData)
     {
         return @unserialize($value);
     }
 
-    public function filterEditMetaKeywords($value, $name, $data, $copyData)
+    public function sanitiseEditMetaKeywords($value, $name, $data, $copyData)
     {
         return $data['meta']['keywords'];
     }
 
-    public function filterEditMetaDescription($value, $name, $data, $copyData)
+    public function sanitiseEditMetaDescription($value, $name, $data, $copyData)
     {
         return $data['meta']['description'];
     }
 
-    public function filterViewMeta($value, $name, $data, $copyData)
+    public function sanitiseViewMeta($value, $name, $data, $copyData)
     {
         return @unserialize($value);
     }
 
-    public function filterViewMetaKeywords($value, $name, $data, $copyData)
+    public function sanitiseViewMetaKeywords($value, $name, $data, $copyData)
     {
         return $data['meta']['keywords'];
     }
 
-    public function filterViewMetaDescription($value, $name, $data, $copyData)
+    public function sanitiseViewMetaDescription($value, $name, $data, $copyData)
     {
         return $data['meta']['description'];
     }

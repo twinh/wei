@@ -100,9 +100,9 @@ class Crm_Customer_Metadata_Care extends Common_Metadata
                             'customer-care-type',
                         ),
                     ),
-                    'filter' => array(
+                    'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'filter'),
+                            array('Common_Helper_Option', 'sanitise'),
                             'customer-care-type',
                         ),
                         'view' => 'list',
@@ -155,7 +155,7 @@ class Crm_Customer_Metadata_Care extends Common_Metadata
                     'fieldMap' => array(
                         'customer_id' => 'name',
                     ),
-                    'set' => array(
+                    'asc' => array(
                         'namespace' => 'Crm',
                         'module' => 'Customer',
                         'controller' => 'Customer',
@@ -182,15 +182,15 @@ class Crm_Customer_Metadata_Care extends Common_Metadata
         ));
     }
 
-    public function filterEditCustomerId($value, $name, $data, $dataCopy)
+    public function sanitiseEditCustomerId($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::filterPopupCustomer($value, $name, 'name', $this);
+        Crm_Helper::sanitisePopupCustomer($value, $name, 'name', $this);
         return $value;
     }
 
-    public function filterEditContactId($value, $name, $data, $dataCopy)
+    public function sanitiseEditContactId($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::filterPopupContact($value, $name, '', $this);
+        Crm_Helper::sanitisePopupContact($value, $name, '', $this);
         return $value;
     }
 }

@@ -29,7 +29,7 @@
 class Qwin_Application_Metadata extends Qwin_Metadata
 {
     /**
-     * @var array $_filterOption   数据转换的选项
+     * @var array $_sanitiseOption   数据处理的选项
      *
      *      -- view                 是否根据视图类关联模型的配置进行转换
      *                              提示,如果转换的数据作为表单的值显示,应该禁止改选项
@@ -38,19 +38,19 @@ class Qwin_Application_Metadata extends Qwin_Metadata
      *
      *      -- type                 是否进行强类型的转换,类型定义在['fieldName]['db']['type']
      *
-     *      -- meta                 是否使用元数据的filter配置进行转换
+     *      -- meta                 是否使用元数据的sanitise配置进行转换
      *
-     *      -- filter            是否使用转换器进行转换
+     *      -- sanitise             是否使用转换器进行转换
      *
      *      -- relatedMeta          是否转换关联的元数据
      */
-    protected $_filterOption = array(
+    protected $_sanitiseOption = array(
         'view'          => true,
         'null'          => true,
         'type'          => true,
         'meta'          => true,
-        'filter'     => true,
-        'link'          => true,
+        'sanitise'      => true,
+        'link'          => false,
         'relatedMeta'   => true,
     );
 
@@ -150,6 +150,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
      * 根据元数据配置,获取Doctrine的查询对象
      *
      * @param array $asc 元数据配置
+     * @return Doctrine_Query 查询对象
      */
     public function getQueryByAsc($asc, $type = array(), $name = array())
     {
@@ -488,23 +489,25 @@ class Qwin_Application_Metadata extends Qwin_Metadata
     }
 
     /**
-     * 数据转换,用于 edit 等二维数组的数据
-     * 该方法包含两部分的转换,一个是元数据的转换配置,一个是转换器的转换方法
+     * 处理数据
      *
-     * @param array $data 准备转换的数据
-     * @param string $action 转换的行为,例如Add,Edit
-     * @param Qwin_Metadata $meta 元数据
-     * @param object $filterObject 转换器的对象,默认是元数据自身
-     * @return array 经过转换的数据
+     * @param array $data 处理的数据
+     * @param array $action 处理的行为,如db,list,view
+     * @param array $option 配置选项
+     * @return array
      */
-    public function filterOne($data, $action, array $option = array())
+    public function sanitise($data, $action = 'db', array $option = array(), array $dataCopy = array())
     {
-        $option = array_merge($this->_filterOption, $option);
-        $dataCopy = $data;
+        $option = array_merge($this->_sanitiseOption, $option);
+        empty($dataCopy) && $dataCopy = $data;
         $action = strtolower($action);
-        $meta = $this;
 
-        if ($option['view']) {
+        // 加载流程处理对象
+        if ($option['meta']) {
+            $flow = Qwin::call('Qwin_Flow');
+        }
+
+        /*if ($option['view']) {
             foreach ($meta['model'] as $model) {
                 if ('view' == $model['type']) {
                     foreach ($model['fieldMap'] as $localField => $foreignField) {
@@ -513,23 +516,20 @@ class Qwin_Application_Metadata extends Qwin_Metadata
                     }
                 }
             }
-        }
-        
-        // 对自身域进行转换
-        foreach ($meta['field'] as $field) {
-            $name = $field['form']['name'];
+        }*/
 
-            // 初始化两数组的值,如果不存在,则设为空
-            if (isset($data[$name])) {
-                'NULL' === $data[$name] && $data[$name] = null;
-                '' === $data[$name] && $data[$name] = null;
-                $newData[$name] = $data[$name];
-            } else {
-                $newData[$name] = $data[$name] = null;
+        foreach ($data as $name => $value) {
+            if (!isset($this->field[$name])) {
+                continue;
+            }
+
+            // 空转换 如果不存在,则设为空
+            if ('NULL' === $data[$name] || '' === $data[$name]) {
+                $data[$name] = null;
             }
 
             // 类型转换
-            if ($option['type'] && $field['db']['type']) {
+            /*if ($option['type'] && $field['db']['type']) {
                 if (null != $newData[$name]) {
                     if ('string' == $field['db']['type']) {
                         $newData[$name] = (string)$newData[$name];
@@ -541,85 +541,53 @@ class Qwin_Application_Metadata extends Qwin_Metadata
                         $newData[$name] = (array)$newData[$name];
                     }
                 }
-            }
+            }*/
 
             // 根据元数据中转换器的配置进行转换
-            if ($option['meta'] && isset($field['filter'][$action]) && is_array($field['filter'][$action])) {
-                $newData[$name] = $this->filter($field['filter'][$action], $data[$name]);
+            if ($option['meta'] && isset($this->field[$name]['sanitiser'][$action])) {
+                $data[$name] = $flow->call(array($this->field[$name]['sanitiser'][$action]), $value);
             }
 
             // 使用转换器中的方法进行转换
-            if ($option['filter']) {
-                $methodName = str_replace(array('_', '-'), '', 'filter' . $action . $name);
-                if (method_exists($this, $methodName)) {
-                    $newData[$name] = call_user_func_array(
-                        array($this, $methodName),
-                        array($newData[$name], $name, $newData, $dataCopy)
+            if ($option['sanitise']) {
+                $method = str_replace(array('_', '-'), '', 'sanitise' . $action . $name);
+                if (method_exists($this, $method)) {
+                    $data[$name] = call_user_func_array(
+                        array($this, $method),
+                        array($value, $name, $data, $dataCopy)
                     );
                 }
             }
 
             // 转换链接
-            if ($option['link'] && 1 == $field['attr']['isLink'] && method_exists($this, 'setIsLink')) {
-                $newData[$name] = call_user_func_array(
+            if ($option['link'] && 1 == $this->field[$name]['attr']['isLink'] && method_exists($this, 'setIsLink')) {
+                $data[$name] = call_user_func_array(
                     array($this, 'setIsLink'),
-                    array($newData[$name], $name, $newData, $dataCopy, $action)
+                    array($value, $name, $data, $dataCopy, $action)
                 );
             }
         }
 
         // 对db类型的关联元数据进行转换
         if ($option['relatedMeta']) {
-            foreach ($this->getModelMetadataByType($meta, 'db') as $name => $relatedMeta) {
+            foreach ($this->getModelMetadataByType('db') as $name => $relatedMeta) {
                 !isset($data[$name]) && $data[$name] = array();
                 // 不继续转换关联元数据
                 $option['relatedMeta'] = false;
-                $newData[$name] = $this->filterOne($data[$name], $action, $relatedMeta, $relatedMeta, $option);
+                $data[$name] = $relatedMeta->sanitise($data[$name], $action, $option);
             }
         }
-        
-        return $newData;
-    }
 
-    /**
-     * 根据配置转换一个值
-     *
-     * @param array $set 数组配置
-     * @param mixed  要转换的值
-     * @return mixed 转换结果
-     */
-    public function filter($set, $value)
-    {
-        array_unshift($set, null);
-        $set[0] = $set[1];
-        $set[1] = $value;
-        return Qwin_Class::callByArray($set, $value);
-    }
-
-    /**
-     * 数据转换,用于 list 等三位数组的数据
-     *
-     * @param array $data 准备转换的数据
-     * @param string $action 转换的行为,例如Add,Edit
-     * @param Qwin_Metadata $meta 元数据
-     * @param object $filterObject 转换器的对象,默认是元数据自身
-     * @return array 经过转换的数据
-     */
-    public function filterArray($data, $action, array $option = array())
-    {
-        foreach ($data as &$row) {
-            $row = $this->filterOne($row, $action, $option);
-        }
         return $data;
     }
-    
+
     public function getModelMetadataByType($type = 'db')
     {
-        if (empty($this->model)) {
+        if (empty($this['model'])) {
             return array();
         }
         $result = array();
-        foreach ($this->model as $name => $model) {
+        foreach ($this['model'] as $name => $model) {
             if ($model['enabled'] && $type == $model['type']) {
                 if (!isset($model['metadata'])) {
                     $metadataClass = $this->getClassName('Metadata', $model['asc']);
@@ -748,78 +716,139 @@ class Qwin_Application_Metadata extends Qwin_Metadata
     }
 
     /**
-     * 验证一个域的数据
-     *
-     * @param string $name 域的名称
-     * @param string $meta 域的验证配置
-     * @param string $data 包含各域的值的数组,例如从数据库取出或客户端提交的数据
-     * @param object|null $validateObj 验证器对象
-     * @return true/Qwin_Validator_Result true表示通过验证,Qwin_Validator_Result表示不通过,对象中包含错误信息
+     * 验证未通过的域信息
+     * @var array
+     * @example $this->_invalidData = array(
+     *              'field' => array(
+     *                  'rule1' => 'message1',
+     *                  'rule2' => 'message2',
+     *              )
+     *          );
      */
-    public function validateOne($name, $data, $validator, $validateObj = null, $option = array())
+    protected $_invalidData = array();
+    
+    /**
+     * 设置通过元数据方法验证失败时的提示信息
+     *
+     * @param string $field 域
+     * @param string $message 提示信息
+     * @return Qwin_Application_Metadata 当前对象
+     */
+    public function setInvalidMetaMessage($field, $message)
     {
-        $option = array_merge($this->_validateOption, $option);
-
-        // 根据验证器的方法进行验证
-        if ($option['validator'] && null != $validateObj) {
-            $method = 'validate' . str_replace(array('_', '-'), '', $name);
-            !isset($data[$name]) && $data[$name] = null;
-            $result = Qwin::callByArray(array(
-                array($validateObj, $method),
-                $data[$name],
-                $name,
-                $data,
-            ));
-            // 除了返回错误的对象外,其他都认为是验证通过
-            if (is_object($result) && 'Qwin_Validator_Result' == get_class($result)) {
-                return $result;
-            }
-        }
-
-        // 根据元数据进行验证
-        if(!$option['meta'] || empty($validator['rule']))
-        {
-            return true;
-        }
-        $ext = Qwin::call('Qwin_Class_Extension');
-        foreach ($validator['rule'] as $rule => $param) {
-            $class = $ext->getClass($rule);
-            if (false == $class) {
-                return true;
-            }
-            $array = array(
-                array($class, $rule),
-                $data[$name],
-                $param,
-            );
-            if (false === Qwin::callByArray($array)) {
-                return new Qwin_Validator_Result(false, $name, $validator['message'][$rule], 0, $param);
-            }
-        }
-        return true;
+        $this->_invalidData[$field]['validate' . $field] = $message;
+        return $this;
     }
 
     /**
-     * 验证一组域的数据
+     * 获取验证失败的域
      *
-     * @param array $data 验证的数据
-     * @param array $data 元数据对象
-     * @param object|null $validateObj 转换器对象
-     * @return true|Qwin_Validate_Result 是否通过验证,true表示通过,Qwin_Validate_Result对象是包含错误信息的返回结果
+     * @return array
      */
-    public function validateArray($data, Qwin_Metadata $meta, $validateObj = null)
+    public function getInvalidFields()
     {
-        // 验证自身域
-        foreach ($meta['field'] as $field) {
-            $result = $this->validateOne($field['form']['name'], $data, $field['validator'], $validateObj);
-            // 返回错误信息
-            if (true !== $result) {
-                return $result;
+        return array_keys($this->_invalidData);
+    }
+
+    /**
+     * 获取验证失败的信息
+     *
+     * @return array
+     */
+    public function getInvalidData()
+    {
+        return $this->_invalidData;
+    }
+
+    /**
+     * 获取未通过域的提示信息
+     *
+     * @param Qwin_Application_Language $lang 语言对象
+     * @param string $template 模板
+     * @return string 
+     */
+    public function getInvalidMessage(Qwin_Application_Language $lang, $template = null)
+    {
+        $msssage = '';
+        foreach ($this->_invalidData as $field => $row) {
+            foreach ($row as $rule => $message) {
+                $msssage .= $lang[$message] . PHP_EOL;
+            }
+        }
+        return $msssage;
+    }
+
+    /**
+     * 获取验证失败的规则
+     *
+     * @param string $field 域
+     * @return array
+     */
+    public function getInvalidRulesByField($field)
+    {
+        if (isset($this->_invalidData[$field])) {
+            return array_keys($this->_invalidData[$field]);
+        }
+        return array();
+    }
+
+    /**
+     * 验证数据
+     *
+     * @param array $data 数据数组,键名表示域的名称,值表示域的值
+     * @param array $option 配置选修
+     * @return boolen
+     */
+    public function validate(array $data, array $option = array())
+    {
+        $option = array_merge($this->_validateOption, $option);
+
+        // 重置验证不通过的域
+        $this->_invalidData = array();
+
+        // 加载验证对象
+        if ($option['validator']) {
+            $validator = Qwin::call('Qwin_Validator');
+        }
+
+        foreach ($data as $name => $value) {
+            // 跳过不存在的域
+            if (!isset($this->field[$name])) {
+                continue;
+            }
+
+            // 根据验证对象进行验证
+            if ($option['validator'] && !empty($this->field[$name]['validator']['rule'])) {
+                $validateData = $this->field[$name]['validator'];
+                foreach ($validateData['rule'] as $rule => $param) {
+                    if (false === $validator->valid($rule, $param)) {
+                        if (!isset($validateData['message'][$rule])) {
+                            $this->_invalidData[$name][$rule] = 'VALIDATE_' . strtoupper($rule);
+                        }
+                        return false;
+                    }
+                }
+            }
+
+            // 根据元数据进行验证
+            if ($option['meta']) {
+                $method = 'validate' . str_replace(array('_', '-'), '', $name);
+                if (method_exists($this, $method)) {
+                    if (false === call_user_func_array(
+                        array($this, $method),
+                        array($value, $name, $data)
+                    )) {
+                        if (!isset($this->_invalidData[$name][$method])) {
+                            $this->_invalidData[$name][$method] = 'VALIDATE_' . strtoupper($method);
+                        }
+                        return false;
+                    }
+                }
             }
         }
 
         // 验证关联域
-        foreach ($this->getModelMetadataByType($meta, 'db') as $name => $relatedMeta) {
+        /*foreach ($this->getModelMetadataByType($meta, 'db') as $name => $relatedMeta) {
             !isset($data[$name]) && $data[$name] = array();
             $result = $this->validateArray($data[$name], $relatedMeta, $relatedMeta);
             // 返回错误信息
@@ -827,8 +856,8 @@ class Qwin_Application_Metadata extends Qwin_Metadata
                 $result->field = array($name, $result->field);
                 return $result;
             }
-        }
-        
+        }*/
+
         return true;
     }
 
@@ -989,20 +1018,6 @@ class Qwin_Application_Metadata extends Qwin_Metadata
         return $resource;
     }
 
-    public function fillDbData($data, $dbData)
-    {
-        foreach ($dbData as $field => $value) {
-            if (!is_array($value)) {
-                if (!array_key_exists($field, $data)) {
-                    $data[$field] = $value;
-                }
-            } else {
-               $data[$field] = $this->fillDbData($data[$field], $dbData[$field]);
-            }
-        }
-        return $data;
-    }
-
     public function saveRelatedDbData($meta, $data, $query)
     {
         $ctrler = Qwin::call('-controller');
@@ -1060,5 +1075,47 @@ class Qwin_Application_Metadata extends Qwin_Metadata
     public function getRelatedListConfig($meta)
     {
         
+    }
+
+    /**
+     * 过滤编辑数据,即改动过的,需要更新的数据
+     *
+     * @param array $data 从数据库取出的数据
+     * @param array $post 用户提交的数据
+     * @return array 
+     */
+    public function filterEditData($data, $post)
+    {
+        $result = array();
+        foreach ($this->field as $name => $field) {
+            if (
+                isset($post[$name])
+                && $post[$name] != $data[$name]
+                && 1 != $field['attr']['isReadonly']
+            ) {
+                $result[$name] = $post[$name];
+            }
+        }
+        return $result;
+    }
+
+    public function filterListData()
+    {
+        $result = array();
+        foreach ($this['field'] as $name => $field) {
+            if (1 == $field['attr']['isList']) {
+                $result[$name] = true;
+            }
+        }
+        return $result;
+    }
+
+    public function filterAddData($post)
+    {
+        $result = array();
+        foreach ($this['field'] as $name => $field) {
+            $result[$name] = isset($post[$name]) ? $post[$name] : null;
+        }
+        return $result;
     }
 }

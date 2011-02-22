@@ -86,11 +86,7 @@ class Qwin_Application_Language implements ArrayAccess
      */
     public function t($name = null)
     {
-        if(isset($this->_data[$name]))
-        {
-            return $this->_data[$name];
-        }
-        return $name;
+        return $this->offsetGet($name);
     }
 
     /**
@@ -134,7 +130,7 @@ class Qwin_Application_Language implements ArrayAccess
      */
     public function offsetGet($offset)
     {
-        return isset($this->_data[$offset]) ? $this->_data[$offset] : null;
+        return isset($this->_data[$offset]) ? $this->_data[$offset] : $offset;
     }
 
     /**

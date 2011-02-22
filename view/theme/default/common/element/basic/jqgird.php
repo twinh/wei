@@ -31,7 +31,7 @@
 <script type="text/javascript">
 jQuery(function($){
     var primaryKey = '<?php echo $primaryKey?>';
-    var jqGridObj = $('#<?php echo $jqGrid['id'] ?>');
+    var jqGridObj = $('#<?php echo $jqGridWidget->getId() ?>');
 
     <?php if (!isset($isPopup)) : ?>
     jqGridObj.jqGrid('setGridParam',{
@@ -54,11 +54,11 @@ jQuery(function($){
     <?php endif; ?>
 
     if (document.getElementById('ui-box-tab')) {
-        $(jqGrid.object).jqGrid('setGridWidth', $('#ui-box-tab').width() - 30);
+        jqGridObj.jqGrid('setGridWidth', $('#ui-box-tab').width() - 30);
     }
 
     // 点击删除按钮
-    $('#action-<?php echo $ascString ?>-delete').click(function(){
+    $('#action-<?php echo $jqGrid['ascId'] ?>-delete').click(function(){
         var keyList = new Array(),
             rowList = jqGridObj.jqGrid('getGridParam','selarrrow');
         if (rowList.length == 0) {
@@ -72,15 +72,14 @@ jQuery(function($){
         var addition = {};
         addition['action'] = 'Delete';
         addition[primaryKey] = keyList.join(',');
-        if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE))
-        {
+        if (confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE)) {
             window.location.href = Qwin.url.createUrl(Qwin.get, addition);
         }
         return false;
     });
 
     // 点击复制按钮
-    $('#action-<?php echo $ascString ?>-copy').click(function(){
+    $('#action-<?php echo $jqGrid['ascId'] ?>-copy').click(function(){
         var rowList = jqGridObj.jqGrid('getGridParam','selarrrow');
         if (rowList.length != 1) {
             alert(Qwin.Lang.MSG_CHOOSE_ONLY_ONE_ROW);

@@ -45,7 +45,7 @@ class Common_Service_JsonList extends Common_Service
         'limit'     => null,
         'asAction'  => 'list',
         'isView'    => true,
-        'filter'    => true,
+        'sanitise'  => true,
         'display'   => true,
         'viewClass' => 'Common_View_JsonList',
     );
@@ -54,9 +54,13 @@ class Common_Service_JsonList extends Common_Service
     {
         // 初始配置
         $option     = array_merge($this->_option, $option);
-        $app        = Qwin::call('-app');
-        $meta       = $app->getMetadataByAsc($option['asc']);
         $listField  = $option['list'];
+
+        /* @var $app Qwin_Application */
+        $app = Qwin::call('-app');
+
+        /* @var $meta Common_Metadata */
+        $meta = $app->getMetadataByAsc($option['asc']);
 
         // 从模型获取数据
         $query = $meta->getQueryByAsc($option['asc'], array('db', 'view'));
@@ -72,8 +76,16 @@ class Common_Service_JsonList extends Common_Service
         $total  = $query->count();
 
         // 对数据进行转换
-        if ($option['filter']) {
-            $data = $meta->filterArray($data, $option['asAction'], array('view' => $option['isView']));
+        if ($option['sanitise']) {
+            // TODO listField & listField2
+            $listField2 = $meta->filterListData();
+            foreach ($data as &$row) {
+                $rowTemp = array_intersect_key($row, $listField2) + $listField2;
+                $row = $meta->sanitise($rowTemp, $option['asAction'], array(
+                    'view' => $option['isView'],
+                    'link' => true,
+                ), $row);
+            }
         }
 
         // 设置返回结果

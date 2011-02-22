@@ -38,10 +38,10 @@ class Common_Service_View extends Common_Service
             'controller'    => null,
             'action'        => null,
         ),
-        'value'     => null,
+        'id'        => null,
         'asAction'  => 'view',
         'isView'    => true,
-        'filter'    => true,
+        'sanitise'  => true,
         'display'   => true,
         'viewClass' => 'Common_View_View',
     );
@@ -62,13 +62,17 @@ class Common_Service_View extends Common_Service
     {
         // 初始配置
         $option     = array_merge($this->_option, $option);
+        
+        /* @var $app Qwin_Application */
         $app        = Qwin::call('-app');
+        
+        /* @var $meta Common_Metadata */
         $meta       = $app->getMetadataByAsc($option['asc']);
         $primaryKey = $meta['db']['primaryKey'];
 
         // 从模型获取数据
         $query = $meta->getQueryByAsc($option['asc'], array('db', 'view'));
-        $dbData = $query->where($primaryKey . ' = ?', $option['value'])->fetchOne();
+        $dbData = $query->where($primaryKey . ' = ?', $option['id'])->fetchOne();
 
         // 记录不存在,加载错误视图
         if (false == $dbData) {
@@ -83,6 +87,7 @@ class Common_Service_View extends Common_Service
                 return $result;
             }
         }
+        $data = $dbData->toArray();
 
         // 设置钩子:取得数据
         Qwin::hook('viewRecord', array(
@@ -90,9 +95,9 @@ class Common_Service_View extends Common_Service
             'meta' => $meta,
         ));
 
-        // 对数据进行转换
-        if ($option['filter']) {
-            $data = $meta->filterOne($dbData->toArray(), $option['asAction'], array('view' => $option['isView']));
+        // 转换数据
+        if ($option['sanitise']) {
+            $data = $meta->sanitise($data, $option['asAction'], array('view' => $option['isView']));
         }
 
         // 设置返回结果

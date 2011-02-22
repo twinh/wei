@@ -206,9 +206,9 @@ class Common_Article_Metadata_Article extends Common_Metadata
                         'isDbField' => 1,
                         'isDbQuery' => 1,
                     ),
-                    'filter' => array(
+                    'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'filter'),
+                            array('Common_Helper_Option', 'sanitise'),
                             'yes-or-no',
                         ),
                     ),
@@ -230,9 +230,9 @@ class Common_Article_Metadata_Article extends Common_Metadata
                         'isDbField' => 1,
                         'isDbQuery' => 1,
                     ),
-                    'filter' => array(
+                    'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'filter'),
+                            array('Common_Helper_Option', 'sanitise'),
                             'yes-or-no',
                         ),
                     ),
@@ -328,7 +328,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
         ));
     }
 
-    public function filterAddCategoryId($val, $name, $data, $copyData)
+    public function sanitiseAddCategoryId($val, $name, $data, $copyData)
     {
         if(isset($_GET['sign']))
         {
@@ -345,7 +345,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
         return $val;
     }
 
-    public function filterAddCategory2()
+    public function sanitiseAddCategory2()
     {
         if(isset($_GET['sign']))
         {
@@ -353,7 +353,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
         }
     }
 
-    /*public function filterEditCategoryId($val, $name, $data)
+    /*public function sanitiseEditCategoryId($val, $name, $data)
     {
         // 专题
         if(NULL != $data['category_2'])
@@ -371,17 +371,17 @@ class Common_Article_Metadata_Article extends Common_Metadata
         return $val;
     }*/
 
-    public function filterListTitle($value, $name, $data, $copyData)
+    public function sanitiseListTitle($value, $name, $data, $copyData)
     {
         return Qwin_Util_Html::titleDecorator($value, $copyData['title_style'], $copyData['title_color']);
     }
 
-    public function filterViewTitle($value, $name, $data, $copyData)
+    public function sanitiseViewTitle($value, $name, $data, $copyData)
     {
         return Qwin_Util_Html::titleDecorator($value, $copyData['title_style'], $copyData['title_color']);
     }
 
-    public function filterEditTitleStyle($value, $name, $data, $copyData)
+    public function sanitiseEditTitleStyle($value, $name, $data, $copyData)
     {
         if (is_array($value)) {
             return explode('|', $value[0]);
@@ -389,7 +389,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
         return $value;
     }
 
-    public function filterEditTitleColor($value, $name, $data, $copyData)
+    public function sanitiseEditTitleColor($value, $name, $data, $copyData)
     {
         null == $value && $value = 'NULL';
         return $value;
@@ -399,12 +399,12 @@ class Common_Article_Metadata_Article extends Common_Metadata
      *
      * @todo 检查
      */
-    public function filterDbTitleStyle($value, $name, $data, $copyData)
+    public function sanitiseDbTitleStyle($value, $name, $data, $copyData)
     {
         return implode('|', (array)$value);
     }
 
-    public function filterDbTitleColor($value, $name, $data, $copyData)
+    public function sanitiseDbTitleColor($value, $name, $data, $copyData)
     {
         'NULL' == $value && $value = null;
         return $value;

@@ -2,9 +2,6 @@
 /**
  * ActionController
  *
- * AciionController is controller with some default action,such as index,list,
- * add,edit,delete,view and so on.
- *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -67,10 +64,8 @@ class Common_ActionController extends Common_Controller
     {
         $service = new Common_Service_View();
         return $service->process(array(
-            'asc' => $this->_asc,
-            'data' => array(
-                'primaryKeyValue' => $this->request->getPrimaryKeyValue($this->_asc),
-            ),
+            'asc'       => $this->_asc,
+            'id'        => $this->request->getPrimaryKeyValue($this->_asc),
         ));
     }
 
@@ -84,27 +79,16 @@ class Common_ActionController extends Common_Controller
         if (!$this->request->isPost()) {
             $service = new Common_Service_Form();
             return $service->process(array(
-                'asc' => $this->_asc,
-                'data' => array(
-                    'primaryKeyValue' => $this->request->getPrimaryKeyValue($this->_asc),
-                    'initalData' => $this->request->getInitialData(),
-                )
+                'asc'       => $this->_asc,
+                'id'        => $this->request->getPrimaryKeyValue($this->_asc),
+                'initalData'=> $this->request->getInitialData(),
             ));
         } else {
             $service = new Common_Service_Add();
             return $service->process(array(
-                'asc' => $this->_asc,
-                'data' => array(
-                    'db' => $_POST,
-                ),
-                'callback' => array(
-                    'afterDb' => array(
-                        array($this, 'onAfterDb'),
-                    ),
-                ),
-                'view' => array(
-                    'url' => urldecode($this->request->post('_page')),
-                ),
+                'asc'       => $this->_asc,
+                'data'      => $_POST,
+                'url'       => urldecode($this->request->post('_page')),
             ));
         }
     }
@@ -120,7 +104,7 @@ class Common_ActionController extends Common_Controller
             $service = new Common_Service_View();
             return $service->process(array(
                 'asc'       => $this->_asc,
-                'value'     => $this->request->getPrimaryKeyValue($this->_asc),
+                'id'        => $this->request->getPrimaryKeyValue($this->_asc),
                 'asAction'  => 'edit',
                 'isView'    => false,
                 'viewClass' => 'Common_View_Edit',
@@ -128,18 +112,9 @@ class Common_ActionController extends Common_Controller
         } else {
             $service = new Common_Service_Edit();
             return $service->process(array(
-                'asc' => $this->_asc,
-                'data' => array(
-                    'db' => $_POST,
-                ),
-                'callback' => array(
-                    'afterDb' => array(
-                        array($this, 'onAfterDb'),
-                    ),
-                ),
-                'view' => array(
-                    'url' => urldecode($this->request->post('_page')),
-                ),
+                'asc'       => $this->_asc,
+                'data'      => $_POST,
+                'url'       => urldecode($this->request->post('_page')),
             ));
         }
     }
@@ -156,11 +131,6 @@ class Common_ActionController extends Common_Controller
             'asc' => $this->_asc,
             'data' => array(
                 'primaryKeyValue' => $this->request->getPrimaryKeyValue($this->_asc),
-            ),
-            'callback' => array(
-                'afterDb' => array(
-                    array($this, 'onAfterDb'),
-                ),
             ),
         ));
     }

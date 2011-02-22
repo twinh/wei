@@ -26,38 +26,31 @@
  */
 
 // 防止直接访问导致错误
-!defined('QWIN_PATH') && exit('Forbidden');
+defined('QWIN') or exit('Forbidden');
 $jQueryFile['tabs'] = $jQuery->loadUi('tabs', false);
 $minify->add($jQueryFile['tabs']['css'])
-	->add($jQueryFile['tabs']['js'])
-	->add(QWIN . '/view/theme/default/common/script/form.js');
+        ->add($jQueryFile['tabs']['js']);
 $operationField =  $this->loadWidget('Common_Widget_FormLink', array($data, $primaryKey));
 ?>
-<script>
-	jQuery(function($) {
-		$( "#ui-box-tab" ).tabs();
-	});
-	</script>
+<script type="text/javascript">
+jQuery(function($) {
+    $('fieldset > legend').click(function(){
+        $(this).next().toggle();
+    });
 
-  <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
-    <div class="ui-box-header">
-        <?php $this->loadWidget('Common_Widget_Header') ?>
+    $('table.ui-form-table input, table.ui-form-table select').addClass('ui-widget-content ui-corner-all');
+    $('#ui-box-tab').tabs();
+});
+</script>
+<div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
+<div class="ui-box-header">
+    <?php $this->loadWidget('Common_Widget_Header') ?>
+</div>
+<div class="ui-form-content ui-box-content ui-widget-content">
+    <div class="ui-operation-field">
+        <?php echo $operationField ?>
     </div>
-    <div class="ui-form-content ui-box-content ui-widget-content">
-        <form id="post-form" name="form" method="post" action="">
-        <div class="ui-operation-field">
-            <?php echo $operationField ?>
-        </div>
-        <div class="ui-helper-hidden">
-            <?php
-            // TODO 逻辑分离
-            // 将隐藏域单独分开
-            if(isset($layout[-1])):
-                unset($layout[-1]);
-            endif;
-            ?>
-        </div>
-        <div id="ui-box-tab" class="ui-box-tab">
+    <div id="ui-box-tab" class="ui-box-tab">
         <ul>
             <li><a href="#ui-tab-1"><?php echo $lang[$meta['page']['title']] . $lang['LBL_TAB_DATA'] ?></a></li>
         <?php
@@ -69,72 +62,10 @@ $operationField =  $this->loadWidget('Common_Widget_FormLink', array($data, $pri
         ?>
         </ul>
     <div id="ui-tab-1">
-        <?php foreach($layout as $groupKey => $fieldGroup): ?>
-        <fieldset id="ui-fieldset-<?php echo $groupKey ?>" class="ui-widget-content ui-corner-all">
-            <legend><?php echo qw_lang($group[$groupKey]) ?></legend>
-            <table class="ui-form-table" id="ui-form-table-<?php echo $groupKey ?>" width="100%">
-                <tr>
-                  <td width="12.5%"></td>
-                  <td width="37.5%"></td>
-                  <td width="12.5%"></td>
-                  <td width="37.5%"></td>
-                </tr>
-                <?php
-                foreach($fieldGroup as $fieldRow):
-                ?>
-                <tr>
-                    <?php
-                    if(1 == count($fieldRow)):
-                        $colspan = ' colspan="3"';
-                    else:
-                        $colspan = '';
-                    endif;
-                    foreach($fieldRow as $fieldCell):
-                        if('' == $fieldCell):
-                    ?>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <?php
-                        else:
-                            if(null == $fieldCell[0]):
-                                $tempMeta = $meta;
-                                $tempData = $data;
-                                $formSet = $tempMeta['field'][$fieldCell[1]]['form'];
-                                $formSet['_value'] = isset($tempData[$formSet['name']]) ? $tempData[$formSet['name']] : null;
-                            else:
-                                $tempMeta = $meta['metadata'][$fieldCell[0]];
-                                $tempData = $data[$fieldCell[0]];
-                                $formSet = $tempMeta['field'][$fieldCell[1]]['form'];
-
-                                $formSet['_value'] = isset($tempData[$formSet['name']]) ? $tempData[$formSet['name']] : null;
-                                $formSet['id'] = $fieldCell[0] . '_' . $formSet['name'];
-                                $formSet['name'] = $fieldCell[0] . '[' . $formSet['name'] . ']';
-                            endif;
-                            $formSet['class'] .= ' ui-widget-content ui-corner-all';
-                            $type = $tempMeta['field'][$fieldCell[1]]['form']['_type'];
-                    ?>
-                    <td class="ui-label-common"><label for="<?php echo $tempMeta['field'][$fieldCell[1]]['form']['id'] ?>"><?php echo qw_lang($tempMeta['field'][$fieldCell[1]]['basic']['title']) ?>:</label></td>
-                    <td class="ui-field-common ui-field-<?php echo $type ?>"<?php echo $colspan ?>>
-                      <?php echo qw_null_text($tempData[$fieldCell[1]]) ?>
-                    </td>
-                    <?php
-                        endif;
-                    endforeach;
-                    ?>
-                </tr>
-                <?php
-                endforeach;
-                ?>
-            </table>
-        </fieldset>
-        <?php endforeach ?>
-        <div id="ui-buttom-operation-field" class="ui-operation-field">
-            <?php echo $operationField ?>
-        </div>
-	</div>
+    <?php $formWidget->render($formOption); ?>
+    </div>
     <?php
     foreach($jqGridList as $alias => $jqGrid):
-        $jqGridJson = $jqGridListJson[$alias];
     ?>
     <div id="ui-tab-<?php echo $alias ?>">
         <?php require $this->decodePath('<resource><theme>/<defaultNamespace>/element/basic/jqgird<suffix>') ?>
@@ -142,7 +73,6 @@ $operationField =  $this->loadWidget('Common_Widget_FormLink', array($data, $pri
     <?php
     endforeach;
     ?>
-</div>
-        </form>
     </div>
-  </div>
+</div>
+</div>

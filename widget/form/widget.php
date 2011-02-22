@@ -35,6 +35,7 @@ class Form_Widget extends Qwin_Widget_Abstract
         'action'    => 'add',
         'column'    => 2,
         'data'      => array(),
+        'view'      => 'default.php',
     );
 
     /**
@@ -58,7 +59,13 @@ class Form_Widget extends Qwin_Widget_Abstract
         $form = $this->getLayout($meta, 'edit', $meta['page']['tableLayout'], $data);
         $group = $meta['group'];
 
-        require $this->_rootPath . 'view/default.php';
+        $file = $this->_rootPath . 'view/' . $option['view'];
+        if (is_file($file)) {
+            require $file;
+        } else {
+            require $this->_rootPath . 'view/default.php';
+        }
+        return $this;
     }
 
     /**
@@ -506,7 +513,7 @@ class Form_Widget extends Qwin_Widget_Abstract
         }
 
         // 获取关联元数据
-        foreach ($meta->getModelMetadataByType($meta, 'db') as $key => $relatedMeta) {
+        foreach ($meta->getModelMetadataByType('db') as $key => $relatedMeta) {
             if ('db' == $meta['model'][$key]['type']) {
                 $relatedMeta = $this->getOrderedField($orderedField, $key);
             }

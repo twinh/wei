@@ -25,7 +25,7 @@
 
 class Crm_Helper
 {
-    public static function filterPopupMember($value, $name, $viewName, $meta)
+    public static function sanitisePopupMember($value, $name, $viewName, $meta)
     {
         $data = Qwin::call('Qwin_Application_Metadata')
             ->getQueryByAsc(array(
@@ -38,7 +38,7 @@ class Crm_Helper
         $meta['field']->set($name . '.form._value2', $data[$viewName]);
     }
 
-    public static function filterPopupContact($value, $name, $viewName, $meta)
+    public static function sanitisePopupContact($value, $name, $viewName, $meta)
     {
         $data = Qwin::call('Qwin_Application_Metadata')
             ->getQueryByAsc(array(
@@ -51,7 +51,7 @@ class Crm_Helper
         $meta['field']->set($name . '.form._value2', $data['last_name'] . $data['first_name']);
     }
 
-    public static function filterPopupCustomer($value, $name, $viewName, $meta)
+    public static function sanitisePopupCustomer($value, $name, $viewName, $meta)
     {
         $data = Qwin::call('Qwin_Application_Metadata')
             ->getQueryByAsc(array(
@@ -64,7 +64,7 @@ class Crm_Helper
         $meta['field']->set($name . '.form._value2', $data[$viewName]);
     }
 
-    public static function filterPopupOpportunity($value, $name, $viewName, $meta)
+    public static function sanitisePopupOpportunity($value, $name, $viewName, $meta)
     {
         $data = Qwin::call('Qwin_Application_Metadata')
             ->getQueryByAsc(array(

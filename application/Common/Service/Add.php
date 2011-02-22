@@ -25,126 +25,103 @@
  * @since       2010-10-11 22:31:44
  */
 
-class Common_Service_Add extends Common_Service_BasicAction
+class Common_Service_Add extends Common_Service
 {
     /**
      * 服务的基本配置
      * @var array
      */
-    protected $_config = array(
+    protected $_option = array(
         'asc' => array(
             'namespace' => null,
             'module' => null,
             'controller' => null,
             'action' => null,
         ),
-        'data' => array(
-            'db' => null,
-        ),
-        'callback' => array(
-        ),
-        'view' => array(
-            'class' => null,
-            'display' => true,
-            'url' => null,
-        ),
-        'this' => null
+        'data'      => array(),
+        'display'   => true,
+        'url'       => null,
     );
 
     /**
      * 根据配置,执行插入数据操作
      *
-     * @param array $config 配置
-     * @todo 检查是否存在数据
+     * @param array $option 配置
      */
-    public function process(array $config = null)
+    public function process(array $option = null)
     {
         // 初始配置
-        $config = $this->_multiArrayMerge($this->_config, $config);
-        $metaHelper = Qwin::call('Qwin_Application_Metadata');
-        if(null == $config['this'])
-        {
-            $config['this'] = Qwin::call($metaHelper->getClassName('Controller', $config['asc']));
-        }
+        $option = array_merge($this->_option, $option);
 
-        // 通过父类,加载语言,元数据,模型等
-        parent::process($config['asc']);
+        /* @var $app Qwin_Application */
+        $app    = Qwin::call('-app');
 
-        // 初始化常用的变量
-        $meta = $this->_meta;
-        $primaryKey = $meta['db']['primaryKey'];
-        $query = $metaHelper->getQueryByAsc($this->_asc, 'db');
-        Qwin::call('Qwin_Class_Extension')
-            ->setNamespace('validator')
-            ->addClass('Qwin_Validator_JQuery');
+        /* @var $meta Qwin_Application_Metadata */
+        $meta   = $app->getMetadataByAsc($option['asc']);
+        $id     = $meta['db']['primaryKey'];
 
-        // 转换,验证
-        $data = $metaHelper->unsetPrimaryKeyValue($config['data']['db'], $meta);
+        // 从模型获取数据
+        $query = $meta->getQueryByAsc($option['asc'], array('db'));
 
-        // 检查记录是否存在,存在则提示
-        if(isset($data[$primaryKey]))
-        {
-            $result = $query->where($primaryKey . ' = ?', $data[$primaryKey])->fetchOne();
-            if(false != $result)
-            {
-                $return = array(
+        // 记录已经存在,加载错误视图
+        if (isset($data[$id])) {
+            $dbData = $query->where($primaryKey . ' = ?', $data[$id])->fetchOne();
+            if(false !== $result) {
+                $lang = Qwin::call('-lang');
+                $result = array(
                     'result' => false,
-                    'message' => $this->_lang->t('MSG_RECORD_EXISTS'),
+                    'message' => $lang['MSG_RECORD_EXISTS'],
                 );
-                if($config['view']['display'])
-                {
-                    $this->view->setRedirectView($return['message']);
+                if ($option['display']) {
+                    return Qwin::call('-view')->redirect($result['message']);
+                } else {
+                    return $result;
                 }
-                return $return;
             }
         }
 
-        $data = $metaHelper->filterOne($data, 'db', $meta, $meta, array('view' => false));
-        $data = $metaHelper->setForeignKeyData($meta['model'], $data);
-        $validateResult = $metaHelper->validateArray($data + $_POST, $meta, $meta);
-        if(true !== $validateResult)
-        {
-            $message = $config['this']->showValidateError($validateResult, $meta, $config['view']['display']);
-            $return = array(
+        // 获取改动过的数据
+        $data = $meta->filterAddData($option['data']);
+
+        // 转换数据
+        $data = $meta->sanitise($data, 'db');
+
+        //$data = $metaHelper->setForeignKeyData($meta['model'], $data);
+
+        // 验证数据
+        if (!$meta->validate($data)) {
+            $lang = Qwin::call('-lang');
+            $result = array(
                 'result' => false,
-                'message' => $message,
+                'message' => $meta->getInvalidMessage($lang),
             );
-            return $return;
+            if ($option['display']) {
+                return Qwin::call('-view')->redirect($result['message']);
+            } else {
+                return $result;
+            }
         }
 
         // 保存关联模型的数据
         //$metaHelper->saveRelatedDbData($meta, $data, $query);
 
         // 入库
-        $modelName = $metaHelper->getClassName('Model', $this->_asc);
+        $modelName = $app->getClass('model', $option['asc']);
         $result = new $modelName;
         $result->fromArray($data);
         $result->save();
 
-        // 在数据库操作之后,执行相应的 on 函数,跳转到原来的页面或列表页
-        if(isset($config['callback']['afterDb']))
-        {
-            $config['callback']['afterDb'][1] = $data;
-            $config['callback']['afterDb'][2] = null;
-            $this->executeCallback('afterDb', $config);
-        }
 
-        // 设置视图数据
-        if($config['view']['url'])
-        {
-            $url = $config['view']['url'];
-        } else {
-            $url = $this->url->url($this->_asc, array('action' => 'Index'));
+        // 展示视图
+        if ($option['display']) {
+            if (!$option['url']) {
+                $option['url'] = Qwin::call('-url')->url($option['asc'], array('action' => 'Index'));
+            }
+            return Qwin::call('-view')->redirect('MSG_OPERATE_SUCCESSFULLY', $option['url']);
         }
-        $return = array(
+        return array(
             'result' => true,
-            'message' => $this->_lang->t('MSG_OPERATE_SUCCESSFULLY'),
-            'url' => $url,
+            'data' => get_defined_vars(),
         );
-        if($config['view']['display'])
-        {
-            $this->view->setRedirectView($return['message'], $url);
-        }
-        return $return;
     }
 }
