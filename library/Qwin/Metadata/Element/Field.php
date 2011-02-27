@@ -25,7 +25,7 @@
  * @since       2010-7-26 14:07:07
  */
 
-class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
+class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Driver
 {
    /**
      * 查找属性的缓存数组
@@ -33,9 +33,13 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
      */
     protected $_attrCache = array();
 
-    protected $_sampleData = array(
+    /**
+     * 默认数据
+     * @var array
+     */
+    protected $_default = array(
         'basic' => array(
-            'title' => 'LBL_FIELD_TITLE',
+            'title' => 'FLD_TITLE',
             'description' => array(),
             'order' => 50,
             'group' => 0,
@@ -45,7 +49,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
             '_resource' => null,
             //'_resourceGetter' => null,
             //'_resourceFormFile' => null,
-            '_extend' => null,
+            //'_widget' => array(),
             '_value' => '',
             'name' => null,
             //'id' => null,
@@ -63,8 +67,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
             'type' => 'string',
             'length' => null,
         ),
-        'sanitiser' => array(
-        ),
+        'sanitiser' => array(),
         'validator' => array(
             'rule' => array(),
             'message' => array(),
@@ -72,68 +75,79 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
     );
 
     /**
-     * 以数组的形式递归格式化数据
+     * 将数据格式化并加入
      *
-     * @return object 当前对象
+     * @param array $data 数据
+     * @param array $option 配置选项
+     * @return Qwin_Metadata_Element_Field 当前对象
      */
-    public function format()
+    public function merge($data, array $option = array())
     {
-        return $this->_formatAsArray();
+        $data = $this->_mergeAsArray($data, $option);
+        $this->exchangeArray($data + $this->getArrayCopy());
+        return $this;
     }
 
-    protected function _format($metadata, $name = null)
+    /**
+     * 格式化数据
+     *
+     * @param array $data 数据
+     * @param string $name 名称
+     * @return Qwin_Metadata_Element_Field 当前对象
+     */
+    protected function _merge($data, array $option = array(), $name = null)
     {
-        if (!isset($metadata['form'])) {
-            $metadata['form'] = array();
+        $data = (array)$data;
+        if (!isset($data['form'])) {
+            $data['form'] = array();
         }
-        if (!isset($metadata['form']['name'])) {
+        if (!isset($data['form']['name'])) {
             if (null != $name) {
-                $metadata['form']['name'] = $name;
+                $data['form']['name'] = $name;
             } else {
                 require_once 'Qwin/Metadata/Element/Field/Exception.php';
                 throw new Qwin_Metadata_Element_Field_Exception('The name value is not defined.');
             }
         }
 
-        if (!isset($metadata['basic'])) {
-            $metadata['basic'] = array();
+        if (!isset($data['basic'])) {
+            $data['basic'] = array();
         }
         
         // 设置名称
-        if (!isset($metadata['basic']['title'])) {
-            $metadata['basic']['title'] = 'LBL_FIELD_' . strtoupper($metadata['form']['name']);
+        if (!isset($data['basic']['title'])) {
+            $data['basic']['title'] = 'LBL_FIELD_' . strtoupper($data['form']['name']);
         }
         // 设置编号
-        if (!isset($metadata['form']['id'])) {
-            $metadata['form']['id'] = $metadata['form']['name'];
+        if (!isset($data['form']['id'])) {
+            $data['form']['id'] = $data['form']['name'];
         }
 
         // 初始验证器和补全验证信息
-        if(isset($metadata['validator']) && !empty($metadata['validator']['rule'])) {
-            foreach ($metadata['validator']['rule'] as $key => $rule) {
-                if (!isset($metadata['validator']['message'][$key])) {
-                    $metadata['validator']['message'][$key] = 'MSG_VALIDATOR_' . strtoupper($key);
+        if(isset($data['validator']) && !empty($data['validator']['rule'])) {
+            foreach ($data['validator']['rule'] as $key => $rule) {
+                if (!isset($data['validator']['message'][$key])) {
+                    $data['validator']['message'][$key] = 'MSG_VALIDATOR_' . strtoupper($key);
                 }
             }
         }
 
         // 转换转换器的配置,使不同的行为之间允许共享转换器
-        !isset($metadata['sanitiser']) && $metadata['sanitiser'] = array();
-        foreach ($metadata['sanitiser'] as $key => $value) {
-            if (is_string($value) && isset($metadata['sanitiser'][$value])) {
-                $metadata['sanitiser'][$key] = $metadata['sanitiser'][$value];
+        !isset($data['sanitiser']) && $data['sanitiser'] = array();
+        foreach ($data['sanitiser'] as $key => $value) {
+            if (is_string($value) && isset($data['sanitiser'][$value])) {
+                $data['sanitiser'][$key] = $data['sanitiser'][$value];
             }
         }
 
-        $sampleData = $this->getSampleData();
-        foreach ($sampleData as $key => $row) {
-            if (isset($metadata[$key])) {
-                $metadata[$key] = array_merge($row, $metadata[$key]);
+        foreach ($this->_default as $key => $row) {
+            if (isset($data[$key])) {
+                $data[$key] = array_merge($row, $data[$key]);
             } else {
-                 $metadata[$key] = $row;
+                 $data[$key] = $row;
             }
         }
-        return $metadata;
+        return $data;
     }
 
     /**
@@ -162,7 +176,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         foreach ($banAttr as $attr) {
             $tmpArr[$attr] = 0;
         }
-        foreach ($this->_data as $field) {
+        foreach ($this as $field) {
             if ($tmpArr == array_intersect_assoc($tmpArr, $field['attr'])) {
                 $result[$field['form']['name']] = $field['form']['name'];
             }
@@ -188,7 +202,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
      */
     public function setAttr($field, $attr, $value)
     {
-        $this->_data[$field]['attr'][$attr] = $value;
+        $this[$field]['attr'][$attr] = $value;
         return $this;
     }
 
@@ -260,19 +274,6 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Abstract
         return $newData;
     }
     
-    /**
-     * 设置验证缩写名称和数组的对应关系
-     *
-     * @param string $name 缩写
-     * @param array $value 全数组
-     * @return object 当前对象
-     */
-    public function setValidatorMap($name, $value)
-    {
-        $this->_validatorMap[$name] = $value;
-        return $this;
-    }
-
     /**
      * 设置指定域为只读
      *

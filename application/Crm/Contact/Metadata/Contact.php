@@ -28,7 +28,7 @@ class Crm_Contact_Metadata_Contact extends Common_Metadata
     public function setMetadata()
     {
         $this->setAdvancedMetadata();
-        $this->parseMetadata(array(
+        $this->merge(array(
             'field' => array(
                 'last_name' => array(
                     'attr' => array(

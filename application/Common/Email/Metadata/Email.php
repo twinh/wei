@@ -32,7 +32,7 @@ class Common_Email_Metadata_Email extends Common_Metadata
         $this->setIdMetadata()
             ->setCreatedData()
             ->setOperationMetadata();
-        $this->parseMetadata(array(
+        $this->merge(array(
             'field' => array(
                 'from' => array(
                     'attr' => array(

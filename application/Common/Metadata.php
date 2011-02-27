@@ -43,16 +43,10 @@ class Common_Metadata extends Qwin_Application_Metadata
      */
     protected $_linkAction = array('list', 'view');
 
-    /**
-     * 元数据助手类,负责一系列的转换工作
-     * @var Qwin_Application_Metadata
-     */
-    public $metaHelper;
-
     public function  __construct()
     {
+        parent::__construct();
         $this->url = Qwin::call('-url');
-        $this->metaHelper = Qwin::call('Qwin_Application_Metadata');
     }
 
     /**
@@ -127,7 +121,7 @@ class Common_Metadata extends Qwin_Application_Metadata
      */
     public function setIdMetadata()
     {
-        $this->addField(array(
+        $this->merge(array(
             'id' => array(
                 'basic' => array(
                     'order' => -1,
@@ -154,7 +148,7 @@ class Common_Metadata extends Qwin_Application_Metadata
                     'isReadonly' => 0,
                 ),
             ),
-        ));
+        ), 'field');
         return $this;
     }
 
@@ -165,7 +159,7 @@ class Common_Metadata extends Qwin_Application_Metadata
      */
     public function setCreatedData()
     {
-        $this->addField(array(
+        $this->merge(array(
             'created_by' => array(
                 'basic' => array(
                     'order' => 1020,
@@ -194,7 +188,7 @@ class Common_Metadata extends Qwin_Application_Metadata
                     'isReadonly' => 1,
                 ),
             ),
-        ));
+        ), 'field');
         return $this;
     }
 
@@ -205,7 +199,7 @@ class Common_Metadata extends Qwin_Application_Metadata
      */
     public function setModifiedData()
     {
-        $this->addField(array(
+        $this->merge(array(
             'modified_by' => array(
                 'basic' => array(
                     'order' => 1040,
@@ -225,7 +219,7 @@ class Common_Metadata extends Qwin_Application_Metadata
                     'isList' => 1,
                 ),
             ),
-        ));
+        ), 'field');
         return $this;
     }
 
@@ -236,7 +230,7 @@ class Common_Metadata extends Qwin_Application_Metadata
      */
     public function setOperationMetadata()
     {
-        $this->addField(array(
+        $this->merge(array(
             'operation' => array(
                 'basic' => array(
                     'order' => 1100,
@@ -252,13 +246,13 @@ class Common_Metadata extends Qwin_Application_Metadata
                     'isList' => 1,
                 ),
             ),
-        ));
+        ), 'field');
         return $this;
     }
 
     public function setAssignToMetadata()
     {
-        $this->addField(array(
+        $this->merge(array(
             'assign_to' => array(
                 'basic' => array(
                     'order' => 1100,
@@ -292,13 +286,13 @@ class Common_Metadata extends Qwin_Application_Metadata
                     ),
                 ),
             ),
-        ));
+        ), 'field');
         return $this;
     }
 
     public function setIsDeletedMetadata()
     {
-        $this->addField(array(
+        $this->merge(array(
             'is_deleted' => array(
                 'basic' => array(
                     'order' => 1105,
@@ -313,7 +307,7 @@ class Common_Metadata extends Qwin_Application_Metadata
                     'isReadonly' => 1,
                 ),
             ),
-        ));
+        ), 'field');
         return $this;
     }
 
@@ -362,7 +356,7 @@ class Common_Metadata extends Qwin_Application_Metadata
         $lang = Qwin::call('-lang');
         $asc = $this->getAscFromClass();
         if (!isset($this->controller)) {
-            $this->controller = Qwin::call($this->metaHelper->getClassName('Controller', $asc));
+            $this->controller = Qwin::call($this->getClassName('Controller', $asc));
             $this->forbiddenAction = $this->controller->getForbiddenAction();
         }
         // 不为禁用的行为设置链接

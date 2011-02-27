@@ -29,7 +29,7 @@ class Common_Member_Metadata_Password extends Common_Metadata
 {
     public function setMetadata()
     {
-        $this->parseMetadata(array(
+        $this->merge(array(
             // 基本属性
             'field' => array(
                 'id' => array(

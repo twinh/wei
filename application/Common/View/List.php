@@ -49,7 +49,7 @@ class Common_View_List extends Common_View
         $option['rowNum']        = $request->getLimit();
 
         // 设置弹出窗口属性
-        if ($this->isPopup) {
+        if ($this->popup) {
             $popup = array(
                 'valueInput'    => $request['popup-value-input'],
                 'viewInput'     => $request['popup-view-input'],

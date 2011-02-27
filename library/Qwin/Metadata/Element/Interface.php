@@ -1,8 +1,8 @@
 <?php
 /**
- * Order
+ * Interface
  *
- * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,22 +16,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  Metadata
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-08 9:45:22
+ * @since       2011-02-26 14:29:02
  */
 
-class Qwin_Metadata_Element_Field_Order
+interface Qwin_Metadata_Element_Interface
 {
-    public static $order = 0;
-    public static $orderLength = 20;
-
-    public static function getOrder()
-    {
-        return self::$order = self::$order + self::$orderLength;
-    }
+    public function merge($data, array $option = array());
 }

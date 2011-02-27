@@ -29,7 +29,7 @@ class Common_Member_Metadata_Log extends Qwin_Application_Metadata
 {
     public function  __construct()
     {
-        $this->parseMetadata(array(
+        $this->merge(array(
             // 基本属性
             'field' => array(
                 'captcha' => array(

@@ -25,9 +25,9 @@
  * @since       2010-7-27 12:37:11
  */
 
-class Qwin_Metadata_Element_Model extends Qwin_Metadata_Element_Abstract
+class Qwin_Metadata_Element_Model extends Qwin_Metadata_Element_Driver
 {
-    protected $_sampleData = array(
+    protected $_default = array(
         'alias' => null,
         'metadata' => null,
         'relation' => 'hasOne',
@@ -44,11 +44,17 @@ class Qwin_Metadata_Element_Model extends Qwin_Metadata_Element_Abstract
         ),
     );
     
-    public function format()
+    /**
+     * 将数据格式化并加入
+     *
+     * @param array $data 数据
+     * @param array $option 配置选项
+     * @return Qwin_Metadata_Element_Field 当前对象
+     */
+    public function merge($data, array $option = array())
     {
-        foreach ($this->_data as $key => $row) {
-            $this->_data[$key] = $this->_format($row, $key);
-        }
+        $data = $this->_mergeAsArray($data, $option);
+        $this->exchangeArray($data + $this->getArrayCopy());
         return $this;
     }
 }

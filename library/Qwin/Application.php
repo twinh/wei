@@ -330,7 +330,7 @@ class Qwin_Application
     public function getMetadataByAsc(array $asc)
     {
         $name = $this->getClass('metadata', $asc);
-        return Qwin_Metadata_Manager::get($name);
+        return Qwin_Metadata::getInstance()->get($name);
     }
 
     /**
@@ -363,7 +363,7 @@ class Qwin_Application
 
     public function getEndTime()
     {
-        return round((microtime(true) - $this->_startTime), 4);
+        return str_pad(round((microtime(true) - $this->_startTime), 4), 6, 0);
     }
 
     public function _onNamespaceNotExists($asc)

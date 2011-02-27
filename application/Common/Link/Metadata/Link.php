@@ -30,7 +30,7 @@ class Common_Link_Metadata_Link extends Common_Metadata
     public function  setMetadata()
     {
         $this->setCommonMetadata();
-        $this->parseMetadata(array(
+        $this->merge(array(
             // 基本属性
             'field' => array(
                 'category_id' => array(

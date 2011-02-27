@@ -22,12 +22,12 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-7-27 18:13:16
+ * @since       2010-07-27 18:13:16
  */
 
-class Qwin_Metadata_Element_Db extends Qwin_Metadata_Element_Abstract
+class Qwin_Metadata_Element_Db extends Qwin_Metadata_Element_Driver
 {
-    protected $_sampleData = array(
+    protected $_default = array(
         'type' => 'sql',
         'table' => null,
         'primaryKey' => 'id',

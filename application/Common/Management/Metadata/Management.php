@@ -29,7 +29,7 @@ class Common_Management_Metadata_Management extends Common_Metadata
 {
     public function setMetadata()
     {
-        $this->parseMetadata(array(
+        $this->merge(array(
             'page' => array(
                 'title' => 'LBL_MODULE_MANAGEMENT',
                 'icon' => 'gear',

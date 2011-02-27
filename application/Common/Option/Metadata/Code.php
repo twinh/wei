@@ -27,7 +27,7 @@ class Common_Option_Metadata_Code extends Common_Metadata
 {
     public function setMetadata()
     {
-        $this->parseMetadata(array(
+        $this->merge(array(
             'field' => array(
                 'value' => array(
                 ),

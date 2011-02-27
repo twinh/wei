@@ -28,7 +28,7 @@ class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
     public function  setMetadata()
     {
         $this->setAdvancedMetadata();
-        $this->parseMetadata(array(
+        $this->merge(array(
             'field' => array(
                 'name' => array(
                     'attr' => array(

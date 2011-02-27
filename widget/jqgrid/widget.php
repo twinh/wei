@@ -320,7 +320,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
         return $rowData;
     }
 
-    public function getLayout(Qwin_Metadata $meta, array $layout = array(), $relatedName = false)
+    public function getLayout(Qwin_Metadata_Abstract $meta, array $layout = array(), $relatedName = false)
     {
         foreach ($meta['field'] as $name => $field) {
             if (1 != $field['attr']['isList']) {
