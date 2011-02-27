@@ -30,7 +30,7 @@ class Common_Option_Metadata_Option extends Common_Metadata
     public function  setMetadata()
     {
         $this->setCommonMetadata()
-			->parseMetadata(
+			->merge(
             array(
                 'field' => array(
                     'language' => array(

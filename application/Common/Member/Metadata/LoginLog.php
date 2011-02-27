@@ -30,7 +30,7 @@ class Common_Member_Metadata_LoginLog extends Common_Metadata
     public function __construct()
     {
         $this->setIdMetadata();
-        $this->parseMetadata(array(
+        $this->merge(array(
             'field' => array(
                 'member_id' => array(
                     'attr' => array(

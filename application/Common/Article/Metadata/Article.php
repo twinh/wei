@@ -30,7 +30,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
     public function setMetadata()
     {
         $this->setCommonMetadata()
-             ->parseMetadata(array(
+             ->merge(array(
             // 基本属性
             'field' => array(
                 'category_id' => array(

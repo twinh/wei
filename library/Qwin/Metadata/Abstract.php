@@ -25,98 +25,45 @@
  * @since       2010-07-27 15:41:46
  */
 
-abstract class Qwin_Metadata_Abstract implements ArrayAccess, Iterator
+abstract class Qwin_Metadata_Abstract extends ArrayObject
 {
-    protected $_data = array();
+    /**
+     * 管理类
+     *
+     * @var Qwin_Metadata
+     */
+    protected $_manager = null;
 
     /**
-     * 通过魔术方法设置一个属性的值
+     * 初始化类
      *
-     * @param string $name 名称
-     * @param mixed $value 值
+     * @param array $input 数组
      */
-    public function __set($name, $value)
+    public function  __construct($input = array(), $flags = self::ARRAY_AS_PROPS)
     {
-        $this->_data[$name] = $value;
-    }
-
-    /**
-     * 通过魔术方法获取一个属性的值
-     *
-     * @param string $name 名称
-     * @return mixed
-     */
-    public function __get($name)
-    {
-        return isset($this->_data[$name]) ? $this->_data[$name] : null;
+        parent::__construct($input, $flags);
     }
 
     /**
-     * 检查索引是否存在
+     * 获取管理器对象
      *
-     * @param string $offset 索引
-     * @return bool
+     * @return Qwin_Metadata
      */
-    public function offsetExists($offset)
+    public function getManager()
     {
-        return isset($this->_data[$offset]);
+        return $this->_manager;
     }
 
     /**
-     * 获取索引的数据
+     * 设置管理器
      *
-     * @param string $offset 索引
-     * @return mixed
+     * @param Qwin_Metadata $metadata 管理器对象
+     * @return Qwin_Metadata_Abstract 当前对象
      */
-    public function offsetGet($offset)
+    public function setManager(Qwin_Metadata $metadata)
     {
-        return isset($this->_data[$offset]) ? $this->_data[$offset] : null;
-    }
-
-    /**
-     * 设置索引的值
-     *
-     * @param string $offset 索引
-     * @param mixed $value 值
-     */
-    public function offsetSet($offset, $value)
-    {
-        $this->_data[$offset] = $value;
-    }
-
-    /**
-     * 销毁一个索引
-     *
-     * @param string $offset 索引的名称
-     */
-    public function offsetUnset($offset)
-    {
-        unset($this->_data[$offset]);
-    }
-    
-    public function next()
-    {
-        return next($this->_data);
-    }
-
-    public function key()
-    {
-        return key($this->_data);
-    }
-
-    public function valid()
-    {
-        return false !== $this->current();
-    }
-
-    public function rewind()
-    {
-        reset($this->_data);
-    }
-
-    public function current()
-    {
-        return current($this->_data);
+        $this->_manager = $metadata;
+        return $this;
     }
 
     /**
@@ -149,21 +96,74 @@ abstract class Qwin_Metadata_Abstract implements ArrayAccess, Iterator
      * @param array $data 要加入对象的数组
      * @return object 当前对象
      */
-    public function fromArray($data)
+    public function fromArray(array $data)
     {
-        $this->_data = $data;
+        $this->exchangeArray(array_merge($this->getArrayCopy(), $data));
         return $this;
     }
 
-    /**
-     * 合并两个元数据
-     *
-     * @param Qwin_Metadata_Abstract $meta
-     * @return object 当前对象
-     */
-    public function merge(Qwin_Metadata_Abstract $meta)
+    public function appendMetadata()
     {
-        $this->_data += $meta->toArray();
+
+    }
+
+    public function setMetadata()
+    {
+
+    }
+
+    public function merge(array $data, $name = null)
+    {
+        // 补全数据
+        if (isset($name)) {
+            $data  = array(
+                $name => $data,
+            );
+        }
+
+        // 获取转换驱动数组
+        $drivers = Qwin_Metadata::getInstance()->getDriver();
+
+        $result = array();
+        foreach ($data as $name => $value) {
+            // 检查是否存在该元素的驱动类
+            $name = strtolower($name);
+
+            // 初始化驱动类
+            if (!isset($this[$name]) && isset($drivers[$name])) {
+                $this[$name] = new $drivers[$name];
+            }
+
+            // 没有找到驱动类,为纯数组形式
+            if (!isset($this[$name])) {
+                $this[$name] = array();
+            }
+
+            // 根据不同类型合并数据
+            if (is_object($this[$name])) {
+                $this[$name]->merge($value);
+            } else {
+                $this[$name] = $value + $this[$name];
+            }
+        }
+        return $this;
+    }
+
+    public function getId()
+    {
+        if (!isset($this->_id)) {
+            if (isset($this['db']['table'])) {
+                $this->_id = $this['db']['table'];
+            } else {
+                $this->_id = strtolower(get_class($this));
+            }
+        }
+        return $this->_id;
+    }
+
+    public function setId($id)
+    {
+        $this->_id = (string)$id;
         return $this;
     }
 }

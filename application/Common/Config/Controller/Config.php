@@ -96,7 +96,7 @@ class Common_Config_Controller_Config extends Common_ActionController
                 'module' => 'Config',
                 'controller' => 'Temp',
             ))
-            ->parseMetadata($configMeta);
+            ->merge($configMeta);
         
         if (empty($_POST)) {
             $this->view->assign(get_defined_vars());

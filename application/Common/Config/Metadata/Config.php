@@ -30,7 +30,7 @@ class Common_Config_Metadata_Config extends Common_Metadata
     public function setMetadata()
     {
         $this->setCommonMetadata();
-        $this->parseMetadata(array(
+        $this->merge(array(
             'field' => array(
                 'group_id' => array(
                     'form' => array(

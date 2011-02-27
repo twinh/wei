@@ -31,7 +31,7 @@ class Common_Management_Metadata_Module extends Common_Metadata
     {
         $this->setIdMetadata();
         $this->setOperationMetadata();
-        $this->parseMetadata(array(
+        $this->merge(array(
             'field' => array(
                 'namespace_value' => array(
                     'form' => array(

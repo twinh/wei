@@ -70,6 +70,11 @@ class Qwin_Application_View extends Qwin_Metadata_Abstract
         'style' => '<style>'
     );
 
+    public function  __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * 设置变量
      *
@@ -80,9 +85,9 @@ class Qwin_Application_View extends Qwin_Metadata_Abstract
     public function assign($name, $value = null)
     {
         if (is_array($name)) {
-            $this->_data += $name;
+            $this->fromArray($name);
         } else {
-            $this->_data[$name] = $value;
+            $this->offsetSet($name, $value);
         }
         return $this;
     }

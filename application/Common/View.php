@@ -43,6 +43,7 @@ class Common_View extends Qwin_Application_View
      */
     public function __construct()
     {
+        parent::__construct();
         Qwin::get('-app')->setView($this);
         Qwin::set('-view', $this);
     }
@@ -171,7 +172,7 @@ class Common_View extends Qwin_Application_View
         if (!empty($data)) {
             $this->assign($data);
         }
-        extract($this->_data, EXTR_OVERWRITE);
+        extract($this->getArrayCopy(), EXTR_OVERWRITE);
 
         $request = Qwin::call('-request');
 

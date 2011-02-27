@@ -26,119 +26,111 @@
  *
  */
 
-/**
- * @see Qwin_Metadata_Abstract
- */
-require_once 'Qwin/Metadata/Abstract.php';
-
-abstract class Qwin_Metadata extends Qwin_Metadata_Abstract
+class Qwin_Metadata
 {
     /**
-     * 原始数据,未经过格式转换
-     * @var array
-     */
-    //private $_originalData;
-
-    /**
-     * 经过格式化转换的数据
-     * @var array
-     */
-    protected $_data;
-
-    protected $_id;
-
-    /**
-     * 不允许的元数据键名
-     * @var array
-     */
-    private $_banType = array('Abstract', 'Interface', 'Driver');
-
-    /**
-     * 设置元数据
+     * 当前对象
      *
+     * @var Qwin_Metadata
+     */
+    protected static $_instance;
+
+    /**
+     * 驱动映射数组
+     *
+     * @var array
+     */
+    protected $_drivers = array(
+        'field'     => 'Qwin_Metadata_Element_Field',
+        'group'     => 'Qwin_Metadata_Element_Group',
+        'model'     => 'Qwin_Metadata_Element_Model',
+        'db'        => 'Qwin_Metadata_Element_Db',
+        'page'      => 'Qwin_Metadata_Element_Page',
+    );
+
+    /**
+     * 实例化的元数据对象数组
+     *
+     * @var array
+     */
+    protected $_objects = array();
+
+    private function  __construct()
+    {
+    }
+
+    /**
+     * 获取当前类的实例化对象
+     *
+     * @return Qwin_Metadata
+     */
+    public static function getInstance()
+    {
+        if (!isset(self::$_instance)) {
+            self::$_instance = new self();
+        }
+        return self::$_instance;
+    }
+
+    /**
+     * 获取一个元数据对象
+     *
+     * @param string $class 类名
+     * @return object 元数据对象
+     */
+    public function get($class)
+    {
+        if (isset($this->_objects[$class])) {
+            return $this->_objects[$class];
+        }
+
+        // 初始化并设置元数据
+        if(is_subclass_of($class, 'Qwin_Metadata_Abstract')) {
+            $object = new $class;
+            $object->setManager($this)
+                   ->setMetadata();
+            $this->_objects[$class] = $object;
+            return $object;
+        } else {
+            require_once 'Qwin/Metadata/Exception.php';
+            throw new Qwin_Metadata_Exception('Class "' . $class . '" is not the sub class of "Qwin_Metadata_Abstract".');
+        }
+    }
+
+    /**
+     * 设置驱动类
+     *
+     * @param string $name 驱动名称
+     * @param string $class 类名
      * @return Qwin_Metadata 当前对象
      */
-    public function setMetadata()
+    public function setDriver($name, $class)
     {
-        return $this;
-    }
-
-    /**
-     * 添加一组元数据
-     * 
-     * @param array $metadata
-     * @return Qwin_Metadata 当前对象
-     */
-    public function parseMetadata($metadata)
-    {
-        foreach ($metadata as $key => $row) {
-            $type = ucfirst(strtolower($key));
-            $this->_add($type, $row);
+        if (is_subclass_of($class, 'Qwin_Metadata_Element_Driver')) {
+            $this->_drivers[strtolower($name)] = $class;
+        } else {
+            require_once 'Qwin/Metadata/Exception.php';
+            throw new Qwin_Metadata_Exception('Class "' . $class . '" is not the sub class of "Qwin_Metadata_Element_Driver".');
         }
         return $this;
     }
 
     /**
-     * 为添加数据到元数据的某一类型中
+     * 获取驱动类名
      *
-     * @param string $type
-     * @param mixed $data
+     * @param string|null $name 类名,留空表示获取驱动数组
+     * @return string|array
      */
-    private function _add($type, $data)
+    public function getDriver($name = null)
     {
-        if (!in_array($type, $this->_banType)) {
-            $name = strtolower($type);
-            $class = 'Qwin_Metadata_Element_' . $type;
-            if (class_exists($class)) {
-                // 加入到原始数据中
-                //!isset($this->_originalData[$name]) && $this->_originalData[$name] = array();
-                // 加入到数据中
-                if (!isset($this->_data[$name])) {
-                    $this->_data[$name] = new $class;
-                }
-                $this->_data[$name]->addData($data)->format();
-            }
+        if (null === $name) {
+            return $this->_drivers;
         }
-        return $this;
+        return isset($this->_drivers[$name]) ? $this->_drivers[$name] : null;
     }
 
-    /**
-     * 魔术方法,调用add,get,set三类方法
-     *
-     * @param 方法的名称 $name
-     * @param 参数 $args
-     * @return mixed 返回当前对象或错误信息
-     */
-    public function  __call($name, $args)
+    public function getByAsc(array $asc)
     {
-        $action = substr($name, 0, 3);
-        $type = substr($name, 3);
-        if ('add' == $action) {
-            return $this->_add($type, $args[0]);
-        } elseif ('get' == $action && isset($this->_data[$type])) {
-            return $this->_data[$type];
-        } elseif ('set' == $action) {
-            return $this->_set($type, $args[0]);
-        }
-        require_once 'Qwin/Metadata/Exception.php';
-        throw new Qwin_Metadata_Exception('Call to undefined method ' . __CLASS__ . '::' . $name . '()');
-    }
-
-    public function getId()
-    {
-        if (!isset($this->_id)) {
-            if (isset($this['db']['table'])) {
-                $this->_id = $this['db']['table'];
-            } else {
-                $this->_id = strtolower(get_class($this));
-            }
-        }
-        return $this->_id;
-    }
-
-    public function setId($id)
-    {
-        $this->_id = (string)$id;
-        return $this;
+        
     }
 }

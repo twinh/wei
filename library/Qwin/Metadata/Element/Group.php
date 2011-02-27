@@ -25,13 +25,10 @@
  * @since       2010-10-14 11:54:56
  */
 
-class Qwin_Metadata_Element_Group extends Qwin_Metadata_Element_Abstract
+class Qwin_Metadata_Element_Group extends Qwin_Metadata_Element_Driver
 {
-    public function getSampleData()
-    {
-        return array(
-            0 => 'LBL_GROUP_BASIC_DATA',
-        );
-    }
+    protected $_default = array(
+        0 => 'LBL_GROUP_BASIC_DATA',
+    );
 }
 

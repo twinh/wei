@@ -29,7 +29,7 @@ class Common_AdminMenu_Metadata_Menu extends Common_Metadata
     public function setMetadata()
     {
         $this->setCommonMetadata();
-        $this->parseMetadata(array(
+        $this->merge(array(
             // 基本属性
             'field' => array(
                 'category_id' => array(

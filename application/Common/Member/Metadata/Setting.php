@@ -29,7 +29,7 @@ class Common_Member_Metadata_Setting extends Common_Metadata
 {
     public function setMetadata()
     {
-        $this->parseMetadata(array(
+        $this->merge(array(
             'page' => array(
                 'title' => 'LBL_MODULE_MEMBER_SETTING',
                 'icon' => 'user',

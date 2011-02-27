@@ -30,7 +30,7 @@ class Common_Category_Metadata_Category extends Common_Metadata
     public function  setMetadata()
     {
         parent::setCommonMetadata();
-        $this->parseMetadata(array(
+        $this->merge(array(
             'field' => array(
                 'parent_id' => array(
                     'basic' => array(

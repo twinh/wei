@@ -25,33 +25,23 @@
  * @since       2010-7-27 12:44:44
  */
 
-class Qwin_Metadata_Element_Page extends Qwin_Metadata_Element_Abstract
+class Qwin_Metadata_Element_Page extends Qwin_Metadata_Element_Driver
 {
-    protected $a;
-
-    public function getSampleData()
-    {
-        return array(
-            'title'         => null,
-            'icon'          => 'document',
-            'description'   => null,
-            'tableLayout'   => 2,
-            'mainField'     => null,
-            'trash'         => array(
-                'enable'        => true,
-                'field'         => 'is_deleted',
-                'toggleFlag'    => array(0, 1),
-            ),
-            'log'           => array(
-                'enable'        => true,
-                'field'         => '',
-                'banField'      => '',
-            ),
-        );
-    }
-
-    public function setTitle()
-    {
-        
-    }
+    protected $_default = array(
+        'title'         => null,
+        'icon'          => 'document',
+        'description'   => null,
+        'tableLayout'   => 2,
+        'mainField'     => null,
+        'trash'         => array(
+            'enable'        => true,
+            'field'         => 'is_deleted',
+            'toggleFlag'    => array(0, 1),
+        ),
+        'log'           => array(
+            'enable'        => true,
+            'field'         => '',
+            'banField'      => '',
+        ),
+    );
 }

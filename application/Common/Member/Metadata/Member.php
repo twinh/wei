@@ -30,8 +30,7 @@ class Common_Member_Metadata_Member extends Common_Metadata
     public function  setMetadata()
     {
         $this->setCommonMetadata()
-             ->parseMetadata(array(
-            // 基本属性
+             ->merge(array(
             'field' => array(
                 'group_id' => array(
                     'form' => array(

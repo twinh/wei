@@ -30,7 +30,7 @@ class Common_Feedback_Metadata_Feedback extends Common_Metadata
     public function setMetadata()
     {
         $this->setIdMetadata();
-        $this->parseMetadata(array(
+        $this->merge(array(
             'field' => array(
                 'title' => array(
 

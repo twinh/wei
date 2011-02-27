@@ -38,7 +38,7 @@ class Common_Member_Controller_Member extends Common_ActionController
         {
             return $this->view->setRedirectView($this->_lang->t('MSG_GUEST_NOT_ALLOW_EDIT_PASSWORD'));
         }
-        $this->_meta = Qwin_Metadata_Manager::get('Common_Member_Metadata_Password');
+        $this->_meta = Qwin_Metadata::get('Common_Member_Metadata_Password');
 
         if(empty($_POST))
         {

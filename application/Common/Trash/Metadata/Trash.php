@@ -29,7 +29,7 @@ class Common_Trash_Metadata_Trash extends Common_Metadata
     {
         $this->setIdMetadata();
         $this->setOperationMetadata();
-        $this->parseMetadata(array(
+        $this->merge(array(
             'field' => array(
                 'name' => array(
                     'attr' => array(

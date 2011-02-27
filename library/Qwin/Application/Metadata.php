@@ -31,7 +31,7 @@
  */
 require_once 'Qwin/Metadata/Abstract.php';
 
-class Qwin_Application_Metadata extends Qwin_Metadata
+class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
 {
     /**
      * @var array $_sanitiseOption   数据处理的选项
@@ -132,11 +132,11 @@ class Qwin_Application_Metadata extends Qwin_Metadata
     /**
      * 将元数据的域定义,数据表定义加入模型中
      *
-     * @param Qwin_Metadata $meta 元数据对象
+     * @param Qwin_Metadata_Abstract $meta 元数据对象
      * @param Doctrine_Record $model Doctrine对象
      * @return Qwin_Application_Metadata 当前对象
      */
-    public function metadataToModel(Qwin_Metadata $meta, Doctrine_Record $model)
+    public function metadataToModel(Qwin_Metadata_Abstract $meta, Doctrine_Record $model)
     {
         $tablePrefix = $this->getTablePrefix();
 
@@ -161,7 +161,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
     {
         $metaClass  = $this->getClassName('Metadata', $asc);
         $modelClass = $this->getClassName('Model', $asc);
-        $meta       = Qwin_Metadata_Manager::get($metaClass);
+        $meta       = $this->_manager->get($metaClass);
         $model      = Qwin::call($modelClass);
         return $this->getQuery($meta, $model, $type, $name);
     }
@@ -169,13 +169,13 @@ class Qwin_Application_Metadata extends Qwin_Metadata
     /**
      * 通过元数据配置,获取Doctrine的查询对象
      *
-     * @param Qwin_Metadata $meta 元数据配置
+     * @param Qwin_Metadata_Abstract $meta 元数据配置
      * @param Doctrine_Record $model 模型对象
      * @return Doctrine_Query 查询对象
      * @todo 缓存查询对象,模型对象
      * @todo padb问题
      */
-    public function getQuery(Qwin_Metadata $meta, Doctrine_Record $model = null, $type = array(), $name = array())
+    public function getQuery(Qwin_Metadata_Abstract $meta, Doctrine_Record $model = null, $type = array(), $name = array())
     {
         // 未定义模型,则初始化关联模型
         if (null == $model) {
@@ -212,7 +212,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
             // 该模型的设置
             $modelSet = $meta['model'][$joinModelName];
             $modelName = $this->getClassName('Model', $modelSet['asc']);
-            $relatedMetaObject = Qwin_Metadata_Manager::get($this->getClassName('Metadata', $modelSet['asc']));
+            $relatedMetaObject = $this->_manager->get($this->getClassName('Metadata', $modelSet['asc']));
             $relatedModelObejct = Qwin::call($modelName);
             $this->metadataToModel($relatedMetaObject, $relatedModelObejct);
 
@@ -233,7 +233,6 @@ class Qwin_Application_Metadata extends Qwin_Metadata
     /**
      * 为Doctrine查询对象增加查询语句
      *
-     * @param Qwin_Metadata $meta
      * @param Doctrine_Query $query
      * @return object 当前对象
      * @todo 是否要将主类加入到$meta['model']数组中,减少代码重复
@@ -258,7 +257,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
          * 设置关联类的查询语句
          */
         foreach ($meta['model'] as $model) {
-            $linkedMetaObj = Qwin_Metadata_Manager::get($this->getClassName('Metadata', $model['asc']));
+            $linkedMetaObj = $this->_manager->get($this->getClassName('Metadata', $model['asc']));
 
             // 调整主键的属性,因为查询时至少需要选择一列
             $primaryKey = $linkedMetaObj['db']['primaryKey'];
@@ -280,7 +279,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
         if (!class_exists($metadataName)) {
             return null;
         }
-        $meta = Qwin_Metadata_Manager::get($metadataName);
+        $meta = $this->_manager->get($metadataName);
         return $meta['db']['primaryKey'];
     }
 
@@ -294,7 +293,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
     {
         $metadataName = $this->getClassName('Metadata', $asc);
         if (class_exists($metadataName)) {
-            $meta = Qwin_Metadata_Manager::get($metadataName);
+            $meta = $this->_manager->get($metadataName);
         } else {
             $metadataName = 'Application_Metadata';
             $meta = Qwin::call($metadataName);
@@ -306,7 +305,6 @@ class Qwin_Application_Metadata extends Qwin_Metadata
     /**
      * 为Doctrine查询对象增加排序语句
      * 
-     * @param Qwin_Metadata $meta
      * @param Doctrine_Query $query
      * @param array|null $addition 附加的排序配置
      * @return object 当前对象
@@ -341,7 +339,6 @@ class Qwin_Application_Metadata extends Qwin_Metadata
     /**
      * 为Doctrine查询对象增加查找语句
      *
-     * @param Qwin_Metadata $meta
      * @param Doctrine_Query $query
      * @param array|null $addition 附加的排序配置
      * @return object 当前对象
@@ -452,7 +449,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
     /**
      * 为Doctrine查询对象增加偏移语句
      *
-     * @param Qwin_Metadata $meta
+     * @param Qwin_Metadata_Abstract $meta
      * @param Doctrine_Query $query
      * @param int|null $addition 附加的偏移配置
      * @return object 当前对象
@@ -474,7 +471,6 @@ class Qwin_Application_Metadata extends Qwin_Metadata
     /**
      * 为Doctrine查询对象增加限制语句
      *
-     * @param Qwin_Metadata $meta
      * @param Doctrine_Query $query
      * @param int|null $addition 附加的限制配置
      * @return object 当前对象
@@ -596,7 +592,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
             if ($model['enabled'] && $type == $model['type']) {
                 if (!isset($model['metadata'])) {
                     $metadataClass = $this->getClassName('Metadata', $model['asc']);
-                    $model['metadata'] = Qwin_Metadata_Manager::get($metadataClass);
+                    $model['metadata'] = $this->_manager->get($metadataClass);
                 }
                 $result[$name] = $model['metadata'];
             }
@@ -610,7 +606,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
             return $meta['model'][$name]['metadata'];
         }
         $class = $this->getClassName('Metadata', $meta['model'][$name]['asc']);
-        return $meta['model'][$name]['metadata'] = Qwin_Metadata_Manager::get($class);
+        return $meta['model'][$name]['metadata'] = $this->_manager->get($class);
     }
 
     /**
@@ -793,7 +789,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
             {
                 continue;
             }
-            $relatedMeta = Qwin_Metadata_Manager::get($model['metadata']);
+            $relatedMeta = $this->_manager->get($model['metadata']);
             $tempValidation = $this->getJQueryValidateCode($relatedMeta, $model['alias']);
             $validation['rules'] += $tempValidation['rules'];
             $validation['messages'] += $tempValidation['messages'];
@@ -805,10 +801,10 @@ class Qwin_Application_Metadata extends Qwin_Metadata
      * 删除只读键的值
      *
      * @param array $data
-     * @param Qwin_Metadata $meta 元数据对象
+     * @param Qwin_Metadata_Abstract $meta 元数据对象
      * @return array
      */
-    public function deleteReadonlyValue($data, Qwin_Metadata $meta)
+    public function deleteReadonlyValue($data, Qwin_Metadata_Abstract $meta)
     {
         foreach ($meta['field'] as $field) {
             if ($field['attr']['isReadonly']) {
@@ -842,10 +838,10 @@ class Qwin_Application_Metadata extends Qwin_Metadata
      * 删除主键的的值
      *
      * @param array $data
-     * @param Qwin_Metadata $meta 元数据对象
+     * @param Qwin_Metadata_Abstract $meta 元数据对象
      * @return array
      */
-    public function unsetPrimaryKeyValue($data, Qwin_Metadata $meta)
+    public function unsetPrimaryKeyValue($data, Qwin_Metadata_Abstract $meta)
     {
         $primaryKey = $meta['db']['primaryKey'];
         // 允许自定义主键的值
@@ -884,7 +880,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
      * @param array $repalce 转换的数组
      * @return string 转换后的数据
      */
-    public function format($data, $repalce)
+    /*public function format($data, $repalce)
     {
         $repalce = (array)$repalce;
         $pos = strpos($data, '{0}');
@@ -897,7 +893,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
             $data = str_replace($search, $repalce, $data);
         }
         return $data;
-    }
+    }*/
 
     /*public function saveRelatedDbData($meta, $data, $query)
     {
@@ -926,7 +922,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata
                         $relatedData[$foreignField] = null;
                     }
                 }
-                $relatedDbMeta = Qwin_Metadata_Manager::get($model['metadata']);
+                $relatedDbMeta = $this->_manager->get($model['metadata']);
                 // TODO 补全其他转换方式,分离该过程
                 $copyData = $relatedData;
                 foreach ($relatedDbMeta['field'] as $name => $field) {

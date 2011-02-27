@@ -30,7 +30,7 @@ class Common_Article_Metadata_Detail extends Common_Metadata
     public function  setMetadata()
     {
         $this//->setIdMetadata()
-             ->parseMetadata(array(
+             ->merge(array(
             'field' => array(
                 'id' => array(
                     'form' => array(

@@ -28,7 +28,7 @@ class Crm_Company_Metadata_Company extends Common_Metadata
     public function setMetadata()
     {
         $this->setCommonMetadata();
-        $this->parseMetadata(array(
+        $this->merge(array(
             'field' => array(
                 'customer_id' => array(
                     'basic' => array(
