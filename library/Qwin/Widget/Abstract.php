@@ -23,7 +23,7 @@
  * @since       2011-01-29 18:13:42
  */
 
-abstract class Qwin_Widget_Abstract
+abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
 {
     /**
      * 配置选项
@@ -59,7 +59,10 @@ abstract class Qwin_Widget_Abstract
      */
     protected $_widget;
     
-    abstract public function render($option);
+    public function render($option)
+    {
+        return $this;
+    }
 
     /**
      * 初始化
@@ -101,6 +104,19 @@ abstract class Qwin_Widget_Abstract
             return $this->_option;
         }
         return isset($this->_option[$name]) ? $this->_option[$name] : null;
+    }
+
+    /**
+     * 设置配置选项
+     *
+     * @param string $name 配置名称
+     * @param mixed $value 配置的值
+     * @return Qwin_Widget_Abstract 当前对象
+     */
+    public function setOption($name, $value = null)
+    {
+        isset($this->_option[$name]) && $this->_option[$name] = $value;
+        return $this;
     }
 
     /**

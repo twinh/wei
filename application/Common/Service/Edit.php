@@ -75,7 +75,7 @@ class Common_Service_Edit extends Common_Service
         }
 
         // 获取改动过的数据
-        $data = $meta->filterEditData($dbData, $option['data']);
+        $data = $this->_filterData($meta, $dbData, $option['data']);
 
         // 转换数据
         $data = $meta->sanitise($data, 'db');
@@ -109,5 +109,28 @@ class Common_Service_Edit extends Common_Service
             'result' => true,
             'data' => get_defined_vars(),
         );
+    }
+
+    /**
+     * 取出编辑数据,即改动过的,需要更新的数据
+     *
+     * @param Qwin_Metadata_Abstract 元数据对象
+     * @param array $data 从数据库取出的数据
+     * @param array $post 用户提交的数据
+     * @return array
+     */
+    protected function _filterData($meta, $data, $post)
+    {
+        $result = array();
+        foreach ($this->field as $name => $field) {
+            if (
+                isset($post[$name])
+                && $post[$name] != $data[$name]
+                && 1 != $field['attr']['isReadonly']
+            ) {
+                $result[$name] = $post[$name];
+            }
+        }
+        return $result;
     }
 }

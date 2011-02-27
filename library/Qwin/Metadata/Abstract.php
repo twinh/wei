@@ -37,11 +37,21 @@ abstract class Qwin_Metadata_Abstract extends ArrayObject
     /**
      * 初始化类
      *
-     * @param array $input 数组
+     * @param array $input 数据
      */
     public function  __construct($input = array(), $flags = self::ARRAY_AS_PROPS)
     {
         parent::__construct($input, $flags);
+    }
+
+    /**
+     * 设置基本元数据,初始化时调用该方法
+     *
+     * @return Qwin_Metadata_Abstract 当前对象
+     */
+    public function setMetadata()
+    {
+        return $this;
     }
 
     /**
@@ -67,34 +77,26 @@ abstract class Qwin_Metadata_Abstract extends ArrayObject
     }
 
     /**
-     * 返回该对象的数组形式
+     * 获取元数据的数组形式(仅获取至第二层)
      *
-     * @return 返回该对象的数组形式
+     * @return 数组
      */
     public function toArray()
     {
-        return $this->_toArray($this->_data);
-    }
-
-
-    protected function _toArray($data)
-    {
-        $result = array();
-        foreach ($data as $key => $value) {
-            if (is_object($value) && is_subclass_of($value, __CLASS__)) {
-                $result[$key] = $this->_toArray($value);
-            } else {
-                $result[$key] = $value;
+        $array = $this->getArrayCopy();
+        foreach ($array as $name => $element) {
+            if (is_subclass_of($element, 'ArrayObject')) {
+                $array[$name] = $element->getArrayCopy();
             }
         }
-        return $result;
+        return $array;
     }
 
     /**
-     * 将数组加入该对象中
+     * 将数组加入元数据中
      *
-     * @param array $data 要加入对象的数组
-     * @return object 当前对象
+     * @param array $data 数组
+     * @return Qwin_Metadata_Abstract 当前对象
      */
     public function fromArray(array $data)
     {
@@ -102,16 +104,13 @@ abstract class Qwin_Metadata_Abstract extends ArrayObject
         return $this;
     }
 
-    public function appendMetadata()
-    {
-
-    }
-
-    public function setMetadata()
-    {
-
-    }
-
+    /**
+     * 合并/加入元数据
+     *
+     * @param array $data 原始数据
+     * @param string $name 元素的名称
+     * @return Qwin_Metadata_Abstract 当前对象
+     */
     public function merge(array $data, $name = null)
     {
         // 补全数据
@@ -149,9 +148,15 @@ abstract class Qwin_Metadata_Abstract extends ArrayObject
         return $this;
     }
 
+    /**
+     * 获取元数据唯一编号
+     *
+     * @return string 编号
+     */
     public function getId()
     {
         if (!isset($this->_id)) {
+            // 如果存在数据库名称,以数据库名称为唯一编号
             if (isset($this['db']['table'])) {
                 $this->_id = $this['db']['table'];
             } else {
@@ -161,9 +166,27 @@ abstract class Qwin_Metadata_Abstract extends ArrayObject
         return $this->_id;
     }
 
+    /**
+     * 设置元数据唯一编号
+     *
+     * @param string $id 编号
+     * @return Qwin_Metadata_Abstract 当前对象
+     */
     public function setId($id)
     {
         $this->_id = (string)$id;
         return $this;
     }
+
+    /**
+     * 获取数据库查询对象
+     */
+    //abstract public function getQuery();
+
+    /**
+     * 根据应用结构配置获取数据库查询对象
+     *
+     * @param array $asc 应用结构配置
+     */
+    //abstract public function getQueryByAsc($asc);
 }

@@ -21,6 +21,7 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       v0.7.0 2011-02-16 01:09:01
+ * @todo        表单,前端验证(js),后端验证(php)如何解耦
  */
 
 class Form_Widget extends Qwin_Widget_Abstract
@@ -360,7 +361,7 @@ class Form_Widget extends Qwin_Widget_Abstract
      * @param string $action 小写的操作名称
      * @param int $column 每行几栏,只能是1或2
      */
-    public function getLayout(Qwin_Metadata $metaCopy, $action = 'add', $column = 2, array $dataCopy = array())
+    public function getLayout(Qwin_Metadata_Abstract $metaCopy, $action = 'add', $column = 2, array $dataCopy = array())
     {
         $orderedField = $this->getOrderedField($metaCopy);
 
@@ -498,7 +499,7 @@ class Form_Widget extends Qwin_Widget_Abstract
      * @param string|false $relatedName 元数据关联模型的元数据名称,如果是主元数据,则为false
      * @return array 以顺序为键名,以域的名称为值的数组
      */
-    public function getOrderedField(Qwin_Metadata $meta, array $orderedField = null, $relatedName = null)
+    public function getOrderedField(Qwin_Metadata_Abstract $meta, array $orderedField = null, $relatedName = null)
     {
         foreach ($meta['field'] as $name => $field) {
             // 使用order作为键名
@@ -551,5 +552,83 @@ class Form_Widget extends Qwin_Widget_Abstract
             return true;
         }
         return false;
+    }
+
+    /**
+     * 将域的元数据转换成jQuery Validate 的验证配置数组
+     *
+     * @param array $fieldMeta 域的元数据配置
+     * @return array jQuery Validate 的验证配置数组
+     * @todo 语言为可选
+     */
+    public function getJQueryValidateCode($meta, $relatedName = false)
+    {
+        $lang = Qwin::call('-lang');
+        $validation = array(
+            'rules' => array(),
+            'messages' => array(),
+        );
+        foreach ($meta['field'] as $name => $field) {
+            if (empty($field['validator']['rule'])) {
+                continue;
+            }
+            foreach($field['validator']['rule'] as $rule => $param) {
+                if ($relatedName) {
+                    $name = $relatedName . '[' . $name . ']';
+                }
+                $validation['rules'][$name][$rule] = $param;
+                $validation['messages'][$name][$rule] = $this->format($lang->t($field['validator']['message'][$rule]), $param);
+            }
+        }
+
+        // 关联元数据
+        /*foreach($meta['model'] as $model)
+        {
+            if('db' != $model['type'])
+            {
+                continue;
+            }
+            $relatedMeta = $this->_manager->get($model['metadata']);
+            $tempValidation = $this->getJQueryValidateCode($relatedMeta, $model['alias']);
+            $validation['rules'] += $tempValidation['rules'];
+            $validation['messages'] += $tempValidation['messages'];
+        }*/
+        return $validation;
+    }
+
+
+    public function makeRequiredAtFront($rule)
+    {
+        // 将必填项放在数组第一位
+        if (array_key_exists('required', $rule)) {
+            $tmpArr = array(
+                'required' => true,
+            );
+            unset($rule['required']);
+            $rule = $tmpArr + $rule;
+        }
+        return $rule;
+    }
+
+    /**
+     * 模拟jquery.format转换数据,将{i}替换为$replace[i]的值
+     *
+     * @param string $data 代转换的数据
+     * @param array $repalce 转换的数组
+     * @return string 转换后的数据
+     */
+    public function format($data, $repalce)
+    {
+        $repalce = (array)$repalce;
+        $pos = strpos($data, '{0}');
+        if (false !== $pos) {
+            $search = array();
+            $count = count($repalce);
+            for ($i = 0;$i < $count; $i++) {
+                $search[$i] = '{' . $i . '}';
+            }
+            $data = str_replace($search, $repalce, $data);
+        }
+        return $data;
     }
 }

@@ -78,7 +78,7 @@ class Common_Service_JsonList extends Common_Service
         // 对数据进行转换
         if ($option['sanitise']) {
             // TODO listField & listField2
-            $listField2 = $meta->filterListData();
+            $listField2 = $this->_filterData($meta);
             foreach ($data as &$row) {
                 $rowTemp = array_intersect_key($row, $listField2) + $listField2;
                 $row = $meta->sanitise($rowTemp, $option['asAction'], array(
@@ -100,6 +100,23 @@ class Common_Service_JsonList extends Common_Service
             return $view->assign($result['data']);
         }
 
+        return $result;
+    }
+
+    /**
+     * 取出列表操作显示的数据
+     *
+     * @param Qwin_Metadata_Abstract $meta 元数据对象
+     * @return array 数据
+     */
+    protected function _filterData($meta)
+    {
+        $result = array();
+        foreach ($meta['field'] as $name => $field) {
+            if (1 == $field['attr']['isList']) {
+                $result[$name] = true;
+            }
+        }
         return $result;
     }
 }

@@ -73,7 +73,7 @@ function qw_form($option)
 function qw_form_extend($option, $form = null)
 {
     static $widget;
-    if (null == $option['_extend']) {
+    if (!isset($option['_extend'])) {
         return false;
     }
 

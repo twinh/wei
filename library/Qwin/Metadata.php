@@ -55,7 +55,10 @@ class Qwin_Metadata
      */
     protected $_objects = array();
 
-    private function  __construct()
+    /**
+     * 不允许在外部初始化
+     */
+    final private function  __construct()
     {
     }
 
@@ -80,6 +83,8 @@ class Qwin_Metadata
      */
     public function get($class)
     {
+        $class = strtolower($class);
+        
         if (isset($this->_objects[$class])) {
             return $this->_objects[$class];
         }
@@ -95,6 +100,19 @@ class Qwin_Metadata
             require_once 'Qwin/Metadata/Exception.php';
             throw new Qwin_Metadata_Exception('Class "' . $class . '" is not the sub class of "Qwin_Metadata_Abstract".');
         }
+    }
+
+    /**
+     * 设置一个元数据对象
+     *
+     * @param string $class 类名,或任意字符串
+     * @param Qwin_Metadata_Abstract $object 元数据对象
+     */
+    public function set($class, Qwin_Metadata_Abstract $object)
+    {
+        $class = (string)$class;
+        $this->_objects[$class] = $object;
+        return $this;
     }
 
     /**
@@ -119,7 +137,7 @@ class Qwin_Metadata
      * 获取驱动类名
      *
      * @param string|null $name 类名,留空表示获取驱动数组
-     * @return string|array
+     * @return string|array 类名或类名数组
      */
     public function getDriver($name = null)
     {
@@ -127,10 +145,5 @@ class Qwin_Metadata
             return $this->_drivers;
         }
         return isset($this->_drivers[$name]) ? $this->_drivers[$name] : null;
-    }
-
-    public function getByAsc(array $asc)
-    {
-        
     }
 }
