@@ -64,46 +64,5 @@ class Common_Namespace extends Qwin_Application_Namespace
             $router->addList($config['router']['list']);
             $url = Qwin::call('-url', $router);
         }*/
-
-        // TODO 延迟连接!!!!
-        /**
-         * 数据库链接,使用的是Doctrine Orm
-         * @todo 助手类
-         */
-        $manager = Doctrine_Manager::getInstance();
-        // 连接padb数据库
-        if(isset($config['database']['adapter']['padb']))
-        {
-            $manager->registerConnectionDriver('padb', 'Doctrine_Connection_Padb');
-            $manager->registerHydrator('padb', 'Doctrine_Hydrator_Padb');
-            $padb = $config['database']['adapter']['padb'];
-            $adapter = $padb['type'] . '://'
-                     . $padb['username'] . ':'
-                     . $padb['password'] . '@'
-                     . $padb['server'] . '/'
-                     . $padb['database'];
-            $conn = Doctrine_Manager::connection($adapter, 'padb');
-        }
-
-        // 连接其他数据库
-        if($config['database']['setup'])
-        {
-            if(isset($_SERVER['SERVER_ADDR']) && $_SERVER['SERVER_ADDR'] == '127.0.0.1')
-            {
-                $mainAdapter = 'localhost';
-            } else {
-                $mainAdapter = 'web';
-            }
-            $databaseSet = $config['database']['adapter'][$mainAdapter];
-            $adapter = $databaseSet['type'] . '://'
-                     . $databaseSet['username'] . ':'
-                     . $databaseSet['password'] . '@'
-                     . $databaseSet['server'] . '/'
-                     . $databaseSet['database'];
-            $conn = Doctrine_Manager::connection($adapter, $config['projectName']);
-            $conn->setAttribute(Doctrine_Core::ATTR_QUOTE_IDENTIFIER, true);
-            $conn->setCharset($databaseSet['charset']);
-            //$conn->setCollate('utf8_general_ci');
-        }
     }
 }
