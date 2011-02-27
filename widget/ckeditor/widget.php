@@ -27,6 +27,24 @@ class CKEditor_Widget extends Qwin_Widget_Abstract
 {
     public function render($option)
     {
+        /*
+        $code = '<script type="text/javascript" src="' . QWIN . '/js/ckeditor/ckeditor.js"></script>
+                 <script type="text/javascript" src="' . QWIN . '/js/ckfinder/ckfinder.js"></script>
+                 <script type="text/javascript">
+                    var ckeditor = CKEDITOR.replace("' . $meta['id'] . '");
+                    CKFinder.setupCKEditor(ckeditor, "' . QWIN . '/js/ckfinder/" );
+                 </script>
+        ';
+
+        // 配置 CKFinder
+        require_once QWIN . DS . 'js/ckfinder/qwin_interface.php';
+        $qwin_interface = new Qwin_CKFinder_Interface();
+        // TODO param 2 登陆的标准
+        $path = dirname($_SERVER['SCRIPT_NAME']) . '/upload/';
+        $qwin_interface->setInterface($path, true);
+
+        return $code;
+        */
         $path = $this->getRootPath(__FILE__);
         require $path . '/view/default.php';
     }

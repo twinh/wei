@@ -50,6 +50,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Driver
             //'_resourceGetter' => null,
             //'_resourceFormFile' => null,
             //'_widget' => array(),
+            //'_extend' => array(),
             '_value' => '',
             'name' => null,
             //'id' => null,
@@ -350,7 +351,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Driver
     public function getFormValue()
     {
         $data = array();
-        foreach ($this->_data as $name => $field) {
+        foreach ($this as $name => $field) {
             $data[$name] = $field['form']['_value'];
         }
         return $data;

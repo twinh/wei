@@ -81,7 +81,7 @@ class Common_Service_Add extends Common_Service
         }
 
         // 获取改动过的数据
-        $data = $meta->filterAddData($option['data']);
+        $data = $this->_filterData($meta, $option['data']);
 
         // 转换数据
         $data = $meta->sanitise($data, 'db');
@@ -123,5 +123,21 @@ class Common_Service_Add extends Common_Service
             'result' => true,
             'data' => get_defined_vars(),
         );
+    }
+
+    /**
+     * 取出添加操作入库的数据
+     *
+     * @param Qwin_Metadata_Abstract $meta 元数据对象
+     * @param array $post 原始数据,一般为$_POST
+     * @return array 数据
+     */
+    protected function _filterData($meta, $post)
+    {
+        $result = array();
+        foreach ($meta['field'] as $name => $field) {
+            $result[$name] = isset($post[$name]) ? $post[$name] : null;
+        }
+        return $result;
     }
 }

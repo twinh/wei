@@ -27,7 +27,7 @@ class Crm_Helper
 {
     public static function sanitisePopupMember($value, $name, $viewName, $meta)
     {
-        $data = Qwin::call('Qwin_Application_Metadata')
+        $data = $meta
             ->getQueryByAsc(array(
                 'namespace' => 'Common',
                 'module' => 'Member',
@@ -36,12 +36,12 @@ class Crm_Helper
             ->select($viewName)
             ->where('id = ?', $value)
             ->fetchOne();
-        $meta['field']->set($name . '.form._value2', $data[$viewName]);
+        $meta['field'][$name]['form']['_value2'] = $data[$viewName];
     }
 
     public static function sanitisePopupContact($value, $name, $viewName, $meta)
     {
-        $data = Qwin::call('Qwin_Application_Metadata')
+        $data = $meta
             ->getQueryByAsc(array(
                 'namespace' => 'Crm',
                 'module' => 'Contact',
@@ -49,12 +49,12 @@ class Crm_Helper
             ))
             ->where('id = ?', $value)
             ->fetchOne();
-        $meta['field']->set($name . '.form._value2', $data['last_name'] . $data['first_name']);
+        $meta['field'][$name]['form']['_value2'] = $data['last_name'] . $data['first_name'];
     }
 
     public static function sanitisePopupCustomer($value, $name, $viewName, $meta)
     {
-        $data = Qwin::call('Qwin_Application_Metadata')
+        $data = $meta
             ->getQueryByAsc(array(
                 'namespace' => 'Crm',
                 'module' => 'Customer',
@@ -62,12 +62,12 @@ class Crm_Helper
             ))
             ->where('id = ?', $value)
             ->fetchOne();
-        $meta['field']->set($name . '.form._value2', $data[$viewName]);
+        $meta['field'][$name]['form']['_value2'] = $data[$viewName];
     }
 
     public static function sanitisePopupOpportunity($value, $name, $viewName, $meta)
     {
-        $data = Qwin::call('Qwin_Application_Metadata')
+        $data = $meta
             ->getQueryByAsc(array(
                 'namespace' => 'Crm',
                 'module' => 'Opportunity',
@@ -75,6 +75,6 @@ class Crm_Helper
             ))
             ->where('id = ?', $value)
             ->fetchOne();
-        $meta['field']->set($name . '.form._value2', $data[$viewName]);
+        $meta['field'][$name]['form']['_value2'] = $data[$viewName];
     }
 }

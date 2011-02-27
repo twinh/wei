@@ -257,9 +257,8 @@ class Common_Request extends Qwin_Request
      */
     public function getPrimaryKeyValue(array $asc)
     {
-        $metaHelper = Qwin::call('Qwin_Application_Metadata');
-        $primaryKey = $metaHelper->getPrimaryKeyName($asc);
-        return $this->get($primaryKey);
+        $meta = Qwin_Application::getInstance()->getMetadataByAsc($asc);
+        return $this->get($meta['db']['primaryKey']);
     }
 
     public function getLang($name = null)

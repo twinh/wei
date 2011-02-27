@@ -294,6 +294,11 @@ class Qwin_Application
     {
         
     }
+
+    public function getModelByAsc()
+    {
+        
+    }
     
     /**
      * 获取视图类名
@@ -322,11 +327,6 @@ class Qwin_Application
         }
     }    
 
-    public function getMetadata()
-    {
-
-    }
-
     public function getMetadataByAsc(array $asc)
     {
         $name = $this->getClass('metadata', $asc);
@@ -350,32 +350,51 @@ class Qwin_Application
     }
 
     /**
-     * 设置视图对象,方便第三方扩展
+     * 设置视图对象,方便第三方扩展,如Samrty
      *
-     * @param object $view 视图对象,如Samrty,或
+     * @param object $view 视图对象
      */
     public function setView($view)
     {
         $this->_view = $view;
-        //Qwin::set('-view', $view);
         return $this;
     }
 
+    /**
+     * 获取页面运行时间
+     *
+     * @return string
+     */
     public function getEndTime()
     {
         return str_pad(round((microtime(true) - $this->_startTime), 4), 6, 0);
     }
 
+    /**
+     * 命名空间不存在
+     *
+     * @param array $asc 应用结构配置
+     */
     public function _onNamespaceNotExists($asc)
     {
         exit('The namespace "' . $asc['namespace'] . '" is not exists.');
     }
 
+    /**
+     * 控制器不存在
+     *
+     * @param array $asc 应用结构配置
+     */
     public function _onControllerNotExists($asc)
     {
         exit('The controller "' . $asc['controller'] . '" is not exists.');
     }
 
+    /**
+     * 行为不存在
+     *
+     * @param array $asc 应用结构配置
+     */
     public function _onActionNotExists($asc)
     {
         exit('The action "' . $asc['action'] .  '" is not exists');

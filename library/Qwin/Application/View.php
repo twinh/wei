@@ -25,7 +25,7 @@
  * @since       2010-08-06 19:25:40
  */
 
-class Qwin_Application_View extends Qwin_Metadata_Abstract
+class Qwin_Application_View extends ArrayObject
 {
     /**
      * 变量数组
@@ -70,9 +70,14 @@ class Qwin_Application_View extends Qwin_Metadata_Abstract
         'style' => '<style>'
     );
 
-    public function  __construct()
+    /**
+     * 初始化类
+     *
+     * @param array $input 数据
+     */
+    public function  __construct($input = array())
     {
-        parent::__construct();
+        parent::__construct($input, self::ARRAY_AS_PROPS);
     }
 
     /**
@@ -85,7 +90,7 @@ class Qwin_Application_View extends Qwin_Metadata_Abstract
     public function assign($name, $value = null)
     {
         if (is_array($name)) {
-            $this->fromArray($name);
+            $this->exchangeArray(array_merge($this->getArrayCopy(), $name));
         } else {
             $this->offsetSet($name, $value);
         }

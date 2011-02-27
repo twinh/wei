@@ -35,8 +35,6 @@ require_once 'Qwin/Application/Metadata.php';
 
 class Common_Metadata extends Qwin_Application_Metadata
 {
-    protected $_set;
-
     /**
      * 需要进行链接转换的行为
      * @var array
@@ -47,6 +45,401 @@ class Common_Metadata extends Qwin_Application_Metadata
     {
         parent::__construct();
         $this->url = Qwin::call('-url');
+    }
+
+    /**
+     * 数据表前缀
+     * @var string
+     */
+    protected $_tablePrefix;
+
+    /**
+     * 获取数据表前缀,方便调用
+     *
+     * @return string 表前缀
+     */
+    public function getTablePrefix($adapter = null)
+    {
+        if (null != $this->_tablePrefix) {
+            return $this->_tablePrefix;
+        }
+        if (null == $adapter) {
+            $config = Qwin::config();
+            $adapter = $config['database']['mainAdapter'];
+        }
+        $this->_tablePrefix = $config['database']['adapter'][$adapter]['prefix'];
+        return $this->_tablePrefix;
+    }
+
+    /**
+     * 根据元数据配置,获取Doctrine的查询对象
+     *
+     * @param array $asc 元数据配置
+     * @return Doctrine_Query 查询对象
+     */
+    public function getQueryByAsc($asc, $type = array(), $name = array())
+    {
+        $metaClass  = $this->getClassName('Metadata', $asc);
+        $modelClass = $this->getClassName('Model', $asc);
+        $meta       = $this->_manager->get($metaClass);
+        $model      = Qwin::call($modelClass);
+        return $meta->getQuery($model, $type, $name);
+    }
+
+    public static function connect()
+    {
+        
+    }
+
+    /**
+     * 通过元数据配置,获取Doctrine的查询对象
+     *
+     * @param Doctrine_Record $model 模型对象
+     * @return Doctrine_Query 查询对象
+     * @todo 缓存查询对象,模型对象
+     * @todo padb问题
+     */
+    public function getQuery(Doctrine_Record $model = null, $type = array(), $name = array())
+    {
+        
+        // 未定义模型,则初始化关联模型
+        if (null == $model) {
+            $asc = $this->getAscFromClass();
+            $modelClass = $this->getClassName('Model', $asc);
+            $model = Qwin::call($modelClass);
+        } else {
+            $modelClass = get_class($model);
+        }
+
+        $joinModel = array();
+        !is_array($name) && $name = array($name);
+        !is_array($type) && $type = array($type);
+        // 取出要关联的模块
+        if (!empty($name) || !empty($type)) {
+            foreach ($this['model'] as $modelName => $modelSet) {
+                if (in_array($modelName, $name) || in_array($modelSet['type'], $type)) {
+                    $joinModel[$modelName] = $modelName;
+                }
+            }
+        }
+
+        // 自身的转换
+        $this->metadataToModel($model);
+        $query = Doctrine_Query::create()->from($modelClass);
+
+        // 增加默认查询
+        if (!empty($this['db']['defaultWhere'])) {
+            $this->addWhereToQuery($query, $this['db']['defaultWhere']);
+        }
+
+        // 关联模型的转换
+        foreach ($joinModel as $joinModelName) {
+            // 该模型的设置
+            $modelSet = $this['model'][$joinModelName];
+            $modelName = $this->getClassName('Model', $modelSet['asc']);
+            $relatedMetaObject = $this->_manager->get($this->getClassName('Metadata', $modelSet['asc']));
+            $relatedModelObejct = Qwin::call($modelName);
+            $relatedMetaObject->metadataToModel($relatedModelObejct);
+
+            // 设置模型关系
+            call_user_func(
+                array($model, 'hasOne'),
+                $modelName . ' as ' . $modelSet['alias'],
+                array(
+                    'local' => $modelSet['local'],
+                    'foreign' => $modelSet['foreign']
+                )
+            );
+            $query->leftJoin($modelClass . '.' . $modelSet['alias'] . ' ' . $modelSet['alias']);
+        }
+        return $query;
+    }
+
+    /**
+     * 将元数据的域定义,数据表定义加入模型中
+     *
+     * @param Doctrine_Record $model Doctrine对象
+     * @return Qwin_Application_Metadata 当前对象
+     */
+    public function metadataToModel(Doctrine_Record $model)
+    {
+        $tablePrefix = $this->getTablePrefix();
+
+        // 设置数据表
+        $model->setTableName($tablePrefix . $this['db']['table']);
+
+        // 设置字段
+        $fieldList = $this['field']->getAttrList(array('isDbField', 'isDbQuery'));
+        foreach ($fieldList as $field) {
+            $model->hasColumn($field);
+        }
+        return $this;
+    }
+
+    /**
+     * 为Doctrine查询对象增加排序语句
+     *
+     * @param Doctrine_Query $query
+     * @param array|null $addition 附加的排序配置
+     * @return object 当前对象
+     * @todo 关联元数据的排序
+     */
+    public function addOrderToQuery(Doctrine_Query $query, array $addition = null)
+    {
+        $meta = $this;
+        $order = null != $addition ? $addition : $meta['db']['order'];
+
+        $alias = $query->getRootAlias();
+        '' != $alias && $alias .= '.';
+
+        // 数据表字段的域
+        $queryField = $meta['field']->getAttrList('isDbQuery');
+        $orderType = array('DESC', 'ASC');
+
+        foreach ($order as $fieldSet) {
+            // 不被允许的域名称
+            if (!in_array($fieldSet[0], $queryField)) {
+                continue;
+            }
+            $fieldSet[1] = strtoupper($fieldSet[1]);
+            if (!in_array($fieldSet[1], $orderType)) {
+                $fieldSet[1] = $orderType[0];
+            }
+            $query->addOrderBy($alias . $fieldSet[0] . ' ' .  $fieldSet[1]);
+        }
+        return $this;
+    }
+
+    /**
+     * 为Doctrine查询对象增加查找语句
+     *
+     * @param Doctrine_Query $query
+     * @param array|null $addition 附加的排序配置
+     * @return object 当前对象
+     * @todo 完善查询类型
+     * @todo 复杂查询
+     */
+    public function addWhereToQuery(Doctrine_Query $query, array $addition = null)
+    {
+        $meta = $this;
+        $search = null != $addition ? $addition : $meta['db']['where'];
+
+        $alias = $query->getRootAlias();
+        '' != $alias && $alias .= '.';
+
+        // 数据表字段的域
+        $queryField = $meta['field']->getAttrList('isDbQuery');
+        // TODO　是否使用%s替换
+        $searchType = array(
+            'eq' => '=',
+            'ne' => '<>',
+            'lt' => '<',
+            'le' => '<=',
+            'gt' => '>',
+            'ge' => '>=',
+            'bw' => 'LIKE',
+            'bn' => 'NOT LINK',
+            'in' => 'IN',
+            'ni' => 'NOT IN',
+            'ew' => 'LIKE',
+            'en' => 'NOT LIKE',
+            'cn' => 'LIKE',
+            'nc' => 'NOT LIKE',
+        );
+
+        foreach ($search as $fieldSet) {
+            // 不被允许的域名称
+            if (!in_array($fieldSet[0], $queryField)) {
+                continue;
+            }
+            if (!isset($fieldSet[2])) {
+                $fieldSet[2] = key($searchType);
+            } else {
+                $fieldSet[2] = strtolower($fieldSet[2]);
+                !isset($searchType[$fieldSet[2]]) && $fieldSet[2] = key($searchType);
+            }
+            switch ($fieldSet[2]) {
+                case 'bw':
+                case 'bn':
+                    $value = '%' . $this->_escapeWildcard($fieldSet[1]);
+                    break;
+                case 'ew':
+                case 'en':
+                    $value = $this->_escapeWildcard($fieldSet[1]) . '%';
+                    break;
+                case 'cn':
+                case 'nc':
+                    $value = '%' . $this->_escapeWildcard($fieldSet[1]) . '%';
+                    $value = '%' . $this->_escapeWildcard($fieldSet[1]) . '%';
+                    break;
+                /*case 'in':
+                case 'ni':
+                    $value = is_array($fieldSet[1]) ? $fieldSet[1] : array($fieldSet[1]);
+                    break;
+                /*case 'eq':
+                case 'ne':
+                case 'lt':
+                case 'le':
+                case 'gt':
+                case 'ge':*/
+                default:
+                    $value = $fieldSet[1];
+                    break;
+            }
+            if ('in' == $fieldSet[2] || 'ni' == $fieldSet[2]) {
+                $valueSign = '(?)';
+            } else {
+                $valueSign = '?';
+            }
+
+            // null and not null
+            if(null === $value) {
+                if ('eq' == $fieldSet[2]) {
+                    $query->andWhere($alias . $fieldSet[0] . ' IS NULL');
+                    continue;
+                } elseif ('ne' == $fieldSet[2]) {
+                    $query->andWhere($alias . $fieldSet[0] . ' IS NOT NULL');
+                    continue;
+                }
+            }
+            $query->andWhere($alias . $fieldSet[0] . ' ' . $searchType[$fieldSet[2]] . ' ' . $valueSign, $value);
+        }
+        return $this;
+    }
+
+    /**
+     * 转义LIKE语言中的通配符%和_
+     *
+     * @param string $value
+     * @return string
+     * @todo 其他通配符[]
+     * @todo 其他数据库是否支持
+     */
+    protected function _escapeWildcard($value)
+    {
+        return strtr($value, array('%' => '\%', '_' => '\_'));
+    }
+
+    /**
+     * 为Doctrine查询对象增加偏移语句
+     *
+     * @param Doctrine_Query $query
+     * @param int|null $addition 附加的偏移配置
+     * @return object 当前对象
+     */
+    public function addOffsetToQuery(Doctrine_Query $query, $addition = null)
+    {
+        $meta = $this;
+        $offset = 0;
+        if (null != $addition) {
+            $addition = intval($addition);
+            if (0 < $addition) {
+                $offset = $addition;
+            }
+        }
+        $query->offset($offset);
+        return $this;
+    }
+
+    /**
+     * 为Doctrine查询对象增加限制语句
+     *
+     * @param Doctrine_Query $query
+     * @param int|null $addition 附加的限制配置
+     * @return object 当前对象
+     */
+    public function addLimitToQuery(Doctrine_Query $query, $addition = null)
+    {
+        $meta = $this;
+        $limit = 0;
+        if (null != $addition) {
+            $addition = intval($addition);
+            if (0 < $addition) {
+                $limit = $addition;
+            }
+        }
+        $query->limit($limit);
+        return $this;
+    }
+
+    /**
+     * 根据应用结构配置获取元数据
+     *
+     * @param array $asc 应用结构配置
+     * @return Application_Metadata
+     */
+    public function getMetadataByAsc($asc)
+    {
+        $metadataName = $this->getClassName('Metadata', $asc);
+        if (class_exists($metadataName)) {
+            $meta = $this->_manager->get($metadataName);
+        } else {
+            $metadataName = 'Application_Metadata';
+            $meta = Qwin::call($metadataName);
+        }
+        Qwin::set('-meta', $metadataName);
+        return $meta;
+    }
+
+    /**
+     * 获取标准的类名
+     *
+     * @param string $addition 附加的字符串
+     * @param array $asc 配置数组
+     * @return string 类名
+     */
+    public function getClassName($addition, $asc)
+    {
+        if (!isset($asc['namespace'])) {
+            if (!isset($this->config)) {
+                $this->config = Qwin::call('-config');
+            }
+            $asc['namespace'] = $this->config['asc']['namespace'];
+        }
+        return $asc['namespace'] . '_' . $asc['module'] . '_' . $addition . '_' . $asc['controller'];
+    }
+
+    /**
+     * 为Doctrine查询对象增加查询语句
+     *
+     * @param Doctrine_Query $query
+     * @return object 当前对象
+     * @todo 是否要将主类加入到$meta['model']数组中,减少代码重复
+     */
+    public function addSelectToQuery(Doctrine_Query $query)
+    {
+        /**
+         * 设置主类的查询语句
+         */
+        $meta = $this;
+        // 调整主键的属性,因为查询时至少需要选择一列
+        $primaryKey = $meta['db']['primaryKey'];
+        $meta->field
+             //->setAttr($primaryKey, 'isList', true)
+             ->setAttr($primaryKey, 'isDbField', true)
+             ->setAttr($primaryKey, 'isDbQuery', true);
+
+        $queryField = $meta->field->getAttrList(array('isDbQuery', 'isDbField'));
+        $query->select(implode(', ', $queryField));
+
+        /**
+         * 设置关联类的查询语句
+         */
+        foreach ($meta['model'] as $model) {
+            $linkedMetaObj = $this->_manager->get($this->getClassName('Metadata', $model['asc']));
+
+            // 调整主键的属性,因为查询时至少需要选择一列
+            $primaryKey = $linkedMetaObj['db']['primaryKey'];
+            $linkedMetaObj->field
+                          ->setAttr($primaryKey, 'isDbField', true)
+                          ->setAttr($primaryKey, 'isDbQuery', true);
+
+            $queryField = $linkedMetaObj->field->getAttrList(array('isDbQuery', 'isDbField'));
+            foreach ($queryField as $field) {
+                $query->addSelect($model['alias'] . '.' . $field);
+            }
+        }
+        return $this;
     }
 
     /**
@@ -420,7 +813,7 @@ class Common_Metadata extends Qwin_Application_Metadata
     public function sanitiseAddOrder($value, $name, $data, $dataCopy)
     {
         return 50;
-        $query = $this->metaHelper->getQuery($this);
+        $query = $this->getQuery($this);
         $result = $query
             ->select($this->db['primaryKey'] . ', order')
             ->orderBy('order DESC')
