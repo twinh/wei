@@ -32,4 +32,67 @@ require_once 'Doctrine/Record.php';
 
 class Common_Model extends Doctrine_Record
 {
+    /**
+     * 数据库连接标识
+     * @var bool
+     */
+    protected static $_connected = false;
+    
+    public function  __construct($table = null, $isNewEntry = false)
+    {
+        self::_connect();
+        parent::__construct($table, $isNewEntry);
+    }
+
+    /**
+     * 连接数据库
+     *
+     * @return bool
+     */
+    protected static function _connect()
+    {
+        if (!self::$_connected) {
+            $manager = Doctrine_Manager::getInstance();
+            $config = Qwin::config();
+            // 连接padb数据库
+            /*if(isset($config['database']['adapter']['padb'])) {
+                $manager->registerConnectionDriver('padb', 'Doctrine_Connection_Padb');
+                $manager->registerHydrator('padb', 'Doctrine_Hydrator_Padb');
+                $padb = $config['database']['adapter']['padb'];
+                $adapter = $padb['type'] . '://'
+                         . $padb['username'] . ':'
+                         . $padb['password'] . '@'
+                         . $padb['server'] . '/'
+                         . $padb['database'];
+                $conn = $manager->openConnection($adapter, 'padb');
+            }*/
+
+            // 连接其他数据库
+            if (isset($_SERVER['SERVER_ADDR']) && $_SERVER['SERVER_ADDR'] == '127.0.0.1') {
+                $mainAdapter = 'localhost';
+            } else {
+                $mainAdapter = 'web';
+            }
+            $databaseSet = $config['database']['adapter'][$mainAdapter];
+            $adapter = $databaseSet['type'] . '://'
+                     . $databaseSet['username'] . ':'
+                     . $databaseSet['password'] . '@'
+                     . $databaseSet['server'] . '/'
+                     . $databaseSet['database'];
+            $conn = $manager->openConnection($adapter, $config['projectName']);
+
+            // 设置字段查询带引号
+            $conn->setAttribute(Doctrine_Core::ATTR_QUOTE_IDENTIFIER, true);
+
+            // 设置表前缀
+            $manager->setAttribute(Doctrine_Core::ATTR_TBLNAME_FORMAT, $databaseSet['prefix'] . '%s');
+
+            // 设置字符集
+            $conn->setCharset($databaseSet['charset']);
+            //$conn->setCollate('utf8_general_ci');
+
+            self::$_connected = true;
+        }
+        return true;
+    }
 }

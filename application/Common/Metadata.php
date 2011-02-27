@@ -48,30 +48,6 @@ class Common_Metadata extends Qwin_Application_Metadata
     }
 
     /**
-     * 数据表前缀
-     * @var string
-     */
-    protected $_tablePrefix;
-
-    /**
-     * 获取数据表前缀,方便调用
-     *
-     * @return string 表前缀
-     */
-    public function getTablePrefix($adapter = null)
-    {
-        if (null != $this->_tablePrefix) {
-            return $this->_tablePrefix;
-        }
-        if (null == $adapter) {
-            $config = Qwin::config();
-            $adapter = $config['database']['mainAdapter'];
-        }
-        $this->_tablePrefix = $config['database']['adapter'][$adapter]['prefix'];
-        return $this->_tablePrefix;
-    }
-
-    /**
      * 根据元数据配置,获取Doctrine的查询对象
      *
      * @param array $asc 元数据配置
@@ -86,11 +62,6 @@ class Common_Metadata extends Qwin_Application_Metadata
         return $meta->getQuery($model, $type, $name);
     }
 
-    public static function connect()
-    {
-        
-    }
-
     /**
      * 通过元数据配置,获取Doctrine的查询对象
      *
@@ -101,7 +72,6 @@ class Common_Metadata extends Qwin_Application_Metadata
      */
     public function getQuery(Doctrine_Record $model = null, $type = array(), $name = array())
     {
-        
         // 未定义模型,则初始化关联模型
         if (null == $model) {
             $asc = $this->getAscFromClass();
@@ -163,10 +133,8 @@ class Common_Metadata extends Qwin_Application_Metadata
      */
     public function metadataToModel(Doctrine_Record $model)
     {
-        $tablePrefix = $this->getTablePrefix();
-
         // 设置数据表
-        $model->setTableName($tablePrefix . $this['db']['table']);
+        $model->setTableName($this['db']['table']);
 
         // 设置字段
         $fieldList = $this['field']->getAttrList(array('isDbField', 'isDbQuery'));
