@@ -73,7 +73,6 @@ class Common_Service_View extends Common_Service
         // 从模型获取数据
         $query = $meta->getQueryByAsc($option['asc'], array('db', 'view'));
         $dbData = $query
-            ->select($primaryKey)
             ->where($primaryKey . ' = ?', $option['id'])
             ->fetchOne();
 

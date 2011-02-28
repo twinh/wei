@@ -73,22 +73,22 @@ class Common_Model extends Doctrine_Record
             } else {
                 $mainAdapter = 'web';
             }
-            $databaseSet = $config['database']['adapter'][$mainAdapter];
-            $adapter = $databaseSet['type'] . '://'
-                     . $databaseSet['username'] . ':'
-                     . $databaseSet['password'] . '@'
-                     . $databaseSet['server'] . '/'
-                     . $databaseSet['database'];
+            $db = $config['database']['adapter'][$mainAdapter];
+            $adapter = $db['type'] . '://'
+                     . $db['username'] . ':'
+                     . $db['password'] . '@'
+                     . $db['server'] . '/'
+                     . $db['database'];
             $conn = $manager->openConnection($adapter, $config['projectName']);
 
             // 设置字段查询带引号
             $conn->setAttribute(Doctrine_Core::ATTR_QUOTE_IDENTIFIER, true);
 
             // 设置表前缀
-            $manager->setAttribute(Doctrine_Core::ATTR_TBLNAME_FORMAT, $databaseSet['prefix'] . '%s');
+            $manager->setAttribute(Doctrine_Core::ATTR_TBLNAME_FORMAT, $db['prefix'] . '%s');
 
             // 设置字符集
-            $conn->setCharset($databaseSet['charset']);
+            $conn->setCharset($db['charset']);
             //$conn->setCollate('utf8_general_ci');
 
             self::$_connected = true;
