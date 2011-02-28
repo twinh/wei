@@ -122,7 +122,7 @@ class Common_Service_Edit extends Common_Service
     protected function _filterData($meta, $data, $post)
     {
         $result = array();
-        foreach ($this->field as $name => $field) {
+        foreach ($meta['field'] as $name => $field) {
             if (
                 isset($post[$name])
                 && $post[$name] != $data[$name]
