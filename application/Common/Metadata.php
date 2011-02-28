@@ -331,25 +331,6 @@ class Common_Metadata extends Qwin_Application_Metadata
     }
 
     /**
-     * 根据应用结构配置获取元数据
-     *
-     * @param array $asc 应用结构配置
-     * @return Application_Metadata
-     */
-    public function getMetadataByAsc($asc)
-    {
-        $metadataName = self::getByAsc($asc);
-        if (class_exists($metadataName)) {
-            $meta = $this->_manager->get($metadataName);
-        } else {
-            $metadataName = 'Application_Metadata';
-            $meta = Qwin::call($metadataName);
-        }
-        Qwin::set('-meta', $metadataName);
-        return $meta;
-    }
-
-    /**
      * 为Doctrine查询对象增加查询语句
      *
      * @param Doctrine_Query $query

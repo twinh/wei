@@ -53,7 +53,7 @@ class Common_Service_Form extends Common_Service
         $app        = Qwin::call('-app');
         
         /* @var $meta Common_Metadata */
-        $meta       = $app->getMetadataByAsc($option['asc']);
+        $meta       = Common_Metadata::getByAsc($option['asc']);
         $primaryKey = $meta['db']['primaryKey'];
         $primaryKeyValue = $option['id'];
 

@@ -39,12 +39,12 @@ abstract class Qwin_Application_Model extends Doctrine_Record
      * @return Common_Model 模型对象
      * @todo
      */
-    public static function getByAsc(array $asc)
+    public static function getByAsc(array $asc, $instanced = true)
     {
         $class = $asc['namespace'] . '_' . $asc['module'] . '_Model_' . $asc['controller'];
         if (!class_exists($class)) {
-            $class = __CLASS__;
+            $class = $asc['namespace'] . '_Model';
         }
-        return new $class;
+        return $instanced ? Qwin::call($class) : null;
     }
 }

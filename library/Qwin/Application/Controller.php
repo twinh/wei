@@ -70,15 +70,12 @@ abstract class Qwin_Application_Controller
      *
      * @param array $asc 应用结构配置
      * @return Common_Model 模型对象
-     * @todo
+     * @todo 当类不存在时,是否需要用父类?
      */
-    public static function getByAsc(array $asc)
+    public static function getByAsc(array $asc, $instanced = true)
     {
         $class = $asc['namespace'] . '_' . $asc['module'] . '_Controller_' . $asc['controller'];
-        if (!class_exists($class)) {
-            $class = __CLASS__;
-        }
-        return new $class;
+        return $instanced ? Qwin::call($class) : $class;
     }
 
     /**

@@ -31,7 +31,7 @@ class Common_Widget_FormLink extends Common_Widget
         $asc = $view['asc'];
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
-        $controller = $manager->getClass('controller', $asc);
+        $controller = Common_Controller::getByAsc($asc, false);
         $varList = get_class_vars($controller);
         if (isset($varList['_forbiddenAction'])) {
             $forbiddenAction = (array)$varList['_forbiddenAction'];
@@ -85,7 +85,7 @@ class Common_Widget_FormLink extends Common_Widget
             }
 
              if (!in_array('delete', $forbiddenAction)) {
-                $meta = $manager->getMetadataByAsc($asc);
+                $meta = Common_Metadata::getByAsc($asc);
                 if (!isset($meta['page']['useTrash'])) {
                     $icon = 'ui-icon-close';
                     $jsLang = 'MSG_CONFIRM_TO_DELETE';
