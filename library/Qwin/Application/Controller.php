@@ -25,7 +25,7 @@
  * @since       2009-11-24 20:45:11
  */
 
-class Qwin_Application_Controller
+abstract class Qwin_Application_Controller
 {
     /**
      * 模型对象
@@ -63,6 +63,22 @@ class Qwin_Application_Controller
     public function __construct()
     {
         
+    }
+
+    /**
+     * 根据应用结构配置获取模型对象
+     *
+     * @param array $asc 应用结构配置
+     * @return Common_Model 模型对象
+     * @todo
+     */
+    public static function getByAsc(array $asc)
+    {
+        $class = $asc['namespace'] . '_' . $asc['module'] . '_Controller_' . $asc['controller'];
+        if (!class_exists($class)) {
+            $class = __CLASS__;
+        }
+        return new $class;
     }
 
     /**

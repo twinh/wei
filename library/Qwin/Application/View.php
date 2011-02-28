@@ -28,12 +28,6 @@
 class Qwin_Application_View extends ArrayObject
 {
     /**
-     * 变量数组
-     * @var array
-     */
-    protected $_data = array();
-
-    /**
      * 视图元素数组
      * @var array
      */

@@ -28,6 +28,11 @@
  * @since       2009-11-21 14:37
  */
 
+/**
+ * @see Qwin_Application_Namespace
+ */
+require_once 'Qwin/Application/Namespace.php';
+
 class Common_Namespace extends Qwin_Application_Namespace
 {
     public function __construct()

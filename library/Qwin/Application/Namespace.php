@@ -25,6 +25,6 @@
  * @since       2010-08-16 15:45:02
  */
 
-class Qwin_Application_Namespace
+abstract class Qwin_Application_Namespace
 {
 }

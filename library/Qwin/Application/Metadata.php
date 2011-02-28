@@ -31,7 +31,7 @@
  */
 require_once 'Qwin/Metadata/Abstract.php';
 
-class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
+abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
 {
     /**
      * @var array $_sanitiseOption  数据处理的选项
@@ -97,10 +97,30 @@ class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
         'model'         => array(),
         'type'          => array(),
     );*/
-    
+
+    /**
+     * 根据应用结构配置获取元数据对象
+     *
+     * @param array $asc 应用结构配置
+     * @return Qwin_Metadata_Abstarct 元数据对象
+     */
+    public static function getByAsc(array $asc)
+    {
+        $class = $asc['namespace'] . '_' . $asc['module'] . '_Metadata_' . $asc['controller'];
+        if (!class_exists($class)) {
+            $class = __CLASS__;
+        }
+        return Qwin_Metadata::getInstance()->get($class);
+    }
+
+    /**
+     *
+     * @param array $asc
+     * @return <type> 
+     */
     public function getPrimaryKeyName(array $asc)
     {
-        $metadataName = $this->getClassName('Metadata', $asc);
+        $metadataName = self::getByAsc($asc);
         if (!class_exists($metadataName)) {
             return null;
         }
@@ -201,6 +221,12 @@ class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
         return $data;
     }
 
+    /**
+     * 根据类型获取模型的元数据
+     *
+     * @param string $type 类型
+     * @return array 由元数据组成的数组
+     */
     public function getModelMetadataByType($type = 'db')
     {
         if (empty($this['model'])) {
@@ -210,8 +236,7 @@ class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
         foreach ($this['model'] as $name => $model) {
             if ($model['enabled'] && $type == $model['type']) {
                 if (!isset($model['metadata'])) {
-                    $metadataClass = $this->getClassName('Metadata', $model['asc']);
-                    $model['metadata'] = $this->_manager->get($metadataClass);
+                    $model['metadata'] = self::getByAsc($model['asc']);
                 }
                 $result[$name] = $model['metadata'];
             }
@@ -219,13 +244,18 @@ class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
         return $result;
     }
 
-    public function getModelMetadataByAlias($meta, $name)
+    /**
+     * 根据别名获取模型的元数据
+     *
+     * @param string $name 别名
+     * @return Qwin_Metadata_Abstract $meta 元数据
+     */
+    public function getModelMetadataByAlias($name)
     {
-        if (isset($meta['model'][$name]['metadata'])) {
-            return $meta['model'][$name]['metadata'];
+        if (isset($this['model'][$name]['metadata'])) {
+            return $this['model'][$name]['metadata'];
         }
-        $class = $this->getClassName('Metadata', $meta['model'][$name]['asc']);
-        return $meta['model'][$name]['metadata'] = $this->_manager->get($class);
+        return $meta['model'][$name]['metadata'] = self::getByAsc($meta['model'][$name]['asc']);
     }
     
     /**

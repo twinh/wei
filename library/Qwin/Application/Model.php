@@ -25,6 +25,26 @@
  * @since       2010-04-17 15:49:35
  */
 
-class Qwin_Application_Model
+/**
+ * @see Doctrine_Record
+ */
+require_once 'Doctrine/Record.php';
+
+abstract class Qwin_Application_Model extends Doctrine_Record
 {
+    /**
+     * 根据应用结构配置获取模型对象
+     *
+     * @param array $asc 应用结构配置
+     * @return Common_Model 模型对象
+     * @todo
+     */
+    public static function getByAsc(array $asc)
+    {
+        $class = $asc['namespace'] . '_' . $asc['module'] . '_Model_' . $asc['controller'];
+        if (!class_exists($class)) {
+            $class = __CLASS__;
+        }
+        return new $class;
+    }
 }
