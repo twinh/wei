@@ -78,7 +78,7 @@ class Common_Member_Controller_Setting extends Common_Controller
     {
         if(empty($_POST))
         {
-            $model = $this->metaHelper->getClassName('Model', $this->_asc);
+            $model = Common_Model::getByAsc($this->_asc);
             $this->_model = Qwin::call($model);
             $styles = $this->_model->getStyles();
             $path = $this->_model->getPath();

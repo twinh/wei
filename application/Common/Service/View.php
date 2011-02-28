@@ -91,7 +91,7 @@ class Common_Service_View extends Common_Service
         }
         $data = $dbData->toArray();
 
-        // 设置钩子:取得数据
+        // 设置钩子:查看数据
         Qwin::hook('viewRecord', array(
             'record' => $dbData,
             'meta' => $meta,

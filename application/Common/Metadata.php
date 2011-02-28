@@ -55,10 +55,8 @@ class Common_Metadata extends Qwin_Application_Metadata
      */
     public function getQueryByAsc($asc, $type = array(), $name = array())
     {
-        $metaClass  = $this->getClassName('Metadata', $asc);
-        $modelClass = $this->getClassName('Model', $asc);
-        $meta       = $this->_manager->get($metaClass);
-        $model      = Qwin::call($modelClass);
+        $meta       = self::getByAsc($asc);
+        $model      = Common_Model::getByAsc($asc);
         return $meta->getQuery($model, $type, $name);
     }
 
@@ -75,8 +73,8 @@ class Common_Metadata extends Qwin_Application_Metadata
         // 未定义模型,则初始化关联模型
         if (null == $model) {
             $asc = $this->getAscFromClass();
-            $modelClass = $this->getClassName('Model', $asc);
-            $model = Qwin::call($modelClass);
+            $model = Common_Model::getByAsc($asc);
+            $modelClass = get_class($model);
         } else {
             $modelClass = get_class($model);
         }
@@ -106,9 +104,11 @@ class Common_Metadata extends Qwin_Application_Metadata
         foreach ($joinModel as $joinModelName) {
             // 该模型的设置
             $modelSet = $this['model'][$joinModelName];
-            $modelName = $this->getClassName('Model', $modelSet['asc']);
-            $relatedMetaObject = $this->_manager->get($this->getClassName('Metadata', $modelSet['asc']));
-            $relatedModelObejct = Qwin::call($modelName);
+            
+            $relatedModelObejct = Common_Model::getByAsc($modelSet['asc']);
+            $modelName = get_class($relatedModelObejct);
+
+            $relatedMetaObject = self::getByAsc($modelSet['asc']);
             $relatedMetaObject->metadataToModel($relatedModelObejct);
 
             // 设置模型关系
@@ -338,7 +338,7 @@ class Common_Metadata extends Qwin_Application_Metadata
      */
     public function getMetadataByAsc($asc)
     {
-        $metadataName = $this->getClassName('Metadata', $asc);
+        $metadataName = self::getByAsc($asc);
         if (class_exists($metadataName)) {
             $meta = $this->_manager->get($metadataName);
         } else {
@@ -347,24 +347,6 @@ class Common_Metadata extends Qwin_Application_Metadata
         }
         Qwin::set('-meta', $metadataName);
         return $meta;
-    }
-
-    /**
-     * 获取标准的类名
-     *
-     * @param string $addition 附加的字符串
-     * @param array $asc 配置数组
-     * @return string 类名
-     */
-    public function getClassName($addition, $asc)
-    {
-        if (!isset($asc['namespace'])) {
-            if (!isset($this->config)) {
-                $this->config = Qwin::call('-config');
-            }
-            $asc['namespace'] = $this->config['asc']['namespace'];
-        }
-        return $asc['namespace'] . '_' . $asc['module'] . '_' . $addition . '_' . $asc['controller'];
     }
 
     /**
@@ -394,7 +376,7 @@ class Common_Metadata extends Qwin_Application_Metadata
          * 设置关联类的查询语句
          */
         foreach ($meta['model'] as $model) {
-            $linkedMetaObj = $this->_manager->get($this->getClassName('Metadata', $model['asc']));
+            $linkedMetaObj = self::getByAsc($model['asc']);
 
             // 调整主键的属性,因为查询时至少需要选择一列
             $primaryKey = $linkedMetaObj['db']['primaryKey'];
@@ -717,7 +699,8 @@ class Common_Metadata extends Qwin_Application_Metadata
         $lang = Qwin::call('-lang');
         $asc = $this->getAscFromClass();
         if (!isset($this->controller)) {
-            $this->controller = Qwin::call($this->getClassName('Controller', $asc));
+            // TODO　不重复加载
+            $this->controller = Common_Controller::getByAsc($asc);
             $this->forbiddenAction = $this->controller->getForbiddenAction();
         }
         // 不为禁用的行为设置链接

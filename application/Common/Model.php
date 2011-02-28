@@ -28,9 +28,9 @@
  * @since       2010-7-28 17:26:42
  */
 
-require_once 'Doctrine/Record.php';
+require_once 'Qwin/Application/Model.php';
 
-class Common_Model extends Doctrine_Record
+class Common_Model extends Qwin_Application_Model
 {
     /**
      * 数据库连接标识

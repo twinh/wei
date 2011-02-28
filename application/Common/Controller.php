@@ -28,6 +28,11 @@
  * @since       2010-7-28 15:19:18
  */
 
+/**
+ * @see Qwin_Application_Controller
+ */
+require_once 'Qwin/Application/Controller.php';
+
 class Common_Controller extends Qwin_Application_Controller
 {
     protected $_asc;
@@ -87,12 +92,6 @@ class Common_Controller extends Qwin_Application_Controller
      * @var object
      */
     protected $_model;
-
-    /**
-     * 元数据助手,负责元数据的获取,转换,检查等
-     * @var Qwin_Application_Metadata
-     */
-    public $metaHelper;
 
     /**
      * 视图对象

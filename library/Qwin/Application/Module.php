@@ -25,6 +25,6 @@
  * @since       2010-04-17 15:50:02
  */
 
-class Qwin_Application_Module
+abstract class Qwin_Application_Module
 {
 }
