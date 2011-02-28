@@ -27,4 +27,45 @@
 
 abstract class Qwin_Application_Namespace
 {
+    /**
+     * 合法的命名空间
+     * @var array
+     */
+    protected static $_validList;
+
+    /**
+     * 根据应用结构配置获取命名空间
+     *
+     * @param array $asc 应用结构配置
+     * @return Qwin_Application_Namespace 命名空间对象
+     */
+    public static function getByAsc(array $asc, $instanced = true)
+    {
+        $class = $asc['namespace'] . '_Namespace';
+        return $instanced ? Qwin::call($class) : null;
+    }
+
+    /**
+     * 获取合法的命名空间列表
+     *
+     * @param array $appPaths 应用根目录
+     * @return array
+     */
+    public static function getList($appPaths = array())
+    {
+        if (!isset(self::$_validList)) {
+            self::$_validList = array();
+            foreach ((array)$appPaths as $path) {
+                if (!is_dir($path)) {
+                    continue;
+                }
+                foreach (scandir($path) as $file) {
+                    if ('.' != $file[0] && is_dir($path . '/' . $file)) {
+                        self::$_validList[$file] = $path . '/' . $file;
+                    }
+                }
+            }
+        }
+        return self::$_validList;
+    }
 }

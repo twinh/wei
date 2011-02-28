@@ -70,7 +70,7 @@ class Qwin_Application_Language implements ArrayAccess
         if (null == $asc) {
             $asc = Qwin::config('asc');
         }
-        $this->_namespaceList = Qwin::call('-app')->getNamespaceList();
+        $this->_namespaceList = Qwin_Application_Namespace::getList();
         $this->_namespacePath = $this->_namespaceList[$asc['namespace']];
 
         // 获取名称,同时加载当前命名空间的语言文件

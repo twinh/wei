@@ -56,11 +56,8 @@ class Common_Service_JsonList extends Common_Service
         $option     = array_merge($this->_option, $option);
         $listField  = $option['list'];
 
-        /* @var $app Qwin_Application */
-        $app = Qwin::call('-app');
-
         /* @var $meta Common_Metadata */
-        $meta = $app->getMetadataByAsc($option['asc']);
+        $meta = Common_Metadata::getByAsc($option['asc']);
 
         // 从模型获取数据
         $query = $meta->getQueryByAsc($option['asc'], array('db', 'view'));

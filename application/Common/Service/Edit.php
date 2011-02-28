@@ -51,8 +51,8 @@ class Common_Service_Edit extends Common_Service
         /* @var $app Qwin_Application */
         $app        = Qwin::call('-app');
         
-        /* @var $meta Qwin_Application_Metadata */
-        $meta       = $app->getMetadataByAsc($option['asc']);
+        /* @var $meta Common_Metadata */
+        $meta       = Common_Metadata::getByAsc($option['asc']);
         $primaryKey = $meta['db']['primaryKey'];
         $primaryKeyValue = isset($option['data'][$primaryKey]) ? $option['data'][$primaryKey] : null;
 

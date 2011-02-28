@@ -54,8 +54,7 @@ class Common_Service_List extends Common_Service
     {
         // 初始配置
         $option     = array_merge($this->_option, $option);
-        $manager    = Qwin::call('-app');
-        $meta       = $manager->getMetadataByAsc($option['asc']);
+        $meta       = Common_Metadata::getByAsc($option['asc']);
         $primaryKey = $meta['db']['primaryKey'];
 
         // 显示哪些域

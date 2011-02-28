@@ -113,7 +113,7 @@ class Common_Controller extends Qwin_Application_Controller
         $this->view     = Qwin::call('Common_View');
         Qwin::set('-view', $this->view);
 
-        $this->_meta = $this->app->getMetadataByAsc($this->_asc);
+        $this->_meta = Common_Metadata::getByAsc($this->_asc);
          /**
          * 访问控制
          */

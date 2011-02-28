@@ -67,7 +67,7 @@ class Common_Service_View extends Common_Service
         $app        = Qwin::call('-app');
         
         /* @var $meta Common_Metadata */
-        $meta       = $app->getMetadataByAsc($option['asc']);
+        $meta       = Common_Metadata::getByAsc($option['asc']);
         $primaryKey = $meta['db']['primaryKey'];
 
         // 从模型获取数据

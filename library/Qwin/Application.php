@@ -41,12 +41,6 @@ class Qwin_Application
     protected $_isLoad = false;
     
     /**
-     * 全局配置
-     * @var Qwin_Config
-     */
-    protected $_config;
-
-    /**
      * 配置选项
      * @var array
      */
@@ -77,12 +71,6 @@ class Qwin_Application
      * @var Qwin_Application_Controller
      */
     protected $_controller;
-
-    /**
-     * 命名空间数组,键名为命名空间名称,值为所在路径
-     * @var array
-     */
-    protected $_namespaceList;
 
     /**
      * 启动时间
@@ -153,7 +141,7 @@ class Qwin_Application
         if (empty($_SERVER['QUERY_STRING'])) {
             header('HTTP/1.1 301 Moved Permanently');
             header('location: ' . $config['index']);
-        }        
+        }
         // 启动Url路由
         /*$router = null;
         if ($config['router']['enable']) {
@@ -179,23 +167,21 @@ class Qwin_Application
         
         Qwin::config('asc', $asc);
 
-        // 检查命名空间是否存在
-        $namespaceList = $this->getNamespaceList();
+        // 检查命名空间是否存在,存在则加载
+        $namespaceList = Qwin_Application_Namespace::getList($config['Qwin']['autoloadPath']);
         if (!isset($namespaceList[$asc['namespace']])) {
             return $this->_onNamespaceNotExists($asc);
         }
-        $this->_namespace = $this->getNamespace($asc, $config);
-        Qwin::setMap('-namespace', $this->_namespace);
+        Qwin_Application_Namespace::getByAsc($asc);
 
         // 加载模块
-        $this->_module = $this->getModule($asc);
+        Qwin_Application_Module::getByAsc($asc);
 
         // 加载控制器
-        $controller = $this->getController($asc);
+        $controller = Qwin_Application_Controller::getByAsc($asc);
         if (null == $controller) {
             return $this->_onControllerNotExists($asc);
         }
-        $this->_controller = $controller;
 
         // 执行行为
         $action = 'action' . $asc['action'];
@@ -203,83 +189,18 @@ class Qwin_Application
             && !in_array(strtolower($asc['action']), $controller->getForbiddenAction())) {
             call_user_func_array(
                 array($controller, $action),
-                array(&$asc, &$this->_config)
+                array(&$asc, &$config)
             );
         } else {
             return $this->_onActionNotExists($asc);
         }
 
         // 展示视图
-        if (is_subclass_of($this->_view, 'Common_View')) {
+        if (is_subclass_of($this->_view, 'Qwin_Application_View')) {
             $this->_view->display();
         }
         
         return $this;
-    }
-
-    /**
-     * 从项目目录中获取合法的命名空间名称
-     *
-     * @return array
-     */
-    public function getNamespaceList()
-    {
-        if (!isset($this->_namespaceList)) {
-            $this->_namespaceList = array();
-            foreach ((array)Qwin::config('Qwin/autoloadPath') as $dir) {
-                if (!is_dir($dir)) {
-                    continue;
-                }
-                foreach (scandir($dir) as $file) {
-                    if ('.' != $file[0] && is_dir($dir . '/' . $file)) {
-                        $this->_namespaceList[$file] = $dir . '/' . $file;
-                    }
-                }
-            }
-        }
-        return $this->_namespaceList;
-    }
-
-    /**
-     * 获取命名空间对象
-     *
-     * @param array $asc 应用结构配置
-     * @return Qwin_Application_Namespace
-     */
-    public function getNamespace(array $asc = null)
-    {
-        if (null == $asc) {
-            return $this->_namespace;
-        }
-        return Qwin::call($this->getClass('namespace', $asc));
-    }
-
-    /**
-     * 获取模块对象
-     *
-     * @param array $asc 应用结构配置
-     * @return Qwin_Application_Module
-     */
-    public function getModule(array $asc = null)
-    {
-        if (null == $asc) {
-            return $this->_module;
-        }
-        return Qwin::call($this->getClass('module', $asc));
-    }
-
-    /**
-     * 获取控制器
-     *
-     * @param array $asc 应用结构配置
-     * @return Qwin_Application_Controller
-     */
-    public function getController(array $asc = null)
-    {
-        if (null == $asc) {
-            return $this->_controller;
-        }
-        return Qwin::call($this->getClass('controller', $asc));
     }
 
     public function getView(array $asc = null)
@@ -288,16 +209,6 @@ class Qwin_Application
             return $this->_module;
         }
         return Qwin::call($this->getClass('view', $asc));
-    }
-
-    public function getModel(array $asc = null)
-    {
-        
-    }
-
-    public function getModelByAsc()
-    {
-        
     }
     
     /**
@@ -326,12 +237,6 @@ class Qwin_Application
                 return false;
         }
     }    
-
-    public function getMetadataByAsc(array $asc)
-    {
-        $name = $this->getClass('metadata', $asc);
-        return Qwin_Metadata::getInstance()->get($name);
-    }
 
     /**
      * 获取助手类

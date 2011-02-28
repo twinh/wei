@@ -27,4 +27,15 @@
 
 abstract class Qwin_Application_Module
 {
+    /**
+     * 根据应用结构配置获取模块
+     *
+     * @param array $asc 应用结构配置
+     * @return Qwin_Application_Module 模块对象
+     */
+    public static function getByAsc(array $asc, $instanced = true)
+    {
+        $class = $asc['namespace'] . '_' . $asc['module'] . '_Module';
+        return $instanced ? Qwin::call($class) : null;
+    }
 }
