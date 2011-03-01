@@ -104,6 +104,7 @@ class Common_Controller extends Qwin_Application_Controller
      */
     public function __construct()
     {
+        Qwin::call('Qwin_Validator', 'Qwin_Validator_JQuery');
         $this->app      = Qwin::call('-app');
         $this->request  = Qwin::call('-request');
         $this->url      = Qwin::call('-url');

@@ -154,14 +154,13 @@ class Common_Metadata extends Qwin_Application_Metadata
      */
     public function addOrderToQuery(Doctrine_Query $query, array $addition = null)
     {
-        $meta = $this;
-        $order = null != $addition ? $addition : $meta['db']['order'];
+        $order = null != $addition ? $addition : $this['db']['order'];
 
         $alias = $query->getRootAlias();
         '' != $alias && $alias .= '.';
 
         // 数据表字段的域
-        $queryField = $meta['field']->getAttrList('isDbQuery');
+        $queryField = $this['field']->getAttrList('isDbQuery');
         $orderType = array('DESC', 'ASC');
 
         foreach ($order as $fieldSet) {
@@ -189,14 +188,13 @@ class Common_Metadata extends Qwin_Application_Metadata
      */
     public function addWhereToQuery(Doctrine_Query $query, array $addition = null)
     {
-        $meta = $this;
-        $search = null != $addition ? $addition : $meta['db']['where'];
+        $search = null != $addition ? $addition : $this['db']['where'];
 
         $alias = $query->getRootAlias();
         '' != $alias && $alias .= '.';
 
         // 数据表字段的域
-        $queryField = $meta['field']->getAttrList('isDbQuery');
+        $queryField = $this['field']->getAttrList('isDbQuery');
         // TODO　是否使用%s替换
         $searchType = array(
             'eq' => '=',
@@ -297,7 +295,6 @@ class Common_Metadata extends Qwin_Application_Metadata
      */
     public function addOffsetToQuery(Doctrine_Query $query, $addition = null)
     {
-        $meta = $this;
         $offset = 0;
         if (null != $addition) {
             $addition = intval($addition);
@@ -318,7 +315,6 @@ class Common_Metadata extends Qwin_Application_Metadata
      */
     public function addLimitToQuery(Doctrine_Query $query, $addition = null)
     {
-        $meta = $this;
         $limit = 0;
         if (null != $addition) {
             $addition = intval($addition);
@@ -342,21 +338,20 @@ class Common_Metadata extends Qwin_Application_Metadata
         /**
          * 设置主类的查询语句
          */
-        $meta = $this;
         // 调整主键的属性,因为查询时至少需要选择一列
-        $primaryKey = $meta['db']['primaryKey'];
-        $meta->field
+        $primaryKey = $this['db']['primaryKey'];
+        $this['field']
              //->setAttr($primaryKey, 'isList', true)
              ->setAttr($primaryKey, 'isDbField', true)
              ->setAttr($primaryKey, 'isDbQuery', true);
 
-        $queryField = $meta->field->getAttrList(array('isDbQuery', 'isDbField'));
+        $queryField = $this['field']->getAttrList(array('isDbQuery', 'isDbField'));
         $query->select(implode(', ', $queryField));
 
         /**
          * 设置关联类的查询语句
          */
-        foreach ($meta['model'] as $model) {
+        foreach ($this['model'] as $model) {
             $linkedMetaObj = self::getByAsc($model['asc']);
 
             // 调整主键的属性,因为查询时至少需要选择一列
@@ -417,6 +412,8 @@ class Common_Metadata extends Qwin_Application_Metadata
 
     /**
      * 设置基本的元数据,包括编号,创建时间,修改时间和操作.
+     *
+     * @return Common_Metadata 当前对象
      */
     public function setCommonMetadata()
     {
@@ -427,6 +424,11 @@ class Common_Metadata extends Qwin_Application_Metadata
             ->setOperationMetadata();
     }
 
+    /**
+     * 设置高级的元数据,包括编号,创建时间,修改时间,分配者,是否删除,操作
+     *
+     * @return Common_Metadata 当前对象
+     */
     public function setAdvancedMetadata()
     {
         return $this

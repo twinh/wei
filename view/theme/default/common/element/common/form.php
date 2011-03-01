@@ -34,7 +34,7 @@
     <div class="ui-operation-field">
         <?php echo $operationField ?>
     </div>
-    <?php $formWidget->render($formOption); ?>
+    <?php $formWidget->render($formOption) ?>
     <div class="ui-operation-field">
         <?php echo $operationField ?>
     </div>

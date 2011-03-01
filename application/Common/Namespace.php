@@ -56,11 +56,6 @@ class Common_Namespace extends Qwin_Application_Namespace
         // 设置语言类
         Qwin::setMap('-lang', 'Qwin_Application_Language');
 
-        // 设置页面编码
-        /*if (isset($config['interface']['charset'])) {
-            header('Content-Type: text/html; charset=' . $config['interface']['charset']);
-        }*/
-
         // 打开缓冲区
         ob_start();
 

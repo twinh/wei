@@ -127,12 +127,12 @@ class Qwin_Application
         date_default_timezone_set($config['timezone']);
 
         // 加载框架主类,设置自动加载类
-        require_once QWIN . '/library/Qwin.php';
+        require_once $config['resource'] . '/library/Qwin.php';
         Qwin::setOption($config['Qwin']);
         Qwin::config($config);
         
         // 加载Qwin函数库
-        require_once QWIN . '/library/function/qwin.php';
+        require_once $config['resource'] . '/library/function/qwin.php';
 
         // 注册当前类
         Qwin::set('-app', $this);
@@ -162,8 +162,6 @@ class Qwin_Application
             $asc[$name] = isset($_GET[$name]) ? $_GET[$name] :  $value;
             $asc[$name] = basename(str_replace('_', '', $asc[$name]));
         }
-        empty($asc['module']) && $asc['module'] = $asc['controller'];
-        empty($asc['controller']) && $asc['controller'] = $asc['module'];
         
         Qwin::config('asc', $asc);
 
@@ -195,7 +193,7 @@ class Qwin_Application
             return $this->_onActionNotExists($asc);
         }
 
-        // 展示视图
+        // 展示视图,视图对象可能在行为操作中已被更改,需进行辨别
         if (is_subclass_of($this->_view, 'Qwin_Application_View')) {
             $this->_view->display();
         }
@@ -209,49 +207,6 @@ class Qwin_Application
             return $this->_module;
         }
         return Qwin::call($this->getClass('view', $asc));
-    }
-    
-    /**
-     * 获取视图类名
-     *
-     * @param string $type 应用结构配置类型
-     * @param array $asc 应用结构配置
-     * @return string 类名
-     */
-    public function getClass($type, array $asc)
-    {
-        switch ($type) {
-            case 'metadata' :
-                return $asc['namespace'] . '_' . $asc['module'] . '_Metadata_' . $asc['controller'];
-            case 'namespace' :
-                return $asc['namespace'] . '_Namespace';
-            case 'view' :
-                return $asc['namespace'] . '_View';
-            case 'controller' :
-                return $asc['namespace'] . '_' . $asc['module'] . '_Controller_' . $asc['controller'];
-            case 'model' :
-                return $asc['namespace'] . '_' . $asc['module'] . '_Model_' . $asc['controller'];
-            case 'module' :
-                return $asc['namespace'] . '_' . $asc['module'] . '_Module';
-            default:
-                return false;
-        }
-    }    
-
-    /**
-     * 获取助手类
-     *
-     * @param string $name 助手类名称
-     * @param string $namespace 助手类所在的命名空间
-     * @return object 助手类对象
-     */
-    public function getHelper($name, $namespace = null)
-    {
-        if (null == $namespace) {
-            $namespace = $this->config['asc']['namespace'];
-        }
-        $class = $namespace . '_Helper_' . $name;
-        return Qwin::call($class);
     }
 
     /**

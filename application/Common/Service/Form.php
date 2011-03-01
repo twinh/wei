@@ -48,17 +48,11 @@ class Common_Service_Form extends Common_Service
     {
         // 初始配置
         $option     = array_merge($this->_option, $option);
-
-        /* @var $app Qwin_Application */
-        $app        = Qwin::call('-app');
         
         /* @var $meta Common_Metadata */
         $meta       = Common_Metadata::getByAsc($option['asc']);
         $primaryKey = $meta['db']['primaryKey'];
         $primaryKeyValue = $option['id'];
-
-        // 从模型获取数据
-        $query = $meta->getQueryByAsc($option['asc']);
 
         /**
          * 空值 < 元数据表单初始值 < 根据主键取值 < 配置初始值(一般是从url中获取)
@@ -69,6 +63,8 @@ class Common_Service_Form extends Common_Service
         // 根据主键取值
         $copyRecordData = array();
         if (null != $primaryKeyValue) {
+            // 从模型获取数据
+            $query = $meta->getQueryByAsc($option['asc']);
             $result = $query->where($primaryKey . ' = ?', $primaryKeyValue)->fetchOne();
             if (false !== $result) {
                 // 删除null值

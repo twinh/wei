@@ -32,11 +32,20 @@ class Form_Widget extends Qwin_Widget_Abstract
      * @var array
      */
     protected $_option = array(
+        'id'        => 'form-%s',
         'meta'      => null,
         'action'    => 'add',
         'column'    => 2,
         'data'      => array(),
         'view'      => 'default.php',
+    );
+
+    /**
+     * 自动加载配置
+     * @var array
+     */
+    protected $_autoload = array(
+        'lang' => true,
     );
 
     /**
@@ -48,6 +57,13 @@ class Form_Widget extends Qwin_Widget_Abstract
         '_value' => null,
     );
 
+    /**
+     * 生成表单界面
+     *
+     * @param array $option 配置选项
+     * @return Form_Widget 当前对象
+     * @todo 表单地址,验证可选等
+     */
     public function render($option)
     {
         // 合并选项
@@ -56,9 +72,15 @@ class Form_Widget extends Qwin_Widget_Abstract
         $data = $option['data'];
         $minify = $this->_widget->get('minify');
         $lang = Qwin::call('-lang');
-        
+
+        $option['id'] = sprintf($option['id'], $meta->getId());
+
+        // 表单布局
         $form = $this->getLayout($meta, 'edit', $meta['page']['tableLayout'], $data);
         $group = $meta['group'];
+
+        // 验证代码
+        $validateCode = $this->getValidateCode($meta, $lang);
 
         $file = $this->_rootPath . 'view/' . $option['view'];
         if (is_file($file)) {
@@ -561,9 +583,9 @@ class Form_Widget extends Qwin_Widget_Abstract
      * @return array jQuery Validate 的验证配置数组
      * @todo 语言为可选
      */
-    public function getJQueryValidateCode($meta, $relatedName = false)
+    public function getValidateCode(Qwin_Application_Metadata $meta, Qwin_Application_Language $lang = null, $relatedName = false)
     {
-        $lang = Qwin::call('-lang');
+        !$lang && $lang = Qwin::call('-lang');
         $validation = array(
             'rules' => array(),
             'messages' => array(),
@@ -593,6 +615,11 @@ class Form_Widget extends Qwin_Widget_Abstract
             $validation['rules'] += $tempValidation['rules'];
             $validation['messages'] += $tempValidation['messages'];
         }*/
+
+        if (false === $relatedName) {
+            $validation = Qwin_Util_Array::jsonEncode($validation);
+        }
+
         return $validation;
     }
 

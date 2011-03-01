@@ -21,8 +21,10 @@
  * @version     $Id$
  * @since       v0.7.0 2011-02-16 17:54:11
  */
+
+var validateCode = new Array();
 jQuery(function($){
-    $('table.ui-form-table input, table.ui-form-table select').addClass('ui-widget-content ui-corner-all');
+    $('table.ui-form-table input, table.ui-form-table textarea, table.ui-form-table select').addClass('ui-widget-content ui-corner-all');
 
     $('div.ui-icon-common a').qui();
 
@@ -30,28 +32,36 @@ jQuery(function($){
         $(this).next().toggle();
     });
 
-    if(undefined != $.validator)
-    {
-        $('#post-form').validate({
-            rules: jQueryValidateCode.rules,
-            messages: jQueryValidateCode.messages,
-            //errorClass: 'ui-state-error',
-            errorPlacement: function(error, element) {
-                error.appendTo( element.parent());
-            },
-            success: function(label) {
-                label.addClass('ui-icon ui-icon-check').html('check!');
-            },
-            submitHandler: function(form){
-                form.submit();
-            },
-            highlight: function(input){
-                $(input).addClass('ui-state-highlight');
-            },
-            unhighlight: function(input){
-                $(input).removeClass('ui-state-highlight');
+    if (undefined != $.validator) {
+        for (var form in validateCode) {
+            // 为必选项增加星号标识
+            for (var rule in validateCode[form]['rules']) {
+                if (undefined != validateCode[form]['rules'][rule]['required']) {
+                    $('label[for="' + rule + '"]').prepend('<span class="ui-validator-required>*</span>');
+                }
             }
-        });
+            // 定义表单验证
+            $('#' + form).validate({
+                rules: validateCode[form]['rules'],
+                messages: validateCode[form]['messages'],
+                //errorClass: 'ui-state-error',
+                errorPlacement: function(error, element) {
+                    error.appendTo( element.parent());
+                },
+                success: function(label) {
+                    label.addClass('ui-icon ui-icon-check').html('check!');
+                },
+                submitHandler: function(form){
+                    form.submit();
+                },
+                highlight: function(input){
+                    $(input).addClass('ui-state-highlight');
+                },
+                unhighlight: function(input){
+                    $(input).removeClass('ui-state-highlight');
+                }
+            });
+        }
     }
 
     // todo 动态切换浏览模式

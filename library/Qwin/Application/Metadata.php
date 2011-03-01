@@ -390,26 +390,6 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
     }
 
     /**
-     * 删除只读键的值
-     *
-     * @param array $data
-     * @param Qwin_Metadata_Abstract $meta 元数据对象
-     * @return array
-     */
-    public function deleteReadonlyValue($data, Qwin_Metadata_Abstract $meta)
-    {
-        foreach ($meta['field'] as $field) {
-            if ($field['attr']['isReadonly']) {
-                unset($data[$field['form']['name']]);
-            }
-        }
-        foreach ($this->getModelMetadataByType($meta, 'db') as $name => $relatedMeta) {
-            $this->deleteReadonlyValue($data[$name], $relatedMeta);
-        }
-        return $data;
-    }
-
-    /**
      * 设置外键的值,保证数据之间能正确关联
      *
      * @param Qwin_Metadata_Element_Model $modelList 模型配置元数据

@@ -103,7 +103,7 @@ class Common_Trash_Metadata_Trash extends Common_Metadata
             'module' => $value[1],
             'controller' => $value[2],
         );
-        $metadata = $this->metaHelper->getMetadataByAsc($asc);
+        $metadata = Common_Metadata::getByAsc($asc);
         $lang = Qwin::call('-lang');
         
         return Qwin_Util_Html::link($this->url->url($asc), $lang->t($metadata['page']['title']));
