@@ -194,7 +194,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
 
         // 设置排序 配置自定义 > 元数据定义 > 主键
         if (!$jqGrid['sortname']) {
-            if (is_array($meta['db']['order'][0])) {
+            if (isset($meta['db']['order'][0]) && is_array($meta['db']['order'][0])) {
                 $jqGrid['sortname']  = $meta['db']['order'][0][0];
                 $jqGrid['sortorder'] = $meta['db']['order'][0][1];
             } else {

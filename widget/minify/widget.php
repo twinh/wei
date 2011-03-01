@@ -54,7 +54,7 @@ class Minify_Widget extends Qwin_Widget_Abstract
 
     public function render($option)
     {
-        
+        return $this;
     }
 
     /**
@@ -89,7 +89,7 @@ class Minify_Widget extends Qwin_Widget_Abstract
         if (!isset($this->_data[$extension]) || empty($this->_data[$extension])) {
             return false;
         }
-
+        $this->_data[$extension] = array_unique($this->_data[$extension]);
         $name = md5(implode('|', $this->_data[$extension]));
         $fileName = $this->_cachePath . $name . '.php';
         if (file_exists($fileName)) {

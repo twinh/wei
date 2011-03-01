@@ -219,7 +219,7 @@ class Common_Member_Metadata_Member extends Common_Metadata
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
         $set = $this->getAscFromClass();
-        $html = Qwin_Util_Html::jQueryButton($url->url($set, array('action' => 'EditPassword', $primaryKey => $copyData[$primaryKey])), $lang->t('LBL_ACTION_EDIT_PASSWORD'), 'ui-icon-key')
+        $html = Qwin_Util_JQuery::icon($url->url($set, array('action' => 'EditPassword', $primaryKey => $copyData[$primaryKey])), $lang->t('LBL_ACTION_EDIT_PASSWORD'), 'ui-icon-key')
               . parent::sanitiseListOperation($value, $name, $data, $copyData);
         return $html;
     }

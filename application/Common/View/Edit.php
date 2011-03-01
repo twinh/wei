@@ -47,8 +47,6 @@ class Common_View_Edit extends Common_View
             'data'  => $this->data,
         );
         
-        $jQueryValidateCode = Qwin_Util_Array::jsonEncode($formWidget->getJQueryValidateCode($meta));
-
         $operationField = $this->loadWidget('Common_Widget_FormLink', array($this->data, $primaryKey));
 
         $this->assign(get_defined_vars());

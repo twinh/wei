@@ -53,9 +53,6 @@ class Common_Service_Add extends Common_Service
         // 初始配置
         $option = array_merge($this->_option, $option);
 
-        /* @var $app Qwin_Application */
-        $app    = Qwin::call('-app');
-
         /* @var $meta Common_Metadata */
         $meta   = Common_Metadata::getByAsc($option['asc']);
         $id     = $meta['db']['primaryKey'];
@@ -101,13 +98,14 @@ class Common_Service_Add extends Common_Service
                 return $result;
             }
         }
+        d($_POST, 1);
+        d($data);
 
         // 保存关联模型的数据
         //$metaHelper->saveRelatedDbData($meta, $data, $query);
 
         // 入库
-        $modelName = Common_Model::getByAsc($option['asc']);
-        $result = new $modelName;
+        $result = Common_Model::getByAsc($option['asc']);
         $result->fromArray($data);
         $result->save();
 

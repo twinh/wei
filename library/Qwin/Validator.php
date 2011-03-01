@@ -28,6 +28,40 @@
 class Qwin_Validator
 {
     /**
+     * 验证方法列表
+     *
+     * @var array
+     */
+    protected $_methods = array();
+
+    public function  __construct($callbacks = null)
+    {
+        foreach((array)$callbacks as $callback) {
+            if (class_exists($callback) || is_object($call)) {
+                foreach (get_class_methods($callback) as $method) {
+                    $method = strtolower($method);
+                    $this->_methods[$method] = array($callback, $method);
+                }
+            } elseif (function_exists($callback)) {
+                
+            } else {
+                
+            }
+        }
+        p($this);
+    }
+
+    public function setMethod($name, $callback)
+    {
+        if (is_callable($callback)) {
+            $this->_methods[$name] = $callback;
+            return $this;
+        }
+        require_once 'Qwin/Validator/Exception.php';
+        throw new Qwin_Validator_Exception('The param 2 is not callable.');
+    }
+
+    /**
      * 添加一个验证类
      * @param string $className
      * @return object

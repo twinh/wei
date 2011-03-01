@@ -29,7 +29,7 @@ return array(
     'LBL_FIELD_GRADE' => '等级',
     'LBL_FIELD_STATE' => '状态',
     'LBL_FIELD_QQ' => 'QQ',
-    'LBL_FIELD_MSN' => 'Msn',
+    'LBL_FIELD_MSN' => 'MSN',
     'LBL_FIELD_SKYPE' => 'Skype',
     'LBL_FIELD_OFFICE_PHONE' => '办公电话',
     'LBL_FIELD_PHONE' => '个人电话',
