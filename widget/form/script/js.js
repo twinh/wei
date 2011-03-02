@@ -33,6 +33,7 @@ jQuery(function($){
     });
 
     if (undefined != $.validator) {
+        return true;
         for (var form in validateCode) {
             // 为必选项增加星号标识
             for (var rule in validateCode[form]['rules']) {

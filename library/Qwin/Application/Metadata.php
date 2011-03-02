@@ -300,7 +300,7 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
         $msssage = '';
         foreach ($this->_invalidData as $field => $row) {
             foreach ($row as $rule => $message) {
-                $msssage .= $lang[$message] . PHP_EOL;
+                $msssage .= $lang[$this['field'][$field]['basic']['title']] . $lang[$message] . PHP_EOL;
             }
         }
         return $msssage;
@@ -327,7 +327,7 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
      * @param array $option 配置选修
      * @return boolen
      */
-    public function validate(array $data, array $option = array())
+    public function  validate(array $data, array $option = array())
     {
         $option = array_merge($this->_validateOption, $option);
 
@@ -349,9 +349,11 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
             if ($option['validator'] && !empty($this->field[$name]['validator']['rule'])) {
                 $validateData = $this->field[$name]['validator'];
                 foreach ($validateData['rule'] as $rule => $param) {
-                    if (false === $validator->valid($rule, $param)) {
+                    if (false === $validator->valid($rule, $value, $param)) {
                         if (!isset($validateData['message'][$rule])) {
-                            $this->_invalidData[$name][$rule] = 'VALIDATE_' . strtoupper($rule);
+                            $this->_invalidData[$name][$rule] = 'VLD_' . strtoupper($rule);
+                        } else {
+                            $this->_invalidData[$name][$rule] = $validateData['message'][$rule];
                         }
                         return false;
                     }

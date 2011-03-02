@@ -98,8 +98,6 @@ class Common_Service_Add extends Common_Service
                 return $result;
             }
         }
-        d($_POST, 1);
-        d($data);
 
         // 保存关联模型的数据
         //$metaHelper->saveRelatedDbData($meta, $data, $query);
