@@ -64,7 +64,7 @@ class Common_Service_Form extends Common_Service
         $copyRecordData = array();
         if (null != $primaryKeyValue) {
             // 从模型获取数据
-            $query = $meta->getQueryByAsc($option['asc']);
+            $query = $meta->getQuery();
             $result = $query->where($primaryKey . ' = ?', $primaryKeyValue)->fetchOne();
             if (false !== $result) {
                 // 删除null值

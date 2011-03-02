@@ -60,7 +60,7 @@ class Common_Service_JsonList extends Common_Service
         $meta = Common_Metadata::getByAsc($option['asc']);
 
         // 从模型获取数据
-        $query = $meta->getQueryByAsc($option['asc'], array('db', 'view'));
+        $query = $meta->getQuery(null, array('type' => array('db', 'view')));
         $meta
             ->addSelectToQuery($query)
             ->addOrderToQuery($query, $option['order'])

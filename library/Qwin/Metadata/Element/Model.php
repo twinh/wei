@@ -22,7 +22,9 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-7-27 12:37:11
+ * @since       2010-07-27 12:37:11
+ * @todo        调整为关联元数据,而非模型,元数据
+ * @todo        模型,元数据可自定义,而不通过应用目录配置获得
  */
 
 class Qwin_Metadata_Element_Model extends Qwin_Metadata_Element_Driver
@@ -49,7 +51,7 @@ class Qwin_Metadata_Element_Model extends Qwin_Metadata_Element_Driver
      *
      * @param array $data 数据
      * @param array $option 配置选项
-     * @return Qwin_Metadata_Element_Field 当前对象
+     * @return Qwin_Metadata_Element_Model 当前对象
      */
     public function merge($data, array $option = array())
     {

@@ -59,7 +59,7 @@ class Common_Service_Add extends Common_Service
 
         // 记录已经存在,加载错误视图
         if (isset($data[$id])) {
-            $query = $meta->getQueryByAsc($option['asc'], array('db'));
+            $query = $meta->getQuery(null, array('type' => 'db'));
             $dbData = $query->where($primaryKey . ' = ?', $data[$id])->fetchOne();
             if(false !== $result) {
                 $lang = Qwin::call('-lang');
@@ -100,11 +100,10 @@ class Common_Service_Add extends Common_Service
         // 保存关联模型的数据
         //$metaHelper->saveRelatedDbData($meta, $data, $query);
 
-        // 入库
-        $result = Common_Model::getByAsc($option['asc']);
-        $result->fromArray($data);
-        $result->save();
-
+        // 保存到数据库
+        $record = $meta->getRecord();
+        $record->fromArray($data);
+        $record->save();
 
         // 展示视图
         if ($option['display']) {
