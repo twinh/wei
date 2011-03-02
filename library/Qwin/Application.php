@@ -118,7 +118,7 @@ class Qwin_Application
 
         // 合并配置
         $globalConfig = require_once $config['root'] . 'config/global.php';
-        $config = array_merge($config, $globalConfig);
+        $config = $config + $globalConfig;
 
         // 设置错误提示的输出等级
         error_reporting($config['errorType']);

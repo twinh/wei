@@ -165,11 +165,16 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
      * @return Qwin_Widget_Abstract 当前对象
      * @todo 更合适的方式加载
      */
-    public function loadLanguage()
+    public function loadLanguage($widget = null)
     {
         /* @var $lang Qwin_Application_Language */
         $lang = Qwin::call('-lang');
-        $lang->appendByFile($this->_rootPath . 'language/' . $lang->getName() . '.php');
+        if (!$widget) {
+            $filePath = $this->_rootPath;
+        } else {
+            $filePath = dirname($this->_rootPath) . '/' . $widget . '/';
+        }
+        $lang->appendByFile($filePath . 'language/' . $lang->getName() . '.php');
         return $this;
     }
 

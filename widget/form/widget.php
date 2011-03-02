@@ -82,6 +82,7 @@ class Form_Widget extends Qwin_Widget_Abstract
 
         // 验证代码
         if ($option['validate']) {
+            $this->loadLanguage('validator');
             $validateCode = $this->getValidateCode($meta, $lang);
         }
 
