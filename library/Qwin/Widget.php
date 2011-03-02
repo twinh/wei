@@ -102,8 +102,8 @@ class Qwin_Widget
 
         // 设置根目录,自动加载
         $widget->setRootPath($this->_rootPath . $lower . '/')
-               ->autoload();        
+               ->autoload();    
 
-        return $this->_loaded[$lower];
+        return $widget;
     }
 }
