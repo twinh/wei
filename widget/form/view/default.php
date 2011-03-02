@@ -22,13 +22,17 @@
  * @version     $Id$
  * @since       2011-02-16 14:14:21
  */
-$minify->add($this->_rootPath . 'script/style.css')
-       ->add($this->_rootPath . 'script/js.js')
-       ->add($this->_rootPath . 'source/jquery.validate.pack.js');
+$minify->add($this->_rootPath . 'script/js.js');
+if ($option['validate']) {
+    $minify->add($this->_rootPath . 'script/style.css')
+           ->add($this->_rootPath . 'source/jquery.validate.pack.js');
 ?>
 <script type="text/javascript">
 validateCode['<?php echo $option['id'] ?>'] = <?php echo $validateCode ?>;
 </script>
+<?php
+}
+?>
 <form id="<?php echo $option['id'] ?>" name="form" method="post" action="<?php echo qw_url()?>">
 <div class="ui-operation-field">
     <?php echo qw_jquery_button('submit', qw_lang('LBL_ACTION_SUBMIT'), 'ui-icon-check') ?>

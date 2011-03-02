@@ -80,12 +80,12 @@ class Common_Service_Edit extends Common_Service
         // 转换数据
         $data = $meta->sanitise($data, 'db');
 
-        // 验证数据
-        if (!$meta->validate($data)) {
-            $lang = Qwin::call('-lang');
+        // 加载验证微件,验证数据
+        $validator = Qwin::widget('validator');
+        if (!$validator->valid($data, $meta)) {
             $result = array(
                 'result' => false,
-                'message' => $meta->getInvalidMessage($lang),
+                'message' => $validator->getInvalidMessage(),
             );
             if ($option['display']) {
                 return Qwin::call('-view')->redirect($result['message']);

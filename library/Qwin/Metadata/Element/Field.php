@@ -228,26 +228,6 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Driver
         $this->_data = $newArr;
         return $this;
     }
-
-    public function addValidator()
-    {
-
-    }
-
-    public function addValidatorRule()
-    {
-
-    }
-
-    public function filterReadonlyToHidden()
-    {
-        foreach ($this->_data as $field => $data) {
-            if (1 == $data['attr']['isReadonly'] || 'custom' == $data['form']['_type']) {
-                $this->_data[$field]['form']['_type'] = 'hidden';
-            }
-        }
-        return $this;
-    }
     
     /**
      * 增加表单域的类名

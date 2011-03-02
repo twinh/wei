@@ -95,6 +95,12 @@ class Qwin_Widget
             return false;
         }
 
+        // 微件类应该继承自抽象类
+        if (!is_subclass_of($class, 'Qwin_Widget_Abstract')) {
+            require_once 'Qwin/Widget/Exception.php';
+            throw new Qwin_Widget_Exception('Class "' . $class . '" is not the subclass of "Qwin_Widget_Abstract"');
+        }
+
         // 初始化类
         /* @var $widget Qwin_Widget_Abstract */
         $widget = Qwin::call($class);

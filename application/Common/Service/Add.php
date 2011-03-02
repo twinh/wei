@@ -83,13 +83,12 @@ class Common_Service_Add extends Common_Service
 
         //$data = $metaHelper->setForeignKeyData($meta['model'], $data);
 
-        // 验证数据
-        if (!$meta->validate($data)) {
-            $lang = Qwin::call('-lang');
-            //$lang->appendByFile();
+        // 加载验证微件,验证数据
+        $validator = Qwin::widget('validator');
+        if (!$validator->valid($data, $meta)) {
             $result = array(
                 'result' => false,
-                'message' => $meta->getInvalidMessage($lang),
+                'message' => $validator->getInvalidMessage(),
             );
             if ($option['display']) {
                 return Qwin::call('-view')->redirect($result['message']);
