@@ -159,7 +159,7 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
         }*/
 
         foreach ($data as $name => $value) {
-            if (!isset($this->field[$name])) {
+            if (!isset($this['field'][$name])) {
                 continue;
             }
 
@@ -184,8 +184,8 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
             }*/
 
             // 根据元数据中转换器的配置进行转换
-            if ($option['meta'] && isset($this->field[$name]['sanitiser'][$action])) {
-                $data[$name] = $flow->call(array($this->field[$name]['sanitiser'][$action]), $value);
+            if ($option['meta'] && isset($this['field'][$name]['sanitiser'][$action])) {
+                $data[$name] = $flow->call(array($this['field'][$name]['sanitiser'][$action]), $value);
             }
 
             // 使用转换器中的方法进行转换
@@ -350,13 +350,13 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
 
         foreach ($data as $name => $value) {
             // 跳过不存在的域
-            if (!isset($this->field[$name])) {
+            if (!isset($this['field'][$name])) {
                 continue;
             }
 
             // 根据验证对象进行验证
-            if ($option['validator'] && !empty($this->field[$name]['validator']['rule'])) {
-                $validateData = $this->field[$name]['validator'];
+            if ($option['validator'] && !empty($this['field'][$name]['validator']['rule'])) {
+                $validateData = $this['field'][$name]['validator'];
                 foreach ($validateData['rule'] as $rule => $param) {
                     if (false === $validator->valid($rule, $value, $param)) {
                         if (!isset($validateData['message'][$rule])) {
