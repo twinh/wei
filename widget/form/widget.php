@@ -68,7 +68,7 @@ class Form_Widget extends Qwin_Widget_Abstract
     public function render($option)
     {
         // 合并选项
-        $option = $this->merge($this->_option, $option);
+        $option = array_merge($this->_option, $option);
         $meta = $option['meta'];
         $data = $option['data'];
         $minify = $this->_widget->get('minify');
