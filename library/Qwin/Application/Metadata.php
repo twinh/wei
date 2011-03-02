@@ -139,6 +139,9 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
         empty($dataCopy) && $dataCopy = $data;
         $action = strtolower($action);
 
+        // 调用钩子方法
+        $this->preSanitise();
+
         // 加载流程处理对象
         if ($option['meta']) {
             $flow = Qwin::call('Qwin_Flow');
@@ -214,6 +217,9 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
                 $data[$name] = $relatedMeta->sanitise($data[$name], $action, $option);
             }
         }
+
+        // 调用钩子方法
+        $this->postSanitise();
 
         return $data;
     }
@@ -331,6 +337,9 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
     {
         $option = array_merge($this->_validateOption, $option);
 
+        // 调用钩子方法
+        $this->preValidate();
+
         // 重置验证不通过的域
         $this->_invalidData = array();
 
@@ -376,6 +385,9 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
                 }
             }
         }
+
+        // 调用钩子方法
+        $this->postValidate();
 
         // 验证关联域
         /*foreach ($this->getModelMetadataByType($meta, 'db') as $name => $relatedMeta) {
@@ -432,5 +444,33 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
             }
         }
         return $data;
+    }
+
+    /**
+     * 提供一个钩子方法,当验证开始时,调用此方法
+     */
+    public function preValidate()
+    {
+    }
+
+    /**
+     * 提供一个钩子方法,当验证完毕时,调用此方法
+     */
+    public function postValidate()
+    {
+    }
+
+    /**
+     * 提供一个钩子方法,当数据处理开始时,调用此方法
+     */
+    public function preSanitise()
+    {
+    }
+
+    /**
+     * 提供一个钩子方法,当数据处理结束时,调用此方法
+     */
+    public function postSanitise()
+    {
     }
 }

@@ -207,7 +207,7 @@ class Qwin_Application_Language implements ArrayAccess
     /**
      * 加载语言数据
      *
-     * @return <type>
+     * @return Qwin_Application_Language 当前对象
      */
     public function _loadData()
     {

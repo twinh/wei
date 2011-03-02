@@ -57,11 +57,9 @@ class Common_Service_Add extends Common_Service
         $meta   = Common_Metadata::getByAsc($option['asc']);
         $id     = $meta['db']['primaryKey'];
 
-        // 从模型获取数据
-        $query = $meta->getQueryByAsc($option['asc'], array('db'));
-
         // 记录已经存在,加载错误视图
         if (isset($data[$id])) {
+            $query = $meta->getQueryByAsc($option['asc'], array('db'));
             $dbData = $query->where($primaryKey . ' = ?', $data[$id])->fetchOne();
             if(false !== $result) {
                 $lang = Qwin::call('-lang');
@@ -88,6 +86,7 @@ class Common_Service_Add extends Common_Service
         // 验证数据
         if (!$meta->validate($data)) {
             $lang = Qwin::call('-lang');
+            //$lang->appendByFile();
             $result = array(
                 'result' => false,
                 'message' => $meta->getInvalidMessage($lang),
