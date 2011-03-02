@@ -97,7 +97,7 @@ class Common_Member_Metadata_Group extends Common_Metadata
         $primaryKey = $this->db['primaryKey'];
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
-        $set = $this->getAscFromClass();
+        $set = $this->getAsc();
         $html = Qwin_Util_Html::jQueryButton($url->url($set, array('action' => 'AllocatePermission', $primaryKey => $copyData[$primaryKey])), $lang->t('LBL_ACTION_ALLOCATE_PERMISSION'), 'ui-icon-person')
               . parent::sanitiseListOperation($value, $name, $data, $copyData);
         return $html;

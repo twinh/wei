@@ -25,7 +25,7 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-7-28 17:26:04
+ * @since       2010-07-28 17:26:04
  */
 
 /**
@@ -36,10 +36,29 @@ require_once 'Qwin/Application/Metadata.php';
 class Common_Metadata extends Qwin_Application_Metadata
 {
     /**
+     * 当前元数据对应的应用目录结果
+     * @var array
+     */
+    protected $_asc;
+
+    /**
      * 需要进行链接转换的行为
      * @var array
      */
     protected $_linkAction = array('list', 'view');
+
+    /**
+     * @var array           获取记录的配置
+     *
+     *  -- type             记录类型
+     *
+     *  -- name             记录名称
+     */
+    protected $_recordOption = array(
+        'type'          => array(),
+        'alias'         => array(),
+        //'exceptAlias'   => array(),
+    );
 
     public function  __construct()
     {
@@ -47,81 +66,124 @@ class Common_Metadata extends Qwin_Application_Metadata
         $this->url = Qwin::call('-url');
     }
 
-    /**
-     * 根据元数据配置,获取Doctrine的查询对象
-     *
-     * @param array $asc 元数据配置
-     * @return Doctrine_Query 查询对象
-     */
-    public function getQueryByAsc($asc, $type = array(), $name = array())
+    public static function getRecordByAsc($asc)
     {
-        $meta       = self::getByAsc($asc);
-        $model      = Common_Model::getByAsc($asc);
-        return $meta->getQuery($model, $type, $name);
+
     }
 
     /**
-     * 通过元数据配置,获取Doctrine的查询对象
+     * 获取元数据对应的记录对象
      *
-     * @param Doctrine_Record $model 模型对象
-     * @return Doctrine_Query 查询对象
-     * @todo 缓存查询对象,模型对象
-     * @todo padb问题
+     * @param Doctrine_Record $record 原始Doctrine记录对象
+     * @param array $option 配置选项
+     * @return Doctrine_Record 带字段定义,表定理,关联关系的Doctrine记录对象
      */
-    public function getQuery(Doctrine_Record $model = null, $type = array(), $name = array())
+    public function getRecord(Doctrine_Record $record = null, array $option = array())
     {
-        // 未定义模型,则初始化关联模型
-        if (null == $model) {
-            $asc = $this->getAscFromClass();
-            $model = Common_Model::getByAsc($asc);
-            $modelClass = get_class($model);
-        } else {
-            $modelClass = get_class($model);
+        $option = $option + $this->_recordOption;
+        $option['type'] = (array)$option['type'];
+        $option['alias'] = (array)$option['alias'];
+        
+        if (null === $record) {
+            $record = Common_Model::getByAsc($this->getAsc());
         }
+        
+        // 将元数据加入记录配置中
+        $this->toRecord($record);
 
-        $joinModel = array();
-        !is_array($name) && $name = array($name);
-        !is_array($type) && $type = array($type);
-        // 取出要关联的模块
-        if (!empty($name) || !empty($type)) {
-            foreach ($this['model'] as $modelName => $modelSet) {
-                if (in_array($modelName, $name) || in_array($modelSet['type'], $type)) {
-                    $joinModel[$modelName] = $modelName;
-                }
+        foreach ($this['model'] as $alias => $model) {
+            if (in_array($model['type'], $option['type']) || in_array($alias, $option['alias'])) {
+                $modelObject = Common_Model::getByAsc($model['asc']);
+                $name = get_class($modelObject);
+
+                $metaObject = self::getByAsc($model['asc']);
+                $metaObject->toRecord($modelObject);
+
+                // 设置模型关系
+                call_user_func(
+                    array($record, $model['relation']),
+                    $name . ' as ' . $alias,
+                    array(
+                        'local' => $model['local'],
+                        'foreign' => $model['foreign']
+                    )
+                );
             }
         }
 
-        // 自身的转换
-        $this->metadataToModel($model);
-        $query = Doctrine_Query::create()->from($modelClass);
+        return $record;
+    }
+
+        /**
+     * 根据应用结构配置,获取Doctrine的查询对象
+     *
+     * @param array $asc 应用结构配置
+     * @param array $type 类型,可选
+     * @param array $name 名称,可选
+     * @return Doctrine_Query 查询对象
+     */
+    public static function getQueryByAsc($asc, array $option = array())
+    {
+        $meta       = self::getByAsc($asc);
+        $model      = Common_Model::getByAsc($asc);
+        return $meta->getQuery($model, $option);
+    }
+
+    /**
+     * 获取元数据对应的查询对象
+     *
+     * @param Doctrine_Record $record 原始Doctrine记录对象
+     * @param array $option 配置选项
+     * @return Doctrine_Query 查询对象
+     * @todo padb问题
+     */
+    public function getQuery(Doctrine_Record $record = null, array $option = array())
+    {
+        $option = $option + $this->_recordOption;
+        $option['type'] = (array)$option['type'];
+        $option['alias'] = (array)$option['alias'];
+
+        if (null === $record) {
+            $recordClass = Common_Model::getByAsc($this->getAsc(), false);
+            $record = Qwin::call($recordClass);
+        } else {
+            $recordClass = get_class($record);
+        }
+
+        // 将元数据加入记录配置中
+        $this->toRecord($record);
+
+        // 初始化查询
+        // TODO 更多选项,如缓存,索引
+        $query = Doctrine_Query::create()->from($recordClass);
 
         // 增加默认查询
         if (!empty($this['db']['defaultWhere'])) {
             $this->addWhereToQuery($query, $this['db']['defaultWhere']);
         }
 
-        // 关联模型的转换
-        foreach ($joinModel as $joinModelName) {
-            // 该模型的设置
-            $modelSet = $this['model'][$joinModelName];
-            
-            $relatedModelObejct = Common_Model::getByAsc($modelSet['asc']);
-            $modelName = get_class($relatedModelObejct);
+        foreach ($this['model'] as $alias => $model) {
+            if (in_array($model['type'], $option['type']) || in_array($alias, $option['alias'])) {
+                $modelObject = Common_Model::getByAsc($model['asc']);
+                $name = get_class($modelObject);
 
-            $relatedMetaObject = self::getByAsc($modelSet['asc']);
-            $relatedMetaObject->metadataToModel($relatedModelObejct);
+                $metaObject = self::getByAsc($model['asc']);
+                $metaObject->toRecord($modelObject);
 
-            // 设置模型关系
-            call_user_func(
-                array($model, 'hasOne'),
-                $modelName . ' as ' . $modelSet['alias'],
-                array(
-                    'local' => $modelSet['local'],
-                    'foreign' => $modelSet['foreign']
-                )
-            );
-            $query->leftJoin($modelClass . '.' . $modelSet['alias'] . ' ' . $modelSet['alias']);
+                // 设置模型关系
+                call_user_func(
+                    array($record, $model['relation']),
+                    $name . ' as ' . $alias,
+                    array(
+                        'local' => $model['local'],
+                        'foreign' => $model['foreign']
+                    )
+                );
+
+                $query->leftJoin($recordClass . '.' . $alias . ' ' . $alias);
+            }
         }
+
         return $query;
     }
 
@@ -129,18 +191,23 @@ class Common_Metadata extends Qwin_Application_Metadata
      * 将元数据的域定义,数据表定义加入模型中
      *
      * @param Doctrine_Record $model Doctrine对象
-     * @return Qwin_Application_Metadata 当前对象
+     * @return Common_Metadata 当前对象
      */
-    public function metadataToModel(Doctrine_Record $model)
+    public function toRecord(Doctrine_Record $record)
     {
         // 设置数据表
-        $model->setTableName($this['db']['table']);
+        $record->setTableName($this['db']['table']);
 
         // 设置字段
         $fieldList = $this['field']->getAttrList(array('isDbField', 'isDbQuery'));
         foreach ($fieldList as $field) {
-            $model->hasColumn($field);
+            $record->hasColumn($field);
         }
+
+        // 重新初始化记录,否则Doctrine将提示属性或关联组件不存在
+        // TODO 是否有更合适的方法
+        $record->__construct();
+
         return $this;
     }
 
@@ -149,7 +216,7 @@ class Common_Metadata extends Qwin_Application_Metadata
      *
      * @param Doctrine_Query $query
      * @param array|null $addition 附加的排序配置
-     * @return object 当前对象
+     * @return Common_Metadata 当前对象
      * @todo 关联元数据的排序
      */
     public function addOrderToQuery(Doctrine_Query $query, array $addition = null)
@@ -182,7 +249,7 @@ class Common_Metadata extends Qwin_Application_Metadata
      *
      * @param Doctrine_Query $query
      * @param array|null $addition 附加的排序配置
-     * @return object 当前对象
+     * @return Common_Metadata 当前对象
      * @todo 完善查询类型
      * @todo 复杂查询
      */
@@ -291,7 +358,7 @@ class Common_Metadata extends Qwin_Application_Metadata
      *
      * @param Doctrine_Query $query
      * @param int|null $addition 附加的偏移配置
-     * @return object 当前对象
+     * @return Common_Metadata 当前对象
      */
     public function addOffsetToQuery(Doctrine_Query $query, $addition = null)
     {
@@ -311,7 +378,7 @@ class Common_Metadata extends Qwin_Application_Metadata
      *
      * @param Doctrine_Query $query
      * @param int|null $addition 附加的限制配置
-     * @return object 当前对象
+     * @return Common_Metadata 当前对象
      */
     public function addLimitToQuery(Doctrine_Query $query, $addition = null)
     {
@@ -330,7 +397,7 @@ class Common_Metadata extends Qwin_Application_Metadata
      * 为Doctrine查询对象增加查询语句
      *
      * @param Doctrine_Query $query
-     * @return object 当前对象
+     * @return Common_Metadata 当前对象
      * @todo 是否要将主类加入到$meta['model']数组中,减少代码重复
      */
     public function addSelectToQuery(Doctrine_Query $query)
@@ -369,37 +436,27 @@ class Common_Metadata extends Qwin_Application_Metadata
     }
 
     /**
-     * 根据类名获取配置(set)
+     * 根据类名获取应用结构配置
      *
      * @return array 配置
-     * @todo 应该允许自定义set
      */
-    public function getAscFromClass()
+    public function getAsc()
     {
-        return Qwin::config('asc');
-        if (null != $this->_asc) {
+        if (!empty($this->_asc)) {
             return $this->_asc;
         }
-        
-        $name = get_class();
-        // 必需是子类的名称才有set结构
-        if($name == 'Common_Metadata') {
-            $this->_asc = array();
-        } else {
-            $name = explode('_', $name);
-            // 名称不是合法的set结构
-            if(4 != count($name) || 'Metadata' != $name[2])
-            {
-                $this->_asc = array();
-            } else {
-                $this->_asc = array(
-                    'namespace' => $name[0],
-                    'module' => $name[1],
-                    'controller' => $name[3],
-                );
-            }
+
+        $class = get_class($this);
+        $parts = explode('_', get_class($this));
+        if (4 == count($parts) && 'Metadata' == $parts[2]) {
+            return $this->_asc = array(
+                'namespace' => $parts[0],
+                'module' => $parts[1],
+                'controller' => $parts[3],
+            );
         }
-        return $this->_asc;
+        require_once 'Qwin/Metadata/Exception.php';
+        throw new Qwin_Metadata_Exception('Class "' . $class . '" do not have a valid Application Structure Configuration.');
     }
 
     /**
@@ -481,7 +538,7 @@ class Common_Metadata extends Qwin_Application_Metadata
     /**
      * 设置创建域,包括创建人和创建时间
      *
-     * @return object 当前对象
+     * @return Common_Metadata 当前对象
      */
     public function setCreatedData()
     {
@@ -521,7 +578,7 @@ class Common_Metadata extends Qwin_Application_Metadata
     /**
      * 设置修改域,包括修改人和修改时间
      *
-     * @return object 当前对象
+     * @return Common_Metadata 当前对象
      */
     public function setModifiedData()
     {
@@ -680,7 +737,7 @@ class Common_Metadata extends Qwin_Application_Metadata
         $primaryKey = $this->db['primaryKey'];
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
-        $asc = $this->getAscFromClass();
+        $asc = $this->getAsc();
         if (!isset($this->controller)) {
             // TODO　不重复加载
             $this->controller = Common_Controller::getByAsc($asc);
@@ -722,7 +779,7 @@ class Common_Metadata extends Qwin_Application_Metadata
                 'title' => $lang->t('LBL_ACTION_DELETE'),
                 'icon'  => $icon,
             );
-            
+
         }
         if (5 != func_num_args()) {
             $data = '';
@@ -845,7 +902,7 @@ class Common_Metadata extends Qwin_Application_Metadata
     public function setIsLink($value, $name, $data, $dataCopy, $action)
     {
         //if (in_array($action, $this->_linkAction)) {
-            $asc = $this->getAscFromClass();
+            $asc = $this->getAsc();
             !isset($this->url) && $this->url = Qwin::call('-url');
             $name = str_replace(':', '\:', $name);
             $dataCopy[$name] = str_replace(':', '\:', $dataCopy[$name]);

@@ -39,9 +39,9 @@ abstract class Qwin_Metadata_Abstract extends ArrayObject
      *
      * @param array $input 数据
      */
-    public function  __construct($input = array(), $flags = self::ARRAY_AS_PROPS)
+    public function  __construct($input = array())
     {
-        parent::__construct($input, $flags);
+        parent::__construct($input, self::ARRAY_AS_PROPS);
     }
 
     /**

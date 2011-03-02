@@ -71,7 +71,7 @@ class Common_Service_View extends Common_Service
         $primaryKey = $meta['db']['primaryKey'];
 
         // 从模型获取数据
-        $query = $meta->getQueryByAsc($option['asc'], array('db', 'view'));
+        $query = $meta->getQuery(null, array('type' => array('db', 'view')));
         $dbData = $query
             ->where($primaryKey . ' = ?', $option['id'])
             ->fetchOne();

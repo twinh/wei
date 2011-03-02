@@ -125,7 +125,7 @@ class Common_Trash_Metadata_Trash extends Common_Metadata
         $primaryKey = $this->db['primaryKey'];
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
-        $asc = $this->getAscFromClass();
+        $asc = $this->getAsc();
         $operation = array();
         $operation['restore'] = array(
             'url' => 'javascript:if(confirm(QWIN_PATH.Lang.MSG_CONFIRM_TO_RESTORE)){window.location=\'' . $url->url($asc, array('action' => 'Restore', $primaryKey => $dataCopy[$primaryKey])) . '\';}',

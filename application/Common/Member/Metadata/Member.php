@@ -218,7 +218,7 @@ class Common_Member_Metadata_Member extends Common_Metadata
         $primaryKey = $this->db['primaryKey'];
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
-        $set = $this->getAscFromClass();
+        $set = $this->getAsc();
         $html = Qwin_Util_JQuery::icon($url->url($set, array('action' => 'EditPassword', $primaryKey => $copyData[$primaryKey])), $lang->t('LBL_ACTION_EDIT_PASSWORD'), 'ui-icon-key')
               . parent::sanitiseListOperation($value, $name, $data, $copyData);
         return $html;
@@ -229,7 +229,7 @@ class Common_Member_Metadata_Member extends Common_Metadata
         if ('Edit' == Qwin::config('asc/action')) {
             return true;
         }
-        $asc = $this->getAscFromClass();
+        $asc = $this->getAsc();
         $lang = Qwin::call('-lang');
         $result = $this->isUsernameExists($value);
 
@@ -242,12 +242,11 @@ class Common_Member_Metadata_Member extends Common_Metadata
 
     public function isUsernameExists($username)
     {
-        $set = $this->getAscFromClass();
+        $set = $this->getAsc();
         $query = $this->metaHelper->getQueryByAsc($set);
         $result = $query->where('username = ?', $username)
             ->fetchOne();
-        if(false != $result)
-        {
+        if (false != $result) {
             $result = true;
         }
         return $result;

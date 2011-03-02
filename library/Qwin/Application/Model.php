@@ -45,6 +45,6 @@ abstract class Qwin_Application_Model extends Doctrine_Record
         if (!class_exists($class)) {
             $class = $asc['namespace'] . '_Model';
         }
-        return $instanced ? Qwin::call($class) : null;
+        return $instanced ? new $class : $class;
     }
 }

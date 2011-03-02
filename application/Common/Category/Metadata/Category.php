@@ -122,7 +122,7 @@ class Common_Category_Metadata_Category extends Common_Metadata
         $primaryKey = $this->db['primaryKey'];
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
-        $set = $this->getAscFromClass();
+        $set = $this->getAsc();
         $link = $url->url($set, array('action' => 'Add', '_data[parent_id]' => $data[$primaryKey]));
         $html = Qwin_Util_Html::jQueryButton($link, $lang->t('LBL_ACTION_ADD_SUBCATEGORY'), 'ui-icon-plusthick')
               . parent::sanitiseListOperation($value, $name, $data, $copyData);
