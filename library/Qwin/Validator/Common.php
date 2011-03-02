@@ -25,7 +25,7 @@
  * @since       2010-09-14 09:30:39
  */
 
-class Qwin_Validator_JQuery extends Qwin_Validator_Abstract
+class Qwin_Validator_Common extends Qwin_Validator_Abstract
 {
     /**
      * 验证不能为空
