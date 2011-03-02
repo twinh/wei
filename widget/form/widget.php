@@ -38,6 +38,7 @@ class Form_Widget extends Qwin_Widget_Abstract
         'column'    => 2,
         'data'      => array(),
         'view'      => 'default.php',
+        'validate'  => true,
     );
 
     /**
@@ -80,7 +81,9 @@ class Form_Widget extends Qwin_Widget_Abstract
         $group = $meta['group'];
 
         // 验证代码
-        $validateCode = $this->getValidateCode($meta, $lang);
+        if ($option['validate']) {
+            $validateCode = $this->getValidateCode($meta, $lang);
+        }
 
         $file = $this->_rootPath . 'view/' . $option['view'];
         if (is_file($file)) {

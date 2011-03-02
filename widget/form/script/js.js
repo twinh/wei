@@ -22,6 +22,11 @@
  * @since       v0.7.0 2011-02-16 17:54:11
  */
 
+/**
+ * 验证代码键名为表单的id,值为jQuery Validate的验证规则和错误信息
+ *
+ * @var array
+ */
 var validateCode = new Array();
 jQuery(function($){
     $('table.ui-form-table input, table.ui-form-table textarea, table.ui-form-table select').addClass('ui-widget-content ui-corner-all');
@@ -33,7 +38,6 @@ jQuery(function($){
     });
 
     if (undefined != $.validator) {
-        return true;
         for (var form in validateCode) {
             // 为必选项增加星号标识
             for (var rule in validateCode[form]['rules']) {
