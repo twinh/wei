@@ -128,7 +128,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Driver
         if(isset($data['validator']) && !empty($data['validator']['rule'])) {
             foreach ($data['validator']['rule'] as $key => $rule) {
                 if (!isset($data['validator']['message'][$key])) {
-                    $data['validator']['message'][$key] = 'MSG_VALIDATOR_' . strtoupper($key);
+                    $data['validator']['message'][$key] = 'VLD_' . strtoupper($key);
                 }
             }
         }

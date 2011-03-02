@@ -28,68 +28,96 @@
 class Qwin_Validator
 {
     /**
-     * 验证方法列表
+     * 未处理的规则
      *
      * @var array
      */
-    protected $_methods = array();
+    protected $_rawRules = array();
 
+    /**
+     * 处理后的规则
+     *
+     * @var array
+     */
+    protected $_rules = array();
+
+    /**
+     * 初始化
+     *
+     * @param array $callbacks
+     * @return Qwin_Validator 当前对象
+     */
     public function  __construct($callbacks = null)
     {
-        foreach((array)$callbacks as $callback) {
-            if (class_exists($callback) || is_object($call)) {
-                foreach (get_class_methods($callback) as $method) {
-                    $method = strtolower($method);
-                    $this->_methods[$method] = array($callback, $method);
-                }
-            } elseif (function_exists($callback)) {
-                
-            } else {
-                
-            }
-        }
-        p($this);
-    }
-
-    public function setMethod($name, $callback)
-    {
-        if (is_callable($callback)) {
-            $this->_methods[$name] = $callback;
-            return $this;
-        }
-        require_once 'Qwin/Validator/Exception.php';
-        throw new Qwin_Validator_Exception('The param 2 is not callable.');
+        return $this->setRules((array)$callbacks);
     }
 
     /**
-     * 添加一个验证类
-     * @param string $className
-     * @return object
+     * 设置规则
+     *
+     * @param mixed $callback 回调结构,可能的类型
+     *              ①类对象/类名 将类的所有公用方法作为验证规则
+     *              ②函数名     如果不提供规则名,则函数名为规则名
+     *              ③类方法数组  如果不提供规则名,则方法名为规则名
+     * @param string $rule 规则名称,可选
+     * @return Qwin_Validator 当前对象
      */
-    public function add($className)
+    public function setRule($callback, $rule = null)
     {
-        $this->_class[$className] = $className;
+        if (!isset($rule)) {
+            $this->_rawRules[] = $callback;
+        } else {
+            $this->_rawRules[$rule] = $callback;
+        }
         return $this;
     }
 
-    public function call($method, $param)
+    /**
+     * 设置规则列表
+     *
+     * @param array $callbacks 数组,键名为规则名或留空,值为回调结构或类对象,类名
+     * @return Qwin_Validator 当前对象
+     */
+    public function setRules(array $callbacks)
     {
-        foreach($this->_class as $class)
-        {
-            $object = Qwin::call($class);
-            if(method_exists($object, $method))
-            {
-                return call_user_func_array(
-                    array($object, $method),
-                    $param
-                );
-            }
+        foreach ($callbacks as $rule => $callback) {
+            $this->_rawRules[$rule] = $callback;
         }
-        return true;
+        return $this;
     }
 
-    public function valid()
+    /**
+     * 处理规则
+     *
+     * @param bool $update 是否重新更新规则
+     * @return Qwin_Validator 当前对象
+     */
+    protected function _processRules($update = false)
     {
-        return true;
+        if (!$update && !empty($this->_rules)) {
+            return $this;
+        }
+        foreach ($this->_rawRules as $rule => $callback) {
+            if (class_exists($callback) || is_object($callback)) {
+                foreach (get_class_methods($callback) as $method) {
+                    $method = strtolower($method);
+                    $this->_rules[$method] = array($callback, $method);
+                }
+            } elseif (is_callable($callback)) {
+                $this->_rules[$rule] = $callback;
+            }
+        }
+        return $this;
+    }
+
+    public function valid($rule, $value, $param = null)
+    {
+        $this->_processRules();
+        $rule = strtolower($rule);
+        if (isset($this->_rules[$rule])) {
+            return (bool)call_user_func($this->_rules[$rule], $value, $param);
+        }
+        require_once 'Qwin/Validator/Exception.php';
+        throw new Qwin_Validator_Exception('Rule "' . $rule . '" not found.');
     }
 }

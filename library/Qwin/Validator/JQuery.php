@@ -33,7 +33,7 @@ class Qwin_Validator_JQuery extends Qwin_Validator_Abstract
      * @param string $value 待验证的字符串
      * @return boolen 是否通过验证
      */
-    public function required($value)
+    public static function required($value)
     {
         return '' != trim($value);
     }
