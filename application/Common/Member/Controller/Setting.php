@@ -67,7 +67,7 @@ class Common_Member_Controller_Setting extends Common_Controller
             $result['language'] = $language;
             $result->save();
             $url = Qwin::call('-url')->url($this->_asc);
-            $this->view->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+            $this->view->redirect($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }
 
@@ -101,7 +101,7 @@ class Common_Member_Controller_Setting extends Common_Controller
             $result['theme'] = $theme;
             $result->save();
             $url = Qwin::call('-url')->url($this->_asc);
-            $this->view->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+            $this->view->redirect($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         } 
     }
 }

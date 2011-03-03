@@ -54,7 +54,7 @@ class Common_Member_Controller_Group extends Common_ActionController
          * 记录不存在,加载错误视图
          */
         if (false == $result) {
-            return $this->view->setRedirectView($this->_lang->t('MSG_NO_RECORD'));
+            return $this->view->redirect($this->_lang->t('MSG_NO_RECORD'));
         }
 
         if (empty($_POST)) {
@@ -86,7 +86,7 @@ class Common_Member_Controller_Group extends Common_ActionController
             $result['permission'] = serialize($permission);
             $result->save();
             $url = Qwin::call('-url')->url($this->_asc, array('action' => 'Index'));
-            return $this->view->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+            return $this->view->redirect($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }    
 }

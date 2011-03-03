@@ -48,7 +48,7 @@ class Common_Email_Controller_Email extends Common_ActionController
             $this->_result->save();
             if(null != $this->_fromUrl)
             {
-                $this->setRedirectView('MSG_OPERATE_SUCCESSFULLY', $this->_fromUrl);
+                $this->redirect('MSG_OPERATE_SUCCESSFULLY', $this->_fromUrl);
                 exit;
             }
             return true;

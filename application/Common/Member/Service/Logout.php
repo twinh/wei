@@ -76,7 +76,7 @@ class Common_Member_Service_Logout extends Common_Service_BasicAction
                 );
                 if($config['view']['display'])
                 {
-                    $this->view->setRedirectView($return['message']);
+                    $this->view->redirect($return['message']);
                 }
                 return $return;
             }
@@ -94,7 +94,7 @@ class Common_Member_Service_Logout extends Common_Service_BasicAction
         );     
         if($config['view']['display'])
         {
-            $this->view->setRedirectView($return['message'], $return['url']);
+            $this->view->redirect($return['message'], $return['url']);
         }
         return $return;
     }

@@ -114,7 +114,7 @@ class Common_Service_Delete extends Common_Service_BasicAction
                  * if ($result['result']) {
                     continue;
                 } else {
-                    $this->view->setRedirectView();
+                    $this->view->redirect();
                 }*/
             }
         } else {
@@ -145,7 +145,7 @@ class Common_Service_Delete extends Common_Service_BasicAction
         );
         if($config['view']['display'])
         {
-            $this->view->setRedirectView($return['message'], $url);
+            $this->view->redirect($return['message'], $url);
         }
         return $return;
     }

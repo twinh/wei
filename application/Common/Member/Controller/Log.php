@@ -35,7 +35,7 @@ class Common_Member_Controller_Log extends Common_Controller
         // 提示已经登陆的信息
         /*$member = $this->session->get('member');
         if ('guest' != $member['username']) {
-            return $this->view->setRedirectView($this->_lang->t('MSG_LOGINED'));
+            return $this->view->redirect($this->_lang->t('MSG_LOGINED'));
         }*/
 
         // 设置视图,加载登陆界面

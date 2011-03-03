@@ -178,7 +178,7 @@ class Common_Helper_Option
         if (isset($this->_query)) {
             return $this->_query;
         }
-        $this->_query =  Qwin::call('Qwin_Application_Metadata')->getQueryByAsc(array(
+        $this->_query =  Common_Metadata::getQueryByAsc(array(
             'namespace' => 'Common',
             'module' => 'Option',
             'controller' => 'Option',

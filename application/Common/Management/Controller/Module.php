@@ -93,7 +93,7 @@ class Common_Management_Controller_Module extends Common_Controller
     {
         if(false === $this->_isNamespaceExists)
         {
-            return $this->view->setRedirectView($this->_lang->t('MSG_NAMESAPCE_NOT_EXISTS'));
+            return $this->view->redirect($this->_lang->t('MSG_NAMESAPCE_NOT_EXISTS'));
         }
 
         $meta = $this->_meta;
@@ -145,13 +145,13 @@ class Common_Management_Controller_Module extends Common_Controller
             
             if(false === $this->_isNamespaceExists)
             {
-                return $this->view->setRedirectView($this->_lang->t('MSG_NAMESAPCE_NOT_EXISTS'));
+                return $this->view->redirect($this->_lang->t('MSG_NAMESAPCE_NOT_EXISTS'));
             }
 
             // 模块已存在
             if(in_array($module, $this->_moduleList))
             {
-                return $this->view->setRedirectView($this->_lang->t('MSG_MODULE_EXISTS'));
+                return $this->view->redirect($this->_lang->t('MSG_MODULE_EXISTS'));
             }
 
             // 创建模块,同时创建默认目录结构
@@ -170,7 +170,7 @@ class Common_Management_Controller_Module extends Common_Controller
             $applicationFile->createLanguageFile($this->_namespace, $module, $this->getLanguage());
 
             $url = Qwin::call('-url')->url($this->_asc, array('action' => 'Index', 'namespace_value' => $this->_namespace));
-            return $this->view->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+            return $this->view->redirect($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }
 }

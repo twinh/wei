@@ -150,5 +150,5 @@ function qw_jquery_button($type, $title, $icon)
 
 function qw_jquery_operation_button($url, $title, $icon)
 {
-    return Qwin_Helper_Html::jQueryButton($url, $title, $icon);
+    return Qwin_Util_JQuery::icon($url, $title, $icon);
 }
