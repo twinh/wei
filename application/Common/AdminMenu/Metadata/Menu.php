@@ -116,6 +116,7 @@ class Common_AdminMenu_Metadata_Menu extends Common_Metadata
             'model' => array(
                 'creator' => array(
                     'asc' => array(
+                        'namespace' => 'Common',
                         'module' => 'Member',
                         'controller' => 'Member',
                     ),
@@ -128,6 +129,7 @@ class Common_AdminMenu_Metadata_Menu extends Common_Metadata
                 ),
                 'modifier' => array(
                     'asc' => array(
+                        'namespace' => 'Common',
                         'module' => 'Member',
                         'controller' => 'Member',
                     ),

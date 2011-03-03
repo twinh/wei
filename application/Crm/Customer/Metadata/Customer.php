@@ -37,6 +37,8 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                     'validator' => array(
                         'rule' => array(
                             'required' => true,
+                            'rangelength' => array(5, 8),
+                            //'nomethod' => false,
                         ),
                     ),
                 ),

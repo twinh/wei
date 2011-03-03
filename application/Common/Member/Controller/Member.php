@@ -36,7 +36,7 @@ class Common_Member_Controller_Member extends Common_ActionController
     {
         if('guest' == $this->request->get('id') || 'guest' == $this->request->post('id'))
         {
-            return $this->view->setRedirectView($this->_lang->t('MSG_GUEST_NOT_ALLOW_EDIT_PASSWORD'));
+            return $this->view->redirect($this->_lang->t('MSG_GUEST_NOT_ALLOW_EDIT_PASSWORD'));
         }
         $this->_meta = Qwin_Metadata::get('Common_Member_Metadata_Password');
 
@@ -96,7 +96,7 @@ class Common_Member_Controller_Member extends Common_ActionController
         $result = array_intersect($idList, $banIdList);
         if(!empty($result))
         {
-            return $this->view->setRedirectView($this->_lang->t('MSG_NOT_ALLOW_DELETE'));
+            return $this->view->redirect($this->_lang->t('MSG_NOT_ALLOW_DELETE'));
         }
         parent::actionDelete();
     }
@@ -133,7 +133,7 @@ class Common_Member_Controller_Member extends Common_ActionController
         if('EditPassword' == $action)
         {
             $url = Qwin::call('-url')->url(array('module' => 'Member', 'controller' => 'Log', 'action' => 'Logout'));
-            $this->view->setRedirectView('LOGIN', $url)
+            $this->view->redirect('LOGIN', $url)
                     ->loadView()
                     ->display();
             exit();

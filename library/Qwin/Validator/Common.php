@@ -70,7 +70,7 @@ class Qwin_Validator_Common extends Qwin_Validator_Abstract
      * @param int $param2 最大长度
      * @return boolen 是否通过验证
      */
-    public function rangelength($value, $param)
+    public static function rangelength($value, $param)
     {
         $len = strlen($value);
         return $len >= $param[0] && $len <= $param[1];

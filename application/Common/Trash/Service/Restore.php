@@ -109,7 +109,7 @@ class Common_Trash_Service_Restore extends Common_Service_BasicAction
             'url' => $url,
         );
         if ($setting['view']['display']) {
-            return $this->view->setRedirectView($return['message'], $url);
+            return $this->view->redirect($return['message'], $url);
         } else {
             return $return;
         }

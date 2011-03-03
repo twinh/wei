@@ -32,10 +32,13 @@ class Validator_Widget extends Qwin_Widget_Abstract
      *
      *      -- validator            是否根据验证器进行验证
      *
+     *      -- break                当验证失败时,是否继续验证
+     *
      */
     protected $_option = array(
         'meta'          => true,
-        'validator'     => true,
+        'validator'     => 'Qwin_Validator',
+        'break'         => false,
     );
 
     /**
@@ -67,12 +70,15 @@ class Validator_Widget extends Qwin_Widget_Abstract
         // 重置验证不通过的域
         $this->_invalidData = array();
 
+        // 初始化验证结果为通过
+        $result = true;
+
         // 为获取错误域信息做备份
         $this->_meta = $meta;
 
         // 加载验证对象
         if ($option['validator']) {
-            $validator = Qwin::call('Qwin_Validator');
+            $validator = Qwin::call($option['validator']);
         }
 
         foreach ($data as $name => $value) {
@@ -91,7 +97,11 @@ class Validator_Widget extends Qwin_Widget_Abstract
                         } else {
                             $this->_invalidData[$name][$rule] = $validateData['message'][$rule];
                         }
-                        return false;
+                        if ($option['break']) {
+                            return false;
+                        } else {
+                            $result = false;
+                        }
                     }
                 }
             }
@@ -107,10 +117,16 @@ class Validator_Widget extends Qwin_Widget_Abstract
                         if (!isset($this->_invalidData[$name][$method])) {
                             $this->_invalidData[$name][$method] = 'VLD_' . strtoupper($method);
                         }
-                        return false;
+                        if ($option['break']) {
+                            return false;
+                        } else {
+                            $result = false;
+                        }
                     }
                 }
             }
+
+            return $result;
         }
 
         // 调用钩子方法

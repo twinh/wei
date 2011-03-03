@@ -80,7 +80,7 @@ class Common_Member_Service_Login extends Common_Service_BasicAction
                     'result' => false,
                     'message' => $this->_lang->t('MSG_LOGINED'),
                 );
-                $this->view->setRedirectView($return['message']);
+                $this->view->redirect($return['message']);
                 return $return;
             }
         }
@@ -140,7 +140,7 @@ class Common_Member_Service_Login extends Common_Service_BasicAction
             {
                 if($config['view']['display'])
                 {
-                    $this->view->setRedirectView($logResult['message']);
+                    $this->view->redirect($logResult['message']);
                 }
                 return $logResult;
             }
@@ -160,7 +160,7 @@ class Common_Member_Service_Login extends Common_Service_BasicAction
         );
         if($config['view']['display'])
         {
-            $this->view->setRedirectView($return['message'], $url);
+            $this->view->redirect($return['message'], $url);
         }
         
         return $return;

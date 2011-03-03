@@ -157,7 +157,7 @@ abstract class Qwin_Metadata_Abstract extends ArrayObject
     {
         if (!isset($this->_id)) {
             // 如果存在数据库名称,以数据库名称为唯一编号
-            if (isset($this['db']['table'])) {
+            if (isset($this['db']) && isset($this['db']['table'])) {
                 $this->_id = $this['db']['table'];
             } else {
                 $this->_id = strtolower(get_class($this));

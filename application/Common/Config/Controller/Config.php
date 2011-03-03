@@ -31,24 +31,22 @@ class Common_Config_Controller_Config extends Common_ActionController
     public function actionRender()
     {
         $request = $this->request;
-        $metaHelper = $this->metaHelper;
         
         $groupId = $request->get('groupId');
         
         // 获取当前分组的所有表单项
-        $formData = $metaHelper
-            ->getQuery($this->_meta)
+        $formData = $this->_meta
+            ->getQuery()
             ->where('group_id = ?', $groupId)
             ->andWhere('is_enabled = 1')
             ->execute()
             ->toArray();
         if (empty($formData)) {
-           return $this->view->setRedirectView($this->_lang->t('MSG_NO_RECORD'));
+           return $this->view->redirect($this->_lang->t('MSG_NO_RECORD'));
         }
         
         // 构建域分组
-        $groupResult = $metaHelper
-            ->getQueryByAsc(array(
+        $groupResult = Common_Metadata::getQueryByAsc(array(
                 'namespace' => 'Common',
                 'module' => 'Config',
                 'controller' => 'Group',
@@ -90,8 +88,7 @@ class Common_Config_Controller_Config extends Common_ActionController
             );
             $data[$row['form_name']] = $row['value'];
         }
-        $meta = $metaHelper
-            ->getMetadataByAsc(array(
+        $meta = Common_Metadata::getByAsc(array(
                 'namespace' => 'Common',
                 'module' => 'Config',
                 'controller' => 'Temp',
@@ -99,19 +96,20 @@ class Common_Config_Controller_Config extends Common_ActionController
             ->merge($configMeta);
         
         if (empty($_POST)) {
-            $this->view->assign(get_defined_vars());
-            $this->view->setProcesser('Common_View_EditForm');
+            $primaryKey = $groupId;
+            $view = Qwin::call('Common_View_Edit');
+            $view->assign(get_defined_vars());
         } else {
             // 保存结果
-            $data = $metaHelper->sanitiseOne($_POST, 'db', $meta, $meta, array('view' => false));
+            $data = $meta->sanitise($_POST, 'db', array('view' => false));
             unset($data['groupId']);
-            $path = Qwin_ROOT_PATH . '/common/config/global.php';
+            $path = Qwin::config('root') . 'config/global.php';
             $globalConfig = require $path;
             $globalConfig[$groupId] = $data;
-            Qwin_Helper_File::writeArray($path, $globalConfig);
+            Qwin_Util_File::writeArray($path, $globalConfig);
             
             $url = $this->url->url($this->_asc, array('action' => 'Index'));
-            $this->view->setRedirectView($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+            $this->view->redirect(Qwin::call('-lang')->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }
     
@@ -122,14 +120,12 @@ class Common_Config_Controller_Config extends Common_ActionController
 
     public function actionCenter()
     {
-        $metaHelper = $this->metaHelper;
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
         $meta = $this->_meta;
 
         // 分组的数据
-        $data = $metaHelper
-            ->getQueryByAsc(array(
+        $data = Common_Metadata::getQueryByAsc(array(
                 'namespace' => 'Common',
                 'module' => 'Config',
                 'controller' => 'Group',

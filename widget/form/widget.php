@@ -38,7 +38,7 @@ class Form_Widget extends Qwin_Widget_Abstract
         'column'    => 2,
         'data'      => array(),
         'view'      => 'default.php',
-        'validate'  => true,
+        'validate'  => false,
     );
 
     /**

@@ -60,6 +60,9 @@ class Common_Metadata extends Qwin_Application_Metadata
         //'exceptAlias'   => array(),
     );
 
+    /**
+     * 初始化常用变量
+     */
     public function  __construct()
     {
         parent::__construct();
@@ -68,7 +71,9 @@ class Common_Metadata extends Qwin_Application_Metadata
 
     public static function getRecordByAsc($asc)
     {
-
+        $meta       = self::getByAsc($asc);
+        $record     = Common_Model::getByAsc($asc);
+        return $meta->getReord($record);
     }
 
     /**
@@ -93,28 +98,14 @@ class Common_Metadata extends Qwin_Application_Metadata
 
         foreach ($this['model'] as $alias => $model) {
             if (in_array($model['type'], $option['type']) || in_array($alias, $option['alias'])) {
-                $modelObject = Common_Model::getByAsc($model['asc']);
-                $name = get_class($modelObject);
-
-                $metaObject = self::getByAsc($model['asc']);
-                $metaObject->toRecord($modelObject);
-
-                // 设置模型关系
-                call_user_func(
-                    array($record, $model['relation']),
-                    $name . ' as ' . $alias,
-                    array(
-                        'local' => $model['local'],
-                        'foreign' => $model['foreign']
-                    )
-                );
+                $this->setRecordRelation($record, $model);
             }
         }
 
         return $record;
     }
 
-        /**
+    /**
      * 根据应用结构配置,获取Doctrine的查询对象
      *
      * @param array $asc 应用结构配置
@@ -125,8 +116,8 @@ class Common_Metadata extends Qwin_Application_Metadata
     public static function getQueryByAsc($asc, array $option = array())
     {
         $meta       = self::getByAsc($asc);
-        $model      = Common_Model::getByAsc($asc);
-        return $meta->getQuery($model, $option);
+        $record     = Common_Model::getByAsc($asc);
+        return $meta->getQuery($record, $option);
     }
 
     /**
@@ -164,27 +155,39 @@ class Common_Metadata extends Qwin_Application_Metadata
 
         foreach ($this['model'] as $alias => $model) {
             if (in_array($model['type'], $option['type']) || in_array($alias, $option['alias'])) {
-                $modelObject = Common_Model::getByAsc($model['asc']);
-                $name = get_class($modelObject);
-
-                $metaObject = self::getByAsc($model['asc']);
-                $metaObject->toRecord($modelObject);
-
-                // 设置模型关系
-                call_user_func(
-                    array($record, $model['relation']),
-                    $name . ' as ' . $alias,
-                    array(
-                        'local' => $model['local'],
-                        'foreign' => $model['foreign']
-                    )
-                );
-
+                $this->setRecordRelation($record, $model);
                 $query->leftJoin($recordClass . '.' . $alias . ' ' . $alias);
             }
         }
 
         return $query;
+    }
+
+    /**
+     * 设置模型间的关联关系
+     *
+     * @param Doctrine_Record $record 记录对象
+     * @param array $model 关联配置
+     * @return Common_Metadata 当前对象
+     */
+    public function setRecordRelation(Doctrine_Record $record, array $model)
+    {
+        $modelObject = Common_Model::getByAsc($model['asc']);
+        $name = get_class($modelObject);
+
+        $metaObject = self::getByAsc($model['asc']);
+        $metaObject->toRecord($modelObject);
+
+        // 设置模型关系
+        call_user_func(
+            array($record, $model['relation']),
+            $name . ' as ' . $model['alias'],
+            array(
+                'local' => $model['local'],
+                'foreign' => $model['foreign']
+            )
+        );
+        return $this;
     }
 
     /**
