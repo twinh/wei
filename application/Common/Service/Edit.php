@@ -88,7 +88,7 @@ class Common_Service_Edit extends Common_Service
                 'message' => $validator->getInvalidMessage(),
             );
             if ($option['display']) {
-                return Qwin::call('-view')->alert($result['message']);
+                return Qwin::call('-view')->alert($result['message']['title'], null, $result['message']['content']);
             } else {
                 return $result;
             }
