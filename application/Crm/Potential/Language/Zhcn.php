@@ -24,16 +24,16 @@
  */
 
 return array(
-    'LBL_FIELD_CLOSING_DATE' => '预计成交日期',
-    'LBL_FIELD_CUSTOMER_ID' => '客户编号',
-    'LBL_FIELD_PROBABILITY' => '可能性(%)',
-    'LBL_FIELD_NEXT_STEP' => '下一步',
-    'LBL_FIELD_EXPECTED_REVENUE' => '期望收益',
-    'LBL_FIELD_SOURCE' => '来源',
-    'LBL_FIELD_CAMPAIGN_ID' => '市场活动编号',
-    'LBL_FIELD_CAMPAIGN' => '市场活动',
-    'LBL_FIELD_CONTACT_ID' => '联系人编号',
-    'LBL_FIELD_CONTACT' => '联系人',
+    'FLD_CLOSING_DATE' => '预计成交日期',
+    'FLD_CUSTOMER_ID' => '客户编号',
+    'FLD_PROBABILITY' => '可能性(%)',
+    'FLD_NEXT_STEP' => '下一步',
+    'FLD_EXPECTED_REVENUE' => '期望收益',
+    'FLD_SOURCE' => '来源',
+    'FLD_CAMPAIGN_ID' => '市场活动编号',
+    'FLD_CAMPAIGN' => '市场活动',
+    'FLD_CONTACT_ID' => '联系人编号',
+    'FLD_CONTACT' => '联系人',
 
     'LBL_GROUP_RELATED_DATA' => '关联资料',
 

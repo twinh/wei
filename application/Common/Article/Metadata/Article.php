@@ -35,7 +35,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
             'field' => array(
                 'category_id' => array(
                     'basic' => array(
-                        'title' => 'LBL_FIELD_CATEGORY_NAME',
+                        'title' => 'FLD_CATEGORY_NAME',
                     ),
                     'form' => array(
                         '_type' => 'select',
@@ -253,7 +253,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
                 ),
                 /*'date_created' => array(
                     'basic' => array(
-                        'title' => 'LBL_FIELD_POST_DATA',
+                        'title' => 'FLD_POST_DATA',
                         'group' => 1
                     ),
                     'form' => array(

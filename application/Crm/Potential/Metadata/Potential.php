@@ -148,7 +148,7 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                 ),
                 'campaign_id' => array(
                     'basic' => array(
-                        'title' => 'LBL_FIELD_CAMPAIGN',
+                        'title' => 'FLD_CAMPAIGN',
                         'group' => 1,
                     ),
                     'form' => array(
@@ -169,14 +169,14 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                 ),
                 'contact_id' => array(
                     'basic' => array(
-                        'title' => 'LBL_FIELD_CONTACT',
+                        'title' => 'FLD_CONTACT',
                         'group' => 1,
                     ),
                     'form' => array(
                         '_widgetDetail' => array(
                             array(
                                 array('Qwin_Widget_JQuery_PopupGrid', 'render'),
-                                'LBL_FIELD_CONTACT',
+                                'FLD_CONTACT',
                                 array(
                                     'namespace' => 'Crm',
                                     'module' => 'Contact',

@@ -26,9 +26,9 @@
  */
 
 return array(
-    'LBL_FIELD_URL' => '地址',
-    'LBL_FIELD_IMG_URL' => '图片地址',
-    'LBL_FIELD_TARGET' => '链接目标',
+    'FLD_URL' => '地址',
+    'FLD_IMG_URL' => '图片地址',
+    'FLD_TARGET' => '链接目标',
 
     'LBL_MODULE_LINK' => '链接',
 );

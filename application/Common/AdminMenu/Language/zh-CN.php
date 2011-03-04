@@ -26,10 +26,10 @@
  */
 
 return array(
-    'LBL_FIELD_CATEGORY' => '分类',
-    'LBL_FIELD_URL' => '地址',
-    'LBL_FIELD_ORDER' => '顺序',
-    'LBL_FIELD_TARGET' => '链接目标',
+    'FLD_CATEGORY' => '分类',
+    'FLD_URL' => '地址',
+    'FLD_ORDER' => '顺序',
+    'FLD_TARGET' => '链接目标',
 
     'LBL_MODULE_ADMIN_MENU' => '后台菜单',
 );

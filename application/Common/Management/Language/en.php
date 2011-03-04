@@ -29,7 +29,7 @@ return array(
     'LBL_MODULE_APPLICATION_STRUCTURE' => 'Application Structure',
 
 
-    'LBL_FIELD_MODULE' => 'Module',
+    'FLD_MODULE' => 'Module',
 
     'LBL_ACTION_UPDATE_APPLICATION_STRUCTURE' => 'Update Application Structure File',
     'LBL_ACTION_ADD_NAMESPACE' => 'Add Namespace',

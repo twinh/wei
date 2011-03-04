@@ -129,7 +129,7 @@ class Crm_Contact_Metadata_Contact extends Common_Metadata
                 ),
                 'parent_id' => array(
                     'basic' => array(
-                        'title' => 'LBL_FIELD_SUPERIOR',
+                        'title' => 'FLD_SUPERIOR',
                         'group' => 1,
                     ),
                     'form' => array(

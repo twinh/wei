@@ -28,8 +28,8 @@ return array(
 
     'LBL_ACTION_EMPTY' => '清空',
 
-    'LBL_FIELD_DELETED_BY' => '删除者',
-    'LBL_FIELD_DELETED_AT' => '删除时间',
+    'FLD_DELETED_BY' => '删除者',
+    'FLD_DELETED_AT' => '删除时间',
 
     'MSG_NO_SOURCE_RECORD' => '源记录已不存在,无法还原.',
     'MSG_CONFIRM_TO_RESTORE' => '记录将还原,确认?',

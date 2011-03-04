@@ -26,14 +26,14 @@
  */
 
 return array(
-    'LBL_FIELD_GROUP_ID' => '分组编号',
-    'LBL_FIELD_FORM_TYPE' => '表单类型',
-    'LBL_FIELD_FORM_WIDGET' => '表单微件',
-    'LBL_FIELD_LABEL' => '名称',
-    'LBL_FIELD_FORM_NAME' => '表单名称',
-    'LBL_FIELD_FORM_LABEL' => '表单标题',
-    'LBL_FIELD_FORM_RESOURCE' => '表单资源',
-    'LBL_FIELD_IS_ENABLED' => '是否启用',
+    'FLD_GROUP_ID' => '分组编号',
+    'FLD_FORM_TYPE' => '表单类型',
+    'FLD_FORM_WIDGET' => '表单微件',
+    'FLD_LABEL' => '名称',
+    'FLD_FORM_NAME' => '表单名称',
+    'FLD_FORM_LABEL' => '表单标题',
+    'FLD_FORM_RESOURCE' => '表单资源',
+    'FLD_IS_ENABLED' => '是否启用',
 
     'LBL_GROUP_FORM_SETTING' => '表单配置',
 

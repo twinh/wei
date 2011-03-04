@@ -26,9 +26,9 @@
  */
 
 return array(
-    'LBL_FIELD_LANGUAGE' => 'Language',
-    'LBL_FIELD_SIGN' => 'Sign',
-    'LBL_FIELD_CODE' => 'Code',
+    'FLD_LANGUAGE' => 'Language',
+    'FLD_SIGN' => 'Sign',
+    'FLD_CODE' => 'Code',
 
     'LBL_ACTION_ADD_NEXT' => 'Add Next Class',
 

@@ -26,12 +26,12 @@
  */
 
 return array(
-    'LBL_FIELD_PARENT_ID' => '父分类',
-    'LBL_FIELD_TO_URL' => '跳转到',
-    'LBL_FIELD_ORDER' => '顺序',
-    'LBL_FIELD_IMAGE' => '图像',
-    'LBL_FIELD_IMAGE_2' => '图像2',
-    'LBL_FIELD_SIGN' => '唯一标识',
+    'FLD_PARENT_ID' => '父分类',
+    'FLD_TO_URL' => '跳转到',
+    'FLD_ORDER' => '顺序',
+    'FLD_IMAGE' => '图像',
+    'FLD_IMAGE_2' => '图像2',
+    'FLD_SIGN' => '唯一标识',
 
     'LBL_ACTION_ADD_SUBCATEGORY' => '添加子分类',
     'LBL_ACTION_ADD_SPECIAL_ARTICLE' => '添加专题文章',

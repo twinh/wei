@@ -29,7 +29,7 @@ return array(
     'LBL_MODULE_APPLICATION_STRUCTURE' => '应用目录结构',
 
 
-    'LBL_FIELD_MODULE' => '模块',
+    'FLD_MODULE' => '模块',
 
     'LBL_ACTION_UPDATE_APPLICATION_STRUCTURE' => '更新应用目录结构文件',
     'LBL_ACTION_ADD_NAMESPACE' => '添加命名空间',
