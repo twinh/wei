@@ -57,7 +57,7 @@ return array(
     'LBL_MODULE_ARTICLE' => 'Article',
     'LBL_MODULE_ARTICLE_CATEGORY' => 'Article Category',
 
-    'LBL_ACTION_CREATE_HTML' => 'Create Html Page',
+    'ACT_CREATE_HTML' => 'Create Html Page',
 
     'MSG_TEMPLATE_NOT_EXISTS' => 'The article\'s template is not exists, please return and modify!',
     'LBL_CREATE_ALL_HMTL' => 'Create all html page',

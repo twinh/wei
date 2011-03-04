@@ -77,12 +77,12 @@ return array(
     'LBL_EDIT_PASSWORD' => 'Edit Password',
     'LBL_SWITCH_STYLE' => 'Switch Style',
     'LBL_SWITCH_LANGUAGE' => 'Switch Language',
-    'LBL_ACTION_ALLOCATE_PERMISSION' => 'Allocate Permission',
+    'ACT_ALLOCATE_PERMISSION' => 'Allocate Permission',
 
 
     'LBL_LOGIN_TITLE' => 'Welcome to use the system',
 
-    'LBL_ACTION_EDIT_PASSWORD' => 'Edit password',
+    'ACT_EDIT_PASSWORD' => 'Edit password',
 
     'MSG_ERROR_USERNAME_PASSWORD' => 'username or password error',
     'MSG_LOGINED' => 'You have login',

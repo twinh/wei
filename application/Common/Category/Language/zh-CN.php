@@ -33,10 +33,10 @@ return array(
     'FLD_IMAGE_2' => '图像2',
     'FLD_SIGN' => '唯一标识',
 
-    'LBL_ACTION_ADD_SUBCATEGORY' => '添加子分类',
-    'LBL_ACTION_ADD_SPECIAL_ARTICLE' => '添加专题文章',
-    'LBL_ACTION_VIEW_SPECIAL_ARTICLE' => '查看专题文章',
-    'LBL_ACTION_VIEW_SPECIAL' => '查看专题',
+    'ACT_ADD_SUBCATEGORY' => '添加子分类',
+    'ACT_ADD_SPECIAL_ARTICLE' => '添加专题文章',
+    'ACT_VIEW_SPECIAL_ARTICLE' => '查看专题文章',
+    'ACT_VIEW_SPECIAL' => '查看专题',
 
     'LBL_MODULE_CATEGORY' => '栏目',
 );

@@ -751,21 +751,21 @@ class Common_Metadata extends Qwin_Application_Metadata
         if (!in_array('edit', $this->forbiddenAction)) {
             $operation['edit'] = array(
                 'url'   => $url->url($asc, array('action' => 'Edit', $primaryKey => $dataCopy[$primaryKey])),
-                'title' => $lang->t('LBL_ACTION_EDIT'),
+                'title' => $lang->t('ACT_EDIT'),
                 'icon'  => 'ui-icon-tag',
             );
         }
         if (!in_array('view', $this->forbiddenAction)) {
             $operation['view'] = array(
                 'url'   => $url->url($asc, array('action' => 'View', $primaryKey => $dataCopy[$primaryKey])),
-                'title' => $lang->t('LBL_ACTION_VIEW'),
+                'title' => $lang->t('ACT_VIEW'),
                 'icon'  => 'ui-icon-lightbulb',
             );
         }
         /*if (!in_array('add', $this->forbiddenAction)) {
             $operation['add'] = array(
                 'url'   => $url->url($asc, array('action' => 'Add', $primaryKey => $dataCopy[$primaryKey])),
-                'title' => $lang->t('LBL_ACTION_COPY'),
+                'title' => $lang->t('ACT_COPY'),
                 'icon'  => 'ui-icon-transferthick-e-w',
             );
         }*/
@@ -779,7 +779,7 @@ class Common_Metadata extends Qwin_Application_Metadata
             }
             $operation['delete'] = array(
                 'url'   => 'javascript:if(confirm(QWIN_PATH.Lang.' . $jsLang . ')){window.location=\'' . $url->url($asc, array('action' => 'Delete', $primaryKey => $dataCopy[$primaryKey])) . '\';}',
-                'title' => $lang->t('LBL_ACTION_DELETE'),
+                'title' => $lang->t('ACT_DELETE'),
                 'icon'  => $icon,
             );
 

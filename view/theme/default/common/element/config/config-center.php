@@ -45,7 +45,7 @@
             <tr class="ui-widget-content">
                 <td class="ui-state-default"><?php echo $row['title'] ?></td>
                 <td><?php echo $row['description'] ?></td>
-                <td><?php echo qw_jquery_operation_button($url->url($asc, array('controller' => 'Config', 'action' => 'Render', 'groupId' => $row['form_name'])), $lang->t('LBL_ACTION_EDIT'), 'ui-icon-tag') ?></td>
+                <td><?php echo qw_jquery_operation_button($url->url($asc, array('controller' => 'Config', 'action' => 'Render', 'groupId' => $row['form_name'])), $lang->t('ACT_EDIT'), 'ui-icon-tag') ?></td>
             </tr>
             <?php
             endforeach;

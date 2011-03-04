@@ -37,7 +37,7 @@ return array(
 
     'LBL_GROUP_FORM_SETTING' => '表单配置',
 
-    'LBL_ACTION_CENTER' => '配置中心',
+    'ACT_CENTER' => '配置中心',
 
     'LBL_CONTROLLER_CONFIG' => '配置',
     'LBL_MODULE_CONFIG' => '配置',

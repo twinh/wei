@@ -26,7 +26,7 @@
 return array(
     'LBL_MODULE_TRASH' => '回收站',
 
-    'LBL_ACTION_EMPTY' => '清空',
+    'ACT_EMPTY' => '清空',
 
     'FLD_DELETED_BY' => '删除者',
     'FLD_DELETED_AT' => '删除时间',

@@ -51,7 +51,7 @@ return array(
     'LBL_MODULE_ARTICLE' => '文章',
     'LBL_MODULE_ARTICLE_CATEGORY' => '文章分类',
 
-    'LBL_ACTION_CREATE_HTML' => '生成静态页面',
+    'ACT_CREATE_HTML' => '生成静态页面',
 
     'MSG_TEMPLATE_NOT_EXISTS' => '文章模板不存在,请返回修改!',
     'LBL_CREATE_ALL_HMTL' => '生成所有的静态页面',

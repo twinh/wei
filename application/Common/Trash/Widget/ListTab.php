@@ -34,7 +34,7 @@ class Common_Trash_Widget_ListTab extends Common_Widget
         // 替换添加,删除的链接
         $param['tab']['restore'] = array(
             'url' => $url->url($asc, array('action' => 'Restore')),
-            'title' => $lang->t('LBL_ACTION_RESTORE'),
+            'title' => $lang->t('ACT_RESTORE'),
             'icon' => 'ui-icon-arrowreturnthick-1-w',
             'target' => null,
             'id' => 'action-restore',
@@ -42,7 +42,7 @@ class Common_Trash_Widget_ListTab extends Common_Widget
         );
         $param['tab']['empty'] = array(
             'url' => $url->url($asc, array('action' => 'Empty')),
-            'title' => $lang->t('LBL_ACTION_EMPTY'),
+            'title' => $lang->t('ACT_EMPTY'),
             'icon' => 'ui-icon-closethick',
             'target' => null,
             'id' => 'action-empty',

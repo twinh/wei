@@ -129,7 +129,7 @@ class Common_Trash_Metadata_Trash extends Common_Metadata
         $operation = array();
         $operation['restore'] = array(
             'url' => 'javascript:if(confirm(QWIN_PATH.Lang.MSG_CONFIRM_TO_RESTORE)){window.location=\'' . $url->url($asc, array('action' => 'Restore', $primaryKey => $dataCopy[$primaryKey])) . '\';}',
-            'title' => $lang->t('LBL_ACTION_RESTORE'),
+            'title' => $lang->t('ACT_RESTORE'),
             'icon' => 'ui-icon-arrowreturnthick-1-w',
         );
         $operation += parent::sanitiseListOperation($value, $name, $data, $dataCopy, true);

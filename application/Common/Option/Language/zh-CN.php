@@ -38,7 +38,7 @@ return array(
     'LBL_OPTION_EDITOR_OPER' => '操作',
     'LBL_OPTION_EDITOR_ADD' => '添加选项',
 
-    'LBL_ACTION_ADD_NEXT' => '添加下一个分类',
+    'ACT_ADD_NEXT' => '添加下一个分类',
 
     'LBL_MODULE_OPTION' => '选项',
     'FLD_LANGUAGE' => '语言',

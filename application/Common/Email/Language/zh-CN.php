@@ -38,7 +38,7 @@ class Common_Email_Language_Zhcn extends Common_Language_Zhcn
             'FLD_SUBJECT' => '标题',
             'FLD_RESULT' => '发送结果',
 
-            'LBL_ACTION_POST' => '发布',
+            'ACT_POST' => '发布',
 
             'LBL_MODULE_EMAIL' => '邮件',
         );
