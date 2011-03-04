@@ -90,6 +90,10 @@ class Validator_Widget extends Qwin_Widget_Abstract
             // 根据验证对象进行验证
             if ($option['validator'] && !empty($meta['field'][$name]['validator']['rule'])) {
                 $validateData = $meta['field'][$name]['validator'];
+                // 如果该域不是必填的,且为空,则不验证内容
+                if (!isset($validateData['rule']['required']) && '' == $value) {
+                    continue;
+                }
                 foreach ($validateData['rule'] as $rule => $param) {
                     if (false === $validator->valid($rule, $value, $param)) {
                         if (!isset($validateData['message'][$rule])) {
@@ -127,11 +131,10 @@ class Validator_Widget extends Qwin_Widget_Abstract
             }
         }
 
-        return $result;
-
         // 调用钩子方法
         $meta->postValidate();
 
+        return $result;
         // 验证关联域
         /*foreach ($this->getModelMetadataByType($meta, 'db') as $name => $relatedMeta) {
             !isset($data[$name]) && $data[$name] = array();
@@ -142,8 +145,6 @@ class Validator_Widget extends Qwin_Widget_Abstract
                 return $result;
             }
         }*/
-
-        return true;
     }
 
     /**

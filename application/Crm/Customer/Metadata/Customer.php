@@ -43,7 +43,7 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                     ),
                 ),
                 'number' => array(
-
+                    
                 ),
                 'sex' => array(
                     'form' => array(
