@@ -24,6 +24,8 @@
  */
 
 return array(
+    'VLD_DATA' => '您的提交的数据存在以下错误,请修复后再次提交.',
+
     'VLD_REQUIRED' => '该项是必填的.',
     'VLD_REMOTE' => '请修正该项的值.',
     'VLD_EMAIL' => '请输入合法的邮箱.',

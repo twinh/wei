@@ -39,6 +39,19 @@ class Common_View extends Qwin_Application_View
     protected $_packSign = '<!-- qwin-packer-sign -->';
 
     /**
+     * 信息提示视图的选项
+     *
+     * @var array
+     */
+    public $_infoOptions = array(
+        'icon'      => 'info',
+        'title'     => null,
+        'url'       => null,
+        'content'   => array(),
+        'time'      => 3000,
+    );
+
+    /**
      * 将当前视图对象加入注册器中
      */
     public function __construct()
@@ -116,32 +129,40 @@ class Common_View extends Qwin_Application_View
         ));
         
         // 布局的选择次序为 自定义视图 > 行为级 > 控制器级 > 模块级 > 默认(命名空间级)
-        $this->setLayout(array(
-            '<resource><theme>/<namespace>/layout/<module>-<controller>-<action><suffix>',
-            '<resource><theme>/<namespace>/layout/<module>-<controller><suffix>',
-            '<resource><theme>/<namespace>/layout/<module><suffix>',
-            '<resource><theme>/<namespace>/layout/common<suffix>',
-            '<resource><theme>/<defaultNamespace>/layout/common<suffix>',
-        ));
+        //if (empty($this->getRawLayout())) {
+            $this->setLayout(array(
+                '<resource><theme>/<namespace>/layout/<module>-<controller>-<action><suffix>',
+                '<resource><theme>/<namespace>/layout/<module>-<controller><suffix>',
+                '<resource><theme>/<namespace>/layout/<module><suffix>',
+                '<resource><theme>/<namespace>/layout/common<suffix>',
+                '<resource><theme>/<defaultNamespace>/layout/common<suffix>',
+            ));
+        //}
 
         // 默认视图元素的选择次序为 自定义视图 > 当前行为视图 > 默认模块视图 > 默认视图
-        $this->setElement('content', array(
-            '<resource><theme>/<namespace>/element/<module>/<controller>-<action><suffix>',
-            '<resource><theme>/<defaultNamespace>/element/common/<action><suffix>',
-            '<resource><theme>/<namespace>/element/common<suffix>',
-        ));
+        if (!$this->elementExists('content')) {
+            $this->setElement('content', array(
+                '<resource><theme>/<namespace>/element/<module>/<controller>-<action><suffix>',
+                '<resource><theme>/<defaultNamespace>/element/common/<action><suffix>',
+                '<resource><theme>/<namespace>/element/common<suffix>',
+            ));
+        }
 
         // 当前行为的左栏操作视图
-        $this->setElement('sidebar', array(
-            '<resource><theme>/<namespace>/element/<module>/<controller>/<action>-sidebar<suffix>',
-            '<resource><theme>/<defaultNamespace>/element/common/sidebar<suffix>',
-        ));
+        if (!$this->elementExists('sidebar')) {
+            $this->setElement('sidebar', array(
+                '<resource><theme>/<namespace>/element/<module>/<controller>/<action>-sidebar<suffix>',
+                '<resource><theme>/<defaultNamespace>/element/common/sidebar<suffix>',
+            ));
+        }
 
         // 当前行为的页眉标题视图
-        $this->setElement('header', array(
-            '<resource><theme>/<namespace>/element/<module>/<controller>/<action>-header<suffix>',
-            '<resource><theme>/<namespace>/element/common/header<suffix>',
-        ));
+        if (!$this->elementExists('header')) {
+            $this->setElement('header', array(
+                '<resource><theme>/<namespace>/element/<module>/<controller>/<action>-header<suffix>',
+                '<resource><theme>/<namespace>/element/common/header<suffix>',
+            ));
+        }
 
         return $this;
     }
@@ -214,19 +235,98 @@ class Common_View extends Qwin_Application_View
     }
 
     /**
-     * 跳转
+     * 输出信息提示视图
      *
-     * @param string $message 提示信息
-     * @param string $method 方式
+     * @param array $options 配置
+     * @todo 如何不通过exit退出,又能防止其他视图类加载
+     */
+    public function displayInfo(array $options = array())
+    {
+        $options = $options + $this->_infoOptions;
+        $this->setLayout('<resource><theme>/<defaultNamespace>/layout/common<suffix>');
+        $this->setElement('content', '<resource><theme>/<defaultNamespace>/element/common/info<suffix>');
+
+        $title = $options['title'];
+        $url = $options['url'];
+        $content = (array)$options['content'];
+        $time = intval($options['time']);
+        $meta['page']['title'] = 'LBL_REDIRECT';
+        $meta['page']['icon'] = $icon = $options['icon'];
+        
+        $this->assign(get_defined_vars());
+        $this->display();
+        exit;
+    }
+
+    /**
+     * 输出通用类型信息提示视图
+     *
+     * @param string $info 信息
+     * @param string $url 跳转地址
+     * @param array|string $content 内容
      * @return Common_View 当前对象
      */
-    public function redirect($message, $method = null)
+    public function info($info, $url = null, $content = array())
     {
-        $view = Qwin::call('Common_View_Redirect');
-        $view->assign('message', $message);
-        $view->assign('method', $method);
-        $view->display();
-        return $this;
+        return $this->displayInfo(array(
+            'title'     => $info,
+            'url'       => $url,
+            'content'   => $content,
+        ));
+    }
+
+    /**
+     * 输出成功类型的信息提示视图,如保存成功
+     *
+     * @param string $info 信息
+     * @param string $url 跳转地址
+     * @param array|string $content 内容
+     * @return Common_View 当前对象
+     */
+    public function success($info, $url = null, $content = array())
+    {
+        return $this->displayInfo(array(
+            'icon'      => 'tick',
+            'title'     => $info,
+            'url'       => $url,
+            'content'   => $content,
+        ));
+    }
+
+    /**
+     * 输出警告类型的信息提示视图,用于一般性错误,如提交表单内容不正确
+     *
+     * @param string $info 信息
+     * @param string $url 跳转地址
+     * @param array|string $content 内容
+     * @return Common_View 当前对象
+     */
+    public function alert($info, $url = null, $content = array())
+    {
+        return $this->displayInfo(array(
+            'icon'      => 'warning',
+            'title'     => $info,
+            'url'       => $url,
+            'content'   => $content,
+        ));
+    }
+
+    /**
+     * 输出错误类型的信息提示视图,用于严重性错误,如不可进行的操作
+     *
+     * @param string $info 信息
+     * @param string $url 跳转地址
+     * @param array|string $content 内容
+     * @return Common_View 当前对象
+     */
+    public function error($info, $url = null, $content = array())
+    {
+        return $this->displayInfo(array(
+            'icon'      => 'delete',
+            'title'     => $info,
+            'url'       => $url,
+            'content'   => $content,
+        ));
     }
 
     /**
