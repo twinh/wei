@@ -117,7 +117,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Driver
         
         // 设置名称
         if (!isset($data['basic']['title'])) {
-            $data['basic']['title'] = 'LBL_FIELD_' . strtoupper($data['form']['name']);
+            $data['basic']['title'] = 'FLD_' . strtoupper($data['form']['name']);
         }
         // 设置编号
         if (!isset($data['form']['id'])) {

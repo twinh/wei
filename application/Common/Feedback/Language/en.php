@@ -27,6 +27,6 @@
 
 return array(
     'LBL_MODULE_FEEDBACK' => 'Feedback',
-    'LBL_FIELD_AUTHOR' => 'Author',
-    'LBL_FIELD_EMAIL' => 'Email',
+    'FLD_AUTHOR' => 'Author',
+    'FLD_EMAIL' => 'Email',
 );

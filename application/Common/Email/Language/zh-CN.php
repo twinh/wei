@@ -31,12 +31,12 @@ class Common_Email_Language_Zhcn extends Common_Language_Zhcn
     {
         parent::__construct();
         $this->_data += array(
-            'LBL_FIELD_FROM' => '来自',
-            'LBL_FIELD_FROM_NAME' => '发件人',
-            'LBL_FIELD_TO' => '发至',
-            'LBL_FIELD_TO_NAME' => '收件人',
-            'LBL_FIELD_SUBJECT' => '标题',
-            'LBL_FIELD_RESULT' => '发送结果',
+            'FLD_FROM' => '来自',
+            'FLD_FROM_NAME' => '发件人',
+            'FLD_TO' => '发至',
+            'FLD_TO_NAME' => '收件人',
+            'FLD_SUBJECT' => '标题',
+            'FLD_RESULT' => '发送结果',
 
             'LBL_ACTION_POST' => '发布',
 

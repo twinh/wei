@@ -26,10 +26,10 @@
  */
 
 return array(
-    'LBL_FIELD_CATEGORY' => 'Category',
-    'LBL_FIELD_URL' => 'Url',
-    'LBL_FIELD_ORDER' => 'Order',
-    'LBL_FIELD_TARGET' => 'Target',
+    'FLD_CATEGORY' => 'Category',
+    'FLD_URL' => 'Url',
+    'FLD_ORDER' => 'Order',
+    'FLD_TARGET' => 'Target',
 
     'LBL_MODULE_ADMIN_MENU' => 'Admin Menu',
 );

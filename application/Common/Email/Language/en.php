@@ -26,12 +26,12 @@
  */
 
 return array(
-    'LBL_FIELD_FROM' => 'From',
-    'LBL_FIELD_FROM_NAME' => 'From Name',
-    'LBL_FIELD_TO' => 'To',
-    'LBL_FIELD_TO_NAME' => 'To Name',
-    'LBL_FIELD_SUBJECT' => 'Subject',
-    'LBL_FIELD_RESULT' => 'Result',
+    'FLD_FROM' => 'From',
+    'FLD_FROM_NAME' => 'From Name',
+    'FLD_TO' => 'To',
+    'FLD_TO_NAME' => 'To Name',
+    'FLD_SUBJECT' => 'Subject',
+    'FLD_RESULT' => 'Result',
 
     'LBL_ACTION_POST' => 'Post',
 

@@ -34,7 +34,7 @@ class Common_Category_Metadata_Category extends Common_Metadata
             'field' => array(
                 'parent_id' => array(
                     'basic' => array(
-                        'title' => 'LBL_FIELD_PARENT_NAME',
+                        'title' => 'FLD_PARENT_NAME',
                     ),
                     'form' => array(
                         '_type' => 'select',

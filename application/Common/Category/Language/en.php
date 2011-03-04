@@ -26,12 +26,12 @@
  */
 
 return array(
-    'LBL_FIELD_PARENT_ID' => 'Parent Category',
-    'LBL_FIELD_TO_URL' => 'Jump to url',
-    'LBL_FIELD_ORDER' => 'Order',
-    'LBL_FIELD_IMAGE' => 'Image',
-    'LBL_FIELD_IMAGE_2' => 'Image 2',
-    'LBL_FIELD_SIGN' => 'Sign',
+    'FLD_PARENT_ID' => 'Parent Category',
+    'FLD_TO_URL' => 'Jump to url',
+    'FLD_ORDER' => 'Order',
+    'FLD_IMAGE' => 'Image',
+    'FLD_IMAGE_2' => 'Image 2',
+    'FLD_SIGN' => 'Sign',
 
     'LBL_ACTION_ADD_SUBCATEGORY' => 'Add Subcategory',
     'LBL_ACTION_ADD_SPECIAL_ARTICLE' => 'Add Special Article',

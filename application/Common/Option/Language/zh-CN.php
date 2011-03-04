@@ -26,10 +26,10 @@
  */
 
 return array(
-    'LBL_FIELD_CODE' => '选项列表',
-    'LBL_FIELD_VALUE' => '值',
-    'LBL_FIELD_VAR_NAME' => '变量名称',
-    'LBL_FIELD_TYPE' => '类型',
+    'FLD_CODE' => '选项列表',
+    'FLD_VALUE' => '值',
+    'FLD_VAR_NAME' => '变量名称',
+    'FLD_TYPE' => '类型',
 
     'LBL_OPTION_EDITOR_VALUE' => '值',
     'LBL_OPTION_EDITOR_NAME' => '名称',
@@ -41,6 +41,6 @@ return array(
     'LBL_ACTION_ADD_NEXT' => '添加下一个分类',
 
     'LBL_MODULE_OPTION' => '选项',
-    'LBL_FIELD_LANGUAGE' => '语言',
-    'LBL_FIELD_SIGN' => '标识',
+    'FLD_LANGUAGE' => '语言',
+    'FLD_SIGN' => '标识',
 );

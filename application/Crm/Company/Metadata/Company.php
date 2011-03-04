@@ -32,7 +32,7 @@ class Crm_Company_Metadata_Company extends Common_Metadata
             'field' => array(
                 'customer_id' => array(
                     'basic' => array(
-                        'title' => 'LBL_FIELD_MEMBER_NAME',
+                        'title' => 'FLD_MEMBER_NAME',
                     ),
                     'form' => array(
                         '_type' => 'text',

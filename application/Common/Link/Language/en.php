@@ -26,11 +26,11 @@
  */
 
 return array(
-    'LBL_FIELD_CATEGORY_ID' => 'Category Name',
-    'LBL_FIELD_URL' => 'Url',
-    'LBL_FIELD_IMG_URL' => 'Image Url',
-    'LBL_FIELD_ORDER' => 'Order',
-    'LBL_FIELD_TARGET' => 'Target',
+    'FLD_CATEGORY_ID' => 'Category Name',
+    'FLD_URL' => 'Url',
+    'FLD_IMG_URL' => 'Image Url',
+    'FLD_ORDER' => 'Order',
+    'FLD_TARGET' => 'Target',
 
     'LBL_MODULE_LINK' => 'Link',
 );

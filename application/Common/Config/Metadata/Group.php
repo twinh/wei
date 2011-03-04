@@ -34,7 +34,7 @@ class Common_Config_Metadata_Group extends Common_Metadata
             'field' => array(
                 /*'parent_id' => array(
                     'basic' => array(
-                        'title' => 'LBL_FIELD_PARENT_NAME',
+                        'title' => 'FLD_PARENT_NAME',
                     ),
                     'form' => array(
                         '_type' => 'select',
