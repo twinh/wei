@@ -125,9 +125,9 @@ class Validator_Widget extends Qwin_Widget_Abstract
                     }
                 }
             }
-
-            return $result;
         }
+
+        return $result;
 
         // 调用钩子方法
         $meta->postValidate();
