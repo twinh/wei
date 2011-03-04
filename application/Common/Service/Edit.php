@@ -68,7 +68,7 @@ class Common_Service_Edit extends Common_Service
                 'message' => $lang['MSG_NO_RECORD'],
             );
             if ($option['display']) {
-                return Qwin::call('-view')->redirect($result['message']);
+                return Qwin::call('-view')->alert($result['message']);
             } else {
                 return $result;
             }
@@ -88,7 +88,7 @@ class Common_Service_Edit extends Common_Service
                 'message' => $validator->getInvalidMessage(),
             );
             if ($option['display']) {
-                return Qwin::call('-view')->redirect($result['message']);
+                return Qwin::call('-view')->alert($result['message']);
             } else {
                 return $result;
             }
@@ -103,7 +103,7 @@ class Common_Service_Edit extends Common_Service
             if (!$option['url']) {
                 $option['url'] = Qwin::call('-url')->url($option['asc'], array('action' => 'Index'));
             }
-            return Qwin::call('-view')->redirect('MSG_OPERATE_SUCCESSFULLY', $option['url']);
+            return Qwin::call('-view')->success('MSG_OPERATE_SUCCESSFULLY', $option['url']);
         }
         return array(
             'result' => true,

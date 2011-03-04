@@ -125,7 +125,7 @@ return array(
     'LBL_GROUP_DEFAULT_DATA' => '默认资料',
     'MSG_OPERATE_SUCCESSFULLY' => '操作成功!',
     'MSG_FUNCTION_DEVELOPTING' => '功能尚在开发中.',
-    'MSG_CLICK_TO_REDIRECT' => '3秒后跳转到新的页面,点击"跳转"按钮直接跳转.',
+    'MSG_CLICK_TO_REDIRECT' => '如果页面没有刷新,单击这里直接跳转.',
     'MSG_NOT_ALLOW_DELETE' => '不允许删除该用户.',
     'MSG_FILE_NOT_EXISTS' => '文件不存在',
     'MSG_PERMISSION_NOT_ENOUGH' => '您不够权限查看或操作该页面.',

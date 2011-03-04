@@ -111,7 +111,6 @@ class Common_Controller extends Qwin_Application_Controller
         $this->session  = Qwin::call('-session');
         $this->member   = $this->session->get('member');
         $this->view     = Qwin::call('Common_View');
-        Qwin::set('-view', $this->view);
 
         $this->_meta = Common_Metadata::getByAsc($this->_asc);
          /**
@@ -180,7 +179,7 @@ class Common_Controller extends Qwin_Application_Controller
                 'action' => 'Login',
             )));
         } else {
-            $this->view->redirect($this->_lang->t('MSG_PERMISSION_NOT_ENOUGH'));
+            $this->view->alert($this->_lang->t('MSG_PERMISSION_NOT_ENOUGH'));
         }
         return false;
     }

@@ -42,7 +42,7 @@ class Common_Config_Controller_Config extends Common_ActionController
             ->execute()
             ->toArray();
         if (empty($formData)) {
-           return $this->view->redirect($this->_lang->t('MSG_NO_RECORD'));
+           return $this->view->alert($this->_lang->t('MSG_NO_RECORD'));
         }
         
         // 构建域分组
@@ -109,7 +109,7 @@ class Common_Config_Controller_Config extends Common_ActionController
             Qwin_Util_File::writeArray($path, $globalConfig);
             
             $url = $this->url->url($this->_asc, array('action' => 'Index'));
-            $this->view->redirect(Qwin::call('-lang')->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+            $this->view->success(Qwin::call('-lang')->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }
     

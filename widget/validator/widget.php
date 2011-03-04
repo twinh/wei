@@ -191,12 +191,16 @@ class Validator_Widget extends Qwin_Widget_Abstract
         $msssage = '';
         $lang = Qwin::call('-lang');
         $this->loadLanguage();
+        $result = array(
+            'title' => $lang['VLD_DATA'],
+            'content' => array(),
+        );
         foreach ($this->_invalidData as $field => $row) {
             foreach ($row as $rule => $message) {
-                $msssage .= $lang[$this->_meta['field'][$field]['basic']['title']] . $lang[$message] . PHP_EOL;
+                $result['content'][] = $lang[$this->_meta['field'][$field]['basic']['title']] . ':' . $lang[$message] . PHP_EOL;
             }
         }
-        return $msssage;
+        return $result;
     }
 
     /**

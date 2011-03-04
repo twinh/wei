@@ -124,17 +124,6 @@ class Qwin_Application_View extends ArrayObject
     }
 
     /**
-     * 清空变量
-     *
-     * @return Qwin_Application_View 当前对象
-     */
-    public function clearData()
-    {
-        $this->_data = array();
-        return $this;
-    }
-
-    /**
      * 设置一组视图元素
      *
      * @param array $list 视图元素组,键名为视图名称,值为视图的值
@@ -213,6 +202,17 @@ class Qwin_Application_View extends ArrayObject
     {
         $this->_element = array();
         return $this;
+    }
+
+    /**
+     * 检查视图元素是否存在
+     *
+     * @param string $name 名称
+     * @return bool
+     */
+    public function elementExists($name)
+    {
+        return isset($this->_element[$name]);
     }
 
     /**
