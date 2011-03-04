@@ -106,8 +106,8 @@ $jsPacker
                         <div class="ui-field-common ui-login-operation">
                             <input type="hidden" name="_action" value="<?php echo $this->_set['action']?>" />
                             <input type="hidden" name="_page" value="<?php echo qw_referer_page() ?>" />
-                            <input type="submit" class="ui-form-button ui-state-default ui-corner-all" id="submit" value="<?php echo qw_lang('LBL_ACTION_SUBMIT')?>" />
-                            <input type="reset" class="ui-form-button ui-state-default ui-corner-all" value="<?php echo qw_lang('LBL_ACTION_RESET')?>" />
+                            <input type="submit" class="ui-form-button ui-state-default ui-corner-all" id="submit" value="<?php echo qw_lang('ACT_SUBMIT')?>" />
+                            <input type="reset" class="ui-form-button ui-state-default ui-corner-all" value="<?php echo qw_lang('ACT_RESET')?>" />
                         </div>
                 </td>
             </tr>

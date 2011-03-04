@@ -33,10 +33,10 @@ return array(
     'FLD_IMAGE_2' => 'Image 2',
     'FLD_SIGN' => 'Sign',
 
-    'LBL_ACTION_ADD_SUBCATEGORY' => 'Add Subcategory',
-    'LBL_ACTION_ADD_SPECIAL_ARTICLE' => 'Add Special Article',
-    'LBL_ACTION_VIEW_SPECIAL_ARTICLE' => 'Show Special Article',
-    'LBL_ACTION_VIEW_SPECIAL' => 'View Special',
+    'ACT_ADD_SUBCATEGORY' => 'Add Subcategory',
+    'ACT_ADD_SPECIAL_ARTICLE' => 'Add Special Article',
+    'ACT_VIEW_SPECIAL_ARTICLE' => 'Show Special Article',
+    'ACT_VIEW_SPECIAL' => 'View Special',
 
     'LBL_MODULE_CATEGORY' => 'Category',
 );

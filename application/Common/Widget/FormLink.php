@@ -43,7 +43,7 @@ class Common_Widget_FormLink extends Common_Widget
         if (!in_array('index', $forbiddenAction)) {
             $link['index'] = array(
                 'url'   => $url->url($asc, array('action' => 'Index')),
-                'title' => $lang->t('LBL_ACTION_LIST'),
+                'title' => $lang->t('ACT_LIST'),
                 'icon'  => 'ui-icon-note',
             );
         }
@@ -51,7 +51,7 @@ class Common_Widget_FormLink extends Common_Widget
         if (!in_array('add', $forbiddenAction)) {
             $link['add'] = array(
                 'url'   => $url->url($asc, array('action' => 'Add')),
-                'title' => $lang->t('LBL_ACTION_ADD'),
+                'title' => $lang->t('ACT_ADD'),
                 'icon'  => 'ui-icon-plus',
             );
             
@@ -63,7 +63,7 @@ class Common_Widget_FormLink extends Common_Widget
             if (!in_array('edit', $forbiddenAction)) {
                 $link['edit'] = array(
                     'url'   => $url->url($asc, array('action' => 'Edit', $primaryKey => $data[$primaryKey])),
-                    'title' => $lang->t('LBL_ACTION_EDIT'),
+                    'title' => $lang->t('ACT_EDIT'),
                     'icon'  => 'ui-icon-tag',
                 );
             }
@@ -71,7 +71,7 @@ class Common_Widget_FormLink extends Common_Widget
             if (!in_array('view', $forbiddenAction)) {
                 $link['view'] = array(
                     'url'   => $url->url($asc, array('action' => 'View', $primaryKey => $data[$primaryKey])),
-                    'title' => $lang->t('LBL_ACTION_VIEW'),
+                    'title' => $lang->t('ACT_VIEW'),
                     'icon'  => 'ui-icon-lightbulb',
                 );
             }
@@ -79,7 +79,7 @@ class Common_Widget_FormLink extends Common_Widget
             if (!in_array('add', $forbiddenAction)) {
                 $link['copy'] = array(
                     'url'   => $url->url($asc, array('action' => 'Add', $primaryKey => $data[$primaryKey])),
-                    'title' => $lang->t('LBL_ACTION_COPY'),
+                    'title' => $lang->t('ACT_COPY'),
                     'icon'  => 'ui-icon-transferthick-e-w',
                 );
             }
@@ -95,14 +95,14 @@ class Common_Widget_FormLink extends Common_Widget
                 }
                  $link['delete'] = array(
                     'url'   => 'javascript:if(confirm(QWIN_PATH.Lang.' . $jsLang . ')){window.location=\'' . $url->url($asc, array('action' => 'Delete', $primaryKey => $data[$primaryKey])) . '\'};',
-                    'title' => $lang->t('LBL_ACTION_DELETE'),
+                    'title' => $lang->t('ACT_DELETE'),
                     'icon'  => $icon,
                 );
              }
         }
         $link['return'] = array(
             'url'   => 'javascript:history.go(-1);',
-            'title' => $lang->t('LBL_ACTION_RETURN'),
+            'title' => $lang->t('ACT_RETURN'),
             'icon'  => 'ui-icon-arrowthickstop-1-w',
         );
 

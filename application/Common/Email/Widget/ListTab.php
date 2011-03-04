@@ -35,7 +35,7 @@ class Common_Email_Widget_ListTab extends Common_Widget
 
         $param['tab']['post'] = array(
             'url' => $url->url($asc, array('action' => 'Post')),
-            'title' => $lang->t('LBL_ACTION_POST'),
+            'title' => $lang->t('ACT_POST'),
             'icon' => 'ui-icon-script',
             'target' => null,
             'id' => null,

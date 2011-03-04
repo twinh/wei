@@ -69,7 +69,7 @@ class Common_Widget_ListTab extends Common_Widget
         if (!in_array('add', $forbiddenAction)) {
             $tab['add'] = array(
                 'url'       => $url->url($get, array('action' => 'Add')),
-                'title'     => $lang->t('LBL_ACTION_ADD'),
+                'title'     => $lang->t('ACT_ADD'),
                 'icon'      => 'ui-icon-plus',
                 'target'    => null,
                 'id'        => 'action-' . $ascString . '-add',
@@ -77,7 +77,7 @@ class Common_Widget_ListTab extends Common_Widget
             );
             $tab['copy'] = array(
                 'url'   => $url->url($asc, array('action' => 'Add')),
-                'title' => $lang->t('LBL_ACTION_COPY'),
+                'title' => $lang->t('ACT_COPY'),
                 'icon'  => 'ui-icon-transferthick-e-w',
                 'target'    => null,
                 'id'        => 'action-' . $ascString . '-copy',
@@ -97,7 +97,7 @@ class Common_Widget_ListTab extends Common_Widget
             }
             $tab['delete'] = array(
                 'url'       => 'javascript:;',
-                'title'     => $lang->t('LBL_ACTION_DELETE'),
+                'title'     => $lang->t('ACT_DELETE'),
                 'icon'      => $icon,
                 'target'    => null,
                 'id'        => 'action-' . $ascString . '-delete',
@@ -108,7 +108,7 @@ class Common_Widget_ListTab extends Common_Widget
         if (!in_array('list', $forbiddenAction)) {
             $tab['list'] = array(
                 'url' => $url->url($asc, array('action' => 'Index')),
-                'title' => $lang->t('LBL_ACTION_LIST'),
+                'title' => $lang->t('ACT_LIST'),
                 'icon' => 'ui-icon-note',
                 'target' => null,
                 'id' => 'action-' . $ascString . '-list',

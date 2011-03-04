@@ -33,7 +33,7 @@ return array(
     'FLD_SUBJECT' => 'Subject',
     'FLD_RESULT' => 'Result',
 
-    'LBL_ACTION_POST' => 'Post',
+    'ACT_POST' => 'Post',
 
     'LBL_MODULE_EMAIL' => 'Email',
 );

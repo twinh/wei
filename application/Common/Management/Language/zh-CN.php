@@ -31,11 +31,11 @@ return array(
 
     'FLD_MODULE' => '模块',
 
-    'LBL_ACTION_UPDATE_APPLICATION_STRUCTURE' => '更新应用目录结构文件',
-    'LBL_ACTION_ADD_NAMESPACE' => '添加命名空间',
-    'LBL_ACTION_NAMESPACE_LIST' => '命名空间列表',
-    'LBL_ACTION_ADD_MODULE' => '添加模块',
-    'LBL_ACTION_VIEW_MODULE' => '查看模块',
+    'ACT_UPDATE_APPLICATION_STRUCTURE' => '更新应用目录结构文件',
+    'ACT_ADD_NAMESPACE' => '添加命名空间',
+    'ACT_NAMESPACE_LIST' => '命名空间列表',
+    'ACT_ADD_MODULE' => '添加模块',
+    'ACT_VIEW_MODULE' => '查看模块',
 
     'MSG_VALIDATOR_NAMESPACE_EXISTS' => '命名空间已存在.',
     'MSG_NAMESAPCE_NOT_EXISTS' => '命名空间不存在.',

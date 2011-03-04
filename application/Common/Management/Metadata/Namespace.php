@@ -77,9 +77,9 @@ class Common_Management_Metadata_Namespace extends Common_Metadata
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
         $set = $this->getAsc();
-        return Qwin_Util_Html::jQueryButton($url->url($set, array('controller' => 'Module', 'action' => 'Index', 'namespace_value' => $copyData['namespace'])), $lang->t('LBL_ACTION_VIEW_MODULE'), 'ui-icon-lightbulb')
-            . Qwin_Util_Html::jQueryButton($url->url($set, array('controller' => 'Module', 'action' => 'Add', 'namespace_value' => $copyData['namespace'])), $lang->t('LBL_ACTION_ADD_MODULE'), 'ui-icon-plus')
-            . Qwin_Util_Html::jQueryButton('javascript:if(confirm(QWIN_PATH.Lang.MSG_CONFIRM_TO_DELETE)){window.location=\'' . $url->url($set, array('action' => 'Delete', 'namespace_value' => $copyData['namespace'])) . '\';}', $lang->t('LBL_ACTION_DELETE'), 'ui-icon-closethick');
+        return Qwin_Util_Html::jQueryButton($url->url($set, array('controller' => 'Module', 'action' => 'Index', 'namespace_value' => $copyData['namespace'])), $lang->t('ACT_VIEW_MODULE'), 'ui-icon-lightbulb')
+            . Qwin_Util_Html::jQueryButton($url->url($set, array('controller' => 'Module', 'action' => 'Add', 'namespace_value' => $copyData['namespace'])), $lang->t('ACT_ADD_MODULE'), 'ui-icon-plus')
+            . Qwin_Util_Html::jQueryButton('javascript:if(confirm(QWIN_PATH.Lang.MSG_CONFIRM_TO_DELETE)){window.location=\'' . $url->url($set, array('action' => 'Delete', 'namespace_value' => $copyData['namespace'])) . '\';}', $lang->t('ACT_DELETE'), 'ui-icon-closethick');
     }
 }
 

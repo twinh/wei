@@ -56,7 +56,7 @@ return array(
     'LBL_GROUP_ADDRESS_DATA' => '地址资料',
     'LBL_GROUP_BANK_DATA' => '银行财务资料',
 
-    'LBL_ACTION_LEAD' => '潜在客户',
+    'ACT_LEAD' => '潜在客户',
 
     'LBL_MODULE_CUSTOMER' => '客户',
 

@@ -31,11 +31,11 @@ return array(
 
     'FLD_MODULE' => 'Module',
 
-    'LBL_ACTION_UPDATE_APPLICATION_STRUCTURE' => 'Update Application Structure File',
-    'LBL_ACTION_ADD_NAMESPACE' => 'Add Namespace',
-    'LBL_ACTION_NAMESPACE_LIST' => 'Namespace List',
-    'LBL_ACTION_ADD_MODULE' => 'Add Module',
-    'LBL_ACTION_VIEW_MODULE' => 'View Module',
+    'ACT_UPDATE_APPLICATION_STRUCTURE' => 'Update Application Structure File',
+    'ACT_ADD_NAMESPACE' => 'Add Namespace',
+    'ACT_NAMESPACE_LIST' => 'Namespace List',
+    'ACT_ADD_MODULE' => 'Add Module',
+    'ACT_VIEW_MODULE' => 'View Module',
 
     'MSG_VALIDATOR_NAMESPACE_EXISTS' => 'The namespace is exists.',
     'MSG_NAMESAPCE_NOT_EXISTS' => 'The namespace is not exists.',

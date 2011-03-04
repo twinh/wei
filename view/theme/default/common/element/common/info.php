@@ -72,7 +72,7 @@
         </div>
         <div class="ui-message-operation">
         <?php
-            echo qw_jquery_link('javascript:history.go(-1);', qw_lang('LBL_ACTION_RETURN'), 'ui-icon-arrowthickstop-1-w')
+            echo qw_jquery_link('javascript:history.go(-1);', qw_lang('ACT_RETURN'), 'ui-icon-arrowthickstop-1-w')
          ?>
         </div>
     </div>

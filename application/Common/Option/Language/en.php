@@ -30,7 +30,7 @@ return array(
     'FLD_SIGN' => 'Sign',
     'FLD_CODE' => 'Code',
 
-    'LBL_ACTION_ADD_NEXT' => 'Add Next Class',
+    'ACT_ADD_NEXT' => 'Add Next Class',
 
     'LBL_MODULE_COMMONCLASS' => 'Common Class',
 );

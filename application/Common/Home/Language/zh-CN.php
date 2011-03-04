@@ -26,5 +26,5 @@
 return array(
     'LBL_MODULE_HOME' => '主页',
 
-    'LBL_ACTION_UPDATELOG' => '更新日志',
+    'ACT_UPDATELOG' => '更新日志',
 );

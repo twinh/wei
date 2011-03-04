@@ -51,10 +51,10 @@ class Common_Widget_Header extends Common_Widget
         $header .= '<a href="' . $url->url(array_diff_key($asc, array('action' => ''))) . '">' . $lang->t('LBL_CONTROLLER_' . strtoupper($asc['controller'])) . '</a>&nbsp;&raquo;&nbsp;';
         */
         // 行为 todo 允许自定义
-        $actionLabel = 'LBL_ACTION_' . strtoupper($asc['action']);
+        $actionLabel = 'ACT_' . strtoupper($asc['action']);
         $actionHeader = $lang->t($actionLabel);
         if ($actionLabel != $actionHeader) {
-            $header .= '&nbsp;&raquo;&nbsp;<a href="' . $url->url($_GET) . '">' . $lang->t('LBL_ACTION_' . strtoupper($asc['action'])) . '</a>';
+            $header .= '&nbsp;&raquo;&nbsp;<a href="' . $url->url($_GET) . '">' . $lang->t('ACT_' . strtoupper($asc['action'])) . '</a>';
         }
         
         require $view->decodePath('<resource><theme>/<defaultNamespace>/element/widget/header<suffix>');
