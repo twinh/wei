@@ -47,14 +47,14 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Driver
         'form' => array(
             '_type' => 'text',
             '_resource' => null,
-            //'_resourceGetter' => null,
-            //'_resourceFormFile' => null,
-            //'_widget' => array(),
-            //'_extend' => array(),
             '_value' => '',
             'name' => null,
-            //'id' => null,
-            //'class' => null,
+//            '_resourceGetter' => null,
+//            '_resourceFormFile' => null,
+//            '_widget' => array(),
+//            '_extend' => array(),
+//            'id' => null,
+//            'class' => null,
         ),
         'attr' => array(
             'isLink' => 0,
@@ -68,11 +68,11 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Driver
             'type' => 'string',
             'length' => null,
         ),
-        'sanitiser' => array(),
-        'validator' => array(
-            'rule' => array(),
-            'message' => array(),
-        ),
+//        'sanitiser' => array(),
+//        'validator' => array(
+//            'rule' => array(),
+//            'message' => array(),
+//        ),
     );
 
     /**
@@ -134,13 +134,14 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Driver
         }
 
         // 转换转换器的配置,使不同的行为之间允许共享转换器
-        !isset($data['sanitiser']) && $data['sanitiser'] = array();
-        foreach ($data['sanitiser'] as $key => $value) {
-            if (is_string($value) && isset($data['sanitiser'][$value])) {
-                $data['sanitiser'][$key] = $data['sanitiser'][$value];
+        if (isset($data['sanitiser'])) {
+            foreach ((array)$data['sanitiser'] as $key => $value) {
+                if (is_string($value) && isset($data['sanitiser'][$value])) {
+                    $data['sanitiser'][$key] = $data['sanitiser'][$value];
+                }
             }
         }
-
+        
         foreach ($this->_default as $key => $row) {
             if (isset($data[$key])) {
                 $data[$key] = array_merge($row, $data[$key]);
