@@ -49,7 +49,9 @@ class Qwin_Validator
      */
     public function  __construct($callbacks = null)
     {
-        return $this->setRules((array)$callbacks);
+        if (isset($callbacks)) {
+            $this->setRules((array)$callbacks);
+        }
     }
 
     /**
@@ -98,10 +100,25 @@ class Qwin_Validator
             return $this;
         }
         foreach ($this->_rawRules as $rule => $callback) {
-            if (class_exists($callback) || is_object($callback)) {
-                foreach (get_class_methods($callback) as $method) {
-                    $method = strtolower($method);
-                    $this->_rules[$method] = array($callback, $method);
+            if (class_exists($callback)) {
+                $class  = $callback;
+                $object = Qwin::call($class);
+            } elseif (is_object($callback)) {
+                $class  = get_class($callback);
+                $object = $callback;
+            } else {
+                unset($class, $object);
+            }
+            if (isset($class)) {
+                $reflection = new ReflectionClass($callback);
+                $methods = $reflection->getMethods(ReflectionMethod::IS_PUBLIC);
+                foreach ($methods as $method) {
+                    $name = strtolower($method->getName());
+                    if ($method->isStatic()) {
+                        $this->_rules[$name] = array($class, $name);
+                    } else {
+                        $this->_rules[$name] = array($object, $name);
+                    }
                 }
             } elseif (is_callable($callback)) {
                 $this->_rules[$rule] = $callback;
@@ -110,6 +127,14 @@ class Qwin_Validator
         return $this;
     }
 
+    /**
+     * 验证
+     *
+     * @param string $rule 规则名称
+     * @param mixed $value 验证的值
+     * @param mixed $param 验证附加参数
+     * @return bool 验证结果
+     */
     public function valid($rule, $value, $param = null)
     {
         $this->_processRules();
