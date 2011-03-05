@@ -68,7 +68,7 @@ jQuery(function($) {
     foreach($jqGridList as $alias => $jqGrid):
     ?>
     <div id="ui-tab-<?php echo $alias ?>">
-        <?php require $this->decodePath('<resource><theme>/<defaultNamespace>/element/basic/jqgird<suffix>') ?>
+        <?php require $this->decodePath('<resource><theme>/<defaultPackage>/element/basic/jqgird<suffix>') ?>
     </div>
     <?php
     endforeach;

@@ -56,9 +56,9 @@ class Qwin_Application
     
     /**
      * 命名空间的实例化对象
-     * @var Qwin_Application_Namespace
+     * @var Qwin_Application_Package
      */
-    protected $_namespace;
+    protected $_package;
 
     /**
      * 模块的实例化对象
@@ -166,11 +166,11 @@ class Qwin_Application
         Qwin::config('asc', $asc);
 
         // 检查命名空间是否存在,存在则加载
-        $namespaceList = Qwin_Application_Namespace::getList($config['Qwin']['autoloadPath']);
-        if (!isset($namespaceList[$asc['namespace']])) {
-            return $this->_onNamespaceNotExists($asc);
+        $packageList = Qwin_Application_Package::getList($config['Qwin']['autoloadPath']);
+        if (!isset($packageList[$asc['package']])) {
+            return $this->_onPackageNotExists($asc);
         }
-        Qwin_Application_Namespace::getByAsc($asc);
+        Qwin_Application_Package::getByAsc($asc);
 
         // 加载模块
         Qwin_Application_Module::getByAsc($asc);
@@ -235,9 +235,9 @@ class Qwin_Application
      *
      * @param array $asc 应用结构配置
      */
-    public function _onNamespaceNotExists($asc)
+    public function _onPackageNotExists($asc)
     {
-        exit('The namespace "' . $asc['namespace'] . '" is not exists.');
+        exit('The package "' . $asc['package'] . '" is not exists.');
     }
 
     /**

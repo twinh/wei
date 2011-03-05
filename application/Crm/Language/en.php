@@ -24,5 +24,5 @@
  */
 
 /* @var $this Qwin_Application_Language */
-$this->appendByNamespace('Common');
+$this->appendByPackage('Common');
 return array();

@@ -134,7 +134,7 @@ class Common_Controller extends Qwin_Application_Controller
         if(null == $member)
         {
             $asc = array(
-                'namespace' => 'Common',
+                'package' => 'Common',
                 'module' => 'Member',
                 'controller' => 'Member',
             );
@@ -154,19 +154,19 @@ class Common_Controller extends Qwin_Application_Controller
         // 逐层权限判断
         $asc = $this->config['asc'];
         $permission = @unserialize($member['group']['permission']);
-        if(isset($permission[$asc['namespace']]))
+        if(isset($permission[$asc['package']]))
         {
             return true;
         }
-        if(isset($permission[$asc['namespace'] . '|' . $asc['module']]))
+        if(isset($permission[$asc['package'] . '|' . $asc['module']]))
         {
             return true;
         }
-        if(isset($permission[$asc['namespace'] . '|' . $asc['module'] . '|' . $asc['controller']]))
+        if(isset($permission[$asc['package'] . '|' . $asc['module'] . '|' . $asc['controller']]))
         {
             return true;
         }
-        if(isset($permission[$asc['namespace'] . '|' . $asc['module'] . '|' . $asc['controller'] . '|' . $asc['action']]))
+        if(isset($permission[$asc['package'] . '|' . $asc['module'] . '|' . $asc['controller'] . '|' . $asc['action']]))
         {
             return true;
         }

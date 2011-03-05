@@ -1,6 +1,6 @@
 <?php
 /**
- * Namespace
+ * Package
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -25,7 +25,7 @@
  * @since       2010-09-16 16:12:40
  */
 
-class Common_Management_Controller_Namespace extends Common_Controller
+class Common_Management_Controller_Package extends Common_Controller
 {
     public function  __construct()
     {
@@ -44,19 +44,19 @@ class Common_Management_Controller_Namespace extends Common_Controller
     {
         $meta = $this->_meta;
         $theme = Qwin::call('-ini')->getConfig('interface.theme');
-        $namespace[$this->_path] = $this->_app->getNamespace($this->_path);
-        $namespace[$this->_rootAppPath] = $this->_app->getNamespace($this->_rootAppPath);
+        $package[$this->_path] = $this->_app->getPackage($this->_path);
+        $package[$this->_rootAppPath] = $this->_app->getPackage($this->_rootAppPath);
 
         // 构建数组
         $data = array();
         $key = 1;
-        foreach($namespace as $path => $value)
+        foreach($package as $path => $value)
         {
             foreach($value as $name)
             {
                 $data[] = array(
                     'id' => $key++,
-                    'namespace' => $name,
+                    'package' => $name,
                     'path' => $path,
                 );
             }
@@ -68,7 +68,7 @@ class Common_Management_Controller_Namespace extends Common_Controller
         $this->_view = array(
             'class' => 'Common_View',
             'element' => array(
-                array('content', QWIN_PATH . '/view/theme/' . $theme . '/element/management/namespace-list.php'),
+                array('content', QWIN_PATH . '/view/theme/' . $theme . '/element/management/package-list.php'),
             ),
             'data' => get_defined_vars(),
         );
@@ -90,8 +90,8 @@ class Common_Management_Controller_Namespace extends Common_Controller
             $primaryKey = $meta['db']['primaryKey'];
             $primaryKeyValue = $config['data']['primaryKeyValue'];
 
-            $namespace = $this->_app->getNamespace($this->_path);
-            $banNamespace = implode(',', $namespace);
+            $package = $this->_app->getPackage($this->_path);
+            $banPackage = implode(',', $package);
 
             $theme = Qwin::call('-ini')->getConfig('interface.theme');
 
@@ -99,7 +99,7 @@ class Common_Management_Controller_Namespace extends Common_Controller
             $this->_view = array(
                 'class' => 'Common_View',
                 'element' => array(
-                    array('content', QWIN_PATH . '/view/theme/' . $theme . '/element/management/add-namespace.php'),
+                    array('content', QWIN_PATH . '/view/theme/' . $theme . '/element/management/add-package.php'),
                 ),
                 'data' => get_defined_vars(),
             );
@@ -114,7 +114,7 @@ class Common_Management_Controller_Namespace extends Common_Controller
                     . $this->_meta->format($this->_lang->t($validateResult->message), $validateResult->param);
                 return $this->view->redirect($message);
             }
-            mkdir($this->_path . '/' . $_POST['namespace']);
+            mkdir($this->_path . '/' . $_POST['package']);
 
             $url = Qwin::call('-url')->url($this->_asc, array('action' => 'Index'));
             return $this->view->redirect($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
@@ -123,7 +123,7 @@ class Common_Management_Controller_Namespace extends Common_Controller
 
     public function actionDelete()
     {
-        $name = $this->_request->get('namespace_value');
+        $name = $this->_request->get('package_value');
         $path = $this->_path . '/' . $name;
         
         // 不存在的目录

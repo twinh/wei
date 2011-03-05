@@ -31,7 +31,7 @@
 .ui-permission-list{
     padding: 1em;
 }
-.ui-app-structure-namespace{
+.ui-app-structure-package{
 
 }
 .ui-app-structure-module td{
@@ -58,21 +58,21 @@
         <div class="ui-permission-list">
             <table>
             <?php
-            foreach($appStructure as $namespace => $moduleList):
-                if(isset($permission[$namespace])):
+            foreach($appStructure as $package => $moduleList):
+                if(isset($permission[$package])):
                     $checked = ' checked="checked" ';
                 else :
                     $checked = '';
                 endif;
             ?>
-                <tr class="ui-app-structure-namespace">
+                <tr class="ui-app-structure-package">
                     <td class="ui-field-checkbox">
-                        <label for="namespace-<?php echo $namespace ?>"><?php echo $namespace ?></label><input type="checkbox" id="namespace-<?php echo $namespace ?>" name="permission[<?php echo $namespace ?>]" <?php echo $checked ?> />
+                        <label for="package-<?php echo $package ?>"><?php echo $package ?></label><input type="checkbox" id="package-<?php echo $package ?>" name="permission[<?php echo $package ?>]" <?php echo $checked ?> />
                     </td>
                 </tr>
             <?php
                 foreach($moduleList as $module => $controllerList):
-                    if(isset($permission[$namespace . '|' . $module])):
+                    if(isset($permission[$package . '|' . $module])):
                         $checked = ' checked="checked" ';
                     else :
                         $checked = '';
@@ -80,12 +80,12 @@
             ?>
                 <tr class="ui-app-structure-module">
                     <td class="ui-field-checkbox">
-                        <label for="module-<?php echo $namespace ?>-<?php echo $module ?>"><?php echo $module ?></label><input type="checkbox" id="module-<?php echo $namespace ?>-<?php echo $module ?>" name="permission[<?php echo $namespace ?>|<?php echo $module ?>]" <?php echo $checked ?> />
+                        <label for="module-<?php echo $package ?>-<?php echo $module ?>"><?php echo $module ?></label><input type="checkbox" id="module-<?php echo $package ?>-<?php echo $module ?>" name="permission[<?php echo $package ?>|<?php echo $module ?>]" <?php echo $checked ?> />
                     </td>
                 </tr>
             <?php
                     foreach($controllerList as $controller => $actionList):
-                        if(isset($permission[$namespace . '|' . $module . '|' . $controller])):
+                        if(isset($permission[$package . '|' . $module . '|' . $controller])):
                             $checked = ' checked="checked" ';
                         else :
                             $checked = '';
@@ -93,21 +93,21 @@
             ?>
                 <tr class="ui-app-structure-controller">
                     <td class="ui-field-checkbox">
-                        <label for="controller-<?php echo $namespace ?>-<?php echo $module ?>-<?php echo $controller ?>"><?php echo $controller ?></label><input type="checkbox" id="controller-<?php echo $namespace ?>-<?php echo $module ?>-<?php echo $controller ?>" name="permission[<?php echo $namespace ?>|<?php echo $module ?>|<?php echo $controller ?>]" <?php echo $checked ?> />
+                        <label for="controller-<?php echo $package ?>-<?php echo $module ?>-<?php echo $controller ?>"><?php echo $controller ?></label><input type="checkbox" id="controller-<?php echo $package ?>-<?php echo $module ?>-<?php echo $controller ?>" name="permission[<?php echo $package ?>|<?php echo $module ?>|<?php echo $controller ?>]" <?php echo $checked ?> />
                     </td>
                 </tr>
                 <tr class="ui-app-structure-action">
                     <td class="ui-field-checkbox">
             <?php
                         foreach($actionList as $action):
-                            if(isset($permission[$namespace . '|' . $module . '|' . $controller . '|' . $action])):
+                            if(isset($permission[$package . '|' . $module . '|' . $controller . '|' . $action])):
                                 $checked = ' checked="checked" ';
                             else :
                                 $checked = '';
                             endif;
             ?>
                 
-                        <label for="action-<?php echo $namespace ?>-<?php echo $module ?>-<?php echo $controller ?>-<?php echo $action ?>"><?php echo $action ?></label><input type="checkbox" id="action-<?php echo $namespace ?>-<?php echo $module ?>-<?php echo $controller ?>-<?php echo $action ?>" name="permission[<?php echo $namespace ?>|<?php echo $module ?>|<?php echo $controller ?>|<?php echo $action ?>]" <?php echo $checked ?> />
+                        <label for="action-<?php echo $package ?>-<?php echo $module ?>-<?php echo $controller ?>-<?php echo $action ?>"><?php echo $action ?></label><input type="checkbox" id="action-<?php echo $package ?>-<?php echo $module ?>-<?php echo $controller ?>-<?php echo $action ?>" name="permission[<?php echo $package ?>|<?php echo $module ?>|<?php echo $controller ?>|<?php echo $action ?>]" <?php echo $checked ?> />
             <?php
                         endforeach;
             ?>

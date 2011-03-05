@@ -53,8 +53,8 @@ class Common_Management_Controller_ApplicationStructure extends Common_Controlle
         $action = array();
         foreach($path as $subPath)
         {
-            $namespace = $app->getNamespace($subPath);
-            $module = $app->getModule($subPath, $namespace);
+            $package = $app->getPackage($subPath);
+            $module = $app->getModule($subPath, $package);
             $controller = $app->getController($subPath, $module);
             $action += $app->getAction($subPath, $controller);
         }
@@ -65,14 +65,14 @@ class Common_Management_Controller_ApplicationStructure extends Common_Controlle
         $this->view->redirect($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
     }
 
-    public function validateNamespace($value, $name, $data)
+    public function validatePackage($value, $name, $data)
     {
         $path = $this->_getAppPath();
-        $namesapceList = $this->_getNamespace($path);
+        $namesapceList = $this->_getPackage($path);
         if(!in_array($value, $namesapceList))
         {
             return true;
         }
-        return new Qwin_Validator_Result(false, 'namespace', 'MSG_VALIDATOR_NAMESPACE_EXISTS');
+        return new Qwin_Validator_Result(false, 'package', 'MSG_VALIDATOR_NAMESPACE_EXISTS');
     }
 }

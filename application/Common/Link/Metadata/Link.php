@@ -39,7 +39,7 @@ class Common_Link_Metadata_Link extends Common_Metadata
                         '_resourceGetter' => array(
                             array('Project_Helper_Category', 'getTreeResource'),
                             array(
-                                'namespace' => 'Common',
+                                'package' => 'Common',
                                 'module' => 'Category',
                                 'controller' => 'Category',
                             ),

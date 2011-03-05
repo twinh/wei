@@ -62,7 +62,7 @@ class Common_Member_Metadata_LoginLog extends Common_Metadata
                         'member_id' => 'username',
                     ),
                     'asc' => array(
-                        'namespace' => 'Common',
+                        'package' => 'Common',
                         'module' => 'Member',
                         'controller' => 'Member'
                     ),

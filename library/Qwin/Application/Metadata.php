@@ -81,7 +81,7 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
      */
     public static function getByAsc(array $asc, $instanced = true)
     {
-        $class = $asc['namespace'] . '_' . $asc['module'] . '_Metadata_' . $asc['controller'];
+        $class = $asc['package'] . '_' . $asc['module'] . '_Metadata_' . $asc['controller'];
         return $instanced ? Qwin_Metadata::getInstance()->get($class) : $class;
     }
 

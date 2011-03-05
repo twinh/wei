@@ -1,6 +1,6 @@
 <?php
 /**
- * Namespace
+ * Package
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -25,7 +25,7 @@
  * @since       2010-09-16 16:15:23
  */
 
-class Common_Management_Metadata_Namespace extends Common_Metadata
+class Common_Management_Metadata_Package extends Common_Metadata
 {
     public function __construct()
     {
@@ -33,7 +33,7 @@ class Common_Management_Metadata_Namespace extends Common_Metadata
         $this->setOperationMetadata();
         $this->merge(array(
             'field' => array(
-                'namespace' => array(
+                'package' => array(
                     'validator' => array(
                         'rule' => array(
                             'required' => true,
@@ -54,7 +54,7 @@ class Common_Management_Metadata_Namespace extends Common_Metadata
 
             ),
             'db' => array(
-                'table' => 'namespace',
+                'table' => 'package',
             ),
             'page' => array(
                 'title' => 'LBL_MODULE_NAMESPACE',
@@ -77,9 +77,9 @@ class Common_Management_Metadata_Namespace extends Common_Metadata
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
         $set = $this->getAsc();
-        return Qwin_Util_Html::jQueryButton($url->url($set, array('controller' => 'Module', 'action' => 'Index', 'namespace_value' => $copyData['namespace'])), $lang->t('ACT_VIEW_MODULE'), 'ui-icon-lightbulb')
-            . Qwin_Util_Html::jQueryButton($url->url($set, array('controller' => 'Module', 'action' => 'Add', 'namespace_value' => $copyData['namespace'])), $lang->t('ACT_ADD_MODULE'), 'ui-icon-plus')
-            . Qwin_Util_Html::jQueryButton('javascript:if(confirm(QWIN_PATH.Lang.MSG_CONFIRM_TO_DELETE)){window.location=\'' . $url->url($set, array('action' => 'Delete', 'namespace_value' => $copyData['namespace'])) . '\';}', $lang->t('ACT_DELETE'), 'ui-icon-closethick');
+        return Qwin_Util_Html::jQueryButton($url->url($set, array('controller' => 'Module', 'action' => 'Index', 'package_value' => $copyData['package'])), $lang->t('ACT_VIEW_MODULE'), 'ui-icon-lightbulb')
+            . Qwin_Util_Html::jQueryButton($url->url($set, array('controller' => 'Module', 'action' => 'Add', 'package_value' => $copyData['package'])), $lang->t('ACT_ADD_MODULE'), 'ui-icon-plus')
+            . Qwin_Util_Html::jQueryButton('javascript:if(confirm(QWIN_PATH.Lang.MSG_CONFIRM_TO_DELETE)){window.location=\'' . $url->url($set, array('action' => 'Delete', 'package_value' => $copyData['package'])) . '\';}', $lang->t('ACT_DELETE'), 'ui-icon-closethick');
     }
 }
 

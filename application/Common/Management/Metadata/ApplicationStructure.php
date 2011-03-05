@@ -33,7 +33,7 @@ class Common_Management_Metadata_ApplicationStructure extends Common_Metadata
         $this->setOperationMetadata();
         $this->merge(array(
             'field' => array(
-                'namespace' => array(
+                'package' => array(
                     'validator' => array(
                         'rule' => array(
                             'required' => true,

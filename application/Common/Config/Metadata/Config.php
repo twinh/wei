@@ -38,7 +38,7 @@ class Common_Config_Metadata_Config extends Common_Metadata
                         '_resourceGetter' => array(
                             array('Project_Helper_Category', 'getTreeResource'),
                             array(
-                                'namespace' => 'Common',
+                                'package' => 'Common',
                                 'module' => 'Config',
                                 'controller' => 'Group',
                             ),
@@ -146,7 +146,7 @@ class Common_Config_Metadata_Config extends Common_Metadata
             'model' => array(
                 'group' => array(
                     'asc' => array(
-                        'namespace' => 'Common',
+                        'package' => 'Common',
                         'module' => 'Config',
                         'controller' => 'Group',
                     ),

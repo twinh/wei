@@ -33,7 +33,7 @@ class Common_Member_Service_Logout extends Common_Service_BasicAction
      */
     protected $_config = array(
         'set' => array(
-            'namespace' => null,
+            'package' => null,
             'module' => null,
             'controller' => null,
             'action' => null,

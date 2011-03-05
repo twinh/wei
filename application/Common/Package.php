@@ -1,6 +1,6 @@
 <?php
 /**
- * Namespace
+ * Package
  *
  * AciionController is controller with some default action,such as index,list,
  * add,edit,delete,view and so on.
@@ -20,7 +20,7 @@
  * limitations under the License.
  *
  * @package     Common
- * @subpackage  Namespace
+ * @subpackage  Package
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -29,11 +29,11 @@
  */
 
 /**
- * @see Qwin_Application_Namespace
+ * @see Qwin_Application_Package
  */
-require_once 'Qwin/Application/Namespace.php';
+require_once 'Qwin/Application/Package.php';
 
-class Common_Namespace extends Qwin_Application_Namespace
+class Common_Package extends Qwin_Application_Package
 {
     public function __construct()
     {

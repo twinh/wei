@@ -57,6 +57,6 @@ class Common_Widget_Header extends Common_Widget
             $header .= '&nbsp;&raquo;&nbsp;<a href="' . $url->url($_GET) . '">' . $lang->t('ACT_' . strtoupper($asc['action'])) . '</a>';
         }
         
-        require $view->decodePath('<resource><theme>/<defaultNamespace>/element/widget/header<suffix>');
+        require $view->decodePath('<resource><theme>/<defaultPackage>/element/widget/header<suffix>');
     }
 }

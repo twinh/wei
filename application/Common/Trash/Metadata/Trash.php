@@ -69,7 +69,7 @@ class Common_Trash_Metadata_Trash extends Common_Metadata
             'model' => array(
                 'deleter' => array(
                     'asc' => array(
-                        'namespace' => 'Common',
+                        'package' => 'Common',
                         'module' => 'Member',
                         'controller' => 'Member',
                     ),
@@ -99,7 +99,7 @@ class Common_Trash_Metadata_Trash extends Common_Metadata
     {
         $value = explode('.', $value);
         $asc = array(
-            'namespace' => $value[0],
+            'package' => $value[0],
             'module' => $value[1],
             'controller' => $value[2],
         );

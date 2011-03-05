@@ -56,9 +56,9 @@ class Qwin_Application_Application
      * @param string $path 应用的路径
      * @return array 命名空间数组
      */
-    public function getNamespace($path)
+    public function getPackage($path)
     {
-        $namespace = array();
+        $package = array();
         $path .= '/';
         foreach(scandir($path) as $file)
         {
@@ -69,35 +69,35 @@ class Qwin_Application_Application
             }
             if(is_dir($path . $file))
             {
-                $namespace[] = $file;
+                $package[] = $file;
             }
         }
-        return $namespace;
+        return $package;
     }
 
     /**
      * 根据应用的路径和提供的命名空间数组,找出所有的模块,忽略以.和_开头的命名空间
      *
      * @param string $path 应用的路径
-     * @param array $namespaceList 命名空间数组,一般由$this->_getNamespace()获取
+     * @param array $packageList 命名空间数组,一般由$this->_getPackage()获取
      * @return array 模块数组
      */
-    public function getModule($path, $namespaceList)
+    public function getModule($path, $packageList)
     {
         $module = array();
         $path .= '/';
-        foreach($namespaceList as $namespace)
+        foreach($packageList as $package)
         {
-            foreach(scandir($path . $namespace) as $file)
+            foreach(scandir($path . $package) as $file)
             {
                 $firstLetter = substr($file, 0, 1);
                 if($firstLetter == '.' || $firstLetter == '_')
                 {
                     continue;
                 }
-                if(is_dir($path . $namespace . '/' . $file))
+                if(is_dir($path . $package . '/' . $file))
                 {
-                    $module[$namespace][] = $file;
+                    $module[$package][] = $file;
                 }
             }
         }
@@ -114,21 +114,21 @@ class Qwin_Application_Application
     public function getController($path, $moduleList)
     {
         $controller = array();
-        foreach($moduleList as $namespace => $moduleList2)
+        foreach($moduleList as $package => $moduleList2)
         {
             foreach($moduleList2 as $module)
             {
                 // 伪模块或不完整模块不包含Controller目录
-                if(!is_dir($path . '/' . $namespace . '/' . $module . '/Controller'))
+                if(!is_dir($path . '/' . $package . '/' . $module . '/Controller'))
                 {
                     continue;
                 }
-                foreach(scandir($path . '/' . $namespace . '/' . $module . '/Controller') as $file)
+                foreach(scandir($path . '/' . $package . '/' . $module . '/Controller') as $file)
                 {
                     $name = basename($file, '.php');
                     if($name != $file)
                     {
-                        $controller[$namespace][$module][] = $name;
+                        $controller[$package][$module][] = $name;
                     }
                 }
             }
@@ -146,13 +146,13 @@ class Qwin_Application_Application
     public function getAction($path, $controllerList)
     {
         $action = array();
-        foreach($controllerList as $namespace => $moduleList)
+        foreach($controllerList as $package => $moduleList)
         {
             foreach($moduleList as $module => $controllerList)
             {
                 foreach($controllerList as  $controller)
                 {
-                    $class = $namespace . '_' . $module . '_Controller_' . $controller;
+                    $class = $package . '_' . $module . '_Controller_' . $controller;
                     /**
                      * 取出action类型的方法
                      */
@@ -177,7 +177,7 @@ class Qwin_Application_Application
 //                                $method = new ReflectionMethod('Application_Article_Controller_Article', 'actionIndex');
 //                                preg_match("/\/\*\*[\s]+\*\s(.+?)[\s]+\*/i", $doc, $matches);
 //                                p($matches);
-                                $action[$namespace][$module][$controller][] = $actionName;
+                                $action[$package][$module][$controller][] = $actionName;
                             }
                         }
                     }

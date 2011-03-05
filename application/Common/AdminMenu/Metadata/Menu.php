@@ -38,7 +38,7 @@ class Common_AdminMenu_Metadata_Menu extends Common_Metadata
                         '_resourceGetter' => array(
                             array('Project_Helper_Category', 'getTreeResource'),
                             array(
-                                'namespace' => 'Common',
+                                'package' => 'Common',
                                 'module' => 'AdminMenu',
                                 'controller' => 'Menu',
                             ),
@@ -54,7 +54,7 @@ class Common_AdminMenu_Metadata_Menu extends Common_Metadata
                         'list' => array(
                             array('Project_Helper_Category', 'sanitiseTreeResource'),
                             array(
-                                'namespace' => 'Common',
+                                'package' => 'Common',
                                 'module' => 'AdminMenu',
                                 'controller' => 'Menu',
                             ),
@@ -116,7 +116,7 @@ class Common_AdminMenu_Metadata_Menu extends Common_Metadata
             'model' => array(
                 'creator' => array(
                     'asc' => array(
-                        'namespace' => 'Common',
+                        'package' => 'Common',
                         'module' => 'Member',
                         'controller' => 'Member',
                     ),
@@ -129,7 +129,7 @@ class Common_AdminMenu_Metadata_Menu extends Common_Metadata
                 ),
                 'modifier' => array(
                     'asc' => array(
-                        'namespace' => 'Common',
+                        'package' => 'Common',
                         'module' => 'Member',
                         'controller' => 'Member',
                     ),

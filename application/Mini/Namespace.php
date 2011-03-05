@@ -25,7 +25,7 @@
  * @since       2010-08-04 10:59:31
  */
 
-class Mini_Namespace
+class Mini_Package
 {
     public function __construct()
     {

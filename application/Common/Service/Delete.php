@@ -33,7 +33,7 @@ class Common_Service_Delete extends Common_Service_BasicAction
      */
     protected $_config = array(
         'asc' => array(
-            'namespace' => null,
+            'package' => null,
             'module' => null,
             'controller' => null,
             'action' => null,
@@ -91,14 +91,14 @@ class Common_Service_Delete extends Common_Service_BasicAction
                 // 加入回收站
                 $InsertSetting = array(
                     'set' => array(
-                        'namespace' => 'Common',
+                        'package' => 'Common',
                         'module' => 'Trash',
                         'controller' => 'Trash',
                     ),
                     'data' => array(
                         'db' => array(
                             'name' => $name,
-                            'type' => $this->_asc['namespace'] . '.' . $this->_asc['module'] . '.' . $this->_asc['controller'],
+                            'type' => $this->_asc['package'] . '.' . $this->_asc['module'] . '.' . $this->_asc['controller'],
                             'type_id' => $result[$meta['db']['primaryKey']],
                         ),
                     ),

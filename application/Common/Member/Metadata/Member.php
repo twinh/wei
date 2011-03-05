@@ -38,7 +38,7 @@ class Common_Member_Metadata_Member extends Common_Metadata
                         '_resourceGetter' => array(
                             array('Project_Helper_Category', 'getTreeResource'),
                             array(
-                                'namespace' => 'Common',
+                                'package' => 'Common',
                                 'module' => 'Member',
                                 'controller' => 'Group',
                             ),
@@ -192,7 +192,7 @@ class Common_Member_Metadata_Member extends Common_Metadata
                         'group_id' => 'name',
                     ),
                     'asc' => array(
-                        'namespace' => 'Common',
+                        'package' => 'Common',
                         'module' => 'Member',
                         'controller' => 'Group',
                     ),

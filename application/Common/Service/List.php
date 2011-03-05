@@ -33,7 +33,7 @@ class Common_Service_List extends Common_Service
      */
     protected $_option = array(
         'asc'       => array(
-            'namespace' => null,
+            'package' => null,
             'module'    => null,
             'controller'=> null,
             'action'    => null,

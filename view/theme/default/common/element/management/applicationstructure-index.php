@@ -36,8 +36,8 @@
     	<div class="ui-space-10px"></div>
         <div class="ui-operation-field">
             <?php echo qw_jQuery_link(qw_url(array('module' => 'Management', 'controller' => 'ApplicationStructure', 'action' => 'Update')), qw_lang('ACT_UPDATE_APPLICATION_STRUCTURE'), 'ui-icon-refresh') ?>
-            <!--<?php echo qw_jQuery_link(qw_url(array('module' => 'Management', 'controller' => 'Namespace')), qw_lang('ACT_NAMESPACE_LIST'), 'ui-icon-script') ?>
-            <?php echo qw_jQuery_link(qw_url(array('module' => 'Management', 'controller' => 'Namespace', 'action' => 'Add')), qw_lang('ACT_ADD_NAMESPACE'), 'ui-icon-plus') ?>-->
+            <!--<?php echo qw_jQuery_link(qw_url(array('module' => 'Management', 'controller' => 'Package')), qw_lang('ACT_NAMESPACE_LIST'), 'ui-icon-script') ?>
+            <?php echo qw_jQuery_link(qw_url(array('module' => 'Management', 'controller' => 'Package', 'action' => 'Add')), qw_lang('ACT_ADD_NAMESPACE'), 'ui-icon-plus') ?>-->
             <?php echo qw_jQuery_link('javascript:history.go(-1);', qw_lang('ACT_RETURN'), 'ui-icon-arrowthickstop-1-w') ?>
         </div>
         <div class="ui-space-10px"></div>

@@ -43,13 +43,13 @@ class Common_Management_Controller_Module extends Common_Controller
      * 命名空间列表
      * @var array
      */
-    protected $_namespaceList;
+    protected $_packageList;
 
     /**
      * 当前的命名空间
      * @var string
      */
-    protected $_namespace;
+    protected $_package;
 
     /**
      * 当前命名空间的模块列表
@@ -61,7 +61,7 @@ class Common_Management_Controller_Module extends Common_Controller
      * 命名空间是否存在
      * @var boolen
      */
-    protected $_isNamespaceExists;
+    protected $_isPackageExists;
 
     public function  __construct()
     {
@@ -72,16 +72,16 @@ class Common_Management_Controller_Module extends Common_Controller
         parent::__construct();
 
         // 检查命名空间是否存在
-        $this->_namespaceList = $this->_app->getNamespace($this->_path);
-        $this->_namespace = $this->request->r('namespace_value');
-        if(!in_array($this->_namespace, $this->_namespaceList))
+        $this->_packageList = $this->_app->getPackage($this->_path);
+        $this->_package = $this->request->r('package_value');
+        if(!in_array($this->_package, $this->_packageList))
         {
-            $this->_isNamespaceExists = false;
+            $this->_isPackageExists = false;
         }
 
-        $allModule = $this->_app->getModule($this->_path, $this->_namespaceList);
+        $allModule = $this->_app->getModule($this->_path, $this->_packageList);
 
-        $this->_moduleList = empty($allModule[$this->_namespace]) ? array() : $allModule[$this->_namespace];
+        $this->_moduleList = empty($allModule[$this->_package]) ? array() : $allModule[$this->_package];
     }
 
     /**
@@ -91,14 +91,14 @@ class Common_Management_Controller_Module extends Common_Controller
      */
     public function actionIndex()
     {
-        if(false === $this->_isNamespaceExists)
+        if(false === $this->_isPackageExists)
         {
             return $this->view->redirect($this->_lang->t('MSG_NAMESAPCE_NOT_EXISTS'));
         }
 
         $meta = $this->_meta;
         $theme = Qwin::call('-ini')->getConfig('interface.theme');
-        $namespace = $this->_namespace;
+        $package = $this->_package;
 
         // 构建数组
         $data = array();
@@ -127,7 +127,7 @@ class Common_Management_Controller_Module extends Common_Controller
         {
             $layout = $this->metaHelper->getAddLayout($meta);
             $meta['field'] = $this->_meta->field;
-            $meta['field']->set('namespace_value.form._value', $this->_namespace);
+            $meta['field']->set('package_value.form._value', $this->_package);
             $banModule = implode(',', $this->_moduleList);
 
             $theme = Qwin::call('-ini')->getConfig('interface.theme');
@@ -143,7 +143,7 @@ class Common_Management_Controller_Module extends Common_Controller
         } else {
             $module = $this->request->post('module');
             
-            if(false === $this->_isNamespaceExists)
+            if(false === $this->_isPackageExists)
             {
                 return $this->view->redirect($this->_lang->t('MSG_NAMESAPCE_NOT_EXISTS'));
             }
@@ -155,7 +155,7 @@ class Common_Management_Controller_Module extends Common_Controller
             }
 
             // 创建模块,同时创建默认目录结构
-            $path = $this->_path . '/' . $this->_namespace . '/' . $module;
+            $path = $this->_path . '/' . $this->_package . '/' . $module;
             mkdir($path);
             mkdir($path . '/Controller');
             mkdir($path . '/Metadata');
@@ -164,12 +164,12 @@ class Common_Management_Controller_Module extends Common_Controller
 
             // 创建默认控制器,元数据,模型,语言类
             $applicationFile = Qwin::call('Project_Helper_ApplicationFile');
-            $applicationFile->createControllerFile($this->_namespace, $module);
-            $applicationFile->createMetadataFile($this->_namespace, $module);
-            $applicationFile->createModelFile($this->_namespace, $module);
-            $applicationFile->createLanguageFile($this->_namespace, $module, $this->getLanguage());
+            $applicationFile->createControllerFile($this->_package, $module);
+            $applicationFile->createMetadataFile($this->_package, $module);
+            $applicationFile->createModelFile($this->_package, $module);
+            $applicationFile->createLanguageFile($this->_package, $module, $this->getLanguage());
 
-            $url = Qwin::call('-url')->url($this->_asc, array('action' => 'Index', 'namespace_value' => $this->_namespace));
+            $url = Qwin::call('-url')->url($this->_asc, array('action' => 'Index', 'package_value' => $this->_package));
             return $this->view->redirect($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }

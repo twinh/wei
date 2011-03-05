@@ -453,7 +453,7 @@ class Common_Metadata extends Qwin_Application_Metadata
         $parts = explode('_', get_class($this));
         if (4 == count($parts) && 'Metadata' == $parts[2]) {
             return $this->_asc = array(
-                'namespace' => $parts[0],
+                'package' => $parts[0],
                 'module' => $parts[1],
                 'controller' => $parts[3],
             );
@@ -650,7 +650,7 @@ class Common_Metadata extends Qwin_Application_Metadata
                             array('Qwin_Widget_JQuery_PopupGrid', 'render'),
                             'LBL_MODULE_MEMBER',
                             array(
-                                'namespace' => 'Common',
+                                'package' => 'Common',
                                 'module' => 'Member',
                                 'controller' => 'Member',
                                 'list' => 'id,group_id,username,email',

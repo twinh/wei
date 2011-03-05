@@ -87,7 +87,7 @@ class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
                                 array('Qwin_Widget_JQuery_PopupGrid', 'render'),
                                 'LBL_MODULE_OPPORTUNITY',
                                 array(
-                                    'namespace' => 'Crm',
+                                    'package' => 'Crm',
                                     'module' => 'Opportunity',
                                     'controller' => 'Opportunity',
                                     'list' => 'id,name,status,type,start_time,end_time',
@@ -206,7 +206,7 @@ class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
                         'assign_to' => 'username',
                     ),
                     'asc' => array(
-                        'namespace' => 'Common',
+                        'package' => 'Common',
                         'module' => 'Member',
                         'controller' => 'Member',
                     ),

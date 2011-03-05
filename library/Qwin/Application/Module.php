@@ -35,7 +35,7 @@ abstract class Qwin_Application_Module
      */
     public static function getByAsc(array $asc, $instanced = true)
     {
-        $class = $asc['namespace'] . '_' . $asc['module'] . '_Module';
+        $class = $asc['package'] . '_' . $asc['module'] . '_Module';
         return $instanced ? Qwin::call($class) : null;
     }
 }

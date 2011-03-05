@@ -32,18 +32,18 @@ return array(
     'FLD_MODULE' => 'Module',
 
     'ACT_UPDATE_APPLICATION_STRUCTURE' => 'Update Application Structure File',
-    'ACT_ADD_NAMESPACE' => 'Add Namespace',
-    'ACT_NAMESPACE_LIST' => 'Namespace List',
+    'ACT_ADD_NAMESPACE' => 'Add Package',
+    'ACT_NAMESPACE_LIST' => 'Package List',
     'ACT_ADD_MODULE' => 'Add Module',
     'ACT_VIEW_MODULE' => 'View Module',
 
-    'MSG_VALIDATOR_NAMESPACE_EXISTS' => 'The namespace is exists.',
-    'MSG_NAMESAPCE_NOT_EXISTS' => 'The namespace is not exists.',
-    'MSG_NAMESPACE_NOT_EMPTY' => 'The namespace folder is not empty, can not be delete.',
-    'MSG_MODULE_EMPTY' => 'The namespace does not contain any module.',
+    'MSG_VALIDATOR_NAMESPACE_EXISTS' => 'The package is exists.',
+    'MSG_NAMESAPCE_NOT_EXISTS' => 'The package is not exists.',
+    'MSG_NAMESPACE_NOT_EMPTY' => 'The package folder is not empty, can not be delete.',
+    'MSG_MODULE_EMPTY' => 'The package does not contain any module.',
     'MSG_MODULE_EXISTS' => 'The module is exitst',
 
     'LBL_MANAGEMENT' => 'Management',
-    'LBL_NAMESPACE' => 'Namespace',
+    'LBL_NAMESPACE' => 'Package',
     'LBL_MODULE' => 'Module',
 );

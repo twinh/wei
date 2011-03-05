@@ -58,7 +58,7 @@ class Common_Member_Controller_Setting extends Common_Controller
             
             $result = $this->metaHelper
                     ->getQueryByAsc(array(
-                        'namespace' => 'Common',
+                        'package' => 'Common',
                         'module' => 'Member',
                         'controller' => 'Member',
                     ))
@@ -92,7 +92,7 @@ class Common_Member_Controller_Setting extends Common_Controller
             
             $result = $this->metaHelper
                     ->getQueryByAsc(array(
-                        'namespace' => 'Common',
+                        'package' => 'Common',
                         'module' => 'Member',
                         'controller' => 'Member',
                     ))
