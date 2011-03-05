@@ -51,16 +51,16 @@ class Qwin_Application_Language implements ArrayAccess
      * 命名空间列表
      *
      * @var array
-     * @see Qwin_Application_Manager ::getNamespaceList
+     * @see Qwin_Application_Manager ::getPackageList
      */
-    protected $_namespaceList;
+    protected $_packageList;
 
     /**
      * 当前命名空间所在的路径,用于定位语言文件
      *
      * @var string
      */
-    protected $_namespacePath;
+    protected $_packagePath;
 
     /**
      * 初始化路径,加载数据
@@ -70,8 +70,8 @@ class Qwin_Application_Language implements ArrayAccess
         if (null == $asc) {
             $asc = Qwin::config('asc');
         }
-        $this->_namespaceList = Qwin_Application_Namespace::getList();
-        $this->_namespacePath = $this->_namespaceList[$asc['namespace']];
+        $this->_packageList = Qwin_Application_Package::getList();
+        $this->_packagePath = $this->_packageList[$asc['package']];
 
         // 获取名称,同时加载当前命名空间的语言文件
         $this->_loadData();
@@ -237,7 +237,7 @@ class Qwin_Application_Language implements ArrayAccess
         }
 
         throw new Qwin_Exception('Language file "' . $name . '.php" not found in path "'
-                                . $this->_namespacePath . DIRECTORY_SEPARATOR . 'Language".' );
+                                . $this->_packagePath . DIRECTORY_SEPARATOR . 'Language".' );
     }
 
     /**
@@ -248,8 +248,8 @@ class Qwin_Application_Language implements ArrayAccess
      */
     public function appendByAsc(array $asc)
     {
-        if (isset($this->_namespaceList[$asc['namespace']])) {
-            $file = $this->_namespaceList[$asc['namespace']] . '/' . $asc['module'] . '/Language/' . $this->_name . '.php';
+        if (isset($this->_packageList[$asc['package']])) {
+            $file = $this->_packageList[$asc['package']] . '/' . $asc['module'] . '/Language/' . $this->_name . '.php';
             if (is_file($file)) {
                 return $this->_appendFile($file);
             }
@@ -260,13 +260,13 @@ class Qwin_Application_Language implements ArrayAccess
     /**
      * 根据命名空间加载语言
      *
-     * @param string $namespace
+     * @param string $package
      * @return Qwin_Application_Language|false 当前对象|失败
      */
-    public function appendByNamespace($namespace)
+    public function appendByPackage($package)
     {
-        if (isset($this->_namespaceList[$namespace])) {
-            $file = $this->_namespaceList[$namespace] . '/Language/' . $this->_name . '.php';
+        if (isset($this->_packageList[$package])) {
+            $file = $this->_packageList[$package] . '/Language/' . $this->_name . '.php';
             if (is_file($file)) {
                 return $this->_appendFile($file);
             }
@@ -277,7 +277,7 @@ class Qwin_Application_Language implements ArrayAccess
     /**
      * 根据文件路径加载语言
      *
-     * @param string $namespace
+     * @param string $package
      * @return Qwin_Application_Language|false 当前对象|失败
      */
     public function appendByFile($file)
@@ -296,7 +296,7 @@ class Qwin_Application_Language implements ArrayAccess
      */
     public function isExist($name)
     {
-        $file = $this->_namespacePath . '/Language/' . $name . '.php';
+        $file = $this->_packagePath . '/Language/' . $name . '.php';
         if (is_file($file)) {
             return $file;
         }

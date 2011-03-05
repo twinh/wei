@@ -47,7 +47,7 @@ class Common_Config_Controller_Config extends Common_ActionController
         
         // 构建域分组
         $groupResult = Common_Metadata::getQueryByAsc(array(
-                'namespace' => 'Common',
+                'package' => 'Common',
                 'module' => 'Config',
                 'controller' => 'Group',
             ))
@@ -89,7 +89,7 @@ class Common_Config_Controller_Config extends Common_ActionController
             $data[$row['form_name']] = $row['value'];
         }
         $meta = Common_Metadata::getByAsc(array(
-                'namespace' => 'Common',
+                'package' => 'Common',
                 'module' => 'Config',
                 'controller' => 'Temp',
             ))
@@ -126,7 +126,7 @@ class Common_Config_Controller_Config extends Common_ActionController
 
         // 分组的数据
         $data = Common_Metadata::getQueryByAsc(array(
-                'namespace' => 'Common',
+                'package' => 'Common',
                 'module' => 'Config',
                 'controller' => 'Group',
             ))

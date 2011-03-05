@@ -71,7 +71,7 @@ class Crm_Contact_Metadata_Contact extends Common_Metadata
                                 array('Qwin_Widget_JQuery_PopupGrid', 'render'),
                                 'LBL_MODULE_CUSTOMER',
                                 array(
-                                    'namespace' => 'Crm',
+                                    'package' => 'Crm',
                                     'module' => 'Customer',
                                     'controller' => 'Customer',
                                     'list' => 'id,name,birthday,email,source',
@@ -138,7 +138,7 @@ class Crm_Contact_Metadata_Contact extends Common_Metadata
                                 array('Qwin_Widget_JQuery_PopupGrid', 'render'),
                                 'LBL_MODULE_CONTACT',
                                 array(
-                                    'namespace' => 'Crm',
+                                    'package' => 'Crm',
                                     'module' => 'Contact',
                                     'controller' => 'Contact',
                                     'list' => 'id,full_name,birthday,email,source',
@@ -300,7 +300,7 @@ class Crm_Contact_Metadata_Contact extends Common_Metadata
                         'parent_id' => 'full_name',
                     ),
                     'asc' => array(
-                        'namespace' => 'Crm',
+                        'package' => 'Crm',
                         'module' => 'Contact',
                         'controller' => 'Contact',
                     ),
@@ -314,7 +314,7 @@ class Crm_Contact_Metadata_Contact extends Common_Metadata
                         'assign_to' => 'username',
                     ),
                     'asc' => array(
-                        'namespace' => 'Common',
+                        'package' => 'Common',
                         'module' => 'Member',
                         'controller' => 'Member',
                     ),

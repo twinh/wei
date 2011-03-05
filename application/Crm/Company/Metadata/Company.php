@@ -41,7 +41,7 @@ class Crm_Company_Metadata_Company extends Common_Metadata
                                 array('Qwin_Widget_JQuery_PopupGrid', 'render'),
                                 'LBL_MODULE_MEMBER',
                                 array(
-                                    'namespace' => 'Common',
+                                    'package' => 'Common',
                                     'module' => 'Member',
                                     'controller' => 'Member',
                                     'action' => 'Popup',
@@ -197,7 +197,7 @@ class Crm_Company_Metadata_Company extends Common_Metadata
                         'member_id' => 'username',
                     ),
                     'asc' => array(
-                        'namespace' => 'Common',
+                        'package' => 'Common',
                         'module' => 'Member',
                         'controller' => 'Member',
                     ),

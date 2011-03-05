@@ -36,6 +36,6 @@ class Common_Widget_NavigationBar extends Common_Widget
         $queryString = empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING'];
         $pageUrl = basename($_SERVER['PHP_SELF']) . $queryString;
 
-        require $view->decodePath('<resource><theme>/<defaultNamespace>/element/widget/navigation-bar<suffix>');
+        require $view->decodePath('<resource><theme>/<defaultPackage>/element/widget/navigation-bar<suffix>');
     }
 }

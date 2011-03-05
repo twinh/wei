@@ -53,7 +53,7 @@ class Common_Category_Controller_Category extends Common_ActionController
         $fileCacheObj = Qwin::call('Qwin_Cache_File');
         $fileCacheObj->connect(Qwin_ROOT_PATH . '/cache/');
         $setting = array_intersect_key($this->_asc, array(
-            'namespace' => '',
+            'package' => '',
             'module' => '',
             'controller' => '',
         ));
@@ -74,7 +74,7 @@ class Common_Category_Controller_Category extends Common_ActionController
         $fileCacheObj = Qwin::call('Qwin_Cache_File');
         $fileCacheObj->connect(Qwin_ROOT_PATH . '/cache/');
         $setting = array(
-            'namespace' => 'Common',
+            'package' => 'Common',
             'module' => 'Category',
             'controller' => 'Category',
         );

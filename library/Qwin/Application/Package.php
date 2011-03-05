@@ -1,6 +1,6 @@
 <?php
 /**
- * Namespace
+ * Package
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -25,7 +25,7 @@
  * @since       2010-08-16 15:45:02
  */
 
-abstract class Qwin_Application_Namespace
+abstract class Qwin_Application_Package
 {
     /**
      * 合法的命名空间
@@ -37,11 +37,11 @@ abstract class Qwin_Application_Namespace
      * 根据应用结构配置获取命名空间
      *
      * @param array $asc 应用结构配置
-     * @return Qwin_Application_Namespace 命名空间对象
+     * @return Qwin_Application_Package 命名空间对象
      */
     public static function getByAsc(array $asc, $instanced = true)
     {
-        $class = $asc['namespace'] . '_Namespace';
+        $class = $asc['package'] . '_Package';
         return $instanced ? Qwin::call($class) : null;
     }
 
@@ -60,8 +60,8 @@ abstract class Qwin_Application_Namespace
                     continue;
                 }
                 foreach (scandir($path) as $file) {
-                    if ('.' != $file[0] && is_dir($path . '/' . $file)) {
-                        self::$_validList[$file] = $path . '/' . $file;
+                    if ('.' != $file[0] && is_dir($path . $file)) {
+                        self::$_validList[$file] = $path . $file;
                     }
                 }
             }

@@ -179,7 +179,7 @@ class Common_Helper_Option
             return $this->_query;
         }
         $this->_query =  Common_Metadata::getQueryByAsc(array(
-            'namespace' => 'Common',
+            'package' => 'Common',
             'module' => 'Option',
             'controller' => 'Option',
         ));

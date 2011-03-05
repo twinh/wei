@@ -1,6 +1,6 @@
 <?php
 /**
- * mangementcreatenamespace
+ * mangementcreatepackage
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -51,7 +51,7 @@
             <tr class="ui-widget-content">
                 <td width="25%"><?php echo qw_lang('LBL_FIELD_NAMESPACE') ?></td>
                 <td class=""><?php echo qw_lang('LBL_TYPE_NOT_IN') ?></td>
-                <td class=""><?php echo $banNamespace ?></td>
+                <td class=""><?php echo $banPackage ?></td>
             </tr>
         </table>
         <?php require QWIN . '/view/theme/' . $theme . '/element/basic/form.php' ?>

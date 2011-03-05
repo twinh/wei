@@ -31,7 +31,7 @@ class Common_Trash_Service_Restore extends Common_Service_BasicAction
      */
     protected $_setting = array(
         'asc' => array(
-            'namespace' => null,
+            'package' => null,
             'module' => null,
             'controller' => null,
             'action' => null,
@@ -76,7 +76,7 @@ class Common_Trash_Service_Restore extends Common_Service_BasicAction
             // 获取源记录
             $type = explode('.', $obejct['type']);
             $asc = array(
-                'namespace' => $type[0],
+                'package' => $type[0],
                 'module' => $type[1],
                 'controller' => $type[2],
             );

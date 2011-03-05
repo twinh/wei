@@ -74,7 +74,7 @@ abstract class Qwin_Application_Controller
      */
     public static function getByAsc(array $asc, $instanced = true)
     {
-        $class = $asc['namespace'] . '_' . $asc['module'] . '_Controller_' . $asc['controller'];
+        $class = $asc['package'] . '_' . $asc['module'] . '_Controller_' . $asc['controller'];
         return $instanced ? Qwin::call($class) : $class;
     }
 

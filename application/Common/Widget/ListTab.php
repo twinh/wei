@@ -117,10 +117,10 @@ class Common_Widget_ListTab extends Common_Widget
         }
 
         // 如果当前行为存在选项卡视图,加载该视图,否则直接输出默认选项卡内容
-        $class = $asc['namespace'] . '_' . $asc['module'] . '_Widget_ListTab';
+        $class = $asc['package'] . '_' . $asc['module'] . '_Widget_ListTab';
         if(class_exists($class)) {
             $object = new $class;
-            $file = $view->decodePath('<resource><theme>/<defaultNamespace>/element/<module>/<controller>/<action>-tab<suffix>');
+            $file = $view->decodePath('<resource><theme>/<defaultPackage>/element/<module>/<controller>/<action>-tab<suffix>');
             return $object->render(array(
                 'tab' => $tab,
                 'file' => $file,
@@ -145,7 +145,7 @@ class Common_Widget_ListTab extends Common_Widget
             $output .= Qwin_Util_JQuery::link($row['url'], $row['title'], $row['icon'], $row['class'], $row['target'], $row['id']);
         }
         if ($echo) {
-            require $view->decodePath('<resource><theme>/<defaultNamespace>/element/basic/output<suffix>');
+            require $view->decodePath('<resource><theme>/<defaultPackage>/element/basic/output<suffix>');
         } else {
             return $output;
         }

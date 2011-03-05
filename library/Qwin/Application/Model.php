@@ -41,9 +41,9 @@ abstract class Qwin_Application_Model extends Doctrine_Record
      */
     public static function getByAsc(array $asc, $instanced = true)
     {
-        $class = $asc['namespace'] . '_' . $asc['module'] . '_Model_' . $asc['controller'];
+        $class = $asc['package'] . '_' . $asc['module'] . '_Model_' . $asc['controller'];
         if (!class_exists($class)) {
-            $class = $asc['namespace'] . '_Model';
+            $class = $asc['package'] . '_Model';
         }
         return $instanced ? new $class : $class;
     }

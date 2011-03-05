@@ -109,7 +109,7 @@ class Common_Member_Metadata_Log extends Qwin_Application_Metadata
         $value = md5($value);
         $result = Qwin::call('Qwin_Application_Metadata')
             ->getQueryByAsc(array(
-                'namespace' => 'Common',
+                'package' => 'Common',
                 'module' => 'Member',
                 'controller' => 'Member',
             ), array('db', 'view'))

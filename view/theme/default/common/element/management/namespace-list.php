@@ -1,6 +1,6 @@
 <?php
 /**
- * mangementnamespacelist
+ * mangementpackagelist
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -49,7 +49,7 @@
             ?>
             <tr class="ui-widget-content">
                 <td class="ui-state-default"><?php echo $row['id'] ?></td>
-                <td><?php echo $row['namespace'] ?></td>
+                <td><?php echo $row['package'] ?></td>
                 <td><?php echo $row['operation'] ?></td>
             </tr>
             <?php

@@ -30,7 +30,7 @@ class Common_View_Add extends Common_View
     public function preDisplay()
     {
         parent::preDisplay();
-        $this->setElement('content', '<resource><theme>/<defaultNamespace>/element/common/form<suffix>');
+        $this->setElement('content', '<resource><theme>/<defaultPackage>/element/common/form<suffix>');
 
         // 初始化变量,方便调用
         $primaryKey = $this->primaryKey;

@@ -33,7 +33,7 @@ class Common_Member_Service_Login extends Common_Service_BasicAction
      */
     protected $_config = array(
         'asc' => array(
-            'namespace' => null,
+            'package' => null,
             'module' => null,
             'controller' => null,
             'action' => null,
@@ -93,7 +93,7 @@ class Common_Member_Service_Login extends Common_Service_BasicAction
 
         // 加载验证类,并进行验证
         Qwin::call('Qwin_Class_Extension')
-            ->setNamespace('validator')
+            ->setPackage('validator')
             ->addClass('Qwin_Validator_JQuery');
         $validateResult = $metaHelper->validateArray($config['data']['db'], $meta, $meta);
         if(true !== $validateResult)
@@ -122,7 +122,7 @@ class Common_Member_Service_Login extends Common_Service_BasicAction
              */
             $logConfig = array(
                 'set' => array(
-                    'namespace' => 'Common',
+                    'package' => 'Common',
                     'module' => 'Member',
                     'controller' => 'LoginLog',
                 ),

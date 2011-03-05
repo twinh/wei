@@ -42,7 +42,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
                         '_resourceGetter' => array(
                             array('Project_Helper_Category', 'getTreeResource'),
                             array(
-                                'namespace' => 'Common',
+                                'package' => 'Common',
                                 'module' => 'Category',
                                 'controller' => 'Category',
                             ),
@@ -288,7 +288,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
                     'local' => 'id',
                     'foreign' => 'article_id',
                     'set' => array(
-                        'namespace' => 'Common',
+                        'package' => 'Common',
                         'module' => 'Article',
                         'controller' => 'Detail',
                     ),
@@ -335,7 +335,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
             $this->__meta['field']['category_id']['form']['_resourceGetter'] = array(
                 array('Project_Helper_Category', 'getTreeResource'),
                 array(
-                    'namespace' => 'Default',
+                    'package' => 'Default',
                     'module' => 'Category',
                     'controller' => 'Category',
                 ),
@@ -361,7 +361,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
             $this->__meta['field']['category_id']['form']['_resourceGetter'] = array(
                 array('Project_Helper_Category', 'getTreeResource'),
                 array(
-                    'namespace' => 'Default',
+                    'package' => 'Default',
                     'module' => 'Category',
                     'controller' => 'Category',
                 ),

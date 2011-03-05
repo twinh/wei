@@ -71,7 +71,7 @@ return array(
     // field
     'FLD_ID' => 'Id',
     'FLD_NAME' => 'Name',
-    'FLD_NAMESPACE' => 'Namespace',
+    'FLD_NAMESPACE' => 'Package',
     'FLD_TITLE' => 'Title',
     'FLD_OPERATION' => 'Operation',
     'FLD_DATE_CREATED' => 'Date Created',

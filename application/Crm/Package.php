@@ -1,6 +1,6 @@
 <?php
 /**
- * Namespace
+ * Package
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -23,6 +23,6 @@
  * @since       2011-01-04 23:10:19
  */
 
-class Crm_Namespace extends Common_Namespace
+class Crm_Package extends Common_Package
 {
 }
