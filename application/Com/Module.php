@@ -43,7 +43,7 @@ class Com_Module extends Qwin_Application_Module
         if ($config['log']) {
             /* @var $log Logger */
             $log = Qwin::widget('log4php');
-            $log->debug('The asc is ' . implode('/', $config['asc']));
+            $log->debug('The module is ' . implode('/', $config['module']));
         }
 
         // 关闭魔术引用

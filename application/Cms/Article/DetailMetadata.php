@@ -25,7 +25,7 @@
  * @since       2010-05-27 00:13:24
  */
 
-class Com_Article_Metadata_Detail extends Com_Metadata
+class Cms_Article_DetailMetadata extends Com_Metadata
 {
     public function  setMetadata()
     {

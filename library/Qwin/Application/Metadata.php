@@ -214,7 +214,7 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
         foreach ($this['model'] as $name => $model) {
             if ($model['enabled'] && $type == $model['type']) {
                 if (!isset($model['metadata'])) {
-                    $model['metadata'] = self::getByAsc($model['asc']);
+                    $model['metadata'] = self::getByModule($model['module']);
                 }
                 $result[$name] = $model['metadata'];
             }

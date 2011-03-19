@@ -24,7 +24,7 @@
  * @since       2010-04-17 14:02:35
  */
 
-class Com_Article_Controller_Article extends Com_ActionController
+class Cms_Article_Controller extends Com_ActionController
 {
 
     /**
