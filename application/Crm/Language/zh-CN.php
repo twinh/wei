@@ -24,5 +24,5 @@
  */
 
 /* @var $this Qwin_Application_Language */
-$this->appendByModule('Common');
+$this->appendByModule('Com');
 return array();

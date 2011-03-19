@@ -32,12 +32,7 @@ class Com_Service_Edit extends Com_Service
      * @var array
      */
     protected $_option = array(
-        'asc'       => array(
-            'package'     => null,
-            'module'        => null,
-            'controller'    => null,
-            'action'        => null,
-        ),
+        'module'    => null,
         'data'      => array(),
         'display'   => true,
         'url'       => null,
@@ -52,7 +47,7 @@ class Com_Service_Edit extends Com_Service
         $app        = Qwin::call('-app');
         
         /* @var $meta Com_Metadata */
-        $meta       = Com_Metadata::getByAsc($option['asc']);
+        $meta       = Com_Metadata::getByModule($option['module']);
         $primaryKey = $meta['db']['primaryKey'];
         $primaryKeyValue = isset($option['data'][$primaryKey]) ? $option['data'][$primaryKey] : null;
 
@@ -101,7 +96,7 @@ class Com_Service_Edit extends Com_Service
         // 展示视图
         if ($option['display']) {
             if (!$option['url']) {
-                $option['url'] = Qwin::call('-url')->url($option['asc'], array('action' => 'Index'));
+                $option['url'] = Qwin::call('-url')->url(array('module' => $option['module'], 'action' => 'Index'));
             }
             return Qwin::call('-view')->success('MSG_OPERATE_SUCCESSFULLY', $option['url']);
         }

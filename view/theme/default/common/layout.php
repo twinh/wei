@@ -64,7 +64,7 @@ $minify
             <img src="<?php echo QWIN ?>/view/theme/default/common/image/logo.png" alt="logo" />
         </a>
             </div>
-    <?php $this->loadWidget('Common_Widget_NavigationBar') ?>
+    <?php $this->loadWidget('Com_Widget_NavigationBar') ?>
     </div>
 <table id="ui-main-table" border="0" cellpadding="0" cellspacing="0">
     <tr>

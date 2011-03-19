@@ -62,7 +62,7 @@ class Com_View_List extends Com_View
 
         $jqGrid = array(
             'module'    => $this->module,
-            'moduleId'  => strtr($this->module, '/', '_'),
+            'moduleId'  => strtolower(strtr($this->module, '/', '-')),
             'meta'      => $meta,
             'layout'    => $this->list,
             'option'    => $option,

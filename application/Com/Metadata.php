@@ -740,32 +740,32 @@ class Com_Metadata extends Qwin_Application_Metadata
         if (!isset($this->controller)) {
             // TODO　不重复加载
             $this->controller = Com_Controller::getByModule($module);
-            $this->forbiddenAction = $this->controller->getForbiddenActions();
+            $this->unableAction = $this->controller->getForbiddenActions();
         }
         // 不为禁用的行为设置链接
         $operation = array();
-        if (!in_array('edit', $this->forbiddenAction)) {
+        if (!in_array('edit', $this->unableAction)) {
             $operation['edit'] = array(
                 'url'   => $url->url(array('module' => $module, 'action' => 'Edit', $primaryKey => $dataCopy[$primaryKey])),
                 'title' => $lang->t('ACT_EDIT'),
                 'icon'  => 'ui-icon-tag',
             );
         }
-        if (!in_array('view', $this->forbiddenAction)) {
+        if (!in_array('view', $this->unableAction)) {
             $operation['view'] = array(
                 'url'   => $url->url(array('module' => $module, 'action' => 'View', $primaryKey => $dataCopy[$primaryKey])),
                 'title' => $lang->t('ACT_VIEW'),
                 'icon'  => 'ui-icon-lightbulb',
             );
         }
-        /*if (!in_array('add', $this->forbiddenAction)) {
+        /*if (!in_array('add', $this->unableAction)) {
             $operation['add'] = array(
                 'url'   => $url->url($asc, array('action' => 'Add', $primaryKey => $dataCopy[$primaryKey])),
                 'title' => $lang->t('ACT_COPY'),
                 'icon'  => 'ui-icon-transferthick-e-w',
             );
         }*/
-        if (!in_array('delete', $this->forbiddenAction)) {
+        if (!in_array('delete', $this->unableAction)) {
             if (!isset($this->page['useTrash'])) {
                 $icon = 'ui-icon-close';
                 $jsLang = 'MSG_CONFIRM_TO_DELETE';

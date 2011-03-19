@@ -243,8 +243,8 @@ class Com_View extends Qwin_Application_View
     public function displayInfo(array $options = array())
     {
         $options = $options + $this->_infoOptions;
-        $this->setLayout('<resource><theme>/<defaultPackage>/layout/common<suffix>');
-        $this->setElement('content', '<resource><theme>/<defaultPackage>/element/common/info<suffix>');
+        $this->setElement('layout', '<root>common/layout<suffix>');
+        $this->setElement('content', '<root>common/basic/info<suffix>');
 
         $title = $options['title'];
         $url = $options['url'];

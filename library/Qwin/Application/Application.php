@@ -161,9 +161,9 @@ class Qwin_Application_Application
                         $methodList = get_class_methods($class);
                         $varList = get_class_vars($class);
                         // 删除禁用的行为
-                        if (isset($varList['_forbiddenAction'])) {
-                            foreach ($varList['_forbiddenAction'] as $forbiddenAction) {
-                                $key = array_search('action' . ucfirst($forbiddenAction), $methodList);
+                        if (isset($varList['_unableAction'])) {
+                            foreach ($varList['_unableAction'] as $unableAction) {
+                                $key = array_search('action' . ucfirst($unableAction), $methodList);
                                 if (false !== $key) {
                                      unset($methodList[$key]);
                                 }

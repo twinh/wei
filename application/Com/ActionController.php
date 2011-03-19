@@ -64,8 +64,8 @@ class Com_ActionController extends Com_Controller
     {
         $service = new Com_Service_View();
         return $service->process(array(
-            'asc'       => $this->_asc,
-            'id'        => $this->_request->getPrimaryKeyValue($this->_asc),
+            'module'    => $this->_module,
+            'id'        => $this->_request->getPrimaryKeyValue($this->_module),
         ));
     }
 
@@ -79,14 +79,14 @@ class Com_ActionController extends Com_Controller
         if (!$this->_request->isPost()) {
             $service = new Com_Service_Form();
             return $service->process(array(
-                'asc'       => $this->_asc,
-                'id'        => $this->_request->getPrimaryKeyValue($this->_asc),
+                'module'    => $this->_module,
+                'id'        => $this->_request->getPrimaryKeyValue($this->_module),
                 'initalData'=> $this->_request->getInitialData(),
             ));
         } else {
             $service = new Com_Service_Add();
             return $service->process(array(
-                'asc'       => $this->_asc,
+                'module'    => $this->_module,
                 'data'      => $_POST,
                 'url'       => urldecode($this->_request->post('_page')),
             ));
@@ -128,9 +128,9 @@ class Com_ActionController extends Com_Controller
     {
         $service = new Com_Service_Delete();
         return $service->process(array(
-            'asc' => $this->_asc,
-            'data' => array(
-                'primaryKeyValue' => $this->_request->getPrimaryKeyValue($this->_asc),
+            'module'    => $this->_module,
+            'data'      => array(
+                'primaryKeyValue' => $this->_request->getPrimaryKeyValue($this->_module),
             ),
         ));
     }

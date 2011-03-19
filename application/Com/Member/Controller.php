@@ -25,7 +25,7 @@
  * @since       2010-05-13 10:17:58
  */
 
-class Com_Member_Controller_Member extends Com_ActionController
+class Com_Member_Controller extends Com_ActionController
 {
     /**
      * 编辑密码

@@ -25,7 +25,7 @@
  * @since       2010-05-13 10:19:22
  */
 
-class Com_Member_Metadata_Member extends Com_Metadata
+class Com_Member_Metadata extends Com_Metadata
 {
     public function  setMetadata()
     {

@@ -30,7 +30,7 @@ class Com_View_View extends Com_View
     public function  preDisplay()
     {
         parent::preDisplay();
-        $this->setElement('content', '<resource><theme>/<defaultPackage>/element/common/view<suffix>');
+        $this->setElement('content', '<root>common/basic/view<suffix>');
 
         // 初始化变量,方便调用
         $primaryKey     = $this->primaryKey;
@@ -39,7 +39,6 @@ class Com_View_View extends Com_View
         $request        = Qwin::call('-request');
         $config         = Qwin::config();
         $url            = Qwin::call('-url');
-        $asc            = $config['asc'];
         $lang           = Qwin::call('-lang');
         
         /* @var $formWidget Form_Widget */

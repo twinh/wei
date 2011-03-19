@@ -30,7 +30,7 @@ class Com_Trash_Controller_Trash extends Com_ActionController
      * @var array
      * @todo 使用和父类同样的访问级别会被覆盖?
      */
-    public $_forbiddenAction = array(
+    public $_unableAction = array(
         'add', 'edit',
     );
 
