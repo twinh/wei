@@ -23,7 +23,7 @@
  * @since       2011-01-10 01:12:30
  */
 
-require $this->decodePath('<resource><theme>/<defaultPackage>/element/common/<action><suffix>');
+require $this->decodePath('<resource><theme>/<defaultPackage>/element/com/<action><suffix>');
 ?>
 <script type="text/javascript">
 jQuery(function($){
