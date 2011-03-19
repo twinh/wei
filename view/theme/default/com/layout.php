@@ -16,7 +16,7 @@ $jQueryFile = array(
 );
 $minify
     ->add(QWIN . '/view/style/' . $this->_style . '/jquery.ui.theme.css')
-    ->add(QWIN . '/view/theme/default/common/style/style.css')
+    ->add(QWIN . '/view/theme/default/com/style/style.css')
     ->add($jQueryFile['core']['css'])
     ->add($jQueryFile['widget']['css'])
     ->add($jQueryFile['button']['css'])
@@ -25,7 +25,7 @@ $minify
     ->add($jQuery->loadCore(false))
     ->add(QWIN . '/js/qwin/qwin.js')
     ->add(QWIN . '/js/qwin/url.js')
-    ->add(QWIN . '/view/theme/default/common/script/style.js')
+    ->add(QWIN . '/view/theme/default/com/script/style.js')
     ->add($jQueryFile['core']['js'])
     ->add($jQueryFile['widget']['js'])
     ->add($jQueryFile['button']['js'])
@@ -33,7 +33,7 @@ $minify
     ->add($jQueryFile['qui']['js']);
 ?>
 <!--[if IE 6]>
-<link rel="stylesheet" type="text/css" media="all" href="<?php echo QWIN ?>/view/theme/default/common/style/style-ie6.css" />
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo QWIN ?>/view/theme/default/com/style/style-ie6.css" />
 <![endif]-->
 <script type="text/javascript">
     jQuery.noConflict();
@@ -61,7 +61,7 @@ $minify
             </div>
     <div class="ui-header-logo ui-widget-content">
         <a href="?">
-            <img src="<?php echo QWIN ?>/view/theme/default/common/image/logo.png" alt="logo" />
+            <img src="<?php echo QWIN ?>/view/theme/default/com/image/logo.png" alt="logo" />
         </a>
             </div>
     <?php $this->loadWidget('Com_Widget_NavigationBar') ?>
