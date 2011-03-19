@@ -54,19 +54,19 @@ class Com_Widget_ListTab extends Com_Widget
         } else {
             $module = $view['module'];
         }
-        $moduleId = strtr($module, '/', '-');
+        $moduleId = strtolower(strtr($module, '/', '-'));
         parse_str($param['url'], $get);
 
         // 获取禁用的行为
         $controllerClass = Com_Controller::getByModule($module, false);
         $classVar = get_class_vars($controllerClass);
-        if (isset($classVar['_forbiddenAction'])) {
-            $forbiddenAction = $classVar['_forbiddenAction'];
+        if (isset($classVar['_unableAction'])) {
+            $unableAction = $classVar['_unableAction'];
         } else {
-            $forbiddenAction = array();
+            $unableAction = array();
         }
 
-        if (!in_array('add', $forbiddenAction)) {
+        if (!in_array('add', $unableAction)) {
             $tab['add'] = array(
                 'url'       => $url->url($get, array('action' => 'Add')),
                 'title'     => $lang->t('ACT_ADD'),
@@ -86,7 +86,7 @@ class Com_Widget_ListTab extends Com_Widget
         }
 
         // TODO jsLang
-        if (!in_array('delete', $forbiddenAction)) {
+        if (!in_array('delete', $unableAction)) {
             $meta = Com_Metadata::getByModule($module);
             if (!isset($meta['page']['useTrash'])) {
                 $icon = 'ui-icon-close';
@@ -105,7 +105,7 @@ class Com_Widget_ListTab extends Com_Widget
             );
         }
 
-        if (!in_array('list', $forbiddenAction)) {
+        if (!in_array('list', $unableAction)) {
             $tab['list'] = array(
                 'url' => $url->url($get, array('action' => 'Index')),
                 'title' => $lang->t('ACT_LIST'),

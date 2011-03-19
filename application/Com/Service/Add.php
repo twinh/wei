@@ -32,7 +32,7 @@ class Com_Service_Add extends Com_Service
      * @var array
      */
     protected $_option = array(
-        'module'    => '',
+        'module'    => null,
         'data'      => array(),
         'display'   => true,
         'url'       => null,
@@ -49,7 +49,7 @@ class Com_Service_Add extends Com_Service
         $option = array_merge($this->_option, $option);
 
         /* @var $meta Com_Metadata */
-        $meta   = Com_Metadata::getModule($option['module']);
+        $meta   = Com_Metadata::getByModule($option['module']);
         $id     = $meta['db']['primaryKey'];
 
         // 记录已经存在,加载错误视图

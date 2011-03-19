@@ -28,29 +28,29 @@ class Com_Widget_FormLink extends Com_Widget
     public function render($param, $view)
     {
         $manager = Qwin_Application::getInstance();
-        $asc = $view['asc'];
+        $module = $view['module'];
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
-        $controller = Com_Controller::getByAsc($asc, false);
+        $controller = Com_Controller::getByModule($module, false);
         $varList = get_class_vars($controller);
-        if (isset($varList['_forbiddenAction'])) {
-            $forbiddenAction = (array)$varList['_forbiddenAction'];
+        if (isset($varList['_unableActions'])) {
+            $unableActions = (array)$varList['_unableActions'];
         } else {
-            $forbiddenAction = array();
+            $unableActions = array();
         }
         $link = array();
 
-        if (!in_array('index', $forbiddenAction)) {
+        if (!in_array('index', $unableActions)) {
             $link['index'] = array(
-                'url'   => $url->url($asc, array('action' => 'Index')),
+                'url'   => $url->url(array('module' => $module, 'action' => 'Index')),
                 'title' => $lang->t('ACT_LIST'),
                 'icon'  => 'ui-icon-note',
             );
         }
 
-        if (!in_array('add', $forbiddenAction)) {
+        if (!in_array('add', $unableActions)) {
             $link['add'] = array(
-                'url'   => $url->url($asc, array('action' => 'Add')),
+                'url'   => $url->url(array('module' => $module, 'action' => 'Add')),
                 'title' => $lang->t('ACT_ADD'),
                 'icon'  => 'ui-icon-plus',
             );
@@ -60,32 +60,32 @@ class Com_Widget_FormLink extends Com_Widget
         $data = $param[0];
         $primaryKey = $param[1];
         if (isset($param[0][$param[1]])) {
-            if (!in_array('edit', $forbiddenAction)) {
+            if (!in_array('edit', $unableActions)) {
                 $link['edit'] = array(
-                    'url'   => $url->url($asc, array('action' => 'Edit', $primaryKey => $data[$primaryKey])),
+                    'url'   => $url->url(array('module' => $module, 'action' => 'Edit', $primaryKey => $data[$primaryKey])),
                     'title' => $lang->t('ACT_EDIT'),
                     'icon'  => 'ui-icon-tag',
                 );
             }
 
-            if (!in_array('view', $forbiddenAction)) {
+            if (!in_array('view', $unableActions)) {
                 $link['view'] = array(
-                    'url'   => $url->url($asc, array('action' => 'View', $primaryKey => $data[$primaryKey])),
+                    'url'   => $url->url(array('module' => $module, 'action' => 'View', $primaryKey => $data[$primaryKey])),
                     'title' => $lang->t('ACT_VIEW'),
                     'icon'  => 'ui-icon-lightbulb',
                 );
             }
 
-            if (!in_array('add', $forbiddenAction)) {
+            if (!in_array('add', $unableActions)) {
                 $link['copy'] = array(
-                    'url'   => $url->url($asc, array('action' => 'Add', $primaryKey => $data[$primaryKey])),
+                    'url'   => $url->url(array('module' => $module, 'action' => 'Add', $primaryKey => $data[$primaryKey])),
                     'title' => $lang->t('ACT_COPY'),
                     'icon'  => 'ui-icon-transferthick-e-w',
                 );
             }
 
-             if (!in_array('delete', $forbiddenAction)) {
-                $meta = Com_Metadata::getByAsc($asc);
+             if (!in_array('delete', $unableActions)) {
+                $meta = Com_Metadata::getByModule($module);
                 if (!isset($meta['page']['useTrash'])) {
                     $icon = 'ui-icon-close';
                     $jsLang = 'MSG_CONFIRM_TO_DELETE';
@@ -94,7 +94,7 @@ class Com_Widget_FormLink extends Com_Widget
                     $jsLang = 'MSG_CONFIRM_TO_DELETE_TO_TRASH';
                 }
                  $link['delete'] = array(
-                    'url'   => 'javascript:if(confirm(QWIN_PATH.Lang.' . $jsLang . ')){window.location=\'' . $url->url($asc, array('action' => 'Delete', $primaryKey => $data[$primaryKey])) . '\'};',
+                    'url'   => 'javascript:if(confirm(QWIN_PATH.Lang.' . $jsLang . ')){window.location=\'' . $url->url(array('module' => $module, 'action' => 'Delete', $primaryKey => $data[$primaryKey])) . '\'};',
                     'title' => $lang->t('ACT_DELETE'),
                     'icon'  => $icon,
                 );
@@ -107,7 +107,7 @@ class Com_Widget_FormLink extends Com_Widget
         );
 
         // 如果当前行为存在选项卡视图,加载该视图,否则直接输出默认选项卡内容
-        $class = $asc['package'] . '_' . $asc['module'] . '_Widget_Form_Link';
+        $class = strtr($module, '/', '_') . '_Widget_Form_Link';
         if(class_exists($class)) {
             $object = new $class;
             $file = $view->decodePath('<resource><theme>/<defaultPackage>/element/<module>/<controller>/<action>-formlink<suffix>');

@@ -24,7 +24,7 @@
  */
 ?>
 <div class="ui-jqgrid-top">
-    <?php echo $this->loadWidget('Common_Widget_ListTab', array('module' => $jqGrid['module'], 'url' => $jqGrid['option']['url'])) ?>
+    <?php echo $this->loadWidget('Com_Widget_ListTab', array('module' => $jqGrid['module'], 'url' => $jqGrid['option']['url'])) ?>
 </div>
 <div class="clear"></div>
 <?php $jqGridWidget->render($jqGrid) ?>

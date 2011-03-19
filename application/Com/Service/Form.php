@@ -32,12 +32,7 @@ class Com_Service_Form extends Com_Service
      * @var array
      */
     protected $_option = array(
-        'asc' => array(
-            'package' => null,
-            'module' => null,
-            'controller' => null,
-            'action' => null,
-        ),
+        'module'    => null,
         'id'        => null,
         'initalData'=> array(),
         'display'   => true,
@@ -50,7 +45,7 @@ class Com_Service_Form extends Com_Service
         $option     = array_merge($this->_option, $option);
         
         /* @var $meta Com_Metadata */
-        $meta       = Com_Metadata::getByAsc($option['asc']);
+        $meta       = Com_Metadata::getByModule($option['module']);
         $primaryKey = $meta['db']['primaryKey'];
         $primaryKeyValue = $option['id'];
 

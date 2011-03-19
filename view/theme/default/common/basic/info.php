@@ -27,7 +27,7 @@
 ?>
 <div class="ui-box ui-widget ui-widget-content ui-corner-all">
     <div class="ui-box-header">
-        <?php $this->loadWidget('Common_Widget_Header') ?>
+        <?php $this->loadWidget('Com_Widget_Header') ?>
     </div>
     <div class="ui-message ui-box-content ui-widget-content">
         <div class="ui-message-box ui-state-highlight ui-corner-all">

@@ -40,7 +40,7 @@ abstract class Qwin_Application_Controller
      *
      * @var array
      */
-    protected $_forbiddenActions = array();
+    protected $_unableActions = array();
 
     public function __construct()
     {
@@ -68,7 +68,7 @@ abstract class Qwin_Application_Controller
      */
     public function getForbiddenActions()
     {
-        return $this->_forbiddenActions;
+        return $this->_unableActions;
     }
 
     /**
@@ -80,7 +80,7 @@ abstract class Qwin_Application_Controller
     public function setForbiddenActions($action)
     {
         if (method_exists($this, 'action' . $action)) {
-            $this->_forbiddenActions[] = strtolower($action);
+            $this->_unableActions[] = strtolower($action);
         }
         return $this;
     }
