@@ -25,7 +25,7 @@
  * @since       2010-5-26 22:52:49
  */
 
-class Com_Article_Metadata_Article extends Com_Metadata
+class Cms_Article_Metadata extends Com_Metadata
 {
     public function setMetadata()
     {
@@ -50,6 +50,7 @@ class Com_Article_Metadata_Article extends Com_Metadata
                         ),
                     ),
                     'attr' => array(
+                        'isList' => 1,
                         'isLink' => 1,
                     ),
                 ),
@@ -59,7 +60,6 @@ class Com_Article_Metadata_Article extends Com_Metadata
                     ),
                     'attr' => array(
                         'isLink' => 1,
-                        'isList' => 0,
                         'isView' => 0,
                     ),
                 ),
@@ -76,6 +76,9 @@ class Com_Article_Metadata_Article extends Com_Metadata
                 'title' => array(
                     'basic' => array(
                         'layout' => 2,
+                    ),
+                    'attr' => array(
+                        'isList' => 1,
                     ),
                     'validator' => array(
                         'rule' => array(
@@ -124,7 +127,6 @@ class Com_Article_Metadata_Article extends Com_Metadata
                 'author' => array(
                     'attr' => array(
                         'isLink' => 1,
-                        'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
                     ),
@@ -138,7 +140,6 @@ class Com_Article_Metadata_Article extends Com_Metadata
                     ),
                     'attr' => array(
                         'isLink' => 1,
-                        'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
                     ),
@@ -152,7 +153,6 @@ class Com_Article_Metadata_Article extends Com_Metadata
                     ),
                     'attr' => array(
                         'isLink' => 1,
-                        'isList' => 0,
                         'isDbField' => 1,
                         'isDbQuery' => 1,
                     ),
@@ -164,6 +164,9 @@ class Com_Article_Metadata_Article extends Com_Metadata
                     'form' => array(
                         '_value' => '0',
                     ),
+                    'attr' => array(
+                        'isList' => 1,
+                    ),
                 ),
                 'order' => array(
                     'basic' => array(
@@ -172,21 +175,18 @@ class Com_Article_Metadata_Article extends Com_Metadata
                     'form' => array(
                         '_value' => 0,
                     ),
+                    'attr' => array(
+                        'isList' => 1,
+                    ),
                 ),
                 'page_name' => array(
                     'basic' => array(
                         'group' => 2,
                     ),
-                    'attr' => array(
-                        'isList' => 0,
-                    ),
                 ),
                 'template' => array(
                     'basic' => array(
                         'group' => 2,
-                    ),
-                    'attr' => array(
-                        'isList' => 0,
                     ),
                 ),
                 'is_posted' => array(
@@ -282,7 +282,7 @@ class Com_Article_Metadata_Article extends Com_Metadata
 
             ),
             'model' => array(
-                'detail' => array(
+                /*'detail' => array(
                     'alias' => 'detail',
                     'type' => 'db',
                     'local' => 'id',
@@ -303,7 +303,7 @@ class Com_Article_Metadata_Article extends Com_Metadata
                     'fieldMap' => array(
                         'category_id' => 'name',
                     ),
-                ),
+                ),*/
             ),
             'metadata' => array(
 
@@ -373,12 +373,12 @@ class Com_Article_Metadata_Article extends Com_Metadata
 
     public function sanitiseListTitle($value, $name, $data, $copyData)
     {
-        return Qwin_Util_Html::titleDecorator($value, $copyData['title_style'], $copyData['title_color']);
+        return Qwin_Util_Html::decorateWord($value, $copyData['title_style'], $copyData['title_color']);
     }
 
     public function sanitiseViewTitle($value, $name, $data, $copyData)
     {
-        return Qwin_Util_Html::titleDecorator($value, $copyData['title_style'], $copyData['title_color']);
+        return Qwin_Util_Html::decorateWord($value, $copyData['title_style'], $copyData['title_color']);
     }
 
     public function sanitiseEditTitleStyle($value, $name, $data, $copyData)
