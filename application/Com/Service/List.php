@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Service
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-10-10 14:16:45
  */
 
-class Common_Service_List extends Common_Service
+class Com_Service_List extends Com_Service
 {
     /**
      * 服务的基本配置
@@ -36,7 +36,7 @@ class Common_Service_List extends Common_Service
         'list'      => array(),
         'popup'     => false,
         'display'   => true,
-        'viewClass' => 'Common_View_List',
+        'viewClass' => 'Com_View_List',
     );
 
     /**
@@ -49,7 +49,7 @@ class Common_Service_List extends Common_Service
     {
         // 初始配置
         $option     = $option + $this->_option;
-        $meta       = Common_Metadata::getByModule($option['module']);
+        $meta       = Com_Metadata::getByModule($option['module']);
         $primaryKey = $meta['db']['primaryKey'];
 
         // 显示哪些域

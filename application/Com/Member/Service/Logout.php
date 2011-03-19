@@ -25,7 +25,7 @@
  * @since       2010-10-12 14:04:48
  */
 
-class Common_Member_Service_Logout extends Common_Service_BasicAction
+class Com_Member_Service_Logout extends Com_Service_BasicAction
 {
     /**
      * 服务的基本配置

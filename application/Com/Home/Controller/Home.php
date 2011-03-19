@@ -23,7 +23,7 @@
  * @since       2011-01-09 09:42:41
  */
 
-class Common_Home_Controller_Home extends Common_Controller
+class Com_Home_Controller_Home extends Com_Controller
 {
     public function actionUpdateLog()
     {

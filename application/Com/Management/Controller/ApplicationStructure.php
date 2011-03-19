@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Management
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-09-11 21:15:01
  */
 
-class Common_Management_Controller_ApplicationStructure extends Common_Controller
+class Com_Management_Controller_ApplicationStructure extends Com_Controller
 {
     public function actionIndex()
     {

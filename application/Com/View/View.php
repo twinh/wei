@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  View
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-09-17 18:24:58
  */
 
-class Common_View_View extends Common_View
+class Com_View_View extends Com_View
 {
     public function  preDisplay()
     {

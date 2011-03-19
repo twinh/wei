@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Job
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,6 +25,6 @@
  * @since       2010-06-17 09:50:16
  */
 
-class Common_Link_Controller_Link extends Common_ActionController
+class Com_Link_Controller_Link extends Com_ActionController
 {
 }

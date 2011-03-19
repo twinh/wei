@@ -23,7 +23,7 @@
  * @since       2011-01-04 22:55:48
  */
 
-class Crm_Customer_Metadata_Customer extends Common_Metadata
+class Crm_Customer_Metadata_Customer extends Com_Metadata
 {
     public function setMetadata()
     {
@@ -49,13 +49,13 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Common_Helper_Option', 'get'),
+                            array('Com_Helper_Option', 'get'),
                             'sex',
                         ),
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'sanitise'),
+                            array('Com_Helper_Option', 'sanitise'),
                             'sex',
                         ),
                         'view' => 'list',
@@ -69,13 +69,13 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Common_Helper_Option', 'get'),
+                            array('Com_Helper_Option', 'get'),
                             'customer-type',
                         ),
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'sanitise'),
+                            array('Com_Helper_Option', 'sanitise'),
                             'customer-type',
                         ),
                         'view' => 'list',
@@ -89,13 +89,13 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Common_Helper_Option', 'get'),
+                            array('Com_Helper_Option', 'get'),
                             'customer-source',
                         ),
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'sanitise'),
+                            array('Com_Helper_Option', 'sanitise'),
                             'customer-source',
                         ),
                         'view' => 'list',
@@ -109,13 +109,13 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Common_Helper_Option', 'get'),
+                            array('Com_Helper_Option', 'get'),
                             'customer-grade',
                         ),
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'sanitise'),
+                            array('Com_Helper_Option', 'sanitise'),
                             'customer-grade',
                         ),
                         'view' => 'list',
@@ -129,7 +129,7 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Common_Helper_Option', 'get'),
+                            array('Com_Helper_Option', 'get'),
                             'customer-status',
                         ),
                     ),
@@ -139,7 +139,7 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'sanitise'),
+                            array('Com_Helper_Option', 'sanitise'),
                             'customer-status',
                         ),
                         'view' => 'list',
@@ -267,13 +267,13 @@ class Crm_Customer_Metadata_Customer extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Common_Helper_Option', 'get'),
+                            array('Com_Helper_Option', 'get'),
                             'payment-type',
                         ),
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'sanitise'),
+                            array('Com_Helper_Option', 'sanitise'),
                             'payment-type',
                         ),
                         'view' => 'list',

@@ -23,7 +23,7 @@
  * @since       2011-01-05 17:57:20
  */
 
-class Crm_Contact_Metadata_Contact extends Common_Metadata
+class Crm_Contact_Metadata_Contact extends Com_Metadata
 {
     public function setMetadata()
     {
@@ -111,13 +111,13 @@ class Crm_Contact_Metadata_Contact extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Common_Helper_Option', 'get'),
+                            array('Com_Helper_Option', 'get'),
                             'customer-source',
                         ),
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'sanitise'),
+                            array('Com_Helper_Option', 'sanitise'),
                             'customer-source',
                         ),
                         'view' => 'list',

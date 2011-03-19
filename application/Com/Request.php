@@ -24,7 +24,7 @@
  * @todo        url空间 http://yourwebsite/?qw=[query-string]
  */
 
-class Common_Request extends Qwin_Request
+class Com_Request extends Qwin_Request
 {
     /**
      * @var array $_option          数据请求的选项
@@ -104,7 +104,7 @@ class Common_Request extends Qwin_Request
      *
      * @param string $name 选项名称
      * @param mixed $value 选项值
-     * @return Common_Request 当前对象
+     * @return Com_Request 当前对象
      */
     public function setOption($name, $value)
     {
@@ -263,7 +263,7 @@ class Common_Request extends Qwin_Request
      */
     public function getPrimaryKeyValue($module)
     {
-        $meta = Common_Metadata::getByModule($module);
+        $meta = Com_Metadata::getByModule($module);
         return $this->get($meta['db']['primaryKey']);
     }
 

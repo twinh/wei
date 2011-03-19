@@ -25,6 +25,6 @@
  * @since       2010-09-11 21:41:42
  */
 
-class Common_Management_Model_ApplicationStructure extends Common_Model
+class Com_Management_Model_ApplicationStructure extends Com_Model
 {
 }

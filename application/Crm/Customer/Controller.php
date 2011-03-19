@@ -25,6 +25,6 @@
  * @since       2011-01-04 22:54:41
  */
 
-class Crm_Customer_Controller extends Common_ActionController
+class Crm_Customer_Controller extends Com_ActionController
 {
 }

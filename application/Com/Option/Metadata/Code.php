@@ -23,7 +23,7 @@
  * @since       2011-01-20 20:47:21
  */
 
-class Common_Option_Metadata_Code extends Common_Metadata
+class Com_Option_Metadata_Code extends Com_Metadata
 {
     public function setMetadata()
     {
@@ -37,7 +37,7 @@ class Common_Option_Metadata_Code extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Common_Helper_Option', 'get'),
+                            array('Com_Helper_Option', 'get'),
                             'css-color',
                             'NULL',
                         ),

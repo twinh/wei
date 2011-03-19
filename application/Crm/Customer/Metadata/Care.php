@@ -23,7 +23,7 @@
  * @since       2011-01-18 11:46:12
  */
 
-class Crm_Customer_Metadata_Care extends Common_Metadata
+class Crm_Customer_Metadata_Care extends Com_Metadata
 {
     public function setMetadata()
     {
@@ -96,13 +96,13 @@ class Crm_Customer_Metadata_Care extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Common_Helper_Option', 'get'),
+                            array('Com_Helper_Option', 'get'),
                             'customer-care-type',
                         ),
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'sanitise'),
+                            array('Com_Helper_Option', 'sanitise'),
                             'customer-care-type',
                         ),
                         'view' => 'list',

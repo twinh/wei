@@ -25,7 +25,7 @@
  * @since       2010-10-09 15:30:37
  */
 
-class Common_Service
+class Com_Service
 {
     /**
      * 内置的的操作结果

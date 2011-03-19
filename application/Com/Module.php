@@ -19,7 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Module
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -33,7 +33,7 @@
  */
 require_once 'Qwin/Application/Module.php';
 
-class Common_Module extends Qwin_Application_Module
+class Com_Module extends Qwin_Application_Module
 {
     public function __construct()
     {

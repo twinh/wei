@@ -25,7 +25,7 @@
  * @since       2010-10-12 11:53:55
  */
 
-class Common_Member_Service_Login extends Common_Service_BasicAction
+class Com_Member_Service_Login extends Com_Service_BasicAction
 {
     /**
      * 服务的基本配置
@@ -118,7 +118,7 @@ class Common_Member_Service_Login extends Common_Service_BasicAction
         if($config['data']['loginLog'])
         {
             /**
-             * @see Common_Service_Insert $_config
+             * @see Com_Service_Insert $_config
              */
             $logConfig = array(
                 'set' => array(
@@ -135,7 +135,7 @@ class Common_Member_Service_Login extends Common_Service_BasicAction
                     'display' => false,
                 ),
             );
-            $logResult = Qwin::call('Common_Service_Insert')->process($logConfig);
+            $logResult = Qwin::call('Com_Service_Insert')->process($logConfig);
             if(!$logResult['result'])
             {
                 if($config['view']['display'])

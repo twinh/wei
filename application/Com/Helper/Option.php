@@ -23,7 +23,7 @@
  * @since       2011-01-20 14:38:02
  */
 
-class Common_Helper_Option
+class Com_Helper_Option
 {
     /**
      * 语言名称,应该以标准形式出现
@@ -178,7 +178,7 @@ class Common_Helper_Option
         if (isset($this->_query)) {
             return $this->_query;
         }
-        $this->_query =  Common_Metadata::getQueryByAsc(array(
+        $this->_query =  Com_Metadata::getQueryByAsc(array(
             'package' => 'Common',
             'module' => 'Option',
             'controller' => 'Option',

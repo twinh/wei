@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Email
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang

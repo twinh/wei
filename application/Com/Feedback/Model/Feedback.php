@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Feedback
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,6 +25,6 @@
  * @since       2010-09-06 13:24:16
  */
 
-class Common_Feedback_Model_Feedback extends Common_Model
+class Com_Feedback_Model_Feedback extends Com_Model
 {
 }

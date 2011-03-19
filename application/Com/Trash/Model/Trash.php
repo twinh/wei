@@ -23,6 +23,6 @@
  * @since       2011-01-09 15:29:06
  */
 
-class Common_Trash_Model_Trash extends Common_Model
+class Com_Trash_Model_Trash extends Com_Model
 {
 }

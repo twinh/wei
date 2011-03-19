@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Service
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-10-11 17:14:08
  */
 
-class Common_Service_Form extends Common_Service
+class Com_Service_Form extends Com_Service
 {
     /**
      * 服务的基本配置
@@ -41,7 +41,7 @@ class Common_Service_Form extends Common_Service
         'id'        => null,
         'initalData'=> array(),
         'display'   => true,
-        'viewClass' => 'Common_View_Add',
+        'viewClass' => 'Com_View_Add',
     );
 
     public function process(array $option = null)
@@ -49,8 +49,8 @@ class Common_Service_Form extends Common_Service
         // 初始配置
         $option     = array_merge($this->_option, $option);
         
-        /* @var $meta Common_Metadata */
-        $meta       = Common_Metadata::getByAsc($option['asc']);
+        /* @var $meta Com_Metadata */
+        $meta       = Com_Metadata::getByAsc($option['asc']);
         $primaryKey = $meta['db']['primaryKey'];
         $primaryKeyValue = $option['id'];
 

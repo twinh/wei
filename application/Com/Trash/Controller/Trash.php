@@ -23,7 +23,7 @@
  * @since       2011-01-09 14:21:39
  */
 
-class Common_Trash_Controller_Trash extends Common_ActionController
+class Com_Trash_Controller_Trash extends Com_ActionController
 {
     /**
      * 禁用行为
@@ -41,7 +41,7 @@ class Common_Trash_Controller_Trash extends Common_ActionController
      */
     public function actionRestore()
     {
-        $service = new Common_Trash_Service_Restore();
+        $service = new Com_Trash_Service_Restore();
         $service->process(array(
             'asc' => $this->_asc,
             'data' => array(
@@ -56,7 +56,7 @@ class Common_Trash_Controller_Trash extends Common_ActionController
      */
     public function actionDelete()
     {
-        $service = new Common_Trash_Service_Delete();
+        $service = new Com_Trash_Service_Delete();
         $service->process(array(
             'asc' => $this->_asc,
             'data' => array(

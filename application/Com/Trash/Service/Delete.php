@@ -23,7 +23,7 @@
  * @since       2011-01-10 16:44:37
  */
 
-class Common_Trash_Service_Delete extends Common_Service_BasicAction
+class Com_Trash_Service_Delete extends Com_Service_BasicAction
 {
     /**
      * 服务的基本配置

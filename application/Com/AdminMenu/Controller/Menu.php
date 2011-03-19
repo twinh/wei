@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  AdminMenu
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-05-25 07:59:33
  */
 
-class Common_AdminMenu_Controller_Menu extends Common_ActionController
+class Com_AdminMenu_Controller_Menu extends Com_ActionController
 {
     public function onAfterDb($data)
     {

@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Service
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-10-11 23:31:25
  */
 
-class Common_Service_Delete extends Common_Service_BasicAction
+class Com_Service_Delete extends Com_Service_BasicAction
 {
     /**
      * 服务的基本配置
@@ -107,7 +107,7 @@ class Common_Service_Delete extends Common_Service_BasicAction
                     ),
                     'this' => $config['this'],
                 );
-                $sevice = new Common_Service_Insert();
+                $sevice = new Com_Service_Insert();
                 $result = $sevice->process($InsertSetting);
                 /*
                  * todo 结果判断

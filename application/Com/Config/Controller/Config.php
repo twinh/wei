@@ -25,7 +25,7 @@
  * @since       2010-12-07 17:31:03
  */
 
-class Common_Config_Controller_Config extends Common_ActionController
+class Com_Config_Controller_Config extends Com_ActionController
 {
     // 根据配置分组生成表单
     public function actionRender()
@@ -46,7 +46,7 @@ class Common_Config_Controller_Config extends Common_ActionController
         }
         
         // 构建域分组
-        $groupResult = Common_Metadata::getQueryByAsc(array(
+        $groupResult = Com_Metadata::getQueryByAsc(array(
                 'package' => 'Common',
                 'module' => 'Config',
                 'controller' => 'Group',
@@ -88,7 +88,7 @@ class Common_Config_Controller_Config extends Common_ActionController
             );
             $data[$row['form_name']] = $row['value'];
         }
-        $meta = Common_Metadata::getByAsc(array(
+        $meta = Com_Metadata::getByAsc(array(
                 'package' => 'Common',
                 'module' => 'Config',
                 'controller' => 'Temp',
@@ -97,7 +97,7 @@ class Common_Config_Controller_Config extends Common_ActionController
         
         if (empty($_POST)) {
             $primaryKey = $groupId;
-            $view = Qwin::call('Common_View_Edit');
+            $view = Qwin::call('Com_View_Edit');
             $view->assign(get_defined_vars());
         } else {
             // 保存结果
@@ -125,7 +125,7 @@ class Common_Config_Controller_Config extends Common_ActionController
         $meta = $this->_meta;
 
         // 分组的数据
-        $data = Common_Metadata::getQueryByAsc(array(
+        $data = Com_Metadata::getQueryByAsc(array(
                 'package' => 'Common',
                 'module' => 'Config',
                 'controller' => 'Group',

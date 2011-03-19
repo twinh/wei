@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2011-01-03 12:47:24
  */
 
-class Common_Widget_NavigationBar extends Common_Widget
+class Com_Widget_NavigationBar extends Com_Widget
 {
     public function render($param, $view)
     {

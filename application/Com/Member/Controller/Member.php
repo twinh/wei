@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Member
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-05-13 10:17:58
  */
 
-class Common_Member_Controller_Member extends Common_ActionController
+class Com_Member_Controller_Member extends Com_ActionController
 {
     /**
      * 编辑密码
@@ -38,12 +38,12 @@ class Common_Member_Controller_Member extends Common_ActionController
         {
             return $this->view->redirect($this->_lang->t('MSG_GUEST_NOT_ALLOW_EDIT_PASSWORD'));
         }
-        $this->_meta = Qwin_Metadata::get('Common_Member_Metadata_Password');
+        $this->_meta = Qwin_Metadata::get('Com_Member_Metadata_Password');
 
         if(empty($_POST))
         {
             /**
-             * @see Common_Service_View $_config
+             * @see Com_Service_View $_config
              */
             $config = array(
                 'set' => $this->_asc,
@@ -55,14 +55,14 @@ class Common_Member_Controller_Member extends Common_ActionController
                     'isView' => false,
                 ),
                 'view' => array(
-                    'class' => 'Common_View_EditForm',
+                    'class' => 'Com_View_EditForm',
                 ),
                 'this' => $this,
             );
-            return Qwin::call('Common_Service_View')->process($config);
+            return Qwin::call('Com_Service_View')->process($config);
         } else {
             /**
-             * @see Common_Service_Update $_config
+             * @see Com_Service_Update $_config
              */
             $config = array(
                 'set' => $this->_asc,
@@ -75,7 +75,7 @@ class Common_Member_Controller_Member extends Common_ActionController
                 ),
                 'this' => $this,
             );
-            return Qwin::call('Common_Service_Update')->process($config);
+            return Qwin::call('Com_Service_Update')->process($config);
         }
     }
 

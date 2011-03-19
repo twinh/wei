@@ -23,7 +23,7 @@
  * @since       2011-01-09 14:48:52
  */
 
-class Common_Trash_Metadata_Trash extends Common_Metadata
+class Com_Trash_Metadata_Trash extends Com_Metadata
 {
     public function setMetadata()
     {
@@ -103,7 +103,7 @@ class Common_Trash_Metadata_Trash extends Common_Metadata
             'module' => $value[1],
             'controller' => $value[2],
         );
-        $metadata = Common_Metadata::getByAsc($asc);
+        $metadata = Com_Metadata::getByAsc($asc);
         $lang = Qwin::call('-lang');
         
         return Qwin_Util_Html::link($this->url->url($asc), $lang->t($metadata['page']['title']));

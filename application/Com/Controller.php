@@ -19,7 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Controller
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -33,17 +33,17 @@
  */
 require_once 'Qwin/Application/Controller.php';
 
-class Common_Controller extends Qwin_Application_Controller
+class Com_Controller extends Qwin_Application_Controller
 {
     /**
      * 模型对象
-     * @var Common_Model
+     * @var Com_Model
      */
     protected $_model;
 
     /**
      * 元数据对象
-     * @var Common_Metadata
+     * @var Com_Metadata
      */
     protected $_meta;
 
@@ -55,13 +55,13 @@ class Common_Controller extends Qwin_Application_Controller
 
     /**
      * 请求对象
-     * @var Common_Request
+     * @var Com_Request
      */
     protected $_request;
 
     /**
      * 视图对象
-     * @var Common_View
+     * @var Com_View
      */
     protected $_view;
 

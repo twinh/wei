@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Article
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -24,7 +24,7 @@
  * @since       2010-04-17 14:02:35
  */
 
-class Common_Article_Controller_Article extends Common_ActionController
+class Com_Article_Controller_Article extends Com_ActionController
 {
 
     /**

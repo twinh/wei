@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Option
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2009-11-21 15:21:00
  */
 
-class Common_Option_Metadata_Option extends Common_Metadata
+class Com_Option_Metadata_Option extends Com_Metadata
 {
     public function  setMetadata()
     {
@@ -37,7 +37,7 @@ class Common_Option_Metadata_Option extends Common_Metadata
                         'form' => array(
                             '_type' => 'select',
                             '_resourceGetter' => array(
-                                array('Common_Helper_Option', 'get'),
+                                array('Com_Helper_Option', 'get'),
                                 'language',
                             ),
                         ),

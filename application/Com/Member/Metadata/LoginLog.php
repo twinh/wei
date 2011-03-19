@@ -25,7 +25,7 @@
  * @since       2010-09-13 11:20:21
  */
 
-class Common_Member_Metadata_LoginLog extends Common_Metadata
+class Com_Member_Metadata_LoginLog extends Com_Metadata
 {
     public function __construct()
     {

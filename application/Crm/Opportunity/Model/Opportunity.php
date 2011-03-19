@@ -23,6 +23,6 @@
  * @since       2011-01-05 14:14:13
  */
 
-class Crm_Opportunity_Model_Opportunity extends Common_Model
+class Crm_Opportunity_Model_Opportunity extends Com_Model
 {
 }

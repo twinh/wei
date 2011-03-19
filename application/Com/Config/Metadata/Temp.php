@@ -25,6 +25,6 @@
  * @since       2010-12-08 11:44:25
  */
 
-class Common_Config_Metadata_Temp extends Common_Metadata
+class Com_Config_Metadata_Temp extends Com_Metadata
 {
 }

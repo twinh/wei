@@ -27,7 +27,7 @@ class Crm_Helper
 {
     public static function sanitisePopupMember($value, $name, $viewName, $meta)
     {
-        $data = Common_Metadata::getQueryByModule('Common/Member')
+        $data = Com_Metadata::getQueryByModule('Com/Member')
             ->select($viewName)
             ->where('id = ?', $value)
             ->fetchOne();
@@ -36,7 +36,7 @@ class Crm_Helper
 
     public static function sanitisePopupContact($value, $name, $viewName, $meta)
     {
-        $data = Common_Metadata::getQueryByAsc(array(
+        $data = Com_Metadata::getQueryByAsc(array(
                 'package' => 'Crm',
                 'module' => 'Contact',
                 'controller' => 'Contact',
@@ -48,7 +48,7 @@ class Crm_Helper
 
     public static function sanitisePopupCustomer($value, $name, $viewName, $meta)
     {
-        $data = Common_Metadata::getQueryByAsc(array(
+        $data = Com_Metadata::getQueryByAsc(array(
                 'package' => 'Crm',
                 'module' => 'Customer',
                 'controller' => 'Customer',
@@ -60,7 +60,7 @@ class Crm_Helper
 
     public static function sanitisePopupOpportunity($value, $name, $viewName, $meta)
     {
-        $data = Common_Metadata::getQueryByAsc(array(
+        $data = Com_Metadata::getQueryByAsc(array(
                 'package' => 'Crm',
                 'module' => 'Opportunity',
                 'controller' => 'Opportunity',

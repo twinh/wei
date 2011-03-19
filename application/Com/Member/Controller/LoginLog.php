@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Member
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-09-13 11:19:25
  */
 
-class Common_Member_Controller_LoginLog extends Common_ActionController
+class Com_Member_Controller_LoginLog extends Com_ActionController
 {
     public $_forbiddenAction = array(
         'add',  'edit', 'delete'

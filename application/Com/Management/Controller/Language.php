@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Management
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-09-20 15:51:17
  */
 
-class Common_Management_Controller_Language extends Common_Controller
+class Com_Management_Controller_Language extends Com_Controller
 {
     public function actionIndex()
     {
@@ -33,12 +33,12 @@ class Common_Management_Controller_Language extends Common_Controller
         $class2 = $this->request->get('class2');
 
         $object1 = Qwin::call($class1);
-        if(!is_subclass_of($object1, 'Common_Language'))
+        if(!is_subclass_of($object1, 'Com_Language'))
         {
             exit('类1不是语言类');
         }
         $object2 = Qwin::call($class2);
-        if(!is_subclass_of($object2, 'Common_Language'))
+        if(!is_subclass_of($object2, 'Com_Language'))
         {
             exit('类2不是语言类');
         }

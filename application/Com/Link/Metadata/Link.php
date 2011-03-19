@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Link
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-06-17 09:54:00
  */
 
-class Common_Link_Metadata_Link extends Common_Metadata
+class Com_Link_Metadata_Link extends Com_Metadata
 {
     public function  setMetadata()
     {
@@ -102,9 +102,9 @@ class Common_Link_Metadata_Link extends Common_Metadata
             ),
             'model' => array(
                 array(
-                    'name' => 'Common_Category_Model_Category',
+                    'name' => 'Com_Category_Model_Category',
                     'alias' => 'category',
-                    'metadata' => 'Common_Category_Metadata_Category',
+                    'metadata' => 'Com_Category_Metadata_Category',
                     'local' => 'category_id',
                     'foreign' => 'id',
                     'type' => 'view',
