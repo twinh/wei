@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Service
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-10-11 11:55:35
  */
 
-class Common_Service_Edit extends Common_Service
+class Com_Service_Edit extends Com_Service
 {
     /**
      * 服务的基本配置
@@ -51,8 +51,8 @@ class Common_Service_Edit extends Common_Service
         /* @var $app Qwin_Application */
         $app        = Qwin::call('-app');
         
-        /* @var $meta Common_Metadata */
-        $meta       = Common_Metadata::getByAsc($option['asc']);
+        /* @var $meta Com_Metadata */
+        $meta       = Com_Metadata::getByAsc($option['asc']);
         $primaryKey = $meta['db']['primaryKey'];
         $primaryKeyValue = isset($option['data'][$primaryKey]) ? $option['data'][$primaryKey] : null;
 

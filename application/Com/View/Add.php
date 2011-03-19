@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  View
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-09-17 18:14:58
  */
 
-class Common_View_Add extends Common_View
+class Com_View_Add extends Com_View
 {
     public function preDisplay()
     {
@@ -46,7 +46,7 @@ class Common_View_Add extends Common_View
             'data'  => $this->data,
         );
 
-        $operationField = $this->loadWidget('Common_Widget_FormLink', array($this->data, $primaryKey));
+        $operationField = $this->loadWidget('Com_Widget_FormLink', array($this->data, $primaryKey));
 
         $this->assign(get_defined_vars());
     }

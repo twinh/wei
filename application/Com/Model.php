@@ -19,7 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Model
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -30,7 +30,7 @@
 
 require_once 'Qwin/Application/Model.php';
 
-class Common_Model extends Qwin_Application_Model
+class Com_Model extends Qwin_Application_Model
 {
     /**
      * 数据库连接标识

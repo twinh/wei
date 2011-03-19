@@ -25,7 +25,7 @@
  * @since       2010-09-11 21:41:36
  */
 
-class Common_Management_Metadata_ApplicationStructure extends Common_Metadata
+class Com_Management_Metadata_ApplicationStructure extends Com_Metadata
 {
     public function __construct()
     {

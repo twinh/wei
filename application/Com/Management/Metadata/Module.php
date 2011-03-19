@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Management
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-09-17 0:33:03
  */
 
-class Common_Management_Metadata_Module extends Common_Metadata
+class Com_Management_Metadata_Module extends Com_Metadata
 {
     public function __construct()
     {

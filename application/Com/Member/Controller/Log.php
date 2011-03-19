@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Member
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-05-23 00:22:37
  */
 
-class Common_Member_Controller_Log extends Common_Controller
+class Com_Member_Controller_Log extends Com_Controller
 {
     public function actionLogin()
     {
@@ -43,7 +43,7 @@ class Common_Member_Controller_Log extends Common_Controller
         {
             $this->view->assign(get_defined_vars());
         } else {
-            $service = new Common_Member_Service_Login();
+            $service = new Com_Member_Service_Login();
             $service->process(array(
                 'asc' => $this->_asc,
                 'data' => array(
@@ -55,7 +55,7 @@ class Common_Member_Controller_Log extends Common_Controller
 
     public function actionLogout()
     {
-        return Qwin::call('Common_Member_Service_Logout')->process(array(
+        return Qwin::call('Com_Member_Service_Logout')->process(array(
             'asc' => $this->_asc,
             'this' => $this,
         ));

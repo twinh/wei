@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Member
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-08-28 20:40:31
  */
 
-class Common_Member_Metadata_Password extends Common_Metadata
+class Com_Member_Metadata_Password extends Com_Metadata
 {
     public function setMetadata()
     {

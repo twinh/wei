@@ -25,7 +25,7 @@
  * @since       2010-12-07 17:05:49
  */
 
-class Common_Config_Metadata_Group extends Common_Metadata
+class Com_Config_Metadata_Group extends Com_Metadata
 {
     public function setMetadata()
     {
@@ -69,7 +69,7 @@ class Common_Config_Metadata_Group extends Common_Metadata
                         '_type' => 'select',
                         '_value' => 1,
                         '_resourceGetter' => array(
-                            array('Common_Helper_Option', 'get'),
+                            array('Com_Helper_Option', 'get'),
                             'yes-or-no',
                         ),
                     ),
@@ -78,7 +78,7 @@ class Common_Config_Metadata_Group extends Common_Metadata
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'sanitise'),
+                            array('Com_Helper_Option', 'sanitise'),
                             'yes-or-no',
                         ),
                         'view' => 'list',

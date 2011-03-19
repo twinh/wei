@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Feedback
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-09-06 13:17:33
  */
 
-class Common_Feedback_Metadata_Feedback extends Common_Metadata
+class Com_Feedback_Metadata_Feedback extends Com_Metadata
 {
     public function setMetadata()
     {

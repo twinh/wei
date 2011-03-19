@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Service
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-10-09 21:20:47
  */
 
-class Common_Service_JsonList extends Common_Service
+class Com_Service_JsonList extends Com_Service
 {
     /**
      * 服务的基本配置
@@ -42,7 +42,7 @@ class Common_Service_JsonList extends Common_Service
         'isView'    => true,
         'sanitise'  => true,
         'display'   => true,
-        'viewClass' => 'Common_View_JsonList',
+        'viewClass' => 'Com_View_JsonList',
     );
 
     public function process(array $option = null)
@@ -51,11 +51,11 @@ class Common_Service_JsonList extends Common_Service
         $option     = array_merge($this->_option, $option);
         $listField  = $option['list'];
 
-        /* @var $meta Common_Metadata */
-        $meta = Common_Metadata::getByModule($option['module']);
+        /* @var $meta Com_Metadata */
+        $meta = Com_Metadata::getByModule($option['module']);
 
         // 从模型获取数据
-        $query = Common_Metadata::getQueryByModule($option['module'], array('type' => array('db', 'view')));
+        $query = Com_Metadata::getQueryByModule($option['module'], array('type' => array('db', 'view')));
         $meta
             ->addSelectToQuery($query)
             ->addOrderToQuery($query, $option['order'])

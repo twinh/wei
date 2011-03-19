@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  AdminMenu
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -24,6 +24,6 @@
  * @since       2010-5-25 08:10:46
  */
 
-class Common_AdminMenu_Model_Menu extends Common_Model
+class Com_AdminMenu_Model_Menu extends Com_Model
 {
 }

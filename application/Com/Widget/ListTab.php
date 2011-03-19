@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2011-01-04 17:02:34
  * @todo        通过元数据定义list tab
  */
-class Common_Widget_ListTab extends Common_Widget
+class Com_Widget_ListTab extends Com_Widget
 {
     /**
      * 生成列表选项卡
@@ -58,7 +58,7 @@ class Common_Widget_ListTab extends Common_Widget
         parse_str($param['url'], $get);
 
         // 获取禁用的行为
-        $controllerClass = Common_Controller::getByModule($module, false);
+        $controllerClass = Com_Controller::getByModule($module, false);
         $classVar = get_class_vars($controllerClass);
         if (isset($classVar['_forbiddenAction'])) {
             $forbiddenAction = $classVar['_forbiddenAction'];
@@ -87,7 +87,7 @@ class Common_Widget_ListTab extends Common_Widget
 
         // TODO jsLang
         if (!in_array('delete', $forbiddenAction)) {
-            $meta = Common_Metadata::getByModule($module);
+            $meta = Com_Metadata::getByModule($module);
             if (!isset($meta['page']['useTrash'])) {
                 $icon = 'ui-icon-close';
                 $jsLang = 'MSG_CONFIRM_TO_DELETE';

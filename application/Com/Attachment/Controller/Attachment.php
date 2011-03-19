@@ -23,7 +23,7 @@
  * @since       2011-01-18 11:21:02
  */
 
-class Common_Attachment_Controller_Attachment extends Common_ActionController
+class Com_Attachment_Controller_Attachment extends Com_ActionController
 {
      
 }

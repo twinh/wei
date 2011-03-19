@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Management
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-09-16 17:11:16
  */
 
-class Common_Management_Controller_Module extends Common_Controller
+class Com_Management_Controller_Module extends Com_Controller
 {
     /**
      * Qwin_Application_Application对象
@@ -113,7 +113,7 @@ class Common_Management_Controller_Module extends Common_Controller
         $data = $this->metaHelper->sanitiseArray($data, 'list', $meta, $this);
 
         $this->_view = array(
-            'class' => 'Common_View',
+            'class' => 'Com_View',
             'element' => array(
                 array('content', QWIN_PATH . '/view/theme/' . $theme . '/element/management/module-list.php'),
             ),
@@ -134,7 +134,7 @@ class Common_Management_Controller_Module extends Common_Controller
 
             $jQueryValidateCode = Qwin::call('-arr')->jsonEncode($this->_meta->getJQueryValidateCode($meta['field']));
             $this->_view = array(
-                'class' => 'Common_View',
+                'class' => 'Com_View',
                 'element' => array(
                     array('content', QWIN_PATH . '/view/theme/' . $theme . '/element/management/add-module.php'),
                 ),

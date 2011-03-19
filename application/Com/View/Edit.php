@@ -25,7 +25,7 @@
  * @since       2010-10-14 17:38:02
  */
 
-class Common_View_Edit extends Common_View
+class Com_View_Edit extends Com_View
 {
     public function  preDisplay()
     {
@@ -47,7 +47,7 @@ class Common_View_Edit extends Common_View
             'data'  => $this->data,
         );
         
-        $operationField = $this->loadWidget('Common_Widget_FormLink', array($this->data, $primaryKey));
+        $operationField = $this->loadWidget('Com_Widget_FormLink', array($this->data, $primaryKey));
 
         $this->assign(get_defined_vars());
     }

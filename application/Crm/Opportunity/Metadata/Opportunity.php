@@ -23,7 +23,7 @@
  * @since       2011-01-05 14:13:37
  */
 
-class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
+class Crm_Opportunity_Metadata_Opportunity extends Com_Metadata
 {
     public function  setMetadata()
     {
@@ -44,7 +44,7 @@ class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Common_Helper_Option', 'get'),
+                            array('Com_Helper_Option', 'get'),
                             'opportunity-status',
                         ),
                     ),
@@ -54,7 +54,7 @@ class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'sanitise'),
+                            array('Com_Helper_Option', 'sanitise'),
                             'opportunity-status',
                         ),
                         'view' => 'list',
@@ -64,7 +64,7 @@ class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Common_Helper_Option', 'get'),
+                            array('Com_Helper_Option', 'get'),
                             'opportunity-type',
                         ),
                     ),
@@ -74,7 +74,7 @@ class Crm_Opportunity_Metadata_Opportunity extends Common_Metadata
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'sanitise'),
+                            array('Com_Helper_Option', 'sanitise'),
                             'opportunity-type',
                         ),
                         'view' => 'list',

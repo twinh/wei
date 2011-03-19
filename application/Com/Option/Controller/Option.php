@@ -23,6 +23,6 @@
  * @since       2009-11-21 12:18:00
  */
 
-class Common_Option_Controller_Option extends Common_ActionController
+class Com_Option_Controller_Option extends Com_ActionController
 {
 }

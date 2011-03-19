@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  View
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -29,7 +29,7 @@
  *                       ->loadView('package-module-controller-action');
  */
 
-class Common_View extends Qwin_Application_View
+class Com_View extends Qwin_Application_View
 {
     /**
      * 打包的标记,用于合并js,css标签
@@ -97,7 +97,7 @@ class Common_View extends Qwin_Application_View
     /**
      * 数据预处理,设置变量,路径标签,视图布局,元素等
      *
-     * @return Common_View 当前对象
+     * @return Com_View 当前对象
      */
     public function preDisplay()
     {
@@ -175,7 +175,7 @@ class Common_View extends Qwin_Application_View
      *
      * @param string $layout 布局路径
      * @param array $data 数据
-     * @return Common_View 当前对象
+     * @return Com_View 当前对象
      */
     public function display($layout = null, array $data = null)
     {
@@ -213,7 +213,7 @@ class Common_View extends Qwin_Application_View
     /**
      * 视图输出后的处理
      *
-     * @return Common_View 当前对象
+     * @return Com_View 当前对象
      */
     public function afterDisplay()
     {
@@ -264,7 +264,7 @@ class Common_View extends Qwin_Application_View
      * @param string $info 信息
      * @param string $url 跳转地址
      * @param array|string $content 内容
-     * @return Common_View 当前对象
+     * @return Com_View 当前对象
      */
     public function info($info, $url = null, $content = array())
     {
@@ -281,7 +281,7 @@ class Common_View extends Qwin_Application_View
      * @param string $info 信息
      * @param string $url 跳转地址
      * @param array|string $content 内容
-     * @return Common_View 当前对象
+     * @return Com_View 当前对象
      */
     public function success($info, $url = null, $content = array())
     {
@@ -299,7 +299,7 @@ class Common_View extends Qwin_Application_View
      * @param string $info 信息
      * @param string $url 跳转地址
      * @param array|string $content 内容
-     * @return Common_View 当前对象
+     * @return Com_View 当前对象
      */
     public function alert($info, $url = null, $content = array())
     {
@@ -317,7 +317,7 @@ class Common_View extends Qwin_Application_View
      * @param string $info 信息
      * @param string $url 跳转地址
      * @param array|string $content 内容
-     * @return Common_View 当前对象
+     * @return Com_View 当前对象
      */
     public function error($info, $url = null, $content = array())
     {
@@ -333,7 +333,7 @@ class Common_View extends Qwin_Application_View
      * 跳转
      *
      * @param string $url 地址
-     * @return Common_View 当前对象
+     * @return Com_View 当前对象
      */
     public function jump($url)
     {

@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Category
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-07-12 17:01:37
  */
 
-class Common_Category_Controller_Category extends Common_ActionController
+class Com_Category_Controller_Category extends Com_ActionController
 {
     public function datasanitise($data)
     {

@@ -19,7 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Metadata
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -33,7 +33,7 @@
  */
 require_once 'Qwin/Application/Metadata.php';
 
-class Common_Metadata extends Qwin_Application_Metadata
+class Com_Metadata extends Qwin_Application_Metadata
 {
     /**
      * 模块标识
@@ -72,7 +72,7 @@ class Common_Metadata extends Qwin_Application_Metadata
     public static function getRecordByAsc($asc)
     {
         $meta       = self::getByAsc($asc);
-        $record     = Common_Model::getByAsc($asc);
+        $record     = Com_Model::getByAsc($asc);
         return $meta->getReord($record);
     }
 
@@ -90,7 +90,7 @@ class Common_Metadata extends Qwin_Application_Metadata
         $option['alias'] = (array)$option['alias'];
         
         if (null === $record) {
-            $record = Common_Model::getByModule($this->getModule());
+            $record = Com_Model::getByModule($this->getModule());
         }
         
         // 将元数据加入记录配置中
@@ -116,7 +116,7 @@ class Common_Metadata extends Qwin_Application_Metadata
     public static function getQueryByModule($module, array $option = array())
     {
         $meta       = self::getByModule($module);
-        $record     = Common_Model::getByModule($module);
+        $record     = Com_Model::getByModule($module);
         return $meta->getQuery($record, $option);
     }
 
@@ -135,7 +135,7 @@ class Common_Metadata extends Qwin_Application_Metadata
         $option['alias'] = (array)$option['alias'];
 
         if (null === $record) {
-            $recordClass = Common_Model::getByModule($this->getModule(), false);
+            $recordClass = Com_Model::getByModule($this->getModule(), false);
             $record = Qwin::call($recordClass);
         } else {
             $recordClass = get_class($record);
@@ -168,11 +168,11 @@ class Common_Metadata extends Qwin_Application_Metadata
      *
      * @param Doctrine_Record $record 记录对象
      * @param array $model 关联配置
-     * @return Common_Metadata 当前对象
+     * @return Com_Metadata 当前对象
      */
     public function setRecordRelation(Doctrine_Record $record, array $model)
     {
-        $modelObject = Common_Model::getByModule($model['module']);
+        $modelObject = Com_Model::getByModule($model['module']);
         $name = get_class($modelObject);
 
         $metaObject = self::getByModule($model['module']);
@@ -194,7 +194,7 @@ class Common_Metadata extends Qwin_Application_Metadata
      * 将元数据的域定义,数据表定义加入模型中
      *
      * @param Doctrine_Record $model Doctrine对象
-     * @return Common_Metadata 当前对象
+     * @return Com_Metadata 当前对象
      */
     public function toRecord(Doctrine_Record $record)
     {
@@ -219,7 +219,7 @@ class Common_Metadata extends Qwin_Application_Metadata
      *
      * @param Doctrine_Query $query
      * @param array|null $addition 附加的排序配置
-     * @return Common_Metadata 当前对象
+     * @return Com_Metadata 当前对象
      * @todo 关联元数据的排序
      */
     public function addOrderToQuery(Doctrine_Query $query, array $addition = null)
@@ -252,7 +252,7 @@ class Common_Metadata extends Qwin_Application_Metadata
      *
      * @param Doctrine_Query $query
      * @param array|null $addition 附加的排序配置
-     * @return Common_Metadata 当前对象
+     * @return Com_Metadata 当前对象
      * @todo 完善查询类型
      * @todo 复杂查询
      */
@@ -361,7 +361,7 @@ class Common_Metadata extends Qwin_Application_Metadata
      *
      * @param Doctrine_Query $query
      * @param int|null $addition 附加的偏移配置
-     * @return Common_Metadata 当前对象
+     * @return Com_Metadata 当前对象
      */
     public function addOffsetToQuery(Doctrine_Query $query, $addition = null)
     {
@@ -381,7 +381,7 @@ class Common_Metadata extends Qwin_Application_Metadata
      *
      * @param Doctrine_Query $query
      * @param int|null $addition 附加的限制配置
-     * @return Common_Metadata 当前对象
+     * @return Com_Metadata 当前对象
      */
     public function addLimitToQuery(Doctrine_Query $query, $addition = null)
     {
@@ -400,7 +400,7 @@ class Common_Metadata extends Qwin_Application_Metadata
      * 为Doctrine查询对象增加查询语句
      *
      * @param Doctrine_Query $query
-     * @return Common_Metadata 当前对象
+     * @return Com_Metadata 当前对象
      * @todo 是否要将主类加入到$meta['model']数组中,减少代码重复
      */
     public function addSelectToQuery(Doctrine_Query $query)
@@ -469,7 +469,7 @@ class Common_Metadata extends Qwin_Application_Metadata
     /**
      * 设置基本的元数据,包括编号,创建时间,修改时间和操作.
      *
-     * @return Common_Metadata 当前对象
+     * @return Com_Metadata 当前对象
      */
     public function setCommonMetadata()
     {
@@ -483,7 +483,7 @@ class Common_Metadata extends Qwin_Application_Metadata
     /**
      * 设置高级的元数据,包括编号,创建时间,修改时间,分配者,是否删除,操作
      *
-     * @return Common_Metadata 当前对象
+     * @return Com_Metadata 当前对象
      */
     public function setAdvancedMetadata()
     {
@@ -537,7 +537,7 @@ class Common_Metadata extends Qwin_Application_Metadata
     /**
      * 设置创建域,包括创建人和创建时间
      *
-     * @return Common_Metadata 当前对象
+     * @return Com_Metadata 当前对象
      */
     public function setCreatedData()
     {
@@ -577,7 +577,7 @@ class Common_Metadata extends Qwin_Application_Metadata
     /**
      * 设置修改域,包括修改人和修改时间
      *
-     * @return Common_Metadata 当前对象
+     * @return Com_Metadata 当前对象
      */
     public function setModifiedData()
     {
@@ -739,7 +739,7 @@ class Common_Metadata extends Qwin_Application_Metadata
         $module = $this->getModule();
         if (!isset($this->controller)) {
             // TODO　不重复加载
-            $this->controller = Common_Controller::getByModule($module);
+            $this->controller = Com_Controller::getByModule($module);
             $this->forbiddenAction = $this->controller->getForbiddenActions();
         }
         // 不为禁用的行为设置链接

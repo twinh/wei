@@ -23,7 +23,7 @@
  * @since       2011-01-14 10:41:58
  */
 
-class Common_Member_Model_Setting
+class Com_Member_Model_Setting
 {
     /**
      * 风格目录

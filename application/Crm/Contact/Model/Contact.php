@@ -23,6 +23,6 @@
  * @since       2011-01-05 17:58:56
  */
 
-class Crm_Contact_Model_Contact extends Common_Model
+class Crm_Contact_Model_Contact extends Com_Model
 {
 }

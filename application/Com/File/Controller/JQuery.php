@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  File
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-05-27 07:56:33
  */
 
-class Common_File_Controller_JQuery extends Qwin_Application_Controller
+class Com_File_Controller_JQuery extends Qwin_Application_Controller
 {
     public function actionAjaxUpload()
     {

@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Member
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-05-24 07:52:43
  */
 
-class Common_Member_Metadata_Log extends Qwin_Application_Metadata
+class Com_Member_Metadata_Log extends Qwin_Application_Metadata
 {
     public function  __construct()
     {

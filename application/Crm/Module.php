@@ -23,6 +23,6 @@
  * @since       2011-01-04 23:10:19
  */
 
-class Crm_Module extends Common_Module
+class Crm_Module extends Com_Module
 {
 }

@@ -23,7 +23,7 @@
  * @since       2011-01-05 16:08:05
  */
 
-class Crm_Potential_Metadata_Potential extends Common_Metadata
+class Crm_Potential_Metadata_Potential extends Com_Metadata
 {
     public function setMetadata()
     {
@@ -81,7 +81,7 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Common_Helper_Option', 'get'),
+                            array('Com_Helper_Option', 'get'),
                             'potential-status',
                         ),
                     ),
@@ -91,7 +91,7 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'sanitise'),
+                            array('Com_Helper_Option', 'sanitise'),
                             'potential-status',
                         ),
                         'view' => 'list',
@@ -101,7 +101,7 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Common_Helper_Option', 'get'),
+                            array('Com_Helper_Option', 'get'),
                             'potential-type',
                         ),
                     ),
@@ -111,7 +111,7 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'sanitise'),
+                            array('Com_Helper_Option', 'sanitise'),
                             'potential-type',
                         ),
                         'view' => 'list',
@@ -130,7 +130,7 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Common_Helper_Option', 'get'),
+                            array('Com_Helper_Option', 'get'),
                             'customer-source',
                         ),
                     ),
@@ -140,7 +140,7 @@ class Crm_Potential_Metadata_Potential extends Common_Metadata
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'sanitise'),
+                            array('Com_Helper_Option', 'sanitise'),
                             'customer-source',
                         ),
                         'view' => 'list',

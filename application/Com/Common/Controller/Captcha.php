@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Common
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-08-27 10:40:28
  */
 
-class Common_Common_Controller_Captcha extends Qwin_Application_Controller
+class Com_Com_Controller_Captcha extends Qwin_Application_Controller
 {
     public function actionIndex()
     {

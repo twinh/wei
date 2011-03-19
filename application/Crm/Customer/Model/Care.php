@@ -23,6 +23,6 @@
  * @since       2011-01-18 11:49:46
  */
 
-class Crm_Customer_Model_Care extends Common_Model
+class Crm_Customer_Model_Care extends Com_Model
 {
 }

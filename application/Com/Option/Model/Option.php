@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Option
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,10 +25,10 @@
  * @since       2010-06-10 08:31:30
  */
 
-class Common_Option_Model_Option extends Common_Model
+class Com_Option_Model_Option extends Com_Model
 {
     public function postSave($event)
     {
-        return Qwin::call('Common_Helper_Option')->setCache($this);
+        return Qwin::call('Com_Helper_Option')->setCache($this);
     }
 }

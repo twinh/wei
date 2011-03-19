@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  ActionController
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-08-26 15:31:26
  */
 
-class Common_ActionController extends Common_Controller
+class Com_ActionController extends Com_Controller
 {
     /**
      * 控制器默认首页,Common命名空间的默认首页是数据列表
@@ -36,7 +36,7 @@ class Common_ActionController extends Common_Controller
     {
         $request = $this->getRequest();
         if ($request->isJson()) {
-            $service = new Common_Service_JsonList();
+            $service = new Com_Service_JsonList();
             return $service->process(array(
                 'module'=> $this->_module,
                 'list'  => $request->getListField(),
@@ -46,7 +46,7 @@ class Common_ActionController extends Common_Controller
                 'limit' => $request->getLimit(),
             ));
         } else {
-            $service = new Common_Service_List();
+            $service = new Com_Service_List();
             return $service->process(array(
                 'module'=> $this->_module,
                 'list'  => $request->getListField(),
@@ -62,7 +62,7 @@ class Common_ActionController extends Common_Controller
      */
     public function actionView()
     {
-        $service = new Common_Service_View();
+        $service = new Com_Service_View();
         return $service->process(array(
             'asc'       => $this->_asc,
             'id'        => $this->_request->getPrimaryKeyValue($this->_asc),
@@ -77,14 +77,14 @@ class Common_ActionController extends Common_Controller
     public function actionAdd()
     {
         if (!$this->_request->isPost()) {
-            $service = new Common_Service_Form();
+            $service = new Com_Service_Form();
             return $service->process(array(
                 'asc'       => $this->_asc,
                 'id'        => $this->_request->getPrimaryKeyValue($this->_asc),
                 'initalData'=> $this->_request->getInitialData(),
             ));
         } else {
-            $service = new Common_Service_Add();
+            $service = new Com_Service_Add();
             return $service->process(array(
                 'asc'       => $this->_asc,
                 'data'      => $_POST,
@@ -101,16 +101,16 @@ class Common_ActionController extends Common_Controller
     public function actionEdit()
     {
         if (!$this->_request->isPost()) {
-            $service = new Common_Service_View();
+            $service = new Com_Service_View();
             return $service->process(array(
                 'module'    => $this->_module,
                 'id'        => $this->_request->getPrimaryKeyValue($this->_module),
                 'asAction'  => 'edit',
                 'isView'    => false,
-                'viewClass' => 'Common_View_Edit',
+                'viewClass' => 'Com_View_Edit',
             ));
         } else {
-            $service = new Common_Service_Edit();
+            $service = new Com_Service_Edit();
             return $service->process(array(
                 'module'    => $this->_module,
                 'data'      => $_POST,
@@ -126,7 +126,7 @@ class Common_ActionController extends Common_Controller
      */
     public function actionDelete()
     {
-        $service = new Common_Service_Delete();
+        $service = new Com_Service_Delete();
         return $service->process(array(
             'asc' => $this->_asc,
             'data' => array(

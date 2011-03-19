@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Email
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-09-20 10:37:51
  */
 
-class Common_Email_Controller_Email extends Common_ActionController
+class Com_Email_Controller_Email extends Com_ActionController
 {
     /**
      * post操作后的地址

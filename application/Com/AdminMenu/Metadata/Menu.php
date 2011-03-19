@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  AdminMenu
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -24,7 +24,7 @@
  * @since       2010-05-25 08:00:36
  */
 
-class Common_AdminMenu_Metadata_Menu extends Common_Metadata
+class Com_AdminMenu_Metadata_Menu extends Com_Metadata
 {
     public function setMetadata()
     {

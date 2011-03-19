@@ -25,6 +25,6 @@
  * @since       2010-12-07 17:13:42
  */
 
-class Common_Config_Model_Group extends Common_Model
+class Com_Config_Model_Group extends Com_Model
 {
 }

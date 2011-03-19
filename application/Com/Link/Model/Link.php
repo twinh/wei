@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Link
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,6 +25,6 @@
  * @since       2010-06-17 09:51:50
  */
 
-class Common_Link_Model_Link extends Common_Model
+class Com_Link_Model_Link extends Com_Model
 {
 }

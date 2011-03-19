@@ -25,7 +25,7 @@
  * @since       2010-09-20 17:09:38
  */
 
-class Common_Email_Language_Zhcn extends Common_Language_Zhcn
+class Com_Email_Language_Zhcn extends Com_Language_Zhcn
 {
     public function  __construct()
     {

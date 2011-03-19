@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Article
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-5-26 22:52:49
  */
 
-class Common_Article_Metadata_Article extends Common_Metadata
+class Com_Article_Metadata_Article extends Com_Metadata
 {
     public function setMetadata()
     {
@@ -90,7 +90,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
                     'form' => array(
                         '_type' => 'checkbox',
                         '_resourceGetter' => array(
-                            array('Common_Helper_Option', 'get'),
+                            array('Com_Helper_Option', 'get'),
                             'font-style',
                         ),
                     ),
@@ -106,7 +106,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
                     'form' => array(
                         '_type' => 'radio',
                         '_resourceGetter' => array(
-                            array('Common_Helper_Option', 'get'),
+                            array('Com_Helper_Option', 'get'),
                             'font-color',
                         ),
                         '_value' => 'NULL',
@@ -196,7 +196,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Common_Helper_Option', 'get'),
+                            array('Com_Helper_Option', 'get'),
                             'yes-or-no',
                         ),
                     ),
@@ -208,7 +208,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'sanitise'),
+                            array('Com_Helper_Option', 'sanitise'),
                             'yes-or-no',
                         ),
                     ),
@@ -220,7 +220,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Common_Helper_Option', 'get'),
+                            array('Com_Helper_Option', 'get'),
                             'yes-or-no',
                         ),
                     ),
@@ -232,7 +232,7 @@ class Common_Article_Metadata_Article extends Common_Metadata
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'sanitise'),
+                            array('Com_Helper_Option', 'sanitise'),
                             'yes-or-no',
                         ),
                     ),
@@ -294,9 +294,9 @@ class Common_Article_Metadata_Article extends Common_Metadata
                     ),
                 ),
                 'category' => array(
-                    'name' => 'Common_Category_Model_Category',
+                    'name' => 'Com_Category_Model_Category',
                     'alias' => 'category',
-                    'metadata' => 'Common_Category_Metadata_Category',
+                    'metadata' => 'Com_Category_Metadata_Category',
                     'local' => 'category_id',
                     'foreign' => 'id',
                     'type' => 'view',

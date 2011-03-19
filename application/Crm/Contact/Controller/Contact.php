@@ -23,6 +23,6 @@
  * @since       2011-01-05 17:56:46
  */
 
-class Crm_Contact_Controller_Contact extends Common_ActionController
+class Crm_Contact_Controller_Contact extends Com_ActionController
 {
 }

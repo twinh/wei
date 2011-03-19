@@ -25,7 +25,7 @@
  * @since       2011-01-04 19:57:49
  */
 
-class Common_Email_Widget_ListTab extends Common_Widget
+class Com_Email_Widget_ListTab extends Com_Widget
 {
     public function render($param, $view)
     {

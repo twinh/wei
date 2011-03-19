@@ -23,7 +23,7 @@
  * @since       2011-01-05 00:08:51
  */
 
-class Crm_Company_Metadata_Company extends Common_Metadata
+class Crm_Company_Metadata_Company extends Com_Metadata
 {
     public function setMetadata()
     {
@@ -81,13 +81,13 @@ class Crm_Company_Metadata_Company extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Common_Helper_Option', 'get'),
+                            array('Com_Helper_Option', 'get'),
                             'company-industry',
                         ),
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'sanitise'),
+                            array('Com_Helper_Option', 'sanitise'),
                             'company-industry',
                         ),
                         'view' => 'list',
@@ -105,13 +105,13 @@ class Crm_Company_Metadata_Company extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Common_Helper_Option', 'get'),
+                            array('Com_Helper_Option', 'get'),
                             'company-nature',
                         ),
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'sanitise'),
+                            array('Com_Helper_Option', 'sanitise'),
                             'company-nature',
                         ),
                         'view' => 'list'
@@ -129,17 +129,17 @@ class Crm_Company_Metadata_Company extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Common_Helper_Option', 'get'),
+                            array('Com_Helper_Option', 'get'),
                             'company-size',
                         ),
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'sanitise'),
+                            array('Com_Helper_Option', 'sanitise'),
                             'company-size',
                         ),
                         'view' => array(
-                            array('Common_Helper_Option', 'sanitise'),
+                            array('Com_Helper_Option', 'sanitise'),
                             'company-size',
                         )
                     ),

@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Member
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -26,7 +26,7 @@
  * @todo        区分theme和style
  */
 
-class Common_Member_Controller_Setting extends Common_Controller
+class Com_Member_Controller_Setting extends Com_Controller
 {
     /**
      * 用户中心
@@ -78,7 +78,7 @@ class Common_Member_Controller_Setting extends Common_Controller
     {
         if(empty($_POST))
         {
-            $model = Common_Model::getByAsc($this->_asc);
+            $model = Com_Model::getByAsc($this->_asc);
             $this->_model = Qwin::call($model);
             $styles = $this->_model->getStyles();
             $path = $this->_model->getPath();

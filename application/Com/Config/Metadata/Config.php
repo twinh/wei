@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Config
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-12-07 17:31:48
  */
 
-class Common_Config_Metadata_Config extends Common_Metadata
+class Com_Config_Metadata_Config extends Com_Metadata
 {
     public function setMetadata()
     {
@@ -72,7 +72,7 @@ class Common_Config_Metadata_Config extends Common_Metadata
                         '_type' => 'select',
                         '_value' => 1,
                         '_resourceGetter' => array(
-                            array('Common_Helper_Option', 'get'),
+                            array('Com_Helper_Option', 'get'),
                             'yes-or-no',
                         ),
                     ),
@@ -81,7 +81,7 @@ class Common_Config_Metadata_Config extends Common_Metadata
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'sanitise'),
+                            array('Com_Helper_Option', 'sanitise'),
                             'yes-or-no',
                         ),
                         'view' => 'list',
@@ -111,7 +111,7 @@ class Common_Config_Metadata_Config extends Common_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Common_Helper_Option', 'get'),
+                            array('Com_Helper_Option', 'get'),
                             'form-type',
                         ),
                     ),
@@ -120,7 +120,7 @@ class Common_Config_Metadata_Config extends Common_Metadata
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Common_Helper_Option', 'sanitise'),
+                            array('Com_Helper_Option', 'sanitise'),
                             'form-type',
                         ),
                         'view' => 'list',

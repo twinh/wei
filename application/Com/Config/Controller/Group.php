@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
+ * @package     Com
  * @subpackage  Config
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -25,7 +25,7 @@
  * @since       2010-12-07 17:04:33
  */
 
-class Common_Config_Controller_Group extends Common_ActionController
+class Com_Config_Controller_Group extends Com_ActionController
 {
     
 }

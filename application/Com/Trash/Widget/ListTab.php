@@ -23,7 +23,7 @@
  * @since       2011-01-09 15:35:03
  */
 
-class Common_Trash_Widget_ListTab extends Common_Widget
+class Com_Trash_Widget_ListTab extends Com_Widget
 {
     public function render($param, $view)
     {
