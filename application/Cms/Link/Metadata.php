@@ -25,7 +25,7 @@
  * @since       2010-06-17 09:54:00
  */
 
-class Com_Link_Metadata_Link extends Com_Metadata
+class Cms_Link_Metadata extends Com_Metadata
 {
     public function  setMetadata()
     {
