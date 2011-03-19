@@ -37,7 +37,7 @@ if ($request->isPopup()) :
     padding: 0;
 }
 </style>
-<?php require $this->decodePath('<resource><theme>/<defaultPackage>/element/basic/jqgird<suffix>') ?>
+<?php require $this->decodePath('<root>common/basic/jqgird<suffix>') ?>
 <?php
 else :
 ?>
@@ -47,7 +47,7 @@ else :
     </div>
     <div class="ui-form-content ui-box-content ui-widget-content">
         <div class="ui-operation-field">
-        <?php require $this->decodePath('<resource><theme>/<defaultPackage>/element/basic/jqgird<suffix>') ?>
+        <?php require $this->decodePath('<root>common/basic/jqgird<suffix>') ?>
         </div>
     </div>
 </div>
