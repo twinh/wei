@@ -48,34 +48,155 @@ class Qwin_Application_Language implements ArrayAccess
     protected $_appendedFileList = array();
 
     /**
-     * 命名空间列表
-     *
-     * @var array
-     * @see Qwin_Application_Manager ::getPackageList
+     * 模块管理对象
+     * @var Qwin_Application_Module
      */
-    protected $_packageList;
-
-    /**
-     * 当前命名空间所在的路径,用于定位语言文件
-     *
-     * @var string
-     */
-    protected $_packagePath;
+    protected $_module;
 
     /**
      * 初始化路径,加载数据
      */
-    public function  __construct(array $asc = null)
+    public function  __construct($module = null)
     {
-        if (null == $asc) {
-            $asc = Qwin::config('asc');
+        if (null == $module) {
+            $module = Qwin::config('module');
         }
-        $this->_packageList = Qwin_Application_Package::getList();
-        $this->_packagePath = $this->_packageList[$asc['package']];
 
-        // 获取名称,同时加载当前命名空间的语言文件
-        $this->_loadData();
-        $this->appendByAsc($asc);
+        $this->_module = Qwin::call('Qwin_Application_Module');
+        
+        // 初始化语言名称
+        $this->_getName($module);
+
+        // 逐层加载语言
+        $this->appendByModule($module);
+    }
+
+        /**
+     * 附加文件数据
+     *
+     * @param string $file 文件路径
+     * @example $file = $this->isExist('zh-CN');
+     *          if (!$file) {
+     *              $this->_appendFile($file);
+     *          }
+     */
+    protected function _appendFile($file)
+    {
+        if (!isset($this->_appendedFileList[$file])) {
+            $this->append((array)require $file);
+            $this->_appendedFileList[$file] = true;
+        }
+        return $this;
+    }
+
+    /**
+     * 获取当前的语言名称
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
+
+    /**
+     * 检查语言是否存在
+     *
+     * @param string $name 语言名称
+     * @param string $module 模块标识
+     * @return string 
+     */
+    public function isExists($name, $module)
+    {
+        $root = $this->_module->getRoot($module);
+        $path = $this->_module->getPath($module);
+        $file = $path . $root . '/' . 'Language/' . $name . '.php';
+        if (is_file($file)) {
+            return $file;
+        }
+        return false;
+    }
+
+    /**
+     * 加载语言数据
+     *
+     * @return Qwin_Application_Language 当前对象
+     */
+    public function _getName($module)
+    {
+        /* @var $request Common_Request */
+        $request = Qwin::call('-request');
+
+        /* @var $session Qwin_Session */
+        $session = Qwin::call('-session');
+
+        // 用户请求
+        $name = $request['lang'];
+        $this->_name = &$name;
+        if (null != $name && ($file = $this->isExists($name, $module))) {
+            $session['lang'] = $name;
+            return $name;
+        }
+
+        // 会话中用户的配置
+        $name = $session['lang'];
+        if (null != $name && ($file = $this->isExists($name, $module))) {
+            return $name;
+        }
+
+        // 全局配置
+        $name = Qwin::config('language');
+        if (null != $name && ($file = $this->isExists($name, $module))) {
+            $session['lang'] = $name;
+            return $name;
+        }
+
+        // 构建语言文件路径
+        $root = $this->_module->getRoot($module);
+        $path = $this->_module->getPath($module);
+        $file = $path . $root . '/' . 'Language/' . $name . '.php';
+
+        require_once 'Qwin/Application/Language/Exception.php';
+        throw new Qwin_Application_Language_Exception('Language file "' . $file . '" not found.');
+    }
+
+    /**
+     * 根据模块标识加载语言
+     *
+     * @param array $module 模块标识
+     * @return Qwin_Application_Language|false 当前对象|失败
+     */
+    public function appendByModule($module)
+    {
+        $path = $this->_module->getPath($module);
+        if (false === $path) {
+            return false;
+        }
+
+        // 逐层加载模块
+        $modules = explode('/', $module);
+        foreach ($modules as $module) {
+            $path .= $module . '/';
+            $file = $path . '/Language/' . $this->_name . '.php';
+            if (is_file($file)) {
+                $this->_appendFile($file);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * 根据文件路径加载语言
+     *
+     * @param string $package
+     * @return Qwin_Application_Language|false 当前对象|失败
+     */
+    public function appendByFile($file)
+    {
+        if (is_file($file)) {
+            return $this->_appendFile($file);
+        }
+        return false;
     }
 
     /**
@@ -174,132 +295,5 @@ class Qwin_Application_Language implements ArrayAccess
     {
         $this->_data += $data;
         return $this;
-    }
-
-    /**
-     * 附加文件数据
-     *
-     * @param string $file 文件路径
-     * @example $file = $this->isExist('zh-CN');
-     *          if (!$file) {
-     *              $this->_appendFile($file);
-     *          }
-     */
-    protected function _appendFile($file)
-    {
-        if (!isset($this->_appendedFileList[$file])) {
-            $this->append((array)require $file);
-            $this->_appendedFileList[$file] = true;
-        }
-        return $this;
-    }
-    
-    /**
-     * 获取当前的语言名称
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->_name;
-    }
-
-    /**
-     * 加载语言数据
-     *
-     * @return Qwin_Application_Language 当前对象
-     */
-    public function _loadData()
-    {
-        // 用户请求
-        /* @var $request Common_Request */
-        $request = Qwin::call('-request');
-        $name = $request['lang'];
-        $this->_name = &$name;
-        if (null != $name && ($file = $this->isExist($name))) {
-            $session['lang'] = $name;
-            return $this->_appendFile($file);
-        }
-
-        // 会话中用户的配置
-        /* @var $session Qwin_Session */
-        $session = Qwin::call('-session');
-        $name = $session['lang'];
-        if (null != $name && ($file = $this->isExist($name))) {
-            return $this->_appendFile($file);
-        }
-
-        // 全局配置
-        $name = Qwin::config('language');
-        if (null != $name && ($file = $this->isExist($name))) {
-            $session['lang'] = $name;
-            return $this->_appendFile($file);
-        }
-
-        throw new Qwin_Exception('Language file "' . $name . '.php" not found in path "'
-                                . $this->_packagePath . DIRECTORY_SEPARATOR . 'Language".' );
-    }
-
-    /**
-     * 根据应用结构配置加载语言
-     *
-     * @param array $asc 应用结构配置
-     * @return Qwin_Application_Language|false 当前对象|失败
-     */
-    public function appendByAsc(array $asc)
-    {
-        if (isset($this->_packageList[$asc['package']])) {
-            $file = $this->_packageList[$asc['package']] . '/' . $asc['module'] . '/Language/' . $this->_name . '.php';
-            if (is_file($file)) {
-                return $this->_appendFile($file);
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 根据命名空间加载语言
-     *
-     * @param string $package
-     * @return Qwin_Application_Language|false 当前对象|失败
-     */
-    public function appendByPackage($package)
-    {
-        if (isset($this->_packageList[$package])) {
-            $file = $this->_packageList[$package] . '/Language/' . $this->_name . '.php';
-            if (is_file($file)) {
-                return $this->_appendFile($file);
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 根据文件路径加载语言
-     *
-     * @param string $package
-     * @return Qwin_Application_Language|false 当前对象|失败
-     */
-    public function appendByFile($file)
-    {
-        if (is_file($file)) {
-            return $this->_appendFile($file);
-        }
-        return false;
-    }
-
-    /**
-     * 检查语言是否存在
-     *
-     * @param string $name 语言名称,标准格式
-     * @return bool|string 语言存在时,返回路径,不存在时,返回false
-     */
-    public function isExist($name)
-    {
-        $file = $this->_packagePath . '/Language/' . $name . '.php';
-        if (is_file($file)) {
-            return $file;
-        }
-        return false;
     }
 }

@@ -80,13 +80,18 @@ class Qwin_Metadata
      *
      * @param string $class 类名
      * @return object 元数据对象
+     * @todo 当元数据不存在,是否应该加载父元数据?
      */
     public function get($class)
     {
-        $class = strtolower($class);
+        $lower = strtolower($class);
         
-        if (isset($this->_objects[$class])) {
-            return $this->_objects[$class];
+        if (isset($this->_objects[$lower])) {
+            return $this->_objects[$lower];
+        }
+
+        if (!class_exists($class)) {
+            throw new Qwin_Application_Metadata_Exception('Class "' . $class . '" not found.');
         }
 
         // 初始化并设置元数据

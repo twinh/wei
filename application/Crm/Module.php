@@ -1,6 +1,6 @@
 <?php
 /**
- * Customer
+ * Package
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -20,9 +20,9 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-04 23:15:49
+ * @since       2011-01-04 23:10:19
  */
 
-class Crm_Customer_Model_Customer extends Common_Model
+class Crm_Module extends Common_Module
 {
 }

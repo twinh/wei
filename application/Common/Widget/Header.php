@@ -30,7 +30,8 @@ class Common_Widget_Header extends Common_Widget
     public function render($param, $view)
     {
         // 构建页眉导航
-        $asc = $view['asc'];
+        $module = $view['module'];
+        $action = Qwin::config('action');
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
 
@@ -40,7 +41,7 @@ class Common_Widget_Header extends Common_Widget
         $icon = Qwin::config('resource') . 'image/' . $view['meta']['page']['icon'] . '_32.png';
         !is_file($icon) && $icon = null;
 
-        $header .= '<a href="' . $url->url(array_diff_key($asc, array('action' => ''))) . '">' . $lang->t($view['meta']['page']['title']) . '</a>';
+        $header .= '<a href="' . $url->url(array()) . '">' . $lang->t($view['meta']['page']['title']) . '</a>';
 
         /*// 如果模块和控制器相同,不显示模块
         if ($asc['module'] != $asc['controller']) {
@@ -51,12 +52,12 @@ class Common_Widget_Header extends Common_Widget
         $header .= '<a href="' . $url->url(array_diff_key($asc, array('action' => ''))) . '">' . $lang->t('LBL_CONTROLLER_' . strtoupper($asc['controller'])) . '</a>&nbsp;&raquo;&nbsp;';
         */
         // 行为 todo 允许自定义
-        $actionLabel = 'ACT_' . strtoupper($asc['action']);
+        $actionLabel = 'ACT_' . strtoupper($action);
         $actionHeader = $lang->t($actionLabel);
         if ($actionLabel != $actionHeader) {
-            $header .= '&nbsp;&raquo;&nbsp;<a href="' . $url->url($_GET) . '">' . $lang->t('ACT_' . strtoupper($asc['action'])) . '</a>';
+            $header .= '&nbsp;&raquo;&nbsp;<a href="' . $url->url($_GET) . '">' . $lang->t('ACT_' . strtoupper($action)) . '</a>';
         }
         
-        require $view->decodePath('<resource><theme>/<defaultPackage>/element/widget/header<suffix>');
+        require $view->decodePath('<root>common/widget-header<suffix>');
     }
 }

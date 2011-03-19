@@ -20,7 +20,7 @@
  * limitations under the License.
  *
  * @package     Common
- * @subpackage  Package
+ * @subpackage  Module
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -29,11 +29,11 @@
  */
 
 /**
- * @see Qwin_Application_Package
+ * @see Qwin_Application_Module
  */
-require_once 'Qwin/Application/Package.php';
+require_once 'Qwin/Application/Module.php';
 
-class Common_Package extends Qwin_Application_Package
+class Common_Module extends Qwin_Application_Module
 {
     public function __construct()
     {
@@ -49,16 +49,9 @@ class Common_Package extends Qwin_Application_Package
         // 关闭魔术引用
         ini_set('magic_quotes_runtime', 0);
 
-        // 设置用户请求对象
-        $request = Qwin::call('Common_Request');
-        Qwin::set('-request', $request);
-
         // 设置语言类
         Qwin::setMap('-lang', 'Qwin_Application_Language');
-
-        // 打开缓冲区
-        ob_start();
-
+        
         /*if ($config['router']['enable']) {
             $router = Qwin::call('Qwin_Url_Router');
             $router->addList($config['router']['list']);

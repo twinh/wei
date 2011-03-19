@@ -39,11 +39,7 @@ class Qwin_Metadata_Element_Model extends Qwin_Metadata_Element_Driver
         'enabled' => true,
         'fieldMap' => array(),
         'list'  => array(),
-        'asc' => array(
-            /*'namespace' => null,
-            'module' => null,
-            'controller' => null,*/
-        ),
+        'module' => null,
     );
     
     /**

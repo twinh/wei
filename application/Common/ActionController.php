@@ -34,11 +34,11 @@ class Common_ActionController extends Common_Controller
      */
     public function actionIndex()
     {
-        $request = $this->request;
+        $request = $this->getRequest();
         if ($request->isJson()) {
             $service = new Common_Service_JsonList();
             return $service->process(array(
-                'asc'   => $this->_asc,
+                'module'=> $this->_module,
                 'list'  => $request->getListField(),
                 'order' => $request->getOrder(),
                 'where' => $request->getWhere(),
@@ -48,7 +48,7 @@ class Common_ActionController extends Common_Controller
         } else {
             $service = new Common_Service_List();
             return $service->process(array(
-                'asc'   => $this->_asc,
+                'module'=> $this->_module,
                 'list'  => $request->getListField(),
                 'popup' => $request['popup'],
             ));
@@ -65,7 +65,7 @@ class Common_ActionController extends Common_Controller
         $service = new Common_Service_View();
         return $service->process(array(
             'asc'       => $this->_asc,
-            'id'        => $this->request->getPrimaryKeyValue($this->_asc),
+            'id'        => $this->_request->getPrimaryKeyValue($this->_asc),
         ));
     }
 
@@ -76,19 +76,19 @@ class Common_ActionController extends Common_Controller
      */
     public function actionAdd()
     {
-        if (!$this->request->isPost()) {
+        if (!$this->_request->isPost()) {
             $service = new Common_Service_Form();
             return $service->process(array(
                 'asc'       => $this->_asc,
-                'id'        => $this->request->getPrimaryKeyValue($this->_asc),
-                'initalData'=> $this->request->getInitialData(),
+                'id'        => $this->_request->getPrimaryKeyValue($this->_asc),
+                'initalData'=> $this->_request->getInitialData(),
             ));
         } else {
             $service = new Common_Service_Add();
             return $service->process(array(
                 'asc'       => $this->_asc,
                 'data'      => $_POST,
-                'url'       => urldecode($this->request->post('_page')),
+                'url'       => urldecode($this->_request->post('_page')),
             ));
         }
     }
@@ -100,11 +100,11 @@ class Common_ActionController extends Common_Controller
      */
     public function actionEdit()
     {
-        if (!$this->request->isPost()) {
+        if (!$this->_request->isPost()) {
             $service = new Common_Service_View();
             return $service->process(array(
-                'asc'       => $this->_asc,
-                'id'        => $this->request->getPrimaryKeyValue($this->_asc),
+                'module'    => $this->_module,
+                'id'        => $this->_request->getPrimaryKeyValue($this->_module),
                 'asAction'  => 'edit',
                 'isView'    => false,
                 'viewClass' => 'Common_View_Edit',
@@ -112,9 +112,9 @@ class Common_ActionController extends Common_Controller
         } else {
             $service = new Common_Service_Edit();
             return $service->process(array(
-                'asc'       => $this->_asc,
+                'module'    => $this->_module,
                 'data'      => $_POST,
-                'url'       => urldecode($this->request->post('_page')),
+                'url'       => urldecode($this->_request->post('_page')),
             ));
         }
     }
@@ -130,7 +130,7 @@ class Common_ActionController extends Common_Controller
         return $service->process(array(
             'asc' => $this->_asc,
             'data' => array(
-                'primaryKeyValue' => $this->request->getPrimaryKeyValue($this->_asc),
+                'primaryKeyValue' => $this->_request->getPrimaryKeyValue($this->_asc),
             ),
         ));
     }

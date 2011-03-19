@@ -1,6 +1,6 @@
 <?php
- /**
- * Model
+/**
+ * Customer
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,31 +16,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  Application
+ * @package     Crm
+ * @subpackage  Customer
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-04-17 15:49:35
+ * @since       2011-01-04 22:54:41
  */
 
-/**
- * @see Doctrine_Record
- */
-require_once 'Doctrine/Record.php';
-
-abstract class Qwin_Application_Model extends Doctrine_Record
+class Crm_Customer_Controller extends Common_ActionController
 {
-    /**
-     * 根据模块获取模型对象
-     *
-     * @param string $module 模块标识
-     * @return Qwin_Application_Model 模型对象
-     */
-    public static function getByModule($module, $instanced = true)
-    {
-        $class = strtr($module, '/', '_') . '_Model';
-        return $instanced ? new $class : $class;
-    }
 }

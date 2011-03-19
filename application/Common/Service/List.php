@@ -32,12 +32,7 @@ class Common_Service_List extends Common_Service
      * @var array
      */
     protected $_option = array(
-        'asc'       => array(
-            'package' => null,
-            'module'    => null,
-            'controller'=> null,
-            'action'    => null,
-        ),
+        'module'    => null,
         'list'      => array(),
         'popup'     => false,
         'display'   => true,
@@ -53,8 +48,8 @@ class Common_Service_List extends Common_Service
     public function process(array $option = null)
     {
         // 初始配置
-        $option     = array_merge($this->_option, $option);
-        $meta       = Common_Metadata::getByAsc($option['asc']);
+        $option     = $option + $this->_option;
+        $meta       = Common_Metadata::getByModule($option['module']);
         $primaryKey = $meta['db']['primaryKey'];
 
         // 显示哪些域

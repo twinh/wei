@@ -32,12 +32,7 @@ class Common_Service_View extends Common_Service
      * @var array
      */
     protected $_option = array(
-        'asc'       => array(
-            'package'     => null,
-            'module'        => null,
-            'controller'    => null,
-            'action'        => null,
-        ),
+        'module'    => null,
         'id'        => null,
         'asAction'  => 'view',
         'isView'    => true,
@@ -67,11 +62,11 @@ class Common_Service_View extends Common_Service
         $app        = Qwin::call('-app');
         
         /* @var $meta Common_Metadata */
-        $meta       = Common_Metadata::getByAsc($option['asc']);
+        $meta       = Common_Metadata::getByModule($option['module']);
         $primaryKey = $meta['db']['primaryKey'];
 
         // 从模型获取数据
-        $query = $meta->getQuery(null, array('type' => array('db', 'view')));
+        $query = Common_Metadata::getQueryByModule($option['module'], array('type' => array('db', 'view')));
         $dbData = $query
             ->where($primaryKey . ' = ?', $option['id'])
             ->fetchOne();

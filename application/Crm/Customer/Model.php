@@ -1,6 +1,6 @@
 <?php
 /**
- * Default
+ * Customer
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -20,24 +20,9 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-04 10:58:17
+ * @since       2011-01-04 23:15:49
  */
 
-class Mini_Index_Controller_Index
+class Crm_Customer_Model extends Common_Model
 {
-    public function __construct()
-    {
-        echo '<p>加载了控制器</p>';
-    }
-
-    public function actionIndex()
-    {
-        echo '<p>加载了默认首页</p>';
-        echo '<p style="color: green;">该命名空间展示的是Qwin框架的基本加载流程.</p>';
-    }
-
-    public function  __destruct()
-    {
-        echo '<p>销毁了控制器</p>';
-    }
 }

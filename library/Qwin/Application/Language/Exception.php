@@ -1,8 +1,8 @@
 <?php
 /**
- * Customer
+ * Exception
  *
- * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Crm
- * @subpackage  Customer
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-04 22:54:41
+ * @since       2011-03-17 17:02:28
  */
 
-class Crm_Customer_Controller_Customer extends Common_ActionController
-{
+require_once 'Qwin/Exception.php';
+
+class Qwin_Application_Language_Exception extends Exception
+{   
 }

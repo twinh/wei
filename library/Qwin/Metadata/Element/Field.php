@@ -64,10 +64,10 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Driver
             'isReadonly' => 0,
             'isView' => 1,
         ),
-        'db' => array(
-            'type' => 'string',
-            'length' => null,
-        ),
+//        'db' => array(
+//            'type' => 'string',
+//            'length' => null,
+//        ),
 //        'sanitiser' => array(),
 //        'validator' => array(
 //            'rule' => array(),

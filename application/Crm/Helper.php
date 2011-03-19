@@ -27,11 +27,7 @@ class Crm_Helper
 {
     public static function sanitisePopupMember($value, $name, $viewName, $meta)
     {
-        $data = Common_Metadata::getQueryByAsc(array(
-                'package' => 'Common',
-                'module' => 'Member',
-                'controller' => 'Member',
-            ))
+        $data = Common_Metadata::getQueryByModule('Common/Member')
             ->select($viewName)
             ->where('id = ?', $value)
             ->fetchOne();

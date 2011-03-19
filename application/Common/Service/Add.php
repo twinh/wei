@@ -32,12 +32,7 @@ class Common_Service_Add extends Common_Service
      * @var array
      */
     protected $_option = array(
-        'asc' => array(
-            'package' => null,
-            'module' => null,
-            'controller' => null,
-            'action' => null,
-        ),
+        'module'    => '',
         'data'      => array(),
         'display'   => true,
         'url'       => null,
@@ -54,7 +49,7 @@ class Common_Service_Add extends Common_Service
         $option = array_merge($this->_option, $option);
 
         /* @var $meta Common_Metadata */
-        $meta   = Common_Metadata::getByAsc($option['asc']);
+        $meta   = Common_Metadata::getModule($option['module']);
         $id     = $meta['db']['primaryKey'];
 
         // 记录已经存在,加载错误视图
@@ -108,7 +103,7 @@ class Common_Service_Add extends Common_Service
         // 展示视图
         if ($option['display']) {
             if (!$option['url']) {
-                $option['url'] = Qwin::call('-url')->url($option['asc'], array('action' => 'Index'));
+                $option['url'] = Qwin::call('-url')->url($option['module'], array('action' => 'Index'));
             }
             return Qwin::call('-view')->success('MSG_OPERATE_SUCCESSFULLY', $option['url']);
         }
