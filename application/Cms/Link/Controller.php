@@ -25,6 +25,6 @@
  * @since       2010-06-17 09:50:16
  */
 
-class Com_Link_Controller_Link extends Com_ActionController
+class Cms_Link_Controller extends Com_ActionController
 {
 }
