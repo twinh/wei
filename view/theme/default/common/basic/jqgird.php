@@ -24,7 +24,7 @@
  */
 ?>
 <div class="ui-jqgrid-top">
-    <?php echo $this->loadWidget('Common_Widget_ListTab', array('asc' => $jqGrid['asc'], 'url' => $jqGrid['option']['url'])) ?>
+    <?php echo $this->loadWidget('Common_Widget_ListTab', array('module' => $jqGrid['module'], 'url' => $jqGrid['option']['url'])) ?>
 </div>
 <div class="clear"></div>
 <?php $jqGridWidget->render($jqGrid) ?>
@@ -58,7 +58,7 @@ jQuery(function($){
     }
 
     // 点击删除按钮
-    $('#action-<?php echo $jqGrid['ascId'] ?>-delete').click(function(){
+    $('#action-<?php echo $jqGrid['moduleId'] ?>-delete').click(function(){
         var keyList = new Array(),
             rowList = jqGridObj.jqGrid('getGridParam','selarrrow');
         if (rowList.length == 0) {
@@ -79,7 +79,7 @@ jQuery(function($){
     });
 
     // 点击复制按钮
-    $('#action-<?php echo $jqGrid['ascId'] ?>-copy').click(function(){
+    $('#action-<?php echo $jqGrid['moduleId'] ?>-copy').click(function(){
         var rowList = jqGridObj.jqGrid('getGridParam','selarrrow');
         if (rowList.length != 1) {
             alert(Qwin.Lang.MSG_CHOOSE_ONLY_ONE_ROW);
