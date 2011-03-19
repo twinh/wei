@@ -30,7 +30,7 @@ class Com_View_Add extends Com_View
     public function preDisplay()
     {
         parent::preDisplay();
-        $this->setElement('content', '<root>common/basic/form<suffix>');
+        $this->setElement('content', '<root>com/basic/form<suffix>');
 
         // 初始化变量,方便调用
         $primaryKey = $this->primaryKey;

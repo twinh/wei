@@ -120,7 +120,7 @@ class Com_Widget_ListTab extends Com_Widget
         $class = strtr($module, '/', '_') . '_Widget_ListTab';
         if(class_exists($class)) {
             $object = new $class;
-            $file = $view->decodePath('<root>common/widget-<action>-tab<suffix>');
+            $file = $view->decodePath('<root>com/widget-<action>-tab<suffix>');
             return $object->render(array(
                 'tab' => $tab,
                 'file' => $file,
@@ -145,7 +145,7 @@ class Com_Widget_ListTab extends Com_Widget
             $output .= Qwin_Util_JQuery::link($row['url'], $row['title'], $row['icon'], $row['class'], $row['target'], $row['id']);
         }
         if ($echo) {
-            require $view->decodePath('<root>common/basic/output<suffix>');
+            require $view->decodePath('<root>com/basic/output<suffix>');
         } else {
             return $output;
         }
