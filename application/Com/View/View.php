@@ -30,7 +30,7 @@ class Com_View_View extends Com_View
     public function  preDisplay()
     {
         parent::preDisplay();
-        $this->setElement('content', '<root>common/basic/view<suffix>');
+        $this->setElement('content', '<root>com/basic/view<suffix>');
 
         // 初始化变量,方便调用
         $primaryKey     = $this->primaryKey;

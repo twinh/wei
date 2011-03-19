@@ -58,6 +58,6 @@ class Com_Widget_Header extends Com_Widget
             $header .= '&nbsp;&raquo;&nbsp;<a href="' . $url->url($_GET) . '">' . $lang->t('ACT_' . strtoupper($action)) . '</a>';
         }
         
-        require $view->decodePath('<root>common/widget-header<suffix>');
+        require $view->decodePath('<root>com/widget-header<suffix>');
     }
 }

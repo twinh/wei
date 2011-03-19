@@ -36,7 +36,6 @@ class Com_Widget_NavigationBar extends Com_Widget
         $queryString = empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING'];
         $pageUrl = basename($_SERVER['PHP_SELF']) . $queryString;
 
-        // '<root><module>/layout-<action><suffix>',
-        require $view->decodePath('<root>common/widget-navigation-bar<suffix>');
+        require $view->decodePath('<root>com/widget-navigation-bar<suffix>');
     }
 }

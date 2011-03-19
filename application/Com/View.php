@@ -132,7 +132,7 @@ class Com_View extends Qwin_Application_View
                 '<root><module>/layout-<action><suffix>',
                 '<root><rootModule>/layout-<action><suffix>',
                 '<root><rootModule>/layout<suffix>',
-                '<root>common/layout<suffix>',
+                '<root>com/layout<suffix>',
             ));
         }
 
@@ -142,7 +142,7 @@ class Com_View extends Qwin_Application_View
                 '<root><module>/content-<action><suffix>',
                 '<root><rootModule>/content-<action><suffix>',
                 '<root><rootModule>/content<suffix>',
-                '<root>common/content-<action><suffix>',
+                '<root>com/content-<action><suffix>',
             ));
         }
 
@@ -152,7 +152,7 @@ class Com_View extends Qwin_Application_View
                 '<root><module>/sidebar-<action><suffix>',
                 '<root><rootModule>/sidebar-<action><suffix>',
                 '<root><rootModule>/sidebar<suffix>',
-                '<root>common/sidebar<suffix>',
+                '<root>com/sidebar<suffix>',
             ));
         }
 
@@ -162,7 +162,7 @@ class Com_View extends Qwin_Application_View
                 '<root><module>/header-<action><suffix>',
                 '<root><rootModule>/header-<action><suffix>',
                 '<root><rootModule>/header<suffix>',
-                '<root>common/header<suffix>',
+                '<root>com/header<suffix>',
             ));
         }
 
@@ -243,8 +243,8 @@ class Com_View extends Qwin_Application_View
     public function displayInfo(array $options = array())
     {
         $options = $options + $this->_infoOptions;
-        $this->setElement('layout', '<root>common/layout<suffix>');
-        $this->setElement('content', '<root>common/basic/info<suffix>');
+        $this->setElement('layout', '<root>com/layout<suffix>');
+        $this->setElement('content', '<root>com/basic/info<suffix>');
 
         $title = $options['title'];
         $url = $options['url'];
