@@ -31,7 +31,7 @@
 
 class Qwin
 {
-    const VERSION = '0.7.0';
+    const VERSION = '0.7.9';
 
     /**
      * 全局配置数组
@@ -197,7 +197,7 @@ class Qwin
         }
 
         // 没有找到
-        return false;
+        return null;
     }
 
     /**
@@ -225,6 +225,8 @@ class Qwin
      * @param string $name 类名
      * @param null|array $param 参数
      * @return object 实例化的对象
+     * @todo 是否应该可以加载单例类 getInstance
+     * @todo 是否应该实现类替换 Qwin_Request -> Common_Request
      */
     protected static function _instanceClass($name, $param = null)
     {
@@ -376,6 +378,13 @@ class Qwin
             }
         }
         return false;
+    }
+
+    public static function callByArray($array)
+    {
+        $array[0][0] = Qwin::call($array[0][0]);
+        $callback = array_shift($array);
+        return call_user_func_array($callback, $array);
     }
 
     /**

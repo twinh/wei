@@ -35,7 +35,6 @@ class Common_View_List extends Common_View
         $request    = Qwin::call('-request');
         $lang       = Qwin::call('-lang');
         $url        = Qwin::call('-url');
-        $asc        = Qwin::config('asc');
 
         /* @var $jqGridWidget JqGrid_Widget */
         $jqGridWidget   = $this->widget->get('jqgrid');
@@ -62,8 +61,8 @@ class Common_View_List extends Common_View
         }
 
         $jqGrid = array(
-            'asc'       => $asc,
-            'ascId'     => strtolower(implode('-', $asc)),
+            'module'    => $this->module,
+            'moduleId'  => strtr($this->module, '/', '_'),
             'meta'      => $meta,
             'layout'    => $this->list,
             'option'    => $option,

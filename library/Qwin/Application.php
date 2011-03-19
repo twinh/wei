@@ -44,9 +44,7 @@ class Qwin_Application
      * 配置选项
      * @var array
      */
-    protected $_option = array(
-        
-    );
+    protected $_option = array();
 
     /**
      * 视图的实例化对象
@@ -54,12 +52,6 @@ class Qwin_Application
      */
     protected $_view;
     
-    /**
-     * 命名空间的实例化对象
-     * @var Qwin_Application_Package
-     */
-    protected $_package;
-
     /**
      * 模块的实例化对象
      * @var Qwin_Application_Module
@@ -100,10 +92,9 @@ class Qwin_Application
 
     /**
      * 启动应用程序
-     * 本方法定义了应用程序的加载流程,按顺序为命名空间,模块,控制器,行为.
      * 
      * @param array $config 配置选项
-     * @return Qwin_Application_Startup 当前对象
+     * @return Qwin_Application 当前对象
      */
     public function startup(array $config)
     {
@@ -130,83 +121,65 @@ class Qwin_Application
         require_once $config['resource'] . '/library/Qwin.php';
         Qwin::setOption($config['Qwin']);
         Qwin::config($config);
+
+        // 设置应用启动钩子
+        Qwin::hook('appStartup');
         
         // 加载Qwin函数库
+        // TODO 如何合法使用?
         require_once $config['resource'] . '/library/function/qwin.php';
 
         // 注册当前类
         Qwin::set('-app', $this);
 
-        // 跳转到默认首页
-        if (empty($_SERVER['QUERY_STRING'])) {
-            header('HTTP/1.1 301 Moved Permanently');
-            header('location: ' . $config['index']);
-        }
-        // 启动Url路由
-        /*$router = null;
-        if ($config['router']['enable']) {
-            $router = Qwin::call('Qwin_Url_Router');
-            $router->add($config['router']['list']);
-        }
-        $url = Qwin::call('-url', $router);*/
+        // todo启动Url路由
 
         // 加载视图
-        $this->_view = new Qwin_Application_View();
-        Qwin::set('-view', $this->_view);
-        
-        // 通过配置数据和Url参数初始化系统配置(包括命名空间,模块,控制器,行为等)
-        if (empty($_SERVER['QUERY_STRING'])) {
-            //$_GET = $url->parse($config['index']['url']);
-        }
-        foreach ($config['defaultAsc'] as $name => $value) {
-            $asc[$name] = isset($_GET[$name]) ? $_GET[$name] :  $value;
-            $asc[$name] = basename(str_replace('_', '', $asc[$name]));
-        }
-        
-        Qwin::config('asc', $asc);
+        $this->_view = Qwin::call($config['initClasses']['view']);
 
-        // 检查命名空间是否存在,存在则加载
-        $packageList = Qwin_Application_Package::getList($config['Qwin']['autoloadPath']);
-        if (!isset($packageList[$asc['package']])) {
-            return $this->_onPackageNotExists($asc);
+        // 初始化请求
+        $request = Qwin::call($config['initClasses']['request']);
+
+        // 获取模块和行为
+        $module = $request->getModule();
+        $action = $request->getAction();
+        Qwin::config('module', $module);
+        Qwin::config('action', $action);
+
+        // 逐层加载模块类
+        if (false === Qwin_Application_Module::load($module)) {
+            throw new Qwin_Application_Exception('Module "' . $module . '" not found.');
         }
-        Qwin_Application_Package::getByAsc($asc);
 
-        // 加载模块
-        Qwin_Application_Module::getByAsc($asc);
-
-        // 加载控制器
-        $controller = Qwin_Application_Controller::getByAsc($asc);
-        if (null == $controller) {
-            return $this->_onControllerNotExists($asc);
+        // 加载最终模块的控制器
+        $controller = Qwin_Application_Controller::getByModule($module, true, array($config));
+        if (!$controller) {
+            throw new Qwin_Application_Exception('Controller in module "' . $module . '" not found.');
         }
 
         // 执行行为
-        $action = 'action' . $asc['action'];
-        if (method_exists($controller, $action)
-            && !in_array(strtolower($asc['action']), $controller->getForbiddenAction())) {
-            call_user_func_array(
-                array($controller, $action),
-                array(&$asc, &$config)
-            );
+        $actionName = 'action' . $action;
+        if (method_exists($controller, $actionName)
+            && !in_array(strtolower($action), $controller->getForbiddenActions())) {
+            call_user_func(array($controller, $actionName));
         } else {
-            return $this->_onActionNotExists($asc);
+            throw new Qwin_Application_Exception('Action "' . $action . '" not found in controller "' . get_class($controller) .  '"');
         }
 
-        // 展示视图,视图对象可能在行为操作中已被更改,需进行辨别
+        // 展示视图,视图对象可能已被更改,需进行辨别
         if (is_subclass_of($this->_view, 'Qwin_Application_View')) {
             $this->_view->display();
         }
+
+        // 设置应用结束钩子
+        Qwin::hook('appTermination');
         
         return $this;
     }
 
-    public function getView(array $asc = null)
+    public function getView()
     {
-        if (null == $asc) {
-            return $this->_module;
-        }
-        return Qwin::call($this->getClass('view', $asc));
+        return $this->_view;
     }
 
     /**
@@ -228,35 +201,5 @@ class Qwin_Application
     public function getEndTime()
     {
         return str_pad(round((microtime(true) - $this->_startTime), 4), 6, 0);
-    }
-
-    /**
-     * 命名空间不存在
-     *
-     * @param array $asc 应用结构配置
-     */
-    public function _onPackageNotExists($asc)
-    {
-        exit('The package "' . $asc['package'] . '" is not exists.');
-    }
-
-    /**
-     * 控制器不存在
-     *
-     * @param array $asc 应用结构配置
-     */
-    public function _onControllerNotExists($asc)
-    {
-        exit('The controller "' . $asc['controller'] . '" is not exists.');
-    }
-
-    /**
-     * 行为不存在
-     *
-     * @param array $asc 应用结构配置
-     */
-    public function _onActionNotExists($asc)
-    {
-        exit('The action "' . $asc['action'] .  '" is not exists');
     }
 }

@@ -35,88 +35,129 @@ require_once 'Qwin/Application/Controller.php';
 
 class Common_Controller extends Qwin_Application_Controller
 {
-    protected $_asc;
+    /**
+     * 模型对象
+     * @var Common_Model
+     */
+    protected $_model;
 
     /**
-     * Qwin_Request对象
+     * 元数据对象
+     * @var Common_Metadata
+     */
+    protected $_meta;
+
+    /**
+     * 语言对象
+     * @var Qwin_Application_Language
+     */
+    protected $_lang;
+
+    /**
+     * 请求对象
      * @var Common_Request
      */
-    public $request;
+    protected $_request;
 
     /**
-     *
-     *
-     * @var Qwin_Application
+     * 视图对象
+     * @var Common_View
      */
-    public $app;
+    protected $_view;
 
     /**
-     * Qwin_Url对象
-     * @var object
+     * Url对象
+     * @var Qwin_Url
      */
-    public $url;
-
-    /**
-     * 全局配置数组
-     * @var array
-     */
-    protected $config;
+    protected $_url;
 
     /**
      * 会话对象
-     * @var object
+     * @var Qwin_Session
      */
-    protected $session;
+    protected $_session;
 
     /**
      * 用户数据数组
      * @var array
      */
-    public $member;
+    protected $_member;
 
     /**
-     * Qwin_Application_Language语言子对象
-     * @var object
+     * 模块标识
+     * @var string
      */
-    protected $_lang;
+    protected $_module;
 
     /**
-     * Qwin_Application_Metadata元数据子对象
-     * @var object
+     * 操作名称
+     * @var string
      */
-    protected $_meta;
-
-
-    /**
-     * Qwin_Application_Model模型子对象
-     * @var object
-     */
-    protected $_model;
-
-    /**
-     * 视图对象
-     * @var Qwin_Application_View
-     */
-    public $view;
+    protected $_action;
 
     /**
      * 初始化各类和数据
      */
     public function __construct()
     {
-        $this->app      = Qwin::call('-app');
-        $this->request  = Qwin::call('-request');
-        $this->url      = Qwin::call('-url');
-        $this->_asc     = Qwin::config('asc');
-        $this->session  = Qwin::call('-session');
-        $this->member   = $this->session->get('member');
-        $this->view     = Qwin::call('Common_View');
+        $this->_module  = Qwin::config('module');
+        $this->_action  = Qwin::config('action');
 
-        $this->_meta = Common_Metadata::getByAsc($this->_asc);
+        $this->getRequest();
          /**
          * 访问控制
          */
         //$this->_isAllowVisited();
+    }
+
+    /**
+     * 获取请求对象
+     *
+     * @return Qwin_Request
+     */
+    public function getRequest()
+    {
+        if (!$this->_request) {
+            $this->_request = Qwin::call('-request');
+        }
+        return $this->_request;
+    }
+
+    /**
+     * 获取Url对象
+     * @return Qwin_Url
+     */
+    public function getUrl()
+    {
+        if (!$this->_url) {
+            $this->_url = Qwin::call('-url');
+        }
+        return $this->_url;
+    }
+
+    /**
+     * 获取会话对象
+     * @return Qwin_Session
+     */
+    public function getSession()
+    {
+        if (!$this->_session) {
+            $this->_session = Qwin::call('-session');
+        }
+        return $this->_session;
+    }
+
+    /**
+     * 获取用户数据
+     *
+     * @return array
+     */
+    public function getMember()
+    {
+        if (!$this->_member) {
+            $this->_member = $this->getSession()->get('member');
+        }
+        return $this->_member;
     }
 
     /**

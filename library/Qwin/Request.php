@@ -179,4 +179,15 @@ class Qwin_Request implements ArrayAccess
     {
         unset($this->_data[$offset]);
     }
+
+    public function getModule()
+    {
+        return $this->get('module');
+    }
+
+    public function getAction()
+    {
+        $action = $this->get('action');
+        return $action ? $action : 'Index';
+    }
 }

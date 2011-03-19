@@ -32,7 +32,7 @@ class Common_Widget_ListTab extends Common_Widget
      *
      * @param array $param      参数
      *
-     *      -- asc              当前选项卡的应用配置结构
+     *      -- module           模块标识
      *
      *      -- url              当前选项卡查询组成的请求字符串
      *
@@ -49,16 +49,16 @@ class Common_Widget_ListTab extends Common_Widget
         $tab = array();
 
         // 获取应用结构配置
-        if (isset($param['asc'])) {
-            $asc = $param['asc'];
+        if (isset($param['module'])) {
+            $module = $param['module'];
         } else {
-            $asc = $view['asc'];
+            $module = $view['module'];
         }
-        $ascString = strtolower(implode('-', $asc));
+        $moduleId = strtr($module, '/', '-');
         parse_str($param['url'], $get);
 
         // 获取禁用的行为
-        $controllerClass = Common_Controller::getByAsc($asc, false);
+        $controllerClass = Common_Controller::getByModule($module, false);
         $classVar = get_class_vars($controllerClass);
         if (isset($classVar['_forbiddenAction'])) {
             $forbiddenAction = $classVar['_forbiddenAction'];
@@ -72,22 +72,22 @@ class Common_Widget_ListTab extends Common_Widget
                 'title'     => $lang->t('ACT_ADD'),
                 'icon'      => 'ui-icon-plus',
                 'target'    => null,
-                'id'        => 'action-' . $ascString . '-add',
+                'id'        => 'action-' . $moduleId . '-add',
                 'class'     => 'action-add',
             );
             $tab['copy'] = array(
-                'url'   => $url->url($asc, array('action' => 'Add')),
+                'url'   => $url->url($get, array('action' => 'Add')),
                 'title' => $lang->t('ACT_COPY'),
                 'icon'  => 'ui-icon-transferthick-e-w',
                 'target'    => null,
-                'id'        => 'action-' . $ascString . '-copy',
+                'id'        => 'action-' . $moduleId . '-copy',
                 'class'     => 'action-copy',
             );
         }
 
         // TODO jsLang
         if (!in_array('delete', $forbiddenAction)) {
-            $meta = Common_Metadata::getByAsc($asc);
+            $meta = Common_Metadata::getByModule($module);
             if (!isset($meta['page']['useTrash'])) {
                 $icon = 'ui-icon-close';
                 $jsLang = 'MSG_CONFIRM_TO_DELETE';
@@ -100,27 +100,27 @@ class Common_Widget_ListTab extends Common_Widget
                 'title'     => $lang->t('ACT_DELETE'),
                 'icon'      => $icon,
                 'target'    => null,
-                'id'        => 'action-' . $ascString . '-delete',
+                'id'        => 'action-' . $moduleId . '-delete',
                 'class'     => 'action-delete',
             );
         }
 
         if (!in_array('list', $forbiddenAction)) {
             $tab['list'] = array(
-                'url' => $url->url($asc, array('action' => 'Index')),
+                'url' => $url->url($get, array('action' => 'Index')),
                 'title' => $lang->t('ACT_LIST'),
                 'icon' => 'ui-icon-note',
                 'target' => null,
-                'id' => 'action-' . $ascString . '-list',
+                'id' => 'action-' . $moduleId . '-list',
                 'class' => 'action-list',
             );
         }
 
         // 如果当前行为存在选项卡视图,加载该视图,否则直接输出默认选项卡内容
-        $class = $asc['package'] . '_' . $asc['module'] . '_Widget_ListTab';
+        $class = strtr($module, '/', '_') . '_Widget_ListTab';
         if(class_exists($class)) {
             $object = new $class;
-            $file = $view->decodePath('<resource><theme>/<defaultPackage>/element/<module>/<controller>/<action>-tab<suffix>');
+            $file = $view->decodePath('<root>common/widget-<action>-tab<suffix>');
             return $object->render(array(
                 'tab' => $tab,
                 'file' => $file,
@@ -145,7 +145,7 @@ class Common_Widget_ListTab extends Common_Widget
             $output .= Qwin_Util_JQuery::link($row['url'], $row['title'], $row['icon'], $row['class'], $row['target'], $row['id']);
         }
         if ($echo) {
-            require $view->decodePath('<resource><theme>/<defaultPackage>/element/basic/output<suffix>');
+            require $view->decodePath('<root>common/basic/output<suffix>');
         } else {
             return $output;
         }

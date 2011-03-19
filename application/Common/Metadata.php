@@ -36,10 +36,10 @@ require_once 'Qwin/Application/Metadata.php';
 class Common_Metadata extends Qwin_Application_Metadata
 {
     /**
-     * 当前元数据对应的应用目录结果
-     * @var array
+     * 模块标识
+     * @var string
      */
-    protected $_asc;
+    protected $_module;
 
     /**
      * 需要进行链接转换的行为
@@ -90,7 +90,7 @@ class Common_Metadata extends Qwin_Application_Metadata
         $option['alias'] = (array)$option['alias'];
         
         if (null === $record) {
-            $record = Common_Model::getByAsc($this->getAsc());
+            $record = Common_Model::getByModule($this->getModule());
         }
         
         // 将元数据加入记录配置中
@@ -113,10 +113,10 @@ class Common_Metadata extends Qwin_Application_Metadata
      * @param array $name 名称,可选
      * @return Doctrine_Query 查询对象
      */
-    public static function getQueryByAsc($asc, array $option = array())
+    public static function getQueryByModule($module, array $option = array())
     {
-        $meta       = self::getByAsc($asc);
-        $record     = Common_Model::getByAsc($asc);
+        $meta       = self::getByModule($module);
+        $record     = Common_Model::getByModule($module);
         return $meta->getQuery($record, $option);
     }
 
@@ -135,7 +135,7 @@ class Common_Metadata extends Qwin_Application_Metadata
         $option['alias'] = (array)$option['alias'];
 
         if (null === $record) {
-            $recordClass = Common_Model::getByAsc($this->getAsc(), false);
+            $recordClass = Common_Model::getByModule($this->getModule(), false);
             $record = Qwin::call($recordClass);
         } else {
             $recordClass = get_class($record);
@@ -172,10 +172,10 @@ class Common_Metadata extends Qwin_Application_Metadata
      */
     public function setRecordRelation(Doctrine_Record $record, array $model)
     {
-        $modelObject = Common_Model::getByAsc($model['asc']);
+        $modelObject = Common_Model::getByModule($model['module']);
         $name = get_class($modelObject);
 
-        $metaObject = self::getByAsc($model['asc']);
+        $metaObject = self::getByModule($model['module']);
         $metaObject->toRecord($modelObject);
 
         // 设置模型关系
@@ -439,27 +439,23 @@ class Common_Metadata extends Qwin_Application_Metadata
     }
 
     /**
-     * 根据类名获取应用结构配置
      *
-     * @return array 配置
+     * @return string 模块标识
+     * @todo !!!
      */
-    public function getAsc()
+    public function getModule()
     {
-        if (!empty($this->_asc)) {
-            return $this->_asc;
+        if (!$this->_module) {
+            $parts = explode('_', get_class($this));
+            array_pop($parts);
+            $this->_module = implode('/', $parts);
         }
+        return $this->_module;
+    }
 
-        $class = get_class($this);
-        $parts = explode('_', get_class($this));
-        if (4 == count($parts) && 'Metadata' == $parts[2]) {
-            return $this->_asc = array(
-                'package' => $parts[0],
-                'module' => $parts[1],
-                'controller' => $parts[3],
-            );
-        }
-        require_once 'Qwin/Metadata/Exception.php';
-        throw new Qwin_Metadata_Exception('Class "' . $class . '" do not have a valid Application Structure Configuration.');
+    public function getModuleId()
+    {
+        
     }
 
     /**
@@ -740,24 +736,24 @@ class Common_Metadata extends Qwin_Application_Metadata
         $primaryKey = $this->db['primaryKey'];
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
-        $asc = $this->getAsc();
+        $module = $this->getModule();
         if (!isset($this->controller)) {
             // TODO　不重复加载
-            $this->controller = Common_Controller::getByAsc($asc);
-            $this->forbiddenAction = $this->controller->getForbiddenAction();
+            $this->controller = Common_Controller::getByModule($module);
+            $this->forbiddenAction = $this->controller->getForbiddenActions();
         }
         // 不为禁用的行为设置链接
         $operation = array();
         if (!in_array('edit', $this->forbiddenAction)) {
             $operation['edit'] = array(
-                'url'   => $url->url($asc, array('action' => 'Edit', $primaryKey => $dataCopy[$primaryKey])),
+                'url'   => $url->url(array('module' => $module, 'action' => 'Edit', $primaryKey => $dataCopy[$primaryKey])),
                 'title' => $lang->t('ACT_EDIT'),
                 'icon'  => 'ui-icon-tag',
             );
         }
         if (!in_array('view', $this->forbiddenAction)) {
             $operation['view'] = array(
-                'url'   => $url->url($asc, array('action' => 'View', $primaryKey => $dataCopy[$primaryKey])),
+                'url'   => $url->url(array('module' => $module, 'action' => 'View', $primaryKey => $dataCopy[$primaryKey])),
                 'title' => $lang->t('ACT_VIEW'),
                 'icon'  => 'ui-icon-lightbulb',
             );
@@ -778,7 +774,7 @@ class Common_Metadata extends Qwin_Application_Metadata
                 $jsLang = 'MSG_CONFIRM_TO_DELETE_TO_TRASH';
             }
             $operation['delete'] = array(
-                'url'   => 'javascript:if(confirm(QWIN_PATH.Lang.' . $jsLang . ')){window.location=\'' . $url->url($asc, array('action' => 'Delete', $primaryKey => $dataCopy[$primaryKey])) . '\';}',
+                'url'   => 'javascript:if(confirm(QWIN_PATH.Lang.' . $jsLang . ')){window.location=\'' . $url->url(array('module' => $module, 'action' => 'Delete', $primaryKey => $dataCopy[$primaryKey])) . '\';}',
                 'title' => $lang->t('ACT_DELETE'),
                 'icon'  => $icon,
             );
@@ -905,11 +901,11 @@ class Common_Metadata extends Qwin_Application_Metadata
     public function setIsLink($value, $name, $data, $dataCopy, $action)
     {
         //if (in_array($action, $this->_linkAction)) {
-            $asc = $this->getAsc();
+            $module = $this->getModule();
             !isset($this->url) && $this->url = Qwin::call('-url');
             $name = str_replace(':', '\:', $name);
             $dataCopy[$name] = str_replace(':', '\:', $dataCopy[$name]);
-            $value = '<a href="' . $this->url->url($asc, array('action' => 'Index', 'search' => $name . ':' . $dataCopy[$name])) . '">' . $data[$name] . '</a>';
+            $value = '<a href="' . $this->url->url(array('module' => $module, 'action' => 'Index', 'search' => $name . ':' . $dataCopy[$name])) . '">' . $data[$name] . '</a>';
         //}
         return $value;
     }

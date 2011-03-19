@@ -1,8 +1,8 @@
 <?php
 /**
- * Package
+ * Exception
  *
- * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,10 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-04 23:10:19
+ * @since       2011-03-15 10:58:01
  */
 
-class Crm_Package extends Common_Package
+class Qwin_Application_Exception extends Qwin_Exception
 {
+    
 }

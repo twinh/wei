@@ -34,12 +34,6 @@ class Qwin_Application_View extends ArrayObject
     protected $_element;
 
     /**
-     * 布局文件路径
-     * @var string
-     */
-    protected $_layout;
-
-    /**
      * 视图是否已展示
      * @var boolen
      */
@@ -65,13 +59,33 @@ class Qwin_Application_View extends ArrayObject
     );
 
     /**
+     * 选项
+     * @var array
+     */
+    protected $_option = array(
+        'theme'         => '',
+        'style'         => '',
+        'exceptionView' => '',
+        'errorView'     => '',
+    );
+
+    /**
      * 初始化类
      *
      * @param array $input 数据
      */
     public function  __construct($input = array())
     {
+        Qwin::set('-view', $this);
         parent::__construct($input, self::ARRAY_AS_PROPS);
+        // todo 是否会造成重复
+        // 打开缓冲区
+        ob_start();
+
+        // 自定义错误和异常处理
+        set_exception_handler(array($this, 'displayException'));
+        // TODO 导致火狐提示页面载入出错,连接被重置
+        //set_error_handler(array($this, 'displayError'));
     }
 
     /**
@@ -166,7 +180,7 @@ class Qwin_Application_View extends ArrayObject
     public function getElement($name)
     {
         if (!isset($this->_element[$name])) {
-            throw new Qwin_Application_View_Exception('Undefined element name: ' . $name);
+            throw new Qwin_Application_View_Exception('Undefined view file name: ' . $name);
         }
         $pathCahce = array();
         foreach ($this->_element[$name] as $path) {
@@ -176,7 +190,7 @@ class Qwin_Application_View extends ArrayObject
             }
             $pathCahce[] = $path;
         }
-        throw new Qwin_Application_View_Exception('All of the element files are not exists: ' . implode(';', $pathCahce));
+        throw new Qwin_Application_View_Exception('All view files not found: "' . implode(';', $pathCahce) . '".');
     }
 
     /**
@@ -213,47 +227,6 @@ class Qwin_Application_View extends ArrayObject
     public function elementExists($name)
     {
         return isset($this->_element[$name]);
-    }
-
-    /**
-     * 设置布局文件的路径,布局可以为一个或多个,多个将按照键名优先级和存在性选择
-     *
-     * @param string|array $layout
-     * @return object 当前对象
-     */
-    public function setLayout($layout)
-    {
-        !is_array($layout) && $layout = array($layout);
-        $this->_layout = $layout;
-        return $this;
-    }
-
-    /**
-     * 获取未处理的布局配置
-     *
-     * @return array 布局配置
-     */
-    public function getRawLayout()
-    {
-        return $this->_layout;
-    }
-
-    /**
-     * 获取经过解码的布局路径
-     *
-     * @return string
-     */
-    public function getLayout()
-    {
-        $pathCahce = array();
-        foreach ($this->_layout as $path) {
-            $path = $this->decodePath($path);
-            if (is_file($path)) {
-                return $path;
-            }
-            $pathCahce[] = $path;
-        }
-        throw new Qwin_Application_View_Exception('All of the layout files are not exists: ' . implode(';', $pathCahce));
     }
 
     /**
@@ -413,5 +386,75 @@ class Qwin_Application_View extends ArrayObject
         }
         return $file;
          */
+    }
+
+    /**
+     * 显示异常信息
+     *
+     * @param Exception $e 异常对象
+     * @todo xdebug
+     */
+    public function displayException($e)
+    {
+        ob_end_clean();
+        restore_exception_handler();
+        $file = $e->getFile();
+        $line = $e->getLine();
+        if (Qwin::config('debug')) {
+            echo '<h1>' . get_class($e) . '</h1>';
+            echo '<p>' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine() . '</p>';
+            echo '<pre>' . $e->getTraceAsString() . '</pre>';
+            echo '<pre>' . $this->_getFileCode($file, $line) . '<pre>';
+        } else {
+            echo '<p style="color:red;">' . $e->getMessage() . '</p>';
+        }
+        exit;
+    }
+
+    /**
+     * 显示错误信息
+     *
+     * @param <type> $errno
+     * @param <type> $errstr
+     * @param <type> $errfile
+     * @param <type> $errline 
+     */
+    public function displayError($errno, $errstr, $errfile, $errline)
+    {
+        restore_error_handler();
+        throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+    }
+
+    protected function _getFileCode($file, $line, $range = 20)
+    {
+        if (false == ($code = file($file))) {
+            return null;
+        }
+
+        $half = (int)($range / 2);
+
+        // 开始行
+        $start = $line - $half;
+        0 > $start && $start = 0;
+
+        // 结束行
+        $total = count($code);
+        $end = $line + $half;
+        $total < $end && $end = $total;
+
+        // 调整file获取的文件行数与Exception->getLine相差一行的问题
+        array_unshift($code, null);
+        $content = '';
+        for($i = $start; $i < $end; $i++) {
+            $temp = str_pad($i, 4, 0, STR_PAD_LEFT) . ':' . $code[$i];
+            if ($line != $i) {
+                $content .= $temp;
+            } else {
+                $content .= '<div style="color:red;">' . $temp . '</div>';
+            }
+        }
+
+        unset($code);
+        return $content;
     }
 }

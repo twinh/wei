@@ -82,6 +82,12 @@ class Common_Request extends Qwin_Request
         'maxRow'        => 500,
     );
 
+    public function  __construct()
+    {
+        parent::__construct();
+        Qwin::set('-request', $this);
+    }
+
     /**
      * 获取选项的值
      *
@@ -255,9 +261,9 @@ class Common_Request extends Qwin_Request
      * @param array $asc 应用结构配置
      * @return null|string 值
      */
-    public function getPrimaryKeyValue(array $asc)
+    public function getPrimaryKeyValue($module)
     {
-        $meta = Common_Metadata::getByAsc($asc);
+        $meta = Common_Metadata::getByModule($module);
         return $this->get($meta['db']['primaryKey']);
     }
 

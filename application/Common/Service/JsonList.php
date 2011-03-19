@@ -32,12 +32,7 @@ class Common_Service_JsonList extends Common_Service
      * @var array
      */
     protected $_option = array(
-        'asc'       => array(
-            'package'     => null,
-            'module'        => null,
-            'controller'    => null,
-            'action'        => null,
-        ),
+        'module'    => null,
         'list'      => array(),
         'order'     => array(),
         'where'     => array(),
@@ -57,10 +52,10 @@ class Common_Service_JsonList extends Common_Service
         $listField  = $option['list'];
 
         /* @var $meta Common_Metadata */
-        $meta = Common_Metadata::getByAsc($option['asc']);
+        $meta = Common_Metadata::getByModule($option['module']);
 
         // 从模型获取数据
-        $query = $meta->getQuery(null, array('type' => array('db', 'view')));
+        $query = Common_Metadata::getQueryByModule($option['module'], array('type' => array('db', 'view')));
         $meta
             ->addSelectToQuery($query)
             ->addOrderToQuery($query, $option['order'])

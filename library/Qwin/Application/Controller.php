@@ -28,24 +28,6 @@
 abstract class Qwin_Application_Controller
 {
     /**
-     * 模型对象
-     * @var object
-     */
-    protected $_model;
-
-    /**
-     * 元数据对象
-     * @var object
-     */
-    protected $_meta;
-
-    /**
-     * 语言对象
-     * @var object
-     */
-    protected $_lang;
-
-    /**
      * 视图对象
      * @var Qwin_Application_View
      */
@@ -58,24 +40,25 @@ abstract class Qwin_Application_Controller
      *
      * @var array
      */
-    protected $_forbiddenAction = array();
+    protected $_forbiddenActions = array();
 
     public function __construct()
     {
-        
+        return $this;
     }
 
     /**
-     * 根据应用结构配置获取模型对象
+     * 根据模块获取控制器对象
      *
-     * @param array $asc 应用结构配置
-     * @return Common_Model 模型对象
+     * @param string $module 模块标识
+     * @return Qwin_Application_Controller 控制器对象
      * @todo 当类不存在时,是否需要用父类?
+     * @todo 是否应该考虑存在性,安全性
      */
-    public static function getByAsc(array $asc, $instanced = true)
+    public static function getByModule($module, $instanced = true, $param = null)
     {
-        $class = $asc['package'] . '_' . $asc['module'] . '_Controller_' . $asc['controller'];
-        return $instanced ? Qwin::call($class) : $class;
+        $class = strtr($module, '/', '_') . '_Controller';
+        return $instanced ? Qwin::call($class, $param) : $class;
     }
 
     /**
@@ -83,9 +66,9 @@ abstract class Qwin_Application_Controller
      *
      * @return array
      */
-    public function getForbiddenAction()
+    public function getForbiddenActions()
     {
-        return $this->_forbiddenAction;
+        return $this->_forbiddenActions;
     }
 
     /**
@@ -94,10 +77,10 @@ abstract class Qwin_Application_Controller
      * @param string $action 行为名称,即方法名去除'action'标识
      * @return Qwin_Application_Controller 当前对象
      */
-    public function setForbiddenAction($action)
+    public function setForbiddenActions($action)
     {
         if (method_exists($this, 'action' . $action)) {
-            $this->_forbiddenAction[] = strtolower($action);
+            $this->_forbiddenActions[] = strtolower($action);
         }
         return $this;
     }

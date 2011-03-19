@@ -110,57 +110,59 @@ class Common_View extends Qwin_Application_View
             'minify'    => Qwin::widget('minify'),
             'jQuery'    => Qwin::widget('jquery'),
             'config'    => $config,
-            'asc'       => $config['asc'],
+            'module'    => $config['module'],
             'theme'     => $config['theme'],
         ));
 
         // 设置标签
         $this->setTag(array(
-            'resource'          => $config['resource'] . 'view/theme/',
+            'root'              => $config['resource'] . 'view/theme/' . $config['theme'] . '/',
             'suffix'            => '.php',
-            'theme'             => $config['theme'],
             'style'             => $this->getStyle(),
-            'package'         => $config['asc']['package'],
-            'module'            => $config['asc']['module'],
-            'controller'        => $config['asc']['controller'],
-            'action'            => $config['asc']['action'],
-            'defaultPackage'  => $config['defaultAsc']['package'],
-            'defaultAction'     => $config['defaultAsc']['action'],
+            'module'            => $config['module'],
+            'action'            => $config['action'],
+            'rootModule'        => Qwin::call('Qwin_Application_Module')->getRoot($config['module']),
+            'defaultModule'     => $config['defaultModule'],
+            'defaultAction'     => $config['defaultAction'],
         ));
-        
+
         // 布局的选择次序为 自定义视图 > 行为级 > 控制器级 > 模块级 > 默认(命名空间级)
-        //if (empty($this->getRawLayout())) {
-            $this->setLayout(array(
-                '<resource><theme>/<package>/layout/<module>-<controller>-<action><suffix>',
-                '<resource><theme>/<package>/layout/<module>-<controller><suffix>',
-                '<resource><theme>/<package>/layout/<module><suffix>',
-                '<resource><theme>/<package>/layout/common<suffix>',
-                '<resource><theme>/<defaultPackage>/layout/common<suffix>',
+        if (!$this->elementExists('layout')) {
+            $this->setElement('layout', array(
+                '<root><module>/layout-<action><suffix>',
+                '<root><rootModule>/layout-<action><suffix>',
+                '<root><rootModule>/layout<suffix>',
+                '<root>common/layout<suffix>',
             ));
-        //}
+        }
 
         // 默认视图元素的选择次序为 自定义视图 > 当前行为视图 > 默认模块视图 > 默认视图
         if (!$this->elementExists('content')) {
             $this->setElement('content', array(
-                '<resource><theme>/<package>/element/<module>/<controller>-<action><suffix>',
-                '<resource><theme>/<defaultPackage>/element/common/<action><suffix>',
-                '<resource><theme>/<package>/element/common<suffix>',
+                '<root><module>/content-<action><suffix>',
+                '<root><rootModule>/content-<action><suffix>',
+                '<root><rootModule>/content<suffix>',
+                '<root>common/content-<action><suffix>',
             ));
         }
 
         // 当前行为的左栏操作视图
         if (!$this->elementExists('sidebar')) {
             $this->setElement('sidebar', array(
-                '<resource><theme>/<package>/element/<module>/<controller>/<action>-sidebar<suffix>',
-                '<resource><theme>/<defaultPackage>/element/common/sidebar<suffix>',
+                '<root><module>/sidebar-<action><suffix>',
+                '<root><rootModule>/sidebar-<action><suffix>',
+                '<root><rootModule>/sidebar<suffix>',
+                '<root>common/sidebar<suffix>',
             ));
         }
 
         // 当前行为的页眉标题视图
         if (!$this->elementExists('header')) {
             $this->setElement('header', array(
-                '<resource><theme>/<package>/element/<module>/<controller>/<action>-header<suffix>',
-                '<resource><theme>/<package>/element/common/header<suffix>',
+                '<root><module>/header-<action><suffix>',
+                '<root><rootModule>/header-<action><suffix>',
+                '<root><rootModule>/header<suffix>',
+                '<root>common/header<suffix>',
             ));
         }
 
@@ -185,21 +187,19 @@ class Common_View extends Qwin_Application_View
         }
 
         // 附加视图
-        if (isset($layout)) {
+        /*if (isset($layout)) {
             $this->_layout = array_shift($layout);
-        }
+        }*/
 
         // 附加变量
-        if (!empty($data)) {
-            $this->assign($data);
-        }
+        !empty($data) && $this->assign($data);
         extract($this->getArrayCopy(), EXTR_OVERWRITE);
 
         $request = Qwin::call('-request');
 
         // 加载布局
         if (!$request->isAjax()) {
-            require $this->getLayout();
+            require $this->getElement('layout');
         } else {
             require $this->getElement('content');
         }
@@ -223,7 +223,7 @@ class Common_View extends Qwin_Application_View
 
         $url = Qwin::call('-url');
         $minify = $this->minify;
-        $jsUrl = array('package' => 'Mini', 'g' => $minify->pack('js'));
+        $jsUrl = array('module' => 'Util/Minify', 'g' => $minify->pack('js'));
         $cssUrl =  array('g' => $minify->pack('css')) + $jsUrl;
         $replace = Qwin_Util_Html::jsTag($url->url($jsUrl))
                  . Qwin_Util_Html::cssLinkTag($url->url($cssUrl));

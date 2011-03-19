@@ -74,14 +74,14 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
     );*/
 
     /**
-     * 根据应用结构配置获取元数据对象
+     * 根据模块获取元数据对象
      *
-     * @param array $asc 应用结构配置
+     * @param string $module 模块标识
      * @return Qwin_Metadata_Abstarct 元数据对象
      */
-    public static function getByAsc(array $asc, $instanced = true)
+    public static function getByModule($module, $instanced = true)
     {
-        $class = $asc['package'] . '_' . $asc['module'] . '_Metadata_' . $asc['controller'];
+        $class = strtr($module, '/', '_') . '_Metadata';
         return $instanced ? Qwin_Metadata::getInstance()->get($class) : $class;
     }
 
