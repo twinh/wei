@@ -120,7 +120,7 @@ class Form_Widget extends Qwin_Widget_Abstract
 
         // 转换资源
         if (isset($private['_resourceGetter'])) {
-            $private['_resource'] = Qwin_Class::callByArray($private['_resourceGetter']);
+            $private['_resource'] = Qwin::callByArray($private['_resourceGetter']);
         }
 
         // 根据类型,生成代码
