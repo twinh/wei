@@ -229,8 +229,8 @@ class Qwin
      */
     protected static function _instanceClass($name, $param = null)
     {
-        $param = (array)$param + (array)self::config($name);
-
+        $param = null !== $param ? $param : self::config($name);
+        
         // 标准单例模式
         if (method_exists($name, 'getInstance')) {
             return call_user_func_array(array($name, 'getInstance'), $param);
@@ -242,7 +242,7 @@ class Qwin
         } else {
             // 有参数的情况下使用类反射进行初始化
             $reflection = new ReflectionClass($name);
-            return $reflection->newInstanceArgs($param);
+            return $reflection->newInstanceArgs((array)$param);
         }
     }
     

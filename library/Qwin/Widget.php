@@ -94,13 +94,24 @@ class Qwin_Widget
             return false;
         }
 
-        // 加载并查看类是否存在
+        // 加载类文件
         require_once $file;
-        $class = $name . '_Widget';
+        $class = ucfirst($name) . '_Widget';
+
+        // 合并自定义的参数和配置中的参数
         $param = array(
-            'rootPath' => $this->_rootPath . $sign . '/',
+            array(
+                'rootPath'  => $this->_rootPath . $sign . '/',
+                'lang'      => true,
+            ),
         );
-        $widget = $this->_callClass($class, array($param));
+        $configParam = (array)Qwin::config($class);
+        if (!empty($configParam)) {
+            $param[0] += current($configParam);
+        }
+
+        // 初始化
+        $widget = $this->_callClass($class, $param);
         $this->_loaded[$sign] = $widget;
 
         return $widget;
