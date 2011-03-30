@@ -25,7 +25,7 @@
  * @since       2009-11-21 15:21:00
  */
 
-class Com_Option_Metadata_Option extends Com_Metadata
+class Ide_Option_Metadata extends Com_Metadata
 {
     public function  setMetadata()
     {
