@@ -63,10 +63,45 @@ class Com_Metadata extends Qwin_Application_Metadata
     /**
      * 初始化常用变量
      */
-    public function __construct()
+    public function __construct($module = null)
     {
         parent::__construct();
+        if (isset($module)) {
+            $this->setModule($module);
+        } else {
+            $this->getModule();
+        }
         $this->url = Qwin::call('-url');
+    }
+
+    /**
+     * 设置模块标识
+     *
+     * @return Com_Metadata 当前对象
+     */
+    public function setModule()
+    {
+        if ($module instanceof Qwin_Module) {
+            $this->_module = $module;
+        } else {
+            $this->_module = new Qwin_Module($module);
+        }
+        return $this;
+    }
+
+    /**
+     * 获取模块标识
+     *
+     * @return Qwin_Module
+     */
+    public function getModule()
+    {
+        if (!$this->_module) {
+            $parts = explode('_', get_class($this));
+            array_pop($parts);
+            $this->_module = new Qwin_Module(implode('/', $parts));
+        }
+        return $this->_module;
     }
 
     public static function getRecordByModule($module)
@@ -440,26 +475,6 @@ class Com_Metadata extends Qwin_Application_Metadata
     }
 
     /**
-     *
-     * @return string 模块标识
-     * @todo !!!
-     */
-    public function getModule()
-    {
-        if (!$this->_module) {
-            $parts = explode('_', get_class($this));
-            array_pop($parts);
-            $this->_module = implode('/', $parts);
-        }
-        return $this->_module;
-    }
-
-    public function getModuleId()
-    {
-        
-    }
-
-    /**
      * 设置元数据各个细节,包括域,分组,关联模型等等,每个元数据类应该包含该方法
      */
     public function setMetadata()
@@ -748,14 +763,14 @@ class Com_Metadata extends Qwin_Application_Metadata
         $operation = array();
         if (!in_array('edit', $this->unableAction)) {
             $operation['edit'] = array(
-                'url'   => $url->url(array('module' => $module, 'action' => 'edit', $primaryKey => $dataCopy[$primaryKey])),
+                'url'   => $url->url(array('module' => $module->toUrl(), 'action' => 'edit', $primaryKey => $dataCopy[$primaryKey])),
                 'title' => $lang->t('ACT_EDIT'),
                 'icon'  => 'ui-icon-tag',
             );
         }
         if (!in_array('view', $this->unableAction)) {
             $operation['view'] = array(
-                'url'   => $url->url(array('module' => $module, 'action' => 'view', $primaryKey => $dataCopy[$primaryKey])),
+                'url'   => $url->url(array('module' => $module->toUrl(), 'action' => 'view', $primaryKey => $dataCopy[$primaryKey])),
                 'title' => $lang->t('ACT_VIEW'),
                 'icon'  => 'ui-icon-lightbulb',
             );
@@ -776,7 +791,7 @@ class Com_Metadata extends Qwin_Application_Metadata
                 $jsLang = 'MSG_CONFIRM_TO_DELETE_TO_TRASH';
             }
             $operation['delete'] = array(
-                'url'   => 'javascript:if(confirm(QWIN_PATH.Lang.' . $jsLang . ')){window.location=\'' . $url->url(array('module' => $module, 'action' => 'Delete', $primaryKey => $dataCopy[$primaryKey])) . '\';}',
+                'url'   => 'javascript:if(confirm(Qwin.Lang.' . $jsLang . ')){window.location=\'' . $url->url(array('module' => $module->toUrl(), 'action' => 'delete', $primaryKey => $dataCopy[$primaryKey])) . '\';}',
                 'title' => $lang->t('ACT_DELETE'),
                 'icon'  => $icon,
             );

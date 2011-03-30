@@ -50,6 +50,12 @@ class Qwin_Module
     protected $_class;
 
     /**
+     * 模块Url化名称
+     * @var string
+     */
+    protected $_url;
+
+    /**
      * 默认配置
      * @var array
      */
@@ -85,9 +91,17 @@ class Qwin_Module
         
     }
 
+    /**
+     * 获取模块Url化名称
+     *
+     * @return string
+     */
     public function toUrl()
     {
-        
+        if (!$this->_url) {
+            $this->_url = strtolower($this->_data);
+        }
+        return $this->_url;
     }
 
     /**
