@@ -188,6 +188,6 @@ class Qwin_Request implements ArrayAccess
     public function getAction()
     {
         $action = $this->get('action');
-        return $action ? $action : 'Index';
+        return $action ? strtolower($action) : 'index';
     }
 }

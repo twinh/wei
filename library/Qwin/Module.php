@@ -54,7 +54,7 @@ class Qwin_Module
      * @var array
      */
     protected $_defaults = array(
-        'rootModule'    => 'Common',
+        'rootModule'    => 'Com',
     );
 
     public function __construct($module)
@@ -81,6 +81,11 @@ class Qwin_Module
     }
 
     public function toPath()
+    {
+        
+    }
+
+    public function toUrl()
     {
         
     }
