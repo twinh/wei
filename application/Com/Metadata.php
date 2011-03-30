@@ -922,7 +922,7 @@ class Com_Metadata extends Qwin_Application_Metadata
             !isset($this->url) && $this->url = Qwin::call('-url');
             $name = str_replace(':', '\:', $name);
             $dataCopy[$name] = str_replace(':', '\:', $dataCopy[$name]);
-            $value = '<a href="' . $this->url->url(array('module' => $module, 'action' => 'index', 'search' => $name . ':' . $dataCopy[$name])) . '">' . $data[$name] . '</a>';
+            $value = '<a href="' . $this->url->url(array('module' => $module->toUrl(), 'action' => 'index', 'search' => $name . ':' . $dataCopy[$name])) . '">' . $data[$name] . '</a>';
         //}
         return $value;
     }

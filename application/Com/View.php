@@ -225,7 +225,7 @@ class Com_View extends Qwin_Application_View
 
         $url = Qwin::call('-url');
         $minify = $this->minify;
-        $jsUrl = array('module' => 'Util/Minify', 'g' => $minify->pack('js'));
+        $jsUrl = array('module' => 'util/minify', 'g' => $minify->pack('js'));
         $cssUrl =  array('g' => $minify->pack('css')) + $jsUrl;
         $replace = Qwin_Util_Html::jsTag($url->url($jsUrl))
                  . Qwin_Util_Html::cssLinkTag($url->url($cssUrl));
