@@ -82,7 +82,7 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
     public static function getByModule($module, $instanced = true)
     {
         $class = strtr($module, '/', '_') . '_Metadata';
-        return $instanced ? Qwin_Metadata::getInstance()->get($class) : $class;
+        return $instanced ? Qwin_Metadata::getInstance()->get($class, $module) : $class;
     }
 
     /**
