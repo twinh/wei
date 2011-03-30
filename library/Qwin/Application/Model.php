@@ -35,12 +35,16 @@ abstract class Qwin_Application_Model extends Doctrine_Record
     /**
      * 根据模块获取模型对象
      *
-     * @param string $module 模块标识
-     * @return Qwin_Application_Model 模型对象
+     * @param Qwin_Module|string $module 模块对象/标识
+     * @param bool $instanced 是否实例化
+     * @return Com_Model|string 实例化对象|类名
      */
     public static function getByModule($module, $instanced = true)
     {
         $class = strtr($module, '/', '_') . '_Model';
+        if (!class_exists($class)) {
+            throw new Qwin_Application_Model_Exception('Model Class "' . $class . '" not found.');
+        }
         return $instanced ? new $class : $class;
     }
 }

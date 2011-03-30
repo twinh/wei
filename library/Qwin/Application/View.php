@@ -180,7 +180,7 @@ class Qwin_Application_View extends ArrayObject
     public function getElement($name)
     {
         if (!isset($this->_element[$name])) {
-            throw new Qwin_Application_View_Exception('Undefined view file name: ' . $name);
+            throw new Qwin_Application_View_Exception('Undefined view element name: ' . $name);
         }
         $pathCahce = array();
         foreach ($this->_element[$name] as $path) {
@@ -362,33 +362,6 @@ class Qwin_Application_View extends ArrayObject
     }
 
     /**
-     * 加载一个微件
-     *
-     * @param string $name 微件的类名
-     * @param mixed $param 参数
-     * @return string 视图路径
-     * @todo 规范化
-     * @toto 类检查
-     * @todo 允许多种返回类型
-     * @todo 变量跨域
-     */
-    public function loadWidget($name, $param = null)
-    {
-        if (!class_exists($name)) {
-            throw new Qwin_Application_View_Exception('The widget class "' . $name . '" is not exists.');
-        }
-        $object = new $name;
-        return $object->render($param, $this);
-        /*
-        $file = $object->render($param, $this);
-        if (!is_file($file)) {
-           throw new Qwin_Application_View_Exception('The widget class should return a available file path.');
-        }
-        return $file;
-         */
-    }
-
-    /**
      * 显示异常信息
      *
      * @param Exception $e 异常对象
@@ -396,7 +369,7 @@ class Qwin_Application_View extends ArrayObject
      */
     public function displayException($e)
     {
-        ob_end_clean();
+        //ob_end_clean();
         restore_exception_handler();
         $file = $e->getFile();
         $line = $e->getLine();

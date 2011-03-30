@@ -183,7 +183,7 @@ class Com_Member_Metadata extends Com_Metadata
                 1 => 'LBL_GROUP_DETAIL_DATA',
             ),
             'model' => array(
-                'group' => array(
+                /*'group' => array(
                     'alias' => 'group',
                     'local' => 'group_id',
                     'foreign' => 'id',
@@ -196,7 +196,7 @@ class Com_Member_Metadata extends Com_Metadata
                         'module' => 'Member',
                         'controller' => 'Group',
                     ),
-                ),
+                ),*/
             ),
             'db' => array(
                 'table' => 'member',
@@ -218,8 +218,8 @@ class Com_Member_Metadata extends Com_Metadata
         $primaryKey = $this->db['primaryKey'];
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
-        $set = $this->getAsc();
-        $html = Qwin_Util_JQuery::icon($url->url($set, array('action' => 'EditPassword', $primaryKey => $copyData[$primaryKey])), $lang->t('ACT_EDIT_PASSWORD'), 'ui-icon-key')
+        $module = $this->getModule();
+        $html = Qwin_Util_JQuery::icon($url->url(array('module' => $module, 'action' => 'EditPassword', $primaryKey => $copyData[$primaryKey])), $lang->t('ACT_EDIT_PASSWORD'), 'ui-icon-key')
               . parent::sanitiseListOperation($value, $name, $data, $copyData);
         return $html;
     }

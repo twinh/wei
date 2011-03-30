@@ -23,17 +23,10 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2010-08-20 15:26:25
- * @todo        形成一个规范的体系
  */
 
 class Qwin_Widget
 {
-    /**
-     * 微件目录
-     * @var string
-     */
-    protected $_rootPath;
-
     /**
      * 已加载的微件
      * @var array
@@ -41,16 +34,19 @@ class Qwin_Widget
     protected $_loaded = array();
 
     /**
-     * 初始化
+     * 微件所在目录
+     * @var string
+     */
+    protected $_rootPath;
+
+    /**
+     * 获取当前类的实例化对象
      *
-     * @param string $path
-     * @return Qwin_Widget 当前对象
+     * @return Qwin_Widget
      */
     public function __construct($path = null)
     {
-        if ($path) {
-            $this->setRootPath($path);
-        }
+        $path && $this->setRootPath($path);
     }
 
     /**
@@ -65,8 +61,18 @@ class Qwin_Widget
             $this->_rootPath = $path;
             return $this;
         }
-        
         throw new Qwin_Widget_Exception('Path "' . $path . '" not found.');
+    }
+
+    /**
+     * 根据类名获取微件
+     *
+     * @param string $class 类名
+     * @return mixed
+     */
+    public function getByClass($class)
+    {
+        return $this->_loaded[$class] = $this->_callClass($class);
     }
 
     /**
@@ -77,13 +83,13 @@ class Qwin_Widget
      */
     public function get($name)
     {
-        $lower = strtolower($name);
-        if (isset($this->_loaded[$lower])) {
-            return $this->_loaded[$lower];
+        $sign = strtolower($name);
+        if (isset($this->_loaded[$sign])) {
+            return $this->_loaded[$sign];
         }
 
         // 查看主文件是否存在
-        $file = $this->_rootPath . $lower . '/widget.php';
+        $file = $this->_rootPath . $sign . '/Widget.php';
         if (!is_file($file)) {
             return false;
         }
@@ -91,25 +97,35 @@ class Qwin_Widget
         // 加载并查看类是否存在
         require_once $file;
         $class = $name . '_Widget';
+        $param = array(
+            'rootPath' => $this->_rootPath . $sign . '/',
+        );
+        $widget = $this->_callClass($class, array($param));
+        $this->_loaded[$sign] = $widget;
+
+        return $widget;
+    }
+
+    /**
+     * 初始化一个微件类
+     *
+     * @param string $class 类名
+     */
+    public function _callClass($class, array $param = null)
+    {
         if (!class_exists($class)) {
-            return false;
+            require_once 'Qwin/Widget/Exception.php';
+            throw new Qwin_Widget_Exception('Class "' . $class . '" not found.');
         }
 
         // 微件类应该继承自抽象类
         if (!is_subclass_of($class, 'Qwin_Widget_Abstract')) {
             require_once 'Qwin/Widget/Exception.php';
-            throw new Qwin_Widget_Exception('Class "' . $class . '" is not the subclass of "Qwin_Widget_Abstract"');
+            throw new Qwin_Widget_Exception('Class "' . $class . '" is not the subclass of "Qwin_Widget_Abstract".');
         }
 
         // 初始化类
         /* @var $widget Qwin_Widget_Abstract */
-        $widget = Qwin::call($class);
-        $this->_loaded[$lower] = $widget;
-
-        // 设置根目录,自动加载
-        $widget->setRootPath($this->_rootPath . $lower . '/')
-               ->autoload();    
-
-        return $widget;
+        return Qwin::call($class, $param);
     }
 }

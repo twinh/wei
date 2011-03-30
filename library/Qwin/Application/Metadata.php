@@ -105,7 +105,7 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
      *
      * @param array $data 处理的数据
      * @param array $action 处理的行为,如db,list,view
-     * @param array $option 配置选项
+     * @param array $option 选项
      * @return array
      */
     public function sanitise($data, $action = 'db', array $option = array(), array $dataCopy = array())

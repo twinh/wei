@@ -44,15 +44,6 @@ class Com_Model extends Qwin_Application_Model
         parent::__construct($table, $isNewEntry);
     }
 
-    public static function getByModule($module, $instanced = true)
-    {
-        $class = strtr($module, '/', '_') . '_Model';
-        if ($instanced && !class_exists($class)) {
-            $class = 'Com_Model';
-        }
-        return $instanced ? new $class : $class;
-    }
-
     /**
      * 连接数据库
      *

@@ -26,20 +26,17 @@
 abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
 {
     /**
-     * 配置选项
+     * 默认配置
+     * @var array
+     */
+    protected $_defaults = array();
+
+    /**
+     * 选项
      *
      * @var array
      */
     protected $_option = array();
-
-    /**
-     * 自动加载培训
-     *
-     * @var array
-     */
-    protected $_autoload = array(
-        'lang' => false,
-    );
 
     /**
      * 微件的根目录
@@ -58,6 +55,12 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
      * @var Qwin_Widget
      */
     protected $_widget;
+
+    /**
+     * 语言对象
+     * @var Qwin_Application_Language
+     */
+    protected $_lang;
     
     public function render($option)
     {
@@ -67,33 +70,57 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
     /**
      * 初始化
      */
-    public function  __construct()
+    public function __construct(array $options = null)
     {
+        // 初始化根目录
+        if (isset($options['rootPath'])) {
+            $this->setRootPath($options['rootPath']);
+        }
+        
         $this->_widget = Qwin::call('Qwin_Widget');
+
+        // 加载语言
+        if (isset($options['lang'])) {
+            $this->_lang = Qwin::call('-lang');
+            $lang->appendByFile($this->_rootPath . 'language/' . $lang->getName() . '.php');
+        }
     }
 
     /**
-     * 安装微件
+     * 获取默认选项
      *
-     * @return bool
+     * @param string|null $name 名称
+     * @return mixed
      */
-    public function install()
+    public function getDefault($name = null)
     {
-        return true;
+        if (null == $name) {
+            return $this->_defaults;
+        }
+        if (isset($this->_defaults[$name])) {
+            return $this->_defaults[$name];
+        }
+        throw new Qwin_Widget_Exception('Undefine default option "' . $name . '".');
     }
 
     /**
-     * 卸载微件
+     * 设置默认选项
      *
-     * @return bool
+     * @param string $name 选项名称
+     * @param mixed $value 选项的值
+     * @return Qwin_Widget_Abstract 当前对象
      */
-    public function uninstall()
+    public function setDefault($name, $value = null)
     {
-        return true;
+        if (isset($this->_defaults[$name])) {
+            $this->_defaults[$name] = $value;
+            return $this;
+        }
+        throw new Qwin_Widget_Exception('Undefine default option "' . $name . '".');        
     }
 
     /**
-     * 获取配置选项
+     * 获取选项
      *
      * @param string $name 配置名称
      * @return mixed
@@ -103,11 +130,14 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
         if (null == $name) {
             return $this->_option;
         }
-        return isset($this->_option[$name]) ? $this->_option[$name] : null;
+        if (isset($this->_option[$name])) {
+            return $this->_option[$name];
+        }
+        throw new Qwin_Widget_Exception('Undefine option "' . $name . '".');
     }
 
     /**
-     * 设置配置选项
+     * 设置选项
      *
      * @param string $name 配置名称
      * @param mixed $value 配置的值
@@ -206,7 +236,7 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
     /**
      * 自动加载部分常用类
      *
-     * @param array $option 配置选项
+     * @param array $option 选项
      * @return Qwin_Widget_Abstract 当前对象
      * @todo 耦合.
      */
@@ -214,9 +244,7 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
     {
         $this->_autoload = array_merge($this->_autoload, (array)$option);
         if ($this->_autoload['lang']) {
-            /* @var $lang Qwin_Application_Language */
-            $lang = Qwin::call('-lang');
-            $lang->appendByFile($this->_rootPath . 'language/' . $lang->getName() . '.php');
+            
         }
         return $this;
     }

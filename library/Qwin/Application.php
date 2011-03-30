@@ -41,7 +41,7 @@ class Qwin_Application
     protected $_isLoad = false;
     
     /**
-     * 配置选项
+     * 选项
      * @var array
      */
     protected $_option = array();
@@ -93,7 +93,7 @@ class Qwin_Application
     /**
      * 启动应用程序
      * 
-     * @param array $config 配置选项
+     * @param array $config 配置
      * @return Qwin_Application 当前对象
      */
     public function startup(array $config)
@@ -120,7 +120,7 @@ class Qwin_Application
         // 加载框架主类,设置自动加载类
         require_once $config['resource'] . '/library/Qwin.php';
         Qwin::setOption($config['Qwin']);
-        Qwin::config($config);
+        $config = Qwin::config($config);
 
         // 设置应用启动钩子
         Qwin::hook('appStartup');
@@ -143,7 +143,7 @@ class Qwin_Application
         // 获取模块和行为
         $module = $request->getModule();
         $action = $request->getAction();
-        Qwin::config('module', $module);
+        $module = Qwin::call('-module', $module);
         Qwin::config('action', $action);
 
         // 逐层加载模块类
@@ -152,7 +152,8 @@ class Qwin_Application
         }
 
         // 加载最终模块的控制器
-        $controller = Qwin_Application_Controller::getByModule($module, true, array($config));
+        $params = array($config, $module, $action);
+        $controller = Qwin_Application_Controller::getByModule($module, true, $params);
         if (!$controller) {
             throw new Qwin_Application_Exception('Controller in module "' . $module . '" not found.');
         }
@@ -161,7 +162,7 @@ class Qwin_Application
         $actionName = 'action' . $action;
         if (method_exists($controller, $actionName)
             && !in_array(strtolower($action), $controller->getForbiddenActions())) {
-            call_user_func(array($controller, $actionName));
+            call_user_func_array(array($controller, $actionName), $params);
         } else {
             throw new Qwin_Application_Exception('Action "' . $action . '" not found in controller "' . get_class($controller) .  '"');
         }

@@ -39,14 +39,14 @@ class Com_View_Add extends Com_View
         $data = $this->data;
         $asc = Qwin::config('asc');
         /* @var $formWidget Form_Widget */
-        $formWidget = Qwin::widget('form');
+        $formWidget = Qwin::call('-widget')->get('form');
         $formOption = array(
             'meta'  => $meta,
             'action' => 'edit',
             'data'  => $this->data,
         );
 
-        $operationField = $this->loadWidget('Com_Widget_FormLink', array($this->data, $primaryKey));
+        $operLinks = Qwin::call('-widget')->get('OperLinks')->render($this);
 
         $this->assign(get_defined_vars());
     }

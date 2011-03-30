@@ -25,7 +25,7 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-7-28 15:19:18
+ * @since       2010-07-28 15:19:18
  */
 
 /**
@@ -98,10 +98,10 @@ class Com_Controller extends Qwin_Application_Controller
     /**
      * 初始化各类和数据
      */
-    public function __construct()
+    public function __construct($config = array(), $module = null, $action = null)
     {
-        $this->_module  = Qwin::config('module');
-        $this->_action  = Qwin::config('action');
+        $this->_module  = $module;
+        $this->_action  = $action;
 
         $this->getRequest();
          /**
@@ -122,7 +122,7 @@ class Com_Controller extends Qwin_Application_Controller
         }
         return $this->_request;
     }
-
+    
     /**
      * 获取Url对象
      * @return Qwin_Url

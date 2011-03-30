@@ -26,14 +26,8 @@
 interface Qwin_Widget_Interface
 {
     public function render($option);
-
-    /**
-     *
-     */
+    public function setDefault($name, $value = null);
+    public function getDefault($name = null);
     public function setOption($name, $value = null);
-
-    /**
-     * 获取配置选项
-     */
     public function getOption($name = null);
 }

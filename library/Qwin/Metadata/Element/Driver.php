@@ -32,7 +32,7 @@ abstract class Qwin_Metadata_Element_Driver extends ArrayObject implements Qwin_
     protected $_default = array();
 
     /**
-     * 配置选项
+     * 选项
      * @var array
      */
     protected $_option = array();
@@ -51,7 +51,7 @@ abstract class Qwin_Metadata_Element_Driver extends ArrayObject implements Qwin_
      * 格式化数据,例如,设置默认数据,为未初始化的键名设置空值
      *
      * @param array $data 数据
-     * @param array $option 配置选项
+     * @param array $option 选项
      * @return Qwin_Metadata_Element_Driver 当前对象
      */
     public function merge($data, array $option = array())
@@ -85,7 +85,7 @@ abstract class Qwin_Metadata_Element_Driver extends ArrayObject implements Qwin_
     }
 
     /**
-     * 获取配置选项
+     * 获取选项
      *
      * @param string $name 配置名称
      * @return mixed

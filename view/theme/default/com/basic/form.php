@@ -28,15 +28,15 @@
 ?>
 <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
 <div class="ui-box-header">
-    <?php $this->loadWidget('Com_Widget_Header') ?>
+    <?php Qwin::hook('ViewContentHeader', $this) ?>
 </div>
 <div class="ui-form-content ui-box-content ui-widget-content">
     <div class="ui-operation-field">
-        <?php echo $operationField ?>
+        <?php echo $operLinks ?>
     </div>
     <?php $formWidget->render($formOption) ?>
     <div class="ui-operation-field">
-        <?php echo $operationField ?>
+        <?php echo $operLinks ?>
     </div>
 </div>
 </div>

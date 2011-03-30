@@ -317,20 +317,17 @@ class Crm_Customer_Metadata extends Com_Metadata
                 ),
             ),
             'model' => array(
-                /*'receiver' => array(
+                'receiver' => array(
+                    'module' => 'Com/Member',
                     'alias' => 'receiver',
                     'type' => 'view',
                     'local' => 'assign_to',
                     'fieldMap' => array(
                         'assign_to' => 'username',
                     ),
-                    'asc' => array(
-                        'package' => 'Common',
-                        'module' => 'Member',
-                        'controller' => 'Member',
-                    ),
                 ),
                 'care' => array(
+                    'module' => 'Crm/Customer/Care',
                     'alias' => 'care',
                     'type' => 'relatedList',
                     'relation' => 'hasMany',
@@ -341,13 +338,9 @@ class Crm_Customer_Metadata extends Com_Metadata
                     'list' => array(
                         //'id', 'name', 'care_at', 'type'
                     ),
-                    'asc' => array(
-                        'package' => 'Crm',
-                        'module' => 'Customer',
-                        'controller' => 'Care',
-                    ),
                 ),
                 'contacts' => array(
+                    'module' => 'Crm/Contact',
                     'alias' => 'contacts',
                     'type' => 'relatedList',
                     'relation' => 'hasMany',
@@ -355,12 +348,7 @@ class Crm_Customer_Metadata extends Com_Metadata
                     'fieldMap' => array(
                         'id' => 'full_name',
                     ),
-                    'asc' => array(
-                        'package' => 'Crm',
-                        'module' => 'Contact',
-                        'controller' => 'Contact',
-                    ),
-                ),*/
+                ),
             ),
             'db' => array(
                 'table' => 'customer',

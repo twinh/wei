@@ -31,7 +31,7 @@ class Com_View_JsonList extends Com_View
     {
         // 初始变量,方便调用
         $request = Qwin::call('-request');
-        $jqGridWidget = Qwin::widget('jqgrid');
+        $jqGridWidget = Qwin::call('-widget')->get('jqgrid');
 
         // 获取并合并布局
         $layout = $jqGridWidget->getLayout($this->meta);

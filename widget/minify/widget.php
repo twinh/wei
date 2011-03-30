@@ -45,8 +45,9 @@ class Minify_Widget extends Qwin_Widget_Abstract
      *
      * @param string $cachePath 缓存文件的路径
      */
-    public function  __construct($cachePath = null)
+    public function  __construct($options)
     {
+        p($options);exit;
         if ($cachePath) {
             $this->setCachePath($cachePath);
         }
