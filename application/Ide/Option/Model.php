@@ -1,6 +1,6 @@
 <?php
 /**
- * Option
+ * Common Class
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,13 +16,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ * @package     Com
+ * @subpackage  Option
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2009-11-21 12:18:00
+ * @since       2010-06-10 08:31:30
  */
 
-class Com_Option_Controller_Option extends Com_ActionController
+class Ide_Option_Model extends Com_Model
 {
+    public function postSave($event)
+    {
+        return Qwin::call('Com_Helper_Option')->setCache($this);
+    }
 }
