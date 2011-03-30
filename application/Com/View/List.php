@@ -30,6 +30,7 @@ class Com_View_List extends Com_View
     public function preDisplay()
     {
         parent::preDisplay();
+
         // 初始变量,方便调用
         $meta       = $this->meta;
         $request    = Qwin::call('-request');
@@ -62,12 +63,11 @@ class Com_View_List extends Com_View
 
         $jqGrid = array(
             'module'    => $this->module,
-            'moduleId'  => strtolower(strtr($this->module, '/', '-')),
             'meta'      => $meta,
             'layout'    => $this->list,
             'option'    => $option,
         );
-        
+
         $this->assign(get_defined_vars());
     }
 }

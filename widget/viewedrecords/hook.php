@@ -40,7 +40,7 @@ class ViewedRecords_Hook extends Qwin_Hook_Abstract
 
     public function hookViewMainLeft($view)
     {
-        return Qwin::widget('viewedrecords')->render($view);
+        return Qwin::call('-widget')->get('viewedrecords')->render($view);
     }
 
     public function hookViewRecord($option)

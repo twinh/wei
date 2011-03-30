@@ -35,7 +35,7 @@ class Qwin_Session implements ArrayAccess
     private $_namespace;
 
     /**
-     * @var array           配置选项
+     * @var array           选项
      *
      *      -- namespace    默认命名空间
      *

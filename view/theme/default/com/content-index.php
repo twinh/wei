@@ -24,9 +24,7 @@
  * @version     $Id$
  * @since       2009-11-24 18:47:32
  */
-?>
-<!-- qwin-packer-sign -->
-<?php
+echo $this->getPackerSign();
 if ($request->isPopup()) :
 ?>
 <style type="text/css">
@@ -43,7 +41,7 @@ else :
 ?>
 <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
 	<div class="ui-box-header">
-    	<?php $this->loadWidget('Com_Widget_Header') ?>
+    	<?php Qwin::hook('ViewContentHeader', $this) ?>
     </div>
     <div class="ui-form-content ui-box-content ui-widget-content">
         <div class="ui-operation-field">

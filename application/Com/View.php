@@ -103,14 +103,16 @@ class Com_View extends Qwin_Application_View
     {
         // 获取配置
         $config = Qwin::config();
+        $widget = Qwin::call('-widget');
 
         // 部分视图常用变量
         $this->assign(array(
-            'widget'    => Qwin::call('-widget'),
-            'minify'    => Qwin::widget('minify'),
-            'jQuery'    => Qwin::widget('jquery'),
+            'widget'    => $widget,
+            'minify'    => $widget->get('minify'),
+            'jQuery'    => $widget->get('jquery'),
             'config'    => $config,
-            'module'    => $config['module'],
+            'module'    => Qwin::call('-module'),
+            'action'    => $config['action'],
             'theme'     => $config['theme'],
         ));
 
@@ -119,7 +121,7 @@ class Com_View extends Qwin_Application_View
             'root'              => $config['resource'] . 'view/theme/' . $config['theme'] . '/',
             'suffix'            => '.php',
             'style'             => $this->getStyle(),
-            'module'            => $config['module'],
+            'module'            => $this->module,
             'action'            => $config['action'],
             'rootModule'        => Qwin::call('Qwin_Application_Module')->getRoot($config['module']),
             'defaultModule'     => $config['defaultModule'],

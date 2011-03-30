@@ -42,7 +42,7 @@ class Com_Module extends Qwin_Application_Module
         // 加载log4php
         if ($config['log']) {
             /* @var $log Logger */
-            $log = Qwin::widget('log4php');
+            $log = Qwin::call('-widget')->get('log4php');
             $log->debug('The module is ' . implode('/', $config['module']));
         }
 
@@ -51,6 +51,7 @@ class Com_Module extends Qwin_Application_Module
 
         // 设置语言类
         Qwin::setMap('-lang', 'Qwin_Application_Language');
+        Qwin::setMap('-view', 'Com_View');
         
         /*if ($config['router']['enable']) {
             $router = Qwin::call('Qwin_Url_Router');

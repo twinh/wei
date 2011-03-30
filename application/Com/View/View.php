@@ -40,9 +40,10 @@ class Com_View_View extends Com_View
         $config         = Qwin::config();
         $url            = Qwin::call('-url');
         $lang           = Qwin::call('-lang');
+        $widget         = Qwin::call('-widget');
         
         /* @var $formWidget Form_Widget */
-        $formWidget = Qwin::widget('form');
+        $formWidget = $widget->get('form');
         $formOption = array(
             'meta'      => $meta,
             'action'    => 'view',
@@ -51,7 +52,7 @@ class Com_View_View extends Com_View
         );
 
         /* @var $jqGridWidget JqGrid_Widget */
-        $jqGridWidget   = Qwin::widget('jqgrid');
+        $jqGridWidget   = $widget->get('jqgrid');
         $jqGridOptions  = array();
 
         // 关联列表的数据配置
@@ -103,6 +104,8 @@ class Com_View_View extends Com_View
             $jqGridList[$alias] = $jqGrid;
         }
         $group = $meta['group'];
+
+        $operLinks = $widget->get('OperLinks')->render($this);
 
         $this->assign(get_defined_vars());
     }

@@ -79,7 +79,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Driver
      * 将数据格式化并加入
      *
      * @param array $data 数据
-     * @param array $option 配置选项
+     * @param array $option 选项
      * @return Qwin_Metadata_Element_Field 当前对象
      */
     public function merge($data, array $option = array())

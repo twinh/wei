@@ -179,10 +179,11 @@ class Qwin_Hook
      *
      * @param string $name 钩子名称
      * @param mixed $param 参数
-     * @return Qwin_Hook 
+     * @return Qwin_Hook|string 当前对象|字符串
      */
     public function call($name, $param = null)
     {
+        $return = '';
         $name = strtolower($name);
         !is_array($param) && $param = array($param);
         if (isset($this->_data[$name])) {
@@ -190,17 +191,22 @@ class Qwin_Hook
                 // 默认文件形式
                 if (isset($callback['file'])) {
                     require_once $callback['file'];
-                    call_user_func_array(
+                    $result = call_user_func_array(
                         array(Qwin::call($callback['class']), 'hook' . $name),
                         $param
                     );
                 // 自定义回调结构形式
                 } else {
                     $callback[1] = isset($callback[1]) ? array_merge($callback[1], $param) : $param;
-                    call_user_func_array($callback[0], $callback[1]);
+                    $result = call_user_func_array($callback[0], $callback[1]);
+                }
+                if (is_string($result)) {
+                    $return .= $result;
                 }
             }
-            
+        }
+        if ($return) {
+            return $return;
         }
         return $this;
     }

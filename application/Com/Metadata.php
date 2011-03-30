@@ -69,10 +69,10 @@ class Com_Metadata extends Qwin_Application_Metadata
         $this->url = Qwin::call('-url');
     }
 
-    public static function getRecordByAsc($asc)
+    public static function getRecordByModule($asc)
     {
-        $meta       = self::getByAsc($asc);
-        $record     = Com_Model::getByAsc($asc);
+        $meta       = self::getByModule($asc);
+        $record     = Com_Model::getByModule($asc);
         return $meta->getReord($record);
     }
 
@@ -80,7 +80,7 @@ class Com_Metadata extends Qwin_Application_Metadata
      * 获取元数据对应的记录对象
      *
      * @param Doctrine_Record $record 原始Doctrine记录对象
-     * @param array $option 配置选项
+     * @param array $option 选项
      * @return Doctrine_Record 带字段定义,表定理,关联关系的Doctrine记录对象
      */
     public function getRecord(Doctrine_Record $record = null, array $option = array())
@@ -124,7 +124,7 @@ class Com_Metadata extends Qwin_Application_Metadata
      * 获取元数据对应的查询对象
      *
      * @param Doctrine_Record $record 原始Doctrine记录对象
-     * @param array $option 配置选项
+     * @param array $option 选项
      * @return Doctrine_Query 查询对象
      * @todo padb问题
      */
@@ -155,6 +155,7 @@ class Com_Metadata extends Qwin_Application_Metadata
 
         foreach ($this['model'] as $alias => $model) {
             if (in_array($model['type'], $option['type']) || in_array($alias, $option['alias'])) {
+                $relatedRecord = Com_Model::getByModule($model['module']);
                 $this->setRecordRelation($record, $model);
                 $query->leftJoin($recordClass . '.' . $alias . ' ' . $alias);
             }
@@ -422,7 +423,7 @@ class Com_Metadata extends Qwin_Application_Metadata
          * 设置关联类的查询语句
          */
         foreach ($this['model'] as $model) {
-            $linkedMetaObj = self::getByAsc($model['asc']);
+            $linkedMetaObj = self::getByModule($model['module']);
 
             // 调整主键的属性,因为查询时至少需要选择一列
             $primaryKey = $linkedMetaObj['db']['primaryKey'];

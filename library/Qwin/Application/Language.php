@@ -59,7 +59,7 @@ class Qwin_Application_Language implements ArrayAccess
     public function  __construct($module = null)
     {
         if (null == $module) {
-            $module = Qwin::config('module');
+            $module = Qwin::call('-module');
         }
 
         $this->_module = Qwin::call('Qwin_Application_Module');

@@ -36,8 +36,7 @@ class Com_ActionController extends Com_Controller
     {
         $request = $this->getRequest();
         if ($request->isJson()) {
-            $service = new Com_Service_JsonList();
-            return $service->process(array(
+            return Com_Widget::getByModule('Com', 'JsonList')->process(array(
                 'module'=> $this->_module,
                 'list'  => $request->getListField(),
                 'order' => $request->getOrder(),
@@ -46,8 +45,7 @@ class Com_ActionController extends Com_Controller
                 'limit' => $request->getLimit(),
             ));
         } else {
-            $service = new Com_Service_List();
-            return $service->process(array(
+            return Com_Widget::getByModule('Com', 'List')->process(array(
                 'module'=> $this->_module,
                 'list'  => $request->getListField(),
                 'popup' => $request['popup'],
@@ -62,8 +60,7 @@ class Com_ActionController extends Com_Controller
      */
     public function actionView()
     {
-        $service = new Com_Service_View();
-        return $service->process(array(
+        return Com_Widget::getByModule('Com', 'View')->process(array(
             'module'    => $this->_module,
             'id'        => $this->_request->getPrimaryKeyValue($this->_module),
         ));
@@ -77,15 +74,13 @@ class Com_ActionController extends Com_Controller
     public function actionAdd()
     {
         if (!$this->_request->isPost()) {
-            $service = new Com_Service_Form();
-            return $service->process(array(
+            return Com_Widget::getByModule('Com', 'Form')->process(array(
                 'module'    => $this->_module,
                 'id'        => $this->_request->getPrimaryKeyValue($this->_module),
                 'initalData'=> $this->_request->getInitialData(),
             ));
         } else {
-            $service = new Com_Service_Add();
-            return $service->process(array(
+            return Com_Widget::getByModule('Com', 'Add')->process(array(
                 'module'    => $this->_module,
                 'data'      => $_POST,
                 'url'       => urldecode($this->_request->post('_page')),
@@ -101,8 +96,7 @@ class Com_ActionController extends Com_Controller
     public function actionEdit()
     {
         if (!$this->_request->isPost()) {
-            $service = new Com_Service_View();
-            return $service->process(array(
+            return Com_Widget::getByModule('Com', 'View')->process(array(
                 'module'    => $this->_module,
                 'id'        => $this->_request->getPrimaryKeyValue($this->_module),
                 'asAction'  => 'edit',
@@ -110,8 +104,7 @@ class Com_ActionController extends Com_Controller
                 'viewClass' => 'Com_View_Edit',
             ));
         } else {
-            $service = new Com_Service_Edit();
-            return $service->process(array(
+            return Com_Widget::getByModule('Com', 'Edit')->process(array(
                 'module'    => $this->_module,
                 'data'      => $_POST,
                 'url'       => urldecode($this->_request->post('_page')),
@@ -126,8 +119,7 @@ class Com_ActionController extends Com_Controller
      */
     public function actionDelete()
     {
-        $service = new Com_Service_Delete();
-        return $service->process(array(
+        return Com_Widget::getByModule('Com', 'Delete')->process(array(
             'module'    => $this->_module,
             'data'      => array(
                 'primaryKeyValue' => $this->_request->getPrimaryKeyValue($this->_module),

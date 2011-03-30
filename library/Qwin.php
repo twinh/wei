@@ -225,23 +225,25 @@ class Qwin
      * @param string $name 类名
      * @param null|array $param 参数
      * @return object 实例化的对象
-     * @todo 是否应该可以加载单例类 getInstance
      * @todo 是否应该实现类替换 Qwin_Request -> Common_Request
      */
     protected static function _instanceClass($name, $param = null)
     {
-        // 没有提供参数的情况下,尝试在配置中查找该类的参数,如果还是没有则直接初始化
-        if (null === $param) {
-            if (!$config = self::config($name)) {
-                return new $name;
-            }
-            $param = $config;
+        $param = (array)$param + (array)self::config($name);
+
+        // 标准单例模式
+        if (method_exists($name, 'getInstance')) {
+            return call_user_func_array(array($name, 'getInstance'), $param);
         }
 
-        // 有参数的情况下使用类反射进行初始化
-        $param = is_array($param) ? $param : array($param);
-        $reflection = new ReflectionClass($name);
-        return $reflection->newInstanceArgs($param);
+        // 没有提供参数的情况下,直接初始化
+        if (empty($param)) {
+            return new $name;
+        } else {
+            // 有参数的情况下使用类反射进行初始化
+            $reflection = new ReflectionClass($name);
+            return $reflection->newInstanceArgs($param);
+        }
     }
     
     /**
@@ -434,19 +436,6 @@ class Qwin
 
         // 不匹配任何操作
         return null;
-    }
-
-    /**
-     * 获取一个微件对象(加速方法)
-     *
-     * @param string $name 微件名称
-     * @return Qwin_Widget_Abstract|Exception 微件对象或未找到微件的异常
-     * @uses Qwin_Widget::get
-     * @see Qwin_Widget
-     */
-    public static function widget($name)
-    {
-        return self::call('Qwin_Widget')->get($name);
     }
 
     /**

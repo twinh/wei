@@ -55,9 +55,9 @@ class Util_Minify_Controller extends Qwin_Application_Controller
         // 获取文件
         $request = Qwin::call('-request');
         $name = $request->get('g');
-        $file = Qwin::widget('minify')->getCacheFile($name);
+        $file = Qwin::call('-widget')->get('minify')->getCacheFile($name);
         if (!is_file($file)) {
-            Qwin::widget('log4php')->info('minify file ' . $name . ' not found.');
+            Qwin::call('-widget')->get('log4php')->info('minify file ' . $name . ' not found.');
             exit;
         }
         $option['minApp']['groups'][$name] = require $file;
