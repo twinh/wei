@@ -63,7 +63,7 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
 
         if (!in_array('add', $unableAction)) {
             $tab['add'] = array(
-                'url'       => $url->url($get, array('action' => 'Add')),
+                'url'       => $url->url($get, array('action' => 'add')),
                 'title'     => $lang->t('ACT_ADD'),
                 'icon'      => 'ui-icon-plus',
                 'target'    => null,
@@ -71,7 +71,7 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
                 'class'     => 'action-add',
             );
             $tab['copy'] = array(
-                'url'   => $url->url($get, array('action' => 'Add')),
+                'url'   => $url->url($get, array('action' => 'add')),
                 'title' => $lang->t('ACT_COPY'),
                 'icon'  => 'ui-icon-transferthick-e-w',
                 'target'    => null,
@@ -102,7 +102,7 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
 
         if (!in_array('list', $unableAction)) {
             $tab['list'] = array(
-                'url' => $url->url($get, array('action' => 'Index')),
+                'url' => $url->url($get, array('action' => 'index')),
                 'title' => $lang->t('ACT_LIST'),
                 'icon' => 'ui-icon-note',
                 'target' => null,

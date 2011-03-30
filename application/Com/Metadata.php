@@ -63,16 +63,16 @@ class Com_Metadata extends Qwin_Application_Metadata
     /**
      * 初始化常用变量
      */
-    public function  __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->url = Qwin::call('-url');
     }
 
-    public static function getRecordByModule($asc)
+    public static function getRecordByModule($module)
     {
-        $meta       = self::getByModule($asc);
-        $record     = Com_Model::getByModule($asc);
+        $meta = self::getByModule($module);
+        $record = Com_Model::getByModule($module);
         return $meta->getReord($record);
     }
 
@@ -115,8 +115,8 @@ class Com_Metadata extends Qwin_Application_Metadata
      */
     public static function getQueryByModule($module, array $option = array())
     {
-        $meta       = self::getByModule($module);
-        $record     = Com_Model::getByModule($module);
+        $meta = self::getByModule($module);
+        $record = Com_Model::getByModule($module);
         return $meta->getQuery($record, $option);
     }
 
@@ -731,6 +731,7 @@ class Com_Metadata extends Qwin_Application_Metadata
      * @param array $cpoyData 未转换过的当前记录的值
      * @return string 当前域的新值
      * @todo 简化,重利用,是否需要用微件的形式
+     * @todo widget
      */
     public function sanitiseListOperation($value, $name, $data, $dataCopy)
     {
@@ -747,14 +748,14 @@ class Com_Metadata extends Qwin_Application_Metadata
         $operation = array();
         if (!in_array('edit', $this->unableAction)) {
             $operation['edit'] = array(
-                'url'   => $url->url(array('module' => $module, 'action' => 'Edit', $primaryKey => $dataCopy[$primaryKey])),
+                'url'   => $url->url(array('module' => $module, 'action' => 'edit', $primaryKey => $dataCopy[$primaryKey])),
                 'title' => $lang->t('ACT_EDIT'),
                 'icon'  => 'ui-icon-tag',
             );
         }
         if (!in_array('view', $this->unableAction)) {
             $operation['view'] = array(
-                'url'   => $url->url(array('module' => $module, 'action' => 'View', $primaryKey => $dataCopy[$primaryKey])),
+                'url'   => $url->url(array('module' => $module, 'action' => 'view', $primaryKey => $dataCopy[$primaryKey])),
                 'title' => $lang->t('ACT_VIEW'),
                 'icon'  => 'ui-icon-lightbulb',
             );
@@ -906,7 +907,7 @@ class Com_Metadata extends Qwin_Application_Metadata
             !isset($this->url) && $this->url = Qwin::call('-url');
             $name = str_replace(':', '\:', $name);
             $dataCopy[$name] = str_replace(':', '\:', $dataCopy[$name]);
-            $value = '<a href="' . $this->url->url(array('module' => $module, 'action' => 'Index', 'search' => $name . ':' . $dataCopy[$name])) . '">' . $data[$name] . '</a>';
+            $value = '<a href="' . $this->url->url(array('module' => $module, 'action' => 'index', 'search' => $name . ':' . $dataCopy[$name])) . '">' . $data[$name] . '</a>';
         //}
         return $value;
     }
