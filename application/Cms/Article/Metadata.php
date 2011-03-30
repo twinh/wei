@@ -93,7 +93,7 @@ class Cms_Article_Metadata extends Com_Metadata
                     'form' => array(
                         '_type' => 'checkbox',
                         '_resourceGetter' => array(
-                            array('Com_Helper_Option', 'get'),
+                            array('Ide_Option_Widget', 'get'),
                             'font-style',
                         ),
                     ),
@@ -109,7 +109,7 @@ class Cms_Article_Metadata extends Com_Metadata
                     'form' => array(
                         '_type' => 'radio',
                         '_resourceGetter' => array(
-                            array('Com_Helper_Option', 'get'),
+                            array('Ide_Option_Widget', 'get'),
                             'font-color',
                         ),
                         '_value' => 'NULL',
@@ -196,7 +196,7 @@ class Cms_Article_Metadata extends Com_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Com_Helper_Option', 'get'),
+                            array('Ide_Option_Widget', 'get'),
                             'yes-or-no',
                         ),
                     ),
@@ -208,7 +208,7 @@ class Cms_Article_Metadata extends Com_Metadata
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Com_Helper_Option', 'sanitise'),
+                            array('Ide_Option_Widget', 'sanitise'),
                             'yes-or-no',
                         ),
                     ),
@@ -220,7 +220,7 @@ class Cms_Article_Metadata extends Com_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Com_Helper_Option', 'get'),
+                            array('Ide_Option_Widget', 'get'),
                             'yes-or-no',
                         ),
                     ),
@@ -232,7 +232,7 @@ class Cms_Article_Metadata extends Com_Metadata
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Com_Helper_Option', 'sanitise'),
+                            array('Ide_Option_Widget', 'sanitise'),
                             'yes-or-no',
                         ),
                     ),

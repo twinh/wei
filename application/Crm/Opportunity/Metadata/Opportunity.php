@@ -44,7 +44,7 @@ class Crm_Opportunity_Metadata_Opportunity extends Com_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Com_Helper_Option', 'get'),
+                            array('Ide_Option_Widget', 'get'),
                             'opportunity-status',
                         ),
                     ),
@@ -54,7 +54,7 @@ class Crm_Opportunity_Metadata_Opportunity extends Com_Metadata
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Com_Helper_Option', 'sanitise'),
+                            array('Ide_Option_Widget', 'sanitise'),
                             'opportunity-status',
                         ),
                         'view' => 'list',
@@ -64,7 +64,7 @@ class Crm_Opportunity_Metadata_Opportunity extends Com_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Com_Helper_Option', 'get'),
+                            array('Ide_Option_Widget', 'get'),
                             'opportunity-type',
                         ),
                     ),
@@ -74,7 +74,7 @@ class Crm_Opportunity_Metadata_Opportunity extends Com_Metadata
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Com_Helper_Option', 'sanitise'),
+                            array('Ide_Option_Widget', 'sanitise'),
                             'opportunity-type',
                         ),
                         'view' => 'list',

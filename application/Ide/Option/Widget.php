@@ -23,7 +23,7 @@
  * @since       2011-01-20 14:38:02
  */
 
-class Com_Helper_Option
+class Ide_Option_Widget extends Qwin_Widget_Abstract
 {
     /**
      * 语言名称,应该以标准形式出现
@@ -68,14 +68,13 @@ class Com_Helper_Option
         ),
     );
 
-
-    public function  __construct($cachePath = null)
+    public function  __construct(array $options = null)
     {
-        if (!is_dir($cachePath)) {
+        if (!is_dir($options['cachePath'])) {
             throw new Qwin_Exception('The option path is not found.');
         }
         // 初始化路径
-        $this->_path = $cachePath;
+        $this->_path = $options['cachePath'];
 
         $lang = Qwin::call('-lang');
         // 初始化附加选项

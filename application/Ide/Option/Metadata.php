@@ -30,14 +30,13 @@ class Ide_Option_Metadata extends Com_Metadata
     public function  setMetadata()
     {
         $this->setCommonMetadata()
-			->merge(
-            array(
+             ->merge(array(
                 'field' => array(
                     'language' => array(
                         'form' => array(
                             '_type' => 'select',
                             '_resourceGetter' => array(
-                                array('Com_Helper_Option', 'get'),
+                                array('Ide_Option_Widget', 'get'),
                                 'language',
                             ),
                         ),

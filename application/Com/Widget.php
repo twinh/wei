@@ -27,14 +27,18 @@
 
 class Com_Widget extends Qwin_Widget
 {
-    public static function getByModule($module, $name, $instanced = true)
+    public static function getByModule($module, $name = null, $instanced = true)
     {
         if ($module instanceof Qwin_Module) {
             $class = $module->toClass();
         } else {
             $class = strtr($module, '/', '_');
         }
-        $class = $class . '_Widget_' . $name;
+        if ($name) {
+            $class = $class . '_Widget_' . $name;
+        } else {
+            $class = $class . '_Widget';
+        }
 
         return $instanced ? Qwin::call('-widget')->getByClass($class) : $class;
     }
