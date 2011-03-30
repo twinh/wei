@@ -62,13 +62,11 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
      */
     protected $_lang;
     
-    public function render($option)
-    {
-        return $this;
-    }
-
     /**
      * 初始化
+     *
+     * @param array $options 选项
+     * @todo 不是每一个微件都需要此流程
      */
     public function __construct(array $options = null)
     {
@@ -82,8 +80,15 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
         // 加载语言
         if (isset($options['lang'])) {
             $this->_lang = Qwin::call('-lang');
-            $lang->appendByFile($this->_rootPath . 'language/' . $lang->getName() . '.php');
+            if ($this->_lang instanceof Qwin_Application_Language) {
+                $this->_lang->appendByFile($this->_rootPath . 'language/' . $this->_lang->getName() . '.php');
+            }
         }
+    }
+
+    public function render($option)
+    {
+        return $this;
     }
 
     /**
