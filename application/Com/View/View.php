@@ -66,7 +66,7 @@ class Com_View_View extends Com_View
             $jqGrid = array();
             $model = $meta['model'][$alias];
             
-            $lang->appendByAsc($model['asc']);
+            $lang->appendByModule($model['asc']);
 
             $tabTitle[$alias] = $lang[$relatedMeta['page']['title']];
 
