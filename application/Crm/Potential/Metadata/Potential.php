@@ -81,7 +81,7 @@ class Crm_Potential_Metadata_Potential extends Com_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Com_Helper_Option', 'get'),
+                            array('Ide_Option_Widget', 'get'),
                             'potential-status',
                         ),
                     ),
@@ -91,7 +91,7 @@ class Crm_Potential_Metadata_Potential extends Com_Metadata
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Com_Helper_Option', 'sanitise'),
+                            array('Ide_Option_Widget', 'sanitise'),
                             'potential-status',
                         ),
                         'view' => 'list',
@@ -101,7 +101,7 @@ class Crm_Potential_Metadata_Potential extends Com_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Com_Helper_Option', 'get'),
+                            array('Ide_Option_Widget', 'get'),
                             'potential-type',
                         ),
                     ),
@@ -111,7 +111,7 @@ class Crm_Potential_Metadata_Potential extends Com_Metadata
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Com_Helper_Option', 'sanitise'),
+                            array('Ide_Option_Widget', 'sanitise'),
                             'potential-type',
                         ),
                         'view' => 'list',
@@ -130,7 +130,7 @@ class Crm_Potential_Metadata_Potential extends Com_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Com_Helper_Option', 'get'),
+                            array('Ide_Option_Widget', 'get'),
                             'customer-source',
                         ),
                     ),
@@ -140,7 +140,7 @@ class Crm_Potential_Metadata_Potential extends Com_Metadata
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Com_Helper_Option', 'sanitise'),
+                            array('Ide_Option_Widget', 'sanitise'),
                             'customer-source',
                         ),
                         'view' => 'list',

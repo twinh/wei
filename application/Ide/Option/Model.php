@@ -29,6 +29,6 @@ class Ide_Option_Model extends Com_Model
 {
     public function postSave($event)
     {
-        return Qwin::call('Com_Helper_Option')->setCache($this);
+        return Com_Widget::getByModule('Ide/Option')->setCache($this);
     }
 }

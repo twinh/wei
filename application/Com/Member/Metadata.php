@@ -115,13 +115,13 @@ class Com_Member_Metadata extends Com_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Com_Helper_Option', 'get'),
+                            array('Ide_Option_Widget', 'get'),
                             'sex',
                         ),
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Com_Helper_Option', 'sanitise'),
+                            array('Ide_Option_Widget', 'sanitise'),
                             'sex',
                         ),
                         'view' => 'list',
@@ -152,7 +152,7 @@ class Com_Member_Metadata extends Com_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Com_Helper_Option', 'get'),
+                            array('Ide_Option_Widget', 'get'),
                             'language',
                         ),
                     ),

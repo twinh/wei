@@ -49,13 +49,13 @@ class Crm_Customer_Metadata_Customer extends Com_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Com_Helper_Option', 'get'),
+                            array('Ide_Option_Widget', 'get'),
                             'sex',
                         ),
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Com_Helper_Option', 'sanitise'),
+                            array('Ide_Option_Widget', 'sanitise'),
                             'sex',
                         ),
                         'view' => 'list',
@@ -69,13 +69,13 @@ class Crm_Customer_Metadata_Customer extends Com_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Com_Helper_Option', 'get'),
+                            array('Ide_Option_Widget', 'get'),
                             'customer-type',
                         ),
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Com_Helper_Option', 'sanitise'),
+                            array('Ide_Option_Widget', 'sanitise'),
                             'customer-type',
                         ),
                         'view' => 'list',
@@ -89,13 +89,13 @@ class Crm_Customer_Metadata_Customer extends Com_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Com_Helper_Option', 'get'),
+                            array('Ide_Option_Widget', 'get'),
                             'customer-source',
                         ),
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Com_Helper_Option', 'sanitise'),
+                            array('Ide_Option_Widget', 'sanitise'),
                             'customer-source',
                         ),
                         'view' => 'list',
@@ -109,13 +109,13 @@ class Crm_Customer_Metadata_Customer extends Com_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Com_Helper_Option', 'get'),
+                            array('Ide_Option_Widget', 'get'),
                             'customer-grade',
                         ),
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Com_Helper_Option', 'sanitise'),
+                            array('Ide_Option_Widget', 'sanitise'),
                             'customer-grade',
                         ),
                         'view' => 'list',
@@ -129,7 +129,7 @@ class Crm_Customer_Metadata_Customer extends Com_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Com_Helper_Option', 'get'),
+                            array('Ide_Option_Widget', 'get'),
                             'customer-status',
                         ),
                     ),
@@ -139,7 +139,7 @@ class Crm_Customer_Metadata_Customer extends Com_Metadata
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Com_Helper_Option', 'sanitise'),
+                            array('Ide_Option_Widget', 'sanitise'),
                             'customer-status',
                         ),
                         'view' => 'list',
@@ -267,13 +267,13 @@ class Crm_Customer_Metadata_Customer extends Com_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Com_Helper_Option', 'get'),
+                            array('Ide_Option_Widget', 'get'),
                             'payment-type',
                         ),
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Com_Helper_Option', 'sanitise'),
+                            array('Ide_Option_Widget', 'sanitise'),
                             'payment-type',
                         ),
                         'view' => 'list',

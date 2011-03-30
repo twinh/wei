@@ -69,7 +69,7 @@ class Ide_Config_Group_Metadata extends Com_Metadata
                         '_type' => 'select',
                         '_value' => 1,
                         '_resourceGetter' => array(
-                            array('Com_Helper_Option', 'get'),
+                            array('Ide_Option_Widget', 'get'),
                             'yes-or-no',
                         ),
                     ),
@@ -78,7 +78,7 @@ class Ide_Config_Group_Metadata extends Com_Metadata
                     ),
                     'sanitiser' => array(
                         'list' => array(
-                            array('Com_Helper_Option', 'sanitise'),
+                            array('Ide_Option_Widget', 'sanitise'),
                             'yes-or-no',
                         ),
                         'view' => 'list',
