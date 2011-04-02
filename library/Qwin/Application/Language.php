@@ -151,13 +151,15 @@ class Qwin_Application_Language implements ArrayAccess
             return $name;
         }
 
+        return false;
+        // todo 不存在时记录 $this->log('');
         // 构建语言文件路径
-        $root = $this->_module->getRoot($module);
-        $path = $this->_module->getPath($module);
-        $file = $path . $root . '/' . 'Language/' . $name . '.php';
+        //$root = $this->_module->getRoot($module);
+        //$path = $this->_module->getPath($module);
+        //$file = $path . $root . '/' . 'Language/' . $name . '.php';
 
-        require_once 'Qwin/Application/Language/Exception.php';
-        throw new Qwin_Application_Language_Exception('Language file "' . $file . '" not found.');
+        //require_once 'Qwin/Application/Language/Exception.php';
+        //throw new Qwin_Application_Language_Exception('Language file "' . $file . '" not found.');
     }
 
     /**

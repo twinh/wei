@@ -36,14 +36,22 @@ class Com_Member_Metadata extends Com_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Helper_Category', 'getTreeResource'),
+                            array('Com_Category_Widget', 'get'),
                             array(
-                                'package' => 'Common',
-                                'module' => 'Member',
-                                'controller' => 'Group',
+                                'com/member/group',
+                                null,
+                                array('id', null, 'name'),
                             ),
-                            NULL,
-                            array('id', NULL, 'name')
+                        ),
+                    ),
+                    'sanitiser' => array(
+                        'list' => array(
+                            array('Com_Category_Widget', 'sanitise'),
+                            array(
+                                'com/member/group',
+                                null,
+                                array('id', null, 'name'),
+                            ),
                         ),
                     ),
                     'attr' => array(

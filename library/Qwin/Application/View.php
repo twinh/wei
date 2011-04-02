@@ -77,15 +77,17 @@ class Qwin_Application_View extends ArrayObject
     public function  __construct($input = array())
     {
         Qwin::set('-view', $this);
-        parent::__construct($input, self::ARRAY_AS_PROPS);
+        $this->setFlags(ArrayObject::ARRAY_AS_PROPS);
         // todo 是否会造成重复
         // 打开缓冲区
         ob_start();
 
-        // 自定义错误和异常处理
-        set_exception_handler(array($this, 'displayException'));
-        // TODO 导致火狐提示页面载入出错,连接被重置
-        //set_error_handler(array($this, 'displayError'));
+//        // 自定义错误和异常处理
+//        restore_exception_handler();
+//        set_exception_handler(array($this, 'displayException'));
+//        // TODO 导致火狐提示页面载入出错,连接被重置
+//        restore_error_handler();
+//        set_error_handler(array($this, 'displayError'));
     }
 
     /**

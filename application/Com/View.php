@@ -56,7 +56,7 @@ class Com_View extends Qwin_Application_View
      */
     public function __construct()
     {
-        parent::__construct();
+        $this->setFlags(ArrayObject::ARRAY_AS_PROPS);
         Qwin::get('-app')->setView($this);
         Qwin::set('-view', $this);
     }
@@ -180,7 +180,7 @@ class Com_View extends Qwin_Application_View
      * @return Com_View 当前对象
      */
     public function display($layout = null, array $data = null)
-    {
+    {   
         $this->preDisplay();
 
         // 不再输出视图,一般在preDisplay中设置该参数

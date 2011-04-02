@@ -63,6 +63,6 @@ class Util_Minify_Controller extends Qwin_Application_Controller
         $option['minApp']['groups'][$name] = require $file;
 
         // serve!
-        Minify::serve('MinApp', $option);
+        $result = Minify::serve('MinApp', $option);
     }
 }
