@@ -131,7 +131,7 @@ class Qwin_Application
 
         // 注册当前类
         Qwin::set('-app', $this);
-
+        
         // todo启动Url路由
 
         // 加载视图
@@ -204,3 +204,11 @@ class Qwin_Application
         return str_pad(round((microtime(true) - $this->_startTime), 4), 6, 0);
     }
 }
+function err($errno, $errstr, $errfile, $errline)
+ {
+ echo "<b>Custom error:</b> [$errno] $errstr<br />";
+ echo " Error on line $errline in $errfile<br />";
+ echo "Ending Script";
+ die();
+ }
+

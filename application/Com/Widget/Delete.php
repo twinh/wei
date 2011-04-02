@@ -136,7 +136,7 @@ class Com_Widget_Delete extends Qwin_Widget_Abstract
         $this->executeCallback('afterDb', $config);
         
         $url = urldecode($this->request->post('_page'));
-        '' == $url && $url = $this->url->url($this->_asc, array('action' => 'Index'));
+        '' == $url && $url = $this->url->url($this->_asc, array('action' => 'index'));
 
         $return = array(
             'result' => true,

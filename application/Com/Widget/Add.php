@@ -103,7 +103,7 @@ class Com_Widget_Add extends Qwin_Widget_Abstract
         // 展示视图
         if ($option['display']) {
             if (!$option['url']) {
-                $option['url'] = Qwin::call('-url')->url($option['module'], array('action' => 'Index'));
+                $option['url'] = Qwin::call('-url')->url($option['module'], array('action' => 'index'));
             }
             return Qwin::call('-view')->success('MSG_OPERATE_SUCCESSFULLY', $option['url']);
         }

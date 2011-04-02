@@ -51,8 +51,9 @@ class Com_Module extends Qwin_Application_Module
 
         // 设置语言类
         Qwin::setMap('-lang', 'Qwin_Application_Language');
+
         Qwin::setMap('-view', 'Com_View');
-        
+        Qwin::call('Com_View');
         /*if ($config['router']['enable']) {
             $router = Qwin::call('Qwin_Url_Router');
             $router->addList($config['router']['list']);

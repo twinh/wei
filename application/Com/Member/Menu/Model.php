@@ -28,9 +28,9 @@ class Com_Member_Menu_Model extends Com_Model
 {
     public function postSave($event)
     {
-//        $query = Com_Metadata::getQueryByModule('Com/Member/Menu');
-//        $query->orderBy('order ASC');
-//        $data = $query->execute()->toArray();
-//        Qwin::call('Qwin_Cache_List')->writeCache($data, 'AdminMenu');
+        $query = Com_Metadata::getQueryByModule('Com/Member/Menu');
+        $query->orderBy('order ASC');
+        $data = $query->execute()->toArray();
+        Qwin_Util_File::writeArray(Qwin::config('root') . 'cache/menu.php', $data);
     }
 }

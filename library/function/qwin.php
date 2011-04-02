@@ -110,13 +110,13 @@ function qw_url(array $data = null)
 function qw_lang($name = null)
 {
     static $lang;
-    null == $lang && $lang = Qwin::call('-lang');
+    null == $lang && $lang = Qwin::call('Qwin_Application_Language');
     return $lang->t($name);
 }
 
 function qw_lang_to_js()
 {
-    return 'Qwin.Lang = ' . json_encode(Qwin::call('-lang')->toArray()) . ';';
+    return 'Qwin.Lang = ' . json_encode(Qwin::call('Qwin_Application_Language')->toArray()) . ';';
 }
 
 function qw_null_text($data = null)

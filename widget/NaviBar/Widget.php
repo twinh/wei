@@ -28,7 +28,7 @@ class NaviBar_Widget extends Qwin_Widget_Abstract
     public function render($option)
     {
         // 加载页眉导航的缓存
-        $navigationData = require Qwin::config('root') . 'cache/php/admin-menu.php';
+        $navigationData = require Qwin::config('root') . 'cache/menu.php';
 
         // 页面名称
         $queryString = empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING'];
