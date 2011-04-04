@@ -35,8 +35,8 @@ validateCode['<?php echo $option['id'] ?>'] = <?php echo $validateCode ?>;
 ?>
 <form id="<?php echo $option['id'] ?>" name="form" method="post" action="<?php echo qw_url()?>">
 <div class="ui-operation-field">
-    <?php echo qw_jquery_button('submit', qw_lang('ACT_SUBMIT'), 'ui-icon-check') ?>
-    <?php echo qw_jquery_button('reset', qw_lang('ACT_RESET'), 'ui-icon-arrowreturnthick-1-w') ?>
+    <?php echo Qwin_Util_JQuery::button('submit', qw_lang('ACT_SUBMIT'), 'ui-icon-check') ?>
+    <?php echo Qwin_Util_JQuery::button('reset', qw_lang('ACT_RESET'), 'ui-icon-arrowreturnthick-1-w') ?>
 </div>
 <div class="ui-helper-hidden">
     <?php
@@ -87,8 +87,8 @@ validateCode['<?php echo $option['id'] ?>'] = <?php echo $validateCode ?>;
 </fieldset>
 <?php endforeach ?>
 <div class="ui-operation-field">
-    <input type="hidden" name="_page" value="<?php echo qw_referer_page() ?>" />
-    <?php echo qw_jquery_button('submit', qw_lang('ACT_SUBMIT'), 'ui-icon-check') ?>
-    <?php echo qw_jquery_button('reset', qw_lang('ACT_RESET'), 'ui-icon-arrowreturnthick-1-w') ?>
+    <input type="hidden" name="_page" value="<?php echo $refererPage ?>" />
+    <?php echo Qwin_Util_JQuery::button('submit', qw_lang('ACT_SUBMIT'), 'ui-icon-check') ?>
+    <?php echo Qwin_Util_JQuery::button('reset', qw_lang('ACT_RESET'), 'ui-icon-arrowreturnthick-1-w') ?>
 </div>
 </form>

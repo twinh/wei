@@ -73,6 +73,7 @@ class Form_Widget extends Qwin_Widget_Abstract
         $data = $option['data'];
         $minify = $this->_widget->get('minify');
         $lang = Qwin::call('-lang');
+        $refererPage = urlencode(Qwin::call('-request')->server('HTTP_REFERER'));
 
         $option['id'] = sprintf($option['id'], $meta->getId());
 
