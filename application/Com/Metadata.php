@@ -763,7 +763,7 @@ class Com_Metadata extends Qwin_Application_Metadata
         $operation = array();
         if (!in_array('edit', $this->unableAction)) {
             $operation['edit'] = array(
-                'url'   => $url->url($module->toUrl(), 'eidt', array($primaryKey => $dataCopy[$primaryKey])),
+                'url'   => $url->url($module->toUrl(), 'edit', array($primaryKey => $dataCopy[$primaryKey])),
                 'title' => $lang->t('ACT_EDIT'),
                 'icon'  => 'ui-icon-tag',
             );
