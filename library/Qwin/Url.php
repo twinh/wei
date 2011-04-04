@@ -27,6 +27,11 @@
 
 class Qwin_Url
 {
+    protected $_options = array(
+        'module' => 'module',
+        'action' => 'action',
+    );
+
     /**
      * 路由器对象
      * @var Qwin_Url_Router
@@ -38,8 +43,6 @@ class Qwin_Url
      * @var Qwin_Url_Router
      */
     protected $_routerTmp;
-
-    protected $_processer;
 
     /**
      * 初始化,按需引入路由器对象
@@ -57,7 +60,7 @@ class Qwin_Url
      * @param array $data url数组,如$_GET
      * @return string
      */
-    public function url(array $data = null)
+    public function build(array $data = null)
     {
         // TODO 是否应该引入Qwin_Request
         if (null == $data) {
@@ -75,7 +78,7 @@ class Qwin_Url
         if ($this->_router) {
             return $this->_router->build($data);
         }
-        return '?' . strtr(urldecode(http_build_query($data)), array('&amp;' => '&'));;
+        return '?' . strtr(urldecode(http_build_query($data)), array('&amp;' => '&'));
     }
 
     /**
@@ -134,5 +137,21 @@ class Qwin_Url
     public function getRouter()
     {
         return $this->_router;
+    }
+
+    /**
+     * 构建模块链接
+     *
+     * @param string $module 模块标识
+     * @param string $action 行为名称
+     * @param array $params 附加参数
+     * @return string
+     */
+    public function url($module, $action = 'index', array $params = array())
+    {
+        return $this->build(array(
+            $this->_options['module'] => $module,
+            $this->_options['action'] => $action,
+        ) + $params);
     }
 }

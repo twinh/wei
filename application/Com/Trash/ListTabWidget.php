@@ -33,7 +33,7 @@ class Com_Trash_ListTabWidget
 
         // 替换添加,删除的链接
         $param['tab']['restore'] = array(
-            'url' => $url->url(array('module' => $module, 'action' => 'Restore')),
+            'url' => $url->url($module, 'restore'),
             'title' => $lang->t('ACT_RESTORE'),
             'icon' => 'ui-icon-arrowreturnthick-1-w',
             'target' => null,
@@ -41,7 +41,7 @@ class Com_Trash_ListTabWidget
             'class' => null,
         );
         $param['tab']['empty'] = array(
-            'url' => $url->url(array('module' => $module, 'action' => 'Empty')),
+            'url' => $url->url($module, 'empty'),
             'title' => $lang->t('ACT_EMPTY'),
             'icon' => 'ui-icon-closethick',
             'target' => null,

@@ -23,13 +23,70 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2010-02-13 23:02
+ * @todo        缩减重复代码
  */
 
 class Qwin_Request implements ArrayAccess
 {
-    public function  __construct()
+    /**
+     * @var array           默认选项
+     *
+     *  -- get              注入$_GET的参数数组
+     *
+     *  -- post             注入$_POST的参数数组
+     *
+     *  -- cookie           注入$_COOKIE的参数数组
+     *
+     *  -- request          注入$_REQUEST的参数数组
+     */
+    protected $_defaults = array(
+        'get'       => array(),
+        'post'      => array(),
+        'cookie'    => array(),
+        'request'   => array(),
+    );
+
+    /**
+     * 存储$_GET的值和用户自定义的get值
+     * @var array
+     */
+    protected $_get = array();
+
+    /**
+     * 存储$_POST的值和用户自定义的post值
+     * @var array
+     */
+    protected $_post = array();
+
+    /**
+     * 存储$_REQUEST的值和用户自定义的request值
+     * @var array
+     */
+    protected $_request = array();
+
+    /**
+     * 存储$_COOKIE的值和用户自定义的cookie值
+     * @var array
+     */
+    protected $_cookie = array();
+
+    public function __construct(array $options = array())
     {
-        $this->_data = &$_REQUEST;
+        $options = $options + $this->_defaults;
+
+        // 通过创建新的变量,而不是直接修改,不污染全局变量
+        $this->_get = $_GET;
+        $this->_post = $_POST;
+        $this->_request = $_REQUEST;
+
+        // 根据配置注入各变量
+        !empty($options['get']) && $this->addGet($options['get']);
+        !empty($options['post']) && $this->addPost($options['post']);
+        !empty($options['cookie']) && $this->addCookie($options['cookie']);
+        !empty($options['request']) && $this->addRequest($options['request']);
+
+        // 构建数组对象
+        //parent::__construct(&$this->_request, ArrayObject::ARRAY_AS_PROPS);
     }
 
     /**
@@ -41,12 +98,31 @@ class Qwin_Request implements ArrayAccess
     public function get($name)
     {
         if (!is_array($name)) {
-            return isset($_GET[$name]) ? $_GET[$name] : null;
+            return isset($this->_get[$name]) ? $this->_get[$name] : null;
         }
         foreach($name as $key) {
-            $array[$key] = isset($_GET[$key]) ? $_GET[$key] : null;
+            $array[$key] = isset($this->_get[$key]) ? $this->_get[$key] : null;
         }
         return $array;
+    }
+
+    /**
+     * 注入get变量
+     *
+     * @param string|array $name 名称或数组
+     * @param mixed $value 值
+     * @return Qwin_Request 当前对象
+     */
+    public function addGet($name, $value = null)
+    {
+        if (is_array($name)) {
+            $this->_get += $name;
+            $this->_request += $name;
+        } else {
+            $this->_get[$name] = $value;
+            $this->_request[$name] = $value;
+        }
+        return $this;
     }
 
     /**
@@ -58,12 +134,31 @@ class Qwin_Request implements ArrayAccess
     public function post($name)
     {
         if (!is_array($name)) {
-            return isset($_POST[$name]) ? $_POST[$name] : null;
+            return isset($this->_post[$name]) ? $this->_post[$name] : null;
         }
         foreach($name as $key) {
-            $array[$key] = isset($_POST[$key]) ? $_POST[$key] : null;
+            $array[$key] = isset($this->_post[$key]) ? $this->_post[$key] : null;
         }
         return $array;
+    }
+
+    /**
+     * 注入post变量
+     *
+     * @param string|array $name 名称或数组
+     * @param mixed $value 值
+     * @return Qwin_Request 当前对象
+     */
+    public function addPost($name, $value = null)
+    {
+        if (is_array($name)) {
+            $this->_post += $name;
+            $this->_request += $name;
+        } else {
+            $this->_post[$name] = $value;
+            $this->_request[$name] = $value;
+        }
+        return $this;
     }
 
     /**
@@ -75,12 +170,31 @@ class Qwin_Request implements ArrayAccess
     public function cookie($name)
     {
         if (!is_array($name)) {
-            return isset($_COOKIE[$name]) ? $_COOKIE[$name] : null;
+            return isset($this->_cookie[$name]) ? $this->_cookie[$name] : null;
         }
         foreach($name as $key) {
-            $array[$key] = isset($_COOKIE[$key]) ? $_COOKIE[$key] : null;
+            $array[$key] = isset($this->_cookie[$key]) ? $this->_cookie[$key] : null;
         }
         return $array;
+    }
+
+    /**
+     * 注入cookie变量
+     *
+     * @param string|array $name 名称或数组
+     * @param mixed $value 值
+     * @return Qwin_Request 当前对象
+     */
+    public function addCookie($name, $value = null)
+    {
+        if (is_array($name)) {
+            $this->_cookie += $name;
+            $this->_request += $name;
+        } else {
+            $this->_cookie[$name] = $value;
+            $this->_request[$name] = $value;
+        }
+        return $this;
     }
     
     /**
@@ -92,14 +206,31 @@ class Qwin_Request implements ArrayAccess
     public function request($name)
     {
         if (!is_array($name)) {
-            return isset($_REQUEST[$name]) ? $_REQUEST[$name] : null;
+            return isset($this->_request[$name]) ? $this->_request[$name] : null;
         }
         foreach($name as $key) {
-            $array[$key] = isset($_REQUEST[$key]) ? $_REQUEST[$key] : null;
+            $array[$key] = isset($this->_request[$key]) ? $this->_request[$key] : null;
         }
         return $array;
     }
 
+    /**
+     * 注入request变量
+     *
+     * @param string|array $name 名称或数组
+     * @param mixed $value 值
+     * @return Qwin_Request 当前对象
+     */
+    public function addRequest($name, $value = null)
+    {
+        if (is_array($name)) {
+            $this->_request += $name;
+        } else {
+            $this->_request[$name] = $value;
+        }
+        return $this;
+    }
+    
     /**
      * 获取$_REQUEST数组中的值
      *
@@ -145,7 +276,7 @@ class Qwin_Request implements ArrayAccess
      */
     public function offsetExists($offset)
     {
-        return isset($this->_data[$offset]);
+        return isset($this->_request[$offset]);
     }
 
     /**
@@ -156,7 +287,7 @@ class Qwin_Request implements ArrayAccess
      */
     public function offsetGet($offset)
     {
-        return isset($this->_data[$offset]) ? $this->_data[$offset] : null;
+        return isset($this->_request[$offset]) ? $this->_request[$offset] : null;
     }
 
     /**
@@ -167,7 +298,7 @@ class Qwin_Request implements ArrayAccess
      */
     public function offsetSet($offset, $value)
     {
-        $this->_data[$offset] = $value;
+        $this->_request[$offset] = $value;
     }
 
     /**
@@ -177,7 +308,7 @@ class Qwin_Request implements ArrayAccess
      */
     public function offsetUnset($offset)
     {
-        unset($this->_data[$offset]);
+        unset($this->_request[$offset]);
     }
 
     public function getModule()
@@ -200,5 +331,15 @@ class Qwin_Request implements ArrayAccess
     public function isAjax()
     {
         return (bool)$this->get('ajax');
+    }
+
+    /**
+     * 是否请求以Json数据显示
+     *
+     * @return bool
+     */
+    public function isJson()
+    {
+        return (bool)$this->get('json');
     }
 }

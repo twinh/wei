@@ -98,7 +98,7 @@ class Com_Member_Group_Metadata extends Com_Metadata
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
         $module = $this->getModule();
-        $html = Qwin_Util_JQuery::icon($url->url(array('module' => $module, 'action' => 'AllocatePermission', $primaryKey => $copyData[$primaryKey])), $lang->t('ACT_ALLOCATE_PERMISSION'), 'ui-icon-person')
+        $html = Qwin_Util_JQuery::icon($url->url($module, 'AllocatePermission', array($primaryKey => $copyData[$primaryKey])), $lang->t('ACT_ALLOCATE_PERMISSION'), 'ui-icon-person')
               . parent::sanitiseListOperation($value, $name, $data, $copyData);
         return $html;
     }

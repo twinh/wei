@@ -165,6 +165,8 @@ class Com_View extends Qwin_Application_View
     /**
      * 输出视图
      * 输出视图的情况:显示数据,信息提示,跳转.
+     * 当请求是Ajax时,返回content或特定视图,
+     * 当请求是Json时,应该返回纯Json数据,以此类推.
      *
      * @param string $layout 布局路径
      * @param array $data 数据
@@ -216,10 +218,8 @@ class Com_View extends Qwin_Application_View
 
         $url = Qwin::call('-url');
         $minify = $this->minify;
-        $jsUrl = array('module' => 'util/minify', 'g' => $minify->pack('js'));
-        $cssUrl =  array('g' => $minify->pack('css')) + $jsUrl;
-        $replace = Qwin_Util_Html::jsTag($url->url($jsUrl))
-                 . Qwin_Util_Html::cssLinkTag($url->url($cssUrl));
+        $replace = Qwin_Util_Html::jsTag($url->url('util/minify', 'index', array('g' => $minify->pack('js'))))
+                 . Qwin_Util_Html::cssLinkTag($url->url('util/minify', 'index', array('g' => $minify->pack('css'))));
 
         $output = Qwin_Util_String::replaceFirst($this->getPackerSign(), $replace, $output);
         echo $output;

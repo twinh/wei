@@ -763,14 +763,14 @@ class Com_Metadata extends Qwin_Application_Metadata
         $operation = array();
         if (!in_array('edit', $this->unableAction)) {
             $operation['edit'] = array(
-                'url'   => $url->url(array('module' => $module->toUrl(), 'action' => 'edit', $primaryKey => $dataCopy[$primaryKey])),
+                'url'   => $url->url($module->toUrl(), 'eidt', array($primaryKey => $dataCopy[$primaryKey])),
                 'title' => $lang->t('ACT_EDIT'),
                 'icon'  => 'ui-icon-tag',
             );
         }
         if (!in_array('view', $this->unableAction)) {
             $operation['view'] = array(
-                'url'   => $url->url(array('module' => $module->toUrl(), 'action' => 'view', $primaryKey => $dataCopy[$primaryKey])),
+                'url'   => $url->url($module->toUrl(), 'view', array($primaryKey => $dataCopy[$primaryKey])),
                 'title' => $lang->t('ACT_VIEW'),
                 'icon'  => 'ui-icon-lightbulb',
             );
@@ -791,7 +791,7 @@ class Com_Metadata extends Qwin_Application_Metadata
                 $jsLang = 'MSG_CONFIRM_TO_DELETE_TO_TRASH';
             }
             $operation['delete'] = array(
-                'url'   => 'javascript:if(confirm(Qwin.Lang.' . $jsLang . ')){window.location=\'' . $url->url(array('module' => $module->toUrl(), 'action' => 'delete', $primaryKey => $dataCopy[$primaryKey])) . '\';}',
+                'url'   => 'javascript:if(confirm(Qwin.Lang.' . $jsLang . ')){window.location=\'' . $url->url($module->toUrl(), 'delete', array($primaryKey => $dataCopy[$primaryKey])) . '\';}',
                 'title' => $lang->t('ACT_DELETE'),
                 'icon'  => $icon,
             );
@@ -922,7 +922,7 @@ class Com_Metadata extends Qwin_Application_Metadata
             !isset($this->url) && $this->url = Qwin::call('-url');
             $name = str_replace(':', '\:', $name);
             $dataCopy[$name] = str_replace(':', '\:', $dataCopy[$name]);
-            $value = '<a href="' . $this->url->url(array('module' => $module->toUrl(), 'action' => 'index', 'search' => $name . ':' . $dataCopy[$name])) . '">' . $data[$name] . '</a>';
+            $value = '<a href="' . $this->url->url($module->toUrl(), 'index', array('search' => $name . ':' . $dataCopy[$name])) . '">' . $data[$name] . '</a>';
         //}
         return $value;
     }
