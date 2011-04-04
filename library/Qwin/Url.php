@@ -27,9 +27,14 @@
 
 class Qwin_Url
 {
-    protected $_options = array(
-        'module' => 'module',
-        'action' => 'action',
+    /**
+     * 提供一个只有两个值的数组,供快速构建url服务
+     * @var array
+     * @todo 允许配置
+     */
+    protected $_url = array(
+        'name1' => 'module',
+        'name2' => 'action',
     );
 
     /**
@@ -140,18 +145,24 @@ class Qwin_Url
     }
 
     /**
-     * 构建模块链接
+     * 快速构建链接
      *
-     * @param string $module 模块标识
-     * @param string $action 行为名称
-     * @param array $params 附加参数
-     * @return string
+     * 大多数的应用,都是通过两个参数定位请求,
+     * 例如Qwin使用的是的模块(module)和操作(action)两个参数,
+     * 其他一些程序可能是使用控制器(controller)和操作(action),
+     * 或是模块(mod,m)和操作(act,a)的缩写等等
+     * 通过该方法,可以减少编写链接的工作量,同时将参数名称隐藏起来
+     *
+     * @param string $value1 值1
+     * @param string $value2 值2
+     * @param array $params 其他参数
+     * @return 链接
      */
-    public function url($module, $action = 'index', array $params = array())
+    public function url($value1, $value2 = 'index', array $params = array())
     {
         return $this->build(array(
-            $this->_options['module'] => $module,
-            $this->_options['action'] => $action,
+            $this->_url['name1'] => $value1,
+            $this->_url['name2'] => $value2,
         ) + $params);
     }
 }
