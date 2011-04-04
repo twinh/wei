@@ -138,7 +138,7 @@ class Qwin_Application
         $this->_view = Qwin::call('Qwin_Application_View');
 
         // 初始化请求
-        $request = Qwin::call($config['initClasses']['request']);
+        $request = Qwin::call('-request');
 
         // TODO 强化request对象
         // 获取模块和行为

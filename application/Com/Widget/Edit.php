@@ -43,9 +43,6 @@ class Com_Widget_Edit extends Qwin_Widget_Abstract
         // 初始配置
         $option     = array_merge($this->_option, $option);
         
-        /* @var $app Qwin_Application */
-        $app        = Qwin::call('-app');
-        
         /* @var $meta Com_Metadata */
         $meta       = Com_Metadata::getByModule($option['module']);
         $primaryKey = $meta['db']['primaryKey'];
@@ -93,6 +90,7 @@ class Com_Widget_Edit extends Qwin_Widget_Abstract
         $dbData->fromArray($data);
         $dbData->save();
 
+        $url->url($module . '/' . $action, '');
         // 展示视图
         if ($option['display']) {
             if (!$option['url']) {

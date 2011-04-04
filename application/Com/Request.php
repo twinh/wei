@@ -322,24 +322,4 @@ class Com_Request extends Qwin_Request
         }
         return $result;
     }
-
-    /**
-     * 是否请求以Json数据显示
-     *
-     * @return bool
-     */
-    public function isJson()
-    {
-        return (bool)$this->get('json');
-    }
-
-    /**
-     * 是否请求以弹出窗口的形式显示
-     *
-     * @return bool
-     */
-    public function isPopup()
-    {
-        return (bool)$this->get('popup');
-    }
 }

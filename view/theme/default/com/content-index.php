@@ -25,7 +25,7 @@
  * @since       2009-11-24 18:47:32
  */
 echo $this->getPackerSign();
-if ($request->isPopup()) :
+if ($request->isAjax()) :
 ?>
 <style type="text/css">
 #t_ui-jqgrid-table{

@@ -43,7 +43,7 @@ class Com_View_List extends Com_View
         $option         = array();
       
         // 获取json数据的地址
-        $option['url'] = $url->url(array('json' => true) + $_GET);
+        $option['url'] = $url->build(array('json' => true) + $_GET);
 
         // 设置Url参数的名称
         $option['rowNum']        = $request->getLimit();
