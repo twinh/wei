@@ -190,4 +190,15 @@ class Qwin_Request implements ArrayAccess
         $action = $this->get('action');
         return $action ? strtolower($action) : 'index';
     }
+
+    /**
+     * 是否是ajax请求
+     *
+     * @return bool
+     * @todo 是否应该从server判断
+     */
+    public function isAjax()
+    {
+        return (bool)$this->get('ajax');
+    }
 }

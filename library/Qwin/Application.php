@@ -123,7 +123,7 @@ class Qwin_Application
         $config = Qwin::config($config);
 
         // 设置应用启动钩子
-        Qwin::hook('appStartup');
+        Qwin::hook('AppStartup');
         
         // 加载Qwin函数库
         // TODO 如何合法使用?
@@ -135,14 +135,18 @@ class Qwin_Application
         // todo启动Url路由
 
         // 加载视图
-        $this->_view = Qwin::call($config['initClasses']['view']);
+        $this->_view = Qwin::call('Qwin_Application_View');
 
         // 初始化请求
         $request = Qwin::call($config['initClasses']['request']);
 
+        // TODO 强化request对象
         // 获取模块和行为
         $module = $request->getModule();
+        !$module && $module = $config['defaultModule'];
         $action = $request->getAction();
+        !$action && $action = $config['defaultAction'];
+        /* @var $module Qwin_Module */
         $module = Qwin::call('-module', $module);
         Qwin::config('action', $action);
 
@@ -150,6 +154,9 @@ class Qwin_Application
         if (false === Qwin_Application_Module::load($module)) {
             throw new Qwin_Application_Exception('Module "' . $module . '" not found.');
         }
+
+        // 加载模块语言
+        Qwin::call('-lang')->appendByModule($module);
 
         // 加载最终模块的控制器
         $params = array($config, $module, $action);
@@ -173,7 +180,7 @@ class Qwin_Application
         }
 
         // 设置应用结束钩子
-        Qwin::hook('appTermination');
+        Qwin::hook('AppTermination');
         
         return $this;
     }

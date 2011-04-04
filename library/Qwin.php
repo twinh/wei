@@ -113,6 +113,9 @@ class Qwin
         self::$_option = array_merge(self::$_option, $option);
         self::setCacheFile(self::$_option['cacheFile']);
         self::setAutoload(self::$_option['autoloadPath']);
+        foreach (self::$_option['map'] as $name => $map) {
+            self::setMap($name, $map);
+        }
     }
 
     /**

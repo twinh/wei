@@ -36,7 +36,7 @@ class Qwin_Application_Module
      */
     protected $_defaults = array(
         'rootPaths'          => array(),
-        'rootModule'        => 'Common',
+        'rootModule'        => 'Com',
     );
 
     /**
