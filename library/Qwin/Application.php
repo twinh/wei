@@ -122,15 +122,11 @@ class Qwin_Application
         Qwin::setOption($config['Qwin']);
         $config = Qwin::config($config);
 
-        // 设置应用启动钩子
-        Qwin::hook('AppStartup');
-        
-        // 加载Qwin函数库
-        // TODO 作为微件,通过钩子加载
-        require_once $config['resource'] . '/library/function/qwin.php';
-
         // 注册当前类
         Qwin::set('-app', $this);
+
+        // 设置应用启动钩子
+        Qwin::hook('AppStartup');
         
         // 加载视图
         $this->_view = Qwin::call('Qwin_Application_View');
@@ -206,11 +202,3 @@ class Qwin_Application
         return str_pad(round((microtime(true) - $this->_startTime), 4), 6, 0);
     }
 }
-function err($errno, $errstr, $errfile, $errline)
- {
- echo "<b>Custom error:</b> [$errno] $errstr<br />";
- echo " Error on line $errline in $errfile<br />";
- echo "Ending Script";
- die();
- }
-
