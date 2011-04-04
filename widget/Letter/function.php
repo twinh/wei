@@ -52,15 +52,14 @@ function qw($class, $param = null)
     //return Qwin::call($class, $param);
 }
 
-/**
- * 快速加载类
- *
- * @param string $name
- * @return object|null
- */
-function qwin($name)
+function qw_a()
 {
-    return Qwin::call($name);
+    
+}
+
+function qw_f()
+{
+    
 }
 
 function qw_form($option)
@@ -97,14 +96,6 @@ function qw_form_extend($option, $form = null)
 function qw_url(array $data = null)
 {
     return Qwin::call('-url')->url($data);
-    /*static $url, $config;
-    null == $url && $url = Qwin::call('-url');
-    if (null == $array1) {
-        null == $config && $config = Qwin::call('-config');
-        $array1 = $config['asc'];
-    }*/
-    return $url->createUrl($array1, $array2);
-
 }
 
 function qw_lang($name = null)
@@ -125,30 +116,4 @@ function qw_null_text($data = null)
         return $data;
     }
     return '<em>(' . qw_lang('LBL_NULL') .')</em>';
-}
-
-function qw_referer_page($page = null)
-{
-    !isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] = $page;
-    return urlencode($_SERVER['HTTP_REFERER']);
-}
-
-function qw_title_decorator($title, $fontStyle = null, $color = null)
-{
-    return Qwin_Helper_Html::titleDecorator($title, $fontStyle, $color);
-}
-
-function qw_jquery_link($url, $title, $icon, $aClass = null, $target = '_self')
-{
-    return Qwin_Util_JQuery::link($url, $title, $icon, $aClass, $target);
-}
-
-function qw_jquery_button($type, $title, $icon)
-{
-    return '<button type="' . $type . '" class="ui-button-none ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ' . $icon . '"></span><span class="ui-button-text">' . $title . '</span></button>' . "\r\n";
-}
-
-function qw_jquery_operation_button($url, $title, $icon)
-{
-    return Qwin_Util_JQuery::icon($url, $title, $icon);
 }

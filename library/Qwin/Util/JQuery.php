@@ -42,4 +42,13 @@ class Qwin_Util_JQuery
                . $aClass . '" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon '
                . $icon . '"></span><span class="ui-button-text">' . $title . '</span></a>' . PHP_EOL;
     }
+
+    public static function button($type, $title, $icon)
+    {
+        return '<button type="' . $type . '" class="ui-button-none ui-button '
+             . 'ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" '
+             . 'role="button" aria-disabled="false"><span class="ui-button-icon-primary '
+             . 'ui-icon ' . $icon . '"></span><span class="ui-button-text">'
+             . $title . '</span></button>' . PHP_EOL;
+    }
 }
