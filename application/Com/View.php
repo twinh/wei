@@ -49,17 +49,8 @@ class Com_View extends Qwin_Application_View
         'url'       => null,
         'content'   => array(),
         'time'      => 3000,
+        'customer'  => false,
     );
-
-    /**
-     * 将当前视图对象加入注册器中
-     */
-    public function __construct()
-    {
-        $this->setFlags(ArrayObject::ARRAY_AS_PROPS);
-        Qwin::get('-app')->setView($this);
-        Qwin::set('-view', $this);
-    }
 
     /**
      * 获取风格,风格为jQuery的主题

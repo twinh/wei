@@ -342,14 +342,4 @@ class Com_Request extends Qwin_Request
     {
         return (bool)$this->get('popup');
     }
-
-    /**
-     * 是否请求以弹出窗口的形式显示
-     *
-     * @return bool
-     */
-    public function isAjax()
-    {
-        return (bool)$this->get('ajax');
-    }
 }

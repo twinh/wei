@@ -54,24 +54,50 @@ class Qwin_Application_Language implements ArrayAccess
     protected $_module;
 
     /**
-     * 初始化路径,加载数据
+     * @var array           默认选项
+     *
+     *  -- rootModule       根模块,当模块找不到时,加载此模块的语言
+     *
+     *  -- module           要加载语言的模块
+     *
+     *  -- name             语言名称
      */
-    public function  __construct($module = null)
+    protected $_defaults = array(
+        'rootModule' => 'Com',
+        'module'     => null,
+        'name'       => 'zh-CN',
+    );
+
+    protected $_options = array();
+
+    /**
+     * 初始化语言数据
+     * 不论是怎样的情况,出错,模块未找到等等,至少应该加载默认根目录的默认语言
+     */
+    public function  __construct(array $options = array())
     {
-        if (null == $module) {
-            $module = Qwin::call('-module');
+        // 合并选项
+        $options = $options + $this->_defaults;
+        $this->_options = &$options;
+
+        if (!isset($options['module'])) {
+            $options['module'] = $options['rootModule'];
         }
+
+        /*if (null == $module) {
+            $module = Qwin::call('-module');
+        }*/
 
         $this->_module = Qwin::call('Qwin_Application_Module');
         
         // 初始化语言名称
-        $this->_getName($module);
+        $this->_getName($options['module']);
 
         // 逐层加载语言
-        $this->appendByModule($module);
+        $this->appendByModule($options['module']);
     }
 
-        /**
+    /**
      * 附加文件数据
      *
      * @param string $file 文件路径
@@ -144,7 +170,7 @@ class Qwin_Application_Language implements ArrayAccess
             return $name;
         }
 
-        // 全局配置
+        // 全局配置 or $this->_options['name'] ?
         $name = Qwin::config('language');
         if (null != $name && ($file = $this->isExists($name, $module))) {
             $session['lang'] = $name;
@@ -179,7 +205,7 @@ class Qwin_Application_Language implements ArrayAccess
         $modules = explode('/', $module);
         foreach ($modules as $module) {
             $path .= $module . '/';
-            $file = $path . '/Language/' . $this->_name . '.php';
+            $file = $path . 'Language/' . $this->_name . '.php';
             if (is_file($file)) {
                 $this->_appendFile($file);
             }

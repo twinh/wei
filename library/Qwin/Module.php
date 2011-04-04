@@ -63,9 +63,14 @@ class Qwin_Module
         'rootModule'    => 'Com',
     );
 
-    public function __construct($module)
+    public function __construct($module = null)
     {
-        $this->_data = $module;
+        // 耦合?
+        if (!$module) {
+            $this->_data = Qwin::call('-request')->getModule();
+        } else {
+            $this->_data = $module;
+        }
     }
 
     public function toString()
@@ -126,5 +131,10 @@ class Qwin_Module
     public function __toString()
     {
         return $this->_data;
+    }
+
+    public function set($data)
+    {
+        $this->_data = $data;
     }
 }

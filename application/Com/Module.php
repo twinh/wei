@@ -49,9 +49,6 @@ class Com_Module extends Qwin_Application_Module
         // 关闭魔术引用
         ini_set('magic_quotes_runtime', 0);
 
-        // 设置语言类
-        Qwin::setMap('-lang', 'Qwin_Application_Language');
-
         Qwin::setMap('-view', 'Com_View');
         Qwin::call('Com_View');
         /*if ($config['router']['enable']) {

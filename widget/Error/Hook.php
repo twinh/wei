@@ -1,6 +1,6 @@
 <?php
 /**
- * Base
+ * Hook
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -20,20 +20,13 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-02-17 22:36:45
+ * @since       2011-04-02 09:30:00
  */
 
-class Qwin_Base
+class Error_Hook extends Qwin_Hook_Abstract
 {
-    protected $_log = array();
-
-    public function __construct()
+    public function hookAppStartup()
     {
-        
-    }
-
-    public function log($info, $level)
-    {
-        
+        return Qwin::call('-widget')->get('Error')->render();
     }
 }
