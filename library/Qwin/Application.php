@@ -126,26 +126,21 @@ class Qwin_Application
         Qwin::hook('AppStartup');
         
         // 加载Qwin函数库
-        // TODO 如何合法使用?
+        // TODO 作为微件,通过钩子加载
         require_once $config['resource'] . '/library/function/qwin.php';
 
         // 注册当前类
         Qwin::set('-app', $this);
         
-        // todo启动Url路由
-
         // 加载视图
         $this->_view = Qwin::call('Qwin_Application_View');
 
         // 初始化请求
         $request = Qwin::call('-request');
 
-        // TODO 强化request对象
         // 获取模块和行为
-        $module = $request->getModule();
-        !$module && $module = $config['defaultModule'];
-        $action = $request->getAction();
-        !$action && $action = $config['defaultAction'];
+        $module = $request->get('module');
+        $action = $request->get('action');
         /* @var $module Qwin_Module */
         $module = Qwin::call('-module', $module);
         Qwin::config('action', $action);

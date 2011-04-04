@@ -311,17 +311,6 @@ class Qwin_Request implements ArrayAccess
         unset($this->_request[$offset]);
     }
 
-    public function getModule()
-    {
-        return $this->get('module');
-    }
-
-    public function getAction()
-    {
-        $action = $this->get('action');
-        return $action ? strtolower($action) : 'index';
-    }
-
     /**
      * 是否是ajax请求
      *

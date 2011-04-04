@@ -67,7 +67,7 @@ class Qwin_Module
     {
         // 耦合?
         if (!$module) {
-            $this->_data = Qwin::call('-request')->getModule();
+            $this->_data = Qwin::call('-request')->get('module');
         } else {
             $this->_data = $module;
         }
