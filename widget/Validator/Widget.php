@@ -26,7 +26,7 @@
 class Validator_Widget extends Qwin_Widget_Abstract
 {
     /**
-     * @var array $_option          数据验证的选项
+     * @var array $_options          数据验证的选项
      *
      *      -- meta                 是否根据元数据的验证配置进行转换
      *
@@ -35,7 +35,7 @@ class Validator_Widget extends Qwin_Widget_Abstract
      *      -- break                当验证失败时,是否继续验证
      *
      */
-    protected $_option = array(
+    protected $_options = array(
         'meta'          => true,
         'validator'     => 'Qwin_Validator',
         'break'         => false,
@@ -57,15 +57,15 @@ class Validator_Widget extends Qwin_Widget_Abstract
      * 验证数据
      *
      * @param array $data 数据数组,键名表示域的名称,值表示域的值
-     * @param array $option 配置选修
+     * @param array $options 配置选修
      * @return boolen
      */
-    public function valid(array $data, Qwin_Metadata_Abstract $meta, array $option = array())
+    public function valid(array $data, Qwin_Metadata_Abstract $meta, array $options = array())
     {
         // 调用钩子方法
         $meta->preValidate();
 
-        $option = $option + $this->_option;
+        $options = $options + $this->_options;
 
         // 重置验证不通过的域
         $this->_invalidData = array();
@@ -77,8 +77,8 @@ class Validator_Widget extends Qwin_Widget_Abstract
         $this->_meta = $meta;
 
         // 加载验证对象
-        if ($option['validator']) {
-            $validator = Qwin::call($option['validator']);
+        if ($options['validator']) {
+            $validator = Qwin::call($options['validator']);
         }
 
         foreach ($data as $name => $value) {
@@ -88,7 +88,7 @@ class Validator_Widget extends Qwin_Widget_Abstract
             }
 
             // 根据验证对象进行验证
-            if ($option['validator'] && !empty($meta['field'][$name]['validator']['rule'])) {
+            if ($options['validator'] && !empty($meta['field'][$name]['validator']['rule'])) {
                 $validateData = $meta['field'][$name]['validator'];
                 // 如果该域不是必填的,且为空,则不验证内容
                 if (!isset($validateData['rule']['required']) && '' == $value) {
@@ -101,7 +101,7 @@ class Validator_Widget extends Qwin_Widget_Abstract
                         } else {
                             $this->_invalidData[$name][$rule] = $validateData['message'][$rule];
                         }
-                        if ($option['break']) {
+                        if ($options['break']) {
                             return false;
                         } else {
                             $result = false;
@@ -111,7 +111,7 @@ class Validator_Widget extends Qwin_Widget_Abstract
             }
 
             // 根据元数据进行验证
-            if ($option['meta']) {
+            if ($options['meta']) {
                 $method = 'validate' . str_replace(array('_', '-'), '', $name);
                 if (method_exists($this, $method)) {
                     if (false === call_user_func_array(
@@ -121,7 +121,7 @@ class Validator_Widget extends Qwin_Widget_Abstract
                         if (!isset($this->_invalidData[$name][$method])) {
                             $this->_invalidData[$name][$method] = 'VLD_' . strtoupper($method);
                         }
-                        if ($option['break']) {
+                        if ($options['break']) {
                             return false;
                         } else {
                             $result = false;

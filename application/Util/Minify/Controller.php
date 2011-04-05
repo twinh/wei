@@ -30,8 +30,8 @@ class Util_Minify_Controller extends Qwin_Application_Controller
         $config = Qwin::config();
         ini_set('zlib.output_compression', '0');
 
-        $option['maxAge'] = 1800;
-        $option['minApp']['groupsOnly'] = true;
+        $options['maxAge'] = 1800;
+        $options['minApp']['groupsOnly'] = true;
 
         // IIS may need help
         if (0 === stripos(PHP_OS, 'win')) {
@@ -44,7 +44,7 @@ class Util_Minify_Controller extends Qwin_Application_Controller
 
         // 调试
         if ($config['debug']) {
-            $option['debug'] = true;
+            $options['debug'] = true;
         }
 
         // 日志记录
@@ -60,9 +60,9 @@ class Util_Minify_Controller extends Qwin_Application_Controller
             Qwin::call('-widget')->get('log4php')->info('minify file ' . $name . ' not found.');
             exit;
         }
-        $option['minApp']['groups'][$name] = require $file;
+        $options['minApp']['groups'][$name] = require $file;
 
         // serve!
-        $result = Minify::serve('MinApp', $option);
+        $result = Minify::serve('MinApp', $options);
     }
 }

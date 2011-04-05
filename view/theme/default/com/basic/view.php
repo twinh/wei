@@ -61,7 +61,7 @@ jQuery(function($) {
         ?>
         </ul>
     <div id="ui-tab-1">
-    <?php $formWidget->render($formOption); ?>
+    <?php $formWidget->render($formOptions); ?>
     </div>
     <?php
     foreach($jqGridList as $alias => $jqGrid):

@@ -44,9 +44,9 @@ class Com_View_JsonList extends Com_View
             'data'          => $this->data,
             'layout'        => $layout,
             'primaryKey'    => $this->meta['db']['primaryKey'],
-            'option'        => array(
-                'page'      => $this->option['page'],
-                'total'     => ceil($this->total / $this->option['row']),
+            'options'        => array(
+                'page'      => $this->options['page'],
+                'total'     => ceil($this->total / $this->options['row']),
                 'records'   => $this->total,
             ),
         ));

@@ -31,7 +31,7 @@ class Com_Widget_View extends Qwin_Widget_Abstract
      * 服务的基本配置
      * @var array
      */
-    protected $_option = array(
+    protected $_options = array(
         'module'    => null,
         'id'        => null,
         'asAction'  => 'view',
@@ -53,22 +53,22 @@ class Com_Widget_View extends Qwin_Widget_Abstract
         'data' => null,
     );
 
-    public function process(array $option = null)
+    public function process(array $options = null)
     {
         // 初始配置
-        $option     = array_merge($this->_option, $option);
+        $options     = array_merge($this->_options, $options);
         
         /* @var $app Qwin_Application */
         $app        = Qwin::call('-app');
         
         /* @var $meta Com_Metadata */
-        $meta       = Com_Metadata::getByModule($option['module']);
+        $meta       = Com_Metadata::getByModule($options['module']);
         $primaryKey = $meta['db']['primaryKey'];
 
         // 从模型获取数据
-        $query = Com_Metadata::getQueryByModule($option['module'], array('type' => array('db', 'view')));
+        $query = Com_Metadata::getQueryByModule($options['module'], array('type' => array('db', 'view')));
         $dbData = $query
-            ->where($primaryKey . ' = ?', $option['id'])
+            ->where($primaryKey . ' = ?', $options['id'])
             ->fetchOne();
 
         // 记录不存在,加载错误视图
@@ -78,7 +78,7 @@ class Com_Widget_View extends Qwin_Widget_Abstract
                 'result' => false,
                 'message' => $lang['MSG_NO_RECORD'],
             );
-            if ($option['display']) {
+            if ($options['display']) {
                 return Qwin::call('-view')->alert($result['message']);
             } else {
                 return $result;
@@ -93,8 +93,8 @@ class Com_Widget_View extends Qwin_Widget_Abstract
         ));
 
         // 转换数据
-        if ($option['sanitise']) {
-            $data = $meta->sanitise($data, $option['asAction'], array('view' => $option['isView']));
+        if ($options['sanitise']) {
+            $data = $meta->sanitise($data, $options['asAction'], array('view' => $options['isView']));
         }
 
         // 设置返回结果
@@ -104,8 +104,8 @@ class Com_Widget_View extends Qwin_Widget_Abstract
         );
 
         // 展示视图
-        if ($option['display']) {
-            $view = new $option['viewClass'];
+        if ($options['display']) {
+            $view = new $options['viewClass'];
             return $view->assign($result['data']);
         }
 

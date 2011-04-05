@@ -40,7 +40,7 @@ class Com_View_Edit extends Com_View
 
         /* @var $formWidget Form_Widget */
         $formWidget = Qwin::call('-widget')->get('form');
-        $formOption = array(
+        $formOptions = array(
             'meta'  => $meta,
             'action' => 'edit',
             'data'  => $this->data,

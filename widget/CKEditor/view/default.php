@@ -25,5 +25,5 @@
 ?>
 <script type="text/javascript" src="<?php echo $path ?>/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
-    var ckeditor = CKEDITOR.replace('<?php echo htmlspecialchars($option['form']['id']) ?>');
+    var ckeditor = CKEDITOR.replace('<?php echo htmlspecialchars($options['form']['id']) ?>');
 </script>

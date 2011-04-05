@@ -82,11 +82,11 @@ class Com_View_View extends Com_View
                 unset($listLayout[$key]);
             }
             $col = $jqGridWidget->getColByListLayout($listLayout, $relatedMeta, $lang);
-            $option['colNames'] = $col['colNames'];
-            $option['colModel'] = $col['colModel'];
+            $options['colNames'] = $col['colNames'];
+            $options['colModel'] = $col['colModel'];
 
             // 获取json数据的地址
-            $option['url'] = $url->url($model['module'], 'index', array(
+            $options['url'] = $url->url($model['module'], 'index', array(
                 'json'      => '1',
                 'search'    => $model['foreign'] . ':' . $data[$model['local']],
                 'list'      => implode(',', $listLayout),
@@ -96,7 +96,7 @@ class Com_View_View extends Com_View
                 'module'    => new Qwin_Module($model['module']),
                 'meta'      => $relatedMeta,
                 'layout'    => (array)$model['list'],
-                'option'    => $option,
+                'options'    => $options,
             );
 
             $jqGridList[$alias] = $jqGrid;

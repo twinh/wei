@@ -25,7 +25,7 @@
 
 class Error_Widget extends Qwin_Widget_Abstract
 {
-    public function render($option = null)
+    public function render($options = null)
     {
         // 自定义错误和异常处理
         set_exception_handler(array($this, 'renderException'));

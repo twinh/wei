@@ -24,14 +24,14 @@
  */
 ?>
 
-<table id="<?php echo $option['id'] ?>"></table>
-<div id="<?php echo $option['pager'] ?>"></div>
+<table id="<?php echo $options['id'] ?>"></table>
+<div id="<?php echo $options['pager'] ?>"></div>
 <script type="text/javascript">
 jQuery(function($){
     var jqGrid = <?php echo $jqGridJson?>;
     // todo 如何在php代码中表示js function
     jqGrid.ondblClickRow = function(){};
-    $('#<?php echo $option['id'] ?>')
+    $('#<?php echo $options['id'] ?>')
         .jqGrid(jqGrid)
         .jqGrid('navGrid', jqGrid.pager,{
             add : false,
@@ -41,7 +41,7 @@ jQuery(function($){
         });
 
     // 样式调整
-    var gboxId = '#gbox_<?php echo $option['id'] ?>';
+    var gboxId = '#gbox_<?php echo $options['id'] ?>';
     $(gboxId).width($(gboxId).width() - 2).addClass('ui-state-default');
     $('table.ui-jqgrid-htable tr.ui-jqgrid-labels th:last').css('border-right', 'none');
 });

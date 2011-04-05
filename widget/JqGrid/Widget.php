@@ -26,9 +26,9 @@
 class JqGrid_Widget extends Qwin_Widget_Abstract
 {
     /**
-     * @var array $_option          界面的配置选项
+     * @var array $_options          界面的配置选项
      *
-     *      -- option               jqGrid的部分配置选项
+     *      -- options               jqGrid的部分配置选项
      *
      *          -- url                  获取json数据的链接
      *
@@ -78,12 +78,12 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
      *
      *              -- search               搜索的查询名称
      */
-    protected $_option = array(
+    protected $_options = array(
         'id'            => null,//'ui-jqgrid-table',
         'meta'          => null,
         'lang'          => null,
         'layout'        => array(),
-        'option'        => array(
+        'options'        => array(
             'url'           => '',
             'datatype'      => 'json',
             'colNames'      => array(),
@@ -118,7 +118,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
     );
 
     /**
-     * @var array $_jsonOption      Json数据的配置选项
+     * @var array $_jsonOptions      Json数据的配置选项
      *
      *      -- data                 原始数据,一般是从数据库取出,并经过转换
      *
@@ -126,7 +126,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
      *
      *      -- primaryKey           主键,主键隐藏 TODO!!!
      *
-     *      -- option               jqGrid返回的Json数据的数组
+     *      -- options               jqGrid返回的Json数据的数组
      *
      *          -- page                 当前页面数
      *
@@ -136,11 +136,11 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
      *
      *          -- rows                 记录信息
      */
-    protected $_jsonOption = array(
+    protected $_jsonOptions = array(
         'data'          => array(),
         'layout'        => array(),
         'primaryKey'    => array(),
-        'option'        => array(
+        'options'        => array(
             'page'          => 1,
             'total'         => 1,
             'records'       => 0,
@@ -153,41 +153,41 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
     /**
      * 渲染jqGrid界面
      *
-     * @param array $option 配置选项
+     * @param array $options 配置选项
      */
-    public function render($option)
+    public function render($options)
     {
         // 合并选项
-        $option = array_merge($this->_option, $option);
-        $jqGrid = array_merge($this->_option['option'], $option['option']);
+        $options = array_merge($this->_options, $options);
+        $jqGrid = array_merge($this->_options['options'], $options['options']);
 
-        $meta = $option['meta'];
+        $meta = $options['meta'];
 
         // 设置语言
-        if (!$option['lang']) {
-            $option['lang'] = Qwin::call('-lang');
+        if (!$options['lang']) {
+            $options['lang'] = Qwin::call('-lang');
         }
 
         // 设置编号
-        if (!$option['id']) {
-            $option['id'] = 'ui-jqgrid-' . $meta->getId();
-            $this->_id = $option['id'];
+        if (!$options['id']) {
+            $options['id'] = 'ui-jqgrid-' . $meta->getId();
+            $this->_id = $options['id'];
         }
 
         if (!$jqGrid['pager']) {
-            $jqGrid['pager'] = '#' . $option['id'] . '-pager';
+            $jqGrid['pager'] = '#' . $options['id'] . '-pager';
         }
 
         // 设置栏目
         if (empty($jqGrid['colNames'])) {
             // 获取并合并布局
             $layout = $this->getLayout($meta);
-            if ($option['layout']) {
-                $layout = array_intersect($layout, (array)$option['layout']);
+            if ($options['layout']) {
+                $layout = array_intersect($layout, (array)$options['layout']);
             }
 
             // 根据布局获取栏数据
-            $col = $this->getColByListLayout($layout, $meta, $option['lang']);
+            $col = $this->getColByListLayout($layout, $meta, $options['lang']);
             $jqGrid['colNames'] = $col['colNames'];
             $jqGrid['colModel'] = $col['colModel'];
         }
@@ -217,10 +217,10 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
             ->add($this->_rootPath . '/source/jquery.jqgrid.js');
 
         // 翻译语言
-        $jqGrid['emptyrecords'] = $option['lang'][$jqGrid['emptyrecords']];
+        $jqGrid['emptyrecords'] = $options['lang'][$jqGrid['emptyrecords']];
 
         // 获取jqGrid与其分页的id号
-        $option['pager'] = substr($jqGrid['pager'], 1);
+        $options['pager'] = substr($jqGrid['pager'], 1);
 
         $jqGridJson = Qwin_Util_Array::jsonEncode($jqGrid);
 
@@ -230,17 +230,17 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
     /**
      * 渲染Json数据
      *
-     * @param array $option 配置选项
+     * @param array $options 配置选项
      */
-    public function renderJson($option)
+    public function renderJson($options)
     {
         // 合并选项
-        $option = $this->merge($this->_jsonOption, $option);
+        $options = $this->merge($this->_jsonOptions, $options);
 
         // 转换为jqGrid的行数据
-        $option['option']['rows'] = $this->filterRowData($option['data'], $option['primaryKey'], $option['layout']);
+        $options['options']['rows'] = $this->filterRowData($options['data'], $options['primaryKey'], $options['layout']);
 
-        return json_encode($option['option']);
+        return json_encode($options['options']);
     }
 
     /**
@@ -253,7 +253,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
      */
     public function getColByListLayout($layout, $meta, $lang)
     {
-        $option = array(
+        $options = array(
             'colNames' => array(),
             'colModel' => array(),
         );
@@ -265,21 +265,21 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
             } else {
                 $fieldMeta = $meta['field'][$field];
             }
-            $option['colNames'][] = $lang->t($fieldMeta['basic']['title']);
-            $option['colModel'][] = array(
+            $options['colNames'][] = $lang->t($fieldMeta['basic']['title']);
+            $options['colModel'][] = array(
                 'name' => $field,
                 'index' => $field,
             );
             // 隐藏主键
             if ($primaryKey == $field) {
-                $option['colModel'][count($option['colModel']) - 1]['hidden'] = true;
+                $options['colModel'][count($options['colModel']) - 1]['hidden'] = true;
             }
             // 宽度控制
             if (isset($fieldMeta['list']) && isset($fieldMeta['list']['width'])) {
-                $option['colModel'][count($option['colModel']) - 1]['width'] = $fieldMeta['list']['width'];
+                $options['colModel'][count($options['colModel']) - 1]['width'] = $fieldMeta['list']['width'];
             }
         }
-        return $option;
+        return $options;
     }
 
     /**

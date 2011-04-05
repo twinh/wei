@@ -31,7 +31,7 @@ class Com_Widget_Add extends Qwin_Widget_Abstract
      * 服务的基本配置
      * @var array
      */
-    protected $_option = array(
+    protected $_options = array(
         'module'    => null,
         'data'      => array(),
         'display'   => true,
@@ -41,15 +41,15 @@ class Com_Widget_Add extends Qwin_Widget_Abstract
     /**
      * 根据配置,执行插入数据操作
      *
-     * @param array $option 配置
+     * @param array $options 配置
      */
-    public function process(array $option = null)
+    public function process(array $options = null)
     {
         // 初始配置
-        $option = array_merge($this->_option, $option);
+        $options = array_merge($this->_options, $options);
 
         /* @var $meta Com_Metadata */
-        $meta   = Com_Metadata::getByModule($option['module']);
+        $meta   = Com_Metadata::getByModule($options['module']);
         $id     = $meta['db']['primaryKey'];
 
         // 记录已经存在,加载错误视图
@@ -62,7 +62,7 @@ class Com_Widget_Add extends Qwin_Widget_Abstract
                     'result' => false,
                     'message' => $lang['MSG_RECORD_EXISTS'],
                 );
-                if ($option['display']) {
+                if ($options['display']) {
                     return Qwin::call('-view')->alert($result['message']);
                 } else {
                     return $result;
@@ -71,7 +71,7 @@ class Com_Widget_Add extends Qwin_Widget_Abstract
         }
 
         // 获取改动过的数据
-        $data = $this->_filterData($meta, $option['data']);
+        $data = $this->_filterData($meta, $options['data']);
 
         // 转换数据
         $data = $meta->sanitise($data, 'db');
@@ -85,7 +85,7 @@ class Com_Widget_Add extends Qwin_Widget_Abstract
                 'result' => false,
                 'message' => $validator->getInvalidMessage(),
             );
-            if ($option['display']) {
+            if ($options['display']) {
                 Qwin::call('-view')->alert($result['message']['title'], null, $result['message']['content']);
             } else {
                 return $result;
@@ -101,11 +101,11 @@ class Com_Widget_Add extends Qwin_Widget_Abstract
         $record->save();
 
         // 展示视图
-        if ($option['display']) {
-            if (!$option['url']) {
-                $option['url'] = Qwin::call('-url')->url($option['module'], array('action' => 'index'));
+        if ($options['display']) {
+            if (!$options['url']) {
+                $options['url'] = Qwin::call('-url')->url($options['module'], array('action' => 'index'));
             }
-            return Qwin::call('-view')->success(Qwin::call('-lang')->t('MSG_SUCCEEDED'), $option['url']);
+            return Qwin::call('-view')->success(Qwin::call('-lang')->t('MSG_SUCCEEDED'), $options['url']);
         }
         return array(
             'result' => true,

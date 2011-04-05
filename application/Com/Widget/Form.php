@@ -31,7 +31,7 @@ class Com_Widget_Form extends Qwin_Widget_Abstract
      * 服务的基本配置
      * @var array
      */
-    protected $_option = array(
+    protected $_options = array(
         'module'    => null,
         'id'        => null,
         'data'      => array(),
@@ -39,15 +39,15 @@ class Com_Widget_Form extends Qwin_Widget_Abstract
         'viewClass' => 'Com_View_Add',
     );
 
-    public function process(array $option = null)
+    public function process(array $options = null)
     {
         // 初始配置
-        $option     = array_merge($this->_option, $option);
+        $options     = array_merge($this->_options, $options);
         
         /* @var $meta Com_Metadata */
-        $meta       = Com_Metadata::getByModule($option['module']);
+        $meta       = Com_Metadata::getByModule($options['module']);
         $primaryKey = $meta['db']['primaryKey'];
-        $primaryKeyValue = $option['id'];
+        $primaryKeyValue = $options['id'];
 
         /**
          * 空值 < 元数据表单初始值 < 根据主键取值 < 配置初始值(一般是从url中获取)
@@ -70,8 +70,8 @@ class Com_Widget_Form extends Qwin_Widget_Abstract
         }
 
         // 合并数据
-        $option['data'] = $this->splitToInitalData($option['data']);
-        $data = array_merge($formInitalData, $copyRecordData, $option['data']);
+        $options['data'] = $this->splitToInitalData($options['data']);
+        $data = array_merge($formInitalData, $copyRecordData, $options['data']);
 
         // 处理数据
         $data = $meta->sanitise($data, 'add', array('view' => false));
@@ -83,8 +83,8 @@ class Com_Widget_Form extends Qwin_Widget_Abstract
         );
 
         // 展示视图
-        if ($option['display']) {
-            $view = new $option['viewClass'];
+        if ($options['display']) {
+            $view = new $options['viewClass'];
             return $view->assign($result['data']);
         }
 

@@ -34,7 +34,7 @@
     <div class="ui-operation-field">
         <?php echo $operLinks ?>
     </div>
-    <?php $formWidget->render($formOption) ?>
+    <?php $formWidget->render($formOptions) ?>
     <div class="ui-operation-field">
         <?php echo $operLinks ?>
     </div>

@@ -54,7 +54,7 @@ class Com_Metadata extends Qwin_Application_Metadata
      *
      *  -- name             记录名称
      */
-    protected $_recordOption = array(
+    protected $_recordOptions = array(
         'type'          => array(),
         'alias'         => array(),
         //'exceptAlias'   => array(),
@@ -115,14 +115,14 @@ class Com_Metadata extends Qwin_Application_Metadata
      * 获取元数据对应的记录对象
      *
      * @param Doctrine_Record $record 原始Doctrine记录对象
-     * @param array $option 选项
+     * @param array $options 选项
      * @return Doctrine_Record 带字段定义,表定理,关联关系的Doctrine记录对象
      */
-    public function getRecord(Doctrine_Record $record = null, array $option = array())
+    public function getRecord(Doctrine_Record $record = null, array $options = array())
     {
-        $option = $option + $this->_recordOption;
-        $option['type'] = (array)$option['type'];
-        $option['alias'] = (array)$option['alias'];
+        $options = $options + $this->_recordOptions;
+        $options['type'] = (array)$options['type'];
+        $options['alias'] = (array)$options['alias'];
         
         if (null === $record) {
             $record = Com_Model::getByModule($this->getModule());
@@ -132,7 +132,7 @@ class Com_Metadata extends Qwin_Application_Metadata
         $this->toRecord($record);
 
         foreach ($this['model'] as $alias => $model) {
-            if (in_array($model['type'], $option['type']) || in_array($alias, $option['alias'])) {
+            if (in_array($model['type'], $options['type']) || in_array($alias, $options['alias'])) {
                 $this->setRecordRelation($record, $model);
             }
         }
@@ -148,26 +148,26 @@ class Com_Metadata extends Qwin_Application_Metadata
      * @param array $name 名称,可选
      * @return Doctrine_Query 查询对象
      */
-    public static function getQueryByModule($module, array $option = array())
+    public static function getQueryByModule($module, array $options = array())
     {
         $meta = self::getByModule($module);
         $record = Com_Model::getByModule($module);
-        return $meta->getQuery($record, $option);
+        return $meta->getQuery($record, $options);
     }
 
     /**
      * 获取元数据对应的查询对象
      *
      * @param Doctrine_Record $record 原始Doctrine记录对象
-     * @param array $option 选项
+     * @param array $options 选项
      * @return Doctrine_Query 查询对象
      * @todo padb问题
      */
-    public function getQuery(Doctrine_Record $record = null, array $option = array())
+    public function getQuery(Doctrine_Record $record = null, array $options = array())
     {
-        $option = $option + $this->_recordOption;
-        $option['type'] = (array)$option['type'];
-        $option['alias'] = (array)$option['alias'];
+        $options = $options + $this->_recordOptions;
+        $options['type'] = (array)$options['type'];
+        $options['alias'] = (array)$options['alias'];
 
         if (null === $record) {
             $recordClass = Com_Model::getByModule($this->getModule(), false);
@@ -189,7 +189,7 @@ class Com_Metadata extends Qwin_Application_Metadata
         }
 
         foreach ($this['model'] as $alias => $model) {
-            if (in_array($model['type'], $option['type']) || in_array($alias, $option['alias'])) {
+            if (in_array($model['type'], $options['type']) || in_array($alias, $options['alias'])) {
                 $relatedRecord = Com_Model::getByModule($model['module']);
                 $this->setRecordRelation($record, $model);
                 $query->leftJoin($recordClass . '.' . $alias . ' ' . $alias);
