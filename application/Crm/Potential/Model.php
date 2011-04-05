@@ -23,6 +23,6 @@
  * @since       2011-01-05 16:07:36
  */
 
-class Crm_Potential_Model_Potential extends Com_Model
+class Crm_Potential_Model extends Com_Model
 {
 }

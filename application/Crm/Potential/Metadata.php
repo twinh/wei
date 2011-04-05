@@ -23,7 +23,7 @@
  * @since       2011-01-05 16:08:05
  */
 
-class Crm_Potential_Metadata_Potential extends Com_Metadata
+class Crm_Potential_Metadata extends Com_Metadata
 {
     public function setMetadata()
     {
@@ -208,17 +208,13 @@ class Crm_Potential_Metadata_Potential extends Com_Metadata
             ),
             'model' => array(
                 'receiver' => array(
+                    'module' => 'com/member',
                     'alias' => 'receiver',
                     'type' => 'view',
                     'local' => 'assign_to',
                     'foreign' => 'id',
                     'fieldMap' => array(
                         'assign_to' => 'username',
-                    ),
-                    'asc' => array(
-                        'package' => 'Common',
-                        'module' => 'Member',
-                        'controller' => 'Member',
                     ),
                 ),
             ),
