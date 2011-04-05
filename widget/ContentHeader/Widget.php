@@ -33,6 +33,11 @@ class ContentHeader_Widget extends Qwin_Widget_Abstract
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
 
+        // 可能没有元数据
+        if (!isset($view['meta'])) {
+            return false;
+        }
+
         // 图标 > 模块 > 控制器 > 行为
         $header = '';
 

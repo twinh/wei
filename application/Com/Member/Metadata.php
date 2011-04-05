@@ -216,7 +216,7 @@ class Com_Member_Metadata extends Com_Metadata
             'page' => array(
                 'title' => 'LBL_MODULE_MEMBER',
                 'icon' => 'user',
-                'tableLayout' => 1,
+                'tableLayout' => 2,
             ),
         ));
     }

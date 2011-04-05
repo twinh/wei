@@ -84,6 +84,12 @@ class Com_Controller extends Qwin_Application_Controller
     protected $_member;
 
     /**
+     * 元数据对象
+     * @var Com_Metadata
+     */
+    protected $_metadata;
+
+    /**
      * 模块标识
      * @var string
      */
@@ -108,7 +114,7 @@ class Com_Controller extends Qwin_Application_Controller
          /**
          * 访问控制
          */
-        //$this->_isAllowVisited();
+        $this->_isAllowVisited();
     }
 
     /**
@@ -162,66 +168,64 @@ class Com_Controller extends Qwin_Application_Controller
     }
 
     /**
+     * 获取元数据对象
+     *
+     * @return Com_Metadata
+     */
+    public function getMetadata()
+    {
+        if (!$this->_metadata) {
+            $this->_metadata = Com_Metadata::getByModule($this->_module);
+        }
+        return $this->_metadata;
+    }
+
+    /**
+     * 获取模型对象
+     *
+     * @return Com_Model
+     */
+    public function getModel()
+    {
+        if (!$this->_model) {
+            $this->_model = Com_Model::getByModule($this->_model);
+        }
+        return $this->_model;
+    }
+
+    /**
      * 是否有权限浏览该页面
      *
      * @return boolen
      */
     protected function _isAllowVisited()
     {
-        $session = $this->session;
+        $session = $this->getSession();
         $member = $session->get('member');
-        $metaHelper = Qwin::call('Qwin_Application_Metadata');
 
         // 未登陆则默认使用游客账号
-        if(null == $member)
-        {
-            $asc = array(
-                'package' => 'Common',
-                'module' => 'Member',
-                'controller' => 'Member',
-            );
-            $result = $metaHelper
-                ->getQueryByAsc($asc, array('db', 'view'))
+        if (null == $member) {
+            $member = Com_Metadata::getQueryByModule('com/member')
                 ->where('username = ?', 'guest')
-                ->fetchOne();
-            $member = $result->toArray();
-            
+                ->fetchOne()
+                ->toArray();
+
+            // 设置登陆信息
             $session
                 ->set('member',  $member)
-                ->set('permisson', $member['group']['permission'])
+                //->set('permisson', $member['group']['permission'])
                 ->set('style', $member['theme'])
-                ->set('language', $member['language']);
+                ->set('lang', $member['language']);
         }
 
-        // 逐层权限判断
-        $asc = $this->config['asc'];
-        $permission = @unserialize($member['group']['permission']);
-        if(isset($permission[$asc['package']]))
-        {
-            return true;
-        }
-        if(isset($permission[$asc['package'] . '|' . $asc['module']]))
-        {
-            return true;
-        }
-        if(isset($permission[$asc['package'] . '|' . $asc['module'] . '|' . $asc['controller']]))
-        {
-            return true;
-        }
-        if(isset($permission[$asc['package'] . '|' . $asc['module'] . '|' . $asc['controller'] . '|' . $asc['action']]))
-        {
-            return true;
-        }
+        // 权限判断
+        return true;
 
-        if('guest' == $member['username'])
-        {
-            Qwin::call('#view')->jump($this->url->url(array(
-                'module' => 'Member',
-                'controller' => 'Log',
-                'action' => 'Login',
-            )));
+        // 
+        if ('guest' == $member['username']) {
+            // 转入登陆界面
         } else {
-            $this->view->alert($this->_lang->t('MSG_PERMISSION_NOT_ENOUGH'));
+            // 提示权限不足
         }
         return false;
     }

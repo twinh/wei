@@ -122,7 +122,7 @@ class Ide_Config_Controller extends Com_ActionController
     {
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
-        $meta = $this->_meta;
+        $meta = Com_Metadata::getByModule('ide/config');
 
         // 分组的数据
         $data = Com_Metadata::getQueryByModule('Ide/Config/Group')

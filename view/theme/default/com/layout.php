@@ -44,7 +44,7 @@ $minify
 <div id="ui-main" class="ui-main ui-widget-content ui-corner-all">
   <div id="ui-header" class="ui-header ui-widget">
             <div class="ui-header-shortcut" id="ui-header-shortcut">
-                <a class="ui-state-default" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Setting')) ?>"><?php echo qw_lang('LBL_WELCOME') ?>, <?php echo $nickname ?>!</a>
+                <a class="ui-state-default" href="<?php echo qw_u('com/member/my') ?>"><?php echo qw_lang('LBL_WELCOME') ?>, <?php echo $nickname ?>!</a>
                 <a class="ui-state-default" href="<?php echo qw_url(array('module' => 'Management', 'controller' => 'Management')) ?>"><?php echo qw_lang('LBL_MANAGEMENT') ?></a>
                 <?php
                 if('guest' == $member['username']):
