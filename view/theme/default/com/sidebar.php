@@ -27,6 +27,6 @@
 ?>
 <div class="ui-sidebar-content ui-sidebar-content-2">
 	<ul>
-        <li><a class="ui-iconx ui-iconx-trash-16" href="<?php echo qw_url(array('module' => 'Com/Trash')) ?>"><?php echo qw_lang('LBL_MODULE_TRASH') ?></a></li>
+        <li><a class="ui-iconx ui-iconx-trash-16" href="<?php echo qw_url(array('module' => 'com/trash')) ?>"><?php echo qw_lang('LBL_MODULE_TRASH') ?></a></li>
     </ul>
 </div>
