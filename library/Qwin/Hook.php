@@ -30,7 +30,7 @@ class Qwin_Hook
      * 默认配置
      * @var array
      */
-    protected $_defaultOption = array(
+    protected $_defaults = array(
         'path' => '../widget/',
         'cachePath' => '../cache/',
         'lifetime' => 86400,
@@ -44,7 +44,7 @@ class Qwin_Hook
      * 当前配置
      * @var array
      */
-    protected $_option = array();
+    protected $_options = array();
 
     /**
      * 钩子数据
@@ -65,10 +65,10 @@ class Qwin_Hook
     public function  __construct(array $option = array())
     {
         !empty($option) && $this->setOption($option);
-        $cacheFile = $this->_option['cachePath'] . '/hook.php';
+        $cacheFile = $this->_options['cachePath'] . '/hook.php';
 
         if (is_file($cacheFile)) {
-            if ($this->_option['lifetime'] < $_SERVER['REQUEST_TIME'] - filemtime($cacheFile)) {
+            if ($this->_options['lifetime'] < $_SERVER['REQUEST_TIME'] - filemtime($cacheFile)) {
                 $this->update();
             } else {
                 $this->_data = (array) require $cacheFile;
@@ -84,9 +84,9 @@ class Qwin_Hook
      */
     public function setOption($option)
     {
-        $this->_option = array_merge($this->_defaultOption, $option);
-        if (!is_dir($this->_option['path'])) {
-            throw new Qwin_Hook_Exception('The path "' . $this->_option['path'] . '" can not be found.');
+        $this->_options = array_merge($this->_defaults, $option);
+        if (!is_dir($this->_options['path'])) {
+            throw new Qwin_Hook_Exception('The path "' . $this->_options['path'] . '" can not be found.');
         }
         return $this;
     }
@@ -115,16 +115,16 @@ class Qwin_Hook
      */
     public function update()
     {
-        if (!is_dir($this->_option['cachePath'])) {
-            throw new Qwin_Hook_Exception('The cache path "' . $this->_option['cachePath'] . '" can not be found.');
+        if (!is_dir($this->_options['cachePath'])) {
+            throw new Qwin_Hook_Exception('The cache path "' . $this->_options['cachePath'] . '" can not be found.');
         }
 
         // 清空原有钩子脚本
         $this->_data = array();
-        $pathList = scandir($this->_option['path']);
+        $pathList = scandir($this->_options['path']);
         foreach ($pathList as $path) {
             // 是否存在钩子文件
-            $file = $this->_option['path'] . $path . '/hook.php';
+            $file = $this->_options['path'] . $path . '/hook.php';
             if (!is_file($file)) {
                 continue;
             }
@@ -170,7 +170,7 @@ class Qwin_Hook
             ksort($value);
         }
 
-        Qwin_Util_File::writeArray($this->_option['cachePath'] . '/hook.php', $this->_data);
+        Qwin_Util_File::writeArray($this->_options['cachePath'] . '/hook.php', $this->_data);
         return $this;
     }
 

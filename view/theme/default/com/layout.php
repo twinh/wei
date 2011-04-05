@@ -49,11 +49,11 @@ $minify
                 <?php
                 if('guest' == $member['username']):
                 ?>
-                <a class="ui-state-default" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Log', 'action' => 'Login')) ?>"><?php echo qw_lang('LBL_LOGIN') ?></a>
+                <a class="ui-state-default" href="<?php echo qw_u('com/member/auth', 'login') ?>"><?php echo qw_lang('LBL_LOGIN') ?></a>
                 <?php
                 else :
                 ?>
-                <a class="ui-state-default" href="<?php echo qw_url(array('module' => 'Member', 'controller' => 'Log', 'action' => 'Logout')) ?>"><?php echo qw_lang('LBL_LOGOUT') ?></a>
+                <a class="ui-state-default" href="<?php echo qw_u('com/member/auth', 'logout') ?>"><?php echo qw_lang('LBL_LOGOUT') ?></a>
                 <?php
                 endif;
                 ?>

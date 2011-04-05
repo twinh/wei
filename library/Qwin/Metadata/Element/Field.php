@@ -37,7 +37,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Driver
      * 默认数据
      * @var array
      */
-    protected $_default = array(
+    protected $_defaults = array(
         'basic' => array(
             'title' => 'FLD_TITLE',
             'description' => array(),
@@ -142,7 +142,7 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Driver
             }
         }
         
-        foreach ($this->_default as $key => $row) {
+        foreach ($this->_defaults as $key => $row) {
             if (isset($data[$key])) {
                 $data[$key] = array_merge($row, $data[$key]);
             } else {

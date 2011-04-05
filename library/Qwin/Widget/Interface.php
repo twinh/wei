@@ -25,7 +25,7 @@
 
 interface Qwin_Widget_Interface
 {
-    public function render($option);
+    public function render($options);
     public function setDefault($name, $value = null);
     public function getDefault($name = null);
     public function setOption($name, $value = null);

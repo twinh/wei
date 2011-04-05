@@ -374,7 +374,7 @@ class Qwin_Padb_Execute
         return $this->_updateDataFile($data, $q['from']);
     }
 
-    public function createTable($name, $fieldSet, $option)
+    public function createTable($name, $fieldSet, $options)
     {
         if(true == $this->isTableExist($name))
         {
@@ -396,7 +396,7 @@ class Qwin_Padb_Execute
         $schemaContent = array(
             Qwin_Padb::SCHEMA_FIELD => array_keys($fieldSet),
             Qwin_Padb::SCHEMA_FIELD_SETTING => $fieldSet,
-            Qwin_Padb::SCHEMA_PRIMARY_KEY => $option['primary'],
+            Qwin_Padb::SCHEMA_PRIMARY_KEY => $options['primary'],
         );
         $schemaContent = "<?php\r\nreturn " . Qwin_Padb_Array::decode($schemaContent) . ";";
         file_put_contents($schemaFile, $schemaContent);

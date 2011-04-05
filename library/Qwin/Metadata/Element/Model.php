@@ -29,7 +29,7 @@
 
 class Qwin_Metadata_Element_Model extends Qwin_Metadata_Element_Driver
 {
-    protected $_default = array(
+    protected $_defaults = array(
         'alias' => null,
         'metadata' => null,
         'relation' => 'hasOne',
@@ -46,12 +46,12 @@ class Qwin_Metadata_Element_Model extends Qwin_Metadata_Element_Driver
      * 将数据格式化并加入
      *
      * @param array $data 数据
-     * @param array $option 选项
+     * @param array $options 选项
      * @return Qwin_Metadata_Element_Model 当前对象
      */
-    public function merge($data, array $option = array())
+    public function merge($data, array $options = array())
     {
-        $data = $this->_mergeAsArray($data, $option);
+        $data = $this->_mergeAsArray($data, $options);
         $this->exchangeArray($data + $this->getArrayCopy());
         return $this;
     }

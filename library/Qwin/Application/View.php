@@ -62,7 +62,7 @@ class Qwin_Application_View extends ArrayObject
      * 选项
      * @var array
      */
-    protected $_option = array(
+    protected $_options = array(
         'theme'         => '',
         'style'         => '',
         'exceptionView' => '',

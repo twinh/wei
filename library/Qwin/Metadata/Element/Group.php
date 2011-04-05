@@ -27,7 +27,7 @@
 
 class Qwin_Metadata_Element_Group extends Qwin_Metadata_Element_Driver
 {
-    protected $_default = array(
+    protected $_defaults = array(
         0 => 'LBL_GROUP_BASIC_DATA',
     );
 }

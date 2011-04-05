@@ -31,31 +31,20 @@ class Com_Member_Auth_Widget_Login extends Qwin_Widget_Abstract
      * 服务的基本配置
      * @var array
      */
-    protected $_config = array(
-        'asc' => array(
-            'package' => null,
-            'module' => null,
-            'controller' => null,
-            'action' => null,
-        ),
+    protected $_option = array(
         'data' => array(
-            'db' => array(
-                'username' => null,
-                'password' => null,
-                'captcha' => null,
-            ),
-            'checkIsLogin' => true,
-            'checkCaptcha' => true,
-            'checkQuestion' => false,
-            'loginLog' => true,
+            'username' => null,
+            'password' => null,
+            'captcha' => null,
         ),
+        'checkIsLogin' => true,
+        'checkCaptcha' => true,
+        'checkQuestion' => false,
+        'loginLog' => true,
         'callback' => array(
             'afterLoggedIn' => array(),
         ),
-        'view' => array(
-            'display' => true,
-            'url' => null,
-        ),
+        'display' => true,
     );
 
     public function process(array $config = null)

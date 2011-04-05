@@ -36,7 +36,7 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
      *
      * @var array
      */
-    protected $_option = array();
+    protected $_options = array();
 
     /**
      * 微件的根目录
@@ -86,7 +86,7 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
         }
     }
 
-    public function render($option)
+    public function render($options)
     {
         return $this;
     }
@@ -133,10 +133,10 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
     public function getOption($name = null)
     {
         if (null == $name) {
-            return $this->_option;
+            return $this->_options;
         }
-        if (isset($this->_option[$name])) {
-            return $this->_option[$name];
+        if (isset($this->_options[$name])) {
+            return $this->_options[$name];
         }
         throw new Qwin_Widget_Exception('Undefine option "' . $name . '".');
     }
@@ -150,20 +150,20 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
      */
     public function setOption($name, $value = null)
     {
-        isset($this->_option[$name]) && $this->_option[$name] = $value;
+        isset($this->_options[$name]) && $this->_options[$name] = $value;
         return $this;
     }
 
     /**
      * 生成属性字符串
      *
-     * @param array $option 属性数组,键名表示属性名称,值表示属性值
+     * @param array $options 属性数组,键名表示属性名称,值表示属性值
      * @return string 属性字符串
      */
-    public function renderAttr($option)
+    public function renderAttr($options)
     {
         $attr = '';
-        foreach ($option as $name => $value) {
+        foreach ($options as $name => $value) {
             $attr .= $name . '="' . htmlspecialchars($value) . '" ';
         }
         return $attr;
@@ -236,22 +236,6 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
     public function getCachePath()
     {
         return $this->_cachePath;
-    }
-
-    /**
-     * 自动加载部分常用类
-     *
-     * @param array $option 选项
-     * @return Qwin_Widget_Abstract 当前对象
-     * @todo 耦合.
-     */
-    public function autoload(array $option = null)
-    {
-        $this->_autoload = array_merge($this->_autoload, (array)$option);
-        if ($this->_autoload['lang']) {
-            
-        }
-        return $this;
     }
 
     /**

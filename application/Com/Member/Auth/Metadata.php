@@ -25,7 +25,7 @@
  * @since       2010-09-13 11:20:21
  */
 
-class Com_Member_Metadata_LoginLog extends Com_Metadata
+class Com_Member_Auth_Metadata extends Com_Metadata
 {
 
     public function setMetadata()

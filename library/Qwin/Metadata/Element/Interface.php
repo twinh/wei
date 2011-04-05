@@ -25,5 +25,5 @@
 
 interface Qwin_Metadata_Element_Interface
 {
-    public function merge($data, array $option = array());
+    public function merge($data, array $options = array());
 }

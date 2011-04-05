@@ -44,7 +44,7 @@ class Qwin_Application
      * 选项
      * @var array
      */
-    protected $_option = array();
+    protected $_options = array();
 
     /**
      * 视图的实例化对象

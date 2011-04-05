@@ -146,10 +146,10 @@ class Qwin_Padb_Query
      * @param boolen $execute 是否立即执行查询
      * @return mixed 创建结果或当前对象
      */
-    public function createTable($name, $fieldSet, $option = null, $execute = true)
+    public function createTable($name, $fieldSet, $options = null, $execute = true)
     {
         $this->_query['type'] = Qwin_Padb::METHOD_OTHER;
-        $this->_query['param'] = array('createTable', $name, $fieldSet, $option);
+        $this->_query['param'] = array('createTable', $name, $fieldSet, $options);
 
         if(true == $execute)
         {

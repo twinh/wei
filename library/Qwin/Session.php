@@ -43,21 +43,21 @@ class Qwin_Session implements ArrayAccess
      *
      *      -- expire       见expire
      */
-    protected $_option = array(
+    protected $_options = array(
         'namespace' => 'default',
         'limiter'   => 'private_no_expire, must-revalidate',
         'expire'    => 86400,
     );
 
-    public function __construct(array $option)
+    public function __construct(array $options)
     {
-        $this->_option = array_merge($this->_option, $option);
+        $this->_options = array_merge($this->_options, $options);
         if(!session_id()) {
-            session_cache_limiter($this->_option['limiter']);
-            session_cache_expire($this->_option['expire']);
+            session_cache_limiter($this->_options['limiter']);
+            session_cache_expire($this->_options['expire']);
             session_start();
         }
-        $this->setNamespace($this->_option['namespace']);
+        $this->setNamespace($this->_options['namespace']);
     }
 
     /**
