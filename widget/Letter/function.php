@@ -95,7 +95,7 @@ function qw_form_extend($option, $form = null)
 
 function qw_url(array $data = null)
 {
-    return Qwin::call('-url')->url($data);
+    return Qwin::call('-url')->build($data);
 }
 
 function qw_lang($name = null)

@@ -90,13 +90,12 @@ class Com_Widget_Edit extends Qwin_Widget_Abstract
         $dbData->fromArray($data);
         $dbData->save();
 
-        $url->url($module . '/' . $action, '');
         // 展示视图
         if ($option['display']) {
             if (!$option['url']) {
-                $option['url'] = Qwin::call('-url')->url(array('module' => $option['module'], 'action' => 'index'));
+                $option['url'] = Qwin::call('-url')->url($option['module'] , 'index');
             }
-            return Qwin::call('-view')->success('MSG_OPERATE_SUCCESSFULLY', $option['url']);
+            return Qwin::call('-view')->success(Qwin::call('-lang')->t('MSG_SUCCEEDED'), $option['url']);
         }
         return array(
             'result' => true,

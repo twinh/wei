@@ -28,8 +28,8 @@ class Error_Widget extends Qwin_Widget_Abstract
     public function render($option = null)
     {
         // 自定义错误和异常处理
-        //set_exception_handler(array($this, 'renderException'));
-        //set_error_handler(array($this, 'renderError'));
+        set_exception_handler(array($this, 'renderException'));
+        set_error_handler(array($this, 'renderError'));
     }
 
     /**
@@ -47,8 +47,8 @@ class Error_Widget extends Qwin_Widget_Abstract
         // 清空之前输出的内容,再重新启动
         ob_end_clean();
         ob_start();
-        
-        $view = Qwin::call('-view');
+
+        $view = Qwin::call('Com_View');
 
         $content = null;
         $file = $e->getFile();
