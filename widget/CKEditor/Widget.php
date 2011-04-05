@@ -25,7 +25,7 @@
 
 class CKEditor_Widget extends Qwin_Widget_Abstract
 {
-    public function render($option)
+    public function render($options)
     {
         /*
         $code = '<script type="text/javascript" src="' . QWIN . '/js/ckeditor/ckeditor.js"></script>

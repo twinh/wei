@@ -23,17 +23,17 @@
  * @since       2011-02-16 14:14:21
  */
 $minify->add($this->_rootPath . 'script/js.js');
-if ($option['validate']) {
+if ($options['validate']) {
     $minify->add($this->_rootPath . 'script/style.css')
            ->add($this->_rootPath . 'source/jquery.validate.pack.js');
 ?>
 <script type="text/javascript">
-validateCode['<?php echo $option['id'] ?>'] = <?php echo $validateCode ?>;
+validateCode['<?php echo $options['id'] ?>'] = <?php echo $validateCode ?>;
 </script>
 <?php
 }
 ?>
-<form id="<?php echo $option['id'] ?>" name="form" method="post" action="<?php echo qw_url()?>">
+<form id="<?php echo $options['id'] ?>" name="form" method="post" action="<?php echo qw_url()?>">
 <div class="ui-operation-field">
     <?php echo Qwin_Util_JQuery::button('submit', qw_lang('ACT_SUBMIT'), 'ui-icon-check') ?>
     <?php echo Qwin_Util_JQuery::button('reset', qw_lang('ACT_RESET'), 'ui-icon-arrowreturnthick-1-w') ?>

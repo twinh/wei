@@ -31,22 +31,22 @@ class Com_Widget_Edit extends Qwin_Widget_Abstract
      * 服务的基本配置
      * @var array
      */
-    protected $_option = array(
+    protected $_options = array(
         'module'    => null,
         'data'      => array(),
         'display'   => true,
         'url'       => null,
     );
 
-    public function process(array $option = null)
+    public function process(array $options = null)
     {
         // 初始配置
-        $option     = array_merge($this->_option, $option);
+        $options     = array_merge($this->_options, $options);
         
         /* @var $meta Com_Metadata */
-        $meta       = Com_Metadata::getByModule($option['module']);
+        $meta       = Com_Metadata::getByModule($options['module']);
         $primaryKey = $meta['db']['primaryKey'];
-        $primaryKeyValue = isset($option['data'][$primaryKey]) ? $option['data'][$primaryKey] : null;
+        $primaryKeyValue = isset($options['data'][$primaryKey]) ? $options['data'][$primaryKey] : null;
 
         // 从模型获取数据
         $query = $meta->getQuery(null, array('type' => array('db', 'view')));
@@ -59,7 +59,7 @@ class Com_Widget_Edit extends Qwin_Widget_Abstract
                 'result' => false,
                 'message' => $lang['MSG_NO_RECORD'],
             );
-            if ($option['display']) {
+            if ($options['display']) {
                 return Qwin::call('-view')->alert($result['message']);
             } else {
                 return $result;
@@ -67,7 +67,7 @@ class Com_Widget_Edit extends Qwin_Widget_Abstract
         }
 
         // 获取改动过的数据
-        $data = $this->_filterData($meta, $dbData, $option['data']);
+        $data = $this->_filterData($meta, $dbData, $options['data']);
 
         // 转换数据
         $data = $meta->sanitise($data, 'db');
@@ -79,7 +79,7 @@ class Com_Widget_Edit extends Qwin_Widget_Abstract
                 'result' => false,
                 'message' => $validator->getInvalidMessage(),
             );
-            if ($option['display']) {
+            if ($options['display']) {
                 return Qwin::call('-view')->alert($result['message']['title'], null, $result['message']['content']);
             } else {
                 return $result;
@@ -91,11 +91,11 @@ class Com_Widget_Edit extends Qwin_Widget_Abstract
         $dbData->save();
 
         // 展示视图
-        if ($option['display']) {
-            if (!$option['url']) {
-                $option['url'] = Qwin::call('-url')->url($option['module'] , 'index');
+        if ($options['display']) {
+            if (!$options['url']) {
+                $options['url'] = Qwin::call('-url')->url($options['module'] , 'index');
             }
-            return Qwin::call('-view')->success(Qwin::call('-lang')->t('MSG_SUCCEEDED'), $option['url']);
+            return Qwin::call('-view')->success(Qwin::call('-lang')->t('MSG_SUCCEEDED'), $options['url']);
         }
         return array(
             'result' => true,

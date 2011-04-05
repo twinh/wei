@@ -31,7 +31,7 @@ class Com_Member_Auth_Widget_Login extends Qwin_Widget_Abstract
      * 服务的基本配置
      * @var array
      */
-    protected $_option = array(
+    protected $_options = array(
         'data' => array(
             'username' => null,
             'password' => null,

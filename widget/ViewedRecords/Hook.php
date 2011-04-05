@@ -34,7 +34,7 @@ class ViewedRecords_Hook extends Qwin_Hook_Abstract
         'ViewRecord' => 50,
     );
 
-    protected $_option = array(
+    protected $_options = array(
         'maxNum' => 8,
     );
 
@@ -43,10 +43,10 @@ class ViewedRecords_Hook extends Qwin_Hook_Abstract
         return Qwin::call('-widget')->get('viewedrecords')->render($view);
     }
 
-    public function hookViewRecord($option)
+    public function hookViewRecord($options)
     {
-        $meta = $option['meta'];
-        $record = $option['record'];
+        $meta = $options['meta'];
+        $record = $options['record'];
 
         if (!empty($meta['page']['mainField'])) {
             $title = $record[$meta['page']['mainField']];
@@ -62,7 +62,7 @@ class ViewedRecords_Hook extends Qwin_Hook_Abstract
         $viewRecords = (array)$session['viewedRecords'];
         $key = get_class($meta) . $record[$meta['db']['primaryKey']];
 
-        if ($this->_option['maxNum'] <= count($viewRecords)) {
+        if ($this->_options['maxNum'] <= count($viewRecords)) {
             array_pop($viewRecords);
         }
 

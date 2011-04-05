@@ -31,7 +31,7 @@ class Com_Widget_JsonList extends Qwin_Widget_Abstract
      * 服务的基本配置
      * @var array
      */
-    protected $_option = array(
+    protected $_options = array(
         'module'    => null,
         'list'      => null,
         'order'     => null,
@@ -45,41 +45,41 @@ class Com_Widget_JsonList extends Qwin_Widget_Abstract
         'viewClass' => 'Com_View_JsonList',
     );
 
-    public function process(array $option = null)
+    public function process(array $options = null)
     {
         // 初始配置
-        $option     = array_merge($this->_option, $option);
+        $options     = array_merge($this->_options, $options);
 
         // 处理显示域
-        $listFields  = $option['list'];
+        $listFields  = $options['list'];
         if (is_string($listFields)) {
             $listFields = Qwin_Util_String::split2d($listFields);
         }
         
         /* @var $meta Com_Metadata */
-        $meta = Com_Metadata::getByModule($option['module']);
+        $meta = Com_Metadata::getByModule($options['module']);
 
         // 从模型获取数据
-        $query = Com_Metadata::getQueryByModule($option['module'], array('type' => array('db', 'view')));
+        $query = Com_Metadata::getQueryByModule($options['module'], array('type' => array('db', 'view')));
         $meta
             ->addSelectToQuery($query)
-            ->addOrderToQuery($query, $option['order'])
-            ->addWhereToQuery($query, $option['search'])
-            ->addOffsetToQuery($query, ($option['page'] - 1) * $option['row'])
-            ->addLimitToQuery($query, $option['row']);
+            ->addOrderToQuery($query, $options['order'])
+            ->addWhereToQuery($query, $options['search'])
+            ->addOffsetToQuery($query, ($options['page'] - 1) * $options['row'])
+            ->addLimitToQuery($query, $options['row']);
         $dbData = $query->execute();
         $data   = $dbData->toArray();
         $count  = count($data);
         $total  = $query->count();
 
         // 对数据进行转换
-        if ($option['sanitise']) {
+        if ($options['sanitise']) {
             // TODO listField & listField2
             $listField2 = $this->_filterData($meta);
             foreach ($data as &$row) {
                 $rowTemp = array_intersect_key($row, $listField2) + $listField2;
-                $row = $meta->sanitise($rowTemp, $option['asAction'], array(
-                    'view' => $option['isView'],
+                $row = $meta->sanitise($rowTemp, $options['asAction'], array(
+                    'view' => $options['isView'],
                     'link' => true,
                 ), $row);
             }
@@ -92,8 +92,8 @@ class Com_Widget_JsonList extends Qwin_Widget_Abstract
         );
 
         // 展示视图
-        if ($option['display']) {
-            $view = new $option['viewClass'];
+        if ($options['display']) {
+            $view = new $options['viewClass'];
             return $view->assign($result['data']);
         }
 

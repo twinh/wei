@@ -48,7 +48,7 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
         $tab = array();
 
         $moduleId = $module->toId();
-        parse_str(ltrim($view['option']['url'], '?'), $get);
+        parse_str(ltrim($view['options']['url'], '?'), $get);
         if (isset($get['json'])) {
             unset($get['json']);
         }

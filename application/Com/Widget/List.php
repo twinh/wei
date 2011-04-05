@@ -31,7 +31,7 @@ class Com_Widget_List extends Qwin_Widget_Abstract
      * 服务的基本配置
      * @var array
      */
-    protected $_option = array(
+    protected $_options = array(
         'module'    => null,
         'list'      => array(),
         'popup'     => false,
@@ -42,21 +42,21 @@ class Com_Widget_List extends Qwin_Widget_Abstract
     /**
      * 服务处理
      *
-     * @param array $option 选项
+     * @param array $options 选项
      * @return array 处理结果
      */
-    public function process(array $option = null)
+    public function process(array $options = null)
     {
         // 初始配置
-        $option     = $option + $this->_option;
-        $meta       = Com_Metadata::getByModule($option['module']);
+        $options     = $options + $this->_options;
+        $meta       = Com_Metadata::getByModule($options['module']);
         $primaryKey = $meta['db']['primaryKey'];
 
         // 显示哪些域
-        $list       = $option['list'];
+        $list       = $options['list'];
 
         // 是否以弹出框形式显示
-        $popup      = $option['popup'];
+        $popup      = $options['popup'];
 
         // 设置返回结果
         $result = array(
@@ -65,8 +65,8 @@ class Com_Widget_List extends Qwin_Widget_Abstract
         );
 
         // 展示视图
-        if ($option['display']) {
-            $view = new $option['viewClass'];
+        if ($options['display']) {
+            $view = new $options['viewClass'];
             return $view->assign($result['data']);
         }
 

@@ -33,7 +33,7 @@ class ViewedRecords_Widget extends Qwin_Widget_Abstract
         'lang' => true,
     );
 
-    public function render($option)
+    public function render($options)
     {
         $viewRecords = Qwin::call('-session')->get('viewedRecords');
 

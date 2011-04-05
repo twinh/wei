@@ -31,7 +31,7 @@ class Form_Widget extends Qwin_Widget_Abstract
      *
      * @var array
      */
-    protected $_option = array(
+    protected $_options = array(
         'id'        => 'form-%s',
         'meta'      => null,
         'action'    => 'add',
@@ -53,7 +53,7 @@ class Form_Widget extends Qwin_Widget_Abstract
      * 表单元素的配置,不带下划线的为Html属性,否则为私有属性
      * @var array
      */
-    protected $_elementOption = array(
+    protected $_elementoptions = array(
         '_type' => null,
         '_value' => null,
     );
@@ -61,33 +61,33 @@ class Form_Widget extends Qwin_Widget_Abstract
     /**
      * 生成表单界面
      *
-     * @param array $option 配置选项
+     * @param array $options 配置选项
      * @return Form_Widget 当前对象
      * @todo 表单地址,验证可选等
      */
-    public function render($option)
+    public function render($options)
     {
         // 合并选项
-        $option = array_merge($this->_option, $option);
-        $meta = $option['meta'];
-        $data = $option['data'];
+        $options = array_merge($this->_options, $options);
+        $meta = $options['meta'];
+        $data = $options['data'];
         $minify = $this->_widget->get('Minify');
         $lang = Qwin::call('-lang');
         $refererPage = urlencode(Qwin::call('-request')->server('HTTP_REFERER'));
 
-        $option['id'] = sprintf($option['id'], $meta->getModule()->toId());
+        $options['id'] = sprintf($options['id'], $meta->getModule()->toId());
 
         // 表单布局
         $form = $this->getLayout($meta, 'edit', $meta['page']['tableLayout'], $data);
         $group = $meta['group'];
 
         // 验证代码
-        if ($option['validate']) {
+        if ($options['validate']) {
             $this->loadLanguage('validator');
             $validateCode = $this->getValidateCode($meta, $lang);
         }
 
-        $file = $this->_rootPath . 'view/' . $option['view'];
+        $file = $this->_rootPath . 'view/' . $options['view'];
         if (is_file($file)) {
             require $file;
         } else {
@@ -101,15 +101,15 @@ class Form_Widget extends Qwin_Widget_Abstract
      *
      * @return string
      */
-    public function renderElement(array $option)
+    public function renderElement(array $options)
     {
-        $option = array_merge($this->_elementOption, $option);
+        $options = array_merge($this->_elementoptions, $options);
 
         $public = array();
         $private = array();
 
         // 分出公有和私有属性
-        foreach ($option as $name => $value) {
+        foreach ($options as $name => $value) {
             if (isset($name[0]) && '_' == $name[0]) {
                 $private[$name] = $value;
             } else {
@@ -334,17 +334,17 @@ class Form_Widget extends Qwin_Widget_Abstract
         if (isset($private['_resource'])) {
             // 转换资源
             $resource = $this->filterResource($private['_resource']);
-            foreach($resource as $option) {
+            foreach($resource as $options) {
                 // 附加颜色到样式中
-                null != $option['color'] && $option['style'] = 'color:' . $option['color'] . ';' . $option['style'];
-                null != $option['style'] && $option['style'] = ' style="' . $option['style'] . '"';
-                if(false == $isUsed && $value == $option['value']) {
+                null != $options['color'] && $options['style'] = 'color:' . $options['color'] . ';' . $options['style'];
+                null != $options['style'] && $options['style'] = ' style="' . $options['style'] . '"';
+                if(false == $isUsed && $value == $options['value']) {
                     $isUsed = true;
                     $isSelected = ' selected="selected" ';
                 } else {
                     $isSelected = '';
                 }
-                $data .= '<option' . $option['style'] . ' value="' . $option['value'] . '"' . $isSelected . '>' . $option['name'] . '</option>';
+                $data .= '<options' . $options['style'] . ' value="' . $options['value'] . '"' . $isSelected . '>' . $options['name'] . '</options>';
             }
         }
         $data .= '</select>';
@@ -355,11 +355,11 @@ class Form_Widget extends Qwin_Widget_Abstract
      * 转换资源为选项模块的形式
      *
      * @param array $resource
-     * @param array $option 配置选项
+     * @param array $options 配置选项
      * @return array
      * @todo 耦合?
      */
-    public function filterResource($resource, $option = null)
+    public function filterResource($resource, $options = null)
     {
         // 认定为选项模块的选项
         $element = $resource[key($resource)];

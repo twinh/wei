@@ -40,15 +40,15 @@ class Com_View_List extends Com_View
         /* @var $jqGridWidget JqGrid_Widget */
         $jqGridWidget   = $this->widget->get('jqgrid');
 
-        $option         = array();
+        $options         = array();
       
         // 获取json数据的地址
-        $option['url'] = $url->build(array('json' => true) + $_GET);
+        $options['url'] = $url->build(array('json' => true) + $_GET);
 
         // 设置Url参数的名称
         $row = intval($request->get('row'));
         $row <= 0 && $row = $meta['db']['limit'];
-        $option['rowNum'] = $row;
+        $options['rowNum'] = $row;
 
         // 设置弹出窗口属性
         if ($this->popup) {
@@ -58,16 +58,16 @@ class Com_View_List extends Com_View
                 'valueColumn'   => $request['popup-value-column'],
                 'viewColumn'    => $request['popup-view-column'],
             );
-            $option['multiselect']  = false;
-            $option['autowidth']    = false;
-            $option['width']        = 800;
+            $options['multiselect']  = false;
+            $options['autowidth']    = false;
+            $options['width']        = 800;
         }
 
         $jqGrid = array(
             'module'    => $this->module,
             'meta'      => $meta,
             'layout'    => $this->list,
-            'option'    => $option,
+            'options'    => $options,
         );
 
         $this->assign(get_defined_vars());

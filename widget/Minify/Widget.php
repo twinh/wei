@@ -53,7 +53,7 @@ class Minify_Widget extends Qwin_Widget_Abstract
         }
     }
 
-    public function render($option)
+    public function render($options)
     {
         return $this;
     }

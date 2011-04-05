@@ -71,9 +71,9 @@ class Log4php_Widget extends Qwin_Widget_Abstract
     /**
      * 渲染微件
      *
-     * @param mixed $option 配置选项
+     * @param mixed $options 配置选项
      */
-    public function render($option)
+    public function render($options)
     {
         throw new Qwin_Widget_Exception('The "render" method should not be called in this widget.');
     }
