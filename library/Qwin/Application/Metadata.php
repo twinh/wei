@@ -119,7 +119,7 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
 
         // 加载流程处理对象
         if ($option['meta']) {
-            $flow = Qwin::call('Qwin_Flow');
+            $flow = Qwin::call('-flow');
         }
 
         /*if ($option['view']) {

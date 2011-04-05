@@ -385,11 +385,18 @@ class Qwin
         return false;
     }
 
+    /**
+     * 调用方法
+     *
+     * @param array $array
+     * @return mixed
+     * @todo !!!
+     */
     public static function callByArray($array)
     {
         $array[0][0] = Qwin::call($array[0][0]);
-        $callback = array_shift($array);
-        return call_user_func_array($callback, $array);
+        is_string($array[1]) && $array[1] = array($array[1]);
+        return call_user_func_array($array[0], $array[1]);
     }
 
     /**

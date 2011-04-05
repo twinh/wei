@@ -243,7 +243,7 @@ class Com_View extends Qwin_Application_View
         $url = $options['url'];
         $content = (array)$options['content'];
         $time = intval($options['time']);
-        $meta['page']['title'] = 'LBL_REDIRECT';
+        $meta['page']['title'] = 'MOD_INFO';
         $meta['page']['icon'] = $icon = $options['icon'];
         
         $this->assign(get_defined_vars());

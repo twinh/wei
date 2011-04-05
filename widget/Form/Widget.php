@@ -71,7 +71,7 @@ class Form_Widget extends Qwin_Widget_Abstract
         $option = array_merge($this->_option, $option);
         $meta = $option['meta'];
         $data = $option['data'];
-        $minify = $this->_widget->get('minify');
+        $minify = $this->_widget->get('Minify');
         $lang = Qwin::call('-lang');
         $refererPage = urlencode(Qwin::call('-request')->server('HTTP_REFERER'));
 

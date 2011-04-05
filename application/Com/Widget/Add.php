@@ -105,7 +105,7 @@ class Com_Widget_Add extends Qwin_Widget_Abstract
             if (!$option['url']) {
                 $option['url'] = Qwin::call('-url')->url($option['module'], array('action' => 'index'));
             }
-            return Qwin::call('-view')->success('MSG_OPERATE_SUCCESSFULLY', $option['url']);
+            return Qwin::call('-view')->success(Qwin::call('-lang')->t('MSG_SUCCEEDED'), $option['url']);
         }
         return array(
             'result' => true,

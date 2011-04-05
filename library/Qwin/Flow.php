@@ -44,6 +44,17 @@ class Qwin_Flow
         return $value;
     }
 
+    public function callOne($callback)
+    {
+        $callback = $this->filter($callback, $value);
+        if (3 == count($callback[0])) {
+            $value = $this->_callClassMethod($callback);
+        } else {
+            $value = $this->_callFunction($callback);
+        }
+        return $value;
+    }
+
     /**
      * 调用函数型回调结构
      *
@@ -87,6 +98,8 @@ class Qwin_Flow
      * @param string|array $callback 回调结构
      * @param mixed $value
      * @return int
+     * @todo 简化
+     * @todo 没有value的情况
      */
     public function filter($callback, $value)
     {
