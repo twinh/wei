@@ -44,7 +44,7 @@ class Com_View_View extends Com_View
         
         /* @var $formWidget Form_Widget */
         $formWidget = $widget->get('form');
-        $formOption = array(
+        $formOptions = array(
             'meta'      => $meta,
             'action'    => 'view',
             'data'      => $this->data,
