@@ -94,7 +94,7 @@ abstract class Qwin_Application_Controller
     public function getView($class = null)
     {
         if (isset($class) && class_exists($class)) {
-            $this->_view = new $class;
+            $this->_view = Qwin::call($class);
         }
         return $this->_view;
     }

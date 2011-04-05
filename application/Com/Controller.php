@@ -103,6 +103,7 @@ class Com_Controller extends Qwin_Application_Controller
         $this->_module  = $module;
         $this->_action  = $action;
 
+        $this->_view = Qwin::call('Com_View');
         $this->getRequest();
          /**
          * 访问控制

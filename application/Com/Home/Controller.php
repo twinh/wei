@@ -23,12 +23,12 @@
  * @since       2011-01-09 09:42:41
  */
 
-class Com_Home_Controller_Home extends Com_Controller
+class Com_Home_Controller extends Com_Controller
 {
     public function actionUpdateLog()
     {
         $meta['page']['icon'] = 'clipboard';
         $meta['page']['title'] = 'LBL_MODULE_HOME';
-        $this->view->assign(get_defined_vars());
+        $this->getView()->assign(get_defined_vars());
     }
 }

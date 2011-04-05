@@ -46,8 +46,6 @@ class Com_Module extends Qwin_Application_Module
             $log->debug('The module is ' . implode('/', $config['module']));
         }
 
-        Qwin::setMap('-view', 'Com_View');
-        Qwin::call('Com_View');
         /*if ($config['router']['enable']) {
             $router = Qwin::call('Qwin_Url_Router');
             $router->addList($config['router']['list']);
