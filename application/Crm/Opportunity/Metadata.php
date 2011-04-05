@@ -23,9 +23,9 @@
  * @since       2011-01-05 14:13:37
  */
 
-class Crm_Opportunity_Metadata_Opportunity extends Com_Metadata
+class Crm_Opportunity_Metadata extends Com_Metadata
 {
-    public function  setMetadata()
+    public function setMetadata()
     {
         $this->setAdvancedMetadata();
         $this->merge(array(
@@ -198,17 +198,13 @@ class Crm_Opportunity_Metadata_Opportunity extends Com_Metadata
             ),
             'model' => array(
                 'receiver' => array(
+                    'module' => 'com/member',
                     'alias' => 'receiver',
                     'type' => 'view',
                     'local' => 'assign_to',
                     'foreign' => 'id',
                     'fieldMap' => array(
                         'assign_to' => 'username',
-                    ),
-                    'asc' => array(
-                        'package' => 'Common',
-                        'module' => 'Member',
-                        'controller' => 'Member',
                     ),
                 ),
             ),
