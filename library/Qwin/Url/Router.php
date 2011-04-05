@@ -29,7 +29,7 @@
 class Qwin_Url_Router
 {
     /**
-     * @var array $_option  数据转换的选项
+     * @var array $_options  数据转换的选项
      *
      *      -- pattern      正则模式,不包含分隔符和修正符,默认为忽略大小写
      *
@@ -39,7 +39,7 @@ class Qwin_Url_Router
      *
      * @todo 能否允许自定义分隔符和修正符
      */
-    protected $_option = array(
+    protected $_options = array(
         'pattern'   => '',
         'match'     => array(),
         'default'   => '',
@@ -78,24 +78,24 @@ class Qwin_Url_Router
      */
     public function add(array $route, $name = null)
     {
-        $option =  $route + $this->_option;
+        $options =  $route + $this->_options;
 
-        $option['pattern'] = '#^' . $option['pattern'] . '#i';
+        $options['pattern'] = '#^' . $options['pattern'] . '#i';
 
         // 检测正则模式是否有效
-        if (false === preg_match($option['pattern'], '')) {
-            throw new Qwin_Url_Router_Exception('The pattern ' . $option['pattern'] . ' is invalid' );
+        if (false === preg_match($options['pattern'], '')) {
+            throw new Qwin_Url_Router_Exception('The pattern ' . $options['pattern'] . ' is invalid' );
         }
 
         // 如果默认值是url字符串形式,自动转换为数组形式
-        if (is_string($option['default'])) {
-            $option['default'] = parse_str($option['default']);
+        if (is_string($options['default'])) {
+            $options['default'] = parse_str($options['default']);
         }
 
         if (null == $name) {
-            $this->_data[] = $option;
+            $this->_data[] = $options;
         } else {
-            $this->_data[$name] = $option;
+            $this->_data[$name] = $options;
         }
         return $this;
     }

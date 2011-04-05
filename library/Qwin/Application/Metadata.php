@@ -34,7 +34,7 @@ require_once 'Qwin/Metadata/Abstract.php';
 abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
 {
     /**
-     * @var array $_sanitiseOption  数据处理的选项
+     * @var array $_sanitiseOptions  数据处理的选项
      *
      *      -- view                 是否根据视图类关联模型的配置进行转换
      *                              提示,如果转换的数据作为表单的值显示,应该禁止改选项
@@ -49,7 +49,7 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
      *
      *      -- relatedMeta          是否转换关联的元数据
      */
-    protected $_sanitiseOption = array(
+    protected $_sanitiseOptions = array(
         'view'          => true,
         'null'          => true,
         'type'          => true,
@@ -61,14 +61,14 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
 
     /**
      *
-     * @var array $_queryOption 查询对象的选项
+     * @var array $_queryOptions 查询对象的选项
      *
      *      -- model                 模型的别名组成的数组
      *
      *      -- type                  模型的类型组成的数组
      *
      */
-    /*protected $_queryOption = array(
+    /*protected $_queryOptions = array(
         'model'         => array(),
         'type'          => array(),
     );*/
@@ -105,12 +105,12 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
      *
      * @param array $data 处理的数据
      * @param array $action 处理的行为,如db,list,view
-     * @param array $option 选项
+     * @param array $options 选项
      * @return array
      */
-    public function sanitise($data, $action = 'db', array $option = array(), array $dataCopy = array())
+    public function sanitise($data, $action = 'db', array $options = array(), array $dataCopy = array())
     {
-        $option = array_merge($this->_sanitiseOption, $option);
+        $options = array_merge($this->_sanitiseOptions, $options);
         empty($dataCopy) && $dataCopy = $data;
         $action = strtolower($action);
 
@@ -118,11 +118,11 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
         $this->preSanitise();
 
         // 加载流程处理对象
-        if ($option['meta']) {
+        if ($options['meta']) {
             $flow = Qwin::call('-flow');
         }
 
-        /*if ($option['view']) {
+        /*if ($options['view']) {
             foreach ($meta['model'] as $model) {
                 if ('view' == $model['type']) {
                     foreach ($model['fieldMap'] as $localField => $foreignField) {
@@ -144,7 +144,7 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
             }
 
             // 类型转换
-            /*if ($option['type'] && $field['db']['type']) {
+            /*if ($options['type'] && $field['db']['type']) {
                 if (null != $newData[$name]) {
                     if ('string' == $field['db']['type']) {
                         $newData[$name] = (string)$newData[$name];
@@ -159,12 +159,12 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
             }*/
 
             // 根据元数据中转换器的配置进行转换
-            if ($option['meta'] && isset($this['field'][$name]['sanitiser'][$action])) {
+            if ($options['meta'] && isset($this['field'][$name]['sanitiser'][$action])) {
                 $data[$name] = $flow->call(array($this['field'][$name]['sanitiser'][$action]), $value);
             }
 
             // 使用转换器中的方法进行转换
-            if ($option['sanitise']) {
+            if ($options['sanitise']) {
                 $method = str_replace(array('_', '-'), '', 'sanitise' . $action . $name);
                 if (method_exists($this, $method)) {
                     $data[$name] = call_user_func_array(
@@ -175,7 +175,7 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
             }
 
             // 转换链接
-            if ($option['link'] && 1 == $this->field[$name]['attr']['isLink'] && method_exists($this, 'setIsLink')) {
+            if ($options['link'] && 1 == $this->field[$name]['attr']['isLink'] && method_exists($this, 'setIsLink')) {
                 $data[$name] = call_user_func_array(
                     array($this, 'setIsLink'),
                     array($value, $name, $data, $dataCopy, $action)
@@ -184,12 +184,12 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
         }
 
         // 对db类型的关联元数据进行转换
-        if ($option['relatedMeta']) {
+        if ($options['relatedMeta']) {
             foreach ($this->getModelMetadataByType('db') as $name => $relatedMeta) {
                 !isset($data[$name]) && $data[$name] = array();
                 // 不继续转换关联元数据
-                $option['relatedMeta'] = false;
-                $data[$name] = $relatedMeta->sanitise($data[$name], $action, $option);
+                $options['relatedMeta'] = false;
+                $data[$name] = $relatedMeta->sanitise($data[$name], $action, $options);
             }
         }
 

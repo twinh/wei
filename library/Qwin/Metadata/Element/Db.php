@@ -27,7 +27,7 @@
 
 class Qwin_Metadata_Element_Db extends Qwin_Metadata_Element_Driver
 {
-    protected $_default = array(
+    protected $_defaults = array(
         'type' => 'sql',
         'table' => null,
         'primaryKey' => 'id',

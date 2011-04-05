@@ -25,6 +25,6 @@
  * @since       2010-09-13 11:20:50
  */
 
-class Com_Member_Model_LoginLog extends Com_Model
+class Com_Member_Auth_Model extends Com_Model
 {
 }

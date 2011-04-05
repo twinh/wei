@@ -25,13 +25,10 @@
  * @since       2010-05-23 00:22:37
  */
 
-class Com_Member_Controller_Log extends Com_Controller
+class Com_Member_Auth_Controller extends Com_Controller
 {
     public function actionLogin()
     {
-        $js = Qwin::call('Qwin_Helper_Js');
-        $meta = $this->_meta;
-
         // 提示已经登陆的信息
         /*$member = $this->session->get('member');
         if ('guest' != $member['username']) {

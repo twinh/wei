@@ -27,7 +27,7 @@
 
 class Qwin_Metadata_Element_Page extends Qwin_Metadata_Element_Driver
 {
-    protected $_default = array(
+    protected $_defaults = array(
         'title'         => null,
         'icon'          => 'document',
         'description'   => null,

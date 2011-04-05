@@ -29,13 +29,13 @@ abstract class Qwin_Metadata_Element_Driver extends ArrayObject implements Qwin_
      * 默认数据
      * @var array
      */
-    protected $_default = array();
+    protected $_defaults = array();
 
     /**
      * 选项
      * @var array
      */
-    protected $_option = array();
+    protected $_options = array();
 
     /**
      * 初始化类
@@ -51,12 +51,12 @@ abstract class Qwin_Metadata_Element_Driver extends ArrayObject implements Qwin_
      * 格式化数据,例如,设置默认数据,为未初始化的键名设置空值
      *
      * @param array $data 数据
-     * @param array $option 选项
+     * @param array $options 选项
      * @return Qwin_Metadata_Element_Driver 当前对象
      */
-    public function merge($data, array $option = array())
+    public function merge($data, array $options = array())
     {
-        $data = $data + $this->_default;
+        $data = $data + $this->_defaults;
         $this->exchangeArray($data + $this->getArrayCopy());
         return $this;
     }
@@ -66,10 +66,10 @@ abstract class Qwin_Metadata_Element_Driver extends ArrayObject implements Qwin_
      *
      * @return array 格式过的数据
      */
-    protected function _mergeAsArray($data, array $option = array())
+    protected function _mergeAsArray($data, array $options = array())
     {
         foreach ($data as $key => &$row) {
-            $row = $this->_merge($row, $option, $key);
+            $row = $this->_merge($row, $options, $key);
         }
         return $data;
     }
@@ -79,9 +79,9 @@ abstract class Qwin_Metadata_Element_Driver extends ArrayObject implements Qwin_
      *
      * @return array 格式过的数据
      */
-    protected function _merge($data, array $option = array(), $name = null)
+    protected function _merge($data, array $options = array(), $name = null)
     {
-        return array_merge($this->_default, $data);
+        return array_merge($this->_defaults, $data);
     }
 
     /**
@@ -90,12 +90,12 @@ abstract class Qwin_Metadata_Element_Driver extends ArrayObject implements Qwin_
      * @param string $name 配置名称
      * @return mixed
      */
-    public function getOption($name = null)
+    public function getoption($name = null)
     {
         if (null == $name) {
-            return $this->_option;
+            return $this->_options;
         }
-        return isset($this->_option[$name]) ? $this->_option[$name] : null;
+        return isset($this->_options[$name]) ? $this->_options[$name] : null;
     }
 
     /**
