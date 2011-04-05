@@ -46,7 +46,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
         }
         $link = array();
 
-        if (!in_array('index', $unableActions)) {
+        if (!in_array('index', $unableActions) && method_exists($controller, 'actionIndex')) {
             $link['index'] = array(
                 'url'   => $url->url($module->toUrl(), 'index'),
                 'title' => $lang->t('ACT_LIST'),
@@ -54,7 +54,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
             );
         }
 
-        if (!in_array('add', $unableActions)) {
+        if (!in_array('add', $unableActions) && method_exists($controller, 'actionAdd')) {
             $link['add'] = array(
                 'url'   => $url->url($module->toUrl(), 'add'),
                 'title' => $lang->t('ACT_ADD'),
@@ -66,7 +66,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
         $data = $view['data'];
         $primaryKey = $view['primaryKey'];
         if (isset($data[$primaryKey])) {
-            if (!in_array('edit', $unableActions)) {
+            if (!in_array('edit', $unableActions) && method_exists($controller, 'actionEdit')) {
                 $link['edit'] = array(
                     'url'   => $url->url($module->toUrl(), 'edit', array($primaryKey => $data[$primaryKey])),
                     'title' => $lang->t('ACT_EDIT'),
@@ -74,7 +74,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
                 );
             }
 
-            if (!in_array('view', $unableActions)) {
+            if (!in_array('view', $unableActions) && method_exists($controller, 'actionView')) {
                 $link['view'] = array(
                     'url'   => $url->url($module->toUrl(), 'view', array($primaryKey => $data[$primaryKey])),
                     'title' => $lang->t('ACT_VIEW'),
@@ -82,7 +82,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
                 );
             }
 
-            if (!in_array('add', $unableActions)) {
+            if (!in_array('add', $unableActions) && method_exists($controller, 'actionAdd')) {
                 $link['copy'] = array(
                     'url'   => $url->url($module->toUrl(), 'add', array($primaryKey => $data[$primaryKey])),
                     'title' => $lang->t('ACT_COPY'),
@@ -90,7 +90,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
                 );
             }
 
-             if (!in_array('delete', $unableActions)) {
+             if (!in_array('delete', $unableActions) && method_exists($controller, 'actionDelete')) {
                 $meta = Com_Metadata::getByModule($module);
                 if (!isset($meta['page']['useTrash'])) {
                     $icon = 'ui-icon-close';

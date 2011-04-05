@@ -97,6 +97,10 @@ function qw_url(array $data = null)
 {
     return Qwin::call('-url')->build($data);
 }
+function qw_u($value1, $value2 = 'index', array $params = array())
+{
+    return Qwin::call('-url')->url($value1, $value2, $params);
+}
 
 function qw_lang($name = null)
 {

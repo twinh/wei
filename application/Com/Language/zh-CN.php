@@ -142,8 +142,8 @@ return array(
     'LBL_LOGIN' => '登录',
 
     'LBL_LANG_GBK' => '简体中文(Zh-cn,Gbk)',
-    'LBL_LANG_ZHCN' => '简体中文(Zh-cn,Utf-8)',
-    'LBL_LANG_ENUS' => '英文(En-us)',
+    'LBL_LANG_ZHCN' => '简体中文(zh-CN,Utf-8)',
+    'LBL_LANG_EN' => '英文(en)',
 
     'LBL_CANCEL' => '取消',
     'LBL_CUSTOM_VALUE' => '自定义值',
