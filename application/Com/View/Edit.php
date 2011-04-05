@@ -37,7 +37,6 @@ class Com_View_Edit extends Com_View
 
         $meta = $this->meta;
         $data = $this->data;
-        $asc = Qwin::config('asc');
 
         /* @var $formWidget Form_Widget */
         $formWidget = Qwin::call('-widget')->get('form');

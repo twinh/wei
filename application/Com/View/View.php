@@ -66,7 +66,7 @@ class Com_View_View extends Com_View
             $jqGrid = array();
             $model = $meta['model'][$alias];
             
-            $lang->appendByModule($model['asc']);
+            $lang->appendByModule($model['module']);
 
             $tabTitle[$alias] = $lang[$relatedMeta['page']['title']];
 
@@ -86,16 +86,14 @@ class Com_View_View extends Com_View
             $option['colModel'] = $col['colModel'];
 
             // 获取json数据的地址
-            $option['url'] = $url->url(
-                array('json' => '1')
-                + $model['asc']
-                + array('search' => $model['foreign'] . ':' . $data[$model['local']])
-                + array('list' => implode(',', $listLayout))
-            );
+            $option['url'] = $url->url($model['module'], 'index', array(
+                'json'      => '1',
+                'search'    => $model['foreign'] . ':' . $data[$model['local']],
+                'list'      => implode(',', $listLayout),
+            ));
 
             $jqGrid = array(
-                'asc'       => $model['asc'],
-                'ascId'     => strtolower(implode('-', $model['asc'])),
+                'module'    => new Qwin_Module($model['module']),
                 'meta'      => $relatedMeta,
                 'layout'    => (array)$model['list'],
                 'option'    => $option,

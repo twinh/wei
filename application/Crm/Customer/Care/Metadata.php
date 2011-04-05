@@ -137,28 +137,23 @@ class Crm_Customer_Care_Metadata extends Com_Metadata
                     ),
                     'form' => array(
                         '_type' => 'textarea',
-                        '_value' => 'lala',
                     ),
                 ),
             ),
             'group' => array(
-                1 => 'LBL_GROUP_DETAIL_DATA'
+                1 => 'LBL_GROUP_DETAIL_DATA',
             ),
             'layout' => array(
 
             ),
             'model' => array(
                 'customer' => array(
+                    'module' => 'crm/customer',
                     'alias' => 'customer',
                     'type' => 'view',
                     'local' => 'customer_id',
                     'fieldMap' => array(
                         'customer_id' => 'name',
-                    ),
-                    'asc' => array(
-                        'package' => 'Crm',
-                        'module' => 'Customer',
-                        'controller' => 'Customer',
                     ),
                 ),
             ),

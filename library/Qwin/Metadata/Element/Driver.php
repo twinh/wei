@@ -56,7 +56,7 @@ abstract class Qwin_Metadata_Element_Driver extends ArrayObject implements Qwin_
      */
     public function merge($data, array $option = array())
     {
-        $data = array_merge($this->_default, $data);
+        $data = $data + $this->_default;
         $this->exchangeArray($data + $this->getArrayCopy());
         return $this;
     }

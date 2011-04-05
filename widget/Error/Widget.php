@@ -106,9 +106,9 @@ class Error_Widget extends Qwin_Widget_Abstract
         for($i = $start; $i < $end; $i++) {
             $temp = str_pad($i, 4, 0, STR_PAD_LEFT) . ':' . $code[$i];
             if ($line != $i) {
-                $content .= $temp;
+                $content .= htmlspecialchars($temp);
             } else {
-                $content .= '<div style="color:red;">' . $temp . '</div>';
+                $content .= '<div style="color:red;">' . htmlspecialchars($temp) . '</div>';
             }
         }
 

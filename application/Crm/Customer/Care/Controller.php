@@ -23,6 +23,6 @@
  * @since       2011-01-18 11:21:45
  */
 
-class Crm_Customer_Controller_Care extends Com_ActionController
+class Crm_Customer_Care_Controller extends Com_ActionController
 {
 }
