@@ -23,6 +23,6 @@
  * @since       2011-01-05 16:06:16
  */
 
-class Crm_Potential_Controller_Potential extends Com_ActionController
+class Crm_Potential_Controller extends Com_ActionController
 {
 }
