@@ -25,7 +25,7 @@
  * @since       2010-10-12 11:53:55
  */
 
-class Com_Member_Service_Login extends Com_Service_BasicAction
+class Com_Member_Auth_Widget_Login extends Qwin_Widget_Abstract
 {
     /**
      * 服务的基本配置

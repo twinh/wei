@@ -27,25 +27,55 @@
 
 class Com_Member_Metadata_LoginLog extends Com_Metadata
 {
-    public function __construct()
+
+    public function setMetadata()
     {
-        $this->setIdMetadata();
         $this->merge(array(
             'field' => array(
-                'member_id' => array(
+                'captcha' => array(
+                    'form' => array(
+                        'class' => 'ui-widget-content ui-corner-all',
+                        'maxlength' => 4,
+                    ),
                     'attr' => array(
-                        'isLink' => 1,
-                        'isList' => 1,
+                        'isList' => 0,
+                        'isDbField' => 0,
+                        'isDbQuery' => 0,
+                    ),
+                    'validator' => array(
+                        'rule' => array(
+                            'required' => true,
+                        ),
                     ),
                 ),
-                'ip' => array(
+                'username' => array(
+                    'form' => array(
+                        'class' => 'ui-widget-content ui-corner-all',
+                    ),
                     'attr' => array(
-                        'isList' => 1,
+                        'isList' => 0,
+                    ),
+                    'validator' => array(
+                        'rule' => array(
+                            'required' => true,
+                        ),
                     ),
                 ),
-                'date_created' => array(
+                'password' => array(
+                    'form' => array(
+                        '_type' => 'password',
+                        'class' => 'ui-widget-content ui-corner-all',
+                    ),
                     'attr' => array(
-                        'isList' => 1,
+                        'isList' => 0,
+                    ),
+                    'sanitiser' => array(
+                        'db' => array('md5')
+                    ),
+                    'validator' => array(
+                        'rule' => array(
+                            'required' => true,
+                        ),
                     ),
                 ),
             ),
@@ -53,43 +83,47 @@ class Com_Member_Metadata_LoginLog extends Com_Metadata
 
             ),
             'model' => array(
-                'member' => array(
-                    'alias' => 'status',
-                    'local' => 'member_id',
-                    'foreign' => 'id',
-                    'type' => 'view',
-                    'fieldMap' => array(
-                        'member_id' => 'username',
-                    ),
-                    'asc' => array(
-                        'package' => 'Common',
-                        'module' => 'Member',
-                        'controller' => 'Member'
-                    ),
-                ),
-            ),
-            'metadata' => array(
 
             ),
             'db' => array(
-                'table' => 'member_loginlog',
-                'order' => array(
-                    array('date_created', 'DESC'),
-                ),
+                'table' => 'member',
             ),
+            // 页面显示
             'page' => array(
-                'title' => 'LBL_MODULE_MEMBER_LOGINLOG',
-            )
+                'title' => 'LBL_MODULE_TITLE',
+            ),
         ));
     }
 
-    public function sanitiseDbIp($value, $name, $data, $copyData)
+    public function validateCaptcha($value, $name, $data)
     {
-        return Qwin_Helper_Util::getIp();
+        if($value == Qwin::call('-session')->get('captcha'))
+        {
+            return true;
+        }
+        return new Qwin_Validator_Result(false, $name, 'MSG_ERROR_CAPTCHA');
     }
 
-    public function sanitiseListDateCreated($value, $name, $data, $copyData)
+    public function validatePassword($value, $name, $data)
     {
-        return $value;
+        $value = md5($value);
+        $result = Qwin::call('Qwin_Application_Metadata')
+            ->getQueryByAsc(array(
+                'package' => 'Common',
+                'module' => 'Member',
+                'controller' => 'Member',
+            ), array('db', 'view'))
+            ->where('username = ? AND password = ?', array($data['username'], $value))
+            ->fetchOne();
+        if(false != $result)
+        {
+            $member = $result->toArray();
+            unset($member['password']);
+            // 加入到元数据中,方便调用
+            $this->member = $member;
+            return true;
+        }
+        Qwin::call('-session')->set('member', null);
+        return new Qwin_Validator_Result(false, 'password', 'MSG_ERROR_USERNAME_PASSWORD');
     }
 }
