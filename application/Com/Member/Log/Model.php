@@ -25,6 +25,6 @@
  * @since       2010-05-24 09:25:40
  */
 
-class Com_Member_Model_Log extends Com_Model
+class Com_Member_Log_Model extends Com_Model
 {
 }
