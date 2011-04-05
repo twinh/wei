@@ -20,9 +20,9 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-05 14:12:38
+ * @since       2011-01-05 14:14:13
  */
 
-class Crm_Opportunity_Controller_Opportunity extends Com_ActionController
+class Crm_Opportunity_Model extends Com_Model
 {
 }

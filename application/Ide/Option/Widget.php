@@ -177,11 +177,7 @@ class Ide_Option_Widget extends Qwin_Widget_Abstract
         if (isset($this->_query)) {
             return $this->_query;
         }
-        $this->_query =  Com_Metadata::getQueryByAsc(array(
-            'package' => 'Common',
-            'module' => 'Option',
-            'controller' => 'Option',
-        ));
+        $this->_query = Com_Metadata::getQueryByModule('ide/option');
         return $this->_query;
     }
 
