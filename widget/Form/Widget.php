@@ -75,7 +75,7 @@ class Form_Widget extends Qwin_Widget_Abstract
         $lang = Qwin::call('-lang');
         $refererPage = urlencode(Qwin::call('-request')->server('HTTP_REFERER'));
 
-        $option['id'] = sprintf($option['id'], $meta->getId());
+        $option['id'] = sprintf($option['id'], $meta->getModule()->toId());
 
         // 表单布局
         $form = $this->getLayout($meta, 'edit', $meta['page']['tableLayout'], $data);

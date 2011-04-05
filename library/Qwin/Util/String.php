@@ -264,4 +264,50 @@ class Qwin_Util_String
             mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
         );
     }
+
+    /**
+     * 分割字符串为数字形式
+     *
+     * @param <type> $data
+     * @param <type> $separator 分割符1
+     * @param <type> $separator2 分隔符2
+     * @return array
+     * @todo example
+     */
+    public static function split2d($data, $separator = ',', $separator2 = '.')
+    {
+        if (null == $data) {
+            return null;
+        }
+        $data = explode($separator, $data);
+        foreach ($data as $key => $value) {
+            $pos = strpos($value, $separator2);
+            if (false !== $pos) {
+                $data[$key] = array(
+                    substr($value, 0, $pos),
+                    substr($value, $pos + 1),
+                );
+            }
+        }
+        return $data;
+    }
+
+    /**
+     * 分割查询字符串为数组形式
+     *
+     * @param string $data 查询字符串
+     * @return array 查询数组
+     */
+    public static function splitQuery($data)
+    {
+        $data = preg_split('/(?<!\\\\)\,/', $data, -1, PREG_SPLIT_DELIM_CAPTURE);
+        foreach ($data as &$row) {
+            $row = strtr($row, array('\,' => ','));
+            $row = preg_split('/(?<!\\\\)\:/', $row, -1, PREG_SPLIT_DELIM_CAPTURE);
+            foreach ($row as &$element) {
+                $element = strtr($element, array('\:' => ':'));
+            }
+        }
+        return $data;
+    }
 }

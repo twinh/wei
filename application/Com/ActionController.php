@@ -38,17 +38,20 @@ class Com_ActionController extends Com_Controller
         if ($request->isJson()) {
             return Com_Widget::getByModule('Com', 'JsonList')->process(array(
                 'module'=> $this->_module,
-                'list'  => $request->getListField(),
-                'order' => $request->getOrder(),
-                'where' => $request->getWhere(),
-                'offset'=> $request->getOffset(),
-                'limit' => $request->getLimit(),
+                'list'  => $request->get('list'),
+                'search'=> $request->get('search'),
+                'page'  => $request->get('page'),
+                'row'   => $request->get('row'),
+                'order' => array(
+                    $request->get('orderField'),
+                    $request->get('orderType')
+               ),
             ));
         } else {
             return Com_Widget::getByModule('Com', 'List')->process(array(
                 'module'=> $this->_module,
-                'list'  => $request->getListField(),
-                'popup' => $request['popup'],
+                'list'  => $request->get('list'),
+                'popup' => $request->get('popup'),
             ));
         }
     }
@@ -62,7 +65,7 @@ class Com_ActionController extends Com_Controller
     {
         return Com_Widget::getByModule('Com', 'View')->process(array(
             'module'    => $this->_module,
-            'id'        => $this->_request->getPrimaryKeyValue($this->_module),
+            'id'        => $this->_request->get('id'),
         ));
     }
 
@@ -73,11 +76,12 @@ class Com_ActionController extends Com_Controller
      */
     public function actionAdd()
     {
+        $r = Qwin::call('-widget')->get('Request');
         if (!$this->_request->isPost()) {
             return Com_Widget::getByModule('Com', 'Form')->process(array(
                 'module'    => $this->_module,
-                'id'        => $this->_request->getPrimaryKeyValue($this->_module),
-                'initalData'=> $this->_request->getInitialData(),
+                'id'        => $this->_request->get('id'),
+                'data'      => $this->_request->get('search'),
             ));
         } else {
             return Com_Widget::getByModule('Com', 'Add')->process(array(
@@ -98,7 +102,7 @@ class Com_ActionController extends Com_Controller
         if (!$this->_request->isPost()) {
             return Com_Widget::getByModule('Com', 'View')->process(array(
                 'module'    => $this->_module,
-                'id'        => $this->_request->getPrimaryKeyValue($this->_module),
+                'id'        => $this->_request->get('id'),
                 'asAction'  => 'edit',
                 'isView'    => false,
                 'viewClass' => 'Com_View_Edit',
@@ -122,7 +126,7 @@ class Com_ActionController extends Com_Controller
         return Com_Widget::getByModule('Com', 'Delete')->process(array(
             'module'    => $this->_module,
             'data'      => array(
-                'primaryKeyValue' => $this->_request->getPrimaryKeyValue($this->_module),
+                'id' => $this->_request->get('id'),
             ),
         ));
     }

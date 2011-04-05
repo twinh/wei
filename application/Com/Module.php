@@ -46,11 +46,7 @@ class Com_Module extends Qwin_Application_Module
             $log->debug('The module is ' . implode('/', $config['module']));
         }
 
-        // 关闭魔术引用
-        ini_set('magic_quotes_runtime', 0);
-
         Qwin::setMap('-view', 'Com_View');
-        Qwin::call('Com_Request');
         Qwin::call('Com_View');
         /*if ($config['router']['enable']) {
             $router = Qwin::call('Qwin_Url_Router');

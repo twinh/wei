@@ -46,7 +46,9 @@ class Com_View_List extends Com_View
         $option['url'] = $url->build(array('json' => true) + $_GET);
 
         // 设置Url参数的名称
-        $option['rowNum']        = $request->getLimit();
+        $row = intval($request->get('row'));
+        $row <= 0 && $row = $meta['db']['limit'];
+        $option['rowNum'] = $row;
 
         // 设置弹出窗口属性
         if ($this->popup) {

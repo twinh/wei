@@ -48,7 +48,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
 
         if (!in_array('index', $unableActions)) {
             $link['index'] = array(
-                'url'   => $url->url(array('module' => $module->toString(), 'action' => 'Index')),
+                'url'   => $url->url($module->toUrl(), 'index'),
                 'title' => $lang->t('ACT_LIST'),
                 'icon'  => 'ui-icon-note',
             );
@@ -56,7 +56,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
 
         if (!in_array('add', $unableActions)) {
             $link['add'] = array(
-                'url'   => $url->url(array('module' => $module->toString(), 'action' => 'Add')),
+                'url'   => $url->url($module->toUrl(), 'add'),
                 'title' => $lang->t('ACT_ADD'),
                 'icon'  => 'ui-icon-plus',
             );
@@ -68,7 +68,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
         if (isset($data[$primaryKey])) {
             if (!in_array('edit', $unableActions)) {
                 $link['edit'] = array(
-                    'url'   => $url->url(array('module' => $module->toString(), 'action' => 'Edit', $primaryKey => $data[$primaryKey])),
+                    'url'   => $url->url($module->toUrl(), 'edit', array($primaryKey => $data[$primaryKey])),
                     'title' => $lang->t('ACT_EDIT'),
                     'icon'  => 'ui-icon-tag',
                 );
@@ -76,7 +76,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
 
             if (!in_array('view', $unableActions)) {
                 $link['view'] = array(
-                    'url'   => $url->url(array('module' => $module->toString(), 'action' => 'View', $primaryKey => $data[$primaryKey])),
+                    'url'   => $url->url($module->toUrl(), 'view', array($primaryKey => $data[$primaryKey])),
                     'title' => $lang->t('ACT_VIEW'),
                     'icon'  => 'ui-icon-lightbulb',
                 );
@@ -84,7 +84,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
 
             if (!in_array('add', $unableActions)) {
                 $link['copy'] = array(
-                    'url'   => $url->url(array('module' => $module->toString(), 'action' => 'Add', $primaryKey => $data[$primaryKey])),
+                    'url'   => $url->url($module->toUrl(), 'add', array($primaryKey => $data[$primaryKey])),
                     'title' => $lang->t('ACT_COPY'),
                     'icon'  => 'ui-icon-transferthick-e-w',
                 );
@@ -100,7 +100,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
                     $jsLang = 'MSG_CONFIRM_TO_DELETE_TO_TRASH';
                 }
                  $link['delete'] = array(
-                    'url'   => 'javascript:if(confirm(QWIN_PATH.Lang.' . $jsLang . ')){window.location=\'' . $url->url(array('module' => $module, 'action' => 'Delete', $primaryKey => $data[$primaryKey])) . '\'};',
+                    'url'   => 'javascript:if(confirm(Qwin.Lang.' . $jsLang . ')){window.location=\'' . $url->url($module->toUrl(), 'delete', array($primaryKey => $data[$primaryKey])) . '\'};',
                     'title' => $lang->t('ACT_DELETE'),
                     'icon'  => $icon,
                 );

@@ -254,13 +254,26 @@ class Com_Metadata extends Qwin_Application_Metadata
      * 为Doctrine查询对象增加排序语句
      *
      * @param Doctrine_Query $query
-     * @param array|null $addition 附加的排序配置
+     * @param array|null $order 排序配置
      * @return Com_Metadata 当前对象
      * @todo 关联元数据的排序
      */
-    public function addOrderToQuery(Doctrine_Query $query, array $addition = null)
+    public function addOrderToQuery(Doctrine_Query $query, $order = null)
     {
-        $order = null != $addition ? $addition : $this['db']['order'];
+        // 排序为字符串形式,进行分割
+        if (is_string($order)) {
+            $order = Qwin_Util_String::splitQuery($order);
+        }
+
+        // 排序只有一项,补全数组
+        if (isset($order[0]) && is_string($order[0])) {
+            $order = array($order);
+        }
+
+        // 没有排序,使用默认排序
+        if (empty($order)) {
+            $order = $this['db']['order'];
+        }
 
         $alias = $query->getRootAlias();
         '' != $alias && $alias .= '.';
@@ -292,8 +305,11 @@ class Com_Metadata extends Qwin_Application_Metadata
      * @todo 完善查询类型
      * @todo 复杂查询
      */
-    public function addWhereToQuery(Doctrine_Query $query, array $addition = null)
+    public function addWhereToQuery(Doctrine_Query $query, $addition = null)
     {
+        if (is_string($addition)) {
+            $addition = Qwin_Util_String::splitQuery($addition);
+        }
         $search = null != $addition ? $addition : $this['db']['where'];
 
         $alias = $query->getRootAlias();
@@ -399,15 +415,10 @@ class Com_Metadata extends Qwin_Application_Metadata
      * @param int|null $addition 附加的偏移配置
      * @return Com_Metadata 当前对象
      */
-    public function addOffsetToQuery(Doctrine_Query $query, $addition = null)
+    public function addOffsetToQuery(Doctrine_Query $query, $offset)
     {
-        $offset = 0;
-        if (null != $addition) {
-            $addition = intval($addition);
-            if (0 < $addition) {
-                $offset = $addition;
-            }
-        }
+        $offset = intval($offset);
+        $offset = $offset < 0 ? 0 : $offset;
         $query->offset($offset);
         return $this;
     }

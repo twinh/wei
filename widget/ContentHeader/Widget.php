@@ -39,7 +39,7 @@ class ContentHeader_Widget extends Qwin_Widget_Abstract
         $icon = Qwin::config('resource') . 'image/' . $view['meta']['page']['icon'] . '_32.png';
         !is_file($icon) && $icon = null;
 
-        $header .= '<a href="' . $url->url(array()) . '">' . $lang->t($view['meta']['page']['title']) . '</a>';
+        $header .= '<a href="' . $url->url($module->toUrl(), 'index') . '">' . $lang->t($view['meta']['page']['title']) . '</a>';
 
         /*// 如果模块和控制器相同,不显示模块
         if ($asc['module'] != $asc['controller']) {
@@ -53,7 +53,7 @@ class ContentHeader_Widget extends Qwin_Widget_Abstract
         $actionLabel = 'ACT_' . strtoupper($action);
         $actionHeader = $lang->t($actionLabel);
         if ($actionLabel != $actionHeader) {
-            $header .= '&nbsp;&raquo;&nbsp;<a href="' . $url->url($_GET) . '">' . $lang->t('ACT_' . strtoupper($action)) . '</a>';
+            $header .= '&nbsp;&raquo;&nbsp;<a href="' . $url->build() . '">' . $lang->t('ACT_' . strtoupper($action)) . '</a>';
         }
 
         require 'view/default.php';
