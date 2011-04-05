@@ -31,12 +31,12 @@ class Com_View_JsonList extends Com_View
     {
         // 初始变量,方便调用
         $request = Qwin::call('-request');
-        $jqGridWidget = Qwin::call('-widget')->get('jqgrid');
+        $jqGridWidget = Qwin::call('-widget')->get('JqGrid');
 
         // 获取并合并布局
         $layout = $jqGridWidget->getLayout($this->meta);
-        if ($this->listField) {
-            $layout = array_intersect($layout, (array)$this->listField);
+        if ($this->listFields) {
+            $layout = array_intersect($layout, (array)$this->listFields);
         }
 
         // 通过jqGrid微件获取数据
@@ -45,8 +45,8 @@ class Com_View_JsonList extends Com_View
             'layout'        => $layout,
             'primaryKey'    => $this->meta['db']['primaryKey'],
             'option'        => array(
-                'page'      => $request->getPage(),
-                'total'     => ceil($this->total / $request->getLimit()),
+                'page'      => $this->option['page'],
+                'total'     => ceil($this->total / $this->option['row']),
                 'records'   => $this->total,
             ),
         ));

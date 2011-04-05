@@ -33,11 +33,11 @@ class Com_Widget_JsonList extends Qwin_Widget_Abstract
      */
     protected $_option = array(
         'module'    => null,
-        'list'      => array(),
-        'order'     => array(),
-        'where'     => array(),
-        'offset'    => null,
-        'limit'     => null,
+        'list'      => null,
+        'order'     => null,
+        'search'    => null,
+        'page'      => null,
+        'row'       => null,
         'asAction'  => 'list',
         'isView'    => true,
         'sanitise'  => true,
@@ -49,8 +49,13 @@ class Com_Widget_JsonList extends Qwin_Widget_Abstract
     {
         // 初始配置
         $option     = array_merge($this->_option, $option);
-        $listField  = $option['list'];
 
+        // 处理显示域
+        $listFields  = $option['list'];
+        if (is_string($listFields)) {
+            $listFields = Qwin_Util_String::split2d($listFields);
+        }
+        
         /* @var $meta Com_Metadata */
         $meta = Com_Metadata::getByModule($option['module']);
 
@@ -59,9 +64,9 @@ class Com_Widget_JsonList extends Qwin_Widget_Abstract
         $meta
             ->addSelectToQuery($query)
             ->addOrderToQuery($query, $option['order'])
-            ->addWhereToQuery( $query, $option['where'])
-            ->addOffsetToQuery($query, $option['offset'])
-            ->addLimitToQuery($query, $option['limit']);
+            ->addWhereToQuery($query, $option['search'])
+            ->addOffsetToQuery($query, ($option['page'] - 1) * $option['row'])
+            ->addLimitToQuery($query, $option['row']);
         $dbData = $query->execute();
         $data   = $dbData->toArray();
         $count  = count($data);

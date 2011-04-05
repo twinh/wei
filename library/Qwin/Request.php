@@ -74,6 +74,9 @@ class Qwin_Request implements ArrayAccess
     {
         $options = $options + $this->_defaults;
 
+        // 关闭魔术引用
+        ini_set('magic_quotes_runtime', 0);
+
         // 通过创建新的变量,而不是直接修改,不污染全局变量
         $this->_get = $_GET;
         $this->_post = $_POST;
@@ -94,6 +97,7 @@ class Qwin_Request implements ArrayAccess
      *
      * @param string|array $name 名称
      * @return string|array
+     * @todo 是否应该有第二个参数,例如默认值,长度,回调函数
      */
     public function get($name)
     {

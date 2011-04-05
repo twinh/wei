@@ -34,7 +34,7 @@ class Com_Widget_Form extends Qwin_Widget_Abstract
     protected $_option = array(
         'module'    => null,
         'id'        => null,
-        'initalData'=> array(),
+        'data'      => array(),
         'display'   => true,
         'viewClass' => 'Com_View_Add',
     );
@@ -70,7 +70,8 @@ class Com_Widget_Form extends Qwin_Widget_Abstract
         }
 
         // 合并数据
-        $data = array_merge($formInitalData, $copyRecordData, $option['initalData']);
+        $option['data'] = $this->splitToInitalData($option['data']);
+        $data = array_merge($formInitalData, $copyRecordData, $option['data']);
 
         // 处理数据
         $data = $meta->sanitise($data, 'add', array('view' => false));
@@ -87,6 +88,20 @@ class Com_Widget_Form extends Qwin_Widget_Abstract
             return $view->assign($result['data']);
         }
 
+        return $result;
+    }
+
+    public function splitToInitalData($data)
+    {
+        $result = array();
+        $data = preg_split('/(?<!\\\\)\,/', $data, -1, PREG_SPLIT_DELIM_CAPTURE);
+        foreach ($data as &$row) {
+            $row = strtr($row, array('\,' => ','));
+            $row = preg_split('/(?<!\\\\)\:/', $row, -1, PREG_SPLIT_DELIM_CAPTURE);
+            if (isset($row[0]) && isset($row[1])) {
+                $result[$row[0]] = strtr($row[1], array('\:' => ':'));
+            }
+        }
         return $result;
     }
 }
