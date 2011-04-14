@@ -36,7 +36,9 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
      *
      * @var array
      */
-    protected $_options = array();
+    protected $_options = array(
+        'lang' => false,
+    );
 
     /**
      * 微件的根目录
@@ -68,18 +70,25 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
      * @param array $options 选项
      * @todo 不是每一个微件都需要此流程
      */
-    public function __construct(array $options = null)
+    public function __construct(array $options = array())
     {
+        // 检查是否通过微件管理对象获得,不是则
+        $this->_widget = Qwin::call('Qwin_Widget');
+        if (!$this->_widget->isCalled($this)) {
+            $params = $this->_widget->getParams($this);
+            isset($params[0]) && $options += $params[0];
+        }
+
+        $options = $this->_options = $options + $this->_options;
+
         // 初始化根目录
-        if (isset($options['rootPath'])) {
+        if (isset($options['rootPath']) && is_dir($options['rootPath'])) {
             $this->setRootPath($options['rootPath']);
         }
         
-        $this->_widget = Qwin::call('Qwin_Widget');
-
         // 加载语言
-        if (isset($options['lang'])) {
-            $this->_lang = Qwin::call('-lang');
+        $this->_lang = Qwin::call('-lang');
+        if (isset($options['lang']) && $options['lang']) {
             if ($this->_lang instanceof Qwin_Application_Language) {
                 $this->_lang->appendByFile($this->_rootPath . 'language/' . $this->_lang->getName() . '.php');
             }

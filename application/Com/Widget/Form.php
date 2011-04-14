@@ -39,7 +39,7 @@ class Com_Widget_Form extends Qwin_Widget_Abstract
         'viewClass' => 'Com_View_Add',
     );
 
-    public function process(array $options = null)
+    public function execute(array $options = null)
     {
         // 初始配置
         $options     = array_merge($this->_options, $options);

@@ -55,19 +55,15 @@ class Crm_Potential_Metadata extends Com_Metadata
                         'title' => 'LBL_MODULE_CUSTOMER',
                     ),
                     'form' => array(
-                        '_widgetDetail' => array(
+                        '_widget' => array(
                             array(
-                                array('Qwin_Widget_JQuery_PopupGrid', 'render'),
-                                'LBL_MODULE_CUSTOMER',
-                                array(
-                                    'package' => 'Crm',
-                                    'module' => 'Customer',
-                                    'controller' => 'Customer',
+                                array('PopupGrid_Widget', 'render'),
+                                array(array(
+                                    'title'  => 'LBL_MODULE_CUSTOMER',
+                                    'module' => 'crm/customer',
                                     'list' => 'id,name,birthday,email,source',
-                                ),
-                                array(
-                                    'name', 'id'
-                                ),
+                                    'fields' => array('name', 'id'),
+                                )),
                             ),
                         ),
                     ),
@@ -152,17 +148,15 @@ class Crm_Potential_Metadata extends Com_Metadata
                         'group' => 1,
                     ),
                     'form' => array(
-                        '_widgetDetail' => array(
+                        '_widget' => array(
                             array(
-                                array('Qwin_Widget_JQuery_PopupGrid', 'render'),
-                                'LBL_MODULE_OPPORTUNITY',
-                                array(
-                                    'package' => 'Crm',
-                                    'module' => 'Opportunity',
-                                    'controller' => 'Opportunity',
+                                array('PopupGrid_Widget', 'render'),
+                                array(array(
+                                    'title'  => 'LBL_MODULE_OPPORTUNITY',
+                                    'module' => 'crm/opportunity',
                                     'list' => 'id,name,status,type,start_time,end_time',
-                                ),
-                                array('name', 'id'),
+                                    'fields' => array('name', 'id'),
+                                )),
                             ),
                         ),
                     ),
@@ -173,17 +167,15 @@ class Crm_Potential_Metadata extends Com_Metadata
                         'group' => 1,
                     ),
                     'form' => array(
-                        '_widgetDetail' => array(
+                        '_widget' => array(
                             array(
-                                array('Qwin_Widget_JQuery_PopupGrid', 'render'),
-                                'FLD_CONTACT',
-                                array(
-                                    'package' => 'Crm',
-                                    'module' => 'Contact',
-                                    'controller' => 'Contact',
+                                array('PopupGrid_Widget', 'render'),
+                                array(array(
+                                    'title'  => 'LBL_MODULE_OPPORTUNITY',
+                                    'module' => 'crm/contact',
                                     'list' => 'id,full_name,email,source,birthday',
-                                ),
-                                array('full_name', 'id'),
+                                    'fields' => array('full_name', 'id'),
+                                )),
                             ),
                         ),
                     ),
@@ -239,19 +231,34 @@ class Crm_Potential_Metadata extends Com_Metadata
 
     public function sanitiseEditCustomerId($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::sanitisePopupCustomer($value, $name, 'name', $this);
+        $data = Com_Metadata::getQueryByModule('crm/customer')
+            ->select('name')
+            ->where('id = ?', $value)
+            ->fetchOne();
+
+        $this['field'][$name]['form']['_value2'] = $data['name'];
         return $value;
     }
 
     public function sanitiseEditCampaignId($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::sanitisePopupOpportunity($value, $name, 'name', $this);
+        $data = Com_Metadata::getQueryByModule('crm/opportunity')
+            ->select('name')
+            ->where('id = ?', $value)
+            ->fetchOne();
+
+        $this['field'][$name]['form']['_value2'] = $data['name'];
         return $value;
     }
 
     public function sanitiseEditContactId($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::sanitisePopupContact($value, $name, 'first_name', $this);
+        $data = Com_Metadata::getQueryByModule('crm/contact')
+            ->select('last_name, first_name')
+            ->where('id = ?', $value)
+            ->fetchOne();
+
+        $this['field'][$name]['form']['_value2'] = $data['last_name'] . $data['first_name'];
         return $value;
     }
 }

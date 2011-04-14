@@ -45,24 +45,41 @@ class Ide_Option_Widget extends Qwin_Widget_Abstract
     protected $_query;
 
     /**
+     * 选项
+     * @var array
+     */
+    protected $_options = array(
+        'cachePath' => null,
+    );
+
+    /**
      * 附加选项
      *
      * @var array   附加选项数组
      *
-     *      -- 0    无
+     *      -- 0    无，用于表单或显示
      *
-     *      -- NULL 请选择(相当于空)
+     *      -- 1    请选择(相当于空)，用于表单
+     *
+     *      -- 2    <em>(未填写)</em>，用于显示
+     * @todo 加入$options中，允许自由配置
      */
     protected $_defaultAddition = array(
         0 => array(
             'value' => '0',
-            'name' => 'LBL_OPTION_NULL',
+            'name'  => 'LBL_NO',
             'color' => null,
             'style' => null,
         ),
-        'NULL' => array(
+        1 => array(
+            'value' => 'NULL',
+            'name'  => 'LBL_PLEASE_SELECT',
+            'color' => null,
+            'style' => null,
+        ),
+        2 => array(
             'value' => null,
-            'name' => 'LBL_OPTION_SELECT',
+            'name'  => 'LBL_NOT_FILLED',
             'color' => null,
             'style' => null,
         ),
@@ -92,7 +109,7 @@ class Ide_Option_Widget extends Qwin_Widget_Abstract
      * @param string $lang 语言名称
      * @return array
      */
-    public function get($name, $addition = null, $lang = null)
+    public function get($name, $addition = 1, $lang = null)
     {
         // 获取缓存数据
         null == $lang && $lang = $this->_lang;
@@ -108,7 +125,9 @@ class Ide_Option_Widget extends Qwin_Widget_Abstract
         // 附加选项
         if (null !== $addition) {
             if (!is_array($addition) && isset($this->_defaultAddition[$addition])) {
-                array_unshift($data, $this->_defaultAddition[$addition]);
+                $data = array(
+                    $this->_defaultAddition[$addition]['value'] => $this->_defaultAddition[$addition]
+                ) + $data;
             } elseif (is_array($addition)) {
                 array_unshift($data, $addition);
             }
@@ -116,7 +135,7 @@ class Ide_Option_Widget extends Qwin_Widget_Abstract
 
         return $data;
     }
-
+    
     /**
      * 根据标识设置缓存数据
      *
@@ -150,7 +169,7 @@ class Ide_Option_Widget extends Qwin_Widget_Abstract
     {
         $code = @unserialize($data['code']);
         $path = $this->_path . '/' . $data['language'] . '/' . $data['sign'] . '.php';
-        Qwin_Helper_File::writeArray($path, $code);
+        Qwin_Util_File::writeArray($path, $code);
     }
 
     /**
@@ -181,9 +200,9 @@ class Ide_Option_Widget extends Qwin_Widget_Abstract
         return $this->_query;
     }
 
-    public function sanitise($value, $name)
+    public function sanitise($value, $name, $addition = 2)
     {
-        $data = $this->get($name);        
+        $data = $this->get($name, $addition);
         if (isset($data[$value])) {
             // 附加颜色到样式中
             null != $data[$value]['color'] && $data[$value]['style'] = 'color:' . $data[$value]['color'] . ';' . $data[$value]['style'];

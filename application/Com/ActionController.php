@@ -30,13 +30,13 @@ class Com_ActionController extends Com_Controller
     /**
      * 控制器默认首页,Common命名空间的默认首页是数据列表
      *
-     * @return array 服务处理结果
+     * @return array 执行结果
      */
     public function actionIndex()
     {
         $request = $this->getRequest();
         if ($request->isJson()) {
-            return Com_Widget::getByModule('Com', 'JsonList')->process(array(
+            return Com_Widget::getByModule('Com', 'JsonList')->execute(array(
                 'module'=> $this->_module,
                 'list'  => $request->get('list'),
                 'search'=> $request->get('search'),
@@ -48,7 +48,7 @@ class Com_ActionController extends Com_Controller
                ),
             ));
         } else {
-            return Com_Widget::getByModule('Com', 'List')->process(array(
+            return Com_Widget::getByModule('Com', 'List')->execute(array(
                 'module'=> $this->_module,
                 'list'  => $request->get('list'),
                 'popup' => $request->get('popup'),
@@ -59,11 +59,19 @@ class Com_ActionController extends Com_Controller
     /**
      * 查看一条记录
      *
-     * @return array 服务处理结果
+     * @return array 执行结果
      */
     public function actionView()
     {
-        return Com_Widget::getByModule('Com', 'View')->process(array(
+        if ($this->_request->get('forward')) {
+            return Qwin::call('-widget')->get('Forward')->execute(array(
+                'module'    => $this->_module,
+                'action'    => $this->_action,
+                'id'        => $this->_request->get('id'),
+                'forward'   => $this->_request->get('forward'),
+            ));
+        }
+        return Com_Widget::getByModule('Com', 'View')->execute(array(
             'module'    => $this->_module,
             'id'        => $this->_request->get('id'),
         ));
@@ -72,19 +80,18 @@ class Com_ActionController extends Com_Controller
     /**
      * 添加记录
      *
-     * @return array 服务处理结果
+     * @return array 执行结果
      */
     public function actionAdd()
     {
-        $r = Qwin::call('-widget')->get('Request');
         if (!$this->_request->isPost()) {
-            return Com_Widget::getByModule('Com', 'Form')->process(array(
+            return Com_Widget::getByModule('Com', 'Form')->execute(array(
                 'module'    => $this->_module,
                 'id'        => $this->_request->get('id'),
                 'data'      => $this->_request->get('search'),
             ));
         } else {
-            return Com_Widget::getByModule('Com', 'Add')->process(array(
+            return Com_Widget::getByModule('Com', 'Add')->execute(array(
                 'module'    => $this->_module,
                 'data'      => $_POST,
                 'url'       => urldecode($this->_request->post('_page')),
@@ -95,12 +102,20 @@ class Com_ActionController extends Com_Controller
     /**
      * 编辑记录
      *
-     * @return array 服务处理结果
+     * @return array 执行结果
      */
     public function actionEdit()
     {
+        if ($this->_request->get('forward')) {
+            return Qwin::call('-widget')->get('Forward')->execute(array(
+                'module'    => $this->_module,
+                'action'    => $this->_action,
+                'id'        => $this->_request->get('id'),
+                'forward'   => $this->_request->get('forward'),
+            ));
+        }
         if (!$this->_request->isPost()) {
-            return Com_Widget::getByModule('Com', 'View')->process(array(
+            return Com_Widget::getByModule('Com', 'View')->execute(array(
                 'module'    => $this->_module,
                 'id'        => $this->_request->get('id'),
                 'asAction'  => 'edit',
@@ -108,7 +123,7 @@ class Com_ActionController extends Com_Controller
                 'viewClass' => 'Com_View_Edit',
             ));
         } else {
-            return Com_Widget::getByModule('Com', 'Edit')->process(array(
+            return Com_Widget::getByModule('Com', 'Edit')->execute(array(
                 'module'    => $this->_module,
                 'data'      => $_POST,
                 'url'       => urldecode($this->_request->post('_page')),
@@ -119,11 +134,11 @@ class Com_ActionController extends Com_Controller
     /**
      * 删除记录
      *
-     * @return array 服务处理结果
+     * @return array 执行结果
      */
     public function actionDelete()
     {
-        return Com_Widget::getByModule('Com', 'Delete')->process(array(
+        return Com_Widget::getByModule('Com', 'Delete')->execute(array(
             'module'    => $this->_module,
             'data'      => array(
                 'id' => $this->_request->get('id'),

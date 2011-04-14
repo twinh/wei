@@ -183,9 +183,10 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
             // 获取并合并布局
             $layout = $this->getLayout($meta);
             if ($options['layout']) {
+                !is_array($options['layout']) && $options['layout'] = explode(',', $options['layout']);
                 $layout = array_intersect($layout, (array)$options['layout']);
             }
-
+            
             // 根据布局获取栏数据
             $col = $this->getColByListLayout($layout, $meta, $options['lang']);
             $jqGrid['colNames'] = $col['colNames'];
@@ -211,7 +212,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
 
         // 通过Minify加载Css和Js
         $this->_widget
-            ->get('minify')
+            ->get('Minify')
             ->add($this->_rootPath . '/source/jquery.jqgrid.css')
             ->add($this->_rootPath . '/source/i18n/grid.locale-en.js')
             ->add($this->_rootPath . '/source/jquery.jqgrid.js');
@@ -224,7 +225,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
 
         $jqGridJson = Qwin_Util_Array::jsonEncode($jqGrid);
 
-        require '/view/default.php';
+        require $this->_rootPath . 'view/default.php';
     }
 
     /**

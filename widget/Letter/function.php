@@ -25,23 +25,6 @@
  * @since       2010-08-18 10:28:04
  */
 
-function d($a = null, $exit = true)
-{
-    var_dump($a);
-    if (true === $exit) {
-        exit;
-    }
-}
-function p($a = null, $exit = true)
-{
-    echo '<p><pre>';
-    print_r($a);
-    echo '</pre><p>';
-    if (true === $exit) {
-        exit;
-    }
-}
-
 /**
  * 快速加载类
  *
@@ -57,6 +40,20 @@ function qw_a()
     
 }
 
+/**
+ * 输出$v的值，做调试用
+ *
+ * @param mixed $v
+ * @param mixed $exit 是否退出，中断操作
+ */
+function qw_d($v = null, $exit = true)
+{
+    var_dump($v);
+    if (true === $exit) {
+        exit;
+    }
+}
+
 function qw_f()
 {
     
@@ -65,32 +62,29 @@ function qw_f()
 function qw_form($option)
 {
     static $form;
-    null == $form && $form = Qwin::widget('form');
+    null == $form && $form = Qwin::call('-widget')->get('Form');
     return $form->renderElement($option);
 }
 
-function qw_form_extend($option, $form = null)
+function qw_h()
 {
-    static $widget;
-    if (!isset($option['_extend'])) {
-        return false;
-    }
+    // TODO hook
+}
 
-    null == $widget && $widget = Qwin_Widget::getInstance();
-    $result = '';
-    foreach ($option['_extend'] as $callback) {
-        $widgetName = array_shift($callback);
-        if ($widget->isExists($widgetName)) {
-            $param = array(
-                'option' => $callback,
-                'form' => $option,
-            );
-            $result .= $widget->get($widgetName)->render($param);
-        } else {
-            $result .= Qwin_Class::callByArray($callback);
-        }
+/**
+ * 输出$v的值，做调试用
+ *
+ * @param mixed $v
+ * @param mixed $exit 是否退出，中断操作
+ */
+function qw_p($v = null, $exit = true)
+{
+    echo '<p><pre>';
+    print_r($v);
+    echo '</pre><p>';
+    if (true === $exit) {
+        exit;
     }
-    return $result;
 }
 
 function qw_url(array $data = null)
@@ -102,6 +96,19 @@ function qw_u($value1, $value2 = 'index', array $params = array())
     return Qwin::call('-url')->url($value1, $value2, $params);
 }
 
+function qw_w($name)
+{
+    static $widget;
+    null == $widget && $widget = Qwin::call('-widget');
+    return $widget->get($name);
+}
+
+function qw_l()
+{
+    // TODO language or qw_t
+}
+
+
 function qw_lang($name = null)
 {
     static $lang;
@@ -109,9 +116,11 @@ function qw_lang($name = null)
     return $lang->t($name);
 }
 
-function qw_lang_to_js()
+function qw_t($name = null)
 {
-    return 'Qwin.Lang = ' . json_encode(Qwin::call('Qwin_Application_Language')->toArray()) . ';';
+    static $lang;
+    null == $lang && $lang = Qwin::call('Qwin_Application_Language');
+    return $lang->t($name);
 }
 
 function qw_null_text($data = null)

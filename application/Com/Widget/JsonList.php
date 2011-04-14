@@ -45,7 +45,7 @@ class Com_Widget_JsonList extends Qwin_Widget_Abstract
         'viewClass' => 'Com_View_JsonList',
     );
 
-    public function process(array $options = null)
+    public function execute(array $options = null)
     {
         // 初始配置
         $options     = array_merge($this->_options, $options);
@@ -58,6 +58,10 @@ class Com_Widget_JsonList extends Qwin_Widget_Abstract
         
         /* @var $meta Com_Metadata */
         $meta = Com_Metadata::getByModule($options['module']);
+
+        // 处理每页显示数目‘
+        $options['row'] = (int)$options['row'];
+        $options['row'] <= 0 && $options['row'] = $meta['db']['limit'];
 
         // 从模型获取数据
         $query = Com_Metadata::getQueryByModule($options['module'], array('type' => array('db', 'view')));

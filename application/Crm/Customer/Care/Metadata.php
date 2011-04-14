@@ -40,7 +40,11 @@ class Crm_Customer_Care_Metadata extends Com_Metadata
                         'isList' => 1,
                     ),
                     'form' => array(
-                        '_widget' => 'datepicker',
+                        '_widget' => array(
+                            array(
+                                array('Datepicker_Widget', 'render'),
+                            ),
+                        ),
                     ),
                 ),
                 'customer_id' => array(
@@ -48,19 +52,15 @@ class Crm_Customer_Care_Metadata extends Com_Metadata
                         'title' => 'LBL_MODULE_CUSTOMER',
                     ),
                     'form' => array(
-                        '_widgetDetail' => array(
+                        '_widget' => array(
                             array(
-                                array('Qwin_Widget_JQuery_PopupGrid', 'render'),
-                                'LBL_MODULE_CUSTOMER',
-                                array(
-                                    'package' => 'Crm',
-                                    'module' => 'Customer',
-                                    'controller' => 'Customer',
+                                array('PopupGrid_Widget', 'render'),
+                                array(array(
+                                    'title'  => 'LBL_MODULE_CUSTOMER',
+                                    'module' => 'crm/customer',
                                     'list' => 'id,name,birthday,email,source',
-                                ),
-                                array(
-                                    'name', 'id'
-                                ),
+                                    'fields' => array('name', 'id'),
+                                )),
                             ),
                         ),
                     ),
@@ -74,20 +74,15 @@ class Crm_Customer_Care_Metadata extends Com_Metadata
                         'title' => 'LBL_MODULE_CONTACT',
                     ),
                     'form' => array(
-                        '_widgetDetail' => array(
+                        '_widget' => array(
                             array(
-                                array('Qwin_Widget_JQuery_PopupGrid', 'render'),
-                                'LBL_MODULE_CONTACT',
-                                array(
-                                    'package' => 'Crm',
-                                    'module' => 'Contact',
-                                    'controller' => 'Contact',
+                                array('PopupGrid_Widget', 'render'),
+                                array(array(
+                                    'title'  => 'LBL_MODULE_CONTACT',
+                                    'module' => 'crm/contact',
                                     'list' => 'id,full_name,birthday,email,source',
-                                ),
-                                array(
-                                    'full_name',
-                                    'id'
-                                ),
+                                    'fields' => array('full_name', 'id'),
+                                )),
                             ),
                         ),
                     ),
@@ -179,13 +174,23 @@ class Crm_Customer_Care_Metadata extends Com_Metadata
 
     public function sanitiseEditCustomerId($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::sanitisePopupCustomer($value, $name, 'name', $this);
+        $data = Com_Metadata::getQueryByModule('crm/customer')
+            ->select('name')
+            ->where('id = ?', $value)
+            ->fetchOne();
+
+        $this['field'][$name]['form']['_value2'] = $data['name'];
         return $value;
     }
 
     public function sanitiseEditContactId($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::sanitisePopupContact($value, $name, '', $this);
+        $data = Com_Metadata::getQueryByModule('crm/contact')
+            ->select('last_name, first_name')
+            ->where('id = ?', $value)
+            ->fetchOne();
+
+        $this['field'][$name]['form']['_value2'] = $data['last_name'] . $data['first_name'];
         return $value;
     }
 }

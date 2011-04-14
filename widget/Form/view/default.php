@@ -73,7 +73,7 @@ validateCode['<?php echo $options['id'] ?>'] = <?php echo $validateCode ?>;
             ?>
             <td class="ui-label-common"><label for="<?php echo $cell[1]['id'] ?>"><?php echo $lang[$cell[0]] ?>:</label></td>
             <td class="ui-field-common ui-field-<?php echo $cell[1]['_type'] ?>"<?php echo $colspan ?>>
-              <?php echo $this->renderElement($cell[1]) , qw_form_extend($cell[1]) ?>
+              <?php echo $this->renderElement($cell[1]) , $this->renderElementWidget($cell[1]) ?>
             </td>
             <?php
                 endif;

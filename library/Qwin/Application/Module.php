@@ -106,6 +106,7 @@ class Qwin_Application_Module
      */
     public static function load($module, $paths = array())
     {
+        /* @var $self Qwin_Application_Module */
         $self = Qwin::call(__CLASS__);
         !$paths && $paths = $self->_options['rootPaths'];
 
@@ -138,7 +139,7 @@ class Qwin_Application_Module
             return $this->_options['rootModule'];
         }
         if (false !== ($pos = strpos($module, '/'))) {
-            $module = substr($module, 0, $pos);
+            $module = ucfirst(substr($module, 0, $pos));
         }
         return $module;
     }

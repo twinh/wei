@@ -38,7 +38,7 @@ class Com_View_List extends Com_View
         $url        = Qwin::call('-url');
 
         /* @var $jqGridWidget JqGrid_Widget */
-        $jqGridWidget   = $this->widget->get('jqgrid');
+        $jqGridWidget   = $this->widget->get('JqGrid');
 
         $options         = array();
       

@@ -34,7 +34,9 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
     public function render($view)
     {
         $module = $view['module'];
-
+        $action = $view['action'];
+        // 模块的Url形式
+        $moduleUrl = $module->toUrl();
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
         $controller = Com_Controller::getByModule($module, false);
@@ -48,7 +50,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
 
         if (!in_array('index', $unableActions) && method_exists($controller, 'actionIndex')) {
             $link['index'] = array(
-                'url'   => $url->url($module->toUrl(), 'index'),
+                'url'   => $url->url($moduleUrl, 'index'),
                 'title' => $lang->t('ACT_LIST'),
                 'icon'  => 'ui-icon-note',
             );
@@ -56,7 +58,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
 
         if (!in_array('add', $unableActions) && method_exists($controller, 'actionAdd')) {
             $link['add'] = array(
-                'url'   => $url->url($module->toUrl(), 'add'),
+                'url'   => $url->url($moduleUrl, 'add'),
                 'title' => $lang->t('ACT_ADD'),
                 'icon'  => 'ui-icon-plus',
             );
@@ -68,7 +70,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
         if (isset($data[$primaryKey])) {
             if (!in_array('edit', $unableActions) && method_exists($controller, 'actionEdit')) {
                 $link['edit'] = array(
-                    'url'   => $url->url($module->toUrl(), 'edit', array($primaryKey => $data[$primaryKey])),
+                    'url'   => $url->url($moduleUrl, 'edit', array($primaryKey => $data[$primaryKey])),
                     'title' => $lang->t('ACT_EDIT'),
                     'icon'  => 'ui-icon-tag',
                 );
@@ -76,7 +78,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
 
             if (!in_array('view', $unableActions) && method_exists($controller, 'actionView')) {
                 $link['view'] = array(
-                    'url'   => $url->url($module->toUrl(), 'view', array($primaryKey => $data[$primaryKey])),
+                    'url'   => $url->url($moduleUrl, 'view', array($primaryKey => $data[$primaryKey])),
                     'title' => $lang->t('ACT_VIEW'),
                     'icon'  => 'ui-icon-lightbulb',
                 );
@@ -84,7 +86,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
 
             if (!in_array('add', $unableActions) && method_exists($controller, 'actionAdd')) {
                 $link['copy'] = array(
-                    'url'   => $url->url($module->toUrl(), 'add', array($primaryKey => $data[$primaryKey])),
+                    'url'   => $url->url($moduleUrl, 'add', array($primaryKey => $data[$primaryKey])),
                     'title' => $lang->t('ACT_COPY'),
                     'icon'  => 'ui-icon-transferthick-e-w',
                 );
@@ -100,7 +102,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
                     $jsLang = 'MSG_CONFIRM_TO_DELETE_TO_TRASH';
                 }
                  $link['delete'] = array(
-                    'url'   => 'javascript:if(confirm(Qwin.Lang.' . $jsLang . ')){window.location=\'' . $url->url($module->toUrl(), 'delete', array($primaryKey => $data[$primaryKey])) . '\'};',
+                    'url'   => 'javascript:if(confirm(Qwin.Lang.' . $jsLang . ')){window.location=\'' . $url->url($moduleUrl, 'delete', array($primaryKey => $data[$primaryKey])) . '\'};',
                     'title' => $lang->t('ACT_DELETE'),
                     'icon'  => $icon,
                 );
@@ -111,6 +113,22 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
             'title' => $lang->t('ACT_RETURN'),
             'icon'  => 'ui-icon-arrowthickstop-1-w',
         );
+
+        // 上一记录，下一记录
+        if ('edit' == $action || 'view' == $action) {
+            $link['next'] = array(
+                'url'   => $url->url($moduleUrl, $action, array($primaryKey => $data[$primaryKey], 'forward' => 'next')),
+                'title' => $lang['ACT_NEXT'],
+                'icon'  => 'ui-icon-circle-triangle-e',
+                'class' => 'qw-fr',
+            );
+            $link['prev'] = array(
+                'url'   => $url->url($moduleUrl, $action, array($primaryKey => $data[$primaryKey], 'forward' => 'prev')),
+                'title' => $lang['ACT_PREV'],
+                'icon'  => 'ui-icon-circle-triangle-w',
+                'class' => 'qw-fr',
+            );
+        }
 
         // 如果当前行为存在选项卡视图,加载该视图,否则直接输出默认选项卡内容
         $class = strtr($module, '/', '_') . '_OperLinksWidget';
@@ -140,7 +158,8 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
     {
         $output = '';
         foreach ($link as $row) {
-            $output .= Qwin_Util_JQuery::link($row['url'], $row['title'], $row['icon']);
+            !isset($row['class']) && $row['class'] = null;
+            $output .= Qwin_Util_JQuery::link($row['url'], $row['title'], $row['icon'], $row['class']);
         }
         if ($echo) {
             require $view->decodePath('<resource><theme>/<defaultPackage>/element/basic/output<suffix>');

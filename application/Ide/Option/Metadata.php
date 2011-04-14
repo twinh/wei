@@ -58,9 +58,9 @@ class Ide_Option_Metadata extends Com_Metadata
                     'code' => array(
                         'form' => array(
                             '_type' => 'custome',
-                            '_widgetDetail' => array(
+                            '_widget' => array(
                                 array(
-                                    array('Qwin_Widget_Editor_Option', 'render'),
+                                    array('OptionEditor_Widget', 'render'),
                                 ),
                             ),
                         ),

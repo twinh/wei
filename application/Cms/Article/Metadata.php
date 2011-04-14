@@ -40,13 +40,12 @@ class Cms_Article_Metadata extends Com_Metadata
                     'form' => array(
                         '_type' => 'select',
                         '_resourceGetter' => array(
-                            array('Project_Helper_Category', 'getTreeResource'),
+                            array('Com_Category_Widget', 'get'),
                             array(
-                                'package' => 'Common',
-                                'module' => 'Category',
-                                'controller' => 'Category',
+                                'com/category',
+                                null,
+                                array('id', 'category_id', 'title'),
                             ),
-                            'article'
                         ),
                     ),
                     'attr' => array(

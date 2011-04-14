@@ -38,8 +38,7 @@ class Ide_Option_CodeMetadata extends Com_Metadata
                         '_type' => 'select',
                         '_resourceGetter' => array(
                             array('Ide_Option_Widget', 'get'),
-                            'css-color',
-                            'NULL',
+                            array('css-color', 'NULL'),
                         ),
                     ),
                 ),

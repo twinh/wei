@@ -26,19 +26,19 @@
 <div class="ui-jqgrid-top">
     <?php Qwin::hook('ViewListTop', $this) ?>
 </div>
-<div class="clear"></div>
+<div class="qw-c"></div>
 <?php $jqGridWidget->render($jqGrid) ?>
 <script type="text/javascript">
 jQuery(function($){
     var primaryKey = '<?php echo $primaryKey?>';
     var jqGridObj = $('#<?php echo $jqGridWidget->getId() ?>');
 
-    <?php if (!isset($isPopup)) : ?>
+    <?php if (!isset($popup)) : ?>
     jqGridObj.jqGrid('setGridParam',{
         ondblClickRow: function(rowId, iRow, iCol, e){
             var rowData = jqGridObj.jqGrid('getRowData', rowId),
                 addition = {};
-            addition['action'] = 'View';
+            addition['action'] = 'view';
             addition[primaryKey] = rowData[primaryKey];
             window.location.href = Qwin.url.createUrl(Qwin.get, addition);
             return false;
@@ -70,7 +70,7 @@ jQuery(function($){
             keyList[i] = rowData[primaryKey];
         }
         var addition = {};
-        addition['action'] = 'Delete';
+        addition['action'] = 'delete';
         addition[primaryKey] = keyList.join(',');
         if (confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE)) {
             window.location.href = Qwin.url.createUrl(Qwin.get, addition);

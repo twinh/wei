@@ -57,7 +57,7 @@ class Form_Widget extends Qwin_Widget_Abstract
         '_type' => null,
         '_value' => null,
     );
-
+    
     /**
      * 生成表单界面
      *
@@ -99,11 +99,19 @@ class Form_Widget extends Qwin_Widget_Abstract
     /**
      * 生成表单元素的Html代码
      *
+     * @param array $options 表单配置
+     * @param mixed $value 表单的值，可选
      * @return string
      */
     public function renderElement(array $options)
     {
         $options = array_merge($this->_elementoptions, $options);
+
+        // 假如设定了第二个参数，将作为表单的值
+        $params = func_get_args();
+        if (array_key_exists(1, $params)) {
+            $options['_value'] = $params[1];
+        }
 
         $public = array();
         $private = array();
@@ -120,8 +128,8 @@ class Form_Widget extends Qwin_Widget_Abstract
         //$set['id'] = preg_replace("/(\w*)\[(\w+)\]/", "$1-$2", $set['name']);
 
         // 转换资源
-        if (isset($private['_resourceGetter'])) {
-            $private['_resource'] = Qwin::callByArray($private['_resourceGetter']);
+        if (isset($private['_resourceGetter'])) {          
+            $private['_resource'] = Qwin::call('-flow')->callOne($private['_resourceGetter']);
         }
 
         // 根据类型,生成代码
@@ -135,7 +143,7 @@ class Form_Widget extends Qwin_Widget_Abstract
             case 'hidden' :
                 return $this->renderHidden($public, $private);
 
-             case 'select' :
+            case 'select' :
                 return $this->renderSelect($public, $private);
 
             case 'password' :
@@ -155,9 +163,37 @@ class Form_Widget extends Qwin_Widget_Abstract
         }
     }
 
-    public function renderElementExtend()
+    /**
+     * 生成表单元素微件
+     *
+     * @param array $options 表单配置
+     * @return mixded
+     */
+    public function renderElementWidget(array $options)
     {
-        
+        if (!isset($options['_widget']) || !is_array($options['_widget']) || empty($options['_widget'])) {
+            return false;
+        }
+
+        /* @var $flow Qwin_Flow */
+        $flow = Qwin::call('-flow');
+        $result = '';
+
+        foreach ($options['_widget'] as $callback) {
+            if (!is_array($callback)) {
+                continue;
+            }
+            // 构造参数
+            !isset($callback[1]) && $callback[1] = array();
+            !isset($callback[1][0]) && $callback[1][0] = array();
+
+            $callback[1][0] += array(
+                'form' => $options,
+            );
+            $result .= $flow->callOne($callback);
+        }
+
+        return $result;
     }
 
     /**
@@ -255,32 +291,19 @@ class Form_Widget extends Qwin_Widget_Abstract
      */
     public function renderCheckbox(array $public, array $private = null)
     {
-        $value = $private['_value'];
-        if (!is_array($value)) {
-            $value = explode('|', $value);
-        }
-        $i = 1;
-        $data = '';
+        $value = is_array($private['_value']) ? $private['_value'] : explode('|', $private['_value']);
         $public['name'] .= '[]';
-        foreach($private['_resource'] as $key => $val)
-        {
-            $public['value'] = $key;
-            // 备份原始 id
-            $origin_id = $public['id'];
-            //if($i != 0)
-            //{
-                $public['id'] .= '-' . $i;
-            //}
-            $attr = $this->renderAttr($private);
-            if(in_array($key, $value))
-            {
-                $isChecked = ' checked="checked" ';
-            } else {
-                $isChecked = '';
-            }
-            $data .= '<input type="checkbox" ' . $attr . $isChecked . '/><label for="' . $public['id'] . '">' . $val . '</label>';
-            // 还原原始 id
-            $public['id'] = $origin_id;
+        $i = 0;
+        $data = '';
+        foreach ($private['_resource'] as $options) {
+            // 转换资源
+            $resource = $this->filterResource($private['_resource']);
+
+            $attr = $public;
+            $attr['id'] .= '-' . $i;
+            $htmlAttr = $this->renderAttr($attr);
+            $isChecked = in_array($options['value'], $value) ? ' checked="checked" ' : '';
+            $data .= '<input type="checkbox" ' . $htmlAttr . $isChecked . '/><label for="' . $attr['id'] . '"' . $this->filterOptionStyle($options) . '>' . $options['name'] . '</label>';
             $i++;
         }
         return $data;
@@ -296,22 +319,17 @@ class Form_Widget extends Qwin_Widget_Abstract
     public function renderRadio(array $public, array $private = null)
     {
         $value = $private['_value'];
-        $i = 1;
+        $i = 0;
         $data = '';
-        foreach($private['_resource'] as $key => $val)
-        {
-            $public['value'] = $key;
-            // 备份原始 id
-            $origin_id = $public['id'];
-            //if($i != 0)
-            //{
-                $public['id'] .= '-' . $i;
-            //}
-            $attr = $this->renderAttr($public);
-            $isChecked = $value == $key ? ' checked="checked" ' : '';
-            $data .= '<input type="radio" ' . $attr . $isChecked . '/><label for="' . $public['id'] . '">' . $val . '</label>';
-            // 还原原始 id
-            $public['id'] = $origin_id;
+        foreach ($private['_resource'] as $options) {
+            // 转换资源
+            $resource = $this->filterResource($private['_resource']);
+            
+            $attr = $public;
+            $attr['id'] .= '-' . $i;
+            $htmlAttr = $this->renderAttr($attr);
+            $isChecked = $value == $options['value'] ? ' checked="checked" ' : '';
+            $data .= '<input type="radio" ' . $htmlAttr . $isChecked . '/><label for="' . $attr['id'] . '"' . $this->filterOptionStyle($options) . '>' . $options['name'] . '</label>';
             $i++;
         }
         return $data;
@@ -335,16 +353,13 @@ class Form_Widget extends Qwin_Widget_Abstract
             // 转换资源
             $resource = $this->filterResource($private['_resource']);
             foreach($resource as $options) {
-                // 附加颜色到样式中
-                null != $options['color'] && $options['style'] = 'color:' . $options['color'] . ';' . $options['style'];
-                null != $options['style'] && $options['style'] = ' style="' . $options['style'] . '"';
                 if(false == $isUsed && $value == $options['value']) {
                     $isUsed = true;
                     $isSelected = ' selected="selected" ';
                 } else {
                     $isSelected = '';
                 }
-                $data .= '<options' . $options['style'] . ' value="' . $options['value'] . '"' . $isSelected . '>' . $options['name'] . '</options>';
+                $data .= '<option' . $this->filterOptionStyle($options) . ' value="' . $options['value'] . '"' . $isSelected . '>' . $options['name'] . '</option>';
             }
         }
         $data .= '</select>';
@@ -381,6 +396,19 @@ class Form_Widget extends Qwin_Widget_Abstract
         return $return;
     }
 
+    /**
+     * 附加颜色到样式中
+     *
+     * @param array $options 选项数据
+     * @return string
+     */
+    public function filterOptionStyle($options)
+    {
+        null != $options['color'] && $options['style'] = 'color:' . $options['color'] . ';' . $options['style'];
+        null != $options['style'] && $options['style'] = ' style="' . $options['style'] . '"';
+        return $options['style'];
+    }
+    
     /**
      * 获取表格布局
      *

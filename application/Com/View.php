@@ -99,8 +99,8 @@ class Com_View extends Qwin_Application_View
         // 部分视图常用变量
         $this->assign(array(
             'widget'    => $widget,
-            'minify'    => $widget->get('minify'),
-            'jQuery'    => $widget->get('jquery'),
+            'minify'    => $widget->get('Minify'),
+            'jQuery'    => $widget->get('JQuery'),
             'config'    => $config,
             'module'    => Qwin::call('-module'),
             'action'    => $config['action'],
@@ -330,6 +330,8 @@ class Com_View extends Qwin_Application_View
      */
     public function jump($url)
     {
+        header('Location: ' . $url);
+        exit;
         $this->setLayout('<resource><theme>/<defaultPackage>/layout/jump<suffix>');
         $this->assign('url', $url);
         return $this;
