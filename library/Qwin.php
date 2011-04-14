@@ -386,20 +386,6 @@ class Qwin
     }
 
     /**
-     * 调用方法
-     *
-     * @param array $array
-     * @return mixed
-     * @todo !!!
-     */
-    public static function callByArray($array)
-    {
-        $array[0][0] = Qwin::call($array[0][0]);
-        is_string($array[1]) && $array[1] = array($array[1]);
-        return call_user_func_array($array[0], $array[1]);
-    }
-
-    /**
      * 获取/设置配置
      *
      * @param mixed $name 配置的值,多级用'/'分开

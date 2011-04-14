@@ -81,7 +81,12 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
      */
     public static function getByModule($module, $instanced = true)
     {
-        $class = strtr($module, '/', '_') . '_Metadata';
+        if ($module instanceof Qwin_Module) {
+            $class = $module->toClass();
+        } else {
+            $class = Qwin_Module::instance($module)->toClass();
+        }
+        $class .= '_Metadata';
         return $instanced ? Qwin_Metadata::getInstance()->get($class, $module) : $class;
     }
 
@@ -122,26 +127,37 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
             $flow = Qwin::call('-flow');
         }
 
-        /*if ($options['view']) {
-            foreach ($meta['model'] as $model) {
+        // 转换关联模块的显示域
+        if ($options['view']) {
+            foreach ($this['model'] as $model) {
                 if ('view' == $model['type']) {
                     foreach ($model['fieldMap'] as $localField => $foreignField) {
-                        !isset($data[$model['alias']][$foreignField]) && $data[$model['alias']][$foreignField] = '';
-                        $data[$localField] = $data[$model['alias']][$foreignField];
+                        if (isset($dataCopy[$model['alias']][$foreignField])) {
+                            $data[$localField] = $dataCopy[$model['alias']][$foreignField];
+                        }
+                        // else throw exception ?
+                        //!isset($data[$model['alias']][$foreignField]) && $data[$model['alias']][$foreignField] = '';
                     }
                 }
             }
-        }*/
+        }
 
         foreach ($data as $name => $value) {
             if (!isset($this['field'][$name])) {
                 continue;
             }
 
-            // 空转换 如果不存在,则设为空
-            if ('NULL' === $data[$name] || '' === $data[$name]) {
-                $data[$name] = null;
-            }
+//            if ('db' == $action) {
+                // 空转换 如果不存在,则设为空
+                if ('NULL' === $data[$name] || '' === $data[$name]) {
+                    $data[$name] = null;
+                }
+//            } else {
+//                if (null === $data[$name]) {
+//                    $data[$name] = 'NULL';
+//                }
+//            }
+            
 
             // 类型转换
             /*if ($options['type'] && $field['db']['type']) {
@@ -160,7 +176,7 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
 
             // 根据元数据中转换器的配置进行转换
             if ($options['meta'] && isset($this['field'][$name]['sanitiser'][$action])) {
-                $data[$name] = $flow->call(array($this['field'][$name]['sanitiser'][$action]), $value);
+                $data[$name] = $flow->call(array($this['field'][$name]['sanitiser'][$action]), Qwin_Flow::PARAM, $value);
             }
 
             // 使用转换器中的方法进行转换
@@ -169,6 +185,7 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
                 if (method_exists($this, $method)) {
                     $data[$name] = call_user_func_array(
                         array($this, $method),
+                        // $value or $data[$name] ?
                         array($value, $name, $data, $dataCopy)
                     );
                 }
@@ -178,6 +195,7 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
             if ($options['link'] && 1 == $this->field[$name]['attr']['isLink'] && method_exists($this, 'setIsLink')) {
                 $data[$name] = call_user_func_array(
                     array($this, 'setIsLink'),
+                    // $value or $data[$name] ?
                     array($value, $name, $data, $dataCopy, $action)
                 );
             }

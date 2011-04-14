@@ -129,6 +129,11 @@ class Qwin_Request implements ArrayAccess
         return $this;
     }
 
+    public function getGet()
+    {
+        return $this->_get;
+    }
+
     /**
      * 获取$_POST中数组中的值
      *

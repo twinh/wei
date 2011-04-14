@@ -300,6 +300,9 @@ class Qwin_Util_String
      */
     public static function splitQuery($data)
     {
+        if (empty($data)) {
+            return array();
+        }
         $data = preg_split('/(?<!\\\\)\,/', $data, -1, PREG_SPLIT_DELIM_CAPTURE);
         foreach ($data as &$row) {
             $row = strtr($row, array('\,' => ','));
@@ -309,5 +312,22 @@ class Qwin_Util_String
             }
         }
         return $data;
+    }
+
+    public static function implodeQuery(&$data)
+    {
+        $result = '';
+        foreach ($data as &$row) {
+            // 不是合法格式
+            if (!is_array($row) || !isset($row[0]) || !isset($row[1])) {
+                continue;
+            }
+            $temp = strtr($row[0], array(':' => '\:')) . ':' . strtr($row[1], array(':' => '\:'));
+            if (isset($row[2])) {
+                $temp .= strtr($row[2], array(':' => '\:'));
+            }
+            $row = strtr($temp, array(',' => '\,'));;
+        }
+        return implode(',', $data);
     }
 }

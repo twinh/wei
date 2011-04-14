@@ -39,7 +39,7 @@ class Com_View_Add extends Com_View
         $data = $this->data;
         $asc = Qwin::config('asc');
         /* @var $formWidget Form_Widget */
-        $formWidget = Qwin::call('-widget')->get('form');
+        $formWidget = Qwin::call('-widget')->get('Form');
         $formOptions = array(
             'meta'  => $meta,
             'action' => 'edit',

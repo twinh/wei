@@ -204,7 +204,7 @@ class Qwin_Application_Language implements ArrayAccess
         // 逐层加载模块
         $modules = explode('/', $module);
         foreach ($modules as $module) {
-            $path .= $module . '/';
+            $path .= ucfirst($module) . '/';
             $file = $path . 'Language/' . $this->_name . '.php';
             if (is_file($file)) {
                 $this->_appendFile($file);

@@ -65,14 +65,15 @@ class Qwin_Hook
     public function  __construct(array $option = array())
     {
         !empty($option) && $this->setOption($option);
-        $cacheFile = $this->_options['cachePath'] . '/hook.php';
+        $cacheFile = $this->_options['cachePath'] . 'hook.php';
 
-        if (is_file($cacheFile)) {
-            if ($this->_options['lifetime'] < $_SERVER['REQUEST_TIME'] - filemtime($cacheFile)) {
-                $this->update();
-            } else {
-                $this->_data = (array) require $cacheFile;
-            }
+        if (!is_file($cacheFile)) {
+            file_put_contents($cacheFile, null);
+        }
+        if ($this->_options['lifetime'] < $_SERVER['REQUEST_TIME'] - filemtime($cacheFile)) {
+            $this->update();
+        } else {
+            $this->_data = (array)require $cacheFile;
         }
     }
 
@@ -123,8 +124,12 @@ class Qwin_Hook
         $this->_data = array();
         $pathList = scandir($this->_options['path']);
         foreach ($pathList as $path) {
+            if ('.' == $path || '..' == $path) {
+                continue;
+            }
+            
             // 是否存在钩子文件
-            $file = $this->_options['path'] . $path . '/hook.php';
+            $file = $this->_options['path'] . $path . '/Hook.php';
             if (!is_file($file)) {
                 continue;
             }

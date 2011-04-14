@@ -381,7 +381,7 @@ class Com_Metadata extends Qwin_Application_Metadata
             }
 
             // null and not null
-            if(null === $value) {
+            if(null === $value || 'NULL' === $value) {
                 if ('eq' == $fieldSet[2]) {
                     $query->andWhere($alias . $fieldSet[0] . ' IS NULL');
                     continue;
@@ -668,20 +668,15 @@ class Com_Metadata extends Qwin_Application_Metadata
                 ),
                 'form' => array(
                     '_type' => 'text',
-                    '_widgetDetail' => array(
+                    '_widget' => array(
                         array(
-                            array('Qwin_Widget_JQuery_PopupGrid', 'render'),
-                            'LBL_MODULE_MEMBER',
-                            array(
-                                'package' => 'Common',
-                                'module' => 'Member',
-                                'controller' => 'Member',
+                            array('PopupGrid_Widget', 'render'),
+                            array(array(
+                                'title'  => 'LBL_MODULE_MEMBER',
+                                'module' => 'com/member',
                                 'list' => 'id,group_id,username,email',
-                            ),
-                            array(
-                                'username',
-                                'id'
-                            ),
+                                'fields' => array('username', 'id'),
+                            )),
                         ),
                     ),
                 ),
@@ -888,21 +883,6 @@ class Com_Metadata extends Qwin_Application_Metadata
         return date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
     }
 
-    /**
-     * 在入库操作下,转换分类的值
-     *
-     * @param mixed 当前域的值
-     * @param string 当前域的名称
-     * @param array $data 已转换过的当前记录的值
-     * @param array $cpoyData 未转换过的当前记录的值
-     * @return string 当前域的新值
-     */
-    public function sanitiseDbCategoryId($value)
-    {
-        '0' == $value && $value = null;
-        return $value;
-    }
-
     public function sanitiseDbCreatedBy($value, $name, $data, $dataCopy)
     {
         $member = Qwin::call('Qwin_Session')->get('member');
@@ -922,7 +902,11 @@ class Com_Metadata extends Qwin_Application_Metadata
 
     public function sanitiseEditAssignTo($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::sanitisePopupMember($value, $name, 'username', $this);
+        $data = Com_Metadata::getQueryByModule('com/member')
+            ->select('username')
+            ->where('id = ?', $value)
+            ->fetchOne();
+        $this['field'][$name]['form']['_value2'] = $data['username'];
         return $value;
     }
 
@@ -932,7 +916,11 @@ class Com_Metadata extends Qwin_Application_Metadata
             $module = $this->getModule();
             !isset($this->url) && $this->url = Qwin::call('-url');
             $name = str_replace(':', '\:', $name);
-            $dataCopy[$name] = str_replace(':', '\:', $dataCopy[$name]);
+            if (null === $dataCopy[$name]) {
+                $dataCopy[$name] = 'NULL';
+            } else {
+                $dataCopy[$name] = str_replace(':', '\:', $dataCopy[$name]);
+            }
             $value = '<a href="' . $this->url->url($module->toUrl(), 'index', array('search' => $name . ':' . $dataCopy[$name])) . '">' . $data[$name] . '</a>';
         //}
         return $value;

@@ -38,7 +38,7 @@ class Com_Widget_Edit extends Qwin_Widget_Abstract
         'url'       => null,
     );
 
-    public function process(array $options = null)
+    public function execute(array $options = null)
     {
         // 初始配置
         $options     = array_merge($this->_options, $options);
@@ -73,7 +73,7 @@ class Com_Widget_Edit extends Qwin_Widget_Abstract
         $data = $meta->sanitise($data, 'db');
 
         // 加载验证微件,验证数据
-        $validator = Qwin::call('-widget')->get('validator');
+        $validator = Qwin::call('-widget')->get('Validator');
         if (!$validator->valid($data, $meta)) {
             $result = array(
                 'result' => false,
@@ -117,6 +117,7 @@ class Com_Widget_Edit extends Qwin_Widget_Abstract
         foreach ($meta['field'] as $name => $field) {
             if (
                 isset($post[$name])
+                && isset($data[$name])
                 && $post[$name] != $data[$name]
                 && 1 != $field['attr']['isReadonly']
             ) {

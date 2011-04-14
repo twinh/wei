@@ -33,7 +33,7 @@
 <div class="ui-form-content ui-box-content ui-widget-content">
     <div class="ui-operation-field">
         <?php echo $operLinks ?>
-    </div>
+        </div>
     <?php $formWidget->render($formOptions) ?>
     <div class="ui-operation-field">
         <?php echo $operLinks ?>

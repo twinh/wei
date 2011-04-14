@@ -1,8 +1,8 @@
 <?php
 /**
- * Jump
+ * Model
  *
- * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,15 +20,10 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-25 22:10:07
+ * @since       2011-04-13 03:29:48
  */
 
-class Com_View_Jump extends Qwin_Application_View_Processer
+class Cms_Article_Model extends Com_Model
 {
-    public function __construct(Qwin_Application_View $view)
-    {
-        $view->setLayout('<resource><theme>/<defaultPackage>/layout/jump<suffix>');
 
-        $view->assign(get_defined_vars());
-    }
 }

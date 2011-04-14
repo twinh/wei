@@ -50,13 +50,13 @@ class Com_Widget_Delete extends Qwin_Widget_Abstract
         ),
     );
 
-    public function process(array $config = null)
+    public function execute(array $config = null)
     {
         // 初始配置
         $config = $this->_multiArrayMerge($this->_config, $config);
 
         // 通过父类,加载语言,元数据,模型等
-        parent::process($config['set']);
+        parent::execute($config['set']);
 
         // 初始化常用的变量
         $metaHelper = Qwin::call('Qwin_Application_Metadata');
@@ -108,7 +108,7 @@ class Com_Widget_Delete extends Qwin_Widget_Abstract
                     'this' => $config['this'],
                 );
                 $sevice = new Com_Service_Insert();
-                $result = $sevice->process($InsertSetting);
+                $result = $sevice->execute($InsertSetting);
                 /*
                  * todo 结果判断
                  * if ($result['result']) {

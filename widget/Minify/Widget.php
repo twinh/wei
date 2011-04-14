@@ -80,6 +80,24 @@ class Minify_Widget extends Qwin_Widget_Abstract
     }
 
     /**
+     * 添加一组文件
+     *
+     * @param array $array 文件数组
+     * @return Minify_Widget 当前对象
+     */
+    public function addArray(array $array)
+    {
+        foreach ($array as $value) {
+            if (is_array($value)) {
+                $this->addArray($value);
+            } else {
+                $this->add($value);
+            }
+        }
+        return $this;
+    }
+
+    /**
      * 打包一类文件
      *
      * @param string $extension 后缀名

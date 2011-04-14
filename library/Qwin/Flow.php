@@ -26,27 +26,62 @@
 class Qwin_Flow
 {
     /**
+     * 在回调流程中，将结果作为下一个流程的参数
+     */
+    const PARAM = 0;
+
+    /**
+     * 在回调流程中，将结果作为字符串连接起来
+     */
+    const STRING  = 1;
+
+
+    /**
      * 操作符,其中"->"表示动态调用,"::"表示静态调用
      * @var array
      */
     protected $_operator = array('->', '::');
 
-    public function call(array $callbackList, $value)
+    /**
+     * 调用一组流程
+     *
+     * @param array $callbacks 由多个回调结构组成的数组
+     * @param int $resultAs 结果使用方式
+     * @param mixed $value 初始值
+     * @return mixed
+     */
+    public function call(array $callbacks, $resultAs = self::STRING)
     {
-        foreach ($callbackList as $callback) {
-            $callback = $this->filter($callback, $value);
-            if (3 == count($callback[0])) {
-                $value = $this->_callClassMethod($callback, $value);
+        $i = 0;
+        foreach ($callbacks as $callback) {
+            if ($i != 0) {
+               if ($resultAs == self::STRING) {
+                   $result .= $this->callOne($callback);
+               } else {
+                   $result = $this->callOne($callback, $result);
+               }
+            // 第一次调用时，可能没有初始值，
             } else {
-                $value = $this->_callFunction($callback, $value);
+               $args = func_get_args();
+               $params = array($callback);
+               array_key_exists(2, $args) && $params[2] = $args[2];
+               $result = call_user_func_array(array($this, 'callOne'), $params);
+               $i++;
             }
         }
-        return $value;
+        return $result;
     }
 
+    /**
+     * 调用一个流程
+     *
+     * @param array $callback 回调结构组成的数组
+     * @param mixed $value 初始值
+     * @return mixed
+     */
     public function callOne($callback)
     {
-        $callback = $this->filter($callback, $value);
+        $callback = call_user_func_array(array($this, 'filter'), func_get_args());
         if (3 == count($callback[0])) {
             $value = $this->_callClassMethod($callback);
         } else {
@@ -96,12 +131,12 @@ class Qwin_Flow
      * 转换回调结构
      *
      * @param string|array $callback 回调结构
-     * @param mixed $value
-     * @return int
+     * @param mixed $value 初始值，可选
+     * @return array 回调结构
      * @todo 简化
-     * @todo 没有value的情况
+     * @todo 将_callClassMethod中对方法到检查等并入filter中
      */
-    public function filter($callback, $value)
+    public function filter($callback)
     {
         if (!is_array($callback)) {
             $callback = array($callback);
@@ -127,7 +162,7 @@ class Qwin_Flow
         }
         $callback = array();
 
-        // 转换第二层第一个键的数据
+        // 转换第一个键的数据
         if (is_array($temp[0])) {
             // 类名/对象
             if (!isset($temp[0][0])) {
@@ -151,16 +186,15 @@ class Qwin_Flow
             $callback[0] = $temp[0];
         }
 
-        // 转换第二层的第二个键的数据
+        // 转换第二个键的数据
         $callback[1] = (array)$temp[1];
 
-        $temp[2] = (int)$temp[2];
-        if (0 > $temp[2] || count($temp[1]) < $temp[2]) {
-            $temp[2] = 0;
+        // 如果存在初始值,将初始值加入参数中
+        $params = func_get_args();
+        if (array_key_exists(1, $params)) {
+            $temp[2] = (int)$temp[2];
+            array_splice($callback[1], $temp[2], 0, array($params[1]));
         }
-
-        // 加入到参数中
-        array_splice($callback[1], $temp[2], 0, array($value));
 
         return $callback;
     }

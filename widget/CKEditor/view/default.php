@@ -23,7 +23,7 @@
  * @since       v0.6.0 2011-01-29 20:43:18
  */
 ?>
-<script type="text/javascript" src="<?php echo $path ?>/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="<?php echo $this->_rootPath ?>/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
     var ckeditor = CKEDITOR.replace('<?php echo htmlspecialchars($options['form']['id']) ?>');
 </script>

@@ -23,34 +23,20 @@
  * @since       2011-01-13 00:36:36
  */
 
-$jQueryFile = array(
-    'position' => $jQuery->loadUi('position', false),
-    'dialog' => $jQuery->loadUi('dialog', false),
-    'qwinPopup' => $jQuery->loadPlugin('qwin-popup', null, false),
-);
-$cssPacker
-    ->add($jQueryFile['position']['css'])
-    ->add($jQueryFile['dialog']['css'])
-    ->add($jQueryFile['qwinPopup']['css']);
-$jsPacker
-    ->add($jQueryFile['position']['js'])
-    ->add($jQueryFile['dialog']['js'])
-    ->add($jQueryFile['qwinPopup']['js']);
-
-echo qw_form($meta);
+echo $form->renderElement($meta);
 ?>
-<button id="ui-button-qwin-popup-<?php echo $id ?>" type="button"><span class="ui-icon ui-icon-calculator"><?php echo $meta['name'] ?></span></button>
+&nbsp;<button id="ui-button-qwin-popup-<?php echo $id ?>" type="button"><span class="ui-icon ui-icon-calculator"><?php echo $meta['name'] ?></span></button>
 <button id="ui-button-qwin-popup-<?php echo $id ?>-clear" type="button"><span class="ui-icon ui-icon-arrowreturnthick-1-w"><?php echo $meta['name'] ?></span></button>
 <script type="text/javascript">
 jQuery(function($){
     $('#<?php echo $id ?>').hide();
-    $('#ui-button-qwin-popup-<?php echo $id ?>').qwinPopup({
+    $('#ui-button-qwin-popup-<?php echo $id ?>').popupGrid({
         title       : '<?php  echo $title ?>',
-        url         : "<?php  echo qw_url($url) ?>",
+        url         : "<?php  echo $url ?>",
         viewInput   : '#<?php echo $meta['id'] ?>',
         valueInput  : '#<?php echo $id ?>',
-        viewColumn  : '<?php  echo $viewField[0] ?>',
-        valueColumn : '<?php  echo $viewField[1] ?>'
+        viewColumn  : '<?php  echo $options['fields'][0] ?>',
+        valueColumn : '<?php  echo $options['fields'][1] ?>'
     });
     $('#ui-button-qwin-popup-<?php echo $id ?>-clear').click(function(){
         $('#<?php echo $id ?>').val('');

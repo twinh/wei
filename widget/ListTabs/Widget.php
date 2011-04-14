@@ -103,7 +103,7 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
 
         if (!in_array('list', $unableAction)) {
             $tab['list'] = array(
-                'url' => $url->build($get, array('action' => 'index')),
+                'url' => $url->url($module->toUrl(), 'index'),
                 'title' => $lang->t('ACT_LIST'),
                 'icon' => 'ui-icon-note',
                 'target' => null,

@@ -52,7 +52,6 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Driver
 //            '_resourceGetter' => null,
 //            '_resourceFormFile' => null,
 //            '_widget' => array(),
-//            '_extend' => array(),
 //            'id' => null,
 //            'class' => null,
         ),
@@ -240,10 +239,11 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Driver
      */
     public function addClass($field, $value)
     {
-        if ('' != $this->_data[$field]['form']['class']) {
-            $value = ' ' . $value;
+        if (isset($this->{$field}['form']['class'])) {
+            $this->{$field}['form']['class'] = $this->{$field}['form']['class'] . ' ' . $value;
+        } else {
+            $this->{$field}['form']['class'] = $value;
         }
-        $this->_data[$field]['form']['class'] .= $value;
         return $this;
     }
 
@@ -336,5 +336,39 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Driver
             $data[$name] = $field['form']['_value'];
         }
         return $data;
+    }
+
+    public function getResource($field)
+    {
+        if (isset($this[$field])) {
+            if ($this[$field]['form']['_resource']) {
+                return $this[$field]['form']['_resource'];
+            } else {
+                if (isset($this[$field]['form']['_resourceGetter'])) {
+                    $resource = Qwin::call('-flow')->callOne($this[$field]['form']['_resourceGetter']);
+                }
+
+                // 认定为选项模块的选项
+                $element = $resource[key($resource)];
+                if (is_array($element)) {
+                    $this[$field]['form']['_resource'] = $resource;
+                } else {
+                    // 否则,认定为value=>name的形式
+                    $return = array();
+                    foreach($resource as $value => $name) {
+                        $return[$value] = array(
+                            'value' => $value,
+                            'name' => $name,
+                            'color' => null,
+                            'style' => null,
+                        );
+                    }
+                    $this[$field]['form']['_resource'] = $return;
+                }
+
+                return $this[$field]['form']['_resource'];
+            }
+        }
+        throw new Qwin_Metadata_Element_Field_Exception('Undefined field "' . $field . '"');
     }
 }

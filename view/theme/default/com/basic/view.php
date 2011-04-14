@@ -25,8 +25,6 @@
  * @since       2009-11-24 18:47:32
  */
 
-// 防止直接访问导致错误
-defined('QWIN') or exit('Forbidden');
 $jQueryFile['tabs'] = $jQuery->loadUi('tabs', false);
 $minify->add($jQueryFile['tabs']['css'])
         ->add($jQueryFile['tabs']['js']);

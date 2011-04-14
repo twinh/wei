@@ -43,7 +43,7 @@ class Com_View_View extends Com_View
         $widget         = Qwin::call('-widget');
         
         /* @var $formWidget Form_Widget */
-        $formWidget = $widget->get('form');
+        $formWidget = $widget->get('Form');
         $formOptions = array(
             'meta'      => $meta,
             'action'    => 'view',
@@ -52,7 +52,7 @@ class Com_View_View extends Com_View
         );
 
         /* @var $jqGridWidget JqGrid_Widget */
-        $jqGridWidget   = $widget->get('jqgrid');
+        $jqGridWidget   = $widget->get('JqGrid');
         $jqGridOptions  = array();
 
         // 关联列表的数据配置

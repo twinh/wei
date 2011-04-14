@@ -20,35 +20,30 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-02-27 14:50:27
+ * @since       2010-08-20 10:51:21
  */
 
 class AjaxUpload_Widget extends Qwin_Widget_Abstract
 {
-    public function render($meta)
+    public function render($options)
     {
-        $jquery = Qwin::call('Qwin_Resource_JQuery');
-        $cssPacker = Qwin::call('Qwin_Packer_Css');
-        $jsPacker = Qwin::call('Qwin_Packer_Js');
+        $jQuery = $this->_widget->get('JQuery');
+        $minify = $this->_widget->get('Minify');
 
-        $positionFile = $jquery->loadUi('position', false);
-        $dialogFile = $jquery->loadUi('dialog', false);
-        $ajaxUploadFile = $jquery->loadPlugin('ajaxupload', null, false);
-        $cssPacker
-            ->add($positionFile['css'])
-            ->add($dialogFile['css'])
-            ->add($ajaxUploadFile['css']);
-        $jsPacker
-            ->add($positionFile['js'])
-            ->add($dialogFile['js'])
-            ->add($ajaxUploadFile['js']);
+        $minify->addArray(array(
+            $jQuery->loadUi('position', false),
+            $jQuery->loadUi('dialog', false),
+            $this->_rootPath . 'source/jquery.ajaxupload.css',
+            $this->_rootPath . 'source/jquery.ajaxupload.js',
+        ));
+        
 
-        $buttonId = 'ui-button-ajaxupload-' . $meta['id'];
+        $buttonId = 'ui-button-ajaxupload-' . $options['form']['id'];
 
-        $code = '<button id="' . $buttonId . '" type="button"><span class="ui-icon ui-icon-arrowthickstop-1-n">' . $meta['id'] . '</span></button>
+        $code = '<button id="' . $buttonId . '" type="button"><span class="ui-icon ui-icon-arrowthickstop-1-n">' . $options['form']['id'] . '</span></button>
                 <script type="text/javascript">jQuery(function($){
                     $("#' . $buttonId . '").ajaxUpload({
-                        input : "#' . $meta['id'] . '"
+                        input : "#' . $options['form']['id'] . '"
                     });
                 });
               </script>';

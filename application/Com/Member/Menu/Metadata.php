@@ -35,33 +35,29 @@ class Com_Member_Menu_Metadata extends Com_Metadata
                 'category_id' => array(
                     'form' => array(
                         '_type' => 'select',
-                        /*'_resourceGetter' => array(
-                            array('Project_Helper_Category', 'getTreeResource'),
+                        '_resourceGetter' => array(
+                            array('Com_Category_Widget', 'get'),
                             array(
-                                'package' => 'Common',
-                                'module' => 'AdminMenu',
-                                'controller' => 'Menu',
+                                'com/member/menu',
+                                null,
+                                array('id', 'category_id', 'title'),
                             ),
-                            null,
-                            array('id', 'category_id', 'title'),
-                        ),*/
+                        ),
                     ),
                     'attr' => array(
                         'isList' => 1,
                         'isLink' => 1,
                     ),
                     'sanitiser' => array(
-                        /*'list' => array(
-                            array('Project_Helper_Category', 'sanitiseTreeResource'),
+                        'list' => array(
+                            array('Com_Category_Widget', 'sanitise'),
                             array(
-                                'package' => 'Common',
-                                'module' => 'AdminMenu',
-                                'controller' => 'Menu',
+                                'com/member/menu',
+                                null,
+                                array('id', 'category_id', 'title'),
                             ),
-                            NULL,
-                            array('id', 'category_id', 'title'),
                         ),
-                        'view' => 'list',*/
+                        'view' => 'list',
                     ),
                 ),
                 'title' => array(

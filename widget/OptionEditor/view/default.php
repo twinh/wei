@@ -46,16 +46,16 @@ foreach ($codeMeta['field'] as $field => $value) {
             <table>
                 <tr>
                     <td class="ui-optioneditor-value">
-                        <?php echo qw_form($codeMeta->getDynamicFieldForm('value', $key), $row['value']) ?>
+                        <?php echo $form->renderElement($codeMeta->getDynamicFieldForm('value', $key), $row['value']) ?>
                     </td>
                     <td class="ui-optioneditor-common">
-                        <?php echo qw_form($codeMeta->getDynamicFieldForm('name', $key), $row['name']) ?>
+                        <?php echo $form->renderElement($codeMeta->getDynamicFieldForm('name', $key), $row['name']) ?>
                     </td>
                     <td class="ui-optioneditor-color">
-                        <?php echo qw_form($codeMeta->getDynamicFieldForm('color', $key), $row['color']) ?>
+                        <?php echo $form->renderElement($codeMeta->getDynamicFieldForm('color', $key), $row['color']) ?>
                     </td>
                     <td class="ui-optioneditor-color">
-                        <?php echo qw_form($codeMeta->getDynamicFieldForm('style', $key), $row['style']) ?>
+                        <?php echo $form->renderElement($codeMeta->getDynamicFieldForm('style', $key), $row['style']) ?>
                     </td>
                     <td class="ui-optioneditor-oper">
                         <a class="ui-state-default"><span class="ui-icon ui-icon-circle-close">X</span></a>
@@ -72,9 +72,9 @@ foreach ($codeMeta['field'] as $field => $value) {
         <tr>
             <td>
                 <input id="ui-optioneditor-number" type="text" class="ui-widget-content ui-corner-all" value="1">
-                <?php echo qw_jQuery_link('javascript:;', $lang['LBL_OPTION_EDITOR_ADD'], 'ui-icon-plus', 'ui-optioneditor-button')?>
-                <!--<?php echo qw_jQuery_link('javascript:;', '重置顺序', 'ui-icon-plus', 'ui-optioneditor-reset')?>-->
-                <!--<?php echo qw_jQuery_link('javascript:;', '按值排序', 'ui-icon-plus', 'ui-optioneditor-order')?>-->
+                <?php echo Qwin_Util_JQuery::link('javascript:;', $lang['LBL_OPTION_EDITOR_ADD'], 'ui-icon-plus', 'ui-optioneditor-button')?>
+                <!--<?php echo Qwin_Util_JQuery::link('javascript:;', '重置顺序', 'ui-icon-plus', 'ui-optioneditor-reset')?>-->
+                <!--<?php echo Qwin_Util_JQuery::link('javascript:;', '按值排序', 'ui-icon-plus', 'ui-optioneditor-order')?>-->
             </td>
         </tr>
     </table>

@@ -53,6 +53,7 @@ class Com_Member_Metadata extends Com_Metadata
                                 array('id', null, 'name'),
                             ),
                         ),
+                        'view' => 'list',
                     ),
                     'attr' => array(
                         'isLink' => 1,

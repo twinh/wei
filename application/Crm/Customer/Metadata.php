@@ -50,7 +50,7 @@ class Crm_Customer_Metadata extends Com_Metadata
                         '_type' => 'select',
                         '_resourceGetter' => array(
                             array('Ide_Option_Widget', 'get'),
-                            'sex',
+                            array('sex'),
                         ),
                     ),
                     'sanitiser' => array(
@@ -76,7 +76,7 @@ class Crm_Customer_Metadata extends Com_Metadata
                     'sanitiser' => array(
                         'list' => array(
                             array('Ide_Option_Widget', 'sanitise'),
-                            'customer-type',
+                            array('customer-type'),
                         ),
                         'view' => 'list',
                     ),

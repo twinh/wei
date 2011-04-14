@@ -83,38 +83,72 @@ class Qwin_Widget
      */
     public function get($name)
     {
-        $sign = strtolower($name);
-        if (isset($this->_loaded[$sign])) {
-            return $this->_loaded[$sign];
+        $class = $name . '_Widget';
+        if (isset($this->_loaded[$class])) {
+            return $this->_loaded[$class];
         }
 
         // 查看主文件是否存在
-        $file = $this->_rootPath . $sign . '/Widget.php';
+        $file = $this->_rootPath . $name . '/Widget.php';
         if (!is_file($file)) {
-            return false;
+            throw new Qwin_Widget_Exception('Widget "' . $name . '" not found.');
         }
-
+        
         // 加载类文件
         require_once $file;
-        $class = ucfirst($name) . '_Widget';
+
+        $param = $this->getParams($name);
+        
+        // 初始化
+        $widget = $this->_callClass($class, $param);
+        $this->_loaded[$class] = $widget;
+
+        return $widget;
+    }
+
+    /**
+     * 获取微件参数
+     *
+     * @param string|Qwin_Widget_Abstarct $name 名词或实例化对象
+     * @return array
+     */
+    public function getParams($name)
+    {
+        if (is_string($name)) {
+            $class = $name . '_Widget';
+            $rootPath = $this->_rootPath . $name . '/';
+        // TODO 是否应该做进一步检查
+        } elseif (is_object($name)) {
+            $class = get_class($name);
+            $name = substr($class, 0, -7);
+        } else {
+            throw new Qwin_Widget_Exception('Param must be a string or object.');
+        }
 
         // 合并自定义的参数和配置中的参数
         $param = array(
             array(
-                'rootPath'  => $this->_rootPath . $sign . '/',
-                'lang'      => true,
+                'rootPath'  => $this->_rootPath . $name . '/',
+                //'lang'      => true,
             ),
         );
         $configParam = (array)Qwin::config($class);
         if (!empty($configParam)) {
             $param[0] += current($configParam);
         }
+        return $param;
+    }
 
-        // 初始化
-        $widget = $this->_callClass($class, $param);
-        $this->_loaded[$sign] = $widget;
-
-        return $widget;
+    /**
+     * 检查是否调用过该微件类
+     *
+     * @param string|Qwin_Widget_Abstract $class 微件对象或类名
+     * @return bool
+     */
+    public function isCalled($class)
+    {
+        is_object($class) && $class = get_class($class);
+        return isset($this->_loaded[$class]);
     }
 
     /**
@@ -134,6 +168,9 @@ class Qwin_Widget
             require_once 'Qwin/Widget/Exception.php';
             throw new Qwin_Widget_Exception('Class "' . $class . '" is not the subclass of "Qwin_Widget_Abstract".');
         }
+
+        // 设定为已加载该类，在类的构造方法中调用isCalled将返回true结果
+        $this->_loaded[$class] = true;
 
         // 初始化类
         /* @var $widget Qwin_Widget_Abstract */

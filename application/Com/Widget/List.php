@@ -45,7 +45,7 @@ class Com_Widget_List extends Qwin_Widget_Abstract
      * @param array $options 选项
      * @return array 处理结果
      */
-    public function process(array $options = null)
+    public function execute(array $options = null)
     {
         // 初始配置
         $options     = $options + $this->_options;

@@ -43,7 +43,7 @@ class Com_Widget_Add extends Qwin_Widget_Abstract
      *
      * @param array $options 配置
      */
-    public function process(array $options = null)
+    public function execute(array $options = null)
     {
         // 初始配置
         $options = array_merge($this->_options, $options);
@@ -79,7 +79,7 @@ class Com_Widget_Add extends Qwin_Widget_Abstract
         //$data = $metaHelper->setForeignKeyData($meta['model'], $data);
 
         // 加载验证微件,验证数据
-        $validator = Qwin::call('-widget')->get('validator');
+        $validator = Qwin::call('-widget')->get('Validator');
         if (!$validator->valid($data, $meta)) {
             $result = array(
                 'result' => false,

@@ -79,7 +79,7 @@ class Com_Trash_Metadata extends Com_Metadata
                 ),
             ),
             'db' => array(
-                'table' => 'Trash',
+                'table' => 'trash',
                 'order' => array(
                     array('deleted_at', 'DESC'),
                 ),

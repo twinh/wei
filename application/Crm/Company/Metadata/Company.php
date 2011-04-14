@@ -36,21 +36,15 @@ class Crm_Company_Metadata_Company extends Com_Metadata
                     ),
                     'form' => array(
                         '_type' => 'text',
-                        '_widgetDetail' => array(
+                        '_widget' => array(
                             array(
-                                array('Qwin_Widget_JQuery_PopupGrid', 'render'),
-                                'LBL_MODULE_MEMBER',
-                                array(
-                                    'package' => 'Common',
-                                    'module' => 'Member',
-                                    'controller' => 'Member',
-                                    'action' => 'Popup',
-                                    'listName' => 'id,group_id,username,email',
-                                ),
-                                array(
-                                    'username',
-                                    'id'
-                                ),
+                                array('PopupGrid_Widget', 'render'),
+                                array(array(
+                                    'title'  => 'LBL_MODULE_MEMBER',
+                                    'module' => 'com/member',
+                                    'list' => 'id,group_id,username,email',
+                                    'fields' => array('username', 'id'),
+                                )),
                             ),
                         ),
                     ),

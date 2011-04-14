@@ -128,6 +128,11 @@ class Qwin_Module
         
     }
 
+    /**
+     * 魔法方法，返回原始数据
+     *
+     * @return string
+     */
     public function __toString()
     {
         return $this->_data;
@@ -136,5 +141,25 @@ class Qwin_Module
     public function set($data)
     {
         $this->_data = $data;
+    }
+
+    /**
+     * 存放实例的数组
+     * @var array
+     */
+    protected static $_intances = array();
+
+    /**
+     * 实例化一个模块对象
+     *
+     * @param string $module string 模块名称
+     * @return Qwin_Module
+     */
+    public static function instance($module)
+    {
+        if (!isset(self::$_intances[$module])) {
+            self::$_intances[$module] = new Qwin_Module($module);
+        }
+        return self::$_intances[$module];
     }
 }

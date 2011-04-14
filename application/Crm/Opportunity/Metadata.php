@@ -82,17 +82,15 @@ class Crm_Opportunity_Metadata extends Com_Metadata
                 ),
                 'parent_id' => array(
                     'form' => array(
-                        '_widgetDetail' => array(
+                        '_widget' => array(
                             array(
-                                array('Qwin_Widget_JQuery_PopupGrid', 'render'),
-                                'LBL_MODULE_OPPORTUNITY',
-                                array(
-                                    'package' => 'Crm',
-                                    'module' => 'Opportunity',
-                                    'controller' => 'Opportunity',
+                                array('PopupGrid_Widget', 'render'),
+                                array(array(
+                                    'title'  => 'LBL_MODULE_OPPORTUNITY',
+                                    'module' => 'crm/opportunity',
                                     'list' => 'id,name,status,type,start_time,end_time',
-                                ),
-                                array('name', 'id'),
+                                    'fields' => array('name', 'id'),
+                                )),
                             ),
                         ),
                     ),
@@ -229,7 +227,12 @@ class Crm_Opportunity_Metadata extends Com_Metadata
 
     public function sanitiseEditParentId($value, $name, $data, $dataCopy)
     {
-        Crm_Helper::sanitisePopupOpportunity($value, $name, 'name', $this);
+        $data = Com_Metadata::getQueryByModule('crm/opportunity')
+            ->select('name')
+            ->where('id = ?', $value)
+            ->fetchOne();
+
+        $this['field'][$name]['form']['_value2'] = $data['name'];
         return $value;
     }
 }

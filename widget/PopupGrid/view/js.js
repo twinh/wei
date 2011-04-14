@@ -24,8 +24,8 @@
  */
 // 需jQuery dialog, jqgrid
 (function($) {
-    $.fn.qwinPopup = function(options) {
-        var opts = $.extend({}, $.fn.qwinPopup.defaults, options);
+    $.fn.popupGrid = function(options) {
+        var opts = $.extend({}, $.fn.popupGrid.defaults, options);
         // 设置窗口标题
         if (null != opts.title) {
             opts.dialog.title = opts.title;
@@ -45,11 +45,12 @@
                     'popup-value-column': opts.valueColumn,
                     'popup-view-column': opts.viewColumn
                 });
+            this.blur();
         });
         return this;
     };
 
-    $.fn.qwinPopup.defaults = {
+    $.fn.popupGrid.defaults = {
         title: null, // 弹出对话框显示的标题
         url: null, // 弹出对话框内容的地址
         viewInput: null, // 显示选中数据的输入框

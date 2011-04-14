@@ -41,7 +41,12 @@ abstract class Qwin_Application_Model extends Doctrine_Record
      */
     public static function getByModule($module, $instanced = true)
     {
-        $class = strtr($module, '/', '_') . '_Model';
+        if ($module instanceof Qwin_Module) {
+            $class = $module->toClass();
+        } else {
+            $class = Qwin_Module::instance($module)->toClass();
+        }
+        $class .= '_Model';
         if (!class_exists($class)) {
             throw new Qwin_Application_Model_Exception('Model Class "' . $class . '" not found.');
         }

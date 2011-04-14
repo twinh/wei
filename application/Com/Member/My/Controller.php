@@ -40,7 +40,7 @@ class Com_Member_My_Controller extends Com_Controller
     {
         $member = $this->getMember();
         if (!$this->_request->isPost()) {
-            return Com_Widget::getByModule('Com', 'View')->process(array(
+            return Com_Widget::getByModule('Com', 'View')->execute(array(
                 'module'    => $this->_memberModule,
                 'id'        => $member['id'],
                 'asAction'  => 'edit',
@@ -48,7 +48,7 @@ class Com_Member_My_Controller extends Com_Controller
                 'viewClass' => 'Com_View_Edit',
             ));
         } else {
-            return Com_Widget::getByModule('Com', 'Edit')->process(array(
+            return Com_Widget::getByModule('Com', 'Edit')->execute(array(
                 'module'    => $this->_memberModule,
                 'data'      => $_POST,
                 'url'       => urldecode($this->_request->post('_page')),
@@ -59,7 +59,7 @@ class Com_Member_My_Controller extends Com_Controller
     public function actionView()
     {
         $member = $this->getMember();
-        return Com_Widget::getByModule('Com', 'View')->process(array(
+        return Com_Widget::getByModule('Com', 'View')->execute(array(
             'module'    => $this->_memberModule,
             'id'        => $member['id']
         ));

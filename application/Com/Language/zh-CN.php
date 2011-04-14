@@ -41,6 +41,9 @@ return array(
     'ACT_APPLY' => '应用',
     'ACT_RESTORE' => '还原',
     'ACT_REDIRECT' => '跳转',
+    'ACT_PREV' => '上一记录',
+    'ACT_NEXT' => '下一记录',
+    'ACT_FILTER' => '筛选',
     'LBL_DEFAULT' => '默认',
     'LBL_OPERATION' => '操作',
     'LBL_SWITCH_DISPLAY_MODEL' => '切换显示模式',
@@ -52,9 +55,11 @@ return array(
     'LBL_TOOL' => '工具',
     'LBL_LANG' => '语言',
     'LBL_NULL' => '未填写',
+    'LBL_ALL' => '全部',
+
+    'LBL_NO' => '无',
     'LBL_PLEASE_SELECT' => '请选择',
-    'LBL_OPTION_NULL' => '无',
-    'LBL_OPTION_SELECT' => '请选择',
+    'LBL_NOT_FILLED' => '<em>(未填写)</em>',
 
     // 域
     'FLD_ID' => '编号',
@@ -106,8 +111,6 @@ return array(
     'MSG_NO_RECORD' => '该记录不存在或已经被删除.',
     'MSG_RECORD_EXISTS' => '该记录已存在',
     'MSG_ERROR_CAPTCHA' => '验证码错误',
-
-
 
     'LBL_HTML_TITLE' => 'Management System - Powered by Qwin Framework',
     'LBL_FOOTER_COPYRIGHT' => 'Powered by Qwin Framework, Version ' . Qwin::VERSION . '. Copyright © 2008-2010 Twin. All rights reserved.',
