@@ -114,12 +114,15 @@ div.ui-header-logo{
 }
 .ui-nav-bar ul li ul {
     display: none;
+    text-align:left;
+    position: absolute;
+    margin-left: -1px;
 }
 .ui-nav-bar ul li ul li {
     clear: both;
-    font-weight: normal
+    font-weight: normal;
+    float: left;
 }
-
 /* 
   修复部分使用部分字体导致该栏下面空一像素的问题
   todo 更合适的字体
@@ -127,6 +130,7 @@ div.ui-header-logo{
 .ui-nav-bar ul li.ui-state-active a {
     font-family: sans-serif;
 }
+
 #ui-header{
     height: 60px;
 }
@@ -331,7 +335,7 @@ div.ui-box-tab .ui-tabs-panel{
 
 
 /* 防止ck编辑器下部变形 */
-.cke_editor .cke_contents fieldset{ 
+.cke_editor .cke_contents fieldset {
     margin: 0;
 }
 
@@ -613,4 +617,38 @@ div.ui-box-tab .ui-tabs-panel{
 }
 .ui-jqgrid-top {
     margin-left: 30px;
+}
+
+.ui-listtab{
+    border-left :0;
+    border-right: 0;
+    border-bottom: 0;
+    z-index: 99999;
+}
+.ui-listtab ul.ui-listtab-parent{
+    border: 0;
+    white-space: nowrap;
+/*    overflow: hidden;*/
+    width: 800px;
+    height: 26px;
+    background: none;
+}
+.ui-listtab ul.ui-widget-content{
+    float: left;
+}
+.ui-listtab ul li {
+    width: auto;
+/*    float: left;*/
+    border-bottom: 0;
+    margin: 0;
+    display: inline-table;
+/*    margin-bottom: -1px;*/
+}
+.ui-listtab ul li ul {
+    display: none;
+    z-index: 9999;
+}
+.ui-listtab ul li ul li {
+    clear: both;
+    font-weight: normal
 }

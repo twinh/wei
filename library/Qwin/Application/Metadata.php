@@ -56,6 +56,7 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
         'meta'          => true,
         'sanitise'      => true,
         'link'          => false,
+        'notFilled'     => false,
         'relatedMeta'   => true,
     );
 
@@ -126,6 +127,9 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
         if ($options['meta']) {
             $flow = Qwin::call('-flow');
         }
+        if ($options['notFilled']) {
+            $lang = Qwin::call('-lang');
+        }
 
         // 转换关联模块的显示域
         if ($options['view']) {
@@ -189,6 +193,11 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
                         array($value, $name, $data, $dataCopy)
                     );
                 }
+            }
+
+            // 转换null值为未填写
+            if ($options['notFilled'] && null === $data[$name]) {
+                $data[$name] = $lang['LBL_NOT_FILLED'];
             }
 
             // 转换链接

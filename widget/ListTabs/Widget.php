@@ -45,7 +45,7 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
         $module = $view['module'];
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
-        $tab = array();
+        $tabs = array();
 
         $moduleId = $module->toId();
         parse_str(ltrim($view['options']['url'], '?'), $get);
@@ -63,7 +63,7 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
         }
 
         if (!in_array('add', $unableAction)) {
-            $tab['add'] = array(
+            $tabs['add'] = array(
                 'url'       => $url->build($get, array('action' => 'add')),
                 'title'     => $lang->t('ACT_ADD'),
                 'icon'      => 'ui-icon-plus',
@@ -71,7 +71,7 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
                 'id'        => 'action-' . $moduleId . '-add',
                 'class'     => 'action-add',
             );
-            $tab['copy'] = array(
+            $tabs['copy'] = array(
                 'url'   => $url->build($get, array('action' => 'add')),
                 'title' => $lang->t('ACT_COPY'),
                 'icon'  => 'ui-icon-transferthick-e-w',
@@ -91,7 +91,7 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
                 $icon = 'ui-icon-trash';
                 $jsLang = 'MSG_CONFIRM_TO_DELETE_TO_TRASH';
             }
-            $tab['delete'] = array(
+            $tabs['delete'] = array(
                 'url'       => 'javascript:;',
                 'title'     => $lang->t('ACT_DELETE'),
                 'icon'      => $icon,
@@ -102,7 +102,7 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
         }
 
         if (!in_array('list', $unableAction)) {
-            $tab['list'] = array(
+            $tabs['list'] = array(
                 'url' => $url->url($module->toUrl(), 'index'),
                 'title' => $lang->t('ACT_LIST'),
                 'icon' => 'ui-icon-note',
@@ -113,37 +113,20 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
         }
 
         // 如果当前行为存在选项卡视图,加载该视图,否则直接输出默认选项卡内容
-        $class = strtr($module, '/', '_') . '_ListTabWidget';
+        $class = $module->toClass() . '_ListTabWidget';
         if(class_exists($class)) {
             $object = new $class;
             $file = $view->decodePath('<root>com/widget-<action>-tab<suffix>');
             return $object->render(array(
-                'tab' => $tab,
+                'tabs' => $tabs,
                 'file' => $file,
                 'object' => $this,
             ), $view);
         } else {
-            $this->renderTab($tab, $view);
-        }
-    }
-
-    /**
-     * 输出选项卡视图
-     *
-     * @param object $view 视图对象
-     * @param bool $echo 是否输出视图
-     * @return string
-     */
-    public function renderTab($tab, $view, $echo = true)
-    {
-        $output = '';
-        foreach ($tab as $row) {
-            $output .= Qwin_Util_JQuery::link($row['url'], $row['title'], $row['icon'], $row['class'], $row['target'], $row['id']);
-        }
-        if ($echo) {
-            require $view->decodePath('<root>com/basic/output<suffix>');
-        } else {
-            return $output;
+            /* @var $smarty Smarty */
+            $smarty = $this->_widget->get('Smarty')->getObject();
+            $smarty->assign('tabs', $tabs);
+            $smarty->display($this->_rootPath . 'view/default.tpl');
         }
     }
 }

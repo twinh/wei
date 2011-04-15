@@ -85,6 +85,7 @@ class Com_Widget_JsonList extends Qwin_Widget_Abstract
                 $row = $meta->sanitise($rowTemp, $options['asAction'], array(
                     'view' => $options['isView'],
                     'link' => true,
+                    'notFilled' => true,
                 ), $row);
             }
         }

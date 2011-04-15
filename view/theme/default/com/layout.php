@@ -63,8 +63,7 @@ $minify->addArray(array(
     </tr>
     <tr id="ui-header2">
         <td colspan="4">
-            <div class="ui-navbar2 ui-widget-content ui-state-default">
-            </div>
+            <div class="ui-navbar2 ui-widget-content ui-state-default"></div>
         </td>
     </tr>
     <tr>

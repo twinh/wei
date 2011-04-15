@@ -39,6 +39,13 @@ class Form_Widget extends Qwin_Widget_Abstract
         'data'      => array(),
         'view'      => 'default.php',
         'validate'  => false,
+        'addSelect' => true,
+        'select'    => array(
+            'value' => 'NULL',
+            'name'  => 'LBL_PLEASE_SELECT',
+            'color' => null,
+            'style' => null,
+        ),
     );
 
     /**
@@ -46,7 +53,7 @@ class Form_Widget extends Qwin_Widget_Abstract
      * @var array
      */
     protected $_autoload = array(
-        'lang' => true,
+        'lang' => false,
     );
 
     /**
@@ -352,6 +359,12 @@ class Form_Widget extends Qwin_Widget_Abstract
         if (isset($private['_resource'])) {
             // 转换资源
             $resource = $this->filterResource($private['_resource']);
+            if ($this->_options['addSelect']) {
+                $this->_options['select']['name'] = $this->_lang[$this->_options['select']['name']];
+                $resource = array(
+                    $this->_options['select']
+                ) + $resource;
+            }
             foreach($resource as $options) {
                 if(false == $isUsed && $value == $options['value']) {
                     $isUsed = true;

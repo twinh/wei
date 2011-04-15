@@ -39,6 +39,7 @@
 .qw-filter h3 a.qw-filter-cancel {
     font-size: 12px;
     font-weight: normal;
+    text-decoration: underline;
 }
 .qw-filter a.ui-state-default {
     font-weight: normal;

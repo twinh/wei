@@ -4,36 +4,41 @@
 /* Grid for qwin 2010-01-30
 ----------------------------------*/
 .ui-jqgrid-title a{
-	font-size: 14px;
+    font-size: 14px;
 }
 .ui-jqgrid{
-	font-size: 12px;
-	border-bottom: 0;
-	border-top: 0;
+    font-size: 12px;
+    border-bottom: 0;
+    border-top: 0;
     border: none;
-	background: none;
+    background: none;
 }
 .ui-jqgrid tr.jqgrow td{
-	height: 30px;
+    height: 30px;
 }
 .ui-jqgrid .ui-jqgrid-htable th{
-	height: 25px;
-	font-size: 12px;
+    height: 25px;
+    font-size: 12px;
 }
 /* 2010-05-21 */
 .ui-jqgrid tr.jqgrow td a.ui-jqgrid-icon{
-	cursor:pointer;
-	float:left;
-	margin:2px;
-	width:19px;
-	height:19px;
+    cursor:pointer;
+    float:left;
+    margin:2px;
+    width:19px;
+    height:19px;
 }
 .ui-jqgrid tr.jqgrow td a.ui-jqgrid-icon span{
-	display:block;
+    display:block;
     margin:1px
 }
 .ui-jqgrid tr.ui-row-ltr td{
     border-right: none;
 }
 /* 2010-01-04 */
-.ui-jqgrid { -moz-border-radius: 0px; -webkit-border-radius: 0px; border-radius: 0px; overflow: hidden; }
+.ui-jqgrid {
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    overflow: hidden;
+}
