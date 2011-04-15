@@ -31,10 +31,26 @@ class Smarty_Widget extends Qwin_Widget_Abstract
      */
     protected $_smarty;
 
-    public function  __construct(array $options = array()) {
+    /**
+     * 默认选项
+     * @var array
+     * @todo 更多选项
+     */
+    protected $_defaults = array(
+        'compile_dir' => null,
+    );
+
+    public function __construct(array $options = array())
+    {
         parent::__construct($options);
+        
         require_once $this->_rootPath . 'libs/Smarty.class.php';
         $this->_smarty = Qwin::call('Smarty');
+
+        // 设定选项
+        foreach ($this->_options as $key => $value) {
+            $this->_smarty->$key = $value;
+        }
     }
 
     /**

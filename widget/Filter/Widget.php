@@ -47,7 +47,7 @@ class Filter_Widget extends Qwin_Widget_Abstract
         /* @var $request Qwin_Request */
         $request = Qwin::call('-request');
         if (!$request->get('filter')) {
-            //return false;
+            return false;
         }
         
         $lang = $this->_lang;
@@ -80,10 +80,16 @@ class Filter_Widget extends Qwin_Widget_Abstract
                 $data[$name] = $meta['field']->getResource($name);
 
                 // "全部"的选项
-                $data[$name] = array(array(
-                    'name' => $lang['LBL_ALL'],
-                    'value' => null,
-                )) + $data[$name];
+                $data[$name] = array(
+                    null => array(
+                        'name' => $lang['LBL_ALL'],
+                        'value' => null,
+                    ),
+                    'NULL' => array(
+                        'name' => $lang['LBL_NOT_FILLED'],
+                        'value' => 'NULL',
+                    ),
+                ) + $data[$name];
 
                 $urlData = $searchData;
                 if (isset($urlData[$name])) {

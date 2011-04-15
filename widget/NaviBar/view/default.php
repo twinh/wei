@@ -30,7 +30,6 @@ jQuery(function($){
         function(){
             $(this).addClass('ui-state-hover');
             navbarUl = $(this).find('ul');
-            //alert(navbarUl.css('display'));
             if ('' != $.trim(navbarUl.html()) && 'none' == navbarUl.css('display')) {
                 navbarUl.show(300);
             }
@@ -50,7 +49,7 @@ jQuery(function($){
         foreach ($navigationData as $menu) :
             if (null == $menu['category_id']) :
         ?><li class="ui-widget ui-state-default ui-corner-top"> <a href="<?php echo $menu['url'] ?>" target="<?php echo $menu['target'] ?>"><?php echo $menu['title'] ?></a>
-        <ul>
+        <ul class="ui-state-hover ui-corner-bottom">
             <?php
             foreach ($navigationData as $subMenu) :
                 if ($menu['id'] == $subMenu['category_id']) :

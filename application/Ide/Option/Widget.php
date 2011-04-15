@@ -71,18 +71,18 @@ class Ide_Option_Widget extends Qwin_Widget_Abstract
             'color' => null,
             'style' => null,
         ),
-        1 => array(
-            'value' => 'NULL',
-            'name'  => 'LBL_PLEASE_SELECT',
-            'color' => null,
-            'style' => null,
-        ),
-        2 => array(
-            'value' => null,
-            'name'  => 'LBL_NOT_FILLED',
-            'color' => null,
-            'style' => null,
-        ),
+//        1 => array(
+//            'value' => 'NULL',
+//            'name'  => 'LBL_PLEASE_SELECT',
+//            'color' => null,
+//            'style' => null,
+//        ),
+//        2 => array(
+//            'value' => null,
+//            'name'  => 'LBL_NOT_FILLED',
+//            'color' => null,
+//            'style' => null,
+//        ),
     );
 
     public function  __construct(array $options = null)
@@ -123,7 +123,7 @@ class Ide_Option_Widget extends Qwin_Widget_Abstract
         $data = $this->_data[$lang][$name];
 
         // 附加选项
-        if (null !== $addition) {
+        /*if (null !== $addition) {
             if (!is_array($addition) && isset($this->_defaultAddition[$addition])) {
                 $data = array(
                     $this->_defaultAddition[$addition]['value'] => $this->_defaultAddition[$addition]
@@ -131,7 +131,7 @@ class Ide_Option_Widget extends Qwin_Widget_Abstract
             } elseif (is_array($addition)) {
                 array_unshift($data, $addition);
             }
-        }
+        }*/
 
         return $data;
     }
