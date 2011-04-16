@@ -603,52 +603,6 @@ div.ui-box-tab .ui-tabs-panel{
     font-size: 12px;
 }
 
-.ui-jqgrid-top a.ui-state-default{
-    float: left;
-    -moz-border-radius-bottomleft: 0;
-    -webkit-border-bottom-left-radius: 0;
-    border-bottom-left-radius: 0;
-    -moz-border-radius-bottomright: 0;
-    -webkit-border-bottom-right-radius: 0;
-    border-bottom-right-radius: 0;
-    border-bottom: none;
-    /*margin-bottom: -1px;
-    z-index: 9999;*/
-}
 .ui-jqgrid-top {
     margin-left: 30px;
-}
-
-.ui-listtab{
-    border-left :0;
-    border-right: 0;
-    border-bottom: 0;
-    z-index: 99999;
-}
-.ui-listtab ul.ui-listtab-parent{
-    border: 0;
-    white-space: nowrap;
-/*    overflow: hidden;*/
-    width: 800px;
-    height: 26px;
-    background: none;
-}
-.ui-listtab ul.ui-widget-content{
-    float: left;
-}
-.ui-listtab ul li {
-    width: auto;
-/*    float: left;*/
-    border-bottom: 0;
-    margin: 0;
-    display: inline-table;
-/*    margin-bottom: -1px;*/
-}
-.ui-listtab ul li ul {
-    display: none;
-    z-index: 9999;
-}
-.ui-listtab ul li ul li {
-    clear: both;
-    font-weight: normal
 }

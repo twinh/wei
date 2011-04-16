@@ -44,6 +44,7 @@ return array(
     'ACT_PREV' => '上一记录',
     'ACT_NEXT' => '下一记录',
     'ACT_FILTER' => '筛选',
+    'ACT_MORE' => '更多',
     'LBL_DEFAULT' => '默认',
     'LBL_OPERATION' => '操作',
     'LBL_SWITCH_DISPLAY_MODEL' => '切换显示模式',
