@@ -24,20 +24,13 @@
  */
 
 class Forward_Widget extends Qwin_Widget_Abstract
-{
-    /**
-     * 选项
-     * @var array
-     */
-    protected $_defaults = array(
-        'lang'      => true,
-    );
-    
+{   
     /**
      * 默认选项
      * @var array
      */
     protected $_defaults = array(
+        'lang'      => true,
         'module'    => null,
         'action'    => 'view',
         'id'        => null,
@@ -95,7 +88,7 @@ class Forward_Widget extends Qwin_Widget_Abstract
         $dbData = $query
             ->select('id, ' . $key)
             ->where($key . ' ' . $oper . ' ?', $dbData[$key])
-            ->orderBy('date_modified ASC')
+            ->orderBy($key . ' ASC')
             ->limit(1)
             ->fetchOne();
 
