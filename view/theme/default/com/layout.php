@@ -8,7 +8,7 @@ echo $this->getPackerSign();
 $member = Qwin::call('-session')->get('member');
 $nickname = isset($member['contact']) ? $member['contact']['nickname'] : $member['username'];
 $minify->addArray(array(
-    QWIN . 'view/style/' . $this->_style . '/jquery.ui.theme.css',
+    $style->getCssFile(),
     QWIN . 'view/theme/default/com/style/style.css',
     QWIN . 'image/iconx.css',
     $jQuery->loadCore(false),

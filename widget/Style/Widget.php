@@ -25,8 +25,48 @@
 
 class Style_Widget extends Qwin_Widget_Abstract
 {
-    public function render($options)
+    protected $_name = null;
+
+    /**
+     * 获取风格名称,风格为jQuery的主题
+     *
+     * @return string
+     */
+    public function getName()
     {
-        
+        if (isset($this->_name)) {
+            return $this->_name;
+        }
+        $config = Qwin::config();
+
+        $session = Qwin::call('-session');
+        // 按优先级排列语言的数组
+        $styleList = array(
+            Qwin::call('-request')->get('style'),
+            $session['style'],
+            $config['style'],
+        );
+        foreach ($styleList as $val) {
+            if (null != $val) {
+                $style = $val;
+                break;
+            }
+        }
+
+        if (!is_dir($this->_rootPath . 'source/' . $style)) {
+            $style = $config['style'];
+        }
+        $session['style'] = $style;
+        return $this->_name = $style;
+    }
+
+    /**
+     * 获取风格样式文件
+     *
+     * @return string
+     */
+    public function getCssFile()
+    {
+        return $this->_rootPath . 'source/' . $this->getName() . '/jquery.ui.theme.css';
     }
 }
