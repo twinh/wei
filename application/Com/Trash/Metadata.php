@@ -127,7 +127,7 @@ class Com_Trash_Metadata extends Com_Metadata
         $module = $this->getModule();
         $operation = array();
         $operation['restore'] = array(
-            'url' => 'javascript:if(confirm(QWIN_PATH.Lang.MSG_CONFIRM_TO_RESTORE)){window.location=\'' . $url->url(array('module' => $module, 'action' => 'Restore', $primaryKey => $dataCopy[$primaryKey])) . '\';}',
+            'url' => 'javascript:if(confirm(Qwin.Lang.MSG_CONFIRM_TO_RESTORE)){window.location=\'' . $url->url($module->toUrl(), 'restore', array($primaryKey => $dataCopy[$primaryKey])) . '\';}',
             'title' => $lang->t('ACT_RESTORE'),
             'icon' => 'ui-icon-arrowreturnthick-1-w',
         );
