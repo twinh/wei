@@ -68,9 +68,10 @@ class Com_Member_My_Controller extends Com_Controller
     public function actionStyle()
     {
         if (!$this->_request->isPost()) {
-            $model = Com_Model::getByModule($this->_module);
-            $styles = $model->getStyles();
-            $path = $model->getPath();
+            $style = Qwin::call('-widget')->get('Style');
+
+            $styles = $style->getStyles();
+            $path = $style->getSourcePath();
             $meta = $this->getMetadata();
             
             $this->getView()->assign(get_defined_vars());

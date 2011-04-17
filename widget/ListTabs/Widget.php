@@ -29,31 +29,14 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
         'max' => 4,
     );
 
-    /**
-     * 生成列表选项卡
-     *
-     * @param array $param      参数
-     *
-     *      -- module           模块标识
-     *
-     *      -- url              当前选项卡查询组成的请求字符串
-     *
-     * @param <type> $view      视图对象
-     * @return array
-     * @todo Asc和Url的选择
-     * @todo ListTab, FormLink等存在重复的情况,应考虑如何合并
-     */
-    public function render($view)
+    public function getTabs($module, $getUrl)
     {
-        $this->_options = $this->_defaults;
-        // 获取应用结构配置
-        $module = $view['module'];
         $url = Qwin::call('-url');
-        $lang = Qwin::call('-lang');
+        $lang = $this->_lang;
         $tabs = array();
 
         $moduleId = $module->toId();
-        parse_str(ltrim($view['options']['url'], '?'), $get);
+        parse_str(ltrim($getUrl, '?'), $get);
         if (isset($get['json'])) {
             unset($get['json']);
         }
@@ -125,46 +108,58 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
                 'class' => 'action-filter',
             );
         }
+        return $tabs;
+    }
 
-        // 如果当前行为存在选项卡视图,加载该视图,否则直接输出默认选项卡内容
-        $class = $module->toClass() . '_ListTabWidget';
-        if(class_exists($class)) {
-            $object = new $class;
-            $file = $view->decodePath('<root>com/widget-<action>-tab<suffix>');
-            return $object->render(array(
-                'tabs' => $tabs,
-                'file' => $file,
-                'object' => $this,
-            ), $view);
-        } else {
-            $moreTab = $subTabs = array();
-            if ($this->_options['max'] < count($tabs)) {
-                $subTabs = array_splice($tabs, $this->_options['max']);
-                $tabs = array_splice($tabs, 0, $this->_options['max']);
-                $moreTab = array(
-                    'url' => 'javascript:;',
-                    'title' => $lang->t('ACT_MORE'),
-                    'icon' => 'ui-icon-triangle-1-e',
-                    'target' => null,
-                    'id' => 'action-' . $moduleId . '-more',
-                    'class' => 'action-more',
-                );
-            }
+    /**
+     * 生成列表选项卡
+     *
+     * @param array $param      参数
+     *
+     *      -- module           模块标识
+     *
+     *      -- url              当前选项卡查询组成的请求字符串
+     *
+     * @param Com_View $view      视图对象
+     * @return array
+     * @todo ListTab, FormLink等存在重复的情况,应考虑如何合并
+     */
+    public function render($view)
+    {
+        $tabs = $this->getTabs($view['module'], $view['options']['url']);
+        return $this->renderTabs($tabs);
+    }
 
-            /* @var $minify Minify_Widget */
-            $minify = $this->_widget->get('Minify');
-            $minify->addArray(array(
-                $this->_rootPath . 'view/style.css',
-                $this->_rootPath . 'view/js.js',
-            ));
-
-            /* @var $smarty Smarty */
-            $smarty = $this->_widget->get('Smarty')->getObject();
-            $smarty->assign('tabs', $tabs);
-            $smarty->assign('moreTab', $moreTab);
-            $smarty->assign('subTabs', $subTabs);
-            $smarty->assign('lang', $lang);
-            $smarty->display($this->_rootPath . 'view/default.tpl');
+    public function renderTabs($tabs)
+    {
+        $this->_options = $this->_defaults;
+        $moreTab = $subTabs = array();
+        if ($this->_options['max'] < count($tabs)) {
+            $subTabs = array_splice($tabs, $this->_options['max']);
+            $tabs = array_splice($tabs, 0, $this->_options['max']);
+            $moreTab = array(
+                'url' => 'javascript:;',
+                'title' => $this->_lang->t('ACT_MORE'),
+                'icon' => 'ui-icon-triangle-1-e',
+                'target' => null,
+                'id' => null,
+                'class' => 'action-more',
+            );
         }
+
+        /* @var $minify Minify_Widget */
+        $minify = $this->_widget->get('Minify');
+        $minify->addArray(array(
+            $this->_rootPath . 'view/style.css',
+            $this->_rootPath . 'view/js.js',
+        ));
+
+        /* @var $smarty Smarty */
+        $smarty = $this->_widget->get('Smarty')->getObject();
+        $smarty->assign('tabs', $tabs);
+        $smarty->assign('moreTab', $moreTab);
+        $smarty->assign('subTabs', $subTabs);
+        $smarty->assign('lang', $this->_lang);
+        $smarty->display($this->_rootPath . 'view/default.tpl');
     }
 }
