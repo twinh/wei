@@ -53,39 +53,6 @@ class Com_View extends Qwin_Application_View
     );
 
     /**
-     * 获取风格,风格为jQuery的主题
-     *
-     * @return string
-     */
-    public function getStyle()
-    {
-        if (isset($this->_style)) {
-            return $this->_style;
-        }
-        $config = Qwin::config();
-
-        $session = Qwin::call('-session');
-        // 按优先级排列语言的数组
-        $styleList = array(
-            Qwin::call('-request')->get('style'),
-            $session['style'],
-            $config['style'],
-        );
-        foreach ($styleList as $val) {
-            if (null != $val) {
-                $style = $val;
-                break;
-            }
-        }
-
-        if (!is_dir($config['resource'] . '/view/style/' . $style)) {
-            $style = $config['style'];
-        }
-        $session['style'] = $style;
-        return $this->_style = $style;
-    }
-
-    /**
      * 数据预处理,设置变量,路径标签,视图布局,元素等
      *
      * @return Com_View 当前对象
@@ -95,6 +62,7 @@ class Com_View extends Qwin_Application_View
         // 获取配置
         $config = Qwin::config();
         $widget = Qwin::call('-widget');
+        $style = $widget->get('Style');
 
         // 部分视图常用变量
         $this->assign(array(
@@ -105,13 +73,14 @@ class Com_View extends Qwin_Application_View
             'module'    => Qwin::call('-module'),
             'action'    => $config['action'],
             'theme'     => $config['theme'],
+            'style'     => $style,
         ));
 
         // 设置标签
         $this->setTag(array(
             'root'              => $config['resource'] . 'view/theme/' . $config['theme'] . '/',
             'suffix'            => '.php',
-            'style'             => $this->getStyle(),
+            'style'             => $style->getName(),
             'module'            => $this->module,
             'action'            => $config['action'],
             'rootModule'        => Qwin::call('Qwin_Application_Module')->getRoot($config['module']),
