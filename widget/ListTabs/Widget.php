@@ -119,7 +119,7 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
             $tabs['filter'] = array(
                 'url' => $url->url($module->toUrl(), 'index', array('filter' => '1')),
                 'title' => $lang->t('ACT_FILTER'),
-                'icon' => 'ui-icon-note',
+                'icon' => 'ui-icon-calculator',
                 'target' => null,
                 'id' => 'action-' . $moduleId . '-filter',
                 'class' => 'action-filter',

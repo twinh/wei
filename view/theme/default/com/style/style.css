@@ -48,24 +48,23 @@ a{
 .ui-header{
     clear: both;
 }
-div.ui-header-logo{
+div.ui-header-logo {
     width: 200px;
     font-weight: bold;
     font-size: 32px;
     background: none;
-    height: 60px;
     border: none;
     float: left;
     overflow: hidden;
 }
-.ui-header-logo a img{
+.ui-header-logo a img {
     vertical-align: middle;
-    margin: 18px 0 0 12px;
+    margin: 12px 0 0 12px;
     height: 40px;
 }
-.ui-header-shortcut{
+.ui-header-shortcut {
     float: right;
-    margin: 0 0 20px 6px;
+    margin: 0 0 0 6px;
 }
 .ui-header .ui-header-shortcut a{
     padding: 6px 12px;
@@ -87,6 +86,7 @@ div.ui-header-logo{
     border-left :0;
     border-right: 0;
     border-bottom: 0;
+    margin-top: 7px;
 }
 .ui-nav-bar ul.ui-navbar-parent{
     border: 0;
@@ -132,7 +132,7 @@ div.ui-header-logo{
 }
 
 #ui-header{
-    height: 60px;
+    height: 50px;
 }
 #ui-header-left{
     vertical-align: top;

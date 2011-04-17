@@ -32,6 +32,23 @@ class Com_Member_Menu_Model extends Com_Model
             ->select('id, category_id, title, target, url')
             ->orderBy('order ASC')
             ->fetchArray();
-        Qwin_Util_File::writeArray(Qwin::config('root') . 'cache/menu.php', $data);
+        /**
+         * 菜单数据，键名表示菜单所在级别
+         */
+        $menus = array(
+            0 => array(),
+            1 => array(),
+        );
+        foreach ($data as $key => $row) {
+            if (null == $row['category_id']) {
+                $menus[0][$row['id']] = $row;
+            }
+            foreach ($data as $subRow) {
+                if ($row['id'] == $subRow['category_id']) {
+                    $menus[1][$row['id']][] = $subRow;
+                }
+            }
+        }
+        Qwin_Util_File::writeArray(Qwin::config('root') . 'cache/menu.php', $menus);
     }
 }
