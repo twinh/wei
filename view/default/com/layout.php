@@ -9,7 +9,7 @@ $member = Qwin::call('-session')->get('member');
 $nickname = isset($member['contact']) ? $member['contact']['nickname'] : $member['username'];
 $minify->addArray(array(
     $style->getCssFile(),
-    QWIN . 'view/theme/default/com/style/style.css',
+    $this->getTag('root') . 'com/style/style.css',
     QWIN . 'image/iconx.css',
     $jQuery->loadCore(false),
     $jQuery->loadUi('core', false),
@@ -18,11 +18,11 @@ $minify->addArray(array(
     $jQuery->loadEffect('core', false),
     $jQuery->loadPlugin('qui', null, false),
     QWIN . 'js/qwin.js',
-    QWIN . 'view/theme/default/com/script/style.js',
+    $this->getTag('root') . 'com/script/style.js',
 ));
 ?>
 <!--[if IE 6]>
-<link rel="stylesheet" type="text/css" media="all" href="<?php echo QWIN ?>view/theme/default/com/style/style-ie6.css" />
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->getTag('root') ?>com/style/style-ie6.css" />
 <![endif]-->
 <script type="text/javascript">
     jQuery.noConflict();
@@ -37,7 +37,7 @@ $minify->addArray(array(
         <td id="ui-header-left" colspan="2">
             <div class="ui-header-logo ui-widget-content">
                 <a href="?">
-                    <img src="<?php echo QWIN ?>view/theme/default/com/image/logo.png" alt="logo" />
+                    <img src="<?php echo $this->getTag('root') ?>com/image/logo.png" alt="logo" />
                 </a>
             </div>
         </td>
