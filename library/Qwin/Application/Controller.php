@@ -57,7 +57,12 @@ abstract class Qwin_Application_Controller
      */
     public static function getByModule($module, $instanced = true, $param = null)
     {
-        $class = strtr($module, '/', '_') . '_Controller';
+        if ($module instanceof Qwin_Module) {
+            $class = $module->toClass();
+        } else {
+            $class = Qwin_Module::instance($module)->toClass();
+        }
+        $class .= '_Controller';
         return $instanced ? Qwin::call($class, $param) : $class;
     }
 
