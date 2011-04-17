@@ -703,6 +703,10 @@ class Com_Metadata extends Qwin_Application_Metadata
                 ),
                 'form' => array(
                     '_type' => 'custom',
+                    '_resource' => array(
+                        0 => 0,
+                        1 => 1,
+                    ),
                 ),
                 'attr' => array(
                     'isLink' => 0,

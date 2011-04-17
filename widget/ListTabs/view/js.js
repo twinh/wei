@@ -23,17 +23,17 @@
  */
 jQuery(function($){
     var ul, icon;
-    $('#qw-listtabs-more-link').button({
+    $('.qw-listtabs-more-link').button({
         icons: {
             secondary: "ui-icon-triangle-1-e"
         }
     });
 
     // 防止当鼠标移出链接时，链接变默认颜色
-    $('#qw-listtabs ul li.qw-listtabs-more li').hover(function(){
-        $('#qw-listtabs-more-link').addClass('ui-state-hover');
+    $('.qw-listtabs ul li.qw-listtabs-more li').hover(function(){
+        $('.qw-listtabs-more-link').addClass('ui-state-hover');
     });
-    $('#qw-listtabs ul li.qw-listtabs-more').hover(
+    $('.qw-listtabs ul li.qw-listtabs-more').hover(
         function(){
             $(this).addClass('ui-state-hover');
             icon = $(this).find('a span.ui-icon');

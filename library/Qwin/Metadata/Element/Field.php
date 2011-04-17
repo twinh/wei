@@ -346,6 +346,8 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Driver
             } else {
                 if (isset($this[$field]['form']['_resourceGetter'])) {
                     $resource = Qwin::call('-flow')->callOne($this[$field]['form']['_resourceGetter']);
+                } else {
+                    return array();
                 }
 
                 // 认定为选项模块的选项
