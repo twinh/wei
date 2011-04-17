@@ -1,8 +1,8 @@
 <?php
 /**
- * Hook
+ * ListTab
  *
- * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,26 +16,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ * @package     QWIN_PATH
+ * @subpackage  
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-03-27 02:22:36
+ * @since       2011-01-04 19:57:49
  */
 
-class ListTabs_Hook extends Qwin_Hook_Abstract
+class Com_Email_Widget_ListTabs extends Qwin_Widget_Abstract
 {
-    public function hookViewListTop($view)
+    public function render($options)
     {
-        $module = $view['module'];
-        $widget = Qwin::call('-widget');
-
-        // 如果当前行为存在选项卡视图,加载该视图,否则直接输出默认选项卡内容
-        $class = $module->toClass() . '_Widget_ListTabs';
-        if(class_exists($class)) {
-            return $widget->getByClass($class)->render($view);
-        } else {
-            return $widget->get('ListTabs')->render($view);
-        }
+        $listTabs = Qwin::call('-widget')->get('ListTabs');
+        $tabs = $listTabs->getTabs($options['module'], $options['options']['url']);
+        $tabs = array('post' => array(
+            'url' => Qwin::call('-url')->url($options['module']->toUrl(), 'post'),
+            'title' => $this->_lang->t('ACT_POST'),
+            'icon' => 'ui-icon-script',
+            'target' => null,
+            'id' => null,
+            'class' => null,
+        )) + $tabs;
+        $listTabs->renderTabs($tabs);
     }
 }

@@ -25,43 +25,4 @@
 
 class Com_Member_My_Model
 {
-    /**
-     * 风格目录
-     * @var string
-     */
-    protected $_stylePath;
-
-    public function __construct()
-    {
-        $this->_stylePath = Qwin::config('resource') . 'view/style';
-    }
-
-    public function getStyles($path = null)
-    {
-        if (!$path) {
-            $path = $this->_stylePath;
-        }
-        $files = scandir($path);
-        $styles = array();
-
-        // 如果存在配置文件,表示有效风格
-        foreach ($files as $file) {
-            $styleFile = $path . '/' . $file . '/config.php';
-            if (!is_file($styleFile)) {
-                continue;
-            }
-            $styles[] = (require $styleFile) + array(
-                'path' => $file
-            );
-        }
-
-        // 重置风格路径
-        $this->_stylePath = $path;
-        return $styles;
-    }
-
-    public function getPath()
-    {
-        return $this->_stylePath;
-    }
 }

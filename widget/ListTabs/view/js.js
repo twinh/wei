@@ -40,13 +40,13 @@ jQuery(function($){
             ul = $(this).find('ul');
             if ('' != $.trim(ul.html()) && 'none' == ul.css('display')) {
                 icon.addClass('ui-icon-triangle-1-s');
-                ul.slideDown(300);
+                ul.slideDown(200);
             }
         }, function(){
             $(this).removeClass('ui-state-hover');
             if ('none' != ul.css('display')) {
                 icon.removeClass('ui-icon-triangle-1-s');
-                ul.slideUp(300);
+                ul.slideUp(200);
             }
         }
     );
