@@ -78,7 +78,7 @@ class Com_View extends Qwin_Application_View
 
         // 设置标签
         $this->setTag(array(
-            'root'              => $config['resource'] . 'view/theme/' . $config['theme'] . '/',
+            'root'              => $config['resource'] . 'view/' . $config['theme'] . '/',
             'suffix'            => '.php',
             'style'             => $style->getName(),
             'module'            => $this->module,
