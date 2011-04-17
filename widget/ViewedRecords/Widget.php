@@ -29,7 +29,7 @@ class ViewedRecords_Widget extends Qwin_Widget_Abstract
      * 自动加载配置
      * @var array
      */
-    protected $_options = array(
+    protected $_defaults = array(
         'lang' => true,
     );
 

@@ -60,7 +60,8 @@ class Smarty_Widget extends Qwin_Widget_Abstract
      * @param array $arguments 参数数组
      * @return mixed
      */
-    public function  __call($name, $arguments) {
+    public function  __call($name, $arguments)
+    {
         return call_user_func_array(array($this->_smarty, $name), $arguments);
     }
 

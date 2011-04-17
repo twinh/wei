@@ -31,7 +31,7 @@ class Com_Widget_Edit extends Qwin_Widget_Abstract
      * 服务的基本配置
      * @var array
      */
-    protected $_options = array(
+    protected $_defaults = array(
         'module'    => null,
         'data'      => array(),
         'display'   => true,

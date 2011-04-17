@@ -25,25 +25,11 @@
 
 class Com_Trash_RestoreWidget extends Qwin_Widget_Abstract
 {
-    /**
-     * 服务的基本配置
-     * @var array
-     */
+    protected $_defaults = array(
+        
+    );
     protected $_setting = array(
-        'asc' => array(
-            'package' => null,
-            'module' => null,
-            'controller' => null,
-            'action' => null,
-        ),
-        'data' => array(
-            
-        ),
-        'view' => array(
-            'class' => '',
-            'display' => true,
-        ),
-        'this' => null,
+        'module'
     );
     
     public function process(array $setting = null)

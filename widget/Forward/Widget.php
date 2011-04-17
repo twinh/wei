@@ -29,7 +29,7 @@ class Forward_Widget extends Qwin_Widget_Abstract
      * 选项
      * @var array
      */
-    protected $_options = array(
+    protected $_defaults = array(
         'lang'      => true,
     );
     

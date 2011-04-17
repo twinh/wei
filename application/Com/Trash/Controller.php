@@ -41,24 +41,9 @@ class Com_Trash_Controller extends Com_ActionController
      */
     public function actionRestore()
     {
-        // Com_Trash_RestoreService
-        // actionIndex
-        // processIndex
-        // serviceIndex
-        // executeIndex
-        //
-        Com_Metadata::getByModule('com/trash')->executeRestore(array(
-            'id'    => array(),
-            'where' => array(),
-            'view'  => array(),
-        ));
-        $service = new Com_Trash_Service_Restore();
-        $service->process(array(
-            'asc' => $this->_asc,
-            'data' => array(
-                'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_asc),
-            ),
-            'this' => $this,
+        return Com_Widget::getByModule('com/trash', 'restore')->execute(array(
+            'module'    => $this->_module,
+            'id'        => $this->_request->get('id'),
         ));
     }
 
@@ -67,14 +52,10 @@ class Com_Trash_Controller extends Com_ActionController
      */
     public function actionDelete()
     {
-        $service = new Com_Trash_Service_Delete();
-        $service->process(array(
-            'asc' => $this->_asc,
-            'data' => array(
-                'primaryKeyValue' => $this->request->getPrimaryKeyValue($this->_asc),
-                'type' => $this->request->get('type'),
-            ),
-            'this' => $this,
+        return Com_Widget::getByModule('com/trash', 'delete')->execute(array(
+            'module'    => $this->_module,
+            'id'        => $this->_request->get('id'),
+            'type'      => $this->_request->get('type'),
         ));
     }
 }
