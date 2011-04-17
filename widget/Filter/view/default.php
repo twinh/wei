@@ -23,44 +23,6 @@
  * @since       2011-04-13 04:16:38
  */
 ?>
-<style type="text/css">
-.qw-filter{
-    margin: 0 15px;
-}
-.qw-filter h3{
-    height: 30px;
-}
-.qw-filter h3 a.qw-filter-return {
-    float: right;
-    display: block;
-    width: 20px;
-    height: 20px;
-}
-.qw-filter h3 a.qw-filter-cancel {
-    font-size: 12px;
-    font-weight: normal;
-    text-decoration: underline;
-}
-.qw-filter a.ui-state-default {
-    font-weight: normal;
-    padding: 2px;
-}
-
-.qw-filter .qw-filter-content {
-    line-height: 35px;
-    clear: both;
-}
-.qw-filter .qw-filter-content a {
-    font-weight: normal;
-    text-decoration: underline;
-}
-.qw-filter .qw-filter-content a.ui-state-default {
-    text-decoration: none;
-}
-.qw-filter .qw-filter-content a.qw-filter-seleted {
-    cursor: text;
-}
-</style>
 <div class="qw-c"></div>
 <div class="ui-widget qw-filter">
     <div class="ui-widget-content">

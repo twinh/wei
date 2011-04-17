@@ -166,4 +166,9 @@ class Qwin_Application_Module
         }
         return $roots;
     }
+
+    public function getRootPaths()
+    {
+        return $this->_options['rootPaths'];
+    }
 }

@@ -32,7 +32,8 @@ class Com_Widget extends Qwin_Widget
         if ($module instanceof Qwin_Module) {
             $class = $module->toClass();
         } else {
-            $class = strtr($module, '/', '_');
+            $class = preg_split('/([^A-Za-z0-9])/', $module);
+            $class = implode('_', array_map('ucfirst', $class));
         }
         if ($name) {
             $class = $class . '_Widget_' . $name;

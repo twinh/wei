@@ -389,6 +389,9 @@ class Form_Widget extends Qwin_Widget_Abstract
      */
     public function filterResource($resource, $options = null)
     {
+        if (empty($resource)) {
+            return $resource;
+        }
         // 认定为选项模块的选项
         $element = $resource[key($resource)];
         if (is_array($element)) {
@@ -417,9 +420,9 @@ class Form_Widget extends Qwin_Widget_Abstract
      */
     public function filterOptionStyle($options)
     {
-        null != $options['color'] && $options['style'] = 'color:' . $options['color'] . ';' . $options['style'];
-        null != $options['style'] && $options['style'] = ' style="' . $options['style'] . '"';
-        return $options['style'];
+        isset($options['color']) && $options['style'] = 'color:' . $options['color'] . ';' . $options['style'];
+        isset($options['style']) && $options['style'] = ' style="' . $options['style'] . '"';
+        return isset($options['style']) ? $options['style'] : null;
     }
     
     /**
