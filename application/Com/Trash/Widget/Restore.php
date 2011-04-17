@@ -23,33 +23,47 @@
  * @since       2011-01-10 15:40:44
  */
 
-class Com_Trash_RestoreWidget extends Qwin_Widget_Abstract
+class Com_Trash_Widget_Restore extends Qwin_Widget_Abstract
 {
+    /**
+     * 默认选项
+     * @var array
+     */
     protected $_defaults = array(
-        
+        'module'    => null,
+        'id'        => null,
+        'display'   => true,
+        'url'       => null,
     );
-    protected $_setting = array(
-        'module'
-    );
-    
-    public function process(array $setting = null)
-    {
-        // 初始配置
-        $setting = $this->_multiArrayMerge($this->_setting, $setting);
-        
-        // 通过父类,加载语言,元数据,模型等
-        parent::process($setting['asc']);
 
-        $meta = $this->_meta;
-        $metaHelper = $this->metaHelper;
-        $lang = $this->_lang;
-        $primaryKey = explode(',', $setting['data']['primaryKeyValue']);
+    public function execute($options)
+    {
+        $options = $this->_options = (array)$options + $this->_options;
+
+        /* @var $meta Com_Metadata */
+        $meta = Com_Metadata::getByModule($options['module']);
+        $idValue = explode(',', $options['id']);
+        $query = $meta->getQuery(null, array(
+            'type' => 'db',
+        ));
 
         // 获取指定的回收站对象
-        $query = $metaHelper->getQueryByAsc($this->_asc, 'db');
-        $objectList = $query
-            ->whereIn($meta['db']['primaryKey'], $primaryKey)
+        $records = $query
+            ->whereIn($meta['db']['primaryKey'], $idValue)
             ->execute();
+
+        // 记录不存在
+        if (0 == $records->count()) {
+            $result = array(
+                'result' => false,
+                'message' => $this->_lang->t('MSG_NO_RECORD'),
+            );
+            if ($options['display']) {
+                return Qwin::call('-view')->alert($result['message']);
+            } else {
+                return $result;
+            }
+        }
 
         // 统计操作结果
         /*$count = array(
@@ -58,24 +72,20 @@ class Com_Trash_RestoreWidget extends Qwin_Widget_Abstract
             2 => 0,
         );*/
         // 循环还原各记录
-        foreach ($objectList as $obejct) {
+        foreach ($records as $record) {
             // 获取源记录
-            $type = explode('.', $obejct['type']);
-            $asc = array(
-                'package' => $type[0],
-                'module' => $type[1],
-                'controller' => $type[2],
-            );
-            $meta = $metaHelper->getMetadataByAsc($asc);
-            $query = $metaHelper->getQueryByAsc($asc);
-            $result = $query
-                ->where($meta['db']['primaryKey'] . ' = ?', $obejct['type_id'])
+            /* @var $moduleMeta Com_Metadata */
+            $moduleMeta = Com_Metadata::getByModule($record['module']);
+            $moduleQuery = $moduleMeta->getQuery();
+            $result = $moduleQuery
+                ->select('is_deleted')
+                ->where($meta['db']['primaryKey'] . ' = ?', $record['module_id'])
                 ->fetchOne();
             
             // 源记录不存在
             if (false == $result) {
                 // 删除当前记录
-                $obejct->delete();
+                $record->delete();
                 continue;
             }
 
@@ -84,20 +94,18 @@ class Com_Trash_RestoreWidget extends Qwin_Widget_Abstract
             $result->save();
 
             // 删除当前记录
-            $obejct->delete();
+            $record->delete();
         }
         // TODO log 总共查询 11 条记录,找到10 条记录,其中找到 8 条源纪录,7 条删除状态正常,1条状态异常,已还原7条
 
-        $url = $this->url->url($this->_asc, array('action' => 'Index'));
-        $return = array(
-            'result' => true,
-            'message' => $lang->t('MSG_OPERATE_SUCCESSFULLY'),
-            'url' => $url,
-        );
-        if ($setting['view']['display']) {
-            return $this->view->redirect($return['message'], $url);
-        } else {
-            return $return;
+        // 展示视图
+        if ($options['display']) {
+            !$options['url'] && $options['url'] = Qwin::call('-url')->url('com/trash');
+            return Qwin::call('-view')->success(Qwin::call('-lang')->t('MSG_SUCCEEDED'), $options['url']);
         }
+        return array(
+            'result' => true,
+            'data' => get_defined_vars(),
+        );
     }
 }

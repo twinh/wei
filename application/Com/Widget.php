@@ -36,7 +36,7 @@ class Com_Widget extends Qwin_Widget
             $class = implode('_', array_map('ucfirst', $class));
         }
         if ($name) {
-            $class = $class . '_Widget_' . $name;
+            $class = $class . '_Widget_' . ucfirst($name);
         } else {
             $class = $class . '_Widget';
         }

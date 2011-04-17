@@ -42,7 +42,7 @@ jQuery(function($){
             keyList[i] = rowData[primaryKey];
         }
         var addition = {};
-        addition['action'] = 'Restore';
+        addition['action'] = 'restore';
         addition[primaryKey] = keyList.join(',');
         if (confirm(Qwin.Lang.MSG_CONFIRM_TO_RESTORE)) {
             window.location.href = Qwin.url.createUrl(Qwin.get, addition);
@@ -52,7 +52,7 @@ jQuery(function($){
 	// 清空
     $('#action-empty').click(function(){
         var addition = {};
-		addition['action'] = 'Delete';
+		addition['action'] = 'delete';
 		addition['type'] = 'all';
         if(confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE)) {
             window.location.href = Qwin.url.createUrl(Qwin.get, addition);

@@ -23,86 +23,68 @@
  * @since       2011-01-10 16:44:37
  */
 
-class Com_Trash_Service_Delete extends Com_Service_BasicAction
+class Com_Trash_Widget_Delete extends Qwin_Widget_Abstract
 {
     /**
-     * 服务的基本配置
+     * 默认选项
      * @var array
      */
-    protected $_setting = array(
-        'asc' => array(
-            'package' => null,
-            'module' => null,
-            'controller' => null,
-            'action' => null,
-        ),
-        'data' => array(
-
-        ),
-        'view' => array(
-            'class' => '',
-            'display' => true,
-        ),
-        'this' => null,
+    protected $_defaults = array(
+        'module'    => null,
+        'id'        => null,
+        'type'      => null,
+        'display'   => true,
+        'url'       => null,
     );
     
-    public function process(array $setting = null)
+    public function execute($options)
     {
-        // 初始配置
-        $setting = $this->_multiArrayMerge($this->_setting, $setting);
+        $options = $this->_options = (array)$options + $this->_options;
 
-        // 通过父类,加载语言,元数据,模型等
-        parent::process($setting['asc']);
+        /* @var $meta Com_Metadata */
+        $meta = Com_Metadata::getByModule($options['module']);
+        $idValue = explode(',', $options['id']);
 
-        $meta = $this->_meta;
-        $metaHelper = $this->metaHelper;
-        $lang = $this->_lang;
+        $query = $meta->getQuery(null, array(
+            'type' => 'db',
+        ));
 
-        // 获取指定的回收站对象
-        $query = $metaHelper->getQueryByAsc($this->_asc, 'db');
-
-        if ('all' != $setting['data']['type']) {
-            $primaryKey = explode(',', $setting['data']['primaryKeyValue']);
-            $query->whereIn($meta['db']['primaryKey'], $primaryKey);
+        if ('all' != $options['type']) {
+            $idValue = explode(',', $options['id']);
+            $query->whereIn($meta['db']['primaryKey'], $idValue);
         }
-        $objectList = $query->execute();
+        $records = $query->execute();
 
-        // 循环删除各记录 TODO使用应该使用删除服务
-        foreach ($objectList as $obejct) {
+        // 循环删除各记录 TODO是否应该使用删除微件
+        foreach ($records as $record) {
             // 获取源记录
-            $type = explode('.', $obejct['type']);
-            $asc = array(
-                'package' => $type[0],
-                'module' => $type[1],
-                'controller' => $type[2],
-            );
-            $meta = $metaHelper->getMetadataByAsc($asc);
-            $query = $metaHelper->getQueryByAsc($asc);
-            $result = $query
-                ->where($meta['db']['primaryKey'] . ' = ?', $obejct['type_id'])
+            /* @var $sourceMeta Com_Metadata */
+            $sourceMeta = Com_Metadata::getByModule($record['module']);
+            $sourceQuery = $sourceMeta->getQuery();
+            $result = $sourceQuery
+                ->select('is_deleted')
+                ->where($meta['db']['primaryKey'] . ' = ?', $record['module_id'])
                 ->fetchOne();
 
             // 源记录不存在
             if (false == $result) {
-                $obejct->delete();
+                $record->delete();
                 continue;
             }
 
             // 删除源记录和记录
             $result->delete();
-            $obejct->delete();
+            $record->delete();
         }
 
-        $url = $this->url->url($this->_asc, array('action' => 'Index'));
-        $return = array(
-            'result' => true,
-            'message' => $lang->t('MSG_OPERATE_SUCCESSFULLY'),
-            'url' => $url,
-        );
-        if ($setting['view']['display']) {
-            return $this->view->success($return['message'], $url);
-        } else {
-            return $return;
+        // 展示视图
+        if ($options['display']) {
+            !$options['url'] && $options['url'] = Qwin::call('-url')->url('com/trash');
+            return Qwin::call('-view')->success(Qwin::call('-lang')->t('MSG_SUCCEEDED'), $options['url']);
         }
+        return array(
+            'result' => true,
+            'data' => get_defined_vars(),
+        );
     }
 }
