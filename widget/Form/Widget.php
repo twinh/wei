@@ -31,7 +31,7 @@ class Form_Widget extends Qwin_Widget_Abstract
      *
      * @var array
      */
-    protected $_options = array(
+    protected $_defaults = array(
         'id'        => 'form-%s',
         'meta'      => null,
         'action'    => 'add',

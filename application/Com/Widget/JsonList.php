@@ -31,7 +31,7 @@ class Com_Widget_JsonList extends Qwin_Widget_Abstract
      * 服务的基本配置
      * @var array
      */
-    protected $_options = array(
+    protected $_defaults = array(
         'module'    => null,
         'list'      => null,
         'order'     => null,

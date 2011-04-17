@@ -30,7 +30,7 @@
 
 class Filter_Widget extends Qwin_Widget_Abstract
 {
-    protected $_options = array(
+    protected $_defaults = array(
         'lang' => true,
     );
 

@@ -29,16 +29,16 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
      * 默认配置
      * @var array
      */
-    protected $_defaults = array();
+    protected $_defaults = array(
+        'lang' => false,
+    );
 
     /**
      * 选项
      *
      * @var array
      */
-    protected $_options = array(
-        'lang' => false,
-    );
+    protected $_options = array();
 
     /**
      * 微件的根目录
@@ -79,7 +79,7 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
             isset($params[0]) && $options += $params[0];
         }
 
-        $options = $this->_options = $options + $this->_options;
+        $options = $this->_options = $options + $this->_defaults;
 
         // 初始化根目录
         if (isset($options['rootPath']) && is_dir($options['rootPath'])) {

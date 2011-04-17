@@ -35,7 +35,7 @@ class Validator_Widget extends Qwin_Widget_Abstract
      *      -- break                当验证失败时,是否继续验证
      *
      */
-    protected $_options = array(
+    protected $_defaults = array(
         'meta'          => true,
         'validator'     => 'Qwin_Validator',
         'break'         => false,

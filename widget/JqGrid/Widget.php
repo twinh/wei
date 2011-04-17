@@ -78,7 +78,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
      *
      *              -- search               搜索的查询名称
      */
-    protected $_options = array(
+    protected $_defaults = array(
         'id'            => null,//'ui-jqgrid-table',
         'meta'          => null,
         'lang'          => null,
