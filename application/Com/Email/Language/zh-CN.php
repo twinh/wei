@@ -16,8 +16,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     QWIN_PATH
- * @subpackage  
+ * @package     Com
+ * @subpackage  Mail
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,22 +25,15 @@
  * @since       2010-09-20 17:09:38
  */
 
-class Com_Email_Language_Zhcn extends Com_Language_Zhcn
-{
-    public function  __construct()
-    {
-        parent::__construct();
-        $this->_data += array(
-            'FLD_FROM' => '来自',
-            'FLD_FROM_NAME' => '发件人',
-            'FLD_TO' => '发至',
-            'FLD_TO_NAME' => '收件人',
-            'FLD_SUBJECT' => '标题',
-            'FLD_RESULT' => '发送结果',
+return array(
+    'FLD_FROM' => '来自',
+    'FLD_FROM_NAME' => '发件人',
+    'FLD_TO' => '发至',
+    'FLD_TO_NAME' => '收件人',
+    'FLD_SUBJECT' => '标题',
+    'FLD_RESULT' => '发送结果',
 
-            'ACT_POST' => '发布',
+    'ACT_POST' => '发布',
 
-            'LBL_MODULE_EMAIL' => '邮件',
-        );
-    }
-}
+    'LBL_MODULE_EMAIL' => '邮件',
+);

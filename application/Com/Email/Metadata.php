@@ -25,7 +25,7 @@
  * @since       2010-09-20 10:37:51
  */
 
-class Com_Email_Metadata_Email extends Com_Metadata
+class Com_Email_Metadata extends Com_Metadata
 {
     public function setMetadata()
     {
