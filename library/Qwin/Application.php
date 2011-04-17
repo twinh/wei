@@ -135,8 +135,8 @@ class Qwin_Application
         $request = Qwin::call('-request');
 
         // 获取模块和行为
-        $module = $request->get('module');
-        $action = $request->get('action');
+        $module = (string)$request->get('module');
+        $action = (string)$request->get('action');
         /* @var $module Qwin_Module */
         $module = Qwin::call('-module', $module);
         Qwin::config('action', $action);
