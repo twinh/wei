@@ -103,6 +103,11 @@ class Com_Trash_Metadata extends Com_Metadata
         return Qwin_Util_Html::link($this->url->url($value), $lang->t($meta['page']['title']));
     }
 
+    public function sanitiseViewModule($value, $name, $data, $dataCopy)
+    {
+        return $this->sanitiseListModule($value, $name, $data, $dataCopy);
+    }
+
     public function sanitiseDbDeletedAt($value, $name, $data, $dataCopy)
     {
         return date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
