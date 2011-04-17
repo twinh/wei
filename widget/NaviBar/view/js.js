@@ -1,8 +1,7 @@
-<?php
 /**
- * navigation-bar
+ * js
  *
- * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,10 +19,8 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-03 01:17:46
+ * @since       2011-04-17 09:28:38 v0.7.9
  */
-?>
-<script type="text/javascript">
 jQuery(function($){
     var navbarUl;
     $('#ui-nav-bar ul li.ui-widget').hover(
@@ -41,28 +38,3 @@ jQuery(function($){
         }
     );
 });
-</script>
-<div id="ui-nav-bar" class="ui-nav-bar">
-    <ul class="ui-widget-content ui-navbar-parent">
-        <li class="ui-widget ui-state-active ui-corner-top"> <a href="?"><?php echo qw_t('LBL_QWIN') ?></a>
-        </li><?php
-        foreach ($navigationData as $menu) :
-            if (null == $menu['category_id']) :
-        ?><li class="ui-widget ui-state-default ui-corner-top"> <a href="<?php echo $menu['url'] ?>" target="<?php echo $menu['target'] ?>"><?php echo $menu['title'] ?></a>
-        <ul class="ui-state-hover ui-corner-bottom">
-            <?php
-            foreach ($navigationData as $subMenu) :
-                if ($menu['id'] == $subMenu['category_id']) :
-            ?>
-                    <li><a href="<?php echo $subMenu['url'] ?>" target="<?php echo $subMenu['target'] ?>"><?php echo $subMenu['title'] ?></a></li>
-            <?php
-                    endif;
-                endforeach;
-            ?>
-            </ul>
-        </li><?php
-                    endif;
-                endforeach;
-        ?>
-    </ul>
-</div>

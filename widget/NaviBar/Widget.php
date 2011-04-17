@@ -25,15 +25,47 @@
 
 class NaviBar_Widget extends Qwin_Widget_Abstract
 {
+    protected $_defaults = array(
+        'max' => 8,
+        'more' => array(
+            'id' => 'more',
+            'url' => 'javascript:;',
+            'target' => '_self',
+            'title' => 'ACT_MORE',
+        ),
+    );
+
     public function render($options)
     {
         // 加载页眉导航的缓存
-        $navigationData = require Qwin::config('root') . 'cache/menu.php';
+        $menus = require Qwin::config('root') . 'cache/menu.php';
+
+        // 将超出的菜单附加到“更多"的菜单下
+        $this->_options = $this->_defaults;
+        if ($this->_options['max'] < count($menus[0])) {
+            // "更多"菜单的子菜单
+            $moreMenus = array_splice($menus[0], $this->_options['max']);
+
+            // 根菜单
+            $menus[0] = array_splice($menus[0], 0, $this->_options['max']);
+
+            // 附加“更多”的菜单
+            $this->_defaults['more']['title'] = $this->_lang[$this->_defaults['more']['title']];
+            $menus[0] += array(
+                'more' => $this->_defaults['more']
+            );
+            $menus[1]['more'] = $moreMenus;
+         }
 
         // 页面名称
         $queryString = empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING'];
         $pageUrl = basename($_SERVER['PHP_SELF']) . $queryString;
 
-        require 'view/default.php';
+        $minify = $this->_widget->get('Minify');
+        $minify->add($this->_rootPath . 'view/js.js');
+
+        $smarty = $this->_widget->get('Smarty')->getObject();
+        $smarty->assign('menus', $menus);
+        $smarty->display($this->_rootPath . 'view/default.tpl');
     }
 }
