@@ -36,12 +36,12 @@ class Com_Trash_Metadata extends Com_Metadata
                         'isList' => 1,
                     ),
                 ),
-                'type' => array(
+                'module' => array(
                     'attr' => array(
                         'isList' => 1,
                     ),
                 ),
-                'type_id' => array(
+                'module_id' => array(
                     'form' => array(
                         '_type' => 'hidden'
                     ),
@@ -91,17 +91,16 @@ class Com_Trash_Metadata extends Com_Metadata
         ));
     }
 
-    public function sanitiseListType($value, $name, $data, $dataCopy)
+    public function sanitiseListModule($value, $name, $data, $dataCopy)
     {
-        $module = strtr($value, '.', '/');
-        $class = Com_Metadata::getByModule($module, false);
+        $class = Com_Metadata::getByModule($value, false);
         if (!class_exists($class)) {
-            return $module;
+            return $value;
         }
-        $metadata = Qwin_Metadata::getInstance()->get($class);
+        $meta = Qwin_Metadata::getInstance()->get($class);
         $lang = Qwin::call('-lang');
         
-        return Qwin_Util_Html::link($this->url->url(array('module' => $module)), $lang->t($metadata['page']['title']));
+        return Qwin_Util_Html::link($this->url->url($value), $lang->t($meta['page']['title']));
     }
 
     public function sanitiseDbDeletedAt($value, $name, $data, $dataCopy)

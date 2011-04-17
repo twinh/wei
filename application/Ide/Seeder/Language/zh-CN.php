@@ -1,8 +1,8 @@
 <?php
 /**
- * Zhcn
+ * zh-CN
  *
- * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,18 +20,13 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-09 14:52:09
+ * @since       2011-04-17 13:38:09
  */
 
 return array(
-    'LBL_MODULE_TRASH' => '回收站',
-
-    'ACT_EMPTY' => '清空',
-
+    'MOD_IDE_SEEDER' => '播种机',
     'FLD_MODULE' => '模块',
-    'FLD_DELETED_BY' => '删除者',
-    'FLD_DELETED_AT' => '删除时间',
+    'FLD_NUMBER' => '数目',
 
-    'MSG_NO_SOURCE_RECORD' => '源记录已不存在,无法还原.',
-    'MSG_CONFIRM_TO_RESTORE' => '记录将还原,确认?',
+    'MSG_MOD_UNAVAILABLE' => '模块不可用',
 );
