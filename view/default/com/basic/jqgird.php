@@ -72,7 +72,14 @@ jQuery(function($){
         var addition = {};
         addition['action'] = 'delete';
         addition[primaryKey] = keyList.join(',');
-        if (confirm(Qwin.Lang.MSG_CONFIRM_TO_DELETE)) {
+
+        var message = '';
+        if ($(this).find('span').hasClass('ui-icon-trash')) {
+            message = Qwin.Lang.MSG_CONFIRM_TO_DELETE_TO_TRASH;
+        } else {
+            message = Qwin.Lang.MSG_CONFIRM_TO_DELETE;
+        }
+        if (confirm(message)) {
             window.location.href = Qwin.url.createUrl(Qwin.get, addition);
         }
         return false;

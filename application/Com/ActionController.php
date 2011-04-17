@@ -138,11 +138,10 @@ class Com_ActionController extends Com_Controller
      */
     public function actionDelete()
     {
-        return Com_Widget::getByModule('Com', 'Delete')->execute(array(
+        return Qwin::call('-widget')->get('DeleteAction')->execute(array(
             'module'    => $this->_module,
-            'data'      => array(
-                'id' => $this->_request->get('id'),
-            ),
+            'id'        => $this->_request->get('id'),
+            'url'       => urldecode($this->_request->post('_page')),
         ));
     }
 }
