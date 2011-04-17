@@ -25,33 +25,6 @@
  * @since       2010-09-20 10:37:51
  */
 
-class Com_Email_Controller_Email extends Com_ActionController
+class Com_Email_Model extends Com_Model
 {
-    /**
-     * post操作后的地址
-     * @var string
-     */
-    protected $_fromUrl;
-
-    public function actionPost($fromUrl = null)
-    {
-        $this->_fromUrl = $fromUrl;
-        parent::actionAdd();
-    }
-
-    public function onAfterDb($data)
-    {
-        if('Post' == $this->getLastAction())
-        {
-            // 发布邮件
-            $this->_result['result'] = 'posted!';
-            $this->_result->save();
-            if(null != $this->_fromUrl)
-            {
-                $this->redirect('MSG_OPERATE_SUCCESSFULLY', $this->_fromUrl);
-                exit;
-            }
-            return true;
-        }
-    }
 }
