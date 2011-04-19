@@ -126,7 +126,8 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
      */
     public function render($view)
     {
-        $tabs = $this->getTabs($view['module'], $view['options']['url']);
+        // TODO
+        $tabs = $this->getTabs($view['module'], $view['jqGrid']['options']['url']);
         return $this->renderTabs($tabs);
     }
 
