@@ -25,7 +25,7 @@
 
 class Letter_Widget extends Qwin_Widget_Abstract
 {
-    public function render($options = null)
+    public function render($options)
     {
         require_once $this->_rootPath . 'function.php';
     }

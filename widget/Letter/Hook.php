@@ -27,6 +27,6 @@ class Letter_Hook extends Qwin_Hook_Abstract
 {
     public function hookAppStartup()
     {
-        return Qwin::call('-widget')->get('Letter')->render();
+        return Qwin::call('-widget')->get('Letter')->render(null);
     }
 }

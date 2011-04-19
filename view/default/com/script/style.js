@@ -108,9 +108,9 @@ jQuery(function($){
         return true;
     }
 
-    $('#ui-main-middle').qui().click(function(){
-        $("#ui-main-left").animate({width: 'toggle'}, 500);
-    });
+//    $('#ui-main-middle').qui().click(function(){
+//        $("#ui-main-left").animate({width: 'toggle'}, 500);
+//    });
 
     //
     /*if ($.browser.mozilla) {

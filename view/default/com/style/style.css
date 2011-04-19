@@ -210,7 +210,7 @@ div.ui-header-logo {
 #ui-main-middle{
     width: 4px;
     border-top: none;
-    cursor: pointer;
+/*    cursor: pointer;*/
 }
 #ui-main-right{
     width: auto;

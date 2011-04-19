@@ -81,7 +81,9 @@ class Qwin_Flow
      */
     public function callOne($callback)
     {
-        $callback = call_user_func_array(array($this, 'filter'), func_get_args());
+        // fixed Fatal error: func_get_args(): Can't be used as a function parameter 
+        $args = func_get_args();
+        $callback = call_user_func_array(array($this, 'filter'), $args);
         if (3 == count($callback[0])) {
             $value = $this->_callClassMethod($callback);
         } else {
@@ -112,7 +114,9 @@ class Qwin_Flow
      */
     protected function _callClassMethod($callback)
     {
-        if (!is_callable(array($callback[0][0], $callback[0][1]))) {
+        // http://bugs.php.net/bug.php?id=51527 ??
+        //if (!is_callable(array($callback[0][0], $callback[0][1]))) {
+        if (!method_exists($callback[0][0], $callback[0][1])) {
             is_object($callback[0][0]) && $callback[0][0] = get_class($callback[0][0]);
             throw new Exception('The method "' . $callback[0][0] . $callback[0][2] . $callback[0][1] . '" can not be called.');
         }
