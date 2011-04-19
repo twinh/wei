@@ -44,7 +44,7 @@ $minify->addArray(array(
         <td colspan="2" id="ui-header-middle">
             <div class="ui-header-shortcut" id="ui-header-shortcut">
                 <a class="ui-state-default" href="<?php echo qw_u('com/member/my') ?>"><?php echo qw_t('LBL_WELCOME') ?>, <?php echo $nickname ?>!</a>
-                <a class="ui-state-default" href="<?php echo qw_url(array('module' => 'Management', 'controller' => 'Management')) ?>"><?php echo qw_t('LBL_MANAGEMENT') ?></a>
+<!--                <a class="ui-state-default" href="<?php echo qw_url(array('module' => 'Management', 'controller' => 'Management')) ?>"><?php echo qw_t('LBL_MANAGEMENT') ?></a>-->
                 <?php
                 if('guest' == $member['username']):
                 ?>
