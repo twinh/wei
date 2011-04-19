@@ -30,31 +30,24 @@ class Com_Member_Auth_Controller extends Com_Controller
     public function actionLogin()
     {
         // 提示已经登陆的信息
-        /*$member = $this->session->get('member');
+        $member = $this->getSession()->get('member');
         if ('guest' != $member['username']) {
-            return $this->view->redirect($this->_lang->t('MSG_LOGINED'));
-        }*/
+            return $this->getView()->alert(Qwin::call('-lang')->t('MSG_LOGINED'));
+        }
 
         // 设置视图,加载登陆界面
-        if(empty($_POST))
-        {
-            $this->view->assign(get_defined_vars());
+        if (!$this->_request->isPost()) {
+            $meta = $this->getMetadata();
+            $this->getView()->assign(get_defined_vars());
         } else {
-            $service = new Com_Member_Service_Login();
-            $service->process(array(
-                'asc' => $this->_asc,
-                'data' => array(
-                    'db' => $_POST,
-                ),
+            return Com_Widget::getByModule('com/member/auth', 'login')->execute(array(
+                'data' => $_POST,
             ));
         }
     }
 
     public function actionLogout()
     {
-        return Qwin::call('Com_Member_Service_Logout')->process(array(
-            'asc' => $this->_asc,
-            'this' => $this,
-        ));
+        return Com_Widget::getByModule('com/member/auth', 'logout')->execute(array());
     }
 }

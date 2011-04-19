@@ -25,7 +25,7 @@
  * @since       2010-04-29 04:49:37
  */
 
-class Qwin_Helper_Util
+class Qwin_Util_Common
 {
     /**
      * 获取Ip地址

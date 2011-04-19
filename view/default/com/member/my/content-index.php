@@ -37,7 +37,7 @@
         echo Qwin_Util_JQuery::link(qw_u('com/member/my', 'view'), qw_lang('LBL_VIEW_DATA'), 'ui-icon-lightbulb'),
              Qwin_Util_JQuery::link(qw_u('com/member/my', 'edit'), qw_lang('LBL_EDIT_DATA'), 'ui-icon-tag'),
              Qwin_Util_JQuery::link(qw_u('com/member/my', 'editpassword'), qw_lang('LBL_EDIT_PASSWORD'), 'ui-icon-key'),
-             Qwin_Util_JQuery::link(qw_url(array('module' => 'Member', 'controller' => 'LoginLog', 'searchField' => 'member_id', 'searchValue' => $member['id'])), qw_lang('LBL_MODULE_MEMBER_LOGINLOG'), 'ui-icon-script'),
+             Qwin_Util_JQuery::link(qw_u('com/member/log', 'index', array('search' => 'member_id:' . $member['id'])), qw_lang('LBL_MODULE_MEMBER_LOGINLOG'), 'ui-icon-script'),
              Qwin_Util_JQuery::link(qw_u('com/member/my', 'style'), qw_lang('LBL_SWITCH_STYLE'), 'ui-icon-calculator'),
              Qwin_Util_JQuery::link(qw_u('com/member/my', 'language'), qw_lang('LBL_SWITCH_LANGUAGE'), 'ui-icon-script'),
              Qwin_Util_JQuery::link('javascript:history.go(-1);', qw_lang('ACT_RETURN'), 'ui-icon-arrowthickstop-1-w')

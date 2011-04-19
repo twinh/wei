@@ -120,10 +120,9 @@ class Com_ActionController extends Com_Controller
                 'id'        => $this->_request->get('id'),
                 'asAction'  => 'edit',
                 'isView'    => false,
-                'viewClass' => 'Com_View_Edit',
             ));
         } else {
-            return Qwin::call('-widget')->get('Add')->execute(array(
+            return Qwin::call('-widget')->get('Edit')->execute(array(
                 'module'    => $this->_module,
                 'data'      => $_POST,
                 'url'       => urldecode($this->_request->post('_page')),

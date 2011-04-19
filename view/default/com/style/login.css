@@ -1,32 +1,30 @@
-.ui-line{
-	padding:.15em;
+.qw-login {
+    vertical-align: top;
 }
-.ui-login-panel{
-	width:400px;
-	margin:4em auto
+.qw-login-panel {
+    width: 400px;
+    margin: 60px auto
 }
 
-.ui-form .ui-form-content form{
-	padding: .8em;
+.qw-login-panel h3 {
+    padding: 6px 6px;
+    font-size: 14px;
+    font-weight: normal;
 }
-.login-input input {
+.qw-login-content {
+    border-top: 0;
+}
+.qw-login-input input {
     width:160px;
     padding:.4em 0 .4em .5em;/* for ie & ff */
     line-height:1.5em;/* for ie */
     font-weight:normal;
 }
-.login-label{
+.qw-login-label{
     margin-right:5px;
     margin-top:.1em;
-	text-align:right;
+    text-align:right;
 }
-.ui-form .ui-form-content .ui-login-operation{
-    clear: both;
-	margin:0;
-}
-.ui-form .ui-form-content .ui-field-common{
-    width: auto;
-}
-#login-captcha{
-    cursor: pointer;
+.qw-login-operation input.ui-state-default {
+    font-weight: normal;
 }

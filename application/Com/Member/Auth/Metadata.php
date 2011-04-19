@@ -97,26 +97,23 @@ class Com_Member_Auth_Metadata extends Com_Metadata
 
     public function validateCaptcha($value, $name, $data)
     {
-        if($value == Qwin::call('-session')->get('captcha'))
-        {
+        if ($value == Qwin::call('-session')->get('captcha')) {
             return true;
         }
-        return new Qwin_Validator_Result(false, $name, 'MSG_ERROR_CAPTCHA');
+        // MSG_ERROR_CAPTCHA
+        return false;
     }
 
     public function validatePassword($value, $name, $data)
     {
-        $value = md5($value);
-        $result = Qwin::call('Qwin_Application_Metadata')
-            ->getQueryByAsc(array(
-                'package' => 'Common',
-                'module' => 'Member',
-                'controller' => 'Member',
-            ), array('db', 'view'))
-            ->where('username = ? AND password = ?', array($data['username'], $value))
-            ->fetchOne();
-        if(false != $result)
-        {
+        $value = md5(trim($value));
+        $query = Com_Metadata::getQueryByModule('com/member', array(
+            'type' => 'db',
+        ));
+        $result = $query->where('username = ? AND password = ?', array($data['username'], $value))
+                ->fetchOne();
+
+        if (false != $result) {
             $member = $result->toArray();
             unset($member['password']);
             // 加入到元数据中,方便调用
@@ -124,6 +121,6 @@ class Com_Member_Auth_Metadata extends Com_Metadata
             return true;
         }
         Qwin::call('-session')->set('member', null);
-        return new Qwin_Validator_Result(false, 'password', 'MSG_ERROR_USERNAME_PASSWORD');
+        return false;
     }
 }

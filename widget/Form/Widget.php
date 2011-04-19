@@ -38,7 +38,7 @@ class Form_Widget extends Qwin_Widget_Abstract
         'column'    => 2,
         'data'      => array(),
         'view'      => 'default.php',
-        'validate'  => false,
+        'validate'  => true,
         'addSelect' => true,
         'select'    => array(
             'value' => 'NULL',
@@ -75,7 +75,7 @@ class Form_Widget extends Qwin_Widget_Abstract
     public function render($options)
     {
         // 合并选项
-        $options = array_merge($this->_options, $options);
+        $options = $options + $this->_options;
         $meta = $options['meta'];
         $data = $options['data'];
         $minify = $this->_widget->get('Minify');
@@ -85,12 +85,12 @@ class Form_Widget extends Qwin_Widget_Abstract
         $options['id'] = sprintf($options['id'], $meta->getModule()->toId());
 
         // 表单布局
-        $form = $this->getLayout($meta, 'edit', $meta['page']['tableLayout'], $data);
+        $form = $this->getLayout($meta, $options['action'], $meta['page']['tableLayout'], $data);
         $group = $meta['group'];
 
         // 验证代码
         if ($options['validate']) {
-            $this->loadLanguage('validator');
+            $this->loadLanguage('Validator');
             $validateCode = $this->getValidateCode($meta, $lang);
         }
 

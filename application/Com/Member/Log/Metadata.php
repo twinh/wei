@@ -65,7 +65,7 @@ class Com_Member_Log_Metadata extends Com_Metadata
                 ),
             ),
             'db' => array(
-                'table' => 'member_loginlog',
+                'table' => 'member_log',
                 'order' => array(
                     array('date_created', 'DESC'),
                 ),
@@ -78,7 +78,7 @@ class Com_Member_Log_Metadata extends Com_Metadata
 
     public function sanitiseDbIp($value, $name, $data, $copyData)
     {
-        return Qwin_Helper_Util::getIp();
+        return Qwin_Util_Common::getIp();
     }
 
     public function sanitiseListDateCreated($value, $name, $data, $copyData)

@@ -34,48 +34,25 @@ class Com_Member_Controller extends Com_ActionController
      */
     public function actionEditPassword()
     {
-        if('guest' == $this->request->get('id') || 'guest' == $this->request->post('id'))
-        {
-            return $this->view->redirect($this->_lang->t('MSG_GUEST_NOT_ALLOW_EDIT_PASSWORD'));
+        $request = $this->_request;
+        if('guest' == $request->get('id') || 'guest' == $request->post('id')) {
+            $lang = Qwin::call('-lang');
+            return $this->getView()->alert($lang->t('MSG_GUEST_NOT_ALLOW_EDIT_PASSWORD'));
         }
-        $this->_meta = Qwin_Metadata::get('Com_Member_Metadata_Password');
+        $meta = Qwin_Metadata::getInstance()->get('Com_Member_PasswordMetadata');
 
-        if(empty($_POST))
-        {
-            /**
-             * @see Com_Service_View $_config
-             */
-            $config = array(
-                'set' => $this->_asc,
-                'data' => array(
-                    'primaryKeyValue' => $this->metaHelper->getUrlPrimaryKeyValue($this->_asc),
-                    'asAction' => 'editpassword',
-                    'meta' => $this->_meta,
-                    'isLink' => false,
-                    'isView' => false,
-                ),
-                'view' => array(
-                    'class' => 'Com_View_EditForm',
-                ),
-                'this' => $this,
-            );
-            return Qwin::call('Com_Service_View')->process($config);
+        if (!$request->isPost()) {
+            return Qwin::call('-widget')->get('View')->execute(array(
+                'module'    => $this->_module,
+                'meta'      => $meta,
+                'id'        => $request->get('id'),
+                'asAction'  => 'edit',
+                'isView'    => false,
+            ));
         } else {
-            /**
-             * @see Com_Service_Update $_config
-             */
-            $config = array(
-                'set' => $this->_asc,
-                'data' => array(
-                    'db' => $_POST,
-                    'meta' => $this->_meta,
-                ),
-                'view' => array(
-                    'url' => urldecode($this->request->post('_page')),
-                ),
-                'this' => $this,
-            );
-            return Qwin::call('Com_Service_Update')->process($config);
+            return Com_Widget::getByModule('com/member', 'editPassword')->execute(array(
+                'data'      => $_POST,
+            ));
         }
     }
 
@@ -84,7 +61,7 @@ class Com_Member_Controller extends Com_ActionController
      */
     public function actionDelete()
     {
-        $id = $this->request->get('id');
+        $id = $this->_request->get('id');
         $idList = explode(',', $id);
 
         /**
@@ -94,9 +71,9 @@ class Com_Member_Controller extends Com_ActionController
             'guest', 'admin'
         );
         $result = array_intersect($idList, $banIdList);
-        if(!empty($result))
-        {
-            return $this->view->redirect($this->_lang->t('MSG_NOT_ALLOW_DELETE'));
+        if (!empty($result)) {
+            $lang = Qwin::call('-lang');
+            return $this->getView()->alert($lang->t('MSG_NOT_ALLOW_DELETE'));
         }
         parent::actionDelete();
     }
@@ -106,7 +83,7 @@ class Com_Member_Controller extends Com_ActionController
      */
     public function actionIsUsernameExists()
     {
-        $username = Qwin::call('-gpc')->get('usesrname');
+        $username = $this->_request->get('usesrname');
         if(true == $this->isUsernameExists($username))
         {
             echo 1;

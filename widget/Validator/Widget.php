@@ -53,7 +53,7 @@ class Validator_Widget extends Qwin_Widget_Abstract
      */
     protected $_invalidData = array();
 
-        /**
+    /**
      * 验证数据
      *
      * @param array $data 数据数组,键名表示域的名称,值表示域的值
@@ -113,10 +113,10 @@ class Validator_Widget extends Qwin_Widget_Abstract
             // 根据元数据进行验证
             if ($options['meta']) {
                 $method = 'validate' . str_replace(array('_', '-'), '', $name);
-                if (method_exists($this, $method)) {
+                if (method_exists($meta, $method)) {
                     if (false === call_user_func_array(
-                        array($this, $method),
-                        array($value, $name, $data)
+                        array($meta, $method),
+                        array($value, $name, $data, $this)
                     )) {
                         if (!isset($this->_invalidData[$name][$method])) {
                             $this->_invalidData[$name][$method] = 'VLD_' . strtoupper($method);

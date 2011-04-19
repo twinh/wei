@@ -31,127 +31,96 @@ class Com_Member_Auth_Widget_Login extends Qwin_Widget_Abstract
      * 服务的基本配置
      * @var array
      */
-    protected $_options = array(
+    protected $_defaults = array(
         'data' => array(
             'username' => null,
             'password' => null,
             'captcha' => null,
         ),
         'checkIsLogin' => true,
-        'checkCaptcha' => true,
+        'checkCaptcha' => false,
         'checkQuestion' => false,
         'loginLog' => true,
-        'callback' => array(
-            'afterLoggedIn' => array(),
-        ),
         'display' => true,
     );
 
-    public function process(array $config = null)
+    public function execute($options)
     {
-        // 初始配置
-        $config = $this->_multiArrayMerge($this->_config, $config);
-
-        // 通过父类,加载语言,元数据,模型等
-        parent::process($config['set']);
-
-        // 初始化常用的变量
-        $metaHelper = Qwin::call('Qwin_Application_Metadata');
-        $member     = $this->session->get('member');
-        $meta       = $this->_meta;
+        $options = $options + $this->_options;
+        $session = Qwin::call('-session');
+        $member = $session['member'];
+        $meta = Com_Metadata::getByModule('com/member/auth');
 
         // 检查是否登陆,如果登陆,提示已登陆
-        if($config['data']['checkIsLogin'])
-        {
-            if(isset($member['id']) && 'guest' != $member['id'])
-            {
+        if ($options['checkIsLogin']) {
+            if (isset($member['id']) && 'guest' != $member['id']) {
                 $return = array(
                     'result' => false,
                     'message' => $this->_lang->t('MSG_LOGINED'),
                 );
-                $this->view->redirect($return['message']);
+                if ($options['display']) {
+                    $view = Qwin::call('-view');
+                    $view->alert($return['message']);
+                }
                 return $return;
             }
         }
 
         // 不对验证码做检查,即删除验证码元数据配置
-        if(!$config['data']['checkCaptcha'])
-        {
+        if (!$options['checkCaptcha']) {
             unset($meta['field']['captcha']);
         }
 
-        // 加载验证类,并进行验证
-        Qwin::call('Qwin_Class_Extension')
-            ->setPackage('validator')
-            ->addClass('Qwin_Validator_JQuery');
-        $validateResult = $metaHelper->validateArray($config['data']['db'], $meta, $meta);
-        if(true !== $validateResult)
-        {
-            $message = $config['this']->showValidateError($validateResult, $meta, $config['view']['display']);
+        /* @var $validator Validator_Widget */
+        $validator = $this->_widget->get('Validator');
+        if (!$validator->valid($options['data'], $meta)) {
             $return = array(
                 'result' => false,
-                'message' => $message,
+                'message' => $validator->getInvalidMessage(),
             );
+            if ($options['display']) {
+                return Qwin::call('-view')->alert($return['message']['title'], null, $return['message']['content']);
+            }
             return $return;
         }
         
         // 验证通过,设置登陆数据到session
         $member = $meta->member;
-        $this->session->set('member',  $member);
-        $this->session->set('style', $member['theme']);
-        $this->session->set('language', $member['language']);
+        $session->set('member',  $member);
+        $session->set('style', $member['theme']);
+        $session->set('language', $member['language']);
 
-        // 已登陆
-        $this->executeCallback('afterLoggedIn', $config);
-
-        if($config['data']['loginLog'])
-        {
-            /**
-             * @see Com_Service_Insert $_config
-             */
-            $logConfig = array(
-                'set' => array(
-                    'package' => 'Common',
-                    'module' => 'Member',
-                    'controller' => 'LoginLog',
+        if ($options['loginLog']) {
+            $logResult = Qwin::call('-widget')->get('Add')->execute(array(
+                'module'    => 'com/member/log',
+                'data'      => array(
+                    'member_id' => $member['id'],
                 ),
-                'data' => array(
-                    'db' => array(
-                        'member_id' => $member['id'],
-                    ),
-                ),
-                'view' => array(
-                    'display' => false,
-                ),
-            );
-            $logResult = Qwin::call('Com_Service_Insert')->process($logConfig);
-            if(!$logResult['result'])
-            {
-                if($config['view']['display'])
-                {
-                    $this->view->redirect($logResult['message']);
+                'display'   => false,
+            ));
+            if (false == $logResult['result']) {
+                if ($options['display']) {
+                    $view = Qwin::call('-view');
+                    $view->alert($logResult['message']);
                 }
                 return $logResult;
             }
         }
 
         // 设置视图数据
-        if($config['view']['url'])
-        {
-            $url = $config['view']['url'];
+        if (isset($options['data']['_page'])) {
+            $url = urldecode($options['data']['_page']);
         } else {
             $url = '?';
         }
         $return = array(
             'result' => true,
-            'message' => $this->_lang->t('MSG_OPERATE_SUCCESSFULLY'),
+            'message' => $this->_lang->t('MSG_SUCCEEDED'),
             'url' => $url,
         );
-        if($config['view']['display'])
-        {
-            $this->view->redirect($return['message'], $url);
+        if ($options['display']) {
+            Qwin::call('-view')->success($return['message'], $url);
         }
-        
         return $return;
     }
 }

@@ -39,6 +39,7 @@ return array(
     'FLD_GROUP_ID' => '分组',
     'FLD_NEW_PASSWORD' => '新密码',
     'FLD_OLD_PASSWORD' => '旧密码',
+    'FLD_PASSWORD2' => '再次输入密码',
     'FLD_CONFIRM_PASSWORD' => '确认密码',
     'FLD_MONEY' => '金额',
 
@@ -65,13 +66,15 @@ return array(
 
     'LBL_APPLY_TO_SETTING' => '应用当前风格到个人配置中',
     'LBL_LOGIN_TITLE' => '欢迎您使用本系统',
-    'MSG_ERROR_USERNAME_PASSWORD' => '用户名或密码错误',
-    'MSG_LOGINED' => '您已经登陆',
+    'VLD_VALIDATEPASSWORD' => '用户名或密码错误',
+    'VLD_VALIDATEUSERNAME' => '用户名已经存在',
+    'VLD_VALIDATEEMAIL' => '邮箱已经存在',
+    'MSG_LOGINED' => '您已经登陆,要重新登录请先注销。',
     'MSG_NOT_LOGIN' => '您还未登陆',
     'MSG_USERNAME_EXISTS' => '用户名已存在.',
 
 
-    'MSG_OLD_PASSWORD_NOT_CORRECT' => '旧密码不正确',
+    'VLD_VALIDATEOLDPASSWORD' => '旧密码不正确',
     'MSG_MEMBER_NOT_ALLOW_DELETE' => '不允许删除系统用户',
     'MSG_GUEST_NOT_ALLOW_EDIT_PASSWORD' => '不允许修改游客密码',
 
