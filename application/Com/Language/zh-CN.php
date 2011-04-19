@@ -129,7 +129,7 @@ return array(
     'MSG_CLICK_TO_REDIRECT' => '如果页面没有刷新,单击这里直接跳转.',
     'MSG_NOT_ALLOW_DELETE' => '不允许删除该用户.',
     'MSG_FILE_NOT_EXISTS' => '文件不存在',
-    'MSG_PERMISSION_NOT_ENOUGH' => '您不够权限查看或操作该页面.',
+    'MSG_PERMISSION_NOT_ENOUGH' => '您不够权限查看或操作该页面,请点击右上角登录按钮.',
     'MSG_NO_RECORDS' => '抱歉,未查找到任何数据!',
     'FLD_ORDER' => '顺序',
 

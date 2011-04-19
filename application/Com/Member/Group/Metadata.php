@@ -92,14 +92,14 @@ class Com_Member_Group_Metadata extends Com_Metadata
         return $value . '<em>(' . $this->_lang->t('MSG_FILE_NOT_EXISTS') . ')</em>';
     }
 
-    public function sanitiseListOperation($value, $name, $data, $copyData)
-    {
-        $primaryKey = $this->db['primaryKey'];
-        $url = Qwin::call('-url');
-        $lang = Qwin::call('-lang');
-        $module = $this->getModule();
-        $html = Qwin_Util_JQuery::icon($url->url($module, 'AllocatePermission', array($primaryKey => $copyData[$primaryKey])), $lang->t('ACT_ALLOCATE_PERMISSION'), 'ui-icon-person')
-              . parent::sanitiseListOperation($value, $name, $data, $copyData);
-        return $html;
-    }
+//    public function sanitiseListOperation($value, $name, $data, $copyData)
+//    {
+//        $primaryKey = $this->db['primaryKey'];
+//        $url = Qwin::call('-url');
+//        $lang = Qwin::call('-lang');
+//        $module = $this->getModule();
+//        $html = Qwin_Util_JQuery::icon($url->url($module, 'AllocatePermission', array($primaryKey => $copyData[$primaryKey])), $lang->t('ACT_ALLOCATE_PERMISSION'), 'ui-icon-person')
+//              . parent::sanitiseListOperation($value, $name, $data, $copyData);
+//        return $html;
+//    }
 }

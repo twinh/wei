@@ -218,15 +218,11 @@ class Com_Controller extends Qwin_Application_Controller
                 ->set('lang', $member['language']);
         }
 
-        // 权限判断
-        return true;
-
-        // 
-        if ('guest' == $member['username']) {
-            // 转入登陆界面
-        } else {
-            // 提示权限不足
+        // TODO 修复权限管理
+        if ('guest' == $member['username'] && $this->_module != 'com/member/auth') {
+            $lang = Qwin::call('-lang');
+            return Qwin::call('-view')->alert($lang->t('MSG_PERMISSION_NOT_ENOUGH'));
         }
-        return false;
+        return true;
     }
 }
