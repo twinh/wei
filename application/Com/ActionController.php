@@ -36,7 +36,7 @@ class Com_ActionController extends Com_Controller
     {
         $request = $this->getRequest();
         if ($request->isJson()) {
-            return Com_Widget::getByModule('Com', 'JsonList')->execute(array(
+            return Qwin::call('-widget')->get('JsonList')->execute(array(
                 'module'=> $this->_module,
                 'list'  => $request->get('list'),
                 'search'=> $request->get('search'),
@@ -45,10 +45,10 @@ class Com_ActionController extends Com_Controller
                 'order' => array(
                     $request->get('orderField'),
                     $request->get('orderType')
-               ),
+                ),
             ));
         } else {
-            return Com_Widget::getByModule('Com', 'List')->execute(array(
+            return Qwin::call('-widget')->get('List')->execute(array(
                 'module'=> $this->_module,
                 'list'  => $request->get('list'),
                 'popup' => $request->get('popup'),
@@ -138,7 +138,7 @@ class Com_ActionController extends Com_Controller
      */
     public function actionDelete()
     {
-        return Qwin::call('-widget')->get('DeleteAction')->execute(array(
+        return Qwin::call('-widget')->get('Delete')->execute(array(
             'module'    => $this->_module,
             'id'        => $this->_request->get('id'),
             'url'       => urldecode($this->_request->post('_page')),
