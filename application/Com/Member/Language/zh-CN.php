@@ -72,6 +72,7 @@ return array(
     'MSG_LOGINED' => '您已经登陆,要重新登录请先注销。',
     'MSG_NOT_LOGIN' => '您还未登陆',
     'MSG_USERNAME_EXISTS' => '用户名已存在.',
+    'MSG_MEMBER_LOCKED' => '帐号已锁定，无法执行该操作。',
 
 
     'VLD_VALIDATEOLDPASSWORD' => '旧密码不正确',

@@ -28,6 +28,14 @@
 class Com_Member_Controller extends Com_ActionController
 {
     /**
+     * 锁定的核心帐号，防止恶意修改
+     * @var array
+     */
+    protected $_lock = array(
+        'guest', 'admin', '7641b5b1-c727-6c07-e11f-9cb5b74ddfc9',
+    );
+
+    /**
      * 编辑密码
      * @return object 实例化编辑操作
      * @todo 重新登陆
@@ -35,9 +43,10 @@ class Com_Member_Controller extends Com_ActionController
     public function actionEditPassword()
     {
         $request = $this->_request;
-        if('guest' == $request->get('id') || 'guest' == $request->post('id')) {
+        $id = $request->request('id');
+        if (in_array($id, $this->_lock)) {
             $lang = Qwin::call('-lang');
-            return $this->getView()->alert($lang->t('MSG_GUEST_NOT_ALLOW_EDIT_PASSWORD'));
+            return $this->getView()->alert($lang->t('MSG_MEMBER_LOCKED'));
         }
         $meta = Qwin_Metadata::getInstance()->get('Com_Member_PasswordMetadata');
 
@@ -67,10 +76,7 @@ class Com_Member_Controller extends Com_ActionController
         /**
          * @todo 是否在数据库增加一个字段,作为不允许删除的标志
          */
-        $banIdList = array(
-            'guest', 'admin'
-        );
-        $result = array_intersect($idList, $banIdList);
+        $result = array_intersect($idList, $this->_lock);
         if (!empty($result)) {
             $lang = Qwin::call('-lang');
             return $this->getView()->alert($lang->t('MSG_NOT_ALLOW_DELETE'));
@@ -84,8 +90,7 @@ class Com_Member_Controller extends Com_ActionController
     public function actionIsUsernameExists()
     {
         $username = $this->_request->get('usesrname');
-        if(true == $this->isUsernameExists($username))
-        {
+        if (true == $this->isUsernameExists($username)) {
             echo 1;
         } else {
             echo 0;
@@ -98,8 +103,7 @@ class Com_Member_Controller extends Com_ActionController
         $query = $this->_meta->getQueryByAsc($this->_asc);
         $result = $query->where('username = ?', $username)
             ->fetchOne();
-        if(false != $result)
-        {
+        if (false != $result) {
             $result = true;
         }
         return $result;
