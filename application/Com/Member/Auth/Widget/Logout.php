@@ -31,70 +31,44 @@ class Com_Member_Auth_Widget_Logout extends Qwin_Widget_Abstract
      * 服务的基本配置
      * @var array
      */
-    protected $_config = array(
-        'set' => array(
-            'package' => null,
-            'module' => null,
-            'controller' => null,
-            'action' => null,
-        ),
-        'data' => array(
-            'checkLogin' => true,
-        ),
-        'view' => array(
-            'display' => true,
-        ),
-        'this' => null,
+    protected $_defaults = array(
+        'checkLogin' => true,
+        'display' => true,
     );
 
-    public function process(array $config = null)
+    public function execute($options)
     {
-        // 初始配置
-        $config = $this->_multiArrayMerge($this->_config, $config);
-
-        // 通过父类,加载语言,元数据,模型等
-        parent::process($config['set']);
-
-        // 初始化常用的变量
-        $metaHelper = Qwin::call('Qwin_Application_Metadata');
-        $member     = $this->session->get('member');
+        $options = $options + $this->_options;
+        $session = Qwin::call('-session');
+        $member = $session['member'];
+        $lang = Qwin::call('-lang');
 
         // 检查是否登陆
-        if($config['data']['checkLogin'])
-        {
-            if(null === $member)
-            {
-                $url = $this->url->url(array(
-                    'module' => 'Member',
-                    'controller' => 'Log',
-                    'action' => 'Login'
-                ));
+        if ($options['checkLogin']) {
+            if (null === $member) {
                 $return = array(
                     'result' => false,
-                    'message' => $this->_lang->t('MSG_NOT_LOGIN'),
-                    'method' => '',
+                    'message' => $lang->t('MSG_NOT_LOGIN'),
                 );
-                if($config['view']['display'])
-                {
-                    $this->view->redirect($return['message']);
+                if ($options['display']) {
+                    Qwin::call('-view')->alert($return['message']);
                 }
                 return $return;
             }
         }
 
         // 清除登陆状态
-        $this->session->set('member', null);
+        $session->set('member', null);
 
         // 跳转回上一页或默认首页
         $url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '?';
         $return = array(
             'result' => true,
-            'message' => $this->_lang->t('MSG_LOGOUTED'),
+            'message' => $lang->t('MSG_LOGOUTED'),
             'url' => $url,
         );     
-        if($config['view']['display'])
-        {
-            $this->view->redirect($return['message'], $return['url']);
+        if ($options['display']) {
+            Qwin::call('-view')->success($return['message'], $return['url']);
         }
         return $return;
     }

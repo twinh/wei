@@ -27,7 +27,7 @@
 
 class Com_Member_Metadata extends Com_Metadata
 {
-    public function  setMetadata()
+    public function setMetadata()
     {
         $this->setCommonMetadata()
              ->merge(array(
@@ -77,13 +77,10 @@ class Com_Member_Metadata extends Com_Metadata
                         ),
                     ),
                 ),
-                'first_name' => array(
-
-                ),
-                'last_name' => array(
-
-                ),
                 'password' => array(
+                    'form' => array(
+                        '_type' => 'password',
+                    ),
                     'attr' => array(
                         'isReadonly' => 1,
                         'isView' => 0,
@@ -96,7 +93,23 @@ class Com_Member_Metadata extends Com_Metadata
                     'validator' => array(
                         'rule' => array(
                             'required' => true,
-                            'maxlength' => 40,
+                            'rangelength' => array(5, 40),
+                        ),
+                    ),
+                ),
+                'password2' => array(
+                    'form' => array(
+                        '_type' => 'password',
+                    ),
+                    'attr' => array(
+                        'isReadonly' => 1,
+                        'isView' => 0,
+                        'isDbField' => 0,
+                    ),
+                    'validator' => array(
+                        'rule' => array(
+                            'required' => true,
+                            'equalTo' => '#password',
                         ),
                     ),
                 ),
@@ -111,6 +124,12 @@ class Com_Member_Metadata extends Com_Metadata
                             'maxlength' => 256,
                         ),
                     ),
+                ),
+                'first_name' => array(
+
+                ),
+                'last_name' => array(
+
                 ),
                 'photo' => array(
                     'form' => array(
@@ -141,7 +160,11 @@ class Com_Member_Metadata extends Com_Metadata
                 ),
                 'birthday' => array(
                     'form' => array(
-                        '_widget' => 'datepicker',
+                        '_widget' => array(
+                            array(
+                                array('Datepicker_Widget', 'render')
+                            ),
+                        ),
                     )
                 ),
                 'reg_ip' => array(
@@ -228,32 +251,34 @@ class Com_Member_Metadata extends Com_Metadata
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
         $module = $this->getModule();
-        $html = Qwin_Util_JQuery::icon($url->url(array('module' => $module, 'action' => 'EditPassword', $primaryKey => $copyData[$primaryKey])), $lang->t('ACT_EDIT_PASSWORD'), 'ui-icon-key')
+        $html = Qwin_Util_JQuery::icon($url->url($module->toUrl(), 'editpassword', array($primaryKey => $copyData[$primaryKey])), $lang->t('ACT_EDIT_PASSWORD'), 'ui-icon-key')
               . parent::sanitiseListOperation($value, $name, $data, $copyData);
         return $html;
     }
 
-    public function validateUsername($value, $name)
+    public function validateUsername($value, $name, $data)
     {
-        if ('Edit' == Qwin::config('asc/action')) {
+        if ('add' != Qwin::config('action')) {
             return true;
         }
-        $asc = $this->getAsc();
-        $lang = Qwin::call('-lang');
-        $result = $this->isUsernameExists($value);
 
-        if(true === $result)
-        {
-            return new Qwin_Validator_Result(false, $name, 'MSG_USERNAME_EXISTS');
-        }
-        return true;
+        return true === $this->isUsernameExists($value) ? false : true;
+    }
+
+    public function validateEmail($value, $name, $data)
+    {
+        $result = Com_Metadata::getQueryByModule('com/member')
+            ->select('id')
+            ->where('email = ? AND username <> ?', array($value, $data['username']))
+            ->fetchOne();
+        return false == $result ? true : false;
     }
 
     public function isUsernameExists($username)
     {
-        $set = $this->getAsc();
-        $query = $this->metaHelper->getQueryByAsc($set);
-        $result = $query->where('username = ?', $username)
+        $result = Com_Metadata::getQueryByModule('com/member')
+            ->select('id')
+            ->where('username = ?', $username)
             ->fetchOne();
         if (false != $result) {
             $result = true;

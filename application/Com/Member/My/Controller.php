@@ -40,7 +40,7 @@ class Com_Member_My_Controller extends Com_Controller
     {
         $member = $this->getMember();
         if (!$this->_request->isPost()) {
-            return Com_Widget::getByModule('Com', 'View')->execute(array(
+            return Qwin::call('-widget')->get('View')->execute(array(
                 'module'    => $this->_memberModule,
                 'id'        => $member['id'],
                 'asAction'  => 'edit',
@@ -48,9 +48,9 @@ class Com_Member_My_Controller extends Com_Controller
                 'viewClass' => 'Com_View_Edit',
             ));
         } else {
-            return Com_Widget::getByModule('Com', 'Edit')->execute(array(
+            return Qwin::call('-widget')->get('Add')->execute(array(
                 'module'    => $this->_memberModule,
-                'data'      => $_POST,
+                'data'      => array('id' => $member['id']) + $_POST,
                 'url'       => urldecode($this->_request->post('_page')),
             ));
         }
@@ -59,10 +59,10 @@ class Com_Member_My_Controller extends Com_Controller
     public function actionView()
     {
         $member = $this->getMember();
-        return Com_Widget::getByModule('Com', 'View')->execute(array(
-            'module'    => $this->_memberModule,
-            'id'        => $member['id']
-        ));
+        return Qwin::call('-widget')->get('View')->execute(array(
+                'module'    => $this->_memberModule,
+                'id'        => $member['id'],
+            ));
     }
 
     public function actionStyle()

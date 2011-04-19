@@ -100,8 +100,7 @@ class Qwin_Validator_Common extends Qwin_Validator_Abstract
     public function equalTo($value, $param)
     {
         $param = strtr($param, array('#' => '', '.' => ''));
-        if(isset($_POST[$param]))
-        {
+        if (isset($_POST[$param])) {
             return $_POST[$param] == $value;
         }
         return true;
@@ -116,6 +115,11 @@ class Qwin_Validator_Common extends Qwin_Validator_Abstract
      */
     public function email($value)
     {
-        return @ereg("^[-a-zA-Z0-9_\.]+\@([0-9A-Za-z][0-9A-Za-z-]+\.)+[A-Za-z]{2,5}$", $value);
+        return preg_match("/^[-a-zA-Z0-9_\.]+\@([0-9A-Za-z][0-9A-Za-z-]+\.)+[A-Za-z]{2,5}$/i", $value);
+    }
+
+    public function notNull($value)
+    {
+        return 'NULL' !== $value || '' !== $value || null !== $value;
     }
 }

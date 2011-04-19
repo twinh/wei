@@ -25,7 +25,7 @@
  * @since       2010-08-28 20:40:31
  */
 
-class Com_Member_Metadata_Password extends Com_Metadata
+class Com_Member_PasswordMetadata extends Com_Metadata
 {
     public function setMetadata()
     {
@@ -107,22 +107,19 @@ class Com_Member_Metadata_Password extends Com_Metadata
      *
      * @return string 空字符串
      */
-    public function sanitiseEditPasswordPassword()
+    public function sanitiseEditPassword()
     {
         return '';
     }
 
     public function validateOldPassword($value, $name, $data)
     {
-        $set = $this->getAsc();
-        $lang = Qwin::call('-lang');
-        $query = $this->metaHelper->getQueryByAsc($set);
-        $result = $query
+        $result = Com_Metadata::getQueryByModule('com/member')
+            ->select('password')
             ->where('id = ?', $data['id'])
             ->fetchOne();
-        if(md5($value) != $result['password'])
-        {
-            return new Qwin_Validator_Result(false, $name, 'MSG_OLD_PASSWORD_NOT_CORRECT');
+        if (md5($value) != $result['password']) {
+            return false;
         }
         return true;
     }

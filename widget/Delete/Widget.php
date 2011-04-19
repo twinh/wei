@@ -24,7 +24,7 @@
  * @todo        各类检查
  */
 
-class DeleteAction_Widget extends Qwin_Widget_Abstract
+class Delete_Widget extends Qwin_Widget_Abstract
 {
     protected $_defaults = array(
         'module'    => null,
@@ -52,7 +52,7 @@ class DeleteAction_Widget extends Qwin_Widget_Abstract
 
         // 分两种情况 1使用回收站 2直接删除
         // 使用回收站应符合三个条件 1启用回收站功能 2存在标识域is_deleted
-        if ($meta['page']['useTrash'] && isset($meta['field']['is_deleted'])) {
+        if (isset($meta['page']['useTrash']) && true == $meta['page']['useTrash'] && isset($meta['field']['is_deleted'])) {
             foreach ($results as $key => $result) {
                 // 设置删除标志
                 $result['is_deleted'] = 1;
@@ -100,6 +100,9 @@ class DeleteAction_Widget extends Qwin_Widget_Abstract
 
         // 展示视图
         if ($options['display']) {
+            if (!$options['url']) {
+                $options['url'] = $_SERVER['HTTP_REFERER'];
+            }
             if (!$options['url']) {
                 $options['url'] = Qwin::call('-url')->url($options['module']);
             }

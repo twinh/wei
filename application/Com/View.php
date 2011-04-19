@@ -315,4 +315,9 @@ class Com_View extends Qwin_Application_View
     {
         return $this->_packSign;
     }
+
+    public function getRefererPage()
+    {
+        return urlencode(Qwin::call('-request')->server('HTTP_REFERER'));
+    }
 }
