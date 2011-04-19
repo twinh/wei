@@ -71,7 +71,7 @@ class Com_ActionController extends Com_Controller
                 'forward'   => $this->_request->get('forward'),
             ));
         }
-        return Com_Widget::getByModule('Com', 'View')->execute(array(
+        return Qwin::call('-widget')->get('View')->execute(array(
             'module'    => $this->_module,
             'id'        => $this->_request->get('id'),
         ));
@@ -85,13 +85,13 @@ class Com_ActionController extends Com_Controller
     public function actionAdd()
     {
         if (!$this->_request->isPost()) {
-            return Com_Widget::getByModule('Com', 'Form')->execute(array(
+            return Qwin::call('-widget')->get('AddForm')->execute(array(
                 'module'    => $this->_module,
                 'id'        => $this->_request->get('id'),
                 'data'      => $this->_request->get('search'),
             ));
         } else {
-            return Com_Widget::getByModule('Com', 'Add')->execute(array(
+            return Qwin::call('-widget')->get('Add')->execute(array(
                 'module'    => $this->_module,
                 'data'      => $_POST,
                 'url'       => urldecode($this->_request->post('_page')),
@@ -115,7 +115,7 @@ class Com_ActionController extends Com_Controller
             ));
         }
         if (!$this->_request->isPost()) {
-            return Com_Widget::getByModule('Com', 'View')->execute(array(
+            return Qwin::call('-widget')->get('View')->execute(array(
                 'module'    => $this->_module,
                 'id'        => $this->_request->get('id'),
                 'asAction'  => 'edit',
@@ -123,7 +123,7 @@ class Com_ActionController extends Com_Controller
                 'viewClass' => 'Com_View_Edit',
             ));
         } else {
-            return Com_Widget::getByModule('Com', 'Edit')->execute(array(
+            return Qwin::call('-widget')->get('Add')->execute(array(
                 'module'    => $this->_module,
                 'data'      => $_POST,
                 'url'       => urldecode($this->_request->post('_page')),
