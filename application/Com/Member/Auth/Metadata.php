@@ -50,6 +50,7 @@ class Com_Member_Auth_Metadata extends Com_Metadata
                 ),
                 'username' => array(
                     'form' => array(
+                        '_value' => 'admin',
                         'class' => 'ui-widget-content ui-corner-all',
                     ),
                     'attr' => array(
@@ -63,6 +64,7 @@ class Com_Member_Auth_Metadata extends Com_Metadata
                 ),
                 'password' => array(
                     'form' => array(
+                        '_value' => 'admin',
                         '_type' => 'password',
                         'class' => 'ui-widget-content ui-corner-all',
                     ),

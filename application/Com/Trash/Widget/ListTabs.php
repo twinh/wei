@@ -31,7 +31,7 @@ class Com_Trash_Widget_ListTabs extends Qwin_Widget_Abstract
         $lang = Qwin::call('-lang');
 
         $listTabs = Qwin::call('-widget')->get('ListTabs');
-        $tabs = $listTabs->getTabs($options['module'], $options['options']['url']);
+        $tabs = $listTabs->getTabs($options['module'], $options['jqGrid']['options']['url']);
         $tabs = array(
             'restore' => array(
                 'url' => $url->url($options['module']->toUrl(), 'restore'),

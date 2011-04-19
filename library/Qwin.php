@@ -303,7 +303,7 @@ class Qwin
         self::$_option['cacheFile'] = $file;
         self::$_classCache = (array)require $file;
 
-        register_shutdown_function(array('Qwin', 'updateCacheFile'));
+//        register_shutdown_function(array('Qwin', 'updateCacheFile'));
     }
 
     /**
@@ -367,10 +367,10 @@ class Qwin
     {
         // (五级)通过缓存文件的类数组加载
         $lower = strtolower($class);
-        if (isset(self::$_classCache[$lower])) {
-            require_once self::$_classCache[$lower];
-            return true;
-        }
+//        if (isset(self::$_classCache[$lower])) {
+//            require_once self::$_classCache[$lower];
+//            return true;
+//        }
         // 通过解析类名,获取文件路径加载
         $class = strtr($class, array('_' => DIRECTORY_SEPARATOR));
         foreach (self::$_autoloadPath as $path) {
