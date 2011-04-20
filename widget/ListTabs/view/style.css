@@ -21,13 +21,10 @@
  * @version     $Id$
  * @since       2011-04-16 13:33:33
  */
-.qw-listtabs ul.ui-navbar-parent{
+.qw-listtabs ul.qw-listtabs-parent{
     border: 0;
-    z-index: 999;
     white-space: nowrap;
-/*    overflow: hidden;*/
     width: 800px;
-    height: 26px;
     background: none;
 }
 .qw-listtabs ul.ui-widget-content{
@@ -35,12 +32,11 @@
 }
 .qw-listtabs ul li {
     width: auto;
-/*    float: left;*/
+    float: left;
     border-bottom: 0;
     border: none;
     margin: 0;
     display: inline-table;
-/*    margin-bottom: -1px;*/
 }
 .qw-listtabs ul li.ui-state-hover {
     border: 0;
@@ -53,15 +49,19 @@
     -webkit-border-bottom-right-radius: 0;
     border-bottom-right-radius: 0;
     border-bottom: none;
-    /*margin-bottom: -1px;
-    z-index: 9999;*/
+    z-index: 999;
+    display: block;
+    /* ie6 使按钮不独立为一行 */
+    _width: 20px;
 }
 .qw-listtabs ul li ul {
     display: none;
-    text-align:left;
+    text-align: left;
     position: absolute;
-    margin-left: -1px;
+/*    margin-left: -1px;*/
     z-index: 999;
+    height: 28px;
+    overflow: hidden;
 }
 .qw-listtabs ul li ul li {
     clear: both;

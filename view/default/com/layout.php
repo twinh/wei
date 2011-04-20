@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $config['interface']['charset'] ?>" />
 <title><?php echo qw_t('LBL_HTML_TITLE') ?></title>
 <?php
@@ -23,17 +24,13 @@ $minify->addArray(array(
 ?>
 <!--[if IE 6]>
 <link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->getTag('root') ?>com/style/style-ie6.css" />
-<?php
-$pngFix = $jQuery->loadPlugin('pngFix', 'pack');
-?>
-<script type="text/javascript" src="<?php echo $pngFix['js'] ?>"></script>
 <![endif]-->
 <script type="text/javascript">
     jQuery.noConflict();
-    Qwin.Lang = <?php echo json_encode(Qwin::call('-lang')->toArray()) ?>;
     Qwin.get = <?php echo Qwin_Util_Array::jsonEncode($_GET) ?>;
+    Qwin.Lang = <?php echo json_encode(Qwin::call('-lang')->toArray()) ?>;
+    
 </script>
-<!--<script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>-->
 </head>
 <body>
 <div id="ui-main" class="ui-main ui-widget-content ui-corner-all">

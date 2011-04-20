@@ -121,6 +121,7 @@ div.ui-header-logo {
     position: absolute;
     /* todo ie下小颤动 */
     margin-left: -1px;
+    z-index: 999;
 }
 .ui-nav-bar ul li ul li {
     clear: both;

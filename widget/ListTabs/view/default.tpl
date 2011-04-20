@@ -21,20 +21,22 @@
  * @version     $Id$
  * @since       2011-04-15 19:21:20 v0.7.9
  *}
+{strip}
 <div class="qw-listtabs">
-<ul>
+<ul class="ui-widget-content qw-listtabs-parent">
 {foreach from=$tabs item=tab}
-    <li>{Qwin_Util_JQuery::link($tab.url, $tab.title, $tab.icon, $tab.class, $tab.target, $tab.id)}<li>
+    <li>{Qwin_Util_JQuery::link($tab.url, $tab.title, $tab.icon, $tab.class, $tab.target, $tab.id)}</li>
 {/foreach}
 {if !empty($moreTab)}
     <li class="qw-listtabs-more" id="qw-listtabs-more">
         <a class="qw-listtabs-more-link">{$lang.ACT_MORE}</a>
         <ul class="ui-helper-hidden ui-state-hover ui-corner-bottom">
             {foreach from=$subTabs item=tab}
-            <li>{Qwin_Util_JQuery::link($tab.url, $tab.title, $tab.icon, $tab.class, $tab.target, $tab.id)}<li>
+            <li>{Qwin_Util_JQuery::link($tab.url, $tab.title, $tab.icon, $tab.class, $tab.target, $tab.id)}</li>
             {/foreach}
         </ul>
     </li>
 {/if}
 </ul>
 </div>
+{/strip}
