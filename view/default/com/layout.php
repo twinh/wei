@@ -23,18 +23,23 @@ $minify->addArray(array(
 ?>
 <!--[if IE 6]>
 <link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->getTag('root') ?>com/style/style-ie6.css" />
+<?php
+$pngFix = $jQuery->loadPlugin('pngFix', 'pack');
+?>
+<script type="text/javascript" src="<?php echo $pngFix['js'] ?>"></script>
 <![endif]-->
 <script type="text/javascript">
     jQuery.noConflict();
-    <?php echo 'Qwin.Lang = ' . json_encode(Qwin::call('-lang')->toArray()) . ';' ?>
-    Qwin.get = <?php echo Qwin_Util_Array::jsonEncode($_GET);?>;
+    Qwin.Lang = <?php echo json_encode(Qwin::call('-lang')->toArray()) ?>;
+    Qwin.get = <?php echo Qwin_Util_Array::jsonEncode($_GET) ?>;
 </script>
+<!--<script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>-->
 </head>
 <body>
-<div id="ui-main" class="ui-main ui-widget-content ui-corner-all"> 
-<table id="ui-main-table" border="0" cellpadding="0" cellspacing="0">
-    <tr id="ui-header" class="ui-header ui-widget">
-        <td id="ui-header-left" colspan="2">
+<div id="ui-main" class="ui-main ui-widget-content ui-corner-all">
+<table id="ui-header" class="ui-header ui-widget" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="ui-header-left">
             <div class="ui-header-logo ui-widget-content">
                 <a href="?">
                     <img src="<?php echo $this->getTag('root') ?>com/image/logo.png" alt="logo" />
@@ -61,17 +66,17 @@ $minify->addArray(array(
             <?php Qwin::hook('ViewNaviBar') ?>
         </td>
     </tr>
-    <tr id="ui-header2">
-        <td colspan="4">
-            <div class="ui-navbar2 ui-widget-content ui-state-default"></div>
-        </td>
-    </tr>
-    <tr>
+</table>
+<div class="ui-navbar2 ui-widget-content ui-state-default"></div>
+<table id="ui-main-table" border="0" cellpadding="0" cellspacing="0">
+    <tr id="ui-main-content">
         <td id="ui-main-left">
         <?php Qwin::hook('viewMainLeft', $this); ?>
         <?php require $this->getElement('sidebar') ?>
         </td>
-        <td id="ui-main-middle" class="ui-state-default"></td>
+        <td id="ui-main-middle" class="ui-state-default">
+            <div class="ui-main-middle-content"></div>
+        </td>
         <td id="ui-main-right" colspan="2">
         <?php require $this->getElement('content') ?>
         </td>

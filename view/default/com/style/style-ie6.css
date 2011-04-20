@@ -26,7 +26,7 @@ html, body {
 }
 
 /* 底部固定  */
-#ui-bottom-floating-botton {
+#ui-floating-footer {
     position: absolute;
     bottom: auto;
     top: expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));

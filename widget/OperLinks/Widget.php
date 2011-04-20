@@ -47,6 +47,24 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
             $unableActions = array();
         }
         $link = array();
+        $data = $view['data'];
+        $primaryKey = $view['primaryKey'];
+        
+        // 上一记录，下一记录
+        if ('edit' == $action || 'view' == $action) {
+            $link['next'] = array(
+                'url'   => $url->url($moduleUrl, $action, array($primaryKey => $data[$primaryKey], 'forward' => 'next')),
+                'title' => $lang['ACT_NEXT'],
+                'icon'  => 'ui-icon-circle-triangle-e',
+                'class' => 'qw-fr',
+            );
+            $link['prev'] = array(
+                'url'   => $url->url($moduleUrl, $action, array($primaryKey => $data[$primaryKey], 'forward' => 'prev')),
+                'title' => $lang['ACT_PREV'],
+                'icon'  => 'ui-icon-circle-triangle-w',
+                'class' => 'qw-fr',
+            );
+        }
 
         if (!in_array('index', $unableActions) && method_exists($controller, 'actionIndex')) {
             $link['index'] = array(
@@ -65,8 +83,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
 
         }
 
-        $data = $view['data'];
-        $primaryKey = $view['primaryKey'];
+        
         if (isset($data[$primaryKey])) {
             if (!in_array('edit', $unableActions) && method_exists($controller, 'actionEdit')) {
                 $link['edit'] = array(
@@ -114,21 +131,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
             'icon'  => 'ui-icon-arrowthickstop-1-w',
         );
 
-        // 上一记录，下一记录
-        if ('edit' == $action || 'view' == $action) {
-            $link['next'] = array(
-                'url'   => $url->url($moduleUrl, $action, array($primaryKey => $data[$primaryKey], 'forward' => 'next')),
-                'title' => $lang['ACT_NEXT'],
-                'icon'  => 'ui-icon-circle-triangle-e',
-                'class' => 'qw-fr',
-            );
-            $link['prev'] = array(
-                'url'   => $url->url($moduleUrl, $action, array($primaryKey => $data[$primaryKey], 'forward' => 'prev')),
-                'title' => $lang['ACT_PREV'],
-                'icon'  => 'ui-icon-circle-triangle-w',
-                'class' => 'qw-fr',
-            );
-        }
+        
 
         // 如果当前行为存在选项卡视图,加载该视图,否则直接输出默认选项卡内容
         $class = strtr($module, '/', '_') . '_OperLinksWidget';

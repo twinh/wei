@@ -83,16 +83,18 @@ div.ui-header-logo {
 /* Navigation Bar
 ----------------------------------*/
 .ui-nav-bar{
+    width: auto;
     border-left :0;
     border-right: 0;
     border-bottom: 0;
+    float: left;
     margin-top: 7px;
 }
 .ui-nav-bar ul.ui-navbar-parent{
     border: 0;
     z-index: 999;
     white-space: nowrap;
-/*    overflow: hidden;*/
+    overflow: hidden;
     width: 800px;
     height: 26px;
     background: none;
@@ -102,11 +104,12 @@ div.ui-header-logo {
 }
 .ui-nav-bar ul li {
     width: auto;
-/*    float: left;*/
-    border-bottom: 0;
-    margin: 0;
+    float: left;
     display: inline-table;
-/*    margin-bottom: -1px;*/
+    line-height: normal;
+}
+.ui-nav-bar ul li.ui-widget {
+    border-bottom: none;
 }
 .ui-nav-bar ul li a {
     padding: 5px 16px;
@@ -114,8 +117,9 @@ div.ui-header-logo {
 }
 .ui-nav-bar ul li ul {
     display: none;
-    text-align:left;
+    text-align: left;
     position: absolute;
+    /* todo ie下小颤动 */
     margin-left: -1px;
 }
 .ui-nav-bar ul li ul li {
@@ -125,16 +129,18 @@ div.ui-header-logo {
 }
 /* 
   修复部分使用部分字体导致该栏下面空一像素的问题
-  todo 更合适的字体
+  todo ubuntu 下空1px, windows正常
 */
-.ui-nav-bar ul li.ui-state-active a {
+/*.ui-nav-bar ul li.ui-state-active a {
     font-family: sans-serif;
-}
+}*/
 
 #ui-header{
     height: 60px;
+    width: 100%;
 }
 #ui-header-left{
+    width: 204px;
     vertical-align: top;
 }
 #ui-header-middle{
@@ -143,12 +149,10 @@ div.ui-header-logo {
 #ui-header-right{
     vertical-align: top;
 }
-
-#ui-header2{
-    height: 26px;
-    overflow: hidden;
+#ui-main-content {
+    vertical-align: top;
 }
-#ui-main-table .ui-navbar2 {
+#ui-main .ui-navbar2 {
     height: 26px;
     border-left: 0;
     border-right: 0;
@@ -175,7 +179,7 @@ div.ui-header-logo {
     font-weight:normal;
     border: 0;
 }
-.ui-sidebar-content ul li:hover{
+.ui-sidebar-content ul li.ui-state-hover{
     border: 0;
 }
 .ui-sidebar-content ul li a{
@@ -207,10 +211,14 @@ div.ui-header-logo {
     width: 198px;
     vertical-align: top;
 }
-#ui-main-middle{
+#ui-main-middle {
     width: 4px;
     border-top: none;
+    vertical-align: top;
 /*    cursor: pointer;*/
+}
+.ui-main-middle-content {
+    height: 100%;
 }
 #ui-main-right{
     width: auto;
@@ -253,9 +261,11 @@ div.ui-header-logo {
 .ui-box .ui-box-header {
     width: 100%;
     border: none;
-/*    height: 40px;*/
     line-height: 40px;
     text-indent: 16px;
+}
+.ui-box .ui-box-header img {
+    *padding-top: 5px;
 }
 .ui-box .ui-box-header .ui-box-header-icon{
     vertical-align: middle;
@@ -316,8 +326,6 @@ div.ui-box-tab .ui-tabs-panel{
 .ui-form .ui-form-content{
     padding: 0 10px;
 }
-
-
 .ui-form .ui-form-content fieldset {
     margin: 5px;
     padding-left: 5px;

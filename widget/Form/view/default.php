@@ -49,10 +49,16 @@ validateCode['<?php echo $options['id'] ?>'] = <?php echo $validateCode ?>;
 <fieldset id="ui-fieldset-<?php echo $groupKey ?>" class="ui-widget-content ui-corner-all">
     <legend><?php echo qw_lang($group[$groupKey]) ?></legend>
     <table class="ui-form-table" id="ui-form-table-<?php echo $groupKey ?>" width="100%">
-        <colgroup width="12.5%"></colgroup>
+        <tr>
+            <td width="12.5%"></td>
+            <td width="37.5%"></td>
+            <td width="12.5%"></td>
+            <td width="37.5%"></td>
+        </tr>
+<!--        <colgroup width="12.5%"></colgroup>
         <colgroup width="37.5%"></colgroup>
         <colgroup width="12.5%"></colgroup>
-        <colgroup width="37.5%"></colgroup>
+        <colgroup width="37.5%"></colgroup>-->
         <?php
         foreach($fieldGroup as $row):
         ?>
@@ -71,7 +77,7 @@ validateCode['<?php echo $options['id'] ?>'] = <?php echo $validateCode ?>;
             <?php
                 else:
             ?>
-            <td class="ui-label-common"><label for="<?php echo $cell[1]['id'] ?>"><?php echo $lang[$cell[0]] ?>:</label></td>
+            <td class="ui-label-common ui-label-common-<?php echo count($row) ?>"><label for="<?php echo $cell[1]['id'] ?>"><?php echo $lang[$cell[0]] ?>:</label></td>
             <td class="ui-field-common ui-field-<?php echo $cell[1]['_type'] ?>"<?php echo $colspan ?>>
               <?php echo $this->renderElement($cell[1]) , $this->renderElementWidget($cell[1]) ?>
             </td>
