@@ -97,5 +97,16 @@ jQuery(function($){
         window.location.href = url;
         return false;
     });
+
+    // 根据窗口变化设置jqGrid宽度等
+    setJqGridWidth();
+    $(window).resize(function(){
+        setJqGridWidth();
+    });
+    function setJqGridWidth() {
+        var fullWidth = $('#ui-header-middle').width();
+        jqGridObj.jqGrid('setGridWidth', fullWidth - 32);
+        $('#ui-form').width(fullWidth);
+    }
 });
 </script>

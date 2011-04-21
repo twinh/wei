@@ -1,6 +1,5 @@
 jQuery(function($){
-    function getWidgetObject()
-    {
+    function getWidgetObject() {
         $('body').append('<div id="ui-temp-widget-tcontent" class="ui-widget-content ui-helper-hidden"></div>');
         return $('#ui-temp-widget-tcontent');
     }
@@ -42,36 +41,6 @@ jQuery(function($){
         return false;
     })
 
-    // 页眉导航
-    $('#ui-top-floating-bar ul li.ui-top-bar-list').hover(
-        function(){
-            var firstAnchor = $(this).find('a:first');
-            var ul = $(this).find('ul');
-
-            firstAnchor.addClass('ui-state-hover');
-            if('' != $.trim(ul.html())){
-                firstAnchor
-                    .removeClass('ui-corner-all')
-                    .addClass('ui-corner-top');
-                ul.show();
-            }
-        },function(){
-            var firstAnchor = $(this).find('a:first');
-            var ul = $(this).find('ul');
-            
-            firstAnchor
-                .removeClass('ui-state-hover ui-corner-top')
-                .addClass('ui-corner-all');
-            ul.hide();
-        }
-    )
-    .find('li').hover(
-        function(){
-            $(this).addClass('ui-state-active').css('border', 'none')
-        },function(){
-            $(this).removeClass('ui-state-active');
-    });
-
     // 点击盒子右上角,显示或隐藏盒子内容
     $('a.ui-box-title-icon')
         .qui()
@@ -98,8 +67,10 @@ jQuery(function($){
 
     // 修复中间栏不能达到最大高度的问题
     fixMainTableHeight();
-    function fixMainTableHeight()
-    {
+    $(window).resize(function(){
+        fixMainTableHeight();
+    });
+    function fixMainTableHeight() {
         if (!document.getElementById('ui-main-table')) {
            return false;
         }

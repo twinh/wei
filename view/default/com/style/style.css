@@ -212,13 +212,17 @@ div.ui-header-logo {
     width: 198px;
     vertical-align: top;
 }
+.ui-mian-left-panel {
+    width: 198px;
+}
 #ui-main-middle {
     width: 4px;
     border-top: none;
     vertical-align: top;
 /*    cursor: pointer;*/
 }
-.ui-main-middle-content {
+.ui-main-middle-panel {
+    width: 4px;
     height: 100%;
 }
 #ui-main-right{
@@ -284,7 +288,7 @@ div.ui-header-logo {
 .ui-box .ui-box-content{
     border: 0;
     background: none;
-    overflow: auto;
+    overflow: hidden;
 }
 div.ui-box-tab{
      padding: 5px;
@@ -323,6 +327,8 @@ div.ui-box-tab .ui-tabs-panel{
 }
 .ui-form{
     width: auto;
+    overflow: hidden;
+    min-width: 800px;
 }
 .ui-form .ui-form-content{
     padding: 0 10px;
