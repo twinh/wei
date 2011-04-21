@@ -25,6 +25,14 @@
 
 class Com_Member_My_Controller extends Com_Controller
 {
+    /**
+     * 锁定的核心帐号，防止恶意修改
+     * @var array
+     */
+    protected $_lock = array(
+        'guest', 'admin', '7641b5b1-c727-6c07-e11f-9cb5b74ddfc9',
+    );
+    
     public function  __construct($config = array(), $module = null, $action = null) {
         parent::__construct($config, $module, $action);
         $this->_memberModule = new Qwin_Module('com/member');
@@ -63,6 +71,32 @@ class Com_Member_My_Controller extends Com_Controller
                 'module'    => $this->_memberModule,
                 'id'        => $member['id'],
             ));
+    }
+
+    public function actionEditPassword()
+    {
+        $request = $this->_request;
+        $member = $this->getMember();
+        $id = $member['id'];
+        if (in_array($id, $this->_lock)) {
+            $lang = Qwin::call('-lang');
+            return $this->getView()->alert($lang->t('MSG_MEMBER_LOCKED'));
+        }
+        $meta = Qwin_Metadata::getInstance()->get('Com_Member_PasswordMetadata');
+
+        if (!$request->isPost()) {
+            return Qwin::call('-widget')->get('View')->execute(array(
+                'module'    => $this->_memberModule,
+                'meta'      => $meta,
+                'id'        => $id,
+                'asAction'  => 'edit',
+                'isView'    => false,
+            ));
+        } else {
+            return Com_Widget::getByModule('com/member', 'editPassword')->execute(array(
+                'data'      => array('id' => $id) + $_POST,
+            ));
+        }
     }
 
     public function actionStyle()
