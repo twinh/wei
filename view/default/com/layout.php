@@ -68,11 +68,13 @@ $minify->addArray(array(
 <table id="ui-main-table" border="0" cellpadding="0" cellspacing="0">
     <tr id="ui-main-content">
         <td id="ui-main-left">
+        <div class="ui-mian-left-panel">
         <?php Qwin::hook('viewMainLeft', $this); ?>
         <?php require $this->getElement('sidebar') ?>
+        </div>
         </td>
         <td id="ui-main-middle" class="ui-state-default">
-            <div class="ui-main-middle-content"></div>
+            <div class="ui-main-middle-panel"></div>
         </td>
         <td id="ui-main-right" colspan="2">
         <?php require $this->getElement('content') ?>
