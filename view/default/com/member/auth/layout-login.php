@@ -65,9 +65,9 @@ $minify->addArray(array(
     });
 </script>
 <div id="ui-main" class="ui-main ui-widget-content ui-corner-all">
-<table id="ui-main-table" border="0" cellpadding="0" cellspacing="0">
-    <tr id="ui-header" class="ui-header ui-widget">
-        <td id="ui-header-left" colspan="2">
+    <table id="ui-header" class="ui-header ui-widget" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="ui-header-left">
             <div class="ui-header-logo ui-widget-content">
                 <a href="?">
                     <img src="<?php echo $this->getTag('root') ?>com/image/logo.png" alt="logo" />
@@ -77,6 +77,7 @@ $minify->addArray(array(
         <td colspan="2" id="ui-header-middle">
             <div class="ui-header-shortcut" id="ui-header-shortcut">
                 <a class="ui-state-default" href="<?php echo qw_u('com/member/my') ?>"><?php echo qw_t('LBL_WELCOME') ?>, <?php echo $nickname ?>!</a>
+<!--                <a class="ui-state-default" href="<?php echo qw_url(array('module' => 'Management', 'controller' => 'Management')) ?>"><?php echo qw_t('LBL_MANAGEMENT') ?></a>-->
                 <?php
                 if('guest' == $member['username']):
                 ?>
@@ -89,13 +90,12 @@ $minify->addArray(array(
                 endif;
                 ?>
             </div>
+            <div class="qw-c"></div>
         </td>
     </tr>
-    <tr id="ui-header2">
-        <td colspan="4">
-            <div class="ui-navbar2 ui-widget-content ui-state-default"></div>
-        </td>
-    </tr>
+</table>
+<div class="ui-navbar2 ui-widget-content ui-state-default"></div>
+<table id="ui-main-table" border="0" cellpadding="0" cellspacing="0">
     <tr>
         <td class="qw-login" colspan="4">
 <div class="qw-login-panel ui-widget">
