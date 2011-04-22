@@ -99,7 +99,10 @@ jQuery(function($){
     });
 
     // 根据窗口变化设置jqGrid宽度等
-    setJqGridWidth();
+    // 修复360极速浏览器(6.0Chrome内核)宽度不正确的问题
+    $(window).load(function() {
+        setJqGridWidth();
+    });
     $(window).resize(function(){
         setJqGridWidth();
     });

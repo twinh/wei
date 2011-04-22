@@ -29,8 +29,8 @@ $minify->addArray(array(
     jQuery.noConflict();
     Qwin.get = <?php echo Qwin_Util_Array::jsonEncode($_GET) ?>;
     Qwin.Lang = <?php echo json_encode(Qwin::call('-lang')->toArray()) ?>;
-    
 </script>
+<!--<script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>-->
 </head>
 <body>
 <div id="ui-main" class="ui-main ui-widget-content ui-corner-all">
