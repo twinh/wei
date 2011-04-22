@@ -66,7 +66,10 @@ jQuery(function($){
     $('table.ui-table td a.ui-jqgrid-icon').qui();
 
     // 修复中间栏不能达到最大高度的问题
-    fixMainTableHeight();
+    // 修复360极速浏览器(6.0Chrome内核)高度不正确的问题
+    $(window).load(function() {
+        fixMainTableHeight();
+    });
     $(window).resize(function(){
         fixMainTableHeight();
     });
