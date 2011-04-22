@@ -25,6 +25,13 @@
 
 class Com_Home_Controller extends Com_Controller
 {
+    public function actionAbout()
+    {
+        $meta['page']['icon'] = 'clipboard';
+        $meta['page']['title'] = 'MOD_COM_HOME';
+        $this->getView()->assign(get_defined_vars());
+    }
+
     public function actionUpdateLog()
     {
         $meta['page']['icon'] = 'clipboard';

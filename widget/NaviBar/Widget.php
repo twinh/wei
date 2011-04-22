@@ -55,7 +55,14 @@ class NaviBar_Widget extends Qwin_Widget_Abstract
                 'more' => $this->_defaults['more']
             );
             $menus[1]['more'] = $moreMenus;
-         }
+        }
+
+        // 增加Qwin链接
+        $url = Qwin::call('-url');
+        $menus['qwin'] = array(
+            'title' => $this->_lang['LBL_QWIN'],
+            'url' => $url->url('com/home', 'about'),
+        );
 
         // 页面名称
         $queryString = empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING'];

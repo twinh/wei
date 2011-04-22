@@ -24,7 +24,7 @@
 <div id="ui-nav-bar" class="ui-nav-bar">
     <ul class="ui-widget-content ui-navbar-parent">
     {strip}
-        <li class="ui-widget ui-state-active ui-corner-top"> <a href="?">{qw_t('LBL_QWIN')}</a>
+        <li class="ui-widget ui-state-active ui-corner-top"> <a href="{$menus.qwin.url}">{$menus.qwin.title}</a>
         </li>
         {foreach from=$menus[0] item=menu}
         <li class="ui-widget ui-state-default ui-corner-top"><a href="{$menu.url}" target="{$menu.target}">{$menu.title}</a>
