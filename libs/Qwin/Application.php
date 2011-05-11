@@ -118,7 +118,7 @@ class Qwin_Application
         date_default_timezone_set($config['timezone']);
 
         // 加载框架主类,设置自动加载类
-        require_once $config['resource'] . '/library/Qwin.php';
+        require_once $config['resource'] . 'libs/Qwin.php';
         Qwin::setOption($config['Qwin']);
         $config = Qwin::config($config);
 
