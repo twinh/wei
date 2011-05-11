@@ -49,7 +49,7 @@ class Filter_Widget extends Qwin_Widget_Abstract
         if (!$request->get('filter')) {
             return false;
         }
-        
+
         $lang = $this->_lang;
         $meta = $options['meta'];
         $url = Qwin::call('-url');

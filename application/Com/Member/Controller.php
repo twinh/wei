@@ -49,7 +49,7 @@ class Com_Member_Controller extends Com_ActionController
             return $this->getView()->alert($lang->t('MSG_MEMBER_LOCKED'));
         }
         $meta = Qwin_Metadata::getInstance()->get('Com_Member_PasswordMetadata');
-
+        
         if (!$request->isPost()) {
             return Qwin::call('-widget')->get('View')->execute(array(
                 'module'    => $this->_module,

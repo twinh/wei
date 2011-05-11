@@ -68,7 +68,7 @@ class Com_Member_Auth_Widget_Login extends Qwin_Widget_Abstract
 
         // 不对验证码做检查,即删除验证码元数据配置
         if (!$options['checkCaptcha']) {
-            unset($meta['field']['captcha']);
+            unset($meta['fields']['captcha']);
         }
 
         /* @var $validator Validator_Widget */

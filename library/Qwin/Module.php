@@ -93,7 +93,10 @@ class Qwin_Module
 
     public function toPath()
     {
-        
+        if (!$this->_path) {
+            $this->_path = strtr($this->toClass(), '_', '/') . '/';
+        }
+        return $this->_path;
     }
 
     /**

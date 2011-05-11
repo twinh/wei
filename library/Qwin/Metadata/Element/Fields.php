@@ -25,7 +25,7 @@
  * @since       2010-7-26 14:07:07
  */
 
-class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Driver
+class Qwin_Metadata_Element_Fields extends Qwin_Metadata_Element_Driver
 {
    /**
      * 查找属性的缓存数组
@@ -38,26 +38,10 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Driver
      * @var array
      */
     protected $_defaults = array(
-        'basic' => array(
-            'title' => 'FLD_TITLE',
-            'description' => array(),
-            'order' => 50,
-            'group' => 0,
-        ),
-        'form' => array(
-            '_type' => 'text',
-            '_resource' => null,
-            '_value' => '',
-            'name' => null,
-//            '_resourceGetter' => null,
-//            '_resourceFormFile' => null,
-//            '_widget' => array(),
-//            'id' => null,
-//            'class' => null,
-        ),
+        'title' => 'FLD_TITLE',
+        'description' => array(),
+        'order' => 50,
         'attr' => array(
-            'isLink' => 0,
-            'isList' => 0,
             'isDbField' => 1,
             'isDbQuery' => 1,
             'isReadonly' => 0,
@@ -109,14 +93,10 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Driver
                 throw new Qwin_Metadata_Element_Field_Exception('The name value is not defined.');
             }
         }
-
-        if (!isset($data['basic'])) {
-            $data['basic'] = array();
-        }
         
         // 设置名称
-        if (!isset($data['basic']['title'])) {
-            $data['basic']['title'] = 'FLD_' . strtoupper($data['form']['name']);
+        if (!isset($data['title'])) {
+            $data['title'] = 'FLD_' . strtoupper($data['form']['name']);
         }
         // 设置编号
         if (!isset($data['form']['id'])) {
@@ -142,12 +122,13 @@ class Qwin_Metadata_Element_Field extends Qwin_Metadata_Element_Driver
         }
         
         foreach ($this->_defaults as $key => $row) {
-            if (isset($data[$key])) {
+            if (!array_key_exists($key, $data)) {
+                $data[$key] = $row;
+            } elseif (is_array($data[$key])) {
                 $data[$key] = array_merge($row, $data[$key]);
-            } else {
-                 $data[$key] = $row;
             }
         }
+        
         return $data;
     }
 

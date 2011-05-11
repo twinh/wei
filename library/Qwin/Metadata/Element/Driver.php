@@ -118,4 +118,14 @@ abstract class Qwin_Metadata_Element_Driver extends ArrayObject implements Qwin_
         }
         return $array1;
     }
+    
+    public function getBy($key, $value)
+    {
+        foreach ($this as $name => $field) {
+            if ($field[$key] === $value) {
+                $result[$name] = true;
+            }
+        }
+        return $result;
+    }
 }

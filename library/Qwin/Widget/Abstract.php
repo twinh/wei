@@ -269,4 +269,25 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
         }
         return $array1;
     }
+
+    public function  __get($name)
+    {
+        if ('_' == $name[0]) {
+            return $this->_widget->get(ucfirst(substr($name, 1)));
+        }
+        throw new Exception('Undefined property: ' . get_class($this) . '::$' . $name);
+    }
+    
+    public function e()
+    {
+        $this->_E->setObject($this);
+        call_user_func_array(array($this->_E, 'e'), func_get_args());
+    }
+    
+    public function result($result = true, $data = array())
+    {
+        return array(
+            'r'
+        );
+    }
 }

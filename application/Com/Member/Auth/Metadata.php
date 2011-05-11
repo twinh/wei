@@ -31,7 +31,7 @@ class Com_Member_Auth_Metadata extends Com_Metadata
     public function setMetadata()
     {
         $this->merge(array(
-            'field' => array(
+            'fields' => array(
                 'captcha' => array(
                     'form' => array(
                         'class' => 'ui-widget-content ui-corner-all',

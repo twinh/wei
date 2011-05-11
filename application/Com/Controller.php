@@ -219,10 +219,10 @@ class Com_Controller extends Qwin_Application_Controller
         }
 
         // TODO 修复权限管理
-        if ('guest' == $member['username'] && $this->_module != 'com/member/auth') {
-            $lang = Qwin::call('-lang');
-            return Qwin::call('-view')->alert($lang->t('MSG_PERMISSION_NOT_ENOUGH'));
-        }
+//        if ('guest' == $member['username'] && $this->_module != 'com/member/auth') {
+//            $lang = Qwin::call('-lang');
+//            return Qwin::call('-view')->alert($lang->t('MSG_PERMISSION_NOT_ENOUGH'));
+//        }
         return true;
     }
 }

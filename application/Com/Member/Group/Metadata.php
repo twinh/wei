@@ -32,7 +32,7 @@ class Com_Member_Group_Metadata extends Com_Metadata
         $this->setCommonMetadata();
         $this->merge(array(
             // 基本属性
-            'field' => array(
+            'fields' => array(
                 'name' => array(
                     'attr' => array(
                         'isList' => 1,

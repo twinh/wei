@@ -30,7 +30,7 @@ class Qwin_Metadata_Element_Db extends Qwin_Metadata_Element_Driver
     protected $_defaults = array(
         'type' => 'sql',
         'table' => null,
-        'primaryKey' => 'id',
+        'id' => 'id',
         'offset' => 0,
         'limit' => 10,
         'order' => array(),

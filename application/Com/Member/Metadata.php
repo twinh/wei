@@ -29,225 +29,225 @@ class Com_Member_Metadata extends Com_Metadata
 {
     public function setMetadata()
     {
-        $this->setCommonMetadata()
-             ->merge(array(
-            'field' => array(
-                'group_id' => array(
-                    'form' => array(
-                        '_type' => 'select',
-                        '_resourceGetter' => array(
-                            array('Com_Category_Widget', 'get'),
-                            array(
-                                'com/member/group',
-                                null,
-                                array('id', null, 'name'),
-                            ),
-                        ),
-                    ),
-                    'sanitiser' => array(
-                        'list' => array(
-                            array('Com_Category_Widget', 'sanitise'),
-                            array(
-                                'com/member/group',
-                                null,
-                                array('id', null, 'name'),
-                            ),
-                        ),
-                        'view' => 'list',
-                    ),
-                    'attr' => array(
-                        'isLink' => 1,
-                        'isList' => 1,
-                    ),
-                    'validator' => array(
-                        'rule' => array(
-                            'notNull' => true,
-                        ),
-                    ),
-                ),
-                'username' => array(
-                    'attr' => array(
-                        'isList' => 1,
-                        'isReadonly' => 1,
-                    ),
-                    'validator' => array(
-                        'rule' => array(
-                            'required' => true,
-                            'maxlength' => 40,
-                        ),
-                    ),
-                ),
-                'password' => array(
-                    'form' => array(
-                        '_type' => 'password',
-                    ),
-                    'attr' => array(
-                        'isReadonly' => 1,
-                        'isView' => 0,
-                    ),
-                    'sanitiser' => array(
-                        'db' => array(
-                            'md5'
-                        )
-                    ),
-                    'validator' => array(
-                        'rule' => array(
-                            'required' => true,
-                            'rangelength' => array(5, 40),
-                        ),
-                    ),
-                ),
-                'password2' => array(
-                    'form' => array(
-                        '_type' => 'password',
-                    ),
-                    'attr' => array(
-                        'isReadonly' => 1,
-                        'isView' => 0,
-                        'isDbField' => 0,
-                    ),
-                    'validator' => array(
-                        'rule' => array(
-                            'required' => true,
-                            'equalTo' => '#password',
-                        ),
-                    ),
-                ),
-                'email' => array(
-                    'attr' => array(
-                        'isList' => 1,
-                    ),
-                    'validator' => array(
-                        'rule' => array(
-                            'required' => true,
-                            'email' => true,
-                            'maxlength' => 256,
-                        ),
-                    ),
-                ),
-                'first_name' => array(
-
-                ),
-                'last_name' => array(
-
-                ),
-                'photo' => array(
-                    'form' => array(
-                        '_widget' => array(
-                            'fileTree',
-                            'ajaxUpload',
-                        ),
-                    ),
-                ),
-                'sex' => array(
-                    'form' => array(
-                        '_type' => 'select',
-                        '_resourceGetter' => array(
-                            array('Ide_Option_Widget', 'get'),
-                            'sex',
-                        ),
-                    ),
-                    'sanitiser' => array(
-                        'list' => array(
-                            array('Ide_Option_Widget', 'sanitise'),
-                            'sex',
-                        ),
-                        'view' => 'list',
-                    ),
-                    'attr' => array(
-                        'isLink' => 1,
-                    ),
-                ),
-                'birthday' => array(
-                    'form' => array(
-                        '_widget' => array(
-                            array(
-                                array('Datepicker_Widget', 'render')
-                            ),
-                        ),
-                    )
-                ),
-                'reg_ip' => array(
-                    'basic' => array(
-                        'group' => 1,
-                    ),
-                ),
-                'theme' => array(
-                    'basic' => array(
-                        'group' => 1,
-                    ),
-                ),
-                'language' => array(
-                    'basic' => array(
-                        'group' => 1,
-                    ),
-                    'form' => array(
-                        '_type' => 'select',
-                        '_resourceGetter' => array(
-                            array('Ide_Option_Widget', 'get'),
-                            'language',
-                        ),
-                    ),
-                ),
-                'telephone' => array(
-                    'basic' => array(
-                        'group' => 1,
-                    ),
-                ),
-                'mobile' => array(
-                    'basic' => array(
-                        'group' => 1,
-                    ),
-                ),
-                'homepage' => array(
-                    'basic' => array(
-                        'group' => 1,
-                    ),
-                ),
-                'address' => array(
-                    'basic' => array(
-                        'group' => 1,
-                    ),
-                ),
-            ),
-            'group' => array(
-                0 => 'LBL_GROUP_BASIC_DATA',
-                1 => 'LBL_GROUP_DETAIL_DATA',
-            ),
-            'model' => array(
-                /*'group' => array(
-                    'alias' => 'group',
-                    'local' => 'group_id',
-                    'foreign' => 'id',
-                    'type' => 'view',
-                    'fieldMap' => array(
-                        'group_id' => 'name',
-                    ),
-                    'asc' => array(
-                        'package' => 'Common',
-                        'module' => 'Member',
-                        'controller' => 'Group',
-                    ),
-                ),*/
-            ),
-            'db' => array(
-                'table' => 'member',
-                'nameField' => array(
-                    'username',
-                ),
-            ),
-            // 页面显示
-            'page' => array(
-                'title' => 'LBL_MODULE_MEMBER',
-                'icon' => 'user',
-                'tableLayout' => 2,
-            ),
-        ));
+//        $this->setCommonMetadata()
+//             ->merge(array(
+//            'field' => array(
+//                'group_id' => array(
+//                    'form' => array(
+//                        '_type' => 'select',
+//                        '_resourceGetter' => array(
+//                            array('Com_Category_Widget', 'get'),
+//                            array(
+//                                'com/member/group',
+//                                null,
+//                                array('id', null, 'name'),
+//                            ),
+//                        ),
+//                    ),
+//                    'sanitiser' => array(
+//                        'list' => array(
+//                            array('Com_Category_Widget', 'sanitise'),
+//                            array(
+//                                'com/member/group',
+//                                null,
+//                                array('id', null, 'name'),
+//                            ),
+//                        ),
+//                        'view' => 'list',
+//                    ),
+//                    'attr' => array(
+//                        'isLink' => 1,
+//                        'isList' => 1,
+//                    ),
+//                    'validator' => array(
+//                        'rule' => array(
+//                            'notNull' => true,
+//                        ),
+//                    ),
+//                ),
+//                'username' => array(
+//                    'attr' => array(
+//                        'isList' => 1,
+//                        'isReadonly' => 1,
+//                    ),
+//                    'validator' => array(
+//                        'rule' => array(
+//                            'required' => true,
+//                            'maxlength' => 40,
+//                        ),
+//                    ),
+//                ),
+//                'password' => array(
+//                    'form' => array(
+//                        '_type' => 'password',
+//                    ),
+//                    'attr' => array(
+//                        'isReadonly' => 1,
+//                        'isView' => 0,
+//                    ),
+//                    'sanitiser' => array(
+//                        'db' => array(
+//                            'md5'
+//                        )
+//                    ),
+//                    'validator' => array(
+//                        'rule' => array(
+//                            'required' => true,
+//                            'rangelength' => array(5, 40),
+//                        ),
+//                    ),
+//                ),
+//                'password2' => array(
+//                    'form' => array(
+//                        '_type' => 'password',
+//                    ),
+//                    'attr' => array(
+//                        'isReadonly' => 1,
+//                        'isView' => 0,
+//                        'isDbField' => 0,
+//                    ),
+//                    'validator' => array(
+//                        'rule' => array(
+//                            'required' => true,
+//                            'equalTo' => '#password',
+//                        ),
+//                    ),
+//                ),
+//                'email' => array(
+//                    'attr' => array(
+//                        'isList' => 1,
+//                    ),
+//                    'validator' => array(
+//                        'rule' => array(
+//                            'required' => true,
+//                            'email' => true,
+//                            'maxlength' => 256,
+//                        ),
+//                    ),
+//                ),
+//                'first_name' => array(
+//
+//                ),
+//                'last_name' => array(
+//
+//                ),
+//                'photo' => array(
+//                    'form' => array(
+//                        '_widget' => array(
+//                            'fileTree',
+//                            'ajaxUpload',
+//                        ),
+//                    ),
+//                ),
+//                'sex' => array(
+//                    'form' => array(
+//                        '_type' => 'select',
+//                        '_resourceGetter' => array(
+//                            array('Ide_Option_Widget', 'get'),
+//                            'sex',
+//                        ),
+//                    ),
+//                    'sanitiser' => array(
+//                        'list' => array(
+//                            array('Ide_Option_Widget', 'sanitise'),
+//                            'sex',
+//                        ),
+//                        'view' => 'list',
+//                    ),
+//                    'attr' => array(
+//                        'isLink' => 1,
+//                    ),
+//                ),
+//                'birthday' => array(
+//                    'form' => array(
+//                        '_widget' => array(
+//                            array(
+//                                array('Datepicker_Widget', 'render')
+//                            ),
+//                        ),
+//                    )
+//                ),
+//                'reg_ip' => array(
+//                    'basic' => array(
+//                        'group' => 1,
+//                    ),
+//                ),
+//                'theme' => array(
+//                    'basic' => array(
+//                        'group' => 1,
+//                    ),
+//                ),
+//                'language' => array(
+//                    'basic' => array(
+//                        'group' => 1,
+//                    ),
+//                    'form' => array(
+//                        '_type' => 'select',
+//                        '_resourceGetter' => array(
+//                            array('Ide_Option_Widget', 'get'),
+//                            'language',
+//                        ),
+//                    ),
+//                ),
+//                'telephone' => array(
+//                    'basic' => array(
+//                        'group' => 1,
+//                    ),
+//                ),
+//                'mobile' => array(
+//                    'basic' => array(
+//                        'group' => 1,
+//                    ),
+//                ),
+//                'homepage' => array(
+//                    'basic' => array(
+//                        'group' => 1,
+//                    ),
+//                ),
+//                'address' => array(
+//                    'basic' => array(
+//                        'group' => 1,
+//                    ),
+//                ),
+//            ),
+//            'group' => array(
+//                0 => 'LBL_GROUP_BASIC_DATA',
+//                1 => 'LBL_GROUP_DETAIL_DATA',
+//            ),
+//            'model' => array(
+//                /*'group' => array(
+//                    'alias' => 'group',
+//                    'local' => 'group_id',
+//                    'foreign' => 'id',
+//                    'type' => 'view',
+//                    'fieldMap' => array(
+//                        'group_id' => 'name',
+//                    ),
+//                    'asc' => array(
+//                        'package' => 'Common',
+//                        'module' => 'Member',
+//                        'controller' => 'Group',
+//                    ),
+//                ),*/
+//            ),
+//            'db' => array(
+//                'table' => 'member',
+//                'nameField' => array(
+//                    'username',
+//                ),
+//            ),
+//            // 页面显示
+//            'page' => array(
+//                'title' => 'LBL_MODULE_MEMBER',
+//                'icon' => 'user',
+//                'tableLayout' => 2,
+//            ),
+//        ));
     }
 
     public function sanitiseListOperation($value, $name, $data, $copyData)
     {
-        $primaryKey = $this->db['primaryKey'];
+        $primaryKey = $this['db']['id'];
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
         $module = $this->getModule();

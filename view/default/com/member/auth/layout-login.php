@@ -105,11 +105,11 @@ $minify->addArray(array(
         <table width="100%" cellpadding="4" cellspacing="20">
             <tr>
                 <td class="qw-login-label"><label for="username"><?php echo qw_lang('FLD_USERNAME')?>:</label></td>
-                <td class="qw-login-input"><?php echo qw_form($meta['field']['username']['form'], $request['username']) ?></td>
+                <td class="qw-login-input"><?php echo qw_form($meta['fields']['username']['form'], $request['username']) ?></td>
             </tr>
             <tr>
                 <td class="qw-login-label"><label for="password"><?php echo qw_lang('FLD_PASSWORD')?>:</label></td>
-                <td class="qw-login-input"><?php echo qw_form($meta['field']['password']['form']) ?></td>
+                <td class="qw-login-input"><?php echo qw_form($meta['fields']['password']['form']) ?></td>
             </tr>
             <tr>
                 <td>&nbsp;</td>

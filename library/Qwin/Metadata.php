@@ -41,7 +41,9 @@ class Qwin_Metadata
      * @var array
      */
     protected $_drivers = array(
-        'field'     => 'Qwin_Metadata_Element_Field',
+        'fields'    => 'Qwin_Metadata_Element_Fields',
+        'list'      => 'Qwin_Metadata_Element_List',
+        'form'      => 'Qwin_Metadata_Element_Form',
         'group'     => 'Qwin_Metadata_Element_Group',
         'model'     => 'Qwin_Metadata_Element_Model',
         'db'        => 'Qwin_Metadata_Element_Db',
@@ -150,5 +152,19 @@ class Qwin_Metadata
             return $this->_drivers;
         }
         return isset($this->_drivers[$name]) ? $this->_drivers[$name] : null;
+    }
+    
+    /**
+     * 验证是否为合法元数据变量
+     * 
+     * @param Qwin_Metadata_Abstract $meta 
+     * @return bool
+     */
+    public static function isValid($meta)
+    {
+        if (is_object($meta) && $meta instanceof Qwin_Metadata_Abstract) {
+            return true;
+        }
+        return false;
     }
 }
