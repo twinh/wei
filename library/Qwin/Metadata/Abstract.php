@@ -147,6 +147,37 @@ abstract class Qwin_Metadata_Abstract extends ArrayObject
         }
         return $this;
     }
+    
+    /**
+     *
+     * @param string $index 
+     * @param array $data
+     * @param string $driver 
+     */
+    public function set($index, $data, $driver = null)
+    {
+        // 获取驱动
+        if (isset($driver)) {
+            $driver = Qwin_Metadata::getInstance()->getDriver($driver);
+        } else {
+            $driver = Qwin_Metadata::getInstance()->getDriver($index);
+        }
+        
+        if (isset($this[$index])) {
+            $data = $data + $this[$index]->getArrayCopy();
+            $this[$index] = new $driver;
+            $this[$index]->merge($data);
+        } else {
+            if (isset($driver)) {
+                $this[$index] = new $driver;
+                $this[$index]->merge($data);
+            } else {
+                $this[$index] = $data;
+            }
+        }
+        
+        return $this;
+    }
 
     /**
      * 获取元数据唯一编号

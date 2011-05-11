@@ -30,37 +30,56 @@ class JsonList_Widget extends Qwin_Widget_Abstract
     /**
      * 默认选项
      * @var array
+     *
+     *      -- module       模块标识
+     *
+     *      -- list         显示的域，可以是数组，或者用“,”分开
+     *
+     *      -- order        排列顺序, 0键为键名，1键为排序类型（DESC，ASC）
+     *
+     *      -- search       查询的语句
+     *
+     *      -- page         当前页数
+     *
+     *      -- row          每页显示数目
+     *
+     *      -- sanitise     是否转换数据
+     *
+     *      -- display      是否显示数据
      */
     protected $_defaults = array(
         'module'    => null,
+        'listName'  => 'list',
         'list'      => null,
         'order'     => null,
         'search'    => null,
         'page'      => null,
         'row'       => null,
-        'asAction'  => 'list',
-        'isView'    => true,
         'sanitise'  => true,
         'display'   => true,
     );
 
+    
     public function execute(array $options = null)
     {
-        // 初始配置
-        $options     = array_merge($this->_options, $options);
-
-        // 处理显示域
-        $listFields  = $options['list'];
-        if (is_string($listFields)) {
-            $listFields = Qwin_Util_String::split2d($listFields);
-        }
+        // 初始化配置
+        $options = array_merge($this->_options, $options);
         
         /* @var $meta Com_Metadata */
         $meta = Com_Metadata::getByModule($options['module']);
 
+        // 检查元数据列表键名是否存在
+        if (!$meta->offsetLoad($options['listName'], 'list')) {
+            return $this->e('ERR_META_OFFSET_NOT_FOUND', $options['listName']);
+        }
+
         // 处理每页显示数目‘
         $options['row'] = (int)$options['row'];
         $options['row'] <= 0 && $options['row'] = $meta['db']['limit'];
+        
+        // 处理页数
+        $options['page'] = (int)$options['page'];
+        $options['page'] <= 0 && $options['page'] = 1;
 
         // 从模型获取数据
         $query = Com_Metadata::getQueryByModule($options['module'], array('type' => array('db', 'view')));
@@ -75,14 +94,15 @@ class JsonList_Widget extends Qwin_Widget_Abstract
         $count  = count($data);
         $total  = $query->count();
 
+        // 显示的域
+        $listFields = $meta[$options['listName']]->getBy('enabled', true);
+        
         // 对数据进行转换
         if ($options['sanitise']) {
-            // TODO listField & listField2
-            $listField2 = $this->_filterData($meta);
             foreach ($data as &$row) {
-                $rowTemp = array_intersect_key($row, $listField2) + $listField2;
-                $row = $meta->sanitise($rowTemp, $options['asAction'], array(
-                    'view' => $options['isView'],
+                $rowTemp = array_intersect_key($row, $listFields) + $listFields;
+                $row = $meta->sanitise($rowTemp, 'list', array(
+                    'view' => true,
                     'link' => true,
                     'notFilled' => true,
                 ), $row);
@@ -90,7 +110,7 @@ class JsonList_Widget extends Qwin_Widget_Abstract
             unset($row, $rowTemp);
         }
 
-        // 不展示视图，输出数据
+        // 不展示视图，返回数据
         if (!$options['display']) {
             return array(
                 'result' => true,
@@ -99,20 +119,23 @@ class JsonList_Widget extends Qwin_Widget_Abstract
         }
 
         // 输出jqGrid Json视图
-        $jqGridWidget = $this->_widget->get('JqGrid');
+        $jqGrid = $this->_JqGrid;
 
         // 获取并合并布局
-        $layout = $jqGridWidget->getLayout($meta);
-        if ($listFields) {
-            $layout = array_intersect($layout, (array)$listFields);
+        if (!empty($options['list'])) {
+            if (!is_array($options['list'])) {
+                $options['list'] = Qwin_Util_String::split2d($options['list']);
+            }
+            $options['list'] = array_flip($options['list']);
+            $listFields = array_intersect_key($listFields, $options['list']);
         }
 
         // 通过jqGrid微件获取数据
-        $json = $jqGridWidget->renderJson(array(
+        $json = $jqGrid->renderJson(array(
             'data'          => $data,
-            'layout'        => $layout,
-            'primaryKey'    => $meta['db']['primaryKey'],
-            'options'        => array(
+            'layout'        => $listFields,
+            'primaryKey'    => $meta['db']['id'],
+            'options'       => array(
                 'page'      => $options['page'],
                 'total'     => ceil($total / $options['row']),
                 'records'   => $total,
@@ -122,22 +145,5 @@ class JsonList_Widget extends Qwin_Widget_Abstract
         // TODO 输出型视图
         echo $json;
         Qwin::call('-view')->setDisplayed();
-    }
-
-    /**
-     * 取出列表操作显示的数据
-     *
-     * @param Qwin_Metadata_Abstract $meta 元数据对象
-     * @return array 数据
-     */
-    protected function _filterData($meta)
-    {
-        $result = array();
-        foreach ($meta['field'] as $name => $field) {
-            if (1 == $field['attr']['isList']) {
-                $result[$name] = true;
-            }
-        }
-        return $result;
     }
 }

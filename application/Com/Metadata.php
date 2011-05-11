@@ -41,6 +41,8 @@ class Com_Metadata extends Qwin_Application_Metadata
      */
     protected $_module;
 
+    protected $_modulePath;
+
     /**
      * 需要进行链接转换的行为
      * @var array
@@ -104,6 +106,80 @@ class Com_Metadata extends Qwin_Application_Metadata
         return $this->_module;
     }
 
+    public function getModulePath()
+    {
+        if (!$this->_modulePath) {
+            $appModule = Qwin::call('Qwin_Application_Module');
+            $module = $this->getModule();
+            $this->_modulePath = $appModule->getPath($module) . $module->toPath();
+        }
+        return $this->_modulePath;
+    }
+
+    /**
+     * 获取指定键名的元数据值，元数据不存在时将抛出异常
+     *
+     * @param string $index 键名
+     * @return mixed
+     */
+    public function offsetGet($index)
+    {
+        if (parent::offsetExists($index)) {
+            return parent::offsetGet($index);
+        } elseif ($value = $this->_offsetGetByFile($index)) {
+            return $value;
+        }
+        throw new Qwin_Metadata_Exception('Undefined index "' . $index . '"');
+    }
+
+    /**
+     * 根据键名加载元数据文件，元数据不存在时返回false
+     *
+     * @param string $index 键名
+     * @return mixed
+     */
+    protected function _offsetGetByFile($index, $driver = null)
+    {
+        $file = $this->getModulePath() . 'meta/' .  $index . '.php';
+        if (is_file($file)) {
+            $this->set($index, require $file, $driver);
+            return $this[$index];
+        }
+        return false;
+    }
+
+    /**
+     * 获取指定键名的元数据值，元数据不存在时返回false
+     *
+     * @param string $index 键名
+     * @return mixed
+     */
+    public function offsetLoad($index, $driver = null)
+    {
+        if (parent::offsetExists($index)) {
+            return parent::offsetGet($index);
+        }
+        return $this->_offsetGetByFile($index, $driver);
+    }
+
+    /**
+     * 获取指定键名的元数据值，元数据不存在时返回空数组
+     *
+     * @param string $index 键名
+     * @return mixed
+     */
+    public function offsetLoadAsArray($index)
+    {
+        if (parent::offsetExists($index)) {
+            return parent::offsetGet($index);
+        }
+        $value = $this->_offsetGetByFile($index);
+        if (false === $value) {
+            return array();
+        }
+        return (array)$value;
+    }
+    
     public static function getRecordByModule($module)
     {
         $meta = self::getByModule($module);
@@ -188,7 +264,7 @@ class Com_Metadata extends Qwin_Application_Metadata
             $this->addWhereToQuery($query, $this['db']['defaultWhere']);
         }
 
-        foreach ($this['model'] as $alias => $model) {
+        foreach ($this->offsetLoadAsArray('meta') as $alias => $model) {
             if (in_array($model['type'], $options['type']) || in_array($alias, $options['alias'])) {
                 $relatedRecord = Com_Model::getByModule($model['module']);
                 $this->setRecordRelation($record, $model);
@@ -238,7 +314,7 @@ class Com_Metadata extends Qwin_Application_Metadata
         $record->setTableName($this['db']['table']);
 
         // 设置字段
-        $fieldList = $this['field']->getAttrList(array('isDbField', 'isDbQuery'));
+        $fieldList = $this['fields']->getAttrList(array('isDbField', 'isDbQuery'));
         foreach ($fieldList as $field) {
             $record->hasColumn($field);
         }
@@ -279,7 +355,7 @@ class Com_Metadata extends Qwin_Application_Metadata
         '' != $alias && $alias .= '.';
 
         // 数据表字段的域
-        $queryField = $this['field']->getAttrList('isDbQuery');
+        $queryField = $this['fields']->getAttrList('isDbQuery');
         $orderType = array('DESC', 'ASC');
 
         foreach ($order as $fieldSet) {
@@ -316,7 +392,7 @@ class Com_Metadata extends Qwin_Application_Metadata
         '' != $alias && $alias .= '.';
 
         // 数据表字段的域
-        $queryField = $this['field']->getAttrList('isDbQuery');
+        $queryField = $this['fields']->getAttrList('isDbQuery');
         // TODO　是否使用%s替换
         $searchType = array(
             'eq' => '=',
@@ -456,28 +532,27 @@ class Com_Metadata extends Qwin_Application_Metadata
          * 设置主类的查询语句
          */
         // 调整主键的属性,因为查询时至少需要选择一列
-        $primaryKey = $this['db']['primaryKey'];
-        $this['field']
-             //->setAttr($primaryKey, 'isList', true)
+        $primaryKey = $this['db']['id'];
+        $this['fields']
              ->setAttr($primaryKey, 'isDbField', true)
              ->setAttr($primaryKey, 'isDbQuery', true);
 
-        $queryField = $this['field']->getAttrList(array('isDbQuery', 'isDbField'));
+        $queryField = $this['fields']->getAttrList(array('isDbQuery', 'isDbField'));
         $query->select(implode(', ', $queryField));
 
         /**
          * 设置关联类的查询语句
          */
-        foreach ($this['model'] as $model) {
+        foreach ($this->offsetLoadAsArray('meta') as $model) {
             $linkedMetaObj = self::getByModule($model['module']);
 
             // 调整主键的属性,因为查询时至少需要选择一列
-            $primaryKey = $linkedMetaObj['db']['primaryKey'];
-            $linkedMetaObj->field
+            $primaryKey = $linkedMetaObj['db']['id'];
+            $linkedMetaObj->fields
                           ->setAttr($primaryKey, 'isDbField', true)
                           ->setAttr($primaryKey, 'isDbQuery', true);
 
-            $queryField = $linkedMetaObj->field->getAttrList(array('isDbQuery', 'isDbField'));
+            $queryField = $linkedMetaObj->fields->getAttrList(array('isDbQuery', 'isDbField'));
             foreach ($queryField as $field) {
                 $query->addSelect($model['alias'] . '.' . $field);
             }
@@ -532,10 +607,8 @@ class Com_Metadata extends Qwin_Application_Metadata
     {
         $this->merge(array(
             'id' => array(
-                'basic' => array(
-                    'order' => -1,
-                    'layout' => 2,
-                ),
+                'order' => -1,
+                'layout' => 2,
                 'form' => array(
                     '_type' => 'hidden',
                     /*'_type' => 'text',
@@ -557,7 +630,7 @@ class Com_Metadata extends Qwin_Application_Metadata
                     'isReadonly' => 0,
                 ),
             ),
-        ), 'field');
+        ), 'fields');
         return $this;
     }
 
@@ -570,9 +643,7 @@ class Com_Metadata extends Qwin_Application_Metadata
     {
         $this->merge(array(
             'created_by' => array(
-                'basic' => array(
-                    'order' => 1020,
-                ),
+                'order' => 1020,
                 'form' => array(
                     '_type' => 'custom',
                 ),
@@ -597,7 +668,7 @@ class Com_Metadata extends Qwin_Application_Metadata
                     'isReadonly' => 1,
                 ),
             ),
-        ), 'field');
+        ), 'fields');
         return $this;
     }
 
@@ -610,9 +681,7 @@ class Com_Metadata extends Qwin_Application_Metadata
     {
         $this->merge(array(
             'modified_by' => array(
-                'basic' => array(
-                    'order' => 1040,
-                ),
+                'order' => 1040,
                 'form' => array(
                     '_type' => 'custom',
                 ),
@@ -628,7 +697,7 @@ class Com_Metadata extends Qwin_Application_Metadata
                     'isList' => 1,
                 ),
             ),
-        ), 'field');
+        ), 'fields');
         return $this;
     }
 
@@ -641,9 +710,7 @@ class Com_Metadata extends Qwin_Application_Metadata
     {
         $this->merge(array(
             'operation' => array(
-                'basic' => array(
-                    'order' => 1100,
-                ),
+                'order' => 1100,
                 'form' => array(
                     '_type' => 'custom',
                 ),
@@ -655,7 +722,7 @@ class Com_Metadata extends Qwin_Application_Metadata
                     'isList' => 1,
                 ),
             ),
-        ), 'field');
+        ), 'fields');
         return $this;
     }
 
@@ -663,9 +730,7 @@ class Com_Metadata extends Qwin_Application_Metadata
     {
         $this->merge(array(
             'assign_to' => array(
-                'basic' => array(
-                    'order' => 1100,
-                ),
+                'order' => 1100,
                 'form' => array(
                     '_type' => 'text',
                     '_widget' => array(
@@ -690,7 +755,7 @@ class Com_Metadata extends Qwin_Application_Metadata
                     ),
                 ),
             ),
-        ), 'field');
+        ), 'fields');
         return $this;
     }
 
@@ -698,9 +763,7 @@ class Com_Metadata extends Qwin_Application_Metadata
     {
         $this->merge(array(
             'is_deleted' => array(
-                'basic' => array(
-                    'order' => 1105,
-                ),
+                'order' => 1105,
                 'form' => array(
                     '_type' => 'custom',
                     '_resource' => array(
@@ -715,7 +778,7 @@ class Com_Metadata extends Qwin_Application_Metadata
                     'isReadonly' => 1,
                 ),
             ),
-        ), 'field');
+        ), 'fields');
         return $this;
     }
 
@@ -760,7 +823,7 @@ class Com_Metadata extends Qwin_Application_Metadata
      */
     public function sanitiseListOperation($value, $name, $data, $dataCopy)
     {
-        $primaryKey = $this->db['primaryKey'];
+        $primaryKey = $this['db']['id'];
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
         $module = $this->getModule();

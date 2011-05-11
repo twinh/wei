@@ -83,13 +83,13 @@ class Validator_Widget extends Qwin_Widget_Abstract
 
         foreach ($data as $name => $value) {
             // 跳过不存在的域
-            if (!isset($meta['field'][$name])) {
+            if (!isset($meta['fields'][$name])) {
                 continue;
             }
 
             // 根据验证对象进行验证
-            if ($options['validator'] && !empty($meta['field'][$name]['validator']['rule'])) {
-                $validateData = $meta['field'][$name]['validator'];
+            if ($options['validator'] && !empty($meta['fields'][$name]['validator']['rule'])) {
+                $validateData = $meta['fields'][$name]['validator'];
                 // 如果该域不是必填的,且为空,则不验证内容
                 if (!isset($validateData['rule']['required']) && '' == $value) {
                     continue;

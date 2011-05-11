@@ -162,4 +162,7 @@ return array(
     'LBL_MODULE_CUSTOMER' => '客户',
     'LBL_MODULE_OPPORTUNITY' => '商机',
     'LBL_MODULE_CONTACT' => '联系人',
+    
+    'ERR_META_NOT_DEFINED' => '参数"元数据"未定义',
+    'ERR_META_OFFSET_NOT_FOUND' => '元数据的键名"%s"不存在.',
 );

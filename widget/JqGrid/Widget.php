@@ -81,7 +81,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
     protected $_defaults = array(
         'id'            => null,//'ui-jqgrid-table',
         'meta'          => null,
-        'lang'          => null,
+        'list'          => null,
         'layout'        => array(),
         'options'        => array(
             'url'           => '',
@@ -158,16 +158,21 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
     public function render($options)
     {
         // 合并选项
-        $options = array_merge($this->_options, $options);
-        $jqGrid = array_merge($this->_options['options'], $options['options']);
+        $options = $options + $this->_options;
+        $jqGrid = $options['options'] + $this->_options['options'];
 
+        // 检查元数据是否合法
         $meta = $options['meta'];
-
-        // 设置语言
-        if (!$options['lang']) {
-            $options['lang'] = Qwin::call('-lang');
+        if (false === Qwin_Metadata::isValid($meta)) {
+            $this->e('ERR_META_NOT_DEFINED');
         }
-
+        
+        // 检查元数据中是否包含表单定义
+        if (!$meta->offsetLoad($options['name'], 'list')) {
+            return $this->e('ERR_META_OFFSET_NOT_FOUND', $options['name']);
+        }
+        $listMeta = $meta[$options['name']];
+        
         // 设置编号
         if (!$options['id']) {
             $options['id'] = 'ui-jqgrid-' . $meta->getId();
@@ -181,10 +186,11 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
         // 设置栏目
         if (empty($jqGrid['colNames'])) {
             // 获取并合并布局
-            $layout = $this->getLayout($meta);
+            $layout = $options['list']->getBy('enabled', true);
             if ($options['layout']) {
                 !is_array($options['layout']) && $options['layout'] = explode(',', $options['layout']);
-                $layout = array_intersect($layout, (array)$options['layout']);
+                $options['layout'] = array_flip($options['layout']);
+                $layout = array_intersect_key($layout, (array)$options['layout']);
             }
             
             // 根据布局获取栏数据
@@ -199,7 +205,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
                 $jqGrid['sortname']  = $meta['db']['order'][0][0];
                 $jqGrid['sortorder'] = $meta['db']['order'][0][1];
             } else {
-                $jqGrid['sortname']  = $meta['db']['primaryKey'];
+                $jqGrid['sortname']  = $meta['db']['id'];
                 $jqGrid['sortorder'] = 'DESC';
             }
         }
@@ -237,9 +243,20 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
     {
         // 合并选项
         $options = $this->merge($this->_jsonOptions, $options);
-
+        
+        $data = array();
+        foreach ($options['data'] as $row) {
+            $cell = array();
+            foreach ($options['layout'] as $field => $bool) {
+                $cell[] = $row[$field];
+            }
+            $data[] = array(
+                $options['primaryKey'] => $row[$options['primaryKey']],
+                'cell' => $cell,
+            );
+        }
         // 转换为jqGrid的行数据
-        $options['options']['rows'] = $this->filterRowData($options['data'], $options['primaryKey'], $options['layout']);
+        $options['options']['rows'] = $data;
 
         return json_encode($options['options']);
     }
@@ -258,21 +275,22 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
             'colNames' => array(),
             'colModel' => array(),
         );
-        $primaryKey = $meta['db']['primaryKey'];
-        foreach ($layout as $field) {
+
+        $id = $meta['db']['id'];
+        foreach ($layout as $field => $bool) {
             if (is_array($field)) {
                 $fieldMeta = $meta['metadata'][$field[0]]['field'][$field[1]];
                 $field = $field[0] . '_' . $field[1];
             } else {
-                $fieldMeta = $meta['field'][$field];
+                $fieldMeta = $meta['fields'][$field];
             }
-            $options['colNames'][] = $lang->t($fieldMeta['basic']['title']);
+            $options['colNames'][] = $lang->t($fieldMeta['title']);
             $options['colModel'][] = array(
                 'name' => $field,
                 'index' => $field,
             );
             // 隐藏主键
-            if ($primaryKey == $field) {
+            if ($id == $field) {
                 $options['colModel'][count($options['colModel']) - 1]['hidden'] = true;
             }
             // 宽度控制
@@ -283,74 +301,37 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
         return $options;
     }
 
-    /**
-     *  转换为jqGrid的行数据
-     *
-     * @param array $data 原始数据
-     * @param string $primaryKey
-     * @param array $layout
-     * @return string
-     */
-    public function filterRowData($data, $primaryKey, $layout)
-    {
-        $lang = Qwin::call('-lang');
-        $i = 0;
-        $rowData = array();
-        $nullData = '<em>(' . $lang->t('LBL_NULL') .')<em>';
-        foreach ($data as $row) {
-            $rowData[$i][$primaryKey] = $row[$primaryKey];
-            foreach ($layout as $field) {
-                if (is_array($field)) {
-                    if (isset($row[$field[0]][$field[1]])) {
-                        $rowValue = $row[$field[0]][$field[1]];
-                    } else {
-                        // 使列表 null 类型数据能正确显示
-                        $rowValue = $nullData;
-                    }
-                } else {
-                    if (isset($row[$field])) {
-                        $rowValue = $row[$field];
-                    } else {
-                        $rowValue = $nullData;
-                    }
-                }
-                $rowData[$i]['cell'][] = $rowValue;
-            }
-            $i++;
-        }
-        return $rowData;
-    }
-
     public function getLayout(Qwin_Metadata_Abstract $meta, array $layout = array(), $relatedName = false)
     {
-        foreach ($meta['field'] as $name => $field) {
-            if (1 != $field['attr']['isList']) {
+        foreach ($meta->offsetLoadAsArray('list') as $name => $field) {
+            if (true != $field['enabled']) {
                 continue;
             }
+            $layout[] = $name;
 
             // 使用order作为键名
-            $order = $field['basic']['order'];
-            while (isset($layout[$order])) {
-                $order++;
-            }
-
-            if (!$relatedName) {
-                $layout[$order] = $field['form']['name'];
-            } else {
-                $layout[$order] = array(
-                     $relatedName, $field['form']['name'],
-                );
-            }
+//            $order = $field['order'];
+//            while (isset($layout[$order])) {
+//                $order++;
+//            }
+//
+//            if (!$relatedName) {
+//                $layout[$order] = $field['form']['name'];
+//            } else {
+//                $layout[$order] = array(
+//                     $relatedName, $field['form']['name'],
+//                );
+//            }
         }
 
-        foreach ($meta->getModelMetadataByType('db') as $name => $relatedMeta) {
-            $layout += $this->getLayout($relatedMeta, $layout, $name);
-        }
-
-        // 根据键名排序
-        if (!$relatedName) {
-            ksort($layout);
-        }
+//        foreach ($meta->getModelMetadataByType('db') as $name => $relatedMeta) {
+//            $layout += $this->getLayout($relatedMeta, $layout, $name);
+//        }
+//
+//        // 根据键名排序
+//        if (!$relatedName) {
+//            ksort($layout);
+//        }
 
         return $layout;
     }

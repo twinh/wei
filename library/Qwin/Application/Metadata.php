@@ -92,21 +92,6 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
     }
 
     /**
-     *
-     * @param array $asc
-     * @return <type> 
-     */
-    public function getPrimaryKeyName(array $asc)
-    {
-        $metadataName = self::getByAsc($asc);
-        if (!class_exists($metadataName)) {
-            return null;
-        }
-        $meta = $this->_manager->get($metadataName);
-        return $meta['db']['primaryKey'];
-    }
-
-    /**
      * 处理数据
      *
      * @param array $data 处理的数据
@@ -119,6 +104,8 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
         $options = array_merge($this->_sanitiseOptions, $options);
         empty($dataCopy) && $dataCopy = $data;
         $action = strtolower($action);
+
+        $actionMeta = $this->offsetLoadAsArray($action);
 
         // 调用钩子方法
         $this->preSanitise();
@@ -133,7 +120,7 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
 
         // 转换关联模块的显示域
         if ($options['view']) {
-            foreach ($this['model'] as $model) {
+            foreach ($this->offsetLoadAsArray('meta') as $model) {
                 if ('view' == $model['type']) {
                     foreach ($model['fieldMap'] as $localField => $foreignField) {
                         if (isset($dataCopy[$model['alias']][$foreignField])) {
@@ -147,7 +134,7 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
         }
 
         foreach ($data as $name => $value) {
-            if (!isset($this['field'][$name])) {
+            if (!isset($this['fields'][$name])) {
                 continue;
             }
 
@@ -179,8 +166,8 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
             }*/
 
             // 根据元数据中转换器的配置进行转换
-            if ($options['meta'] && isset($this['field'][$name]['sanitiser'][$action])) {
-                $data[$name] = $flow->call(array($this['field'][$name]['sanitiser'][$action]), Qwin_Flow::PARAM, $value);
+            if ($options['meta'] && isset($actionMeta[$name]['sanitiser'])) {
+                $data[$name] = $flow->call(array($actionMeta[$name]['sanitiser']), Qwin_Flow::PARAM, $value);
             }
 
             // 使用转换器中的方法进行转换
@@ -201,7 +188,7 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
             }
 
             // 转换链接
-            if ($options['link'] && 1 == $this->field[$name]['attr']['isLink'] && method_exists($this, 'setIsLink')) {
+            if ($options['link'] && isset($actionMeta[$name]['link']) && true == $actionMeta[$name]['link'] && method_exists($this, 'setIsLink')) {
                 $data[$name] = call_user_func_array(
                     array($this, 'setIsLink'),
                     // $value or $data[$name] ?

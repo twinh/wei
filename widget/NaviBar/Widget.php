@@ -61,7 +61,7 @@ class NaviBar_Widget extends Qwin_Widget_Abstract
         $url = Qwin::call('-url');
         $menus['qwin'] = array(
             'title' => $this->_lang['LBL_QWIN'],
-            'url' => $url->url('com/home', 'about'),
+            'url' => $url->url('com/home', 'index'),
         );
 
         // 页面名称

@@ -23,6 +23,17 @@
  * @since       2011-04-13 04:16:38
  */
 ?>
+<script type="text/javascript">
+//jQuery(function($){
+//    $('div.qw-filter a').click(function(){
+//        $('#ui-jqgrid-<?php echo $meta->getId() ?>').jqGrid('setGridParam',{
+//            url: $(this).attr('href') + '&json=1'
+//        }).trigger("reloadGrid");
+//        $(this).addClass('ui-state-default qw-filter-seleted');
+//        return false;
+//    });
+//});
+</script>
 <div class="qw-c"></div>
 <div class="ui-widget qw-filter">
     <div class="ui-widget-content">

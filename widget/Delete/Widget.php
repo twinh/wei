@@ -101,7 +101,7 @@ class Delete_Widget extends Qwin_Widget_Abstract
         // 展示视图
         if ($options['display']) {
             if (!$options['url']) {
-                $options['url'] = $_SERVER['HTTP_REFERER'];
+                $options['url'] = Qwin::call('-request')->server('HTTP_REFERER');
             }
             if (!$options['url']) {
                 $options['url'] = Qwin::call('-url')->url($options['module']);

@@ -1,8 +1,9 @@
 <?php
+
 /**
- * Home
+ * Widget
  *
- * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,22 +21,21 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-09 09:42:41
+ * @since       v0.7.9 2011-05-10 10:42:59
  */
-
-class Com_Home_Controller extends Com_Controller
+class E_Widget extends Qwin_Widget_Abstract
 {
-    public function actionIndex()
+    public function e()
     {
-        $meta['page']['icon'] = 'clipboard';
-        $meta['page']['title'] = 'MOD_COM_HOME';
-        $this->getView()->assign(get_defined_vars());
+        $args = func_get_args();
+        $args[0] = $this->_lang[$args[0]];
+        throw new Exception(call_user_func_array('sprintf', $args));
     }
-
-    public function actionUpdateLog()
+    
+    public function setObject(Qwin_Widget_Abstract $widget)
     {
-        $meta['page']['icon'] = 'clipboard';
-        $meta['page']['title'] = 'LBL_MODULE_HOME';
-        $this->getView()->assign(get_defined_vars());
+        $this->_lang = Qwin::call('-lang');
+        $this->_lang->appendByFile($widget->getRootPath() . 'languages/e-' . $this->_lang->getName() . '.php');
+        return $this;
     }
 }

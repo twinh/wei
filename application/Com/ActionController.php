@@ -34,10 +34,17 @@ class Com_ActionController extends Com_Controller
      */
     public function actionIndex()
     {
+        Qwin::call('-widget')->get('JqGrid')->render(array(
+            'meta'  => null,
+            'list'  => '',
+        ));
+        exit;
+        
+        
         $request = $this->getRequest();
         if ($request->isJson()) {
             return Qwin::call('-widget')->get('JsonList')->execute(array(
-                'module'=> $this->_module,
+                'meta'  => $this->getMetadata(),
                 'list'  => $request->get('list'),
                 'search'=> $request->get('search'),
                 'page'  => $request->get('page'),
@@ -48,8 +55,8 @@ class Com_ActionController extends Com_Controller
                 ),
             ));
         } else {
-            return Qwin::call('-widget')->get('List')->execute(array(
-                'module'=> $this->_module,
+            return Qwin::call('-widget')->get('List')->render(array(
+                'meta'  => $this->getMetadata(),
                 'list'  => $request->get('list'),
                 'popup' => $request->get('popup'),
             ));
@@ -84,6 +91,15 @@ class Com_ActionController extends Com_Controller
      */
     public function actionAdd()
     {
+        return Qwin::call('-widget')->get('Form2')->render(array(
+            'meta'      => $this->getMetadata(),
+            'id'        => null,
+            'data'      => array(),
+            'asAction'  => 'view',
+            'isView'    => true,
+            'sanitise'  => true,
+            'display'   => true,
+        ));
         if (!$this->_request->isPost()) {
             return Qwin::call('-widget')->get('AddForm')->execute(array(
                 'module'    => $this->_module,

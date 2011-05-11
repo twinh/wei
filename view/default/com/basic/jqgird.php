@@ -30,7 +30,7 @@
 <?php $jqGridWidget->render($jqGrid) ?>
 <script type="text/javascript">
 jQuery(function($){
-    var primaryKey = '<?php echo $primaryKey?>';
+    var primaryKey = '<?php echo $id?>';
     var jqGridObj = $('#<?php echo $jqGridWidget->getId() ?>');
 
     <?php if (!isset($popup)) : ?>
