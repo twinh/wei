@@ -1,6 +1,6 @@
 <?php
 /**
- * Model
+ * Db
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -22,37 +22,28 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-07-27 12:37:11
- * @todo        调整为关联元数据,而非模型,元数据
- * @todo        模型,元数据可自定义,而不通过应用目录配置获得
+ * @since       2010-07-27 18:13:16
  */
 
-class Qwin_Metadata_Element_Model extends Qwin_Metadata_Element_Driver
+class Qwin_Metadata__Db extends Qwin_Metadata__Driver
 {
     protected $_defaults = array(
-        'alias' => null,
-        'metadata' => null,
-        'relation' => 'hasOne',
-        'local' => 'id',
-        'foreign' => 'id',
-        'type' => 'db',
-        'enabled' => true,
-        'fieldMap' => array(),
-        'list'  => array(),
-        'module' => null,
+        'type' => 'sql',
+        'table' => null,
+        'id' => 'id',
+        'offset' => 0,
+        'limit' => 10,
+        'order' => array(),
+        'where' => array(),
     );
-    
+ 
     /**
-     * 将数据格式化并加入
+     * 获取数据表名称,不包含前缀
      *
-     * @param array $data 数据
-     * @param array $options 选项
-     * @return Qwin_Metadata_Element_Model 当前对象
+     * @return string 数据表名称
      */
-    public function merge($data, array $options = array())
+    public function getTable()
     {
-        $data = $this->_mergeAsArray($data, $options);
-        $this->exchangeArray($data + $this->getArrayCopy());
-        return $this;
+        return $this->_data['table'];
     }
 }

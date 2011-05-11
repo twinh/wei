@@ -1,8 +1,8 @@
 <?php
 /**
- * Interface
+ * Page
  *
- * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ * @package     Qwin
+ * @subpackage  Metadata
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-02-26 14:29:02
+ * @since       2010-7-27 12:44:44
  */
 
-interface Qwin_Metadata_Element_Interface
+class Qwin_Metadata_Page extends Qwin_Metadata__Driver
 {
-    public function merge($data, array $options = array());
+    protected $_defaults = array(
+        'title'         => null,
+        'icon'          => 'document',
+        'description'   => null,
+        'tableLayout'   => 2,
+        'mainField'     => null,
+        'trash'         => array(
+            'enable'        => true,
+            'field'         => 'is_deleted',
+            'toggleFlag'    => array(0, 1),
+        ),
+        'log'           => array(
+            'enable'        => true,
+            'field'         => '',
+            'banField'      => '',
+        ),
+    );
 }

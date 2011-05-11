@@ -1,8 +1,8 @@
 <?php
 /**
- * Db
+ * Interface
  *
- * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,34 +16,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  Metadata
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-07-27 18:13:16
+ * @since       2011-02-26 14:29:02
  */
 
-class Qwin_Metadata_Element_Db extends Qwin_Metadata_Element_Driver
+interface Qwin_Metadata__Interface
 {
-    protected $_defaults = array(
-        'type' => 'sql',
-        'table' => null,
-        'id' => 'id',
-        'offset' => 0,
-        'limit' => 10,
-        'order' => array(),
-        'where' => array(),
-    );
- 
-    /**
-     * 获取数据表名称,不包含前缀
-     *
-     * @return string 数据表名称
-     */
-    public function getTable()
-    {
-        return $this->_data['table'];
-    }
+    public function merge($data, array $options = array());
 }

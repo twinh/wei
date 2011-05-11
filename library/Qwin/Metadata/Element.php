@@ -25,6 +25,6 @@
  * @since       2010-7-26 14:05:37
  */
 
-class Qwin_Metadata_Element
+class Qwin_Metadata_
 {
 }

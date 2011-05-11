@@ -1,6 +1,6 @@
 <?php
 /**
- * Form
+ * List
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -20,10 +20,10 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-5-11 0:31:52
+ * @since       2011-05-07 09:00:45
  */
 
-class Qwin_Metadata_Element_Form extends Qwin_Metadata_Element_Driver
+class Qwin_Metadata_List extends Qwin_Metadata__Driver
 {
     /**
      * 默认选项
@@ -31,15 +31,10 @@ class Qwin_Metadata_Element_Form extends Qwin_Metadata_Element_Driver
      */
     protected $_defaults = array(
         'enabled' => true,
-        '_type' => 'text',
-        '_resource' => null,
-        '_value' => '',
-        'name' => null,
-//        '_resourceGetter' => null,
-//        '_resourceFormFile' => null,
-//        '_widget' => array(),
-//        'id' => null,
-//        'class' => null,
+        'hidden' => false,
+        'link' => false,
+        //'width' => null,
+        //'sanitiser' => array(),
     );
 
     /**
@@ -47,17 +42,24 @@ class Qwin_Metadata_Element_Form extends Qwin_Metadata_Element_Driver
      *
      * @param array $data 数据
      * @param array $options 选项
-     * @return Qwin_Metadata_Element_Model 当前对象
+     * @return Qwin_Metadata__Model 当前对象
      */
     public function merge($data, array $options = array())
     {
         // 处理默认选项
-        if (array_key_exists('*', $data)) {
-            $this->_defaults = $this->_defaults + (array)$data['*'];
-            unset($data['*']);
+        if (array_key_exists('*', $data['fields'])) {
+            $this->_defaults = $this->_defaults + (array)$data['fields']['*'];
+            unset($data['fields']['*']);
         }
-        $data = $this->_mergeAsArray($data, $options);
-        $this->exchangeArray($data + $this->getArrayCopy());
+        foreach ($data['fields'] as &$field) {
+            $field = $field + $this->_defaults;
+        }
+        $this->exchangeArray($data);
         return $this;
+    }
+    
+    public function setLayout()
+    {
+        
     }
 }
