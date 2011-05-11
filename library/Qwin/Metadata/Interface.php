@@ -23,7 +23,7 @@
  * @since       2011-02-26 14:29:02
  */
 
-interface Qwin_Metadata__Interface
+interface Qwin_Metadata_Interface
 {
     public function merge($data, array $options = array());
 }

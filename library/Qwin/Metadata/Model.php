@@ -27,7 +27,7 @@
  * @todo        模型,元数据可自定义,而不通过应用目录配置获得
  */
 
-class Qwin_Metadata_Model extends Qwin_Metadata__Driver
+class Qwin_Metadata_Model extends Qwin_Metadata_Driver
 {
     protected $_defaults = array(
         'alias' => null,
@@ -47,7 +47,7 @@ class Qwin_Metadata_Model extends Qwin_Metadata__Driver
      *
      * @param array $data 数据
      * @param array $options 选项
-     * @return Qwin_Metadata__Model 当前对象
+     * @return Qwin_Metadata_Model 当前对象
      */
     public function merge($data, array $options = array())
     {

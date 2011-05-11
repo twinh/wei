@@ -25,7 +25,7 @@
  * @since       2010-7-27 12:44:44
  */
 
-class Qwin_Metadata_Page extends Qwin_Metadata__Driver
+class Qwin_Metadata_Page extends Qwin_Metadata_Driver
 {
     protected $_defaults = array(
         'title'         => null,

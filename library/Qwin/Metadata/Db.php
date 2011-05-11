@@ -25,7 +25,7 @@
  * @since       2010-07-27 18:13:16
  */
 
-class Qwin_Metadata__Db extends Qwin_Metadata__Driver
+class Qwin_Metadata_Db extends Qwin_Metadata_Driver
 {
     protected $_defaults = array(
         'type' => 'sql',
