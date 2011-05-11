@@ -34,13 +34,6 @@ class Com_ActionController extends Com_Controller
      */
     public function actionIndex()
     {
-        Qwin::call('-widget')->get('JqGrid')->render(array(
-            'meta'  => null,
-            'list'  => '',
-        ));
-        exit;
-        
-        
         $request = $this->getRequest();
         if ($request->isJson()) {
             return Qwin::call('-widget')->get('JsonList')->execute(array(

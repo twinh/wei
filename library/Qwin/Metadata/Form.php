@@ -23,7 +23,7 @@
  * @since       2011-5-11 0:31:52
  */
 
-class Qwin_Metadata__Form extends Qwin_Metadata__Driver
+class Qwin_Metadata_Form extends Qwin_Metadata_Driver
 {
     /**
      * 默认选项
@@ -47,7 +47,7 @@ class Qwin_Metadata__Form extends Qwin_Metadata__Driver
      *
      * @param array $data 数据
      * @param array $options 选项
-     * @return Qwin_Metadata__Model 当前对象
+     * @return Qwin_Metadata_Model 当前对象
      */
     public function merge($data, array $options = array())
     {

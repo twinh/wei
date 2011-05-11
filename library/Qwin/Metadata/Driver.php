@@ -23,7 +23,7 @@
  * @since       2011-02-26 14:29:27
  */
 
-abstract class Qwin_Metadata__Driver extends ArrayObject implements Qwin_Metadata__Interface
+abstract class Qwin_Metadata_Driver extends ArrayObject implements Qwin_Metadata_Interface
 {
     /**
      * 默认数据
@@ -52,7 +52,7 @@ abstract class Qwin_Metadata__Driver extends ArrayObject implements Qwin_Metadat
      *
      * @param array $data 数据
      * @param array $options 选项
-     * @return Qwin_Metadata__Driver 当前对象
+     * @return Qwin_Metadata_Driver 当前对象
      */
     public function merge($data, array $options = array())
     {

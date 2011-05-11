@@ -41,13 +41,13 @@ class Qwin_Metadata
      * @var array
      */
     protected $_drivers = array(
-        'fields'    => 'Qwin_Metadata_Element_Fields',
-        'list'      => 'Qwin_Metadata_Element_List',
-        'form'      => 'Qwin_Metadata_Element_Form',
-        'group'     => 'Qwin_Metadata_Element_Group',
-        'model'     => 'Qwin_Metadata_Element_Model',
-        'db'        => 'Qwin_Metadata_Element_Db',
-        'page'      => 'Qwin_Metadata_Element_Page',
+        'fields'    => 'Qwin_Metadata_Fields',
+        'list'      => 'Qwin_Metadata_List',
+        'form'      => 'Qwin_Metadata_Form',
+        'group'     => 'Qwin_Metadata_Group',
+        'model'     => 'Qwin_Metadata_Model',
+        'db'        => 'Qwin_Metadata_Db',
+        'page'      => 'Qwin_Metadata_Page',
     );
 
     /**
@@ -131,11 +131,11 @@ class Qwin_Metadata
      */
     public function setDriver($name, $class)
     {
-        if (is_subclass_of($class, 'Qwin_Metadata_Element_Driver')) {
+        if (is_subclass_of($class, 'Qwin_Metadata_Driver')) {
             $this->_drivers[strtolower($name)] = $class;
         } else {
             require_once 'Qwin/Metadata/Exception.php';
-            throw new Qwin_Metadata_Exception('Class "' . $class . '" is not the sub class of "Qwin_Metadata_Element_Driver".');
+            throw new Qwin_Metadata_Exception('Class "' . $class . '" is not the sub class of "Qwin_Metadata_Driver".');
         }
         return $this;
     }

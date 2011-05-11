@@ -25,7 +25,7 @@
  * @since       2010-7-26 14:07:07
  */
 
-class Qwin_Metadata__Fields extends Qwin_Metadata__Driver
+class Qwin_Metadata_Fields extends Qwin_Metadata_Driver
 {
    /**
      * 查找属性的缓存数组
@@ -63,7 +63,7 @@ class Qwin_Metadata__Fields extends Qwin_Metadata__Driver
      *
      * @param array $data 数据
      * @param array $option 选项
-     * @return Qwin_Metadata__Field 当前对象
+     * @return Qwin_Metadata_Field 当前对象
      */
     public function merge($data, array $option = array())
     {
@@ -77,7 +77,7 @@ class Qwin_Metadata__Fields extends Qwin_Metadata__Driver
      *
      * @param array $data 数据
      * @param string $name 名称
-     * @return Qwin_Metadata__Field 当前对象
+     * @return Qwin_Metadata_Field 当前对象
      */
     protected function _merge($data, array $option = array(), $name = null)
     {
@@ -90,7 +90,7 @@ class Qwin_Metadata__Fields extends Qwin_Metadata__Driver
                 $data['form']['name'] = $name;
             } else {
                 require_once 'Qwin/Metadata/Element/Field/Exception.php';
-                throw new Qwin_Metadata__Field_Exception('The name value is not defined.');
+                throw new Qwin_Metadata_Field_Exception('The name value is not defined.');
             }
         }
         
@@ -180,7 +180,7 @@ class Qwin_Metadata__Fields extends Qwin_Metadata__Driver
      * @param string $field 域的名称
      * @param string $attr 属性的名称
      * @param mixed $value 属性的值
-     * @return Qwin_Metadata__Field 当前对象
+     * @return Qwin_Metadata_Field 当前对象
      */
     public function setAttr($field, $attr, $value)
     {
@@ -191,7 +191,7 @@ class Qwin_Metadata__Fields extends Qwin_Metadata__Driver
     /**
      * 根据域中的order从小到大排序
      * 
-     * @return Qwin_Metadata__Field 当前对象
+     * @return Qwin_Metadata_Field 当前对象
      * @todo 转为n维数组排序
      */
     public function order()
@@ -352,6 +352,6 @@ class Qwin_Metadata__Fields extends Qwin_Metadata__Driver
                 return $this[$field]['form']['_resource'];
             }
         }
-        throw new Qwin_Metadata__Field_Exception('Undefined field "' . $field . '"');
+        throw new Qwin_Metadata_Field_Exception('Undefined field "' . $field . '"');
     }
 }
