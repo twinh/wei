@@ -1,6 +1,6 @@
 <?php
 /**
- * Field
+ * Fields
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -25,7 +25,7 @@
  * @since       2010-7-26 14:07:07
  */
 
-class Qwin_Metadata_Fields extends Qwin_Metadata_Driver
+class Qwin_Metadata_Fields extends Qwin_Metadata_Common
 {
    /**
      * 查找属性的缓存数组
@@ -34,27 +34,40 @@ class Qwin_Metadata_Fields extends Qwin_Metadata_Driver
     protected $_attrCache = array();
 
     /**
-     * 默认数据
-     * @var array
+     * @var array $_defaults        默认选项
+     *
+     *      -- title                标题标识, 默认为 FLD_$fieldUppeName
+     * 
+     *      -- description          域描述
+     * 
+     *      -- order                排序
+     * 
+     *      -- dbField              是否为数据库字段
+     * 
+     * 
+     *
+     *      -- null                 是否将NULL字符串转换为null类型
+     *
+     *      -- type                 是否进行强类型的转换,类型定义在['fieldName]['db']['type']
+     *
+     *      -- meta                 是否使用元数据的sanitise配置进行转换
+     *
+     *      -- sanitise             是否使用转换器进行转换
+     *
+     *      -- relatedMeta          是否转换关联的元数据
      */
     protected $_defaults = array(
-        'title' => 'FLD_TITLE',
+        'name' => null,
+        'title' => null,
         'description' => array(),
         'order' => 50,
-        'attr' => array(
-            'isDbField' => 1,
-            'isDbQuery' => 1,
-            'isReadonly' => 0,
-            'isView' => 1,
-        ),
+        'dbField' => true,
+        'dbQuery' => true,
+        'urlQuery' => true,
+        'readonly' => false,
 //        'db' => array(
 //            'type' => 'string',
 //            'length' => null,
-//        ),
-//        'sanitiser' => array(),
-//        'validator' => array(
-//            'rule' => array(),
-//            'message' => array(),
 //        ),
     );
 
@@ -65,9 +78,9 @@ class Qwin_Metadata_Fields extends Qwin_Metadata_Driver
      * @param array $option 选项
      * @return Qwin_Metadata_Field 当前对象
      */
-    public function merge($data, array $option = array())
+    public function merge($data, array $options = array())
     {
-        $data = $this->_mergeAsArray($data, $option);
+        $data = $this->_mergeAsArray((array)$data, $options);
         $this->exchangeArray($data + $this->getArrayCopy());
         return $this;
     }
@@ -79,55 +92,27 @@ class Qwin_Metadata_Fields extends Qwin_Metadata_Driver
      * @param string $name 名称
      * @return Qwin_Metadata_Field 当前对象
      */
-    protected function _merge($data, array $option = array(), $name = null)
+    protected function _merge($name, $data, array $options = array())
     {
-        $data = (array)$data;
-        if (!isset($data['form'])) {
-            $data['form'] = array();
-        }
-        if (!isset($data['form']['name'])) {
-            if (null != $name) {
-                $data['form']['name'] = $name;
-            } else {
-                require_once 'Qwin/Metadata/Element/Field/Exception.php';
-                throw new Qwin_Metadata_Field_Exception('The name value is not defined.');
-            }
-        }
+        !is_array($data) && $data = (array)$data;
+        
+        // 名称需一致
+        $data['name'] = $name;
         
         // 设置名称
         if (!isset($data['title'])) {
-            $data['title'] = 'FLD_' . strtoupper($data['form']['name']);
-        }
-        // 设置编号
-        if (!isset($data['form']['id'])) {
-            $data['form']['id'] = $data['form']['name'];
-        }
-
-        // 初始验证器和补全验证信息
-        if(isset($data['validator']) && !empty($data['validator']['rule'])) {
-            foreach ($data['validator']['rule'] as $key => $rule) {
-                if (!isset($data['validator']['message'][$key])) {
-                    $data['validator']['message'][$key] = 'VLD_' . strtoupper($key);
-                }
-            }
-        }
-
-        // 转换转换器的配置,使不同的行为之间允许共享转换器
-        if (isset($data['sanitiser'])) {
-            foreach ((array)$data['sanitiser'] as $key => $value) {
-                if (is_string($value) && isset($data['sanitiser'][$value])) {
-                    $data['sanitiser'][$key] = $data['sanitiser'][$value];
-                }
-            }
+            $data['title'] = 'FLD_' . strtoupper($name);
         }
         
-        foreach ($this->_defaults as $key => $row) {
-            if (!array_key_exists($key, $data)) {
-                $data[$key] = $row;
-            } elseif (is_array($data[$key])) {
-                $data[$key] = array_merge($row, $data[$key]);
-            }
-        }
+        $data = $data + $this->_defaults;
+
+//        foreach ($this->_defaults as $key => $row) {
+//            if (!array_key_exists($key, $data)) {
+//                $data[$key] = $row;
+//            } elseif (is_array($data[$key])) {
+//                $data[$key] = array_merge($row, $data[$key]);
+//            }
+//        }
         
         return $data;
     }
@@ -251,22 +236,6 @@ class Qwin_Metadata_Fields extends Qwin_Metadata_Driver
                 $this->_data[$key]['attr']['isReadonly'] = 1;
                 $this->_data[$key]['form']['_type'] = 'hidden';
             }
-        }
-        return $this;
-    }
-
-    /**
-     * 为元数据表单名称增加组名,如name将转换为group[name]
-     *
-     * @param string $name 组名
-     * @return object 当前对象
-     */
-    public function setFormGroupName($name)
-    {
-        foreach ($this->_data as $key => $value) {
-            $this->_data[$key]['form']['_oldName'] = $this->_data[$key]['form']['_name'];
-            $this->_data[$key]['form']['id'] = $name . '_' . $this->_data[$key]['form']['_name'];
-            $this->_data[$key]['form']['_name'] = $name . '[' . $this->_data[$key]['form']['_name'] . ']';
         }
         return $this;
     }

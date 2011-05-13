@@ -21,12 +21,14 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2011-02-26 14:29:27
+ * @method mixed get*(mixed $value) magic finders; @see __call()
+ * @method mixed set*(mixed $value) magic finders; @see __call()
  */
 
-abstract class Qwin_Metadata_Driver extends ArrayObject implements Qwin_Metadata_Interface
+class Qwin_Metadata_Common extends ArrayObject implements Qwin_Metadata_Interface
 {
     /**
-     * 默认数据
+     * 默认选项
      * @var array
      */
     protected $_defaults = array();
@@ -36,6 +38,13 @@ abstract class Qwin_Metadata_Driver extends ArrayObject implements Qwin_Metadata
      * @var array
      */
     protected $_options = array();
+    
+    /**
+     * 元数据父对象
+     * 
+     * @var Qwin_Metadata_Abstract
+     */
+    protected $_parent;
 
     /**
      * 初始化类
@@ -52,11 +61,12 @@ abstract class Qwin_Metadata_Driver extends ArrayObject implements Qwin_Metadata
      *
      * @param array $data 数据
      * @param array $options 选项
-     * @return Qwin_Metadata_Driver 当前对象
+     * @return Qwin_Metadata_Common 当前对象
+     * @todo 是否一定要数组
      */
     public function merge($data, array $options = array())
     {
-        $data = $data + $this->_defaults;
+        $data = (array)$data + $this->_defaults;
         $this->exchangeArray($data + $this->getArrayCopy());
         return $this;
     }
@@ -68,8 +78,8 @@ abstract class Qwin_Metadata_Driver extends ArrayObject implements Qwin_Metadata
      */
     protected function _mergeAsArray($data, array $options = array())
     {
-        foreach ($data as $key => &$row) {
-            $row = $this->_merge($row, $options, $key);
+        foreach ($data as $name => &$row) {
+            $row = $this->_merge($name, $row, $options);
         }
         return $data;
     }
@@ -79,7 +89,7 @@ abstract class Qwin_Metadata_Driver extends ArrayObject implements Qwin_Metadata
      *
      * @return array 格式过的数据
      */
-    protected function _merge($data, array $options = array(), $name = null)
+    protected function _merge($name, $data, array $options = array())
     {
         return array_merge($this->_defaults, $data);
     }
@@ -127,5 +137,63 @@ abstract class Qwin_Metadata_Driver extends ArrayObject implements Qwin_Metadata
             }
         }
         return $result;
+    }
+    
+    /**
+     * 设置父元数据对象,方便调用
+     * 
+     * @param Qwin_Metadata_Abstract $meta 父元数据对象
+     * @return Qwin_Metadata_Common 当前对象
+     */
+    public function setParent(Qwin_Metadata_Abstract $meta)
+    {
+        foreach ($meta as $element => $value) {
+            if ($value === $this) {
+                $this->_parent = $meta;
+                return $this;
+            }
+        }
+        throw new Qwin_Metadata_Common_Exception('Sub metadata not found.');
+    }
+    
+    /**
+     * 获取父元数据对象
+     * 
+     * @return Qwin_Metadata_Abstract
+     */
+    public function getParent()
+    {
+        if (isset($this->_parent)) {
+            return $this->_parent;
+        }
+        throw new Qwin_Metadata_Common_Exception('Parent metadata not defined.');
+    }
+    
+    /**
+     * 魔术方法,允许通过getXXX取值和setXXX设置值
+     * 建议直接使用$this[$name],甚至是$this->offsetGet($name)和
+     * $this->offsetSet($name)获得更好的效率
+     * 
+     * @param type $name
+     * @param type $arguments
+     * @return type 
+     */
+    public function __call($name, $arguments)
+    {
+        $lname = strtolower($name);
+        $action = substr($lname, 0, 3);
+        $element = substr($lname, 3);
+        
+        if ('get' == $action) {
+            if ($this->offsetExists($element)) {
+                return $this->offsetGet($element);
+            }
+            throw new Qwin_Metadata_Common_Exception('Undefiend index "'. $element . '".');
+        } elseif ('set' == $action) {
+            if (0 === count($arguments)) {
+                throw new Qwin_Metadata_Common_Exception('You must specify the value to ' . $name);
+            }
+            return $this->offsetSet($element, $arguments[0]);
+        }
     }
 }

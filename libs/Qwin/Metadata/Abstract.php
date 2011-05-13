@@ -105,77 +105,71 @@ abstract class Qwin_Metadata_Abstract extends ArrayObject
     }
 
     /**
-     * 合并/加入元数据
-     *
-     * @param array $data 原始数据
-     * @param string $name 元素的名称
-     * @return Qwin_Metadata_Abstract 当前对象
+     * 合并/附加元数据
+     * 
+     * @param string $index 键名
+     * @param array $data 数据
+     * @return QwiQwin_Metadata_Abstract 当前对象
      */
-    public function merge(array $data, $name = null)
+    public function merge($index, $data)
     {
-        // 补全数据
-        if (isset($name)) {
-            $data  = array(
-                $name => $data,
-            );
+        if (!$this->offsetExists($index)) {
+            return $this->set($index, $data);
         }
-
-        // 获取转换驱动数组
-        $drivers = Qwin_Metadata::getInstance()->getDriver();
-
-        $result = array();
-        foreach ($data as $name => $value) {
-            // 检查是否存在该元素的驱动类
-            $name = strtolower($name);
-
-            // 初始化驱动类
-            if (!isset($this[$name]) && isset($drivers[$name])) {
-                $this[$name] = new $drivers[$name];
-            }
-
-            // 没有找到驱动类,为纯数组形式
-            if (!isset($this[$name])) {
-                $this[$name] = array();
-            }
-
-            // 根据不同类型合并数据
-            if (is_object($this[$name])) {
-                $this[$name]->merge($value);
-            } else {
-                $this[$name] = $value + $this[$name];
-            }
-        }
+        $this[$index]->merge($data);
         return $this;
     }
     
     /**
-     *
-     * @param string $index 
-     * @param array $data
-     * @param string $driver 
+     * 设置元数据的值
+     * 
+     * @param string $index 键名
+     * @param array $data 数据
+     * @param string $driver 驱动标识
+     * @todo 驱动标识支持多种类型,如类名,对象
      */
-    public function set($index, $data, $driver = null)
+    public function set($index, $data = null, $driver = null)
     {
-        // 获取驱动
-        if (isset($driver)) {
-            $driver = Qwin_Metadata::getInstance()->getDriver($driver);
-        } else {
-            $driver = Qwin_Metadata::getInstance()->getDriver($index);
-        }
+        $meta = Qwin_Metadata::getInstance();
         
-        if (isset($this[$index])) {
-            $data = $data + $this[$index]->getArrayCopy();
-            $this[$index] = new $driver;
-            $this[$index]->merge($data);
+        // 获取驱动类名 $driver > $index > default
+        if (isset($driver)) {
+            $class = $meta->getDriver($driver);
+            if (!$class) {
+                throw new Qwin_Metadata_Exception(sprintf('Metadata driver "%s" not found.', $driver));
+            }
         } else {
-            if (isset($driver)) {
-                $this[$index] = new $driver;
-                $this[$index]->merge($data);
-            } else {
-                $this[$index] = $data;
+            $class = $meta->getDriver($index);
+            if (!$class) {
+                $class = $meta->getDefaultDriver();
             }
         }
         
+        // 不存在该键名,直接设置值
+        if (!$this->offsetExists($index)) {
+            $this[$index] = new $class;
+            $this[$index]->setParent($this);
+            $this[$index]->merge($data);
+        } else {
+            // 元数据该键名的值不是对象
+//            if (!is_object($this[$index])) {
+//                $data = $data + $this[$index];
+//                $this[$index] = new $class;
+//                $this[$index]->merge($data);
+//            } else {
+                // 类名一样,直接设置值
+                if ($class == get_class($this[$index])) {
+                    $this[$index]->merge($data);
+                // 类名不一样,取出原始数据重新设置
+                } else {
+                    $data = $data + $this[$index]->getArrayCopy();
+                    $this[$index] = new $class;
+                    $this[$index]->setParent($this);
+                    $this[$index]->merge($data);
+                }
+//            }
+        }
+
         return $this;
     }
 
@@ -208,16 +202,4 @@ abstract class Qwin_Metadata_Abstract extends ArrayObject
         $this->_id = (string)$id;
         return $this;
     }
-
-    /**
-     * 获取数据库查询对象
-     */
-    //abstract public function getQuery();
-
-    /**
-     * 根据应用结构配置获取数据库查询对象
-     *
-     * @param array $asc 应用结构配置
-     */
-    //abstract public function getQueryByAsc($asc);
 }

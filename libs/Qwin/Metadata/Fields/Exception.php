@@ -30,6 +30,6 @@
  */
 require_once 'Qwin/Exception.php';
 
-class Qwin_Metadata_Field_Exception extends Qwin_Exception
+class Qwin_Metadata_Fields_Exception extends Qwin_Exception
 {
 }

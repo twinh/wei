@@ -23,7 +23,7 @@
  * @since       2011-5-11 0:31:52
  */
 
-class Qwin_Metadata_Form extends Qwin_Metadata_Driver
+class Qwin_Metadata_Form extends Qwin_Metadata_Common
 {
     /**
      * 默认选项
@@ -41,6 +41,15 @@ class Qwin_Metadata_Form extends Qwin_Metadata_Driver
 //        'id' => null,
 //        'class' => null,
     );
+    
+    /**
+     * 表单元数据整体结构
+     * @var type 
+     */
+    protected $_struct = array(
+        'fields' => array(),
+        'layout' => array(),
+    );
 
     /**
      * 将数据格式化并加入
@@ -51,13 +60,29 @@ class Qwin_Metadata_Form extends Qwin_Metadata_Driver
      */
     public function merge($data, array $options = array())
     {
-        // 处理默认选项
-        if (array_key_exists('*', $data)) {
-            $this->_defaults = $this->_defaults + (array)$data['*'];
-            unset($data['*']);
+        // 初始化结构,保证数据完整性
+        $data = (array)$data + $this->_struct;
+        !is_array($data['fields']) && $data['fields'] = (array)$data['fields'];
+        !is_array($data['layout']) && $data['layout'] = (array)$data['layout'];
+        
+        // 处理通配选项
+        if (array_key_exists('*', $data['fields'])) {
+            $this->_defaults = $this->_defaults + (array)$data['fields']['*'];
+            unset($data['fields']['*']);
         }
-        $data = $this->_mergeAsArray($data, $options);
-        $this->exchangeArray($data + $this->getArrayCopy());
+        foreach ($data['fields'] as &$field) {
+            $field = (array)$field + $this->_defaults;
+        }
+        $this->exchangeArray($data);
         return $this;
+
+//        // 初始验证器和补全验证信息
+//        if(isset($data['validator']) && !empty($data['validator']['rule'])) {
+//            foreach ($data['validator']['rule'] as $key => $rule) {
+//                if (!isset($data['validator']['message'][$key])) {
+//                    $data['validator']['message'][$key] = 'VLD_' . strtoupper($key);
+//                }
+//            }
+//        }
     }
 }

@@ -1,8 +1,9 @@
 <?php
+
 /**
- * Group
+ * Exception
  *
- * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,19 +17,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  Group
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-10-14 11:54:56
+ * @since       2011-05-13 11:00:46
  */
 
-class Qwin_Metadata_Group extends Qwin_Metadata_Driver
-{
-    protected $_defaults = array(
-        0 => 'LBL_GROUP_BASIC_DATA',
-    );
-}
+/**
+ * @see Qwin_Exception
+ */
+require_once 'Qwin/Exception.php';
 
+class Qwin_Metadata_Common_Exception extends Qwin_Exception
+{
+}

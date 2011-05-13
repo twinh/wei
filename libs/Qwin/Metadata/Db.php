@@ -25,8 +25,12 @@
  * @since       2010-07-27 18:13:16
  */
 
-class Qwin_Metadata_Db extends Qwin_Metadata_Driver
+class Qwin_Metadata_Db extends Qwin_Metadata_Common
 {
+    /**
+     * 默认选项
+     * @var array 
+     */
     protected $_defaults = array(
         'type' => 'sql',
         'table' => null,
@@ -36,14 +40,4 @@ class Qwin_Metadata_Db extends Qwin_Metadata_Driver
         'order' => array(),
         'where' => array(),
     );
- 
-    /**
-     * 获取数据表名称,不包含前缀
-     *
-     * @return string 数据表名称
-     */
-    public function getTable()
-    {
-        return $this->_data['table'];
-    }
 }
