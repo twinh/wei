@@ -25,7 +25,7 @@
  * @since       2010-7-27 12:44:44
  */
 
-class Qwin_Metadata_Page extends Qwin_Metadata_Driver
+class Qwin_Metadata_Page extends Qwin_Metadata_Common
 {
     protected $_defaults = array(
         'title'         => null,
@@ -33,15 +33,16 @@ class Qwin_Metadata_Page extends Qwin_Metadata_Driver
         'description'   => null,
         'tableLayout'   => 2,
         'mainField'     => null,
-        'trash'         => array(
-            'enable'        => true,
-            'field'         => 'is_deleted',
-            'toggleFlag'    => array(0, 1),
-        ),
-        'log'           => array(
-            'enable'        => true,
-            'field'         => '',
-            'banField'      => '',
-        ),
+        // TODO 作为新的元数据键名
+//        'trash'         => array(
+//            'enable'        => true,
+//            'field'         => 'is_deleted',
+//            'toggleFlag'    => array(0, 1),
+//        ),
+//        'log'           => array(
+//            'enable'        => true,
+//            'field'         => '',
+//            'banField'      => '',
+//        ),
     );
 }

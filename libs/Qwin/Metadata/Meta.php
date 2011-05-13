@@ -27,7 +27,7 @@
  * @todo        模型,元数据可自定义,而不通过应用目录配置获得
  */
 
-class Qwin_Metadata_Model extends Qwin_Metadata_Driver
+class Qwin_Metadata_Model extends Qwin_Metadata_Common
 {
     protected $_defaults = array(
         'alias' => null,

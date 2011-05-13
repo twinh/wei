@@ -23,172 +23,183 @@
  * @since       2011-04-27 15:21:09
  */
 
-
-
 return array(
-    'group_id' => array(
-        '_type' => 'select',
-        '_resourceGetter' => array(
-            array('Com_Category_Widget', 'get'),
-            array(
-                'com/member/group',
-                null,
-                array('id', null, 'name'),
+    'fields' => array(
+        'id' => array(
+            'form' => array(
+                
+            ),
+            'sanitiser' => array(
+                
+            ),
+            'validator' => array(
+                
             ),
         ),
-        'sanitiser' => array(
-            array('Com_Category_Widget', 'sanitise'),
-            array(
-                'com/member/group',
-                null,
-                array('id', null, 'name'),
-            ),
-        ),
-        'validator' => array(
-            'rule' => array(
-                'notNull' => true,
-            ),
-        ),
-    ),
-    'username' => array(
-        'validator' => array(
-            'rule' => array(
-                'required' => true,
-                'maxlength' => 40,
-            ),
-        ),
-    ),
-    'password' => array(
-        'form' => array(
-            '_type' => 'password',
-        ),
-        'attr' => array(
-            'isReadonly' => 1,
-            'isView' => 0,
-        ),
-        'sanitiser' => array(
-            'db' => array(
-                'md5'
-            )
-        ),
-        'validator' => array(
-            'rule' => array(
-                'required' => true,
-                'rangelength' => array(5, 40),
-            ),
-        ),
-    ),
-    'password2' => array(
-        'form' => array(
-            '_type' => 'password',
-        ),
-        'attr' => array(
-            'isReadonly' => 1,
-            'isView' => 0,
-            'isDbField' => 0,
-        ),
-        'validator' => array(
-            'rule' => array(
-                'required' => true,
-                'equalTo' => '#password',
-            ),
-        ),
-    ),
-    'email' => array(
-        'attr' => array(
-            'isList' => 1,
-        ),
-        'validator' => array(
-            'rule' => array(
-                'required' => true,
-                'email' => true,
-                'maxlength' => 256,
-            ),
-        ),
-    ),
-    'first_name' => array(
-    ),
-    'last_name' => array(
-    ),
-    'photo' => array(
-        'form' => array(
-            '_widget' => array(
-                'fileTree',
-                'ajaxUpload',
-            ),
-        ),
-    ),
-    'sex' => array(
-        'form' => array(
+        'group_id' => array(
             '_type' => 'select',
             '_resourceGetter' => array(
-                array('Ide_Option_Widget', 'get'),
-                'sex',
-            ),
-        ),
-        'sanitiser' => array(
-            'list' => array(
-                array('Ide_Option_Widget', 'sanitise'),
-                'sex',
-            ),
-            'view' => 'list',
-        ),
-        'attr' => array(
-            'isLink' => 1,
-        ),
-    ),
-    'birthday' => array(
-        'form' => array(
-            '_widget' => array(
+                array('Com_Category_Widget', 'get'),
                 array(
-                    array('Datepicker_Widget', 'render')
+                    'com/member/group',
+                    null,
+                    array('id', null, 'name'),
                 ),
             ),
-        )
-    ),
-    'reg_ip' => array(
-        'basic' => array(
-            'group' => 1,
+            'sanitiser' => array(
+                array('Com_Category_Widget', 'sanitise'),
+                array(
+                    'com/member/group',
+                    null,
+                    array('id', null, 'name'),
+                ),
+            ),
+            'validator' => array(
+                'rule' => array(
+                    'notNull' => true,
+                ),
+            ),
         ),
-    ),
-    'theme' => array(
-        'basic' => array(
-            'group' => 1,
+        'username' => array(
+            'validator' => array(
+                'rule' => array(
+                    'required' => true,
+                    'maxlength' => 40,
+                ),
+            ),
         ),
-    ),
-    'language' => array(
-        'basic' => array(
-            'group' => 1,
+        'password' => array(
+            'form' => array(
+                '_type' => 'password',
+            ),
+            'attr' => array(
+                'isReadonly' => 1,
+                'isView' => 0,
+            ),
+            'sanitiser' => array(
+                'db' => array(
+                    'md5'
+                )
+            ),
+            'validator' => array(
+                'rule' => array(
+                    'required' => true,
+                    'rangelength' => array(5, 40),
+                ),
+            ),
         ),
-        'form' => array(
-            '_type' => 'select',
-            '_resourceGetter' => array(
-                array('Ide_Option_Widget', 'get'),
-                'language',
+        'password2' => array(
+            'form' => array(
+                '_type' => 'password',
+            ),
+            'attr' => array(
+                'isReadonly' => 1,
+                'isView' => 0,
+                'isDbField' => 0,
+            ),
+            'validator' => array(
+                'rule' => array(
+                    'required' => true,
+                    'equalTo' => '#password',
+                ),
+            ),
+        ),
+        'email' => array(
+            'attr' => array(
+                'isList' => 1,
+            ),
+            'validator' => array(
+                'rule' => array(
+                    'required' => true,
+                    'email' => true,
+                    'maxlength' => 256,
+                ),
+            ),
+        ),
+        'first_name' => array(
+        ),
+        'last_name' => array(
+        ),
+        'photo' => array(
+            'form' => array(
+                '_widget' => array(
+                    'fileTree',
+                    'ajaxUpload',
+                ),
+            ),
+        ),
+        'sex' => array(
+            'form' => array(
+                '_type' => 'select',
+                '_resourceGetter' => array(
+                    array('Ide_Option_Widget', 'get'),
+                    'sex',
+                ),
+            ),
+            'sanitiser' => array(
+                'list' => array(
+                    array('Ide_Option_Widget', 'sanitise'),
+                    'sex',
+                ),
+                'view' => 'list',
+            ),
+            'attr' => array(
+                'isLink' => 1,
+            ),
+        ),
+        'birthday' => array(
+            'form' => array(
+                '_widget' => array(
+                    array(
+                        array('Datepicker_Widget', 'render')
+                    ),
+                ),
+            )
+        ),
+        'reg_ip' => array(
+            'basic' => array(
+                'group' => 1,
+            ),
+        ),
+        'theme' => array(
+            'basic' => array(
+                'group' => 1,
+            ),
+        ),
+        'language' => array(
+            'basic' => array(
+                'group' => 1,
+            ),
+            'form' => array(
+                '_type' => 'select',
+                '_resourceGetter' => array(
+                    array('Ide_Option_Widget', 'get'),
+                    'language',
+                ),
+            ),
+        ),
+        'telephone' => array(
+            'basic' => array(
+                'group' => 1,
+            ),
+        ),
+        'mobile' => array(
+            'basic' => array(
+                'group' => 1,
+            ),
+        ),
+        'homepage' => array(
+            'basic' => array(
+                'group' => 1,
+            ),
+        ),
+        'address' => array(
+            'basic' => array(
+                'group' => 1,
             ),
         ),
     ),
-    'telephone' => array(
-        'basic' => array(
-            'group' => 1,
-        ),
-    ),
-    'mobile' => array(
-        'basic' => array(
-            'group' => 1,
-        ),
-    ),
-    'homepage' => array(
-        'basic' => array(
-            'group' => 1,
-        ),
-    ),
-    'address' => array(
-        'basic' => array(
-            'group' => 1,
-        ),
-    ),
-    '_layout' => array(
+    'layout' => array(
         array('field1', 'field2'),
         array('field3', 'field4'),
         array('field5', 'field6'),

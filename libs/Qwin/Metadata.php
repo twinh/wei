@@ -44,12 +44,11 @@ class Qwin_Metadata
         'fields'    => 'Qwin_Metadata_Fields',
         'list'      => 'Qwin_Metadata_List',
         'form'      => 'Qwin_Metadata_Form',
-        'group'     => 'Qwin_Metadata_Group',
-        'model'     => 'Qwin_Metadata_Model',
+        'meta'      => 'Qwin_Metadata_Meta',
         'db'        => 'Qwin_Metadata_Db',
         'page'      => 'Qwin_Metadata_Page',
     );
-
+   
     /**
      * 实例化的元数据对象数组
      *
@@ -152,6 +151,16 @@ class Qwin_Metadata
             return $this->_drivers;
         }
         return isset($this->_drivers[$name]) ? $this->_drivers[$name] : null;
+    }
+    
+    /**
+     * 获取默认驱动的类名
+     * 
+     * @return string
+     */
+    public function getDefaultDriver()
+    {
+        return 'Qwin_Metadata_Common';
     }
     
     /**
