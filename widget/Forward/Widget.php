@@ -48,8 +48,8 @@ class Forward_Widget extends Qwin_Widget_Abstract
         $options = $this->_options = $options + $this->_defaults;
 
         $module = $options['module'];
-        $meta = Com_Metadata::getByModule($module);
-        $query = Com_Metadata::getQueryByModule($module);
+        $meta = Com_Meta::getByModule($module);
+        $query = Com_Meta::getQueryByModule($module);
 
         // 当比较键名不存在时，使用主键做比较
         $key = isset($meta['field'][$options['key']]) ? $options['key'] : $meta['db']['primaryKey'];

@@ -25,13 +25,13 @@
  * @since       2010-09-20 10:37:51
  */
 
-class Com_Email_Metadata extends Com_Metadata
+class Com_Email_Meta extends Com_Meta
 {
-    public function setMetadata()
+    public function setMeta()
     {
-        $this->setIdMetadata()
+        $this->setIdMeta()
             ->setCreatedData()
-            ->setOperationMetadata();
+            ->setOperationMeta();
         $this->merge(array(
             'field' => array(
                 'from' => array(

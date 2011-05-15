@@ -428,11 +428,11 @@ class Form_Widget extends Qwin_Widget_Abstract
     /**
      * 获取表格布局
      *
-     * @param Qwin_Metadata $meta 元数据
+     * @param Qwin_Meta $meta 元数据
      * @param string $action 小写的操作名称
      * @param int $column 每行几栏,只能是1或2
      */
-    public function getLayout(Qwin_Metadata_Abstract $metaCopy, $action = 'add', $column = 2, array $dataCopy = array())
+    public function getLayout(Qwin_Meta_Abstract $metaCopy, $action = 'add', $column = 2, array $dataCopy = array())
     {
         $orderedField = $this->getOrderedField($metaCopy);
 
@@ -451,7 +451,7 @@ class Form_Widget extends Qwin_Widget_Abstract
                 $data = $dataCopy;
                 $form = $meta['field'][$field[0]]['form'];
             } else {
-                $meta = $meta->getModelMetadataByAlias($meta, $field[1]);
+                $meta = $meta->getModelMetaByAlias($meta, $field[1]);
                 $data = $dataCopy[$field[1]];
                 $form = $meta['field'][$field[0]]['form'];
                 $form['id'] = $field[1] . '_' . $form['name'];
@@ -565,12 +565,12 @@ class Form_Widget extends Qwin_Widget_Abstract
     /**
      * 排列元数据
      *
-     * @param Qwin_Application_Metadata $meta 元数据
+     * @param Qwin_Application_Meta $meta 元数据
      * @param array $orderedField 经过排列的域
      * @param string|false $relatedName 元数据关联模型的元数据名称,如果是主元数据,则为false
      * @return array 以顺序为键名,以域的名称为值的数组
      */
-    public function getOrderedField(Qwin_Metadata_Abstract $meta, array $orderedField = null, $relatedName = null)
+    public function getOrderedField(Qwin_Meta_Abstract $meta, array $orderedField = null, $relatedName = null)
     {
         foreach ($meta['field'] as $name => $field) {
             // 使用order作为键名
@@ -585,7 +585,7 @@ class Form_Widget extends Qwin_Widget_Abstract
         }
 
         // 获取关联元数据
-        foreach ($meta->getModelMetadataByType('db') as $key => $relatedMeta) {
+        foreach ($meta->getModelMetaByType('db') as $key => $relatedMeta) {
             if ('db' == $meta['model'][$key]['type']) {
                 $relatedMeta = $this->getOrderedField($orderedField, $key);
             }
@@ -632,7 +632,7 @@ class Form_Widget extends Qwin_Widget_Abstract
      * @return array jQuery Validate 的验证配置数组
      * @todo 语言为可选
      */
-    public function getValidateCode(Qwin_Application_Metadata $meta, Qwin_Application_Language $lang = null, $relatedName = false)
+    public function getValidateCode(Qwin_Application_Meta $meta, Qwin_Application_Language $lang = null, $relatedName = false)
     {
         !$lang && $lang = Qwin::call('-lang');
         $validation = array(
@@ -659,7 +659,7 @@ class Form_Widget extends Qwin_Widget_Abstract
             {
                 continue;
             }
-            $relatedMeta = $this->_manager->get($model['metadata']);
+            $relatedMeta = $this->_manager->get($model['meta']);
             $tempValidation = $this->getJQueryValidateCode($relatedMeta, $model['alias']);
             $validation['rules'] += $tempValidation['rules'];
             $validation['messages'] += $tempValidation['messages'];

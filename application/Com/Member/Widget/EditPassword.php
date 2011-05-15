@@ -38,7 +38,7 @@ class Com_Member_Widget_EditPassword extends Qwin_Widget_Abstract
     public function execute($options)
     {
         $options = $options + $this->_options;
-        $meta = Qwin_Metadata::getInstance()->get('Com_Member_PasswordMetadata');
+        $meta = Qwin_Meta::getInstance()->get('Com_Member_PasswordMeta');
         $primaryKey = $meta['db']['primaryKey'];
         $primaryKeyValue = isset($options['data'][$primaryKey]) ? $options['data'][$primaryKey] : null;
 

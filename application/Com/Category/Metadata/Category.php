@@ -25,11 +25,11 @@
  * @since       2010-07-12 16:52:28
  */
 
-class Com_Category_Metadata_Category extends Com_Metadata
+class Com_Category_Meta_Category extends Com_Meta
 {
-    public function  setMetadata()
+    public function  setMeta()
     {
-        parent::setCommonMetadata();
+        parent::setCommonMeta();
         $this->merge(array(
             'field' => array(
                 'parent_id' => array(

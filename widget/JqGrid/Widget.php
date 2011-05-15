@@ -163,7 +163,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
 
         // 检查元数据是否合法
         $meta = $options['meta'];
-        if (false === Qwin_Metadata::isValid($meta)) {
+        if (false === Qwin_Meta::isValid($meta)) {
             $this->e('ERR_META_NOT_DEFINED');
         }
         
@@ -265,7 +265,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
      * 根据列表布局数组,获取栏目配置
      *
      * @param array $layout 列表布局数组
-     * @param Qwin_Metadata $meta 元数据
+     * @param Qwin_Meta $meta 元数据
      * @param Common_Language $lang 语言对象
      * @return array 栏目配置
      */
@@ -279,7 +279,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
         $id = $meta['db']['id'];
         foreach ($layout as $field => $bool) {
             if (is_array($field)) {
-                $fieldMeta = $meta['metadata'][$field[0]]['field'][$field[1]];
+                $fieldMeta = $meta['meta'][$field[0]]['field'][$field[1]];
                 $field = $field[0] . '_' . $field[1];
             } else {
                 $fieldMeta = $meta['fields'][$field];
@@ -301,7 +301,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
         return $options;
     }
 
-    public function getLayout(Qwin_Metadata_Abstract $meta, array $layout = array(), $relatedName = false)
+    public function getLayout(Qwin_Meta_Abstract $meta, array $layout = array(), $relatedName = false)
     {
         foreach ($meta->offsetLoadAsArray('list') as $name => $field) {
             if (true != $field['enabled']) {
@@ -324,7 +324,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
 //            }
         }
 
-//        foreach ($meta->getModelMetadataByType('db') as $name => $relatedMeta) {
+//        foreach ($meta->getModelMetaByType('db') as $name => $relatedMeta) {
 //            $layout += $this->getLayout($relatedMeta, $layout, $name);
 //        }
 //

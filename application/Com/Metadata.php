@@ -1,6 +1,6 @@
 <?php
 /**
- * Metadata
+ * Meta
  *
  * AciionController is controller with some default action,such as index,list,
  * add,edit,delete,view and so on.
@@ -20,7 +20,7 @@
  * limitations under the License.
  *
  * @package     Com
- * @subpackage  Metadata
+ * @subpackage  Meta
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -29,11 +29,11 @@
  */
 
 /**
- * @see Qwin_Application_Metadata
+ * @see Qwin_Application_Meta
  */
-require_once 'Qwin/Application/Metadata.php';
+require_once 'Qwin/Application/Meta.php';
 
-class Com_Metadata extends Qwin_Application_Metadata
+class Com_Meta extends Qwin_Application_Meta
 {
     /**
      * 模块标识
@@ -79,7 +79,7 @@ class Com_Metadata extends Qwin_Application_Metadata
     /**
      * 设置模块标识
      *
-     * @return Com_Metadata 当前对象
+     * @return Com_Meta 当前对象
      */
     public function setModule()
     {
@@ -129,7 +129,7 @@ class Com_Metadata extends Qwin_Application_Metadata
         } elseif ($value = $this->_offsetGetByFile($index)) {
             return $value;
         }
-        throw new Qwin_Metadata_Exception('Undefined index "' . $index . '"');
+        throw new Qwin_Meta_Exception('Undefined index "' . $index . '"');
     }
 
     /**
@@ -280,7 +280,7 @@ class Com_Metadata extends Qwin_Application_Metadata
      *
      * @param Doctrine_Record $record 记录对象
      * @param array $model 关联配置
-     * @return Com_Metadata 当前对象
+     * @return Com_Meta 当前对象
      */
     public function setRecordRelation(Doctrine_Record $record, array $model)
     {
@@ -306,7 +306,7 @@ class Com_Metadata extends Qwin_Application_Metadata
      * 将元数据的域定义,数据表定义加入模型中
      *
      * @param Doctrine_Record $model Doctrine对象
-     * @return Com_Metadata 当前对象
+     * @return Com_Meta 当前对象
      */
     public function toRecord(Doctrine_Record $record)
     {
@@ -331,7 +331,7 @@ class Com_Metadata extends Qwin_Application_Metadata
      *
      * @param Doctrine_Query $query
      * @param array|null $order 排序配置
-     * @return Com_Metadata 当前对象
+     * @return Com_Meta 当前对象
      * @todo 关联元数据的排序
      */
     public function addOrderToQuery(Doctrine_Query $query, $order = null)
@@ -377,7 +377,7 @@ class Com_Metadata extends Qwin_Application_Metadata
      *
      * @param Doctrine_Query $query
      * @param array|null $addition 附加的排序配置
-     * @return Com_Metadata 当前对象
+     * @return Com_Meta 当前对象
      * @todo 完善查询类型
      * @todo 复杂查询
      */
@@ -489,7 +489,7 @@ class Com_Metadata extends Qwin_Application_Metadata
      *
      * @param Doctrine_Query $query
      * @param int|null $addition 附加的偏移配置
-     * @return Com_Metadata 当前对象
+     * @return Com_Meta 当前对象
      */
     public function addOffsetToQuery(Doctrine_Query $query, $offset)
     {
@@ -504,7 +504,7 @@ class Com_Metadata extends Qwin_Application_Metadata
      *
      * @param Doctrine_Query $query
      * @param int|null $addition 附加的限制配置
-     * @return Com_Metadata 当前对象
+     * @return Com_Meta 当前对象
      */
     public function addLimitToQuery(Doctrine_Query $query, $addition = null)
     {
@@ -523,7 +523,7 @@ class Com_Metadata extends Qwin_Application_Metadata
      * 为Doctrine查询对象增加查询语句
      *
      * @param Doctrine_Query $query
-     * @return Com_Metadata 当前对象
+     * @return Com_Meta 当前对象
      * @todo 是否要将主类加入到$meta['model']数组中,减少代码重复
      */
     public function addSelectToQuery(Doctrine_Query $query)
@@ -563,7 +563,7 @@ class Com_Metadata extends Qwin_Application_Metadata
     /**
      * 设置元数据各个细节,包括域,分组,关联模型等等,每个元数据类应该包含该方法
      */
-    public function setMetadata()
+    public function setMeta()
     {
         return null;
     }
@@ -571,31 +571,31 @@ class Com_Metadata extends Qwin_Application_Metadata
     /**
      * 设置基本的元数据,包括编号,创建时间,修改时间和操作.
      *
-     * @return Com_Metadata 当前对象
+     * @return Com_Meta 当前对象
      */
-    public function setCommonMetadata()
+    public function setCommonMeta()
     {
         return $this
-            ->setIdMetadata()
+            ->setIdMeta()
             ->setCreatedData()
             ->setModifiedData()
-            ->setOperationMetadata();
+            ->setOperationMeta();
     }
 
     /**
      * 设置高级的元数据,包括编号,创建时间,修改时间,分配者,是否删除,操作
      *
-     * @return Com_Metadata 当前对象
+     * @return Com_Meta 当前对象
      */
-    public function setAdvancedMetadata()
+    public function setAdvancedMeta()
     {
         return $this
-            ->setIdMetadata()
+            ->setIdMeta()
             ->setCreatedData()
             ->setModifiedData()
-            ->setAssignToMetadata()
-            ->setIsDeletedMetadata()
-            ->setOperationMetadata();
+            ->setAssignToMeta()
+            ->setIsDeletedMeta()
+            ->setOperationMeta();
     }
 
     /**
@@ -603,7 +603,7 @@ class Com_Metadata extends Qwin_Application_Metadata
      *
      * @return obejct 当前对象
      */
-    public function setIdMetadata()
+    public function setIdMeta()
     {
         $this->merge(array(
             'id' => array(
@@ -637,7 +637,7 @@ class Com_Metadata extends Qwin_Application_Metadata
     /**
      * 设置创建域,包括创建人和创建时间
      *
-     * @return Com_Metadata 当前对象
+     * @return Com_Meta 当前对象
      */
     public function setCreatedData()
     {
@@ -675,7 +675,7 @@ class Com_Metadata extends Qwin_Application_Metadata
     /**
      * 设置修改域,包括修改人和修改时间
      *
-     * @return Com_Metadata 当前对象
+     * @return Com_Meta 当前对象
      */
     public function setModifiedData()
     {
@@ -706,7 +706,7 @@ class Com_Metadata extends Qwin_Application_Metadata
      *
      * @return obejct 当前对象
      */
-    public function setOperationMetadata()
+    public function setOperationMeta()
     {
         $this->merge(array(
             'operation' => array(
@@ -726,7 +726,7 @@ class Com_Metadata extends Qwin_Application_Metadata
         return $this;
     }
 
-    public function setAssignToMetadata()
+    public function setAssignToMeta()
     {
         $this->merge(array(
             'assign_to' => array(
@@ -759,7 +759,7 @@ class Com_Metadata extends Qwin_Application_Metadata
         return $this;
     }
 
-    public function setIsDeletedMetadata()
+    public function setIsDeletedMeta()
     {
         $this->merge(array(
             'is_deleted' => array(
@@ -969,7 +969,7 @@ class Com_Metadata extends Qwin_Application_Metadata
 
     public function sanitiseEditAssignTo($value, $name, $data, $dataCopy)
     {
-        $data = Com_Metadata::getQueryByModule('com/member')
+        $data = Com_Meta::getQueryByModule('com/member')
             ->select('username')
             ->where('id = ?', $value)
             ->fetchOne();

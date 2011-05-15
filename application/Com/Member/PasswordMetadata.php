@@ -25,9 +25,9 @@
  * @since       2010-08-28 20:40:31
  */
 
-class Com_Member_PasswordMetadata extends Com_Metadata
+class Com_Member_PasswordMeta extends Com_Meta
 {
-    public function setMetadata()
+    public function setMeta()
     {
         $this->merge(array(
             // 基本属性
@@ -114,7 +114,7 @@ class Com_Member_PasswordMetadata extends Com_Metadata
 
     public function validateOldPassword($value, $name, $data)
     {
-        $result = Com_Metadata::getQueryByModule('com/member')
+        $result = Com_Meta::getQueryByModule('com/member')
             ->select('password')
             ->where('id = ?', $data['id'])
             ->fetchOne();

@@ -23,11 +23,11 @@
  * @since       2011-01-05 14:13:37
  */
 
-class Crm_Opportunity_Metadata extends Com_Metadata
+class Crm_Opportunity_Meta extends Com_Meta
 {
-    public function setMetadata()
+    public function setMeta()
     {
-        $this->setAdvancedMetadata();
+        $this->setAdvancedMeta();
         $this->merge(array(
             'field' => array(
                 'name' => array(
@@ -227,7 +227,7 @@ class Crm_Opportunity_Metadata extends Com_Metadata
 
     public function sanitiseEditParentId($value, $name, $data, $dataCopy)
     {
-        $data = Com_Metadata::getQueryByModule('crm/opportunity')
+        $data = Com_Meta::getQueryByModule('crm/opportunity')
             ->select('name')
             ->where('id = ?', $value)
             ->fetchOne();

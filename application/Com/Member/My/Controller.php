@@ -40,7 +40,7 @@ class Com_Member_My_Controller extends Com_Controller
 
     public function actionIndex()
     {
-        $meta = $this->getMetadata();
+        $meta = $this->getMeta();
         $this->getView()->assign(get_defined_vars());
     }
 
@@ -82,7 +82,7 @@ class Com_Member_My_Controller extends Com_Controller
             $lang = Qwin::call('-lang');
             return $this->getView()->alert($lang->t('MSG_MEMBER_LOCKED'));
         }
-        $meta = Qwin_Metadata::getInstance()->get('Com_Member_PasswordMetadata');
+        $meta = Qwin_Meta::getInstance()->get('Com_Member_PasswordMeta');
 
         if (!$request->isPost()) {
             return Qwin::call('-widget')->get('View')->execute(array(
@@ -106,7 +106,7 @@ class Com_Member_My_Controller extends Com_Controller
 
             $styles = $style->getStyles();
             $path = $style->getSourcePath();
-            $meta = $this->getMetadata();
+            $meta = $this->getMeta();
             
             $this->getView()->assign(get_defined_vars());
         } else {
@@ -114,7 +114,7 @@ class Com_Member_My_Controller extends Com_Controller
             $member = $session->get('member');
             $style = $session->get('style');
             
-            $result = Com_Metadata::getQueryByModule($this->_memberModule)
+            $result = Com_Meta::getQueryByModule($this->_memberModule)
                 ->update()
                 ->set('theme', '?', $style)
                 ->where('id = ?', $member['id'])
@@ -128,7 +128,7 @@ class Com_Member_My_Controller extends Com_Controller
     public function actionLanguage()
     {
         if (!$this->_request->isPost()) {
-            $meta = $this->getMetadata();
+            $meta = $this->getMeta();
             $urlLanguage = $this->_request->get('lang');
 
             $this->getView()->assign(get_defined_vars());
@@ -137,7 +137,7 @@ class Com_Member_My_Controller extends Com_Controller
             $member = $session->get('member');
             $lang = $session->get('lang');
 
-            $result = Com_Metadata::getQueryByModule($this->_memberModule)
+            $result = Com_Meta::getQueryByModule($this->_memberModule)
                 ->update()
                 ->set('language', '?', $lang)
                 ->where('id = ?', $member['id'])

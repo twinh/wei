@@ -1,6 +1,6 @@
 <?php
 /**
- * Metadata
+ * Meta
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -23,9 +23,9 @@
  * @since       2011-04-05 06:52:51
  */
 
-class Com_Member_My_Metadata extends Com_Metadata
+class Com_Member_My_Meta extends Com_Meta
 {
-    public function setMetadata()
+    public function setMeta()
     {
         $this->merge(array(
              'page' => array(

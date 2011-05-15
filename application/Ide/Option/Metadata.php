@@ -25,11 +25,11 @@
  * @since       2009-11-21 15:21:00
  */
 
-class Ide_Option_Metadata extends Com_Metadata
+class Ide_Option_Meta extends Com_Meta
 {
-    public function  setMetadata()
+    public function  setMeta()
     {
-        $this->setCommonMetadata()
+        $this->setCommonMeta()
              ->merge(array(
                 'field' => array(
                     'language' => array(

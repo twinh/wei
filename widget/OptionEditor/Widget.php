@@ -35,7 +35,7 @@ class OptionEditor_Widget extends Qwin_Widget_Abstract
         $view = Qwin::call('-view');
 
         // todo 更合适的加载方式？
-        $codeMeta = Qwin_Metadata::getInstance()->get('Ide_Option_CodeMetadata');
+        $codeMeta = Qwin_Meta::getInstance()->get('Ide_Option_CodeMeta');
 
         $jQueryFile = array(
             'mouse' => $jQuery->loadUi('mouse', false),

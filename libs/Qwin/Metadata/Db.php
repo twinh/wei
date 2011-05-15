@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Metadata
+ * @subpackage  Meta
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,7 +25,7 @@
  * @since       2010-07-27 18:13:16
  */
 
-class Qwin_Metadata_Db extends Qwin_Metadata_Common
+class Qwin_Meta_Db extends Qwin_Meta_Common
 {
     /**
      * 默认选项

@@ -25,11 +25,11 @@
  * @since       2010-06-17 09:54:00
  */
 
-class Cms_Link_Metadata extends Com_Metadata
+class Cms_Link_Meta extends Com_Meta
 {
-    public function  setMetadata()
+    public function  setMeta()
     {
-        $this->setCommonMetadata();
+        $this->setCommonMeta();
         $this->merge(array(
             // 基本属性
             'field' => array(
@@ -104,7 +104,7 @@ class Cms_Link_Metadata extends Com_Metadata
                 array(
                     'name' => 'Com_Category_Model_Category',
                     'alias' => 'category',
-                    'metadata' => 'Com_Category_Metadata_Category',
+                    'meta' => 'Com_Category_Meta_Category',
                     'local' => 'category_id',
                     'foreign' => 'id',
                     'type' => 'view',
@@ -113,7 +113,7 @@ class Cms_Link_Metadata extends Com_Metadata
                     ),
                 ),
             ),
-            'metadata' => array(
+            'meta' => array(
 
             ),
             'db' => array(

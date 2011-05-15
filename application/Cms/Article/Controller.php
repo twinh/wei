@@ -42,7 +42,7 @@ class Cms_Article_Controller extends Com_ActionController
         // 获取模型类名称
         $modelName = $ini->getClassName('Model', $this->_set);
         $query = $this->meta->connectModel($modelName, $meta['model']);
-        $meta = $this->meta->connetMetadata($meta);
+        $meta = $this->meta->connetMeta($meta);
 
         // 转换成List是为了使用List的转换函数
         $this->setAction('List');

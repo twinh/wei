@@ -25,11 +25,11 @@
  * @since       2010-09-06 13:17:33
  */
 
-class Com_Feedback_Metadata_Feedback extends Com_Metadata
+class Com_Feedback_Meta_Feedback extends Com_Meta
 {
-    public function setMetadata()
+    public function setMeta()
     {
-        $this->setIdMetadata();
+        $this->setIdMeta();
         $this->merge(array(
             'field' => array(
                 'title' => array(
@@ -75,7 +75,7 @@ class Com_Feedback_Metadata_Feedback extends Com_Metadata
             'model' => array(
 
             ),
-            'metadata' => array(
+            'meta' => array(
 
             ),
             'db' => array(

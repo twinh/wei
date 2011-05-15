@@ -58,7 +58,7 @@ class Form2_Widget extends Qwin_Widget_Abstract
         
         // 检查元数据是否合法
         $meta = $options['meta'];
-        if (false === Qwin_Metadata::isValid($meta)) {
+        if (false === Qwin_Meta::isValid($meta)) {
             $this->e('ERR_META_NOT_DEFINED');
         }
         

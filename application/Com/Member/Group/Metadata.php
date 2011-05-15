@@ -25,11 +25,11 @@
  * @since       2010-07-15 14:49:16
  */
 
-class Com_Member_Group_Metadata extends Com_Metadata
+class Com_Member_Group_Meta extends Com_Meta
 {
-    public function setMetadata()
+    public function setMeta()
     {
-        $this->setCommonMetadata();
+        $this->setCommonMeta();
         $this->merge(array(
             // 基本属性
             'fields' => array(

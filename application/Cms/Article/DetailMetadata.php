@@ -25,11 +25,11 @@
  * @since       2010-05-27 00:13:24
  */
 
-class Cms_Article_DetailMetadata extends Com_Metadata
+class Cms_Article_DetailMeta extends Com_Meta
 {
-    public function  setMetadata()
+    public function  setMeta()
     {
-        $this//->setIdMetadata()
+        $this//->setIdMeta()
              ->merge(array(
             'field' => array(
                 'id' => array(
@@ -107,7 +107,7 @@ class Cms_Article_DetailMetadata extends Com_Metadata
                 ),
             ),
             'model' => array(),
-            'metadata' => array(),
+            'meta' => array(),
             'db' => array(
                 'table' => 'article_detail',
                 'primaryKey' => 'id',

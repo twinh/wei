@@ -1,6 +1,6 @@
 <?php
 /**
- * Metadata
+ * Meta
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Metadata
+ * @subpackage  Meta
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -26,12 +26,12 @@
  *
  */
 
-class Qwin_Metadata
+class Qwin_Meta
 {
     /**
      * 当前对象
      *
-     * @var Qwin_Metadata
+     * @var Qwin_Meta
      */
     protected static $_instance;
 
@@ -41,12 +41,12 @@ class Qwin_Metadata
      * @var array
      */
     protected $_drivers = array(
-        'fields'    => 'Qwin_Metadata_Fields',
-        'list'      => 'Qwin_Metadata_List',
-        'form'      => 'Qwin_Metadata_Form',
-        'meta'      => 'Qwin_Metadata_Meta',
-        'db'        => 'Qwin_Metadata_Db',
-        'page'      => 'Qwin_Metadata_Page',
+        'fields'    => 'Qwin_Meta_Fields',
+        'list'      => 'Qwin_Meta_List',
+        'form'      => 'Qwin_Meta_Form',
+        'meta'      => 'Qwin_Meta_Meta',
+        'db'        => 'Qwin_Meta_Db',
+        'page'      => 'Qwin_Meta_Page',
     );
    
     /**
@@ -66,7 +66,7 @@ class Qwin_Metadata
     /**
      * 获取当前类的实例化对象
      *
-     * @return Qwin_Metadata
+     * @return Qwin_Meta
      */
     public static function getInstance()
     {
@@ -92,19 +92,19 @@ class Qwin_Metadata
         }
 
         if (!class_exists($class)) {
-            throw new Qwin_Application_Metadata_Exception('Class "' . $class . '" not found.');
+            throw new Qwin_Application_Meta_Exception('Class "' . $class . '" not found.');
         }
 
         // 初始化并设置元数据
-        if(is_subclass_of($class, 'Qwin_Metadata_Abstract')) {
+        if(is_subclass_of($class, 'Qwin_Meta_Abstract')) {
             $object = new $class;
             $object->setManager($this)
-                   ->setMetadata();
+                   ->setMeta();
             $this->_objects[$class] = $object;
             return $object;
         } else {
-            require_once 'Qwin/Metadata/Exception.php';
-            throw new Qwin_Metadata_Exception('Class "' . $class . '" is not the sub class of "Qwin_Metadata_Abstract".');
+            require_once 'Qwin/Meta/Exception.php';
+            throw new Qwin_Meta_Exception('Class "' . $class . '" is not the sub class of "Qwin_Meta_Abstract".');
         }
     }
 
@@ -112,9 +112,9 @@ class Qwin_Metadata
      * 设置一个元数据对象
      *
      * @param string $class 类名,或任意字符串
-     * @param Qwin_Metadata_Abstract $object 元数据对象
+     * @param Qwin_Meta_Abstract $object 元数据对象
      */
-    public function set($class, Qwin_Metadata_Abstract $object)
+    public function set($class, Qwin_Meta_Abstract $object)
     {
         $class = (string)$class;
         $this->_objects[$class] = $object;
@@ -126,15 +126,15 @@ class Qwin_Metadata
      *
      * @param string $name 驱动名称
      * @param string $class 类名
-     * @return Qwin_Metadata 当前对象
+     * @return Qwin_Meta 当前对象
      */
     public function setDriver($name, $class)
     {
-        if (is_subclass_of($class, 'Qwin_Metadata_Driver')) {
+        if (is_subclass_of($class, 'Qwin_Meta_Driver')) {
             $this->_drivers[strtolower($name)] = $class;
         } else {
-            require_once 'Qwin/Metadata/Exception.php';
-            throw new Qwin_Metadata_Exception('Class "' . $class . '" is not the sub class of "Qwin_Metadata_Driver".');
+            require_once 'Qwin/Meta/Exception.php';
+            throw new Qwin_Meta_Exception('Class "' . $class . '" is not the sub class of "Qwin_Meta_Driver".');
         }
         return $this;
     }
@@ -160,18 +160,18 @@ class Qwin_Metadata
      */
     public function getDefaultDriver()
     {
-        return 'Qwin_Metadata_Common';
+        return 'Qwin_Meta_Common';
     }
     
     /**
      * 验证是否为合法元数据变量
      * 
-     * @param Qwin_Metadata_Abstract $meta 
+     * @param Qwin_Meta_Abstract $meta 
      * @return bool
      */
     public static function isValid($meta)
     {
-        if (is_object($meta) && $meta instanceof Qwin_Metadata_Abstract) {
+        if (is_object($meta) && $meta instanceof Qwin_Meta_Abstract) {
             return true;
         }
         return false;

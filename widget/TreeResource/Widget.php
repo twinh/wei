@@ -42,7 +42,7 @@ class TreeResource_Widget extends Qwin_Widget_Abstract
          * 在页面执行过程中,对于每个不同的配置(set),只会执行一次
          */
         if (!isset($this->_fileCache[$module])) {
-            $this->_fileCache[$module] = Com_Metadata::getQueryByModule($module)
+            $this->_fileCache[$module] = Com_Meta::getQueryByModule($module)
                 ->execute()
                 ->toArray();
         }

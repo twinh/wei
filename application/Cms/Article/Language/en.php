@@ -28,7 +28,7 @@
 return array(
     'FLD_PARENT_ID' => 'Parent Id',
     'FLD_ANCESTOR_ID' => 'Ancestor Id',
-    'FLD_META' => 'Metadata',
+    'FLD_META' => 'Meta',
     'FLD_TO_URL' => 'Jump to',
     'FLD_HIT' => 'Hit',
     'FLD_PAGE_NAME' => 'Page Name',

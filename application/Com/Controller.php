@@ -43,7 +43,7 @@ class Com_Controller extends Qwin_Application_Controller
 
     /**
      * 元数据对象
-     * @var Com_Metadata
+     * @var Com_Meta
      */
     protected $_meta;
 
@@ -82,12 +82,6 @@ class Com_Controller extends Qwin_Application_Controller
      * @var array
      */
     protected $_member;
-
-    /**
-     * 元数据对象
-     * @var Com_Metadata
-     */
-    protected $_metadata;
 
     /**
      * 模块标识
@@ -170,14 +164,14 @@ class Com_Controller extends Qwin_Application_Controller
     /**
      * 获取元数据对象
      *
-     * @return Com_Metadata
+     * @return Com_Meta
      */
-    public function getMetadata()
+    public function getMeta()
     {
-        if (!$this->_metadata) {
-            $this->_metadata = Com_Metadata::getByModule($this->_module);
+        if (!$this->_meta) {
+            $this->_meta = Com_Meta::getByModule($this->_module);
         }
-        return $this->_metadata;
+        return $this->_meta;
     }
 
     /**
@@ -205,7 +199,7 @@ class Com_Controller extends Qwin_Application_Controller
 
         // 未登陆则默认使用游客账号
         if (null == $member) {
-            $member = Com_Metadata::getQueryByModule('com/member')
+            $member = Com_Meta::getQueryByModule('com/member')
                 ->where('username = ?', 'guest')
                 ->fetchOne()
                 ->toArray();

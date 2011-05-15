@@ -60,7 +60,7 @@ class Ide_Seeder_Widget_Seed extends Qwin_Widget_Abstract
         }
 
         // 获取数据库字段配置
-        $query = Com_Metadata::getQueryByModule($options['module']);
+        $query = Com_Meta::getQueryByModule($options['module']);
         $manager = Doctrine_Manager::getInstance();
         $tableFormat = $manager->getAttribute(Doctrine_Core::ATTR_TBLNAME_FORMAT);
         $tableColumns = $query->getConnection()->import->listTableColumns(sprintf($tableFormat, $meta['db']['table']));

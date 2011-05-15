@@ -41,8 +41,8 @@ class Com_Trash_Widget_Delete extends Qwin_Widget_Abstract
     {
         $options = $this->_options = (array)$options + $this->_options;
 
-        /* @var $meta Com_Metadata */
-        $meta = Com_Metadata::getByModule($options['module']);
+        /* @var $meta Com_Meta */
+        $meta = Com_Meta::getByModule($options['module']);
         $idValue = explode(',', $options['id']);
 
         $query = $meta->getQuery(null, array(
@@ -58,8 +58,8 @@ class Com_Trash_Widget_Delete extends Qwin_Widget_Abstract
         // 循环删除各记录 TODO是否应该使用删除微件
         foreach ($records as $record) {
             // 获取源记录
-            /* @var $sourceMeta Com_Metadata */
-            $sourceMeta = Com_Metadata::getByModule($record['module']);
+            /* @var $sourceMeta Com_Meta */
+            $sourceMeta = Com_Meta::getByModule($record['module']);
             $sourceQuery = $sourceMeta->getQuery();
             $result = $sourceQuery
                 ->select('is_deleted')

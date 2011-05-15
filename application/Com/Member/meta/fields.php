@@ -23,7 +23,7 @@
  * @since       2011-04-27 15:39:26
  */
 
-$this->setCommonMetadata();
+$this->setCommonMeta();
 return array(
     'group_id' => array(
         'validator' => array(

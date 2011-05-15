@@ -23,9 +23,9 @@
  * @since       2011-01-20 20:47:21
  */
 
-class Ide_Option_CodeMetadata extends Com_Metadata
+class Ide_Option_CodeMeta extends Com_Meta
 {
-    public function setMetadata()
+    public function setMeta()
     {
         $this->merge(array(
             'field' => array(

@@ -23,12 +23,12 @@
  * @since       2011-01-09 14:48:52
  */
 
-class Com_Trash_Metadata extends Com_Metadata
+class Com_Trash_Meta extends Com_Meta
 {
-    public function setMetadata()
+    public function setMeta()
     {
-        $this->setIdMetadata();
-        $this->setOperationMetadata();
+        $this->setIdMeta();
+        $this->setOperationMeta();
         $this->merge(array(
             'field' => array(
                 'name' => array(
@@ -93,11 +93,11 @@ class Com_Trash_Metadata extends Com_Metadata
 
     public function sanitiseListModule($value, $name, $data, $dataCopy)
     {
-        $class = Com_Metadata::getByModule($value, false);
+        $class = Com_Meta::getByModule($value, false);
         if (!class_exists($class)) {
             return $value;
         }
-        $meta = Qwin_Metadata::getInstance()->get($class);
+        $meta = Qwin_Meta::getInstance()->get($class);
         $lang = Qwin::call('-lang');
         
         return Qwin_Util_Html::link($this->url->url($value), $lang->t($meta['page']['title']));

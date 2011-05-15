@@ -49,7 +49,7 @@ class Com_Member_Auth_Widget_Login extends Qwin_Widget_Abstract
         $options = $options + $this->_options;
         $session = Qwin::call('-session');
         $member = $session['member'];
-        $meta = Com_Metadata::getByModule('com/member/auth');
+        $meta = Com_Meta::getByModule('com/member/auth');
 
         // 检查是否登陆,如果登陆,提示已登陆
         if ($options['checkIsLogin']) {

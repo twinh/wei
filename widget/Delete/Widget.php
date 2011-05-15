@@ -36,8 +36,8 @@ class Delete_Widget extends Qwin_Widget_Abstract
     {
         $options = $this->_options = $options + $this->_defaults;
 
-        /* @var $meta Com_Metadata */
-        $meta = Com_Metadata::getByModule($options['module']);
+        /* @var $meta Com_Meta */
+        $meta = Com_Meta::getByModule($options['module']);
         $idValue = explode(',', $options['id']);
         $query = $meta->getQuery(null, array(
             'type' => 'db',
