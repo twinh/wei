@@ -23,11 +23,11 @@
  * @since       2011-01-05 16:08:05
  */
 
-class Crm_Potential_Metadata extends Com_Metadata
+class Crm_Potential_Meta extends Com_Meta
 {
-    public function setMetadata()
+    public function setMeta()
     {
-        $this->setAdvancedMetadata();
+        $this->setAdvancedMeta();
         $this->merge(array(
             'field' => array(
                 'name' => array(
@@ -231,7 +231,7 @@ class Crm_Potential_Metadata extends Com_Metadata
 
     public function sanitiseEditCustomerId($value, $name, $data, $dataCopy)
     {
-        $data = Com_Metadata::getQueryByModule('crm/customer')
+        $data = Com_Meta::getQueryByModule('crm/customer')
             ->select('name')
             ->where('id = ?', $value)
             ->fetchOne();
@@ -242,7 +242,7 @@ class Crm_Potential_Metadata extends Com_Metadata
 
     public function sanitiseEditCampaignId($value, $name, $data, $dataCopy)
     {
-        $data = Com_Metadata::getQueryByModule('crm/opportunity')
+        $data = Com_Meta::getQueryByModule('crm/opportunity')
             ->select('name')
             ->where('id = ?', $value)
             ->fetchOne();
@@ -253,7 +253,7 @@ class Crm_Potential_Metadata extends Com_Metadata
 
     public function sanitiseEditContactId($value, $name, $data, $dataCopy)
     {
-        $data = Com_Metadata::getQueryByModule('crm/contact')
+        $data = Com_Meta::getQueryByModule('crm/contact')
             ->select('last_name, first_name')
             ->where('id = ?', $value)
             ->fetchOne();

@@ -25,9 +25,9 @@
  * @since       2011-01-04 21:18:36
  */
 
-class Com_Management_Metadata_Management extends Com_Metadata
+class Com_Management_Meta_Management extends Com_Meta
 {
-    public function setMetadata()
+    public function setMeta()
     {
         $this->merge(array(
             'page' => array(

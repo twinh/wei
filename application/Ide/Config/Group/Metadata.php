@@ -25,11 +25,11 @@
  * @since       2010-12-07 17:05:49
  */
 
-class Ide_Config_Group_Metadata extends Com_Metadata
+class Ide_Config_Group_Meta extends Com_Meta
 {
-    public function setMetadata()
+    public function setMeta()
     {
-        $this->setCommonMetadata();
+        $this->setCommonMeta();
         $this->merge(array(
             'field' => array(
                 /*'parent_id' => array(

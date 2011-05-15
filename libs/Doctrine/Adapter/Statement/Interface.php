@@ -216,7 +216,7 @@ interface Doctrine_Adapter_Statement_Interface
     public function getAttribute($attribute);
 
     /**
-     * Returns metadata for a column in a result set
+     * Returns meta for a column in a result set
      *
      * @param integer $column               The 0-indexed column in the result set.
      *

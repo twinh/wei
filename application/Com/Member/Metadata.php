@@ -25,11 +25,11 @@
  * @since       2010-05-13 10:19:22
  */
 
-class Com_Member_Metadata extends Com_Metadata
+class Com_Member_Meta extends Com_Meta
 {
-    public function setMetadata()
+    public function setMeta()
     {
-//        $this->setCommonMetadata()
+//        $this->setCommonMeta()
 //             ->merge(array(
 //            'field' => array(
 //                'group_id' => array(
@@ -267,7 +267,7 @@ class Com_Member_Metadata extends Com_Metadata
 
     public function validateEmail($value, $name, $data)
     {
-        $result = Com_Metadata::getQueryByModule('com/member')
+        $result = Com_Meta::getQueryByModule('com/member')
             ->select('id')
             ->where('email = ? AND username <> ?', array($value, $data['username']))
             ->fetchOne();
@@ -276,7 +276,7 @@ class Com_Member_Metadata extends Com_Metadata
 
     public function isUsernameExists($username)
     {
-        $result = Com_Metadata::getQueryByModule('com/member')
+        $result = Com_Meta::getQueryByModule('com/member')
             ->select('id')
             ->where('username = ?', $username)
             ->fetchOne();

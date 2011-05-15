@@ -65,8 +65,8 @@ class JsonList_Widget extends Qwin_Widget_Abstract
         // 初始化配置
         $options = array_merge($this->_options, $options);
         
-        /* @var $meta Com_Metadata */
-        $meta = Com_Metadata::getByModule($options['module']);
+        /* @var $meta Com_Meta */
+        $meta = Com_Meta::getByModule($options['module']);
 
         // 检查元数据列表键名是否存在
         if (!$meta->offsetLoad($options['listName'], 'list')) {
@@ -82,7 +82,7 @@ class JsonList_Widget extends Qwin_Widget_Abstract
         $options['page'] <= 0 && $options['page'] = 1;
 
         // 从模型获取数据
-        $query = Com_Metadata::getQueryByModule($options['module'], array('type' => array('db', 'view')));
+        $query = Com_Meta::getQueryByModule($options['module'], array('type' => array('db', 'view')));
         $meta
             ->addSelectToQuery($query)
             ->addOrderToQuery($query, $options['order'])

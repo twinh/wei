@@ -37,7 +37,7 @@ class Com_ActionController extends Com_Controller
         $request = $this->getRequest();
         if ($request->isJson()) {
             return Qwin::call('-widget')->get('JsonList')->execute(array(
-                'meta'  => $this->getMetadata(),
+                'meta'  => $this->getMeta(),
                 'list'  => $request->get('list'),
                 'search'=> $request->get('search'),
                 'page'  => $request->get('page'),
@@ -49,7 +49,7 @@ class Com_ActionController extends Com_Controller
             ));
         } else {
             return Qwin::call('-widget')->get('List')->render(array(
-                'meta'  => $this->getMetadata(),
+                'meta'  => $this->getMeta(),
                 'list'  => $request->get('list'),
                 'popup' => $request->get('popup'),
             ));
@@ -85,7 +85,7 @@ class Com_ActionController extends Com_Controller
     public function actionAdd()
     {
         return Qwin::call('-widget')->get('Form2')->render(array(
-            'meta'      => $this->getMetadata(),
+            'meta'      => $this->getMeta(),
             'id'        => null,
             'data'      => array(),
             'asAction'  => 'view',

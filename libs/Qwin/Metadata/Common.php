@@ -25,7 +25,7 @@
  * @method mixed set*(mixed $value) magic finders; @see __call()
  */
 
-class Qwin_Metadata_Common extends ArrayObject implements Qwin_Metadata_Interface
+class Qwin_Meta_Common extends ArrayObject implements Qwin_Meta_Interface
 {
     /**
      * 默认选项
@@ -42,7 +42,7 @@ class Qwin_Metadata_Common extends ArrayObject implements Qwin_Metadata_Interfac
     /**
      * 元数据父对象
      * 
-     * @var Qwin_Metadata_Abstract
+     * @var Qwin_Meta_Abstract
      */
     protected $_parent;
 
@@ -61,7 +61,7 @@ class Qwin_Metadata_Common extends ArrayObject implements Qwin_Metadata_Interfac
      *
      * @param array $data 数据
      * @param array $options 选项
-     * @return Qwin_Metadata_Common 当前对象
+     * @return Qwin_Meta_Common 当前对象
      * @todo 是否一定要数组
      */
     public function merge($data, array $options = array())
@@ -142,10 +142,10 @@ class Qwin_Metadata_Common extends ArrayObject implements Qwin_Metadata_Interfac
     /**
      * 设置父元数据对象,方便调用
      * 
-     * @param Qwin_Metadata_Abstract $meta 父元数据对象
-     * @return Qwin_Metadata_Common 当前对象
+     * @param Qwin_Meta_Abstract $meta 父元数据对象
+     * @return Qwin_Meta_Common 当前对象
      */
-    public function setParent(Qwin_Metadata_Abstract $meta)
+    public function setParent(Qwin_Meta_Abstract $meta)
     {
         foreach ($meta as $element => $value) {
             if ($value === $this) {
@@ -153,20 +153,20 @@ class Qwin_Metadata_Common extends ArrayObject implements Qwin_Metadata_Interfac
                 return $this;
             }
         }
-        throw new Qwin_Metadata_Common_Exception('Sub metadata not found.');
+        throw new Qwin_Meta_Common_Exception('Sub meta not found.');
     }
     
     /**
      * 获取父元数据对象
      * 
-     * @return Qwin_Metadata_Abstract
+     * @return Qwin_Meta_Abstract
      */
     public function getParent()
     {
         if (isset($this->_parent)) {
             return $this->_parent;
         }
-        throw new Qwin_Metadata_Common_Exception('Parent metadata not defined.');
+        throw new Qwin_Meta_Common_Exception('Parent meta not defined.');
     }
     
     /**
@@ -188,10 +188,10 @@ class Qwin_Metadata_Common extends ArrayObject implements Qwin_Metadata_Interfac
             if ($this->offsetExists($element)) {
                 return $this->offsetGet($element);
             }
-            throw new Qwin_Metadata_Common_Exception('Undefiend index "'. $element . '".');
+            throw new Qwin_Meta_Common_Exception('Undefiend index "'. $element . '".');
         } elseif ('set' == $action) {
             if (0 === count($arguments)) {
-                throw new Qwin_Metadata_Common_Exception('You must specify the value to ' . $name);
+                throw new Qwin_Meta_Common_Exception('You must specify the value to ' . $name);
             }
             return $this->offsetSet($element, $arguments[0]);
         }

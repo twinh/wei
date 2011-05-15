@@ -29,6 +29,6 @@
  */
 require_once 'Qwin/Exception.php';
 
-class Qwin_Metadata_Common_Exception extends Qwin_Exception
+class Qwin_Meta_Common_Exception extends Qwin_Exception
 {
 }

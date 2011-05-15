@@ -110,7 +110,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
             }
 
              if (!in_array('delete', $unableActions) && method_exists($controller, 'actionDelete')) {
-                $meta = Com_Metadata::getByModule($module);
+                $meta = Com_Meta::getByModule($module);
                 if (!isset($meta['page']['useTrash'])) {
                     $icon = 'ui-icon-close';
                     $jsLang = 'MSG_CONFIRM_TO_DELETE';

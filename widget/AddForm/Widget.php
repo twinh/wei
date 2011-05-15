@@ -44,8 +44,8 @@ class AddForm_Widget extends Qwin_Widget_Abstract
         $options    = $options + $this->_options;
         $module     = $options['module'];
 
-        /* @var $meta Com_Metadata */
-        $meta       = Com_Metadata::getByModule($module);
+        /* @var $meta Com_Meta */
+        $meta       = Com_Meta::getByModule($module);
         $primaryKey = $meta['db']['primaryKey'];
         $primaryKeyValue = $options['id'];
 

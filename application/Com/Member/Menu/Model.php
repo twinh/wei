@@ -28,7 +28,7 @@ class Com_Member_Menu_Model extends Com_Model
 {
     public function postSave($event)
     {
-        $data = Com_Metadata::getQueryByModule('com/member/menu')
+        $data = Com_Meta::getQueryByModule('com/member/menu')
             ->select('id, category_id, title, target, url')
             ->orderBy('order ASC')
             ->fetchArray();

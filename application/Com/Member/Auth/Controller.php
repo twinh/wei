@@ -37,7 +37,7 @@ class Com_Member_Auth_Controller extends Com_Controller
 
         // 设置视图,加载登陆界面
         if (!$this->_request->isPost()) {
-            $meta = $this->getMetadata();
+            $meta = $this->getMeta();
             $this->getView()->assign(get_defined_vars());
         } else {
             return Com_Widget::getByModule('com/member/auth', 'login')->execute(array(

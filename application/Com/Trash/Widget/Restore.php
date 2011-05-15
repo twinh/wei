@@ -40,8 +40,8 @@ class Com_Trash_Widget_Restore extends Qwin_Widget_Abstract
     {
         $options = $this->_options = (array)$options + $this->_options;
 
-        /* @var $meta Com_Metadata */
-        $meta = Com_Metadata::getByModule($options['module']);
+        /* @var $meta Com_Meta */
+        $meta = Com_Meta::getByModule($options['module']);
         $idValue = explode(',', $options['id']);
         $query = $meta->getQuery(null, array(
             'type' => 'db',
@@ -74,8 +74,8 @@ class Com_Trash_Widget_Restore extends Qwin_Widget_Abstract
         // 循环还原各记录
         foreach ($records as $record) {
             // 获取源记录
-            /* @var $moduleMeta Com_Metadata */
-            $moduleMeta = Com_Metadata::getByModule($record['module']);
+            /* @var $moduleMeta Com_Meta */
+            $moduleMeta = Com_Meta::getByModule($record['module']);
             $moduleQuery = $moduleMeta->getQuery();
             $result = $moduleQuery
                 ->select('is_deleted')

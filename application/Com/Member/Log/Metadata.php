@@ -25,11 +25,11 @@
  * @since       2010-05-24 07:52:43
  */
 
-class Com_Member_Log_Metadata extends Com_Metadata
+class Com_Member_Log_Meta extends Com_Meta
 {
-    public function setMetadata()
+    public function setMeta()
     {
-        $this->setIdMetadata();
+        $this->setIdMeta();
         $this->merge(array(
             'field' => array(
                 'member_id' => array(

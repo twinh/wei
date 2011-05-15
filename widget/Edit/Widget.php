@@ -44,8 +44,8 @@ class Edit_Widget extends Qwin_Widget_Abstract
         // 初始配置
         $options     = array_merge($this->_options, $options);
 
-        /* @var $meta Com_Metadata */
-        $meta = null == $options['meta'] ? Com_Metadata::getByModule($options['module']) : $options['meta'];
+        /* @var $meta Com_Meta */
+        $meta = null == $options['meta'] ? Com_Meta::getByModule($options['module']) : $options['meta'];
         $primaryKey = $meta['db']['primaryKey'];
         $primaryKeyValue = isset($options['data'][$primaryKey]) ? $options['data'][$primaryKey] : null;
 
@@ -107,7 +107,7 @@ class Edit_Widget extends Qwin_Widget_Abstract
     /**
      * 取出编辑数据,即改动过的,需要更新的数据
      *
-     * @param Qwin_Metadata_Abstract 元数据对象
+     * @param Qwin_Meta_Abstract 元数据对象
      * @param array $data 从数据库取出的数据
      * @param array $post 用户提交的数据
      * @return array

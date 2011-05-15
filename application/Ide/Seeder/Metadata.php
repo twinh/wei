@@ -1,6 +1,6 @@
 <?php
 /**
- * Metadata
+ * Meta
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -23,9 +23,9 @@
  * @since       2011-04-17 13:30:29
  */
 
-class Ide_Seeder_Metadata extends Com_Metadata
+class Ide_Seeder_Meta extends Com_Meta
 {
-    public function setMetadata()
+    public function setMeta()
     {
         $this->merge(array(
             'field' => array(

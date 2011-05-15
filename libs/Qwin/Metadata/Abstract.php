@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Metadata
+ * @subpackage  Meta
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,12 +25,12 @@
  * @since       2010-07-27 15:41:46
  */
 
-abstract class Qwin_Metadata_Abstract extends ArrayObject
+abstract class Qwin_Meta_Abstract extends ArrayObject
 {
     /**
      * 管理类
      *
-     * @var Qwin_Metadata
+     * @var Qwin_Meta
      */
     protected $_manager = null;
 
@@ -47,9 +47,9 @@ abstract class Qwin_Metadata_Abstract extends ArrayObject
     /**
      * 设置基本元数据,初始化时调用该方法
      *
-     * @return Qwin_Metadata_Abstract 当前对象
+     * @return Qwin_Meta_Abstract 当前对象
      */
-    public function setMetadata()
+    public function setMeta()
     {
         return $this;
     }
@@ -57,7 +57,7 @@ abstract class Qwin_Metadata_Abstract extends ArrayObject
     /**
      * 获取管理器对象
      *
-     * @return Qwin_Metadata
+     * @return Qwin_Meta
      */
     public function getManager()
     {
@@ -67,12 +67,12 @@ abstract class Qwin_Metadata_Abstract extends ArrayObject
     /**
      * 设置管理器
      *
-     * @param Qwin_Metadata $metadata 管理器对象
-     * @return Qwin_Metadata_Abstract 当前对象
+     * @param Qwin_Meta $meta 管理器对象
+     * @return Qwin_Meta_Abstract 当前对象
      */
-    public function setManager(Qwin_Metadata $metadata)
+    public function setManager(Qwin_Meta $meta)
     {
-        $this->_manager = $metadata;
+        $this->_manager = $meta;
         return $this;
     }
 
@@ -96,7 +96,7 @@ abstract class Qwin_Metadata_Abstract extends ArrayObject
      * 将数组加入元数据中
      *
      * @param array $data 数组
-     * @return Qwin_Metadata_Abstract 当前对象
+     * @return Qwin_Meta_Abstract 当前对象
      */
     public function fromArray(array $data)
     {
@@ -109,7 +109,7 @@ abstract class Qwin_Metadata_Abstract extends ArrayObject
      * 
      * @param string $index 键名
      * @param array $data 数据
-     * @return QwiQwin_Metadata_Abstract 当前对象
+     * @return QwiQwin_Meta_Abstract 当前对象
      */
     public function merge($index, $data)
     {
@@ -130,13 +130,13 @@ abstract class Qwin_Metadata_Abstract extends ArrayObject
      */
     public function set($index, $data = null, $driver = null)
     {
-        $meta = Qwin_Metadata::getInstance();
+        $meta = Qwin_Meta::getInstance();
         
         // 获取驱动类名 $driver > $index > default
         if (isset($driver)) {
             $class = $meta->getDriver($driver);
             if (!$class) {
-                throw new Qwin_Metadata_Exception(sprintf('Metadata driver "%s" not found.', $driver));
+                throw new Qwin_Meta_Exception(sprintf('Meta driver "%s" not found.', $driver));
             }
         } else {
             $class = $meta->getDriver($index);
@@ -195,7 +195,7 @@ abstract class Qwin_Metadata_Abstract extends ArrayObject
      * 设置元数据唯一编号
      *
      * @param string $id 编号
-     * @return Qwin_Metadata_Abstract 当前对象
+     * @return Qwin_Meta_Abstract 当前对象
      */
     public function setId($id)
     {

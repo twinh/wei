@@ -46,7 +46,7 @@ class Ide_Config_Controller extends Com_ActionController
         }
         
         // 构建域分组
-        $groupResult = Com_Metadata::getQueryByAsc(array(
+        $groupResult = Com_Meta::getQueryByAsc(array(
                 'package' => 'Common',
                 'module' => 'Config',
                 'controller' => 'Group',
@@ -88,7 +88,7 @@ class Ide_Config_Controller extends Com_ActionController
             );
             $data[$row['form_name']] = $row['value'];
         }
-        $meta = Com_Metadata::getByAsc(array(
+        $meta = Com_Meta::getByAsc(array(
                 'package' => 'Common',
                 'module' => 'Config',
                 'controller' => 'Temp',
@@ -113,7 +113,7 @@ class Ide_Config_Controller extends Com_ActionController
         }
     }
     
-    public function getMetadataByGroupId($groupId)
+    public function getMetaByGroupId($groupId)
     {
         
     }
@@ -122,10 +122,10 @@ class Ide_Config_Controller extends Com_ActionController
     {
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
-        $meta = Com_Metadata::getByModule('ide/config');
+        $meta = Com_Meta::getByModule('ide/config');
 
         // 分组的数据
-        $data = Com_Metadata::getQueryByModule('Ide/Config/Group')
+        $data = Com_Meta::getQueryByModule('Ide/Config/Group')
             ->where('is_enabled = 1')
             ->orderBy('order DESC, date_modified DESC')
             ->execute()

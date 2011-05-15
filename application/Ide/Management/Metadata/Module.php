@@ -25,12 +25,12 @@
  * @since       2010-09-17 0:33:03
  */
 
-class Com_Management_Metadata_Module extends Com_Metadata
+class Com_Management_Meta_Module extends Com_Meta
 {
     public function __construct()
     {
-        $this->setIdMetadata();
-        $this->setOperationMetadata();
+        $this->setIdMeta();
+        $this->setOperationMeta();
         $this->merge(array(
             'field' => array(
                 'package_value' => array(

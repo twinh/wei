@@ -1,6 +1,6 @@
 <?php
 /**
- * Metadata
+ * Meta
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -27,11 +27,11 @@
  */
 
 /**
- * @see Qwin_Metadata_Abstract
+ * @see Qwin_Meta_Abstract
  */
-require_once 'Qwin/Metadata/Abstract.php';
+require_once 'Qwin/Meta/Abstract.php';
 
-abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
+abstract class Qwin_Application_Meta extends Qwin_Meta_Abstract
 {
     /**
      * @var array $_sanitiseOptions  数据处理的选项
@@ -78,7 +78,7 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
      * 根据模块获取元数据对象
      *
      * @param string $module 模块标识
-     * @return Qwin_Metadata_Abstarct 元数据对象
+     * @return Qwin_Meta_Abstarct 元数据对象
      */
     public static function getByModule($module, $instanced = true)
     {
@@ -87,8 +87,8 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
         } else {
             $class = Qwin_Module::instance($module)->toClass();
         }
-        $class .= '_Metadata';
-        return $instanced ? Qwin_Metadata::getInstance()->get($class, $module) : $class;
+        $class .= '_Meta';
+        return $instanced ? Qwin_Meta::getInstance()->get($class, $module) : $class;
     }
 
     /**
@@ -199,7 +199,7 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
 
         // 对db类型的关联元数据进行转换
         if ($options['relatedMeta']) {
-            foreach ($this->getModelMetadataByType('db') as $name => $relatedMeta) {
+            foreach ($this->getModelMetaByType('db') as $name => $relatedMeta) {
                 !isset($data[$name]) && $data[$name] = array();
                 // 不继续转换关联元数据
                 $options['relatedMeta'] = false;
@@ -219,7 +219,7 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
      * @param string $type 类型
      * @return array 由元数据组成的数组
      */
-    public function getModelMetadataByType($type = 'db')
+    public function getModelMetaByType($type = 'db')
     {
         if (empty($this['model'])) {
             return array();
@@ -227,10 +227,10 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
         $result = array();
         foreach ($this['model'] as $name => $model) {
             if ($model['enabled'] && $type == $model['type']) {
-                if (!isset($model['metadata'])) {
-                    $model['metadata'] = self::getByModule($model['module']);
+                if (!isset($model['meta'])) {
+                    $model['meta'] = self::getByModule($model['module']);
                 }
-                $result[$name] = $model['metadata'];
+                $result[$name] = $model['meta'];
             }
         }
         return $result;
@@ -240,20 +240,20 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
      * 根据别名获取模型的元数据
      *
      * @param string $name 别名
-     * @return Qwin_Metadata_Abstract $meta 元数据
+     * @return Qwin_Meta_Abstract $meta 元数据
      */
-    public function getModelMetadataByAlias($name)
+    public function getModelMetaByAlias($name)
     {
-        if (isset($this['model'][$name]['metadata'])) {
-            return $this['model'][$name]['metadata'];
+        if (isset($this['model'][$name]['meta'])) {
+            return $this['model'][$name]['meta'];
         }
-        return $meta['model'][$name]['metadata'] = self::getByAsc($meta['model'][$name]['asc']);
+        return $meta['model'][$name]['meta'] = self::getByAsc($meta['model'][$name]['asc']);
     }
 
     /**
      * 设置外键的值,保证数据之间能正确关联
      *
-     * @param Qwin_Metadata_Element_Model $modelList 模型配置元数据
+     * @param Qwin_Meta_Element_Model $modelList 模型配置元数据
      * @param array $data 经过转换的用户提交的数据
      * @return array 设置的后的值
      */
@@ -271,10 +271,10 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
      * 删除主键的的值
      *
      * @param array $data
-     * @param Qwin_Metadata_Abstract $meta 元数据对象
+     * @param Qwin_Meta_Abstract $meta 元数据对象
      * @return array
      */
-    public function unsetPrimaryKeyValue($data, Qwin_Metadata_Abstract $meta)
+    public function unsetPrimaryKeyValue($data, Qwin_Meta_Abstract $meta)
     {
         $primaryKey = $meta['db']['primaryKey'];
         // 允许自定义主键的值
@@ -283,7 +283,7 @@ abstract class Qwin_Application_Metadata extends Qwin_Metadata_Abstract
             $data[$primaryKey] = null;
             //unset($data[$primaryKey]);
         }*/
-        foreach ($this->getModelMetadataByType($meta, 'db') as $name => $relatedMeta) {
+        foreach ($this->getModelMetaByType($meta, 'db') as $name => $relatedMeta) {
             $primaryKey = $relatedMeta['db']['primaryKey'];
             if (isset($data[$name][$primaryKey])) {
                 $data[$name][$primaryKey] = null;

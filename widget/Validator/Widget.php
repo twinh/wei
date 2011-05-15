@@ -60,7 +60,7 @@ class Validator_Widget extends Qwin_Widget_Abstract
      * @param array $options 配置选修
      * @return boolen
      */
-    public function valid(array $data, Qwin_Metadata_Abstract $meta, array $options = array())
+    public function valid(array $data, Qwin_Meta_Abstract $meta, array $options = array())
     {
         // 调用钩子方法
         $meta->preValidate();
@@ -136,7 +136,7 @@ class Validator_Widget extends Qwin_Widget_Abstract
 
         return $result;
         // 验证关联域
-        /*foreach ($this->getModelMetadataByType($meta, 'db') as $name => $relatedMeta) {
+        /*foreach ($this->getModelMetaByType($meta, 'db') as $name => $relatedMeta) {
             !isset($data[$name]) && $data[$name] = array();
             $result = $this->validateArray($data[$name], $relatedMeta, $relatedMeta);
             // 返回错误信息
@@ -152,7 +152,7 @@ class Validator_Widget extends Qwin_Widget_Abstract
      *
      * @param string $field 域
      * @param string $message 提示信息
-     * @return Qwin_Application_Metadata 当前对象
+     * @return Qwin_Application_Meta 当前对象
      */
     public function setInvalidMetaMessage($field, $message)
     {

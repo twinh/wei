@@ -25,12 +25,12 @@
  * @since       2010-09-16 16:15:23
  */
 
-class Com_Management_Metadata_Package extends Com_Metadata
+class Com_Management_Meta_Package extends Com_Meta
 {
     public function __construct()
     {
-        $this->setIdMetadata();
-        $this->setOperationMetadata();
+        $this->setIdMeta();
+        $this->setOperationMeta();
         $this->merge(array(
             'field' => array(
                 'package' => array(
@@ -50,7 +50,7 @@ class Com_Management_Metadata_Package extends Com_Metadata
             ),
             'model' => array(
             ),
-            'metadata' => array(
+            'meta' => array(
 
             ),
             'db' => array(

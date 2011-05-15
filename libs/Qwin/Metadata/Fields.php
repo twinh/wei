@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Metadata
+ * @subpackage  Meta
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,7 +25,7 @@
  * @since       2010-7-26 14:07:07
  */
 
-class Qwin_Metadata_Fields extends Qwin_Metadata_Common
+class Qwin_Meta_Fields extends Qwin_Meta_Common
 {
    /**
      * 查找属性的缓存数组
@@ -76,7 +76,7 @@ class Qwin_Metadata_Fields extends Qwin_Metadata_Common
      *
      * @param array $data 数据
      * @param array $option 选项
-     * @return Qwin_Metadata_Field 当前对象
+     * @return Qwin_Meta_Field 当前对象
      */
     public function merge($data, array $options = array())
     {
@@ -90,7 +90,7 @@ class Qwin_Metadata_Fields extends Qwin_Metadata_Common
      *
      * @param array $data 数据
      * @param string $name 名称
-     * @return Qwin_Metadata_Field 当前对象
+     * @return Qwin_Meta_Field 当前对象
      */
     protected function _merge($name, $data, array $options = array())
     {
@@ -165,7 +165,7 @@ class Qwin_Metadata_Fields extends Qwin_Metadata_Common
      * @param string $field 域的名称
      * @param string $attr 属性的名称
      * @param mixed $value 属性的值
-     * @return Qwin_Metadata_Field 当前对象
+     * @return Qwin_Meta_Field 当前对象
      */
     public function setAttr($field, $attr, $value)
     {
@@ -176,7 +176,7 @@ class Qwin_Metadata_Fields extends Qwin_Metadata_Common
     /**
      * 根据域中的order从小到大排序
      * 
-     * @return Qwin_Metadata_Field 当前对象
+     * @return Qwin_Meta_Field 当前对象
      * @todo 转为n维数组排序
      */
     public function order()
@@ -321,6 +321,6 @@ class Qwin_Metadata_Fields extends Qwin_Metadata_Common
                 return $this[$field]['form']['_resource'];
             }
         }
-        throw new Qwin_Metadata_Field_Exception('Undefined field "' . $field . '"');
+        throw new Qwin_Meta_Field_Exception('Undefined field "' . $field . '"');
     }
 }

@@ -45,7 +45,7 @@ class Com_Category_Widget extends Qwin_Widget_Abstract
         
         // 缓存查询数据
         if (!isset($this->_fileCache[$module])) {
-            $this->_fileCache[$module] = Com_Metadata::getQueryByModule($module)
+            $this->_fileCache[$module] = Com_Meta::getQueryByModule($module)
                 ->select(implode(',', $keys))
                 ->execute()
                 ->toArray();

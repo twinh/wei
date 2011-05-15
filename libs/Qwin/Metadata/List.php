@@ -23,7 +23,7 @@
  * @since       2011-05-07 09:00:45
  */
 
-class Qwin_Metadata_List extends Qwin_Metadata_Common
+class Qwin_Meta_List extends Qwin_Meta_Common
 {
     /**
      * 默认选项
@@ -51,7 +51,7 @@ class Qwin_Metadata_List extends Qwin_Metadata_Common
      *
      * @param array $data 数据
      * @param array $options 选项
-     * @return Qwin_Metadata_Model 当前对象
+     * @return Qwin_Meta_Model 当前对象
      */
     public function merge($data, array $options = array())
     {

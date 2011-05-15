@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Metadata
+ * @subpackage  Meta
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -27,11 +27,11 @@
  * @todo        模型,元数据可自定义,而不通过应用目录配置获得
  */
 
-class Qwin_Metadata_Model extends Qwin_Metadata_Common
+class Qwin_Meta_Model extends Qwin_Meta_Common
 {
     protected $_defaults = array(
         'alias' => null,
-        'metadata' => null,
+        'meta' => null,
         'relation' => 'hasOne',
         'local' => 'id',
         'foreign' => 'id',
@@ -47,7 +47,7 @@ class Qwin_Metadata_Model extends Qwin_Metadata_Common
      *
      * @param array $data 数据
      * @param array $options 选项
-     * @return Qwin_Metadata_Model 当前对象
+     * @return Qwin_Meta_Model 当前对象
      */
     public function merge($data, array $options = array())
     {

@@ -23,11 +23,11 @@
  * @since       2011-01-05 17:57:20
  */
 
-class Crm_Contact_Metadata extends Com_Metadata
+class Crm_Contact_Meta extends Com_Meta
 {
-    public function setMetadata()
+    public function setMeta()
     {
-        $this->setAdvancedMetadata();
+        $this->setAdvancedMeta();
         $this->merge(array(
             'field' => array(
                 'last_name' => array(
@@ -331,7 +331,7 @@ class Crm_Contact_Metadata extends Com_Metadata
 
     public function sanitiseEditCustomerId($value, $name, $data, $dataCopy)
     {
-        $data = Com_Metadata::getQueryByModule('crm/customer')
+        $data = Com_Meta::getQueryByModule('crm/customer')
             ->select('name')
             ->where('id = ?', $value)
             ->fetchOne();
@@ -342,7 +342,7 @@ class Crm_Contact_Metadata extends Com_Metadata
 
     public function sanitiseEditParentId($value, $name, $data, $dataCopy)
     {
-        $data = Com_Metadata::getQueryByModule('crm/contact')
+        $data = Com_Meta::getQueryByModule('crm/contact')
             ->select('last_name, first_name')
             ->where('id = ?', $value)
             ->fetchOne();

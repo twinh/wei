@@ -46,12 +46,12 @@ class View_Widget extends Qwin_Widget_Abstract
         // 初始配置
         $options    = array_merge($this->_options, $options);
 
-        /* @var $meta Com_Metadata */
-        $meta = null == $options['meta'] ? Com_Metadata::getByModule($options['module']) : $options['meta'];
+        /* @var $meta Com_Meta */
+        $meta = null == $options['meta'] ? Com_Meta::getByModule($options['module']) : $options['meta'];
         $primaryKey = $meta['db']['primaryKey'];
 
         // 从模型获取数据
-        $query = Com_Metadata::getQueryByModule($options['module'], array('type' => array('db', 'view')));
+        $query = Com_Meta::getQueryByModule($options['module'], array('type' => array('db', 'view')));
         $dbData = $query
             ->where($primaryKey . ' = ?', $options['id'])
             ->fetchOne();
@@ -139,8 +139,8 @@ class View_Widget extends Qwin_Widget_Abstract
 
         // 关联列表的数据配置
         //$relatedListConfig = $metaHelper->getRelatedListConfig($meta);
-        /* @var $meta Qwin_Application_Metadata */
-        $relatedListMetaList = $meta->getModelMetadataByType('relatedList');
+        /* @var $meta Qwin_Application_Meta */
+        $relatedListMetaList = $meta->getModelMetaByType('relatedList');
 
         // 构建每一个的jqgrid数据
         $jqGridList = $tabTitle = $moduleLang = array();

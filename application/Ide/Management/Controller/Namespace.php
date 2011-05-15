@@ -85,7 +85,7 @@ class Com_Management_Controller_Package extends Com_Controller
         if(empty($_POST))
         {
             // 初始化常用的变量
-            $metaHelper = Qwin::call('Qwin_Application_Metadata');
+            $metaHelper = Qwin::call('Qwin_Application_Meta');
             $meta = $this->_meta;
             $primaryKey = $meta['db']['primaryKey'];
             $primaryKeyValue = $config['data']['primaryKeyValue'];

@@ -405,7 +405,7 @@ class Doctrine_Connection_Statement implements Doctrine_Adapter_Statement_Interf
 
     /**
      * getColumnMeta
-     * Returns metadata for a column in a result set
+     * Returns meta for a column in a result set
      *
      * @param integer $column               The 0-indexed column in the result set.
      *

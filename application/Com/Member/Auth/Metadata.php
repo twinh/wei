@@ -25,10 +25,10 @@
  * @since       2010-09-13 11:20:21
  */
 
-class Com_Member_Auth_Metadata extends Com_Metadata
+class Com_Member_Auth_Meta extends Com_Meta
 {
 
-    public function setMetadata()
+    public function setMeta()
     {
         $this->merge(array(
             'fields' => array(
@@ -109,7 +109,7 @@ class Com_Member_Auth_Metadata extends Com_Metadata
     public function validatePassword($value, $name, $data)
     {
         $value = md5(trim($value));
-        $query = Com_Metadata::getQueryByModule('com/member', array(
+        $query = Com_Meta::getQueryByModule('com/member', array(
             'type' => 'db',
         ));
         $result = $query->where('username = ? AND password = ?', array($data['username'], $value))

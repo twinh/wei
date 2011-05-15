@@ -23,11 +23,11 @@
  * @since       2011-01-05 00:08:51
  */
 
-class Crm_Company_Metadata_Company extends Com_Metadata
+class Crm_Company_Meta_Company extends Com_Meta
 {
-    public function setMetadata()
+    public function setMeta()
     {
-        $this->setCommonMetadata();
+        $this->setCommonMeta();
         $this->merge(array(
             'field' => array(
                 'customer_id' => array(

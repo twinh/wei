@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Qwin
- * @subpackage  Metadata
+ * @subpackage  Meta
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -30,6 +30,6 @@
  */
 require_once 'Qwin/Exception.php';
 
-class Qwin_Application_Metadata_Exception extends Qwin_Exception
+class Qwin_Application_Meta_Exception extends Qwin_Exception
 {
 }

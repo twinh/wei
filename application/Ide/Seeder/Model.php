@@ -54,11 +54,11 @@ class Ide_Seeder_Model
 
     public function isModuleAvailable($module)
     {
-        $meta = Com_Metadata::getByModule($module, false);
+        $meta = Com_Meta::getByModule($module, false);
         if (!class_exists($meta)) {
             return false;
         }
-        $meta = Qwin_Metadata::getInstance()->get($meta);
+        $meta = Qwin_Meta::getInstance()->get($meta);
 
         // TODO $meta['page']['mode'] 设定元数据模式
         // 判断是否是使用数据库的模块

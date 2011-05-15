@@ -24,11 +24,11 @@
  * @since       2010-05-25 08:00:36
  */
 
-class Com_Member_Menu_Metadata extends Com_Metadata
+class Com_Member_Menu_Meta extends Com_Meta
 {
-    public function setMetadata()
+    public function setMeta()
     {
-        $this->setCommonMetadata();
+        $this->setCommonMeta();
         $this->merge(array(
             // 基本属性
             'field' => array(

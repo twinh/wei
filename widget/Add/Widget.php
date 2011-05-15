@@ -48,8 +48,8 @@ class Add_Widget extends Qwin_Widget_Abstract
         // 初始配置
         $options = $options + $this->_options;
 
-        /* @var $meta Com_Metadata */
-        $meta   = Com_Metadata::getByModule($options['module']);
+        /* @var $meta Com_Meta */
+        $meta   = Com_Meta::getByModule($options['module']);
         $id     = $meta['db']['primaryKey'];
 
         // 记录已经存在,加载错误视图
@@ -116,7 +116,7 @@ class Add_Widget extends Qwin_Widget_Abstract
     /**
      * 取出添加操作入库的数据
      *
-     * @param Qwin_Metadata_Abstract $meta 元数据对象
+     * @param Qwin_Meta_Abstract $meta 元数据对象
      * @param array $post 原始数据,一般为$_POST
      * @return array 数据
      */

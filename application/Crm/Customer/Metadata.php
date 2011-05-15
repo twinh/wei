@@ -23,11 +23,11 @@
  * @since       2011-01-04 22:55:48
  */
 
-class Crm_Customer_Metadata extends Com_Metadata
+class Crm_Customer_Meta extends Com_Meta
 {
-    public function setMetadata()
+    public function setMeta()
     {
-        $this->setAdvancedMetadata();
+        $this->setAdvancedMeta();
         $this->merge(array(
             'field' => array(
                 'name' => array(

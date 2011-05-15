@@ -158,14 +158,14 @@ class Com_Management_Controller_Module extends Com_Controller
             $path = $this->_path . '/' . $this->_package . '/' . $module;
             mkdir($path);
             mkdir($path . '/Controller');
-            mkdir($path . '/Metadata');
+            mkdir($path . '/Meta');
             mkdir($path . '/Model');
             mkdir($path . '/Language');
 
             // 创建默认控制器,元数据,模型,语言类
             $applicationFile = Qwin::call('Project_Helper_ApplicationFile');
             $applicationFile->createControllerFile($this->_package, $module);
-            $applicationFile->createMetadataFile($this->_package, $module);
+            $applicationFile->createMetaFile($this->_package, $module);
             $applicationFile->createModelFile($this->_package, $module);
             $applicationFile->createLanguageFile($this->_package, $module, $this->getLanguage());
 
