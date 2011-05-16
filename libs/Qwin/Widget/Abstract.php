@@ -95,7 +95,7 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
         }
     }
 
-    public function render($options)
+    public function render($options = null)
     {
         return $this;
     }
@@ -287,7 +287,8 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
     public function result($result = true, $data = array())
     {
         return array(
-            'r'
+            'result' => $result,
+            'data' => $data,
         );
     }
 }
