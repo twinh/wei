@@ -52,7 +52,6 @@ class FormAction_Widget extends Qwin_Widget_Abstract
     
     public function render($options = null)
     {
-        
         // 初始配置
         $options    = (array)$options + $this->_options;
         
@@ -92,11 +91,13 @@ class FormAction_Widget extends Qwin_Widget_Abstract
             $data = $meta->sanitise($data, $options['sanitise']);
         }
         
-        // 设置返回结果
-        $result = array(
-            'result' => true,
-            'data' => get_defined_vars(),
-        );
+        // 返回结果
+        if (!$options['display']) {
+            return array(
+                'result' => true,
+                'data' => get_defined_vars(),
+            );
+        }
 
         // 展示视图
         if ($options['display']) {
@@ -196,37 +197,6 @@ class FormAction_Widget extends Qwin_Widget_Abstract
         $group = $meta['group'];
 
         $operLinks = $widget->get('OperLinks')->render($view);
-
-        $view->assign(get_defined_vars());
-    }
-
-    /**
-     * 处理编辑操作
-     *
-     * @todo 作为新的微件
-     */
-    protected function _processEdit()
-    {
-        $view = Qwin::call('-view');
-        $view->setElement('content', '<root>com/basic/form<suffix>');
-        $view['module'] = $view['options']['module'];
-        $view['action'] = 'edit';
-
-        // 初始化变量,方便调用
-        $primaryKey = $view->primaryKey;
-
-        $meta = $view->meta;
-        $data = $view->data;
-
-        /* @var $formWidget Form_Widget */
-        $formWidget = Qwin::call('-widget')->get('Form');
-        $formOptions = array(
-            'meta'  => $meta,
-            'action' => 'edit',
-            'data'  => $view->data,
-        );
-
-        $operLinks = Qwin::call('-widget')->get('OperLinks')->render($view);
 
         $view->assign(get_defined_vars());
     }

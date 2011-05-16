@@ -27,25 +27,21 @@ return array(
     'fields' => array(
         'id' => array(
             'form' => array(
-                
-            ),
-            'sanitiser' => array(
-                
-            ),
-            'validator' => array(
-                
+                '_type' => 'hidden',
             ),
         ),
         'group_id' => array(
-            '_type' => 'select',
             'link' => true,
-            '_resourceGetter' => array(
-                array('Com_Category_Widget', 'get'),
-                array(
-                    'com/member/group',
-                    null,
-                    array('id', null, 'name'),
-                ),
+            'form' => array(
+                '_type' => 'select',
+//                '_resourceGetter' => array(
+//                    array('Com_Category_Widget', 'get'),
+//                    array(
+//                        'com/member/group',
+//                        null,
+//                        array('id', null, 'name'),
+//                    ),
+//                ),
             ),
             'sanitiser' => array(
                 array('Com_Category_Widget', 'sanitise'),
@@ -73,14 +69,10 @@ return array(
             'form' => array(
                 '_type' => 'password',
             ),
-            'attr' => array(
-                'isReadonly' => 1,
-                'isView' => 0,
-            ),
             'sanitiser' => array(
                 'db' => array(
                     'md5'
-                )
+                ),
             ),
             'validator' => array(
                 'rule' => array(
@@ -90,13 +82,9 @@ return array(
             ),
         ),
         'password2' => array(
+            'readonly' => true,
             'form' => array(
                 '_type' => 'password',
-            ),
-            'attr' => array(
-                'isReadonly' => 1,
-                'isView' => 0,
-                'isDbField' => 0,
             ),
             'validator' => array(
                 'rule' => array(
@@ -106,9 +94,6 @@ return array(
             ),
         ),
         'email' => array(
-            'attr' => array(
-                'isList' => 1,
-            ),
             'validator' => array(
                 'rule' => array(
                     'required' => true,
@@ -200,9 +185,22 @@ return array(
             ),
         ),
     ),
+    'columns' => 1,
+//    'buttons' => array(),
+//    'files' => array(),
+    'hidden' => array(
+        'id',
+    ),
     'layout' => array(
-        array('field1', 'field2'),
-        array('field3', 'field4'),
-        array('field5', 'field6'),
+        'GRP_BASIC' => array(
+            array('group_id'),
+            array('username'),
+            array('language'),
+        ),
+        'GRP_DESCRIP' => array(
+            array('mobile'),
+            array('homepage'),
+            array('address'),
+        ),
     ),
 );

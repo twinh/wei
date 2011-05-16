@@ -30,16 +30,28 @@ class Qwin_Meta_Form extends Qwin_Meta_Common
      * @var array
      */
     protected $_defaults = array(
-        'enabled' => true,
-        '_type' => 'text',
-        '_resource' => null,
-        '_value' => '',
-        'name' => null,
-//        '_resourceGetter' => null,
-//        '_resourceFormFile' => null,
-//        '_widget' => array(),
-//        'id' => null,
-//        'class' => null,
+        'form' => array(
+            '_type' => 'text',
+            '_resource' => null,
+            '_value' => '',
+            'name' => null,
+//            '_resourceGetter' => null,
+//            '_resourceFormFile' => null,
+//            '_widget' => array(),
+//            'id' => null,
+//            'class' => null,
+        ),
+//        'sanitiser' => array(
+//            
+//        ),
+//        'validator' => array(
+//            'rules' => array(
+//                
+//            ),
+//            'messages' => array(
+//                
+//            ),
+//        ),
     );
     
     /**

@@ -33,6 +33,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
 
     public function render($view)
     {
+        return null;
         $module = $view['module'];
         $action = $view['action'];
         // 模块的Url形式

@@ -128,7 +128,7 @@ class Com_ActionController extends Com_Controller
         $form = $meta->offsetLoad('edit', 'form');
         !$form && $form = $meta['form'];
         if (!$this->_request->isPost()) {
-            return Qwin::call('-widget')->get('FormAction')->render(array(
+            return Qwin::call('-widget')->get('EditFormAction')->render(array(
                 'form'      => $form,
                 'id'        => $this->_request->get('id'),
                 'asAction'  => 'edit',
