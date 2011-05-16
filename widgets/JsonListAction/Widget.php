@@ -86,6 +86,7 @@ class JsonListAction_Widget extends Qwin_Widget_Abstract
         $options['page'] = (int)$options['page'];
         $options['page'] <= 0 && $options['page'] = 1;
 
+        // TODO DbData_Widget
         // 从模型获取数据
         $query = $meta->getQuery(null, array('type' => array('db', 'view')));
         $meta

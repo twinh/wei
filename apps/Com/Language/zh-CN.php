@@ -98,8 +98,8 @@ return array(
     'FLD_SEX' => '性别',
 
     // 分组
-    'LBL_GROUP_BASIC_DATA' => '基本资料',
-    'LBL_GROUP_DESCRIPTION_DATA' => '描述资料',
+    'GRP_BASIC' => '基本资料',
+    'GRP_DESCRIP' => '描述资料',
 
     // 选项卡
     'LBL_TAB_DATA' => '资料',

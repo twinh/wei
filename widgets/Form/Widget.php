@@ -33,7 +33,7 @@ class Form_Widget extends Qwin_Widget_Abstract
      */
     protected $_defaults = array(
         'id'        => 'form-%s',
-        'meta'      => null,
+        'form'      => null,
         'action'    => 'add',
         'column'    => 2,
         'data'      => array(),
@@ -75,23 +75,46 @@ class Form_Widget extends Qwin_Widget_Abstract
     public function render($options = null)
     {
         // 合并选项
-        $options = $options + $this->_options;
-        $meta = $options['meta'];
+        $options = (array)$options + $this->_options;
+        
+        /* @var $listMeta Qwin_Meta_Form */
+        $form = $options['form'];
+        
+        // 检查表单元数据是否合法
+        if (!is_object($form) || !$form instanceof Qwin_Meta_Form) {
+            $this->e('ERR_META_ILLEGAL');
+        }
+        $meta = $form->getParent();
+        $id = $meta['db']['id'];
         $data = $options['data'];
+        
+        // 获取表格栏目的宽度百分比
+        // TODO 更好的算法
+        if (1 != $form['columns']) {
+            $percent = array();
+            $prePercent = (float)(100 / ($form['columns'] * 4));
+            for ($i = 0; $i < $form['columns'] * 2; $i++) {
+                if ($i % 2) {
+                    $percent[] = 3 * $prePercent;
+                } else {
+                    $percent[] = $prePercent;
+                }
+            }
+        } else {
+            $percent = array(13.5, 87.5);
+        }
+        
+        
         $minify = $this->_widget->get('Minify');
         $lang = Qwin::call('-lang');
         $refererPage = urlencode(Qwin::call('-request')->server('HTTP_REFERER'));
 
         $options['id'] = sprintf($options['id'], $meta->getModule()->toId());
 
-        // 表单布局
-        $form = $this->getLayout($meta, $options['action'], $meta['page']['tableLayout'], $data);
-        $group = $meta['group'];
-
         // 验证代码
         if ($options['validate']) {
             $this->loadLanguage('Validator');
-            $validateCode = $this->getValidateCode($meta, $lang);
+            $validateCode = array(); //$this->getValidateCode($meta, $lang);
         }
 
         $file = $this->_rootPath . 'view/' . $options['view'];
@@ -423,143 +446,6 @@ class Form_Widget extends Qwin_Widget_Abstract
         isset($options['color']) && $options['style'] = 'color:' . $options['color'] . ';' . $options['style'];
         isset($options['style']) && $options['style'] = ' style="' . $options['style'] . '"';
         return isset($options['style']) ? $options['style'] : null;
-    }
-    
-    /**
-     * 获取表格布局
-     *
-     * @param Qwin_Meta $meta 元数据
-     * @param string $action 小写的操作名称
-     * @param int $column 每行几栏,只能是1或2
-     */
-    public function getLayout(Qwin_Meta_Abstract $metaCopy, $action = 'add', $column = 2, array $dataCopy = array())
-    {
-        $orderedField = $this->getOrderedField($metaCopy);
-
-        $layout = array();
-
-        // 隐藏域的表单配置
-        $hidden = array();
-
-        // 布局上一个布局类型
-        $prev = array();
-
-        foreach ($orderedField as $field) {
-            // 初始化元数据,表单,数据
-            if (null == $field[1]) {
-                $meta = $metaCopy;
-                $data = $dataCopy;
-                $form = $meta['field'][$field[0]]['form'];
-            } else {
-                $meta = $meta->getModelMetaByAlias($meta, $field[1]);
-                $data = $dataCopy[$field[1]];
-                $form = $meta['field'][$field[0]]['form'];
-                $form['id'] = $field[1] . '_' . $form['name'];
-                $form['name'] = $field[1] . '[' . $form['name'] . ']';
-            }
-            //if (!isset($form['_value'])) {
-                $form['_value'] = isset($data[$form['name']]) ? $data[$form['name']] : null;
-            //}
-            
-            // 将隐藏域加入第一个布局中
-            if ('hidden' == $form['_type']) {
-                $hidden[] = $form;
-                continue;
-            }
-
-            // 通过回调方法自定义处理
-            $method = 'callback' . $action . 'Layout';
-            if(method_exists($this, $method)) {
-                $result = call_user_func_array(array($this, $method), array($meta['field'][$field[0]]));
-                if (true === $result) {
-                    $hidden[] = $form;
-                    continue;
-                }
-            }
-
-            $cell = array($meta['field'][$field[0]]['basic']['title'], $form);
-            $group = $meta['field'][$field[0]]['basic']['group'];
-            if (!isset($layout[$group])) {
-                $layout[$group] = array();
-                $prev[$group] = 2;
-            }
-
-            if (isset($meta['field'][$field[0]]['basic']['layout'])) {
-                $type = $meta['field'][$field[0]]['basic']['layout'];
-            } else {
-                $type = $column;
-            }
-
-            // 占一格,自动向左填补
-            if (1 === $type) {
-                // 上一行为2,3,4
-                if (1 != $prev[$group]) {
-                    $layout[$group][] = array(
-                        $cell,
-                    );
-                } else {
-                    if (2 === count(end($layout[$group]))) {
-                        $layout[$group][] = array(
-                            $cell,
-                        );
-                    } else {
-                        $layout[$group][key($layout[$group])][] = $cell;
-                    }
-                }
-                $prev[$group] = 1;
-                continue;
-            }
-
-            // 补齐上一行末尾
-            if (1 === $prev[$group] && 1 === count(end($layout[$group]))) {
-                $key = key($layout[$group]);
-                $layout[$group][$key][] = '';
-            }
-
-            // 根据不同类型设置布局
-            switch ($type) {
-                // 独自占满一行
-                case 2:
-                    $content = array(
-                        $cell,
-                    );
-                    break;
-
-                // 占一格,放在左边,右边为空
-                case 3:
-                    $content = array(
-                        $cell, '',
-                    );
-                    break;
-
-                // 占一格,放在右边,左边为空
-                case 4:
-                    $content = array(
-                        '', $cell,
-                    );
-                    break;
-
-                // 未知布局,直接忽略
-                default:
-                    continue;
-                    break;
-            }
-            $layout[$group][] = $content;
-            $prev[$group] = $type;
-        }
-
-        // 修复最后一行末尾
-        foreach ($layout as $group => &$row) {
-            if (1 === $prev[$group] && 1 === count(end($row))) {
-                $key = key($row);
-                $row[$key][] = '';
-            }
-        }
-
-        return array(
-            'hidden' => $hidden,
-            'element' => $layout,
-        );
     }
 
     /**
