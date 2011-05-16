@@ -136,10 +136,11 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
      *          -- rows                 记录信息
      */
     protected $_jsonOptions = array(
+        'list'          => null,
         'data'          => array(),
         'layout'        => array(),
         'primaryKey'    => array(),
-        'options'        => array(
+        'options'       => array(
             'page'          => 1,
             'total'         => 1,
             'records'       => 0,
@@ -188,10 +189,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
 
         // 设置栏目
         if (empty($options['colNames'])) {
-            !is_array($options['layout']) && $options['layout'] = explode(',', (string)$options['layout']);
-            $layout = array_intersect($list['layout'], $options['layout']);
-            empty($layout) && $layout = $list['layout'];
-            
+            $layout = $this->getLayout($list, $options['layout']);
             foreach ($layout as $field) {
                 if (isset($meta['fields'][$field])) {
                     $options['colNames'][] = $this->_lang[$meta['fields'][$field]['title']];
@@ -240,7 +238,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
 
         require $this->_rootPath . 'view/default.php';
     }
-
+    
     /**
      * 渲染Json数据
      *
@@ -250,11 +248,13 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
     {
         // 合并选项
         $options = $this->merge($this->_jsonOptions, $options);
-
+        
+        $layout = $this->getLayout($options['list'], $options['layout']);
+        
         $data = array();
         foreach ($options['data'] as $row) {
             $cell = array();
-            foreach ($options['layout'] as $field) {
+            foreach ($layout as $field) {
                 $cell[] = $row[$field];
             }
             $data[] = array(
@@ -267,39 +267,26 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
 
         return json_encode($options['options']);
     }
-
-    public function getLayout(Qwin_Meta_Abstract $meta, array $layout = array(), $relatedName = false)
+    
+    public function getLayout(Qwin_Meta_List $list, $layout)
     {
-        foreach ($meta->offsetLoadAsArray('list') as $name => $field) {
-            if (true != $field['enabled']) {
-                continue;
-            }
-            $layout[] = $name;
-
-            // 使用order作为键名
-//            $order = $field['order'];
-//            while (isset($layout[$order])) {
-//                $order++;
-//            }
-//
-//            if (!$relatedName) {
-//                $layout[$order] = $field['form']['name'];
-//            } else {
-//                $layout[$order] = array(
-//                     $relatedName, $field['form']['name'],
-//                );
-//            }
+        if (empty($layout)) {
+            return $list['layout'];
         }
-
-//        foreach ($meta->getModelMetaByType('db') as $name => $relatedMeta) {
-//            $layout += $this->getLayout($relatedMeta, $layout, $name);
-//        }
-//
-//        // 根据键名排序
-//        if (!$relatedName) {
-//            ksort($layout);
-//        }
-
+        
+        if (!is_array($layout)) {
+            $layout = Qwin_Util_String::split2d($layout);
+        }
+        
+        $layout = array_intersect($list['layout'], $layout);
+        
+        // 如果布局中不包含主键,把主键加入布局中
+        $meta = $list->getParent();
+        $id = $meta['db']['id'];
+        if (!in_array($id, $layout)) {
+            array_unshift($layout, $id);
+        }
+        
         return $layout;
     }
 

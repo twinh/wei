@@ -31,9 +31,9 @@ class JsonList_Widget extends Qwin_Widget_Abstract
      * 默认选项
      * @var array
      *
-     *      -- module       模块标识
+     *      -- list         列表元数据
      *
-     *      -- list         显示的域，可以是数组，或者用“,”分开
+     *      -- layout       显示的域，可以是数组，或者用“,”分开
      *
      *      -- order        排列顺序, 0键为键名，1键为排序类型（DESC，ASC）
      *
@@ -43,7 +43,7 @@ class JsonList_Widget extends Qwin_Widget_Abstract
      *
      *      -- row          每页显示数目
      *
-     *      -- sanitise     是否转换数据
+     *      -- sanitise     转换选项,false表示不转换
      *
      *      -- display      是否显示数据
      */
@@ -54,7 +54,12 @@ class JsonList_Widget extends Qwin_Widget_Abstract
         'search'    => null,
         'page'      => null,
         'row'       => null,
-        'sanitise'  => true,
+        'sanitise'  => array(
+            'view'      => true,
+            'link'      => true,
+            'sanitise'  => 'list',
+            'notFilled' => true,
+        ),
         'display'   => true,
     );
 
@@ -73,7 +78,7 @@ class JsonList_Widget extends Qwin_Widget_Abstract
         }
         $meta = $list->getParent();
         
-        // 处理每页显示数目‘
+        // 处理每页显示数目
         $options['row'] = (int)$options['row'];
         $options['row'] <= 0 && $options['row'] = $list['db']['limit'];
         
@@ -99,12 +104,7 @@ class JsonList_Widget extends Qwin_Widget_Abstract
             $rowLayout = array_combine(array_values($list['layout']), array_pad(array(), count($list['layout']), null));
             foreach ($data as &$row) {
                 $rowTemp = array_intersect_key($row, $rowLayout) + $rowLayout;
-                $row = $list->sanitise($rowTemp, array(
-                    'view' => true,
-                    'link' => true,
-                    'sanitise' => 'list',
-                    'notFilled' => true,
-                ), $row);
+                $row = $list->sanitise($rowTemp, $options['sanitise'], $row);
             }
             unset($row, $rowTemp);
         }
@@ -117,22 +117,11 @@ class JsonList_Widget extends Qwin_Widget_Abstract
             );
         }
 
-        // 输出jqGrid Json视图
-        $jqGrid = $this->_JqGrid;
-
-        // 获取并合并布局
-        $layout = $list['layout'];
-        if (!empty($options['layout'])) {
-            if (!is_array($options['layout'])) {
-                $options['layout'] = Qwin_Util_String::split2d($options['layout']);
-            }
-            $layout = array_intersect($layout, $options['layout']);
-        }
-
         // 通过jqGrid微件获取数据
-        $json = $jqGrid->renderJson(array(
+        $json = $this->_JqGrid->renderJson(array(
+            'list'          => $list,
             'data'          => $data,
-            'layout'        => $layout,
+            'layout'        => $options['layout'],
             'id'            => $meta['db']['id'],
             'options'       => array(
                 'page'      => $options['page'],
