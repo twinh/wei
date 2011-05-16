@@ -61,6 +61,12 @@ class Com_Meta extends Qwin_Meta_Abstract
         'alias'         => array(),
         //'exceptAlias'   => array(),
     );
+    
+    /**
+     * 数据排序类型
+     * @var array
+     */
+    protected static $_orderTypes = array('DESC', 'ASC');
 
     /**
      * 初始化常用变量
@@ -347,7 +353,7 @@ class Com_Meta extends Qwin_Meta_Abstract
             $order = array($order);
         }
 
-        // 没有排序,使用默认排序
+        // 没有自定义排序,使用默认排序
         if (empty($order)) {
             $order = $this['db']['order'];
         }
@@ -359,7 +365,7 @@ class Com_Meta extends Qwin_Meta_Abstract
         $orderType = array('DESC', 'ASC');
 
         foreach ($order as $field) {
-            if (!isset($field[0]) || !isset($this['fields'][$field[0]]) || $this['fields'][$field[0]]['dbField']) {
+            if (!isset($field[0]) || !isset($this['fields'][$field[0]]) || !$this['fields'][$field[0]]['dbField']) {
                 continue;
             }
             $field[1] = strtoupper($field[1]);
