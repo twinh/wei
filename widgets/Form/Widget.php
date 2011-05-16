@@ -72,7 +72,7 @@ class Form_Widget extends Qwin_Widget_Abstract
      * @return Form_Widget 当前对象
      * @todo 表单地址,验证可选等
      */
-    public function render($options)
+    public function render($options = null)
     {
         // 合并选项
         $options = $options + $this->_options;

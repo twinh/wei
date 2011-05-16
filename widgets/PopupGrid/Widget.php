@@ -29,7 +29,7 @@ class PopupGrid_Widget extends Qwin_Widget_Abstract
      * 
      * @param array $options 选项
      */
-    public function render($options)
+    public function render($options = null)
     {
         $jQuery = $this->_widget->get('JQuery');
         $minify = $this->_widget->get('Minify');

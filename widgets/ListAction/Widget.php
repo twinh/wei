@@ -16,8 +16,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Com
- * @subpackage  Service
+ * @package     Widget
+ * @subpackage  ListAction
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,7 +25,7 @@
  * @since       2010-10-10 14:16:45
  */
 
-class List_Widget extends Qwin_Widget_Abstract
+class ListAction_Widget extends Qwin_Widget_Abstract
 {
     /**
      * @var array           默认选项

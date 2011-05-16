@@ -23,12 +23,12 @@
  * @since       2011-05-11 01:09:44
  */
 
-class Form2_Widget extends Qwin_Widget_Abstract
+class FormAction_Widget extends Qwin_Widget_Abstract
 {
     /**
      * @var array           默认选项
      * 
-     *      -- meta         元数据对象
+     *      -- form         表单元数据对象
      * 
      *      -- id           主键的值
      * 
@@ -39,8 +39,7 @@ class Form2_Widget extends Qwin_Widget_Abstract
      *      -- display      是否显示视图
      */
     protected $_defaults = array(
-        'meta'      => null,
-        'name'      => 'form',
+        'form'      => null,
         'id'        => null,
         'data'      => array(),
         'asAction'  => 'view',
@@ -51,22 +50,184 @@ class Form2_Widget extends Qwin_Widget_Abstract
         'display'   => true,
     );
     
-    public function render($options)
+    public function render($options = null)
     {
+        
         // 初始配置
-        $options    = $options + $this->_options;
+        $options    = (array)$options + $this->_options;
         
-        // 检查元数据是否合法
-        $meta = $options['meta'];
-        if (false === Qwin_Meta::isValid($meta)) {
-            $this->e('ERR_META_NOT_DEFINED');
+        /* @var $listMeta Qwin_Meta_Form */
+        $form = $options['form'];
+        
+        // 检查表单元数据是否合法
+        if (!is_object($form) || !$form instanceof Qwin_Meta_Form) {
+            $this->e('ERR_META_ILLEGAL');
+        }
+        $meta = $form->getParent();
+        $id = $meta['db']['id'];
+        
+        // 从模型获取数据
+        $query = $meta->getQuery(null, array('type' => array('db', 'view')));
+        $dbData = $query
+            ->where($id . ' = ?', $options['id'])
+            ->fetchOne();
+        
+        // 记录不存在,加载错误视图
+        if (false == $dbData) {
+            $lang = Qwin::call('-lang');
+            $result = array(
+                'result' => false,
+                'message' => $lang['MSG_NO_RECORD'],
+            );
+            if ($options['display']) {
+                return Qwin::call('-view')->alert($result['message']);
+            } else {
+                return $result;
+            }
+        }
+        $data = $dbData->toArray();
+        
+        // 转换数据
+        if ($options['sanitise']) {
+            $data = $meta->sanitise($data, $options['sanitise']);
         }
         
-        // 检查元数据中是否包含表单定义
-        if (!$meta->offsetLoad($options['name'], 'form')) {
-            return $this->e('ERR_META_OFFSET_NOT_FOUND', $options['name']);
+        // 设置返回结果
+        $result = array(
+            'result' => true,
+            'data' => get_defined_vars(),
+        );
+
+        // 展示视图
+        if ($options['display']) {
+            $view = Qwin::call('-view')->assign(get_defined_vars());
+            if ('view' == $options['asAction']) {
+                $this->_processView();
+            } elseif ('edit' == $options['asAction']) {
+                $this->_processEdit();
+            } else {
+                // todo error or other
+            }
         }
-        
-        qw_p($meta['form']);
+
+        return $result;
+    }
+    
+    /**
+     * 处理视图
+     * @todo 作为新的微件
+     */
+    protected function _processView()
+    {
+        $view = Qwin::call('-view');
+        $view->setElement('content', '<root>com/basic/view<suffix>');
+        $view['module'] = $view['options']['module'];
+        $view['action'] = 'view';
+
+        // 初始化变量,方便调用
+        $primaryKey     = $view->primaryKey;
+        $meta           = $view->meta;
+        $data           = $view->data;
+        $request        = Qwin::call('-request');
+        $config         = Qwin::config();
+        $url            = Qwin::call('-url');
+        $lang           = Qwin::call('-lang');
+        $widget         = Qwin::call('-widget');
+
+        /* @var $formWidget Form_Widget */
+        $formWidget = $widget->get('Form');
+        $formOptions = array(
+            'meta'      => $meta,
+            'action'    => 'view',
+            'data'      => $view->data,
+            'view'      => 'view.php',
+        );
+
+        /* @var $jqGridWidget JqGrid_Widget */
+        $jqGridWidget   = $widget->get('JqGrid');
+        $jqGridOptions  = array();
+
+        // 关联列表的数据配置
+        //$relatedListConfig = $metaHelper->getRelatedListConfig($meta);
+        /* @var $meta Qwin_Application_Meta */
+        $relatedListMetaList = $meta->getModelMetaByType('relatedList');
+
+        // 构建每一个的jqgrid数据
+        $jqGridList = $tabTitle = $moduleLang = array();
+        foreach ($relatedListMetaList as $alias => $relatedMeta) {
+            $jqGrid = array();
+            $model = $meta['model'][$alias];
+
+            $lang->appendByModule($model['module']);
+
+            $tabTitle[$alias] = $lang[$relatedMeta['page']['title']];
+
+
+            // 获取并合并布局
+            $listLayout = $jqGridWidget->getLayout($relatedMeta);
+            if (null != $model['list']) {
+                $listLayout = array_intersect($listLayout, (array)$model['list']);
+            }
+            // 删除外键域,外键域显示的内容即为当前视图的内容
+            $key = array_search($model['foreign'], $listLayout);
+            if (false !== $key) {
+                unset($listLayout[$key]);
+            }
+            $col = $jqGridWidget->getColByListLayout($listLayout, $relatedMeta, $lang);
+            $options['colNames'] = $col['colNames'];
+            $options['colModel'] = $col['colModel'];
+
+            // 获取json数据的地址
+            $options['url'] = $url->url($model['module'], 'index', array(
+                'json'      => '1',
+                'search'    => $model['foreign'] . ':' . $data[$model['local']],
+                'list'      => implode(',', $listLayout),
+            ));
+
+            $jqGrid = array(
+                'module'    => new Qwin_Module($model['module']),
+                'meta'      => $relatedMeta,
+                'layout'    => (array)$model['list'],
+                'options'    => $options,
+            );
+
+            $jqGridList[$alias] = $jqGrid;
+        }
+        $group = $meta['group'];
+
+        $operLinks = $widget->get('OperLinks')->render($view);
+
+        $view->assign(get_defined_vars());
+    }
+
+    /**
+     * 处理编辑操作
+     *
+     * @todo 作为新的微件
+     */
+    protected function _processEdit()
+    {
+        $view = Qwin::call('-view');
+        $view->setElement('content', '<root>com/basic/form<suffix>');
+        $view['module'] = $view['options']['module'];
+        $view['action'] = 'edit';
+
+        // 初始化变量,方便调用
+        $primaryKey = $view->primaryKey;
+
+        $meta = $view->meta;
+        $data = $view->data;
+
+        /* @var $formWidget Form_Widget */
+        $formWidget = Qwin::call('-widget')->get('Form');
+        $formOptions = array(
+            'meta'  => $meta,
+            'action' => 'edit',
+            'data'  => $view->data,
+        );
+
+        $operLinks = Qwin::call('-widget')->get('OperLinks')->render($view);
+
+        $view->assign(get_defined_vars());
     }
 }

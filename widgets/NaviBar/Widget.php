@@ -35,7 +35,7 @@ class NaviBar_Widget extends Qwin_Widget_Abstract
         ),
     );
 
-    public function render($options)
+    public function render($options = null)
     {
         // 加载页眉导航的缓存
         $menus = require Qwin::config('root') . 'cache/menu.php';
