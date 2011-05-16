@@ -29,14 +29,13 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
         'max' => 4,
     );
 
-    public function getTabs($module, $getUrl)
+    public function getTabs($module, $get)
     {
         $url = Qwin::call('-url');
         $lang = $this->_lang;
         $tabs = array();
 
         $moduleId = $module->toId();
-        parse_str(ltrim($getUrl, '?'), $get);
         if (isset($get['json'])) {
             unset($get['json']);
         }
@@ -126,8 +125,7 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
      */
     public function render($view)
     {
-        // TODO
-        $tabs = $this->getTabs($view['module'], $view['jqGrid']['options']['url']);
+        $tabs = $this->getTabs($view['module'], $view['get']);
         return $this->renderTabs($tabs);
     }
 

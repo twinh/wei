@@ -202,4 +202,155 @@ abstract class Qwin_Meta_Abstract extends ArrayObject
         $this->_id = (string)$id;
         return $this;
     }
+    
+        /**
+     * 魔术方法,允许通过getXXX取值和setXXX设置值
+     * 建议直接使用$this[$name],甚至是$this->offsetGet($name)和
+     * $this->offsetSet($name)获得更好的效率
+     * 
+     * @param type $name
+     * @param type $arguments
+     * @return type 
+     */
+    public function __call($name, $arguments)
+    {
+        $lname = strtolower($name);
+        $action = substr($lname, 0, 3);
+        $element = substr($lname, 3);
+        
+        if ('get' == $action) {
+            return $this->offsetGet($element);
+        } elseif ('set' == $action) {
+            if (1 === count($arguments)) {
+                throw new Qwin_Meta_Common_Exception('You must specify the value to ' . $name);
+            }
+            return $this->offsetSet($element, $arguments[0]);
+        }
+        //throw new ...
+    }
+
+    /**
+     *
+     * @var array $_queryOptions 查询对象的选项
+     *
+     *      -- model                 模型的别名组成的数组
+     *
+     *      -- type                  模型的类型组成的数组
+     *
+     */
+    /*protected $_queryOptions = array(
+        'model'         => array(),
+        'type'          => array(),
+    );*/
+
+    /**
+     * 根据模块获取元数据对象
+     *
+     * @param string $module 模块标识
+     * @return Qwin_Meta_Abstarct 元数据对象
+     */
+    public static function getByModule($module, $instanced = true)
+    {
+        if ($module instanceof Qwin_Module) {
+            $class = $module->toClass();
+        } else {
+            $class = Qwin_Module::instance($module)->toClass();
+        }
+        $class .= '_Meta';
+        return $instanced ? Qwin_Meta::getInstance()->get($class, $module) : $class;
+    }
+
+    /**
+     * 根据类型获取模型的元数据
+     *
+     * @param string $type 类型
+     * @return array 由元数据组成的数组
+     */
+    public function getModelMetaByType($type = 'db')
+    {
+        if (empty($this['model'])) {
+            return array();
+        }
+        $result = array();
+        foreach ($this['model'] as $name => $model) {
+            if ($model['enabled'] && $type == $model['type']) {
+                if (!isset($model['meta'])) {
+                    $model['meta'] = self::getByModule($model['module']);
+                }
+                $result[$name] = $model['meta'];
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * 根据别名获取模型的元数据
+     *
+     * @param string $name 别名
+     * @return Qwin_Meta_Abstract $meta 元数据
+     */
+    public function getModelMetaByAlias($name)
+    {
+        if (isset($this['model'][$name]['meta'])) {
+            return $this['model'][$name]['meta'];
+        }
+        return $meta['model'][$name]['meta'] = self::getByAsc($meta['model'][$name]['asc']);
+    }
+
+    /**
+     * 设置外键的值,保证数据之间能正确关联
+     *
+     * @param Qwin_Meta_Element_Model $modelList 模型配置元数据
+     * @param array $data 经过转换的用户提交的数据
+     * @return array 设置的后的值
+     */
+    public function setForeignKeyData($modelList, $data)
+    {
+        foreach ($modelList as $model) {
+            if ('db' == $model['type']) {
+                $data[$model['alias']][$model['foreign']] = $data[$model['local']];
+            }
+        }
+        return $data;
+    }
+
+    /**
+     * 删除主键的的值
+     *
+     * @param array $data
+     * @param Qwin_Meta_Abstract $meta 元数据对象
+     * @return array
+     */
+    public function unsetPrimaryKeyValue($data, Qwin_Meta_Abstract $meta)
+    {
+        $primaryKey = $meta['db']['primaryKey'];
+        // 允许自定义主键的值
+        /*if(isset($data[$primaryKey]))
+        {
+            $data[$primaryKey] = null;
+            //unset($data[$primaryKey]);
+        }*/
+        foreach ($this->getModelMetaByType($meta, 'db') as $name => $relatedMeta) {
+            $primaryKey = $relatedMeta['db']['primaryKey'];
+            if (isset($data[$name][$primaryKey])) {
+                $data[$name][$primaryKey] = null;
+                //unset($data[$name][$primaryKey]);
+            }
+        }
+        return $data;
+    }
+
+    /**
+     * 提供一个钩子方法,当验证开始时,调用此方法
+     */
+    public function preValidate()
+    {
+    }
+
+    /**
+     * 提供一个钩子方法,当验证完毕时,调用此方法
+     */
+    public function postValidate()
+    {
+    }
 }

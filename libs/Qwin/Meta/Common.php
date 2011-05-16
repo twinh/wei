@@ -45,6 +45,34 @@ class Qwin_Meta_Common extends ArrayObject implements Qwin_Meta_Interface
      * @var Qwin_Meta_Abstract
      */
     protected $_parent;
+    
+    /**
+     * @var array $_sanitiseOptions  数据处理的选项
+     *
+     *      -- view                 是否根据视图类关联模型的配置进行转换
+     *                              提示,如果转换的数据作为表单的值显示,应该禁止改选项
+     *
+     *      -- null                 是否将NULL字符串转换为null类型
+     *
+     *      -- type                 是否进行强类型的转换,类型定义在['fieldName]['db']['type']
+     *
+     *      -- meta                 是否使用元数据的sanitise配置进行转换
+     *
+     *      -- sanitise             是否使用转换器进行转换
+     *
+     *      -- relatedMeta          是否转换关联的元数据
+     */
+    protected $_sanitiseOptions = array(
+        'action'        => null,
+        'view'          => true,
+        'null'          => true,
+        'type'          => true,
+        'meta'          => true,
+        'sanitise'      => false,
+        'link'          => false,
+        'notFilled'     => false,
+        'relatedMeta'   => true,
+    );
 
     /**
      * 初始化类
@@ -100,7 +128,7 @@ class Qwin_Meta_Common extends ArrayObject implements Qwin_Meta_Interface
      * @param string $name 配置名称
      * @return mixed
      */
-    public function getoption($name = null)
+    public function getOption($name = null)
     {
         if (null == $name) {
             return $this->_options;
@@ -129,10 +157,43 @@ class Qwin_Meta_Common extends ArrayObject implements Qwin_Meta_Interface
         return $array1;
     }
     
+    /**
+     * 获取元数据数组中,键名为$key,值为$value的数据内容
+     * 
+     * @param string $key 键名
+     * @param mixed $value 值
+     * @return array 数组
+     * @todo 缓存
+     */
     public function getBy($key, $value)
     {
+        $result = array();
         foreach ($this as $name => $field) {
-            if ($field[$key] === $value) {
+            if (isset($field[$key]) && $field[$key] === $value) {
+                $result[$name] = true;
+            }
+        }
+        return $result;
+    }
+    
+    /**
+     * 获取元数据$name键名中,键名为$key,值为$value的数据内容
+     * 
+     * @param string $key 键名
+     * @param mixed $value 值
+     * @param string $name 元数据键名
+     * @return array 数组
+     * @todo 缓存
+     * @todo 高级筛选
+     */
+    public function getByField($key, $value, $name = 'fields')
+    {
+        if (!isset($this[$name])) {
+            throw new Qwin_Meta_Common_Exception('Undefiend index "' . $name . '" in metadata ' . get_class($this));
+        }
+        $result = array();
+        foreach ($this[$name] as $name => $field) {
+            if (isset($field[$key]) && $field[$key] === $value) {
                 $result[$name] = true;
             }
         }
@@ -195,5 +256,152 @@ class Qwin_Meta_Common extends ArrayObject implements Qwin_Meta_Interface
             }
             return $this->offsetSet($element, $arguments[0]);
         }
+        throw new Qwin_Meta_Common_Exception('Call to undefined method "' . get_class($this) .  '::' . $name . '()".');
     }
+
+    /**
+     * 处理数据
+     * 
+     * @param type $data 处理的数据
+     * @param type $action 处理的行为,如db,list,view
+     * @param array $options 选项
+     * @param array $dataCopy 完整数据备份
+     * @return array 处理过的数据
+     */
+    public function sanitise(array $data, array $options = array(), array $dataCopy = array())
+    {
+        $options = $options + $this->_sanitiseOptions;
+        empty($dataCopy) && $dataCopy = $data;
+        
+        // TODO 其他结构的转换
+        if (!isset($this['fields'])) {
+            throw new Qwin_Meta_Common('Metadata "' . get_class($this) . '" unsupport sanitisation.');
+        }
+        
+        $meta = $this->getParent();
+
+        // 加载流程处理对象
+        if ($options['meta']) {
+            $flow = Qwin::call('-flow');
+        }
+        if ($options['notFilled']) {
+            $lang = Qwin::call('-lang');
+        }
+
+        // 转换关联模块的显示域
+        if ($options['view']) {
+            foreach ($meta->offsetLoadAsArray('meta') as $relatedMeta) {
+                if ('view' != $relatedMeta['type']) {
+                    continue;
+                }
+                foreach ($relatedMeta['fieldMap'] as $localField => $foreignField) {
+                    if (isset($dataCopy[$relatedMeta['alias']][$foreignField])) {
+                        $data[$localField] = $dataCopy[$relatedMeta['alias']][$foreignField];
+                    }
+                    // else throw exception ?
+                    //!isset($data[$model['alias']][$foreignField]) && $data[$model['alias']][$foreignField] = '';
+                }
+            }
+        }
+
+        foreach ($data as $name => $value) {
+//            if (!isset($this['fields'][$name])) {
+//                continue;
+//            }
+
+//            if ('db' == $action) {
+                // 空转换 如果不存在,则设为空
+                if ('NULL' === $data[$name] || '' === $data[$name]) {
+                    $data[$name] = null;
+                }
+//            } else {
+//                if (null === $data[$name]) {
+//                    $data[$name] = 'NULL';
+//                }
+//            }
+            
+            // 类型转换
+            /*if ($options['type'] && $field['db']['type']) {
+                if (null != $newData[$name]) {
+                    if ('string' == $field['db']['type']) {
+                        $newData[$name] = (string)$newData[$name];
+                    } elseif ('integer' == $field['db']['type']) {
+                        $newData[$name] = (int)$newData[$name];
+                    } elseif ('float' == $field['db']['type']) {
+                        $newData[$name] = (float)$newData[$name];
+                    } elseif ('array' == $field['db']['type']) {
+                        $newData[$name] = (array)$newData[$name];
+                    }
+                }
+            }*/
+
+            // 根据元数据中转换器的配置进行转换
+            if ($options['meta']) {
+                if (!isset($options['action'])) {
+                    if (isset($this['fields'][$name]['sanitiser'])) {
+                        $data[$name] = $flow->call(array($this['fields'][$name]['sanitiser']), Qwin_Flow::PARAM, $value);
+                    }
+                } else {
+                    if (isset($this['fields'][$name]['sanitiser'][$action])) {
+                        $data[$name] = $flow->call(array($this['fields'][$name]['sanitiser'][$action]), Qwin_Flow::PARAM, $value);
+                    }
+                }
+            }
+
+            // 使用转换器中的方法进行转换
+            if ($options['sanitise']) {
+                $method = str_replace(array('_', '-'), '', 'sanitise' . $options['sanitise'] . $name);
+                if (method_exists($meta, $method)) {
+                    $data[$name] = call_user_func_array(
+                        array($meta, $method),
+                        // $value or $data[$name] ?
+                        array($value, $name, $data, $dataCopy)
+                    );
+                }
+            }
+
+            // 转换null值为未填写
+            if ($options['notFilled'] && null === $data[$name]) {
+                $data[$name] = $lang['LBL_NOT_FILLED'];
+            }
+
+            // 转换链接
+            if ($options['link'] && isset($this['fields'][$name]['link']) && true == $this['fields'][$name]['link'] && method_exists($meta, 'setIsLink')) {
+                $data[$name] = call_user_func_array(
+                    array($meta, 'setIsLink'),
+                    // $value or $data[$name] ?
+                    array($value, $name, $data, $dataCopy, $options['action'])
+                );
+            }
+        }
+
+        // 对db类型的关联元数据进行转换
+        if ($options['relatedMeta']) {
+//            foreach ($meta->getModelMetaByType('db') as $name => $relatedMeta) {
+//                !isset($data[$name]) && $data[$name] = array();
+//                // 不继续转换关联元数据
+//                $options['relatedMeta'] = false;
+//                $data[$name] = $relatedMeta->sanitise($data[$name], $action, $options);
+//            }
+        }
+
+        // 调用钩子方法
+        //$this->postSanitise();
+
+        return $data;
+    }
+    
+//    /**
+//     * 提供一个钩子方法,当数据处理开始时,调用此方法
+//     */
+//    public function preSanitise()
+//    {
+//    }
+//
+//    /**
+//     * 提供一个钩子方法,当数据处理结束时,调用此方法
+//     */
+//    public function postSanitise()
+//    {
+//    }
 }

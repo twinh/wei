@@ -27,7 +27,7 @@
     <?php Qwin::hook('ViewListTop', $this) ?>
 </div>
 <div class="qw-c"></div>
-<?php $jqGridWidget->render($jqGrid) ?>
+<?php $jqGridWidget->render($jqGridOptions) ?>
 <script type="text/javascript">
 jQuery(function($){
     var primaryKey = '<?php echo $id?>';

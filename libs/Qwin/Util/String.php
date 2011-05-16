@@ -268,9 +268,9 @@ class Qwin_Util_String
     /**
      * 分割字符串为数字形式
      *
-     * @param <type> $data
-     * @param <type> $separator 分割符1
-     * @param <type> $separator2 分隔符2
+     * @param string $data 数据
+     * @param string $separator 分割符1
+     * @param string $separator2 分隔符2
      * @return array
      * @todo example
      */

@@ -35,6 +35,8 @@ class Qwin_Meta_Fields extends Qwin_Meta_Common
 
     /**
      * @var array $_defaults        默认选项
+     * 
+     *      -- name                 名称
      *
      *      -- title                标题标识, 默认为 FLD_$fieldUppeName
      * 
@@ -44,17 +46,11 @@ class Qwin_Meta_Fields extends Qwin_Meta_Common
      * 
      *      -- dbField              是否为数据库字段
      * 
+     *      -- dbQuery              是否允许数据库查询
      * 
-     *
-     *      -- null                 是否将NULL字符串转换为null类型
-     *
-     *      -- type                 是否进行强类型的转换,类型定义在['fieldName]['db']['type']
-     *
-     *      -- meta                 是否使用元数据的sanitise配置进行转换
-     *
-     *      -- sanitise             是否使用转换器进行转换
-     *
-     *      -- relatedMeta          是否转换关联的元数据
+     *      -- urlQuery             是否允许Url查询
+     * 
+     *      -- readonly             是否只读
      */
     protected $_defaults = array(
         'name' => null,
@@ -115,42 +111,6 @@ class Qwin_Meta_Fields extends Qwin_Meta_Common
 //        }
         
         return $data;
-    }
-
-    /**
-     * 筛选符合属性的域
-     *
-     * @param 合法的属性组成的数组
-     * @param 非法的属性组成的数组
-     * @return array 符合要求的的域组成的数组
-     */
-    public function getAttrList($allowAttr, $banAttr = null)
-    {
-        $allowAttr = (array)$allowAttr;
-        $banAttr = (array)$banAttr;
-
-        // 查找是否已有该属性的缓存数据
-        $cacheName = implode('|', $allowAttr) . '-' . implode('', $banAttr);
-        if (isset($this->_attrCache[$cacheName])) {
-            return $this->_attrCache[$cacheName];
-        }
-
-        $tmpArr = array();
-        $result = array();
-        foreach ($allowAttr as $attr) {
-            $tmpArr[$attr] = 1;
-        }
-        foreach ($banAttr as $attr) {
-            $tmpArr[$attr] = 0;
-        }
-        foreach ($this as $field) {
-            if ($tmpArr == array_intersect_assoc($tmpArr, $field['attr'])) {
-                $result[$field['form']['name']] = $field['form']['name'];
-            }
-        }
-        // 加入缓存中
-        $this->_attrCache[$cacheName] = $result;
-        return $result;
     }
 
     public function setField($name, $data)

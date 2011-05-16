@@ -30,20 +30,23 @@ class List_Widget extends Qwin_Widget_Abstract
     /**
      * @var array           默认选项
      * 
-     *      -- meta         元数据对象
+     *      -- list         列表元数据
      * 
-     *      -- id           主键的值
+     *      -- get          用户请求的参数,默认为$_GET数组
      * 
-     *      -- data         初始值
+     *      -- layout       布局
      * 
-     *      -- sanitise     转换配置
+     *      -- row          每页显示数目
+     * 
+     *      -- popup        是否是弹出框
      * 
      *      -- display      是否显示视图
      */
     protected $_defaults = array(
-        'meta'      => null,
-        'name'      => 'list',
-        'list'      => array(),
+        'list'      => null,
+        'get'       => null,
+        'layout'    => array(),
+        'row'       => 10,
         'popup'     => false,
         'display'   => true,
     );
@@ -54,25 +57,29 @@ class List_Widget extends Qwin_Widget_Abstract
      * @param array $options 选项
      * @return array 处理结果
      */
-    public function render($options)
+    public function render($options = null)
     {
         // 初始配置
         $options    = (array)$options + $this->_options;
         
-        // 检查元数据是否合法
-        $meta = $options['meta'];
-        if (false === Qwin_Meta::isValid($meta)) {
-            $this->e('ERR_META_NOT_DEFINED');
-        }
-        
-        // 检查元数据中是否包含表单定义
-        if (!$meta->offsetLoad($options['name'], 'list')) {
-            return $this->e('ERR_META_OFFSET_NOT_FOUND', $options['name']);
-        }
-         
-        // 显示哪些域
+        /* @var $listMeta Qwin_Meta_List */
         $list = $options['list'];
 
+        // 检查列表元数据是否合法
+        if (!is_object($list) || !$list instanceof Qwin_Meta_List) {
+            $this->e('ERR_META_ILLEGAL');
+        }
+        $meta = $list->getParent();
+ 
+        // 显示哪些域
+        $layout = $options['layout'];
+        
+        // 用户请求参数
+        $get = $options['get'] ? $options['get'] : $_GET;
+        
+        // 主键名称
+        $id = $meta['db']['id'];
+        
         // 是否以弹出框形式显示
         $popup = $options['popup'];
 
@@ -83,24 +90,23 @@ class List_Widget extends Qwin_Widget_Abstract
                 'data' => get_defined_vars(),
             );
         }
-
+        
         /* @var $jqGridWidget JqGrid_Widget */
-        $jqGridWidget   = $this->_widget->get('JqGrid');
-        $url            = Qwin::call('-url');
-        $request        = Qwin::call('-request');
-
-        $jqGridOptions  = array();
-
-        // 获取json数据的地址
-        $jqGridOptions['url'] = $url->build(array('json' => true) + $_GET);
-
-        // 设置Url参数的名称
-        $row = intval($request->get('row'));
-        $row <= 0 && $row = $meta['db']['limit'];
-        $jqGridOptions['rowNum'] = $row;
+        $jqGridWidget = $this->_widget->get('JqGrid');
+        $url = Qwin::call('-url');
+        
+        // jqGrid选项
+        $options['row'] = intval($options['row']);
+        $jqGridOptions = array(
+            'list' => $list,
+            'url' => $url->build(array('json' => true) + $get),
+            'rowNum' => $options['row'] > 0 ? $options['row'] : $list['db']['limit'],
+            'layout' => $layout,
+        );
 
         // 设置弹出窗口属性
         if ($options['popup']) {
+            $request        = Qwin::call('-request');
             $popup = array(
                 'valueInput'    => $request['popup-value-input'],
                 'viewInput'     => $request['popup-view-input'],
@@ -111,14 +117,7 @@ class List_Widget extends Qwin_Widget_Abstract
             $jqGridOptions['autowidth']    = false;
             $jqGridOptions['width']        = 800;
         }
-
-        $jqGrid = array(
-            'meta'      => $meta,
-            'list'      => $meta[$options['name']],
-            'layout'    => $list,
-            'options'    => $jqGridOptions,
-        );
-        qw_p($jqGrid);
+        
         Qwin::call('-view')->assign(get_defined_vars());
     }
 }
