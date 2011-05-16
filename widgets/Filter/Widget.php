@@ -38,7 +38,7 @@ class Filter_Widget extends Qwin_Widget_Abstract
         'select', 'radio', 'checkbox'
     );
 
-    public function render($options)
+    public function render($options = null)
     {
         if ('index' != $options['action']) {
             return false;

@@ -26,7 +26,7 @@
 
 class Datepicker_Widget extends Qwin_Widget_Abstract
 {
-    public function render($options)
+    public function render($options = null)
     {
         $jQuery = $this->_widget->get('JQuery');
         $minify = $this->_widget->get('Minify');

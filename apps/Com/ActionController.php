@@ -36,7 +36,7 @@ class Com_ActionController extends Com_Controller
     {
         $request = $this->getRequest();
         if ($request->isJson()) {
-            return Qwin::call('-widget')->get('JsonList')->render(array(
+            return Qwin::call('-widget')->get('JsonListAction')->render(array(
                 'list'   => $this->getMeta()->getList(),
                 'layout' => $request->get('layout'),
                 'search' => $request->get('search'),
@@ -48,7 +48,7 @@ class Com_ActionController extends Com_Controller
                 ),
             ));
         } else {
-            return Qwin::call('-widget')->get('List')->render(array(
+            return Qwin::call('-widget')->get('ListAction')->render(array(
                 'list'   => $this->getMeta()->getList(),
                 'layout' => $request->get('layout'),
                 'row'    => $request->get('row'),
@@ -124,9 +124,12 @@ class Com_ActionController extends Com_Controller
                 'forward'   => $this->_request->get('forward'),
             ));
         }
+        $meta = $this->getMeta();
+        $form = $meta->offsetLoad('edit', 'form');
+        !$form && $form = $meta['form'];
         if (!$this->_request->isPost()) {
-            return Qwin::call('-widget')->get('View')->execute(array(
-                'module'    => $this->_module,
+            return Qwin::call('-widget')->get('FormAction')->render(array(
+                'form'      => $form,
                 'id'        => $this->_request->get('id'),
                 'asAction'  => 'edit',
                 'isView'    => false,

@@ -16,8 +16,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Com
- * @subpackage  Service
+ * @package     Widget
+ * @subpackage  JsonListAction
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,7 +25,7 @@
  * @since       2010-10-09 21:20:47
  */
 
-class JsonList_Widget extends Qwin_Widget_Abstract
+class JsonListAction_Widget extends Qwin_Widget_Abstract
 {
     /**
      * 默认选项

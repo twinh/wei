@@ -33,7 +33,7 @@ class FileTree_Widget extends Qwin_Widget_Abstract
      * @param array $options 选项
      * @return string 文件树代码
      */
-    public function render($options)
+    public function render($options = null)
     {
         $jQuery = $this->_widget->get('JQuery');
         $minify = $this->_widget->get('Minify');
