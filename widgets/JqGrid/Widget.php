@@ -268,6 +268,13 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
         return json_encode($options['options']);
     }
     
+    /**
+     * 根据列表元数据定义和自定义列表栏目,获取列表布局
+     * 
+     * @param Qwin_Meta_List $list 列表元数据
+     * @param string|array $layout 列表配置
+     * @return $layout 列表布局数组 
+     */
     public function getLayout(Qwin_Meta_List $list, $layout)
     {
         if (empty($layout)) {
