@@ -75,7 +75,7 @@ class Filter_Widget extends Qwin_Widget_Abstract
 
         // 列出允许筛选的域
         $data = array();
-        foreach ($meta['field'] as $name => $field) {
+        foreach ($meta['fields'] as $name => $field) {
             if ($field['attr']['isDbField'] && in_array($field['form']['_type'], $this->_formTypes)) {
                 $data[$name] = $meta['field']->getResource($name);
 
