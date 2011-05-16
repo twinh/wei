@@ -38,6 +38,7 @@ return array(
         ),
         'group_id' => array(
             '_type' => 'select',
+            'link' => true,
             '_resourceGetter' => array(
                 array('Com_Category_Widget', 'get'),
                 array(

@@ -36,22 +36,23 @@ class Com_ActionController extends Com_Controller
     {
         $request = $this->getRequest();
         if ($request->isJson()) {
-            return Qwin::call('-widget')->get('JsonList')->execute(array(
-                'meta'  => $this->getMeta(),
-                'list'  => $request->get('list'),
-                'search'=> $request->get('search'),
-                'page'  => $request->get('page'),
-                'row'   => $request->get('row'),
-                'order' => array(
+            return Qwin::call('-widget')->get('JsonList')->render(array(
+                'list'   => $this->getMeta()->getList(),
+                'layout' => $request->get('layout'),
+                'search' => $request->get('search'),
+                'page'   => $request->get('page'),
+                'row'    => $request->get('row'),
+                'order'  => array(
                     $request->get('orderField'),
                     $request->get('orderType')
                 ),
             ));
         } else {
             return Qwin::call('-widget')->get('List')->render(array(
-                'meta'  => $this->getMeta(),
-                'list'  => $request->get('list'),
-                'popup' => $request->get('popup'),
+                'list'   => $this->getMeta()->getList(),
+                'layout' => $request->get('layout'),
+                'row'    => $request->get('row'),
+                'popup'  => $request->get('popup'),
             ));
         }
     }

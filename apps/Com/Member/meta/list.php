@@ -31,14 +31,14 @@ return array(
         ),
         'group_id' => array(
             'link' => true,
-            'sanitiser' => array(
-                array('Com_Category_Widget', 'sanitise'),
-                array(
-                    'com/member/group',
-                    null,
-                    array('id', null, 'name'),
-                ),
-            ),
+//            'sanitiser' => array(
+//                array('Com_Category_Widget', 'sanitise'),
+//                array(
+//                    'com/member/group',
+//                    null,
+//                    array('id', null, 'name'),
+//                ),
+//            ),
         ),
         'sex' => array(
             'link' => true,

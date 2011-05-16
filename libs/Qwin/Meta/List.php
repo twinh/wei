@@ -44,6 +44,9 @@ class Qwin_Meta_List extends Qwin_Meta_Common
     protected $_struct = array(
         'fields' => array(),
         'layout' => array(),
+        'db' => array(
+            'limit' => 10,
+        ),
     );
 
     /**
@@ -73,6 +76,11 @@ class Qwin_Meta_List extends Qwin_Meta_Common
     }
     
     public function setLayout()
+    {
+        
+    }
+    
+    public function getLayout()
     {
         
     }

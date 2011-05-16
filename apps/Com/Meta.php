@@ -31,9 +31,9 @@
 /**
  * @see Qwin_Application_Meta
  */
-require_once 'Qwin/Application/Meta.php';
+require_once 'Qwin/Meta/Abstract.php';
 
-class Com_Meta extends Qwin_Application_Meta
+class Com_Meta extends Qwin_Meta_Abstract
 {
     /**
      * 模块标识
@@ -312,11 +312,12 @@ class Com_Meta extends Qwin_Application_Meta
     {
         // 设置数据表
         $record->setTableName($this['db']['table']);
-
+        
         // 设置字段
-        $fieldList = $this['fields']->getAttrList(array('isDbField', 'isDbQuery'));
-        foreach ($fieldList as $field) {
-            $record->hasColumn($field);
+        foreach ($this['fields'] as $name => $field) {
+            if ($field['dbField'] && $field['dbQuery']) {
+                $record->hasColumn($name);
+            }
         }
 
         // 重新初始化记录,否则Doctrine将提示属性或关联组件不存在
@@ -355,19 +356,17 @@ class Com_Meta extends Qwin_Application_Meta
         '' != $alias && $alias .= '.';
 
         // 数据表字段的域
-        $queryField = $this['fields']->getAttrList('isDbQuery');
         $orderType = array('DESC', 'ASC');
 
-        foreach ($order as $fieldSet) {
-            // 不被允许的域名称
-            if (!in_array($fieldSet[0], $queryField)) {
+        foreach ($order as $field) {
+            if (!isset($field[0]) || !isset($this['fields'][$field[0]]) || $this['fields'][$field[0]]['dbField']) {
                 continue;
             }
-            $fieldSet[1] = strtoupper($fieldSet[1]);
-            if (!in_array($fieldSet[1], $orderType)) {
-                $fieldSet[1] = $orderType[0];
+            $field[1] = strtoupper($field[1]);
+            if (!in_array($field[1], $orderType)) {
+                $field[1] = $orderType[0];
             }
-            $query->addOrderBy($alias . $fieldSet[0] . ' ' .  $fieldSet[1]);
+            $query->addOrderBy($alias . $field[0] . ' ' .  $field[1]);
         }
         return $this;
     }
@@ -391,8 +390,6 @@ class Com_Meta extends Qwin_Application_Meta
         $alias = $query->getRootAlias();
         '' != $alias && $alias .= '.';
 
-        // 数据表字段的域
-        $queryField = $this['fields']->getAttrList('isDbQuery');
         // TODO　是否使用%s替换
         $searchType = array(
             'eq' => '=',
@@ -412,8 +409,7 @@ class Com_Meta extends Qwin_Application_Meta
         );
 
         foreach ($search as $fieldSet) {
-            // 不被允许的域名称
-            if (!in_array($fieldSet[0], $queryField)) {
+            if (!isset($this['fields'][$fieldSet[0]]) || !$this['fields'][$fieldSet[0]]['dbField']) {
                 continue;
             }
             if (!isset($fieldSet[2])) {
@@ -532,13 +528,18 @@ class Com_Meta extends Qwin_Application_Meta
          * 设置主类的查询语句
          */
         // 调整主键的属性,因为查询时至少需要选择一列
-        $primaryKey = $this['db']['id'];
+        $id = $this['db']['id'];
         $this['fields']
-             ->setAttr($primaryKey, 'isDbField', true)
-             ->setAttr($primaryKey, 'isDbQuery', true);
-
-        $queryField = $this['fields']->getAttrList(array('isDbQuery', 'isDbField'));
-        $query->select(implode(', ', $queryField));
+             ->setAttr($id, 'isDbField', true)
+             ->setAttr($id, 'isDbQuery', true);
+        
+        $queryFields = array();
+        foreach ($this['fields'] as $name => $field) {
+            if ($field['dbQuery'] && $field['dbField']) {
+                $queryFields[] = $name;
+            }
+        }
+        $query->select(implode(', ', $queryFields));
 
         /**
          * 设置关联类的查询语句
@@ -547,10 +548,10 @@ class Com_Meta extends Qwin_Application_Meta
             $linkedMetaObj = self::getByModule($model['module']);
 
             // 调整主键的属性,因为查询时至少需要选择一列
-            $primaryKey = $linkedMetaObj['db']['id'];
+            $id = $linkedMetaObj['db']['id'];
             $linkedMetaObj->fields
-                          ->setAttr($primaryKey, 'isDbField', true)
-                          ->setAttr($primaryKey, 'isDbQuery', true);
+                          ->setAttr($id, 'isDbField', true)
+                          ->setAttr($id, 'isDbQuery', true);
 
             $queryField = $linkedMetaObj->fields->getAttrList(array('isDbQuery', 'isDbField'));
             foreach ($queryField as $field) {
@@ -605,7 +606,7 @@ class Com_Meta extends Qwin_Application_Meta
      */
     public function setIdMeta()
     {
-        $this->merge(array(
+        $this->merge('fields', array(
             'id' => array(
                 'order' => -1,
                 'layout' => 2,
@@ -630,7 +631,7 @@ class Com_Meta extends Qwin_Application_Meta
                     'isReadonly' => 0,
                 ),
             ),
-        ), 'fields');
+        ));
         return $this;
     }
 
@@ -641,7 +642,7 @@ class Com_Meta extends Qwin_Application_Meta
      */
     public function setCreatedData()
     {
-        $this->merge(array(
+        $this->merge('fields', array(
             'created_by' => array(
                 'order' => 1020,
                 'form' => array(
@@ -668,7 +669,7 @@ class Com_Meta extends Qwin_Application_Meta
                     'isReadonly' => 1,
                 ),
             ),
-        ), 'fields');
+        ));
         return $this;
     }
 
@@ -679,7 +680,7 @@ class Com_Meta extends Qwin_Application_Meta
      */
     public function setModifiedData()
     {
-        $this->merge(array(
+        $this->merge('fields', array(
             'modified_by' => array(
                 'order' => 1040,
                 'form' => array(
@@ -697,7 +698,7 @@ class Com_Meta extends Qwin_Application_Meta
                     'isList' => 1,
                 ),
             ),
-        ), 'fields');
+        ));
         return $this;
     }
 
@@ -708,27 +709,22 @@ class Com_Meta extends Qwin_Application_Meta
      */
     public function setOperationMeta()
     {
-        $this->merge(array(
+        $this->merge('fields', array(
             'operation' => array(
+                'dbField' => 0,
+                'dbQuery' => 0,
                 'order' => 1100,
                 'form' => array(
                     '_type' => 'custom',
                 ),
-                'attr' => array(
-                    'isLink' => 0,
-                    'isDbField' => 0,
-                    'isDbQuery' => 0,
-                    'isView' => 0,
-                    'isList' => 1,
-                ),
             ),
-        ), 'fields');
+        ));
         return $this;
     }
 
     public function setAssignToMeta()
     {
-        $this->merge(array(
+        $this->merge('fields', array(
             'assign_to' => array(
                 'order' => 1100,
                 'form' => array(
@@ -755,13 +751,13 @@ class Com_Meta extends Qwin_Application_Meta
                     ),
                 ),
             ),
-        ), 'fields');
+        ));
         return $this;
     }
 
     public function setIsDeletedMeta()
     {
-        $this->merge(array(
+        $this->merge('fields', array(
             'is_deleted' => array(
                 'order' => 1105,
                 'form' => array(
@@ -778,7 +774,7 @@ class Com_Meta extends Qwin_Application_Meta
                     'isReadonly' => 1,
                 ),
             ),
-        ), 'fields');
+        ));
         return $this;
     }
 
@@ -823,7 +819,7 @@ class Com_Meta extends Qwin_Application_Meta
      */
     public function sanitiseListOperation($value, $name, $data, $dataCopy)
     {
-        $primaryKey = $this['db']['id'];
+        $id = $this['db']['id'];
         $url = Qwin::call('-url');
         $lang = Qwin::call('-lang');
         $module = $this->getModule();
@@ -836,21 +832,21 @@ class Com_Meta extends Qwin_Application_Meta
         $operation = array();
         if (!in_array('edit', $this->unableAction)) {
             $operation['edit'] = array(
-                'url'   => $url->url($module->toUrl(), 'edit', array($primaryKey => $dataCopy[$primaryKey])),
+                'url'   => $url->url($module->toUrl(), 'edit', array($id => $dataCopy[$id])),
                 'title' => $lang->t('ACT_EDIT'),
                 'icon'  => 'ui-icon-tag',
             );
         }
         if (!in_array('view', $this->unableAction)) {
             $operation['view'] = array(
-                'url'   => $url->url($module->toUrl(), 'view', array($primaryKey => $dataCopy[$primaryKey])),
+                'url'   => $url->url($module->toUrl(), 'view', array($id => $dataCopy[$id])),
                 'title' => $lang->t('ACT_VIEW'),
                 'icon'  => 'ui-icon-lightbulb',
             );
         }
         /*if (!in_array('add', $this->unableAction)) {
             $operation['add'] = array(
-                'url'   => $url->url($asc, array('action' => 'Add', $primaryKey => $dataCopy[$primaryKey])),
+                'url'   => $url->url($asc, array('action' => 'Add', $id => $dataCopy[$id])),
                 'title' => $lang->t('ACT_COPY'),
                 'icon'  => 'ui-icon-transferthick-e-w',
             );
@@ -864,7 +860,7 @@ class Com_Meta extends Qwin_Application_Meta
                 $jsLang = 'MSG_CONFIRM_TO_DELETE_TO_TRASH';
             }
             $operation['delete'] = array(
-                'url'   => 'javascript:if(confirm(Qwin.Lang.' . $jsLang . ')){window.location=\'' . $url->url($module->toUrl(), 'delete', array($primaryKey => $dataCopy[$primaryKey])) . '\';}',
+                'url'   => 'javascript:if(confirm(Qwin.Lang.' . $jsLang . ')){window.location=\'' . $url->url($module->toUrl(), 'delete', array($id => $dataCopy[$id])) . '\';}',
                 'title' => $lang->t('ACT_DELETE'),
                 'icon'  => $icon,
             );

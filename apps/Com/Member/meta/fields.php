@@ -61,11 +61,8 @@ return array(
         ),
     ),
     'password2' => array(
-        'attr' => array(
-            'isReadonly' => 1,
-            'isView' => 0,
-            'isDbField' => 0,
-        ),
+        'dbField' => 0,
+        'dbQuery' => 0,
         'validator' => array(
             'rule' => array(
                 'required' => true,
