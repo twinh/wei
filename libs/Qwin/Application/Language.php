@@ -66,6 +66,7 @@ class Qwin_Application_Language implements ArrayAccess
         'rootModule' => 'Com',
         'module'     => null,
         'name'       => 'zh-CN',
+        'path'       => 'lang',
     );
 
     protected $_options = array();

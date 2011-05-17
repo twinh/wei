@@ -45,4 +45,25 @@ class Qwin_Meta_Page extends Qwin_Meta_Common
 //            'banField'      => '',
 //        ),
     );
+    
+    /**
+     * 格式化数据,例如,设置默认数据,为未初始化的键名设置空值
+     *
+     * @param array $data 数据
+     * @param array $options 选项
+     * @return Qwin_Meta_Common 当前对象
+     * @todo 是否一定要数组
+     */
+    public function merge($data, array $options = array())
+    {
+        $data = (array)$data;
+        
+        if (!isset($data['title'])) {
+            $data['title'] = 'MOD_' . $this->getParent()->getModule()->toLang();
+        }
+
+        $data = $data + $this->_defaults;
+        $this->exchangeArray($data + $this->getArrayCopy());
+        return $this;
+    }
 }

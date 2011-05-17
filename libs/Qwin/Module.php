@@ -54,6 +54,11 @@ class Qwin_Module
      * @var string
      */
     protected $_url;
+    
+    /**
+     * 模块语言化名称
+     */
+    protected $_lang;
 
     /**
      * 默认配置
@@ -124,6 +129,14 @@ class Qwin_Module
             $this->_class = implode('_', array_map('ucfirst', $class));
         }
         return $this->_class;
+    }
+    
+    public function toLang()
+    {
+        if (!$this->_lang) {
+            $this->_lang = strtoupper(strtr($this->_data, '/', '_'));
+        }
+        return $this->_lang;
     }
 
     public function isValid()

@@ -82,8 +82,9 @@ validateCode['<?php echo $options['id'] ?>'] = <?php echo $validateCode ?>;
                 if ('' === $field) {
                     echo '<td colspan="' . ($i + 2) . '">&nbsp;</td>';
                 } else {
-                    echo '<td class="ui-label-common"><label for="">' . $lang[$meta['fields'][$field]['title']] . ':</label></td>'
-                       . '<td class="ui-field-common ui-field-' . $form['fields'][$field]['form']['_type'] . '" colspan="' . ($i * 2 + 1) . '">' . $this->renderElement($form['fields'][$field]['form']) , $this->renderElementWidget($form['fields'][$field]['form']) . '</td>';
+                    $fieldForm = $form['fields'][$field]['form'];
+                    echo '<td class="ui-label-common"><label for="' . 1/*$form['fields'][$field]['form']['id']*/ . '">' . $lang[$meta['fields'][$field]['title']] . ':</label></td>'
+                       . '<td class="ui-field-common ui-field-' . $fieldForm['_type'] . '" colspan="' . ($i * 2 + 1) . '">' . $this->renderElement($fieldForm) , $this->renderElementWidget($fieldForm) . '</td>';
                 }
             } else {
                 echo '<td colspan="2">&nbsp;</td>';
@@ -97,56 +98,9 @@ validateCode['<?php echo $options['id'] ?>'] = <?php echo $validateCode ?>;
     </fieldset>
 <?php endif; ?>
 <?php endforeach; ?>
-<?php /*foreach($form['element'] as $groupKey => $fieldGroup): ?>
-<fieldset id="ui-fieldset-<?php echo $groupKey ?>" class="ui-widget-content ui-corner-all">
-    <legend><?php echo qw_lang($group[$groupKey]) ?></legend>
-    <table class="ui-form-table" id="ui-form-table-<?php echo $groupKey ?>" width="100%">
-        <tr>
-            <td width="12.5%"></td>
-            <td width="37.5%"></td>
-            <td width="12.5%"></td>
-            <td width="37.5%"></td>
-        </tr>
-<!--        <colgroup width="12.5%"></colgroup>
-        <colgroup width="37.5%"></colgroup>
-        <colgroup width="12.5%"></colgroup>
-        <colgroup width="37.5%"></colgroup>-->
-        <?php
-        foreach($fieldGroup as $row):
-        ?>
-        <tr>
-            <?php
-            if(1 == count($row)):
-                $colspan = ' colspan="3"';
-            else:
-                $colspan = '';
-            endif;
-            foreach($row as $cell):
-                if('' == $cell):
-            ?>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <?php
-                else:
-            ?>
-            <td class="ui-label-common ui-label-common-<?php echo count($row) ?>"><label for="<?php echo $cell[1]['id'] ?>"><?php echo $lang[$cell[0]] ?>:</label></td>
-            <td class="ui-field-common ui-field-<?php echo $cell[1]['_type'] ?>"<?php echo $colspan ?>>
-              <?php echo $this->renderElement($cell[1]) , $this->renderElementWidget($cell[1]) ?>
-            </td>
-            <?php
-                endif;
-            endforeach;
-            ?>
-        </tr>
-        <?php
-        endforeach;
-        ?>
-    </table>
-</fieldset>
-<?php endforeach*/ ?>
 <div class="ui-operation-field">
     <input type="hidden" name="_page" value="<?php echo $refererPage ?>" />
-    <?php echo Qwin_Util_JQuery::button('submit', qw_lang('ACT_SUBMIT'), 'ui-icon-check') ?>
-    <?php echo Qwin_Util_JQuery::button('reset', qw_lang('ACT_RESET'), 'ui-icon-arrowreturnthick-1-w') ?>
+    <?php echo Qwin_Util_JQuery::button('submit', $lang['ACT_SUBMIT'], 'ui-icon-check') ?>
+    <?php echo Qwin_Util_JQuery::button('reset', $lang['ACT_RESET'], 'ui-icon-arrowreturnthick-1-w') ?>
 </div>
 </form>
