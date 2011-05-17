@@ -30,27 +30,25 @@ class Qwin_Meta_Form extends Qwin_Meta_Common
      * @var array
      */
     protected $_defaults = array(
-        'form' => array(
-            '_type' => 'text',
-            '_resource' => null,
-            '_value' => '',
-            'name' => null,
-//            '_resourceGetter' => null,
-//            '_resourceFormFile' => null,
-//            '_widget' => array(),
-//            'id' => null,
-//            'class' => null,
-        ),
-//        'sanitiser' => array(
+        '_type' => 'text',
+        '_resource' => null,
+        '_value' => '',
+        'name' => null,
+        'id' => null,
+//        '_resourceGetter' => null,
+//        // TODO 通过resourceGetter实现
+//        '_resourceFormFile' => null,
+//        '_widget' => array(),
+//        'class' => null,
+//        '_sanitiser' => array(
 //            
 //        ),
-//        'validator' => array(
-//            'rules' => array(
-//                
-//            ),
-//            'messages' => array(
-//                
-//            ),
+//        //validator
+//        '_rules' => array(
+//            
+//        ),
+//        '_messages' => array(
+//            
 //        ),
     );
     
@@ -82,7 +80,9 @@ class Qwin_Meta_Form extends Qwin_Meta_Common
             $this->_defaults = $this->_defaults + (array)$data['fields']['*'];
             unset($data['fields']['*']);
         }
-        foreach ($data['fields'] as &$field) {
+        foreach ($data['fields'] as $name => &$field) {
+            !isset($field['name']) && $field['name'] = $name;
+            !isset($field['id']) && $field['id'] = $name;
             $field = (array)$field + $this->_defaults;
         }
         $this->exchangeArray($data);

@@ -26,14 +26,11 @@
 return array(
     'fields' => array(
         'id' => array(
-            'form' => array(
-                '_type' => 'hidden',
-            ),
+            '_type' => 'hidden',
         ),
         'group_id' => array(
             'link' => true,
-            'form' => array(
-                '_type' => 'select',
+            '_type' => 'select',
 //                '_resourceGetter' => array(
 //                    array('Com_Category_Widget', 'get'),
 //                    array(
@@ -42,7 +39,6 @@ return array(
 //                        array('id', null, 'name'),
 //                    ),
 //                ),
-            ),
             'sanitiser' => array(
                 array('Com_Category_Widget', 'sanitise'),
                 array(
@@ -186,6 +182,7 @@ return array(
         ),
     ),
     'columns' => 1,
+    'topButtons' => true,
 //    'buttons' => array(),
 //    'files' => array(),
     'hidden' => array(

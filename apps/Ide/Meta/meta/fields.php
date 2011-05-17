@@ -1,7 +1,7 @@
 <?php
 
 /**
- * zh-CN
+ * fields
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -21,15 +21,35 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-05-17 11:53:29
+ * @since       2011-5-17 15:13:00
  */
 
 return array(
-    'MOD_IDE_META' => '元数据',
-    'ACT_IDE_META_FIELDS' => '域配置',
-    
-    'FLD_DBFIELD' => '数据库字段',
-    'FLD_DBQUERY' => '允许查询',
-    'FLD_URLQUERY' => '允许Url查询',
-    'FLD_READONLY' => '只读',
+    '*' => array(
+        'dbField' => false,
+    ),
+    'name' => array(
+        
+    ),
+    'title' => array(
+        
+    ),
+    'description' => array(
+        
+    ),
+    'order' => array(
+        
+    ),
+    'dbField' => array(
+        
+    ),
+    'dbQuery' => array(
+        
+    ),
+    'urlQuery' => array(
+        
+    ),
+    'readonly' => array(
+        
+    ),
 );

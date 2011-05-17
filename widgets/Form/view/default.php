@@ -34,10 +34,12 @@ validateCode['<?php echo $options['id'] ?>'] = <?php echo $validateCode ?>;
 }
 ?>
 <form id="<?php echo $options['id'] ?>" name="form" method="post" action="<?php echo qw_url()?>">
+<?php if ($form['topButtons']) : ?>
 <div class="ui-operation-field">
     <?php echo Qwin_Util_JQuery::button('submit', qw_lang('ACT_SUBMIT'), 'ui-icon-check') ?>
     <?php echo Qwin_Util_JQuery::button('reset', qw_lang('ACT_RESET'), 'ui-icon-arrowreturnthick-1-w') ?>
 </div>
+<?php endif; ?>
 <div class="ui-helper-hidden">
     <?php
     foreach($form['hidden'] as $value) {
@@ -82,8 +84,12 @@ validateCode['<?php echo $options['id'] ?>'] = <?php echo $validateCode ?>;
                 if ('' === $field) {
                     echo '<td colspan="' . ($i + 2) . '">&nbsp;</td>';
                 } else {
-                    $fieldForm = $form['fields'][$field]['form'];
-                    echo '<td class="ui-label-common"><label for="' . 1/*$form['fields'][$field]['form']['id']*/ . '">' . $lang[$meta['fields'][$field]['title']] . ':</label></td>'
+                    if (isset($form['fields'][$field])) {
+                        $fieldForm = $form['fields'][$field];
+                    } else {
+                        $fieldForm = $defaultForm;
+                    }
+                    echo '<td class="ui-label-common"><label for="' . $fieldForm['id'] . '">' . $lang[$meta['fields'][$field]['title']] . ':</label></td>'
                        . '<td class="ui-field-common ui-field-' . $fieldForm['_type'] . '" colspan="' . ($i * 2 + 1) . '">' . $this->renderElement($fieldForm) , $this->renderElementWidget($fieldForm) . '</td>';
                 }
             } else {
