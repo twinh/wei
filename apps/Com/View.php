@@ -67,6 +67,7 @@ class Com_View extends Qwin_Application_View
         // 部分视图常用变量
         $this->assign(array(
             'widget'    => $widget,
+            'lang'      => $widget->get('Lang'),
             'minify'    => $widget->get('Minify'),
             'jQuery'    => $widget->get('JQuery'),
             'config'    => $config,

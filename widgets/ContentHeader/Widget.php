@@ -31,7 +31,7 @@ class ContentHeader_Widget extends Qwin_Widget_Abstract
         $module = $view['module'];
         $action = Qwin::config('action');
         $url = Qwin::call('-url');
-        $lang = Qwin::call('-lang');
+        $lang = $this->_Lang;
 
         // 可能没有元数据
         if (!isset($view['meta'])) {

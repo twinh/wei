@@ -232,7 +232,7 @@ class Qwin_Application_View extends ArrayObject
     /**
      * 视图展示之前,用于视图数据处理,构建等
      *
-     * @return Common_View 当前对象
+     * @return Qwin_Application_View 当前对象
      */
     public function preDisplay()
     {
@@ -255,7 +255,7 @@ class Qwin_Application_View extends ArrayObject
     /**
      * 视图展示之后,用于视图数据的回调处理等
      *
-     * @return Common_View 当前对象
+     * @return Qwin_Application_View 当前对象
      */
     public function afterDisplay()
     {

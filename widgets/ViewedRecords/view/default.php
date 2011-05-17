@@ -24,14 +24,14 @@
  */
 ?>
 <div class="ui-sidebar-header ui-state-default">
-	<a class="ui-iconx ui-iconx-clock-16" href="javascript:;"><?php echo qw_lang('LBL_VIEWED_RECORDS') ?></a>
+	<a class="ui-iconx ui-iconx-clock-16" href="javascript:;"><?php echo qw_t('LBL_VIEWED_RECORDS') ?></a>
 </div>
 <div class="ui-sidebar-content">
     <ul>
 	<?php
     if(empty($viewRecords)):
     ?>
-        <li><a><?php echo qw_lang('MSG_NO_VIEWED_RECORDS') ?></a></li>
+        <li><a><?php echo qw_t('MSG_NO_VIEWED_RECORDS') ?></a></li>
 	<?php
     else:
         foreach($viewRecords as $row):

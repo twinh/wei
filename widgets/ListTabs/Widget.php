@@ -32,7 +32,7 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
     public function getTabs($module, $get)
     {
         $url = Qwin::call('-url');
-        $lang = $this->_lang;
+        $lang = $this->_Lang;
         $tabs = array();
 
         $moduleId = $module->toId();
@@ -138,7 +138,7 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
             $tabs = array_splice($tabs, 0, $this->_options['max']);
             $moreTab = array(
                 'url' => 'javascript:;',
-                'title' => $this->_lang->t('ACT_MORE'),
+                'title' => $this->_Lang->t('ACT_MORE'),
                 'icon' => 'ui-icon-triangle-1-e',
                 'target' => null,
                 'id' => null,
