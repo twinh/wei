@@ -45,7 +45,7 @@
         height: 28px;
         line-height: 28px;
         padding-left: 10px;
-        margin: 2px;
+        margin: 1px;
     }
     
     .qw-meta-fields-left ul li.ui-state-hover {
@@ -59,10 +59,16 @@
     <div class="ui-form-content ui-box-content ui-widget-content">
     <table class="qw-meta-fields-table" width="100%">
         <tr>
+            <td colspan="2">
+                <div class="ui-operation-field">
+                    <a class="ui-state-default" href="#">xxx模块, xx wenjian ...</a>
+                </div>
+            </td>
+        </tr>
+        <tr>
             <td class="qw-meta-fields">
                 <div class="qw-meta-fields-left ui-widget-content ui-corner-all">
                     <ul>
-                        <li class="ui-state-default ui-corner-top"><a href="#">域列表</a></li>
                         <li><a href="#">编号(id)</a></li>
                         <li><a href="#">分组(group_id)</a></li>
                         <li><a href="#">用户名(username)</a></li>

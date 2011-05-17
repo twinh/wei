@@ -108,18 +108,10 @@ function qw_l()
     // TODO language or qw_t
 }
 
-
-function qw_lang($name = null)
-{
-    static $lang;
-    null == $lang && $lang = Qwin::call('Qwin_Application_Language');
-    return $lang->t($name);
-}
-
 function qw_t($name = null)
 {
     static $lang;
-    null == $lang && $lang = Qwin::call('Qwin_Application_Language');
+    null == $lang && $lang = Qwin::call('-widget')->get('Lang');
     return $lang->t($name);
 }
 
