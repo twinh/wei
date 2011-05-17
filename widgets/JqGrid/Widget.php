@@ -192,9 +192,9 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
             $layout = $this->getLayout($list, $options['layout']);
             foreach ($layout as $field) {
                 if (isset($meta['fields'][$field])) {
-                    $options['colNames'][] = $this->_lang[$meta['fields'][$field]['title']];
+                    $options['colNames'][] = $this->_Lang[$meta['fields'][$field]['title']];
                 } else {
-                    $options['colNames'][] = $this->_lang[null];
+                    $options['colNames'][] = $this->_Lang[null];
                 }
                 $options['colModel'][] = array(
                     'name' => $field,

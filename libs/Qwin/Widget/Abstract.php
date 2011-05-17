@@ -59,12 +59,6 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
     protected $_widget;
 
     /**
-     * 语言对象
-     * @var Qwin_Application_Language
-     */
-    protected $_lang;
-    
-    /**
      * 初始化
      *
      * @param array $options 选项
