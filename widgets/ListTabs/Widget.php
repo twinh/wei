@@ -158,7 +158,7 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
         $smarty->assign('tabs', $tabs);
         $smarty->assign('moreTab', $moreTab);
         $smarty->assign('subTabs', $subTabs);
-        $smarty->assign('lang', $this->_lang);
+        $smarty->assign('lang', $this->_Lang);
         $smarty->display($this->_rootPath . 'view/default.tpl');
     }
 }

@@ -213,6 +213,28 @@ class Lang_Widget extends Qwin_Widget_Abstract implements ArrayAccess
         }
         return $this;
     }
+    
+    /**
+     * 加载微件语言
+     * 
+     * @param Qwin_Widget_Abstract|string $widget 微件对象或名称
+     * @return false|Lang_Widget 语言文件不存在|加载成功
+     */
+    public function appendByWidget($widget)
+    {
+        if (is_object($widget) && $widget instanceof Qwin_Widget_Abstract) {
+            if (is_file($file = $widget->getRootPath() . $this->_options['path'] . '/' . $this->_name . '.php')) {
+                return $this->_appendFile($file);
+            }
+            return false;
+        } elseif (is_string($widget)) {
+            if (is_file($file = dirname($this->_rootPath) . '/' . $widget . '/' . $this->_name . '.php')) {
+                return $this->_appendFile($file);
+            }
+            return false;
+        }
+        throw new Qwin_Widget_Exception('Argument should be a instanced widget object or widget name.');
+    }
 
     /**
      * 根据文件路径加载语言

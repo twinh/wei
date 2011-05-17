@@ -827,7 +827,7 @@ class Com_Meta extends Qwin_Meta_Abstract
     {
         $id = $this['db']['id'];
         $url = Qwin::call('-url');
-        $lang = Qwin::call('-lang');
+        $lang = Qwin::call('-widget')->get('Lang');
         $module = $this->getModule();
         if (!isset($this->controller)) {
             // TODO　不重复加载

@@ -26,8 +26,8 @@
 class Ide_Option_Widget extends Qwin_Widget_Abstract
 {
     /**
-     * 语言名称,应该以标准形式出现
-     * @var string
+     *
+     * @var Lang_Widget
      */
     protected $_lang;
 
@@ -90,14 +90,14 @@ class Ide_Option_Widget extends Qwin_Widget_Abstract
         if (!is_dir($options['cachePath'])) {
             throw new Qwin_Exception('The option path is not found.');
         }
+        
+        $this->_lang = Qwin::call('-widget')->get('Lang');
         // 初始化路径
         $this->_path = $options['cachePath'];
-
-        $lang = Qwin::call('-lang');
+        
         // 初始化附加选项
-        $this->_lang = $lang->getName();
         foreach ($this->_defaultAddition as &$row) {
-            $row['name'] = $lang[$row['name']];
+            $row['name'] = $this->_lang[$row['name']];
         }
     }
 
@@ -112,7 +112,7 @@ class Ide_Option_Widget extends Qwin_Widget_Abstract
     public function get($name, $addition = 1, $lang = null)
     {
         // 获取缓存数据
-        null == $lang && $lang = $this->_lang;
+        null == $lang && $lang = $this->_lang->getName();
         !isset($this->_data[$lang]) && $this->_data[$lang] = array();
         $file = $this->_path . '/' . $lang . '/' . $name . '.php';
         if (is_file($file)) {
@@ -145,7 +145,7 @@ class Ide_Option_Widget extends Qwin_Widget_Abstract
      */
     public function setCacheBySign($sign, $lang = null)
     {
-        null == $lang && $lang = $this->_lang;
+        null == $lang && $lang = $this->_lang->getName();
         $result = $this
             ->getQuery()
             ->where('sign = ?', $sign)

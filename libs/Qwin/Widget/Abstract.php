@@ -71,7 +71,7 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
      * @todo 不是每一个微件都需要此流程
      */
     public function __construct(array $options = array())
-    {
+    {    
         // 检查是否通过微件管理对象获得,不是则
         $this->_widget = Qwin::call('Qwin_Widget');
         if (!$this->_widget->isCalled($this)) {
@@ -201,25 +201,6 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
     public function getRootPath()
     {
         return $this->_rootPath;
-    }
-
-    /**
-     * 加载语言
-     *
-     * @return Qwin_Widget_Abstract 当前对象
-     * @todo 更合适的方式加载
-     */
-    public function loadLanguage($widget = null)
-    {
-        /* @var $lang Qwin_Application_Language */
-        $lang = Qwin::call('-lang');
-        if (!$widget) {
-            $filePath = $this->_rootPath;
-        } else {
-            $filePath = dirname($this->_rootPath) . '/' . $widget . '/';
-        }
-        $lang->appendByFile($filePath . 'language/' . $lang->getName() . '.php');
-        return $this;
     }
 
     /**
