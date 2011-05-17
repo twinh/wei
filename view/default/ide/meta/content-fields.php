@@ -24,21 +24,45 @@
  * @since       2011-05-17 11:28:30
  */
 ?>
+<script type="text/javascript">
+    jQuery(function($){
+        $('div.qw-meta-fields-left ul li').not('.ui-state-default').qui();
+    });
+</script>
 <style type="text/css">
     .qw-meta-fields {
         width: 200px;
         vertical-align: top;
+    }
+    .qw-meta-fields-detail {
+        vertical-align: top;
+    }
+    .qw-meta-fields-table {
+        margin-left: 5px;
+        margin-top: 3px;
+    }
+    .qw-meta-fields-left ul li {
+        height: 28px;
+        line-height: 28px;
+        padding-left: 10px;
+        margin: 2px;
+    }
+    
+    .qw-meta-fields-left ul li.ui-state-hover {
+        border: none;
     }
 </style>
 <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
     <div class="ui-box-header">
         <?php Qwin::hook('ViewContentHeader', $this) ?>
     </div>
-    <table>
+    <div class="ui-form-content ui-box-content ui-widget-content">
+    <table class="qw-meta-fields-table" width="100%">
         <tr>
             <td class="qw-meta-fields">
-                <div>
+                <div class="qw-meta-fields-left ui-widget-content ui-corner-all">
                     <ul>
+                        <li class="ui-state-default ui-corner-top"><a href="#">域列表</a></li>
                         <li><a href="#">编号(id)</a></li>
                         <li><a href="#">分组(group_id)</a></li>
                         <li><a href="#">用户名(username)</a></li>
@@ -49,17 +73,20 @@
                     </ul>
                 </div>
             </td>
-            <td>
+            <td class="qw-meta-fields-detail">
+                <div class="qw-meta-fields-right ui-widget-content ui-corner-all">
                 <?php
                 $formWidget = Qwin::call('-widget')->get('Form');
                 $formOptions = array(
-                    'form'  => Com_Meta::getByModule('com/member')->getForm(),
+                    'form'  => Com_Meta::getByModule('ide/meta')->getForm(),
                     'action' => 'edit',
                     'data'  => $data,
                 );
                 $formWidget->render($formOptions);
                 ?>
+                </div>
             </td>
         </tr>
     </table>
+    </div>
 </div>

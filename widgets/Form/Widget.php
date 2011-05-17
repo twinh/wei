@@ -85,7 +85,6 @@ class Form_Widget extends Qwin_Widget_Abstract
             $this->e('ERR_META_ILLEGAL');
         }
         $meta = $form->getParent();
-        $id = $meta['db']['id'];
         $data = $options['data'];
         
         // 获取表格栏目的宽度百分比
@@ -104,6 +103,7 @@ class Form_Widget extends Qwin_Widget_Abstract
             $percent = array(13.5, 87.5);
         }
         
+        $defaultForm = $form->getDefault();
         
         $minify = $this->_widget->get('Minify');
         $lang = Qwin::call('-lang');
@@ -446,43 +446,6 @@ class Form_Widget extends Qwin_Widget_Abstract
         isset($options['color']) && $options['style'] = 'color:' . $options['color'] . ';' . $options['style'];
         isset($options['style']) && $options['style'] = ' style="' . $options['style'] . '"';
         return isset($options['style']) ? $options['style'] : null;
-    }
-
-    /**
-     * 排列元数据
-     *
-     * @param Qwin_Application_Meta $meta 元数据
-     * @param array $orderedField 经过排列的域
-     * @param string|false $relatedName 元数据关联模型的元数据名称,如果是主元数据,则为false
-     * @return array 以顺序为键名,以域的名称为值的数组
-     */
-    public function getOrderedField(Qwin_Meta_Abstract $meta, array $orderedField = null, $relatedName = null)
-    {
-        foreach ($meta['field'] as $name => $field) {
-            // 使用order作为键名
-            $order = $field['basic']['order'];
-            while (isset($orderedField[$order])) {
-                $order++;
-            }
-
-            $orderedField[$order] = array(
-                $field['form']['name'], $relatedName,
-            );
-        }
-
-        // 获取关联元数据
-        foreach ($meta->getModelMetaByType('db') as $key => $relatedMeta) {
-            if ('db' == $meta['model'][$key]['type']) {
-                $relatedMeta = $this->getOrderedField($orderedField, $key);
-            }
-        }
-
-        // 根据键名排序
-        if (!$relatedName) {
-            ksort($orderedField);
-        }
-
-        return $orderedField;
     }
 
     public function callbackAddLayout($field)

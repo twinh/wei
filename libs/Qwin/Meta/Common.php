@@ -135,6 +135,14 @@ class Qwin_Meta_Common extends ArrayObject implements Qwin_Meta_Interface
         }
         return isset($this->_options[$name]) ? $this->_options[$name] : null;
     }
+    
+    public function getDefault($name = null)
+    {
+        if (null == $name) {
+            return $this->_defaults;
+        }
+        return isset($this->_defaults[$name]) ? $this->_defaults[$name] : null;
+    }
 
     /**
      * 合并多维数组
