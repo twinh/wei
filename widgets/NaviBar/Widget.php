@@ -50,7 +50,7 @@ class NaviBar_Widget extends Qwin_Widget_Abstract
             $menus[0] = array_splice($menus[0], 0, $this->_options['max']);
 
             // 附加“更多”的菜单
-            $this->_defaults['more']['title'] = $this->_lang[$this->_defaults['more']['title']];
+            $this->_defaults['more']['title'] = $this->_Lang[$this->_defaults['more']['title']];
             $menus[0] += array(
                 'more' => $this->_defaults['more']
             );
@@ -60,7 +60,7 @@ class NaviBar_Widget extends Qwin_Widget_Abstract
         // 增加Qwin链接
         $url = Qwin::call('-url');
         $menus['qwin'] = array(
-            'title' => $this->_lang['LBL_QWIN'],
+            'title' => $this->_Lang['LBL_QWIN'],
             'url' => $url->url('com/home', 'index'),
         );
 
