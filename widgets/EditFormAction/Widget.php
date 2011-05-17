@@ -91,7 +91,7 @@ class EditFormAction_Widget extends Qwin_Widget_Abstract
         if ($options['sanitise']) {
             $data = $meta->sanitise($data, $options['sanitise']);
         }
-        
+
         // 返回结果
         if (!$options['display']) {
             return array(
@@ -100,11 +100,6 @@ class EditFormAction_Widget extends Qwin_Widget_Abstract
             );
         }
         
-        $view = Qwin::call('-view');
-        $view->setElement('content', '<root>com/basic/form<suffix>');
-        $view['module'] = $meta->getModule();
-        $view['action'] = 'edit';
-
         /* @var $formWidget Form_Widget */
         $formWidget = Qwin::call('-widget')->get('Form');
         $formOptions = array(
@@ -112,9 +107,14 @@ class EditFormAction_Widget extends Qwin_Widget_Abstract
             'action' => 'edit',
             'data'  => $data,
         );
+        
+        $view = Qwin::call('-view');
+        $view->assign(get_defined_vars());
+        $view->setElement('content', '<root>com/basic/form<suffix>');
+        $view['module'] = $meta->getModule();
+        $view['action'] = 'edit';
 
         $operLinks = Qwin::call('-widget')->get('OperLinks')->render($view);
-
-        $view->assign(get_defined_vars());
+        $view['operLinks'] = $operLinks;
     }
 }
