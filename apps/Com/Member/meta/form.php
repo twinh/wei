@@ -29,7 +29,7 @@ return array(
             '_type' => 'hidden',
         ),
         'group_id' => array(
-            'link' => true,
+            '_link' => true,
             '_type' => 'select',
 //                '_resourceGetter' => array(
 //                    array('Com_Category_Widget', 'get'),
@@ -39,7 +39,7 @@ return array(
 //                        array('id', null, 'name'),
 //                    ),
 //                ),
-            'sanitiser' => array(
+            '_sanitiser' => array(
                 array('Com_Category_Widget', 'sanitise'),
                 array(
                     'com/member/group',
@@ -47,14 +47,14 @@ return array(
                     array('id', null, 'name'),
                 ),
             ),
-            'validator' => array(
+            '_validator' => array(
                 'rule' => array(
                     'notNull' => true,
                 ),
             ),
         ),
         'username' => array(
-            'validator' => array(
+            '_validator' => array(
                 'rule' => array(
                     'required' => true,
                     'maxlength' => 40,
@@ -62,15 +62,13 @@ return array(
             ),
         ),
         'password' => array(
-            'form' => array(
-                '_type' => 'password',
-            ),
-            'sanitiser' => array(
+            '_type' => 'password',
+            '_sanitiser' => array(
                 'db' => array(
                     'md5'
                 ),
             ),
-            'validator' => array(
+            '_validator' => array(
                 'rule' => array(
                     'required' => true,
                     'rangelength' => array(5, 40),
@@ -78,11 +76,9 @@ return array(
             ),
         ),
         'password2' => array(
-            'readonly' => true,
-            'form' => array(
-                '_type' => 'password',
-            ),
-            'validator' => array(
+            '_readonly' => true,
+            '_type' => 'password',
+            '_validator' => array(
                 'rule' => array(
                     'required' => true,
                     'equalTo' => '#password',

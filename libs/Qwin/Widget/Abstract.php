@@ -173,7 +173,7 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
     {
         $attr = '';
         foreach ($options as $name => $value) {
-            $attr .= $name . '="' . htmlspecialchars($value) . '" ';
+            $attr .= $name . '="' . htmlspecialchars((string)$value) . '" ';
         }
         return $attr;
     }
