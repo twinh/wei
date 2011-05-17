@@ -7,7 +7,7 @@ body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,fieldset,p,blockquote,input,te
 }
 /* 修复搜狗浏览器(4.0Chrome内核)样式错误,区别? */
 ul {
-    margin: 0;
+    margin: 0;ui-form-content
     padding: 0;
 }
 *{outline:none}
@@ -272,7 +272,7 @@ div.ui-header-logo {
     width: 100%;
     border: none;
     line-height: 40px;
-    text-indent: 16px;
+    text-indent: 10px;
 }
 .ui-box .ui-box-header img {
     *padding-top: 5px;
@@ -336,7 +336,7 @@ div.ui-box-tab .ui-tabs-panel{
     min-width: 800px;
 }
 .ui-form .ui-form-content{
-    padding: 0 10px;
+    padding: 0 5px;
 }
 .ui-form .ui-form-content fieldset {
     margin: 5px;

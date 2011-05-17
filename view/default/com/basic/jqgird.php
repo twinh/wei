@@ -108,7 +108,7 @@ jQuery(function($){
     });
     function setJqGridWidth() {
         var fullWidth = $('#ui-header-middle').width();
-        jqGridObj.jqGrid('setGridWidth', fullWidth - 32);
+        jqGridObj.jqGrid('setGridWidth', fullWidth - 20);
         $('#ui-form').width(fullWidth);
     }
 });

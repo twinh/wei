@@ -31,7 +31,7 @@
 </script>
 <style type="text/css">
     .qw-meta-fields {
-        width: 200px;
+        width: 180px;
         vertical-align: top;
     }
     .qw-meta-fields-detail {
