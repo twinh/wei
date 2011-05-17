@@ -62,7 +62,7 @@ return array(
             ),
         ),
     ),
-    'topButtons' => true,
+    'topButtons' => false,
     'columns' => 1,
     'hidden' => array(
         

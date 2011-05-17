@@ -16,8 +16,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  Application
+ * @package     Widget
+ * @subpackage  Lang
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,7 +25,7 @@
  * @since       2010-08-16 18:41:13
  */
 
-class Qwin_Application_Language implements ArrayAccess
+class Lang_Widget extends Qwin_Widget_Abstract implements ArrayAccess
 {
     /**
      * 语言转换数据
@@ -137,7 +137,7 @@ class Qwin_Application_Language implements ArrayAccess
     {
         $root = $this->_module->getRoot($module);
         $path = $this->_module->getPath($module);
-        $file = $path . $root . '/' . 'Language/' . $name . '.php';
+        $file = $path . $root . '/' . $this->_options['path'] . '/' . $name . '.php';
         if (is_file($file)) {
             return $file;
         }
@@ -206,7 +206,7 @@ class Qwin_Application_Language implements ArrayAccess
         $modules = explode('/', $module);
         foreach ($modules as $module) {
             $path .= ucfirst($module) . '/';
-            $file = $path . 'Language/' . $this->_name . '.php';
+            $file = $path . $this->_options['path'] . '/' . $this->_name . '.php';
             if (is_file($file)) {
                 $this->_appendFile($file);
             }

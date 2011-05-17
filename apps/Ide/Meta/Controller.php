@@ -33,6 +33,19 @@ class Ide_Meta_Controller extends Com_Controller
     
     public function actionFields()
     {
+        $request = $this->_request;
+        
+        $from = $request->get('from');
+        $from = Qwin_Util_Array::forceInArray($from, array('file', 'table'));
+        $source = $request->get('source');
+        
+        // 读取元数据域配置文件
+        if ('file' == $from) {
+            
+        } else {
+            
+        }
+        
         $meta = $this->getMeta();
         $this->getView()->assign(get_defined_vars());
     }
