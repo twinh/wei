@@ -293,7 +293,7 @@ class Qwin_Meta_Common extends ArrayObject implements Qwin_Meta_Interface
             $flow = Qwin::call('-flow');
         }
         if ($options['notFilled']) {
-            $lang = Qwin::call('-lang');
+            $lang = Qwin::call('-widget')->get('Lang');
         }
 
         // 转换关联模块的显示域

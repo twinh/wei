@@ -36,8 +36,8 @@ validateCode['<?php echo $options['id'] ?>'] = <?php echo $validateCode ?>;
 <form id="<?php echo $options['id'] ?>" name="form" method="post" action="<?php echo qw_url()?>">
 <?php if ($form['topButtons']) : ?>
 <div class="ui-operation-field">
-    <?php echo Qwin_Util_JQuery::button('submit', qw_lang('ACT_SUBMIT'), 'ui-icon-check') ?>
-    <?php echo Qwin_Util_JQuery::button('reset', qw_lang('ACT_RESET'), 'ui-icon-arrowreturnthick-1-w') ?>
+    <?php echo Qwin_Util_JQuery::button('submit', qw_t('ACT_SUBMIT'), 'ui-icon-check') ?>
+    <?php echo Qwin_Util_JQuery::button('reset', qw_t('ACT_RESET'), 'ui-icon-arrowreturnthick-1-w') ?>
 </div>
 <?php endif; ?>
 <div class="ui-helper-hidden">

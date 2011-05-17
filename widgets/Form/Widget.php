@@ -102,18 +102,18 @@ class Form_Widget extends Qwin_Widget_Abstract
         } else {
             $percent = array(13.5, 87.5);
         }
-        
+
         $defaultForm = $form->getDefault();
         
         $minify = $this->_widget->get('Minify');
-        $lang = Qwin::call('-lang');
+        $lang = $this->_Lang;
         $refererPage = urlencode(Qwin::call('-request')->server('HTTP_REFERER'));
 
         $options['id'] = sprintf($options['id'], $meta->getModule()->toId());
 
         // 验证代码
         if ($options['validate']) {
-            $this->loadLanguage('Validator');
+            $this->_Lang->appendByWidget('Validator');
             $validateCode = array(); //$this->getValidateCode($meta, $lang);
         }
 
