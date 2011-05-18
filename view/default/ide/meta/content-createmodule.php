@@ -1,7 +1,6 @@
 <?php
-
 /**
- * fields
+ * content-createmodule
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -21,8 +20,14 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-5-17 15:13:00
+ * @since       2011-05-18 15:48:25
  */
-
-return array(
-);
+?>
+<div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
+    <div class="ui-box-header">
+        <?php Qwin::hook('ViewContentHeader', $this) ?>
+    </div>
+    <div class="ui-form-content ui-box-content ui-widget-content">
+        <?php $formWidget->render($formOptions) ?>
+    </div>
+</div>

@@ -76,6 +76,12 @@ class Com_Controller extends Qwin_Application_Controller
      * @var Qwin_Session
      */
     protected $_session;
+    
+    /**
+     * 微件管理对象
+     * @var Qwin_Widget
+     */
+    protected $_widget;
 
     /**
      * 用户数据数组
@@ -185,6 +191,19 @@ class Com_Controller extends Qwin_Application_Controller
             $this->_model = Com_Model::getByModule($this->_model);
         }
         return $this->_model;
+    }
+    
+    /**
+     * 获取微件管理对象
+     * 
+     * @return Qwin_Widget
+     */
+    public function getWidget()
+    {
+        if (!$this->_widget) {
+            $this->_widget = Qwin::call('-widget');
+        }
+        return $this->_widget;
     }
 
     /**

@@ -32,4 +32,8 @@ return array(
     'FLD_DBQUERY' => '允许查询',
     'FLD_URLQUERY' => '允许Url查询',
     'FLD_READONLY' => '只读',
+    
+    'ACT_IDE_META_CREATEMODULE' => '创建模块',
+    
+    'FLD_PATH' => '路径',
 );

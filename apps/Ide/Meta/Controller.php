@@ -31,13 +31,40 @@ class Ide_Meta_Controller extends Com_Controller
         
     }
     
+    /**
+     * 创建模块
+     */
+    public function actionCreateModule()
+    {
+        if (!$this->_request->isPost()) {
+            $meta = $this->getMeta();
+            $meta->offsetLoad('createmodule', 'form');
+            
+            $formWidget = $this->getWidget()->get('Form');
+            $formOptions = array(
+                'form' => $meta['createmodule'],
+            );
+            
+            $this->getView()->assign(get_defined_vars());
+        } else {
+            
+        }
+    }
+    
     public function actionFields()
     {
         $request = $this->_request;
         $meta = $this->getMeta();
+        $lang = Qwin::call('-widget')->get('Lang');
         
+        // 模块
+        $module2 = $request->get('module2');
+        
+        //
         $from = $request->get('from');
         $from = Qwin_Util_Array::forceInArray($from, array('file', 'table'));
+        
+        //
         $source = $request->get('source');
         
         // 读取元数据域配置文件
@@ -50,42 +77,6 @@ class Ide_Meta_Controller extends Com_Controller
             $tableFormat = $manager->getAttribute(Doctrine_Core::ATTR_TBLNAME_FORMAT);
             $tableColumns = $query->getConnection()->import->listTableColumns(sprintf($tableFormat, $source));
             
-//              [id] => Array
-//        (
-//            [name] => id
-//            [type] => string
-//            [alltypes] => Array
-//                (
-//                    [0] => string
-//                )
-//
-//            [ntype] => char(36)
-//            [length] => 36
-//            [fixed] => 1
-//            [unsigned] => 
-//            [values] => Array
-//                (
-//                )
-//
-//            [primary] => 1
-//            [default] => 
-//            [notnull] => 1
-//            [autoincrement] => 
-//        )
-            
-//          'layout' => array(
-//        array(
-//            array('name'),
-//            array('title'),
-//            array('order'),
-//            array('dbField'),
-//            array('dbQuery'),
-//            array('urlQuery'),
-//            array('readonly'),
-//            array('description'),
-//        ),
-//    ),
-
             // 将配置转换为元数据形式
             $formName = $source . 'form';
             $fields = array();
@@ -95,21 +86,27 @@ class Ide_Meta_Controller extends Com_Controller
             );
             foreach ($tableColumns as $name => $column) {
                 $fields[$name] = array();
-                $form['fields'][$name] = array();
+                //$form['fields'][$name] = array();
                 $form['layout'][$name] = array();
                 
-                foreach ($meta['form']['fields'] as $attrName => $attrForm) {
-                    $form['layout'][$name][] = array($attrName);
-                    $form['fields'][$attrName] = array(
-                        'title' => $meta['fields'][$attrName]['title'],
-                    );
+                foreach ($meta['formsample'] as $attrName => $attrForm) {
+                    $newName = $name . '[' . $attrName . ']';
+                    $form['layout'][$name][] = array($newName);
+                    $form['fields'][$newName] = array(
+                        '_label' => 'FLD_' . strtoupper($attrName),
+                        'name' => $newName,
+                        'id' => $name . '_' . $attrName,
+                    ) + $attrForm;
+                    if ('title' == $attrName) {
+                        $form['fields'][$newName]['class'] = 'qw-fields-' . $attrName;
+                    } elseif ('name' == $attrName) {
+                        $form['fields'][$newName]['_value'] = $name . '(' . $lang['LBL_READONLY'] . ')';
+                        $form['fields'][$newName]['readonly'] = true;
+                    }
                 }
             }
-            //qw_p($form);
             $meta->set('fields', $fields);
             $meta->set($formName, $form, 'form');
-            //qw_p($meta[$formName]->getArrayCopy());
-            
         }
         
         $meta = $this->getMeta();
