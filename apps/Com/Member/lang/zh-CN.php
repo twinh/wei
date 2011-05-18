@@ -54,7 +54,7 @@ return array(
     'LBL_GROUP_BASIC_DATA' => '基本资料',
     'LBL_GROUP_DETAIL_DATA' => '详细资料',
 
-    'LBL_MODULE_MEMBER' => '用户',
+    'MOD_COM_MEMBER' => '用户',
     'LBL_MODULE_MEMBER_DETAIL' => '用户详细',
     'LBL_MODULE_MEMBER_SETTING' => '用户配置',
 

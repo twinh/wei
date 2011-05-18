@@ -65,7 +65,7 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
      * @todo 不是每一个微件都需要此流程
      */
     public function __construct(array $options = array())
-    {    
+    {
         // 检查是否通过微件管理对象获得,不是则
         $this->_widget = Qwin::call('Qwin_Widget');
         if (!$this->_widget->isCalled($this)) {
@@ -78,14 +78,6 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
         // 初始化根目录
         if (isset($options['rootPath']) && is_dir($options['rootPath'])) {
             $this->setRootPath($options['rootPath']);
-        }
-        
-        // 加载语言
-        $this->_lang = Qwin::call('-lang');
-        if (isset($options['lang']) && $options['lang']) {
-            if ($this->_lang instanceof Qwin_Application_Language) {
-                $this->_lang->appendByFile($this->_rootPath . 'language/' . $this->_lang->getName() . '.php');
-            }
         }
     }
 
@@ -102,7 +94,7 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
      */
     public function getDefault($name = null)
     {
-        if (null == $name) {
+        if (null === $name) {
             return $this->_defaults;
         }
         if (isset($this->_defaults[$name])) {
@@ -117,6 +109,7 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
      * @param string $name 选项名称
      * @param mixed $value 选项的值
      * @return Qwin_Widget_Abstract 当前对象
+     * @todo 是否应该保持类型一致
      */
     public function setDefault($name, $value = null)
     {
@@ -135,7 +128,7 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
      */
     public function getOption($name = null)
     {
-        if (null == $name) {
+        if (null === $name) {
             return $this->_options;
         }
         if (isset($this->_options[$name])) {
@@ -153,8 +146,11 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
      */
     public function setOption($name, $value = null)
     {
-        isset($this->_options[$name]) && $this->_options[$name] = $value;
-        return $this;
+        if (isset($this->_options[$name])) {
+            $this->_options[$name] = $value;
+            return $this;
+        }
+        throw new Qwin_Widget_Exception('Undefine option "' . $name . '".');
     }
 
     /**

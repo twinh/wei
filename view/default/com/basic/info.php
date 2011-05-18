@@ -67,12 +67,12 @@
                     endif;
                 ?>
                 <p>&nbsp;</p>
-                <p><a class="ui-message-link" href="<?php echo $url ?>"><?php echo qw_lang('MSG_CLICK_TO_REDIRECT') ?></a></p>
+                <p><a class="ui-message-link" href="<?php echo $url ?>"><?php echo qw_t('MSG_CLICK_TO_REDIRECT') ?></a></p>
             </div>
         </div>
         <div class="ui-message-operation">
         <?php
-            echo Qwin_Util_JQuery::link('javascript:history.go(-1);', qw_lang('ACT_RETURN'), 'ui-icon-arrowthickstop-1-w')
+            echo Qwin_Util_JQuery::link('javascript:history.go(-1);', qw_t('ACT_RETURN'), 'ui-icon-arrowthickstop-1-w')
          ?>
         </div>
     </div>

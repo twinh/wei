@@ -1,6 +1,7 @@
 <?php
+
 /**
- * page
+ * Model
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -20,10 +21,9 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-04-27 14:56:12
+ * @since       2011-5-18 9:08:33
  */
-
-return array(
-    'icon' => 'user',
-    'tableLayout' => 2,
-);
+class Ide_Meta_Model extends Com_Model
+{
+    
+}

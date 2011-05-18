@@ -59,6 +59,9 @@ class Qwin_Meta_Form extends Qwin_Meta_Common
     protected $_struct = array(
         'fields' => array(),
         'layout' => array(),
+        'hidden' => array(),
+        'topButtons' => false,
+        'columns' => 1,
     );
 
     /**
