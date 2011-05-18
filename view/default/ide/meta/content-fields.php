@@ -26,13 +26,32 @@
 ?>
 <script type="text/javascript">
     jQuery(function($){
-        $('div.qw-meta-fields-left ul li').not('.ui-state-default').qui();
+        var preLi = null;
+        var field;
+        $('div.qw-meta-fields-left ul li').qui().click(function(){
+            // 隐藏上一个表单组,显示点击的表单组
+            field && $('#ui-fieldset-' + field).hide();
+            field = $(this).attr('id').substr(15);
+            $('#ui-fieldset-' + field).show();
+            
+            // 移除上一个域的激活效果,激活当前域
+            preLi && preLi.removeClass('ui-state-active');
+            $(this).addClass('ui-state-active');
+            preLi = $(this);
+        // 激活第一项
+        }).first().click();
     });
 </script>
 <style type="text/css">
     .qw-meta-fields {
-        width: 180px;
+        width: 200px;
         vertical-align: top;
+    }
+    .qw-meta-fields-left {
+        width: 200px;
+        height: 400px;
+        overflow: hidden;
+        overflow-y: scroll;
     }
     .qw-meta-fields-detail {
         vertical-align: top;
@@ -47,9 +66,11 @@
         padding-left: 10px;
         margin: 1px;
     }
-    
-    .qw-meta-fields-left ul li.ui-state-hover {
+    .qw-meta-fields-left ul li.ui-state-hover, .qw-meta-fields-left ul li.ui-state-active {
         border: none;
+    }
+    .qw-meta-fields-right form fieldset {
+        display: none;
     }
 </style>
 <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
@@ -60,7 +81,7 @@
     <table class="qw-meta-fields-table" width="100%">
         <tr>
             <td colspan="2">
-                <div class="ui-operation-field">
+                <div class="ui-operation-field qw-meta-oper-field">
                     <a class="ui-state-default" href="#">xxx模块, xx wenjian ...</a>
                 </div>
             </td>
@@ -69,13 +90,13 @@
             <td class="qw-meta-fields">
                 <div class="qw-meta-fields-left ui-widget-content ui-corner-all">
                     <ul>
-                        <li><a href="#">编号(id)</a></li>
-                        <li><a href="#">分组(group_id)</a></li>
-                        <li><a href="#">用户名(username)</a></li>
-                        <li><a href="#">密码(password)</a></li>
-                        <li><a href="#">邮箱(email)</a></li>
-                        <li><a href="#">名(first_name)</a></li>
-                        <li><a href="#">姓(last_name)</a></li>
+                    <?php
+                    foreach ($meta['fields'] as $field) :
+                    ?>
+                        <li id="qw-fieldset-li-<?php echo $field['name'] ?>"><a href="#"><?php echo $field['title'] ?>(<?php echo $field['name'] ?>)</a></li>
+                    <?php
+                    endforeach;
+                    ?>
                     </ul>
                 </div>
             </td>
@@ -84,7 +105,7 @@
                 <?php
                 $formWidget = Qwin::call('-widget')->get('Form');
                 $formOptions = array(
-                    'form'  => Com_Meta::getByModule('ide/meta')->getForm(),
+                    'form'  => $meta[$formName],
                     'action' => 'edit',
                     'data'  => $data,
                 );

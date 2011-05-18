@@ -34,6 +34,7 @@ class Ide_Meta_Controller extends Com_Controller
     public function actionFields()
     {
         $request = $this->_request;
+        $meta = $this->getMeta();
         
         $from = $request->get('from');
         $from = Qwin_Util_Array::forceInArray($from, array('file', 'table'));
@@ -43,6 +44,71 @@ class Ide_Meta_Controller extends Com_Controller
         if ('file' == $from) {
             
         } else {
+            // 获取数据库字段配置
+            $query = Com_Meta::getQueryByModule($this->_module);
+            $manager = Doctrine_Manager::getInstance();
+            $tableFormat = $manager->getAttribute(Doctrine_Core::ATTR_TBLNAME_FORMAT);
+            $tableColumns = $query->getConnection()->import->listTableColumns(sprintf($tableFormat, $source));
+            
+//              [id] => Array
+//        (
+//            [name] => id
+//            [type] => string
+//            [alltypes] => Array
+//                (
+//                    [0] => string
+//                )
+//
+//            [ntype] => char(36)
+//            [length] => 36
+//            [fixed] => 1
+//            [unsigned] => 
+//            [values] => Array
+//                (
+//                )
+//
+//            [primary] => 1
+//            [default] => 
+//            [notnull] => 1
+//            [autoincrement] => 
+//        )
+            
+//          'layout' => array(
+//        array(
+//            array('name'),
+//            array('title'),
+//            array('order'),
+//            array('dbField'),
+//            array('dbQuery'),
+//            array('urlQuery'),
+//            array('readonly'),
+//            array('description'),
+//        ),
+//    ),
+
+            // 将配置转换为元数据形式
+            $formName = $source . 'form';
+            $fields = array();
+            $form = array(
+                'fields' => array(),
+                'layout' => array(),
+            );
+            foreach ($tableColumns as $name => $column) {
+                $fields[$name] = array();
+                $form['fields'][$name] = array();
+                $form['layout'][$name] = array();
+                
+                foreach ($meta['form']['fields'] as $attrName => $attrForm) {
+                    $form['layout'][$name][] = array($attrName);
+                    $form['fields'][$attrName] = array(
+                        'title' => $meta['fields'][$attrName]['title'],
+                    );
+                }
+            }
+            //qw_p($form);
+            $meta->set('fields', $fields);
+            $meta->set($formName, $form, 'form');
+            //qw_p($meta[$formName]->getArrayCopy());
             
         }
         

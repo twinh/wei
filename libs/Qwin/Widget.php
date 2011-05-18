@@ -79,7 +79,7 @@ class Qwin_Widget
      * 获取一个微件的实例化对象
      *
      * @param string $name 微件类名称,不带Widget_前缀
-     * @return Qwin_Widget_Abstarct
+     * @return Qwin_Widget_Abstarct 微件对象
      */
     public function get($name)
     {
@@ -104,6 +104,12 @@ class Qwin_Widget
         $this->_loaded[$class] = $widget;
 
         return $widget;
+    }
+    
+    public function register(Qwin_Widget_Abstract $object)
+    {
+        $this->_loaded[get_class($object)] = $object;
+        return $this;
     }
 
     /**

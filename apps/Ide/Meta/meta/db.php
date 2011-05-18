@@ -1,6 +1,7 @@
 <?php
+
 /**
- * page
+ * db
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -20,10 +21,9 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-04-27 14:56:12
+ * @since       2011-5-18 9:11:19
  */
 
 return array(
-    'icon' => 'user',
-    'tableLayout' => 2,
+    
 );
