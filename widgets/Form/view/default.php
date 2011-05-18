@@ -89,12 +89,7 @@ validateCode['<?php echo $options['id'] ?>'] = <?php echo $validateCode ?>;
                     } else {
                         $fieldForm = $defaultForm;
                     }
-                    if (isset($meta['fields'][$field])) {
-                        $label = $lang[$meta['fields'][$field]['title']];
-                    } else {
-                        $label = $lang[$fieldForm['name']];
-                    }
-                    echo '<td class="ui-label-common"><label for="' . $fieldForm['id'] . '">' . $label . ':</label></td>'
+                    echo '<td class="ui-label-common"><label for="' . $fieldForm['id'] . '">' . $lang[$fieldForm['_label']] . ':</label></td>'
                        . '<td class="ui-field-common ui-field-' . $fieldForm['_type'] . '" colspan="' . ($i * 2 + 1) . '">' . $this->renderElement($fieldForm) , $this->renderElementWidget($fieldForm) . '</td>';
                 }
             } else {

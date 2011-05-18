@@ -30,6 +30,7 @@ class Qwin_Meta_Form extends Qwin_Meta_Common
      * @var array
      */
     protected $_defaults = array(
+        '_label' => null,
         '_type' => 'text',
         '_resource' => null,
         '_value' => '',
@@ -86,6 +87,7 @@ class Qwin_Meta_Form extends Qwin_Meta_Common
         foreach ($data['fields'] as $name => &$field) {
             !isset($field['name']) && $field['name'] = $name;
             !isset($field['id']) && $field['id'] = $name;
+            !isset($field['_label']) && $field['_label'] = 'FLD_' . strtoupper($name);
             $field = (array)$field + $this->_defaults;
         }
         $this->exchangeArray($data);

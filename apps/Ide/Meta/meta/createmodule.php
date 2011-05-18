@@ -1,7 +1,6 @@
 <?php
-
 /**
- * fields
+ * createmodule
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -21,8 +20,23 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-5-17 15:13:00
+ * @since       2011-05-18 15:36:13
  */
 
 return array(
+    'fields' => array(
+        'name' => array(
+            
+        ),
+        'path' => array(
+            
+        ),
+    ),
+    'topButtons' => true,
+    'layout' => array(
+        array(
+            array('name'),
+            array('path'),
+        ),
+    ),
 );
