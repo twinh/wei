@@ -41,7 +41,6 @@ class Qwin_Meta
      * @var array
      */
     protected $_drivers = array(
-        'fields'    => 'Qwin_Meta_Fields',
         'list'      => 'Qwin_Meta_List',
         'form'      => 'Qwin_Meta_Form',
         'meta'      => 'Qwin_Meta_Meta',

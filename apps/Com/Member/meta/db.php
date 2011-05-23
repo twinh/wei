@@ -24,9 +24,109 @@
  */
 
 return array(
-    'field' => array(
-        // ... 
+    'fields' => array(
+        'group_id' => array(
+            'validator' => array(
+                'rule' => array(
+                    'notNull' => true,
+                ),
+            ),
+        ),
+        'username' => array(
+            'attr' => array(
+                'isReadonly' => 1,
+            ),
+            'validator' => array(
+                'rule' => array(
+                    'required' => true,
+                    'maxlength' => 40,
+                ),
+            ),
+        ),
+        'password' => array(
+            'attr' => array(
+                'isReadonly' => 1,
+                'isView' => 0,
+            ),
+            'sanitiser' => array(
+                'db' => array(
+                    'md5'
+                )
+            ),
+            'validator' => array(
+                'rule' => array(
+                    'required' => true,
+                    'rangelength' => array(5, 40),
+                ),
+            ),
+        ),
+        'password2' => array(
+            'dbField' => 0,
+            'dbQuery' => 0,
+            'validator' => array(
+                'rule' => array(
+                    'required' => true,
+                    'equalTo' => '#password',
+                ),
+            ),
+        ),
+        'email' => array(
+            'validator' => array(
+                'rule' => array(
+                    'required' => true,
+                    'email' => true,
+                    'maxlength' => 256,
+                ),
+            ),
+        ),
+        'first_name' => array(
+        ),
+        'last_name' => array(
+        ),
+        'photo' => array(
+        ),
+        'sex' => array(
+
+        ),
+        'birthday' => array(
+        ),
+        'reg_ip' => array(
+            'basic' => array(
+                'group' => 1,
+            ),
+        ),
+        'theme' => array(
+            'basic' => array(
+                'group' => 1,
+            ),
+        ),
+        'language' => array(
+            'basic' => array(
+                'group' => 1,
+            ),
+        ),
+        'telephone' => array(
+            'basic' => array(
+                'group' => 1,
+            ),
+        ),
+        'mobile' => array(
+            'basic' => array(
+                'group' => 1,
+            ),
+        ),
+        'homepage' => array(
+            'basic' => array(
+                'group' => 1,
+            ),
+        ),
+        'address' => array(
+            'basic' => array(
+                'group' => 1,
+            ),
+        ),
     ),
+    'id' => 'id',
     'table' => 'member',
     'nameField' => array(
         'username',
