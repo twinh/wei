@@ -22,7 +22,7 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-7-26 13:14:28
+ * @since       2010-07-26 13:14:28
  *
  */
 
@@ -46,6 +46,7 @@ class Qwin_Meta
         'meta'      => 'Qwin_Meta_Meta',
         'db'        => 'Qwin_Meta_Db',
         'page'      => 'Qwin_Meta_Page',
+        'module'    => 'Qwin_Meta_Module',
     );
    
     /**
@@ -58,7 +59,7 @@ class Qwin_Meta
     /**
      * 不允许在外部初始化
      */
-    final private function  __construct()
+    final private function __construct()
     {
     }
 

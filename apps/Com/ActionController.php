@@ -33,11 +33,12 @@ class Com_ActionController extends Com_Controller
      * @return array 执行结果
      */
     public function actionIndex()
-    {
+    {        
         $request = $this->getRequest();
         if ($request->isJson()) {
             return Qwin::call('-widget')->get('JsonListAction')->render(array(
-                'list'   => $this->getMeta()->getList(),
+                'meta'   => $meta,
+                'list'   => $this->getMeta()->offsetGet('db'),
                 'layout' => $request->get('layout'),
                 'search' => $request->get('search'),
                 'page'   => $request->get('page'),
@@ -49,7 +50,7 @@ class Com_ActionController extends Com_Controller
             ));
         } else {
             return Qwin::call('-widget')->get('ListAction')->render(array(
-                'list'   => $this->getMeta()->getList(),
+                'meta'   => $this->getMeta(),
                 'layout' => $request->get('layout'),
                 'row'    => $request->get('row'),
                 'popup'  => $request->get('popup'),

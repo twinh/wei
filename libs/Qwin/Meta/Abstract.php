@@ -203,14 +203,26 @@ abstract class Qwin_Meta_Abstract extends ArrayObject
         return $this;
     }
     
-        /**
+    /**
+     * 
+     * 
+     * @param string $index 索引
+     * @return mixed 
+     * @see Qwin_Meta_Abstract offsetGet
+     */
+    public function get($index)
+    {
+        return $this->offsetGet($index);
+    }
+    
+    /**
      * 魔术方法,允许通过getXXX取值和setXXX设置值
      * 建议直接使用$this[$name],甚至是$this->offsetGet($name)和
      * $this->offsetSet($name)获得更好的效率
      * 
-     * @param type $name
-     * @param type $arguments
-     * @return type 
+     * @param string $name 方法名称
+     * @param array $arguments 参数数组
+     * @return mixed
      */
     public function __call($name, $arguments)
     {
