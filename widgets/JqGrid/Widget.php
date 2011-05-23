@@ -223,9 +223,9 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
 
         // 通过Minify加载CSS和JS
         $this->_Minify
-            ->add($this->_rootPath . '/source/jquery.jqgrid.css')
-            ->add($this->_rootPath . '/source/i18n/grid.locale-en.js')
-            ->add($this->_rootPath . '/source/jquery.jqgrid.js');
+            ->add($this->_rootPath . 'source/jquery.jqgrid.css')
+            ->add($this->_rootPath . 'source/i18n/grid.locale-en.js')
+            ->add($this->_rootPath . 'source/jquery.jqgrid.js');
 
         // 翻译语言
         // TODO 翻译全部

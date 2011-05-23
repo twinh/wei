@@ -27,7 +27,14 @@
 
 class Qwin_Meta_Page extends Qwin_Meta_Common
 {
+    /**
+     * 默认选项
+     * 
+     * @var array
+     */
     protected $_defaults = array(
+//        'module'        => null,
+//        'action'        => null,
         'title'         => null,
         'icon'          => 'document',
         'description'   => null,
@@ -59,7 +66,7 @@ class Qwin_Meta_Page extends Qwin_Meta_Common
         $data = (array)$data;
         
         if (!isset($data['title'])) {
-            $data['title'] = 'MOD_' . $this->getParent()->getModule()->toLang();
+            $data['title'] = 'MOD_' . $this->getParent()->getModule()->getLang();
         }
 
         $data = $data + $this->_defaults;

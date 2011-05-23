@@ -66,19 +66,23 @@ class Com_Meta extends Qwin_Meta_Abstract
      * 数据排序类型
      * @var array
      */
-    protected static $_orderTypes = array('DESC', 'ASC');
+    protected static $_orderTypes = array(
+        'DESC', 'ASC'
+    );
+    
+    /**
+     * @var Qwin_Url
+     */
+    protected $url;
 
     /**
      * 初始化常用变量
      */
-    public function __construct($module = null)
+    public function __construct($input = array())
     {
-        parent::__construct();
-        if (isset($module)) {
-            $this->setModule($module);
-        } else {
-            $this->getModule();
-        }
+        parent::__construct($input);
+        $class = get_class($this);
+        $this->set('module', substr($class, 0, strrpos($class, '_')));
         $this->url = Qwin::call('-url');
     }
 
@@ -96,32 +100,7 @@ class Com_Meta extends Qwin_Meta_Abstract
         }
         return $this;
     }
-
-    /**
-     * 获取模块标识
-     *
-     * @return Qwin_Module
-     */
-    public function getModule()
-    {
-        if (!$this->_module) {
-            $parts = explode('_', get_class($this));
-            array_pop($parts);
-            $this->_module = new Qwin_Module(implode('/', $parts));
-        }
-        return $this->_module;
-    }
-
-    public function getModulePath()
-    {
-        if (!$this->_modulePath) {
-            $appModule = Qwin::call('Qwin_Application_Module');
-            $module = $this->getModule();
-            $this->_modulePath = $appModule->getPath($module) . $module->toPath();
-        }
-        return $this->_modulePath;
-    }
-
+    
     /**
      * 获取指定键名的元数据值，元数据不存在时将抛出异常
      *
@@ -146,7 +125,11 @@ class Com_Meta extends Qwin_Meta_Abstract
      */
     protected function _offsetGetByFile($index, $driver = null)
     {
-        $file = $this->getModulePath() . 'meta/' .  $index . '.php';
+        if (!$this->_modulePath) {
+            $reflection = new ReflectionClass($this);
+            $this->_modulePath = dirname($reflection->getFileName()) . '/';
+        }
+        $file = $this->_modulePath . 'meta/' .  $index . '.php';
         if (is_file($file)) {
             $this->set($index, require $file, $driver);
             return $this[$index];

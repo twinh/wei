@@ -30,7 +30,9 @@ class ListAction_Widget extends Qwin_Widget_Abstract
     /**
      * @var array           默认选项
      * 
-     *      -- list         列表元数据
+     *      -- meta         元数据对象
+     * 
+     *      -- list         列表元数据的名称
      * 
      *      -- get          用户请求的参数,默认为$_GET数组
      * 
@@ -43,7 +45,8 @@ class ListAction_Widget extends Qwin_Widget_Abstract
      *      -- display      是否显示视图
      */
     protected $_defaults = array(
-        'list'      => null,
+        'meta'      => null,
+        'list'      => 'list',
         'get'       => null,
         'layout'    => array(),
         'row'       => 10,
@@ -60,17 +63,20 @@ class ListAction_Widget extends Qwin_Widget_Abstract
     public function render($options = null)
     {
         // 初始配置
-        $options    = (array)$options + $this->_options;
+        $options = (array)$options + $this->_options;
         
-        /* @var $listMeta Qwin_Meta_List */
-        $list = $options['list'];
+        // 检查元数据是否合法
+        /* @var $meta Com_Meta */
+        $meta = $options['meta'];
+        if (!Qwin_Meta::isValid($meta)) {
+            throw new Qwin_Widget_Exception('ERR_META_ILLEGAL');
+        }
 
         // 检查列表元数据是否合法
-        if (!is_object($list) || !$list instanceof Qwin_Meta_List) {
-            $this->e('ERR_META_ILLEGAL');
+        if (!($list = $meta->offsetLoad($options['list'], 'list'))) {
+            throw new Qwin_Widget_Exception('ERR_LIST_META_NOT_FOUND');
         }
-        $meta = $list->getParent();
- 
+        
         // 显示哪些域
         $layout = $options['layout'];
         
@@ -100,7 +106,7 @@ class ListAction_Widget extends Qwin_Widget_Abstract
         $jqGridOptions = array(
             'list' => $list,
             'url' => $url->build(array('json' => true) + $get),
-            'rowNum' => $options['row'] > 0 ? $options['row'] : $list['db']['limit'],
+            'rowNum' => $options['row'] > 0 ? $options['row'] : 0,//$list['db']['limit'],
             'layout' => $layout,
         );
 
