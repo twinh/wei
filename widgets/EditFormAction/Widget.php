@@ -70,13 +70,13 @@ class EditFormAction_Widget extends Qwin_Widget_Abstract
         if (!($form = $meta->offsetLoad($options['form'], 'form'))) {
             throw new Qwin_Widget_Exception('ERR_FROM_META_NOT_FOUND');
         }
-        
+
         // 检查数据库元数据是否合法
-        /* @var $form Qwin_Meta_Db */
+        /* @var $db Qwin_Meta_Db */
         if (!($db = $meta->offsetLoad($options['db'], 'db'))) {
             throw new Qwin_Widget_Exception('ERR_DB_META_NOT_FOUND');
         }
-        
+
         // 从模型获取数据
         $id = $db['id'];
         $query = $db->getQueryByType(null, array('db', 'view'))
