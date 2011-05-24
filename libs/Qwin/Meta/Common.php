@@ -243,9 +243,9 @@ class Qwin_Meta_Common extends ArrayObject implements Qwin_Meta_Interface
      * 建议直接使用$this[$name],甚至是$this->offsetGet($name)和
      * $this->offsetSet($name)获得更好的效率
      * 
-     * @param type $name
-     * @param type $arguments
-     * @return type 
+     * @param string $name 方法名称
+     * @param array $arguments 参数数组
+     * @return mixed 结果
      */
     public function __call($name, $arguments)
     {
@@ -257,7 +257,6 @@ class Qwin_Meta_Common extends ArrayObject implements Qwin_Meta_Interface
             if ($this->offsetExists($element)) {
                 return $this->offsetGet($element);
             }
-            throw new Qwin_Meta_Common_Exception('Undefiend index "'. $element . '".');
         } elseif ('set' == $action) {
             if (0 === count($arguments)) {
                 throw new Qwin_Meta_Common_Exception('You must specify the value to ' . $name);
@@ -270,11 +269,10 @@ class Qwin_Meta_Common extends ArrayObject implements Qwin_Meta_Interface
     /**
      * 处理数据
      * 
-     * @param type $data 处理的数据
-     * @param type $action 处理的行为,如db,list,view
+     * @param array $data 处理的数据
      * @param array $options 选项
      * @param array $dataCopy 完整数据备份
-     * @return array 处理过的数据
+     * @return array 处理后的数据
      */
     public function sanitise(array $data, array $options = array(), array $dataCopy = array())
     {
@@ -298,7 +296,7 @@ class Qwin_Meta_Common extends ArrayObject implements Qwin_Meta_Interface
 
         // 转换关联模块的显示域
         if ($options['view']) {
-            foreach ($meta->offsetLoadAsArray('meta') as $relatedMeta) {
+            foreach ((array)$meta->offsetLoad('meta') as $relatedMeta) {
                 if ('view' != $relatedMeta['type']) {
                     continue;
                 }

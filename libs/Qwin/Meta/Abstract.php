@@ -177,6 +177,7 @@ abstract class Qwin_Meta_Abstract extends ArrayObject
      * 获取元数据唯一编号
      *
      * @return string 编号
+     * @todo ..
      */
     public function getId()
     {
@@ -238,7 +239,7 @@ abstract class Qwin_Meta_Abstract extends ArrayObject
             }
             return $this->offsetSet($element, $arguments[0]);
         }
-        //throw new ...
+        throw new Qwin_Meta_Exception('Call to undefined method ' . get_class($this) . '::' . $name . '()');
     }
 
     /**

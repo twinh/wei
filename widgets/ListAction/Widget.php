@@ -34,6 +34,8 @@ class ListAction_Widget extends Qwin_Widget_Abstract
      * 
      *      -- list         列表元数据的名称
      * 
+     *      -- db           数据库元数据的名称
+     * 
      *      -- get          用户请求的参数,默认为$_GET数组
      * 
      *      -- layout       布局
@@ -47,6 +49,7 @@ class ListAction_Widget extends Qwin_Widget_Abstract
     protected $_defaults = array(
         'meta'      => null,
         'list'      => 'list',
+        'db'        => 'db',
         'get'       => null,
         'layout'    => array(),
         'row'       => 10,
@@ -104,9 +107,9 @@ class ListAction_Widget extends Qwin_Widget_Abstract
         // jqGrid选项
         $options['row'] = intval($options['row']);
         $jqGridOptions = array(
-            'list' => $list,
+            'meta' => $meta,
             'url' => $url->build(array('json' => true) + $get),
-            'rowNum' => $options['row'] > 0 ? $options['row'] : 0,//$list['db']['limit'],
+            'rowNum' => $options['row'] > 0 ? $options['row'] : $list['db']['limit'],
             'layout' => $layout,
         );
 

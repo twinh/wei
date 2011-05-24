@@ -45,6 +45,7 @@ class Qwin_Meta_List extends Qwin_Meta_Common
         'fields' => array(),
         'layout' => array(),
         'db' => array(
+            'order' => array(),
             'limit' => 10,
         ),
     );

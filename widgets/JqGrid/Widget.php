@@ -26,63 +26,61 @@
 class JqGrid_Widget extends Qwin_Widget_Abstract
 {
     /**
-     * @var array $_options          界面的配置选项
+     * @var array $_options         jqGrid的部分配置选项和微件配置
      * 
-     *      -- list                  列表元数据
+     *      -- url                  获取json数据的链接
      *
-     *      -- options               jqGrid的部分配置选项
+     *      -- datatype             数据类型
      *
-     *          -- url                  获取json数据的链接
+     *      -- colNames             列的名称
      *
-     *          -- datatype             数据类型
+     *      -- colModel             列的模型
      *
-     *          -- colNames             列的名称
+     *      -- sortname             排序的域名称
      *
-     *          -- colModel             列的模型
+     *      -- sortorder            排序的域类型
      *
-     *          -- sortname             排序的域名称
+     *      -- rowNum               每列显示数目
      *
-     *          -- sortorder            排序的域类型
+     *      -- rowList              每页显示数目的选项
      *
-     *          -- rowNum               每列显示数目
+     *      -- caption              标题
      *
-     *          -- rowList              每页显示数目的选项
+     *      -- rownumbers           是否显示记录为第几行
      *
-     *          -- caption              标题
+     *      -- multiselect          是否允许多选
      *
-     *          -- rownumbers           是否显示记录为第几行
+     *      -- height               高度,默认为100%
      *
-     *          -- multiselect          是否允许多选
+     *      -- width                宽度,默认为自动(auto)
      *
-     *          -- height               高度,默认为100%
+     *      -- autowidth            是否自动调整高度
      *
-     *          -- width                宽度,默认为自动(auto)
+     *      -- pager                分页对象的字符串
      *
-     *          -- autowidth            是否自动调整高度
+     *      -- viewrecords          是否在分页栏右下角显示记录数,默认为显示
      *
-     *          -- pager                分页对象的字符串
+     *      -- forceFit             列宽度改变改变时,不改变表格宽度,从而不出现滚动条
      *
-     *          -- viewrecords          是否在分页栏右下角显示记录数,默认为显示
+     *      -- emptyrecords         当记录为空时,右下角显示的提示语
      *
-     *          -- forceFit             列宽度改变改变时,不改变表格宽度,从而不出现滚动条
+     *      -- prmNames             各参数的对应关系
      *
-     *          -- emptyrecords         当记录为空时,右下角显示的提示语
+     *          -- page                 分页的查询名称
      *
-     *          -- prmNames             各参数的对应关系
+     *          -- rows                 每页显示数目的查询名称
      *
-     *              -- page                 分页的查询名称
+     *          -- sort                 排序域查询的名称
      *
-     *              -- rows                 每页显示数目的查询名称
+     *          -- order                排序类型的查询名称
      *
-     *              -- sort                 排序域查询的名称
-     *
-     *              -- order                排序类型的查询名称
-     *
-     *              -- search               搜索的查询名称
+     *          -- search               搜索的查询名称
      */
     protected $_defaults = array(
         'id'            => null,
-        'list'          => null,
+        'meta'          => null,
+        'list'          => 'list',
+        'db'            => 'db',
         'layout'        => array(),
         'url'           => null,
         'datatype'      => 'json',
@@ -125,15 +123,15 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
      *
      *      -- primaryKey           主键,主键隐藏 TODO!!!
      *
-     *      -- options               jqGrid返回的Json数据的数组
+     *      -- options              jqGrid返回的Json数据的数组
      *
-     *          -- page                 当前页面数
+     *      -- page                 当前页面数
      *
-     *          -- total                总页面数
+     *      -- total                总页面数
      *
-     *          -- records              总记录数
+     *      -- records              总记录数
      *
-     *          -- rows                 记录信息
+     *      -- rows                 记录信息
      */
     protected $_jsonOptions = array(
         'list'          => null,
@@ -160,15 +158,20 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
         // 合并选项
         $options = (array)$options + $this->_options;
         
-        /* @var $listMeta Qwin_Meta_List */
-        $list = $options['list'];
-        unset($options['list']);
-
-        // 检查列表元数据是否合法
-        if (!is_object($list) || !$list instanceof Qwin_Meta_List) {
-            $this->e('列表元数据不是合法的元数据对象');
+        // 检查元数据是否合法
+        /* @var $meta Com_Meta */
+        $meta = $options['meta'];
+        if (!Qwin_Meta::isValid($meta)) {
+            throw new Qwin_Widget_Exception('ERR_META_ILLEGAL');
         }
-        $meta = $list->getParent();
+        
+        // 检查列表元数据是否合法
+        if (!($list = $meta->offsetLoad($options['list'], 'list'))) {
+            throw new Qwin_Widget_Exception('ERR_LIST_META_NOT_FOUND');
+        }
+
+        // 加载数据库元数据
+        $db = $meta->offsetLoad($options['db'], 'db');
         
         // 设置编号
         if (!isset($options['id'])) {
@@ -191,11 +194,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
         if (empty($options['colNames'])) {
             $layout = $this->getLayout($list, $options['layout']);
             foreach ($layout as $field) {
-                if (isset($meta['fields'][$field])) {
-                    $options['colNames'][] = $this->_Lang[$meta['fields'][$field]['title']];
-                } else {
-                    $options['colNames'][] = $this->_Lang[null];
-                }
+                $options['colNames'][] = $this->_Lang->f($field);
                 $options['colModel'][] = array(
                     'name' => $field,
                     'index' => $field,

@@ -33,7 +33,7 @@ class Com_Member_Meta extends Com_Meta
         $url = Qwin::call('-url');
         $lang = Qwin::call('-widget')->get('Lang');
         $module = $this->getModule();
-        $html = Qwin_Util_JQuery::icon($url->url($module->toUrl(), 'editpassword', array($primaryKey => $copyData[$primaryKey])), $lang->t('ACT_EDIT_PASSWORD'), 'ui-icon-key')
+        $html = Qwin_Util_JQuery::icon($url->url($module->getUrl(), 'editpassword', array($primaryKey => $copyData[$primaryKey])), $lang->t('ACT_EDIT_PASSWORD'), 'ui-icon-key')
               . parent::sanitiseListOperation($value, $name, $data, $copyData);
         return $html;
     }
