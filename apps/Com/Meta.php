@@ -183,7 +183,7 @@ class Com_Meta extends Qwin_Meta_Abstract
         $module = $this->getModule();
         if (!isset($this->controller)) {
             // TODO　不重复加载
-            $this->controller = Com_Controller::getByModule($module->getString());
+            $this->controller = Com_Controller::getByModule($module->getUrl());
             $this->unableAction = $this->controller->getForbiddenActions();
         }
         // 不为禁用的行为设置链接
