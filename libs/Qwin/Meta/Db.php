@@ -123,6 +123,20 @@ class Qwin_Meta_Db extends Qwin_Meta_Common
     }
     
     /**
+     *
+     * @param Doctrine_Record $record 原始Doctrine记录对象
+     * @param array|string $type 类型数字或字符串,如view,db
+     * @return Doctrine_Query 查询对象
+     */
+    public function getQueryByType(Doctrine_Record $record = null, $type = array())
+    {
+        !is_array($type) && $type = (array)$type;
+        return $this->getQuery($record, array(
+            'type' => $type,
+        ));
+    }
+    
+    /**
      * 获取元数据对应的查询对象
      *
      * @param Doctrine_Record $record 原始Doctrine记录对象

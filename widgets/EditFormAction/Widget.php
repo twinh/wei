@@ -40,7 +40,9 @@ class EditFormAction_Widget extends Qwin_Widget_Abstract
      *      -- display      是否显示视图
      */
     protected $_defaults = array(
-        'form'      => null,
+        'meta'      => null,
+        'form'      => 'form',
+        'db'        => 'db',
         'id'        => null,
         'data'      => array(),
         'asAction'  => 'view',
@@ -54,30 +56,38 @@ class EditFormAction_Widget extends Qwin_Widget_Abstract
     public function render($options = null)
     {
         // 初始配置
-        $options    = (array)$options + $this->_options;
+        $options = (array)$options + $this->_options;
         
-        /* @var $listMeta Qwin_Meta_Form */
-        $form = $options['form'];
-        
-        // 检查表单元数据是否合法
-        if (!is_object($form) || !$form instanceof Qwin_Meta_Form) {
-            $this->e('ERR_META_ILLEGAL');
+        // 检查元数据是否合法
+        /* @var $meta Com_Meta */
+        $meta = $options['meta'];
+        if (!Qwin_Meta::isValid($meta)) {
+            throw new Qwin_Widget_Exception('ERR_META_ILLEGAL');
         }
-        $meta = $form->getParent();
-        $id = $meta['db']['id'];
+
+        // 检查列表元数据是否合法
+        /* @var $form Qwin_Meta_Form */
+        if (!($form = $meta->offsetLoad($options['form'], 'form'))) {
+            throw new Qwin_Widget_Exception('ERR_FROM_META_NOT_FOUND');
+        }
+        
+        // 检查数据库元数据是否合法
+        /* @var $form Qwin_Meta_Db */
+        if (!($db = $meta->offsetLoad($options['db'], 'db'))) {
+            throw new Qwin_Widget_Exception('ERR_DB_META_NOT_FOUND');
+        }
         
         // 从模型获取数据
-        $query = $meta->getQuery(null, array('type' => array('db', 'view')));
-        $dbData = $query
-            ->where($id . ' = ?', $options['id'])
-            ->fetchOne();
-        
+        $id = $db['id'];
+        $query = $db->getQueryByType(null, array('db', 'view'))
+            ->where($id . ' = ?', $options['id']);
+        $dbData = $query->fetchOne();
+
         // 记录不存在,加载错误视图
         if (false == $dbData) {
-            $lang = Qwin::call('-lang');
             $result = array(
                 'result' => false,
-                'message' => $lang['MSG_NO_RECORD'],
+                'message' => $this->_Lang['MSG_NO_RECORD'],
             );
             if ($options['display']) {
                 return Qwin::call('-view')->alert($result['message']);
