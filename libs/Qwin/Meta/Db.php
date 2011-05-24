@@ -140,7 +140,7 @@ class Qwin_Meta_Db extends Qwin_Meta_Common
         if (is_null($record)) {
             // 尝试通过父元数据的模型配置加载记录对象
             // TODO 一个模块,多个记录对象如何处理
-            $recordClass = Com_Model::getByModule($meta['module']->getString(), false);
+            $recordClass = Com_Model::getByModule($meta['module']->getUrl(), false);
             $record = Qwin::call($recordClass);
         } else {
             $recordClass = get_class($record);
