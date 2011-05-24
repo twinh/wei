@@ -36,6 +36,28 @@ class Qwin_Meta_Query extends Doctrine_Query
     );
     
     /**
+     * 数据查询类型
+     * @var array
+     * @todo 是否使用%s替换 
+     */
+    protected static $_searchTypes = array(
+            'eq' => '=',
+            'ne' => '<>',
+            'lt' => '<',
+            'le' => '<=',
+            'gt' => '>',
+            'ge' => '>=',
+            'bw' => 'LIKE',
+            'bn' => 'NOT LINK',
+            'in' => 'IN',
+            'ni' => 'NOT IN',
+            'ew' => 'LIKE',
+            'en' => 'NOT LIKE',
+            'cn' => 'LIKE',
+            'nc' => 'NOT LIKE',
+        );
+    
+    /**
      * 设置模型间的关联关系
      *
      * @param Doctrine_Record $record 记录对象
@@ -111,43 +133,25 @@ class Qwin_Meta_Query extends Doctrine_Query
      * @todo 完善查询类型
      * @todo 复杂查询
      */
-    public function addRawWhere($addition = null)
+    public function addRawWhere(Qwin_Meta_Db $db, $search = null)
     {
-        if (is_string($addition)) {
-            $addition = Qwin_Util_String::splitQuery($addition);
+        if (is_string($search)) {
+            $search = Qwin_Util_String::splitQuery($search);
         }
-        $search = null != $addition ? $addition : $this['db']['where'];
+        $search = is_null($search) ? $db['where'] : $search;
 
-        $alias = $query->getRootAlias();
+        $alias = $this->getRootAlias();
         '' != $alias && $alias .= '.';
 
-        // TODO　是否使用%s替换
-        $searchType = array(
-            'eq' => '=',
-            'ne' => '<>',
-            'lt' => '<',
-            'le' => '<=',
-            'gt' => '>',
-            'ge' => '>=',
-            'bw' => 'LIKE',
-            'bn' => 'NOT LINK',
-            'in' => 'IN',
-            'ni' => 'NOT IN',
-            'ew' => 'LIKE',
-            'en' => 'NOT LIKE',
-            'cn' => 'LIKE',
-            'nc' => 'NOT LIKE',
-        );
-
         foreach ($search as $fieldSet) {
-            if (!isset($this['fields'][$fieldSet[0]]) || !$this['fields'][$fieldSet[0]]['dbField']) {
+            if (!isset($db['fields'][$fieldSet[0]]) || !$db['fields'][$fieldSet[0]]['dbField']) {
                 continue;
             }
             if (!isset($fieldSet[2])) {
-                $fieldSet[2] = key($searchType);
+                $fieldSet[2] = 'eq';
             } else {
                 $fieldSet[2] = strtolower($fieldSet[2]);
-                !isset($searchType[$fieldSet[2]]) && $fieldSet[2] = key($searchType);
+                !isset(self::$_searchTypes[$fieldSet[2]]) && $fieldSet[2] = 'eq';
             }
             switch ($fieldSet[2]) {
                 case 'bw':
@@ -186,14 +190,14 @@ class Qwin_Meta_Query extends Doctrine_Query
             // null and not null
             if(null === $value || 'NULL' === $value) {
                 if ('eq' == $fieldSet[2]) {
-                    $query->andWhere($alias . $fieldSet[0] . ' IS NULL');
+                    $this->andWhere($alias . $fieldSet[0] . ' IS NULL');
                     continue;
                 } elseif ('ne' == $fieldSet[2]) {
-                    $query->andWhere($alias . $fieldSet[0] . ' IS NOT NULL');
+                    $this->andWhere($alias . $fieldSet[0] . ' IS NOT NULL');
                     continue;
                 }
             }
-            $query->andWhere($alias . $fieldSet[0] . ' ' . $searchType[$fieldSet[2]] . ' ' . $valueSign, $value);
+            $this->andWhere($alias . $fieldSet[0] . ' ' . self::$_searchTypes[$fieldSet[2]] . ' ' . $valueSign, $value);
         }
         return $this;
     }
