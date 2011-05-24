@@ -182,12 +182,19 @@ class Com_View extends Qwin_Application_View
      */
     public function afterDisplay()
     {
+        // TODO 是否应该通过钩子加载
+        // 加载当前操作的样式和脚本
+        $minify = $this->minify;
+        $minify->addArray(array(
+            $this->decodePath('<root><module>/<action>.js'),
+            $this->decodePath('<root><module>/<action>.css'),
+        ));
+        
         // 获取缓冲数据,输出并清理
         $output = ob_get_contents();
         '' != $output && ob_end_clean();
 
         $url = Qwin::call('-url');
-        $minify = $this->minify;
         $replace = Qwin_Util_Html::jsTag($url->url('util/minify', 'index', array('g' => $minify->pack('js'))))
                  . Qwin_Util_Html::cssLinkTag($url->url('util/minify', 'index', array('g' => $minify->pack('css'))));
 
