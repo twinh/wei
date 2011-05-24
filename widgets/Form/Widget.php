@@ -109,7 +109,7 @@ class Form_Widget extends Qwin_Widget_Abstract
         $lang = $this->_Lang;
         $refererPage = urlencode(Qwin::call('-request')->server('HTTP_REFERER'));
 
-        $options['id'] = sprintf($options['id'], $meta->getModule()->toId());
+        $options['id'] = sprintf($options['id'], $meta['module']->getId());
 
         // 验证代码
         if ($options['validate']) {

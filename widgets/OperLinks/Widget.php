@@ -36,10 +36,10 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
         $module = $view['module'];
         $action = $view['action'];
         // 模块的Url形式
-        $moduleUrl = $module->toUrl();
+        $moduleUrl = $module->getUrl();
         $url = Qwin::call('-url');
         $lang = $this->_Lang;
-        $controller = Com_Controller::getByModule($module, false);
+        $controller = Com_Controller::getByModule($moduleUrl, false);
         $varList = get_class_vars($controller);
         if (isset($varList['_unableActions'])) {
             $unableActions = (array)$varList['_unableActions'];
@@ -110,7 +110,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
             }
 
              if (!in_array('delete', $unableActions) && method_exists($controller, 'actionDelete')) {
-                $meta = Com_Meta::getByModule($module);
+                $meta = Com_Meta::getByModule($moduleUrl);
                 if (!isset($meta['page']['useTrash'])) {
                     $icon = 'ui-icon-close';
                     $jsLang = 'MSG_CONFIRM_TO_DELETE';
@@ -132,9 +132,8 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
         );
 
         
-
         // 如果当前行为存在选项卡视图,加载该视图,否则直接输出默认选项卡内容
-        $class = strtr($module, '/', '_') . '_OperLinksWidget';
+        $class = $module->getClass() . '_OperLinksWidget';
         if(class_exists($class)) {
             $object = new $class;
             // TODO
