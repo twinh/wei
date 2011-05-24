@@ -59,21 +59,11 @@ class Qwin_Meta_Module extends Qwin_Meta_Common
     public function merge($source, array $options = array())
     {
         $data = $this->_defaults;
-        $data['source'] = (string)$source;
+        $data['source'] = preg_split('/([^A-Za-z0-9])/', (string)$source);
         $this->exchangeArray($data);
         return $this;
     }
     
-    /**
-     * 获取字符串形式,即源数据
-     * 
-     * @return string
-     */
-    public function getString()
-    {
-        return $this['source'];
-    }
-
     /**
      * 获取模块编号形式名称
      *
@@ -82,7 +72,7 @@ class Qwin_Meta_Module extends Qwin_Meta_Common
     public function getId()
     {
         if (!$this['id']) {
-            $this['id'] = strtolower(strtr($this['source'], '/', '-'));
+            $this['id'] = strtolower(implode('-', $this['source']));
         }
         return $this['id'];
     }
@@ -95,7 +85,7 @@ class Qwin_Meta_Module extends Qwin_Meta_Common
     public function getPath()
     {
         if (!$this['path']) {
-            $this['path'] = strtr($this->getClass(), '_', '/') . '/';
+            $this['path'] = implode('/', array_map('ucfirst', $this['source'])) . '/';
         }
         return $this['path'];
     }
@@ -108,7 +98,7 @@ class Qwin_Meta_Module extends Qwin_Meta_Common
     public function getUrl()
     {
         if (!$this['url']) {
-            $this['url'] = strtolower($this['source']);
+            $this['url'] = strtolower(implode('/', $this['source']));
         }
         return $this['url'];
     }
@@ -121,9 +111,7 @@ class Qwin_Meta_Module extends Qwin_Meta_Common
     public function getClass()
     {
         if (!$this['class']) {
-            // 转换为标准格式的类名
-            $class = preg_split('/([^A-Za-z0-9])/', $this['source']);
-            $this['class'] = implode('_', array_map('ucfirst', $class));
+            $this['class'] = implode('_', array_map('ucfirst', $this['source']));
         }
         return $this['class'];
     }
@@ -136,18 +124,8 @@ class Qwin_Meta_Module extends Qwin_Meta_Common
     public function getLang()
     {
         if (!$this['lang']) {
-            $this['lang'] = strtoupper(strtr($this['source'], '/', '_'));
+            $this['lang'] = strtoupper(implode('_', $this['source']));
         }
         return $this['lang'];
-    }
-
-    /**
-     * 魔法方法，返回原始数据
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this['source'];
     }
 }
