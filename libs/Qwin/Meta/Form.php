@@ -103,6 +103,20 @@ class Qwin_Meta_Form extends Qwin_Meta_Common
 //        }
     }
     
+    /**
+     * 获取表单的初始值
+     * 
+     * @return $data 初始值数组 
+     */
+    public function getValue()
+    {
+        $data = array();
+        foreach ($this['fields'] as $name => $field) {
+            $data[$name] = $field['_value'];
+        }
+        return $data;
+    }
+    
 //    public function getResource($field)
 //    {
 //        if (isset($this[$field])) {

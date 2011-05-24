@@ -25,56 +25,71 @@
  * @since       2010-10-11 17:14:08
  */
 
-class AddForm_Widget extends Qwin_Widget_Abstract
+class AddFormAction_Widget extends Qwin_Widget_Abstract
 {
     /**
-     * 服务的基本配置
+     * 默认选项
      * @var array
      */
     protected $_defaults = array(
-        'module'    => null,
+        'meta'      => null,
+        'form'      => 'form',
+        'db'        => 'db',
         'id'        => null,
-        'data'      => array(),
+        'data'      => null,
         'display'   => true,
     );
 
-    public function execute(array $options = null)
+    public function render($options = null)
     {
         // 初始配置
-        $options    = $options + $this->_options;
-        $module     = $options['module'];
+        $options = (array)$options + $this->_options;
 
+        // 检查元数据是否合法
         /* @var $meta Com_Meta */
-        $meta       = Com_Meta::getByModule($module);
-        $primaryKey = $meta['db']['primaryKey'];
-        $primaryKeyValue = $options['id'];
+        $meta = $options['meta'];
+        if (!Qwin_Meta::isValid($meta)) {
+            throw new Qwin_Widget_Exception('ERR_META_ILLEGAL');
+        }
 
-        /**
-         * 空值 < 元数据表单初始值 < 根据主键取值 < 配置初始值(一般是从url中获取)
-         */
+        // 检查列表元数据是否合法
+        /* @var $form Qwin_Meta_Form */
+        if (!($form = $meta->offsetLoad($options['form'], 'form'))) {
+            throw new Qwin_Widget_Exception('ERR_FROM_META_NOT_FOUND');
+        }
+
+        // 检查数据库元数据是否合法
+        /* @var $db Qwin_Meta_Db */
+        if (!($db = $meta->offsetLoad($options['db'], 'db'))) {
+            throw new Qwin_Widget_Exception('ERR_DB_META_NOT_FOUND');
+        }
+        $id = $db['id'];
+        
+        // 空值 < 元数据表单初始值 < 根据主键取值 < 配置初始值(一般是从url中获取)
         // 从元数据表单配置取值
-        $formInitalData = $meta['field']->getFormValue();
+        $formInitalData = $form->getValue();
 
         // 根据主键取值
         $copyRecordData = array();
-        if (null != $primaryKeyValue) {
+        if (!is_null($options['id'])) {
             // 从模型获取数据
-            $query = $meta->getQuery();
-            $result = $query->where($primaryKey . ' = ?', $primaryKeyValue)->fetchOne();
+            $query = $db->getQuery()
+                ->where($db['id'] . ' = ?', $options['id']);
+            $result = $query->fetchOne();
             if (false !== $result) {
                 // 删除null值
                 foreach ($result as $name => $value) {
-                    null !== $value && $copyRecordData[$name] = $value;
+                    !is_null($value) && $copyRecordData[$name] = $value;
                 }
             }
         }
 
         // 合并数据
         $options['data'] = $this->splitToInitalData($options['data']);
-        $data = array_merge($formInitalData, $copyRecordData, $options['data']);
+        $data = $options['data'] + $copyRecordData + $formInitalData;
 
         // 处理数据
-        $data = $meta->sanitise($data, 'add', array('view' => false));
+        //$data = $meta->sanitise($data, 'add', array('view' => false));
 
         // 返回处理结果
         if (!$options['display']) {
@@ -83,26 +98,23 @@ class AddForm_Widget extends Qwin_Widget_Abstract
                 'data' => get_defined_vars(),
             );
         }
-
-        // 展示视图 TODO
-        $view = Qwin::call('-view');
-        $view->setElement('content', '<root>com/basic/form<suffix>');
-        $view['module'] = $module;
-        $view['action'] = 'add';
-        $view['data'] = $data;
-        $view['primaryKey'] = $primaryKey;
-
+        
         /* @var $formWidget Form_Widget */
         $formWidget = Qwin::call('-widget')->get('Form');
         $formOptions = array(
-            'meta'  => $meta,
+            'form'  => $form,
             'action' => 'add',
             'data'  => $data,
         );
-
         
-        $operLinks = Qwin::call('-widget')->get('OperLinks')->render($view);
+        $view = Qwin::call('-view');
         $view->assign(get_defined_vars());
+        $view->setElement('content', '<root>com/basic/form<suffix>');
+        $view['module'] = $meta['module'];
+        $view['action'] = 'add';
+
+        $operLinks = Qwin::call('-widget')->get('OperLinks')->render($view);
+        $view['operLinks'] = $operLinks;
     }
 
     public function splitToInitalData($data)

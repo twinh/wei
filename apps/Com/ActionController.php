@@ -85,20 +85,11 @@ class Com_ActionController extends Com_Controller
      */
     public function actionAdd()
     {
-        return Qwin::call('-widget')->get('Form2')->render(array(
-            'meta'      => $this->getMeta(),
-            'id'        => null,
-            'data'      => array(),
-            'asAction'  => 'view',
-            'isView'    => true,
-            'sanitise'  => true,
-            'display'   => true,
-        ));
         if (!$this->_request->isPost()) {
-            return Qwin::call('-widget')->get('AddForm')->execute(array(
-                'module'    => $this->_module,
+            return $this->getWidget()->get('AddFormAction')->render(array(
+                'meta'      => $this->getMeta(),
                 'id'        => $this->_request->get('id'),
-                'data'      => $this->_request->get('search'),
+                'search'    => $this->_request->get('search'),
             ));
         } else {
             return Qwin::call('-widget')->get('Add')->execute(array(

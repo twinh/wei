@@ -74,11 +74,22 @@ class Qwin_Widget
     {
         return $this->_loaded[$class] = $this->_callClass($class);
     }
+    
+    /**
+     * 获取一个微件的实例化对象,同get
+     * 
+     * @param string $name 微件类名称,不带"_Widget"后缀
+     * @return Qwin_Widget_Abstarct 微件对象
+     */
+    public function call($name)
+    {
+        return $this->get($name);
+    }
 
     /**
      * 获取一个微件的实例化对象
      *
-     * @param string $name 微件类名称,不带Widget_前缀
+     * @param string $name 微件类名称,不带"_Widget"后缀
      * @return Qwin_Widget_Abstarct 微件对象
      */
     public function get($name)
