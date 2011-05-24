@@ -33,12 +33,11 @@ class Com_ActionController extends Com_Controller
      * @return array 执行结果
      */
     public function actionIndex()
-    {        
+    {
         $request = $this->getRequest();
         if ($request->isJson()) {
             return Qwin::call('-widget')->get('JsonListAction')->render(array(
-                'meta'   => $meta,
-                'list'   => $this->getMeta()->offsetGet('db'),
+                'meta'   => $this->getMeta(),
                 'layout' => $request->get('layout'),
                 'search' => $request->get('search'),
                 'page'   => $request->get('page'),

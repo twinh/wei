@@ -102,4 +102,40 @@ class Qwin_Meta_Form extends Qwin_Meta_Common
 //            }
 //        }
     }
+    
+//    public function getResource($field)
+//    {
+//        if (isset($this[$field])) {
+//            if ($this[$field]['form']['_resource']) {
+//                return $this[$field]['form']['_resource'];
+//            } else {
+//                if (isset($this[$field]['form']['_resourceGetter'])) {
+//                    $resource = Qwin::call('-flow')->callOne($this[$field]['form']['_resourceGetter']);
+//                } else {
+//                    return array();
+//                }
+//
+//                // 认定为选项模块的选项
+//                $element = $resource[key($resource)];
+//                if (is_array($element)) {
+//                    $this[$field]['form']['_resource'] = $resource;
+//                } else {
+//                    // 否则,认定为value=>name的形式
+//                    $return = array();
+//                    foreach($resource as $value => $name) {
+//                        $return[$value] = array(
+//                            'value' => $value,
+//                            'name' => $name,
+//                            'color' => null,
+//                            'style' => null,
+//                        );
+//                    }
+//                    $this[$field]['form']['_resource'] = $return;
+//                }
+//
+//                return $this[$field]['form']['_resource'];
+//            }
+//        }
+//        throw new Qwin_Meta_Field_Exception('Undefined field "' . $field . '"');
+//    }
 }

@@ -48,7 +48,9 @@ class JsonListAction_Widget extends Qwin_Widget_Abstract
      *      -- display      是否显示数据
      */
     protected $_defaults = array(
-        'list'      => null,
+        'meta'      => null,
+        'list'      => 'list',
+        'db'        => 'db',
         'layout'    => array(),
         'order'     => null,
         'search'    => null,
@@ -67,20 +69,29 @@ class JsonListAction_Widget extends Qwin_Widget_Abstract
     public function render($options = null)
     {
         // 初始配置
-        $options    = (array)$options + $this->_options;
+        $options = (array)$options + $this->_options;
         
-        /* @var $listMeta Qwin_Meta_List */
-        $list = $options['list'];
+        // 检查元数据是否合法
+        /* @var $meta Com_Meta */
+        $meta = $options['meta'];
+        if (!Qwin_Meta::isValid($meta)) {
+            throw new Qwin_Widget_Exception('ERR_META_ILLEGAL');
+        }
 
         // 检查列表元数据是否合法
-        if (!is_object($list) || !$list instanceof Qwin_Meta_List) {
-            $this->e('ERR_META_ILLEGAL');
+        if (!($list = $meta->offsetLoad($options['list'], 'list'))) {
+            throw new Qwin_Widget_Exception('ERR_LIST_META_NOT_FOUND');
         }
-        $meta = $list->getParent();
+        
+        // 检查数据库元数据是否合法
+        if (!($db = $meta->offsetLoad($options['db'], 'db'))) {
+            throw new Qwin_Widget_Exception('ERR_DB_META_NOT_FOUND');
+        }
         
         // 处理每页显示数目
         $options['row'] = (int)$options['row'];
         $options['row'] <= 0 && $options['row'] = $list['db']['limit'];
+        $options['row'] > 500 && $options['row'] = 500;
         
         // 处理页数
         $options['page'] = (int)$options['page'];
@@ -88,13 +99,11 @@ class JsonListAction_Widget extends Qwin_Widget_Abstract
 
         // TODO DbData_Widget
         // 从模型获取数据
-        $query = $meta->getQuery(null, array('type' => array('db', 'view')));
-        $meta
-            ->addSelectToQuery($query)
-            ->addOrderToQuery($query, $options['order'])
-            ->addWhereToQuery($query, $options['search'])
-            ->addOffsetToQuery($query, ($options['page'] - 1) * $options['row'])
-            ->addLimitToQuery($query, $options['row']);
+        $query = $db->getQuery(null, array('type' => array('db', 'view')))
+            ->addRawSelect($db)
+            ->addRawOrder($db, $options['order'])
+            ->addRawOffset(($options['page'] - 1) * $options['row'])
+            ->addRawLimit($options['row']);
         $dbData = $query->execute();
         $data   = $dbData->toArray();
         $count  = count($data);

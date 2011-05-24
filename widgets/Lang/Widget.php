@@ -258,7 +258,19 @@ class Lang_Widget extends Qwin_Widget_Abstract implements ArrayAccess
      */
     public function t($name = null)
     {
-        return $this->offsetGet($name);
+        return isset($this->_data[$name]) ? $this->_data[$name] : $name;
+    }
+    
+    /**
+     * 翻译一个域名称
+     * 
+     * @param string $name 域名称
+     * @return string
+     */
+    public function f($name = null)
+    {
+        $name = 'FLD_' . strtoupper($name);
+        return isset($this->_data[$name]) ? $this->_data[$name] : $name;
     }
 
     /**

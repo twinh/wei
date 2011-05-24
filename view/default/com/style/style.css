@@ -7,7 +7,7 @@ body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,fieldset,p,blockquote,input,te
 }
 /* 修复搜狗浏览器(4.0Chrome内核)样式错误,区别? */
 ul {
-    margin: 0;ui-form-content
+    margin: 0;
     padding: 0;
 }
 *{outline:none}
@@ -255,6 +255,7 @@ div.ui-header-logo {
     float: right;
     width: 20px;
     margin: 2px 0 0 2px;
+    cursor: pointer;
 }
 .ui-footer-time{
     float: right;
