@@ -65,15 +65,15 @@ class Com_ActionController extends Com_Controller
     public function actionView()
     {
         if ($this->_request->get('forward')) {
-            return Qwin::call('-widget')->get('Forward')->execute(array(
+            return Qwin::call('-widget')->get('Forward')->render(array(
                 'module'    => $this->_module,
                 'action'    => $this->_action,
                 'id'        => $this->_request->get('id'),
                 'forward'   => $this->_request->get('forward'),
             ));
         }
-        return Qwin::call('-widget')->get('View')->execute(array(
-            'module'    => $this->_module,
+        return Qwin::call('-widget')->get('ViewAction')->render(array(
+            'meta'      => $this->getMeta(),
             'id'        => $this->_request->get('id'),
         ));
     }
@@ -92,7 +92,7 @@ class Com_ActionController extends Com_Controller
                 'search'    => $this->_request->get('search'),
             ));
         } else {
-            return Qwin::call('-widget')->get('AddAction')->execute(array(
+            return Qwin::call('-widget')->get('AddAction')->render(array(
                 'meta'      => $this->getMeta(),
                 'data'      => $_POST,
                 'url'       => urldecode($this->_request->post('_page')),
@@ -108,7 +108,7 @@ class Com_ActionController extends Com_Controller
     public function actionEdit()
     {
         if ($this->_request->get('forward')) {
-            return Qwin::call('-widget')->get('Forward')->execute(array(
+            return Qwin::call('-widget')->get('Forward')->render(array(
                 'module'    => $this->_module,
                 'action'    => $this->_action,
                 'id'        => $this->_request->get('id'),
@@ -119,11 +119,9 @@ class Com_ActionController extends Com_Controller
             return Qwin::call('-widget')->get('EditFormAction')->render(array(
                 'meta'      => $this->getMeta(),
                 'id'        => $this->_request->get('id'),
-                'asAction'  => 'edit',
-                'isView'    => false,
             ));
         } else {
-            return Qwin::call('-widget')->get('Edit')->execute(array(
+            return Qwin::call('-widget')->get('Edit')->render(array(
                 'module'    => $this->_module,
                 'data'      => $_POST,
                 'url'       => urldecode($this->_request->post('_page')),
@@ -138,7 +136,7 @@ class Com_ActionController extends Com_Controller
      */
     public function actionDelete()
     {
-        return Qwin::call('-widget')->get('Delete')->execute(array(
+        return Qwin::call('-widget')->get('Delete')->render(array(
             'module'    => $this->_module,
             'id'        => $this->_request->get('id'),
             'url'       => urldecode($this->_request->post('_page')),

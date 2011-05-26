@@ -33,7 +33,9 @@ class Form_Widget extends Qwin_Widget_Abstract
      */
     protected $_defaults = array(
         'id'        => 'form-%s',
-        'form'      => null,
+        'meta'      => null,
+        'form'      => 'form',
+        'db'        => 'db',
         'action'    => 'add',
         'column'    => 2,
         'data'      => array(),
@@ -46,6 +48,15 @@ class Form_Widget extends Qwin_Widget_Abstract
             'color' => null,
             'style' => null,
         ),
+    );
+    
+    /**
+     * 操作名称数组,不同操作下,根据表单的配置,显示不同的数据
+     * 
+     * @var array
+     */
+    protected $_actions = array(
+        'add', 'edit', 'view',
     );
 
     /**
@@ -66,17 +77,27 @@ class Form_Widget extends Qwin_Widget_Abstract
      */
     public function render($options = null)
     {
-        // 合并选项
+        // 初始配置
         $options = (array)$options + $this->_options;
         
-        /* @var $listMeta Qwin_Meta_Form */
-        $form = $options['form'];
-        
-        // 检查表单元数据是否合法
-        if (!is_object($form) || !$form instanceof Qwin_Meta_Form) {
-            $this->e('ERR_META_ILLEGAL');
+        // 检查元数据是否合法
+        /* @var $meta Com_Meta */
+        $meta = $options['meta'];
+        if (!Qwin_Meta::isValid($meta)) {
+            throw new Qwin_Widget_Exception('ERR_META_ILLEGAL');
         }
-        $meta = $form->getParent();
+
+        // 检查列表元数据是否合法
+        /* @var $form Qwin_Meta_Form */
+        if (!($form = $meta->offsetLoad($options['form'], 'form'))) {
+            throw new Qwin_Widget_Exception('ERR_FROM_META_NOT_FOUND');
+        }
+        $form = clone $form;
+
+        // 数据库元数据是可选的,不用做检查
+        /* @var $db Qwin_Meta_Db */
+        $db = $meta->offsetLoad($options['db'], 'db');
+        
         $data = $options['data'];
         
         // 获取表格栏目的宽度百分比
@@ -95,13 +116,40 @@ class Form_Widget extends Qwin_Widget_Abstract
             $percent = array(13.5, 87.5);
         }
 
+        // 默认表单配置
         $defaultForm = $form->getDefault();
-        
         $minify = $this->_widget->get('Minify');
         $lang = $this->_Lang;
         $refererPage = urlencode(Qwin::call('-request')->server('HTTP_REFERER'));
-
+        
+        //
         $options['id'] = sprintf($options['id'], $meta['module']->getId());
+        
+        // 为表单赋值
+        foreach ($form['fields'] as $name => $field) {
+            if (array_key_exists($name, $data)) {
+                $form['fields'][$name]['_value'] = $data[$name];
+            }
+        }
+        
+        // 编辑操作下,为只读域增加提示
+        if ('edit' == $options['action']) {
+            if (false !== $db) {
+                foreach ($db['fields'] as $name => $field) {
+                    if ($field['readonly'] && isset($form['fields'][$name])) {
+                        $form['fields'][$name]['readonly'] = 'readonly';
+                        $form['fields'][$name]['_value'] .= '(' . $lang['LBL_READONLY'] . ')';
+                    }
+                }
+            }
+        // 视图操作下,将表单类型换为纯文本.
+        } elseif ('view' == $options['action']) {
+            $defaultForm['_type'] = 'plain';
+            foreach ($form['fields'] as $name => $field) {
+                $form['fields'][$name]['_type'] = 'plain';
+                $form['fields'][$name]['_widget'] = null;
+            }
+        }
 
         // 验证代码
         if ($options['validate']) {
@@ -154,6 +202,7 @@ class Form_Widget extends Qwin_Widget_Abstract
             $private['_resource'] = Qwin::call('-flow')->callOne($private['_resourceGetter']);
         }
 
+        // TODO 更高效的方法
         // 根据类型,生成代码
         switch ($private['_type']) {
             case 'text' :
@@ -179,6 +228,9 @@ class Form_Widget extends Qwin_Widget_Abstract
 
             case 'file' :
                 return $this->renderFile($public, $private);
+                
+            case 'plain' :
+                return $this->renderPlain($public, $private);
 
             default :
                 return '';
