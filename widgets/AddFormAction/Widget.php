@@ -100,11 +100,13 @@ class AddFormAction_Widget extends Qwin_Widget_Abstract
         }
         
         /* @var $formWidget Form_Widget */
-        $formWidget = Qwin::call('-widget')->get('Form');
+        $formWidget = $this->_Form;
         $formOptions = array(
-            'form'  => $form,
-            'action' => 'add',
-            'data'  => $data,
+            'meta'      => $meta,
+            'form'      => $options['form'],
+            'db'        => $options['db'],
+            'action'    => 'add',
+            'data'      => $data,
         );
         
         $view = Qwin::call('-view');

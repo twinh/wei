@@ -95,9 +95,8 @@ endif;
                     } else {
                         $label = $lang->f($field);
                     }
-                    $value = isset($data[$field]) ? $data[$field] : null;
                     echo '<td class="ui-label-common"><label for="' . $fieldForm['id'] . '">' . $label . ':</label></td>'
-                       . '<td class="ui-field-common ui-field-' . $fieldForm['_type'] . '" colspan="' . ($i * 2 + 1) . '">' . $this->renderElement($fieldForm, $value) , $this->renderElementWidget($fieldForm) . '</td>';
+                       . '<td class="ui-field-common ui-field-' . $fieldForm['_type'] . '" colspan="' . ($i * 2 + 1) . '">' . $this->renderElement($fieldForm) , $this->renderElementWidget($fieldForm) . '</td>';
                 }
             } else {
                 echo '<td colspan="2">&nbsp;</td>';

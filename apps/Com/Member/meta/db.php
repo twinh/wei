@@ -33,9 +33,7 @@ return array(
             ),
         ),
         'username' => array(
-            'attr' => array(
-                'isReadonly' => 1,
-            ),
+            'readonly' => true,
             'validator' => array(
                 'rule' => array(
                     'required' => true,
