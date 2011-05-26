@@ -222,7 +222,7 @@ class Qwin_Meta_Query extends Doctrine_Query
      * @param int|null $addition 附加的偏移配置
      * @return Com_Meta 当前对象
      */
-    public function addRawOffset($offset)
+    public function addRawOffset(Qwin_Meta_Db $db, $offset)
     {
         $offset = intval($offset);
         $offset = $offset < 0 ? 0 : $offset;
@@ -237,7 +237,7 @@ class Qwin_Meta_Query extends Doctrine_Query
      * @param int|null $addition 附加的限制配置
      * @return Com_Meta 当前对象
      */
-    public function addRawLimit($addition = null)
+    public function addRawLimit(Qwin_Meta_Db $db, $addition = null)
     {
         $limit = 0;
         if (null != $addition) {

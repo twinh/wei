@@ -25,9 +25,10 @@
  * @since       2010-07-27 12:37:11
  * @todo        调整为关联元数据,而非模型,元数据
  * @todo        模型,元数据可自定义,而不通过应用目录配置获得
+ * @todo        db表示如主表和分表, view
  */
 
-class Qwin_Meta_Model extends Qwin_Meta_Common
+class Qwin_Meta_Meta extends Qwin_Meta_Common
 {
     protected $_defaults = array(
         'alias' => null,

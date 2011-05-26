@@ -96,7 +96,7 @@ class EditFormAction_Widget extends Qwin_Widget_Abstract
             }
         }
         $data = $dbData->toArray();
-        
+
         // 转换数据
         if ($options['sanitise']) {
             $data = $meta->sanitise($data, $options['sanitise']);

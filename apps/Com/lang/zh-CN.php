@@ -100,6 +100,7 @@ return array(
     // 分组
     'GRP_BASIC' => '基本资料',
     'GRP_DESCRIP' => '描述资料',
+    'GRP_MORE' => '更多资料',
 
     // 选项卡
     'LBL_TAB_DATA' => '资料',

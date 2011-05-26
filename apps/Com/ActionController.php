@@ -92,8 +92,8 @@ class Com_ActionController extends Com_Controller
                 'search'    => $this->_request->get('search'),
             ));
         } else {
-            return Qwin::call('-widget')->get('Add')->execute(array(
-                'module'    => $this->_module,
+            return Qwin::call('-widget')->get('AddAction')->execute(array(
+                'meta'      => $this->getMeta(),
                 'data'      => $_POST,
                 'url'       => urldecode($this->_request->post('_page')),
             ));
