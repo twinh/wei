@@ -103,8 +103,8 @@ class JsonListAction_Widget extends Qwin_Widget_Abstract
             ->addRawSelect($db)
             ->addRawWhere($db, $options['search'])
             ->addRawOrder($db, $options['order'])
-            ->addRawOffset(($options['page'] - 1) * $options['row'])
-            ->addRawLimit($options['row']);
+            ->offset(($options['page'] - 1) * $options['row'])
+            ->limit($options['row']);
         $dbData = $query->execute();
         $data   = $dbData->toArray();
         $count  = count($data);

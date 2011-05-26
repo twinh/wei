@@ -26,31 +26,44 @@
 class Qwin_Meta_Form extends Qwin_Meta_Common
 {
     /**
-     * 默认选项
-     * @var array
+     * @var array               默认选项,以下划线开头为私有属性,否则为Html属性
+     * 
+     *      -- _label           表单标题名称,如果为空,使用表单名称代替
+     * 
+     *      -- _type            表单类型,和Html属性type相对应
+     * 
+     *      -- _resource        表单资源,当表单类型为select,checkbox,raido时,其子项
+     *                          通过资源数组来表示
+     * 
+     *      -- _resourceGetter  表单资源回调结构
+     * 
+     *      -- _value           表单的初始值
+     * 
+     *      -- name             表单名称
+     * 
+     *      -- id               表单唯一编号
+     * 
+     *      -- class            表单类名称
+     * 
+     *      -- _widget          表单微件流程回调结构
+     * 
+     *      -- _readonly        值为真时,不可编辑,对添加,查看无影响
+     * 
+     *      -- _view            值为假时,在视图页不显示
+     * 
      */
     protected $_defaults = array(
-        '_label' => null,
+        //'_label' => null,
         '_type' => 'text',
         '_resource' => null,
+        //_resourceGetter = null, 
         '_value' => '',
         'name' => null,
         'id' => null,
-//        '_resourceGetter' => null,
-//        // TODO 通过resourceGetter实现
-//        '_resourceFormFile' => null,
-//        '_widget' => array(),
-//        'class' => null,
-//        '_sanitiser' => array(
-//            
-//        ),
-//        //validator
-//        '_rules' => array(
-//            
-//        ),
-//        '_messages' => array(
-//            
-//        ),
+        //'class' => null,
+        //'_widget' => array(),
+        //'_readonly' => false,
+        //'_sanitiser' => array(),
     );
     
     /**
@@ -87,7 +100,7 @@ class Qwin_Meta_Form extends Qwin_Meta_Common
         foreach ($data['fields'] as $name => &$field) {
             !isset($field['name']) && $field['name'] = $name;
             !isset($field['id']) && $field['id'] = $name;
-            !isset($field['_label']) && $field['_label'] = 'FLD_' . strtoupper($name);
+            //!isset($field['_label']) && $field['_label'] = 'FLD_' . strtoupper($name);
             $field = (array)$field + $this->_defaults;
         }
         $this->exchangeArray($data);

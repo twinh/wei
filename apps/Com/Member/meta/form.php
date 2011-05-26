@@ -47,11 +47,6 @@ return array(
                     array('id', null, 'name'),
                 ),
             ),
-            '_validator' => array(
-                'rule' => array(
-                    'notNull' => true,
-                ),
-            ),
         ),
         'username' => array(
             '_validator' => array(
@@ -68,112 +63,33 @@ return array(
                     'md5'
                 ),
             ),
-            '_validator' => array(
-                'rule' => array(
-                    'required' => true,
-                    'rangelength' => array(5, 40),
-                ),
-            ),
-        ),
-        'password2' => array(
-            '_readonly' => true,
-            '_type' => 'password',
-            '_validator' => array(
-                'rule' => array(
-                    'required' => true,
-                    'equalTo' => '#password',
-                ),
-            ),
-        ),
-        'email' => array(
-            'validator' => array(
-                'rule' => array(
-                    'required' => true,
-                    'email' => true,
-                    'maxlength' => 256,
-                ),
-            ),
-        ),
-        'first_name' => array(
-        ),
-        'last_name' => array(
-        ),
-        'photo' => array(
-            'form' => array(
-                '_widget' => array(
-                    'fileTree',
-                    'ajaxUpload',
-                ),
-            ),
         ),
         'sex' => array(
-            'form' => array(
-                '_type' => 'select',
-                '_resourceGetter' => array(
-                    array('Ide_Option_Widget', 'get'),
-                    'sex',
-                ),
+            '_type' => 'select',
+            '_resourceGetter' => array(
+                array('Ide_Option_Widget', 'get'),
+                'sex',
             ),
-            'sanitiser' => array(
+            '_sanitiser' => array(
                 'list' => array(
                     array('Ide_Option_Widget', 'sanitise'),
                     'sex',
                 ),
                 'view' => 'list',
             ),
-            'attr' => array(
-                'isLink' => 1,
-            ),
         ),
         'birthday' => array(
-            'form' => array(
-                '_widget' => array(
-                    array(
-                        array('Datepicker_Widget', 'render')
-                    ),
+            '_widget' => array(
+                array(
+                    array('Datepicker_Widget', 'render')
                 ),
-            )
-        ),
-        'reg_ip' => array(
-            'basic' => array(
-                'group' => 1,
-            ),
-        ),
-        'theme' => array(
-            'basic' => array(
-                'group' => 1,
             ),
         ),
         'language' => array(
-            'basic' => array(
-                'group' => 1,
-            ),
-            'form' => array(
-                '_type' => 'select',
-                '_resourceGetter' => array(
-                    array('Ide_Option_Widget', 'get'),
-                    'language',
-                ),
-            ),
-        ),
-        'telephone' => array(
-            'basic' => array(
-                'group' => 1,
-            ),
-        ),
-        'mobile' => array(
-            'basic' => array(
-                'group' => 1,
-            ),
-        ),
-        'homepage' => array(
-            'basic' => array(
-                'group' => 1,
-            ),
-        ),
-        'address' => array(
-            'basic' => array(
-                'group' => 1,
+            '_type' => 'select',
+            '_resourceGetter' => array(
+                array('Ide_Option_Widget', 'get'),
+                'language',
             ),
         ),
     ),
@@ -188,9 +104,20 @@ return array(
         'GRP_BASIC' => array(
             array('group_id'),
             array('username'),
-            array('language'),
+            array('email'),
+            array('first_name'),
+            array('last_name'),
+            array('sex'),
+            array('photo'),
+            array('birthday'),
+            array('reg_ip'),
         ),
-        'GRP_DESCRIP' => array(
+        'GRP_CUSTOMER' => array(
+            array('language'),
+            array('theme'),
+        ),
+        'GRP_MORE' => array(
+            array('telephone'),
             array('mobile'),
             array('homepage'),
             array('address'),

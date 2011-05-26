@@ -50,9 +50,8 @@ return array(
     'FLD_MOBILE' => '手机',
     'FLD_HOMEPAGE' => '主页',
     'FLD_ADDRESS' => '地址',
-
-    'LBL_GROUP_BASIC_DATA' => '基本资料',
-    'LBL_GROUP_DETAIL_DATA' => '详细资料',
+    
+    'GRP_CUSTOMER' => '界面配置',
 
     'MOD_COM_MEMBER' => '用户',
     'LBL_MODULE_MEMBER_DETAIL' => '用户详细',

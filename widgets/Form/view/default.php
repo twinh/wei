@@ -23,7 +23,7 @@
  * @since       2011-02-16 14:14:21
  */
 $minify->add($this->_rootPath . 'script/js.js');
-if ($options['validate']) {
+if ($options['validate']) :
     $minify->add($this->_rootPath . 'script/style.css')
            ->add($this->_rootPath . 'source/jquery.validate.qwin.js');
 ?>
@@ -31,7 +31,7 @@ if ($options['validate']) {
 validateCode['<?php echo $options['id'] ?>'] = <?php echo $validateCode ?>;
 </script>
 <?php
-}
+endif;
 ?>
 <form id="<?php echo $options['id'] ?>" name="form" method="post" action="<?php echo qw_url()?>">
 <?php if ($form['topButtons']) : ?>
@@ -61,6 +61,7 @@ validateCode['<?php echo $options['id'] ?>'] = <?php echo $validateCode ?>;
         <?php foreach ($row as $fields) : ?>
         <tr>
         <?php
+        // TODO 逻辑&视图
         // 删除多余或补全缺少的数据
         $num = count($fields);
         if ($form['columns'] > $num) {
@@ -87,10 +88,16 @@ validateCode['<?php echo $options['id'] ?>'] = <?php echo $validateCode ?>;
                     if (isset($form['fields'][$field])) {
                         $fieldForm = $form['fields'][$field];
                     } else {
-                        $fieldForm = $defaultForm;
+                        $fieldForm = array('name' => $field) + $defaultForm;
                     }
-                    echo '<td class="ui-label-common"><label for="' . $fieldForm['id'] . '">' . $lang[$fieldForm['_label']] . ':</label></td>'
-                       . '<td class="ui-field-common ui-field-' . $fieldForm['_type'] . '" colspan="' . ($i * 2 + 1) . '">' . $this->renderElement($fieldForm) , $this->renderElementWidget($fieldForm) . '</td>';
+                    if (isset($fieldForm['_label'])) {
+                        $label = $fieldForm['_label'];
+                    } else {
+                        $label = $lang->f($field);
+                    }
+                    $value = isset($data[$field]) ? $data[$field] : null;
+                    echo '<td class="ui-label-common"><label for="' . $fieldForm['id'] . '">' . $label . ':</label></td>'
+                       . '<td class="ui-field-common ui-field-' . $fieldForm['_type'] . '" colspan="' . ($i * 2 + 1) . '">' . $this->renderElement($fieldForm, $value) , $this->renderElementWidget($fieldForm) . '</td>';
                 }
             } else {
                 echo '<td colspan="2">&nbsp;</td>';

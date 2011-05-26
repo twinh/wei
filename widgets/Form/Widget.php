@@ -49,14 +49,6 @@ class Form_Widget extends Qwin_Widget_Abstract
     );
 
     /**
-     * 自动加载配置
-     * @var array
-     */
-    protected $_autoload = array(
-        'lang' => false,
-    );
-
-    /**
      * 表单元素的配置,不带下划线的为Html属性,否则为私有属性
      * @var array
      */
@@ -446,32 +438,6 @@ class Form_Widget extends Qwin_Widget_Abstract
         isset($options['color']) && $options['style'] = 'color:' . $options['color'] . ';' . $options['style'];
         isset($options['style']) && $options['style'] = ' style="' . $options['style'] . '"';
         return isset($options['style']) ? $options['style'] : null;
-    }
-
-    public function callbackAddLayout($field)
-    {
-        if('custom' == $field['form']['_type']) {
-            return true;
-        }
-        return false;
-    }
-
-    public function callbackEditLayout($field)
-    {
-        if (1 == $field['attr']['isReadonly'] || 'custom' == $field['form']['_type']) {
-            return true;
-            // TODO
-            //$meta['field']->set($name . '.form._type', 'hidden');
-        }
-        return false;
-    }
-
-    public function callbackViewLayout($field)
-    {
-        if (0 == $field['attr']['isView']) {
-            return true;
-        }
-        return false;
     }
 
     /**
