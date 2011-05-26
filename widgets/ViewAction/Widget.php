@@ -42,7 +42,12 @@ class ViewAction_Widget extends Qwin_Widget_Abstract
         'db'        => 'db',
         'id'        => null,
         'sanitise'  => array(
-            
+            'notFilled'     => true,
+            'sanitise'      => true,
+            'hook'          => true,
+            'link'          => true,
+            'action'        => 'view',
+            'null'          => true,
         ),
         'display'   => true,
     );
@@ -93,7 +98,7 @@ class ViewAction_Widget extends Qwin_Widget_Abstract
 
         // 转换数据
         if ($options['sanitise']) {
-            $data = $meta->sanitise($data, $options['sanitise']);
+            $data = $form->sanitise($data, $options['sanitise']);
         }
         
         // 返回结果
@@ -128,87 +133,87 @@ class ViewAction_Widget extends Qwin_Widget_Abstract
         );
         
         // TODO view
-        $view = Qwin::call('-view');
-        //$view->setElement('content', '<root>com/basic/view<suffix>');
-        $view->setElement('content', '<root>com/basic/form<suffix>');
-        $view['module'] = $view['options']['module'];
-        $view['action'] = 'view';
-
-        // 初始化变量,方便调用
-        $primaryKey     = $view->primaryKey;
-        $meta           = $view->meta;
-        $data           = $view->data;
-        $request        = Qwin::call('-request');
-        $config         = Qwin::config();
-        $url            = Qwin::call('-url');
-        $lang           = Qwin::call('-lang');
-        $widget         = Qwin::call('-widget');
-
-        /* @var $formWidget Form_Widget */
-        $formWidget = $widget->get('Form');
-        $formOptions = array(
-            'meta'      => $meta,
-            'action'    => 'view',
-            'data'      => $view->data,
-            'view'      => 'view.php',
-        );
-
-        /* @var $jqGridWidget JqGrid_Widget */
-        $jqGridWidget   = $widget->get('JqGrid');
-        $jqGridOptions  = array();
-
-        // 关联列表的数据配置
-        //$relatedListConfig = $metaHelper->getRelatedListConfig($meta);
-        /* @var $meta Qwin_Application_Meta */
-        $relatedListMetaList = $meta->getModelMetaByType('relatedList');
-
-        // 构建每一个的jqgrid数据
-        $jqGridList = $tabTitle = $moduleLang = array();
-        foreach ($relatedListMetaList as $alias => $relatedMeta) {
-            $jqGrid = array();
-            $model = $meta['model'][$alias];
-
-            $lang->appendByModule($model['module']);
-
-            $tabTitle[$alias] = $lang[$relatedMeta['page']['title']];
-
-
-            // 获取并合并布局
-            $listLayout = $jqGridWidget->getLayout($relatedMeta);
-            if (null != $model['list']) {
-                $listLayout = array_intersect($listLayout, (array)$model['list']);
-            }
-            // 删除外键域,外键域显示的内容即为当前视图的内容
-            $key = array_search($model['foreign'], $listLayout);
-            if (false !== $key) {
-                unset($listLayout[$key]);
-            }
-            $col = $jqGridWidget->getColByListLayout($listLayout, $relatedMeta, $lang);
-            $options['colNames'] = $col['colNames'];
-            $options['colModel'] = $col['colModel'];
-
-            // 获取json数据的地址
-            $options['url'] = $url->url($model['module'], 'index', array(
-                'json'      => '1',
-                'search'    => $model['foreign'] . ':' . $data[$model['local']],
-                'list'      => implode(',', $listLayout),
-            ));
-
-            $jqGrid = array(
-                'module'    => new Qwin_Module($model['module']),
-                'meta'      => $relatedMeta,
-                'layout'    => (array)$model['list'],
-                'options'    => $options,
-            );
-
-            $jqGridList[$alias] = $jqGrid;
-        }
-        $group = $meta['group'];
-
-        $operLinks = $widget->get('OperLinks')->render($view);
-
-        $view->assign(get_defined_vars());
-
-        return $result;
+//        $view = Qwin::call('-view');
+//        //$view->setElement('content', '<root>com/basic/view<suffix>');
+//        $view->setElement('content', '<root>com/basic/form<suffix>');
+//        $view['module'] = $view['options']['module'];
+//        $view['action'] = 'view';
+//
+//        // 初始化变量,方便调用
+//        $primaryKey     = $view->primaryKey;
+//        $meta           = $view->meta;
+//        $data           = $view->data;
+//        $request        = Qwin::call('-request');
+//        $config         = Qwin::config();
+//        $url            = Qwin::call('-url');
+//        $lang           = Qwin::call('-lang');
+//        $widget         = Qwin::call('-widget');
+//
+//        /* @var $formWidget Form_Widget */
+//        $formWidget = $widget->get('Form');
+//        $formOptions = array(
+//            'meta'      => $meta,
+//            'action'    => 'view',
+//            'data'      => $view->data,
+//            'view'      => 'view.php',
+//        );
+//
+//        /* @var $jqGridWidget JqGrid_Widget */
+//        $jqGridWidget   = $widget->get('JqGrid');
+//        $jqGridOptions  = array();
+//
+//        // 关联列表的数据配置
+//        //$relatedListConfig = $metaHelper->getRelatedListConfig($meta);
+//        /* @var $meta Qwin_Application_Meta */
+//        $relatedListMetaList = $meta->getModelMetaByType('relatedList');
+//
+//        // 构建每一个的jqgrid数据
+//        $jqGridList = $tabTitle = $moduleLang = array();
+//        foreach ($relatedListMetaList as $alias => $relatedMeta) {
+//            $jqGrid = array();
+//            $model = $meta['model'][$alias];
+//
+//            $lang->appendByModule($model['module']);
+//
+//            $tabTitle[$alias] = $lang[$relatedMeta['page']['title']];
+//
+//
+//            // 获取并合并布局
+//            $listLayout = $jqGridWidget->getLayout($relatedMeta);
+//            if (null != $model['list']) {
+//                $listLayout = array_intersect($listLayout, (array)$model['list']);
+//            }
+//            // 删除外键域,外键域显示的内容即为当前视图的内容
+//            $key = array_search($model['foreign'], $listLayout);
+//            if (false !== $key) {
+//                unset($listLayout[$key]);
+//            }
+//            $col = $jqGridWidget->getColByListLayout($listLayout, $relatedMeta, $lang);
+//            $options['colNames'] = $col['colNames'];
+//            $options['colModel'] = $col['colModel'];
+//
+//            // 获取json数据的地址
+//            $options['url'] = $url->url($model['module'], 'index', array(
+//                'json'      => '1',
+//                'search'    => $model['foreign'] . ':' . $data[$model['local']],
+//                'list'      => implode(',', $listLayout),
+//            ));
+//
+//            $jqGrid = array(
+//                'module'    => new Qwin_Module($model['module']),
+//                'meta'      => $relatedMeta,
+//                'layout'    => (array)$model['list'],
+//                'options'    => $options,
+//            );
+//
+//            $jqGridList[$alias] = $jqGrid;
+//        }
+//        $group = $meta['group'];
+//
+//        $operLinks = $widget->get('OperLinks')->render($view);
+//
+//        $view->assign(get_defined_vars());
+//
+//        return $result;
     }
 }

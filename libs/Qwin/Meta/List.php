@@ -49,6 +49,22 @@ class Qwin_Meta_List extends Qwin_Meta_Common
             'limit' => 10,
         ),
     );
+    
+    /**
+     * 转换配置
+     * @var array
+     */
+    protected $_sanitiseOptions = array(
+        'notFilled'     => true,
+        'null'          => false,
+        'type'          => false,
+        'sanitise'      => true,
+        'hook'          => true,
+        'relation'      => true,
+        'relatedMeta'   => true,
+        'link'          => true,
+        'action'        => null,
+    );
 
     /**
      * 将数据格式化并加入
@@ -74,15 +90,5 @@ class Qwin_Meta_List extends Qwin_Meta_Common
         }
         $this->exchangeArray($data);
         return $this;
-    }
-    
-    public function setLayout()
-    {
-        
-    }
-    
-    public function getLayout()
-    {
-        
     }
 }

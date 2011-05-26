@@ -92,6 +92,36 @@ return array(
                 'language',
             ),
         ),
+        'email' => array(
+            
+        ),
+        'first_name' => array(
+            
+        ),
+        'last_name' => array(
+            
+        ),
+        'photo' => array(
+            
+        ),
+        'reg_ip' => array(
+            
+        ),
+        'theme' => array(
+            
+        ),
+        'telephone' => array(
+            
+        ),
+        'mobile' => array(
+            
+        ),
+        'homepage' => array(
+            
+        ),
+        'address' => array(
+            
+        ),
     ),
     'columns' => 1,
     'topButtons' => true,

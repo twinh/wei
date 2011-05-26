@@ -48,32 +48,32 @@ class Qwin_Meta_Common extends ArrayObject implements Qwin_Meta_Interface
     
     /**
      * @var array $_sanitiseOptions  数据处理的选项
-     *
-     *      -- view                 是否根据视图类关联模型的配置进行转换
-     *                              提示,如果转换的数据作为表单的值显示,应该禁止改选项
-     *
+     * 
+     *      -- notFilled            是否将null值转换为(未填写),适用显示数据类操作
+     * 
      *      -- null                 是否将NULL字符串转换为null类型
-     *
-     *      -- type                 是否进行强类型的转换,类型定义在['fieldName]['db']['type']
-     *
-     *      -- meta                 是否使用元数据的sanitise配置进行转换
-     *
-     *      -- sanitise             是否使用转换器进行转换
-     *
-     *      -- relatedMeta          是否转换关联的元数据
+     * 
+     *      -- type                 是否强制类型转换
+     * 
+     *      -- sanitise             是否使用元数据的转换配置
+     * 
+     *      -- hook                 是否使用外部钩子对象,一般为父元数据
+     * 
+     *      -- relatedMeta          是否通过关联元数据转换
+     * 
+     *      -- link                 是否转换链接
      */
     protected $_sanitiseOptions = array(
-        'action'        => null,
-        'view'          => true,
-        'null'          => true,
-        'type'          => true,
-        'meta'          => true,
-        'sanitise'      => false,
+        'notFilled'     => false, // LBL_NOT_FILLED
+        'null'          => false, // NULL
+        'type'          => false,
+        'sanitiser'     => false, // action
+        'hook'          => false, // $meta
+        'relation'      => false,
         'link'          => false,
-        'notFilled'     => false,
-        'relatedMeta'   => true,
+        'action'        => null,
     );
-
+    
     /**
      * 初始化类
      *
@@ -125,8 +125,8 @@ class Qwin_Meta_Common extends ArrayObject implements Qwin_Meta_Interface
     /**
      * 获取选项
      *
-     * @param string $name 配置名称
-     * @return mixed
+     * @param string $name 选项名称
+     * @return mixed 选项值
      */
     public function getOption($name = null)
     {
@@ -136,6 +136,12 @@ class Qwin_Meta_Common extends ArrayObject implements Qwin_Meta_Interface
         return isset($this->_options[$name]) ? $this->_options[$name] : null;
     }
     
+    /**
+     * 获取默认选项
+     * 
+     * @param string $name 选项名称
+     * @return mixed 选项值
+     */
     public function getDefault($name = null)
     {
         if (null == $name) {
@@ -150,7 +156,7 @@ class Qwin_Meta_Common extends ArrayObject implements Qwin_Meta_Interface
      * @param array $array1
      * @param array $array2
      * @return array
-     * @todo 深度
+     * @todo 深度,效率
      */
     protected function _multiArrayMerge($array1, $array2)
     {
@@ -279,7 +285,7 @@ class Qwin_Meta_Common extends ArrayObject implements Qwin_Meta_Interface
         $options = $options + $this->_sanitiseOptions;
         empty($dataCopy) && $dataCopy = $data;
         
-        // TODO 其他结构的转换
+        // 存在字段配置的才允许转换
         if (!isset($this['fields'])) {
             throw new Qwin_Meta_Common('Metadata "' . get_class($this) . '" unsupport sanitisation.');
         }
@@ -287,15 +293,15 @@ class Qwin_Meta_Common extends ArrayObject implements Qwin_Meta_Interface
         $meta = $this->getParent();
 
         // 加载流程处理对象
-        if ($options['meta']) {
+        if ($options['sanitise']) {
             $flow = Qwin::call('-flow');
         }
         if ($options['notFilled']) {
             $lang = Qwin::call('-widget')->get('Lang');
         }
-
+        
         // 转换关联模块的显示域
-        if ($options['view']) {
+        if ($options['relation']) {
             foreach ((array)$meta->offsetLoad('meta') as $relatedMeta) {
                 if ('view' != $relatedMeta['type']) {
                     continue;
@@ -311,66 +317,48 @@ class Qwin_Meta_Common extends ArrayObject implements Qwin_Meta_Interface
         }
 
         foreach ($data as $name => $value) {
-//            if (!isset($this['fields'][$name])) {
-//                continue;
-//            }
-
-//            if ('db' == $action) {
-                // 空转换 如果不存在,则设为空
+            if ($options['null']) {
                 if ('NULL' === $data[$name] || '' === $data[$name]) {
                     $data[$name] = null;
                 }
-//            } else {
-//                if (null === $data[$name]) {
-//                    $data[$name] = 'NULL';
-//                }
-//            }
+            }
             
             // 类型转换
             /*if ($options['type'] && $field['db']['type']) {
                 if (null != $newData[$name]) {
-                    if ('string' == $field['db']['type']) {
-                        $newData[$name] = (string)$newData[$name];
-                    } elseif ('integer' == $field['db']['type']) {
-                        $newData[$name] = (int)$newData[$name];
-                    } elseif ('float' == $field['db']['type']) {
-                        $newData[$name] = (float)$newData[$name];
-                    } elseif ('array' == $field['db']['type']) {
-                        $newData[$name] = (array)$newData[$name];
-                    }
+                    settype($newData[$name], $field['db']['type']);
                 }
             }*/
 
             // 根据元数据中转换器的配置进行转换
-            if ($options['meta']) {
+            if ($options['sanitise']) {
                 if (!isset($options['action'])) {
                     if (isset($this['fields'][$name]['sanitiser'])) {
                         $data[$name] = $flow->call(array($this['fields'][$name]['sanitiser']), Qwin_Flow::PARAM, $value);
                     }
                 } else {
-                    if (isset($this['fields'][$name]['sanitiser'][$action])) {
-                        $data[$name] = $flow->call(array($this['fields'][$name]['sanitiser'][$action]), Qwin_Flow::PARAM, $value);
+                    if (isset($this['fields'][$name]['sanitiser'][$options['action']])) {
+                        $data[$name] = $flow->call(array($this['fields'][$name]['sanitiser'][$options['action']]), Qwin_Flow::PARAM, $value);
                     }
                 }
             }
 
             // 使用转换器中的方法进行转换
-            if ($options['sanitise']) {
+            if ($options['hook']) {
                 $method = str_replace(array('_', '-'), '', 'sanitise' . $options['sanitise'] . $name);
                 if (method_exists($meta, $method)) {
                     $data[$name] = call_user_func_array(
                         array($meta, $method),
-                        // $value or $data[$name] ?
                         array($value, $name, $data, $dataCopy)
                     );
                 }
             }
 
             // 转换null值为未填写
-            if ($options['notFilled'] && null === $data[$name]) {
+            if ($options['notFilled'] && is_null($data[$name])) {
                 $data[$name] = $lang['LBL_NOT_FILLED'];
             }
-
+            
             // 转换链接
             if ($options['link'] && isset($this['fields'][$name]['link']) && true == $this['fields'][$name]['link'] && method_exists($meta, 'setIsLink')) {
                 $data[$name] = call_user_func_array(
@@ -382,18 +370,17 @@ class Qwin_Meta_Common extends ArrayObject implements Qwin_Meta_Interface
         }
 
         // 对db类型的关联元数据进行转换
-        if ($options['relatedMeta']) {
+        //if ($options['relatedMeta']) {
 //            foreach ($meta->getModelMetaByType('db') as $name => $relatedMeta) {
 //                !isset($data[$name]) && $data[$name] = array();
 //                // 不继续转换关联元数据
 //                $options['relatedMeta'] = false;
 //                $data[$name] = $relatedMeta->sanitise($data[$name], $action, $options);
 //            }
-        }
+        //}
 
         // 调用钩子方法
         //$this->postSanitise();
-
         return $data;
     }
     
