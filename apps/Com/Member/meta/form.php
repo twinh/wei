@@ -135,6 +135,7 @@ return array(
             array('group_id'),
             array('username'),
             array('email'),
+            array('password'),
             array('first_name'),
             array('last_name'),
             array('sex'),

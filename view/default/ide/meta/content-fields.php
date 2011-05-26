@@ -100,7 +100,7 @@ $widget->get('Minify')->addArray(array(
         border: none;
     }
     .qw-fields-right form fieldset {
-        display: none;
+/*        display: none;*/
     }
 </style>
 <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
@@ -125,9 +125,9 @@ $widget->get('Minify')->addArray(array(
                 <div class="qw-fields-left ui-widget-content ui-corner-left">
                     <ul>
                     <?php
-                    foreach ($meta['fields'] as $field) :
+                    foreach ($fields as $name => $field) :
                     ?>
-                        <li class="ui-corner-left" id="qw-fieldset-li-<?php echo $field['name'] ?>"><a href="javascript:;"><?php echo $field['title'] ?>(<?php echo $field['name'] ?>)</a></li>
+                        <li class="ui-corner-left" id="qw-fieldset-li-<?php echo $name ?>"><a href="javascript:;"><?php echo $lang->f($name) ?>(<?php echo $name ?>)</a></li>
                     <?php
                     endforeach;
                     ?>
@@ -139,7 +139,8 @@ $widget->get('Minify')->addArray(array(
                 <?php
                 $formWidget = Qwin::call('-widget')->get('Form');
                 $formOptions = array(
-                    'form'  => $meta[$formName],
+                    'meta' => $meta,
+                    'form'  => $formName,
                     'action' => 'edit',
                     'data'  => $data,
                 );

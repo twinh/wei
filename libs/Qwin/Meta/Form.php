@@ -59,7 +59,7 @@ class Qwin_Meta_Form extends Qwin_Meta_Common
         //_resourceGetter = null, 
         '_value' => '',
         'name' => null,
-        'id' => null,
+        //'id' => null,
         //'class' => null,
         //'_widget' => array(),
         //'_readonly' => false,
@@ -98,9 +98,9 @@ class Qwin_Meta_Form extends Qwin_Meta_Common
         }
         
         foreach ($data['fields'] as $name => &$field) {
+            // TODO 能否可选
             !isset($field['name']) && $field['name'] = $name;
             !isset($field['id']) && $field['id'] = $name;
-            //!isset($field['_label']) && $field['_label'] = 'FLD_' . strtoupper($name);
             $field = (array)$field + $this->_fieldDefaults;
         }
         $this->exchangeArray($data);
@@ -128,6 +128,21 @@ class Qwin_Meta_Form extends Qwin_Meta_Common
             $data[$name] = $field['_value'];
         }
         return $data;
+    }
+    
+    /**
+     * 获取表单数组
+     * 
+     * @param string $name
+     * @param string $id
+     * @return array 
+     */
+    public function getForm($name, $id = null)
+    {
+        return array(
+            'name' => $name,
+            'id' => isset($id) ? $id : $name,
+        ) + $this->_fieldDefaults;
     }
     
 //    public function getResource($field)

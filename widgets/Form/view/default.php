@@ -85,8 +85,8 @@ endif;
                 if ('' === $field) {
                     echo '<td colspan="' . ($i + 2) . '">&nbsp;</td>';
                 } else {
-                    if (isset($fieldForm['_label'])) {
-                        $label = $fieldForm['_label'];
+                    if (isset($form['fields'][$field]['_label'])) {
+                        $label = $lang[$form['fields'][$field]['_label']];
                     } else {
                         $label = $lang->f($field);
                     }
