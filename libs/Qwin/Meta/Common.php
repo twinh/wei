@@ -378,23 +378,6 @@ class Qwin_Meta_Common extends ArrayObject implements Qwin_Meta_Interface
 //                $data[$name] = $relatedMeta->sanitise($data[$name], $action, $options);
 //            }
         //}
-
-        // 调用钩子方法
-        //$this->postSanitise();
         return $data;
     }
-    
-//    /**
-//     * 提供一个钩子方法,当数据处理开始时,调用此方法
-//     */
-//    public function preSanitise()
-//    {
-//    }
-//
-//    /**
-//     * 提供一个钩子方法,当数据处理结束时,调用此方法
-//     */
-//    public function postSanitise()
-//    {
-//    }
 }

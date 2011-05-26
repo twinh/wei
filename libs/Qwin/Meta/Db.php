@@ -56,7 +56,6 @@ class Qwin_Meta_Db extends Qwin_Meta_Common
         'name' => null,
         'title' => null,
         'description' => array(),
-        'order' => 50,
         'dbField' => true,
         'dbQuery' => true,
         'urlQuery' => true,
@@ -115,7 +114,7 @@ class Qwin_Meta_Db extends Qwin_Meta_Common
         
         foreach ($data['fields'] as $name => &$field) {
             !isset($field['name']) && $field['name'] = $name;
-            !isset($field['title']) && $field['title'] = 'FLD_' . strtoupper($name);
+            //!isset($field['title']) && $field['title'] = 'FLD_' . strtoupper($name);
             $field = (array)$field + $this->_fieldDefaults;
         }
         $this->exchangeArray($data);

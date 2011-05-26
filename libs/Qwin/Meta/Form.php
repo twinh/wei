@@ -26,7 +26,7 @@
 class Qwin_Meta_Form extends Qwin_Meta_Common
 {
     /**
-     * @var array               默认选项,以下划线开头为私有属性,否则为Html属性
+     * @var array               域默认选项,以下划线开头为私有属性,否则为Html属性
      * 
      *      -- _label           表单标题名称,如果为空,使用表单名称代替
      * 
@@ -52,7 +52,7 @@ class Qwin_Meta_Form extends Qwin_Meta_Common
      *      -- _view            值为假时,在视图页不显示
      * 
      */
-    protected $_defaults = array(
+    protected $_fieldDefaults = array(
         //'_label' => null,
         '_type' => 'text',
         '_resource' => null,
@@ -67,10 +67,10 @@ class Qwin_Meta_Form extends Qwin_Meta_Common
     );
     
     /**
-     * 表单元数据整体结构
-     * @var type 
+     * 默认选项
+     * @var array
      */
-    protected $_struct = array(
+    protected $_defaults = array(
         'fields' => array(),
         'layout' => array(),
         'hidden' => array(),
@@ -88,20 +88,20 @@ class Qwin_Meta_Form extends Qwin_Meta_Common
     public function merge($data, array $options = array())
     {
         // 初始化结构,保证数据完整性
-        $data = (array)$data + $this->_struct;
+        $data = (array)$data + $this->_defaults;
         !is_array($data['fields']) && $data['fields'] = (array)$data['fields'];
-        !is_array($data['layout']) && $data['layout'] = (array)$data['layout'];
         
         // 处理通配选项
         if (array_key_exists('*', $data['fields'])) {
-            $this->_defaults = $this->_defaults + (array)$data['fields']['*'];
+            $this->_fieldDefaults = $this->_fieldDefaults + (array)$data['fields']['*'];
             unset($data['fields']['*']);
         }
+        
         foreach ($data['fields'] as $name => &$field) {
             !isset($field['name']) && $field['name'] = $name;
             !isset($field['id']) && $field['id'] = $name;
             //!isset($field['_label']) && $field['_label'] = 'FLD_' . strtoupper($name);
-            $field = (array)$field + $this->_defaults;
+            $field = (array)$field + $this->_fieldDefaults;
         }
         $this->exchangeArray($data);
         return $this;

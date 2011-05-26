@@ -26,10 +26,10 @@
 class Qwin_Meta_List extends Qwin_Meta_Common
 {
     /**
-     * 默认选项
+     * 域默认选项
      * @var array
      */
-    protected $_defaults = array(
+    protected $_fieldDefaults = array(
         'enabled' => true,
         'hidden' => false,
         'link' => false,
@@ -38,10 +38,10 @@ class Qwin_Meta_List extends Qwin_Meta_Common
     );
     
     /**
-     * 列表元数据整体结构
-     * @var type 
+     * 默认选项
+     * @var array 
      */
-    protected $_struct = array(
+    protected $_defaults = array(
         'fields' => array(),
         'layout' => array(),
         'db' => array(
@@ -71,22 +71,21 @@ class Qwin_Meta_List extends Qwin_Meta_Common
      *
      * @param array $data 数据
      * @param array $options 选项
-     * @return Qwin_Meta_Model 当前对象
+     * @return Qwin_Meta_List 当前对象
      */
     public function merge($data, array $options = array())
     {
-        // 初始化结构,保证数据完整性
-        $data = (array)$data + $this->_struct;
-        !is_array($data['fields']) && $data['fields'] = (array)$data['fields'];
-        !is_array($data['layout']) && $data['layout'] = (array)$data['layout'];
+        $data = (array)$data + $this->_defaults;
+        !is_array($data['fields']) && (array)$data['fields'];
         
         // 处理通配选项
         if (array_key_exists('*', $data['fields'])) {
-            $this->_defaults = $this->_defaults + (array)$data['fields']['*'];
+            $this->_fieldDefaults = $this->_fieldDefaults + (array)$data['fields']['*'];
             unset($data['fields']['*']);
         }
+        
         foreach ($data['fields'] as &$field) {
-            $field = (array)$field + $this->_defaults;
+            $field = (array)$field + $this->_fieldDefaults;
         }
         $this->exchangeArray($data);
         return $this;
