@@ -55,29 +55,32 @@ class Ide_Meta_Controller extends Com_Controller
     {
         $request = $this->_request;
         $meta = $this->getMeta();
-        $lang = Qwin::call('-widget')->get('Lang');
+        $lang = $this->getWidget()->call('Lang');
         
         // 模块
         $module2 = $request->get('module2');
         
-        //
         $from = $request->get('from');
         $from = Qwin_Util_Array::forceInArray($from, array('file', 'table'));
         
         //
         $source = $request->get('source');
         
+        if ($request->isPost()) {
+            qw_P($_POST);
+        }
+        
         // 读取元数据域配置文件
         if ('file' == $from) {
             
         } else {
             // 获取数据库字段配置
-            $query = Com_Meta::getQueryByModule($this->_module);
+            $query = $this->getMeta()->get('db')->getQuery();
             $manager = Doctrine_Manager::getInstance();
             $tableFormat = $manager->getAttribute(Doctrine_Core::ATTR_TBLNAME_FORMAT);
             $tableColumns = $query->getConnection()->import->listTableColumns(sprintf($tableFormat, $source));
             
-            // 将配置转换为元数据形式
+            // 构造表单元数据
             $formName = $source . 'form';
             $fields = array();
             $form = array(
@@ -85,16 +88,17 @@ class Ide_Meta_Controller extends Com_Controller
                 'layout' => array(),
             );
             foreach ($tableColumns as $name => $column) {
+                $groupName = 'FLD_' . strtoupper($name);
                 $fields[$name] = array();
                 //$form['fields'][$name] = array();
-                $form['layout'][$name] = array();
+                $form['layout'][$groupName] = array();
                 
                 foreach ($meta['formsample'] as $attrName => $attrForm) {
                     $newName = $name . '[' . $attrName . ']';
-                    $form['layout'][$name][] = array($newName);
+                    $form['layout'][$groupName][] = array($newName);
                     $form['fields'][$newName] = array(
                         '_label' => 'FLD_' . strtoupper($attrName),
-                        'name' => $newName,
+                        'name' => 'fields[' . $name . '][' . $attrName . ']',
                         'id' => $name . '_' . $attrName,
                     ) + $attrForm;
                     if ('title' == $attrName) {
@@ -105,10 +109,8 @@ class Ide_Meta_Controller extends Com_Controller
                     }
                 }
             }
-            $meta->set('fields', $fields);
             $meta->set($formName, $form, 'form');
         }
-        
         $meta = $this->getMeta();
         $this->getView()->assign(get_defined_vars());
     }

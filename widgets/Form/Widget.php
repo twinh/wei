@@ -64,6 +64,8 @@ class Form_Widget extends Qwin_Widget_Abstract
      * @var array
      */
     protected $_elementoptions = array(
+        'name' => null,
+        'id' => null,
         '_type' => null,
         '_value' => null,
     );
@@ -92,7 +94,7 @@ class Form_Widget extends Qwin_Widget_Abstract
         if (!($form = $meta->offsetLoad($options['form'], 'form'))) {
             throw new Qwin_Widget_Exception('ERR_FROM_META_NOT_FOUND');
         }
-        $form = clone $form;
+        $form1 = clone $form;
 
         // 数据库元数据是可选的,不用做检查
         /* @var $db Qwin_Meta_Db */
@@ -117,20 +119,15 @@ class Form_Widget extends Qwin_Widget_Abstract
         }
 
         // 默认表单配置
-        $defaultForm = $form->getDefault();
         $minify = $this->_widget->get('Minify');
         $lang = $this->_Lang;
         $refererPage = urlencode(Qwin::call('-request')->server('HTTP_REFERER'));
         
         //
         $options['id'] = sprintf($options['id'], $meta['module']->getId());
-        
+
         // 为表单赋值
-        foreach ($data as $name => $value) {
-            if (!isset($form['fields'][$name])) {
-                $form['fields'][$name] = $defaultForm;
-            }
-            $form['fields'][$name]['name'] = $name;
+        foreach ((array)$data as $name => $value) {
             $form['fields'][$name]['_value'] = $value;
         }
 
@@ -177,8 +174,8 @@ class Form_Widget extends Qwin_Widget_Abstract
      */
     public function renderElement(array $options)
     {
-        $options = array_merge($this->_elementoptions, $options);
-
+        $options = $options + $this->_elementoptions;
+        
         // 假如设定了第二个参数，将作为表单的值
         $params = func_get_args();
         if (array_key_exists(1, $params)) {

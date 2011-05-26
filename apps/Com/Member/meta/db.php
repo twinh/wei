@@ -42,10 +42,7 @@ return array(
             ),
         ),
         'password' => array(
-            'attr' => array(
-                'isReadonly' => 1,
-                'isView' => 0,
-            ),
+            'readonly' => true,
             'sanitiser' => array(
                 'db' => array(
                     'md5'
