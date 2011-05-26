@@ -126,12 +126,14 @@ class Form_Widget extends Qwin_Widget_Abstract
         $options['id'] = sprintf($options['id'], $meta['module']->getId());
         
         // 为表单赋值
-        foreach ($form['fields'] as $name => $field) {
-            if (array_key_exists($name, $data)) {
-                $form['fields'][$name]['_value'] = $data[$name];
+        foreach ($data as $name => $value) {
+            if (!isset($form['fields'][$name])) {
+                $form['fields'][$name] = $defaultForm;
             }
+            $form['fields'][$name]['name'] = $name;
+            $form['fields'][$name]['_value'] = $value;
         }
-        
+
         // 编辑操作下,为只读域增加提示
         if ('edit' == $options['action']) {
             if (false !== $db) {

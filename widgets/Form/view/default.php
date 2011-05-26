@@ -85,18 +85,13 @@ endif;
                 if ('' === $field) {
                     echo '<td colspan="' . ($i + 2) . '">&nbsp;</td>';
                 } else {
-                    if (isset($form['fields'][$field])) {
-                        $fieldForm = $form['fields'][$field];
-                    } else {
-                        $fieldForm = array('name' => $field) + $defaultForm;
-                    }
                     if (isset($fieldForm['_label'])) {
                         $label = $fieldForm['_label'];
                     } else {
                         $label = $lang->f($field);
                     }
-                    echo '<td class="ui-label-common"><label for="' . $fieldForm['id'] . '">' . $label . ':</label></td>'
-                       . '<td class="ui-field-common ui-field-' . $fieldForm['_type'] . '" colspan="' . ($i * 2 + 1) . '">' . $this->renderElement($fieldForm) , $this->renderElementWidget($fieldForm) . '</td>';
+                    echo '<td class="ui-label-common"><label for="' . $form['fields'][$field]['id'] . '">' . $label . ':</label></td>'
+                       . '<td class="ui-field-common ui-field-' . $form['fields'][$field]['_type'] . '" colspan="' . ($i * 2 + 1) . '">' . $this->renderElement($form['fields'][$field]) , $this->renderElementWidget($form['fields'][$field]) . '</td>';
                 }
             } else {
                 echo '<td colspan="2">&nbsp;</td>';
