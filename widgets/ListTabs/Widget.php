@@ -123,7 +123,7 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
      * @return array
      * @todo ListTab, FormLink等存在重复的情况,应考虑如何合并
      */
-    public function render($view)
+    public function render($view = null)
     {
         $tabs = $this->getTabs($view['module'], $view['get']);
         return $this->renderTabs($tabs);

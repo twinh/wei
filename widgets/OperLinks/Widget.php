@@ -31,7 +31,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
 //        'pk'    => null,
 //    );
 
-    public function render($view)
+    public function render($view = null)
     {
         $module = $view['module'];
         $action = $view['action'];
@@ -119,7 +119,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
                     $jsLang = 'MSG_CONFIRM_TO_DELETE_TO_TRASH';
                 }
                  $link['delete'] = array(
-                    'url'   => 'javascript:if(confirm(Qwin.Lang.' . $jsLang . ')){window.location=\'' . $url->url($moduleUrl, 'delete', array($id => $data[$id])) . '\'};',
+                    'url'   => 'javascript:if(confirm(qwin.lang.' . $jsLang . ')){window.location=\'' . $url->url($moduleUrl, 'delete', array($id => $data[$id])) . '\'};',
                     'title' => $lang->t('ACT_DELETE'),
                     'icon'  => $icon,
                 );

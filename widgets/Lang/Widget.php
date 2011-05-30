@@ -45,7 +45,7 @@ class Lang_Widget extends Qwin_Widget_Abstract implements ArrayAccess
      *
      * @var array
      */
-    protected $_appendedFileList = array();
+    protected $_appendedFiles = array();
 
     /**
      * 模块管理对象
@@ -93,6 +93,11 @@ class Lang_Widget extends Qwin_Widget_Abstract implements ArrayAccess
         
         // 初始化语言名称
         $this->_getName($options['module']);
+        
+        // 加载全局语言
+        $resource = Qwin::config('resource');
+        $file = $resource . 'apps/lang/' . $this->_name . '.php';
+        $this->appendByFile($file);
 
         // 逐层加载语言
         $this->appendByModule($options['module']);
@@ -109,9 +114,9 @@ class Lang_Widget extends Qwin_Widget_Abstract implements ArrayAccess
      */
     protected function _appendFile($file)
     {
-        if (!isset($this->_appendedFileList[$file])) {
+        if (!isset($this->_appendedFiles[$file])) {
             $this->append((array)require $file);
-            $this->_appendedFileList[$file] = true;
+            $this->_appendedFiles[$file] = true;
         }
         return $this;
     }

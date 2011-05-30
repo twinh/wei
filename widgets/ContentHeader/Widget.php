@@ -25,7 +25,7 @@
 
 class ContentHeader_Widget extends Qwin_Widget_Abstract
 {
-    public function render($view)
+    public function render($view = null)
     {
         // 构建页眉导航
         $module = $view['module'];

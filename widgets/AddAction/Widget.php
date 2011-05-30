@@ -63,7 +63,7 @@ class AddAction_Widget extends Qwin_Widget_Abstract
                     'message' => $lang['MSG_RECORD_EXISTS'],
                 );
                 if ($options['display']) {
-                    return Qwin::call('-view')->alert($result['message']);
+                    return $this->_View->alert($result['message']);
                 } else {
                     return $result;
                 }
@@ -86,7 +86,7 @@ class AddAction_Widget extends Qwin_Widget_Abstract
                 'message' => $validator->getInvalidMessage(),
             );
             if ($options['display']) {
-                Qwin::call('-view')->alert($result['message']['title'], null, $result['message']['content']);
+                $this->_View->alert($result['message']['title'], null, $result['message']['content']);
             } else {
                 return $result;
             }
@@ -105,7 +105,7 @@ class AddAction_Widget extends Qwin_Widget_Abstract
             if (!$options['url']) {
                 $options['url'] = Qwin::call('-url')->url($options['module'], array('action' => 'index'));
             }
-            return Qwin::call('-view')->success(Qwin::call('-lang')->t('MSG_SUCCEEDED'), $options['url']);
+            return $this->_View->success(Qwin::call('-lang')->t('MSG_SUCCEEDED'), $options['url']);
         }
         return array(
             'result' => true,

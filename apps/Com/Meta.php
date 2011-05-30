@@ -218,7 +218,7 @@ class Com_Meta extends Qwin_Meta_Abstract
                 $jsLang = 'MSG_CONFIRM_TO_DELETE_TO_TRASH';
             }
             $operation['delete'] = array(
-                'url'   => 'javascript:if(confirm(Qwin.Lang.' . $jsLang . ')){window.location=\'' . $url->url($module->getUrl(), 'delete', array($id => $dataCopy[$id])) . '\';}',
+                'url'   => 'javascript:if(confirm(qwin.lang.' . $jsLang . ')){window.location=\'' . $url->url($module->getUrl(), 'delete', array($id => $dataCopy[$id])) . '\';}',
                 'title' => $lang->t('ACT_DELETE'),
                 'icon'  => $icon,
             );

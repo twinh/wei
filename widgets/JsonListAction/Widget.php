@@ -143,6 +143,6 @@ class JsonListAction_Widget extends Qwin_Widget_Abstract
 
         // TODO 输出型视图
         echo $json;
-        Qwin::call('-view')->setDisplayed();
+        $this->_View->setDisplayed();
     }
 }

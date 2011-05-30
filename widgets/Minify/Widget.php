@@ -72,6 +72,11 @@ class Minify_Widget extends Qwin_Widget_Abstract
             if (null == $extension) {
                 $extension = pathinfo($file, PATHINFO_EXTENSION);
             }
+//            if ('js' == $extension) {
+//                echo '<script src="' . $file . '"></script>';
+//            } else {
+//                echo '<link rel="stylesheet" type="text/css" media="all" href="' . $file . '" />';
+//            }
             if (isset($this->_data[$extension])) {
                 $this->_data[$extension][] = $file;
             }

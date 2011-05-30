@@ -32,7 +32,7 @@ class OptionEditor_Widget extends Qwin_Widget_Abstract
         $form = $this->_widget->get('Form');
 
         $id = $options['form']['id'];
-        $view = Qwin::call('-view');
+        $view = $this->_View;
 
         // todo 更合适的加载方式？
         $codeMeta = Qwin_Meta::getInstance()->get('Ide_Option_CodeMeta');

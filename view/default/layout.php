@@ -3,14 +3,14 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $config['interface']['charset'] ?>" />
-<title><?php echo qw_t('LBL_HTML_TITLE') ?></title>
+<title><?php echo $lang['LBL_HTML_TITLE'] ?></title>
 <?php
 echo $this->getPackerSign();
 $member = Qwin::call('-session')->get('member');
 $nickname = isset($member['contact']) ? $member['contact']['nickname'] : $member['username'];
 $minify->addArray(array(
     $style->getCssFile(),
-    $this->getTag('root') . 'com/style/style.css',
+    $this->getTag('root') . 'style.css',
     QWIN . 'image/iconx.css',
     $jQuery->loadCore(false),
     $jQuery->loadUi('core', false),
@@ -18,33 +18,32 @@ $minify->addArray(array(
     $jQuery->loadUi('button', false),
     $jQuery->loadEffect('core', false),
     $jQuery->loadPlugin('qui', null, false),
-    QWIN . 'js/qwin.js',
-    $this->getTag('root') . 'com/script/style.js',
+    $this->getTag('root') . 'style.js',
 ));
 ?>
 <!--[if IE 6]>
-<link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->getTag('root') ?>com/style/style-ie6.css" />
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->getTag('root') ?>style-ie6.css" />
 <![endif]-->
 <script type="text/javascript">
     jQuery.noConflict();
-    Qwin.get = <?php echo Qwin_Util_Array::jsonEncode($_GET) ?>;
-    Qwin.Lang = <?php echo json_encode($lang->toArray()) ?>;
+    qwin.get = <?php echo Qwin_Util_Array::jsonEncode($_GET) ?>;
+    qwin.lang = <?php echo json_encode($lang->toArray()) ?>;
 </script>
 <!--<script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>-->
 </head>
 <body>
 <div id="ui-main" class="ui-main ui-widget-content ui-corner-all">
-<table id="ui-header" class="ui-header ui-widget" border="0" cellpadding="0" cellspacing="0">
+<table id="qw-header" class="qw-header ui-widget" border="0" cellpadding="0" cellspacing="0">
     <tr>
-        <td id="ui-header-left">
-            <div class="ui-header-logo ui-widget-content">
+        <td id="qw-header-left">
+            <div class="qw-header-logo ui-widget-content">
                 <a href="?">
                     <img src="<?php echo $this->getTag('root') ?>com/image/logo.png" alt="logo" />
                 </a>
             </div>
         </td>
-        <td colspan="2" id="ui-header-middle">
-            <div class="ui-header-shortcut" id="ui-header-shortcut">
+        <td colspan="2" id="qw-header-middle">
+            <div class="qw-header-shortcut" id="qw-header-shortcut">
                 <a class="ui-state-default" href="<?php echo qw_u('com/member/my') ?>"><?php echo qw_t('LBL_WELCOME') ?>, <?php echo $nickname ?>!</a>
 <!--                <a class="ui-state-default" href="<?php echo qw_url(array('module' => 'Management', 'controller' => 'Management')) ?>"><?php echo qw_t('LBL_MANAGEMENT') ?></a>-->
                 <?php
@@ -69,7 +68,6 @@ $minify->addArray(array(
     <tr id="ui-main-content">
         <td id="ui-main-left">
         <div class="ui-mian-left-panel">
-        <?php Qwin::hook('viewMainLeft', $this); ?>
         <?php require $this->getElement('sidebar') ?>
         </div>
         </td>

@@ -24,6 +24,8 @@
  */
 
 return array(
+    'MOD_CRM_CUSTOMER' => '客户',
+    
     'FLD_NUMBER' => '编号',
     'FLD_SOURCE' => '来源',
     'FLD_GRADE' => '等级',
@@ -57,8 +59,6 @@ return array(
     'LBL_GROUP_BANK_DATA' => '银行财务资料',
 
     'ACT_LEAD' => '潜在客户',
-
-    'LBL_MODULE_CUSTOMER' => '客户',
 
     'FLD_CARE_AT' => '关怀时间',
     'FLD_CUSTOMER_ID' => '客户编号',

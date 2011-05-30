@@ -51,7 +51,7 @@ class Com_Member_Auth_Widget_Logout extends Qwin_Widget_Abstract
                     'message' => $lang->t('MSG_NOT_LOGIN'),
                 );
                 if ($options['display']) {
-                    Qwin::call('-view')->alert($return['message']);
+                    $this->_View->alert($return['message']);
                 }
                 return $return;
             }
@@ -68,7 +68,7 @@ class Com_Member_Auth_Widget_Logout extends Qwin_Widget_Abstract
             'url' => $url,
         );     
         if ($options['display']) {
-            Qwin::call('-view')->success($return['message'], $return['url']);
+            $this->_View->success($return['message'], $return['url']);
         }
         return $return;
     }

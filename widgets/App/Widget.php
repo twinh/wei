@@ -23,7 +23,14 @@
  * @version     $Id$
  * @since       2011-05-15 13:31:05
  */
+
 class App_Widget extends Qwin_Widget_Abstract
 {
-    
+    public function render($options = null)
+    {
+        // TODO
+        //Qwin::render($config);
+        //Qwin::call('-widget')->call('App')->render($config);
+        //Qwin::widget('App')->render($config);
+    }
 }

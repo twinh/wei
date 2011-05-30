@@ -21,7 +21,7 @@
  * @version     $Id$
  * @since       2011-01-03 01:17:46
  *}
-<div id="ui-nav-bar" class="ui-nav-bar">
+<div id="qw-nav-bar" class="qw-nav-bar">
     <ul class="ui-widget-content ui-navbar-parent">
     {strip}
         <li class="ui-widget ui-state-active ui-corner-top"> <a href="{$menus.qwin.url}">{$menus.qwin.title}</a>

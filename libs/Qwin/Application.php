@@ -130,6 +130,7 @@ class Qwin_Application
         
         // 加载视图
         $this->_view = Qwin::call('Qwin_Application_View');
+        //$this->_view = Qwin::call('-widget')->call('View');
 
         // 初始化请求
         $request = Qwin::call('-request');
@@ -161,21 +162,15 @@ class Qwin_Application
         } else {
             throw new Qwin_Application_Exception('Action "' . $action . '" not found in controller "' . get_class($controller) .  '"');
         }
-
+        
         // 展示视图,视图对象可能已被更改,需进行辨别
-        if (is_subclass_of($this->_view, 'Qwin_Application_View')) {
-            $this->_view->display();
-        }
+        $this->_view->display();
+        //Qwin::call('-widget')->call('View')->display();
 
         // 设置应用结束钩子
         Qwin::hook('AppTermination');
         
         return $this;
-    }
-
-    public function getView()
-    {
-        return $this->_view;
     }
 
     /**

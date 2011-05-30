@@ -47,6 +47,12 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
     protected $_rootPath;
     
     /**
+     * 微件的准确根目录
+     * @var string 
+     */
+    protected $_exactRootPath;
+    
+    /**
      * 微件的缓存目录
      * @var string
      */
@@ -65,22 +71,22 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
      * @todo 不是每一个微件都需要此流程
      */
     public function __construct(array $options = array())
-    {
+    {        
         // 检查是否通过微件管理对象获得,不是则
-        $this->_widget = Qwin::call('Qwin_Widget');
-        if (!$this->_widget->isCalled($this)) {
-            $params = $this->_widget->getParams($this);
-            isset($params[0]) && $options += $params[0];
-        }
-
+        $this->_widget = Qwin::call('-widget');
+        $this->_widget->register($this);
+        
         $options = $this->_options = $options + $this->_defaults;
-
-        // 初始化根目录
-        if (isset($options['rootPath']) && is_dir($options['rootPath'])) {
-            $this->setRootPath($options['rootPath']);
-        }
+        // !!
+        $this->_rootPath = $this->_widget->getPath() . substr(get_class($this), 0, -7) . '/';
     }
 
+    /**
+     * 渲染微件
+     * 
+     * @param mixed $options 选项
+     * @return Qwin_Widget_Abstract 当前对象 
+     */
     public function render($options = null)
     {
         return $this;
@@ -184,13 +190,22 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
     }
 
     /**
-     * 获取当前根目录
-     *
-     * @return string
+     * 获取微件根目录
+     * 
+     * @param bool $exact 通过类反射获取准确的根目录,当微件不在默认目录时使用
+     * @return string 根目录
      */
-    public function getRootPath()
+    public function getRootPath($exact = false)
     {
-        return $this->_rootPath;
+        if (false === $exact) {
+            return $this->_rootPath;
+        } else {
+            if (!$this->_exactRootPath) {
+                $obj = new ReflectionClass($this);
+                $this->_exactRootPath = dirname($obj->getFileName());
+            }
+            $this->_exactRootPath;
+        }
     }
 
     /**

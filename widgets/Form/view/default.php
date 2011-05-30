@@ -47,12 +47,15 @@ endif;
     }
     ?>
 </div>
-<?php foreach ($form['layout'] as $group => $row) : ?>
+<?php
+    foreach ($form['layout'] as $group => $row) : 
+        $groupId = strtolower(strtr($group, '_', '-'));
+?>
 <?php if (!is_numeric($group)) : ?>
-    <fieldset id="ui-fieldset-<?php echo $group ?>" class="ui-widget-content ui-corner-all">
+    <fieldset id="ui-fieldset-<?php echo $groupId ?>" class="ui-widget-content ui-corner-all">
     <legend><?php echo $lang[$group] ?></legend>
 <?php endif; ?>
-    <table class="ui-form-table" id="ui-form-table-<?php echo $group ?>" width="100%">
+    <table class="ui-form-table" id="ui-form-table-<?php echo $groupId ?>" width="100%">
         <tr>
         <?php foreach ($percent as $value) : ?>
             <td width="<?php echo $value?>%"></td>

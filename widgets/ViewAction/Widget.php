@@ -89,7 +89,7 @@ class ViewAction_Widget extends Qwin_Widget_Abstract
                 'message' => $this->_Lang['MSG_NO_RECORD'],
             );
             if ($options['display']) {
-                return Qwin::call('-view')->alert($result['message']);
+                return $this->_View->alert($result['message']);
             } else {
                 return $result;
             }
@@ -119,7 +119,7 @@ class ViewAction_Widget extends Qwin_Widget_Abstract
             'data'      => $data,
         );
         
-        $view = Qwin::call('-view');
+        $view = $this->_View;
         $view->assign(get_defined_vars());
         $view->setElement('content', '<root>com/basic/form<suffix>');
         $view['module'] = $meta->getModule();
@@ -133,7 +133,7 @@ class ViewAction_Widget extends Qwin_Widget_Abstract
         );
         
         // TODO view
-//        $view = Qwin::call('-view');
+//        $view = $this->_View;
 //        //$view->setElement('content', '<root>com/basic/view<suffix>');
 //        $view->setElement('content', '<root>com/basic/form<suffix>');
 //        $view['module'] = $view['options']['module'];

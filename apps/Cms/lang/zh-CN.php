@@ -20,9 +20,9 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-02-09 18:01:16
+ * @since       2011-5-28 16:57:01
  */
 
-/* @var $this Qwin_Application_Language */
-$this->appendByModule('Com');
-return array();
+return array(
+    'MOD_CMS' => '内容管理',
+);

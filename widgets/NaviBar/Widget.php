@@ -69,7 +69,10 @@ class NaviBar_Widget extends Qwin_Widget_Abstract
         $pageUrl = basename($_SERVER['PHP_SELF']) . $queryString;
 
         $minify = $this->_widget->get('Minify');
-        $minify->add($this->_rootPath . 'view/js.js');
+        $minify->addArray(array(
+            $this->_rootPath . 'view/style.css',
+            $this->_rootPath . 'view/js.js',
+        ));
 
         $smarty = $this->_widget->get('Smarty')->getObject();
         $smarty->assign('menus', $menus);

@@ -59,7 +59,7 @@ class Com_Trash_Widget_Restore extends Qwin_Widget_Abstract
                 'message' => $this->_lang->t('MSG_NO_RECORD'),
             );
             if ($options['display']) {
-                return Qwin::call('-view')->alert($result['message']);
+                return $this->_View->alert($result['message']);
             } else {
                 return $result;
             }
@@ -101,7 +101,7 @@ class Com_Trash_Widget_Restore extends Qwin_Widget_Abstract
         // 展示视图
         if ($options['display']) {
             !$options['url'] && $options['url'] = Qwin::call('-url')->url('com/trash');
-            return Qwin::call('-view')->success(Qwin::call('-lang')->t('MSG_SUCCEEDED'), $options['url']);
+            return $this->_View->success(Qwin::call('-lang')->t('MSG_SUCCEEDED'), $options['url']);
         }
         return array(
             'result' => true,

@@ -127,6 +127,8 @@ class ListAction_Widget extends Qwin_Widget_Abstract
             $jqGridOptions['width']        = 800;
         }
         
-        Qwin::call('-view')->assign(get_defined_vars());
+        $view = $this->_View;
+        $view->setElement('content', $this->_rootPath . 'view/default.php');
+        $view->assign(get_defined_vars());
     }
 }

@@ -30,7 +30,7 @@ class ViewedRecords_Hook extends Qwin_Hook_Abstract
      * @var array
      */
     protected $_priorities = array(
-        'ViewMainLeft' => 50,
+        'ViewSidebar' => 50,
         'ViewRecord' => 50,
     );
 
@@ -38,7 +38,7 @@ class ViewedRecords_Hook extends Qwin_Hook_Abstract
         'maxNum' => 8,
     );
 
-    public function hookViewMainLeft($view)
+    public function hookViewSidebar($view)
     {
         return Qwin::call('-widget')->get('ViewedRecords')->render($view);
     }

@@ -55,7 +55,7 @@ class Ide_Seeder_Widget_Seed extends Qwin_Widget_Abstract
         // 检查模块是否存在且合法
         $model = Com_Model::getByModule('ide/seeder');
         if (!($meta = $model->isModuleAvailable($options['module']))) {
-            $view = Qwin::call('-view');
+            $view = $this->_View;
             $view->alert($this->_lang['MSG_MOD_UNAVAILABLE']);
         }
 
@@ -103,7 +103,7 @@ class Ide_Seeder_Widget_Seed extends Qwin_Widget_Abstract
             $record->save();
         }
 
-        $view = Qwin::call('-view');
+        $view = $this->_View;
         $view->info($this->_lang['MSG_SUCCEEDED'], Qwin::call('-url')->url('ide/seeder'));
     }
 

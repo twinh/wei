@@ -36,7 +36,7 @@ abstract class Qwin_Application_Controller
     /**
      * 禁用的行为列表
      * 当行为被禁用时,无法通过外部进行访问
-     * 通过禁用行为,可以用于精确的
+     * 通过禁用行为,可以用于精确的访问控制
      *
      * @var array
      */
@@ -98,9 +98,6 @@ abstract class Qwin_Application_Controller
      */
     public function getView($class = null)
     {
-        if (isset($class) && class_exists($class)) {
-            $this->_view = Qwin::call($class);
-        }
-        return $this->_view;
+        return $this->getWidget()->call('View');
     }
 }
