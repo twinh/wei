@@ -59,7 +59,7 @@ class Com_Member_Auth_Widget_Login extends Qwin_Widget_Abstract
                     'message' => $this->_lang->t('MSG_LOGINED'),
                 );
                 if ($options['display']) {
-                    $view = Qwin::call('-view');
+                    $view = $this->_View;
                     $view->alert($return['message']);
                 }
                 return $return;
@@ -79,7 +79,7 @@ class Com_Member_Auth_Widget_Login extends Qwin_Widget_Abstract
                 'message' => $validator->getInvalidMessage(),
             );
             if ($options['display']) {
-                return Qwin::call('-view')->alert($return['message']['title'], null, $return['message']['content']);
+                return $this->_View->alert($return['message']['title'], null, $return['message']['content']);
             }
             return $return;
         }
@@ -100,7 +100,7 @@ class Com_Member_Auth_Widget_Login extends Qwin_Widget_Abstract
             ));
             if (false == $logResult['result']) {
                 if ($options['display']) {
-                    $view = Qwin::call('-view');
+                    $view = $this->_View;
                     $view->alert($logResult['message']);
                 }
                 return $logResult;
@@ -119,7 +119,7 @@ class Com_Member_Auth_Widget_Login extends Qwin_Widget_Abstract
             'url' => $url,
         );
         if ($options['display']) {
-            Qwin::call('-view')->success($return['message'], $url);
+            $this->_View->success($return['message'], $url);
         }
         return $return;
     }

@@ -89,7 +89,7 @@ class Ide_Meta_Controller extends Com_Controller
             );
             foreach ($tableColumns as $name => $column) {
                 $groupName = 'FLD_' . strtoupper($name);
-                $fields[$name] = array();
+                $fields[] = $name;
                 //$form['fields'][$name] = array();
                 $form['layout'][$groupName] = array();
                 

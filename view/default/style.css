@@ -50,10 +50,10 @@ a{
 }
 /* Header
 ----------------------------------*/
-.ui-header{
+.qw-header{
     clear: both;
 }
-div.ui-header-logo {
+div.qw-header-logo {
     width: 200px;
     font-weight: bold;
     font-size: 32px;
@@ -62,16 +62,16 @@ div.ui-header-logo {
     float: left;
     overflow: hidden;
 }
-.ui-header-logo a img {
+.qw-header-logo a img {
     vertical-align: middle;
     margin: 12px 0 0 12px;
     height: 40px;
 }
-.ui-header-shortcut {
+.qw-header-shortcut {
     float: right;
     margin: 0 0 0 6px;
 }
-.ui-header .ui-header-shortcut a{
+.qw-header .qw-header-shortcut a{
     padding: 6px 12px;
     display: block;
     float: left;
@@ -81,78 +81,22 @@ div.ui-header-logo {
     height: 14px;
     border-top: none;
 }
-.ui-header-shortcut a.ui-header-shortcut-last-anchor{
+.qw-header-shortcut a.qw-header-shortcut-last-anchor{
     border-right: none;
 }
 
-/* Navigation Bar
-----------------------------------*/
-.ui-nav-bar{
-    width: auto;
-    border-left :0;
-    border-right: 0;
-    border-bottom: 0;
-    float: left;
-    margin-top: 7px;
-}
-.ui-nav-bar ul.ui-navbar-parent{
-    border: 0;
-    z-index: 999;
-    white-space: nowrap;
-    overflow: hidden;
-    width: 800px;
-    height: 26px;
-    background: none;
-}
-.ui-nav-bar ul.ui-widget-content{
-    float: left;
-}
-.ui-nav-bar ul li {
-    width: auto;
-    float: left;
-    display: inline-table;
-    line-height: normal;
-}
-.ui-nav-bar ul li.ui-widget {
-    border-bottom: none;
-}
-.ui-nav-bar ul li a {
-    padding: 5px 16px;
-    display: block;
-}
-.ui-nav-bar ul li ul {
-    display: none;
-    text-align: left;
-    position: absolute;
-    /* todo ie下小颤动 */
-    margin-left: -1px;
-    z-index: 999;
-}
-.ui-nav-bar ul li ul li {
-    clear: both;
-    font-weight: normal;
-    float: left;
-}
-/* 
-  修复部分使用部分字体导致该栏下面空一像素的问题
-  todo ubuntu 下空1px, windows正常
-*/
-/*.ui-nav-bar ul li.ui-state-active a {
-    font-family: sans-serif;
-}*/
-
-#ui-header{
+#qw-header{
     height: 60px;
     width: 100%;
 }
-#ui-header-left{
+#qw-header-left{
     width: 204px;
     vertical-align: top;
 }
-#ui-header-middle{
+#qw-header-middle{
     vertical-align: top;
 }
-#ui-header-right{
+#qw-header-right{
     vertical-align: top;
 }
 #ui-main-content {
@@ -219,6 +163,7 @@ div.ui-header-logo {
 }
 .ui-mian-left-panel {
     width: 198px;
+    overflow: hidden;
 }
 #ui-main-middle {
     width: 4px;

@@ -1,0 +1,78 @@
+/**
+ * style
+ *
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @version     $Id$
+ * @since       2011-5-28 18:26:00
+*/
+/* Navigation Bar
+----------------------------------*/
+.qw-nav-bar{
+    width: auto;
+    border-left :0;
+    border-right: 0;
+    border-bottom: 0;
+    float: left;
+    margin-top: 7px;
+}
+.qw-nav-bar ul.ui-navbar-parent{
+    border: 0;
+    z-index: 999;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 800px;
+    height: 26px;
+    background: none;
+}
+.qw-nav-bar ul.ui-widget-content{
+    float: left;
+}
+.qw-nav-bar ul li {
+    width: auto;
+    float: left;
+    display: inline-table;
+    line-height: normal;
+}
+.qw-nav-bar ul li.ui-widget {
+    border-bottom: none;
+}
+.qw-nav-bar ul li a {
+    padding: 5px 16px;
+    display: block;
+}
+.qw-nav-bar ul li ul {
+    display: none;
+    text-align: left;
+    position: absolute;
+    /* todo ie下小颤动 */
+    margin-left: -1px;
+    z-index: 999;
+}
+.qw-nav-bar ul li ul li {
+    clear: both;
+    font-weight: normal;
+    float: left;
+}
+/* 
+  修复部分使用部分字体导致该栏下面空一像素的问题
+  todo ubuntu 下空1px, windows正常
+*/
+/*.qw-nav-bar ul li.ui-state-active a {
+    font-family: sans-serif;
+}*/

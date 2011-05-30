@@ -23,7 +23,7 @@
  */
 jQuery(function($){
     var navbarUl;
-    $('#ui-nav-bar ul li.ui-widget').hover(
+    $('#qw-nav-bar ul li.ui-widget').hover(
         function(){
             $(this).addClass('ui-state-hover');
             navbarUl = $(this).find('ul');

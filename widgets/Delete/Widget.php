@@ -106,7 +106,7 @@ class Delete_Widget extends Qwin_Widget_Abstract
             if (!$options['url']) {
                 $options['url'] = Qwin::call('-url')->url($options['module']);
             }
-            return Qwin::call('-view')->success(Qwin::call('-lang')->t('MSG_SUCCEEDED'), $options['url']);
+            return $this->_View->success(Qwin::call('-lang')->t('MSG_SUCCEEDED'), $options['url']);
         }
         return array(
             'result' => true,

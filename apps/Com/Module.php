@@ -48,11 +48,5 @@ class Com_Module extends Qwin_Application_Module
         
         $module = Qwin::call('-module');
         Qwin::call('-widget')->get('Lang')->appendByModule($module);
-
-        /*if ($config['router']['enable']) {
-            $router = Qwin::call('Qwin_Url_Router');
-            $router->addList($config['router']['list']);
-            $url = Qwin::call('-url', $router);
-        }*/
     }
 }

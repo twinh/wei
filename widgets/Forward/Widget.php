@@ -67,7 +67,7 @@ class Forward_Widget extends Qwin_Widget_Abstract
                 'message' => $lang['MSG_NO_RECORD'],
             );
             if ($options['display']) {
-                return Qwin::call('-view')->alert($result['message']);
+                return $this->_View->alert($result['message']);
             } else {
                 return $result;
             }
@@ -99,7 +99,7 @@ class Forward_Widget extends Qwin_Widget_Abstract
                 'message' => $lang[$message],
             );
             if ($options['display']) {
-                return Qwin::call('-view')->alert($result['message']);
+                return $this->_View->alert($result['message']);
             } else {
                 return $result;
             }
@@ -108,7 +108,7 @@ class Forward_Widget extends Qwin_Widget_Abstract
         $url = Qwin::call('-url')->url($module->toUrl(), $options['action'], array('id' => $dbData['id']));
         // 跳转到新的记录
         if ($options['display']) {
-            return Qwin::call('-view')->jump($url);
+            return $this->_View->jump($url);
         } else {
             return array(
                 'result' => true,

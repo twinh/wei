@@ -26,11 +26,26 @@
 $widget->get('Minify')->addArray(array(
     $jQuery->loadUi('position', false),
     $jQuery->loadUi('dialog', false),
+    $jQuery->loadPlugin('tmpl', 'min'),
+    $jQuery->loadPlugin('tmplplus', 'min'),
 ));
 ?>
 <script type="text/javascript">
+    var fields = <?php echo json_encode($fields) ?>;
+
     jQuery(function($){
-        var preLi = null;
+        var fieldTmpl = '<li class="ui-corner-left" id="qw-fieldset-li-${this.data}"><a href="javascript:;">${qw_f(this.data)}(${this.data})</a></li>';
+        
+        var tmpl = '<li>${url}</li>';
+		
+	// Renders one LI, filled with data, then appends it into the UL
+	$(".qw-fields ul").append( fieldTmpl, fields, {})
+            .find('li')
+            .click(function(){
+                $(this).addClass('ui-state-active');
+            });
+        
+        /*var preLi = null;
         var field;
         $('div.qw-fields-left ul li').qui().click(function(){
             // 隐藏上一个表单组,显示点击的表单组
@@ -69,7 +84,7 @@ $widget->get('Minify')->addArray(array(
         function delField($name)
         {
             
-        }
+        }*/
     });
 </script>
 <style type="text/css">
@@ -125,11 +140,11 @@ $widget->get('Minify')->addArray(array(
                 <div class="qw-fields-left ui-widget-content ui-corner-left">
                     <ul>
                     <?php
-                    foreach ($fields as $name => $field) :
+                    /*foreach ($fields as $name => $field) :
                     ?>
                         <li class="ui-corner-left" id="qw-fieldset-li-<?php echo $name ?>"><a href="javascript:;"><?php echo $lang->f($name) ?>(<?php echo $name ?>)</a></li>
                     <?php
-                    endforeach;
+                    endforeach;*/
                     ?>
                     </ul>
                 </div>
@@ -137,14 +152,14 @@ $widget->get('Minify')->addArray(array(
             <td class="qw-fields-detail">
                 <div class="qw-fields-right ui-widget-content ui-corner-right">
                 <?php
-                $formWidget = Qwin::call('-widget')->get('Form');
-                $formOptions = array(
-                    'meta' => $meta,
-                    'form'  => $formName,
-                    'action' => 'edit',
-                    'data'  => $data,
-                );
-                $formWidget->render($formOptions);
+//                $formWidget = Qwin::call('-widget')->get('Form');
+//                $formOptions = array(
+//                    'meta' => $meta,
+//                    'form'  => $formName,
+//                    'action' => 'edit',
+//                    'data'  => $data,
+//                );
+//                $formWidget->render($formOptions);
                 ?>
                 </div>
             </td>

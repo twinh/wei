@@ -58,6 +58,7 @@ class Qwin_Application_Module
      */
     public function  __construct(array $options = array())
     {
+        $options['rootPaths'] = (array)$options['rootPaths'];
         $this->_options = $options + $this->_defaults;
         return $this;
     }

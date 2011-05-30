@@ -63,6 +63,11 @@ class Qwin_Widget
         }
         throw new Qwin_Widget_Exception('Path "' . $path . '" not found.');
     }
+    
+    public function getPath()
+    {
+        return $this->_rootPath;
+    }
 
     /**
      * 根据类名获取微件
@@ -72,27 +77,30 @@ class Qwin_Widget
      */
     public function getByClass($class)
     {
-        return $this->_loaded[$class] = $this->_callClass($class);
+        if (!class_exists($class)) {
+            require_once 'Qwin/Widget/Exception.php';
+            throw new Qwin_Widget_Exception('Class "' . $class . '" not found.');
+        }
+
+        // 微件类应该继承自抽象类或是实现其接口类
+        if (!is_subclass_of($class, 'Qwin_Widget_Abstract')) {
+            $reflection = new ReflectionClass($class);
+            if (!in_array('Qwin_Widget_Interface', $reflection->getInterfaceNames())) {
+                require_once 'Qwin/Widget/Exception.php';
+                throw new Qwin_Widget_Exception('Class "' . $class . '" is not a widget class.');
+            }
+        }
+        
+        return $this->_loaded[$class] = Qwin::call($class);
     }
     
     /**
-     * 获取一个微件的实例化对象,同get
+     * 获取一个微件的实例化对象
      * 
      * @param string $name 微件类名称,不带"_Widget"后缀
      * @return Qwin_Widget_Abstarct 微件对象
      */
     public function call($name)
-    {
-        return $this->get($name);
-    }
-
-    /**
-     * 获取一个微件的实例化对象
-     *
-     * @param string $name 微件类名称,不带"_Widget"后缀
-     * @return Qwin_Widget_Abstarct 微件对象
-     */
-    public function get($name)
     {
         $class = $name . '_Widget';
         if (isset($this->_loaded[$class])) {
@@ -107,53 +115,24 @@ class Qwin_Widget
         
         // 加载类文件
         require_once $file;
+        return $this->getByClass($class);
+    }
 
-        $param = $this->getParams($name);
-        
-        // 初始化
-        $widget = $this->_callClass($class, $param);
-        $this->_loaded[$class] = $widget;
-
-        return $widget;
+    /**
+     * 获取一个微件的实例化对象
+     *
+     * @param string $name 微件类名称,不带"_Widget"后缀
+     * @return Qwin_Widget_Abstarct 微件对象
+     */
+    public function get($name)
+    {
+        return $this->call($name);
     }
     
     public function register(Qwin_Widget_Abstract $object)
     {
         $this->_loaded[get_class($object)] = $object;
         return $this;
-    }
-
-    /**
-     * 获取微件参数
-     *
-     * @param string|Qwin_Widget_Abstarct $name 名词或实例化对象
-     * @return array
-     */
-    public function getParams($name)
-    {
-        if (is_string($name)) {
-            $class = $name . '_Widget';
-            $rootPath = $this->_rootPath . $name . '/';
-        // TODO 是否应该做进一步检查
-        } elseif (is_object($name)) {
-            $class = get_class($name);
-            $name = substr($class, 0, -7);
-        } else {
-            throw new Qwin_Widget_Exception('Param must be a string or object.');
-        }
-
-        // 合并自定义的参数和配置中的参数
-        $param = array(
-            array(
-                'rootPath'  => $this->_rootPath . $name . '/',
-                //'lang'      => true,
-            ),
-        );
-        $configParam = (array)Qwin::config($class);
-        if (!empty($configParam)) {
-            $param[0] += current($configParam);
-        }
-        return $param;
     }
 
     /**
@@ -166,31 +145,5 @@ class Qwin_Widget
     {
         is_object($class) && $class = get_class($class);
         return isset($this->_loaded[$class]);
-    }
-
-    /**
-     * 初始化一个微件类
-     *
-     * @param string $class 类名
-     */
-    public function _callClass($class, array $param = null)
-    {
-        if (!class_exists($class)) {
-            require_once 'Qwin/Widget/Exception.php';
-            throw new Qwin_Widget_Exception('Class "' . $class . '" not found.');
-        }
-
-        // 微件类应该继承自抽象类
-        if (!is_subclass_of($class, 'Qwin_Widget_Abstract')) {
-            require_once 'Qwin/Widget/Exception.php';
-            throw new Qwin_Widget_Exception('Class "' . $class . '" is not the subclass of "Qwin_Widget_Abstract".');
-        }
-
-        // 设定为已加载该类，在类的构造方法中调用isCalled将返回true结果
-        $this->_loaded[$class] = true;
-
-        // 初始化类
-        /* @var $widget Qwin_Widget_Abstract */
-        return Qwin::call($class, $param);
     }
 }

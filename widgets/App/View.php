@@ -1,8 +1,8 @@
 <?php
 /**
- * common-sidebar
+ * View
  *
- * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,17 +16,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
- * @subpackage  View
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-04 02:47:27
+ * @since       2011-05-28 18:35:25
  */
-?>
-<div class="ui-sidebar-content ui-sidebar-content-2">
-	<ul>
-        <li><a class="ui-iconx ui-iconx-trash-16" href="<?php echo qw_url(array('module' => 'com/trash')) ?>"><?php echo qw_t('LBL_MODULE_TRASH') ?></a></li>
-    </ul>
-</div>
+
+class App_View
+{
+    
+}

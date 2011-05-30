@@ -23,6 +23,12 @@
  * @since       2011-03-26 09:47:29
  */
 
-/* @var $this Qwin_Application_Language */
-$this->appendByModule('Com');
-return array();
+return array(
+    'MOD_IDE' => 'IDE',
+    'META' => '元数据',
+    'CONTROLLER' => '控制器',
+    'MODEL' => '模型',
+    'LANGUAGE' => '语言',
+    'FILE' => '文件',
+    'FOLDER' => '目录',
+);

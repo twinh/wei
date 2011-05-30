@@ -149,7 +149,7 @@ class Form_Widget extends Qwin_Widget_Abstract
                 $form['fields'][$name]['_widget'] = null;
             }
         }
-
+        
         // 验证代码
         if ($options['validate']) {
             $this->_Lang->appendByWidget('Validator');

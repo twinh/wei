@@ -55,7 +55,7 @@ class Com_Controller extends Qwin_Application_Controller
 
     /**
      * 请求对象
-     * @var Com_Request
+     * @var Qwin_Request
      */
     protected $_request;
 
@@ -109,7 +109,8 @@ class Com_Controller extends Qwin_Application_Controller
         $this->_module  = $module;
         $this->_action  = $action;
 
-        $this->_view = Qwin::call('Com_View');
+        $this->_view = $this->getWidget()->call('View');
+        //$this->_view = Qwin::call('Com_View');
         $this->getRequest();
          /**
          * 访问控制
@@ -218,7 +219,7 @@ class Com_Controller extends Qwin_Application_Controller
 
         // 未登陆则默认使用游客账号
         if (null == $member) {
-            $member = Com_Meta::getQueryByModule('com/member')
+            $member = Com_Meta::getByModule('com/member')->get('db')->getQuery()
                 ->where('username = ?', 'guest')
                 ->fetchOne()
                 ->toArray();
@@ -234,7 +235,7 @@ class Com_Controller extends Qwin_Application_Controller
         // TODO 修复权限管理
 //        if ('guest' == $member['username'] && $this->_module != 'com/member/auth') {
 //            $lang = Qwin::call('-lang');
-//            return Qwin::call('-view')->alert($lang->t('MSG_PERMISSION_NOT_ENOUGH'));
+//            return $this->_View->alert($lang->t('MSG_PERMISSION_NOT_ENOUGH'));
 //        }
         return true;
     }

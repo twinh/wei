@@ -16,21 +16,60 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Com
- * @subpackage  View
+ * @package     Qwin
+ * @subpackage  Application
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-14 11:12:00
- * @todo        是否需要一种简洁的加载模式与之相辅相成
- *              例如 $this->setViewPath('resource-path/view/theme')
- *                       ->setTheme('default')
- *                       ->loadView('package-module-controller-action');
+ * @since       2010-08-06 19:25:40
  */
 
-class Com_View extends Qwin_Application_View
+// ArrayObject
+class View_Widget extends Qwin_Application_View implements Qwin_Widget_Interface
 {
+    /**
+     * 视图元素数组
+     * @var array
+     */
+    protected $_element;
+
+    /**
+     * 视图是否已展示
+     * @var boolen
+     */
+    protected $_displayed = false;
+
+    /**
+     * 标签,表示变量标识符,用于布局和视图元素的路径中
+     * @var array
+     */
+    protected $_tag = array(
+        'theme' => 'default',
+        'style' => 'default',
+    );
+
+    /**
+     * 标签名称,用于替换标签,格式为 <标签的键名>
+     * @var array
+     * @todo 目前采用的是用空间换取时间的方式,是否有更好的方法加速标签替换
+     */
+    protected $_tagName = array(
+        'theme' => '<theme>',
+        'style' => '<style>'
+    );
+
+    /**
+     * 选项
+     * @var array
+     */
+    protected $_options = array(
+        'theme'         => '',
+        'style'         => '',
+        'exceptionView' => '',
+        'errorView'     => '',
+    );
+    
     /**
      * 打包的标记,用于合并js,css标签
      *
@@ -51,7 +90,36 @@ class Com_View extends Qwin_Application_View
         'time'      => 3000,
         'customer'  => false,
     );
+    
+    /**
+     * 初始化类
+     *
+     * @param array $input 数据
+     */
+//    public function  __construct($input = array())
+//    {
+//        if ($input instanceof ArrayObject) {
+//            $input = $input->getArrayCopy();
+//        }
+//        parent::__construct($input, ArrayObject::ARRAY_AS_PROPS);
+//
+//        // todo 是否会造成重复
+//        // 打开缓冲区
+//        ob_start();
+//        //register_shutdown_function(array($this, 'ob'));
+//    }
+    
+    public function  __construct($input = array())
+    {
+        parent::__construct($input, ArrayObject::ARRAY_AS_PROPS);
 
+        Qwin::get('-app')->setView($this);
+        Qwin::set('-view', $this);
+        // todo 是否会造成重复
+        // 打开缓冲区
+        ob_start();
+    }
+        
     /**
      * 数据预处理,设置变量,路径标签,视图布局,元素等
      *
@@ -84,18 +152,14 @@ class Com_View extends Qwin_Application_View
             'style'             => $style->getName(),
             'module'            => $this->module,
             'action'            => $config['action'],
-            'rootModule'        => Qwin::call('Qwin_Application_Module')->getRoot($config['module']),
-            'defaultModule'     => $config['defaultModule'],
-            'defaultAction'     => $config['defaultAction'],
         ));
 
         // 布局的选择次序为 自定义视图 > 行为级 > 控制器级 > 模块级 > 默认(命名空间级)
         if (!$this->elementExists('layout')) {
             $this->setElement('layout', array(
                 '<root><module>/layout-<action><suffix>',
-                '<root><rootModule>/layout-<action><suffix>',
-                '<root><rootModule>/layout<suffix>',
-                '<root>com/layout<suffix>',
+                '<root><module>/layout<suffix>',
+                '<root><layout<suffix>'
             ));
         }
 
@@ -103,9 +167,8 @@ class Com_View extends Qwin_Application_View
         if (!$this->elementExists('content')) {
             $this->setElement('content', array(
                 '<root><module>/content-<action><suffix>',
-                '<root><rootModule>/content-<action><suffix>',
-                '<root><rootModule>/content<suffix>',
-                '<root>com/content-<action><suffix>',
+                '<root><module>/content<suffix>',
+                '<root>content<suffix>'
             ));
         }
 
@@ -113,9 +176,8 @@ class Com_View extends Qwin_Application_View
         if (!$this->elementExists('sidebar')) {
             $this->setElement('sidebar', array(
                 '<root><module>/sidebar-<action><suffix>',
-                '<root><rootModule>/sidebar-<action><suffix>',
-                '<root><rootModule>/sidebar<suffix>',
-                '<root>com/sidebar<suffix>',
+                '<root><module>/sidebar<suffix>',
+                '<root>sidebar<suffix>'
             ));
         }
 
@@ -123,9 +185,8 @@ class Com_View extends Qwin_Application_View
         if (!$this->elementExists('header')) {
             $this->setElement('header', array(
                 '<root><module>/header-<action><suffix>',
-                '<root><rootModule>/header-<action><suffix>',
-                '<root><rootModule>/header<suffix>',
-                '<root>com/header<suffix>',
+                '<root><module>/header<suffix>',
+                '<root>header<suffix>'
             ));
         }
 
@@ -160,15 +221,13 @@ class Com_View extends Qwin_Application_View
         !empty($data) && $this->assign($data);
         extract($this->getArrayCopy(), EXTR_OVERWRITE);
 
+        // 根据Url的请求加载不同的视图
         $request = Qwin::call('-request');
-
-        // 加载布局
-        if (!$request->isAjax()) {
-            require $this->getElement('layout');
-        } else {
-            require $this->getElement('content');
+        $view = $request->get('view');
+        if (!$this->elementExists($view)) {
+            $view = 'layout';
         }
-        
+        require $this->getElement($view);
         $this->afterDisplay();
         $this->setDisplayed();
         
@@ -189,7 +248,7 @@ class Com_View extends Qwin_Application_View
             $this->decodePath('<root><module>/<action>.js'),
             $this->decodePath('<root><module>/<action>.css'),
         ));
-        
+        //return $this;
         // 获取缓冲数据,输出并清理
         $output = ob_get_contents();
         '' != $output && ob_end_clean();
@@ -203,6 +262,20 @@ class Com_View extends Qwin_Application_View
         unset($output);
         return $this;
     }
+    
+    /**
+     * 输出JSON数据
+     * 
+     * @param array $json JSON数组数据
+     * @param bool $exit 是否退出 
+     */
+    public function displayJson($json, $exit = true)
+    {
+         echo json_encode($json);
+         if ($exit) {
+             exit;
+         }
+    }
 
     /**
      * 输出信息提示视图
@@ -213,7 +286,7 @@ class Com_View extends Qwin_Application_View
     public function displayInfo(array $options = array())
     {
         $options = $options + $this->_infoOptions;
-        $this->setElement('layout', '<root>com/layout<suffix>');
+        $this->setElement('layout', '<root>layout<suffix>');
         $this->setElement('content', '<root>com/basic/info<suffix>');
 
         $title = $options['title'];
@@ -327,5 +400,250 @@ class Com_View extends Qwin_Application_View
     public function getRefererPage()
     {
         return urlencode(Qwin::call('-request')->server('HTTP_REFERER'));
+    }
+
+    /**
+     * 设置变量
+     *
+     * @param string $name 变量名称
+     * @param mixed $value 变量的值
+     * @return object 当前对象
+     */
+    public function assign($name, $value = null)
+    {
+        if (is_array($name)) {
+            $this->exchangeArray(array_merge($this->getArrayCopy(), $name));
+        } else {
+            $this->offsetSet($name, $value);
+        }
+        return $this;
+    }
+
+    /**
+     * 销毁一个变量
+     *
+     * @param string $name 变量名称
+     * @return object 当前对象
+     */
+    public function clearAssign($name)
+    {
+        if (is_array($name)) {
+            foreach($name as $key => $value) {
+                 unset($this->_data[$key]);
+            }
+        } else {
+            unset($this->_data[$name]);
+        }
+        return $this;
+    }
+
+    /**
+     * 获取变量的值
+     *
+     * @param string $name
+     * @return mixed 变量的值
+     */
+    public function getVariable($name = null)
+    {
+        if (null == $name) {
+            return $this->_data;
+        }
+        return isset($this->_data[$name]) ? $this->_data[$name] : null;
+    }
+
+    /**
+     * 设置一组视图元素
+     *
+     * @param array $list 视图元素组,键名为视图名称,值为视图的值
+     * @return Qwin_Application_View 当前对象
+     */
+    public function setElementList(array $list)
+    {
+        foreach ($list as $key => $value) {
+            !is_array($value) && $value = array($value);
+            $this->_element[$key] = $value;
+        }
+        return $this;
+    }
+
+    /**
+     * 设置一个视图元素
+     *
+     * @param string $name 视图元素的名称
+     * @param string|mixed $element 视图元素的路径
+     * @return Qwin_Application_View 当前对象
+     */
+    public function setElement($name, $element)
+    {
+        !is_array($element) && $element = array($element);
+        $this->_element[$name] = $element;
+        return $this;
+    }
+
+    /**
+     * 获取未处理的视图元素
+     *
+     * @param string $name
+     * @return string 视图元素
+     */
+    public function getRawElement($name)
+    {
+        return $this->_element[$name];
+    }
+
+    public function getElement($name)
+    {
+        if (!isset($this->_element[$name])) {
+            throw new Qwin_Application_View_Exception('Undefined view element name: ' . $name);
+        }
+        $pathCahce = array();
+        foreach ($this->_element[$name] as $path) {
+            $path = $this->decodePath($path);
+            if (is_file($path)) {
+                return $path;
+            }
+            $pathCahce[] = $path;
+        }
+        throw new Qwin_Application_View_Exception('All view files not found: "' . implode(';', $pathCahce) . '".');
+    }
+
+    /**
+     * 销毁视图元素
+     *
+     * @param string $name
+     * @return object 当前对象
+     */
+    public function unsetElement($name)
+    {
+        if (isset($this->_element[$name])) {
+            unset($this->_element[$name]);
+        }
+        return $this;
+    }
+
+    /**
+     * 清空视图元素数组
+     *
+     * @return Qwin_Application_View 当前对象
+     */
+    public function clearElement()
+    {
+        $this->_element = array();
+        return $this;
+    }
+
+    /**
+     * 检查视图元素是否存在
+     *
+     * @param string $name 名称
+     * @return bool
+     */
+    public function elementExists($name)
+    {
+        return isset($this->_element[$name]);
+    }
+
+    public function render($options = null)
+    {
+        return $this->display();
+    }
+
+    /**
+     * 获取一个标签的值
+     *
+     * @param string $name 标签名称
+     * @return string 标签的值
+     */
+    public function getTag($name)
+    {
+        return isset($this->_tag[$name]) ? $this->_tag[$name] : null;
+    }
+
+    /**
+     * 设置一个标签的值
+     *
+     * @param string $name 标签名称
+     * @param mixed $value 标签的值
+     * @return Qwin_Application_View 当前对象
+     */
+    public function setTag($name, $value = null)
+    {
+        if (!is_array($name)) {
+            $name = array($name => $value);
+        }
+        foreach ($name as $key => $value) {
+            $this->_tag[$key] = strtolower($value);
+            $this->_tagName[$key] = '<' . $key . '>';
+        }
+        return $this;
+    }
+
+    /**
+     * 获取标签数组
+     *
+     * @return array  标签数组
+     */
+    public function getTagList()
+    {
+        return $this->_tag;
+    }
+
+    /**
+     * 删除一个标签
+     *
+     * @param string $name 标签名称
+     * @return Qwin_Application_View 当前对象
+     */
+    public function unsetTag($name)
+    {
+        if (isset($this->_tag[$name])) {
+            unset($this->_tag[$name]);
+            unset($this->_tagName[$name]);
+        }
+        return $this;
+    }
+
+    /**
+     * 清空标签数组
+     *
+     * @return Qwin_Application_View 当前对象
+     */
+    public function clearTag()
+    {
+        $this->_tag = array();
+        $this->_tagName = array();
+        return $this;
+    }
+
+    /**
+     * 根据标签设置将标签路径解码为真实路径
+     *
+     * @param string $path 路径
+     * @return string 真实路径
+     */
+    public function decodePath($path)
+    {
+        return str_replace($this->_tagName, $this->_tag, $path);
+    }
+
+    /**
+     * 设置视图已展示
+     *
+     * @return Qwin_Application_View 当前对象
+     */
+    public function setDisplayed()
+    {
+        $this->_displayed = true;
+        return $this;
+    }
+
+    /**
+     * 视图是否已展示
+     *
+     * @return boolen
+     */
+    public function isDisplayed()
+    {
+        return $this->_displayed;
     }
 }

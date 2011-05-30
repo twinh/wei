@@ -131,6 +131,6 @@ class Ide_Config_Controller extends Com_ActionController
             ->execute()
             ->toArray();
 
-        Qwin::call('-view')->assign(get_defined_vars());
+        $this->_View->assign(get_defined_vars());
     }
 }
