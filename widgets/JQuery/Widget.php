@@ -37,7 +37,7 @@ class JQuery_Widget extends Qwin_Widget_Abstract
      */
     public function loadCore()
     {
-        $file = $this->_rootPath . 'jquery.js';
+        $file = $this->_path . 'jquery.js';
         return $file;
     }
 
@@ -50,8 +50,8 @@ class JQuery_Widget extends Qwin_Widget_Abstract
     public function loadUi($name)
     {
         return array(
-            'js' => $this->_rootPath . 'ui/jquery.ui.' . $name . '.min.js',
-            'css' => $this->_rootPath . 'ui/jquery.ui.' . $name . '.css',
+            'js' => $this->_path . 'ui/jquery.ui.' . $name . '.min.js',
+            'css' => $this->_path . 'ui/jquery.ui.' . $name . '.css',
         );
     }
 
@@ -63,7 +63,7 @@ class JQuery_Widget extends Qwin_Widget_Abstract
      */
     public function loadEffect($name)
     {
-        return $this->_rootPath . 'effects/jquery.effects.' . $name . '.min.js';
+        return $this->_path . 'effects/jquery.effects.' . $name . '.min.js';
     }
 
     /**
@@ -75,12 +75,12 @@ class JQuery_Widget extends Qwin_Widget_Abstract
      */
     public function loadPlugin($name, $type = null)
     {
-        $js = $this->_rootPath . 'plugins/' . $name . '/jquery.' . $name;
+        $js = $this->_path . 'plugins/' . $name . '/jquery.' . $name;
         $js .= $type ? '.' . $type : null;
         $js .= '.js';
         return array(
             'js' => $js,
-            'css' => $this->_rootPath . 'plugins/' . $name . '/jquery.' . $name . '.css',
+            'css' => $this->_path . 'plugins/' . $name . '/jquery.' . $name . '.css',
         );
     }
 }

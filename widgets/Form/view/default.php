@@ -22,10 +22,10 @@
  * @version     $Id$
  * @since       2011-02-16 14:14:21
  */
-$minify->add($this->_rootPath . 'script/js.js');
+$minify->add($this->_path . 'script/js.js');
 if ($options['validate']) :
-    $minify->add($this->_rootPath . 'script/style.css')
-           ->add($this->_rootPath . 'source/jquery.validate.qwin.js');
+    $minify->add($this->_path . 'script/style.css')
+           ->add($this->_path . 'source/jquery.validate.qwin.js');
 ?>
 <script type="text/javascript">
 validateCode['<?php echo $options['id'] ?>'] = <?php echo $validateCode ?>;

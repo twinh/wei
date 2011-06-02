@@ -52,6 +52,33 @@ class Minify_Widget extends Qwin_Widget_Abstract
             $this->setCachePath($options['cachePath']);
         }
     }
+    
+    
+    /**
+     * 设置缓存路径
+     *
+     * @param string $path 路径
+     * @return Qwin_Widget_Abstract 当前对象
+     */
+    public function setCachePath($path)
+    {
+        if (is_dir($path)) {
+            $this->_cachePath = $path;
+            return $this;
+        }
+        throw new Qwin_Widget_Exception('Path "' . $path . '" no found.');
+    }
+
+    /**
+     * 获取缓存路径
+     * 
+     * @return string
+     */
+    public function getCachePath()
+    {
+        return $this->_cachePath;
+    }
+
 
     public function render($options = null)
     {

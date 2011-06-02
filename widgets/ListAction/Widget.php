@@ -128,7 +128,7 @@ class ListAction_Widget extends Qwin_Widget_Abstract
         }
         
         $view = $this->_View;
-        $view->setElement('content', $this->_rootPath . 'view/default.php');
+        $view->setElement('content', $this->_path . 'view/default.php');
         $view->assign(get_defined_vars());
     }
 }

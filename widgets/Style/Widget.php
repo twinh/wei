@@ -53,7 +53,7 @@ class Style_Widget extends Qwin_Widget_Abstract
             }
         }
 
-        if (!is_dir($this->_rootPath . 'source/' . $style)) {
+        if (!is_dir($this->_path . 'source/' . $style)) {
             $style = $config['style'];
         }
         $session['style'] = $style;
@@ -67,7 +67,7 @@ class Style_Widget extends Qwin_Widget_Abstract
      */
     public function getCssFile()
     {
-        return $this->_rootPath . 'source/' . $this->getName() . '/jquery.ui.theme.css';
+        return $this->_path . 'source/' . $this->getName() . '/jquery.ui.theme.css';
     }
 
     /**
@@ -77,7 +77,7 @@ class Style_Widget extends Qwin_Widget_Abstract
      */
     public function getSourcePath()
     {
-        return $this->_rootPath . 'source/';
+        return $this->_path . 'source/';
     }
 
      public function getStyles($path = null)

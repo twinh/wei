@@ -45,6 +45,6 @@ class CKEditor_Widget extends Qwin_Widget_Abstract
 
         return $code;
         */
-        require $this->_rootPath . 'view/default.php';
+        require $this->_path . 'view/default.php';
     }
 }

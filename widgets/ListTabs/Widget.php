@@ -149,8 +149,8 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
         /* @var $minify Minify_Widget */
         $minify = $this->_widget->get('Minify');
         $minify->addArray(array(
-            $this->_rootPath . 'view/style.css',
-            $this->_rootPath . 'view/js.js',
+            $this->_path . 'view/style.css',
+            $this->_path . 'view/js.js',
         ));
 
         /* @var $smarty Smarty */
@@ -159,6 +159,6 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
         $smarty->assign('moreTab', $moreTab);
         $smarty->assign('subTabs', $subTabs);
         $smarty->assign('lang', $this->_Lang);
-        $smarty->display($this->_rootPath . 'view/default.tpl');
+        $smarty->display($this->_path . 'view/default.tpl');
     }
 }

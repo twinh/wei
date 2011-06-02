@@ -47,9 +47,9 @@ class OptionEditor_Widget extends Qwin_Widget_Abstract
             ->add($jQueryFile['sortable']['css'])
             ->add($jQueryFile['mouse']['js'])
             ->add($jQueryFile['sortable']['js'])
-            ->add($this->_rootPath . 'source/style.css')
-            ->add($this->_rootPath . 'source/js.js');
+            ->add($this->_path . 'source/style.css')
+            ->add($this->_path . 'source/js.js');
 
-        require $this->_rootPath . 'view/default.php';
+        require $this->_path . 'view/default.php';
     }
 }

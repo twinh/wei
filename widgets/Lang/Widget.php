@@ -228,12 +228,12 @@ class Lang_Widget extends Qwin_Widget_Abstract implements ArrayAccess
     public function appendByWidget($widget)
     {
         if (is_object($widget) && $widget instanceof Qwin_Widget_Abstract) {
-            if (is_file($file = $widget->getRootPath() . $this->_options['path'] . '/' . $this->_name . '.php')) {
+            if (is_file($file = $widget->getPath() . $this->_options['path'] . '/' . $this->_name . '.php')) {
                 return $this->_appendFile($file);
             }
             return false;
         } elseif (is_string($widget)) {
-            if (is_file($file = dirname($this->_rootPath) . '/' . $widget . '/' . $this->_name . '.php')) {
+            if (is_file($file = dirname($this->_path) . '/' . $widget . '/' . $this->_name . '.php')) {
                 return $this->_appendFile($file);
             }
             return false;

@@ -45,7 +45,7 @@ class PopupGrid_Widget extends Qwin_Widget_Abstract
             ->add($files['dialog']['css'])
             ->add($files['position']['js'])
             ->add($files['dialog']['js'])
-            ->add($this->_rootPath . 'view/js.js');
+            ->add($this->_path . 'view/js.js');
 
         $lang = $this->_lang;
         $id = $options['form']['id'];
@@ -74,6 +74,6 @@ class PopupGrid_Widget extends Qwin_Widget_Abstract
         }
         $meta['_value'] .= '(' . $selected . ', ' . $lang->t('LBL_READONLY') . ')';
 
-        require $this->_rootPath . 'view/default.php';
+        require $this->_path . 'view/default.php';
     }
 }
