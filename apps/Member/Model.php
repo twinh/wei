@@ -25,6 +25,6 @@
  * @since       2010-05-13 10:33:32
  */
 
-class Com_Member_Model extends Com_Model
+class Member_Model extends Com_Model
 {
 }
