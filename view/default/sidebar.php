@@ -27,7 +27,7 @@
 ?>
 <?php Qwin::hook('viewSidebar', $this); ?>
 <div class="ui-sidebar-content ui-sidebar-content-2">
-	<ul>
-        <li><a class="ui-iconx ui-iconx-trash-16" href="<?php echo qw_url(array('module' => 'com/trash')) ?>"><?php echo qw_t('LBL_MODULE_TRASH') ?></a></li>
+    <ul>
+        <li><a class="qw-icon qw-icon-trash-16" href="<?php echo qw_url(array('module' => 'com/trash')) ?>"><?php echo qw_t('LBL_MODULE_TRASH') ?></a></li>
     </ul>
 </div>
