@@ -1,0 +1,192 @@
+/**
+ * iconx
+ *
+ * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @version     $Id$
+ * @since       2011-01-04 01:36:40
+ */
+.qw-icon{ background-position: 0 0; background-repeat: no-repeat;}
+.qw-icon-address-16{background-image:url(address_16.png)}
+.qw-icon-address-32{background-image:url(address_32.png)}
+.qw-icon-address-48{background-image:url(address_48.png)}
+.qw-icon-address-64{background-image:url(address_64.png)}
+.qw-icon-block-16{background-image:url(block_16.png)}
+.qw-icon-block-32{background-image:url(block_32.png)}
+.qw-icon-block-48{background-image:url(block_48.png)}
+.qw-icon-block-64{background-image:url(block_64.png)}
+.qw-icon-bookmark-16{background-image:url(bookmark_16.png)}
+.qw-icon-bookmark-32{background-image:url(bookmark_32.png)}
+.qw-icon-bookmark-48{background-image:url(bookmark_48.png)}
+.qw-icon-bookmark-64{background-image:url(bookmark_64.png)}
+.qw-icon-briefcase-16{background-image:url(briefcase_16.png)}
+.qw-icon-briefcase-32{background-image:url(briefcase_32.png)}
+.qw-icon-briefcase-48{background-image:url(briefcase_48.png)}
+.qw-icon-briefcase-64{background-image:url(briefcase_64.png)}
+.qw-icon-bubble-16{background-image:url(bubble_16.png)}
+.qw-icon-bubble-32{background-image:url(bubble_32.png)}
+.qw-icon-bubble-48{background-image:url(bubble_48.png)}
+.qw-icon-bubble-64{background-image:url(bubble_64.png)}
+.qw-icon-buy-16{background-image:url(buy_16.png)}
+.qw-icon-buy-32{background-image:url(buy_32.png)}
+.qw-icon-buy-48{background-image:url(buy_48.png)}
+.qw-icon-buy-64{background-image:url(buy_64.png)}
+.qw-icon-calendar-16{background-image:url(calendar_16.png)}
+.qw-icon-calendar-32{background-image:url(calendar_32.png)}
+.qw-icon-calendar-48{background-image:url(calendar_48.png)}
+.qw-icon-calendar-64{background-image:url(calendar_64.png)}
+.qw-icon-clipboard-16{background-image:url(clipboard_16.png)}
+.qw-icon-clipboard-32{background-image:url(clipboard_32.png)}
+.qw-icon-clipboard-48{background-image:url(clipboard_48.png)}
+.qw-icon-clipboard-64{background-image:url(clipboard_64.png)}
+.qw-icon-clock-16{background-image:url(clock_16.png)}
+.qw-icon-clock-32{background-image:url(clock_32.png)}
+.qw-icon-clock-48{background-image:url(clock_48.png)}
+.qw-icon-clock-64{background-image:url(clock_64.png)}
+.qw-icon-delete-16{background-image:url(delete_16.png)}
+.qw-icon-delete-32{background-image:url(delete_32.png)}
+.qw-icon-delete-48{background-image:url(delete_48.png)}
+.qw-icon-delete-64{background-image:url(delete_64.png)}
+.qw-icon-diagram-16{background-image:url(diagram_16.png)}
+.qw-icon-diagram-32{background-image:url(diagram_32.png)}
+.qw-icon-diagram-48{background-image:url(diagram_48.png)}
+.qw-icon-diagram-64{background-image:url(diagram_64.png)}
+.qw-icon-document-16{background-image:url(document_16.png)}
+.qw-icon-document-32{background-image:url(document_32.png)}
+.qw-icon-document-48{background-image:url(document_48.png)}
+.qw-icon-document-64{background-image:url(document_64.png)}
+.qw-icon-down-16{background-image:url(down_16.png)}
+.qw-icon-down-32{background-image:url(down_32.png)}
+.qw-icon-down-48{background-image:url(down_48.png)}
+.qw-icon-down-64{background-image:url(down_64.png)}
+.qw-icon-flag-16{background-image:url(flag_16.png)}
+.qw-icon-flag-32{background-image:url(flag_32.png)}
+.qw-icon-flag-48{background-image:url(flag_48.png)}
+.qw-icon-flag-64{background-image:url(flag_64.png)}
+.qw-icon-folder-16{background-image:url(folder_16.png)}
+.qw-icon-folder-32{background-image:url(folder_32.png)}
+.qw-icon-folder-48{background-image:url(folder_48.png)}
+.qw-icon-folder-64{background-image:url(folder_64.png)}
+.qw-icon-gear-16{background-image:url(gear_16.png)}
+.qw-icon-gear-32{background-image:url(gear_32.png)}
+.qw-icon-gear-48{background-image:url(gear_48.png)}
+.qw-icon-gear-64{background-image:url(gear_64.png)}
+.qw-icon-globe-16{background-image:url(globe_16.png)}
+.qw-icon-globe-32{background-image:url(globe_32.png)}
+.qw-icon-globe-48{background-image:url(globe_48.png)}
+.qw-icon-globe-64{background-image:url(globe_64.png)}
+.qw-icon-heart-16{background-image:url(heart_16.png)}
+.qw-icon-heart-32{background-image:url(heart_32.png)}
+.qw-icon-heart-48{background-image:url(heart_48.png)}
+.qw-icon-heart-64{background-image:url(heart_64.png)}
+.qw-icon-help-16{background-image:url(help_16.png)}
+.qw-icon-help-32{background-image:url(help_32.png)}
+.qw-icon-help-48{background-image:url(help_48.png)}
+.qw-icon-help-64{background-image:url(help_64.png)}
+.qw-icon-home-16{background-image:url(home_16.png)}
+.qw-icon-home-32{background-image:url(home_32.png)}
+.qw-icon-home-48{background-image:url(home_48.png)}
+.qw-icon-home-64{background-image:url(home_64.png)}
+.qw-icon-info-16{background-image:url(info_16.png)}
+.qw-icon-info-32{background-image:url(info_32.png)}
+.qw-icon-info-48{background-image:url(info_48.png)}
+.qw-icon-info-64{background-image:url(info_64.png)}
+.qw-icon-key-16{background-image:url(key_16.png)}
+.qw-icon-key-32{background-image:url(key_32.png)}
+.qw-icon-key-48{background-image:url(key_48.png)}
+.qw-icon-key-64{background-image:url(key_64.png)}
+.qw-icon-label-16{background-image:url(label_16.png)}
+.qw-icon-label-32{background-image:url(label_32.png)}
+.qw-icon-label-48{background-image:url(label_48.png)}
+.qw-icon-label-64{background-image:url(label_64.png)}
+.qw-icon-left-16{background-image:url(left_16.png)}
+.qw-icon-left-32{background-image:url(left_32.png)}
+.qw-icon-left-48{background-image:url(left_48.png)}
+.qw-icon-left-64{background-image:url(left_64.png)}
+.qw-icon-letter-16{background-image:url(letter_16.png)}
+.qw-icon-letter-32{background-image:url(letter_32.png)}
+.qw-icon-letter-48{background-image:url(letter_48.png)}
+.qw-icon-letter-64{background-image:url(letter_64.png)}
+.qw-icon-monitor-16{background-image:url(monitor_16.png)}
+.qw-icon-monitor-32{background-image:url(monitor_32.png)}
+.qw-icon-monitor-48{background-image:url(monitor_48.png)}
+.qw-icon-monitor-64{background-image:url(monitor_64.png)}
+.qw-icon-pencil-16{background-image:url(pencil_16.png)}
+.qw-icon-pencil-32{background-image:url(pencil_32.png)}
+.qw-icon-pencil-48{background-image:url(pencil_48.png)}
+.qw-icon-pencil-64{background-image:url(pencil_64.png)}
+.qw-icon-plus-16{background-image:url(plus_16.png)}
+.qw-icon-plus-32{background-image:url(plus_32.png)}
+.qw-icon-plus-48{background-image:url(plus_48.png)}
+.qw-icon-plus-64{background-image:url(plus_64.png)}
+.qw-icon-present-16{background-image:url(present_16.png)}
+.qw-icon-present-32{background-image:url(present_32.png)}
+.qw-icon-present-48{background-image:url(present_48.png)}
+.qw-icon-present-64{background-image:url(present_64.png)}
+.qw-icon-print-16{background-image:url(print_16.png)}
+.qw-icon-print-32{background-image:url(print_32.png)}
+.qw-icon-print-48{background-image:url(print_48.png)}
+.qw-icon-print-64{background-image:url(print_64.png)}
+.qw-icon-right-16{background-image:url(right_16.png)}
+.qw-icon-right-32{background-image:url(right_32.png)}
+.qw-icon-right-48{background-image:url(right_48.png)}
+.qw-icon-right-64{background-image:url(right_64.png)}
+.qw-icon-save-16{background-image:url(save_16.png)}
+.qw-icon-save-32{background-image:url(save_32.png)}
+.qw-icon-save-48{background-image:url(save_48.png)}
+.qw-icon-save-64{background-image:url(save_64.png)}
+.qw-icon-search-16{background-image:url(search_16.png)}
+.qw-icon-search-32{background-image:url(search_32.png)}
+.qw-icon-search-48{background-image:url(search_48.png)}
+.qw-icon-search-64{background-image:url(search_64.png)}
+.qw-icon-shield-16{background-image:url(shield_16.png)}
+.qw-icon-shield-32{background-image:url(shield_32.png)}
+.qw-icon-shield-48{background-image:url(shield_48.png)}
+.qw-icon-shield-64{background-image:url(shield_64.png)}
+.qw-icon-statistics-16{background-image:url(statistics_16.png)}
+.qw-icon-statistics-32{background-image:url(statistics_32.png)}
+.qw-icon-statistics-48{background-image:url(statistics_48.png)}
+.qw-icon-statistics-64{background-image:url(statistics_64.png)}
+.qw-icon-stop-16{background-image:url(stop_16.png)}
+.qw-icon-stop-32{background-image:url(stop_32.png)}
+.qw-icon-stop-48{background-image:url(stop_48.png)}
+.qw-icon-stop-64{background-image:url(stop_64.png)}
+.qw-icon-tick-16{background-image:url(tick_16.png)}
+.qw-icon-tick-32{background-image:url(tick_32.png)}
+.qw-icon-tick-48{background-image:url(tick_48.png)}
+.qw-icon-tick-64{background-image:url(tick_64.png)}
+.qw-icon-trash-16{background-image:url(trash_16.png)}
+.qw-icon-trash-32{background-image:url(trash_32.png)}
+.qw-icon-trash-48{background-image:url(trash_48.png)}
+.qw-icon-trash-64{background-image:url(trash_64.png)}
+.qw-icon-up-16{background-image:url(up_16.png)}
+.qw-icon-up-32{background-image:url(up_32.png)}
+.qw-icon-up-48{background-image:url(up_48.png)}
+.qw-icon-up-64{background-image:url(up_64.png)}
+.qw-icon-user-16{background-image:url(user_16.png)}
+.qw-icon-user-32{background-image:url(user_32.png)}
+.qw-icon-user-48{background-image:url(user_48.png)}
+.qw-icon-user-64{background-image:url(user_64.png)}
+.qw-icon-wallet-16{background-image:url(wallet_16.png)}
+.qw-icon-wallet-32{background-image:url(wallet_32.png)}
+.qw-icon-wallet-48{background-image:url(wallet_48.png)}
+.qw-icon-wallet-64{background-image:url(wallet_64.png)}
+.qw-icon-warning-16{background-image:url(warning_16.png)}
+.qw-icon-warning-32{background-image:url(warning_32.png)}
+.qw-icon-warning-48{background-image:url(warning_48.png)}
+.qw-icon-warning-64{background-image:url(warning_64.png)}

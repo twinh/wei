@@ -24,7 +24,7 @@
  */
 ?>
 <div class="ui-sidebar-header ui-state-default">
-	<a class="ui-iconx ui-iconx-clock-16" href="javascript:;"><?php echo qw_t('LBL_VIEWED_RECORDS') ?></a>
+	<a class="qw-icon qw-icon-clock-16" href="javascript:;"><?php echo qw_t('LBL_VIEWED_RECORDS') ?></a>
 </div>
 <div class="ui-sidebar-content">
     <ul>
