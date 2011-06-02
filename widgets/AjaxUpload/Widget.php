@@ -33,8 +33,8 @@ class AjaxUpload_Widget extends Qwin_Widget_Abstract
         $minify->addArray(array(
             $jQuery->loadUi('position', false),
             $jQuery->loadUi('dialog', false),
-            $this->_rootPath . 'source/jquery.ajaxupload.css',
-            $this->_rootPath . 'source/jquery.ajaxupload.js',
+            $this->_path . 'source/jquery.ajaxupload.css',
+            $this->_path . 'source/jquery.ajaxupload.js',
         ));
         
 

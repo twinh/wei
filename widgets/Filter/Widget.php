@@ -129,8 +129,8 @@ class Filter_Widget extends Qwin_Widget_Abstract
             }
         }
 
-        $minify->add($this->_rootPath . 'view/style.css');
-        require $this->_rootPath . 'view/default.php';
+        $minify->add($this->_path . 'view/style.css');
+        require $this->_path . 'view/default.php';
     }
 
     /**

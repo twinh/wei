@@ -55,6 +55,6 @@ class ContentHeader_Widget extends Qwin_Widget_Abstract
             $header .= '&nbsp;&raquo;&nbsp;<a href="' . $url->build() . '">' . $lang[$actionLabel] . '</a>';
         }
 
-        require $this->_rootPath . 'view/default.php';
+        require $this->_path . 'view/default.php';
     }
 }

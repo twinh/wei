@@ -222,9 +222,9 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
 
         // 通过Minify加载CSS和JS
         $this->_Minify
-            ->add($this->_rootPath . 'source/jquery.jqgrid.css')
-            ->add($this->_rootPath . 'source/i18n/grid.locale-en.js')
-            ->add($this->_rootPath . 'source/jquery.jqgrid.js');
+            ->add($this->_path . 'source/jquery.jqgrid.css')
+            ->add($this->_path . 'source/i18n/grid.locale-en.js')
+            ->add($this->_path . 'source/jquery.jqgrid.js');
 
         // 翻译语言
         // TODO 翻译全部
@@ -235,7 +235,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
 
         $jqGridJson = Qwin_Util_Array::jsonEncode($options);
 
-        require $this->_rootPath . 'view/default.php';
+        require $this->_path . 'view/default.php';
     }
     
     /**
@@ -246,7 +246,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
     public function renderJson($options)
     {
         // 合并选项
-        $options = $this->merge($this->_jsonOptions, $options);
+        $options = (array)$options + $this->_jsonOptions;
         
         $layout = $this->getLayout($options['list'], $options['layout']);
         

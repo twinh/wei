@@ -44,7 +44,7 @@ class Smarty_Widget extends Qwin_Widget_Abstract
     {
         parent::__construct($options);
         
-        require_once $this->_rootPath . 'libs/Smarty.class.php';
+        require_once $this->_path . 'libs/Smarty.class.php';
         $this->_smarty = Qwin::call('Smarty');
 
         // 设定选项

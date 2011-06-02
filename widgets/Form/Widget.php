@@ -71,6 +71,21 @@ class Form_Widget extends Qwin_Widget_Abstract
     );
     
     /**
+     * 生成属性字符串
+     *
+     * @param array $options 属性数组,键名表示属性名称,值表示属性值
+     * @return string 属性字符串
+     */
+    public function renderAttr($options)
+    {
+        $attr = '';
+        foreach ($options as $name => $value) {
+            $attr .= $name . '="' . htmlspecialchars((string)$value) . '" ';
+        }
+        return $attr;
+    }
+    
+    /**
      * 生成表单界面
      *
      * @param array $options 配置选项
@@ -156,11 +171,11 @@ class Form_Widget extends Qwin_Widget_Abstract
             $validateCode = array(); //$this->getValidateCode($meta, $lang);
         }
 
-        $file = $this->_rootPath . 'view/' . $options['view'];
+        $file = $this->_path . 'view/' . $options['view'];
         if (is_file($file)) {
             require $file;
         } else {
-            require $this->_rootPath . 'view/default.php';
+            require $this->_path . 'view/default.php';
         }
         return $this;
     }

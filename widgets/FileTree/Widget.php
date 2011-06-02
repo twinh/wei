@@ -41,8 +41,8 @@ class FileTree_Widget extends Qwin_Widget_Abstract
         $minify->addArray(array(
             $jQuery->loadUi('position', false),
             $jQuery->loadUi('dialog', false),
-            $this->_rootPath . 'source/jquery.filetree.css',
-            $this->_rootPath . 'source/jquery.filetree.js',
+            $this->_path . 'source/jquery.filetree.css',
+            $this->_path . 'source/jquery.filetree.js',
         ));
 
         $id = $options['form']['id'];

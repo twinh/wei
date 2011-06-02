@@ -46,9 +46,9 @@ class Log4php_Widget extends Qwin_Widget_Abstract
     {
         parent::__construct($options);
         // 加载配置文件
-        require_once $this->_rootPath . 'source/Logger.php';
+        require_once $this->_path . 'source/Logger.php';
         if (!isset($options['configFile'])) {
-            $options['configFile'] = $this->_rootPath . $this->_configFile;
+            $options['configFile'] = $this->_path . $this->_configFile;
         }
         Logger::configure($options['configFile']);
 

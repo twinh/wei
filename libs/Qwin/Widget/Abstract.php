@@ -29,9 +29,7 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
      * 默认配置
      * @var array
      */
-    protected $_defaults = array(
-        'lang' => false,
-    );
+    protected $_defaults = array();
 
     /**
      * 选项
@@ -44,20 +42,14 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
      * 微件的根目录
      * @var string
      */
-    protected $_rootPath;
+    protected $_path;
     
     /**
      * 微件的准确根目录
      * @var string 
      */
-    protected $_exactRootPath;
+    protected $_exactPath;
     
-    /**
-     * 微件的缓存目录
-     * @var string
-     */
-    protected $_cachePath;
-
     /*
      * 微件单例对象
      * @var Qwin_Widget
@@ -76,9 +68,8 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
         $this->_widget = Qwin::call('-widget');
         $this->_widget->register($this);
         
-        $options = $this->_options = $options + $this->_defaults;
-        // !!
-        $this->_rootPath = $this->_widget->getPath() . substr(get_class($this), 0, -7) . '/';
+        $this->_options = $options + $this->_defaults;
+        $this->getPath();
     }
 
     /**
@@ -158,32 +149,17 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
         }
         throw new Qwin_Widget_Exception('Undefine option "' . $name . '".');
     }
-
-    /**
-     * 生成属性字符串
-     *
-     * @param array $options 属性数组,键名表示属性名称,值表示属性值
-     * @return string 属性字符串
-     */
-    public function renderAttr($options)
-    {
-        $attr = '';
-        foreach ($options as $name => $value) {
-            $attr .= $name . '="' . htmlspecialchars((string)$value) . '" ';
-        }
-        return $attr;
-    }
-
+    
     /**
      * 设置微件根路径
      *
      * @param string $path 路径
      * @return Qwin_Widget_Abstract 当前对象
      */
-    public function setRootPath($path)
+    public function setPath($path)
     {
         if (is_dir($path)) {
-            $this->_rootPath = $path;
+            $this->_path = $path;
             return $this;
         }
         throw new Qwin_Widget_Exception('Path "' . $path . '" no found.');
@@ -195,67 +171,22 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
      * @param bool $exact 通过类反射获取准确的根目录,当微件不在默认目录时使用
      * @return string 根目录
      */
-    public function getRootPath($exact = false)
+    public function getPath($exact = false)
     {
         if (false === $exact) {
-            return $this->_rootPath;
+            if (!$this->_path) {
+                $this->_path = $this->_widget->getPath() . substr(get_class($this), 0, -7) . '/';
+            }
+            return $this->_path;
         } else {
-            if (!$this->_exactRootPath) {
+            if (!$this->_exactPath) {
                 $obj = new ReflectionClass($this);
-                $this->_exactRootPath = dirname($obj->getFileName());
+                $this->_exactPath = dirname($obj->getFileName());
             }
-            $this->_exactRootPath;
+            $this->_exactPath;
         }
     }
-
-    /**
-     * 设置缓存路径
-     *
-     * @param string $path 路径
-     * @return Qwin_Widget_Abstract 当前对象
-     */
-    public function setCachePath($path)
-    {
-        if (is_dir($path)) {
-            $this->_cachePath = $path;
-            return $this;
-        }
-        throw new Qwin_Widget_Exception('Path "' . $path . '" no found.');
-    }
-
-    /**
-     * 获取缓存路径
-     * 
-     * @return string
-     */
-    public function getCachePath()
-    {
-        return $this->_cachePath;
-    }
-
-    /**
-     * 合并两个数组
-     *
-     * @param array $array1 数组1
-     * @param array $array2 数组2
-     * @return array
-     */
-    protected function merge(array $array1 = null, array $array2 = null)
-    {
-        if (null == $array2) {
-            return $array1;
-        }
-        foreach ($array2 as $key => $val) {
-            if (is_array($val)) {
-                !isset($array1[$key]) && $array1[$key] = array();
-                $array1[$key] = $this->merge($array1[$key], $val);
-            } else {
-                $array1[$key] = $val;
-            }
-        }
-        return $array1;
-    }
-
+    
     public function  __get($name)
     {
         if ('_' == $name[0]) {
@@ -268,13 +199,5 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
     {
         $this->_E->setObject($this);
         call_user_func_array(array($this->_E, 'e'), func_get_args());
-    }
-    
-    public function result($result = true, $data = array())
-    {
-        return array(
-            'result' => $result,
-            'data' => $data,
-        );
     }
 }
