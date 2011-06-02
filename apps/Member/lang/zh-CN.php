@@ -53,7 +53,7 @@ return array(
     
     'GRP_CUSTOMER' => '界面配置',
 
-    'MOD_COM_MEMBER' => '用户',
+    'MOD_MEMBER' => '用户',
     'LBL_MODULE_MEMBER_DETAIL' => '用户详细',
     'LBL_MODULE_MEMBER_SETTING' => '用户配置',
 

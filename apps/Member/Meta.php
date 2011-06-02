@@ -25,7 +25,7 @@
  * @since       2010-05-13 10:19:22
  */
 
-class Com_Member_Meta extends Com_Meta
+class Member_Meta extends Com_Meta
 {
     public function sanitiseListOperation($value, $name, $data, $copyData)
     {
