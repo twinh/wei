@@ -11,7 +11,7 @@ $nickname = isset($member['contact']) ? $member['contact']['nickname'] : $member
 $minify->addArray(array(
     $style->getCssFile(),
     $this->getTag('root') . 'style.css',
-    QWIN . 'image/iconx.css',
+    QWIN . 'view/default/icons/iconx.css',
     $jQuery->loadCore(false),
     $jQuery->loadUi('core', false),
     $jQuery->loadUi('widget', false),
