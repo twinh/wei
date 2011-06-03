@@ -149,7 +149,7 @@ class Qwin_Application
 
         // 加载最终模块的控制器
         $params = array($config, $module, $action);
-        $controller = Qwin_Application_Controller::getByModule($module, true, $params);
+        $controller = Controller_Widget::getByModule($module, true, $params);
         if (!$controller) {
             throw new Qwin_Application_Exception('Controller in module "' . $module . '" not found.');
         }

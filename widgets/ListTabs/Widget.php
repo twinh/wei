@@ -41,7 +41,7 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
         }
 
         // 获取禁用的行为
-        $controllerClass = Com_Controller::getByModule($module, false);
+        $controllerClass = Controller_Widget::getByModule($module, false);
         $classVar = get_class_vars($controllerClass);
         if (isset($classVar['_unableAction'])) {
             $unableAction = $classVar['_unableAction'];

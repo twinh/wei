@@ -25,7 +25,7 @@
  * @since       2010-05-13 10:17:58
  */
 
-class Member_Controller extends Com_ActionController
+class Member_Controller extends ActionController_Widget
 {
     /**
      * 锁定的核心帐号，防止恶意修改
