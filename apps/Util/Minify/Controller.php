@@ -23,7 +23,7 @@
  * @since       2010-08-04 10:58:17
  */
 
-class Util_Minify_Controller extends Qwin_Application_Controller
+class Util_Minify_Controller extends Controller_Widget
 {
     public function actionIndex()
     {

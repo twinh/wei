@@ -42,7 +42,7 @@ class Log4php_Widget extends Qwin_Widget_Abstract
      *
      * @param string|null $file 配置文件
      */
-    public function __construct(array $options)
+    public function __construct(array $options = array())
     {
         parent::__construct($options);
         // 加载配置文件

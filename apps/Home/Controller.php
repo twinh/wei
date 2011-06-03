@@ -23,7 +23,7 @@
  * @since       2011-01-09 09:42:41
  */
 
-class Com_Home_Controller extends Com_Controller
+class Home_Controller extends Com_Controller
 {
     public function actionIndex()
     {

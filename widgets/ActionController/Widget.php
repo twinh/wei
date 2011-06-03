@@ -1,8 +1,8 @@
 <?php
 /**
- * ActionController
+ * Widget
  *
- * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Com
- * @subpackage  ActionController
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-26 15:31:26
+ * @since       2011-06-03 14:45:19
  */
 
-class Com_ActionController extends Com_Controller
+class ActionController_Widget extends Controller_Widget
 {
     /**
      * 控制器默认首页,Common命名空间的默认首页是数据列表
