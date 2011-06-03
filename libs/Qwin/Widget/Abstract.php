@@ -33,7 +33,6 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
 
     /**
      * 选项
-     *
      * @var array
      */
     protected $_options = array();
@@ -43,13 +42,13 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
      * @var string
      */
     protected $_path;
-    
+
     /**
      * 微件的准确根目录
-     * @var string 
+     * @var string
      */
     protected $_exactPath;
-    
+
     /*
      * 微件单例对象
      * @var Qwin_Widget
@@ -63,20 +62,20 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
      * @todo 不是每一个微件都需要此流程
      */
     public function __construct(array $options = array())
-    {        
+    {
         // 检查是否通过微件管理对象获得,不是则
         $this->_widget = Qwin::call('-widget');
         $this->_widget->register($this);
-        
+
         $this->_options = $options + $this->_defaults;
         $this->getPath();
     }
 
     /**
      * 渲染微件
-     * 
+     *
      * @param mixed $options 选项
-     * @return Qwin_Widget_Abstract 当前对象 
+     * @return Qwin_Widget_Abstract 当前对象
      */
     public function render($options = null)
     {
@@ -114,7 +113,7 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
             $this->_defaults[$name] = $value;
             return $this;
         }
-        throw new Qwin_Widget_Exception('Undefine default option "' . $name . '".');        
+        throw new Qwin_Widget_Exception('Undefine default option "' . $name . '".');
     }
 
     /**
@@ -149,7 +148,7 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
         }
         throw new Qwin_Widget_Exception('Undefine option "' . $name . '".');
     }
-    
+
     /**
      * 设置微件根路径
      *
@@ -167,7 +166,7 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
 
     /**
      * 获取微件根目录
-     * 
+     *
      * @param bool $exact 通过类反射获取准确的根目录,当微件不在默认目录时使用
      * @return string 根目录
      */
@@ -186,7 +185,7 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
             $this->_exactPath;
         }
     }
-    
+
     public function  __get($name)
     {
         if ('_' == $name[0]) {
@@ -194,7 +193,7 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
         }
         throw new Exception('Undefined property: ' . get_class($this) . '::$' . $name);
     }
-    
+
     public function e()
     {
         $this->_E->setObject($this);

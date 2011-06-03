@@ -68,7 +68,7 @@ class Controller_Widget extends Qwin_Widget_Abstract
      * @var Qwin_Session
      */
     protected $_session;
-    
+
     /**
      * 微件管理对象
      * @var Qwin_Widget
@@ -155,7 +155,7 @@ class Controller_Widget extends Qwin_Widget_Abstract
     {
         return $this->getWidget()->call('View');
     }
-    
+
     /**
      * 初始化各类和数据
      */
@@ -185,7 +185,7 @@ class Controller_Widget extends Qwin_Widget_Abstract
         }
         return $this->_request;
     }
-    
+
     /**
      * 获取Url对象
      * @return Qwin_Url
@@ -226,12 +226,12 @@ class Controller_Widget extends Qwin_Widget_Abstract
     /**
      * 获取元数据对象
      *
-     * @return Com_Meta
+     * @return Meta_Widget
      */
     public function getMeta()
     {
         if (!$this->_meta) {
-            $this->_meta = Com_Meta::getByModule($this->_module);
+            $this->_meta = Meta_Widget::getByModule($this->_module);
         }
         return $this->_meta;
     }
@@ -248,10 +248,10 @@ class Controller_Widget extends Qwin_Widget_Abstract
         }
         return $this->_model;
     }
-    
+
     /**
      * 获取微件管理对象
-     * 
+     *
      * @return Qwin_Widget
      */
     public function getWidget()
