@@ -25,8 +25,7 @@
  * @since       2010-08-06 19:25:40
  */
 
-// ArrayObject
-class View_Widget extends Qwin_Application_View implements Qwin_Widget_Interface
+class View_Widget extends ArrayObject implements Qwin_Widget_Interface
 {
     /**
      * 视图元素数组
@@ -90,31 +89,16 @@ class View_Widget extends Qwin_Application_View implements Qwin_Widget_Interface
         'time'      => 3000,
         'customer'  => false,
     );
-    
+
     /**
      * 初始化类
      *
      * @param array $input 数据
      */
-//    public function  __construct($input = array())
-//    {
-//        if ($input instanceof ArrayObject) {
-//            $input = $input->getArrayCopy();
-//        }
-//        parent::__construct($input, ArrayObject::ARRAY_AS_PROPS);
-//
-//        // todo 是否会造成重复
-//        // 打开缓冲区
-//        ob_start();
-//        //register_shutdown_function(array($this, 'ob'));
-//    }
-    
     public function  __construct($input = array())
     {
         parent::__construct($input, ArrayObject::ARRAY_AS_PROPS);
 
-        Qwin::get('-app')->setView($this);
-        Qwin::set('-view', $this);
         // todo 是否会造成重复
         // 打开缓冲区
         ob_start();
