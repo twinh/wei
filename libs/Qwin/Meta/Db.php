@@ -35,21 +35,21 @@ class Qwin_Meta_Db extends Qwin_Meta_Common
 
     /**
      * @var array $_defaults        默认选项
-     * 
+     *
      *      -- name                 名称
      *
      *      -- title                标题标识, 默认为 FLD_$fieldUppeName
-     * 
+     *
      *      -- description          域描述
-     * 
+     *
      *      -- order                排序
-     * 
+     *
      *      -- dbField              是否为数据库字段
-     * 
+     *
      *      -- dbQuery              是否允许数据库查询
-     * 
+     *
      *      -- urlQuery             是否允许Url查询
-     * 
+     *
      *      -- readonly             是否只读
      */
     protected $_fieldDefaults = array(
@@ -65,10 +65,10 @@ class Qwin_Meta_Db extends Qwin_Meta_Common
 //            'length' => null,
 //        ),
     );
-    
+
     /**
      * 默认选项
-     * @var array 
+     * @var array
      */
     protected $_defaults = array(
         'fields' => array(),
@@ -80,7 +80,7 @@ class Qwin_Meta_Db extends Qwin_Meta_Common
         'order' => array(),
         'where' => array(),
     );
-    
+
     /**
      * @var array           获取记录的配置
      *
@@ -105,13 +105,13 @@ class Qwin_Meta_Db extends Qwin_Meta_Common
     {
         $data = (array)$data + $this->_defaults;
         !is_array($data['fields']) && (array)$data['fields'];
-                
+
         // 处理通配选项
         if (array_key_exists('*', $data['fields'])) {
             $this->_fieldDefaults = $this->_fieldDefaults + (array)$data['fields']['*'];
             unset($data['fields']['*']);
         }
-        
+
         foreach ($data['fields'] as $name => &$field) {
             !isset($field['name']) && $field['name'] = $name;
             //!isset($field['title']) && $field['title'] = 'FLD_' . strtoupper($name);
@@ -120,7 +120,7 @@ class Qwin_Meta_Db extends Qwin_Meta_Common
         $this->exchangeArray($data);
         return $this;
     }
-    
+
     /**
      *
      * @param Doctrine_Record $record 原始Doctrine记录对象
@@ -134,7 +134,7 @@ class Qwin_Meta_Db extends Qwin_Meta_Common
             'type' => $type,
         ));
     }
-    
+
     /**
      * 获取元数据对应的查询对象
      *
@@ -149,11 +149,11 @@ class Qwin_Meta_Db extends Qwin_Meta_Common
         $options['type'] = (array)$options['type'];
         $options['alias'] = (array)$options['alias'];
         $meta = $this->getParent();
-        
+
         if (is_null($record)) {
             // 尝试通过父元数据的模型配置加载记录对象
             // TODO 一个模块,多个记录对象如何处理
-            $recordClass = Com_Model::getByModule($meta['module']->getUrl(), false);
+            $recordClass = Model_Widget::getByModule($meta['module']->getUrl(), false);
             $record = Qwin::call($recordClass);
         } else {
             $recordClass = get_class($record);
@@ -178,10 +178,10 @@ class Qwin_Meta_Db extends Qwin_Meta_Common
                 $query->leftJoin($recordClass . '.' . $alias . ' ' . $alias);
             }
         }
-        
+
         return $query;
     }
-    
+
     /**
      * 将元数据的域定义,数据表定义加入模型中
      *
@@ -192,7 +192,7 @@ class Qwin_Meta_Db extends Qwin_Meta_Common
     {
         // 设置数据表
         $record->setTableName($this['table']);
-        
+
         // 设置字段
         foreach ($this['fields'] as $name => $field) {
             if ($field['dbField'] && $field['dbQuery']) {
@@ -206,7 +206,7 @@ class Qwin_Meta_Db extends Qwin_Meta_Common
 
         return $this;
     }
-    
+
     public static function getRecordByModule($module)
     {
         $meta = self::getByModule($module);
@@ -226,11 +226,11 @@ class Qwin_Meta_Db extends Qwin_Meta_Common
         $options = $options + $this->_recordOptions;
         $options['type'] = (array)$options['type'];
         $options['alias'] = (array)$options['alias'];
-        
+
         if (null === $record) {
             $record = Com_Model::getByModule($this->getModule());
         }
-        
+
         // 将元数据加入记录配置中
         $this->toRecord($record);
 

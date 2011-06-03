@@ -25,5 +25,5 @@
 
 interface Qwin_Widget_Interface
 {
-    public function render($options = null);
+    //public function render($options = null);
 }
