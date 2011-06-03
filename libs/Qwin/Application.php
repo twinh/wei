@@ -128,10 +128,6 @@ class Qwin_Application
         // 设置应用启动钩子
         Qwin::hook('AppStartup');
         
-        // 加载视图
-        $this->_view = Qwin::call('Qwin_Application_View');
-        //$this->_view = Qwin::call('-widget')->call('View');
-
         // 初始化请求
         $request = Qwin::call('-request');
 
@@ -164,8 +160,7 @@ class Qwin_Application
         }
         
         // 展示视图,视图对象可能已被更改,需进行辨别
-        $this->_view->display();
-        //Qwin::call('-widget')->call('View')->display();
+        Qwin::call('-widget')->call('View')->display();
 
         // 设置应用结束钩子
         Qwin::hook('AppTermination');
