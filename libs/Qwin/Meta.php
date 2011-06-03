@@ -48,7 +48,7 @@ class Qwin_Meta
         'page'      => 'Qwin_Meta_Page',
         'module'    => 'Qwin_Meta_Module',
     );
-   
+
     /**
      * 实例化的元数据对象数组
      *
@@ -86,13 +86,13 @@ class Qwin_Meta
     public function get($class)
     {
         $lower = strtolower($class);
-        
+
         if (isset($this->_objects[$lower])) {
             return $this->_objects[$lower];
         }
 
         if (!class_exists($class)) {
-            throw new Qwin_Application_Meta_Exception('Class "' . $class . '" not found.');
+            throw new Qwin_Meta_Exception('Class "' . $class . '" not found.');
         }
 
         // 初始化并设置元数据
@@ -152,21 +152,21 @@ class Qwin_Meta
         }
         return isset($this->_drivers[$name]) ? $this->_drivers[$name] : null;
     }
-    
+
     /**
      * 获取默认驱动的类名
-     * 
+     *
      * @return string
      */
     public function getDefaultDriver()
     {
         return 'Qwin_Meta_Common';
     }
-    
+
     /**
      * 验证是否为合法元数据变量
-     * 
-     * @param Qwin_Meta_Abstract $meta 
+     *
+     * @param Qwin_Meta_Abstract $meta
      * @return bool
      */
     public static function isValid($meta)
