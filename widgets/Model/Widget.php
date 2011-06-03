@@ -1,9 +1,6 @@
 <?php
-/**
+ /**
  * Model
- *
- * AciionController is controller with some default action,such as index,list,
- * add,edit,delete,view and so on.
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -19,25 +16,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Com
+ * @package     Widget
  * @subpackage  Model
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-7-28 17:26:42
+ * @since       2010-04-17 15:49:35
+ * @todo        Record or Model
  */
 
-require_once 'Qwin/Application/Model.php';
+/**
+ * @see Doctrine_Record
+ */
+require_once 'Doctrine/Record.php';
 
-class Com_Model extends Qwin_Application_Model
+class Model_Widget extends Doctrine_Record implements Qwin_Widget_Interface
 {
     /**
      * 数据库连接标识
      * @var bool
      */
     protected static $_connected = false;
-    
+
     public function  __construct($table = null, $isNewEntry = false)
     {
         self::_connect();
@@ -54,19 +55,6 @@ class Com_Model extends Qwin_Application_Model
         if (!self::$_connected) {
             $manager = Doctrine_Manager::getInstance();
             $config = Qwin::config();
-            // 连接padb数据库
-            /*if(isset($config['database']['adapter']['padb'])) {
-                $manager->registerConnectionDriver('padb', 'Doctrine_Connection_Padb');
-                $manager->registerHydrator('padb', 'Doctrine_Hydrator_Padb');
-                $padb = $config['database']['adapter']['padb'];
-                $adapter = $padb['type'] . '://'
-                         . $padb['username'] . ':'
-                         . $padb['password'] . '@'
-                         . $padb['server'] . '/'
-                         . $padb['database'];
-                $conn = $manager->openConnection($adapter, 'padb');
-            }*/
-
             // 连接其他数据库
             if (isset($_SERVER['SERVER_ADDR']) && $_SERVER['SERVER_ADDR'] == '127.0.0.1') {
                 $mainAdapter = 'localhost';
@@ -94,5 +82,26 @@ class Com_Model extends Qwin_Application_Model
             self::$_connected = true;
         }
         return true;
+    }
+
+    /**
+     * 根据模块获取模型对象
+     *
+     * @param Qwin_Module|string $module 模块对象/标识
+     * @param bool $instanced 是否实例化
+     * @return Com_Model|string 实例化对象|类名
+     */
+    public static function getByModule($module, $instanced = true)
+    {
+        if ($module instanceof Qwin_Module) {
+            $class = $module->toClass();
+        } else {
+            $class = Qwin_Module::instance($module)->toClass();
+        }
+        $class .= '_Model';
+        if (!class_exists($class)) {
+            throw new Qwin_Application_Model_Exception('Model Class "' . $class . '" not found.');
+        }
+        return $instanced ? new $class : $class;
     }
 }
