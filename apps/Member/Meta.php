@@ -58,7 +58,7 @@ class Member_Meta extends Meta_Widget
 
     public function isUsernameExists($username)
     {
-        $result = Com_Meta::getQueryByModule('com/member')
+        $result = Com_Meta::getQueryByModule('member')
             ->select('id')
             ->where('username = ?', $username)
             ->fetchOne();

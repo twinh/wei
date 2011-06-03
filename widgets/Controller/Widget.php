@@ -274,7 +274,7 @@ class Controller_Widget extends Qwin_Widget_Abstract
 
         // 未登陆则默认使用游客账号
         if (null == $member) {
-            $member = Com_Meta::getByModule('com/member')->get('db')->getQuery()
+            $member = Meta_Widget::getByModule('member')->get('db')->getQuery()
                 ->where('username = ?', 'guest')
                 ->fetchOne()
                 ->toArray();
