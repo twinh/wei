@@ -33,7 +33,7 @@
  */
 require_once 'Qwin/Meta/Abstract.php';
 
-class Com_Meta extends Qwin_Meta_Abstract
+class Meta_Widget extends Qwin_Meta_Abstract implements Qwin_Widget_Interface
 {
     /**
      * 当前模块根路径
@@ -43,7 +43,7 @@ class Com_Meta extends Qwin_Meta_Abstract
 
     /**
      * 初始化对象
-     * 
+     *
      * @param array $input 默认数组
      */
     public function __construct($input = array())
@@ -52,7 +52,12 @@ class Com_Meta extends Qwin_Meta_Abstract
         $class = get_class($this);
         $this->set('module', substr($class, 0, strrpos($class, '_')));
     }
-    
+
+    public function render($options = null)
+    {
+
+    }
+
     /**
      * 获取指定键名的元数据值，元数据不存在时将抛出异常
      *
@@ -102,7 +107,7 @@ class Com_Meta extends Qwin_Meta_Abstract
         }
         return $this->_offsetGetByFile($index, $driver);
     }
-    
+
 //    public function setAssignToMeta()
 //    {
 //        $this->merge('fields', array(

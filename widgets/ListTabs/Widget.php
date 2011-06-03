@@ -70,7 +70,7 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
 
         // TODO jsLang
         if (!in_array('delete', $unableAction)) {
-            $meta = Com_Meta::getByModule($module);
+            $meta = Meta_Widget::getByModule($module);
             if (!isset($meta['page']['useTrash'])) {
                 $icon = 'ui-icon-close';
                 $jsLang = 'MSG_CONFIRM_TO_DELETE';
