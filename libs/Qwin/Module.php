@@ -23,141 +23,35 @@
  * @since       2011-03-22 15:36:41
  */
 
-class Qwin_Module
+class Qwin_Module implements ArrayAccess
 {
     /**
-     * 模块名称
-     * @var string
+     * @var array           模块数据
+     *
+     *      -- source       模块标识源字符串
+     *
+     *      -- url          Url形式,即小写,横杆
+     *
+     *      -- url          路径形式,即首字母大写,斜杠
+     *
+     *      -- class        类名形式,即首字母大写,下划线
+     *
+     *      -- id           编号形式,即小写,横杠
+     *
+     *      -- lang         语言形式,即大写,下划线
      */
-    protected $_data;
-
-    /**
-     * 模块编号化名称,如 com-member
-     * @var string
-     */
-    protected $_id;
-
-    /**
-     * 模块路径化名称,如 Com/Member
-     * @var string
-     */
-    protected $_path;
-
-    /**
-     * 模块类名化名称,如Com_Member
-     * @var string
-     */
-    protected $_class;
-
-    /**
-     * 模块Url化名称
-     * @var string
-     */
-    protected $_url;
-    
-    /**
-     * 模块语言化名称
-     */
-    protected $_lang;
-
-    /**
-     * 默认配置
-     * @var array
-     */
-    protected $_defaults = array(
-        'rootModule'    => 'Com',
+    protected $_data = array(
+        'url'       => null,
+        'path'      => null,
+        'class'     => null,
+        'id'        => null,
+        'lang'      => null,
     );
 
-    public function __construct($module = null)
-    {
-        // 耦合?
-        if (!$module) {
-            $this->_data = Qwin::call('-request')->get('module');
-        } else {
-            $this->_data = $module;
-        }
-    }
-
-    public function toString()
-    {
-        return $this->_data;
-    }
-
     /**
-     * 获取模块编号化名称
-     *
-     * @return string
+     * @var array 模块数组数据
      */
-    public function toId()
-    {
-        if (!$this->_id) {
-            $this->_id = strtolower(strtr($this->_data, '/', '-'));
-        }
-        return $this->_id;
-    }
-
-    public function toPath()
-    {
-        if (!$this->_path) {
-            $this->_path = strtr($this->toClass(), '_', '/') . '/';
-        }
-        return $this->_path;
-    }
-
-    /**
-     * 获取模块Url化名称
-     *
-     * @return string
-     */
-    public function toUrl()
-    {
-        if (!$this->_url) {
-            $this->_url = strtolower($this->_data);
-        }
-        return $this->_url;
-    }
-
-    /**
-     * 获取模块类名化名称
-     * @return string
-     */
-    public function toClass()
-    {
-        if (!$this->_class) {
-            // 转换为标准格式的类名
-            $class = preg_split('/([^A-Za-z0-9])/', $this->_data);
-            $this->_class = implode('_', array_map('ucfirst', $class));
-        }
-        return $this->_class;
-    }
-    
-    public function toLang()
-    {
-        if (!$this->_lang) {
-            $this->_lang = strtoupper(strtr($this->_data, '/', '_'));
-        }
-        return $this->_lang;
-    }
-
-    public function isValid()
-    {
-        
-    }
-
-    /**
-     * 魔法方法，返回原始数据
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->_data;
-    }
-
-    public function set($data)
-    {
-        $this->_data = $data;
-    }
+    protected $_source = array();
 
     /**
      * 存放实例的数组
@@ -166,10 +60,20 @@ class Qwin_Module
     protected static $_intances = array();
 
     /**
+     * 初始化模块数据
+     *
+     * @param string $module 模块名称
+     */
+    public function __construct($module)
+    {
+        $this->_source = preg_split('/([^A-Za-z0-9])/', (string)$module);
+    }
+
+    /**
      * 实例化一个模块对象
      *
-     * @param string $module string 模块名称
-     * @return Qwin_Module
+     * @param string $module 模块名称
+     * @return Qwin_Module 模块对象
      */
     public static function instance($module)
     {
@@ -177,5 +81,123 @@ class Qwin_Module
             self::$_intances[$module] = new Qwin_Module($module);
         }
         return self::$_intances[$module];
+    }
+
+    /**
+     * 获取模块编号形式名称
+     *
+     * @return string
+     */
+    public function getId()
+    {
+        if (empty($this->_data['id'])) {
+            $this->_data['id'] = strtolower(implode('-', $this->_source));
+        }
+        return $this->_data['id'];
+    }
+
+    /**
+     * 获取模块路径形式名称
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+        if (empty($this->_data['path'])) {
+            $this->_data['path'] = implode('/', array_map('ucfirst', $this->_source)) . '/';
+        }
+        return $this->_data['path'];
+    }
+
+    /**
+     * 获取模块Url形式名称
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        if (empty($this->_data['url'])) {
+            $this->_data['url'] = strtolower(implode('/', $this->_source));
+        }
+        return $this->_data['url'];
+    }
+
+    /**
+     * 获取模块类名化名称
+     *
+     * @return string
+     */
+    public function getClass()
+    {
+        if (empty($this->_data['class'])) {
+            $this->_data['class'] = implode('_', array_map('ucfirst', $this->_source));
+        }
+        return $this->_data['class'];
+    }
+
+    /**
+     * 获取语言形式名称
+     *
+     * @return string
+     */
+    public function getLang()
+    {
+        if (empty($this->_data['lang'])) {
+            $this->_data['lang'] = strtoupper(implode('_', $this->_source));
+        }
+        return $this->_data['lang'];
+    }
+
+    /**
+     * 检查是否存在索引
+     *
+     * @param string $offset 索引
+     * @return bool
+     */
+    public function offsetExists($offset)
+    {
+        return array_key_exists($offset, $this->_data);
+    }
+
+    /**
+     * 为索引设置值
+     *
+     * @param string $offset 索引
+     * @param mixed $value 值
+     * @return mixed $value 值
+     */
+    public function offsetSet($offset, $value)
+    {
+        return $this->_data[$offset] = $value;
+    }
+
+    /**
+     * 删除一个索引
+     *
+     * @param string $offset 索引
+     */
+    public function offsetUnset($offset)
+    {
+        if (array_key_exists($offset, $this->_data)) {
+            unset($this->_data[$offset]);
+        }
+    }
+
+    /**
+     * 获取索引的值
+     *
+     * @param string $offset 索引
+     * @return mixed 值
+     */
+    public function offsetGet($offset)
+    {
+        $method = 'get' . $offset;
+        if (method_exists($this, $method)) {
+            return call_user_func(array($this, $method));
+        }
+        if (array_key_exists($offset, $this->_data)) {
+            return $this->_data[$offset];
+        }
+        return null;
     }
 }

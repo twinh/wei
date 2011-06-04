@@ -106,7 +106,7 @@ abstract class Qwin_Meta_Abstract extends ArrayObject
 
     /**
      * 合并/附加元数据
-     * 
+     *
      * @param string $index 键名
      * @param array $data 数据
      * @return QwiQwin_Meta_Abstract 当前对象
@@ -119,10 +119,10 @@ abstract class Qwin_Meta_Abstract extends ArrayObject
         $this[$index]->merge($data);
         return $this;
     }
-    
+
     /**
      * 设置元数据的值
-     * 
+     *
      * @param string $index 键名
      * @param array $data 数据
      * @param string $driver 驱动标识
@@ -131,7 +131,7 @@ abstract class Qwin_Meta_Abstract extends ArrayObject
     public function set($index, $data = null, $driver = null)
     {
         $meta = Qwin_Meta::getInstance();
-        
+
         // 获取驱动类名 $driver > $index > default
         if (isset($driver)) {
             $class = $meta->getDriver($driver);
@@ -144,7 +144,7 @@ abstract class Qwin_Meta_Abstract extends ArrayObject
                 $class = $meta->getDefaultDriver();
             }
         }
-        
+
         // 不存在该键名,直接设置值
         if (!$this->offsetExists($index)) {
             $this[$index] = new $class;
@@ -203,24 +203,24 @@ abstract class Qwin_Meta_Abstract extends ArrayObject
         $this->_id = (string)$id;
         return $this;
     }
-    
+
     /**
-     * 
-     * 
+     *
+     *
      * @param string $index 索引
-     * @return mixed 
+     * @return mixed
      * @see Qwin_Meta_Abstract offsetGet
      */
     public function get($index)
     {
         return $this->offsetGet($index);
     }
-    
+
     /**
      * 魔术方法,允许通过getXXX取值和setXXX设置值
      * 建议直接使用$this[$name],甚至是$this->offsetGet($name)和
      * $this->offsetSet($name)获得更好的效率
-     * 
+     *
      * @param string $name 方法名称
      * @param array $arguments 参数数组
      * @return mixed
@@ -230,7 +230,7 @@ abstract class Qwin_Meta_Abstract extends ArrayObject
         $lname = strtolower($name);
         $action = substr($lname, 0, 3);
         $element = substr($lname, 3);
-        
+
         if ('get' == $action) {
             return $this->offsetGet($element);
         } elseif ('set' == $action) {
@@ -265,9 +265,9 @@ abstract class Qwin_Meta_Abstract extends ArrayObject
     public static function getByModule($module, $instanced = true)
     {
         if ($module instanceof Qwin_Module) {
-            $class = $module->toClass();
+            $class = $module->getClass();
         } else {
-            $class = Qwin_Module::instance($module)->toClass();
+            $class = Qwin_Module::instance($module)->getClass();
         }
         $class .= '_Meta';
         return $instanced ? Qwin_Meta::getInstance()->get($class, $module) : $class;
@@ -351,19 +351,5 @@ abstract class Qwin_Meta_Abstract extends ArrayObject
             }
         }
         return $data;
-    }
-
-    /**
-     * 提供一个钩子方法,当验证开始时,调用此方法
-     */
-    public function preValidate()
-    {
-    }
-
-    /**
-     * 提供一个钩子方法,当验证完毕时,调用此方法
-     */
-    public function postValidate()
-    {
     }
 }
