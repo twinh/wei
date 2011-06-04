@@ -113,9 +113,9 @@ class Controller_Widget extends Qwin_Widget_Abstract
     public static function getByModule($module, $instanced = true, $param = null)
     {
         if ($module instanceof Qwin_Module) {
-            $class = $module->toClass();
+            $class = $module->getClass();
         } else {
-            $class = Qwin_Module::instance($module)->toClass();
+            $class = Qwin_Module::instance($module)->getClass();
         }
         $class .= '_Controller';
         return $instanced ? Qwin::call($class, $param) : $class;

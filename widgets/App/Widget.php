@@ -71,10 +71,13 @@ class App_Widget extends Qwin_Widget_Abstract
         // 获取模块和行为
         $module = (string)$request->get('module');
         $action = (string)$request->get('action');
-        /* @var $module Qwin_Module */
-        $module = Qwin::call('-module', $module);
-        Qwin::config('action', $action);
 
+        require_once 'Qwin/Module.php';
+        $module = Qwin_Module::instance($module);
+
+        // 加入到配置中
+        $config['action'] = $action;
+        $config['module'] = $module;
         // 逐层加载模块类
         if (false === Qwin_Application_Module::load($module)) {
             throw new Qwin_Application_Exception('Module "' . $module . '" not found.');
