@@ -40,20 +40,6 @@ class Qwin
     public static $_config = array();
 
     /**
-     *
-     * @var array               配置选项
-     *
-     *      -- cachePath        缓存文件的路径,缓存文件内容为数组,键名是类名,值是类所在文件
-     *
-     *      -- autoloadPath     是否自动将发现的类加入到缓存文件中
-     */
-    protected static $_option = array(
-        'cacheFile'     => null,
-        'lifetime'      => 86400,
-        'autoloadPath'  => array(),
-    );
-
-    /**
      * 类名映射
      * @var array
      * @example self::$_map = array(
@@ -79,41 +65,11 @@ class Qwin
     protected static $_data = array();
 
     /**
-     * 类名和路径的缓存数组
-     * @var array
-     * @example self::$_classCache = array(
-     *              'class_name_1' => 'class_path_1',
-     *              'class_name_2' => 'class_path_2',
-     *              ...
-     *          );
-     */
-    protected static $_classCache = array();
-
-    /**
-     * 通过自动加载获取的类的缓存数组,对应关系同$_classCache
-     *
-     * @var array
-     */
-    protected static $_classAppendCache = array();
-
-    /**
      * 自动加载的根路径数组
      *
      * @var array
      */
-    protected static $_autoloadPath = array();
-
-    /**
-     * 设置配置选项
-     *
-     * @param array $option 配置选项,参见self::$_option
-     */
-    public static function setOption(array $option)
-    {
-        self::$_option = array_merge(self::$_option, $option);
-        self::setCacheFile(self::$_option['cacheFile']);
-        self::setAutoload(self::$_option['autoloadPath']);
-    }
+    protected static $_autoloadPaths = array();
 
     /**
      * 获取一项资源
@@ -212,7 +168,7 @@ class Qwin
         // 转换为标准格式的类名
         $name = preg_split('/([^A-Za-z0-9])/', $name);
         $name = implode('_', array_map('ucfirst', $name));
-        
+
         if (class_exists($name)) {
             return self::_instanceClass($name, $param);
         }
@@ -230,7 +186,7 @@ class Qwin
     protected static function _instanceClass($name, $param = null)
     {
         $param = null !== $param ? $param : self::config($name);
-        
+
         // 标准单例模式
         if (method_exists($name, 'getInstance')) {
             return call_user_func_array(array($name, 'getInstance'), $param);
@@ -245,7 +201,7 @@ class Qwin
             return $reflection->newInstanceArgs((array)$param);
         }
     }
-    
+
     /**
      * 设置短标签
      *
@@ -283,73 +239,25 @@ class Qwin
         self::$_map[$name] = strtolower($realName);
     }
 
-    /**
-     * 加载类缓存文件
-     *
-     * @param string $file 文件路径
-     * @todo 怎么保证安全 ob_start() ?
-     * @todo 如何保证缓存文件的完整性,不受外界影响
-     * @todo 针对不同请求的不同缓存文件
-     */
-    public static function setCacheFile($file)
-    {
-        if (!is_file($file)) {
-            require_once 'Qwin/Exception.php';
-            throw new Qwin_Exception('The file "' . $file . '" is not exists.', '123');
-        }
-        self::$_option['cacheFile'] = $file;
-        self::$_classCache = (array)require $file;
-
-//        register_shutdown_function(array('Qwin', 'updateCacheFile'));
-    }
-
-    /**
-     * 更新类缓存到文件中
-     *
-     * @return boolen
-     * @see Qwin_Util_File ::appendArray
-     * @todo 对缓存文件的末端进行检测
-     */
-    public static function updateCacheFile()
-    {
-        // 重建缓存文件 todo 优化
-        if (self::$_option['lifetime'] < $_SERVER['REQUEST_TIME'] - filemtime(self::$_option['cacheFile'])) {
-            file_put_contents(self::$_option['cacheFile'], '<?php' . PHP_EOL . 'return array (' . PHP_EOL . ');');
-        }
-
-        if (!empty(self::$_classAppendCache)) {
-            // 构建数组
-            $code = substr(var_export(self::$_classAppendCache, true), 7) . ';';
-
-            // 打开文件,并移动指针到倒数第三位倒数几位分别是 "换行符);"
-            $fp = fopen(self::$_option['cacheFile'], 'r+');
-            fseek($fp, -3, SEEK_END);
-            fwrite($fp, $code);
-            fclose($fp);
-            return true;
-        }
-        return false;
-    }
 
     /**
      * 设置自动加载的子路径
      *
-     * @param array|string $pathList 自动加载的初始路径
+     * @param array|string $paths 自动加载的初始路径
      */
-    public static function setAutoload($pathList = null)
+    public static function setAutoload($paths = null)
     {
         // 设置自动加载的路径
-        if (!is_array($pathList)) {
-            $pathList[] = $pathList;
+        $file = dirname(__FILE__);
+        !is_array($paths) && $paths = (array)$paths;
+        foreach ($paths as &$path) {
+            $path = realpath($path) . DIRECTORY_SEPARATOR;
         }
-        array_unshift($pathList, dirname(__FILE__));
-        foreach ($pathList as $path) {
-            self::$_autoloadPath[] = realpath($path) . DIRECTORY_SEPARATOR;
-        }
-        self::$_autoloadPath = array_unique(self::$_autoloadPath);
+        array_push($paths, $file . DIRECTORY_SEPARATOR);
+        self::$_autoloadPaths = array_unique($paths);
 
         // 将类库加入加载路径中
-        set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__FILE__));
+        set_include_path(get_include_path() . PATH_SEPARATOR . $file);
         spl_autoload_register(array('self', 'autoload'));
     }
 
@@ -362,19 +270,11 @@ class Qwin
      */
     public static function autoload($class)
     {
-        // (五级)通过缓存文件的类数组加载
-        $lower = strtolower($class);
-//        if (isset(self::$_classCache[$lower])) {
-//            require_once self::$_classCache[$lower];
-//            return true;
-//        }
         // 通过解析类名,获取文件路径加载
         $class = strtr($class, array('_' => DIRECTORY_SEPARATOR));
-        foreach (self::$_autoloadPath as $path) {
+        foreach (self::$_autoloadPaths as $path) {
             $path = $path . $class . '.php';
             if (file_exists($path)) {
-                // 加入缓存数组
-                self::$_classAppendCache[$lower] = $path;
                 require_once $path;
                 return true;
             }
@@ -432,18 +332,53 @@ class Qwin
     }
 
     /**
-     * 设置一个钩子(加速方法)
+     * 设置一个钩子
      *
      * @param string $name 钩子名称
      * @param array $param 钩子参数
-     * @uses Qwin_Hook::call
-     * @see Qwin_Hook
      */
-    public static function hook($name)
+    public static function hook($name, $options = null)
     {
-        // 获取参数
-        $params = func_get_args();
-        array_shift($params);
-        return self::call('Qwin_Hook')->call($name, $params);
+        return self::call('-hook')->call($name, $options);
+    }
+
+    /**
+     * 调用一个微件
+     *
+     * @param string $name 微件名称
+     * @return Qwin_Widget_Abstract 微件实例化对象
+     */
+    public static function widget($name)
+    {
+        return self::call('-widget')->call($name);
+    }
+
+    /**
+     * 启动
+     *
+     * @param string|array $config 配置文件的路径或配置数组
+     * @param string|array $config2 附加的配置数据,例如有不同的入口文件,指向不同的模块操作
+     *                              通过定义附加配置,即可方便实现
+     * @return mixed 结果
+     */
+    public static function startup($config, $config2 = null)
+    {
+        // 合并配置
+        if (!is_array($config)) {
+            if (file_exists($config)) {
+                $config = require $config;
+            } else {
+                require_once 'Qwin/Exception.php';
+                throw new Qwin_Exception('File "' . $config . '" not found.');
+            }
+        }
+        // 设定全局配置
+        $config = self::config((array)$config2 + (array)$config);
+
+        // 设置自动加载
+        self::setAutoload($config['Qwin']['autoloadPaths']);
+
+        // 启动应用
+        return self::widget('app')->render($config);
     }
 }
