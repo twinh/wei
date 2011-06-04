@@ -31,7 +31,7 @@ class App_Widget extends Qwin_Widget_Abstract
      * 应用是否已加载,即调用过startup方法
      * @var boolen
      */
-    protected $_isLoad = false;
+    protected $_loaded = false;
 
     /**
      * 启动时间
@@ -48,10 +48,10 @@ class App_Widget extends Qwin_Widget_Abstract
     public function render($config = null)
     {
         // 设置加载标识,防止二次加载
-        if ($this->_isLoad) {
+        if ($this->_loaded) {
             return false;
         }
-        $this->_isLoad = true;
+        $this->_loaded = true;
 
         // 设置启动时间
         $this->_startTime = microtime(true);
@@ -97,7 +97,7 @@ class App_Widget extends Qwin_Widget_Abstract
         }
 
         // 展示视图,视图对象可能已被更改,需进行辨别
-        Qwin::call('-widget')->call('View')->display();
+        $this->_View->display();
 
         // 设置应用结束钩子
         Qwin::hook('AppTermination');
