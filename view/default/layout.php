@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
-<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $config['interface']['charset'] ?>" />
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $config['charset'] ?>" />
 <title><?php echo $lang['LBL_HTML_TITLE'] ?></title>
 <?php
 echo $this->getPackerSign();
@@ -83,7 +83,7 @@ $minify->addArray(array(
 <div id="ui-floating-footer" class="ui-state-default">
     <div id="ui-footer-arrow" class="ui-icon ui-icon-arrowthickstop-1-n"></div>
     <div class="ui-footer-time"></div>
-    <div class="ui-copyright ui-widget">Executed in <?php echo Qwin_Application::getInstance()->getEndTime() ?>(s). <?php echo qw_t('LBL_FOOTER_COPYRIGHT') ?></div>
+    <div class="ui-copyright ui-widget">Executed in <?php echo $widget->call('app')->getEndTime() ?>(s). <?php echo qw_t('LBL_FOOTER_COPYRIGHT') ?></div>
 </div>
 </body>
 </html>

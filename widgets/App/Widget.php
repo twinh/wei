@@ -25,78 +25,27 @@
  * @since       2009-11-24 20:45:11
  */
 
-class Qwin_Application
+class App_Widget extends Qwin_Widget_Abstract
 {
-    /**
-     * 启动器的实例化对象
-     *
-     * @var Qwin_Application_Setup
-     */
-    protected static $_instance;
-
     /**
      * 应用是否已加载,即调用过startup方法
      * @var boolen
      */
     protected $_isLoad = false;
-    
-    /**
-     * 选项
-     * @var array
-     */
-    protected $_options = array();
-
-    /**
-     * 视图的实例化对象
-     * @var Qwin_Application_View
-     */
-    protected $_view;
-    
-    /**
-     * 模块的实例化对象
-     * @var Qwin_Application_Module
-     */
-    protected $_module;
-
-    /**
-     * 控制器的实例化对象
-     * @var Qwin_Application_Controller
-     */
-    protected $_controller;
 
     /**
      * 启动时间
      * @var string
      */
     protected $_startTime;
-    
-    /**
-     * 构造方法,不允许继承,也不允许通过外部实例化
-     */
-    final protected function __construct()
-    {
-    }
-
-    /**
-     * 获取当前类的实例化对象(单例模式)
-     *
-     * @return Qwin_Application
-     */
-    public static function getInstance()
-    {
-        if (!isset(self::$_instance)) {
-            self::$_instance = new self();
-        }
-        return self::$_instance;
-    }
 
     /**
      * 启动应用程序
-     * 
+     *
      * @param array $config 配置
      * @return Qwin_Application 当前对象
      */
-    public function startup(array $config)
+    public function render($config = null)
     {
         // 设置加载标识,防止二次加载
         if ($this->_isLoad) {
@@ -107,27 +56,15 @@ class Qwin_Application
         // 设置启动时间
         $this->_startTime = microtime(true);
 
-        // 合并配置
-        $globalConfig = require_once $config['root'] . 'config/global.php';
-        $config = $config + $globalConfig;
-
         // 设置错误提示的输出等级
         error_reporting($config['errorType']);
 
         // 默认时区
         date_default_timezone_set($config['timezone']);
 
-        // 加载框架主类,设置自动加载类
-        require_once $config['resource'] . 'libs/Qwin.php';
-        Qwin::setOption($config['Qwin']);
-        $config = Qwin::config($config);
-
-        // 注册当前类
-        Qwin::set('-app', $this);
-
         // 设置应用启动钩子
         Qwin::hook('AppStartup');
-        
+
         // 初始化请求
         $request = Qwin::call('-request');
 
@@ -158,24 +95,13 @@ class Qwin_Application
         } else {
             throw new Qwin_Application_Exception('Action "' . $action . '" not found in controller "' . get_class($controller) .  '"');
         }
-        
+
         // 展示视图,视图对象可能已被更改,需进行辨别
         Qwin::call('-widget')->call('View')->display();
 
         // 设置应用结束钩子
         Qwin::hook('AppTermination');
-        
-        return $this;
-    }
 
-    /**
-     * 设置视图对象,方便第三方扩展,如Samrty
-     *
-     * @param object $view 视图对象
-     */
-    public function setView($view)
-    {
-        $this->_view = $view;
         return $this;
     }
 
