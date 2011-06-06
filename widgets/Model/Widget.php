@@ -96,7 +96,7 @@ class Model_Widget extends Doctrine_Record implements Qwin_Widget_Interface
         if ($module instanceof Qwin_Module) {
             $class = $module->toClass();
         } else {
-            $class = Qwin_Module::instance($module)->toClass();
+            $class = Qwin_Module::instance($module)->getClass();
         }
         $class .= '_Model';
         if (!class_exists($class)) {

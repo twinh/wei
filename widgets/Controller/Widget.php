@@ -112,12 +112,23 @@ class Controller_Widget extends Qwin_Widget_Abstract
      */
     public static function getByModule($module, $instanced = true, $param = null)
     {
-        if ($module instanceof Qwin_Module) {
-            $class = $module->getClass();
-        } else {
-            $class = Qwin_Module::instance($module)->getClass();
+        // 初始化模块类
+        if (!$module instanceof Qwin_Module) {
+            $module = Qwin_Module::instance($module);
         }
-        $class .= '_Controller';
+        // 检查模块控制器文件是否存在
+        $path = Qwin::widget('App')->getOption('path');
+        $file = $path . $module->getPath() . 'Controller.php';
+        if (!is_file($file)) {
+            throw new Qwin_Widget_Exception('Module "' . $module->getUrl() . '" not found.');
+        }
+        
+        require_once $file;
+        $class = $module->getClass() . '_Controller';
+        if (!class_exists($class)) {
+            throw new Qwin_Widget_Exception('Controller class "' . $class . '" not found.');
+        }
+        
         return $instanced ? Qwin::call($class, $param) : $class;
     }
 

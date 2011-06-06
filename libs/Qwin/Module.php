@@ -49,24 +49,47 @@ class Qwin_Module implements ArrayAccess
     );
 
     /**
-     * @var array 模块数组数据
+     * 模块数组数据
+     * @var array 
      */
     protected $_source = array();
+    
+    /**
+     * 模块标识
+     * @var string
+     */
+    protected $_string;
+    
+    /**
+     * 替换的标识
+     * 
+     * @var array
+     */
+    protected static $_replace = array(
+        '-' => '/',
+        '_' => '/',
+    );
 
     /**
      * 存放实例的数组
      * @var array
      */
-    protected static $_intances = array();
+    public static $_intances = array();
 
     /**
      * 初始化模块数据
      *
      * @param string $module 模块名称
      */
-    public function __construct($module)
+    protected function __construct($module)
     {
-        $this->_source = preg_split('/([^A-Za-z0-9])/', (string)$module);
+        $this->_string = (string)$module;
+        $this->_source = preg_split('/([^A-Za-z0-9])/', $this->_string);
+    }
+    
+    public function __toString()
+    {
+        return $this->_string;
     }
 
     /**
@@ -77,6 +100,7 @@ class Qwin_Module implements ArrayAccess
      */
     public static function instance($module)
     {
+        $module = strtr(strtolower($module), self::$_replace);
         if (!isset(self::$_intances[$module])) {
             self::$_intances[$module] = new Qwin_Module($module);
         }

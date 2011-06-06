@@ -48,7 +48,7 @@ class Error_Widget extends Qwin_Widget_Abstract
         ob_end_clean();
         ob_start();
 
-        $view = Qwin::call('Com_View');
+        $view = $this->_View;
 
         $content = null;
         $file = $e->getFile();
