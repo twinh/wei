@@ -20,6 +20,7 @@ $minify->addArray(array(
     $jQuery->loadPlugin('qui', null, false),
     $this->getTag('root') . 'style.js',
 ));
+
 ?>
 <!--[if IE 6]>
 <link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->getTag('root') ?>style-ie6.css" />

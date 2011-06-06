@@ -35,7 +35,7 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
         $lang = $this->_Lang;
         $tabs = array();
 
-        $moduleId = $module->toId();
+        $moduleId = $module->getId();
         if (isset($get['json'])) {
             unset($get['json']);
         }
@@ -90,7 +90,7 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
 
         if (!in_array('list', $unableAction)) {
             $tabs['list'] = array(
-                'url' => $url->url($module->toUrl(), 'index'),
+                'url' => $url->url($module->getUrl(), 'index'),
                 'title' => $lang->t('ACT_LIST'),
                 'icon' => 'ui-icon-note',
                 'target' => null,
@@ -99,7 +99,7 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
             );
             // TODO hook
             $tabs['filter'] = array(
-                'url' => $url->url($module->toUrl(), 'index', array('filter' => '1')),
+                'url' => $url->url($module->getUrl(), 'index', array('filter' => '1')),
                 'title' => $lang->t('ACT_FILTER'),
                 'icon' => 'ui-icon-calculator',
                 'target' => null,

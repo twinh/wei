@@ -58,7 +58,7 @@ jQuery(function($){
     }
 
     // 点击删除按钮
-    $('#action-<?php echo $module->toId() ?>-delete').click(function(){
+    $('#action-<?php echo $module->getId() ?>-delete').click(function(){
         var keyList = new Array(),
             rowList = jqGridObj.jqGrid('getGridParam','selarrrow');
         if (rowList.length == 0) {
@@ -86,7 +86,7 @@ jQuery(function($){
     });
 
     // 点击复制按钮
-    $('#action-<?php echo $module->toId() ?>-copy').click(function(){
+    $('#action-<?php echo $module->getId() ?>-copy').click(function(){
         var rowList = jqGridObj.jqGrid('getGridParam','selarrrow');
         if (rowList.length != 1) {
             alert(Qwin.Lang.MSG_CHOOSE_ONLY_ONE_ROW);

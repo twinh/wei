@@ -37,7 +37,7 @@ class Qwin_Widget
      * 微件所在目录
      * @var string
      */
-    protected $_rootPath;
+    protected $_path;
 
     /**
      * 获取当前类的实例化对象
@@ -46,7 +46,7 @@ class Qwin_Widget
      */
     public function __construct($path = null)
     {
-        $path && $this->setRootPath($path);
+        $path && $this->setPath($path);
     }
 
     /**
@@ -55,18 +55,23 @@ class Qwin_Widget
      * @param string $path 路径
      * @return Qwin_Widget 当前对象
      */
-    public function setRootPath($path)
+    public function setPath($path)
     {
         if (is_dir($path)) {
-            $this->_rootPath = $path;
+            $this->_path = $path;
             return $this;
         }
         throw new Qwin_Widget_Exception('Path "' . $path . '" not found.');
     }
     
+    /**
+     * 获取微件目录
+     *  
+     * @return string 目录
+     */
     public function getPath()
     {
-        return $this->_rootPath;
+        return $this->_path;
     }
 
     /**
@@ -102,13 +107,13 @@ class Qwin_Widget
      */
     public function call($name)
     {
-        $class = $name . '_Widget';
+        $class = ucfirst($name) . '_Widget';
         if (isset($this->_loaded[$class])) {
             return $this->_loaded[$class];
         }
 
         // 查看主文件是否存在
-        $file = $this->_rootPath . $name . '/Widget.php';
+        $file = $this->_path . $name . '/Widget.php';
         if (!is_file($file)) {
             throw new Qwin_Widget_Exception('Widget "' . $name . '" not found.');
         }

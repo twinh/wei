@@ -95,7 +95,7 @@ class App_Widget extends Qwin_Widget_Abstract
         // 加入到配置中
         $config['action'] = $action;
         $config['module'] = $module;
-        
+
         // 加载控制器
         $params = array($config, $module, $action);
         $controller = Controller_Widget::getByModule($module, true, $params);
