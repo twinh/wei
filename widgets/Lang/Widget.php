@@ -105,6 +105,7 @@ class Lang_Widget extends Qwin_Widget_Abstract implements ArrayAccess
         
         // 全局配置
         $name = $options['name'];
+        $file = $options['appPath'] . $options['path'] . $name . '.php';
         if (null != $name && is_file($file)) {
             $session['lang'] = $name;
             return $this->_appendFile($file);

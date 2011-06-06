@@ -49,13 +49,18 @@ class Qwin_Session implements ArrayAccess
         'expire'    => 86400,
     );
 
-    public function __construct(array $options)
+    public function __construct(array $options = array())
     {
-        $this->_options = array_merge($this->_options, $options);
+        $this->_options = $options + $this->_options;
         if(!session_id()) {
             session_cache_limiter($this->_options['limiter']);
             session_cache_expire($this->_options['expire']);
             session_start();
+        }
+        // 命名空间对于每个项目都是唯一的
+        // TODO $_SERVER['SCRIPT_FILENAME']对于不同项目不能保证100%唯一,是否有更好的标识
+        if (!$this->_options['namespace']) {
+            $this->_options['namespace'] = md5(dirname($_SERVER['SCRIPT_FILENAME']));
         }
         $this->setNamespace($this->_options['namespace']);
     }

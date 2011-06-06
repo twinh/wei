@@ -163,7 +163,7 @@ jQuery(function($){
         $('#ui-main-table').css('height', height);
         return true;
     }
-
+    
 //    $('#ui-main-middle').qui().click(function(){
 //        $("#ui-main-left").animate({width: 'toggle'}, 500);
 //    });
