@@ -29,6 +29,11 @@
  * @todo      其他缓存方式
  */
 
+/**
+ * 定义常量QWIN
+ */
+define('QWIN', true);
+
 class Qwin
 {
     const VERSION = '0.7.9';
