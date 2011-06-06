@@ -44,9 +44,9 @@ class ContentHeader_Widget extends Qwin_Widget_Abstract
         $icon = Qwin::config('resource') . 'view/default/icons/' . $view['meta']['page']['icon'] . '_32.png';
         !is_file($icon) && $icon = null;
 
-        $header .= '<a href="' . $url->url($module->toUrl(), 'index') . '">' . $lang->t($view['meta']['page']['title']) . '</a>';
+        $header .= '<a href="' . $url->url($module->getUrl(), 'index') . '">' . $lang->t($view['meta']['page']['title']) . '</a>';
       
-        $actionLabel = 'ACT_' . $module->toLang() . '_' . strtoupper($action);
+        $actionLabel = 'ACT_' . $module->getLang() . '_' . strtoupper($action);
         if (!isset($lang[$actionLabel])) {
             $actionLabel = 'ACT_' . strtoupper($action);
         }

@@ -31,7 +31,7 @@ class ListTabs_Hook extends Qwin_Hook_Abstract
         $widget = Qwin::call('-widget');
 
         // 如果当前行为存在选项卡视图,加载该视图,否则直接输出默认选项卡内容
-        $class = $module->toClass() . '_Widget_ListTabs';
+        $class = $module->getClass() . '_Widget_ListTabs';
         if(class_exists($class)) {
             return $widget->getByClass($class)->render($view);
         } else {

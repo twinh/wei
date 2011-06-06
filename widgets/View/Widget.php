@@ -123,7 +123,7 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
             'minify'    => $widget->get('Minify'),
             'jQuery'    => $widget->get('JQuery'),
             'config'    => $config,
-            'module'    => Qwin::call('-module'),
+            'module'    => Qwin::config('module'),
             'action'    => $config['action'],
             'theme'     => $config['theme'],
             'style'     => $style,

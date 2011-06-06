@@ -24,7 +24,7 @@
  */
 
 return array(
-    'MOD_COM_HOME' => '主页',
+    'MOD_HOME' => '主页',
     'ACT_ABOUT' => '关于Qwin',
     'ACT_UPDATELOG' => '更新日志',
 );

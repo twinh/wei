@@ -48,12 +48,6 @@ class Lang_Widget extends Qwin_Widget_Abstract implements ArrayAccess
     protected $_appendedFiles = array();
 
     /**
-     * 模块管理对象
-     * @var Qwin_Application_Module
-     */
-    protected $_module;
-
-    /**
      * @var array           默认选项
      *
      *  -- rootModule       根模块,当模块找不到时,加载此模块的语言
@@ -63,44 +57,59 @@ class Lang_Widget extends Qwin_Widget_Abstract implements ArrayAccess
      *  -- name             语言名称
      */
     protected $_defaults = array(
-        'rootModule' => 'Com',
-        'module'     => null,
         'name'       => 'zh-CN',
-        'path'       => 'lang',
+        'path'       => 'lang/',
     );
 
-    protected $_options = array();
-
     /**
-     * 初始化语言数据
-     * 不论是怎样的情况,出错,模块未找到等等,至少应该加载默认根目录的默认语言
+     * 初始化语言微件
+     * 
+     * @param array $options 选项
+     * @return Lang_Widget
      */
     public function  __construct(array $options = array())
     {
-        // 合并选项
-        $options = $options + $this->_defaults;
-        $this->_options = &$options;
+        parent::__construct($options);
+        $options = &$this->_options;
+        
+        /**
+         * 注意:语言微件有自己的__get,__set方法,通过语言微件加载其他微件,应通过
+         *     $this->_wiget->get('name'),而不能直接使用$tihs->_name取得.
+         */
+        // 设置应用目录和微件目录
+        $options['appPath'] = $this->_widget->get('app')->getOption('path');
+        $options['widgetPath'] = $this->_widget->getPath();
 
-        if (!isset($options['module'])) {
-            $options['module'] = $options['rootModule'];
+        // 通过应用根目录检查语言是否存在
+        /* @var $request Qwin_Request */
+        $request = Qwin::call('-request');
+
+        /* @var $session Qwin_Session */
+        $session = Qwin::call('-session');
+
+        // 用户请求
+        $name = $request['lang'];
+        $this->_name = &$name;
+        $file = $options['appPath'] . $options['path'] . $name . '.php';
+        if (null != $name && is_file($file)) {
+            $session['lang'] = $name;
+            return $this->_appendFile($file);
         }
-
-        /*if (null == $module) {
-            $module = Qwin::call('-module');
-        }*/
-
-        $this->_module = Qwin::call('Qwin_Application_Module');
+        // 会话中用户的配置
+        $name = $session['lang'];
+        $file = $options['appPath'] . $options['path'] . $name . '.php';
+        if (null != $name && is_file($file)) {
+            return $this->_appendFile($file);
+        }
         
-        // 初始化语言名称
-        $this->_getName($options['module']);
+        // 全局配置
+        $name = $options['name'];
+        if (null != $name && is_file($file)) {
+            $session['lang'] = $name;
+            return $this->_appendFile($file);
+        }
         
-        // 加载全局语言
-        $resource = Qwin::config('resource');
-        $file = $resource . 'apps/lang/' . $this->_name . '.php';
-        $this->appendByFile($file);
-
-        // 逐层加载语言
-        $this->appendByModule($options['module']);
+        throw new Qwin_Widget_Exception('Language file "' . $file . '" for "' . $name . '" not found.');
     }
 
     /**
@@ -147,51 +156,6 @@ class Lang_Widget extends Qwin_Widget_Abstract implements ArrayAccess
             return $file;
         }
         return false;
-    }
-
-    /**
-     * 加载语言数据
-     *
-     * @return Qwin_Application_Language 当前对象
-     */
-    public function _getName($module)
-    {
-        /* @var $request Common_Request */
-        $request = Qwin::call('-request');
-
-        /* @var $session Qwin_Session */
-        $session = Qwin::call('-session');
-
-        // 用户请求
-        $name = $request['lang'];
-        $this->_name = &$name;
-        if (null != $name && ($file = $this->isExists($name, $module))) {
-            $session['lang'] = $name;
-            return $name;
-        }
-
-        // 会话中用户的配置
-        $name = $session['lang'];
-        if (null != $name && ($file = $this->isExists($name, $module))) {
-            return $name;
-        }
-
-        // 全局配置 or $this->_options['name'] ?
-        $name = Qwin::config('language');
-        if (null != $name && ($file = $this->isExists($name, $module))) {
-            $session['lang'] = $name;
-            return $name;
-        }
-
-        return false;
-        // todo 不存在时记录 $this->log('');
-        // 构建语言文件路径
-        //$root = $this->_module->getRoot($module);
-        //$path = $this->_module->getPath($module);
-        //$file = $path . $root . '/' . 'Language/' . $name . '.php';
-
-        //require_once 'Qwin/Application/Language/Exception.php';
-        //throw new Qwin_Application_Language_Exception('Language file "' . $file . '" not found.');
     }
 
     /**
