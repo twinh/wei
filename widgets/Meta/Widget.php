@@ -50,7 +50,8 @@ class Meta_Widget extends Qwin_Meta_Abstract implements Qwin_Widget_Interface
     {
         parent::__construct($input);
         $class = get_class($this);
-        $this->set('module', substr($class, 0, strrpos($class, '_')));
+        $this['module'] = Qwin_Module::instance(substr($class, 0, strrpos($class, '_')));
+        //qw_p(Qwin_Module::$_intances);
     }
 
     public function render($options = null)

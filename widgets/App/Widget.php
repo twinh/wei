@@ -28,6 +28,14 @@
 class App_Widget extends Qwin_Widget_Abstract
 {
     /**
+     * 默认选项
+     * @var array 
+     */
+    protected $_defaults = array(
+        'path' => null,
+    );
+    
+    /**
      * 应用是否已加载,即调用过startup方法
      * @var boolen
      */
@@ -38,6 +46,15 @@ class App_Widget extends Qwin_Widget_Abstract
      * @var string
      */
     protected $_startTime;
+    
+    public function __construct(array $options = array())
+    {
+        parent::__construct($options);
+        // 设置默认的目录
+        if (null == $this->_options['path']) {
+            $this->_options['path'] = dirname($this->_widget->getPath()) . '/apps/';
+        }
+    }
 
     /**
      * 启动应用程序
@@ -78,17 +95,10 @@ class App_Widget extends Qwin_Widget_Abstract
         // 加入到配置中
         $config['action'] = $action;
         $config['module'] = $module;
-        // 逐层加载模块类
-        if (false === Qwin_Application_Module::load($module)) {
-            throw new Qwin_Application_Exception('Module "' . $module . '" not found.');
-        }
-
-        // 加载最终模块的控制器
+        
+        // 加载控制器
         $params = array($config, $module, $action);
         $controller = Controller_Widget::getByModule($module, true, $params);
-        if (!$controller) {
-            throw new Qwin_Application_Exception('Controller in module "' . $module . '" not found.');
-        }
 
         // 执行行为
         $actionName = 'action' . $action;
@@ -96,7 +106,7 @@ class App_Widget extends Qwin_Widget_Abstract
             && !in_array(strtolower($action), $controller->getForbiddenActions())) {
             call_user_func_array(array($controller, $actionName), $params);
         } else {
-            throw new Qwin_Application_Exception('Action "' . $action . '" not found in controller "' . get_class($controller) .  '"');
+            throw new Qwin_Widget_Exception('Action "' . $action . '" not found in controller "' . get_class($controller) .  '"');
         }
 
         // 展示视图,视图对象可能已被更改,需进行辨别
