@@ -11,7 +11,7 @@ $nickname = isset($member['contact']) ? $member['contact']['nickname'] : $member
 $minify->addArray(array(
     $style->getCssFile(),
     $this->getTag('root') . 'style.css',
-    QWIN . 'view/default/icons/icon.css',
+    $config['resource'] . 'view/default/icons/icon.css',
     $jQuery->loadCore(false),
     $jQuery->loadUi('core', false),
     $jQuery->loadUi('widget', false),
@@ -28,7 +28,7 @@ $minify->addArray(array(
 <![endif]-->
 <script type="text/javascript">
     jQuery.noConflict();
-    qwin.get = <?php echo Qwin_Util_Array::jsonEncode($_GET) ?>;
+    qwin.get = <?php echo json_encode($_GET) ?>;
     qwin.lang = <?php echo json_encode($lang->toArray()) ?>;
 </script>
 <!--<script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>-->
