@@ -189,7 +189,7 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
     public function  __get($name)
     {
         if ('_' == $name[0]) {
-            return $this->_widget->get(ucfirst(substr($name, 1)));
+            return $this->$name = $this->_widget->get(ucfirst(substr($name, 1)));
         }
         throw new Exception('Undefined property: ' . get_class($this) . '::$' . $name);
     }

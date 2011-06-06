@@ -57,10 +57,10 @@ class App_Widget extends Qwin_Widget_Abstract
     }
 
     /**
-     * 启动应用程序
-     *
+     * 启动应用
+     * 
      * @param array $config 配置
-     * @return Qwin_Application 当前对象
+     * @return App_Widget 当前对象
      */
     public function render($config = null)
     {
@@ -110,7 +110,7 @@ class App_Widget extends Qwin_Widget_Abstract
         }
 
         // 展示视图,视图对象可能已被更改,需进行辨别
-        $this->_View->display();
+        $this->_view->display();
 
         // 设置应用结束钩子
         Qwin::hook('AppTermination');
