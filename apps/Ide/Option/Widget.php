@@ -48,7 +48,7 @@ class Ide_Option_Widget extends Qwin_Widget_Abstract
      * 选项
      * @var array
      */
-    protected $_options = array(
+    protected $_defaults = array(
         'cachePath' => null,
     );
 
@@ -85,17 +85,22 @@ class Ide_Option_Widget extends Qwin_Widget_Abstract
 //        ),
     );
 
-    public function  __construct(array $options = null)
+    public function  __construct(array $options = array())
     {
-        if (!is_dir($options['cachePath'])) {
-            throw new Qwin_Exception('The option path is not found.');
+        parent::__construct($options);
+        if (null == $this->_options['cachePath']) {
+            $this->_options['cachePath'] = Qwin::config('root') . 'cache/option/';
         }
         
-        $this->_lang = Qwin::call('-widget')->get('Lang');
         // 初始化路径
-        $this->_path = $options['cachePath'];
+        $this->_path = $this->_options['cachePath'];
+
+        if (!is_dir($this->_path)) {
+            throw new Qwin_Exception('Option path "' . $this->_path . '" is not found.');
+        }
         
         // 初始化附加选项
+        $this->_lang = Qwin::call('-widget')->get('Lang');
         foreach ($this->_defaultAddition as &$row) {
             $row['name'] = $this->_lang[$row['name']];
         }

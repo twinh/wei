@@ -19,6 +19,7 @@ $minify->addArray(array(
     $jQuery->loadEffect('core', false),
     $jQuery->loadPlugin('qui', null, false),
     $this->getTag('root') . 'style.js',
+    $this->getTag('root') . 'DD_roundies_0.0.2a-min.js',
 ));
 
 ?>

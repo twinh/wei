@@ -46,7 +46,12 @@ class Qwin_Widget
      */
     public function __construct($path = null)
     {
-        $path && $this->setPath($path);
+        // 如果不提供路径,则认为微件存放于类库同级目录的widgets文件夹里
+        // TODO 是否有更快的方式,例如操作字符串
+        if (null == $path) {
+            $path = dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'widgets' . DIRECTORY_SEPARATOR;
+        }
+        $this->setPath($path);
     }
 
     /**

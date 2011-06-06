@@ -47,7 +47,7 @@ class Qwin_Validator
      * @param array $callbacks
      * @return Qwin_Validator 当前对象
      */
-    public function  __construct($callbacks = null)
+    public function  __construct($callbacks = 'Qwin_Validator_Common')
     {
         if (isset($callbacks)) {
             $this->setRules((array)$callbacks);

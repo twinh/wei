@@ -67,7 +67,7 @@ class Model_Widget extends Doctrine_Record implements Qwin_Widget_Interface
                      . $db['password'] . '@'
                      . $db['server'] . '/'
                      . $db['database'];
-            $conn = $manager->openConnection($adapter, $config['projectName']);
+            $conn = $manager->openConnection($adapter);
 
             // 设置字段查询带引号
             $conn->setAttribute(Doctrine_Core::ATTR_QUOTE_IDENTIFIER, true);
