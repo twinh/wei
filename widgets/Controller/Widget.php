@@ -40,12 +40,6 @@ class Controller_Widget extends Qwin_Widget_Abstract
     protected $_meta;
 
     /**
-     * 语言对象
-     * @var Qwin_Application_Language
-     */
-    protected $_lang;
-
-    /**
      * 请求对象
      * @var Qwin_Request
      */
@@ -101,6 +95,26 @@ class Controller_Widget extends Qwin_Widget_Abstract
      * @var array
      */
     protected $_unableActions = array();
+    
+    /**
+     * 初始化各类和数据
+     */
+    public function __construct($config = array(), $module = null, $action = null)
+    {
+        parent::__construct();
+        $this->_module  = $module;
+        $this->_action  = $action;
+
+        // 加载模块语言
+        $this->_lang->appendByModule($module);
+        
+        $this->_view = $this->getWidget()->call('View');
+        $this->getRequest();
+         /**
+         * 访问控制
+         */
+        $this->_isAllowVisited();
+    }
 
     /**
      * 根据模块获取控制器对象
@@ -165,23 +179,6 @@ class Controller_Widget extends Qwin_Widget_Abstract
     public function getView($class = null)
     {
         return $this->getWidget()->call('View');
-    }
-
-    /**
-     * 初始化各类和数据
-     */
-    public function __construct($config = array(), $module = null, $action = null)
-    {
-        $this->_module  = $module;
-        $this->_action  = $action;
-
-        $this->_view = $this->getWidget()->call('View');
-        //$this->_view = Qwin::call('Com_View');
-        $this->getRequest();
-         /**
-         * 访问控制
-         */
-        $this->_isAllowVisited();
     }
 
     /**

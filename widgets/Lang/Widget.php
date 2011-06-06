@@ -95,7 +95,8 @@ class Lang_Widget extends Qwin_Widget_Abstract implements ArrayAccess
             $session['lang'] = $name;
             return $this->_appendFile($file);
         }
-        // 会话中用户的配置
+        
+        // 会话配置
         $name = $session['lang'];
         $file = $options['appPath'] . $options['path'] . $name . '.php';
         if (null != $name && is_file($file)) {
@@ -141,46 +142,19 @@ class Lang_Widget extends Qwin_Widget_Abstract implements ArrayAccess
     }
 
     /**
-     * 检查语言是否存在
-     *
-     * @param string $name 语言名称
-     * @param string $module 模块标识
-     * @return string 
-     */
-    public function isExists($name, $module)
-    {
-        $root = $this->_module->getRoot($module);
-        $path = $this->_module->getPath($module);
-        $file = $path . $root . '/' . $this->_options['path'] . '/' . $name . '.php';
-        if (is_file($file)) {
-            return $file;
-        }
-        return false;
-    }
-
-    /**
      * 根据模块标识加载语言
-     *
-     * @param array $module 模块标识
-     * @return Qwin_Application_Language|false 当前对象|失败
+     * 
+     * @param string|Qwin_Module $module 模块标识
+     * @return false|Lang_Widget
+     * @todo 增加参数:递归加载和语言名称
      */
     public function appendByModule($module)
     {
-        $path = $this->_module->getPath($module);
-        if (false === $path) {
-            return false;
+        if (!$module instanceof Qwin_Module) {
+            $module = Qwin_Module::instance($module);
         }
-
-        // 逐层加载模块
-        $modules = explode('/', $module);
-        foreach ($modules as $module) {
-            $path .= ucfirst($module) . '/';
-            $file = $path . $this->_options['path'] . '/' . $this->_name . '.php';
-            if (is_file($file)) {
-                $this->_appendFile($file);
-            }
-        }
-        return $this;
+        $file = $this->_options['appPath'] . $module->getPath() . $this->_options['path'] . $this->_name . '.php';
+        return $this->appendByFile($file);
     }
     
     /**
@@ -191,18 +165,13 @@ class Lang_Widget extends Qwin_Widget_Abstract implements ArrayAccess
      */
     public function appendByWidget($widget)
     {
-        if (is_object($widget) && $widget instanceof Qwin_Widget_Abstract) {
-            if (is_file($file = $widget->getPath() . $this->_options['path'] . '/' . $this->_name . '.php')) {
-                return $this->_appendFile($file);
-            }
-            return false;
-        } elseif (is_string($widget)) {
-            if (is_file($file = dirname($this->_path) . '/' . $widget . '/' . $this->_name . '.php')) {
-                return $this->_appendFile($file);
-            }
-            return false;
+        if ($widget instanceof Qwin_Widget_Abstract) {
+            $path = $widget->getPath();
+        } else {
+            $path = $this->_widget->getPath() . ucfirst($widget) . '/';
         }
-        throw new Qwin_Widget_Exception('Argument should be a instanced widget object or widget name.');
+        $file = $path . $this->_options['path'] . $this->_name . '.php';
+        return $this->appendByFile($file);
     }
 
     /**
