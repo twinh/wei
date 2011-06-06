@@ -59,15 +59,20 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
     );
 
     /**
+     * 默认选项
+     * @var array
+     */
+    protected $_defaults = array(
+        'style'         => 'cupertino',
+        'theme'         => 'default',
+        'charset'       => 'utf-8',
+    );
+    
+    /**
      * 选项
      * @var array
      */
-    protected $_options = array(
-        'theme'         => '',
-        'style'         => '',
-        'exceptionView' => '',
-        'errorView'     => '',
-    );
+    protected $_options = array();
     
     /**
      * 打包的标记,用于合并js,css标签
@@ -95,10 +100,11 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
      *
      * @param array $input 数据
      */
-    public function  __construct($input = array())
+    public function  __construct(array $options = array())
     {
-        parent::__construct($input, ArrayObject::ARRAY_AS_PROPS);
-
+        parent::__construct(array(), ArrayObject::ARRAY_AS_PROPS);
+        $this->_options = $options + $this->_defaults;
+        
         // todo 是否会造成重复
         // 打开缓冲区
         ob_start();
@@ -125,13 +131,13 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
             'config'    => $config,
             'module'    => Qwin::config('module'),
             'action'    => $config['action'],
-            'theme'     => $config['theme'],
+            'theme'     => $this->_options['theme'],
             'style'     => $style,
         ));
 
         // 设置标签
         $this->setTag(array(
-            'root'              => $config['resource'] . 'view/' . $config['theme'] . '/',
+            'root'              => $config['resource'] . 'view/' . $this->_options['theme'] . '/',
             'suffix'            => '.php',
             'style'             => $style->getName(),
             'module'            => $this->module,
@@ -629,5 +635,10 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
     public function isDisplayed()
     {
         return $this->_displayed;
+    }
+    
+    public function getOption($name)
+    {
+        return isset($this->_options[$name]) ? $this->_options[$name] : null;
     }
 }
