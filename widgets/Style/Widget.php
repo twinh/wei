@@ -37,14 +37,13 @@ class Style_Widget extends Qwin_Widget_Abstract
         if (isset($this->_name)) {
             return $this->_name;
         }
-        $config = Qwin::config();
 
         $session = Qwin::call('-session');
         // 按优先级排列语言的数组
         $styleList = array(
             Qwin::call('-request')->get('style'),
             $session['style'],
-            $config['style'],
+            $this->_view->getOption('style'),
         );
         foreach ($styleList as $val) {
             if (null != $val) {
@@ -54,7 +53,7 @@ class Style_Widget extends Qwin_Widget_Abstract
         }
 
         if (!is_dir($this->_path . 'source/' . $style)) {
-            $style = $config['style'];
+            $style = $this->_view->getOption('style');
         }
         $session['style'] = $style;
         return $this->_name = $style;

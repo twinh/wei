@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
-<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $config['charset'] ?>" />
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->_options['charset'] ?>" />
 <title><?php echo $lang['LBL_HTML_TITLE'] ?></title>
 <?php
 echo $this->getPackerSign();
@@ -19,7 +19,7 @@ $minify->addArray(array(
     $jQuery->loadEffect('core', false),
     $jQuery->loadPlugin('qui', null, false),
     $this->getTag('root') . 'style.js',
-    $this->getTag('root') . 'DD_roundies_0.0.2a-min.js',
+    //$this->getTag('root') . 'DD_roundies_0.0.2a-min.js',
 ));
 
 ?>
