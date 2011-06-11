@@ -86,39 +86,21 @@ return array(
         'birthday' => array(
         ),
         'reg_ip' => array(
-            'basic' => array(
-                'group' => 1,
-            ),
         ),
         'theme' => array(
-            'basic' => array(
-                'group' => 1,
-            ),
         ),
         'language' => array(
-            'basic' => array(
-                'group' => 1,
-            ),
         ),
         'telephone' => array(
-            'basic' => array(
-                'group' => 1,
-            ),
         ),
         'mobile' => array(
-            'basic' => array(
-                'group' => 1,
-            ),
         ),
         'homepage' => array(
-            'basic' => array(
-                'group' => 1,
-            ),
         ),
         'address' => array(
-            'basic' => array(
-                'group' => 1,
-            ),
+        ),
+        'date_modified' => array(
+            
         ),
     ),
     'id' => 'id',
