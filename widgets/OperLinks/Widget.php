@@ -39,7 +39,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
         $moduleUrl = $module->getUrl();
         $url = Qwin::call('-url');
         $lang = $this->_Lang;
-        $controller = Com_Controller::getByModule($moduleUrl, false);
+        $controller = Controller_Widget::getByModule($moduleUrl, false);
         $varList = get_class_vars($controller);
         if (isset($varList['_unableActions'])) {
             $unableActions = (array)$varList['_unableActions'];
@@ -110,7 +110,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
             }
 
              if (!in_array('delete', $unableActions) && method_exists($controller, 'actionDelete')) {
-                $meta = Com_Meta::getByModule($moduleUrl);
+                $meta = Meta_Widget::getByModule($moduleUrl);
                 if (!isset($meta['page']['useTrash'])) {
                     $icon = 'ui-icon-close';
                     $jsLang = 'MSG_CONFIRM_TO_DELETE';

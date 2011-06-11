@@ -22,10 +22,15 @@
  * @version     $Id$
  * @since       2011-02-16 14:14:21
  */
-$minify->add($this->_path . 'script/js.js');
+$this->_minify->addArray(array(
+    $this->_path . 'view/style.css',
+    $this->_path . 'script/js.js'
+));
 if ($options['validate']) :
-    $minify->add($this->_path . 'script/style.css')
-           ->add($this->_path . 'source/jquery.validate.qwin.js');
+    $this->_minify->addArray(array(
+        $this->_path . 'script/style.css',
+        $this->_path . 'source/jquery.validate.qwin.js'
+    ));
 ?>
 <script type="text/javascript">
 validateCode['<?php echo $options['id'] ?>'] = <?php echo $validateCode ?>;
@@ -35,7 +40,7 @@ endif;
 ?>
 <form id="<?php echo $options['id'] ?>" name="form" method="post" action="<?php echo qw_url()?>">
 <?php if ($form['topButtons']) : ?>
-<div class="ui-operation-field">
+<div class="qw-operation-field">
     <?php echo Qwin_Util_JQuery::button('submit', qw_t('ACT_SUBMIT'), 'ui-icon-check') ?>
     <?php echo Qwin_Util_JQuery::button('reset', qw_t('ACT_RESET'), 'ui-icon-arrowreturnthick-1-w') ?>
 </div>
@@ -52,10 +57,10 @@ endif;
         $groupId = strtolower(strtr($group, '_', '-'));
 ?>
 <?php if (!is_numeric($group)) : ?>
-    <fieldset id="ui-fieldset-<?php echo $groupId ?>" class="ui-widget-content ui-corner-all">
+    <fieldset id="qw-fieldset-<?php echo $groupId ?>" class="ui-widget-content ui-corner-all">
     <legend><?php echo $lang[$group] ?></legend>
 <?php endif; ?>
-    <table class="ui-form-table" id="ui-form-table-<?php echo $groupId ?>" width="100%">
+    <table class="qw-form-table" id="qw-form-table-<?php echo $groupId ?>" width="100%">
         <tr>
         <?php foreach ($percent as $value) : ?>
             <td width="<?php echo $value?>%"></td>
@@ -93,8 +98,8 @@ endif;
                     } else {
                         $label = $lang->f($field);
                     }
-                    echo '<td class="ui-label-common"><label for="' . $form['fields'][$field]['id'] . '">' . $label . ':</label></td>'
-                       . '<td class="ui-field-common ui-field-' . $form['fields'][$field]['_type'] . '" colspan="' . ($i * 2 + 1) . '">' . $this->renderElement($form['fields'][$field]) , $this->renderElementWidget($form['fields'][$field]) . '</td>';
+                    echo '<td class="qw-label-common"><label for="' . $form['fields'][$field]['id'] . '">' . $label . ':</label></td>'
+                       . '<td class="qw-field-common qw-field-' . $form['fields'][$field]['_type'] . '" colspan="' . ($i * 2 + 1) . '">' . $this->renderElement($form['fields'][$field]) , $this->renderElementWidget($form['fields'][$field]) . '</td>';
                 }
             } else {
                 echo '<td colspan="2">&nbsp;</td>';
@@ -108,7 +113,7 @@ endif;
     </fieldset>
 <?php endif; ?>
 <?php endforeach; ?>
-<div class="ui-operation-field">
+<div class="qw-operation-field">
     <input type="hidden" name="_page" value="<?php echo $refererPage ?>" />
     <?php echo Qwin_Util_JQuery::button('submit', $lang['ACT_SUBMIT'], 'ui-icon-check') ?>
     <?php echo Qwin_Util_JQuery::button('reset', $lang['ACT_RESET'], 'ui-icon-arrowreturnthick-1-w') ?>
