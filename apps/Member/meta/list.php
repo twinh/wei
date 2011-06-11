@@ -49,6 +49,6 @@ return array(
         ),
     ),
     'layout' => array(
-        'id', 'group_id', 'username', 'email', 'sex', 'operation',
+        'id', 'group_id', 'username', 'email', 'sex', 'date_modified', 'operation',
     ),
 );
