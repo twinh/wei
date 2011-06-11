@@ -134,7 +134,6 @@ class Form_Widget extends Qwin_Widget_Abstract
         }
 
         // 默认表单配置
-        $minify = $this->_widget->get('Minify');
         $lang = $this->_Lang;
         $refererPage = urlencode(Qwin::call('-request')->server('HTTP_REFERER'));
         
@@ -170,7 +169,7 @@ class Form_Widget extends Qwin_Widget_Abstract
             $this->_Lang->appendByWidget('Validator');
             $validateCode = array(); //$this->getValidateCode($meta, $lang);
         }
-
+        
         $file = $this->_path . 'view/' . $options['view'];
         if (is_file($file)) {
             require $file;

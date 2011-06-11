@@ -23,7 +23,7 @@
  * @since       2011-05-28 12:42:31
  */
 
-class Ide_Controller extends Com_Controller
+class Ide_Controller extends Controller_Widget
 {
     public function actionIndex()
     {

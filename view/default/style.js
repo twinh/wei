@@ -113,7 +113,7 @@ jQuery(function($){
         click: true,
         focus: true
     });
-    $('table.ui-form-table input:text, table.ui-form-table textarea').qui();
+    $('table.qw-form-table input:text, table.qw-form-table textarea').qui();
 
     $('a.ui-action-controller').button({icons: {primary: 'ui-icon-triangle-1-e'},text: false});
 

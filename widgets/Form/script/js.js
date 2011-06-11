@@ -29,9 +29,9 @@
  */
 var validateCode = new Array();
 jQuery(function($){
-    $('table.ui-form-table input, table.ui-form-table textarea, table.ui-form-table select').addClass('ui-widget-content ui-corner-all');
+    $('table.qw-form-table input, table.qw-form-table textarea, table.qw-form-table select').addClass('ui-widget-content ui-corner-all');
 
-    $('div.ui-icon-common a').qui();
+    $('div.qw-icon-common a').qui();
 
     $('fieldset > legend').click(function(){
         $(this).next().toggle();
