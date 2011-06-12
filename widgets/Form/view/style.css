@@ -1,0 +1,130 @@
+/**
+ * Style
+ *
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @version     $Id$
+ * @since       2011-6-11, 20:21:51
+ */
+ 
+ 
+/* Form
+----------------------------------*/
+.qw-form-error-message{
+    padding: 4px 4px 4.8px 4px;
+    vertical-align: text-bottom
+}
+
+.qw-form{
+    width: auto;
+    overflow: hidden;
+    min-width: 800px;
+}
+.qw-form .qw-form-content{
+    padding: 0 5px;
+}
+.qw-form .qw-form-content fieldset {
+    margin: 5px;
+    padding-left: 5px;
+    background: none;
+}
+.qw-form .qw-form-content legend {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 120%;
+    padding: 0 3px;
+    cursor: pointer;
+    background: none;
+    border: 0;
+}
+
+
+/* 防止ck编辑器下部变形 */
+.cke_editor .cke_contents fieldset {
+    margin: 0;
+}
+
+/* Tables in the Form
+----------------------------------*/
+.qw-form-table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 2px 0 20px;
+}
+.qw-form-table td{
+    padding: 2px;
+    font-weight: normal;
+    line-height: 20px;
+}
+.qw-form-table .qw-label-common{
+    text-align: right;
+
+}
+.qw-form-table .qw-field-text input,
+.qw-form-table .qw-field-password input{
+    width: 60%;
+    padding: 4px 0 4px 5px;/* for ie & ff */
+    line-height: 15px;/* for ie */
+    font-weight:normal;
+    vertical-align: bottom;
+}
+.qw-form-table .qw-field-text-small input{
+    width: 22%;
+}
+.qw-form-table .qw-field-checkbox input,
+.qw-form-table .qw-field-radio input {
+    margin-top: 4px;
+}
+.qw-form-table .qw-field-select select {
+    width: 61%;
+    height: 24px;
+    line-height: 24px;
+    padding: 2px 0 0;
+}
+.qw-form-table .qw-field-textarea textarea{
+    width: 59.6%;
+    height: 8em;
+    line-height: 2em;
+    padding: .2em .4em;
+    font-weight: normal;
+    overflow-y: auto;
+    vertical-align: bottom;
+}
+.qw-form-table .qw-field-common button{
+    vertical-align: bottom;
+}
+.qw-form-table .qw-field-common button .qw-button-text{
+    padding: 0.4em 0.4em;
+}
+.qw-form-table .qw-field-common label.error {
+    cursor:pointer;
+    display:inline-block;
+    margin-right:0.1em;
+    overflow:visible;
+    padding:0;
+    position:relative;
+    text-align:center;
+    text-decoration:none !important;
+}
+
+.qw-operation-field{
+    padding: 5px;
+}
+.qw-operation-content{
+    margin: 20px 5px;
+}

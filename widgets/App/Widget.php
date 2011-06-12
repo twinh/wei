@@ -28,11 +28,17 @@
 class App_Widget extends Qwin_Widget_Abstract
 {
     /**
-     * 默认选项
-     * @var array 
+     * @var array           默认选项
+     * 
+     *      -- path         应用的路径
+     * 
+     *      -- errorType    报错类型
+     *                      E_ALL|E_STRICT      32767
+     *                      E_ALL & ~E_NOTICE   30711
      */
     protected $_defaults = array(
-        'path' => null,
+        'path'          => null,
+        'errorType'     => 32767,
     );
     
     /**
@@ -50,10 +56,15 @@ class App_Widget extends Qwin_Widget_Abstract
     public function __construct(array $options = array())
     {
         parent::__construct($options);
+        
+        // 设置错误提示的输出等级
+        error_reporting($this->_options['errorType']);
+        
         // 设置默认的目录
         if (null == $this->_options['path']) {
             $this->_options['path'] = dirname($this->_widget->getPath()) . '/apps/';
         }
+        
     }
 
     /**
@@ -72,9 +83,6 @@ class App_Widget extends Qwin_Widget_Abstract
 
         // 设置启动时间
         $this->_startTime = microtime(true);
-
-        // 设置错误提示的输出等级
-        error_reporting($config['errorType']);
 
         // 默认时区
         date_default_timezone_set($config['timezone']);
