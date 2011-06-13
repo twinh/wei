@@ -27,14 +27,13 @@ $minify->addArray(array(
 <link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->getTag('root') ?>style-ie6.css" />
 <![endif]-->
 <script type="text/javascript">
-    jQuery.noConflict();
     qwin.get = <?php echo json_encode($_GET) ?>;
     qwin.lang = <?php echo json_encode($lang->toArray()) ?>;
 </script>
 <!--<script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>-->
 </head>
 <body>
-<div id="ui-main" class="ui-main ui-widget-content ui-corner-all">
+<div id="qw-main" class="qw-main ui-widget-content ui-corner-all">
 <table id="qw-header" class="qw-header ui-widget" border="0" cellpadding="0" cellspacing="0">
     <tr>
         <td id="qw-header-left">
@@ -66,26 +65,26 @@ $minify->addArray(array(
     </tr>
 </table>
 <div class="ui-navbar2 ui-widget-content ui-state-default"></div>
-<table id="ui-main-table" border="0" cellpadding="0" cellspacing="0">
-    <tr id="ui-main-content">
-        <td id="ui-main-left">
-        <div class="ui-mian-left-panel">
+<table id="qw-main-table" border="0" cellpadding="0" cellspacing="0">
+    <tr id="qw-main-content">
+        <td id="qw-main-left">
+        <div class="qw-mian-left-panel">
         <?php require $this->getElement('sidebar') ?>
         </div>
         </td>
-        <td id="ui-main-middle" class="ui-state-default">
-            <div class="ui-main-middle-panel"></div>
+        <td id="qw-main-middle" class="ui-state-default">
+            <div class="qw-main-middle-panel"></div>
         </td>
-        <td id="ui-main-right" colspan="2">
+        <td id="qw-main-right" colspan="2">
         <?php require $this->getElement('content') ?>
         </td>
     </tr>
 </table>
 </div>
-<div id="ui-floating-footer" class="ui-state-default">
-    <div id="ui-footer-arrow" class="ui-icon ui-icon-arrowthickstop-1-n"></div>
-    <div class="ui-footer-time"></div>
-    <div class="ui-copyright ui-widget">Executed in <?php echo $widget->call('app')->getEndTime() ?>(s). <?php echo qw_t('LBL_FOOTER_COPYRIGHT') ?></div>
+<div id="qw-floating-footer" class="ui-state-default">
+    <div id="qw-footer-arrow" class="ui-icon ui-icon-arrowthickstop-1-n"></div>
+    <div class="qw-footer-time"></div>
+    <div class="qw-copyright ui-widget">Executed in <?php echo $widget->call('app')->getEndTime() ?>(s). <?php echo qw_t('LBL_FOOTER_COPYRIGHT') ?></div>
 </div>
 </body>
 </html>

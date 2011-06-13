@@ -99,10 +99,10 @@ div.qw-header-logo {
 #qw-header-right{
     vertical-align: top;
 }
-#ui-main-content {
+#qw-main-content {
     vertical-align: top;
 }
-#ui-main .ui-navbar2 {
+#qw-main .ui-navbar2 {
     height: 26px;
     border-left: 0;
     border-right: 0;
@@ -150,32 +150,32 @@ div.qw-header-logo {
 
 /* Main
 ----------------------------------*/
-.ui-main{
+.qw-main{
     margin: 0 auto;
     border: none;
 }
-#ui-main-table{
+#qw-main-table{
     width: 100%;
 }
-#ui-main-left{
+#qw-main-left{
     width: 198px;
     vertical-align: top;
 }
-.ui-mian-left-panel {
+.qw-mian-left-panel {
     width: 198px;
     overflow: hidden;
 }
-#ui-main-middle {
+#qw-main-middle {
     width: 4px;
     border-top: none;
     vertical-align: top;
 /*    cursor: pointer;*/
 }
-.ui-main-middle-panel {
+.qw-main-middle-panel {
     width: 4px;
     height: 100%;
 }
-#ui-main-right{
+#qw-main-right{
     width: auto;
     vertical-align: top;
     padding-bottom: 20px;
@@ -183,7 +183,7 @@ div.qw-header-logo {
 
 /* Footer
 ----------------------------------*/
-#ui-floating-footer{
+#qw-floating-footer{
     position: fixed;
     bottom: 0;
     right: 0;
@@ -196,16 +196,16 @@ div.qw-header-logo {
     border-right: 0;
     font-weight: normal;
 }
-#ui-footer-arrow{
+#qw-footer-arrow{
     float: right;
     width: 20px;
     margin: 2px 0 0 2px;
     cursor: pointer;
 }
-.ui-footer-time{
+.qw-footer-time{
     float: right;
 }
-.ui-copyright{
+.qw-copyright{
     text-align: center;
 }
 /* Box
