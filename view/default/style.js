@@ -22,6 +22,8 @@
  * @since       2010-01-20 03:20:19
  */
 
+jQuery.noConflict();
+
 var qwin = {
     App: {},
     lang: {}
@@ -82,8 +84,8 @@ function qw_f(name)
 }
 jQuery(function($){
     function getWidgetObject() {
-        $('body').append('<div id="ui-temp-widget-tcontent" class="ui-widget-content ui-helper-hidden"></div>');
-        return $('#ui-temp-widget-tcontent');
+        $('body').append('<div id="qw-temp-widget-tcontent" class="ui-widget-content ui-helper-hidden"></div>');
+        return $('#qw-temp-widget-tcontent');
     }
 
     $widget = getWidgetObject();
@@ -98,15 +100,15 @@ jQuery(function($){
 
     // 为按钮增加样式
     $('button:not(.ui-button-none), input:submit, input:reset, input:button, a.ui-anchor').button();
-    $('td.ui-field-radio, td.ui-field-checkbox').buttonset();
+    $('td.qw-field-radio, td.qw-field-checkbox').buttonset();
 
     //$('#ui-main-left ul li').qui();
-    $('#ui-header-shortcut a').qui({
+    $('#qw-header-shortcut a').qui({
         click: true,
         focus: true
     });
-    $('#ui-header-shortcut a:first').addClass('ui-corner-bl');
-    $('#ui-header-shortcut a:last').addClass('ui-header-shortcut-last-anchor');
+    $('#qw-header-shortcut a:first').addClass('ui-corner-bl');
+    $('#qw-header-shortcut a:last').addClass('ui-header-shortcut-last-anchor');
 
     //$('div.ui-message-operation a, div.ui-operation-field a, div.ui-operation-field button').qui();
     $('button.ui-button, a.ui-button').qui({
@@ -118,7 +120,7 @@ jQuery(function($){
     $('a.ui-action-controller').button({icons: {primary: 'ui-icon-triangle-1-e'},text: false});
 
     // 点击右下按钮,回到顶部
-    $('#ui-footer-arrow').click(function(){
+    $('#qw-footer-arrow').click(function(){
         $('html').animate({scrollTop:0}, 700);
         return false;
     })
@@ -156,11 +158,11 @@ jQuery(function($){
         fixMainTableHeight();
     });
     function fixMainTableHeight() {
-        if (!document.getElementById('ui-main-table')) {
+        if (!document.getElementById('qw-main-table')) {
            return false;
         }
-        var height = $(window).height() - $('#ui-main-table').offset().top - $('#ui-floating-footer').height();
-        $('#ui-main-table').css('height', height);
+        var height = $(window).height() - $('#qw-main-table').offset().top - $('#qw-floating-footer').height();
+        $('#qw-main-table').css('height', height);
         return true;
     }
     
