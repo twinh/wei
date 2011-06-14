@@ -342,7 +342,7 @@ class Qwin
      * @param string $name 钩子名称
      * @param array $param 钩子参数
      */
-    public static function hook($name, $options = null)
+    public static function hook($name, array $options = array())
     {
         return self::call('-hook')->call($name, $options);
     }

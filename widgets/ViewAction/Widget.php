@@ -100,6 +100,10 @@ class ViewAction_Widget extends Qwin_Widget_Abstract
         if ($options['sanitise']) {
             $data = $form->sanitise($data, $options['sanitise']);
         }
+        Qwin::call('-hook')->call('ViewRecord', array(
+            'meta' => $meta,
+            'record' => $dbData,
+        ));
         
         // 返回结果
         if (!$options['display']) {

@@ -25,7 +25,9 @@
 ?>
 <div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
     <div class="ui-box-header">
-        <?php Qwin::hook('ViewContentHeader', $this) ?>
+        <?php Qwin::call('-hook')->call('ViewContentHeader', array(
+            'view' => $this,
+        )) ?>
     </div>
     <div class="ui-form-content ui-box-content ui-widget-content">
         <div class="qw-operation-field">

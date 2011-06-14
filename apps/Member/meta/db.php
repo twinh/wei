@@ -105,7 +105,5 @@ return array(
     ),
     'id' => 'id',
     'table' => 'member',
-    'nameField' => array(
-        'username',
-    ),
+    'mainField' => 'username'
 );

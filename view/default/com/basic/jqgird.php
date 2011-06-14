@@ -24,7 +24,7 @@
  */
 ?>
 <div class="ui-jqgrid-top">
-    <?php Qwin::hook('ViewListTop', $this) ?>
+    <?php Qwin::hook('ViewListTop', array('view' => $this)) ?>
 </div>
 <div class="qw-c"></div>
 <?php $jqGridWidget->render($jqGridOptions) ?>

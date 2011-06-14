@@ -122,11 +122,9 @@ jQuery(function($){
         });
     });
     
-    // 为按钮增加样式
+    // 为按钮增加样式和鼠标操作效果
     $('button:not(.ui-button-none), input:submit, input:reset, input:button, a.ui-anchor').button();
     $('td.qw-field-radio, td.qw-field-checkbox').buttonset();
-
-    //$('div.ui-message-operation a, div.ui-operation-field a, div.ui-operation-field button').qui();
     $('button.ui-button, a.ui-button').qui({
         click: true,
         focus: true
@@ -164,12 +162,6 @@ jQuery(function($){
     $('table.ui-table tr').not('.ui-table-header').qui();
     $('table.ui-table td.ui-state-default').qui();
     $('table.ui-table td a.ui-jqgrid-icon').qui();
-
-    
-    
-//    $('#ui-main-middle').qui().click(function(){
-//        $("#ui-main-left").animate({width: 'toggle'}, 500);
-//    });
 
     //
     /*if ($.browser.mozilla) {
