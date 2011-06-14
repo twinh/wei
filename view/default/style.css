@@ -283,58 +283,6 @@ div.ui-box-tab .ui-tabs-panel{
     padding: .2em;
 }
 
-
-/* Message
-----------------------------------*/
-.ui-message{
-    padding: 2em;
-}
-.ui-message p {
-    padding: 2px 0;
-}
-.ui-message p span{
-    float: left;
-}
-.ui-message-icon {
-    width: 92px;
-    height: 92px;
-    float: left;
-}
-.ui-message-icon span.ui-iconx {
-    display: block;
-    width: 64px;
-    height: 64px;
-    margin: 0 auto;
-    margin-top: 8px;
-}
-.ui-message-box {
-    padding: 10px;
-    min-height: 80px;
-}
-.ui-message-box h4 {
-    padding: 5px 2px;
-    font-size: 16px;
-}
-.ui-message-box h4 span.ui-icon {
-    float: left;
-    margin-right: 3px;
-}
-.ui-message-box ol li {
-    list-style-type: disc;
-    margin-left: 22px;
-    padding: 2px 0;
-}
-.ui-message-box a.ui-message-link {
-    text-decoration: underline;
-}
-.ui-message-operation{
-    padding: 1em;
-    text-align: right;
-}
-.ui-message-content {
-    margin-left:  110px;
-}
-
 /* Theme Switch Page
 ----------------------------------*/
 .ui-image-list{

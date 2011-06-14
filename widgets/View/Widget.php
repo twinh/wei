@@ -104,7 +104,7 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
     {
         parent::__construct(array(), ArrayObject::ARRAY_AS_PROPS);
         $this->_options = $options + $this->_defaults;
-        
+
         // todo 是否会造成重复
         // 打开缓冲区
         ob_start();
@@ -277,7 +277,7 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
     {
         $options = $options + $this->_infoOptions;
         $this->setElement('layout', '<root>layout<suffix>');
-        $this->setElement('content', '<root>com/basic/info<suffix>');
+        $this->setElement('content', Qwin::call('-widget')->getPath() . 'View/view/info.php');
 
         $title = $options['title'];
         $url = $options['url'];
@@ -484,7 +484,7 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
     public function getElement($name)
     {
         if (!isset($this->_element[$name])) {
-            throw new Qwin_Application_View_Exception('Undefined view element name: ' . $name);
+            throw new Qwin_Widget_Exception('Undefined view element name: ' . $name);
         }
         $pathCahce = array();
         foreach ($this->_element[$name] as $path) {
@@ -494,7 +494,7 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
             }
             $pathCahce[] = $path;
         }
-        throw new Qwin_Application_View_Exception('All view files not found: "' . implode(';', $pathCahce) . '".');
+        throw new Qwin_Widget_Exception('All view files not found: "' . implode(';', $pathCahce) . '".');
     }
 
     /**
