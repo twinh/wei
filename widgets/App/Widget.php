@@ -64,7 +64,6 @@ class App_Widget extends Qwin_Widget_Abstract
         if (null == $this->_options['path']) {
             $this->_options['path'] = dirname($this->_widget->getPath()) . '/apps/';
         }
-        
     }
 
     /**

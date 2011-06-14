@@ -106,10 +106,15 @@ jQuery(function($){
     $(window).resize(function(){
         setJqGridWidth();
     });
+    qwin.layout.splitter.bind('toggle', function(){
+        setJqGridWidth();
+    });
+    /*$(qwin.layout.splitter).click(function(){
+        setJqGridWidth();
+    });*/
     function setJqGridWidth() {
-        var fullWidth = $('#ui-header-middle').width();
-        jqGridObj.jqGrid('setGridWidth', fullWidth - 20);
-        $('#ui-form').width(fullWidth);
+        jqGridObj.jqGrid('setGridWidth', $('#qw-middle').width() - 20);
+        //$('#ui-form').width(fullWidth);
     }
 });
 </script>
