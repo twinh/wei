@@ -44,7 +44,7 @@ else :
     	<?php Qwin::hook('ViewContentHeader', $this) ?>
     </div>
     <div class="ui-form-content ui-box-content ui-widget-content">
-        <div class="ui-operation-field">
+        <div class="qw-operation-field">
         <?php require $this->decodePath('<root>com/basic/jqgird<suffix>') ?>
         </div>
     </div>

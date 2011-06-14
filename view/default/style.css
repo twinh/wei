@@ -33,7 +33,6 @@ img {
 a {
     text-decoration: none;
 }
-
 /* 保持大小一致 */
 .ui-widget, .ui-widget-content {
     font-size: 12px;
@@ -51,12 +50,23 @@ a {
     clear: both;
 }
 
-/* Header
+/* 整体布局
 ----------------------------------*/
-.qw-header{
-    clear: both;
+#qw-main {
+    margin: 0 auto;
+    border: none;
 }
-div.qw-header-logo {
+/* 页眉 */
+#qw-header {
+    clear: both;
+    height: 60px;
+    width: 100%;
+}
+#qw-header-left {
+    width: 204px;
+    vertical-align: top;
+}
+#qw-logo {
     width: 200px;
     font-weight: bold;
     font-size: 32px;
@@ -65,16 +75,19 @@ div.qw-header-logo {
     float: left;
     overflow: hidden;
 }
-.qw-header-logo a img {
+#qw-logo a img {
     vertical-align: middle;
     margin: 12px 0 0 12px;
     height: 40px;
 }
-.qw-header-shortcut {
+#qw-header-right {
+    vertical-align: top;
+}
+#qw-header-shortcut {
     float: right;
     margin: 0 0 0 6px;
 }
-.qw-header .qw-header-shortcut a{
+#qw-header-shortcut a {
     padding: 6px 12px;
     display: block;
     float: left;
@@ -84,31 +97,69 @@ div.qw-header-logo {
     height: 14px;
     border-top: none;
 }
-.qw-header-shortcut a.qw-header-shortcut-last-anchor{
+#qw-header-shortcut a.qw-last-link{
     border-right: none;
 }
-
-#qw-header{
-    height: 60px;
-    width: 100%;
-}
-#qw-header-left{
-    width: 204px;
-    vertical-align: top;
-}
-#qw-header-middle{
-    vertical-align: top;
-}
-#qw-header-right{
-    vertical-align: top;
-}
-#qw-main-content {
-    vertical-align: top;
-}
-#qw-main #qw-navbar2 {
+#qw-header2 {
     height: 26px;
     border-left: 0;
     border-right: 0;
+}
+/* 中间内容 */
+#qw-content-table {
+    width: 100%;
+}
+#qw-content {
+    vertical-align: top;
+}
+#qw-left{
+    width: 198px;
+    vertical-align: top;
+}
+#qw-left-content {
+    width: 198px;
+    overflow: hidden;
+}
+#qw-middle {
+    width: auto;
+    vertical-align: top;
+    padding-bottom: 20px;
+}
+#qw-content .qw-splitter {
+    width: 4px;
+    border-top: none;
+    vertical-align: top;
+    cursor: pointer;
+}
+.qw-splitter-content {
+    width: 4px;
+    height: 100%;
+}
+/* 页脚 */
+#qw-footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 999;
+    width: 100%;
+    height: 20px;
+    text-align: right;
+    line-height: 20px;
+    border-left: 0;
+    border-right: 0;
+    font-weight: normal;
+}
+#qw-footer-arrow {
+    float: right;
+    width: 20px;
+    margin: 2px 0 0 2px;
+    cursor: pointer;
+}
+#qw-footer-time {
+    float: right;
+}
+#qw-copyright {
+    text-align: center;
 }
 
 /* Sidebar
@@ -149,67 +200,6 @@ div.qw-header-logo {
 }
 .ui-sidebar-content ul li a:hover{
     border: 0;
-}
-
-/* Main
-----------------------------------*/
-.qw-main{
-    margin: 0 auto;
-    border: none;
-}
-#qw-main-table{
-    width: 100%;
-}
-#qw-main-left{
-    width: 198px;
-    vertical-align: top;
-}
-.qw-mian-left-panel {
-    width: 198px;
-    overflow: hidden;
-}
-#qw-main-middle {
-    width: 4px;
-    border-top: none;
-    vertical-align: top;
-    /*    cursor: pointer;*/
-}
-.qw-main-middle-panel {
-    width: 4px;
-    height: 100%;
-}
-#qw-main-right{
-    width: auto;
-    vertical-align: top;
-    padding-bottom: 20px;
-}
-
-/* Footer
-----------------------------------*/
-#qw-floating-footer{
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    z-index: 999;
-    width: 100%;
-    height: 20px;
-    text-align: right;
-    line-height: 20px;
-    border-left: 0;
-    border-right: 0;
-    font-weight: normal;
-}
-#qw-footer-arrow{
-    float: right;
-    width: 20px;
-    margin: 2px 0 0 2px;
-    cursor: pointer;
-}
-.qw-footer-time{
-    float: right;
-}
-.qw-copyright{
-    text-align: center;
 }
 /* Box
 ----------------------------------*/
@@ -448,6 +438,13 @@ div.ui-box-tab .ui-tabs-panel{
 
 .ui-jqgrid-top {
     margin-left: 30px;
+}
+
+.qw-operation-field{
+    padding: 5px;
+}
+.qw-operation-content{
+    margin: 20px 5px;
 }
 
 /* 修复ie下按钮对应不整齐的问题 */

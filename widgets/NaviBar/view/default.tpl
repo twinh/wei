@@ -21,9 +21,9 @@
  * @version     $Id$
  * @since       2011-01-03 01:17:46
  *}
+{strip}
 <div class="qw-nav-bar">
     <ul class="ui-widget-content qw-navbar-parent">
-    {strip}
         <li class="ui-widget ui-state-active ui-corner-top"> <a href="{$menus.qwin.url}">{$menus.qwin.title}</a>
         </li>
         {foreach from=$menus[0] item=menu}
@@ -40,3 +40,4 @@
     {/strip}
     </ul>
 </div>
+{strip}

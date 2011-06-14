@@ -25,8 +25,10 @@
 jQuery.noConflict();
 
 var qwin = {
-    App: {},
-    lang: {}
+    get: {},
+    app: {},
+    lang: {},
+    layout: {}
 };
 
 qwin.urlSeparator = {
@@ -83,32 +85,40 @@ function qw_f(name)
     return qw_l('FLD_' + name.toUpperCase());
 }
 jQuery(function($){
-    function getWidgetObject() {
-        $('body').append('<div id="qw-temp-widget-tcontent" class="ui-widget-content ui-helper-hidden"></div>');
-        return $('#qw-temp-widget-tcontent');
-    }
-
-    $widget = getWidgetObject();
-    /**
-     * 设置背景颜色,让背景看起来更协调
-     * @todo 允许自定义背景
-     */
-    if('transparent' == $('body').css('background-color'))
-    {
-        $('body').css('background-color', $widget.css('background-color'));
-    }
-
-    // 为按钮增加样式
-    $('button:not(.ui-button-none), input:submit, input:reset, input:button, a.ui-anchor').button();
-    $('td.qw-field-radio, td.qw-field-checkbox').buttonset();
-
-    //$('#ui-main-left ul li').qui();
+    // 为页眉快捷链接增加鼠标操作效果
     $('#qw-header-shortcut a').qui({
         click: true,
         focus: true
     });
-    $('#qw-header-shortcut a:first').addClass('ui-corner-bl');
-    $('#qw-header-shortcut a:last').addClass('ui-header-shortcut-last-anchor');
+    
+    // 调整中间栏到最大高度
+    // 修复360极速浏览器(6.0Chrome内核)高度不正确的问题
+    $(window).load(function() {
+        fixMainTableHeight();
+    }).resize(function(){
+        fixMainTableHeight();
+    });
+    function fixMainTableHeight() {
+        if (!document.getElementById('qw-content-table')) {
+           return false;
+        }
+        var height = $(window).height() - $('#qw-content-table').offset().top - $('#qw-footer').height();
+        $('#qw-content-table').css('height', height);
+        return true;
+    }
+
+    // 点击分割栏缩进
+    qwin.layout.splitter = $('#qw-content > td.qw-splitter').qui().click(function(){
+        $('#qw-left').animate({
+            width: 'toggle'
+        }, 300, function(){
+            qwin.layout.splitter.trigger('toggle');
+        });
+    });
+    
+    // 为按钮增加样式
+    $('button:not(.ui-button-none), input:submit, input:reset, input:button, a.ui-anchor').button();
+    $('td.qw-field-radio, td.qw-field-checkbox').buttonset();
 
     //$('div.ui-message-operation a, div.ui-operation-field a, div.ui-operation-field button').qui();
     $('button.ui-button, a.ui-button').qui({
@@ -123,7 +133,7 @@ jQuery(function($){
     $('#qw-footer-arrow').click(function(){
         $('html').animate({scrollTop:0}, 700);
         return false;
-    })
+    });
 
     // 点击盒子右上角,显示或隐藏盒子内容
     $('a.ui-box-title-icon')
@@ -149,22 +159,7 @@ jQuery(function($){
     $('table.ui-table td.ui-state-default').qui();
     $('table.ui-table td a.ui-jqgrid-icon').qui();
 
-    // 修复中间栏不能达到最大高度的问题
-    // 修复360极速浏览器(6.0Chrome内核)高度不正确的问题
-    $(window).load(function() {
-        fixMainTableHeight();
-    });
-    $(window).resize(function(){
-        fixMainTableHeight();
-    });
-    function fixMainTableHeight() {
-        if (!document.getElementById('qw-main-table')) {
-           return false;
-        }
-        var height = $(window).height() - $('#qw-main-table').offset().top - $('#qw-floating-footer').height();
-        $('#qw-main-table').css('height', height);
-        return true;
-    }
+    
     
 //    $('#ui-main-middle').qui().click(function(){
 //        $("#ui-main-left").animate({width: 'toggle'}, 500);
