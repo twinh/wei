@@ -172,29 +172,29 @@ a {
 
 /* Sidebar
 ----------------------------------*/
-.ui-widget-content .ui-sidebar-header{
+.ui-widget-content .qw-sidebar-header{
     height: 30px;
     border: 0;
     line-height: 30px;
     background-image: none;
 }
-.ui-sidebar-header a{
+.qw-sidebar-header a{
     text-indent: 32px;
     display: block;
     background-position: 10px 7px;
 }
-.ui-sidebar-content-2{
+.qw-sidebar-content-2{
     margin-top: 30px;
 }
-.ui-sidebar-content ul li {
+.qw-sidebar-content ul li {
     margin:3px 3px 3px 6px;
     font-weight:normal;
     border: 0;
 }
-.ui-sidebar-content ul li.ui-state-hover{
+.qw-sidebar-content ul li.ui-state-hover{
     border: 0;
 }
-.ui-sidebar-content ul li a{
+.qw-sidebar-content ul li a{
     display: block;
     line-height: 24px;
     height: 24px;
@@ -202,11 +202,11 @@ a {
     padding: 3px 3px 0 3px;
     text-align: left;
 }
-.ui-sidebar-content ul li a.qw-icon{
+.qw-sidebar-content ul li a.qw-icon{
     background-position: 5px 6px;
     text-indent: 24px;
 }
-.ui-sidebar-content ul li a:hover{
+.qw-sidebar-content ul li a:hover{
     border: 0;
 }
 /* Box

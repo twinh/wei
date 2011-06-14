@@ -23,12 +23,12 @@
  * @since       2011-01-03 01:29:49
  */
 ?>
-<div class="ui-sidebar-header ui-state-default">
-	<a class="qw-icon qw-icon-clock-16" href="javascript:;"><?php echo qw_t('LBL_VIEWED_RECORDS') ?></a>
+<div class="qw-sidebar-header ui-state-default">
+    <a class="qw-icon qw-icon-clock-16" href="javascript:;"><?php echo qw_t('LBL_VIEWED_RECORDS') ?></a>
 </div>
-<div class="ui-sidebar-content">
+<div class="qw-sidebar-content">
     <ul>
-	<?php
+    <?php
     if(empty($viewRecords)):
     ?>
         <li><a><?php echo qw_t('MSG_NO_VIEWED_RECORDS') ?></a></li>
