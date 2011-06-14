@@ -1,18 +1,13 @@
 @charset "utf-8";
-/* Basic
+/* 全局配置
 ----------------------------------*/
 body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,fieldset,p,blockquote,input,textarea,p,th,td,hr {
     margin: 0;
     padding: 0;
+    outline: none;
 }
-/* 修复搜狗浏览器(4.0Chrome内核)样式错误,区别? */
-ul {
-    margin: 0;
-    padding: 0;
-}
-*{outline:none}
 /* 让火狐一直显示右边滚动条 */
-html{
+html {
     overflow-y: scroll;
 }
 body{
@@ -20,25 +15,32 @@ body{
     margin: 0 auto;
     min-width: 1000px;
 }
+/* 修复搜狗浏览器(4.0Chrome内核)样式错误,区别? */
+ul {
+    margin: 0;
+    padding: 0;
+}
 ol,ul,li{
     list-style: none;
 }
-/*table {
+table {
     border-spacing: 0;
-}*/
-img{
+
+}
+img {
     border: 0;
 }
-a{
+a {
     text-decoration: none;
+}
+
+/* 保持大小一致 */
+.ui-widget, .ui-widget-content {
+    font-size: 12px;
 }
 
 /* 常用样式
 ----------------------------------*/
-.clear{
-    clear: both;
-}
-
 .qw-fl {
     float: left;
 }
@@ -48,6 +50,7 @@ a{
 .qw-c {
     clear: both;
 }
+
 /* Header
 ----------------------------------*/
 .qw-header{
@@ -102,7 +105,7 @@ div.qw-header-logo {
 #qw-main-content {
     vertical-align: top;
 }
-#qw-main .ui-navbar2 {
+#qw-main #qw-navbar2 {
     height: 26px;
     border-left: 0;
     border-right: 0;
@@ -169,7 +172,7 @@ div.qw-header-logo {
     width: 4px;
     border-top: none;
     vertical-align: top;
-/*    cursor: pointer;*/
+    /*    cursor: pointer;*/
 }
 .qw-main-middle-panel {
     width: 4px;
@@ -242,7 +245,7 @@ div.qw-header-logo {
     overflow: hidden;
 }
 div.ui-box-tab{
-     padding: 5px;
+    padding: 5px;
 }
 div.ui-box-tab .ui-tabs-panel{
     padding: 15px 10px;
@@ -282,14 +285,6 @@ div.ui-box-tab .ui-tabs-panel{
     padding: .2em;
 }
 
-/* Error Box
-----------------------------------*/
-.ui-error-box{
-    width: auto;
-}
-.ui-error-box .ui-error-box-content{
-    padding: 2em;
-}
 
 /* Message
 ----------------------------------*/
@@ -449,11 +444,6 @@ div.ui-box-tab .ui-tabs-panel{
     overflow: hidden;
     float: left;
     margin: 4px;
-}
-
-/* 保持大小一致 */
-.ui-widget, .ui-widget-content {
-    font-size: 12px;
 }
 
 .ui-jqgrid-top {
