@@ -64,7 +64,7 @@ $minify->addArray(array(
         </td>
     </tr>
 </table>
-<div class="ui-navbar2 ui-widget-content ui-state-default"></div>
+<div id="qw-navbar2" class="ui-widget-content ui-state-default"></div>
 <table id="qw-main-table" border="0" cellpadding="0" cellspacing="0">
     <tr id="qw-main-content">
         <td id="qw-main-left">

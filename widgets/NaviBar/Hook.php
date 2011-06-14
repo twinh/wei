@@ -27,6 +27,6 @@ class NaviBar_Hook extends Qwin_Hook_Abstract
 {
     public function hookViewNaviBar()
     {
-        Qwin::call('-widget')->get('NaviBar')->render();
+        return Qwin::call('-widget')->get('NaviBar')->render();
     }
 }
