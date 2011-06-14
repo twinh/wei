@@ -28,8 +28,8 @@
 <?php Qwin::hook('viewSidebar', array(
     'view' => $this
 )); ?>
-<div class="ui-sidebar-content ui-sidebar-content-2">
+<div class="qw-sidebar-content qw-sidebar-content-2">
     <ul>
-        <li><a class="qw-icon qw-icon-trash-16" href="<?php echo qw_url(array('module' => 'com/trash')) ?>"><?php echo qw_t('LBL_MODULE_TRASH') ?></a></li>
+        <li><a class="qw-icon qw-icon-trash-16" href="<?php echo qw_url(array('module' => 'trash')) ?>"><?php echo qw_t('LBL_MODULE_TRASH') ?></a></li>
     </ul>
 </div>
