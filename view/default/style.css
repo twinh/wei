@@ -434,16 +434,6 @@ div.ui-box-tab .ui-tabs-panel{
     font-size: 12px;
     font-weight: normal;
 }
-.qw-icon-plus{
-    background: url(./../../resource/image/plus_16.png) 0 0 no-repeat;
-    width: 16px; height: 16px;
-    display: block;
-    text-indent:-99999px;
-    overflow: hidden;
-    float: left;
-    margin: 4px;
-}
-
 .ui-jqgrid-top {
     margin-left: 30px;
 }

@@ -51,7 +51,7 @@ class Util_Minify_Controller extends Controller_Widget
         if ($config['log']) {
             Minify_Logger::setLogger(FirePHP::getInstance(true));
         }
-
+        
         // 获取文件
         $request = Qwin::call('-request');
         $name = $request->get('g');
@@ -64,5 +64,6 @@ class Util_Minify_Controller extends Controller_Widget
 
         // serve!
         $result = Minify::serve('MinApp', $options);
+        $this->_view->setDisplayed();
     }
 }
