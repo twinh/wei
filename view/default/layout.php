@@ -71,17 +71,17 @@ $minify->addArray(array(
                 <?php require $this->getElement('sidebar') ?>
             </div>
         </td>
-        <td class="qw-splitter ui-state-default">
+        <td id="qw-splitter-left" class="qw-splitter ui-state-default">
             <div class="qw-splitter-content"></div>
         </td>
         <td id="qw-middle">
             <?php require $this->getElement('content') ?>
         </td>
-        <td class="ui-helper-hidden qw-splitter ui-state-default">
+        <td id="qw-splitter-right" class="qw-splitter ui-state-default">
             <div class="qw-splitter-content"></div>
         </td>
         <td id="qw-right" class="ui-helper-hidden">
-            <div id="qw-left-content"></div>
+            <div id="qw-right-content"></div>
         </td>
     </tr>
 </table>

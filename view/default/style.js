@@ -28,7 +28,7 @@ var qwin = {
     get: {},
     app: {},
     lang: {},
-    layout: {}
+    page: {}
 };
 
 qwin.urlSeparator = {
@@ -85,6 +85,21 @@ function qw_f(name)
     return qw_l('FLD_' + name.toUpperCase());
 }
 jQuery(function($){
+    qwin.page = {
+        left: $('#qw-left'),
+        right: $('#qw-right'),
+        content: $('#qw-content'),
+        splitter: $('#qw-content > td.qw-splitter'),
+        fixContentHeight: function(){
+            if (!document.getElementById('qw-content-table')) {
+               return false;
+            }
+            var height = $(window).height() - $('#qw-content-table').offset().top - $('#qw-footer').height();
+            $('#qw-content-table').css('height', height);
+            return true;
+        }
+    };
+    
     // 为页眉快捷链接增加鼠标操作效果
     $('#qw-header-shortcut a').qui({
         click: true,
@@ -94,25 +109,16 @@ jQuery(function($){
     // 调整中间栏到最大高度
     // 修复360极速浏览器(6.0Chrome内核)高度不正确的问题
     $(window).load(function() {
-        fixMainTableHeight();
+        qwin.page.fixContentHeight();
     }).resize(function(){
-        fixMainTableHeight();
+        qwin.page.fixContentHeight();
     });
-    function fixMainTableHeight() {
-        if (!document.getElementById('qw-content-table')) {
-           return false;
-        }
-        var height = $(window).height() - $('#qw-content-table').offset().top - $('#qw-footer').height();
-        $('#qw-content-table').css('height', height);
-        return true;
-    }
 
     // 点击分割栏缩进
-    qwin.layout.splitter = $('#qw-content > td.qw-splitter').qui().click(function(){
-        $('#qw-left').animate({
-            width: 'toggle'
-        }, 300, function(){
-            qwin.layout.splitter.trigger('toggle');
+    qwin.page.splitter.qui().click(function(){
+        var id = $(this).attr('id');
+        $('#qw-' + id.substring(id.lastIndexOf('-') + 1, id.length)).toggle(0, function(){
+            qwin.page.splitter.trigger('toggle');
         });
     });
     

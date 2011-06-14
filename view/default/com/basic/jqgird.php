@@ -102,19 +102,18 @@ jQuery(function($){
     // 修复360极速浏览器(6.0Chrome内核)宽度不正确的问题
     $(window).load(function() {
         setJqGridWidth();
-    });
-    $(window).resize(function(){
+    }).resize(function(){
         setJqGridWidth();
     });
-    qwin.layout.splitter.bind('toggle', function(){
+    qwin.page.splitter.bind('toggle', function(){
         setJqGridWidth();
     });
-    /*$(qwin.layout.splitter).click(function(){
-        setJqGridWidth();
-    });*/
     function setJqGridWidth() {
-        jqGridObj.jqGrid('setGridWidth', $('#qw-middle').width() - 20);
-        //$('#ui-form').width(fullWidth);
+        // 窗口宽度 - 左栏宽度 - 分割栏宽度 - 左栏宽度 - 分割栏宽度
+        var leftWidth = 'none' == qwin.page.left.css('display') ? 0 : qwin.page.left.width();
+        var rightWidth = 'none' == qwin.page.right.css('display') ? 0 : qwin.page.right.width();
+        var width = $(window).width() - leftWidth - rightWidth - (2 * qwin.page.splitter.width()) - 16;
+        jqGridObj.jqGrid('setGridWidth', width);
     }
 });
 </script>
