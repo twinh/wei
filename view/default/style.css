@@ -120,6 +120,10 @@ a {
     width: 198px;
     overflow: hidden;
 }
+.qw-splitter-content {
+    width: 4px;
+    height: 100%;
+}
 #qw-middle {
     width: auto;
     vertical-align: top;
@@ -131,9 +135,13 @@ a {
     vertical-align: top;
     cursor: pointer;
 }
-.qw-splitter-content {
-    width: 4px;
-    height: 100%;
+#qw-right{
+    width: 198px;
+    vertical-align: top;
+}
+#qw-right-content {
+    width: 198px;
+    overflow: hidden;
 }
 /* 页脚 */
 #qw-footer {
