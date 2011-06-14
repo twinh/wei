@@ -226,8 +226,8 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
 
     /**
      * 视图输出后的处理
-     *
-     * @return Com_View 当前对象
+     * 
+     * @return View_Widget 当前对象
      */
     public function afterDisplay()
     {
