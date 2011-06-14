@@ -27,14 +27,16 @@
 ?>
 <div class="ui-box ui-widget ui-widget-content ui-corner-all">
     <div class="ui-box-header">
-        <?php Qwin::hook('ViewContentHeader', $this) ?>
+        <?php Qwin::hook('ViewContentHeader', array(
+            'view' => $this
+        )) ?>
     </div>
-    <div class="ui-message ui-box-content ui-widget-content">
-        <div class="ui-message-box ui-state-highlight ui-corner-all">
-            <div class="ui-message-icon">
-                <span class="ui-iconx ui-iconx-<?php echo $icon ?>-64"></span>
+    <div class="qw-message ui-box-content ui-widget-content">
+        <div class="qw-message-box ui-state-highlight ui-corner-all">
+            <div class="qw-message-icon">
+                <span class="qw-icon qw-icon-<?php echo $icon ?>-64"></span>
             </div>
-            <div class="ui-message-content">
+            <div class="qw-message-content">
                 <h4><?php echo $title ?></h4>
                 <?php
                     if (is_array($content)) :
@@ -67,10 +69,10 @@
                     endif;
                 ?>
                 <p>&nbsp;</p>
-                <p><a class="ui-message-link" href="<?php echo $url ?>"><?php echo qw_t('MSG_CLICK_TO_REDIRECT') ?></a></p>
+                <p><a class="qw-message-link" href="<?php echo $url ?>"><?php echo qw_t('MSG_CLICK_TO_REDIRECT') ?></a></p>
             </div>
         </div>
-        <div class="ui-message-operation">
+        <div class="qw-message-operation">
         <?php
             echo Qwin_Util_JQuery::link('javascript:history.go(-1);', qw_t('ACT_RETURN'), 'ui-icon-arrowthickstop-1-w')
          ?>

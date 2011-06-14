@@ -28,8 +28,8 @@ class Error_Widget extends Qwin_Widget_Abstract
     public function render($options = null)
     {
         // 自定义错误和异常处理
-        //set_exception_handler(array($this, 'renderException'));
-        //set_error_handler(array($this, 'renderError'));
+        set_exception_handler(array($this, 'renderException'));
+        set_error_handler(array($this, 'renderError'));
     }
 
     /**
@@ -45,10 +45,9 @@ class Error_Widget extends Qwin_Widget_Abstract
         restore_exception_handler();
         
         // 清空之前输出的内容,再重新启动
-        ob_end_clean();
+        $output = ob_get_contents();
+        '' != $output && ob_end_clean();
         ob_start();
-
-        $view = $this->_View;
 
         $content = null;
         $file = $e->getFile();
@@ -58,7 +57,8 @@ class Error_Widget extends Qwin_Widget_Abstract
                 . '<pre>' . $e->getTraceAsString() . '</pre>'
                 . '<pre>' . $this->_getFileCode($file, $line) . '<pre>';
         }
-        $view->error($e->getMessage(), null, $content);
+        $this->_minify->add($this->_path . 'view/style.css');
+        $this->_view->error($e->getMessage(), null, $content);
     }
 
     /**
