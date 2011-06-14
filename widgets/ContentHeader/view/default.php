@@ -28,7 +28,7 @@
 <?php
 if($icon):
 ?>
-<img class="ui-box-header-icon" src="<?php echo $icon ?>" alt="<?php echo $view['meta']['page']['icon'] ?>" />&nbsp;
+<img class="ui-box-header-icon" src="<?php echo $icon ?>" alt="<?php echo $options['view']['meta']['page']['icon'] ?>" />&nbsp;
 <?php
 endif;
 echo $header;

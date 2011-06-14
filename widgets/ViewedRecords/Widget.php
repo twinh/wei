@@ -38,6 +38,6 @@ class ViewedRecords_Widget extends Qwin_Widget_Abstract
         $this->_Lang->appendByWidget($this);
         $viewRecords = Qwin::call('-session')->get('viewedRecords');
 
-        require 'view/default.php';
+        require $this->_path . 'view/default.php';
     }
 }

@@ -25,26 +25,26 @@
 
 class ContentHeader_Widget extends Qwin_Widget_Abstract
 {
-    public function render($view = null)
+    public function render($options = null)
     {
         // 构建页眉导航
-        $module = $view['module'];
+        $module = $options['view']['module'];
         $action = Qwin::config('action');
         $url = Qwin::call('-url');
         $lang = $this->_Lang;
 
         // 可能没有元数据
-        if (!isset($view['meta'])) {
+        if (!isset($options['view']['meta'])) {
             return false;
         }
 
         // 图标 > 模块 > 控制器 > 行为
         $header = '';
 
-        $icon = Qwin::config('resource') . 'view/default/icons/' . $view['meta']['page']['icon'] . '_32.png';
+        $icon = Qwin::config('resource') . 'view/default/icons/' . $options['view']['meta']['page']['icon'] . '_32.png';
         !is_file($icon) && $icon = null;
 
-        $header .= '<a href="' . $url->url($module->getUrl(), 'index') . '">' . $lang->t($view['meta']['page']['title']) . '</a>';
+        $header .= '<a href="' . $url->url($module->getUrl(), 'index') . '">' . $lang->t($options['view']['meta']['page']['title']) . '</a>';
       
         $actionLabel = 'ACT_' . $module->getLang() . '_' . strtoupper($action);
         if (!isset($lang[$actionLabel])) {

@@ -40,7 +40,7 @@ class Filter_Widget extends Qwin_Widget_Abstract
 
     public function render($options = null)
     {
-        if ('index' != $options['action']) {
+        if ('index' != $options['view']['action']) {
             return false;
         }
 

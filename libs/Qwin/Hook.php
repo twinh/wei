@@ -186,17 +186,16 @@ class Qwin_Hook
      * @param mixed $param 参数
      * @return Qwin_Hook|string 当前对象|字符串
      */
-    public function call($name, $param = null)
+    public function call($name, array $param = array())
     {
         $return = '';
         $name = strtolower($name);
-        !is_array($param) && $param = array($param);
         if (isset($this->_data[$name])) {
             foreach ($this->_data[$name] as $callback) {
                 // 默认文件形式
                 if (isset($callback['file'])) {
                     require_once $callback['file'];
-                    $result = call_user_func_array(
+                    $result = call_user_func(
                         array(Qwin::call($callback['class']), 'hook' . $name),
                         $param
                     );

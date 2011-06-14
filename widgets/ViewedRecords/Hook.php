@@ -48,8 +48,8 @@ class ViewedRecords_Hook extends Qwin_Hook_Abstract
         $meta = $options['meta'];
         $record = $options['record'];
 
-        if (!empty($meta['page']['mainField'])) {
-            $title = $record[$meta['page']['mainField']];
+        if (!empty($meta['db']['mainField'])) {
+            $title = $record[$meta['db']['mainField']];
         } elseif (method_exists($meta, 'getMainFieldValue')) {
             $title = $meta->getMainFieldValue($record);
         } else {
@@ -57,10 +57,10 @@ class ViewedRecords_Hook extends Qwin_Hook_Abstract
         }
 
         $session = Qwin::call('-session');
-        $lang = Qwin::call('-lang');
+        $lang = Qwin::call('-widget')->get('lang');
 
         $viewRecords = (array)$session['viewedRecords'];
-        $key = get_class($meta) . $record[$meta['db']['primaryKey']];
+        $key = get_class($meta) . $record[$meta['db']['id']];
 
         if ($this->_options['maxNum'] <= count($viewRecords)) {
             array_pop($viewRecords);

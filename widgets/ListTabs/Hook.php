@@ -25,17 +25,17 @@
 
 class ListTabs_Hook extends Qwin_Hook_Abstract
 {
-    public function hookViewListTop($view)
+    public function hookViewListTop($options)
     {
-        $module = $view['module'];
+        $module = $options['view']['module'];
         $widget = Qwin::call('-widget');
 
         // 如果当前行为存在选项卡视图,加载该视图,否则直接输出默认选项卡内容
         $class = $module->getClass() . '_Widget_ListTabs';
         if(class_exists($class)) {
-            return $widget->getByClass($class)->render($view);
+            return $widget->getByClass($class)->render($options['view']);
         } else {
-            return $widget->get('ListTabs')->render($view);
+            return $widget->get('ListTabs')->render($options['view']);
         }
     }
 }
