@@ -21,29 +21,17 @@
  * @version     $Id$
  * @since       2011-6-11, 20:21:51
  */
- 
- 
-/* Form
-----------------------------------*/
-.qw-form-error-message{
-    padding: 4px 4px 4.8px 4px;
-    vertical-align: text-bottom
-}
-
-.qw-form{
+.qw-form {
     width: auto;
     overflow: hidden;
     min-width: 800px;
 }
-.qw-form .qw-form-content{
-    padding: 0 5px;
-}
-.qw-form .qw-form-content fieldset {
+.qw-form fieldset {
     margin: 5px;
     padding-left: 5px;
     background: none;
 }
-.qw-form .qw-form-content legend {
+.qw-form legend {
     font-size: 14px;
     font-weight: bold;
     line-height: 120%;
@@ -52,15 +40,10 @@
     background: none;
     border: 0;
 }
-
-
 /* 防止ck编辑器下部变形 */
 .cke_editor .cke_contents fieldset {
     margin: 0;
 }
-
-/* Tables in the Form
-----------------------------------*/
 .qw-form-table{
     border-collapse: collapse;
     border-spacing: 0;

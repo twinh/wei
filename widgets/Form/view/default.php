@@ -38,9 +38,9 @@ validateCode['<?php echo $options['id'] ?>'] = <?php echo $validateCode ?>;
 <?php
 endif;
 ?>
-<form id="<?php echo $options['id'] ?>" name="form" method="post" action="<?php echo qw_url()?>">
+<form id="<?php echo $options['id'] ?>" class="qw-form" name="form" method="post" action="<?php echo qw_url()?>">
 <?php if ($form['topButtons']) : ?>
-<div class="qw-operation-field">
+<div class="qw-p5">
     <?php echo Qwin_Util_JQuery::button('submit', qw_t('ACT_SUBMIT'), 'ui-icon-check') ?>
     <?php echo Qwin_Util_JQuery::button('reset', qw_t('ACT_RESET'), 'ui-icon-arrowreturnthick-1-w') ?>
 </div>
@@ -113,7 +113,7 @@ endif;
     </fieldset>
 <?php endif; ?>
 <?php endforeach; ?>
-<div class="qw-operation-field">
+<div class="qw-p5">
     <input type="hidden" name="_page" value="<?php echo $refererPage ?>" />
     <?php echo Qwin_Util_JQuery::button('submit', $lang['ACT_SUBMIT'], 'ui-icon-check') ?>
     <?php echo Qwin_Util_JQuery::button('reset', $lang['ACT_RESET'], 'ui-icon-arrowreturnthick-1-w') ?>

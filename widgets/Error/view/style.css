@@ -1,0 +1,72 @@
+/**
+ * iconx
+ *
+ * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @version     $Id$
+ * @since       2011-06-15 02:43:02
+ */
+ 
+.qw-message{
+    padding: 2em;
+}
+.qw-message p {
+    padding: 2px 0;
+}
+.qw-message p span{
+    float: left;
+}
+.qw-message-icon {
+    width: 92px;
+    height: 92px;
+    float: left;
+}
+.qw-message-icon span.qw-icon {
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto;
+    margin-top: 8px;
+}
+.qw-message-box {
+    padding: 10px;
+    min-height: 80px;
+}
+.qw-message-box h4 {
+    padding: 5px 2px;
+    font-size: 16px;
+}
+.qw-message-box h4 span.ui-icon {
+    float: left;
+    margin-right: 3px;
+}
+.qw-message-box ol li {
+    list-style-type: disc;
+    margin-left: 22px;
+    padding: 2px 0;
+}
+.qw-message-box a.qw-message-link {
+    text-decoration: underline;
+}
+.qw-message-operation{
+    padding: 1em;
+    text-align: right;
+}
+.qw-message-content {
+    margin-left:  110px;
+}
