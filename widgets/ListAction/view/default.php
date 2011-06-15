@@ -25,30 +25,14 @@
  * @since       2009-11-24 18:47:32
  */
 echo $this->getPackerSign();
-if ($request->isAjax()) :
 ?>
-<style type="text/css">
-#t_ui-jqgrid-table{
-    display : none;
-}
-.ui-jqgrid{
-    padding: 0;
-}
-</style>
-<?php require $this->decodePath('<root>com/basic/jqgird<suffix>') ?>
-<?php
-else :
-?>
-<div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
-	<div class="ui-box-header">
+<div class="qw-middle ui-widget-content">
+    <div class="qw-middle-header">
     	<?php Qwin::hook('ViewContentHeader', array('view' => $this)) ?>
     </div>
-    <div class="ui-form-content ui-box-content ui-widget-content">
-        <div class="qw-operation-field">
+    <div class="qw-middle-content">
+        <div class="qw-p5">
         <?php require $this->decodePath('<root>com/basic/jqgird<suffix>') ?>
         </div>
     </div>
 </div>
-<?php
-endif;
-?>

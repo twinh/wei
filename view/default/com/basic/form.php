@@ -24,20 +24,17 @@
  * @version     $Id$
  * @since       2009-11-24 18:47:32
  */
-// 防止直接访问导致错误
 ?>
-<div class="qw-form ui-box ui-widget ui-widget-content ui-corner-all" id="qw-form">
-<div class="ui-box-header">
-    <?php Qwin::hook('ViewContentHeader', array(
-        'view' => $this
-    )) ?>
-</div>
-<div class="qw-form-content ui-box-content ui-widget-content">
-    <div class="qw-operation-field">
+<div class="qw-middle ui-widget-content">
+    <div class="qw-middle-header">
+    	<?php Qwin::hook('ViewContentHeader', array('view' => $this)) ?>
+    </div>
+    <div class="qw-middle-content">
+    <div class="qw-p5">
         <?php echo $operLinks ?>
         </div>
     <?php $formWidget->render($formOptions) ?>
-    <div class="qw-operation-field">
+    <div class="qw-p5">
         <?php echo $operLinks ?>
     </div>
 </div>
