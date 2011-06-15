@@ -122,7 +122,7 @@ jQuery(function($){
         });
     });
     
-    // 为按钮增加样式和鼠标操作效果
+    // 为表单增加样式和鼠标操作效果
     $('button:not(.ui-button-none), input:submit, input:reset, input:button, a.ui-anchor').button();
     $('td.qw-field-radio, td.qw-field-checkbox').buttonset();
     $('button.ui-button, a.ui-button').qui({
@@ -131,34 +131,12 @@ jQuery(function($){
     });
     $('table.qw-form-table input:text, table.qw-form-table textarea').qui();
 
-    $('a.ui-action-controller').button({icons: {primary: 'ui-icon-triangle-1-e'},text: false});
-
     // 点击右下按钮,回到顶部
     $('#qw-footer-arrow').click(function(){
         $('html').animate({scrollTop:0}, 700);
         return false;
     });
-
-    // 点击盒子右上角,显示或隐藏盒子内容
-    $('a.ui-box-title-icon')
-        .qui()
-        .click(function(){
-            // 切换按钮
-            var icon_obj = $(this).find('span');
-            if(icon_obj.hasClass('ui-icon-circle-triangle-n'))
-            {
-                icon_obj.removeClass("ui-icon-circle-triangle-n").addClass("ui-icon-circle-triangle-s");
-            } else {
-                icon_obj.removeClass("ui-icon-circle-triangle-s").addClass("ui-icon-circle-triangle-n");
-            }
-            // 显示/隐藏指定内容
-            var name = $(this).attr('name');
-            if('' != name)
-            {
-                $(name).slideToggle('fast');
-            }
-    });
-
+    
     $('table.ui-table tr').not('.ui-table-header').qui();
     $('table.ui-table td.ui-state-default').qui();
     $('table.ui-table td a.ui-jqgrid-icon').qui();
