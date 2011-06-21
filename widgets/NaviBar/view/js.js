@@ -22,19 +22,14 @@
  * @since       2011-04-17 09:28:38 v0.7.9
  */
 jQuery(function($){
-    var navbarUl;
-    $('ul.qw-navbar-parent li.ui-widget').hover(
-        function(){
-            $(this).addClass('ui-state-hover');
-            navbarUl = $(this).find('ul');
-            if ('' != $.trim(navbarUl.html()) && 'none' == navbarUl.css('display')) {
-                navbarUl.show(300);
-            }
-        }, function(){
-            $(this).removeClass('ui-state-hover');
-            if ('none' != navbarUl.css('display')) {
-                navbarUl.hide(300);
-            }
+    qwin.page.tabs = {
+        obj: $('#qw-tabs'),
+        add: function(){
+            
         }
-    );
+    };
+    $('#qw-tabs > li > span.qw-tabs-close').click(function(){
+        $(this).parent().hide(500);
+    });
+    qwin.page.tabs.obj.find('li').qui();
 });

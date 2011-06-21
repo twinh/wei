@@ -24,12 +24,14 @@
  * @version     $Id$
  * @since       2011-01-04 02:47:27
  */
+/* Qwin::hook('viewSidebar', array(
+  'view' => $this
+  )); */
+
 ?>
-<?php Qwin::hook('viewSidebar', array(
-    'view' => $this
-)); ?>
-<div class="qw-sidebar-content qw-sidebar-content-2">
-    <ul>
-        <li><a class="qw-icon qw-icon-trash-16" href="<?php echo qw_url(array('module' => 'trash')) ?>"><?php echo qw_t('LBL_MODULE_TRASH') ?></a></li>
-    </ul>
+<div class="qw-shortcut ui-state-default">
+    <a class="qw-icon qw-icon-monitor-16" href="javascript:;">快速启动</a>
+</div>
+<div>
+    
 </div>

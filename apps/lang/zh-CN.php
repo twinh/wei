@@ -126,7 +126,9 @@ return array(
 
     'LBL_GROUP_DETAIL_DATA' => '详细资料',
     'LBL_GROUP_DEFAULT_DATA' => '默认资料',
+    'MSG_START_REQUEST' => '开始请求...',
     'MSG_SUCCEEDED' => '操作成功!',
+    'MSG_ERROR' => '发生错误.',// then?
     'MSG_FUNCTION_DEVELOPTING' => '功能尚在开发中.',
     'MSG_CLICK_TO_REDIRECT' => '如果页面没有刷新,单击这里直接跳转.',
     'MSG_NOT_ALLOW_DELETE' => '不允许删除该用户.',
@@ -158,6 +160,7 @@ return array(
     'LBL_TREE_PREFIX_2' => '┣',
 
     'MOD_INFO' => '信息提示',
+    'LBL_SHORTCUT' => '快速启动',
 
     'LBL_MODULE_TRASH' => '回收站',
     

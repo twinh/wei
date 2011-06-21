@@ -1,6 +1,5 @@
-<?php
-/**
- * Hook
+{**
+ * navi
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -20,13 +19,14 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-03-26 11:40:07
- */
-
-class NaviBar_Hook extends Qwin_Hook_Abstract
-{
-    public function hookViewHeaderRight($options = null)
-    {
-        Qwin::widget('naviBar')->render();
-    }
-}
+ * @since       2011-06-21 09:05:08
+ *}
+ <div class="qw-nav" id="qw-nav">
+    <a class="ui-state-default ui-corner-bl" href="{qw_u('member/my')}">{$lang.LBL_WELCOME}, {$member.username}!</a>
+    <a class="ui-state-default" href="#">{$lang.LBL_MANAGEMENT}</a>
+    {if 'guest' == $member.username}
+    <a class="ui-state-default qw-last-link" href="{qw_u('member/auth', 'login')}">{$lang.LBL_LOGIN}</a>
+    {else}
+    <a class="ui-state-default qw-last-link" href="{qw_u('member/auth', 'logout')}">{$lang.LBL_LOGOUT}</a>
+    {/if}
+</div>

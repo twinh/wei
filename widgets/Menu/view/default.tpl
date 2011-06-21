@@ -1,6 +1,5 @@
-<?php
-/**
- * Hook
+{**
+ * default
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -20,13 +19,22 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-03-26 11:40:07
- */
-
-class NaviBar_Hook extends Qwin_Hook_Abstract
-{
-    public function hookViewHeaderRight($options = null)
-    {
-        Qwin::widget('naviBar')->render();
-    }
-}
+ * @since       2011-06-20 18:31:59
+ *}
+<div class="qw-shortcut ui-state-default">
+    <a class="qw-icon qw-icon-monitor-16" href="javascript:;">{$lang.LBL_SHORTCUT}</a>
+</div>
+<ul class="qw-menu">
+    {foreach from=$menus[0] item=menu}
+    <li>
+        <a class="qw-icon qw-icon-document-16" href="{$menu.url}" target="{$menu.target}">{$menu.title}</a>
+    {if isset($menus[1][$menu.id])}
+    <ul class="ui-state-hover ui-corner-right">
+        {foreach from=$menus[1][$menu.id] item=subMenu}
+        <li><a href="{$subMenu.url}" target="{$subMenu.target}">{$subMenu.title}</a></li>
+        {/foreach}
+    </ul>
+    {/if}
+    </li>
+    {/foreach}
+</ul>
