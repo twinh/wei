@@ -25,13 +25,11 @@
  * @since       2010-08-26 11:01:20
  */
 ?>
-<div class="ui-box ui-widget ui-widget-content ui-corner-all">
-    <div class="ui-box-header">
-        <?php Qwin::hook('ViewContentHeader', array(
-            'view' => $this
-        )) ?>
+<div class="qw-middle ui-widget-content">
+    <div class="qw-middle-header">
+    	<?php Qwin::hook('ViewContentHeader', array('view' => $this)) ?>
     </div>
-    <div class="qw-message ui-box-content ui-widget-content">
+    <div class="qw-middle-content qw-message ui-box-content ui-widget-content">
         <div class="qw-message-box ui-state-highlight ui-corner-all">
             <div class="qw-message-icon">
                 <span class="qw-icon qw-icon-<?php echo $icon ?>-64"></span>

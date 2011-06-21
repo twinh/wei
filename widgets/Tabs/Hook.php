@@ -23,10 +23,10 @@
  * @since       2011-03-26 11:40:07
  */
 
-class NaviBar_Hook extends Qwin_Hook_Abstract
+class Tabs_Hook extends Qwin_Hook_Abstract
 {
     public function hookViewHeaderRight($options = null)
     {
-        Qwin::widget('naviBar')->render();
+        Qwin::widget('tabs')->render();
     }
 }
