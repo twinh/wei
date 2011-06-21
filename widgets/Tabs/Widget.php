@@ -24,7 +24,7 @@
  * @todo        改为Tabs
  */
 
-class NaviBar_Widget extends Qwin_Widget_Abstract
+class Tabs_Widget extends Qwin_Widget_Abstract
 {
     /**
      * 默认选项
