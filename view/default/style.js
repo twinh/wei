@@ -28,7 +28,8 @@ var qwin = {
     get: {},
     app: {},
     lang: {},
-    page: {}
+    page: {},
+    ajax: {}
 };
 
 qwin.urlSeparator = {
@@ -89,6 +90,7 @@ jQuery(function($){
         left: $('#qw-left'),
         right: $('#qw-right'),
         content: $('#qw-content'),
+        middle: $('#qw-middle'),
         splitter: $('#qw-content > td.qw-splitter'),
         fixContentHeight: function(){
             if (!document.getElementById('qw-content-table')) {
@@ -100,12 +102,24 @@ jQuery(function($){
         }
     };
     
-    // 为页眉快捷链接增加鼠标操作效果
-    $('#qw-header-shortcut a').qui({
-        click: true,
-        focus: true
+    // 设置全局Ajax提示信息
+    qwin.ajax.show = function(msg){
+        $('#qw-ajax').html(msg).css({
+            left: ($(window).width() - $('#qw-ajax').width()) / 2
+        }).fadeIn(200).fadeOut(2000);
+    }
+    $.ajax({
+        beforeSend: function(){
+            //qwin.ajax.show(qwin.lang.MSG_START_REQUEST);
+        },
+        error: function(){
+            qwin.ajax.show(qwin.lang.MSG_ERROR);
+        },
+        success: function(){
+            qwin.ajax.show(qwin.lang.MSG_SUCCEEDED);
+        }
     });
-    
+
     // 调整中间栏到最大高度
     // 修复360极速浏览器(6.0Chrome内核)高度不正确的问题
     $(window).load(function() {
@@ -131,7 +145,7 @@ jQuery(function($){
     });
     $('table.qw-form-table input:text, table.qw-form-table textarea').qui();
 
-    // 点击右下按钮,回到顶部
+    // 点击页脚下按钮,回到顶部
     $('#qw-footer-arrow').click(function(){
         $('html').animate({scrollTop:0}, 700);
         return false;

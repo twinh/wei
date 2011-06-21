@@ -22,22 +22,18 @@
  * @since       2011-01-03 01:17:46
  *}
 {strip}
-<div class="qw-nav-bar">
-    <ul class="ui-widget-content qw-navbar-parent">
-        <li class="ui-widget ui-state-active ui-corner-top"> <a href="{$menus.qwin.url}">{$menus.qwin.title}</a>
+<div class="qw-c"></div>
+<div class="qw-tabs-box">
+    <ul id="qw-tabs">
+        <li class="ui-widget ui-state-active ui-corner-top">
+            <a href="{$menus.qwin.url}">{$menus.qwin.title}</a>
         </li>
         {foreach from=$menus[0] item=menu}
-        <li class="ui-widget ui-state-default ui-corner-top"><a href="{$menu.url}" target="{$menu.target}">{$menu.title}</a>
-        {if isset($menus[1][$menu.id])}
-        <ul class="ui-state-hover ui-corner-bottom">
-            {foreach from=$menus[1][$menu.id] item=subMenu}
-            <li><a href="{$subMenu.url}" target="{$subMenu.target}">{$subMenu.title}</a></li>
-            {/foreach}
-        </ul>
-        {/if}
+        <li class="ui-widget ui-state-default ui-corner-top">
+            <span class="qw-tabs-close ui-icon ui-icon-close"></span>
+            <a href="{$menu.url}" target="{$menu.target}">{$menu.title}</a>
         </li>
         {/foreach}
-    {/strip}
     </ul>
 </div>
 {strip}

@@ -19,11 +19,9 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-5-28 18:26:00
+ * @since       2011-05-28 18:26:00
 */
-/* Navigation Bar
-----------------------------------*/
-.qw-nav-bar{
+.qw-tabs-box {
     width: auto;
     border-left :0;
     border-right: 0;
@@ -31,7 +29,7 @@
     float: left;
     margin-top: 7px;
 }
-.qw-nav-bar ul.qw-navbar-parent{
+#qw-tabs {
     border: 0;
     z-index: 999;
     white-space: nowrap;
@@ -40,39 +38,17 @@
     height: 26px;
     background: none;
 }
-.qw-nav-bar ul.ui-widget-content{
-    float: left;
-}
-.qw-nav-bar ul li {
+#qw-tabs li {
     width: auto;
     float: left;
     display: inline-table;
     line-height: normal;
 }
-.qw-nav-bar ul li.ui-widget {
-    border-bottom: none;
-}
-.qw-nav-bar ul li a {
+#qw-tabs li a {
     padding: 5px 16px;
     display: block;
 }
-.qw-nav-bar ul li ul {
-    display: none;
-    text-align: left;
-    position: absolute;
-    /* todo ie下小颤动 */
-    margin-left: -1px;
-    z-index: 999;
+.qw-tabs-close {
+    float: right;
+    margin-top: 5px;
 }
-.qw-nav-bar ul li ul li {
-    clear: both;
-    font-weight: normal;
-    float: left;
-}
-/* 
-  修复部分使用部分字体导致该栏下面空一像素的问题
-  todo ubuntu 下空1px, windows正常
-*/
-/*.qw-nav-bar ul li.ui-state-active a {
-    font-family: sans-serif;
-}*/

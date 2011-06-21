@@ -1,6 +1,5 @@
-<?php
 /**
- * Hook
+ * js
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -20,13 +19,28 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-03-26 11:40:07
+ * @since       2011-06-20 19:00:27
  */
-
-class NaviBar_Hook extends Qwin_Hook_Abstract
-{
-    public function hookViewHeaderRight($options = null)
-    {
-        Qwin::widget('naviBar')->render();
-    }
-}
+jQuery(function($){
+    // 鼠标移过菜单栏,显示子菜单
+    $('#qw-left-content ul.qw-menu li').hover(function(){
+        var _this = $(this);
+        _this.find('ul:first').css({
+            left: _this.width()
+        }).show();
+        $(this).css('padding', '0').addClass('ui-state-hover');
+    }, function(){
+        $(this).find('ul:first').hide();
+        $(this).css('padding', '1px').removeClass('ui-state-hover');
+    }).find('a').click(function(){
+        $.ajax({
+            url: $(this).attr('href'),
+            data: 'view=content',
+            cache: false,
+            success: function(msg){
+                qwin.page.middle.html(msg);
+            }
+        });
+        return false;
+    });
+});

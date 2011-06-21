@@ -21,6 +21,7 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2011-03-26 11:39:36
+ * @todo        改为Tabs
  */
 
 class NaviBar_Widget extends Qwin_Widget_Abstract

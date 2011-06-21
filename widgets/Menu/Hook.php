@@ -20,13 +20,18 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-03-26 11:40:07
+ * @since       2011-6-20 18:26:18
  */
 
-class NaviBar_Hook extends Qwin_Hook_Abstract
+class Menu_Hook extends Qwin_Hook_Abstract
 {
-    public function hookViewHeaderRight($options = null)
+    public function hookViewLeft()
     {
-        Qwin::widget('naviBar')->render();
+        Qwin::widget('menu')->render();
+    }
+    
+    public function hookViewHeaderRight()
+    {
+        Qwin::widget('menu')->renderNavi();
     }
 }

@@ -1,6 +1,5 @@
-<?php
 /**
- * Hook
+ * navi
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -20,13 +19,22 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-03-26 11:40:07
- */
-
-class NaviBar_Hook extends Qwin_Hook_Abstract
-{
-    public function hookViewHeaderRight($options = null)
-    {
-        Qwin::widget('naviBar')->render();
-    }
+ * @since       2011-06-21 09:58:47
+*/
+#qw-nav {
+    float: right;
+    margin: 0 0 0 6px;
+}
+#qw-nav a {
+    padding: 6px 12px;
+    display: block;
+    float: left;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    height: 14px;
+    border-top: none;
+}
+#qw-nav a.qw-last-link{
+    border-right: none;
 }

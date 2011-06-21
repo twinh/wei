@@ -6,8 +6,6 @@
 <title><?php echo $lang['LBL_HTML_TITLE'] ?></title>
 <?php
 echo $this->getPackerSign();
-$member = Qwin::call('-session')->get('member');
-$nickname = isset($member['contact']) ? $member['contact']['nickname'] : $member['username'];
 $minify->addArray(array(
     $style->getCssFile(),
     $this->getTag('root') . 'style.css',
@@ -43,32 +41,17 @@ $minify->addArray(array(
             </div>
         </td>
         <td id="qw-header-right" colspan="2">
-            <div class="qw-header-shortcut" id="qw-header-shortcut">
-                <a class="ui-state-default ui-corner-bl" href="<?php echo qw_u('com/member/my') ?>"><?php echo qw_t('LBL_WELCOME') ?>, <?php echo $nickname ?>!</a>
-                <a class="ui-state-default" href="#"><?php echo qw_t('LBL_MANAGEMENT') ?></a>
-                <?php
-                if('guest' == $member['username']):
-                ?>
-                <a class="ui-state-default qw-last-link" href="<?php echo qw_u('com/member/auth', 'login') ?>"><?php echo qw_t('LBL_LOGIN') ?></a>
-                <?php
-                else :
-                ?>
-                <a class="ui-state-default qw-last-link" href="<?php echo qw_u('com/member/auth', 'logout') ?>"><?php echo qw_t('LBL_LOGOUT') ?></a>
-                <?php
-                endif;
-                ?>
-            </div>
-            <div class="qw-c"></div>
-            <?php Qwin::hook('ViewNaviBar') ?>
+            <?php Qwin::hook('viewHeaderRight') ?>
         </td>
     </tr>
 </table>
-<div id="qw-header2" class="ui-widget-content ui-state-default"></div>
+<div id="qw-header2" class="ui-widget-content ui-state-default">
+</div>
 <table id="qw-content-table" border="0" cellpadding="0" cellspacing="0">
     <tr id="qw-content">
         <td id="qw-left">
             <div id="qw-left-content">
-                <?php require $this->getElement('sidebar') ?>
+                <?php Qwin::hook('viewLeft') ?>
             </div>
         </td>
         <td id="qw-splitter-left" class="qw-splitter ui-state-default">
@@ -81,7 +64,9 @@ $minify->addArray(array(
             <div class="qw-splitter-content"></div>
         </td>
         <td id="qw-right" class="ui-helper-hidden">
-            <div id="qw-right-content"></div>
+            <div id="qw-right-content">
+                <?php Qwin::hook('viewRight') ?>
+            </div>
         </td>
     </tr>
 </table>
@@ -91,5 +76,6 @@ $minify->addArray(array(
     <div id="qw-footer-time"></div>
     <div id="qw-copyright" class="ui-widget">Executed in <?php echo $widget->call('app')->getEndTime() ?>(s). <?php echo qw_t('LBL_FOOTER_COPYRIGHT') ?></div>
 </div>
+<div id="qw-ajax" class="ui-state-highlight"></div>
 </body>
 </html>

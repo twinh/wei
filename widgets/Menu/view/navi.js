@@ -1,6 +1,5 @@
-<?php
 /**
- * Hook
+ * navi
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -20,13 +19,12 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-03-26 11:40:07
+ * @since       2011-6-21 9:58:30
  */
-
-class NaviBar_Hook extends Qwin_Hook_Abstract
-{
-    public function hookViewHeaderRight($options = null)
-    {
-        Qwin::widget('naviBar')->render();
-    }
-}
+// 为页眉导航栏增加鼠标操作效果
+jQuery(function($){
+    $('#qw-nav a').qui({
+        click: true,
+        focus: true
+    });
+});

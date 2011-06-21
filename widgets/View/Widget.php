@@ -162,24 +162,6 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
             ));
         }
 
-        // 当前行为的左栏操作视图
-        if (!$this->elementExists('sidebar')) {
-            $this->setElement('sidebar', array(
-                '<root><module>/sidebar-<action><suffix>',
-                '<root><module>/sidebar<suffix>',
-                '<root>sidebar<suffix>'
-            ));
-        }
-
-        // 当前行为的页眉标题视图
-        if (!$this->elementExists('header')) {
-            $this->setElement('header', array(
-                '<root><module>/header-<action><suffix>',
-                '<root><module>/header<suffix>',
-                '<root>header<suffix>'
-            ));
-        }
-
         return $this;
     }
 
