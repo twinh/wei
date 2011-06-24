@@ -152,6 +152,26 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
                 '<root><layout<suffix>'
             ));
         }
+        
+        if (!$this->elementExists('header')) {
+            $this->setElement('header', array(
+                '<root>header<suffix>',
+            ));
+        }
+        
+        if (!$this->elementExists('left')) {
+            $this->setElement('left', array(
+                '<root><module>/left-<action><suffix>',
+                '<root><module>/left<suffix>',
+                '<root>left<suffix>',
+            ));
+        }
+        
+        if (!$this->elementExists('right')) {
+            $this->setElement('right', array(
+                '<root>right<suffix>',
+            ));
+        }
 
         // 默认视图元素的选择次序为 自定义视图 > 当前行为视图 > 默认模块视图 > 默认视图
         if (!$this->elementExists('content')) {
@@ -159,6 +179,12 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
                 '<root><module>/content-<action><suffix>',
                 '<root><module>/content<suffix>',
                 '<root>content<suffix>'
+            ));
+        }
+        
+        if (!$this->elementExists('footer')) {
+            $this->setElement('footer', array(
+                '<root>footer<suffix>'
             ));
         }
 
@@ -179,7 +205,7 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
     {   
         $this->preDisplay();
 
-        // 不再输出视图,一般在preDisplay中设置该参数
+        // 视图已输出
         if ($this->_displayed) {
             return false;
         }
@@ -225,7 +251,7 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
         $output = ob_get_contents();
         '' != $output && ob_end_clean();
 
-        $url = Qwin::call('-url');
+        $url = Qwin::widget('url');
         $replace = Qwin_Util_Html::jsTag($url->url('util/minify', 'index', array('g' => $minify->pack('js'))))
                  . Qwin_Util_Html::cssLinkTag($url->url('util/minify', 'index', array('g' => $minify->pack('css'))));
 

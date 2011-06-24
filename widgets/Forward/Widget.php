@@ -105,7 +105,7 @@ class Forward_Widget extends Qwin_Widget_Abstract
             }
         }
 
-        $url = Qwin::call('-url')->url($module->toUrl(), $options['action'], array('id' => $dbData['id']));
+        $url = $this->_url->url($module->toUrl(), $options['action'], array('id' => $dbData['id']));
         // 跳转到新的记录
         if ($options['display']) {
             return $this->_View->jump($url);

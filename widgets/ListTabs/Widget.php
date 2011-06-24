@@ -31,8 +31,8 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
 
     public function getTabs($module, $get)
     {
-        $url = Qwin::call('-url');
-        $lang = $this->_Lang;
+        $url = $this->_url;
+        $lang = $this->_lang;
         $tabs = array();
 
         $moduleId = $module->getId();

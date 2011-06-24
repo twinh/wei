@@ -102,7 +102,7 @@ class ListAction_Widget extends Qwin_Widget_Abstract
         
         /* @var $jqGridWidget JqGrid_Widget */
         $jqGridWidget = $this->_widget->get('JqGrid');
-        $url = Qwin::call('-url');
+        $url = $this->_url;
         
         // jqGrid选项
         $options['row'] = intval($options['row']);

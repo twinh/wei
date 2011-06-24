@@ -52,7 +52,7 @@ class Filter_Widget extends Qwin_Widget_Abstract
 
         $lang = $this->_lang;
         $meta = $options['meta'];
-        $url = Qwin::call('-url');
+        $url = $this->_url;
         $minify = $this->_widget->get('Minify');
         
         $search = $request->get('search');

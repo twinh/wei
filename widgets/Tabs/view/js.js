@@ -27,23 +27,18 @@ jQuery(function($){
             + '<span class="qw-tabs-close ui-icon ui-icon-close"></span>'
             + '<a href="${url}">${title}</a>'
             + '</li>',
+        iframeTmpl: '<iframe id="qw-tabs-iframe-${id}" class="qw-tabs-iframe" frameborder="no" scrolling="auto" src="${url}"></iframe>',
         obj: $('#qw-tabs'),
-        lastId: '1',
+        lastId: null,
         init: function(){
-            var id = qwin.page.tabs.encode(window.location.search);
-            var tmpl = $.tmpl(qwin.page.tabs.tmpl, {
-                    id: id,
-                    url: window.location.search,
-                    title: 'Default'
-                }).qui();
-            
-            // 点击选项卡,显示对应内容
-            tmpl.click(function(){
-                qwin.page.tabs.show($(this).find('a'));
-                return false;
-            });
-            $('#qw-content-1').attr('id', 'qw-content-' + id);
-            qwin.page.tabs.obj.append(tmpl);
+            if ('undefined' == typeof qwin.get.module) {
+                qwin.get.module = 'index';
+            }
+            var title = 'MOD_' + qwin.get.module.toUpperCase();
+            if ('undefined' == typeof qwin.lang[title]) {
+                qwin.lang[title] = qwin.lang.UNTITLED;
+            }
+            qwin.page.tabs.show('<a href="' + window.location.search + '">' + qwin.lang[title] + '</a>');
         },
         show: function(a){
             var id = qwin.page.tabs.encode($(a).attr('href'));
@@ -68,15 +63,12 @@ jQuery(function($){
             }
 
             // 增加内容
-            if (!document.getElementById('qw-content-' + id)) {
-                $.ajax({
-                    url: $(a).attr('href'),
-                    data: 'view=content',
-                    cache: false,
-                    success: function(msg){
-                        qwin.page.middle.append('<div id="qw-content-' + id + '">' + msg + '</div>');
-                    }
+            if (!document.getElementById('qw-tabs-iframe-' + id)) {
+                var iframeTmpl = $.tmpl(qwin.page.tabs.iframeTmpl, {
+                    id: id,
+                    url: $(a).attr('href') + '&view-only=content'
                 });
+                qwin.page.middle.append(iframeTmpl);
             }
             
             if (qwin.page.tabs.lastId == id) {
@@ -85,13 +77,14 @@ jQuery(function($){
             
             // 隐藏上一个选项卡的内容
             $('#qw-tabs-li-' + qwin.page.tabs.lastId).removeClass('ui-state-active');
-            $('#qw-content-' + qwin.page.tabs.lastId).hide();
+            $('#qw-tabs-iframe-' + qwin.page.tabs.lastId).hide();
            
             // 显示当前选项卡内容
             $('#qw-tabs-li-' + id).addClass('ui-state-active');
-            $('#qw-content-' + id).show();
+            $('#qw-tabs-iframe-' + id).show();
             
             qwin.page.tabs.lastId = id;
+            return false;
         },
         remove: function(a){
             var id = qwin.page.tabs.encode($(a).attr('href'));
@@ -105,7 +98,7 @@ jQuery(function($){
             $('#qw-tabs-li-' + id).hide(500).remove();
 
             // 删除窗口
-            $('#qw-content-' + id).remove();
+            $('#qw-tabs-iframe-' + id).remove();
         },
         // TODO 减少长度
         encode: function(id){
@@ -125,7 +118,7 @@ jQuery(function($){
     $('a').click(function(){
         var url = $(this).attr('href');
         var parts = parseUri(url);
-        
+
         if (parts.protocol) {
             return true;
         }

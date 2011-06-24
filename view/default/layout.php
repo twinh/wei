@@ -32,6 +32,11 @@ $minify->addArray(array(
 </head>
 <body>
 <div id="qw-main" class="ui-widget-content">
+<?php
+if ($request['view-only'] && $this->elementExists($request['view-only'])) :
+    require $this->getElement('content');
+else :
+?>
 <table id="qw-header" class="ui-widget" border="0" cellpadding="0" cellspacing="0">
     <tr>
         <td id="qw-header-left">
@@ -46,7 +51,7 @@ $minify->addArray(array(
         </td>
     </tr>
 </table>
-<div id="qw-header2" class="ui-widget-content ui-state-default">
+<div id="qw-header2" class="ui-state-default">
 </div>
 <table id="qw-content-table" border="0" cellpadding="0" cellspacing="0">
     <tr id="qw-content">
@@ -59,26 +64,27 @@ $minify->addArray(array(
             <div class="qw-splitter-content"></div>
         </td>
         <td id="qw-middle">
-            <div id="qw-content-1">
             <?php require $this->getElement('content') ?>
-            </div>
         </td>
-        <td id="qw-splitter-right" class="qw-splitter ui-state-default">
+        <!--<td id="qw-splitter-right" class="qw-splitter ui-state-default">
             <div class="qw-splitter-content"></div>
         </td>
         <td id="qw-right" class="ui-helper-hidden">
             <div id="qw-right-content">
                 <?php Qwin::hook('viewRight') ?>
             </div>
-        </td>
+        </td>-->
     </tr>
 </table>
 </div>
 <div id="qw-footer" class="ui-state-default">
     <div id="qw-footer-arrow" class="ui-icon ui-icon-arrowthickstop-1-n"></div>
     <div id="qw-footer-time"></div>
-    <div id="qw-copyright" class="ui-widget">Executed in <?php echo $widget->call('app')->getEndTime() ?>(s). <?php echo qw_t('LBL_FOOTER_COPYRIGHT') ?></div>
+    <div id="qw-copyright" class="ui-widget"><?php echo qw_t('LBL_FOOTER_COPYRIGHT') ?></div>
 </div>
 <div id="qw-ajax" class="ui-state-highlight"></div>
+<?php
+endif;
+?>
 </body>
 </html>

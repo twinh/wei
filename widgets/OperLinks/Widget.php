@@ -37,8 +37,8 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
         $action = $view['action'];
         // 模块的Url形式
         $moduleUrl = $module->getUrl();
-        $url = Qwin::call('-url');
-        $lang = $this->_Lang;
+        $url = $this->_url;
+        $lang = $this->_lang;
         $controller = Controller_Widget::getByModule($moduleUrl, false);
         $varList = get_class_vars($controller);
         if (isset($varList['_unableActions'])) {

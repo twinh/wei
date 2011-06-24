@@ -89,11 +89,11 @@ function qw_p($v = null, $exit = true)
 
 function qw_url(array $data = null)
 {
-    return Qwin::call('-url')->build($data);
+    return Qwin::widget('url')->build($data);
 }
 function qw_u($value1, $value2 = 'index', array $params = array())
 {
-    return Qwin::call('-url')->url($value1, $value2, $params);
+    return Qwin::widget('url')->url($value1, $value2, $params);
 }
 
 function qw_w($name)

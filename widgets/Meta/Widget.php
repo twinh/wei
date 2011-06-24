@@ -184,7 +184,7 @@ class Meta_Widget extends Qwin_Meta_Abstract implements Qwin_Widget_Interface
     public function sanitiseListOperation($value, $name, $data, $dataCopy)
     {
         $id = $this['db']['id'];
-        $url = Qwin::call('-url');
+        $url = Qwin::widget('url');
         $lang = Qwin::call('-widget')->get('Lang');
         $module = $this->getModule();
         if (!isset($this->controller)) {
@@ -339,7 +339,7 @@ class Meta_Widget extends Qwin_Meta_Abstract implements Qwin_Widget_Interface
 
     public function setIsLink($value, $name, $data, $dataCopy, $action)
     {
-        $url = Qwin::call('-url');
+        $url = Qwin::widget('url');
         $name = str_replace(':', '\:', $name);
         if (null === $dataCopy[$name]) {
             $dataCopy[$name] = 'NULL';

@@ -30,7 +30,7 @@ class ContentHeader_Widget extends Qwin_Widget_Abstract
         // 构建页眉导航
         $module = $options['view']['module'];
         $action = Qwin::config('action');
-        $url = Qwin::call('-url');
+        $url = $this->_url;
         $lang = $this->_Lang;
 
         // 可能没有元数据
