@@ -131,4 +131,9 @@ jQuery(function($){
         return false;
     });
     qwin.page.tabs.obj.find('li').qui();
+    $(window).load(function() {
+        //alert($('#qw-middle').height())
+        //alert($('#qw-content-table').height())
+    });
+    
 });

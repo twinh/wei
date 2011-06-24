@@ -26,21 +26,6 @@
 
 class Tabs_Widget extends Qwin_Widget_Abstract
 {
-    /**
-     * 默认选项
-     * 
-     * @var array
-     */
-    protected $_defaults = array(
-        'max' => 8,
-        'more' => array(
-            'id' => 'more',
-            'url' => 'javascript:;',
-            'target' => '_self',
-            'title' => 'ACT_MORE',
-        ),
-    );
-
     public function render($options = null)
     {
         // 
@@ -64,8 +49,8 @@ class Tabs_Widget extends Qwin_Widget_Abstract
 
         $minify = $this->_widget->get('Minify');
         $minify->addArray(array(
-            $this->_path . 'view/style.css',
-            $this->_path . 'view/js.js',
+            $this->_path . 'view/default.css',
+            $this->_path . 'view/default.js',
             $this->_jQuery->loadPlugin('tmpl', false),
         ));
         

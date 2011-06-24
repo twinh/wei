@@ -185,7 +185,7 @@ class Meta_Widget extends Qwin_Meta_Abstract implements Qwin_Widget_Interface
     {
         $id = $this['db']['id'];
         $url = Qwin::widget('url');
-        $lang = Qwin::call('-widget')->get('Lang');
+        $lang = Qwin::widget('lang');
         $module = $this->getModule();
         if (!isset($this->controller)) {
             // TODO　不重复加载
@@ -346,7 +346,7 @@ class Meta_Widget extends Qwin_Meta_Abstract implements Qwin_Widget_Interface
         } else {
             $dataCopy[$name] = str_replace(':', '\:', $dataCopy[$name]);
         }
-        $value = '<a href="' . $url->url($this['module']->getUrl(), 'index', array('search' => $name . ':' . $dataCopy[$name])) . '">' . $data[$name] . '</a>';
+        $value = '<a href="' . $url->url($this['module']->getUrl(), 'index', array('search' => $name . ':' . $dataCopy[$name], 'view-only' => 'content')) . '">' . $data[$name] . '</a>';
         return $value;
     }
 }

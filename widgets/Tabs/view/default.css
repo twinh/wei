@@ -25,6 +25,10 @@
 html {
     overflow-y: auto;
 }
+#qw-middle {
+    width: 100%;
+    height: 100%;
+}
 .qw-tabs-box {
     width: auto;
     border-left :0;
@@ -59,5 +63,4 @@ html {
 .qw-tabs-iframe {
     height: 100%;
     width: 100%;
-    height: 500px;
 }

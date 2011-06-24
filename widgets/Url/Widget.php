@@ -59,6 +59,8 @@ class Url_Widget extends Qwin_Widget_Abstract
     {
         if (null == $data) {
             $data = $_GET;
+        } else {
+            $data += $this->_options['basicParams'];
         }
 
         // 对传入的多个参数进行合并
