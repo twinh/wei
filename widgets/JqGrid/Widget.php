@@ -181,7 +181,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
         
         // 设置Url
         if (!isset($options['url'])) {
-            $options['url'] = Qwin::call('-url')->url($meta->getModule()->toUrl(), 'index', array(
+            $options['url'] = $this->_url->url($meta->getModule()->toUrl(), 'index', array(
                 'json' => true,
             ));
         }

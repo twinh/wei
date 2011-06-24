@@ -43,8 +43,16 @@ class Tabs_Widget extends Qwin_Widget_Abstract
 
     public function render($options = null)
     {
+        // 
+        $request = Qwin::call('-request');
+        if ('content' != $request['view-only']) {
+            $this->_view->setElement('content', array(
+                $this->_path . '/view/empty.php',
+            ));
+        }
+        
         // 增加Qwin链接
-        $url = Qwin::call('-url');
+        $url = $this->_url;
         $menus['qwin'] = array(
             'title' => $this->_Lang['LBL_QWIN'],
             'url' => $url->url('com/home', 'index'),
@@ -64,5 +72,10 @@ class Tabs_Widget extends Qwin_Widget_Abstract
         $smarty = $this->_widget->get('Smarty')->getObject();
         $smarty->assign('menus', $menus);
         $smarty->display($this->_path . 'view/default.tpl');
+    }
+    
+    public function renderContent($options = null)
+    {
+        $this->_minify->add($this->_path . 'view/content.js');
     }
 }

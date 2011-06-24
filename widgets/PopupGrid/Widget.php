@@ -50,7 +50,7 @@ class PopupGrid_Widget extends Qwin_Widget_Abstract
         $lang = $this->_lang;
         $id = $options['form']['id'];
 
-        $url = Qwin::call('-url')->url($options['module'], 'index', array(
+        $url = $this->_url->url($options['module'], 'index', array(
             'popup' => 1,
             'ajax' => 1,
             'list' => $options['list'],

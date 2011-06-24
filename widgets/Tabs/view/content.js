@@ -1,5 +1,5 @@
 /**
- * style
+ * content
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -19,45 +19,14 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-05-28 18:26:00
-*/
+ * @since       2011-06-24 20:56:12
+ */
 
-html {
-    overflow-y: auto;
-}
-.qw-tabs-box {
-    width: auto;
-    border-left :0;
-    border-right: 0;
-    border-bottom: 0;
-    float: left;
-    margin-top: 7px;
-}
-#qw-tabs {
-    border: 0;
-    z-index: 999;
-    white-space: nowrap;
-    overflow: hidden;
-    width: 800px;
-    height: 26px;
-    background: none;
-}
-#qw-tabs li {
-    width: auto;
-    float: left;
-    display: inline-table;
-    line-height: normal;
-}
-#qw-tabs li a {
-    padding: 5px 16px;
-    display: block;
-}
-.qw-tabs-close {
-    float: right;
-    margin-top: 5px;
-}
-.qw-tabs-iframe {
-    height: 100%;
-    width: 100%;
-    height: 500px;
-}
+jQuery(function($){
+    if ('undefined' != typeof qwin.get['view-only'] && 'content' == qwin.get['view-only']) {
+        $('a').live('click', function(){
+            window.location.href = $(this).attr('href') + '&view-only=content';
+            return false;
+        });
+    }
+});

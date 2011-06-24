@@ -25,7 +25,7 @@
  * @since       2009-11-24 20:45:11
  */
 
-class Qwin_Url
+class Url_Widget extends Qwin_Widget_Abstract
 {
     /**
      * 提供一个只有两个值的数组,供快速构建url服务
@@ -38,26 +38,16 @@ class Qwin_Url
     );
 
     /**
-     * 路由器对象
-     * @var Qwin_Url_Router
+     * 默认选项
+     * @var array
      */
-    protected $_router;
-
-    /**
-     * 路由器对象, 当禁用路由器时,由此变量存储路由器对象
-     * @var Qwin_Url_Router
-     */
-    protected $_routerTmp;
-
-    /**
-     * 初始化,按需引入路由器对象
-     *
-     * @param Qwin_Url_Router $router 路由器
-     */
-    public function __construct(Qwin_Url_Router $router = null)
-    {
-        $this->_router = $router;
-    }
+    protected $_defaults = array(
+        'basicParams' => array(),
+        'names' => array(
+            'module',
+            'action'
+        ),
+    );
 
     /**
      * 构建url查询字符串,功能类似http_build_query
@@ -67,7 +57,6 @@ class Qwin_Url
      */
     public function build(array $data = null)
     {
-        // TODO 是否应该引入Qwin_Request
         if (null == $data) {
             $data = $_GET;
         }
@@ -79,69 +68,8 @@ class Qwin_Url
                 $data = array_merge($data, $arg);
             }
         }
-
-        if ($this->_router) {
-            return $this->_router->build($data);
-        }
+        
         return '?' . strtr(urldecode(http_build_query($data)), array('&amp;' => '&'));
-    }
-
-    /**
-     * 解析一个url查询字符串
-     *
-     * @param string $url url查询字符串
-     * @return array|false 解析结果
-     */
-    public function parse($url = null)
-    {
-        if (null == $url) {
-            $url = $_SERVER['QUERY_STRING'];
-        }
-        if ($this->_router) {
-            return $this->_router->parse($url);
-        }
-        parse_str($url, $get);
-        return $get;
-    }
-
-    /**
-     * 禁用路由器
-     *
-     * @return Qwin_Url 当前对象
-     */
-    public function disableRouter()
-    {
-        if (isset($this->_router)) {
-            $this->_routerTmp = $this->_router;
-            $this->_router = null;
-            return $this;
-        }
-        // 没有设置路由器
-        return false;
-    }
-
-    /**
-     * 启用路由器
-     *
-     * @return Qwin_Url 当前对象
-     */
-    public function enableRouter()
-    {
-        if (isset($this->_routerTmp)) {
-            $this->_router = $this->_routerTmp;
-            return $this;
-        }
-        return false;
-    }
-
-    /**
-     * 获取路由器对象
-     *
-     * @return Qwin_Url_Router
-     */
-    public function getRouter()
-    {
-        return $this->_router;
     }
 
     /**
@@ -161,8 +89,8 @@ class Qwin_Url
     public function url($value1, $value2 = 'index', array $params = array())
     {
         return $this->build(array(
-            $this->_url['name1'] => $value1,
-            $this->_url['name2'] => $value2,
+            $this->_options['names'][0] => $value1,
+            $this->_options['names'][1] => $value2,
         ) + $params);
     }
 }

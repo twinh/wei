@@ -195,18 +195,6 @@ class Controller_Widget extends Qwin_Widget_Abstract
     }
 
     /**
-     * 获取Url对象
-     * @return Qwin_Url
-     */
-    public function getUrl()
-    {
-        if (!$this->_url) {
-            $this->_url = Qwin::call('-url');
-        }
-        return $this->_url;
-    }
-
-    /**
      * 获取会话对象
      * @return Qwin_Session
      */

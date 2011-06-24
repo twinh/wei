@@ -26,7 +26,7 @@
 abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
 {
     /**
-     * 默认配置
+     * 默认选项
      * @var array
      */
     protected $_defaults = array();
