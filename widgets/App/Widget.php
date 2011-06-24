@@ -116,7 +116,7 @@ class App_Widget extends Qwin_Widget_Abstract
             throw new Qwin_Widget_Exception('Action "' . $action . '" not found in controller "' . get_class($controller) .  '"');
         }
 
-        // 展示视图,视图对象可能已被更改,需进行辨别
+        // 展示视图
         $this->_view->display();
 
         // 设置应用结束钩子

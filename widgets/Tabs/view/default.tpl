@@ -24,16 +24,6 @@
 {strip}
 <div class="qw-c"></div>
 <div class="qw-tabs-box">
-    <ul id="qw-tabs">
-        <li class="ui-widget ui-state-active ui-corner-top">
-            <a href="{$menus.qwin.url}">{$menus.qwin.title}</a>
-        </li>
-        {foreach from=$menus[0] item=menu}
-        <li class="ui-widget ui-state-default ui-corner-top">
-            <span class="qw-tabs-close ui-icon ui-icon-close"></span>
-            <a href="{$menu.url}" target="{$menu.target}">{$menu.title}</a>
-        </li>
-        {/foreach}
-    </ul>
+    <ul id="qw-tabs"></ul>
 </div>
 {strip}

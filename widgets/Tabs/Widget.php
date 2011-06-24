@@ -43,33 +43,13 @@ class Tabs_Widget extends Qwin_Widget_Abstract
 
     public function render($options = null)
     {
-        // 加载页眉导航的缓存
-        $menus = require Qwin::config('root') . 'cache/menu.php';
-
-        // 将超出的菜单附加到“更多"的菜单下
-        $this->_options = $this->_defaults;
-        if ($this->_options['max'] < count($menus[0])) {
-            // "更多"菜单的子菜单
-            $moreMenus = array_splice($menus[0], $this->_options['max']);
-
-            // 根菜单
-            $menus[0] = array_splice($menus[0], 0, $this->_options['max']);
-
-            // 附加“更多”的菜单
-            $this->_defaults['more']['title'] = $this->_Lang[$this->_defaults['more']['title']];
-            $menus[0] += array(
-                'more' => $this->_defaults['more']
-            );
-            $menus[1]['more'] = $moreMenus;
-        }
-
         // 增加Qwin链接
         $url = Qwin::call('-url');
         $menus['qwin'] = array(
             'title' => $this->_Lang['LBL_QWIN'],
             'url' => $url->url('com/home', 'index'),
         );
-
+        
         // 页面名称
         $queryString = empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING'];
         $pageUrl = basename($_SERVER['PHP_SELF']) . $queryString;
@@ -78,8 +58,9 @@ class Tabs_Widget extends Qwin_Widget_Abstract
         $minify->addArray(array(
             $this->_path . 'view/style.css',
             $this->_path . 'view/js.js',
+            $this->_jQuery->loadPlugin('tmpl', false),
         ));
-
+        
         $smarty = $this->_widget->get('Smarty')->getObject();
         $smarty->assign('menus', $menus);
         $smarty->display($this->_path . 'view/default.tpl');
