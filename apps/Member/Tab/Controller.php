@@ -1,5 +1,6 @@
+<?php
 /**
- * js
+ * Controller
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -19,18 +20,14 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-06-20 19:00:27
+ * @since       2011-6-24 11:00:44
  */
-jQuery(function($){
-    // 鼠标移过菜单栏,显示子菜单
-    $('#qw-left-content ul.qw-menu li').hover(function(){
-        var _this = $(this);
-        _this.find('ul:first').css({
-            left: _this.width()
-        }).show();
-        $(this).css('padding', '0').addClass('ui-state-hover');
-    }, function(){
-        $(this).find('ul:first').hide();
-        $(this).css('padding', '1px').removeClass('ui-state-hover');
-    });
-});
+
+class Member_Tab_Controller extends Controller_Widget
+{
+    public function actionAdd()
+    {
+        //$this->_view->setDisplayed();
+        return false;
+    }
+}

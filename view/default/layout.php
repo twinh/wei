@@ -17,6 +17,7 @@ $minify->addArray(array(
     $jQuery->loadEffect('core', false),
     $jQuery->loadPlugin('qui', null, false),
     $this->getTag('root') . 'style.js',
+    $this->getTag('root') . 'script/parseUri.js',
     //$this->getTag('root') . 'DD_roundies_0.0.2a-min.js',
 ));
 ?>
@@ -58,7 +59,9 @@ $minify->addArray(array(
             <div class="qw-splitter-content"></div>
         </td>
         <td id="qw-middle">
+            <div id="qw-content-1">
             <?php require $this->getElement('content') ?>
+            </div>
         </td>
         <td id="qw-splitter-right" class="qw-splitter ui-state-default">
             <div class="qw-splitter-content"></div>
