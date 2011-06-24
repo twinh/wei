@@ -96,7 +96,7 @@ jQuery(function($){
             if (!document.getElementById('qw-content-table')) {
                return false;
             }
-            var height = $(window).height() - $('#qw-content-table').offset().top - $('#qw-footer').height();
+            var height = $(window).height() - $('#qw-content-table').offset().top;
             $('#qw-content-table').css('height', height);
             return true;
         }

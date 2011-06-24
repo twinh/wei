@@ -100,12 +100,19 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
      *
      * @param array $input 数据
      */
-    public function  __construct(array $options = array())
+    public function __construct(array $options = array())
     {
         parent::__construct(array(), ArrayObject::ARRAY_AS_PROPS);
         $this->_options = $options + $this->_defaults;
 
-        // todo 是否会造成重复
+        // 使视图一致 TODO 更合适的位置
+        $request = Qwin::call('-request');
+        if ($request['view-only']) {
+            Qwin::widget('url')->setOption('basicParams', array(
+                'view-only' => $request['view-only'],
+            ));
+        }
+        
         // 打开缓冲区
         ob_start();
     }
@@ -153,26 +160,6 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
             ));
         }
         
-        if (!$this->elementExists('header')) {
-            $this->setElement('header', array(
-                '<root>header<suffix>',
-            ));
-        }
-        
-        if (!$this->elementExists('left')) {
-            $this->setElement('left', array(
-                '<root><module>/left-<action><suffix>',
-                '<root><module>/left<suffix>',
-                '<root>left<suffix>',
-            ));
-        }
-        
-        if (!$this->elementExists('right')) {
-            $this->setElement('right', array(
-                '<root>right<suffix>',
-            ));
-        }
-
         // 默认视图元素的选择次序为 自定义视图 > 当前行为视图 > 默认模块视图 > 默认视图
         if (!$this->elementExists('content')) {
             $this->setElement('content', array(
@@ -182,12 +169,6 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
             ));
         }
         
-        if (!$this->elementExists('footer')) {
-            $this->setElement('footer', array(
-                '<root>footer<suffix>'
-            ));
-        }
-
         return $this;
     }
 

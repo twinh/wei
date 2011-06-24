@@ -40,7 +40,7 @@ jQuery(function($){
                 addition = {};
             addition['action'] = 'view';
             addition[primaryKey] = rowData[primaryKey];
-            window.location.href = Qwin.url.createUrl(Qwin.get, addition);
+            window.location.href = qwin.url.createUrl(qwin.get, addition);
             return false;
     }});
     <?php else : ?>
@@ -48,7 +48,7 @@ jQuery(function($){
         ondblClickRow: function(rowId, iRow, iCol, e){
             var rowData = jqGridObj.jqGrid('getRowData', rowId);
             $('<?php echo $popup['valueInput'] ?>').val(rowData['<?php echo $popup['valueColumn'] ?>']);
-            $('<?php echo $popup['viewInput'] ?>').val(rowData['<?php echo $popup['viewColumn'] ?>'] + '(' + Qwin.Lang['LBL_SELECTED'] + ', ' + Qwin.Lang['LBL_READONLY'] + ')');
+            $('<?php echo $popup['viewInput'] ?>').val(rowData['<?php echo $popup['viewColumn'] ?>'] + '(' + qwin.lang.LBL_SELECTED + ', ' + qwin.lang.LBL_READONLY + ')');
             $('#ui-popup').dialog('close');
     }});
     <?php endif; ?>
@@ -62,7 +62,7 @@ jQuery(function($){
         var keyList = new Array(),
             rowList = jqGridObj.jqGrid('getGridParam','selarrrow');
         if (rowList.length == 0) {
-            alert(Qwin.Lang.MSG_CHOOSE_AT_LEASE_ONE_ROW);
+            alert(qwin.lang.MSG_CHOOSE_AT_LEASE_ONE_ROW);
             return false;
         }
         for (var i in rowList) {
@@ -75,12 +75,12 @@ jQuery(function($){
 
         var message = '';
         if ($(this).find('span').hasClass('ui-icon-trash')) {
-            message = Qwin.Lang.MSG_CONFIRM_TO_DELETE_TO_TRASH;
+            message = qwin.lang.MSG_CONFIRM_TO_DELETE_TO_TRASH;
         } else {
-            message = Qwin.Lang.MSG_CONFIRM_TO_DELETE;
+            message = qwin.lang.MSG_CONFIRM_TO_DELETE;
         }
         if (confirm(message)) {
-            window.location.href = Qwin.url.createUrl(Qwin.get, addition);
+            window.location.href = qwin.url.createUrl(qwin.get, addition);
         }
         return false;
     });
@@ -89,7 +89,7 @@ jQuery(function($){
     $('#action-<?php echo $module->getId() ?>-copy').click(function(){
         var rowList = jqGridObj.jqGrid('getGridParam','selarrrow');
         if (rowList.length != 1) {
-            alert(Qwin.Lang.MSG_CHOOSE_ONLY_ONE_ROW);
+            alert(qwin.lang.MSG_CHOOSE_ONLY_ONE_ROW);
             return false;
         }
         var rowData = jqGridObj.jqGrid('getRowData', rowList[0]);

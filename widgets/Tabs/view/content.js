@@ -23,10 +23,10 @@
  */
 
 jQuery(function($){
-    if ('undefined' != typeof qwin.get['view-only'] && 'content' == qwin.get['view-only']) {
-        $('a').live('click', function(){
-            window.location.href = $(this).attr('href') + '&view-only=content';
-            return false;
-        });
-    }
+//    if ('undefined' != typeof qwin.get['view-only'] && 'content' == qwin.get['view-only']) {
+//        $('a').live('click', function(){
+//            window.location.href = $(this).attr('href') + '&view-only=content';
+//            return false;
+//        });
+//    }
 });
