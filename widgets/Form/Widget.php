@@ -217,8 +217,23 @@ class Form_Widget extends Qwin_Widget_Abstract
             }
         }
 
+        // TODO 应该在元数据中转换,避免重复执行
         //$set['id'] = preg_replace("/(\w*)\[(\w+)\]/", "$1-$2", $set['name']);
-
+        if (isset($private['_realation'])) {
+            $realation = &$private['_realation'];
+            $dbData = Meta_Widget::getByModule($realation['module'])->get('db')->getQuery()
+                ->select($realation['field'] . ', ' . $realation['display'])
+                ->execute();
+            $private['_resource'] = array();
+            foreach ($dbData as $key => $row) {
+                $private['_resource'][$row[$realation['field']]] = array(
+                    'name' => $row[$realation['display']],
+                    'value' => $row[$realation['field']],
+                );
+            }
+        }
+        
+        
         // 转换资源
         if (isset($private['_resourceGetter'])) {          
             $private['_resource'] = Qwin::call('-flow')->callOne($private['_resourceGetter']);

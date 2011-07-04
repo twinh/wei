@@ -30,7 +30,12 @@ return array(
             'hidden' => true,
         ),
         'group_id' => array(
-            'link' => true,
+            '_link' => true,
+            '_relation' => array(
+                'module' => 'member/group',
+                'field' => 'id',
+                'display' => 'name',
+            ),
 //            'sanitiser' => array(
 //                array('Com_Category_Widget', 'sanitise'),
 //                array(
@@ -41,7 +46,7 @@ return array(
 //            ),
         ),
         'sex' => array(
-            'link' => true,
+            '_link' => true,
             '_sanitiser' => array(
                 'list' => array(
                     array('Ide_Option_Widget', 'sanitise'),

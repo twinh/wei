@@ -338,7 +338,7 @@ class Meta_Widget extends Qwin_Meta_Abstract implements Qwin_Widget_Interface
 
     public function setLink($value, $name, $data, $dataCopy, $meta, $action)
     {
-        if (isset($meta['fields'][$name]['link']) && true == $meta['fields'][$name]['link']) {
+        if (isset($meta['fields'][$name]['_link']) && true == $meta['fields'][$name]['_link']) {
             $url = Qwin::widget('url');
             $name = str_replace(':', '\:', $name);
             if (null === $dataCopy[$name]) {

@@ -61,6 +61,7 @@ class JsonListAction_Widget extends Qwin_Widget_Abstract
             'sanitiser'     => true,
             'sanitise'      => true,
             'action'        => 'list',
+            'relation'     => true,
         ),
         'display'   => true,
     );
