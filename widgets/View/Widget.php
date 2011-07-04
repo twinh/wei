@@ -272,6 +272,7 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
         $options = $options + $this->_infoOptions;
         $this->setElement('layout', '<root>layout<suffix>');
         $this->setElement('content', Qwin::call('-widget')->getPath() . 'View/view/info.php');
+        Qwin::widget('minify')->add(Qwin::call('-widget')->getPath() . 'View/view/style.css');
 
         $title = $options['title'];
         $url = $options['url'];
