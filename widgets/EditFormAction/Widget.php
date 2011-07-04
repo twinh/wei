@@ -48,10 +48,9 @@ class EditFormAction_Widget extends Qwin_Widget_Abstract
         'asAction'  => 'view',
         'isView'    => true,
         'sanitise'  => array(
-            'view'      => true,
-            'link'      => true,
-            'sanitiser' => 'edit',
-            'hook'      => true,
+            'sanitiser'     => true,
+            'sanitise'      => true,
+            'action'        => 'edit',
         ),
         'display'   => true,
     );
