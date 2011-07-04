@@ -45,6 +45,7 @@
     margin: 0;
 }
 .qw-form-table{
+    width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
     margin: 2px 0 20px;
@@ -103,4 +104,10 @@
     position:relative;
     text-align:center;
     text-decoration:none !important;
+}
+.qw-field-hidden {
+    display: none;
+}
+.qw-label-hidden {
+    display: none;
 }

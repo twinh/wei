@@ -38,11 +38,11 @@ validateCode['<?php echo $options['id'] ?>'] = <?php echo $validateCode ?>;
 <?php
 endif;
 ?>
-<form id="<?php echo $options['id'] ?>" class="qw-form" name="form" method="post" action="<?php echo qw_url()?>">
+<form id="<?php echo $options['id'] ?>" class="qw-form" action="<?php echo qw_url()?>" method="post">
 <?php if ($form['topButtons']) : ?>
 <div class="qw-p5">
-    <?php echo Qwin_Util_JQuery::button('submit', qw_t('ACT_SUBMIT'), 'ui-icon-check') ?>
-    <?php echo Qwin_Util_JQuery::button('reset', qw_t('ACT_RESET'), 'ui-icon-arrowreturnthick-1-w') ?>
+    <?php echo Qwin_Util_JQuery::button('submit', $lang['ACT_SUBMIT'], 'ui-icon-check') ?>
+    <?php echo Qwin_Util_JQuery::button('reset', $lang['ACT_RESET'], 'ui-icon-arrowreturnthick-1-w') ?>
 </div>
 <?php endif; ?>
 <div class="ui-helper-hidden">
@@ -53,65 +53,52 @@ endif;
     ?>
 </div>
 <?php
-    foreach ($form['layout'] as $group => $row) : 
-        $groupId = strtolower(strtr($group, '_', '-'));
+    foreach ($form['layout'] as $name => $fieldset) :
 ?>
-<?php if (!is_numeric($group)) : ?>
-    <fieldset id="qw-fieldset-<?php echo $groupId ?>" class="ui-widget-content ui-corner-all">
-    <legend><?php echo $lang[$group] ?></legend>
-<?php endif; ?>
-    <table class="qw-form-table" id="qw-form-table-<?php echo $groupId ?>" width="100%">
+    <fieldset class="ui-widget-content ui-corner-all">
+    <legend><?php echo $lang[$name] ?></legend>
+    <table class="qw-form-table">
         <tr>
         <?php foreach ($percent as $value) : ?>
             <td width="<?php echo $value?>%"></td>
         <?php endforeach; ?>
         </tr>
-        <?php foreach ($row as $fields) : ?>
+        <?php foreach ($fieldset as $fields) : ?>
         <tr>
         <?php
-        // TODO 逻辑&视图
-        // 删除多余或补全缺少的数据
-        $num = count($fields);
-        if ($form['columns'] > $num) {
-            $fields = array_pad($fields, $form['columns'], '');
-        } elseif ($form['columns'] < $num) {
-            $fields = array_slice($fields, 0, $form['columns']);
-        }
-        // 从第一位开始判断
         $i = 0;
-        foreach ($fields as $key => $field) {
-            if (0 < $i) {
+        foreach ($fields as $key => $field) :
+            if (0 < $i) :
                 $i--;
                 continue;
-            }
-            if (!is_null($field)) {
+            endif;
+            if (is_null($field)) :
+        ?>
+            <td colspan="2">&nbsp;</td>
+        <?php
+            else :
                 $i = $key;
-                while(array_key_exists($i + 1, $fields) && is_null($fields[$i + 1])) {
+                while(array_key_exists($i + 1, $fields) && is_null($fields[$i + 1])) :
                     $i++;
-                }
+                endwhile;
                 $i = $i - $key;
-                if ('' === $field) {
-                    echo '<td colspan="' . ($i + 2) . '">&nbsp;</td>';
-                } else {
-                    if (isset($form['fields'][$field]['_label'])) {
-                        $label = $lang[$form['fields'][$field]['_label']];
-                    } else {
-                        $label = $lang->f($field);
-                    }
-                    echo '<td class="qw-label-common"><label for="' . $form['fields'][$field]['id'] . '">' . $label . ':</label></td>'
-                       . '<td class="qw-field-common qw-field-' . $form['fields'][$field]['_type'] . '" colspan="' . ($i * 2 + 1) . '">' . $this->renderElement($form['fields'][$field]) , $this->renderElementWidget($form['fields'][$field]) . '</td>';
-                }
-            } else {
-                echo '<td colspan="2">&nbsp;</td>';
-            }
-        }
+                if ('' === $field) :
+        ?>
+            <td colspan="<?php echo $i + 2 ?>">&nbsp;</td>
+        <?php
+                else :
+        ?>
+            <td class="qw-label-common qw-label-<?php echo $form['fields'][$field]['_type'] ?>"><label for="<?php echo $form['fields'][$field]['id'] ?>"><?php echo $lang->f($field) ?>:</label></td>
+            <td class="qw-field-common qw-field-<?php echo $form['fields'][$field]['_type'] ?>" colspan="<?php echo $i * 2 + 1 ?>"><?php echo $this->renderElement($form['fields'][$field]) , $this->renderElementWidget($form['fields'][$field]) ?></td>
+        <?php
+                endif;
+            endif;
+        endforeach;
         ?>
         </tr>
         <?php endforeach; ?>
     </table>
-<?php if (!is_numeric($group)) : ?>
     </fieldset>
-<?php endif; ?>
 <?php endforeach; ?>
 <div class="qw-p5">
     <input type="hidden" name="_page" value="<?php echo $refererPage ?>" />

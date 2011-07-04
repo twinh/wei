@@ -57,10 +57,10 @@ class JsonListAction_Widget extends Qwin_Widget_Abstract
         'page'      => null,
         'row'       => null,
         'sanitise'  => array(
-            'view'      => true,
-            'link'      => true,
-            'sanitise'  => 'list',
-            'notFilled' => true,
+            'nullTxt'       => true,
+            'sanitiser'     => true,
+            'sanitise'      => true,
+            'action'        => 'list',
         ),
         'display'   => true,
     );
@@ -115,7 +115,7 @@ class JsonListAction_Widget extends Qwin_Widget_Abstract
             $rowLayout = array_combine(array_values($list['layout']), array_pad(array(), count($list['layout']), null));
             foreach ($data as &$row) {
                 $rowTemp = array_intersect_key($row, $rowLayout) + $rowLayout;
-                $row = $list->sanitise($rowTemp, $options['sanitise'], $row);
+                $row = $this->_sanitiser->sanitise($list, $rowTemp, $options['sanitise'], $row);
             }
             unset($row, $rowTemp);
         }
@@ -141,8 +141,6 @@ class JsonListAction_Widget extends Qwin_Widget_Abstract
             ),
         ));
 
-        // TODO 输出型视图
-        echo $json;
-        $this->_View->setDisplayed();
+        return $this->_view->displayJson($json);
     }
 }

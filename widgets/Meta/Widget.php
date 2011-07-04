@@ -228,7 +228,6 @@ class Meta_Widget extends Qwin_Meta_Abstract implements Qwin_Widget_Interface
                 'title' => $lang->t('ACT_DELETE'),
                 'icon'  => $icon,
             );
-
         }
         if (5 != func_num_args()) {
             $data = '';
@@ -337,16 +336,18 @@ class Meta_Widget extends Qwin_Meta_Abstract implements Qwin_Widget_Interface
         return $value;
     }
 
-    public function setIsLink($value, $name, $data, $dataCopy, $action)
+    public function setLink($value, $name, $data, $dataCopy, $meta, $action)
     {
-        $url = Qwin::widget('url');
-        $name = str_replace(':', '\:', $name);
-        if (null === $dataCopy[$name]) {
-            $dataCopy[$name] = 'NULL';
-        } else {
-            $dataCopy[$name] = str_replace(':', '\:', $dataCopy[$name]);
+        if (isset($meta['fields'][$name]['link']) && true == $meta['fields'][$name]['link']) {
+            $url = Qwin::widget('url');
+            $name = str_replace(':', '\:', $name);
+            if (null === $dataCopy[$name]) {
+                $dataCopy[$name] = 'NULL';
+            } else {
+                $dataCopy[$name] = str_replace(':', '\:', $dataCopy[$name]);
+            }
+            $value = '<a href="' . $url->url($meta->getParent()->get('module')->getUrl(), 'index', array('search' => $name . ':' . $dataCopy[$name], 'view-only' => 'content')) . '">' . $data[$name] . '</a>';
         }
-        $value = '<a href="' . $url->url($this['module']->getUrl(), 'index', array('search' => $name . ':' . $dataCopy[$name], 'view-only' => 'content')) . '">' . $data[$name] . '</a>';
         return $value;
     }
 }

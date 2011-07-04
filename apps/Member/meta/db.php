@@ -99,6 +99,15 @@ return array(
         ),
         'address' => array(
         ),
+        'created_by' => array(
+            
+        ),
+        'date_created' => array(
+            
+        ),
+        'modified_by' => array(
+            
+        ),
         'date_modified' => array(
             
         ),

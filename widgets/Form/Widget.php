@@ -32,7 +32,7 @@ class Form_Widget extends Qwin_Widget_Abstract
      * @var array
      */
     protected $_defaults = array(
-        'id'        => 'form-%s',
+        'id'        => 'qw-form-%s',
         'meta'      => null,
         'form'      => 'form',
         'db'        => 'db',
@@ -98,7 +98,7 @@ class Form_Widget extends Qwin_Widget_Abstract
         $options = (array)$options + $this->_options;
         
         // 检查元数据是否合法
-        /* @var $meta Com_Meta */
+        /* @var $meta Meta_Widget */
         $meta = $options['meta'];
         if (!Qwin_Meta::isValid($meta)) {
             throw new Qwin_Widget_Exception('ERR_META_ILLEGAL');
@@ -109,54 +109,43 @@ class Form_Widget extends Qwin_Widget_Abstract
         if (!($form = $meta->offsetLoad($options['form'], 'form'))) {
             throw new Qwin_Widget_Exception('ERR_FROM_META_NOT_FOUND');
         }
-        $form1 = clone $form;
+        
+        foreach ($form['fields'] as $name => $field) {
+            // 为表单赋值
+            if (array_key_exists($name, $options['data'])) {
+                $field['_value'] = $options['data'][$name];
+            }
+            
+            // 根据操作动态调整表单元数据
+            $action = '_on' . ucfirst($options['action']);
+            if (isset($field[$action])) {
+                $field = $field[$action] + $field;
+            }
 
-        // 数据库元数据是可选的,不用做检查
-        /* @var $db Qwin_Meta_Db */
-        $db = $meta->offsetLoad($options['db'], 'db');
+            $form['fields'][$name] = $field;
+        }
         
-        $data = $options['data'];
-        
-        // 获取表格栏目的宽度百分比
-        // TODO 更好的算法
-        if (1 != $form['columns']) {
-            $percent = array();
-            $prePercent = (float)(100 / ($form['columns'] * 4));
-            for ($i = 0; $i < $form['columns'] * 2; $i++) {
-                if ($i % 2) {
-                    $percent[] = 3 * $prePercent;
-                } else {
-                    $percent[] = $prePercent;
+        // 删除多余或补全缺少的数据
+        foreach ($form['layout'] as &$fieldset) {
+            foreach ($fieldset as &$fields) {
+                if (($count = count($fields)) == $form['columns']) {
+                    continue;
+                }
+                if ($count > $form['columns']) {
+                    $fields = array_slice($fields, 0, $form['columns']);
+                } else  {
+                    $fields = array_pad($fields, $form['columns'], '');
                 }
             }
-        } else {
-            $percent = array(13.5, 87.5);
         }
 
         // 默认表单配置
-        $lang = $this->_Lang;
+        $lang = $this->_lang;
+        $percent = $this->getColumnPercent($form['columns'] * 2);
         $refererPage = urlencode(Qwin::call('-request')->server('HTTP_REFERER'));
-        
-        //
         $options['id'] = sprintf($options['id'], $meta['module']->getId());
 
-        // 为表单赋值
-        foreach ((array)$data as $name => $value) {
-            $form['fields'][$name]['_value'] = $value;
-        }
-
-        // 编辑操作下,为只读域增加提示
-        if ('edit' == $options['action']) {
-            if (false !== $db) {
-                foreach ($db['fields'] as $name => $field) {
-                    if ($field['readonly'] && isset($form['fields'][$name])) {
-                        $form['fields'][$name]['readonly'] = 'readonly';
-                        $form['fields'][$name]['_value'] .= '(' . $lang['LBL_READONLY'] . ')';
-                    }
-                }
-            }
-        // 视图操作下,将表单类型换为纯文本.
-        } elseif ('view' == $options['action']) {
+        if ('view' == $options['action']) {
             $defaultForm['_type'] = 'plain';
             foreach ($form['fields'] as $name => $field) {
                 $form['fields'][$name]['_type'] = 'plain';
@@ -166,7 +155,7 @@ class Form_Widget extends Qwin_Widget_Abstract
         
         // 验证代码
         if ($options['validate']) {
-            $this->_Lang->appendByWidget('Validator');
+            $this->_lang->appendByWidget('Validator');
             $validateCode = array(); //$this->getValidateCode($meta, $lang);
         }
         
@@ -177,6 +166,26 @@ class Form_Widget extends Qwin_Widget_Abstract
             require $this->_path . 'view/default.php';
         }
         return $this;
+    }
+    
+    /**
+     * 获取表格栏目的宽度百分比
+     * 
+     * @param array $num 栏目数
+     * @return array
+     */
+    public function getColumnPercent($num)
+    {
+        if (2 == $num) {
+            return array(13.5, 87.5);
+        }
+        $source = array();
+        $source[0] = (float)(100 / ($num * 2));
+        $source[1] = $source[0] * 3;
+        for ($i = 0; $i < $num; $i++) {
+            $percent[] = $source[$i % 2];
+        }
+        return $percent;
     }
 
     /**

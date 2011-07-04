@@ -143,7 +143,7 @@ jQuery(function($){
         click: true,
         focus: true
     });
-    $('table.qw-form-table input:text, table.qw-form-table textarea').qui();
+    $('table.qw-form-table input:text, table.qw-form-table textarea, table.qw-form-table input:password').qui();
 
     // 点击页脚下按钮,回到顶部
     $('#qw-footer-arrow').click(function(){

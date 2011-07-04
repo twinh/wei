@@ -48,7 +48,10 @@ class EditFormAction_Widget extends Qwin_Widget_Abstract
         'asAction'  => 'view',
         'isView'    => true,
         'sanitise'  => array(
-            
+            'view'      => true,
+            'link'      => true,
+            'sanitiser' => 'edit',
+            'hook'      => true,
         ),
         'display'   => true,
     );
@@ -87,10 +90,10 @@ class EditFormAction_Widget extends Qwin_Widget_Abstract
         if (false == $dbData) {
             $result = array(
                 'result' => false,
-                'message' => $this->_Lang['MSG_NO_RECORD'],
+                'message' => $this->_lang['MSG_NO_RECORD'],
             );
             if ($options['display']) {
-                return $this->_View->alert($result['message']);
+                return $this->_view->alert($result['message']);
             } else {
                 return $result;
             }
@@ -99,7 +102,7 @@ class EditFormAction_Widget extends Qwin_Widget_Abstract
 
         // 转换数据
         if ($options['sanitise']) {
-            $data = $meta->sanitise($data, $options['sanitise']);
+            $data = $this->_sanitiser->sanitise($form, $data, $options['sanitise']);
         }
 
         // 返回结果
@@ -111,7 +114,7 @@ class EditFormAction_Widget extends Qwin_Widget_Abstract
         }
         
         /* @var $formWidget Form_Widget */
-        $formWidget = $this->_Form;
+        $formWidget = $this->_form;
         $formOptions = array(
             'meta'      => $meta,
             'form'      => $options['form'],
@@ -120,13 +123,13 @@ class EditFormAction_Widget extends Qwin_Widget_Abstract
             'data'      => $data,
         );
         
-        $view = $this->_View;
+        $view = $this->_view;
         $view->assign(get_defined_vars());
         $view->setElement('content', '<root>com/basic/form<suffix>');
         $view['module'] = $meta->getModule();
         $view['action'] = 'edit';
 
-        $operLinks = Qwin::call('-widget')->get('OperLinks')->render($view);
+        $operLinks = $this->_operLinks->render($view);
         $view['operLinks'] = $operLinks;
     }
 }

@@ -21,9 +21,35 @@
  * @version     $Id$
  * @since       2011-01-03 01:17:46
  *}
+<script type="text/javascript">
+jQuery(function($){
+    qwin.page.tabs.data = {json_encode(${tabs})};
+    qwin.page.tabs.lastId = '{$lastTab}';
+    qwin.page.tabs.init();
+});
+</script>
 {strip}
 <div class="qw-c"></div>
 <div class="qw-tabs-box">
+    <ul id="qw-tabs-oper">
+        <li id="qw-tabs-prev" class="ui-button-none ui-state-default ui-corner-tl">
+            <span class="ui-icon ui-icon-triangle-1-w"></span>
+        </li>
+        <li id="qw-tabs-next" class="ui-button-none ui-state-default">
+            <span class="ui-icon ui-icon-triangle-1-e"></span>
+        </li>
+        <li id="qw-tabs-list" class="ui-button-none ui-state-default">
+            <span class="ui-icon ui-icon-triangle-1-s"></span>
+            <ul class="ui-state-default ui-corner-bottom"></ul>
+        </li>
+        <!-- TODO history <li id="qw-tabs-closed" class="ui-button-none ui-state-default">
+            <span class="ui-icon ui-icon-arrowreturnthick-1-w"></span>
+            <ul class="ui-state-default ui-corner-bottom"></ul>
+        </li> -->
+        <!-- TODO grid <li id="qw-tabs-grid" class="ui-button-none ui-state-default">
+            <span class="ui-icon ui-icon-calculator"></span>
+        </li> -->
+    </ul>
     <ul id="qw-tabs"></ul>
 </div>
 {strip}

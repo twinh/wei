@@ -24,7 +24,7 @@
  * @since       2010-5-25 08:10:46
  */
 
-class Com_Member_Menu_Model extends Com_Model
+class Member_Menu_Model extends Model_Widget
 {
     public function postSave($event)
     {

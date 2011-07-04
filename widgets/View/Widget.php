@@ -233,7 +233,7 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
         '' != $output && ob_end_clean();
 
         $url = Qwin::widget('url');
-        $replace = Qwin_Util_Html::jsTag($url->url('util/minify', 'index', array('g' => $minify->pack('js'))))
+        $replace = Qwin_Util_Html::jsTag($url->url('util/minify', 'index', array('g' => $minify->pack('js')))) . PHP_EOL
                  . Qwin_Util_Html::cssLinkTag($url->url('util/minify', 'index', array('g' => $minify->pack('css'))));
 
         $output = Qwin_Util_String::replaceFirst($this->getPackerSign(), $replace, $output);
@@ -247,13 +247,18 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
      * 
      * @param array $json JSON数组数据
      * @param bool $exit 是否退出 
+     * @todo 是否应该直接输出
      */
     public function displayJson($json, $exit = true)
     {
-         echo json_encode($json);
-         if ($exit) {
-             exit;
-         }
+        if (is_string($json)) {
+            echo $json;
+        } else {
+            echo json_encode($json);
+        }
+        if ($exit) {
+            exit;
+        }
     }
 
     /**

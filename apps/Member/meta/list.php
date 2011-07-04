@@ -42,9 +42,11 @@ return array(
         ),
         'sex' => array(
             'link' => true,
-            'sanitiser' => array(
-                array('Ide_Option_Widget', 'sanitise'),
-                'sex',
+            '_sanitiser' => array(
+                'list' => array(
+                    array('Ide_Option_Widget', 'sanitise'),
+                    'sex',
+                ),
             ),
         ),
     ),

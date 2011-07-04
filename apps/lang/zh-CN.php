@@ -59,7 +59,8 @@ return array(
 
     'LBL_NO' => '无',
     'LBL_PLEASE_SELECT' => '请选择',
-    'LBL_NOT_FILLED' => '<em>(未填写)</em>',
+    'NOT_FILLED_TXT' => '<em>(未填写)</em>',
+    'EMPTY_TXT' => '<em>(空)</em>',
     'MODULE' => '模块',
     
         
