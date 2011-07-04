@@ -49,7 +49,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
         $link = array();
         $data = $view['data'];
         $id = $view['id'];
-        
+
         // 上一记录，下一记录
         if ('edit' == $action || 'view' == $action) {
             $link['next'] = array(
@@ -80,11 +80,9 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
                 'title' => $lang->t('ACT_ADD'),
                 'icon'  => 'ui-icon-plus',
             );
-
         }
 
-        
-        if (isset($data[$id])) {
+        if ('add' != $action) {
             if (!in_array('edit', $unableActions) && method_exists($controller, 'actionEdit')) {
                 $link['edit'] = array(
                     'url'   => $url->url($moduleUrl, 'edit', array($id => $data[$id])),
@@ -130,7 +128,6 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
             'title' => $lang->t('ACT_RETURN'),
             'icon'  => 'ui-icon-arrowthickstop-1-w',
         );
-
         
         // 如果当前行为存在选项卡视图,加载该视图,否则直接输出默认选项卡内容
         $class = $module->getClass() . '_OperLinksWidget';
