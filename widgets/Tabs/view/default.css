@@ -30,27 +30,65 @@ html {
     height: 100%;
 }
 .qw-tabs-box {
-    width: auto;
+    width: 100%;
     border-left :0;
     border-right: 0;
     border-bottom: 0;
     float: left;
     margin-top: 7px;
 }
+#qw-tabs-oper {
+    float: right;
+    margin-top: 7px;
+}
+#qw-tabs-oper li.ui-button-none {
+    padding: 1px;
+    float: left;
+    height:  16px;
+    width:  16px;
+    border-bottom: 0;
+}
+#qw-tabs-list ul {
+    margin-top: 1px;
+    float: left;
+    right: 1px;
+    position: absolute;
+    z-index: 10000;
+    width: 120px;
+    display: none;
+}
+#qw-tabs-list ul li {
+    margin: 2px;
+    padding: 1px;
+    position: relative;
+    font-weight: normal;
+}
+#qw-tabs-list ul li.ui-state-hover {
+    font-weight: bold;
+}
+#qw-tabs-list ul li a {
+    display: block;
+    line-height: 24px;
+    height: 24px;
+    overflow: hidden;
+    text-indent: 6px;
+}
+#qw-tabs-list ul li.qw-tabs-list-current {
+    font-weight: bold;
+}
 #qw-tabs {
     border: 0;
-    z-index: 999;
     white-space: nowrap;
     overflow: hidden;
-    width: 800px;
+/*    width: 800px;*/
     height: 26px;
     background: none;
 }
 #qw-tabs li {
     width: auto;
     float: left;
-    display: inline-table;
     line-height: normal;
+    display: none;
 }
 #qw-tabs li a {
     padding: 5px 16px;
@@ -63,4 +101,5 @@ html {
 .qw-tabs-iframe {
     height: 100%;
     width: 100%;
+    display: none;
 }

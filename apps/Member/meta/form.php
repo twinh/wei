@@ -58,6 +58,10 @@ return array(
         ),
         'password' => array(
             '_type' => 'password',
+            '_onEdit' => array(
+                '_type' => 'text',
+                'readonly' => 'true',
+            ),
             '_sanitiser' => array(
                 'db' => array(
                     'md5'
@@ -93,7 +97,7 @@ return array(
             ),
         ),
         'email' => array(
-            
+
         ),
         'first_name' => array(
             
@@ -129,6 +133,11 @@ return array(
 //    'files' => array(),
     'hidden' => array(
         'id',
+    ),
+    'fieldsets' => array(
+        'basic' => array(
+            
+        ),
     ),
     'layout' => array(
         'GRP_BASIC' => array(

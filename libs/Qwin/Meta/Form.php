@@ -67,11 +67,24 @@ class Qwin_Meta_Form extends Qwin_Meta_Common
     );
     
     /**
+     * @var array               域组默认配置
+     * 
+     *      -- _open            是否打开
+     * 
+     *      -- _show            是否显示
+     */
+    protected $_fieldsetDefaults = array(
+        '_open' => true,
+        '_show' => true,
+    );
+    
+    /**
      * 默认选项
      * @var array
      */
     protected $_defaults = array(
         'fields' => array(),
+        'fieldsets' => array(),
         'layout' => array(),
         'hidden' => array(),
         'topButtons' => false,

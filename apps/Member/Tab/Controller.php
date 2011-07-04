@@ -24,10 +24,61 @@
  */
 
 class Member_Tab_Controller extends Controller_Widget
-{
+{    
     public function actionAdd()
     {
-        //$this->_view->setDisplayed();
-        return false;
+        $request = $this->getRequest();
+        
+        // 未定义Url,返回失败结果
+        if (!$request->post('url')) {
+            return $this->_view->displayJson(array(
+                'result' => false,
+                'message' => '',
+            ));
+        }
+
+        // 未定义标题,使用"无标题"
+        $title = $request->post('title') ? $request->post('title') : $this->_lang['UNTITLED'];
+        
+        $session = $this->getSession();
+        $tabs = (array)$session['tabs'];
+        // 将Url和标题加入Session中
+        $tabs[$request->post('url')] = array(
+            'url' => $request->post('url'),
+            'title' => $title,
+        );
+        $session['tabs'] = $tabs;
+        
+        // 返回结果
+        return $this->_view->displayJson(array(
+            'result' => true,
+        ));
+    }
+    
+    public function actionRemove()
+    {
+        $request = $this->getRequest();
+        $url = $request->post('url');
+
+        // 未定义Url,返回失败结果
+        if (!$url) {
+            return $this->_view->displayJson(array(
+                'result' => false,
+                'message' => '',
+            ));
+        }
+        
+        // 如果存在指定选项卡则删除
+        $session = $this->getSession();
+        $tabs = (array)$session['tabs'];
+        if (isset($tabs[$url])) {
+            unset($tabs[$url]);
+        }
+        $session['tabs'] = $tabs;
+        
+        // 返回结果
+        return $this->_view->displayJson(array(
+            'result' => true,
+        ));
     }
 }

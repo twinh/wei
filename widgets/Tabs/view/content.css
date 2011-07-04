@@ -1,8 +1,7 @@
-<?php
 /**
- * AdminMenu
+ * content
  *
- * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Member
- * @subpackage  Menu
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-05-25 07:59:33
- */
-
-class Member_Menu_Controller extends ActionController_Widget
-{
+ * @since       2011-6-27 16:36:44
+*/
+body {
+    min-width: 0;
 }

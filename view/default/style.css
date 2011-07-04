@@ -10,7 +10,7 @@ body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,fieldset,p,blockquote,input,te
 html {
     overflow-y: scroll;
 }
-body{
+body {
     font-size: 12px;
     margin: 0 auto;
     min-width: 1000px;
@@ -25,13 +25,13 @@ ol,ul,li{
 }
 table {
     border-spacing: 0;
-
 }
 img {
     border: 0;
 }
 a {
     text-decoration: none;
+    outline: 0;
 }
 /* 保持大小一致 */
 .ui-widget, .ui-widget-content {
@@ -49,6 +49,7 @@ a {
 .qw-c {
     clear: both;
 }
+/* TODO 如何命名 */
 .qw-p5 {
     padding: 5px;
 }
@@ -142,6 +143,7 @@ a {
     font-weight: normal;
 }
 #qw-footer-arrow {
+    display: none;
     float: right;
     width: 20px;
     margin: 2px 0 0 2px;

@@ -35,32 +35,46 @@ class Tabs_Widget extends Qwin_Widget_Abstract
                 $this->_path . '/view/empty.php',
             ));
         }
+
+        $session = Qwin::call('-session');
+        $tabs = (array)$session->get('tabs');
+        $url = '?' . $_SERVER['QUERY_STRING'];
+        $lastTab = $session['lastTab'] ? $session['lastTab'] : $url;
         
+        // 检查当前页是否在选项卡中,没有则加入
+        if (!isset($tabs[$url])) {
+            $tabs = array(
+                $url => array(
+                    'url' => $url,
+                    'title' => $this->_lang['MOD_' . Qwin::config('module')->getLang()],
+                ),
+            ) + $tabs;
+        }
+        $session['tabs'] = $tabs;
+
         // 增加Qwin链接
         $url = $this->_url;
-        $menus['qwin'] = array(
-            'title' => $this->_Lang['LBL_QWIN'],
-            'url' => $url->url('com/home', 'index'),
-        );
         
-        // 页面名称
-        $queryString = empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING'];
-        $pageUrl = basename($_SERVER['PHP_SELF']) . $queryString;
-
         $minify = $this->_widget->get('Minify');
         $minify->addArray(array(
             $this->_path . 'view/default.css',
             $this->_path . 'view/default.js',
             $this->_jQuery->loadPlugin('tmpl', false),
+            $this->_jQuery->loadUi('mouse'),
+            $this->_jQuery->loadUi('sortable'),
         ));
         
         $smarty = $this->_widget->get('Smarty')->getObject();
-        $smarty->assign('menus', $menus);
+        $smarty->assign('tabs', $tabs);
+        $smarty->assign('lastTab', $lastTab);
         $smarty->display($this->_path . 'view/default.tpl');
     }
     
     public function renderContent($options = null)
     {
-        $this->_minify->add($this->_path . 'view/content.js');
+        $this->_minify->addArray(array(
+            $this->_path . 'view/content.js',
+            $this->_path . 'view/content.css',
+        ));
     }
 }

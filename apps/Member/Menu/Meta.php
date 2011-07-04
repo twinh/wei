@@ -24,7 +24,7 @@
  * @since       2010-05-25 08:00:36
  */
 
-class Com_Member_Menu_Meta extends Com_Meta
+class Member_Menu_Meta extends Meta_Widget
 {
     public function setMeta()
     {
