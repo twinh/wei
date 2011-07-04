@@ -61,6 +61,9 @@ return array(
         ),
         'password' => array(
             '_type' => 'password',
+            '_onAdd' => array(
+                '_value' => '',
+            ),
             '_onEdit' => array(
                 '_type' => 'text',
                 'readonly' => 'true',
