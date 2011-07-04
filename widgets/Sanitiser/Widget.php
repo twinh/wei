@@ -91,23 +91,26 @@ class Sanitiser_Widget extends Qwin_Widget_Abstract
             $lang = Qwin::call('-widget')->get('lang');
         }
         
-        // 转换关联模块的显示域
-        if ($options['relation']) {
-            foreach ((array)$parentMeta->offsetLoad('meta') as $relatedMeta) {
-                if ('view' != $relatedMeta['type']) {
-                    continue;
-                }
-                foreach ($relatedMeta['fieldMap'] as $localField => $foreignField) {
-                    if (isset($dataCopy[$relatedMeta['alias']][$foreignField])) {
-                        $data[$localField] = $dataCopy[$relatedMeta['alias']][$foreignField];
+        $relationData = array();
+        
+        foreach ($data as $name => $value) {
+            // 转换关联数据
+            if ($options['relation'] && isset($meta['fields'][$name]['_relation'])) {
+                $realation = &$meta['fields'][$name]['_relation'];
+                if (!isset($relationData[$name])) {
+                    $relationData[$name] = array();
+                    $dbData = Meta_Widget::getByModule($realation['module'])->get('db')->getQuery()
+                        ->select($realation['field'] . ', ' . $realation['display'])
+                        ->execute();
+                    foreach ($dbData as $row) {
+                        $relationData[$name][$row[$realation['field']]] = $row[$realation['display']];
                     }
-                    // else throw exception ?
-                    //!isset($data[$model['alias']][$foreignField]) && $data[$model['alias']][$foreignField] = '';
+                }
+                if (isset($relationData[$name][$value])) {
+                    $data[$name] = $relationData[$name][$value];
                 }
             }
-        }
-
-        foreach ($data as $name => $value) {
+            
             if ($options['null']) {
                 if ('NULL' === $data[$name] || '' === $data[$name]) {
                     $data[$name] = null;

@@ -1,8 +1,9 @@
 <?php
+
 /**
- * Group
+ * Widget
  *
- * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +17,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Com
- * @subpackage  Member
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-07-15 15:51:02
+ * @since       2011-7-5 1:18:32
  */
 
-class Member_Group_Model extends Model_Widget
+class Query_Widget extends Qwin_Widget_Abstract
 {
+    
 }

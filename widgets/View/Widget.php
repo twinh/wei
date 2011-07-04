@@ -23,6 +23,7 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2010-08-06 19:25:40
+ * @todo        错误与视图
  */
 
 class View_Widget extends ArrayObject implements Qwin_Widget_Interface

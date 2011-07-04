@@ -31,14 +31,21 @@ return array(
         'group_id' => array(
             '_link' => true,
             '_type' => 'select',
-//                '_resourceGetter' => array(
-//                    array('Com_Category_Widget', 'get'),
-//                    array(
-//                        'com/member/group',
-//                        null,
-//                        array('id', null, 'name'),
-//                    ),
-//                ),
+            '_realation' => array(
+                'module' => 'member/group',
+                'field' => 'id',
+                // TODO 完善转换类型
+                // 1. field name
+                // 2. format field name
+                // 3. callback
+                'display' => 'name',
+                // TODO 完善条件查询
+                'criteria' => array(),
+                // TODO 排序
+                'order' => array(),
+                // TODO 只加载一次
+                'loaded' => false,
+            ),
             '_sanitiser' => array(
                 array('Com_Category_Widget', 'sanitise'),
                 array(

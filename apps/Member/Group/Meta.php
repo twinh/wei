@@ -25,9 +25,9 @@
  * @since       2010-07-15 14:49:16
  */
 
-class Com_Member_Group_Meta extends Com_Meta
+class Member_Group_Meta extends Meta_Widget
 {
-    public function setMeta()
+    public function _setMeta()
     {
         $this->setCommonMeta();
         $this->merge(array(

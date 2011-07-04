@@ -33,7 +33,9 @@ jQuery(function($){
     
     // TODO 如何不影响输入框的数据
     $('form.qw-form input[readonly], form.qw-form textarea[readonly]').each(function(){
-        $(this).val($(this).val() + '(' + qwin.lang.LBL_READONLY + ')');
+        $(this)
+            .attr('autocomplete', 'off')
+            .val($(this).val() + '(' + qwin.lang.LBL_READONLY + ')');
     });
     $('div.qw-icon-common a').qui();
 
