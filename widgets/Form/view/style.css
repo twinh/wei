@@ -19,7 +19,7 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-6-11, 20:21:51
+ * @since       2011-06-11 20:21:51
  */
 .qw-form {
     width: auto;
@@ -44,16 +44,16 @@
 .cke_editor .cke_contents fieldset {
     margin: 0;
 }
-.qw-form-table{
+.qw-form-table {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
     margin: 2px 0 20px;
 }
-.qw-form-table td{
-    padding: 2px;
+.qw-form-table td {
+    padding: 1px;
     font-weight: normal;
-    line-height: 20px;
+    line-height: 28px;
 }
 .qw-form-table .qw-label-common{
     text-align: right;

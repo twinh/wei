@@ -42,12 +42,11 @@ class ViewAction_Widget extends Qwin_Widget_Abstract
         'db'        => 'db',
         'id'        => null,
         'sanitise'  => array(
-            'notFilled'     => true,
+            'nullTxt'       => true,
+            'emptyTxt'      => true,
+            'sanitiser'     => true,
             'sanitise'      => true,
-            'hook'          => true,
-            'link'          => true,
             'action'        => 'view',
-            'null'          => true,
         ),
         'display'   => true,
     );
@@ -86,10 +85,10 @@ class ViewAction_Widget extends Qwin_Widget_Abstract
         if (false == $dbData) {
             $result = array(
                 'result' => false,
-                'message' => $this->_Lang['MSG_NO_RECORD'],
+                'message' => $this->_lang['MSG_NO_RECORD'],
             );
             if ($options['display']) {
-                return $this->_View->alert($result['message']);
+                return $this->_view->alert($result['message']);
             } else {
                 return $result;
             }
@@ -98,7 +97,7 @@ class ViewAction_Widget extends Qwin_Widget_Abstract
 
         // 转换数据
         if ($options['sanitise']) {
-            $data = $form->sanitise($data, $options['sanitise']);
+            $data = $this->_sanitiser->sanitise($form, $data, $options['sanitise']);
         }
         Qwin::call('-hook')->call('ViewRecord', array(
             'meta' => $meta,

@@ -29,8 +29,12 @@
  */
 var validateCode = new Array();
 jQuery(function($){
-    $('table.qw-form-table input, table.qw-form-table textarea, table.qw-form-table select').addClass('ui-widget-content ui-corner-all');
-
+    $('form.qw-form input, form.qw-form textarea, form.qw-form select').addClass('ui-widget-content ui-corner-all');
+    
+    // TODO 如何不影响输入框的数据
+    $('form.qw-form input[readonly], form.qw-form textarea[readonly]').each(function(){
+        $(this).val($(this).val() + '(' + qwin.lang.LBL_READONLY + ')');
+    });
     $('div.qw-icon-common a').qui();
 
     $('fieldset > legend').click(function(){

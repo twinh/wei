@@ -49,6 +49,9 @@ return array(
             ),
         ),
         'username' => array(
+            '_onEdit' => array(
+                'readonly' => 'true',
+            ),
             '_validator' => array(
                 'rule' => array(
                     'required' => true,
@@ -79,7 +82,10 @@ return array(
                     array('Ide_Option_Widget', 'sanitise'),
                     'sex',
                 ),
-                'view' => 'list',
+                'view' => array(
+                    array('Ide_Option_Widget', 'sanitise'),
+                    'sex',
+                ),
             ),
         ),
         'birthday' => array(
@@ -143,8 +149,8 @@ return array(
         'GRP_BASIC' => array(
             array('group_id'),
             array('username'),
-            array('email'),
             array('password'),
+            array('email'),
             array('first_name'),
             array('last_name'),
             array('sex'),
