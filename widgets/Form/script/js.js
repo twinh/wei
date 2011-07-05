@@ -31,7 +31,7 @@ var validateCode = new Array();
 jQuery(function($){
     $('form.qw-form input, form.qw-form textarea, form.qw-form select').addClass('ui-widget-content ui-corner-all');
     
-    // TODO 如何不影响输入框的数据
+    // TODO 如何不影响输入框的数据,如使用锁的图标表示只读
     $('form.qw-form input[readonly], form.qw-form textarea[readonly]').each(function(){
         $(this)
             .attr('autocomplete', 'off')
