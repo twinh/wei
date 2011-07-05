@@ -138,6 +138,7 @@ class Form_Widget extends Qwin_Widget_Abstract
                 }
             }
         }
+        unset($fieldset, $fields);
 
         // 默认表单配置
         $lang = $this->_lang;
