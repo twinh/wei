@@ -73,8 +73,9 @@ class AddFormAction_Widget extends Qwin_Widget_Abstract
         $copyRecordData = array();
         if (!is_null($options['id'])) {
             // 从模型获取数据
-            $query = $db->getQuery()
-                ->where($db['id'] . ' = ?', $options['id']);
+            $query = Query_Widget::getByMeta($db)
+                ->leftJoinByType(array('db', 'view'))
+                ->where($id . ' = ?', $options['id']);
             $result = $query->fetchOne();
             if (false !== $result) {
                 // 删除null值
