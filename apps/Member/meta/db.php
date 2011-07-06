@@ -120,7 +120,7 @@ return array(
         'group' => array(
             'module'    => 'member/group',
             'alias'     => 'group',
-            'meta'      => 'db',
+            'db'        => 'db',
             'relation'  => 'hasOne',
             'local'     => 'group_id',
             'foreign'   => 'id',
