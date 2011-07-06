@@ -95,7 +95,7 @@ class Sanitiser_Widget extends Qwin_Widget_Abstract
         
         foreach ($data as $name => $value) {
             // 转换关联数据
-            if ($options['relation'] && isset($meta['fields'][$name]['_relation'])) {
+            /*if ($options['relation'] && isset($meta['fields'][$name]['_relation'])) {
                 $realation = &$meta['fields'][$name]['_relation'];
                 if (!isset($relationData[$name])) {
                     $relationData[$name] = array();
@@ -109,7 +109,7 @@ class Sanitiser_Widget extends Qwin_Widget_Abstract
                 if (isset($relationData[$name][$value])) {
                     $data[$name] = $relationData[$name][$value];
                 }
-            }
+            }*/
             
             if ($options['null']) {
                 if ('NULL' === $data[$name] || '' === $data[$name]) {

@@ -52,6 +52,7 @@ class Model_Widget extends Doctrine_Record implements Qwin_Widget_Interface
      */
     protected static function _connect()
     {
+        // TODO 配置应该更规范
         if (!self::$_connected) {
             $manager = Doctrine_Manager::getInstance();
             $config = Qwin::config();
@@ -72,7 +73,7 @@ class Model_Widget extends Doctrine_Record implements Qwin_Widget_Interface
             // 设置字段查询带引号
             $conn->setAttribute(Doctrine_Core::ATTR_QUOTE_IDENTIFIER, true);
 
-            // 设置表前缀
+            // 设置表格式
             $manager->setAttribute(Doctrine_Core::ATTR_TBLNAME_FORMAT, $db['prefix'] . '%s');
 
             // 设置字符集
@@ -94,7 +95,7 @@ class Model_Widget extends Doctrine_Record implements Qwin_Widget_Interface
     public static function getByModule($module, $instanced = true)
     {
         if ($module instanceof Qwin_Module) {
-            $class = $module->toClass();
+            $class = $module->getClass();
         } else {
             $class = Qwin_Module::instance($module)->getClass();
         }

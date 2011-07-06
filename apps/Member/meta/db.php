@@ -112,7 +112,21 @@ return array(
             
         ),
     ),
+    'uid' => 'db',
     'id' => 'id',
     'table' => 'member',
-    'mainField' => 'username'
+    'mainField' => 'username',
+    'relations' => array(
+        'group' => array(
+            'module'    => 'member/group',
+            'alias'     => 'group',
+            'meta'      => 'db',
+            'relation'  => 'hasOne',
+            'local'     => 'group_id',
+            'foreign'   => 'id',
+            'type'      => 'db',
+            'fieldMap'  => array(), // ?是否仍需要
+            'enabled'   => true,
+        ),
+    ),
 );

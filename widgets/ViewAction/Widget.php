@@ -77,7 +77,9 @@ class ViewAction_Widget extends Qwin_Widget_Abstract
 
         // 从模型获取数据
         $id = $db['id'];
-        $query = $db->getQueryByType(null, array('db', 'view'))
+        $query = // 从模型获取数据
+        $query = Query_Widget::getByMeta($db)
+            ->leftJoinByType(array('db', 'view'))
             ->where($id . ' = ?', $options['id']);
         $dbData = $query->fetchOne();
 

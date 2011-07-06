@@ -57,11 +57,11 @@ class JsonListAction_Widget extends Qwin_Widget_Abstract
         'page'      => null,
         'row'       => null,
         'sanitise'  => array(
-            'nullTxt'       => true,
-            'sanitiser'     => true,
-            'sanitise'      => true,
-            'action'        => 'list',
-            'relation'     => true,
+            'nullTxt'   => true,
+            'sanitiser' => true,
+            'sanitise'  => true,
+            'action'    => 'list',
+            'relation'  => true,
         ),
         'display'   => true,
     );
@@ -97,10 +97,10 @@ class JsonListAction_Widget extends Qwin_Widget_Abstract
         // 处理页数
         $options['page'] = (int)$options['page'];
         $options['page'] <= 0 && $options['page'] = 1;
-
-        // TODO DbData_Widget
+        
         // 从模型获取数据
-        $query = $db->getQueryByType(null, array('db', 'view'))
+        $query = Query_Widget::getByMeta($db)
+            ->leftJoinByType(array('db', 'view'))
             ->addRawSelect($db)
             ->addRawWhere($db, $options['search'])
             ->addRawOrder($db, $options['order'])
@@ -130,7 +130,7 @@ class JsonListAction_Widget extends Qwin_Widget_Abstract
         }
 
         // 通过jqGrid微件获取数据
-        $json = $this->_JqGrid->renderJson(array(
+        $json = $this->_jqGrid->renderJson(array(
             'list'          => $list,
             'data'          => $data,
             'layout'        => $options['layout'],
