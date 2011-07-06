@@ -54,8 +54,11 @@ class AddAction_Widget extends Qwin_Widget_Abstract
 
         // 记录已经存在,加载错误视图
         if (isset($data[$id])) {
-            $query = $meta->getQuery(null, array('type' => 'db'));
-            $dbData = $query->where($primaryKey . ' = ?', $data[$id])->fetchOne();
+            // 从模型获取数据
+            $query = Query_Widget::getByMeta($db)
+                ->leftJoinByType(array('db', 'view'))
+                ->where($id . ' = ?', $data['id']);
+            $dbData = $query->fetchOne();
             if(false !== $result) {
                 $lang = Qwin::call('-lang');
                 $result = array(
