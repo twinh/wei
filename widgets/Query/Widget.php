@@ -92,14 +92,11 @@ class Query_Widget extends Doctrine_Query implements Qwin_Widget_Interface
     public static function getByMeta(Qwin_Meta_Db $meta)
     {
         $parentMeta = $meta->getParent();
-        
+
         // 获取记录对象
-        $recordClass = Model_Widget::getByModule($parentMeta['module'], false);
+        $recordClass = Record_Widget::getByModule($parentMeta['module'], $meta['uid'], false);
         $record = Qwin::call($recordClass);
-        
-        // 将数据库配置加入记录配置中
-        self::metaToRecord($meta, $record);
-        
+                
         // 根据别名和索引构建DQL的from语句
         $from = $recordClass;
         if ($meta['alias']) {
@@ -130,7 +127,6 @@ class Query_Widget extends Doctrine_Query implements Qwin_Widget_Interface
         $types = is_array($type) ? $type : array($type);
         foreach ($this->_meta['relations'] as $alias => $relation) {
             if (in_array($relation['type'], $types)) {
-                $this->setRelation($relation);
                 $this->leftJoin($this->getRootAlias() . '.' . $alias . ' ' . $alias);
             }
         }
@@ -144,81 +140,11 @@ class Query_Widget extends Doctrine_Query implements Qwin_Widget_Interface
             if (!isset($this->_meta['relations'][$alias])) {
                 throw new Qwin_Widget_Exception('Undefined relation "' . $alias . '"');
             }
-            $this->setRelation($this->_meta['relations'][$alias]);
             $this->leftJoin($this->getRootAlias() . '.' . $alias . ' ' . $alias);
         }
         return $this;
     }
     
-    public function setRelation($relation)
-    {
-        // 初始化记录和元数据
-        $record = Model_Widget::getByModule($relation['module']);
-        $meta = Meta_Widget::getByModule($relation['module'])->get($relation['meta']);
-
-        self::metaToRecord($meta, $record);
-
-        // 设置模型关系
-        call_user_func(
-            array($this->_record, $relation['relation']),
-            get_class($record) . ' as ' . $relation['alias'],
-            array(
-                'local' => $relation['local'],
-                'foreign' => $relation['foreign']
-            )
-        );
-        
-        return $this;
-    }
-    
-    public function leftJoinByName($name)
-    {
-        return $this->leftJoinByAlias($name);
-    }
-    
-    /**
-     * 将数据库元数据的域定义,数据表定义加入模型中
-     * 
-     * @param Qwin_Meta_Db $meta 数据库元数据对象
-     * @param Doctrine_Record $record Doctrine记录对象
-     */
-    public static function metaToRecord(Qwin_Meta_Db $meta, Doctrine_Record $record)
-    {
-        // 设置数据表
-        $record->setTableName($meta['table']);
-
-        // 设置字段
-        foreach ($meta['fields'] as $name => $field) {
-            if ($field['dbField'] && $field['dbQuery']) {
-                $record->hasColumn($name);
-            }
-        }
-        
-        // 重新初始化记录,否则Doctrine将提示属性或关联组件不存在
-        // TODO 是否有更合适的方法
-        $record->__construct();
-    }
-    
-    public static function getRecordByModule()
-    {
-        
-    }
-    
-    public static function getRecordByMeta()
-    {
-        
-    }
-    
-    
-    
-
-    public static function getRecordByModule($module)
-    {
-        $meta = self::getByModule($module);
-        $record = Com_Model::getByModule($module);
-        return $meta->getReord($record);
-    }
-
     /**
      * 获取元数据对应的记录对象
      *
@@ -246,33 +172,6 @@ class Query_Widget extends Doctrine_Query implements Qwin_Widget_Interface
         }
 
         return $record;
-    }
-    
-    /**
-     * 设置模型间的关联关系
-     *
-     * @param Doctrine_Record $record 记录对象
-     * @param array $meta2 关联配置
-     * @return Com_Meta 当前对象
-     */
-    public function setRecordRelation(Doctrine_Record $record, array $meta2)
-    {
-        $meta2Object = Com_Model::getByModule($meta2['module']);
-        $name = get_class($meta2Object);
-
-        $metaObject = self::getByModule($meta2['module']);
-        $metaObject->toRecord($meta2Object);
-
-        // 设置模型关系
-        call_user_func(
-            array($record, $meta2['relation']),
-            $name . ' as ' . $meta2['alias'],
-            array(
-                'local' => $meta2['local'],
-                'foreign' => $meta2['foreign']
-            )
-        );
-        return $this;
     }
 
     /**
