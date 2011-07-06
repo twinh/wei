@@ -51,6 +51,22 @@ class Form_Widget extends Qwin_Widget_Abstract
     );
     
     /**
+     * 表单元素类型
+     * @var array
+     */
+    protected $_elementTypes = array(
+        'text'      => true,
+        'textarea'  => true,
+        'hidden'    => true,
+        'select'    => true,
+        'password'  => true,
+        'checkbox'  => true,
+        'radio'     => true,
+        'file'      => true,
+        'plain'     => true,
+    );
+    
+    /**
      * 操作名称数组,不同操作下,根据表单的配置,显示不同的数据
      * 
      * @var array
@@ -71,6 +87,12 @@ class Form_Widget extends Qwin_Widget_Abstract
     );
     
     /**
+     * 最近一次执行render保存的表单元数据
+     * @var Qwin_Meta_Form
+     */
+    protected $_form;
+    
+    /**
      * 生成属性字符串
      *
      * @param array $options 属性数组,键名表示属性名称,值表示属性值
@@ -80,7 +102,9 @@ class Form_Widget extends Qwin_Widget_Abstract
     {
         $attr = '';
         foreach ($options as $name => $value) {
-            $attr .= $name . '="' . htmlspecialchars((string)$value) . '" ';
+            if (!isset($name[0]) || '_' !== $name[0]) {
+                $attr .= $name . '="' . htmlspecialchars((string)$value) . '" ';
+            }
         }
         return $attr;
     }
@@ -94,8 +118,8 @@ class Form_Widget extends Qwin_Widget_Abstract
      */
     public function render($options = null)
     {
-        // 初始配置
-        $options = (array)$options + $this->_options;
+        // 合并选项
+        $options = $this->_options = (array)$options + $this->_options;
         
         // 检查元数据是否合法
         /* @var $meta Meta_Widget */
@@ -109,11 +133,21 @@ class Form_Widget extends Qwin_Widget_Abstract
         if (!($form = $meta->offsetLoad($options['form'], 'form'))) {
             throw new Qwin_Widget_Exception('ERR_FROM_META_NOT_FOUND');
         }
-        
-        foreach ($form['fields'] as $name => $field) {
+        // 保存表单元数据
+        $this->_form = $form;
+
+        foreach ($form['fields'] as $name => &$field) {
             // 为表单赋值
             if (array_key_exists($name, $options['data'])) {
                 $field['_value'] = $options['data'][$name];
+            }
+            
+            // 将关联转换为资源
+            if ('view' != $options['action']) {
+                if (isset($field['_relation']) && !$field['_relation']['loaded']) {
+                    $field['_resouce'] = $this->relationToResource($field['_relation']);
+                    $field['_relation']['loaded'] = true;
+                }
             }
             
             // 根据操作动态调整表单元数据
@@ -121,9 +155,8 @@ class Form_Widget extends Qwin_Widget_Abstract
             if (isset($field[$action])) {
                 $field = $field[$action] + $field;
             }
-
-            $form['fields'][$name] = $field;
         }
+        unset($field);
         
         // 删除多余或补全缺少的数据
         foreach ($form['layout'] as &$fieldset) {
@@ -160,12 +193,13 @@ class Form_Widget extends Qwin_Widget_Abstract
             $validateCode = array(); //$this->getValidateCode($meta, $lang);
         }
         
+        // 加载视图文件
         $file = $this->_path . 'view/' . $options['view'];
-        if (is_file($file)) {
-            require $file;
-        } else {
-            require $this->_path . 'view/default.php';
+        if (!is_file($file)) {
+            throw new Qwin_Widget_Exception('File "' . $file . '" not found.');
         }
+        require $file;
+        
         return $this;
     }
     
@@ -188,6 +222,27 @@ class Form_Widget extends Qwin_Widget_Abstract
         }
         return $percent;
     }
+    
+    /**
+     * 将关联转换为资源
+     * 
+     * @param array $relation 关联数组
+     * @return array
+     */
+    public function relationToResource($relation)
+    {
+        $dbData = Query_Widget::getByModule($relation['module'], $relation['db'])
+            ->select($relation['field'] . ', ' . $relation['display'])
+            ->execute();
+        $resource = array();
+        foreach ($dbData as $data) {
+            $resource[$data[$relation['field']]] = array(
+                'name' => $data[$relation['display']],
+                'value' => $data[$relation['field']],
+            );
+        }
+        return $resource;
+    }
 
     /**
      * 生成表单元素的Html代码
@@ -200,79 +255,30 @@ class Form_Widget extends Qwin_Widget_Abstract
     {
         $options = $options + $this->_elementoptions;
         
+        // 检查表单元素类型是否合法
+        $options['_type'] = strtolower($options['_type']);
+        if (!isset($this->_elementTypes[$options['_type']])) {
+            throw new Qwin_Widget_Exception('Form element type "' . $options['_type'] . '" invalid.');
+        }
+        
         // 假如设定了第二个参数，将作为表单的值
         $params = func_get_args();
         if (array_key_exists(1, $params)) {
             $options['_value'] = $params[1];
         }
-
-        $public = array();
-        $private = array();
-
-        // 分出公有和私有属性
-        foreach ($options as $name => $value) {
-            if (isset($name[0]) && '_' == $name[0]) {
-                $private[$name] = $value;
-            } else {
-                $public[$name] = $value;
-            }
-        }
-
-        // TODO 应该在元数据中转换,避免重复执行
-        //$set['id'] = preg_replace("/(\w*)\[(\w+)\]/", "$1-$2", $set['name']);
-        /*if (isset($private['_realation'])) {
-            $realation = &$private['_realation'];
-            $dbData = Meta_Widget::getByModule($realation['module'])->get('db')->getQuery()
-                ->select($realation['field'] . ', ' . $realation['display'])
-                ->execute();
-            $private['_resource'] = array();
-            foreach ($dbData as $key => $row) {
-                $private['_resource'][$row[$realation['field']]] = array(
-                    'name' => $row[$realation['display']],
-                    'value' => $row[$realation['field']],
-                );
-            }
-        }*/
         
+        // 处理关联关系的资源
+        if (isset($options['_relation']) && !$options['_relation']['loaded']) {
+            $options['_resource'] = $this->relationToResource($options['_relation']);
+        // 处理回调方法的资源
+        } elseif (isset($options['_resourceGetter'])) {          
+            $options['_resource'] = Qwin::call('-flow')->callOne($options['_resourceGetter']);
+        }
         
-        // 转换资源
-        if (isset($private['_resourceGetter'])) {          
-            $private['_resource'] = Qwin::call('-flow')->callOne($private['_resourceGetter']);
-        }
-
-        // TODO 更高效的方法
-        // 根据类型,生成代码
-        switch ($private['_type']) {
-            case 'text' :
-                return $this->renderText($public, $private);
-
-            case 'textarea' :
-                return $this->renderTextarea($public, $private);
-
-            case 'hidden' :
-                return $this->renderHidden($public, $private);
-
-            case 'select' :
-                return $this->renderSelect($public, $private);
-
-            case 'password' :
-                return $this->renderPassword($public, $private);
-
-            case 'checkbox' :
-                return $this->renderCheckbox($public, $private);
-
-            case 'radio' :
-                return $this->renderRadio($public, $private);
-
-            case 'file' :
-                return $this->renderFile($public, $private);
-                
-            case 'plain' :
-                return $this->renderPlain($public, $private);
-
-            default :
-                return '';
-        }
+        return call_user_func_array(
+            array($this, 'render' . $options['_type']),
+            array($options)
+        );
     }
 
     /**
@@ -310,112 +316,104 @@ class Form_Widget extends Qwin_Widget_Abstract
 
     /**
      * 生成纯文本域
-     *
-     * @param array $public 公有的属性
-     * @param array $private 私有的配置
-     * @return string 文本数据
+     * 
+     * @param array $options 选项
+     * @return string 
      */
-    public function renderPlain($public, $private)
+    public function renderPlain($options)
     {
-        return $private['_value'];
+        return $options['_value'];
     }
 
     /**
-     * 生成输入域
-     *
-     * @param string $type 输入域的类型,一般有text,hidden,file等
-     * @param array $public 公有的属性
-     * @return string 表单数据
+     * 生成输入域,一般有text,hidden,file等
+     * 
+     * @param array $options 选项
+     * @return string 
      */
-    public function renderInput($type, array $public, array $private = null)
+    public function renderInput($options)
     {
-        $public['type'] = $type;
-        $public['value'] = $private['_value'];
-        return '<input ' . $this->renderAttr($public) . '/>';
+        $options['type'] = $options['_type'];
+        $options['value'] = $options['_value'];
+        return '<input ' . $this->renderAttr($options) . '/>';
     }
 
     /**
      * 生成文本域
-     *
-     * @param array $public 公有的属性
-     * @param array $private 私有的配置
-     * @return string 表单数据
+     * 
+     * @param array $options 选项
+     * @return string 
      */
-    public function renderText(array $public, array $private = null)
+    public function renderText($options)
     {
-        return $this->renderInput('text', $public, $private);
+        return $this->renderInput($options);
     }
 
     /**
      * 生成文件域
-     *
-     * @param array $public 公有的属性
-     * @param array $private 私有的配置
-     * @return string 表单数据
+     * 
+     * @param array $options 选项
+     * @return string 
      */
-    public function renderFile(array $public, array $private = null)
+    public function renderFile($options)
     {
-        return $this->renderInput('file', $public, $private);
+        return $this->renderInput($options);
     }
 
     /**
      * 生成密码域
-     *
-     * @param array $public 公有的属性
-     * @param array $private 私有的配置
-     * @return string 表单数据
+     * 
+     * @param array $options 选项
+     * @return string 
      */
-    public function renderPassword(array $public, array $private = null)
+    public function renderPassword($options)
     {
-        return $this->renderInput('password', $public, $private);
+        return $this->renderInput($options);
     }
 
     /**
      * 生成隐藏域
-     *
-     * @param array $public 公有的属性
-     * @param array $private 私有的配置
-     * @return string 表单数据
+     * 
+     * @param array $options 选项
+     * @return string 
      */
-    public function renderHidden(array $public, array $private = null)
+    public function renderHidden($options)
     {
-        return $this->renderInput('hidden', $public, $private);
+        return $this->renderInput($options);
     }
 
     /**
      * 生成多行文本域
-     *
-     * @param array $public 公有的属性
-     * @param array $private 私有的配置
-     * @return string 表单数据
+     * 
+     * @param array $options 选项
+     * @return string 
      */
-    public function renderTextarea(array $public, array $private = null)
+    public function renderTextarea($options)
     {
-        return '<textarea ' . $this->renderAttr($public) . '>' . $private['_value'] . '</textarea>';
+        return '<textarea ' . $this->renderAttr($options) . '>' . $options['_value'] . '</textarea>';
     }
 
     /**
      * 生成多选按钮
-     *
-     * @param array $public 公有的属性
-     * @param array $private 私有的配置
-     * @return string 表单数据
+     * 
+     * @param array $options 选项
+     * @return string 
      */
-    public function renderCheckbox(array $public, array $private = null)
+    public function renderCheckbox($options)
     {
-        $value = is_array($private['_value']) ? $private['_value'] : explode('|', $private['_value']);
-        $public['name'] .= '[]';
+        $value = is_array($options['_value']) ? $options['_value'] : explode('|', $options['_value']);
+        $options['name'] .= '[]';
         $i = 0;
         $data = '';
-        foreach ($private['_resource'] as $options) {
+        foreach ($options['_resource'] as $opts) {
             // 转换资源
-            $resource = $this->filterResource($private['_resource']);
+            $resource = $this->filterResource($options['_resource']);
 
-            $attr = $public;
+            $attr = $options;
             $attr['id'] .= '-' . $i;
             $htmlAttr = $this->renderAttr($attr);
-            $isChecked = in_array($options['value'], $value) ? ' checked="checked" ' : '';
-            $data .= '<input type="checkbox" ' . $htmlAttr . $isChecked . '/><label for="' . $attr['id'] . '"' . $this->filterOptionStyle($options) . '>' . $options['name'] . '</label>';
+            $isChecked = in_array($opts['value'], $value) ? ' checked="checked" ' : '';
+            $data .= '<input type="checkbox" ' . $htmlAttr . $isChecked . '/><label for="' . $attr['id'] . '"' . $this->filterOptionStyle($opts) . '>' . $opts['name'] . '</label>';
             $i++;
         }
         return $data;
@@ -423,25 +421,24 @@ class Form_Widget extends Qwin_Widget_Abstract
 
     /**
      * 生成单选按钮
-     *
-     * @param array $public 公有的属性
-     * @param array $private 私有的配置
-     * @return string 表单数据
+     * 
+     * @param array $options 选项
+     * @return string 
      */
-    public function renderRadio(array $public, array $private = null)
+    public function renderRadio($options)
     {
-        $value = $private['_value'];
+        $value = $options['_value'];
         $i = 0;
         $data = '';
-        foreach ($private['_resource'] as $options) {
+        foreach ($options['_resource'] as $opts) {
             // 转换资源
-            $resource = $this->filterResource($private['_resource']);
+            $resource = $this->filterResource($options['_resource']);
             
-            $attr = $public;
+            $attr = $options;
             $attr['id'] .= '-' . $i;
             $htmlAttr = $this->renderAttr($attr);
-            $isChecked = $value == $options['value'] ? ' checked="checked" ' : '';
-            $data .= '<input type="radio" ' . $htmlAttr . $isChecked . '/><label for="' . $attr['id'] . '"' . $this->filterOptionStyle($options) . '>' . $options['name'] . '</label>';
+            $isChecked = $value == $opts['value'] ? ' checked="checked" ' : '';
+            $data .= '<input type="radio" ' . $htmlAttr . $isChecked . '/><label for="' . $attr['id'] . '"' . $this->filterOptionStyle($opts) . '>' . $opts['name'] . '</label>';
             $i++;
         }
         return $data;
@@ -449,35 +446,34 @@ class Form_Widget extends Qwin_Widget_Abstract
 
     /**
      * 生成选择列表
-     *
-     * @param array $public 公有的属性
-     * @param array $private 私有的配置
-     * @return string 表单数据
-     * @todo 0 和 '' 的区分等
+     * 
+     * @param array $options 选项
+     * @return string
+     * @todo 0 和 '' 的区分等 
      */
-    public function renderSelect($public, $private)
+    public function renderSelect($options)
     {
-        $value = $private['_value'];
-        $attr = $this->renderAttr($public);
+        $value = $options['_value'];
+        $attr = $this->renderAttr($options);
         $data = '<select ' . $attr . '>';
         $isUsed = false;
-        if (isset($private['_resource'])) {
+        if (isset($options['_resource'])) {
             // 转换资源
-            $resource = $this->filterResource($private['_resource']);
+            $resource = $this->filterResource($options['_resource']);
             if ($this->_options['addSelect']) {
                 $this->_options['select']['name'] = $this->_lang[$this->_options['select']['name']];
                 $resource = array(
                     $this->_options['select']
                 ) + $resource;
             }
-            foreach($resource as $options) {
-                if(false == $isUsed && $value == $options['value']) {
+            foreach($resource as $opts) {
+                if(false == $isUsed && $value == $opts['value']) {
                     $isUsed = true;
                     $isSelected = ' selected="selected" ';
                 } else {
                     $isSelected = '';
                 }
-                $data .= '<option' . $this->filterOptionStyle($options) . ' value="' . $options['value'] . '"' . $isSelected . '>' . $options['name'] . '</option>';
+                $data .= '<option' . $this->filterOptionStyle($opts) . ' value="' . $opts['value'] . '"' . $isSelected . '>' . $opts['name'] . '</option>';
             }
         }
         $data .= '</select>';
