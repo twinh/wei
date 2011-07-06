@@ -182,7 +182,7 @@ class Query_Widget extends Doctrine_Query implements Qwin_Widget_Interface
      * @return Com_Meta 当前对象
      * @todo 关联元数据的排序
      */
-    public function addRawOrder(Qwin_Meta_Db $db, $order = null)
+    public function addRawOrder($order = null)
     {
         if (empty($order)) {
             return $this;
@@ -202,7 +202,7 @@ class Query_Widget extends Doctrine_Query implements Qwin_Widget_Interface
         $alias && $alias .= '.';
 
         foreach ($order as $field) {
-            if (!isset($field[0]) || !isset($db['fields'][$field[0]]) || !$db['fields'][$field[0]]['dbField']) {
+            if (!isset($field[0]) || !isset($this->_meta['fields'][$field[0]]) || !$this->_meta['fields'][$field[0]]['dbField']) {
                 continue;
             }
             $field[1] = strtoupper($field[1]);
@@ -223,18 +223,18 @@ class Query_Widget extends Doctrine_Query implements Qwin_Widget_Interface
      * @todo 完善查询类型
      * @todo 复杂查询
      */
-    public function addRawWhere(Qwin_Meta_Db $db, $search = null)
+    public function addRawWhere($search = null)
     {
         if (is_string($search)) {
             $search = Qwin_Util_String::splitQuery($search);
         }
-        $search = is_null($search) ? $db['where'] : $search;
+        $search = is_null($search) ? $this->_meta['where'] : $search;
 
         $alias = $this->getRootAlias();
         '' != $alias && $alias .= '.';
 
         foreach ($search as $fieldSet) {
-            if (!isset($db['fields'][$fieldSet[0]]) || !$db['fields'][$fieldSet[0]]['dbField']) {
+            if (!isset($this->_meta['fields'][$fieldSet[0]]) || !$this->_meta['fields'][$fieldSet[0]]['dbField']) {
                 continue;
             }
             if (!isset($fieldSet[2])) {
@@ -341,18 +341,16 @@ class Query_Widget extends Doctrine_Query implements Qwin_Widget_Interface
     }
 
     /**
-     * 为Doctrine查询对象增加查询语句
-     *
-     * @param Doctrine_Query $query
-     * @return Com_Meta 当前对象
-     * @todo 是否要将主类加入到$meta['model']数组中,减少代码重复
+     * 添加字段到SELECT查询中
+     * 
+     * @return Query_Widget 当前对象
      */
-    public function addRawSelect(Qwin_Meta_Db $db)
+    public function addRawSelect()
     {
         /**
          * 设置主类的查询语句
          */
-        foreach ($db['fields'] as $name => $field) {
+        foreach ($this->_meta['fields'] as $name => $field) {
             if ($field['dbQuery'] && $field['dbField']) {
                 $this->addSelect($name);
             }
