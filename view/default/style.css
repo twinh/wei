@@ -157,7 +157,8 @@ a {
 }
 /* 中间内容 */
 .qw-middle{
-    margin-bottom: 5px;
+    /* 解决浮动页脚挡住页面的问题 TODO 更合适的方法 */
+    padding-bottom: 5px;
     border: none;
 }
 .qw-middle .qw-middle-header {
@@ -349,4 +350,8 @@ div.qw-middle-tab .ui-tabs-panel{
 *+html button.ui-button-text-icon-primary .ui-button-text,
 *+html button.ui-button-text-icons .ui-button-text {
     padding: .4em 1em .2em 2.1em;
+}
+/* 修复日期选择器不自动隐藏的问题 why? */
+#ui-datepicker-div {
+    display: none;
 }
