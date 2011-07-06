@@ -31,8 +31,9 @@ return array(
         'group_id' => array(
             '_link' => true,
             '_type' => 'select',
-            '_realation' => array(
+            '_relation' => array(
                 'module' => 'member/group',
+                'db'    => 'db',
                 'field' => 'id',
                 // TODO 完善转换类型
                 // 1. field name
@@ -43,7 +44,6 @@ return array(
                 'criteria' => array(),
                 // TODO 排序
                 'order' => array(),
-                // TODO 只加载一次
                 'loaded' => false,
             ),
             '_sanitiser' => array(
