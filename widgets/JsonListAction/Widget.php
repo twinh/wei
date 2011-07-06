@@ -101,9 +101,9 @@ class JsonListAction_Widget extends Qwin_Widget_Abstract
         // 从模型获取数据
         $query = Query_Widget::getByMeta($db)
             ->leftJoinByType(array('db', 'view'))
-            ->addRawSelect($db)
-            ->addRawWhere($db, $options['search'])
-            ->addRawOrder($db, $options['order'])
+            ->addRawSelect()
+            ->addRawWhere($options['search'])
+            ->addRawOrder($options['order'])
             ->offset(($options['page'] - 1) * $options['row'])
             ->limit($options['row']);
         $dbData = $query->execute();
