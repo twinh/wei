@@ -78,7 +78,7 @@ class Record_Widget extends Doctrine_Record implements Qwin_Widget_Interface
 
             // 设置关联
             foreach ($meta['relations'] as  $relation) {
-                $class = self::getByModule($relation['module'], $relation['meta'], false);
+                $class = self::getByModule($relation['module'], $relation['db'], false);
                 call_user_func(
                     array($this, $relation['relation']),
                     $class . ' as ' . $relation['alias'],
