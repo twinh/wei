@@ -38,7 +38,7 @@ class Datepicker_Widget extends Qwin_Widget_Abstract
 
         $code = '<script type="text/javascript">
                 jQuery(function($){
-                    $("#' . $options['form']['id'] . '").datepicker({dateFormat: "yy-mm-dd"});
+                    $("#' . $options['_form']['id'] . '").datepicker({dateFormat: "yy-mm-dd"});
                 });
                </script>';
         return $code;
