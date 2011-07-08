@@ -23,7 +23,7 @@
  * @since       2010-10-04 18:54:37
  */
 
-class PopupGrid_Widget extends Qwin_Widget_Abstract
+class PopupPicker_Widget extends Qwin_Widget_Abstract
 {
     /**
      * 默认选项
