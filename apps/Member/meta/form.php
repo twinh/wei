@@ -33,6 +33,7 @@ return array(
             '_type' => 'text',
             '_relation' => array(
                 'module' => 'member/group',
+                'alias' => 'group',
                 'display' => 'name',
                 'loaded' => true,
             ),

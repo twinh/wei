@@ -80,6 +80,7 @@ class Qwin_Meta_Form extends Qwin_Meta_Common
      */
     protected $_relationDefaults = array(
         'module'    => null,
+        'alias'     => null,
         'db'        => 'db',
         'field'     => 'id',
         'display'   => 'id',
