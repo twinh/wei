@@ -55,8 +55,8 @@ class PopupPicker_Widget extends Qwin_Widget_Abstract
         $this->_minify->addArray(array(
             $jQuery->loadUi('position', false),
             $jQuery->loadUi('dialog', false),
-            $jQuery->loadUi('mouse', false),
-            $jQuery->loadUi('draggable', false),
+            //$jQuery->loadUi('mouse', false),
+            //$jQuery->loadUi('draggable', false),
             $jQuery->loadPlugin('tmpl', false),
             $this->_path . 'view/default.css',
             $this->_path . 'view/default.js',
