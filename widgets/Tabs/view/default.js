@@ -134,7 +134,7 @@ jQuery(function($){
             if (('undefined' == typeof frame || true == frame) && !document.getElementById('qw-tabs-iframe-' + id)) {
                 $.tmpl(qwin.page.tabs.iframeTmpl, {
                     id: id,
-                    url: $(a).attr('href') + '&view-only=content'
+                    url: $(a).attr('href') + '&view=content'
                 }).appendTo(qwin.page.middle);
                 
                 // 点击隐藏选项卡列表

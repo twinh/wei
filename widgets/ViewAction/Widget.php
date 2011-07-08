@@ -115,16 +115,17 @@ class ViewAction_Widget extends Qwin_Widget_Abstract
         }
         
         /* @var $formWidget Form_Widget */
-        $formWidget = $this->_Form;
+        $formWidget = $this->_form;
         $formOptions = array(
             'meta'      => $meta,
             'form'      => $options['form'],
             'db'        => $options['db'],
             'action'    => 'view',
             'data'      => $data,
+            'widget'    => false,
         );
         
-        $view = $this->_View;
+        $view = $this->_view;
         $view->assign(get_defined_vars());
         $view->setElement('content', '<root>com/basic/form<suffix>');
         $view['module'] = $meta->getModule();

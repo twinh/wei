@@ -45,25 +45,47 @@ class Qwin_Meta_Form extends Qwin_Meta_Common
      * 
      *      -- class            表单类名称
      * 
-     *      -- _widget          表单微件流程回调结构
+     *      -- _widgets         表单微件流程回调结构
      * 
      *      -- _readonly        值为真时,不可编辑,对添加,查看无影响
      * 
      *      -- _view            值为假时,在视图页不显示
      * 
+     * @todo 整理注释
      */
     protected $_fieldDefaults = array(
-        //'_label' => null,
-        '_type' => 'text',
+        '_type'     => 'text',
         '_resource' => null,
-        //_resourceGetter = null, 
-        '_value' => '',
-        'name' => null,
+        '_value'    => '',
+        'name'      => null,
+        //'_label' => null,
         //'id' => null,
         //'class' => null,
-        //'_widget' => array(),
+        //'_widgets' => array(),
         //'_readonly' => false,
         //'_sanitiser' => array(),
+        //_resourceGetter = null, 
+    );
+    
+    /**
+     * 关联选项
+     * 
+     * @var array 
+     * @todo 条件查询 criteria
+     * @todo 排序查询 order
+     * @todo 显示的类型
+     *       1. field name
+     *       2. format field name
+     *       3. callback
+     */
+    protected $_relationDefaults = array(
+        'module'    => null,
+        'db'        => 'db',
+        'field'     => 'id',
+        'display'   => 'id',
+        'criteria'  => array(),
+        'order'     => array(),
+        'loaded'    => false,
     );
     
     /**
@@ -114,6 +136,9 @@ class Qwin_Meta_Form extends Qwin_Meta_Common
             // TODO 能否可选
             !isset($field['name']) && $field['name'] = $name;
             !isset($field['id']) && $field['id'] = $name;
+            if (isset($field['_relation'])) {
+                $field['_relation'] = (array)$field['_relation'] + $this->_relationDefaults;
+            } 
             $field = (array)$field + $this->_fieldDefaults;
         }
         $this->exchangeArray($data);

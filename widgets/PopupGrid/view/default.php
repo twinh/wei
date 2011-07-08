@@ -22,25 +22,24 @@
  * @version     $Id$
  * @since       2011-01-13 00:36:36
  */
-
-echo $form->renderElement($meta);
+echo $this->_form->renderElement($element);
 ?>
-&nbsp;<button id="ui-button-qwin-popup-<?php echo $id ?>" type="button"><span class="ui-icon ui-icon-calculator"><?php echo $meta['name'] ?></span></button>
-<button id="ui-button-qwin-popup-<?php echo $id ?>-clear" type="button"><span class="ui-icon ui-icon-arrowreturnthick-1-w"><?php echo $meta['name'] ?></span></button>
+&nbsp;<button id="qw-button-popup-<?php echo $id ?>" class="qw-button-common" type="button"><span class="ui-icon ui-icon-calculator"><?php echo $element['name'] ?></span></button>
+<button id="qw-button-popup-<?php echo $id ?>-clear" class="qw-button-common" type="button"><span class="ui-icon ui-icon-arrowreturnthick-1-w"><?php echo $element['name'] ?></span></button>
 <script type="text/javascript">
 jQuery(function($){
     $('#<?php echo $id ?>').hide();
-    $('#ui-button-qwin-popup-<?php echo $id ?>').popupGrid({
-        title       : '<?php  echo $title ?>',
+    $('#qw-button-popup-<?php echo $id ?>').popupGrid({
+        title       : '<?php  echo $lang['LBL_PLEASE_SELECT'] ?>',
         url         : "<?php  echo $url ?>",
-        viewInput   : '#<?php echo $meta['id'] ?>',
+        viewInput   : '#<?php echo $element['id'] ?>',
         valueInput  : '#<?php echo $id ?>',
-        viewColumn  : '<?php  echo $options['fields'][0] ?>',
-        valueColumn : '<?php  echo $options['fields'][1] ?>'
+        viewColumn  : '<?php  echo $options['display'] ?>',
+        valueColumn : '<?php  echo $options['field'] ?>'
     });
-    $('#ui-button-qwin-popup-<?php echo $id ?>-clear').click(function(){
+    $('#qw-button-popup-<?php echo $id ?>-clear').click(function(){
         $('#<?php echo $id ?>').val('');
-        $('#<?php echo $meta['id'] ?>').val('(<?php echo qw_lang('LBL_NOT_SELECTED')?>,<?php echo qw_lang('LBL_READONLY') ?>)');
+        $('#<?php echo $element['id'] ?>').val('(<?php echo $lang['LBL_NOT_SELECTED']?>,<?php echo $lang['LBL_READONLY'] ?>)');
     });
 })
 </script>

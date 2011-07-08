@@ -25,7 +25,7 @@
  * @since       2010-07-15 14:43:28
  */
 
-class Com_Member_Group_Controller extends Com_ActionController
+class Member_Group_Controller extends ActionController_Widget
 {
     /**
      * 分配权限

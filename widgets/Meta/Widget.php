@@ -345,7 +345,7 @@ class Meta_Widget extends Qwin_Meta_Abstract implements Qwin_Widget_Interface
             } else {
                 $dataCopy[$name] = str_replace(':', '\:', $dataCopy[$name]);
             }
-            $value = '<a href="' . $url->url($meta->getParent()->get('module')->getUrl(), 'index', array('search' => $name . ':' . $dataCopy[$name], 'view-only' => 'content')) . '">' . $data[$name] . '</a>';
+            $value = '<a href="' . $url->url($meta->getParent()->get('module')->getUrl(), 'index', array('search' => $name . ':' . $dataCopy[$name], 'view' => 'content')) . '">' . $data[$name] . '</a>';
         }
         return $value;
     }

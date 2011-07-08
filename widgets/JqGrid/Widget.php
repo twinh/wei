@@ -233,6 +233,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
         // 获取jqGrid与其分页的id号
         $options['pager'] = substr($options['pager'], 1);
 
+        unset($options['meta']);
         $jqGridJson = Qwin_Util_Array::jsonEncode($options);
 
         require $this->_path . 'view/default.php';

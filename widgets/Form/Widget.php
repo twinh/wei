@@ -40,6 +40,7 @@ class Form_Widget extends Qwin_Widget_Abstract
         'column'    => 2,
         'data'      => array(),
         'view'      => 'default.php',
+        'widget'    => true,
         'validate'  => true,
         'addSelect' => true,
         'select'    => array(
@@ -142,10 +143,15 @@ class Form_Widget extends Qwin_Widget_Abstract
                 $field['_value'] = $options['data'][$name];
             }
             
+            // TODO 源元数据不应该做如此更改
+            // TODO 1.复制 2.开关
+            if ('view' == $options['action']) {
+                $field['_type'] = 'plain';
+                $field['_widget'] = null;
             // 将关联转换为资源
-            if ('view' != $options['action']) {
+            } else {
                 if (isset($field['_relation']) && !$field['_relation']['loaded']) {
-                    $field['_resouce'] = $this->relationToResource($field['_relation']);
+                    $field['_resource'] = $this->relationToResource($field['_relation']);
                     $field['_relation']['loaded'] = true;
                 }
             }
@@ -179,14 +185,6 @@ class Form_Widget extends Qwin_Widget_Abstract
         $refererPage = urlencode(Qwin::call('-request')->server('HTTP_REFERER'));
         $options['id'] = sprintf($options['id'], $meta['module']->getId());
 
-        if ('view' == $options['action']) {
-            $defaultForm['_type'] = 'plain';
-            foreach ($form['fields'] as $name => $field) {
-                $form['fields'][$name]['_type'] = 'plain';
-                $form['fields'][$name]['_widget'] = null;
-            }
-        }
-        
         // 验证代码
         if ($options['validate']) {
             $this->_lang->appendByWidget('Validator');
@@ -285,32 +283,50 @@ class Form_Widget extends Qwin_Widget_Abstract
      * 生成表单元素微件
      *
      * @param array $options 表单配置
-     * @return mixded
+     * @return string
+     * @todo 微件动态更改表单元素
      */
-    public function renderElementWidget(array $options)
+    public function renderWidget(array $options)
     {
-        if (!isset($options['_widget']) || !is_array($options['_widget']) || empty($options['_widget'])) {
+        if (!$this->_options['widget'] || !isset($options['_widgets'])) {
             return false;
         }
-
+        $widgets = &$options['_widgets'];
+        !is_array($widgets) && $widgets = (array)$widgets;
+        
         /* @var $flow Qwin_Flow */
         $flow = Qwin::call('-flow');
         $result = '';
-
-        foreach ($options['_widget'] as $callback) {
-            if (!is_array($callback)) {
-                continue;
+        
+        foreach ($widgets as $widget) {
+            if (is_string($widget)) {
+                $class = $widget . '_Widget';
+                if (!class_exists($class)) {
+                    if (!function_exists($widget)) {
+                        throw new Qwin_Widget_Exception('Function "' . $widget . '" not found');
+                    // 处理函数
+                    } else {
+                        $widget = array(
+                            $widget,
+                        );
+                    }
+                // 处理微件
+                } else {
+                    $widget = array(
+                        array($class, 'render'),
+                    );
+                }
             }
+            
             // 构造参数
-            !isset($callback[1]) && $callback[1] = array();
-            !isset($callback[1][0]) && $callback[1][0] = array();
+            !isset($widget[1]) && $widget[1] = array();
+            !isset($widget[1][0]) && $widget[1][0] = array();
 
-            $callback[1][0] += array(
-                'form' => $options,
+            $widget[1][0] += array(
+                '_form' => $options,
             );
-            $result .= $flow->callOne($callback);
+            $result .= $flow->callOne($widget);
         }
-
         return $result;
     }
 

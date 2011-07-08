@@ -89,7 +89,7 @@ endif;
                 else :
         ?>
             <td class="qw-label-common qw-label-<?php echo $form['fields'][$field]['_type'] ?>"><label for="<?php echo $form['fields'][$field]['id'] ?>"><?php echo $lang->f($field) ?>:</label></td>
-            <td class="qw-field-common qw-field-<?php echo $form['fields'][$field]['_type'] ?>" colspan="<?php echo $i * 2 + 1 ?>"><?php echo $this->renderElement($form['fields'][$field]) , $this->renderElementWidget($form['fields'][$field]) ?></td>
+            <td class="qw-field-common qw-field-<?php echo $form['fields'][$field]['_type'] ?>" colspan="<?php echo $i * 2 + 1 ?>"><?php echo $this->renderElement($form['fields'][$field]) , $this->renderWidget($form['fields'][$field]) ?></td>
         <?php
                 endif;
             endif;

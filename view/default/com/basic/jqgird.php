@@ -24,16 +24,15 @@
  */
 ?>
 <div class="ui-jqgrid-top">
-    <?php Qwin::hook('ViewListTop', array('view' => $this)) ?>
+    <?php Qwin::hook('viewListTop', array('view' => $this)) ?>
 </div>
 <div class="qw-c"></div>
 <?php $jqGridWidget->render($jqGridOptions) ?>
 <script type="text/javascript">
 jQuery(function($){
     var primaryKey = '<?php echo $id?>';
-    var jqGridObj = $('#<?php echo $jqGridWidget->getId() ?>');
+    var jqGridObj = qwin.jqGrid = $('#<?php echo $jqGridWidget->getId() ?>');
 
-    <?php if (!isset($popup)) : ?>
     jqGridObj.jqGrid('setGridParam',{
         ondblClickRow: function(rowId, iRow, iCol, e){
             var rowData = jqGridObj.jqGrid('getRowData', rowId),
@@ -43,15 +42,6 @@ jQuery(function($){
             window.location.href = qwin.url.createUrl(qwin.get, addition);
             return false;
     }});
-    <?php else : ?>
-    jqGridObj.jqGrid('setGridParam',{
-        ondblClickRow: function(rowId, iRow, iCol, e){
-            var rowData = jqGridObj.jqGrid('getRowData', rowId);
-            $('<?php echo $popup['valueInput'] ?>').val(rowData['<?php echo $popup['valueColumn'] ?>']);
-            $('<?php echo $popup['viewInput'] ?>').val(rowData['<?php echo $popup['viewColumn'] ?>'] + '(' + qwin.lang.LBL_SELECTED + ', ' + qwin.lang.LBL_READONLY + ')');
-            $('#ui-popup').dialog('close');
-    }});
-    <?php endif; ?>
 
     if (document.getElementById('ui-box-tab')) {
         jqGridObj.jqGrid('setGridWidth', $('#ui-box-tab').width() - 30);

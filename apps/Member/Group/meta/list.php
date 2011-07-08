@@ -24,15 +24,13 @@
  */
 
 return array(
-    'id' => array(
-        
+    'fields' => array(
+        'id' => array(
+            'link' => false,
+            'hidden' => true,
+        ),
     ),
-    'name' => array(
-    ),
-    'date_modified' => array(
-        
-    ),
-    'operation' => array(
-        
+    'layout' => array(
+        'id', 'name', 'date_modified', 'operation',
     ),
 );

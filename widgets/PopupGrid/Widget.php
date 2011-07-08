@@ -26,53 +26,63 @@
 class PopupGrid_Widget extends Qwin_Widget_Abstract
 {
     /**
+     * 默认选项
+     * @var array
+     */
+    protected $_defaults = array(
+        'module'    => null,
+        'db'        => null,
+        'field'     => 'id',
+        'display'   => 'id',
+        'layout'    => null,
+        'criteria'  => array(),
+        'order'     => array(),
+    );
+    
+    /**
+     * 生成弹出选择器
      * 
      * @param array $options 选项
      */
     public function render($options = null)
     {
-        $jQuery = $this->_widget->get('JQuery');
-        $minify = $this->_widget->get('Minify');
-        $form = $this->_widget->get('Form');
-
-        $files = array(
-            'position' => $jQuery->loadUi('position', false),
-            'dialog' => $jQuery->loadUi('dialog', false),
-        );
+        $options = (array)$options + $options['_form']['_relation'] + $this->_options;
         
-        $minify
-            ->add($files['position']['css'])
-            ->add($files['dialog']['css'])
-            ->add($files['position']['js'])
-            ->add($files['dialog']['js'])
-            ->add($this->_path . 'view/js.js');
-
         $lang = $this->_lang;
-        $id = $options['form']['id'];
+        $form = $this->_form;
+        $jQuery = $this->_jQuery;
+        
+        $this->_minify->addArray(array(
+            $jQuery->loadUi('position', false),
+            $jQuery->loadUi('dialog', false),
+            $jQuery->loadUi('mouse', false),
+            $jQuery->loadUi('draggable', false),
+            $jQuery->loadPlugin('tmpl', false),
+            $this->_path . 'view/default.css',
+            $this->_path . 'view/default.js',
+        ));
+
+        $id = $options['_form']['id'];
 
         $url = $this->_url->url($options['module'], 'index', array(
-            'popup' => 1,
-            'ajax' => 1,
-            'list' => $options['list'],
+            'view' => 'content',
+            'layout' => $options['layout'],
         ));
-        $title = $lang->t('LBL_PLEASE_SELECT') . $lang->t($options['title']);
 
         // 设置新的表单属性
-        $meta = $options['form'];
-        foreach (array('name', 'id') as $value) {
-            $meta[$value] .= '_value';
-        }
-        $meta['readonly'] = 'readonly';
+        $element = $options['_form'];
+        $element['id'] = $element['id'] . '_value';
+        $element['name'] = $element['name'] . '_value';
+        $element['readonly'] = 'readonly';
 
         // 输入框显示的值
-        if(isset($meta['_value2']))
-        {
-            $meta['_value'] = $meta['_value2'];
-            $selected = $lang->t('LBL_SELECTED');
+        if (isset($element['_value2'])) {
+            $element['_value'] = $element['_value2'];
+            $selected = $lang['LBL_SELECTED'];
         } else {
-            $selected = $lang->t('LBL_NOT_SELECTED');
+            $selected = $lang['LBL_NOT_SELECTED'];
         }
-        $meta['_value'] .= '(' . $selected . ', ' . $lang->t('LBL_READONLY') . ')';
+        $element['_value'] .= '(' . $selected . ')';
 
         require $this->_path . 'view/default.php';
     }
