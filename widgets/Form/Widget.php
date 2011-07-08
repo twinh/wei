@@ -147,7 +147,6 @@ class Form_Widget extends Qwin_Widget_Abstract
             // TODO 1.复制 2.开关
             if ('view' == $options['action']) {
                 $field['_type'] = 'plain';
-                $field['_widget'] = null;
             // 将关联转换为资源
             } else {
                 if (isset($field['_relation']) && !$field['_relation']['loaded']) {

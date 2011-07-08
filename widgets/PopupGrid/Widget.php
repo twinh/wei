@@ -75,14 +75,15 @@ class PopupGrid_Widget extends Qwin_Widget_Abstract
         $element['name'] = $element['name'] . '_value';
         $element['readonly'] = 'readonly';
 
+        // 获取表单值
+        $data = $this->_form->getOption('data');
         // 输入框显示的值
-        if (isset($element['_value2'])) {
-            $element['_value'] = $element['_value2'];
+        if (isset($data[$options['alias']]) && isset($data[$options['alias']][$options['display']])) {
+            $element['_value'] = $data[$options['alias']][$options['display']];
             $selected = $lang['LBL_SELECTED'];
         } else {
             $selected = $lang['LBL_NOT_SELECTED'];
         }
-        $element['_value'] .= '(' . $selected . ')';
 
         require $this->_path . 'view/default.php';
     }
