@@ -235,7 +235,7 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
 
         $url = Qwin::widget('url');
         $replace = Qwin_Util_Html::jsTag($url->url('util/minify', 'index', array('g' => $minify->pack('js')))) . PHP_EOL
-                 . Qwin_Util_Html::cssLinkTag($url->url('util/minify', 'index', array('g' => $minify->pack('css'))));
+                 . Qwin_Util_Html::cssLinkTag($url->url('util/minify', 'index', array('g' => $minify->pack('css')))) . PHP_EOL;
 
         $output = Qwin_Util_String::replaceFirst($this->getPackerSign(), $replace, $output);
         echo $output;

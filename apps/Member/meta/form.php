@@ -39,7 +39,7 @@ return array(
             ),
             '_widgets' => array(
                 array(
-                    array('PopupGrid_Widget', 'render'),
+                    array('PopupPicker_Widget', 'render'),
                     array(array(
                         'layout' => 'id,name,date_modified',
                     )),

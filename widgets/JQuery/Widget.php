@@ -21,6 +21,7 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2011-01-29 16:42:43
+ * @todo        按钮,遮罩
  */
 
 class JQuery_Widget extends Qwin_Widget_Abstract

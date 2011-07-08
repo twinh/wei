@@ -23,6 +23,7 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2010-08-20 15:26:25
+ * @todo        hook,exception,error,log,dump,config,trace
  */
 
 class Qwin_Widget
