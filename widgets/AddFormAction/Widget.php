@@ -110,7 +110,7 @@ class AddFormAction_Widget extends Qwin_Widget_Abstract
             'data'      => $data,
         );
         
-        $view = $this->_View;
+        $view = $this->_view;
         $view->assign(get_defined_vars());
         $view->setElement('content', '<root>com/basic/form<suffix>');
         $view['module'] = $meta['module'];

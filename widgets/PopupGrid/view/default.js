@@ -26,25 +26,43 @@
 (function($) {
     $.fn.popupGrid = function(options) {
         var opts = $.extend({}, $.fn.popupGrid.defaults, options);
+        opts.id = $.fn.popupGrid.id;
+        $.fn.popupGrid.id++;
+        
         // 设置窗口标题
         if (null != opts.title) {
             opts.dialog.title = opts.title;
         }
-
+        
         // 点击弹出窗口,显示内容
         this.click(function(){
-            if($('#ui-popup').html() == null) {
-				$('body').append('<div id="ui-popup"></div>');
-			}
-            $('#ui-popup')
-                .html('')
-                .dialog(opts.dialog)
-                .load(opts.url, {
-                    'popup-value-input': opts.valueInput,
-                    'popup-view-input': opts.viewInput,
-                    'popup-value-column': opts.valueColumn,
-                    'popup-view-column': opts.viewColumn
+            if (0 != $('#qw-popup-iframe-' + opts.id).length) {
+                opts.obj.dialog('open');
+                return;
+            }
+            opts.obj = $.tmpl($.fn.popupGrid.iframeTmpl, {
+                id: opts.id,
+                url: opts.url
+            })
+            opts.obj
+            .dialog(opts.dialog)
+            .find('iframe').load(function(){
+                // 双击赋值
+                var jqGridObj = window.frames['qw-popup-iframe-' + opts.id].qwin.jqGrid;
+                jqGridObj.jqGrid('setGridParam', {
+                    ondblClickRow: function(rowId, iRow, iCol, e){
+                        var rowData = jqGridObj.jqGrid('getRowData', rowId);
+                        $(opts.valueInput).val(rowData[opts.valueColumn]);
+                        $(opts.viewInput).val(rowData[opts.viewColumn] + '(' + qwin.lang.LBL_SELECTED + ', ' + qwin.lang.LBL_READONLY + ')');
+                        opts.obj.dialog('close');
+                    }
+                    // TODO 动态设置高度
+                    /*,
+                    gridComplete: function(){
+                        opts.obj.dialog('option', 'height', '470');
+                    }*/
                 });
+            });
             this.blur();
         });
         return this;
@@ -58,11 +76,13 @@
         viewColumn: 'name', // 弹出窗口的列表域名称
         valueColumn: 'id', // 弹出窗口的列表域的值
         dialog: { // jQuery 对话框的配置
-            position: ['center', 80],
-            height: 'auto',
+            position: ['center', 60],
+            height: 470,
             width: 800,
             modal: true,
-            dialogClass: 'ui-popup-content'
+            dialogClass: 'qw-popup'
         }
     }
+    $.fn.popupGrid.id = 1;
+    $.fn.popupGrid.iframeTmpl = '<div><iframe name="qw-popup-iframe-${id}" id="qw-popup-iframe-${id}" class="qw-popup-iframe" frameborder="no" scrolling="auto" src="${url}"></iframe></div>';
 })(jQuery);

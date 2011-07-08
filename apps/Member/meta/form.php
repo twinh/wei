@@ -30,28 +30,18 @@ return array(
         ),
         'group_id' => array(
             '_link' => true,
-            '_type' => 'select',
+            '_type' => 'text',
             '_relation' => array(
                 'module' => 'member/group',
-                'db'    => 'db',
-                'field' => 'id',
-                // TODO 完善转换类型
-                // 1. field name
-                // 2. format field name
-                // 3. callback
                 'display' => 'name',
-                // TODO 完善条件查询
-                'criteria' => array(),
-                // TODO 排序
-                'order' => array(),
-                'loaded' => false,
+                'loaded' => true,
             ),
-            '_sanitiser' => array(
-                array('Com_Category_Widget', 'sanitise'),
+            '_widgets' => array(
                 array(
-                    'com/member/group',
-                    null,
-                    array('id', null, 'name'),
+                    array('PopupGrid_Widget', 'render'),
+                    array(array(
+                        'layout' => 'id,name,date_modified',
+                    )),
                 ),
             ),
         ),
@@ -74,6 +64,10 @@ return array(
             '_onEdit' => array(
                 '_type' => 'text',
                 'readonly' => 'true',
+            ),
+            // TODO 更好的方法,如显示<em>(不可见)</em>
+            '_onView' => array(
+                '_value' => '●●●●●',
             ),
             '_sanitiser' => array(
                 'db' => array(
@@ -99,11 +93,7 @@ return array(
             ),
         ),
         'birthday' => array(
-            '_widget' => array(
-                array(
-                    array('Datepicker_Widget', 'render')
-                ),
-            ),
+            '_widgets' => 'datepicker',
         ),
         'language' => array(
             '_type' => 'select',

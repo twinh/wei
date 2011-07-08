@@ -32,8 +32,8 @@ $minify->addArray(array(
 <body>
 <div id="qw-main" class="ui-widget-content">
 <?php
-if ($request['view-only'] && $this->elementExists($request['view-only'])) :
-    require $this->getElement($request['view-only']);
+if ($request['view'] && $this->elementExists($request['view'])) :
+    require $this->getElement($request['view']);
 else :
 ?>
 <table id="qw-header" class="ui-widget" border="0" cellpadding="0" cellspacing="0">

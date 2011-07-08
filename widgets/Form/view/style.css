@@ -89,11 +89,13 @@
     overflow-y: auto;
     vertical-align: bottom;
 }
-.qw-form-table .qw-field-common button{
+.qw-form-table .qw-field-common .qw-button-common{
     vertical-align: bottom;
+    width: 24px;
+    height: 24px;
 }
-.qw-form-table .qw-field-common button .qw-button-text{
-    padding: 0.4em 0.4em;
+.qw-form-table .qw-field-common button .ui-button-text{
+    padding: 3px;
 }
 .qw-form-table .qw-field-common label.error {
     cursor:pointer;

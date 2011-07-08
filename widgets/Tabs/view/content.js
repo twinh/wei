@@ -23,9 +23,9 @@
  */
 
 jQuery(function($){
-//    if ('undefined' != typeof qwin.get['view-only'] && 'content' == qwin.get['view-only']) {
+//    if ('undefined' != typeof qwin.get['view'] && 'content' == qwin.get['view']) {
 //        $('a').live('click', function(){
-//            window.location.href = $(this).attr('href') + '&view-only=content';
+//            window.location.href = $(this).attr('href') + '&view=content';
 //            return false;
 //        });
 //    }

@@ -30,7 +30,7 @@ class Tabs_Widget extends Qwin_Widget_Abstract
     {
         // 
         $request = Qwin::call('-request');
-        if ('content' != $request['view-only']) {
+        if ('content' != $request['view']) {
             $this->_view->setElement('content', array(
                 $this->_path . '/view/empty.php',
             ));

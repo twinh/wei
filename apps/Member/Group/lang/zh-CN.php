@@ -1,7 +1,7 @@
 <?php
 
 /**
- * db
+ * zh-CN
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -21,38 +21,9 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-07-05 01:24:51
+ * @since       2011-7-8 0:14:25
  */
 
 return array(
-    'fields' => array(
-        'id' => array(
-            
-        ),
-        'name' => array(
-            
-        ),
-        'image_path' => array(
-            
-        ),
-        'permission' => array(
-            
-        ),
-        'description' => array(
-            
-        ), 	
-        'created_by' => array(
-            
-        ), 	
-        'modified_by' => array(
-            
-        ), 	
-        'date_created' => array(
-            
-        ), 	
-        'date_modified' => array(
-            
-        ),
-    ),
-    'table' => 'member_group',
+    'MOD_MEMBER_GROUP' => '分组',
 );

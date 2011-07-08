@@ -108,9 +108,9 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
 
         // 使视图一致 TODO 更合适的位置
         $request = Qwin::call('-request');
-        if ($request['view-only']) {
+        if ($request['view']) {
             Qwin::widget('url')->setOption('basicParams', array(
-                'view-only' => $request['view-only'],
+                'view' => $request['view'],
             ));
         }
         
@@ -203,7 +203,7 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
 
         // 根据Url的请求加载不同的视图
         $request = Qwin::call('-request');
-        $view = $request->get('view');
+        $view = $request->get('view-only');
         if (!$this->elementExists($view)) {
             $view = 'layout';
         }

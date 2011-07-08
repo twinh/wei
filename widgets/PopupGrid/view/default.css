@@ -1,7 +1,5 @@
-<?php
-
 /**
- * db
+ * default
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -21,38 +19,12 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-07-05 01:24:51
- */
-
-return array(
-    'fields' => array(
-        'id' => array(
-            
-        ),
-        'name' => array(
-            
-        ),
-        'image_path' => array(
-            
-        ),
-        'permission' => array(
-            
-        ),
-        'description' => array(
-            
-        ), 	
-        'created_by' => array(
-            
-        ), 	
-        'modified_by' => array(
-            
-        ), 	
-        'date_created' => array(
-            
-        ), 	
-        'date_modified' => array(
-            
-        ),
-    ),
-    'table' => 'member_group',
-);
+ * @since       2011-07-08 10:00:24
+*/
+.qw-popup-iframe {
+    height: 100%;
+    width: 800px;
+}
+.qw-popup .ui-dialog-content {
+    padding: 0;
+}
