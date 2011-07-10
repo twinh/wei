@@ -40,7 +40,7 @@ class Sanitiser_Widget extends Qwin_Widget_Abstract
      * 
      *      -- sanitise             转换sanitise{Action}{Field}方法
      * 
-     *      -- action               
+     *      -- action               操作名称
      * 
      *      -- relation             
      * 

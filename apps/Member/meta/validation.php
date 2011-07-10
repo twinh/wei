@@ -1,8 +1,9 @@
 <?php
+
 /**
- * Abstract
+ * validation
  *
- * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +17,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  Validator
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-09-10 17:12:42
+ * @since       2011-7-9 17:45:16
  */
 
-abstract class Qwin_Validator_Abstract
-{
-}
+return array(
+    'fields' => array(
+        'group_id' => array(
+            'rules' => array(
+                'notNull' => true,
+            ),
+        ),
+        'username' => array(
+            'rules' => array(
+                'required' => true,
+                'maxlength' => 40,
+            ),
+        ),
+        'password' => array(
+            'rules' => array(
+                'required' => true,
+                'rangelength' => array(5, 40),
+            ),
+        ),
+        'email' => array(
+            'required' => true,
+            'email' => true,
+            'maxlength' => 256,
+        ),
+    ),
+);

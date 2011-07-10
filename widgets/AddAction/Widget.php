@@ -16,8 +16,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Com
- * @subpackage  Service
+ * @package     Widget
+ * @subpackage  AddAction
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -32,7 +32,7 @@ class AddAction_Widget extends Qwin_Widget_Abstract
      * @var array
      */
     protected $_defaults = array(
-        'meta'    => null,
+        'meta'      => null,
         'data'      => array(),
         'display'   => true,
         'url'       => null,
