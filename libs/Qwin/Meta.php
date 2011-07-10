@@ -47,6 +47,7 @@ class Qwin_Meta
         'db'        => 'Qwin_Meta_Db',
         'page'      => 'Qwin_Meta_Page',
         'module'    => 'Qwin_Meta_Module',
+        'validation'=> 'Qwin_Meta_Validation',
     );
 
     /**

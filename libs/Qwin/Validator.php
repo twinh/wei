@@ -23,6 +23,7 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2010-5-21 7:03:17
+ * @todo        加入Validator微件中
  */
 
 class Qwin_Validator
@@ -47,7 +48,7 @@ class Qwin_Validator
      * @param array $callbacks
      * @return Qwin_Validator 当前对象
      */
-    public function  __construct($callbacks = 'Qwin_Validator_Common')
+    public function  __construct($callbacks = 'Validator_Methods')
     {
         if (isset($callbacks)) {
             $this->setRules((array)$callbacks);

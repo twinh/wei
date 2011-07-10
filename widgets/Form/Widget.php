@@ -134,8 +134,6 @@ class Form_Widget extends Qwin_Widget_Abstract
         if (!($form = $meta->offsetLoad($options['form'], 'form'))) {
             throw new Qwin_Widget_Exception('ERR_FROM_META_NOT_FOUND');
         }
-        // 保存表单元数据
-        $this->_form = $form;
 
         foreach ($form['fields'] as $name => &$field) {
             // 为表单赋值

@@ -36,8 +36,11 @@ class Validator_Widget extends Qwin_Widget_Abstract
      *
      */
     protected $_defaults = array(
-        'meta'          => true,
-        'validator'     => 'Qwin_Validator',
+        'data'          => array(),
+        'meta'          => null,
+        'validation'    => 'validation',
+        'validate'      => true,
+        'methods'       => 'Validator_Methods',
         'break'         => false,
     );
 
@@ -54,18 +57,43 @@ class Validator_Widget extends Qwin_Widget_Abstract
     protected $_invalidData = array();
 
     /**
+     * 初始化对象,同时加载语言
+     * 
+     * @param array $options 选项
+     */
+    public function __construct(array $options = array())
+    {
+        parent::__construct($options);
+        $this->_lang->appendByWidget($this);
+    }
+
+    /**
      * 验证数据
      *
      * @param array $data 数据数组,键名表示域的名称,值表示域的值
      * @param array $options 配置选修
      * @return boolen
      */
-    public function valid(array $data, Qwin_Meta_Abstract $meta, array $options = array())
+    public function valid(array $options = array())
     {
-        // 调用钩子方法
-        $meta->preValidate();
+        // 合并选项
+        $options = $this->_options = $options + $this->_options;
+        
+        // 检查元数据是否合法
+        /* @var $meta Meta_Widget */
+        $meta = $options['meta'];
+        if (!Qwin_Meta::isValid($meta)) {
+            throw new Qwin_Widget_Exception('ERR_META_ILLEGAL');
+        }
 
-        $options = $options + $this->_options;
+        // 检查列表元数据是否合法
+        /* @var $validation Qwin_Meta_Validation */
+        if (!($validation = $meta->offsetLoad($options['validation'], 'validation'))) {
+            throw new Qwin_Widget_Exception('ERR_VALIDATION_META_NOT_FOUND');
+        }
+        
+        // 调用钩子方法 TODO $this->_hook->preValidate();
+        //$meta->preValidate();
 
         // 重置验证不通过的域
         $this->_invalidData = array();
@@ -74,49 +102,48 @@ class Validator_Widget extends Qwin_Widget_Abstract
         $result = true;
 
         // 为获取错误域信息做备份
-        $this->_meta = $meta;
+        $this->_validation = $validation;
 
         // 加载验证对象
-        if ($options['validator']) {
-            $validator = Qwin::call($options['validator']);
-        }
-
-        foreach ($data as $name => $value) {
-            // 跳过不存在的域
-            if (!isset($meta['fields'][$name])) {
+        $validator = Qwin::call('-validator');
+        $data = $options['data'];
+        
+        // TODO 允许定义只验证哪些字段
+        // 根据字段验证
+        foreach ($validation['fields'] as $name => $field) {
+            if (!array_key_exists($name, $data)) {
+                $data[$name] = null;
+            } elseif ('' === $data[$name]) {
+                $data[$name] = null;
+            }
+            
+            // 如果该域不是必填的,且为空,则不验证内容
+            if (!isset($field['rules']['required']) && is_null($data[$name])) {
                 continue;
             }
-
-            // 根据验证对象进行验证
-            if ($options['validator'] && !empty($meta['fields'][$name]['validator']['rule'])) {
-                $validateData = $meta['fields'][$name]['validator'];
-                // 如果该域不是必填的,且为空,则不验证内容
-                if (!isset($validateData['rule']['required']) && '' == $value) {
-                    continue;
-                }
-                foreach ($validateData['rule'] as $rule => $param) {
-                    if (false === $validator->valid($rule, $value, $param)) {
-                        if (!isset($validateData['message'][$rule])) {
-                            $this->_invalidData[$name][$rule] = 'VLD_' . strtoupper($rule);
-                        } else {
-                            $this->_invalidData[$name][$rule] = $validateData['message'][$rule];
-                        }
-                        if ($options['break']) {
-                            return false;
-                        } else {
-                            $result = false;
-                        }
+            
+            foreach ($field['rules'] as $rule => $param) {
+                if (false === $validator->valid($rule, $data[$name], $param)) {
+                    if (!isset($validateData['message'][$rule])) {
+                        $this->_invalidData[$name][$rule] = 'VLD_' . strtoupper($rule);
+                    } else {
+                        $this->_invalidData[$name][$rule] = $validateData['message'][$rule];
+                    }
+                    if ($options['break']) {
+                        return false;
+                    } else {
+                        $result = false;
                     }
                 }
             }
-
+            
             // 根据元数据进行验证
-            if ($options['meta']) {
+            if ($options['validate']) {
                 $method = 'validate' . str_replace(array('_', '-'), '', $name);
                 if (method_exists($meta, $method)) {
                     if (false === call_user_func_array(
                         array($meta, $method),
-                        array($value, $name, $data, $this)
+                        array($data[$name], $name, $data, $this)
                     )) {
                         if (!isset($this->_invalidData[$name][$method])) {
                             $this->_invalidData[$name][$method] = 'VLD_' . strtoupper($method);
@@ -132,7 +159,7 @@ class Validator_Widget extends Qwin_Widget_Abstract
         }
 
         // 调用钩子方法
-        $meta->postValidate();
+        //$parentMeta->postValidate();
 
         return $result;
         // 验证关联域
@@ -183,21 +210,19 @@ class Validator_Widget extends Qwin_Widget_Abstract
     /**
      * 获取未通过域的提示信息
      *
-     * @param Qwin_Application_Language $lang 语言对象
-     * @param string $template 模板
      * @return string
      */
-    public function getInvalidMessage($template = null)
+    public function getInvalidMessage()
     {
         $msssage = '';
-        $lang = Qwin::call('-lang');
+        $lang = $this->_lang;
         $result = array(
             'title' => $lang['VLD_DATA'],
             'content' => array(),
         );
         foreach ($this->_invalidData as $field => $row) {
             foreach ($row as $rule => $message) {
-                $result['content'][] = $lang[$this->_meta['field'][$field]['basic']['title']] . ':' . $lang[$message] . PHP_EOL;
+                $result['content'][] = $lang->f($field) . ':' . $lang[$message] . PHP_EOL;
             }
         }
         return $result;

@@ -25,21 +25,14 @@
 
 return array(
     'fields' => array(
+        'id' => array(
+            
+        ),
         'group_id' => array(
-            'validator' => array(
-                'rule' => array(
-                    'notNull' => true,
-                ),
-            ),
+            
         ),
         'username' => array(
             'readonly' => true,
-            'validator' => array(
-                'rule' => array(
-                    'required' => true,
-                    'maxlength' => 40,
-                ),
-            ),
         ),
         'password' => array(
             'readonly' => true,
@@ -47,12 +40,6 @@ return array(
                 'db' => array(
                     'md5'
                 )
-            ),
-            'validator' => array(
-                'rule' => array(
-                    'required' => true,
-                    'rangelength' => array(5, 40),
-                ),
             ),
         ),
         'password2' => array(
@@ -66,13 +53,6 @@ return array(
             ),
         ),
         'email' => array(
-            'validator' => array(
-                'rule' => array(
-                    'required' => true,
-                    'email' => true,
-                    'maxlength' => 256,
-                ),
-            ),
         ),
         'first_name' => array(
         ),
@@ -81,7 +61,6 @@ return array(
         'photo' => array(
         ),
         'sex' => array(
-
         ),
         'birthday' => array(
         ),
