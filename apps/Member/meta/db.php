@@ -99,13 +99,7 @@ return array(
         'group' => array(
             'module'    => 'member/group',
             'alias'     => 'group',
-            'db'        => 'db',
-            'relation'  => 'hasOne',
             'local'     => 'group_id',
-            'foreign'   => 'id',
-            'type'      => 'db',
-            'fieldMap'  => array(), // ?是否仍需要
-            'enabled'   => true,
         ),
     ),
 );

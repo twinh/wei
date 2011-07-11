@@ -31,5 +31,5 @@ return array(
     'FLD_ORDER' => '顺序',
     'FLD_TARGET' => '链接目标',
 
-    'LBL_MODULE_ADMIN_MENU' => '用户菜单',
+    'MOD_MEMBER_MENU' => '用户菜单',
 );
