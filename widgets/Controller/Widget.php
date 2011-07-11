@@ -44,19 +44,7 @@ class Controller_Widget extends Qwin_Widget_Abstract
      * @var Qwin_Request
      */
     protected $_request;
-
-    /**
-     * 视图对象
-     * @var Com_View
-     */
-    protected $_view;
-
-    /**
-     * Url对象
-     * @var Qwin_Url
-     */
-    protected $_url;
-
+    
     /**
      * 会话对象
      * @var Qwin_Session
@@ -171,17 +159,6 @@ class Controller_Widget extends Qwin_Widget_Abstract
     }
 
     /**
-     * 获取视图对象
-     *
-     * @param string $class 新的视图类名,可选
-     * @return Qwin_Application_View
-     */
-    public function getView($class = null)
-    {
-        return $this->getWidget()->call('View');
-    }
-
-    /**
      * 获取请求对象
      *
      * @return Qwin_Request
@@ -270,7 +247,7 @@ class Controller_Widget extends Qwin_Widget_Abstract
 
         // 未登陆则默认使用游客账号
         if (null == $member) {
-            $member = Meta_Widget::getByModule('member')->get('db')->getQuery()
+            $member = Query_Widget::getByModule('member')
                 ->where('username = ?', 'guest')
                 ->fetchOne()
                 ->toArray();

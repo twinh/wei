@@ -25,7 +25,7 @@
  * @since       2010-09-13 11:19:25
  */
 
-class Com_Member_Log_Controller extends Com_ActionController
+class Member_Log_Controller extends ActionController_Widget
 {
     public $_unableAction = array(
         'add',  'edit', 'delete'

@@ -1,6 +1,6 @@
 <?php
 /**
- * Home
+ * Log
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -16,24 +16,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ * @package     Com
+ * @subpackage  Member
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-09 09:42:41
+ * @since       2010-05-24 09:25:40
  */
 
-class Home_Controller extends Controller_Widget
+class Member_Log_DbRecord extends Record_Widget
 {
-    public function actionIndex()
-    {
-        $meta = $this->getMeta();
-        $this->_view->assign(get_defined_vars());
-    }
-
-    public function actionUpdateLog()
-    {
-        $meta = $this->getMeta();
-        $this->_view->assign(get_defined_vars());
-    }
 }

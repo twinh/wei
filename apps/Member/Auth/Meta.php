@@ -25,10 +25,10 @@
  * @since       2010-09-13 11:20:21
  */
 
-class Com_Member_Auth_Meta extends Com_Meta
+class Member_Auth_Meta extends Meta_Widget
 {
 
-    public function setMeta()
+    /*public function setMeta()
     {
         $this->merge(array(
             'fields' => array(
@@ -87,15 +87,7 @@ class Com_Member_Auth_Meta extends Com_Meta
             'model' => array(
 
             ),
-            'db' => array(
-                'table' => 'member',
-            ),
-            // 页面显示
-            'page' => array(
-                'title' => 'LBL_MODULE_TITLE',
-            ),
-        ));
-    }
+    }*/
 
     public function validateCaptcha($value, $name, $data)
     {

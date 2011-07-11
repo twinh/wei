@@ -1,3 +1,13 @@
+html, body, #qw-main {
+    height: 100%;
+}
+#qw-login-form table {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+#qw-login-form td{
+    padding: 4px;
+}
 .qw-login {
     vertical-align: top;
 }

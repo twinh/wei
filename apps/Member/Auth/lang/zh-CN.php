@@ -20,9 +20,9 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-04-05 07:00:52
+ * @since       2011-7-11 13:59:38
  */
 
 return array(
-    'MOD_MEMBER_MY' => '个人中心',
+    'MOD_MEMBER_AUTH' => '用户验证',
 );

@@ -30,6 +30,11 @@ class Tabs_Widget extends Qwin_Widget_Abstract
     {
         // 
         $request = Qwin::call('-request');
+        
+        if ('0' == $request['tabs']) {
+            return false;
+        }
+        
         if ('content' != $request['view']) {
             $this->_view->setElement('content', array(
                 $this->_path . '/view/empty.php',

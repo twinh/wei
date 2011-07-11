@@ -86,12 +86,8 @@ return array(
     'FLD_LANGUAGE' => '语言',
     'FLD_IP' => 'Ip',
     'LBL_MODULE_MEMBER_GROUP' => '用户组',
-    'LBL_MODULE_MEMBER_LOGINLOG' => '用户登陆记录',
-    'LBL_VIEW_DATA' => '查看个人资料',
-    'LBL_EDIT_DATA' => '编辑个人资料',
-    'LBL_EDIT_PASSWORD' => '修改密码',
-    'LBL_SWITCH_STYLE' => '切换风格',
-    'LBL_SWITCH_LANGUAGE' => '切换语言',
+    
+    
     'ACT_ALLOCATEPERMISSION' => '分配权限',
     'ACT_EDIT_PASSWORD' => '修改密码',
     'ACT_SWITCHLANGUAGE' => '切换语言',

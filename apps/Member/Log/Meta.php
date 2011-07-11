@@ -25,9 +25,9 @@
  * @since       2010-05-24 07:52:43
  */
 
-class Com_Member_Log_Meta extends Com_Meta
+class Member_Log_Meta extends Meta_Widget
 {
-    public function setMeta()
+    /*public function setMeta()
     {
         $this->setIdMeta();
         $this->merge(array(
@@ -74,7 +74,7 @@ class Com_Member_Log_Meta extends Com_Meta
                 'title' => 'LBL_MODULE_MEMBER_LOGINLOG',
             )
         ));
-    }
+    }*/
 
     public function sanitiseDbIp($value, $name, $data, $copyData)
     {
