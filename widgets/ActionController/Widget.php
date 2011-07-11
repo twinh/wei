@@ -135,9 +135,8 @@ class ActionController_Widget extends Controller_Widget
     public function actionDelete()
     {
         return Qwin::call('-widget')->get('DeleteAction')->render(array(
-            'module'    => $this->_module,
-            'id'        => $this->_request->get('id'),
-            'url'       => urldecode($this->_request->post('_page')),
+            'meta'  => $this->getMeta(),
+            'id'    => $this->_request->get('id'),
         ));
     }
 }
