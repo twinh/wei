@@ -27,90 +27,109 @@
 class DeleteAction_Widget extends Qwin_Widget_Abstract
 {
     protected $_defaults = array(
-        'module'    => null,
+        'meta'      => null,
+        'db'        => 'db',
         'id'        => null,
         'display'   => true,
     );
 
-    public function execute($options)
+    public function render($options = null)
     {
-        $options = $this->_options = $options + $this->_defaults;
-
-        /* @var $meta Com_Meta */
-        $meta = Com_Meta::getByModule($options['module']);
+        // 初始配置
+        $options = (array)$options + $this->_options;
+        
+        // 检查元数据是否合法
+        /* @var $meta Meta_Widget */
+        $meta = $options['meta'];
+        if (!Qwin_Meta::isValid($meta)) {
+            throw new Qwin_Widget_Exception('ERR_META_ILLEGAL');
+        }
+        
+        // 检查数据库元数据是否合法
+        /* @var $db Qwin_Meta_Db */
+        if (!($db = $meta->offsetLoad($options['db'], 'db'))) {
+            throw new Qwin_Widget_Exception('ERR_DB_META_NOT_FOUND');
+        }
+        
+        // 从数据库取出记录
         $idValue = explode(',', $options['id']);
-        $query = $meta->getQuery(null, array(
-            'type' => 'db',
-        ));
-
-        $alias = $query->getRootAlias();
-        '' != $alias && $alias .= '.';
-        $results = $query
-            //->select($modelName . '.' . $meta['db']['primaryKey'])
-            ->whereIn($alias . $meta['db']['primaryKey'], $idValue)
+        $dbData = Query_Widget::getByMeta($db)
+            ->whereIn($db['id'], $idValue)
             ->execute();
+        $data = $dbData->toArray();
+        
+        // 数据为空则展示错误视图
+        if (empty($data)) {
+            return $options['display'] ? $this->_view->alert($this->_lang['MSG_NO_RECORD']) : array(
+                'result'    => false,
+                'message'   => $lang['MSG_NO_RECORD'],
+            );
+        }
 
+        // 删除记录 TODO 提供更详细的信息
+        $dbData->delete();
+        
+        // 展示视图
+        $options['url'] ? $options['url'] : $this->_url->url($meta['module']['url'] , 'index');
+        return $options['display'] ? $this->_view->success($this->_lang['MSG_SUCCEEDED'], $options['url'])
+                : array(
+                    'result' => true,
+                    'data' => get_defined_vars(),
+                );
+
+//        $alias = $query->getRootAlias();
+//        '' != $alias && $alias .= '.';
+//        $results = $query
+//            //->select($modelName . '.' . $meta['db']['primaryKey'])
+//            ->whereIn($alias . $meta['db']['primaryKey'], $idValue)
+//            ->execute();
+//        
         // 分两种情况 1使用回收站 2直接删除
         // 使用回收站应符合三个条件 1启用回收站功能 2存在标识域is_deleted
-        if (isset($meta['page']['useTrash']) && true == $meta['page']['useTrash'] && isset($meta['field']['is_deleted'])) {
-            foreach ($results as $key => $result) {
-                // 设置删除标志
-                $result['is_deleted'] = 1;
-                $result->save();
-
-                // 获取记录标题,不存在则用编号代替
-                if (!empty($meta['page']['mainField'])) {
-                    $name = $result[$meta['page']['mainField']];
-                } elseif (method_exists($meta, 'getMainFieldValue')) {
-                    $name = $meta->getMainFieldValue($result);
-                } else {
-                    $name = $result[$meta['db']['primaryKey']];
-                }
-
-                $result = Com_Widget::getByModule('Com', 'Add')->execute(array(
-                    'module'    => 'com/trash',
-                    'display' => false,
-                    'data'      => array(
-                        'name' => $name,
-                        'module' => $options['module']->toString(),
-                        'module_id' => $result[$meta['db']['primaryKey']],
-                    ),
-                ));
-
-                /*
-                 * todo 结果判断
-                 * if ($result['result']) {
-                    continue;
-                } else {
-                    $this->view->redirect();
-                }*/
-            }
-        } else {
-            // TODO 统计删除数
-            // TODO 删除数据关联的模块
-            foreach ($results as $key => $result) {
-                foreach ($meta['model'] as $model) {
-                    if (isset($results[$key][$model['alias']])) {
-                        $results[$key][$model['alias']]->delete();
-                    }
-                }
-                $result->delete();
-            }
-        }
-
-        // 展示视图
-        if ($options['display']) {
-            if (!$options['url']) {
-                $options['url'] = Qwin::call('-request')->server('HTTP_REFERER');
-            }
-            if (!$options['url']) {
-                $options['url'] = $this->_url->url($options['module']);
-            }
-            return $this->_View->success($this->_lang->t('MSG_SUCCEEDED'), $options['url']);
-        }
-        return array(
-            'result' => true,
-            'data' => get_defined_vars(),
-        );
+//        if (isset($meta['page']['useTrash']) && true == $meta['page']['useTrash'] && isset($meta['field']['is_deleted'])) {
+//            foreach ($results as $key => $result) {
+//                // 设置删除标志
+//                $result['is_deleted'] = 1;
+//                $result->save();
+//
+//                // 获取记录标题,不存在则用编号代替
+//                if (!empty($meta['page']['mainField'])) {
+//                    $name = $result[$meta['page']['mainField']];
+//                } elseif (method_exists($meta, 'getMainFieldValue')) {
+//                    $name = $meta->getMainFieldValue($result);
+//                } else {
+//                    $name = $result[$meta['db']['primaryKey']];
+//                }
+//
+//                $result = Com_Widget::getByModule('Com', 'Add')->execute(array(
+//                    'module'    => 'com/trash',
+//                    'display' => false,
+//                    'data'      => array(
+//                        'name' => $name,
+//                        'module' => $options['module']->toString(),
+//                        'module_id' => $result[$meta['db']['primaryKey']],
+//                    ),
+//                ));
+//
+//                /*
+//                 * todo 结果判断
+//                 * if ($result['result']) {
+//                    continue;
+//                } else {
+//                    $this->view->redirect();
+//                }*/
+//            }
+//        } else {
+//            // TODO 统计删除数
+//            // TODO 删除数据关联的模块
+//            foreach ($results as $key => $result) {
+//                foreach ($meta['model'] as $model) {
+//                    if (isset($results[$key][$model['alias']])) {
+//                        $results[$key][$model['alias']]->delete();
+//                    }
+//                }
+//                $result->delete();
+//            }
+//        }
     }
 }
