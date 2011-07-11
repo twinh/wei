@@ -349,4 +349,9 @@ class Meta_Widget extends Qwin_Meta_Abstract implements Qwin_Widget_Interface
         }
         return $value;
     }
+    
+    public function sanitiseList()
+    {
+        return call_user_func_array(array($this, 'setLink'), func_get_args());
+    }
 }
