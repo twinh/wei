@@ -23,10 +23,10 @@
  *}
  <div class="qw-nav" id="qw-nav">
     <a class="ui-state-default ui-corner-bl" href="{qw_u('member/my')}">{$lang.LBL_WELCOME}, {$member.username}!</a>
-    <a class="ui-state-default" href="#">{$lang.LBL_MANAGEMENT}</a>
+    <!--<a class="ui-state-default" href="#">{$lang.LBL_MANAGEMENT}</a>-->
     {if 'guest' == $member.username}
-    <a class="ui-state-default qw-last-link" href="{qw_u('member/auth', 'login')}">{$lang.LBL_LOGIN}</a>
+    <a class="ui-state-default qw-last-link qw-tabs-false" href="{qw_u('member/auth', 'login')}&tabs=0">{$lang.LBL_LOGIN}</a>
     {else}
-    <a class="ui-state-default qw-last-link" href="{qw_u('member/auth', 'logout')}">{$lang.LBL_LOGOUT}</a>
+    <a class="ui-state-default qw-last-link qw-tabs-false" href="{qw_u('member/auth', 'logout')}&tabs=0">{$lang.LBL_LOGOUT}</a>
     {/if}
 </div>

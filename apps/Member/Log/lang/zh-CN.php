@@ -1,6 +1,6 @@
 <?php
 /**
- * Meta
+ * zh-CN
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -20,18 +20,11 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-04-05 06:52:51
+ * @since       2011-7-11 12:46:32
  */
 
-class Com_Member_My_Meta extends Com_Meta
-{
-    public function setMeta()
-    {
-        $this->merge(array(
-             'page' => array(
-                 'title' => 'MOD_MEMBER_MY',
-                 'icon' => 'home',
-             ),
-         ));
-    }
-}
+return array(
+    'MOD_MEMBER_LOG' => '用户登陆记录',
+    'FLD_MEMBER_ID' => '用户',
+    'FLD_IP' => 'IP地址',
+);

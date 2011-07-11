@@ -1,8 +1,9 @@
 <?php
+
 /**
- * Home
+ * db
  *
- * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,20 +21,23 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-09 09:42:41
+ * @since       2011-7-11 12:44:47
  */
 
-class Home_Controller extends Controller_Widget
-{
-    public function actionIndex()
-    {
-        $meta = $this->getMeta();
-        $this->_view->assign(get_defined_vars());
-    }
-
-    public function actionUpdateLog()
-    {
-        $meta = $this->getMeta();
-        $this->_view->assign(get_defined_vars());
-    }
-}
+return array(
+    'fields' => array(
+        'id' => array(
+            
+        ),
+        'member_id' => array(
+            
+        ),
+        'ip' => array(
+            
+        ),
+        'date_created' => array(
+            
+        ),
+    ),
+    'table' => 'member_log'
+);

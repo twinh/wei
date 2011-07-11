@@ -98,14 +98,14 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
                 'class' => 'action-list',
             );
             // TODO hook
-            $tabs['filter'] = array(
+            /*$tabs['filter'] = array(
                 'url' => $url->url($module->getUrl(), 'index', array('filter' => '1')),
                 'title' => $lang->t('ACT_FILTER'),
                 'icon' => 'ui-icon-calculator',
                 'target' => null,
                 'id' => 'action-' . $moduleId . '-filter',
                 'class' => 'action-filter',
-            );
+            );*/
         }
         return $tabs;
     }

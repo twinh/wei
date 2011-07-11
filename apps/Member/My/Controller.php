@@ -23,7 +23,7 @@
  * @since       2011-04-05 06:14:49
  */
 
-class Com_Member_My_Controller extends Com_Controller
+class Member_My_Controller extends Controller_Widget
 {
     /**
      * 锁定的核心帐号，防止恶意修改
@@ -32,32 +32,33 @@ class Com_Member_My_Controller extends Com_Controller
     protected $_lock = array(
         'guest', 'admin', '7641b5b1-c727-6c07-e11f-9cb5b74ddfc9',
     );
-    
+        
     public function  __construct($config = array(), $module = null, $action = null) {
         parent::__construct($config, $module, $action);
-        $this->_memberModule = new Qwin_Module('com/member');
+        $this->_memberModule = Qwin_Module::instance('member');
+        
+        // 加载用户模块的语言
+        $this->_lang->appendByModule($this->_memberModule);
     }
 
     public function actionIndex()
     {
+        $member = $this->getMember();
         $meta = $this->getMeta();
-        $this->getView()->assign(get_defined_vars());
+        $this->_view->assign(get_defined_vars());
     }
 
     public function actionEdit()
     {
         $member = $this->getMember();
         if (!$this->_request->isPost()) {
-            return Qwin::call('-widget')->get('View')->execute(array(
-                'module'    => $this->_memberModule,
+            return Qwin::call('-widget')->get('EditFormAction')->render(array(
+                'meta'      => Meta_Widget::getByModule('member'),
                 'id'        => $member['id'],
-                'asAction'  => 'edit',
-                'isView'    => false,
-                'viewClass' => 'Com_View_Edit',
             ));
         } else {
-            return Qwin::call('-widget')->get('Add')->execute(array(
-                'module'    => $this->_memberModule,
+            return Qwin::call('-widget')->get('EditAction')->render(array(
+                'meta'      => Meta_Widget::getByModule('member'),
                 'data'      => array('id' => $member['id']) + $_POST,
                 'url'       => urldecode($this->_request->post('_page')),
             ));
@@ -67,10 +68,10 @@ class Com_Member_My_Controller extends Com_Controller
     public function actionView()
     {
         $member = $this->getMember();
-        return Qwin::call('-widget')->get('View')->execute(array(
-                'module'    => $this->_memberModule,
-                'id'        => $member['id'],
-            ));
+        return Qwin::call('-widget')->get('ViewAction')->render(array(
+            'meta'      => Meta_Widget::getByModule('member'),
+            'id'        => $member['id'],
+        ));
     }
 
     public function actionEditPassword()
@@ -102,26 +103,26 @@ class Com_Member_My_Controller extends Com_Controller
     public function actionStyle()
     {
         if (!$this->_request->isPost()) {
-            $style = Qwin::call('-widget')->get('Style');
+            $style = $this->_style;
 
             $styles = $style->getStyles();
             $path = $style->getSourcePath();
             $meta = $this->getMeta();
             
-            $this->getView()->assign(get_defined_vars());
+            $this->_view->assign(get_defined_vars());
         } else {
             $session = $this->getSession();
             $member = $session->get('member');
             $style = $session->get('style');
             
-            $result = Com_Meta::getQueryByModule($this->_memberModule)
+            $result = Query_Widget::getByModule($this->_memberModule)
                 ->update()
                 ->set('theme', '?', $style)
                 ->where('id = ?', $member['id'])
                 ->execute();
 
-            $url = $this->getUrl()->url($this->_module->toUrl(), 'index');
-            $this->getView()->success(Qwin::call('-lang')->t('MSG_SUCCEEDED'), $url);
+            $url = $this->_url->url($this->_module['url'], 'index');
+            $this->_view->success($this->_lang['MSG_SUCCEEDED'], $url);
         } 
     }
 
@@ -131,7 +132,7 @@ class Com_Member_My_Controller extends Com_Controller
             $meta = $this->getMeta();
             $urlLanguage = $this->_request->get('lang');
 
-            $this->getView()->assign(get_defined_vars());
+            $this->_view->assign(get_defined_vars());
         } else {
             $session = $this->getSession();
             $member = $session->get('member');
@@ -144,7 +145,7 @@ class Com_Member_My_Controller extends Com_Controller
                 ->execute();
 
             $url = $this->getUrl()->url($this->_module->toUrl(), 'index');
-            $this->getView()->success(Qwin::call('-lang')->t('MSG_SUCCEEDED'), $url);
+            $this->_view->success(Qwin::call('-lang')->t('MSG_SUCCEEDED'), $url);
         }
     }
 }

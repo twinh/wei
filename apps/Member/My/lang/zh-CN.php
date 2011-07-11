@@ -1,8 +1,8 @@
 <?php
 /**
- * Home
+ * zh-CN
  *
- * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,20 +20,16 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-09 09:42:41
+ * @since       2011-04-05 07:00:52
  */
 
-class Home_Controller extends Controller_Widget
-{
-    public function actionIndex()
-    {
-        $meta = $this->getMeta();
-        $this->_view->assign(get_defined_vars());
-    }
-
-    public function actionUpdateLog()
-    {
-        $meta = $this->getMeta();
-        $this->_view->assign(get_defined_vars());
-    }
-}
+return array(
+    'MOD_MEMBER_MY' => '个人中心',
+    
+    'LBL_VIEW_DATA' => '查看个人资料',
+    'LBL_EDIT_DATA' => '编辑个人资料',
+    'LBL_EDIT_PASSWORD' => '修改密码',
+    'LBL_SWITCH_STYLE' => '切换风格',
+    'LBL_SWITCH_LANGUAGE' => '切换语言',
+    'LBL_MODULE_MEMBER_LOGINLOG' => '用户登陆记录',
+);

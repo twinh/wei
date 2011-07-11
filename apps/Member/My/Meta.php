@@ -1,8 +1,8 @@
 <?php
 /**
- * Log
+ * Meta
  *
- * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Com
- * @subpackage  Member
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-05-24 09:25:40
+ * @since       2011-04-05 06:52:51
  */
 
-class Com_Member_Log_Model extends Com_Model
+class Member_My_Meta extends Meta_Widget
 {
 }

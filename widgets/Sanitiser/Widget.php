@@ -109,7 +109,7 @@ class Sanitiser_Widget extends Qwin_Widget_Abstract
                     // TODO onAction支持更多情况
                     $onAction = '_on' . ucfirst($options['action']);
                     if (isset($field[$onAction]) && isset($field[$onAction]['_sanitiser'])) {
-                        $data[$name] = $flow->call($field[$onAction]['_sanitiser'], Qwin_Flow::PARAM, $value);
+                        $data[$name] = $flow->call($field[$onAction]['_sanitiser'], Qwin_Flow::PARAM, $data[$name]);
                     }
                 }
                     

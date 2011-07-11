@@ -73,10 +73,11 @@ class Style_Widget extends Qwin_Widget_Abstract
      * 获取风格源文件目录
      *
      * @return string
+     * @todo !!
      */
     public function getSourcePath()
     {
-        return $this->_path . 'source/';
+        return Qwin::config('resource') . 'widgets/Style/source/';
     }
 
      public function getStyles($path = null)

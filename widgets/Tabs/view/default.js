@@ -35,6 +35,9 @@ jQuery(function($){
         init: function(){
             // 点击链接,根据情况决定是否生成选项卡
             $('a').live('click', function(){
+                if ($(this).hasClass('qw-tabs-false')) {
+                    return true;
+                }
                 var url = $(this).attr('href');
                 var parts = parseUri(url);
 

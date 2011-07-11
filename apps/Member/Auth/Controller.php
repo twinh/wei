@@ -25,29 +25,60 @@
  * @since       2010-05-23 00:22:37
  */
 
-class Com_Member_Auth_Controller extends Com_Controller
+class Member_Auth_Controller extends Controller_Widget
 {
+    public function __construct($config = array(), $module = null, $action = null)
+    {
+        parent::__construct($config, $module, $action);
+        $this->_lang->appendByModule('member');
+    }
+    
     public function actionLogin()
     {
         // 提示已经登陆的信息
         $member = $this->getSession()->get('member');
         if ('guest' != $member['username']) {
-            return $this->getView()->alert(Qwin::call('-lang')->t('MSG_LOGINED'));
+            return $this->_view->alert($this->_lang['MSG_LOGINED']);
         }
 
         // 设置视图,加载登陆界面
         if (!$this->_request->isPost()) {
             $meta = $this->getMeta();
-            $this->getView()->assign(get_defined_vars());
+            $this->_view->assign(get_defined_vars());
         } else {
-            return Com_Widget::getByModule('com/member/auth', 'login')->execute(array(
+            /*
+             * TODO 修复
+             * return Com_Widget::getByModule('com/member/auth', 'login')->execute(array(
                 'data' => $_POST,
-            ));
+            ));*/
+            $dbData = Query_Widget::getByModule('member')
+                    ->where('username = ? AND password = ?', array($this->_request['username'], md5($this->_request['password'])))
+                    ->fetchOne();
+            if (false === $dbData) {
+                return $this->_view->alert($this->_lang['VLD_VALIDATEPASSWORD']);
+            }
+            
+            $member = $dbData->toArray();
+            unset($member['password']);
+            $session = $this->getSession();
+            $session->set('member',  $member);
+            $session->set('style', $member['theme']);
+            $session->set('language', $member['language']);
+            
+            $url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '?';
+            return $this->_view->success($this->_lang['MSG_SUCCEEDED'], '?');
         }
     }
 
     public function actionLogout()
     {
-        return Com_Widget::getByModule('com/member/auth', 'logout')->execute(array());
+        // TODO 修复
+        //return Com_Widget::getByModule('com/member/auth', 'logout')->execute(array());
+        // 清除登陆状态
+        $session = $this->getSession();
+        $session->set('member', null);
+
+        $url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '?';
+        return $this->_view->success($this->_lang['MSG_LOGOUTED'], '?');
     }
 }

@@ -44,7 +44,7 @@ class Com_Member_Auth_Widget_Login extends Qwin_Widget_Abstract
         'display' => true,
     );
 
-    public function execute($options)
+    public function render($options)
     {
         $options = $options + $this->_options;
         $session = Qwin::call('-session');
