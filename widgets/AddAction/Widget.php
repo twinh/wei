@@ -67,7 +67,7 @@ class AddAction_Widget extends Qwin_Widget_Abstract
         // 检查验证元数据是否合法
         /* @var $validation Qwin_Meta_Validation */
         if (!($validation = $meta->offsetLoad($options['validation'], 'validation'))) {
-            throw new Qwin_Widget_Exception('ERR_VALIDATION_META_NOT_FOUND');
+            //throw new Qwin_Widget_Exception('ERR_VALIDATION_META_NOT_FOUND');
         }
         
         $data = &$options['data'];
@@ -89,7 +89,7 @@ class AddAction_Widget extends Qwin_Widget_Abstract
         }
         
         // 验证数据
-        if (!$this->_validator->valid($validation, $data)) {
+        if ($validation && !$this->_validator->valid($validation, $data)) {
             $message = $this->_validator->getInvalidMessage();
             return $options['display'] ? $this->_view->alert($message['title'], null, $message['content']) : array(
                 'result'    => false,

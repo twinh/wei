@@ -124,6 +124,11 @@ class Qwin_Meta_Db extends Qwin_Meta_Common
             //!isset($field['title']) && $field['title'] = 'FLD_' . strtoupper($name);
             $field = (array)$field + $this->_fieldDefaults;
         }
+        
+        foreach ($data['relations'] as &$relation) {
+            $relation += $this->_relationDefaults;
+        }
+        
         $this->exchangeArray($data);
         return $this;
     }
