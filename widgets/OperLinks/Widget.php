@@ -51,7 +51,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
         $id = $view['id'];
 
         // 上一记录，下一记录
-        if ('edit' == $action || 'view' == $action) {
+        /*if ('edit' == $action || 'view' == $action) {
             $link['next'] = array(
                 'url'   => $url->url($moduleUrl, $action, array($id => $data[$id], 'forward' => 'next')),
                 'title' => $lang['ACT_NEXT'],
@@ -64,7 +64,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
                 'icon'  => 'ui-icon-circle-triangle-w',
                 'class' => 'qw-fr',
             );
-        }
+        }*/
 
         if (!in_array('index', $unableActions) && method_exists($controller, 'actionIndex')) {
             $link['index'] = array(
