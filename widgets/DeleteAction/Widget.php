@@ -24,7 +24,7 @@
  * @todo        各类检查
  */
 
-class Delete_Widget extends Qwin_Widget_Abstract
+class DeleteAction_Widget extends Qwin_Widget_Abstract
 {
     protected $_defaults = array(
         'module'    => null,

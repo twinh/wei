@@ -27,7 +27,7 @@
 
 class Member_Meta extends Meta_Widget
 {
-    public function sanitiseListOperation($value, $name, $data, $copyData)
+    /*public function sanitiseListOperation($value, $name, $data, $copyData)
     {
         $primaryKey = $this['db']['id'];
         $url = Qwin::widget('url');
@@ -36,7 +36,7 @@ class Member_Meta extends Meta_Widget
         $html = Qwin_Util_JQuery::icon($url->url($module->getUrl(), 'editpassword', array($primaryKey => $copyData[$primaryKey])), $lang->t('ACT_EDIT_PASSWORD'), 'ui-icon-key')
               . parent::sanitiseListOperation($value, $name, $data, $copyData);
         return $html;
-    }
+    }*/
 
     public function validateUsername($value, $name, $data)
     {

@@ -62,14 +62,14 @@ class ActionController_Widget extends Controller_Widget
      */
     public function actionView()
     {
-        if ($this->_request->get('forward')) {
+        /*if ($this->_request->get('forward')) {
             return Qwin::call('-widget')->get('Forward')->render(array(
                 'module'    => $this->_module,
                 'action'    => $this->_action,
                 'id'        => $this->_request->get('id'),
                 'forward'   => $this->_request->get('forward'),
             ));
-        }
+        }*/
         return Qwin::call('-widget')->get('ViewAction')->render(array(
             'meta'      => $this->getMeta(),
             'id'        => $this->_request->get('id'),
@@ -105,14 +105,14 @@ class ActionController_Widget extends Controller_Widget
      */
     public function actionEdit()
     {
-        if ($this->_request->get('forward')) {
+        /*if ($this->_request->get('forward')) {
             return Qwin::call('-widget')->get('Forward')->render(array(
                 'module'    => $this->_module,
                 'action'    => $this->_action,
                 'id'        => $this->_request->get('id'),
                 'forward'   => $this->_request->get('forward'),
             ));
-        }
+        }*/
         if (!$this->_request->isPost()) {
             return Qwin::call('-widget')->get('EditFormAction')->render(array(
                 'meta'      => $this->getMeta(),
