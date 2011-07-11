@@ -19,7 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Com
+ * @package     Widget
  * @subpackage  Meta
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
@@ -274,7 +274,7 @@ class Meta_Widget extends Qwin_Meta_Abstract implements Qwin_Widget_Interface
      */
     public function sanitiseDbId($value, $name, $data, $dataCopy)
     {
-        if (null == $value) {
+        if (empty($value)) {
             $value = Qwin_Util_String::uuid();
         }
         return $value;

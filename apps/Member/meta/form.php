@@ -50,12 +50,6 @@ return array(
             '_onEdit' => array(
                 'readonly' => 'true',
             ),
-            '_validator' => array(
-                'rule' => array(
-                    'required' => true,
-                    'maxlength' => 40,
-                ),
-            ),
         ),
         'password' => array(
             '_type' => 'password',
@@ -70,11 +64,6 @@ return array(
             '_onView' => array(
                 '_value' => '●●●●●',
             ),
-            '_sanitiser' => array(
-                'db' => array(
-                    'md5'
-                ),
-            ),
         ),
         'sex' => array(
             '_type' => 'select',
@@ -82,14 +71,12 @@ return array(
                 array('Ide_Option_Widget', 'get'),
                 'sex',
             ),
-            '_sanitiser' => array(
-                'list' => array(
-                    array('Ide_Option_Widget', 'sanitise'),
-                    'sex',
-                ),
-                'view' => array(
-                    array('Ide_Option_Widget', 'sanitise'),
-                    'sex',
+            '_onView' => array(
+                '_sanitiser' => array(
+                    array(
+                        array('Ide_Option_Widget', 'sanitise'),
+                        array('sex'),
+                    ),
                 ),
             ),
         ),

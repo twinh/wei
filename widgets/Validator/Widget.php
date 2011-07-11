@@ -28,17 +28,9 @@ class Validator_Widget extends Qwin_Widget_Abstract
     /**
      * @var array $_options          数据验证的选项
      *
-     *      -- meta                 是否根据元数据的验证配置进行转换
-     *
-     *      -- validator            是否根据验证器进行验证
-     *
      *      -- break                当验证失败时,是否继续验证
-     *
      */
     protected $_defaults = array(
-        'data'          => array(),
-        'meta'          => null,
-        'validation'    => 'validation',
         'validate'      => true,
         'methods'       => 'Validator_Methods',
         'break'         => false,
@@ -73,24 +65,12 @@ class Validator_Widget extends Qwin_Widget_Abstract
      * @param array $data 数据数组,键名表示域的名称,值表示域的值
      * @param array $options 配置选修
      * @return boolen
+     * @todo 可自行抛出错误
      */
-    public function valid(array $options = array())
+    public function valid(Qwin_Meta_Validation $validation, array $data, array $options = array())
     {
         // 合并选项
         $options = $this->_options = $options + $this->_options;
-        
-        // 检查元数据是否合法
-        /* @var $meta Meta_Widget */
-        $meta = $options['meta'];
-        if (!Qwin_Meta::isValid($meta)) {
-            throw new Qwin_Widget_Exception('ERR_META_ILLEGAL');
-        }
-
-        // 检查列表元数据是否合法
-        /* @var $validation Qwin_Meta_Validation */
-        if (!($validation = $meta->offsetLoad($options['validation'], 'validation'))) {
-            throw new Qwin_Widget_Exception('ERR_VALIDATION_META_NOT_FOUND');
-        }
         
         // 调用钩子方法 TODO $this->_hook->preValidate();
         //$meta->preValidate();
@@ -106,8 +86,10 @@ class Validator_Widget extends Qwin_Widget_Abstract
 
         // 加载验证对象
         $validator = Qwin::call('-validator');
-        $data = $options['data'];
         
+        // 获取父元数据
+        $meta = $validation->getParent();
+
         // TODO 允许定义只验证哪些字段
         // 根据字段验证
         foreach ($validation['fields'] as $name => $field) {
@@ -121,7 +103,7 @@ class Validator_Widget extends Qwin_Widget_Abstract
             if (!isset($field['rules']['required']) && is_null($data[$name])) {
                 continue;
             }
-            
+
             foreach ($field['rules'] as $rule => $param) {
                 if (false === $validator->valid($rule, $data[$name], $param)) {
                     if (!isset($validateData['message'][$rule])) {

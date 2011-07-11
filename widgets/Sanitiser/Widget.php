@@ -58,11 +58,6 @@ class Sanitiser_Widget extends Qwin_Widget_Abstract
         'relatedMeta'   => false,
     );
     
-    public function render($options = null)
-    {
-        
-    }
-    
     /**
      * 处理数据
      * 
@@ -91,44 +86,33 @@ class Sanitiser_Widget extends Qwin_Widget_Abstract
             $lang = Qwin::call('-widget')->get('lang');
         }
         
-        $relationData = array();
-        
-        foreach ($data as $name => $value) {
-            // 转换关联数据
-            /*if ($options['relation'] && isset($meta['fields'][$name]['_relation'])) {
-                $realation = &$meta['fields'][$name]['_relation'];
-                if (!isset($relationData[$name])) {
-                    $relationData[$name] = array();
-                    $dbData = Meta_Widget::getByModule($realation['module'])->get('db')->getQuery()
-                        ->select($realation['field'] . ', ' . $realation['display'])
-                        ->execute();
-                    foreach ($dbData as $row) {
-                        $relationData[$name][$row[$realation['field']]] = $row[$realation['display']];
-                    }
-                }
-                if (isset($relationData[$name][$value])) {
-                    $data[$name] = $relationData[$name][$value];
-                }
-            }*/
-            
+        foreach ($meta['fields'] as $name => $field) {
             if ($options['null']) {
-                if ('NULL' === $data[$name] || '' === $data[$name]) {
+                if (!array_key_exists($name, $data) || 'NULL' === $data[$name] || '' === $data[$name]) {
                     $data[$name] = null;
                 }
             }
             
-            // 类型转换
-            /*if ($options['type'] && $field['db']['type']) {
-                if (null != $newData[$name]) {
-                    settype($newData[$name], $field['db']['type']);
+            // 转换关联数据
+            if ($options['relation'] && isset($meta['fields'][$name]['_relation'])) {
+                $realation = &$meta['fields'][$name]['_relation'];
+                if (isset($dataCopy[$realation['alias']]) && isset($dataCopy[$realation['alias']][$realation['display']])) {
+                    $data[$name] = $dataCopy[$realation['alias']][$realation['display']];
                 }
-            }*/
-
+            }
+            
             // 根据元数据中转换器的配置进行转换
             if ($options['sanitiser']) {
-                if (isset($meta['fields'][$name]['_sanitiser'][$options['action']])) {
-                    $data[$name] = $flow->call(array($meta['fields'][$name]['_sanitiser'][$options['action']]), Qwin_Flow::PARAM, $value);
+                if (isset($field['_sanitiser'])) {
+                    $data[$name] = $flow->call($field['_sanitiser'], Qwin_Flow::PARAM, $data[$name]);
+                } else {
+                    // TODO onAction支持更多情况
+                    $onAction = '_on' . ucfirst($options['action']);
+                    if (isset($field[$onAction]) && isset($field[$onAction]['_sanitiser'])) {
+                        $data[$name] = $flow->call($field[$onAction]['_sanitiser'], Qwin_Flow::PARAM, $value);
+                    }
                 }
+                    
             }
 
             // 使用转换器中的方法进行转换
@@ -137,7 +121,7 @@ class Sanitiser_Widget extends Qwin_Widget_Abstract
                 if (method_exists($parentMeta, $method)) {
                     $data[$name] = call_user_func_array(
                         array($parentMeta, $method),
-                        array($value, $name, $data, $dataCopy)
+                        array($data[$name], $name, $data, $dataCopy)
                     );
                 }
             }
@@ -163,6 +147,84 @@ class Sanitiser_Widget extends Qwin_Widget_Abstract
                 }
             }
         }
+
+//        foreach ($data as $name => $value) {
+//            // 转换关联数据
+////            if ($options['relation'] && isset($meta['fields'][$name]['_relation'])) {
+////                $realation = &$meta['fields'][$name]['_relation'];
+////                if (!isset($relationData[$name])) {
+////                    $relationData[$name] = array();
+////                    $dbData = Meta_Widget::getByModule($realation['module'])->get('db')->getQuery()
+////                        ->select($realation['field'] . ', ' . $realation['display'])
+////                        ->execute();
+////                    foreach ($dbData as $row) {
+////                        $relationData[$name][$row[$realation['field']]] = $row[$realation['display']];
+////                    }
+////                }
+////                if (isset($relationData[$name][$value])) {
+////                    $data[$name] = $relationData[$name][$value];
+////                }
+////            }
+//            
+//            if ($options['null']) {
+//                if ('NULL' === $data[$name] || '' === $data[$name]) {
+//                    $data[$name] = null;
+//                }
+//            }
+//            
+//            // 类型转换
+////            if ($options['type'] && $field['db']['type']) {
+////                if (null != $newData[$name]) {
+////                    settype($newData[$name], $field['db']['type']);
+////                }
+////            }
+//
+//            // 根据元数据中转换器的配置进行转换
+//            if ($options['sanitiser']) {
+//                if (isset($meta['fields'][$name]['_sanitiser'])) {
+//                    $data[$name] = $flow->call($meta['fields'][$name]['_sanitiser'], Qwin_Flow::PARAM, $value);
+//                } else {
+//                    // TODO onAction支持更多情况
+//                    $onAction = '_on' . ucfirst($options['action']);
+//                    if (isset($meta['fields'][$name][$onAction]) && isset($meta['fields'][$name][$onAction]['_sanitiser'])) {
+//                        $data[$name] = $flow->call($meta['fields'][$name][$onAction]['_sanitiser'], Qwin_Flow::PARAM, $value);
+//                    }
+//                }
+//                    
+//            }
+//
+//            // 使用转换器中的方法进行转换
+//            if ($options['sanitise']) {
+//                $method = str_replace(array('_', '-'), '', 'sanitise' . $options['action'] . $name);
+//                if (method_exists($parentMeta, $method)) {
+//                    $data[$name] = call_user_func_array(
+//                        array($parentMeta, $method),
+//                        array($value, $name, $data, $dataCopy)
+//                    );
+//                }
+//            }
+//
+//            // 转换null值为提示语"未填写"
+//            if ($options['nullTxt'] && is_null($data[$name])) {
+//                $data[$name] = $lang['NOT_FILLED_TXT'];
+//            }
+//            
+//            // 转换空值为提示语"空"
+//            if ($options['emptyTxt'] && empty($data[$name])) {
+//                $data[$name] = $lang['EMPTY_TXT'];
+//            }
+//            
+//            // 整体转换
+//            if ($options['sanitise']) {
+//                $method = 'sanitise' . $options['action'];
+//                if (method_exists($parentMeta, $method)) {
+//                    $data[$name] = call_user_func_array(
+//                        array($parentMeta, $method),
+//                        array($data[$name], $name, $data, $dataCopy, $meta, $options['action'])
+//                    );
+//                }
+//            }
+//        }
 
         // 对db类型的关联元数据进行转换
         //if ($options['relatedMeta']) {

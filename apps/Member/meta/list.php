@@ -33,6 +33,7 @@ return array(
             '_link' => true,
             '_relation' => array(
                 'module' => 'member/group',
+                'alias' => 'group',
                 'field' => 'id',
                 'display' => 'name',
             ),
@@ -48,11 +49,14 @@ return array(
         'sex' => array(
             '_link' => true,
             '_sanitiser' => array(
-                'list' => array(
+                array(
                     array('Ide_Option_Widget', 'sanitise'),
                     'sex',
                 ),
             ),
+        ),
+        'operation' => array(
+            
         ),
     ),
     'layout' => array(

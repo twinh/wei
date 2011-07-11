@@ -51,21 +51,27 @@ class Qwin_Meta_List extends Qwin_Meta_Common
     );
     
     /**
-     * 转换配置
-     * @var array
+     * 关联选项
+     * 
+     * @var array 
+     * @todo 条件查询 criteria
+     * @todo 排序查询 order
+     * @todo 显示的类型
+     *       1. field name
+     *       2. format field name
+     *       3. callback
      */
-    protected $_sanitiseOptions = array(
-        'notFilled'     => true,
-        'null'          => false,
-        'type'          => false,
-        'sanitise'      => true,
-        'hook'          => true,
-        'relation'      => true,
-        'relatedMeta'   => true,
-        'link'          => true,
-        'action'        => null,
+    protected $_relationDefaults = array(
+        'module'    => null,
+        'alias'     => null,
+        'db'        => 'db',
+        'field'     => 'id',
+        'display'   => 'id',
+        'criteria'  => array(),
+        'order'     => array(),
+        'loaded'    => false,
     );
-
+    
     /**
      * 将数据格式化并加入
      *
@@ -86,6 +92,9 @@ class Qwin_Meta_List extends Qwin_Meta_Common
         
         foreach ($data['fields'] as &$field) {
             $field = (array)$field + $this->_fieldDefaults;
+            if (isset($field['_relation'])) {
+                $field['_relation'] = (array)$field['_relation'] + $this->_relationDefaults;
+            }
         }
         $this->exchangeArray($data);
         return $this;

@@ -119,8 +119,8 @@ class ActionController_Widget extends Controller_Widget
                 'id'        => $this->_request->get('id'),
             ));
         } else {
-            return Qwin::call('-widget')->get('Edit')->render(array(
-                'module'    => $this->_module,
+            return Qwin::call('-widget')->get('EditAction')->render(array(
+                'meta'      => $this->getMeta(),
                 'data'      => $_POST,
                 'url'       => urldecode($this->_request->post('_page')),
             ));
@@ -134,7 +134,7 @@ class ActionController_Widget extends Controller_Widget
      */
     public function actionDelete()
     {
-        return Qwin::call('-widget')->get('Delete')->render(array(
+        return Qwin::call('-widget')->get('DeleteAction')->render(array(
             'module'    => $this->_module,
             'id'        => $this->_request->get('id'),
             'url'       => urldecode($this->_request->post('_page')),
