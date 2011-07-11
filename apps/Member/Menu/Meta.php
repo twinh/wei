@@ -26,7 +26,7 @@
 
 class Member_Menu_Meta extends Meta_Widget
 {
-    public function setMeta()
+    public function setMeta2()
     {
         $this->setCommonMeta();
         $this->merge(array(

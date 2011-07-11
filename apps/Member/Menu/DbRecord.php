@@ -24,11 +24,11 @@
  * @since       2010-5-25 08:10:46
  */
 
-class Member_Menu_Model extends Model_Widget
+class Member_Menu_DbRecord extends Record_Widget
 {
     public function postSave($event)
     {
-        $data = Com_Meta::getQueryByModule('com/member/menu')
+        $data = Query_Widget::getByModule('member/menu')
             ->select('id, category_id, title, target, url')
             ->orderBy('order ASC')
             ->fetchArray();

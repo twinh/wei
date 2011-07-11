@@ -65,11 +65,6 @@ class Member_Meta extends Meta_Widget
         return $result;
     }
     
-    public function sanitiseList()
-    {
-        return call_user_func_array(array($this, 'setLink'), func_get_args());
-    }
-    
     public function sanitiseEditPassword()
     {
         return '';
