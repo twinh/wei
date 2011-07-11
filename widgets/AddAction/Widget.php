@@ -32,88 +32,90 @@ class AddAction_Widget extends Qwin_Widget_Abstract
      * @var array
      */
     protected $_defaults = array(
-        'meta'      => null,
-        'data'      => array(),
-        'display'   => true,
-        'url'       => null,
+        'meta'          => null,
+        'db'            => 'db',
+        'validation'    => 'validation',
+        'data'          => array(),
+        'sanitise'  => array(
+            'sanitiser'     => true,
+            'sanitise'      => true,
+            'action'        => 'db',
+            'null'          => true,
+        ),
+        'display'       => true,
+        'url'           => null,
     );
 
-    /**
-     * 根据配置,执行插入数据操作
-     *
-     * @param array $options 配置
-     */
-    public function execute(array $options = null)
+    public function render($options = null)
     {
         // 初始配置
-        $options = $options + $this->_options;
-
-        /* @var $meta Com_Meta */
-        $meta   = Com_Meta::getByModule($options['module']);
-        $id     = $meta['db']['primaryKey'];
-
-        // 记录已经存在,加载错误视图
-        if (isset($data[$id])) {
-            // 从模型获取数据
-            $query = Query_Widget::getByMeta($db)
-                ->leftJoinByType(array('db', 'view'))
-                ->where($id . ' = ?', $data['id']);
-            $dbData = $query->fetchOne();
-            if(false !== $result) {
-                $lang = Qwin::call('-lang');
-                $result = array(
-                    'result' => false,
-                    'message' => $lang['MSG_RECORD_EXISTS'],
-                );
-                if ($options['display']) {
-                    return $this->_View->alert($result['message']);
-                } else {
-                    return $result;
-                }
-            }
+        $options = (array)$options + $this->_options;
+        
+        // 检查元数据是否合法
+        /* @var $meta Meta_Widget */
+        $meta = $options['meta'];
+        if (!Qwin_Meta::isValid($meta)) {
+            throw new Qwin_Widget_Exception('ERR_META_ILLEGAL');
+        }
+        
+        // 检查数据库元数据是否合法
+        /* @var $db Qwin_Meta_Db */
+        if (!($db = $meta->offsetLoad($options['db'], 'db'))) {
+            throw new Qwin_Widget_Exception('ERR_DB_META_NOT_FOUND');
         }
 
-        // 获取改动过的数据
-        $data = $this->_filterData($meta, $options['data']);
+        // 检查验证元数据是否合法
+        /* @var $validation Qwin_Meta_Validation */
+        if (!($validation = $meta->offsetLoad($options['validation'], 'validation'))) {
+            throw new Qwin_Widget_Exception('ERR_VALIDATION_META_NOT_FOUND');
+        }
+        
+        $data = &$options['data'];
+        if (isset($data[$db['id']]) && !empty($data[$db['id']])) {
+            // 从数据库取出记录
+            $dbData = Query_Widget::getByMeta($db)
+                    ->select($db['id'])
+                    //->leftJoinByType(array('db'))
+                    ->where($db['id'] . ' = ?', $data[$db['id']])
+                    ->fetchOne();
+        
+            // 记录已经存在,加载错误视图
+            if (false !== $dbData) {
+                return $options['display'] ? $this->_view->alert($lang['MSG_RECORD_EXISTS']) : array(
+                    'result'    => false,
+                    'message'   => $lang['MSG_RECORD_EXISTS'],
+                );
+            }
+        }
+        
+        // 验证数据
+        if (!$this->_validator->valid($validation, $data)) {
+            $message = $this->_validator->getInvalidMessage();
+            return $options['display'] ? $this->_view->alert($message['title'], null, $message['content']) : array(
+                'result'    => false,
+                'message'   => $message,
+            );
+        }
 
         // 转换数据
-        $data = $meta->sanitise($data, 'db');
-
-        //$data = $metaHelper->setForeignKeyData($meta['model'], $data);
-
-        // 加载验证微件,验证数据
-        $validator = Qwin::call('-widget')->get('Validator');
-        if (!$validator->valid($data, $meta)) {
-            $result = array(
-                'result' => false,
-                'message' => $validator->getInvalidMessage(),
-            );
-            if ($options['display']) {
-                $this->_View->alert($result['message']['title'], null, $result['message']['content']);
-            } else {
-                return $result;
-            }
+        if ($options['sanitise']) {
+            $data = $this->_sanitiser->sanitise($db, $data, $options['sanitise']);
         }
 
         // 保存关联模型的数据
         //$metaHelper->saveRelatedDbData($meta, $data, $query);
 
-        // 保存到数据库
-        $record = $meta->getRecord();
+        $record = Record_Widget::getByModule($meta['module'], $options['db']);
         $record->fromArray($data);
         $record->save();
-
+        
         // 展示视图
-        if ($options['display']) {
-            if (!$options['url']) {
-                $options['url'] = $this->_url->url($options['module'], array('action' => 'index'));
-            }
-            return $this->_View->success(Qwin::call('-lang')->t('MSG_SUCCEEDED'), $options['url']);
-        }
-        return array(
-            'result' => true,
-            'data' => get_defined_vars(),
-        );
+        $options['url'] ? $options['url'] : $this->_url->url($meta['module']['url'] , 'index');
+        return $options['display'] ? $this->_view->success($this->_lang['MSG_SUCCEEDED'], $options['url'])
+                : array(
+                    'result' => true,
+                    'data' => get_defined_vars(),
+                );
     }
 
     /**
@@ -123,7 +125,7 @@ class AddAction_Widget extends Qwin_Widget_Abstract
      * @param array $post 原始数据,一般为$_POST
      * @return array 数据
      */
-    protected function _filterData($meta, $post)
+    /*protected function _filterData($meta, $post)
     {
         $result = array();
         foreach ($meta['field'] as $name => $field) {
@@ -133,5 +135,5 @@ class AddAction_Widget extends Qwin_Widget_Abstract
             $result[$meta['db']['primaryKey']] = null;
         }
         return $result;
-    }
+    }*/
 }

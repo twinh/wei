@@ -49,9 +49,14 @@ class Qwin_Flow
      * @param int $resultAs 结果使用方式
      * @param mixed $value 初始值
      * @return mixed
+     * @todo empty $callbacks renturn 
      */
     public function call(array $callbacks, $resultAs = self::STRING)
     {
+        if (empty($callbacks)) {
+            $args = func_get_args();
+            return array_key_exists(2, $args) ? $args[2] : null; 
+        }
         $i = 0;
         foreach ($callbacks as $callback) {
             if ($i != 0) {

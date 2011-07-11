@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget
  *
@@ -21,7 +20,7 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-5-16 12:15:56
+ * @since       2011-05-16 12:15:56
  */
 
 class EditFormAction_Widget extends Qwin_Widget_Abstract
@@ -45,8 +44,6 @@ class EditFormAction_Widget extends Qwin_Widget_Abstract
         'db'        => 'db',
         'id'        => null,
         'data'      => array(),
-        'asAction'  => 'view',
-        'isView'    => true,
         'sanitise'  => array(
             'sanitiser'     => true,
             'sanitise'      => true,
@@ -67,7 +64,7 @@ class EditFormAction_Widget extends Qwin_Widget_Abstract
             throw new Qwin_Widget_Exception('ERR_META_ILLEGAL');
         }
 
-        // 检查列表元数据是否合法
+        // 检查表单元数据是否合法
         /* @var $form Qwin_Meta_Form */
         if (!($form = $meta->offsetLoad($options['form'], 'form'))) {
             throw new Qwin_Widget_Exception('ERR_FROM_META_NOT_FOUND');
@@ -81,24 +78,19 @@ class EditFormAction_Widget extends Qwin_Widget_Abstract
         
         // 从模型获取数据
         $id = $db['id'];
-        $query = // 从模型获取数据
         $query = Query_Widget::getByMeta($db)
             ->leftJoinByType(array('db', 'view'))
             ->where($id . ' = ?', $options['id']);
         $dbData = $query->fetchOne();
-
+        
         // 记录不存在,加载错误视图
-        if (false == $dbData) {
-            $result = array(
-                'result' => false,
-                'message' => $this->_lang['MSG_NO_RECORD'],
+        if (false === $dbData) {
+            return $options['display'] ? $this->_view->alert($lang['MSG_NO_RECORD']) : array(
+                'result'    => false,
+                'message'   => $lang['MSG_NO_RECORD'],
             );
-            if ($options['display']) {
-                return $this->_view->alert($result['message']);
-            } else {
-                return $result;
-            }
         }
+
         $data = $dbData->toArray();
 
         // 转换数据

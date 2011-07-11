@@ -36,10 +36,10 @@ return array(
         ),
         'password' => array(
             'readonly' => true,
-            'sanitiser' => array(
-                'db' => array(
-                    'md5'
-                )
+            '_sanitiser' => array(
+                array(
+                    'md5',
+                ),
             ),
         ),
         'password2' => array(
@@ -79,10 +79,10 @@ return array(
         'address' => array(
         ),
         'created_by' => array(
-            
+            'readonly' => true,
         ),
         'date_created' => array(
-            
+            'readonly' => true,
         ),
         'modified_by' => array(
             

@@ -40,25 +40,22 @@ class Member_Meta extends Meta_Widget
 
     public function validateUsername($value, $name, $data)
     {
-        if ('add' != Qwin::config('action')) {
-            return true;
-        }
-
         return true === $this->isUsernameExists($value) ? false : true;
     }
 
     public function validateEmail($value, $name, $data)
     {
-        $result = Com_Meta::getQueryByModule('com/member')
+        // TODO 如何合理的获取当前模块名称等基本信息
+        $result = Query_Widget::getByModule('member')
             ->select('id')
-            ->where('email = ? AND username <> ?', array($value, $data['username']))
+            ->where('email = ? AND id <> ?', array($value, $data['id']))
             ->fetchOne();
         return false == $result ? true : false;
     }
 
     public function isUsernameExists($username)
     {
-        $result = Com_Meta::getQueryByModule('member')
+        $result = Query_Widget::getByModule('member')
             ->select('id')
             ->where('username = ?', $username)
             ->fetchOne();
@@ -76,5 +73,11 @@ class Member_Meta extends Meta_Widget
     public function sanitiseEditPassword()
     {
         return '';
+    }
+    
+    public function validatePassword($value)
+    {
+        // md5('')
+        return 'd41d8cd98f00b204e9800998ecf8427e' !== $value;
     }
 }

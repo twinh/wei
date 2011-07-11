@@ -139,7 +139,7 @@ class Qwin_Meta_Form extends Qwin_Meta_Common
             !isset($field['id']) && $field['id'] = $name;
             if (isset($field['_relation'])) {
                 $field['_relation'] = (array)$field['_relation'] + $this->_relationDefaults;
-            } 
+            }
             $field = (array)$field + $this->_fieldDefaults;
         }
         $this->exchangeArray($data);

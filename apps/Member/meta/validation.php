@@ -28,6 +28,7 @@ return array(
     'fields' => array(
         'group_id' => array(
             'rules' => array(
+                'required' => true,
                 'notNull' => true,
             ),
         ),
@@ -44,9 +45,11 @@ return array(
             ),
         ),
         'email' => array(
-            'required' => true,
-            'email' => true,
-            'maxlength' => 256,
+            'rules' => array(
+                'required' => true,
+                'email' => true,
+                'maxlength' => 256,
+            ),
         ),
     ),
 );
