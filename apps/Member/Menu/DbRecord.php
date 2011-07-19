@@ -51,4 +51,9 @@ class Member_Menu_DbRecord extends Record_Widget
         }
         Qwin_Util_File::writeArray(Qwin::config('root') . 'cache/menu.php', $menus);
     }
+    
+    public function postDelete($event)
+    {
+        return $this->postSave($event);
+    }
 }
