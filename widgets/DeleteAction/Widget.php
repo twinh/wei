@@ -31,6 +31,7 @@ class DeleteAction_Widget extends Qwin_Widget_Abstract
         'db'        => 'db',
         'id'        => null,
         'display'   => true,
+        'url'       => null,
     );
 
     public function render($options = null)

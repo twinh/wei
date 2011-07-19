@@ -58,6 +58,7 @@ class JsonListAction_Widget extends Qwin_Widget_Abstract
         'row'       => null,
         'sanitise'  => array(
             'nullTxt'   => true,
+            'emptyTxt'  => true,
             'sanitiser' => true,
             'sanitise'  => true,
             'action'    => 'list',

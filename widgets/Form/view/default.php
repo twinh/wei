@@ -23,7 +23,7 @@
  * @since       2011-02-16 14:14:21
  */
 $this->_minify->addArray(array(
-    $this->_path . 'view/style.css',
+    $this->_path . 'view/default.css',
     $this->_path . 'script/js.js'
 ));
 if ($options['validate']) :
@@ -39,12 +39,10 @@ validateCode['<?php echo $options['id'] ?>'] = <?php echo $validateCode ?>;
 endif;
 ?>
 <form id="<?php echo $options['id'] ?>" class="qw-form" action="<?php echo qw_url()?>" method="post">
-<?php if ($form['topButtons']) : ?>
 <div class="qw-p5">
     <?php echo Qwin_Util_JQuery::button('submit', $lang['ACT_SUBMIT'], 'ui-icon-check') ?>
     <?php echo Qwin_Util_JQuery::button('reset', $lang['ACT_RESET'], 'ui-icon-arrowreturnthick-1-w') ?>
 </div>
-<?php endif; ?>
 <div class="ui-helper-hidden">
     <?php
     foreach($form['hidden'] as $value) {
