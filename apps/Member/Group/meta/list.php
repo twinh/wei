@@ -29,6 +29,9 @@ return array(
             'link' => false,
             'hidden' => true,
         ),
+        'operation' => array(
+            
+        ),
     ),
     'layout' => array(
         'id', 'name', 'date_modified', 'operation',
