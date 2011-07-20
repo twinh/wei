@@ -46,6 +46,9 @@ return array(
 //                ),
 //            ),
         ),
+        'email' => array(
+            
+        ),
         'sex' => array(
             '_link' => true,
             '_sanitiser' => array(

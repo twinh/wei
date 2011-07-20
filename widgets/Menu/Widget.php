@@ -65,7 +65,7 @@ class Menu_Widget extends Qwin_Widget_Abstract
         // 增加Qwin链接
         $menus['qwin'] = array(
             'title' => $this->_Lang['LBL_QWIN'],
-            'url' => $this->_url->url('com/home', 'index'),
+            'url' => $this->_url->url('home', 'index'),
         );
 
         // 页面名称

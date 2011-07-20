@@ -82,10 +82,7 @@ class Sanitiser_Widget extends Qwin_Widget_Abstract
         if ($options['sanitiser']) {
             $flow = Qwin::call('-flow');
         }
-        if ($options['nullTxt']) {
-            $lang = Qwin::call('-widget')->get('lang');
-        }
-        
+
         foreach ($meta['fields'] as $name => $field) {
             if ($options['null']) {
                 if (!array_key_exists($name, $data) || 'NULL' === $data[$name] || '' === $data[$name]) {
@@ -127,13 +124,13 @@ class Sanitiser_Widget extends Qwin_Widget_Abstract
             }
 
             // 转换null值为提示语"未填写"
-            if ($options['nullTxt'] && is_null($data[$name])) {
-                $data[$name] = $lang['NOT_FILLED_TXT'];
+            if ($options['nullTxt'] && !isset($data[$name])) {
+                $data[$name] = $this->_lang['NOT_FILLED_TXT'];
             }
-            
+
             // 转换空值为提示语"空"
-            if ($options['emptyTxt'] && empty($data[$name])) {
-                $data[$name] = $lang['EMPTY_TXT'];
+            if ($options['emptyTxt'] && '' === $data[$name]) {
+                $data[$name] = $this->_lang['EMPTY_TXT'];
             }
             
             // 整体转换
