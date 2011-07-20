@@ -75,7 +75,7 @@
     display: none;
     text-align: left;
     position: absolute;
-    /* todo ie下小颤动 or 如何对齐 */
+    /* todo 如何对齐 */
     margin-left: -1px;
     z-index: 9999;
 }

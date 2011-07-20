@@ -22,4 +22,55 @@
  * @version     $Id$
  * @since       2011-06-15 01:40:37
  */
- 
+.qw-sidebar {
+    margin: 0 0 0 3px;
+    display: block;
+}
+.qw-sidebar li {
+    margin: 2px;
+    padding: 1px;
+    font-weight: normal;
+    position: relative;
+}
+/*.qw-sidebar li.ui-state-hover {
+    background-image: none;
+}*/
+.qw-sidebar li a{
+    display: block;
+    line-height: 24px;
+    height: 24px;
+    overflow: hidden;
+    padding: 2px 2px 0 2px;
+    text-align: left;
+}
+.qw-sidebar li a.qw-icon{
+    background-position: 5px 6px;
+    text-indent: 24px;
+}
+/* TODO!!　*/
+.qw-sidebar li ul {
+    position: absolute;
+    z-index: 9999;
+    display: none;
+    width: 150px;
+    float: left;
+    margin-top: -27px;
+}
+/*.qw-sidebar li ul.ui-state-hover {
+    background-image: none;
+}*/
+#qw-left-content .qw-shortcut {
+    height: 30px;
+    border: 0;
+    line-height: 30px;
+    background-image: none;
+    margin-bottom: 10px;
+}
+.qw-shortcut a{
+    text-indent: 32px;
+    display: block;
+    background-position: 10px 7px;
+}
+.qw-sidebar-hr {
+   
+}
