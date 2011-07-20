@@ -38,7 +38,7 @@
 #qw-nav a.qw-last-link{
     border-right: none;
 }
-.qw-nav-bar{
+.qw-menu {
     width: auto;
     border-left :0;
     border-right: 0;
@@ -46,7 +46,7 @@
     float: left;
     margin-top: 7px;
 }
-.qw-nav-bar ul.qw-navbar-parent{
+.qw-menu ul.qw-menu-ul {
     border: 0;
     z-index: 999;
     white-space: nowrap;
@@ -55,23 +55,23 @@
     height: 26px;
     background: none;
 }
-.qw-nav-bar ul.ui-widget-content{
+.qw-menu ul.ui-widget-content {
     float: left;
 }
-.qw-nav-bar ul li {
+.qw-menu ul li {
     width: auto;
     float: left;
     display: inline-table;
     line-height: normal;
 }
-.qw-nav-bar ul li.ui-widget {
+.qw-menu ul li.ui-widget {
     border-bottom: none;
 }
-.qw-nav-bar ul li a {
+.qw-menu ul li a {
     padding: 5px 16px;
     display: block;
 }
-.qw-nav-bar ul li ul {
+.qw-menu ul li ul {
     display: none;
     text-align: left;
     position: absolute;
@@ -79,7 +79,7 @@
     margin-left: -1px;
     z-index: 9999;
 }
-.qw-nav-bar ul li ul li {
+.qw-menu ul li ul li {
     clear: both;
     font-weight: normal;
     float: left;
@@ -88,6 +88,6 @@
   修复部分使用部分字体导致该栏下面空一像素的问题
   todo ubuntu 下空1px, windows正常
 */
-/*.qw-nav-bar ul li.ui-state-active a {
+/*.qw-menu ul li.ui-state-active a {
     font-family: sans-serif;
 }*/

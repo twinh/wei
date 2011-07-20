@@ -27,20 +27,19 @@ jQuery(function($){
         click: true,
         focus: true
     });
-});
-jQuery(function($){
-    var navbarUl;
-    $('ul.qw-navbar-parent li.ui-widget').hover(
+
+    var menuUl;
+    $('ul.qw-menu-ul li.ui-widget').hover(
         function(){
             $(this).addClass('ui-state-hover');
-            navbarUl = $(this).find('ul');
-            if ('' != $.trim(navbarUl.html()) && 'none' == navbarUl.css('display')) {
-                navbarUl.show(300);
+            menuUl = $(this).find('ul');
+            if ('' != $.trim(menuUl.html()) && 'none' == menuUl.css('display')) {
+                menuUl.show(300);
             }
         }, function(){
             $(this).removeClass('ui-state-hover');
-            if ('none' != navbarUl.css('display')) {
-                navbarUl.hide(300);
+            if ('none' != menuUl.css('display')) {
+                menuUl.hide(300);
             }
         }
     );

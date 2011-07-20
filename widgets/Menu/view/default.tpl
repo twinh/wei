@@ -31,8 +31,8 @@
     {/if}
 </div>
 <div class="qw-c"></div>
-<div class="qw-nav-bar">
-    <ul class="ui-widget-content qw-navbar-parent">
+<div class="qw-menu">
+    <ul class="ui-widget-content qw-menu-ul">
     {strip}
         <li class="ui-widget ui-state-active ui-corner-top"> <a href="{$menus.qwin.url}">{$menus.qwin.title}</a>
         </li>
