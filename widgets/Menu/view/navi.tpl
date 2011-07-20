@@ -30,3 +30,23 @@
     <a class="ui-state-default qw-last-link qw-tabs-false" href="{qw_u('member/auth', 'logout')}&tabs=0">{$lang.LBL_LOGOUT}</a>
     {/if}
 </div>
+<div class="qw-c"></div>
+<div class="qw-nav-bar">
+    <ul class="ui-widget-content qw-navbar-parent">
+    {strip}
+        <li class="ui-widget ui-state-active ui-corner-top"> <a href="{$menus.qwin.url}">{$menus.qwin.title}</a>
+        </li>
+        {foreach from=$menus[0] item=menu}
+        <li class="ui-widget ui-state-default ui-corner-top"><a href="{$menu.url}" target="{$menu.target}">{$menu.title}</a>
+        {if isset($menus[1][$menu.id])}
+        <ul class="ui-state-hover ui-corner-bottom">
+            {foreach from=$menus[1][$menu.id] item=subMenu}
+            <li><a href="{$subMenu.url}" target="{$subMenu.target}">{$subMenu.title}</a></li>
+            {/foreach}
+        </ul>
+        {/if}
+        </li>
+        {/foreach}
+    {/strip}
+    </ul>
+</div>
