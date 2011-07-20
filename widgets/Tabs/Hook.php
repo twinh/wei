@@ -27,11 +27,11 @@ class Tabs_Hook extends Qwin_Hook_Abstract
 {
     public function hookViewHeaderRight($options = null)
     {
-        Qwin::widget('tabs')->render();
+        //Qwin::widget('tabs')->render();
     }
     
     public function hookViewContentHeader($options = null)
     {
-        Qwin::widget('tabs')->renderContent();
+        //Qwin::widget('tabs')->renderContent();
     }
 }

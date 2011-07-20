@@ -116,7 +116,7 @@ jQuery(function($){
             qwin.ajax.show(qwin.lang.MSG_ERROR);
         },
         success: function(){
-            qwin.ajax.show(qwin.lang.MSG_SUCCEEDED);
+            //qwin.ajax.show(qwin.lang.MSG_SUCCEEDED);
         }
     });
 

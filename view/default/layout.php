@@ -65,14 +65,14 @@ else :
         <td id="qw-middle">
             <?php require $this->getElement('content') ?>
         </td>
-        <!--<td id="qw-splitter-right" class="qw-splitter ui-state-default">
+        <td id="qw-splitter-right" class="qw-splitter ui-state-default">
             <div class="qw-splitter-content"></div>
         </td>
         <td id="qw-right" class="ui-helper-hidden">
             <div id="qw-right-content">
                 <?php Qwin::hook('viewRight') ?>
             </div>
-        </td>-->
+        </td>
     </tr>
 </table>
 </div>

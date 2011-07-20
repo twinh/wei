@@ -25,11 +25,6 @@
 
 class Menu_Hook extends Qwin_Hook_Abstract
 {
-    public function hookViewLeft()
-    {
-        Qwin::widget('menu')->render();
-    }
-    
     public function hookViewHeaderRight()
     {
         Qwin::widget('menu')->renderNavi();

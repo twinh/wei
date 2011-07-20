@@ -28,3 +28,20 @@ jQuery(function($){
         focus: true
     });
 });
+jQuery(function($){
+    var navbarUl;
+    $('ul.qw-navbar-parent li.ui-widget').hover(
+        function(){
+            $(this).addClass('ui-state-hover');
+            navbarUl = $(this).find('ul');
+            if ('' != $.trim(navbarUl.html()) && 'none' == navbarUl.css('display')) {
+                navbarUl.show(300);
+            }
+        }, function(){
+            $(this).removeClass('ui-state-hover');
+            if ('none' != navbarUl.css('display')) {
+                navbarUl.hide(300);
+            }
+        }
+    );
+});
