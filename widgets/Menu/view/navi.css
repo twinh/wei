@@ -75,9 +75,9 @@
     display: none;
     text-align: left;
     position: absolute;
-    /* todo ie下小颤动 */
+    /* todo ie下小颤动 or 如何对齐 */
     margin-left: -1px;
-    z-index: 999;
+    z-index: 9999;
 }
 .qw-nav-bar ul li ul li {
     clear: both;
