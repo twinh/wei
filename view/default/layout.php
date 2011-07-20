@@ -79,7 +79,7 @@ else :
 <div id="qw-footer" class="ui-state-default">
     <div id="qw-footer-arrow" class="ui-icon ui-icon-arrowthickstop-1-n"></div>
     <div id="qw-footer-time"></div>
-    <div id="qw-copyright" class="ui-widget"><?php echo qw_t('LBL_FOOTER_COPYRIGHT') ?></div>
+    <div id="qw-copyright" class="ui-widget">Executed in <?php echo $widget->call('app')->getEndTime() ?>(s). <?php echo qw_t('LBL_FOOTER_COPYRIGHT') ?></div>
 </div>
 <div id="qw-ajax" class="ui-state-highlight"></div>
 <?php

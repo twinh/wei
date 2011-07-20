@@ -35,8 +35,10 @@ class ViewedRecords_Widget extends Qwin_Widget_Abstract
 
     public function render($options = null)
     {
-        $this->_Lang->appendByWidget($this);
+        return false;
+        $this->_lang->appendByWidget($this);
         $viewRecords = Qwin::call('-session')->get('viewedRecords');
+        $this->_minify->add($this->_path . 'view/style.css');
 
         require $this->_path . 'view/default.php';
     }

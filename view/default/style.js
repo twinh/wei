@@ -166,4 +166,10 @@ jQuery(function($){
             fixSelectStyle($(this));
         });
     }*/
+    
+    /*$('#qw-header2').click(function(){
+        $('#qw-header').slideToggle(0, function(){
+            qwin.page.fixContentHeight();
+        });
+    });*/
 });

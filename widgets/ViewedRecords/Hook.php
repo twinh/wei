@@ -38,7 +38,7 @@ class ViewedRecords_Hook extends Qwin_Hook_Abstract
         'maxNum' => 8,
     );
 
-    public function hookViewSidebar($view)
+    public function hookViewLeft($view)
     {
         return Qwin::call('-widget')->get('ViewedRecords')->render($view);
     }
