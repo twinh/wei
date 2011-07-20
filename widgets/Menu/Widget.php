@@ -72,29 +72,20 @@ class Menu_Widget extends Qwin_Widget_Abstract
         $queryString = empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING'];
         $pageUrl = basename($_SERVER['PHP_SELF']) . $queryString;
 
-        $minify = $this->_widget->get('Minify');
-        $minify->addArray(array(
-            $this->_path . 'view/style.css',
-            $this->_path . 'view/js.js',
-        ));
-
-        $smarty = $this->_widget->get('Smarty')->getObject();
-        $smarty->assign('menus', $menus);
-        //$smarty->display($this->_path . 'view/default.tpl');
-        
         // 获取用户信息
         $member = Qwin::call('-session')->get('member');
         
         // 加载样式和脚本
         $minify = $this->_widget->get('minify');
         $minify->addArray(array(
-            $this->_path . 'view/navi.css',
-            $this->_path . 'view/navi.js',
+            $this->_path . 'view/default.css',
+            $this->_path . 'view/default.js',
         ));
         
         $smarty = $this->_widget->get('smarty')->getObject();
         $smarty->assign('lang', $this->_lang);
         $smarty->assign('member', $member);
-        $smarty->display($this->_path . 'view/navi.tpl');
+        $smarty->assign('menus', $menus);
+        $smarty->display($this->_path . 'view/default.tpl');
     }
 }
