@@ -39,26 +39,8 @@ class Menu_Widget extends Qwin_Widget_Abstract
             'title' => 'ACT_MORE',
         ),
     );
-    
+
     public function render($options = null)
-    {
-        // 加载菜单的缓存
-        $menus = require Qwin::config('root') . 'cache/menu.php';
-        
-        // 加载样式和脚本
-        $minify = $this->_widget->get('minify');
-        $minify->addArray(array(
-            $this->_path . 'view/default.css',
-            $this->_path . 'view/default.js',
-        ));
-        
-        $smarty = $this->_widget->get('smarty')->getObject();
-        $smarty->assign('menus', $menus);
-        $smarty->assign('lang', $this->_lang);
-        $smarty->display($this->_path . 'view/default.tpl');
-    }
-    
-    public function renderNavi($options = null)
     {
         // 加载页眉导航的缓存
         $menus = require Qwin::config('root') . 'cache/menu.php';
@@ -81,7 +63,6 @@ class Menu_Widget extends Qwin_Widget_Abstract
         }
 
         // 增加Qwin链接
-        $url = Qwin::call('-url');
         $menus['qwin'] = array(
             'title' => $this->_Lang['LBL_QWIN'],
             'url' => $this->_url->url('com/home', 'index'),
