@@ -24,9 +24,6 @@
  */
 ?>
 <div class="qw-middle ui-widget-content">
-    <div class="qw-middle-header">
-    	<?php Qwin::hook('ViewContentHeader', array('view' => $this)) ?>
-    </div>
     <div class="qw-middle-content">
         <div class="ui-space-10px"></div>
         <div class="qw-p5">

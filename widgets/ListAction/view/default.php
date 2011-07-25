@@ -26,10 +26,7 @@
  */
 echo $this->getPackerSign();
 ?>
-<div class="qw-middle ui-widget-content">
-    <div class="qw-middle-header">
-    	<?php Qwin::hook('ViewContentHeader', array('view' => $this)) ?>
-    </div>
+<div class="qw-middle">
     <div class="qw-middle-content">
         <div class="qw-p5">
         <?php require $this->decodePath('<root>com/basic/jqgird<suffix>') ?>
