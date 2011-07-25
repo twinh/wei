@@ -118,7 +118,7 @@ class EditFormAction_Widget extends Qwin_Widget_Abstract
         
         $view = $this->_view;
         $view->assign(get_defined_vars());
-        $view->setElement('content', '<root>com/basic/form<suffix>');
+        $view->setElement('content', $this->_path . 'view/default.php');
         $view['module'] = $meta->getModule();
         $view['action'] = 'edit';
 
