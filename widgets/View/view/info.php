@@ -26,9 +26,6 @@
  */
 ?>
 <div class="qw-middle ui-widget-content">
-    <div class="qw-middle-header">
-    	<?php Qwin::hook('ViewContentHeader', array('view' => $this)) ?>
-    </div>
     <div class="qw-middle-content qw-message ui-box-content ui-widget-content">
         <div class="qw-message-box ui-state-highlight ui-corner-all">
             <div class="qw-message-icon">
