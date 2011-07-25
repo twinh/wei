@@ -31,9 +31,6 @@ jQuery(function($){
 });
 </script>
 <div class="qw-middle ui-widget-content">
-    <div class="qw-middle-header">
-    	<?php Qwin::hook('ViewContentHeader', array('view' => $this)) ?>
-    </div>
     <div class="qw-middle-content">
         <form action="" method="post">
         <div class="ui-form-content ui-box-content ui-widget-content ui-image-list">

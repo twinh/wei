@@ -27,24 +27,25 @@ class ContentHeader_Widget extends Qwin_Widget_Abstract
 {
     public function render($options = null)
     {
+        $view = $this->_view;
         // 构建页眉导航
-        $module = $options['view']['module'];
+        $module = $view['module'];
         $action = Qwin::config('action');
         $url = $this->_url;
         $lang = $this->_Lang;
 
         // 可能没有元数据
-        if (!isset($options['view']['meta'])) {
+        if (!isset($view['meta'])) {
             return false;
         }
 
         // 图标 > 模块 > 控制器 > 行为
         $header = '';
 
-        $icon = Qwin::config('resource') . 'view/default/icons/' . $options['view']['meta']['page']['icon'] . '_32.png';
+        $icon = Qwin::config('resource') . 'view/default/icons/' . $view['meta']['page']['icon'] . '_32.png';
         !is_file($icon) && $icon = null;
 
-        $header .= '<a href="' . $url->url($module->getUrl(), 'index') . '">' . $lang->t($options['view']['meta']['page']['title']) . '</a>';
+        $header .= '<a href="' . $url->url($module->getUrl(), 'index') . '">' . $lang->t($view['meta']['page']['title']) . '</a>';
       
         $actionLabel = 'ACT_' . $module->getLang() . '_' . strtoupper($action);
         if (!isset($lang[$actionLabel])) {
@@ -54,6 +55,8 @@ class ContentHeader_Widget extends Qwin_Widget_Abstract
         if (isset($lang[$actionLabel])) {
             $header .= '&nbsp;&raquo;&nbsp;<a href="' . $url->build() . '">' . $lang[$actionLabel] . '</a>';
         }
+        
+        $this->_minify->add($this->_path . 'view/default.css');
 
         require $this->_path . 'view/default.php';
     }

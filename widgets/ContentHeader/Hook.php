@@ -25,8 +25,8 @@
 
 class ContentHeader_Hook extends Qwin_Hook_Abstract
 {
-    public function hookViewContentHeader($view)
+    public function hookViewContentHeader()
     {
-        return Qwin::call('-widget')->get('ContentHeader')->render($view);
+        return Qwin::call('-widget')->get('ContentHeader')->render();
     }
 }

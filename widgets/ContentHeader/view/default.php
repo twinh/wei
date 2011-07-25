@@ -25,6 +25,7 @@
  * @since       2011-01-04 15:53:16
  */
 ?>
+<div class="qw-middle-header">
 <?php
 if($icon):
 ?>
@@ -33,3 +34,4 @@ if($icon):
 endif;
 echo $header;
 ?>
+</div>

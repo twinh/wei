@@ -113,6 +113,7 @@ a {
     width: auto;
     vertical-align: top;
     padding-bottom: 20px;
+    border: 0;
 }
 #qw-content .qw-splitter {
     width: 4px;
@@ -159,22 +160,6 @@ a {
     /* 解决浮动页脚挡住页面的问题 TODO 更合适的方法 */
     padding-bottom: 5px;
     border: none;
-}
-.qw-middle .qw-middle-header {
-    width: 100%;
-    border: none;
-    line-height: 40px;
-    text-indent: 10px;
-}
-.qw-middle .qw-middle-header img {
-    *padding-top: 5px;
-}
-.qw-middle .qw-middle-header .qw-middle-header-icon{
-    vertical-align: middle;
-}
-.qw-middle .qw-middle-header a{
-    font-size: 14px;
-    font-weight: bold;
 }
 .qw-middle .qw-middle-title{
     float: left;
