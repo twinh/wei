@@ -54,7 +54,7 @@ else :
 </div>
 <table id="qw-content-table" border="0" cellpadding="0" cellspacing="0">
     <tr id="qw-content">
-        <td id="qw-left">
+        <td id="qw-left" class="ui-helper-hidden">
             <div id="qw-left-content">
                 <?php Qwin::hook('viewLeft') ?>
             </div>
