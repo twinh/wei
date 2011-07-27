@@ -68,9 +68,7 @@
             </div>
         </div>
         <div class="qw-message-operation">
-        <?php
-            echo Qwin_Util_JQuery::link('javascript:history.go(-1);', qw_t('ACT_RETURN'), 'ui-icon-arrowthickstop-1-w')
-         ?>
+            <a class="qw-anchor" href="javascript:history.go(-1);" data="{icons:{primary:'ui-icon-arrowthickstop-1-w'}}"><?php echo $lang['ACT_RETURN'] ?></a>
         </div>
     </div>
 </div>

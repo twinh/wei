@@ -231,7 +231,11 @@ class Meta_Widget extends Qwin_Meta_Abstract implements Qwin_Widget_Interface
         if (5 != func_num_args()) {
             $data = '';
             foreach ($operation as $row) {
-                $data .= Qwin_Util_JQuery::icon($row['url'], $row['title'], $row['icon']);
+                // TODO　如何结合button
+                $data .= '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="'
+                      . $row['icon'] . '" href="' . $row['url'] . '"><span class="ui-icon ' . $row['icon']
+                      .  '">' . $row['icon'] . '</span></a>';
+                //$data .= '<a class="qw-anchor" href="' . $row['url'] . '" data="{icons:primary:\'' . $row['icon'] . '\'}">' . $row['title'] . '</a>';
             }
             return $data;
         } else {

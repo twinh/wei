@@ -40,8 +40,8 @@ endif;
 ?>
 <form id="<?php echo $options['id'] ?>" class="qw-form" action="<?php echo qw_url()?>" method="post">
 <div class="qw-p5">
-    <?php echo Qwin_Util_JQuery::button('submit', $lang['ACT_SUBMIT'], 'ui-icon-check') ?>
-    <?php echo Qwin_Util_JQuery::button('reset', $lang['ACT_RESET'], 'ui-icon-arrowreturnthick-1-w') ?>
+    <button type="submit" class="qw-button" data="{icons:{primary:'ui-icon-check'}}"><?php echo $lang['ACT_SUBMIT'] ?></button>
+    <button type="reset" class="qw-button" data="{icons:{primary:'ui-icon-arrowreturnthick-1-w'}}"><?php echo $lang['ACT_RESET'] ?></button>
 </div>
 <div class="ui-helper-hidden">
     <?php
@@ -100,7 +100,7 @@ endif;
 <?php endforeach; ?>
 <div class="qw-p5">
     <input type="hidden" name="_page" value="<?php echo $refererPage ?>" />
-    <?php echo Qwin_Util_JQuery::button('submit', $lang['ACT_SUBMIT'], 'ui-icon-check') ?>
-    <?php echo Qwin_Util_JQuery::button('reset', $lang['ACT_RESET'], 'ui-icon-arrowreturnthick-1-w') ?>
+    <button type="submit" class="qw-button" data="{icons:{primary:'ui-icon-check'}}"><?php echo $lang['ACT_SUBMIT'] ?></button>
+    <button type="reset" class="qw-button" data="{icons:{primary:'ui-icon-arrowreturnthick-1-w'}}"><?php echo $lang['ACT_RESET'] ?></button>
 </div>
 </form>

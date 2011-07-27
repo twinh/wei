@@ -134,7 +134,9 @@ class Com_Trash_Meta extends Com_Meta
         $operation += parent::sanitiseListOperation($value, $name, $data, $dataCopy, true);
         $data = '';
         foreach ($operation as $row) {
-            $data .= Qwin_Util_JQuery::icon($row['url'], $row['title'], $row['icon']);
+            $data .= '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="'
+                  . $row['icon'] . '" href="' . $row['url'] . '"><span class="ui-icon ' . $row['icon']
+                  .  '">' . $row['icon'] . '</span></a>';
         }
         return $data;
     }

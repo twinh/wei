@@ -35,9 +35,8 @@ jQuery(function($){
         <form action="" method="post">
         <div class="ui-form-content ui-box-content ui-widget-content ui-image-list">
             <div class="ui-theme-operation ui-operation-field">
-                <?php echo Qwin_Util_JQuery::button('submit', $lang['ACT_SUBMIT'], 'ui-icon-check') ?>
-                <?php echo Qwin_Util_JQuery::link('javascript:history.go(-1);', $lang['ACT_RETURN'], 'ui-icon-arrowthickstop-1-w') ?>
-                <input type="hidden" name="_submit" value="1" />
+                <button type="submit" class="qw-button" data="{icons:{primary:'ui-icon-check'}}"><?php echo $lang['ACT_SUBMIT'] ?></button>
+                <a class="qw-anchor" href="javascript:history.go(-1);" data="{icons:{primary:'ui-icon-arrowthickstop-1-w'}}"><?php echo $lang['ACT_RETURN'] ?></a>
             </div>
             <hr class="ui-line ui-widget-content" />
             <ul>
@@ -61,8 +60,8 @@ jQuery(function($){
             </ul>
             <hr class="ui-line ui-widget-content" />
             <div class="ui-theme-operation ui-operation-field">
-                <?php echo Qwin_Util_JQuery::button('submit', $lang['ACT_SUBMIT'], 'ui-icon-check') ?>
-                <?php echo Qwin_Util_JQuery::link('javascript:history.go(-1);', $lang['ACT_RETURN'], 'ui-icon-arrowthickstop-1-w') ?>
+                <button type="submit" class="qw-button" data="{icons:{primary:'ui-icon-check'}}"><?php echo $lang['ACT_SUBMIT'] ?></button>
+                <a class="qw-anchor" href="javascript:history.go(-1);" data="{icons:{primary:'ui-icon-arrowthickstop-1-w'}}"><?php echo $lang['ACT_RETURN'] ?></a>
             </div>
         </div>
         </form>

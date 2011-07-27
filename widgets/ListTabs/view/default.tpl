@@ -20,20 +20,21 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2011-04-15 19:21:20 v0.7.9
+ * @todo        列表data属性代码复杂,难以认清,需简化
  *}
 {strip}
 <div class="qw-listtabs">
 <ul class="ui-widget-content qw-listtabs-parent">
 {foreach from=$tabs item=tab}
-    <li>{Qwin_Util_JQuery::link($tab.url, $tab.title, $tab.icon, $tab.class, $tab.target, $tab.id)}</li>
+    <li><a class="qw-anchor" href="{$tab.url}" id="{$tab.id}" class="{$tab.class}" target="{$tab.target}" data="{literal}{icons:{primary:'{/literal}{$tab.icon}{literal}'}}{/literal}">{$tab.title}</a></li>
 {/foreach}
 {if !empty($moreTab)}
     <li class="qw-listtabs-more" id="qw-listtabs-more">
         <a class="qw-listtabs-more-link">{$lang.ACT_MORE}</a>
         <ul class="ui-helper-hidden ui-state-hover ui-corner-bottom">
-            {foreach from=$subTabs item=tab}
-            <li>{Qwin_Util_JQuery::link($tab.url, $tab.title, $tab.icon, $tab.class, $tab.target, $tab.id)}</li>
-            {/foreach}
+        {foreach from=$subTabs item=tab}
+        <li><a class="qw-anchor" href="{$tab.url}" id="{$tab.id}" class="{$tab.class}" target="{$tab.target}" data="{literal}{icons:{primary:'{/literal}{$tab.icon}{literal}'}}{/literal}">{$tab.title}</a></li>
+        {/foreach}
         </ul>
     </li>
 {/if}
