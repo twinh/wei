@@ -14,8 +14,10 @@ $minify->addArray(array(
     $jQuery->loadUi('core', false),
     $jQuery->loadUi('widget', false),
     $jQuery->loadUi('button', false),
+    $jQuery->loadUi('position', false),
     $jQuery->loadEffect('core', false),
     $jQuery->loadPlugin('qui', null, false),
+    $jQuery->loadPlugin('blockUI', null, false),
     $this->getTag('root') . 'style.js',
     //$this->getTag('root') . 'DD_roundies_0.0.2a-min.js',
 ));
@@ -63,6 +65,15 @@ else :
             <div class="qw-splitter-content"></div>
         </td>
         <td id="qw-middle" class="ui-widget-content">
+            <div class="qw-msg qw-m5 ui-state-highlight ui-corner-all ui-helper-hidden">
+                <span class="qw-msg-close ui-icon ui-icon-close"></span>
+                <div class="qw-msg-icon">
+                    <span class="qw-icon qw-icon-info-16"></span>
+                </div>
+                <div class="qw-msg-txt">
+                    加载中,请稍后...
+                </div>
+            </div>
             <?php Qwin::hook('viewContentHeader') ?>
             <?php require $this->getElement('content') ?>
         </td>
@@ -82,7 +93,6 @@ else :
     <div id="qw-footer-time"></div>
     <div id="qw-copyright" class="ui-widget">Executed in <?php echo $widget->call('app')->getEndTime() ?>(s). <?php echo qw_t('LBL_FOOTER_COPYRIGHT') ?></div>
 </div>
-<div id="qw-ajax" class="ui-state-highlight"></div>
 <?php
 endif;
 ?>

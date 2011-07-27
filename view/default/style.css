@@ -53,6 +53,9 @@ a {
 .qw-p5 {
     padding: 5px;
 }
+.qw-m5 {
+    margin: 5px;
+}
 /* 整体布局
 ----------------------------------*/
 #qw-main {
@@ -322,6 +325,40 @@ div.qw-middle-tab .ui-tabs-panel{
     top: 0;
     padding: 2px 3px;
     display: none;
+}
+/* Message
+----------------------------------*/
+.qw-msg {
+    padding: 6px;
+}
+.qw-msg-icon {
+    float: left;
+}
+.qw-msg-icon span.qw-icon {
+    display: block;
+    width: 16px;
+    height: 16px;
+}
+.qw-msg-txt {
+    margin-left: 24px;
+    line-height: 16px;
+}
+.qw-msg-top {
+    -moz-border-radius-topleft: 0;
+    -webkit-border-top-left-radius: 0;
+    border-top-left-radius: 0;
+    -moz-border-radius-topright: 0;
+    -webkit-border-top-right-radius: 0;
+    border-top-right-radius: 0;
+    padding: 0px;
+    border-top: 0;
+}
+.qw-msg-box div.ui-dialog-content {
+    padding: 4px;
+}
+.qw-msg-close {
+    float: right;
+    cursor: pointer;
 }
 /* 修复ie下按钮对应不整齐的问题 */
 .ui-operation-field a.ui-button {

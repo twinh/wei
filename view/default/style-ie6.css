@@ -7,11 +7,6 @@
         Link: http://www.qianduan.net/fix-ie6-dont-support-position-fixed-bug.html
 */
 
-/* 
-   TODO customize this sample style
-   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
-*/
-
 /* 修正IE6振动bug */
 html, body {
     background-image: url(about:blank);
@@ -26,7 +21,7 @@ html, body {
 }
 
 /* 底部固定  */
-#ui-floating-footer {
+#qw-footer {
     position: absolute;
     bottom: auto;
     top: expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));

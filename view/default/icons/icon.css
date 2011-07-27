@@ -21,7 +21,7 @@
  * @version     $Id$
  * @since       2011-01-04 01:36:40
  */
-.qw-icon{ background-position: 0 0; background-repeat: no-repeat;}
+.qw-icon{ /*background-position: 0 0;*/ background-repeat: no-repeat;}
 .qw-icon-address-16{background-image:url(address_16.png)}
 .qw-icon-address-32{background-image:url(address_32.png)}
 .qw-icon-address-48{background-image:url(address_48.png)}
