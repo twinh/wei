@@ -86,6 +86,9 @@ function qw_f(name)
     return qw_l('FLD_' + name.toUpperCase());
 }
 jQuery(function($){
+    // 设定元数据从data属性取值
+    $.metadata.setType('attr', 'data');
+    
     // 提示信息
     qwin.msg = {
         /**
@@ -202,14 +205,16 @@ jQuery(function($){
             qwin.page.splitter.trigger('toggle');
         });
     });
-    
-    // 为表单增加样式和鼠标操作效果
-    $('button:not(.ui-button-none), input:submit, input:reset, input:button, a.ui-anchor').button();
+
+    // 为表单增加样式和鼠标操作效果 // input:submit, input:reset, input:button ?
+    $('button.qw-button, a.qw-anchor').each(function(){
+        $(this).button($(this).metadata());
+    });
     $('td.qw-field-radio, td.qw-field-checkbox').buttonset();
-    $('button.ui-button, a.ui-button').qui({
+    /*$('button.ui-button, a.ui-button').qui({
         click: true,
         focus: true
-    });
+    });*/
     $('table.qw-form-table input:text, table.qw-form-table textarea, table.qw-form-table input:password').qui();
 
     // 点击页脚下按钮,回到顶部
@@ -222,7 +227,9 @@ jQuery(function($){
     $('table.ui-table td.ui-state-default').qui();
     $('table.ui-table td a.ui-jqgrid-icon').qui();
 
-    //
+    //    jQuery.metadata.setType('attr', 'data');
+    //var data = $('#d').metadata();
+    
     /*if ($.browser.mozilla) {
         function fixSelectStyle(obj) {
             obj.attr('style', obj.find('option:selected').attr('style'));

@@ -158,7 +158,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
         $output = '';
         foreach ($link as $row) {
             !isset($row['class']) && $row['class'] = null;
-            $output .= Qwin_Util_JQuery::link($row['url'], $row['title'], $row['icon'], $row['class']);
+            $output .= '<a class="qw-anchor" class="' . $row['class'] . '" href="' . $row['url'] . '" data="{icons:{primary:\'' . $row['icon'] . '\'}}">' . $row['title'] . '</a>&nbsp;';
         }
         if ($echo) {
             require $view->decodePath('<resource><theme>/<defaultPackage>/element/basic/output<suffix>');

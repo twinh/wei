@@ -29,15 +29,13 @@
     <div class="qw-middle-content">
         <div class="ui-space-10px"></div>
         <div class="qw-p5">
-        <?php 
-        echo Qwin_Util_JQuery::link(qw_u('member/my', 'view'), qw_t('LBL_VIEW_DATA'), 'ui-icon-lightbulb'),
-             Qwin_Util_JQuery::link(qw_u('member/my', 'edit'), qw_t('LBL_EDIT_DATA'), 'ui-icon-tag'),
-             //Qwin_Util_JQuery::link(qw_u('member/my', 'editpassword'), qw_t('LBL_EDIT_PASSWORD'), 'ui-icon-key'),
-             Qwin_Util_JQuery::link(qw_u('member/log', 'index', array('search' => 'member_id:' . $member['id'])), qw_t('LBL_MODULE_MEMBER_LOGINLOG'), 'ui-icon-script'),
-             //Qwin_Util_JQuery::link(qw_u('member/my', 'style'), qw_t('LBL_SWITCH_STYLE'), 'ui-icon-calculator'),
-             //Qwin_Util_JQuery::link(qw_u('member/my', 'language'), qw_t('LBL_SWITCH_LANGUAGE'), 'ui-icon-script'),
-             Qwin_Util_JQuery::link('javascript:history.go(-1);', qw_t('ACT_RETURN'), 'ui-icon-arrowthickstop-1-w')
-        ?>
+            <a class="qw-anchor" href="<?php echo qw_u('member/my', 'view') ?>" data="{icons:{primary:'ui-icon-lightbulb'}}"><?php echo $lang['LBL_VIEW_DATA'] ?></a>
+            <a class="qw-anchor" href="<?php echo qw_u('member/my', 'edit') ?>" data="{icons:{primary:'ui-icon-tag'}}"><?php echo $lang['LBL_EDIT_DATA'] ?></a>
+            <a class="qw-anchor" href="<?php echo qw_u('member/my', 'editpassword') ?>" data="{icons:{primary:'ui-icon-key'}}"><?php echo $lang['LBL_EDIT_PASSWORD'] ?></a>
+            <a class="qw-anchor" href="<?php echo qw_u('member/log', 'index', array('search' => 'member_id:' . $member['id'])) ?>" data="{icons:{primary:'ui-icon-script'}}"><?php echo $lang['LBL_MODULE_MEMBER_LOGINLOG'] ?></a>
+            <a class="qw-anchor" href="<?php echo qw_u('member/my', 'style') ?>" data="{icons:{primary:'ui-icon-calculator'}}"><?php echo $lang['LBL_SWITCH_STYLE'] ?></a>
+            <a class="qw-anchor" href="<?php echo qw_u('member/my', 'language') ?>" data="{icons:{primary:'ui-icon-script'}}"><?php echo $lang['LBL_SWITCH_LANGUAGE'] ?></a>
+            <a class="qw-anchor" href="javascript:history.go(-1);" data="{icons:{primary:'ui-icon-arrowthickstop-1-w'}}"><?php echo $lang['ACT_RETURN'] ?></a>
         </div>
         <div class="ui-space-10px"></div>
     </div>
