@@ -24,8 +24,8 @@
  */
 echo $this->_form->renderElement($element);
 ?>
-&nbsp;<button id="qw-button-popup-<?php echo $id ?>" class="qw-button-common" type="button"><span class="ui-icon ui-icon-calculator"><?php echo $element['name'] ?></span></button>
-<button id="qw-button-popup-<?php echo $id ?>-clear" class="qw-button-common" type="button"><span class="ui-icon ui-icon-arrowreturnthick-1-w"><?php echo $element['name'] ?></span></button>
+&nbsp;<button type="button" class="qw-button qw-button-common" id="qw-button-popup-<?php echo $id ?>" data="{icons:{primary:'ui-icon-calculator'},text:false}"><?php echo $element['name'] ?></button>
+<button type="button" class="qw-button qw-button-common" id="qw-button-popup-<?php echo $id ?>-clear" data="{icons:{primary:'ui-icon-arrowreturnthick-1-w'},text:false}"><?php echo $element['name'] ?></button>
 <script type="text/javascript">
 jQuery(function($){
     $('#<?php echo $id ?>').hide();
