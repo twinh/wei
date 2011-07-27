@@ -58,7 +58,7 @@ class Error_Widget extends Qwin_Widget_Abstract
                 . '<pre>' . $this->_getFileCode($file, $line) . '<pre>';
         }
         $this->_minify->add($this->_path . 'view/style.css');
-        $this->_view->error($e->getMessage(), null, $content);
+        $this->_view->info($e->getMessage(), null, $content);
     }
 
     /**

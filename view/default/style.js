@@ -86,6 +86,73 @@ function qw_f(name)
     return qw_l('FLD_' + name.toUpperCase());
 }
 jQuery(function($){
+    // 提示信息
+    qwin.msg = {
+        /**
+         * 创建一个内联提示信息对象
+         */
+        create: function(opts) {
+            opts = $.extend({}, qwin.msg.createDefaults, opts || {});
+            var s = '<div class="qw-msg ui-corner-all ' + opts.wrapClass + '">'
+                  + '   <span class="qw-msg-close ui-icon ui-icon-close"></span>'
+                  + '   <div class="qw-msg-icon">'
+                  + '   <span class="qw-icon ui-icon ' + opts.icon + '"></span>'
+                  + '   </div>'
+                  + '   <div class="qw-msg-txt">' + opts.msg + '</div>'
+                  + '</div>';
+            s = $(s);
+            s.find('span.qw-msg-close').click(function(){
+                s.hide().remove();
+            });
+            return s;
+        },
+        /**
+         * 弹出信息框,可选择居中或显示在顶部等,详细参见$.blockUI
+         */
+        show: function(opts) {
+            opts = $.extend({}, qwin.msg.defaults, opts || {});
+
+            // 根据定位设置不同的类名
+            if ('top' == opts.position) {
+                opts.themedCSS.top = 0;
+                opts.blockMsgClass += ' qw-msg-top';
+            } else {
+                opts.blockMsgClass += ' qw-msg-center';
+            }
+            opts.blockMsgClass += ' qw-msg-box';
+
+            opts.message = '<div class="qw-msg-icon">' +
+                '<span class="qw-icon ui-icon ' + opts.icon + '"></span>' +
+                //'<span class="qw-icon qw-icon-' + icon + '-16"></span>' +
+                '</div>' +
+                '<div class="qw-msg-txt">' + opts.message + '</div>',
+            $.blockUI(opts);
+        },
+        /**
+         * 隐藏弹出信息框
+         */
+        hide: function() {
+            $.unblockUI();
+        },
+        createDefaults: {
+            icon: 'ui-icon-info',
+            msg: null,
+            wrapClass: 'ui-state-highlight'
+        },
+        defaults: {
+            icon: 'ui-icon-info',
+            position: 'center',
+            // blockUI options
+            theme: true,
+            message: null,
+            showOverlay: false,
+            blockMsgClass: 'ui-state-highlight',
+            themedCSS: {
+                width: 'auto'
+            }
+        }
+    }
+    
     qwin.page = {
         left: $('#qw-left'),
         right: $('#qw-right'),
