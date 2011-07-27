@@ -65,15 +65,6 @@ else :
             <div class="qw-splitter-content"></div>
         </td>
         <td id="qw-middle" class="ui-widget-content">
-            <div class="qw-msg qw-m5 ui-state-highlight ui-corner-all ui-helper-hidden">
-                <span class="qw-msg-close ui-icon ui-icon-close"></span>
-                <div class="qw-msg-icon">
-                    <span class="qw-icon qw-icon-info-16"></span>
-                </div>
-                <div class="qw-msg-txt">
-                    加载中,请稍后...
-                </div>
-            </div>
             <?php Qwin::hook('viewContentHeader') ?>
             <?php require $this->getElement('content') ?>
         </td>
