@@ -162,6 +162,7 @@ jQuery(function($){
         content: $('#qw-content'),
         middle: $('#qw-middle'),
         splitter: $('#qw-content > td.qw-splitter'),
+        // Q: 是否通过设置各级样式高度为100%即可解决
         fixContentHeight: function(){
             if (!document.getElementById('qw-content-table')) {
                return false;

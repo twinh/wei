@@ -80,7 +80,7 @@ function qw_h()
 function qw_p($v = null, $exit = true)
 {
     echo '<p><pre>';
-    print_r($v);
+    echo htmlspecialchars(print_r($v, true));
     echo '</pre><p>';
     if (true === $exit) {
         exit;

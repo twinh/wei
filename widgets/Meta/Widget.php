@@ -231,7 +231,7 @@ class Meta_Widget extends Qwin_Meta_Abstract implements Qwin_Widget_Interface
         if (5 != func_num_args()) {
             $data = '';
             foreach ($operation as $row) {
-                // TODO　如何结合button
+                // TODO　如何结合button liveQuery ?
                 $data .= '<a class="ui-state-default ui-jqgrid-icon ui-corner-all" title="'
                       . $row['icon'] . '" href="' . $row['url'] . '"><span class="ui-icon ' . $row['icon']
                       .  '">' . $row['icon'] . '</span></a>';
