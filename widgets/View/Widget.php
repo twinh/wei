@@ -289,7 +289,7 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
                 . '</pre>';
         }
         
-        $title = $options['title'];
+        $title = $this->_widget->get('lang')->t($options['title']);
         $url = $options['url'];
         $time = intval($options['time']);
         $meta['page']['title'] = 'MOD_INFO';
