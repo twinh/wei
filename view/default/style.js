@@ -160,7 +160,7 @@ jQuery(function($){
         left: $('#qw-left'),
         right: $('#qw-right'),
         content: $('#qw-content'),
-        middle: $('#qw-middle'),
+        middle: $('#qw-center'),
         splitter: $('#qw-content > td.qw-splitter'),
         // Q: 是否通过设置各级样式高度为100%即可解决
         fixContentHeight: function(){

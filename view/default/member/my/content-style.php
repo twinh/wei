@@ -30,8 +30,8 @@ jQuery(function($){
     $('div.ui-image-list ul li').qui();
 });
 </script>
-<div class="qw-middle ui-widget-content">
-    <div class="qw-middle-content">
+<div class="qw-center ui-widget-content">
+    <div class="qw-center-content">
         <form action="" method="post">
         <div class="ui-form-content ui-box-content ui-widget-content ui-image-list">
             <div class="ui-theme-operation ui-operation-field">

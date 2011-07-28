@@ -21,6 +21,7 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2011-04-02 09:29:07
+ * @todo        是否与视图微件耦合?是否应该整合为一个
  */
 
 class Error_Widget extends Qwin_Widget_Abstract

@@ -25,11 +25,11 @@
  * @since       2011-01-04 15:53:16
  */
 ?>
-<div class="qw-middle-header">
+<div class="qw-center-header">
 <?php
 if($icon):
 ?>
-<img class="qw-middle-header-icon" src="<?php echo $icon ?>" alt="<?php echo $options['view']['meta']['page']['icon'] ?>" />&nbsp;
+<img class="qw-center-header-icon" src="<?php echo $icon ?>" alt="<?php echo $options['view']['meta']['page']['icon'] ?>" />&nbsp;
 <?php
 endif;
 echo $header;

@@ -21,19 +21,19 @@
  * @version     $Id$
  * @since       2011-7-25 17:33:19
 */
-.qw-middle-header {
+.qw-center-header {
     width: 100%;
     border: none;
     line-height: 40px;
     text-indent: 10px;
 }
-.qw-middle-header img {
+.qw-center-header img {
     *padding-top: 5px;
 }
-.qw-middle-header-icon{
+.qw-center-header-icon{
     vertical-align: middle;
 }
-.qw-middle-header a{
+.qw-center-header a{
     font-size: 14px;
     font-weight: bold;
 }

@@ -23,8 +23,8 @@
  * @since       2011-5-28 13:00:33
  */
 ?>
-<div class="qw-middle ui-widget-content">
-    <div class="qw-middle-content">
+<div class="qw-center ui-widget-content">
+    <div class="qw-center-content">
         <div class="ui-space-10px"></div>
         <div class="qw-p5">
             <div class="qw-p5">

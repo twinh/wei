@@ -65,7 +65,7 @@ else :
         <td id="qw-splitter-left" class="qw-splitter ui-state-default">
             <div class="qw-splitter-content"></div>
         </td>
-        <td id="qw-middle" class="ui-widget-content">
+        <td id="qw-center" class="ui-widget-content">
             <?php Qwin::hook('viewContentHeader') ?>
             <?php require $this->getElement('content') ?>
         </td>
