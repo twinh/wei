@@ -27,6 +27,7 @@ class Error_Hook extends Qwin_Hook_Abstract
 {
     public function hookAppStartup()
     {
-        return Qwin::call('-widget')->get('Error')->render(null);
+        // 初始化错误微件
+        Qwin::call('-widget')->get('error');
     }
 }

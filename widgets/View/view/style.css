@@ -23,7 +23,7 @@
  */
  
 .qw-message{
-    padding: 2em;
+    padding: 5px;
 }
 .qw-message p {
     padding: 2px 0;
@@ -32,8 +32,8 @@
     float: left;
 }
 .qw-message-icon {
-    width: 92px;
-    height: 92px;
+    width: 82px;
+    height: 82px;
     float: left;
 }
 .qw-message-icon span.qw-icon {
@@ -44,7 +44,7 @@
     margin-top: 8px;
 }
 .qw-message-box {
-    padding: 10px;
+    padding: 0px;
     min-height: 80px;
 }
 .qw-message-box h4 {
@@ -68,5 +68,5 @@
     text-align: right;
 }
 .qw-message-content {
-    margin-left:  110px;
+    margin: 6px 0 11px 90px;
 }

@@ -94,6 +94,7 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
         'content'   => array(),
         'time'      => 3000,
         'customer'  => false,
+        'exception' => null,
     );
 
     /**
@@ -105,6 +106,7 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
     {
         parent::__construct(array(), ArrayObject::ARRAY_AS_PROPS);
         $this->_options = $options + $this->_defaults;
+        $this->_widget = Qwin::call('-widget');
 
         // 使视图一致 TODO 更合适的位置
         $request = Qwin::call('-request');
@@ -181,7 +183,7 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
      *
      * @param string $layout 布局路径
      * @param array $data 数据
-     * @return Com_View 当前对象
+     * @return View_Widget 当前对象
      */
     public function display($layout = null, array $data = null)
     {   
@@ -273,11 +275,22 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
         $options = $options + $this->_infoOptions;
         $this->setElement('layout', '<root>layout<suffix>');
         $this->setElement('content', Qwin::call('-widget')->getPath() . 'View/view/info.php');
-        Qwin::widget('minify')->add(Qwin::call('-widget')->getPath() . 'View/view/style.css');
+        $this->_widget->get('minify')->add(Qwin::call('-widget')->getPath() . 'View/view/style.css');
 
+        $content = (array)$options['content'];
+        
+        // 开启错误调试且不是由异常发送过来的消息时,构造运行记录
+        if (Qwin::config('debug') && !$options['exception']) {
+            $error = $this->_widget->get('error');
+            $traces = debug_backtrace();
+            $content[] =  '<pre>'
+                . $error->getTraceString($traces, 1)
+                . $error->getFileCode($traces[1]['file'], $traces[1]['line'])
+                . '</pre>';
+        }
+        
         $title = $options['title'];
         $url = $options['url'];
-        $content = (array)$options['content'];
         $time = intval($options['time']);
         $meta['page']['title'] = 'MOD_INFO';
         $meta['page']['icon'] = $icon = $options['icon'];
@@ -362,7 +375,7 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
      * 跳转
      *
      * @param string $url 地址
-     * @return Com_View 当前对象
+     * @return View_Widget 当前对象
      */
     public function jump($url)
     {
@@ -420,6 +433,7 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
         } else {
             unset($this->_data[$name]);
         }
+        $this->_widget = Qwin::call('-widget');
         return $this;
     }
 

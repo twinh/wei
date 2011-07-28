@@ -24,14 +24,20 @@
  */
 
 class Error_Widget extends Qwin_Widget_Abstract
-{
-    public function render($options = null)
+{   
+    protected $_defaults = array(
+        'exception' => true,
+        //'error' => false,
+    );
+    
+    public function __construct(array $options = array())
     {
-        // 自定义错误和异常处理
-        set_exception_handler(array($this, 'renderException'));
-        set_error_handler(array($this, 'renderError'));
+        parent::__construct($options);
+        if ($this->_options['exception']) {
+            set_exception_handler(array($this, 'render'));
+        }
     }
-
+    
     /**
      * 显示异常信息
      *
@@ -39,9 +45,8 @@ class Error_Widget extends Qwin_Widget_Abstract
      * @todo xdebug
      * @todo view
      */
-    public function renderException($e)
+    public function render($e = null)
     {
-        restore_error_handler();
         restore_exception_handler();
         
         // 清空之前输出的内容,再重新启动
@@ -53,12 +58,18 @@ class Error_Widget extends Qwin_Widget_Abstract
         $file = $e->getFile();
         $line = $e->getLine();
         if (Qwin::config('debug')) {
-            $content =  'Throwed by ' . get_class($e) . ' in ' . $e->getFile() . ' on line ' . $e->getLine()
+            $content =  'Throwed by ' . get_class($e) . ' in ' . $file . ' on line ' . $line
                 . '<pre>' . $e->getTraceAsString() . '</pre>'
-                . '<pre>' . $this->_getFileCode($file, $line) . '<pre>';
+                . '<pre>' . $this->getFileCode($file, $line) . '<pre>';
         }
         $this->_minify->add($this->_path . 'view/style.css');
-        $this->_view->info($e->getMessage(), null, $content);
+        return $this->_view->displayInfo(array(
+            'icon'      => 'delete',
+            'title'     => $e->getMessage(),
+            'url'       => null,
+            'content'   => $content,
+            'exception' => $e,
+        ));
     }
 
     /**
@@ -83,7 +94,7 @@ class Error_Widget extends Qwin_Widget_Abstract
      * @param int $range 获取的总行数
      * @return string 文件代码
      */
-    protected function _getFileCode($file, $line, $range = 20)
+    public function getFileCode($file, $line, $range = 20)
     {
         if (false == ($code = file($file))) {
             return null;
@@ -108,11 +119,65 @@ class Error_Widget extends Qwin_Widget_Abstract
             if ($line != $i) {
                 $content .= htmlspecialchars($temp);
             } else {
-                $content .= '<div style="color:red;">' . htmlspecialchars($temp) . '</div>';
+                $content .= '<span class="ui-state-error">' . htmlspecialchars($temp) . '</span>';
             }
         }
 
         unset($code);
         return $content;
+    }
+    
+    /**
+     * 构造运行记录
+     * 
+     * @param array $traces 运行记录,一般由debug_backtrace取得
+     * @param int $offset 剔除运行记录数
+     * @return string 
+     */
+    public function getTraceString($traces, $offset = 0)
+    {
+        for($i = -1; $i < $offset; $i++) {
+            $first = array_shift($traces);
+        }
+        if (isset($first['class'])) {
+            $calledBy = $first['class'] . $first['type'] . $first['function'];
+        } else {
+            $calledBy = $first['function'];
+        }
+        $msg = 'Called by '. $calledBy . ' in ' . $first['file'] . ' on line ' . $first['line'] . PHP_EOL . PHP_EOL;
+        foreach ($traces as $i => $trace) {
+            $msg .= '#' . $i . ' ';
+            if (isset($trace['file'])) {
+                $msg .= sprintf('%s(%s)', $trace['file'], $trace['line']);
+            } else {
+                $msg .= '[internal function]';
+            }
+            if (isset($trace['class'])) {
+                $msg .= ': ' . $trace['class'] . $trace['type'] . $trace['function'];
+            } else {
+                $msg .= ': ' . $trace['function'];
+            }
+
+            $args = array();
+            foreach ($trace['args'] as $arg) {
+                if (is_object($arg)) {
+                    $args[] = 'Object(' . get_class($arg) . ')';
+                } elseif (is_string($arg)) {
+                    $args[] = "'{$arg}'";
+                } elseif (is_bool($arg)) {
+                    if (true == $arg) {
+                        $args[] = 'true';
+                    } else {
+                        $args[] = 'false';
+                    }
+                } else {
+                    $args[] = (string)$arg;
+                }
+            }
+            $msg .= '(' . implode(', ', $args) . ')';
+            $msg .= PHP_EOL;
+        }
+        $msg .= '#' . ++$i . ' {main}' . PHP_EOL . PHP_EOL;
+        return $msg;
     }
 }
