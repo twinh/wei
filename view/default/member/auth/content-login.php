@@ -40,11 +40,11 @@
             .addClass('ui-widget-content ui-corner-all');
     });
 </script>
-<div class="qw-middle ui-widget-content">
-    <div class="qw-middle-header">
+<div class="qw-center ui-widget-content">
+    <div class="qw-center-header">
     	<?php Qwin::hook('ViewContentHeader', array('view' => $this)) ?>
     </div>
-    <div class="qw-middle-content">
+    <div class="qw-center-content">
         <div class="qw-login-panel ui-widget">
             <h3 class="ui-state-default ui-corner-top"><a><?php echo $lang['LBL_LOGIN_TITLE'] ?></a></h3>
             <div class="qw-login-content ui-widget-content">

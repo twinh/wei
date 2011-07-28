@@ -25,8 +25,8 @@
  * @since       2010-08-26 11:01:20
  */
 ?>
-<div class="qw-middle ui-widget-content">
-    <div class="qw-middle-content qw-message ui-box-content ui-widget-content">
+<div class="qw-center ui-widget-content">
+    <div class="qw-center-content qw-message ui-box-content ui-widget-content">
         <div class="qw-message-box ui-state-highlight ui-corner-all">
             <div class="qw-message-icon">
                 <span class="qw-icon qw-icon-<?php echo $icon ?>-64"></span>

@@ -112,7 +112,7 @@ a {
     width: 4px;
     height: 100%;
 }
-#qw-middle {
+#qw-center {
     width: auto;
     vertical-align: top;
     padding-bottom: 20px;
@@ -159,27 +159,27 @@ a {
     text-align: center;
 }
 /* 中间内容 */
-.qw-middle{
+.qw-center{
     /* 解决浮动页脚挡住页面的问题 TODO 更合适的方法 */
     padding-bottom: 5px;
     border: none;
 }
-.qw-middle .qw-middle-title{
+.qw-center .qw-center-title{
     float: left;
     padding: 5px 18px 3px 7px;
     font-size: 14px;
     display: block;
 }
-.qw-middle .qw-middle-content{
+.qw-center .qw-center-content{
     border: 0;
     background: none;
     overflow: hidden;
 }
 /* TODO */
-div.qw-middle-tab{
+div.qw-center-tab{
     padding: 5px;
 }
-div.qw-middle-tab .ui-tabs-panel{
+div.qw-center-tab .ui-tabs-panel{
     padding: 15px 10px;
 }
 #ui-tab-1{

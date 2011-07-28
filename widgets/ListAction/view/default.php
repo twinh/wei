@@ -26,8 +26,8 @@
  */
 echo $this->getPackerSign();
 ?>
-<div class="qw-middle">
-    <div class="qw-middle-content">
+<div class="qw-center">
+    <div class="qw-center-content">
         <div class="qw-p5">
         <div class="ui-jqgrid-top">
     <?php Qwin::hook('viewListTop', array('view' => $this)) ?>
