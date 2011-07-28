@@ -62,7 +62,7 @@ class Error_Widget extends Qwin_Widget_Abstract
                 . '<pre>' . $e->getTraceAsString() . '</pre>'
                 . '<pre>' . $this->getFileCode($file, $line) . '<pre>';
         }
-        $this->_minify->add($this->_path . 'view/style.css');
+
         return $this->_view->displayInfo(array(
             'icon'      => 'delete',
             'title'     => $e->getMessage(),
