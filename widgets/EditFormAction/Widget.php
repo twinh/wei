@@ -86,7 +86,7 @@ class EditFormAction_Widget extends Qwin_Widget_Abstract
         //throw new Exception('d');
         // 记录不存在,加载错误视图
         if (false === $dbData) {
-            return $options['display'] ? $this->_view->alert($this->_lang['MSG_NO_RECORD']) : array(
+            return $options['display'] ? $this->_view->alert('MSG_NO_RECORD') : array(
                 'result'    => false,
                 'message'   => $this->_lang['MSG_NO_RECORD'],
             );

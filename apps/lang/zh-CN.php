@@ -157,10 +157,7 @@ return array(
 
     'LBL_CANCEL' => '取消',
     'LBL_CUSTOM_VALUE' => '自定义值',
-
-    'LBL_TREE_PREFIX_1' => '┃',
-    'LBL_TREE_PREFIX_2' => '┣',
-
+    
     'MOD_INFO' => '信息提示',
     'LBL_SHORTCUT' => '快速启动',
 
