@@ -33,7 +33,7 @@ $minify->addArray(array(
 <!--<script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>-->
 </head>
 <body>
-<div id="qw-main" class="ui-widget-content">
+<div id="qw-body" class="ui-widget-content">
 <?php
 if ($request['view'] && $this->elementExists($request['view'])) :
     require $this->getElement($request['view']);
@@ -55,8 +55,8 @@ else :
 </table>
 <div id="qw-header2" class="ui-state-default">
 </div>
-<table id="qw-content-table" border="0" cellpadding="0" cellspacing="0">
-    <tr id="qw-content">
+<table id="qw-main-table" cellpadding="0" cellspacing="0">
+    <tr id="qw-main">
         <td id="qw-left" class="ui-helper-hidden">
             <div id="qw-left-content">
                 <?php Qwin::hook('viewLeft') ?>
@@ -67,7 +67,9 @@ else :
         </td>
         <td id="qw-center" class="ui-widget-content">
             <?php Qwin::hook('viewContentHeader') ?>
-            <?php require $this->getElement('content') ?>
+            <div id="qw-content">
+                <?php require $this->getElement('content') ?>
+            </div>
         </td>
         <td id="qw-splitter-right" class="qw-splitter ui-state-default">
             <div class="qw-splitter-content"></div>
@@ -79,11 +81,11 @@ else :
         </td>
     </tr>
 </table>
-</div>
 <div id="qw-footer" class="ui-state-default">
     <div id="qw-footer-arrow" class="ui-icon ui-icon-arrowthickstop-1-n"></div>
     <div id="qw-footer-time"></div>
     <div id="qw-copyright" class="ui-widget">Executed in <?php echo $widget->call('app')->getEndTime() ?>(s). <?php echo qw_t('LBL_FOOTER_COPYRIGHT') ?></div>
+</div>
 </div>
 <?php
 endif;

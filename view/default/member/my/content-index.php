@@ -25,8 +25,8 @@
  * @since       2010-08-28 19:29:07
  */
 ?>
-<div class="qw-center ui-widget-content">
-    <div class="qw-center-content">
+<div class="qw-content ui-widget-content">
+    <div class="qw-content-content">
         <div class="ui-space-10px"></div>
         <div class="qw-p5">
             <a class="qw-anchor" href="<?php echo qw_u('member/my', 'view') ?>" data="{icons:{primary:'ui-icon-lightbulb'}}"><?php echo $lang['LBL_VIEW_DATA'] ?></a>
