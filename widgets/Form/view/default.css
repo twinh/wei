@@ -113,7 +113,10 @@
 .qw-label-hidden {
     display: none;
 }
-
 .qw-form-readonly {
     display: inline;
+}
+/* todo 规范 */
+.ui-validator-required {
+    color: orange;
 }
