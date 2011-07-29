@@ -23,8 +23,8 @@
 */
 .qw-popup-iframe {
     height: 100%;
-    width: 800px;
+    width: 794px;
 }
 .qw-popup .ui-dialog-content {
-    padding: 0;
+    padding: 5px;
 }
