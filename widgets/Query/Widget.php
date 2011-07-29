@@ -278,7 +278,7 @@ class Query_Widget extends Doctrine_Query implements Qwin_Widget_Interface
             }
 
             // null and not null
-            if(null === $value || 'NULL' === $value) {
+            if(null === $value || 'null' === strtolower($value)) {
                 if ('eq' == $fieldSet[2]) {
                     $this->andWhere($alias . $fieldSet[0] . ' IS NULL');
                     continue;

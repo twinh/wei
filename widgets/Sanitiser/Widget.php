@@ -85,7 +85,7 @@ class Sanitiser_Widget extends Qwin_Widget_Abstract
 
         foreach ($meta['fields'] as $name => $field) {
             if ($options['null']) {
-                if (!array_key_exists($name, $data) || 'NULL' === $data[$name] || '' === $data[$name]) {
+                if (!array_key_exists($name, $data) || 'null' === $data[$name] || '' === $data[$name]) {
                     $data[$name] = null;
                 }
             }
@@ -164,7 +164,7 @@ class Sanitiser_Widget extends Qwin_Widget_Abstract
 ////            }
 //            
 //            if ($options['null']) {
-//                if ('NULL' === $data[$name] || '' === $data[$name]) {
+//                if ('null' === $data[$name] || '' === $data[$name]) {
 //                    $data[$name] = null;
 //                }
 //            }

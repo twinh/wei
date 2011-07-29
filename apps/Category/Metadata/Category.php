@@ -131,7 +131,7 @@ class Com_Category_Meta_Category extends Com_Meta
 
     public function sanitiseListName($val, $name, $data, $copyData)
     {
-        if(NULL != $copyData['parent_id'])
+        if(null != $copyData['parent_id'])
         {
             // 缓存Tree对象
             if(!isset($this->treeObj))
@@ -152,7 +152,7 @@ class Com_Category_Meta_Category extends Com_Meta
 
     public function sanitiseDbParentId($val, $name, $data)
     {
-        '0' == $val && $val = 'NULL';
+        '0' == $val && $val = 'null';
         return $val;
     }
 }

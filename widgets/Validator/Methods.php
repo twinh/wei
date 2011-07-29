@@ -120,6 +120,6 @@ class Validator_Methods
 
     public function notNull($value)
     {
-        return 'NULL' !== $value || '' !== $value || null !== $value;
+        return 'null' !== strtolower($value) || '' !== $value || null !== $value;
     }
 }

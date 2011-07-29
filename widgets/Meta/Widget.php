@@ -345,7 +345,7 @@ class Meta_Widget extends Qwin_Meta_Abstract implements Qwin_Widget_Interface
             $url = Qwin::widget('url');
             $name = str_replace(':', '\:', $name);
             if (null === $dataCopy[$name]) {
-                $dataCopy[$name] = 'NULL';
+                $dataCopy[$name] = 'null';
             } else {
                 $dataCopy[$name] = str_replace(':', '\:', $dataCopy[$name]);
             }

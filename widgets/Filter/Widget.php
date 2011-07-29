@@ -87,9 +87,9 @@ class Filter_Widget extends Qwin_Widget_Abstract
                         'name' => $lang['LBL_ALL'],
                         'value' => null,
                     ),
-                    'NULL' => array(
+                    'null' => array(
                         'name' => $lang['LBL_NOT_FILLED'],
-                        'value' => 'NULL',
+                        'value' => 'null',
                     ),
                 ) + $data[$name];
 
