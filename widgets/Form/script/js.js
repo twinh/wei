@@ -29,11 +29,14 @@
  */
 var validateCode = new Array();
 jQuery(function($){
+    // 为表单输入框增加UI样式
     $('form.qw-form input, form.qw-form textarea, form.qw-form select').addClass('ui-widget-content ui-corner-all');
     
-    // TODO 如何不影响输入框的数据,如使用锁的图标表示只读,或提示语浮动置于表单最右端
+    // TODO 必填和只读互斥
+    // 为只读项增加锁的图标
+    var readonly = '<span title="' + qwin.lang.READONLY + '" class="qw-form-readonly ui-icon ui-icon-locked">&nbsp;&nbsp;&nbsp;</span>';
     $('form.qw-form input[readonly], form.qw-form textarea[readonly]').each(function(){
-        $('label[for="' + $(this).attr('id') + '"]').prepend('<span title="Readonly" class="qw-form-readonly ui-icon ui-icon-locked">&nbsp;&nbsp;&nbsp;</span>');
+        $('label[for="' + $(this).attr('id') + '"]').prepend(readonly);
         $(this).addClass('ui-priority-secondary');
     });
     $('div.qw-icon-common a').qui();
