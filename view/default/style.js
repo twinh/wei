@@ -159,16 +159,16 @@ jQuery(function($){
     qwin.page = {
         left: $('#qw-left'),
         right: $('#qw-right'),
+        center: $('#qw-center'),
         content: $('#qw-content'),
-        middle: $('#qw-center'),
-        splitter: $('#qw-content > td.qw-splitter'),
+        splitter: $('#qw-main > td.qw-splitter'),
         // Q: 是否通过设置各级样式高度为100%即可解决
         fixContentHeight: function(){
-            if (!document.getElementById('qw-content-table')) {
+            if (!document.getElementById('qw-main-table')) {
                return false;
             }
-            var height = $(window).height() - $('#qw-content-table').offset().top;
-            $('#qw-content-table').css('height', height);
+            var height = $(window).height() - $('#qw-main-table').offset().top;
+            $('#qw-main-table').css('height', height);
             return true;
         }
     };

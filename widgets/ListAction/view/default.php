@@ -26,11 +26,8 @@
  */
 echo $this->getPackerSign();
 ?>
-<div class="qw-center">
-    <div class="qw-center-content">
-        <div class="qw-p5">
-        <div class="ui-jqgrid-top">
-    <?php Qwin::hook('viewListTop', array('view' => $this)) ?>
+<div class="ui-jqgrid-top">
+<?php Qwin::hook('viewListTop', array('view' => $this)) ?>
 </div>
 <div class="qw-c"></div>
 <?php $jqGridWidget->render($jqGridOptions) ?>
@@ -113,6 +110,3 @@ jQuery(function($){
     }
 });
 </script>
-        </div>
-    </div>
-</div>

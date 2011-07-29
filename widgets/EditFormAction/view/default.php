@@ -25,14 +25,10 @@
  * @since       2009-11-24 18:47:32
  */
 ?>
-<div class="qw-center ui-widget-content">
-    <div class="qw-center-content">
-    <div class="qw-p5">
-        <?php echo $operLinks ?>
-        </div>
-    <?php $formWidget->render($formOptions) ?>
-    <div class="qw-p5">
-        <?php echo $operLinks ?>
-    </div>
+<div class="qw-p5">
+    <?php echo $operLinks ?>
 </div>
+<?php $formWidget->render($formOptions) ?>
+<div class="qw-p5">
+    <?php echo $operLinks ?>
 </div>

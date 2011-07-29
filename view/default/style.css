@@ -9,11 +9,13 @@ body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,fieldset,p,blockquote,input,te
 /* 让火狐一直显示右边滚动条 */
 html {
     overflow-y: scroll;
+    height: 100%;
 }
 body {
     font-size: 12px;
     margin: 0 auto;
     min-width: 1000px;
+    height: 100%;
 }
 /* 修复搜狗浏览器(4.0Chrome内核)样式错误,区别? */
 ul {
@@ -58,9 +60,10 @@ a {
 }
 /* 整体布局
 ----------------------------------*/
-#qw-main {
+#qw-body {
     margin: 0 auto;
     border: none;
+    height: 100%;
 }
 /* 页眉 */
 #qw-header {
@@ -95,10 +98,10 @@ a {
     border-right: 0;
 }
 /* 中间内容 */
-#qw-content-table {
+#qw-main-table {
     width: 100%;
 }
-#qw-content {
+#qw-main {
     vertical-align: top;
 }
 #qw-left{
@@ -112,13 +115,16 @@ a {
     width: 4px;
     height: 100%;
 }
-#qw-center {
+#qw-content-box {
     width: auto;
     vertical-align: top;
     padding-bottom: 20px;
     border: 0;
 }
-#qw-content .qw-splitter {
+#qw-content {
+    padding: 5px;
+}
+#qw-main .qw-splitter {
     width: 4px;
     border-top: none;
     vertical-align: top;
@@ -159,27 +165,27 @@ a {
     text-align: center;
 }
 /* 中间内容 */
-.qw-center{
+#qw-center {
     /* 解决浮动页脚挡住页面的问题 TODO 更合适的方法 */
-    padding-bottom: 5px;
+    padding-bottom: 25px;
     border: none;
 }
-.qw-center .qw-center-title{
+#qw-center .qw-content-title{
     float: left;
     padding: 5px 18px 3px 7px;
     font-size: 14px;
     display: block;
 }
-.qw-center .qw-center-content{
+#qw-content {
     border: 0;
     background: none;
     overflow: hidden;
 }
 /* TODO */
-div.qw-center-tab{
+div.qw-content-tab{
     padding: 5px;
 }
-div.qw-center-tab .ui-tabs-panel{
+div.qw-content-tab .ui-tabs-panel{
     padding: 15px 10px;
 }
 #ui-tab-1{
