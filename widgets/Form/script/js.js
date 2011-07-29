@@ -33,9 +33,8 @@ jQuery(function($){
     
     // TODO 如何不影响输入框的数据,如使用锁的图标表示只读,或提示语浮动置于表单最右端
     $('form.qw-form input[readonly], form.qw-form textarea[readonly]').each(function(){
-        $(this)
-            .attr('autocomplete', 'off')
-            .val($(this).val() + '(' + qwin.lang.LBL_READONLY + ')');
+        $('label[for="' + $(this).attr('id') + '"]').prepend('<span title="Readonly" class="qw-form-readonly ui-icon ui-icon-locked">&nbsp;&nbsp;&nbsp;</span>');
+        $(this).addClass('ui-priority-secondary');
     });
     $('div.qw-icon-common a').qui();
 
