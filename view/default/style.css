@@ -366,6 +366,17 @@ div.qw-content-tab .ui-tabs-panel{
     float: right;
     cursor: pointer;
 }
+
+.qw-loading {
+    background: url('images/loading.gif') 0 0 no-repeat;
+}
+.qw-popup-iframe {
+    overflow-x: hidden;
+}
+/*
+background-repeat: no-repeat;}
+.qw-icon-address-16{background-image:url(address_16.png)}
+*/
 /* 修复ie下按钮对应不整齐的问题 */
 .ui-operation-field a.ui-button {
     vertical-align: top;

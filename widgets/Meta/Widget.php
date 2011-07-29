@@ -29,7 +29,7 @@
  */
 
 /**
- * @see Qwin_Application_Meta
+ * @see Qwin_Meta_Abstract
  */
 require_once 'Qwin/Meta/Abstract.php';
 
@@ -107,39 +107,6 @@ class Meta_Widget extends Qwin_Meta_Abstract implements Qwin_Widget_Interface
         }
         return $this->_offsetGetByFile($index, $driver);
     }
-
-//    public function setAssignToMeta()
-//    {
-//        $this->merge('fields', array(
-//            'assign_to' => array(
-//                'order' => 1100,
-//                'form' => array(
-//                    '_type' => 'text',
-//                    '_widget' => array(
-//                        array(
-//                            array('PopupGrid_Widget', 'render'),
-//                            array(array(
-//                                'title'  => 'LBL_MODULE_MEMBER',
-//                                'module' => 'com/member',
-//                                'list' => 'id,group_id,username,email',
-//                                'fields' => array('username', 'id'),
-//                            )),
-//                        ),
-//                    ),
-//                ),
-//                'attr' => array(
-//                    'isLink' => 0,
-//                    'isList' => 0,
-//                ),
-//                'validator' => array(
-//                    'rule' => array(
-//                        'required' => true,
-//                    ),
-//                ),
-//            ),
-//        ));
-//        return $this;
-//    }
 
      /**
      * 在列表操作下,设置记录添加时间的格式为年月日
@@ -349,7 +316,7 @@ class Meta_Widget extends Qwin_Meta_Abstract implements Qwin_Widget_Interface
             } else {
                 $dataCopy[$name] = str_replace(':', '\:', $dataCopy[$name]);
             }
-            $value = '<a href="' . $url->url($meta->getParent()->get('module')->getUrl(), 'index', array('search' => $name . ':' . $dataCopy[$name], 'view' => 'content')) . '">' . $data[$name] . '</a>';
+            $value = '<a href="' . $url->url($meta->getParent()->get('module')->getUrl(), 'index', array('search' => $name . ':' . $dataCopy[$name])) . '">' . $data[$name] . '</a>';
         }
         return $value;
     }

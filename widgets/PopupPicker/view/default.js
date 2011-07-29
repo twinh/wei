@@ -44,6 +44,9 @@
                 id: opts.id,
                 url: opts.url
             })
+            qwin.msg.show({
+                message: 'loading...'
+            });
             opts.obj
             .dialog(opts.dialog)
             .find('iframe').load(function(){
@@ -62,6 +65,7 @@
                         opts.obj.dialog('option', 'height', '470');
                     }*/
                 });
+                qwin.msg.hide();
             });
             this.blur();
         });
