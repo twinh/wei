@@ -56,7 +56,7 @@ else :
 <div id="qw-header2" class="ui-state-default">
 </div>
 <table id="qw-main-table" cellpadding="0" cellspacing="0">
-    <tr id="qw-main">
+    <tr id="qw-main" class="ui-widget-content">
         <td id="qw-left" class="ui-helper-hidden">
             <div id="qw-left-content">
                 <?php Qwin::hook('viewLeft') ?>
@@ -65,7 +65,7 @@ else :
         <td id="qw-splitter-left" class="qw-splitter ui-state-default">
             <div class="qw-splitter-content"></div>
         </td>
-        <td id="qw-center" class="ui-widget-content">
+        <td id="qw-center">
             <?php Qwin::hook('viewContentHeader') ?>
             <div id="qw-content">
                 <?php require $this->getElement('content') ?>
