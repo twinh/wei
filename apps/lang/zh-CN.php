@@ -121,7 +121,7 @@ return array(
     'LBL_FOOTER_COPYRIGHT' => 'Powered by Qwin Framework, Version ' . Qwin::VERSION . '. Copyright © 2008-2010 Twin. All rights reserved.',
     'ACT_VIEW' => '查看',
     'ACT_UPDATE' => '更新',
-    'ACT_INDEX' => '列表',
+    'ACT_INDEX' => '首页',
     'LBL_MESSAGE' => '提示信息',
     'LBL_MEMBER_CENTER' => '用户中心',
     'LBL_MANAGEMENT' => '管理',
