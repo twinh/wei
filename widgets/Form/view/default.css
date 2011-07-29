@@ -113,3 +113,7 @@
 .qw-label-hidden {
     display: none;
 }
+
+.qw-form-readonly {
+    display: inline;
+}
