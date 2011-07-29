@@ -73,7 +73,7 @@ class Com_Category_Widget extends Qwin_Widget_Abstract
         }
         $tree->getAllList($treeData, $parent);
 
-        $this->_resourceCache[$name]['NULL'] = '';
+        $this->_resourceCache[$name]['null'] = '';
         // 添加前缀
         if ($isPrefix) {
             $lang = Qwin::call('-lang');

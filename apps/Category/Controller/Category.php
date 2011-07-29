@@ -84,17 +84,17 @@ class Com_Category_Controller_Category extends Com_ActionController
         // 转换为树
         $treeData = array();
         $tree = new Qwin_Tree();
-        $tree->setParentDefaultValue(NULL);
+        $tree->setParentDefaultValue(null);
         foreach($cateogryCache as $row)
         {
             $tree->addNode($row);
         }
-        $tree->getAllList($treeData, NULL);
+        $tree->getAllList($treeData, null);
         $tree->setLayer($treeData);
 
         // 转换为表单资源
         $categoryResource = array(
-            'NULL' => '',
+            'null' => '',
         );
         foreach($treeData as $id)
         {

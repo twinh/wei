@@ -72,7 +72,7 @@ class Ide_Option_Widget extends Qwin_Widget_Abstract
             'style' => null,
         ),
 //        1 => array(
-//            'value' => 'NULL',
+//            'value' => 'null',
 //            'name'  => 'LBL_PLEASE_SELECT',
 //            'color' => null,
 //            'style' => null,

@@ -44,7 +44,7 @@ class Form_Widget extends Qwin_Widget_Abstract
         'validate'  => true,
         'addSelect' => true,
         'select'    => array(
-            'value' => 'NULL',
+            'value' => 'null',
             'name'  => 'LBL_PLEASE_SELECT',
             'color' => null,
             'style' => null,

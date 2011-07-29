@@ -38,7 +38,7 @@ class Ide_Option_CodeMeta extends Com_Meta
                         '_type' => 'select',
                         '_resourceGetter' => array(
                             array('Ide_Option_Widget', 'get'),
-                            array('css-color', 'NULL'),
+                            array('css-color', 'null'),
                         ),
                     ),
                 ),

@@ -111,7 +111,7 @@ class Cms_Article_Meta extends Com_Meta
                             array('Ide_Option_Widget', 'get'),
                             'font-color',
                         ),
-                        '_value' => 'NULL',
+                        '_value' => 'null',
                     ),
                     'attr' => array(
                         'isList' => 0,
@@ -355,7 +355,7 @@ class Cms_Article_Meta extends Com_Meta
     /*public function sanitiseEditCategoryId($val, $name, $data)
     {
         // 专题
-        if(NULL != $data['category_2'])
+        if(null != $data['category_2'])
         {
             $this->__meta['field']['category_id']['form']['_resourceGetter'] = array(
                 array('Project_Helper_Category', 'getTreeResource'),
@@ -390,7 +390,7 @@ class Cms_Article_Meta extends Com_Meta
 
     public function sanitiseEditTitleColor($value, $name, $data, $copyData)
     {
-        null == $value && $value = 'NULL';
+        null == $value && $value = 'null';
         return $value;
     }
 
@@ -405,7 +405,7 @@ class Cms_Article_Meta extends Com_Meta
 
     public function sanitiseDbTitleColor($value, $name, $data, $copyData)
     {
-        'NULL' == $value && $value = null;
+        'null' == $value && $value = null;
         return $value;
     }
 }
