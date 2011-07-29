@@ -25,50 +25,46 @@
  * @since       2010-08-26 11:01:20
  */
 ?>
-<div class="qw-content ui-widget-content">
-    <div class="qw-content-content qw-message ui-box-content ui-widget-content">
-        <div class="qw-message-box ui-state-highlight ui-corner-all">
-            <div class="qw-message-icon">
-                <span class="qw-icon qw-icon-<?php echo $icon ?>-64"></span>
-            </div>
-            <div class="qw-message-content">
-                <h4><?php echo $title ?></h4>
-                <?php
-                    if (is_array($content)) :
-                ?>
-                <ol>
-                    <?php
-                    foreach ($content as $row) :
-                    ?>
-                    <li><?php echo $row ?></li>
-                    <?php
-                    endforeach;
-                    ?>
-                </ol>
-                <?php
-                    elseif (isset($content)) :
-                ?>
-                <p><?php echo $content ?></p>
-                <?php
-                    endif;
-                    if (isset($url)) :
-                ?>
-                <script type="text/javascript">
-                    window.setTimeout(function(){
-                        window.location.href = '<?php echo str_replace('\'', '\\\'', $url) ?>';
-                    }, <?php echo $time ?>);
-                </script>
-                <?php
-                    else:
-                        $url = 'javascript:history.go(-1);';
-                    endif;
-                ?>
-                <p>&nbsp;</p>
-                <p><a class="qw-message-link" href="<?php echo $url ?>"><?php echo qw_t('MSG_CLICK_TO_REDIRECT') ?></a></p>
-            </div>
-        </div>
-        <div class="qw-message-operation">
-            <a class="qw-anchor" href="javascript:history.go(-1);" data="{icons:{primary:'ui-icon-arrowthickstop-1-w'}}"><?php echo $lang['ACT_RETURN'] ?></a>
-        </div>
+<div class="qw-message-box ui-state-highlight ui-corner-all">
+    <div class="qw-message-icon">
+        <span class="qw-icon qw-icon-<?php echo $icon ?>-64"></span>
     </div>
+    <div class="qw-message-content">
+        <h4><?php echo $title ?></h4>
+        <?php
+            if (is_array($content)) :
+        ?>
+        <ol>
+            <?php
+            foreach ($content as $row) :
+            ?>
+            <li><?php echo $row ?></li>
+            <?php
+            endforeach;
+            ?>
+        </ol>
+        <?php
+            elseif (isset($content)) :
+        ?>
+        <p><?php echo $content ?></p>
+        <?php
+            endif;
+            if (isset($url)) :
+        ?>
+        <script type="text/javascript">
+            window.setTimeout(function(){
+                window.location.href = '<?php echo str_replace('\'', '\\\'', $url) ?>';
+            }, <?php echo $time ?>);
+        </script>
+        <?php
+            else:
+                $url = 'javascript:history.go(-1);';
+            endif;
+        ?>
+        <p>&nbsp;</p>
+        <p><a class="qw-message-link" href="<?php echo $url ?>"><?php echo qw_t('MSG_CLICK_TO_REDIRECT') ?></a></p>
+    </div>
+</div>
+<div class="qw-message-operation">
+    <a class="qw-anchor" href="javascript:history.go(-1);" data="{icons:{primary:'ui-icon-arrowthickstop-1-w'}}"><?php echo $lang['ACT_RETURN'] ?></a>
 </div>
