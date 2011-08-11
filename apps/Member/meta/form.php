@@ -29,6 +29,7 @@ return array(
             '_type' => 'hidden',
         ),
         'group_id' => array(
+            'readonly' => true,
             '_link' => true,
             '_type' => 'text',
             '_relation' => array(
@@ -59,6 +60,7 @@ return array(
             '_onEdit' => array(
                 '_type' => 'text',
                 'readonly' => 'true',
+                '_value' => '●●●●●'
             ),
             // TODO 更好的方法,如显示<em>(不可见)</em>
             '_onView' => array(
@@ -106,6 +108,15 @@ return array(
             
         ),
         'theme' => array(
+            '_type' => 'select',
+            '_resourceGetter' => array(
+                array('Style_Widget', 'getResource'),
+            ),
+        ),
+        'date' => array(
+            
+        ),
+        'time' => array(
             
         ),
         'telephone' => array(
@@ -149,6 +160,8 @@ return array(
         'GRP_CUSTOMER' => array(
             array('language'),
             array('theme'),
+            array('date'),
+            array('time'),
         ),
         'GRP_MORE' => array(
             array('telephone'),

@@ -25,18 +25,13 @@
  * @since       2010-08-28 19:29:07
  */
 ?>
-<div class="qw-content ui-widget-content">
-    <div class="qw-content-content">
-        <div class="ui-space-10px"></div>
-        <div class="qw-p5">
-            <a class="qw-anchor" href="<?php echo qw_u('member/my', 'view') ?>" data="{icons:{primary:'ui-icon-lightbulb'}}"><?php echo $lang['LBL_VIEW_DATA'] ?></a>
-            <a class="qw-anchor" href="<?php echo qw_u('member/my', 'edit') ?>" data="{icons:{primary:'ui-icon-tag'}}"><?php echo $lang['LBL_EDIT_DATA'] ?></a>
-            <a class="qw-anchor" href="<?php echo qw_u('member/my', 'editpassword') ?>" data="{icons:{primary:'ui-icon-key'}}"><?php echo $lang['LBL_EDIT_PASSWORD'] ?></a>
-            <a class="qw-anchor" href="<?php echo qw_u('member/log', 'index', array('search' => 'member_id:' . $member['id'])) ?>" data="{icons:{primary:'ui-icon-script'}}"><?php echo $lang['LBL_MODULE_MEMBER_LOGINLOG'] ?></a>
-            <a class="qw-anchor" href="<?php echo qw_u('member/my', 'style') ?>" data="{icons:{primary:'ui-icon-calculator'}}"><?php echo $lang['LBL_SWITCH_STYLE'] ?></a>
-            <a class="qw-anchor" href="<?php echo qw_u('member/my', 'language') ?>" data="{icons:{primary:'ui-icon-script'}}"><?php echo $lang['LBL_SWITCH_LANGUAGE'] ?></a>
-            <a class="qw-anchor" href="javascript:history.go(-1);" data="{icons:{primary:'ui-icon-arrowthickstop-1-w'}}"><?php echo $lang['ACT_RETURN'] ?></a>
-        </div>
-        <div class="ui-space-10px"></div>
-    </div>
-</div>
+<div class="ui-space-10px"></div>
+<div class="qw-p5">
+    <a class="qw-anchor" href="<?php echo qw_u('member/my', 'view') ?>" data="{icons:{primary:'ui-icon-lightbulb'}}"><?php echo $lang['LBL_VIEW_DATA'] ?></a>
+    <a class="qw-anchor" href="<?php echo qw_u('member/my', 'edit') ?>" data="{icons:{primary:'ui-icon-tag'}}"><?php echo $lang['LBL_EDIT_DATA'] ?></a>
+    <a class="qw-anchor" href="<?php echo qw_u('member/my', 'editpassword') ?>" data="{icons:{primary:'ui-icon-key'}}"><?php echo $lang['LBL_EDIT_PASSWORD'] ?></a>
+    <a class="qw-anchor" href="<?php echo qw_u('member/log', 'index', array('search' => 'member_id:' . $member['id'])) ?>" data="{icons:{primary:'ui-icon-script'}}"><?php echo $lang['LBL_MODULE_MEMBER_LOGINLOG'] ?></a>
+    <a class="qw-anchor" href="<?php echo qw_u('member/my', 'style') ?>" data="{icons:{primary:'ui-icon-calculator'}}"><?php echo $lang['LBL_SWITCH_STYLE'] ?></a>
+    <a class="qw-anchor" href="<?php echo qw_u('member/my', 'language') ?>" data="{icons:{primary:'ui-icon-script'}}"><?php echo $lang['LBL_SWITCH_LANGUAGE'] ?></a>
+    <a class="qw-anchor" href="javascript:history.go(-1);" data="{icons:{primary:'ui-icon-arrowthickstop-1-w'}}"><?php echo $lang['ACT_RETURN'] ?></a>
+</div>  

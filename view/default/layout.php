@@ -39,27 +39,13 @@ if ($request['view'] && $this->elementExists($request['view'])) :
     require $this->getElement($request['view']);
 else :
 ?>
-<table id="qw-header" class="ui-widget" border="0" cellpadding="0" cellspacing="0">
-    <tr>
-        <td id="qw-header-left">
-            <div id="qw-logo" class="ui-widget-content">
-                <a href="?">
-                    <img src="<?php echo $this->getTag('root') ?>/images/logo.png" alt="logo" />
-                </a>
-            </div>
-        </td>
-        <td id="qw-header-right" colspan="2">
-            <?php Qwin::hook('viewHeaderRight') ?>
-        </td>
-    </tr>
-</table>
-<div id="qw-header2" class="ui-state-default">
-</div>
+<?php require $this->getElement('header') ?>
 <table id="qw-main-table" cellpadding="0" cellspacing="0">
     <tr id="qw-main" class="ui-widget-content">
         <td id="qw-left" class="ui-helper-hidden">
             <div id="qw-left-content">
                 <?php Qwin::hook('viewLeft') ?>
+                <?php require $this->getElement('left') ?>
             </div>
         </td>
         <td id="qw-splitter-left" class="qw-splitter ui-state-default">
@@ -77,6 +63,7 @@ else :
         <td id="qw-right" class="ui-helper-hidden">
             <div id="qw-right-content">
                 <?php Qwin::hook('viewRight') ?>
+                <?php require $this->getElement('right') ?>
             </div>
         </td>
     </tr>

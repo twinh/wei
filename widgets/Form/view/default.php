@@ -24,16 +24,26 @@
  */
 $this->_minify->addArray(array(
     $this->_path . 'view/default.css',
-    $this->_path . 'script/js.js'
+    $this->_path . 'view/default.js'
 ));
 if ($options['validate']) :
     $this->_minify->addArray(array(
-        $this->_path . 'script/style.css',
         $this->_path . 'source/jquery.validate.qwin.js'
     ));
 ?>
+<style type="text/css">
+    /*table.qw-form-table tr{
+        display: inline-block;
+        width: 100%
+    }  */
+</style>
 <script type="text/javascript">
 validateCode['<?php echo $options['id'] ?>'] = <?php echo $validateCode ?>;
+jQuery(function($){
+    /*$('table.qw-form-table tr').click(function(){
+        $(this).slideUp();
+    })*/
+});
 </script>
 <?php
 endif;
