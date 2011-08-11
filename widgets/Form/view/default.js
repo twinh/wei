@@ -50,7 +50,7 @@ jQuery(function($){
             // 为必选项增加星号标识
             for (var rule in validateCode[form]['rules']) {
                 if (undefined != validateCode[form]['rules'][rule]['required']) {
-                    $('label[for="' + rule + '"]').prepend('<span class="ui-validator-required>*</span>');
+                    $('label[for="' + rule + '"]').prepend('<span class="ui-validator-required">*</span>');
                 }
             }
             // 定义表单验证

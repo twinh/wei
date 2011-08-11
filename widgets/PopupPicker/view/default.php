@@ -39,7 +39,7 @@ jQuery(function($){
     });
     $('#qw-button-popup-<?php echo $id ?>-clear').click(function(){
         $('#<?php echo $id ?>').val('');
-        $('#<?php echo $element['id'] ?>').val('(<?php echo $lang['LBL_NOT_SELECTED']?>,<?php echo $lang['LBL_READONLY'] ?>)');
+        $('#<?php echo $element['id'] ?>').val('');
     });
 })
 </script>

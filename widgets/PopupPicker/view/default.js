@@ -56,7 +56,7 @@
                     ondblClickRow: function(rowId, iRow, iCol, e){
                         var rowData = jqGridObj.jqGrid('getRowData', rowId);
                         $(opts.valueInput).val(rowData[opts.valueColumn]);
-                        $(opts.viewInput).val(rowData[opts.viewColumn] + '(' + qwin.lang.LBL_SELECTED + ', ' + qwin.lang.LBL_READONLY + ')');
+                        $(opts.viewInput).val(rowData[opts.viewColumn]);
                         opts.obj.dialog('close');
                     }
                     // TODO 动态设置高度

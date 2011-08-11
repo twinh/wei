@@ -103,4 +103,16 @@ class Style_Widget extends Qwin_Widget_Abstract
         $this->_stylePath = $path;
         return $styles;
     }
+    
+    public function getResource()
+    {
+        $files = scandir($this->_path . 'source/');
+        $resources = array();
+        foreach ($files as $file) {
+            if (is_file($this->_path . 'source/' . $file . '/config.php')) {
+                $resources[$file] = $file;
+            }
+        }
+        return $resources;
+    }
 }

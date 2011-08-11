@@ -113,7 +113,8 @@ class Qwin_Widget
      */
     public function call($name)
     {
-        $class = ucfirst($name) . '_Widget';
+        $name = ucfirst($name);
+        $class = $name . '_Widget';
         if (isset($this->_loaded[$class])) {
             return $this->_loaded[$class];
         }

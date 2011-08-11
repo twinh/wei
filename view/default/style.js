@@ -173,22 +173,26 @@ jQuery(function($){
     };
     
     // 设置全局Ajax提示信息
-    qwin.ajax.show = function(msg){
-        $('#qw-ajax').html(msg).css({
-            left: ($(window).width() - $('#qw-ajax').width()) / 2
-        }).fadeIn(200).fadeOut(2000);
-    }
-    $.ajax({
-        beforeSend: function(){
-            //qwin.ajax.show(qwin.lang.MSG_START_REQUEST);
-        },
-        error: function(){
-            qwin.ajax.show(qwin.lang.MSG_ERROR);
-        },
-        success: function(){
-            //qwin.ajax.show(qwin.lang.MSG_SUCCEEDED);
-        }
-    });
+//    qwin.ajax.show = function(msg){
+//        $('#qw-ajax').html(msg).css({
+//            left: ($(window).width() - $('#qw-ajax').width()) / 2
+//        }).fadeIn(200).fadeOut(2000);
+//    }
+//    $.ajax({
+//        beforeSend: function(){
+//            //qwin.ajax.show(qwin.lang.MSG_START_REQUEST);
+//        },
+//        error: function(){
+//            qwin.ajax.show(qwin.lang.MSG_ERROR);
+//        },
+//        success: function(){
+//            //qwin.ajax.show(qwin.lang.MSG_SUCCEEDED);
+//        }
+//    });
+
+//    $.get('?module=member&action=add&view-only=content', function(data){
+//          $('#qw-content').html(data);
+//    });
 
     // 调整中间栏到最大高度
     // 修复360极速浏览器(6.0Chrome内核)高度不正确的问题

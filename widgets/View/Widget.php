@@ -172,6 +172,30 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
             ));
         }
         
+        if (!$this->elementExists('left')) {
+            $this->setElement('left', array(
+                '<root><module>/left-<action><suffix>',
+                '<root><module>/left<suffix>',
+                '<root>left<suffix>'
+            ));
+        }
+        
+        if (!$this->elementExists('right')) {
+            $this->setElement('right', array(
+                '<root><module>/right-<action><suffix>',
+                '<root><module>/right<suffix>',
+                '<root>right<suffix>'
+            ));
+        }
+        
+        if (!$this->elementExists('header')) {
+            $this->setElement('header', array(
+                '<root><module>/header-<action><suffix>',
+                '<root><module>/header<suffix>',
+                '<root>header<suffix>'
+            ));
+        }
+        
         return $this;
     }
 

@@ -193,10 +193,4 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
         }
         throw new Exception('Undefined property: ' . get_class($this) . '::$' . $name);
     }
-
-    public function e()
-    {
-        $this->_E->setObject($this);
-        call_user_func_array(array($this->_E, 'e'), func_get_args());
-    }
 }
