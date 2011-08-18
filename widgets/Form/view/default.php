@@ -63,8 +63,8 @@ endif;
 <?php
     foreach ($form['layout'] as $name => $fieldset) :
 ?>
-    <fieldset class="ui-widget-content ui-corner-all">
-    <legend><?php echo $lang[$name] ?></legend>
+    <fieldset class="qw-form-el-1 ui-widget-content ui-corner-all">
+    <legend class="qw-form-el-2"><?php echo $lang[$name] ?></legend>
     <table class="qw-form-table">
         <tr>
         <?php foreach ($percent as $value) : ?>

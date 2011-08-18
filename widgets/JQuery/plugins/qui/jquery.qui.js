@@ -1,6 +1,7 @@
 /*
 2010 02 10 
 QUI is short for Quick UI
+@todo opt live 
 */
 (function($) {
     $.fn.qui = function(options) {

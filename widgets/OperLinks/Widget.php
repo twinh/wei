@@ -47,8 +47,8 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
             $unableActions = array();
         }
         $link = array();
-        $data = $view['data'];
-        $id = $view['id'];
+        $data = isset($view['data']) ? $view['data'] : array();
+        $id = isset($view['id']) ? $view['id'] : null;
 
         // 上一记录，下一记录
         /*if ('edit' == $action || 'view' == $action) {
@@ -69,7 +69,7 @@ class OperLinks_Widget extends Qwin_Widget_Abstract
         if (!in_array('index', $unableActions) && method_exists($controller, 'actionIndex')) {
             $link['index'] = array(
                 'url'   => $url->url($moduleUrl, 'index'),
-                'title' => $lang->t('ACT_LIST'),
+                'title' => $lang->t('ACT_INDEX'),
                 'icon'  => 'ui-icon-note',
             );
         }

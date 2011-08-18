@@ -64,7 +64,7 @@
     text-decoration: underline;
 }
 .qw-message-operation{
-    padding: 1em;
+    margin: 10px 0;
     text-align: right;
 }
 .qw-message-content {
