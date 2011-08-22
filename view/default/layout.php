@@ -42,30 +42,14 @@ else :
 <?php require $this->getElement('header') ?>
 <table id="qw-main-table" cellpadding="0" cellspacing="0">
     <tr id="qw-main" class="ui-widget-content">
-        <td id="qw-left" class="ui-helper-hidden">
-            <div id="qw-left-content">
-                <?php Qwin::hook('viewLeft') ?>
-                <?php require $this->getElement('left') ?>
-            </div>
-        </td>
-        <td id="qw-splitter-left" class="qw-splitter ui-state-default">
-            <div class="qw-splitter-content"></div>
-        </td>
+        <?php require $this->getElement('left') ?>
         <td id="qw-center">
             <?php Qwin::hook('viewContentHeader') ?>
             <div id="qw-content">
                 <?php require $this->getElement('content') ?>
             </div>
         </td>
-        <td id="qw-splitter-right" class="qw-splitter ui-state-default">
-            <div class="qw-splitter-content"></div>
-        </td>
-        <td id="qw-right" class="ui-helper-hidden">
-            <div id="qw-right-content">
-                <?php Qwin::hook('viewRight') ?>
-                <?php require $this->getElement('right') ?>
-            </div>
-        </td>
+        <?php require $this->getElement('right') ?>
     </tr>
 </table>
 <div id="qw-footer" class="ui-state-default">

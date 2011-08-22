@@ -68,7 +68,7 @@ return array(
             ),
         ),
         'sex' => array(
-            '_type' => 'select',
+            '_type' => 'checkbox',
             '_resourceGetter' => array(
                 array('Ide_Option_Widget', 'get'),
                 'sex',

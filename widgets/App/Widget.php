@@ -1,6 +1,6 @@
 <?php
 /**
- * 应用程序启动类,通过该类指定应用程序需要加载的结构(如命名空间,控制器等),同时初始化最基本的对象
+ * 应用程序启动类
  *
  * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
  *
@@ -95,8 +95,6 @@ class App_Widget extends Qwin_Widget_Abstract
         // 获取模块和行为
         $module = (string)$request->get('module');
         $action = (string)$request->get('action');
-
-        require_once 'Qwin/Module.php';
         $module = Qwin_Module::instance($module);
 
         // 加入到配置中

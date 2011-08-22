@@ -23,6 +23,6 @@
  * @since       2009-11-21 12:18:00
  */
 
-class Ide_Option_Controller extends Com_ActionController
+class Ide_Option_Controller extends ActionController_Widget
 {
 }
