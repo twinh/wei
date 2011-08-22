@@ -159,7 +159,7 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
             $this->setElement('layout', array(
                 '<root><module>/layout-<action><suffix>',
                 '<root><module>/layout<suffix>',
-                '<root><layout<suffix>'
+                '<root>layout<suffix>'
             ));
         }
         
