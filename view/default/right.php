@@ -22,5 +22,16 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2011-07-30 16:10:19
+ * @todo        
  */
 ?>
+<!--
+<td id="qw-splitter-right" class="qw-splitter ui-state-default">
+    <div class="qw-splitter-content"></div>
+</td>
+<td id="qw-right" class="ui-helper-hidden">
+    <div id="qw-right-content">
+        <?php Qwin::hook('viewRight') ?>
+
+    </div>
+</td>-->

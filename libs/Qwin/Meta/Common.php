@@ -210,7 +210,9 @@ class Qwin_Meta_Common extends ArrayObject implements Qwin_Meta_Interface
      */
     public function getParent()
     {
-        if (isset($this->_parent)) {
+        // 在一些环境中,返回结果为isset false
+        if (null !== $this->_parent) {
+        //if (isset($this->_parent)) {
             return $this->_parent;
         }
         throw new Qwin_Meta_Common_Exception('Parent meta not defined.');

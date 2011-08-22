@@ -25,9 +25,9 @@
  * @since       2009-11-21 15:21:00
  */
 
-class Ide_Option_Meta extends Com_Meta
+class Ide_Option_Meta extends Meta_Widget
 {
-    public function  setMeta()
+    /*public function  setMeta()
     {
         $this->setCommonMeta()
              ->merge(array(
@@ -90,7 +90,7 @@ class Ide_Option_Meta extends Com_Meta
                     'icon' => 'stop',
                 ),
          ));
-    }
+    }*/
 
     protected $_codeSample = array(
         'value' => null,

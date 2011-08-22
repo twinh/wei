@@ -24,3 +24,13 @@
  * @since       2011-07-30 16:10:08
  */
 ?>
+<!--
+<td id="qw-left" class="ui-helper-hidden">
+    <div id="qw-left-content">
+        <?php Qwin::hook('viewLeft') ?>
+
+    </div>
+</td>
+<td id="qw-splitter-left" class="qw-splitter ui-state-default">
+    <div class="qw-splitter-content"></div>
+</td>-->

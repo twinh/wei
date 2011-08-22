@@ -166,6 +166,7 @@ return array(
     'ERR_META_NOT_DEFINED' => '参数"元数据"未定义',
     'ERR_META_OFFSET_NOT_FOUND' => '元数据的键名"%s"不存在.',
     'ERR_META_ILLEGAL' => '元数据不合法.',
+    'ERR_LIST_META_NOT_FOUND' => '未找到列表元数据.',
     'UNTITLED' => '(无标题)',
     'READONLY' => '只读',
 );

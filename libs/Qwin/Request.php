@@ -133,6 +133,15 @@ class Qwin_Request implements ArrayAccess
     {
         return $this->_get;
     }
+    
+    /**
+     * 获取post参数
+     * @todo getParam('post') ?
+     */
+    public function getPost()
+    {
+        return $this->_post;
+    }
 
     /**
      * 获取$_POST中数组中的值
