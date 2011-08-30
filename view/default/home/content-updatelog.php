@@ -43,31 +43,20 @@
     list-style: decimal;
 }
 </style>
-<div class="ui-form ui-box ui-widget ui-widget-content ui-corner-all" id="ui-form">
-    <div class="ui-box-header">
-        <?php Qwin::hook('ViewContentHeader', $this) ?>
-    </div>
-    <form action="" method="post">
-    <div class="ui-form-content ui-box-content ui-widget-content">
-        <div class="ui-operation-field"> 
-        </div>
-        <ul class="ui-updatelog">
-            <li class="ui-updatelog-preview">
-                v0.0.0 预计更新内容
-                <ul>
-                    <li>XXXXX</li>
-                    <li>XXXXX</li>
-                </ul>
-            </li>
-            <li>v0.0.0 XXXXXXX 0000.00.00
-                <ul>
-                    <li>[XX]XXXXXXXXXXXXX</li>
-                    <li>[XX]XXXXXXXXXXXXX</li>
-                    <li>[XX]XXXXXXXXXXXXX</li>
-                    <li>[XX]XXXXXXXXXXXXX</li>
-                </ul>
-            </li>
+<ul class="ui-updatelog">
+    <li class="ui-updatelog-preview">
+        v0.0.0 预计更新内容
+        <ul>
+            <li>XXXXX</li>
+            <li>XXXXX</li>
         </ul>
-    </div>
-    </form>
-</div>
+    </li>
+    <li>v0.0.0 XXXXXXX 0000.00.00
+        <ul>
+            <li>[XX]XXXXXXXXXXXXX</li>
+            <li>[XX]XXXXXXXXXXXXX</li>
+            <li>[XX]XXXXXXXXXXXXX</li>
+            <li>[XX]XXXXXXXXXXXXX</li>
+        </ul>
+    </li>
+</ul>
