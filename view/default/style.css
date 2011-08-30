@@ -255,7 +255,7 @@ div.qw-content-tab .ui-tabs-panel{
     padding: 1px;
     width: 100%;
 }
-.ui-table td{
+.ui-table td, .ui-table th{
     padding: 2px;
     font-weight: normal;
     line-height: 20px;

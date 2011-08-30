@@ -270,7 +270,7 @@ abstract class Qwin_Meta_Abstract extends ArrayObject
             $class = Qwin_Module::instance($module)->getClass();
         }
         $class .= '_Meta';
-        return $instanced ? Qwin_Meta::getInstance()->get($class, $module) : $class;
+        return $instanced ? Qwin_Meta::getInstance()->get($class) : $class;
     }
 
     /**
