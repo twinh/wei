@@ -119,9 +119,17 @@ class Controller_Widget extends Qwin_Widget_Abstract
             $module = Qwin_Module::instance($module);
         }
         // 检查模块控制器文件是否存在
-        $path = Qwin::widget('App')->getOption('path');
-        $file = $path . $module->getPath() . 'Controller.php';
-        if (!is_file($file)) {
+        $found = false;
+        $paths = Qwin::widget('App')->getOption('paths');
+
+        foreach ($paths as $path) {
+            $file = $path . $module->getPath() . 'Controller.php';
+            if (is_file($file)) {
+                $found = true;
+                break;
+            }
+        }
+        if (!$found) {
             throw new Qwin_Widget_Exception('Module "' . $module->getUrl() . '" not found.');
         }
         

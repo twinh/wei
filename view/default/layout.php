@@ -6,9 +6,9 @@
 <title><?php echo $lang['LBL_HTML_TITLE'] ?></title>
 <?php
 echo $this->getPackerSign();
-$minify->addArray(array(
+$minify->add(array(
     $style->getCssFile(),
-    $this->getTag('root') . 'style.css',
+    $root . 'style.css',
     $config['resource'] . 'view/default/icons/icon.css',
     $jQuery->loadCore(false),
     $jQuery->loadUi('core', false),
@@ -19,12 +19,12 @@ $minify->addArray(array(
     $jQuery->loadPlugin('qui', null, false),
     $jQuery->loadPlugin('blockUI', null, false),
     $jQuery->loadPlugin('metadata', null, false),
-    $this->getTag('root') . 'style.js',
+    $root . 'style.js',
     //$this->getTag('root') . 'DD_roundies_0.0.2a-min.js',
 ));
 ?>
 <!--[if IE 6]>
-<link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->getTag('root') ?>style-ie6.css" />
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo $root ?>style-ie6.css" />
 <![endif]-->
 <script type="text/javascript">
     qwin.get = <?php echo json_encode($_GET) ?>;

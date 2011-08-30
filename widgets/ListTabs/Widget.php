@@ -148,7 +148,7 @@ class ListTabs_Widget extends Qwin_Widget_Abstract
 
         /* @var $minify Minify_Widget */
         $minify = $this->_widget->get('Minify');
-        $minify->addArray(array(
+        $minify->add(array(
             $this->_path . 'view/default.css',
             $this->_path . 'view/default.js',
         ));

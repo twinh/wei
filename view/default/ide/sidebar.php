@@ -22,7 +22,7 @@
  * @version     $Id$
  * @since       2011-5-28 12:48:54
  */
-$minify->addArray(array(
+$minify->add(array(
     $jQuery->loadPlugin('jstree'),
 ));
 ?>

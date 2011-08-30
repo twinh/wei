@@ -37,7 +37,9 @@ class App_Widget extends Qwin_Widget_Abstract
      *                      E_ALL & ~E_NOTICE   30711
      */
     protected $_defaults = array(
-        'path'          => null,
+        'paths'         => null,
+        'module'        => null,
+        'action'        => null,
         'errorType'     => 32767,
     );
     
@@ -56,13 +58,15 @@ class App_Widget extends Qwin_Widget_Abstract
     public function __construct(array $options = array())
     {
         parent::__construct($options);
+        $options = &$this->_options;
         
         // 设置错误提示的输出等级
-        error_reporting($this->_options['errorType']);
+        error_reporting($options['errorType']);
         
         // 设置默认的目录
-        if (null == $this->_options['path']) {
-            $this->_options['path'] = dirname($this->_widget->getPath()) . '/apps/';
+        !is_array($options['paths']) && $options['paths'] = (array)$options['paths'];
+        if (empty($options['paths'])) {
+            $options['paths'][] = dirname($this->_widget->getPath()) . '/apps/';
         }
     }
 

@@ -35,7 +35,7 @@ class Error_Widget extends Qwin_Widget_Abstract
     {
         parent::__construct($options);
         if ($this->_options['exception']) {
-            set_exception_handler(array($this, 'render'));
+            //set_exception_handler(array($this, 'render'));
         }
     }
     

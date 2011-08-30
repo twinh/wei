@@ -38,7 +38,7 @@ class FileTree_Widget extends Qwin_Widget_Abstract
         $jQuery = $this->_widget->get('JQuery');
         $minify = $this->_widget->get('Minify');
 
-        $minify->addArray(array(
+        $minify->add(array(
             $jQuery->loadUi('position', false),
             $jQuery->loadUi('dialog', false),
             $this->_path . 'source/jquery.filetree.css',

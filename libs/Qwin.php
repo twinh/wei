@@ -201,6 +201,7 @@ class Qwin
         if (empty($param)) {
             return new $name;
         } else {
+            // TODO 参数少的情况下,不使用类反射
             // 有参数的情况下使用类反射进行初始化
             $reflection = new ReflectionClass($name);
             return $reflection->newInstanceArgs((array)$param);
@@ -365,6 +366,7 @@ class Qwin
      * @param string|array $config2 附加的配置数据,例如有不同的入口文件,指向不同的模块操作
      *                              通过定义附加配置,即可方便实现
      * @return mixed 结果
+     * @todo 支持不定长长度的参数
      */
     public static function startup($config, $config2 = null)
     {
