@@ -52,7 +52,7 @@ class PopupPicker_Widget extends Qwin_Widget_Abstract
         $form = $this->_form;
         $jQuery = $this->_jQuery;
         
-        $this->_minify->addArray(array(
+        $this->_minify->add(array(
             $jQuery->loadUi('position', false),
             $jQuery->loadUi('dialog', false),
             //$jQuery->loadUi('mouse', false),

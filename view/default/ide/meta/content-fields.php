@@ -23,7 +23,7 @@
  * @version     $Id$
  * @since       2011-05-17 11:28:30
  */
-$widget->get('Minify')->addArray(array(
+$widget->get('Minify')->add(array(
     $jQuery->loadUi('position', false),
     $jQuery->loadUi('dialog', false),
     $jQuery->loadPlugin('tmpl', 'min'),

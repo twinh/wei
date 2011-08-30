@@ -77,7 +77,7 @@ class Menu_Widget extends Qwin_Widget_Abstract
         
         // 加载样式和脚本
         $minify = $this->_widget->get('minify');
-        $minify->addArray(array(
+        $minify->add(array(
             $this->_path . 'view/default.css',
             $this->_path . 'view/default.js',
         ));

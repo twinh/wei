@@ -38,36 +38,40 @@ class Qwin_Widget
      * 微件所在目录
      * @var string
      */
-    protected $_path;
+    protected $_paths;
 
     /**
      * 获取当前类的实例化对象
      *
      * @return Qwin_Widget
      */
-    public function __construct($path = null)
+    public function __construct($paths = null)
     {
         // 如果不提供路径,则认为微件存放于类库同级目录的widgets文件夹里
         // TODO 是否有更快的方式,例如操作字符串
-        if (null == $path) {
-            $path = dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'widgets' . DIRECTORY_SEPARATOR;
+        !is_array($paths) && $paths = (array)$paths;
+        
+        if (empty($paths)) {
+            $paths = dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'widgets' . DIRECTORY_SEPARATOR;
         }
-        $this->setPath($path);
+
+        $this->_paths = $paths;
+        //$this->setPath($paths);
     }
 
     /**
      * 设置根路径
      *
-     * @param string $path 路径
+     * @param string $paths 路径
      * @return Qwin_Widget 当前对象
      */
-    public function setPath($path)
+    public function setPath($paths)
     {
-        if (is_dir($path)) {
-            $this->_path = $path;
+        if (is_dir($paths)) {
+            $this->_paths = $paths;
             return $this;
         }
-        throw new Qwin_Widget_Exception('Path "' . $path . '" not found.');
+        throw new Qwin_Widget_Exception('Path "' . $paths . '" not found.');
     }
     
     /**
@@ -77,7 +81,7 @@ class Qwin_Widget
      */
     public function getPath()
     {
-        return $this->_path;
+        return $this->_paths;
     }
 
     /**
@@ -120,14 +124,15 @@ class Qwin_Widget
         }
 
         // 查看主文件是否存在
-        $file = $this->_path . $name . '/Widget.php';
-        if (!is_file($file)) {
-            throw new Qwin_Widget_Exception('Widget "' . $name . '" not found.');
+        foreach ($this->_paths as $path) {
+            $file = $path . $name . '/Widget.php';
+            if (is_file($file)) {
+                require_once $file;
+                return $this->getByClass($class);
+            }
         }
         
-        // 加载类文件
-        require_once $file;
-        return $this->getByClass($class);
+        throw new Qwin_Widget_Exception('Widget "' . $name . '" not found.');
     }
 
     /**

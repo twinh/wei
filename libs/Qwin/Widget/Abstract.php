@@ -23,7 +23,7 @@
  * @since       2011-01-29 18:13:42
  */
 
-abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
+abstract class Qwin_Widget_Abstract extends ArrayObject implements Qwin_Widget_Interface
 {
     /**
      * 默认选项
@@ -63,6 +63,8 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
      */
     public function __construct(array $options = array())
     {
+        parent::__construct(array(), ArrayObject::ARRAY_AS_PROPS);
+        
         // 检查是否通过微件管理对象获得,不是则
         $this->_widget = Qwin::call('-widget');
         $this->_widget->register($this);
@@ -172,6 +174,8 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
      */
     public function getPath($exact = false)
     {
+        $obj = new ReflectionClass($this);
+        return $this->_path = dirname($obj->getFileName()) . '/';
         if (false === $exact) {
             if (!$this->_path) {
                 $this->_path = $this->_widget->getPath() . substr(get_class($this), 0, -7) . '/';
@@ -185,12 +189,20 @@ abstract class Qwin_Widget_Abstract implements Qwin_Widget_Interface
             $this->_exactPath;
         }
     }
+    
+    public function offsetGet($name)
+    {
+        if ('_' == $name[0]) {
+            return $this->$name = $this->_widget->get(ucfirst(substr($name, 1)));
+        }
+        return parent::offsetGet($name);
+    }
 
     public function  __get($name)
     {
         if ('_' == $name[0]) {
             return $this->$name = $this->_widget->get(ucfirst(substr($name, 1)));
         }
-        throw new Exception('Undefined property: ' . get_class($this) . '::$' . $name);
+        return parent::offsetGet($index);
     }
 }

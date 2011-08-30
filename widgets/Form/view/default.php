@@ -22,12 +22,12 @@
  * @version     $Id$
  * @since       2011-02-16 14:14:21
  */
-$this->_minify->addArray(array(
+$this->_minify->add(array(
     $this->_path . 'view/default.css',
     $this->_path . 'view/default.js'
 ));
 if ($options['validate']) :
-    $this->_minify->addArray(array(
+    $this->_minify->add(array(
         $this->_path . 'source/jquery.validate.qwin.js'
     ));
 ?>

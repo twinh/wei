@@ -26,7 +26,7 @@
  * @todo        错误与视图
  */
 
-class View_Widget extends ArrayObject implements Qwin_Widget_Interface
+class View_Widget extends Qwin_Widget_Abstract
 {
     /**
      * 视图元素数组
@@ -41,39 +41,16 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
     protected $_displayed = false;
 
     /**
-     * 标签,表示变量标识符,用于布局和视图元素的路径中
-     * @var array
-     */
-    protected $_tag = array(
-        'theme' => 'default',
-        'style' => 'default',
-    );
-
-    /**
-     * 标签名称,用于替换标签,格式为 <标签的键名>
-     * @var array
-     * @todo 目前采用的是用空间换取时间的方式,是否有更好的方法加速标签替换
-     */
-    protected $_tagName = array(
-        'theme' => '<theme>',
-        'style' => '<style>'
-    );
-
-    /**
      * 默认选项
      * @var array
      */
     protected $_defaults = array(
+        'paths'         => array(),
         'style'         => 'cupertino',
         'theme'         => 'default',
         'charset'       => 'utf-8',
+        
     );
-    
-    /**
-     * 选项
-     * @var array
-     */
-    protected $_options = array();
     
     /**
      * 打包的标记,用于合并js,css标签
@@ -104,16 +81,21 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
      */
     public function __construct(array $options = array())
     {
-        parent::__construct(array(), ArrayObject::ARRAY_AS_PROPS);
-        $this->_options = $options + $this->_defaults;
-        $this->_widget = Qwin::call('-widget');
+        parent::__construct($options);
+        $options = &$this->_options;
 
         // 使视图一致 TODO 更合适的位置
         $request = Qwin::call('-request');
         if ($request['view']) {
-            Qwin::widget('url')->setOption('basicParams', array(
+            $this->_url->setOption('basicParams', array(
                 'view' => $request['view'],
             ));
+        }
+        
+        // 设置默认的目录
+        !is_array($options['paths']) && $options['paths'] = (array)$options['paths'];
+        if (empty($options['paths'])) {
+            $options['paths'][] = dirname($this->_widget->getPath()) . '/view/';
         }
         
         // 打开缓冲区
@@ -134,6 +116,7 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
 
         // 部分视图常用变量
         $this->assign(array(
+            'root'      => $config['resource'] . 'view/' . $this->_options['theme'] . '/',
             'widget'    => $widget,
             'lang'      => $widget->get('Lang'),
             'minify'    => $widget->get('Minify'),
@@ -144,58 +127,7 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
             'theme'     => $this->_options['theme'],
             'style'     => $style,
         ));
-
-        // 设置标签
-        $this->setTag(array(
-            'root'              => $config['resource'] . 'view/' . $this->_options['theme'] . '/',
-            'suffix'            => '.php',
-            'style'             => $style->getName(),
-            'module'            => $this->module,
-            'action'            => $config['action'],
-        ));
-
-        // 布局的选择次序为 自定义视图 > 行为级 > 控制器级 > 模块级 > 默认(命名空间级)
-        if (!$this->elementExists('layout')) {
-            $this->setElement('layout', array(
-                '<root><module>/layout-<action><suffix>',
-                '<root><module>/layout<suffix>',
-                '<root>layout<suffix>'
-            ));
-        }
-        
-        // 默认视图元素的选择次序为 自定义视图 > 当前行为视图 > 默认模块视图 > 默认视图
-        if (!$this->elementExists('content')) {
-            $this->setElement('content', array(
-                '<root><module>/content-<action><suffix>',
-                '<root><module>/content<suffix>',
-                '<root>content<suffix>'
-            ));
-        }
-        
-        if (!$this->elementExists('left')) {
-            $this->setElement('left', array(
-                '<root><module>/left-<action><suffix>',
-                '<root><module>/left<suffix>',
-                '<root>left<suffix>'
-            ));
-        }
-        
-        if (!$this->elementExists('right')) {
-            $this->setElement('right', array(
-                '<root><module>/right-<action><suffix>',
-                '<root><module>/right<suffix>',
-                '<root>right<suffix>'
-            ));
-        }
-        
-        if (!$this->elementExists('header')) {
-            $this->setElement('header', array(
-                '<root><module>/header-<action><suffix>',
-                '<root><module>/header<suffix>',
-                '<root>header<suffix>'
-            ));
-        }
-        
+ 
         return $this;
     }
 
@@ -249,12 +181,14 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
     {
         // TODO 是否应该通过钩子加载
         // 加载当前操作的样式和脚本
-        $minify = $this->minify;
-        $minify->addArray(array(
-            $this->decodePath('<root><module>/<action>.js'),
-            $this->decodePath('<root><module>/<action>.css'),
-        ));
-        //return $this;
+        $minify = $this->_minify;
+        $files = array();
+        foreach ($this->_options['paths'] as $path) {
+            $files[] = $path . $this->_options['theme'] . '/' . $this['module'] . '/' . $this['action'] . '.js';
+            $files[] = $path . $this->_options['theme'] . '/' . $this['module'] . '/' . $this['action'] . '.css';
+        }
+        $minify->add($files);
+
         // 获取缓冲数据,输出并清理
         $output = ob_get_contents();
         '' != $output && ob_end_clean();
@@ -476,21 +410,6 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
     }
 
     /**
-     * 设置一组视图元素
-     *
-     * @param array $list 视图元素组,键名为视图名称,值为视图的值
-     * @return Qwin_Application_View 当前对象
-     */
-    public function setElementList(array $list)
-    {
-        foreach ($list as $key => $value) {
-            !is_array($value) && $value = array($value);
-            $this->_element[$key] = $value;
-        }
-        return $this;
-    }
-
-    /**
      * 设置一个视图元素
      *
      * @param string $name 视图元素的名称
@@ -503,32 +422,35 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
         $this->_element[$name] = $element;
         return $this;
     }
-
-    /**
-     * 获取未处理的视图元素
-     *
-     * @param string $name
-     * @return string 视图元素
-     */
-    public function getRawElement($name)
-    {
-        return $this->_element[$name];
-    }
-
+    
     public function getElement($name)
     {
-        if (!isset($this->_element[$name])) {
-            throw new Qwin_Widget_Exception('Undefined view element name: ' . $name);
-        }
-        $pathCahce = array();
-        foreach ($this->_element[$name] as $path) {
-            $path = $this->decodePath($path);
-            if (is_file($path)) {
-                return $path;
+        // 在视图目录找出视图路径
+        // 根路径 + 风格目录 [+模块目录]
+        $module = Qwin::config('module');
+        $action = Qwin::config('action');
+        $fileCache = array();
+        foreach ($this->_options['paths'] as $path) {
+            $file = $path . $this->_options['theme'] . '/' . $module->__toString() . '/' . $action . '-' . $name . '.php';
+            if (is_file($file)) {
+                return $file;
             }
-            $pathCahce[] = $path;
+            $fileCache[] = $file;
+            
+            $file = $path . $this->_options['theme'] . '/' . $module->__toString() . '/' . $name . '.php';
+            if (is_file($file)) {
+                return $file;
+            }
+            $fileCache[] = $file;
+            
+            $file = $path . $this->_options['theme'] . '/' . $name . '.php';
+            if (is_file($file)) {
+                return $file;
+            }
+            $fileCache[] = $file;
         }
-        throw new Qwin_Widget_Exception('All view files not found: "' . implode(';', $pathCahce) . '".');
+        
+        throw new Qwin_Widget_Exception('All view files not found: "' . implode(';', $fileCache) . '".');
     }
 
     /**
@@ -546,17 +468,6 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
     }
 
     /**
-     * 清空视图元素数组
-     *
-     * @return Qwin_Application_View 当前对象
-     */
-    public function clearElement()
-    {
-        $this->_element = array();
-        return $this;
-    }
-
-    /**
      * 检查视图元素是否存在
      *
      * @param string $name 名称
@@ -570,84 +481,6 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
     public function render($options = null)
     {
         return $this->display();
-    }
-
-    /**
-     * 获取一个标签的值
-     *
-     * @param string $name 标签名称
-     * @return string 标签的值
-     */
-    public function getTag($name)
-    {
-        return isset($this->_tag[$name]) ? $this->_tag[$name] : null;
-    }
-
-    /**
-     * 设置一个标签的值
-     *
-     * @param string $name 标签名称
-     * @param mixed $value 标签的值
-     * @return Qwin_Application_View 当前对象
-     */
-    public function setTag($name, $value = null)
-    {
-        if (!is_array($name)) {
-            $name = array($name => $value);
-        }
-        foreach ($name as $key => $value) {
-            $this->_tag[$key] = strtolower($value);
-            $this->_tagName[$key] = '<' . $key . '>';
-        }
-        return $this;
-    }
-
-    /**
-     * 获取标签数组
-     *
-     * @return array  标签数组
-     */
-    public function getTagList()
-    {
-        return $this->_tag;
-    }
-
-    /**
-     * 删除一个标签
-     *
-     * @param string $name 标签名称
-     * @return Qwin_Application_View 当前对象
-     */
-    public function unsetTag($name)
-    {
-        if (isset($this->_tag[$name])) {
-            unset($this->_tag[$name]);
-            unset($this->_tagName[$name]);
-        }
-        return $this;
-    }
-
-    /**
-     * 清空标签数组
-     *
-     * @return Qwin_Application_View 当前对象
-     */
-    public function clearTag()
-    {
-        $this->_tag = array();
-        $this->_tagName = array();
-        return $this;
-    }
-
-    /**
-     * 根据标签设置将标签路径解码为真实路径
-     *
-     * @param string $path 路径
-     * @return string 真实路径
-     */
-    public function decodePath($path)
-    {
-        return str_replace($this->_tagName, $this->_tag, $path);
     }
 
     /**
@@ -669,10 +502,5 @@ class View_Widget extends ArrayObject implements Qwin_Widget_Interface
     public function isDisplayed()
     {
         return $this->_displayed;
-    }
-    
-    public function getOption($name)
-    {
-        return isset($this->_options[$name]) ? $this->_options[$name] : null;
     }
 }

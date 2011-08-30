@@ -39,6 +39,8 @@ class Minify_Widget extends Qwin_Widget_Abstract
         'js'    => array(),
         'css'   => array(),
     );
+    
+    protected $_cachePath;
 
     /**
      * 初始化系统
@@ -95,7 +97,11 @@ class Minify_Widget extends Qwin_Widget_Abstract
      */
     public function add($file, $extension = null)
     {
-        if (file_exists($file)) {
+        if (is_array($file)) {
+            foreach ($file as $item) {
+                $this->add($item);
+            }
+        } elseif (file_exists($file)) {
             if (null == $extension) {
                 $extension = pathinfo($file, PATHINFO_EXTENSION);
             }
@@ -106,24 +112,6 @@ class Minify_Widget extends Qwin_Widget_Abstract
 //            }
             if (isset($this->_data[$extension])) {
                 $this->_data[$extension][] = $file;
-            }
-        }
-        return $this;
-    }
-
-    /**
-     * 添加一组文件
-     *
-     * @param array $array 文件数组
-     * @return Minify_Widget 当前对象
-     */
-    public function addArray(array $array)
-    {
-        foreach ($array as $value) {
-            if (is_array($value)) {
-                $this->addArray($value);
-            } else {
-                $this->add($value);
             }
         }
         return $this;

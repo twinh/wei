@@ -101,14 +101,7 @@ class Record_Widget extends Doctrine_Record implements Qwin_Widget_Interface
         // TODO 配置应该更规范
         if (!self::$_connected) {
             $manager = Doctrine_Manager::getInstance();
-            $config = Qwin::config();
-            // 连接其他数据库
-            if (isset($_SERVER['SERVER_ADDR']) && $_SERVER['SERVER_ADDR'] == '127.0.0.1') {
-                $mainAdapter = 'localhost';
-            } else {
-                $mainAdapter = 'web';
-            }
-            $db = $config['database']['adapter'][$mainAdapter];
+            $db = Qwin::config('database');
             $adapter = $db['type'] . '://'
                      . $db['username'] . ':'
                      . $db['password'] . '@'
