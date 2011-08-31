@@ -112,7 +112,7 @@ class AddFormAction_Widget extends Qwin_Widget_Abstract
 
         $view = $this->_view;
         $view->assign(get_defined_vars());
-        $view->setElement('content', $this->_widget->getPath() . 'EditFormAction/view/default.php');
+        $view->setElement('content', Qwin::config('resource') . 'widgets/EditFormAction/view/default.php');
         $view['module'] = $meta['module'];
         $view['action'] = 'add';
 

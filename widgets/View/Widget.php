@@ -418,13 +418,16 @@ class View_Widget extends Qwin_Widget_Abstract
      */
     public function setElement($name, $element)
     {
-        !is_array($element) && $element = array($element);
         $this->_element[$name] = $element;
         return $this;
     }
     
     public function getElement($name)
     {
+        if (isset($this->_element[$name])) {
+            return $this->_element[$name];
+        }
+        
         // 在视图目录找出视图路径
         // 根路径 + 风格目录 [+模块目录]
         $module = Qwin::config('module');
