@@ -32,6 +32,8 @@ class Member_My_Controller extends Controller_Widget
     protected $_lock = array(
         'guest', 'admin', '7641b5b1-c727-6c07-e11f-9cb5b74ddfc9',
     );
+    
+    protected $_memberModule;
         
     public function  __construct($config = array(), $module = null, $action = null) {
         parent::__construct($config, $module, $action);
