@@ -2,7 +2,7 @@
 /**
  * Logout
  *
- * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

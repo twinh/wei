@@ -2,7 +2,7 @@
 /**
  * Widget
  *
- * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ class Qwin_Widget
      * 微件所在目录
      * @var string
      */
-    protected $_paths;
+    protected $_paths = array();
 
     /**
      * 获取当前类的实例化对象
@@ -52,7 +52,7 @@ class Qwin_Widget
         !is_array($paths) && $paths = (array)$paths;
         
         if (empty($paths)) {
-            $paths = dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'widgets' . DIRECTORY_SEPARATOR;
+            $paths[] = dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'widgets' . DIRECTORY_SEPARATOR;
         }
 
         $this->_paths = $paths;

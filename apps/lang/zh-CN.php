@@ -118,7 +118,7 @@ return array(
     'ERR_FROM_META_NOT_FOUND' => '表单元数据未定义',
 
     'LBL_HTML_TITLE' => 'Management System - Powered by Qwin Framework',
-    'LBL_FOOTER_COPYRIGHT' => 'Powered by Qwin Framework, Version ' . Qwin::VERSION . '. Copyright © 2008-2010 Twin. All rights reserved.',
+    'LBL_FOOTER_COPYRIGHT' => 'Powered by Qwin Framework, Version ' . Qwin::VERSION . '. Copyright © 2008-2011 Twin. All rights reserved.',
     'ACT_VIEW' => '查看',
     'ACT_UPDATE' => '更新',
     'ACT_INDEX' => '首页',
