@@ -2,7 +2,7 @@
 /**
  * 应用程序启动类
  *
- * Copyright (c) 2008-2010 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,7 +66,7 @@ class App_Widget extends Qwin_Widget_Abstract
         // 设置默认的目录
         !is_array($options['paths']) && $options['paths'] = (array)$options['paths'];
         if (empty($options['paths'])) {
-            $options['paths'][] = dirname($this->_widget->getPath()) . '/apps/';
+            $options['paths'][] = dirname(dirname(dirname(__FILE__))) . '/apps/';
         }
     }
 
