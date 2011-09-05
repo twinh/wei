@@ -231,9 +231,9 @@ class View_Widget extends Qwin_Widget_Abstract
     public function displayInfo(array $options = array())
     {
         $options = $options + $this->_infoOptions;
-        $this->setElement('layout', '<root>layout<suffix>');
-        $this->setElement('content', Qwin::call('-widget')->getPath() . 'View/view/info.php');
-        $this->_widget->get('minify')->add(Qwin::call('-widget')->getPath() . 'View/view/style.css');
+        //$this->setElement('layout', '<root>layout<suffix>');
+        $this->setElement('content', $this->_path . 'view/info.php');
+        $this->_widget->get('minify')->add($this->_path . 'view/style.css');
 
         $content = (array)$options['content'];
         
