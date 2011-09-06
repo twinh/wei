@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* 全局配置
 ----------------------------------*/
-body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,fieldset,p,blockquote,input,textarea,p,th,td,hr {
+body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,fieldset,p,blockquote,input,textarea,p,th,td,hr,pre {
     margin: 0;
     padding: 0;
     outline: none;
