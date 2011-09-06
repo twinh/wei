@@ -250,6 +250,7 @@ class Qwin
      * 设置自动加载的子路径
      *
      * @param array|string $paths 自动加载的初始路径
+     * @todo 多次执行可能混乱
      */
     public static function setAutoload($paths = null)
     {
@@ -261,9 +262,21 @@ class Qwin
         }
         array_push($paths, $file . DIRECTORY_SEPARATOR);
         self::$_autoloadPaths = array_unique($paths);
-
-        // 将类库加入加载路径中
-        set_include_path(get_include_path() . PATH_SEPARATOR . $file);
+        
+        /**
+         * 将类库加入加载路径中的第二位
+         * 默认情况下,php的加载路径为"当前目录;PEAR目录",而很多时候,PEAR目录是不可控的,例如,存在陈旧的类文件却无法
+         * 更新,所以自定义的类库应该置于PEAR目录之前
+         * @todo 
+         */
+        $includePath = get_include_path();
+        $pos = strpos($includePath, PATH_SEPARATOR);
+        if ($pos) {
+            $includePath = substr_replace($includePath, $file . PATH_SEPARATOR, $pos + 1, 0);
+        } else {
+            $includePath .= PATH_SEPARATOR . $file;
+        }
+        set_include_path($includePath);
         spl_autoload_register(array('self', 'autoload'));
     }
 
@@ -273,6 +286,7 @@ class Qwin
      *
      * @param string $className
      * @return bool 是否加载成功
+     * @todo 重新开启缓存功能
      */
     public static function autoload($class)
     {
