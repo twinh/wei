@@ -67,28 +67,35 @@
 }
 .qw-docs-option .qw-docs-option-name,
 .qw-docs-event .qw-docs-event-name,
-.qw-docs-result .qw-docs-result-code,
+.qw-docs-result .qw-docs-result-message,
 .qw-docs-method .qw-docs-method-name,
 .qw-docs-property .qw-docs-property-name {
     width: 20%;
     display: block;
-    text-indent: 6px;
     font-size: 12px;
+}
+/* TODO 删除或保留 */
+.qw-docs-result .qw-docs-result-message a,
+.qw-docs-result .qw-docs-result-message a.ui-state-hover {
+    /*font-weight: normal;*/
 }
 .qw-docs-result .qw-docs-result-code {
     width: 10%;
 }
+.qw-docs-property .qw-docs-property-modifiers,
+.qw-docs-method .qw-docs-method-modifiers {
+    width: 120px;
+}
 .qw-docs-option .qw-docs-option-name a,
 .qw-docs-event .qw-docs-event-name a,
-.qw-docs-result .qw-docs-result-code a,
+.qw-docs-result .qw-docs-result-message a,
 .qw-docs-method .qw-docs-method-name a,
 .qw-docs-property .qw-docs-property-name a {
     border: 0;
 }
 .qw-docs-option-type,
 .qw-docs-property-type,
-.qw-docs-property-default,
-.qw-docs-result-message {
+.qw-docs-property-default {
     width: 20%;;
 }
 .qw-docs-option-default,
@@ -104,13 +111,13 @@
 .qw-docs-property-content {
     clear: both;
     display: none;
-    text-indent: 6px;
+    text-indent: 3px;
     margin: 2px 0 12px;
 }
 
 .qw-docs-event-params,
 .qw-docs-method-params {
-    width: 40%;
+    width: 30%;
 }
 .qw-docs-summary th {
     padding: 4px 0;

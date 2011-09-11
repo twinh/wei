@@ -1,6 +1,6 @@
 <?php
 /**
- * zh-CN
+ * Model
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -20,11 +20,13 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-08-23 00:18:23
+ * @since       2011-09-06 13:48:16
  */
 
-return array(
-    'MOD_DOC' => '文档',
-    'WIDGET' => '微件',
-    'CLASS' => '类',
-);
+class Doc_Model
+{
+    public function getClass()
+    {
+        
+    }
+}
