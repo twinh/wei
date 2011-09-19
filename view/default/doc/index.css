@@ -40,7 +40,8 @@
 .qw-docs-event-list,
 .qw-docs-result-list,
 .qw-docs-method-list,
-.qw-docs-property-list {
+.qw-docs-property-list,
+.qw-docs-parameter-list {
     float: left;
     width: 100%;
 }
@@ -48,7 +49,8 @@
 .qw-docs-event-list li,
 .qw-docs-result-list li,
 .qw-docs-method-list li,
-.qw-docs-property-list li {
+.qw-docs-property-list li,
+.qw-docs-parameter-list li {
     clear: left;
     height: auto;
     width: 100%;
@@ -69,7 +71,8 @@
 .qw-docs-event .qw-docs-event-name,
 .qw-docs-result .qw-docs-result-message,
 .qw-docs-method .qw-docs-method-name,
-.qw-docs-property .qw-docs-property-name {
+.qw-docs-property .qw-docs-property-name,
+.qw-docs-parameter .qw-docs-parameter-name {
     width: 20%;
     display: block;
     font-size: 12px;
@@ -90,12 +93,14 @@
 .qw-docs-event .qw-docs-event-name a,
 .qw-docs-result .qw-docs-result-message a,
 .qw-docs-method .qw-docs-method-name a,
-.qw-docs-property .qw-docs-property-name a {
+.qw-docs-property .qw-docs-property-name a,
+.qw-docs-parameter .qw-docs-parameter-name a {
     border: 0;
 }
 .qw-docs-option-type,
 .qw-docs-property-type,
-.qw-docs-property-default {
+.qw-docs-property-default,
+.qw-docs-parameter-type {
     width: 20%;;
 }
 .qw-docs-option-default,
@@ -108,7 +113,8 @@
 .qw-docs-event-content,
 .qw-docs-result-content,
 .qw-docs-method-content,
-.qw-docs-property-content {
+.qw-docs-property-content,
+.qw-docs-parameter-content {
     clear: both;
     display: none;
     text-indent: 3px;
