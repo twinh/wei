@@ -82,7 +82,7 @@ class Qwin_Reflection_Docblock_Tag extends Zend_Reflection_Docblock_Tag
         $matches = array();
 
         // find the line
-        if (!preg_match('#^@(\w+)(?:\s+([^\s].*)|$)?#', $tagDocblockLine, $matches)) {
+        if (!preg_match('#^@(\w+)[ \s]+(.+?)$#s', $tagDocblockLine, $matches)) {
             require_once 'Zend/Reflection/Exception.php';
             throw new Zend_Reflection_Exception('Provided docblock line does not contain a valid tag');
         }

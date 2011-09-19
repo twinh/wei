@@ -455,7 +455,7 @@ class View_Widget extends Qwin_Widget_Abstract
         
         throw new Qwin_Widget_Exception('All view files not found: "' . implode(';', $fileCache) . '".');
     }
-
+    
     /**
      * 销毁视图元素
      *

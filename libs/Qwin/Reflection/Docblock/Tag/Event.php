@@ -249,4 +249,23 @@ class Qwin_Reflection_Docblock_Tag_Event extends Qwin_Reflection_Docblock_Tag
     {
         return $this->_methodName;
     }
+    
+    public function toArray()
+    {
+        $tmp = array();
+        foreach ($this->getParams() as $param) {
+            if (isset($param['value'])) {
+                $tmp[] = $param['type'] . $param['name'] . ' = ' . $param['value'];
+            } else {
+                $tmp[] = $param['type'] . $param['name'];
+            }
+        }
+        
+        return array(
+            'name' => $this->getMethodName(),
+            'param' => '(' . implode(', ', $tmp) . ')',
+            'return' => $this->getType(),
+            'description' => $this->getDescription(),
+        );
+    }
 }

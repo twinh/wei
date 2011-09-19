@@ -24,19 +24,17 @@
  */
 $minify->add(array(
     $jQuery->loadUi('tabs'),
-    $jQuery->loadUi('accordion'),
 ));
 ?>
 <script type="text/javascript">
     jQuery(function($){
-        $("#qw-docs-tabs").tabs({
-            
-        });
+        $("#qw-docs-tabs").tabs();
         
-        $('#qw-docs-tabs .qw-docs-option-name a, \n\
-           #qw-docs-tabs .qw-docs-event-name a, \n\
+        $('#qw-docs-tabs .qw-docs-option-name a,    \n\
+           #qw-docs-tabs .qw-docs-event-name a,     \n\
            #qw-docs-tabs .qw-docs-result-message a, \n\
-           #qw-docs-tabs .qw-docs-property-name a,\n\
+           #qw-docs-tabs .qw-docs-property-name a,  \n\
+           #qw-docs-tabs .qw-docs-parameter-name a, \n\
            #qw-docs-tabs .qw-docs-method-name a,')
         .qui()
         .click(function(){
@@ -47,57 +45,80 @@ $minify->add(array(
 <div class="qw-p5">
     <h2 class="qw-docs-title"><?php echo $lang[$type] ?>:<?php echo $data['name'] ?></h2>
     <div id="qw-docs-tabs">
+        <?php
+        if ('Function' != $type) :
+        ?>
         <ul>
-            <li><a href="#qw-docs-overview">概述</a></li>
+            <li><a href="#qw-docs-overview"><?php echo $lang['Overview'] ?></a></li>
             <?php if (isset($data['options'])) : ?>
-            <li><a href="#qw-docs-options">选项</a></li>
+            <li><a href="#qw-docs-options"><?php echo $lang['Options'] ?></a></li>
             <?php endif; ?>
             <?php if (isset($data['events'])) : ?>
-            <li><a href="#qw-docs-events">事件</a></li>
+            <li><a href="#qw-docs-events"><?php echo $lang['Events'] ?></a></li>
             <?php endif; ?>
             <?php if (isset($data['results'])) : ?>
-            <li><a href="#qw-docs-result">结果</a></li>
+            <li><a href="#qw-docs-results"><?php echo $lang['Results'] ?></a></li>
             <?php endif; ?>
-            <li><a href="#qw-docs-properties">属性</a></li>
-            <li><a href="#qw-docs-methods">方法</a></li>
+            <li><a href="#qw-docs-properties"><?php echo $lang['Properties'] ?></a></li>
+            <li><a href="#qw-docs-methods"><?php echo $lang['Methods'] ?></a></li>
         </ul>
         <div id="qw-docs-overview">
             <table class="ui-table ui-widget-content qw-docs-summary ui-corner-all">
-        <tbody>
-            <tr class="ui-widget-content ">
-                <th class="qw-docs-overview-title ui-corner-tl">名称</th>
-                <td><?php echo $data['overview']['name'] ?></td>
-            </tr>
-            <tr class="ui-widget-content">
-                <th class="">版本</th>
-                <td><?php echo $data['overview']['version'] ?></td>
-            </tr>
-            <tr class="ui-widget-content">
-                <th class="">介绍</th>
-                <td><pre><?php echo $data['overview']['description'] ?></pre></td>
-            </tr>
-            <!--
-            <tr class="ui-widget-content">
-                <th class="">使用方法</th>
-                <td>
-                    <ul>
-                        <li>1. 在ide.qq.com下载抽奖微件的类库</li>
-                        <li>2. 解压文件,将Qwin目录复制到src/library目录下</li>
-                        <li>3. 在程序代码中使用如下方式调用:
-                            <pre>
-  // 设定选项,详细选项查看文档"选项"一栏
-  $options = array(
-      'once' => true
-  );
-  // 加载抽奖微件并渲染
-  Qwin::widget('lottery')->render();</pre>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-            -->
-        </tbody>
-    </table>
+            <tbody>
+                <tr class="ui-widget-content ">
+                    <th class="qw-docs-overview-title ui-corner-tl"><?php echo $lang['Name'] ?></th>
+                    <td><?php echo $data['name'] ?></td>
+                </tr>
+                <tr class="ui-widget-content">
+                    <th class=""><?php echo $lang['Version'] ?></th>
+                    <td><?php echo $data['version'] ?></td>
+                </tr>
+                <tr class="ui-widget-content">
+                    <th class=""><?php echo $lang['Short description'] ?></th>
+                    <td><pre><?php echo $data['shortDescription'] ?></pre></td>
+                </tr>
+                <tr class="ui-widget-content ">
+                    <th class="qw-docs-overview-title ui-corner-tl">父类</th>
+                    <td>
+                    <?php
+                    if ($data['extends']) :
+                    foreach ($data['extends'] as $class) : 
+                    ?>
+                        <a href="?module=doc&name=<?php echo $class ?>"><?php echo $class ?></a>
+                    <?php
+                    endforeach;
+                    else :
+                    ?>
+                        -
+                    <?php
+                    endif;
+                    ?>
+                    </td>
+                </tr>
+                <tr class="ui-widget-content ">
+                    <th class="qw-docs-overview-title ui-corner-tl">接口</th>
+                    <td>
+                    <?php
+                    if ($data['interfaces']) :
+                    foreach ($data['interfaces'] as $interface) : 
+                    ?>
+                        <a href="?module=doc&name=<?php echo $interface ?>"><?php echo $interface ?></a>
+                    <?php
+                    endforeach;
+                    else :
+                    ?>
+                        -
+                    <?php
+                    endif;
+                    ?>
+                    </td>
+                </tr>
+                <tr class="ui-widget-content">
+                    <th class=""><?php echo $lang['Demo'] ?></th>
+                    <td><a target="_blank" href="?module=demo&tag=<?php echo $data['name'] ?>"><?php echo $lang['Demo'] ?></a></td>
+                </tr>
+            </tbody>
+            </table>
         </div>
         <?php
         if (isset($data['options'])) :
@@ -105,24 +126,24 @@ $minify->add(array(
         <div id="qw-docs-options">
             <ul class="qw-docs-option-list">
                 <li class="qw-docs-option ui-widget-content">
-                    <div class="qw-docs-option-name ui-priority-secondary qw-docs-cell">名称</div>
-                    <div class="qw-docs-option-type ui-priority-secondary qw-docs-cell">类型</div>
-                    <div class="qw-docs-option-default ui-priority-secondary qw-docs-cell">默认值</div>
+                    <div class="qw-docs-option-name ui-priority-secondary qw-docs-cell"><?php echo $lang['Name'] ?></div>
+                    <div class="qw-docs-option-type ui-priority-secondary qw-docs-cell"><?php echo $lang['Type'] ?></div>
+                    <div class="qw-docs-option-default ui-priority-secondary qw-docs-cell"><?php echo $lang['Default value'] ?></div>
                 </li>
                 <?php
                 if (!empty($data['options'])) :
                 foreach ($data['options'] as $options) :
                 ?>
-                <li id="option-<?php echo $options[0] ?>" class="qw-docs-option ui-widget-content">
+                <li id="option-<?php echo $options['name'] ?>" class="qw-docs-option ui-widget-content">
                     <div class="qw-docs-option-header">
                         <h3 class="qw-docs-option-name qw-docs-cell">
-                            <a href="javascript:;"><?php echo $options[0] ?></a>
+                            <a href="javascript:;"><?php echo $options['name'] ?></a>
                         </h3>
-                        <div class="qw-docs-option-type qw-docs-cell"><?php echo $options[1] ?></div>
-                        <div class="qw-docs-option-default qw-docs-cell"><?php echo $options[3] ?></div>
+                        <div class="qw-docs-option-type qw-docs-cell"><?php echo $options['type'] ?></div>
+                        <div class="qw-docs-option-default qw-docs-cell"><?php echo $options['value'] ?></div>
                     </div>
                     <div class="qw-docs-option-content">
-                        <div class="qw-docs-option-descrip"><?php echo $options[2] ?></div>
+                        <div class="qw-docs-option-descrip"><?php echo $options['description'] ?></div>
                         <div class="qw-docs-option-example"></div>
                     </div>
                 </li>
@@ -132,7 +153,7 @@ $minify->add(array(
                 ?>
                 <li class="qw-docs-option ui-widget-content">
                     <div class="qw-docs-cell">
-                        该微件没有选项.
+                        <?php echo sprintf($lang['The %s does not defined any %s.'], $lang['class'], $lang['options']) ?>
                     </div>
                 </li>
                 <?php
@@ -149,9 +170,9 @@ $minify->add(array(
         <div id="qw-docs-events">
             <ul class="qw-docs-event-list">
                 <li class="qw-docs-event ui-widget-content">
-                    <div class="qw-docs-event-name ui-priority-secondary qw-docs-cell">名称</div>
-                    <div class="qw-docs-event-params ui-priority-secondary qw-docs-cell">参数</div>
-                    <div class="qw-docs-event-return ui-priority-secondary qw-docs-cell">返回值</div>
+                    <div class="qw-docs-event-name ui-priority-secondary qw-docs-cell"><?php echo $lang['Name'] ?></div>
+                    <div class="qw-docs-event-params ui-priority-secondary qw-docs-cell"><?php echo $lang['Parameters'] ?></div>
+                    <div class="qw-docs-event-return ui-priority-secondary qw-docs-cell"><?php echo $lang['Return'] ?></div>
                 </li>
                 <?php
                 if (!empty($data['events'])) :
@@ -176,7 +197,7 @@ $minify->add(array(
                 ?>
                 <li class="qw-docs-event ui-widget-content">
                     <div class="qw-docs-cell">
-                        该微件没有回调事件.
+                        <?php echo sprintf($lang['The %s does not defined any %s.'], $lang['class'], $lang['events']) ?>
                     </div>
                 </li>
                 <?php
@@ -190,24 +211,24 @@ $minify->add(array(
         <?php
         if (isset($data['results'])) : 
         ?>
-        <div id="qw-docs-result">
+        <div id="qw-docs-results">
             <ul class="qw-docs-result-list">
                 <li class="qw-docs-result ui-widget-content">
-                    <div class="qw-docs-result-code ui-priority-secondary qw-docs-cell">代码</div>
-                    <div class="qw-docs-result-message ui-priority-secondary qw-docs-cell">信息</div>
-                    <div class="qw-docs-result-memo ui-priority-secondary qw-docs-cell">备注</div>
+                    <div class="qw-docs-result-code ui-priority-secondary qw-docs-cell"><?php echo $lang['Code'] ?></div>
+                    <div class="qw-docs-result-message ui-priority-secondary qw-docs-cell"><?php echo $lang['Message'] ?></div>
+                    <div class="qw-docs-result-memo ui-priority-secondary qw-docs-cell"><?php echo $lang['Description'] ?></div>
                 </li>
                 <?php
                 if (!empty($data['results'])) :
                 foreach ($data['results'] as $result) :
                 ?>
-                <li id="result-<?php echo $result[0] ?>" class="qw-docs-result ui-widget-content">
+                <li id="result-<?php echo $result['code'] ?>" class="qw-docs-result ui-widget-content">
                     <div class="qw-docs-result-header">
-                        <div class="qw-docs-result-code qw-docs-cell"><?php echo $result[0] ?></div>
+                        <div class="qw-docs-result-code qw-docs-cell"><?php echo $result['code'] ?></div>
                         <h3 class="qw-docs-result-message qw-docs-cell">
-                            <a href="javascript:;"><?php echo $result[1] ?></a>
+                            <a href="javascript:;"><?php echo $result['message'] ?></a>
                         </h3>
-                        <div class="qw-docs-result-memo qw-docs-cell"><?php echo $result[2] ?></div>
+                        <div class="qw-docs-result-memo qw-docs-cell"><?php echo $result['description'] ?></div>
                     </div>
                     <div class="qw-docs-result-content">
                         <div class="qw-docs-result-descrip"></div>
@@ -220,7 +241,7 @@ $minify->add(array(
                 ?>
                 <li class="qw-docs-result ui-widget-content">
                     <div class="qw-docs-cell">
-                        该微件没有操作结果.
+                        <?php echo sprintf($lang['The %s does not defined any %s.'], $lang['class'], $lang['results']) ?>
                     </div>
                 </li>
                 <?php
@@ -234,23 +255,23 @@ $minify->add(array(
         <div id="qw-docs-properties">
             <ul class="qw-docs-property-list">
                 <li class="qw-docs-property ui-widget-content">
-                    <div class="qw-docs-property-modifiers ui-priority-secondary qw-docs-cell">修饰符</div>
-                    <div class="qw-docs-property-name ui-priority-secondary qw-docs-cell">名称</div>
-                    <div class="qw-docs-property-type ui-priority-secondary qw-docs-cell">类型</div>
-                    <div class="qw-docs-property-default ui-priority-secondary qw-docs-cell">默认值</div>
+                    <div class="qw-docs-property-modifiers ui-priority-secondary qw-docs-cell"><?php echo $lang['Modifiers'] ?></div>
+                    <div class="qw-docs-property-name ui-priority-secondary qw-docs-cell"><?php echo $lang['Name'] ?></div>
+                    <div class="qw-docs-property-type ui-priority-secondary qw-docs-cell"><?php echo $lang['Type'] ?></div>
+                    <div class="qw-docs-property-default ui-priority-secondary qw-docs-cell"><?php echo $lang['Default value'] ?></div>
                 </li>
                 <?php
                 if (!empty($data['properties'])) :
-                foreach ($data['properties'] as $property) :
+                foreach ($data['constants'] + $data['properties'] as $property) :
                 ?>
                 <li id="property-<?php echo $property['name'] ?>" class="qw-docs-property ui-widget-content">
                     <div class="qw-docs-property-header">
                         <div class="qw-docs-property-modifiers qw-docs-cell"><?php echo $property['modifiers'] ?></div>
                         <h3 class="qw-docs-property-name qw-docs-cell">
-                            <a href="javascript:;"><?php echo $property['name'] ?></a>
+                            <a href="javascript:;"><?php echo $property['varName'] ?></a>
                         </h3>
                         <div class="qw-docs-property-type qw-docs-cell"><?php echo $property['type'] ?></div>
-                        <div class="qw-docs-property-default qw-docs-cell"><?php echo $property['value'] ?></div>
+                        <div class="qw-docs-property-default qw-docs-cell"><?php echo $property['valueText'] ?></div>
                     </div>
                     <div class="qw-docs-property-content">
                         <div class="qw-docs-property-descrip"></div>
@@ -263,7 +284,7 @@ $minify->add(array(
                 ?>
                 <li class="qw-docs-property ui-widget-content">
                     <div class="qw-docs-cell">
-                        该微件没有属性.
+                        <?php echo sprintf($lang['The %s does not defined any %s.'], $lang['class'], $lang['properties']) ?>
                     </div>
                 </li>
                 <?php
@@ -274,10 +295,10 @@ $minify->add(array(
         <div id="qw-docs-methods">
             <ul class="qw-docs-method-list">
                 <li class="qw-docs-method ui-widget-content">
-                    <div class="qw-docs-method-modifiers ui-priority-secondary qw-docs-cell">修饰符</div>
-                    <div class="qw-docs-method-name ui-priority-secondary qw-docs-cell">名称</div>
-                    <div class="qw-docs-method-params ui-priority-secondary qw-docs-cell">参数</div>
-                    <div class="qw-docs-method-return ui-priority-secondary qw-docs-cell">返回值</div>
+                    <div class="qw-docs-method-modifiers ui-priority-secondary qw-docs-cell"><?php echo $lang['Modifiers'] ?></div>
+                    <div class="qw-docs-method-name ui-priority-secondary qw-docs-cell"><?php echo $lang['Name'] ?></div>
+                    <div class="qw-docs-method-params ui-priority-secondary qw-docs-cell"><?php echo $lang['Parameters'] ?></div>
+                    <div class="qw-docs-method-return ui-priority-secondary qw-docs-cell"><?php echo $lang['Return'] ?></div>
                 </li>
                 <?php
                 if (!empty($data['methods'])) :
@@ -289,11 +310,11 @@ $minify->add(array(
                         <h3 class="qw-docs-method-name qw-docs-cell">
                             <a href="javascript:;"><?php echo $method['name'] ?></a>
                         </h3>
-                        <div class="qw-docs-method-params qw-docs-cell"><?php echo $method['param'] ?></div>
+                        <div class="qw-docs-method-params qw-docs-cell"><?php echo $method['parameterText'] ?></div>
                         <div class="qw-docs-method-return qw-docs-cell"><?php echo $method['return'] ?></div>
                     </div>
                     <div class="qw-docs-method-content">
-                        <div class="qw-docs-method-descrip"><?php echo $method['description'] ?></div>
+                        <div class="qw-docs-method-descrip"><?php echo $method['shortDescription'] ?></div>
                         <div class="qw-docs-method-example"></div>
                     </div>
                 </li>
@@ -303,7 +324,7 @@ $minify->add(array(
                 ?>
                 <li class="qw-docs-method ui-widget-content">
                     <div class="qw-docs-cell">
-                        该微件没有方法.
+                        <?php echo sprintf($lang['The %s does not defined any %s.'], $lang['class'], $lang['methods']) ?>
                     </div>
                 </li>
                 <?php
@@ -311,5 +332,71 @@ $minify->add(array(
                 ?>
             </ul>
         </div>
+        <?php
+        else:
+        ?>
+        <ul>
+            <li><a href="#qw-docs-overview"><?php echo $lang['Overview'] ?></a></li>
+            <li><a href="#qw-docs-parameters"><?php echo $lang['Parameters'] ?></a></li>
+        </ul>
+        <div id="qw-docs-overview">
+            <table class="ui-table ui-widget-content qw-docs-summary ui-corner-all">
+            <tbody>
+                <tr class="ui-widget-content ">
+                    <th class="qw-docs-overview-title ui-corner-tl"><?php echo $lang['Name'] ?></th>
+                    <td><?php echo $data['name'] ?></td>
+                </tr>
+                <tr class="ui-widget-content">
+                    <th class=""><?php echo $lang['How to use'] ?></th>
+                    <td><?php echo $data['name'] . $data['parameterText'] ?></td>
+                </tr>
+                <tr class="ui-widget-content">
+                    <th class=""><?php echo $lang['Short description'] ?></th>
+                    <td><?php echo $data['shortDescription'] ?></td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+        <div id="qw-docs-parameters">
+            <ul class="qw-docs-parameter-list">
+                <li class="qw-docs-parameter ui-widget-content">
+                    <div class="qw-docs-parameter-name ui-priority-secondary qw-docs-cell"><?php echo $lang['Name'] ?></div>
+                    <div class="qw-docs-parameter-type ui-priority-secondary qw-docs-cell"><?php echo $lang['Type'] ?></div>
+                    <div class="qw-docs-parameter-default ui-priority-secondary qw-docs-cell"><?php echo $lang['Default value'] ?></div>
+                </li>
+                <?php
+                if (!empty($data['parameters'])) :
+                foreach ($data['parameters'] as $parameter) :
+                ?>
+                <li id="parameter-<?php echo $parameter['name'] ?>" class="qw-docs-parameter ui-widget-content">
+                    <div class="qw-docs-parameter-header">
+                        <h3 class="qw-docs-parameter-name qw-docs-cell">
+                            <a href="javascript:;"><?php echo $parameter['varName'] ?></a>
+                        </h3>
+                        <div class="qw-docs-parameter-type qw-docs-cell"><?php echo $parameter['type'] ? $parameter['type'] : '-' ?></div>
+                        <div class="qw-docs-parameter-default qw-docs-cell"><?php echo $parameter['value'] ? $parameter['value'] : '-' ?></div>
+                    </div>
+                    <div class="qw-docs-parameter-content">
+                        <div class="qw-docs-parameter-descrip"></div>
+                        <div class="qw-docs-parameter-example"></div>
+                    </div>
+                </li>
+                <?php
+                endforeach;
+                else :
+                ?>
+                <li class="qw-docs-parameter ui-widget-content">
+                    <div class="qw-docs-cell">
+                        <?php echo sprintf($lang['The %s does not defined any %s.'], $lang['function'], $lang['parameters']) ?>
+                    </div>
+                </li>
+                <?php
+                endif;
+                ?>
+            </ul>
+        </div>
+        <?php
+        endif;
+        ?>
     </div>
 </div>

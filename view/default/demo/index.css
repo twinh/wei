@@ -1,0 +1,48 @@
+<?php
+/**
+ * index
+ *
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @version     $Id$
+ * @since       2011-9-19 18:39:41
+*/
+.qw-demo-title {
+    margin: 10px 0 6px 5px;
+}
+#qw-demo .qw-demo-code {
+    width: 1px;
+    height: 1px;
+}
+#qw-demo .ui-tabs-panel {
+    width: 100%;
+    padding: 0;
+} 
+#qw-demo .ui-tabs-panel .CodeMirror {
+    line-height: 16px;
+}
+#qw-demo .ui-tabs-panel .CodeMirror-scroll {
+    height: 400px;
+}
+
+.ui-tabs-vertical { }
+.ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
+.ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
+.ui-tabs-vertical .ui-tabs-nav li a { display:block; }
+.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-selected { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; border-right-width: 1px; }
+.ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: left;}
