@@ -21,6 +21,7 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2011-09-15 20:56:18
+ * @todo        get interface only implements by itself
  */
 
 /**
@@ -59,10 +60,17 @@ class Qwin_Reflection_Class extends Zend_Reflection_Class
      */
     public function toArray()
     {
+        $tagsTree = array();
         try {
             $docblock = $this->getDocblock();
             $longDescription = $docblock->getLongDescription();
             $shortDescription = $docblock->getShortDescription();
+            
+            $tags = $docblock->getTags();
+            /* @var $tag Qwin_Reflection_Docblock_Tag */
+            foreach ($tags as $tag) {
+                $tagsTree[$tag->getName()][] = $tag->toArray();
+            }
             
             $version = $docblock->getTag('version');
             if (false == $version) {
@@ -76,7 +84,7 @@ class Qwin_Reflection_Class extends Zend_Reflection_Class
             $shortDescription = null;
             $version = PHP_VERSION;
         }
-        
+
         $methods = array();
         /* @var $method Qwin_Reflection_Method */
         foreach ($this->getMethods() as $method) {
@@ -108,19 +116,21 @@ class Qwin_Reflection_Class extends Zend_Reflection_Class
                 'valueText' => Qwin_Reflection::exportValue($value),
             );
         }
-        
-        $extends = class_parents($this->getName());
+
+        $class = $this->getName();
+        $extends = class_parents($class);
         $interfaces = $this->getInterfaceNames();
-        
+
         return array(
-            'name' => $this->getName(),
+            'name' => $class,
             'version' => $version,
             'modifiers' => $this->getModifiers(),
             'longDescription' => $longDescription,
             'shortDescription' => $shortDescription,
             
-            'extends' => class_parents($this->getName()),
-            'interfaces' => $this->getInterfaceNames(),
+            'parents' => $extends,
+            'interfaces' => $interfaces,
+            'inheritence' => $this->getInheritence(),
             
             'methods' => $methods,
             'constants' => $constants,
@@ -129,7 +139,31 @@ class Qwin_Reflection_Class extends Zend_Reflection_Class
             'events' => $this->getEvents(),
             'options' => $this->getOptions(),
             'results' => $this->getResults(),
+            'tags' => $tagsTree,
         );
+    }
+    
+    /**
+     * Return class inheritence
+     * 
+     * @return array
+     */
+    public function getInheritence()
+    {
+        $class = $this->getName();
+        $interfaces = $this->getInterfaceNames();
+        $inheritence = array();
+        
+        while($parentClass = get_parent_class($class)) {
+            $parentInstance = new Qwin_Reflection_Class($parentClass);
+            $parentInterfaces = $parentInstance->getInterfaceNames();
+            $inheritence[$class] = array_diff($interfaces, $parentInterfaces);
+            sort($inheritence[$class]);
+            $class = $parentClass;
+            $interfaces = $parentInterfaces;
+        }
+        $inheritence[$class] = $interfaces;
+        return $inheritence;
     }
     
     /**
@@ -146,11 +180,14 @@ class Qwin_Reflection_Class extends Zend_Reflection_Class
         try {
             $events = array();
             $docblock = $this->getDocblock();
-            $tags = $docblock->getTags('event');
-            $eventTags = $docblock->getTags('event');
-            /* @var $event Qwin_Reflection_Docblock_Tag_Event */
-            foreach ($eventTags as $event) {
-                $events[$event->getMethodName()] = $event->toArray();
+            if ($docblock->hasTag('event')) {
+                $eventTags = $docblock->getTags('event');
+                /* @var $event Qwin_Reflection_Docblock_Tag_Event */
+                foreach ($eventTags as $event) {
+                    $events[$event->getMethodName()] = $event->toArray();
+                }
+            } else {
+                $events = null;
             }
         } catch (Exception $e) {
             $events = null;

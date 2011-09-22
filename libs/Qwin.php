@@ -279,6 +279,11 @@ class Qwin
         set_include_path($includePath);
         spl_autoload_register(array('self', 'autoload'));
     }
+    
+    public static function getAutoloadPaths()
+    {
+        return self::$_autoloadPaths;
+    }
 
     /**
      * 自动加载类的方法,适用各类按标注方法命名的类库

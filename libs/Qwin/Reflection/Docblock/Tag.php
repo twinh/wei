@@ -46,6 +46,21 @@ class Qwin_Reflection_Docblock_Tag extends Zend_Reflection_Docblock_Tag
      * @var string
      */
     protected $_longDescription = null;
+    
+    /**
+     * return array format of tag data
+     * 
+     * @return array
+     */
+    public function toArray()
+    {
+        return array(
+            'name' => $this->getName(),
+            'description' => $this->getDescription(),
+            'longDescription' => $this->getLongDescription(),
+            'shortDescription' => $this->getShortDescription(),
+        );
+    }
 
     /**
      * Factory: Create the appropriate annotation tag object

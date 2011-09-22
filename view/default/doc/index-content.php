@@ -40,8 +40,45 @@ $minify->add(array(
         .click(function(){
             $(this).parent().parent().next().toggle();
         });
+        $('#qw-docs-overview h3 a').qui();
+        $('#qw-docs-summary a').qui();
+        $('#qw-doc-inheritence-details, #qw-doc-inheritence-toggle').click(function(){
+            $('#qw-doc-inheritence-tree1').toggle(600);
+            $('#qw-doc-inheritence-tree').toggle(600);
+        });
     });
 </script>
+<style type="text/css">
+    #qw-docs-summary a {
+        border: 0;
+        font-weight: normal;
+        text-decoration: underline;
+    }
+    #qw-doc-inheritence-tree dd {
+        margin: 0;
+        padding: 2px;
+    }
+    #qw-doc-inheritence-tree a {
+        padding:  0 2px;
+    }
+    #qw-docs-overview h3 {
+        margin-bottom: 10px;
+    }
+    #qw-docs-overview h3 a {
+        border-top: 0;
+        border-right: 0;
+        border-left: 0;
+        border-bottom-width: 3px;
+        padding-bottom: 2px;
+        background: none;
+    }
+    #qw-docs-overview p {
+        line-height: 18px;
+    }
+    #qw-docs-summary th {
+        width: 180px;
+    }
+</style>
 <div class="qw-p5">
     <h2 class="qw-docs-title"><?php echo $lang[$type] ?>:<?php echo $data['name'] ?></h2>
     <div id="qw-docs-tabs">
@@ -63,62 +100,163 @@ $minify->add(array(
             <li><a href="#qw-docs-methods"><?php echo $lang['Methods'] ?></a></li>
         </ul>
         <div id="qw-docs-overview">
-            <table class="ui-table ui-widget-content qw-docs-summary ui-corner-all">
+            <h3><a id="short-description" class="ui-state-default" href="#short-description"><?php echo $lang['Short Description'] ?></a></h3>
+            <p><?php echo nl2br($data['shortDescription']) ?></p>
+            <p><?php echo nl2br($data['longDescription']) ?></p>
+            <br />
+            <h3><a id="detailed-description" class="ui-state-default" href="#detailed-description"><?php echo $lang['Detailed Description'] ?></a></h3>
+            <table id="qw-docs-summary" class="ui-table ui-table-noui ui-widget-content qw-docs-summary">
             <tbody>
-                <tr class="ui-widget-content ">
-                    <th class="qw-docs-overview-title ui-corner-tl"><?php echo $lang['Name'] ?></th>
-                    <td><?php echo $data['name'] ?></td>
-                </tr>
+                <?php
+                if (isset($tags['package'])) :
+                ?>
                 <tr class="ui-widget-content">
-                    <th class=""><?php echo $lang['Version'] ?></th>
-                    <td><?php echo $data['version'] ?></td>
+                    <th><?php echo $lang['Package'] ?></th>
+                    <td><?php echo $tags['package'][0]['description'] ?></td>
                 </tr>
+                <?php
+                    unset($tags['package']);
+                endif;
+                ?>
+                <?php
+                if (isset($tags['subpackage'])) :
+                ?>
                 <tr class="ui-widget-content">
-                    <th class=""><?php echo $lang['Short description'] ?></th>
-                    <td><pre><?php echo $data['shortDescription'] ?></pre></td>
+                    <th><?php echo $lang['Subpackage'] ?></th>
+                    <td><?php echo $tags['subpackage'][0]['description'] ?></td>
                 </tr>
-                <tr class="ui-widget-content ">
-                    <th class="qw-docs-overview-title ui-corner-tl">父类</th>
+                <?php
+                    unset($tags['subpackage']);
+                endif;
+                ?>
+                <tr class="ui-widget-content">
+                    <th><?php echo $lang['Inheritence'] ?></th>
                     <td>
-                    <?php
-                    if ($data['extends']) :
-                    foreach ($data['extends'] as $class) : 
-                    ?>
-                        <a href="?module=doc&name=<?php echo $class ?>"><?php echo $class ?></a>
-                    <?php
-                    endforeach;
-                    else :
-                    ?>
-                        -
-                    <?php
-                    endif;
-                    ?>
+                        <div id="qw-doc-inheritence-tree1">
+                        <a href="?module=doc&name=<?php echo $data['name'] ?>"><?php echo $data['name'] ?></a>
+                        <?php
+                        foreach ($data['parents'] as $parent) :
+                        ?>
+                        » <a href="?module=doc&name=<?php echo $parent ?>"><?php echo $parent ?></a>
+                        <?php
+                        endforeach;
+                        ?>
+                        <a id="qw-doc-inheritence-details" href="javascript:;">(<?php echo $lang['Details'] ?>)</a>
+                        </div>
+                        <div id="qw-doc-inheritence-tree" class="ui-helper-hidden">
+                            <dl>
+                            <?php
+                            $leftPx = 0;
+                            foreach (array_reverse($data['inheritence']) as $class => $interfaces) :
+                            ?>
+                                <dd style="padding-left: <?php echo $leftPx ?>px;">
+                                <?php
+                                if (0 != $leftPx) :
+                                ?>
+                                    <img alt="extended by" src="<?php echo $root ?>images/inheritence.gif" />
+                                <?php
+                                endif;
+                                ?>
+                               
+                                <a href="?module=doc&name=<?php echo $class ?>"><?php echo $class ?></a>
+                                    
+                                <?php
+                                if (!empty($interfaces)) :
+                                ?>
+                                implements
+                                <?php
+                                    foreach ($interfaces as $interface) :
+                                ?>
+                                    <a href="?module=doc&name=<?php echo $interface ?>"><?php echo $interface ?></a> 
+                                <?php
+                                    endforeach;
+                                endif;
+                                ?>
+                                        
+                                <?php
+                                if ($data['name'] == $class) :
+                                ?>
+                                    <a id="qw-doc-inheritence-toggle" href="javascript:;">(<?php echo $lang['Slide up'] ?>)</a>
+                                <?php
+                                endif;
+                                ?>
+                                </dd>
+                            <?php
+                            $leftPx += 30;
+                            endforeach;
+                            ?>
+                            </dl>
+                        </div>
                     </td>
                 </tr>
-                <tr class="ui-widget-content ">
-                    <th class="qw-docs-overview-title ui-corner-tl">接口</th>
+                <tr class="ui-widget-content">
+                    <th><?php echo $lang['Link'] ?></th>
                     <td>
-                    <?php
-                    if ($data['interfaces']) :
-                    foreach ($data['interfaces'] as $interface) : 
-                    ?>
-                        <a href="?module=doc&name=<?php echo $interface ?>"><?php echo $interface ?></a>
-                    <?php
-                    endforeach;
-                    else :
-                    ?>
-                        -
-                    <?php
-                    endif;
-                    ?>
+                        <a href="?module=demo&tag=<?php echo $data['name'] ?>"><?php echo $lang['Demo'] ?></a>,
+                        <a href="?module=ide/code&value=<?php echo $data['name'] ?>"><?php echo $lang['Source code'] ?></a>
                     </td>
                 </tr>
+                <?php
+                if (isset($tags['author'])) :
+                ?>
                 <tr class="ui-widget-content">
-                    <th class=""><?php echo $lang['Demo'] ?></th>
-                    <td><a target="_blank" href="?module=demo&tag=<?php echo $data['name'] ?>"><?php echo $lang['Demo'] ?></a></td>
+                    <th><?php echo $lang['Author'] ?></th>
+                    <td><?php echo $tags['author'][0]['description'] ?></td>
                 </tr>
+                <?php
+                    unset($tags['author']);
+                endif;
+                ?>
+                <?php
+                if (isset($tags['since'])) :
+                ?>
+                <tr class="ui-widget-content">
+                    <th><?php echo $lang['Since'] ?></th>
+                    <td><?php echo $tags['since'][0]['description'] ?></td>
+                </tr>
+                <?php
+                    unset($tags['since']);
+                endif;
+                ?>
+                <?php
+                if (isset($tags['version'])) :
+                ?>
+                <tr class="ui-widget-content">
+                    <th><?php echo $lang['Version'] ?></th>
+                    <td><?php echo $tags['version'][0]['description'] ?></td>
+                </tr>
+                <?php
+                    unset($tags['version']);
+                endif;
+                ?>
+                <?php
+                foreach ($tags as $name => $tag) :
+                    if (in_array($name, $ignoreTags)) :
+                        continue;
+                    endif;
+                    foreach ($tag as $row) :
+                ?>
+                <tr class="ui-widget-content">
+                    <th><?php echo $lang[ucfirst($row['name'])] ?></th>
+                    <td class="qw-doc-tag-<?php $row['name'] ?>"><?php echo nl2br($row['description']) ?></td>
+                </tr>
+                <?php
+                    endforeach;
+                endforeach;
+                ?>
             </tbody>
             </table>
+            <br />
+            <!--<h3><a class="ui-state-default" href="#">自定义信息</a></h3>
+            <p>抽奖微件提供了安全的抽奖操作.</p>
+            <p>除了基本的抽奖功能之外,还包括了登陆检查,行为监测,时间段限制,回调事件等功能</p>
+            <p>除了基本的抽奖功能之外,还包括了登陆检查,行为监测,时间段限制,回调事件等功能</p>
+            <p>除了基本的抽奖功能之外,还包括了登陆检查,行为监测,时间段限制,回调事件等功能</p>
+            <p>除了基本的抽奖功能之外,还包括了登陆检查,行为监测,时间段限制,回调事件等功能</p>
+            <p>除了基本的抽奖功能之外,还包括了登陆检查,行为监测,时间段限制,回调事件等功能</p>
+            <p>除了基本的抽奖功能之外,还包括了登陆检查,行为监测,时间段限制,回调事件等功能</p>
+            <p>除了基本的抽奖功能之外,还包括了登陆检查,行为监测,时间段限制,回调事件等功能</p>
+            <br />-->
         </div>
         <?php
         if (isset($data['options'])) :
