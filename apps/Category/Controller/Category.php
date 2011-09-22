@@ -25,7 +25,7 @@
  * @since       2010-07-12 17:01:37
  */
 
-class Com_Category_Controller_Category extends Com_ActionController
+class Category_Controller extends ActionController_Widget
 {
     public function datasanitise($data)
     {

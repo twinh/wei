@@ -227,7 +227,7 @@ jQuery(function($){
         return false;
     });
     
-    $('table.ui-table tr').not('.ui-table-header').qui();
+    $('table.ui-table:not(.ui-table-noui) tr').not('.ui-table-header').qui();
     $('table.ui-table td.ui-state-default').qui();
     $('table.ui-table td a.ui-jqgrid-icon').qui();
 

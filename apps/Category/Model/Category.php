@@ -25,6 +25,6 @@
  * @since       2010-07-12 16:51:41
  */
 
-class Com_Category_Model_Category extends Com_Model
+class Category_Model
 {
 }

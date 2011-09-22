@@ -25,7 +25,7 @@
  * @since       2010-07-12 16:52:28
  */
 
-class Com_Category_Meta_Category extends Com_Meta
+class Category_Meta extends Meta_Widget
 {
     public function  setMeta()
     {

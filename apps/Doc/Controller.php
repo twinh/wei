@@ -25,8 +25,12 @@
 
 class Doc_Controller extends Controller_Widget
 {
+    protected $_ignoreTags = array(
+        'nternal', 'event',
+    );
+    
     public function actionIndex()
-    {
+    {        
         $request = $this->_request;
         $type = $request->get('type');
         $name = $request->get('name');
@@ -52,9 +56,57 @@ class Doc_Controller extends Controller_Widget
             $this->_view->alert('Function "' . $name . '" not found.');
         }
         
+        // get the relative file name
+        $relativeFile = false;
+        $file = $reflection->getFileName();
+        foreach ($this->_app->getOption('paths') as $path) {
+            $path = realpath(dirname($path) . '/');
+            if (false !== ($pos = strpos($file, $path))) {
+                $relativeFile = substr($file, strlen($path));
+            }
+        }
+        
         $data = $this->_getDocs($name, $type, $reflection->toArray());
+        $tags = $data['tags'];
+        $ignoreTags = $this->_ignoreTags;
 
         $this->_view->assign(get_defined_vars());
+    }
+    
+    public function actionPackage()
+    {
+        return true;
+        // scanf all php file in autoload paths
+        $files = array();
+        foreach (Qwin::getAutoloadPaths() as $path) {
+            $files = array_merge($files, $this->_scanf($path));
+        }
+        
+        foreach ($files as $file) {
+            require $file;
+            $object = new Qwin_Reflection_File($file);
+            qw_p($object->getClasses(), 1);
+        }
+    }
+    
+    protected function _scanf($path)
+    {
+        $found = array();
+        $files = scandir($path);
+        foreach ($files as $file) {
+            if ('.' == $file || '..' == $file) {
+                continue;
+            }
+            $file2 = $path . '/' . $file;
+            if (is_file($file2)) {
+                if (64 < ord($file[0]) && 91 > ord($file[0]) && '.php' == substr($file2, -4)) {
+                    $found[] = $file2;
+                }
+            } elseif (is_dir($file2)) {
+                $found = array_merge($found, $this->_scanf($file2));
+            }
+        }
+        return $found;
     }
     
     /**
@@ -79,4 +131,14 @@ class Doc_Controller extends Controller_Widget
         $data = $data + $appendData;
         return $data;
     }
+}
+class NClosureFix
+{
+	static $vars = array();
+
+	static function uses($args)
+	{
+		self::$vars[] = $args;
+		return count(self::$vars)-1;
+	}
 }

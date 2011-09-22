@@ -1,0 +1,81 @@
+<?php
+/**
+ * Qwin Framework
+ *
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @version     $Id$
+ */
+
+/**
+ * Controller
+ * 
+ * @category    Qwin
+ * @package     Qwin
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2011-09-20 15:13:38
+ */
+class Ide_Code_Controller extends Controller_Widget
+{  
+    public function actionIndex()
+    {
+        $request = $this->_request;
+        $value = htmlspecialchars($request->get('value'));
+        $type = Qwin_Util_Array::forceInArray($request->get('type'), array('object', 'file'));
+        
+        if (empty($value)) {
+            return $this->_view->alert('Param value should not be empty.');
+        }
+        
+        if ('object' === $type) {
+            if (class_exists($value) || interface_exists($value)) {
+                $object = new Qwin_Reflection_Class($value);
+            } elseif (function_exists($value)) {
+                $object = new Qwin_Reflection_Function($value);
+            } else {
+                return $this->_view->alert('Class, interface or function "' . $value . '" not found.');
+            }
+            
+            if (false != ($file = $object->getFileName())) {
+                $data = file_get_contents($file);
+            } else {
+                // TODO toSource ?
+                $data = $object->__toString();
+            }
+        } else {
+            // Never show config file to others
+            if (strripos($value, 'config.php')) {
+                return $this->_view->alert(sprintf('File "%s" not found.', htmlspecialchars($value)));
+            }
+
+            foreach ($this->_app->getOption('paths') as $path) {
+                $file = dirname($path) . '/' . $value;
+                if (is_file($file)) {
+                    $data = file_get_contents($file);
+                }
+            }
+            
+            if (!isset($data)) {
+                return $this->_view->alert(sprintf('File "%s" not found.', htmlspecialchars($value)));
+            }
+        }
+        
+        return $this->_view->assign(get_defined_vars());
+    }
+}

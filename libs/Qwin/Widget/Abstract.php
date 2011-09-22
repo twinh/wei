@@ -98,7 +98,7 @@ abstract class Qwin_Widget_Abstract extends ArrayObject implements Qwin_Widget_I
         if (isset($this->_defaults[$name])) {
             return $this->_defaults[$name];
         }
-        throw new Qwin_Widget_Exception('Undefine default option "' . $name . '".');
+        throw new Qwin_Widget_Exception('Undefined default option "' . $name . '".');
     }
 
     /**
@@ -115,7 +115,7 @@ abstract class Qwin_Widget_Abstract extends ArrayObject implements Qwin_Widget_I
             $this->_defaults[$name] = $value;
             return $this;
         }
-        throw new Qwin_Widget_Exception('Undefine default option "' . $name . '".');
+        throw new Qwin_Widget_Exception('Undefined default option "' . $name . '".');
     }
 
     /**
@@ -132,7 +132,7 @@ abstract class Qwin_Widget_Abstract extends ArrayObject implements Qwin_Widget_I
         if (isset($this->_options[$name])) {
             return $this->_options[$name];
         }
-        throw new Qwin_Widget_Exception('Undefine option "' . $name . '".');
+        throw new Qwin_Widget_Exception('Undefined option "' . $name . '".');
     }
 
     /**
@@ -148,7 +148,7 @@ abstract class Qwin_Widget_Abstract extends ArrayObject implements Qwin_Widget_I
             $this->_options[$name] = $value;
             return $this;
         }
-        throw new Qwin_Widget_Exception('Undefine option "' . $name . '".');
+        throw new Qwin_Widget_Exception('Undefined option "' . $name . '".');
     }
 
     /**
