@@ -40,4 +40,13 @@ class Qwin_Reflection
         }
         return $value;
     }
+    
+    /**
+     * @return mixed
+     * @todo store the reflection objects
+     */
+    public static function call()
+    {
+        return false;
+    }
 }

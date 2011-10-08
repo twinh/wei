@@ -118,39 +118,14 @@ class Qwin_Util_Array
     }
 
     /**
-     * Json 编码
-     * @param mixed $data
-     * @return mixed
-     */
-    public static function jsonEncode($data)
-    {
-        return json_encode($data);
-        require_once 'fastjson.php';
-        return FastJSON::encode($data);
-    }
-
-    /**
-     * Json 解码
-     * 
-     * @param string $data
-     * @return mixed
-     */
-    public static function jsonDecode($data)
-    {
-        require_once 'services_json.php';
-        $value = new Services_JSON();
-        return $value->decode($data);
-    }
-
-    /**
      * 按大写字母分割字符串
      *
-     * @param string $data 字符串
+     * @param string $string 字符串
      * @return array
      */
-    public static function explodeByUpper($data)
+    public static function explodeByUpper($string)
     {
-        return preg_split('/(?<!^)(?=[A-Z])/', (string)$data);
+        return preg_split('/(?<!^)(?=[A-Z])/', (string)$string);
     }
 
     /**

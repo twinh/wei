@@ -86,7 +86,7 @@ class Url_Widget extends Qwin_Widget_Abstract
      * @param string $value1 值1
      * @param string $value2 值2
      * @param array $params 其他参数
-     * @return 链接
+     * @return string
      */
     public function url($value1, $value2 = 'index', array $params = array())
     {

@@ -234,7 +234,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
         $options['pager'] = substr($options['pager'], 1);
 
         unset($options['meta']);
-        $jqGridJson = Qwin_Util_Array::jsonEncode($options);
+        $jqGridJson = json_encode($options);
 
         require $this->_path . 'view/default.php';
     }

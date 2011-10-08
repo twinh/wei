@@ -52,6 +52,7 @@ return array(
     'Methods' => '方法',
     'methods' => '方法',
     'Return' => '返回值',
+    'Returns' => '返回',
     'Code' => '代码',
     'Message' => '信息',
     'Description' => '描述',
@@ -74,4 +75,8 @@ return array(
     'Short Description' => '简要介绍',
     'Slide up' => '收起',
     'See' => '查阅',
+    'Ctrs' => '贡献者',
+    'Official document' => '官方文档',
+    'Methods inherited from %s' => '继承于%s的方法',
+    'Properties inherited from %s' => '继承于%s的属性',
 );

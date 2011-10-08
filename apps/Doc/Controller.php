@@ -1,6 +1,6 @@
 <?php
 /**
- * Controller
+ * jQuery UI style's document
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -30,7 +30,7 @@ class Doc_Controller extends Controller_Widget
     );
     
     public function actionIndex()
-    {        
+    {
         $request = $this->_request;
         $type = $request->get('type');
         $name = $request->get('name');
@@ -131,14 +131,4 @@ class Doc_Controller extends Controller_Widget
         $data = $data + $appendData;
         return $data;
     }
-}
-class NClosureFix
-{
-	static $vars = array();
-
-	static function uses($args)
-	{
-		self::$vars[] = $args;
-		return count(self::$vars)-1;
-	}
 }

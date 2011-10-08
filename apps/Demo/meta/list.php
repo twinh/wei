@@ -31,6 +31,9 @@ return array(
         'title' => array(
             
         ),
+        'tags' => array(
+            '_link' => true,
+        ),
         'code' => array(
             
         ),
@@ -54,6 +57,6 @@ return array(
         ),
     ),
     'layout' => array(
-        'id', 'title', 'date_modified', 'operation',
+        'id', 'title', 'tags', 'date_modified', 'operation',
     ),
 );

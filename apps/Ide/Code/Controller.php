@@ -40,7 +40,7 @@ class Ide_Code_Controller extends Controller_Widget
         $type = Qwin_Util_Array::forceInArray($request->get('type'), array('object', 'file'));
         
         if (empty($value)) {
-            return $this->_view->alert('Param value should not be empty.');
+            $value = __CLASS__;
         }
         
         if ('object' === $type) {
@@ -59,7 +59,7 @@ class Ide_Code_Controller extends Controller_Widget
                 $data = $object->__toString();
             }
         } else {
-            // Never show config file to others
+            // It's not allowed to show config file.
             if (strripos($value, 'config.php')) {
                 return $this->_view->alert(sprintf('File "%s" not found.', htmlspecialchars($value)));
             }

@@ -20,7 +20,7 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-9-17 16:23:19
+ * @since       2011-09-17 16:23:19
  */
 
 /**
@@ -54,9 +54,9 @@ class Qwin_Reflection_Function extends Zend_Reflection_Function
                 if ('NULL' == $defaultValue) {
                     $defaultValue = 'null';
                 }
-                $parameterText[] = $array['type'] . ' $' . $array['name'] . ' = ' . $defaultValue;
+                $parameterText[] = $array['type'] . ' ' . $array['varName'] . ' = ' . $defaultValue;
             } else {
-                $parameterText[] = $array['type'] . ' $' . $array['name'];
+                $parameterText[] = $array['type'] . ' ' . $array['varName'];
             }
         }
         
@@ -66,7 +66,12 @@ class Qwin_Reflection_Function extends Zend_Reflection_Function
         
         return array(
             'name' => $this->getName(),
+            'urlName' => strtolower(strtr($this->getName(), '_', '-')),
+            'isInternal' => $this->isInternal(),
+            'inheritence' => array(),
+            'parents' => array(),
             'return' => '',
+            'tags' => array(),
             'parameters' => $parameters,
             'parameterText' => $parameterText,
             'return' => $type,

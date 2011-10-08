@@ -63,7 +63,7 @@ class Log4php_Widget extends Qwin_Widget_Abstract
      */
     public function shutdown()
     {
-        $this->_logger->info('execute in ' . Qwin_Application::getInstance()->getEndTime() . '(s)');
+        $this->_logger->info('execute in ' . $this->_app->getEndTime() . '(s)');
         $this->_logger->debug('** END ****' . PHP_EOL);
     }
 

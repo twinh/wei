@@ -37,42 +37,72 @@ class Qwin_Reflection_Method extends Zend_Reflection_Method
             $docblock = $this->getDocblock();
             $longDescription = $docblock->getLongDescription();
             $shortDescription = $docblock->getShortDescription();
-            $return = $docblock->getTag('return');
-            $type = $return ? $return->getType() : '-';
+            
+            $returnTag = $docblock->getTag('return');
+            $return = array(
+                'type' => $returnTag ? $returnTag->getType() : '-',
+                'description' => $returnTag ? $returnTag->getDescription() : null,
+            );
+
+            $paramsDescription = array();
+            $tags = $docblock->getTags();
+            /* @var $tag Zend_Reflection_Docblock_Tag_Param */
+            foreach ($tags as $tag) {
+                if ('param' == $tag->getName()) {
+                    $paramsDescription[$tag->getVariableName()] = $tag->getDescription();
+                }
+            }
         } catch (Zend_Reflection_Exception $e) {
             $type = '-';
             $longDescription = null;
             $shortDescription = null;
+            
+            $return = array(
+                'type' => '-',
+                'description' => null,
+            );
         }
-        
+
         $parameters = $parameterText = array();
+        $hasDescription = false;
         /* @var $parameter Qwin_Reflection_Parameter */
         foreach ($this->getParameters() as $parameter) {
-            $array = $parameters[$parameter->getName()] = $parameter->toArray();
+            $parameters[$parameter->getName()] = $parameter->toArray();
+            $array = &$parameters[$parameter->getName()];
             
             if ($parameter->isDefaultValueAvailable()) {
                 $defaultValue = var_export($parameter->getDefaultValue(), true);
                 if ('NULL' == $defaultValue) {
                     $defaultValue = 'null';
                 }
-                $parameterText[] = $array['type'] . ' $' . $array['name'] . ' = ' . $defaultValue;
+                $parameterText[] = $array['type'] . ' ' . $array['varName'] . ' = ' . $defaultValue;
             } else {
-                $parameterText[] = $array['type'] . ' $' . $array['name'];
+                $parameterText[] = $array['type'] . ' ' . $array['varName'];
+            }
+
+            if (isset($paramsDescription[$array['varName']])) {
+                $array['description'] = $paramsDescription[$array['varName']];
+                $hasDescription = true;
+            } else {
+                $array['description'] = null;
             }
         }
         
         $parameterText = implode(', ', $parameterText);
         empty($parameterText) && $parameterText = 'void';
         $parameterText = '( ' . $parameterText . ' )';
-        
+
         return array(
             'name' => $this->getName(),
-            'return' => $type,
+            'class' => $this->class,
+            'return' => $return,
             'modifiers' => implode(' ', Reflection::getModifierNames($this->getModifiers())),
             'longDescription' => $longDescription,
             'shortDescription' => $shortDescription,
             'parameters' => $parameters,
             'parameterText' => $parameterText,
+            'hasDescription' => $hasDescription,
+            'startLine' => (int)$this->getStartLine(true),
         );
     }
     

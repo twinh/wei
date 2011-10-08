@@ -26,14 +26,13 @@
 }
 #qw-docs-tabs .ui-tabs-panel {
     overflow: hidden;
-    padding: 0;
+    padding: 0 3px;
 }
 #qw-docs-tabs .ui-tabs-nav li a {
     padding: 0.5em 1.5em;
 }
-
 #qw-docs-tabs #qw-docs-overview {
-    padding: 1em 1.4em;
+    padding: 12px 8px;
 }
 
 .qw-docs-option-list,
@@ -55,10 +54,10 @@
     height: auto;
     width: 100%;
     float: left;
-    padding: 0 12px;
     border-top: 0;
     border-left: 0;
     border-right: 0;
+    padding: 0 2px;
 }
 .qw-docs-title {
     margin: 10px 0 6px 5px;
@@ -66,6 +65,10 @@
 .qw-docs-cell {
     float: left;
     padding: 10px 0;
+}
+.qw-docs-empty-cell {
+    float: left;
+    padding: 10px 18px;
 }
 .qw-docs-option .qw-docs-option-name,
 .qw-docs-event .qw-docs-event-name,
@@ -77,10 +80,14 @@
     display: block;
     font-size: 12px;
 }
-/* TODO 删除或保留 */
+.qw-docs-option .qw-docs-option-name a,
+.qw-docs-event .qw-docs-event-name a,
 .qw-docs-result .qw-docs-result-message a,
-.qw-docs-result .qw-docs-result-message a.ui-state-hover {
-    /*font-weight: normal;*/
+.qw-docs-method .qw-docs-method-name a,
+.qw-docs-property .qw-docs-property-name a,
+.qw-docs-parameter .qw-docs-parameter-name a {
+    border: 0;
+    cursor: pointer;
 }
 .qw-docs-result .qw-docs-result-code {
     width: 10%;
@@ -89,23 +96,19 @@
 .qw-docs-method .qw-docs-method-modifiers {
     width: 120px;
 }
-.qw-docs-option .qw-docs-option-name a,
-.qw-docs-event .qw-docs-event-name a,
-.qw-docs-result .qw-docs-result-message a,
-.qw-docs-method .qw-docs-method-name a,
-.qw-docs-property .qw-docs-property-name a,
-.qw-docs-parameter .qw-docs-parameter-name a {
-    border: 0;
-}
+
 .qw-docs-option-type,
 .qw-docs-property-type,
 .qw-docs-property-default,
 .qw-docs-parameter-type {
     width: 20%;;
 }
+.qw-docs-method-return {
+    width: 180px;
+}
 .qw-docs-option-default,
 .qw-docs-event-return,
-.qw-docs-method-return {
+.qw-docs-method-oper {
     width: auto;
     clear: right;
 }
@@ -118,7 +121,7 @@
     clear: both;
     display: none;
     text-indent: 3px;
-    margin: 2px 0 12px;
+    margin: 2px 0 12px 15px;
 }
 
 .qw-docs-event-params,
@@ -137,7 +140,55 @@
 .qw-docs-overview-title {
     width: 20%;
 }
-/*.qw-docs-title {
-    padding: 0 0 0 20px;
-    background: url("./../resource/view/default/icons/present_16.png") 0 2px no-repeat;
-}*/
+#qw-docs-summary a {
+    border: 0;
+    font-weight: normal;
+    text-decoration: underline;
+}
+#qw-doc-inheritence-tree dd {
+    margin: 0;
+    padding: 2px;
+}
+#qw-doc-inheritence-tree a {
+    padding:  0 2px;
+}
+#qw-docs-overview h3 {
+    margin-bottom: 10px;
+}
+#qw-docs-overview h3 a {
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-bottom-width: 3px;
+    padding-bottom: 2px;
+    background: none;
+}
+#qw-docs-overview p {
+    line-height: 18px;
+}
+#qw-docs-summary th {
+    width: 180px;
+}
+#qw-docs-tabs .qw-docs-detail-toggle {
+    float: left;
+    width: 18px;
+    cursor: pointer;
+}
+#qw-docs-tabs .qw-docs-method-descrip dl {
+    margin-top: 6px;
+}
+#qw-docs-tabs .qw-docs-method-descrip dt {
+    font-weight: bold;
+}
+#qw-docs-tabs .qw-docs-method-descrip dd {
+    margin-left: 20px;
+    padding: 2px 0;
+}
+#qw-docs-tabs .qw-docs-method-descrip dl a {
+    border: 0;
+    font-weight: normal;
+}
+#qw-docs-tabs div.qw-docs-empty-cell a {
+    border: 0;
+    font-weight: bold;
+}

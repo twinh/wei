@@ -45,7 +45,7 @@ $minify->add(array(
                     if (undefined == editors[id]) {
                         editors[id] = CodeMirror.fromTextArea($(ui.panel).find('textarea')[0], {
                             lineNumbers: true,
-                            readOnly: true,
+                            readOnly: false,
                             mode: "application/x-httpd-php"
                         });
                     }

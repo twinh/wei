@@ -39,7 +39,7 @@ class Qwin_Reflection_Property extends Zend_Reflection_Property
         } else {
             $type = 'void';
         }
-        
+
         return array(
             'name' => $this->getName(),
             'type' => $type,
