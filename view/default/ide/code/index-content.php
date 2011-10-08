@@ -53,7 +53,19 @@ $minify->add(array(
             indentUnit: 8,
             indentWithTabs: true,
             enterMode: "keep",
-            tabMode: "shift"
+            tabMode: "shift",
+            onHighlightComplete: function(){
+                var hash = window.location.hash
+                if (hash) {
+                    hash = hash.substring(1, hash.length) - 1;
+                    if (!hash || hash < 0) {
+                        return false;
+                    }
+                    var line = $('#qw-code .CodeMirror-gutter-text pre').eq(hash);
+                    $('html').animate({scrollTop:line.offset().top}, 0);
+                }
+                return true;
+            }
         });
     });
 </script>

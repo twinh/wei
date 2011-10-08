@@ -68,14 +68,14 @@ class Qwin
      * @var array
      */
     protected static $_data = array();
-
+    
     /**
      * 自动加载的根路径数组
      *
      * @var array
      */
     protected static $_autoloadPaths = array();
-
+    
     /**
      * 获取一项资源
      *

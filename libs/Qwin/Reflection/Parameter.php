@@ -46,7 +46,7 @@ class Qwin_Reflection_Parameter extends Zend_Reflection_Parameter
             $pos = strpos($string, '>');
             $pos2 = strpos($string, ' ', $pos + 2);
             $type = substr($string, $pos + 2, $pos2 - $pos - 2);
-            if ('$' == $type[0]) {
+            if ('$' == $type[0] || '&' == $type[0]) {
                 $type = null;
             }
         }
@@ -54,7 +54,7 @@ class Qwin_Reflection_Parameter extends Zend_Reflection_Parameter
         $name = $this->getName();
         return array(
             'name' => $name,
-            'varName' => '$' . $name,
+            'varName' => ($this->isPassedByReference() ? '&' : '') . '$' . $name,
             'type' => $type,
             'value' => null,
             'valueText' => null,

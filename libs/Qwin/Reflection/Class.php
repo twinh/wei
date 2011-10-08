@@ -21,7 +21,6 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2011-09-15 20:56:18
- * @todo        get interface only implements by itself
  */
 
 /**
@@ -88,9 +87,8 @@ class Qwin_Reflection_Class extends Zend_Reflection_Class
         $methods = array();
         /* @var $method Qwin_Reflection_Method */
         foreach ($this->getMethods() as $method) {
-            $methods[$method->getName()] = $method->toArray();
+            $methods[$method->class][$method->getName()] = $method->toArray();
         }
-        ksort($methods);
         
         // TODO $propertiesValue
         $properties = array();
@@ -98,39 +96,44 @@ class Qwin_Reflection_Class extends Zend_Reflection_Class
         /* @var $property Qwin_Reflection_Property */
         foreach ($this->getProperties() as $property) {
             $value = $propertiesValue[$property->getName()];
-            $properties[$property->getName()] = $property->toArray() + array(
+            $properties[$property->class][$property->getName()] = $property->toArray() + array(
                 'value' => $value,
-                'valueText' => Qwin_Reflection::exportValue($value),
-            );
-        }
-        
-        // TODO as class Qwin_Reflection_Constant
-        $constants = array();
-        foreach ($this->getConstants() as $constant => $value) {
-            $constants[$constant] = array(
-                'name' => $constant,
-                'varName' => $constant,
-                'type' => gettype($value),
-                'value' => $value,
-                'modifiers' => 'const',
                 'valueText' => Qwin_Reflection::exportValue($value),
             );
         }
 
+        $constants = array();
+        /* @var $constant Qwin_Reflection_Constant */
+        foreach ($this->getConsts() as $constant) {
+            $constants[$constant->getClass()][$constant->getName()] = $constant->toArray();
+        }
+        
+        $inheritence = $this->getInheritence();
+        foreach ($inheritence as $class => $value) {
+            if (!isset($properties[$class])) {
+                $properties[$class] = array();
+            }
+            if (!isset($constants[$class])) {
+                $constants[$class] = array();
+            }
+        }
+        
         $class = $this->getName();
-        $extends = class_parents($class);
+        $parents = class_parents($class);
         $interfaces = $this->getInterfaceNames();
 
         return array(
             'name' => $class,
+            'urlName' => strtolower(strtr($class, '_', '')),
             'version' => $version,
             'modifiers' => $this->getModifiers(),
             'longDescription' => $longDescription,
             'shortDescription' => $shortDescription,
             
-            'parents' => $extends,
+            'parents' => $parents,
             'interfaces' => $interfaces,
-            'inheritence' => $this->getInheritence(),
+            'inheritence' => $inheritence,
+            'isInternal' => $this->isInternal(),
             
             'methods' => $methods,
             'constants' => $constants,
@@ -307,6 +310,65 @@ class Qwin_Reflection_Class extends Zend_Reflection_Class
     }
     
     /**
+     * Get reflection objects of constants by filter
+     * 
+     * @param string $filter
+     * @param string $reflectionClass Reflection class to use for constants
+     * @return array Array of Qwin_Reflection_Constant objects
+     * @todo $filter
+     */
+    public function getConsts($filter = -1, $reflectionClass = 'Qwin_Reflection_Constant')
+    {
+        $consts = array();
+        $class = $this->getName();
+        $parents = class_parents($class);
+        $constants = $this->getConstants();
+        foreach ($parents as $parentClass) {
+            $parentInstance = new Qwin_Reflection_Class($parentClass);
+            $parentConstants = $parentInstance->getConstants();
+            foreach (array_diff($constants, $parentConstants) as $name => $value) {
+                $consts[$name] = new $reflectionClass($name, $class);
+                if (!$consts[$name] instanceof Qwin_Reflection_Constant) {
+                    require_once 'Qwin/Reflection/Exception.php';
+                    throw new Zend_Reflection_Exception('Invalid reflection class provided; must extend Qwin_Reflection_Constant');
+                }
+            }
+            $class = $parentClass;
+            $constants = $parentConstants;
+        }
+        return $consts;
+    }
+    
+    /**
+     * Get reflection object of constant by name
+     * 
+     * @param string $name constant name
+     * @param string $reflectionClass Reflection class to use for constant
+     * @return Qwin_Reflection_Constant
+     */
+    public function getConst($name, $reflectionClass = 'Qwin_Reflection_Constant')
+    {
+        $class = $this->getName();
+        $parents = class_parents($class);
+        $constants = $this->getConstants();
+        foreach ($parents as $parentClass) {
+            $parentInstance = new Qwin_Reflection_Class($parentClass);
+            $parentConstants = $parentInstance->getConstants();
+            $diff  = array_diff($constants, $parentConstants);
+            if (isset($diff[$name])) {
+                $const = new $reflectionClass($name, $class);
+                if (!$const instanceof Qwin_Reflection_Constant) {
+                    require_once 'Qwin/Reflection/Exception.php';
+                    throw new Qwin_Reflection_Exception('Invalid reflection class provided; must extend Qwin_Reflection_Constant');
+                }
+                return $const;
+            }
+        }
+        require_once 'Qwin/Reflection/Exception.php';
+        throw new Qwin_Reflection_Exception('Constant "' . $name . '" does not exist');
+    }
+    
+    /**
      * Return the reflection file of the declaring file.
      *
      * @return Qwin_Reflection_File
@@ -352,7 +414,7 @@ class Qwin_Reflection_Class extends Zend_Reflection_Class
     }
 
     /**
-     * Get reflection objects of all methods
+     * Get reflection objects of methods by filter
      *
      * @param  string $filter
      * @param  string $reflectionClass Reflection class to use for methods
