@@ -23,7 +23,7 @@
  * @since       2010-08-20 10:51:21
  */
 
-class AjaxUpload_Widget extends Qwin_Widget_Abstract
+class AjaxUpload_Widget extends Qwin_Widget
 {
     public function render($options = null)
     {

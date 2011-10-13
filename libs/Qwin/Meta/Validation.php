@@ -25,7 +25,7 @@
 
 class Qwin_Meta_Validation extends Qwin_Meta_Common
 {
-    protected $_defaults = array(
+    public $options = array(
         'fields' => array(),
     );
     

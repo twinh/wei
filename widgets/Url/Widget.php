@@ -25,7 +25,7 @@
  * @since       2009-11-24 20:45:11
  */
 
-class Url_Widget extends Qwin_Widget_Abstract
+class Url_Widget extends Qwin_Widget
 {
     /**
      * 提供一个只有两个值的数组,供快速构建url服务
@@ -41,7 +41,7 @@ class Url_Widget extends Qwin_Widget_Abstract
      * 默认选项
      * @var array
      */
-    protected $_defaults = array(
+    public $options = array(
         'basicParams' => array(),
         'names' => array(
             'module',

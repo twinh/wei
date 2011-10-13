@@ -105,7 +105,7 @@ class Qwin_Meta_Form extends Qwin_Meta_Common
      * 默认选项
      * @var array
      */
-    protected $_defaults = array(
+    public $options = array(
         'fields' => array(),
         'fieldsets' => array(),
         'layout' => array(),

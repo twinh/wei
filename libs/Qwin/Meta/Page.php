@@ -32,7 +32,7 @@ class Qwin_Meta_Page extends Qwin_Meta_Common
      * 
      * @var array
      */
-    protected $_defaults = array(
+    public $options = array(
 //        'module'        => null,
 //        'action'        => null,
         'title'         => null,

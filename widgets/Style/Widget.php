@@ -23,7 +23,7 @@
  * @since       2011-04-12 09:59:05
  */
 
-class Style_Widget extends Qwin_Widget_Abstract
+class Style_Widget extends Qwin_Widget
 {
     protected $_name = null;
 

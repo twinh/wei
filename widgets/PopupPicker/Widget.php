@@ -23,13 +23,13 @@
  * @since       2010-10-04 18:54:37
  */
 
-class PopupPicker_Widget extends Qwin_Widget_Abstract
+class PopupPicker_Widget extends Qwin_Widget
 {
     /**
      * 默认选项
      * @var array
      */
-    protected $_defaults = array(
+    public $options = array(
         'module'    => null,
         'db'        => null,
         'field'     => 'id',

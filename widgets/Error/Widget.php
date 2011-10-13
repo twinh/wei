@@ -24,9 +24,9 @@
  * @todo        是否与视图微件耦合?是否应该整合为一个
  */
 
-class Error_Widget extends Qwin_Widget_Abstract
+class Error_Widget extends Qwin_Widget
 {   
-    protected $_defaults = array(
+    public $options = array(
         'exception' => true,
         //'error' => false,
     );

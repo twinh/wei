@@ -23,13 +23,13 @@
  * @since       2011-01-10 16:44:37
  */
 
-class Com_Trash_Widget_Delete extends Qwin_Widget_Abstract
+class Com_Trash_Widget_Delete extends Qwin_Widget
 {
     /**
      * 默认选项
      * @var array
      */
-    protected $_defaults = array(
+    public $options = array(
         'module'    => null,
         'id'        => null,
         'type'      => null,

@@ -23,13 +23,13 @@
  * @since       2011-04-12 12:04:35 v0.7.9
  */
 
-class Forward_Widget extends Qwin_Widget_Abstract
+class Forward_Widget extends Qwin_Widget
 {   
     /**
      * 默认选项
      * @var array
      */
-    protected $_defaults = array(
+    public $options = array(
         'lang'      => true,
         'module'    => null,
         'action'    => 'view',

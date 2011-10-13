@@ -25,7 +25,7 @@
  * @since       2010-10-09 21:20:47
  */
 
-class JsonListAction_Widget extends Qwin_Widget_Abstract
+class JsonListAction_Widget extends Qwin_Widget
 {
     /**
      * 默认选项
@@ -47,7 +47,7 @@ class JsonListAction_Widget extends Qwin_Widget_Abstract
      *
      *      -- display      是否显示数据
      */
-    protected $_defaults = array(
+    public $options = array(
         'meta'      => null,
         'list'      => 'list',
         'db'        => 'db',

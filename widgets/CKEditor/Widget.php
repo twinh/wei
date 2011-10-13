@@ -23,7 +23,7 @@
  * @since       2011-01-28 23:51:45
  */
 
-class CKEditor_Widget extends Qwin_Widget_Abstract
+class CKEditor_Widget extends Qwin_Widget
 {
     public function render($options = null)
     {

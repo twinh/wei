@@ -25,7 +25,7 @@
  * @since       2009-11-24 20:45:11
  */
 
-class Controller_Widget extends Qwin_Widget_Abstract
+class Controller_Widget extends Qwin_Widget
 {
     /**
      * 模型对象

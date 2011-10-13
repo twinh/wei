@@ -23,7 +23,7 @@
  * @since       2011-01-09 15:35:03
  */
 
-class Com_Trash_Widget_ListTabs extends Qwin_Widget_Abstract
+class Com_Trash_Widget_ListTabs extends Qwin_Widget
 {
     public function render($options)
     {

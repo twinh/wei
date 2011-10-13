@@ -23,13 +23,13 @@
  * @since       2011-04-20 03:17:06
  */
 
-class Com_Member_Widget_EditPassword extends Qwin_Widget_Abstract
+class Com_Member_Widget_EditPassword extends Qwin_Widget
 {
     /**
      * 默认选项
      * @var array
      */
-    protected $_defaults = array(
+    public $options = array(
         'display'   => true,
         'data'      => array(),
         'url'       => null,

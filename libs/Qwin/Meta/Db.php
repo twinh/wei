@@ -86,7 +86,7 @@ class Qwin_Meta_Db extends Qwin_Meta_Common
      * 默认选项
      * @var array
      */
-    protected $_defaults = array(
+    public $options = array(
         'fields'    => array(),
         //'type'      => 'sql',
         'uid'       => 'db',

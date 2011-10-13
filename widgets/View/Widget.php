@@ -26,7 +26,7 @@
  * @todo        错误与视图
  */
 
-class View_Widget extends Qwin_Widget_Abstract
+class View_Widget extends Qwin_Widget
 {
     /**
      * 视图元素数组
@@ -44,7 +44,7 @@ class View_Widget extends Qwin_Widget_Abstract
      * 默认选项
      * @var array
      */
-    protected $_defaults = array(
+    public $options = array(
         'paths'         => array(),
         'style'         => 'cupertino',
         'theme'         => 'default',

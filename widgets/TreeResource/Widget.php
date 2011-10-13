@@ -26,7 +26,7 @@
  * @since     2010-7-17 9:41:38
  */
 
-class TreeResource_Widget extends Qwin_Widget_Abstract
+class TreeResource_Widget extends Qwin_Widget
 {
     protected $_defaultKeys = array(
         'id', 'parent_id', 'name',

@@ -24,14 +24,14 @@
  * @todo        表单,前端验证(js),后端验证(php)如何解耦
  */
 
-class Form_Widget extends Qwin_Widget_Abstract
+class Form_Widget extends Qwin_Widget
 {
     /**
      * 表单配置
      *
      * @var array
      */
-    protected $_defaults = array(
+    public $options = array(
         'id'        => 'qw-form-%s',
         'meta'      => null,
         'form'      => 'form',

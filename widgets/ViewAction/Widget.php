@@ -23,7 +23,7 @@
  * @since       2011-05-11 01:09:44
  */
 
-class ViewAction_Widget extends Qwin_Widget_Abstract
+class ViewAction_Widget extends Qwin_Widget
 {
     /**
      * @var array           默认选项
@@ -36,7 +36,7 @@ class ViewAction_Widget extends Qwin_Widget_Abstract
      * 
      *      -- display      是否显示视图
      */
-    protected $_defaults = array(
+    public $options = array(
         'meta'      => null,
         'form'      => 'form',
         'db'        => 'db',

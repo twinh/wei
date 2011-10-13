@@ -168,12 +168,12 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
     /**
      * 加载微件语言
      * 
-     * @param Qwin_Widget_Abstract|string $widget 微件对象或名称
+     * @param Qwin_Widget|string $widget 微件对象或名称
      * @return false|Lang_Widget 语言文件不存在|加载成功
      */
     public function appendByWidget($widget)
     {
-        if ($widget instanceof Qwin_Widget_Abstract) {
+        if ($widget instanceof Qwin_Widget) {
             $path = $widget->getPath();
         } else {
             $path = $this->_widget->getPath() . ucfirst($widget) . '/';

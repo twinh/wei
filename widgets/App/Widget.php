@@ -25,7 +25,7 @@
  * @since       2009-11-24 20:45:11
  */
 
-class App_Widget extends Qwin_Widget_Abstract
+class App_Widget extends Qwin_Widget
 {
     /**
      * @var array           默认选项
@@ -36,7 +36,7 @@ class App_Widget extends Qwin_Widget_Abstract
      *                      E_ALL|E_STRICT      32767
      *                      E_ALL & ~E_NOTICE   30711
      */
-    protected $_defaults = array(
+    public $options = array(
         'paths'         => null,
         'module'        => null,
         'action'        => null,

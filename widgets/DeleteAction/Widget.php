@@ -24,9 +24,9 @@
  * @todo        各类检查
  */
 
-class DeleteAction_Widget extends Qwin_Widget_Abstract
+class DeleteAction_Widget extends Qwin_Widget
 {
-    protected $_defaults = array(
+    public $options = array(
         'meta'      => null,
         'db'        => 'db',
         'id'        => null,

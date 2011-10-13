@@ -25,13 +25,13 @@
  * @since       2010-10-11 11:55:35
  */
 
-class EditAction_Widget extends Qwin_Widget_Abstract
+class EditAction_Widget extends Qwin_Widget
 {
     /**
      * 默认选项
      * @var array
      */
-    protected $_defaults = array(
+    public $options = array(
         'meta'          => null,
         'db'            => 'db',
         'validation'    => 'validation',

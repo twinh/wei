@@ -24,7 +24,7 @@
  * @todo        更多参数
  */
 
-class Datepicker_Widget extends Qwin_Widget_Abstract
+class Datepicker_Widget extends Qwin_Widget
 {
     public function render($options = null)
     {

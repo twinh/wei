@@ -23,13 +23,13 @@
  * @since       2011-01-10 15:40:44
  */
 
-class Com_Trash_Widget_Restore extends Qwin_Widget_Abstract
+class Com_Trash_Widget_Restore extends Qwin_Widget
 {
     /**
      * 默认选项
      * @var array
      */
-    protected $_defaults = array(
+    public $options = array(
         'module'    => null,
         'id'        => null,
         'display'   => true,

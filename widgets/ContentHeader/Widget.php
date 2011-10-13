@@ -23,7 +23,7 @@
  * @since       2011-03-27 01:42:40
  */
 
-class ContentHeader_Widget extends Qwin_Widget_Abstract
+class ContentHeader_Widget extends Qwin_Widget
 {
     public function render($options = null)
     {

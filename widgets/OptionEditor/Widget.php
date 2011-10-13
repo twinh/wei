@@ -23,7 +23,7 @@
  * @since       2011-04-11 02:50:46
  */
 
-class OptionEditor_Widget extends Qwin_Widget_Abstract
+class OptionEditor_Widget extends Qwin_Widget
 {
     public function render($options = null) {
         $lang = $this->_lang;

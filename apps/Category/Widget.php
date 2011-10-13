@@ -26,7 +26,7 @@
  * @since     2010-7-17 9:41:38
  */
 
-class Com_Category_Widget extends Qwin_Widget_Abstract
+class Com_Category_Widget extends Qwin_Widget
 {
     /**
      * 默认键名
