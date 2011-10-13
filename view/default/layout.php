@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
-<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->_options['charset'] ?>" />
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->options['charset'] ?>" />
 <title><?php echo $lang['LBL_HTML_TITLE'] ?></title>
 <?php
 echo $this->getPackerSign();

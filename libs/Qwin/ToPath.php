@@ -1,6 +1,6 @@
 <?php
- /**
- * 异常处理
+/**
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -16,19 +16,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  Exception
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-04-18 11:56:29
  */
 
-class Qwin_Exception extends Exception
+/**
+ * toPath
+ * 
+ * @namespace   Qwin
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2011-10-12 16:58:47
+ */
+class Qwin_ToPath extends Qwin_Widget
 {
-    public function __construct($msg = '', $code = 0)
+    public function call()
     {
-        parent::__construct($msg, (int)$code);
+        return $this;
+        if (empty($this->_data['path'])) {
+            $this->_data['path'] = implode('/', array_map('ucfirst', $this->_source)) . '/';
+        }
+        return $this->_data['path'];
     }
 }
