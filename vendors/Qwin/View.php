@@ -49,7 +49,6 @@ class Qwin_View extends Qwin_Widget
         'style'         => 'cupertino',
         'theme'         => 'default',
         'charset'       => 'utf-8',
-        
     );
     
     /**
