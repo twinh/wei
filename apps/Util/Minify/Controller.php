@@ -23,11 +23,10 @@
  * @since       2010-08-04 10:58:17
  */
 
-class Util_Minify_Controller extends Controller_Widget
+class Util_Minify_Controller extends Qwin_Widget
 {
     public function actionIndex()
     {
-        $config = Qwin::config();
         ini_set('zlib.output_compression', '0');
 
         $options['maxAge'] = 1800;
@@ -35,32 +34,31 @@ class Util_Minify_Controller extends Controller_Widget
 
         // IIS may need help
         if (0 === stripos(PHP_OS, 'win')) {
-            $_SERVER['DOCUMENT_ROOT'] = dirname($config['root']);
+            $_SERVER['DOCUMENT_ROOT'] = dirname($this->config('root'));
         }
 
         // 设置缓存类型
-        $cachePath = $config['root'] . 'cache/minify';
+        $cachePath = $this->config('root') . 'cache/minify';
         Minify::setCache($cachePath);
 
         // 调试
-        if ($config['debug']) {
+        if ($this->config('debug')) {
             $options['debug'] = true;
         }
 
         // 日志记录
-        if ($config['log']) {
+        if ($this->config('log')) {
             Minify_Logger::setLogger(FirePHP::getInstance(true));
         }
         
         // 获取文件
-        $request = Qwin::call('-request');
-        $name = $request->get('g');
-        $file = Qwin::call('-widget')->get('Minify')->getCacheFile($name);
+        $name = $this->get('g');
+        $file = $this->minify->getCacheFile($name);
         if (!is_file($file)) {
-            Qwin::call('-widget')->get('Log4php')->info('minify file "' . $name . '" not found.');
+            $this->log4php->info('minify file "' . $name . '" not found.');
             exit;
         }
-        $options['minApp']['groups'][$name] = require $file;
+        $options['minApp']['groups'][$name->__toString()] = require $file;
 
         // serve!
         $result = Minify::serve('MinApp', $options);

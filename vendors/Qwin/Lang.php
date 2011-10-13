@@ -85,7 +85,8 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
         $session = Qwin::widget('session');
 
         // 用户请求$request
-        $name = $this->get('lang');
+        //$name = $this->get('lang');
+        $name = null;
         $this->_name = &$name;
         foreach ($options['appPaths'] as $path) {
             $file = $path . $options['path'] . $name . '.php';

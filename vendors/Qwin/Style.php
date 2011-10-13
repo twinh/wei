@@ -26,6 +26,12 @@
 class Qwin_Style extends Qwin_Widget
 {
     protected $_name = null;
+    
+    public function __construct($source = null)
+    {
+        parent::__construct($source);
+        $this->_path = dirname(__FILE__) . '/Style/';
+    }
 
     /**
      * 获取风格名称,风格为jQuery的主题
@@ -38,13 +44,13 @@ class Qwin_Style extends Qwin_Widget
             return $this->_name;
         }
 
-        $session = Qwin::call('-session');
         // 按优先级排列语言的数组
         $styleList = array(
-            Qwin::call('-request')->get('style'),
-            $session['style'],
-            $this->_view->getOption('style'),
+            $this->get('style')->__toString(),
+            //$this->session['style']->_toString(),
+            $this->view->options['style'],
         );
+
         foreach ($styleList as $val) {
             if (null != $val) {
                 $style = $val;
@@ -52,10 +58,10 @@ class Qwin_Style extends Qwin_Widget
             }
         }
 
-        if (!is_dir($this->_path . 'source/' . $style)) {
-            $style = $this->_view->getOption('style');
+        if (!is_dir($this->_path . $style)) {
+            $style = $this->view->options['style'];
         }
-        $session['style'] = $style;
+        $this->session['style'] = $style;
         return $this->_name = $style;
     }
 
@@ -66,7 +72,7 @@ class Qwin_Style extends Qwin_Widget
      */
     public function getCssFile()
     {
-        return $this->_path . 'source/' . $this->getName() . '/jquery.ui.theme.css';
+        return $this->_path . $this->getName() . '/jquery.ui.theme.css';
     }
 
     /**

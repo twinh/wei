@@ -26,9 +26,15 @@
 
 class Qwin_JQuery extends Qwin_Widget
 {
-    public function render($options = null)
+    public function __construct($source = null)
     {
-        
+        parent::__construct($source);
+        $this->_path = dirname(__FILE__) . '/JQuery/';
+    }
+    
+    public function call()
+    {
+        return $this;
     }
 
     /**

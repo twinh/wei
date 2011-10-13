@@ -95,7 +95,7 @@ class Qwin_App extends Qwin_Widget
         if (method_exists($controller, $actionName)) {
             call_user_func(array($controller, $actionName));
         } else {
-            throw new Qwin_Widget_Exception('Action "' . $action . '" not found in controller "' . get_class($controller) .  '"');
+            throw new Qwin_Exception('Action "' . $action . '" not found in controller "' . get_class($controller) .  '"');
         }
         
         return $this->view();
@@ -113,7 +113,7 @@ class Qwin_App extends Qwin_Widget
             && !in_array(strtolower($action), $controller->getForbiddenActions())) {
             call_user_func_array(array($controller, $actionName), $params);
         } else {
-            throw new Qwin_Widget_Exception('Action "' . $action . '" not found in controller "' . get_class($controller) .  '"');
+            throw new Qwin_Exception('Action "' . $action . '" not found in controller "' . get_class($controller) .  '"');
         }
 
         // 展示视图
