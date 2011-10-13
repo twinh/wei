@@ -31,7 +31,7 @@
 </td>
 <td id="qw-right" class="ui-helper-hidden">
     <div id="qw-right-content">
-        <?php Qwin::hook('viewRight') ?>
+        <?php //Qwin::hook('viewRight') ?>
 
     </div>
 </td>-->

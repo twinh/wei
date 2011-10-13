@@ -26,8 +26,14 @@
  * @todo        错误与视图
  */
 
-class Qwin_View extends Qwin_Widget
+class Qwin_View extends Qwin_Widget implements ArrayAccess
 {
+    /**
+     * 语言转换数据
+     * @var array
+     */
+    protected $_data = array();
+    
     /**
      * 视图元素数组
      * @var array
@@ -141,7 +147,7 @@ class Qwin_View extends Qwin_Widget
 
         // 附加变量
         !empty($data) && $this->assign($data);
-        //extract($this->getArrayCopy(), EXTR_OVERWRITE);
+        extract($this->_data, EXTR_OVERWRITE);
 
         // 根据Url的请求加载不同的视图
         $view = $this->get('view-only');
@@ -153,11 +159,11 @@ class Qwin_View extends Qwin_Widget
         
         // TODO 是否应该通过钩子加载
         // 加载当前操作的样式和脚本
-        $minify = $this->_minify;
+        $minify = $this->minify;
         $files = array();
-        foreach ($this->_options['paths'] as $path) {
-            $files[] = $path . $this->_options['theme'] . '/' . $this['module'] . '/' . $this['action'] . '.js';
-            $files[] = $path . $this->_options['theme'] . '/' . $this['module'] . '/' . $this['action'] . '.css';
+        foreach ($this->options['paths'] as $path) {
+            $files[] = $path . $this->options['theme'] . '/' . $this['module'] . '/' . $this['action'] . '.js';
+            $files[] = $path . $this->options['theme'] . '/' . $this['module'] . '/' . $this['action'] . '.css';
         }
         $minify->add($files);
 
@@ -343,11 +349,10 @@ class Qwin_View extends Qwin_Widget
      */
     public function assign($name, $value = null)
     {
-        return $this;
         if (is_array($name)) {
-            $this->exchangeArray(array_merge($this->getArrayCopy(), $name));
+            $this->_data = $name + $this->_data;
         } else {
-            $this->offsetSet($name, $value);
+            $this->_data[$name] = $value;
         }
         return $this;
     }
@@ -481,5 +486,48 @@ class Qwin_View extends Qwin_Widget
     public function isDisplayed()
     {
         return $this->_displayed;
+    }
+    
+    /**
+     * 检查索引是否存在
+     *
+     * @param string $offset 索引
+     * @return bool
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->_data[$offset]);
+    }
+
+    /**
+     * 获取索引的数据
+     *
+     * @param string $offset 索引
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->_data[$offset]) ? $this->_data[$offset] : $offset;
+    }
+
+    /**
+     * 设置索引的值
+     *
+     * @param string $offset 索引
+     * @param mixed $value 值
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->_data[$offset] = $value;
+    }
+
+    /**
+     * 销毁一个索引
+     *
+     * @param string $offset 索引的名称
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->_data[$offset]);
     }
 }

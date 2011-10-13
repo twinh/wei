@@ -35,7 +35,7 @@ $minify->add(array(
 <body>
 <div id="qw-body" class="ui-widget-content">
 <?php
-if ($request['view'] && $this->elementExists($request['view'])) :
+if ($this->get('view') && $this->elementExists($this->get('view'))) :
     require $this->getElement($request['view']);
 else :
 ?>
@@ -44,7 +44,7 @@ else :
     <tr id="qw-main" class="ui-widget-content">
         <?php require $this->getElement('left') ?>
         <td id="qw-center">
-            <?php Qwin::hook('viewContentHeader') ?>
+            <?php //Qwin::hook('viewContentHeader') ?>
             <div id="qw-content">
                 <?php require $this->getElement('content') ?>
             </div>
@@ -55,7 +55,7 @@ else :
 <div id="qw-footer" class="ui-state-default">
     <div id="qw-footer-arrow" class="ui-icon ui-icon-arrowthickstop-1-n"></div>
     <div id="qw-footer-time"></div>
-    <div id="qw-copyright" class="ui-widget">Executed in <?php echo $widget->call('app')->getEndTime() ?>(s). <?php echo qw_t('LBL_FOOTER_COPYRIGHT') ?></div>
+    <div id="qw-copyright" class="ui-widget">Executed in <?php echo $this->app->getEndTime() ?>(s). <?php echo $lang['LBL_FOOTER_COPYRIGHT'] ?></div>
 </div>
 </div>
 <?php

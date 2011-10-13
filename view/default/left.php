@@ -27,7 +27,7 @@
 
 <td id="qw-left" class="ui-helper-hidden">
     <div id="qw-left-content">
-        <?php Qwin::hook('viewLeft') ?>
+        <?php //Qwin::hook('viewLeft') ?>
 
     </div>
 </td>

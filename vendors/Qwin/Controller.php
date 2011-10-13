@@ -114,8 +114,14 @@ class Qwin_Controller extends Qwin_Widget
      */
     public function getByModule($module, $instance = true, $param = null)
     {
+        // 初始化模块类
+        if (!$module instanceof Qwin_Module) {
+            $module = Qwin_Module::instance($module);
+        }
+        
+        $found = false;
         foreach ($this->app->option('paths') as $path) {
-            $file = $path . ucfirst($module) . '/Controller.php';
+            $file = $path . $module->getPath() . '/Controller.php';
             if (is_file($file)) {
                 $found = true;
                 break;
@@ -126,7 +132,7 @@ class Qwin_Controller extends Qwin_Widget
         }
         
         require_once $file;
-        $class = ucfirst($module) . '_Controller';
+        $class = $module->getClass() . '_Controller';
         if (!class_exists($class)) {
             throw new Qwin_Exception('Controller class "' . $class . '" not found.');
         }

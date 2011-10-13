@@ -25,7 +25,7 @@
  * @since       2009-11-24 20:45:11
  */
 
-class Url_Widget extends Qwin_Widget
+class Qwin_Url extends Qwin_Widget
 {
     /**
      * 提供一个只有两个值的数组,供快速构建url服务
@@ -60,7 +60,7 @@ class Url_Widget extends Qwin_Widget
         if (null == $data) {
             $data = $_GET;
         } else {
-            $data += $this->_options['basicParams'];
+            $data += $this->options['basicParams'];
         }
 
         // 对传入的多个参数进行合并
@@ -91,8 +91,8 @@ class Url_Widget extends Qwin_Widget
     public function url($value1, $value2 = 'index', array $params = array())
     {
         return $this->build(array(
-            $this->_options['names'][0] => $value1,
-            $this->_options['names'][1] => $value2,
+            $this->options['names'][0] => $value1,
+            $this->options['names'][1] => $value2,
         ) + $params);
     }
 }
