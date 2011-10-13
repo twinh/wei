@@ -25,7 +25,7 @@
  * @since       2010-08-16 18:41:13
  */
 
-class Lang_Widget extends Qwin_Widget_Abstract implements ArrayAccess
+class Qwin_Lang extends Qwin_Widget implements ArrayAccess
 {
     /**
      * 语言转换数据
@@ -56,7 +56,7 @@ class Lang_Widget extends Qwin_Widget_Abstract implements ArrayAccess
      *
      *  -- name             语言名称
      */
-    protected $_defaults = array(
+    public $options = array(
         'name'       => 'zh-CN',
         'path'       => 'lang/',
     );
@@ -67,28 +67,25 @@ class Lang_Widget extends Qwin_Widget_Abstract implements ArrayAccess
      * @param array $options 选项
      * @return Lang_Widget
      */
-    public function  __construct(array $options = array())
+    public function  __construct(array $options = null)
     {
         parent::__construct($options);
-        $options = &$this->_options;
+        $options = &$this->options;
         
         /**
          * 注意:语言微件有自己的__get,__set方法,通过语言微件加载其他微件,应通过
          *     $this->_wiget->get('name'),而不能直接使用$tihs->_name取得.
          */
         // 设置应用目录和微件目录
-        $options['appPaths'] = $this->_widget->get('app')->getOption('paths');
-        $options['widgetPath'] = $this->_widget->getPath();
+        $options['appPaths'] = Qwin::widget('app')->option('paths');
 
         // 通过应用根目录检查语言是否存在
-        /* @var $request Qwin_Request */
-        $request = Qwin::call('-request');
 
         /* @var $session Qwin_Session */
-        $session = Qwin::call('-session');
+        $session = Qwin::widget('session');
 
-        // 用户请求
-        $name = $request['lang'];
+        // 用户请求$request
+        $name = $this->get('lang');
         $this->_name = &$name;
         foreach ($options['appPaths'] as $path) {
             $file = $path . $options['path'] . $name . '.php';
@@ -160,8 +157,8 @@ class Lang_Widget extends Qwin_Widget_Abstract implements ArrayAccess
         if (!$module instanceof Qwin_Module) {
             $module = Qwin_Module::instance($module);
         }
-        foreach ($this->_options['appPaths'] as $path) {
-            $file = $path . $module->getPath() . $this->_options['path'] . $this->_name . '.php';
+        foreach ($this->options['appPaths'] as $path) {
+            $file = $path . $module->getPath() . $this->options['path'] . $this->_name . '.php';
             if (is_file($file)) {
                 return $this->_appendFile($file);
             }
@@ -181,7 +178,7 @@ class Lang_Widget extends Qwin_Widget_Abstract implements ArrayAccess
         } else {
             $path = $this->_widget->getPath() . ucfirst($widget) . '/';
         }
-        $file = $path . $this->_options['path'] . $this->_name . '.php';
+        $file = $path . $this->options['path'] . $this->_name . '.php';
         return $this->appendByFile($file);
     }
 

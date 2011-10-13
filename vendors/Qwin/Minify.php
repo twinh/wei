@@ -23,7 +23,7 @@
  * @since       2011-01-31 14:24:51
  */
 
-class Minify_Widget extends Qwin_Widget_Abstract
+class Qwin_Minify extends Qwin_Widget
 {
     /**
      * 
@@ -82,7 +82,7 @@ class Minify_Widget extends Qwin_Widget_Abstract
     }
 
 
-    public function render($options = null)
+    public function call($options = null)
     {
         return $this;
     }
