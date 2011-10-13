@@ -25,7 +25,7 @@
  * @since       2010-10-10 14:16:45
  */
 
-class ListAction_Widget extends Qwin_Widget_Abstract
+class ListAction_Widget extends Qwin_Widget
 {
     /**
      * @var array           默认选项
@@ -46,7 +46,7 @@ class ListAction_Widget extends Qwin_Widget_Abstract
      * 
      *      -- display      是否显示视图
      */
-    protected $_defaults = array(
+    public $options = array(
         'meta'      => null,
         'list'      => 'list',
         'db'        => 'db',

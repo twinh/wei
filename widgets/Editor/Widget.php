@@ -23,7 +23,7 @@
  * @since       2011-04-12 05:36:29
  */
 
-class Editor_Widget extends Qwin_Widget_Abstract
+class Editor_Widget extends Qwin_Widget
 {
 
 }

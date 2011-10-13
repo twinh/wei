@@ -25,13 +25,13 @@
  * @since       2010-10-11 17:14:08
  */
 
-class AddFormAction_Widget extends Qwin_Widget_Abstract
+class AddFormAction_Widget extends Qwin_Widget
 {
     /**
      * 默认选项
      * @var array
      */
-    protected $_defaults = array(
+    public $options = array(
         'meta'      => null,
         'form'      => 'form',
         'db'        => 'db',

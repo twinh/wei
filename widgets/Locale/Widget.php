@@ -24,13 +24,13 @@
  * @todo        度量衡,纸张大小,字符等
  */
 
-class Locale_Widget extends Qwin_Widget_Abstract
+class Locale_Widget extends Qwin_Widget
 {
     /**
      * 默认选项
      * @var array
      */
-    protected $_defaults = array(
+    public $options = array(
         'timezone' => 'Asia/Shanghai',
     );
 

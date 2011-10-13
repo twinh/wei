@@ -23,7 +23,7 @@
  * @since       2011-04-05 12:11:27
  */
 
-class Letter_Widget extends Qwin_Widget_Abstract
+class Letter_Widget extends Qwin_Widget
 {
     public function render($options = null)
     {

@@ -39,7 +39,7 @@ class Qwin_Request implements ArrayAccess
      *
      *  -- request          注入$_REQUEST的参数数组
      */
-    protected $_defaults = array(
+    public $options = array(
         'get'       => array(),
         'post'      => array(),
         'cookie'    => array(),

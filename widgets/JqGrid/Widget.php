@@ -23,7 +23,7 @@
  * @since       v0.7.0 2011-01-18 15:24:53
  */
 
-class JqGrid_Widget extends Qwin_Widget_Abstract
+class JqGrid_Widget extends Qwin_Widget
 {
     /**
      * @var array $_options         jqGrid的部分配置选项和微件配置
@@ -76,7 +76,7 @@ class JqGrid_Widget extends Qwin_Widget_Abstract
      *
      *          -- search               搜索的查询名称
      */
-    protected $_defaults = array(
+    public $options = array(
         'id'            => null,
         'meta'          => null,
         'list'          => 'list',

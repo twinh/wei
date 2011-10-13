@@ -23,13 +23,13 @@
  * @since       2011-02-11 14:47:21
  */
 
-class ViewedRecords_Widget extends Qwin_Widget_Abstract
+class ViewedRecords_Widget extends Qwin_Widget
 {
     /**
      * 自动加载配置
      * @var array
      */
-    protected $_defaults = array(
+    public $options = array(
         'lang' => true,
     );
 

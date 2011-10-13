@@ -30,7 +30,7 @@ class Qwin_Hook
      * 默认配置
      * @var array
      */
-    protected $_defaults = array(
+    public $options = array(
         'path' => '../widget/',
         'cachePath' => '../cache/',
         'lifetime' => 86400,

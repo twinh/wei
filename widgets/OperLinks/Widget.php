@@ -23,9 +23,9 @@
  * @since       2011-03-27 02:05:30
  */
 
-class OperLinks_Widget extends Qwin_Widget_Abstract
+class OperLinks_Widget extends Qwin_Widget
 {
-//    protected $_defaults = array(
+//    public $options = array(
 //        'view'  => null,
 //        'data'  => array(),
 //        'pk'    => null,

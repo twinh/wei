@@ -23,14 +23,14 @@
  * @since       2011-03-02 16:02:23
  */
 
-class Validator_Widget extends Qwin_Widget_Abstract
+class Validator_Widget extends Qwin_Widget
 {
     /**
      * @var array $_options          数据验证的选项
      *
      *      -- break                当验证失败时,是否继续验证
      */
-    protected $_defaults = array(
+    public $options = array(
         'validate'      => true,
         'methods'       => 'Validator_Methods',
         'break'         => false,

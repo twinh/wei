@@ -24,7 +24,7 @@
  * @todo        按钮,遮罩
  */
 
-class JQuery_Widget extends Qwin_Widget_Abstract
+class Qwin_JQuery extends Qwin_Widget
 {
     public function render($options = null)
     {

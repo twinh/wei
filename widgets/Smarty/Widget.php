@@ -23,7 +23,7 @@
  * @since       2011-04-15 22:00:11 v0.7.9
  */
 
-class Smarty_Widget extends Qwin_Widget_Abstract
+class Smarty_Widget extends Qwin_Widget
 {
     /**
      * Smarty对象
@@ -36,7 +36,7 @@ class Smarty_Widget extends Qwin_Widget_Abstract
      * @var array
      * @todo 更多选项
      */
-    protected $_defaults = array(
+    public $options = array(
         'compile_dir' => null,
     );
 

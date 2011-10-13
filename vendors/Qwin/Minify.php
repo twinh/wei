@@ -60,7 +60,7 @@ class Qwin_Minify extends Qwin_Widget
      * 设置缓存路径
      *
      * @param string $path 路径
-     * @return Qwin_Widget_Abstract 当前对象
+     * @return Qwin_Widget 当前对象
      */
     public function setCachePath($path)
     {

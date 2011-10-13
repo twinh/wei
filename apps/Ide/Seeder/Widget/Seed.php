@@ -23,7 +23,7 @@
  * @since       2011-04-17 15:22:18
  */
 
-class Ide_Seeder_Widget_Seed extends Qwin_Widget_Abstract
+class Ide_Seeder_Widget_Seed extends Qwin_Widget
 {
     protected $_seedMeta = array(
         'field1' => array(
@@ -42,7 +42,7 @@ class Ide_Seeder_Widget_Seed extends Qwin_Widget_Abstract
         ),
     );
 
-    protected $_defaults = array(
+    public $options = array(
         'module'    => null,
         'number'    => 1000,
         'display'   => true,

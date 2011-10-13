@@ -28,9 +28,9 @@
  * @todo        当筛选值数量过多，换行时，换行位置不正确
  */
 
-class Filter_Widget extends Qwin_Widget_Abstract
+class Filter_Widget extends Qwin_Widget
 {
-    protected $_defaults = array(
+    public $options = array(
         'lang' => true,
     );
 

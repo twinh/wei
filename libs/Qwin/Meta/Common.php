@@ -31,7 +31,7 @@ class Qwin_Meta_Common extends ArrayObject implements Qwin_Meta_Interface
      * 默认选项
      * @var array
      */
-    protected $_defaults = array();
+    public $options = array();
 
     /**
      * 选项

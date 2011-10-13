@@ -23,7 +23,7 @@
  * @since       2011-01-20 14:38:02
  */
 
-class Ide_Option_Widget extends Qwin_Widget_Abstract
+class Ide_Option_Widget extends Qwin_Widget
 {
     /**
      *
@@ -48,7 +48,7 @@ class Ide_Option_Widget extends Qwin_Widget_Abstract
      * 选项
      * @var array
      */
-    protected $_defaults = array(
+    public $options = array(
         'cachePath' => null,
     );
 

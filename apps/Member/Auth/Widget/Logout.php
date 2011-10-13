@@ -25,13 +25,13 @@
  * @since       2010-10-12 14:04:48
  */
 
-class Com_Member_Auth_Widget_Logout extends Qwin_Widget_Abstract
+class Com_Member_Auth_Widget_Logout extends Qwin_Widget
 {
     /**
      * 服务的基本配置
      * @var array
      */
-    protected $_defaults = array(
+    public $options = array(
         'checkLogin' => true,
         'display' => true,
     );

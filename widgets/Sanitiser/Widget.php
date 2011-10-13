@@ -23,7 +23,7 @@
  * @since       2011-6-29 16:55:02
  */
 
-class Sanitiser_Widget extends Qwin_Widget_Abstract
+class Sanitiser_Widget extends Qwin_Widget
 {
     /**
      * @var array $_defaults        数据处理的选项
@@ -46,7 +46,7 @@ class Sanitiser_Widget extends Qwin_Widget_Abstract
      * 
      *      -- relatedMeta          转换关联元数据的值
      */
-    protected $_defaults = array(
+    public $options = array(
         'null'          => false,
         'nullTxt'       => false, // NOT_FILLED_TXT
         'emptyTxt'      => false, // EMPTY_TXT

@@ -23,7 +23,7 @@
  * @since       2010-08-19 14:03:50
  */
 
-class FileTree_Widget extends Qwin_Widget_Abstract
+class FileTree_Widget extends Qwin_Widget
 {
     
 

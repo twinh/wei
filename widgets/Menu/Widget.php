@@ -23,14 +23,14 @@
  * @since       2011-6-20 18:25:53
  */
 
-class Menu_Widget extends Qwin_Widget_Abstract
+class Menu_Widget extends Qwin_Widget
 {
     /**
      * 默认选项
      * 
      * @var array
      */
-    protected $_defaults = array(
+    public $options = array(
         'max' => 8,
         'more' => array(
             'id' => 'more',
