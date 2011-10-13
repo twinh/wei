@@ -37,7 +37,7 @@ class Member_Controller// extends Qwin_ActionController
     
     public function actionIndex()
     {
-        echo 'Hello Qwin';
+        
     }
 
     /**
