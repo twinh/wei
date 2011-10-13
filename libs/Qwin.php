@@ -1,11 +1,6 @@
 <?php
 /**
- * Qwin框架核心类,使用注册模式,统一管理全部资源(类对象,数组配置等等),包含的特性如下
- *  1. 类自动加载(autoload)
- *  2. 资源注册器(get,set)
- *  3. 类智能加载(call)(资源,短标签,原生态,短标签,映射,缓存)
- *  4. 类缓存控制
- *  5. 全局配置规划等
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -21,254 +16,149 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @author    Twin Huang <twinh@yahoo.cn>
- * @copyright Twin Huang
- * @license   http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version   $Id$
- * @since     2010-04-26 10:39:18
- * @todo      其他缓存方式
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @version     $Id$
  */
 
 /**
- * 定义常量QWIN
+ * @see Qwin_Widget
  */
-define('QWIN', true);
+require_once 'Qwin/Widget.php';
 
-class Qwin
+/**
+ * Qwin
+ * 
+ * @namespace   Qwin
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2010-04-26 10:39:18
+ */
+class Qwin extends Qwin_Widget
 {
-    const VERSION = '0.7.9';
-
     /**
-     * 全局配置数组
+     * 版本
+     */
+    const VERSION = '0.8.0';
+    
+    /**
+     * 存储微件对象的数组
      * @var array
      */
-    public static $_config = array();
-
+    protected $_widgets = array();
+    
     /**
-     * 类名映射
-     * @var array
-     * @example self::$_map = array(
-     *              '-url'     => 'Qwin_Url',
-     *              '-request' => 'Qwin_Request',
-     *              ...
-     *          );
-     */
-    protected static $_map = array();
-
-    /**
-     * 短标签数组,通过短标签表示类名的前缀
+     * 存储类对象的数组
      * @var array
      */
-    protected static $_shortTag = array(
-        '-' => 'Qwin_',
+    protected $_objects = array();
+    
+    /**
+     * 存储值为字符串或整数的微件的数组
+     * @var array
+     */
+    protected $_vars = array();
+    
+    /**
+     * 存储值不为字符串或整数的微件键名
+     * @var array
+     */
+    protected $_varKeys = array();
+    
+    /**
+     * 存储值不为字符串或整数的微件值
+     * @var array 
+     */
+    protected $_varValues = array();
+    
+    /**
+     * 存储全局配置的数组
+     * @var array
+     */
+    protected $_config = array();
+    
+    /**
+     * 原始全局变量$q的备份
+     * @var mixed
+     */
+    public $globalQ;
+    
+    /**
+     * 当前实例化对象
+     * @var Qwin
+     */
+    protected static $_instance;
+    
+    /**
+     * 选项
+     * 
+     * @var array
+     *       fnQ            bool        是否定义全局函数"q"
+     * 
+     *       autoload       bool        是否启用类自动加载
+     * 
+     *       autoloadPaths  array       类自动加载的目录
+     */
+    public $options = array(
+        'fnQ'           => true,
+        'autoload'      => true,
+        'autoloadPaths' => array(),
     );
 
     /**
-     * 存储注册资源的数组
+     * 定义微件值的类型与微件类的对应关系
      * @var array
      */
-    protected static $_data = array();
+    /*protected $_types = array(
+        'string'    => 'String',
+        'array'     => 'Array',
+        'NULL'      => 'Null',
+        'object'    => 'Object',
+        'integer'   => 'Int',
+        'boolean'   => 'Bool',
+        'dobule'    => 'Float',
+        'resource'  => 'Resource',
+    );*/
     
     /**
-     * 自动加载的根路径数组
-     *
-     * @var array
+     * 初始化Qwin微件
+     * 
+     * @return Qwin
      */
-    protected static $_autoloadPaths = array();
-    
-    /**
-     * 获取一项资源
-     *
-     * @param string $name
-     * @return mixed 资源
-     */
-    public static function get($name)
+    public function __construct(array $config = array())
     {
-        $name = strtolower($name);
-        return isset(self::$_data[$name]) ? self::$_data[$name] : null;
-    }
-
-    /**
-     * 设置一项资源
-     *
-     * @param string $name
-     * @param mixed $value
-     */
-    public static function set($name, $value = null)
-    {
-        self::$_data[strtolower($name)] = $value;
-    }
-
-    /**
-     * 以类名的形式加载/获取一项资源
-     *
-     * @param string $name 完整或短标签形式的类名
-     * @param undefined|string|array 类初始化时的参数,将转换为数组 参数,以数组的形式出现,null表示没有参数,
-     * @return null|object 类对象或空
-     * @example Qwin::run('-url'); return new Qwin_Url();
-     */
-    public static function call($name, $param = null)
-    {
-        // 键名只接受字符串
-        $name = (string)$name;
-        /* @var $lower string 小写名称 */
-        $lower = strtolower($name);
-
-        // (一级)存在该资源,直接返回
-        if (isset(self::$_data[$lower])) {
-            return self::$_data[$lower];
+        if (isset(self::$_instance)) {
+            require_once 'Qwin/Exception.php';
+            throw new Qwin_Exception('Class "Qwin" can only have one instance.');
         }
 
-        // (二级)类可能是短标签形式,对短标签进行转换
-        if (isset($name[0]) && isset(self::$_shortTag[$name[0]])) {
-            /* @var $name2 string 转换后的名称 */
-            $name2 = self::$_shortTag[$name[0]] . substr($name, 1);
-            /* @var $lower2 string 转换后的小写名称 */
-            $lower2 = strtolower($name2);
-            if (isset(self::$_data[$lower2])) {
-                self::$_data[$lower] = self::$_data[$lower2];
-                return self::$_data[$lower2];
-            }
-            if ($result = self::_callClass($name2, $param)) {
-                self::$_data[$lower2] = $result;
-                self::$_data[$lower] = $result;
-                return $result;
+        $this->config($config);
+        if (isset($config[__CLASS__])) {
+            $this->options = $config[__CLASS__] + $this->options;
+        }
+        $options = &$this->options;
+
+        // 定义全局函数Q
+        if ($options['fnQ'] && !function_exists('q')) {
+            function q($value = null) {
+                return Qwin::variable($value);
             }
         }
-
-        // (三级)通过直接加载
-        if ($result = self::_callClass($name, $param)) {
-            self::$_data[$lower] = $result;
-            return $result;
-        }
-
-        // (四级)转换类名映射,如 url 映射为 Qwin_Url
-        if (isset(self::$_map[$name])) {
-            $name2 = self::$_map[$name];
-            $lower2 = strtolower($name2);
-            if (isset(self::$_data[$lower2])) {
-                self::$_data[$lower] = self::$_data[$lower2];
-                return self::$_data[$lower2];
-            }
-            if ($result = self::_callClass($name2, $param)) {
-                self::$_data[$lower2] = $result;
-                self::$_data[$lower] = $result;
-                return $result;
-            }
-        }
-
-        // 没有找到
-        return null;
-    }
-
-    /**
-     * 尝试初始化一个类,初始化之前,会将类名进行转换,符合类自动搜索需求
-     *
-     * @param string $name 类名
-     * @param null|array $param 参数,以数组形式出现
-     * @return object|false 实例化对象,或失败
-     */
-    protected static function _callClass($name, $param = null)
-    {
-        // 转换为标准格式的类名
-        $name = preg_split('/([^A-Za-z0-9])/', $name);
-        $name = implode('_', array_map('ucfirst', $name));
-
-        if (class_exists($name)) {
-            return self::_instanceClass($name, $param);
-        }
-        return false;
-    }
-
-    /**
-     * 初始化一个类
-     *
-     * @param string $name 类名
-     * @param null|array $param 参数
-     * @return object 实例化的对象
-     * @todo 是否应该实现类替换 Qwin_Request -> Common_Request
-     */
-    protected static function _instanceClass($name, $param = null)
-    {
-        $param = null !== $param ? $param : self::config($name);
-
-        // 标准单例模式
-        if (method_exists($name, 'getInstance')) {
-            return call_user_func_array(array($name, 'getInstance'), $param);
-        }
-
-        // 没有提供参数的情况下,直接初始化
-        if (empty($param)) {
-            return new $name;
-        } else {
-            // TODO 参数少的情况下,不使用类反射
-            // 有参数的情况下使用类反射进行初始化
-            $reflection = new ReflectionClass($name);
-            return $reflection->newInstanceArgs((array)$param);
-        }
-    }
-
-    /**
-     * 设置短标签
-     *
-     * @param string $name 名称,只能为一个字符,常用的为符号,如-,#,@ ...
-     * @param string $value 值,如 Qwin_, Zend_ ...
-     */
-    public static function setShortTag($name, $value)
-    {
-        if (!is_string($name) || 1 != strlen($name)) {
-            throw new Qwin_Exception('The short tag name should be a sting and the length is 1.');
-        }
-        if (!is_string($value)) {
-            throw new Qwin_Exception('The short tag value should be a sting.');
-        }
-        self::$_shortTag[$name] = $value;
-    }
-
-    /**
-     * 设置资源名称映射
-     *
-     * @param string $name 映射的原名称,一般为缩写形式
-     * @param string $realName 映射的结果名称,一般为完整类名
-     */
-    public static function setMap($name, $realName)
-    {
-        if (!is_string($name)) {
-            throw new Qwin_Exception('The map name should be a sting.');
-        }
-        if (is_object($realName)) {
-            $realName = get_class($realName);
-        }
-        if (!is_string($realName)) {
-            throw new Qwin_Exception('The map real name should be a sting.');
-        }
-        self::$_map[$name] = strtolower($realName);
-    }
-
-
-    /**
-     * 设置自动加载的子路径
-     *
-     * @param array|string $paths 自动加载的初始路径
-     * @todo 多次执行可能混乱
-     */
-    public static function setAutoload($paths = null)
-    {
-        // 设置自动加载的路径
-        $file = dirname(__FILE__);
-        !is_array($paths) && $paths = (array)$paths;
-        foreach ($paths as &$path) {
-            $path = realpath($path) . DIRECTORY_SEPARATOR;
-        }
-        array_push($paths, $file . DIRECTORY_SEPARATOR);
-        self::$_autoloadPaths = array_unique($paths);
         
-        /**
-         * 将类库加入加载路径中的第二位
-         * 默认情况下,php的加载路径为"当前目录;PEAR目录",而很多时候,PEAR目录是不可控的,例如,存在陈旧的类文件却无法
-         * 更新,所以自定义的类库应该置于PEAR目录之前
-         * @todo 
-         */
+        // 定义全局函数Qwin
+        function qwin($value = null) {
+            return Qwin::variable($value);
+        }
+        
+        // 定义全局变量$q
+        if (isset($GLOBALS['q'])) {
+            $this->globalQ = &$GLOBALS['q'];
+        }
+        $GLOBALS['q'] = $this;
+        
+        // 将类库路径加入加载路径中的第二位
+        $file = dirname(__FILE__);
         $includePath = get_include_path();
         $pos = strpos($includePath, PATH_SEPARATOR);
         if ($pos) {
@@ -277,27 +167,35 @@ class Qwin
             $includePath .= PATH_SEPARATOR . $file;
         }
         set_include_path($includePath);
-        spl_autoload_register(array('self', 'autoload'));
-    }
-    
-    public static function getAutoloadPaths()
-    {
-        return self::$_autoloadPaths;
+
+        // 设置自动加载
+        if ($options['autoload']) {
+            $paths = &$options['autoloadPaths'];
+            !is_array($paths) && $paths = (array)$paths;
+            foreach ($paths as &$path) {
+                $path = realpath($path) . DIRECTORY_SEPARATOR;
+            }
+            $paths[] = $file . DIRECTORY_SEPARATOR;
+            $paths = array_unique($paths);
+            
+            spl_autoload_register(array($this, 'autoload'));
+        }
+        
+        $this->_widgets['Qwin_Qwin'] = $this;
+        $this->_objects['Qwin'] = $this;
     }
 
     /**
-     * 自动加载类的方法,适用各类按标注方法命名的类库
-     * 并将加载到的类的文件路径加入缓存数组中
-     *
-     * @param string $className
+     * 自动加载按标准格式命名的类
+     * 
+     * @param string $class 类名
      * @return bool 是否加载成功
-     * @todo 重新开启缓存功能
+     * @todo 缓存加载过的类
      */
-    public static function autoload($class)
+    public function autoload($class)
     {
-        // 通过解析类名,获取文件路径加载
         $class = strtr($class, array('_' => DIRECTORY_SEPARATOR));
-        foreach (self::$_autoloadPaths as $path) {
+        foreach ($this->options['autoloadPaths'] as $path) {
             $path = $path . $class . '.php';
             if (file_exists($path)) {
                 require_once $path;
@@ -308,27 +206,101 @@ class Qwin
     }
 
     /**
+     * 调用一个微件
+     *
+     * @param string $name 微件名称
+     * @return Qwin_Widget 微件实例化对象
+     */
+    public static function widget($name)
+    {
+        $q = self::getInstance();
+        $class = 'Qwin_' . ucfirst($name);
+        
+        if (isset($q->_widgets[$class])) {
+            return $q->_widgets[$class];
+        }
+        
+        if (!class_exists($class)) {
+            require_once 'Qwin/Exception.php';
+            throw new Qwin_Exception('Widget or property "' . $name . '" not found');
+        }
+        
+        return $q->_widgets[$class] = $q->call($class);
+    }
+    
+    /**
+     * 初始化一个类
+     * 
+     * @param string $name 类名
+     * @param null|array $param 类初始化时的参数,以数组的形式出现
+     * @return false|object 失败或类对象
+     */
+    public function call($name, $param = null)
+    {
+        if (isset($this->_objects[$name])) {
+            return $this->_objects[$name];
+        }
+        
+        if (!class_exists($name)) {
+            return false;
+        }
+        
+        // 获取参数
+        $param = null !== $param ? $param : $this->config($name);
+        !is_array($param) && $param = array($param);
+
+        // 标准单例模式
+        if (method_exists($name, 'getInstance')) {
+            return call_user_func_array(array($name, 'getInstance'), $param);
+        }
+
+        // 根据参数数目初始化类
+        switch (count($param)) {
+            case 0:
+                $object = new $name;
+                break;
+                
+            case 1:
+                $object = new $name(current($param));
+                break;
+
+            case 2:
+                $object = new $name(current($param), next($param));
+                break;
+
+            case 3:
+                $object = new $name(current($param), next($param), next($param));
+                break;
+
+            default:
+                $reflection = new ReflectionClass($name);
+                $object = $reflection->newInstanceArgs($param);
+        }
+        return $this->_objects[$name] = $object;
+    }
+    
+    /**
      * 获取/设置配置
      *
      * @param mixed $name 配置的值,多级用'/'分开
      * @param mixed $param 配置内容
      * @return mixed
-     * @example Qwin::config();                 // 获取所有配置
-     *          Qwin::config('className');      // 获取此项的配置,建议为类名
-     *          Qwin::config('array');          // 设定该数组为全局配置
-     *          Qwin::config('name', 'param');  // 设定项为name的配置为param
-     *          Qwin::config('key1/key2');      // 获取$config[key1][key2]的值
+     * @example $this->config();                 // 获取所有配置
+     *          $this->config('className');      // 获取此项的配置,建议为类名
+     *          $this->config('array');          // 设定该数组为全局配置
+     *          $this->config('name', 'param');  // 设定项为name的配置为param
+     *          $this->config('key1/key2');      // 获取$config[key1][key2]的值
      */
-    public static function config($name = null)
+    public function config($name = null)
     {
         // 获取所有配置
         if (null === $name ) {
-            return self::$_config;
+            return $this->_config;
         }
 
         // 获取/设置某一项配置
         if (is_scalar($name)) {
-            $temp = &self::$_config;
+            $temp = &$this->_config;
             if (false !== strpos($name, '/')) {
                 $array = explode('/', $name);
                 $name = array_pop($array);
@@ -349,7 +321,7 @@ class Qwin
 
         // 设置全局配置
         if (is_array($name)) {
-            return self::$_config = new ArrayObject($name, ArrayObject::ARRAY_AS_PROPS);
+            return $this->_config = $name;
         }
 
         // 不匹配任何操作
@@ -357,54 +329,61 @@ class Qwin
     }
 
     /**
-     * 设置一个钩子
-     *
-     * @param string $name 钩子名称
-     * @param array $param 钩子参数
+     * 初始化一个变量微件
+     * 
+     * @param mixed $mixed 变量
+     * @return Qwin_Widget 微件实例化对象
+     * @todo 是否应该考虑变量类型
      */
-    public static function hook($name, array $options = array())
+    public static function variable($mixed = null, $class = 'Qwin_Widget')
     {
-        return self::call('-hook')->call($name, $options);
+        /*$type = gettype($mixed);
+        if (isset(self::$_types[$type])) {
+            $class = 'Qwin_' . self::$_types[$type];
+        } else {
+            $class = 'Qwin_Widget';
+        }*/
+        $q = self::getInstance();
+        if (is_string($mixed) || is_int($mixed)) {
+            if (isset($q->_vars[$mixed])) {
+                return $q->_vars[$mixed];
+            }
+            return $q->_vars[$mixed] = new $class($mixed);
+        } else {
+            if (false !== ($key = array_search($mixed, $q->_varKeys, true))) {
+                return $q->_varValues[$key];
+            }
+            $q->_varKeys[] = $mixed;
+            return $q->_varValues[] = new $class($mixed);
+        }
     }
-
+    
     /**
-     * 调用一个微件
+     * 获取当前类的实例化对象
      *
-     * @param string $name 微件名称
-     * @return Qwin_Widget_Abstract 微件实例化对象
+     * @param mixed $config 数组或者文件路径,支持不定长参数
+     * @return Qwin
      */
-    public static function widget($name)
+    public static function getInstance()
     {
-        return self::call('-widget')->call($name);
-    }
+        if (isset(self::$_instance)) {
+            return self::$_instance;
+        }
 
-    /**
-     * 启动
-     *
-     * @param string|array $config 配置文件的路径或配置数组
-     * @param string|array $config2 附加的配置数据,例如有不同的入口文件,指向不同的模块操作
-     *                              通过定义附加配置,即可方便实现
-     * @return mixed 结果
-     * @todo 支持不定长长度的参数
-     */
-    public static function startup($config, $config2 = null)
-    {
-        // 合并配置
-        if (!is_array($config)) {
-            if (file_exists($config)) {
-                $config = require $config;
+        // 合并所有的参数
+        $args = func_get_args();
+        $config = array();
+        foreach ($args as $arg) {
+            if (is_array($arg)) {
+                $config = $arg + $config;
+            } elseif (is_string($arg) && is_file($arg)) {
+                $config = ((array)require $arg) + $config;
             } else {
                 require_once 'Qwin/Exception.php';
-                throw new Qwin_Exception('File "' . $config . '" not found.');
+                throw new Qwin_Exception('Config should be array or file.');
             }
         }
-        // 设定全局配置
-        $config = self::config((array)$config2 + (array)$config);
-
-        // 设置自动加载
-        self::setAutoload($config['Qwin']['autoloadPaths']);
-
-        // 启动应用
-        return self::widget('app')->render($config);
+        
+        return self::$_instance = new self($config);
     }
 }

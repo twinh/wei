@@ -1,6 +1,6 @@
 <?php
- /**
- * 异常处理
+/**
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -16,19 +16,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  Exception
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-04-18 11:56:29
  */
 
-class Qwin_Exception extends Exception
+/**
+ * isInt
+ * 
+ * @package     Qwin
+ * @subpackage  Qwin
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2011-10-02 0:34:54
+ */
+class Qwin_isInt
 {
-    public function __construct($msg = '', $code = 0)
-    {
-        parent::__construct($msg, (int)$code);
-    }
+    
 }

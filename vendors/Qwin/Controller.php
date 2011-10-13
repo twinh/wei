@@ -25,7 +25,7 @@
  * @since       2009-11-24 20:45:11
  */
 
-class Controller_Widget extends Qwin_Widget_Abstract
+class Qwin_Controller extends Qwin_Widget
 {
     /**
      * 模型对象
@@ -87,7 +87,7 @@ class Controller_Widget extends Qwin_Widget_Abstract
     /**
      * 初始化各类和数据
      */
-    public function __construct($config = array(), $module = null, $action = null)
+    public function __construct2($config = array(), $module = null, $action = null)
     {
         parent::__construct();
         $this->_module  = $module;
@@ -103,7 +103,7 @@ class Controller_Widget extends Qwin_Widget_Abstract
          */
         $this->_isAllowVisited();
     }
-
+    
     /**
      * 根据模块获取控制器对象
      *
@@ -112,7 +112,30 @@ class Controller_Widget extends Qwin_Widget_Abstract
      * @todo 当类不存在时,是否需要用父类?
      * @todo 是否应该考虑存在性,安全性
      */
-    public static function getByModule($module, $instanced = true, $param = null)
+    public function getByModule($module, $instance = true, $param = null)
+    {
+        foreach ($this->app->option('paths') as $path) {
+            $file = $path . ucfirst($module) . '/Controller.php';
+            if (is_file($file)) {
+                $found = true;
+                break;
+            }
+        }
+        if (!$found) {
+            throw new Qwin_Exception('Module "' . $module . '" not found.');
+        }
+        
+        require_once $file;
+        $class = ucfirst($module) . '_Controller';
+        if (!class_exists($class)) {
+            throw new Qwin_Exception('Controller class "' . $class . '" not found.');
+        }
+        
+        return $instance ? Qwin::getInstance()->call($class, $param) : $class;
+    }
+
+    
+    public static function getByModule2($module, $instanced = true, $param = null)
     {
         // 初始化模块类
         if (!$module instanceof Qwin_Module) {

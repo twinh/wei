@@ -1,6 +1,6 @@
 <?php
 /**
- * Widget
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -16,151 +16,136 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-20 15:26:25
- * @todo        hook,exception,error,log,dump,config,trace
  */
 
+/**
+ * Widget
+ * 
+ * @namespace   Qwin
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2011-10-03 00:28:06
+ */
 class Qwin_Widget
 {
     /**
-     * 已加载的微件
+     * 对象的值
+     * @var mixed 
+     */
+    public $source;
+    
+    /**
+     * 对象环的上一个微件
+     * @var mixed
+     */
+    public $prevWidget;
+
+    /**
+     * 选项
      * @var array
      */
-    protected $_loaded = array();
-
+    public $options = array();
+    
     /**
-     * 微件所在目录
-     * @var string
-     */
-    protected $_paths = array();
-
-    /**
-     * 获取当前类的实例化对象
-     *
-     * @return Qwin_Widget
-     */
-    public function __construct($paths = null)
-    {
-        // 如果不提供路径,则认为微件存放于类库同级目录的widgets文件夹里
-        // TODO 是否有更快的方式,例如操作字符串
-        !is_array($paths) && $paths = (array)$paths;
-        
-        if (empty($paths)) {
-            $paths[] = dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'widgets' . DIRECTORY_SEPARATOR;
-        }
-
-        $this->_paths = $paths;
-        //$this->setPath($paths);
-    }
-
-    /**
-     * 设置根路径
-     *
-     * @param string $paths 路径
+     * 初始化微件
+     * 
+     * @param mixed $source 对象的值
      * @return Qwin_Widget 当前对象
      */
-    public function setPath($paths)
+    public function __construct($source = null)
     {
-        if (is_dir($paths)) {
-            $this->_paths = $paths;
-            return $this;
+        if ('Qwin_Widget' == get_class($this)) {
+            $this->source = $source;
+        } else {
+            if (is_array($this->options)) {
+                $this->options = (array)$source + (array)$this->options;
+            } else {
+                $this->options = $source;
+            }
         }
-        throw new Qwin_Widget_Exception('Path "' . $paths . '" not found.');
     }
     
     /**
-     * 获取微件目录
-     *  
-     * @return string 目录
+     * 获取/设置选项
+     * 
+     * @param mixed $name 选项名称
+     * @return mixed 
+     * @example $widget->option('name');            // 获取name选项
+     *          $widget->option('name', 'value');   // 设置name选项的值为value  
+     *          $widget->option();                  // 获取所有选项
+     *          $widget->option(array());           // 设置所有选项      
      */
-    public function getPath()
+    public function option($name = null)
     {
-        return $this->_paths;
+        // 获取/设置某一个选项
+        if (is_string($name) || is_int($name)) {
+            if (2 == func_num_args()) {
+                return $this->options[$name] = func_get_arg(1);
+            }
+            return isset($this->options[$name]) ? $this->options[$name] : null;
+        }
+        
+        // 获取所有选项
+        if (null === $name ) {
+            return $this->options;
+        }
+        
+        // 设置所有选项
+        if (is_array($name)) {
+            $this->options = $name + $this->options;
+        }
+        
+        // 不匹配任何操作
+        return null;
     }
 
     /**
-     * 根据类名获取微件
-     *
-     * @param string $class 类名
+     * 魔术方法,实现通过方法调用同名微件
+     * 
+     * @param string $name 方法名称
+     * @param array $args 调用参数
      * @return mixed
      */
-    public function getByClass($class)
+    public function __call($name, $args)
     {
-        if (!class_exists($class)) {
-            require_once 'Qwin/Widget/Exception.php';
-            throw new Qwin_Widget_Exception('Class "' . $class . '" not found.');
+        // 获取微件对象
+        if (!isset($this->$name)) {
+            $this->$name = Qwin::widget($name);
+        }
+        $widget = $this->$name;
+        
+        if (!method_exists($widget, 'call')) {
+            require_once 'Qwin/Exception.php';
+            throw new Qwin_Exception('Method "call" not found in widget "' . get_class($widget) . '"');
         }
 
-        // 微件类应该继承自抽象类或是实现其接口类
-        if (!is_subclass_of($class, 'Qwin_Widget_Abstract')) {
-            $reflection = new ReflectionClass($class);
-            if (!in_array('Qwin_Widget_Interface', $reflection->getInterfaceNames())) {
-                require_once 'Qwin/Widget/Exception.php';
-                throw new Qwin_Widget_Exception('Class "' . $class . '" is not a widget class.');
-            }
-        }
-        
-        return $this->_loaded[$class] = Qwin::call($class);
+        // 执行相应方法
+        $widget->prevWidget = $this;
+        $widget->source = $this->source;
+        $result = call_user_func_array(array($widget, 'call'), $args);
+        $this->source = $widget->source;
+        return $result;
     }
     
     /**
-     * 获取一个微件的实例化对象
+     * 魔术方法,实现通过对象属性获取同名微件
      * 
-     * @param string $name 微件类名称,不带"_Widget"后缀
-     * @return Qwin_Widget_Abstarct 微件对象
+     * @param string $name 微件名称
+     * @return Qwin_Widget 
      */
-    public function call($name)
+    public function __get($name)
     {
-        $name = ucfirst($name);
-        $class = $name . '_Widget';
-        if (isset($this->_loaded[$class])) {
-            return $this->_loaded[$class];
-        }
-
-        // 查看主文件是否存在
-        foreach ($this->_paths as $path) {
-            $file = $path . $name . '/Widget.php';
-            if (is_file($file)) {
-                require_once $file;
-                return $this->getByClass($class);
-            }
-        }
-        
-        throw new Qwin_Widget_Exception('Widget "' . $name . '" not found.');
-    }
-
-    /**
-     * 获取一个微件的实例化对象
-     *
-     * @param string $name 微件类名称,不带"_Widget"后缀
-     * @return Qwin_Widget_Abstarct 微件对象
-     */
-    public function get($name)
-    {
-        return $this->call($name);
+        $this->$name = Qwin::widget($name);
+        $this->$name->prevWidget = $this;
+        return $this->$name;
     }
     
-    public function register(Qwin_Widget_Abstract $object)
+    public function __toString()
     {
-        $this->_loaded[get_class($object)] = $object;
-        return $this;
-    }
-
-    /**
-     * 检查是否调用过该微件类
-     *
-     * @param string|Qwin_Widget_Abstract $class 微件对象或类名
-     * @return bool
-     */
-    public function isCalled($class)
-    {
-        is_object($class) && $class = get_class($class);
-        return isset($this->_loaded[$class]);
+        return (string)$this->source;
     }
 }
