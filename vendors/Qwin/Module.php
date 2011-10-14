@@ -23,7 +23,7 @@
  * @since       2011-03-22 15:36:41
  */
 
-class Qwin_Module implements ArrayAccess
+class Qwin_Module extends Qwin_Widget implements ArrayAccess
 {
     /**
      * @var array           模块数据
@@ -76,15 +76,11 @@ class Qwin_Module implements ArrayAccess
      */
     public static $_intances = array();
 
-    /**
-     * 初始化模块数据
-     *
-     * @param string $module 模块名称
-     */
-    protected function __construct($module)
+    public function call()
     {
-        $this->_string = (string)$module;
-        $this->_source = preg_split('/([^A-Za-z0-9])/', $this->_string);
+        $this->_string = $this->source;
+        $this->_source = preg_split('/([^A-Za-z0-9])/', $this->source);
+        return $this;
     }
     
     public function __toString()
@@ -112,7 +108,7 @@ class Qwin_Module implements ArrayAccess
      *
      * @return string
      */
-    public function getId()
+    public function toId()
     {
         if (empty($this->_data['id'])) {
             $this->_data['id'] = strtolower(implode('-', $this->_source));
@@ -125,7 +121,7 @@ class Qwin_Module implements ArrayAccess
      *
      * @return string
      */
-    public function getPath()
+    public function toPath()
     {
         if (empty($this->_data['path'])) {
             $this->_data['path'] = implode('/', array_map('ucfirst', $this->_source)) . '/';
@@ -138,7 +134,7 @@ class Qwin_Module implements ArrayAccess
      *
      * @return string
      */
-    public function getUrl()
+    public function toUrl()
     {
         if (empty($this->_data['url'])) {
             $this->_data['url'] = strtolower(implode('/', $this->_source));
@@ -151,7 +147,7 @@ class Qwin_Module implements ArrayAccess
      *
      * @return string
      */
-    public function getClass()
+    public function toClass()
     {
         if (empty($this->_data['class'])) {
             $this->_data['class'] = implode('_', array_map('ucfirst', $this->_source));
@@ -164,7 +160,7 @@ class Qwin_Module implements ArrayAccess
      *
      * @return string
      */
-    public function getLang()
+    public function toLang()
     {
         if (empty($this->_data['lang'])) {
             $this->_data['lang'] = strtoupper(implode('_', $this->_source));

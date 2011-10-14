@@ -25,7 +25,7 @@
  * @since       2010-10-09 21:20:47
  */
 
-class JsonListAction_Widget extends Qwin_Widget
+class Qwin_JsonListAction extends Qwin_Widget
 {
     /**
      * 默认选项
@@ -77,17 +77,17 @@ class JsonListAction_Widget extends Qwin_Widget
         /* @var $meta Com_Meta */
         $meta = $options['meta'];
         if (!Qwin_Meta::isValid($meta)) {
-            throw new Qwin_Widget_Exception('ERR_META_ILLEGAL');
+            throw new Qwin_Exception('ERR_META_ILLEGAL');
         }
 
         // 检查列表元数据是否合法
         if (!($list = $meta->offsetLoad($options['list'], 'list'))) {
-            throw new Qwin_Widget_Exception('ERR_LIST_META_NOT_FOUND');
+            throw new Qwin_Exception('ERR_LIST_META_NOT_FOUND');
         }
         
         // 检查数据库元数据是否合法
         if (!($db = $meta->offsetLoad($options['db'], 'db'))) {
-            throw new Qwin_Widget_Exception('ERR_DB_META_NOT_FOUND');
+            throw new Qwin_Exception('ERR_DB_META_NOT_FOUND');
         }
         
         // 处理每页显示数目
@@ -117,7 +117,7 @@ class JsonListAction_Widget extends Qwin_Widget
             $rowLayout = array_combine(array_values($list['layout']), array_pad(array(), count($list['layout']), null));
             foreach ($data as &$row) {
                 $rowTemp = array_intersect_key($row, $rowLayout) + $rowLayout;
-                $row = $this->_sanitiser->sanitise($list, $rowTemp, $options['sanitise'], $row);
+                $row = $this->sanitiser($list, $rowTemp, $options['sanitise'], $row);
             }
             unset($row, $rowTemp);
         }
@@ -131,7 +131,7 @@ class JsonListAction_Widget extends Qwin_Widget
         }
 
         // 通过jqGrid微件获取数据
-        $json = $this->_jqGrid->renderJson(array(
+        $json = $this->jqGrid->renderJson(array(
             'list'          => $list,
             'data'          => $data,
             'layout'        => $options['layout'],
@@ -143,6 +143,6 @@ class JsonListAction_Widget extends Qwin_Widget
             ),
         ));
 
-        return $this->_view->displayJson($json);
+        return $this->view->displayJson($json);
     }
 }

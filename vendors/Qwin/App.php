@@ -84,44 +84,28 @@ class Qwin_App extends Qwin_Widget
         date_default_timezone_set($options['timezone']);
         
         // 设置应用启动钩子
+        //$this->trigger('appStartup');
         //Qwin::hook('AppStartup');
 
-        // 获取模块和行为
-        $module = $this->get('module');
+        // 获取模块名称并转换为模块对象
+        $module = $this->get('module')->module();
         $action = $this->get('action');
 
         $controller = $this->controller->getByModule($module);
-        $actionName = 'action' . $action;
+        $actionName = $action . 'Action';
         if (method_exists($controller, $actionName)) {
             call_user_func(array($controller, $actionName));
         } else {
             throw new Qwin_Exception('Action "' . $action . '" not found in controller "' . get_class($controller) .  '"');
         }
         
-        return $this->view();
-        
-        //$module = Qwin_Module::instance($module);
-
-
-        // 加载控制器
-        $params = array($config, $module, $action);
-        $controller = Controller_Widget::getByModule($module, true, $params);
-
-        // 执行行为
-        $actionName = 'action' . $action;
-        if (method_exists($controller, $actionName)
-            && !in_array(strtolower($action), $controller->getForbiddenActions())) {
-            call_user_func_array(array($controller, $actionName), $params);
-        } else {
-            throw new Qwin_Exception('Action "' . $action . '" not found in controller "' . get_class($controller) .  '"');
-        }
-
         // 展示视图
-        $this->view->display();
-
+        $this->view();
+        
         // 设置应用结束钩子
         //Qwin::hook('AppTermination');
-
+        
+        // 返回当前对象
         return $this;
     }
 

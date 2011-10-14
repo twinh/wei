@@ -23,30 +23,32 @@
  * @since       2011-06-03 14:45:19
  */
 
-class ActionController_Widget extends Controller_Widget
+class Qwin_CrudController extends Qwin_Controller
 {
-    /**
-     * 控制器默认首页,Common命名空间的默认首页是数据列表
-     *
-     * @return array 执行结果
-     */
-    public function actionIndex()
+    public function indexAction()
     {
-        $request = $this->getRequest();
-        if ($request->isJson()) {
-            return Qwin::call('-widget')->get('JsonListAction')->render(array(
+        return $this->listAction();
+    }
+    
+    /**
+     * 查看列表记录
+     */
+    public function listAction()
+    {
+        if ($this->request->isJson()) {
+            return $this->jsonListAction(array(
                 'meta'   => $this->getMeta(),
-                'layout' => $request->get('layout'),
-                'search' => $request->get('search'),
-                'page'   => $request->get('page'),
-                'row'    => $request->get('row'),
+                'layout' => $this->get('layout'),
+                'search' => $this->get('search'),
+                'page'   => $this->get('page'),
+                'row'    => $this->get('row'),
                 'order'  => array(
-                    $request->get('orderField'),
-                    $request->get('orderType')
+                    $this->get('orderField'),
+                    $this->get('orderType')
                 ),
             ));
         } else {
-            return Qwin::call('-widget')->get('ListAction')->render(array(
+            return $this->listAction(array(
                 'meta'   => $this->getMeta(),
                 'layout' => $request->get('layout'),
                 'row'    => $request->get('row'),
@@ -57,10 +59,8 @@ class ActionController_Widget extends Controller_Widget
 
     /**
      * 查看一条记录
-     *
-     * @return array 执行结果
      */
-    public function actionView()
+    public function viewAction()
     {
         /*if ($this->_request->get('forward')) {
             return Qwin::call('-widget')->get('Forward')->render(array(
@@ -78,10 +78,8 @@ class ActionController_Widget extends Controller_Widget
 
     /**
      * 添加记录
-     *
-     * @return array 执行结果
      */
-    public function actionAdd()
+    public function addAction()
     {
         if (!$this->_request->isPost()) {
             return $this->getWidget()->get('AddFormAction')->render(array(
@@ -100,10 +98,8 @@ class ActionController_Widget extends Controller_Widget
 
     /**
      * 编辑记录
-     *
-     * @return array 执行结果
      */
-    public function actionEdit()
+    public function editAction()
     {
         /*if ($this->_request->get('forward')) {
             return Qwin::call('-widget')->get('Forward')->render(array(
@@ -129,10 +125,8 @@ class ActionController_Widget extends Controller_Widget
 
     /**
      * 删除记录
-     *
-     * @return array 执行结果
      */
-    public function actionDelete()
+    public function deleteAction()
     {
         return Qwin::call('-widget')->get('DeleteAction')->render(array(
             'meta'  => $this->getMeta(),

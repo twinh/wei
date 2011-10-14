@@ -26,7 +26,7 @@
  * @todo        缩减重复代码
  */
 
-class Qwin_Request implements ArrayAccess
+class Qwin_Request extends Qwin_Widget implements ArrayAccess
 {
     /**
      * @var array           默认选项
@@ -70,9 +70,9 @@ class Qwin_Request implements ArrayAccess
      */
     protected $_cookie = array();
 
-    public function __construct(array $options = array())
+    public function __construct(array $options = null)
     {
-        $options = $options + $this->_defaults;
+        
 
         // 关闭魔术引用
         ini_set('magic_quotes_runtime', 0);
@@ -87,9 +87,6 @@ class Qwin_Request implements ArrayAccess
         !empty($options['post']) && $this->addPost($options['post']);
         !empty($options['cookie']) && $this->addCookie($options['cookie']);
         !empty($options['request']) && $this->addRequest($options['request']);
-
-        // 构建数组对象
-        //parent::__construct(&$this->_request, ArrayObject::ARRAY_AS_PROPS);
     }
 
     /**
