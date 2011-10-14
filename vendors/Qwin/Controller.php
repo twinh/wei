@@ -23,6 +23,7 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2009-11-24 20:45:11
+ * @todo        重新实现禁用行为
  */
 
 class Qwin_Controller extends Qwin_Widget
@@ -40,77 +41,31 @@ class Qwin_Controller extends Qwin_Widget
     protected $_meta;
 
     /**
-     * 请求对象
-     * @var Qwin_Request
-     */
-    protected $_request;
-    
-    /**
-     * 会话对象
-     * @var Qwin_Session
-     */
-    protected $_session;
-
-    /**
-     * 微件管理对象
-     * @var Qwin_Widget
-     */
-    protected $_widget;
-
-    /**
      * 用户数据数组
      * @var array
      */
     protected $_member;
 
     /**
-     * 模块标识
-     * @var string
-     */
-    protected $_module;
-
-    /**
-     * 操作名称
-     * @var string
-     */
-    protected $_action;
-
-    /**
-     * 禁用的行为列表
-     * 当行为被禁用时,无法通过外部进行访问
-     * 通过禁用行为,可以用于精确的访问控制
-     *
-     * @var array
-     */
-    protected $_unableActions = array();
-    
-    /**
      * 初始化各类和数据
      */
-    public function __construct2($config = array(), $module = null, $action = null)
+    public function __construct()
     {
         parent::__construct();
-        $this->_module  = $module;
-        $this->_action  = $action;
-
-        // 加载模块语言
-        $this->_lang->appendByModule($module);
         
-        $this->_view = $this->getWidget()->call('View');
-        $this->getRequest();
          /**
          * 访问控制
          */
-        $this->_isAllowVisited();
+        //$this->_isAllowVisited();
     }
-    
+
     /**
      * 根据模块获取控制器对象
-     *
-     * @param string $module 模块标识
-     * @return Qwin_Application_Controller 控制器对象
-     * @todo 当类不存在时,是否需要用父类?
-     * @todo 是否应该考虑存在性,安全性
+     * 
+     * @param string $module 模块名称
+     * @param bool $instance 是否实例化
+     * @param mixed $param 参数
+     * @return Qwin_Controller
      */
     public function getByModule($module, $instance = true, $param = null)
     {
@@ -119,9 +74,10 @@ class Qwin_Controller extends Qwin_Widget
             $module = Qwin_Module::instance($module);
         }
         
+        // 检查模块控制器文件是否存在
         $found = false;
         foreach ($this->app->option('paths') as $path) {
-            $file = $path . $module->getPath() . '/Controller.php';
+            $file = $path . $module->toPath() . '/Controller.php';
             if (is_file($file)) {
                 $found = true;
                 break;
@@ -132,92 +88,12 @@ class Qwin_Controller extends Qwin_Widget
         }
         
         require_once $file;
-        $class = $module->getClass() . '_Controller';
+        $class = $module->toClass() . '_Controller';
         if (!class_exists($class)) {
             throw new Qwin_Exception('Controller class "' . $class . '" not found.');
         }
         
-        return $instance ? Qwin::getInstance()->call($class, $param) : $class;
-    }
-
-    
-    public static function getByModule2($module, $instanced = true, $param = null)
-    {
-        // 初始化模块类
-        if (!$module instanceof Qwin_Module) {
-            $module = Qwin_Module::instance($module);
-        }
-        // 检查模块控制器文件是否存在
-        $found = false;
-        $paths = (array)Qwin::widget('App')->option('paths');
-
-        foreach ($paths as $path) {
-            $file = $path . $module->getPath() . 'Controller.php';
-            if (is_file($file)) {
-                $found = true;
-                break;
-            }
-        }
-        if (!$found) {
-            throw new Qwin_Widget_Exception('Module "' . $module->getUrl() . '" not found.');
-        }
-        
-        require_once $file;
-        $class = $module->getClass() . '_Controller';
-        if (!class_exists($class)) {
-            throw new Qwin_Widget_Exception('Controller class "' . $class . '" not found.');
-        }
-        
-        return $instanced ? Qwin::call($class, $param) : $class;
-    }
-
-    /**
-     * 获取禁用的行为列表
-     *
-     * @return array
-     */
-    public function getForbiddenActions()
-    {
-        return $this->_unableActions;
-    }
-
-    /**
-     * 设置禁用行为
-     *
-     * @param string $action 行为名称,即方法名去除'action'标识
-     * @return Qwin_Application_Controller 当前对象
-     */
-    public function setForbiddenActions($action)
-    {
-        if (method_exists($this, 'action' . $action)) {
-            $this->_unableActions[] = strtolower($action);
-        }
-        return $this;
-    }
-
-    /**
-     * 获取请求对象
-     *
-     * @return Qwin_Request
-     */
-    public function getRequest()
-    {
-        if (!$this->_request) {
-            $this->_request = Qwin::call('-request');
-        }
-        return $this->_request;
-    }
-
-    /**
-     * 获取会话对象
-     * @return Qwin_Session
-     */
-    public function getSession()
-    {
-        if (!$this->_session) {
-            $this->_session = Qwin::call('-session');
-        }
-        return $this->_session;
+        return $instance ? $this->qwin($class, $param) : $class;
     }
 
     /**
@@ -228,7 +104,7 @@ class Qwin_Controller extends Qwin_Widget
     public function getMember()
     {
         if (!$this->_member) {
-            $this->_member = $this->getSession()->get('member');
+            $this->_member = $this->session->get('member');
         }
         return $this->_member;
     }
@@ -241,7 +117,7 @@ class Qwin_Controller extends Qwin_Widget
     public function getMeta()
     {
         if (!$this->_meta) {
-            $this->_meta = Meta_Widget::getByModule($this->_module);
+            $this->_meta = Qwin_Meta::getByModule($this->_module);
         }
         return $this->_meta;
     }
@@ -257,19 +133,6 @@ class Qwin_Controller extends Qwin_Widget
             $this->_model = Com_Model::getByModule($this->_model);
         }
         return $this->_model;
-    }
-
-    /**
-     * 获取微件管理对象
-     *
-     * @return Qwin_Widget
-     */
-    public function getWidget()
-    {
-        if (!$this->_widget) {
-            $this->_widget = Qwin::call('-widget');
-        }
-        return $this->_widget;
     }
 
     /**

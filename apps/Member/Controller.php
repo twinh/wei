@@ -25,7 +25,7 @@
  * @since       2010-05-13 10:17:58
  */
 
-class Member_Controller// extends Qwin_ActionController
+class Member_Controller extends Qwin_CrudController
 {
     /**
      * 锁定的核心帐号，防止恶意修改
@@ -35,11 +35,6 @@ class Member_Controller// extends Qwin_ActionController
         'guest', 'admin', '7641b5b1-c727-6c07-e11f-9cb5b74ddfc9',
     );
     
-    public function actionIndex()
-    {
-        
-    }
-
     /**
      * 编辑密码
      * @return object 实例化编辑操作

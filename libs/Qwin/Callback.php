@@ -1,6 +1,7 @@
-<?php
+u<?php
+
 /**
- * Exception
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -16,28 +17,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  Hook
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-02-05 21:05:02
  */
 
 /**
- * @see Qwin_Exception
- */
-require_once 'Qwin/Exception.php';
-
-/**
- * Flow exception
- *
- * @package     Qwin
- * @subpackage  Hook
- * @copyright   Twin Huang
+ * Callback
+ * 
+ * @namespace   Qwin
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2011-10-13 15:23:16
  */
-class Qwin_Hook_Exception extends Qwin_Exception
+class Qwin_Callback extends Qwin_Widget
 {
+    /**
+     * 处理回调结构
+     * 
+     * @param mixed $callback 回调结构
+     * @param array $params 数组参数
+     * @return mixed 
+     */
+    public function call($callback, array $params = null)
+    {
+        if (!$callback || !is_callable($callback)) {
+            return null;
+        }
+        return call_user_func_array($callback, (array)$params);
+    }
 }
