@@ -7,9 +7,9 @@
 <?php
 echo $this->getPackerSign();
 $minify->add(array(
-    $style->getCssFile(),
+    $this->options['paths'][0] . 'widgets/view/themes/' . $this->options['theme'] .  '/jquery.ui.theme.css',
     $root . 'style.css',
-    $config['resource'] . 'view/default/icons/icon.css',
+    $config['resource'] . 'view/app/icons/icon.css',
     $jQuery->loadCore(false),
     $jQuery->loadUi('core', false),
     $jQuery->loadUi('widget', false),
