@@ -27,14 +27,14 @@
 echo $this->getPackerSign();
 ?>
 <div class="ui-jqgrid-top">
-<?php Qwin::hook('viewListTop', array('view' => $this)) ?>
+<?php $this->trigger('viewListTop') ?>
 </div>
 <div class="qw-c"></div>
-<?php $jqGridWidget->render($jqGridOptions) ?>
+<?php $grid->render() ?>
 <script type="text/javascript">
 jQuery(function($){
-    var primaryKey = '<?php echo $id?>';
-    var jqGridObj = qwin.jqGrid = $('#<?php echo $jqGridWidget->getId() ?>');
+    var primaryKey = 'id';
+    var jqGridObj = qwin.jqGrid = $('#<?php echo $grid->getId() ?>');
 
     jqGridObj.jqGrid('setGridParam',{
         ondblClickRow: function(rowId, iRow, iCol, e){
@@ -51,7 +51,7 @@ jQuery(function($){
     }
 
     // 点击删除按钮
-    $('#action-<?php echo $module->getId() ?>-delete').click(function(){
+    $('#action-<?php echo $grid->getId() ?>-delete').click(function(){
         var keyList = new Array(),
             rowList = jqGridObj.jqGrid('getGridParam','selarrrow');
         if (rowList.length == 0) {
@@ -79,7 +79,7 @@ jQuery(function($){
     });
 
     // 点击复制按钮
-    $('#action-<?php echo $module->getId() ?>-copy').click(function(){
+    $('#action-<?php echo $grid->getId() ?>-copy').click(function(){
         var rowList = jqGridObj.jqGrid('getGridParam','selarrrow');
         if (rowList.length != 1) {
             alert(qwin.lang.MSG_CHOOSE_ONLY_ONE_ROW);

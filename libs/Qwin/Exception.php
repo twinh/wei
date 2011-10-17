@@ -31,4 +31,10 @@ class Qwin_Exception extends Exception
     {
         parent::__construct($msg, (int)$code);
     }
+    
+    public function call()
+    {
+        $this->message = call_user_func_array('sprintf', func_get_args());
+        throw $this;
+    }
 }

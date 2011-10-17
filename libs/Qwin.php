@@ -221,8 +221,8 @@ class Qwin extends Qwin_Widget
         }
         
         if (!class_exists($class)) {
-            require_once 'Qwin/Exception.php';
-            throw new Qwin_Exception('Widget or property "' . $name . '" not found');
+            $trace = debug_backtrace();
+            $q->exception('Widget or property "%s" not found called by class "%s"', $name, $trace[2]['class']);
         }
         
         return $q->_widgets[$class] = $q->call($class);

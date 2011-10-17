@@ -23,9 +23,9 @@
  * @since       2010-08-04 10:58:17
  */
 
-class Util_Minify_Controller extends Qwin_Widget
+class Util_Minify_Controller extends Qwin_Controller
 {
-    public function actionIndex()
+    public function indexAction()
     {
         ini_set('zlib.output_compression', '0');
 

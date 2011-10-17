@@ -21,10 +21,115 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-8-14 10:10:49
+ * @since       2011-04-27 14:57:25
  */
-
-class Member_Record extends Record_Widget
+class Member_Record extends Qwin_Record
 {
-    
+    public function getRecordData()
+    {
+        return $this->options = array(
+            'fields' => array(
+                'id' => array(
+                    'type' => 'string',
+                    'length' => 36,
+                    'fixed' => true,
+                    'unsigned' => false,
+                    'primary' => true,
+                    'autoincrement' => false,
+                ),
+                'group_id' => array(
+                    'type' => 'string',
+                    'length' => 36,
+                    'fixed' => true,
+                    'unsigned' => false,
+                    'primary' => false,
+                    'notnull' => true,
+                    'autoincrement' => false,
+                ),
+                'username' => array(
+                    'readonly' => true,
+                    'type' => 'string',
+                    'length' => 32,
+                    'fixed' => false,
+                    'unsigned' => false,
+                    'primary' => false,
+                    'notnull' => true,
+                    'autoincrement' => false,
+                ),
+                'password' => array(
+                    'readonly' => true,
+                    '_sanitiser' => array(
+                        array(
+                            'md5',
+                        ),
+                    ),
+                    'type' => 'string',
+                    'length' => 32,
+                    'fixed' => false,
+                    'unsigned' => false,
+                    'primary' => false,
+                    'notnull' => true,
+                    'autoincrement' => false,
+                ),
+//                'password2' => array(
+//                    'dbField' => 0,
+//                    'dbQuery' => 0,
+//                ),
+                'email' => array(
+                    'type' => 'string',
+                    'length' => 256,
+                    'fixed' => false,
+                    'unsigned' => false,
+                    'primary' => false,
+                    'notnull' => true,
+                    'autoincrement' => false,
+                ),
+                'first_name' => array(
+                ),
+                'last_name' => array(
+                ),
+                'photo' => array(
+                ),
+                'sex' => array(
+                ),
+                'birthday' => array(
+                ),
+                'reg_ip' => array(
+                ),
+                'theme' => array(
+                ),
+                'language' => array(
+                ),
+                'telephone' => array(
+                ),
+                'mobile' => array(
+                ),
+                'homepage' => array(
+                ),
+                'address' => array(
+                ),
+                'created_by' => array(
+                    'readonly' => true,
+                ),
+                'date_created' => array(
+                    'readonly' => true,
+                ),
+                'modified_by' => array(
+                ),
+                'date_modified' => array(
+                ),
+            ),
+            'id' => 'id',
+            'table' => 'member',
+            'mainField' => 'username',
+            'relations' => array(
+                'group' => array(
+                    'module' => 'member/group',
+                    'alias' => 'group',
+                    'local' => 'group_id',
+                ),
+            ),
+        );
+    }
+
 }

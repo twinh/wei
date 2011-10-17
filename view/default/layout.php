@@ -20,7 +20,6 @@ $minify->add(array(
     $jQuery->loadPlugin('blockUI', null, false),
     $jQuery->loadPlugin('metadata', null, false),
     $root . 'style.js',
-    //$this->getTag('root') . 'DD_roundies_0.0.2a-min.js',
 ));
 ?>
 <!--[if IE 6]>

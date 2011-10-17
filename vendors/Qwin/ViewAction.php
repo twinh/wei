@@ -23,7 +23,7 @@
  * @since       2011-05-11 01:09:44
  */
 
-class ViewAction_Widget extends Qwin_Widget
+class Qwin_ViewAction extends Qwin_Widget
 {
     /**
      * @var array           默认选项
@@ -51,10 +51,9 @@ class ViewAction_Widget extends Qwin_Widget
         'display'   => true,
     );
     
-    public function render($options = null)
+    public function call($options = null)
     {
-        // 初始配置
-        $options = (array)$options + $this->_options;
+        $this->option(&$options);
         
         // 检查元数据是否合法
         /* @var $meta Com_Meta */

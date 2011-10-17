@@ -29,37 +29,6 @@
 class Qwin_Controller extends Qwin_Widget
 {
     /**
-     * 模型对象
-     * @var Com_Model
-     */
-    protected $_model;
-
-    /**
-     * 元数据对象
-     * @var Com_Meta
-     */
-    protected $_meta;
-
-    /**
-     * 用户数据数组
-     * @var array
-     */
-    protected $_member;
-
-    /**
-     * 初始化各类和数据
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        
-         /**
-         * 访问控制
-         */
-        //$this->_isAllowVisited();
-    }
-
-    /**
      * 根据模块获取控制器对象
      * 
      * @param string $module 模块名称
@@ -67,16 +36,13 @@ class Qwin_Controller extends Qwin_Widget
      * @param mixed $param 参数
      * @return Qwin_Controller
      */
-    public function getByModule($module, $instance = true, $param = null)
+    public function call($module = null, $instance = true, $param = null)
     {
-        // 初始化模块类
-        if (!$module instanceof Qwin_Module) {
-            $module = Qwin_Module::instance($module);
-        }
-        
+        !$module && $module = $this->module();
+
         // 检查模块控制器文件是否存在
         $found = false;
-        foreach ($this->app->option('paths') as $path) {
+        foreach ($this->app->options['paths'] as $path) {
             $file = $path . $module->toPath() . '/Controller.php';
             if (is_file($file)) {
                 $found = true;
@@ -84,55 +50,35 @@ class Qwin_Controller extends Qwin_Widget
             }
         }
         if (!$found) {
-            throw new Qwin_Exception('Module "' . $module . '" not found.');
+            $this->exception('Module "%s" not found.', $module);
         }
         
         require_once $file;
         $class = $module->toClass() . '_Controller';
         if (!class_exists($class)) {
-            throw new Qwin_Exception('Controller class "' . $class . '" not found.');
+            $this->exception('Controller class "%s" not found.', $class);
         }
         
         return $instance ? $this->qwin($class, $param) : $class;
     }
-
+    
     /**
-     * 获取用户数据
-     *
-     * @return array
+     * 执行行为
+     * 
+     * @param string $action 行为名称
+     * @return mixed 
      */
-    public function getMember()
+    public function action($action)
     {
-        if (!$this->_member) {
-            $this->_member = $this->session->get('member');
+        $action = (string)$action;
+        if ($action) {
+            $action2 = $action . 'Action';
+            if (method_exists($this, $action2)) {
+                return call_user_func(array($this, $action2));
+            }
         }
-        return $this->_member;
-    }
-
-    /**
-     * 获取元数据对象
-     *
-     * @return Meta_Widget
-     */
-    public function getMeta()
-    {
-        if (!$this->_meta) {
-            $this->_meta = Qwin_Meta::getByModule($this->_module);
-        }
-        return $this->_meta;
-    }
-
-    /**
-     * 获取模型对象
-     *
-     * @return Com_Model
-     */
-    public function getModel()
-    {
-        if (!$this->_model) {
-            $this->_model = Com_Model::getByModule($this->_model);
-        }
-        return $this->_model;
+        
+        $this->exception('Action "%s" not found in controller %s.', $action, get_class($this));
     }
 
     /**
@@ -140,7 +86,7 @@ class Qwin_Controller extends Qwin_Widget
      *
      * @return boolen
      */
-    protected function _isAllowVisited()
+    /*protected function _isAllowVisited()
     {
         $session = $this->getSession();
         $member = $session->get('member');
@@ -166,5 +112,5 @@ class Qwin_Controller extends Qwin_Widget
 //            return $this->_View->alert($lang->t('MSG_PERMISSION_NOT_ENOUGH'));
 //        }
         return true;
-    }
+    }*/
 }
