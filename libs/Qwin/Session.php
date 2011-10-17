@@ -22,11 +22,10 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-4-18 11:50:10
- * @todo        session start
+ * @since       2010-04-18 11:50:10
  */
 
-class Qwin_Session implements ArrayAccess
+class Qwin_Session extends Qwin_Widget implements ArrayAccess
 {
     /**
      * 当前的命名空间
@@ -191,5 +190,15 @@ class Qwin_Session implements ArrayAccess
     public function offsetUnset($offset)
     {
         unset($_SESSION[$this->_namespace][$offset]);
+    }
+    
+    /**
+     * 删除由于微件注入的session
+     * 
+     * @todo session不存为属性,改为_data
+     */
+    public function __destruct()
+    {
+        $this->offsetUnset('prevWidget');
     }
 }

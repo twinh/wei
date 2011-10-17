@@ -477,10 +477,11 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
             if (is_dir($path . 'widgets/view/themes/' . $theme)) {
                 $this->options['theme'] = $theme;
                 $this->session['theme'] = $theme;
+                return $this;
             }
         }
 
-        $this->session['style'] = $this->options['theme'];
+        $this->session['theme'] = $this->options['theme'];
     }
     
     /**
