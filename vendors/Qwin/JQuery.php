@@ -32,6 +32,11 @@ class Qwin_JQuery extends Qwin_Widget
         $this->_path = dirname(__FILE__) . '/JQuery/';
     }
     
+    public function getPath()
+    {
+        return $this->_path;
+    }
+    
     public function call()
     {
         return $this;

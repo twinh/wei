@@ -22,8 +22,12 @@
  * @version     $Id$
  * @since       2011-01-31 14:20:01
  */
+// 加载语言,脚本和样式文件
+$this->minify->add(array(
+    $this->jQuery->getPath() . 'plugins/jqgrid/i18n/grid.locale-en.js',
+    $this->jQuery->loadPlugin('jqgrid', null, false),
+));
 ?>
-
 <table id="<?php echo $options['id'] ?>"></table>
 <div id="<?php echo $options['pager'] ?>"></div>
 <script type="text/javascript">

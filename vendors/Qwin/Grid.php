@@ -1,6 +1,7 @@
 <?php
+
 /**
- * JqGrid
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -20,13 +21,20 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       v0.7.0 2011-01-18 15:24:53
  */
 
-class JqGrid_Widget extends Qwin_Widget
+/**
+ * Grid
+ * 
+ * @namespace   Qwin
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2011-01-18 15:24:53
+ */
+class Qwin_Grid extends Qwin_Widget
 {
     /**
-     * @var array $_options         jqGrid的部分配置选项和微件配置
+     * @var array $options          jqGrid的部分配置选项和微件配置
      * 
      *      -- url                  获取json数据的链接
      *
@@ -78,9 +86,7 @@ class JqGrid_Widget extends Qwin_Widget
      */
     public $options = array(
         'id'            => null,
-        'meta'          => null,
-        'list'          => 'list',
-        'db'            => 'db',
+        'fields'        => array(),
         'layout'        => array(),
         'url'           => null,
         'datatype'      => 'json',
@@ -95,12 +101,9 @@ class JqGrid_Widget extends Qwin_Widget
         'multiselect'   => true,
         'height'        => '100%',
         'width'         => 'auto',
-        'autowidth'     => true,
+        'autowidth'     => false,
         'viewrecords'   => true,
         'forceFit'      => true,
-        'toolbar'       => false,
-        //'toolbar'       => array(true, 'top'),
-        //'ondblClickRow' => null,
         'emptyrecords'  => 'MSG_NO_RECORDS',
         'pager'         => null,//'#ui-jqgrid-page',
         'prmNames'      => array(
@@ -147,41 +150,42 @@ class JqGrid_Widget extends Qwin_Widget
     );
 
     protected $_id = null;
+    
+    /**
+     * 获取模块记录
+     * 
+     * @param string $name 记录名称
+     * @param Qwin_Module $module 模块名称
+     * @return Qwin_Record 
+     */
+    public function call($name = null, $module = null)
+    {
+        if (!$module) {
+            $module = $this->module();
+        }
+        $class = $module->toClass() . '_' . ucfirst($name) . 'Grid';
+        return $this->qwin($class);
+    }
  
     /**
      * 渲染jqGrid界面
      *
      * @param array $options 配置选项
      */
-    public function render($options = null)
+    public function render(array $options = array())
     {
-        // 合并选项
-        $options = (array)$options + $this->_options;
-        
-        // 检查元数据是否合法
-        /* @var $meta Com_Meta */
-        $meta = $options['meta'];
-        if (!Qwin_Meta::isValid($meta)) {
-            throw new Qwin_Widget_Exception('ERR_META_ILLEGAL');
-        }
-        
-        // 检查列表元数据是否合法
-        if (!($list = $meta->offsetLoad($options['list'], 'list'))) {
-            throw new Qwin_Widget_Exception('ERR_LIST_META_NOT_FOUND');
-        }
+        $this->option(&$options);
+        $options = $this->getGridData() + $options;
 
-        // 加载数据库元数据
-        $db = $meta->offsetLoad($options['db'], 'db');
-        
         // 设置编号
         if (!isset($options['id'])) {
-            $options['id'] = 'ui-jqgrid-' . $meta->getId();
+            $options['id'] = 'ui-jqgrid-1';
             $this->_id = $options['id'];
         }
         
         // 设置Url
         if (!isset($options['url'])) {
-            $options['url'] = $this->_url->url($meta->getModule()->toUrl(), 'index', array(
+            $options['url'] = $this->url->url($this->module(), 'list', array(
                 'json' => true,
             ));
         }
@@ -192,51 +196,21 @@ class JqGrid_Widget extends Qwin_Widget
 
         // 设置栏目
         if (empty($options['colNames'])) {
-            $layout = $this->getLayout($list, $options['layout']);
-            foreach ($layout as $field) {
-                $options['colNames'][] = $this->_Lang->f($field);
-                $options['colModel'][] = array(
-                    'name' => $field,
-                    'index' => $field,
-                    'hidden' => isset($list['fields'][$field]['hidden']) ? $list['fields'][$field]['hidden'] : false,
-                );
+            $layout = $this->getLayout($options['layout']);
+            foreach ($options['fields'] as $field) {
+                if (isset($layout[$field['name']])) {
+                    $options['colNames'][] = $this->lang[$field['name']];
+                    $options['colModel'][] = $field;
+                }
             }
         }
-
-        // 设置排序 配置自定义 > 元数据定义 > 主键
-        if (!$options['sortname']) {
-            if (isset($meta['db']['order'][0]) && is_array($meta['db']['order'][0])) {
-                $options['sortname']  = $meta['db']['order'][0][0];
-                $options['sortorder'] = $meta['db']['order'][0][1];
-            } else {
-                $options['sortname']  = $meta['db']['id'];
-                $options['sortorder'] = 'DESC';
-            }
-        }
-
-        // 设置每页数目
-        $options['rowNum'] = intval($options['rowNum']);
-        if (0 >= $options['rowNum']) {
-            $options['rowNum'] = $meta['db']['limit'];
-        }
-
-        // 通过Minify加载CSS和JS
-        $this->_Minify
-            ->add($this->_path . 'source/jquery.jqgrid.css')
-            ->add($this->_path . 'source/i18n/grid.locale-en.js')
-            ->add($this->_path . 'source/jquery.jqgrid.js');
-
-        // 翻译语言
-        // TODO 翻译全部
-        $options['emptyrecords'] = $this->_lang[$options['emptyrecords']];
 
         // 获取jqGrid与其分页的id号
         $options['pager'] = substr($options['pager'], 1);
 
-        unset($options['meta']);
         $jqGridJson = json_encode($options);
 
-        require $this->_path . 'view/default.php';
+        require $this->view->getFile('widgets/grid/default.php');
     }
     
     /**
@@ -248,15 +222,23 @@ class JqGrid_Widget extends Qwin_Widget
     {
         // 合并选项
         $options = (array)$options + $this->_jsonOptions;
-        
-        $layout = $this->getLayout($options['list'], $options['layout']);
+        $this->options = $this->getGridData() + $this->options;
+        $layout = $this->getLayout($options['layout']);
         
         $data = array();
         foreach ($options['data'] as $row) {
             $cell = array();
-            foreach ($layout as $field) {
-                $cell[] = $row[$field];
+
+            foreach ($this->options['fields'] as $field) {
+                if (isset($layout[$field['name']])) {
+                    if (isset($row[$field['name']])) {
+                        $cell[] = $row[$field['name']];
+                    } else {
+                        $cell[] = null;
+                    }
+                }
             }
+            
             $data[] = array(
                 $options['id'] => $row[$options['id']],
                 'cell' => $cell,
@@ -275,26 +257,19 @@ class JqGrid_Widget extends Qwin_Widget
      * @param string|array $layout 列表配置
      * @return $layout 列表布局数组 
      */
-    public function getLayout(Qwin_Meta_List $list, $layout)
+    public function getLayout($layout)
     {
-        if (empty($layout)) {
-            return $list['layout'];
+        $layout = (string)$layout;
+        if ($layout) {
+            $layout = array_flip(explode(',', $layout));
         }
-        
-        if (!is_array($layout)) {
-            $layout = Qwin_Util_String::split2d($layout);
+
+        foreach ($this->options['fields'] as $field) {
+            if (!$layout || isset($layout[$field['name']])) {
+                $data[$field['name']] = 1;
+            }
         }
-        
-        $layout = array_intersect($list['layout'], $layout);
-        
-        // 如果布局中不包含主键,把主键加入布局中
-        $meta = $list->getParent();
-        $id = $meta['db']['id'];
-        if (!in_array($id, $layout)) {
-            array_unshift($layout, $id);
-        }
-        
-        return $layout;
+        return $data;
     }
 
     /**

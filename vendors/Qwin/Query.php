@@ -24,9 +24,7 @@
  * @since       2011-07-05 01:18:32
  */
 
-require_once 'Doctrine/Query.php';
-
-class Query_Widget extends Doctrine_Query implements Qwin_Widget_Interface
+class Qwin_Query extends Doctrine_Query
 {
     /**
      * 数据排序类型
@@ -59,44 +57,35 @@ class Query_Widget extends Doctrine_Query implements Qwin_Widget_Interface
     );
     
     /**
-     * 查询对应的数据库元数据
-     * @var Qwin_Meta_Db
-     */
-    protected $_meta;
-    
-    /**
      * 查询对应的记录对象
      * @var Doctrine_Record
      */
     protected $_record;
     
-    /**
-     * 根据模块获取查询对象
-     * 
-     * @param string|Qwin_Module $module
-     * @param string $name 数据库元数据的键名
-     * @return Query_Widget 查询对象
-     */
-    public static function getByModule($module, $name = 'db')
+    public function __construct(Doctrine_Connection $connection = null, Doctrine_Hydrator_Abstract $hydrator = null)
     {
-        $meta = Meta_Widget::getByModule($module);
-        return self::getByMeta($meta[$name]);
+        Qwin_Record::connect();
+        parent::__construct($connection, $hydrator);
     }
     
-    /**
-     * 获取数据库元数据对应的查询对象
-     * 
-     * @param Qwin_Meta_Db $meta
-     * @return Query_Widget 查询对象
-     */
-    public static function getByMeta(Qwin_Meta_Db $meta)
+    public function getByRecord($record)
     {
-        $parentMeta = $meta->getParent();
+        $class = get_class($record);
+        $query = Doctrine_Query::create(null, __CLASS__)->from($class);
+        $query->_record = $record;
+        return $query;
+    }
+    
+    public function call($name = null, $module = null)
+    {
+        $widget = Qwin::getInstance();
+        $record = $widget->record($name, $module);
+        $class = get_class($record);
+        
+        $query = Doctrine_Query::create(null, __CLASS__)->from($class);
+        $query->_record = $record;
+        return $query;
 
-        // 获取记录对象
-        $recordClass = Record_Widget::getByModule($parentMeta['module'], $meta['uid'], false);
-        $record = Qwin::call($recordClass);
-                
         // 根据别名和索引构建DQL的from语句
         $from = $recordClass;
         if ($meta['alias']) {
@@ -111,24 +100,21 @@ class Query_Widget extends Doctrine_Query implements Qwin_Widget_Interface
         $query = Doctrine_Query::create(null, __CLASS__)->from($from);
         
         // 将元数据存储在查询对象中,方便获取其关联关系
-        $query->_meta = $meta;
         $query->_record = $record;
 
         // 增加默认查询
         if (!empty($this['where'])) {
             $query->addRawWhere($this['where']);
         }
-
-        return $query;
     }
-    
+
     public function leftJoinByType($type)
     {
         $types = is_array($type) ? $type : array($type);
-        foreach ($this->_meta['relations'] as $alias => $relation) {
-            if (in_array($relation['type'], $types)) {
-                $this->leftJoin($this->getRootAlias() . '.' . $alias . ' ' . $alias);
-            }
+        foreach ($this->_record->options['relations'] as $alias => $relation) {
+//            if (in_array($relation['type'], $types)) {
+//                $this->leftJoin($this->getRootAlias() . '.' . $alias . ' ' . $alias);
+//            }
         }
         return $this;
     }
@@ -142,36 +128,7 @@ class Query_Widget extends Doctrine_Query implements Qwin_Widget_Interface
             }
             $this->leftJoin($this->getRootAlias() . '.' . $alias . ' ' . $alias);
         }
-        return $this;
-    }
-    
-    /**
-     * 获取元数据对应的记录对象
-     *
-     * @param Doctrine_Record $record 原始Doctrine记录对象
-     * @param array $options 选项
-     * @return Doctrine_Record 带字段定义,表定理,关联关系的Doctrine记录对象
-     */
-    public function getRecord(Doctrine_Record $record = null, array $options = array())
-    {
-        $options = $options + $this->_recordOptions;
-        $options['type'] = (array)$options['type'];
-        $options['alias'] = (array)$options['alias'];
-
-        if (null === $record) {
-            $record = Com_Model::getByModule($this->getModule());
-        }
-
-        // 将元数据加入记录配置中
-        $this->toRecord($record);
-
-        foreach ($this['model'] as $alias => $model) {
-            if (in_array($model['type'], $options['type']) || in_array($alias, $options['alias'])) {
-                $this->setRecordRelation($record, $model);
-            }
-        }
-
-        return $record;
+        return $this; 
     }
 
     /**
@@ -187,14 +144,14 @@ class Query_Widget extends Doctrine_Query implements Qwin_Widget_Interface
         if (empty($order)) {
             return $this;
         }
-        
+
         // 排序为字符串形式,进行分割
         if (is_string($order)) {
             $order = Qwin_Util_String::splitQuery($order);
         }
 
         // 排序只有一项,补全数组
-        if (isset($order[0]) && is_string($order[0])) {
+        if (isset($order[0]) && (is_string($order[0])) || is_object($order[0])) {
             $order = array($order);
         }
         
@@ -202,7 +159,7 @@ class Query_Widget extends Doctrine_Query implements Qwin_Widget_Interface
         $alias && $alias .= '.';
 
         foreach ($order as $field) {
-            if (!isset($field[0]) || !isset($this->_meta['fields'][$field[0]]) || !$this->_meta['fields'][$field[0]]['dbField']) {
+            if (!isset($field[0]) || !isset($this->_record->options['fields'][(string)$field[0]])) {
                 continue;
             }
             $field[1] = strtoupper($field[1]);
@@ -234,7 +191,7 @@ class Query_Widget extends Doctrine_Query implements Qwin_Widget_Interface
         '' != $alias && $alias .= '.';
 
         foreach ($search as $fieldSet) {
-            if (!isset($this->_meta['fields'][$fieldSet[0]]) || !$this->_meta['fields'][$fieldSet[0]]['dbField']) {
+            if (!isset($this->_record->options['fields'][$fieldSet[0]]) || !$this->_record->options['fields'][$fieldSet[0]]['dbField']) {
                 continue;
             }
             if (!isset($fieldSet[2])) {

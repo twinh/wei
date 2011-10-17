@@ -31,37 +31,35 @@ class Qwin_CrudController extends Qwin_Controller
     }
     
     /**
-     * 查看列表记录
+     * 显示列表记录
      */
     public function listAction()
     {
         if ($this->request->isJson()) {
-            return $this->jsonListAction(array(
-                'meta'   => $this->getMeta(),
-                'layout' => $this->get('layout'),
-                'search' => $this->get('search'),
-                'page'   => $this->get('page'),
-                'row'    => $this->get('row'),
-                'order'  => array(
+            return $this->widget->jsonListAction(array(
+                'grid'      => $this->grid(),
+                'record'    => $this->record(),
+                'layout'    => $this->get('layout'),
+                'search'    => $this->get('search'),
+                'page'      => $this->get('page'),
+                'row'       => $this->get('row'),
+                'order'     => array(
                     $this->get('orderField'),
                     $this->get('orderType')
                 ),
             ));
         } else {
-            return $this->listAction(array(
-                'meta'   => $this->getMeta(),
-                'layout' => $request->get('layout'),
-                'row'    => $request->get('row'),
-                'popup'  => $request->get('popup'),
+            return $this->widget->listAction(array(
+                'grid'      => $this->grid(),
+                'layout'    => $this->get('layout'),
+                'row'       => $this->get('row'),
             ));
         }
     }
 
     /**
-     * 查看一条记录
-     */
-    public function viewAction()
-    {
+     * 查看一条记录    */
+    public function viewAction()    {
         /*if ($this->_request->get('forward')) {
             return Qwin::call('-widget')->get('Forward')->render(array(
                 'module'    => $this->_module,
@@ -70,9 +68,13 @@ class Qwin_CrudController extends Qwin_Controller
                 'forward'   => $this->_request->get('forward'),
             ));
         }*/
+        return $this->widget->viewAction(array(
+            
+        ));
+        $this->dump($this->widget);
         return Qwin::call('-widget')->get('ViewAction')->render(array(
             'meta'      => $this->getMeta(),
-            'id'        => $this->_request->get('id'),
+            'id'        => $this->get('id'),
         ));
     }
 
@@ -81,17 +83,18 @@ class Qwin_CrudController extends Qwin_Controller
      */
     public function addAction()
     {
-        if (!$this->_request->isPost()) {
-            return $this->getWidget()->get('AddFormAction')->render(array(
-                'meta'      => $this->getMeta(),
-                'id'        => $this->_request->get('id'),
-                'search'    => $this->_request->get('search'),
+        if (!$this->request->isPost()) {
+            return $this->widget->addFormAction(array(
+                'form'      => $this->form(),
+                //'record'    => $this->record(),
+                'id'        => $this->get('id'),
             ));
         } else {
-            return Qwin::call('-widget')->get('AddAction')->render(array(
-                'meta'      => $this->getMeta(),
+            return $this->widget->addAcion(array(
+                'form'      => $this->form(),
+                'record'    => $this->record(),
                 'data'      => $_POST,
-                'url'       => urldecode($this->_request->post('_page')),
+                'url'       => urldecode($this->post('_page')),
             ));
         }
     }

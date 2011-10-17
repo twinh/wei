@@ -88,17 +88,7 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
     {
         parent::__construct($source);
         $options = &$this->options;
-        /*
-        
 
-        // 使视图一致 TODO 更合适的位置
-        $request = Qwin::call('-request');
-        if ($request['view']) {
-            $this->_url->setOption('basicParams', array(
-                'view' => $request['view'],
-            ));
-        }
-        */
         // 设置默认的目录
         !is_array($options['paths']) && $options['paths'] = (array)$options['paths'];
         if (empty($options['paths'])) {
@@ -108,19 +98,31 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         // 打开缓冲区
         ob_start();
     }
+    
+    /**
+     * 展示视图
+     */
+    public function display($layout = null, array $data = null)
+    {
+        return $this->call($layout, $data);
+    }
 
     /**
-     * 输出视图
-     * 输出视图的情况:显示数据,信息提示,跳转.
-     * 当请求是Ajax时,返回content或特定视图,
-     * 当请求是Json时,应该返回纯Json数据,以此类推.
+     * 展示视图
      *
      * @param string $layout 布局路径
-     * @param array $data 数据
-     * @return View_Widget 当前对象
+     * @param array $data 附加数据
+     * @todo 不只是输出文件,还有数据类型等等
      */
     public function call($layout = null, array $data = null)
     {
+        // 视图已输出
+        if ($this->_displayed) {
+            return false;
+        }
+        
+        $this->trigger('beforeViewDisplay');
+        
         // 部分视图常用变量
         $this->assign(array(
             'root'      => $this->config('resource') . 'view/' . $this->options['theme'] . '/',
@@ -129,17 +131,12 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
             'minify'    => $this->minify,
             'jQuery'    => $this->jQuery,
             'config'    => $this->config(),
-            'module'    => $this->config('module'),
-            'action'    => $this->config('action'),
+            'module'    => $this->module(),
+            'action'    => $this->action(),
             'theme'     => $this->options['theme'],
             'style'     => $this->style,
         ));
-        
-        // 视图已输出
-        if ($this->_displayed) {
-            return false;
-        }
-
+ 
         // 附加视图
         /*if (isset($layout)) {
             $this->_layout = array_shift($layout);
@@ -156,6 +153,7 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         }
         require $this->getElement($view);
         
+        $this->trigger('afterViewDisplay');
         
         // TODO 是否应该通过钩子加载
         // 加载当前操作的样式和脚本
@@ -335,11 +333,6 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         return $this->_packSign;
     }
 
-    public function getRefererPage()
-    {
-        return urlencode(Qwin::call('-request')->server('HTTP_REFERER'));
-    }
-
     /**
      * 设置变量
      *
@@ -406,13 +399,18 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
     public function getElement($name)
     {
         if (isset($this->_element[$name])) {
-            return $this->_element[$name];
+            foreach ($this->options['paths'] as $path) {
+                if (is_file($file = $path . $this->_element[$name])) {
+                    return $file;
+                }
+            }
+            $this->exception('File "%s" not found.', $this->_element[$name]);
         }
         
         // 在视图目录找出视图路径
         // 根路径 + 风格目录 [+模块目录]
-        $module = $this->config('module');
-        $action = $this->config('module');
+        $module = $this->module . '';
+        $action = $this->get('action');
         $fileCache = array();
         foreach ($this->options['paths'] as $path) {
             $file = $path . $this->options['theme'] . '/' . $module . '/' . $action . '-' . $name . '.php';
@@ -434,7 +432,20 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
             $fileCache[] = $file;
         }
         
-        throw new Qwin_Widget_Exception('All view files not found: "' . implode(';', $fileCache) . '".');
+        throw new Qwin_Exception('All view files not found: "' . implode(';', $fileCache) . '".');
+    }
+    
+    public function getFile($file)
+    {
+        if (file_exists($file)) {
+            return $file;
+        }
+        foreach ($this->options['paths'] as $path) {
+            if (is_file($file2 = $path . $file)) {
+                return $file2;
+            }
+        }
+        $this->exception('File "%s" not found.', $file);
     }
     
     /**
@@ -459,12 +470,7 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
      */
     public function elementExists($name)
     {
-        return isset($this->_element[$name]);
-    }
-
-    public function render($options = null)
-    {
-        return $this->display();
+        return isset($this->_element[(string)$name]);
     }
 
     /**

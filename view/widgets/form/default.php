@@ -26,9 +26,9 @@
  */
 ?>
 <div class="qw-p5">
-    <?php echo $operLinks ?>
+    <?php //echo $operLinks ?>
 </div>
-<?php $formWidget->render($formOptions) ?>
+<?php $form->render() ?>
 <div class="qw-p5">
-    <?php echo $operLinks ?>
+    <?php //echo $operLinks ?>
 </div>

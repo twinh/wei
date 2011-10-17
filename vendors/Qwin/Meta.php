@@ -36,12 +36,6 @@ require_once 'Qwin/Meta/Abstract.php';
 class Meta_Widget extends Qwin_Meta_Abstract implements Qwin_Widget_Interface
 {
     /**
-     * 当前模块根路径
-     * @var string
-     */
-    protected $_modulePath;
-
-    /**
      * 初始化对象
      *
      * @param array $input 默认数组
@@ -51,61 +45,6 @@ class Meta_Widget extends Qwin_Meta_Abstract implements Qwin_Widget_Interface
         parent::__construct($input);
         $class = get_class($this);
         $this['module'] = Qwin_Module::instance(substr($class, 0, strrpos($class, '_')));
-    }
-
-    public function render($options = null)
-    {
-
-    }
-
-    /**
-     * 获取指定键名的元数据值，元数据不存在时将抛出异常
-     *
-     * @param string $index 键名
-     * @return mixed
-     */
-    public function offsetGet($index)
-    {
-        if (parent::offsetExists($index)) {
-            return parent::offsetGet($index);
-        } elseif ($value = $this->_offsetGetByFile($index)) {
-            return $value;
-        }
-        throw new Qwin_Meta_Exception('Undefined index "' . $index . '"');
-    }
-
-    /**
-     * 根据键名加载元数据文件，元数据不存在时返回false
-     *
-     * @param string $index 键名
-     * @return mixed
-     */
-    protected function _offsetGetByFile($index, $driver = null)
-    {
-        if (!$this->_modulePath) {
-            $reflection = new ReflectionClass($this);
-            $this->_modulePath = dirname($reflection->getFileName()) . '/';
-        }
-        $file = $this->_modulePath . 'meta/' .  $index . '.php';
-        if (is_file($file)) {
-            $this->set($index, require $file, $driver);
-            return $this[$index];
-        }
-        return false;
-    }
-
-    /**
-     * 获取指定键名的元数据值，元数据不存在时返回false
-     *
-     * @param string $index 键名
-     * @return mixed
-     */
-    public function offsetLoad($index, $driver = null)
-    {
-        if (parent::offsetExists($index)) {
-            return parent::offsetGet($index);
-        }
-        return $this->_offsetGetByFile($index, $driver);
     }
 
      /**

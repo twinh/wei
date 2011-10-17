@@ -75,32 +75,36 @@ class Qwin_Module extends Qwin_Widget implements ArrayAccess
      * @var array
      */
     public static $_intances = array();
-
-    public function call()
+    
+    public function __construct($source = null)
     {
-        $this->_string = $this->source;
-        $this->_source = preg_split('/([^A-Za-z0-9])/', $this->source);
-        return $this;
+        $this->_string = (string)$source;
+        $this->_source = preg_split('/([^A-Za-z0-9])/', $source);
+    }
+
+    /**
+     * 获取/初始化一个模块类
+     * 
+     * @param string $name 模块名称
+     * @return Qwin_Module 
+     */
+    public function call($name = null)
+    {
+        // 空则返回第一个模块
+        if (!$name && !empty(self::$_intances)) {
+            return current(self::$_intances);
+        }
+        
+        !$name && $name = $this->source;
+        if (isset(self::$_intances[$name])) {
+            return self::$_intances[$name];
+        }
+        return self::$_intances[$name] = new self($name);
     }
     
     public function __toString()
     {
         return $this->_string;
-    }
-
-    /**
-     * 实例化一个模块对象
-     *
-     * @param string $module 模块名称
-     * @return Qwin_Module 模块对象
-     */
-    public static function instance($module)
-    {
-        $module = strtr(strtolower($module), self::$_replace);
-        if (!isset(self::$_intances[$module])) {
-            self::$_intances[$module] = new Qwin_Module($module);
-        }
-        return self::$_intances[$module];
     }
 
     /**
@@ -211,7 +215,7 @@ class Qwin_Module extends Qwin_Widget implements ArrayAccess
      */
     public function offsetGet($offset)
     {
-        $method = 'get' . $offset;
+        $method = 'to' . $offset;
         if (method_exists($this, $method)) {
             return call_user_func(array($this, $method));
         }

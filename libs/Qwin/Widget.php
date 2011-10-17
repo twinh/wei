@@ -81,6 +81,13 @@ class Qwin_Widget
      */
     public function option($name = null)
     {
+        // 设置所有选项
+        if (is_array($name)) {
+            $name = $name + $this->options;
+            $this->options = &$name;
+            return $this;
+        }
+        
         // 获取/设置某一个选项
         if (is_string($name) || is_int($name)) {
             if (2 == func_num_args()) {
@@ -93,12 +100,7 @@ class Qwin_Widget
         if (null === $name ) {
             return $this->options;
         }
-        
-        // 设置所有选项
-        if (is_array($name)) {
-            $this->options = $name + $this->options;
-        }
-        
+
         // 不匹配任何操作
         return null;
     }
