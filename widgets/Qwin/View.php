@@ -52,8 +52,7 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
      */
     public $options = array(
         'paths'         => array(),
-        'style'         => 'cupertino',
-        'theme'         => 'default',
+        'theme'         => 'cupertino',
         'charset'       => 'utf-8',
     );
     
@@ -88,12 +87,15 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
     {
         parent::__construct($source);
         $options = &$this->options;
-
-        // 设置默认的目录
+        
+        // 设置默认视图目录
         !is_array($options['paths']) && $options['paths'] = (array)$options['paths'];
         if (empty($options['paths'])) {
             $options['paths'][] = dirname(dirname(dirname(__FILE__))) . '/view/';
         }
+        
+        // 获取主题
+        $this->_getTheme();
 
         // 打开缓冲区
         ob_start();
@@ -125,7 +127,7 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         
         // 部分视图常用变量
         $this->assign(array(
-            'root'      => $this->config('resource') . 'view/' . $this->options['theme'] . '/',
+            'root'      => $this->config('resource') . 'view/apps/',
             'widget'    => $this,
             'lang'      => $this->lang,
             'minify'    => $this->minify,
@@ -134,7 +136,6 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
             'module'    => $this->module(),
             'action'    => $this->action(),
             'theme'     => $this->options['theme'],
-            'style'     => $this->style,
         ));
  
         // 附加视图
@@ -160,8 +161,8 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         $minify = $this->minify;
         $files = array();
         foreach ($this->options['paths'] as $path) {
-            $files[] = $path . $this->options['theme'] . '/' . $this['module'] . '/' . $this['action'] . '.js';
-            $files[] = $path . $this->options['theme'] . '/' . $this['module'] . '/' . $this['action'] . '.css';
+            $files[] = $path . 'apps/' . $this['module'] . '/' . $this['action'] . '.js';
+            $files[] = $path . 'apps/' . $this['module'] . '/' . $this['action'] . '.css';
         }
         $minify->add($files);
 
@@ -413,19 +414,19 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         $action = $this->get('action');
         $fileCache = array();
         foreach ($this->options['paths'] as $path) {
-            $file = $path . $this->options['theme'] . '/' . $module . '/' . $action . '-' . $name . '.php';
+            $file = $path . 'apps/' . $module . '/' . $action . '-' . $name . '.php';
             if (is_file($file)) {
                 return $file;
             }
             $fileCache[] = $file;
             
-            $file = $path . $this->options['theme'] . '/' . $module . '/' . $name . '.php';
+            $file = $path . 'apps/' . $module . '/' . $name . '.php';
             if (is_file($file)) {
                 return $file;
             }
             $fileCache[] = $file;
             
-            $file = $path . $this->options['theme'] . '/' . $name . '.php';
+            $file = $path . 'apps/' . $name . '.php';
             if (is_file($file)) {
                 return $file;
             }
@@ -449,12 +450,46 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
     }
     
     /**
-     * 销毁视图元素
+     * 获取主题名称,主题为jQuery UI
+     *
+     * @see http://jqueryui.com/themeroller/
+     * @return string
+     * @todo 缓存主题加速查找
+     */
+    protected function _getTheme()
+    {
+        // 按优先级排列主题的数组
+        $themes = array(
+            (string)$this->get('theme'),
+            $this->session['theme'],
+            $this->options['theme'],
+        );
+
+        foreach ($themes as $value) {
+            if ($value) {
+                $theme = $value;
+                break;
+            }
+        }
+        
+        // 在所有视图路径查找主题
+        foreach ($this->options['paths'] as $path) {
+            if (is_dir($path . 'widgets/view/themes/' . $theme)) {
+                $this->options['theme'] = $theme;
+                $this->session['theme'] = $theme;
+            }
+        }
+
+        $this->session['style'] = $this->options['theme'];
+    }
+    
+    /**
+     * 删除视图元素
      *
      * @param string $name
      * @return object 当前对象
      */
-    public function unsetElement($name)
+    public function removeElement($name)
     {
         if (isset($this->_element[$name])) {
             unset($this->_element[$name]);

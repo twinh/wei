@@ -29,7 +29,7 @@
         <td id="qw-header-left">
             <div id="qw-logo" class="ui-widget-content">
                 <a href="?">
-                    <img src="<?php echo $root ?>/images/logo.png" alt="logo" />
+                    <img src="<?php echo $root ?>images/logo.png" alt="logo" />
                 </a>
             </div>
         </td>
