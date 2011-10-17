@@ -129,6 +129,7 @@ class Member_Record extends Qwin_Record
                     'local' => 'group_id',
                 ),
             ),
+            'limit' => 10,
         );
     }
 

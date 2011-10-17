@@ -68,10 +68,11 @@ class Qwin_JsonListAction extends Qwin_Widget
     public function call(array $options = array())
     {
         $this->option(&$options);
+        $reocrd = $options['record'];
 
         // 处理每页显示数目
         $options['row'] = intval((string)$options['row']);
-        $options['row'] <= 0 && $options['row'] = $list['db']['limit'];
+        $options['row'] <= 0 && $options['row'] = $reocrd->options['limit'];
         $options['row'] > 500 && $options['row'] = 500;
         
         // 处理页数
