@@ -16,19 +16,194 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Trex
- * @subpackage  View
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2009-11-24 18:47:32
  */
+$minify->add(array(
+    $jQuery->loadUi('mouse', false),
+    $jQuery->loadUi('resizable', false),
+    $jQuery->loadPlugin('ui.form', false),
+));
 ?>
+<script type="text/javascript">
+jQuery(function($){
+    $('#qw-form').form({
+        elems: [
+            {
+                name: 'name',
+                label: 'label1'
+            },
+            {
+                name: 'name2',
+                label: 'label3'
+            },
+            {
+                elems: [
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    }
+                ]
+            },
+            {
+                elems: [
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    }
+                ]
+            },{
+                elems: [
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    }
+                ]
+            },{
+                elems: [
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    }
+                ]
+            },{
+                elems: [
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    }
+                ]
+            },{
+                elems: [
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    },
+                    {
+                        name: 'name2',
+                        label: 'label3'
+                    }
+                ]
+            }
+        ]
+    }).resizable();
+});
+</script>
+<!--
 <div class="qw-p5">
     <?php //echo $operLinks ?>
-</div>
-<?php $form->render() ?>
+</div>-->
+<form id="qw-form" class="qw-form ui-widget ui-widget-content ui-corner-all" style="width:800px;">
+    
+</form>
+<?php //$form->render() ?>
 <div class="qw-p5">
     <?php //echo $operLinks ?>
 </div>
