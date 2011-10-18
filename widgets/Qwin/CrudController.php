@@ -25,6 +25,9 @@
 
 class Qwin_CrudController extends Qwin_Controller
 {
+    /**
+     * 模块首页,默认显示列表记录
+     */
     public function indexAction()
     {
         return $this->listAction();
@@ -60,20 +63,9 @@ class Qwin_CrudController extends Qwin_Controller
     /**
      * 查看一条记录    */
     public function viewAction()    {
-        /*if ($this->_request->get('forward')) {
-            return Qwin::call('-widget')->get('Forward')->render(array(
-                'module'    => $this->_module,
-                'action'    => $this->_action,
-                'id'        => $this->_request->get('id'),
-                'forward'   => $this->_request->get('forward'),
-            ));
-        }*/
         return $this->widget->viewAction(array(
-            
-        ));
-        $this->dump($this->widget);
-        return Qwin::call('-widget')->get('ViewAction')->render(array(
-            'meta'      => $this->getMeta(),
+            'form'      => $this->form(),
+            'record'    => $this->record(),
             'id'        => $this->get('id'),
         ));
     }
