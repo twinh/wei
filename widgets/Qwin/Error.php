@@ -24,20 +24,20 @@
  * @todo        是否与视图微件耦合?是否应该整合为一个
  */
 
-class Error_Widget extends Qwin_Widget
+class Qwin_Error extends Qwin_Widget
 {   
     public $options = array(
         'exception' => true,
         //'error' => false,
     );
     
-    public function __construct(array $options = array())
-    {
-        parent::__construct($options);
-        if ($this->_options['exception']) {
-            //set_exception_handler(array($this, 'render'));
-        }
-    }
+//    public function __construct(array $options = array())
+//    {
+//        parent::__construct($options);
+//        if ($this->_options['exception']) {
+//            //set_exception_handler(array($this, 'render'));
+//        }
+//    }
     
     /**
      * 显示异常信息
@@ -46,7 +46,7 @@ class Error_Widget extends Qwin_Widget
      * @todo xdebug
      * @todo view
      */
-    public function render($e = null)
+    public function call($e = null)
     {
         restore_exception_handler();
         

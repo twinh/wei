@@ -24,7 +24,7 @@
  * @todo        各类检查
  */
 
-class DeleteAction_Widget extends Qwin_Widget
+class Qwin_DeleteAction extends Qwin_Widget
 {
     public $options = array(
         'meta'      => null,
@@ -34,23 +34,25 @@ class DeleteAction_Widget extends Qwin_Widget
         'url'       => null,
     );
 
-    public function render($options = null)
+    public function call($options = null)
     {
-        // 初始配置
-        $options = (array)$options + $this->_options;
+        $this->option(&$options);
+        $record = $options['record'];
+        $pk = $record->options['id'];
         
-        // 检查元数据是否合法
-        /* @var $meta Meta_Widget */
-        $meta = $options['meta'];
-        if (!Qwin_Meta::isValid($meta)) {
-            throw new Qwin_Widget_Exception('ERR_META_ILLEGAL');
-        }
+        $this->query
+            ->getByRecord($record)
+            ->where($pk . ' = ?', $options['id'])
+            ->execute()
+            ->delete();
         
-        // 检查数据库元数据是否合法
-        /* @var $db Qwin_Meta_Db */
-        if (!($db = $meta->offsetLoad($options['db'], 'db'))) {
-            throw new Qwin_Widget_Exception('ERR_DB_META_NOT_FOUND');
-        }
+        // 展示视图
+        $options['url'] ? $options['url'] : $this->url->url($this->module() , 'index');
+        return $options['display'] ? $this->view->success($this->lang['MSG_SUCCEEDED'], $options['url'])
+                : array(
+                    'result' => true,
+                    'data' => get_defined_vars(),
+                );
         
         // 从数据库取出记录
         $idValue = explode(',', $options['id']);

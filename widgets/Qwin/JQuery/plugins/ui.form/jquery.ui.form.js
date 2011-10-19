@@ -86,15 +86,21 @@
                     var cell = $('<div class="qw-form-cell"></div>').outerWidth(cellWidth);
                     body.append(cell);
                     
+                    // 
+                    elems[item] = $.extend({}, $.fn.form.fieldDefaults, elems[item]);
+                    if (options.data && options.data[elems[item].name]) {
+                        elems[item].value = options.data[elems[item].name];
+                    }
+                    
                     var label = $('<label class="qw-form-label" for="' + elems[item].name + '">' + elems[item].label + ':</label>');
                     cell.append(label);
                     
                     var inputWidth = cell.width() - label.outerWidth();
-                    var input = $('<div class="qw-form-elem"><input class="qw-form-text ui-widget-content qw-corner-all" type="text" value="' + elems[item].name + '"/></div>');
+                    var input = $('<div class="qw-form-elem"><input class="qw-form-text ui-widget-content qw-corner-all" type="text" id="' + elems[item].name + '" name="' + elems[item].name + '" value="' + elems[item].value + '"/></div>');
                     input.outerWidth(inputWidth);
                     
                     cell.append(input);
-                    input.find('input').outerWidth(inputWidth);
+                    input.find('input').qui().outerWidth(inputWidth);
                     cell.append('<div class="qw-clear"></div>');
                     i++;
                 }
@@ -134,8 +140,15 @@
         return this;
     };
 
+    $.fn.form.fieldDefaults = {
+        label: '',
+        type: 'text',
+        value: '',
+        name: ''
+    }
     $.fn.form.defaults = {
         title: null,
+        data: {},
         fieldDefaults: {
             
         },
@@ -143,6 +156,12 @@
             
         },
         elems: [],
-        buttons: []
+        buttons: [{
+            label: 'Submit',
+            icon: 'ui-icon-check'
+        },{
+            label: 'Reset',
+            icon: ''
+        }]
     }
 })(jQuery);

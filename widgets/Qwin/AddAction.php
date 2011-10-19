@@ -25,16 +25,15 @@
  * @since       2010-10-11 22:31:44
  */
 
-class AddAction_Widget extends Qwin_Widget
+class Qwin_AddAction extends Qwin_Widget
 {
     /**
      * 默认选项
      * @var array
      */
     public $options = array(
-        'meta'          => null,
-        'db'            => 'db',
-        'validation'    => 'validation',
+        'record'        => null,
+        'validation'    => null,
         'data'          => array(),
         'sanitise'  => array(
             'sanitiser'     => true,
@@ -46,30 +45,24 @@ class AddAction_Widget extends Qwin_Widget
         'url'           => null,
     );
 
-    public function render($options = null)
+    public function call($options = null)
     {
-        // 初始配置
-        $options = (array)$options + $this->_options;
+        $this->option(&$options);
+        $record = $options['record'];
+        $data = $options['data'];
+        $id = $record->options['id'];
         
-        // 检查元数据是否合法
-        /* @var $meta Meta_Widget */
-        $meta = $options['meta'];
-        if (!Qwin_Meta::isValid($meta)) {
-            throw new Qwin_Widget_Exception('ERR_META_ILLEGAL');
+        if (!isset($data[$id]) || !$data[$id]) {
+            $data[$id] = Qwin_Util_String::uuid();
         }
+        $record[$id] = $data[$id];
+        $record->fromArray($data);
+        $record->save();
         
-        // 检查数据库元数据是否合法
-        /* @var $db Qwin_Meta_Db */
-        if (!($db = $meta->offsetLoad($options['db'], 'db'))) {
-            throw new Qwin_Widget_Exception('ERR_DB_META_NOT_FOUND');
-        }
-
-        // 检查验证元数据是否合法
-        /* @var $validation Qwin_Meta_Validation */
-        if (!($validation = $meta->offsetLoad($options['validation'], 'validation'))) {
-            //throw new Qwin_Widget_Exception('ERR_VALIDATION_META_NOT_FOUND');
-        }
-        
+        $this->view->success($this->lang['MSG_SUCCEEDED'], $options['url']);
+        return false;
+       
+        // TODO fix
         $data = &$options['data'];
         if (isset($data[$db['id']]) && !empty($data[$db['id']])) {
             // 从数据库取出记录

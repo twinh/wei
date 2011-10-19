@@ -26,16 +26,15 @@
 /**
  * Post
  * 
- * @package     Qwin
- * @subpackage  Qwin
+ * @namespace   Qwin
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-2 0:44:56
+ * @since       2011-10-02 00:44:56
  */
 class Qwin_Post extends Qwin_Widget
 {
-    public function render($name, $default = null /*, $type='string' ?*/)
+    public function call($name, $default = null /*, $type='string' ?*/)
     {
-        return Qwin::init(isset($_GET[$name]) ? $_GET[$name] : $default);
+        return Qwin::variable(isset($_POST[$name]) ? $_POST[$name] : $default);
     }
 }

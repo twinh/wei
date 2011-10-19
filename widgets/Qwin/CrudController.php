@@ -26,7 +26,7 @@
 class Qwin_CrudController extends Qwin_Controller
 {
     /**
-     * 模块首页,默认显示列表记录
+     * 首页,默认显示列表记录
      */
     public function indexAction()
     {
@@ -61,8 +61,10 @@ class Qwin_CrudController extends Qwin_Controller
     }
 
     /**
-     * 查看一条记录    */
-    public function viewAction()    {
+     * 查看一条记录    
+     */
+    public function viewAction()
+    {
         return $this->widget->viewAction(array(
             'form'      => $this->form(),
             'record'    => $this->record(),
@@ -78,12 +80,11 @@ class Qwin_CrudController extends Qwin_Controller
         if (!$this->request->isPost()) {
             return $this->widget->addFormAction(array(
                 'form'      => $this->form(),
-                //'record'    => $this->record(),
+                'record'    => $this->record(),
                 'id'        => $this->get('id'),
             ));
         } else {
-            return $this->widget->addAcion(array(
-                'form'      => $this->form(),
+            return $this->widget->addAction(array(
                 'record'    => $this->record(),
                 'data'      => $_POST,
                 'url'       => urldecode($this->post('_page')),
@@ -96,24 +97,17 @@ class Qwin_CrudController extends Qwin_Controller
      */
     public function editAction()
     {
-        /*if ($this->_request->get('forward')) {
-            return Qwin::call('-widget')->get('Forward')->render(array(
-                'module'    => $this->_module,
-                'action'    => $this->_action,
-                'id'        => $this->_request->get('id'),
-                'forward'   => $this->_request->get('forward'),
-            ));
-        }*/
-        if (!$this->_request->isPost()) {
-            return Qwin::call('-widget')->get('EditFormAction')->render(array(
-                'meta'      => $this->getMeta(),
-                'id'        => $this->_request->get('id'),
+        if (!$this->request->isPost()) {
+            return $this->widget->editFormAction(array(
+                'form'      => $this->form(),
+                'record'    => $this->record(),
+                'id'        => $this->get('id'),
             ));
         } else {
-            return Qwin::call('-widget')->get('EditAction')->render(array(
-                'meta'      => $this->getMeta(),
+            return $this->widget->editAction(array(
+                'record'    => $this->record(),
                 'data'      => $_POST,
-                'url'       => urldecode($this->_request->post('_page')),
+                'url'       => urldecode($this->post('_page')),
             ));
         }
     }
@@ -123,9 +117,9 @@ class Qwin_CrudController extends Qwin_Controller
      */
     public function deleteAction()
     {
-        return Qwin::call('-widget')->get('DeleteAction')->render(array(
-            'meta'  => $this->getMeta(),
-            'id'    => $this->_request->get('id'),
+        return $this->widget->deleteAction(array(
+            'record'    => $this->record(),
+            'id'        => $this->get('id'),
         ));
     }
 }
