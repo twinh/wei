@@ -62,7 +62,7 @@
             endif;
         ?>
         <p>&nbsp;</p>
-        <p><a class="qw-message-link" href="<?php echo $url ?>"><?php echo qw_t('MSG_CLICK_TO_REDIRECT') ?></a></p>
+        <p><a class="qw-message-link" href="<?php echo $url ?>"><?php echo $lang['MSG_CLICK_TO_REDIRECT'] ?></a></p>
     </div>
 </div>
 <div class="qw-message-operation">

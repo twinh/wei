@@ -211,15 +211,16 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
     public function displayInfo(array $options = array())
     {
         $options = $options + $this->_infoOptions;
+        $path = $this->options['paths'][0] . 'widgets/view/';
         //$this->setElement('layout', '<root>layout<suffix>');
-        $this->setElement('content', $this->_path . 'view/info.php');
-        $this->_widget->get('minify')->add($this->_path . 'view/style.css');
+        $this->setElement('content', $path . 'info.php');
+        $this->minify->add($path . 'style.css');
 
         $content = (array)$options['content'];
         
         // 开启错误调试且不是由异常发送过来的消息时,构造运行记录
-        if (Qwin::config('debug') && !$options['exception']) {
-            $error = $this->_widget->get('error');
+        if ($this->config('debug') && !$options['exception']) {
+            $error = $this->error;
             $traces = debug_backtrace();
             $content[] =  '<pre>'
                 . $error->getTraceString($traces, 1)
@@ -227,7 +228,7 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
                 . '</pre>';
         }
         
-        $title = $this->_widget->get('lang')->t($options['title']);
+        $title = $this->lang[$options['title']];
         $url = $options['url'];
         $time = intval($options['time']);
         $meta['page']['title'] = 'MOD_INFO';
@@ -400,6 +401,9 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
     public function getElement($name)
     {
         if (isset($this->_element[$name])) {
+            if (is_file($this->_element[$name])) {
+                return $this->_element[$name];
+            }
             foreach ($this->options['paths'] as $path) {
                 if (is_file($file = $path . $this->_element[$name])) {
                     return $file;

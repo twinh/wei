@@ -23,7 +23,7 @@
  * @since       2011-05-16 12:15:56
  */
 
-class EditFormAction_Widget extends Qwin_Widget
+class Qwin_EditFormAction extends Qwin_Widget
 {
     /**
      * @var array           默认选项
@@ -39,9 +39,8 @@ class EditFormAction_Widget extends Qwin_Widget
      *      -- display      是否显示视图
      */
     public $options = array(
-        'meta'      => null,
-        'form'      => 'form',
-        'db'        => 'db',
+        'record'    => null,
+        'form'      => null,
         'id'        => null,
         'data'      => array(),
         'sanitise'  => array(
@@ -52,33 +51,16 @@ class EditFormAction_Widget extends Qwin_Widget
         'display'   => true,
     );
     
-    public function render($options = null)
+    public function call($options = null)
     {
-        // 初始配置
-        $options = (array)$options + $this->_options;
-        
-        // 检查元数据是否合法
-        /* @var $meta Com_Meta */
-        $meta = $options['meta'];
-        if (!Qwin_Meta::isValid($meta)) {
-            throw new Qwin_Widget_Exception('ERR_META_ILLEGAL');
-        }
-
-        // 检查表单元数据是否合法
-        /* @var $form Qwin_Meta_Form */
-        if (!($form = $meta->offsetLoad($options['form'], 'form'))) {
-            throw new Qwin_Widget_Exception('ERR_FROM_META_NOT_FOUND');
-        }
-
-        // 检查数据库元数据是否合法
-        /* @var $db Qwin_Meta_Db */
-        if (!($db = $meta->offsetLoad($options['db'], 'db'))) {
-            throw new Qwin_Widget_Exception('ERR_DB_META_NOT_FOUND');
-        }
+        $this->option(&$options);
+        $record = $options['record'];
+        $form = $options['form'];
         
         // 从模型获取数据
-        $id = $db['id'];
-        $query = Query_Widget::getByMeta($db)
+        $id = $record->options['id'];
+        $query = $this->query
+            ->getByRecord($record)
             ->leftJoinByType(array('db', 'view'))
             ->where($id . ' = ?', $options['id']);
         $dbData = $query->fetchOne();
@@ -86,18 +68,18 @@ class EditFormAction_Widget extends Qwin_Widget
         //throw new Exception('d');
         // 记录不存在,加载错误视图
         if (false === $dbData) {
-            return $options['display'] ? $this->_view->alert('MSG_NO_RECORD') : array(
+            return $options['display'] ? $this->view->alert('MSG_NO_RECORD') : array(
                 'result'    => false,
-                'message'   => $this->_lang['MSG_NO_RECORD'],
+                'message'   => $this->lang['MSG_NO_RECORD'],
             );
         }
 
         $data = $dbData->toArray();
 
         // 转换数据
-        if ($options['sanitise']) {
-            $data = $this->_sanitiser->sanitise($form, $data, $options['sanitise']);
-        }
+//        if ($options['sanitise']) {
+//            $data = $this->_sanitiser->sanitise($form, $data, $options['sanitise']);
+//        }
 
         // 返回结果
         if (!$options['display']) {
@@ -107,23 +89,12 @@ class EditFormAction_Widget extends Qwin_Widget
             );
         }
         
-        /* @var $formWidget Form_Widget */
-        $formWidget = $this->_form;
-        $formOptions = array(
-            'meta'      => $meta,
-            'form'      => $options['form'],
-            'db'        => $options['db'],
-            'action'    => 'edit',
-            'data'      => $data,
-        );
+        $form->options['data'] = $data;
+        $form->options['action'] = 'edit';
         
-        $view = $this->_view;
-        $view->assign(get_defined_vars());
-        $view->setElement('content', $this->_path . 'view/default.php');
-        $view['module'] = $meta->getModule();
-        $view['action'] = 'edit';
-
-        $operLinks = $this->_operLinks->render($view);
-        $view['operLinks'] = $operLinks;
+        // 加载表单视图
+        $this->view
+            ->assign(get_defined_vars())
+            ->setElement('content', 'widgets/form/default.php');
     }
 }
