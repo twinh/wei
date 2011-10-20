@@ -160,9 +160,11 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         // 加载当前操作的样式和脚本
         $minify = $this->minify;
         $files = array();
+        $action = $this->get('action', 'index');
+        $module = $this->module();
         foreach ($this->options['paths'] as $path) {
-            $files[] = $path . 'apps/' . $this['module'] . '/' . $this['action'] . '.js';
-            $files[] = $path . 'apps/' . $this['module'] . '/' . $this['action'] . '.css';
+            $files[] = $path . 'apps/' . $this['module'] . '/' . $action . '.js';
+            $files[] = $path . 'apps/' . $this['module'] . '/' . $action . '.css';
         }
         $minify->add($files);
 
@@ -414,8 +416,9 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         
         // 在视图目录找出视图路径
         // 根路径 + 风格目录 [+模块目录]
-        $module = $this->module . '';
-        $action = $this->get('action');
+        $module = (string)$this->module();
+        $action = (string)$this->get('action', 'index');
+
         $fileCache = array();
         foreach ($this->options['paths'] as $path) {
             $file = $path . 'apps/' . $module . '/' . $action . '-' . $name . '.php';
@@ -436,10 +439,17 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
             }
             $fileCache[] = $file;
         }
-        
+
         throw new Qwin_Exception('All view files not found: "' . implode(';', $fileCache) . '".');
     }
     
+    /**
+     * 从视图目录获取文件路径
+     * 
+     * @param string $file 文件相对链接
+     * @return string 
+     * @todo cache
+     */
     public function getFile($file)
     {
         if (file_exists($file)) {
