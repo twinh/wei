@@ -37,4 +37,9 @@ class Qwin_Post extends Qwin_Widget
     {
         return Qwin::variable(isset($_POST[$name]) ? $_POST[$name] : $default);
     }
+    
+    public function toArray()
+    {
+        return array('fds' => 'fds');
+    }
 }

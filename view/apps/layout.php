@@ -29,7 +29,6 @@ $minify->add(array(
     qwin.get = <?php echo json_encode($_GET) ?>;
     qwin.lang = <?php echo json_encode($lang->toArray()) ?>;
 </script>
-<!--<script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>-->
 </head>
 <body>
 <div id="qw-body" class="ui-widget-content">
@@ -43,6 +42,7 @@ else :
     <tr id="qw-main" class="ui-widget-content">
         <?php require $this->getElement('left') ?>
         <td id="qw-center">
+            <?php $this->trigger('beforeContentLoad') ?>
             <?php //Qwin::hook('viewContentHeader') ?>
             <div id="qw-content">
                 <?php require $this->getElement('content') ?>
