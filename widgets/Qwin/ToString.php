@@ -32,6 +32,10 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-2 0:45:51
  */
-class ToString {
-    
+class Qwin_ToString extends Qwin_Widget
+{
+    public function call()
+    {
+        return (string)$this->source;
+    }
 }

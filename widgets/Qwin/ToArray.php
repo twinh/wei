@@ -32,6 +32,10 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-2 0:43:31
  */
-class ToArray {
-    
+class Qwin_ToArray extends Qwin_Widget
+{
+    public function call()
+    {
+        return (array)$this->source;
+    }
 }
