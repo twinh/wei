@@ -21,30 +21,29 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2011-02-05 21:01:08
- * @todo        适配器模式?
+ * @todo        优化
  */
+class Qwin_Hook extends Qwin_Widget {
 
-class Qwin_Hook
-{
     /**
-     * 默认配置
+     * 选项
      * @var array
      */
     public $options = array(
-        'path' => '../widget/',
-        'cachePath' => '../cache/',
-        'lifetime' => 86400,
-        /*'file' => 'hook.php',
-        'depth' => 2,
-        'class' => 'classPattern',
-        'method' => 'hookPattern',*/
+        'paths' => array(),
     );
-
+    
     /**
-     * 当前配置
+     * 过滤器列表
+     * @var array 
+     */
+    protected $_filters = array();
+    
+    /**
+     * 事件列表
      * @var array
      */
-    protected $_options = array();
+    protected $_events = array();
 
     /**
      * 钩子数据
@@ -52,194 +51,116 @@ class Qwin_Hook
      */
     protected $_data = array();
 
-    /**
-     * 已调用过的钩子
-     * @var array
-     */
-    protected $_called = array();
-
-    /**
-     * 初始化,设置配置
-     * @param array $option 配置,参照默认配置
-     */
-    public function  __construct(array $option = array())
+    public function __construct($source = null)
     {
-        !empty($option) && $this->setOption($option);
-        $cacheFile = $this->_options['cachePath'] . 'hook.php';
+        // 初始化选项
+        parent::__construct($source);
+        $options = &$this->options;
 
-        if (!is_file($cacheFile)) {
-            file_put_contents($cacheFile, null);
+        // 设置默认目录
+        if (empty($options['paths'])) {
+            $options['paths'] = array(
+                dirname(dirname(dirname(__FILE__))) . '/widgets/'
+            );
         }
-        if ($this->_options['lifetime'] < $_SERVER['REQUEST_TIME'] - filemtime($cacheFile)) {
-            $this->update();
+
+        // 获取钩子缓存
+        $data = $this->cache->get('hook');
+        if (!$data) {
+            $files = array();
+            foreach ($options['paths'] as $path) {
+                $this->findHooks($path);
+            }
+            $this->cache->set('hook', array(
+                'filters' => $this->_filters,
+                'events' => $this->_events,
+            ));
         } else {
-            $this->_data = (array)require $cacheFile;
+            $this->_filters = $data['filters'];
+            $this->_events = $data['events'];
         }
     }
 
     /**
-     * 设置配置
-     *
-     * @param array $option 配置,参照默认配置
-     * @return Qwin_Hook 
+     * 查找钩子
+     *  
+     * @param string $dir 当前查找目录
+     * @param string $root 根目录
+     * @todo 整理优化
      */
-    public function setOption($option)
+    public function findHooks($dir, $root = null)
     {
-        $this->_options = array_merge($this->_defaults, $option);
-        if (!is_dir($this->_options['path'])) {
-            throw new Qwin_Hook_Exception('The path "' . $this->_options['path'] . '" can not be found.');
+        if (null == $root) {
+            $root = $dir;
         }
-        return $this;
-    }
-
-    /**
-     * 动态添加一个钩子
-     *
-     * @param string $name 钩子名称
-     * @param array $callback 简单回调结构
-     * @return Qwin_Hook 当前对象
-     */
-    public function set($name, array $callback)
-    {
-        if (!isset($callback[0]) || !is_callable($callback[0])) {
-            throw new Qwin_Hook_Exception('The callback param is not callable.');
-        }
-        $this->_data[$name] = $callback;
-        return $this;
-    }
-
-    /**
-     * 更新钩子缓存数据
-     *
-     * @return Qwin_Hook 当前对象
-     * @uses Qwin_Util_File::writeArray 写入钩子数据
-     */
-    public function update()
-    {
-        if (!is_dir($this->_options['cachePath'])) {
-            throw new Qwin_Hook_Exception('The cache path "' . $this->_options['cachePath'] . '" can not be found.');
-        }
-
-        // 清空原有钩子脚本
-        $this->_data = array();
-        $pathList = scandir($this->_options['path']);
-        foreach ($pathList as $path) {
-            if ('.' == $path || '..' == $path) {
-                continue;
-            }
-            
-            // 是否存在钩子文件
-            $file = $this->_options['path'] . $path . '/Hook.php';
-            if (!is_file($file)) {
-                continue;
-            }
-
-            // 是否存在钩子类
-            require_once $file;
-            $class = $path . '_Hook';
-            if (!class_exists($class)) {
-                continue;
-            }
-
-            // 是否继承父类
-            /*if ('Qwin_Hook_Abstract' != get_parent_class($class)) {
-                continue;
-            }*/
-
-            $reflection = new ReflectionClass($class);
-            $properties = $reflection->getDefaultProperties();
-            $priorities = array_change_key_case($properties['_priorities']);
-            $methods    = get_class_methods($class);
-
-            foreach ($methods as $method) {
-                if ('hook' == substr($method, 0, 4)) {
-                    $name = strtolower(substr($method, 4));
-
-                    // 以优先级作为键名,当优先级相同时,往后递增
-                    // 当数量庞大时,应进行优化
-                    !isset($priorities[$name]) && $priorities[$name] = 50;
-                    while (isset($this->_data[$name][$priorities[$name]])) {
-                        $priorities[$name]++;
+        
+        $return = array();
+        $files = glob($dir . '/*');
+        foreach ($files as $file) {
+            if (is_dir($file)) {
+                $this->findHooks($file, $root);
+                //$return = array_merge($return, $this->findFiles($file, $root));
+            } else {
+                if ('.php' == substr($file, -4)) {
+                    // 过滤非类文件
+                    $name = basename($file);
+                    $ord = ord($name[0]);
+                    if (65 > ord($name[0]) || 90 < ord($name[0])) {
+                        continue;
                     }
                     
-                    $this->_data[$name][$priorities[$name]] = array(
-                        'file' => $file,
-                        'class' => strtolower($class),
-                    );
+                    // 根据文件名称和根目录的相对路径,反向获取类名称
+                    $class = substr($file, strlen($root), -4);
+                    $class = ltrim($class, '/\\');
+                    $class = strtr($class, '/', '_');
+
+                    require_once $file;
+                    if (!class_exists($class)) {
+                        continue;
+                    }
+                    
+                    $vars = get_class_vars($class);
+                    $priorities = isset($vars['priorities']) ? (array)$vars['priorities'] : array();
+                    $methods = get_class_methods($class);
+                    
+                    foreach ($methods as $method) {
+                        $method = strtolower($method);
+                        // 处理事件
+                        if ('trigger' == substr($method, 0, 7)) {
+                            $name = strtolower(substr($method, 7));
+                            
+                            !isset($priorities[$method]) && $priorities[$method] = 50;
+                            while (isset($this->_events[$name][$priorities[$method]])) {
+                                $priorities[$method]++;
+                            }
+                            $this->_events[$name][$priorities[$method]] = array(
+                                'file' => realpath($file),
+                                'class' => strtolower($class),
+                            );
+                            
+                        // 处理过滤器
+                        } elseif ('filter' == substr($method, 0, 6)) {
+                            $name = strtolower(substr($method, 6));
+                            
+                            !isset($priorities[$method]) && $priorities[$method] = 50;
+                            while (isset($this->_filters[$name][$priorities[$method]])) {
+                                $priorities[$method]++;
+                            }
+                            $this->_filters[$name][$priorities[$method]] = array(
+                                'file' => realpath($file),
+                                'class' => strtolower($class),
+                            );
+                        }
+                    }
                 }
+                //array_push($return, $file);
             }
         }
-
-        // 根据优先级排序
-        foreach ($this->_data as &$value) {
-            ksort($value);
-        }
-
-        Qwin_Util_File::writeArray($this->_options['cachePath'] . '/hook.php', $this->_data);
-        return $this;
+        //return $return;
     }
-
-    /**
-     * 调用钩子脚本
-     *
-     * @param string $name 钩子名称
-     * @param mixed $param 参数
-     * @return Qwin_Hook|string 当前对象|字符串
-     */
-    public function call($name, array $param = array())
+    
+    public function call()
     {
-        $return = '';
-        $name = strtolower($name);
-        if (isset($this->_data[$name])) {
-            foreach ($this->_data[$name] as $callback) {
-                // 默认文件形式
-                if (isset($callback['file'])) {
-                    require_once $callback['file'];
-                    $result = call_user_func(
-                        array(Qwin::call($callback['class']), 'hook' . $name),
-                        $param
-                    );
-                // 自定义回调结构形式
-                } else {
-                    $callback[1] = isset($callback[1]) ? array_merge($callback[1], $param) : $param;
-                    $result = call_user_func_array($callback[0], $callback[1]);
-                }
-                if (is_string($result)) {
-                    $return .= $result;
-                }
-            }
-        }
-        if ($return) {
-            return $return;
-        }
-        return $this;
-    }
-
-    /**
-     * 是否调用过某一个钩子
-     *
-     * @param string $name 钩子名称
-     * @return bool
-     */
-    public function isCalled($name)
-    {
-        return isset($this->_called[$name]);
-    }
-
-    /**
-     * 清空钩子脚本
-     *
-     * @param string|null $name 不存在时,清空所有的钩子;存在时,清空指定名称的钩子
-     * @return Qwin_Hook 当前对象
-     */
-    public function clear($name = null)
-    {
-        if (!$name) {
-            $this->_data = array();
-        }
-        if (isset($this->_data[$name])) {
-            $this->_data[$name] = array();
-        }
         return $this;
     }
 }

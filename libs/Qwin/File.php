@@ -23,18 +23,22 @@
  */
 
 /**
- * Call
+ * File
  * 
  * @namespace   Qwin
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-11 15:49:30
+ * @since       2011-10-23 14:26:10
  */
-class Qwin_Call extends Qwin_Widget
+class Qwin_File extends Qwin_Widget
 {
-    /**
-     * 
-     * @var array
-     */
-    protected $_data = array();
+    public function call()
+    {
+        return $this;
+    }
+    
+    public function find($paths)
+    {
+        
+    }
 }

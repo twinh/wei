@@ -28,12 +28,7 @@
  * @since       2010-07-28 17:26:04
  */
 
-/**
- * @see Qwin_Meta_Abstract
- */
-require_once 'Qwin/Meta/Abstract.php';
-
-class Meta_Widget extends Qwin_Meta_Abstract implements Qwin_Widget_Interface
+class Meta_Widget
 {
     /**
      * 初始化对象
