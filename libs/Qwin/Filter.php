@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Qwin Framework
  *
@@ -16,25 +17,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  Exception
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-04-18 11:56:29
  */
 
-class Qwin_Exception extends Exception
+/**
+ * Filter
+ * 
+ * @namespace   Qwin
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2011-10-23 17:23:26
+ */
+class Qwin_Filter extends Qwin_Widget
 {
-    public function __construct($msg = '', $code = 0)
-    {
-        parent::__construct($msg, (int)$code);
-    }
-    
     public function call()
     {
-        $this->message = call_user_func_array('sprintf', func_get_args());
-        throw $this;
+        
     }
 }

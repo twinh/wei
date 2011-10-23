@@ -37,4 +37,24 @@ class Qwin_File extends Qwin_Widget
     {
         return $this;
     }
+    
+    public function write($data)
+    {
+        
+    }
+    
+    public function read()
+    {
+        
+    }
+    
+    public function writeArray($data)
+    {
+        
+    }
+    
+    public function mkdir()
+    {
+        
+    }
 }

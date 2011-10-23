@@ -16,25 +16,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  Exception
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-04-18 11:56:29
  */
 
-class Qwin_Exception extends Exception
+/**
+ * Bind
+ * 
+ * @namespace   Qwin
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2011-10-23 17:29:38
+ */
+class Qwin_Bind extends Qwin_Widget
 {
-    public function __construct($msg = '', $code = 0)
+    /**
+     * 绑定事件
+     * 
+     * @see Qwin_Event::add()
+     * @param string $event 事件名称
+     * @param mixed $callback 回调结构
+     * @return void
+     */
+    public function call($event, $callback, $priority = 10)
     {
-        parent::__construct($msg, (int)$code);
-    }
-    
-    public function call()
-    {
-        $this->message = call_user_func_array('sprintf', func_get_args());
-        throw $this;
+        return $this->event->add($event, $callback, $priority);
     }
 }

@@ -39,6 +39,11 @@ class Menu_Widget extends Qwin_Widget
             'title' => 'ACT_MORE',
         ),
     );
+    
+    public function triggerBeforeContentLoad()
+    {
+        
+    }
 
     public function render($options = null)
     {
