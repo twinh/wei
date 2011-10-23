@@ -1,6 +1,6 @@
 <?php
 /**
- * Qwin Framework
+ * header
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -16,38 +16,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ * @package     Common
+ * @subpackage  View
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
+ * @since       2011-01-04 15:53:16
  */
-
-/**
- * Callback
- * 
- * @namespace   Qwin
- * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-13 15:23:16
- */
-class Qwin_Callback extends Qwin_Widget
-{
-    /**
-     * 处理回调结构
-     * 
-     * @param mixed $callback 回调结构
-     * @param array $params 数组参数
-     * @return mixed 
-     * @todo :: -> ?
-     */
-    public function call($callback, array $params = null)
-    {
-        if (!$callback || !is_callable($callback)) {
-            return null;
-        }
-        if (is_string($callback[0])) {
-            $callback[0] = $this->qwin->call($callback[0]);
-        }
-        return call_user_func_array($callback, (array)$params);
-    }
-}
+?>
+<div class="qw-content-header">
+    <img class="qw-content-header-icon" src="<?php echo $icon ?>" alt="" />&nbsp;
+    <a href="<?php echo $moduleUrl ?>"><?php echo $moduleTitle ?></a>&nbsp;&raquo;&nbsp;<a href="<?php echo $actionUrl ?>"><?php echo $actionTitle ?></a>
+</div>
