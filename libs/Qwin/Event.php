@@ -54,23 +54,25 @@ class Qwin_Event extends Qwin_Widget
     public function call($name, $params)
     {
         $name = strtolower($name);
-        if (isset($this->data[$name])) {
-            foreach ($this->data[$name] as $event) {
-                if (isset($event['file'])) {
-                    if (!is_file($event['file'])) {
-                        continue;
-                    }
-                    
-                    require_once $event['file'];
-                    $callback = array($event['class'], 'trigger' . $name);
-                } else {
-                    $callback = $event['callback'];
+        if (!isset($this->data[$name])) {
+            return $this;
+        }
+
+        foreach ($this->data[$name] as $event) {
+            if (isset($event['file'])) {
+                if (!is_file($event['file'])) {
+                    continue;
                 }
-                
-                // 如果返回false,终止继续调用事件
-                if (false === $this->callback($callback, $params)) {
-                    return false;
-                }
+
+                require_once $event['file'];
+                $callback = array($event['class'], 'trigger' . $name);
+            } else {
+                $callback = $event['callback'];
+            }
+
+            // 如果返回false,终止继续调用事件
+            if (false === $this->callback($callback, $params)) {
+                return false;
             }
         }
         

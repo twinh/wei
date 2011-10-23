@@ -76,6 +76,17 @@ class Qwin_Hook extends Qwin_Widget {
             foreach ($options['paths'] as $path) {
                 $this->findHooks($path);
             }
+            
+            // 根据优先级排序
+            foreach ($this->events as &$value) {
+                ksort($value);
+            }
+            unset($value);
+
+            foreach ($this->filters as &$value) {
+                ksort($value);
+            }
+            
             $this->cache->set('hook', array(
                 'filters' => $this->filters,
                 'events' => $this->events,
@@ -123,7 +134,7 @@ class Qwin_Hook extends Qwin_Widget {
                     if (!class_exists($class)) {
                         continue;
                     }
-                    
+
                     $vars = get_class_vars($class);
                     $priorities = isset($vars['priorities']) ? (array)$vars['priorities'] : array();
                     $methods = get_class_methods($class);
@@ -131,7 +142,7 @@ class Qwin_Hook extends Qwin_Widget {
                     foreach ($methods as $method) {
                         $method = strtolower($method);
                         // 处理事件
-                        if (7 > strlen($method) && 'trigger' == substr($method, 0, 7)) {
+                        if (7 < strlen($method) && 'trigger' == substr($method, 0, 7)) {
                             $name = strtolower(substr($method, 7));
                             
                             !isset($priorities[$method]) && $priorities[$method] = 50;
@@ -144,7 +155,7 @@ class Qwin_Hook extends Qwin_Widget {
                             );
                             
                         // 处理过滤器
-                        } elseif (6 > strlen($method) && 'filter' == substr($method, 0, 6)) {
+                        } elseif (6 < strlen($method) && 'filter' == substr($method, 0, 6)) {
                             $name = strtolower(substr($method, 6));
                             
                             !isset($priorities[$method]) && $priorities[$method] = 50;
@@ -156,16 +167,6 @@ class Qwin_Hook extends Qwin_Widget {
                                 'class' => strtolower($class),
                             );
                         }
-                    }
-                    
-                    // 根据优先级排序
-                    foreach ($this->events as &$value) {
-                        ksort($value);
-                    }
-                    unset($value);
-                    
-                    foreach ($this->filters as &$value) {
-                        ksort($value);
                     }
                 }
             }
