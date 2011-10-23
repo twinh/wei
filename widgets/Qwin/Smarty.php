@@ -23,13 +23,13 @@
  * @since       2011-04-15 22:00:11 v0.7.9
  */
 
-class Smarty_Widget extends Qwin_Widget
+class Qwin_Smarty extends Qwin_Widget
 {
     /**
      * Smarty对象
      * @var Smarty
      */
-    protected $_smarty;
+    protected $smarty;
 
     /**
      * 默认选项
@@ -39,18 +39,23 @@ class Smarty_Widget extends Qwin_Widget
     public $options = array(
         'compile_dir' => null,
     );
-
+    
     public function __construct(array $options = array())
     {
         parent::__construct($options);
         
-        require_once $this->_path . 'libs/Smarty.class.php';
-        $this->_smarty = Qwin::call('Smarty');
+        require_once dirname(__FILE__) . '/Smarty/Smarty.class.php';
+        $this->smarty = $this->qwin->call('Smarty');
 
         // 设定选项
-        foreach ($this->_options as $key => $value) {
-            $this->_smarty->$key = $value;
+        foreach ($this->options as $key => $value) {
+            $this->smarty->$key = $value;
         }
+    }
+    
+    public function call()
+    {
+        return $this->smarty;
     }
 
     /**
@@ -62,7 +67,7 @@ class Smarty_Widget extends Qwin_Widget
      */
     public function  __call($name, $arguments)
     {
-        return call_user_func_array(array($this->_smarty, $name), $arguments);
+        return call_user_func_array(array($this->smarty, $name), $arguments);
     }
 
     /**
@@ -71,6 +76,6 @@ class Smarty_Widget extends Qwin_Widget
      */
     public function getObject()
     {
-        return $this->_smarty;
+        return $this->smarty;
     }
 }

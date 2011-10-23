@@ -20,10 +20,10 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-6-20 18:25:53
+ * @since       2011-06-20 18:25:53
  */
 
-class Menu_Widget extends Qwin_Widget
+class Qwin_Menu extends Qwin_Widget
 {
     /**
      * 默认选项
@@ -40,37 +40,31 @@ class Menu_Widget extends Qwin_Widget
         ),
     );
     
-    public function triggerBeforeContentLoad()
-    {
-        
-    }
-
-    public function render($options = null)
+    public function triggerHeaderRight()
     {
         // 加载页眉导航的缓存
-        $menus = require Qwin::config('root') . 'cache/menu.php';
+        $menus = require $this->cache->options['dir'] . 'menu.php';
 
         // 将超出的菜单附加到“更多"的菜单下
-        $this->_options = $this->_defaults;
-        if ($this->_options['max'] < count($menus[0])) {
+        if ($this->options['max'] < count($menus[0])) {
             // "更多"菜单的子菜单
-            $moreMenus = array_splice($menus[0], $this->_options['max']);
+            $moreMenus = array_splice($menus[0], $this->options['max']);
 
             // 根菜单
-            $menus[0] = array_splice($menus[0], 0, $this->_options['max']);
+            $menus[0] = array_splice($menus[0], 0, $this->options['max']);
 
             // 附加“更多”的菜单
-            $this->_defaults['more']['title'] = $this->_Lang[$this->_defaults['more']['title']];
+            $this->options['more']['title'] = $this->lang[$this->_defaults['more']['title']];
             $menus[0] += array(
-                'more' => $this->_defaults['more']
+                'more' => $this->options['more']
             );
             $menus[1]['more'] = $moreMenus;
         }
 
         // 增加Qwin链接
         $menus['qwin'] = array(
-            'title' => $this->_lang['LBL_QWIN'],
-            'url' => $this->_url->url('home', 'index'),
+            'title' => $this->lang['LBL_QWIN'],
+            'url' => $this->url->url('home', 'index'),
         );
 
         // 页面名称
@@ -78,19 +72,19 @@ class Menu_Widget extends Qwin_Widget
         $pageUrl = basename($_SERVER['PHP_SELF']) . $queryString;
 
         // 获取用户信息
-        $member = Qwin::call('-session')->get('member');
+        $member = $this->session->get('member');
         
         // 加载样式和脚本
-        $minify = $this->_widget->get('minify');
-        $minify->add(array(
-            $this->_path . 'view/default.css',
-            $this->_path . 'view/default.js',
+        $view = $this->view;
+        $this->minify->add(array(
+            $view->getFile('widgets/menu/default.css'),
+            $view->getFile('widgets/menu/default.js'),
         ));
         
-        $smarty = $this->_widget->get('smarty')->getObject();
-        $smarty->assign('lang', $this->_lang);
+        $smarty = $this->smarty->getObject();
+        $smarty->assign('lang', $this->lang);
         $smarty->assign('member', $member);
         $smarty->assign('menus', $menus);
-        $smarty->display($this->_path . 'view/default.tpl');
+        $smarty->display($view->getFile('widgets/menu/default.tpl'));
     }
 }
