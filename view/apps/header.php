@@ -34,7 +34,7 @@
             </div>
         </td>
         <td id="qw-header-right" colspan="2">
-            <?php //Qwin::hook('viewHeaderRight') ?>
+            <?php $this->trigger('headerRight') ?>
         </td>
     </tr>
 </table>
