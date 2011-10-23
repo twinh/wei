@@ -39,10 +39,10 @@ class Qwin_Widget
     public $source;
     
     /**
-     * 对象环的上一个微件
+     * 调用者,对象环的上一个对象
      * @var mixed
      */
-    public $prevWidget;
+    public $invoker;
 
     /**
      * 选项
@@ -126,7 +126,7 @@ class Qwin_Widget
         }
 
         // 执行相应方法
-        $widget->prevWidget = $this;
+        $widget->invoker = $this;
         $widget->source = $this->source;
         $result = call_user_func_array(array($widget, 'call'), $args);
         $this->source = $widget->source;
@@ -142,7 +142,7 @@ class Qwin_Widget
     public function __get($name)
     {
         $this->$name = Qwin::widget($name);
-        $this->$name->prevWidget = $this;
+        $this->$name->invoker = $this;
         return $this->$name;
     }
     

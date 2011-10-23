@@ -199,6 +199,6 @@ class Qwin_Session extends Qwin_Widget implements ArrayAccess
      */
     public function __destruct()
     {
-        $this->offsetUnset('prevWidget');
+        $this->offsetUnset('invoker');
     }
 }

@@ -33,7 +33,7 @@ class Qwin_Record extends Doctrine_Record
      */
     protected static $_connected = false;
     
-    public $prevWidget;
+    public $invoker;
     
     public $source;
     

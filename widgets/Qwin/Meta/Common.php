@@ -25,7 +25,7 @@
  * @method mixed set*(mixed $value) magic finders; @see __call()
  */
 
-class Qwin_Meta_Common extends ArrayObject implements Qwin_Meta_Interface
+class Qwin_Meta_Common extends ArrayObject
 {
     /**
      * 默认选项

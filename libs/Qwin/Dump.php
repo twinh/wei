@@ -37,7 +37,7 @@ class Qwin_Dump extends Qwin_Widget
     {
         $args = func_get_args();
         if (empty($args)) {
-            var_dump($this->prevWidget);
+            var_dump($this->invoker);
             exit;
         }
         var_dump($value);
