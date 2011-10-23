@@ -171,6 +171,11 @@ class Qwin_Module extends Qwin_Widget implements ArrayAccess
         }
         return $this->_data['lang'];
     }
+    
+    public function toString()
+    {
+        return implode(' ', $this->_source);
+    }
 
     /**
      * 检查是否存在索引

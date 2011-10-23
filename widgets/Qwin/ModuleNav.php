@@ -1,6 +1,6 @@
 <?php
 /**
- * header
+ * Widget
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -16,22 +16,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Common
- * @subpackage  View
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-04 15:53:16
+ * @since       2011-03-27 01:42:40
  */
-?>
-<div class="qw-content-header">
-<?php
-if($icon):
-?>
-<img class="qw-content-header-icon" src="<?php echo $icon ?>" alt="<?php echo $options['view']['meta']['page']['icon'] ?>" />&nbsp;
-<?php
-endif;
-echo $header;
-?>
-</div>
+
+class Qwin_ModuleNav extends Qwin_Widget
+{
+    public function triggerBeforeContentLoad()
+    {
+        $module = $this->module();
+        $action = $this->get('action', 'index');
+        $view = $this->view;
+        $lang = $this->lang;
+        $url = $this->url;
+        
+        $icon = $view->getFile('apps/icons/document_32.png');
+        $moduleUrl = $url->url->url($module->toUrl());
+        $moduleTitle = $lang[$module->toString()];
+        
+        $actionUrl = $url->build();
+        $actionTitle = $lang[$action->toString()];
+        
+        $this->minify->add($view->getFile('widgets/modulenav/default.css'));
+        require $view->getFile('widgets/modulenav/default.php');
+    }
+}

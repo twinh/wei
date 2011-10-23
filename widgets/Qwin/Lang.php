@@ -101,6 +101,7 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
         foreach ($options['appPaths'] as $path) {
             $file = $path . $options['path'] . $name . '.php';
             if (null != $name && is_file($file)) {
+                $this->_appendFile($file);
                 return $this->_appendFile($file);
             }
         }
@@ -115,7 +116,7 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
             }
         }
         
-        throw new Qwin_Widget_Exception('Language file "' . $file . '" for "' . $name . '" not found.');
+        $this->exception('Language file "' . $file . '" for "' . $name . '" not found.');
     }
 
     /**
@@ -159,7 +160,7 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
             $module = Qwin_Module::instance($module);
         }
         foreach ($this->options['appPaths'] as $path) {
-            $file = $path . $module->getPath() . $this->options['path'] . $this->_name . '.php';
+            $file = $path . $module->toPath() . $this->options['path'] . $this->_name . '.php';
             if (is_file($file)) {
                 return $this->_appendFile($file);
             }
