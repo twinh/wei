@@ -25,11 +25,10 @@
 /**
  * Dump
  * 
- * @package     Qwin
- * @subpackage  Qwin
+ * @namespace   Qwin
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-5 12:04:07
+ * @since       2011-10-05 12:04:07
  */
 class Qwin_Dump extends Qwin_Widget
 {

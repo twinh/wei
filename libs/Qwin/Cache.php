@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Qwin Framework
  *
@@ -31,7 +30,6 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-23 13:50:07
  * @todo        优化
- *              
  */
 class Qwin_Cache extends Qwin_Widget
 {

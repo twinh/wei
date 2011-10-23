@@ -29,16 +29,12 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-23 14:26:10
+ * @todo        what to do ?
  */
 class Qwin_File extends Qwin_Widget
 {
     public function call()
     {
         return $this;
-    }
-    
-    public function find($paths)
-    {
-        
     }
 }

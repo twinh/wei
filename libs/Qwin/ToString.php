@@ -34,8 +34,8 @@
  */
 class Qwin_ToString extends Qwin_Widget
 {
-    public function call()
+    public function call($mixed = null)
     {
-        return (string)$this->source;
+        return $mixed ? (string)$mixed : (string)$this->source;
     }
 }
