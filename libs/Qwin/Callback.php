@@ -1,5 +1,4 @@
-u<?php
-
+<?php
 /**
  * Qwin Framework
  *
@@ -39,6 +38,7 @@ class Qwin_Callback extends Qwin_Widget
      * @param mixed $callback 回调结构
      * @param array $params 数组参数
      * @return mixed 
+     * @todo :: -> ?
      */
     public function call($callback, array $params = null)
     {
