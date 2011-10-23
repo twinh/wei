@@ -43,10 +43,10 @@ else :
         <?php require $this->getElement('left') ?>
         <td id="qw-center">
             <?php $this->trigger('beforeContentLoad') ?>
-            <?php //Qwin::hook('viewContentHeader') ?>
             <div id="qw-content">
                 <?php require $this->getElement('content') ?>
             </div>
+            <?php $this->trigger('afterContentLoad') ?>
         </td>
         <?php require $this->getElement('right') ?>
     </tr>

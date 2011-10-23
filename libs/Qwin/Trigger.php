@@ -33,9 +33,8 @@
  */
 class Qwin_Trigger extends Qwin_Widget
 {
-    public function call($event)
+    public function call($event, $param = array())
     {
-        // todo 触发事件$event
-        return $this;
+        return $this->event->call($event, $param);
     }
 }

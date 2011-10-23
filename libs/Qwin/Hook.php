@@ -28,22 +28,27 @@ class Qwin_Hook extends Qwin_Widget {
     /**
      * 选项
      * @var array
+     * 
+     *       paths      array       钩子目录
+     * 
+     *       expire     int         缓存有效期
      */
     public $options = array(
-        'paths' => array(),
+        'paths'     => array(),
+        'expire'    => 86400,
     );
     
     /**
      * 过滤器列表
      * @var array 
      */
-    protected $_filters = array();
+    public $filters = array();
     
     /**
      * 事件列表
      * @var array
      */
-    protected $_events = array();
+    public $events = array();
 
     /**
      * 钩子数据
@@ -72,12 +77,12 @@ class Qwin_Hook extends Qwin_Widget {
                 $this->findHooks($path);
             }
             $this->cache->set('hook', array(
-                'filters' => $this->_filters,
-                'events' => $this->_events,
-            ));
+                'filters' => $this->filters,
+                'events' => $this->events,
+            ), $options['expire']);
         } else {
-            $this->_filters = $data['filters'];
-            $this->_events = $data['events'];
+            $this->filters = $data['filters'];
+            $this->events = $data['events'];
         }
     }
 
@@ -126,37 +131,47 @@ class Qwin_Hook extends Qwin_Widget {
                     foreach ($methods as $method) {
                         $method = strtolower($method);
                         // 处理事件
-                        if ('trigger' == substr($method, 0, 7)) {
+                        if (7 > strlen($method) && 'trigger' == substr($method, 0, 7)) {
                             $name = strtolower(substr($method, 7));
                             
                             !isset($priorities[$method]) && $priorities[$method] = 50;
-                            while (isset($this->_events[$name][$priorities[$method]])) {
+                            while (isset($this->events[$name][$priorities[$method]])) {
                                 $priorities[$method]++;
                             }
-                            $this->_events[$name][$priorities[$method]] = array(
+                            $this->events[$name][$priorities[$method]] = array(
                                 'file' => realpath($file),
                                 'class' => strtolower($class),
                             );
                             
                         // 处理过滤器
-                        } elseif ('filter' == substr($method, 0, 6)) {
+                        } elseif (6 > strlen($method) && 'filter' == substr($method, 0, 6)) {
                             $name = strtolower(substr($method, 6));
                             
                             !isset($priorities[$method]) && $priorities[$method] = 50;
-                            while (isset($this->_filters[$name][$priorities[$method]])) {
+                            while (isset($this->filters[$name][$priorities[$method]])) {
                                 $priorities[$method]++;
                             }
-                            $this->_filters[$name][$priorities[$method]] = array(
+                            $this->filters[$name][$priorities[$method]] = array(
                                 'file' => realpath($file),
                                 'class' => strtolower($class),
                             );
                         }
                     }
+                    
+                    // 根据优先级排序
+                    foreach ($this->events as &$value) {
+                        ksort($value);
+                    }
+                    unset($value);
+                    
+                    foreach ($this->filters as &$value) {
+                        ksort($value);
+                    }
                 }
-                //array_push($return, $file);
             }
         }
-        //return $return;
+        
+        return $this;
     }
     
     public function call()

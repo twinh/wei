@@ -55,12 +55,9 @@ class Qwin_App extends Qwin_Widget
      */
     public function call(array $options = array())
     {
-        // 启用钩子
-        $this->hook();
-        
         // 合并选项
         $this->option(&$options);
-        
+
         // 设置启动时间
         !$options['startTime'] && $options['startTime'] = microtime(true);
         
