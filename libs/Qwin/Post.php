@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Qwin Framework
  *
@@ -36,10 +35,5 @@ class Qwin_Post extends Qwin_Widget
     public function call($name, $default = null /*, $type='string' ?*/)
     {
         return Qwin::variable(isset($_POST[$name]) ? $_POST[$name] : $default);
-    }
-    
-    public function toArray()
-    {
-        return array('fds' => 'fds');
     }
 }

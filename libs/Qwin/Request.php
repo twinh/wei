@@ -24,6 +24,7 @@
  * @version     $Id$
  * @since       2010-02-13 23:02
  * @todo        缩减重复代码
+ * @todo        通过Qwin_Request获取的值,为原生态,通过Qwin_Get等获取的值为对象
  */
 
 class Qwin_Request extends Qwin_Widget implements ArrayAccess

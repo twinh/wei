@@ -30,10 +30,10 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-16 15:23:14
  */
-class Qwin_ToInt
+class Qwin_ToInt extends Qwin_Widget
 {
-    public function call()
+    public function call($mixed = null)
     {
-        return intval($this->source);
+        return $mixed ? intval($mixed) : intval($this->source);
     }
 }

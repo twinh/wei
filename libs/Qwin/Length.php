@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Qwin Framework
  *
@@ -26,12 +25,27 @@
 /**
  * Length
  * 
- * @package     Qwin
- * @subpackage  Qwin
+ * @namespace   Qwin
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-2 0:41:02
+ * @since       2011-10-02 00:41:02
  */
-class Length {
-    
+class Qwin_Length extends Qwin_Widget
+{
+    /**
+     * 获取长度
+     * 
+     * @param type $mixed
+     * @return int
+     */
+    public function call($mixed = null)
+    {
+        $mixed = $mixed ? $mixed : $this->source;
+        if (is_string($mixed)) {
+            return strlen($miexd);
+        } elseif (is_array($mixed)) {
+            return count($miexd);
+        }
+        return false;
+    }
 }

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Qwin Framework
  *
@@ -30,8 +29,63 @@
  * @subpackage  Qwin
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-2 0:45:14
+ * @since       2011-10-02 00:45:14
  */
-class Cookies {
+class Qwin_Cookie extends Qwin_Widget
+{
+    /**
+     * 设置或获取Cookie
+     * 
+     * @param string $key 名称
+     * @return mixed 
+     */
+    public function call($key)
+    {
+        $args = func_get_args();
+        
+        if (2 == count($args)) {
+            return $this->set($key, $args[1]);
+        } else {
+            return $this->get($key);
+        }
+    }
     
+    /**
+     * 获取Cookie
+     * 
+     * @param string $key 名称
+     * @param mixed $default 默认值
+     * @return mixed
+     */
+    public function get($key, $default = null)
+    {
+        return isset($_COOKIE[$key]) ? @unserialize($_COOKIE[$key]) : $default;
+    }
+    
+    /**
+     * 设置Cookie
+     * 
+     * @param string $key 名称
+     * @param mixed $value 值
+     * @param int $expire 过期时间
+     * @todo 更多选项
+     */
+    public function set($key, $value, $expire = 0)
+    {
+        $_COOKIE[$key] = serialize($value);
+        setcookie($key, $_COOKIE[$key], $expire);
+    }
+    
+    /**
+     * 移除Cookie
+     * 
+     * @param string $key 名称 
+     */
+    public function remove($key)
+    {
+        if (isset($_COOKIE[$key])) {
+            unset($_COOKIE[$key]);
+            setcookie($key, null, -1);
+        }
+    }
 }
