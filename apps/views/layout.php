@@ -9,7 +9,7 @@ echo $this->getPackerSign();
 $minify->add(array(
     $jQuery->loadTheme($this->options['theme']),
     $this->getFile('views/style.css'),
-    //$this->getFile('apps/icons/icon.css'),
+    $this->getFile('views/icons/icon.css'),
     $jQuery->loadCore(false),
     $jQuery->loadUi('core', false),
     $jQuery->loadUi('widget', false),
@@ -19,7 +19,7 @@ $minify->add(array(
     $jQuery->loadPlugin('qui', null, false),
     $jQuery->loadPlugin('blockUI', null, false),
     $jQuery->loadPlugin('metadata', null, false),
-    $root . 'style.js',
+    $this->getFile('views/style.js'),
 ));
 ?>
 <!--[if IE 6]>
