@@ -23,15 +23,15 @@
  * @since       2011-08-22 23:44:15
  */
 
-class Doc_Controller extends Controller_Widget
+class Doc_Controller extends Qwin_Controller
 {
     protected $_ignoreTags = array(
         'nternal', 'event',
     );
     
-    public function actionIndex()
+    public function indexAction()
     {
-        $request = $this->_request;
+        $request = $this->request;
         $type = $request->get('type');
         $name = $request->get('name');
 
@@ -46,20 +46,20 @@ class Doc_Controller extends Controller_Widget
             } elseif (interface_exists($name)) {
                 $type = 'Interface';
             } else {
-                $this->_view->alert('Class or interface "' . $name . '" not found.');
+                $this->view->alert('Class or interface "' . $name . '" not found.');
             }
             $reflection = new Qwin_Reflection_Class($name);
         } elseif (function_exists($name)) {
             $type = 'Function';
             $reflection = new Qwin_Reflection_Function($name);
         } else {
-            $this->_view->alert('Function "' . $name . '" not found.');
+            $this->view->alert('Function "' . $name . '" not found.');
         }
         
         // get the relative file name
         $relativeFile = false;
         $file = $reflection->getFileName();
-        foreach ($this->_app->getOption('paths') as $path) {
+        foreach ($this->app->option('paths') as $path) {
             $path = realpath(dirname($path) . '/');
             if (false !== ($pos = strpos($file, $path))) {
                 $relativeFile = substr($file, strlen($path));
@@ -70,7 +70,7 @@ class Doc_Controller extends Controller_Widget
         $tags = $data['tags'];
         $ignoreTags = $this->_ignoreTags;
 
-        $this->_view->assign(get_defined_vars());
+        $this->view->assign(get_defined_vars());
     }
     
     public function actionPackage()
@@ -122,8 +122,8 @@ class Doc_Controller extends Controller_Widget
         $data = array();
         $type == 'Interface' && $type = 'class';
         
-        foreach ($this->_app->getOption('paths') as $path) {
-            $file = dirname($path) . '/docs/' . $this->_lang->getName() . '/' . strtolower($type) . '.' . strtolower($name) . '.php';
+        foreach ($this->app->option('paths') as $path) {
+            $file = dirname($path) . '/docs/' . $this->lang->getName() . '/' . strtolower($type) . '.' . strtolower($name) . '.php';
             if (is_file($file)) {
                 $data = require $file;
             }

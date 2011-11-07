@@ -24,7 +24,7 @@
  */
 
 return array(
-    'MOD_DOC' => '文档',
+    'Doc' => '文档',
     'Overview' => '概述',
     'Class' => '类',
     'class' => '类',
