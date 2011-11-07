@@ -76,11 +76,11 @@ class Qwin_App extends Qwin_Widget
         $this->trigger('appStartup');
 
         // 获取模块和行为对象
-        $options['module'] = $module = $this->get('module', $options['module'])->module();
-        $options['action'] = $action = $this->get('action', $options['action'])->action();
+        $options['module'] = $this->get('module', $options['module'])->module();
+        $options['action'] = $this->get('action', $options['action'])->action();
 
         // 获取控制器并执行相应行为
-        $this->controller()->action($action);
+        $this->controller()->action($options['action']);
 
         // 展示视图
         $this->view();

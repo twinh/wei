@@ -33,8 +33,18 @@
 
 class Qwin_Action extends Qwin_Widget
 {
+    protected $_source;
+    
     public function call()
     {
+        if (!$this->_source && $this->source) {
+            $this->_source = $this->source;
+        }
         return $this;
+    }
+    
+    public function __toString()
+    {
+        return $this->_source;
     }
 }

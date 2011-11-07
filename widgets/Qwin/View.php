@@ -160,7 +160,7 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         // 加载当前操作的样式和脚本
         $minify = $this->minify;
         $files = array();
-        $action = $this->get('action', 'index');
+        $action = $this->action();
         $module = $this->module();
         foreach ($this->options['paths'] as $path) {
             $files[] = $path . 'apps/' . $this['module'] . '/' . $action . '.js';
