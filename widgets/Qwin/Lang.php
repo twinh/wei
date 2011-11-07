@@ -58,7 +58,7 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
      */
     public $options = array(
         'name'       => 'zh-CN',
-        'path'       => 'lang/',
+        'path'       => 'langs/',
     );
     
     //public $widget;
