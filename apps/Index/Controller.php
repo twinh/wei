@@ -1,6 +1,6 @@
 <?php
 /**
- * Meta
+ * Home
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -20,10 +20,18 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-7-11 14:19:01
+ * @since       2011-01-09 09:42:41
  */
 
-class Home_Meta extends Meta_Widget
+class Index_Controller extends Qwin_Controller
 {
-    
+    public function indexAction()
+    {
+        
+    }
+
+    public function updateLogAction()
+    {
+        
+    }
 }

@@ -35,10 +35,10 @@ class Qwin_ModuleNav extends Qwin_Widget
         
         $icon = $view->getFile('apps/icons/document_32.png');
         $moduleUrl = $url->url->url($module->toUrl());
-        $moduleTitle = $lang[$module->toString()];
+        $moduleTitle = $lang[ucfirst($module->toString())];
         
         $actionUrl = $url->build();
-        $actionTitle = $lang[$action->toString()];
+        $actionTitle = $lang[ucfirst($action->toString())];
         
         $this->minify->add($view->getFile('widgets/modulenav/default.css'));
         require $view->getFile('widgets/modulenav/default.php');

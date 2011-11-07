@@ -169,4 +169,6 @@ return array(
     'ERR_LIST_META_NOT_FOUND' => '未找到列表元数据.',
     'UNTITLED' => '(无标题)',
     'READONLY' => '只读',
+    
+    'Index' => '主页',
 );

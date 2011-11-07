@@ -39,9 +39,9 @@ class Qwin_App extends Qwin_Widget
      */
     public $options = array(
         'paths'         => null,
-        'module'        => 'home',
+        'module'        => 'index',
         'action'        => 'index',
-        'timezone'      => null,
+        'timezone'      => 'Asia/Shanghai',
         'startTime'     => null,
     );
     
@@ -78,7 +78,7 @@ class Qwin_App extends Qwin_Widget
         // 获取模块和行为对象
         $options['module'] = $module = $this->get('module', $options['module'])->module();
         $options['action'] = $action = $this->get('action', $options['action'])->action();
-        
+
         // 获取控制器并执行相应行为
         $this->controller()->action($action);
 

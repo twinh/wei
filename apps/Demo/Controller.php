@@ -26,27 +26,22 @@
  * @todo        Download
  * @todo        Copy and send to others
  */
-class Demo_Controller extends ActionController_Widget
+class Demo_Controller extends Qwin_CrudController
 {
-    public function actionIndex()
+    public function indexAction()
     {
-        $tag = $this->_request->get('tag');
+        $tag = $this->request->get('tag');
         if (!$tag) {
-            return $this->_view->alert('Tag name should not be empty.');
+            return $this->view->alert('Tag name should not be empty.');
         }
-        
-        $data = Query_Widget::getByModule('demo')->where('tags = ?', $tag)->fetchArray();
+        $this->record;
+        $data = $this->query->getByRecord($this->record())->where('tags = ?', $tag)->fetchArray();
         
         $tag = htmlspecialchars($tag);
         if (empty($data)) {
-            return $this->_view->alert(sprintf('Tag "%s" does not have any demos.', $tag));
+            return $this->view->alert(sprintf('Tag "%s" does not have any demos.', $tag));
         }
         
-        $this->_view->assign(get_defined_vars());
-    }
-    
-    public function actionList()
-    {
-        return parent::actionIndex();
+        $this->view->assign(get_defined_vars());
     }
 }
