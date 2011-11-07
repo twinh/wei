@@ -60,39 +60,39 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
         'name'       => 'zh-CN',
         'path'       => 'lang/',
     );
+    
+    //public $widget;
 
     /**
      * 初始化语言微件
      * 
      * @param array $options 选项
      * @return Lang_Widget
+     * @todo 简化
      */
     public function  __construct(array $options = null)
     {
         parent::__construct($options);
         $options = &$this->options;
         
-        /**
-         * 注意:语言微件有自己的__get,__set方法,通过语言微件加载其他微件,应通过
-         *     $this->_wiget->get('name'),而不能直接使用$tihs->_name取得.
-         */
-        // 设置应用目录和微件目录
-        $options['appPaths'] = Qwin::widget('app')->option('paths');
+        // 获取目录
+        $options['appPaths'] = &$this->app->options['paths'];
 
         // 通过应用根目录检查语言是否存在
 
         /* @var $session Qwin_Session */
-        $session = Qwin::widget('session');
+        $session = $this->session;
+        $module = $this->module();
 
-        // 用户请求$request
-        //$name = $this->get('lang');
-        $name = null;
+        // 用户请求
+        $name = $this->request->get('lang');
         $this->_name = &$name;
         foreach ($options['appPaths'] as $path) {
             $file = $path . $options['path'] . $name . '.php';
             if (null != $name && is_file($file)) {
                 $session['lang'] = $name;
-                return $this->_appendFile($file);
+                $this->_appendFile($file);
+                return $this->appendByModule($module);
             }
         }
         
@@ -102,7 +102,7 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
             $file = $path . $options['path'] . $name . '.php';
             if (null != $name && is_file($file)) {
                 $this->_appendFile($file);
-                return $this->_appendFile($file);
+                return $this->appendByModule($module);
             }
         }
         
@@ -112,7 +112,8 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
             $file = $path . $options['path'] . $name . '.php';
             if (null != $name && is_file($file)) {
                 $session['lang'] = $name;
-                return $this->_appendFile($file);
+                $this->_appendFile($file);
+                return $this->appendByModule($module);
             }
         }
         
@@ -121,12 +122,9 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
 
     /**
      * 附加文件数据
-     *
-     * @param string $file 文件路径
-     * @example $file = $this->isExist('zh-CN');
-     *          if (!$file) {
-     *              $this->_appendFile($file);
-     *          }
+     * 
+     * @param type $file 文件路径
+     * @return Qwin_Lang 
      */
     protected function _appendFile($file)
     {
@@ -141,7 +139,7 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
      * 获取当前的语言名称
      *
      * @return string
-     */
+     */ 
     public function getName()
     {
         return $this->_name;
@@ -207,40 +205,6 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
     public function t($name = null)
     {
         return isset($this->_data[$name]) ? $this->_data[$name] : $name;
-    }
-    
-    /**
-     * 翻译一个域名称
-     * 
-     * @param string $name 域名称
-     * @return string
-     */
-    public function f($name = null)
-    {
-        $name = 'FLD_' . strtoupper($name);
-        return isset($this->_data[$name]) ? $this->_data[$name] : $name;
-    }
-
-    /**
-     * 通过魔术方法设置一个属性的值
-     *
-     * @param string $name 名称
-     * @param mixed $value 值
-     */
-    public function __set($name, $value)
-    {
-        $this->_data[$name] = $value;
-    }
-
-    /**
-     * 通过魔术方法获取一个属性的值
-     *
-     * @param string $name 名称
-     * @return mixed
-     */
-    public function __get($name)
-    {
-        return isset($this->_data[$name]) ? $this->_data[$name] : null;
     }
 
     /**

@@ -37,6 +37,18 @@ class Qwin_Record extends Doctrine_Record
     
     public $source;
     
+    public $dbOptions = array(
+        'type'      => 'mysql',
+        'server'    => 'localhost',
+        'username'  => 'root',
+        'password'  => '',
+        'database'  => 'qwin',
+        'prefix'    => 'qwin_',
+        'port'      => 3306,
+        'charset'   => 'utf8',
+        'collate'   => 'utf8_general_ci',
+    );
+    
     /**
      * @var array $_defaults        默认选项
      *
@@ -106,10 +118,12 @@ class Qwin_Record extends Doctrine_Record
     );
     
     public function __construct($table = null, $isNewEntry = false)
-    {
+    {        
         // 保证连接数据库链接上,否则出现异常
-        self::connect();
+        self::connect((array)$table + $this->dbOptions);
+        
         $this->getRecordData();
+        
         parent::__construct($table, $isNewEntry);
     }
     
@@ -214,27 +228,26 @@ class Qwin_Record extends Doctrine_Record
      * @return void
      * @todo 配置应该更规范
      */
-    public static function connect()
+    public static function connect(array $options = array())
     {
         if (!self::$_connected) {
             $manager = Doctrine_Manager::getInstance();
-            $db = Qwin::getInstance()->config('database');
-            $adapter = $db['type'] . '://'
-                     . $db['username'] . ':'
-                     . $db['password'] . '@'
-                     . $db['server'] . '/'
-                     . $db['database'];
+            $adapter = $options['type'] . '://'
+                     . $options['username'] . ':'
+                     . $options['password'] . '@'
+                     . $options['server'] . '/'
+                     . $options['database'];
             $conn = $manager->openConnection($adapter);
 
             // 设置字段查询带引号
             $conn->setAttribute(Doctrine_Core::ATTR_QUOTE_IDENTIFIER, true);
 
             // 设置数据表名称格式
-            $manager->setAttribute(Doctrine_Core::ATTR_TBLNAME_FORMAT, $db['prefix'] . '%s');
+            $manager->setAttribute(Doctrine_Core::ATTR_TBLNAME_FORMAT, $options['prefix'] . '%s');
 
             // 设置字符集
-            $conn->setCharset($db['charset']);
-            $conn->setCollate($db['collate']);
+            $conn->setCharset($options['charset']);
+            $conn->setCollate($options['collate']);
 
             self::$_connected = true;
         }
