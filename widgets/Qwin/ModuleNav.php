@@ -27,6 +27,7 @@ class Qwin_ModuleNav extends Qwin_Widget
 {
     public function triggerBeforeContentLoad()
     {
+        return $this;
         $module = $this->module();
         $action = $this->get('action', 'index');
         $view = $this->view;
