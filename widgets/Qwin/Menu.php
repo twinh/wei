@@ -75,16 +75,17 @@ class Qwin_Menu extends Qwin_Widget
         $member = $this->session->get('member');
         
         // 加载样式和脚本
+        $this->_path = dirname(__FILE__) . '/Menu/';
         $view = $this->view;
         $this->minify->add(array(
-            $view->getFile('widgets/menu/default.css'),
-            $view->getFile('widgets/menu/default.js'),
+            $view->getFile($this->_path . 'default.css'),
+            $view->getFile($this->_path . 'default.js'),
         ));
         
         $smarty = $this->smarty->getObject();
         $smarty->assign('lang', $this->lang);
         $smarty->assign('member', $member);
         $smarty->assign('menus', $menus);
-        $smarty->display($view->getFile('widgets/menu/default.tpl'));
+        $smarty->display($this->_path . 'default.tpl');
     }
 }

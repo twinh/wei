@@ -31,11 +31,11 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-09-20 15:13:38
  */
-class Ide_Code_Controller extends Controller_Widget
+class Ide_Code_Controller extends Qwin_Controller
 {  
-    public function actionIndex()
+    public function indexAction()
     {
-        $request = $this->_request;
+        $request = $this->request;
         $value = htmlspecialchars($request->get('value'));
         $type = Qwin_Util_Array::forceInArray($request->get('type'), array('object', 'file'));
         
@@ -61,10 +61,10 @@ class Ide_Code_Controller extends Controller_Widget
         } else {
             // It's not allowed to show config file.
             if (strripos($value, 'config.php')) {
-                return $this->_view->alert(sprintf('File "%s" not found.', htmlspecialchars($value)));
+                return $this->view->alert(sprintf('File "%s" not found.', htmlspecialchars($value)));
             }
 
-            foreach ($this->_app->getOption('paths') as $path) {
+            foreach ($this->app->option('paths') as $path) {
                 $file = dirname($path) . '/' . $value;
                 if (is_file($file)) {
                     $data = file_get_contents($file);
@@ -72,10 +72,10 @@ class Ide_Code_Controller extends Controller_Widget
             }
             
             if (!isset($data)) {
-                return $this->_view->alert(sprintf('File "%s" not found.', htmlspecialchars($value)));
+                return $this->view->alert(sprintf('File "%s" not found.', htmlspecialchars($value)));
             }
         }
         
-        return $this->_view->assign(get_defined_vars());
+        return $this->view->assign(get_defined_vars());
     }
 }

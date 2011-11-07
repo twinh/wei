@@ -95,4 +95,9 @@ class Qwin_JQuery extends Qwin_Widget
             'css' => $this->_path . 'plugins/' . $name . '/jquery.' . $name . '.css',
         );
     }
+    
+    public function loadTheme($name)
+    {
+        return $this->_path . 'themes/' . $name . '/jquery.ui.theme.css';
+    }
 }

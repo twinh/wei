@@ -38,7 +38,7 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
      * 视图元素数组
      * @var array
      */
-    protected $_element;
+    protected $_elements;
 
     /**
      * 视图是否已展示
@@ -47,7 +47,7 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
     protected $_displayed = false;
 
     /**
-     * 默认选项
+     * 选项
      * @var array
      */
     public $options = array(
@@ -88,11 +88,8 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         parent::__construct($source);
         $options = &$this->options;
         
-        // 设置默认视图目录
-        !is_array($options['paths']) && $options['paths'] = (array)$options['paths'];
-        if (empty($options['paths'])) {
-            $options['paths'][] = dirname(dirname(dirname(__FILE__))) . '/view/';
-        }
+        // 设置视图根目录为应用根目录
+        $this->options['paths'] = &$this->app->options['paths'];
         
         // 获取主题
         $this->_getTheme();
@@ -396,44 +393,37 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
      */
     public function setElement($name, $element)
     {
-        $this->_element[$name] = $element;
+        $this->_elements[$name] = $element;
         return $this;
     }
     
     public function getElement($name)
     {
-        if (isset($this->_element[$name])) {
-            if (is_file($this->_element[$name])) {
-                return $this->_element[$name];
+        // 如果已定义视图元素,从视图元素中获取文件
+        if (isset($this->_elements[$name])) {
+            if (is_file($this->_elements[$name])) {
+                return $this->_elements[$name];
             }
             foreach ($this->options['paths'] as $path) {
-                if (is_file($file = $path . $this->_element[$name])) {
+                if (is_file($file = $path . $this->_elements[$name])) {
                     return $file;
                 }
             }
-            $this->exception('File "%s" not found.', $this->_element[$name]);
+            $this->exception('File "%s" not found.', $this->_elements[$name]);
         }
         
-        // 在视图目录找出视图路径
-        // 根路径 + 风格目录 [+模块目录]
-        $module = (string)$this->module();
-        $action = (string)$this->get('action', 'index');
-
-        $fileCache = array();
+        // 未定义视图元素,则查找该应用目录下的视图文件
+        $module = $this->module()->toPath();
+        $action = $this->action()->toString();
         foreach ($this->options['paths'] as $path) {
-            $file = $path . 'apps/' . $module . '/' . $action . '-' . $name . '.php';
+            $file = $path . $module . 'views/' . $action . '-' . $name . '.php';
             if (is_file($file)) {
                 return $file;
+            } else {
+                $fileCache[] = $file;
             }
-            $fileCache[] = $file;
             
-            $file = $path . 'apps/' . $module . '/' . $name . '.php';
-            if (is_file($file)) {
-                return $file;
-            }
-            $fileCache[] = $file;
-            
-            $file = $path . 'apps/' . $name . '.php';
+            $file = $path . 'views/' . $name . '.php';
             if (is_file($file)) {
                 return $file;
             }
@@ -506,8 +496,8 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
      */
     public function removeElement($name)
     {
-        if (isset($this->_element[$name])) {
-            unset($this->_element[$name]);
+        if (isset($this->_elements[$name])) {
+            unset($this->_elements[$name]);
         }
         return $this;
     }
@@ -520,7 +510,7 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
      */
     public function elementExists($name)
     {
-        return isset($this->_element[(string)$name]);
+        return isset($this->_elements[(string)$name]);
     }
 
     /**
