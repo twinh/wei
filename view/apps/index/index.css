@@ -1,6 +1,5 @@
-<?php
 /**
- * Zhcn
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -20,10 +19,29 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-09 09:49:53
- */
+*/
 
-return array(
-    'ACT_ABOUT' => '关于Qwin',
-    'ACT_UPDATELOG' => '更新日志',
-);
+/**
+ * index
+ * 
+ * @namespace   Qwin
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2011-11-7 14:13:04
+*/
+.ui-updatelog{
+    margin: 10px;
+}
+.ui-updatelog li{
+    font-weight: bold;
+    line-height: 28px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+.ui-updatelog ul li{
+    font-weight: normal;
+    height: 24px;
+    line-height: 24px;
+    font-size: 14px;
+    margin: 0 0 0 30px;
+}
