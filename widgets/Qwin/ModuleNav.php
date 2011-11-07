@@ -27,21 +27,21 @@ class Qwin_ModuleNav extends Qwin_Widget
 {
     public function triggerBeforeContentLoad()
     {
-        return $this;
         $module = $this->module();
-        $action = $this->get('action', 'index');
+        $action = $this->action();
         $view = $this->view;
         $lang = $this->lang;
         $url = $this->url;
         
-        $icon = $view->getFile('apps/icons/document_32.png');
+        $icon = $view->getFile('views/icons/document_32.png');
         $moduleUrl = $url->url->url($module->toUrl());
         $moduleTitle = $lang[ucfirst($module->toString())];
         
         $actionUrl = $url->build();
         $actionTitle = $lang[ucfirst($action->toString())];
         
-        $this->minify->add($view->getFile('widgets/modulenav/default.css'));
-        require $view->getFile('widgets/modulenav/default.php');
+        $this->_path = dirname(__FILE__) . '/ModuleNav/';
+        $this->minify->add($this->_path . 'default.css');
+        require $this->_path . 'default.php';
     }
 }
