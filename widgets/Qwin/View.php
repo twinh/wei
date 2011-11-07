@@ -158,10 +158,10 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         $minify = $this->minify;
         $files = array();
         $action = $this->action();
-        $module = $this->module();
+        $modulePath = $this->module()->toPath();
         foreach ($this->options['paths'] as $path) {
-            $files[] = $path . 'apps/' . $this['module'] . '/' . $action . '.js';
-            $files[] = $path . 'apps/' . $this['module'] . '/' . $action . '.css';
+            $files[] = $path . $modulePath . 'views/' . $action . '.js';
+            $files[] = $path . $modulePath . 'views/' . $action . '.css';
         }
         $minify->add($files);
 
