@@ -50,38 +50,9 @@ class Qwin_Minify extends Qwin_Widget
     public function  __construct(array $options = null)
     {
         parent::__construct($options);
-        if (isset($options['cachePath'])) {
-            $this->setCachePath($options['cachePath']);
-        }
+        $this->_cachePath = $this->cache->options['dir'] . 'minify/';
     }
     
-    
-    /**
-     * 设置缓存路径
-     *
-     * @param string $path 路径
-     * @return Qwin_Widget 当前对象
-     */
-    public function setCachePath($path)
-    {
-        if (is_dir($path)) {
-            $this->_cachePath = $path;
-            return $this;
-        }
-        throw new Qwin_Widget_Exception('Path "' . $path . '" no found.');
-    }
-
-    /**
-     * 获取缓存路径
-     * 
-     * @return string
-     */
-    public function getCachePath()
-    {
-        return $this->_cachePath;
-    }
-
-
     public function call($options = null)
     {
         return $this;
