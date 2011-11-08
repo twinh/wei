@@ -23,10 +23,11 @@
  * @since       2011-05-28 12:42:31
  */
 
-class Ide_Controller extends Controller_Widget
+class Ide_Controller extends Qwin_Controller
 {
-    public function actionIndex()
+    public function indexAction()
     {
+        return true;
         $request = $this->_request;
         $lang = $this->getWidget()->call('Lang');
         if ($request->isJson()) {

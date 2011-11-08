@@ -32,13 +32,32 @@ class Qwin_ModuleNav extends Qwin_Widget
         $view = $this->view;
         $lang = $this->lang;
         $url = $this->url;
+        $navs = array();
         
+        // 构造父模块的链接
+        $parent = $module->getParent();
+        while($parent) {
+            $lang->appendByModule($parent);
+            $navs[] = array(
+                'title' => $lang[$parent->toLang()],
+                'url' => $url->url($parent->toUrl()),
+            );
+            $parent = $parent->getParent();
+        }
+ 
+        // 构造当前模块的链接
+        $navs[] = array(
+            'title' => $lang[$module->toLang()],
+            'url' => $url->url($module->toUrl()),
+        );
+        
+        // 构造行为的链接
+        $actionNav = array(
+            'title' => $lang[ucfirst($action->toString())],
+            'url' => $url->build(),
+        );
+
         $icon = $view->getUrlFile('views/icons/document_32.png');
-        $moduleUrl = $url->url->url($module->toUrl());
-        $moduleTitle = $lang[ucfirst($module->toString())];
-        
-        $actionUrl = $url->build();
-        $actionTitle = $lang[ucfirst($action->toString())];
         
         $this->_dir = dirname(__FILE__) . '/ModuleNav/';
         $this->minify->add($this->_dir . 'default.css');
