@@ -44,6 +44,7 @@ class Qwin_Module extends Qwin_Widget implements ArrayAccess
         'path'      => null,
         'class'     => null,
         'id'        => null,
+        'lang'      => null,
     );
 
     /**
@@ -76,8 +77,13 @@ class Qwin_Module extends Qwin_Widget implements ArrayAccess
     
     public function __construct($source = null)
     {
-        $this->_string = (string)$source;
-        $this->_source = preg_split('/([^A-Za-z0-9])/', $source);
+        //$this->_string = (string)$source;
+        $source = explode('/', $source);
+        foreach ($source as &$value) {
+            $value = explode('-', $value);
+        }
+        $this->_source = $source;
+        //$this->_source = preg_split('/([^A-Za-z0-9])/', $source);
     }
 
     /**
@@ -102,7 +108,7 @@ class Qwin_Module extends Qwin_Widget implements ArrayAccess
     
     public function __toString()
     {
-        return $this->_string;
+        return $this->toString();
     }
 
     /**
@@ -113,7 +119,12 @@ class Qwin_Module extends Qwin_Widget implements ArrayAccess
     public function toId()
     {
         if (empty($this->_data['id'])) {
-            $this->_data['id'] = strtolower(implode('-', $this->_source));
+            $sources = array();
+            foreach ($this->_source as $source) {
+                $sources[] = implode('', $source);
+            }
+            $this->_data['id'] = strtolower(implode('-', $sources));
+            //$this->_data['id'] = strtolower(implode('-', $this->_source));
         }
         return $this->_data['id'];
     }
@@ -126,7 +137,12 @@ class Qwin_Module extends Qwin_Widget implements ArrayAccess
     public function toPath()
     {
         if (empty($this->_data['path'])) {
-            $this->_data['path'] = implode('/', array_map('ucfirst', $this->_source)) . '/';
+            $sources = array();
+            foreach ($this->_source as $source) {
+                $sources[] = implode('', array_map('ucfirst', $source));
+            }
+            $this->_data['path'] = implode('/', $sources) . '/';
+            //$this->_data['path'] = implode('/', array_map('ucfirst', $this->_source)) . '/';
         }
         return $this->_data['path'];
     }
@@ -139,7 +155,12 @@ class Qwin_Module extends Qwin_Widget implements ArrayAccess
     public function toUrl()
     {
         if (empty($this->_data['url'])) {
-            $this->_data['url'] = strtolower(implode('/', $this->_source));
+            $sources = array();
+            foreach ($this->_source as $source) {
+                $sources[] = implode('-', $source);
+            }
+            $this->_data['url'] = strtolower(implode('/', $sources));
+            //$this->_data['url'] = strtolower(implode('/', $this->_source));
         }
         return $this->_data['url'];
     }
@@ -152,14 +173,49 @@ class Qwin_Module extends Qwin_Widget implements ArrayAccess
     public function toClass()
     {
         if (empty($this->_data['class'])) {
-            $this->_data['class'] = implode('_', array_map('ucfirst', $this->_source));
+            $sources = array();
+            foreach ($this->_source as $source) {
+                $sources[] = implode('', array_map('ucfirst', $source));
+            }
+            $this->_data['class'] = implode('_', $sources);
+            //$this->_data['class'] = implode('_', array_map('ucfirst', $this->_source));
         }
         return $this->_data['class'];
     }
 
+    /**
+     * 获取模块字符串名称
+     * 
+     * @return string 
+     */
     public function toString()
     {
-        return implode(' ', $this->_source);
+        if (!$this->_string) {
+            $sources = array();
+            foreach ($this->_source as $source) {
+                $sources[] = implode('', array_map('ucfirst', $source));
+            }
+            $this->_string = implode(' ', $sources);
+        }
+        return $this->_string;
+    }
+    
+    public function toLang()
+    {
+        if (!$this->_data['lang']) {
+            end($this->_source);
+            $this->_data['lang'] = ucfirst(implode('', $this->_source[key($this->_source)]));
+            reset($this->_source);
+        }
+        return $this->_data['lang'];
+    }
+    
+    public function getParent()
+    {
+        if (1 == count($this->_source)) {
+            return false;
+        }
+        return $this->module(implode('-', $this->_source[0]));
     }
 
     /**

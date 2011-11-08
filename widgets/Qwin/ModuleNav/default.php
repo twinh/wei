@@ -27,5 +27,12 @@
 ?>
 <div class="qw-content-header">
     <img class="qw-content-header-icon" src="<?php echo $icon ?>" alt="" />&nbsp;
-    <a href="<?php echo $moduleUrl ?>"><?php echo $moduleTitle ?></a>&nbsp;&raquo;&nbsp;<a href="<?php echo $actionUrl ?>"><?php echo $actionTitle ?></a>
+    <?php
+    foreach ($navs as $nav) :
+    ?>
+    <a href="<?php echo $nav['url'] ?>"><?php echo $nav['title'] ?></a>&nbsp;&raquo;
+    <?php 
+    endforeach;
+    ?>
+    <a href="<?php echo $actionNav['url'] ?>"><?php echo $actionNav['title'] ?></a>
 </div>
