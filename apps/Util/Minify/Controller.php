@@ -33,13 +33,15 @@ class Util_Minify_Controller extends Qwin_Controller
         $options['minApp']['groupsOnly'] = true;
 
         // IIS may need help
-        if (0 === stripos(PHP_OS, 'win')) {
-            $_SERVER['DOCUMENT_ROOT'] = dirname($this->config('root'));
+        if(empty($_SERVER['DOCUMENT_ROOT']) && !empty($_SERVER['SCRIPT_FILENAME'])) {
+            $_SERVER['DOCUMENT_ROOT'] = str_replace( '\\', '/', substr($_SERVER['SCRIPT_FILENAME'], 0, 0 - strlen($_SERVER['PHP_SELF'])));
+        }
+        if(empty($_SERVER['DOCUMENT_ROOT']) && !empty($_SERVER['PATH_TRANSLATED'])) {
+            $_SERVER['DOCUMENT_ROOT'] = str_replace( '\\', '/', substr(str_replace('\\\\', '\\', $_SERVER['PATH_TRANSLATED']), 0, 0 - strlen($_SERVER['PHP_SELF'])));
         }
 
         // 设置缓存类型
-        $cachePath = $this->config('root') . 'cache/minify';
-        Minify::setCache($cachePath);
+        Minify::setCache($this->cache->options['dir'] . 'minify/');
 
         // 调试
         if ($this->config('debug')) {

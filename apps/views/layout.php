@@ -22,9 +22,6 @@ $minify->add(array(
     $this->getFile('views/style.js'),
 ));
 ?>
-<!--[if IE 6]>
-<link rel="stylesheet" type="text/css" media="all" href="<?php echo $root ?>style-ie6.css" />
-<![endif]-->
 <script type="text/javascript">
     qwin.get = <?php echo json_encode($_GET) ?>;
     qwin.lang = <?php echo json_encode($lang->toArray()) ?>;
