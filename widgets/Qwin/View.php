@@ -51,7 +51,6 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
      * @var array
      */
     public $options = array(
-        'paths'         => array(),
         'theme'         => 'cupertino',
         'charset'       => 'utf-8',
     );
@@ -89,7 +88,7 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         $options = &$this->options;
         
         // 设置视图根目录为应用根目录
-        $this->options['paths'] = &$this->app->options['paths'];
+        $this->options['dirs'] = &$this->app->options['dirs'];
         
         // 获取主题
         $this->_getTheme();
@@ -158,10 +157,10 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         $minify = $this->minify;
         $files = array();
         $action = $this->action();
-        $modulePath = $this->module()->toPath();
-        foreach ($this->options['paths'] as $path) {
-            $files[] = $path . $modulePath . 'views/' . $action . '.js';
-            $files[] = $path . $modulePath . 'views/' . $action . '.css';
+        $moduleDir = $this->module()->toPath();
+        foreach ($this->options['dirs'] as $dir) {
+            $files[] = $dir . $moduleDir . 'views/' . $action . '.js';
+            $files[] = $dir . $moduleDir . 'views/' . $action . '.css';
         }
         $minify->add($files);
 
@@ -404,8 +403,8 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
             if (is_file($this->_elements[$name])) {
                 return $this->_elements[$name];
             }
-            foreach ($this->options['paths'] as $path) {
-                if (is_file($file = $path . $this->_elements[$name])) {
+            foreach ($this->options['dirs'] as $dir) {
+                if (is_file($file = $dir . $this->_elements[$name])) {
                     return $file;
                 }
             }
@@ -415,15 +414,15 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         // 未定义视图元素,则查找该应用目录下的视图文件
         $module = $this->module()->toPath();
         $action = $this->action()->toString();
-        foreach ($this->options['paths'] as $path) {
-            $file = $path . $module . 'views/' . $action . '-' . $name . '.php';
+        foreach ($this->options['dirs'] as $dir) {
+            $file = $dir . $module . 'views/' . $action . '-' . $name . '.php';
             if (is_file($file)) {
                 return $file;
             } else {
                 $fileCache[] = $file;
             }
             
-            $file = $path . 'views/' . $name . '.php';
+            $file = $dir . 'views/' . $name . '.php';
             if (is_file($file)) {
                 return $file;
             }
@@ -445,12 +444,18 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         if (file_exists($file)) {
             return $file;
         }
-        foreach ($this->options['paths'] as $path) {
-            if (is_file($file2 = $path . $file)) {
+        foreach ($this->options['dirs'] as $dir) {
+            if (is_file($file2 = $dir . $file)) {
                 return $file2;
             }
         }
         $this->exception('File "%s" not found.', $file);
+    }
+    
+    public function getUrlFile($file)
+    {
+        $file = realpath($this->getFile($file));
+        return strtr(substr($file, strlen($_SERVER['DOCUMENT_ROOT'])), '\\', '/');
     }
     
     /**
@@ -477,8 +482,8 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         }
         
         // 在所有视图路径查找主题
-        foreach ($this->options['paths'] as $path) {
-            if (is_dir($path . 'widgets/view/themes/' . $theme)) {
+        foreach ($this->options['dirs'] as $dir) {
+            if (is_dir($dir . 'widgets/view/themes/' . $theme)) {
                 $this->options['theme'] = $theme;
                 $this->session['theme'] = $theme;
                 return $this;

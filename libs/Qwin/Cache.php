@@ -36,7 +36,7 @@ class Qwin_Cache extends Qwin_Widget
     /**
      * 选项
      * @var array
-     *       path   string  缓存存储路径 
+     *       dir    string  缓存存储路径 
      */
     public $options = array(
         'dir'       => './cache/',

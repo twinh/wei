@@ -42,8 +42,8 @@ class Qwin_Controller extends Qwin_Widget
 
         // 检查模块控制器文件是否存在
         $found = false;
-        foreach ($this->app->options['paths'] as $path) {
-            $file = $path . $module->toPath() . '/Controller.php';
+        foreach ($this->app->options['dirs'] as $dir) {
+            $file = $dir . $module->toPath() . '/Controller.php';
             if (is_file($file)) {
                 $found = true;
                 break;
