@@ -24,16 +24,15 @@
  * @version     $Id$
  * @todo        width 100%
  */
-$path = dirname($minify->getPath());
 $minify->add(array(
-    $path . '/CodeMirror/lib/codemirror.css',
-    $path . '/CodeMirror/lib/codemirror.js',
-    $path . '/CodeMirror/mode/xml/xml.js',
-    $path . '/CodeMirror/mode/javascript/javascript.js',
-    $path . '/CodeMirror/mode/css/css.js',
-    $path . '/CodeMirror/mode/clike/clike.js',
-    $path . '/CodeMirror/mode/php/php.js',
-    $path . '/CodeMirror/theme/default.css',
+    $codeMirrorDir . '/lib/codemirror.css',
+    $codeMirrorDir . '/lib/codemirror.js',
+    $codeMirrorDir . '/mode/xml/xml.js',
+    $codeMirrorDir . '/mode/javascript/javascript.js',
+    $codeMirrorDir . '/mode/css/css.js',
+    $codeMirrorDir . '/mode/clike/clike.js',
+    $codeMirrorDir . '/mode/php/php.js',
+    $codeMirrorDir . '/theme/default.css',
 ));
 ?>
 <style type="text/css">
