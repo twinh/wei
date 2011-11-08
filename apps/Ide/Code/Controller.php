@@ -76,6 +76,9 @@ class Ide_Code_Controller extends Qwin_Controller
             }
         }
         
+        // 初始化CodeMirror目录
+        $codeMirrorDir = $this->codeMirror->getDir();
+        
         return $this->view->assign(get_defined_vars());
     }
 }
