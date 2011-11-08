@@ -40,7 +40,11 @@ class Qwin_Minify extends Qwin_Widget
         'css'   => array(),
     );
     
-    protected $_cachePath;
+    /**
+     * 缓存目录
+     * @var string
+     */
+    protected $_cacheDir;
 
     /**
      * 初始化系统
@@ -50,7 +54,7 @@ class Qwin_Minify extends Qwin_Widget
     public function  __construct(array $options = null)
     {
         parent::__construct($options);
-        $this->_cachePath = $this->cache->options['dir'] . 'minify/';
+        $this->_cacheDir = $this->cache->options['dir'] . 'minify/';
     }
     
     public function call($options = null)
@@ -101,7 +105,7 @@ class Qwin_Minify extends Qwin_Widget
         }
         $this->_data[$extension] = array_unique($this->_data[$extension]);
         $name = md5(implode('|', $this->_data[$extension]));
-        $fileName = $this->_cachePath . $name . '.php';
+        $fileName = $this->_cacheDir . $name . '.php';
         if (file_exists($fileName)) {
             return $name;
         }
@@ -118,7 +122,7 @@ class Qwin_Minify extends Qwin_Widget
      */
     public function getCacheFile($name)
     {
-        $file = $this->_cachePath . $name . '.php';
+        $file = $this->_cacheDir . $name . '.php';
         if (file_exists($file)) {
             return $file;
         }

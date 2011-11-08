@@ -40,8 +40,8 @@ class Qwin_ModuleNav extends Qwin_Widget
         $actionUrl = $url->build();
         $actionTitle = $lang[ucfirst($action->toString())];
         
-        $this->_path = dirname(__FILE__) . '/ModuleNav/';
-        $this->minify->add($this->_path . 'default.css');
-        require $this->_path . 'default.php';
+        $this->_dir = dirname(__FILE__) . '/ModuleNav/';
+        $this->minify->add($this->_dir . 'default.css');
+        require $this->_dir . 'default.php';
     }
 }

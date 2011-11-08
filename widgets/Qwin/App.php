@@ -35,10 +35,18 @@ class Qwin_App extends Qwin_Widget
     /**
      * @var array           选项
      * 
-     *       paths          应用的路径
+     *       dirs           应用所在目录
+     * 
+     *       module         默认模块名称
+     * 
+     *       action         默认行为名称
+     * 
+     *       timezone       时区
+     * 
+     *       startTime      启动时间
      */
     public $options = array(
-        'paths'         => null,
+        'dirs'          => null,
         'module'        => 'index',
         'action'        => 'index',
         'timezone'      => 'Asia/Shanghai',
@@ -62,11 +70,11 @@ class Qwin_App extends Qwin_Widget
         !$options['startTime'] && $options['startTime'] = microtime(true);
         
         // 设置默认应用目录
-        if (!is_array($options['paths'])) {
-            $options['paths'] = (array)$options['paths'];
+        if (!is_array($options['dirs'])) {
+            $options['dirs'] = (array)$options['dirs'];
         }
-        if (empty($options['paths'])) {
-            $options['paths'][] = dirname(dirname(dirname(__FILE__))) . '/apps/';
+        if (empty($options['dirs'])) {
+            $options['dirs'][] = dirname(dirname(dirname(__FILE__))) . '/apps/';
         }
 
         // 默认时区

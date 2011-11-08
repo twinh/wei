@@ -29,12 +29,12 @@ class Qwin_JQuery extends Qwin_Widget
     public function __construct($source = null)
     {
         parent::__construct($source);
-        $this->_path = dirname(__FILE__) . '/JQuery/';
+        $this->_dir = dirname(__FILE__) . '/JQuery/';
     }
     
-    public function getPath()
+    public function getDir()
     {
-        return $this->_path;
+        return $this->_dir;
     }
     
     public function call()
@@ -49,7 +49,7 @@ class Qwin_JQuery extends Qwin_Widget
      */
     public function loadCore()
     {
-        $file = $this->_path . 'jquery.js';
+        $file = $this->_dir . 'jquery.js';
         return $file;
     }
 
@@ -62,8 +62,8 @@ class Qwin_JQuery extends Qwin_Widget
     public function loadUi($name)
     {
         return array(
-            'js' => $this->_path . 'ui/jquery.ui.' . $name . '.min.js',
-            'css' => $this->_path . 'ui/jquery.ui.' . $name . '.css',
+            'js' => $this->_dir . 'ui/jquery.ui.' . $name . '.min.js',
+            'css' => $this->_dir . 'ui/jquery.ui.' . $name . '.css',
         );
     }
 
@@ -75,7 +75,7 @@ class Qwin_JQuery extends Qwin_Widget
      */
     public function loadEffect($name)
     {
-        return $this->_path . 'effects/jquery.effects.' . $name . '.min.js';
+        return $this->_dir . 'effects/jquery.effects.' . $name . '.min.js';
     }
 
     /**
@@ -87,17 +87,17 @@ class Qwin_JQuery extends Qwin_Widget
      */
     public function loadPlugin($name, $type = null)
     {
-        $js = $this->_path . 'plugins/' . $name . '/jquery.' . $name;
+        $js = $this->_dir . 'plugins/' . $name . '/jquery.' . $name;
         $js .= $type ? '.' . $type : null;
         $js .= '.js';
         return array(
             'js' => $js,
-            'css' => $this->_path . 'plugins/' . $name . '/jquery.' . $name . '.css',
+            'css' => $this->_dir . 'plugins/' . $name . '/jquery.' . $name . '.css',
         );
     }
     
     public function loadTheme($name)
     {
-        return $this->_path . 'themes/' . $name . '/jquery.ui.theme.css';
+        return $this->_dir . 'themes/' . $name . '/jquery.ui.theme.css';
     }
 }

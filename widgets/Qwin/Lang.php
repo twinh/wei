@@ -48,17 +48,12 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
     protected $_appendedFiles = array();
 
     /**
-     * @var array           默认选项
-     *
-     *  -- rootModule       根模块,当模块找不到时,加载此模块的语言
-     *
-     *  -- module           要加载语言的模块
-     *
-     *  -- name             语言名称
+     * @var array           选项
+     * 
+     *       name           默认语言名称
      */
     public $options = array(
         'name'       => 'zh-CN',
-        'path'       => 'langs/',
     );
     
     //public $widget;
@@ -76,7 +71,7 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
         $options = &$this->options;
         
         // 获取目录
-        $options['appPaths'] = &$this->app->options['paths'];
+        $this->options['dirs'] = &$this->app->options['dirs'];
 
         // 通过应用根目录检查语言是否存在
 
@@ -87,8 +82,8 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
         // 用户请求
         $name = $this->request->get('lang');
         $this->_name = &$name;
-        foreach ($options['appPaths'] as $path) {
-            $file = $path . $options['path'] . $name . '.php';
+        foreach ($this->options['dirs'] as $dir) {
+            $file = $dir . '/langs/' . $name . '.php';
             if (null != $name && is_file($file)) {
                 $session['lang'] = $name;
                 $this->_appendFile($file);
@@ -98,8 +93,8 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
         
         // 会话配置
         $name = $session['lang'];
-        foreach ($options['appPaths'] as $path) {
-            $file = $path . $options['path'] . $name . '.php';
+        foreach ($this->options['dirs'] as $dir) {
+            $file = $dir . '/langs/' . $name . '.php';
             if (null != $name && is_file($file)) {
                 $this->_appendFile($file);
                 return $this->appendByModule($module);
@@ -108,8 +103,8 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
         
         // 全局配置
         $name = $options['name'];
-        foreach ($options['appPaths'] as $path) {
-            $file = $path . $options['path'] . $name . '.php';
+        foreach ($this->options['dirs'] as $dir) {
+            $file = $dir . '/langs/' . $name . '.php';
             if (null != $name && is_file($file)) {
                 $session['lang'] = $name;
                 $this->_appendFile($file);
@@ -157,8 +152,8 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
         if (!$module instanceof Qwin_Module) {
             $module = Qwin_Module::instance($module);
         }
-        foreach ($this->options['appPaths'] as $path) {
-            $file = $path . $module->toPath() . $this->options['path'] . $this->_name . '.php';
+        foreach ($this->options['dirs'] as $dir) {
+            $file = $dir . $module->toPath() . '/langs/' . $this->_name . '.php';
             if (is_file($file)) {
                 return $this->_appendFile($file);
             }
