@@ -33,20 +33,17 @@ class Qwin_Module extends Qwin_Widget implements ArrayAccess
      *
      *      -- url          Url形式,即小写,横杆
      *
-     *      -- url          路径形式,即首字母大写,斜杠
+     *      -- path         路径形式,即首字母大写,斜杠
      *
      *      -- class        类名形式,即首字母大写,下划线
      *
      *      -- id           编号形式,即小写,横杠
-     *
-     *      -- lang         语言形式,即大写,下划线
      */
     protected $_data = array(
         'url'       => null,
         'path'      => null,
         'class'     => null,
         'id'        => null,
-        'lang'      => null,
     );
 
     /**
@@ -160,19 +157,6 @@ class Qwin_Module extends Qwin_Widget implements ArrayAccess
         return $this->_data['class'];
     }
 
-    /**
-     * 获取语言形式名称
-     *
-     * @return string
-     */
-    public function toLang()
-    {
-        if (empty($this->_data['lang'])) {
-            $this->_data['lang'] = strtoupper(implode('_', $this->_source));
-        }
-        return $this->_data['lang'];
-    }
-    
     public function toString()
     {
         return implode(' ', $this->_source);
