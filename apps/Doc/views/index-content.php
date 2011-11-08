@@ -100,7 +100,7 @@ $minify->add(array(
                                 <?php
                                 if (0 != $leftPx) :
                                 ?>
-                                    <img alt="extended by" src="<?php echo $root ?>images/inheritence.gif" />
+                                    <img alt="extended by" src="<?php echo $this->getUrlFile('views/images/inheritence.gif') ?>" />
                                 <?php
                                 endif;
                                 ?>
