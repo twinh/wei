@@ -33,7 +33,7 @@ class Qwin_ModuleNav extends Qwin_Widget
         $lang = $this->lang;
         $url = $this->url;
         
-        $icon = $view->getFile('views/icons/document_32.png');
+        $icon = $view->getUrlFile('views/icons/document_32.png');
         $moduleUrl = $url->url->url($module->toUrl());
         $moduleTitle = $lang[ucfirst($module->toString())];
         
