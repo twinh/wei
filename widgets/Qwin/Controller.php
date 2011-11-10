@@ -28,6 +28,14 @@
 
 class Qwin_Controller extends Qwin_Widget
 {
+    public function __construct($source = null)
+    {
+        parent::__construct($source);
+        
+        $this->options = new Qwin_Controller_Option($this->options);
+        $this->options->setController($this);
+    }
+    
     /**
      * 根据模块获取控制器对象
      * 

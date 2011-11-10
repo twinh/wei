@@ -24,7 +24,7 @@
  */
 // 加载语言,脚本和样式文件
 $this->minify->add(array(
-    $this->jQuery->getPath() . 'plugins/jqgrid/i18n/grid.locale-en.js',
+    $this->jQuery->getDir() . 'plugins/jqgrid/i18n/grid.locale-en.js',
     $this->jQuery->loadPlugin('jqgrid', null, false),
 ));
 ?>
