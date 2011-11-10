@@ -210,7 +210,7 @@ class Qwin_Grid extends Qwin_Widget
 
         $jqGridJson = json_encode($options);
 
-        require $this->view->getFile('widgets/grid/default.php');
+        require $this->view->getFile(dirname(__FILE__) . '/Grid/default.php');
     }
     
     /**

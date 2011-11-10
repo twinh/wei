@@ -26,6 +26,10 @@
  */
 
 return array(
+    'Member' => '用户',
+    'username' => '用户名',
+    'email' => '邮箱',
+    'sex' => '性别',
     'FLD_USERNAME' => '用户名',
     'FLD_PASSWORD' => '密码',
     'FLD_NICKNAME' => '昵称',
@@ -53,7 +57,6 @@ return array(
     
     'GRP_CUSTOMER' => '界面配置',
 
-    'MOD_MEMBER' => '用户',
     'LBL_MODULE_MEMBER_DETAIL' => '用户详细',
     'LBL_MODULE_MEMBER_SETTING' => '用户配置',
 
