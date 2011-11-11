@@ -27,7 +27,7 @@
 echo $this->getPackerSign();
 ?>
 <div class="ui-jqgrid-top">
-<?php $this->trigger('viewListTop') ?>
+<?php $this->trigger('viewGridTop') ?>
 </div>
 <div class="qw-c"></div>
 <?php $grid->render() ?>

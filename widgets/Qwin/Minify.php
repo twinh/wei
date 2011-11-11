@@ -59,7 +59,7 @@ class Qwin_Minify extends Qwin_Widget
     
     public function call($options = null)
     {
-        return $this;
+        return $this->add($options);
     }
 
     /**

@@ -59,7 +59,7 @@ class Doc_Controller extends Qwin_Controller
         // get the relative file name
         $relativeFile = false;
         $file = $reflection->getFileName();
-        foreach ($this->app->option('paths') as $path) {
+        foreach ($this->app->option('dirs') as $path) {
             $path = realpath(dirname($path) . '/');
             if (false !== ($pos = strpos($file, $path))) {
                 $relativeFile = substr($file, strlen($path));
@@ -122,7 +122,7 @@ class Doc_Controller extends Qwin_Controller
         $data = array();
         $type == 'Interface' && $type = 'class';
         
-        foreach ($this->app->option('paths') as $path) {
+        foreach ($this->app->option('dirs') as $path) {
             $file = dirname($path) . '/docs/' . $this->lang->getName() . '/' . strtolower($type) . '.' . strtolower($name) . '.php';
             if (is_file($file)) {
                 $data = require $file;

@@ -112,7 +112,7 @@ class Qwin_Cache extends Qwin_Widget
         $content = serialize(array(
             0 => time(),
             1 => $value,
-            2 => $name,
+            2 => $key,
         ));
         
         return file_put_contents($file, $content);
