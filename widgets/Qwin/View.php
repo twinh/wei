@@ -396,6 +396,12 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         return $this;
     }
     
+    /**
+     * 根据视图名称获取视图文件
+     * 
+     * @param string $name
+     * @return string 
+     */
     public function getElement($name)
     {
         // 如果已定义视图元素,从视图元素中获取文件
@@ -421,6 +427,12 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
             } else {
                 $fileCache[] = $file;
             }
+            
+            $file = $dir . 'views/' . $action . '-' . $name . '.php';
+            if (is_file($file)) {
+                return $file;
+            }
+            $fileCache[] = $file;
             
             $file = $dir . 'views/' . $name . '.php';
             if (is_file($file)) {

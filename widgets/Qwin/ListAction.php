@@ -77,7 +77,6 @@ class Qwin_ListAction extends Qwin_Widget
 
         // 加载列表视图
         $this->view
-            ->assign(get_defined_vars())
-            ->setElement('content', dirname(__FILE__) . '/ListAction/default.php');
+            ->assign(get_defined_vars());
     }
 }
