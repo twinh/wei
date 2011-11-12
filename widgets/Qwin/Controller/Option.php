@@ -85,7 +85,7 @@ class Qwin_Controller_Option extends ArrayObject
         if (is_file($file)) {
             $data = require $file;
             $this->exchangeArray(array($index => $data) + $this->getArrayCopy());
-            return $this;
+            return $data;
         }
         return false;
     }
