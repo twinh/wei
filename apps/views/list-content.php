@@ -16,25 +16,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Trex
- * @subpackage  View
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2009-11-24 18:47:32
  */
-echo $this->getPackerSign();
+// 加载语言,脚本和样式文件
+$this->minify->add(array(
+    $this->jQuery->getDir() . 'plugins/jqgrid/i18n/grid.locale-en.js',
+    $this->jQuery->loadPlugin('jqgrid', null, false),
+));
 ?>
 <div class="ui-jqgrid-top">
 <?php $this->trigger('viewGridTop') ?>
 </div>
 <div class="qw-c"></div>
-<?php $grid->render() ?>
+<table id="<?php echo $jqGrid['id'] ?>"></table>
+<div id="<?php echo $jqGrid['pager'] ?>"></div>
 <script type="text/javascript">
 jQuery(function($){
+    var jqGrid = <?php echo json_encode($jqGrid)?>;
+    // todo 如何在php代码中表示js function
+    jqGrid.ondblClickRow = function(){};
+    $('#<?php echo $jqGrid['id'] ?>')
+        .jqGrid(jqGrid)
+        .jqGrid('navGrid', jqGrid.pager,{
+            add : false,
+            edit : false,
+            del : false,
+            search : false
+        });
+
+    // 样式调整
+    var gboxId = '#gbox_<?php echo $jqGrid['id'] ?>';
+    $(gboxId).width($(gboxId).width() - 2).addClass('ui-state-default');
+    $('table.ui-jqgrid-htable tr.ui-jqgrid-labels th:last').css('border-right', 'none');
+    
     var primaryKey = 'id';
-    var jqGridObj = qwin.jqGrid = $('#<?php echo $grid->getId() ?>');
+    var jqGridObj = qwin.jqGrid = $('#<?php echo $jqGrid['id'] ?>');
 
     jqGridObj.jqGrid('setGridParam',{
         ondblClickRow: function(rowId, iRow, iCol, e){
@@ -51,7 +71,7 @@ jQuery(function($){
     }
 
     // 点击删除按钮
-    $('#action-<?php echo $grid->getId() ?>-delete').click(function(){
+    $('#action-<?php echo $jqGrid['id'] ?>-delete').click(function(){
         var keyList = new Array(),
             rowList = jqGridObj.jqGrid('getGridParam','selarrrow');
         if (rowList.length == 0) {
@@ -79,7 +99,7 @@ jQuery(function($){
     });
 
     // 点击复制按钮
-    $('#action-<?php echo $grid->getId() ?>-copy').click(function(){
+    $('#action-<?php echo $jqGrid['id'] ?>-copy').click(function(){
         var rowList = jqGridObj.jqGrid('getGridParam','selarrrow');
         if (rowList.length != 1) {
             alert(qwin.lang.MSG_CHOOSE_ONLY_ONE_ROW);
