@@ -63,11 +63,24 @@ class Qwin_JsonListAction extends Qwin_Widget
         ),
         'display'   => true,
     );
-
     
+    protected $jsonOptions = array(
+        'list'          => null,
+        'data'          => array(),
+        'layout'        => array(),
+        'primaryKey'    => array(),
+        'options'       => array(
+            'page'          => 1,
+            'total'         => 1,
+            'records'       => 0,
+            'rows'          => array(),
+        ),
+    );
+
     public function call(array $options = array())
     {
         $this->option(&$options);
+        $jqGrid = $options['jqGrid'];
         $reocrd = $options['record'];
 
         // 处理每页显示数目
@@ -110,19 +123,32 @@ class Qwin_JsonListAction extends Qwin_Widget
                 'data' => get_defined_vars(),
             );
         }
+        
+        // 合并选项
+        $jqGridJson = $this->jsonOptions;
+        $json = array();
+        foreach ($data as $row) {
+            $cell = array();
+            foreach ($jqGrid['colModel'] as $column) {
+                if (isset($row[$column['index']])) {
+                    $cell[] = $row[$column['index']];
+                } else {
+                    $cell[] = null;
+                }
+            }
+            $json[] = array(
+                'id' => $row['id'],
+                //$options['id'] => $row[$options['id']],
+                'cell' => $cell,
+            );
+        }
 
-        // 通过jqGrid微件获取数据
-        $json = $options['grid']->renderJson(array(
-            'data'          => $data,
-            'layout'        => $options['layout'],
-            'id'            => 'id',
-            'options'       => array(
-                'page'      => $options['page'],
-                'total'     => ceil($total / $options['row']),
-                'records'   => $total,
-            ),
-        ));
-
-        return $this->view->displayJson($json);
+        $result = array(
+            'page'      => $options['page'],
+            'total'     => ceil($total / $options['row']),
+            'records'   => $total,
+            'rows'      => $json,
+        );
+        return $this->view->displayJson($result);
     }
 }

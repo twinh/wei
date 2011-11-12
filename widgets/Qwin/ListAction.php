@@ -39,12 +39,44 @@ class Qwin_ListAction extends Qwin_Widget
      *      -- display      是否显示视图
      */
     public $options = array(
-        'grid'      => null,
+        'jqGrid'    => null,
         'order'     => array(),
         'row'       => 10,
         'layout'    => array(),
         'get'       => null,
         'display'   => true,
+    );
+    
+    public $jqGridOptions = array(
+        'id'            => null,
+        'layout'        => array(),
+        'url'           => null,
+        'datatype'      => 'json',
+        'colNames'      => array(),
+        'colModel'      => array(),
+        'sortname'      => null,
+        'sortorder'     => null,
+        'rowNum'        => 10,
+        'rowList'       => array('5', '10', '20', '30', '40', '50', '100'),
+        'caption'       => false,
+        'rownumbers'    => true,
+        'multiselect'   => true,
+        'height'        => '100%',
+        'width'         => 'auto',
+        'autowidth'     => false,
+        'viewrecords'   => true,
+        'forceFit'      => true,
+        'emptyrecords'  => 'MSG_NO_RECORDS',
+        'pager'         => null,//'#ui-jqgrid-page',
+        'prmNames'      => array(
+            'page'      => 'page',
+            'rows'      => 'row',
+            'sort'      => 'orderField',
+            'order'     => 'orderType',
+            'search'    => '_search',
+            'nd'        => 'nd',
+            'npage'     => 'npage'
+        ),
     );
 
     /**
@@ -56,15 +88,15 @@ class Qwin_ListAction extends Qwin_Widget
     public function call(array $options = array())
     {
         $this->option(&$options);
-        $grid = $options['grid'];
-        
+        $jqGrid = $options['jqGrid'] + $this->jqGridOptions;
+
         // 显示哪些域
-        $grid->options['layout'] = $options['layout'];
+        //$jqGrid['layout'] = $options['layout'];
         
         // 用户请求参数
         $get = $options['get'] ? $options['get'] : $_GET;
-        if (!$grid->options['url']) {
-            $grid->options['url'] = $this->url->build(array('json' => true) + $get);
+        if (!$jqGrid['url']) {
+            $jqGrid['url'] = $this->url->build(array('json' => true) + $get);
         }
 
         // 不显示视图，直接返回数据
@@ -75,8 +107,23 @@ class Qwin_ListAction extends Qwin_Widget
             );
         }
 
+        // 设置编号
+        if (!isset($jqGrid['id'])) {
+            $jqGrid['id'] = 'ui-jqgrid-1';
+            $this->_id = $jqGrid['id'];
+        }
+        
+        // 设置Url
+        if (!isset($jqGrid['url'])) {
+            $jqGrid['url'] = $this->url->url($this->module(), 'list', array(
+                'json' => true,
+            ));
+        }
+
+        // 获取jqGrid与其分页的id号
+        $jqGrid['pager'] = $jqGrid['id'] . '-pager';
+
         // 加载列表视图
-        $this->view
-            ->assign(get_defined_vars());
+        $this->view->assign(get_defined_vars());
     }
 }

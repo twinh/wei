@@ -40,7 +40,7 @@ class Qwin_CrudController extends Qwin_Controller
     {
         if ($this->request->isJson()) {
             return $this->widget->jsonListAction(array(
-                'grid'      => $this->grid(),
+                'jqGrid'    => $this->options['jqgrid'],
                 'record'    => $this->record(),
                 'layout'    => $this->get('layout'),
                 'search'    => $this->get('search'),
@@ -53,7 +53,7 @@ class Qwin_CrudController extends Qwin_Controller
             ));
         } else {
             return $this->widget->listAction(array(
-                'grid'      => $this->grid(),
+                'jqGrid'    => $this->options['jqgrid'],
                 'layout'    => $this->get('layout'),
                 'row'       => $this->get('row'),
             ));
