@@ -92,9 +92,7 @@ class Qwin_AddFormAction extends Qwin_Widget
         $form->options['action'] = 'add';
         
         // 加载表单视图
-        $this->view
-            ->assign(get_defined_vars())
-            ->setElement('content', 'widgets/form/default.php');
+        $this->view->assign(get_defined_vars());
     }
 
     public function splitToInitalData($data)
