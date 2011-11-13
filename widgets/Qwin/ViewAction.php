@@ -91,6 +91,16 @@ class Qwin_ViewAction extends Qwin_Widget
             );
         }
         
+        $lang = $this->lang;
+        foreach ($form['elems'] as &$elem) {
+            if (!isset($elem['label'])) {
+                $elem['label'] = $lang->field($elem['name']);
+            }
+        }
+        foreach ($form['buttons'] as &$button) {
+            $button['label'] = $lang[$button['label']];
+        }
+        
         $form['data'] = $data;
         $form['action'] = 'view';
         

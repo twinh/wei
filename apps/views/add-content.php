@@ -33,6 +33,6 @@ jQuery(function($){
     $('#qw-form').form(<?php echo json_encode($form) ?>);
 });
 </script>
-<form id="qw-form" method="post" action="" class="qw-form ui-widget ui-widget-content ui-corner-all" style="width:800px; margin: 0 0 0 10px;">
+<form id="qw-form" method="post" action="" class="qw-form ui-widget ui-corner-all" style="width:800px; margin: 0 0 0 10px;">
     
 </form>
