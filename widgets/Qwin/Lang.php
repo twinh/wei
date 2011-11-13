@@ -201,6 +201,12 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
     {
         return isset($this->_data[$name]) ? $this->_data[$name] : $name;
     }
+    
+    public function field($name = null)
+    {
+        $name = ucfirst(strtr($name, '_', ' '));
+        return $this->t($name);
+    }
 
     /**
      * 检查索引是否存在

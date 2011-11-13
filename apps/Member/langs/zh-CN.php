@@ -27,10 +27,10 @@
 
 return array(
     'Member' => '用户',
-    'username' => '用户名',
-    'email' => '邮箱',
-    'sex' => '性别',
-    'FLD_USERNAME' => '用户名',
+    'Group id' => '分组编号',
+    'Username' => '用户名',
+    'Email' => '邮箱',
+    'Sex' => '性别',
     'FLD_PASSWORD' => '密码',
     'FLD_NICKNAME' => '昵称',
     'FLD_REG_TIME' => '注册时间',

@@ -112,7 +112,7 @@ class Qwin_ViewGridTop extends Qwin_Widget
         if (!in_array('add', $unableAction)) {
             $tabs['add'] = array(
                 'url' => $url->build($get, array('action' => 'add')),
-                'title' => $lang->t('ACT_ADD'),
+                'title' => $lang['Add'],
                 'icon' => 'ui-icon-plus',
                 'target' => null,
                 'id' => 'action-' . $moduleId . '-add',
@@ -120,7 +120,7 @@ class Qwin_ViewGridTop extends Qwin_Widget
             );
             $tabs['copy'] = array(
                 'url' => $url->build($get, array('action' => 'add')),
-                'title' => $lang->t('ACT_COPY'),
+                'title' => $lang['Copy'],
                 'icon' => 'ui-icon-transferthick-e-w',
                 'target' => null,
                 'id' => 'action-' . $moduleId . '-copy',
@@ -140,7 +140,7 @@ class Qwin_ViewGridTop extends Qwin_Widget
             }
             $tabs['delete'] = array(
                 'url' => 'javascript:;',
-                'title' => $lang->t('ACT_DELETE'),
+                'title' => $lang['Delete'],
                 'icon' => $icon,
                 'target' => null,
                 'id' => 'action-' . $moduleId . '-delete',
@@ -151,7 +151,7 @@ class Qwin_ViewGridTop extends Qwin_Widget
         if (!in_array('list', $unableAction)) {
             $tabs['list'] = array(
                 'url' => $url->url($module->getUrl(), 'index'),
-                'title' => $lang->t('ACT_LIST'),
+                'title' => $lang['List'],
                 'icon' => 'ui-icon-note',
                 'target' => null,
                 'id' => 'action-' . $moduleId . '-list',

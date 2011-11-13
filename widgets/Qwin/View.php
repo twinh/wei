@@ -211,8 +211,8 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         $options = $options + $this->_infoOptions;
 
         //$this->setElement('layout', '<root>layout<suffix>');
-        $this->setElement('content', $this->getFile('widgets/view/info.php'));
-        $this->minify->add($this->getFile('widgets/view/style.css'));
+        $this->setElement('content', $this->getFile('views/info.php'));
+        $this->minify->add($this->getFile('views/info.css'));
 
         $content = (array)$options['content'];
         
