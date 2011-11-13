@@ -74,17 +74,6 @@ qwin.url = {
         return url.slice(0, -1);
     }
 };
-function qw_l(name)
-{
-    if ('undefined' != typeof(qwin.Lang[name])) {
-        return qwin.Lang[name];
-    }
-    return name;
-}
-function qw_f(name)
-{
-    return qw_l('FLD_' + name.toUpperCase());
-}
 jQuery(function($){
     // 设定元数据从data属性取值
     $.metadata.setType('attr', 'data');
