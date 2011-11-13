@@ -16,11 +16,9 @@ return array(
         'id' => array(
             'type' => 'hidden',
             'name' => 'id',
-            'label' => 'id',
         ),
         'group_id' => array(
             'name' => 'group_id',
-            'label' => 'group_id',
             'readonly' => true,
             '_link' => true,
             '_type' => 'text',
@@ -41,14 +39,12 @@ return array(
         ),
         'username' => array(
             'name' => 'username',
-            'label' => 'username',
             '_onEdit' => array(
                 'readonly' => 'true',
             ),
         ),
         'password' => array(
             'name' => 'password',
-            'label' => 'password',
             '_type' => 'password',
             '_onAdd' => array(
                 '_value' => '',
@@ -65,7 +61,6 @@ return array(
         ),
         'sex' => array(
             'name' => 'sex',
-            'label' => 'sex',
             '_type' => 'checkbox',
             '_resourceGetter' => array(
                 array('Ide_Option_Widget', 'get'),
@@ -82,12 +77,10 @@ return array(
         ),
         'birthday' => array(
             'name' => 'birthday',
-            'label' => 'birthday',
             '_widgets' => 'datepicker',
         ),
         'language' => array(
             'name' => 'language',
-            'label' => 'language',
             '_type' => 'select',
             '_resourceGetter' => array(
                 array('Ide_Option_Widget', 'get'),
@@ -96,55 +89,37 @@ return array(
         ),
         'email' => array(
             'name' => 'email',
-            'label' => 'email',
         ),
         'first_name' => array(
             'name' => 'first_name',
-            'label' => 'first_name',
         ),
         'last_name' => array(
             'name' => 'last_name',
-            'label' => 'last_name',
         ),
         'photo' => array(
             'name' => 'photo',
-            'label' => 'photo',
         ),
         'reg_ip' => array(
             'name' => 'reg_ip',
-            'label' => 'reg_ip',
         ),
         'theme' => array(
             'name' => 'theme',
-            'label' => 'theme',
             '_type' => 'select',
             '_resourceGetter' => array(
                 array('Style_Widget', 'getResource'),
             ),
         ),
-        'date' => array(
-            'name' => 'date',
-            'label' => 'date',
-        ),
-        'time' => array(
-            'name' => 'time',
-            'label' => 'time',
-        ),
         'telephone' => array(
             'name' => 'telephone',
-            'label' => 'telephone',
         ),
         'mobile' => array(
             'name' => 'mobile',
-            'label' => 'mobile',
         ),
         'homepage' => array(
             'name' => 'homepage',
-            'label' => 'homepage',
         ),
         'address' => array(
             'name' => 'address',
-            'label' => 'address',
         ),
     ),
     'buttons' => array(
@@ -155,7 +130,7 @@ return array(
         ),
         array(
             'type' => 'reset',
-            'label' => 'Cancel',
+            'label' => 'Reset',
             'icon' => 'ui-icon-arrowreturnthick-1-w',
         ),
     ),

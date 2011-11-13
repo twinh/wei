@@ -65,8 +65,8 @@ return array(
     
         
     // 域
-    'id' => '编号',
-    'name' => '名称',
+    'Id' => '编号',
+    'Name' => '名称',
     'Date modified' => '修改时间',
     'Operation' => '操作',
 
@@ -178,4 +178,7 @@ return array(
     'Add' => '添加',
     'View' => '查看',
     'Edit' => '编辑',
+    
+    'Submit' => '提交',
+    'Reset' => '重置',
 );
