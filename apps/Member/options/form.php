@@ -1,5 +1,4 @@
 <?php
-
 return array(
     'style' => array(
         'padding' => '5px',

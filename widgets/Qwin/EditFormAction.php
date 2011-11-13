@@ -89,12 +89,10 @@ class Qwin_EditFormAction extends Qwin_Widget
             );
         }
         
-        $form->options['data'] = $data;
-        $form->options['action'] = 'edit';
+        $form['data'] = $data;
+        $form['action'] = 'edit';
         
         // 加载表单视图
-        $this->view
-            ->assign(get_defined_vars())
-            ->setElement('content', 'widgets/form/default.php');
+        $this->view->assign(get_defined_vars());
     }
 }
