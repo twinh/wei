@@ -110,6 +110,13 @@ class Qwin_ListAction extends Qwin_Widget
                 'json' => true,
             ));
         }
+        
+        $lang = $this->lang;
+        if (empty($jqGrid['colNames'])) {
+            foreach ($jqGrid['colModel'] as $column) {
+                $jqGrid['colNames'][] = $lang->field($column['name']);
+            }
+        }
 
         // 获取jqGrid与其分页的id号
         $jqGrid['pager'] = $jqGrid['id'] . '-pager';

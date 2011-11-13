@@ -65,8 +65,11 @@ return array(
     
         
     // 域
-    'FLD_ID' => '编号',
-    'FLD_NAME' => '名称',
+    'id' => '编号',
+    'name' => '名称',
+    'Date modified' => '修改时间',
+    'Operation' => '操作',
+
     'FLD_NAMESPACE' => '命名空间',
     'FLD_TITLE' => '标题',
     'FLD_OPERATION' => '操作',
