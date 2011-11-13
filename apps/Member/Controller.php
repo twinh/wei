@@ -35,12 +35,6 @@ class Member_Controller extends Qwin_CrudController
         'guest', 'admin', '7641b5b1-c727-6c07-e11f-9cb5b74ddfc9',
     );
     
-    public function indexAction()
-    {
-        return parent::indexAction();
-        //$this->dump($this->options['form']);
-    }
-    
     /**
      * 编辑密码
      * @return object 实例化编辑操作

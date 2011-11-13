@@ -32,7 +32,7 @@ class Qwin_CrudController extends Qwin_Controller
     {
         return $this->listAction();
     }
-    
+
     /**
      * 显示列表记录
      */
@@ -40,20 +40,20 @@ class Qwin_CrudController extends Qwin_Controller
     {
         if ($this->request->isJson()) {
             return $this->widget->jsonListAction(array(
-                'jqGrid'    => $this->options['jqgrid'],
+                'jqGrid'    => $this->options['jqGrid'],
                 'record'    => $this->record(),
                 'layout'    => $this->get('layout'),
                 'search'    => $this->get('search'),
                 'page'      => $this->get('page'),
-                'row'       => $this->get('row'),
+                'row'       => $this->get('rows'),
                 'order'     => array(
-                    $this->get('orderField'),
-                    $this->get('orderType')
+                    $this->get('sidx'),
+                    $this->get('sord')
                 ),
             ));
         } else {
             return $this->widget->listAction(array(
-                'jqGrid'    => $this->options['jqgrid'],
+                'jqGrid'    => $this->options['jqGrid'],
                 'layout'    => $this->get('layout'),
                 'row'       => $this->get('row'),
             ));
