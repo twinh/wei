@@ -41,9 +41,6 @@ class Qwin_AddFormAction extends Qwin_Widget
     {
         $this->option(&$options);
         
-        if (!$options['form'] instanceof Qwin_Form) {
-            $this->exception('Option "%s" must be an instance of %s', 'form', 'Qwin_Form');
-        }
         $form = $options['form'];
         
 //        if (!$options['record'] instanceof Qwin_Record) {
@@ -88,8 +85,8 @@ class Qwin_AddFormAction extends Qwin_Widget
             );
         }
         
-        $form->options['data'] = $data;
-        $form->options['action'] = 'add';
+        $form['data'] = $data;
+        $form['action'] = 'add';
         
         // 加载表单视图
         $this->view->assign(get_defined_vars());

@@ -66,7 +66,7 @@ class Qwin_CrudController extends Qwin_Controller
     public function viewAction()
     {
         return $this->widget->viewAction(array(
-            'form'      => $this->form(),
+            'form'      => $this->options['form'],
             'record'    => $this->record(),
             'id'        => $this->get('id'),
         ));
@@ -79,7 +79,7 @@ class Qwin_CrudController extends Qwin_Controller
     {
         if (!$this->request->isPost()) {
             return $this->widget->addFormAction(array(
-                'form'      => $this->form(),
+                'form'      => $this->options['form'],
                 'record'    => $this->record(),
                 'id'        => $this->get('id'),
             ));
@@ -99,7 +99,7 @@ class Qwin_CrudController extends Qwin_Controller
     {
         if (!$this->request->isPost()) {
             return $this->widget->editFormAction(array(
-                'form'      => $this->form(),
+                'form'      => $this->options['form'],
                 'record'    => $this->record(),
                 'id'        => $this->get('id'),
             ));

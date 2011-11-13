@@ -37,9 +37,7 @@ class Qwin_ViewAction extends Qwin_Widget
      *      -- display      是否显示视图
      */
     public $options = array(
-        'meta'      => null,
-        'form'      => 'form',
-        'db'        => 'db',
+        'form'      => '',
         'id'        => null,
         'sanitise'  => array(
             'nullTxt'       => true,
@@ -93,8 +91,8 @@ class Qwin_ViewAction extends Qwin_Widget
             );
         }
         
-        $form->options['data'] = $data;
-        $form->options['action'] = 'view';
+        $form['data'] = $data;
+        $form['action'] = 'view';
         
         // 加载表单视图
         $this->view->assign(get_defined_vars());       

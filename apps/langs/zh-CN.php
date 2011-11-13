@@ -170,5 +170,9 @@ return array(
     'UNTITLED' => '(无标题)',
     'READONLY' => '只读',
     
+    // Action
     'Index' => '主页',
+    'Add' => '添加',
+    'View' => '查看',
+    'Edit' => '编辑',
 );
