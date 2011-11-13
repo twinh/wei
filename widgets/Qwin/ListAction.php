@@ -68,15 +68,6 @@ class Qwin_ListAction extends Qwin_Widget
         'forceFit'      => true,
         'emptyrecords'  => 'MSG_NO_RECORDS',
         'pager'         => null,//'#ui-jqgrid-page',
-        'prmNames'      => array(
-            'page'      => 'page',
-            'rows'      => 'row',
-            'sort'      => 'orderField',
-            'order'     => 'orderType',
-            'search'    => '_search',
-            'nd'        => 'nd',
-            'npage'     => 'npage'
-        ),
     );
 
     /**
