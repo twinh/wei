@@ -30,8 +30,10 @@ $minify->add(array(
 <body>
 <div id="qw-body" class="ui-widget-content">
 <?php
-if ($this->get('view') && $this->elementExists($this->get('view'))) :
-    require $this->getElement($request['view']);
+$viewOnly = $this->request->get('view-only');
+// TODO viewexist
+if ($viewOnly) :
+    require $this->getElement($viewOnly);
 else :
 ?>
 <?php require $this->getElement('header') ?>

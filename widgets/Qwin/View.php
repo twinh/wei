@@ -102,18 +102,6 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
      */
     public function display($layout = null, array $data = null)
     {
-        return $this->call($layout, $data);
-    }
-
-    /**
-     * 展示视图
-     *
-     * @param string $layout 布局路径
-     * @param array $data 附加数据
-     * @todo 不只是输出文件,还有数据类型等等
-     */
-    public function call($layout = null, array $data = null)
-    {
         // 视图已输出
         if ($this->_displayed) {
             return false;
@@ -144,8 +132,8 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         extract($this->_data, EXTR_OVERWRITE);
 
         // 根据Url的请求加载不同的视图
-        $view = $this->get('view-only');
-        if (!$this->elementExists($view)) {
+        $view = $this->request->get('view');
+        if (!$view) {
             $view = 'layout';
         }
         require $this->getElement($view);
@@ -154,7 +142,6 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         
         // TODO 是否应该通过钩子加载
         // 加载当前操作的样式和脚本
-        $minify = $this->minify;
         $files = array();
         $action = $this->action();
         $moduleDir = $this->module()->toPath();
@@ -162,7 +149,7 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
             $files[] = $dir . $moduleDir . 'views/' . $action . '.js';
             $files[] = $dir . $moduleDir . 'views/' . $action . '.css';
         }
-        $minify->add($files);
+        $this->minify->add($files);
 
         // 获取缓冲数据,输出并清理
         $output = ob_get_contents();
@@ -179,6 +166,18 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         $this->setDisplayed();
         
         return $this;
+    }
+
+    /**
+     * 展示视图
+     *
+     * @param string $layout 布局路径
+     * @param array $data 附加数据
+     * @todo 不只是输出文件,还有数据类型等等
+     */
+    public function call($layout = null, array $data = null)
+    {
+        return $this->display($layout, $data);
     }
     
     /**
