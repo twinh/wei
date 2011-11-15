@@ -131,5 +131,4 @@ class Member_Record extends Qwin_Record
             'limit' => 10,
         );
     }
-
 }

@@ -37,7 +37,7 @@ class Qwin_Record extends Doctrine_Record
     
     public $source;
     
-    public $dbOptions = array(
+    public static $dbOptions = array(
         'type'      => 'mysql',
         'server'    => 'localhost',
         'username'  => 'root',
@@ -120,7 +120,7 @@ class Qwin_Record extends Doctrine_Record
     public function __construct($table = null, $isNewEntry = false)
     {        
         // 保证连接数据库链接上,否则出现异常
-        self::connect((array)$table + $this->dbOptions);
+        self::connect((array)$table + self::$dbOptions);
         
         $this->getRecordData();
         
@@ -231,6 +231,12 @@ class Qwin_Record extends Doctrine_Record
     public static function connect(array $options = array())
     {
         if (!self::$_connected) {
+            
+            // 通过Qwin_Query等外部类调用时,参数可能为空,可自行获取
+            if (empty($options)) {
+               $options = current(Qwin::getInstance()->config('Qwin_Record')) + self::$dbOptions;
+            }
+            
             $manager = Doctrine_Manager::getInstance();
             $adapter = $options['type'] . '://'
                      . $options['username'] . ':'
@@ -251,6 +257,5 @@ class Qwin_Record extends Doctrine_Record
 
             self::$_connected = true;
         }
-        return;
     }
 }
