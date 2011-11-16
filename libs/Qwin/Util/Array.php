@@ -111,7 +111,7 @@ class Qwin_Util_Array
         }
         $list2 = array();
         foreach ($list as $key => $value) {
-            $list2[$key] = $val[$keyName];
+            $list2[$key] = $value[$keyName];
         }
         array_multisort($list2, $type, $list);
         return $list;
