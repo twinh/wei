@@ -88,4 +88,9 @@ class Qwin_Menu extends Qwin_Widget
         $smarty->assign('menus', $menus);
         $smarty->display($this->_dir . 'default.tpl');
     }
+    
+    public function getDir()
+    {
+        return dirname(__FILE__) . '/Menu';
+    }
 }

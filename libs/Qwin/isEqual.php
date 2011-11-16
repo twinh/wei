@@ -24,14 +24,17 @@
  */
 
 /**
- * Trim
+ * isEqual
  * 
- * @package     Qwin
- * @subpackage  Qwin
+ * @namespace   Qwin
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-5 11:28:08
+ * @since       2011-11-15 10:16:59
  */
-class Trim {
-    
+class Qwin_isEqual extends Qwin_Widget
+{
+    public function call($mixed = null)
+    {
+        return $this->source === $mixed;
+    }
 }
