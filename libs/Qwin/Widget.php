@@ -40,7 +40,7 @@ class Qwin_Widget
     
     /**
      * 调用者,对象环的上一个对象
-     * @var mixed
+     * @var Qwin_Widget
      */
     public $invoker;
 

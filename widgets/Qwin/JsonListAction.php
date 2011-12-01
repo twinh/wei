@@ -93,8 +93,7 @@ class Qwin_JsonListAction extends Qwin_Widget
         $options['page'] <= 0 && $options['page'] = 1;
 
         // 从模型获取数据
-        $query = $this->query
-            ->getByRecord($options['record'])
+        $query = $this->query()
             ->leftJoinByType(array('db', 'view'))
             //->addRawSelect()
             ->addRawWhere((string)$options['search'])
