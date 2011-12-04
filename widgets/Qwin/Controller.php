@@ -34,6 +34,8 @@ class Qwin_Controller extends Qwin_Widget
         
         $this->options = new Qwin_Controller_Option($this->options);
         $this->options->setController($this);
+        
+        $this->init();
     }
     
     /**
@@ -87,6 +89,16 @@ class Qwin_Controller extends Qwin_Widget
         }
         
         $this->exception('Action "%s" not found in controller %s.', $action, get_class($this));
+    }
+    
+    /**
+     * 初始化方法,于__construct方法之后调用
+     * 
+     * @return Qwin_Controller 当前对象 
+     */
+    public function init()
+    {
+        return $this;
     }
 
     /**

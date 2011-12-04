@@ -25,7 +25,6 @@
  * @todo        
  */
 ?>
-<!--
 <td id="qw-splitter-right" class="qw-splitter ui-state-default">
     <div class="qw-splitter-content"></div>
 </td>
@@ -34,4 +33,4 @@
         <?php //Qwin::hook('viewRight') ?>
 
     </div>
-</td>-->
+</td>

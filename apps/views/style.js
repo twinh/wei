@@ -157,6 +157,7 @@ jQuery(function($){
             }
             var height = $(window).height() - $('#qw-main-table').offset().top;
             $('#qw-main-table').css('height', height);
+            $(window).trigger('afterFixContentHeight');
             return true;
         }
     };

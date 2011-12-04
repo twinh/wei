@@ -383,7 +383,7 @@ class Qwin extends Qwin_Widget
                 throw new Qwin_Exception('Config should be array or file.');
             }
         }
-        
+
         return self::$_instance = new self($config);
     }
 }

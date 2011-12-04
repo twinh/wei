@@ -24,12 +24,30 @@
  */
 // 加载语言,脚本和样式文件
 $this->minify->add(array(
-    $this->jQuery->getDir() . 'plugins/jqgrid/i18n/grid.locale-en.js',
-    $this->jQuery->loadPlugin('jqgrid', null, false),
+    $jQuery->getDir() . 'plugins/jqGrid/i18n/grid.locale-en.js',
+    $jQuery->loadPlugin('jqGrid'),
 ));
 ?>
 <div class="ui-jqgrid-top">
 <?php $this->trigger('viewGridTop') ?>
+</div>
+<style type="text/css">
+    #gbox_ui-jqgrid-1 {
+        border-left: 0;
+        border-right: 0;
+    }
+    #qw-jqgrid-top {
+        font-weight: normal;
+        border-top: 0;
+        padding: 3px 0 0 5px;
+        border-left: 0 none;
+        border: 0;
+        overflow: hidden;
+        line-height: 20px;
+    }
+</style>
+<div id="qw-jqgrid-top" class="ui-state-default">
+    <a href="#">添加</a> | <a href="#">删除</a>
 </div>
 <div class="qw-c"></div>
 <table id="<?php echo $jqGrid['id'] ?>"></table>
@@ -50,9 +68,9 @@ jQuery(function($){
 
     // 样式调整
     var gboxId = '#gbox_<?php echo $jqGrid['id'] ?>';
-    $(gboxId).width($(gboxId).width() - 2).addClass('ui-state-default');
+    //$(gboxId).width($(gboxId).width() - 2).addClass('ui-state-default');
     $('table.ui-jqgrid-htable tr.ui-jqgrid-labels th:last').css('border-right', 'none');
-    
+    $('#t_ui-jqgrid-1').append($('#qw-jqgrid-top').html());
     var primaryKey = 'id';
     var jqGridObj = qwin.jqGrid = $('#<?php echo $jqGrid['id'] ?>');
 
@@ -64,7 +82,8 @@ jQuery(function($){
             addition[primaryKey] = rowData[primaryKey];
             window.location.href = qwin.url.createUrl(qwin.get, addition);
             return false;
-    }});
+    }}).setGridHeight(467)
+
 
     if (document.getElementById('ui-box-tab')) {
         jqGridObj.jqGrid('setGridWidth', $('#ui-box-tab').width() - 30);
@@ -125,7 +144,7 @@ jQuery(function($){
         // 窗口宽度 - 左栏宽度 - 分割栏宽度 - 左栏宽度 - 分割栏宽度
         var leftWidth = 'none' == qwin.page.left.css('display') ? 0 : qwin.page.left.width();
         var rightWidth = 'none' == qwin.page.right.css('display') ? 0 : qwin.page.right.width();
-        var width = $(window).width() - leftWidth - rightWidth - (2 * qwin.page.splitter.width()) - 16;
+        var width = $(window).width() - leftWidth - rightWidth - (2 * qwin.page.splitter.width()) - 5;
         jqGridObj.jqGrid('setGridWidth', width);
     }
 });

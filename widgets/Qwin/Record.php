@@ -258,4 +258,15 @@ class Qwin_Record extends Doctrine_Record
             self::$_connected = true;
         }
     }
+    
+    /**
+     * 覆盖父类方法,增加返回当前对象
+     * 
+     * @return Qwin_Record 
+     */
+    public function fromArray(array $array, $deep = true)
+    {
+        parent::fromArray($array, $deep);
+        return $this;
+    }
 }
