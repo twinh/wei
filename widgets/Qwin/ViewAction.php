@@ -57,8 +57,8 @@ class Qwin_ViewAction extends Qwin_Widget
         $id = $record->options['id'];
         
         // 获取记录数据
-        $query = $this->query
-            ->getByRecord($record)
+        $query = $this
+            ->query()
             ->leftJoinByType(array('db', 'view'))
             ->where($id . ' = ?', $options['id']);
         $dbData = $query->fetchOne();
