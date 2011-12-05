@@ -29,7 +29,7 @@ $this->minify->add(array(
 ));
 ?>
 <div class="ui-jqgrid-top">
-<?php $this->trigger('viewGridTop') ?>
+<?php //$this->trigger('viewGridTop') ?>
 </div>
 <style type="text/css">
     #gbox_ui-jqgrid-1 {
