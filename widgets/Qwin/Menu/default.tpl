@@ -22,31 +22,11 @@
  * @since       2011-06-21 09:05:08
  *}
  <div class="qw-nav" id="qw-nav">
-    <a class="ui-state-default ui-corner-bl" href="{('member/my')}">{$lang.LBL_WELCOME}, {$member.username}!</a>
+    <a class="ui-state-default ui-corner-bl" href="?{('member/my')}">{$lang.LBL_WELCOME}, {$member.username}游客!</a>
     <!--<a class="ui-state-default" href="#">{$lang.LBL_MANAGEMENT}</a>-->
     {if 'guest' == $member.username}
     <a class="ui-state-default qw-last-link qw-tabs-false" href="#">{$lang.LBL_LOGIN}</a>
     {else}
     <a class="ui-state-default qw-last-link qw-tabs-false" href="#">{$lang.LBL_LOGOUT}</a>
     {/if}
-</div>
-<div class="qw-c"></div>
-<div class="qw-menu">
-    <ul class="ui-widget-content qw-menu-ul">
-    {strip}
-        <li class="ui-widget ui-state-active ui-corner-top"> <a href="{$menus.qwin.url}">{$menus.qwin.title}</a>
-        </li>
-        {foreach from=$menus[0] item=menu}
-        <li class="ui-widget ui-state-default ui-corner-top"><a href="{$menu.url}" target="{$menu.target}">{$menu.title}</a>
-        {if isset($menus[1][$menu.id])}
-        <ul class="ui-state-hover ui-corner-bottom">
-            {foreach from=$menus[1][$menu.id] item=subMenu}
-            <li><a href="{$subMenu.url}" target="{$subMenu.target}">{$subMenu.title}</a></li>
-            {/foreach}
-        </ul>
-        {/if}
-        </li>
-        {/foreach}
-    {/strip}
-    </ul>
 </div>

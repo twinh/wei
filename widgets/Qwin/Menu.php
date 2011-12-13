@@ -24,69 +24,24 @@
  */
 
 class Qwin_Menu extends Qwin_Widget
-{
-    /**
-     * 默认选项
-     * 
-     * @var array
-     */
-    public $options = array(
-        'max' => 8,
-        'more' => array(
-            'id' => 'more',
-            'url' => 'javascript:;',
-            'target' => '_self',
-            'title' => 'ACT_MORE',
-        ),
-    );
-    
+{    
     public function triggerHeaderRight()
     {
-        // 加载页眉导航的缓存
-        $menus = require $this->cache->options['dir'] . 'menu.php';
-
-        // 将超出的菜单附加到“更多"的菜单下
-        if ($this->options['max'] < count($menus[0])) {
-            // "更多"菜单的子菜单
-            $moreMenus = array_splice($menus[0], $this->options['max']);
-
-            // 根菜单
-            $menus[0] = array_splice($menus[0], 0, $this->options['max']);
-
-            // 附加“更多”的菜单
-            $this->options['more']['title'] = $this->lang[$this->_defaults['more']['title']];
-            $menus[0] += array(
-                'more' => $this->options['more']
-            );
-            $menus[1]['more'] = $moreMenus;
-        }
-
-        // 增加Qwin链接
-        $menus['qwin'] = array(
-            'title' => $this->lang['LBL_QWIN'],
-            'url' => $this->url->url('index', 'index'),
-        );
-
-        // 页面名称
-        $queryString = empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING'];
-        $pageUrl = basename($_SERVER['PHP_SELF']) . $queryString;
-
         // 获取用户信息
         $member = $this->session->get('member');
         
         // 加载样式和脚本
-        $this->_dir = dirname(__FILE__) . '/Menu/';
+        $this->_dir = $this->getDir();
         $view = $this->view;
         $this->minify->add(array(
-            $view->getFile($this->_dir . 'default.css'),
-            $view->getFile($this->_dir . 'default.js'),
+            $view->getFile($this->_dir . '/default.css'),
+            $view->getFile($this->_dir . '/default.js'),
         ));
         
         $smarty = $this->smarty->getObject();
         $smarty->assign('lang', $this->lang);
         $smarty->assign('member', $member);
-        $smarty->assign('menus', $menus);
-        $smarty->display($this->_dir . 'default.tpl');
+        $smarty->display($this->_dir . '/default.tpl');
     }
     
     public function getDir()

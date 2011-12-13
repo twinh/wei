@@ -60,11 +60,37 @@ a {
 }
 /* 整体布局
 ----------------------------------*/
-#qw-body {
-    margin: 0 auto;
-    border: none;
-    height: 100%;
+.ui-layout-north,
+.ui-layout-west,
+.ui-layout-center,
+.ui-layout-east,
+.ui-layout-south {
+    border: 0;
 }
+.ui-state-default-north,
+.ui-state-default-south {
+    border-width: 1px 0 1px 0;
+}
+
+.ui-state-default-west,
+.ui-state-default-east {
+    border-width: 0 1px 0 1px;
+}
+.ui-state-active-west {
+    border-left: 0;
+    border: 0;
+}
+#ui-west-toggler-closed {
+    width: 16px;
+    height: 16px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 1px;
+}
+
 /* 页眉 */
 #qw-header {
     clear: both;
@@ -92,25 +118,6 @@ a {
 #qw-header-right {
     vertical-align: top;
 }
-#qw-header2 {
-    height: 4px;
-    border-left: 0;
-    border-right: 0;
-}
-/* 中间内容 */
-#qw-main-table {
-    width: 100%;
-}
-#qw-main {
-    vertical-align: top;
-}
-#qw-left{
-    width: 180px;
-    vertical-align: top;
-}
-#qw-left-content {
-    width: 180px;
-}
 .qw-splitter-content {
     width: 4px;
     height: 100%;
@@ -121,29 +128,8 @@ a {
     padding-bottom: 20px;
     border: 0;
 }
-#qw-content {
-/*    padding: 5px;*/
-}
-#qw-main .qw-splitter {
-    width: 4px;
-    border-top: none;
-    vertical-align: top;
-    cursor: pointer;
-}
-#qw-right{
-    width: 180px;
-    vertical-align: top;
-}
-#qw-right-content {
-    width: 180px;
-    overflow: hidden;
-}
 /* 页脚 */
 #qw-footer {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    z-index: 999;
     width: 100%;
     height: 20px;
     text-align: right;
@@ -164,22 +150,49 @@ a {
 #qw-copyright {
     text-align: center;
 }
-/* 中间内容 */
-#qw-center {
-    /* 解决浮动页脚挡住页面的问题 TODO 更合适的方法 */
-    padding-bottom: 25px;
-    border: none;
+/* west */
+#west-menu .ui-accordion-header {
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    margin-top: 0;
+    border-right: none;
+    border-left: none;
 }
-#qw-center .qw-content-title{
-    float: left;
-    padding: 5px 18px 3px 7px;
-    font-size: 14px;
+#west-menu .ui-accordion-header a {
     display: block;
+    font-size: 1em;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    /*padding: 5px 0.5em 5px 0.7em;*/
 }
-#qw-content {
+#west-menu .ui-accordion-content {
+    padding: 0;
+}
+#west-menu .ui-accordion-content ul li {
+    padding: 4px 16px;
+}
+#west-menu-title {
+    line-height: 22px;
+    height: 22px;
+    text-indent: 4px;
+    font-size: 12px;
     border: 0;
-    background: none;
-    overflow: hidden;
+}
+#ui-west-toggler-open {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    font-size: 12px;
+    float: right;
+    display: block;
+    text-align: center;
+    margin: 2px 2px 0 0;
+    padding: 0;
+    line-height: normal;
 }
 /* TODO */
 div.qw-content-tab{

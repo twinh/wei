@@ -21,9 +21,6 @@
  * @version     $Id$
  * @since       2010-01-20 03:20:19
  */
-
-jQuery.noConflict();
-
 var qwin = {
     get: {},
     app: {},
@@ -31,50 +28,54 @@ var qwin = {
     page: {},
     ajax: {}
 };
-
-qwin.urlSeparator = {
-    0: '&',
-    1: '='
-};
-qwin.url = {
-    createUrl : function(array1, array2)
-    {
-        // TODO: 合并数组1和2
-        if ('undefined' != typeof(array2)) {
-            for(var i in array2) {
-                array1[i] = array2[i];
-            }
-        }
-        return '?' + this.arrayKey2Url(array1);
-    },
-    arrayKey2Url : function(arr) {
-        var url = '';
-        for (var i in arr) {
-            url += this.array2Url(arr[i], i) + qwin.urlSeparator[0];
-        }
-        return url.slice(0, -1);
-    },
-    array2Url : function(arr, name)
-    {
-        var url = '';
-        if ('object' == typeof(arr)) {
-            for (var key in arr) {
-                if ('object' == typeof(arr[key])) {
-                    url += this.array2Url(arr[key], name + '[' + key + ']') + qwin.urlSeparator[0];
-                } else if(name) {
-                    url += name + '[' + key + ']' + qwin.urlSeparator[1] + arr[key] + qwin.urlSeparator[0];
-
-                } else {
-                    url += name + qwin.urlSeparator[1] + arr[key] + qwin.urlSeparator[0];
-                }
-            }
-        } else {
-            return name + qwin.urlSeparator[1] + arr;
-        }
-        return url.slice(0, -1);
-    }
-};
 jQuery(function($){
+    var layout = $('body').layout({
+        defaults: {
+            paneClass: 'ui-widget-content',
+            resizerClass: 'ui-state-default'
+        },
+        north: {
+            resizable: false,
+            slidable: false,
+            togglerClass: null
+        },
+        south: {
+            resizable: false,
+            spacing_closed: 0,
+            slidable: false,
+            spacing_open: 0,
+            togglerClass: null
+        },
+        west: {
+            minSize: 150,
+            maxSize: 200,
+            spacing_closed: 23,
+            togglerAlign_closed: 'top',
+            togglerContent_closed: '<div id="ui-west-toggler-closed" class="ui-state-default"><span class="ui-icon ui-icon-carat-1-e"></span></div>',
+            togglerLength_closed: 22
+        },
+        east: {
+            initClosed: true,
+            resizable: false,
+            slidable: false,
+            spacing_closed: 0
+        }
+    }).addCloseBtn('#ui-west-toggler-open', 'west');
+    
+    // 左栏打开按钮增加鼠标滑过效果
+    $('#ui-west-toggler-closed').qui();
+    
+    // 左栏关闭按钮增加点击事件
+    $('#ui-west-toggler-open').qui().click(function(){
+        layout.close('west');
+    });
+    
+    $('#west-menu').accordion({
+        header: 'h3',
+        icons: false
+    });
+    $('#west-menu-title').qui();
+    
     // 设定元数据从data属性取值
     $.metadata.setType('attr', 'data');
     
