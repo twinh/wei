@@ -42,10 +42,6 @@ $menus = require $this->cache->options['dir'] . 'menu.php';
 </style>
 <script type="text/javascript">
     qwin.lang = <?php echo json_encode($lang->toArray()) ?>;
-    jQuery(function($){
-        $('#west-menu li').qui();
-        //ui-accordion-header ui-helper-reset ui-state-default ui-state-active ui-corner-top
-    });
 </script>
 </head>
 <body>
