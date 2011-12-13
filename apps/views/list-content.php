@@ -28,9 +28,6 @@ $this->minify->add(array(
     $jQuery->loadPlugin('jqGrid'),
 ));
 ?>
-<div class="ui-jqgrid-top">
-<?php //$this->trigger('viewGridTop') ?>
-</div>
 <style type="text/css">
     #gbox_ui-jqgrid-1 {
         border-left: 0;
@@ -47,7 +44,7 @@ $this->minify->add(array(
     }
 </style>
 <div id="qw-jqgrid-top" class="ui-state-default">
-    <a href="#">添加</a> | <a href="#">删除</a>
+    <a href="#">添加</a> | <a href="#">编辑</a> | <a href="#">删除</a>
 </div>
 <div class="qw-c"></div>
 <table id="<?php echo $jqGrid['id'] ?>"></table>
@@ -141,6 +138,7 @@ jQuery(function($){
         setJqGridWidth();
     });
     function setJqGridWidth() {
+        return true;
         // 窗口宽度 - 左栏宽度 - 分割栏宽度 - 左栏宽度 - 分割栏宽度
         var leftWidth = 'none' == qwin.page.left.css('display') ? 0 : qwin.page.left.width();
         var rightWidth = 'none' == qwin.page.right.css('display') ? 0 : qwin.page.right.width();
