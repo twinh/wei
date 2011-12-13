@@ -148,23 +148,6 @@ jQuery(function($){
         }
     }
     
-    qwin.page = {
-        left: $('#qw-left'),
-        right: $('#qw-right'),
-        center: $('#qw-center'),
-        content: $('#qw-content'),
-        splitter: $('#qw-main > td.qw-splitter'),
-        fixContentHeight: function(){
-            if (!document.getElementById('qw-main-table')) {
-               return false;
-            }
-            var height = $(window).height() - $('#qw-main-table').offset().top;
-            $('#qw-main-table').css('height', height);
-            $(window).trigger('afterFixContentHeight');
-            return true;
-        }
-    };
-    
     // 设置全局Ajax提示信息
 //    qwin.ajax.show = function(msg){
 //        $('#qw-ajax').html(msg).css({
@@ -187,22 +170,6 @@ jQuery(function($){
 //          $('#qw-content').html(data);
 //    });
 
-    // 调整中间栏到最大高度
-    // 修复360极速浏览器(6.0Chrome内核)高度不正确的问题
-    $(window).load(function() {
-        qwin.page.fixContentHeight();
-    }).resize(function(){
-        qwin.page.fixContentHeight();
-    });
-
-    // 点击分割栏缩进
-    qwin.page.splitter.qui().click(function(){
-        var id = $(this).attr('id');
-        $('#qw-' + id.substring(id.lastIndexOf('-') + 1, id.length)).toggle(0, function(){
-            qwin.page.splitter.trigger('toggle');
-        });
-    });
-
     // 为表单增加样式和鼠标操作效果 // input:submit, input:reset, input:button ?
     $('button.qw-button, a.qw-anchor').each(function(){
         $(this).button($(this).metadata());
@@ -224,9 +191,6 @@ jQuery(function($){
     $('table.ui-table td.ui-state-default').qui();
     $('table.ui-table td a.ui-jqgrid-icon').qui();
 
-    //    jQuery.metadata.setType('attr', 'data');
-    //var data = $('#d').metadata();
-    
     /*if ($.browser.mozilla) {
         function fixSelectStyle(obj) {
             obj.attr('style', obj.find('option:selected').attr('style'));
@@ -237,10 +201,4 @@ jQuery(function($){
             fixSelectStyle($(this));
         });
     }*/
-    
-    /*$('#qw-header2').click(function(){
-        $('#qw-header').slideToggle(0, function(){
-            qwin.page.fixContentHeight();
-        });
-    });*/
 });
