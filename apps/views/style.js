@@ -71,6 +71,7 @@ jQuery(function($){
     });
     
     $('#west-menu').accordion({
+        autoHeight: false,
         header: 'h3',
         icons: false
     });
