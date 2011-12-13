@@ -74,6 +74,7 @@ jQuery(function($){
         header: 'h3',
         icons: false
     });
+    $('#west-menu li').qui();
     $('#west-menu-title').qui();
     
     // 设定元数据从data属性取值
