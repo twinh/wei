@@ -35,10 +35,8 @@ $this->minify->add(array(
     }
     #qw-jqgrid-top {
         font-weight: normal;
-        border-top: 0;
         padding: 3px 0 0 5px;
-        border-left: 0 none;
-        border: 0;
+        border-width: 0 0 0 0;
         overflow: hidden;
         line-height: 20px;
     }
@@ -126,24 +124,5 @@ jQuery(function($){
         window.location.href = url;
         return false;
     });
-
-    // 根据窗口变化设置jqGrid宽度等
-    // 修复360极速浏览器(6.0Chrome内核)宽度不正确的问题
-    $(window).load(function() {
-        setJqGridWidth();
-    }).resize(function(){
-        setJqGridWidth();
-    });
-    qwin.page.splitter.bind('toggle', function(){
-        setJqGridWidth();
-    });
-    function setJqGridWidth() {
-        return true;
-        // 窗口宽度 - 左栏宽度 - 分割栏宽度 - 左栏宽度 - 分割栏宽度
-        var leftWidth = 'none' == qwin.page.left.css('display') ? 0 : qwin.page.left.width();
-        var rightWidth = 'none' == qwin.page.right.css('display') ? 0 : qwin.page.right.width();
-        var width = $(window).width() - leftWidth - rightWidth - (2 * qwin.page.splitter.width()) - 5;
-        jqGridObj.jqGrid('setGridWidth', width);
-    }
 });
 </script>

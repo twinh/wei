@@ -37,12 +37,13 @@ jQuery(function($){
         north: {
             resizable: false,
             slidable: false,
+            spacing_open: 0,
             togglerClass: null
         },
         south: {
             resizable: false,
-            spacing_closed: 0,
             slidable: false,
+            spacing_closed: 0,
             spacing_open: 0,
             togglerClass: null
         },
@@ -77,6 +78,11 @@ jQuery(function($){
     });
     $('#west-menu li').qui();
     $('#west-menu-title').qui();
+    
+    $('#qw-nav a').qui({
+        click: true,
+        focus: true
+    });
     
     // 设定元数据从data属性取值
     $.metadata.setType('attr', 'data');
