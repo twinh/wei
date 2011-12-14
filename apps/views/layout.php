@@ -17,32 +17,25 @@ $minify->add(array(
     $jQuery->loadUi('button', false),
     $jQuery->loadUi('position', false),
     $jQuery->loadUi('draggable', false),
+    $jQuery->loadUi('tabs', false),
     $jQuery->loadUi('accordion', false),
+    $jQuery->loadUi('resizable', false),
     $jQuery->loadEffect('core', false),
     $jQuery->loadEffect('slide', false),
     $jQuery->loadPlugin('qui', null, false),
     $jQuery->loadPlugin('layout', null, false),
     $jQuery->loadPlugin('blockUI', null, false),
     $jQuery->loadPlugin('metadata', null, false),
+    $jQuery->loadPlugin('scrollabletab', null, false),
+    $jQuery->loadPlugin('tmpl', null, false),
+    $jQuery->loadPlugin('qtabs', null, false),
+    $jQuery->loadUi('sortable', false),
     $this->getFile('views/style.js'),
 ));
 // 加载页眉导航的缓存 todo index controller
 $menus = require $this->cache->options['dir'] . 'menu.php';
 //$viewOnly = $this->request->get('view-only');
 ?>
-<style type="text/css">
-    #west-menu .ui-icon {
-        float: left;
-    }
-    #west-menu li.ui-state-hover {
-        border: 0;
-        font-weight: normal;
-        background-image: none;
-    }
-</style>
-<script type="text/javascript">
-    qwin.lang = <?php echo json_encode($lang->toArray()) ?>;
-</script>
 </head>
 <body>
 <div class="ui-layout-north">
@@ -56,7 +49,11 @@ $menus = require $this->cache->options['dir'] . 'menu.php';
                 </div>
             </td>
             <td id="qw-header-right" colspan="2">
-                <?php $this->trigger('headerRight') ?>
+                <div class="qw-nav" id="qw-nav">
+                    <a class="ui-state-default ui-corner-bl" href="?member/my">欢迎您, 游客!</a>
+                    <!--<a class="ui-state-default" href="#">管理</a>-->
+                    <a class="ui-state-default qw-last-link qw-tabs-false" href="#">注销</a>
+                </div>
             </td>
         </tr>
     </table>
@@ -100,8 +97,51 @@ $menus = require $this->cache->options['dir'] . 'menu.php';
     ?>
     </div>
 </div>
+<style type="text/css">
+    
+</style>
+<script type="text/javascript">
+    qwin.lang = <?php echo json_encode($lang->toArray()) ?>;
+    jQuery(function($){
+        tab_counter = 2;
+        
+        $tabs = $('#qw-tabs').tabs({
+            closable: true,
+            add: function( event, ui ) {
+                var tab_content = "Tab " + tab_counter + " content.";
+                $( ui.panel ).append( "<p>" + tab_content + "</p>" );
+            }
+        });
+        
+        $tabs.find('ul.ui-tabs-nav')
+            .removeClass('ui-widget-header ui-helper-reset')
+            .addClass('ui-state-default');
+        
+        // actual addTab function: adds new tab using the title input from the form above
+        function addTab(title) {
+            var id = '#tabs-' + tab_counter;
+            $tabs.tabs("add", id, title);
+            tab_counter++;
+        }
+        
+        addTab('用户管理');
+        addTab('用户管理2');
+        addTab('用户管理3');
+        addTab('用户管理3');
+        addTab('用户管理3');
+        addTab('用户管理3');
+        addTab('用户管理3');
+    });
+</script>
 <div class="ui-layout-center">
-    <?php require $this->getElement('content') ?>
+    <div id="qw-tabs">
+        <ul>
+            <li><a href="#tabs-1">欢迎光临</a></li>
+        </ul>
+        <div id="tabs-1">
+            <?php require $this->getElement('content') ?>
+        </div>
+    </div>
 </div>
 <div class="ui-layout-east">
     
