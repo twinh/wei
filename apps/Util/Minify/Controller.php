@@ -64,6 +64,6 @@ class Util_Minify_Controller extends Qwin_Controller
 
         // serve!
         $result = Minify::serve('MinApp', $options);
-        $this->_view->setDisplayed();
+        $this->view->setDisplayed();
     }
 }
