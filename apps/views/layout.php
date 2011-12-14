@@ -26,10 +26,7 @@ $minify->add(array(
     $jQuery->loadPlugin('layout', null, false),
     $jQuery->loadPlugin('blockUI', null, false),
     $jQuery->loadPlugin('metadata', null, false),
-    $jQuery->loadPlugin('scrollabletab', null, false),
     $jQuery->loadPlugin('tmpl', null, false),
-    $jQuery->loadPlugin('qtabs', null, false),
-    $jQuery->loadUi('sortable', false),
     $this->getFile('views/style.js'),
 ));
 // 加载页眉导航的缓存 todo index controller

@@ -154,8 +154,8 @@ a {
     -webkit-border-radius: 0px;
     border-radius: 0px;
     margin-top: 0;
-    border-right: none;
-    border-left: none;
+    border-right: 0;
+    border-left: 0;
 }
 #west-menu .ui-accordion-header a {
     display: block;
