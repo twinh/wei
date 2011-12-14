@@ -36,24 +36,16 @@ $menus = require $this->cache->options['dir'] . 'menu.php';
 </head>
 <body>
 <div class="ui-layout-north">
-    <table id="qw-header" class="ui-widget" border="0" cellpadding="0" cellspacing="0">
-        <tr>
-            <td id="qw-header-left">
-                <div id="qw-logo" class="ui-widget-content">
-                    <a href="?">
-                        <img src="<?php echo $this->getUrlFile('views/images/logo.png') ?>" alt="logo" />
-                    </a>
-                </div>
-            </td>
-            <td id="qw-header-right" colspan="2">
-                <div class="qw-nav" id="qw-nav">
-                    <a class="ui-state-default ui-corner-bl" href="?member/my">欢迎您, 游客!</a>
-                    <!--<a class="ui-state-default" href="#">管理</a>-->
-                    <a class="ui-state-default qw-last-link qw-tabs-false" href="#">注销</a>
-                </div>
-            </td>
-        </tr>
-    </table>
+    <div id="qw-logo" class="ui-widget-content">
+        <a href="?">
+            <img src="<?php echo $this->getUrlFile('views/images/logo.png') ?>" alt="logo" />
+        </a>
+    </div>
+    <div class="qw-nav" id="qw-nav">
+        <a class="ui-state-default ui-corner-bl" href="?member/my">欢迎您, 游客!</a>
+        <!--<a class="ui-state-default" href="#">管理</a>-->
+        <a class="ui-state-default qw-last-link qw-tabs-false" href="#">注销</a>
+    </div>
 </div>
 <div class="ui-layout-west">
     <h3 id="west-menu-title" class="ui-state-default">
