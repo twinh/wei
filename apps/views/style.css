@@ -104,6 +104,7 @@ a {
     vertical-align: top;
 }
 #qw-logo {
+    height: 60px;
     width: 180px;
     font-weight: bold;
     font-size: 32px;
@@ -224,6 +225,10 @@ a {
 }
 #qw-tabs .ui-tabs-panel {
     padding: 0;
+}
+#qw-tabs .ui-tabs-nav li {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 #qw-tabs .ui-tabs-nav li a {
     padding: 4px 8px;
