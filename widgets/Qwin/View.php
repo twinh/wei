@@ -97,6 +97,23 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         ob_start();
     }
     
+    public function getViewFile()
+    {
+        // 未定义视图元素,则查找该应用目录下的视图文件
+        $module = $this->module()->toPath();
+        $action = $this->action()->toString();
+        foreach ($this->options['dirs'] as $dir) {
+            $file = $dir . $module . 'views/' . $action . '.php';
+            if (is_file($file)) {
+                return $file;
+            } else {
+                $fileCache[] = $file;
+            }
+        }
+
+        throw new Qwin_Exception('All view files not found: "' . implode(';', $fileCache) . '".');
+    }
+    
     /**
      * 展示视图
      */
@@ -131,12 +148,7 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         !empty($data) && $this->assign($data);
         extract($this->_data, EXTR_OVERWRITE);
 
-        // 根据Url的请求加载不同的视图
-        $view = $this->request->get('view');
-        if (!$view) {
-            $view = 'layout';
-        }
-        require $this->getElement($view);
+        require $this->getViewFile();
         
         $this->trigger('afterViewDisplay');
         
@@ -381,67 +393,6 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         }
         return isset($this->_data[$name]) ? $this->_data[$name] : null;
     }
-
-    /**
-     * 设置一个视图元素
-     *
-     * @param string $name 视图元素的名称
-     * @param string|mixed $element 视图元素的路径
-     * @return Qwin_Application_View 当前对象
-     */
-    public function setElement($name, $element)
-    {
-        $this->_elements[$name] = $element;
-        return $this;
-    }
-    
-    /**
-     * 根据视图名称获取视图文件
-     * 
-     * @param string $name
-     * @return string 
-     */
-    public function getElement($name)
-    {
-        // 如果已定义视图元素,从视图元素中获取文件
-        if (isset($this->_elements[$name])) {
-            if (is_file($this->_elements[$name])) {
-                return $this->_elements[$name];
-            }
-            foreach ($this->options['dirs'] as $dir) {
-                if (is_file($file = $dir . $this->_elements[$name])) {
-                    return $file;
-                }
-            }
-            $this->exception('File "%s" not found.', $this->_elements[$name]);
-        }
-        
-        // 未定义视图元素,则查找该应用目录下的视图文件
-        $module = $this->module()->toPath();
-        $action = $this->action()->toString();
-        foreach ($this->options['dirs'] as $dir) {
-            $file = $dir . $module . 'views/' . $action . '-' . $name . '.php';
-            if (is_file($file)) {
-                return $file;
-            } else {
-                $fileCache[] = $file;
-            }
-            
-            $file = $dir . 'views/' . $action . '-' . $name . '.php';
-            if (is_file($file)) {
-                return $file;
-            }
-            $fileCache[] = $file;
-            
-            $file = $dir . 'views/' . $name . '.php';
-            if (is_file($file)) {
-                return $file;
-            }
-            $fileCache[] = $file;
-        }
-
-        throw new Qwin_Exception('All view files not found: "' . implode(';', $fileCache) . '".');
-    }
     
     /**
      * 从视图目录获取文件路径
@@ -502,31 +453,6 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         }
 
         $this->session['theme'] = $this->options['theme'];
-    }
-    
-    /**
-     * 删除视图元素
-     *
-     * @param string $name
-     * @return object 当前对象
-     */
-    public function removeElement($name)
-    {
-        if (isset($this->_elements[$name])) {
-            unset($this->_elements[$name]);
-        }
-        return $this;
-    }
-
-    /**
-     * 检查视图元素是否存在
-     *
-     * @param string $name 名称
-     * @return bool
-     */
-    public function elementExists($name)
-    {
-        return isset($this->_elements[(string)$name]);
     }
 
     /**
