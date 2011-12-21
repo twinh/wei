@@ -22,7 +22,7 @@ ul {
     margin: 0;
     padding: 0;
 }
-ol,ul,li{
+ol, ul, li {
     list-style: none;
 }
 table {
@@ -71,7 +71,6 @@ a {
 .ui-state-default-south {
     border-width: 1px 0 1px 0;
 }
-
 .ui-state-default-west {
     border-width: 1px 1px 0 1px;
 }
@@ -239,6 +238,9 @@ a {
     -webkit-border-radius: 0;
     border-radius: 0;
     border-width: 1px 0 1px 0;
+}
+#qw-tabs .ui-tabs-nav li a {
+    font-weight: normal;
 }
 /* List
 ----------------------------------*/

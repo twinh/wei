@@ -104,6 +104,7 @@ class Qwin extends Qwin_Widget
         'fnQ'           => true,
         'autoload'      => true,
         'autoloadPaths' => array(),
+        'widgetPrefixs' => array('QwinX_', 'Qwin_'),
     );
 
     /**
@@ -181,7 +182,7 @@ class Qwin extends Qwin_Widget
             spl_autoload_register(array($this, 'autoload'));
         }
         
-        $this->_widgets['Qwin_Qwin'] = $this;
+        $this->_widgets['qwin'] = $this;
         $this->_objects['Qwin'] = $this;
     }
 
@@ -214,18 +215,21 @@ class Qwin extends Qwin_Widget
     public static function widget($name)
     {
         $q = self::getInstance();
-        $class = 'Qwin_' . ucfirst($name);
+        $lower = strtolower($name);
         
-        if (isset($q->_widgets[$class])) {
-            return $q->_widgets[$class];
+        if (isset($q->_widgets[$lower])) {
+            return $q->_widgets[$lower];
         }
         
-        if (!class_exists($class)) {
-            $trace = debug_backtrace();
-            $q->exception('Widget or property "%s" not found called by class "%s"', $name, $trace[2]['class']);
+        foreach ($q->options['widgetPrefixs'] as $prefix) {
+            $class = $prefix . ucfirst($name);
+            if (class_exists($class)) {
+                return $q->_widgets[$lower] = $q->call($class);
+            }
         }
         
-        return $q->_widgets[$class] = $q->call($class);
+        $trace = debug_backtrace();
+        $q->exception('Widget or property "%s" not found called by class "%s"', $name, $trace[2]['class']);
     }
     
     /**

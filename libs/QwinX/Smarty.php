@@ -23,7 +23,7 @@
  * @since       2011-04-15 22:00:11 v0.7.9
  */
 
-class Qwin_Smarty extends Qwin_Widget
+class QwinX_Smarty extends Qwin_Widget
 {
     /**
      * Smarty对象

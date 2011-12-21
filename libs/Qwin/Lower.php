@@ -1,6 +1,6 @@
 <?php
 /**
- * Exception
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -16,28 +16,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  Util
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-02-04 20:55:40
  */
 
 /**
- * @see Qwin_Exception
- */
-require_once 'Qwin/Exception.php';
-
-/**
- * Flow exception
- *
+ * Lower
+ * 
  * @package     Qwin
- * @subpackage  Util
- * @copyright   Twin Huang
+ * @subpackage  Qwin
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2011-10-5 11:27:08
  */
-class Qwin_Util_Exception extends Qwin_Exception
+class Qwin_Lower extends Qwin_Widget
 {
+    public function call()
+    {
+        $this->source = strtolower($this->source);
+        return $this;
+    }
 }

@@ -24,7 +24,7 @@
  * @since       2011-07-05 01:18:32
  */
 
-class Qwin_Query extends Doctrine_Query
+class QwinX_Query extends Doctrine_Query
 {
     /**
      * 数据排序类型

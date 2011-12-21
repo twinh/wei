@@ -24,14 +24,26 @@
  */
 
 /**
- * Remove
+ * ToHtml
  * 
- * @package     Qwin
- * @subpackage  Qwin
+ * @namespace   Qwin
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-5 12:13:28
+ * @since       2011-12-20 21:54:10
  */
-class Remove {
-    
+class Qwin_ToHtml extends Qwin_Widget
+{
+    /**
+     * 将文本转换成包含Html标签的代码
+     * 
+     * @return string 
+     */
+    public function call()
+    {
+        return str_replace(
+            array("\t"),
+            array('&nbsp;&nbsp;&nbsp;&nbsp;'),
+            nl2br($this->source)
+        );
+    }
 }

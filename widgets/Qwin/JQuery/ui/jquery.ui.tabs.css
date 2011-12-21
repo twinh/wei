@@ -35,10 +35,3 @@
     -moz-opacity: 0.7;
     filter: alpha(opacity=70);
 }
-
-.ui-tabs .ui-tabs-nav li a {
-    font-weight: normal;
-}
-.ui-tabs .ui-tabs-nav li.ui-tabs-selected  a {
-    font-weight: bold;
-}
