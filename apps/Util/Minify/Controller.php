@@ -27,6 +27,9 @@ class Util_Minify_Controller extends Qwin_Controller
 {
     public function indexAction()
     {
+        // 提前初始化视图对象,因视图对象可能包含对session等的操作
+        $this->view->setDisplayed();
+        
         ini_set('zlib.output_compression', '0');
 
         $options['maxAge'] = 1800;
@@ -64,6 +67,5 @@ class Util_Minify_Controller extends Qwin_Controller
 
         // serve!
         $result = Minify::serve('MinApp', $options);
-        $this->view->setDisplayed();
     }
 }
