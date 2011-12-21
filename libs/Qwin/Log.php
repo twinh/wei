@@ -1,6 +1,6 @@
 <?php
 /**
- * Home
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -20,17 +20,20 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-09 09:42:41
  */
 
-class Index_Controller extends Qwin_Controller
+/**
+ * Log
+ * 
+ * @namespace   Qwin
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2011-12-21 15:47:18
+ * @todo        what's log ?
+ */
+class Qwin_Log extends Qwin_Widget
 {
-    public function indexAction()
-    {
-        
-    }
-
-    public function updateLogAction()
+    public function call()
     {
         
     }
