@@ -270,3 +270,97 @@ class Qwin_Tree
         
     }
 }
+class TreeResource_Widget extends Qwin_Widget
+{
+    protected $_defaultKeys = array(
+        'id', 'parent_id', 'name',
+    );
+
+    private $_resourceCache;
+    private $_fileCache;
+
+    public function get($module, $parent = null, $keys = array(), $isPrefix = true)
+    {
+        /**
+         * 将文件缓存存到该对象中
+         * 在页面执行过程中,对于每个不同的配置(set),只会执行一次
+         */
+        if (!isset($this->_fileCache[$module])) {
+            $this->_fileCache[$module] = Com_Meta::getQueryByModule($module)
+                ->execute()
+                ->toArray();
+        }
+
+        /**
+         * 将文件缓存转换为资源缓存
+         * 在页面执行过程中,对于每个不同的资源,只会进行一次缓存
+         */
+        $args = array($module, $parent, $keys, $isPrefix);
+        $name = $this->_getResourceName($args);
+        if (isset($this->_resourceCache[$name])) {
+            return $this->_resourceCache[$name];
+        }
+
+        empty($keys) && $keys = $this->_defaultKeys;
+
+        // 配置树
+        $treeData = array();
+        $tree = new Qwin_Tree();
+        $tree
+            ->setParentDefaultValue(null)
+            ->setId($keys[0])
+            ->setParentId($keys[1])
+            ->setName($keys[2]);
+        foreach($this->_fileCache[$module] as $row) {
+             $tree->addNode($row);
+        }
+        $tree->getAllList($treeData, $parent);
+
+        $this->_resourceCache[$name]['null'] = '';
+        // 添加前缀
+        if ($isPrefix) {
+            $lang = Qwin::call('-lang');
+            $prefix1 = $lang->t('LBL_TREE_PREFIX_1');
+            $prefix2 = $lang->t('LBL_TREE_PREFIX_2');
+            $tree->setLayer($treeData);
+            foreach ($treeData as $id) {
+                $layer = $tree->getLayer($id);
+                if (0 != $layer) {
+                    $this->_resourceCache[$name][$id] = str_repeat($prefix1, $layer - 1) . $prefix2 . $tree->getValue($id);
+                } else {
+                    $this->_resourceCache[$name][$id] = $tree->getValue($id);
+                }
+            }
+        } else {
+            foreach($treeData as $id)
+            {
+                $this->_resourceCache[$name][$id] = $tree->getValue($id);
+            }
+        }
+
+        return $this->_resourceCache[$name];
+    }
+
+    public function sanitise($code, $module, $parent = null, $keys = array(), $isPrefix = true)
+    {
+        $cache = $this->getTreeResource($module, $parent, $keys, $isPrefix);
+        if (!isset($cache[$code])) {
+            return '-';
+        }
+        return $cache[$code];
+    }
+
+    private function _getResourceName($args)
+    {
+        // 编码参数,参数作为缓存的标识
+        $module = '';
+        foreach($args as $key) {
+            if (is_array($key)) {
+                $module .= implode($key);
+            } else {
+                $module .= $key;
+            }
+        }
+        return md5($module);
+    }
+}
