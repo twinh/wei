@@ -106,18 +106,6 @@ class Validator_Methods
         return true;
     }
 
-    /**
-     * 验证邮箱
-     * 
-     * @param string $value
-     * @return boolen 是否通过验证
-     * @todo ereg已经废弃
-     */
-    public function email($value)
-    {
-        return preg_match("/^[-a-zA-Z0-9_\.]+\@([0-9A-Za-z][0-9A-Za-z-]+\.)+[A-Za-z]{2,5}$/i", $value);
-    }
-
     public function notNull($value)
     {
         return 'null' !== strtolower($value) || '' !== $value || null !== $value;

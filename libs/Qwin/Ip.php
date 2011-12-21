@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Qwin Framework
  *
@@ -24,19 +23,37 @@
  */
 
 /**
- * Lower
+ * Ip
  * 
- * @package     Qwin
- * @subpackage  Qwin
+ * @namespace   Qwin
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-5 11:27:08
+ * @since       2011-12-20 21:46:14
  */
-class Qwin_Lower extends Qwin_Widget
+class Qwin_Ip extends Qwin_Widget
 {
-    public function render()
+    /**
+     * 获取Ip地址
+     *
+     * @return string Ip地址
+     */
+    public function call()
     {
-        $this->source = strtolower($this->source);
-        return $this;
+        if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } elseif (isset($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (isset($_SERVER['REMOTE_ADDR'])) {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        } elseif (getenv('HTTP_X_FORWARDED_FOR')) {
+            $ip = getenv('HTTP_X_FORWARDED_FOR');
+        } elseif (getenv('HTTP_CLIENT_IP')) {
+            $ip = getenv('HTTP_CLIENT_IP');
+        } elseif (getenv('REMOTE_ADDR')) {
+            $ip = getenv('REMOTE_ADDR');
+        } else {
+            $ip = 'Unknown';
+        }
+        return $ip;
     }
 }

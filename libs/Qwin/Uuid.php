@@ -24,24 +24,38 @@
  */
 
 /**
- * ForceInArray
+ * Uuid
  * 
  * @namespace   Qwin
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-11-15 12:42:41
+ * @since       2011-12-20 22:05:35
  */
-class Qwin_ForceInArray extends Qwin_Widget
+class Qwin_Uuid extends Qwin_Widget
 {
     /**
-     * 强制提供值作为数组的一项
+     * 产生一个UUID号
      *
-     * @param array $array 数组
-     * @return mixed
+     * @return string UUID
+     * @see http://stackoverflow.com/questions/2040240/php-function-to-generate-v4-uuid
+     * @see http://php.net/manual/en/function.uniqid.php
      */
-    public function call($array)
+    public function call()
     {
-        !in_array($this->source, $array) && $this->source = $array[key($array)];
-        return $this;
+        return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+            // 32 bits for "time_low"
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+            // 16 bits for "time_mid"
+            mt_rand(0, 0xffff),
+            // 16 bits for "time_hi_and_version",
+            // four most significant bits holds version number 4
+            mt_rand(0, 0x0fff) | 0x4000,
+            // 16 bits, 8 bits for "clk_seq_hi_res",
+            // 8 bits for "clk_seq_low",
+            // two most significant bits holds zero and one for variant DCE1.1
+            mt_rand(0, 0x3fff) | 0x8000,
+            // 48 bits for "node"
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+        );
     }
 }

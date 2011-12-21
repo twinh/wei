@@ -32,6 +32,11 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-5 11:54:30
  */
-class UpperFirst {
-    
+class Qwin_UpperFirst extends Qwin_Widget
+{
+    public function call()
+    {
+        $this->source = ucfirst($this->source);
+        return $this;
+    }
 }

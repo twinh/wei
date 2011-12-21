@@ -27,7 +27,7 @@ class Index_Controller extends Qwin_Controller
 {
     public function indexAction()
     {
-        
+
     }
 
     public function updateLogAction()

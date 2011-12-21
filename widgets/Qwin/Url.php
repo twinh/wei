@@ -28,18 +28,10 @@
 class Qwin_Url extends Qwin_Widget
 {
     /**
-     * 提供一个只有两个值的数组,供快速构建url服务
-     * @var array
-     * @todo 允许配置
-     */
-    protected $_url = array(
-        'name1' => 'module',
-        'name2' => 'action',
-    );
-
-    /**
      * 默认选项
      * @var array
+     * 
+     *       names 提供一个只有两个值的数组,供快速构建url服务
      */
     public $options = array(
         'basicParams' => array(),

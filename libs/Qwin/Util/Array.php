@@ -48,7 +48,7 @@ class Qwin_Util_Array
     }
 
     /**
-     * 删除数组中指定的键名
+     * 删除二维数组中指定的键名
      *
      * @param array $data 二维数组,一般是从数据库读出
      * @param array $keyList 删除的键名
@@ -126,19 +126,6 @@ class Qwin_Util_Array
     public static function explodeByUpper($string)
     {
         return preg_split('/(?<!^)(?=[A-Z])/', (string)$string);
-    }
-
-    /**
-     * 强制提供值作为数组的一项
-     *
-     * @param mixed $value 提供的值
-     * @param array $array 数组
-     * @return mixed
-     */
-    public static function forceInArray($value, array $array)
-    {
-        !in_array($value, $array) && $value = $array[key($array)];
-        return $value;
     }
 
     /**
