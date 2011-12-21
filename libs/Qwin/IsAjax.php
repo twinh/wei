@@ -1,6 +1,6 @@
 <?php
 /**
- * Home
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -20,18 +20,21 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-09 09:42:41
  */
 
-class Index_Controller extends Qwin_Controller
+/**
+ * IsAjax
+ * 
+ * @namespace   Qwin
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2011-12-21 13:56:26
+ */
+class Qwin_IsAjax extends Qwin_Widget
 {
-    public function indexAction()
+    public function call()
     {
-        
-    }
-
-    public function updateLogAction()
-    {
-        
+        return isset($_SERVER['HTTP_X_REQUESTED_WITH'])
+            && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
     }
 }
