@@ -1,6 +1,6 @@
 <?php
 /**
- * Reflection
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -20,32 +20,25 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-09-16 13:35:13
  */
 
-class Qwin_Reflection extends Qwin_Widget
+/**
+ * Now
+ * 
+ * @namespace   Qwin
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2011-12-22 21:08:08
+ */
+class Qwin_Now extends Qwin_Now
 {
-    public static function exportValue($value)
+    public function call($now = null)
     {
-        if (is_array($value)) {
-            if (empty($value)) {
-                $value = 'array( )';
-            } else {
-                $value = 'array(..)';
-            }
-        } elseif (is_null($value)) {
-            $value = 'null';
+        if (null == $now) {
+            return $this->time();
         } else {
-            $value = var_export($value, true);
+            $this->time(strtotime($now));
+            return $this;
         }
-        return $value;
-    }
-    
-    /**
-     * @return mixed
-     */
-    public static function call()
-    {
-        return new Qwin_Reflection_Class($this->invoker);
     }
 }
