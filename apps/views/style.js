@@ -71,10 +71,23 @@ jQuery(function($){
         layout.close('west');
     });
     
+    // todo 优化
+    var menuHeader = null;
     $('#west-menu').accordion({
         autoHeight: false,
+        collapsible: true,
         header: 'h3',
-        icons: false
+        icons: false,
+        create: function(event, ui) {
+            menuHeader = $(this).find('h3:eq(1)').css('border-top-width', 1);
+        },
+        changestart: function(event, ui) {
+            if (menuHeader) {
+                menuHeader.css('border-top-width', 0);
+            }
+            menuHeader = ui.newHeader.parent().next().find('h3');
+            menuHeader.css('border-top-width', 1);
+        }
     });
     $('#west-menu li').qui();
     $('#west-menu-title').qui();
