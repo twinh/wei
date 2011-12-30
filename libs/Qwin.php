@@ -40,7 +40,7 @@ class Qwin extends Qwin_Widget
     /**
      * 版本
      */
-    const VERSION = '0.8.0.$Revision$';
+    const VERSION = '0.8.0.$Rev$';
     
     /**
      * 存储微件对象的数组
