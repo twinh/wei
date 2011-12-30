@@ -29,6 +29,13 @@ class Index_Controller extends Qwin_Controller
     {
         
     }
+    
+    public function taeAction()
+    {
+        error_reporting(E_ALL);
+        require 'E:\work\website\qwin.qq.com\src\web\index.php';
+        echo 1234;
+    }
 
     public function updateLogAction()
     {
