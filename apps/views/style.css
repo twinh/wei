@@ -156,13 +156,15 @@ a {
     margin-top: 0;
     border-width: 0 0 1px 0;
 }
+#west-menu .ui-accordion-next-header {
+    border-width: 1px 0 1px 0;
+}
 #west-menu .ui-accordion-header a {
     display: block;
     font-size: 1em;
     padding-top: 4px;
     padding-bottom: 4px;
     font-weight: normal;
-    /*padding: 5px 0.5em 5px 0.7em;*/
 }
 #west-menu .ui-accordion-content {
     padding: 0;
