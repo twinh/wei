@@ -71,7 +71,7 @@ jQuery(function($){
         layout.close('west');
     });
     
-    // todo 优化
+    // 左栏菜单
     var menuHeader = null;
     $('#west-menu').accordion({
         autoHeight: false,
@@ -79,14 +79,12 @@ jQuery(function($){
         header: 'h3',
         icons: false,
         create: function(event, ui) {
-            menuHeader = $(this).find('h3:eq(1)').css('border-top-width', 1);
+            menuHeader = $(this).find('h3:eq(1)').addClass('ui-accordion-next-header');
         },
         changestart: function(event, ui) {
-            if (menuHeader) {
-                menuHeader.css('border-top-width', 0);
-            }
+            menuHeader.removeClass('ui-accordion-next-header');
             menuHeader = ui.newHeader.parent().next().find('h3');
-            menuHeader.css('border-top-width', 1);
+            menuHeader.addClass('ui-accordion-next-header');
         }
     });
     $('#west-menu li').qui();
