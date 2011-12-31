@@ -30,12 +30,40 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-12-14 22:32:30
  */
-// 加载语言,脚本和样式文件
-$this->minify->add(array(
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->options['charset'] ?>" />
+<title></title>
+<?php 
+echo $this->getPackerSign();
+$minify->add(array(
+    $jQuery->loadTheme($this->options['theme']),
+    $this->getFile('views/style.css'),
+    $this->getFile('views/icons/icon.css'),
+    $jQuery->loadCore(false),
+    $jQuery->loadUi('widget', false),
+    $jQuery->loadUi('core', false),
+    $jQuery->loadUi('mouse', false),
+    $jQuery->loadUi('button', false),
+    $jQuery->loadUi('position', false),
+    $jQuery->loadUi('draggable', false),
+    $jQuery->loadUi('resizable', false),
+    $jQuery->loadEffect('core', false),
+    $jQuery->loadEffect('slide', false),
+    $jQuery->loadPlugin('qui', null, false),
+    $jQuery->loadPlugin('layout', null, false),
+    $jQuery->loadPlugin('blockUI', null, false),
+    $jQuery->loadPlugin('metadata', null, false),
+    $this->getFile('views/style.js'),
     $jQuery->getDir() . 'plugins/jqGrid/i18n/grid.locale-en.js',
     $jQuery->loadPlugin('jqGrid'),
 ));
 ?>
+</head>
+<body>
 <style type="text/css">
     #gbox_ui-jqgrid-1 {
         border-left: 0;
@@ -47,6 +75,12 @@ $this->minify->add(array(
         border-width: 0 0 0 0;
         overflow: hidden;
         line-height: 20px;
+    }
+    .ui-jqgrid .ui-jqgrid-bdiv {
+        overflow-x: hidden; 
+    }
+    #ui-jqgrid-1-pager {
+        border-bottom-width: 0;
     }
 </style>
 <div id="qw-jqgrid-top" class="ui-state-default">
@@ -62,7 +96,7 @@ jQuery(function($){
     jqGrid.ondblClickRow = function(){};
     $('#<?php echo $jqGrid['id'] ?>')
         .jqGrid(jqGrid)
-        .jqGrid('navGrid', jqGrid.pager,{
+            .jqGrid('navGrid', jqGrid.pager,{
             add : false,
             edit : false,
             del : false,
@@ -85,13 +119,24 @@ jQuery(function($){
             addition[primaryKey] = rowData[primaryKey];
             window.location.href = qwin.url.createUrl(qwin.get, addition);
             return false;
-    }}).setGridHeight(467)
+    }})
 
-
-    if (document.getElementById('ui-box-tab')) {
-        jqGridObj.jqGrid('setGridWidth', $('#ui-box-tab').width() - 30);
+    
+    function setGridHeight(jqGridObj) {
+        var height = $('body').height()
+            - $('#qw-jqgrid-top').outerHeight()
+            - $('#gview_ui-jqgrid-1 .ui-jqgrid-hdiv').outerHeight()
+            - $('#ui-jqgrid-1-pager').outerHeight();
+        jqGridObj.setGridHeight(height);
     }
-
+    
+    $(window).load(function(){
+        setGridHeight(jqGridObj);
+    }).resize(function(){
+        jqGridObj.setGridWidth($(window).width());
+        setGridHeight(jqGridObj);
+    });
+    
     // 点击删除按钮
     $('#action-<?php echo $jqGrid['id'] ?>-delete').click(function(){
         var keyList = new Array(),
@@ -134,3 +179,5 @@ jQuery(function($){
     });
 });
 </script>
+</body>
+</html>
