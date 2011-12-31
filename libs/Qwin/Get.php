@@ -34,6 +34,19 @@ class Qwin_Get extends Qwin_Widget
 {
     public function call($name, $default = null /*, $type='string' ?*/)
     {
-        return Qwin::variable(isset($_GET[$name]) ? $_GET[$name] : $default);
+        if (is_string($name)) {
+            return Qwin::variable(isset($_GET[$name]) ? $_GET[$name] : $default);
+        } elseif (is_int($name)) {
+            if (!is_int($default)) {
+                return Qwin::variable(isset($this->source[$name]) ? $this->source[$name] : null);
+            } else {
+                if (is_string($this->source)) {
+                    return Qwin::variable(substr($this->source, $name, $default));
+                } elseif (is_array($this->source)) {
+                    return Qwin::variable(array_slice($this->source, $name, $default));
+                }
+            }
+        }
+        return $this;
     }
 }
