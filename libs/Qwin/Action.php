@@ -25,12 +25,12 @@
 /**
  * Action
  * 
- * @namespace   Qwin
+ * @package     Qwin
+ * @subpackage  Application
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-16 00:02:01
  */
-
 class Qwin_Action extends Qwin_Widget
 {
     protected $_source;

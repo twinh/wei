@@ -25,7 +25,8 @@
 /**
  * App
  * 
- * @namespace   Qwin
+ * @package     Qwin
+ * @subpackage  Application
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2009-11-24 20:45:11

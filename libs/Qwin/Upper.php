@@ -34,7 +34,7 @@
  */
 class Qwin_Upper extends Qwin_Widget
 {
-    public function render()
+    public function call()
     {
         $this->source = strtoupper($this->source);
         return $this;
