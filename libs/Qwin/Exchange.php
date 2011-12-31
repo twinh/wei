@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Qwin Framework
  *
@@ -27,11 +26,15 @@
  * Exchange
  * 
  * @package     Qwin
- * @subpackage  Qwin
+ * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-5 12:11:37
+ * @since       2011-10-05 12:11:37
  */
-class Exchange {
-    
+class Qwin_Exchange extends Qwin_Widget
+{
+    public function call()
+    {
+        return $this;
+    }
 }

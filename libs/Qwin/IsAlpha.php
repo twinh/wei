@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Qwin Framework
  *
@@ -24,14 +23,15 @@
  */
 
 /**
- * isAlpha
+ * IsAlpha
  * 
  * @package     Qwin
- * @subpackage  Qwin
+ * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-5 11:44:51
  */
-class isAlpha {
+class Qwin_IsAlpha extends Qwin_Widget
+{
     
 }

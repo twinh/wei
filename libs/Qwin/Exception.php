@@ -16,15 +16,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  Exception
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-04-18 11:56:29
  */
 
+/**
+ * Exception
+ * 
+ * @package     Qwin
+ * @subpackage  Widget
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2010-04-18 11:56:29
+ */
 class Qwin_Exception extends Exception
 {
     public function __construct($msg = '', $code = 0)
