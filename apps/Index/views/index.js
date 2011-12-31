@@ -37,9 +37,7 @@ jQuery(function($){
     $('#ui-west-toggler-closed').qui();
     
     // 左栏关闭按钮增加点击事件
-    $('#ui-west-toggler-open').qui().click(function(){
-        layout.close('west');
-    });
+    $('#ui-west-toggler-open').qui();
     
     // 左栏菜单
     var menuHeader = null;
@@ -57,8 +55,7 @@ jQuery(function($){
             menuHeader.addClass('ui-accordion-next-header');
         }
     });
-    $('#west-menu li').qui();
-    $('#west-menu-title').qui();
+    $('#west-menu li, #west-menu-oper').qui();
     
     $('#qw-nav a').qui({
         click: true,

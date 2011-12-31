@@ -26,7 +26,6 @@ $minify->add(array(
     $jQuery->loadPlugin('layout', null, false),
     $jQuery->loadPlugin('blockUI', null, false),
     $jQuery->loadPlugin('metadata', null, false),
-    $jQuery->loadPlugin('tmpl', null, false),
     $this->getFile('views/style.js'),
 ));
 // 加载页眉导航的缓存 todo index controller
@@ -51,6 +50,9 @@ $menus = require $this->cache->options['dir'] . 'menu.php';
     <h3 id="west-menu-title" class="ui-state-default">
         <div id="ui-west-toggler-open" class="ui-state-default">
             <span class="ui-icon ui-icon-carat-1-w"></span>
+        </div>
+        <div id="west-menu-oper" class="ui-state-default">
+            <span class="ui-icon ui-icon-gear"></span>
         </div>
         操作菜单
     </h3>
@@ -99,6 +101,9 @@ $menus = require $this->cache->options['dir'] . 'menu.php';
             add: function( event, ui ) {
                 var tab_content = "Tab " + tab_counter + " content.";
                 $( ui.panel ).append( "<p>" + tab_content + "</p>" );
+            },
+            show:function(event, ui){
+                $(ui.panel).innerHeight($('#qw-tabs').innerHeight() - $('#qw-tabs ul').outerHeight());
             }
         });
         
@@ -116,10 +121,10 @@ $menus = require $this->cache->options['dir'] . 'menu.php';
         addTab('用户管理');
         addTab('用户管理2');
         addTab('用户管理3');
-        addTab('用户管理3');
-        addTab('用户管理3');
-        addTab('用户管理3');
-        addTab('用户管理3');
+        addTab('用户管理4');
+        addTab('用户管理5');
+        addTab('用户管理6');
+        addTab('用户管理7');
     });
 </script>
 <div class="ui-layout-center">
@@ -128,7 +133,7 @@ $menus = require $this->cache->options['dir'] . 'menu.php';
             <li><a href="#tabs-1">欢迎光临</a></li>
         </ul>
         <div id="tabs-1">
-           Hello Qwin!
+            <iframe class="qw-iframe" src="http://127.0.0.1/qq/?module=member"></iframe>
         </div>
     </div>
 </div>

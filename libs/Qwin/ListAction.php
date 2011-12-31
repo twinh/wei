@@ -61,7 +61,7 @@ class Qwin_ListAction extends Qwin_Widget
         'caption'       => false,
         'rownumbers'    => true,
         'multiselect'   => true,
-        'height'        => '100%',
+        'height'        => 'auto',
         'width'         => '100%',
         'autowidth'     => true,
         'viewrecords'   => true,

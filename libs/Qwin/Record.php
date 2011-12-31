@@ -25,7 +25,7 @@
  * @since       2010-04-17 15:49:35
  */
 
-class QwinX_Record extends Doctrine_Record
+class Qwin_Record extends Doctrine_Record
 {
     /**
      * 数据库连接标识
