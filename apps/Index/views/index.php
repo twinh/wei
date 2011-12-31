@@ -128,7 +128,7 @@ $menus = require $this->cache->options['dir'] . 'menu.php';
             <li><a href="#tabs-1">欢迎光临</a></li>
         </ul>
         <div id="tabs-1">
-            <?php require 'index-content.php' ?>
+           Hello Qwin!
         </div>
     </div>
 </div>
