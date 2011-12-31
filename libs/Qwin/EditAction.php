@@ -1,6 +1,6 @@
 <?php
 /**
- * Update
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -16,15 +16,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Widget
- * @subpackage  EditAction
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id: Edit.php 556 2011-04-17 13:32:39Z itwinh@gmail.com $
- * @since       2010-10-11 11:55:35
+ * @version     $Id$
  */
 
+/**
+ * EditAction
+ * 
+ * @package     Qwin
+ * @subpackage  Application
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2010-10-11 11:55:35
+ */
 class Qwin_EditAction extends Qwin_Widget
 {
     /**

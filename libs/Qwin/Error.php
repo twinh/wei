@@ -1,6 +1,6 @@
 <?php
 /**
- * Widget
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -20,10 +20,18 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-04-02 09:29:07
- * @todo        是否与视图微件耦合?是否应该整合为一个
  */
 
+/**
+ * EditFormAction
+ * 
+ * @package     Qwin
+ * @subpackage  Application
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2011-04-02 09:29:07
+ * @todo        fix
+ */
 class Qwin_Error extends Qwin_Widget
 {   
     public $options = array(
