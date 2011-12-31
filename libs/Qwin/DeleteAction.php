@@ -1,6 +1,6 @@
 <?php
 /**
- * Widget
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -20,10 +20,17 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-10-11 23:31:25
- * @todo        各类检查
  */
 
+/**
+ * Controller
+ * 
+ * @package     Qwin
+ * @subpackage  Application
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2010-10-11 23:31:25
+ */
 class Qwin_DeleteAction extends Qwin_Widget
 {
     public $options = array(

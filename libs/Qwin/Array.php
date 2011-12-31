@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Qwin Framework
  *
@@ -27,12 +26,13 @@
  * Array
  * 
  * @package     Qwin
- * @subpackage  Qwin
+ * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-06 18:34:13
  * @todo        get, delete, next, prev, nextKey, prevKey, renameKey, copy, insertAfter, insertAfterKey, ..
  */
-class Qwin_Array {
-    
+class Qwin_Array extends Qwin_Widget
+{
+    // todo
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * 用于添加页面的表单
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -19,10 +19,18 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id: Form.php 556 2011-04-17 13:32:39Z itwinh@gmail.com $
- * @since       2010-10-11 17:14:08
+ * @version     $Id$
  */
 
+/**
+ * AddFormAction
+ * 
+ * @package     Qwin
+ * @subpackage  Application
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2010-10-11 17:14:08
+ */
 class Qwin_AddFormAction extends Qwin_Widget
 {
     /**

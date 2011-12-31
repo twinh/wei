@@ -1,6 +1,6 @@
 <?php
 /**
- * Controller
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -16,16 +16,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  Application
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
+ */
+
+/**
+ * Controller
+ * 
+ * @package     Qwin
+ * @subpackage  Application
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2009-11-24 20:45:11
  * @todo        重新实现禁用行为
  */
-
 class Qwin_Controller extends Qwin_Widget
 {
     public function __construct($source = null)
