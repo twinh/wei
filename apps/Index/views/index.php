@@ -34,9 +34,9 @@ $minify->add(array(
         <div id="ui-west-toggler-open" class="ui-state-default">
             <span class="ui-icon ui-icon-carat-1-w"></span>
         </div>
-        <div id="west-menu-oper" class="ui-state-default">
+        <a href="javascript:alert('敬请期待!');" id="west-menu-oper" class="ui-state-default">
             <span class="ui-icon ui-icon-gear"></span>
-        </div>
+        </a>
         操作菜单
     </h3>
     <div id="west-menu">
@@ -116,7 +116,7 @@ $minify->add(array(
             <li><a href="#tabs-1">欢迎光临</a></li>
         </ul>
         <div id="tabs-1">
-            <iframe class="qw-iframe" src="http://127.0.0.1/qq/?module=member"></iframe>
+            <iframe class="qw-iframe" src="?module=member"></iframe>
         </div> 
     </div>
 </div>
