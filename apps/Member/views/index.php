@@ -40,26 +40,13 @@
 <?php 
 echo $this->getPackerSign();
 $minify->add(array(
-    $jQuery->loadTheme($this->options['theme']),
+    $jQuery->getTheme($this->options['theme']),
+    $jQuery->getCore(),
+    $jQuery->getDir() . '/jqGrid/i18n/grid.locale-cn.js',
+    $jQuery->get('ui.core, effects, qui, ui.button, metadata, jqGrid'),
     $this->getFile('views/style.css'),
     $this->getFile('views/icons/icon.css'),
-    $jQuery->loadCore(false),
-    $jQuery->loadUi('widget', false),
-    $jQuery->loadUi('core', false),
-    $jQuery->loadUi('mouse', false),
-    $jQuery->loadUi('button', false),
-    $jQuery->loadUi('position', false),
-    $jQuery->loadUi('draggable', false),
-    $jQuery->loadUi('resizable', false),
-    $jQuery->loadEffect('core', false),
-    $jQuery->loadEffect('slide', false),
-    $jQuery->loadPlugin('qui', null, false),
-    $jQuery->loadPlugin('layout', null, false),
-    $jQuery->loadPlugin('blockUI', null, false),
-    $jQuery->loadPlugin('metadata', null, false),
     $this->getFile('views/style.js'),
-    $jQuery->getDir() . 'plugins/jqGrid/i18n/grid.locale-en.js',
-    $jQuery->loadPlugin('jqGrid'),
 ));
 ?>
 </head>
@@ -173,7 +160,7 @@ jQuery(function($){
             return false;
         }
         var rowData = jqGridObj.jqGrid('getRowData', rowList[0]);
-        var url = $(this).attr('href') + '&' + primaryKey + '=' + rowData[primaryKey];
+        var url = $(this).attr('href') + '&amp;' + primaryKey + '=' + rowData[primaryKey];
         window.location.href = url;
         return false;
     });

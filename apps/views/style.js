@@ -117,10 +117,6 @@ jQuery(function($){
 //        }
 //    });
 
-//    $.get('?module=member&action=add&view-only=content', function(data){
-//          $('#qw-content').html(data);
-//    });
-
     // 为表单增加样式和鼠标操作效果 // input:submit, input:reset, input:button ?
     $('button.qw-button, a.qw-anchor').each(function(){
         $(this).button($(this).metadata());
@@ -135,15 +131,4 @@ jQuery(function($){
     $('table.ui-table:not(.ui-table-noui) tr').not('.ui-table-header').qui();
     $('table.ui-table td.ui-state-default').qui();
     $('table.ui-table td a.ui-jqgrid-icon').qui();
-
-    /*if ($.browser.mozilla) {
-        function fixSelectStyle(obj) {
-            obj.attr('style', obj.find('option:selected').attr('style'));
-        }
-        $('select').each(function(){
-             fixSelectStyle($(this));
-        }).change(function(){
-            fixSelectStyle($(this));
-        });
-    }*/
 });

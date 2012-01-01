@@ -7,30 +7,13 @@
 <?php
 echo $this->getPackerSign();
 $minify->add(array(
-    $jQuery->loadTheme($this->options['theme']),
+    $jQuery->getTheme($this->options['theme']),
+    $jQuery->getCore(),
+    $jQuery->get('ui.core, effects, qui, ui.tabs, ui.accordion, ui.button, layout, metadata'),
+    $this->getFile('views/style.js'),
     $this->getFile('views/style.css'),
     $this->getFile('views/icons/icon.css'),
-    $jQuery->loadCore(false),
-    $jQuery->loadUi('widget', false),
-    $jQuery->loadUi('core', false),
-    $jQuery->loadUi('mouse', false),
-    $jQuery->loadUi('button', false),
-    $jQuery->loadUi('position', false),
-    $jQuery->loadUi('draggable', false),
-    $jQuery->loadUi('tabs', false),
-    $jQuery->loadUi('accordion', false),
-    $jQuery->loadUi('resizable', false),
-    $jQuery->loadEffect('core', false),
-    $jQuery->loadEffect('slide', false),
-    $jQuery->loadPlugin('qui', null, false),
-    $jQuery->loadPlugin('layout', null, false),
-    $jQuery->loadPlugin('blockUI', null, false),
-    $jQuery->loadPlugin('metadata', null, false),
-    $this->getFile('views/style.js'),
 ));
-
-//$jQuery->load('widget, core, mouse, button, position, draggable', false);
-//$viewOnly = $this->request->get('view-only');
 ?>
 </head>
 <body>
@@ -43,7 +26,7 @@ $minify->add(array(
     <div class="qw-nav" id="qw-nav">
         <a class="ui-state-default ui-corner-bl" href="#">欢迎您, 游客!</a>
         <a class="ui-state-default" href="#">管理</a>
-        <a class="ui-state-default qw-last-link qw-tabs-false" href="#">注销</a>
+        <a class="ui-state-default" href="#">登陆</a>
     </div>
 </div>
 <div class="ui-layout-west">
