@@ -32,10 +32,11 @@ class Doc_Controller extends Qwin_Controller
     public function indexAction()
     {
         $request = $this->request;
-        $type = $request->get('type');
+        $type = $this->get('type')
+            ->forceInArray(array('class', 'function'))
+            ->toString();
         $name = $request->get('name');
 
-        $type = Qwin_Util_Array::forceInArray($type, array('class', 'function'));
         if (empty($name)) {
             $name = __CLASS__;
         }

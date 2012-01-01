@@ -48,8 +48,8 @@ $minify->add(array(
         </ul>
         <div id="qw-docs-overview">
             <h3><a id="short-description" class="ui-state-default" href="#short-description"><?php echo $lang['Short Description'] ?></a></h3>
-            <p><?php echo nl2br($data['shortDescription'], true) ?></p>
-            <p><?php echo nl2br($data['longDescription'], true) ?></p>
+            <p><?php echo nl2br($data['shortDescription']) ?></p>
+            <p><?php echo nl2br($data['longDescription']) ?></p>
             <br />
             <h3><a id="detailed-description" class="ui-state-default" href="#detailed-description"><?php echo $lang['Detailed Description'] ?></a></h3>
             <table id="qw-docs-summary" class="ui-table ui-table-noui ui-widget-content qw-docs-summary">
@@ -203,7 +203,7 @@ $minify->add(array(
                 ?>
                 <tr class="ui-widget-content">
                     <th><?php echo $lang[ucfirst($row['name'])] ?></th>
-                    <td class="qw-doc-tag-<?php $row['name'] ?>"><?php echo nl2br($row['description'], true) ?></td>
+                    <td class="qw-doc-tag-<?php $row['name'] ?>"><?php echo nl2br($row['description']) ?></td>
                 </tr>
                 <?php
                     endforeach;
@@ -538,8 +538,8 @@ $minify->add(array(
         </ul>
         <div id="qw-docs-overview">
             <h3><a id="short-description" class="ui-state-default" href="#short-description"><?php echo $lang['Short Description'] ?></a></h3>
-            <p><?php echo nl2br($data['shortDescription'], true) ?></p>
-            <p><?php echo nl2br($data['longDescription'], true) ?></p>
+            <p><?php echo nl2br($data['shortDescription']) ?></p>
+            <p><?php echo nl2br($data['longDescription']) ?></p>
             <br />
             <h3><a id="detailed-description" class="ui-state-default" href="#detailed-description"><?php echo $lang['Detailed Description'] ?></a></h3>
             <table id="qw-docs-summary" class="ui-table ui-table-noui ui-widget-content qw-docs-summary">
@@ -637,7 +637,7 @@ $minify->add(array(
                 ?>
                 <tr class="ui-widget-content">
                     <th><?php echo $lang[ucfirst($row['name'])] ?></th>
-                    <td class="qw-doc-tag-<?php $row['name'] ?>"><?php echo nl2br($row['description'], true) ?></td>
+                    <td class="qw-doc-tag-<?php $row['name'] ?>"><?php echo nl2br($row['description']) ?></td>
                 </tr>
                 <?php
                     endforeach;
