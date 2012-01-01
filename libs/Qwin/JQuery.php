@@ -36,7 +36,7 @@ class Qwin_JQuery extends Qwin_Widget
     public function __construct($source = null)
     {
         parent::__construct($source);
-        $this->_dir = dirname(__FILE__) . '/JQuery/';
+        $this->_dir = dirname(dirname(dirname(__FILE__))) . '/apps/views/jquery/';
     }
     
     public function getDir()
