@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Qwin Framework
  *
@@ -27,11 +26,15 @@
  * ToSource
  * 
  * @package     Qwin
- * @subpackage  Qwin
+ * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-2 0:43:42
+ * @since       2011-10-02 00:43:42
  */
-class ToSource {
-    
+class Qwin_ToSource extends Qwin_Widget
+{
+    public function call()
+    {
+        return $this->source;
+    }
 }

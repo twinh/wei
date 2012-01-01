@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Qwin Framework
  *
@@ -27,11 +26,16 @@
  * IsDir
  * 
  * @package     Qwin
- * @subpackage  Qwin
+ * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-2 0:37:42
+ * @since       2011-10-02 00:37:42
+ * @todo        加载路径等各种路径的检查
  */
-class IsDir {
-    
+class Qwin_IsDir extends Qwin_Widget
+{
+    public function call()
+    {
+        return is_dir($this->source);
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Session
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -16,15 +16,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  Session
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-04-18 11:50:10
  */
 
+/**
+ * Session
+ * 
+ * @package     Qwin
+ * @subpackage  Widget
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2010-04-18 11:50:10
+ * @todo        缩减重复代码
+ * @todo        通过Qwin_Request获取的值,为原生态,通过Qwin_Get等获取的值为对象?
+ */
 class Qwin_Session extends Qwin_Widget implements ArrayAccess
 {
     /**

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Qwin Framework
  *
@@ -24,14 +23,18 @@
  */
 
 /**
- * isExists
+ * IsExists
  * 
  * @package     Qwin
- * @subpackage  Qwin
+ * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-5 11:44:13
+ * @since       2011-10-05 11:44:13
  */
-class isExists {
-    
+class Qwin_IsExists extends Qwin_Widget
+{
+    public function call()
+    {
+        return file_exists($this->source);
+    }
 }

@@ -145,8 +145,8 @@ tr.ui-search-toolbar select {margin: 1px 0px 0px 0px}
     height: auto;
 }
 .ui-jqgrid tr.jqgrow td {
-    padding: 2px;
-    line-height: 20px;
+    /*padding: 2px;
+    line-height: 20px;*/
 }
 .ui-jqgrid {
 /*    padding: 1px;*/

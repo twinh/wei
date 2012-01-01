@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Qwin Framework
  *
@@ -27,7 +26,7 @@
  * Null
  * 
  * @package     Qwin
- * @subpackage  Qwin
+ * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-05 02:10:44

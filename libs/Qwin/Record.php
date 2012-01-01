@@ -1,6 +1,6 @@
 <?php
- /**
- * Record
+/**
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -16,15 +16,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Widget
- * @subpackage  Record
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-04-17 15:49:35
  */
 
+/**
+ * Query
+ * 
+ * @package     Qwin
+ * @subpackage  Application
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2010-04-17 15:49:35
+ */
 class Qwin_Record extends Doctrine_Record
 {
     /**
