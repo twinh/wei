@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Qwin Framework
  *
@@ -20,18 +19,19 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id$
+ * @version     $Id: IsEqual.php 884 2011-12-01 02:23:44Z itwinh@gmail.com $
  */
 
 /**
- * isEqual
+ * IsEqual
  * 
- * @namespace   Qwin
+ * @package     Qwin
+ * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-11-15 10:16:59
  */
-class Qwin_isEqual extends Qwin_Widget
+class Qwin_IsEqual extends Qwin_Widget
 {
     public function call($mixed = null)
     {
