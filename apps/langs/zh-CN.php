@@ -2,7 +2,7 @@
 /**
  * zh-CN
  *
- * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2012 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -121,7 +121,7 @@ return array(
     'ERR_FROM_META_NOT_FOUND' => '表单元数据未定义',
 
     'LBL_HTML_TITLE' => 'Management System - Powered by Qwin Framework',
-    'LBL_FOOTER_COPYRIGHT' => 'Powered by Qwin Framework, Version ' . Qwin::VERSION . '. Copyright © 2008-2011 Twin. All rights reserved.',
+    'LBL_FOOTER_COPYRIGHT' => 'Powered by Qwin Framework, Version ' . Qwin::VERSION . '. Copyright © 2008-2012 Twin. All rights reserved.',
     'ACT_VIEW' => '查看',
     'ACT_UPDATE' => '更新',
     'ACT_INDEX' => '首页',

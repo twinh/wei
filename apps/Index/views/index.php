@@ -41,8 +41,8 @@ $menus = require $this->cache->options['dir'] . 'menu.php';
         </a>
     </div>
     <div class="qw-nav" id="qw-nav">
-        <a class="ui-state-default ui-corner-bl" href="?member/my">欢迎您, 游客!</a>
-        <!--<a class="ui-state-default" href="#">管理</a>-->
+        <a class="ui-state-default ui-corner-bl" href="#">欢迎您, 游客!</a>
+        <a class="ui-state-default" href="#">管理</a>
         <a class="ui-state-default qw-last-link qw-tabs-false" href="#">注销</a>
     </div>
 </div>
@@ -134,7 +134,7 @@ $menus = require $this->cache->options['dir'] . 'menu.php';
         </ul>
         <div id="tabs-1">
             <iframe class="qw-iframe" src="http://127.0.0.1/qq/?module=member"></iframe>
-        </div>
+        </div> 
     </div>
 </div>
 <div class="ui-layout-east">

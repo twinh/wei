@@ -2,7 +2,7 @@
 /**
  * Home
  *
- * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2012 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ class Index_Controller extends Qwin_Controller
 {
     public function indexAction()
     {
-        
+
     }
 
     public function updateLogAction()
