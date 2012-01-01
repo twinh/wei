@@ -28,8 +28,8 @@ $minify->add(array(
     $jQuery->loadPlugin('metadata', null, false),
     $this->getFile('views/style.js'),
 ));
-// 加载页眉导航的缓存 todo index controller
-$menus = require $this->cache->options['dir'] . 'menu.php';
+
+//$jQuery->load('widget, core, mouse, button, position, draggable', false);
 //$viewOnly = $this->request->get('view-only');
 ?>
 </head>

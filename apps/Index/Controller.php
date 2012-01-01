@@ -27,7 +27,10 @@ class Index_Controller extends Qwin_Controller
 {
     public function indexAction()
     {
-
+        // 加载页眉导航的缓存 todo index controller
+        $menus = require $this->cache->options['dir'] . 'menu.php';
+        
+        $this->view->assign(get_defined_vars());
     }
 
     public function updateLogAction()
