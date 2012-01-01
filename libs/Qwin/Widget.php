@@ -25,7 +25,8 @@
 /**
  * Widget
  * 
- * @namespace   Qwin
+ * @package     Qwin
+ * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-03 00:28:06
@@ -146,6 +147,11 @@ class Qwin_Widget
         return $this->$name;
     }
     
+    /**
+     * 魔术方法,返回对象值的字符串形式
+     * 
+     * @return string
+     */
     public function __toString()
     {
         return (string)$this->source;

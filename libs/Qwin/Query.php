@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Widget
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -21,9 +20,17 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-07-05 01:18:32
  */
 
+/**
+ * Query
+ * 
+ * @package     Qwin
+ * @subpackage  Application
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2011-07-05 01:18:32
+ */
 class Qwin_Query extends Doctrine_Query
 {
     /**

@@ -1,6 +1,6 @@
 <?php
 /**
- * 请求处理
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -16,17 +16,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  Request
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-02-13 23:02
- * @todo        缩减重复代码
- * @todo        通过Qwin_Request获取的值,为原生态,通过Qwin_Get等获取的值为对象
  */
 
+/**
+ * Request
+ * 
+ * @package     Qwin
+ * @subpackage  Widget
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2010-02-13 23:02
+ * @todo        缩减重复代码
+ * @todo        通过Qwin_Request获取的值,为原生态,通过Qwin_Get等获取的值为对象?
+ */
 class Qwin_Request extends Qwin_Widget implements ArrayAccess
 {
     /**

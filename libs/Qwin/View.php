@@ -1,6 +1,6 @@
 <?php
 /**
- * View
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -16,16 +16,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Qwin
- * @subpackage  Application
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
+ */
+
+/**
+ * CrudController
+ * 
+ * @package     Qwin
+ * @subpackage  Application
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2010-08-06 19:25:40
  * @todo        错误与视图
  */
-
 class Qwin_View extends Qwin_Widget implements ArrayAccess
 {
     /**

@@ -1,6 +1,6 @@
 <?php
 /**
- * Module
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -20,10 +20,18 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
+ */
+
+/**
+ * Module
+ * 
+ * @package     Qwin
+ * @subpackage  Application
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-03-22 15:36:41
  * @todo        对模块名称进行更全面的检查
  */
-
 class Qwin_Module extends Qwin_Widget implements ArrayAccess
 {
     /**

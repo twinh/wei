@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Qwin Framework
  *
@@ -27,11 +26,12 @@
  * IsUrl
  * 
  * @package     Qwin
- * @subpackage  Qwin
+ * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-2 0:40:04
  */
-class IsUrl {
+class Qwin_IsUrl extends Qwin_Widget
+{
     
 }

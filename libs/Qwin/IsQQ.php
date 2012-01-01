@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Qwin Framework
  *
@@ -27,14 +26,14 @@
  * IsQQ
  * 
  * @package     Qwin
- * @subpackage  Qwin
+ * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-09 20:45:27
  */
 class Qwin_IsQQ extends Qwin_Widget
 {
-    public function render()
+    public function call()
     {
         
     }

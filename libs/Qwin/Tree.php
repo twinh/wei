@@ -24,6 +24,7 @@
  * @version     $Id$
  * @since       2010-05-26 22:19:56
  * @todo        根据分类找出其所有子类, 根据子类找出其父类
+ * @todo        as widget
  */
 
 class Qwin_Tree

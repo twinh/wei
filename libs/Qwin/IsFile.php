@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Qwin Framework
  *
@@ -32,6 +31,10 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-2 0:37:35
  */
-class IsFile {
-    
+class Qwin_IsFile extends Qwin_Widget
+{
+    public function call()
+    {
+        return is_file($this->source);
+    }
 }

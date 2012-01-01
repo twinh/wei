@@ -1,6 +1,6 @@
 <?php
 /**
- * jquery
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -20,10 +20,17 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-01-29 16:42:43
- * @todo        按钮,遮罩
  */
 
+/**
+ * JQuery
+ * 
+ * @package     Qwin
+ * @subpackage  Application
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2011-01-29 16:42:43
+ */
 class Qwin_JQuery extends Qwin_Widget
 {
     public function __construct($source = null)

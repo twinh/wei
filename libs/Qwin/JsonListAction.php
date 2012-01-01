@@ -1,6 +1,6 @@
 <?php
 /**
- * List
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -16,15 +16,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Widget
- * @subpackage  JsonListAction
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id: Widget.php -1   $
- * @since       2010-10-09 21:20:47
+ * @version     $Id$
  */
 
+/**
+ * JsonListAction
+ * 
+ * @package     Qwin
+ * @subpackage  Application
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2010-10-09 21:20:47
+ */
 class Qwin_JsonListAction extends Qwin_Widget
 {
     /**

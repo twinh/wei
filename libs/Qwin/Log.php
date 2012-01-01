@@ -25,7 +25,8 @@
 /**
  * Log
  * 
- * @namespace   Qwin
+ * @package     Qwin
+ * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-12-21 15:47:18

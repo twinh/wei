@@ -26,10 +26,10 @@
  * IsRegx
  * 
  * @package     Qwin
- * @subpackage  Qwin
+ * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-2 0:36:13
+ * @since       2011-10-02 00:36:13
  */
 class Qwin_IsRegx
 {

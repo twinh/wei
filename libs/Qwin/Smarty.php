@@ -1,6 +1,6 @@
 <?php
 /**
- * Widget
+ * Qwin Framework
  *
  * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
@@ -20,16 +20,24 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-04-15 22:00:11 v0.7.9
  */
 
-class QwinX_Smarty extends Qwin_Widget
+/**
+ * CrudController
+ * 
+ * @package     Qwin
+ * @subpackage  Application
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2011-04-15 22:00:11 v0.7.9
+ */
+class Qwin_Smarty extends Qwin_Widget
 {
     /**
      * Smarty对象
      * @var Smarty
      */
-    protected $smarty;
+    protected $_smarty;
 
     /**
      * 默认选项
@@ -45,17 +53,17 @@ class QwinX_Smarty extends Qwin_Widget
         parent::__construct($options);
         
         require_once dirname(__FILE__) . '/Smarty/Smarty.class.php';
-        $this->smarty = $this->qwin->call('Smarty');
+        $this->_smarty = $this->qwin->call('Smarty');
 
         // 设定选项
         foreach ($this->options as $key => $value) {
-            $this->smarty->$key = $value;
+            $this->_smarty->$key = $value;
         }
     }
     
     public function call()
     {
-        return $this->smarty;
+        return $this->_smarty;
     }
 
     /**
@@ -67,7 +75,7 @@ class QwinX_Smarty extends Qwin_Widget
      */
     public function  __call($name, $arguments)
     {
-        return call_user_func_array(array($this->smarty, $name), $arguments);
+        return call_user_func_array(array($this->_smarty, $name), $arguments);
     }
 
     /**
@@ -76,6 +84,6 @@ class QwinX_Smarty extends Qwin_Widget
      */
     public function getObject()
     {
-        return $this->smarty;
+        return $this->_smarty;
     }
 }
