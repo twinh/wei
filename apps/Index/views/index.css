@@ -169,10 +169,8 @@
     font-size: 12px;
     line-height: 14px;
     height: 14px;
-    border-top: none;
-}
-#qw-nav a.qw-last-link{
-    border-right: none;
+    border-right-width: 0;
+    border-top-width: 0;
 }
 #qw-tabs {
     padding: 0;
