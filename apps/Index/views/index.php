@@ -30,16 +30,16 @@ $minify->add(array(
     </div>
 </div>
 <div class="ui-layout-west">
-    <h3 id="west-menu-title" class="ui-state-default">
+    <h3 id="qw-menu-title" class="ui-state-default">
         <div id="ui-west-toggler-open" class="ui-state-default">
             <span class="ui-icon ui-icon-carat-1-w"></span>
         </div>
-        <a href="javascript:alert('敬请期待!');" id="west-menu-oper" class="ui-state-default">
+        <a href="javascript:alert('敬请期待!');" id="qw-menu-oper" class="ui-state-default">
             <span class="ui-icon ui-icon-gear"></span>
         </a>
         操作菜单
     </h3>
-    <div id="west-menu">
+    <div id="qw-menu">
     <?php
     foreach ($menus[0] as $menu) :
     ?>
@@ -76,39 +76,6 @@ $minify->add(array(
 </style>
 <script type="text/javascript">
     qwin.lang = <?php echo json_encode($lang->toArray()) ?>;
-    jQuery(function($){
-        tab_counter = 2;
-        
-        $tabs = $('#qw-tabs').tabs({
-            closable: true,
-            add: function( event, ui ) {
-                var tab_content = "Tab " + tab_counter + " content.";
-                $( ui.panel ).append( "<p>" + tab_content + "</p>" );
-            },
-            show:function(event, ui){
-                $(ui.panel).innerHeight($('#qw-tabs').innerHeight() - $('#qw-tabs ul').outerHeight());
-            }
-        });
-        
-        $tabs.find('ul.ui-tabs-nav')
-            .removeClass('ui-widget-header ui-helper-reset')
-            .addClass('ui-state-default');
-        
-        // actual addTab function: adds new tab using the title input from the form above
-        function addTab(title) {
-            var id = '#tabs-' + tab_counter;
-            $tabs.tabs("add", id, title);
-            tab_counter++;
-        }
-        
-        addTab('用户管理');
-        addTab('用户管理2');
-        addTab('用户管理3');
-        addTab('用户管理4');
-        addTab('用户管理5');
-        addTab('用户管理6');
-        addTab('用户管理7');
-    });
 </script>
 <div class="ui-layout-center">
     <div id="qw-tabs">

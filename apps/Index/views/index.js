@@ -41,7 +41,7 @@ jQuery(function($){
     
     // 左栏菜单
     var menuHeader = null;
-    $('#west-menu').accordion({
+    $('#qw-menu').accordion({
         autoHeight: false,
         collapsible: true,
         header: 'h3',
@@ -55,8 +55,27 @@ jQuery(function($){
             menuHeader.addClass('ui-accordion-next-header');
         }
     });
-    $('#west-menu li, #west-menu-oper').qui();
+    $('#qw-menu li, #qw-menu-oper').qui();
     
+    // 中间选项卡
+    var tabs = $('#qw-tabs').tabs({
+        closable: true,
+        show:function(event, ui){
+            $(ui.panel).innerHeight($('#qw-tabs').innerHeight() - $('#qw-tabs ul').outerHeight());
+        }
+    });
+
+    tabs.find('ul.ui-tabs-nav')
+        .removeClass('ui-widget-header ui-helper-reset')
+        .addClass('ui-state-default');
+    
+    // 点击左栏显示选项卡
+    $('#qw-menu li a').click(function(){
+        $('#qw-tabs').tabs('addIframe', $(this).attr('href'), $(this).text());
+        return false;
+    });
+    
+    // 顶部导航
     $('#qw-nav a').qui({
         click: true,
         focus: true
