@@ -33,7 +33,7 @@ class Index_Controller extends Qwin_Controller
         $this->view->assign(get_defined_vars());
     }
 
-    public function updateLogAction()
+    public function welcomeAction()
     {
         
     }

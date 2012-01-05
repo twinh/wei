@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->options['charset'] ?>" />
-<title><?php echo $lang['LBL_HTML_TITLE'] ?></title>
+<title><?php echo $lang['Qwin Framework'] ?></title>
 <?php
 echo $this->getPackerSign();
 $minify->add(array(
@@ -15,6 +15,12 @@ $minify->add(array(
     $this->getFile('views/icons/icon.css'),
 ));
 ?>
+<style type="text/css">
+    
+</style>
+<script type="text/javascript">
+    qwin.lang = <?php echo json_encode($lang->toArray()) ?>;
+</script>
 </head>
 <body>
 <div class="ui-layout-north">
@@ -71,20 +77,14 @@ $minify->add(array(
     ?>
     </div>
 </div>
-<style type="text/css">
-    
-</style>
-<script type="text/javascript">
-    qwin.lang = <?php echo json_encode($lang->toArray()) ?>;
-</script>
 <div class="ui-layout-center">
     <div id="qw-tabs">
         <ul>
-            <li><a href="#tabs-1">欢迎光临</a></li>
+            <li><a href="#ui-tabs-0">欢迎光临</a></li>
         </ul>
-        <div id="tabs-1">
-            <iframe class="qw-iframe" src="?module=member"></iframe>
-        </div> 
+        <div id="ui-tabs-0">
+            <iframe class="ui-tabs-iframe" src="?module=index&amp;action=welcome"></iframe>
+        </div>
     </div>
 </div>
 <div class="ui-layout-east">
