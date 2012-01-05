@@ -99,6 +99,8 @@ class Qwin extends Qwin_Widget
      *       autoload       bool        是否启用类自动加载
      * 
      *       autoloadPaths  array       类自动加载的目录
+     * 
+     *       widgetPrefixs  array       微件名称前缀(是否确实需要此功能?)
      */
     public $options = array(
         'fnQ'           => true,
