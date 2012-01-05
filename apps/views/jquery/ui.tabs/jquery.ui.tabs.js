@@ -39,14 +39,14 @@ a.rotate(null)}:function(){t=c.selected;h()});if(b){this.element.bind("tabsshow"
      * @todo
      * 1. scrollable or fit
      */
-    var _tabify_orig = $.ui.tabs.prototype._tabify;
+    var _tabifyOrig = $.ui.tabs.prototype._tabify;
     $.extend($.ui.tabs.prototype.options, {
         closable: false,
         closeTemplate: '<span class="ui-icon ui-icon-close">Remove Tab</span>'
     });
     $.extend($.ui.tabs.prototype, {
         _tabify: function(init) {
-            _tabify_orig.apply(this, arguments);
+            _tabifyOrig.apply(this, arguments);
     
             var self = this, o = this.options;
             if (o.closable) {
@@ -59,6 +59,35 @@ a.rotate(null)}:function(){t=c.selected;h()});if(b){this.element.bind("tabsshow"
                         });
                 });
             }
+        },
+        /**
+         * @todo ui-tabs-iframe
+         */
+        addIframe: function(url, title){
+            var self = this,
+                id = self._tabId(title),
+                foundIframe = false;
+            
+            // 检查是否有该url的iframe
+            self.element.find('iframe').each(function(){
+                if ($(this).attr('src') == url) {
+                    foundIframe = true;
+                    self.select($(this).parent().attr('id'));
+                    return false;
+                }
+            });
+            if (foundIframe) {
+                return this;
+            }
+            
+            // add iframe
+            self.element.append('<div id="' + id + '"><iframe class="qw-iframe" src="' + url + '"></iframe></div>');
+            self.add('#' + id, title);
+            
+            // selete tab
+            self.select(id);
+            
+            return this;
         }
     });
 })( jQuery );
