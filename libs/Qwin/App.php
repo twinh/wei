@@ -105,6 +105,7 @@ class Qwin_App extends Qwin_Widget
      * 获取页面运行时间
      *
      * @return string
+     * @todo rename
      */
     public function getEndTime()
     {
