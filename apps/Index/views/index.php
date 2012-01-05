@@ -92,7 +92,7 @@ $minify->add(array(
 </div>
 <div class="ui-layout-south">
     <div id="qw-footer" class="ui-state-default">
-        <div id="qw-copyright" class="ui-widget">Executed in <?php echo $this->app->getEndTime() ?>(s). <?php echo $lang['LBL_FOOTER_COPYRIGHT'] ?></div>
+        <div id="qw-copyright" class="ui-widget"><?php echo $lang['LBL_FOOTER_COPYRIGHT'] ?></div>
     </div>
 </div>
 </body>
