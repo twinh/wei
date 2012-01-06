@@ -37,15 +37,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->options['charset'] ?>" />
 <title></title>
-<?php 
-echo $this->getPackerSign();
+<?php
 $minify->add(array(
     $jQuery->getTheme($this->options['theme']),
     $jQuery->getCore(),
     $jQuery->getDir() . '/jqGrid/i18n/grid.locale-cn.js',
     $jQuery->get('ui.core, effects, qui, ui.button, metadata, jqGrid'),
     $this->getFile('views/style.css'),
-    $this->getFile('views/icons/icon.css'),
     $this->getFile('views/style.js'),
 ));
 ?>

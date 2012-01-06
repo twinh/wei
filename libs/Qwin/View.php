@@ -31,6 +31,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2010-08-06 19:25:40
  * @todo        错误与视图
+ * @todo        rewrite
  */
 class Qwin_View extends Qwin_Widget implements ArrayAccess
 {
@@ -60,13 +61,6 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         'theme'         => 'cupertino',
         'charset'       => 'utf-8',
     );
-    
-    /**
-     * 打包的标记,用于合并js,css标签
-     *
-     * @var string
-     */
-    protected $_packSign = '<!-- qwin-packer-sign -->';
 
     /**
      * 信息提示视图的选项
@@ -177,7 +171,8 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         $replace = Qwin_Util_Html::jsTag($url->url('util/minify', 'index', array('g' => $minify->pack('js')))) . PHP_EOL
                  . Qwin_Util_Html::cssLinkTag($url->url('util/minify', 'index', array('g' => $minify->pack('css')))) . PHP_EOL;
 
-        $output = Qwin_Util_String::replaceFirst($this->getPackerSign(), $replace, $output);
+        // TODO appendAfter
+        $output = Qwin_Util_String::replaceFirst('</title>', '</title>' . $replace, $output);
         echo $output;
         unset($output);
 
@@ -338,16 +333,6 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         $this->setLayout('<resource><theme>/<defaultPackage>/layout/jump<suffix>');
         $this->assign('url', $url);
         return $this;
-    }
-
-    /**
-     * 获取打包标记
-     *
-     * @return string
-     */
-    public function getPackerSign()
-    {
-        return $this->_packSign;
     }
 
     /**

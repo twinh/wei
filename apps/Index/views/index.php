@@ -5,14 +5,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->options['charset'] ?>" />
 <title><?php echo $lang['Qwin Framework'] ?></title>
 <?php
-echo $this->getPackerSign();
 $minify->add(array(
     $jQuery->getTheme($this->options['theme']),
     $jQuery->getCore(),
     $jQuery->get('ui.core, effects, qui, ui.tabs, ui.accordion, ui.button, layout, metadata'),
     $this->getFile('views/style.js'),
     $this->getFile('views/style.css'),
-    $this->getFile('views/icons/icon.css'),
 ));
 ?>
 <style type="text/css">
@@ -80,10 +78,10 @@ $minify->add(array(
 <div class="ui-layout-center">
     <div id="qw-tabs">
         <ul>
-            <li><a href="#ui-tabs-0">欢迎光临</a></li>
+            <li><a href="#ui-tabs-0"><?php echo $title ?></a></li>
         </ul>
         <div id="ui-tabs-0">
-            <iframe class="ui-tabs-iframe" src="?module=index&amp;action=welcome"></iframe>
+            <iframe class="ui-tabs-iframe" src="<?php echo $page ?>"></iframe>
         </div>
     </div>
 </div>

@@ -26,7 +26,6 @@
 return array(
     '' => 'NULL',
     'LBL_QWIN' => 'Qwin',
-    'WELCOME_TO_QWIN' => '您好,欢迎您使用Qwin!',
     'ACT_LIST' => '列表',
     'ACT_ADD' => '添加',
     'ACT_EDIT' => '编辑',
@@ -180,4 +179,6 @@ return array(
     'Submit' => '提交',
     'Reset' => '重置',
     'Qwin Framework' => 'Qwin Framework',
+    'Main Page' => '主页',
+    'Hello, wellcome to Qwin!' => '您好,欢迎您来到Qwin!',
 );
