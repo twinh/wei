@@ -143,6 +143,7 @@ tr.ui-search-toolbar select {margin: 1px 0px 0px 0px}
 .ui-jqgrid .ui-jqgrid-htable th div {
 /*    padding: 4px 0;*/
     height: auto;
+    position: inherit; 
 }
 .ui-jqgrid tr.jqgrow td {
     /*padding: 2px;

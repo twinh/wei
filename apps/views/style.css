@@ -38,6 +38,8 @@ a {
 /* 保持大小一致 */
 .ui-widget, .ui-widget-content {
     font-size: 12px;
+    font-family: Arial,sans-serif;
+    /*font-family: ;*/
 }
 
 /* 常用样式
@@ -58,6 +60,15 @@ a {
 .qw-m5 {
     margin: 5px;
 }
+
+.qw-toolbar {
+    font-weight: normal;
+    padding: 3px 0 3px 5px;
+    border-width: 0 0 0 0;
+    overflow: hidden;
+    line-height: 20px;
+}
+
 /* List
 ----------------------------------*/
 .ui-list .ui-list-content{
