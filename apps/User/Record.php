@@ -22,7 +22,7 @@
  * @version     $Id$
  * @since       2011-04-27 14:57:25
  */
-class Member_Record extends Qwin_Record
+class User_Record extends Qwin_Record
 {
     public function getRecordData()
     {
@@ -119,11 +119,11 @@ class Member_Record extends Qwin_Record
                 ),
             ),
             'id' => 'id',
-            'table' => 'member',
+            'table' => 'User',
             'mainField' => 'username',
             'relations' => array(
                 'group' => array(
-                    'module' => 'member/group',
+                    'module' => 'User/group',
                     'alias' => 'group',
                     'local' => 'group_id',
                 ),

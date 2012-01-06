@@ -1,6 +1,6 @@
 <?php
 /**
- * Member
+ * User
  *
  * Copyright (c) 2008-2012 Twin Huang. All rights reserved.
  *
@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Com
- * @subpackage  Member
+ * @subpackage  User
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,7 +25,7 @@
  * @since       2010-05-13 10:17:58
  */
 
-class Member_Controller extends Qwin_CrudController
+class User_Controller extends Qwin_CrudController
 {
     /**
      * 锁定的核心帐号，防止恶意修改
@@ -46,9 +46,9 @@ class Member_Controller extends Qwin_CrudController
         $id = $request->request('id');
         if (in_array($id, $this->_lock)) {
             $lang = Qwin::call('-lang');
-            return $this->getView()->alert($lang->t('MSG_MEMBER_LOCKED'));
+            return $this->getView()->alert($lang->t('MSG_User_LOCKED'));
         }
-        $meta = Qwin_Meta::getInstance()->get('Com_Member_PasswordMeta');
+        $meta = Qwin_Meta::getInstance()->get('Com_User_PasswordMeta');
         
         if (!$request->isPost()) {
             return Qwin::call('-widget')->get('View')->execute(array(
@@ -59,7 +59,7 @@ class Member_Controller extends Qwin_CrudController
                 'isView'    => false,
             ));
         } else {
-            return Com_Widget::getByModule('com/member', 'editPassword')->execute(array(
+            return Com_Widget::getByModule('com/User', 'editPassword')->execute(array(
                 'data'      => $_POST,
             ));
         }
@@ -113,7 +113,7 @@ class Member_Controller extends Qwin_CrudController
     {
         if('EditPassword' == $action)
         {
-            $url = Qwin::call('-url')->url(array('module' => 'Member', 'controller' => 'Log', 'action' => 'Logout'));
+            $url = Qwin::call('-url')->url(array('module' => 'User', 'controller' => 'Log', 'action' => 'Logout'));
             $this->view->redirect('LOGIN', $url)
                     ->loadView()
                     ->display();

@@ -1,6 +1,6 @@
 <?php
 /**
- * Member
+ * User
  *
  * Copyright (c) 2008-2012 Twin Huang. All rights reserved.
  *
@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Com
- * @subpackage  Member
+ * @subpackage  User
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,7 +25,7 @@
  * @since       2010-05-13 10:19:22
  */
 
-class Member_Meta extends Meta_Widget
+class User_Meta extends Meta_Widget
 {
 //    public function sanitiseListOperation($value, $name, $data, $copyData)
 //    {
@@ -46,7 +46,7 @@ class Member_Meta extends Meta_Widget
     public function validateEmail($value, $name, $data)
     {
         // TODO 如何合理的获取当前模块名称等基本信息
-        $result = Query_Widget::getByModule('member')
+        $result = Query_Widget::getByModule('User')
             ->select('id')
             ->where('email = ? AND id <> ?', array($value, $data['id']))
             ->fetchOne();
@@ -55,7 +55,7 @@ class Member_Meta extends Meta_Widget
 
     public function isUsernameExists($username)
     {
-        $result = Query_Widget::getByModule('member')
+        $result = Query_Widget::getByModule('User')
             ->select('id')
             ->where('username = ?', $username)
             ->fetchOne();
