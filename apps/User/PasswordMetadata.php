@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     Com
- * @subpackage  Member
+ * @subpackage  User
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,7 +25,7 @@
  * @since       2010-08-28 20:40:31
  */
 
-class Com_Member_PasswordMeta extends Com_Meta
+class Com_User_PasswordMeta extends Com_Meta
 {
     public function setMeta()
     {
@@ -93,11 +93,11 @@ class Com_Member_PasswordMeta extends Com_Meta
             'group' => array(),
             'model' => array(),
             'db' => array(
-                'table' => 'member',
+                'table' => 'User',
             ),
             // 页面显示
             'page' => array(
-                'title' => 'LBL_MODULE_MEMBER',
+                'title' => 'LBL_MODULE_User',
             ),
         ));
     }
@@ -114,7 +114,7 @@ class Com_Member_PasswordMeta extends Com_Meta
 
     public function validateOldPassword($value, $name, $data)
     {
-        $result = Com_Meta::getQueryByModule('com/member')
+        $result = Com_Meta::getQueryByModule('com/User')
             ->select('password')
             ->where('id = ?', $data['id'])
             ->fetchOne();

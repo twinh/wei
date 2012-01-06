@@ -18,6 +18,7 @@ $minify->add(array(
 </style>
 <script type="text/javascript">
     qwin.lang = <?php echo json_encode($lang->toArray()) ?>;
+    qwin.user = '';
 </script>
 </head>
 <body>
@@ -28,9 +29,9 @@ $minify->add(array(
         </a>
     </div>
     <div class="qw-nav" id="qw-nav">
-        <a class="ui-state-default ui-corner-bl" href="#">欢迎您, 游客!</a>
-        <a class="ui-state-default" href="#">管理</a>
-        <a class="ui-state-default" href="#">登陆</a>
+        <a href="javascript:;" class="ui-state-default ui-corner-bl"><?php echo $lang['Welcome']?>, <span id="nav-username"></span>!</a>
+        <a id="login" href="javascript:;" class="ui-state-default"><?php echo $lang['Login'] ?></a>
+        <a id="logout" href="javascript:;" class="ui-state-default"><?php echo $lang['Logout'] ?></a>
     </div>
 </div>
 <div class="ui-layout-west">
