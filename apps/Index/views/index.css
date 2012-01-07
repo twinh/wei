@@ -33,15 +33,6 @@
 }
 
 /* 页眉 */
-#qw-header {
-    clear: both;
-    height: 60px;
-    width: 100%;
-}
-#qw-header-left {
-    width: 186px;
-    vertical-align: top;
-}
 #qw-logo {
     height: 60px;
     width: 180px;
@@ -56,15 +47,6 @@
     vertical-align: middle;
     margin: 12px 0 0 12px;
     height: 40px;
-}
-#qw-header-right {
-    vertical-align: top;
-}
-#qw-content-box {
-    width: auto;
-    vertical-align: top;
-    padding-bottom: 20px;
-    border: 0;
 }
 /* 页脚 */
 #qw-footer {
@@ -171,6 +153,9 @@
     height: 14px;
     border-right-width: 0;
     border-top-width: 0;
+}
+#qw-nav a#logout {
+    display: none;
 }
 #qw-tabs {
     padding: 0;

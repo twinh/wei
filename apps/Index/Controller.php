@@ -26,7 +26,7 @@
 class Index_Controller extends Qwin_Controller
 {
     public function indexAction()
-    {
+    {        
         // todo
         $page = htmlspecialchars($this->get('page', '?module=index&action=welcome'));
         $title = htmlspecialchars($this->get('title', $this->lang['Main Page']));

@@ -1,16 +1,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=7" />
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->options['charset'] ?>" />
 <title><?php echo $lang['Qwin Framework'] ?></title>
 <?php
 $minify->add(array(
     $jQuery->getTheme($this->options['theme']),
     $jQuery->getCore(),
-    $jQuery->get('ui.core, effects, qui, ui.tabs, ui.accordion, ui.button, layout, metadata'),
+    $jQuery->get('ui.core, effects, qui, ui.tabs, ui.accordion, ui.button, layout, metadata, ui.dialog, form'),
     $this->getFile('views/style.js'),
     $this->getFile('views/style.css'),
+    $this->getFile('views/form/default.css'),
 ));
 ?>
 <style type="text/css">
@@ -18,7 +18,6 @@ $minify->add(array(
 </style>
 <script type="text/javascript">
     qwin.lang = <?php echo json_encode($lang->toArray()) ?>;
-    qwin.user = '';
 </script>
 </head>
 <body>

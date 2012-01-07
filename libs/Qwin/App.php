@@ -89,10 +89,10 @@ class Qwin_App extends Qwin_Widget
         $options['action'] = $this->get('action', $options['action'])->action();
 
         // 获取控制器并执行相应行为
-        $this->controller()->action($options['action']);
+        $result = $this->controller()->action($options['action']);
 
         // 展示视图
-        $this->view();
+        $this->view($result);
         
         // 触发应用结束事件
         $this->trigger('appTermination');

@@ -33,7 +33,7 @@
  */
 class Qwin_Post extends Qwin_Widget
 {
-    public function call($name, $default = null /*, $type='string' ?*/)
+    public function call($name = null, $default = null /*, $type='string' ?*/)
     {
         return Qwin::variable(isset($_POST[$name]) ? $_POST[$name] : $default);
     }

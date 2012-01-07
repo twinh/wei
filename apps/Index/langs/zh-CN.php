@@ -24,6 +24,7 @@
  */
 
 return array(
-    'ACT_ABOUT' => '关于Qwin',
-    'ACT_UPDATELOG' => '更新日志',
+    'Welcome' => '欢迎您',
+    'Login' => '登陆',
+    'Logout' => '注销'
 );

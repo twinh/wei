@@ -187,10 +187,16 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
      * @param string $layout 布局路径
      * @param array $data 附加数据
      * @todo 不只是输出文件,还有数据类型等等
+     * @todo echo exit ?
      */
     public function call($layout = null, array $data = null)
     {
-        return $this->display($layout, $data);
+        if (is_string($layout)) {
+            echo $layout;
+            exit;
+        } else {
+            return $this->display($layout, $data);
+        }
     }
     
     /**

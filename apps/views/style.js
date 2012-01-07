@@ -21,11 +21,7 @@
  * @version     $Id$
  * @since       2010-01-20 03:20:19
  */
-var qwin = {
-    get: {},
-    app: {},
-    lang: {}
-};
+var qwin = {};
 jQuery(function($){
     // 设定元数据从data属性取值
     $.metadata.setType('attr', 'data');

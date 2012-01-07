@@ -30,8 +30,6 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2010-04-18 11:50:10
- * @todo        缩减重复代码
- * @todo        通过Qwin_Request获取的值,为原生态,通过Qwin_Get等获取的值为对象?
  */
 class Qwin_Session extends Qwin_Widget implements ArrayAccess
 {
