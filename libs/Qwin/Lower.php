@@ -36,6 +36,6 @@ class Qwin_Lower extends Qwin_Widget
     public function call()
     {
         $this->source = strtolower($this->source);
-        return $this;
+        return $this->invoker;
     }
 }

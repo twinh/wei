@@ -36,6 +36,6 @@ class Qwin_Trim extends Qwin_Widget
     public function call()
     {
         $this->source = trim($this->source);
-        return $this;
+        return $this->invoker;
     }
 }

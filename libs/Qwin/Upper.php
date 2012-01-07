@@ -36,6 +36,6 @@ class Qwin_Upper extends Qwin_Widget
     public function call()
     {
         $this->source = strtoupper($this->source);
-        return $this;
+        return $this->invoker;
     }
 }

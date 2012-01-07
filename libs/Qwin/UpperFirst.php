@@ -36,6 +36,6 @@ class Qwin_UpperFirst extends Qwin_Widget
     public function call()
     {
         $this->source = ucfirst($this->source);
-        return $this;
+        return $this->invoker;
     }
 }
