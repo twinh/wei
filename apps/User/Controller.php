@@ -16,8 +16,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Com
- * @subpackage  User
+ * @package     Qwin
+ * @subpackage  Application
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -34,6 +34,77 @@ class User_Controller extends Qwin_CrudController
     protected $_lock = array(
         'guest', 'admin', '7641b5b1-c727-6c07-e11f-9cb5b74ddfc9',
     );
+    
+    public function loginAction()
+    {
+        $user = $this->user();
+        
+        if (!$this->request->isPost()) {
+            return;
+        }
+        
+        // check whether user logged in
+        if ($user['username'] && 'guest' != $user['username']) {
+            return $this->json(array(
+                'code' => -1,
+                'message' => 'You have logged in!'
+            ));
+        }
+        
+        $username = $this->post('username');
+        $password = md5($this->post('password'));
+        
+        $user = $this->query()
+            ->where('username = ? AND password = ?', array($username, $password))
+            ->fetchOne();
+        
+        if (!$user) {
+            return $this->json(array(
+                'code' => -1,
+                'message' => 'Username or password error!',
+            ));
+        }
+        
+        // 
+        $this->user->fromArray($user->toArray());
+        
+        return $this->json(array(
+            'code' => 0,
+            'message' => 'Login success!',
+        ));
+    }
+    
+    public function logoutAction()
+    {
+        $this->user->logout();
+        return $this->json(array(
+            'code' => 0,
+            'message' => 'Logout success!',
+        ));
+    }
+    
+    public function isLoginAction()
+    {
+        $user = $this->user();
+
+        if ('guest' != $user['username']) {
+            return $this->json(array(
+                'code' => 0,
+                'message' => 'You have logged in!',
+                'username' => $user['username'],
+            ));
+        } else {
+            return $this->json(array(
+                'code' => -1,
+                'message' => 'You have logged in!'
+            ));
+        }
+    }
+    
+    public function json($data)
+    {
+        return json_encode($data);
+    }
     
     /**
      * 编辑密码
@@ -108,16 +179,4 @@ class User_Controller extends Qwin_CrudController
         }
         return $result;
     }
-
-    /*public function onAfterDb($action, $data)
-    {
-        if('EditPassword' == $action)
-        {
-            $url = Qwin::call('-url')->url(array('module' => 'User', 'controller' => 'Log', 'action' => 'Logout'));
-            $this->view->redirect('LOGIN', $url)
-                    ->loadView()
-                    ->display();
-            exit();
-        }
-    }*/
 }

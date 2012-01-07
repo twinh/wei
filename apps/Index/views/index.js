@@ -80,4 +80,52 @@ jQuery(function($){
         click: true,
         focus: true
     });
+    
+    $.ajax({
+        url: '?module=user&action=isLogin',
+        dataType: 'json',
+        success: function(data) {
+            if (0 == data.code) {
+                $('#nav-username').text(data.username);
+                $('#logout').show();
+                $('#login').hide();
+            } else {
+                $('#nav-username').text('Guest');
+            }
+        }
+    });
+    
+    $('#login').click(function(){
+        var url = '?module=user&action=login';
+        $('<div id="login-dialog"></div>').load(url).dialog({
+            title: '您好,请登陆',
+            height: 190,
+            width: 330,
+            modal: true,
+            buttons: {
+                '登陆': function(){
+                    $('#qw-form-login').submit();
+                },
+                '取消': function(){
+                    $(this).dialog('destory').remove();
+                }
+            },
+            close: function(){
+                $(this).dialog('destroy').remove();
+            }
+        });
+    });
+    
+    $('#logout').click(function(){
+        $.ajax({
+           url: '?module=user&action=logout',
+           dataType: 'json',
+           success: function(data) {
+               alert(data.message);
+               if (0 == data.code) {
+                   window.location.reload();
+               }
+           }
+        });
+    });
 });
