@@ -43,7 +43,7 @@ class Qwin_User extends Qwin_ArrayWidget
     {
         $data = (array)$this->session->get('user');
         if (empty($data) || !isset($data['username']) || !$data['username']) {
-            
+            $this->_data = $this->_initData;
         } else {
             $this->_data = $data;
         }
@@ -67,7 +67,7 @@ class Qwin_User extends Qwin_ArrayWidget
     
     public function isLogin()
     {
-        return 'guest' == $this->_data['username'];
+        return 'guest' != strtolower($this->_data['username']);
     }
     
     /**
