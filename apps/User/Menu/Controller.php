@@ -25,6 +25,10 @@
  * @since       2010-05-25 07:59:33
  */
 
-class Member_Menu_Controller extends ActionController_Widget
+class User_Menu_Controller extends Qwin_Controller
 {
+    public function indexAction()
+    {
+        
+    }
 }

@@ -46,7 +46,7 @@ class Qwin_CrudController extends Qwin_Controller
      */
     public function listAction()
     {
-        if ($this->request->isJson()) {
+        if ($this->isAjax()) {
             return $this->widget->jsonListAction(array(
                 'jqGrid'    => $this->options['jqGrid'],
                 'record'    => $this->record(),
@@ -58,12 +58,6 @@ class Qwin_CrudController extends Qwin_Controller
                     $this->get('sidx'),
                     $this->get('sord')
                 ),
-            ));
-        } else {
-            return $this->widget->listAction(array(
-                'jqGrid'    => $this->options['jqGrid'],
-                'layout'    => $this->get('layout'),
-                'row'       => $this->get('row'),
             ));
         }
     }

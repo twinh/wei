@@ -86,8 +86,8 @@ class User_Controller extends Qwin_CrudController
     public function isLoginAction()
     {
         $user = $this->user();
-
-        if ('guest' != $user['username']) {
+        
+        if ($user->isLogin()) {
             return $this->json(array(
                 'code' => 0,
                 'message' => 'You have logged in!',
