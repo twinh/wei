@@ -26,5 +26,6 @@
 return array(
     'Welcome' => '欢迎您',
     'Login' => '登陆',
-    'Logout' => '注销'
+    'Logout' => '注销',
+    'Menus' => '操作菜单',
 );
