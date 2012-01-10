@@ -63,7 +63,7 @@
 .qw-form-table .qw-field-text input,
 .qw-form-table .qw-field-password input{
     width: 60%;
-    padding: 4px 0 4px 5px;/* for ie & ff */
+    padding: 4px 4px 4px 5px;/* for ie & ff */
     line-height: 15px;/* for ie */
     font-weight:normal;
     vertical-align: bottom;

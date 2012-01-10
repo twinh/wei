@@ -97,7 +97,7 @@ jQuery(function($){
     
     $('#login').click(function(){
         var url = '?module=user&action=login';
-        $('<div id="login-dialog"></div>').load(url).dialog({
+        $('<div id="login-dialog">loading...</div>').load(url).dialog({
             title: '您好,请登陆',
             height: 190,
             width: 330,

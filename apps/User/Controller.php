@@ -96,7 +96,7 @@ class User_Controller extends Qwin_CrudController
         } else {
             return $this->json(array(
                 'code' => -1,
-                'message' => 'You have logged in!'
+                'message' => 'You have not logged in!'
             ));
         }
     }

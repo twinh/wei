@@ -13,14 +13,14 @@ $minify->add(array(
     $this->getFile('views/form/default.css'),
 ));
 ?>
+</head>
+<body>
 <style type="text/css">
     
 </style>
 <script type="text/javascript">
     qwin.lang = <?php echo json_encode($lang->toArray()) ?>;
 </script>
-</head>
-<body>
 <div class="ui-layout-north">
     <div id="qw-logo" class="ui-widget-content">
         <a href="?">
@@ -38,9 +38,9 @@ $minify->add(array(
         <div id="ui-west-toggler-open" class="ui-state-default">
             <span class="ui-icon ui-icon-carat-1-w"></span>
         </div>
-        <a href="javascript:alert('敬请期待!');" id="qw-menu-oper" class="ui-state-default">
+        <!--<a href="javascript:alert('敬请期待!');" id="qw-menu-oper" class="ui-state-default">
             <span class="ui-icon ui-icon-gear"></span>
-        </a>
+        </a>-->
         操作菜单
     </h3>
     <div id="qw-menu">

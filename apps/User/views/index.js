@@ -28,10 +28,7 @@ jQuery(function($){
         }, {
             name: 'date_modified'
         }, {
-            name: 'operation',
-            formatter: function(){
-                return '1';
-            }
+            name: 'operation'
         }]
     }).jqGrid('navGrid', '#qw-jqgrid-pager', {
         add : false,

@@ -60,7 +60,7 @@ class Util_Minify_Controller extends Qwin_Controller
         $name = $this->get('g');
         $file = $this->minify->getCacheFile($name);
         if (!is_file($file)) {
-            $this->log4php->info('minify file "' . $name . '" not found.');
+            //$this->log4php->info('minify file "' . $name . '" not found.');
             exit;
         }
         $options['minApp']['groups'][$name->__toString()] = require $file;

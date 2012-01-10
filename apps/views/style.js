@@ -26,6 +26,26 @@ jQuery(function($){
     // 设定元数据从data属性取值
     $.metadata.setType('attr', 'data');
     
+    var user = {};
+    user.loginState = null;
+    user.isLogin = function() {
+        if (null === user.loginState) {
+             var result = $.ajax({
+                url: '?module=user&action=isLogin',
+                dataType: 'json',
+                async: false
+            }).responseText;
+            result = $.parseJSON(result);
+            if (0 == result.code) {
+                user.loginState = true;
+            } else {
+                user.loginState = false;
+            }
+        }
+        return user.loginState;
+    };
+    qwin.user = user;
+    
     // 提示信息
 //    qwin.msg = {
 //        /**

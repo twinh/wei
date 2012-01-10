@@ -26,10 +26,10 @@
 class Index_Controller extends Qwin_Controller
 {
     public function indexAction()
-    {        
+    {
         // todo
-        $page = htmlspecialchars($this->get('page', '?module=index&action=welcome'));
-        $title = htmlspecialchars($this->get('title', $this->lang['Main Page']));
+        $page = htmlspecialchars(urldecode($this->get('page', '?module=index&action=welcome')));
+        $title = htmlspecialchars(urldecode($this->get('title', $this->lang['Main Page'])));
 
         
         // 加载页眉导航的缓存 todo index controller
