@@ -172,7 +172,7 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
                  . Qwin_Util_Html::cssLinkTag($url->url('util/minify', 'index', array('g' => $minify->pack('css')))) . PHP_EOL;
 
         // TODO appendAfter
-        $output = Qwin_Util_String::replaceFirst('</title>', '</title>' . $replace, $output);
+        $output = Qwin_Util_String::replaceFirst('</head>', $replace . '</head>', $output);
         echo $output;
         unset($output);
 
