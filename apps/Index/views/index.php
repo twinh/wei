@@ -7,7 +7,7 @@
 $minify->add(array(
     $jQuery->getTheme($this->options['theme']),
     $jQuery->getCore(),
-    $jQuery->get('ui.core, effects, qui, ui.tabs, tabsext, ui.accordion, ui.button, layout, metadata, ui.dialog, form'),
+    $jQuery->get('ui, effects, layout, qui, accordion, tabs, button, metadata, dialog, form'),
     $this->getFile('views/style.js'),
     $this->getFile('views/style.css'),
     $this->getFile('views/form/default.css'),
