@@ -2,7 +2,13 @@ jQuery(function($){
     var layout = $('body').layout({
         defaults: {
             paneClass: 'ui-widget-content',
-            resizerClass: 'ui-state-default'
+            resizerClass: 'ui-state-default',
+            onresize_end: function() {
+                // TODO rewrite select
+                $('#qw-tabs div.ui-tabs-panel:not(.ui-tabs-hide)').innerHeight(
+                    $('#qw-tabs').innerHeight() - $('#qw-tabs ul').outerHeight()
+                );
+            }
         },
         north: {
             resizable: false,

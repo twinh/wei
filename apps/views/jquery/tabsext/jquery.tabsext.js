@@ -3,6 +3,8 @@
  *
  * Depends:
  *	jquery.tabs.js
+ *	
+ * @todo see Rotate
  */
 (function( $, undefined ) {
     /**
