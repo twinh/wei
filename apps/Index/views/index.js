@@ -7,6 +7,7 @@ jQuery(function($){
         north: {
             resizable: false,
             slidable: false,
+            spacing_closed: 0,
             spacing_open: 0,
             togglerClass: null
         },
@@ -31,7 +32,8 @@ jQuery(function($){
             slidable: false,
             spacing_closed: 0
         }
-    }).addCloseBtn('#ui-west-toggler-open', 'west');
+    });
+    layout.addCloseBtn('#ui-west-toggler-open', 'west');
     
     // 左栏打开按钮增加鼠标滑过效果
     $('#ui-west-toggler-closed').qui();
@@ -127,5 +129,29 @@ jQuery(function($){
                }
            }
         });
+    });
+    
+    // 全屏切换
+    var fullscreen = false;
+    $('#qw-fullscreen').hover(function(){
+        $(this).removeClass('ui-priority-secondary');
+    }, function(){
+        $(this).addClass('ui-priority-secondary');
+    }).qui().click(function(){
+        if (!fullscreen) {
+            fullscreen = true;
+            $('span', this).removeClass('ui-icon-arrow-4-diag').addClass('ui-icon-arrow-4');
+            $.each('west,north,south'.split(','), function(index, value){
+                layout.state[value].isHidden = false;
+                layout.hide(value);
+            });
+        } else {
+            fullscreen = false;
+            $('span', this).removeClass('ui-icon-arrow-4').addClass('ui-icon-arrow-4-diag');
+            $.each('west,north,south'.split(','), function(index, value){
+                layout.state[value].isHidden = true;
+                layout.show(value);
+            });
+        }
     });
 });

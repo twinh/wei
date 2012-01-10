@@ -41,7 +41,7 @@ $minify->add(array(
         <!--<a href="javascript:alert('敬请期待!');" id="qw-menu-oper" class="ui-state-default">
             <span class="ui-icon ui-icon-gear"></span>
         </a>-->
-        操作菜单
+        <?php echo $lang['Menus'] ?>
     </h3>
     <div id="qw-menu">
     <?php
@@ -83,6 +83,9 @@ $minify->add(array(
         <div id="ui-tabs-0">
             <iframe class="ui-tabs-iframe" src="<?php echo $page ?>"></iframe>
         </div>
+    </div>
+    <div id="qw-fullscreen" class="ui-state-default ui-priority-secondary">
+        <span class="ui-icon ui-icon-arrow-4-diag"></span>
     </div>
 </div>
 <div class="ui-layout-east">

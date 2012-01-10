@@ -182,3 +182,20 @@
 #qw-tabs .ui-tabs-nav li a {
     font-weight: normal;
 }
+#qw-fullscreen {
+    position: absolute;
+    right: 4px;
+    top: 6px;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    font-size: 12px;
+    float: right;
+    display: block;
+    text-align: center;
+    padding: 0;
+    line-height: normal;
+}
