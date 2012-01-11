@@ -119,11 +119,11 @@ class User_Record extends Qwin_Record
                 ),
             ),
             'id' => 'id',
-            'table' => 'User',
+            'table' => 'user',
             'mainField' => 'username',
             'relations' => array(
                 'group' => array(
-                    'module' => 'User/group',
+                    'module' => 'user/group',
                     'alias' => 'group',
                     'local' => 'group_id',
                 ),
