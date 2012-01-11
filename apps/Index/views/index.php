@@ -6,8 +6,7 @@
 <?php
 $minify->add(array(
     $jQuery->getTheme($this->options['theme']),
-    $jQuery->getCore(),
-    $jQuery->get('ui, effects, layout, qui, accordion, tabs, button, metadata, dialog, form'),
+    $jQuery->get('jquery, ui, effects, layout, qui, accordion, tabs, button, metadata, dialog, form'),
     $this->getFile('views/style.js'),
     $this->getFile('views/style.css'),
     $this->getFile('views/form/default.css'),
@@ -84,9 +83,9 @@ $minify->add(array(
             <iframe class="ui-tabs-iframe" src="<?php echo $page ?>"></iframe>
         </div>
     </div>
-    <div id="qw-fullscreen" class="ui-state-default ui-priority-secondary">
+    <a id="qw-fullscreen" title="<?php echo $lang['Full screen'] ?>" class="ui-state-default ui-priority-secondary">
         <span class="ui-icon ui-icon-arrow-4-diag"></span>
-    </div>
+    </a>
 </div>
 <div class="ui-layout-east">
     
