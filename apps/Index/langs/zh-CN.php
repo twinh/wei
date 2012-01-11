@@ -28,4 +28,5 @@ return array(
     'Login' => '登陆',
     'Logout' => '注销',
     'Menus' => '操作菜单',
+    'Full screen' => '全屏',
 );

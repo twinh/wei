@@ -57,17 +57,6 @@ class Qwin_JQuery extends Qwin_Widget
     {
         return $this;
     }
-
-    /**
-     * 获取核心文件
-     *
-     * @return string
-     */
-    public function getCore()
-    {
-        $file = $this->_dir . '/jquery.js';
-        return $file;
-    }
     
     /**
      * 获取jQuery插件/UI等的文件路径
@@ -82,8 +71,12 @@ class Qwin_JQuery extends Qwin_Widget
         
         foreach ($names as $name) {
             $name = trim($name);
-            $files[] = $this->_dir . '/' . $name . '/jquery.' . $name . '.js';
-            $files[] = $this->_dir . '/' . $name . '/jquery.' . $name . '.css';
+            if ('jquery' == $name) {
+                $files[] = $this->_dir . '/jquery.js';
+            } else {
+                $files[] = $this->_dir . '/' . $name . '/jquery.' . $name . '.js';
+                $files[] = $this->_dir . '/' . $name . '/jquery.' . $name . '.css';
+            }
         }
         return $files;
     }
@@ -102,6 +95,12 @@ class Qwin_JQuery extends Qwin_Widget
         
         foreach ($names as $name) {
             $name = trim($name);
+            
+            if ('jquery' == $name) {
+                $file = $this->_dir . '/jquery.js';
+                $html .= '<script type="text/javascript" src="' . $file . '"></script>' . "\n";
+                continue;
+            }
             
             $file = $this->_dir . '/' . $name . '/jquery.' . $name . '.js';
             if (is_file($file)) {
