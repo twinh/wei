@@ -2,7 +2,7 @@
 /**
  * Qwin Framework
  *
- * Copyright (c) 2008-2012 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,32 +23,17 @@
  */
 
 /**
- * Get
+ * Widgetable
  * 
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-02 00:44:51
+ * @since       2012-01-11 15:34:12
  */
-class Qwin_Get extends Qwin_Widget
+interface Qwin_Widgetable
 {
-    public function call($name, $default = null /*, $type='string' ?*/)
-    {
-        $q = Qwin::getInstance();
-        if (is_string($name)) {
-            return $q->variable(isset($_GET[$name]) ? $_GET[$name] : $default);
-        } elseif (is_int($name)) {
-            if (!is_int($default)) {
-                return $q->variable(isset($this->source[$name]) ? $this->source[$name] : null);
-            } else {
-                if (is_string($this->source)) {
-                    return $q->variable(substr($this->source, $name, $default));
-                } elseif (is_array($this->source)) {
-                    return $q->variable(array_slice($this->source, $name, $default));
-                }
-            }
-        }
-        return $this;
-    }
+    public function __get($name);
+    
+    public function __call($name, $args);
 }

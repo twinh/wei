@@ -167,7 +167,7 @@ class Qwin_View extends Qwin_Widget implements ArrayAccess
         $output = ob_get_contents();
         '' != $output && ob_end_clean();
 
-        $url = Qwin::widget('url');
+        $url = Qwin::getInstance()->widget('url');
         $replace = Qwin_Util_Html::jsTag($url->url('util/minify', 'index', array('g' => $minify->pack('js')))) . PHP_EOL
                  . Qwin_Util_Html::cssLinkTag($url->url('util/minify', 'index', array('g' => $minify->pack('css')))) . PHP_EOL;
 
