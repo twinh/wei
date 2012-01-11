@@ -18,7 +18,7 @@
 .ui-tabs .ui-tabs-hide { display: none !important; }
 
 .ui-tabs .ui-tabs-nav li .ui-icon-close {
-    float: right; 
+    float: left;
     cursor: pointer;
     opacity: 0.4;
     -moz-opacity: 0.4;
