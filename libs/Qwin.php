@@ -40,7 +40,7 @@ class Qwin extends Qwin_Widget
     /**
      * 版本
      */
-    const VERSION = '0.8.0';
+    const VERSION = '0.8.1';
     
     /**
      * 存储微件对象的数组
@@ -145,13 +145,13 @@ class Qwin extends Qwin_Widget
         // 定义全局函数Q
         if ($options['fnQ'] && !function_exists('q')) {
             function q($value = null) {
-                return Qwin::variable($value);
+                return Qwin::getInstance()->variable($value);
             }
         }
         
         // 定义全局函数Qwin
         function qwin($value = null) {
-            return Qwin::variable($value);
+            return Qwin::getInstance()->variable($value);
         }
         
         // 定义全局变量$q
@@ -214,24 +214,23 @@ class Qwin extends Qwin_Widget
      * @param string $name 微件名称
      * @return Qwin_Widget 微件实例化对象
      */
-    public static function widget($name)
+    public function widget($name)
     {
-        $q = self::getInstance();
         $lower = strtolower($name);
         
-        if (isset($q->_widgets[$lower])) {
-            return $q->_widgets[$lower];
+        if (isset($this->_widgets[$lower])) {
+            return $this->_widgets[$lower];
         }
         
-        foreach ($q->options['widgetPrefixs'] as $prefix) {
+        foreach ($this->options['widgetPrefixs'] as $prefix) {
             $class = $prefix . ucfirst($name);
             if (class_exists($class)) {
-                return $q->_widgets[$lower] = $q->call($class);
+                return $this->_widgets[$lower] = $this->call($class);
             }
         }
         
         $trace = debug_backtrace();
-        $q->exception('Widget or property "%s" not found called by class "%s"', $name, $trace[2]['class']);
+        $this->exception('Widget or property "%s" not found called by class "%s"', $name, $trace[2]['class']);
     }
     
     /**
@@ -240,6 +239,7 @@ class Qwin extends Qwin_Widget
      * @param string $name 类名
      * @param null|array $param 类初始化时的参数,以数组的形式出现
      * @return false|object 失败或类对象
+     * @todo reanem to instance ?
      */
     public function call($name, $param = null)
     {
@@ -341,7 +341,7 @@ class Qwin extends Qwin_Widget
      * @return Qwin_Widget 微件实例化对象
      * @todo 是否应该考虑变量类型
      */
-    public static function variable($mixed = null, $class = 'Qwin_Widget')
+    public function variable($mixed = null, $class = 'Qwin_Widget')
     {
         /*$type = gettype($mixed);
         if (isset(self::$_types[$type])) {
@@ -349,18 +349,17 @@ class Qwin extends Qwin_Widget
         } else {
             $class = 'Qwin_Widget';
         }*/
-        $q = self::getInstance();
         if (is_string($mixed) || is_int($mixed)) {
-            if (isset($q->_vars[$mixed])) {
-                return $q->_vars[$mixed];
+            if (isset($this->_vars[$mixed])) {
+                return $this->_vars[$mixed];
             }
-            return $q->_vars[$mixed] = new $class($mixed);
+            return $this->_vars[$mixed] = new $class($mixed);
         } else {
-            if (false !== ($key = array_search($mixed, $q->_varKeys, true))) {
-                return $q->_varValues[$key];
+            if (false !== ($key = array_search($mixed, $this->_varKeys, true))) {
+                return $this->_varValues[$key];
             }
-            $q->_varKeys[] = $mixed;
-            return $q->_varValues[] = new $class($mixed);
+            $this->_varKeys[] = $mixed;
+            return $this->_varValues[] = new $class($mixed);
         }
     }
     
@@ -391,5 +390,38 @@ class Qwin extends Qwin_Widget
         }
 
         return self::$_instance = new self($config);
+    }
+
+    /**
+     * Get a widget obejct and call the "call" method
+     * 
+     * @param Qwin_Widget $invoker
+     * @param string $name
+     * @param array $args 
+     * @return mixed 
+     */
+    public function callWidget($invoker, $name, $args)
+    {
+        $widget = $this->widget($name);
+        
+        if (!method_exists($widget, 'call')) {
+            require_once 'Qwin/Exception.php';
+            throw new Qwin_Exception('Method "call" not found in widget "' . get_class($widget) . '"');
+        }
+        
+        // set invoker for widget
+        $widget->invoker = $invoker;
+        
+        // set source for widget
+        $widget->source = $invoker->source;
+        
+        // call widget
+        $result = call_user_func_array(array($widget, 'call'), $args);
+        
+        // set back source so that source can be passed in widgets
+        $this->source = $widget->source;
+        
+        // return result rather than widget object
+        return $result;
     }
 }

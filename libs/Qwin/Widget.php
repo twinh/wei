@@ -22,6 +22,8 @@
  * @version     $Id$
  */
 
+require_once 'Widgetable.php';
+
 /**
  * Widget
  * 
@@ -31,7 +33,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-03 00:28:06
  */
-class Qwin_Widget
+class Qwin_Widget implements Qwin_Widgetable
 {
     /**
      * 对象的值
@@ -115,23 +117,7 @@ class Qwin_Widget
      */
     public function __call($name, $args)
     {
-        // 获取微件对象
-        if (!isset($this->$name)) {
-            $this->$name = Qwin::widget($name);
-        }
-        $widget = $this->$name;
-        
-        if (!method_exists($widget, 'call')) {
-            require_once 'Qwin/Exception.php';
-            throw new Qwin_Exception('Method "call" not found in widget "' . get_class($widget) . '"');
-        }
-
-        // 执行相应方法
-        $widget->invoker = $this;
-        $widget->source = $this->source;
-        $result = call_user_func_array(array($widget, 'call'), $args);
-        $this->source = $widget->source;
-        return $result;
+        return Qwin::getInstance()->callWidget($this, $name, $args);
     }
     
     /**
@@ -142,15 +128,16 @@ class Qwin_Widget
      */
     public function __get($name)
     {
-        $this->$name = Qwin::widget($name);
-        $this->$name->invoker = $this;
-        return $this->$name;
+        $this->$name = $widget = Qwin::getInstance()->widget($name);
+        $widget->invoker = $this;
+        return $widget;
     }
     
     /**
      * 魔术方法,返回对象值的字符串形式
      * 
      * @return string
+     * @todo 针对不同类型处理
      */
     public function __toString()
     {
