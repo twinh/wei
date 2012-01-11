@@ -501,7 +501,7 @@ a.data(c,"dnd",b);c.p.reccount!="0"&&!c.p.jqgdnd&&g();c.p.jqgdnd=true;for(var f=
                 // TODO other borders
                 if (!options.border) {
                     $('tr', this.grid.hDiv).each(function(){
-                        $('th:last', this).css('border-right-width', 0);
+                        $('th:visible:last', this).css('border-right-width', 0);
                     });
                     
                     if (options.pager) {
