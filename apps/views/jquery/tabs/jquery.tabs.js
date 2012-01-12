@@ -83,9 +83,12 @@ a.rotate(null)}:function(){t=c.selected;h()});if(b){this.element.bind("tabsshow"
             if (foundIframe) {
                 return this;
             }
-            
+
+            // append time to url for ie
+            url = url + (url.indexOf('?') != -1 ? '&' : '?') + (new Date()).getTime();
+
             // add iframe
-            self.element.append('<div id="' + id + '"><iframe class="ui-tabs-iframe" src="' + url + '"></iframe></div>');
+            self.element.append('<div id="' + id + '"><iframe class="ui-tabs-iframe" src="' + url + '" frameborder="0"></iframe></div>');
             self.add('#' + id, title);
             
             // selete tab

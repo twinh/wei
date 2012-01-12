@@ -80,7 +80,7 @@ $minify->add(array(
             <li><a href="#ui-tabs-0"><?php echo $title ?></a></li>
         </ul>
         <div id="ui-tabs-0">
-            <iframe class="ui-tabs-iframe" src="<?php echo $page ?>"></iframe>
+            <iframe class="ui-tabs-iframe" src="<?php echo $page ?>" frameBorder="0"></iframe>
         </div>
     </div>
     <a id="qw-fullscreen" title="<?php echo $lang['Full screen'] ?>" class="ui-state-default ui-priority-secondary">
