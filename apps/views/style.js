@@ -33,6 +33,7 @@ jQuery(function($){
              var result = $.ajax({
                 url: '?module=user&action=isLogin',
                 dataType: 'json',
+                cache: false,
                 async: false
             }).responseText;
             result = $.parseJSON(result);

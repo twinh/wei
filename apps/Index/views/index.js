@@ -92,6 +92,7 @@ jQuery(function($){
     $.ajax({
         url: '?module=user&action=isLogin',
         dataType: 'json',
+        cache: false,
         success: function(data) {
             if (0 == data.code) {
                 $('#nav-username').text(data.username);
