@@ -99,14 +99,29 @@ class Qwin extends Qwin_Widget
      *       autoload       bool        是否启用类自动加载
      * 
      *       autoloadPaths  array       类自动加载的目录
-     * 
-     *       widgetPrefixs  array       微件名称前缀(是否确实需要此功能?)
      */
     public $options = array(
         'fnQ'           => true,
         'autoload'      => true,
         'autoloadPaths' => array(),
-        'widgetPrefixs' => array('QwinX_', 'Qwin_'),
+    );
+    
+    /**
+     * Widgets map
+     * 
+     * @var array
+     */
+    protected $_widgetsMap = array(
+        'lower' => array(
+            'strtolower', // callback name
+            0, // source paramter position
+            1, // max parameter numbers
+        ),
+        'upper' => array(
+            'strtoupper',
+            0,
+            1,
+        ),
     );
 
     /**
@@ -222,11 +237,9 @@ class Qwin extends Qwin_Widget
             return $this->_widgets[$lower];
         }
         
-        foreach ($this->options['widgetPrefixs'] as $prefix) {
-            $class = $prefix . ucfirst($name);
-            if (class_exists($class)) {
-                return $this->_widgets[$lower] = $this->call($class);
-            }
+        $class = 'Qwin_' . ucfirst($name);
+        if (class_exists($class)) {
+            return $this->_widgets[$lower] = $this->call($class);
         }
         
         $trace = debug_backtrace();
@@ -402,6 +415,30 @@ class Qwin extends Qwin_Widget
      */
     public function callWidget($invoker, $name, $args)
     {
+        $lower = strtolower($name);
+        if (isset($this->_widgetsMap[$name])) {
+            $map = &$this->_widgetsMap[$name];
+
+            if (isset($map[1])) {
+                array_splice($args, $map[1], 0, array($invoker->source));
+            } else {
+                $args = array($invoker->source);
+            }
+
+            if (isset($map[2]) && $map[2] < count($args)) {
+                $args = array_slice($args, 0, $map[2]);
+            }
+
+            $result = call_user_func_array($this->_widgetsMap[$name][0], $args);
+
+            if (isset($map[3]) && $map[3]) {
+                return $result;
+            }
+
+            $invoker->source = $result;
+            return $invoker;
+        }
+        
         $widget = $this->widget($name);
         
         if (!method_exists($widget, 'call')) {
