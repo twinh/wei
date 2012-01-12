@@ -122,6 +122,11 @@ class Qwin extends Qwin_Widget
             0,
             1,
         ),
+        'upperFirst' => array(
+            'ucfirst',
+            0,
+            1,
+        ),
     );
 
     /**
@@ -460,5 +465,16 @@ class Qwin extends Qwin_Widget
         
         // return result rather than widget object
         return $result;
+    }
+    
+    /**
+     * convert $var to a widget
+     * 
+     * @param mixed $var
+     * @return Qwin_Widget 
+     */
+    public function __invoke($var)
+    {
+        return $this->variable($var);
     }
 }
