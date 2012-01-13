@@ -27,9 +27,17 @@ class Index_Controller extends Qwin_Controller
 {
     public function indexAction()
     {
-        // todo
-        $page = htmlspecialchars(urldecode($this->get('page', '?module=index&action=welcome')));
-        $title = htmlspecialchars(urldecode($this->get('title', $this->lang['Main Page'])));
+        // TODO escape集成到get中?增加rawGet?
+        $page = $this
+            ->get('page', '?module=index&action=welcome')
+            ->urlDecode()
+            ->escape();
+        
+        $title = $this
+            ->get('title', $this->lang['Main Page'])
+            ->urlDecode()
+            ->escape();
+        //$title = htmlspecialchars($title);
 
         
         // 加载页眉导航的缓存 todo index controller
@@ -40,6 +48,6 @@ class Index_Controller extends Qwin_Controller
 
     public function welcomeAction()
     {
-        
+
     }
 }

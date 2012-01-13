@@ -74,7 +74,7 @@ a.rotate(null)}:function(){t=c.selected;h()});if(b){this.element.bind("tabsshow"
             
             // 检查是否有该url的iframe
             self.element.find('iframe').each(function(){
-                if ($(this).attr('src') == url) {
+                if ($(this).data('src') == url) {
                     foundIframe = true;
                     self.select($(this).parent().attr('id'));
                     return false;
@@ -85,10 +85,11 @@ a.rotate(null)}:function(){t=c.selected;h()});if(b){this.element.bind("tabsshow"
             }
 
             // append time to url for ie
-            url = url + (url.indexOf('?') != -1 ? '&' : '?') + (new Date()).getTime();
+            var url2 = url + (url.indexOf('?') != -1 ? '&' : '?') + (new Date()).getTime();
 
             // add iframe
-            self.element.append('<div id="' + id + '"><iframe class="ui-tabs-iframe" src="' + url + '" frameborder="0"></iframe></div>');
+            self.element.append('<div id="' + id + '"><iframe data-src="'
+                + url + '" class="ui-tabs-iframe" src="' + url2 + '" frameborder="0"></iframe></div>');
             self.add('#' + id, title);
             
             // selete tab

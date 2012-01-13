@@ -43,6 +43,15 @@ class Qwin_Cache extends Qwin_Widget
         'dir'       => './cache/',
     );
     
+    public function __construct($source = null)
+    {
+        parent::__construct($source);
+        // TODO r
+        if (!is_dir($this->options['dir'])) {
+            mkdir($this->options['dir']);
+        }
+    }
+    
     /**
      * 设置或获取一项缓存
      * 

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Qwin Framework
  *
