@@ -46,7 +46,7 @@ class Qwin_Callback extends Qwin_Widget
         if (!$callback || !is_callable($callback)) {
             return null;
         }
-        if (is_string($callback[0])) {
+        if (is_array($callback) && is_string($callback[0])) {
             $callback[0] = $this->qwin->call($callback[0]);
         }
         return call_user_func_array($callback, (array)$params);

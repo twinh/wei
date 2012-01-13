@@ -23,7 +23,7 @@
  */
 
 /**
- * Get
+ * Hook
  * 
  * @package     Qwin
  * @subpackage  Widget

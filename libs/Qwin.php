@@ -40,7 +40,7 @@ class Qwin extends Qwin_Widget
     /**
      * 版本
      */
-    const VERSION = '0.8.1';
+    const VERSION = '0.8.2';
     
     /**
      * 存储微件对象的数组
@@ -118,14 +118,16 @@ class Qwin extends Qwin_Widget
             1, // max parameter numbers
         ),
         'upper' => array(
-            'strtoupper',
-            0,
-            1,
+            'strtoupper', 0, 1,
         ),
         'upperFirst' => array(
-            'ucfirst',
-            0,
-            1,
+            'ucfirst', 0, 1,
+        ),
+        'urlDecode' => array(
+            'urldecode', 0, 1,
+        ),
+        'urlEnCode' => array(
+            'urlencode', 0, 1,
         ),
     );
 
@@ -461,7 +463,7 @@ class Qwin extends Qwin_Widget
         $result = call_user_func_array(array($widget, 'call'), $args);
         
         // set back source so that source can be passed in widgets
-        $this->source = $widget->source;
+        $invoker->source = $widget->source;
         
         // return result rather than widget object
         return $result;
