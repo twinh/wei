@@ -105,9 +105,9 @@ class Qwin_App extends Qwin_Widget
      * 获取页面运行时间
      *
      * @return string
-     * @todo rename
+     * @todo marker widget
      */
-    public function getEndTime()
+    public function getElapsedTime()
     {
         return str_pad(round((microtime(true) - $this->options['startTime']), 4), 6, 0);
     }

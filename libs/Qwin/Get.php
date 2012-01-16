@@ -43,7 +43,7 @@ class Qwin_Get extends Qwin_Widget
                 return $q->variable(isset($this->source[$name]) ? $this->source[$name] : null);
             } else {
                 if (is_string($this->source)) {
-                    return $q->variable(substr($this->source, $name, $default));
+                    return $q->variable(substr($this->source, $name, $default - $name + 1));
                 } elseif (is_array($this->source)) {
                     return $q->variable(array_slice($this->source, $name, $default));
                 }

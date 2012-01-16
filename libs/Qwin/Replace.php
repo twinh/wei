@@ -33,5 +33,10 @@
  */
 class Qwin_Replace extends Qwin_Widget
 {
-    
+    public function call($search, $replace, &$count = null, $case = true)
+    {
+        $fn = $case ? 'str_replace' : 'str_ireplace';
+        $this->source = call_user_func($fn, $search, $replace, $this->source, &$count);
+        return $this->invoker;
+    }
 }
