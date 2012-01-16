@@ -33,5 +33,8 @@
  */
 class Qwin_IsAlnum extends Qwin_Widget
 {
-    
+    public function call()
+    {
+        return (bool)preg_match('/^([a-z0-9]+)$/i', $this->source);
+    }
 }

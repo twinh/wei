@@ -50,7 +50,9 @@ class Qwin_Reflection extends Qwin_Widget
     }
     
     /**
-     * @return mixed
+     * Get invoker's reflection
+     * 
+     * @return Qwin_Reflection_Class
      */
     public static function call()
     {

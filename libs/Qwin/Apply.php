@@ -2,7 +2,7 @@
 /**
  * Qwin Framework
  *
- * Copyright (c) 2008-2012 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,18 +23,19 @@
  */
 
 /**
- * IsRegx
+ * Apply
  * 
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-02 00:36:13
+ * @since       2012-1-14 12:19:16
  */
-class Qwin_IsRegx extends Qwin_Widget
+class Qwin_Apply extends Qwin_Widget
 {
-    public function call($x)
+    public function call($callback, array $args = array())
     {
-        return (bool)preg_match($x, $this->source);
+        $this->source = call_user_func_array($callback, $args);
+        return $this->invoker;
     }
 }

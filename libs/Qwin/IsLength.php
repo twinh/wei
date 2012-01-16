@@ -2,7 +2,7 @@
 /**
  * Qwin Framework
  *
- * Copyright (c) 2008-2012 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,15 +23,18 @@
  */
 
 /**
- * IsDigits
+ * IsLength
  * 
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-5 11:56:38
+ * @since       2012-1-14 16:28:13
  */
-class Qwin_IsDigits extends Qwin_Widget
+class Qwin_IsLength extends Qwin_Widget
 {
-    
+    public function call()
+    {
+        
+    }
 }

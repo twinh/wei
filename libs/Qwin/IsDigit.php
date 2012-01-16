@@ -23,18 +23,18 @@
  */
 
 /**
- * IsRegx
+ * IsDigit
  * 
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-02 00:36:13
+ * @since       2011-10-05 11:56:38
  */
-class Qwin_IsRegx extends Qwin_Widget
+class Qwin_IsDigit extends Qwin_Widget
 {
-    public function call($x)
+    public function call()
     {
-        return (bool)preg_match($x, $this->source);
+        return (bool)preg_match('/^([0-9]+)$/', $this->source);
     }
 }

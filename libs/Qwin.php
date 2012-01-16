@@ -109,13 +109,30 @@ class Qwin extends Qwin_Widget
     /**
      * Widgets map
      * 
+     * key  =>  value
+     *  0   =>  callback name
+     *  1   =>  source paramter position
+     *  2   =>  max parameter numbers
+     *  3   =>  0 => $invoker, 1 => $result, 2 => $widget
+     * 
      * @var array
+     * 
      */
     protected $_widgetsMap = array(
+        'isArray' => array(
+            'is_array', 0, 1, 1
+        ),
+        'isString' => array(
+            'is_string', 0, 1, 1
+        ),
+        'isNull' => array(
+            'is_null', 0, 1, 1
+        ),
+        'split' => array(
+            'explode', 1,
+        ),
         'lower' => array(
-            'strtolower', // callback name
-            0, // source paramter position
-            1, // max parameter numbers
+            'strtolower', 0, 1, 
         ),
         'upper' => array(
             'strtoupper', 0, 1,
@@ -128,6 +145,45 @@ class Qwin extends Qwin_Widget
         ),
         'urlEnCode' => array(
             'urlencode', 0, 1,
+        ),
+        'trim' => array(
+            'trim', 0,
+        ),
+        'ltrim' => array(
+            'ltrim', 0,
+        ),
+        'rtrim' => array(
+            'rtrim', 0,
+        ),
+        'join' => array(
+            'implode', 1,
+        ),
+        'pad' => array(
+            'str_pad',
+        ),
+        'repeat' => array(
+            'str_repeat',
+        ),
+        'shuffle' => array(
+            'str_shuffle',
+        ),
+        'md5' => array(
+            'md5',
+        ),
+        'sha1' => array(
+            'sha1',
+        ),
+        'words' => array(
+            'str_word_count',
+        ),
+        'reverse' => array(
+            
+        ),
+        'find' => array(
+            
+        ),
+        'findLast' => array(
+            
         ),
     );
 
@@ -250,7 +306,8 @@ class Qwin extends Qwin_Widget
         }
         
         $trace = debug_backtrace();
-        $this->exception('Widget or property "%s" not found called by class "%s"', $name, $trace[2]['class']);
+        $this->exception('Widget, property or method "%s" not found, called by class "%s" in %s on line %s and threw ',
+            $name, $trace[2]['class'], $trace[3]['file'], $trace[3]['line']);
     }
     
     /**
@@ -360,9 +417,11 @@ class Qwin extends Qwin_Widget
      * @param mixed $mixed 变量
      * @return Qwin_Widget 微件实例化对象
      * @todo 是否应该考虑变量类型
+     * @todo fix 变量内容是可以改变的.
      */
     public function variable($mixed = null, $class = 'Qwin_Widget')
     {
+        return new $class($mixed);
         /*$type = gettype($mixed);
         if (isset(self::$_types[$type])) {
             $class = 'Qwin_' . self::$_types[$type];
@@ -438,12 +497,18 @@ class Qwin extends Qwin_Widget
 
             $result = call_user_func_array($this->_widgetsMap[$name][0], $args);
 
-            if (isset($map[3]) && $map[3]) {
-                return $result;
-            }
-
             $invoker->source = $result;
-            return $invoker;
+            if (isset($map[3])) {
+                if (0 == $map[3]) {
+                    return $invoker;
+                } elseif (1 == $map[3]) {
+                    return $result;
+                } else {
+                    return $widget;
+                }
+            } else {
+                return $invoker;
+            }
         }
         
         $widget = $this->widget($name);
