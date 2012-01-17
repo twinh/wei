@@ -55,12 +55,6 @@ class Qwin extends Qwin_Widget
     protected $_objects = array();
     
     /**
-     * 存储值为字符串或整数的微件的数组
-     * @var array
-     */
-    protected $_vars = array();
-    
-    /**
      * 存储值不为字符串或整数的微件键名
      * @var array
      */
@@ -187,21 +181,6 @@ class Qwin extends Qwin_Widget
         ),
     );
 
-    /**
-     * 定义微件值的类型与微件类的对应关系
-     * @var array
-     */
-    /*protected $_types = array(
-        'string'    => 'String',
-        'array'     => 'Array',
-        'NULL'      => 'Null',
-        'object'    => 'Object',
-        'integer'   => 'Int',
-        'boolean'   => 'Bool',
-        'dobule'    => 'Float',
-        'resource'  => 'Resource',
-    );*/
-    
     /**
      * 初始化Qwin微件
      * 
@@ -414,32 +393,13 @@ class Qwin extends Qwin_Widget
     /**
      * 初始化一个变量微件
      * 
-     * @param mixed $mixed 变量
-     * @return Qwin_Widget 微件实例化对象
-     * @todo 是否应该考虑变量类型
-     * @todo fix 变量内容是可以改变的.
+     * @param mixed $mixed variable
+     * @return Qwin_Widget
      */
     public function variable($mixed = null, $class = 'Qwin_Widget')
     {
-        return new $class($mixed);
-        /*$type = gettype($mixed);
-        if (isset(self::$_types[$type])) {
-            $class = 'Qwin_' . self::$_types[$type];
-        } else {
-            $class = 'Qwin_Widget';
-        }*/
-        if (is_string($mixed) || is_int($mixed)) {
-            if (isset($this->_vars[$mixed])) {
-                return $this->_vars[$mixed];
-            }
-            return $this->_vars[$mixed] = new $class($mixed);
-        } else {
-            if (false !== ($key = array_search($mixed, $this->_varKeys, true))) {
-                return $this->_varValues[$key];
-            }
-            $this->_varKeys[] = $mixed;
-            return $this->_varValues[] = new $class($mixed);
-        }
+        $this->_varKeys[] = $mixed;
+        return $this->_varValues[] = new $class($mixed);
     }
     
     /**
