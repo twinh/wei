@@ -30,7 +30,7 @@ class QwinTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers {className}::{origMethodName}
+     * @covers Qwin::autoload
      */
     public function testAutoload() {
         $this->assertEquals(class_exists('Qwin_Get', false), false, 'Class "Qwin_Get" not found.');
@@ -41,7 +41,7 @@ class QwinTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers {className}::{origMethodName}
+     * @covers Qwin::widget
      */
     public function testWidget() {
         $get = $this->object->get;
@@ -50,7 +50,7 @@ class QwinTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers {className}::{origMethodName}
+     * @covers Qwin::call
      */
     public function testCall() {
         $std = $this->object->call('stdClass');
@@ -59,7 +59,7 @@ class QwinTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers {className}::{origMethodName}
+     * @covers Qwin::config
      */
     public function testConfig() {
         // clean all config
@@ -69,7 +69,7 @@ class QwinTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers {className}::{origMethodName}
+     * @covers Qwin::variable
      */
     public function testVariable() {
         $var = Qwin::variable('var');
@@ -80,7 +80,7 @@ class QwinTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers {className}::{origMethodName}
+     * @covers Qwin::getInstance
      */
     public function testGetInstance() {
         
@@ -88,7 +88,7 @@ class QwinTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers {className}::{origMethodName}
+     * @covers Qwin::callWidget
      */
     public function testCallWidget() {
         $this->assertEquals(class_exists('Qwin_Post', false), false, 'Class "Qwin_Post" not found.');
@@ -99,8 +99,7 @@ class QwinTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement test__invoke().
+     * @covers Qwin::__invoke
      */
     public function test__invoke() {
         $widget = $this->object->__invoke('this is a string.');
