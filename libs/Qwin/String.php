@@ -34,5 +34,13 @@
  */
 class Qwin_String extends Qwin_Widget
 {
-    
+    public function call($source = null)
+    {
+        if (0 == func_num_args()) {
+            $this->source = $this->toString();
+            return $this->invoker;
+        } else {
+            return Qwin::getInstance()->variable($source)->string();
+        }
+    }
 }

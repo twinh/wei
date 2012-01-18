@@ -52,7 +52,7 @@ class Qwin_Smarty extends Qwin_Widget
     {
         parent::__construct($options);
         
-        require_once dirname(__FILE__) . '/Smarty/Smarty.class.php';
+        require_once dirname(dirname(__FILE__)) . '/Smarty/Smarty.class.php';
         $this->_smarty = $this->qwin->call('Smarty');
 
         // 设定选项
