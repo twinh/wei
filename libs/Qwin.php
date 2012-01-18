@@ -290,6 +290,16 @@ class Qwin extends Qwin_Widget
     }
     
     /**
+     * Instance a class
+     * 
+     * @param string $class Class name 
+     */
+    public function instance($class)
+    {
+        
+    }
+
+    /**
      * 初始化一个类
      * 
      * @param string $name 类名
@@ -309,7 +319,7 @@ class Qwin extends Qwin_Widget
         
         // 获取参数
         $param = null !== $param ? $param : $this->config($name);
-        !is_array($param) && $param = array($param);
+        !is_array($param) && $param = (array)$param;
 
         // 标准单例模式
         if (method_exists($name, 'getInstance')) {
@@ -335,8 +345,12 @@ class Qwin extends Qwin_Widget
                 break;
 
             default:
-                $reflection = new ReflectionClass($name);
-                $object = $reflection->newInstanceArgs($param);
+                if (method_exists($name, '__construct') || method_exists($name, $name)) {
+                    $reflection = new ReflectionClass($name);
+                    $object = $reflection->newInstanceArgs($param);
+                } else {
+                    $object = new $name;
+                } 
         }
         return $this->_objects[$name] = $object;
     }
@@ -361,17 +375,16 @@ class Qwin extends Qwin_Widget
         }
 
         // 获取/设置某一项配置
-        if (is_scalar($name)) {
+        if (is_string($name) || is_int($name)) {
             $temp = &$this->_config;
             if (false !== strpos($name, '/')) {
                 $array = explode('/', $name);
                 $name = array_pop($array);
                 foreach ($array as $value) {
-                    if (isset($temp[$value])) {
-                        $temp = &$temp[$value];
-                    } else {
-                        return null;
+                    if (!isset($temp[$value])) {
+                        $temp[$value] = null;
                     }
+                    $temp = &$temp[$value];
                 }
             }
 

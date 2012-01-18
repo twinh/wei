@@ -33,7 +33,7 @@
  */
 class Qwin_Get extends Qwin_Widget
 {
-    public function call($name, $default = null /*, $type='string' ?*/)
+    public function call($name, $default = null)
     {
         $q = Qwin::getInstance();
         if (is_string($name)) {
@@ -45,10 +45,10 @@ class Qwin_Get extends Qwin_Widget
                 if (is_string($this->source)) {
                     return $q->variable(substr($this->source, $name, $default - $name + 1));
                 } elseif (is_array($this->source)) {
-                    return $q->variable(array_slice($this->source, $name, $default));
+                    return $q->variable(array_slice($this->source, $name, $default - $name + 1));
                 }
             }
         }
-        return $this;
+        return $this->invoker;
     }
 }

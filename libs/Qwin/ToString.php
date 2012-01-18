@@ -33,8 +33,12 @@
  */
 class Qwin_ToString extends Qwin_Widget
 {
-    public function call($mixed = null)
+    public function call()
     {
-        return $mixed ? (string)$mixed : (string)$this->source;
+        if (is_array($this->source)) {
+            return implode(',', $this->source);
+        } else {
+            return (string)$this->source;
+        }
     }
 }
