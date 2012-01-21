@@ -29,12 +29,34 @@
  * @subpackage  Qwin
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-2 0:37:35
+ * @since       2011-10-02 00:37:35
  */
 class Qwin_IsFile extends Qwin_Widget
 {
     public function call()
     {
-        return is_file($this->source);
+        if (!is_string($this->source)) {
+            return false;
+        }
+        
+        $file = &$this->source;
+        
+        // check directly if it's absolute path
+        if ('/' == $file[0] || '\\' == $file[0] || ':' == $file[1]) {
+            if (is_file($file)) {
+                return true;
+            }
+        }
+
+        // check if in include path
+        foreach (explode(PATH_SEPARATOR, ini_get('include_path')) as $path) {
+            $full = rtrim($path, '\\/') . DIRECTORY_SEPARATOR . $file;
+            if (is_file($full)) {
+                return true;
+            }
+        }
+        
+        // not found
+        return false;
     }
 }

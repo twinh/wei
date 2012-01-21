@@ -31,14 +31,33 @@ class Qwin_IsFileTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_IsFile::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $object = $this->object;
+        
+        $this->assertEquals(false, $object->isFile(), 'Not File path');
+        
+        $object->source = __FILE__;
+        
+        $this->assertTrue($object->isFile(), 'File found');
+        
+        $path = array_pop(explode(PATH_SEPARATOR, ini_get('include_path')));
+        $files = scandir($path);
+        foreach ($files as $file) {
+            if ('.' == $file || '..' == $file) {
+                continue;
+            }
+            if (is_file($path . DIRECTORY_SEPARATOR . $file)) {
+                $object->source = $file;
+                $this->assertTrue($object->isFile(), 'File in include path found');
+                break;
+            }
+        }
+        
+        $object->source = '.file not found';
+        
+        $this->assertFalse($object->isFile(), 'File not found');
     }
 
 }
