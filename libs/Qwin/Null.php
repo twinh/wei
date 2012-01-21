@@ -33,5 +33,9 @@
  */
 class Qwin_Null extends Qwin_Widget
 {
-    
+    public function call()
+    {
+        $this->source = null;
+        return $this->invoker;
+    }
 }

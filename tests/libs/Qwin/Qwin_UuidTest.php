@@ -31,14 +31,16 @@ class Qwin_UuidTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_Uuid::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $uuid = $this->object->call();
+        
+        $this->assertInstanceOf('Qwin_Widget', $uuid);
+        
+        $isUuid = $uuid->isRegex('/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/');
+        
+        $this->assertEquals(true, $isUuid);
     }
 
 }

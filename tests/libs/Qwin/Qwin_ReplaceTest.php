@@ -31,14 +31,24 @@ class Qwin_ReplaceTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_Replace::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $object = $this->object;
+        
+        $object->source = 'Hello World';
+        
+        $object->replace('W', 'w');
+        
+        $this->assertEquals('Hello world', $object->source, 'Replace W to lower');
+        
+        $object->replace('l', 'x', &$count);
+        
+        $this->assertEquals(3, $count, 'Replace two chars');
+        
+        $object->replace('O', 'Q', &$count, false);
+        
+        $this->assertEquals(2, $count, 'Ignore case');
     }
 
 }

@@ -33,8 +33,8 @@
  */
 class Qwin_IsEqual extends Qwin_Widget
 {
-    public function call($mixed = null)
+    public function call($mixed = null, $identity = false)
     {
-        return $this->source === $mixed;
+        return $identity ? $this->source === $mixed : $this->source == $mixed;
     }
 }

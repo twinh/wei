@@ -31,14 +31,12 @@ class Qwin_ToSourceTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_ToSource::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $source = Qwin::getInstance()->variable('soure string');
+        
+        $this->assertSame($source->source, $source->toSource());
     }
 
 }
