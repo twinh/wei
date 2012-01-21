@@ -31,14 +31,34 @@ class Qwin_ToStringTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_ToString::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
+        $object = $this->object;
+        
+        $object->souce = 10.6;
+        
+        $this->assertInternalType('string', $object->toString(), 'Int to string');
+        
+        $object->source = true;
+        
+        $this->assertInternalType('string', $object->toString(), 'Bool to string');
+        
+        $object->source = null;
+        
+        $this->assertInternalType('string', $object->toString(), 'Null to string');
+        
+        $object->source = array(
+            'key' => 'value',
+            'key2' => 'value2'
         );
+        
+        $this->assertInternalType('string', $object->toString(), 'Array to string');
+        
+        // how about class without method __toString() ?
+        $object->source = Qwin::getInstance()->variable();
+        
+        $this->assertInternalType('string', $object->toString(), 'Object to string');
     }
 
 }

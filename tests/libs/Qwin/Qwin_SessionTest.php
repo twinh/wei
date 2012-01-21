@@ -1,5 +1,5 @@
 <?php
-
+ob_start();
 require_once dirname(__FILE__) . '/../../../libs/Qwin.php';
 require_once dirname(__FILE__) . '/../../../libs/Qwin/Session.php';
 

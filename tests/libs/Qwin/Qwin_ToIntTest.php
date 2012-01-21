@@ -1,5 +1,4 @@
 <?php
-
 require_once dirname(__FILE__) . '/../../../libs/Qwin.php';
 require_once dirname(__FILE__) . '/../../../libs/Qwin/ToInt.php';
 
@@ -31,14 +30,37 @@ class Qwin_ToIntTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_ToInt::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
+        $object = $this->object;
+        
+        $object->souce = 'this is a string';
+        
+        $this->assertInternalType('int', $object->call(), 'String to int');
+        
+        $object->souce = 10.6;
+        
+        $this->assertInternalType('int', $object->call(), 'Float to int');
+        
+        $object->source = true;
+        
+        $this->assertInternalType('int', $object->call(), 'Bool to int');
+        
+        $object->source = null;
+        
+        $this->assertInternalType('int', $object->call(), 'Null to int');
+        
+        $object->source = array(
+            'key' => 'value',
+            'key2' => 'value2'
         );
+        
+        $this->assertInternalType('int', $object->call(), 'Array to int');
+        
+        $object->source = new stdClass();
+        
+        $this->assertInternalType('int', $object->call(), 'Object to int');
     }
 
 }

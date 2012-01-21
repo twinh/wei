@@ -64,6 +64,10 @@ class Qwin_GetTest extends PHPUnit_Framework_TestCase {
         
         $name6 = $name->get(array());
         $this->assertEquals($name, $name6);
+        
+        $name7 = $name->get(1, 'not int');
+        
+        $name8 = $name->get(new stdClass());
     }
 
 }

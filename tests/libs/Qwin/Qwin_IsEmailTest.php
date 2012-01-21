@@ -31,14 +31,19 @@ class Qwin_IsEmailTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers {className}::{origMethodName}
+     * @covers Qwin_IsEmail::call
      * @todo Implement testCall().
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $object = $this->object;
+        
+        $object->source = 'abc@def.com';
+        
+        $this->assertTrue($object->isEmail());
+        
+        $object->source = 'not email.com';
+        
+        $this->assertFalse($object->isEmail());
     }
 
 }

@@ -35,6 +35,6 @@ class Qwin_IsEmail extends Qwin_Widget
 {
     public function call()
     {
-        return preg_match('/^[-a-zA-Z0-9_\.]+\@([0-9A-Za-z][0-9A-Za-z-]+\.)+[A-Za-z]{2,5}$/i', $this->source);
+        return (bool)preg_match('/^[-a-zA-Z0-9_\.]+\@([0-9A-Za-z][0-9A-Za-z-]+\.)+[A-Za-z]{2,5}$/i', $this->source);
     }
 }

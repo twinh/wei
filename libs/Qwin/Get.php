@@ -30,6 +30,7 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-02 00:44:51
+ * @todo        remove codeCoverageIgnore tags
  */
 class Qwin_Get extends Qwin_Widget
 {
@@ -48,7 +49,9 @@ class Qwin_Get extends Qwin_Widget
                     return $q->variable(array_slice($this->source, $name, $default - $name + 1));
                 }
             }
+        // @codeCoverageIgnoreStart
         }
+        // @codeCoverageIgnoreEnd
         return $this->invoker;
     }
 }

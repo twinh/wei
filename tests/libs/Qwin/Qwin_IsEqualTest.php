@@ -31,14 +31,17 @@ class Qwin_IsEqualTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers {className}::{origMethodName}
+     * @covers Qwin_IsEqual::call
      * @todo Implement testCall().
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $object = $this->object;
+        
+        $object->source = 'string';
+        
+        $this->assertTrue($object->isEqual(true));
+        
+        $this->assertFalse($object->isEqual(true, true));
     }
 
 }
