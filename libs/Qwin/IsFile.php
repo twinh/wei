@@ -30,6 +30,7 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-02 00:37:35
+ * @todo        add stream_resolve_include_path support
  */
 class Qwin_IsFile extends Qwin_Widget
 {
@@ -38,7 +39,7 @@ class Qwin_IsFile extends Qwin_Widget
         if (!is_string($this->source)) {
             return false;
         }
-        
+
         $file = &$this->source;
         
         // check directly if it's absolute path
