@@ -40,7 +40,7 @@ class Qwin_Cache extends Qwin_Widget
      *       dir    string  缓存存储路径 
      */
     public $options = array(
-        'dir'       => './cache/',
+        'dir'       => './cache',
     );
     
     public function __construct($source = null)
