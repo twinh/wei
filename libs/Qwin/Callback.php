@@ -24,7 +24,7 @@
 
 /**
  * Callback
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -35,20 +35,23 @@ class Qwin_Callback extends Qwin_Widget
 {
     /**
      * 处理回调结构
-     * 
+     *
      * @param mixed $callback 回调结构
      * @param array $params 数组参数
-     * @return mixed 
-     * @todo :: -> ?
+     * @return mixed
      */
-    public function call($callback, array $params = null)
+    public function call($name, array $params = null)
     {
-        if (!$callback || !is_callable($callback)) {
-            return null;
+        if ($this->isCallable($name)) {
+            $callback = null;
+            if (is_string($name)) {
+                $callback = $this->isCallable->getStringFn($name);
+            }
+            if (!$callback) {
+                $callback = $name;
+            }
+            return call_user_func_array($callback, (array)$params);
         }
-        if (is_array($callback) && is_string($callback[0])) {
-            $callback[0] = $this->qwin->call($callback[0]);
-        }
-        return call_user_func_array($callback, (array)$params);
+        return $this->exception('Parameter 1 should be a valid callback');
     }
 }
