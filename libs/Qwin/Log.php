@@ -39,16 +39,33 @@ class Qwin_Log extends Qwin_Widget
      * Log options
      * 
      * @var array
-     * @todo logs format
+     * 
+     *      -- level        string      default level for "call" method and lowest level to write
+     * 
+     *      -- format       string      logs format, words start with "$" would be replace to the 
+     *                                  same variable, now only have "$time", "$level" and "$message"
+     * 
+     *      -- timeFormat   string      time format in logs, formatted by strftime
+     * 
+     *      -- save         callback    handle to save logs      
+     * 
+     *      -- file         string      logs file name, if specify this argument, option "fileDir" 
+     *                                  and "fileFormat" would be ignored
+     * 
+     *      -- fileDir      string      dir to store logs file
+     * 
+     *      -- fileFormat   string      logs file name, formatted by strftime
+     * 
+     *      -- fileSize     int         max file size for logs file
      */
     public $options = array(
         'level' => 'debug',
         'format' => '$time $level - $message',
-        'timeFormat' => 'Y-m-d H:i:s',
+        'timeFormat' => '%Y-%m-%d %H:%M:%S',
         'save' => null,
         'file' => null,
         'fileDir' => null,
-        'fileFormat' => 'Ymd.\l\o\g',
+        'fileFormat' => '%Y%m%d.log',
         'fileSize' => 134217728, // 128mb
     );
     
@@ -91,7 +108,7 @@ class Qwin_Log extends Qwin_Widget
                 }
             }
             // use absolute path so that file_put_contents would works
-            $file = realpath($options['fileDir']) . '/' . date($options['fileFormat']);
+            $file = realpath($options['fileDir']) . '/' . strftime($options['fileFormat']);
         }
         
         if ($options['fileSize']) {
@@ -220,12 +237,13 @@ class Qwin_Log extends Qwin_Widget
             $content .= str_replace(array(
                 '$time', '$level', '$message',
             ), array(
-                date($this->options['timeFormat'], $data['time']),
-                strtoupper($data['level']),
+                strftime($this->options['timeFormat'], $data['time']),
+                str_pad(strtoupper($data['level']), 5),
                 $data['message'],
             ), $this->options['format']) . PHP_EOL;
         }
         
+        // TODO file lock
         file_put_contents($this->options['file'], $content, FILE_APPEND);
         
         return $this;
