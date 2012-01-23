@@ -107,7 +107,7 @@ class Qwin_Log extends Qwin_Widget
                     mkdir($options['fileDir']);
                 }
             }
-            // use absolute path so that file_put_contents would works
+            // use absolute path for file_put_contents in register_shutdown_function
             $file = realpath($options['fileDir']) . '/' . strftime($options['fileFormat']);
         }
         
