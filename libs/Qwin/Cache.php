@@ -24,7 +24,7 @@
 
 /**
  * Cache
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -37,12 +37,12 @@ class Qwin_Cache extends Qwin_Widget
     /**
      * 选项
      * @var array
-     *       dir    string  缓存存储路径 
+     *       dir    string  缓存存储路径
      */
     public $options = array(
         'dir'       => './cache',
     );
-    
+
     public function __construct($source = null)
     {
         parent::__construct($source);
@@ -51,31 +51,31 @@ class Qwin_Cache extends Qwin_Widget
             mkdir($this->options['dir']);
         }
     }
-    
+
     /**
      * 设置或获取一项缓存
-     * 
+     *
      * @param string $key 名称
-     * @return mixed 
+     * @return mixed
      */
     public function call($key)
     {
         $args = func_get_args();
-        
+
         if (2 == count($args)) {
             return $this->set($key, $args[1]);
         } else {
             return $this->get($key);
         }
     }
-    
+
     /**
      * 设置缓存,如果缓存已经存在且未过期,返回失败
-     * 
+     *
      * @param string $key 名称
      * @param mixed $value 值
      * @param int $expire 过期时间
-     * @return bool 
+     * @return bool
      */
     public function add($key, $value, $expire = 0)
     {
@@ -84,13 +84,13 @@ class Qwin_Cache extends Qwin_Widget
         }
         return $this->set($key, $value, $expire);
     }
-    
+
     /**
      * 获取缓存
-     * 
+     *
      * @param string $key 名称
      * @param mixed $default 默认值
-     * @return mixed 
+     * @return mixed
      */
     public function get($key, $default = null)
     {
@@ -103,51 +103,67 @@ class Qwin_Cache extends Qwin_Widget
         if (!$content || !is_array($content) || filemtime($file) < (time() - $content[0])) {
             return $default;
         }
-        
+
         return $content[1];
     }
-    
+
     /**
      * 设置缓存
-     * 
+     *
      * @param string $key 名称
      * @param value $value 值
      * @param int $expire 过期时间,0为不过期
-     * @return bool 
+     * @return bool
      */
     public function set($key, $value, $expire = 0)
     {
         $file = $this->getFile($key);
-        
+
         $content = serialize(array(
             0 => time(),
             1 => $value,
             2 => $key,
         ));
-        
+
         return file_put_contents($file, $content);
     }
-    
+
+    /**
+     * 替换缓存
+     *
+     * @param string $key 键名
+     * @param mixed $value 值
+     * @param int $expire 过期时间
+     * @return bool
+     */
+    public function replace($key, $value, $expire = 0)
+    {
+        if (!$this->get($key)) {
+            return false;
+        }
+        return $this->set($key, $value, $expire);
+    }
+
     /**
      * 删除缓存
-     * 
+     *
      * @param string $key
-     * @return bool 
+     * @return bool
      */
     public function remove($key)
     {
         $file = $this->getFile($key);
-        
+
         if (is_file($file)) {
             return unlink($file);
         }
-        
+
         return false;
     }
-    
+
     /**
      * 检查缓存是否过期
-     * 
+     *
      * @param string $key 名称
      * @return bool
      */
@@ -155,12 +171,12 @@ class Qwin_Cache extends Qwin_Widget
     {
         return $this->get($key) ? true : false;
     }
-    
+
     /**
      * 根据键名获取文件名称
-     * 
+     *
      * @param type $key
-     * @return type 
+     * @return type
      */
     public function getFile($key)
     {
