@@ -24,7 +24,7 @@
 
 /**
  * IsExists
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -33,8 +33,60 @@
  */
 class Qwin_IsExists extends Qwin_Widget
 {
-    public function call()
+    /**
+     * whether function "stream_resolve_include_path" exists
+     *
+     * @var bool
+     */
+    protected  $_fn;
+
+    public function __construct($source = null)
     {
-        return file_exists($this->source);
+        parent::__construct($source);
+        $this->_fn = function_exists('stream_resolve_include_path');
+    }
+
+    /**
+     * Determine the object source is a file path, check with the include_path.
+     *
+     * @param bool $abs return file path or true
+     * @return string|bool
+     */
+    public function call($abs = true)
+    {
+        if (!is_string($this->source)) {
+            return false;
+        }
+
+        $file = &$this->source;
+
+        // check directly if it's absolute path
+        if ('/' == $file[0] || '\\' == $file[0] || ':' == $file[1]) {
+            if (file_exists($file)) {
+                return $abs ? $file : true;
+            }
+        // @codeCoverageIgnoreStart
+        // code would be tested in Qwin_IsDir
+        }
+
+        if (function_exists('stream_resolve_include_path')) {
+            $full = stream_resolve_include_path($file);
+            if ($full) {
+                return $abs ? $full : true;
+            }
+            return false;
+        }
+
+        // check if in include path
+        foreach (explode(PATH_SEPARATOR, ini_get('include_path')) as $path) {
+            $full = rtrim($path, '\\/') . DIRECTORY_SEPARATOR . $file;
+            if (file_exists($full)) {
+                return $abs ? $full : true;
+            }
+        }
+
+        // not found
+        return false;
+        // @codeCoverageIgnoreEnd
     }
 }

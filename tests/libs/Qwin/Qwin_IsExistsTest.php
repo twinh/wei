@@ -27,20 +27,55 @@ class Qwin_IsExistsTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_IsExists::call
+     * @covers Qwin_IsExists::__construct
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
+        $object = $this->object;
 
+        $this->assertEquals(false, $object->isExists(), 'Not File path');
+
+        $object->source = __FILE__;
+
+        $this->assertEquals($object->isExists(), __FILE__, 'File found');
+
+        $object->source = '.file not found';
+
+        $this->assertFalse($object->isExists(), 'File not found');
+
+        $path = array_pop(explode(PATH_SEPARATOR, ini_get('include_path')));
+        $files = scandir($path);
+        foreach ($files as $file) {
+            if ('.' == $file || '..' == $file) {
+                continue;
+            }
+            if (file_exists($path . DIRECTORY_SEPARATOR . $file)) {
+                $object->source = $file;
+                $this->assertNotEquals(false, $object->isExists(), 'File in include path found');
+                break;
+            }
+        }
+
+        if (!function_exists('stream_resolve_include_path')) {
+            function stream_resolve_include_path($param) {
+                if ('.file not found' == $param) {
+                    return false;
+                } else {
+                    return 'file found.';
+                }
+            }
+
+            $this->assertNotEquals(false, $object->isExists(), 'File in include path found');
+
+            $object->source = '.file not found';
+
+            $this->assertFalse($object->isExists(), 'File in include path found');
+        }
+    }
 }
 
 ?>
