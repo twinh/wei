@@ -29,8 +29,7 @@
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2012-1-12 13:39:05
- * @todo        custom benchmark
+ * @since       2012-01-12 13:39:05
  */
 class Qwin_Marker extends Qwin_Widget
 {
@@ -47,7 +46,7 @@ class Qwin_Marker extends Qwin_Widget
     {
         !$name && $name = ++$this->_index;
 
-        $times = explode(" ", microtime());
+        $times = explode(' ', microtime());
         $this->_data[$name] = $times[1] . substr($times[0], 1);
 
         return $this->invoker;
@@ -60,17 +59,24 @@ class Qwin_Marker extends Qwin_Widget
 
     public function display($print = true)
     {
+        reset($this->_data);
+        $start = current($this->_data);
+        $total = bcsub(end($this->_data), $start, 8);
+
         $code = '<table cellpadding="3" cellspacing="1" border="1">'
               . '<tr>'
               . '<th>Marker</th>'
               . '<th>Time</th>'
               . '<th>Elapsed Time</th>'
+              . '<th>%</th>'
               . '</tr>';
         foreach ($this->_data as $name => $time) {
             if (isset($preTime)) {
                 $elapsedTime = bcsub($time, $preTime, 8);
+                $percentage = bcmul(bcdiv($elapsedTime, $total, 4), 100, 2) . '%';
             } else {
                 $elapsedTime = '-';
+                $percentage = '-';
             }
             $preTime = $time;
 
@@ -78,6 +84,7 @@ class Qwin_Marker extends Qwin_Widget
                    . '<th>' . $name . '</th>'
                    . '<td>' . $time . '</td>'
                    . '<td>' . $elapsedTime . '</td>'
+                   . '<td>' . $percentage . '</td>'
                    . '</tr>';
         }
         $code .= '</table>';
