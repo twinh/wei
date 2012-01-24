@@ -32,17 +32,17 @@ class Index_Controller extends Qwin_Controller
             ->get('page', '?module=index&action=welcome')
             ->urlDecode()
             ->escape();
-        
+
         $title = $this
             ->get('title', $this->lang['Main Page'])
             ->urlDecode()
             ->escape();
         //$title = htmlspecialchars($title);
 
-        
+
         // 加载页眉导航的缓存 todo index controller
-        $menus = require $this->cache->options['dir'] . 'menu.php';
-        
+        $menus = require $this->cache->options['dir'] . '/menu.php';
+
         $this->view->assign(get_defined_vars());
     }
 
