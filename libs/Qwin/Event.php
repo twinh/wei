@@ -24,7 +24,7 @@
 
 /**
  * Event
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -37,17 +37,11 @@ class Qwin_Event extends Qwin_Widget
      * 存储事件数据
      * @var array
      */
-    public $data;
-    
-    public function __construct($source = null)
-    {
-        parent::__construct($source);
-        $this->data = &$this->hook->events;
-    }
-    
+    public $data = array();
+
     /**
      * 调用一个事件
-     * 
+     *
      * @param string $name 事件名称
      * @param mixed $params 参数
      * @return Qwin_Event|false 当前对象或中断
@@ -76,13 +70,13 @@ class Qwin_Event extends Qwin_Widget
                 return false;
             }
         }
-        
+
         return $this;
     }
- 
+
     /**
      * 绑定事件
-     * 
+     *
      * @param string $name 事件名称
      * @param mixed $callback 回调结构
      * @param int $priority 执行优先级,越小越前执行
@@ -91,30 +85,30 @@ class Qwin_Event extends Qwin_Widget
     public function add($name, $callback, $priority = 10)
     {
         $name = strtolower($name);
-        
+
         if (!isset($this->data[$name])) {
             $this->data[$name] = array();
         }
-        
+
         // 预存储最大优先级的值 ?
         while (isset($this->data[$name][$priority])) {
             $priority++;
         }
-        
+
         $this->data[$name][$priority] = array(
             'callback' => $callback,
         );
-        
+
         // TODO 调用时才排序,或是实现不排序方法
         // 根据优先级排序
         ksort($this->data[$name]);
 
         return $this;
     }
-    
+
     /**
      * 移除一项或全部事件
-     * 
+     *
      * @param string|null $name 事件名称
      * @return Qwin_Event 当前对象
      */
@@ -128,7 +122,7 @@ class Qwin_Event extends Qwin_Widget
                 unset($this->data[$name]);
             }
         }
-        
+
         return $this;
     }
 }
