@@ -24,29 +24,27 @@
 
 /**
  * Length
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-02 00:41:02
+ * @todo        as internal widget ?
  */
 class Qwin_Length extends Qwin_Widget
 {
     /**
-     * 获取长度
-     * 
-     * @param type $mixed
+     * Get source length
+     *
      * @return int
      */
-    public function call($mixed = null)
+    public function call()
     {
-        $mixed = $mixed ? $mixed : $this->source;
-        if (is_string($mixed)) {
-            return strlen($miexd);
-        } elseif (is_array($mixed)) {
-            return count($miexd);
+        if (is_string($this->source)) {
+            return strlen($this->source);
+        } else {
+            return count($this->source);
         }
-        return false;
     }
 }
