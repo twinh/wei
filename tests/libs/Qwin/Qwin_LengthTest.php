@@ -27,18 +27,40 @@ class Qwin_LengthTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_Length::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
+        $widget = $this->object;
+
+        $widget->source = 'string';
+
+        $this->assertEquals($widget->length(), 6);
+
+        $widget->source = array(
+            'one apple', 'two pears', 'three bananas',
         );
+
+        $this->assertEquals($widget->length(), 3);
+
+        $widget->source = null;
+
+        $this->assertEquals($widget->length(), 0);
+
+        $widget->source = 10.1;
+
+        $this->assertEquals($widget->length(), 1);
+
+        $widget->source = true;
+
+        $this->assertEquals($widget->length(), 1);
+
+        $widget->source = false;
+
+        $this->assertEquals($widget->length(), 1);
     }
 
 }
