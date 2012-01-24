@@ -29,7 +29,7 @@
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2012-1-14 15:32:49
+ * @since       2012-01-14 15:32:49
  */
 class Qwin_Is extends Qwin_Widget
 {
