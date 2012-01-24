@@ -23,7 +23,7 @@
  * @since       2011-08-23 00:19:44
  */
 $minify->add(array(
-    $jQuery->loadUi('tabs'),
+    $jQuery->load('tabs'),
 ));
 ?>
 <div class="qw-p5">
@@ -104,9 +104,9 @@ $minify->add(array(
                                 <?php
                                 endif;
                                 ?>
-                               
+
                                 <a href="?module=doc&name=<?php echo $class ?>"><?php echo $class ?></a>
-                                    
+
                                 <?php
                                 if (!empty($interfaces)) :
                                 ?>
@@ -114,7 +114,7 @@ $minify->add(array(
                                 <?php
                                     foreach ($interfaces as $interface) :
                                 ?>
-                                    <a href="?module=doc&name=<?php echo $interface ?>"><?php echo $interface ?></a> 
+                                    <a href="?module=doc&name=<?php echo $interface ?>"><?php echo $interface ?></a>
                                 <?php
                                     endforeach;
                                 endif;
@@ -262,7 +262,7 @@ $minify->add(array(
         endif;
         ?>
         <?php
-        if (isset($data['events'])) : 
+        if (isset($data['events'])) :
         ?>
         <div id="qw-docs-events">
             <ul class="qw-docs-event-list">
@@ -306,11 +306,11 @@ $minify->add(array(
                 ?>
             </ul>
         </div>
-        <?php 
+        <?php
         endif;
         ?>
         <?php
-        if (isset($data['results'])) : 
+        if (isset($data['results'])) :
         ?>
         <div id="qw-docs-results">
             <ul class="qw-docs-result-list">
@@ -484,8 +484,8 @@ $minify->add(array(
                     </div>
                     <div class="qw-docs-method-content qw-docs-content">
                         <div class="qw-docs-method-descrip ui-priority-secondary">
-                            <?php 
-                            if ($method['hasDescription']) : 
+                            <?php
+                            if ($method['hasDescription']) :
                             ?>
                             <dl>
                                 <dt><?php echo $lang['Parameters'] ?>:</dt>
