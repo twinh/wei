@@ -24,7 +24,7 @@
 
 /**
  * App
- * 
+ *
  * @package     Qwin
  * @subpackage  Application
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -35,28 +35,25 @@ class Qwin_App extends Qwin_Widget
 {
     /**
      * @var array           选项
-     * 
+     *
      *       dirs           应用所在目录
-     * 
+     *
      *       module         默认模块名称
-     * 
+     *
      *       action         默认行为名称
-     * 
+     *
      *       timezone       时区
-     * 
-     *       startTime      启动时间
      */
     public $options = array(
         'dirs'          => null,
         'module'        => 'index',
         'action'        => 'index',
         'timezone'      => 'Asia/Shanghai',
-        'startTime'     => null,
     );
-    
+
     /**
      * 启动应用
-     * 
+     *
      * @param array $config 配置
      * @return App_Widget 当前对象
      * @todo 记录状态,防止二次加载?
@@ -64,12 +61,11 @@ class Qwin_App extends Qwin_Widget
      */
     public function call(array $options = array())
     {
+        $this->marker('appStart');
+
         // 合并选项
         $this->option(&$options);
 
-        // 设置启动时间
-        !$options['startTime'] && $options['startTime'] = microtime(true);
-        
         // 设置默认应用目录
         if (!is_array($options['dirs'])) {
             $options['dirs'] = (array)$options['dirs'];
@@ -80,7 +76,7 @@ class Qwin_App extends Qwin_Widget
 
         // 默认时区
         date_default_timezone_set($options['timezone']);
-        
+
         // 触发应用启动事件
         $this->trigger('appStartup');
 
@@ -93,22 +89,13 @@ class Qwin_App extends Qwin_Widget
 
         // 展示视图
         $this->view($result);
-        
+
         // 触发应用结束事件
         $this->trigger('appTermination');
-        
+
+        $this->marker('appTermination');
+
         // 返回当前对象
         return $this;
-    }
-
-    /**
-     * 获取页面运行时间
-     *
-     * @return string
-     * @todo marker widget
-     */
-    public function getElapsedTime()
-    {
-        return str_pad(round((microtime(true) - $this->options['startTime']), 4), 6, 0);
     }
 }
