@@ -24,7 +24,7 @@
 
 /**
  * CrudController
- * 
+ *
  * @package     Qwin
  * @subpackage  Application
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -34,7 +34,7 @@
 class Qwin_Minify extends Qwin_Widget
 {
     /**
-     * 
+     *
      * @var array       存储文件路径的数组
      *
      *      -- js       js文件路径
@@ -47,7 +47,7 @@ class Qwin_Minify extends Qwin_Widget
         'js'    => array(),
         'css'   => array(),
     );
-    
+
     /**
      * 缓存目录
      * @var string
@@ -62,9 +62,9 @@ class Qwin_Minify extends Qwin_Widget
     public function  __construct(array $options = null)
     {
         parent::__construct($options);
-        $this->_cacheDir = $this->cache->options['dir'] . 'minify/';
+        $this->_cacheDir = $this->cache->options['dir'] . '/minify';
     }
-    
+
     public function call($options = null)
     {
         return $this->add($options);
@@ -113,7 +113,7 @@ class Qwin_Minify extends Qwin_Widget
         }
         $this->_data[$extension] = array_unique($this->_data[$extension]);
         $name = md5(implode('|', $this->_data[$extension]));
-        $fileName = $this->_cacheDir . $name . '.php';
+        $fileName = $this->_cacheDir . '/' . $name . '.php';
         if (file_exists($fileName)) {
             return $name;
         }
@@ -130,7 +130,7 @@ class Qwin_Minify extends Qwin_Widget
      */
     public function getCacheFile($name)
     {
-        $file = $this->_cacheDir . $name . '.php';
+        $file = $this->_cacheDir . '/' . $name . '.php';
         if (file_exists($file)) {
             return $file;
         }
