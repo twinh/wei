@@ -27,18 +27,56 @@ class Qwin_IsDirTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_IsDir::call
+     * @covers Qwin_IsDir::__construct
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $object = $this->object;
+
+        $this->assertEquals(false, $object->isDir(), 'Not File path');
+
+        $object->source = __DIR__;
+
+        $this->assertEquals($object->isDir(), __DIR__, 'File found');
+
+        $object->source = '.file not found';
+
+        $this->assertFalse($object->isDir(), 'File not found');
+
+        $path = array_pop(explode(PATH_SEPARATOR, ini_get('include_path')));
+        $files = scandir($path);
+        foreach ($files as $file) {
+            if ('.' == $file || '..' == $file) {
+                continue;
+            }
+            if (is_dir($path . DIRECTORY_SEPARATOR . $file)) {
+                var_dump($path . DIRECTORY_SEPARATOR . $file);
+                var_dump($file);
+                $object->source = $file;
+                $this->assertNotEquals(false, $object->isDir(), 'File in include path found');
+                break;
+            }
+        }
+
+        if (!function_exists('stream_resolve_include_path')) {
+            function stream_resolve_include_path($param) {
+                if ('.file not found' == $param) {
+                    return false;
+                } else {
+                    return 'file found.';
+                }
+            }
+
+            $this->assertNotEquals(false, $object->isDir(), 'File in include path found');
+
+            $object->source = '.file not found';
+
+            $this->assertFalse($object->isDir(), 'File in include path found');
+        }
     }
 
 }
