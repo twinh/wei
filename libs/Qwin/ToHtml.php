@@ -24,7 +24,7 @@
 
 /**
  * ToHtml
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -34,9 +34,9 @@
 class Qwin_ToHtml extends Qwin_Widget
 {
     /**
-     * 将文本转换成包含Html标签的代码
-     * 
-     * @return string 
+     * Convert text to html
+     *
+     * @return string
      */
     public function call()
     {

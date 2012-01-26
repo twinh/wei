@@ -27,18 +27,26 @@ class Qwin_ToHtmlTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_ToHtml::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget->source = "\tstring";
+
+        $this->assertEquals('&nbsp;&nbsp;&nbsp;&nbsp;string', $widget->toHtml());
+
+        $this->assertFalse(strpos("\t", $widget->toHtml()));
+
+        $widget->source = "this\ris\na\r\nstring\n\r";
+
+        $this->assertFalse(strpos("\r", $widget->toHtml()));
+
+        $this->assertFalse(strpos("\n", $widget->toHtml()));
     }
 
 }
