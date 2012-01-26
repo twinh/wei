@@ -27,18 +27,28 @@ class Qwin_EscapeTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_Escape::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $this->assertEquals('\\\\', $widget->source('\\')->escape()->source());
+
+        $this->assertEquals('\0', $widget->source("\0")->escape()->source());
+
+        $this->assertEquals('\\n', $widget->source("\n")->escape()->source());
+
+        $this->assertEquals('\r', $widget->source("\r")->escape()->source());
+
+        $this->assertEquals("\'", $widget->source("'")->escape()->source());
+
+        $this->assertEquals('\"', $widget->source('"')->escape()->source());
+
+        $this->assertEquals('\Z', $widget->source("\x1a")->escape()->source());
     }
 
 }
