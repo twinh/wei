@@ -27,18 +27,34 @@ class Qwin_IsDigitTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_IsDigit::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget->source = '123456';
+
+        $this->assertTrue($widget->isDigit());
+
+        $widget->source = '0123456';
+
+        $this->assertTrue($widget->isDigit());
+
+        $widget->source = '0.123';
+
+        $this->assertFalse($widget->isDigit());
+
+        $widget->source = '1 23456';
+
+        $this->assertFalse($widget->isDigit());
+
+        $widget->source = 'string';
+
+        $this->assertFalse($widget->isDigit());
     }
 
 }
