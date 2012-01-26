@@ -27,18 +27,34 @@ class Qwin_IsQQTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_IsQQ::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget->source = '1000';
+
+        $this->assertFalse($widget->isQQ(), 'Too short');
+
+        $widget->source = '011111';
+
+        $this->assertFalse($widget->isQQ(), 'Should not start with zero');
+
+        $widget->source = 011111;
+
+        $this->assertFalse($widget->isQQ(), 'Should not start with zero, even digits');
+
+        $widget->source = 134.433;
+
+        $this->assertFalse($widget->isQQ(), 'Not digits');
+
+        $widget->source = 1234567;
+
+        $this->assertTrue($widget->isQQ());
     }
 
 }
