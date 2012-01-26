@@ -41,7 +41,7 @@ class Qwin_Length extends Qwin_Widget
      */
     public function call()
     {
-        if (is_string($this->source)) {
+        if (is_scalar($this->source)) {
             return strlen($this->source);
         } else {
             return count($this->source);

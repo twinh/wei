@@ -52,7 +52,7 @@ class Qwin_LengthTest extends PHPUnit_Framework_TestCase {
 
         $widget->source = 10.1;
 
-        $this->assertEquals($widget->length(), 1);
+        $this->assertEquals($widget->length(), 4, 'Convert to sring "10.1"');
 
         $widget->source = true;
 
@@ -60,7 +60,7 @@ class Qwin_LengthTest extends PHPUnit_Framework_TestCase {
 
         $widget->source = false;
 
-        $this->assertEquals($widget->length(), 1);
+        $this->assertEquals($widget->length(), 0, 'Convert to empty string');
     }
 
 }
