@@ -1,5 +1,4 @@
 <?php
-
 require_once dirname(__FILE__) . '/../../../libs/Qwin.php';
 require_once dirname(__FILE__) . '/../../../libs/Qwin/Each.php';
 
@@ -27,20 +26,33 @@ class Qwin_EachTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
+
+    protected $_fruit;
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_Each::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
+        $widget = $this->object;
+
+        $widget->source = array(
+            'apple', 'lemon', 'orange', 'banana', 'pear',
         );
+
+        $widget->each(array($this, 'each'));
+
+        $this->assertEquals('orange', $this->_fruit);
     }
 
+    public function each($key, $value)
+    {
+        if ('orange' == $value) {
+            $this->_fruit = $value;
+            return false;
+        }
+    }
 }
 
 ?>
