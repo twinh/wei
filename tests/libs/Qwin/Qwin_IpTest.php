@@ -27,18 +27,38 @@ class Qwin_IpTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_Ip::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        // test for HTTP_X_FORWARDED_FOR
+        $_SERVER['HTTP_X_FORWARDED_FOR'] = '127.0.0.1';
+
+        $this->assertEquals($_SERVER['HTTP_X_FORWARDED_FOR'], $widget->ip()->source);
+
+        // test for HTTP_CLIENT_IP
+        unset($_SERVER['HTTP_X_FORWARDED_FOR']);
+
+        $_SERVER['HTTP_CLIENT_IP'] = '127.0.0.2';
+
+        $this->assertEquals($_SERVER['HTTP_CLIENT_IP'], $widget->ip()->source);
+
+        // test for REMOTE_ADDR
+        unset($_SERVER['HTTP_CLIENT_IP']);
+
+        $_SERVER['REMOTE_ADDR'] = '127.0.0.3';
+
+        $this->assertEquals($_SERVER['REMOTE_ADDR'], $widget->ip()->source);
+
+        // test for default value
+        unset($_SERVER['REMOTE_ADDR']);
+
+        $this->assertEquals('0.0.0.0', $widget->ip()->source);
     }
 
 }
