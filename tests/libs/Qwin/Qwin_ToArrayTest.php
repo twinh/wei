@@ -1,5 +1,4 @@
 <?php
-
 require_once dirname(__FILE__) . '/../../../libs/Qwin.php';
 require_once dirname(__FILE__) . '/../../../libs/Qwin/ToArray.php';
 
@@ -27,20 +26,37 @@ class Qwin_ToArrayTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_ToArray::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $object = $this->object;
+
+        $object->souce = 'this is a string';
+
+        $this->assertInternalType('array', $object->call(), 'String to array');
+
+        $object->souce = 10.6;
+
+        $this->assertInternalType('array', $object->call(), 'Float to array');
+
+        $object->source = true;
+
+        $this->assertInternalType('array', $object->call(), 'Bool to array');
+
+        $object->source = null;
+
+        $this->assertInternalType('array', $object->call(), 'Null to array');
+
+        $object->source = 100;
+
+        $this->assertInternalType('array', $object->call(), 'Int to array');
+
+        $object->source = new stdClass();
+
+        $this->assertInternalType('array', $object->call(), 'Object to array');
     }
-
 }
-
-?>
