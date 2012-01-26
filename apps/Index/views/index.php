@@ -15,7 +15,7 @@ $minify->add(array(
 </head>
 <body>
 <style type="text/css">
-    
+
 </style>
 <script type="text/javascript">
     qwin.lang = <?php echo json_encode($lang->toArray()) ?>;
@@ -88,7 +88,7 @@ $minify->add(array(
     </a>
 </div>
 <div class="ui-layout-east">
-    
+
 </div>
 <div class="ui-layout-south">
     <div id="qw-footer" class="ui-state-default">
