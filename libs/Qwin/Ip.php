@@ -24,7 +24,7 @@
 
 /**
  * Ip
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -34,11 +34,12 @@
 class Qwin_Ip extends Qwin_Widget
 {
     /**
-     * 获取Ip地址
+     * Get ip address
      *
-     * @return string Ip地址
+     * @param string $default default ip address
+     * @return Qwin_Widget
      */
-    public function call()
+    public function call($default = '0.0.0.0')
     {
         if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
@@ -46,15 +47,9 @@ class Qwin_Ip extends Qwin_Widget
             $ip = $_SERVER['HTTP_CLIENT_IP'];
         } elseif (isset($_SERVER['REMOTE_ADDR'])) {
             $ip = $_SERVER['REMOTE_ADDR'];
-        } elseif (getenv('HTTP_X_FORWARDED_FOR')) {
-            $ip = getenv('HTTP_X_FORWARDED_FOR');
-        } elseif (getenv('HTTP_CLIENT_IP')) {
-            $ip = getenv('HTTP_CLIENT_IP');
-        } elseif (getenv('REMOTE_ADDR')) {
-            $ip = getenv('REMOTE_ADDR');
         } else {
-            $ip = 'Unknown';
+            $ip = $default;
         }
-        return $ip;
+        return Qwin::getInstance()->variable($ip);
     }
 }
