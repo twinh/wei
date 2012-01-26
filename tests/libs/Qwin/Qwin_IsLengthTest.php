@@ -1,5 +1,4 @@
 <?php
-
 require_once dirname(__FILE__) . '/../../../libs/Qwin.php';
 require_once dirname(__FILE__) . '/../../../libs/Qwin/IsLength.php';
 
@@ -27,20 +26,38 @@ class Qwin_IsLengthTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_IsLength::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
+        $widget = $this->object;
+
+        $widget->source = 'length7';
+
+        $this->assertTrue($widget->isLength(7), 'Length is 7');
+
+        $this->assertTrue($widget->isLength(0, 10), 'Length between 0 and 10, or said length less than 10');
+
+        $this->assertTrue($widget->isLength(5, 0), 'Length greater than 5');
+
+        $this->assertFalse($widget->isLength(0), 'Length is not 0');
+
+        $this->assertFalse($widget->isLength(-2, -1), 'Length should be positive, so always be false');
+
+        $this->assertFalse($widget->isLength(10, 0), 'Length should not greater than 10');
+
+        $widget->source = array(
+            'one apple', 'two pears', 'three bananas',
         );
+
+        $this->assertTrue($widget->isLength(3), 'Length is 3');
+
+        $this->assertTrue($widget->isLength(0, 10), 'Length between 0 and 10, or said length less than 10');
+
+        $this->assertTrue($widget->isLength(2, 0), 'Length greater than 2');
     }
 
 }
-
-?>

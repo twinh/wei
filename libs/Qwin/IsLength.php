@@ -24,17 +24,24 @@
 
 /**
  * IsLength
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2012-1-14 16:28:13
+ * @since       2012-01-14 16:28:13
  */
 class Qwin_IsLength extends Qwin_Widget
 {
-    public function call()
+    public function call($min, $max = null)
     {
-        
+        if (0 === $max) {
+            return $this->length() >= $min;
+        } elseif (!$max) {
+            return $this->length() == $min;
+        } else {
+            $len = $this->length();
+            return $min <= $len && $max >= $len;
+        }
     }
 }
