@@ -15,11 +15,21 @@ class Qwin_IsAjaxTest extends PHPUnit_Framework_TestCase {
     protected $object;
 
     /**
+     * original value of $_SERVER['HTTP_X_REQUESTED_WITH']
+     *
+     * @var mixed
+     */
+    protected $_ajax;
+
+    /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
     protected function setUp() {
         $this->object = new Qwin_IsAjax;
+
+        $this->_ajax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) ?
+            $_SERVER['HTTP_X_REQUESTED_WITH'] : new Qwin_Null;
     }
 
     /**
@@ -27,18 +37,30 @@ class Qwin_IsAjaxTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+        if (!$this->_ajax instanceof Qwin_Null) {
+            $_SERVER['HTTP_X_REQUESTED_WITH'] = $this->_ajax;
+        }
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_IsAjax::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+            unset($_SERVER['HTTP_X_REQUESTED_WITH']);
+        }
+
+        $widget = $this->object;
+
+        $this->assertFalse($widget->isAjax());
+
+        $_SERVER['HTTP_X_REQUESTED_WITH'] = 'look like ajax request';
+
+        $this->assertFalse($widget->isAjax());
+
+        $_SERVER['HTTP_X_REQUESTED_WITH'] = 'XmLhTtPrEqUeSt';
+
+        $this->assertTrue($widget->isAjax());
     }
 
 }
