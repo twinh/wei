@@ -48,6 +48,8 @@ class Qwin_ToStringTest extends PHPUnit_Framework_TestCase {
 
         $this->assertInternalType('string', $object->toString(), 'Null to string');
 
+        $this->assertEmpty($object->toString(), 'Null to strig is empty');
+
         $object->source = array(
             'key' => 'value',
             'key2' => 'value2',
