@@ -24,7 +24,7 @@
 
 /**
  * Each
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -35,9 +35,8 @@ class Qwin_Each extends Qwin_Widget
 {
     public function call($callback)
     {
-        foreach ($this->source as $key => $value) {
-            $result = call_user_func($callback, $key, $value);
-            if (false === $result) {
+        foreach ($this->toArray() as $k => $v) {
+            if (false === $this->callback($callback, array($k, $v))) {
                 break;
             }
         }
