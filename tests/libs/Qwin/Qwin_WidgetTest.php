@@ -26,23 +26,23 @@ class Qwin_WidgetTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
-    
+
     /**
      * @covers Qwin_Widget::__construct
      */
     public function test__construct() {
         // self
         $object = new Qwin_Widget('source');
-        
+
         $this->assertEquals('source', $object->source);
-        
+
         // for code cover
         $object = new Qwin_Get('option');
-        
+
         $object2 = new Qwin_Get(array('option'));
-        
+
         $object2->options = 'string';
         $object2->__construct('new string');
     }
@@ -53,19 +53,31 @@ class Qwin_WidgetTest extends PHPUnit_Framework_TestCase {
     public function testOption() {
          // clean all option
         $this->object->option(array());
-        $this->assertEquals(array(), $this->object->option(), 'Option is empty');
-        
+        $this->assertEquals(array(), $this->object->option(), 'option is empty');
+
         $this->object->option('key', 'value');
         $this->assertEquals('value', $this->object->option('key'), 'get option "key"');
-        
+
         $this->object->option('key2', array('value'));
         $this->assertEquals(array(
             'key' => 'value',
             'key2' => array('value'),
         ), $this->object->option(), 'get all options');
-        
+
         $this->assertEquals(null, $this->object->option(new stdClass()));
-        
+
+    }
+
+    /**
+     * @covers Qwin_Widget::source
+     */
+    public function testSource()
+    {
+        $widget = $this->object;
+
+        $widget->source('string');
+
+        $this->assertEquals('string', $widget->source(), 'get source');
     }
 
     /**
@@ -73,7 +85,7 @@ class Qwin_WidgetTest extends PHPUnit_Framework_TestCase {
      */
     public function test__call() {
         $name = $this->object->get('name');
-        
+
         $get = new Qwin_Get();
         $name2 = $get->call('name');
 
@@ -85,7 +97,7 @@ class Qwin_WidgetTest extends PHPUnit_Framework_TestCase {
      */
     public function test__get() {
         $get = $this->object->get;
-        
+
         $this->assertEquals('Qwin_Get', get_class($get), 'widget "get" found.');
     }
 
@@ -94,8 +106,8 @@ class Qwin_WidgetTest extends PHPUnit_Framework_TestCase {
      */
     public function test__toString() {
         $this->object->source = 'source';
-        
+
         $this->assertEquals('source', $this->object->__toString());
     }
 
-} 
+}

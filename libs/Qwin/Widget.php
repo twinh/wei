@@ -26,7 +26,7 @@ require_once 'Widgetable.php';
 
 /**
  * Widget
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -37,10 +37,10 @@ class Qwin_Widget implements Qwin_Widgetable
 {
     /**
      * 对象的值
-     * @var mixed 
+     * @var mixed
      */
     public $source;
-    
+
     /**
      * 调用者,对象环的上一个对象
      * @var Qwin_Widget
@@ -52,10 +52,10 @@ class Qwin_Widget implements Qwin_Widgetable
      * @var array
      */
     public $options = array();
-    
+
     /**
      * 初始化微件
-     * 
+     *
      * @param mixed $source 对象的值
      * @return Qwin_Widget 当前对象
      */
@@ -71,16 +71,16 @@ class Qwin_Widget implements Qwin_Widgetable
             }
         }
     }
-    
+
     /**
      * 获取/设置选项
-     * 
+     *
      * @param mixed $name 选项名称
-     * @return mixed 
+     * @return mixed
      * @example $widget->option('name');            // 获取name选项
-     *          $widget->option('name', 'value');   // 设置name选项的值为value  
+     *          $widget->option('name', 'value');   // 设置name选项的值为value
      *          $widget->option();                  // 获取所有选项
-     *          $widget->option(array());           // 设置所有选项      
+     *          $widget->option(array());           // 设置所有选项
      */
     public function option($name = null)
     {
@@ -90,7 +90,7 @@ class Qwin_Widget implements Qwin_Widgetable
             $this->options = &$name;
             return $this;
         }
-        
+
         // 获取/设置某一个选项
         if (is_string($name) || is_int($name)) {
             if (2 == func_num_args()) {
@@ -98,7 +98,7 @@ class Qwin_Widget implements Qwin_Widgetable
             }
             return isset($this->options[$name]) ? $this->options[$name] : null;
         }
-        
+
         // 获取所有选项
         if (null === $name ) {
             return $this->options;
@@ -109,8 +109,24 @@ class Qwin_Widget implements Qwin_Widgetable
     }
 
     /**
+     * Get/Set source value
+     *
+     * @param mixed $value source value
+     * @return Qwin_Widget
+     */
+    public function source($value = null)
+    {
+        if (!func_num_args()) {
+            return $this->source;
+        } else {
+            $this->source = $value;
+            return $this;
+        }
+    }
+
+    /**
      * 魔术方法,实现通过方法调用同名微件
-     * 
+     *
      * @param string $name 方法名称
      * @param array $args 调用参数
      * @return mixed
@@ -119,12 +135,12 @@ class Qwin_Widget implements Qwin_Widgetable
     {
         return Qwin::getInstance()->callWidget($this, $name, $args);
     }
-    
+
     /**
      * 魔术方法,实现通过对象属性获取同名微件
-     * 
+     *
      * @param string $name 微件名称
-     * @return Qwin_Widget 
+     * @return Qwin_Widget
      */
     public function __get($name)
     {
@@ -132,10 +148,10 @@ class Qwin_Widget implements Qwin_Widgetable
         $widget->invoker = $this;
         return $widget;
     }
-    
+
     /**
      * 魔术方法,返回对象值的字符串形式
-     * 
+     *
      * @return string
      * @todo 针对不同类型处理
      */
