@@ -39,7 +39,9 @@ class Qwin_ToString extends Qwin_Widget
 
     public function call()
     {
-        if (is_scalar($this->source)) {
+        if (is_null($this->source)) {
+            return '';
+        } elseif (is_scalar($this->source)) {
             return (string)$this->source;
         } else {
             return $this->callback($this->options['encoder'], array($this->source));
