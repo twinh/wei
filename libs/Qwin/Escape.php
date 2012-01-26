@@ -42,9 +42,9 @@ class Qwin_Escape extends Qwin_Widget
     {
         // \0 === \x00
         $this->source = str_replace(array(
-            "\0", "\n", "\r", '\\', "'", '"', "\x1a"
+            '\\', "\0", "\n", "\r", "'", '"', "\x1a"
         ), array(
-            '\\0', '\\n', '\\r', '\\\\', "\\'", '\\"', '\\Z'
+            '\\\\', '\0', '\n', '\r', "\\'", '\\"', '\Z'
         ), $this->source);
 
         return $this->invoker;
