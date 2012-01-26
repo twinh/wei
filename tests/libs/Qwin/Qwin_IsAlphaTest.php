@@ -27,18 +27,30 @@ class Qwin_IsAlphaTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_IsAlpha::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget->source = 'abcedfg';
+
+        $this->assertTrue($widget->isAlpha());
+
+        $widget->source = 'aBcDeFg';
+
+        $this->assertTrue($widget->isAlpha());
+
+        $widget->source = 'abcdefg1';
+
+        $this->assertFalse($widget->isAlpha());
+
+        $widget->source = 'a bcdefg';
+
+        $this->assertFalse($widget->isAlpha());
     }
 
 }
