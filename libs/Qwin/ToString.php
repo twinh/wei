@@ -24,7 +24,7 @@
 
 /**
  * ToString
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -33,12 +33,16 @@
  */
 class Qwin_ToString extends Qwin_Widget
 {
+    public $options = array(
+        'encoder' => 'json_encode',
+    );
+
     public function call()
     {
-        if (is_array($this->source)) {
-            return implode(',', $this->source);
-        } else {
+        if (is_scalar($this->source)) {
             return (string)$this->source;
+        } else {
+            return $this->callback($this->options['encoder'], array($this->source));
         }
     }
 }
