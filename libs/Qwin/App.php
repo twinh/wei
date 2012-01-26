@@ -34,15 +34,15 @@
 class Qwin_App extends Qwin_Widget
 {
     /**
-     * @var array           选项
+     * @var array           options
      *
-     *       dirs           应用所在目录
+     *       dirs           application root dirs
      *
-     *       module         默认模块名称
+     *       module         default module value
      *
-     *       action         默认行为名称
+     *       action         default action value
      *
-     *       timezone       时区
+     *       timezone       timezone
      */
     public $options = array(
         'dirs'          => null,
@@ -54,8 +54,8 @@ class Qwin_App extends Qwin_Widget
     /**
      * 启动应用
      *
-     * @param array $config 配置
-     * @return App_Widget 当前对象
+     * @param array $options 选项
+     * @return Qwin_App
      * @todo 记录状态,防止二次加载?
      * @todo 根据是否debug等抛出不同的错误信息
      */
