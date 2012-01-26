@@ -1,5 +1,4 @@
 <?php
-
 require_once dirname(__FILE__) . '/../../../libs/Qwin.php';
 require_once dirname(__FILE__) . '/../../../libs/Qwin/Marker.php';
 
@@ -15,11 +14,21 @@ class Qwin_MarkerTest extends PHPUnit_Framework_TestCase {
     protected $object;
 
     /**
+     *
+     * @var callback
+     */
+    protected $_display;
+
+    /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $this->object = new Qwin_Marker;
+        $this->object = Qwin::getInstance()->marker;
+
+        // disable cusomer display callback
+        $this->_display = $this->object->options['display'];
+        unset($this->object->options['display']);
     }
 
     /**
@@ -27,31 +36,49 @@ class Qwin_MarkerTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+        $this->object->options['display'] = $this->_display;
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_Marker::call
+     * @covers Qwin_Marker::__construct
+     * @covers Qwin_Marker::getMarkers
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget->marker('Testing');
+
+        $data = $widget->getMarkers();
+
+        $this->assertArrayHasKey('Testing', $data);
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testDisplay().
+     * @covers Qwin_Marker::display
      */
     public function testDisplay() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        // test output records
+        $result = $widget->display(false);
+
+        $data = $widget->getMarkers();
+
+        $this->assertCount(1 + count($data) + 1, explode('<tr>', $result), '1 + count($data) + 1(explode) rows');
+
+        // test output directly
+        ob_start();
+
+        $result = $widget->display();
+
+        ob_end_clean();
+
+        $this->assertInstanceOf(Qwin_Widget, $result, 'return invoker instead');
+
+        // test cutome display
+        $widget->options['display'] = 'function($data){return count($data);}';
+
+        $this->assertEquals($widget->display(false), count($widget->getMarkers()), 'custome callback function for dispaly that returns makers length');
     }
-
 }
-
-?>

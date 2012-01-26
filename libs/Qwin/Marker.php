@@ -33,15 +33,44 @@
  */
 class Qwin_Marker extends Qwin_Widget
 {
+    /**
+     * Maker index
+     *
+     * @var int
+     */
     protected $_index = 0;
 
+    /**
+     * Markers data
+     *
+     * @var array
+     */
     protected $_data = array();
 
+    /**
+     * Options
+     *
+     * @var array
+     */
     public $options = array(
         'auto' => true,
         'display' => null,
     );
 
+    public function __construct($source = null)
+    {
+        parent::__construct($source);
+        if ($this->options['auto']) {
+            $this->call('Start');
+        }
+    }
+
+    /**
+     * Set a marker
+     *
+     * @param string $name marker's name
+     * @return Qwin_Widget
+     */
     public function call($name = null)
     {
         !$name && $name = ++$this->_index;
@@ -52,13 +81,30 @@ class Qwin_Marker extends Qwin_Widget
         return $this->invoker;
     }
 
+    /**
+     * Get markers data
+     *
+     * @return array
+     */
     public function getMarkers()
     {
         return $this->_data;
     }
 
+    /**
+     * Display profiling data
+     *
+     * @param string $print
+     * @return mixed
+     */
     public function display($print = true)
     {
+        if ($this->isCallable($this->options['display'])) {
+            return $this->callback($this->options['display'], array(
+                $this->_data, $print, $this->_index
+            ));
+        }
+
         reset($this->_data);
         $start = current($this->_data);
         $total = bcsub(end($this->_data), $start, 8);
@@ -91,8 +137,9 @@ class Qwin_Marker extends Qwin_Widget
 
         if ($print) {
             echo $code;
+            return $this;
         } else {
-            return $print;
+            return $code;
         }
     }
 }
