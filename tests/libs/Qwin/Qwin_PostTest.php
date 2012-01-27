@@ -37,14 +37,13 @@ class Qwin_PostTest extends PHPUnit_Framework_TestCase
     {
         $name = $this->object->call('name');
         $source = isset($_POST['name']) ? $_POST['name'] : null;
-        
+
         $this->assertEquals($name->source, $source);
-        
+
         $default = 'default';
         $name2 = $this->object->call('name', $default);
         $source = isset($_POST['name']) ? $_POST['name'] : $default;
-        
+
         $this->assertEquals($name2->source, $default);
     }
 }
-?>

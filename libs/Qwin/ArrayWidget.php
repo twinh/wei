@@ -24,12 +24,12 @@
 
 /**
  * ArrayWidget
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2012-1-7 10:53:51
+ * @since       2012-01-07 10:53:51
  */
 class Qwin_ArrayWidget extends Qwin_Widget implements ArrayAccess
 {
@@ -38,7 +38,7 @@ class Qwin_ArrayWidget extends Qwin_Widget implements ArrayAccess
      * @var array
      */
     protected $_data = array();
-    
+
     /**
      * 检查索引是否存在
      *
@@ -81,10 +81,10 @@ class Qwin_ArrayWidget extends Qwin_Widget implements ArrayAccess
     {
         unset($this->_data[$offset]);
     }
-    
+
     public function fromArray($data)
     {
-        $this->_data = $data + $this->_data;
+        $this->_data = (array)$data + $this->_data;
         return $this;
     }
 }

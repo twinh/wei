@@ -24,12 +24,12 @@
 
 /**
  * Apply
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2012-1-14 12:19:16
+ * @since       2012-01-14 12:19:16
  */
 class Qwin_Apply extends Qwin_Widget
 {
