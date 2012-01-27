@@ -29,11 +29,12 @@ require_once 'Qwin/Widget.php';
 
 /**
  * Qwin
- * 
+ *
  * @namespace   Qwin
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2010-04-26 10:39:18
+ * @todo        add ini_set support
  */
 class Qwin extends Qwin_Widget
 {
@@ -41,57 +42,57 @@ class Qwin extends Qwin_Widget
      * 版本
      */
     const VERSION = '0.8.2';
-    
+
     /**
      * 存储微件对象的数组
      * @var array
      */
     protected $_widgets = array();
-    
+
     /**
      * 存储类对象的数组
      * @var array
      */
     protected $_objects = array();
-    
+
     /**
      * 存储值不为字符串或整数的微件键名
      * @var array
      */
     protected $_varKeys = array();
-    
+
     /**
      * 存储值不为字符串或整数的微件值
-     * @var array 
+     * @var array
      */
     protected $_varValues = array();
-    
+
     /**
      * 存储全局配置的数组
      * @var array
      */
     protected $_config = array();
-    
+
     /**
      * 原始全局变量$q的备份
      * @var mixed
      */
     public $globalQ;
-    
+
     /**
      * 当前实例化对象
      * @var Qwin
      */
     protected static $_instance;
-    
+
     /**
      * 选项
-     * 
+     *
      * @var array
      *       fnQ            bool        是否定义全局函数"q"
-     * 
+     *
      *       autoload       bool        是否启用类自动加载
-     * 
+     *
      *       autoloadPaths  array       类自动加载的目录
      */
     public $options = array(
@@ -99,18 +100,18 @@ class Qwin extends Qwin_Widget
         'autoload'      => true,
         'autoloadPaths' => array(),
     );
-    
+
     /**
      * Widgets map
-     * 
+     *
      * key  =>  value
      *  0   =>  callback name
      *  1   =>  source paramter position
      *  2   =>  max parameter numbers
      *  3   =>  0 => $invoker, 1 => $result, 2 => $widget
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_widgetsMap = array(
         'isArray' => array(
@@ -122,11 +123,12 @@ class Qwin extends Qwin_Widget
         'isNull' => array(
             'is_null', 0, 1, 1
         ),
+        // TODO as widget, add support split by ''
         'split' => array(
             'explode', 1,
         ),
         'lower' => array(
-            'strtolower', 0, 1, 
+            'strtolower', 0, 1,
         ),
         'upper' => array(
             'strtoupper', 0, 1,
@@ -171,19 +173,19 @@ class Qwin extends Qwin_Widget
             'str_word_count',
         ),
         'reverse' => array(
-            
+
         ),
         'find' => array(
-            
+
         ),
         'findLast' => array(
-            
+
         ),
     );
 
     /**
      * 初始化Qwin微件
-     * 
+     *
      * @return Qwin
      */
     public function __construct(array $config = array())
@@ -205,18 +207,18 @@ class Qwin extends Qwin_Widget
                 return Qwin::getInstance()->variable($value);
             }
         }
-        
+
         // 定义全局函数Qwin
         function qwin($value = null) {
             return Qwin::getInstance()->variable($value);
         }
-        
+
         // 定义全局变量$q
         if (isset($GLOBALS['q'])) {
             $this->globalQ = &$GLOBALS['q'];
         }
         $GLOBALS['q'] = $this;
-        
+
         // 将类库路径加入加载路径中的第二位
         $file = dirname(__FILE__);
         $includePath = get_include_path();
@@ -237,17 +239,17 @@ class Qwin extends Qwin_Widget
             }
             $paths[] = $file . DIRECTORY_SEPARATOR;
             $paths = array_unique($paths);
-            
+
             spl_autoload_register(array($this, 'autoload'));
         }
-        
+
         $this->_widgets['qwin'] = $this;
         $this->_objects['Qwin'] = $this;
     }
 
     /**
      * 自动加载按标准格式命名的类
-     * 
+     *
      * @param string $class 类名
      * @return bool 是否加载成功
      * @todo 缓存加载过的类
@@ -274,34 +276,41 @@ class Qwin extends Qwin_Widget
     public function widget($name)
     {
         $lower = strtolower($name);
-        
+
         if (isset($this->_widgets[$lower])) {
             return $this->_widgets[$lower];
         }
-        
+
         $class = 'Qwin_' . ucfirst($name);
         if (class_exists($class)) {
             return $this->_widgets[$lower] = $this->call($class);
         }
-        
+
+        // TODO test
         $trace = debug_backtrace();
-        $this->exception('Widget, property or method "%s" not found, called by class "%s" in %s on line %s and threw ',
-            $name, $trace[2]['class'], $trace[3]['file'], $trace[3]['line']);
+        $message = 'Widget, property or method "%s" not found, called by class "%s"';
+        if (isset($trace[3]['file'])) {
+            $message .= ' in %s on line %s and threw ';
+            $this->exception($message, $name, $trace[3]['class'], $trace[3]['file'], $trace[3]['line']);
+        } else {
+            $message .= ' and threw ';
+            $this->exception($message, $name, $trace[3]['class']);
+        }
     }
-    
+
     /**
      * Instance a class
-     * 
-     * @param string $class Class name 
+     *
+     * @param string $class Class name
      */
     public function instance($class)
     {
-        
+
     }
 
     /**
      * 初始化一个类
-     * 
+     *
      * @param string $name 类名
      * @param null|array $param 类初始化时的参数,以数组的形式出现
      * @return false|object 失败或类对象
@@ -312,11 +321,11 @@ class Qwin extends Qwin_Widget
         if (isset($this->_objects[$name])) {
             return $this->_objects[$name];
         }
-        
+
         if (!class_exists($name)) {
             return false;
         }
-        
+
         // 获取参数
         $param = null !== $param ? $param : $this->config($name);
         !is_array($param) && $param = (array)$param;
@@ -331,7 +340,7 @@ class Qwin extends Qwin_Widget
             case 0:
                 $object = new $name;
                 break;
-                
+
             case 1:
                 $object = new $name(current($param));
                 break;
@@ -350,11 +359,11 @@ class Qwin extends Qwin_Widget
                     $object = $reflection->newInstanceArgs($param);
                 } else {
                     $object = new $name;
-                } 
+                }
         }
         return $this->_objects[$name] = $object;
     }
-    
+
     /**
      * 获取/设置配置
      *
@@ -405,7 +414,7 @@ class Qwin extends Qwin_Widget
 
     /**
      * 初始化一个变量微件
-     * 
+     *
      * @param mixed $mixed variable
      * @return Qwin_Widget
      */
@@ -414,7 +423,7 @@ class Qwin extends Qwin_Widget
         $this->_varKeys[] = $mixed;
         return $this->_varValues[] = new $class($mixed);
     }
-    
+
     /**
      * 获取当前类的实例化对象
      *
@@ -446,11 +455,11 @@ class Qwin extends Qwin_Widget
 
     /**
      * Get a widget obejct and call the "call" method
-     * 
+     *
      * @param Qwin_Widget $invoker
      * @param string $name
-     * @param array $args 
-     * @return mixed 
+     * @param array $args
+     * @return mixed
      */
     public function callWidget($invoker, $name, $args)
     {
@@ -483,37 +492,37 @@ class Qwin extends Qwin_Widget
                 return $invoker;
             }
         }
-        
+
         $widget = $this->widget($name);
-        
+
         if (!method_exists($widget, 'call')) {
             require_once 'Qwin/Exception.php';
             throw new Qwin_Exception('Method "call" not found in widget "' . get_class($widget) . '"');
         }
-        
+
         // set invoker for widget
         $widget->invoker = $invoker;
-        
+
         // set source for widget
         $widget->source = $invoker->source;
-        
+
         // call widget
         $result = call_user_func_array(array($widget, 'call'), $args);
-        
+
         // set back source so that source can be passed in widgets
         $invoker->source = $widget->source;
-        
+
         // return result rather than widget object
         return $result;
     }
-    
+
     /**
      * convert $var to a widget
-     * 
+     *
      * @param mixed $var
-     * @return Qwin_Widget 
+     * @return Qwin_Widget
      */
-    public function __invoke($var)
+    public function __invoke($var = null)
     {
         return $this->variable($var);
     }
