@@ -34,15 +34,15 @@ class User_Controller extends Qwin_CrudController
     protected $_lock = array(
         'guest', 'admin', '7641b5b1-c727-6c07-e11f-9cb5b74ddfc9',
     );
-    
+
     public function loginAction()
     {
         $user = $this->user();
-        
-        if (!$this->request->isPost()) {
+
+        if (!$this->isPost()) {
             return;
         }
-        
+
         // check whether user logged in
         if ($user['username'] && 'guest' != $user['username']) {
             return $this->json(array(
@@ -50,30 +50,30 @@ class User_Controller extends Qwin_CrudController
                 'message' => 'You have logged in!'
             ));
         }
-        
+
         $username = $this->post('username');
         $password = md5($this->post('password'));
-        
+
         $user = $this->query()
             ->where('username = ? AND password = ?', array($username, $password))
             ->fetchOne();
-        
+
         if (!$user) {
             return $this->json(array(
                 'code' => -1,
                 'message' => 'Username or password error!',
             ));
         }
-        
-        // 
+
+        //
         $this->user->fromArray($user->toArray());
-        
+
         return $this->json(array(
             'code' => 0,
             'message' => 'Login success!',
         ));
     }
-    
+
     public function logoutAction()
     {
         $this->user->logout();
@@ -82,11 +82,11 @@ class User_Controller extends Qwin_CrudController
             'message' => 'Logout success!',
         ));
     }
-    
+
     public function isLoginAction()
     {
         $user = $this->user();
-        
+
         if ($user->isLogin()) {
             return $this->json(array(
                 'code' => 0,
@@ -100,12 +100,12 @@ class User_Controller extends Qwin_CrudController
             ));
         }
     }
-    
+
     public function json($data)
     {
         return json_encode($data);
     }
-    
+
     /**
      * 编辑密码
      * @return object 实例化编辑操作
@@ -120,7 +120,7 @@ class User_Controller extends Qwin_CrudController
             return $this->getView()->alert($lang->t('MSG_User_LOCKED'));
         }
         $meta = Qwin_Meta::getInstance()->get('Com_User_PasswordMeta');
-        
+
         if (!$request->isPost()) {
             return Qwin::call('-widget')->get('View')->execute(array(
                 'module'    => $this->_module,
