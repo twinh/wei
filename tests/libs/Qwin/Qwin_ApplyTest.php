@@ -27,18 +27,18 @@ class Qwin_ApplyTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_Apply::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget->source = 'mypassword';
+
+        $this->assertEquals(md5('mypassword'), $widget->apply('md5', array('mypassword')));
     }
 
 }
