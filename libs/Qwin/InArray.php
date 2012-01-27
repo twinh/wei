@@ -23,26 +23,25 @@
  */
 
 /**
- * ForceInArray
- * 
+ * InArray
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-11-15 12:42:41
- * @todo        rename
  */
-class Qwin_ForceInArray extends Qwin_Widget
+class Qwin_InArray extends Qwin_Widget
 {
     /**
-     * 强制提供值作为数组的一项
+     * while source is not find in the specify array, use the first element of array instead
      *
-     * @param array $array 数组
+     * @param array $array
      * @return mixed
      */
     public function call($array)
     {
         !in_array($this->source, $array) && $this->source = $array[key($array)];
-        return $this;
+        return $this->invoker;
     }
 }
