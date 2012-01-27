@@ -24,7 +24,7 @@
 
 /**
  * Widgetable
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -34,6 +34,8 @@
 interface Qwin_Widgetable
 {
     public function __get($name);
-    
+
     public function __call($name, $args);
+
+    public function __invoke($arg = null);
 }
