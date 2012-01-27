@@ -31,14 +31,12 @@ class Index_Controller extends Qwin_Controller
         $page = $this
             ->get('page', '?module=index&action=welcome')
             ->urlDecode()
-            ->escape();
+            ->toText();
 
         $title = $this
             ->get('title', $this->lang['Main Page'])
             ->urlDecode()
-            ->escape();
-        //$title = htmlspecialchars($title);
-
+            ->toText();
 
         // 加载页眉导航的缓存 todo index controller
         $menus = require $this->cache->options['dir'] . '/menu.php';
