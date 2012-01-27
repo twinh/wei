@@ -41,7 +41,7 @@ class Qwin extends Qwin_Widget
     /**
      * 版本
      */
-    const VERSION = '0.8.2';
+    const VERSION = '0.8.3';
 
     /**
      * 存储微件对象的数组
@@ -168,18 +168,6 @@ class Qwin extends Qwin_Widget
         ),
         'sha1' => array(
             'sha1',
-        ),
-        'words' => array(
-            'str_word_count',
-        ),
-        'reverse' => array(
-
-        ),
-        'find' => array(
-
-        ),
-        'findLast' => array(
-
         ),
     );
 

@@ -22,6 +22,9 @@
  * @version     $Id$
  */
 
+/**
+ * @see Qwin_Widgetable
+ */
 require_once 'Widgetable.php';
 
 /**
@@ -37,18 +40,21 @@ class Qwin_Widget implements Qwin_Widgetable
 {
     /**
      * 对象的值
+     *
      * @var mixed
      */
     public $source;
 
     /**
      * 调用者,对象环的上一个对象
+     *
      * @var Qwin_Widget
      */
     public $invoker;
 
     /**
      * 选项
+     *
      * @var array
      */
     public $options = array();
@@ -147,6 +153,12 @@ class Qwin_Widget implements Qwin_Widgetable
         $this->$name = $widget = Qwin::getInstance()->widget($name);
         $widget->invoker = $this;
         return $widget;
+    }
+
+    public function __invoke($arg = null)
+    {
+        $args = func_get_args();
+        return call_user_func_array(array($this, 'call'), $args);
     }
 
     /**
