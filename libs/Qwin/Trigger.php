@@ -24,17 +24,17 @@
 
 /**
  * Trigger
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-16 1:17:46
+ * @since       2011-10-16 01:17:46
  */
 class Qwin_Trigger extends Qwin_Widget
 {
-    public function call($event, $param = array())
+    public function call($event, $params = array())
     {
-        return $this->event->call($event, $param);
+        return $this->event->call($event, $params);
     }
 }

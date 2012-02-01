@@ -34,10 +34,56 @@
 class Qwin_Event extends Qwin_Widget
 {
     /**
-     * 存储事件数据
+     * Events data
+     *
      * @var array
      */
-    public $data = array();
+    public $_events = array();
+
+    /**
+     * The type of event
+     *
+     * @var string
+     */
+    protected $_type;
+
+    /**
+     * Time stamp with microseconds when object constructed
+     *
+     * @var float
+     */
+    protected $_timeStamp;
+
+    /**
+     * Creat a new event object
+     *
+     * @param string $type
+     */
+    public function __construct($type = null)
+    {
+        $this->_type = (string)$type;
+        $this->_timeStamp = microtime(true);
+    }
+
+    /**
+     * Get the type of event
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->_type;
+    }
+
+    /**
+     * Get the time stamp
+     *
+     * @return string
+     */
+    public function getTimeStamp()
+    {
+        return $this->_timeStamp;
+    }
 
     /**
      * 调用一个事件
@@ -49,24 +95,18 @@ class Qwin_Event extends Qwin_Widget
     public function call($name, $params)
     {
         $name = strtolower($name);
-        if (!isset($this->data[$name])) {
+        if (!isset($this->_events[$name])) {
             return $this;
         }
 
-        foreach ($this->data[$name] as $event) {
-            if (isset($event['file'])) {
-                if (!is_file($event['file'])) {
-                    continue;
-                }
+        // creat new event object
+        $event = new self($name);
 
-                require_once $event['file'];
-                $callback = array($event['class'], 'trigger' . $name);
-            } else {
-                $callback = $event['callback'];
-            }
+        // prepend $event object to the beginning of the params
+        array_unshift($params, $event);
 
-            // 如果返回false,终止继续调用事件
-            if (false === $this->callback($callback, $params)) {
+        foreach ($this->_events[$name] as $event) {
+            if (false === $this->callback($event['callback'], $params)) {
                 return false;
             }
         }
@@ -84,24 +124,28 @@ class Qwin_Event extends Qwin_Widget
      */
     public function add($name, $callback, $priority = 10)
     {
+        if (!$this->isCallable($callback)) {
+            $this->error('Parameter 2 should be a valid callback');
+        }
+
         $name = strtolower($name);
 
-        if (!isset($this->data[$name])) {
-            $this->data[$name] = array();
+        if (!isset($this->_events[$name])) {
+            $this->_events[$name] = array();
         }
 
         // 预存储最大优先级的值 ?
-        while (isset($this->data[$name][$priority])) {
+        while (isset($this->_events[$name][$priority])) {
             $priority++;
         }
 
-        $this->data[$name][$priority] = array(
+        $this->_events[$name][$priority] = array(
             'callback' => $callback,
         );
 
         // TODO 调用时才排序,或是实现不排序方法
         // 根据优先级排序
-        ksort($this->data[$name]);
+        ksort($this->_events[$name]);
 
         return $this;
     }
@@ -115,11 +159,11 @@ class Qwin_Event extends Qwin_Widget
     public function remove($name = null)
     {
         if (null === $name) {
-            $this->data = array();
+            $this->_events = array();
         } else {
             $name = strtolower($name);
-            if (isset($this->data[$name])) {
-                unset($this->data[$name]);
+            if (isset($this->_events[$name])) {
+                unset($this->_events[$name]);
             }
         }
 
