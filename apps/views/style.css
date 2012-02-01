@@ -14,7 +14,6 @@ html {
 body {
     font-size: 12px;
     margin: 0 auto;
-    min-width: 1000px;
     height: 100%;
 }
 /* 修复搜狗浏览器(4.0Chrome内核)样式错误,区别? */
@@ -35,11 +34,10 @@ a {
     text-decoration: none;
     outline: 0;
 }
-/* 保持大小一致 */
+/* keep font in same size  */
 .ui-widget, .ui-widget-content {
     font-size: 12px;
-    font-family: Arial,sans-serif;
-    /*font-family: ;*/
+    font-family: Helvetica, Tahoma, Arial, "\5fae\8f6f\96c5\9ed1", "\5b8b\4f53", sans-serif;
 }
 
 /* 常用样式
@@ -53,14 +51,12 @@ a {
 .qw-c {
     clear: both;
 }
-/* TODO 如何命名 */
 .qw-p5 {
     padding: 5px;
 }
 .qw-m5 {
     margin: 5px;
 }
-
 .qw-toolbar {
     font-weight: normal;
     padding: 3px 0 3px 5px;

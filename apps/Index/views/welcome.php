@@ -12,7 +12,7 @@ $minify->add(array(
 <style>
     .welocme {
         padding: 10px 10px;
-    } 
+    }
 </style>
 </head>
 <body>

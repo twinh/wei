@@ -40,13 +40,13 @@ jQuery(function($){
         }
     });
     layout.addCloseBtn('#ui-west-toggler-open', 'west');
-    
+
     // 左栏打开按钮增加鼠标滑过效果
     $('#ui-west-toggler-closed').qui();
-    
+
     // 左栏关闭按钮增加点击事件
     $('#ui-west-toggler-open').qui();
-    
+
     // 左栏菜单
     var menuHeader = null;
     $('#qw-menu').accordion({
@@ -64,7 +64,7 @@ jQuery(function($){
         }
     });
     $('#qw-menu li, #qw-menu-oper').qui();
-    
+
     // 中间选项卡
     var tabs = $('#qw-tabs').tabs({
         closable: true,
@@ -76,19 +76,19 @@ jQuery(function($){
     tabs.find('ul.ui-tabs-nav')
         .removeClass('ui-widget-header ui-helper-reset')
         .addClass('ui-state-default');
-    
+
     // 点击左栏显示选项卡
     $('#qw-menu li a').click(function(){
         $('#qw-tabs').tabs('addIframe', $(this).attr('href'), $(this).text());
         return false;
     });
-    
+
     // 顶部导航
     $('#qw-nav a').qui({
         click: true,
         focus: true
     });
-    
+
     $.ajax({
         url: '?module=user&action=isLogin',
         dataType: 'json',
@@ -103,7 +103,7 @@ jQuery(function($){
             }
         }
     });
-    
+
     $('#login').click(function(){
         var url = '?module=user&action=login';
         $('<div id="login-dialog">loading...</div>').load(url).dialog({
@@ -124,7 +124,7 @@ jQuery(function($){
             }
         });
     });
-    
+
     $('#logout').click(function(){
         $.ajax({
            url: '?module=user&action=logout',
@@ -137,7 +137,7 @@ jQuery(function($){
            }
         });
     });
-    
+
     // 全屏切换
     var fullscreen = false;
     $('#qw-fullscreen').hover(function(){
