@@ -1,5 +1,4 @@
 <?php
-
 require_once dirname(__FILE__) . '/../../../libs/Qwin.php';
 require_once dirname(__FILE__) . '/../../../libs/Qwin/ArrayWidget.php';
 
@@ -27,62 +26,59 @@ class Qwin_ArrayWidgetTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testOffsetExists().
+     * @covers Qwin_ArrayWidget::offsetExists
      */
     public function testOffsetExists() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget['key'] = 'value';
+
+        $this->assertTrue(isset($widget['key']));
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testOffsetGet().
+     * @covers Qwin_ArrayWidget::offsetGet
+     * @covers Qwin_ArrayWidget::offsetSet
      */
     public function testOffsetGet() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget['key'] = 'value1';
+
+        $this->assertEquals('value1', $widget['key']);
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testOffsetSet().
-     */
-    public function testOffsetSet() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testOffsetUnset().
+     * @covers Qwin_ArrayWidget::offsetUnset
      */
     public function testOffsetUnset() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        unset($widget['key']);
+
+        $this->assertNull($widget['key']);
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testFromArray().
+     * @covers Qwin_ArrayWidget::fromArray
      */
     public function testFromArray() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget['key2'] = 'value2';
+
+        $widget->fromArray(array(
+            'key1' => 'value1',
+            'key2' => 'value changed',
+        ));
+
+        $this->assertEquals('value1', $widget['key1']);
+
+        $this->assertEquals('value changed', $widget['key2']);
     }
 
 }

@@ -40,9 +40,9 @@ class Qwin_ArrayWidget extends Qwin_Widget implements ArrayAccess
     protected $_data = array();
 
     /**
-     * 检查索引是否存在
+     * Check if a offset exists
      *
-     * @param string $offset 索引
+     * @param string $offset
      * @return bool
      */
     public function offsetExists($offset)
@@ -51,9 +51,9 @@ class Qwin_ArrayWidget extends Qwin_Widget implements ArrayAccess
     }
 
     /**
-     * 获取索引的数据
+     * Get a offset value
      *
-     * @param string $offset 索引
+     * @param string $offset
      * @return mixed
      */
     public function offsetGet($offset)
@@ -62,10 +62,10 @@ class Qwin_ArrayWidget extends Qwin_Widget implements ArrayAccess
     }
 
     /**
-     * 设置索引的值
+     * Set a offset value
      *
-     * @param string $offset 索引
-     * @param mixed $value 值
+     * @param string $offset
+     * @param mixed $value
      */
     public function offsetSet($offset, $value)
     {
@@ -73,18 +73,24 @@ class Qwin_ArrayWidget extends Qwin_Widget implements ArrayAccess
     }
 
     /**
-     * 删除一个值
+     * Unset a offset
      *
-     * @param string $offset 索引的名称
+     * @param string $offset
      */
     public function offsetUnset($offset)
     {
         unset($this->_data[$offset]);
     }
 
-    public function fromArray($data)
+    /**
+     * Merge data from array
+     *
+     * @param array $array
+     * @return Qwin_ArrayWidget
+     */
+    public function fromArray($array)
     {
-        $this->_data = (array)$data + $this->_data;
+        $this->_data = (array)$array + $this->_data;
         return $this;
     }
 }
