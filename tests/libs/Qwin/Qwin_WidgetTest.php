@@ -33,6 +33,9 @@ class Qwin_WidgetTest extends PHPUnit_Framework_TestCase {
      * @covers Qwin_Widget::__construct
      */
     public function test__construct() {
+        // init Qwin
+        Qwin::getInstance();
+
         // self
         $object = new Qwin_Widget('source');
 
@@ -110,4 +113,12 @@ class Qwin_WidgetTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('source', $this->object->__toString());
     }
 
+    /**
+     * @covers Qwin_Widget::__invoke
+     */
+    public function test__invoke() {
+        $get = $this->object->get;
+
+        $this->assertEquals($get->call('name'), $get->__invoke('name'));
+    }
 }
