@@ -65,6 +65,7 @@ ol, ul, li {
 <div class="message-wrapper">
     <div class="message-content">
         <h1><?php echo $code ?><?php echo $message ?></h1>
+        <?php if ($debug) : ?>
         <div class="message-box">
             <h2>Call Stack</h2>
             <p class="ui-state-error"><?php echo $stackInfo ?></p>
@@ -208,6 +209,7 @@ ol, ul, li {
             in your Qwin config file or use <code>$this-&gt;config(&#039;debug&#039;, false);</code>
             in any widgets.
         </div>
+        <?php endif ?>
     </div>
 </div>
 </body>

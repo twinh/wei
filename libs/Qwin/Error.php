@@ -33,6 +33,11 @@
  */
 class Qwin_Error extends Qwin_Widget
 {
+    /**
+     * Options
+     *
+     * @var array
+     */
     public $options = array(
         'code' => 500,
         'message' => 'Server busy, please try again later',
@@ -106,6 +111,8 @@ class Qwin_Error extends Qwin_Widget
             ) + $options + $this->options;
             $this->options = &$options;
 
+            $debug = $this->config('debug');
+
             // clean up output
             if ($options['clean'] && ob_get_status()) {
                 $output = ob_get_contents();
@@ -153,6 +160,8 @@ class Qwin_Error extends Qwin_Widget
 
             $this->log->fatal($code . $message . ' ' . $stackInfo);
 
+            $this->trigger('error', array('data' => get_defined_vars()));
+
             // require view file
             require dirname(__FILE__) . '/views/error.php';
 
@@ -170,8 +179,12 @@ class Qwin_Error extends Qwin_Widget
 
         // dispaly basic error message for exception in exception handler
         } catch(Exception $e) {
-            echo sprintf('<p>%s: %s in %s on line %s</p>', get_class($e), $e->getMessage(), $e->getFile(), $e->getCode());
-            echo '<pre>' . $e->getTraceAsString() . '</pre>';
+            if ($this->config('debug')) {
+                echo sprintf('<p>%s: %s in %s on line %s</p>', get_class($e), $e->getMessage(), $e->getFile(), $e->getCode());
+                echo '<pre>' . $e->getTraceAsString() . '</pre>';
+            } else {
+                echo get_class($e) . ': ' . $e->getMessage();
+            }
         }
     }
 
