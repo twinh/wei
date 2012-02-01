@@ -155,6 +155,12 @@ class Qwin_Widget implements Qwin_Widgetable
         return $widget;
     }
 
+    /**
+     * Call the widget object as a function by called the "call" method
+     *
+     * @param mixed $arg
+     * @return mixed
+     */
     public function __invoke($arg = null)
     {
         $args = func_get_args();
