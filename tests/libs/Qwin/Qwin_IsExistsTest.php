@@ -47,7 +47,8 @@ class Qwin_IsExistsTest extends PHPUnit_Framework_TestCase {
 
         $this->assertFalse($object->isExists(), 'File not found');
 
-        $path = array_pop(explode(PATH_SEPARATOR, ini_get('include_path')));
+        $paths = explode(PATH_SEPARATOR, ini_get('include_path'));
+        $path = array_pop($paths);
         $files = scandir($path);
         foreach ($files as $file) {
             if ('.' == $file || '..' == $file) {

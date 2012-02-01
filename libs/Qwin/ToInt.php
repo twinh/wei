@@ -24,7 +24,7 @@
 
 /**
  * ToInt
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License

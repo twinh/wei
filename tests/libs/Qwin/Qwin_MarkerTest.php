@@ -28,7 +28,7 @@ class Qwin_MarkerTest extends PHPUnit_Framework_TestCase {
 
         // disable cusomer display callback
         $this->_display = $this->object->options['display'];
-        unset($this->object->options['display']);
+        $this->object->options['display'] = null;
     }
 
     /**
@@ -74,7 +74,7 @@ class Qwin_MarkerTest extends PHPUnit_Framework_TestCase {
 
         ob_end_clean();
 
-        $this->assertInstanceOf(Qwin_Widget, $result, 'return invoker instead');
+        $this->assertInstanceOf('Qwin_Widget', $result, 'return invoker instead');
 
         // test cutome display
         $widget->options['display'] = 'function($data){return count($data);}';
