@@ -23,71 +23,165 @@
  */
 
 /**
- * EditFormAction
- * 
+ * Error
+ *
  * @package     Qwin
  * @subpackage  Application
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-04-02 09:29:07
- * @todo        fix
  */
 class Qwin_Error extends Qwin_Widget
-{   
+{
     public $options = array(
+        'code' => 500,
+        'message' => 'Server busy, please try again later',
         'exception' => true,
-        //'error' => false,
+        'error' => true,
+        'exit' => true,
+        'clean' => true,
     );
-    
-//    public function __construct(array $options = array())
-//    {
-//        parent::__construct($options);
-//        if ($this->_options['exception']) {
-//            //set_exception_handler(array($this, 'render'));
-//        }
-//    }
-    
-    /**
-     * 显示异常信息
-     *
-     * @param Exception $e 异常对象
-     * @todo xdebug
-     * @todo view
-     */
-    public function call($e = null)
+
+    public function __construct(array $options = array())
     {
-        restore_exception_handler();
-        
-        // 清空之前输出的内容,再重新启动
-        $output = ob_get_contents();
-        '' != $output && ob_end_clean();
-        ob_start();
-
-        $content = null;
-        $file = $e->getFile();
-        $line = $e->getLine();
-        if (Qwin::config('debug')) {
-            $content =  'Throwed by ' . get_class($e) . ' in ' . $file . ' on line ' . $line
-                . '<pre>' . $e->getTraceAsString() . '</pre>'
-                . '<pre>' . $this->getFileCode($file, $line) . '<pre>';
+        parent::__construct($options);
+        if ($this->options['exception']) {
+            set_exception_handler(array($this, 'call'));
         }
-
-        return $this->_view->displayInfo(array(
-            'icon'      => 'delete',
-            'title'     => $e->getMessage(),
-            'url'       => null,
-            'content'   => $content,
-            'exception' => $e,
-        ));
+        if ($this->options['error']) {
+            set_error_handler(array($this, 'renderError'));
+        }
     }
 
     /**
-     * 显示错误信息
+     * Show error message
      *
-     * @param int $errno 错误级别
-     * @param string $errstr 错误信息
-     * @param string $errfile 错误文件
-     * @param int $errline 错误行号
+     * @param mixed $message
+     * @param mixed $code
+     * @param array $options
+     */
+    public function call($message, $code = 500, array $options = array())
+    {
+        try {
+            if ($this->options['exception']) {
+                restore_exception_handler();
+            }
+            if ($this->options['error']) {
+                restore_error_handler();
+            }
+
+            if ($message instanceof Exception) {
+                if (is_array($code)) {
+                    $options = $code;
+                }
+                $e = $message;
+                $code = $e->getCode();
+                $message = $e->getMessage();
+                $file = $e->getFile();
+                $line = $e->getLine();
+                $class = get_class($e);
+                $trace = $e->getTraceAsString();
+            } else {
+                if (is_array($message)) {
+                    $options = $message;
+                    $message = isset($options['message']) ? $options['message'] : $this->options['message'];
+                } else {
+                    $message = (string)$message;
+                }
+
+                $offset = 5;
+                $traces = debug_backtrace();
+                $file = $traces[$offset-1]['file'];
+                $line = $traces[$offset-1]['line'];
+                $class = 'Qwin_Error';
+                $traces = array_slice($traces, $offset);
+                $trace = $this->getTraceString($traces);
+            }
+
+
+            // merge options
+            $options = array(
+                'code' => $code,
+                'message' => $message,
+            ) + $options + $this->options;
+            $this->options = &$options;
+
+            // clean up output
+            if ($options['clean'] && ob_get_status()) {
+                $output = ob_get_contents();
+                $output && ob_end_clean();
+                ob_start();
+            }
+
+            // TODO header for ajax request
+
+            // Title & Message
+            $code = $code ? $code . ': ' : '';
+
+            // Call Stack
+            $stackInfo = sprintf('Raised by %s in %s on line %s', $class, $file, $line);
+            $trace = htmlspecialchars($trace, ENT_QUOTES);
+
+            // File Infomation
+            $mtime = strftime('%c', filemtime($file));
+            $fileInfo = $this->getFileCode($file, $line);
+
+            // System Information
+            $requestMethod = $_SERVER['REQUEST_METHOD'];
+
+            $requestUrl = htmlspecialchars(urldecode($_SERVER['REQUEST_URI']), ENT_QUOTES);;
+
+            $serverTime = strftime('%c');
+
+            $includePaths = explode(PATH_SEPARATOR, get_include_path());
+            foreach ($includePaths as $key => $value) {
+                $includePaths[$key] = realpath($value);
+            }
+            $includePath = implode('<br />', $includePaths);
+
+            // Request Information
+            $get = $this->getGet();
+
+            $post = $this->getPost();
+
+            $cookie = $this->getCookie();
+
+            $session = $this->getSession();
+
+            // Server Environment
+            $server = $this->getServer();
+
+            $this->log->fatal($code . $message . ' ' . $stackInfo);
+
+            // require view file
+            require dirname(__FILE__) . '/views/error.php';
+
+            // exit to prevent other output
+            if ($options['exit']) {
+                exit();
+            } else {
+                if ($this->options['exception']) {
+                    set_exception_handler(array($this, 'call'));
+                }
+                if ($this->options['error']) {
+                    set_error_handler(array($this, 'renderError'));
+                }
+            }
+
+        // dispaly basic error message for exception in exception handler
+        } catch(Exception $e) {
+            echo sprintf('<p>%s: %s in %s on line %s</p>', get_class($e), $e->getMessage(), $e->getFile(), $e->getCode());
+            echo '<pre>' . $e->getTraceAsString() . '</pre>';
+        }
+    }
+
+    /**
+     * Error handler
+     *
+     * @param int $errno
+     * @param string $errstr
+     * @param string $errfile
+     * @param int $errline
      */
     public function renderError($errno, $errstr, $errfile, $errline)
     {
@@ -126,7 +220,7 @@ class Qwin_Error extends Qwin_Widget
         for($i = $start; $i < $end; $i++) {
             $temp = str_pad($i, 4, 0, STR_PAD_LEFT) . ':' . $code[$i];
             if ($line != $i) {
-                $content .= htmlspecialchars($temp);
+                $content .= htmlspecialchars($temp, ENT_QUOTES);
             } else {
                 $content .= '<span class="ui-state-error">' . htmlspecialchars($temp) . '</span>';
             }
@@ -135,36 +229,27 @@ class Qwin_Error extends Qwin_Widget
         unset($code);
         return $content;
     }
-    
+
     /**
-     * 构造运行记录
-     * 
-     * @param array $traces 运行记录,一般由debug_backtrace取得
-     * @param int $offset 剔除运行记录数
-     * @return string 
+     * Get trace string like Exception::getTraceAsString
+     *
+     * @param array $traces usally get from debug_backtrace()
+     * @return string
      */
-    public function getTraceString($traces, $offset = 0)
+    public function getTraceString($traces)
     {
-        for($i = -1; $i < $offset; $i++) {
-            $first = array_shift($traces);
-        }
-        if (isset($first['class'])) {
-            $calledBy = $first['class'] . $first['type'] . $first['function'];
-        } else {
-            $calledBy = $first['function'];
-        }
-        $msg = 'Called by '. $calledBy . ' in ' . $first['file'] . ' on line ' . $first['line'] . PHP_EOL . PHP_EOL;
+        $str = '';
         foreach ($traces as $i => $trace) {
-            $msg .= '#' . $i . ' ';
+            $str .= '#' . $i . ' ';
             if (isset($trace['file'])) {
-                $msg .= sprintf('%s(%s)', $trace['file'], $trace['line']);
+                $str .= sprintf('%s(%s)', $trace['file'], $trace['line']);
             } else {
-                $msg .= '[internal function]';
+                $str .= '[internal function]';
             }
             if (isset($trace['class'])) {
-                $msg .= ': ' . $trace['class'] . $trace['type'] . $trace['function'];
+                $str .= ': ' . $trace['class'] . $trace['type'] . $trace['function'];
             } else {
-                $msg .= ': ' . $trace['function'];
+                $str .= ': ' . $trace['function'];
             }
 
             $args = array();
@@ -183,10 +268,109 @@ class Qwin_Error extends Qwin_Widget
                     $args[] = (string)$arg;
                 }
             }
-            $msg .= '(' . implode(', ', $args) . ')';
-            $msg .= PHP_EOL;
+            $str .= '(' . implode(', ', $args) . ')' . PHP_EOL;
         }
-        $msg .= '#' . ++$i . ' {main}' . PHP_EOL . PHP_EOL;
-        return $msg;
+        $str .= '#' . ++$i . ' {main}' . PHP_EOL . PHP_EOL;
+        return $str;
+    }
+
+    /**
+     * Get readable server information form $_SERVER for html output
+     *
+     * @return array
+     */
+    public function getServer()
+    {
+        $server = array();
+        foreach ($_SERVER as $key => $value) {
+            if ('PATH' == $key) {
+                $paths = explode(PATH_SEPARATOR, $value);
+                foreach ($paths as &$path) {
+                    $path = htmlspecialchars(realpath($path), ENT_QUOTES);
+                }
+                $value = implode('<br />', $paths);
+                $server[$key] = $value;
+                continue;
+            } elseif ('REQUEST_TIME' == $key) {
+                $server[$key] = $value . '&nbsp;<em>(' . strftime('%c', $value) . ')</em>';
+                continue;
+            } elseif ('QUERY_STRING' == $key || 'REQUEST_URI' == $key) {
+                $value = urldecode($value);
+            } elseif (is_array($value)) {
+                $server[$key] = '<pre>' . htmlspecialchars(var_export($value, true), ENT_QUOTES) . '</pre>';
+                continue;
+            }
+            $server[$key] = htmlspecialchars((string)$value, ENT_QUOTES);
+        }
+        return $server;
+    }
+
+    /**
+     * Get reqeust information form $_GET for html output
+     *
+     * @return array
+     */
+    public function getGet()
+    {
+        $get = array();
+        foreach ($_GET as $key => $value) {
+            if (is_array($value)) {
+                $value = var_export($value, true);
+            }
+            $get[$key] = htmlspecialchars($value, ENT_QUOTES);
+        }
+        return $get;
+    }
+
+    /**
+     * Get reqeust information form $_POST for html output
+     *
+     * @return array
+     */
+    public function getPost()
+    {
+        $post = array();
+        foreach ($_POST as $key => $value) {
+            if (is_array($value)) {
+                $value = var_export($value, true);
+            }
+            $post[$key] = htmlspecialchars($value, ENT_QUOTES);
+        }
+        return $post;
+    }
+
+    /**
+     * Get reqeust information form $_COOKIE for html output
+     *
+     * @return array
+     */
+    public function getCookie()
+    {
+        foreach ($_COOKIE as $key => $value) {
+            $cookie[$key] = htmlspecialchars($value, ENT_QUOTES);
+        }
+        return $cookie;
+    }
+
+    /**
+     * Get session information form $_SESSION for html output
+     *
+     * @return array
+     * @todo how about session not enable
+     */
+    public function getSession()
+    {
+        // Session Information
+        $session = array();
+
+        // TODO
+        $this->session;
+
+        foreach ($_SESSION as $key => $value) {
+            if (is_array($value)) {
+                $value = var_export($value, true);
+            }
+            $session[$key] = htmlspecialchars($value, ENT_QUOTES);
+        }
     }
 }
