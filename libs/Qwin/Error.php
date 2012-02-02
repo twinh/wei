@@ -167,7 +167,9 @@ class Qwin_Error extends Qwin_Widget
 
             // exit to prevent other output
             if ($options['exit']) {
+                // @codeCoverageIgnoreStart
                 exit();
+                // @codeCoverageIgnoreEnd
             } else {
                 if ($this->options['exception']) {
                     set_exception_handler(array($this, 'call'));
@@ -176,7 +178,7 @@ class Qwin_Error extends Qwin_Widget
                     set_error_handler(array($this, 'renderError'));
                 }
             }
-
+        // @codeCoverageIgnoreStart
         // dispaly basic error message for exception in exception handler
         } catch(Exception $e) {
             if ($this->config('debug')) {
@@ -186,6 +188,7 @@ class Qwin_Error extends Qwin_Widget
                 echo get_class($e) . ': ' . $e->getMessage();
             }
         }
+        // @codeCoverageIgnoreEnd
     }
 
     /**
@@ -212,9 +215,7 @@ class Qwin_Error extends Qwin_Widget
      */
     public function getFileCode($file, $line, $range = 20)
     {
-        if (false == ($code = file($file))) {
-            return null;
-        }
+        $code = file($file);
 
         $half = (int)($range / 2);
 
@@ -359,6 +360,7 @@ class Qwin_Error extends Qwin_Widget
      */
     public function getCookie()
     {
+        $cookie = array();
         foreach ($_COOKIE as $key => $value) {
             $cookie[$key] = htmlspecialchars($value, ENT_QUOTES);
         }
@@ -369,7 +371,7 @@ class Qwin_Error extends Qwin_Widget
      * Get session information form $_SESSION for html output
      *
      * @return array
-     * @todo how about session not enable
+     * @todo when session not enable ?
      */
     public function getSession()
     {
@@ -385,5 +387,7 @@ class Qwin_Error extends Qwin_Widget
             }
             $session[$key] = htmlspecialchars($value, ENT_QUOTES);
         }
+
+        return $session;
     }
 }
