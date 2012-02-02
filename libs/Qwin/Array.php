@@ -24,7 +24,7 @@
 
 /**
  * Array
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -34,5 +34,13 @@
  */
 class Qwin_Array extends Qwin_Widget
 {
-    // todo
+    public function call($source = null)
+    {
+        if (0 == func_num_args()) {
+            $this->source = $this->toArray();
+            return $this->invoker;
+        } else {
+            return Qwin::getInstance()->variable($source)->array();
+        }
+    }
 }
