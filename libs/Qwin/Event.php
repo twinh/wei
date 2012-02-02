@@ -30,6 +30,8 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-23 17:19:36
+ * @see         http://api.jquery.com/category/events/event-object/
+ * @todo        add default event shut_down error ...
  */
 class Qwin_Event extends Qwin_Widget
 {
@@ -107,7 +109,7 @@ class Qwin_Event extends Qwin_Widget
 
         foreach ($this->_events[$name] as $event) {
             if (false === $this->callback($event['callback'], $params)) {
-                return false;
+                break;
             }
         }
 
@@ -125,7 +127,7 @@ class Qwin_Event extends Qwin_Widget
     public function add($name, $callback, $priority = 10)
     {
         if (!$this->isCallable($callback)) {
-            $this->error('Parameter 2 should be a valid callback');
+            return $this->error('Parameter 2 should be a valid callback');
         }
 
         $name = strtolower($name);
@@ -168,5 +170,16 @@ class Qwin_Event extends Qwin_Widget
         }
 
         return $this;
+    }
+
+    /**
+     * Check if has event
+     *
+     * @param string $name
+     * @return bool
+     */
+    public function has($name)
+    {
+        return isset($this->_events[$name]);
     }
 }
