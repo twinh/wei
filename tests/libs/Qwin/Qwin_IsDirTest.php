@@ -1,5 +1,4 @@
 <?php
-
 require_once dirname(__FILE__) . '/../../../libs/Qwin.php';
 require_once dirname(__FILE__) . '/../../../libs/Qwin/IsDir.php';
 
@@ -55,8 +54,6 @@ class Qwin_IsDirTest extends PHPUnit_Framework_TestCase {
                 continue;
             }
             if (is_dir($path . DIRECTORY_SEPARATOR . $file)) {
-                var_dump($path . DIRECTORY_SEPARATOR . $file);
-                var_dump($file);
                 $object->source = $file;
                 $this->assertNotEquals(false, $object->isDir(), 'File in include path found');
                 break;
@@ -81,5 +78,3 @@ class Qwin_IsDirTest extends PHPUnit_Framework_TestCase {
     }
 
 }
-
-?>
