@@ -36,7 +36,6 @@ class Qwin_IsGet extends Qwin_Widget
 {
     public function call()
     {
-        return isset($_SERVER['REQUEST_METHOD']) ?
-            ('GET' == strtoupper($_SERVER['REQUEST_METHOD']) ? true : false) : false;
+        return isset($_SERVER['REQUEST_METHOD']) && 'GET' == strtoupper($_SERVER['REQUEST_METHOD']);
     }
 }
