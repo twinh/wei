@@ -1,5 +1,4 @@
 <?php
-
 require_once dirname(__FILE__) . '/../../../libs/Qwin.php';
 require_once dirname(__FILE__) . '/../../../libs/Qwin/Bind.php';
 
@@ -27,20 +26,33 @@ class Qwin_BindTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * variable for testCall method
+     *
+     * @var string
+     */
+    protected $_state;
+
+    /**
+     * @covers Qwin_Bind::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget->bind('test', array($this, 'setTextState'));
+
+        $widget->trigger('test', array(
+            'state' => 'testing',
+        ));
+
+        $this->assertEquals('testing', $this->_state);
     }
 
+    public function setTextState($event, $state)
+    {
+        $this->_state = $state;
+    }
 }
-
-?>
