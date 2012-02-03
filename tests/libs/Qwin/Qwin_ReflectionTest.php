@@ -1,5 +1,4 @@
 <?php
-
 require_once dirname(__FILE__) . '/../../../libs/Qwin.php';
 require_once dirname(__FILE__) . '/../../../libs/Qwin/Reflection.php';
 
@@ -27,31 +26,43 @@ class Qwin_ReflectionTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testExportValue().
+     * @covers Qwin_Reflection::exportValue
      */
     public function testExportValue() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $value = 'string';
+        $result = Qwin_Reflection::exportValue($value);
+        $this->assertEquals('\'string\'', $result);
+
+        $value2 = array('string');
+        $result2 = Qwin_Reflection::exportValue($value2);
+        $this->assertEquals('array(..)', $result2);
+
+        $value2 = array();
+        $result2 = Qwin_Reflection::exportValue($value2);
+        $this->assertEquals('array( )', $result2);
+
+        $value3 = true;
+        $result3 = Qwin_Reflection::exportValue($value3);
+        $this->assertEquals('true', $result3);
+
+        $value4 = null;
+        $result4 = Qwin_Reflection::exportValue($value4);
+        $this->assertEquals('null', $result4);
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_Reflection::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $this->assertInstanceOf('Qwin_Reflection_Class', $this->object->reflection());
     }
 
 }
-
-?>
