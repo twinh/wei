@@ -31,6 +31,7 @@ class Qwin_CallbackTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @covers Qwin_Callback::call
+     * @covers Qwin_IsCallable::call
      */
     public function testCall() {
         $widget = $this->object;
