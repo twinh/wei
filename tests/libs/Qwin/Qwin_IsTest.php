@@ -1,5 +1,4 @@
 <?php
-
 require_once dirname(__FILE__) . '/../../../libs/Qwin.php';
 require_once dirname(__FILE__) . '/../../../libs/Qwin/Is.php';
 
@@ -19,7 +18,7 @@ class Qwin_IsTest extends PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $this->object = new Qwin_Is;
+        $this->object = Qwin::getInstance()->is;
     }
 
     /**
@@ -27,20 +26,112 @@ class Qwin_IsTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_Is::call
+     * @covers Qwin_IsCallable::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget->source('email@email.com');
+
+        $this->assertTrue($widget->is('email'), 'one rule');
+
+        $this->assertFalse($widget->is('email, qq'), 'more rules');
+
+        $this->assertTrue($widget->is('length=5,20'), 'rule with params');
+
+        $this->assertFalse($widget->is(array(
+            'rules' => array(
+                'length' => array(5, 10),
+            ),
+            'break' => true,
+        )), 'array options');
+
+        $rule = Qwin::getInstance()->variable('email');
+        $this->assertTrue($widget->is($rule), 'widget as rule');
+
+        // success event
+        $widget->is('email', array(
+            'success' => array($this, 'validSuccess'),
+        ));
+        $this->assertEquals('success', $this->_validState, 'success event');
+
+        // failure event
+        $widget->is('length=10', array(
+            'failure' => array($this, 'validFailure')
+        ));
+        $this->assertEquals('failure', $this->_validState, 'failure event');
+
+        // empty value test
+        // note that widthout "required" rule, all empty value would pass valid
+        $emtpyWidget = Qwin::getInstance()->variable('');
+        $emtpyWidget->is('email', array(
+            'success' => array($this, 'validSuccess'),
+        ));
+        $this->assertEquals('success', $this->_validState, 'empty value test');
+
+        // validated event
+        $widget->source('email@email.com');
+        $widget->is('email', array(
+            'validated' => array($this, 'validated')
+        ));
+
+        // validated with required rule
+        $widget->is('required, email', array(
+            'validated' => array($this, 'requredRuleValidated')
+        ));
+
+        // invalid event
+        $widget->is('required, length=10, email', array(
+            'invalid' => array($this, 'invalid')
+        ));
+
+        // rule should not be empty
+        $this->setExpectedException('Qwin_Exception', 'Rule should not be empty.');
+
+        $widget->is('');
     }
 
-}
+    /**
+     * @convers Qwin_Is::getLastValidationResult
+     */
+    public function testGetLastValidationResult()
+    {
+        $widget = $this->object;
 
-?>
+        $widget->is('email');
+
+        $this->assertInstanceOf('Qwin_ValidationResult', $widget->getLastValidationResult());
+    }
+
+    protected $_validState;
+
+    public function validSuccess()
+    {
+        $this->_validState = 'success';
+    }
+
+    public function validFailure()
+    {
+        $this->_validState = 'failure';
+    }
+
+    public function validated()
+    {
+        $this->assertTrue(true, 'called validated method');
+    }
+
+    public function requredRuleValidated()
+    {
+        $this->assertTrue(true, 'requred rule validated');
+    }
+
+    public function invalid()
+    {
+        $this->assertTrue(true, 'called invalid method');
+    }
+}
