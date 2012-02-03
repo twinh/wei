@@ -27,20 +27,54 @@ class Qwin_CallbackTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_Callback::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $this->assertEquals('callback1', $widget->callback(array($this, 'callbackTest')), 'callback method test');
+
+        $this->assertEquals('callback2', $widget->callback('callbackTest2'), 'callback function test');
+
+        $this->assertEquals('callback3', $widget->callback(array(__CLASS__, 'callbackTest3')), 'callabck static method test');
+
+        $this->assertEquals(array('key' => 'value'), $widget->callback(array($this, 'callbackWithParams'), array(array('key' => 'value'))));
+
+        $this->assertEquals('callback4', $widget->callback("function(){
+            return 'callback4';
+        }"), 'string function for php < 5.3');
+
+        $this->setExpectedException('Qwin_Exception', 'Parameter 1 should be a valid callback');
+
+        $widget->callback(array('not', 'callabled', 'struct'));
     }
 
+    public function callbackTest()
+    {
+        return 'callback1';
+    }
+
+    public static function callbackTest3()
+    {
+        return 'callback3';
+    }
+
+    public function callbackWithParams($params)
+    {
+        return $params;
+    }
 }
 
-?>
+/**
+ * Function for callback test
+ *
+ * @return string
+ */
+function callbackTest2()
+{
+    return 'callback2';
+}
