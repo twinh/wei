@@ -1,5 +1,4 @@
 <?php
-
 require_once dirname(__FILE__) . '/../../../libs/Qwin.php';
 require_once dirname(__FILE__) . '/../../../libs/Qwin/Config.php';
 
@@ -27,20 +26,22 @@ class Qwin_ConfigTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_Config::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget->config('key', 'value');
+
+        $this->assertEquals('value', $widget->config('key'));
+
+        $widget->config('first/second', 'value2');
+
+        $this->assertEquals(array('second' => 'value2',), $widget->config('first'));
     }
 
 }
-
-?>
