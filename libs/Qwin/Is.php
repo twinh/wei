@@ -54,11 +54,12 @@ class Qwin_Is extends Qwin_Widget
         if (is_string($rule)) {
             $rules = explode(', ', $rule);
 
-            if (empty($rules)) {
-                return $this->exception('Rule should not be empty.');
-            }
-
             foreach ($rules as $rule) {
+                $rule = trim($rule);
+                if (empty($rule)) {
+                    return $this->exception('Rule should not be empty.');
+                }
+
                 if (false === strpos($rule, '=')) {
                     $options['rules'][$rule] = true;
                 } else {
@@ -108,38 +109,36 @@ class Qwin_Is extends Qwin_Widget
         // valid the other rules
         foreach ($rules as $rule => $params) {
             $widget = 'is' . ucfirst($rule);
-            if (is_callable(array($this, $widget))) {
-                if (false === $this->callback(array($this, $widget), (array)$params)) {
-                    // would be always false in the whole valid flow
-                    $result = false;
 
-                    $validationResult->addInvalidRule($rule);
+            // TODO check if rule is exists
+            if (false === $this->callback(array($this, $widget), (array)$params)) {
+                // would be always false in the whole valid flow
+                $result = false;
 
-                    // trigger invalid event
-                    if ($options['invalid']) {
-                        $this->callback($options['invalid'], array(
-                            $rule, $params, $value, $validationResult, $this,
+                $validationResult->addInvalidRule($rule);
+
+                // trigger invalid event
+                if ($options['invalid']) {
+                    $this->callback($options['invalid'], array(
+                        $rule, $params, $value, $validationResult, $this,
+                    ));
+                }
+
+                if ($options['break']) {
+                    if ($options['failure']) {
+                        $this->callback($options['failure'], array(
+                            $value, $validationResult, $this,
                         ));
                     }
-
-                    if ($options['break']) {
-                        if ($options['failure']) {
-                            $this->callback($options['failure'], array(
-                                $value, $validationResult, $this,
-                            ));
-                        }
-                        return false;
-                    }
-                } else {
-                    // trigger validated event
-                    if ($options['validated']) {
-                        $this->callback($options['validated'], array(
-                            $rule, $params, $value, $validationResult, $this,
-                        ));
-                    }
+                    return false;
                 }
             } else {
-                return $this->exception('Rule "%s" not found', $widget);
+                // trigger validated event
+                if ($options['validated']) {
+                    $this->callback($options['validated'], array(
+                        $rule, $params, $value, $validationResult, $this,
+                    ));
+                }
             }
         }
 
@@ -153,6 +152,11 @@ class Qwin_Is extends Qwin_Widget
         return $result;
     }
 
+    /**
+     * Get last validation result
+     *
+     * @return Qwin_ValidationResult
+     */
     public function getLastValidationResult()
     {
         return $this->_validationResult;
