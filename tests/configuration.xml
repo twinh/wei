@@ -7,6 +7,8 @@
 <filter>
     <blacklist>
         <directory suffix=".php">../libs/Qwin/views</directory>
+        <directory suffix=".php">../libs/Qwin/Reflection</directory>
+        <directory suffix=".php">../libs/Zend</directory>
         <file>*</file>
     </blacklist>
 </filter>
