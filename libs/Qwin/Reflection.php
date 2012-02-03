@@ -24,7 +24,7 @@
 
 /**
  * Reflection
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -33,6 +33,12 @@
  */
 class Qwin_Reflection extends Qwin_Widget
 {
+    /**
+     * Export variable for better output
+     *
+     * @param mixed $value
+     * @return string
+     */
     public static function exportValue($value)
     {
         if (is_array($value)) {
@@ -48,13 +54,13 @@ class Qwin_Reflection extends Qwin_Widget
         }
         return $value;
     }
-    
+
     /**
      * Get invoker's reflection
-     * 
+     *
      * @return Qwin_Reflection_Class
      */
-    public static function call()
+    public function call()
     {
         return new Qwin_Reflection_Class($this->invoker);
     }
