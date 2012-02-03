@@ -1,5 +1,4 @@
 <?php
-
 require_once dirname(__FILE__) . '/../../../libs/Qwin.php';
 require_once dirname(__FILE__) . '/../../../libs/Qwin/Callback.php';
 
@@ -36,13 +35,15 @@ class Qwin_CallbackTest extends PHPUnit_Framework_TestCase {
     public function testCall() {
         $widget = $this->object;
 
-        $this->assertEquals('callback1', $widget->callback(array($this, 'callbackTest')), 'callback method test');
+        $this->assertEquals('callback1', $widget->callback(array($this, 'callbackTest')), 'method callback test');
 
-        $this->assertEquals('callback2', $widget->callback('callbackTest2'), 'callback function test');
+        $this->assertEquals('callback2', $widget->callback('callbackTest2'), 'function callback test');
 
-        $this->assertEquals('callback3', $widget->callback(array(__CLASS__, 'callbackTest3')), 'callabck static method test');
+        $this->assertEquals('callback3', $widget->callback(array(__CLASS__, 'callbackTest3')), 'static method callabck test');
 
-        $this->assertEquals(array('key' => 'value'), $widget->callback(array($this, 'callbackWithParams'), array(array('key' => 'value'))));
+        $this->assertEquals(array(
+            'key' => 'value'
+         ), $widget->callback(array($this, 'callbackWithParams'), array(array('key' => 'value'))), 'callback with params');
 
         $this->assertEquals('callback4', $widget->callback("function(){
             return 'callback4';
