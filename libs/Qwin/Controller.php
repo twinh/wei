@@ -24,7 +24,7 @@
 
 /**
  * Controller
- * 
+ *
  * @package     Qwin
  * @subpackage  Application
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -37,16 +37,16 @@ class Qwin_Controller extends Qwin_Widget
     public function __construct($source = null)
     {
         parent::__construct($source);
-        
+
         $this->options = new Qwin_Controller_Option($this->options);
         $this->options->setController($this);
-        
+
         $this->init();
     }
-    
+
     /**
      * 根据模块获取控制器对象
-     * 
+     *
      * @param string $module 模块名称
      * @param bool $instance 是否实例化
      * @param mixed $param 参数
@@ -54,37 +54,49 @@ class Qwin_Controller extends Qwin_Widget
      */
     public function call($module = null, $instance = true, $param = null)
     {
-        !$module && $module = $this->module();
-
+        $module = ucfirst($module);
         // 检查模块控制器文件是否存在
         $found = false;
         foreach ($this->app->options['dirs'] as $dir) {
-            $file = $dir . $module->toPath() . '/Controller.php';
+            $file = $dir . $module . '/Controller.php';
             if (is_file($file)) {
                 $found = true;
                 break;
             }
         }
+
         if (!$found) {
-            $this->exception('Module "%s" not found.', $module);
+            $this->log('Module "' . $module . '" not found.');
+            return false;
         }
-        
+
         require_once $file;
-        $class = $module->toClass() . '_Controller';
+        $class = $module . '_Controller';
         if (!class_exists($class)) {
-            $this->exception('Controller class "%s" not found.', $class);
+            $this->log('Controller ' . $class . ' not found.');
+            return false;
         }
-        
+
         return $instance ? $this->qwin($class, $param) : $class;
     }
-    
+
     /**
-     * 执行行为
-     * 
-     * @param string $action 行为名称
-     * @return mixed 
+     * 初始化方法,于__construct方法之后调用
+     *
+     * @return Qwin_Controller 当前对象
      */
-    public function action($action)
+    public function init()
+    {
+        return $this;
+    }
+
+    /**
+     * Execute action
+     *
+     * @param mixed $action
+     * @return mixed
+     */
+    public function execute($action)
     {
         $action = (string)$action;
         if ($action) {
@@ -93,50 +105,9 @@ class Qwin_Controller extends Qwin_Widget
                 return call_user_func(array($this, $action2));
             }
         }
-        
-        $this->exception('Action "%s" not found in controller %s.', $action, get_class($this));
+
+        $this->log(sprintf('Action "%s" not found in controller "%s".', $action, get_class($this)));
+
+        return false;
     }
-    
-    /**
-     * 初始化方法,于__construct方法之后调用
-     * 
-     * @return Qwin_Controller 当前对象 
-     */
-    public function init()
-    {
-        return $this;
-    }
-
-    /**
-     * 是否有权限浏览该页面
-     *
-     * @return boolen
-     */
-    /*protected function _isAllowVisited()
-    {
-        $session = $this->getSession();
-        $member = $session->get('member');
-
-        // 未登陆则默认使用游客账号
-        if (null == $member) {
-            $member = Query_Widget::getByModule('member')
-                ->where('username = ?', 'guest')
-                ->fetchOne()
-                ->toArray();
-
-            // 设置登陆信息
-            $session
-                ->set('member',  $member)
-                //->set('permisson', $member['group']['permission'])
-                ->set('style', $member['theme'])
-                ->set('lang', $member['language']);
-        }
-
-        // TODO 修复权限管理
-//        if ('guest' == $member['username'] && $this->_module != 'com/member/auth') {
-//            $lang = Qwin::call('-lang');
-//            return $this->_View->alert($lang->t('MSG_PERMISSION_NOT_ENOUGH'));
-//        }
-        return true;
-    }*/
 }
