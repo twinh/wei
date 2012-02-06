@@ -54,20 +54,29 @@ class Qwin_WidgetTest extends PHPUnit_Framework_TestCase {
      * @covers Qwin_Widget::option
      */
     public function testOption() {
-         // clean all option
-        $this->object->option(array());
-        $this->assertEquals(array(), $this->object->option(), 'option is empty');
+        $widget = new _WidgetTest;
 
-        $this->object->option('key', 'value');
-        $this->assertEquals('value', $this->object->option('key'), 'get option "key"');
-
-        $this->object->option('key2', array('value'));
+        $widget->option('key2', array('value'));
         $this->assertEquals(array(
-            'key' => 'value',
+            'intValue' => 1,
+            'mixedValue' => null,
             'key2' => array('value'),
-        ), $this->object->option(), 'get all options');
+        ), $widget->option(), 'get all options');
 
-        $this->assertEquals(null, $this->object->option(new stdClass()));
+        $widget->option(array(
+            'key1' => 'value1',
+            'key2' => 'value2',
+        ));
+         $this->assertEquals('value1', $widget->option('key1'), 'set options be passed array and get option "key1"');
+
+
+        $widget->option('key', 'value');
+        $this->assertEquals('value', $widget->option('key'), 'get option "key"');
+
+        $widget->option('intValue', 100);
+        $this->assertEquals(100, $widget->option('intValue'), 'get value by getXxxOption method');
+
+        $this->assertEquals(null, $widget->option(new stdClass()));
 
     }
 
@@ -120,5 +129,40 @@ class Qwin_WidgetTest extends PHPUnit_Framework_TestCase {
         $get = $this->object->get;
 
         $this->assertEquals($get->call('name'), $get->__invoke('name'));
+    }
+}
+
+/**
+ * class for Qwin_Widget test
+ */
+class _WidgetTest extends Qwin_Widget
+{
+    /**
+     * how many times called getIntValueOption method
+     *
+     * @var int
+     */
+    protected $_count = 0;
+
+    public $options = array(
+        'intValue' => 1,
+        'mixedValue' => null,
+    );
+
+    public function setIntValueOption($value)
+    {
+        if (is_int($value)) {
+            $this->options['intValue'] = $value;
+            return $this;
+        }
+        throw new Qwin_Exception('Parameter 1 should be int');
+    }
+
+    public function getIntValueOption()
+    {
+        // called count
+        $this->_count++;
+
+        return $this->options['intValue'];
     }
 }
