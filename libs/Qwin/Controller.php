@@ -34,12 +34,9 @@
  */
 class Qwin_Controller extends Qwin_Widget
 {
-    public function __construct($source = null)
+    public function __construct($options = null)
     {
-        parent::__construct($source);
-
-        $this->options = new Qwin_Controller_Option($this->options);
-        $this->options->setController($this);
+        parent::__construct($options);
 
         $this->init();
     }
@@ -58,7 +55,7 @@ class Qwin_Controller extends Qwin_Widget
         // 检查模块控制器文件是否存在
         $found = false;
         foreach ($this->app->options['dirs'] as $dir) {
-            $file = $dir . $module . '/Controller.php';
+            $file = $dir . '/' . $module . '/Controller.php';
             if (is_file($file)) {
                 $found = true;
                 break;
@@ -109,5 +106,32 @@ class Qwin_Controller extends Qwin_Widget
         $this->log(sprintf('Action "%s" not found in controller "%s".', $action, get_class($this)));
 
         return false;
+    }
+
+    /**
+     * Set or get options
+     *
+     * @param mixed $name
+     * @param mixed $value
+     * @return mixed
+     */
+    public function option($name = null, $value = null)
+    {
+        // load options data from controller "options" dir
+        if (1 == func_num_args() && (is_string($name) || is_int($name))) {
+            if (!isset($this->options[$name])) {
+                foreach ($this->app->options['dirs'] as $dir) {
+                    $file = $dir . '/' . ucfirst($this->module()) . '/options/'  . $name . '.php';
+                    if (is_file($file)) {
+                        $this->options[$name] = require $file;
+                        break;
+                    }
+                }
+            }
+            // get option
+            return parent::option($name);
+        }
+        // other actions
+        return parent::option($name, $value);
     }
 }
