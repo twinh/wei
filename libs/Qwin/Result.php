@@ -24,12 +24,13 @@
 
 /**
  * Result
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2012-1-14 12:23:41
+ * @since       2012-01-14 12:23:41
+ * @todo        is it useful?
  */
 class Qwin_Result extends Qwin_Widget
 {
@@ -37,7 +38,7 @@ class Qwin_Result extends Qwin_Widget
         'code' => 'code',
         'message' => 'message',
     );
-    
+
     public function call($message, $code, array $append = array())
     {
         return Qwin::getInstance()->variable(array(
