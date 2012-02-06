@@ -24,7 +24,7 @@
 
 /**
  * Post
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -33,8 +33,55 @@
  */
 class Qwin_Post extends Qwin_Widget
 {
+    /**
+     * Post data
+     *
+     * @var array
+     */
+    protected $_data;
+
+    public function __construct($options = null)
+    {
+        $this->_data = $_POST;
+    }
+
     public function call($name = null, $default = null)
     {
-        return Qwin::getInstance()->variable(isset($_POST[$name]) ? $_POST[$name] : $default);
+        return Qwin::getInstance()->variable(isset($this->_data[$name]) ? $this->_data[$name] : $default);
+    }
+
+    /**
+     * Add post data
+     *
+     * @param string|array $name
+     * @param mixed $value
+     * @return Qwin_Post
+     */
+    public function add($name, $value = null)
+    {
+        if (is_array($name)) {
+            foreach ($name as $key => $value) {
+                $this->_data[$key] = $value;
+                $this->request->add($name, $value);
+            }
+        } else {
+            $this->_data[$name] = $value;
+            $this->request->add($name, $value);
+        }
+        return $this;
+    }
+
+    /**
+     * Remove data
+     *
+     * @param string $name
+     * @return Qwin_Post
+     */
+    public function remove($name)
+    {
+        if (isset($this->_data[$name])) {
+            unset($this->_data[$name]);
+        }
+        return $this;
     }
 }

@@ -31,6 +31,14 @@ class Qwin_PostTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Qwin_Post::__construct
+     */
+    public function test__construct()
+    {
+        $widget = new Qwin_Post;
+    }
+
+    /**
      * @covers Qwin_Post::call
      */
     public function testCall()
@@ -45,5 +53,42 @@ class Qwin_PostTest extends PHPUnit_Framework_TestCase
         $source = isset($_POST['name']) ? $_POST['name'] : $default;
 
         $this->assertEquals($name2->source, $default);
+    }
+
+    /**
+     * @covers Qwin_Post::add
+     */
+    public function testAdd()
+    {
+        $widget = $this->object;
+
+        $widget->add('key', 'value');
+
+        $this->assertEquals('value', $widget->post('key')->source(), 'string param');
+
+        $this->assertEquals('value', $widget->request('key')->source(), 'get from request widget');
+
+        $widget->add(array(
+            'key1' => 'value1',
+            'key2' => 'value2',
+        ));
+
+        $this->assertEquals('value2', $widget->post('key2')->source(), 'array param');
+    }
+
+    /**
+     * @covers Qwin_Post::remove
+     */
+    public function testRemove()
+    {
+        $widget = $this->object;
+
+        $widget->add('remove', 'just a moment');
+
+        $this->assertEquals('just a moment', $widget->post('remove')->source());
+
+        $widget->remove('remove');
+
+        $this->assertNull($widget->post('remove')->source());
     }
 }
