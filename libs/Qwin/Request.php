@@ -33,8 +33,60 @@
  */
 class Qwin_Request extends Qwin_Widget
 {
+    /**
+     * request data
+     *
+     * @var array
+     */
+    protected $_data;
+
+    public function __construct($options = null)
+    {
+        $this->_data = $_REQUEST;
+    }
+
+    /**
+     * Get request data as widget variable
+     *
+     * @param string $name
+     * @param mixed $default
+     * @return Qwin_Widget
+     */
     public function call($name = null, $default = null)
     {
-        return Qwin::getInstance()->variable(isset($_REQUEST[$name]) ? $_REQUEST[$name] : $default);
+        return Qwin::getInstance()->variable(isset($this->_data[$name]) ? $this->_data[$name] : $default);
+    }
+
+    /**
+     * Add request data
+     *
+     * @param string|array $name
+     * @param mixed $value
+     * @return Qwin_Reqeust
+     */
+    public function add($name, $value = null)
+    {
+        if (is_array($name)) {
+            foreach ($name as $key => $value) {
+                $this->_data[$key] = $value;
+            }
+        } else {
+            $this->_data[$name] = $value;
+        }
+        return $this;
+    }
+
+    /**
+     * Remove get data
+     *
+     * @param string $name
+     * @return Qwin_Request
+     */
+    public function remove($name)
+    {
+        if (isset($this->_data[$name])) {
+            unset($this->_data[$name]);
+        }
+        return $this;
     }
 }
