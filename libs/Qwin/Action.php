@@ -24,7 +24,7 @@
 
 /**
  * Action
- * 
+ *
  * @package     Qwin
  * @subpackage  Application
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -33,23 +33,38 @@
  */
 class Qwin_Action extends Qwin_Widget
 {
-    protected $_source;
-    
-    public function call()
+    protected $_name;
+
+    public $options = array(
+        'key' => 'action',
+        'default' => 'index',
+    );
+
+    public function __construct($options = null)
     {
-        if (!$this->_source && $this->source) {
-            $this->_source = $this->source;
+        parent::__construct($options);
+        $options = &$this->options;
+
+        $action = $this->request($options['key'])->toString();
+        $this->_name = $action ? $action : $options['default'];
+    }
+
+    /**
+     * Get action object or set action name
+     *
+     * @param string $name
+     * @return Qwin_Action
+     */
+    public function call($name = null)
+    {
+        if ($name) {
+            $this->_name = (string)$name;
         }
         return $this;
     }
-    
-    public function toString()
-    {
-        return $this->_source;
-    }
-    
+
     public function __toString()
     {
-        return $this->_source;
+        return $this->_name;
     }
 }

@@ -1,8 +1,8 @@
 <?php
 /**
- * Default
+ * Qwin Framework
  *
- * Copyright (c) 2008-2012 Twin Huang. All rights reserved.
+ * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,16 +20,24 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2010-08-04 10:58:17
  */
 
-class Util_Minify_Controller extends Qwin_Controller
+/**
+ * IsCallable
+ *
+ * @package     Qwin
+ * @subpackage  Widget
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @since       2010-08-04 10:58:17
+ */
+class Minify_Controller extends Qwin_Controller
 {
     public function indexAction()
     {
         // 提前初始化视图对象,因视图对象可能包含对session等的操作
         $this->view->setDisplayed();
-        
+
         ini_set('zlib.output_compression', '0');
 
         $options['maxAge'] = 1800;
@@ -55,15 +63,15 @@ class Util_Minify_Controller extends Qwin_Controller
         if ($this->config('log')) {
             Minify_Logger::setLogger(FirePHP::getInstance(true));
         }
-        
+
         // 获取文件
-        $name = $this->get('g');
+        $name = $this->get('g')->toString();
         $file = $this->minify->getCacheFile($name);
         if (!is_file($file)) {
-            //$this->log4php->info('minify file "' . $name . '" not found.');
-            exit;
+            $this->log('minify file "' . $name . '" not found.');
+            return;
         }
-        $options['minApp']['groups'][$name->__toString()] = require $file;
+        $options['minApp']['groups'][$name] = require $file;
 
         // serve!
         $result = Minify::serve('MinApp', $options);
