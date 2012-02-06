@@ -70,11 +70,7 @@ class Qwin_Widget implements Qwin_Widgetable
         if ('Qwin_Widget' == get_class($this)) {
             $this->source = $source;
         } else {
-            if (is_array($this->options)) {
-                $this->options = (array)$source + (array)$this->options;
-            } else {
-                $this->options = $source;
-            }
+            $this->option((array)$source);
         }
     }
 
@@ -92,17 +88,29 @@ class Qwin_Widget implements Qwin_Widgetable
     {
         // 设置所有选项
         if (is_array($name)) {
-            $name = $name + $this->options;
-            $this->options = &$name;
+            foreach ($name as $key => $value) {
+                $this->option($key, $value);
+            }
             return $this;
         }
 
         // 获取/设置某一个选项
         if (is_string($name) || is_int($name)) {
             if (2 == func_num_args()) {
-                return $this->options[$name] = func_get_arg(1);
+                $method = 'set' . ucfirst($name) . 'Option';
+                if (method_exists($this, $method)) {
+                    return $this->$method(func_get_arg(1));
+                } else {
+                    return $this->options[$name] = func_get_arg(1);
+                }
+            } else {
+                $method = 'get' . ucfirst($name) . 'Option';
+                if (method_exists($this, $method)) {
+                    return $this->$method();
+                } else {
+                    return isset($this->options[$name]) ? $this->options[$name] : null;
+                }
             }
-            return isset($this->options[$name]) ? $this->options[$name] : null;
         }
 
         // 获取所有选项
