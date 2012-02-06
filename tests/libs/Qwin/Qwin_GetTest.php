@@ -30,8 +30,15 @@ class Qwin_GetTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_Get::call
      * @covers Qwin_Get::__construct
+     */
+    public function test__construct()
+    {
+        $widget = new Qwin_Get;
+    }
+
+    /**
+     * @covers Qwin_Get::call
      */
     public function testCall() {
         $name = $this->object->call('name');

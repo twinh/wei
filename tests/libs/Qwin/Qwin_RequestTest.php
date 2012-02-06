@@ -31,6 +31,14 @@ class Qwin_RequestTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
+     * @covers Qwin_Request::__construct
+     */
+    public function test__construct()
+    {
+        $widget = new Qwin_Request;
+    }
+
+    /**
      * @covers Qwin_Request::call
      * @covers Qwin_Request::__construct
      */
