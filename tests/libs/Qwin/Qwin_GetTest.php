@@ -1,5 +1,4 @@
 <?php
-
 require_once dirname(__FILE__) . '/../../../libs/Qwin.php';
 require_once dirname(__FILE__) . '/../../../libs/Qwin/Get.php';
 
@@ -19,7 +18,7 @@ class Qwin_GetTest extends PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $this->object = new Qwin_Get;
+        $this->object = Qwin::getInstance()->get;
     }
 
     /**
@@ -27,32 +26,33 @@ class Qwin_GetTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
      * @covers Qwin_Get::call
+     * @covers Qwin_Get::__construct
      */
     public function testCall() {
         $name = $this->object->call('name');
         $source = isset($_GET['name']) ? $_GET['name'] : null;
-        
+
         $this->assertEquals($name->source, $source);
-        
+
         $default = 'default';
         $name2 = $this->object->call('name', $default);
         $source = isset($_GET['name']) ? $_GET['name'] : $default;
-        
+
         $this->assertEquals($name2->source, $default);
-        
+
         $name->source = 'this is a string';
         $name3 = $name->get(1);
-        
+
         $this->assertEquals('h', $name3->source);
-        
+
         $name4 = $name->get(0, 2);
         $this->assertEquals('thi', $name4->source);
-        
+
         $name->source = array(
             'value1',
             'value2',
@@ -60,16 +60,50 @@ class Qwin_GetTest extends PHPUnit_Framework_TestCase {
         );
         $name5 = $name->get(0, 1);
         $this->assertEquals(array('value1', 'value2'), $name5->source);
-        
-        
+
+
         $name6 = $name->get(array());
         $this->assertEquals($name, $name6);
-        
+
         $name7 = $name->get(1, 'not int');
-        
+
         $name8 = $name->get(new stdClass());
     }
 
-}
+    /**
+     * @covers Qwin_Get::add
+     */
+    public function testAdd()
+    {
+        $widget = $this->object;
 
-?>
+        $widget->add('key', 'value');
+
+        $this->assertEquals('value', $widget->get('key')->source(), 'string param');
+
+        $this->assertEquals('value', $widget->request('key')->source(), 'get from request widget');
+
+        $widget->add(array(
+            'key1' => 'value1',
+            'key2' => 'value2',
+        ));
+
+        $this->assertEquals('value2', $widget->get('key2')->source(), 'array param');
+    }
+
+    /**
+     * @covers Qwin_Get::remove
+     */
+    public function testRemove()
+    {
+        $widget = $this->object;
+
+        $widget->add('remove', 'just a moment');
+
+        $this->assertEquals('just a moment', $widget->get('remove')->source());
+
+        $widget->remove('remove');
+
+        $this->assertNull($widget->get('remove')->source());
+    }
+}
