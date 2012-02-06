@@ -19,7 +19,7 @@ class Qwin_RequestTest extends PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $this->object = new Qwin_Request;
+        $this->object = Qwin::getInstance()->request;
     }
 
     /**
@@ -32,6 +32,7 @@ class Qwin_RequestTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @covers Qwin_Request::call
+     * @covers Qwin_Request::__construct
      */
     public function testCall()
     {
@@ -45,5 +46,40 @@ class Qwin_RequestTest extends PHPUnit_Framework_TestCase {
         $source = isset($_REQUEST['name']) ? $_REQUEST['name'] : $default;
 
         $this->assertEquals($name2->source, $default);
+    }
+
+    /**
+     * @covers Qwin_Request::add
+     */
+    public function testAdd()
+    {
+        $widget = $this->object;
+
+        $widget->add('key', 'value');
+
+        $this->assertEquals('value', $widget->request('key')->source(), 'string param');
+
+        $widget->add(array(
+            'key1' => 'value1',
+            'key2' => 'value2',
+        ));
+
+        $this->assertEquals('value2', $widget->request('key2')->source(), 'array param');
+    }
+
+    /**
+     * @covers Qwin_Request::remove
+     */
+    public function testRemove()
+    {
+        $widget = $this->object;
+
+        $widget->add('remove', 'just a moment');
+
+        $this->assertEquals('just a moment', $widget->request('remove')->source());
+
+        $widget->remove('remove');
+
+        $this->assertNull($widget->request('remove')->source());
     }
 }
