@@ -63,7 +63,22 @@ class Qwin_Module extends Qwin_Widget
         return $this;
     }
 
+    /**
+     * Get module string
+     *
+     * @return string
+     */
     public function __toString()
+    {
+        return $this->_name;
+    }
+
+    /**
+     * Get module string
+     *
+     * @return string
+     */
+    public function toString()
     {
         return $this->_name;
     }
