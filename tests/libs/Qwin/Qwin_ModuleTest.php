@@ -1,5 +1,4 @@
 <?php
-
 require_once dirname(__FILE__) . '/../../../libs/Qwin.php';
 require_once dirname(__FILE__) . '/../../../libs/Qwin/Module.php';
 
@@ -19,7 +18,7 @@ class Qwin_ModuleTest extends PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $this->object = new Qwin_Module;
+        $this->object = Qwin::getInstance()->module;
     }
 
     /**
@@ -27,152 +26,68 @@ class Qwin_ModuleTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_Module::__construct
+     * @covers Qwin_Module::call
+     *
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget->request->add('module', 'test');
+
+        // instance new module object rather than get from widget
+        // because module widget may has been called
+        // $widget->module()->toString()
+        $module = new Qwin_Module;
+
+        $this->assertEquals('test', $module->toString(), 'get module');
+
+        $widget->request->remove('module');
+
+        // instance a new module object with default value
+        $module = new Qwin_Module(array(
+            'default' => 'article',
+        ));
+
+        $this->assertEquals('article', $module->toString(), 'get default value as module');
+
+        $module = $widget->module();
+
+        $this->assertInstanceOf('Qwin_Module', $module, 'get module widget');
+
+        $this->assertEquals('new module', $widget->module('new module')->toString(), 'set new module');
+
+        $widget->request->add('m', 'me');
+        $widget->request->add('module', 'not me');
+
+        $module = new Qwin_Module(array(
+            'key' => 'm',
+        ));
+
+        $this->assertEquals('me', $module->toString());
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement test__toString().
+     * @covers Qwin_Module::__toString
      */
-    public function test__toString() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+    public function test__toString()
+    {
+        $widget = $this->object;
+
+        $this->assertInternalType('string', $widget->__toString());
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testToId().
+     * @covers Qwin_Module::toString
      */
-    public function testToId() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
+    public function testToString()
+    {
+        $widget = $this->object;
 
-    /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testToPath().
-     */
-    public function testToPath() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertInternalType('string', $widget->toString());
     }
-
-    /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testToUrl().
-     */
-    public function testToUrl() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testToClass().
-     */
-    public function testToClass() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testToString().
-     */
-    public function testToString() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testToLang().
-     */
-    public function testToLang() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testGetParent().
-     */
-    public function testGetParent() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testOffsetExists().
-     */
-    public function testOffsetExists() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testOffsetSet().
-     */
-    public function testOffsetSet() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testOffsetUnset().
-     */
-    public function testOffsetUnset() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testOffsetGet().
-     */
-    public function testOffsetGet() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
 }
-
-?>
