@@ -30,6 +30,7 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2009-11-24 20:45:11
+ * @todo        remove timezone option and add to qwin class
  */
 class Qwin_App extends Qwin_Widget
 {
@@ -45,7 +46,7 @@ class Qwin_App extends Qwin_Widget
      *       timezone       timezone
      */
     public $options = array(
-        'dirs'          => null,
+        'dirs'          => array(),
         'module'        => 'index',
         'action'        => 'index',
         'timezone'      => 'Asia/Shanghai',
@@ -61,10 +62,11 @@ class Qwin_App extends Qwin_Widget
      */
     public function call(array $options = array())
     {
-        $this->marker('appStart');
+        $this->marker('appStartup');
 
         // 合并选项
-        $this->option(&$options);
+        $this->option($options);
+        $options = &$this->options;
 
         // 设置默认应用目录
         if (!is_array($options['dirs'])) {
@@ -81,21 +83,46 @@ class Qwin_App extends Qwin_Widget
         $this->trigger('appStartup');
 
         // 获取模块和行为对象
-        $options['module'] = $this->get('module', $options['module'])->module();
-        $options['action'] = $this->get('action', $options['action'])->action();
+        $options['module'] = $this->module();
+        $options['action'] = $this->action();
 
-        // 获取控制器并执行相应行为
-        $result = $this->controller()->action($options['action']);
+        $controller = $this->controller($options['module']);
+
+        if (!$controller || !method_exists($controller, $options['action'] . 'Action')) {
+            return $this->error('The page your reuqested not found.', 404);
+        }
+
+        //
+        $result = $controller->execute($options['action']);
 
         // 展示视图
         $this->view($result);
 
+        $this->marker('appTermination');
+
         // 触发应用结束事件
         $this->trigger('appTermination');
 
-        $this->marker('appTermination');
-
         // 返回当前对象
+        return $this;
+    }
+
+    public function execute($module, $action, $view = true)
+    {
+        $controller = $this->controller($module);
+        if (!$controller) {
+            return false;
+        }
+
+        $actionMethod = $action . 'Action';
+        if (!method_exists($controller, $actionMethod)) {
+            return false;
+        }
+
+        $result = $controller->execute($action);
+
+        $this->view->renderBy($module, $action);
+
         return $this;
     }
 }

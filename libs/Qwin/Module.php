@@ -24,258 +24,47 @@
 
 /**
  * Module
- * 
+ *
  * @package     Qwin
  * @subpackage  Application
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-03-22 15:36:41
- * @todo        对模块名称进行更全面的检查
  */
-class Qwin_Module extends Qwin_Widget implements ArrayAccess
+class Qwin_Module extends Qwin_Widget
 {
-    /**
-     * @var array           模块数据
-     *
-     *      -- source       模块标识源字符串
-     *
-     *      -- url          Url形式,即小写,横杆
-     *
-     *      -- path         路径形式,即首字母大写,斜杠
-     *
-     *      -- class        类名形式,即首字母大写,下划线
-     *
-     *      -- id           编号形式,即小写,横杠
-     */
-    protected $_data = array(
-        'url'       => null,
-        'path'      => null,
-        'class'     => null,
-        'id'        => null,
-        'lang'      => null,
+    protected $_name;
+
+    public $options = array(
+        'key' => 'module',
+        'default' => 'index',
     );
 
-    /**
-     * 模块数组数据
-     * @var array 
-     */
-    protected $_source = array();
-    
-    /**
-     * 模块标识
-     * @var string
-     */
-    protected $_string;
-    
-    /**
-     * 替换的标识
-     * 
-     * @var array
-     */
-    protected static $_replace = array(
-        '-' => '/',
-        '_' => '/',
-    );
-
-    /**
-     * 存放实例的数组
-     * @var array
-     */
-    public static $_intances = array();
-    
-    public function __construct($source = null)
+    public function __construct($options = null)
     {
-        //$this->_string = (string)$source;
-        $source = explode('/', $source);
-        foreach ($source as &$value) {
-            $value = explode('-', $value);
-        }
-        $this->_source = $source;
-        //$this->_source = preg_split('/([^A-Za-z0-9])/', $source);
+        parent::__construct($options);
+        $options = &$this->options;
+
+        $module = $this->request($options['key'])->toString();
+        $this->_name = $module ? $module : $options['default'];
     }
 
     /**
-     * 获取/初始化一个模块类
-     * 
-     * @param string $name 模块名称
-     * @return Qwin_Module 
+     * Get module object or set module name
+     *
+     * @param string $name
+     * @return Qwin_Module
      */
     public function call($name = null)
     {
-        // 空则返回第一个模块
-        if (!$name && !empty(self::$_intances)) {
-            return current(self::$_intances);
+        if ($name) {
+            $this->_name = (string)$name;
         }
-        
-        !$name && $name = $this->source;
-        if (isset(self::$_intances[$name])) {
-            return self::$_intances[$name];
-        }
-        return self::$_intances[$name] = new self($name);
+        return $this;
     }
-    
+
     public function __toString()
     {
-        return $this->toString();
-    }
-
-    /**
-     * 获取模块编号形式名称
-     *
-     * @return string
-     */
-    public function toId()
-    {
-        if (empty($this->_data['id'])) {
-            $sources = array();
-            foreach ($this->_source as $source) {
-                $sources[] = implode('', $source);
-            }
-            $this->_data['id'] = strtolower(implode('-', $sources));
-            //$this->_data['id'] = strtolower(implode('-', $this->_source));
-        }
-        return $this->_data['id'];
-    }
-
-    /**
-     * 获取模块路径形式名称
-     *
-     * @return string
-     */
-    public function toPath()
-    {
-        if (empty($this->_data['path'])) {
-            $sources = array();
-            foreach ($this->_source as $source) {
-                $sources[] = implode('', array_map('ucfirst', $source));
-            }
-            $this->_data['path'] = implode('/', $sources) . '/';
-            //$this->_data['path'] = implode('/', array_map('ucfirst', $this->_source)) . '/';
-        }
-        return $this->_data['path'];
-    }
-
-    /**
-     * 获取模块Url形式名称
-     *
-     * @return string
-     */
-    public function toUrl()
-    {
-        if (empty($this->_data['url'])) {
-            $sources = array();
-            foreach ($this->_source as $source) {
-                $sources[] = implode('-', $source);
-            }
-            $this->_data['url'] = strtolower(implode('/', $sources));
-            //$this->_data['url'] = strtolower(implode('/', $this->_source));
-        }
-        return $this->_data['url'];
-    }
-
-    /**
-     * 获取模块类名化名称
-     *
-     * @return string
-     */
-    public function toClass()
-    {
-        if (empty($this->_data['class'])) {
-            $sources = array();
-            foreach ($this->_source as $source) {
-                $sources[] = implode('', array_map('ucfirst', $source));
-            }
-            $this->_data['class'] = implode('_', $sources);
-            //$this->_data['class'] = implode('_', array_map('ucfirst', $this->_source));
-        }
-        return $this->_data['class'];
-    }
-
-    /**
-     * 获取模块字符串名称
-     * 
-     * @return string 
-     */
-    public function toString()
-    {
-        if (!$this->_string) {
-            $sources = array();
-            foreach ($this->_source as $source) {
-                $sources[] = implode('', array_map('ucfirst', $source));
-            }
-            $this->_string = implode(' ', $sources);
-        }
-        return $this->_string;
-    }
-    
-    public function toLang()
-    {
-        if (!$this->_data['lang']) {
-            end($this->_source);
-            $this->_data['lang'] = ucfirst(implode('', $this->_source[key($this->_source)]));
-            reset($this->_source);
-        }
-        return $this->_data['lang'];
-    }
-    
-    public function getParent()
-    {
-        if (1 == count($this->_source)) {
-            return false;
-        }
-        return $this->module(implode('-', $this->_source[0]));
-    }
-
-    /**
-     * 检查是否存在索引
-     *
-     * @param string $offset 索引
-     * @return bool
-     */
-    public function offsetExists($offset)
-    {
-        return array_key_exists($offset, $this->_data);
-    }
-
-    /**
-     * 为索引设置值
-     *
-     * @param string $offset 索引
-     * @param mixed $value 值
-     * @return mixed $value 值
-     */
-    public function offsetSet($offset, $value)
-    {
-        return $this->_data[$offset] = $value;
-    }
-
-    /**
-     * 删除一个索引
-     *
-     * @param string $offset 索引
-     */
-    public function offsetUnset($offset)
-    {
-        if (array_key_exists($offset, $this->_data)) {
-            unset($this->_data[$offset]);
-        }
-    }
-
-    /**
-     * 获取索引的值
-     *
-     * @param string $offset 索引
-     * @return mixed 值
-     */
-    public function offsetGet($offset)
-    {
-        $method = 'to' . $offset;
-        if (method_exists($this, $method)) {
-            return call_user_func(array($this, $method));
-        }
-        if (array_key_exists($offset, $this->_data)) {
-            return $this->_data[$offset];
-        }
-        return null;
+        return $this->_name;
     }
 }
