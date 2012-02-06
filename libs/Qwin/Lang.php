@@ -24,7 +24,7 @@
 
 /**
  * Lang
- * 
+ *
  * @package     Qwin
  * @subpackage  Application
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -55,18 +55,18 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
 
     /**
      * @var array           选项
-     * 
+     *
      *       name           默认语言名称
      */
     public $options = array(
         'name'       => 'zh-CN',
     );
-    
+
     //public $widget;
 
     /**
      * 初始化语言微件
-     * 
+     *
      * @param array $options 选项
      * @return Lang_Widget
      * @todo 简化
@@ -75,7 +75,7 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
     {
         parent::__construct($options);
         $options = &$this->options;
-        
+
         // 获取目录
         $this->options['dirs'] = &$this->app->options['dirs'];
 
@@ -96,7 +96,7 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
                 return $this->appendByModule($module);
             }
         }
-        
+
         // 会话配置
         $name = $session['lang'];
         foreach ($this->options['dirs'] as $dir) {
@@ -106,7 +106,7 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
                 return $this->appendByModule($module);
             }
         }
-        
+
         // 全局配置
         $name = $options['name'];
         foreach ($this->options['dirs'] as $dir) {
@@ -117,15 +117,15 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
                 return $this->appendByModule($module);
             }
         }
-        
+
         $this->exception('Language file "' . $file . '" for "' . $name . '" not found.');
     }
 
     /**
      * 附加文件数据
-     * 
+     *
      * @param type $file 文件路径
-     * @return Qwin_Lang 
+     * @return Qwin_Lang
      */
     protected function _appendFile($file)
     {
@@ -140,7 +140,7 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
      * 获取当前的语言名称
      *
      * @return string
-     */ 
+     */
     public function getName()
     {
         return $this->_name;
@@ -148,27 +148,25 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
 
     /**
      * 根据模块标识加载语言
-     * 
+     *
      * @param string|Qwin_Module $module 模块标识
      * @return false|Lang_Widget
      * @todo 增加参数:递归加载和语言名称
      */
     public function appendByModule($module)
     {
-        if (!$module instanceof Qwin_Module) {
-            $module = Qwin_Module::instance($module);
-        }
+        $module = ucfirst($module);
         foreach ($this->options['dirs'] as $dir) {
-            $file = $dir . $module->toPath() . '/langs/' . $this->_name . '.php';
+            $file = $dir . $module . '/langs/' . $this->_name . '.php';
             if (is_file($file)) {
                 return $this->_appendFile($file);
             }
         }
     }
-    
+
     /**
      * 加载微件语言
-     * 
+     *
      * @param Qwin_Widget|string $widget 微件对象或名称
      * @return false|Lang_Widget 语言文件不存在|加载成功
      */
@@ -207,7 +205,7 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
     {
         return isset($this->_data[$name]) ? $this->_data[$name] : $name;
     }
-    
+
     public function field($name = null)
     {
         $name = ucfirst(strtr($name, '_', ' '));

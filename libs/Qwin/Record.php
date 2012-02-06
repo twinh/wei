@@ -24,7 +24,7 @@
 
 /**
  * Query
- * 
+ *
  * @package     Qwin
  * @subpackage  Application
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -38,11 +38,11 @@ class Qwin_Record extends Doctrine_Record
      * @var bool
      */
     protected static $_connected = false;
-    
+
     public $invoker;
-    
+
     public $source;
-    
+
     public static $dbOptions = array(
         'type'      => 'mysql',
         'server'    => 'localhost',
@@ -54,7 +54,7 @@ class Qwin_Record extends Doctrine_Record
         'charset'   => 'utf8',
         'collate'   => 'utf8_general_ci',
     );
-    
+
     /**
      * @var array $_defaults        默认选项
      *
@@ -91,7 +91,7 @@ class Qwin_Record extends Doctrine_Record
         //'primary'       => false,
         //'fixed'         => false,
     );
-    
+
     protected $_relationDefaults = array(
         'module'    => null,
         'alias'     => null,
@@ -103,7 +103,7 @@ class Qwin_Record extends Doctrine_Record
         'fieldMap'  => array(), // ?是否仍需要
         'enabled'   => true,
     );
-    
+
     /**
      * 默认选项
      * @var array
@@ -122,17 +122,17 @@ class Qwin_Record extends Doctrine_Record
         'where'     => array(),
         'relations' => array(),
     );
-    
+
     public function __construct($table = null, $isNewEntry = false)
-    {        
+    {
         // 保证连接数据库链接上,否则出现异常
         self::connect((array)$table + self::$dbOptions);
-        
+
         $this->getRecordData();
-        
+
         parent::__construct($table, $isNewEntry);
     }
-    
+
     /**
      * 将数据格式化并加入
      *
@@ -156,21 +156,21 @@ class Qwin_Record extends Doctrine_Record
             //!isset($field['title']) && $field['title'] = 'FLD_' . strtoupper($name);
             $field = (array)$field + $this->_fieldDefaults;
         }
-        
+
         foreach ($data['relations'] as &$relation) {
             $relation += $this->_relationDefaults;
         }
-        
+
         $this->exchangeArray($data);
         return $this;
     }
-    
+
     /**
      * 获取模块记录
-     * 
+     *
      * @param string $name 记录名称
      * @param Qwin_Module $module 模块名称
-     * @return Qwin_Record 
+     * @return Qwin_Record
      */
     public function call($name = null, $module = null)
     {
@@ -178,10 +178,10 @@ class Qwin_Record extends Doctrine_Record
         if (!$module) {
             $module = $widget->module();
         }
-        $class = $module->toClass() . '_' . ucfirst($name) . 'Record';
+        $class = ucfirst($module) . '_' . ucfirst($name) . 'Record';
         return $widget->call($class);
     }
-    
+
     /**
      * 设置字段属性和关联关系
      *
@@ -217,10 +217,10 @@ class Qwin_Record extends Doctrine_Record
             );
         }*/
     }
-    
+
     /**
      * 获取记录配置
-     * 
+     *
      * @return array
      */
     public function getRecordData()
@@ -237,12 +237,12 @@ class Qwin_Record extends Doctrine_Record
     public static function connect(array $options = array())
     {
         if (!self::$_connected) {
-            
+
             // 通过Qwin_Query等外部类调用时,参数可能为空,可自行获取
             if (empty($options)) {
                $options = current(Qwin::getInstance()->config('Qwin_Record')) + self::$dbOptions;
             }
-            
+
             $manager = Doctrine_Manager::getInstance();
             $adapter = $options['type'] . '://'
                      . $options['username'] . ':'
@@ -264,11 +264,11 @@ class Qwin_Record extends Doctrine_Record
             self::$_connected = true;
         }
     }
-    
+
     /**
      * 覆盖父类方法,增加返回当前对象
-     * 
-     * @return Qwin_Record 
+     *
+     * @return Qwin_Record
      */
     public function fromArray(array $array, $deep = true)
     {
