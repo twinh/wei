@@ -1,5 +1,4 @@
 <?php
-
 require_once dirname(__FILE__) . '/../../../libs/Qwin.php';
 require_once dirname(__FILE__) . '/../../../libs/Qwin/Result.php';
 
@@ -27,20 +26,28 @@ class Qwin_ResultTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_Result::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $result = $widget->result('message', -1, array(
+            'data' => 'append data',
+        ));
+
+        $this->assertArrayHasKey('data', $result->source());
+
+        $this->assertCount(3, $result->source());
+
+        $this->assertEquals(array(
+            'code' => -1,
+            'message' => 'message',
+            'data' => 'append data',
+        ), $result->source());
     }
 
 }
-
-?>
