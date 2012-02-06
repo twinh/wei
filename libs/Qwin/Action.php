@@ -63,7 +63,22 @@ class Qwin_Action extends Qwin_Widget
         return $this;
     }
 
+    /**
+     * Get action string
+     *
+     * @return string
+     */
     public function __toString()
+    {
+        return $this->_name;
+    }
+
+    /**
+     * Get action string
+     *
+     * @return string
+     */
+    public function toString()
     {
         return $this->_name;
     }
