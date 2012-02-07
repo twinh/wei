@@ -27,7 +27,7 @@ $minify->add(array(
         </a>
     </div>
     <div class="qw-nav" id="qw-nav">
-        <a href="javascript:;" class="ui-state-default ui-corner-bl"><?php echo $lang['Welcome']?>, <span id="nav-username"></span>!</a>
+        <a href="javascript:;" class="ui-state-default ui-corner-bl"><?php echo $lang['Welcome']?>, <span id="nav-username">Guest</span>!</a>
         <a id="login" href="javascript:;" class="ui-state-default"><?php echo $lang['Login'] ?></a>
         <a id="logout" href="javascript:;" class="ui-state-default"><?php echo $lang['Logout'] ?></a>
     </div>

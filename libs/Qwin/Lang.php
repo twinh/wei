@@ -157,7 +157,7 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
     {
         $module = ucfirst($module);
         foreach ($this->options['dirs'] as $dir) {
-            $file = $dir . $module . '/langs/' . $this->_name . '.php';
+            $file = $dir . '/' . $module . '/langs/' . $this->_name . '.php';
             if (is_file($file)) {
                 return $this->_appendFile($file);
             }
