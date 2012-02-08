@@ -30,6 +30,8 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-04-02 09:29:07
+ * @todo        ajax, cli support
+ * @todo        throw exception when called
  */
 class Qwin_Error extends Qwin_Widget
 {
@@ -126,7 +128,7 @@ class Qwin_Error extends Qwin_Widget
             $code = $code ? $code . ': ' : '';
 
             // Call Stack
-            $stackInfo = sprintf('Raised by %s in %s on line %s', $class, $file, $line);
+            $stackInfo = sprintf('Threw by %s in %s on line %s', $class, $file, $line);
             $trace = htmlspecialchars($trace, ENT_QUOTES);
 
             // File Infomation
@@ -378,8 +380,9 @@ class Qwin_Error extends Qwin_Widget
         // Session Information
         $session = array();
 
-        // TODO
-        $this->session;
+        if (!@$this->session) {
+            return 'Unable to get sesion object, may be some errors occurred when called Qwin_Session::__construct';
+        }
 
         foreach ($_SESSION as $key => $value) {
             if (is_array($value)) {

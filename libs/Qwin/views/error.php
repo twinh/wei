@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><?php echo $message ?></title>
+<title><?php echo $code ?><?php echo $message ?></title>
 <style type="text/css">
 body, div, ul, ol, li, h1, h2, h3, h4, h5, h6, p, th, td, pre {
     margin: 0;
@@ -176,6 +176,10 @@ ol, ul, li {
                     ?>
                     <tr><td clospan="2"><em>empty</em></td></tr>
                     <?php
+                elseif (is_string($session)):
+                ?>
+                    <tr><td clospan="2"><em class="ui-state-error"><?php echo $session ?></em></td></tr>
+                <?php
                 else:
                     foreach ($session as $key => $value):
                         ?>
