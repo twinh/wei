@@ -31,6 +31,10 @@ class Qwin_ErrorTest extends PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
+    /**
+     * @covers Qwin_Session::start
+     * @covers Qwin_Session::__construct
+     */
     protected function setUp() {
         $q = Qwin::getInstance();
 
@@ -249,6 +253,7 @@ class Qwin_ErrorTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @covers Qwin_Error::getSession
+     * @covers Qwin_Session::start
      */
     public function testGetSession() {
         $widget = $this->object;
@@ -256,5 +261,12 @@ class Qwin_ErrorTest extends PHPUnit_Framework_TestCase {
         $session = $widget->getSession();
 
         $this->assertCount(count($_SESSION), $session);
+
+        $temp = $widget->session;
+        $widget->session = false;
+
+        $this->assertInternalType('string', $widget->getSession());
+
+        $widget->session = $temp;
     }
 }
