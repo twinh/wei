@@ -105,6 +105,7 @@ class Qwin_Session extends Qwin_ArrayWidget
      */
     public function setNamespaceOption($name)
     {
+        $this->options['namespace'] = $name;
         $this->_namespace = $name;
         return $this;
     }
@@ -118,7 +119,9 @@ class Qwin_Session extends Qwin_ArrayWidget
     {
         $file = $line = null;
         if (headers_sent($file, $line)) {
+            // @codeCoverageIgnoreStart
             return $this->error(sprintf('Unable to start session, output started at %s:%s', $file, $line));
+            // @codeCoverageIgnoreEnd
         }
 
         // session started, ignored
@@ -175,8 +178,14 @@ class Qwin_Session extends Qwin_ArrayWidget
      */
     public function clear($namespace = null)
     {
-        !$namespace && $namespace = $this->_namespace;
-        unset($_SESSION[$namespace]);
+        if ($namespace) {
+            $_SESSION[$namespace] = array();
+        } else {
+            $_SESSION[$this->_namespace] = array();
+
+            // clean up data for cli mode
+            $this->_data = array();
+        }
         return $this;
     }
 
@@ -190,6 +199,10 @@ class Qwin_Session extends Qwin_ArrayWidget
         if ($this->_started) {
             session_destroy();
         }
+
+        // clean up all data
+        $this->_data = array();
+
         return $this;
     }
 }
