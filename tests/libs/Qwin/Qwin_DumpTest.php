@@ -1,5 +1,4 @@
 <?php
-
 require_once dirname(__FILE__) . '/../../../libs/Qwin.php';
 require_once dirname(__FILE__) . '/../../../libs/Qwin/Dump.php';
 
@@ -19,7 +18,7 @@ class Qwin_DumpTest extends PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $this->object = new Qwin_Dump;
+        $this->object = Qwin::getInstance()->dump;
     }
 
     /**
@@ -27,20 +26,58 @@ class Qwin_DumpTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_Dump::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        // do not exit after variable dump
+        $widget->option('exit', false);
+
+        // test dump invoker, using fake invoker to avoid large infomation output
+        $tmp = $widget->invoker;
+        $widget->invoker = 'fake invoker';
+
+        ob_start();
+
+        $widget->dump();
+
+        $actual = ob_get_contents();
+        ob_end_clean();
+
+        ob_start();
+
+        var_dump($widget->invoker);
+
+        $expected = ob_get_contents();
+        ob_end_clean();
+
+        $this->assertEquals($expected, $actual);
+
+        // reset invoker
+        $widget->invoker = $tmp;
+
+        // test custome variable
+        $var = 'string';
+
+        ob_start();
+
+        $widget->dump($var);
+
+        $actual = ob_get_contents();
+        ob_end_clean();
+
+        ob_start();
+
+        var_dump($var);
+
+        $expected = ob_get_contents();
+        ob_end_clean();
+
+        $this->assertEquals($expected, $actual);
     }
-
 }
-
-?>
