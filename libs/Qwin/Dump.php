@@ -24,7 +24,7 @@
 
 /**
  * Dump
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -33,16 +33,29 @@
  */
 class Qwin_Dump extends Qwin_Widget
 {
-    public function call($value = null, $exit = true)
+    public $options = array(
+        'exit' => true,
+    );
+
+    /**
+     * Dumps information about a variable, by default, dump the object invoker
+     *
+     * @return Qwin_Dump
+     */
+    public function call()
     {
         $args = func_get_args();
         if (empty($args)) {
             var_dump($this->invoker);
-            exit;
+        } else {
+            call_user_func_array('var_dump', $args);
         }
-        var_dump($value);
-        if (true === $exit) {
-            exit;
+
+        if ($this->options['exit']) {
+            // @codeCoverageIgnoreStart
+            exit();
+            // @codeCoverageIgnoreEnd
         }
+        return $this;
     }
 }
