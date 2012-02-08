@@ -34,10 +34,14 @@ a {
     text-decoration: none;
     outline: 0;
 }
-/* keep font in same size  */
+/*
+保证字体大小一致
+宋体    \5B8B\4F53
+微软雅黑 \5FAE\8F6F\96C5\9ED1
+*/
 .ui-widget, .ui-widget-content {
     font-size: 12px;
-    font-family: Helvetica, Tahoma, Arial, "\5fae\8f6f\96c5\9ed1", "\5b8b\4f53", sans-serif;
+    font-family: Helvetica, Tahoma, Arial, \5FAE\8F6F\96C5\9ED1, \5B8B\4F53, sans-serif;
 }
 
 /* 常用样式
