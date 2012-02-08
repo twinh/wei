@@ -24,187 +24,172 @@
 
 /**
  * Session
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2010-04-18 11:50:10
  */
-class Qwin_Session extends Qwin_Widget implements ArrayAccess
+class Qwin_Session extends Qwin_ArrayWidget
 {
     /**
-     * 当前的命名空间
+     * Current namespace to store session data
+     *
      * @var string
      */
-    private $_namespace;
+    protected $_namespace;
 
     /**
-     * @var array           选项
+     * Whether session started
      *
-     *      -- namespace    默认命名空间
+     * @var string
+     */
+    protected $_started = false;
+
+    /**
+     * @var array           Options
      *
-     *      -- limiter      见session_cache_limiter
+     *      -- namespace    namespace to store session data
      *
-     *      -- expire       见expire
+     *      -- autoStart    whether auto start session when object construct
+     *
+     * @see http://php.net/manual/en/session.configuration.php
      */
     public $options = array(
-        'namespace' => 'default',
-        'limiter'   => 'private_no_expire, must-revalidate',
-        'expire'    => 86400,
+        'namespace'         => 'qwin',
+        'autoStart'         => true,
+        'cache_limiter'     => 'private_no_expire, must-revalidate',
+        'cookie_lifetime'   => 86400,
+        'cache_expire'      => 86400,
     );
 
-    public function __construct(array $options = null)
+    public function __construct($options = null)
     {
-        $this->options = (array)$options + $this->options;
-        if(!session_id()) {
-            session_cache_limiter($this->options['limiter']);
-            session_cache_expire($this->options['expire']);
-            session_start();
+        // merge options
+        $options = (array)$options + $this->options;
+        $this->options = &$options;
+
+        // init all options
+        $this->option($options);
+
+        if ($options['autoStart']) {
+            $this->start();
         }
-        // 命名空间对于每个项目都是唯一的
-        // TODO $_SERVER['SCRIPT_FILENAME']对于不同项目不能保证100%唯一,是否有更好的标识
-        if (!$this->options['namespace']) {
-            $this->options['namespace'] = md5(dirname($_SERVER['SCRIPT_FILENAME']));
-        }
-        $this->setNamespace($this->options['namespace']);
     }
 
     /**
-     * 设置一个命名空间
+     * Get or set options
      *
-     * @param string $namespace
-     */
-    public function setNamespace($namespace)
-    {
-        $this->_namespace = $namespace;
-    }
-
-    /**
-     * 在当前命名空间设置一个会话
-     * @param string $name
+     * @param mixed $name
      * @param mixed $value
-     * @return object
-     */
-    public function set($name, $value)
-    {
-        $_SESSION[$this->_namespace][$name] = $value;
-        return $this;
-    }
-
-    /**
-     * 获取当前命名空间的一个会话
-     * @param string $name
-     * @return mixed 会话的值
-     */
-    public function get($name)
-    {
-        return isset($_SESSION[$this->_namespace][$name]) ?
-               $_SESSION[$this->_namespace][$name] :
-               null;
-    }
-
-    /**
-     * 切换命名空间,如果不存在,则设置一个新的命名空间
-     * 
-     * @param string $namesapce
-     * @return object
-     */
-    public function changeNamespace($namesapce)
-    {
-        if (isset($_SESSION[$namesapce])) {
-            $this->_namespace = $namesapce;
-        } else {
-            $this->setNamespace($namespace);
-        }
-        return $this;
-    }
-
-    /**
-     * 销毁当前或指定命名空间
-     * @param string $namespace
-     */
-    public function destroy($namespace = null)
-    {
-        if (null != $namespace) {
-            unset($_SESSION[$namespace]);
-        } else {
-            unset($_SESSION[$this->_namespace]);
-        }
-        //session_destroy();
-    }
-
-    /**
-     * 获取一个会话值
-     *
-     * @param string $name 名称
      * @return mixed
      */
-    public function  __get($name) {
-        return $this->get($name);
+    public function option($name = null, $value = null)
+    {
+        if (2 == func_num_args() && (is_string($name) || is_int($name))) {
+            if ('name' == $name || 0 !== strpos($name, '_')) {
+                ini_set('session.' . $name, $value);
+            }
+            // set option
+            return parent::option($name, $value);
+        }
+        return parent::option($name);
     }
 
     /**
-     * 设置一个会话值
+     * Set current namespace
      *
-     * @param string $name 名称
-     * @param mixed $value 值
-     * @return Qwin_Session 当前对象
+     * @param string $name
+     * @return Qwin_Session
      */
-    public function  __set($name, $value) {
-        return $this->set($name, $value);
+    public function setNamespaceOption($name)
+    {
+        $this->_namespace = $name;
+        return $this;
     }
 
     /**
-     * 检查索引是否存在
+     * Start session
      *
-     * @param string $offset 索引
+     * @return Qwin_Session
+     */
+    public function start()
+    {
+        $file = $line = null;
+        if (headers_sent($file, $line)) {
+            return $this->error(sprintf('Unable to start session, output started at %s:%s', $file, $line));
+        }
+
+        // session started, ignored
+        if (!session_id()) {
+            session_start();
+            $this->_started = true;
+            if (!isset($_SESSION[$this->_namespace])) {
+                $_SESSION[$this->_namespace] = array();
+            }
+            $this->_data = &$_SESSION[$this->_namespace];
+        }
+
+        return $this;
+    }
+
+    /**
+     * Whether session started
+     *
      * @return bool
      */
-    public function offsetExists($offset)
+    public function isStarted()
     {
-        return isset($_SESSION[$this->_namespace][$offset]);
+        return $this->_started;
     }
 
     /**
-     * 获取索引的数据
+     * Set a session value in current namespace
      *
-     * @param string $offset 索引
+     * @param string $offset
+     * @param mixed $value
+     * @return Qwin_Session
+     */
+    public function set($offset, $value)
+    {
+        return $this->offsetSet($offset, $value);
+    }
+
+    /**
+     * Get a session from current namespace
+     *
+     * @param string $name
      * @return mixed
      */
-    public function offsetGet($offset)
+    public function get($offset)
     {
-        return $this->get($offset);
+        return $this->offsetGet($offset);
     }
 
     /**
-     * 设置索引的值
+     * Clear session in $namespace or current namespace
      *
-     * @param string $offset 索引
-     * @param mixed $value 值
+     * @param string $namespace
+     * @return Qwin_Session
      */
-    public function offsetSet($offset, $value)
+    public function clear($namespace = null)
     {
-        return $this->set($offset, $value);
+        !$namespace && $namespace = $this->_namespace;
+        unset($_SESSION[$namespace]);
+        return $this;
     }
 
     /**
-     * 销毁一个索引
+     * Destroy session
      *
-     * @param string $offset 索引的名称
+     * @return Qwin_Session
      */
-    public function offsetUnset($offset)
+    public function destroy()
     {
-        unset($_SESSION[$this->_namespace][$offset]);
-    }
-    
-    /**
-     * 删除由于微件注入的session
-     * 
-     * @todo session不存为属性,改为_data
-     */
-    public function __destruct()
-    {
-        $this->offsetUnset('invoker');
+        if ($this->_started) {
+            session_destroy();
+        }
+        return $this;
     }
 }
