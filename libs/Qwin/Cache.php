@@ -30,51 +30,67 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-23 13:50:07
- * @todo        优化
+ * @todo        rename as file or fileCache
  */
 class Qwin_Cache extends Qwin_Widget
 {
     /**
-     * 选项
-     * @var array
-     *       dir    string  缓存存储路径
+     * @var array Options
+     *
+     *       dir    string  Cache dir
      */
     public $options = array(
         'dir'       => './cache',
     );
 
-    public function __construct($source = null)
+    public function __construct($options = null)
     {
-        parent::__construct($source);
-        // TODO r
-        if (!is_dir($this->options['dir'])) {
-            mkdir($this->options['dir']);
-        }
+        $options = (array)$options + $this->options;
+        $this->option($options);
     }
 
     /**
-     * 设置或获取一项缓存
+     * Set cache dir
      *
-     * @param string $key 名称
-     * @return mixed
+     * @param string $dir
+     * @return Qwin_Cache
      */
-    public function call($key)
+    public function setDirOption($dir)
     {
-        $args = func_get_args();
+        if (!is_dir($dir)) {
+            $mask = umask(0);
+            if (!mkdir($dir, 0777, true)) {
+                umask($mask);
+                $this->error('Failed to creat directory ' . $dir);
+            }
+            umask($mask);
+        }
+        return $this;
+    }
 
-        if (2 == count($args)) {
-            return $this->set($key, $args[1]);
-        } else {
+    /**
+     * Get or set cache
+     *
+     * @param string $key the name of cache
+     * @param mixed $value
+     * @param int $expire expire time for set cache
+     * @return Qwin_Cache
+     */
+    public function call($key, $value = null, $expire = 0)
+    {
+        if (1 == func_num_args()) {
             return $this->get($key);
+        } else {
+            return $this->set($key, $value, $expire);
         }
     }
 
     /**
-     * 设置缓存,如果缓存已经存在且未过期,返回失败
+     * Add cache, if cache is exists, return false
      *
-     * @param string $key 名称
-     * @param mixed $value 值
-     * @param int $expire 过期时间
+     * @param string $key the key of cache
+     * @param mixed $value the value of cache
+     * @param int $expire expire time
      * @return bool
      */
     public function add($key, $value, $expire = 0)
@@ -86,33 +102,32 @@ class Qwin_Cache extends Qwin_Widget
     }
 
     /**
-     * 获取缓存
+     * Get cache
      *
-     * @param string $key 名称
-     * @param mixed $default 默认值
-     * @return mixed
+     * @param string $key the key of cache
+     * @return mixed|false
      */
-    public function get($key, $default = null)
+    public function get($key)
     {
         $file = $this->getFile($key);
         if (!is_file($file)) {
-            return $default;
+            return false;
         }
 
         $content = @unserialize(file_get_contents($file));
         if (!$content || !is_array($content) || filemtime($file) < (time() - $content[0])) {
-            return $default;
+            return false;
         }
 
         return $content[1];
     }
 
     /**
-     * 设置缓存
+     * Set cache
      *
-     * @param string $key 名称
-     * @param value $value 值
-     * @param int $expire 过期时间,0为不过期
+     * @param string $key the key of cache
+     * @param value $value the value of cache
+     * @param int $expire expire time, 0 means never expired
      * @return bool
      */
     public function set($key, $value, $expire = 0)
@@ -129,11 +144,11 @@ class Qwin_Cache extends Qwin_Widget
     }
 
     /**
-     * 替换缓存
+     * Replace cache, if cache not exists, return false
      *
-     * @param string $key 键名
-     * @param mixed $value 值
-     * @param int $expire 过期时间
+     * @param string $key the key of cache
+     * @param mixed $value the value of cache
+     * @param int $expire expire time
      * @return bool
      */
     public function replace($key, $value, $expire = 0)
@@ -145,7 +160,7 @@ class Qwin_Cache extends Qwin_Widget
     }
 
     /**
-     * 删除缓存
+     * Remove cache by key
      *
      * @param string $key
      * @return bool
@@ -162,7 +177,7 @@ class Qwin_Cache extends Qwin_Widget
     }
 
     /**
-     * 检查缓存是否过期
+     * Check if cache file expired
      *
      * @param string $key 名称
      * @return bool
@@ -173,13 +188,47 @@ class Qwin_Cache extends Qwin_Widget
     }
 
     /**
-     * 根据键名获取文件名称
+     * Get cache file by cache key
      *
-     * @param type $key
-     * @return type
+     * @param string $key
+     * @return string
      */
     public function getFile($key)
     {
-        return $this->options['dir'] . '/' . $key;
+        return $this->options['dir'] . '/' . $key . '.tmp';
+    }
+
+    /**
+     * Removes ALL directories and files in cache directory
+     *
+     * @return Qwin_Cache
+     */
+    public function clean()
+    {
+        $this->_clean($this->options['dir']);
+        return $this;
+    }
+
+    /**
+     * Removes ALL directories and files in directory
+     *
+     * @param string $dir
+     */
+    protected function _clean($dir)
+    {
+        if (is_dir($dir)) {
+            $files = scandir($dir);
+            foreach ($files as $file) {
+                if ('.' != $file && '..' != $file) {
+                    $file = $dir . DIRECTORY_SEPARATOR .  $file;
+                    if (is_dir($file)) {
+                        $this->_clean($file);
+                    } else {
+                        unlink($file);
+                    }
+                }
+            }
+            rmdir($dir);
+        }
     }
 }
