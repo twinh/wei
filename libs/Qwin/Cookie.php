@@ -58,14 +58,12 @@ class Qwin_Cookie extends Qwin_ArrayWidget
      * @param string $key the name of cookie
      * @return mixed
      */
-    public function call($key)
+    public function call($key, $value = null, array $options = array())
     {
-        $args = func_get_args();
-
-        if (2 == count($args)) {
-            return $this->set($key, $args[1]);
-        } else {
+        if (1 == func_num_args()) {
             return $this->get($key);
+        } else {
+            return $this->set($key, $value, $options);
         }
     }
 
@@ -118,5 +116,16 @@ class Qwin_Cookie extends Qwin_ArrayWidget
             setcookie($key, null, -1);
         }
         return $this;
+    }
+
+    /**
+     * Remove cookie
+     *
+     * @param string $key the name of cookie
+     * @return Qwin_Cookie
+     */
+    public function offsetUnset($key)
+    {
+        return $this->remove($key);
     }
 }

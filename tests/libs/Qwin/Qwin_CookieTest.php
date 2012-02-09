@@ -65,6 +65,7 @@ class Qwin_CookieTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @covers Qwin_Cookie::remove
+     * @covers Qwin_Cookie::offsetUnset
      */
     public function testRemove() {
         $widget = $this->object;
@@ -73,7 +74,7 @@ class Qwin_CookieTest extends PHPUnit_Framework_TestCase {
 
         $this->assertEquals(__METHOD__, $widget->get('test'));
 
-        $widget->remove('test');
+        $widget->offsetUnset('test');
 
         $this->assertEquals(null, $widget->get('test'));
     }
