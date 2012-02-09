@@ -56,7 +56,9 @@ class Qwin_Cookie extends Qwin_ArrayWidget
      * Get or set cookie
      *
      * @param string $key the name of cookie
-     * @return mixed
+     * @param mixed $value the value of cookie
+     * @param array $options options for set cookie
+     * @return Qwin_Cookie
      */
     public function call($key, $value = null, array $options = array())
     {
