@@ -1,7 +1,6 @@
 <?php
-
+ob_start();
 require_once dirname(__FILE__) . '/../../../libs/Qwin.php';
-require_once dirname(__FILE__) . '/../../../libs/Qwin/Cookie.php';
 
 /**
  * Test class for Qwin_Cookie.
@@ -17,9 +16,10 @@ class Qwin_CookieTest extends PHPUnit_Framework_TestCase {
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     * @covers Qwin_Cookie::__construct
      */
     protected function setUp() {
-        $this->object = new Qwin_Cookie;
+        $this->object = Qwin::getInstance()->cookie;
     }
 
     /**
@@ -27,53 +27,54 @@ class Qwin_CookieTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_Cookie::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget->cookie('test', __METHOD__);
+
+        $this->assertEquals(__METHOD__, $widget->cookie('test'));
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testGet().
+     * @covers Qwin_Cookie::get
      */
     public function testGet() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget->set('test', __METHOD__);
+
+        $this->assertEquals(__METHOD__, $widget->get('test'));
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testSet().
+     * @covers Qwin_Cookie::set
      */
     public function testSet() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget->set('test', __METHOD__, array('expire' => -1));
+
+        $this->assertEquals(null, $widget->get('test'), 'test expired cookie');
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testRemove().
+     * @covers Qwin_Cookie::remove
      */
     public function testRemove() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget->set('test', __METHOD__);
+
+        $this->assertEquals(__METHOD__, $widget->get('test'));
+
+        $widget->remove('test');
+
+        $this->assertEquals(null, $widget->get('test'));
     }
-
 }
-
-?>

@@ -24,62 +24,92 @@
 
 /**
  * Cookie
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-02 00:45:14
  */
-class Qwin_Cookie extends Qwin_Widget
+class Qwin_Cookie extends Qwin_ArrayWidget
 {
     /**
-     * 设置或获取Cookie
-     * 
-     * @param string $key 名称
-     * @return mixed 
+     * @var array Options
+     * @see http://php.net/manual/en/function.setcookie.php
+     */
+    public $options = array(
+        'expire' => 86400,
+        'path' => '/',
+        'domain' => null,
+        'secure' => false,
+        'httpOnly' => false,
+        'raw' => false,
+    );
+
+    public function __construct($option = null)
+    {
+        parent::__construct($option);
+        $this->_data = &$_COOKIE;
+    }
+
+    /**
+     * Get or set cookie
+     *
+     * @param string $key the name of cookie
+     * @return mixed
      */
     public function call($key)
     {
         $args = func_get_args();
-        
+
         if (2 == count($args)) {
             return $this->set($key, $args[1]);
         } else {
             return $this->get($key);
         }
     }
-    
+
     /**
-     * 获取Cookie
-     * 
-     * @param string $key 名称
-     * @param mixed $default 默认值
+     * Get cookie
+     *
+     * @param string $key
+     * @param mixed $default default value
      * @return mixed
      */
     public function get($key, $default = null)
     {
         return isset($_COOKIE[$key]) ? @unserialize($_COOKIE[$key]) : $default;
     }
-    
+
     /**
-     * 设置Cookie
-     * 
-     * @param string $key 名称
-     * @param mixed $value 值
-     * @param int $expire 过期时间
-     * @todo 更多选项
+     * Set cookie
+     *
+     * @param string $key the name of cookie
+     * @param mixed $value the value of cookie
+     * @param array $options
      */
-    public function set($key, $value, $expire = 0)
+    public function set($key, $value, array $options = array())
     {
         $_COOKIE[$key] = serialize($value);
-        setcookie($key, $_COOKIE[$key], $expire);
+
+        $o = $options + $this->options;
+
+        $fn = $o['raw'] ? 'setrawcookie' : 'setcookie';
+        call_user_func_array($fn, array(
+            $key, $_COOKIE[$key], time() + $o['expire'], $o['path'], $o['domain'], $o['secure'], $o['httpOnly']
+        ));
+
+        if (0 >= $o['expire']) {
+            unset($_COOKIE[$key]);
+        }
+
+        return $this;
     }
-    
+
     /**
-     * 移除Cookie
-     * 
-     * @param string $key 名称 
+     * Remove cookie
+     *
+     * @param string $key the name of cookie
      */
     public function remove($key)
     {
@@ -87,5 +117,6 @@ class Qwin_Cookie extends Qwin_Widget
             unset($_COOKIE[$key]);
             setcookie($key, null, -1);
         }
+        return $this;
     }
 }
