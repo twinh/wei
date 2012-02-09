@@ -1,7 +1,6 @@
 <?php
-
+ob_start();
 require_once dirname(__FILE__) . '/../../../libs/Qwin.php';
-require_once dirname(__FILE__) . '/../../../libs/Qwin/Cache.php';
 
 /**
  * Test class for Qwin_Cache.
@@ -17,9 +16,10 @@ class Qwin_CacheTest extends PHPUnit_Framework_TestCase {
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     * @covers Qwin_Cache::__construct
      */
     protected function setUp() {
-        $this->object = new Qwin_Cache;
+        $this->object = Qwin::getInstance()->cache;
     }
 
     /**
@@ -27,86 +27,180 @@ class Qwin_CacheTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
+    }
+
+    public static function tearDownAfterClass()
+    {
+        Qwin::getInstance()->cache->clean();
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testCall().
+     * @covers Qwin_Cache::setDirOption
+     */
+    public function testGetDirOption()
+    {
+        $widget = $this->object;
+
+        $newDir = $widget->option('dir') . DIRECTORY_SEPARATOR . 'newDir';
+
+        $widget->option('dir', $newDir);
+
+        $this->assertFileExists($newDir);
+
+        /*ob_start();
+
+        $widget->error->option(array(
+            'exit' => false,
+            'error' => false,
+        ));
+
+        $this->setExpectedException('ErrorException');
+
+        // how about linux ?
+        $widget->setDirOption('./cache/|');
+
+        $output = ob_get_contents();
+        $output && ob_end_clean();
+
+        $this->assertContains('Failed to creat directory: ', $output);*/
+    }
+
+    /**
+     * @covers Qwin_Cache::call
      */
     public function testCall() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget->cache('test', __METHOD__);
+
+        $this->assertEquals(__METHOD__, $widget->cache('test'));
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testAdd().
+     * @covers Qwin_Cache::add
      */
     public function testAdd() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget->remove('test');
+
+        $widget->add('test', __METHOD__);
+
+        $this->assertEquals(__METHOD__, $widget->get('test'));
+
+        $this->assertFalse($widget->add('test', 'the other test'), 'cache "test" is exits');
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testGet().
+     * @covers Qwin_Cache::get
      */
     public function testGet() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget->set('test', __METHOD__);
+
+        $this->assertEquals(__METHOD__, $widget->get('test'), 'get known cache');
+
+        $widget->remove('test');
+
+        $this->assertFalse($widget->get('test'), 'cache has been removed');
+
+        $widget->set('test', __METHOD__, -1);
+
+        $this->assertFalse($widget->get('test'), 'cache is expired');
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testSet().
+     * @covers Qwin_Cache::set
      */
     public function testSet() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget->set('test', __METHOD__);
+
+        $this->assertEquals(__METHOD__, $widget->get('test'));
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testRemove().
+     * @covers Qwin_Cache::replace
+     */
+    public function testReplace() {
+        $widget = $this->object;
+
+        $widget->set('test', __METHOD__);
+
+        $widget->replace('test', __CLASS__);
+
+        $this->assertEquals(__CLASS__, $widget->get('test'), 'cache replaced');
+
+        $widget->remove('test');
+
+        $widget->replace('test', __CLASS__);
+
+        $this->assertFalse($widget->get('test'), 'cache not found');
+    }
+
+    /**
+     * @covers Qwin_Cache::remove
      */
     public function testRemove() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget->set('test', __METHOD__);
+
+        $widget->remove('test');
+
+        $this->assertEquals(null, $widget->get('test'));
+
+        $this->assertFalse($widget->remove('test'), 'cache not found');
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testIsExpired().
+     * @covers Qwin_Cache::isExpired
      */
     public function testIsExpired() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        // set expired after 1 second
+        $widget->set('test', __METHOD__, 1);
+
+        sleep(2);
+
+        $this->assertTrue($widget->isExpired('test'));
+
+        // never expired
+        $widget->set('test', __METHOD__);
+
+        $this->assertFalse($widget->isExpired('test'));
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testGetFile().
+     * @covers Qwin_Cache::getFile
      */
     public function testGetFile() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget->set('test', __METHOD__);
+
+        $file = $widget->getFile('test');
+
+        $this->assertFileExists($file);
     }
 
-}
+    /**
+     * @covers Qwin_Cache::clean
+     * @covers Qwin_Cache::_clean
+     */
+    public function testClean()
+    {
+        $widget = $this->object;
 
-?>
+        $widget->clean();
+
+        $this->assertFileNotExists($widget->option('dir'), 'directory not found');
+
+        // rebuild directory
+        $widget->setDirOption($widget->option('dir'));
+    }
+}
