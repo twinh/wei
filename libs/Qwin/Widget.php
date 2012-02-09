@@ -53,14 +53,14 @@ class Qwin_Widget implements Qwin_Widgetable
     public $invoker;
 
     /**
-     * 选项
+     * options
      *
      * @var array
      */
     public $options = array();
 
     /**
-     * 初始化微件
+     * init widget
      *
      * @param mixed $source 对象的值
      * @return Qwin_Widget 当前对象
@@ -75,50 +75,52 @@ class Qwin_Widget implements Qwin_Widgetable
     }
 
     /**
-     * 获取/设置选项
+     * Get or set options
      *
-     * @param mixed $name 选项名称
+     * @param mixed $name option name or options array
+     * @param mixed $value
      * @return mixed
-     * @example $widget->option('name');            // 获取name选项
-     *          $widget->option('name', 'value');   // 设置name选项的值为value
-     *          $widget->option();                  // 获取所有选项
-     *          $widget->option(array());           // 设置所有选项
+     * @example $widget->option('name');            // get "name" option's value
+     *          $widget->option('name', 'value');   // set "name" to "value"
+     *          $widget->option();                  // get all options
+     *          $widget->option(array());           // set options
      */
-    public function option($name = null)
+    public function option($name = null, $value = null)
     {
-        // 设置所有选项
+        // set options
         if (is_array($name)) {
-            foreach ($name as $key => $value) {
-                $this->option($key, $value);
+            foreach ($name as $k => $v) {
+                $this->option($k, $v);
             }
             return $this;
         }
 
-        // 获取/设置某一个选项
         if (is_string($name) || is_int($name)) {
-            if (2 == func_num_args()) {
-                $method = 'set' . ucfirst($name) . 'Option';
-                if (method_exists($this, $method)) {
-                    return $this->$method(func_get_arg(1));
-                } else {
-                    return $this->options[$name] = func_get_arg(1);
-                }
-            } else {
+            // get option
+            if (1 == func_num_args()) {
                 $method = 'get' . ucfirst($name) . 'Option';
                 if (method_exists($this, $method)) {
                     return $this->$method();
                 } else {
                     return isset($this->options[$name]) ? $this->options[$name] : null;
                 }
+            // set option
+            } else {
+                $method = 'set' . ucfirst($name) . 'Option';
+                if (method_exists($this, $method)) {
+                    return $this->$method($value);
+                } else {
+                    return $this->options[$name] = $value;
+                }
             }
         }
 
-        // 获取所有选项
-        if (null === $name ) {
+        // get all options
+        if (null === $name) {
             return $this->options;
         }
 
-        // 不匹配任何操作
+        // not match any actions
         return null;
     }
 
