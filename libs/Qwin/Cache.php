@@ -59,9 +59,12 @@ class Qwin_Cache extends Qwin_Widget
     {
         if (!is_dir($dir)) {
             $mask = umask(0);
-            if (!mkdir($dir, 0777, true)) {
+            if (!@mkdir($dir, 0777, true)) {
+                // how to test it ?
+                // @codeCoverageIgnoreStart
                 umask($mask);
-                $this->error('Failed to creat directory ' . $dir);
+                return $this->error('Failed to creat directory: ' . $dir );
+                // @codeCoverageIgnoreEnd
             }
             umask($mask);
         }
