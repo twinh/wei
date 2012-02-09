@@ -115,7 +115,7 @@ class Qwin_Cache extends Qwin_Widget
         }
 
         $content = @unserialize(file_get_contents($file));
-        if (!$content || !is_array($content) || filemtime($file) < (time() - $content[0])) {
+        if (!$content || !is_array($content) || time() > $content[0]) {
             return false;
         }
 
@@ -134,8 +134,11 @@ class Qwin_Cache extends Qwin_Widget
     {
         $file = $this->getFile($key);
 
+        // 2147483647 = pow(2, 31) - 1
+        // avoid year 2038 problem in 32-bit system when date coverts or compares
+        // @see http://en.wikipedia.org/wiki/Year_2038_problem
         $content = serialize(array(
-            0 => time(),
+            0 => $expire ? time() + $expire : 2147483647,
             1 => $value,
             2 => $key,
         ));
@@ -184,7 +187,7 @@ class Qwin_Cache extends Qwin_Widget
      */
     public function isExpired($key)
     {
-        return $this->get($key) ? true : false;
+        return $this->get($key) ? false : true;
     }
 
     /**
