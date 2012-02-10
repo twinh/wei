@@ -24,7 +24,7 @@
 
 /**
  * Log
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -37,25 +37,25 @@ class Qwin_Log extends Qwin_Widget
 {
     /**
      * Log options
-     * 
+     *
      * @var array
-     * 
+     *
      *      -- level        string      default level for "call" method and lowest level to write
-     * 
-     *      -- format       string      logs format, words start with "$" would be replace to the 
+     *
+     *      -- format       string      logs format, words start with "$" would be replace to the
      *                                  same variable, now only have "$time", "$level" and "$message"
-     * 
+     *
      *      -- timeFormat   string      time format in logs, formatted by strftime
-     * 
-     *      -- save         callback    handle to save logs      
-     * 
-     *      -- file         string      logs file name, if specify this argument, option "fileDir" 
+     *
+     *      -- save         callback    handle to save logs
+     *
+     *      -- file         string      logs file name, if specify this argument, option "fileDir"
      *                                  and "fileFormat" would be ignored
-     * 
+     *
      *      -- fileDir      string      dir to store logs file
-     * 
+     *
      *      -- fileFormat   string      logs file name, formatted by strftime
-     * 
+     *
      *      -- fileSize     int         max file size for logs file
      */
     public $options = array(
@@ -68,10 +68,10 @@ class Qwin_Log extends Qwin_Widget
         'fileFormat' => '%Y%m%d.log',
         'fileSize' => 134217728, // 128mb
     );
-    
+
     /**
      * Log levels and priorities
-     * 
+     *
      * @var array
      */
     protected $_levels = array(
@@ -82,44 +82,168 @@ class Qwin_Log extends Qwin_Widget
         'error' => 4,
         'fatal' => 5,
     );
-    
+
     /**
      * log data
-     * 
+     *
      * @var array
      */
-    private $_data = array();
+    protected $_data = array();
+
+    /**
+     * current working directory for hanldeSave method
+     *
+     * @var string
+     */
+    protected $_cwd;
 
     public function __construct($options = null)
     {
         $options = (array)$options + $this->options;
-        
-        if (!$options['save']) {
-            $options['save'] = array($this, 'save');
+        $this->options = &$options;
+
+        $this->_cwd = getcwd();
+
+        $this->option($options);
+
+        // save log file when shutdown
+        register_shutdown_function(array($this, 'handleSave'));
+    }
+
+    /**
+     * Log a default level message
+     *
+     * @param string $message
+     * @return Qwin_Log
+     */
+    public function call($message, $level = null)
+    {
+        $level = isset($level) ? $level : $this->options['level'];
+
+        // TODO add class method file line invoker category ?
+        $this->_data[] = array(
+            'level' => $level,
+            'message' => $message,
+            'time' => microtime(true),
+        );
+
+        return $this;
+    }
+
+    /**
+     * Set save option
+     *
+     * @param callback $callback
+     * @return Qwin_Log
+     */
+    public function setSaveOption($callback)
+    {
+        if (!$callback) {
+            $this->options['save'] = array($this, 'save');
+        } elseif (is_callable($callback)) {
+            $this->options['save'] = $callback;
+        } else {
+            return $this->exception('Invalid callback for save option');
         }
-        register_shutdown_function($options['save']);
-        
+        return $this;
+    }
+
+    /**
+     * Log a trace level message
+     *
+     * @param string $message
+     * @return Qwin_Log
+     */
+    public function trace($message)
+    {
+        return $this->call($message, 'trace');
+    }
+
+    /**
+     * Log a debug level message
+     *
+     * @param string $message
+     * @return Qwin_Log
+     */
+    public function debug($message)
+    {
+        return $this->call($message, 'debug');
+    }
+
+    /**
+     * Log a info level message
+     *
+     * @param string $message
+     * @return Qwin_Log
+     */
+    public function info($message)
+    {
+        return $this->call($message, 'info');
+    }
+
+    /**
+     * Log a warn level message
+     *
+     * @param string $message
+     * @return Qwin_Log
+     */
+    public function warn($message)
+    {
+        return $this->call($message, 'warn');
+    }
+
+    /**
+     * Log an error level message
+     *
+     * @param string $message
+     * @return Qwin_Log
+     */
+    public function error($message)
+    {
+        return $this->call($message, 'error');
+    }
+
+    /**
+     * Log a fatal level message
+     *
+     * @param string $message
+     * @return Qwin_Log
+     */
+    public function fatal($message)
+    {
+        return $this->call($message, 'fatal');
+    }
+
+    public function handleSave()
+    {
+        // most of the time, handleSave is called by register_shutdown_function
+        // and the working directory is changed, we should change it back to the website directory
+        $cwd = getcwd();
+        chdir($this->_cwd);
+
+        $options = &$this->options;
+
         $file = &$options['file'];
         if (!$file) {
             if (!$options['fileDir']) {
                 $options['fileDir'] = $this->cache->option('dir') . '/logs';
                 if (!is_dir($options['fileDir'])) {
-                    mkdir($options['fileDir']);
+                    mkdir($options['fileDir'], 0777, true);
                 }
             }
             // use absolute path for file_put_contents in register_shutdown_function
             $file = realpath($options['fileDir']) . '/' . strftime($options['fileFormat']);
         }
-        
+
         if ($options['fileSize']) {
             $firstFile = $file;
-        
+
             $files = glob($file . '*', GLOB_NOSORT);
 
             if (1 < count($files)) {
                 natsort($files);
                 $file = array_pop($files);
-            } 
+            }
 
             if (is_file($file) && $options['fileSize'] < filesize($file)) {
                 $ext = pathinfo($file, PATHINFO_EXTENSION);
@@ -131,99 +255,15 @@ class Qwin_Log extends Qwin_Widget
             }
         }
 
-        $this->options = &$options;
-    }
-    
-    /**
-     * Log a default level message
-     * 
-     * @param string $message
-     * @return Qwin_Log 
-     */
-    public function call($message, $level = null)
-    {
-        $level = isset($level) ? $level : $this->options['level'];
+        chdir($cwd);
 
-        // TODO add class method file line invoker category ?
-        $this->_data[] = array(
-            'level' => $level, 
-            'message' => $message, 
-            'time' => microtime(true),
-        );
+        return call_user_func($this->options['save']);
+    }
 
-        return $this;
-    }
-    
-    /**
-     * Log a trace level message
-     * 
-     * @param string $message
-     * @return Qwin_Log 
-     */
-    public function trace($message)
-    {
-        return $this->call($message, 'trace');
-    }
-    
-    /**
-     * Log a debug level message
-     * 
-     * @param string $message
-     * @return Qwin_Log 
-     */
-    public function debug($message)
-    {
-        return $this->call($message, 'debug');
-    }
-    
-    /**
-     * Log a info level message
-     * 
-     * @param string $message
-     * @return Qwin_Log 
-     */
-    public function info($message)
-    {
-        return $this->call($message, 'info');
-    }
-    
-    /**
-     * Log a warn level message
-     * 
-     * @param string $message
-     * @return Qwin_Log 
-     */
-    public function warn($message)
-    {
-        return $this->call($message, 'warn');
-    }
-    
-    /**
-     * Log an error level message
-     * 
-     * @param string $message
-     * @return Qwin_Log 
-     */
-    public function error($message)
-    {
-        return $this->call($message, 'error');
-    }
-    
-    /**
-     * Log a fatal level message
-     * 
-     * @param string $message
-     * @return Qwin_Log
-     */
-    public function fatal($message)
-    {
-        return $this->call($message, 'fatal');
-    }
-    
     /**
      * Default method to save logs
-     * 
-     * @return Qwin_Log 
+     *
+     * @return Qwin_Log
      */
     public function save()
     {
@@ -242,10 +282,10 @@ class Qwin_Log extends Qwin_Widget
                 $data['message'],
             ), $this->options['format']) . PHP_EOL;
         }
-        
+
         // TODO file lock
         file_put_contents($this->options['file'], $content, FILE_APPEND);
-        
+
         return $this;
     }
 }
