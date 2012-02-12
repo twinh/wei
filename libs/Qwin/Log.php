@@ -64,7 +64,7 @@ class Qwin_Log extends Qwin_Widget
         'timeFormat' => '%Y-%m-%d %H:%M:%S',
         'save' => null,
         'file' => null,
-        'fileDir' => null,
+        'fileDir' => './logs',
         'fileFormat' => '%Y%m%d.log',
         'fileSize' => 134217728, // 128mb
     );
@@ -91,11 +91,19 @@ class Qwin_Log extends Qwin_Widget
     protected $_data = array();
 
     /**
-     * current working directory for hanldeSave method
+     * current working directory for getFileOption method
      *
      * @var string
      */
     protected $_cwd;
+
+    /**
+     * whether log file's exact path has been detected
+     * when set fileDir, fileFormat or fileSize options, log file should be detected again
+     *
+     * @var bool
+     */
+    protected $_fileDetected = false;
 
     public function __construct($options = null)
     {
@@ -145,6 +153,120 @@ class Qwin_Log extends Qwin_Widget
         } else {
             return $this->exception('Invalid callback for save option');
         }
+        return $this;
+    }
+
+    /**
+     * Get log file
+     *
+     * @return string
+     */
+    public function getFileOption()
+    {
+        if ($this->_fileDetected) {
+            return $this->options['file'];
+        }
+
+        // some time, getFileOption is called in register_shutdown_function
+        // and the working directory is changed, we should change it back to the website directory
+        $cwd = getcwd();
+        chdir($this->_cwd);
+
+        $options = &$this->options;
+
+        $file = &$options['file'];
+
+        if (!is_dir($options['fileDir'])) {
+            mkdir($options['fileDir'], 0777, true);
+        }
+        // use absolute path for file_put_contents in register_shutdown_function
+        $file = realpath($options['fileDir']) . '/' . strftime($options['fileFormat']);
+
+        if ($options['fileSize']) {
+            $firstFile = $file;
+
+            $files = glob($file . '*', GLOB_NOSORT);
+
+            if (1 < count($files)) {
+                natsort($files);
+                $file = array_pop($files);
+            }
+
+            if (is_file($file) && $options['fileSize'] < filesize($file)) {
+                $ext = pathinfo($file, PATHINFO_EXTENSION);
+                if (is_numeric($ext)) {
+                    $file = $firstFile . '.' . ($ext + 1);
+                } else {
+                    $file = $firstFile . '.1';
+                }
+            }
+        }
+
+        chdir($cwd);
+
+        $this->_fileDetected = true;
+
+        return $file;
+    }
+
+    public function setFileOption($file)
+    {
+        // reset detected state
+        if (!$file) {
+            $this->_fileDetected = false;
+            return $this;
+        }
+
+        $dir = dirname($file);
+        if (!is_dir($dir)) {
+            mkdir($dir, 0777, true);
+        }
+
+        $this->options['file'] = $file;
+        $this->_fileDetected = true;
+
+        return $this;
+    }
+
+    /**
+     * Set file directory
+     *
+     * @param string $dir
+     * @return Qwin_Log
+     */
+    public function setFileDirOption($dir)
+    {
+        // reset detectd state
+        $this->_fileDetected = false;
+        $this->options['fileDir'] = $dir;
+        return $this;
+    }
+
+    /**
+     * Set file name format
+     *
+     * @param string $format
+     * @return Qwin_Log
+     */
+    public function setFileFormatOption($format)
+    {
+        // reset detectd state
+        $this->_fileDetected = false;
+        $this->options['fileFormat'] = $format;
+        return $this;
+    }
+
+    /**
+     * Set file size
+     *
+     * @param int $size
+     * @return Qwin_Log
+     */
+    public function setFileSizeOption($size)
+    {
+        // reset detectd state
+        $this->_fileDetected = false;
+        $this->options['fileSize'] = (int)$size;
         return $this;
     }
 
@@ -216,47 +338,6 @@ class Qwin_Log extends Qwin_Widget
 
     public function handleSave()
     {
-        // most of the time, handleSave is called by register_shutdown_function
-        // and the working directory is changed, we should change it back to the website directory
-        $cwd = getcwd();
-        chdir($this->_cwd);
-
-        $options = &$this->options;
-
-        $file = &$options['file'];
-        if (!$file) {
-            if (!$options['fileDir']) {
-                $options['fileDir'] = $this->cache->option('dir') . '/logs';
-                if (!is_dir($options['fileDir'])) {
-                    mkdir($options['fileDir'], 0777, true);
-                }
-            }
-            // use absolute path for file_put_contents in register_shutdown_function
-            $file = realpath($options['fileDir']) . '/' . strftime($options['fileFormat']);
-        }
-
-        if ($options['fileSize']) {
-            $firstFile = $file;
-
-            $files = glob($file . '*', GLOB_NOSORT);
-
-            if (1 < count($files)) {
-                natsort($files);
-                $file = array_pop($files);
-            }
-
-            if (is_file($file) && $options['fileSize'] < filesize($file)) {
-                $ext = pathinfo($file, PATHINFO_EXTENSION);
-                if (is_numeric($ext)) {
-                    $file = $firstFile . '.' . ($ext + 1);
-                } else {
-                    $file = $firstFile . '.1';
-                }
-            }
-        }
-
-        chdir($cwd);
-
         return call_user_func($this->options['save']);
     }
 
@@ -283,9 +364,28 @@ class Qwin_Log extends Qwin_Widget
             ), $this->options['format']) . PHP_EOL;
         }
 
-        // TODO file lock
-        file_put_contents($this->options['file'], $content, FILE_APPEND);
+        file_put_contents($this->getFileOption(), $content, FILE_APPEND|LOCK_EX);
 
+        // clear logs
+        $this->_data = array();
+
+        return $this;
+    }
+
+    public function clean()
+    {
+        $dir = dirname($this->getFileOption());
+        if (is_dir($dir)) {
+            $files = scandir($dir);
+            foreach ($files as $file) {
+                if ('.' != $file && '..' != $file) {
+                    $file = $dir . DIRECTORY_SEPARATOR .  $file;
+                    if (is_file($file)) {
+                        unlink($file);
+                    }
+                }
+            }
+        }
         return $this;
     }
 }
