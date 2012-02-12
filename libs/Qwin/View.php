@@ -77,7 +77,7 @@ class Qwin_View extends Qwin_ArrayWidget
         $action = (string)$action;
 
         foreach ($this->options['dirs'] as $dir) {
-            $file = $dir . $module . '/views/' . $action . '.php';
+            $file = $dir . '/' . $module . '/views/' . $action . '.php';
             if (is_file($file)) {
                 return $file;
             } else {
@@ -155,14 +155,14 @@ class Qwin_View extends Qwin_ArrayWidget
         $action = $this->action();
         $moduleDir = ucfirst($this->module());
         foreach ($this->options['dirs'] as $dir) {
-            $files[] = $dir . $moduleDir . '/views/' . $action . '.js';
-            $files[] = $dir . $moduleDir . '/views/' . $action . '.css';
+            $files[] = $dir . '/' . $moduleDir . '/views/' . $action . '.js';
+            $files[] = $dir . '/' . $moduleDir . '/views/' . $action . '.css';
         }
         $this->minify->add($files);
 
         // 获取缓冲数据,输出并清理
         $output = ob_get_contents();
-        '' != $output && ob_end_clean();
+        $output && ob_end_clean();
 
         // TODO maybe empty
         $url = Qwin::getInstance()->widget('url');
@@ -246,7 +246,7 @@ class Qwin_View extends Qwin_ArrayWidget
             return $file;
         }
         foreach ($this->options['dirs'] as $dir) {
-            if (is_file($file2 = $dir . $file)) {
+            if (is_file($file2 = $dir . '/' . $file)) {
                 return $file2;
             }
         }
