@@ -35,7 +35,7 @@ class Qwin_Split extends Qwin_Widget
 {
     public function call($delimiter = '', $limit = null)
     {
-        if ('' === $delimiter) {
+        if (!$delimiter) {
             $this->source = str_split($this->source);
         } else {
             $arr = array($delimiter, $this->source);
