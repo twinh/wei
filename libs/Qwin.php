@@ -410,18 +410,22 @@ class Qwin extends Qwin_Widget
     }
 
     /**
-     * 获取当前类的实例化对象
+     * Get instance
      *
-     * @param mixed $config 数组或者文件路径,支持不定长参数
+     * @param mixed $config [optional] config file path or array
+     * @param mixed $_ [optional]
      * @return Qwin
      */
-    public static function getInstance()
+    public static function getInstance($config = null)
     {
-        if (isset(self::$_instance)) {
-            return self::$_instance;
+        if (!$config) {
+            if (isset(self::$_instance)) {
+                return self::$_instance;
+            }
+            return self::$_instance = new self();
         }
 
-        // 合并所有的参数
+        // Merge all configs
         $args = func_get_args();
         $config = array();
         foreach ($args as $arg) {
@@ -435,6 +439,10 @@ class Qwin extends Qwin_Widget
             }
         }
 
+        if (isset(self::$_instance)) {
+            self::$_instance->config($config);
+            return self::$_instance;
+        }
         return self::$_instance = new self($config);
     }
 

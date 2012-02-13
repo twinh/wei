@@ -1,5 +1,4 @@
 <?php
-
 require_once dirname(__FILE__) . '/../../libs/Qwin.php';
 
 /**
@@ -16,8 +15,11 @@ class QwinTest extends PHPUnit_Framework_TestCase {
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     * @covers Qwin::getInstance
+     * @covers Qwin::__construct
      */
     protected function setUp() {
+        $GLOBALS['q'] = 'my var q';
         $this->object = Qwin::getInstance();
     }
 
@@ -26,7 +28,7 @@ class QwinTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
@@ -37,9 +39,9 @@ class QwinTest extends PHPUnit_Framework_TestCase {
             $this->markTestSkipped();
         }
         $this->assertEquals(class_exists('Qwin_Get', false), false, 'Class "Qwin_Get" not found.');
-        
+
         $this->object->autoload('Qwin_Get');
-        
+
         $this->assertEquals(class_exists('Qwin_Get'), true, 'Class "Qwin_Get" found.');
 
         $this->assertFalse($this->object->autoload('Class not found.'));
@@ -50,19 +52,19 @@ class QwinTest extends PHPUnit_Framework_TestCase {
      */
     public function testWidget() {
         $get = $this->object->get;
-        
+
         $this->assertEquals(get_class($get), 'Qwin_Get', 'Class of Widget "get" is "Qwin_Get"');
-        
-        // for code cover 
+
+        // for code cover
         $get2 = $this->object->get->get;
-        
+
         $this->assertEquals(get_class($get2), 'Qwin_Get');
-        
+
         $this->setExpectedException('Qwin_Exception');
-       
+
         $this->object->_widgetNotFound;
     }
-    
+
     /**
      * @covers Qwin::instance
      */
@@ -76,25 +78,25 @@ class QwinTest extends PHPUnit_Framework_TestCase {
      */
     public function testCall() {
         $std = $this->object->call('stdClass');
-        
+
         $this->assertEquals(get_class($std), 'stdClass', 'Init class stdClass');
-        
+
         $this->assertEquals($std, $this->object->call('stdClass'), 'Class has been called');
-        
+
         $this->assertFalse($this->object->call('Class not found'));
-        
+
         $this->assertEquals('MySingleton', get_class($this->object->call('MySingleton')), 'Singleton mode');
-        
+
         $this->assertEquals('MyOneParam', get_class($this->object->call('MyOneParam', array(1))), 'Pass one param');
-        
+
         $this->assertEquals('MyTwoParams', get_class($this->object->call('MyTwoParams', array(1, 2))), 'Pass two params');
-        
+
         $this->assertEquals('MyThreeParams', get_class($this->object->call('MyThreeParams', array(1, 2, 3))), 'Pass three params');
-        
+
         $this->assertEquals('MyFourParams', get_class($this->object->call('MyFourParams', array(1, 2, 3, 4))), 'Pass four params');
-        
+
         $this->assertEquals('MyFourParams2', get_class($this->object->call('MyFourParams2', array(1, 2, 3, 4))), 'Pass four params and class with constructor');
-        
+
         $this->assertEquals('MyFourParams3', get_class($this->object->call('MyFourParams3', array(1, 2, 3, 4))), 'Pass four params and class with php4 constructor');
     }
 
@@ -104,17 +106,17 @@ class QwinTest extends PHPUnit_Framework_TestCase {
     public function testConfig() {
         // clean all config
         $this->object->config(array());
-        
+
         $this->assertEmpty($this->object->config(), 'Config is empty');
-        
+
         $config = $this->object->config('user/my/username', 'twin');
-        
+
         $this->assertEquals('twin', $config, 'Set config');
-        
+
         $config2 = $this->object->config('user/my/username');
-        
+
         $this->assertEquals('twin', $config2, 'Get config');
-        
+
         $this->assertEmpty($this->object->config(new stdClass()));
     }
 
@@ -123,9 +125,9 @@ class QwinTest extends PHPUnit_Framework_TestCase {
      */
     public function testVariable() {
         $var = $this->object->variable('var', 'Qwin_Widget');
-        
+
         $expected = new Qwin_Widget('var');
-        
+
         $this->assertEquals($expected, $var);
     }
 
@@ -134,18 +136,75 @@ class QwinTest extends PHPUnit_Framework_TestCase {
      * @covers Qwin::__construct
      */
     public function testGetInstance() {
+        $widget = $this->object;
+
         $this->assertEquals(Qwin::getInstance(), $this->object, 'Class only has one instance');
-        
-        
+
+        // get instance and append array config
+        $config = array(
+            '_key1' => 'value1',
+            '_key2' => 'value2',
+        );
+
+        Qwin::getInstance($config);
+
+        $this->assertEquals('value1', $widget->config('_key1'), 'get instance and append array config');
+
+        // get instance and append config file
+        $file = './_qwin_config.php';
+        file_put_contents($file, '<?php return array("_key3" => "value3");');
+
+        Qwin::getInstance($file);
+
+        $this->assertEquals('value3', $widget->config('_key3'), 'get instance and append config file');
+
+        unlink($file);
+
+        // invalid parameter
+        $this->setExpectedException('Qwin_Exception');
+
+        Qwin::getInstance('file should not found.');
+
+        // one instance only
+        $this->setExpectedException('Qwin_Exception');
+
+        new Qwin();
     }
 
     /**
      * @covers Qwin::callWidget
      */
-    public function testCallWidget() {     
+    public function testCallWidget() {
+        $widget = $this->object;
+
         $name = $this->object->callWidget($this->object, 'post', array('name'));
-        
+
         $this->assertEquals(class_exists('Qwin_Post'), true, 'Class "Qwin_Post" found.');
+
+        $widget->source(null);
+
+        $this->assertTrue($widget->isNull(), 'check if source is null');
+
+        $widget->source(__METHOD__);
+
+        $this->assertEquals(md5(__METHOD__), $widget->md5()->source());
+
+        /*$widget->source('UPPER');
+
+        $widget->lower();
+
+        $this->assertEquals('upper', $widget->source(), 'internal widget lower');
+
+        $widget->source(' trim ');
+
+        $widget->trim();
+
+        $this->assertEquals('trim', $widget->source());*/
+
+        $this->setExpectedException('Qwin_Exception');
+
+        /* @var $var Qwin_ClassWithoutCallMethod */
+        $var = $widget->classWithoutCallMethod();
     }
 
     /**
@@ -153,22 +212,30 @@ class QwinTest extends PHPUnit_Framework_TestCase {
      */
     public function test__invoke() {
         $widget = $this->object->__invoke('this is a string.');
-        
+
         $this->assertEquals(get_class($widget), 'Qwin_Widget');
     }
 
+    /**
+     * Covers function qiwn and q
+     */
+    public function testFunctionQwin()
+    {
+        $this->assertInstanceOf('Qwin_Widget', qwin());
+        $this->assertInstanceOf('Qwin_Widget', q());
+    }
 }
 
 // class for test
 class MySingleton
 {
     protected static $_instance;
-    
+
     protected function __construct()
     {
-        
+
     }
-    
+
     public static function getInstance()
     {
         if (self::$_instance) {
@@ -180,29 +247,29 @@ class MySingleton
 
 class MyOneParam
 {
-    
+
 }
 
 class MyTwoParams
 {
-    
+
 }
 
 class MyThreeParams
 {
-    
+
 }
 
 class MyFourParams
 {
-    
+
 }
 
 class MyFourParams2
 {
     public function __construct()
     {
-        
+
     }
 }
 
@@ -210,6 +277,11 @@ class MyFourParams2
  {
      public function MyFourParams3()
      {
-         
+
      }
+ }
+
+ class Qwin_ClassWithoutCallMethod
+ {
+
  }
