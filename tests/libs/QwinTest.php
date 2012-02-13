@@ -20,7 +20,13 @@ class QwinTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         $GLOBALS['q'] = 'my var q';
-        $this->object = Qwin::getInstance();
+        $this->object = Qwin::getInstance(array(
+            'Qwin' => array(
+                'autoloadPaths' => array(
+                    './not/found/paths',
+                ),
+            ),
+        ));
     }
 
     /**
@@ -164,7 +170,13 @@ class QwinTest extends PHPUnit_Framework_TestCase {
         $this->setExpectedException('Qwin_Exception');
 
         Qwin::getInstance('file should not found.');
+    }
 
+    /**
+     * @covers Qwin::__construct
+     */
+    public function test__construct()
+    {
         // one instance only
         $this->setExpectedException('Qwin_Exception');
 
@@ -189,17 +201,12 @@ class QwinTest extends PHPUnit_Framework_TestCase {
 
         $this->assertEquals(md5(__METHOD__), $widget->md5()->source());
 
-        /*$widget->source('UPPER');
+        $widget->source('UPPER');
 
-        $widget->lower();
+        // parameter would be ignored
+        $widget->lower('param1');
 
         $this->assertEquals('upper', $widget->source(), 'internal widget lower');
-
-        $widget->source(' trim ');
-
-        $widget->trim();
-
-        $this->assertEquals('trim', $widget->source());*/
 
         $this->setExpectedException('Qwin_Exception');
 

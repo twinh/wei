@@ -270,17 +270,7 @@ class Qwin extends Qwin_Widget
             return $this->_widgets[$lower] = $this->call($class);
         }
 
-        // TODO test
-        $trace = debug_backtrace();
-        $message = 'Widget, property or method "%s" not found, called by class "%s"';
-        $class = isset($trace[3]['class']) ? $trace[3]['class'] : $trace[2]['class'];
-        if (isset($trace[3]['file'])) {
-            $message .= ' in %s on line %s and threw ';
-            $this->exception($message, $name, $class, $trace[3]['file'], $trace[3]['line']);
-        } else {
-            $message .= ' and threw ';
-            $this->exception($message, $name, $class);
-        }
+        $this->exception('Widget, property or method "%s" not found.', $name);
     }
 
     /**
