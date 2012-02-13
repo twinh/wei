@@ -123,10 +123,6 @@ class Qwin extends Qwin_Widget
         'isNull' => array(
             'is_null', 0, 1, 1
         ),
-        // TODO as widget, add support split by ''
-        'split' => array(
-            'explode', 1,
-        ),
         'lower' => array(
             'strtolower', 0, 1,
         ),
