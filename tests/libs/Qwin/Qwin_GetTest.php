@@ -15,6 +15,7 @@ class Qwin_GetTest extends PHPUnit_Framework_TestCase {
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     * @covers Qwin_Get::__construct
      */
     protected function setUp() {
         $this->object = Qwin::getInstance()->get;
@@ -26,14 +27,6 @@ class Qwin_GetTest extends PHPUnit_Framework_TestCase {
      */
     protected function tearDown() {
 
-    }
-
-    /**
-     * @covers Qwin_Get::__construct
-     */
-    public function test__construct()
-    {
-        //$widget = new Qwin_Get;
     }
 
     /**
