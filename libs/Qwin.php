@@ -108,7 +108,7 @@ class Qwin extends Qwin_Widget
      *  0   =>  callback name
      *  1   =>  source paramter position
      *  2   =>  max parameter numbers
-     *  3   =>  0 => $invoker, 1 => $result, 2 => $widget
+     *  3   =>  0 => $invoker, 1 => $result
      *
      * @var array
      *
@@ -463,16 +463,10 @@ class Qwin extends Qwin_Widget
             $result = call_user_func_array($this->_widgetsMap[$name][0], $args);
 
             $invoker->source = $result;
-            if (isset($map[3])) {
-                if (0 == $map[3]) {
-                    return $invoker;
-                } elseif (1 == $map[3]) {
-                    return $result;
-                } else {
-                    return $widget;
-                }
-            } else {
+            if (!isset($map[3]) || 0 === $map[3]) {
                 return $invoker;
+            } else {
+                return $result;
             }
         }
 
