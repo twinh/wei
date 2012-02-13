@@ -42,7 +42,7 @@ class Qwin_Split extends Qwin_Widget
             if (1 < func_num_args()) {
                 $arr[] = $limit;
             }
-            $this->sourc = call_user_func_array('explode', $arr);
+            $this->source = call_user_func_array('explode', $arr);
         }
 
         return $this->invoker;
