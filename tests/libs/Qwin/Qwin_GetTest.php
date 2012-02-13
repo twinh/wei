@@ -1,6 +1,5 @@
 <?php
 require_once dirname(__FILE__) . '/../../../libs/Qwin.php';
-require_once dirname(__FILE__) . '/../../../libs/Qwin/Get.php';
 
 /**
  * Test class for Qwin_Get.
@@ -34,7 +33,7 @@ class Qwin_GetTest extends PHPUnit_Framework_TestCase {
      */
     public function test__construct()
     {
-        $widget = new Qwin_Get;
+        //$widget = new Qwin_Get;
     }
 
     /**
