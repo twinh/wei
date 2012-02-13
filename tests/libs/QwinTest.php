@@ -39,6 +39,7 @@ class QwinTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @covers Qwin::autoload
+     * @covers Qwin_Get::__construct
      */
     public function testAutoload() {
         if (class_exists('Qwin_Get', false)) {
@@ -55,6 +56,7 @@ class QwinTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @covers Qwin::widget
+     * @covers Qwin_Get::__construct
      */
     public function testWidget() {
         $get = $this->object->get;

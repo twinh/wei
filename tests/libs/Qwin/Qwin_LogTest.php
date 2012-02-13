@@ -247,17 +247,6 @@ class Qwin_LogTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testSave().
-     */
-    public function testSave() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
      * @covers Qwin_Log::setFileOption
      */
     public function testSetFileOption()
