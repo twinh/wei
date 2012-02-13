@@ -214,18 +214,7 @@ class Qwin extends Qwin_Widget
         }
         set_include_path($includePath);
 
-        // 设置自动加载
-        if ($options['autoload']) {
-            $paths = &$options['autoloadPaths'];
-            !is_array($paths) && $paths = (array)$paths;
-            foreach ($paths as &$path) {
-                $path = realpath($path) . DIRECTORY_SEPARATOR;
-            }
-            $paths[] = $file . DIRECTORY_SEPARATOR;
-            $paths = array_unique($paths);
-
-            spl_autoload_register(array($this, 'autoload'));
-        }
+        $this->option($options);
 
         $this->_widgets['qwin'] = $this;
         $this->_objects['Qwin'] = $this;
@@ -502,5 +491,41 @@ class Qwin extends Qwin_Widget
     public function __invoke($var = null)
     {
         return $this->variable($var);
+    }
+
+    /**
+     * Whether enable autoload
+     *
+     * @param bool $enable
+     */
+    public function setAutoloadOption($enable)
+    {
+        if ($enable) {
+            spl_autoload_register(array($this, 'autoload'));
+        } else {
+            spl_autoload_unregister(array($this, 'autoload'));
+        }
+        $this->options['autoload'] = (bool)$enable;
+        return $this;
+    }
+
+    /**
+     * set autoload paths for autoload method
+     *
+     * @param string|array $paths
+     * @return Qwin
+     */
+    public function setAutoloadPathsOption($paths)
+    {
+        !is_array($paths) && $paths = (array)$paths;
+        foreach ($paths as &$path) {
+            $path = realpath($path) . DIRECTORY_SEPARATOR;
+        }
+        // the autoload paths will always contains the directory of the class file
+        $paths[] = dirname(__FILE__) . DIRECTORY_SEPARATOR;
+        $paths = array_unique($paths);
+
+        $this->options['autoloadPaths'] = $paths;
+        return $this;
     }
 }

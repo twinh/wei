@@ -231,6 +231,47 @@ class QwinTest extends PHPUnit_Framework_TestCase {
         $this->assertInstanceOf('Qwin_Widget', qwin());
         $this->assertInstanceOf('Qwin_Widget', q());
     }
+
+    /**
+     * @covers Qwin::setAutoloadOption
+     */
+    public function testSetAutoloadOption()
+    {
+        $widget = $this->object;
+
+        $widget->setAutoloadOption(false);
+
+        $this->assertNotContains(array($widget, 'autoload'), spl_autoload_functions());
+
+        $widget->setAutoloadOption(true);
+
+        $this->assertContains(array($widget, 'autoload'), spl_autoload_functions());
+    }
+
+    /**
+     * @covers Qwin::setAutoloadPathsOption
+     */
+    public function testSetAutoloadPathsOption()
+    {
+        $widget = $this->object;
+
+        $widget->setAutoloadPathsOption(array());
+
+        $reflection = new ReflectionClass('Qwin');
+
+        // autoload paths contain directory separator
+        $dir = dirname($reflection->getFileName()) . DIRECTORY_SEPARATOR;
+
+        $customDir = dirname(__FILE__) . DIRECTORY_SEPARATOR;
+
+        $widget->setAutoloadPathsOption(array(
+            $customDir
+        ));
+
+        $this->assertContains($customDir, $widget->option('autoloadPaths'), 'custom directory');
+
+        $this->assertContains($dir, $widget->option('autoloadPaths'), '"Qwin" class directory');
+    }
 }
 
 // class for test
