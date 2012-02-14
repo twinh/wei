@@ -237,11 +237,11 @@ class QwinTest extends PHPUnit_Framework_TestCase {
     /**
      * Covers function qiwn and q
      */
-    public function testFunctionQwin()
+    /*public function testFunctionQwin()
     {
         $this->assertInstanceOf('Qwin_Widget', qwin());
         $this->assertInstanceOf('Qwin_Widget', q());
-    }
+    }*/
 
     /**
      * @covers Qwin::setAutoloadOption
