@@ -24,7 +24,7 @@
 
 /**
  * Url
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -36,7 +36,7 @@ class Qwin_Url extends Qwin_Widget
     /**
      * 默认选项
      * @var array
-     * 
+     *
      *       names 提供一个只有两个值的数组,供快速构建url服务
      */
     public $options = array(
@@ -55,7 +55,7 @@ class Qwin_Url extends Qwin_Widget
      */
     public function build(array $data = null)
     {
-        if (null == $data) {
+        if (!$data) {
             $data = $_GET;
         } else {
             $data += $this->options['basicParams'];
@@ -65,10 +65,10 @@ class Qwin_Url extends Qwin_Widget
         if (1 < func_num_args ()) {
             $data = array();
             foreach(func_get_args() as $arg) {
-                $data = array_merge($data, $arg);
+                $data = $arg + $data;
             }
         }
-        
+
         return '?' . strtr(urldecode(http_build_query($data)), array('&amp;' => '&'));
     }
 
@@ -86,7 +86,7 @@ class Qwin_Url extends Qwin_Widget
      * @param array $params 其他参数
      * @return string
      */
-    public function url($value1, $value2 = 'index', array $params = array())
+    public function call($value1, $value2 = 'index', array $params = array())
     {
         return $this->build(array(
             $this->options['names'][0] => $value1,

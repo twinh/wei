@@ -54,9 +54,9 @@ class Qwin_View extends Qwin_ArrayWidget
      *
      * @param mixed
      */
-    public function __construct($source = null)
+    public function __construct($options = null)
     {
-        parent::__construct($source);
+        parent::__construct($options);
         $options = &$this->options;
 
         // 设置视图根目录为应用根目录
@@ -96,8 +96,8 @@ class Qwin_View extends Qwin_ArrayWidget
             'minify'    => $this->minify,
             'jQuery'    => $this->jQuery,
             'config'    => $this->config(),
-            'module'    => $this->module(),
-            'action'    => $this->action(),
+            'module'    => $this->module,
+            'action'    => $this->action,
             'theme'     => $this->options['theme'],
         ));
 
@@ -131,8 +131,8 @@ class Qwin_View extends Qwin_ArrayWidget
             'minify'    => $this->minify,
             'jQuery'    => $this->jQuery,
             'config'    => $this->config(),
-            'module'    => $this->module(),
-            'action'    => $this->action(),
+            'module'    => $this->module,
+            'action'    => $this->action,
             'theme'     => $this->options['theme'],
         ));
 

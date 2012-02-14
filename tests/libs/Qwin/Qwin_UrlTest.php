@@ -1,7 +1,5 @@
 <?php
-
 require_once dirname(__FILE__) . '/../../../libs/Qwin.php';
-require_once dirname(__FILE__) . '/../../../libs/Qwin/Url.php';
 
 /**
  * Test class for Qwin_Url.
@@ -19,6 +17,7 @@ class Qwin_UrlTest extends PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
+        Qwin::getInstance();
         $this->object = new Qwin_Url;
     }
 
@@ -27,31 +26,37 @@ class Qwin_UrlTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testBuild().
+     * @covers Qwin_Url::build
      */
     public function testBuild() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $url = $widget->build(array(
+            'key' => 'value',
+            'key2' => array(
+                'subkey' => 'value2',
+            ),
+        ), array(
+            'key' => 'value2',
+        ));
+
+        $this->assertEquals('?key=value2&key2[subkey]=value2', $url);
+
+        $widget->build();
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testUrl().
+     * @covers Qwin_Url::call
      */
-    public function testUrl() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+    public function testCall() {
+        $widget = $this->object;
+
+        $url = $widget->call('user', 'login');
+
+        $this->assertEquals('?module=user&action=login', $url);
     }
-
 }
-
-?>

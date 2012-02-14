@@ -27,25 +27,22 @@ class Qwin_IsEmailTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
      * @covers Qwin_IsEmail::call
-     * @todo Implement testCall().
      */
     public function testCall() {
         $object = $this->object;
-        
+
         $object->source = 'abc@def.com';
-        
+
         $this->assertTrue($object->isEmail());
-        
+
         $object->source = 'not email.com';
-        
+
         $this->assertFalse($object->isEmail());
     }
 
 }
-
-?>
