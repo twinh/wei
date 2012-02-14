@@ -180,7 +180,7 @@ function getExt(file){
 }
 
 /**
- * Cross-browser way to get xhr object  
+ * Cross-browser way to get xhr object
  */
 var getXhr = function(){
     var xhr;
@@ -627,12 +627,10 @@ if(jQuery)(function($){
             {
                 o.ajaxupload.onComplete = function(file, response)
                 {
-                    // todo ajaxupload ajax 中文乱码
                     alert(decodeURIComponent(response.error.msg));
                     if(response.error.num == 0)
                     {
                         file = decodeURIComponent(response.file_name);
-                        // TODO 完善类型检查
                         // 表单
                         if('text' == $(_this).attr('type'))
                         {
