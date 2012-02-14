@@ -39,7 +39,7 @@ require_once 'Qwin/Widget.php';
 class Qwin extends Qwin_Widget
 {
     /**
-     * 版本
+     * Version
      */
     const VERSION = '0.8.4';
 
@@ -68,7 +68,8 @@ class Qwin extends Qwin_Widget
     protected $_varValues = array();
 
     /**
-     * 存储全局配置的数组
+     * Global config of all widgets
+     *
      * @var array
      */
     protected $_config = array();
@@ -81,7 +82,8 @@ class Qwin extends Qwin_Widget
     public $globalQ;
 
     /**
-     * 当前实例化对象
+     * instance of Qwin
+     *
      * @var Qwin
      */
     protected static $_instance;
@@ -90,17 +92,14 @@ class Qwin extends Qwin_Widget
      * Options
      *
      * @var array
-     *       fnQ            bool        是否定义全局函数"q"
      *
      *       autoload       bool        是否启用类自动加载
      *
      *       autoloadDirs   array       类自动加载的目录
      */
     public $options = array(
-        'fnQ'           => true,
         'autoload'      => true,
-        'autoloadDirs' => array(),
-        'setIncludePath' => true,
+        'autoloadDirs'  => array(),
     );
 
     /**
@@ -170,7 +169,7 @@ class Qwin extends Qwin_Widget
     );
 
     /**
-     * 初始化Qwin微件
+     * Instance qwin widget
      *
      * @return Qwin
      */
@@ -187,28 +186,24 @@ class Qwin extends Qwin_Widget
         }
         $options = &$this->options;
 
-        // 定义全局函数Q
-        if ($options['fnQ'] && !function_exists('q')) {
-            function q($value = null) {
-                return Qwin::getInstance()->variable($value);
-            }
-        }
-
-        // 定义全局变量$q
+        // define global variable $q
         if (isset($GLOBALS['q'])) {
             $this->globalQ = &$GLOBALS['q'];
         }
         $GLOBALS['q'] = $this;
 
-        // 将类库路径加入加载路径中的第二位
+        // set library directory as the second include path
         $file = dirname(__FILE__);
         $includePath = get_include_path();
+
+        // check if it has two or more include paths
         $pos = strpos($includePath, PATH_SEPARATOR);
-        if ($pos) {
-            $includePath = substr_replace($includePath, $file . PATH_SEPARATOR, $pos + 1, 0);
-        } else {
-            $includePath .= PATH_SEPARATOR . $file;
-        }
+
+        // insert into the second potion or append it to the end of whole include path
+        $includePath = $pos
+            ? substr_replace($includePath, $file . PATH_SEPARATOR, $pos + 1, 0)
+            : $includePath . PATH_SEPARATOR . $file;
+
         set_include_path($includePath);
 
         $this->option($options);
@@ -526,13 +521,4 @@ class Qwin extends Qwin_Widget
         $this->options['autoloadDirs'] = $dirs;
         return $this;
     }
-}
-/**
- * Instance a variable widget
- *
- * @param mixed $var
- * @return Qwin_Widget
- */
-function qwin($var = null) {
-    return Qwin::getInstance()->variable($var);
 }
