@@ -35,13 +35,12 @@ url:function(b,e){this.anchors.eq(b).removeData("cache.tabs").data("load.tabs",e
 a.rotate(null)}:function(){t=c.selected;h()});if(b){this.element.bind("tabsshow",h);this.anchors.bind(c.event+".tabs",e);h()}else{clearTimeout(a.rotation);this.element.unbind("tabsshow",h);this.anchors.unbind(c.event+".tabs",e);delete this._rotate;delete this._unrotate}return this}})})(jQuery);
 /*
  * jQuery UI Tabs Ext
- * 
+ *
  * @todo see Rotate
  */
 (function($, undefined) {
     /**
-     * @todo
-     * 1. scrollable or fit
+     * @todo scrollable or fit
      */
     var _tabifyOrig = $.ui.tabs.prototype._tabify;
     $.extend($.ui.tabs.prototype.options, {
@@ -51,11 +50,11 @@ a.rotate(null)}:function(){t=c.selected;h()});if(b){this.element.bind("tabsshow"
     $.extend($.ui.tabs.prototype, {
         _tabify: function(init) {
             _tabifyOrig.apply(this, arguments);
-    
+
             var self = this, o = this.options;
             if (o.closable) {
                 var lis = this.element.find('ul.ui-tabs-nav li');
-                
+
                 lis.not(':has(span.ui-icon-close)').each(function(){
                     $(o.closeTemplate).appendTo(this)
                         .click(function(){
@@ -64,14 +63,11 @@ a.rotate(null)}:function(){t=c.selected;h()});if(b){this.element.bind("tabsshow"
                 });
             }
         },
-        /**
-         * @todo ui-tabs-iframe
-         */
         addIframe: function(url, title){
             var self = this,
                 id = self._tabId(title),
                 foundIframe = false;
-            
+
             // 检查是否有该url的iframe
             self.element.find('iframe').each(function(){
                 if ($(this).data('src') == url) {
@@ -91,10 +87,10 @@ a.rotate(null)}:function(){t=c.selected;h()});if(b){this.element.bind("tabsshow"
             self.element.append('<div id="' + id + '"><iframe data-src="'
                 + url + '" class="ui-tabs-iframe" src="' + url2 + '" frameborder="0"></iframe></div>');
             self.add('#' + id, title);
-            
+
             // selete tab
             self.select(id);
-            
+
             return this;
         }
     });
