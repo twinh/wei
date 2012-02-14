@@ -74,7 +74,8 @@ class Qwin extends Qwin_Widget
     protected $_config = array();
 
     /**
-     * 原始全局变量$q的备份
+     * Backup of gloabal variable $q
+     *
      * @var mixed
      */
     public $globalQ;
@@ -86,19 +87,20 @@ class Qwin extends Qwin_Widget
     protected static $_instance;
 
     /**
-     * 选项
+     * Options
      *
      * @var array
      *       fnQ            bool        是否定义全局函数"q"
      *
      *       autoload       bool        是否启用类自动加载
      *
-     *       autoloadPaths  array       类自动加载的目录
+     *       autoloadDirs   array       类自动加载的目录
      */
     public $options = array(
         'fnQ'           => true,
         'autoload'      => true,
-        'autoloadPaths' => array(),
+        'autoloadDirs' => array(),
+        'setIncludePath' => true,
     );
 
     /**
@@ -192,11 +194,6 @@ class Qwin extends Qwin_Widget
             }
         }
 
-        // 定义全局函数Qwin
-        function qwin($value = null) {
-            return Qwin::getInstance()->variable($value);
-        }
-
         // 定义全局变量$q
         if (isset($GLOBALS['q'])) {
             $this->globalQ = &$GLOBALS['q'];
@@ -230,7 +227,7 @@ class Qwin extends Qwin_Widget
     public function autoload($class)
     {
         $class = strtr($class, array('_' => DIRECTORY_SEPARATOR));
-        foreach ($this->options['autoloadPaths'] as $path) {
+        foreach ($this->options['autoloadDirs'] as $path) {
             $path = $path . $class . '.php';
             if (file_exists($path)) {
                 require_once $path;
@@ -377,15 +374,15 @@ class Qwin extends Qwin_Widget
     }
 
     /**
-     * 初始化一个变量微件
+     * Instance a variable widget
      *
-     * @param mixed $mixed variable
+     * @param mixed $var variable
      * @return Qwin_Widget
      */
-    public function variable($mixed = null, $class = 'Qwin_Widget')
+    public function variable($var = null, $class = 'Qwin_Widget')
     {
-        $this->_varKeys[] = $mixed;
-        return $this->_varValues[] = new $class($mixed);
+        $this->_varKeys[] = $var;
+        return $this->_varValues[] = new $class($var);
     }
 
     /**
@@ -395,34 +392,35 @@ class Qwin extends Qwin_Widget
      * @param mixed $_ [optional]
      * @return Qwin
      */
-    public static function getInstance($config = null)
+    public static function getInstance($config = array())
     {
-        if (!$config) {
-            if (isset(self::$_instance)) {
-                return self::$_instance;
-            }
-            return self::$_instance = new self();
-        }
-
-        // Merge all configs
-        $args = func_get_args();
-        $config = array();
-        foreach ($args as $arg) {
-            if (is_array($arg)) {
-                $config = $arg + $config;
-            } elseif (is_string($arg) && is_file($arg)) {
-                $config = ((array)require $arg) + $config;
-            } else {
-                require_once 'Qwin/Exception.php';
-                throw new Qwin_Exception('Config should be array or file.');
-            }
-        }
-
-        if (isset(self::$_instance)) {
-            self::$_instance->config($config);
+        if (!$config && isset(self::$_instance)) {
             return self::$_instance;
         }
-        return self::$_instance = new self($config);
+
+        if ($config) {
+            // Merge all configs
+            $args = func_get_args();
+            $config = array();
+            foreach ($args as $arg) {
+                if (is_array($arg)) {
+                    $config = $arg + $config;
+                } elseif (is_string($arg) && is_file($arg)) {
+                    $config = ((array)require $arg) + $config;
+                } else {
+                    require_once 'Qwin/Exception.php';
+                    throw new Qwin_Exception('Config should be array or file.');
+                }
+            }
+        }
+
+        if (!isset(self::$_instance)) {
+            self::$_instance = new self($config);
+        } else {
+            self::$_instance->config($config);
+        }
+
+        return self::$_instance;
     }
 
     /**
@@ -515,7 +513,7 @@ class Qwin extends Qwin_Widget
      * @param string|array $paths
      * @return Qwin
      */
-    public function setAutoloadPathsOption($paths)
+    public function setAutoloadDirsOption($paths)
     {
         !is_array($paths) && $paths = (array)$paths;
         foreach ($paths as &$path) {
@@ -525,7 +523,16 @@ class Qwin extends Qwin_Widget
         $paths[] = dirname(__FILE__) . DIRECTORY_SEPARATOR;
         $paths = array_unique($paths);
 
-        $this->options['autoloadPaths'] = $paths;
+        $this->options['autoloadDirs'] = $paths;
         return $this;
     }
+}
+/**
+ * Instance a variable widget
+ *
+ * @param mixed $var
+ * @return Qwin_Widget
+ */
+function qwin($var = null) {
+    return Qwin::getInstance()->variable($var);
 }
