@@ -22,7 +22,7 @@ class QwinTest extends PHPUnit_Framework_TestCase {
         $GLOBALS['q'] = 'my var q';
         $this->object = Qwin::getInstance(array(
             'Qwin' => array(
-                'autoloadPaths' => array(
+                'autoloadDirs' => array(
                     './not/found/paths',
                 ),
             ),
@@ -179,6 +179,15 @@ class QwinTest extends PHPUnit_Framework_TestCase {
      */
     public function test__construct()
     {
+        try {
+            $origPath = get_include_path();
+            set_include_path('.');
+            $q = new Qwin();
+        } catch (Qwin_Exception $e) {
+
+        }
+        set_include_path($origPath);
+
         // one instance only
         $this->setExpectedException('Qwin_Exception');
 
@@ -251,13 +260,13 @@ class QwinTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin::setAutoloadPathsOption
+     * @covers Qwin::setAutoloadDirsOption
      */
-    public function testSetAutoloadPathsOption()
+    public function testSetAutoloadDirsOption()
     {
         $widget = $this->object;
 
-        $widget->setAutoloadPathsOption(array());
+        $widget->setAutoloadDirsOption(array());
 
         $reflection = new ReflectionClass('Qwin');
 
@@ -266,13 +275,13 @@ class QwinTest extends PHPUnit_Framework_TestCase {
 
         $customDir = dirname(__FILE__) . DIRECTORY_SEPARATOR;
 
-        $widget->setAutoloadPathsOption(array(
+        $widget->setAutoloadDirsOption(array(
             $customDir
         ));
 
-        $this->assertContains($customDir, $widget->option('autoloadPaths'), 'custom directory');
+        $this->assertContains($customDir, $widget->option('autoloadDirs'), 'custom directory');
 
-        $this->assertContains($dir, $widget->option('autoloadPaths'), '"Qwin" class directory');
+        $this->assertContains($dir, $widget->option('autoloadDirs'), '"Qwin" class directory');
     }
 }
 
