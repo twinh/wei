@@ -41,34 +41,38 @@ class Qwin extends Qwin_Widget
     /**
      * Version
      */
-    const VERSION = '0.8.4';
+    const VERSION = '0.8.5';
 
     /**
      * 存储微件对象的数组
+     *
      * @var array
      */
     protected $_widgets = array();
 
     /**
      * 存储类对象的数组
+     *
      * @var array
      */
     protected $_objects = array();
 
     /**
      * 存储值不为字符串或整数的微件键名
+     *
      * @var array
      */
     protected $_varKeys = array();
 
     /**
      * 存储值不为字符串或整数的微件值
+     *
      * @var array
      */
     protected $_varValues = array();
 
     /**
-     * Global config of all widgets
+     * Global configurations of all widgets
      *
      * @var array
      */
@@ -82,7 +86,7 @@ class Qwin extends Qwin_Widget
     public $globalQ;
 
     /**
-     * instance of Qwin
+     * The instance of Qwin
      *
      * @var Qwin
      */
@@ -103,13 +107,15 @@ class Qwin extends Qwin_Widget
     );
 
     /**
-     * Widgets map
+     * Internal widgets configurations
      *
      * key  =>  value
      *  0   =>  callback name
      *  1   =>  source paramter position
      *  2   =>  max parameter numbers
-     *  3   =>  0 => $invoker, 1 => $result
+     *  3   =>  returns invoker or called result
+     *      0   => $invoker
+     *      1   => $result
      *
      * @var array
      *
@@ -381,7 +387,7 @@ class Qwin extends Qwin_Widget
     }
 
     /**
-     * Get instance
+     * Get Qwin class instance
      *
      * @param mixed $config [optional] config file path or array
      * @param mixed $_ [optional]
@@ -389,12 +395,13 @@ class Qwin extends Qwin_Widget
      */
     public static function getInstance($config = array())
     {
+        // most of time, it's called after instanced and without arguments
         if (!$config && isset(self::$_instance)) {
             return self::$_instance;
         }
 
+        // merge all configurations
         if ($config) {
-            // Merge all configs
             $args = func_get_args();
             $config = array();
             foreach ($args as $arg) {
@@ -421,23 +428,25 @@ class Qwin extends Qwin_Widget
     /**
      * Get a widget obejct and call the "call" method
      *
-     * @param Qwin_Widget $invoker
-     * @param string $name
-     * @param array $args
+     * @param Qwin_Widget $invoker the invker widget object
+     * @param string $name the name of the widget
+     * @param array $args the arguments for "call" method
      * @return mixed
      */
-    public function callWidget($invoker, $name, $args)
+    public function callWidget(Qwin_Widget $invoker, $name, $args)
     {
-        $lower = strtolower($name);
+        // check if internal widget
         if (isset($this->_widgetsMap[$name])) {
             $map = &$this->_widgetsMap[$name];
 
+            // organize arguments
             if (isset($map[1])) {
                 array_splice($args, $map[1], 0, array($invoker->source));
             } else {
                 $args = array($invoker->source);
             }
 
+            // cut down arguments length
             if (isset($map[2]) && $map[2] < count($args)) {
                 $args = array_slice($args, 0, $map[2]);
             }
@@ -445,6 +454,7 @@ class Qwin extends Qwin_Widget
             $result = call_user_func_array($this->_widgetsMap[$name][0], $args);
 
             $invoker->source = $result;
+
             if (!isset($map[3]) || 0 === $map[3]) {
                 return $invoker;
             } else {
@@ -459,13 +469,10 @@ class Qwin extends Qwin_Widget
             throw new Qwin_Exception('Method "call" not found in widget "' . get_class($widget) . '"');
         }
 
-        // set invoker for widget
+        // set invoker and soure value for widget
         $widget->invoker = $invoker;
-
-        // set source for widget
         $widget->source = $invoker->source;
 
-        // call widget
         $result = call_user_func_array(array($widget, 'call'), $args);
 
         // set back source so that source can be passed in widgets
@@ -476,7 +483,7 @@ class Qwin extends Qwin_Widget
     }
 
     /**
-     * convert $var to a widget
+     * Instance a variable widget
      *
      * @param mixed $var
      * @return Qwin_Widget
@@ -487,7 +494,7 @@ class Qwin extends Qwin_Widget
     }
 
     /**
-     * Whether enable autoload
+     * Whether enable autoload method
      *
      * @param bool $enable
      */
@@ -503,7 +510,7 @@ class Qwin extends Qwin_Widget
     }
 
     /**
-     * set autoload directories for autoload method
+     * Set autoload directories for autoload method
      *
      * @param string|array $dirs
      * @return Qwin
@@ -514,7 +521,7 @@ class Qwin extends Qwin_Widget
         foreach ($dirs as &$dir) {
             $dir = realpath($dir) . DIRECTORY_SEPARATOR;
         }
-        // the autoload directories will always contains the directory of the class file
+        // the autoload directories will always contain the directory of the class file
         $dirs[] = dirname(__FILE__) . DIRECTORY_SEPARATOR;
         $dirs = array_unique($dirs);
 
