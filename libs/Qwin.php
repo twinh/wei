@@ -227,10 +227,10 @@ class Qwin extends Qwin_Widget
     public function autoload($class)
     {
         $class = strtr($class, array('_' => DIRECTORY_SEPARATOR));
-        foreach ($this->options['autoloadDirs'] as $path) {
-            $path = $path . $class . '.php';
-            if (file_exists($path)) {
-                require_once $path;
+        foreach ($this->options['autoloadDirs'] as $dir) {
+            $file = $dir . $class . '.php';
+            if (file_exists($file)) {
+                require_once $file;
                 return true;
             }
         }
@@ -508,22 +508,22 @@ class Qwin extends Qwin_Widget
     }
 
     /**
-     * set autoload paths for autoload method
+     * set autoload directories for autoload method
      *
-     * @param string|array $paths
+     * @param string|array $dirs
      * @return Qwin
      */
-    public function setAutoloadDirsOption($paths)
+    public function setAutoloadDirsOption($dirs)
     {
-        !is_array($paths) && $paths = (array)$paths;
-        foreach ($paths as &$path) {
-            $path = realpath($path) . DIRECTORY_SEPARATOR;
+        !is_array($dirs) && $dirs = (array)$dirs;
+        foreach ($dirs as &$dir) {
+            $dir = realpath($dir) . DIRECTORY_SEPARATOR;
         }
-        // the autoload paths will always contains the directory of the class file
-        $paths[] = dirname(__FILE__) . DIRECTORY_SEPARATOR;
-        $paths = array_unique($paths);
+        // the autoload directories will always contains the directory of the class file
+        $dirs[] = dirname(__FILE__) . DIRECTORY_SEPARATOR;
+        $dirs = array_unique($dirs);
 
-        $this->options['autoloadDirs'] = $paths;
+        $this->options['autoloadDirs'] = $dirs;
         return $this;
     }
 }
