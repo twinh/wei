@@ -1,22 +1,21 @@
 /*
-2010 02 10 
+2010 02 10
 QUI is short for Quick UI
-@todo opt live 
+@todo opt live
 */
 (function($) {
     $.fn.qui = function(options) {
         var opts = $.extend({}, $.fn.qui.defaults, options);
 
-        if(opts.hover)
-        {
-            this.hover(
-                function(){ $(this).addClass('ui-state-hover'); },
-                function(){ $(this).removeClass('ui-state-hover');
+        if (opts.hover) {
+            this.hover(function(){
+                $(this).addClass('ui-state-hover');
+            }, function(){
+                $(this).removeClass('ui-state-hover');
             })
         }
 
-        if(opts.click)
-        {
+        if (opts.click) {
             this.mousedown(function(){
                 $(this).addClass('ui-state-active');
             }).mouseup(function(){
@@ -24,14 +23,14 @@ QUI is short for Quick UI
             });
         }
 
-        if(opts.focus)
-        {
+        if (opts.focus) {
             this.focus(function(){
                 $(this).addClass('ui-state-active');
             }).blur(function(){
                 $(this).removeClass('ui-state-active');
             });
         }
+
         return this;
     };
 

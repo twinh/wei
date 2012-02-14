@@ -16,7 +16,7 @@ class Qwin_SessionTest extends PHPUnit_Framework_TestCase
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
-     * 
+     *
      * @covers Qwin_Session::__construct
      * @covers Qwin_Session::start
      */
@@ -55,18 +55,6 @@ class Qwin_SessionTest extends PHPUnit_Framework_TestCase
         $widget->setNamespaceOption('test');
 
         $this->assertEquals('test', $widget->option('namespace'));
-    }
-
-    /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testStart().
-     */
-    public function testStart()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
     }
 
     /**
