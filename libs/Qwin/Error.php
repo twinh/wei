@@ -32,6 +32,7 @@
  * @since       2011-04-02 09:29:07
  * @todo        ajax, cli support
  * @todo        throw exception when called
+ * @todo        add options display
  */
 class Qwin_Error extends Qwin_Widget
 {

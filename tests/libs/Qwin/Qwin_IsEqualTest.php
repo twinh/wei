@@ -27,23 +27,19 @@ class Qwin_IsEqualTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
      * @covers Qwin_IsEqual::call
-     * @todo Implement testCall().
      */
     public function testCall() {
         $object = $this->object;
-        
+
         $object->source = 'string';
-        
+
         $this->assertTrue($object->isEqual(true));
-        
+
         $this->assertFalse($object->isEqual(true, true));
     }
-
 }
-
-?>
