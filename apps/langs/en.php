@@ -1,6 +1,6 @@
 <?php
 /**
- * Enus
+ * en
  *
  * Copyright (c) 2008-2012 Twin Huang. All rights reserved.
  *
@@ -16,8 +16,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @package     Com
- * @subpackage  Language
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -27,149 +25,4 @@
 
 return array(
     '' => 'NULL',
-    'LBL_BLANK' => '',
-
-    // QWIN_PATH's information
-    'LBL_QWIN' => 'Qwin',
-    'LBL_Qwin_VERSION' => '',
-
-    // User's actions in browser
-    'ACT_LIST' => 'List',
-    'ACT_ADD' => 'Add',
-    'ACT_EDIT' => 'Edit',
-    'ACT_DELETE' => 'Delete',
-    'ACT_VIEW' => 'View',
-    'ACT_COPY' => 'Copy',
-    'ACT_FILTER' => 'Filter',
-    'ACT_RETURN' => 'Return',
-    'ACT_RESET' => 'Reset',
-    'ACT_SUBMIT' => 'Submit',
-    'ACT_APPLY' => 'Apply',
-    'ACT_RESTORE' => 'Restore',
-    'ACT_REDIRECT' => 'Redirect',
-    'ACT_UPDATE' => 'Update',
-
-    'LBL_DEFAULT' => 'Default',
-    'LBL_OPERATION' => 'Operation',
-
-    'LBL_DEFAULT' => 'Default',
-
-    'LBL_SHORTCUT' => 'Shortcuts',
-    'LBL_LAST_VIEWED' => 'Last viewed',
-
-    // 页眉
-    'LBL_STYLE' => 'Style',
-    'LBL_THEME' => 'Theme',
-    'LBL_WELCOME' => 'Welcome',
-    'LBL_LOGOUT' => 'Logout',
-    'LBL_TOOL' => 'Tool',
-    'LBL_LANG' => 'Language',
-    'LBL_MESSAGE' => 'Message',
-    'LBL_MEMBER_CENTER' => 'Member Center',
-    'LBL_MANAGEMENT' => 'Management',
-
-    // field
-    'FLD_ID' => 'Id',
-    'FLD_NAME' => 'Name',
-    'FLD_NAMESPACE' => 'Package',
-    'FLD_TITLE' => 'Title',
-    'FLD_OPERATION' => 'Operation',
-    'FLD_DATE_CREATED' => 'Date Created',
-    'FLD_DATE_MODIFIED' => 'Date Modified',
-    'FLD_CAPTCHA' => 'Captcha',
-    'FLD_DESCRIPTION' => 'Description',
-    'FLD_CONTENT' => 'Content',
-    'FLD_CATEGORY_ID' => 'Category Id',
-    'FLD_CATEGORY_NAME' => 'Category Name',
-    'FLD_CREATOR' => 'Creator',
-    'FLD_MODIFIER' => 'Modifiter',
-    'FLD_CREATED_BY' => 'Created By',
-    'FLD_MODIFIED_BY' => 'Modified By',
-    'FLD_SUMMARY' => 'Summary',
-    'FLD_TYPE' => 'Type',
-    'FLD_PARENT_NAME' => 'Parent Name',
-    'FLD_PARENT_ID' => 'Parent Id',
-    'FLD_VALUE' => 'Value',
-    'FLD_ORDER' => 'Order',
-
-    // group
-    'LBL_GROUP_BASIC_DATA' => 'Basic Data',
-    'LBL_GROUP_DETAIL_DATA' => 'Detail Data',
-    'LBL_GROUP_DEFAULT_DATA' => 'Default Data',
-    'LBL_SWITCH_DISPLAY_MODEL' => 'Switch display model',
-
-    'MSG_CHOOSE_ONLY_ONE_ROW' => 'Please choose only one row!',
-    'MSG_CHOOSE_AT_LEASE_ONE_ROW' => 'Please choose at lease one row!',
-    'MSG_CONFIRM_TO_DELETE' => 'Confirm to delete,OK?',
-    'MSG_ERROR_FIELD' => 'Error field: ',
-    'MSG_ERROR_MSG' => 'Error message: ',
-    'MSG_ERROR_CAPTCHA' => 'Captcha error.',
-    'MSG_NO_RECORD' => 'The record isn\'t exists or has been deleted.',
-    'MSG_OPERATE_SUCCESSFULLY' => 'Operate successfully!',
-    'MSG_FUNCTION_DEVELOPTING' => 'The function is developing.',
-    'MSG_CLICK_TO_REDIRECT' => 'It is going to redirect to a new page in 3 seconds, click the "Redirect" button to redirect at once.',
-    // 3秒后跳转到新的页面,点击"跳转"按钮直接跳转.
-    'MSG_NOT_ALLOW_DELETE' =>'It is not allowed to delete the member.',
-
-    'MSG_FILE_NOT_EXISTS' => 'The file is not exists',
-
-    'LBL_HTML_TITLE' => 'Management System - Powered by Qwin Framework',
-    'LBL_FOOTER_COPYRIGHT' => 'Powered by <a>Qwin Framework</a>. Copyright &copy; 2008-2012 <a>Twin</a>. All rights reserved.',
-    'MSG_PERMISSION_NOT_ENOUGH' => 'Your permission is not enough to view/operate this page',
-
-
-    // TODO 加载其他模块时,同时加载他们的语言类
-    'FLD_CONTACT_ID' => 'Contact Id',
-    'FLD_FIRST_NAME' => 'First Name',
-    'FLD_LAST_NAME' => 'Last Name',
-    'FLD_NICKNAME' => 'Nickname',
-    'FLD_PHOTO' => 'Photo',
-    'FLD_RELATION' => 'Relation',
-    'FLD_BIRTHDAY' => 'Birthday',
-    'FLD_EMAIL' => 'Email',
-    'FLD_TELEPHONE' => 'Telephone',
-    'FLD_MOBILE' => 'Mobile',
-    'FLD_SEX' => 'Sex',
-    'FLD_HOMEPAGE' => 'Homepage',
-    'FLD_ADDRESS' => 'Address',
-    'FLD_RELATED_MODULE' => 'Related Module',
-
-    'MSG_VALIDATOR_REQUIRED' => 'This field is required.',
-    'MSG_VALIDATOR_REMOTE' => 'Please fix this field.',
-    'MSG_VALIDATOR_EMAIL' => 'Please enter a valid email address.',
-    'MSG_VALIDATOR_URL' => 'Please enter a valid URL.',
-    'MSG_VALIDATOR_DATE' => 'Please enter a valid date.',
-    'MSG_VALIDATOR_DATEISO' => 'Please enter a valid date (ISO).',
-    'MSG_VALIDATOR_NUMBER' => 'Please enter a valid number.',
-    'MSG_VALIDATOR_DIGITS' => 'Please enter only digits.',
-    'MSG_VALIDATOR_CREDITCARD' => 'Please enter a valid credit card number.',
-    'MSG_VALIDATOR_EQUALTO' => 'Please enter the same value again.',
-    'MSG_VALIDATOR_ACCEPT' => 'Please enter a value with a valid extension.',
-    'MSG_VALIDATOR_MAXLENGTH' => 'Please enter no more than {0} characters.',
-    'MSG_VALIDATOR_MINLENGTH' => 'Please enter at least {0} characters.',
-    'MSG_VALIDATOR_RANGELENGTH' => 'Please enter a value between {0} and {1} characters long.',
-    'MSG_VALIDATOR_RANGE' => 'Please enter a value between {0} and {1}.',
-    'MSG_VALIDATOR_MAX' => 'Please enter a value less than or equal to {0}.',
-    'MSG_VALIDATOR_MIN' => 'Please enter a value greater than or equal to {0}.',
-
-    'MSG_VALIDATOR_PATHNAME' => 'Please enter a valid path name,without \\/:*?\"<>| .',
-    'MSG_VALIDATOR_NOTNULL' => 'This field is required.',
-
-
-    'LBL_FORM_VALUE_ADVICE' => 'Form value advice',
-    'LBL_FIELD' => 'Field',
-    'LBL_VALUE' => 'Value',
-    'LBL_TYPE' => 'Type',
-    'LBL_TYPE_NOT_IN' => 'Not in',
-
-    'LBL_SELECTED' => 'Selected',
-    'LBL_NOT_SELECTED' => 'Not selected',
-    'LBL_READONLY' => 'Readonly',
-    'LBL_CUSTOM_VALUE' => 'Custom Value',
-    'LBL_CANCEL' => 'Cancel',
-
-    'LBL_HOME' => 'Home',
-
-    'LBL_TREE_PREFIX_1' => '┃',
-    'LBL_TREE_PREFIX_2' => '┣',
 );
