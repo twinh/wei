@@ -36,12 +36,12 @@ class Demo_Controller extends Qwin_CrudController
         }
         $this->record;
         $data = $this->query->getByRecord($this->record())->where('tags = ?', $tag)->fetchArray();
-        
+
         $tag = htmlspecialchars($tag);
         if (empty($data)) {
             return $this->view->alert(sprintf('Tag "%s" does not have any demos.', $tag));
         }
-        
+
         $this->view->assign(get_defined_vars());
     }
 }
