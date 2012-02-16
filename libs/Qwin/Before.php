@@ -33,13 +33,14 @@
  */
 class Qwin_Before extends Qwin_Widget
 {
-    public function call($target, $insert)
+    public function call($target, $insert, $case = true)
     {
-        $pos = strpos($this->source, $target);
-        if ($pos === false) {
+        $strpos = $case ? 'strpos' : 'stripos';
+        $pos = $strpos($this->source, $target);
+        if (false === $pos) {
             return $this->invoker;
         }
-        $this->source = substr_replace($this->source, $insert . $target, $pos, strlen($target));
+        $this->source = substr($this->source, 0, $pos) . $insert . substr($this->source, $pos);
         return $this->invoker;
     }
 }
