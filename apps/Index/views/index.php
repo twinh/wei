@@ -92,7 +92,7 @@ $minify->add(array(
 </div>
 <div class="ui-layout-south">
     <div id="qw-footer" class="ui-state-default">
-        <div id="qw-copyright" class="ui-widget"><?php echo $lang['LBL_FOOTER_COPYRIGHT'] ?></div>
+        <div id="qw-copyright" class="ui-widget">Powered by Qwin Framework, Version <?php echo Qwin::VERSION ?> Copyright © 2008-2012 Twin. All rights reserved.</div>
     </div>
 </div>
 </body>
