@@ -44,5 +44,9 @@ class Qwin_BeforeTest extends PHPUnit_Framework_TestCase {
         $widget->before('not found', 'anything');
 
         $this->assertEquals('I like orange, pear and apple.', $widget->source());
+
+        $widget->before('i', ' ', false);
+
+        $this->assertEquals(' I like orange, pear and apple.', $widget->source());
     }
 }
