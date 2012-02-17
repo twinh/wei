@@ -33,37 +33,11 @@
  * @todo        add init data support
  * @todo        add array param support
  */
-class Qwin_Get extends Qwin_Widget
+class Qwin_Get extends Qwin_Request
 {
-    /**
-     * get data
-     *
-     * @var array
-     */
-    protected $_data;
-
     public function __construct($options = null)
     {
         $this->_data = $_GET;
-    }
-
-    public function call($name, $default = null)
-    {
-        $q = Qwin::getInstance();
-        if (is_string($name)) {
-            return $q->variable(isset($this->_data[$name]) ? $this->_data[$name] : $default);
-        } elseif (is_int($name)) {
-            if (!is_int($default)) {
-                return $q->variable(isset($this->source[$name]) ? $this->source[$name] : null);
-            } else {
-                if (is_string($this->source)) {
-                    return $q->variable(substr($this->source, $name, $default - $name + 1));
-                } elseif (is_array($this->source)) {
-                    return $q->variable(array_slice($this->source, $name, $default - $name + 1));
-                }
-            }
-        }
-        return $this->invoker;
     }
 
     /**
@@ -83,20 +57,6 @@ class Qwin_Get extends Qwin_Widget
         } else {
             $this->_data[$name] = $value;
             $this->request->add($name, $value);
-        }
-        return $this;
-    }
-
-    /**
-     * Remove get data
-     *
-     * @param string $name
-     * @return Qwin_Get
-     */
-    public function remove($name)
-    {
-        if (isset($this->_data[$name])) {
-            unset($this->_data[$name]);
         }
         return $this;
     }

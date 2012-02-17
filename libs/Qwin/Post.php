@@ -31,23 +31,11 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-02 00:44:56
  */
-class Qwin_Post extends Qwin_Widget
+class Qwin_Post extends Qwin_Request
 {
-    /**
-     * Post data
-     *
-     * @var array
-     */
-    protected $_data;
-
     public function __construct($options = null)
     {
         $this->_data = $_POST;
-    }
-
-    public function call($name = null, $default = null)
-    {
-        return Qwin::getInstance()->variable(isset($this->_data[$name]) ? $this->_data[$name] : $default);
     }
 
     /**

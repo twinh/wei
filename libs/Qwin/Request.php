@@ -54,7 +54,7 @@ class Qwin_Request extends Qwin_Widget
      */
     public function call($name = null, $default = null)
     {
-        return Qwin::getInstance()->variable(isset($this->_data[$name]) ? $this->_data[$name] : $default);
+        return isset($this->_data[$name]) ? $this->_data[$name] : $default;
     }
 
     /**
