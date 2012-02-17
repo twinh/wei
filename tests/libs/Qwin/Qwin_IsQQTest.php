@@ -36,25 +36,15 @@ class Qwin_IsQQTest extends PHPUnit_Framework_TestCase {
     public function testCall() {
         $widget = $this->object;
 
-        $widget->source = '1000';
+        $this->assertFalse($widget->isQQ('1000'), 'Too short');
 
-        $this->assertFalse($widget->isQQ(), 'Too short');
+        $this->assertFalse($widget->isQQ('011111'), 'Should not start with zero');
 
-        $widget->source = '011111';
+        $this->assertFalse($widget->isQQ(011111), 'Should not start with zero, even digits');
 
-        $this->assertFalse($widget->isQQ(), 'Should not start with zero');
+        $this->assertFalse($widget->isQQ(134.433), 'Not digits');
 
-        $widget->source = 011111;
-
-        $this->assertFalse($widget->isQQ(), 'Should not start with zero, even digits');
-
-        $widget->source = 134.433;
-
-        $this->assertFalse($widget->isQQ(), 'Not digits');
-
-        $widget->source = 1234567;
-
-        $this->assertTrue($widget->isQQ());
+        $this->assertTrue($widget->isQQ(1234567));
     }
 
 }

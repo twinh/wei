@@ -37,7 +37,7 @@ class Qwin_IsExistsTest extends PHPUnit_Framework_TestCase {
     public function testCall() {
         $object = $this->object;
 
-        $this->assertEquals(false, $object->isExists(), 'Not File path');
+        $this->assertEquals(false, $object->isExists(''), 'Not File path');
 
         $object->source = __FILE__;
 
