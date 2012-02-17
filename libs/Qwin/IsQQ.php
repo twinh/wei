@@ -33,8 +33,8 @@
  */
 class Qwin_IsQQ extends Qwin_Widget
 {
-    public function call()
+    public function call($value)
     {
-        return $this->isDigit() && $this->isLength(5, 10) && '0' != $this->source[0];
+        return $this->isDigit($value) && $this->isLength($value, 5, 10) && '0' != $value[0];
     }
 }

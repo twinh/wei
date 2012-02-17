@@ -36,20 +36,19 @@ class Qwin_ToText extends Qwin_Widget
     /**
      * Convert widget source to text
      */
-    public function call()
+    public function call($data)
     {
         // 其他 '=', "\0", "%00", "\r", '\0', '%00', '\r' ?
         // 过滤不可见字符
-        $text = preg_replace(
+        return preg_replace(
             array('/[\\x00-\\x08\\x0B\\x0C\\x0E-\\x1F]/', '/&(?!(#[0-9]+|[a-z]+);)/is'),
             array('', '&amp;'),
             // 替换html标签,制表符,换行符
             str_replace(
                 array('&', '%3C', '<', '%3E', '>', '"', "'", "\t", ' '),
                 array('&amp;', '&lt;', '&lt;', '&gt;', '&gt;', '&quot;', '&#39;', '&nsbp;&nsbp;&nsbp;&nsbp;', '&nbsp;'),
-                $this->source
+                $data
             )
         );
-        return $text;
     }
 }

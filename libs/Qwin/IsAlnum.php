@@ -24,7 +24,7 @@
 
 /**
  * IsAlnum
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -33,8 +33,8 @@
  */
 class Qwin_IsAlnum extends Qwin_Widget
 {
-    public function call()
+    public function call($value)
     {
-        return (bool)preg_match('/^([a-z0-9]+)$/i', $this->source);
+        return (bool)preg_match('/^([a-z0-9]+)$/i', $value);
     }
 }

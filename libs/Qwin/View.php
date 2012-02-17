@@ -61,12 +61,6 @@ class Qwin_View extends Qwin_ArrayWidget
 
         // 设置视图根目录为应用根目录
         $this->options['dirs'] = &$this->app->options['dirs'];
-
-        // 获取主题
-        $this->_getTheme();
-
-        // 打开缓冲区
-        ob_start();
     }
 
     public function getViewFile($module = null, $action = null)
@@ -98,18 +92,41 @@ class Qwin_View extends Qwin_ArrayWidget
             'config'    => $this->config(),
             'module'    => $this->module,
             'action'    => $this->action,
-            'theme'     => $this->options['theme'],
+            'theme'     => $this->getThemeOption(),
         ));
-
-        // 附加变量
-        !empty($data) && $this->assign($data);
 
         $this->_module = $module;
         $this->_action = $action;
 
         extract($this->_data, EXTR_OVERWRITE);
 
+        ob_start();
+
         require $this->getViewFile($this->_module, $this->_action);
+
+        // 获取缓冲数据,输出并清理
+        $output = ob_get_contents();
+        $output && ob_end_clean();
+
+        // 加载当前操作的样式和脚本
+        $files = array();
+        $action = $this->action();
+        $moduleDir = ucfirst($this->module());
+        foreach ($this->options['dirs'] as $dir) {
+            $files[] = $dir . '/' . $moduleDir . '/views/' . $action . '.js';
+            $files[] = $dir . '/' . $moduleDir . '/views/' . $action . '.css';
+        }
+        $this->minify->add($files);
+        $replace = '<script type="text/javascript" src="' . $this->url('minify', 'index', array('g' => $minify->pack('js'))) . '"></script>' . PHP_EOL
+            . '<link rel="stylesheet" type="text/css" href="' . $this->url('minify', 'index', array('g' => $minify->pack('css'))) . '" media="all" />' . PHP_EOL;
+
+        $this->string($output)
+            ->before('</head>', $replace)
+            ->output();
+
+        unset($output);
+
+        return $this;
     }
 
 
@@ -125,54 +142,9 @@ class Qwin_View extends Qwin_ArrayWidget
 
         $this->trigger('beforeViewDisplay');
 
-        // 部分视图常用变量
-        $this->assign(array(
-            'lang'      => $this->lang,
-            'minify'    => $this->minify,
-            'jQuery'    => $this->jQuery,
-            'config'    => $this->config(),
-            'module'    => $this->module,
-            'action'    => $this->action,
-            'theme'     => $this->options['theme'],
-        ));
-
-        // 附加视图
-        /*if (isset($layout)) {
-            $this->_layout = array_shift($layout);
-        }*/
-
-        // 附加变量
-        !empty($data) && $this->assign($data);
-        extract($this->_data, EXTR_OVERWRITE);
-
-        require $this->getViewFile();
+        $this->renderBy($this->module, $this->action);
 
         $this->trigger('afterViewDisplay');
-
-        // TODO 是否应该通过钩子加载
-        // 加载当前操作的样式和脚本
-        $files = array();
-        $action = $this->action();
-        $moduleDir = ucfirst($this->module());
-        foreach ($this->options['dirs'] as $dir) {
-            $files[] = $dir . '/' . $moduleDir . '/views/' . $action . '.js';
-            $files[] = $dir . '/' . $moduleDir . '/views/' . $action . '.css';
-        }
-        $this->minify->add($files);
-
-        // 获取缓冲数据,输出并清理
-        $output = ob_get_contents();
-        $output && ob_end_clean();
-
-        // TODO maybe empty
-        $url = Qwin::getInstance()->widget('url');
-        $replace = Qwin_Util_Html::jsTag($url->url('minify', 'index', array('g' => $minify->pack('js')))) . PHP_EOL
-                 . Qwin_Util_Html::cssLinkTag($url->url('minify', 'index', array('g' => $minify->pack('css')))) . PHP_EOL;
-
-        // TODO appendAfter
-        $output = Qwin_Util_String::replaceFirst('</head>', $replace . '</head>', $output);
-        echo $output;
-        unset($output);
 
         $this->setDisplayed();
 
@@ -201,19 +173,37 @@ class Qwin_View extends Qwin_ArrayWidget
      * 输出JSON数据
      *
      * @param array $json JSON数组数据
-     * @param bool $exit 是否退出
-     * @todo 是否应该直接输出
      */
-    public function displayJson($json, $exit = true)
+    public function displayJson($json)
     {
+        if ($this->isDisplayed()) {
+            return false;
+        }
+
         if (is_string($json)) {
             echo $json;
         } else {
             echo json_encode($json);
         }
-        if ($exit) {
-            exit;
+
+        $this->setDisplayed();
+
+        return $this;
+    }
+
+    public function displayFile($file)
+    {
+        if ($this->isDisplayed()) {
+            return false;
         }
+
+        $file = $this->getFile($file);
+
+        extract($this->_data, EXTR_OVERWRITE);
+
+        require $file;
+
+        $this->setDisplayed();
     }
 
     /**
@@ -264,10 +254,13 @@ class Qwin_View extends Qwin_ArrayWidget
      *
      * @see http://jqueryui.com/themeroller/
      * @return string
-     * @todo 缓存主题加速查找
      */
-    protected function _getTheme()
+    public function getThemeOption()
     {
+        if (isset($this->options['_theme']) && $this->options['_theme']) {
+            return $this->options['theme'];
+        }
+
         // 按优先级排列主题的数组
         $themes = array(
             (string)$this->get('theme'),
@@ -292,12 +285,16 @@ class Qwin_View extends Qwin_ArrayWidget
         }
 
         $this->cookie->set('theme', $this->options['theme']);
+
+        $this->options['_theme'] = true;
+
+        return $this->options['theme'];
     }
 
     /**
      * 设置视图已展示
      *
-     * @return Qwin_Application_View 当前对象
+     * @return Qwin_View 当前对象
      */
     public function setDisplayed()
     {
