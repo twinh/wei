@@ -33,6 +33,11 @@
  */
 class Qwin_Null extends Qwin_Widget
 {
+    /**
+     * Nothing to do
+     *
+     * @return Qwin_Null
+     */
     public function call()
     {
         return $this;
