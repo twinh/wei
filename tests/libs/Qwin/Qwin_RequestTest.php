@@ -1,7 +1,5 @@
 <?php
-
 require_once dirname(__FILE__) . '/../../../libs/Qwin.php';
-require_once dirname(__FILE__) . '/../../../libs/Qwin/Request.php';
 
 /**
  * Test class for Qwin_Request.
@@ -47,13 +45,13 @@ class Qwin_RequestTest extends PHPUnit_Framework_TestCase {
         $name = $this->object->call('name');
         $source = isset($_REQUEST['name']) ? $_REQUEST['name'] : null;
 
-        $this->assertEquals($name->source, $source);
+        $this->assertEquals($name, $source);
 
         $default = 'default';
         $name2 = $this->object->call('name', $default);
         $source = isset($_REQUEST['name']) ? $_REQUEST['name'] : $default;
 
-        $this->assertEquals($name2->source, $default);
+        $this->assertEquals($name2, $default);
     }
 
     /**
@@ -65,14 +63,14 @@ class Qwin_RequestTest extends PHPUnit_Framework_TestCase {
 
         $widget->add('key', 'value');
 
-        $this->assertEquals('value', $widget->request('key')->source(), 'string param');
+        $this->assertEquals('value', $widget->request('key'), 'string param');
 
         $widget->add(array(
             'key1' => 'value1',
             'key2' => 'value2',
         ));
 
-        $this->assertEquals('value2', $widget->request('key2')->source(), 'array param');
+        $this->assertEquals('value2', $widget->request('key2'), 'array param');
     }
 
     /**
@@ -84,10 +82,10 @@ class Qwin_RequestTest extends PHPUnit_Framework_TestCase {
 
         $widget->add('remove', 'just a moment');
 
-        $this->assertEquals('just a moment', $widget->request('remove')->source());
+        $this->assertEquals('just a moment', $widget->request('remove'));
 
         $widget->remove('remove');
 
-        $this->assertNull($widget->request('remove')->source());
+        $this->assertNull($widget->request('remove'));
     }
 }
