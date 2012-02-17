@@ -53,23 +53,21 @@ class Qwin_IsDir extends Qwin_Widget
      * @param bool $abs return file path or true
      * @return string|bool
      */
-    public function call($abs = true)
+    public function call($value, $abs = true)
     {
-        if (!is_string($this->source)) {
+        if (!is_string($value)) {
             return false;
         }
 
-        $file = &$this->source;
-
         // check directly if it's absolute path
-        if ('/' == $file[0] || '\\' == $file[0] || ':' == $file[1]) {
-            if (is_dir($file)) {
-                return $abs ? $file : true;
+        if ('/' == $value[0] || '\\' == $value[0] || ':' == $value[1]) {
+            if (is_dir($value)) {
+                return $abs ? $value : true;
             }
         }
 
         if (function_exists('stream_resolve_include_path')) {
-            $full = stream_resolve_include_path($file);
+            $full = stream_resolve_include_path($value);
             if ($full) {
                 return $abs ? $full : true;
             }
@@ -78,7 +76,7 @@ class Qwin_IsDir extends Qwin_Widget
 
         // check if in include path
         foreach (explode(PATH_SEPARATOR, ini_get('include_path')) as $path) {
-            $full = rtrim($path, '\\/') . DIRECTORY_SEPARATOR . $file;
+            $full = rtrim($path, '\\/') . DIRECTORY_SEPARATOR . $value;
             if (is_dir($full)) {
                 return $abs ? $full : true;
             }

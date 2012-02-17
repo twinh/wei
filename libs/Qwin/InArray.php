@@ -34,14 +34,15 @@
 class Qwin_InArray extends Qwin_Widget
 {
     /**
-     * while source is not find in the specify array, use the first element of array instead
+     * while $value is not find in the specify $array, use the first element of array instead
      *
+     * @param mixed $value
      * @param array $array
      * @return mixed
      */
-    public function call($array)
+    public function call($value, $array)
     {
-        !in_array($this->source, $array) && $this->source = $array[key($array)];
-        return $this->invoker;
+        !in_array($value, $array) && $value = $array[key($array)];
+        return $value;
     }
 }

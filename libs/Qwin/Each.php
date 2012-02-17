@@ -35,7 +35,7 @@ class Qwin_Each extends Qwin_Widget
 {
     public function call($callback)
     {
-        foreach ($this->toArray() as $k => $v) {
+        foreach ($array as $k => $v) {
             if (false === $this->callback($callback, array($k, $v))) {
                 break;
             }

@@ -24,7 +24,7 @@
 
 /**
  * IsEqual
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -33,8 +33,8 @@
  */
 class Qwin_IsEqual extends Qwin_Widget
 {
-    public function call($mixed = null, $strict = false)
+    public function call($value, $mixed = null, $strict = false)
     {
-        return $strict ? $this->source === $mixed : $this->source == $mixed;
+        return $strict ? $value === $mixed : $value == $mixed;
     }
 }

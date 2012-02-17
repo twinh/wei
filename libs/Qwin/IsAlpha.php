@@ -24,7 +24,7 @@
 
 /**
  * IsAlpha
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -33,8 +33,8 @@
  */
 class Qwin_IsAlpha extends Qwin_Widget
 {
-    public function call()
+    public function call($value)
     {
-        return (bool)preg_match('/^([a-z]+)$/i', $this->source);
+        return (bool)preg_match('/^([a-z]+)$/i', $value);
     }
 }

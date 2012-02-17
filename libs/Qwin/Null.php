@@ -24,7 +24,7 @@
 
 /**
  * Null
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -35,7 +35,6 @@ class Qwin_Null extends Qwin_Widget
 {
     public function call()
     {
-        $this->source = null;
-        return $this->invoker;
+        return $this;
     }
 }

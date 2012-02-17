@@ -38,15 +38,13 @@ class Qwin_Escape extends Qwin_Widget
      *
      * @see www.php.net/manual/en/function.mysql-real-escape-string.php
      */
-    public function call()
+    public function call($data)
     {
         // \0 === \x00
-        $this->source = str_replace(array(
+        return str_replace(array(
             '\\', "\0", "\n", "\r", "'", '"', "\x1a"
         ), array(
             '\\\\', '\0', '\n', '\r', "\\'", '\\"', '\Z'
-        ), $this->source);
-
-        return $this->invoker;
+        ), $data);
     }
 }
