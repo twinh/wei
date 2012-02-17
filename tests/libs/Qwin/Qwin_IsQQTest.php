@@ -1,5 +1,4 @@
 <?php
-
 require_once dirname(__FILE__) . '/../../../libs/Qwin.php';
 require_once dirname(__FILE__) . '/../../../libs/Qwin/IsQQ.php';
 
@@ -46,7 +45,4 @@ class Qwin_IsQQTest extends PHPUnit_Framework_TestCase {
 
         $this->assertTrue($widget->isQQ(1234567));
     }
-
 }
-
-?>

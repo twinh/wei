@@ -35,31 +35,7 @@ class Qwin_StringTest extends PHPUnit_Framework_TestCase {
     public function testCall() {
         $widget = $this->object;
 
-        $widget->souce = 10.6;
-
-        $this->assertInternalType('string', $widget->string()->source, 'Int to string');
-
-        $widget->source = true;
-
-        $this->assertInternalType('string', $widget->string()->source, 'Bool to string');
-
-        $widget->source = null;
-
-        $this->assertInternalType('string', $widget->string()->source, 'Null to string');
-
-        $widget->source = array(
-            'key' => 'value',
-            'key2' => 'value2',
-            'key3' => array('value3'),
-        );
-
-        $this->assertInternalType('string', $widget->string()->source, 'Array to string');
-
-        $widget->source = Qwin::getInstance()->variable();
-
-        $this->assertInternalType('string', $widget->string()->source, 'Object to string');
-
-        $this->assertInternalType('string', $widget->string(array('list' => 'value'))->source, 'Array as param to string');
+        
     }
 
 }

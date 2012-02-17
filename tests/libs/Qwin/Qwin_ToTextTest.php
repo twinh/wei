@@ -35,16 +35,16 @@ class Qwin_ToTextTest extends PHPUnit_Framework_TestCase {
     public function testCall() {
         $widget = $this->object;
 
-        $widget->source = '<a href="attack url">click me!</a>';
+        $result = '<a href="attack url">click me!</a>';
 
-        $this->assertEquals('&lt;a&nbsp;href=&quot;attack&nbsp;url&quot;&gt;click&nbsp;me!&lt;/a&gt;', $widget->toText());
+        $this->assertEquals('&lt;a&nbsp;href=&quot;attack&nbsp;url&quot;&gt;click&nbsp;me!&lt;/a&gt;', $widget->toText($result));
 
-        $widget->source = '%3Chello%3E';
+        $result = '%3Chello%3E';
 
-        $this->assertEquals('&lt;hello&gt;', $widget->toText());
+        $this->assertEquals('&lt;hello&gt;', $widget->toText($result));
 
-        $widget->source = "he's happy.";
+        $result = "he's happy.";
 
-        $this->assertEquals('he&#39;s&nbsp;happy.', $widget->toText());
+        $this->assertEquals('he&#39;s&nbsp;happy.', $widget->toText($result));
     }
 }

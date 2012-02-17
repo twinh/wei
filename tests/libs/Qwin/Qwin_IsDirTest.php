@@ -36,15 +36,11 @@ class Qwin_IsDirTest extends PHPUnit_Framework_TestCase {
     public function testCall() {
         $object = $this->object;
 
-        $this->assertEquals(false, $object->isDir(), 'Not File path');
+        $this->assertEquals(false, $object->isDir(''), 'Not File path');
 
-        $object->source = __DIR__;
+        $this->assertEquals($object->isDir(__DIR__), __DIR__, 'File found');
 
-        $this->assertEquals($object->isDir(), __DIR__, 'File found');
-
-        $object->source = '.file not found';
-
-        $this->assertFalse($object->isDir(), 'File not found');
+        $this->assertFalse($object->isDir('.file not found'), 'File not found');
 
         $paths = explode(PATH_SEPARATOR, ini_get('include_path'));
         $path = array_pop($paths);
@@ -54,8 +50,7 @@ class Qwin_IsDirTest extends PHPUnit_Framework_TestCase {
                 continue;
             }
             if (is_dir($path . DIRECTORY_SEPARATOR . $file)) {
-                $object->source = $file;
-                $this->assertNotEquals(false, $object->isDir(), 'File in include path found');
+                $this->assertTrue($object->isDir($file), 'File in include path found');
                 break;
             }
         }
@@ -69,12 +64,9 @@ class Qwin_IsDirTest extends PHPUnit_Framework_TestCase {
                 }
             }
 
-            $this->assertNotEquals(false, $object->isDir(), 'File in include path found');
+            $this->assertNotEquals(false, $object->isDir($file), 'File in include path found');
 
-            $object->source = '.file not found';
-
-            $this->assertFalse($object->isDir(), 'File in include path found');
+            $this->assertFalse($object->isDir('.file not found'), 'File in include path found');
         }
     }
-
 }

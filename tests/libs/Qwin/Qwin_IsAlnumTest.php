@@ -36,25 +36,15 @@ class Qwin_IsAlnumTest extends PHPUnit_Framework_TestCase {
     public function testCall() {
         $widget = $this->object;
 
-        $widget->source = 'abcedfg';
+        $this->assertTrue($widget->isAlnum('abcedfg'));
 
-        $this->assertTrue($widget->isAlnum());
+        $this->assertTrue($widget->isAlnum('a2BcD3eFg4'));
 
-        $widget->source = 'a2BcD3eFg4';
+        $this->assertTrue($widget->isAlnum('045fewwefds'));
 
-        $this->assertTrue($widget->isAlnum());
+        $this->assertFalse($widget->isAlnum('a bcdefg'));
 
-        $widget->source = '045fewwefds';
-
-        $this->assertTrue($widget->isAlnum());
-
-        $widget->source = 'a bcdefg';
-
-        $this->assertFalse($widget->isAlnum());
-
-        $widget->source = '-213a bcdefg';
-
-        $this->assertFalse($widget->isAlnum());
+        $this->assertFalse($widget->isAlnum('-213a bcdefg'));
     }
 
 }

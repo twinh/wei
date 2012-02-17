@@ -48,6 +48,6 @@ class Qwin_EscapeTest extends PHPUnit_Framework_TestCase {
 
         $this->assertEquals('\"', $widget->escape('"'));
 
-        $this->assertEquals('\Z', $widget->source("\x1a"));
+        $this->assertEquals('\Z', $widget->escape("\x1a"));
     }
 }

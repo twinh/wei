@@ -36,11 +36,7 @@ class Qwin_IsRegexTest extends PHPUnit_Framework_TestCase {
     public function testCall() {
         $widget = $this->object;
 
-        $widget->source = 'This is Qwin Framework.';
-
-        $this->assertTrue($widget->isRegex('/qwin/i'));
+        $this->assertTrue($widget->isRegex('This is Qwin Framework.', '/qwin/i'));
     }
 
 }
-
-?>

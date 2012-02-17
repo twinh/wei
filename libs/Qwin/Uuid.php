@@ -24,7 +24,7 @@
 
 /**
  * Uuid
- * 
+ *
  * @namespace   Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -34,7 +34,7 @@
 class Qwin_Uuid extends Qwin_Widget
 {
     /**
-     * Generate a FAKE UUID(universally unique identifier) widget variable
+     * Generate a FAKE UUID(universally unique identifier)
      *
      * @see http://stackoverflow.com/questions/2040240/php-function-to-generate-v4-uuid
      * @see http://php.net/manual/en/function.uniqid.php
@@ -42,7 +42,7 @@ class Qwin_Uuid extends Qwin_Widget
      */
     public function call()
     {
-        return Qwin::getInstance()->variable(sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+        return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
             // 32 bits for "time_low"
             mt_rand(0, 0xffff), mt_rand(0, 0xffff),
             // 16 bits for "time_mid"
@@ -56,6 +56,6 @@ class Qwin_Uuid extends Qwin_Widget
             mt_rand(0, 0x3fff) | 0x8000,
             // 48 bits for "node"
             mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
-        ));
+        );
     }
 }
