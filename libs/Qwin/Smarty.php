@@ -23,8 +23,8 @@
  */
 
 /**
- * CrudController
- * 
+ * Smarty
+ *
  * @package     Qwin
  * @subpackage  Application
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -35,23 +35,24 @@ class Qwin_Smarty extends Qwin_Widget
 {
     /**
      * Smarty对象
+     *
      * @var Smarty
      */
     protected $_smarty;
 
     /**
-     * 默认选项
+     * Options
+     *
      * @var array
-     * @todo 更多选项
      */
     public $options = array(
         'compile_dir' => null,
     );
-    
+
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-        
+
         require_once dirname(dirname(__FILE__)) . '/Smarty/Smarty.class.php';
         $this->_smarty = $this->qwin->call('Smarty');
 
@@ -60,7 +61,7 @@ class Qwin_Smarty extends Qwin_Widget
             $this->_smarty->$key = $value;
         }
     }
-    
+
     public function call()
     {
         return $this->_smarty;
