@@ -36,13 +36,9 @@ class Qwin_IsEmailTest extends PHPUnit_Framework_TestCase {
     public function testCall() {
         $object = $this->object;
 
-        $object->source = 'abc@def.com';
+        $this->assertTrue($object->isEmail('abc@def.com'));
 
-        $this->assertTrue($object->isEmail());
-
-        $object->source = 'not email.com';
-
-        $this->assertFalse($object->isEmail());
+        $this->assertFalse($object->isEmail('not email.com'));
     }
 
 }

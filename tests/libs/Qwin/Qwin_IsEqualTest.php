@@ -36,10 +36,8 @@ class Qwin_IsEqualTest extends PHPUnit_Framework_TestCase {
     public function testCall() {
         $object = $this->object;
 
-        $object->source = 'string';
+        $this->assertTrue($object->isEqual(null, ''));
 
-        $this->assertTrue($object->isEqual(true));
-
-        $this->assertFalse($object->isEqual(true, true));
+        $this->assertFalse($object->isEqual(null, '', true));
     }
 }

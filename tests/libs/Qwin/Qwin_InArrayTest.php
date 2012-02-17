@@ -35,14 +35,12 @@ class Qwin_InArrayTest extends PHPUnit_Framework_TestCase {
     public function testCall() {
         $widget = $this->object;
 
-        $widget->source('apple');
+        $result = $widget->inArray('apple', array('pear', 'apple', 'banana'));
 
-        $widget->inArray(array('pear', 'apple', 'banana'));
+        $this->assertEquals('apple', $result, 'apple found in array');
 
-        $this->assertEquals('apple', $widget->source(), 'apple found in array');
+        $result = $widget->inArray('apple', array('pear', 'banana'));
 
-        $widget->inArray(array('pear', 'banana'));
-
-        $this->assertEquals('pear', $widget->source(), 'apple ont found, so pear instead');
+        $this->assertEquals('pear', $result, 'apple ont found, so pear instead');
     }
 }

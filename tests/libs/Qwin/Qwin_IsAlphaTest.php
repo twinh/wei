@@ -36,23 +36,12 @@ class Qwin_IsAlphaTest extends PHPUnit_Framework_TestCase {
     public function testCall() {
         $widget = $this->object;
 
-        $widget->source = 'abcedfg';
+        $this->assertTrue($widget->isAlpha('abcedfg'));
 
-        $this->assertTrue($widget->isAlpha());
+        $this->assertTrue($widget->isAlpha('aBcDeFg'));
 
-        $widget->source = 'aBcDeFg';
+        $this->assertFalse($widget->isAlpha('abcdefg1'));
 
-        $this->assertTrue($widget->isAlpha());
-
-        $widget->source = 'abcdefg1';
-
-        $this->assertFalse($widget->isAlpha());
-
-        $widget->source = 'a bcdefg';
-
-        $this->assertFalse($widget->isAlpha());
+        $this->assertFalse($widget->isAlpha('a bcdefg'));
     }
-
 }
-
-?>

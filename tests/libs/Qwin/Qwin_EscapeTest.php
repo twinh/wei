@@ -36,21 +36,18 @@ class Qwin_EscapeTest extends PHPUnit_Framework_TestCase {
     public function testCall() {
         $widget = $this->object;
 
-        $this->assertEquals('\\\\', $widget->source('\\')->escape()->source());
+        $this->assertEquals('\\\\', $widget->escape('\\'));
 
-        $this->assertEquals('\0', $widget->source("\0")->escape()->source());
+        $this->assertEquals('\0', $widget->escape("\0"));
 
-        $this->assertEquals('\\n', $widget->source("\n")->escape()->source());
+        $this->assertEquals('\\n', $widget->escape("\n"));
 
-        $this->assertEquals('\r', $widget->source("\r")->escape()->source());
+        $this->assertEquals('\r', $widget->escape("\r"));
 
-        $this->assertEquals("\'", $widget->source("'")->escape()->source());
+        $this->assertEquals("\'", $widget->escape("'"));
 
-        $this->assertEquals('\"', $widget->source('"')->escape()->source());
+        $this->assertEquals('\"', $widget->escape('"'));
 
-        $this->assertEquals('\Z', $widget->source("\x1a")->escape()->source());
+        $this->assertEquals('\Z', $widget->source("\x1a"));
     }
-
 }
-
-?>

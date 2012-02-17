@@ -37,11 +37,11 @@ class Qwin_EachTest extends PHPUnit_Framework_TestCase {
     public function testCall() {
         $widget = $this->object;
 
-        $widget->source = array(
+        $array = array(
             'apple', 'lemon', 'orange', 'banana', 'pear',
         );
 
-        $widget->each(array($this, 'each'));
+        $widget->each($array, array($this, 'each'));
 
         $this->assertEquals('orange', $this->_fruit);
     }
@@ -54,5 +54,3 @@ class Qwin_EachTest extends PHPUnit_Framework_TestCase {
         }
     }
 }
-
-?>
