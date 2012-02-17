@@ -27,7 +27,7 @@ class Qwin_UuidTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
 
     /**
@@ -35,14 +35,9 @@ class Qwin_UuidTest extends PHPUnit_Framework_TestCase {
      */
     public function testCall() {
         $uuid = $this->object->call();
-        
-        $this->assertInstanceOf('Qwin_Widget', $uuid);
-        
-        $isUuid = $uuid->isRegex('/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/');
-        
+
+        $isUuid = $uuid->isRegex($uuid, '/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/');
+
         $this->assertEquals(true, $isUuid);
     }
-
 }
-
-?>
