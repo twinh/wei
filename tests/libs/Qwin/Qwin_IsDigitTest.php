@@ -36,25 +36,15 @@ class Qwin_IsDigitTest extends PHPUnit_Framework_TestCase {
     public function testCall() {
         $widget = $this->object;
 
-        $widget->source = '123456';
+        $this->assertTrue($widget->isDigit('123456'));
 
-        $this->assertTrue($widget->isDigit());
+        $this->assertTrue($widget->isDigit('0123456'));
 
-        $widget->source = '0123456';
+        $this->assertFalse($widget->isDigit('0.123'));
 
-        $this->assertTrue($widget->isDigit());
+        $this->assertFalse($widget->isDigit('1 23456'));
 
-        $widget->source = '0.123';
-
-        $this->assertFalse($widget->isDigit());
-
-        $widget->source = '1 23456';
-
-        $this->assertFalse($widget->isDigit());
-
-        $widget->source = 'string';
-
-        $this->assertFalse($widget->isDigit());
+        $this->assertFalse($widget->isDigit('string'));
     }
 
 }
