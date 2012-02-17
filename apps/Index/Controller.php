@@ -27,16 +27,14 @@ class Index_Controller extends Qwin_Controller
 {
     public function indexAction()
     {
-        // TODO escape集成到get中?增加rawGet?
-        $page = $this
-            ->get('page', '?module=index&action=welcome')
-            ->urlDecode()
-            ->toText();
+        $page = $this->get('page', '?module=index&action=welcome');
+        $page = urldecode($page);
+        $page = $this->toText($page);
 
-        $title = $this
-            ->get('title', $this->lang['Main Page'])
-            ->urlDecode()
-            ->toText();
+
+        $title = $this->get('title', $this->lang['Main Page']);
+        $title = urldecode($title);
+        $title = $this->toText($title);
 
         // 加载页眉导航的缓存 todo index controller
         $menus = require $this->cache->options['dir'] . '/menu.php';

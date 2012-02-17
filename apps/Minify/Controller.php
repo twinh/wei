@@ -65,7 +65,7 @@ class Minify_Controller extends Qwin_Controller
         }
 
         // 获取文件
-        $name = $this->get('g')->toString();
+        $name = $this->get('g');
         $file = $this->minify->getCacheFile($name);
         if (!is_file($file)) {
             $this->log('minify file "' . $name . '" not found.');
