@@ -35,21 +35,19 @@ class Qwin_IsLengthTest extends PHPUnit_Framework_TestCase {
     public function testCall() {
         $widget = $this->object;
 
-        $widget->source = 'length7';
+        $this->assertTrue($widget->isLength('length7', 7), 'Length is 7');
 
-        $this->assertTrue($widget->isLength(7), 'Length is 7');
+        $this->assertTrue($widget->isLength('length7', 0, 10), 'Length between 0 and 10, or said length less than 10');
 
-        $this->assertTrue($widget->isLength(0, 10), 'Length between 0 and 10, or said length less than 10');
+        $this->assertTrue($widget->isLength('length7', 5, 0), 'Length greater than 5');
 
-        $this->assertTrue($widget->isLength(5, 0), 'Length greater than 5');
+        $this->assertFalse($widget->isLength('length7', 0), 'Length is not 0');
 
-        $this->assertFalse($widget->isLength(0), 'Length is not 0');
+        $this->assertFalse($widget->isLength('length7', -2, -1), 'Length should be positive, so always be false');
 
-        $this->assertFalse($widget->isLength(-2, -1), 'Length should be positive, so always be false');
+        $this->assertFalse($widget->isLength('length7', 10, 0), 'Length should not greater than 10');
 
-        $this->assertFalse($widget->isLength(10, 0), 'Length should not greater than 10');
-
-        $widget->source = array(
+        /*$widget->source = array(
             'one apple', 'two pears', 'three bananas',
         );
 
@@ -57,7 +55,7 @@ class Qwin_IsLengthTest extends PHPUnit_Framework_TestCase {
 
         $this->assertTrue($widget->isLength(0, 10), 'Length between 0 and 10, or said length less than 10');
 
-        $this->assertTrue($widget->isLength(2, 0), 'Length greater than 2');
+        $this->assertTrue($widget->isLength(2, 0), 'Length greater than 2');*/
     }
 
 }

@@ -36,7 +36,7 @@ class Qwin_IsDirTest extends PHPUnit_Framework_TestCase {
     public function testCall() {
         $object = $this->object;
 
-        $this->assertEquals(false, $object->isDir(''), 'Not File path');
+        $this->assertEquals(false, $object->isDir(' '), 'Not File path');
 
         $this->assertEquals($object->isDir(__DIR__), __DIR__, 'File found');
 
@@ -50,7 +50,7 @@ class Qwin_IsDirTest extends PHPUnit_Framework_TestCase {
                 continue;
             }
             if (is_dir($path . DIRECTORY_SEPARATOR . $file)) {
-                $this->assertTrue($object->isDir($file), 'File in include path found');
+                $this->assertNotEquals(false, $object->isDir($file), 'File in include path found');
                 break;
             }
         }

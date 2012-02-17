@@ -27,16 +27,13 @@ class Qwin_NullTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
-    
+
     /**
      * @covers Qwin_Null::call
      */
     public function testCall() {
-        $this->assertNull($this->object->uuid()->null()->toSource(), 'Convert everything to null');
+        
     }
-
 }
-
-?>
