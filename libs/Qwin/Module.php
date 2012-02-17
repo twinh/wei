@@ -45,22 +45,21 @@ class Qwin_Module extends Qwin_Widget
         parent::__construct($options);
         $options = &$this->options;
 
-        $module = $this->request($options['key'])->toString();
-        $this->_name = $module ? $module : $options['default'];
+        $this->_name = $this->request($options['key'], $options['default']);
     }
 
     /**
      * Get module object or set module name
      *
      * @param string $name
-     * @return Qwin_Module
+     * @return string
      */
     public function call($name = null)
     {
         if ($name) {
             $this->_name = (string)$name;
         }
-        return $this;
+        return $this->_name;
     }
 
     /**

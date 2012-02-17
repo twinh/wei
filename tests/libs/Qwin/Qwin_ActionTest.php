@@ -54,9 +54,7 @@ class Qwin_ActionTest extends PHPUnit_Framework_TestCase {
 
         $action = $widget->action();
 
-        $this->assertInstanceOf('Qwin_Action', $action, 'get action widget');
-
-        $this->assertEquals('new action', $widget->action('new action')->toString(), 'set new action');
+        $this->assertEquals('new action', $widget->call('new action'), 'set new action');
 
         $widget->request->add('a', 'me');
         $widget->request->add('action', 'not me');
