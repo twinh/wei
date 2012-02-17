@@ -24,7 +24,7 @@
 
 /**
  * IsDigit
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -33,8 +33,8 @@
  */
 class Qwin_IsDigit extends Qwin_Widget
 {
-    public function call()
+    public function call($data)
     {
-        return (bool)preg_match('/^([0-9]+)$/', $this->source);
+        return (bool)preg_match('/^([0-9]+)$/', $data);
     }
 }
