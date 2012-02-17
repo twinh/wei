@@ -57,9 +57,7 @@ class Qwin_ModuleTest extends PHPUnit_Framework_TestCase {
 
         $module = $widget->module();
 
-        $this->assertInstanceOf('Qwin_Module', $module, 'get module widget');
-
-        $this->assertEquals('new module', $widget->module('new module')->toString(), 'set new module');
+        $this->assertEquals('new module', $widget->module('new module'), 'set new module');
 
         $widget->request->add('m', 'me');
         $widget->request->add('module', 'not me');

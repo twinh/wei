@@ -45,8 +45,7 @@ class Qwin_Action extends Qwin_Widget
         parent::__construct($options);
         $options = &$this->options;
 
-        $action = $this->request($options['key'])->toString();
-        $this->_name = $action ? $action : $options['default'];
+        $this->_name = $this->request($options['key'], $options['default']);
     }
 
     /**
@@ -60,7 +59,7 @@ class Qwin_Action extends Qwin_Widget
         if ($name) {
             $this->_name = (string)$name;
         }
-        return $this;
+        return $this->_name;
     }
 
     /**
