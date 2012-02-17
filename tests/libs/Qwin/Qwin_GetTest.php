@@ -36,15 +36,15 @@ class Qwin_GetTest extends PHPUnit_Framework_TestCase {
         $name = $this->object->call('name');
         $source = isset($_GET['name']) ? $_GET['name'] : null;
 
-        $this->assertEquals($name->source, $source);
+        $this->assertEquals($name, $source);
 
         $default = 'default';
         $name2 = $this->object->call('name', $default);
         $source = isset($_GET['name']) ? $_GET['name'] : $default;
 
-        $this->assertEquals($name2->source, $default);
+        $this->assertEquals($name2, $default);
 
-        $name->source = 'this is a string';
+        /*$name->source = 'this is a string';
         $name3 = $name->get(1);
 
         $this->assertEquals('h', $name3->source);
@@ -66,7 +66,7 @@ class Qwin_GetTest extends PHPUnit_Framework_TestCase {
 
         $name7 = $name->get(1, 'not int');
 
-        $name8 = $name->get(new stdClass());
+        $name8 = $name->get(new stdClass());*/
     }
 
     /**
@@ -78,16 +78,16 @@ class Qwin_GetTest extends PHPUnit_Framework_TestCase {
 
         $widget->add('key', 'value');
 
-        $this->assertEquals('value', $widget->get('key')->source(), 'string param');
+        $this->assertEquals('value', $widget->get('key'), 'string param');
 
-        $this->assertEquals('value', $widget->request('key')->source(), 'get from request widget');
+        $this->assertEquals('value', $widget->request('key'), 'get from request widget');
 
         $widget->add(array(
             'key1' => 'value1',
             'key2' => 'value2',
         ));
 
-        $this->assertEquals('value2', $widget->get('key2')->source(), 'array param');
+        $this->assertEquals('value2', $widget->get('key2'), 'array param');
     }
 
     /**
@@ -99,10 +99,10 @@ class Qwin_GetTest extends PHPUnit_Framework_TestCase {
 
         $widget->add('remove', 'just a moment');
 
-        $this->assertEquals('just a moment', $widget->get('remove')->source());
+        $this->assertEquals('just a moment', $widget->get('remove'));
 
         $widget->remove('remove');
 
-        $this->assertNull($widget->get('remove')->source());
+        $this->assertNull($widget->get('remove'));
     }
 }

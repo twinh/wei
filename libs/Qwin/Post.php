@@ -58,18 +58,4 @@ class Qwin_Post extends Qwin_Request
         }
         return $this;
     }
-
-    /**
-     * Remove data
-     *
-     * @param string $name
-     * @return Qwin_Post
-     */
-    public function remove($name)
-    {
-        if (isset($this->_data[$name])) {
-            unset($this->_data[$name]);
-        }
-        return $this;
-    }
 }
