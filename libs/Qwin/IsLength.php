@@ -33,14 +33,14 @@
  */
 class Qwin_IsLength extends Qwin_Widget
 {
-    public function call($min, $max = null)
+    public function call($data, $min, $max = null)
     {
+        $len = strlen($data);
         if (0 === $max) {
-            return $this->length() >= $min;
+            return $len >= $min;
         } elseif (!$max) {
-            return $this->length() == $min;
+            return $len == $min;
         } else {
-            $len = $this->length();
             return $min <= $len && $max >= $len;
         }
     }

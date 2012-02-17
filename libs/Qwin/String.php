@@ -26,6 +26,11 @@
  */
 class Qwin_String extends Qwin_Widget
 {
+    public function call()
+    {
+        return $this;
+    }
+
     /**
      * 快速生成一个随机数
      *
