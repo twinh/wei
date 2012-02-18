@@ -35,119 +35,100 @@ class Qwin_Is extends Qwin_Widget
 {
     public $options = array(
         'rules' => array(),
+        'data' => array(),
         'break' => false,
+        'breakOne' => false,
+        'validatedOne' => null,
+        'invalidatedOne' => null,
         'validated' => null,
-        'invalid' => null,
+        'invalidated' => null,
         'success' => null,
         'failure' => null,
     );
 
-    public $_validationResult;
+    protected $_validationResult;
 
-    public function call($rule, array $options = array())
+    public function call(array $options = array())
     {
-        // prepare options
-        if ($rule instanceof Qwin_Widget) {
-            $rule = $rule->source;
-        }
-
-        if (is_string($rule)) {
-            $rules = explode(', ', $rule);
-
-            foreach ($rules as $rule) {
-                $rule = trim($rule);
-                if (empty($rule)) {
-                    return $this->exception('Rule should not be empty.');
-                }
-
-                if (false === strpos($rule, '=')) {
-                    $options['rules'][$rule] = true;
-                } else {
-                    $rule = explode('=', $rule);
-                    $options['rules'][$rule[0]] = explode(',', $rule[1]);
-                }
-            }
-
-            if ($options) {
-                $options = $options + $this->options;
-            }
-        } elseif (is_array($rule)) {
-            $options = $rule + $this->options;
-        }
+        $options = $options + $this->options;
         $this->options = &$options;
 
-        $rules = $options['rules'];
-        $value = &$this->source;
+        if (empty($options['rules'])) {
+            return $this->exception('Rules should not be empty.');
+        }
 
-        // set true for default and will change when invalid
+        // set true for default and will change to false when invalidated
         $result = true;
 
         $validationResult = new Qwin_ValidationResult;
         $this->_validationResult = $validationResult;
 
-        if (!isset($rules['required']) && !$value) {
-            if ($options['success']) {
-                $this->callback($options['success'], array(
-                    $value, $validationResult, $this,
-                ));
-            }
-            return true;
-        } else {
-            // pass required validation
-            $validationResult->addValidatedRule('required');
+        foreach ($options['rules'] as $name => $rules) {
+            $data = isset($options['data'][$name]) ? $options['data'][$name] : null;
 
-            // trigger validated event
-            if ($options['validated']) {
-                $this->callback($options['validated'], array(
-                    'required', true, $value, $validationResult, $this,
-                ));
-            }
-
-            unset($rules['required']);
-        }
-
-        // valid the other rules
-        foreach ($rules as $rule => $params) {
-            $widget = 'is' . ucfirst($rule);
-
-            // TODO check if rule is exists
-            if (false === $this->callback(array($this, $widget), (array)$params)) {
-                // would be always false in the whole valid flow
-                $result = false;
-
-                $validationResult->addInvalidRule($rule);
-
-                // trigger invalid event
-                if ($options['invalid']) {
-                    $this->callback($options['invalid'], array(
-                        $rule, $params, $value, $validationResult, $this,
-                    ));
-                }
-
-                if ($options['break']) {
-                    if ($options['failure']) {
-                        $this->callback($options['failure'], array(
-                            $value, $validationResult, $this,
-                        ));
-                    }
-                    return false;
-                }
+            // make required rule at first
+            if (!isset($rules['required'])) {
+                $value = true;
             } else {
-                // trigger validated event
-                if ($options['validated']) {
-                    $this->callback($options['validated'], array(
-                        $rule, $params, $value, $validationResult, $this,
+                $value = (bool)$rules['required'];
+                unset($rules['required']);
+            }
+            $rules = array('required' => $value) + $rules;
+
+            foreach ($rules as $rule => $params) {
+                $widget = 'is' . ucfirst($rule);
+
+                // prepare parameters for validte widget
+                $params = (array)$params;
+                array_unshift($params, $data);
+
+                // TODO check if rule is exists
+                if (false === $this->callback(array($this, $widget), $params)) {
+                    // would be always false in the whole valid flow
+                    $result = false;
+
+                    $validationResult->addInvalidatedRule($rule);
+
+                    // trigger invalidatedOne event
+                    $options['invalidatedOne'] && $this->callback($options['invalidatedOne'], array(
+                        $name, $rule, $params, $data, $rules, $validationResult, $this,
                     ));
+
+                    if ($options['breakOne']) {
+                        break;
+                    }
+                } else {
+                    // trigger validatedOne event
+                    $options['validatedOne'] && $this->callback($options['validatedOne'], array(
+                        $name, $rule, $params, $data, $rules, $validationResult, $this,
+                    ));
+
+                    // goto next rules
+                    if (!$data && 'required' == $rule) {
+                        break;
+                    }
+                }
+            }
+
+            if ($result) {
+                $options['validate'] && $this->callback($options['validate'], array(
+                    $name, $rules, $validationResult, $this,
+                ));
+            } else {
+                $options['invalidated'] && $this->callback($options['invalidated'], array(
+                    $name, $rules, $validationResult, $this,
+                ));
+
+                if ($options['breakOne'] || $options['break']) {
+                    break;
                 }
             }
         }
 
         $event = $result ? 'success' : 'failure';
-        if ($options[$event]) {
-            $this->callback($options[$event], array(
-                $value, $validationResult, $this,
-            ));
-        }
+        $options[$event] && $this->callback($options[$event], array(
+            $validationResult, $this,
+        ));
 
         return $result;
     }
@@ -160,5 +141,10 @@ class Qwin_Is extends Qwin_Widget
     public function getLastValidationResult()
     {
         return $this->_validationResult;
+    }
+
+    public function isRequired($data, $required)
+    {
+        return !$required || $data;
     }
 }
