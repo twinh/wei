@@ -36,64 +36,131 @@ class Qwin_IsTest extends PHPUnit_Framework_TestCase {
     public function testCall() {
         $widget = $this->object;
 
-        $widget->source('email@email.com');
-
-        $this->assertTrue($widget->is('email'), 'one rule');
-
-        $this->assertFalse($widget->is('email, qq'), 'more rules');
-
-        $this->assertTrue($widget->is('length=5,20'), 'rule with params');
+        $this->assertTrue($widget->is(array(
+            'rules' => array(
+                'name' => array(
+                    'email' => true,
+                ),
+            ),
+            'data' => array(
+                'name' => 'email@email.com',
+            ),
+        )), 'one rule');
 
         $this->assertFalse($widget->is(array(
             'rules' => array(
-                'length' => array(5, 10),
+                'name' => array(
+                    'email' => true,
+                    'qq' => true,
+                ),
+            ),
+            'data' => array(
+                'name' => 'email@email.com',
+            ),
+        )), 'more rules');
+
+        $this->assertTrue($widget->is(array(
+            'rules' => array(
+                'name' => array(
+                    'length' => array(5, 20),
+                ),
+            ),
+            'data' => array(
+                'name' => 'email@email.com',
+            ),
+        )), 'rule with params');
+
+        $this->assertFalse($widget->is(array(
+            'rules' => array(
+                'email' => array(
+                    'length' => array(5, 10),
+                ),
+            ),
+            'data' => array(
+                'email' => 'email@email.com'
             ),
             'break' => true,
         )), 'array options');
 
-        $rule = Qwin::getInstance()->variable('email');
-        $this->assertTrue($widget->is($rule), 'widget as rule');
-
         // success event
-        $widget->is('email', array(
+        $widget->is(array(
+            'rules' => array(
+                'name' => array(
+                    'email' => true
+                ),
+            ),
+            'data' => array(
+                'name' => 'email@email.com',
+            ),
             'success' => array($this, 'validSuccess'),
         ));
         $this->assertEquals('success', $this->_validState, 'success event');
 
         // failure event
-        $widget->is('length=10', array(
+        $widget->is(array(
+            'rules' => array(
+                'name' => array(
+                    'length' => array(10),
+                ),
+            ),
+            'data' => array(
+                'name' => 'email@email.com',
+            ),
             'failure' => array($this, 'validFailure')
         ));
         $this->assertEquals('failure', $this->_validState, 'failure event');
 
         // empty value test
         // note that widthout "required" rule, all empty value would pass valid
-        $emtpyWidget = Qwin::getInstance()->variable('');
-        $emtpyWidget->is('email', array(
+        $widget->is(array(
+            'rules' => array(
+                'name' => array(
+                    'email' => true,
+                    'required' => false,
+                ),
+            ),
             'success' => array($this, 'validSuccess'),
         ));
         $this->assertEquals('success', $this->_validState, 'empty value test');
 
         // validated event
-        $widget->source('email@email.com');
-        $widget->is('email', array(
+        $widget->is(array(
+            'rules' => array(
+                'name' => array(
+                    'email' => true,
+                ),
+            ),
+            'data' => array(
+                'name' => 'email@email.com',
+            ),
             'validated' => array($this, 'validated')
         ));
 
         // validated with required rule
-        $widget->is('required, email', array(
+        /*$widget->is('required, email', 'email@email.com', array(
             'validated' => array($this, 'requredRuleValidated')
-        ));
+        ));*/
 
         // invalid event
-        $widget->is('required, length=10, email', array(
+        $widget->is(array(
+            'rules' => array(
+                'name' => array(
+                    'required' => true,
+                    'length' => array(10),
+                    'email' => true,
+                )
+            ),
+            'data' => array(
+                'name' => 'email@email.com',
+            ),
             'invalid' => array($this, 'invalid')
         ));
 
         // rule should not be empty
-        $this->setExpectedException('Qwin_Exception', 'Rule should not be empty.');
+        $this->setExpectedException('Qwin_Exception', 'Rules should not be empty.');
 
-        $widget->is('');
+        $is = new Qwin_Is;
+        $is->call(array());
     }
 
     /**
@@ -103,7 +170,13 @@ class Qwin_IsTest extends PHPUnit_Framework_TestCase {
     {
         $widget = $this->object;
 
-        $widget->is('email');
+        $widget->is(array(
+            'rules' => array(
+                'name' => array(
+                    'email' => true,
+                ),
+            ),
+        ));
 
         $this->assertInstanceOf('Qwin_ValidationResult', $widget->getLastValidationResult());
     }
