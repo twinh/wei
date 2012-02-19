@@ -39,15 +39,15 @@ class Qwin_ResultTest extends PHPUnit_Framework_TestCase {
             'data' => 'append data',
         ));
 
-        $this->assertArrayHasKey('data', $result->source());
+        $this->assertArrayHasKey('data', $result);
 
-        $this->assertCount(3, $result->source());
+        $this->assertCount(3, $result);
 
         $this->assertEquals(array(
             'code' => -1,
             'message' => 'message',
             'data' => 'append data',
-        ), $result->source());
+        ), $result);
     }
 
 }

@@ -36,18 +36,18 @@ class Qwin_WidgetTest extends PHPUnit_Framework_TestCase {
         // init Qwin
         Qwin::getInstance();
 
-        // self
-        $object = new Qwin_Widget('source');
-
-        $this->assertEquals('source', $object->source);
-
-        // for code cover
-        $object = new Qwin_Get('option');
-
-        $object2 = new Qwin_Get(array('option'));
-
-        $object2->options = 'string';
-        $object2->__construct('new string');
+//        // self
+//        $object = new Qwin_Widget('source');
+//
+//        $this->assertEquals('source', $object->source);
+//
+//        // for code cover
+//        $object = new Qwin_Get('option');
+//
+//        $object2 = new Qwin_Get(array('option'));
+//
+//        $object2->options = 'string';
+//        $object2->__construct('new string');
     }
 
     /**
@@ -81,18 +81,6 @@ class Qwin_WidgetTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_Widget::source
-     */
-    public function testSource()
-    {
-        $widget = $this->object;
-
-        $widget->source('string');
-
-        $this->assertEquals('string', $widget->source(), 'get source');
-    }
-
-    /**
      * @covers Qwin_Widget::__call
      */
     public function test__call() {
@@ -111,15 +99,6 @@ class Qwin_WidgetTest extends PHPUnit_Framework_TestCase {
         $get = $this->object->get;
 
         $this->assertEquals('Qwin_Get', get_class($get), 'widget "get" found.');
-    }
-
-    /**
-     * @covers Qwin_Widget::__toString
-     */
-    public function test__toString() {
-        $this->object->source = 'source';
-
-        $this->assertEquals('source', $this->object->__toString());
     }
 }
 

@@ -50,6 +50,6 @@ class Qwin_Ip extends Qwin_Widget
         } else {
             $ip = $default;
         }
-        return Qwin::getInstance()->variable($ip);
+        return $ip;
     }
 }
