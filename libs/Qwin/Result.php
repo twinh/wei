@@ -41,9 +41,9 @@ class Qwin_Result extends Qwin_Widget
 
     public function __invoke($message, $code, array $append = array())
     {
-        return Qwin::getInstance()->variable(array(
+        return array(
             $this->options['code'] => $code,
             $this->options['message'] => $message,
-        ) + $append);
+        ) + $append;
     }
 }

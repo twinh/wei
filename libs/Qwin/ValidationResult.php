@@ -59,9 +59,9 @@ class Qwin_ValidationResult extends Qwin_Widget
      *
      * @return Qwin_ValidationResult
      */
-    public function __invoke($result = true)
+    public function __invoke()
     {
-        return new self($result);
+        return new self();
     }
 
     /**

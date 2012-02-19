@@ -39,8 +39,8 @@ class Qwin_DumpTest extends PHPUnit_Framework_TestCase {
         $widget->option('exit', false);
 
         // test dump invoker, using fake invoker to avoid large infomation output
-        $tmp = $widget->invoker;
-        $widget->invoker = 'fake invoker';
+        $tmp = $widget->__invoker;
+        $widget->__invoker = 'fake invoker';
 
         ob_start();
 
@@ -51,7 +51,7 @@ class Qwin_DumpTest extends PHPUnit_Framework_TestCase {
 
         ob_start();
 
-        var_dump($widget->invoker);
+        var_dump($widget->__invoker);
 
         $expected = ob_get_contents();
         ob_end_clean();
@@ -59,7 +59,7 @@ class Qwin_DumpTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $actual);
 
         // reset invoker
-        $widget->invoker = $tmp;
+        $widget->__invoker = $tmp;
 
         // test custome variable
         $var = 'string';

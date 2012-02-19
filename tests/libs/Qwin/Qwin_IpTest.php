@@ -39,28 +39,26 @@ class Qwin_IpTest extends PHPUnit_Framework_TestCase {
         // test for HTTP_X_FORWARDED_FOR
         $_SERVER['HTTP_X_FORWARDED_FOR'] = '127.0.0.1';
 
-        $this->assertEquals($_SERVER['HTTP_X_FORWARDED_FOR'], $widget->ip()->source);
+        $this->assertEquals($_SERVER['HTTP_X_FORWARDED_FOR'], $widget->ip());
 
         // test for HTTP_CLIENT_IP
         unset($_SERVER['HTTP_X_FORWARDED_FOR']);
 
         $_SERVER['HTTP_CLIENT_IP'] = '127.0.0.2';
 
-        $this->assertEquals($_SERVER['HTTP_CLIENT_IP'], $widget->ip()->source);
+        $this->assertEquals($_SERVER['HTTP_CLIENT_IP'], $widget->ip());
 
         // test for REMOTE_ADDR
         unset($_SERVER['HTTP_CLIENT_IP']);
 
         $_SERVER['REMOTE_ADDR'] = '127.0.0.3';
 
-        $this->assertEquals($_SERVER['REMOTE_ADDR'], $widget->ip()->source);
+        $this->assertEquals($_SERVER['REMOTE_ADDR'], $widget->ip());
 
         // test for default value
         unset($_SERVER['REMOTE_ADDR']);
 
-        $this->assertEquals('0.0.0.0', $widget->ip()->source);
+        $this->assertEquals('0.0.0.0', $widget->ip());
     }
 
 }
-
-?>
