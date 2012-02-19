@@ -23,7 +23,7 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
  * @since       2009-11-24 20:45:11
- * @todo        get, delete, next, prev, nextKey, prevKey, renameKey, copy, insertAfter, insertAfterKey, ..
+ * @todo        next, prev, nextKey, prevKey, renameKey, copy, insertAfter, insertAfterKey, ..
  */
 
 class Qwin_Array extends Qwin_Widget
@@ -97,28 +97,6 @@ class Qwin_Array extends Qwin_Widget
     }
 
     /**
-     * 根据指定的键名和排列顺序,排列二级数组
-     *
-     * @param array $list 排列的二级数组
-     * @param string $order_key 排序的键名
-     * @param int $type 3 => SORT_DESC; 4 => SORT_ASC;
-     * @param array $type 排列好的二级数组
-     * @todo 可以指定排列顺序,由小到大和由大到小
-     */
-    public static function orderBy($list, $keyName = 'order', $type = SORT_DESC)
-    {
-        if (0 == count($list)) {
-            return $list;
-        }
-        $list2 = array();
-        foreach ($list as $key => $value) {
-            $list2[$key] = $value[$keyName];
-        }
-        array_multisort($list2, $type, $list);
-        return $list;
-    }
-
-    /**
      * 按大写字母分割字符串
      *
      * @param string $string 字符串
@@ -175,38 +153,6 @@ class Qwin_Array extends Qwin_Widget
             }
         }
         return $prevKey;
-    }
-
-    /**
-     * 解码数组,统一数组键名不为数字,方便调用
-     *
-     * @param string $array
-     * @return array
-     * @example $array = array(
-     *              'datepicker',
-     *              'colorpicker' => array(
-     *                  'width' => 200,
-     *                  'height' => 100,
-     *              )
-     *          );
-     *          => $array = array(
-     *              'datepicker' => array(
-     *              ),
-     *              'colorpicker' => array(
-     *                  'width' => 200,
-     *                  'height' => 100,
-     *              )
-     *          );
-     */
-    public static function decodeArray($array)
-    {
-        foreach($array as $key => $val) {
-            if (is_numeric($key)) {
-                $array[$val] = array();
-                unset($array[$key]);
-            }
-        }
-        return $arr;
     }
 
     /**

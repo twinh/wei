@@ -41,7 +41,7 @@ class Qwin extends Qwin_Widget
     /**
      * Version
      */
-    const VERSION = '0.8.5';
+    const VERSION = '0.8.6';
 
     /**
      * 存储微件对象的数组
@@ -129,48 +129,6 @@ class Qwin extends Qwin_Widget
         ),
         'isNull' => array(
             'is_null', 0, 1, 1
-        ),
-        'lower' => array(
-            'strtolower', 0, 1,
-        ),
-        'upper' => array(
-            'strtoupper', 0, 1,
-        ),
-        'upperFirst' => array(
-            'ucfirst', 0, 1,
-        ),
-        'urlDecode' => array(
-            'urldecode', 0, 1,
-        ),
-        'urlEnCode' => array(
-            'urlencode', 0, 1,
-        ),
-        'trim' => array(
-            'trim', 0,
-        ),
-        'ltrim' => array(
-            'ltrim', 0,
-        ),
-        'rtrim' => array(
-            'rtrim', 0,
-        ),
-        'join' => array(
-            'implode', 1,
-        ),
-        'pad' => array(
-            'str_pad',
-        ),
-        'repeat' => array(
-            'str_repeat',
-        ),
-        'shuffle' => array(
-            'str_shuffle',
-        ),
-        'md5' => array(
-            'md5',
-        ),
-        'sha1' => array(
-            'sha1',
         ),
     );
 
