@@ -36,6 +36,6 @@ class Qwin_NullTest extends PHPUnit_Framework_TestCase {
     public function testCall() {
         $widget = $this->object;
 
-        $this->assertTrue(is_callable($widget));
+        $this->assertTrue(is_callable($widget->call()));
     }
 }
