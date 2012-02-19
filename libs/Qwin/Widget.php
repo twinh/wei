@@ -39,21 +39,14 @@ require_once 'Widgetable.php';
 class Qwin_Widget implements Qwin_Widgetable
 {
     /**
-     * 对象的值
-     *
-     * @var mixed
-     */
-    public $source;
-
-    /**
      * 调用者,对象环的上一个对象
      *
      * @var Qwin_Widget
      */
-    public $invoker;
+    public $__invoker;
 
     /**
-     * options
+     * Options
      *
      * @var array
      */
@@ -62,16 +55,12 @@ class Qwin_Widget implements Qwin_Widgetable
     /**
      * init widget
      *
-     * @param mixed $source 对象的值
+     * @param mixed $options 对象的值
      * @return Qwin_Widget 当前对象
      */
-    public function __construct($source = null)
+    public function __construct(array $options = array())
     {
-        if ('Qwin_Widget' == get_class($this)) {
-            $this->source = $source;
-        } else {
-            $this->option((array)$source);
-        }
+        $this->option($options);
     }
 
     /**
@@ -125,22 +114,6 @@ class Qwin_Widget implements Qwin_Widgetable
     }
 
     /**
-     * Get/Set source value
-     *
-     * @param mixed $value source value
-     * @return Qwin_Widget
-     */
-    public function source($value = null)
-    {
-        if (!func_num_args()) {
-            return $this->source;
-        } else {
-            $this->source = $value;
-            return $this;
-        }
-    }
-
-    /**
      * 魔术方法,实现通过方法调用同名微件
      *
      * @param string $name 方法名称
@@ -149,7 +122,7 @@ class Qwin_Widget implements Qwin_Widgetable
      */
     public function __call($name, $args)
     {
-        return Qwin::getInstance()->callWidget($this, $name, $args);
+        return Qwin::getInstance()->invokeWidget($this, $name, $args);
     }
 
     /**
@@ -161,30 +134,10 @@ class Qwin_Widget implements Qwin_Widgetable
     public function __get($name)
     {
         $this->$name = $widget = Qwin::getInstance()->widget($name);
-        $widget->invoker = $this;
+        $widget->__invoker = $this;
         return $widget;
     }
 
-    /**
-     * Call the widget object as a function by called the "call" method
-     *
-     * @param mixed $arg
-     * @return mixed
-     */
-    /*public function __invoke($arg = null)
-    {
-        $args = func_get_args();
-        return call_user_func_array(array($this, 'call'), $args);
-    }*/
-
-    /**
-     * 魔术方法,返回对象值的字符串形式
-     *
-     * @return string
-     * @todo 针对不同类型处理
-     */
-    public function __toString()
-    {
-        return (string)$this->source;
-    }
+    // to be implemented by subclasses
+    //public function __invoke();
 }

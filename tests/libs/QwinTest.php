@@ -74,14 +74,6 @@ class QwinTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin::instance
-     */
-    public function testInstance()
-    {
-        $this->assertNull($this->object->instance('do nothing now'));
-    }
-
-    /**
      * @covers Qwin::__invoke
      */
     public function test__invoke() {
@@ -126,17 +118,6 @@ class QwinTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('twin', $config2, 'Get config');
 
         $this->assertEmpty($this->object->config(new stdClass()));
-    }
-
-    /**
-     * @covers Qwin::variable
-     */
-    public function testVariable() {
-        $var = $this->object->variable('var', 'Qwin_Widget');
-
-        $expected = new Qwin_Widget('var');
-
-        $this->assertEquals($expected, $var);
     }
 
     /**
@@ -195,16 +176,16 @@ class QwinTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin::callWidget
+     * @covers Qwin::invokeWidget
      */
-    public function testCallWidget() {
+    public function testInvokeWidget() {
         $widget = $this->object;
 
-        $name = $this->object->callWidget($this->object, 'post', array('name'));
+        $name = $this->object->invokeWidget($this->object, 'post', array('name'));
 
         $this->assertEquals(class_exists('Qwin_Post'), true, 'Class "Qwin_Post" found.');
 
-        $this->assertTrue($widget->isNull(null), 'check if source is null');
+        $this->assertTrue($widget->isNull(null), 'check if is null');
 
         $this->setExpectedException('Qwin_Exception');
 

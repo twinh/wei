@@ -40,7 +40,7 @@ class Qwin_Module extends Qwin_Widget
         'default' => 'index',
     );
 
-    public function __construct($options = null)
+    public function __construct(array $options = array())
     {
         parent::__construct($options);
         $options = &$this->options;

@@ -24,7 +24,7 @@
 
 /**
  * User
- * 
+ *
  * @package     Qwin
  * @subpackage  Application
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -36,10 +36,10 @@ class Qwin_User extends Qwin_ArrayWidget
     protected $_initData = array(
         'username' => 'guest',
     );
-    
+
     protected $_data = array();
-    
-    public function __construct($source = null)
+
+    public function __construct(array $options = array())
     {
         $data = (array)$this->session->get('user');
         if (empty($data) || !isset($data['username']) || !$data['username']) {
@@ -48,28 +48,28 @@ class Qwin_User extends Qwin_ArrayWidget
             $this->_data = $data;
         }
     }
-    
+
     public function __invoke()
     {
         return $this;
     }
-    
+
     /**
      * 注销登录
-     * 
-     * @return Qwin_User 
+     *
+     * @return Qwin_User
      */
     public function logout()
     {
         $this->_data = $this->_initData;
         return $this;
     }
-    
+
     public function isLogin()
     {
         return 'guest' != strtolower($this->_data['username']);
     }
-    
+
     /**
      * 析构方法,将用户信息保存到session中
      */

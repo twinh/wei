@@ -31,14 +31,8 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2010-08-16 18:41:13
  */
-class Qwin_Lang extends Qwin_Widget implements ArrayAccess
+class Qwin_Lang extends Qwin_ArrayWidget
 {
-    /**
-     * 语言转换数据
-     * @var array
-     */
-    protected $_data = array();
-
     /**
      * 当前语言名称
      *
@@ -71,7 +65,7 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
      * @return Lang_Widget
      * @todo 简化
      */
-    public function  __construct(array $options = null)
+    public function  __construct(array $options = array())
     {
         parent::__construct($options);
         $options = &$this->options;
@@ -210,49 +204,6 @@ class Qwin_Lang extends Qwin_Widget implements ArrayAccess
     {
         $name = ucfirst(strtr($name, '_', ' '));
         return $this->t($name);
-    }
-
-    /**
-     * 检查索引是否存在
-     *
-     * @param string $offset 索引
-     * @return bool
-     */
-    public function offsetExists($offset)
-    {
-        return isset($this->_data[$offset]);
-    }
-
-    /**
-     * 获取索引的数据
-     *
-     * @param string $offset 索引
-     * @return mixed
-     */
-    public function offsetGet($offset)
-    {
-        return isset($this->_data[$offset]) ? $this->_data[$offset] : $offset;
-    }
-
-    /**
-     * 设置索引的值
-     *
-     * @param string $offset 索引
-     * @param mixed $value 值
-     */
-    public function offsetSet($offset, $value)
-    {
-        $this->_data[$offset] = $value;
-    }
-
-    /**
-     * 销毁一个索引
-     *
-     * @param string $offset 索引的名称
-     */
-    public function offsetUnset($offset)
-    {
-        unset($this->_data[$offset]);
     }
 
     /**

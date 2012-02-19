@@ -46,7 +46,7 @@ class Qwin_Dump extends Qwin_Widget
     {
         $args = func_get_args();
         if (empty($args)) {
-            var_dump($this->invoker);
+            var_dump($this->__invoker);
         } else {
             call_user_func_array('var_dump', $args);
         }

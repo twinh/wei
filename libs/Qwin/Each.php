@@ -40,6 +40,6 @@ class Qwin_Each extends Qwin_Widget
                 break;
             }
         }
-        return $this->invoker;
+        return $this->__invoker;
     }
 }

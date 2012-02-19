@@ -41,9 +41,8 @@ class Qwin_IsDir extends Qwin_Widget
      */
     protected  $_fn;
 
-    public function __construct($source = null)
+    public function __construct(array $options = array())
     {
-        parent::__construct($source);
         $this->_fn = function_exists('stream_resolve_include_path');
     }
 

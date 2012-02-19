@@ -36,17 +36,17 @@ class Qwin_ReplaceFirst extends Qwin_Widget
     /**
      * Replace the first string
      *
-     * @param string $source the input string
+     * @param string $string the string to be searched and replaced
      * @param string $search the string to search
      * @param string $replace the string to replace
      * @return string
      */
-    public function __invoke($source, $search, $replace)
+    public function __invoke($string, $search, $replace)
     {
-        $pos = strpos($source, $search);
+        $pos = strpos($string, $search);
         if ($pos === false) {
-            return $source;
+            return $string;
         }
-        return substr_replace($source, $replace, $pos, strlen($search));
+        return substr_replace($string, $replace, $pos, strlen($search));
     }
 }
