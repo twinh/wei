@@ -59,6 +59,17 @@ class Qwin_IsTest extends PHPUnit_Framework_TestCase {
             ),
         )), 'more rules');
 
+        $widget->is(array(
+            'rules' => array(
+                'name' => array(
+                    'required' => false,
+                ),
+            ),
+            'data' => array(
+
+            ),
+        ));
+
         $this->assertTrue($widget->is(array(
             'rules' => array(
                 'name' => array(
@@ -136,11 +147,6 @@ class Qwin_IsTest extends PHPUnit_Framework_TestCase {
             'validated' => array($this, 'validated')
         ));
 
-        // validated with required rule
-        /*$widget->is('required, email', 'email@email.com', array(
-            'validated' => array($this, 'requredRuleValidated')
-        ));*/
-
         // invalid event
         $widget->is(array(
             'rules' => array(
@@ -153,7 +159,44 @@ class Qwin_IsTest extends PHPUnit_Framework_TestCase {
             'data' => array(
                 'name' => 'email@email.com',
             ),
-            'invalid' => array($this, 'invalid')
+            'invalidated' => array($this, 'invalid')
+        ));
+
+        $widget->is(array(
+            'rules' => array(
+                'name' => array(
+                    'email' => true,
+                ),
+            ),
+            'data' => array(
+                'name' => 'email@email.com',
+            ),
+            'validatedOne' => array($this, 'validatedOne')
+        ));
+        //$this->assertEquals('validatedOne', $this->_validState);
+
+        $widget->is(array(
+            'rules' => array(
+                'name' => array(
+                    'email' => true,
+                ),
+            ),
+            'data' => array(
+                'name' => 'email.com',
+            ),
+            'invalidatedOne' => array($this, 'invalidatedOne')
+        ));
+
+        $widget->is(array(
+            'rules' => array(
+                'name' => array(
+                    'email' => true,
+                ),
+            ),
+            'data' => array(
+
+            ),
+            'breakOne' => true,
         ));
 
         // rule should not be empty
@@ -206,5 +249,15 @@ class Qwin_IsTest extends PHPUnit_Framework_TestCase {
     public function invalid()
     {
         $this->assertTrue(true, 'called invalid method');
+    }
+
+    public function validatedOne()
+    {
+        $this->_validState = __FUNCTION__;
+    }
+
+    public function invalidatedOne()
+    {
+        $this->_validState = __FUNCTION__;
     }
 }
