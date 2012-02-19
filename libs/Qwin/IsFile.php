@@ -52,13 +52,11 @@ class Qwin_IsFile extends Qwin_Widget
      * @param bool $abs return file path or true
      * @return string|bool
      */
-    public function call($abs = true)
+    public function call($file, $abs = true)
     {
-        if (!is_string($this->source)) {
+        if (!is_string($file)) {
             return false;
         }
-
-        $file = &$this->source;
 
         // check directly if it's absolute path
         if ('/' == $file[0] || '\\' == $file[0] || ':' == $file[1]) {
