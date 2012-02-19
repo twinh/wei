@@ -41,27 +41,27 @@ class Qwin_ValidationResultTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_ValidationResult::getInvalidRules
-     * @covers Qwin_ValidationResult::addInvalidRule
-     * @covers Qwin_ValidationResult::removeInvalidRule
-     * @covers Qwin_ValidationResult::removeValidateRule
+     * @covers Qwin_ValidationResult::getInvalidatedRules
+     * @covers Qwin_ValidationResult::addInvalidatedRule
+     * @covers Qwin_ValidationResult::removeInvalidatedRule
+     * @covers Qwin_ValidationResult::removeValidatedRule
      */
     public function testGetInvalidRules() {
         $widget = $this->object;
 
-        $widget->addInvalidRule('email');
+        $widget->addInvalidatedRule('email');
 
-        $this->assertContains('email', $widget->getInvalidRules());
+        $this->assertContains('email', $widget->getInvalidatedRules());
 
-        $widget->removeInvalidRule('email');
+        $widget->removeInvalidatedRule('email');
 
-        $this->assertNotContains('email', $widget->getInvalidRules());
+        $this->assertNotContains('email', $widget->getInvalidatedRules());
     }
 
     /**
      * @covers Qwin_ValidationResult::getValidatedRules
      * @covers Qwin_ValidationResult::addValidatedRule
-     * @covers Qwin_ValidationResult::removeValidateRule
+     * @covers Qwin_ValidationResult::removeValidatedRule
      */
     public function testGetValidatedRules() {
         $widget = $this->object;
@@ -70,24 +70,24 @@ class Qwin_ValidationResultTest extends PHPUnit_Framework_TestCase {
 
         $this->assertContains('alnum', $widget->getValidatedRules());
 
-        $widget->removeValidateRule('alnum');
+        $widget->removeValidatedRule('alnum');
 
         $this->assertNotContains('alnum', $widget->getValidatedRules());
     }
 
     /**
-     * @covers Qwin_ValidationResult::isInvalid
+     * @covers Qwin_ValidationResult::isInvalidated
      */
-    public function testIsInvalid() {
+    public function testIsInvalidated() {
         $widget = $this->object;
 
-        $widget->addInvalidRule('email');
+        $widget->addInvalidatedRule('email');
 
-        $this->assertTrue($widget->isInvalid('email'));
+        $this->assertTrue($widget->isInvalidated('email'));
 
-        $widget->removeInvalidRule('email');
+        $widget->removeInvalidatedRule('email');
 
-        $this->assertFalse($widget->isInvalid('email'));
+        $this->assertFalse($widget->isInvalidated('email'));
     }
 
     /**
@@ -100,7 +100,7 @@ class Qwin_ValidationResultTest extends PHPUnit_Framework_TestCase {
 
         $this->assertTrue($widget->isValidated('email'));
 
-        $widget->removeValidateRule('email');
+        $widget->removeValidatedRule('email');
 
         $this->assertFalse($widget->isValidated('email'));
     }
