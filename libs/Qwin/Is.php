@@ -111,7 +111,7 @@ class Qwin_Is extends Qwin_Widget
             }
 
             if ($result) {
-                $options['validate'] && $this->callback($options['validate'], array(
+                $options['validated'] && $this->callback($options['validated'], array(
                     $name, $rules, $validationResult, $this,
                 ));
             } else {
