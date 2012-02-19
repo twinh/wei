@@ -62,6 +62,6 @@ class Qwin_Reflection extends Qwin_Widget
      */
     public function __invoke()
     {
-        return new Qwin_Reflection_Class($this->invoker);
+        return new Qwin_Reflection_Class($this->__invoker);
     }
 }

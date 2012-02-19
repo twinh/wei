@@ -58,20 +58,6 @@ class Qwin extends Qwin_Widget
     protected $_objects = array();
 
     /**
-     * 存储值不为字符串或整数的微件键名
-     *
-     * @var array
-     */
-    protected $_varKeys = array();
-
-    /**
-     * 存储值不为字符串或整数的微件值
-     *
-     * @var array
-     */
-    protected $_varValues = array();
-
-    /**
      * Global configurations of all widgets
      *
      * @var array
@@ -205,16 +191,6 @@ class Qwin extends Qwin_Widget
     }
 
     /**
-     * Instance a class
-     *
-     * @param string $class Class name
-     */
-    public function instance($class)
-    {
-
-    }
-
-    /**
      * 初始化一个类
      *
      * @param string $name 类名
@@ -319,18 +295,6 @@ class Qwin extends Qwin_Widget
     }
 
     /**
-     * Instance a variable widget
-     *
-     * @param mixed $var variable
-     * @return Qwin_Widget
-     */
-    public function variable($var = null, $class = 'Qwin_Widget')
-    {
-        $this->_varKeys[] = $var;
-        return $this->_varValues[] = new $class($var);
-    }
-
-    /**
      * Get Qwin class instance
      *
      * @param mixed $config [optional] config file path or array
@@ -377,7 +341,7 @@ class Qwin extends Qwin_Widget
      * @param array $args the arguments for "call" method
      * @return mixed
      */
-    public function callWidget(Qwin_Widget $invoker, $name, $args)
+    public function invokeWidget(Qwin_Widget $invoker, $name, $args)
     {
         // check if internal widget
         if (isset($this->_widgetsMap[$name])) {
@@ -392,16 +356,9 @@ class Qwin extends Qwin_Widget
         }
 
         // set invoker and soure value for widget
-        $widget->invoker = $invoker;
-        $widget->source = $invoker->source;
+        $widget->__invoker = $invoker;
 
-        $result = call_user_func_array(array($widget, '__invoke'), $args);
-
-        // set back source so that source can be passed in widgets
-        $invoker->source = $widget->source;
-
-        // return result rather than widget object
-        return $result;
+        return call_user_func_array(array($widget, '__invoke'), $args);
     }
 
     /**

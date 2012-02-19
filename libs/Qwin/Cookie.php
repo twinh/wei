@@ -46,9 +46,9 @@ class Qwin_Cookie extends Qwin_ArrayWidget
         'raw' => false,
     );
 
-    public function __construct($option = null)
+    public function __construct(array $options = array())
     {
-        parent::__construct($option);
+        parent::__construct($options);
         $this->_data = &$_COOKIE;
     }
 

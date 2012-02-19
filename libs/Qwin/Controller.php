@@ -34,7 +34,7 @@
  */
 class Qwin_Controller extends Qwin_Widget
 {
-    public function __construct($options = null)
+    public function __construct(array $options = array())
     {
         parent::__construct($options);
 

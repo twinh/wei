@@ -57,9 +57,9 @@ class Qwin_Marker extends Qwin_Widget
         'display' => null,
     );
 
-    public function __construct($source = null)
+    public function __construct(array $options = array())
     {
-        parent::__construct($source);
+        parent::__construct($options);
         if ($this->options['auto']) {
             $this->__invoke('Start');
         }
@@ -78,7 +78,7 @@ class Qwin_Marker extends Qwin_Widget
         $times = explode(' ', microtime());
         $this->_data[$name] = $times[1] . substr($times[0], 1);
 
-        return $this->invoker;
+        return $this->__invoker;
     }
 
     /**

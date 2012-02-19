@@ -54,7 +54,7 @@ class Qwin_View extends Qwin_ArrayWidget
      *
      * @param mixed
      */
-    public function __construct($options = null)
+    public function __construct(array $options = array())
     {
         parent::__construct($options);
         $options = &$this->options;
@@ -121,7 +121,7 @@ class Qwin_View extends Qwin_ArrayWidget
             . '<link rel="stylesheet" type="text/css" href="' . $this->url('minify', 'index', array('g' => $minify->pack('css'))) . '" media="all" />' . PHP_EOL;
 
         $output = $this->replaceFirst(&$output, '</head>', $replace . '</head>');
-        
+
         echo $output;
         unset($output);
 
