@@ -43,9 +43,9 @@ class Qwin_IsAjaxTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_IsAjax::call
+     * @covers Qwin_IsAjax::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
             unset($_SERVER['HTTP_X_REQUESTED_WITH']);
         }

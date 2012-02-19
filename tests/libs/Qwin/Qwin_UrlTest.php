@@ -50,12 +50,12 @@ class Qwin_UrlTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_Url::call
+     * @covers Qwin_Url::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
-        $url = $widget->call('user', 'login');
+        $url = $widget->url('user', 'login');
 
         $this->assertEquals('?module=user&action=login', $url);
     }

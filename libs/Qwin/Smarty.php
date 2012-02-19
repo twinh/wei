@@ -62,7 +62,7 @@ class Qwin_Smarty extends Qwin_Widget
         }
     }
 
-    public function call()
+    public function __invoke()
     {
         return $this->_smarty;
     }

@@ -30,9 +30,9 @@ class Qwin_IsQQTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_IsQQ::call
+     * @covers Qwin_IsQQ::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $this->assertFalse($widget->isQQ('1000'), 'Too short');

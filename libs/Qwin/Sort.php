@@ -41,7 +41,7 @@ class Qwin_Sort extends Qwin_Widget
      * @param int $type sort in ascending or descending order
      * @return array
      */
-    public function call(array $array, $key = 'order', $type = SORT_ASC)
+    public function __invoke(array $array, $key = 'order', $type = SORT_ASC)
     {
         if (!$array) {
             return $array;

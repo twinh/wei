@@ -33,7 +33,7 @@
  */
 class Qwin_IsRegex extends Qwin_Widget
 {
-    public function call($value, $x)
+    public function __invoke($value, $x)
     {
         return (bool)preg_match($x, $value);
     }

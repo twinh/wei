@@ -60,7 +60,7 @@ class Qwin_App extends Qwin_Widget
      * @todo 记录状态,防止二次加载?
      * @todo 根据是否debug等抛出不同的错误信息
      */
-    public function call(array $options = array())
+    public function __invoke(array $options = array())
     {
         $this->marker('appStartup');
 

@@ -57,9 +57,9 @@ class Qwin_ReflectionTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_Reflection::call
+     * @covers Qwin_Reflection::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $this->assertInstanceOf('Qwin_Reflection_Class', $this->object->reflection());

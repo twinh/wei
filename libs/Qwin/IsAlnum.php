@@ -33,7 +33,7 @@
  */
 class Qwin_IsAlnum extends Qwin_Widget
 {
-    public function call($value)
+    public function __invoke($value)
     {
         return (bool)preg_match('/^([a-z0-9]+)$/i', $value);
     }

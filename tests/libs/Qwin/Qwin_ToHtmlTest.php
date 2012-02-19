@@ -30,22 +30,19 @@ class Qwin_ToHtmlTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_ToHtml::call
+     * @covers Qwin_ToHtml::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
-        $widget->source = "\tstring";
+        $this->assertEquals('&nbsp;&nbsp;&nbsp;&nbsp;string', $widget->toHtml("\tstring"));
 
-        $this->assertEquals('&nbsp;&nbsp;&nbsp;&nbsp;string', $widget->toHtml());
+        $this->assertFalse(strpos("\t", $widget->toHtml("\tstring")));
 
-        $this->assertFalse(strpos("\t", $widget->toHtml()));
+        $source = "this\ris\na\r\nstring\n\r";
 
-        $widget->source = "this\ris\na\r\nstring\n\r";
+        $this->assertFalse(strpos("\r", $widget->toHtml($source)));
 
-        $this->assertFalse(strpos("\r", $widget->toHtml()));
-
-        $this->assertFalse(strpos("\n", $widget->toHtml()));
+        $this->assertFalse(strpos("\n", $widget->toHtml($source)));
     }
-
 }

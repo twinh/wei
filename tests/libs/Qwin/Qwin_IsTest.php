@@ -30,10 +30,10 @@ class Qwin_IsTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_Is::call
-     * @covers Qwin_IsCallable::call
+     * @covers Qwin_Is::__invoke
+     * @covers Qwin_IsCallable::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $this->assertTrue($widget->is(array(
@@ -203,7 +203,7 @@ class Qwin_IsTest extends PHPUnit_Framework_TestCase {
         $this->setExpectedException('Qwin_Exception', 'Rules should not be empty.');
 
         $is = new Qwin_Is;
-        $is->call(array());
+        $is->__invoke(array());
     }
 
     /**

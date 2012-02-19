@@ -38,12 +38,12 @@ class Qwin_ToHtml extends Qwin_Widget
      *
      * @return string
      */
-    public function call()
+    public function __invoke($data)
     {
         return str_replace(
             array("\t"),
             array('&nbsp;&nbsp;&nbsp;&nbsp;'),
-            nl2br($this->source)
+            nl2br($data)
         );
     }
 }

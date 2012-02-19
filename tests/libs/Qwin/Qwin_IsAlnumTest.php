@@ -31,9 +31,9 @@ class Qwin_IsAlnumTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_IsAlnum::call
+     * @covers Qwin_IsAlnum::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $this->assertTrue($widget->isAlnum('abcedfg'));

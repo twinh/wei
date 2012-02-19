@@ -39,7 +39,7 @@ class Qwin_Ip extends Qwin_Widget
      * @param string $default default ip address
      * @return Qwin_Widget
      */
-    public function call($default = '0.0.0.0')
+    public function __invoke($default = '0.0.0.0')
     {
         if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];

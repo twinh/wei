@@ -38,7 +38,7 @@ class Qwin_Null extends Qwin_Widget
      *
      * @return Qwin_Null
      */
-    public function call()
+    public function __invoke()
     {
         return $this;
     }

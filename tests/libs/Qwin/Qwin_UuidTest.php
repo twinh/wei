@@ -31,9 +31,9 @@ class Qwin_UuidTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_Uuid::call
+     * @covers Qwin_Uuid::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $isUuid = $widget->isRegex($widget->uuid(), '/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/');

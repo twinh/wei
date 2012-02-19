@@ -33,7 +33,7 @@
  */
 class Qwin_IsPost extends Qwin_Widget
 {
-    public function call()
+    public function __invoke()
     {
         return isset($_SERVER['REQUEST_METHOD']) && 'POST' == strtoupper($_SERVER['REQUEST_METHOD']);
     }

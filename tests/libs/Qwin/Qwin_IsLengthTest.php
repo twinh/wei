@@ -30,9 +30,9 @@ class Qwin_IsLengthTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_IsLength::call
+     * @covers Qwin_IsLength::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $this->assertTrue($widget->isLength('length7', 7), 'Length is 7');

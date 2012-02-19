@@ -41,7 +41,7 @@ class Qwin_IsCallable extends Qwin_Widget
         'stringFn' => true,
     );
 
-    public function call($name, $syntaxOnly = false, &$callableName = null)
+    public function __invoke($name, $syntaxOnly = false, &$callableName = null)
     {
         if (is_callable($name, $syntaxOnly, &$callableName)) {
             return true;

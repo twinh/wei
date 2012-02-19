@@ -53,7 +53,7 @@ class Qwin_IsDir extends Qwin_Widget
      * @param bool $abs return file path or true
      * @return string|bool
      */
-    public function call($value, $abs = true)
+    public function __invoke($value, $abs = true)
     {
         if (!is_string($value)) {
             return false;

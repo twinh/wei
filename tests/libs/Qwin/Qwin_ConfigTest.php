@@ -30,9 +30,9 @@ class Qwin_ConfigTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_Config::call
+     * @covers Qwin_Config::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $widget->config('key', 'value');

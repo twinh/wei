@@ -53,7 +53,7 @@ class Qwin_Flush extends Qwin_Widget
      * @param int $sleep the second to sleep
      * @return Qwin_Flush
      */
-    public function call($content, $sleep = 0)
+    public function __invoke($content, $sleep = 0)
     {
         $level = ob_get_level();
         if (0 == $level) {

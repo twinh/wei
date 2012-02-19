@@ -60,7 +60,7 @@ class Qwin_Cookie extends Qwin_ArrayWidget
      * @param array $options options for set cookie
      * @return Qwin_Cookie
      */
-    public function call($key, $value = null, array $options = array())
+    public function __invoke($key, $value = null, array $options = array())
     {
         if (1 == func_num_args()) {
             return $this->get($key);

@@ -99,7 +99,7 @@ class Qwin_WidgetTest extends PHPUnit_Framework_TestCase {
         $name = $this->object->get('name');
 
         $get = new Qwin_Get();
-        $name2 = $get->call('name');
+        $name2 = $get->get('name');
 
         $this->assertEquals($name2, $name);
     }
@@ -120,15 +120,6 @@ class Qwin_WidgetTest extends PHPUnit_Framework_TestCase {
         $this->object->source = 'source';
 
         $this->assertEquals('source', $this->object->__toString());
-    }
-
-    /**
-     * @covers Qwin_Widget::__invoke
-     */
-    public function test__invoke() {
-        $get = $this->object->get;
-
-        $this->assertEquals($get->call('name'), $get->__invoke('name'));
     }
 }
 

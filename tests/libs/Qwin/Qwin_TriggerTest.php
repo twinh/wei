@@ -37,9 +37,9 @@ class Qwin_TriggerTest extends PHPUnit_Framework_TestCase {
     protected $_state;
 
     /**
-     * @covers Qwin_Trigger::call
+     * @covers Qwin_Trigger::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $widget->bind('test', array($this, 'setTextState'));

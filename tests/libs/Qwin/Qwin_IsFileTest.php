@@ -31,10 +31,10 @@ class Qwin_IsFileTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_IsFile::call
+     * @covers Qwin_IsFile::__invoke
      * @covers Qwin_IsFile::__construct
      */
-    public function testCall() {
+    public function test__invoke() {
         $object = $this->object;
 
         $this->assertEquals(false, $object->isFile(array()), 'Not File path');

@@ -38,7 +38,7 @@ class Qwin_Escape extends Qwin_Widget
      *
      * @see www.php.net/manual/en/function.mysql-real-escape-string.php
      */
-    public function call($data)
+    public function __invoke($data)
     {
         // \0 === \x00
         return str_replace(array(

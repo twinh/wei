@@ -40,11 +40,11 @@ class Qwin_MarkerTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_Marker::call
+     * @covers Qwin_Marker::__invoke
      * @covers Qwin_Marker::__construct
      * @covers Qwin_Marker::getMarkers
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $widget->marker('Testing');

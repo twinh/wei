@@ -33,8 +33,8 @@
  */
 class Qwin_Trigger extends Qwin_Widget
 {
-    public function call($event, $params = array())
+    public function __invoke($event, $params = array())
     {
-        return $this->event->call($event, $params);
+        return $this->event->__invoke($event, $params);
     }
 }

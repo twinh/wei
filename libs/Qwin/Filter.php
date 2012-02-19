@@ -33,7 +33,7 @@
  */
 class Qwin_Filter extends Qwin_Widget
 {
-    public function call()
+    public function __invoke()
     {
         
     }

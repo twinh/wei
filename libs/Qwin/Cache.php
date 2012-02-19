@@ -79,7 +79,7 @@ class Qwin_Cache extends Qwin_Widget
      * @param int $expire expire time for set cache
      * @return Qwin_Cache
      */
-    public function call($key, $value = null, $expire = 0)
+    public function __invoke($key, $value = null, $expire = 0)
     {
         if (1 == func_num_args()) {
             return $this->get($key);

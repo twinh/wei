@@ -31,11 +31,11 @@ class Qwin_NullTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_Null::call
+     * @covers Qwin_Null::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
-        $this->assertTrue(is_callable($widget->call()));
+        $this->assertTrue(is_callable($widget->null()));
     }
 }

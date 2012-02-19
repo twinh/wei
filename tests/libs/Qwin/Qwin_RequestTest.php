@@ -37,18 +37,20 @@ class Qwin_RequestTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_Request::call
+     * @covers Qwin_Request::__invoke
      * @covers Qwin_Request::__construct
      */
-    public function testCall()
+    public function test__invoke()
     {
-        $name = $this->object->call('name');
+        $widget = $this->object;
+
+        $name = $widget->request('name');
         $source = isset($_REQUEST['name']) ? $_REQUEST['name'] : null;
 
         $this->assertEquals($name, $source);
 
         $default = 'default';
-        $name2 = $this->object->call('name', $default);
+        $name2 = $widget->request('name', $default);
         $source = isset($_REQUEST['name']) ? $_REQUEST['name'] : $default;
 
         $this->assertEquals($name2, $default);

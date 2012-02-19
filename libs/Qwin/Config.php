@@ -33,7 +33,7 @@
  */
 class Qwin_Config extends Qwin_Widget
 {
-    public function call()
+    public function __invoke()
     {
         $args = func_get_args();
         return call_user_func_array(array($this->qwin, 'config'), $args);

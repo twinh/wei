@@ -30,9 +30,9 @@ class Qwin_ReplaceFirstTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_ReplaceFirst::call
+     * @covers Qwin_ReplaceFirst::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $string = 'abcdefgabcdefg';

@@ -30,9 +30,9 @@ class Qwin_DumpTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_Dump::call
+     * @covers Qwin_Dump::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         // do not exit after variable dump

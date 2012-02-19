@@ -54,7 +54,7 @@ class Qwin_Module extends Qwin_Widget
      * @param string $name
      * @return string
      */
-    public function call($name = null)
+    public function __invoke($name = null)
     {
         if ($name) {
             $this->_name = (string)$name;

@@ -120,10 +120,9 @@ class Qwin_View extends Qwin_ArrayWidget
         $replace = '<script type="text/javascript" src="' . $this->url('minify', 'index', array('g' => $minify->pack('js'))) . '"></script>' . PHP_EOL
             . '<link rel="stylesheet" type="text/css" href="' . $this->url('minify', 'index', array('g' => $minify->pack('css'))) . '" media="all" />' . PHP_EOL;
 
-        $this->string($output)
-            ->before('</head>', $replace)
-            ->output();
-
+        $output = $this->replaceFirst(&$output, '</head>', $replace . '</head>');
+        
+        echo $output;
         unset($output);
 
         return $this;
@@ -159,7 +158,7 @@ class Qwin_View extends Qwin_ArrayWidget
      * @todo 不只是输出文件,还有数据类型等等
      * @todo echo exit ?
      */
-    public function call($layout = null, array $data = null)
+    public function __invoke($layout = null, array $data = null)
     {
         if (is_string($layout)) {
             echo $layout;

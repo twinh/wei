@@ -172,7 +172,7 @@ class Qwin_Record extends Doctrine_Record
      * @param Qwin_Module $module 模块名称
      * @return Qwin_Record
      */
-    public function call($name = null, $module = null)
+    public function __invoke($name = null, $module = null)
     {
         $widget = Qwin::getInstance();
         if (!$module) {
