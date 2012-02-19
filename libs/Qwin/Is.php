@@ -48,7 +48,7 @@ class Qwin_Is extends Qwin_Widget
 
     protected $_validationResult;
 
-    public function call(array $options = array())
+    public function __invoke(array $options = array())
     {
         $options = $options + $this->options;
         $this->options = &$options;

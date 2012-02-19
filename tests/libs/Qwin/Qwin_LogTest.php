@@ -50,12 +50,12 @@ class Qwin_LogTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_Log::call
+     * @covers Qwin_Log::__invoke
      * @covers Qwin_Log::__construct
      * @covers Qwin_Log::save
      * @covers Qwin_Log::getFileOption
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $widget->option('level', 'trace');

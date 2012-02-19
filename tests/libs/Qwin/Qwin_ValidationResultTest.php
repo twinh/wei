@@ -32,12 +32,12 @@ class Qwin_ValidationResultTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_ValidationResult::call
+     * @covers Qwin_ValidationResult::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
-        $this->assertInstanceOf('Qwin_ValidationResult', $widget->call());
+        $this->assertInstanceOf('Qwin_ValidationResult', $widget->validationResult());
     }
 
     /**

@@ -31,9 +31,9 @@ class Qwin_IpTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_Ip::call
+     * @covers Qwin_Ip::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         // test for HTTP_X_FORWARDED_FOR

@@ -30,10 +30,10 @@ class Qwin_IsDirTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_IsDir::call
+     * @covers Qwin_IsDir::__invoke
      * @covers Qwin_IsDir::__construct
      */
-    public function testCall() {
+    public function test__invoke() {
         $object = $this->object;
 
         $this->assertEquals(false, $object->isDir(array()), 'Not File path');

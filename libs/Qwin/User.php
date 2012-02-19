@@ -49,7 +49,7 @@ class Qwin_User extends Qwin_ArrayWidget
         }
     }
     
-    public function call()
+    public function __invoke()
     {
         return $this;
     }

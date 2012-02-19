@@ -30,9 +30,9 @@ class Qwin_IsGetTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_IsGet::call
+     * @covers Qwin_IsGet::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $result = isset($_SERVER['REQUEST_METHOD']) && 'GET' == strtoupper($_SERVER['REQUEST_METHOD']);

@@ -32,9 +32,9 @@ class Qwin_EachTest extends PHPUnit_Framework_TestCase {
     protected $_fruit;
 
     /**
-     * @covers Qwin_Each::call
+     * @covers Qwin_Each::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $array = array(

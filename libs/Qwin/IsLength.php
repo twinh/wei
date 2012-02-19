@@ -33,7 +33,7 @@
  */
 class Qwin_IsLength extends Qwin_Widget
 {
-    public function call($data, $min, $max = null)
+    public function __invoke($data, $min, $max = null)
     {
         $len = strlen($data);
         if (0 === $max) {

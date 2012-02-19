@@ -26,7 +26,7 @@
  */
 class Qwin_String extends Qwin_Widget
 {
-    public function call()
+    public function __invoke()
     {
         return $this;
     }

@@ -30,9 +30,9 @@ class Qwin_ToTextTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_ToText::call
+     * @covers Qwin_ToText::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $result = '<a href="attack url">click me!</a>';

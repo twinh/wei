@@ -37,9 +37,9 @@ class Qwin_BindTest extends PHPUnit_Framework_TestCase {
     protected $_state;
 
     /**
-     * @covers Qwin_Bind::call
+     * @covers Qwin_Bind::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $widget->bind('test', array($this, 'setTextState'));

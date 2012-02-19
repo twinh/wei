@@ -31,10 +31,10 @@ class Qwin_ActionTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @covers Qwin_Action::__construct
-     * @covers Qwin_Action::call
+     * @covers Qwin_Action::__invoke
      *
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $widget->request->add('action', 'test');
@@ -54,7 +54,7 @@ class Qwin_ActionTest extends PHPUnit_Framework_TestCase {
 
         $action = $widget->action();
 
-        $this->assertEquals('new action', $widget->call('new action'), 'set new action');
+        $this->assertEquals('new action', $widget->action('new action'), 'set new action');
 
         $widget->request->add('a', 'me');
         $widget->request->add('action', 'not me');

@@ -33,7 +33,7 @@
  */
 class Qwin_IsDigit extends Qwin_Widget
 {
-    public function call($data)
+    public function __invoke($data)
     {
         return (bool)preg_match('/^([0-9]+)$/', $data);
     }

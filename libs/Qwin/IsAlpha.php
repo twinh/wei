@@ -33,7 +33,7 @@
  */
 class Qwin_IsAlpha extends Qwin_Widget
 {
-    public function call($value)
+    public function __invoke($value)
     {
         return (bool)preg_match('/^([a-z]+)$/i', $value);
     }

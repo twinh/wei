@@ -94,7 +94,7 @@ class Qwin_Event extends Qwin_Widget
      * @param mixed $params 参数
      * @return Qwin_Event|false 当前对象或中断
      */
-    public function call($name, $params)
+    public function __invoke($name, $params)
     {
         $name = strtolower($name);
         if (!isset($this->_events[$name])) {

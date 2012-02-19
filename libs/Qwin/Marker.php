@@ -61,7 +61,7 @@ class Qwin_Marker extends Qwin_Widget
     {
         parent::__construct($source);
         if ($this->options['auto']) {
-            $this->call('Start');
+            $this->__invoke('Start');
         }
     }
 
@@ -71,7 +71,7 @@ class Qwin_Marker extends Qwin_Widget
      * @param string $name marker's name
      * @return Qwin_Widget
      */
-    public function call($name = null)
+    public function __invoke($name = null)
     {
         !$name && $name = ++$this->_index;
 

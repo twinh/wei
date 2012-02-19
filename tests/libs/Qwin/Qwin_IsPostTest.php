@@ -30,9 +30,9 @@ class Qwin_IsPostTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_IsPost::call
+     * @covers Qwin_IsPost::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $result = isset($_SERVER['REQUEST_METHOD']) && 'POST' == strtoupper($_SERVER['REQUEST_METHOD']);

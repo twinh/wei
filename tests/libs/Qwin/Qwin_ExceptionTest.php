@@ -26,26 +26,23 @@ class Qwin_ExceptionTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
+
     }
-    
+
     /**
      * @covers Qwin_Exception::__construct
      */
     public function test__construct()
     {
-        
+
     }
 
     /**
-     * @covers Qwin_Exception::call
+     * @covers Qwin_Exception::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $this->setExpectedException('Qwin_Exception', 'Class "name" not found.');
-        
-        $this->object->call('Class "%s" not found.', 'name');
+
+        $this->object->__invoke('Class "%s" not found.', 'name');
     }
-
 }
-
-?>

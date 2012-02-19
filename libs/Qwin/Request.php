@@ -52,7 +52,7 @@ class Qwin_Request extends Qwin_Widget
      * @param mixed $default
      * @return Qwin_Widget
      */
-    public function call($name = null, $default = null)
+    public function __invoke($name = null, $default = null)
     {
         return isset($this->_data[$name]) ? $this->_data[$name] : $default;
     }

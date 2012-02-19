@@ -30,9 +30,9 @@ class Qwin_ResultTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_Result::call
+     * @covers Qwin_Result::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $result = $widget->result('message', -1, array(

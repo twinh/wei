@@ -31,9 +31,9 @@ class Qwin_CookieTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_Cookie::call
+     * @covers Qwin_Cookie::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $widget->cookie('test', __METHOD__);

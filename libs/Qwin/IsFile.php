@@ -52,7 +52,7 @@ class Qwin_IsFile extends Qwin_Widget
      * @param bool $abs return file path or true
      * @return string|bool
      */
-    public function call($file, $abs = true)
+    public function __invoke($file, $abs = true)
     {
         if (!is_string($file)) {
             return false;

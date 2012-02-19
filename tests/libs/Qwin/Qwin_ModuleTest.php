@@ -31,10 +31,10 @@ class Qwin_ModuleTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @covers Qwin_Module::__construct
-     * @covers Qwin_Module::call
+     * @covers Qwin_Module::__invoke
      *
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $widget->request->add('module', 'test');

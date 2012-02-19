@@ -30,16 +30,18 @@ class Qwin_GetTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_Get::call
+     * @covers Qwin_Get::__invoke
      */
-    public function testCall() {
-        $name = $this->object->call('name');
+    public function test__invoke() {
+        $widget = $this->object;
+
+        $name = $widget->get('name');
         $source = isset($_GET['name']) ? $_GET['name'] : null;
 
         $this->assertEquals($name, $source);
 
         $default = 'default';
-        $name2 = $this->object->call('name', $default);
+        $name2 = $widget->get('name', $default);
         $source = isset($_GET['name']) ? $_GET['name'] : $default;
 
         $this->assertEquals($name2, $default);

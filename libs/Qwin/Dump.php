@@ -42,7 +42,7 @@ class Qwin_Dump extends Qwin_Widget
      *
      * @return Qwin_Dump
      */
-    public function call()
+    public function __invoke()
     {
         $args = func_get_args();
         if (empty($args)) {

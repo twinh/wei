@@ -41,7 +41,7 @@ class Qwin_ReplaceFirst extends Qwin_Widget
      * @param string $replace the string to replace
      * @return string
      */
-    public function call($source, $search, $replace)
+    public function __invoke($source, $search, $replace)
     {
         $pos = strpos($source, $search);
         if ($pos === false) {

@@ -68,7 +68,7 @@ class Qwin_Error extends Qwin_Widget
      * @param mixed $code
      * @param array $options
      */
-    public function call($message, $code = 500, array $options = array())
+    public function __invoke($message, $code = 500, array $options = array())
     {
         try {
             if ($this->options['exception']) {

@@ -59,9 +59,9 @@ class Qwin_EventTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Qwin_Event::call
+     * @covers Qwin_Event::__invoke
      */
-    public function testCall()
+    public function test__invoke()
     {
         $widget = $this->object;
 

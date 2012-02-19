@@ -40,7 +40,7 @@ class Qwin_InArray extends Qwin_Widget
      * @param array $array
      * @return mixed
      */
-    public function call($value, $array)
+    public function __invoke($value, $array)
     {
         !in_array($value, $array) && $value = $array[key($array)];
         return $value;

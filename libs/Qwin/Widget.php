@@ -171,11 +171,11 @@ class Qwin_Widget implements Qwin_Widgetable
      * @param mixed $arg
      * @return mixed
      */
-    public function __invoke($arg = null)
+    /*public function __invoke($arg = null)
     {
         $args = func_get_args();
         return call_user_func_array(array($this, 'call'), $args);
-    }
+    }*/
 
     /**
      * 魔术方法,返回对象值的字符串形式

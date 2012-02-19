@@ -53,7 +53,7 @@ class Qwin_JQuery extends Qwin_Widget
         return $this->_dir;
     }
     
-    public function call()
+    public function __invoke()
     {
         return $this;
     }

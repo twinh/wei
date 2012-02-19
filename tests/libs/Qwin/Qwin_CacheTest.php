@@ -67,9 +67,9 @@ class Qwin_CacheTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_Cache::call
+     * @covers Qwin_Cache::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $widget->cache('test', __METHOD__);

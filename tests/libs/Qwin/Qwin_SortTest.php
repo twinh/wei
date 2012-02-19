@@ -29,9 +29,9 @@ class Qwin_SortTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_Sort::call
+     * @covers Qwin_Sort::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $array = array(

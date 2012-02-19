@@ -40,7 +40,7 @@ class Qwin_Callback extends Qwin_Widget
      * @param array $params 数组参数
      * @return mixed
      */
-    public function call($name, array $params = null)
+    public function __invoke($name, array $params = null)
     {
         if ($this->isCallable($name)) {
             $callback = null;

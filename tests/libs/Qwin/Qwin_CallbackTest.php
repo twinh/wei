@@ -30,10 +30,10 @@ class Qwin_CallbackTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_Callback::call
-     * @covers Qwin_IsCallable::call
+     * @covers Qwin_Callback::__invoke
+     * @covers Qwin_IsCallable::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $this->assertEquals('callback1', $widget->callback(array($this, 'callbackTest')), 'method callback test');

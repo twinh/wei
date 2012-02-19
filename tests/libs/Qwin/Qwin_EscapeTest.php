@@ -31,9 +31,9 @@ class Qwin_EscapeTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_Escape::call
+     * @covers Qwin_Escape::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $this->assertEquals('\\\\', $widget->escape('\\'));

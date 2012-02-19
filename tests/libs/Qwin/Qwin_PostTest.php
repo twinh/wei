@@ -39,17 +39,19 @@ class Qwin_PostTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Qwin_Post::call
+     * @covers Qwin_Post::__invoke
      */
-    public function testCall()
+    public function test__invoke()
     {
-        $name = $this->object->call('name');
+        $widget = $this->object;
+
+        $name = $widget->post('name');
         $source = isset($_POST['name']) ? $_POST['name'] : null;
 
         $this->assertEquals($name, $source);
 
         $default = 'default';
-        $name2 = $this->object->call('name', $default);
+        $name2 = $widget->post('name', $default);
         $source = isset($_POST['name']) ? $_POST['name'] : $default;
 
         $this->assertEquals($name2, $default);

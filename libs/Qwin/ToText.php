@@ -36,7 +36,7 @@ class Qwin_ToText extends Qwin_Widget
     /**
      * Convert widget source to text
      */
-    public function call($data)
+    public function __invoke($data)
     {
         // 其他 '=', "\0", "%00", "\r", '\0', '%00', '\r' ?
         // 过滤不可见字符

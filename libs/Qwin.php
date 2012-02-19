@@ -41,7 +41,7 @@ class Qwin extends Qwin_Widget
     /**
      * Version
      */
-    const VERSION = '0.8.6';
+    const VERSION = '0.8.7';
 
     /**
      * 存储微件对象的数组
@@ -109,27 +109,13 @@ class Qwin extends Qwin_Widget
     /**
      * Internal widgets configurations
      *
-     * key  =>  value
-     *  0   =>  callback name
-     *  1   =>  source paramter position
-     *  2   =>  max parameter numbers
-     *  3   =>  returns invoker or called result
-     *      0   => $invoker
-     *      1   => $result
-     *
      * @var array
      *
      */
     protected $_widgetsMap = array(
-        'isArray' => array(
-            'is_array', 0, 1, 1
-        ),
-        'isString' => array(
-            'is_string', 0, 1, 1
-        ),
-        'isNull' => array(
-            'is_null', 0, 1, 1
-        ),
+        'isArray' => 'is_array',
+        'isString' => 'is_string',
+        'isNull' => 'is_null',
     );
 
     /**
@@ -212,7 +198,7 @@ class Qwin extends Qwin_Widget
 
         $class = 'Qwin_' . ucfirst($name);
         if (class_exists($class)) {
-            return $this->_widgets[$lower] = $this->call($class);
+            return $this->_widgets[$lower] = $this->__invoke($class);
         }
 
         $this->exception('Widget, property or method "%s" not found.', $name);
@@ -236,7 +222,7 @@ class Qwin extends Qwin_Widget
      * @return false|object 失败或类对象
      * @todo reanem to instance ?
      */
-    public function call($name, $param = null)
+    public function __invoke($name, $param = null)
     {
         if (isset($this->_objects[$name])) {
             return $this->_objects[$name];
@@ -395,60 +381,27 @@ class Qwin extends Qwin_Widget
     {
         // check if internal widget
         if (isset($this->_widgetsMap[$name])) {
-            $map = &$this->_widgetsMap[$name];
-
-            // organize arguments
-            if (isset($map[1])) {
-                array_splice($args, $map[1], 0, array($invoker->source));
-            } else {
-                $args = array($invoker->source);
-            }
-
-            // cut down arguments length
-            if (isset($map[2]) && $map[2] < count($args)) {
-                $args = array_slice($args, 0, $map[2]);
-            }
-
-            $result = call_user_func_array($this->_widgetsMap[$name][0], $args);
-
-            $invoker->source = $result;
-
-            if (!isset($map[3]) || 0 === $map[3]) {
-                return $invoker;
-            } else {
-                return $result;
-            }
+            return call_user_func_array($this->_widgetsMap[$name], $args);
         }
 
         $widget = $this->widget($name);
 
-        if (!method_exists($widget, 'call')) {
+        if (!method_exists($widget, '__invoke')) {
             require_once 'Qwin/Exception.php';
-            throw new Qwin_Exception('Method "call" not found in widget "' . get_class($widget) . '"');
+            throw new Qwin_Exception('Method "__invoke" not found in widget "' . get_class($widget) . '"');
         }
 
         // set invoker and soure value for widget
         $widget->invoker = $invoker;
         $widget->source = $invoker->source;
 
-        $result = call_user_func_array(array($widget, 'call'), $args);
+        $result = call_user_func_array(array($widget, '__invoke'), $args);
 
         // set back source so that source can be passed in widgets
         $invoker->source = $widget->source;
 
         // return result rather than widget object
         return $result;
-    }
-
-    /**
-     * Instance a variable widget
-     *
-     * @param mixed $var
-     * @return Qwin_Widget
-     */
-    public function __invoke($var = null)
-    {
-        return $this->variable($var);
     }
 
     /**

@@ -37,5 +37,5 @@ interface Qwin_Widgetable
 
     public function __call($name, $args);
 
-    public function __invoke($arg = null);
+    //public function __invoke();
 }

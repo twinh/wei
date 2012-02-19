@@ -65,7 +65,7 @@ class Qwin_Minify extends Qwin_Widget
         $this->_cacheDir = $this->cache->options['dir'] . '/minify';
     }
 
-    public function call($options = null)
+    public function __invoke($options = null)
     {
         return $this->add($options);
     }

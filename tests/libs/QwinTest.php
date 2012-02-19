@@ -82,30 +82,30 @@ class QwinTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin::call
+     * @covers Qwin::__invoke
      */
-    public function testCall() {
-        $std = $this->object->call('stdClass');
+    public function test__invoke() {
+        $std = $this->object->__invoke('stdClass');
 
         $this->assertEquals(get_class($std), 'stdClass', 'Init class stdClass');
 
-        $this->assertEquals($std, $this->object->call('stdClass'), 'Class has been called');
+        $this->assertEquals($std, $this->object->__invoke('stdClass'), 'Class has been called');
 
-        $this->assertFalse($this->object->call('Class not found'));
+        $this->assertFalse($this->object->__invoke('Class not found'));
 
-        $this->assertEquals('MySingleton', get_class($this->object->call('MySingleton')), 'Singleton mode');
+        $this->assertEquals('MySingleton', get_class($this->object->__invoke('MySingleton')), 'Singleton mode');
 
-        $this->assertEquals('MyOneParam', get_class($this->object->call('MyOneParam', array(1))), 'Pass one param');
+        $this->assertEquals('MyOneParam', get_class($this->object->__invoke('MyOneParam', array(1))), 'Pass one param');
 
-        $this->assertEquals('MyTwoParams', get_class($this->object->call('MyTwoParams', array(1, 2))), 'Pass two params');
+        $this->assertEquals('MyTwoParams', get_class($this->object->__invoke('MyTwoParams', array(1, 2))), 'Pass two params');
 
-        $this->assertEquals('MyThreeParams', get_class($this->object->call('MyThreeParams', array(1, 2, 3))), 'Pass three params');
+        $this->assertEquals('MyThreeParams', get_class($this->object->__invoke('MyThreeParams', array(1, 2, 3))), 'Pass three params');
 
-        $this->assertEquals('MyFourParams', get_class($this->object->call('MyFourParams', array(1, 2, 3, 4))), 'Pass four params');
+        $this->assertEquals('MyFourParams', get_class($this->object->__invoke('MyFourParams', array(1, 2, 3, 4))), 'Pass four params');
 
-        $this->assertEquals('MyFourParams2', get_class($this->object->call('MyFourParams2', array(1, 2, 3, 4))), 'Pass four params and class with constructor');
+        $this->assertEquals('MyFourParams2', get_class($this->object->__invoke('MyFourParams2', array(1, 2, 3, 4))), 'Pass four params and class with constructor');
 
-        $this->assertEquals('MyFourParams3', get_class($this->object->call('MyFourParams3', array(1, 2, 3, 4))), 'Pass four params and class with php4 constructor');
+        $this->assertEquals('MyFourParams3', get_class($this->object->__invoke('MyFourParams3', array(1, 2, 3, 4))), 'Pass four params and class with php4 constructor');
     }
 
     /**
@@ -204,34 +204,12 @@ class QwinTest extends PHPUnit_Framework_TestCase {
 
         $this->assertEquals(class_exists('Qwin_Post'), true, 'Class "Qwin_Post" found.');
 
-        $widget->source(null);
-
-        $this->assertTrue($widget->isNull(), 'check if source is null');
-
-        $widget->source(__METHOD__);
-
-        $this->assertEquals(md5(__METHOD__), $widget->md5()->source());
-
-        $widget->source('UPPER');
-
-        // parameter would be ignored
-        $widget->lower('param1');
-
-        $this->assertEquals('upper', $widget->source(), 'internal widget lower');
+        $this->assertTrue($widget->isNull(null), 'check if source is null');
 
         $this->setExpectedException('Qwin_Exception');
 
         /* @var $var Qwin_ClassWithoutCallMethod */
         $var = $widget->classWithoutCallMethod();
-    }
-
-    /**
-     * @covers Qwin::__invoke
-     */
-    public function test__invoke() {
-        $widget = $this->object->__invoke('this is a string.');
-
-        $this->assertEquals(get_class($widget), 'Qwin_Widget');
     }
 
     /**

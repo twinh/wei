@@ -105,11 +105,11 @@ class Qwin_ErrorTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_Error::call
+     * @covers Qwin_Error::__invoke
      * @covers Qwin_Error::__construct
      * @covers Qwin_Log::__construct
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         // close exit option

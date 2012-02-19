@@ -49,7 +49,7 @@ class Qwin_Controller extends Qwin_Widget
      * @param mixed $param 参数
      * @return Qwin_Controller
      */
-    public function call($module = null, $instance = true, $param = null)
+    public function __invoke($module = null, $instance = true, $param = null)
     {
         $module = ucfirst($module);
         // 检查模块控制器文件是否存在

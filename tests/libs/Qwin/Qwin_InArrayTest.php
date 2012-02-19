@@ -30,9 +30,9 @@ class Qwin_InArrayTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_InArray::call
+     * @covers Qwin_InArray::__invoke
      */
-    public function testCall() {
+    public function test__invoke() {
         $widget = $this->object;
 
         $result = $widget->inArray('apple', array('pear', 'apple', 'banana'));

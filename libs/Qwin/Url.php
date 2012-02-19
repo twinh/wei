@@ -86,7 +86,7 @@ class Qwin_Url extends Qwin_Widget
      * @param array $params 其他参数
      * @return string
      */
-    public function call($value1, $value2 = 'index', array $params = array())
+    public function __invoke($value1, $value2 = 'index', array $params = array())
     {
         return $this->build(array(
             $this->options['names'][0] => $value1,

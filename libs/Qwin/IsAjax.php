@@ -33,7 +33,7 @@
  */
 class Qwin_IsAjax extends Qwin_Widget
 {
-    public function call()
+    public function __invoke()
     {
         return isset($_SERVER['HTTP_X_REQUESTED_WITH'])
             && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';

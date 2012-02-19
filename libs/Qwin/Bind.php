@@ -41,7 +41,7 @@ class Qwin_Bind extends Qwin_Widget
      * @param mixed $callback 回调结构
      * @return void
      */
-    public function call($event, $callback, $priority = 10)
+    public function __invoke($event, $callback, $priority = 10)
     {
         return $this->event->add($event, $callback, $priority);
     }

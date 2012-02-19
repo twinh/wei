@@ -40,7 +40,7 @@ class Qwin_Uuid extends Qwin_Widget
      * @see http://php.net/manual/en/function.uniqid.php
      * @return string
      */
-    public function call()
+    public function __invoke()
     {
         return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
             // 32 bits for "time_low"

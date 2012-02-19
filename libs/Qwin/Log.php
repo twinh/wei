@@ -124,7 +124,7 @@ class Qwin_Log extends Qwin_Widget
      * @param string $message
      * @return Qwin_Log
      */
-    public function call($message, $level = null)
+    public function __invoke($message, $level = null)
     {
         $level = isset($level) ? $level : $this->options['level'];
 
@@ -278,7 +278,7 @@ class Qwin_Log extends Qwin_Widget
      */
     public function trace($message)
     {
-        return $this->call($message, 'trace');
+        return $this->__invoke($message, 'trace');
     }
 
     /**
@@ -289,7 +289,7 @@ class Qwin_Log extends Qwin_Widget
      */
     public function debug($message)
     {
-        return $this->call($message, 'debug');
+        return $this->__invoke($message, 'debug');
     }
 
     /**
@@ -300,7 +300,7 @@ class Qwin_Log extends Qwin_Widget
      */
     public function info($message)
     {
-        return $this->call($message, 'info');
+        return $this->__invoke($message, 'info');
     }
 
     /**
@@ -311,7 +311,7 @@ class Qwin_Log extends Qwin_Widget
      */
     public function warn($message)
     {
-        return $this->call($message, 'warn');
+        return $this->__invoke($message, 'warn');
     }
 
     /**
@@ -322,7 +322,7 @@ class Qwin_Log extends Qwin_Widget
      */
     public function error($message)
     {
-        return $this->call($message, 'error');
+        return $this->__invoke($message, 'error');
     }
 
     /**
@@ -333,7 +333,7 @@ class Qwin_Log extends Qwin_Widget
      */
     public function fatal($message)
     {
-        return $this->call($message, 'fatal');
+        return $this->__invoke($message, 'fatal');
     }
 
     public function handleSave()
