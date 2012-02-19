@@ -34,25 +34,25 @@
 class Qwin_ValidationResult extends Qwin_Widget
 {
     /**
-     * Validate result
+     * Validated result
      *
      * @var bool
      */
     public $source = true;
 
     /**
-     * Invalid rules
+     * Invalidated rules
      *
      * @var array
      */
-    protected $_invalidRules = array();
+    protected $_invalidatedRules = array();
 
     /**
-     * Validate rules
+     * Validated rules
      *
      * @var array
      */
-    protected $_validateRules = array();
+    protected $_validatedRules = array();
 
     /**
      * Get new Qwin_ValidationResult instance
@@ -65,13 +65,13 @@ class Qwin_ValidationResult extends Qwin_Widget
     }
 
     /**
-     * Get invalid rules
+     * Get Invalidated rules
      *
      * @return array
      */
-    public function getInvalidRules()
+    public function getInvalidatedRules()
     {
-        return array_keys($this->_invalidRules);
+        return array_keys($this->_invalidatedRules);
     }
 
     /**
@@ -81,18 +81,18 @@ class Qwin_ValidationResult extends Qwin_Widget
      */
     public function getValidatedRules()
     {
-        return array_keys($this->_validateRules);
+        return array_keys($this->_validatedRules);
     }
 
     /**
-     * Add invalid rule
+     * Add invalidated rule
      *
      * @param string $rule
      * @return Qwin_ValidationResult
      */
-    public function addInvalidRule($rule)
+    public function addInvalidatedRule($rule)
     {
-        $this->_invalidRules[$rule] = true;
+        $this->_invalidatedRules[$rule] = true;
         return $this;
     }
 
@@ -104,20 +104,20 @@ class Qwin_ValidationResult extends Qwin_Widget
      */
     public function addValidatedRule($rule)
     {
-        $this->_validateRules[$rule] = true;
+        $this->_validatedRules[$rule] = true;
         return $this;
     }
 
     /**
-     * Remove invalid rule
+     * Remove invalidated rule
      *
      * @param string $rule
      * @return Qwin_ValidationResult
      */
-    public function removeInvalidRule($rule)
+    public function removeInvalidatedRule($rule)
     {
-        if (isset($this->_invalidRules[$rule])) {
-            unset($this->_invalidRules[$rule]);
+        if (isset($this->_invalidatedRules[$rule])) {
+            unset($this->_invalidatedRules[$rule]);
         }
         return $this;
     }
@@ -128,23 +128,23 @@ class Qwin_ValidationResult extends Qwin_Widget
      * @param string $rule
      * @return Qwin_ValidationResult
      */
-    public function removeValidateRule($rule)
+    public function removeValidatedRule($rule)
     {
-        if (isset($this->_validateRules[$rule])) {
-            unset($this->_validateRules[$rule]);
+        if (isset($this->_validatedRules[$rule])) {
+            unset($this->_validatedRules[$rule]);
         }
         return $this;
     }
 
     /**
-     * Check if $rule invalid
+     * Check if $rule invalidated
      *
      * @param string $rule
      * @return bool
      */
-    public function isInvalid($rule)
+    public function isInvalidated($rule)
     {
-        return isset($this->_invalidRules[$rule]);
+        return isset($this->_invalidatedRules[$rule]);
     }
 
     /**
@@ -155,6 +155,6 @@ class Qwin_ValidationResult extends Qwin_Widget
      */
     public function isValidated($rule)
     {
-        return isset($this->_validateRules[$rule]);
+        return isset($this->_validatedRules[$rule]);
     }
 }
