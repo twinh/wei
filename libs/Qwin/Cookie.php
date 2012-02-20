@@ -31,7 +31,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-02 00:45:14
  */
-class Qwin_Cookie extends Qwin_ArrayWidget
+class Qwin_Cookie extends Qwin_Request
 {
     /**
      * @var array Options
@@ -78,7 +78,7 @@ class Qwin_Cookie extends Qwin_ArrayWidget
      */
     public function get($key, $default = null)
     {
-        return isset($_COOKIE[$key]) ? @unserialize($_COOKIE[$key]) : $default;
+        return isset($this->_data[$key]) ? @unserialize($this->_data[$key]) : $default;
     }
 
     /**
@@ -90,19 +90,42 @@ class Qwin_Cookie extends Qwin_ArrayWidget
      */
     public function set($key, $value, array $options = array())
     {
-        $_COOKIE[$key] = serialize($value);
+        $value = serialize($value);
+        $this->_data[$key] = serialize($value);
 
         $o = $options + $this->options;
 
         $fn = $o['raw'] ? 'setrawcookie' : 'setcookie';
-        call_user_func_array($fn, array(
-            $key, $_COOKIE[$key], time() + $o['expire'], $o['path'], $o['domain'], $o['secure'], $o['httpOnly']
-        ));
+        $fn($key, $value, time() + $o['expire'], $o['path'], $o['domain'], $o['secure'], $o['httpOnly']);
 
-        if (0 >= $o['expire']) {
-            unset($_COOKIE[$key]);
+        if (0 < $o['expire']) {
+            $this->_data[$key] = $value;
+            $this->request->add($key, $value);
+        } else {
+            unset($this->_data[$key]);
         }
 
+        return $this;
+    }
+
+    /**
+     * Add cookie data
+     *
+     * @param string|array $name
+     * @param mixed $value
+     * @return Qwin_Post
+     */
+    public function add($name, $value = null, array $option = array())
+    {
+        if (is_array($name)) {
+            foreach ($name as $key => $value) {
+                $this->set($name, $value, $option);
+                $this->request->add($name, $value);
+            }
+        } else {
+            $this->set($name, $value, $option);
+            $this->request->add($name, $value);
+        }
         return $this;
     }
 
@@ -113,8 +136,8 @@ class Qwin_Cookie extends Qwin_ArrayWidget
      */
     public function remove($key)
     {
-        if (isset($_COOKIE[$key])) {
-            unset($_COOKIE[$key]);
+        if (isset($this->_data[$key])) {
+            unset($this->_data[$key]);
             setcookie($key, null, -1);
         }
         return $this;
