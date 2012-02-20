@@ -31,15 +31,8 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2010-02-13 23:02:00
  */
-class Qwin_Request extends Qwin_Widget
+class Qwin_Request extends Qwin_ArrayWidget
 {
-    /**
-     * request data
-     *
-     * @var array
-     */
-    protected $_data;
-
     public function __construct($options = null)
     {
         $this->_data = $_REQUEST;
