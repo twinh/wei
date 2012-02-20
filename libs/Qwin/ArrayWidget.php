@@ -34,13 +34,14 @@
 class Qwin_ArrayWidget extends Qwin_Widget implements ArrayAccess
 {
     /**
-     * 数组
+     * The variable to store array
+     *
      * @var array
      */
     protected $_data = array();
 
     /**
-     * Check if a offset exists
+     * Check if the offset exists
      *
      * @param string $offset
      * @return bool
@@ -51,7 +52,7 @@ class Qwin_ArrayWidget extends Qwin_Widget implements ArrayAccess
     }
 
     /**
-     * Get a offset value
+     * Get the offset value
      *
      * @param string $offset
      * @return mixed
@@ -62,7 +63,7 @@ class Qwin_ArrayWidget extends Qwin_Widget implements ArrayAccess
     }
 
     /**
-     * Set a offset value
+     * Set the offset value
      *
      * @param string $offset
      * @param mixed $value
@@ -73,7 +74,7 @@ class Qwin_ArrayWidget extends Qwin_Widget implements ArrayAccess
     }
 
     /**
-     * Unset a offset
+     * Unset the offset
      *
      * @param string $offset
      */
@@ -92,5 +93,15 @@ class Qwin_ArrayWidget extends Qwin_Widget implements ArrayAccess
     {
         $this->_data = (array)$array + $this->_data;
         return $this;
+    }
+
+    /**
+     * Return the source array of the object
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->_data;
     }
 }
