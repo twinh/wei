@@ -34,7 +34,6 @@ require_once 'Qwin/Widget.php';
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2010-04-26 10:39:18
- * @todo        add ini_set support
  */
 class Qwin extends Qwin_Widget
 {
@@ -83,13 +82,14 @@ class Qwin extends Qwin_Widget
      *
      * @var array
      *
-     *       autoload       bool        是否启用类自动加载
+     *       autoload       bool        whether enable autoload or not
      *
-     *       autoloadDirs   array       类自动加载的目录
+     *       autoloadDirs   array       the direcroties of classes
      */
     public $options = array(
         'autoload'      => true,
         'autoloadDirs'  => array(),
+        'inis'          => array(),
     );
 
     /**
@@ -151,9 +151,8 @@ class Qwin extends Qwin_Widget
     /**
      * 自动加载按标准格式命名的类
      *
-     * @param string $class 类名
-     * @return bool 是否加载成功
-     * @todo 缓存加载过的类
+     * @param string $class the name of the class
+     * @return bool
      */
     public function autoload($class)
     {
@@ -394,6 +393,20 @@ class Qwin extends Qwin_Widget
         $dirs = array_unique($dirs);
 
         $this->options['autoloadDirs'] = $dirs;
+        return $this;
+    }
+
+    /**
+     * Set the ini options
+     *
+     * @param array $inis
+     * @return Qwin
+     */
+    public function setInisOption($inis)
+    {
+        foreach ($inis as $key => $value) {
+            ini_set($key, $value);
+        }
         return $this;
     }
 }
