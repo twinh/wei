@@ -49,7 +49,6 @@ class Qwin_App extends Qwin_Widget
         'dirs'          => array(),
         'module'        => 'index',
         'action'        => 'index',
-        'timezone'      => 'Asia/Shanghai',
     );
 
     /**
@@ -59,6 +58,30 @@ class Qwin_App extends Qwin_Widget
      * @return Qwin_App
      * @todo 记录状态,防止二次加载?
      * @todo 根据是否debug等抛出不同的错误信息
+     * @todo Qwin::getInstance()->app(function(){ ... }); ?
+     * @todo
+     *
+     * // request
+     * $module = $this->module();
+     * $action = $this->action();
+     *
+     * // controller
+     * $result = $this->controller(array(
+     *     'module' => $module,
+     *     'action' => $action,
+     * ))
+     *
+     * // view
+     * $result = $this->view(array(
+     *     'module' => $module,
+     *     'action' => $action,
+     *     'result' => $result,
+     * ));
+     *
+     * // response
+     * return $this->response(array(
+     *     'body' => $result,
+     * ));
      */
     public function __invoke(array $options = array())
     {
@@ -75,9 +98,6 @@ class Qwin_App extends Qwin_Widget
         if (empty($options['dirs'])) {
             $options['dirs'][] = dirname(dirname(dirname(__FILE__))) . '/apps/';
         }
-
-        // 默认时区
-        date_default_timezone_set($options['timezone']);
 
         // 触发应用启动事件
         $this->trigger('appStartup');
