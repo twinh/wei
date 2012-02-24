@@ -18,7 +18,10 @@ class Qwin_RouterTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         Qwin::getInstance();
+
         $this->object = new Qwin_Router;
+
+        $this->object->options['baseUri'] = '';
     }
 
     /**
@@ -193,9 +196,10 @@ class Qwin_RouterTest extends PHPUnit_Framework_TestCase {
     {
         $router = $this->object;
 
-        $router->remove('default');
-
-        $this->assertFalse($router->matchOne('default', 'blog/list'));
+        $this->assertEquals(array(
+            'module' => 'blog',
+            'action' => 'list'
+        ), $router->match('blog/list', null, 'default'));
     }
 
     public function testUriForStaticRule()
@@ -386,5 +390,97 @@ class Qwin_RouterTest extends PHPUnit_Framework_TestCase {
             'module' => 'blog',
             'page' => '2',
         ), 'blogList'));
+    }
+
+    public function testUriWhenRouterNotEnable()
+    {
+        $router = $this->object;
+
+        $router->option('enable', false);
+
+        $this->assertEquals('?module=index', $router->uri(array(
+            'module' => 'index',
+        )));
+    }
+
+    public function testSetBaseUriOption()
+    {
+        $router = $this->object;
+
+        $router->option('baseUri', '/app');
+
+        $this->assertEquals('/app/', $router->option('baseUri'));
+    }
+
+    public function testMatchRequestUriWhenRouterNotEnable()
+    {
+        $router = $this->object;
+
+        $router->option('enable', false);
+
+        $this->assertEquals($_GET, $router->matchRequestUri());
+    }
+
+    public function testMatchRequestUriInApache2()
+    {
+        $router = $this->object;
+
+        !isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] = 'module/action/id';
+
+        $this->assertContains('module', $router->matchRequestUri());
+    }
+
+    public function testMatchRequestUriInIis7()
+    {
+        $router = $this->object;
+
+        if (isset($_SERVER['REQUEST_URI'])) {
+            unset($_SERVER['REQUEST_URI']);
+        }
+
+        !isset($_SERVER['HTTP_X_ORIGINAL_URL']) && $_SERVER['HTTP_X_ORIGINAL_URL'] = 'module/action/id';
+
+        $this->assertContains('module', $router->matchRequestUri());
+
+        $this->assertContains('module', $router->matchRequestUri(), 'get again for cached variable');
+    }
+
+    public function testMatchRequestUriInIis6()
+    {
+        $router = $this->object;
+
+        if (isset($_SERVER['REQUEST_URI'])) {
+            unset($_SERVER['REQUEST_URI']);
+        }
+
+        if (isset($_SERVER['HTTP_X_ORIGINAL_URL'])) {
+            unset($_SERVER['HTTP_X_ORIGINAL_URL']);
+        }
+
+        !isset($_SERVER['HTTP_X_REWRITE_URL']) && $_SERVER['HTTP_X_REWRITE_URL'] = 'module/action/id';
+
+        $this->assertContains('module', $router->matchRequestUri());
+    }
+
+    public function testMatchRequestUriInUnknownServer()
+    {
+        $router = $this->object;
+
+        if (isset($_SERVER['REQUEST_URI'])) {
+            unset($_SERVER['REQUEST_URI']);
+        }
+
+        if (isset($_SERVER['HTTP_X_ORIGINAL_URL'])) {
+            unset($_SERVER['HTTP_X_ORIGINAL_URL']);
+        }
+
+        if (isset($_SERVER['HTTP_X_REWRITE_URL'])) {
+            unset($_SERVER['HTTP_X_REWRITE_URL']);
+        }
+
+        $this->assertEquals(array(
+            'module' => 'index',
+            'action' => 'index',
+        ), $router->matchRequestUri());
     }
 }
