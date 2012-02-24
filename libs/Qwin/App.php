@@ -30,119 +30,69 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2009-11-24 20:45:11
- * @todo        remove timezone option and add to qwin class
  */
 class Qwin_App extends Qwin_Widget
 {
     /**
      * @var array           options
      *
-     *       dirs           application root dirs
+     *       dirs           the root directories of the applications
      *
-     *       module         default module value
+     *       module         the default module name
      *
-     *       action         default action value
-     *
-     *       timezone       timezone
+     *       action         the default action name
      */
     public $options = array(
-        'dirs'          => array(),
-        'module'        => 'index',
-        'action'        => 'index',
+        'dirs'      => array(),
+        'module'    => null,
+        'action'    => null,
     );
 
     /**
-     * 启动应用
+     * Startup application
      *
-     * @param array $options 选项
+     * @param array $options options
      * @return Qwin_App
-     * @todo 记录状态,防止二次加载?
-     * @todo 根据是否debug等抛出不同的错误信息
-     * @todo Qwin::getInstance()->app(function(){ ... }); ?
-     * @todo
-     *
-     * // request
-     * $module = $this->module();
-     * $action = $this->action();
-     *
-     * // controller
-     * $result = $this->controller(array(
-     *     'module' => $module,
-     *     'action' => $action,
-     * ))
-     *
-     * // view
-     * $result = $this->view(array(
-     *     'module' => $module,
-     *     'action' => $action,
-     *     'result' => $result,
-     * ));
-     *
-     * // response
-     * return $this->response(array(
-     *     'body' => $result,
-     * ));
      */
     public function __invoke(array $options = array())
     {
-        $this->marker('appStartup');
-
-        // 合并选项
+        // merge options
         $this->option($options);
         $options = &$this->options;
 
-        // 设置默认应用目录
-        if (!is_array($options['dirs'])) {
-            $options['dirs'] = (array)$options['dirs'];
-        }
-        if (empty($options['dirs'])) {
-            $options['dirs'][] = dirname(dirname(dirname(__FILE__))) . '/apps/';
-        }
+        // get request & action
+        $module = isset($options['module']) ? $options['module']: $this->module();
+        $action = isset($options['action']) ? $options['action']: $this->action();
 
-        // 触发应用启动事件
-        $this->trigger('appStartup');
+        // execute controller action
+        $result = $this->controller(array(
+            'module' => $module,
+            'action' => $action,
+        ));
 
-        // 获取模块和行为对象
-        $options['module'] = $this->module();
-        $options['action'] = $this->action();
+        // display view
+        $this->view(array(
+            'module' => $module,
+            'action' => $action,
+            'result' => $result,
+        ));
 
-        $controller = $this->controller($options['module']);
-
-        if (!$controller || !method_exists($controller, $options['action'] . 'Action')) {
-            return $this->error('The page your reuqested not found.', 404);
-        }
-
-        //
-        $result = $controller->execute($options['action']);
-
-        // 展示视图
-        $this->view($result);
-
-        $this->marker('appTermination');
-
-        // 触发应用结束事件
-        $this->trigger('appTermination');
-
-        // 返回当前对象
         return $this;
     }
 
-    public function execute($module, $action, $view = true)
+    /**
+     * Set application directories
+     *
+     * @param array $dirs
+     * @return Qwin_App
+     */
+    public function setDirsOption($dirs)
     {
-        $controller = $this->controller($module);
-        if (!$controller) {
-            return false;
+        if (empty($dirs)) {
+            $this->options['dirs'] = array(dirname(dirname(dirname(__FILE__))) . '/apps');
+        } else {
+            $this->options['dirs'] = (array)$dirs;
         }
-
-        $actionMethod = $action . 'Action';
-        if (!method_exists($controller, $actionMethod)) {
-            return false;
-        }
-
-        $result = $controller->execute($action);
-
-        $this->view->renderBy($module, $action);
-
         return $this;
     }
 }
