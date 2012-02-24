@@ -50,6 +50,7 @@ ol, ul, li {
 .message-box th, .message-box td{
     padding: 2px 3px;
     vertical-align: top;
+    font-size: 12px;
 }
 .message-box th {
     min-width: 150px;
