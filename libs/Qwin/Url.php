@@ -34,43 +34,16 @@
 class Qwin_Url extends Qwin_Widget
 {
     /**
-     * 默认选项
-     * @var array
+     * @var array Options
      *
      *       names 提供一个只有两个值的数组,供快速构建url服务
      */
     public $options = array(
-        'basicParams' => array(),
         'names' => array(
             'module',
             'action'
         ),
     );
-
-    /**
-     * 构建url查询字符串,功能类似http_build_query
-     *
-     * @param array $data url数组,如$_GET
-     * @return string
-     */
-    public function build(array $data = null)
-    {
-        if (!$data) {
-            $data = $_GET;
-        } else {
-            $data += $this->options['basicParams'];
-        }
-
-        // 对传入的多个参数进行合并
-        if (1 < func_num_args ()) {
-            $data = array();
-            foreach(func_get_args() as $arg) {
-                $data = $arg + $data;
-            }
-        }
-
-        return '?' . strtr(urldecode(http_build_query($data)), array('&amp;' => '&'));
-    }
 
     /**
      * 快速构建链接
@@ -88,7 +61,7 @@ class Qwin_Url extends Qwin_Widget
      */
     public function __invoke($value1, $value2 = 'index', array $params = array())
     {
-        return $this->build(array(
+        return $this->router->uri(array(
             $this->options['names'][0] => $value1,
             $this->options['names'][1] => $value2,
         ) + $params);

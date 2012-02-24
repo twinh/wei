@@ -37,7 +37,8 @@ class Qwin_Get extends Qwin_Request
 {
     public function __construct($options = null)
     {
-        $this->_data = $_GET;
+        $params = $this->router->matchRequestUri();
+        $this->_data = $params ? $params : $_GET;
     }
 
     /**
