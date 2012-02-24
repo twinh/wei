@@ -35,7 +35,8 @@ class Qwin_Request extends Qwin_ArrayWidget
 {
     public function __construct($options = null)
     {
-        $this->_data = $_REQUEST;
+        $params = $this->router->matchRequestUri();
+        $this->_data = $params + $_REQUEST;
     }
 
     /**
@@ -45,7 +46,7 @@ class Qwin_Request extends Qwin_ArrayWidget
      * @param mixed $default
      * @return Qwin_Widget
      */
-    public function __invoke($name = null, $default = null)
+    public function __invoke($name, $default = null, array $options = array())
     {
         return isset($this->_data[$name]) ? $this->_data[$name] : $default;
     }
