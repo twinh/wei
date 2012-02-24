@@ -73,6 +73,9 @@ class Minify_Controller extends Qwin_Controller
         }
         $options['minApp']['groups'][$name] = require $file;
 
+        // 注入g变量
+        $_GET['g'] = $name;
+
         // serve!
         $result = Minify::serve('MinApp', $options);
     }
