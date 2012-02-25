@@ -66,7 +66,7 @@ class Qwin_CookieTest extends PHPUnit_Framework_TestCase {
 
         $this->assertEquals(null, $widget->get('test'), 'test expired cookie');
     }
-
+    
     /**
      * @covers Qwin_Cookie::remove
      * @covers Qwin_Cookie::offsetUnset

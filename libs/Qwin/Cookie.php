@@ -88,7 +88,7 @@ class Qwin_Cookie extends Qwin_Request
      * @param mixed $value the value of cookie
      * @param array $options
      */
-    public function set($key, $value, array $options = array())
+    public function set($key, $value = null, array $options = array())
     {
         $value = serialize($value);
         $this->_data[$key] = serialize($value);
@@ -100,32 +100,11 @@ class Qwin_Cookie extends Qwin_Request
 
         if (0 < $o['expire']) {
             $this->_data[$key] = $value;
-            $this->request->add($key, $value);
+            $this->request->set($key, $value);
         } else {
             unset($this->_data[$key]);
         }
 
-        return $this;
-    }
-
-    /**
-     * Add cookie data
-     *
-     * @param string|array $name
-     * @param mixed $value
-     * @return Qwin_Post
-     */
-    public function add($name, $value = null, array $option = array())
-    {
-        if (is_array($name)) {
-            foreach ($name as $key => $value) {
-                $this->set($name, $value, $option);
-                $this->request->add($name, $value);
-            }
-        } else {
-            $this->set($name, $value, $option);
-            $this->request->add($name, $value);
-        }
         return $this;
     }
 
