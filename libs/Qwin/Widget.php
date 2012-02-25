@@ -73,6 +73,7 @@ class Qwin_Widget implements Qwin_Widgetable
      *          $widget->option('name', 'value');   // set "name" to "value"
      *          $widget->option();                  // get all options
      *          $widget->option(array());           // set options
+     * @todo test reference in 5.2 version
      */
     public function option($name = null, $value = null)
     {
@@ -81,6 +82,7 @@ class Qwin_Widget implements Qwin_Widgetable
             foreach ($name as $k => $v) {
                 $this->option($k, $v);
             }
+            $name = $this->options;
             return $this;
         }
 
