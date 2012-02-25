@@ -242,6 +242,26 @@ class QwinTest extends PHPUnit_Framework_TestCase {
 
         $this->assertContains($dir, $widget->option('autoloadDirs'), '"Qwin" class directory');
     }
+
+    /**
+     * @covers Qwin::setInisOption
+     */
+    public function testSetInisOption()
+    {
+        $widget = $this->object;
+
+        $timezone = ini_get('date.timezone');
+
+        $widget->option('inis', array(
+            'date.timezone' => 'Asia/Shanghai',
+        ));
+
+        $this->assertEquals('Asia/Shanghai', ini_get('date.timezone'));
+
+        $widget->option('inis', array(
+            'date.timezone' => $timezone,
+        ));
+    }
 }
 
 // class for test
