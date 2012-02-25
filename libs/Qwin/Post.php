@@ -45,16 +45,16 @@ class Qwin_Post extends Qwin_Request
      * @param mixed $value
      * @return Qwin_Post
      */
-    public function add($name, $value = null)
+    public function set($name, $value = null, array $options = array())
     {
         if (is_array($name)) {
             foreach ($name as $key => $value) {
                 $this->_data[$key] = $value;
-                $this->request->add($name, $value);
+                $this->request->set($name, $value);
             }
         } else {
             $this->_data[$name] = $value;
-            $this->request->add($name, $value);
+            $this->request->set($name, $value);
         }
         return $this;
     }
