@@ -52,13 +52,13 @@ class Qwin_Request extends Qwin_ArrayWidget
     }
 
     /**
-     * Add request data
+     * set request data
      *
      * @param string|array $name
      * @param mixed $value
      * @return Qwin_Reqeust
      */
-    public function add($name, $value = null)
+    public function set($name, $value = null, array $options = array())
     {
         if (is_array($name)) {
             foreach ($name as $key => $value) {

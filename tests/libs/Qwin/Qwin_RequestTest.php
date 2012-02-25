@@ -57,17 +57,17 @@ class Qwin_RequestTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_Request::add
+     * @covers Qwin_Request::set
      */
-    public function testAdd()
+    public function testSet()
     {
         $widget = $this->object;
 
-        $widget->add('key', 'value');
+        $widget->set('key', 'value');
 
         $this->assertEquals('value', $widget->request('key'), 'string param');
 
-        $widget->add(array(
+        $widget->set(array(
             'key1' => 'value1',
             'key2' => 'value2',
         ));
@@ -82,7 +82,7 @@ class Qwin_RequestTest extends PHPUnit_Framework_TestCase {
     {
         $widget = $this->object;
 
-        $widget->add('remove', 'just a moment');
+        $widget->set('remove', 'just a moment');
 
         $this->assertEquals('just a moment', $widget->request('remove'));
 
