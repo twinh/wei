@@ -12,7 +12,7 @@
 <script type="text/javascript">
 jQuery(function($){
     $('#qw-form-login input').qui();
-    
+
     $('#qw-form-login').ajaxForm({
         dataType: 'json',
         success: function(data){
@@ -32,13 +32,13 @@ jQuery(function($){
             <td width="80%"></td>
         </tr>
         <tr>
-            <td class="qw-label-common qw-label-plain"><label for="point">用户名:</label></td>
+            <td class="qw-label-common qw-label-plain"><label for="point"><?php echo $lang['Username'] ?>:</label></td>
             <td class="qw-field-common qw-field-text" colspan="1">
                 <input id="login-username" name="username" class="ui-widget-content ui-corner-all" type="text" />
             </td>
         </tr>
         <tr>
-            <td class="qw-label-common qw-label-plain"><label for="reason">密码:</label></td>
+            <td class="qw-label-common qw-label-plain"><label for="reason"><?php echo $lang['Password'] ?>:</label></td>
             <td class="qw-field-common qw-field-password" colspan="1">
                 <input id="login-password" name="password" class="ui-widget-content ui-corner-all" type="password" />
             </td>

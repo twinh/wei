@@ -9,15 +9,12 @@ $minify->add(array(
     $this->getFile('views/style.css'),
 ));
 ?>
-<style>
-    .welocme {
-        padding: 10px 10px;
-    }
-</style>
 </head>
 <body>
-<div class="ui-widget welocme">
+<div class="ui-widget">
+<ul class="ui-updatelog">
     <p><?php echo $lang['Hello, wellcome to Qwin!'] ?></p>
+</ul>
 </div>
 </body>
 </html>

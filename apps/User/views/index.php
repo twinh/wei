@@ -6,19 +6,16 @@
 <?php
 $minify->add(array(
     $jQuery->getTheme($this->options['theme']),
-    $jQuery->getCore(),
+    $jQuery->get('jquery, ui, effects, draggable, dialog, datepicker, form, qui, button, metadata, jqGrid'),
     $jQuery->getDir() . '/jqGrid/i18n/grid.locale-cn.js',
-    $jQuery->get('ui.core, effects, qui, ui.button, metadata, jqGrid'),
-    $this->getFile('views/style.css'),
     $this->getFile('views/style.js'),
+    $this->getFile('views/style.css'),
+    $this->getFile('views/form/default.css'),
 ));
 ?>
 </head>
 <body>
-<div id="qw-jqgrid-top" class="qw-toolbar ui-state-default">
-    <a href="#">添加</a> | <a href="#">编辑</a> | <a href="#">删除</a>
-</div>
-<table id="qw-jqgrid"></table>
-<div id="qw-jqgrid-pager"></div>
+<table id="user-grid"></table>
+<div id="user-grid-pager"></div>
 </body>
 </html>
