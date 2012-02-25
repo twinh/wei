@@ -30,33 +30,17 @@ class Qwin_UrlTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Qwin_Url::build
-     */
-    public function testBuild() {
-        $widget = $this->object;
-
-        $url = $widget->build(array(
-            'key' => 'value',
-            'key2' => array(
-                'subkey' => 'value2',
-            ),
-        ), array(
-            'key' => 'value2',
-        ));
-
-        $this->assertEquals('?key=value2&key2[subkey]=value2', $url);
-
-        $widget->build();
-    }
-
-    /**
      * @covers Qwin_Url::__invoke
      */
     public function test__invoke() {
         $widget = $this->object;
 
+        $widget->router->options['baseUri'] = '';
+
+        $widget->router->remove('default');
+
         $url = $widget->url('user', 'login');
 
-        $this->assertEquals('?module=user&action=login', $url);
+        $this->assertEquals('?module=user&amp;action=login', $url);
     }
 }
