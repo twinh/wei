@@ -25,7 +25,7 @@
  * @since       2010-05-13 10:17:58
  */
 
-class User_Controller extends Qwin_CrudController
+class User_Controller extends Qwin_Controller
 {
     /**
      * 锁定的核心帐号，防止恶意修改
@@ -34,6 +34,30 @@ class User_Controller extends Qwin_CrudController
     protected $_lock = array(
         'guest', 'admin', '7641b5b1-c727-6c07-e11f-9cb5b74ddfc9',
     );
+
+    public function indexAction()
+    {
+        if ($this->isAjax()) {
+            $rows = $this->getInt('rows', 1, 500);
+
+            $page = $this->getInt('page', 1);
+
+            $query = $this->query()
+                ->addRawOrder(array($this->get('sidx'), $this->get('sord')))
+                ->offset(($page - 1) * $rows)
+                ->limit($rows);
+            $data = $query->fetchArray();
+            $total = $query->count();
+
+            return $this->jQGridJson(array(
+                'columns' => array('id', 'group_id', 'username', 'email', 'sex', 'date_modified', 'operation'),
+                'data' => $data,
+                'page' => $page,
+                'rows' => $rows,
+                'total' => $total,
+            ));
+        }
+    }
 
     public function loginAction()
     {
@@ -99,11 +123,6 @@ class User_Controller extends Qwin_CrudController
                 'message' => 'You have not logged in!'
             ));
         }
-    }
-
-    public function json($data)
-    {
-        return json_encode($data);
     }
 
     /**

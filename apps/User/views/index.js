@@ -1,8 +1,7 @@
 jQuery(function($){
-    $('#qw-jqgrid').jqGrid({
+    $('#user-grid').jqGrid({
         sortorder: 'id',
         datatype: 'json',
-        url: '?module=user',
         width: '100%',
         height: 'auto',
         forceFit: true,
@@ -10,7 +9,7 @@ jQuery(function($){
         rownumbers: true,
         multiselect: true,
         viewrecords: true,
-        pager: '#qw-jqgrid-pager',
+        pager: '#user-grid-pager',
         rowNum: 15,
         rowList: [15, 30, 50, 100, 500],
         colNames: [],
@@ -28,9 +27,13 @@ jQuery(function($){
         }, {
             name: 'date_modified'
         }, {
-            name: 'operation'
+            name: 'operation',
+            align: 'center',
+            formatter: function(cellvalue, options, rowObject){
+                return '<a href="#">编辑</a> | <a href="#">删除</a>';
+            }
         }]
-    }).jqGrid('navGrid', '#qw-jqgrid-pager', {
+    }).jqGrid('navGrid', '#user-grid-pager', {
         add : false,
         edit : false,
         del : false,
