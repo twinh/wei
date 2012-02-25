@@ -81,4 +81,16 @@ class Qwin_ArrayWidgetTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('value changed', $widget['key2']);
     }
 
+    public function testToArray()
+    {
+        $widget = $this->object;
+
+        $widget->fromArray(array(
+            'key' => 'other value',
+        ));
+
+        $arr = $widget->toArray();
+
+        $this->assertContains('other value', $arr);
+    }
 }
