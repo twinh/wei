@@ -25,7 +25,7 @@
  * @since       2010-07-15 14:43:28
  */
 
-class Member_Group_Controller extends ActionController_Widget
+class Group_Controller extends Qwin_Controller
 {
     /**
      * 分配权限
@@ -88,5 +88,5 @@ class Member_Group_Controller extends ActionController_Widget
             $url = Qwin::call('-url')->url($this->_asc, array('action' => 'Index'));
             return $this->view->redirect($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
-    }    
+    }
 }
