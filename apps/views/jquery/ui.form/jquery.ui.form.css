@@ -23,37 +23,37 @@
 
 /**
  * jquery
- * 
+ *
  * @namespace   Qwin
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-18 15:34:43
 */
-.qw-corner-all {
+.ui-clear {
+    clear: both;
+}
+.ui-form .ui-corner-all {
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
 }
-.qw-corner-all-2 {
-    -moz-border-radius: 22px;
-    -webkit-border-radius: 22px;
-    border-radius: 22px;
-}
-.qw-clear {
-    clear: both;
-}
-.qw-form {
-    min-width: 300px;
+.ui-form {
     padding: 2px;
     float: left;
     overflow: hidden;
 }
-.qw-form .qw-form-cell {
+.ui-form-header {
+    padding: 5px 4px;
+}
+.ui-form-body {
+    padding: 5px 5px 0px 5px;
+    float: left;
+}
+.ui-form .ui-form-cell {
     padding: 0 0 5px;
     float: left;
 }
-.qw-form .qw-form-label {
-    width: 75px;
+.ui-form .ui-form-label {
     float: left;
     text-align: right;
     padding: 5px 5px 5px 0;
@@ -61,102 +61,96 @@
     float: none;
     text-align: left;*/
 }
-/* 标签只读标志的图标位置 */
-.qw-form-label-readonly {
-    display: inline;
-    background-position: -196px -98px;
-}
-.qw-form-label-required {
+.ui-form-label-required {
     color: orange;
     padding: 0 2px;
 }
-.qw-form .qw-form-elem {
+.ui-form .ui-form-field {
     float: left;
-    /* ? line-height: 20px;*/
-/*        width: 380px;*/
 }
-.qw-form .qw-form-text {
+.ui-form .ui-form-text {
     padding: 1px 3px;
     height: 20px;
     font-weight: normal;
-}
-.qw-form .qw-form-plain {
-    padding: 5px 0 0 5px;
     float: left;
 }
-.qw-form .qw-form-select {
-    padding: 0;
+.ui-form .ui-form-plain {
+    padding: 5px 5px 0 5px;
+    float: left;
+}
+.ui-form .ui-form-select {
     line-height: 24px;
     height: 24px;
-    padding-top: 3px;
+    padding-top: 2px;
     float: left;
 }
-.qw-form .qw-form-textarea {
+.ui-form .ui-form-textarea {
     padding: 4px 3px;
     font-weight: normal;
     float: left;
 }
-.qw-form .qw-form-checkbox-group {
+.ui-form .ui-form-checkbox-group {
     padding: 1px 3px;
     float: left;
 }
-.qw-form .qw-form-checkbox-input {
+.ui-form .ui-form-checkbox-input {
     vertical-align: -3px;
 }
-.qw-form .qw-form-checkbox-elem {
+.ui-form .ui-form-checkbox-elem {
     margin: 4px 5px 0 2px;
     float: left;
 }
-.qw-form .qw-form-checkbox-label {
+.ui-form .ui-form-checkbox-label {
     margin: 0 0 0 4px;
 }
-.qw-form .qw-form-fieldset {
+.ui-form .ui-form-fieldset {
     background: none repeat scroll 0 0 transparent;
-    margin: 5px;
+    display: block;
+    /* for .ui-form-legend */
     padding-left: 5px;
 }
-.qw-form .qw-form-legend {
+.ui-form .ui-form-fieldset-content {
+    margin-right: 5px;
+}
+.ui-form .ui-form-legend {
     background: none repeat scroll 0 0 transparent;
     border: 0 none;
-    cursor: pointer;
     font-size: 12px;
     font-weight: bold;
     line-height: 120%;
     padding: 0 3px;
 }
-.qw-form-legend-toggle {
+.ui-form-legend-toggle {
     float: left;
     margin-top: 1px;
 }
-.qw-form-legend-title {
+.ui-form-legend-title {
     float: left;
     margin-left: 3px;
-
 }
-.qw-form-legend-toggle-icon {
+.ui-form-legend-toggle-icon {
     width: 14px;
     height: 14px;
-    /* ? */
     margin-top: -1px;
-
+    cursor: pointer;
 }
-.qw-form-legend-toggle-icon span {
+.ui-form-legend-toggle-icon span.ui-icon-triangle-1-s {
     background-position: -65px -17px;
 }
-.qw-form-text {
-    float: left;
+.ui-form-legend-toggle-icon span.ui-icon-triangle-1-n {
+    background-position: 0 -17px;
 }
-.qw-form .qw-form-button-0 {
+.ui-form .ui-form-button-0 {
     height: 22px;
     width: 22px;
     float: left;
     cursor: pointer;
     margin-left: 1px;
 }
-.qw-form .qw-form-button-0 .ui-icon {
+.ui-form .ui-form-button-0 .ui-icon {
     margin: 3px;
 }
-.qw-form .qw-form-button {
+/*.ui-form .ui-form-button {
     height: 22px;
     width: 22px;
     float: left;
@@ -166,50 +160,46 @@
     -webkit-border-top-left-radius: 0;
     border-top-left-radius: 0;
     -moz-border-radius-bottomleft: 0;
-    -webkit-border-bottom-left-radius:0; 
+    -webkit-border-bottom-left-radius:0;
     border-bottom-left-radius: 0;
 }
-.qw-form .qw-form-button-2 {
+.ui-form .ui-form-button-2 {
     -moz-border-radius-topright: 0;
     -webkit-border-top-right-radius: 0;
     border-top-right-radius: 0;
     -moz-border-radius-bottomright: 0;
-    -webkit-border-bottom-right-radius:0; 
+    -webkit-border-bottom-right-radius:0;
     border-bottom-right-radius: 0;
 }
-.qw-form .qw-form-button .ui-icon {
+.ui-form .ui-form-button .ui-icon {
     margin: 3px;
 }
-.qw-form .qw-form-text-2 {
+.ui-form .ui-form-text-2 {
     -moz-border-radius-topright: 0;
     -webkit-border-top-right-radius: 0;
     border-top-right-radius: 0;
     -moz-border-radius-bottomright: 0;
-    -webkit-border-bottom-right-radius:0; 
+    -webkit-border-bottom-right-radius:0;
     border-bottom-right-radius: 0;
 }
-.qw-form-button2 {
+.ui-form-button2 {
     margin: 1px 0 0 4px;
     text-align: right;
     text-align: left;
-}
-.qw-form-button2 a {
-
-}
-.qw-form-body {
-    padding: 5px 5px 0px 5px;
-    float: left;
-}
-.qw-form-footer {
+}*/
+.ui-form-footer {
     border-width: 1px 0 0;
     padding: 4px 5px;
     text-align: right;
     float: left;
 }
-.qw-form-footer button {
+.ui-form-footer button {
     cursor: pointer;
     margin: 0 4px 0 0;
 }
-.qw-form-header {
-    padding: 6px 5px;
+.ui-form .ui-form-field-buttons {
+    float: left;
+}
+.ui-form-row {
+    float: left;
 }
