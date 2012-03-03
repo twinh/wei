@@ -6,10 +6,9 @@
 <?php
 $minify->add(array(
     $jQuery->getTheme($this->options['theme']),
-    $jQuery->get('jquery, ui, effects, draggable, layout, qui, accordion, tabs, button, metadata, dialog, form'),
+    $jQuery->get('jquery, ui, effects, draggable, layout, qui, accordion, tabs, button, metadata, dialog, form, ui.form'),
     $this->getFile('views/style.js'),
     $this->getFile('views/style.css'),
-    $this->getFile('views/form/default.css'),
 ));
 ?>
 </head>

@@ -58,15 +58,6 @@
     border-right: 0;
     font-weight: normal;
 }
-#qw-footer-arrow {
-    float: right;
-    width: 20px;
-    margin: 2px 0 0 2px;
-    cursor: pointer;
-}
-#qw-footer-time {
-    float: right;
-}
 #qw-copyright {
     text-align: center;
 }

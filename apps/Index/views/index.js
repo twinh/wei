@@ -113,7 +113,7 @@ jQuery(function($){
             modal: true,
             buttons: {
                 '登陆': function(){
-                    $('#qw-form-login').submit();
+                    $('#login-form').submit();
                 },
                 '取消': function(){
                     $(this).dialog('destory').remove();
