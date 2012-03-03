@@ -37,7 +37,7 @@ class Qwin_ModuleTest extends PHPUnit_Framework_TestCase {
     public function test__invoke() {
         $widget = $this->object;
 
-        $widget->request->add('module', 'test');
+        $widget->request->set('module', 'test');
 
         // instance new module object rather than get from widget
         // because module widget may has been called
@@ -59,8 +59,8 @@ class Qwin_ModuleTest extends PHPUnit_Framework_TestCase {
 
         $this->assertEquals('new module', $widget->module('new module'), 'set new module');
 
-        $widget->request->add('m', 'me');
-        $widget->request->add('module', 'not me');
+        $widget->request->set('m', 'me');
+        $widget->request->set('module', 'not me');
 
         $module = new Qwin_Module(array(
             'key' => 'm',
