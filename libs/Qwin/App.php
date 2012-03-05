@@ -61,8 +61,8 @@ class Qwin_App extends Qwin_Widget
         $options = &$this->options;
 
         // get request & action
-        $module = isset($options['module']) ? $options['module']: $this->module();
-        $action = isset($options['action']) ? $options['action']: $this->action();
+        $module = $options['module'] ? $options['module'] : $this->module();
+        $action = $options['action'] ? $options['action'] : $this->action();
 
         // execute controller action
         $result = $this->controller(array(
