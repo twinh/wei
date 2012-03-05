@@ -82,12 +82,18 @@
             footer.appendTo(form).fullWidth(width);
 
             var button;
-            for (var i in options.buttons) {
-                options.buttons[i] = $.extend({}, $.form.buttonDefaults, options.buttons[i]);
-                button = '<button type="' + options.buttons[i].type + '" hidefocus="true" class="qw-button" data="{icons:{primary:\'' + options.buttons[i].icon + '\'}}">' + options.buttons[i].label + '</button>';
+            $.each(options.buttons, function(name, options) {
+                options = $.extend({}, $.form.buttonDefaults, options);
+                button = '<button type="' + options.type + '" hidefocus="true" class="qw-button" data="{icons:{primary:\'' + options.icon + '\'}}">' + options.label + '</button>';
                 button = $(button).button();
                 footer.append(button);
-            }
+
+                if (options.click) {
+                    button.click(function() {
+                        options.click();
+                    });
+                }
+            });
         }
 
         if (options.afterRendered) {
