@@ -38,3 +38,23 @@ create:function(a){if(this.instances.length===0){setTimeout(function(){c.ui.dial
 c("<div></div>").addClass("ui-widget-overlay")).appendTo(document.body).css({width:this.width(),height:this.height()});c.fn.bgiframe&&b.bgiframe();this.instances.push(b);return b},destroy:function(a){var b=c.inArray(a,this.instances);b!=-1&&this.oldInstances.push(this.instances.splice(b,1)[0]);this.instances.length===0&&c([document,window]).unbind(".dialog-overlay");a.remove();var d=0;c.each(this.instances,function(){d=Math.max(d,this.css("z-index"))});this.maxZ=d},height:function(){var a,b;if(c.browser.msie&&
 c.browser.version<7){a=Math.max(document.documentElement.scrollHeight,document.body.scrollHeight);b=Math.max(document.documentElement.offsetHeight,document.body.offsetHeight);return a<b?c(window).height()+"px":a+"px"}else return c(document).height()+"px"},width:function(){var a,b;if(c.browser.msie){a=Math.max(document.documentElement.scrollWidth,document.body.scrollWidth);b=Math.max(document.documentElement.offsetWidth,document.body.offsetWidth);return a<b?c(window).width()+"px":a+"px"}else return c(document).width()+
 "px"},resize:function(){var a=c([]);c.each(c.ui.dialog.overlay.instances,function(){a=a.add(this)});a.css({width:0,height:0}).css({width:c.ui.dialog.overlay.width(),height:c.ui.dialog.overlay.height()})}});c.extend(c.ui.dialog.overlay.prototype,{destroy:function(){c.ui.dialog.overlay.destroy(this.$el)}})})(jQuery);
+/**
+ * Ifame dialog
+ * @todo title from iframe title
+ */
+(function($) {
+    $.dialog = function(options){
+        options = $.extend($.dialog.defaults, options);
+        return $('<div class="ui-dialog-fullcontent"><iframe id="' + $.guid++ + '" class="ui-dialog-iframe" src="' + options.url + '" frameborder="0"></iframe></div>').dialog(options);
+    };
+    $.dialog.defaults = {
+        url: null,
+        modal: true,
+        close: function(){
+            $(this).dialog('destroy').remove();
+        }
+    };
+    $.dialog.close = function(frameId) {
+        $('#' + frameId).parent().dialog('close');
+    };
+})(jQuery);
