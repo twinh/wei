@@ -1,6 +1,6 @@
 <?php
 /**
- * list
+ * Record
  *
  * Copyright (c) 2008-2012 Twin Huang. All rights reserved.
  *
@@ -20,20 +20,10 @@
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @version     $Id$
- * @since       2011-5-11 0:24:26
+ * @since       2011-07-06 19:31:23
  */
 
-return array(
-    'fields' => array(
-        'id' => array(
-            'link' => false,
-            'hidden' => true,
-        ),
-        'operation' => array(
-            
-        ),
-    ),
-    'layout' => array(
-        'id', 'name', 'date_modified', 'operation',
-    ),
-);
+class Group_Record extends Qwin_Record
+{
+
+}
