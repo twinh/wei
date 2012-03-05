@@ -59,6 +59,20 @@ class User_Controller extends Qwin_Controller
         }
     }
 
+    public function addAction()
+    {
+        if ($this->isPost()) {
+            var_dump($_FILES);
+        } else {
+            $this->view->assign('form', $this->option('form'));
+        }
+    }
+
+    public function editAction()
+    {
+
+    }
+
     public function loginAction()
     {
         $user = $this->user();
@@ -69,7 +83,7 @@ class User_Controller extends Qwin_Controller
 
         // check whether user logged in
         if ($user['username'] && 'guest' != $user['username']) {
-            return $this->json(array(
+            return json_encode(array(
                 'code' => -1,
                 'message' => 'You have logged in!'
             ));
@@ -83,7 +97,7 @@ class User_Controller extends Qwin_Controller
             ->fetchOne();
 
         if (!$user) {
-            return $this->json(array(
+            return json_encode(array(
                 'code' => -1,
                 'message' => 'Username or password error!',
             ));
@@ -92,7 +106,7 @@ class User_Controller extends Qwin_Controller
         //
         $this->user->fromArray($user->toArray());
 
-        return $this->json(array(
+        return json_encode(array(
             'code' => 0,
             'message' => 'Login success!',
         ));
@@ -101,7 +115,7 @@ class User_Controller extends Qwin_Controller
     public function logoutAction()
     {
         $this->user->logout();
-        return $this->json(array(
+        return json_encode(array(
             'code' => 0,
             'message' => 'Logout success!',
         ));
@@ -112,13 +126,13 @@ class User_Controller extends Qwin_Controller
         $user = $this->user();
 
         if ($user->isLogin()) {
-            return $this->json(array(
+            return json_encode(array(
                 'code' => 0,
                 'message' => 'You have logged in!',
                 'username' => $user['username'],
             ));
         } else {
-            return $this->json(array(
+            return json_encode(array(
                 'code' => -1,
                 'message' => 'You have not logged in!'
             ));
