@@ -38,8 +38,8 @@
         }
 
         options = $.extend({}, $.form.defaults, options);
-
         options.labelDefaults = $.extend({}, $.form.labelDefaults, options.labelDefaults);
+        options.fieldDefaults = $.extend({}, $.form.fieldDefaults, options.fieldDefaults);
 
         var form = $(this);
         form.options = options;
@@ -54,19 +54,17 @@
         } else {
             width = form.width();
         }
+        form.fullWidth(width);
+        width = form.width();
 
         // render form header
         if (options.title) {
             var header = $('<div class="ui-form-header ui-corner-top ui-widget-header">' + options.title + '</div>');
-            form.append(header);
-            header.outerWidth(width);
+            header.appendTo(form).fullWidth(width);
         }
 
         var body = $('<div class="ui-form-body"></div>');
-
-        // mark resize
-        body.outerWidth(width);
-        form.append(body);
+        body.appendTo(form).fullWidth(width);
 
         // step 1, create the layout
         var rows = {};
@@ -81,15 +79,15 @@
         // render footer buttons
         if (options.buttons) {
             var footer = $('<div class="ui-form-footer ui-clear"></div>');
-            footer.outerWidth(width);
+            footer.appendTo(form).fullWidth(width);
 
             var button;
             for (var i in options.buttons) {
+                options.buttons[i] = $.extend({}, $.form.buttonDefaults, options.buttons[i]);
                 button = '<button type="' + options.buttons[i].type + '" hidefocus="true" class="qw-button" data="{icons:{primary:\'' + options.buttons[i].icon + '\'}}">' + options.buttons[i].label + '</button>';
                 button = $(button).button();
                 footer.append(button);
             }
-            form.append(footer);
         }
 
         if (options.afterRendered) {
@@ -148,7 +146,7 @@
         buttonDefaults: {
             icon: '',
             label: '',
-            type: ''
+            type: 'button'
         },
         fieldSetDefaults: {
             collapsed: false,
@@ -199,7 +197,7 @@
                     var emptyField = $('<div class="ui-form-field"></div>');
                     cell.append(emptyField);
                     if ('label' == options.type) {
-                        $.form.types.label(options, emptyField, emptyField.outerWidth());
+                        $.form.types.label(options, emptyField, emptyField.fullWidth());
                     }
 
                     // created button
@@ -223,7 +221,7 @@
                         field: emptyField,
                         options: options,
                         parentOptions : fields,
-                        width: cell.outerWidth()
+                        width: cell.fullWidth()
                     };
                     fieldNum++;
                 }
@@ -271,7 +269,7 @@
                         continue;
                     }
 
-                    field.outerWidth(avgWidth);
+                    field.fullWidth(avgWidth);
 
                     if ($.form.types[options.type]) {
                         $.form.types[options.type](options, field, avgWidth, form, rows[i]['fields'][k]['parentOptions']);
@@ -315,7 +313,7 @@
 
             html += label.title + label.separator + '</label>';
 
-            html = $(html).outerWidth(label.width);
+            html = $(html).fullWidth(label.width);
 
             cell.append(html);
         },
@@ -345,9 +343,9 @@
                 container.append(input);
 
                 if (!options.width) {
-                    input.outerWidth(width);
+                    input.fullWidth(width);
                 } else {
-                    input.outerWidth(options.width);
+                    input.fullWidth(options.width);
                 }
             },
             plain: function(options, container, width) {
@@ -356,7 +354,7 @@
 
                 container.append(input);
 
-                input.outerWidth(width);
+                input.fullWidth(width);
             },
             label: function(options, container, width) {
                 var input = $('<div class="ui-form-field ui-form-plain">' + options.value + '</div>');
@@ -368,7 +366,7 @@
                 }
 
                 if (options.width) {
-                    input.outerWidth(options.width);
+                    input.fullWidth(options.width);
                 }
             },
             select: function(options, container, width) {
@@ -381,7 +379,7 @@
 
                 container.append(input);
 
-                input.outerWidth(width);
+                input.fullWidth(width);
             },
             radio: function(options, container, width) {
                 var html = '<div class="ui-form-checkbox-group">';
@@ -397,7 +395,7 @@
 
                 container.append(input);
 
-                input.outerWidth(width);
+                input.fullWidth(width);
             },
             checkbox: function(options, container, width) {
                 var html = '<div class="ui-form-checkbox-group">';
@@ -413,14 +411,14 @@
 
                 container.append(input);
 
-                input.outerWidth(width);
+                input.fullWidth(width);
             },
             textarea: function(options, container, width) {
                 var input = $('<textarea class="ui-form-textarea ui-widget-content ui-corner-all" id="' + options.name + '" name="' + options.name + '" rows="4" cols="20">' + options.value + '</textarea>');
 
                 container.append(input);
 
-                input.outerWidth(width);
+                input.fullWidth(width);
             },
             password: function(options, container, width) {
                 return $.form.types.text(options, container, width);
@@ -436,7 +434,7 @@
                 var bid = 'ui-form-button-' + options.name;
                 container.append('<button id="' + bid + '" class="ui-state-default ui-corner-all" style="height:24px;margin-left:1px;">浏览...</button>');
 
-                width = width - $('#' + bid).qui().outerWidth() - 2;
+                width = width - $('#' + bid).qui().fullWidth() - 2;
 
                 var inputId = 'ui-form-input-' + options.name;
                 var html = '<input class="ui-form-text ui-widget-content ui-corner-all" readonly="readonly" type="text" id="' + inputId + '" name="' + options.name + '" value="' + options.value + '"/>';
@@ -445,7 +443,7 @@
                 var input = $(html);
                 container.append(input);
 
-                input.outerWidth(width);
+                input.fullWidth(width);
 
                 $('#' + bid).click(function(){
                     $('#' + options.name).click();
@@ -499,9 +497,9 @@
 
                 container.append(input);
                 if ('ui-clear' !== container.parent().next().attr('class')) {
-                    input.outerWidth(width - 5);
+                    input.fullWidth(width - 5);
                 } else {
-                    input.outerWidth(width);
+                    input.fullWidth(width);
                 }
 
                 if ('object' == typeof options.fields) {
@@ -526,4 +524,14 @@
             }
         }
     });
+
+    $.fn.fullWidth = function(width) {
+        if (width) {
+            // < 0 ?
+            this.outerWidth(width - parseFloat(this.css('marginLeft')) - parseFloat(this.css('marginRight')));
+            return this;
+        } else {
+            return this.outerWidth(true);
+        }
+    }
 })(jQuery);

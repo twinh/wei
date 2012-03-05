@@ -189,9 +189,9 @@
 }*/
 .ui-form-footer {
     border-width: 1px 0 0;
-    padding: 4px 5px;
     text-align: right;
     float: left;
+    margin-top: 15px;
 }
 .ui-form-footer button {
     cursor: pointer;
