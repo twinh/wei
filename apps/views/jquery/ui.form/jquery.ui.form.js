@@ -121,9 +121,11 @@
             fields: [],
             buttons: [{
                 label: 'Submit',
+                type: 'submit',
                 icon: 'ui-icon-check'
             },{
                 label: 'Reset',
+                type: 'reset',
                 icon: ''
             }]
         },
@@ -377,8 +379,15 @@
             },
             select: function(options, container, width) {
                 var html = '<select id="' + options.name + '" name="' + options.name + '" class="ui-form-select ui-widget-content ui-corner-all">';
+
+                var selected = '';
                 for (var i in options.sources) {
-                    html += '<option value="' + i + '">' + options.sources[i] + '</option>';
+                    if (options.value == i) {
+                        selected = ' selected="selected"';
+                    } else {
+                        selected = '';
+                    }
+                    html += '<option value="' + i + '" ' + selected + '>' + options.sources[i] + '</option>';
                 }
                 html += '</select>';
                 var input = $(html);
