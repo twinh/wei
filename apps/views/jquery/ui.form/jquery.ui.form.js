@@ -277,7 +277,9 @@
                         continue;
                     }
 
-                    field.fullWidth(avgWidth);
+                    if (!options.width) {
+                        field.fullWidth(avgWidth);
+                    }
 
                     if ($.form.types[options.type]) {
                         $.form.types[options.type](options, field, avgWidth, form, rows[i]['fields'][k]['parentOptions']);
@@ -536,6 +538,16 @@
 
                     $.form.renderFields(rows, form);
                 }
+            },
+            datepicker: function(options, container, width, form) {
+                if (undefined == $.datepicker) {
+                    alert('jQuery ui datepicker plugin is not loaded.');
+                    return;
+                }
+
+                $.form.types.text(options, container, width);
+
+                $('#' + options.name).datepicker(options.options);
             }
         }
     });
