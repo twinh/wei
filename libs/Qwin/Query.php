@@ -24,7 +24,7 @@
 
 /**
  * Query
- * 
+ *
  * @package     Qwin
  * @subpackage  Application
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -40,11 +40,11 @@ class Qwin_Query extends Doctrine_Query
     protected static $_orderTypes = array(
         'DESC', 'ASC'
     );
-    
+
     /**
      * 数据查询类型
      * @var array
-     * @todo 是否使用%s替换 
+     * @todo 是否使用%s替换
      */
     protected static $_searchTypes = array(
         'eq' => '=',
@@ -62,72 +62,28 @@ class Qwin_Query extends Doctrine_Query
         'cn' => 'LIKE',
         'nc' => 'NOT LIKE',
     );
-    
+
     /**
      * 查询对应的记录对象
      * @var Doctrine_Record
      */
     protected $_record;
-    
+
     public function __construct(Doctrine_Connection $connection = null, Doctrine_Hydrator_Abstract $hydrator = null)
     {
         Qwin_Record::connect();
         parent::__construct($connection, $hydrator);
     }
-    
+
     public function __invoke($name = null, $module = null)
     {
         $widget = Qwin::getInstance();
         $record = $widget->record($name, $module);
         $class = get_class($record);
-        
+
         $query = Doctrine_Query::create(null, __CLASS__)->from($class);
         $query->_record = $record;
         return $query;
-
-        // 根据别名和索引构建DQL的from语句
-        $from = $recordClass;
-        if ($meta['alias']) {
-            $from .= ' ' . $meta['alias'];
-        }
-        if ($meta['indexBy']) {
-            $from .= ' INDEXBY ' . $meta['indexBy'];
-        }
-
-        // 初始化查询
-        // TODO 更多选项,如缓存
-        $query = Doctrine_Query::create(null, __CLASS__)->from($from);
-        
-        // 将元数据存储在查询对象中,方便获取其关联关系
-        $query->_record = $record;
-
-        // 增加默认查询
-        if (!empty($this['where'])) {
-            $query->addRawWhere($this['where']);
-        }
-    }
-
-    public function leftJoinByType($type)
-    {
-        $types = is_array($type) ? $type : array($type);
-        foreach ($this->_record->options['relations'] as $alias => $relation) {
-//            if (in_array($relation['type'], $types)) {
-//                $this->leftJoin($this->getRootAlias() . '.' . $alias . ' ' . $alias);
-//            }
-        }
-        return $this;
-    }
-    
-    public function leftJoinByAlias($name)
-    {
-        !is_array($name) && $name = array($name);
-        foreach ($name as $alias) {
-            if (!isset($this->_meta['relations'][$alias])) {
-                throw new Qwin_Widget_Exception('Undefined relation "' . $alias . '"');
-            }
-            $this->leftJoin($this->getRootAlias() . '.' . $alias . ' ' . $alias);
-        }
-        return $this; 
     }
 
     /**
@@ -144,21 +100,18 @@ class Qwin_Query extends Doctrine_Query
             return $this;
         }
 
-        // 排序为字符串形式,进行分割
-        if (is_string($order)) {
-            $order = Qwin_Util_String::splitQuery($order);
-        }
-
         // 排序只有一项,补全数组
         if (isset($order[0]) && (is_string($order[0])) || is_object($order[0])) {
             $order = array($order);
         }
-        
+
         $alias = $this->getRootAlias();
         $alias && $alias .= '.';
 
+        $columns = $this->_record->getTable()->getColumns();
+
         foreach ($order as $field) {
-            if (!isset($field[0]) || !isset($this->_record->options['fields'][(string)$field[0]])) {
+            if (!isset($field[0]) || !isset($columns[(string)$field[0]])) {
                 continue;
             }
             $field[1] = strtoupper($field[1]);
@@ -259,76 +212,5 @@ class Qwin_Query extends Doctrine_Query
     protected function _escapeWildcard($value)
     {
         return strtr($value, array('%' => '\%', '_' => '\_'));
-    }
-
-    /**
-     * 为Doctrine查询对象增加偏移语句
-     *
-     * @param Doctrine_Query $query
-     * @param int|null $addition 附加的偏移配置
-     * @return Com_Meta 当前对象
-     */
-    public function addRawOffset(Qwin_Meta_Db $db, $offset)
-    {
-        $offset = intval($offset);
-        $offset = $offset < 0 ? 0 : $offset;
-        $this->offset($offset);
-        return $this;
-    }
-
-    /**
-     * 为Doctrine查询对象增加限制语句
-     *
-     * @param Doctrine_Query $query
-     * @param int|null $addition 附加的限制配置
-     * @return Com_Meta 当前对象
-     */
-    public function addRawLimit(Qwin_Meta_Db $db, $addition = null)
-    {
-        $limit = 0;
-        if (null != $addition) {
-            $addition = intval($addition);
-            if (0 < $addition) {
-                $limit = $addition;
-            }
-        }
-        $this->limit($limit);
-        return $this;
-    }
-
-    /**
-     * 添加字段到SELECT查询中
-     * 
-     * @return Query_Widget 当前对象
-     */
-    public function addRawSelect()
-    {
-        /**
-         * 设置主类的查询语句
-         */
-        foreach ($this->_meta['fields'] as $name => $field) {
-            if ($field['dbQuery'] && $field['dbField']) {
-                $this->addSelect($name);
-            }
-        }
-        
-        /**
-         * 设置关联类的查询语句
-         */
-        //foreach ((array)$this->offsetLoad('meta') as $meta2) {
-//            $linkedMetaObj = self::getByModule($meta2['module']);
-//
-//            // 调整主键的属性,因为查询时至少需要选择一列
-//            $id = $linkedMetaObj['db']['id'];
-//            $linkedMetaObj->fields
-//                          ->setAttr($id, 'isDbField', true)
-//                          ->setAttr($id, 'isDbQuery', true);
-//
-//            $queryField = $linkedMetaObj->fields->getAttrList(array('isDbQuery', 'isDbField'));
-//            foreach ($queryField as $field) {
-//                $query->addSelect($meta2['alias'] . '.' . $field);
-//            }
-        //}
-        return $this;
     }
 }
