@@ -34,6 +34,7 @@
 class Qwin_User extends Qwin_ArrayWidget
 {
     protected $_initData = array(
+        'id' => '0',
         'username' => 'guest',
     );
 
