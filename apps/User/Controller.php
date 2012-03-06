@@ -27,14 +27,6 @@
 
 class User_Controller extends Qwin_Controller
 {
-    /**
-     * 锁定的核心帐号，防止恶意修改
-     * @var array
-     */
-    protected $_lock = array(
-        'guest', 'admin', '7641b5b1-c727-6c07-e11f-9cb5b74ddfc9',
-    );
-
     public function indexAction()
     {
         if ($this->isAjax()) {
@@ -43,14 +35,24 @@ class User_Controller extends Qwin_Controller
             $page = $this->getInt('page', 1);
 
             $query = $this->query()
+                ->select('u.*, g.name')
+                ->from('User_Record u')
+                ->leftJoin('u.group g')
                 ->addRawOrder(array($this->get('sidx'), $this->get('sord')))
                 ->offset(($page - 1) * $rows)
                 ->limit($rows);
+
             $data = $query->fetchArray();
+            foreach ($data as &$row) {
+                if ($row['group']) {
+                    $row['group_id'] = $row['group']['name'];
+                }
+            }
+
             $total = $query->count();
 
             return $this->jQGridJson(array(
-                'columns' => array('id', 'group_id', 'username', 'email', 'sex', 'date_modified', 'operation'),
+                'columns' => array('id', 'group_id', 'username', 'email', 'sex', 'created_by', 'date_created', 'modified_by', 'date_modified', 'operation'),
                 'data' => $data,
                 'page' => $page,
                 'rows' => $rows,
@@ -62,15 +64,81 @@ class User_Controller extends Qwin_Controller
     public function addAction()
     {
         if ($this->isPost()) {
-            var_dump($_FILES);
+            $user = $this->record();
+
+            $user->fromArray($this->post->toArray());
+
+            $user->save();
+
+            return json_encode(array(
+                'code' => 0,
+                'message' => 'User added successfully'
+            ));
         } else {
-            $this->view->assign('form', $this->option('form'));
+            // 分组选项
+            $options = $this->record(null, 'group')->getParentOptions();
+            $options = json_encode($options);
+
+            $this->view->assign(get_defined_vars());
         }
     }
 
     public function editAction()
     {
+        $id = $this->get('id');
 
+        $user = $this->query()
+            ->where('id = ?', $id)
+            ->fetchOne();
+
+        if ($this->isPost()) {
+            if (!$user) {
+                return json_encode(array(
+                    'code' => -1,
+                    'message' => 'User was not found.'
+                ));
+            }
+
+            $user->fromArray($this->post->toArray());
+
+            $user->save();
+
+            return json_encode(array(
+                'code' => 0,
+                'message' => 'User edited successfully'
+            ));
+        } else {
+            if (!$user) {
+                return $this->error('User was not found.');
+            }
+
+            // 分组选项
+            $options = $this->record(null, 'group')->getParentOptions();
+            $options = json_encode($options);
+
+            $data = json_encode($user->toArray());
+
+            $this->view->assign(get_defined_vars());
+        }
+    }
+
+    public function deleteAction()
+    {
+        $id = $this->get('id');
+
+        $user = $this->query()
+            ->where('id = ?', $id)
+            ->fetchOne();
+
+        if (!$user) {
+            $this->error('User is not exists');
+        } else {
+            $user->delete();
+            return json_encode(array(
+                'code' => 0,
+                'message' => 'User deleted successfully',
+            ));
+        }
     }
 
     public function loginAction()
@@ -137,55 +205,6 @@ class User_Controller extends Qwin_Controller
                 'message' => 'You have not logged in!'
             ));
         }
-    }
-
-    /**
-     * 编辑密码
-     * @return object 实例化编辑操作
-     * @todo 重新登陆
-     */
-    public function actionEditPassword()
-    {
-        $request = $this->_request;
-        $id = $request->request('id');
-        if (in_array($id, $this->_lock)) {
-            $lang = Qwin::call('-lang');
-            return $this->getView()->alert($lang->t('MSG_User_LOCKED'));
-        }
-        $meta = Qwin_Meta::getInstance()->get('Com_User_PasswordMeta');
-
-        if (!$request->isPost()) {
-            return Qwin::call('-widget')->get('View')->execute(array(
-                'module'    => $this->_module,
-                'meta'      => $meta,
-                'id'        => $request->get('id'),
-                'asAction'  => 'edit',
-                'isView'    => false,
-            ));
-        } else {
-            return Com_Widget::getByModule('com/User', 'editPassword')->execute(array(
-                'data'      => $_POST,
-            ));
-        }
-    }
-
-    /**
-     * 删除
-     */
-    public function actionDelete()
-    {
-        $id = $this->_request->get('id');
-        $idList = explode(',', $id);
-
-        /**
-         * @todo 是否在数据库增加一个字段,作为不允许删除的标志
-         */
-        $result = array_intersect($idList, $this->_lock);
-        if (!empty($result)) {
-            $lang = Qwin::call('-lang');
-            return $this->getView()->alert($lang->t('MSG_NOT_ALLOW_DELETE'));
-        }
-        parent::actionDelete();
     }
 
     /**

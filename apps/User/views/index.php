@@ -30,7 +30,7 @@ jQuery(function($){
         rowNum: 15,
         rowList: [15, 30, 50, 100, 500],
         colNames: [
-            '编号', '分组', '用户名', '邮箱', '性别', '修改时间', '操作'
+            '编号', '分组', '用户名', '邮箱', '性别', '创建者', '创建时间', '修改者', '修改时间', '操作'
         ],
         colModel: [{
             name: 'id',
@@ -48,16 +48,38 @@ jQuery(function($){
             name: 'sex',
             align: 'center',
             formatter: function(value) {
-                return 1 == value ? '男' : '女';
+                switch (value) {
+                    case '0':
+                        return '男';
+
+                    case '1':
+                        return '女';
+
+                    case '2':
+                    default:
+                        return '未知'
+                }
             }
         }, {
+            name: 'created_by',
+            hidden: true
+        }, {
+            name: 'date_created',
+            align: 'center',
+            hidden: true
+        }, {
+            name: 'modified_by',
+            hidden: true
+        }, {
             name: 'date_modified',
-            align: 'center'
+            align: 'center',
+            hidden: true
         }, {
             name: 'operation',
             align: 'center',
             formatter: function(cellvalue, options, rowObject) {
-                return '<a href="?module=user&action=edit&id=' + rowObject[0] + '">编辑</a> | <a href="#">删除</a>';
+                return '<a class="user-edit" data-id="' + rowObject[0] + '" href="javascript:;">编辑</a>'
+                    + ' | <a class="user-delete" data-id="' + rowObject[0] +'" href="javascript:;">删除</a>';
             }
         }]
     }).jqGrid('navGrid', '#user-grid-pager', {
@@ -66,8 +88,48 @@ jQuery(function($){
         del : false,
         search : false
     }).jqGrid('fullContainer');
+
+    $('a.user-edit').live('click', function(){
+        $.dialog({
+            url: '?module=user&amp;action=edit&amp;id=' + $(this).data('id'),
+            title: '编辑用户',
+            width: 600,
+            height: 560,
+            close: function(){
+                $('#user-grid').trigger('reloadGrid');
+                $(this).dialog('destroy').remove();
+            }
+        });
+    });
+
+    $('a.user-delete').live('click', function(){
+        if (confirm('确认删除?')) {
+            $.ajax({
+                url: '?module=user&action=delete&id=' + $(this).data('id'),
+                success: function() {
+                    $('#user-grid').trigger('reloadGrid');
+                }
+            });
+        }
+    });
+
+    $('#user-add').click(function(){
+        $.dialog({
+            url: '?module=user&amp;action=add',
+            title: '添加用户',
+            width: 600,
+            height: 560,
+            beforeClose: function() {
+                $('#user-grid').trigger('reloadGrid');
+            }
+        });
+    });
 });
 </script>
+<div class="qw-toolbar ui-state-default" id="qw-jqgrid-top">
+    <a id="user-add" href="javascript:;"><?php echo $lang['Add'] ?></a>
+</div>
+<div class="qw-c"></div>
 <table id="user-grid"></table>
 <div id="user-grid-pager"></div>
 </body>

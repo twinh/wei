@@ -16,9 +16,6 @@ $minify->add(array(
     #login-form {
         margin: 15px 10px 10px 10px;
     }
-    html {
-        overflow-y: auto;
-    }
 </style>
 <script type="text/javascript">
 jQuery(function($){
