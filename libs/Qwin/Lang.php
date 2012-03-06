@@ -207,6 +207,17 @@ class Qwin_Lang extends Qwin_ArrayWidget
     }
 
     /**
+     * Get the offset value, when offset value is not found, return the offset name instead
+     *
+     * @param string $offset
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->_data[$offset]) ? $this->_data[$offset] : $offset;
+    }
+
+    /**
      * 返回数据数组
      *
      * @return array
