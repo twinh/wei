@@ -6,27 +6,37 @@
 <?php
 $minify->add(array(
     $jQuery->getTheme($this->options['theme']),
-    $jQuery->get('jquery, ui, effects, metadata, qui, button, ui.form, datepicker, selectmenu'),
+    $jQuery->get('jquery, ui, effects, metadata, qui, button, ui.form, form, datepicker, selectmenu'),
     $jQuery->getDir() . '/jqGrid/i18n/grid.locale-cn.js',
     $this->getFile('views/style.js'),
     $this->getFile('views/style.css'),
+    dirname(__FILE__) . '/form.js',
 ));
 ?>
 </head>
 <body>
+<style type="text/css">
+    #user-form label {
+        text-align: left;
+    }
+    #user-form {
+        margin: 15px 10px 10px 10px;
+    }
+</style>
 <script type="text/javascript">
 jQuery(function($){
-    $('#user-form').form({
-        lableDefaults: {
-            width: 65
-        },
-        items: [{
-            name: 'group_id'
-        }, {
-            name: 'username'
-        }, {
-            name: 'email'
-        }]
+    userForm['data'] = <?php echo $data ?>;
+    // options for group_id
+    userForm['fields'][0]['fields'][0]['sources'] = <?php echo $options ?>;
+    
+    $('#user-form').form(userForm).ajaxForm({
+        dataType: 'json',
+        success: function(data){
+            alert(data.message);
+            if (0 == data.code) {
+                parent.jQuery.dialog.close(window.frameElement.id);
+            }
+        }
     });
 });
 </script>

@@ -24,111 +24,86 @@
  */
 class User_Record extends Qwin_Record
 {
-    public function getRecordData()
+    public function setTableDefinition()
     {
-        return $this->options = array(
-            'fields' => array(
-                'id' => array(
-                    'type' => 'string',
-                    'length' => 36,
-                    'fixed' => true,
-                    'unsigned' => false,
-                    'primary' => true,
-                    'autoincrement' => false,
-                ),
-                'group_id' => array(
-                    'type' => 'string',
-                    'length' => 36,
-                    'fixed' => true,
-                    'unsigned' => false,
-                    'primary' => false,
-                    'notnull' => true,
-                    'autoincrement' => false,
-                ),
-                'username' => array(
-                    'readonly' => true,
-                    'type' => 'string',
-                    'length' => 32,
-                    'fixed' => false,
-                    'unsigned' => false,
-                    'primary' => false,
-                    'notnull' => true,
-                    'autoincrement' => false,
-                ),
-                'password' => array(
-                    'readonly' => true,
-                    '_sanitiser' => array(
-                        array(
-                            'md5',
-                        ),
-                    ),
-                    'type' => 'string',
-                    'length' => 32,
-                    'fixed' => false,
-                    'unsigned' => false,
-                    'primary' => false,
-                    'notnull' => true,
-                    'autoincrement' => false,
-                ),
-//                'password2' => array(
-//                    'dbField' => 0,
-//                    'dbQuery' => 0,
-//                ),
-                'email' => array(
-                    'type' => 'string',
-                    'length' => 256,
-                    'fixed' => false,
-                    'unsigned' => false,
-                    'primary' => false,
-                    'notnull' => true,
-                    'autoincrement' => false,
-                ),
-                'first_name' => array(
-                ),
-                'last_name' => array(
-                ),
-                'photo' => array(
-                ),
-                'sex' => array(
-                ),
-                'birthday' => array(
-                ),
-                'reg_ip' => array(
-                ),
-                'theme' => array(
-                ),
-                'language' => array(
-                ),
-                'telephone' => array(
-                ),
-                'mobile' => array(
-                ),
-                'homepage' => array(
-                ),
-                'address' => array(
-                ),
-                'created_by' => array(
-                    'readonly' => true,
-                ),
-                'date_created' => array(
-                    'readonly' => true,
-                ),
-                'modified_by' => array(
-                ),
-                'date_modified' => array(
-                ),
-            ),
-            'id' => 'id',
-            'table' => 'user',
-            'mainField' => 'username',
-            'relations' => array(
-                'group' => array(
-                    'module' => 'user/group',
-                    'alias' => 'group',
-                    'local' => 'group_id',
-                ),
-            ),
-            'limit' => 10,
+        $this->setTableName('user');
+
+        $this->hasColumn('id', 'string', 36, array(
+            'type' => 'string',
+            'length' => 36,
+            'fixed' => true,
+            'unsigned' => false,
+            'primary' => true,
+            'autoincrement' => false,
+        ));
+
+        $this->hasColumn('group_id');
+
+        $this->hasColumn('username');
+
+        $this->hasColumn('password');
+
+        $this->hasColumn('email');
+
+        $this->hasColumn('first_name');
+
+        $this->hasColumn('last_name');
+
+        $this->hasColumn('photo');
+
+        $this->hasColumn('sex');
+
+        $this->hasColumn('birthday');
+
+        $this->hasColumn('reg_ip');
+
+        $this->hasColumn('theme');
+
+        $this->hasColumn('language');
+
+        $this->hasColumn('telephone');
+
+        $this->hasColumn('mobile');
+
+        $this->hasColumn('homepage');
+
+        $this->hasColumn('address');
+
+        $this->hasColumn('created_by');
+
+        $this->hasColumn('date_created');
+
+        $this->hasColumn('modified_by');
+
+        $this->hasColumn('date_modified');
+    }
+
+    public function setUp()
+    {
+        $this->hasOne('Group_Record as group', array(
+                'local' => 'group_id',
+                'foreign' => 'id'
+            )
         );
+    }
+
+    public function preInsert($event)
+    {
+        $this->id = Qwin::getInstance()->uuid();
+
+        $this->date_created = date('Y-m-d H:i:s', time());
+
+        $this->date_modified = $this->date_created;
+
+        $this->created_by = Qwin::getInstance()->user()->offsetGet('id');
+
+        $this->modified_by = $this->created_by;
+    }
+
+    public function preUpdate($event)
+    {
+        $this->date_modified = date('Y-m-d H:i:s', time());
+
+        $this->modified_by = Qwin::getInstance()->user()->offsetGet('id');
     }
 }
