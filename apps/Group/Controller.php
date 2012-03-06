@@ -27,66 +27,206 @@
 
 class Group_Controller extends Qwin_Controller
 {
-    /**
-     * 分配权限
-     *
-     * @return 当前对象
-     * @todo 预定权限分配模式,提供一键分配
-     * @todo 全选,反选
-     * @todo 当父分类被选择时,子分类全选
-     */
-    public function actionAllocatePermission()
+    public function indexAction()
     {
-        /**
-         * 初始化常用的变量
-         */
-        $meta = $this->_meta;
-        $primaryKey = $meta['db']['primaryKey'];
-        $id = $this->request->get($primaryKey);
+        if ($this->isAjax()) {
+            $rows = $this->getInt('rows', 1, 500);
 
-        /**
-         * 从模型获取数据
-         */
-        $query = $this->metaHelper->getQueryByAsc($this->_asc);
-        $result = $query->where($primaryKey . ' = ?', $id)->fetchOne();
+            $page = $this->getInt('page', 1);
 
-        /**
-         * 记录不存在,加载错误视图
-         */
-        if (false == $result) {
-            return $this->view->redirect($this->_lang->t('MSG_NO_RECORD'));
+            $level = $this->getInt('level', 0);
+
+            $query = $this->query()
+                ->select('g.*, c.username, m.username')
+                ->from('Group_Record g')
+                ->leftJoin('g.creator c')
+                ->leftJoin('g.modifier m')
+                ->addRawOrder(array($this->get('sidx'), $this->get('sord')))
+                //->where('level = ?', $level)
+                ->offset(($page - 1) * $rows)
+                ->limit($rows);
+
+            $data = $query->fetchArray();
+            foreach ($data as &$row) {
+                if ($row['creator']) {
+                    $row['created_by'] = $row['creator']['username'];
+                }
+                if ($row['modifier']) {
+                    $row['modified_by'] = $row['modifier']['username'];
+                }
+            }
+
+            $total = $query->count();
+
+            return $this->jQGridJson(array(
+                'columns' => array('id', 'name', 'created_by', 'modified_by', 'date_created', 'date_modified', 'operation'),
+                'data' => $data,
+                'page' => $page,
+                'rows' => $rows,
+                'total' => $total,
+            ));
         }
+    }
 
-        if (empty($_POST)) {
-            $permission = unserialize($result['permission']);
-            $appStructure = require Qwin_ROOT_PATH . '/cache/php/application-structure.php';
-            $this->view->assign(get_defined_vars());
+    public function addAction()
+    {
+        if ($this->isPost()) {
+            $parentId = $this->post('parent_id');
+            $name = $this->post('name');
+            $description = $this->post('description');
+
+            if (!$parentId) {
+                /* @var $group Group_Record */
+                $group = $this->record();
+                $group['name'] = $name;
+                $group['description'] = $description;
+
+                $tree = $group->getTable()->getTree();
+                $tree->createRoot($group);
+
+                return json_encode(array(
+                    'code' => 0,
+                    'message' => '添加成功',
+                ));
+            } else {
+                $parent = $this->query()
+                    ->where('id = ?', $parentId)
+                    ->fetchOne();
+
+                $group = new Group_Record();
+                $group['name'] = $name;
+
+                $group->getNode()->insertAsLastChildOf($parent);
+
+                return json_encode(array(
+                    'code' => 0,
+                    'message' => '添加成功',
+                ));
+            }
         } else {
-            $permission = (array)$this->request->post('permission');
-            /**
-             * 剔除子项
-             */
-            foreach($permission as $nameString => $value)
-            {
-                $tempName = '';
-                $nameList = explode('|', $nameString);
-                array_pop($nameList);
-                foreach($nameList as $name)
-                {
-                    '' != $tempName && $tempName .= '|';
-                    $tempName .= $name;
-                    if(isset($permission[$tempName]))
-                    {
-                        unset($permission[$nameString]);
-                        break;
+            // 在某一分组下增加子分组
+            $parentId = $this->get('parentId');
+            $data['parent_id'] = $parentId;
+            $data = json_encode($data);
+
+
+            // 分组选项
+            $options = $this->record()->getParentOptions();
+            $options = array(0 => '(' . $this->lang['Root group'] . ')') + $options;
+            $options = json_encode($options);
+
+
+            $this->view->assign(get_defined_vars());
+        }
+    }
+
+    public function editAction()
+    {
+        $id = $this->get('id');
+        $group = $this->query()->where('id = ?', $id)->fetchOne();
+
+        if ($this->isPost()) {
+            if (!$group) {
+                return array(
+                    'code' => -1,
+                    'message' => 'Group is not exists.',
+                );
+            }
+
+            $name = $this->post('name');
+            $description = $this->post('description');
+            $parentId = $this->post('parent_id');
+
+            $group['name'] = $name;
+            $group['description'] = $description;
+
+            $node = $group->getNode();
+
+            // 根分组
+            if ($node->isRoot()) {
+                // 不移动
+                if (!$parentId) {
+                    $group->save();
+
+                // 移动到其他分组之下
+                } else {
+                    $newParent = $this->query()
+                        ->where('id = ?', $parentId)
+                        ->fetchOne();
+
+                    // 不存在的父分组
+                    if (!$newParent) {
+                        $group->save();
+                    } else {
+                        $node->moveAsLastChildOf($newParent);
                     }
                 }
+            // 非根分组
+            } else {
+                $parent = $node->getParent();
 
+                // 父分组不改变,直接保存
+                if ($parentId == $parent['id']) {
+                    $group->save();
+
+                // 转换为根分组
+                } elseif (!$parentId) {
+                    $node->makeRoot($this->record()->createRootId());
+
+                // 移动到其他分组之下
+                } else {
+                    $newParent = $this->query()
+                        ->where('id = ?', $parentId)
+                        ->fetchOne();
+
+                    // 父节点存在,移动
+                    if ($newParent) {
+                        $node->moveAsLastChildOf($newParent);
+                    }
+                }
             }
-            $result['permission'] = serialize($permission);
-            $result->save();
-            $url = Qwin::call('-url')->url($this->_asc, array('action' => 'Index'));
-            return $this->view->redirect($this->_lang->t('MSG_OPERATE_SUCCESSFULLY'), $url);
+
+            return json_encode(array(
+                'code' => 0,
+                'message' => '编辑成功',
+            ));
+        } else {
+            if (!$group) {
+                $this->error('Group is not exists.');
+            }
+
+            $parent = $group->getNode()->getParent();
+
+            // 分组数据
+            $data = $group->toArray();
+            $data['parent_id'] = $parent['id'];
+            $data = json_encode($data);
+
+            // 分组选项
+            $options = $this->record()->getParentOptions();
+            $options = array(0 => '(' . $this->lang['Root group'] . ')') + $options;
+            $options = json_encode($options);
+
+            $this->view->assign(get_defined_vars());
+        }
+    }
+
+    public function deleteAction()
+    {
+        $id = $this->get('id');
+
+        $group = $this->query()
+            ->where('id = ?', $id)
+            ->fetchOne();
+
+        if (!$group) {
+            $this->error('Group is not exists');
+        } else {
+            $group->getNode()->delete();
+            return json_encode(array(
+                'code' => 0,
+                'message' => '删除成功',
+            ));
         }
     }
 }

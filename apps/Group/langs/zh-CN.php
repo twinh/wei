@@ -25,5 +25,5 @@
  */
 
 return array(
-    'MOD_MEMBER_GROUP' => '分组',
+    'Root group' => '根分组',
 );
