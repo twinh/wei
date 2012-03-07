@@ -35,14 +35,14 @@ class Qwin_GetInt extends Qwin_Widget
 {
     public function __invoke($name, $min = null, $max = null)
     {
-        $value = $this->get($name);
+        $value = intval($this->get($name));
 
         if (!is_null($min) && $value < $min) {
             return $min;
         } elseif (!is_null($max) && $value > $max) {
             return $max;
         }
-        
+
         return $value;
     }
 }
