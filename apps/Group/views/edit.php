@@ -6,7 +6,7 @@
 <?php
 $minify->add(array(
     $jQuery->getTheme($this->options['theme']),
-    $jQuery->get('jquery, ui, effects, metadata, qui, button, ui.form, datepicker, selectmenu'),
+    $jQuery->get('jquery, ui, effects, metadata, qui, button, ui.form, form'),
     $jQuery->getDir() . '/jqGrid/i18n/grid.locale-cn.js',
     $this->getFile('views/style.js'),
     $this->getFile('views/style.css'),
@@ -52,6 +52,14 @@ jQuery(function($){
             label: '重置',
             type: 'reset'
         }]
+    }).ajaxForm({
+        dataType: 'json',
+        success: function(data){
+            alert(data.message);
+            if (0 == data.code) {
+                parent.jQuery.dialog.close(window.frameElement.id);
+            }
+        }
     });
 });
 </script>

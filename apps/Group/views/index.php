@@ -28,12 +28,8 @@ jQuery(function($){
         height: 'auto',
         forceFit: true,
         autowidth: true,
-        rownumbers: true,
-        multiselect: true,
         viewrecords: true,
         pager: '#group-grid-pager',
-        rowNum: 15,
-        rowList: [15, 30, 50, 100, 500],
         colNames: [
             '编号', '名称', '创建者', '修改者', '创建时间', '修改时间', '操作'
         ],
@@ -60,7 +56,10 @@ jQuery(function($){
                     + ' | <a class="group-edit" data-id="' + rowObject[0] + '" href="javascript:;">编辑</a>'
                     + ' | <a class="group-delete" data-id="' + rowObject[0] +'" href="javascript:;">删除</a>';
             }
-        }]
+        }],
+        treeGrid: true,
+        ExpandColumn : 'name',
+        ExpandColClick: true
     }).jqGrid('navGrid', '#group-grid-pager', {
         add : false,
         edit : false,
@@ -73,7 +72,7 @@ jQuery(function($){
             url: '?module=group&amp;action=edit&amp;id=' + $(this).data('id'),
             title: '编辑分组',
             width: 400,
-            height: 290,
+            height: 300,
             close: function(){
                 $('#group-grid').trigger('reloadGrid');
                 $(this).dialog('destroy').remove();
