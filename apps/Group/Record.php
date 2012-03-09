@@ -33,8 +33,6 @@ class Group_Record extends Qwin_Record
 
         $this->hasColumn('description');
 
-        $this->hasColumn('root_id');
-
         $this->hasColumn('created_by');
 
         $this->hasColumn('modified_by');
@@ -46,11 +44,7 @@ class Group_Record extends Qwin_Record
 
     public function setUp()
     {
-        $options = array(
-            'hasManyRoots'     => true,
-            'rootColumnName'   => 'root_id'
-        );
-        $this->actAs('NestedSet', $options);
+        $this->actAs('NestedSet');
 
         $this->hasOne('User_Record as creator', array(
                 'local' => 'created_by',
@@ -68,42 +62,10 @@ class Group_Record extends Qwin_Record
     public function getParentOptions()
     {
         $tree = Doctrine_Core::getTable(__CLASS__)->getTree();
-
-        $select = array();
-        foreach ($tree->fetchRoots() as $root) {
-            $options = array(
-                'root_id' => $root['root_id']
-            );
-            foreach($tree->fetchTree($options) as $node) {
-                $select[$node['id']] = str_repeat('--', $node['level']) . $node['name'];
-            }
+        foreach ($tree->fetchTree() as $node) {
+            $options[$node['id']] = str_repeat('--', $node['level']) . $node['name'];
         }
-        return $select;
-    }
-
-    public function get($fieldName, $load = true)
-    {
-        if ('root_id' == $fieldName) {
-            $value = parent::get($fieldName, $load);
-            if (!$value) {
-                $value = $this->createRootId();
-
-                $this->_set($fieldName, $value, false);
-            }
-            return $value;
-        }
-        return parent::get($fieldName, $load);
-    }
-
-    public function createRootId()
-    {
-        $max = Doctrine_Query::create()
-            ->select('id')
-            ->from(__CLASS__)
-            ->orderBy('id DESC')
-            ->fetchOne();
-
-        return $max ? $max['id'] + 1 : 1;
+        return $options;
     }
 
     public function preInsert($event)

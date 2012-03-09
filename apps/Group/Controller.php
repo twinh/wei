@@ -30,21 +30,27 @@ class Group_Controller extends Qwin_Controller
     public function indexAction()
     {
         if ($this->isAjax()) {
-            $rows = $this->getInt('rows', 1, 500);
-
-            $page = $this->getInt('page', 1);
-
-            $level = $this->getInt('level', 0);
-
+            /* @var $query Qwin_Query */
             $query = $this->query()
                 ->select('g.*, c.username, m.username')
                 ->from('Group_Record g')
                 ->leftJoin('g.creator c')
                 ->leftJoin('g.modifier m')
-                ->addRawOrder(array($this->get('sidx'), $this->get('sord')))
-                //->where('level = ?', $level)
-                ->offset(($page - 1) * $rows)
-                ->limit($rows);
+                ->orderBy('lft');
+
+            $node = $this->getInt('nodeid');
+            if(0 < $node) {
+                $n_lft = (integer)$this->request('n_left');
+                $n_rgt = (integer)$this->request('n_right');
+                $n_lvl = (integer)$this->request('n_level');
+
+                $n_lvl = $n_lvl+1;
+                $query->andWhere('lft > ? AND rgt < ? AND level = ?', array(
+                    $n_lft, $n_rgt, $n_lvl
+                ));
+            } else {
+                $query->andWhere('level = 0');
+            }
 
             $data = $query->fetchArray();
             foreach ($data as &$row) {
@@ -55,16 +61,33 @@ class Group_Controller extends Qwin_Controller
                     $row['modified_by'] = $row['modifier']['username'];
                 }
             }
+            unset($row);
 
-            $total = $query->count();
-
-            return $this->jQGridJson(array(
-                'columns' => array('id', 'name', 'created_by', 'modified_by', 'date_created', 'date_modified', 'operation'),
-                'data' => $data,
-                'page' => $page,
-                'rows' => $rows,
-                'total' => $total,
-            ));
+            $response = new stdClass();
+            $response->page = 1;
+            $response->total = 1;
+            $response->records = count($data);
+            $i=0;
+            foreach ($data as $row) {
+                $leaf = 1 >= $row['rgt'] - $row['lft'];
+                $response->rows[$i]['id'] = $row['id'];
+                $response->rows[$i]['cell']= array(
+                    $row['id'],
+                    $row['name'],
+                    $row['created_by'],
+                    $row['modified_by'],
+                    $row['date_created'],
+                    $row['date_modified'],
+                    $row['id'],
+                    $row['level'],
+                    $row['lft'],
+                    $row['rgt'],
+                    $leaf,
+                    false
+                );
+                $i++;
+            }
+            return json_encode($response);
         }
     }
 
@@ -82,7 +105,18 @@ class Group_Controller extends Qwin_Controller
                 $group['description'] = $description;
 
                 $tree = $group->getTable()->getTree();
-                $tree->createRoot($group);
+
+                // get max
+                $max = $this->query()
+                    ->orderBy('rgt DESC')
+                    ->where('level = 0')
+                    ->fetchOne();
+                
+                if ($max) {
+                    $group->getNode()->insertAsNextSiblingOf($max);
+                } else {
+                    $tree->createRoot($group);
+                }
 
                 return json_encode(array(
                     'code' => 0,
