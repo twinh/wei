@@ -1,11 +1,11 @@
-/* 
-* jqGrid  4.2.0 - jQuery Grid 
-* Copyright (c) 2008, Tony Tomov, tony@trirand.com 
-* Dual licensed under the MIT and GPL licenses 
-* http://www.opensource.org/licenses/mit-license.php 
-* http://www.gnu.org/licenses/gpl-2.0.html 
-* Date:2011-10-11 
-* Modules: grid.base.js; jquery.fmatter.js; grid.custom.js; grid.common.js; grid.formedit.js; grid.filter.js; grid.inlinedit.js; grid.celledit.js; jqModal.js; jqDnR.js; grid.subgrid.js; grid.grouping.js; grid.treegrid.js; grid.import.js; JsonXml.js; grid.tbltogrid.js; grid.jqueryui.js; 
+/*
+* jqGrid  4.2.0 - jQuery Grid
+* Copyright (c) 2008, Tony Tomov, tony@trirand.com
+* Dual licensed under the MIT and GPL licenses
+* http://www.opensource.org/licenses/mit-license.php
+* http://www.gnu.org/licenses/gpl-2.0.html
+* Date:2011-10-11
+* Modules: grid.base.js; jquery.fmatter.js; grid.custom.js; grid.common.js; grid.formedit.js; grid.filter.js; grid.inlinedit.js; grid.celledit.js; jqModal.js; jqDnR.js; grid.subgrid.js; grid.grouping.js; grid.treegrid.js; grid.import.js; JsonXml.js; grid.tbltogrid.js; grid.jqueryui.js;
 */
 /*
  jqGrid  4.2.0  - jQuery Grid
@@ -490,44 +490,48 @@ a.data(c,"dnd",b);c.p.reccount!="0"&&!c.p.jqgdnd&&g();c.p.jqgdnd=true;for(var f=
     $.extend($.jgrid.defaults, {
         border: false
     });
-    
+
     $.jgrid.extend({
         fullContainer: function() {
             return this.each(function() {
                 var options = this.p,
                     _this = this,
                     $this = $(this);
-                
+
                 // TODO other borders
                 if (!options.border) {
                     $('tr', this.grid.hDiv).each(function(){
                         $('th:visible:last', this).css('border-right-width', 0);
                     });
-                    
+
                     if (options.pager) {
                         $(options.pager).css('border-bottom-width', 0);
                     } else {
                         // which in bottom?
                     }
                 }
-                
+
                 // TODO other container
                 $(window).load(function(){
+                    $('html').css('overflow-y', 'scroll');
+                    $this.setGridWidth($('body').width());
+                    $this.width($(_this.grid.hDiv).width());
                     setGridHeight();
                 }).resize(function(){
-                    $this.setGridWidth($(window).width());
+                    $this.setGridWidth($('body').width());
+                    $this.width($(_this.grid.hDiv).width());
                     setGridHeight();
                 });
-                
+
                 // TODO other element height, like #qw-jqgrid-top ?
                 function setGridHeight() {
-                    if (options.pager) { 
+                    if (options.pager) {
                         var height = $('body').height()
                             - $(_this.grid.hDiv).outerHeight()
                             - $(options.pager).outerHeight()
                             - $('#qw-jqgrid-top').outerHeight();
                         $this.setGridHeight(height);
-                    }                    
+                    }
                 }
             });
         }
