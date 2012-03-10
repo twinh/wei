@@ -76,6 +76,8 @@ class Menu_Controller extends Qwin_Controller
 
             $data->fromArray($this->post->toArray());
 
+            $data->save();
+
             return json_encode(array(
                 'code' => 0,
                 'message' => '编辑成功',

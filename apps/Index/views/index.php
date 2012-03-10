@@ -6,7 +6,7 @@
 <?php
 $minify->add(array(
     $jQuery->getTheme($this->options['theme']),
-    $jQuery->get('jquery, ui, effects, draggable, layout, qui, accordion, tabs, button, metadata, dialog, form, ui.form'),
+    $jQuery->get('jquery, ui, effects, draggable, layout, qui, accordion, tabs, button, metadata, dialog'),
     $this->getFile('views/style.js'),
     $this->getFile('views/style.css'),
 ));
@@ -16,9 +16,6 @@ $minify->add(array(
 <style type="text/css">
 
 </style>
-<script type="text/javascript">
-    qwin.lang = <?php echo json_encode($lang->toArray()) ?>;
-</script>
 <div class="ui-layout-north">
     <div id="qw-logo" class="ui-widget-content">
         <a href="?">
@@ -32,7 +29,7 @@ $minify->add(array(
     </div>
 </div>
 <div class="ui-layout-west">
-    <h3 id="qw-menu-title" class="ui-state-default">
+    <h3 id="qw-menu-title" class="ui-widget-header">
         <div id="ui-west-toggler-open" class="ui-state-default">
             <span class="ui-icon ui-icon-carat-1-w"></span>
         </div>
@@ -43,31 +40,33 @@ $minify->add(array(
     </h3>
     <div id="qw-menu">
     <?php
-    foreach ($menus[0] as $menu) :
+    foreach ($menus as &$menu) :
+        if (!$menu['category_id']) :
     ?>
         <div>
             <h3><a href="<?php echo $menu['url'] ?>"><?php echo $menu['title'] ?></a></h3>
             <div>
+            <ul>
             <?php
-            if (isset($menus[1][$menu['id']])) :
+            foreach ($menus as &$subMenu) :
+                if ($menu['id'] == $subMenu['category_id']) :
             ?>
-                <ul>
-                    <?php
-                    foreach ($menus[1][$menu['id']] as $subMenu) :
-                    ?>
-                    <li>
-                        <span class="ui-icon ui-icon-document"></span>
-                        <a href="<?php echo $subMenu['url'] ?>"><?php echo $subMenu['title'] ?></a>
-                    </li>
-                    <?php
-                    endforeach;
-                    ?>
-                </ul>
+                <li>
+                    <span class="ui-icon ui-icon-document"></span>
+                    <a href="<?php echo $subMenu['url'] ?>"><?php echo $subMenu['title'] ?></a>
+                </li>
             <?php
-            endif;
+                unset($subMenu);
+                endif;
+            endforeach;
             ?>
+            </ul>
             </div>
         </div>
+    <?php
+        unset($menu);
+        endif;
+    ?>
     <?php
     endforeach;
     ?>

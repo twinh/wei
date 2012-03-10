@@ -25,7 +25,7 @@ var qwin = {};
 jQuery(function($){
     // 设定元数据从data属性取值
     $.metadata.setType('attr', 'data');
-    
+
     var user = {};
     user.loginState = null;
     user.isLogin = function() {
@@ -46,7 +46,26 @@ jQuery(function($){
         return user.loginState;
     };
     qwin.user = user;
-    
+
+
+    qwin.open = function(url, title) {
+        if (parent != window && parent.jQuery) {
+            parent.jQuery('#qw-tabs').tabs('addIframe', url, title);
+            return;
+        }
+        window.location.href = url;
+    }
+
+    // from stackoverflow
+    qwin.format = function() {
+        var s = arguments[0];
+        for (var i = 0; i < arguments.length - 1; i++) {
+            var reg = new RegExp("\\{" + i + "\\}", "gm");
+            s = s.replace(reg, arguments[i + 1]);
+        }
+        return s;
+    }
+
     // 提示信息
 //    qwin.msg = {
 //        /**
@@ -113,7 +132,7 @@ jQuery(function($){
 //            }
 //        }
 //    }
-    
+
     // 设置全局Ajax提示信息
 //    qwin.ajax.show = function(msg){
 //        $('#qw-ajax').html(msg).css({
@@ -136,12 +155,6 @@ jQuery(function($){
     $('button.qw-button, a.qw-anchor').each(function(){
         $(this).button($(this).metadata());
     });
-    $('td.qw-field-radio, td.qw-field-checkbox').buttonset();
-    /*$('button.ui-button, a.ui-button').qui({
-        click: true,
-        focus: true
-    });*/
-    $('table.qw-form-table input:text, table.qw-form-table textarea, table.qw-form-table input:password').qui();
 
     $('table.ui-table:not(.ui-table-noui) tr').not('.ui-table-header').qui();
     $('table.ui-table td.ui-state-default').qui();
