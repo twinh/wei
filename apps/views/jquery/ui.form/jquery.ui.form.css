@@ -108,6 +108,8 @@
     display: block;
     /* for .ui-form-legend */
     padding-left: 5px;
+    padding: 5px 5px 5px 10px;
+    margin: 5px 0;
 }
 .ui-form .ui-form-fieldset-content {
     margin-right: 5px;
