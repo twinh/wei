@@ -16,10 +16,10 @@ $minify->add(array(
 </head>
 <body>
 <style type="text/css">
-    #group-form label {
+    #menu-form label {
         text-align: left;
     }
-    #group-form {
+    #menu-form {
         margin: 15px 10px 10px 10px;
     }
 </style>
@@ -27,7 +27,7 @@ $minify->add(array(
 jQuery(function($){
     menuForm['fields'][1]['sources'] = <?php echo $categorys ?>;
 
-    $('#group-form').form(menuForm).ajaxForm({
+    $('#menu-form').form(menuForm).ajaxForm({
         dataType: 'json',
         success: function(data){
             alert(data.message);
@@ -38,7 +38,7 @@ jQuery(function($){
     });
 });
 </script>
-<form id="group-form" method="post" action="">
+<form id="menu-form" method="post" action="">
 </form>
 </body>
 </html>
