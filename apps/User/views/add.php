@@ -16,6 +16,9 @@ $minify->add(array(
 </head>
 <body>
 <style type="text/css">
+    html {
+        overflow-y: scroll;
+    }
     #user-form label {
         text-align: left;
     }

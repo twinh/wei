@@ -88,5 +88,10 @@ var userForm = {
     },{
         label: '重置',
         type: 'reset'
+    }, {
+        label: '返回',
+        click: function() {
+            history.back();
+        }
     }]
 };
