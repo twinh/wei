@@ -40,6 +40,11 @@ class Menu_Record extends Qwin_Record
         $this->hasColumn('order');
     }
 
+    public function preInsert($event)
+    {
+        $this->id = Qwin::getInstance()->uuid();
+    }
+
     public function setUp()
     {
         $this->hasOne(__CLASS__ . ' as category', array(

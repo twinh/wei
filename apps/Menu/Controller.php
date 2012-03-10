@@ -76,6 +76,8 @@ class Menu_Controller extends Qwin_Controller
 
             $data->fromArray($this->post->toArray());
 
+            !$data['category_id'] && $data['category_id'] = null;
+
             $data->save();
 
             return json_encode(array(
@@ -104,17 +106,13 @@ class Menu_Controller extends Qwin_Controller
     public function addAction()
     {
         if ($this->isPost()) {
-            $id = $this->post('id');
+            $menu = $this->record();
 
-            $data = $this->query()
-                ->where('id = ?', $id)
-                ->fetchOne();
+            $menu->fromArray($this->post->toArray());
 
-            if (!$data) {
-                $this->error('Menu is not exists');
-            }
+            !$menu['category_id'] && $menu['category_id'] = null;
 
-            $data->fromArray($this->post->toArray());
+            $menu->save();
 
             return json_encode(array(
                 'code' => 0,
@@ -125,5 +123,25 @@ class Menu_Controller extends Qwin_Controller
 
             $this->view->assign(get_defined_vars());
         }
+    }
+
+    public function deleteAction()
+    {
+        $id = $this->post('id');
+
+        $menu = $this->query()
+            ->where('id = ?', $id)
+            ->fetchOne();
+
+        if (!$menu) {
+            $this->error('Menu is not exists');
+        }
+
+        $menu->delete();
+
+        return array(
+            'code' => 0,
+            'message' => 'Menu deleted successfully'
+        );
     }
 }
