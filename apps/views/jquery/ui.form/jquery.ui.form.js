@@ -400,12 +400,19 @@
             },
             radio: function(options, container, width) {
                 var html = '<div class="ui-form-checkbox-group">';
+
                 var id = options.name;
+                var checked = '';
                 for (var i in options.sources) {
                     if (0 != i) {
                         id = options.name + '-' + i;
                     }
-                    html += '<div class="ui-form-checkbox-elem"><input class="ui-form-checkbox-input" type="radio" name="' + options.name + '" id="' + id + '" /><label class="ui-form-checkbox-label" for="' + id + '" >' + options.sources[i] + '</label></div>';
+                    if (options.value == i) {
+                        checked = ' checked="checked"';
+                    } else {
+                        checked = '';
+                    }
+                    html += '<div class="ui-form-checkbox-elem"><input class="ui-form-checkbox-input" type="radio" name="' + options.name + '" id="' + id + '" value="' + i + '"' + checked + ' /><label class="ui-form-checkbox-label" for="' + id + '" >' + options.sources[i] + '</label></div>';
                 }
                 html += '</div>';
                 var input = $(html);
