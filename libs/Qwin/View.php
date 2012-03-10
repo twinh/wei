@@ -23,7 +23,7 @@
  */
 
 /**
- * CrudController
+ * View
  *
  * @package     Qwin
  * @subpackage  Application
@@ -36,12 +36,14 @@ class Qwin_View extends Qwin_ArrayWidget
 {
     /**
      * 视图是否已展示
+     *
      * @var boolen
      */
     protected $_displayed = false;
 
     /**
      * 选项
+     *
      * @var array
      */
     public $options = array(
@@ -82,21 +84,60 @@ class Qwin_View extends Qwin_ArrayWidget
         throw new Qwin_Exception('All view files not found: "' . implode(';', $fileCache) . '".');
     }
 
-    public function renderBy($module, $action = 'index')
+    /**
+     * 展示视图
+     */
+    public function display($layout = null, array $data = null)
     {
+        // 判断视图是否已输入
+        if ($this->_displayed) {
+            return false;
+        }
+        $this->_displayed = true;
+
+        $this->trigger('beforeViewDisplay');
+
+        $this->renderBy($this->module, $this->action);
+
+        $this->trigger('afterViewDisplay');
+
+        return $this;
+    }
+
+    /**
+     * 展示视图
+     *
+     * @param string $layout 布局路径
+     * @param array $data 附加数据
+     * @todo 不只是输出文件,还有数据类型等等
+     * @todo echo exit ?
+     */
+    public function __invoke($options = null)
+    {
+        // 判断视图是否已输入
+        if ($this->_displayed) {
+            return false;
+        }
+        $this->_displayed = true;
+
+        if ($options['result']) {
+            echo $options['result'];
+            return $this;
+        }
+
         // 部分视图常用变量
         $this->assign(array(
             'lang'      => $this->lang,
             'minify'    => $this->minify,
             'jQuery'    => $this->jQuery,
             'config'    => $this->config(),
-            'module'    => $this->module,
-            'action'    => $this->action,
+            'module'    => $options['module'],
+            'action'    => $options['action'],
             'theme'     => $this->getThemeOption(),
         ));
 
-        $this->_module = $module;
-        $this->_action = $action;
+        $this->_module = $options['module'];
+        $this->_action = $options['action'];
 
         extract($this->_data, EXTR_OVERWRITE);
 
@@ -116,11 +157,18 @@ class Qwin_View extends Qwin_ArrayWidget
             $files[] = $dir . '/' . $moduleDir . '/views/' . $action . '.js';
             $files[] = $dir . '/' . $moduleDir . '/views/' . $action . '.css';
         }
-        $this->minify->add($files);
-        $replace = '<script type="text/javascript" src="' . $this->url('minify', 'index', array('g' => $minify->pack('js'))) . '"></script>' . PHP_EOL
-            . '<link rel="stylesheet" type="text/css" href="' . $this->url('minify', 'index', array('g' => $minify->pack('css'))) . '" media="all" />' . PHP_EOL;
+        $minify->add($files);
 
-        $output = $this->replaceFirst(&$output, '</head>', $replace . '</head>');
+        $replace = '';
+        if ($js = $minify->pack('js')) {
+            $replace .= '<script type="text/javascript" src="' . $this->url('minify', 'index', array('g' => $js)) . '"></script>' . PHP_EOL;
+        }
+        if ($css = $minify->pack('css')) {
+            $replace .= '<link rel="stylesheet" type="text/css" href="' . $this->url('minify', 'index', array('g' => $css)) . '"/>' . PHP_EOL;
+        }
+        if ($replace) {
+            $output = $this->replaceFirst(&$output, '</head>', $replace . '</head>');
+        }
 
         echo $output;
         unset($output);
@@ -128,81 +176,19 @@ class Qwin_View extends Qwin_ArrayWidget
         return $this;
     }
 
-
-    /**
-     * 展示视图
-     */
-    public function display($layout = null, array $data = null)
+    public function displayFile($file)
     {
-        // 视图已输出
+        // 判断视图是否已输入
         if ($this->_displayed) {
             return false;
         }
-
-        $this->trigger('beforeViewDisplay');
-
-        $this->renderBy($this->module, $this->action);
-
-        $this->trigger('afterViewDisplay');
-
-        $this->setDisplayed();
-
-        return $this;
-    }
-
-    /**
-     * 展示视图
-     *
-     * @param string $layout 布局路径
-     * @param array $data 附加数据
-     * @todo 不只是输出文件,还有数据类型等等
-     * @todo echo exit ?
-     */
-    public function __invoke($layout = null, array $data = null)
-    {
-        if (is_string($layout)) {
-            echo $layout;
-            exit;
-        } else {
-            return $this->display($layout, $data);
-        }
-    }
-
-    /**
-     * 输出JSON数据
-     *
-     * @param array $json JSON数组数据
-     */
-    public function displayJson($json)
-    {
-        if ($this->isDisplayed()) {
-            return false;
-        }
-
-        if (is_string($json)) {
-            echo $json;
-        } else {
-            echo json_encode($json);
-        }
-
-        $this->setDisplayed();
-
-        return $this;
-    }
-
-    public function displayFile($file)
-    {
-        if ($this->isDisplayed()) {
-            return false;
-        }
+        $this->_displayed = true;
 
         $file = $this->getFile($file);
 
-        extract($this->_data, EXTR_OVERWRITE);
+        extract($this->_data);
 
         require $file;
-
-        $this->setDisplayed();
     }
 
     /**
@@ -276,9 +262,11 @@ class Qwin_View extends Qwin_ArrayWidget
 
         // 在所有视图路径查找主题
         foreach ($this->options['dirs'] as $dir) {
-            if (is_dir($dir . 'widgets/view/themes/' . $theme)) {
+            if (is_dir($dir . '/views/jquery/themes/' . $theme)) {
                 $this->options['theme'] = $theme;
-                $this->cookie->set('theme', $theme);
+                if ($theme != $this->cookie->get('theme')) {
+                    $this->cookie->set('theme', $theme);
+                }
                 return $this;
             }
         }
