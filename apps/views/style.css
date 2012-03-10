@@ -8,13 +8,13 @@ body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,fieldset,p,blockquote,input,te
 }
 /* 让火狐一直显示右边滚动条 */
 html {
-    overflow-y: scroll;
     height: 100%;
 }
 body {
     font-size: 12px;
     margin: 0 auto;
     height: 100%;
+    font-family: Helvetica, Tahoma, Arial, \5FAE\8F6F\96C5\9ED1, \5B8B\4F53, sans-serif;
 }
 /* 修复搜狗浏览器(4.0Chrome内核)样式错误,区别? */
 ul {
@@ -39,7 +39,7 @@ a {
 宋体    \5B8B\4F53
 微软雅黑 \5FAE\8F6F\96C5\9ED1
 */
-.ui-widget, .ui-widget-content {
+.ui-widget, .ui-widget-content, .ui-widget .ui-widget, .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
     font-size: 12px;
     font-family: Helvetica, Tahoma, Arial, \5FAE\8F6F\96C5\9ED1, \5B8B\4F53, sans-serif;
 }
@@ -92,9 +92,6 @@ a {
     border-top: none;
 }
 
-.ui-view-message{
-    padding: .2em;
-}
 
 /* Theme Switch Page
 ----------------------------------*/
@@ -169,34 +166,9 @@ a {
     text-align: left;
 }
 
-#ui-popup {
-    padding: 0;
-}
-#ui-jqgrid-table{
-    width: 600px;
-}
-
-#ui-popup-main #gbox_ui-jqgrid-table{
-    -moz-border-radius: 0;
-    border-top: none;
-}
-
-.ui-popup-content .ui-widget-header{
-    border-bottom: none;
-    -moz-border-radius-bottomleft: 0;
-    -webkit-border-bottom-left-radius: 0;
-    border-bottom-left-radius: 0;
-    -moz-border-radius-bottomright: 0;
-    -webkit-border-bottom-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
 .ui-button .ui-button-text {
     font-size: 12px;
     font-weight: normal;
-}
-.ui-jqgrid-top {
-    margin-left: 30px;
 }
 
 #qw-ajax {
@@ -243,13 +215,7 @@ a {
 .qw-loading {
     background: url('images/loading.gif') 0 0 no-repeat;
 }
-.qw-popup-iframe {
-    overflow-x: hidden;
-}
-/*
-background-repeat: no-repeat;}
-.qw-icon-address-16{background-image:url(address_16.png)}
-*/
+
 /* 修复ie下按钮对应不整齐的问题 */
 .ui-operation-field a.ui-button {
     vertical-align: top;

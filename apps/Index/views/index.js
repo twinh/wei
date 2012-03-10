@@ -2,7 +2,7 @@ jQuery(function($){
     var layout = $('body').layout({
         defaults: {
             paneClass: 'ui-widget-content',
-            resizerClass: 'ui-state-default',
+            resizerClass: 'ui-widget-header',
             onresize_end: function() {
                 // TODO rewrite select
                 $('#qw-tabs div.ui-tabs-panel:not(.ui-tabs-hide)').innerHeight(
@@ -73,9 +73,7 @@ jQuery(function($){
         }
     });
 
-    tabs.find('ul.ui-tabs-nav')
-        .removeClass('ui-widget-header ui-helper-reset')
-        .addClass('ui-state-default');
+    tabs.find('ul.ui-tabs-nav').removeClass('ui-helper-reset');
 
     // 点击左栏显示选项卡
     $('#qw-menu li a').click(function(){
@@ -105,23 +103,11 @@ jQuery(function($){
     });
 
     $('#login').click(function(){
-        var url = '?module=user&action=login';
-        $('<div id="login-dialog">loading...</div>').load(url).dialog({
-            title: '您好,请登陆',
-            height: 190,
+        $.dialog({
+            height: 170,
             width: 330,
-            modal: true,
-            buttons: {
-                '登陆': function(){
-                    $('#login-form').submit();
-                },
-                '取消': function(){
-                    $(this).dialog('destory').remove();
-                }
-            },
-            close: function(){
-                $(this).dialog('destroy').remove();
-            }
+            title: '您好,请登陆',
+            url: '?module=user&action=login'
         });
     });
 

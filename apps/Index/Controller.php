@@ -36,8 +36,7 @@ class Index_Controller extends Qwin_Controller
         $title = urldecode($title);
         $title = $this->toText($title);
 
-        // 加载页眉导航的缓存 todo index controller
-        $menus = require $this->cache->options['dir'] . '/menu.php';
+        $menus = $this->query(null, 'menu')->fetchArray();
 
         $this->view->assign(get_defined_vars());
     }
