@@ -14,8 +14,17 @@ $minify->add(array(
 ?>
 </head>
 <body>
+<style type="text/css">
+html {
+    overflow-y: scroll;
+}
+</style>
 <script type="text/javascript">
 jQuery(function($){
+    var addUrl = '<?php echo $this->url('user', 'add') ?>';
+    var editUrl = '<?php echo $this->url('user', 'edit', array('id' => '{0}')) ?>';
+    var deleteUrl = '<?php echo $this->url('user', 'delete', array('id' => '{0}')) ?>';
+
     $('#user-grid').jqGrid({
         sortorder: 'id',
         datatype: 'json',
@@ -78,7 +87,7 @@ jQuery(function($){
             name: 'operation',
             align: 'center',
             formatter: function(cellvalue, options, rowObject) {
-                return '<a class="user-edit" data-id="' + rowObject[0] + '" href="javascript:;">编辑</a>'
+                return '<a class="user-edit" data-id="' + rowObject[0] + '" data-username="' + rowObject[2] + '" href="javascript:;">编辑</a>'
                     + ' | <a class="user-delete" data-id="' + rowObject[0] +'" href="javascript:;">删除</a>';
             }
         }]
@@ -90,22 +99,13 @@ jQuery(function($){
     }).jqGrid('fullContainer');
 
     $('a.user-edit').live('click', function(){
-        $.dialog({
-            url: '?module=user&amp;action=edit&amp;id=' + $(this).data('id'),
-            title: '编辑用户',
-            width: 600,
-            height: 560,
-            close: function(){
-                $('#user-grid').trigger('reloadGrid');
-                $(this).dialog('destroy').remove();
-            }
-        });
+        window.location.href = qwin.format(editUrl, $(this).data('id'));
     });
 
     $('a.user-delete').live('click', function(){
         if (confirm('确认删除?')) {
             $.ajax({
-                url: '?module=user&action=delete&id=' + $(this).data('id'),
+                url: qwin.format(deleteUrl, $(this).data('id')),
                 success: function() {
                     $('#user-grid').trigger('reloadGrid');
                 }
@@ -114,15 +114,7 @@ jQuery(function($){
     });
 
     $('#user-add').click(function(){
-        $.dialog({
-            url: '?module=user&amp;action=add',
-            title: '添加用户',
-            width: 600,
-            height: 560,
-            beforeClose: function() {
-                $('#user-grid').trigger('reloadGrid');
-            }
-        });
+        window.location.href = addUrl;
     });
 });
 </script>

@@ -16,6 +16,9 @@ $minify->add(array(
 </head>
 <body>
 <style type="text/css">
+    html {
+        overflow-y: scroll;
+    }
     #user-form label {
         text-align: left;
     }
@@ -28,7 +31,7 @@ jQuery(function($){
     userForm['data'] = <?php echo $data ?>;
     // options for group_id
     userForm['fields'][0]['fields'][0]['sources'] = <?php echo $options ?>;
-    
+
     $('#user-form').form(userForm).ajaxForm({
         dataType: 'json',
         success: function(data){
