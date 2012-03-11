@@ -101,7 +101,11 @@ jQuery(function($){
             url: url,
             title: '添加分组',
             width: 400,
-            height: 265
+            height: 265,
+            close: function() {
+                $('#group-grid').trigger('reloadGrid');
+                $(this).dialog('destroy').remove();
+            }
         });
     }
 });
