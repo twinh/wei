@@ -62,19 +62,19 @@ class Qwin_Record extends Doctrine_Record
     }
 
     /**
-     * 获取模块记录
+     * Get module's record object
      *
-     * @param string $name 记录名称
-     * @param Qwin_Module $module 模块名称
+     * @param string $module the name of the module
+     * @param string $name the type of the record, as a part of the module class name
      * @return Qwin_Record
      */
-    public function __invoke($name = null, $module = null)
+    public function __invoke($module = null, $type = null)
     {
         $widget = Qwin::getInstance();
         if (!$module) {
             $module = $widget->module();
         }
-        $class = ucfirst($module) . '_' . ucfirst($name) . 'Record';
+        $class = ucfirst($module) . '_' . ucfirst($type) . 'Record';
         return $widget->__invoke($class);
     }
 
@@ -82,7 +82,6 @@ class Qwin_Record extends Doctrine_Record
      * 连接数据库
      *
      * @return void
-     * @todo 配置应该更规范
      */
     public static function connect(array $options = array())
     {
