@@ -75,10 +75,10 @@ class Qwin_Query extends Doctrine_Query
         parent::__construct($connection, $hydrator);
     }
 
-    public function __invoke($name = null, $module = null)
+    public function __invoke($module = null, $type = null)
     {
         $widget = Qwin::getInstance();
-        $record = $widget->record($name, $module);
+        $record = $widget->record($module, $type);
         $class = get_class($record);
 
         $query = Doctrine_Query::create(null, __CLASS__)->from($class);

@@ -36,7 +36,9 @@ class Index_Controller extends Qwin_Controller
         $title = urldecode($title);
         $title = $this->toText($title);
 
-        $menus = $this->query(null, 'menu')->fetchArray();
+        $menus = $this->query('menu')
+            ->orderBy('order')
+            ->fetchArray();
 
         $this->view->assign(get_defined_vars());
     }
