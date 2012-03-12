@@ -402,7 +402,7 @@ class Qwin_Router extends Qwin_Widget
                         }
 
                         // replace the key with the parameter value
-                        $replace = str_replace($key, $params[$param], $replace);
+                        $replace = str_replace($key, urlencode($params[$param]), $replace);
 
                         $isMatched = true;
 
@@ -434,7 +434,7 @@ class Qwin_Router extends Qwin_Widget
                     }
                 }
 
-                $uri = str_replace($key, $params[$param], $uri);
+                $uri = str_replace($key, urlencode($params[$param]), $uri);
 
                 $isMatched = true;
 
