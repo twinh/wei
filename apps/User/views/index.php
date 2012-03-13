@@ -14,11 +14,6 @@ $minify->add(array(
 ?>
 </head>
 <body>
-<style type="text/css">
-html {
-    overflow-y: scroll;
-}
-</style>
 <script type="text/javascript">
 jQuery(function($){
     var addUrl = '<?php echo $this->url('user', 'add') ?>';
