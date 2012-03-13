@@ -82,14 +82,16 @@ class Qwin extends Qwin_Widget
      *
      * @var array
      *
+     *       inis           array       ini options
+     *
      *       autoload       bool        whether enable autoload or not
      *
      *       autoloadDirs   array       the direcroties of classes
      */
     public $options = array(
+        'inis'          => array(),
         'autoload'      => true,
         'autoloadDirs'  => array(),
-        'inis'          => array(),
     );
 
     /**
