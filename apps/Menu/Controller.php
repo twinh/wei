@@ -30,34 +30,66 @@ class Menu_Controller extends Qwin_Controller
     public function indexAction()
     {
         if ($this->isAjax()) {
-            $rows = $this->getInt('rows', 1, 500);
+            $data = $this->query()
+                ->orderBy('order')
+                ->fetchArray();
 
-            $page = $this->getInt('page', 1);
+            $response = array();
+            $response['page'] = 1;
+            $response['total'] = 1;
+            $response['records'] = count($data);
+            $i = 0;
 
-            $query = $this->query()
-                ->leftJoin('Menu_Record.category')
-                ->addRawOrder(array($this->get('sidx'), $this->get('sord')))
-                ->offset(($page - 1) * $rows)
-                ->limit($rows);
+            foreach ($data as &$menu) {
+                if (!$menu['category_id']) {
 
-            $data = $query->fetchArray();
-            foreach ($data as &$row) {
-                if ($row['category']) {
-                    $row['category_id'] = $row['category']['title'];
-                } else {
-                    $row['category_id'] = '-';
+                    $response['rows'][$i] = array();
+                    $response['rows'][$i]['id'] = $menu['id'];
+                    $response['rows'][$i]['cell'] = array(
+                        $menu['id'],
+                        $menu['category_id'],
+                        $menu['title'],
+                        null,
+                        null,
+                        $menu['order'],
+                        $menu['id'],
+                        0,
+                        null,
+                        false,
+                        true,
+                        true,
+                    );
+                    $i++;
+
+                    foreach ($data as &$subMenu) {
+                        if ($menu['id'] == $subMenu['category_id']) {
+
+                            $response['rows'][$i] = array();
+                            $response['rows'][$i]['id'] = $subMenu['id'];
+                            $response['rows'][$i]['cell'] = array(
+                                $subMenu['id'],
+                                $subMenu['category_id'],
+                                $subMenu['title'],
+                                $subMenu['url'],
+                                $subMenu['target'],
+                                $subMenu['order'],
+                                $subMenu['id'],
+                                1,
+                                $subMenu['category_id'],
+                                true,
+                                false,
+                                true,
+                            );
+                            $i++;
+
+                            unset($subMenu);
+                        }
+                    }
+                    unset($menu);
                 }
             }
 
-            $total = $query->count();
-
-            return $this->jQGridJson(array(
-                'columns' => array('id', 'category_id', 'title', 'url', 'target', 'order', 'operation'),
-                'data' => $data,
-                'page' => $page,
-                'rows' => $rows,
-                'total' => $total,
-            ));
+            return json_encode($response);
         }
     }
 

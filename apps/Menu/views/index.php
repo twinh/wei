@@ -21,18 +21,13 @@ jQuery(function($){
     var deleteUrl = '<?php echo $this->url('menu', 'delete', array('id' => '{0}')) ?>';
 
     $('#menu-grid').jqGrid({
-        sortorder: 'id',
         datatype: 'json',
         width: '100%',
         height: 'auto',
         forceFit: true,
         autowidth: true,
-        rownumbers: true,
-        multiselect: true,
         viewrecords: true,
         pager: '#menu-grid-pager',
-        rowNum: 15,
-        rowList: [15, 30, 50, 100, 500],
         colNames: [
             '编号', '分组', '名称', '链接', '目标', '顺序', '操作'
         ],
@@ -40,15 +35,18 @@ jQuery(function($){
             name: 'id',
             hidden: true
         }, {
-            name: 'catrgory_id'
+            name: 'catrgory_id',
+            hidden: true
         }, {
             name: 'title'
         }, {
             name: 'url'
         }, {
-            name: 'target'
+            name: 'target',
+            align: 'center'
         }, {
-            name: 'order'
+            name: 'order',
+            align: 'center'
         }, {
             name: 'operation',
             align: 'center',
@@ -56,7 +54,10 @@ jQuery(function($){
                 return '<a class="menu-edit" data-id="' + rowObject[0] + '" data-username="' + rowObject[2] + '" href="javascript:;">编辑</a>'
                     + ' | <a class="menu-delete" data-id="' + rowObject[0] +'" href="javascript:;">删除</a>';
             }
-        }]
+        }],
+        treeGrid: true,
+        treeGridModel: 'adjacency',
+        ExpandColumn : 'title'
     }).jqGrid('navGrid', '#menu-grid-pager', {
         add : false,
         edit : false,
@@ -66,7 +67,7 @@ jQuery(function($){
 
     $('a.menu-edit').live('click', function(){
         $.dialog({
-            url: qwin.format(editUrl, $(this).data('id')),
+            url: qwin.formatUrl(editUrl, $(this).data('id')),
             title: '编辑菜单',
             width: 400,
             height: 270,
@@ -79,7 +80,7 @@ jQuery(function($){
     $('a.menu-delete').live('click', function(){
         if (confirm('确认删除?')) {
             $.ajax({
-                url: qwin.format(deleteUrl, $(this).data('id')),
+                url: qwin.formatUrl(deleteUrl, $(this).data('id')),
                 success: function() {
                     $('#user-grid').trigger('reloadGrid');
                 }
