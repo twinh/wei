@@ -51,6 +51,19 @@ class Qwin_Controller extends Qwin_Widget
      */
     public function __invoke($module = null, $instance = true, $param = null)
     {
+        if (is_array($module)) {
+            $options = $module;
+
+            $controller = $this->__invoke($options['module']);
+
+            if (!$controller || !method_exists($controller, $options['action'] . 'Action')) {
+                return $this->error('The page you requested was not found.', 404);
+            }
+
+            return call_user_func(array($controller, $options['action'] . 'Action'));
+        }
+
+
         $module = ucfirst($module);
         // 检查模块控制器文件是否存在
         $found = false;
