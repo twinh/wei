@@ -63,6 +63,9 @@ class Qwin_Minify extends Qwin_Widget
     {
         parent::__construct($options);
         $this->_cacheDir = $this->cache->options['dir'] . '/minify';
+        if (!is_dir($this->_cacheDir)) {
+            mkdir($this->_cacheDir, 0777, true);
+        }
     }
 
     public function __invoke($options = null)
