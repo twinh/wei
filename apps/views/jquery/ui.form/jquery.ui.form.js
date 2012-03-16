@@ -478,7 +478,7 @@
                 });
             },
             fieldSet: function(options, container, width, form, parentOptions) {
-                options = $.extend($.form.fieldSetDefaults, form.options.fieldSetDefaults, options);
+                options = $.extend({}, $.form.fieldSetDefaults, form.options.fieldSetDefaults, options);
 
                 var html = '<fieldset class="ui-form-fieldset ui-widget-content ui-corner-all">'
                          + '<legend class="ui-form-legend">';
@@ -562,7 +562,15 @@
     $.fn.fullWidth = function(width) {
         if (width) {
             // < 0 ?
-            this.outerWidth(width - parseFloat(this.css('marginLeft')) - parseFloat(this.css('marginRight')));
+            var l = parseFloat(this.css('marginLeft'));
+            if (isNaN(l)) {
+                l = 0;
+            }
+            var r = parseFloat(this.css('marginRight'));
+            if (isNaN(r)) {
+                r = 0;
+            }
+            this.outerWidth(width - r - l);
             return this;
         } else {
             return this.outerWidth(true);
