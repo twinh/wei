@@ -104,7 +104,7 @@ jQuery(function($){
 
     $('#login').click(function(){
         $.dialog({
-            height: 170,
+            height: 175,
             width: 330,
             title: '您好,请登陆',
             url: '?module=user&action=login'
