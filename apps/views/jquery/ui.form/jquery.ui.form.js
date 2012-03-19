@@ -36,6 +36,10 @@
             alert('element tag should be form');
             return this;
         }
+        if (this.data('form')) {
+            return this;
+        }
+        this.data('form', true);
 
         options = $.extend({}, $.form.defaults, options);
         options.labelDefaults = $.extend({}, $.form.labelDefaults, options.labelDefaults);

@@ -44,7 +44,7 @@ c.browser.version<7){a=Math.max(document.documentElement.scrollHeight,document.b
  */
 (function($) {
     $.dialog = function(options){
-        options = $.extend($.dialog.defaults, options);
+        options = $.extend({}, $.dialog.defaults, options);
         return $('<div class="ui-dialog-fullcontent"><iframe id="' + $.guid++ + '" class="ui-dialog-iframe" src="' + options.url + '" frameborder="0"></iframe></div>').dialog(options);
     };
     $.dialog.defaults = {

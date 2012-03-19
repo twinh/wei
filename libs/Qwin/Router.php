@@ -169,7 +169,8 @@ class Qwin_Router extends Qwin_Widget
     public function setBaseUriOption($uri)
     {
         if (!$uri) {
-            $this->options['baseUri'] = dirname($_SERVER['SCRIPT_NAME']) . '/';
+            $uri = dirname($_SERVER['SCRIPT_NAME']);
+            $this->options['baseUri'] = '/' == $uri ? $uri : $uri . '/';
         } elseif ('/' != $uri[strlen($uri) - 1]) {
             $this->options['baseUri'] = $uri . '/';
         }

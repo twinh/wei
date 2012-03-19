@@ -228,6 +228,13 @@ class Qwin_View extends Qwin_ArrayWidget
         $this->exception('File "%s" not found.', $file);
     }
 
+    /**
+     * Get file url address
+     *
+     * @param string $file the relative file path of dirs options
+     * @return string
+     * @todo how about $_SERVER['DOCUMENT_ROOT'] is a custom path or symlink ?
+     */
     public function getUrlFile($file)
     {
         $file = realpath($this->getFile($file));
