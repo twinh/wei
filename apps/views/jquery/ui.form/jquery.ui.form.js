@@ -428,11 +428,17 @@
             checkbox: function(options, container, width) {
                 var html = '<div class="ui-form-checkbox-group">';
                 var id = options.name;
+                var name;
+                if (options.single) {
+                    name = options.name
+                } else {
+                    name = options.name + '[]';
+                }
                 for (var i in options.sources) {
-                    if (0 != i) {
+                    if (!options.single && 0 != i) {
                         id = options.name + '-' + i;
                     }
-                    html += '<div class="ui-form-checkbox-elem"><input class="ui-form-checkbox-input" type="checkbox" name="' + options.name + '[]" id="' + id + '" /><label class="ui-form-checkbox-label" for="' + id + '" >' + options.sources[i] + '</label></div>';
+                    html += '<div class="ui-form-checkbox-elem"><input class="ui-form-checkbox-input" type="checkbox" name="' + name + '" id="' + id + '" value="' + i + '" /><label class="ui-form-checkbox-label" for="' + id + '" >' + options.sources[i] + '</label></div>';
                 }
                 html += '</div>';
                 var input = $(html);

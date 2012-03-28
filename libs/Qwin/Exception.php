@@ -24,7 +24,7 @@
 
 /**
  * Exception
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -38,10 +38,11 @@ class Qwin_Exception extends Exception
     {
         parent::__construct($msg, (int)$code);
     }
-    
+
     public function __invoke()
     {
-        $this->message = call_user_func_array('sprintf', func_get_args());
+        $args = func_get_args();
+        $this->message = call_user_func_array('sprintf', $args);
         throw $this;
     }
 }

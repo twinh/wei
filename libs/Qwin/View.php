@@ -69,7 +69,7 @@ class Qwin_View extends Qwin_ArrayWidget
     {
         !$module && $module = $this->module();
         !$action && $action = $this->action();
-        $module = (string)$module;
+        $module = ucfirst((string)$module);
         $action = (string)$action;
 
         foreach ($this->options['dirs'] as $dir) {
