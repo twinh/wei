@@ -1,28 +1,4 @@
 <?php
-/**
- * zh-CN
- *
- * Copyright (c) 2008-2012 Twin Huang. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @author      Twin Huang <twinh@yahoo.cn>
- * @copyright   Twin Huang
- * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id$
- * @since       2011-08-23 00:18:23
- */
-
 return array(
     'Doc' => '文档',
     'Overview' => '概述',
@@ -79,4 +55,7 @@ return array(
     'Official document' => '官方文档',
     'Methods inherited from %s' => '继承于%s的方法',
     'Properties inherited from %s' => '继承于%s的属性',
+    'actions' => array(
+        'index' => '文档首页',
+    ),
 );

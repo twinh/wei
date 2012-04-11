@@ -17,7 +17,7 @@
  * limitations under the License.
  *
  * @package     QWIN_PATH
- * @subpackage  
+ * @subpackage
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -25,15 +25,15 @@
  * @since       2010-12-07 17:31:03
  */
 
-class Ide_Config_Controller extends Com_ActionController
+class Config_Controller extends Qwin_Controller
 {
     // 根据配置分组生成表单
     public function actionRender()
     {
         $request = $this->request;
-        
+
         $groupId = $request->get('groupId');
-        
+
         // 获取当前分组的所有表单项
         $formData = $this->_meta
             ->getQuery()
@@ -44,14 +44,14 @@ class Ide_Config_Controller extends Com_ActionController
         if (empty($formData)) {
            return $this->view->alert($this->_lang->t('MSG_NO_RECORD'));
         }
-        
+
         // 构建域分组
         $groupResult = Com_Meta::getQueryByAsc(array(
                 'package' => 'Common',
                 'module' => 'Config',
                 'controller' => 'Group',
             ))
-            ->orderBy('order DESC, date_modified DESC')
+            ->orderBy('order DESC, updated_at DESC')
             ->execute();
         $groupData = array();
         foreach ($groupResult as $row) {
@@ -94,7 +94,7 @@ class Ide_Config_Controller extends Com_ActionController
                 'controller' => 'Temp',
             ))
             ->merge($configMeta);
-        
+
         if (empty($_POST)) {
             $primaryKey = $groupId;
             $view = Qwin::call('Com_View_Edit');
@@ -107,15 +107,15 @@ class Ide_Config_Controller extends Com_ActionController
             $globalConfig = require $path;
             $globalConfig[$groupId] = $data;
             Qwin_Util_File::writeArray($path, $globalConfig);
-            
+
             $url = $this->url->url($this->_asc, array('action' => 'Index'));
             $this->view->success(Qwin::call('-lang')->t('MSG_OPERATE_SUCCESSFULLY'), $url);
         }
     }
-    
+
     public function getMetaByGroupId($groupId)
     {
-        
+
     }
 
     public function actionCenter()
@@ -127,7 +127,7 @@ class Ide_Config_Controller extends Com_ActionController
         // 分组的数据
         $data = Com_Meta::getQueryByModule('Ide/Config/Group')
             ->where('is_enabled = 1')
-            ->orderBy('order DESC, date_modified DESC')
+            ->orderBy('order DESC, updated_at DESC')
             ->execute()
             ->toArray();
 

@@ -41,16 +41,16 @@ class Demo_Record extends Qwin_Record
                 'tags' => array(
 
                 ),
-                'date_created' => array(
+                'created_at' => array(
 
                 ),
                 'created_by' => array(
 
                 ),
-                'date_modified' => array(
+                'updated_at' => array(
 
                 ),
-                'modified_by' => array(
+                'updated_by' => array(
 
                 ),
                 'is_deleted' => array(
@@ -144,12 +144,12 @@ class Demo_Record extends Qwin_Record
                 'created_by' => array(
                     'readonly' => true,
                 ),
-                'date_created' => array(
+                'created_at' => array(
                     'readonly' => true,
                 ),
-                'modified_by' => array(
+                'updated_by' => array(
                 ),
-                'date_modified' => array(
+                'updated_at' => array(
                 ),
             ),
             'id' => 'id',

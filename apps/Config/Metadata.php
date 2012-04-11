@@ -158,7 +158,7 @@ class Ide_Config_Meta extends Com_Meta
             'db' => array(
                 'table' => 'config',
                 'order' => array(
-                    array('date_created', 'DESC'),
+                    array('created_at', 'DESC'),
                 ),
             ),
             'page' => array(

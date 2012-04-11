@@ -58,7 +58,7 @@ class Group_Controller extends Qwin_Controller
                     $row['created_by'] = $row['creator']['username'];
                 }
                 if ($row['modifier']) {
-                    $row['modified_by'] = $row['modifier']['username'];
+                    $row['updated_by'] = $row['modifier']['username'];
                 }
             }
             unset($row);
@@ -75,9 +75,9 @@ class Group_Controller extends Qwin_Controller
                     $row['id'],
                     $row['name'],
                     $row['created_by'],
-                    $row['modified_by'],
-                    $row['date_created'],
-                    $row['date_modified'],
+                    $row['updated_by'],
+                    $row['created_at'],
+                    $row['updated_at'],
                     $row['id'],
                     $row['level'],
                     $row['lft'],
@@ -111,7 +111,7 @@ class Group_Controller extends Qwin_Controller
                     ->orderBy('rgt DESC')
                     ->where('level = 0')
                     ->fetchOne();
-                
+
                 if ($max) {
                     $group->getNode()->insertAsNextSiblingOf($max);
                 } else {
@@ -160,53 +160,40 @@ class Group_Controller extends Qwin_Controller
         $group = $this->query()->where('id = ?', $id)->fetchOne();
 
         if ($this->isPost()) {
-            if (!$group) {
-                return array(
-                    'code' => -1,
-                    'message' => 'Group is not exists.',
-                );
-            }
-
-            $name = $this->post('name');
-            $description = $this->post('description');
-            $parentId = $this->post('parent_id');
-
-            $group['name'] = $name;
-            $group['description'] = $description;
-
-            $node = $group->getNode();
-
-            // 根分组
-            if ($node->isRoot()) {
-                // 不移动
-                if (!$parentId) {
-                    $group->save();
-
-                // 移动到其他分组之下
-                } else {
-                    $newParent = $this->query()
-                        ->where('id = ?', $parentId)
-                        ->fetchOne();
-
-                    // 不存在的父分组
-                    if (!$newParent) {
-                        $group->save();
-                    } else {
-                        $node->moveAsLastChildOf($newParent);
-                    }
+            try {
+                if (!$group) {
+                    return array(
+                        'code' => -1,
+                        'message' => 'Group is not exists.',
+                    );
                 }
-            // 非根分组
-            } else {
+
+                $name = $this->post('name');
+                $description = $this->post('description');
+                $parentId = $this->post('parent_id');
+
+                $group['name'] = $name;
+                $group['description'] = $description;
+
+                /* @var $node Doctrine_Node_NestedSet */
+                $node = $group->getNode();
+
                 $parent = $node->getParent();
 
                 // 父分组不改变,直接保存
-                if ($parentId == $parent['id']) {
+                if ((!$parent && !$parentId) || ($parentId == $parent['id'])) {
                     $group->save();
 
                 // 转换为根分组
                 } elseif (!$parentId) {
-                    $node->makeRoot($this->record()->createRootId());
+                    $tree = $group->getTable()->getTree();
 
+                    $max = $this->query()
+                        ->orderBy('rgt DESC')
+                        ->where('level = 0')
+                        ->fetchOne();
+
+                    $node->moveAsNextSiblingOf($max);
                 // 移动到其他分组之下
                 } else {
                     $newParent = $this->query()
@@ -218,12 +205,17 @@ class Group_Controller extends Qwin_Controller
                         $node->moveAsLastChildOf($newParent);
                     }
                 }
-            }
 
-            return json_encode(array(
-                'code' => 0,
-                'message' => '编辑成功',
-            ));
+                return json_encode(array(
+                    'code' => 0,
+                    'message' => '编辑成功',
+                ));
+            } catch (Exception $e) {
+                return json_encode(array(
+                    'code' => -1,
+                    'message' => $e->getMessage()
+                ));
+            }
         } else {
             if (!$group) {
                 $this->error('Group is not exists.');

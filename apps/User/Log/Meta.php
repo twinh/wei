@@ -43,7 +43,7 @@ class Member_Log_Meta extends Meta_Widget
                         'isList' => 1,
                     ),
                 ),
-                'date_created' => array(
+                'created_at' => array(
                     'attr' => array(
                         'isList' => 1,
                     ),
@@ -67,7 +67,7 @@ class Member_Log_Meta extends Meta_Widget
             'db' => array(
                 'table' => 'member_log',
                 'order' => array(
-                    array('date_created', 'DESC'),
+                    array('created_at', 'DESC'),
                 ),
             ),
             'page' => array(

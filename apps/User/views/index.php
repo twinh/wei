@@ -68,14 +68,14 @@ jQuery(function($){
             name: 'created_by',
             hidden: true
         }, {
-            name: 'date_created',
+            name: 'created_at',
             align: 'center',
             hidden: true
         }, {
-            name: 'modified_by',
+            name: 'updated_by',
             hidden: true
         }, {
-            name: 'date_modified',
+            name: 'updated_at',
             align: 'center',
             hidden: true
         }, {
@@ -94,13 +94,13 @@ jQuery(function($){
     }).jqGrid('fullContainer');
 
     $('a.user-edit').live('click', function(){
-        window.location.href = qwin.format(editUrl, $(this).data('id'));
+        window.location.href = qwin.formatUrl(editUrl, $(this).data('id'));
     });
 
     $('a.user-delete').live('click', function(){
         if (confirm('确认删除?')) {
             $.ajax({
-                url: qwin.format(deleteUrl, $(this).data('id')),
+                url: qwin.formatUrl(deleteUrl, $(this).data('id')),
                 success: function() {
                     $('#user-grid').trigger('reloadGrid');
                 }

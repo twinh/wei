@@ -71,11 +71,11 @@ class User_Record extends Qwin_Record
 
         $this->hasColumn('created_by');
 
-        $this->hasColumn('date_created');
+        $this->hasColumn('created_at');
 
-        $this->hasColumn('modified_by');
+        $this->hasColumn('updated_by');
 
-        $this->hasColumn('date_modified');
+        $this->hasColumn('updated_at');
     }
 
     public function setUp()
@@ -91,19 +91,19 @@ class User_Record extends Qwin_Record
     {
         $this->id = Qwin::getInstance()->uuid();
 
-        $this->date_created = date('Y-m-d H:i:s', time());
+        $this->created_at = date('Y-m-d H:i:s', time());
 
-        $this->date_modified = $this->date_created;
+        $this->updated_at = $this->created_at;
 
         $this->created_by = Qwin::getInstance()->user()->offsetGet('id');
 
-        $this->modified_by = $this->created_by;
+        $this->updated_by = $this->created_by;
     }
 
     public function preUpdate($event)
     {
-        $this->date_modified = date('Y-m-d H:i:s', time());
+        $this->updated_at = date('Y-m-d H:i:s', time());
 
-        $this->modified_by = Qwin::getInstance()->user()->offsetGet('id');
+        $this->updated_by = Qwin::getInstance()->user()->offsetGet('id');
     }
 }

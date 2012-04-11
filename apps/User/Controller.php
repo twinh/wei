@@ -51,8 +51,8 @@ class User_Controller extends Qwin_Controller
 
             $total = $query->count();
 
-            return $this->jQGridJson(array(
-                'columns' => array('id', 'group_id', 'username', 'email', 'sex', 'created_by', 'date_created', 'modified_by', 'date_modified', 'operation'),
+            return $this->jqGridJson(array(
+                'columns' => array('id', 'group_id', 'username', 'email', 'sex', 'created_by', 'created_at', 'updated_by', 'updated_at', 'operation'),
                 'data' => $data,
                 'page' => $page,
                 'rows' => $rows,
@@ -76,7 +76,7 @@ class User_Controller extends Qwin_Controller
             ));
         } else {
             // 分组选项
-            $options = $this->record(null, 'group')->getParentOptions();
+            $options = $this->record('group')->getParentOptions();
             $options = json_encode($options);
 
             $this->view->assign(get_defined_vars());
@@ -113,7 +113,7 @@ class User_Controller extends Qwin_Controller
             }
 
             // 分组选项
-            $options = $this->record(null, 'group')->getParentOptions();
+            $options = $this->record('group')->getParentOptions();
             $options = json_encode($options);
 
             $data = json_encode($user->toArray());
@@ -161,6 +161,9 @@ class User_Controller extends Qwin_Controller
         $password = md5($this->post('password'));
 
         $user = $this->query()
+            ->from('User_Record u')
+            ->leftJoin('u.group g')
+            ->leftJoin('g.acl a')
             ->where('username = ? AND password = ?', array($username, $password))
             ->fetchOne();
 
@@ -171,8 +174,10 @@ class User_Controller extends Qwin_Controller
             ));
         }
 
-        //
-        $this->user->fromArray($user->toArray());
+        $data = $user->toArray();
+        $data['acl'] = $user['group']['acl']['resources'];
+
+        $this->user->fromArray($data);
 
         return json_encode(array(
             'code' => 0,

@@ -81,7 +81,7 @@ class Ide_Option_Meta extends Meta_Widget
                 'db' => array(
                     'table' => 'option',
                     'order' => array(
-                        array('date_created', 'DESC'),
+                        array('created_at', 'DESC'),
                     ),
                     'limit' => 10,
                 ),

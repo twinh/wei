@@ -33,13 +33,13 @@ return array(
 
         ),
         'ip' => array(
-            
+
         ),
-        'date_created' => array(
-            
+        'created_at' => array(
+
         ),
     ),
     'layout' => array(
-        'id', 'member_id', 'ip', 'date_created',
+        'id', 'member_id', 'ip', 'created_at',
     ),
 );
