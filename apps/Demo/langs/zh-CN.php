@@ -23,7 +23,10 @@
  * @since       2011-9-19 14:42:40
  */
 return array(
-    'MOD_DEMO' => '演示',
-    'FLD_CODE' => '代码',
-    'FLD_TAGS' => '标签',
+    'Demo' => '演示',
+    'Code' => '代码',
+    'Tags' => '标签',
+    'actions' => array(
+        'index' => '演示列表',
+    ),
 );

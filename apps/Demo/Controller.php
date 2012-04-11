@@ -26,7 +26,7 @@
  * @todo        Download
  * @todo        Copy and send to others
  */
-class Demo_Controller extends Qwin_CrudController
+class Demo_Controller extends Qwin_Controller
 {
     public function indexAction()
     {

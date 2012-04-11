@@ -17,4 +17,13 @@ return array(
     'Mobile' => '手机',
     'Homepage' => '主页',
     'Address' => '地址',
+    'actions' => array(
+        'index' => '用户列表',
+        'add' => '添加用户',
+        'edit' => '编辑用户',
+        'delete' => '删除用户',
+        'login' => '登录',
+        'logout' => '注销',
+        'isLogin' => '检查是否登陆'
+    ),
 );

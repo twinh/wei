@@ -26,35 +26,35 @@
 return array(
     'fields' => array(
         'id' => array(
-            
+
         ),
         'title' => array(
-            
+
         ),
         'code' => array(
-            
+
         ),
         'tags' => array(
-            
+
         ),
-        'date_created' => array(
-            
+        'created_at' => array(
+
         ),
         'created_by' => array(
-            
+
         ),
-        'date_modified' => array(
-            
+        'updated_at' => array(
+
         ),
-        'modified_by' => array(
-            
+        'updated_by' => array(
+
         ),
         'is_deleted' => array(
-            
+
         ),
     ),
     'table' => 'demo',
     'relations' => array(
-        
+
     ),
 );

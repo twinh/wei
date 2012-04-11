@@ -16,6 +16,8 @@ $minify->add(array(
 <body>
 <script type="text/javascript">
 jQuery(function($){
+    var aclUrl = '<?php echo $this->url('acl', 'assign', array('groupId' => '{0}')) ?>';
+
     $('#group-grid').jqGrid({
         sortorder: 'id',
         datatype: 'json',
@@ -36,18 +38,19 @@ jQuery(function($){
         }, {
             name: 'created_by'
         }, {
-            name: 'modified_by'
+            name: 'updated_by'
         }, {
-            name: 'date_created',
+            name: 'created_at',
             align: 'center'
         }, {
-            name: 'date_modified',
+            name: 'updated_at',
             align: 'center'
         }, {
             name: 'operation',
             align: 'center',
             formatter: function(cellvalue, options, rowObject) {
                 return '<a class="group-addchild" data-id="' + rowObject[0] + '" href="javascript:;">添加子分组</a>'
+                    + ' | <a href="' + qwin.formatUrl(aclUrl, rowObject[0]) + '">分配权限</a>'
                     + ' | <a class="group-edit" data-id="' + rowObject[0] + '" href="javascript:;">编辑</a>'
                     + ' | <a class="group-delete" data-id="' + rowObject[0] +'" href="javascript:;">删除</a>';
             }

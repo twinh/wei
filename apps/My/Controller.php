@@ -23,7 +23,7 @@
  * @since       2011-04-05 06:14:49
  */
 
-class Member_My_Controller extends Controller_Widget
+class My_Controller extends Qwin_Controller
 {
     /**
      * 锁定的核心帐号，防止恶意修改
@@ -32,13 +32,13 @@ class Member_My_Controller extends Controller_Widget
     protected $_lock = array(
         'guest', 'admin', '7641b5b1-c727-6c07-e11f-9cb5b74ddfc9',
     );
-    
+
     protected $_memberModule;
-        
+
     public function  __construct($config = array(), $module = null, $action = null) {
         parent::__construct($config, $module, $action);
         $this->_memberModule = Qwin_Module::instance('member');
-        
+
         // 加载用户模块的语言
         $this->_lang->appendByModule($this->_memberModule);
     }
@@ -110,13 +110,13 @@ class Member_My_Controller extends Controller_Widget
             $styles = $style->getStyles();
             $path = $style->getSourcePath();
             $meta = $this->getMeta();
-            
+
             $this->_view->assign(get_defined_vars());
         } else {
             $session = $this->getSession();
             $member = $session->get('member');
             $style = $session->get('style');
-            
+
             $result = Query_Widget::getByModule($this->_memberModule)
                 ->update()
                 ->set('theme', '?', $style)
@@ -125,7 +125,7 @@ class Member_My_Controller extends Controller_Widget
 
             $url = $this->_url->url($this->_module['url'], 'index');
             $this->_view->success($this->_lang['MSG_SUCCEEDED'], $url);
-        } 
+        }
     }
 
     public function actionLanguage()

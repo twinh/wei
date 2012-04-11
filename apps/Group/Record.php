@@ -27,7 +27,7 @@ class Group_Record extends Qwin_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('user_group');
+        $this->setTableName('group');
 
         $this->hasColumn('name', 'string', 255);
 
@@ -35,11 +35,11 @@ class Group_Record extends Qwin_Record
 
         $this->hasColumn('created_by');
 
-        $this->hasColumn('modified_by');
+        $this->hasColumn('updated_by');
 
-        $this->hasColumn('date_created');
+        $this->hasColumn('created_at');
 
-        $this->hasColumn('date_modified');
+        $this->hasColumn('updated_at');
     }
 
     public function setUp()
@@ -52,37 +52,46 @@ class Group_Record extends Qwin_Record
             )
         );
 
-        $this->hasOne('User_Record as modifier', array(
-                'local' => 'modified_by',
+        $this->hasOne('User_Record as updater', array(
+                'local' => 'updated_by',
                 'foreign' => 'id'
             )
         );
+
+        $this->hasOne('Acl_GroupRecord as acl', array(
+            'local' => 'id',
+            'foreign' => 'group_id'
+        ));
     }
 
     public function getParentOptions()
     {
         $tree = Doctrine_Core::getTable(__CLASS__)->getTree();
-        foreach ($tree->fetchTree() as $node) {
-            $options[$node['id']] = str_repeat('--', $node['level']) . $node['name'];
+        $nodes = $tree->fetchTree();
+        if ($nodes) {
+            foreach ($nodes as $node) {
+                $options[$node['id']] = str_repeat('--', $node['level']) . $node['name'];
+            }
+            return $options;
         }
-        return $options;
+        return array();
     }
 
     public function preInsert($event)
     {
-        $this->date_created = date('Y-m-d H:i:s', time());
+        $this->created_at = date('Y-m-d H:i:s', time());
 
-        $this->date_modified = $this->date_created;
+        $this->updated_at = $this->created_at;
 
         $this->created_by = Qwin::getInstance()->user()->offsetGet('id');
 
-        $this->modified_by = $this->created_by;
+        $this->updated_by = $this->created_by;
     }
 
     public function preUpdate($event)
     {
-        $this->date_modified = date('Y-m-d H:i:s', time());
+        $this->updated_at = date('Y-m-d H:i:s', time());
 
-        $this->modified_by = Qwin::getInstance()->user()->offsetGet('id');
+        $this->updated_by = Qwin::getInstance()->user()->offsetGet('id');
     }
 }

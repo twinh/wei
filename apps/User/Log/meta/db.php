@@ -27,16 +27,16 @@
 return array(
     'fields' => array(
         'id' => array(
-            
+
         ),
         'member_id' => array(
-            
+
         ),
         'ip' => array(
-            
+
         ),
-        'date_created' => array(
-            
+        'created_at' => array(
+
         ),
     ),
     'table' => 'member_log'

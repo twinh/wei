@@ -29,34 +29,34 @@ return array(
             'hidden' => true,
         ),
         'title' => array(
-            
+
         ),
         'tags' => array(
             '_link' => true,
         ),
         'code' => array(
-            
+
         ),
-//        'date_created' => array(
-//            
+//        'created_at' => array(
+//
 //        ),
         'created_by' => array(
-            
+
         ),
-        'date_modified' => array(
-            
+        'updated_at' => array(
+
         ),
-        'modified_by' => array(
-            
+        'updated_by' => array(
+
         ),
         'is_deleted' => array(
-            
+
         ),
         'operation' => array(
-            
+
         ),
     ),
     'layout' => array(
-        'id', 'title', 'tags', 'date_modified', 'operation',
+        'id', 'title', 'tags', 'updated_at', 'operation',
     ),
 );
