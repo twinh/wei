@@ -35,6 +35,6 @@ class Qwin_IsQQ extends Qwin_Widget
 {
     public function __invoke($value)
     {
-        return $this->isDigit($value) && $this->isLength($value, 5, 10) && '0' != $value[0];
+        return (bool)preg_match('/^[1-9][\d]{4,9}$/', $value);
     }
 }
