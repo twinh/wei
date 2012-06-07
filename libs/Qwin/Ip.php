@@ -37,7 +37,7 @@ class Qwin_Ip extends Qwin_Widget
      * Get ip address
      *
      * @param string $default default ip address
-     * @return Qwin_Widget
+     * @return string ip address
      */
     public function __invoke($default = '0.0.0.0')
     {
