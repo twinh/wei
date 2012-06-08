@@ -29,212 +29,111 @@
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-23 13:50:07
- * @todo        rename as file or fileCache
+ * @since       2012-06-03 22:11:39
  */
-class Qwin_Cache extends Qwin_Widget
+class Qwin_Cache extends Qwin_Widget implements Qwin_Storable
 {
-    /**
-     * @var array Options
-     *
-     *       dir    string  Cache dir
-     */
     public $options = array(
-        'dir'       => './cache',
+        'master' => 'memcache',
+        'slave' => 'fCache',
+        'masterOptions' => array(),
+        'slaverOptions' => array(),
+        'time' => 10,
     );
 
-    public function __construct($options = null)
+    protected $_master;
+
+    protected $_slave;
+
+    public function __construct(array $options = array())
     {
-        $options = (array)$options + $this->options;
-        $this->option($options);
+        parent::__construct($options);
+
+        $options = $this->options;
+
+        $this->_master = $this->$options['master'];
+
+        $this->_slave = $this->$options['slave'];
     }
 
-    /**
-     * Set cache dir
-     *
-     * @param string $dir
-     * @return Qwin_Cache
-     */
-    public function setDirOption($dir)
-    {
-        if (!is_dir($dir)) {
-            $mask = umask(0);
-            if (!@mkdir($dir, 0777, true)) {
-                // how to test it ?
-                // @codeCoverageIgnoreStart
-                umask($mask);
-                return $this->error('Failed to creat directory: ' . $dir );
-                // @codeCoverageIgnoreEnd
-            }
-            umask($mask);
-        }
-        return $this;
-    }
-
-    /**
-     * Get or set cache
-     *
-     * @param string $key the name of cache
-     * @param mixed $value
-     * @param int $expire expire time for set cache
-     * @return Qwin_Cache
-     */
-    public function __invoke($key, $value = null, $expire = 0)
-    {
-        if (1 == func_num_args()) {
-            return $this->get($key);
-        } else {
-            return $this->set($key, $value, $expire);
-        }
-    }
-
-    /**
-     * Add cache, if cache is exists, return false
-     *
-     * @param string $key the key of cache
-     * @param mixed $value the value of cache
-     * @param int $expire expire time
-     * @return bool
-     */
-    public function add($key, $value, $expire = 0)
-    {
-        if ($this->get($key)) {
-            return false;
-        }
-        return $this->set($key, $value, $expire);
-    }
-
-    /**
-     * Get cache
-     *
-     * @param string $key the key of cache
-     * @return mixed|false
-     */
     public function get($key)
     {
-        $file = $this->getFile($key);
-        if (!is_file($file)) {
-            return false;
+        $value = $this->_master->get($key);
+
+        if (!$value) {
+            return $this->_slave->get($key);
         }
+    }
 
-        $content = @unserialize(file_get_contents($file));
-        if (!$content || !is_array($content) || time() > $content[0]) {
-            return false;
+    public function set($key, $value, $options = array())
+    {
+        $value = $this->_master->set($key, $value, $options);
+
+        if (true) {
+            $this->_slave->set($key, $value, $options);
         }
-
-        return $content[1];
     }
 
-    /**
-     * Set cache
-     *
-     * @param string $key the key of cache
-     * @param value $value the value of cache
-     * @param int $expire expire time, 0 means never expired
-     * @return bool
-     */
-    public function set($key, $value, $expire = 0)
+    public function add($key, $value, $options = array())
     {
-        $file = $this->getFile($key);
+        $result = $this->_master->add($key, $value, $options);
 
-        // 2147483647 = pow(2, 31) - 1
-        // avoid year 2038 problem in 32-bit system when date coverts or compares
-        // @see http://en.wikipedia.org/wiki/Year_2038_problem
-        $content = serialize(array(
-            0 => $expire ? time() + $expire : 2147483647,
-            1 => $value,
-            2 => $key,
-        ));
-
-        return file_put_contents($file, $content);
-    }
-
-    /**
-     * Replace cache, if cache not exists, return false
-     *
-     * @param string $key the key of cache
-     * @param mixed $value the value of cache
-     * @param int $expire expire time
-     * @return bool
-     */
-    public function replace($key, $value, $expire = 0)
-    {
-        if (!$this->get($key)) {
-            return false;
+        if ($result) {
+            $this->_slave->set($key, $value, $options);
         }
-        return $this->set($key, $value, $expire);
     }
 
-    /**
-     * Remove cache by key
-     *
-     * @param string $key
-     * @return bool
-     */
-    public function remove($key)
+    public function delete($key)
     {
-        $file = $this->getFile($key);
+        $this->_master->delete($key);
 
-        if (is_file($file)) {
-            return unlink($file);
+        $this->_slave->delete($key);
+    }
+
+    public function increment($key, $offset)
+    {
+        $this->_master->increment($key, $offset);
+
+        if (true) {
+            $this->_slave->_set($key, $this->_master->get($key));
         }
-
-        return false;
     }
 
-    /**
-     * Check if cache file expired
-     *
-     * @param string $key 名称
-     * @return bool
-     */
-    public function isExpired($key)
+    public function decrement($key, $offset)
     {
-        return $this->get($key) ? false : true;
-    }
+        $this->_master->decrement($key, $offset);
 
-    /**
-     * Get cache file by cache key
-     *
-     * @param string $key
-     * @return string
-     */
-    public function getFile($key)
-    {
-        return $this->options['dir'] . '/' . $key . '.tmp';
-    }
-
-    /**
-     * Removes ALL directories and files in cache directory
-     *
-     * @return Qwin_Cache
-     */
-    public function clean()
-    {
-        $this->_clean($this->options['dir']);
-        return $this;
-    }
-
-    /**
-     * Removes ALL directories and files in directory
-     *
-     * @param string $dir
-     */
-    protected function _clean($dir)
-    {
-        if (is_dir($dir)) {
-            $files = scandir($dir);
-            foreach ($files as $file) {
-                if ('.' != $file && '..' != $file) {
-                    $file = $dir . DIRECTORY_SEPARATOR .  $file;
-                    if (is_dir($file)) {
-                        $this->_clean($file);
-                    } else {
-                        unlink($file);
-                    }
-                }
-            }
-            rmdir($dir);
+        if (true) {
+            $this->_slave->set($key, $this->_master->get($key));
         }
+    }
+
+    public function replace($key, $value, $options = array())
+    {
+        $this->_master->replace($key, $value, $options);
+
+        if (true) {
+            $this->_slave->set($key, $value);
+        }
+    }
+
+    public function remove()
+    {
+
+    }
+
+    public function clear()
+    {
+        
+    }
+
+    public function getMasterObject()
+    {
+        return $this->_master;
+    }
+
+    public function getSlaveObject()
+    {
+        return $this->_slave;
     }
 }
