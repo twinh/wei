@@ -123,7 +123,13 @@ class Qwin_Error extends Qwin_Widget
                 ob_start();
             }
 
-            // TODO header for ajax request
+            // TODO more info, may be need an ajax view file
+            if ($this->isAjax()) {
+                exit(json_encode(array(
+                    'code' => $code ? ($code > 0 ? -$code : $code) : -9999,
+                    'message' => $message,
+                )));
+            }
 
             // Title & Message
             $code = $code ? $code . ': ' : '';
