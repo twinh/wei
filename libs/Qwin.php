@@ -30,10 +30,10 @@ require_once 'Qwin/Widget.php';
 /**
  * Qwin
  *
- * @namespace   Qwin
+ * @package     Qwin
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2010-04-26 10:39:18
+ * @author      Twin Huang <twinh@yaho 10:39:18o.cn>
+ * @since       2010-04-26
  */
 class Qwin extends Qwin_Widget
 {
@@ -113,11 +113,6 @@ class Qwin extends Qwin_Widget
      */
     public function __construct(array $config = array())
     {
-        if (isset(self::$_instance)) {
-            require_once 'Qwin/Exception.php';
-            throw new Qwin_Exception('Class "Qwin" can only have one instance.');
-        }
-
         $this->config($config);
         if (isset($config[__CLASS__])) {
             $this->options = $config[__CLASS__] + $this->options;
@@ -335,7 +330,7 @@ class Qwin extends Qwin_Widget
     }
 
     /**
-     * Get a widget obejct and call the "call" method
+     * Get a widget object and call its "__invoke" method
      *
      * @param Qwin_Widget $invoker the invker widget object
      * @param string $name the name of the widget
