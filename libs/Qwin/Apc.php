@@ -100,12 +100,12 @@ class Qwin_Apc extends Qwin_Widget implements Qwin_Storable
         }
     }
 
-    public function increment($key, $offset)
+    public function increment($key, $offset = 1)
     {
         return apc_inc($key, $offset);
     }
 
-    public function decrement($key, $offset)
+    public function decrement($key, $offset = 1)
     {
         return apc_dec($key, $offset);
     }
