@@ -29,7 +29,7 @@
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-23 13:50:07
+ * @since       2011-10-23
  */
 class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
 {
@@ -52,7 +52,7 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
      * Set cache dir
      *
      * @param string $dir
-     * @return Qwin_Cache
+     * @return Qwin_Fcache
      */
     public function setDirOption($dir)
     {
@@ -76,7 +76,7 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
      * @param string $key the name of cache
      * @param mixed $value
      * @param int $expire expire time for set cache
-     * @return Qwin_Cache
+     * @return Qwin_Fcache
      */
     public function __invoke($key, $value = null, $expire = 0)
     {
@@ -95,7 +95,7 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
      * @param int $expire expire time
      * @return bool
      */
-    public function add($key, $value, $expire = 0)
+    public function add($key, $value, $expire = 0, array $options = array())
     {
         if ($this->get($key)) {
             return false;
@@ -112,6 +112,7 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
     public function get($key)
     {
         $file = $this->getFile($key);
+        
         if (!is_file($file)) {
             return false;
         }
@@ -132,7 +133,7 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
      * @param int $expire expire time, 0 means never expired
      * @return bool
      */
-    public function set($key, $value, $expire = 0)
+    public function set($key, $value, $expire = 0, array $options = array())
     {
         $file = $this->getFile($key);
 
@@ -145,7 +146,7 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
             2 => $key,
         ));
 
-        return file_put_contents($file, $content);
+        return (bool)file_put_contents($file, $content);
     }
 
     /**
@@ -156,7 +157,7 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
      * @param int $expire expire time
      * @return bool
      */
-    public function replace($key, $value, $expire = 0)
+    public function replace($key, $value, $expire = 0, array $options = array())
     {
         if (!$this->get($key)) {
             return false;
@@ -201,40 +202,6 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
     public function getFile($key)
     {
         return $this->options['dir'] . '/' . $key . '.tmp';
-    }
-
-    /**
-     * Removes ALL directories and files in cache directory
-     *
-     * @return Qwin_Cache
-     */
-    public function clean()
-    {
-        $this->_clean($this->options['dir']);
-        return $this;
-    }
-
-    /**
-     * Removes ALL directories and files in directory
-     *
-     * @param string $dir
-     */
-    protected function _clean($dir)
-    {
-        if (is_dir($dir)) {
-            $files = scandir($dir);
-            foreach ($files as $file) {
-                if ('.' != $file && '..' != $file) {
-                    $file = $dir . DIRECTORY_SEPARATOR .  $file;
-                    if (is_dir($file)) {
-                        $this->_clean($file);
-                    } else {
-                        unlink($file);
-                    }
-                }
-            }
-            rmdir($dir);
-        }
     }
 
     public function delete($key)

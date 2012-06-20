@@ -26,25 +26,24 @@
  * Storable
  *
  * @package     Qwin
- * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2012-5-30 0:46:34
+ * @since       2012-05-30
  */
 interface Qwin_Storable {
     public function get($key);
 
-    public function set($key, $value, $options = array());
+    public function set($key, $value, $expire = 0, array $options = array());
 
     public function remove($key);
 
-    public function add($key, $value, $options = array());
+    public function add($key, $value, $expire = 0, array $options = array());
 
-    public function replace($key, $value, $options = array());
+    public function replace($key, $value, $expire = 0, array $options = array());
 
-    public function increment($key, $offset = 1);
+    public function increment($key, $step = 1);
 
-    public function decrement($key, $offset = 1);
+    public function decrement($key, $step = 1);
 
     public function clear();
 }

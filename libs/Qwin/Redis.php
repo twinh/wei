@@ -43,7 +43,7 @@ class Qwin_Redis extends Qwin_Widget implements Qwin_Storable
     public $options = array(
         'host' => '127.0.0.1',
         'port' => 6379,
-        'timeout' => 0,
+        'timeout' => 1, // or ?
     );
 
     protected $_redisOptions = array(
