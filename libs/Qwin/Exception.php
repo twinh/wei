@@ -30,10 +30,11 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2010-04-18 11:56:29
- * @todo        code for method call
  */
 class Qwin_Exception extends Exception
 {
+    public $__invoker;
+
     public function __construct($msg = '', $code = 0)
     {
         parent::__construct($msg, (int)$code);
@@ -44,5 +45,10 @@ class Qwin_Exception extends Exception
         $args = func_get_args();
         $this->message = call_user_func_array('sprintf', $args);
         throw $this;
+    }
+
+    public function getInvokerClass()
+    {
+        return $this->__invoker ? get_class($this->__invoker) : null;
     }
 }
