@@ -23,75 +23,82 @@
  * @since       2010-05-27 07:56:33
  */
 
-class Util_Upload_Controller extends Qwin_Application_Controller
+class Qwin_Upload extends Qwin_Widget
 {
-    public function actionIndex()
+    public $options = array(
+        'name' => null,
+        'maxSize' => 0,
+        'exts' => array(),
+        'savedName' => null,
+        'savedDir' => './uploads',
+        //to
+    );
+
+    public function __invoke(array $options = array())
     {
-        /*
-         * $str = Qwin::call('Qwin_sanitise_String');
-        // 是否有上传文件
-        $name = 'userfile';
-        !isset($_FILES[$name]) && exit('Forbidden');
-        // 默认的上传路径
-        $default_path = 'upload';
+        $options = (array)$options + $this->options;
+        $this->options = &$options;
 
-        // TODO安全性检查等
-        // 获取想要上传到的目录名称
-        $path = isset($_GET['path']) ? trim($_GET['path']) : 'upload';
-        if(null != $path && is_dir($path) && $default_path == substr($path, 0, 6))
-        {
-            $path = $str->toPathSeparator($path);
-            DS == substr($path, -1, 1) && $path = substr($path, 0, -1);
+        $this->option($options);
+
+        if (!isset($_FILES[$options['name']])) {
+            return array(
+                'code' => -1,
+                'message' => 'No file uploaded',
+            );
+        }
+
+        $tmpFile = $_FILES[$options['name']]['tmp_name'];
+
+        if (!is_uploaded_file($tmpFile)) {
+            return array(
+                'code' => -2,
+                'message' => 'No file uploaded',
+            );
+        }
+
+        if ($options['maxSize'] && $_FILES[$options['name']]['size'] > $options['maxSize']) {
+            return array(
+                'code' => -3,
+                'message' => 'File too big',
+            );
+        }
+
+        $ext = pathinfo($_FILES[$options['name']]['name'], PATHINFO_EXTENSION);
+        if ($options['exts'] && !in_array($ext, (array)$options['exts'])) {
+            return array(
+                'code' => -4,
+                'message' => 'Invalid File Extension',
+            );
+        }
+
+        // todo: callable
+        if ($options['savedName']) {
+            $savedName = $options['savedName'] . '.' . $ext;
         } else {
-            $path = $default_path;
+            $savedName = $_FILES[$options['name']]['name'];
         }
 
-        // 加载上传类
-        $upload = Qwin::call('Qwin_File_Upload');
-        $upload->upload_form_field = $name;
-        $upload->max_file_size = '10000000';
-        $upload->make_script_safe = 1;
-        $upload->allowed_file_ext = array(
-            'gif', 'jpg', 'jpeg', 'png', 'bmp',
-        );
-
-        // 获取上传路径
-        $upload->out_file_dir = $path;
-        //$upload->out_file_name = time();
-        $upload->upload_process();
-
-        switch($upload->error_no)
-        {
-            case 0 :
-                $error_msg = '文件上传成功!';
-                break;
-            case 1 :
-                $error_msg = '没有文件被上传!';
-                break;
-            case 2 :
-            case 5 :
-                $error_msg = '非法文件扩展名!';
-                break;
-            case 3 :
-                $error_msg = '文件大小超过限制!';
-                break;
-            case 4 :
-                $error_msg = '无法移动的上传文件!';
-                break;
-            default :
-
+        if (!is_dir($options['savedDir'])) {
+            mkdir($options['savedDir'], 0700, true);
         }
 
+        if (@!move_uploaded_file($tmpFile, $options['savedDir'] . '/' . $savedName)) {
+            return array(
+                'code' => -5,
+                'message' => 'Can not move uploaded file',
+            );
+        }
 
-        $arr = array(
-            'file_name' => iconv('GBK', 'UTF-8', $str->toUrlSeparator($upload->saved_upload_name)),
-            //'path' => Qwin::call('-str')->toUrlSeparator($upload->out_file_dir),
-            'error' => array(
-                'num' => $upload->error_no,
-                'msg' => $error_msg,
-            )
+        return array(
+            'code' => 0,
+            'message' => 'File uploaded!',
         );
-        echo Qwin::call('-arr')->jsonEncode($arr, 'pear');
-         */
+    }
+
+    public function setNameOption($name)
+    {
+        $this->options['name'] = $name ? $name : key($_FILES);
+        return $this;
     }
 }
