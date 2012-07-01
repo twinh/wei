@@ -87,11 +87,14 @@ class Qwin extends Qwin_Widget
      *       autoload       bool        whether enable autoload or not
      *
      *       autoloadDirs   array       the direcroties of classes
+     *
+     *       classMaps      array       class maps
      */
     public $options = array(
         'inis'          => array(),
         'autoload'      => true,
         'autoloadDirs'  => array(),
+        'classMaps'     => array(),
     );
 
     /**
@@ -167,7 +170,7 @@ class Qwin extends Qwin_Widget
     /**
      * 调用一个微件
      *
-     * @param string $name 微件名称
+     * @param string $name the name of the widget, without class prefix "Qwin_"
      * @return Qwin_Widget 微件实例化对象
      */
     public function widget($name)
@@ -179,6 +182,11 @@ class Qwin extends Qwin_Widget
         }
 
         $class = 'Qwin_' . ucfirst($name);
+
+        if (isset($this->options['classMaps'][$class])) {
+            $class = $this->options['classMaps'][$class];
+        }
+
         if (class_exists($class)) {
             return $this->_widgets[$lower] = $this->__invoke($class);
         }
