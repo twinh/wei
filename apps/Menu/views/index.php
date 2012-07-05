@@ -18,7 +18,7 @@ $minify->add(array(
 jQuery(function($){
     var editUrl = '<?php echo $this->url('menu', 'edit', array('id' => '{0}')) ?>';
     var addUrl = '<?php echo $this->url('menu', 'add') ?>';
-    var deleteUrl = '<?php echo $this->url('menu', 'delete', array('id' => '{0}')) ?>';
+    var deleteUrl = '<?php echo $this->url('menu', 'delete') ?>';
 
     $('#menu-grid').jqGrid({
         datatype: 'json',
@@ -80,9 +80,13 @@ jQuery(function($){
     $('a.menu-delete').live('click', function(){
         if (confirm('确认删除?')) {
             $.ajax({
-                url: qwin.formatUrl(deleteUrl, $(this).data('id')),
+                type: 'post',
+                url: deleteUrl,
+                data: {
+                    id: $(this).data('id')
+                },
                 success: function() {
-                    $('#user-grid').trigger('reloadGrid');
+                    $('#menu-grid').trigger('reloadGrid');
                 }
             });
         }

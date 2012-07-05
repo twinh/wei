@@ -171,9 +171,9 @@ class Menu_Controller extends Qwin_Controller
 
         $menu->delete();
 
-        return array(
+        return json_encode(array(
             'code' => 0,
             'message' => 'Menu deleted successfully'
-        );
+        ));
     }
 }
