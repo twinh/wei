@@ -52,7 +52,7 @@ class Minify_Controller extends Qwin_Controller
         }
 
         // 设置缓存类型
-        Minify::setCache($this->cache->options['dir'] . 'minify/');
+        Minify::setCache($this->fcache->options['dir'] . '/');
 
         // 调试
         if ($this->config('debug')) {
@@ -66,17 +66,17 @@ class Minify_Controller extends Qwin_Controller
 
         // 获取文件
         $name = $this->get('g');
-        $file = $this->minify->getCacheFile($name);
-        if (!is_file($file)) {
-            $this->log('minify file "' . $name . '" not found.');
+        $files = $this->minify->getFiles($name);
+        if (!$files) {
+            $this->log('minify cache "' . $name . '" not found.');
             return;
         }
-        $options['minApp']['groups'][$name] = require $file;
+        $options['minApp']['groups'][$name] = $files;
 
         // 注入g变量
         $_GET['g'] = $name;
 
         // serve!
-        $result = Minify::serve('MinApp', $options);
+        return Minify::serve('MinApp', $options);
     }
 }
