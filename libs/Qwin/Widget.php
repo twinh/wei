@@ -140,6 +140,6 @@ class Qwin_Widget implements Qwin_Widgetable
         return $widget;
     }
 
-    // would be implemented by subclasses
+    // should be implemented by subclasses
     //public function __invoke();
 }
