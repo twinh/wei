@@ -32,7 +32,7 @@ require_once 'Qwin/Widget.php';
  *
  * @package     Qwin
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @author      Twin Huang <twinh@yaho 10:39:18o.cn>
+ * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2010-04-26
  */
 class Qwin extends Qwin_Widget
