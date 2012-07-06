@@ -164,6 +164,9 @@ class Qwin_Error extends Qwin_Widget
 
             $session = $this->getSession();
 
+            // Response Information
+            $response = $this->getResponse();
+
             // Server Environment
             $server = $this->getServer();
 
@@ -399,5 +402,30 @@ class Qwin_Error extends Qwin_Widget
         }
 
         return $session;
+    }
+
+    /**
+     * Get response information for html output
+     *
+     * @return array
+     */
+    public function getResponse()
+    {
+        if (function_exists('apache_response_headers')) {
+            $headers = apache_response_headers();
+        } else {
+            $headers = array();
+
+            foreach (headers_list() as $header) {
+                $pos = strpos($header, ':');
+                $headers[substr($header, 0, $pos)] = trim(substr($header, $pos + 1));
+            }
+        }
+
+        foreach ($headers as &$header) {
+            $header = htmlspecialchars($header, ENT_QUOTES);
+        }
+
+        return $headers;
     }
 }

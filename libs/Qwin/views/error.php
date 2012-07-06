@@ -170,6 +170,22 @@ ol, ul, li {
             </table>
         </div>
         <div class="message-box">
+            <h2>Response Information</h2>
+            <table>
+
+                <?php
+                foreach ($response as $key => $value) :
+                    ?>
+                    <tr>
+                        <th><?php echo $key ?></th>
+                        <td><?php echo $value ?></td>
+                    </tr>
+                    <?php
+                endforeach;
+                ?>
+            </table>
+        </div>
+        <div class="message-box">
             <h2>Session Information</h2>
             <table>
                 <?php
