@@ -33,10 +33,6 @@
  */
 class Qwin_Apc extends Qwin_Widget implements Qwin_Storable
 {
-    protected $_apcOptions = array(
-        'expire' => 0,
-    );
-
     public function __construct(array $options = array())
     {
         if (!extension_loaded('apc')) {
@@ -53,9 +49,9 @@ class Qwin_Apc extends Qwin_Widget implements Qwin_Storable
      * @param string $key
      * @return mixed
      */
-    public function get($key)
+    public function get($key, $options = null)
     {
-        return apc_fetch($key);
+        return apc_fetch($key, $options);
     }
 
     /**
@@ -66,10 +62,9 @@ class Qwin_Apc extends Qwin_Widget implements Qwin_Storable
      * @param array $options
      * @return bool
      */
-    public function set($key, $value, $options = array())
+    public function set($key, $value, $expire = 0, array $options = array())
     {
-        $options = $options + $this->_apcOptions;
-        return apc_store($key, $value, $options['expire']);
+        return apc_store($key, $value, $expire);
     }
 
     /**
@@ -83,18 +78,16 @@ class Qwin_Apc extends Qwin_Widget implements Qwin_Storable
         return apc_delete($key);
     }
 
-    public function add($key, $value, $options = array())
+    public function add($key, $value, $expire = 0, array $options = array())
     {
-        $options = $options + $this->_apcOptions;
-        return apc_add($key, $value, $options['expire']);
+        return apc_add($key, $value, $expire);
     }
 
-    public function replace($key, $value, $options = array())
+    public function replace($key, $value, $expire = 0, array $options = array())
     {
         apc_fetch($key, $success);
         if ($success) {
-            $options = $options + $this->_apcOptions;
-            return apc_store($key, $value, $options['expire']);
+            return apc_store($key, $value, $expire);
         } else {
             return false;
         }

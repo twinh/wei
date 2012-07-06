@@ -109,10 +109,10 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
      * @param string $key the key of cache
      * @return mixed|false
      */
-    public function get($key)
+    public function get($key, $options = null)
     {
         $file = $this->getFile($key);
-        
+
         if (!is_file($file)) {
             return false;
         }
