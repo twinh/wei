@@ -31,7 +31,7 @@
  * @since       2012-05-30
  */
 interface Qwin_Storable {
-    public function get($key);
+    public function get($key, $options = null);
 
     public function set($key, $value, $expire = 0, array $options = array());
 

@@ -38,10 +38,6 @@ class Qwin_Xcache extends Qwin_Widget implements Qwin_Storable
         'pass' => null,
     );
 
-    protected $_xcacheOptions = array(
-        'expire' => 0,
-    );
-
     public function __construct(array $options = array())
     {
         parent::__construct($options);
@@ -50,17 +46,16 @@ class Qwin_Xcache extends Qwin_Widget implements Qwin_Storable
         }
     }
 
-    public function add($key, $value, array $options = array())
+    public function add($key, $value, $expore = 0, array $options = array())
     {
         if (xcache_isset($key)) {
             return false;
         }
 
-        $o = $options + $this->_xcacheOptions;
-        return xcache_set($key, $value, $o['expire']);
+        return xcache_set($key, $value, $expore);
     }
 
-    public function get($key)
+    public function get($key, $options = null)
     {
         return xcache_get($key);
     }
@@ -80,20 +75,18 @@ class Qwin_Xcache extends Qwin_Widget implements Qwin_Storable
         return xcache_unset($key);
     }
 
-    public function replace($key, $value, $options = array())
+    public function replace($key, $value, $expore = 0, array $options = array())
     {
         if (!xcache_isset($key)) {
             return false;
         }
 
-        $o = $options + $this->_xcacheOptions;
-        return xcache_set($key, $value, $o['expire']);
+        return xcache_set($key, $value, $expore);
     }
 
-    public function set($key, $value, $options = array())
+    public function set($key, $value, $expire = 0, array $options = array())
     {
-        $o = $options + $this->_xcacheOptions;
-        return xcache_set($key, $value, $o['expire']);
+        return xcache_set($key, $value, $expire);
     }
 
     public function clear()

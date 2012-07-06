@@ -46,10 +46,6 @@ class Qwin_Redis extends Qwin_Widget implements Qwin_Storable
         'timeout' => 1, // or ?
     );
 
-    protected $_redisOptions = array(
-        'expire' => 0,
-    );
-
     public function __construct(array $options = array())
     {
         $options = $options + $this->options;
@@ -64,25 +60,23 @@ class Qwin_Redis extends Qwin_Widget implements Qwin_Storable
         return $this;
     }
 
-    public function get($key)
+    public function get($key, $options = null)
     {
         return $this->_object->get($key);
     }
 
-    public function set($key, $value, $options = array())
+    public function set($key, $value, $expire = 0, array $options = array())
     {
-        $o = $options + $this->_redisOptions;
-        return $this->_object->set($key, $value, $o['expire']);
+        return $this->_object->set($key, $value, $expire);
     }
 
-    public function add($key, $value, $options = array())
+    public function add($key, $value, $expire = 0, array $options = array())
     {
         if ($this->_object->exists($key)) {
             return false;
         }
 
-        $o = $options + $this->_redisOptions;
-        return $this->_object->set($key, $value, $o['expire']);
+        return $this->_object->set($key, $value, $expire);
     }
 
     public function clear()
@@ -105,13 +99,22 @@ class Qwin_Redis extends Qwin_Widget implements Qwin_Storable
         return $this->_object->del($key);
     }
 
-    public function replace($key, $value, $options = array())
+    public function replace($key, $value, $expire = 0, array $options = array())
     {
         if (!$this->_object->exists($key)) {
             return false;
         }
 
-        $o = $options + $this->_redisOptions;
-        return $this->_object->set($key, $value, $o['expire']);
+        return $this->_object->set($key, $value, $expire);
+    }
+
+    /**
+     * Get redis object
+     *
+     * @return Redis
+     */
+    public function getObject()
+    {
+        return $this->_object;
     }
 }

@@ -39,8 +39,7 @@ class Qwin_Memcache extends Qwin_Widget implements Qwin_Storable
     );
 
     protected $_memcacheOptions = array(
-        'flag' => 0,
-        'expire' => 0,
+        'flag' => MEMCACHE_COMPRESSED,
     );
 
     /**
@@ -59,15 +58,15 @@ class Qwin_Memcache extends Qwin_Widget implements Qwin_Storable
         $this->_memcache->connect($options['host'], $options['port']);
     }
 
-    public function get($key)
+    public function get($key, $options = null)
     {
-        return $this->_memcache->get($key);
+        return $this->_memcache->get($key, $options);
     }
 
-    public function set($key, $value, $options = array())
+    public function set($key, $value, $expire = 0, array $options = array())
     {
         $o = $options + $this->_memcacheOptions;
-        return $this->_memcache->set($key, $value, $o['flag'], $o['expire']);
+        return $this->_memcache->set($key, $value, $o['flag'], $expire);
     }
 
     public function remove($key)
@@ -75,24 +74,24 @@ class Qwin_Memcache extends Qwin_Widget implements Qwin_Storable
         return $this->_memcache->delete($key);
     }
 
-    public function add($key, $value, $options = array())
+    public function add($key, $value, $expire = 0, array $options = array())
     {
         $o = $options + $this->_memcacheOptions;
-        return $this->_memcache->add($key, $value, $o['flag'], $o['expire']);
+        return $this->_memcache->add($key, $value, $o['flag'], $expire);
     }
 
-    public function replace($key, $value, $options = array())
+    public function replace($key, $value, $expire = 0, array $options = array())
     {
         $o = $options + $this->_memcacheOptions;
-        return $this->_memcache->replace($key, $value, $o['flag'], $o['expire']);
+        return $this->_memcache->replace($key, $value, $o['flag'], $expire);
     }
 
-    public function increment($key, $offset)
+    public function increment($key, $offset = 1)
     {
         return $this->_memcache->increment($key, $offset);
     }
 
-    public function decrement($key, $offset)
+    public function decrement($key, $offset = 1)
     {
         return $this->_memcache->decrement($key, $offset);
     }
