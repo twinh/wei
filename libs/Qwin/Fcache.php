@@ -74,11 +74,12 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
                 // how to test it ?
                 // @codeCoverageIgnoreStart
                 umask($mask);
-                return $this->error('Failed to creat directory: ' . $dir );
+                return $this->error('Failed to create directory: ' . $dir );
                 // @codeCoverageIgnoreEnd
             }
             umask($mask);
         }
+        $this->options['dir'] = $dir;
         return $this;
     }
 
