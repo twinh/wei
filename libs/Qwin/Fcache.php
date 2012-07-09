@@ -34,12 +34,24 @@
 class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
 {
     /**
-     * @var array Options
+     * Options
      *
-     *       dir    string  Cache dir
+     * @var array
+     *
+     *       dir    string  Cache directory
      */
     public $options = array(
         'dir'       => './cache',
+    );
+
+    /**
+     * Illegal chars as the name of cache, would be replaced to "_"
+     *
+     * @var array
+     * @todo others chars ?
+     */
+    protected $_illegalChars = array(
+        '\\', '/', ':', '?', '"', '<', '>', '|', "\r", "\n"
     );
 
     public function __construct($options = null)
@@ -90,9 +102,9 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
     /**
      * Add cache, if cache is exists, return false
      *
-     * @param string $key the key of cache
+     * @param string $key the name of cache
      * @param mixed $value the value of cache
-     * @param int $expire expire time
+     * @param int $expire expire time (seconds)
      * @return bool
      */
     public function add($key, $value, $expire = 0, array $options = array())
@@ -106,7 +118,7 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
     /**
      * Get cache
      *
-     * @param string $key the key of cache
+     * @param string $key the name of cache
      * @return mixed|false
      */
     public function get($key, $options = null)
@@ -128,7 +140,7 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
     /**
      * Set cache
      *
-     * @param string $key the key of cache
+     * @param string $key the name of cache
      * @param value $value the value of cache
      * @param int $expire expire time, 0 means never expired
      * @return bool
@@ -143,16 +155,15 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
         $content = serialize(array(
             0 => $expire ? time() + $expire : 2147483647,
             1 => $value,
-            2 => $key,
         ));
 
-        return (bool)file_put_contents($file, $content);
+        return (bool)file_put_contents($file, $content, LOCK_EX);
     }
 
     /**
      * Replace cache, if cache not exists, return false
      *
-     * @param string $key the key of cache
+     * @param string $key the name of cache
      * @param mixed $value the value of cache
      * @param int $expire expire time
      * @return bool
@@ -168,7 +179,7 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
     /**
      * Remove cache by key
      *
-     * @param string $key
+     * @param string $key the name of cache
      * @return bool
      */
     public function remove($key)
@@ -183,48 +194,96 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
     }
 
     /**
-     * Check if cache file expired
-     *
-     * @param string $key 名称
-     * @return bool
-     */
-    public function isExpired($key)
-    {
-        return $this->get($key) ? false : true;
-    }
-
-    /**
-     * Get cache file by cache key
+     * Get cache file by key
      *
      * @param string $key
      * @return string
      */
     public function getFile($key)
     {
+        $key = str_replace($this->_illegalChars, '_', $key);
         return $this->options['dir'] . '/' . $key . '.tmp';
     }
 
-    public function delete($key)
+    /**
+     * Increase a numerical cache
+     *
+     * @param string $key the name of cache
+     * @param int $offset the value to decrease
+     * @return int|false
+     */
+    public function increment($key, $offset = 1)
     {
         $file = $this->getFile($key);
 
-        return unlink($file);
+        if (!is_file($file)) {
+            return false;
+        }
+
+        // open file for reading and rewiting
+        if (!$handle = fopen($file , 'r+b')) {
+            return false;
+        }
+
+        // lock for rewiting
+        if (!flock($handle, LOCK_EX)) {
+            return false;
+        }
+
+        // read content
+        $content = fread($handle, filesize($file));
+        $content = @unserialize($content);
+
+        // check if content is valid
+        if (!$content || !is_array($content) || time() > $content[0]) {
+            return false;
+        }
+
+        if (!is_numeric($content[1])) {
+            return false;
+        }
+
+        // prepare file content
+        $content[1] += $offset;
+        $result = $content[1];
+        $content = serialize($content);
+
+        // rewrite content
+        rewind($handle);
+        if (false === fwrite($handle, $content)) {
+            return false;
+        }
+        flock($handle, LOCK_UN);
+        fclose($handle);
+
+        return $result;
     }
 
+    /**
+     * Decrease a numerical cache
+     *
+     * @param string $key the name of cache
+     * @param int $offset the value to decrease
+     * @return int|false
+     */
     public function decrement($key, $offset = 1)
     {
-        return $this->set($key, $this->get($key) + $offset);
+        return $this->increment($key, -$offset);
     }
 
-    public function increment($key, $offset = 1)
-    {
-        return $this->set($key, $this->get($key) - $offset);
-    }
-
+    /**
+     * Clear all cache
+     *
+     * @return boolean
+     */
     public function clear()
     {
+        $result = true;
+
         foreach(glob($this->options['dir']. '/' . '*.tmp') as $file){
-            @unlink($file);
+            $result = $result && @unlink($file);
         }
+
+        return $result;
     }
 }
