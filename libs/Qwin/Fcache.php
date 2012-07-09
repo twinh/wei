@@ -132,6 +132,7 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
 
         $content = @unserialize(file_get_contents($file));
         if (!$content || !is_array($content) || time() > $content[0]) {
+            $this->remove($key);
             return false;
         }
 
