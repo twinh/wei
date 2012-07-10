@@ -101,22 +101,6 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
     }
 
     /**
-     * Add cache, if cache is exists, return false
-     *
-     * @param string $key the name of cache
-     * @param mixed $value the value of cache
-     * @param int $expire expire time (seconds)
-     * @return bool
-     */
-    public function add($key, $value, $expire = 0, array $options = array())
-    {
-        if ($this->get($key)) {
-            return false;
-        }
-        return $this->set($key, $value, $expire);
-    }
-
-    /**
      * Get cache
      *
      * @param string $key the name of cache
@@ -163,6 +147,80 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
     }
 
     /**
+     * Add cache, if cache is exists, return false
+     *
+     * @param string $key the name of cache
+     * @param mixed $value the value of cache
+     * @param int $expire expire time (seconds)
+     * @return bool
+     */
+    public function add($key, $value, $expire = 0, array $options = array())
+    {
+        $file = $this->getFile($key);
+
+        if (!is_file($file)) {
+            // open file for rewriting
+            if (!$handle = fopen($file , 'wb')) {
+                return false;
+            }
+
+            // lock for writing
+            if (!flock($handle, LOCK_EX | LOCK_NB)) {
+                fclose($handle);
+                return false;
+            }
+
+            // prepare content
+            $content = serialize(array(
+                0 => $expire ? time() + $expire : 2147483647,
+                1 => $value,
+            ));
+
+            $result = fwrite($handle, $content);
+            flock($handle, LOCK_UN);
+            fclose($handle);
+
+            return (bool)$result;
+        } else {
+            // open file for reading and rewriting
+            if (!$handle = fopen($file , 'r+b')) {
+                return false;
+            }
+
+            // lock for rewriting
+            if (!flock($handle, LOCK_EX)) {
+                fclose($handle);
+                return false;
+            }
+
+            // read content
+            $content = fread($handle, filesize($file));
+            $content = @unserialize($content);
+
+            // check if content is valid
+            if (!$content || !is_array($content) || time() > $content[0]) {
+
+                // prepare content
+                $content = serialize(array(
+                    0 => $expire ? time() + $expire : 2147483647,
+                    1 => $value,
+                ));
+
+                // rewrite content
+                rewind($handle);
+                $result = fwrite($handle, $content);
+                flock($handle, LOCK_UN);
+                fclose($handle);
+
+                return (bool)$result;
+            }
+
+            // cache is not expired
+            return false;
+        }
+    }
+
+    /**
      * Replace cache, if cache not exists, return false
      *
      * @param string $key the name of cache
@@ -172,10 +230,45 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
      */
     public function replace($key, $value, $expire = 0, array $options = array())
     {
-        if (!$this->get($key)) {
+        $file = $this->getFile($key);
+
+        if (!is_file($file)) {
             return false;
         }
-        return $this->set($key, $value, $expire);
+
+        // open file for reading and rewriting
+        if (!$handle = fopen($file , 'r+b')) {
+            return false;
+        }
+
+        // lock for rewriting
+        if (!flock($handle, LOCK_EX)) {
+            fclose($handle);
+            return false;
+        }
+
+        // read content
+        $content = fread($handle, filesize($file));
+        $content = @unserialize($content);
+
+        // check if content is valid
+        if (!$content || !is_array($content) || time() > $content[0]) {
+            return false;
+        }
+
+        // prepare content
+        $content = serialize(array(
+            0 => $expire ? time() + $expire : 2147483647,
+            1 => $value,
+        ));
+
+        // rewrite content
+        rewind($handle);
+        $result = fwrite($handle, $content);
+        flock($handle, LOCK_UN);
+        fclose($handle);
+
+        return (bool)$result;
     }
 
     /**
@@ -222,13 +315,14 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
             return false;
         }
 
-        // open file for reading and rewiting
+        // open file for reading and rewriting
         if (!$handle = fopen($file , 'r+b')) {
             return false;
         }
 
-        // lock for rewiting
+        // lock for rewriting
         if (!flock($handle, LOCK_EX)) {
+            fclose($handle);
             return false;
         }
 
@@ -238,6 +332,7 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
 
         // check if content is valid
         if (!$content || !is_array($content) || time() > $content[0]) {
+            fclose($handle);
             return false;
         }
 
@@ -252,13 +347,11 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
 
         // rewrite content
         rewind($handle);
-        if (false === fwrite($handle, $content)) {
-            return false;
-        }
+        $result = fwrite($handle, $content);
         flock($handle, LOCK_UN);
         fclose($handle);
 
-        return $result;
+        return (bool)$result;
     }
 
     /**
