@@ -115,12 +115,12 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
         }
 
         $content = @unserialize(file_get_contents($file));
-        if (!$content || !is_array($content) || time() > $content[0]) {
+        if ($content && is_array($content) && time() < $content[0]) {
+            return $content[1];
+        } else {
             $this->remove($key);
             return false;
         }
-
-        return $content[1];
     }
 
     /**
@@ -135,13 +135,7 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
     {
         $file = $this->getFile($key);
 
-        // 2147483647 = pow(2, 31) - 1
-        // avoid year 2038 problem in 32-bit system when date coverts or compares
-        // @see http://en.wikipedia.org/wiki/Year_2038_problem
-        $content = serialize(array(
-            0 => $expire ? time() + $expire : 2147483647,
-            1 => $value,
-        ));
+        $content = $this->_prepareContent($value, $expire);
 
         return (bool)file_put_contents($file, $content, LOCK_EX);
     }
@@ -159,64 +153,29 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
         $file = $this->getFile($key);
 
         if (!is_file($file)) {
-            // open file for rewriting
-            if (!$handle = fopen($file , 'wb')) {
+            // open and try to lock file immediately
+            if (!$handle = $this->_openAndLock($file, 'wb', LOCK_EX | LOCK_NB)) {
                 return false;
             }
 
-            // lock for writing
-            if (!flock($handle, LOCK_EX | LOCK_NB)) {
-                fclose($handle);
-                return false;
-            }
+            $content = $this->_prepareContent($value, $expire);
 
-            // prepare content
-            $content = serialize(array(
-                0 => $expire ? time() + $expire : 2147483647,
-                1 => $value,
-            ));
-
-            $result = fwrite($handle, $content);
-            flock($handle, LOCK_UN);
-            fclose($handle);
-
-            return (bool)$result;
+            return $this->_writeAndRelease($handle, $content);
         } else {
             // open file for reading and rewriting
-            if (!$handle = fopen($file , 'r+b')) {
+            if (!$handle = $this->_openAndLock($file, 'r+b', LOCK_EX)) {
                 return false;
-            }
-
-            // lock for rewriting
-            if (!flock($handle, LOCK_EX)) {
-                fclose($handle);
-                return false;
-            }
-
-            // read content
-            $content = fread($handle, filesize($file));
-            $content = @unserialize($content);
-
-            // check if content is valid
-            if (!$content || !is_array($content) || time() > $content[0]) {
-
-                // prepare content
-                $content = serialize(array(
-                    0 => $expire ? time() + $expire : 2147483647,
-                    1 => $value,
-                ));
-
-                // rewrite content
-                rewind($handle);
-                $result = fwrite($handle, $content);
-                flock($handle, LOCK_UN);
-                fclose($handle);
-
-                return (bool)$result;
             }
 
             // cache is not expired
-            return false;
+            if ($this->_readAndVerify($handle, $file)) {
+                fclose($handle);
+                return false;
+            }
+
+            $content = $this->_prepareContent($value, $expire);
+
+            return $this->_writeAndRelease($handle, $content, true);
         }
     }
 
@@ -237,38 +196,18 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
         }
 
         // open file for reading and rewriting
-        if (!$handle = fopen($file , 'r+b')) {
+        if (!$handle = $this->_openAndLock($file, 'r+b', LOCK_EX)) {
             return false;
         }
 
-        // lock for rewriting
-        if (!flock($handle, LOCK_EX)) {
+        if (!$this->_readAndVerify($handle, $file)) {
             fclose($handle);
             return false;
         }
 
-        // read content
-        $content = fread($handle, filesize($file));
-        $content = @unserialize($content);
+        $content = $this->_prepareContent($value, $expire);
 
-        // check if content is valid
-        if (!$content || !is_array($content) || time() > $content[0]) {
-            return false;
-        }
-
-        // prepare content
-        $content = serialize(array(
-            0 => $expire ? time() + $expire : 2147483647,
-            1 => $value,
-        ));
-
-        // rewrite content
-        rewind($handle);
-        $result = fwrite($handle, $content);
-        flock($handle, LOCK_UN);
-        fclose($handle);
-
-        return (bool)$result;
+        return $this->_writeAndRelease($handle, $content, true);
     }
 
     /**
@@ -316,22 +255,11 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
         }
 
         // open file for reading and rewriting
-        if (!$handle = fopen($file , 'r+b')) {
+        if (!$handle = $this->_openAndLock($file, 'r+b', LOCK_EX)) {
             return false;
         }
 
-        // lock for rewriting
-        if (!flock($handle, LOCK_EX)) {
-            fclose($handle);
-            return false;
-        }
-
-        // read content
-        $content = fread($handle, filesize($file));
-        $content = @unserialize($content);
-
-        // check if content is valid
-        if (!$content || !is_array($content) || time() > $content[0]) {
+        if (!$content = $this->_readAndVerify($handle, $file)) {
             fclose($handle);
             return false;
         }
@@ -341,17 +269,15 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
         }
 
         // prepare file content
-        $content[1] += $offset;
-        $result = $content[1];
+        $result = $content[1] += $offset;
         $content = serialize($content);
 
         // rewrite content
-        rewind($handle);
-        $result = fwrite($handle, $content);
-        flock($handle, LOCK_UN);
-        fclose($handle);
-
-        return (bool)$result;
+        if ($this->_writeAndRelease($handle, $content, true)) {
+            return $result;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -380,5 +306,89 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
         }
 
         return $result;
+    }
+
+    /**
+     * Open and lock file
+     *
+     * @param string $file file path
+     * @param string $mode open mode
+     * @param int $operation lock operation
+     * @return false|resource false or file handle
+     */
+    protected function _openAndLock($file, $mode, $operation)
+    {
+        if (!$handle = fopen($file , $mode)) {
+            return false;
+        }
+
+        if (!flock($handle, $operation)) {
+            fclose($handle);
+            return false;
+        }
+
+        return $handle;
+    }
+
+    /**
+     * Read file by handle and verify if content is expired
+     *
+     * @param resource $handle file handle
+     * @param string $file file path
+     * @return false|array false or file content array
+     */
+    protected function _readAndVerify($handle, $file)
+    {
+        // read all content
+        $content = fread($handle, filesize($file));
+        $content = @unserialize($content);
+
+        // check if content is valid
+        if ($content && is_array($content) && time() < $content[0]) {
+            return $content;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Prepare content for writing
+     *
+     * @param string $content the value of cache
+     * @param int $expire expire time
+     * @return string file content
+     */
+    protected function _prepareContent($content, $expire)
+    {
+        // 2147483647 = pow(2, 31) - 1
+        // avoid year 2038 problem in 32-bit system when date coverts or compares
+        // @see http://en.wikipedia.org/wiki/Year_2038_problem
+        return serialize(array(
+            0 => $expire ? time() + $expire : 2147483647,
+            1 => $content,
+        ));
+    }
+
+    /**
+     * Write content, release lock and close file
+     *
+     * @param resouce $handle file handle
+     * @param string $content the value of cache
+     * @param bool $rewirte whether rewrite the whole file
+     * @return boolen
+     */
+    protected function _writeAndRelease($handle, $content, $rewirte = false)
+    {
+        if ($rewirte) {
+            rewind($handle);
+        }
+
+        $result = fwrite($handle, $content);
+
+        flock($handle, LOCK_UN);
+
+        fclose($handle);
+
+        return (bool)$result;
     }
 }
