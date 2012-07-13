@@ -64,13 +64,6 @@ class Qwin extends Qwin_Widget
     protected $_config = array();
 
     /**
-     * Backup of gloabal variable $q
-     *
-     * @var mixed
-     */
-    public $globalQ;
-
-    /**
      * The instance of Qwin
      *
      * @var Qwin
@@ -121,12 +114,6 @@ class Qwin extends Qwin_Widget
             $this->options = $config[__CLASS__] + $this->options;
         }
         $options = &$this->options;
-
-        // define global variable $q
-        if (isset($GLOBALS['q'])) {
-            $this->globalQ = &$GLOBALS['q'];
-        }
-        $GLOBALS['q'] = $this;
 
         // set library directory as the second include path
         $file = dirname(__FILE__);
