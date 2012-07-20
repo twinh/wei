@@ -69,15 +69,12 @@ class Qwin_Fcache extends Qwin_Widget implements Qwin_Storable
     public function setDirOption($dir)
     {
         if (!is_dir($dir)) {
-            $mask = umask(0);
-            if (!@mkdir($dir, 0777, true)) {
-                // how to test it ?
-                // @codeCoverageIgnoreStart
-                umask($mask);
-                return $this->error('Failed to create directory: ' . $dir );
-                // @codeCoverageIgnoreEnd
+            // @codeCoverageIgnoreStart
+            if (!@mkdir($dir, 0644, true)) {
+                return $this->exception('Failed to create directory: ' . $dir );
             }
-            umask($mask);
+            chmod($dir, 0644);
+            // @codeCoverageIgnoreEnd
         }
         $this->options['dir'] = $dir;
         return $this;
