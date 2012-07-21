@@ -36,7 +36,7 @@ class Qwin_Apc extends Qwin_Widget implements Qwin_Storable
     public function __construct(array $options = array())
     {
         if (!extension_loaded('apc')) {
-            throw new Qwin_Exception('Extension "apc" is not loaded.');
+            $this->exception('Extension "apc" is not loaded.');
         }
 
         $options = $options + $this->options;
@@ -44,10 +44,27 @@ class Qwin_Apc extends Qwin_Widget implements Qwin_Storable
     }
 
     /**
-     *  Get cache
+     * Get or set cache
      *
-     * @param string $key
-     * @return mixed
+     * @param string $key the name of cache
+     * @param mixed $value
+     * @param int $expire expire time for set cache
+     * @return Qwin_Apc
+     */
+    public function __invoke($key, $value = null, $expire = 0)
+    {
+        if (1 == func_num_args()) {
+            return $this->get($key);
+        } else {
+            return $this->set($key, $value, $expire);
+        }
+    }
+
+    /**
+     * Get cache
+     *
+     * @param string $key the name of cache
+     * @return mixed|false
      */
     public function get($key, $options = null)
     {
@@ -57,9 +74,9 @@ class Qwin_Apc extends Qwin_Widget implements Qwin_Storable
     /**
      * Set cache
      *
-     * @param string $key
-     * @param mixed $value
-     * @param array $options
+     * @param string $key the name of cache
+     * @param value $value the value of cache
+     * @param int $expire expire time, 0 means never expired
      * @return bool
      */
     public function set($key, $value, $expire = 0, array $options = array())
@@ -68,9 +85,9 @@ class Qwin_Apc extends Qwin_Widget implements Qwin_Storable
     }
 
     /**
-     * Remove cache
+     * Remove cache by key
      *
-     * @param string $key
+     * @param string $key the name of cache
      * @return bool
      */
     public function remove($key)
@@ -78,11 +95,27 @@ class Qwin_Apc extends Qwin_Widget implements Qwin_Storable
         return apc_delete($key);
     }
 
+    /**
+     * Add cache, if cache is exists, return false
+     *
+     * @param string $key the name of cache
+     * @param mixed $value the value of cache
+     * @param int $expire expire time
+     * @return bool
+     */
     public function add($key, $value, $expire = 0, array $options = array())
     {
         return apc_add($key, $value, $expire);
     }
 
+    /**
+     * Replace cache, if cache not exists, return false
+     *
+     * @param string $key the name of cache
+     * @param mixed $value the value of cache
+     * @param int $expire expire time
+     * @return bool
+     */
     public function replace($key, $value, $expire = 0, array $options = array())
     {
         apc_fetch($key, $success);
@@ -93,16 +126,35 @@ class Qwin_Apc extends Qwin_Widget implements Qwin_Storable
         }
     }
 
+    /**
+     * Increase a numerical cache
+     *
+     * @param string $key the name of cache
+     * @param int $offset the value to decrease
+     * @return int|false
+     */
     public function increment($key, $offset = 1)
     {
         return apc_inc($key, $offset);
     }
 
+    /**
+     * Decrease a numerical cache
+     *
+     * @param string $key the name of cache
+     * @param int $offset the value to decrease
+     * @return int|false
+     */
     public function decrement($key, $offset = 1)
     {
         return apc_dec($key, $offset);
     }
 
+    /**
+     * Clear all user apc cache
+     *
+     * @return boolean
+     */
     public function clear()
     {
         return apc_clear_cache('user');
