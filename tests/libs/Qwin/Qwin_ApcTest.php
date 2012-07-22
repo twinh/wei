@@ -18,6 +18,10 @@ class Qwin_ApcTest extends PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
+        if (!extension_loaded('apc')) {
+            $this->markTestSkipped('Extension "apc" is not loaded.');
+        }
+
         $this->object = Qwin::getInstance()->apc;
     }
 
@@ -31,6 +35,7 @@ class Qwin_ApcTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @covers Qwin_Apc::get
+     * @covers Qwin_Apc::remove
      * @covers Qwin_Apc::__construct
      */
     public function testGet() {
@@ -46,9 +51,20 @@ class Qwin_ApcTest extends PHPUnit_Framework_TestCase {
 
         $this->assertFalse($widget->get('test'), 'cache has been removed');
 
-        $widget->set('test', __METHOD__, array('expire' => -1));
+        $widget->set('test', __METHOD__, -1);
 
         $this->assertFalse($widget->get('test'), 'cache is expired');
+    }
+
+    /**
+     * @covers Qwin_Apc::__invoke
+     */
+    public function test__invoke() {
+        $widget = $this->object;
+
+        $widget->apc(__METHOD__, true);
+
+        $this->assertEquals(true, $widget->apc(__METHOD__));
     }
 
     /**
@@ -65,60 +81,82 @@ class Qwin_ApcTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testDelete().
-     */
-    public function testDelete() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testAdd().
+     * @covers Qwin_Apc::add
      */
     public function testAdd() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget->remove(__METHOD__);
+
+        $this->assertTrue($widget->add(__METHOD__, true));
+
+        $widget->set(__METHOD__ . 'key', true);
+
+        $this->assertFalse($widget->add(__METHOD__ . 'key', true));
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testReplace().
+     * @covers Qwin_Apc::replace
      */
     public function testReplace() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget->remove(__METHOD__);
+
+        $this->assertFalse($widget->replace(__METHOD__, true));
+
+        $widget->set(__METHOD__ . 'key', 'value');
+
+        $this->assertTrue($widget->replace(__METHOD__ . 'key', true));
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testIncrement().
+     * @covers Qwin_Apc::increment
      */
     public function testIncrement() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget->set(__METHOD__, 1);
+
+        $widget->increment(__METHOD__);
+
+        $this->assertEquals($widget->get(__METHOD__), 2);
+
+        $widget->remove(__METHOD__);
+
+        $result = $widget->increment(__METHOD__);
+
+        $this->assertFalse($result, 'increment not found key');
+
+        $widget->set(__METHOD__, 'string');
+
+        $this->assertFalse($widget->increment(__METHOD__), 'not number key');
     }
 
     /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testDecrement().
+     * @covers Qwin_Apc::decrement
      */
     public function testDecrement() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $widget = $this->object;
+
+        $widget->set(__METHOD__, 1);
+
+        $widget->decrement(__METHOD__);
+
+        $this->assertEquals($widget->get(__METHOD__), 0);
     }
 
-}
+    /**
+     * @covers Qwin_Apc::clear
+     */
+    public function testClear()
+    {
+        $widget = $this->object;
 
-?>
+        $widget->set(__METHOD__, true);
+
+        $widget->clear();
+
+        $this->assertFalse($widget->get(__METHOD__), 'cache not found');
+    }
+}
