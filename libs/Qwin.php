@@ -143,7 +143,7 @@ class Qwin extends Qwin_Widget
      */
     public function autoload($class)
     {
-        $class = strtr($class, array('_' => DIRECTORY_SEPARATOR));
+        $class = strtr($class, array('_' => DIRECTORY_SEPARATOR, '\\' => DIRECTORY_SEPARATOR));
         foreach ($this->options['autoloadDirs'] as $dir) {
             $file = $dir . $class . '.php';
             if (file_exists($file)) {
@@ -155,10 +155,10 @@ class Qwin extends Qwin_Widget
     }
 
     /**
-     * 调用一个微件
+     * Call a widget
      *
      * @param string $name the name of the widget, without class prefix "Qwin_"
-     * @return Qwin_Widget 微件实例化对象
+     * @return Qwin_Widget the widget object
      */
     public function widget($name)
     {
@@ -182,11 +182,11 @@ class Qwin extends Qwin_Widget
     }
 
     /**
-     * 初始化一个类
+     * Instance a class
      *
-     * @param string $name 类名
+     * @param string $name class name
      * @param null|array $param 类初始化时的参数,以数组的形式出现
-     * @return false|object 失败或类对象
+     * @return false|object false or the instance object
      * @todo reanem to instance ?
      */
     public function __invoke($name, $param = null)
@@ -199,7 +199,7 @@ class Qwin extends Qwin_Widget
             return false;
         }
 
-        // 获取参数
+        // get class parameters
         $param = null !== $param ? $param : $this->config($name);
         !is_array($param) && $param = (array)$param;
 
@@ -238,12 +238,12 @@ class Qwin extends Qwin_Widget
     }
 
     /**
-     * 获取/设置配置
+     * Get ot set config
      *
      * @param mixed $name 配置的值,多级用'/'分开
      * @param mixed $param 配置内容
      * @return mixed
-     * @example $this->config();                 // 获取所有配置
+     * @example $this->config();                 // get all config
      *          $this->config('className');      // 获取此项的配置,建议为类名
      *          $this->config('array');          // 设定该数组为全局配置
      *          $this->config('name', 'param');  // 设定项为name的配置为param
@@ -329,7 +329,7 @@ class Qwin extends Qwin_Widget
      *
      * @param Qwin_Widget $invoker the invker widget object
      * @param string $name the name of the widget
-     * @param array $args the arguments for "call" method
+     * @param array $args the arguments for "__invoke" method
      * @return mixed
      */
     public function invokeWidget(Qwin_Widget $invoker, $name, $args)
