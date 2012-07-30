@@ -29,7 +29,7 @@
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2012-06-07 21:38:16
+ * @since       2012-06-07
  */
 class Qwin_Redis extends Qwin_Widget implements Qwin_Storable
 {
@@ -40,72 +40,158 @@ class Qwin_Redis extends Qwin_Widget implements Qwin_Storable
      */
     protected $_object;
 
+    /**
+     * Options
+     * 
+     * @var array
+     */
     public $options = array(
         'host' => '127.0.0.1',
         'port' => 6379,
-        'timeout' => 1, // or ?
+        'timeout' => 0.0,
+        'object' => null,
     );
 
     public function __construct(array $options = array())
     {
-        $options = $options + $this->options;
         parent::__construct($options);
+        $options = $this->options;
 
-        $this->_object = new Redis();
-        $this->_object->connect($options['host'], $options['port'], $options['timeout']);
+        if ($options['object'] && $options['object'] instanceof Redis) {
+            $this->_object = $options['object'];
+        } else {
+            $this->_object = new Redis();
+            $this->_object->connect($options['host'], $options['port'], $options['timeout']);
+        }
     }
 
-    public function __invoke()
+    /**
+     * Get or set cache
+     *
+     * @param string $key the name of cache
+     * @param mixed $value
+     * @param int $expire expire time for set cache
+     * @return mixed
+     */
+    public function __invoke($key, $value = null, $expire = 0)
     {
-        return $this;
+        if (1 == func_num_args()) {
+            return $this->get($key);
+        } else {
+            return $this->set($key, $value, $expire);
+        }
     }
 
+    /**
+     * Get cache
+     *
+     * @param string $key the name of cache
+     * @return mixed|false
+     */
     public function get($key, $options = null)
     {
         return $this->_object->get($key);
     }
 
+    /**
+     * Set cache
+     *
+     * @param string $key the name of cache
+     * @param value $value the value of cache
+     * @param int $expire expire time, 0 means never expired
+     * @return bool
+     */
     public function set($key, $value, $expire = 0, array $options = array())
     {
         return $this->_object->set($key, $value, $expire);
     }
 
+    /**
+     * Add cache, if cache is exists, return false
+     *
+     * @param string $key the name of cache
+     * @param mixed $value the value of cache
+     * @param int $expire expire is not supported by redis when add new cache
+     * @return bool
+     */
     public function add($key, $value, $expire = 0, array $options = array())
     {
+        return $this->_object->setnx($key, $value);
+        /*$this->_object->watch($key);
+        
         if ($this->_object->exists($key)) {
+            $this->_object->unwatch();
             return false;
-        }
-
-        return $this->_object->set($key, $value, $expire);
+        } else {
+            $result = $this->_object
+                ->multi()
+                ->set($key, $value, $expire)
+                ->exec();
+            
+            $this->_object->unwatch();
+            
+            return $result[0];
+        }*/
+    }
+    
+    /**
+     * Replace cache, if cache not exists, return false
+     *
+     * @param string $key the name of cache
+     * @param mixed $value the value of cache
+     * @param int $expire expire is not supported by redis when replace cache
+     * @return bool
+     */
+    public function replace($key, $value, $expire = 0, array $options = array())
+    {
+        return $this->_object->getSet($key, $value);
     }
 
+    /**
+     * Clear all cache
+     *
+     * @return boolean
+     */
     public function clear()
     {
         return $this->_object->flushAll();
     }
 
+    /**
+     * Increase a cache, if cache is not exists, redis will automatic creat it,
+     * this is different with other cache driver
+     *
+     * @param string $key the name of cache
+     * @param int $offset the value to decrease
+     * @return int|false
+     */
     public function increment($key, $offset = 1)
     {
         return $this->_object->incrBy($key, $offset);
     }
 
+    /**
+     * Decrease a cache
+     *
+     * @param string $key the name of cache
+     * @param int $offset the value to decrease
+     * @return int|false
+     * @see Qwin_Redis::increment
+     */
     public function decrement($key, $offset = 1)
     {
         return $this->_object->decrBy($key, $offset);
     }
 
+    /**
+     * Remove cache by key
+     *
+     * @param string $key the name of cache
+     * @return bool
+     */
     public function remove($key)
     {
         return $this->_object->del($key);
-    }
-
-    public function replace($key, $value, $expire = 0, array $options = array())
-    {
-        if (!$this->_object->exists($key)) {
-            return false;
-        }
-
-        return $this->_object->set($key, $value, $expire);
     }
 
     /**
