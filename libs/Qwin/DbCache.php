@@ -63,6 +63,7 @@ class Qwin_DbCache extends Qwin_Widget implements Qwin_Storable
             try {
                 $this->_dbh = new PDO($options['dsn'], $options['user'], $options['password']);
                 $this->_dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $this->_dbh->setAttribute(PDO::ATTR_STRINGIFY_FETCHES, true);
             } catch (PDOException $e) {
                 $this->exception($e->getMessage());
             }
@@ -120,7 +121,7 @@ class Qwin_DbCache extends Qwin_Widget implements Qwin_Storable
     {
         $result = $this->query($this->_sqls['get'], array(
             ':id' => $key,
-            ':time' => time(),
+            ':expire' => time(),
         ));
 
         if ($result) {
@@ -202,18 +203,13 @@ class Qwin_DbCache extends Qwin_Widget implements Qwin_Storable
      */
     public function replace($key, $value, $expire = 0, array $options = array())
     {
-        try {
-            $result = $this->query($this->_sqls['replace'], array(
-                ':id' => $key,
-                ':value' => $value,
-                ':lastModified' => time(),
-                ':expire' => $expire ? time() + $expire : 2147483647
-            ));
-
-            return $result;
-        } catch (Qwin_Exception $e) {
-            return false;
-        }
+        $this->query($this->_sqls['replace'], array(
+            ':id' => $key,
+            ':value' => $value,
+            ':lastModified' => time(),
+            ':expire' => $expire ? time() + $expire : 2147483647
+        ));
+        return (bool)$this->_stmt->rowCount();
     }
 
     /**
@@ -225,7 +221,7 @@ class Qwin_DbCache extends Qwin_Widget implements Qwin_Storable
      */
     public function increment($key, $offset = 1)
     {
-        // select and check. need lock ?
+        // todo add lock or transaction
         if (!is_numeric($value = $this->get($key))) {
             return false;
         }

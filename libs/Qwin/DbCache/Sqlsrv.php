@@ -42,7 +42,7 @@ class Qwin_DbCache_Sqlsrv extends Qwin_DbCache_Driver
         'prepare' => null,
         'checkTable' => 'SELECT 1 from %s',
         'create' => 'CREATE TABLE %s (id nvarchar(255) PRIMARY KEY (id), value nvarchar(max), lastModified int, expire int)',
-        'get' => 'SELECT TOP 1 value FROM %s WHERE id = :id AND expire > :time',
+        'get' => 'SELECT TOP 1 value FROM %s WHERE id = :id AND expire > :expire',
         'set' => 'INSERT INTO %s (id, value, lastModified, expire) VALUES (:id, :value, :lastModified, :expire)',
         'remove' => 'DELETE FROM %s WHERE id = :id',
         'replace' => 'UPDATE %s SET value = :value, lastModified = :lastModified, expire = :expire WHERE id = :id',
