@@ -42,7 +42,7 @@ class Qwin_DbCache_Sqlite extends Qwin_DbCache_Driver
         'prepare' => null,
         'checkTable' => 'SELECT 1 from %s',
         'create' => 'CREATE TABLE %s (id TEXT, value TEXT, lastModified INTEGER, expire INTEGER, PRIMARY KEY (id))',
-        'get' => 'SELECT value FROM %s WHERE id=:id AND expire > :time LIMIT 1',
+        'get' => 'SELECT value FROM %s WHERE id=:id AND expire > :expire LIMIT 1',
         'set' => 'INSERT INTO %s (id, value, lastModified, expire) VALUES (:id, :value, :lastModified, :expire)',
         'remove' => 'DELETE FROM %s WHERE id = :id',
         'replace' => 'UPDATE %s SET value = :value, lastModified = :lastModified, expire = :expire WHERE id = :id',
