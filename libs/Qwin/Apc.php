@@ -29,7 +29,7 @@
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2012-5-30 20:28:38
+ * @since       2012-05-30
  */
 class Qwin_Apc extends Qwin_Widget implements Qwin_Storable
 {
@@ -115,6 +115,7 @@ class Qwin_Apc extends Qwin_Widget implements Qwin_Storable
      * @param mixed $value the value of cache
      * @param int $expire expire time
      * @return bool
+     * @todo lock ? atom ?
      */
     public function replace($key, $value, $expire = 0, array $options = array())
     {
