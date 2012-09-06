@@ -22,6 +22,8 @@
  * @version     $Id$
  */
 
+namespace Qwin;
+
 /**
  * Exception
  *
@@ -31,7 +33,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2010-04-18 11:56:29
  */
-class Qwin_Exception extends Exception
+class Exception extends \Exception
 {
     public $__invoker;
 

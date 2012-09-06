@@ -22,6 +22,8 @@
  * @version     $Id$
  */
 
+use Qwin;
+
 /**
  * App
  *
@@ -31,7 +33,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2009-11-24 20:45:11
  */
-class Qwin_App extends Qwin_Widget
+class App extends Widget
 {
     /**
      * @var array           options

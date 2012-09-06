@@ -9,7 +9,10 @@
  * @version     $Id$
  * @since       2012-01-11
  */
-interface Qwin_Widgetable
+
+namespace Qwin;
+
+interface Widgetable
 {
     public function __get($name);
 

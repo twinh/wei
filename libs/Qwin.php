@@ -19,8 +19,9 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id$
  */
+
+use Qwin\Widget;
 
 /**
  * @see Qwin_Widget
@@ -34,8 +35,9 @@ require_once 'Qwin/Widget.php';
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2010-04-26
+ * @todo        autoload interaction with composer ?
  */
-class Qwin extends Qwin_Widget
+class Qwin extends Widget
 {
     /**
      * Version
@@ -66,7 +68,7 @@ class Qwin extends Qwin_Widget
     /**
      * The instance of Qwin
      *
-     * @var Qwin
+     * @var \Qwin
      */
     protected static $_instance;
 
@@ -105,7 +107,7 @@ class Qwin extends Qwin_Widget
     /**
      * Instance qwin widget
      *
-     * @return Qwin
+     * @return \Qwin
      */
     public function __construct(array $config = array())
     {
@@ -158,7 +160,7 @@ class Qwin extends Qwin_Widget
      * Call a widget
      *
      * @param string $name the name of the widget, without class prefix "Qwin_"
-     * @return Qwin_Widget the widget object
+     * @return Widget the widget object
      */
     public function widget($name)
     {
@@ -168,7 +170,8 @@ class Qwin extends Qwin_Widget
             return $this->_widgets[$lower];
         }
 
-        $class = 'Qwin_' . ucfirst($name);
+        // todo other prefix
+        $class = 'Qwin\\' . ucfirst($name);
 
         if (isset($this->options['classMaps'][$class])) {
             $class = $this->options['classMaps'][$class];
@@ -290,7 +293,7 @@ class Qwin extends Qwin_Widget
      *
      * @param mixed $config [optional] config file path or array
      * @param mixed $_ [optional]
-     * @return Qwin
+     * @return \Qwin
      */
     public static function getInstance($config = array())
     {
@@ -309,8 +312,7 @@ class Qwin extends Qwin_Widget
                 } elseif (is_string($arg) && is_file($arg)) {
                     $config = ((array)require $arg) + $config;
                 } else {
-                    require_once 'Qwin/Exception.php';
-                    throw new Qwin_Exception('Config should be array or file.');
+                    throw new \InvalidArgumentException('Config should be array or file.');
                 }
             }
         }
@@ -332,7 +334,7 @@ class Qwin extends Qwin_Widget
      * @param array $args the arguments for "__invoke" method
      * @return mixed
      */
-    public function invokeWidget(Qwin_Widget $invoker, $name, $args)
+    public function invokeWidget(Qwin\Widget $invoker, $name, $args)
     {
         // check if internal widget
         if (isset($this->_widgetsMap[$name])) {
@@ -347,6 +349,7 @@ class Qwin extends Qwin_Widget
         }
 
         // set invoker and soure value for widget
+        // todo isset
         $widget->__invoker = $invoker;
 
         return call_user_func_array(array($widget, '__invoke'), $args);
@@ -372,7 +375,7 @@ class Qwin extends Qwin_Widget
      * Set autoload directories for autoload method
      *
      * @param string|array $dirs
-     * @return Qwin
+     * @return \Qwin
      */
     public function setAutoloadDirsOption($dirs)
     {
@@ -392,7 +395,7 @@ class Qwin extends Qwin_Widget
      * Set the ini options
      *
      * @param array $inis
-     * @return Qwin
+     * @return \Qwin
      */
     public function setInisOption($inis)
     {

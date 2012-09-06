@@ -22,6 +22,10 @@
  * @version     $Id$
  */
 
+namespace Qwin;
+
+use Qwin\Widget;
+
 /**
  * Escape
  *
@@ -31,7 +35,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-01-12 17:53:49
  */
-class Qwin_Escape extends Qwin_Widget
+class Escape extends Widget
 {
     /**
      * Escapes special characters for sql query
