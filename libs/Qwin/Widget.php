@@ -22,6 +22,8 @@
  * @version     $Id$
  */
 
+namespace Qwin;
+
 /**
  * @see Qwin_Widgetable
  */
@@ -36,7 +38,7 @@ require_once 'Widgetable.php';
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-03 00:28:06
  */
-class Qwin_Widget implements Qwin_Widgetable
+class Widget implements Widgetable
 {
     /**
      * 调用者,对象环的上一个对象
@@ -124,18 +126,18 @@ class Qwin_Widget implements Qwin_Widgetable
      */
     public function __call($name, $args)
     {
-        return Qwin::getInstance()->invokeWidget($this, $name, $args);
+        return \Qwin::getInstance()->invokeWidget($this, $name, $args);
     }
 
     /**
      * 魔术方法,实现通过对象属性获取同名微件
      *
-     * @param string $name 微件名称
+     * @param string $name the name of widget
      * @return Qwin_Widget
      */
     public function __get($name)
     {
-        $this->$name = $widget = Qwin::getInstance()->widget($name);
+        $this->$name = $widget = \Qwin::getInstance()->widget($name);
         $widget->__invoker = $this;
         return $widget;
     }
