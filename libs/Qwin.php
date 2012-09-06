@@ -295,8 +295,8 @@ class Qwin extends Qwin_Widget
     public static function getInstance($config = array())
     {
         // most of time, it's called after instanced and without arguments
-        if (!$config && isset(self::$_instance)) {
-            return self::$_instance;
+        if (!$config && isset(static::$_instance)) {
+            return static::$_instance;
         }
 
         // merge all configurations
@@ -315,13 +315,13 @@ class Qwin extends Qwin_Widget
             }
         }
 
-        if (!isset(self::$_instance)) {
-            self::$_instance = new self($config);
+        if (!isset(static::$_instance)) {
+            static::$_instance = new static($config);
         } else {
-            self::$_instance->config($config);
+            static::$_instance->config($config);
         }
 
-        return self::$_instance;
+        return static::$_instance;
     }
 
     /**
