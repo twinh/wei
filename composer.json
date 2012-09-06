@@ -1,0 +1,24 @@
+{
+    "name": "twinh/qwin",
+    "description": "The PHP library",
+    "version": "0.8.7",
+    "type": "library",
+    "keywords": ["library"],
+    "homepage": "https://github.com/twinh/qwin",
+    "license": "Apache-2.0",
+    "require": {
+
+    },
+    "authors": [
+        {
+            "name": "Twin Huang",
+            "email": "twinh@yahoo.cn",
+            "homepage": "https://github.com/twinh/qwin"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Qwin": "libs"
+        }
+    }
+}
