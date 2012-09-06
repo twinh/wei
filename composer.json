@@ -7,7 +7,7 @@
     "homepage": "https://github.com/twinh/qwin",
     "license": "Apache-2.0",
     "require": {
-
+        "php": ">=5.3"
     },
     "authors": [
         {
