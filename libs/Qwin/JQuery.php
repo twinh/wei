@@ -19,7 +19,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id$
+ * @version     $Id: JQuery.php 1182 2012-02-19 15:42:34Z itwinh@gmail.com $
  */
 
 /**
@@ -40,7 +40,7 @@ class Qwin_JQuery extends Qwin_Widget
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-        $this->_dir = dirname(dirname(dirname(__FILE__))) . '/apps/views/jquery';
+        $this->_dir = 'js/jquery';
     }
 
     /**

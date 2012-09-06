@@ -19,7 +19,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id$
+ * @version     $Id: Controller.php 1246 2012-03-14 08:22:58Z itwinh@gmail.com $
  */
 
 /**
@@ -30,7 +30,6 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2009-11-24 20:45:11
- * @todo        重新实现禁用行为
  */
 class Qwin_Controller extends Qwin_Widget
 {
@@ -38,7 +37,9 @@ class Qwin_Controller extends Qwin_Widget
     {
         parent::__construct($options);
 
-        $this->init();
+        if ('Qwin_Controller' != get_class($this)) {
+            $this->init();
+        }
     }
 
     /**
@@ -97,6 +98,15 @@ class Qwin_Controller extends Qwin_Widget
      */
     public function init()
     {
+        // 权限检查 todo event
+        $user = $this->user();
+
+        $uri = '/' . $this->module() . '/' . $this->action();
+
+        if (!$user->isAdmin() && !$user->can($uri)) {
+            return $this->error('权限不足', 401);
+        }
+
         return $this;
     }
 
@@ -146,5 +156,30 @@ class Qwin_Controller extends Qwin_Widget
         }
         // other actions
         return parent::option($name, $value);
+    }
+
+    public function forward($controller, $action = 'index')
+    {
+        $this->app(array(
+            'module' => $controller,
+            'action' => $action,
+        ));
+
+        return $this;
+    }
+
+    public function redirect($url)
+    {
+        // todo set header location and delay
+    }
+
+    public function assign($name, $value = null)
+    {
+        return $this->view->assign($name, $value);
+    }
+
+    public function render()
+    {
+
     }
 }
