@@ -19,7 +19,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id$
+ * @version     $Id: Flush.php 1267 2012-06-30 08:42:51Z itwinh@gmail.com $
  */
 
 /**
@@ -42,6 +42,8 @@ class Qwin_Flush extends Qwin_Widget
 
         ob_implicit_flush(true);
 
+        // todo $buffer = ini_get('output_buffering');
+        // echo str_repeat(' ',$buffer+1); 
         // NOTE output here !!!
         echo str_pad('',4096);
     }

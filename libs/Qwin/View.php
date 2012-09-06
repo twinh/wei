@@ -19,7 +19,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id$
+ * @version     $Id: View.php 1249 2012-03-28 02:50:20Z itwinh@gmail.com $
  */
 
 /**
@@ -47,7 +47,6 @@ class Qwin_View extends Qwin_ArrayWidget
      * @var array
      */
     public $options = array(
-        'theme'         => 'cupertino',
         'charset'       => 'utf-8',
     );
 
@@ -89,18 +88,6 @@ class Qwin_View extends Qwin_ArrayWidget
      */
     public function display($layout = null, array $data = null)
     {
-        // 判断视图是否已输入
-        if ($this->_displayed) {
-            return false;
-        }
-        $this->_displayed = true;
-
-        $this->trigger('beforeViewDisplay');
-
-        $this->renderBy($this->module, $this->action);
-
-        $this->trigger('afterViewDisplay');
-
         return $this;
     }
 
@@ -133,7 +120,6 @@ class Qwin_View extends Qwin_ArrayWidget
             'config'    => $this->config(),
             'module'    => $options['module'],
             'action'    => $options['action'],
-            'theme'     => $this->getThemeOption(),
         ));
 
         $this->_module = $options['module'];
@@ -160,14 +146,14 @@ class Qwin_View extends Qwin_ArrayWidget
         $minify->add($files);
 
         $replace = '';
-        if ($js = $minify->pack('js')) {
-            $replace .= '<script type="text/javascript" src="' . $this->url('minify', 'index', array('g' => $js)) . '"></script>' . PHP_EOL;
-        }
         if ($css = $minify->pack('css')) {
             $replace .= '<link rel="stylesheet" type="text/css" href="' . $this->url('minify', 'index', array('g' => $css)) . '"/>' . PHP_EOL;
         }
+        if ($js = $minify->pack('js')) {
+            $replace .= '<script type="text/javascript" src="' . $this->url('minify', 'index', array('g' => $js)) . '"></script>' . PHP_EOL;
+        }
         if ($replace) {
-            $output = $this->replaceFirst(&$output, '</head>', $replace . '</head>');
+            $output = $this->replaceFirst($output, '</head>', $replace . '</head>');
         }
 
         echo $output;
@@ -242,50 +228,6 @@ class Qwin_View extends Qwin_ArrayWidget
     }
 
     /**
-     * 获取主题名称,主题为jQuery UI
-     *
-     * @see http://jqueryui.com/themeroller/
-     * @return string
-     */
-    public function getThemeOption()
-    {
-        if (isset($this->options['_theme']) && $this->options['_theme']) {
-            return $this->options['theme'];
-        }
-
-        // 按优先级排列主题的数组
-        $themes = array(
-            (string)$this->get('theme'),
-            $this->cookie->get('theme'),
-            $this->options['theme'],
-        );
-
-        foreach ($themes as $value) {
-            if ($value) {
-                $theme = $value;
-                break;
-            }
-        }
-
-        // 在所有视图路径查找主题
-        foreach ($this->options['dirs'] as $dir) {
-            if (is_dir($dir . '/views/jquery/themes/' . $theme)) {
-                $this->options['theme'] = $theme;
-                if ($theme != $this->cookie->get('theme')) {
-                    $this->cookie->set('theme', $theme);
-                }
-                return $this;
-            }
-        }
-
-        $this->cookie->set('theme', $this->options['theme']);
-
-        $this->options['_theme'] = true;
-
-        return $this->options['theme'];
-    }
-
-    /**
      * 设置视图已展示
      *
      * @return Qwin_View 当前对象
@@ -304,5 +246,15 @@ class Qwin_View extends Qwin_ArrayWidget
     public function isDisplayed()
     {
         return $this->_displayed;
+    }
+
+    public function wrappedBy()
+    {
+
+    }
+
+    public function layout()
+    {
+
     }
 }

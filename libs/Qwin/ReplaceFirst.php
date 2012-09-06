@@ -19,7 +19,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id$
+ * @version     $Id: ReplaceFirst.php 1182 2012-02-19 15:42:34Z itwinh@gmail.com $
  */
 
 /**
@@ -30,6 +30,7 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-02-15 15:35:48
+ * @todo        replaceOne, replaceLast ?
  */
 class Qwin_ReplaceFirst extends Qwin_Widget
 {

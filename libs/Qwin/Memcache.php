@@ -19,7 +19,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id$
+ * @version     $Id: Memcache.php 1282 2012-07-06 07:38:44Z itwinh@gmail.com $
  */
 
 /**
@@ -29,17 +29,29 @@
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2012-05-30 00:55:14
+ * @since       2012-05-30
  */
 class Qwin_Memcache extends Qwin_Widget implements Qwin_Storable
 {
+    /**
+     * Options
+     * 
+     * @var array
+     */
     public $options = array(
-        'host' => 'localhost',
-        'port' => 11211,
-    );
-
-    protected $_memcacheOptions = array(
+        'servers' => array(),
+        'object' => null,
         'flag' => MEMCACHE_COMPRESSED,
+    );
+    
+    protected $_serverOptions = array(
+        'host' => '127.0.0.1',
+        'port' => 11211,
+        'persistent' => true,
+        'weight' => 0,
+        'timeout' => 0,
+        'retryInterval' => 0,
+        'failureCallback' => null,
     );
 
     /**
@@ -47,62 +59,72 @@ class Qwin_Memcache extends Qwin_Widget implements Qwin_Storable
      *
      * @var Memcache
      */
-    protected  $_memcache;
+    protected  $_object;
 
+    /**
+     * Init
+     * 
+     * @param array $options
+     */
     public function __construct(array $options = array())
     {
         $options = $options + $this->options;
         parent::__construct($options);
 
-        $this->_memcache = new Memcache;
-        $this->_memcache->connect($options['host'], $options['port']);
+        $this->_object = new Memcache;
+        $this->_object->addserver($options['host'], $options['port']);
     }
 
     public function get($key, $options = null)
     {
-        return $this->_memcache->get($key, $options);
+        return $this->_object->get($key, $options);
     }
 
     public function set($key, $value, $expire = 0, array $options = array())
     {
-        $o = $options + $this->_memcacheOptions;
-        return $this->_memcache->set($key, $value, $o['flag'], $expire);
+        $o = $options + $this->_objectOptions;
+        return $this->_object->set($key, $value, $o['flag'], $expire);
     }
 
     public function remove($key)
     {
-        return $this->_memcache->delete($key);
+        return $this->_object->delete($key);
     }
 
     public function add($key, $value, $expire = 0, array $options = array())
     {
-        $o = $options + $this->_memcacheOptions;
-        return $this->_memcache->add($key, $value, $o['flag'], $expire);
+        $o = $options + $this->_objectOptions;
+        return $this->_object->add($key, $value, $o['flag'], $expire);
     }
 
     public function replace($key, $value, $expire = 0, array $options = array())
     {
-        $o = $options + $this->_memcacheOptions;
-        return $this->_memcache->replace($key, $value, $o['flag'], $expire);
+        $o = $options + $this->_objectOptions;
+        return $this->_object->replace($key, $value, $o['flag'], $expire);
     }
 
     public function increment($key, $offset = 1)
     {
-        return $this->_memcache->increment($key, $offset);
+        return $this->_object->increment($key, $offset);
     }
 
     public function decrement($key, $offset = 1)
     {
-        return $this->_memcache->decrement($key, $offset);
+        return $this->_object->decrement($key, $offset);
     }
 
     public function clear()
     {
-        return $this->_memcache->flush();
+        return $this->_object->flush();
     }
 
+    /**
+     * Get memcache object
+     * 
+     * @return Memcache
+     */
     public function getObject()
     {
-        return $this->_memcache;
+        return $this->_object;
     }
 }
