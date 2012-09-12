@@ -2,75 +2,52 @@
 /**
  * Qwin Framework
  *
- * Copyright (c) 2008-2012 Twin Huang. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @author      Twin Huang <twinh@yahoo.cn>
- * @copyright   Twin Huang
+ * @copyright   Copyright (c) 2008-2012 Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
 
 use Qwin\Widget;
 
 /**
- * @see Qwin_Widget
+ * @see Qwin\Widget
  */
 require_once 'Qwin/Widget.php';
 
 /**
- * Qwin
+ * The root widget and widget manager 
  *
  * @package     Qwin
- * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2010-04-26
  * @todo        autoload interaction with composer ?
+ * @todo        \Qwin or Qwin\Qwin ? 
  */
 class Qwin extends Widget
 {
     /**
      * Version
      */
-    const VERSION = '0.8.7';
+    const VERSION = '0.8.8';
 
     /**
      * 存储微件对象的数组
      *
      * @var array
      */
-    protected $_widgets = array();
-
-    /**
-     * 存储类对象的数组
-     *
-     * @var array
-     */
-    protected $_objects = array();
+    protected $widgets = array();
 
     /**
      * Global configurations of all widgets
      *
      * @var array
      */
-    protected $_config = array();
+    protected $config = array();
 
     /**
      * The instance of Qwin
      *
      * @var \Qwin
      */
-    protected static $_instance;
+    protected static $instance;
 
     /**
      * Options
@@ -83,25 +60,25 @@ class Qwin extends Widget
      *
      *       autoloadDirs   array       the direcroties of classes
      *
-     *       classMaps      array       class maps
+     *       widgetMap     array       widget name => new class name
      */
     public $options = array(
         'inis'          => array(),
         'autoload'      => true,
         'autoloadDirs'  => array(),
-        'classMaps'     => array(),
-    );
-
-    /**
-     * Internal widgets configurations
-     *
-     * @var array
-     *
-     */
-    protected $_widgetsMap = array(
-        'isArray' => 'is_array',
-        'isString' => 'is_string',
-        'isNull' => 'is_null',
+        'widgetMap'     => array(),
+        'widget'        => null,
+        'invoker'       => null,
+        'deps'          => array(),
+        'funcMap'       => array(
+            'isArray'       => 'is_array',
+            'isBool'        => 'is_bool',
+            'isInt'         => 'is_int', 
+            'isNull'        => 'is_null',
+            'isNumeric'     => 'is_numeric',
+            'isScalar'      => 'is_scalar',
+            'isString'      => 'is_string',
+        ),
     );
 
     /**
@@ -111,30 +88,19 @@ class Qwin extends Widget
      */
     public function __construct(array $config = array())
     {
+        $name = 'qwin';
+        
         $this->config($config);
-        if (isset($config[__CLASS__])) {
-            $this->options = $config[__CLASS__] + $this->options;
+        if (isset($config[$name])) {
+            $this->options = $config[$name] + $this->options;
         }
         $options = &$this->options;
-
-        // set library directory as the second include path
-        $file = dirname(__FILE__);
-        $includePath = get_include_path();
-
-        // check if it has two or more include paths
-        $pos = strpos($includePath, PATH_SEPARATOR);
-
-        // insert into the second potion or append it to the end of whole include path
-        $includePath = $pos
-            ? substr_replace($includePath, $file . PATH_SEPARATOR, $pos + 1, 0)
-            : $includePath . PATH_SEPARATOR . $file;
-
-        set_include_path($includePath);
-
-        $this->option($options);
-
-        $this->_widgets['qwin'] = $this;
-        $this->_objects['Qwin'] = $this;
+        $options['widget'] = $this;
+        
+        $this->widgets['qwin'] = $this;
+        $this->widgets['widget'] = $this;
+        
+        parent::__construct($options);
     }
 
     /**
@@ -142,6 +108,7 @@ class Qwin extends Widget
      *
      * @param string $class the name of the class
      * @return bool
+     * @todo class prefix
      */
     public function autoload($class)
     {
@@ -157,111 +124,35 @@ class Qwin extends Widget
     }
 
     /**
-     * Call a widget
-     *
-     * @param string $name the name of the widget, without class prefix "Qwin_"
-     * @return Widget the widget object
+     * what to do ?
      */
-    public function widget($name)
+    public function __invoke()
     {
-        $lower = strtolower($name);
-
-        if (isset($this->_widgets[$lower])) {
-            return $this->_widgets[$lower];
-        }
-
-        // todo other prefix
-        $class = 'Qwin\\' . ucfirst($name);
-
-        if (isset($this->options['classMaps'][$class])) {
-            $class = $this->options['classMaps'][$class];
-        }
-
-        if (class_exists($class)) {
-            return $this->_widgets[$lower] = $this->__invoke($class);
-        }
-
-        $this->exception('Widget, property or method "%s" not found.', $name);
+        
     }
-
+    
     /**
-     * Instance a class
+     * Get or set widget's configuration
      *
-     * @param string $name class name
-     * @param null|array $param 类初始化时的参数,以数组的形式出现
-     * @return false|object false or the instance object
-     * @todo reanem to instance ?
-     */
-    public function __invoke($name, $param = null)
-    {
-        if (isset($this->_objects[$name])) {
-            return $this->_objects[$name];
-        }
-
-        if (!class_exists($name)) {
-            return false;
-        }
-
-        // get class parameters
-        $param = null !== $param ? $param : $this->config($name);
-        !is_array($param) && $param = (array)$param;
-
-        // 标准单例模式
-        if (method_exists($name, 'getInstance')) {
-            return call_user_func_array(array($name, 'getInstance'), $param);
-        }
-
-        // 根据参数数目初始化类
-        switch (count($param)) {
-            case 0:
-                $object = new $name;
-                break;
-
-            case 1:
-                $object = new $name(current($param));
-                break;
-
-            case 2:
-                $object = new $name(current($param), next($param));
-                break;
-
-            case 3:
-                $object = new $name(current($param), next($param), next($param));
-                break;
-
-            default:
-                if (method_exists($name, '__construct') || method_exists($name, $name)) {
-                    $reflection = new ReflectionClass($name);
-                    $object = $reflection->newInstanceArgs($param);
-                } else {
-                    $object = new $name;
-                }
-        }
-        return $this->_objects[$name] = $object;
-    }
-
-    /**
-     * Get ot set config
-     *
-     * @param mixed $name 配置的值,多级用'/'分开
-     * @param mixed $param 配置内容
+     * @param mixed $name the name of configuration
+     * @param mixed $param the value of configuration
      * @return mixed
-     * @example $this->config();                 // get all config
-     *          $this->config('className');      // 获取此项的配置,建议为类名
+     * @example $this->config();                 // get all configurations
+     *          $this->config('widgetName');     // 获取此项的配置,建议为类名
      *          $this->config('array');          // 设定该数组为全局配置
      *          $this->config('name', 'param');  // 设定项为name的配置为param
      *          $this->config('key1/key2');      // 获取$config[key1][key2]的值
      */
     public function config($name = null)
     {
-        // 获取所有配置
+        // get all configurations
         if (null === $name ) {
-            return $this->_config;
+            return $this->config;
         }
 
-        // 获取/设置某一项配置
+        // get or set one configuration
         if (is_string($name) || is_int($name)) {
-            $temp = &$this->_config;
+            $temp = &$this->config;
             if (false !== strpos($name, '/')) {
                 $array = explode('/', $name);
                 $name = array_pop($array);
@@ -279,12 +170,12 @@ class Qwin extends Widget
             return isset($temp[$name]) ? $temp[$name] : null;
         }
 
-        // 设置全局配置
+        // set global configurations
         if (is_array($name)) {
-            return $this->_config = $name;
+            return $this->config = $name;
         }
 
-        // 不匹配任何操作
+        // not match any actions
         return null;
     }
 
@@ -292,14 +183,15 @@ class Qwin extends Widget
      * Get Qwin class instance
      *
      * @param mixed $config [optional] config file path or array
-     * @param mixed $_ [optional]
+     * @param mixed $ [optional] TODO remove extra args ?
      * @return \Qwin
+     * @todo rename to create ?
      */
     public static function getInstance($config = array())
     {
         // most of time, it's called after instanced and without arguments
-        if (!$config && isset(static::$_instance)) {
-            return static::$_instance;
+        if (!$config && isset(static::$instance)) {
+            return static::$instance;
         }
 
         // merge all configurations
@@ -317,42 +209,113 @@ class Qwin extends Widget
             }
         }
 
-        if (!isset(static::$_instance)) {
-            static::$_instance = new static($config);
+        if (!isset(static::$instance)) {
+            static::$instance = new static($config);
         } else {
-            static::$_instance->config($config);
+            static::$instance->config($config);
         }
 
-        return static::$_instance;
+        return static::$instance;
     }
 
     /**
      * Get a widget object and call its "__invoke" method
-     *
-     * @param Qwin_Widget $invoker the invker widget object
-     * @param string $name the name of the widget
-     * @param array $args the arguments for "__invoke" method
+     * 
+     * @param string $name the name of widget
+     * @param array $args arguments for "__invoke" method
+     * @param string $config
+     * @param \Qwin\Widget $invoker invoker
      * @return mixed
+     * @throws \Qwin\Exception when method "__invoke" not found
      */
-    public function invokeWidget(Qwin\Widget $invoker, $name, $args)
+    public function invokeWidget($name, array $args, $config = null, Widget $invoker = null)
     {
-        // check if internal widget
-        if (isset($this->_widgetsMap[$name])) {
-            return call_user_func_array($this->_widgetsMap[$name], $args);
+        // check if function widget
+        if (isset($this->options['funcMap'][$name])) {
+            return call_user_func_array($this->options['funcMap'][$name], $args);
         }
 
-        $widget = $this->widget($name);
+        $widget = $this->getWidget($name, $config, $invoker);
 
         if (!method_exists($widget, '__invoke')) {
-            require_once 'Qwin/Exception.php';
-            throw new Qwin_Exception('Method "__invoke" not found in widget "' . get_class($widget) . '"');
+            return $this->exception('Method "__invoke" not found in widget "' . get_class($widget) . '"');
         }
 
-        // set invoker and soure value for widget
-        // todo isset
-        $widget->__invoker = $invoker;
+        // set invoker for widget
+        if (isset($widget->options['invoker'])) {
+            $widget->options['invoker'] = $invoker;
+        }
 
         return call_user_func_array(array($widget, '__invoke'), $args);
+    }
+    
+    /**
+     * Get a widget instance
+     *
+     * @param string $name the name of the widget, without class prefix "Qwin_"
+     * @return Widget the widget object
+     */
+    public function getWidget($name, $config = null, Widget $invoker = null)
+    {
+        if ($config) {
+            $full = $name . '.' . $config;
+        } elseif ($invoker && $deps = $invoker->option('deps')) {
+            if (isset($deps[$name])) {
+                $full = $deps[$name];
+            } else {
+                $full = $name;
+            }
+        } else {
+            $full = $name;
+        }
+
+        $lower = strtolower($full);
+
+        // todo shared or not ?
+        if (isset($this->widgets[$lower])) {
+            return $this->widgets[$lower];
+        }
+
+        if (isset($this->options['widgetMap'][$name])) {
+            $class = $this->options['widgetMap'][$name];
+        } else {
+            $class = 'Qwin\\' . ucfirst($name);
+        }
+
+        if (class_exists($class)) {
+            $options = $this->config($full);
+            
+            if (null === $options && $this->config($name)) {
+                return $this->exception('Config name "' . $full . '" not found');
+            }
+            
+            $options = array(
+                'widget' => $this,
+                'invoker' => $invoker,
+            ) + (array)$options;
+            
+            return $this->widgets[$lower] = new $class($options);
+        }
+
+        return $this->exception('Class "' . $class . '" not found');
+    }
+    
+    /**
+     * Remove widget
+     * 
+     * @param string $name the name of widget
+     * @return boolean
+     */
+    public function removeWidget($name)
+    {
+        $lower = strtolower($name);
+        
+        if (isset($this->widgets[$lower])) {
+            unset($this->widgets[$lower]);
+            return true;
+        }
+        
+        return $this->exception('Widget "' . $name . '" not found');
     }
 
     /**

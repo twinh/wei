@@ -2,57 +2,40 @@
 /**
  * Qwin Framework
  *
- * Copyright (c) 2008-2012 Twin Huang. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @author      Twin Huang <twinh@yahoo.cn>
- * @copyright   Twin Huang
+ * @copyright   Copyright (c) 2008-2012 Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id$
  */
 
 namespace Qwin;
 
-/**
- * @see Qwin_Widgetable
- */
 require_once 'Widgetable.php';
 
 /**
- * Widget
+ * The base class for all widget
  *
  * @package     Qwin
- * @subpackage  Widget
- * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-03 00:28:06
+ * @todo        global ? shared ? how to defined?
  */
-class Widget implements Widgetable
+abstract class Widget implements Widgetable
 {
-    /**
-     * 调用者,对象环的上一个对象
-     *
-     * @var Qwin_Widget
-     */
-    public $__invoker;
-
     /**
      * Options
      *
      * @var array
      */
-    public $options = array();
+    public $options = array(
+        'widget' => null,
+        'invoker' => null,
+        'deps' => array(),
+    );
+    
+    /**
+     * Root widget object
+     * 
+     * @var \Qwin
+     */
+    protected $widget;
 
     /**
      * init widget
@@ -62,7 +45,17 @@ class Widget implements Widgetable
      */
     public function __construct(array $options = array())
     {
+        // TODO what to do with init options ? 
         $this->option($options);
+        
+        // or ?
+        //$this->options = $options + $this->options;
+
+        if (!$options['widget'] instanceof self) {
+            throw new \InvalidArgumentException('Option "widget" should be an instance of "' . __CLASS__ . '"');
+        }
+
+        $this->widget = &$options['widget'];
     }
 
     /**
@@ -75,7 +68,7 @@ class Widget implements Widgetable
      *          $widget->option('name', 'value');   // set "name" to "value"
      *          $widget->option();                  // get all options
      *          $widget->option(array());           // set options
-     * @todo test reference in 5.2 version
+     * @todo append
      */
     public function option($name = null, $value = null)
     {
@@ -126,7 +119,7 @@ class Widget implements Widgetable
      */
     public function __call($name, $args)
     {
-        return \Qwin::getInstance()->invokeWidget($this, $name, $args);
+        return $this->widget->invokeWidget($name, $args, null, $this);
     }
 
     /**
@@ -137,11 +130,10 @@ class Widget implements Widgetable
      */
     public function __get($name)
     {
-        $this->$name = $widget = \Qwin::getInstance()->widget($name);
-        $widget->__invoker = $this;
-        return $widget;
+        return $this->$name = $this->widget->getWidget($name, null, $this);
     }
 
     // should be implemented by subclasses
-    //public function __invoke();
+    // avoid "Strict standards: Declaration of xxx::__invoke() should be compatible with that of xxx::__invoke()
+    //public function __invoke(){}
 }
