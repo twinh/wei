@@ -2,36 +2,19 @@
 /**
  * Qwin Framework
  *
- * Copyright (c) 2008-2012 Twin Huang. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @author      Twin Huang <twinh@yahoo.cn>
- * @copyright   Twin Huang
+ * @copyright   Copyright (c) 2008-2012 Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id: Controller.php 1246 2012-03-14 08:22:58Z itwinh@gmail.com $
  */
+
+namespace Qwin;
 
 /**
  * Controller
  *
  * @package     Qwin
- * @subpackage  Application
- * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2009-11-24 20:45:11
  */
-class Qwin_Controller extends Qwin_Widget
+class Controller extends Widget
 {
     public function __construct(array $options = array())
     {
@@ -98,15 +81,6 @@ class Qwin_Controller extends Qwin_Widget
      */
     public function init()
     {
-        // 权限检查 todo event
-        $user = $this->user();
-
-        $uri = '/' . $this->module() . '/' . $this->action();
-
-        if (!$user->isAdmin() && !$user->can($uri)) {
-            return $this->error('权限不足', 401);
-        }
-
         return $this;
     }
 

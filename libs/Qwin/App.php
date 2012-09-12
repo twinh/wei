@@ -2,24 +2,8 @@
 /**
  * Qwin Framework
  *
- * Copyright (c) 2008-2012 Twin Huang. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @author      Twin Huang <twinh@yahoo.cn>
- * @copyright   Twin Huang
+ * @copyright   Copyright (c) 2008-2012 Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id$
  */
 
 namespace Qwin;
@@ -28,10 +12,7 @@ namespace Qwin;
  * App
  *
  * @package     Qwin
- * @subpackage  Application
- * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2009-11-24 20:45:11
  */
 class App extends Widget
 {
@@ -40,14 +21,14 @@ class App extends Widget
      *
      *       dirs           the root directories of the applications
      *
-     *       module         the default module name
+     *       controller     the default controller name
      *
      *       action         the default action name
      */
     public $options = array(
-        'dirs'      => array(),
-        'module'    => null,
-        'action'    => null,
+        'dirs'          => array(),
+        'controller'    => null,
+        'action'        => null,
     );
 
     /**
@@ -61,25 +42,37 @@ class App extends Widget
         // merge options
         $this->option($options);
         $options = &$this->options;
-
+        
         // get request & action
-        $module = $options['module'] ? $options['module'] : $this->module();
-        $action = $options['action'] ? $options['action'] : $this->action();
+        $controller = $options['controller'] ? $options['controller'] : $this->request('controller');
+        $action = $options['action'] ? $options['action'] : $this->request('controller');
 
-        // execute controller action
-        $result = $this->controller(array(
-            'module' => $module,
-            'action' => $action,
-        ));
+        foreach ($options['dirs'] as $namespace => $dir) {
+            $file = $dir . '/' . $namespace . '/Controller/' . ucfirst($controller) . 'Controller.php';
 
-        // display view
-        $this->view(array(
-            'module' => $module,
-            'action' => $action,
-            'result' => $result,
-        ));
+            if (!is_file($file)) {
+                continue;
+            }
 
-        return $this;
+            require $file;
+            
+            $class = $namespace . '\Controller\\' . ucfirst($controller) . 'Controller';
+
+            if (!class_exists($class, false)) {
+                continue;
+            }
+
+            $controllerObject = new $class(array(
+                'widget' => $this->widget
+            ));
+
+            $actionMethod = $action . 'Action';
+            if (method_exists($controllerObject, $actionMethod)) {
+                return $controllerObject->$actionMethod();
+            }
+        }
+        
+        return $this->exception('The page you requested was not found.', 404);
     }
 
     /**

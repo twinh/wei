@@ -38,7 +38,7 @@ class Qwin_Get extends Qwin_Request
     public function __construct($options = null)
     {
         $params = $this->router->matchRequestUri();
-        $this->_data = $params ? $params : $_GET;
+        $this->data = $params ? $params : $_GET;
     }
 
     /**
@@ -52,11 +52,11 @@ class Qwin_Get extends Qwin_Request
     {
         if (is_array($name)) {
             foreach ($name as $key => $value) {
-                $this->_data[$key] = $value;
+                $this->data[$key] = $value;
                 $this->request->set($name, $value);
             }
         } else {
-            $this->_data[$name] = $value;
+            $this->data[$name] = $value;
             $this->request->set($name, $value);
         }
         return $this;
