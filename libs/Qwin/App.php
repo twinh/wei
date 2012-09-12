@@ -22,7 +22,7 @@
  * @version     $Id$
  */
 
-use Qwin;
+namespace Qwin;
 
 /**
  * App

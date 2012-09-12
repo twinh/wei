@@ -22,6 +22,8 @@
  * @version     $Id$
  */
 
+namespace Qwin;
+
 /**
  * Ip
  *
@@ -31,7 +33,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-12-20 21:46:14
  */
-class Qwin_Ip extends Qwin_Widget
+class Ip extends Widget
 {
     /**
      * Get ip address

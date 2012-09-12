@@ -2,55 +2,51 @@
 /**
  * Qwin Framework
  *
- * Copyright (c) 2008-2012 Twin Huang. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @author      Twin Huang <twinh@yahoo.cn>
- * @copyright   Twin Huang
+ * @copyright   Copyright (c) 2008-2012 Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id$
  */
 
 namespace Qwin;
 
 /**
- * Exception
+ * The base exception class for all widget
  *
  * @package     Qwin
- * @subpackage  Widget
- * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2010-04-18 11:56:29
  */
 class Exception extends \Exception
 {
-    public $__invoker;
+    public $options = array(
+        'code' => 500,
+        'message' => null,
+    );
 
-    public function __construct($msg = '', $code = 0)
+    public function __construct($message, $code = 500)
     {
-        parent::__construct($msg, (int)$code);
+        if (is_array($message)) {
+            $options = $message + $this->options;
+            $this->message = $options['message'];
+            $this->code = $options['code'];
+        } else {
+            parent::__construct($message, $code);
+        }
     }
 
-    public function __invoke()
+    public function __invoke($message, $code = 500)
     {
-        $args = func_get_args();
-        $this->message = call_user_func_array('sprintf', $args);
+        $this->message = $message;
+        $this->code = $code;
         throw $this;
     }
 
+    /**
+     * Get the class name of invoker
+     * 
+     * @return string
+     * @todo getInvokeWidget ?
+     */
     public function getInvokerClass()
     {
-        return $this->__invoker ? get_class($this->__invoker) : null;
+        return $this->options['invoker'] ? get_class($this->options['invoker']) : null;
     }
 }
