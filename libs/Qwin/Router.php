@@ -2,39 +2,22 @@
 /**
  * Qwin Framework
  *
- * Copyright (c) 2008-2012 Twin Huang. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @author      Twin Huang <twinh@yahoo.cn>
- * @copyright   Twin Huang
+ * @copyright   Copyright (c) 2008-2012 Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id$
  */
+
+namespace Qwin;
 
 /**
  * Router
  *
  * @package     Qwin
- * @subpackage  Widget
- * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-01-24 01:05:28
  * @link        The code is base on the awesome framework - Kohana
  *              http://kohanaframework.org/3.0/guide/api/Kohana_Route
  *
  */
-class Qwin_Router extends Qwin_Widget
+class Router extends Widget
 {
     /**
      * @var array Options
@@ -51,7 +34,7 @@ class Qwin_Router extends Qwin_Widget
         'routes'    => array(
             'default' => array(
                 'name'              => 'default',
-                'uri'               => '(<module>(/<action>(/<id>)))',
+                'uri'               => '(<controller>(/<action>(/<id>)))',
                 'rules'             => array(),
                 'method'            => null,
                 'regex'             => null,

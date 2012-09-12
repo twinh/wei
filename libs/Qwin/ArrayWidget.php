@@ -2,43 +2,26 @@
 /**
  * Qwin Framework
  *
- * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @author      Twin Huang <twinh@yahoo.cn>
- * @copyright   Twin Huang
+ * @copyright   Copyright (c) 2008-2012 Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id$
  */
+
+namespace Qwin;
 
 /**
  * ArrayWidget
  *
  * @package     Qwin
- * @subpackage  Widget
- * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2012-01-07 10:53:51
  */
-class Qwin_ArrayWidget extends Qwin_Widget implements ArrayAccess
+class ArrayWidget extends Widget implements \ArrayAccess
 {
     /**
      * The variable to store array
      *
      * @var array
      */
-    protected $_data = array();
+    protected $data = array();
 
     /**
      * Check if the offset exists
@@ -48,7 +31,7 @@ class Qwin_ArrayWidget extends Qwin_Widget implements ArrayAccess
      */
     public function offsetExists($offset)
     {
-        return isset($this->_data[$offset]);
+        return isset($this->data[$offset]);
     }
 
     /**
@@ -59,7 +42,7 @@ class Qwin_ArrayWidget extends Qwin_Widget implements ArrayAccess
      */
     public function offsetGet($offset)
     {
-        return isset($this->_data[$offset]) ? $this->_data[$offset] : null;
+        return isset($this->data[$offset]) ? $this->data[$offset] : null;
     }
 
     /**
@@ -70,7 +53,7 @@ class Qwin_ArrayWidget extends Qwin_Widget implements ArrayAccess
      */
     public function offsetSet($offset, $value)
     {
-        return $this->_data[$offset] = $value;
+        return $this->data[$offset] = $value;
     }
 
     /**
@@ -80,7 +63,7 @@ class Qwin_ArrayWidget extends Qwin_Widget implements ArrayAccess
      */
     public function offsetUnset($offset)
     {
-        unset($this->_data[$offset]);
+        unset($this->data[$offset]);
     }
 
     /**
@@ -91,7 +74,7 @@ class Qwin_ArrayWidget extends Qwin_Widget implements ArrayAccess
      */
     public function fromArray($array)
     {
-        $this->_data = (array)$array + $this->_data;
+        $this->data = (array)$array + $this->data;
         return $this;
     }
 
@@ -102,6 +85,6 @@ class Qwin_ArrayWidget extends Qwin_Widget implements ArrayAccess
      */
     public function toArray()
     {
-        return $this->_data;
+        return $this->data;
     }
 }
