@@ -45,7 +45,7 @@ class App extends Widget
         
         // get request & action
         $controller = $options['controller'] ? $options['controller'] : $this->request('controller');
-        $action = $options['action'] ? $options['action'] : $this->request('controller');
+        $action = $options['action'] ? $options['action'] : $this->request('action');
 
         foreach ($options['dirs'] as $namespace => $dir) {
             $file = $dir . '/' . $namespace . '/Controller/' . ucfirst($controller) . 'Controller.php';
