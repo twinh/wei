@@ -40,8 +40,8 @@ class Router extends Widget
                 'regex'             => null,
                 'slashSeparator'    => false,
                 'defaults' => array(
-                    'module' => 'index',
-                    'action' => 'index',
+                    'controller'    => 'index',
+                    'action'        => 'index',
                 ),
             ),
         ),
