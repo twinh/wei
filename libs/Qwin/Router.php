@@ -160,6 +160,16 @@ class Router extends Widget
         }
         return $this;
     }
+    
+    public function setRoutesOption($routes)
+    {
+        foreach ($routes as &$route) {
+            $route += $this->_routeOptions;
+        }
+        $this->options['routes'] = $routes;
+        
+        return $this;
+    }
 
     /**
      * Set route
