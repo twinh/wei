@@ -127,26 +127,4 @@ class Qwin_File extends Qwin_Widget
     {
         return str_replace(array('\\', '/', ':', '*', '<', '>', '?', '|'), '', $name);
     }
-
-    /**
-     * 转换路径分隔符为网址路径
-     *
-     * @param string $path 路径
-     * @return string 路径
-     */
-    public static function toUrlSeparator($path)
-    {
-        return strtr($path, array('\\' => '/'));
-    }
-
-    /**
-     * 转换路径为当前系统类型的路径
-     *
-     * @param string $path 路径
-     * @return string 路径
-     */
-    public static function toPathSeparator($path)
-    {
-        return str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
-    }
 }

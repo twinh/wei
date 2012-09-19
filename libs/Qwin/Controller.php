@@ -31,9 +31,9 @@ abstract class Controller extends Widget
             return $this->$method();
         }
         
-        $this->log()->info(sprintf('Action "%s" not found in controller "%s".', $action, get_class($this)));
+        $this->log(sprintf('Action "%s" not found in controller "%s".', $action, get_class($this)));
         
-        return $this->exception('The page you requested was not found.', 404);
+        throw new \Exception('The page you requested was not found.', 404);
     }
 
     /**

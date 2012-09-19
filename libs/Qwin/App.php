@@ -30,6 +30,22 @@ class App extends Widget
         'controller'    => null,
         'action'        => null,
     );
+    
+    /**
+     * The controller name
+     * 
+     * @var string
+     */
+    protected $controller;
+    
+    /**
+     * The action name
+     * 
+     * @var string
+     */
+    protected $action;
+    
+    protected $controllers = array();
 
     /**
      * Startup application
@@ -43,38 +59,69 @@ class App extends Widget
         $this->option($options);
         $options = &$this->options;
         
-        // get request & action
-        $controller = $options['controller'] ? $options['controller'] : $this->request('controller');
-        $action = $options['action'] ? $options['action'] : $this->request('action');
+        $this->controller = $options['controller'] ?: $this->request('controller');
+        $this->action = $options['action'] ?: $this->request('action');
+        
+        return $this->dispatch($this->controller, $this->action);
+    }
+    
+    public function dispatch($controller, $action = 'index')
+    {
+        $controllerObject = $this->getController($controller);
+        
+        
+        
+        if ($controllerObject) {
+            $result = $controllerObject($action);
+            
+            if ($result) {
+                $this->response($result);
+            }
 
-        foreach ($options['dirs'] as $namespace => $dir) {
-            $file = $dir . '/' . $namespace . '/Controller/' . ucfirst($controller) . 'Controller.php';
+            return $this;
+        }
+          
+        throw new \Exception('The page you requested was not found.', 404);
+    }
+    
+    public function getControllerName()
+    {
+        return $this->controller;
+    }
+    
+    public function getActionName()
+    {
+        return $this->action;
+    }
+    
+    public function getController($name)
+    {
+        foreach ($this->options['dirs'] as $namespace => $dir) {
+            $file = $dir . '/' . $namespace . '/Controller/' . ucfirst($name) . 'Controller.php';
 
             if (!is_file($file)) {
                 continue;
             }
 
-            require $file;
+            require_once $file;
             
-            $class = $namespace . '\Controller\\' . ucfirst($controller) . 'Controller';
+            $class = $namespace . '\Controller\\' . ucfirst($name) . 'Controller';
 
-            if (!class_exists($class, false)) {
-                continue;
-            }
-
-            $controllerObject = new $class(array(
-                'widget' => $this->widget
+            return new $class(array(
+                'widget' => $this->rootWidget
             ));
-
-            $actionMethod = $action . 'Action';
-            if (method_exists($controllerObject, $actionMethod)) {
-                return $controllerObject->$actionMethod();
-            }
         }
         
-        return $this->exception('The page you requested was not found.', 404);
+        $this->log(sprintf('Controller "%s" not found', $name));
+            
+        return false;
     }
-
+    
+    public function getAction()
+    {
+        
+    }
+    
     /**
      * Set application directories
      *

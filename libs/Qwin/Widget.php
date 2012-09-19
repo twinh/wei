@@ -35,7 +35,7 @@ abstract class Widget implements Widgetable
      * 
      * @var \Qwin
      */
-    protected $widget;
+    protected $rootWidget;
 
     /**
      * init widget
@@ -55,7 +55,7 @@ abstract class Widget implements Widgetable
             throw new \InvalidArgumentException('Option "widget" should be an instance of "' . __CLASS__ . '"');
         }
 
-        $this->widget = &$options['widget'];
+        $this->rootWidget = &$options['widget'];
     }
 
     /**
@@ -119,18 +119,19 @@ abstract class Widget implements Widgetable
      */
     public function __call($name, $args)
     {
-        return $this->widget->invokeWidget($name, $args, null, $this);
+        //return call_user_func($this->$name, $name, $args, null, $this);
+        return $this->rootWidget->invokeWidget($name, $args, null, $this);
     }
 
     /**
      * 魔术方法,实现通过对象属性获取同名微件
      *
      * @param string $name the name of widget
-     * @return Qwin_Widget
+     * @return \Qwin\Widget
      */
     public function __get($name)
     {
-        return $this->$name = $this->widget->getWidget($name, null, $this);
+        return $this->$name = $this->rootWidget->getWidget($name, null, $this);
     }
 
     // should be implemented by subclasses

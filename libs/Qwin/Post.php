@@ -31,7 +31,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-02 00:44:56
  */
-class Qwin_Post extends Qwin_Request
+class Post extends Request
 {
     public function __construct($options = null)
     {
