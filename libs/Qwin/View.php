@@ -35,6 +35,41 @@
 class Qwin_View extends Qwin_ArrayWidget
 {
     /**
+     * 设置变量
+     *
+     * @param string $name 变量名称
+     * @param mixed $value 变量的值
+     * @return object 当前对象
+     */
+    public function assign($name, $value = null)
+    {
+        if (is_array($name)) {
+            $this->_data = $name + $this->_data;
+        } else {
+            $this->_data[$name] = $value;
+        }
+        return $this;
+    }
+    
+    public function render($name = null, array $various = array())
+    {
+        
+    }
+    
+    public function display($name = null, array $various = array())
+    {
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /**
      * 视图是否已展示
      *
      * @var boolen
@@ -62,33 +97,6 @@ class Qwin_View extends Qwin_ArrayWidget
 
         // 设置视图根目录为应用根目录
         $this->options['dirs'] = &$this->app->options['dirs'];
-    }
-
-    public function getViewFile($module = null, $action = null)
-    {
-        !$module && $module = $this->module();
-        !$action && $action = $this->action();
-        $module = ucfirst((string)$module);
-        $action = (string)$action;
-
-        foreach ($this->options['dirs'] as $dir) {
-            $file = $dir . '/' . $module . '/views/' . $action . '.php';
-            if (is_file($file)) {
-                return $file;
-            } else {
-                $fileCache[] = $file;
-            }
-        }
-
-        throw new Qwin_Exception('All view files not found: "' . implode(';', $fileCache) . '".');
-    }
-
-    /**
-     * 展示视图
-     */
-    public function display($layout = null, array $data = null)
-    {
-        return $this;
     }
 
     /**
@@ -160,101 +168,5 @@ class Qwin_View extends Qwin_ArrayWidget
         unset($output);
 
         return $this;
-    }
-
-    public function displayFile($file)
-    {
-        // 判断视图是否已输入
-        if ($this->_displayed) {
-            return false;
-        }
-        $this->_displayed = true;
-
-        $file = $this->getFile($file);
-
-        extract($this->_data);
-
-        require $file;
-    }
-
-    /**
-     * 设置变量
-     *
-     * @param string $name 变量名称
-     * @param mixed $value 变量的值
-     * @return object 当前对象
-     */
-    public function assign($name, $value = null)
-    {
-        if (is_array($name)) {
-            $this->_data = $name + $this->_data;
-        } else {
-            $this->_data[$name] = $value;
-        }
-        return $this;
-    }
-
-    /**
-     * 从视图目录获取文件路径
-     *
-     * @param string $file 文件相对链接
-     * @return string
-     * @todo cache
-     */
-    public function getFile($file)
-    {
-        if (file_exists($file)) {
-            return $file;
-        }
-        foreach ($this->options['dirs'] as $dir) {
-            if (is_file($file2 = $dir . '/' . $file)) {
-                return $file2;
-            }
-        }
-        $this->exception('File "%s" not found.', $file);
-    }
-
-    /**
-     * Get file url address
-     *
-     * @param string $file the relative file path of dirs options
-     * @return string
-     * @todo how about $_SERVER['DOCUMENT_ROOT'] is a custom path or symlink ?
-     */
-    public function getUrlFile($file)
-    {
-        $file = realpath($this->getFile($file));
-        return strtr(substr($file, strlen($_SERVER['DOCUMENT_ROOT'])), '\\', '/');
-    }
-
-    /**
-     * 设置视图已展示
-     *
-     * @return Qwin_View 当前对象
-     */
-    public function setDisplayed()
-    {
-        $this->_displayed = true;
-        return $this;
-    }
-
-    /**
-     * 视图是否已展示
-     *
-     * @return boolen
-     */
-    public function isDisplayed()
-    {
-        return $this->_displayed;
-    }
-
-    public function wrappedBy()
-    {
-
-    }
-
-    public function layout()
-    {
-
     }
 }

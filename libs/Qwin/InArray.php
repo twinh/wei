@@ -30,6 +30,7 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-11-15 12:42:41
+ * @todo        rename to beArrayValue ?
  */
 class Qwin_InArray extends Qwin_Widget
 {

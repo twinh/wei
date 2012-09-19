@@ -2,39 +2,21 @@
 /**
  * Qwin Framework
  *
- * Copyright (c) 2008-2012 Twin Huang. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id$
  */
+
+namespace Qwin;
 
 /**
  * Error
  *
  * @package     Qwin
- * @subpackage  Widget
- * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-04-02 09:29:07
  * @todo        ajax, cli support
  * @todo        throw exception when called
  * @todo        add options display
  */
-class Qwin_Error extends Qwin_Widget
+class Error extends Widget
 {
     /**
      * Options
@@ -54,7 +36,7 @@ class Qwin_Error extends Qwin_Widget
     {
         parent::__construct($options);
         if ($this->options['exception']) {
-            set_exception_handler(array($this, 'call'));
+            set_exception_handler(array($this, '__invoke'));
         }
         if ($this->options['error']) {
             set_error_handler(array($this, 'renderError'));
@@ -78,7 +60,7 @@ class Qwin_Error extends Qwin_Widget
                 restore_error_handler();
             }
 
-            if ($message instanceof Exception) {
+            if ($message instanceof \Exception) {
                 if (is_array($code)) {
                     $options = $code;
                 }
@@ -124,7 +106,7 @@ class Qwin_Error extends Qwin_Widget
             }
 
             // TODO more info, may be need an ajax view file
-            if ($this->isAjax()) {
+            if ($this->inAjax()) {
                 exit(json_encode(array(
                     'code' => $code ? ($code > 0 ? -$code : $code) : -9999,
                     'message' => $message,
@@ -170,9 +152,9 @@ class Qwin_Error extends Qwin_Widget
             // Server Environment
             $server = $this->getServer();
 
-            $this->log->fatal($code . $message . ' ' . $stackInfo);
+            $this->log($code . $message . ' ' . $stackInfo);
 
-            $this->trigger('error', array('data' => get_defined_vars()));
+            //$this->trigger('error', array('data' => get_defined_vars()));
 
             // require view file
             require dirname(__FILE__) . '/views/error.php';
@@ -214,7 +196,7 @@ class Qwin_Error extends Qwin_Widget
     public function renderError($errno, $errstr, $errfile, $errline)
     {
         restore_error_handler();
-        throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+        throw new \ErrorException($errstr, 500, $errno, $errfile, $errline);
     }
 
     /**

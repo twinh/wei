@@ -70,6 +70,7 @@ class Qwin extends Widget
         'widget'        => null,
         'invoker'       => null,
         'deps'          => array(),
+        'initWidgets'   => array(),
         'funcMap'       => array(
             'isArray'       => 'is_array',
             'isBool'        => 'is_bool',
@@ -101,6 +102,11 @@ class Qwin extends Widget
         $this->widgets['widget'] = $this;
         
         parent::__construct($options);
+        
+        // call
+        foreach ($options['initWidgets'] as $widgetName) {
+            $this->getWidget($widgetName, null, $this);
+        }
     }
 
     /**
@@ -297,7 +303,8 @@ class Qwin extends Widget
             return $this->widgets[$lower] = new $class($options);
         }
 
-        return $this->exception('Class "' . $class . '" not found');
+        // call at ?
+        throw new Qwin\Exception(sprintf('Class "%s" not found', $class));
     }
     
     /**
@@ -316,6 +323,19 @@ class Qwin extends Widget
         }
         
         return $this->exception('Widget "' . $name . '" not found');
+    }
+    
+    public function hasWidget($name)
+    {
+        $widgetMap = $this->options['widgetMap'];
+        
+        if (isset($widgetMap[$name])) {
+            $class = $widgetMap[$name];
+        } else {
+            $class = 'Qwin\\' . ucfirst($name);
+        }
+        
+        return class_exists($class);
     }
 
     /**
