@@ -18,6 +18,6 @@ class InGet extends Widget
 {
     public function __invoke()
     {
-        return isset($_SERVER['REQUEST_METHOD']) && 'GET' == strtoupper($_SERVER['REQUEST_METHOD']);
+        return 'GET' == strtoupper($this->server('REQUEST_METHOD'));
     }
 }
