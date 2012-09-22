@@ -14,7 +14,7 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class ArrayWidget extends Widget implements \ArrayAccess
+class ArrayWidget extends Widget implements \ArrayAccess, \Countable, \IteratorAggregate
 {
     /**
      * The variable to store array
@@ -72,9 +72,9 @@ class ArrayWidget extends Widget implements \ArrayAccess
      * @param array $array
      * @return Qwin_ArrayWidget
      */
-    public function fromArray($array)
+    public function fromArray(array $array = array())
     {
-        $this->data = (array)$array + $this->data;
+        $this->data = $array;
         return $this;
     }
 
@@ -86,5 +86,25 @@ class ArrayWidget extends Widget implements \ArrayAccess
     public function toArray()
     {
         return $this->data;
+    }
+
+    /**
+     * Return the length of data
+     * 
+     * @return int the length of data
+     */
+    public function count()
+    {
+        return count($this->data);
+    }
+
+    /**
+     * Returns an iterator for data
+     * 
+     * @return \ArrayIterator
+     */
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->data);
     }
 }

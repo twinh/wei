@@ -303,8 +303,22 @@ class Qwin extends Widget
             return $this->widgets[$lower] = new $class($options);
         }
 
-        // call at ?
-        throw new Qwin\Exception(sprintf('Class "%s" not found', $class));
+        $traces = debug_backtrace();
+
+        // called by class ?
+        if (isset($traces[1]) && '__get' == $traces[1]['function'] && $name == $traces[1]['args'][0]) {
+            throw new Qwin\Exception(sprintf('Widget "%s" (class "%s") not found call in file "%s" at line %s', $traces[1]['args'][0], $class, $traces[1]['file'], $traces[1]['line']));
+        } elseif (isset($traces[3]) && $name == $traces[3]['function']) {
+            // call_user_func
+            $file = isset($traces[3]['file']) ? $traces[3]['file'] : $traces[4]['file'];
+            $line = isset($traces[3]['line']) ? $traces[3]['line'] : $traces[4]['line'];
+            throw new Qwin\Exception(sprintf('Widget "%s" (class "%s") not found, call in file "%s" at line %s', $traces[3]['function'], $class, $file, $line));
+        } else {
+            // would this happen ?
+            //Call to undefined method class::method
+            //Undefined property: class::$property
+            throw new Qwin\Exception(sprintf('Property or method "%s" not defined', $name));
+        }
     }
     
     /**

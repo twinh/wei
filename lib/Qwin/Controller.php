@@ -28,7 +28,13 @@ abstract class Controller extends Widget
         $method = $action . 'Action';
         
         if (method_exists($this, $method)) {
-            return $this->$method();
+            $this->trigger('before.action');
+            
+            $result = $this->$method();
+            
+            $this->trigger('after.action');
+            
+            return $result;
         }
         
         $this->log(sprintf('Action "%s" not found in controller "%s".', $action, get_class($this)));

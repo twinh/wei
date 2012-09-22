@@ -16,34 +16,33 @@ namespace Qwin;
  * @todo        add init data support
  * @todo        add array param support
  */
-class Get extends Request
+class Get extends ArrayWidget
 {
+    public $options = array(
+        'parameters' => false,
+    );
+    
     public function __construct($options = null)
     {
         parent::__construct($options);
         
-        $params = $this->router->matchRequestUri();
-        $this->data = $params ? $params : $_GET;
-    }
-
-    /**
-     * Set get data
-     *
-     * @param string|array $name
-     * @param mixed $value
-     * @return Qwin_Get
-     */
-    public function set($name, $value = null, array $options = array())
-    {
-        if (is_array($name)) {
-            foreach ($name as $key => $value) {
-                $this->data[$key] = $value;
-                $this->request->set($name, $value);
-            }
+        if (is_array($this->options['parameters'])) {
+            $this->data = $this->options['parameters'];
         } else {
-            $this->data[$name] = $value;
-            $this->request->set($name, $value);
+            // todo router start or not
+            $this->data = $this->router->matchRequestUri() ?: $_GET;
         }
-        return $this;
+    }
+    
+    /**
+     * Return get parameter
+     * 
+     * @param string $name the parameter name
+     * @param mixed $default the default parameter value if the parameter does not exist
+     * @return mixed the parameter value
+     */
+    public function __invoke($name, $default = null)
+    {
+        return isset($this->data[$name]) ? $this->data[$name] : $default;
     }
 }

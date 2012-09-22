@@ -16,56 +16,49 @@ namespace Qwin;
  */
 class Request extends ArrayWidget
 {
+    /**
+     * Options
+     * 
+     * @var array
+     */
+    public $options = array(
+        'parameters' => false,
+    );
+
+    /**
+     * Constructor
+     * 
+     * @param array $options
+     */
     public function __construct(array $options = array())
     {
         parent::__construct($options);
         
-        $params = $this->router->matchRequestUri();
-        $this->data = $params + $_REQUEST;
+        if (is_array($this->options['parameters'])) {
+            $this->data = $this->options['parameters'];
+        // rebuild request parameters from other widgets
+        } else {
+            $order = ini_get('request_order') ?: ini_get('variables_order');
+
+            $map = array('G' => 'get', 'P' => 'post', 'C' => 'cookie');
+
+            foreach (str_split(strtoupper($order)) as $key) {
+                if (isset($map[$key])) {
+                    $this->data = $this->$map[$key]->toArray() + $this->data;
+                }
+            }
+        }
     }
 
     /**
-     * Get request data as widget variable
-     *
-     * @param string $name
-     * @param mixed $default
-     * @return Qwin_Widget
+     * Return request parameter
+     * 
+     * @param string $name the parameter name
+     * @param mixed $default the default parameter value if the parameter does not exist
+     * @return mixed the parameter value
      */
-    public function __invoke($name, $default = null, array $options = array())
+    public function __invoke($name, $default = null)
     {
         return isset($this->data[$name]) ? $this->data[$name] : $default;
-    }
-
-    /**
-     * set request data
-     *
-     * @param string|array $name
-     * @param mixed $value
-     * @return Qwin_Reqeust
-     */
-    public function set($name, $value = null, array $options = array())
-    {
-        if (is_array($name)) {
-            foreach ($name as $key => $value) {
-                $this->data[$key] = $value;
-            }
-        } else {
-            $this->data[$name] = $value;
-        }
-        return $this;
-    }
-
-    /**
-     * Remove get data
-     *
-     * @param string $name
-     * @return Qwin_Request
-     */
-    public function remove($name)
-    {
-        if (isset($this->data[$name])) {
-            unset($this->data[$name]);
-        }
-        return $this;
     }
 }
