@@ -16,6 +16,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @see         http://api.jquery.com/category/events/event-object/
  * @todo        add default event shut_down error ...
+ * @todo        event manager
  */
 class Event extends Widget
 {
