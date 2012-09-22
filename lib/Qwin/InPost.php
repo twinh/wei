@@ -18,6 +18,6 @@ class InPost extends Widget
 {
     public function __invoke()
     {
-        return isset($_SERVER['REQUEST_METHOD']) && 'POST' == strtoupper($_SERVER['REQUEST_METHOD']);
+        return 'POST' == strtoupper($this->server('REQUEST_METHOD'));
     }
 }

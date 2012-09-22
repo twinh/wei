@@ -13,20 +13,16 @@ namespace Qwin;
  * 
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
- * @todo        remove global var $_SERVER
  */
 class InAjax extends Widget
 {
     public function __invoke()
     {
         // debug support
-        if ($this->config('debug')) {
-            if ($this->get('ajax')) {
-                return true;
-            }
+        if ($this->config('debug') && $this->get('ajax')) {
+            return true;
         }
         
-        return isset($_SERVER['HTTP_X_REQUESTED_WITH'])
-            && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+        return 'xmlhttprequest' == strtolower($this->server('HTTP_X_REQUESTED_WITH'));
     }
 }
