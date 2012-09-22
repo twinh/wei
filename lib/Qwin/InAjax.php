@@ -19,6 +19,13 @@ class InAjax extends Widget
 {
     public function __invoke()
     {
+        // debug support
+        if ($this->config('debug')) {
+            if ($this->get('ajax')) {
+                return true;
+            }
+        }
+        
         return isset($_SERVER['HTTP_X_REQUESTED_WITH'])
             && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
     }
