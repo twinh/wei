@@ -18,7 +18,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "Qwin": "libs"
+            "Qwin": "lib"
         }
     }
 }

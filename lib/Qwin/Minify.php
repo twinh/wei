@@ -49,12 +49,8 @@ class Minify extends Widget
 
         // todo 缓存类型,参数
         $this->_cache = $this->fcache;
-        
-        
-        
-        $this->filter('response', function($content){
             
-        });
+        $this->filter('response', array($this, 'replaceTags'));
     }
 
     public function __invoke($file)
@@ -135,6 +131,25 @@ class Minify extends Widget
         } else {
             return $this->exception('Unsupport output type "' . $ext . '"');
         }
+    }
+    
+    public function replaceTags($output)
+    {
+        $replace = '';
+        
+        if ($css = $this->pack('css')) {
+            $replace .= '<link rel="stylesheet" type="text/css" href="' . $this->url('minify', 'index', array('g' => $css)) . '"/>' . PHP_EOL;
+        }
+        
+        if ($js = $this->pack('js')) {
+            $replace .= '<script type="text/javascript" src="' . $this->url('minify', 'index', array('g' => $js)) . '"></script>' . PHP_EOL;
+        }
+        
+        if ($replace) {
+            $output = $this->replaceFirst($output, '</head>', $replace . '</head>');
+        }
+        
+        return $output;
     }
     
     public function __toString()

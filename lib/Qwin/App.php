@@ -69,9 +69,8 @@ class App extends Widget
     {
         $controllerObject = $this->getController($controller);
         
-        
-        
         if ($controllerObject) {
+                      
             $result = $controllerObject($action);
             
             if ($result) {
@@ -81,7 +80,7 @@ class App extends Widget
             return $this;
         }
           
-        throw new \Exception('The page you requested was not found.', 404);
+        throw new Exception('The page you requested was not found.', 404);
     }
     
     public function getControllerName()

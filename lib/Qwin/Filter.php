@@ -2,39 +2,74 @@
 /**
  * Qwin Framework
  *
- * Copyright (c) 2008-2012 Twin Huang. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @author      Twin Huang <twinh@yahoo.cn>
- * @copyright   Twin Huang
+ * @copyright   Copyright (c) 2008-2012 Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id$
  */
+
+namespace Qwin;
 
 /**
  * Filter
  * 
  * @package     Qwin
- * @subpackage  Widget
- * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-23 17:23:26
  */
-class Qwin_Filter extends Qwin_Widget
+class Filter extends Widget
 {
-    public function __invoke()
+    protected $filters = array();
+
+    public function __invoke($name, $callback)
     {
+        if (is_callable($callback)) {
+            return $this->add($name, $callback);
+        } else {
+            return $this->execute($name, $callback);
+        }
+    }
+    
+    public function add($name, $callback)
+    {
+        $this->filters[$name][] = $callback;
         
+        return $this;
+    }
+    
+    public function execute($name, $data)
+    {
+        if (isset($this->filters[$name])) {
+            foreach ($this->filters[$name] as $callback) {
+                $data = call_user_func($callback, $data);
+            }
+            return $data;
+        }
+        
+        $this->log(sprintf('Undefine filter name "%s"', $name));
+        return $data;
+    }
+    
+    public function has($name, $callback)
+    {
+        if (!isset($this->filters[$name])) {
+            throw new Exception(sprintf('Undefined filter name "%s"', $name));
+        }
+        
+        return (bool)array_search($callback, $this->filters[$name], true);
+    }
+    
+    public function remove($name, $callback)
+    {
+        if (!isset($this->filters[$name])) {
+            throw new Exception(sprintf('Undefined filter name "%s"', $name));
+        }
+        
+        $key = array_search($callback, $this->filters[$name], true);
+        
+        if (false === $key) {
+            return false;
+        }
+        
+        unset($this->filters[$name][$key]);
+        
+        return true;
     }
 }
