@@ -18,6 +18,6 @@ class Trigger extends Widget
 {
     public function __invoke($event, $params = array())
     {
-        return $this->event->__invoke($event, $params);
+        return $this->eventManager->__invoke($event, $params);
     }
 }
