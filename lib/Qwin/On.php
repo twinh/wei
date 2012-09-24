@@ -26,6 +26,6 @@ class On extends Widget
      */
     public function __invoke($event, $callback, $priority = 10)
     {
-        return $this->event->add($event, $callback, $priority);
+        return $this->eventManager->add($event, $callback, $priority);
     }
 }
