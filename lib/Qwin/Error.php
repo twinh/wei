@@ -125,9 +125,9 @@ class Error extends Widget
             $fileInfo = $this->getFileCode($file, $line);
 
             // System Information
-            $requestMethod = $_SERVER['REQUEST_METHOD'];
+            $requestMethod = $this->server['REQUEST_METHOD'];
 
-            $requestUrl = htmlspecialchars(urldecode($_SERVER['REQUEST_URI']), ENT_QUOTES);;
+            $requestUrl = htmlspecialchars(urldecode($this->server['REQUEST_URI']), ENT_QUOTES);;
 
             $serverTime = strftime('%c');
 
@@ -283,14 +283,14 @@ class Error extends Widget
     }
 
     /**
-     * Get readable server information form $_SERVER for html output
+     * Get readable server($_SERVER) information for html output
      *
      * @return array
      */
     public function getServer()
     {
         $server = array();
-        foreach ($_SERVER as $key => $value) {
+        foreach ($this->server as $key => $value) {
             if ('PATH' == $key) {
                 $paths = explode(PATH_SEPARATOR, $value);
                 foreach ($paths as &$path) {
@@ -314,14 +314,14 @@ class Error extends Widget
     }
 
     /**
-     * Get reqeust information form $_GET for html output
+     * Get reqeust information ($_GET) for html output
      *
      * @return array
      */
     public function getGet()
     {
         $get = array();
-        foreach ($_GET as $key => $value) {
+        foreach ($this->get as $key => $value) {
             if (is_array($value)) {
                 $value = var_export($value, true);
             }
@@ -331,14 +331,14 @@ class Error extends Widget
     }
 
     /**
-     * Get reqeust information form $_POST for html output
+     * Get reqeust information ($_POST) for html output
      *
      * @return array
      */
     public function getPost()
     {
         $post = array();
-        foreach ($_POST as $key => $value) {
+        foreach ($this->post as $key => $value) {
             if (is_array($value)) {
                 $value = var_export($value, true);
             }
@@ -348,21 +348,21 @@ class Error extends Widget
     }
 
     /**
-     * Get reqeust information form $_COOKIE for html output
+     * Get reqeust information ($_COOKIE) for html output
      *
      * @return array
      */
     public function getCookie()
     {
         $cookie = array();
-        foreach ($_COOKIE as $key => $value) {
+        foreach ($this->cookie as $key => $value) {
             $cookie[$key] = htmlspecialchars($value, ENT_QUOTES);
         }
         return $cookie;
     }
 
     /**
-     * Get session information form $_SESSION for html output
+     * Get session information ($_SESSION) for html output
      *
      * @return array
      * @todo when session not enable ?
@@ -376,7 +376,7 @@ class Error extends Widget
             return 'Unable to get sesion object, may be some errors occurred when called Qwin_Session::__construct';
         }
 
-        foreach ($_SESSION as $key => $value) {
+        foreach ($this->session as $key => $value) {
             if (is_array($value)) {
                 $value = var_export($value, true);
             }
