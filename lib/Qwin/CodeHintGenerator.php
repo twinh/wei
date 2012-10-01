@@ -18,6 +18,8 @@ class CodeHintGenerator extends Widget
 {    
     public $options = array(
         'target' => 'doc/qwin-code-hint.php',
+        'exclusions' => false,
+        'withWidgetMap' => false, 
     );
     
     protected $indent = '    ';
@@ -56,6 +58,10 @@ class Widget implements Widgetable
 
         foreach (glob(__DIR__ . '/*.php') as $file) {
             $widgetName = basename($file, '.php');
+
+            if (in_array(strtolower($widgetName), $this->options['exclusions'])) {
+                continue;
+            }
             
             $widgetClass = '\Qwin\\' . $widgetName;
              
@@ -82,7 +88,7 @@ class Widget implements Widgetable
         
         // save file
         $dir = dirname($options['target']);
-        
+
         if (!is_dir($dir)) {
             mkdir($dir, 0777, true);
         }
@@ -162,5 +168,24 @@ class Widget implements Widgetable
         }
         
         return var_export($var, true);
+    }
+    
+    public function setExclusionsOption($widgets)
+    {
+        if (!empty($widgets) && is_string($widgets)) {
+            $exclusions = explode(',', $widgets);
+        } elseif (is_array($widgets)) {
+            $exclusions = $widgets;
+        } else {
+            $exclusions = array();
+        }
+        
+        array_walk($exclusions, function(&$value){
+            $value = strtolower(trim($value));
+        });
+        
+        $this->options['exclusions'] = $exclusions;
+        
+        return $this;
     }
 }
