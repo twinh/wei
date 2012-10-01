@@ -45,13 +45,11 @@ abstract class Widget implements Widgetable
      */
     public function __construct(array $options = array())
     {
-        // TODO what to do with init options ? 
         $this->option($options);
         
-        // or ?
-        //$this->options = $options + $this->options;
-
-        if (!$options['widget'] instanceof self) {
+        if (!isset($options['widget']) || empty($options['widget'])) {
+            $options['widget'] = \Qwin::getInstance();
+        } elseif (!$options['widget'] instanceof self) {
             throw new \InvalidArgumentException('Option "widget" should be an instance of "' . __CLASS__ . '"');
         }
 
