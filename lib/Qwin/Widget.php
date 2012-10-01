@@ -33,7 +33,7 @@ abstract class Widget implements Widgetable
     /**
      * The widget manager object
      * 
-     * @var \Qwin
+     * @var \Qwin\WidgetManager
      */
     protected $widgetManager;
 
@@ -48,7 +48,7 @@ abstract class Widget implements Widgetable
         $this->option($options);
         
         if (!isset($options['widget']) || empty($options['widget'])) {
-            $options['widget'] = \Qwin::getInstance();
+            $options['widget'] = WidgetManager::getInstance();
         } elseif (!$options['widget'] instanceof self) {
             throw new \InvalidArgumentException('Option "widget" should be an instance of "' . __CLASS__ . '"');
         }
