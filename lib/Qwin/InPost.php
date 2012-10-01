@@ -18,6 +18,11 @@ class InPost extends Widget
 {
     public function __invoke()
     {
+        // debug support
+        if ($this->config('debug') && $this->get('post')) {
+            return true;
+        }
+        
         return 'POST' == strtoupper($this->server('REQUEST_METHOD'));
     }
 }
