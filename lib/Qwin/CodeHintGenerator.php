@@ -21,15 +21,7 @@ class CodeHintGenerator extends Widget
         'exclusions' => false,
         'withWidgetMap' => false, 
     );
-    
-    protected $indent = '    ';
 
-    protected $propertyTmpl = 
-'    /**
-     * @var %s
-     */ 
-    public $%s;';
-    
     protected $classTmpl = 
 '<?php
 namespace Qwin;
@@ -40,52 +32,54 @@ class Widget implements Widgetable
 {
 %s
 }';
+    protected $propertyTmpl = 
+'    /**
+     * @var %s
+     */ 
+    public $%s;';
     
     protected $methodTmpl = 
 '    public function %s(%s)
     {
-        $%s = new \Qwin\%s;
+        $%s = new %s;
         return $%s->__invoke();
     }
  ';
 
+    /**
+     * Generate the widget code hint file
+     * 
+     * @param array $options
+     * @return \Qwin\CodeHintGenerator
+     */
     public function __invoke(array $options = array())
     {
         $this->option($options);
         $options = &$this->options;
         
         $content = '';
-
-        foreach (glob(__DIR__ . '/*.php') as $file) {
-            $widgetName = basename($file, '.php');
-
-            if (in_array(strtolower($widgetName), $this->options['exclusions'])) {
-                continue;
-            }
-            
-            $widgetClass = '\Qwin\\' . $widgetName;
-             
-            require_once $file;
-            
-            if (!class_exists($widgetClass, false)) {
-                $this->log(sprintf('Widget "%s" (Class "%s") not found', $widgetName, $widgetClass));
-                continue;
-            }
-            
-            $reflection = new \ReflectionClass($widgetClass);
-            
-            if (!$reflection->hasMethod('__invoke')) {
-                $this->log(sprintf('Method "__invoke" not found in class "%s"', $widgetClass));
-                continue;
-            }
-            
-            $invokeMethod = $reflection->getMethod('__invoke');
-
-            $methodContent = $this->generateMethodDocComment($invokeMethod) . PHP_EOL . $this->generateMethodBody($invokeMethod, $widgetName);
-
-            $content .= $this->generatePropertyBody($widgetClass, $widgetName) . PHP_EOL . PHP_EOL . $methodContent . PHP_EOL;
-        }
         
+        // generate the custom widgets
+        if ($options['withWidgetMap']) {
+            foreach ($this->rootWidget->option('widgetMap') as $widget => $class) {
+                if ($this->isExcludeWidget($widget)) {
+                    continue;
+                }
+                $content .= $this->generateWidgetCodeHint($widget, $class);
+            }
+        }
+
+        // generate the base widgets
+        foreach (glob(__DIR__ . '/*.php') as $file) {
+            $widget = basename($file, '.php');
+
+            if ($this->isExcludeWidget($widget)) {
+                continue;
+            }
+
+            $content .= $this->generateWidgetCodeHint($widget, '\Qwin\\' . $widget);
+        }
+
         // save file
         $dir = dirname($options['target']);
 
@@ -94,6 +88,31 @@ class Widget implements Widgetable
         }
         
         file_put_contents($options['target'], sprintf($this->classTmpl, $content));
+        
+        return $this;
+    }
+    
+    public function generateWidgetCodeHint($name, $class)
+    {
+        if (!class_exists($class)) {
+            $this->log(sprintf('Widget "%s" (Class "%s") not found', $name, $class));
+            return false;
+        }
+
+        $reflection = new \ReflectionClass($class);
+
+        if (!$reflection->hasMethod('__invoke')) {
+            $this->log(sprintf('Method "__invoke" not found in class "%s"', $class));
+            return false;
+        }
+
+        $invokeMethod = $reflection->getMethod('__invoke');
+
+        $methodContent = $this->generateMethodDocComment($invokeMethod)
+            . PHP_EOL . $this->generateMethodBody($invokeMethod, $name, $class);
+
+        return $this->generatePropertyBody($class, $name) . PHP_EOL . PHP_EOL 
+            . $methodContent . PHP_EOL;
     }
     
     /**
@@ -117,7 +136,7 @@ class Widget implements Widgetable
      */
     public function generateMethodDocComment(\ReflectionMethod $method)
     {
-        return $this->indent . $method->getDocComment();
+        return '    ' . $method->getDocComment();
     }
     
     /**
@@ -127,14 +146,10 @@ class Widget implements Widgetable
      * @param string $widgetName the name of the widget
      * @return string string
      */
-    protected function generateMethodBody(\ReflectionMethod $method, $widgetName)
+    protected function generateMethodBody(\ReflectionMethod $method, $widgetName, $fullClass)
     {
-        $lowerName = $widgetName;
-        $lowerName[0] = strtolower($lowerName[0]);
-
-        $parameterDefinition = '';
-        
         // generate parameters definition
+        $parameterDefinition = '';
         $parameters = $method->getParameters();
         $count = count($parameters) - 1;
         
@@ -151,7 +166,10 @@ class Widget implements Widgetable
             }
         }
         
-        return sprintf($this->methodTmpl, $lowerName, $parameterDefinition, $lowerName, $widgetName, $lowerName);
+        $lowerName = $widgetName;
+        $lowerName[0] = strtolower($lowerName[0]);
+        
+        return sprintf($this->methodTmpl, $lowerName, $parameterDefinition, $lowerName, $fullClass, $lowerName);
     }
     
     /**
@@ -170,6 +188,12 @@ class Widget implements Widgetable
         return var_export($var, true);
     }
     
+    /**
+     * Set exclusions option
+     * 
+     * @param array|string $widgets the exclusion widget list
+     * @return \Qwin\CodeHintGenerator
+     */
     public function setExclusionsOption($widgets)
     {
         if (!empty($widgets) && is_string($widgets)) {
@@ -187,5 +211,16 @@ class Widget implements Widgetable
         $this->options['exclusions'] = $exclusions;
         
         return $this;
+    }
+    
+    /**
+     * Check if the widget is in exclusion list
+     * 
+     * @param string $widget the name of widget
+     * @return boolen
+     */
+    public function isExcludeWidget($widget)
+    {
+        return in_array(strtolower($widget), $this->options['exclusions']);
     }
 }
