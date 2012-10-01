@@ -310,6 +310,7 @@ class Qwin extends Widget
             throw new Qwin\Exception(sprintf('Widget "%s" (class "%s") not found call in file "%s" at line %s', $traces[1]['args'][0], $class, $traces[1]['file'], $traces[1]['line']));
         } elseif (isset($traces[3]) && $name == $traces[3]['function']) {
             // call_user_func
+            // or call to undefiend method...
             $file = isset($traces[3]['file']) ? $traces[3]['file'] : $traces[4]['file'];
             $line = isset($traces[3]['line']) ? $traces[3]['line'] : $traces[4]['line'];
             throw new Qwin\Exception(sprintf('Widget "%s" (class "%s") not found, call in file "%s" at line %s', $traces[3]['function'], $class, $file, $line));

@@ -61,7 +61,7 @@ class Widget implements Widgetable
         
         // generate the custom widgets
         if ($options['withWidgetMap']) {
-            foreach ($this->rootWidget->option('widgetMap') as $widget => $class) {
+            foreach ($this->widgetManager->option('widgetMap') as $widget => $class) {
                 if ($this->isExcludeWidget($widget)) {
                     continue;
                 }

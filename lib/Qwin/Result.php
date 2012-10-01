@@ -32,7 +32,7 @@ namespace Qwin;
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-01-14 12:23:41
- * @todo        is it useful?
+ * @todo        xml, others?
  */
 class Result extends Widget
 {
@@ -41,11 +41,11 @@ class Result extends Widget
         'message' => 'message',
     );
 
-    public function __invoke($message, $code, array $append = array())
+    public function __invoke($message, $code = 0, array $append = array())
     {
-        return array(
+        return json_encode(array(
             $this->options['code'] => $code,
             $this->options['message'] => $message,
-        ) + $append;
+        ) + $append);
     }
 }

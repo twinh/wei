@@ -107,7 +107,7 @@ class App extends Widget
             $class = $namespace . '\Controller\\' . ucfirst($name) . 'Controller';
 
             return new $class(array(
-                'widget' => $this->rootWidget
+                'widget' => $this->widgetManager
             ));
         }
         
