@@ -22,6 +22,8 @@
  * @version     $Id: Memcache.php 1282 2012-07-06 07:38:44Z itwinh@gmail.com $
  */
 
+namespace Qwin;
+
 /**
  * Memcache
  *
@@ -31,7 +33,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-05-30
  */
-class Qwin_Memcache extends Qwin_Widget implements Qwin_Storable
+class Memcache extends Widget implements Storable
 {
     /**
      * Options

@@ -6,13 +6,15 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
 
+namespace Qwin;
+
 /**
  * IsDir
  *
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Qwin_IsDir extends Qwin_Widget
+class IsDir extends Widget
 {
     /**
      * Determine the object source is a file path, check with the include_path.

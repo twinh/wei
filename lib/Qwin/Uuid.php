@@ -22,6 +22,8 @@
  * @version     $Id$
  */
 
+namespace Qwin;
+
 /**
  * Uuid
  *
@@ -31,7 +33,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-12-20 22:05:35
  */
-class Qwin_Uuid extends Qwin_Widget
+class Uuid extends Widget
 {
     /**
      * Generate a FAKE UUID(universally unique identifier)

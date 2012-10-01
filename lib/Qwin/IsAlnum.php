@@ -22,6 +22,8 @@
  * @version     $Id$
  */
 
+namespace Qwin;
+
 /**
  * IsAlnum
  *
@@ -31,7 +33,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-5 11:44:38
  */
-class Qwin_IsAlnum extends Qwin_Widget
+class IsAlnum extends Widget
 {
     public function __invoke($value)
     {

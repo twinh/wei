@@ -22,6 +22,8 @@
  * @version     $Id$
  */
 
+namespace Qwin;
+
 /**
  * IsDigit
  *
@@ -31,7 +33,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-05 11:56:38
  */
-class Qwin_IsDigit extends Qwin_Widget
+class IsDigit extends Widget
 {
     public function __invoke($data)
     {

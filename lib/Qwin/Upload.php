@@ -23,7 +23,9 @@
  * @since       2010-05-27 07:56:33
  */
 
-class Qwin_Upload extends Qwin_Widget
+namespace Qwin;
+
+class Upload extends Widget
 {
     public $options = array(
         'name' => null,

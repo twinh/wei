@@ -22,6 +22,8 @@
  * @version     $Id$
  */
 
+namespace Qwin;
+
 /**
  * IsLength
  *
@@ -31,7 +33,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-01-14 16:28:13
  */
-class Qwin_IsLength extends Qwin_Widget
+class IsLength extends Widget
 {
     public function __invoke($data, $min, $max = null)
     {

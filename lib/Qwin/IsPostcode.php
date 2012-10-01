@@ -23,6 +23,8 @@
  * @version     $Id$
  */
 
+namespace Qwin;
+
 /**
  * IsPostcode
  *
@@ -32,7 +34,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-05-29 23:53:20
  */
-class IsPostcode extends Qwin_Widget
+class IsPostcode extends Widget
 {
     public function __invoke($data)
     {

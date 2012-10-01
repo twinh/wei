@@ -15,8 +15,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 use Doctrine\ORM\Configuration,
-    Doctrine\ORM\EntityManager as DoctrineEntityManager,
-    Doctrine\Common\Cache\Cache;
+    Doctrine\ORM\EntityManager as DoctrineEntityManager;
 
 class EntityManager extends Widget
 {
@@ -52,7 +51,7 @@ class EntityManager extends Widget
                 $cache = new $class;
                 break;
                 
-             case $options['cache'] instanceof Cache :
+             case $options['cache'] instanceof \Doctrine\Common\Cache\Cache:
                  $cache = $options['cache'];
                  break;
              

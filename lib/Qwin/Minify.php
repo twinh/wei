@@ -13,6 +13,7 @@ namespace Qwin;
  *
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @todo        add group
  */
 class Minify extends Widget
 {
@@ -138,11 +139,11 @@ class Minify extends Widget
         $replace = '';
         
         if ($css = $this->pack('css')) {
-            $replace .= '<link rel="stylesheet" type="text/css" href="' . $this->url('minify', 'index', array('g' => $css)) . '"/>' . PHP_EOL;
+            $replace .= sprintf($this->_tpls['css'], $this->url('minify', 'index', array('id' => $css))) . PHP_EOL;
         }
         
         if ($js = $this->pack('js')) {
-            $replace .= '<script type="text/javascript" src="' . $this->url('minify', 'index', array('g' => $js)) . '"></script>' . PHP_EOL;
+            $replace .= sprintf($this->_tpls['js'], $this->url('minify', 'index', array('id' => $js))) . PHP_EOL;
         }
         
         if ($replace) {

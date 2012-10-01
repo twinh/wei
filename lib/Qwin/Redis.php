@@ -22,6 +22,8 @@
  * @version     $Id$
  */
 
+namespace Qwin;
+
 /**
  * Redis
  *
@@ -31,7 +33,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-06-07
  */
-class Qwin_Redis extends Qwin_Widget implements Qwin_Storable
+class Redis extends Widget implements Storable
 {
     /**
      * Redis object

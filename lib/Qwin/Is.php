@@ -22,6 +22,8 @@
  * @version     $Id$
  */
 
+namespace Qwin;
+
 /**
  * Is
  *
@@ -31,7 +33,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-01-14 15:32:49
  */
-class Qwin_Is extends Qwin_Widget
+class Is extends Widget
 {
     public $options = array(
         'rules' => array(),

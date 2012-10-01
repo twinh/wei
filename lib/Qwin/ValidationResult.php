@@ -22,6 +22,8 @@
  * @version     $Id$
  */
 
+namespace Qwin;
+
 /**
  * ValidationResult
  *
@@ -31,7 +33,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-01-23 22:06:18
  */
-class Qwin_ValidationResult extends Qwin_Widget
+class ValidationResult extends Widget
 {
     /**
      * Validated result

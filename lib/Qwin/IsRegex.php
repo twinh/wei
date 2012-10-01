@@ -22,6 +22,8 @@
  * @version     $Id$
  */
 
+namespace Qwin;
+
 /**
  * IsRegx
  *
@@ -31,7 +33,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-02 00:36:13
  */
-class Qwin_IsRegex extends Qwin_Widget
+class IsRegex extends Widget
 {
     public function __invoke($value, $x)
     {

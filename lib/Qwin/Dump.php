@@ -22,6 +22,8 @@
  * @version     $Id$
  */
 
+namespace Qwin;
+
 /**
  * Dump
  *
@@ -31,7 +33,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-05 12:04:07
  */
-class Qwin_Dump extends Qwin_Widget
+class Dump extends Widget
 {
     public $options = array(
         'exit' => true,

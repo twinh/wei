@@ -1,4 +1,7 @@
 <?php
+
+namespace Qwin;
+
 /**
  * Cache
  *
@@ -9,7 +12,7 @@
  * @version     $Id$
  * @since       2012-06-16
  */
-class Qwin_Cache extends Qwin_Widget
+class Cache extends Widget
 {
     public $options = array(
         'driver' => 'apc',

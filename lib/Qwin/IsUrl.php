@@ -22,6 +22,8 @@
  * @version     $Id$
  */
 
+namespace Qwin;
+
 /**
  * IsUrl
  * 
@@ -31,7 +33,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-2 0:40:04
  */
-class Qwin_IsUrl extends Qwin_Widget
+class IsUrl extends Widget
 {
     
 }

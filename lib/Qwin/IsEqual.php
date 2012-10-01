@@ -22,6 +22,8 @@
  * @version     $Id: IsEqual.php 884 2011-12-01 02:23:44Z itwinh@gmail.com $
  */
 
+namespace Qwin;
+
 /**
  * IsEqual
  *
@@ -31,7 +33,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-11-15 10:16:59
  */
-class Qwin_IsEqual extends Qwin_Widget
+class IsEqual extends Widget
 {
     public function __invoke($value, $mixed = null, $strict = false)
     {

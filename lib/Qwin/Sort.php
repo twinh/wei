@@ -6,11 +6,15 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
 
+namespace Qwin;
+
 /**
  * Sort
  *
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @todo        rename to orderBy ?
+ * @tddo        add selectKeys or filterKeys ?
  */
 class Sort extends Widget
 {
