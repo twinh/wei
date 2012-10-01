@@ -22,6 +22,8 @@
  * @version     $Id: View.php 1249 2012-03-28 02:50:20Z itwinh@gmail.com $
  */
 
+namespace Qwin;
+
 /**
  * View
  *
@@ -32,7 +34,7 @@
  * @since       2010-08-06 19:25:40
  * @todo        rewrite
  */
-class Qwin_View extends Qwin_ArrayWidget
+class View extends ArrayWidget
 {
     /**
      * 设置变量

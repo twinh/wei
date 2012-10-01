@@ -22,6 +22,8 @@
  * @version     $Id: User.php 1221 2012-03-06 14:56:29Z itwinh@gmail.com $
  */
 
+namespace Qwin;
+
 /**
  * User
  *
@@ -30,8 +32,9 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-01-06 17:36:33
+ * @todo        rewrite
  */
-class Qwin_User extends Qwin_ArrayWidget
+class User extends ArrayWidget
 {
     protected $_initData = array(
         'id' => '0',

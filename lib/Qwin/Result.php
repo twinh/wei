@@ -22,6 +22,8 @@
  * @version     $Id$
  */
 
+namespace Qwin;
+
 /**
  * Result
  *
@@ -32,7 +34,7 @@
  * @since       2012-01-14 12:23:41
  * @todo        is it useful?
  */
-class Qwin_Result extends Qwin_Widget
+class Result extends Widget
 {
     public $options = array(
         'code' => 'code',

@@ -22,6 +22,8 @@
  * @version     $Id$
  */
 
+namespace Qwin;
+
 /**
  * Marker
  *
@@ -31,7 +33,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-01-12 13:39:05
  */
-class Qwin_Marker extends Qwin_Widget
+class Marker extends Widget
 {
     /**
      * Maker index

@@ -22,6 +22,8 @@
  * @version     $Id$
  */
 
+namespace Qwin;
+
 /**
  * IsMobile
  *
@@ -31,7 +33,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-05-29 23:43:02
  */
-class Qwin_IsMobile extends Qwin_Widget
+class IsMobile extends Widget
 {
     public function __invoke($data)
     {

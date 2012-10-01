@@ -22,6 +22,8 @@
  * @version     $Id: Flush.php 1267 2012-06-30 08:42:51Z itwinh@gmail.com $
  */
 
+namespace Qwin;
+
 /**
  * Flush
  *
@@ -31,7 +33,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-02-16 15:02:26
  */
-class Qwin_Flush extends Qwin_Widget
+class Flush extends Widget
 {
     public function __construct(array $options = array())
     {

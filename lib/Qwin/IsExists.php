@@ -22,6 +22,8 @@
  * @version     $Id$
  */
 
+namespace Qwin;
+
 /**
  * IsExists
  *
@@ -31,7 +33,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-05 11:44:13
  */
-class Qwin_IsExists extends Qwin_Widget
+class IsExists extends Widget
 {
     /**
      * whether function "stream_resolve_include_path" exists

@@ -22,6 +22,8 @@
  * @version     $Id$
  */
 
+namespace Qwin;
+
 /**
  * ToText
  *
@@ -31,7 +33,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-01-26 16:39:15
  */
-class Qwin_ToText extends Qwin_Widget
+class ToText extends Widget
 {
     /**
      * Convert widget source to text

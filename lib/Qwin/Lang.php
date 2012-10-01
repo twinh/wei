@@ -22,6 +22,8 @@
  * @version     $Id$
  */
 
+namespace Qwin;
+
 /**
  * Lang
  *
@@ -31,7 +33,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2010-08-16 18:41:13
  */
-class Qwin_Lang extends Qwin_ArrayWidget
+class Lang extends ArrayWidget
 {
     /**
      * 当前语言名称

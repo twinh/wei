@@ -1,4 +1,7 @@
 <?php
+
+namespace Qwin;
+
 /**
  * DbCache
  *
@@ -9,7 +12,7 @@
  * @version     $Id$
  * @since       2012-7-24
  */
-class Qwin_DbCache extends Qwin_Widget implements Qwin_Storable
+class DbCache extends Widget implements Storable
 {
     public $options = array(
         'dsn' => 'sqlite:cache.sqlite',

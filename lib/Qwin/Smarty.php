@@ -22,6 +22,8 @@
  * @version     $Id$
  */
 
+namespace Qwin;
+
 /**
  * Smarty
  *
@@ -31,7 +33,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-04-15 22:00:11 v0.7.9
  */
-class Qwin_Smarty extends Qwin_Widget
+class Smarty extends Widget
 {
     /**
      * Smarty对象

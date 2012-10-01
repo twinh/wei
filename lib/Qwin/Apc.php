@@ -22,6 +22,8 @@
  * @version     $Id$
  */
 
+namespace Qwin;
+
 /**
  * Apc
  *
@@ -31,7 +33,7 @@
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-05-30
  */
-class Qwin_Apc extends Qwin_Widget implements Qwin_Storable
+class Apc extends Widget implements Storable
 {
     public function __construct(array $options = array())
     {
