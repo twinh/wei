@@ -43,7 +43,7 @@ class Filter extends Widget
             return $data;
         }
         
-        $this->log(sprintf('Undefine filter name "%s"', $name));
+        $this->log(sprintf('Undefined filter name "%s"', $name));
         return $data;
     }
     
