@@ -18,7 +18,6 @@ class Config extends Widget
 {
     public function __invoke()
     {
-        $args = func_get_args();
-        return call_user_func_array(array($this->qwin, 'config'), $args);
+        return call_user_func_array(array($this->widgetManager, 'config'), func_get_args());
     }
 }

@@ -51,13 +51,12 @@ class App extends Widget
      * Startup application
      *
      * @param array $options options
-     * @return Qwin_App
+     * @return \Qwin\App
      */
     public function __invoke(array $options = array())
     {
         // merge options
-        $this->option($options);
-        $options = &$this->options;
+        $options = $this->option($options);
         
         $this->controller = $options['controller'] ?: $this->request('controller');
         $this->action = $options['action'] ?: $this->request('action');
