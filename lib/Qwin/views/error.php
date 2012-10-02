@@ -94,7 +94,7 @@ ol, ul, li {
                 </tr>
                 <tr>
                     <th>Qwin Version</th>
-                    <td><?php echo Qwin::VERSION ?></td>
+                    <td><?php echo \Qwin\WidgetManager::VERSION ?></td>
                 </tr>
                 <tr>
                     <th>PHP Version</th>

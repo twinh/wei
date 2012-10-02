@@ -12,7 +12,7 @@ namespace Qwin;
  * Error
  *
  * @package     Qwin
- * @todo        ajax, cli support
+ * @todo        cli support
  * @todo        throw exception when called
  * @todo        add options display
  */

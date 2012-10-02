@@ -46,7 +46,7 @@ abstract class Widget implements Widgetable
     public function __construct(array $options = array())
     {
         $this->option($options);
-        
+       
         if (!isset($options['widget']) || empty($options['widget'])) {
             $options['widget'] = WidgetManager::getInstance();
         } elseif (!$options['widget'] instanceof self) {
@@ -75,8 +75,7 @@ abstract class Widget implements Widgetable
             foreach ($name as $k => $v) {
                 $this->option($k, $v);
             }
-            $name = $this->options;
-            return $this;
+            return $this->options;
         }
 
         if (is_string($name) || is_int($name)) {
