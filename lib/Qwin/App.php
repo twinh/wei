@@ -8,6 +8,8 @@
 
 namespace Qwin;
 
+use Qwin\Response;
+
 /**
  * App
  *
@@ -45,6 +47,11 @@ class App extends Widget
      */
     protected $action;
     
+    /**
+     * Controller instances
+     * 
+     * @var array
+     */
     protected $controllers = array();
 
     /**
@@ -55,7 +62,6 @@ class App extends Widget
      */
     public function __invoke(array $options = array())
     {
-        // merge options
         $options = $this->option($options);
         
         $controller = $this->getControllerName();
@@ -64,6 +70,14 @@ class App extends Widget
         return $this->dispatch($controller, $action);
     }
     
+    /**
+     * Load and execute the controller action
+     * 
+     * @param string $controller The name of controller
+     * @param string $action The name of action
+     * @return mixed
+     * @throws Exception When controller or action not found
+     */
     public function dispatch($controller, $action = 'index')
     {
         $controllerObject = $this->getController($controller);
@@ -74,11 +88,11 @@ class App extends Widget
                 
                 $this->trigger('before.action');
                 
-                $result = $controllerObject->$method();
+                $response = $controllerObject->$method();
                 
                 $this->trigger('after.action');
                 
-                return $this->handleActionResult($result);
+                return $this->handleResponse($response);
             } else {
                 $this->log(sprintf('Action "%s" not found in controller "%s".', $action, get_class($controllerObject)));
                 throw new Exception('The page you requested was not found.', 404);
@@ -147,11 +161,15 @@ class App extends Widget
      */
     public function getController($name)
     {
+        if (isset($this->controllers[$name])) {
+            return $this->controllers[$name];
+        }
+        
         if (!preg_match('/^([_a-z0-9]+)$/i', $name)) {
             return false;
         }
         
-        foreach ($this->options['dirs'] as $namespace => $dir) {
+        foreach ((array)$this->options['dirs'] as $namespace => $dir) {
             $file = $dir . '/' . $namespace . '/Controller/' . ucfirst($name) . 'Controller.php';
 
             if (!is_file($file)) {
@@ -162,7 +180,7 @@ class App extends Widget
             
             $class = $namespace . '\Controller\\' . ucfirst($name) . 'Controller';
 
-            return new $class(array(
+            return $this->controllers[$name] = new $class(array(
                 'widget' => $this->widgetManager
             ));
         }
@@ -170,40 +188,38 @@ class App extends Widget
         return false;
     }
     
-    public function handleActionResult($result)
+    /**
+     * Handle the response variable by controller action
+     * 
+     * @param mixed $response
+     * @return mixed
+     * @throws \UnexpectedValueException
+     */
+    public function handleResponse($response)
     {
         switch (true) {
-            case is_null($result):
-            case is_string($result):
-                return $this->response($result);
+            // render default template and using $result as template variables 
+            case is_array($response) :
+                $response = $this->getController($this->controller)->render(null, $response);
                 
-            case is_array($result):
-                return $this->render(null, $result);
-                
-            case $result instanceof \Qwin\Response:
-                // todo
-                
-            case is_object($result) && method_exists($result, '__toString') :
-                
-                
-            default:
-                throw new \UnexpectedValueException();
+            // response directly
+            case is_string($response) :
+            case is_null($response) :
+                return $this->response($response);
+
+            // response
+            case $response instanceof Response :
+                return !$response->isSent() && $response->send();
+ 
+            default :
+                try {
+                    $response = strval($response);
+                    return $this->response($response);
+                } catch (\Exception $e) {
+                    throw new \UnexpectedValueException(
+                        sprintf('Expected array, printable variable or \Qwin\Response, "%s" given', 
+                        (is_object($response) ? get_class($response) : gettype($response))), 500);
+                }
         }
-    }
-    
-    /**
-     * Set application directories
-     *
-     * @param array $dirs
-     * @return \Qwin\App
-     */
-    public function setDirsOption($dirs)
-    {
-        if (empty($dirs)) {
-            $this->options['dirs'] = array(dirname(dirname(dirname(__FILE__))) . '/apps');
-        } else {
-            $this->options['dirs'] = (array)$dirs;
-        }
-        return $this;
     }
 }
