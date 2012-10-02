@@ -21,15 +21,28 @@ class Cookie extends ArrayWidget
      * @see http://php.net/manual/en/function.setcookie.php
      */
     public $options = array(
-        'parameters' => false,
-        'expire' => 86400,
-        'path' => '/',
-        'domain' => null,
-        'secure' => false,
-        'httpOnly' => false,
-        'raw' => false,
+        'parameters'    => false,
+        'expire'        => 86400,
+        'path'          => '/',
+        'domain'        => null,
+        'secure'        => false,
+        'httpOnly'      => false,
+        'raw'           => false,
     );
+    
+    /**
+     * The cookies that have not been sent to header, but will sent when class destruct
+     * 
+     * @var array
+     * @see \Qwin\Cookie::__destruct
+     */
+    protected $rawCookies = array();
 
+    /**
+     * Constructor
+     * 
+     * @param array $options
+     */
     public function __construct(array $options = array())
     {
         parent::__construct($options);
@@ -47,7 +60,7 @@ class Cookie extends ArrayWidget
      * @param string $key the name of cookie
      * @param mixed $value the value of cookie
      * @param array $options options for set cookie
-     * @return Qwin_Cookie
+     * @return \Qwin\Cookie
      */
     public function __invoke($key, $value = null, array $options = array())
     {
@@ -72,28 +85,26 @@ class Cookie extends ArrayWidget
 
     /**
      * Set cookie
-     *
-     * @param string $key the name of cookie
-     * @param mixed $value the value of cookie
+     * 
+     * @param string $key The name of cookie
+     * @param mixed $value The value of cookie
      * @param array $options
+     * @return \Qwin\Cookie
+     * @todo serialize or not ?
      */
     public function set($key, $value = null, array $options = array())
     {
-        $value = serialize($value);
-        $this->data[$key] = serialize($value);
-
-        $o = $options + $this->options;
-
-        $fn = $o['raw'] ? 'setrawcookie' : 'setcookie';
-        $fn($key, $value, time() + $o['expire'], $o['path'], $o['domain'], $o['secure'], $o['httpOnly']);
-
-        if (0 < $o['expire']) {
-            $this->data[$key] = $value;
-            $this->request->set($key, $value);
+        if (isset($options['expire']) && 0 > $options['expire'] && isset($this->data[$key])) {
+             unset($this->data[$key]);
         } else {
-            unset($this->data[$key]);
+            //$this->data[$key] = serialize($value);
+            $this->data[$key] = $value;
         }
-
+        
+        $this->rawCookies[$key] = array(
+            'value' => $value
+        ) + $options + $this->options;
+        
         return $this;
     }
 
@@ -105,8 +116,9 @@ class Cookie extends ArrayWidget
     public function remove($key)
     {
         if (isset($this->data[$key])) {
-            unset($this->data[$key]);
-            setcookie($key, null, -1);
+            $this->set($key, null, array(
+                'expire' => -1
+            ));
         }
         return $this;
     }
@@ -115,10 +127,34 @@ class Cookie extends ArrayWidget
      * Remove cookie
      *
      * @param string $key the name of cookie
-     * @return Qwin_Cookie
+     * @return \Qwin\Cookie
      */
     public function offsetUnset($key)
     {
         return $this->remove($key);
+    }
+    
+    /**
+     * Send cookie to header
+     * 
+     * @return \Qwin\Cookie
+     */
+    public function send()
+    {
+        foreach ($this->rawCookies as $name => $o) {
+            $fn = $o['raw'] ? 'setrawcookie' : 'setcookie';
+            $fn($name, $o['value'], time() + $o['expire'], $o['path'], $o['domain'], $o['secure'], $o['httpOnly']);
+            unset($this->rawCookies[$name]);
+        }
+        
+        return $this;
+    }
+    
+    /**
+     * Destructor
+     */
+    public function __destruct()
+    {
+        $this->send();
     }
 }
