@@ -8,13 +8,15 @@
 
 namespace Qwin;
 
-use Qwin\Response;
+use Qwin\Response,
+    Qwin\App\WorkFlowBreakNotifyException;
 
 /**
  * App
  *
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @todo        output anywhere support?
  */
 class App extends Widget
 {
@@ -66,7 +68,7 @@ class App extends Widget
         
         $controller = $this->getControllerName();
         $action = $this->getActionName();
-                
+
         return $this->dispatch($controller, $action);
     }
     
@@ -80,26 +82,33 @@ class App extends Widget
      */
     public function dispatch($controller, $action = 'index')
     {
-        $controllerObject = $this->getController($controller);
-        
-        if ($controllerObject) {
-            $method = $action . 'Action';
-            if (method_exists($controllerObject, $method)) {
-                
-                $this->trigger('before.action');
-                
-                $response = $controllerObject->$method();
-                
-                $this->trigger('after.action');
-                
-                return $this->handleResponse($response);
+        try {
+            $controllerObject = $this->getController($controller);
+
+            if ($controllerObject) {
+                $method = $action . 'Action';
+                if (method_exists($controllerObject, $method)) {
+
+                    $this->trigger('before.action');
+
+                    $response = $controllerObject->$method();
+
+                    $this->trigger('after.action');
+
+                    $this->handleResponse($response);
+                    
+                    return $this;
+                } else {
+                    $this->log(sprintf('Action "%s" not found in controller "%s".', $action, get_class($controllerObject)));
+                    throw new Exception('The page you requested was not found.', 404);
+                }
             } else {
-                $this->log(sprintf('Action "%s" not found in controller "%s".', $action, get_class($controllerObject)));
+                $this->log(sprintf('Controller "%s" not found', $controller));
                 throw new Exception('The page you requested was not found.', 404);
             }
-        } else {
-            $this->log(sprintf('Controller "%s" not found', $controller));
-            throw new Exception('The page you requested was not found.', 404);
+        // TODO has better name ?
+        } catch (WorkFlowBreakNotifyException $e) {
+            $this->log(sprintf('Caught exception "%s" with message "%s" called in %s on line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine()));
         }
     }
     
@@ -221,5 +230,16 @@ class App extends Widget
                         (is_object($response) ? get_class($response) : gettype($response))), 500);
                 }
         }
+    }
+    
+    /**
+     * Throwa a WorkFlowBreakNotifyException to prevent the previous dispatch process
+     * 
+     * @throws WorkFlowBreakNotifyException
+     */
+    public function preventPreviousDispatch()
+    {
+        $traces = debug_backtrace();
+        throw new WorkFlowBreakNotifyException('', 0, $traces[0]['file'], $traces[0]['line']);
     }
 }
