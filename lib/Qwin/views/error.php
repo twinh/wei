@@ -14,7 +14,7 @@ body {
     background: #fafafa;
 }
 body, pre, code {
-    font-family: Tahoma, Helvetica, Arial, "\5fae\8f6f\96c5\9ed1", "\5b8b\4f53", sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "\5fae\8f6f\96c5\9ed1", "\5b8b\4f53";
 }
 table {
     border-spacing: 0;
