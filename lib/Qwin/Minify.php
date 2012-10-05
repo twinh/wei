@@ -152,9 +152,4 @@ class Minify extends Widget
         
         return $output;
     }
-    
-    public function __toString()
-    {
-        return '';
-    }
 }
