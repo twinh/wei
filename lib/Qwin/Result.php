@@ -33,6 +33,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-01-14 12:23:41
  * @todo        xml, others?
+ * @todo        as response ?
  */
 class Result extends Widget
 {
