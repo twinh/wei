@@ -71,7 +71,7 @@ class EventManager extends Widget
     public function add($name, $callback, $priority = 10)
     {
         if (!is_callable($callback)) {
-            return $this->exception('Parameter 2 should be a valid callback');
+            throw new Exception('Parameter 2 should be a valid callback');
         }
 
         $name = strtolower($name);

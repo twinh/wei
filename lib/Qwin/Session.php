@@ -102,7 +102,7 @@ class Session extends ArrayWidget
     {
         $file = $line = null;
         if (headers_sent($file, $line)) {
-            return $this->exception(sprintf('Unable to start session, output started at %s:%s', $file, $line));
+            throw new Exception(sprintf('Unable to start session, output started at %s:%s', $file, $line));
         }
 
         // session started, ignored
