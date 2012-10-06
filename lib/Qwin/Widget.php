@@ -37,10 +37,10 @@ abstract class Widget implements Widgetable
     protected $widgetManager;
 
     /**
-     * init widget
+     * Constructor
      *
-     * @param mixed $options 对象的值
-     * @return Qwin_Widget 当前对象
+     * @param array $options The options
+     * @return \Qwin\Widget
      */
     public function __construct(array $options = array())
     {
