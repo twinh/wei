@@ -26,7 +26,6 @@ abstract class Widget implements Widgetable
      */
     public $options = array(
         'widget' => null,
-        'invoker' => null,
         'deps' => array(),
     );
     
@@ -110,25 +109,25 @@ abstract class Widget implements Widgetable
     /**
      * 魔术方法,实现通过方法调用同名微件
      *
-     * @param string $name 方法名称
-     * @param array $args 调用参数
+     * @param string $name The name of widget
+     * @param array $args The arguments for widget's __invoke method
      * @return mixed
      */
     public function __call($name, $args)
     {
-        //return call_user_func($this->$name, $name, $args, null, $this);
-        return $this->widgetManager->invokeWidget($name, $args, null, $this);
+        //return call_user_func_array($this->$name, $args);
+        return $this->widgetManager->invokeWidget($name, $args, null, $this->option('deps'));
     }
 
     /**
      * 魔术方法,实现通过对象属性获取同名微件
      *
-     * @param string $name the name of widget
+     * @param string $name The name of widget
      * @return \Qwin\Widget
      */
     public function __get($name)
     {
-        return $this->$name = $this->widgetManager->getWidget($name, null, $this);
+        return $this->$name = $this->widgetManager->getWidget($name, null, $this->option('deps'));
     }
 
     // should be implemented by subclasses

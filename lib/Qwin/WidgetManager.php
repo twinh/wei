@@ -67,7 +67,6 @@ class WidgetManager extends Widget
         'autoloadDirs'  => array(),
         'widgetMap'     => array(),
         'widget'        => null,
-        'invoker'       => null,
         'deps'          => array(),
         'initWidgets'   => array(),
         'funcMap'       => array(
@@ -239,26 +238,20 @@ class WidgetManager extends Widget
      * @param string $name the name of widget
      * @param array $args arguments for "__invoke" method
      * @param string $config
-     * @param \Qwin\Widget $invoker invoker
      * @return mixed
      * @throws \Qwin\Exception when method "__invoke" not found
      */
-    public function invokeWidget($name, array $args, $config = null, Widget $invoker = null)
+    public function invokeWidget($name, array $args, $config = null, $deps = array())
     {
         // check if function widget
         if (isset($this->options['funcMap'][$name])) {
             return call_user_func_array($this->options['funcMap'][$name], $args);
         }
 
-        $widget = $this->getWidget($name, $config, $invoker);
+        $widget = $this->getWidget($name, $config, $deps);
 
         if (!method_exists($widget, '__invoke')) {
             return $this->exception('Method "__invoke" not found in widget "' . get_class($widget) . '"');
-        }
-
-        // set invoker for widget
-        if (isset($widget->options['invoker'])) {
-            $widget->options['invoker'] = $invoker;
         }
 
         return call_user_func_array(array($widget, '__invoke'), $args);
@@ -270,16 +263,12 @@ class WidgetManager extends Widget
      * @param string $name the name of the widget, without class prefix "Qwin_"
      * @return Widget the widget object
      */
-    public function getWidget($name, $config = null, Widget $invoker = null)
+    public function getWidget($name, $config = null, $deps = array())
     {
         if ($config) {
             $full = $name . '.' . $config;
-        } elseif ($invoker && $deps = $invoker->option('deps')) {
-            if (isset($deps[$name])) {
-                $full = $deps[$name];
-            } else {
-                $full = $name;
-            }
+        } elseif (is_array($deps) && isset($deps[$name])) {
+            $full = $deps[$name];
         } else {
             $full = $name;
         }
@@ -301,13 +290,10 @@ class WidgetManager extends Widget
             $options = $this->config($full);
             
             if (null === $options && $this->config($name)) {
-                return $this->exception('Config name "' . $full . '" not found');
+                throw new \InvalidArgumentException(sprintf('Config name "%s" not found', $full));
             }
             
-            $options = array(
-                'widget' => $this,
-                'invoker' => $invoker,
-            ) + (array)$options;
+            $options = array('widget' => $this,) + (array)$options;
             
             return $this->widgets[$lower] = new $class($options);
         }
@@ -318,7 +304,7 @@ class WidgetManager extends Widget
 
         // called by class ?
         if (isset($traces[1]) && '__get' == $traces[1]['function'] && $name == $traces[1]['args'][0]) {
-            throw new Exception(sprintf('Widget "%s" (class "%s") not found call in file "%s" at line %s', $traces[1]['args'][0], $class, $traces[1]['file'], $traces[1]['line']));
+            throw new Exception(sprintf('Property or widget "%s" (class "%s") not found call in file "%s" at line %s', $traces[1]['args'][0], $class, $traces[1]['file'], $traces[1]['line']));
         } elseif (isset($traces[3]) && $name == $traces[3]['function']) {
             // for call_user_func
             $file = isset($traces[3]['file']) ? $traces[3]['file'] : $traces[4]['file'];
