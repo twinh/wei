@@ -21,17 +21,17 @@ interface Viewable
      * Render a template
      * 
      * @param string $name The name of template
-     * @param array $context The parameters pass to template
+     * @param array $context The variables pass to template
      */
-    public function render($name, $parameters);
+    public function render($name, $context = array());
     
     /**
      * Output a rendered template
      * 
      * @param string $name The name of template
-     * @param array $context The parameters pass to template
+     * @param array $context The variables pass to template
      */
-    public function display($name, $parameters);
+    public function display($name, $context = array());
     
     /**
      * Assign variables to template
