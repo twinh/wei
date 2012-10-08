@@ -18,8 +18,18 @@ namespace Qwin;
 class View extends Widget implements Viewable
 {
     public $options = array(
-        'dirs' => array(),
+        'dirs'  => array(),
+        'ext'   => '.php',
     );
+    
+    /**
+     * Get view object
+     * 
+     * @return \Qwin\View
+     */
+    public function __invoke() {
+        return $this;
+    }
     
     /**
      * @see \Qwin\Viewable::render
@@ -27,6 +37,9 @@ class View extends Widget implements Viewable
     public function render($name, $context = array())
     {
         $tmpl = new Tmpl(array('name' => $name));
+        
+        // inject view object
+        $tmpl->view = $this;
         
         return $tmpl->render($context);
     }

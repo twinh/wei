@@ -292,6 +292,6 @@ class App extends Widget
      */
     public function getDefaultTemplate()
     {
-        return '/' . strtolower($this->controller . '/' . $this->action) . $this->getViewEngine()->option('ext');
+        return strtolower($this->controller . '/' . $this->action) . $this->getViewEngine()->option('ext');
     }
 }
