@@ -28,11 +28,14 @@ class App extends Widget
      *       controller     the default controller name
      *
      *       action         the default action name
+     * 
+     *       view           the name of view engine
      */
     public $options = array(
         'dirs'          => array(),
         'controller'    => null,
         'action'        => null,
+        'viewEngine'    => 'view',
     );
     
     /**
@@ -55,6 +58,13 @@ class App extends Widget
      * @var array
      */
     protected $controllers = array();
+    
+    /**
+     * The view engine instance
+     * 
+     * @var \Qwin\Viewable
+     */
+    protected $viewEngine;
 
     /**
      * Startup application
@@ -209,7 +219,7 @@ class App extends Widget
         switch (true) {
             // render default template and using $result as template variables 
             case is_array($response) :
-                $response = $this->getController($this->controller)->render(null, $response);
+                $response = $this->getViewEngine()->render($this->getDefaultTemplate(), $response);
                 
             // response directly
             case is_string($response) :
@@ -241,5 +251,47 @@ class App extends Widget
     {
         $traces = debug_backtrace();
         throw new WorkFlowBreakNotifyException('', 0, $traces[0]['file'], $traces[0]['line']);
+    }
+    
+    /**
+     * Set view engine option
+     * 
+     * @param string $value The name of view engine
+     * @return \Qwin\App
+     */
+    public function setViewEngineOption($value)
+    {
+        $this->viewEngine = null;
+        $this->options['viewEngine'] = $value;
+        return $this;
+    }
+    
+    /**
+     * Get the view engine instance
+     * 
+     * @return \Qwin\Viewable
+     */
+    public function getViewEngine()
+    {
+        if (!$this->viewEngine) {
+            $this->viewEngine = $this->{$this->options['viewEngine']};
+            
+            if (!$this->viewEngine instanceof \Qwin\Viewable) {
+                throw new \UnexpectedValueException(sprintf('View engine widget should implement \Qwin\Viewable interface, "%s" given', 
+                    (is_object($this->viewEngine) ? get_class($this->viewEngine) : gettype($this->viewEngine))), 500);
+            }
+        }
+        return $this->viewEngine;
+    }
+    
+    /**
+     * Get default template file according to the controller, action and file
+     * extension provided by the view engine
+     * 
+     * @return string
+     */
+    public function getDefaultTemplate()
+    {
+        return '/' . strtolower($this->controller . '/' . $this->action) . $this->getViewEngine()->option('ext');
     }
 }
