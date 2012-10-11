@@ -18,7 +18,7 @@ class Twig extends Widget implements Viewable
 {
     /**
      * Options
-     * 
+     *
      * @var array
      * @see \Twig_Environment
      * @see \Twig_Loader_Filesystem
@@ -35,37 +35,37 @@ class Twig extends Widget implements Viewable
         'cache'                 => false,
         'auto_reload'           => null,
         'optimizations'         => -1,
-        
+
         // options for \Qwin\Twig
         'ext'                   => '.html.twig'
     );
-    
+
     /**
      * The twig environment object
-     * 
+     *
      * @return \Twig_Environment
      */
     protected $twig;
 
     /**
      * Constructor
-     * 
-     * @var array 
+     *
+     * @var array
      */
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-        
+
         $this->twig = new \Twig_Environment(new \Twig_Loader_Filesystem($this->options['paths']), $this->options);
-        
+
         $this->twig->addGlobal('widget', $this->widgetManager);
-        
+
         $this->twig->addGlobal('app', $this->app);
     }
-    
+
     /**
      * Get twig environment object
-     * 
+     *
      * @return \Twig_Environment
      */
     public function __invoke()

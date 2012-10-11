@@ -20,13 +20,14 @@ class BeInArray extends Widget
     /**
      * while $value is not find in the specify $array, use the first element of array instead
      *
-     * @param mixed $value
-     * @param array $array
+     * @param  mixed $value
+     * @param  array $array
      * @return mixed
      */
     public function __invoke($value, array $array)
     {
         !in_array($value, $array) && $value = $array[key($array)];
+
         return $value;
     }
 }

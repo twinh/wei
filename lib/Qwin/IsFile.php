@@ -19,7 +19,7 @@ class IsFile extends Widget
     /**
      * Determine the object source is a file path, check with the include_path.
      *
-     * @param bool $abs return file path or true
+     * @param  bool        $abs return file path or true
      * @return string|bool
      */
     public function __invoke($file, $abs = true)
@@ -39,6 +39,7 @@ class IsFile extends Widget
         if ($full) {
             return $abs ? $full : true;
         }
+
         return false;
     }
 }

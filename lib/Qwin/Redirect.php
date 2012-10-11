@@ -20,17 +20,17 @@ class Redirect extends Response
 {
     /**
      * Options
-     * 
-     * @var array 
+     *
+     * @var array
      */
     public $options = array(
         'view' => false,
         'delay' => 0,
     );
-    
+
     /**
      * Default view content
-     * 
+     *
      * @var string
      */
     protected static $html = '<!DOCTYPE html>
@@ -47,17 +47,17 @@ class Redirect extends Response
 
     /**
      * send a redirect response
-     * 
-     * @param string $url The url redirect to
-     * @param int $status The redirect status code
-     * @param array $options The widget options
+     *
+     * @param  string         $url     The url redirect to
+     * @param  int            $status  The redirect status code
+     * @param  array          $options The widget options
      * @return \Qwin\Redirect
-     * @throws Exception When custom view file not found 
+     * @throws Exception      When custom view file not found
      */
     public function __invoke($url = '', $status = 302, array $options = array())
     {
         $options = $this->option($options);
-        
+
         // use custom view file for redirect
         if ($options['view']) {
             if (is_file($options['view'])) {
@@ -67,18 +67,18 @@ class Redirect extends Response
                 throw new Exception(sprintf('View file "%s" not found', $options['view']));
             }
         } else {
-            $options['delay'] = (int)$options['delay'];
+            $options['delay'] = (int) $options['delay'];
 
             // Location header does not support delay
             if ($options['delay'] === 0) {
                 $this->header('Location', $url);
             }
-            
+
             $content = sprintf(static::$html, $options['delay'], htmlspecialchars($url, ENT_QUOTES, 'UTF-8'));
-            
+
             parent::__invoke($content, $status);
         }
-        
+
         return $this;
     }
 }

@@ -37,6 +37,6 @@ class IsMobile extends Widget
 {
     public function __invoke($data)
     {
-        return (bool)preg_match('/^1[358][\d]{9}$/', $data);
+        return (bool) preg_match('/^1[358][\d]{9}$/', $data);
     }
 }

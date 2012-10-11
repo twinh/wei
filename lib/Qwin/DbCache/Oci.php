@@ -35,7 +35,7 @@ class Qwin_DbCache_Oci extends Qwin_DbCache_Driver
 {
     /**
      * Sql queries
-     * 
+     *
      * @var array
      */
     protected $_sqls = array(

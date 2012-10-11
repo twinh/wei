@@ -37,6 +37,6 @@ class IsAlpha extends Widget
 {
     public function __invoke($value)
     {
-        return (bool)preg_match('/^([a-z]+)$/i', $value);
+        return (bool) preg_match('/^([a-z]+)$/i', $value);
     }
 }

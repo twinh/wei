@@ -1,7 +1,7 @@
 <?php
 /**
  * Qwin Framework
- * 
+ *
  * @copyright   Copyright (c) 2008-2012 Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
@@ -29,10 +29,10 @@ class Cookie extends ArrayWidget
         'httpOnly'      => false,
         'raw'           => false,
     );
-    
+
     /**
      * The cookies that have not been sent to header, but will sent when class destruct
-     * 
+     *
      * @var array
      * @see \Qwin\Cookie::__destruct
      */
@@ -40,13 +40,13 @@ class Cookie extends ArrayWidget
 
     /**
      * Constructor
-     * 
+     *
      * @param array $options
      */
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-        
+
         if (is_array($this->options['parameters'])) {
             $this->data = $this->options['parameters'];
         } else {
@@ -57,9 +57,9 @@ class Cookie extends ArrayWidget
     /**
      * Get or set cookie
      *
-     * @param string $key the name of cookie
-     * @param mixed $value the value of cookie
-     * @param array $options options for set cookie
+     * @param  string       $key     the name of cookie
+     * @param  mixed        $value   the value of cookie
+     * @param  array        $options options for set cookie
      * @return \Qwin\Cookie
      */
     public function __invoke($key, $value = null, array $options = array())
@@ -74,8 +74,8 @@ class Cookie extends ArrayWidget
     /**
      * Get cookie
      *
-     * @param string $key
-     * @param mixed $default default value
+     * @param  string $key
+     * @param  mixed  $default default value
      * @return mixed
      */
     public function get($key, $default = null)
@@ -85,10 +85,10 @@ class Cookie extends ArrayWidget
 
     /**
      * Set cookie
-     * 
-     * @param string $key The name of cookie
-     * @param mixed $value The value of cookie
-     * @param array $options
+     *
+     * @param  string       $key     The name of cookie
+     * @param  mixed        $value   The value of cookie
+     * @param  array        $options
      * @return \Qwin\Cookie
      * @todo serialize or not ?
      */
@@ -100,11 +100,11 @@ class Cookie extends ArrayWidget
             //$this->data[$key] = serialize($value);
             $this->data[$key] = $value;
         }
-        
+
         $this->rawCookies[$key] = array(
             'value' => $value
         ) + $options + $this->options;
-        
+
         return $this;
     }
 
@@ -120,23 +120,24 @@ class Cookie extends ArrayWidget
                 'expire' => -1
             ));
         }
+
         return $this;
     }
 
     /**
      * Remove cookie
      *
-     * @param string $key the name of cookie
+     * @param  string       $key the name of cookie
      * @return \Qwin\Cookie
      */
     public function offsetUnset($key)
     {
         return $this->remove($key);
     }
-    
+
     /**
      * Send cookie to header
-     * 
+     *
      * @return \Qwin\Cookie
      */
     public function send()
@@ -146,10 +147,10 @@ class Cookie extends ArrayWidget
             $fn($name, $o['value'], time() + $o['expire'], $o['path'], $o['domain'], $o['secure'], $o['httpOnly']);
             unset($this->rawCookies[$name]);
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Destructor
      */

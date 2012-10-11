@@ -72,7 +72,7 @@ class Is extends Widget
             if (!isset($rules['required'])) {
                 $value = true;
             } else {
-                $value = (bool)$rules['required'];
+                $value = (bool) $rules['required'];
                 unset($rules['required']);
             }
             $rules = array('required' => $value) + $rules;
@@ -81,7 +81,7 @@ class Is extends Widget
                 $widget = 'is' . ucfirst($rule);
 
                 // prepare parameters for validte widget
-                $params = (array)$params;
+                $params = (array) $params;
                 array_unshift($params, $data);
 
                 // TODO check if rule is exists

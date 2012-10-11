@@ -36,7 +36,7 @@ class Qwin_DbCache_PgSql extends Qwin_DbCache_Driver
 {
     /**
      * Sql queries
-     * 
+     *
      * @var array
      */
     protected $_sqls = array(

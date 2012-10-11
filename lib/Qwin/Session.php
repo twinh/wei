@@ -1,7 +1,7 @@
 <?php
 /**
  * Qwin Framework
- * 
+ *
  * @copyright   Copyright (c) 2008-2012 Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
@@ -50,7 +50,7 @@ class Session extends ArrayWidget
     public function __construct($options = null)
     {
         // merge options
-        $options = (array)$options + $this->options;
+        $options = (array) $options + $this->options;
         $this->options = &$options;
 
         // init all options
@@ -64,8 +64,8 @@ class Session extends ArrayWidget
     /**
      * Get or set options
      *
-     * @param mixed $name
-     * @param mixed $value
+     * @param  mixed $name
+     * @param  mixed $value
      * @return mixed
      */
     public function option($name = null, $value = null)
@@ -77,19 +77,21 @@ class Session extends ArrayWidget
             // set option
             return parent::option($name, $value);
         }
+
         return parent::option($name);
     }
 
     /**
      * Set current namespace
      *
-     * @param string $name
+     * @param  string       $name
      * @return Qwin_Session
      */
     public function setNamespaceOption($name)
     {
         $this->options['namespace'] = $name;
         $this->_namespace = $name;
+
         return $this;
     }
 
@@ -131,8 +133,8 @@ class Session extends ArrayWidget
     /**
      * Set a session value in current namespace
      *
-     * @param string $offset
-     * @param mixed $value
+     * @param  string       $offset
+     * @param  mixed        $value
      * @return Qwin_Session
      */
     public function set($offset, $value)
@@ -143,7 +145,7 @@ class Session extends ArrayWidget
     /**
      * Get a session from current namespace
      *
-     * @param string $name
+     * @param  string $name
      * @return mixed
      */
     public function get($offset)
@@ -154,7 +156,7 @@ class Session extends ArrayWidget
     /**
      * Clear session in $namespace or current namespace
      *
-     * @param string $namespace
+     * @param  string       $namespace
      * @return Qwin_Session
      */
     public function clear($namespace = null)
@@ -167,6 +169,7 @@ class Session extends ArrayWidget
             // clean up data for cli mode
             $this->data = array();
         }
+
         return $this;
     }
 

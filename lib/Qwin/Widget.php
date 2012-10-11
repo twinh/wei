@@ -28,10 +28,10 @@ abstract class Widget implements Widgetable
         'widget' => null,
         'deps' => array(),
     );
-    
+
     /**
      * The widget manager object
-     * 
+     *
      * @var \Qwin\WidgetManager
      */
     protected $widgetManager;
@@ -39,13 +39,13 @@ abstract class Widget implements Widgetable
     /**
      * Constructor
      *
-     * @param array $options The options
+     * @param  array        $options The options
      * @return \Qwin\Widget
      */
     public function __construct(array $options = array())
     {
         $this->option($options);
-       
+
         if (!isset($options['widget']) || empty($options['widget'])) {
             $options['widget'] = WidgetManager::getInstance();
         } elseif (!$options['widget'] instanceof self) {
@@ -58,8 +58,8 @@ abstract class Widget implements Widgetable
     /**
      * Get or set options
      *
-     * @param mixed $name option name or options array
-     * @param mixed $value
+     * @param  mixed $name  option name or options array
+     * @param  mixed $value
      * @return mixed
      * @example $widget->option('name');            // get "name" option's value
      *          $widget->option('name', 'value');   // set "name" to "value"
@@ -74,6 +74,7 @@ abstract class Widget implements Widgetable
             foreach ($name as $k => $v) {
                 $this->option($k, $v);
             }
+
             return $this->options;
         }
 
@@ -109,8 +110,8 @@ abstract class Widget implements Widgetable
     /**
      * 魔术方法,实现通过方法调用同名微件
      *
-     * @param string $name The name of widget
-     * @param array $args The arguments for widget's __invoke method
+     * @param  string $name The name of widget
+     * @param  array  $args The arguments for widget's __invoke method
      * @return mixed
      */
     public function __call($name, $args)
@@ -122,7 +123,7 @@ abstract class Widget implements Widgetable
     /**
      * 魔术方法,实现通过对象属性获取同名微件
      *
-     * @param string $name The name of widget
+     * @param  string       $name The name of widget
      * @return \Qwin\Widget
      */
     public function __get($name)

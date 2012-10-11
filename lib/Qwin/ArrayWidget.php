@@ -26,7 +26,7 @@ class ArrayWidget extends Widget implements \ArrayAccess, \Countable, \IteratorA
     /**
      * Check if the offset exists
      *
-     * @param string $offset
+     * @param  string $offset
      * @return bool
      */
     public function offsetExists($offset)
@@ -37,7 +37,7 @@ class ArrayWidget extends Widget implements \ArrayAccess, \Countable, \IteratorA
     /**
      * Get the offset value
      *
-     * @param string $offset
+     * @param  string $offset
      * @return mixed
      */
     public function offsetGet($offset)
@@ -49,7 +49,7 @@ class ArrayWidget extends Widget implements \ArrayAccess, \Countable, \IteratorA
      * Set the offset value
      *
      * @param string $offset
-     * @param mixed $value
+     * @param mixed  $value
      */
     public function offsetSet($offset, $value)
     {
@@ -69,12 +69,13 @@ class ArrayWidget extends Widget implements \ArrayAccess, \Countable, \IteratorA
     /**
      * Merge data from array
      *
-     * @param array $array
+     * @param  array            $array
      * @return Qwin_ArrayWidget
      */
     public function fromArray(array $array = array())
     {
         $this->data = $array;
+
         return $this;
     }
 
@@ -90,7 +91,7 @@ class ArrayWidget extends Widget implements \ArrayAccess, \Countable, \IteratorA
 
     /**
      * Return the length of data
-     * 
+     *
      * @return int the length of data
      */
     public function count()
@@ -100,7 +101,7 @@ class ArrayWidget extends Widget implements \ArrayAccess, \Countable, \IteratorA
 
     /**
      * Returns an iterator for data
-     * 
+     *
      * @return \ArrayIterator
      */
     public function getIterator()

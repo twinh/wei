@@ -18,9 +18,9 @@ class Forward extends Widget
 {
     /**
      * Forwards to the given controller and action
-     * 
-     * @param string $controller The name of controller
-     * @param action $action The name of action
+     *
+     * @param  string        $controller The name of controller
+     * @param  action        $action     The name of action
      * @return \Qwin\Forward
      */
     public function __invoke($controller, $action = 'index')
@@ -30,7 +30,7 @@ class Forward extends Widget
             ->setActionName($action)
             ->dispatch($controller, $action)
             ->preventPreviousDispatch();
-        
+
         return $this;
     }
 }

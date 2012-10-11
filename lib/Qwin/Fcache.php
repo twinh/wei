@@ -39,14 +39,14 @@ class Fcache extends Widget implements Storable
 
     public function __construct($options = null)
     {
-        $options = (array)$options + $this->options;
+        $options = (array) $options + $this->options;
         $this->option($options);
     }
 
     /**
      * Set cache dir
      *
-     * @param string $dir
+     * @param  string      $dir
      * @return Qwin_Fcache
      */
     public function setDirOption($dir)
@@ -60,15 +60,16 @@ class Fcache extends Widget implements Storable
             // @codeCoverageIgnoreEnd
         }
         $this->options['dir'] = $dir;
+
         return $this;
     }
 
     /**
      * Get or set cache
      *
-     * @param string $key the name of cache
-     * @param mixed $value
-     * @param int $expire expire time for set cache
+     * @param  string      $key    the name of cache
+     * @param  mixed       $value
+     * @param  int         $expire expire time for set cache
      * @return Qwin_Fcache
      */
     public function __invoke($key, $value = null, $expire = 0)
@@ -83,7 +84,7 @@ class Fcache extends Widget implements Storable
     /**
      * Get cache
      *
-     * @param string $key the name of cache
+     * @param  string      $key the name of cache
      * @return mixed|false
      */
     public function get($key, $options = null)
@@ -99,6 +100,7 @@ class Fcache extends Widget implements Storable
             return $content[1];
         } else {
             $this->remove($key);
+
             return false;
         }
     }
@@ -106,9 +108,9 @@ class Fcache extends Widget implements Storable
     /**
      * Set cache
      *
-     * @param string $key the name of cache
-     * @param value $value the value of cache
-     * @param int $expire expire time, 0 means never expired
+     * @param  string $key    the name of cache
+     * @param  value  $value  the value of cache
+     * @param  int    $expire expire time, 0 means never expired
      * @return bool
      */
     public function set($key, $value, $expire = 0, array $options = array())
@@ -117,15 +119,15 @@ class Fcache extends Widget implements Storable
 
         $content = $this->_prepareContent($value, $expire);
 
-        return (bool)file_put_contents($file, $content, LOCK_EX);
+        return (bool) file_put_contents($file, $content, LOCK_EX);
     }
 
     /**
      * Add cache, if cache is exists, return false
      *
-     * @param string $key the name of cache
-     * @param mixed $value the value of cache
-     * @param int $expire expire time (seconds)
+     * @param  string $key    the name of cache
+     * @param  mixed  $value  the value of cache
+     * @param  int    $expire expire time (seconds)
      * @return bool
      */
     public function add($key, $value, $expire = 0, array $options = array())
@@ -150,6 +152,7 @@ class Fcache extends Widget implements Storable
             // cache is not expired
             if ($this->_readAndVerify($handle, $file)) {
                 fclose($handle);
+
                 return false;
             }
 
@@ -162,9 +165,9 @@ class Fcache extends Widget implements Storable
     /**
      * Replace cache, if cache not exists, return false
      *
-     * @param string $key the name of cache
-     * @param mixed $value the value of cache
-     * @param int $expire expire time
+     * @param  string $key    the name of cache
+     * @param  mixed  $value  the value of cache
+     * @param  int    $expire expire time
      * @return bool
      */
     public function replace($key, $value, $expire = 0, array $options = array())
@@ -182,6 +185,7 @@ class Fcache extends Widget implements Storable
 
         if (!$this->_readAndVerify($handle, $file)) {
             fclose($handle);
+
             return false;
         }
 
@@ -193,7 +197,7 @@ class Fcache extends Widget implements Storable
     /**
      * Remove cache by key
      *
-     * @param string $key the name of cache
+     * @param  string $key the name of cache
      * @return bool
      */
     public function remove($key)
@@ -210,20 +214,21 @@ class Fcache extends Widget implements Storable
     /**
      * Get cache file by key
      *
-     * @param string $key
+     * @param  string $key
      * @return string
      */
     public function getFile($key)
     {
         $key = str_replace($this->_illegalChars, '_', $key);
+
         return $this->options['dir'] . '/' . $key . '.tmp';
     }
 
     /**
      * Increase a numerical cache
      *
-     * @param string $key the name of cache
-     * @param int $offset the value to decrease
+     * @param  string    $key    the name of cache
+     * @param  int       $offset the value to decrease
      * @return int|false
      */
     public function increment($key, $offset = 1)
@@ -241,6 +246,7 @@ class Fcache extends Widget implements Storable
 
         if (!$content = $this->_readAndVerify($handle, $file)) {
             fclose($handle);
+
             return false;
         }
 
@@ -263,8 +269,8 @@ class Fcache extends Widget implements Storable
     /**
      * Decrease a numerical cache
      *
-     * @param string $key the name of cache
-     * @param int $offset the value to decrease
+     * @param  string    $key    the name of cache
+     * @param  int       $offset the value to decrease
      * @return int|false
      */
     public function decrement($key, $offset = 1)
@@ -281,7 +287,7 @@ class Fcache extends Widget implements Storable
     {
         $result = true;
 
-        foreach(glob($this->options['dir']. '/' . '*.tmp') as $file){
+        foreach (glob($this->options['dir']. '/' . '*.tmp') as $file) {
             $result = $result && @unlink($file);
         }
 
@@ -291,9 +297,9 @@ class Fcache extends Widget implements Storable
     /**
      * Open and lock file
      *
-     * @param string $file file path
-     * @param string $mode open mode
-     * @param int $operation lock operation
+     * @param  string         $file      file path
+     * @param  string         $mode      open mode
+     * @param  int            $operation lock operation
      * @return false|resource false or file handle
      */
     protected function _openAndLock($file, $mode, $operation)
@@ -304,6 +310,7 @@ class Fcache extends Widget implements Storable
 
         if (!flock($handle, $operation)) {
             fclose($handle);
+
             return false;
         }
 
@@ -313,8 +320,8 @@ class Fcache extends Widget implements Storable
     /**
      * Read file by handle and verify if content is expired
      *
-     * @param resource $handle file handle
-     * @param string $file file path
+     * @param  resource    $handle file handle
+     * @param  string      $file   file path
      * @return false|array false or file content array
      */
     protected function _readAndVerify($handle, $file)
@@ -334,8 +341,8 @@ class Fcache extends Widget implements Storable
     /**
      * Prepare content for writing
      *
-     * @param string $content the value of cache
-     * @param int $expire expire time
+     * @param  string $content the value of cache
+     * @param  int    $expire  expire time
      * @return string file content
      */
     protected function _prepareContent($content, $expire)
@@ -352,9 +359,9 @@ class Fcache extends Widget implements Storable
     /**
      * Write content, release lock and close file
      *
-     * @param resouce $handle file handle
-     * @param string $content the value of cache
-     * @param bool $rewirte whether rewrite the whole file
+     * @param  resouce $handle  file handle
+     * @param  string  $content the value of cache
+     * @param  bool    $rewirte whether rewrite the whole file
      * @return boolen
      */
     protected function _writeAndRelease($handle, $content, $rewirte = false)
@@ -369,6 +376,6 @@ class Fcache extends Widget implements Storable
 
         fclose($handle);
 
-        return (bool)$result;
+        return (bool) $result;
     }
 }

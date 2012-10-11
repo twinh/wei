@@ -1,7 +1,7 @@
 <?php
 /**
  * Qwin Framework
- * 
+ *
  * @copyright   Copyright (c) 2008-2011 Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
@@ -22,7 +22,7 @@ class InPost extends Widget
         if ($this->config('debug') && $this->get('post')) {
             return true;
         }
-        
+
         return 'POST' == strtoupper($this->server('REQUEST_METHOD'));
     }
 }

@@ -32,7 +32,7 @@ class Smarty extends Widget implements Viewable
         // options for \Smarty
         'compile_dir'   => null,
         'templateDir'  => null,
-        
+
         // options for internal
         'ext'           => '.tpl',
     );
@@ -40,10 +40,10 @@ class Smarty extends Widget implements Viewable
     public function __construct(array $options = array())
     {
         $this->smarty = new \Smarty();
-        
+
         // TODO better way
         \Smarty::unmuteExpectedErrors();
-        
+
         parent::__construct($options);
 
         foreach ($this->options as $key => $value) {
@@ -51,14 +51,14 @@ class Smarty extends Widget implements Viewable
                 $this->smarty->$key = $value;
             }
         }
-        
+
         // added default global template variable
         $this->smarty->assign('widget', $this->widgetManager);
     }
 
     /**
      * Get smarty object
-     * 
+     *
      * @return \Smarty
      */
     public function __invoke()
@@ -80,6 +80,7 @@ class Smarty extends Widget implements Viewable
     public function display($name, $context = array())
     {
          $context && $this->smarty->assign($context);
+
          return $this->smarty->display($name);
     }
 
@@ -89,36 +90,37 @@ class Smarty extends Widget implements Viewable
     public function render($name, $context = array())
     {
         $context && $this->smarty->assign($context);
+
         return $this->smarty->fetch($name);
     }
-    
+
     /**
      * Set template directory for smarty object
-     * 
-     * @param string|array $dir
+     *
+     * @param  string|array $dir
      * @return \Qwin\Smarty
      */
     public function setTemplateDirOption($dir)
     {
         $this->smarty->setTemplateDir($dir);
-        
+
         $this->options['templateDir'] = $dir;
-        
+
         return $this;
     }
-    
+
     /**
      * Set compole directory for smarty object
-     * 
-     * @param string $dir
+     *
+     * @param  string       $dir
      * @return \Qwin\Smarty
      */
     public function setCompileDirOption($dir)
     {
         $this->smarty->setCompileDir($dir);
-        
+
         $this->options['compileDir'] = $dir;
-        
+
         return $this;
     }
 }

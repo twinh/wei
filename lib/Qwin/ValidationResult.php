@@ -89,31 +89,33 @@ class ValidationResult extends Widget
     /**
      * Add invalidated rule
      *
-     * @param string $rule
+     * @param  string                $rule
      * @return Qwin_ValidationResult
      */
     public function addInvalidatedRule($rule)
     {
         $this->_invalidatedRules[$rule] = true;
+
         return $this;
     }
 
     /**
      * Add validated rule
      *
-     * @param string $rule
+     * @param  string                $rule
      * @return Qwin_ValidationResult
      */
     public function addValidatedRule($rule)
     {
         $this->_validatedRules[$rule] = true;
+
         return $this;
     }
 
     /**
      * Remove invalidated rule
      *
-     * @param string $rule
+     * @param  string                $rule
      * @return Qwin_ValidationResult
      */
     public function removeInvalidatedRule($rule)
@@ -121,13 +123,14 @@ class ValidationResult extends Widget
         if (isset($this->_invalidatedRules[$rule])) {
             unset($this->_invalidatedRules[$rule]);
         }
+
         return $this;
     }
 
     /**
      * Removed validated rule
      *
-     * @param string $rule
+     * @param  string                $rule
      * @return Qwin_ValidationResult
      */
     public function removeValidatedRule($rule)
@@ -135,13 +138,14 @@ class ValidationResult extends Widget
         if (isset($this->_validatedRules[$rule])) {
             unset($this->_validatedRules[$rule]);
         }
+
         return $this;
     }
 
     /**
      * Check if $rule invalidated
      *
-     * @param string $rule
+     * @param  string $rule
      * @return bool
      */
     public function isInvalidated($rule)
@@ -152,7 +156,7 @@ class ValidationResult extends Widget
     /**
      * Check if $rule validated
      *
-     * @param string $rule
+     * @param  string $rule
      * @return bool
      */
     public function isValidated($rule)

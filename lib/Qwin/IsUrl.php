@@ -26,7 +26,7 @@ namespace Qwin;
 
 /**
  * IsUrl
- * 
+ *
  * @package     Qwin
  * @subpackage  Widget
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
@@ -35,5 +35,5 @@ namespace Qwin;
  */
 class IsUrl extends Widget
 {
-    
+
 }

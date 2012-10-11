@@ -1,7 +1,7 @@
 <?php
 /**
  * Qwin Framework
- * 
+ *
  * @copyright   Copyright (c) 2008-2012 Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
@@ -52,17 +52,17 @@ class Event
     {
         return $this->name;
     }
-    
+
     /**
      * Set event name
-     * 
-     * @param string $name
+     *
+     * @param  string      $name
      * @return \Qwin\Event
      */
     public function setName($name)
     {
         $this->name = strtolower($name);
-        
+
         return $this;
     }
 
@@ -78,7 +78,7 @@ class Event
 
     /**
      * Trigger the event
-     * 
+     *
      * @return mixed
      */
     public function __invoke(array$args = array())

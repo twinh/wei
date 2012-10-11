@@ -21,7 +21,7 @@ class EntityManager extends Widget
 {
     /**
      * Options for configuration
-     * 
+     *
      * @var array
      * @see \Doctrine\ORM\Configuration
      */
@@ -36,32 +36,32 @@ class EntityManager extends Widget
 
     /**
      * Constructor
-     * 
+     *
      * @param array $options
      */
     public function __construct(array $options = array())
     {
         parent::__construct($options);
         $options = &$this->options;
-        
+
         // create cache object
         switch (true) {
             case is_string($options['cache']) :
                 $class = '\Doctrine\Common\Cache\\' . $options['cache'];
                 $cache = new $class;
                 break;
-                
-             case $options['cache'] instanceof \Doctrine\Common\Cache\Cache:
+
+             case $options['cache'] instanceof \Doctrine\Common\Cache\Cache :
                  $cache = $options['cache'];
                  break;
-             
+
              default :
                  $cache = false;
         }
-        
+
         // TODO as a widget ?
         $config = new Configuration;
-        
+
         // set default cache
         if ($cache) {
             $config->setMetadataCacheImpl($cache);
@@ -77,20 +77,20 @@ class EntityManager extends Widget
             $driverImpl = $config->newDefaultAnnotationDriver($options['annotationDriverPaths']);
             $config->setMetadataDriverImpl($driverImpl);
         }
-        
+
         if ($options['entityNamespaces']) {
             $config->setEntityNamespaces($options['entityNamespaces']);
         }
-        
+
         // Proxy configuration
         if ($options['proxyDir']) {
             $config->setProxyDir($options['proxyDir']);
         }
-        
+
         if ($options['proxyNamespace']) {
             $config->setProxyNamespace($options['proxyNamespace']);
         }
-        
+
         if (is_bool($options['autoGenerateProxyClasses'])) {
             $config->setAutoGenerateProxyClasses($options['autoGenerateProxyClasses']);
         }
@@ -98,10 +98,10 @@ class EntityManager extends Widget
         // Create EntityManager
         $this->em = DoctrineEntityManager::create($this->db(), $config);
     }
-    
+
     /**
      * Get Docrine ORM entity manager
-     * 
+     *
      * @return \Doctrine\ORM\EntityManager
      */
     public function __invoke()

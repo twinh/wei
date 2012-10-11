@@ -19,57 +19,57 @@ class Response extends Widget
 {
     /**
      * Whether response content has been sent
-     * 
+     *
      * @var bool
      */
     protected $isSent = false;
-    
+
     /**
      * The response content
-     * 
+     *
      * @var string
      */
     protected $content;
-    
+
     /**
      * Send response header and content
-     * 
-     * @param string $content
-     * @param int $status
-     * @param array $options
+     *
+     * @param  string         $content
+     * @param  int            $status
+     * @param  array          $options
      * @return \Qwin\Response
      */
     public function __invoke($content = '', $status = 200, array $options = array())
     {
         $this->isSent = true;
-        
+
         $this->content = $this->filter('response', $content);
-        
+
         $this->header->setStatusCode($status);
-        
+
         $this->header->send();
-        
+
         $this->sendContent();
-        
+
         return $this;
     }
-    
+
     /**
      * Set response content
-     * 
-     * @param mixed $content
+     *
+     * @param  mixed          $content
      * @return \Qwin\Response
      */
     public function setContent($content)
     {
         $this->content = $content;
-        
+
         return $this;
     }
-    
+
     /**
      * Get response content
-     * 
+     *
      * @return string
      */
     public function getContent()
@@ -84,7 +84,7 @@ class Response extends Widget
     {
         echo $this->content;
     }
-    
+
     /**
      * @see \Qwin\Response::__invoke
      */
@@ -92,27 +92,27 @@ class Response extends Widget
     {
         return $this->__invoke($content, $status);
     }
-    
+
     /**
      * Check if response has been sent
-     * 
+     *
      * @return bool
      */
     public function isSent()
     {
         return $this->isSent;
     }
-    
+
     /**
      * Set response sent status
-     * 
-     * @param bool $bool
+     *
+     * @param  bool           $bool
      * @return \Qwin\Response
      */
     public function setSentStatus($bool)
     {
-        $this->isSent = (bool)$bool;
-        
+        $this->isSent = (bool) $bool;
+
         return $this;
     }
 }

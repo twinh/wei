@@ -21,29 +21,30 @@ class View extends Widget implements Viewable
         'dirs'  => array(),
         'ext'   => '.php',
     );
-    
+
     /**
      * Get view object
-     * 
+     *
      * @return \Qwin\View
      */
-    public function __invoke() {
+    public function __invoke()
+    {
         return $this;
     }
-    
+
     /**
      * @see \Qwin\Viewable::render
      */
     public function render($name, $context = array())
     {
         $tmpl = new Tmpl(array('name' => $name));
-        
+
         // inject view object
         $tmpl->view = $this;
-        
+
         return $tmpl->render($context);
     }
-    
+
     /**
      * @see \Qwin\Viewable::display
      */
@@ -51,7 +52,7 @@ class View extends Widget implements Viewable
     {
         echo $this->render($name, $context);
     }
-    
+
     /**
      * @see \Qwin\Viewable::assign
      */
@@ -62,15 +63,15 @@ class View extends Widget implements Viewable
         } else {
             $this->vars[$name] = $value;
         }
+
         return $this;
     }
-  
-    
+
     /**
      * Get the template file by name
-     * 
-     * @param string $name The name of template
-     * @return string The template file path
+     *
+     * @param  string    $name The name of template
+     * @return string    The template file path
      * @throws Exception When file not found
      */
     public function getFile($name)
@@ -80,7 +81,7 @@ class View extends Widget implements Viewable
                 return $file;
             }
         }
-        
+
         throw new Exception(sprintf('Template "%s" not found in directories "%s"', $name, implode('", "', $this->options['dirs'])));
     }
 }

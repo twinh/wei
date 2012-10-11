@@ -28,7 +28,7 @@ class App extends Widget
      *       controller     the default controller name
      *
      *       action         the default action name
-     * 
+     *
      *       view           the name of view engine
      */
     public $options = array(
@@ -37,31 +37,31 @@ class App extends Widget
         'action'        => null,
         'viewEngine'    => 'view',
     );
-    
+
     /**
      * The controller name
-     * 
+     *
      * @var string
      */
     protected $controller;
-    
+
     /**
      * The action name
-     * 
+     *
      * @var string
      */
     protected $action;
-    
+
     /**
      * Controller instances
-     * 
+     *
      * @var array
      */
     protected $controllers = array();
-    
+
     /**
      * The view engine instance
-     * 
+     *
      * @var \Qwin\Viewable
      */
     protected $viewEngine;
@@ -69,24 +69,24 @@ class App extends Widget
     /**
      * Startup application
      *
-     * @param array $options options
+     * @param  array     $options options
      * @return \Qwin\App
      */
     public function __invoke(array $options = array())
     {
         $options = $this->option($options);
-        
+
         $controller = $this->getControllerName();
         $action = $this->getActionName();
 
         return $this->dispatch($controller, $action);
     }
-    
+
     /**
      * Load and execute the controller action
-     * 
-     * @param string $controller The name of controller
-     * @param string $action The name of action
+     *
+     * @param  string    $controller The name of controller
+     * @param  string    $action     The name of action
      * @return mixed
      * @throws Exception When controller or action not found
      */
@@ -106,7 +106,7 @@ class App extends Widget
                     $this->trigger('after.action');
 
                     $this->handleResponse($response);
-                    
+
                     return $this;
                 } else {
                     $this->log(sprintf('Action "%s" not found in controller "%s".', $action, get_class($controllerObject)));
@@ -121,10 +121,10 @@ class App extends Widget
             $this->log(sprintf('Caught exception "%s" with message "%s" called in %s on line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine()));
         }
     }
-    
+
     /**
      * Get the of name controller
-     * 
+     *
      * @return string the name of controller
      */
     public function getControllerName()
@@ -132,24 +132,26 @@ class App extends Widget
         if (!$this->controller) {
             $this->controller = $this->options['controller'] ?: $this->request('controller');
         }
+
         return $this->controller;
     }
-    
+
     /**
      * Set the name of controller
-     * 
-     * @param string $controller the name of controller
+     *
+     * @param  string    $controller the name of controller
      * @return \Qwin\App
      */
     public function setControllerName($controller)
     {
         $this->controller = $controller;
+
         return $this;
     }
-    
+
     /**
      * Get the name of action
-     * 
+     *
      * @return string the name of controller
      */
     public function getActionName()
@@ -157,25 +159,27 @@ class App extends Widget
         if (!$this->action) {
             $this->action = $this->options['action'] ?: $this->request('action');
         }
+
         return $this->action;
     }
-    
+
     /**
-     * Set the name of action 
-     * 
-     * @param string $action the name of action
+     * Set the name of action
+     *
+     * @param  string    $action the name of action
      * @return \Qwin\App
      */
     public function setActionName($action)
     {
         $this->action = $action;
+
         return $this;
     }
-    
+
     /**
      * Get the controller instance, if not found, return false instead
-     * 
-     * @param string $name the name of controller
+     *
+     * @param  string                   $name the name of controller
      * @return boolean|\Qwin\Controller
      */
     public function getController($name)
@@ -183,12 +187,12 @@ class App extends Widget
         if (isset($this->controllers[$name])) {
             return $this->controllers[$name];
         }
-        
+
         if (!preg_match('/^([_a-z0-9]+)$/i', $name)) {
             return false;
         }
-        
-        foreach ((array)$this->options['dirs'] as $namespace => $dir) {
+
+        foreach ((array) $this->options['dirs'] as $namespace => $dir) {
             $file = $dir . '/' . $namespace . '/Controller/' . ucfirst($name) . 'Controller.php';
 
             if (!is_file($file)) {
@@ -196,31 +200,31 @@ class App extends Widget
             }
 
             require_once $file;
-            
+
             $class = $namespace . '\Controller\\' . ucfirst($name) . 'Controller';
 
             return $this->controllers[$name] = new $class(array(
                 'widget' => $this->widgetManager
             ));
         }
-         
+
         return false;
     }
-    
+
     /**
      * Handle the response variable by controller action
-     * 
-     * @param mixed $response
+     *
+     * @param  mixed                     $response
      * @return mixed
      * @throws \UnexpectedValueException
      */
     public function handleResponse($response)
     {
         switch (true) {
-            // render default template and using $result as template variables 
+            // render default template and using $result as template variables
             case is_array($response) :
                 $response = $this->getViewEngine()->render($this->getDefaultTemplate(), $response);
-                
+
             // response directly
             case is_string($response) :
             case is_null($response) :
@@ -229,22 +233,23 @@ class App extends Widget
             // response
             case $response instanceof Response :
                 return !$response->isSent() && $response->send();
- 
+
             default :
                 try {
                     $response = strval($response);
+
                     return $this->response($response);
                 } catch (\Exception $e) {
                     throw new \UnexpectedValueException(
-                        sprintf('Expected array, printable variable or \Qwin\Response, "%s" given', 
+                        sprintf('Expected array, printable variable or \Qwin\Response, "%s" given',
                         (is_object($response) ? get_class($response) : gettype($response))), 500);
                 }
         }
     }
-    
+
     /**
      * Throwa a WorkFlowBreakNotifyException to prevent the previous dispatch process
-     * 
+     *
      * @throws WorkFlowBreakNotifyException
      */
     public function preventPreviousDispatch()
@@ -252,42 +257,44 @@ class App extends Widget
         $traces = debug_backtrace();
         throw new WorkFlowBreakNotifyException('', 0, $traces[0]['file'], $traces[0]['line']);
     }
-    
+
     /**
      * Set view engine option
-     * 
-     * @param string $value The name of view engine
+     *
+     * @param  string    $value The name of view engine
      * @return \Qwin\App
      */
     public function setViewEngineOption($value)
     {
         $this->viewEngine = null;
         $this->options['viewEngine'] = $value;
+
         return $this;
     }
-    
+
     /**
      * Get the view engine instance
-     * 
+     *
      * @return \Qwin\Viewable
      */
     public function getViewEngine()
     {
         if (!$this->viewEngine) {
             $this->viewEngine = $this->{$this->options['viewEngine']};
-            
+
             if (!$this->viewEngine instanceof \Qwin\Viewable) {
-                throw new \UnexpectedValueException(sprintf('View engine widget should implement \Qwin\Viewable interface, "%s" given', 
+                throw new \UnexpectedValueException(sprintf('View engine widget should implement \Qwin\Viewable interface, "%s" given',
                     (is_object($this->viewEngine) ? get_class($this->viewEngine) : gettype($this->viewEngine))), 500);
             }
         }
+
         return $this->viewEngine;
     }
-    
+
     /**
      * Get default template file according to the controller, action and file
      * extension provided by the view engine
-     * 
+     *
      * @return string
      */
     public function getDefaultTemplate()

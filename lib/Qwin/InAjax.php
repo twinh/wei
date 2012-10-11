@@ -10,7 +10,7 @@ namespace Qwin;
 
 /**
  * Check if in ajax request
- * 
+ *
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
@@ -22,7 +22,7 @@ class InAjax extends Widget
         if ($this->config('debug') && $this->get('ajax')) {
             return true;
         }
-        
+
         return 'xmlhttprequest' == strtolower($this->server('HTTP_X_REQUESTED_WITH'));
     }
 }

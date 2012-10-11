@@ -37,6 +37,6 @@ class IsQQ extends Widget
 {
     public function __invoke($value)
     {
-        return (bool)preg_match('/^[1-9][\d]{4,9}$/', $value);
+        return (bool) preg_match('/^[1-9][\d]{4,9}$/', $value);
     }
 }

@@ -63,7 +63,7 @@ class Lang extends ArrayWidget
     /**
      * 初始化语言微件
      *
-     * @param array $options 选项
+     * @param  array       $options 选项
      * @return Lang_Widget
      * @todo 简化
      */
@@ -89,6 +89,7 @@ class Lang extends ArrayWidget
             if (null != $name && is_file($file)) {
                 $session['lang'] = $name;
                 $this->_appendFile($file);
+
                 return $this->appendByModule($module);
             }
         }
@@ -99,6 +100,7 @@ class Lang extends ArrayWidget
             $file = $dir . '/langs/' . $name . '.php';
             if (null != $name && is_file($file)) {
                 $this->_appendFile($file);
+
                 return $this->appendByModule($module);
             }
         }
@@ -110,6 +112,7 @@ class Lang extends ArrayWidget
             if (null != $name && is_file($file)) {
                 $session['lang'] = $name;
                 $this->_appendFile($file);
+
                 return $this->appendByModule($module);
             }
         }
@@ -120,15 +123,16 @@ class Lang extends ArrayWidget
     /**
      * 附加文件数据
      *
-     * @param type $file 文件路径
+     * @param  type      $file 文件路径
      * @return Qwin_Lang
      */
     protected function _appendFile($file)
     {
         if (!isset($this->_appendedFiles[$file])) {
-            $this->appendData((array)require $file);
+            $this->appendData((array) require $file);
             $this->_appendedFiles[$file] = true;
         }
+
         return $this;
     }
 
@@ -145,7 +149,7 @@ class Lang extends ArrayWidget
     /**
      * 根据模块标识加载语言
      *
-     * @param string|Qwin_Module $module 模块标识
+     * @param  string|Qwin_Module $module 模块标识
      * @return false|Lang_Widget
      * @todo 增加参数:递归加载和语言名称
      */
@@ -163,8 +167,8 @@ class Lang extends ArrayWidget
     /**
      * 加载微件语言
      *
-     * @param Qwin_Widget|string $widget 微件对象或名称
-     * @return false|Lang_Widget 语言文件不存在|加载成功
+     * @param  Qwin_Widget|string $widget 微件对象或名称
+     * @return false|Lang_Widget  语言文件不存在|加载成功
      */
     public function appendByWidget($widget)
     {
@@ -174,13 +178,14 @@ class Lang extends ArrayWidget
             $path = $this->_widget->getPath() . ucfirst($widget) . '/';
         }
         $file = $path . $this->options['path'] . $this->_name . '.php';
+
         return $this->appendByFile($file);
     }
 
     /**
      * 根据文件路径加载语言
      *
-     * @param string $package
+     * @param  string                          $package
      * @return Qwin_Application_Language|false 当前对象|失败
      */
     public function appendByFile($file)
@@ -188,13 +193,14 @@ class Lang extends ArrayWidget
         if (is_file($file)) {
             return $this->_appendFile($file);
         }
+
         return false;
     }
 
     /**
      * 翻译一个字符串
      *
-     * @param string $name
+     * @param  string      $name
      * @return string|null
      */
     public function t($name = null)
@@ -205,13 +211,14 @@ class Lang extends ArrayWidget
     public function field($name = null)
     {
         $name = ucfirst(strtr($name, '_', ' '));
+
         return $this->t($name);
     }
 
     /**
      * Get the offset value, when offset value is not found, return the offset name instead
      *
-     * @param string $offset
+     * @param  string $offset
      * @return mixed
      */
     public function offsetGet($offset)
@@ -232,12 +239,13 @@ class Lang extends ArrayWidget
     /**
      * 附加数据数组
      *
-     * @param array $data 数据数组
+     * @param  array                     $data 数据数组
      * @return Qwin_Application_Language 当前对象
      */
     public function appendData(array $data)
     {
         $this->_data += $data;
+
         return $this;
     }
 }

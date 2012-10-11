@@ -32,6 +32,9 @@ namespace Qwin;
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-01-12 13:39:05
+ * @todo        add index column
+ * @todo        add index total row
+ * @todo        add memory column
  */
 class Marker extends Widget
 {
@@ -70,17 +73,19 @@ class Marker extends Widget
     /**
      * Set a marker
      *
-     * @param string $name marker's name
+     * @param  string      $name marker's name
      * @return Qwin_Widget
      */
     public function __invoke($name = null)
     {
+        // TODO add memory
+        //var_dump(memory_get_usage());
         !$name && $name = ++$this->_index;
 
         $times = explode(' ', microtime());
         $this->_data[$name] = $times[1] . substr($times[0], 1);
 
-        return $this->__invoker;
+        return $this;
     }
 
     /**
@@ -96,12 +101,12 @@ class Marker extends Widget
     /**
      * Display profiling data
      *
-     * @param string $print
+     * @param  string $print
      * @return mixed
      */
     public function display($print = true)
     {
-        if ($this->isCallable($this->options['display'])) {
+        if (is_callable($this->options['display'])) {
             return $this->callback($this->options['display'], array(
                 $this->_data, $print, $this->_index
             ));
@@ -139,6 +144,7 @@ class Marker extends Widget
 
         if ($print) {
             echo $code;
+
             return $this;
         } else {
             return $code;

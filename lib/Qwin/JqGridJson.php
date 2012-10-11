@@ -36,7 +36,7 @@ class JqGridJson extends Widget
             foreach ($columns as $column) {
                 if (isset($row[$column])) {
                     if ($row[$column] instanceof \DateTime) {
-                        $date = (array)$row[$column];
+                        $date = (array) $row[$column];
                         $cell[] = $date['date'];
                     } else {
                         $cell[] = $row[$column];

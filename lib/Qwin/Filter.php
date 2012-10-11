@@ -10,7 +10,7 @@ namespace Qwin;
 
 /**
  * Filter
- * 
+ *
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
@@ -26,50 +26,52 @@ class Filter extends Widget
             return $this->execute($name, $callback);
         }
     }
-    
+
     public function add($name, $callback)
     {
         $this->filters[$name][] = $callback;
-        
+
         return $this;
     }
-    
+
     public function execute($name, $data)
     {
         if (isset($this->filters[$name])) {
             foreach ($this->filters[$name] as $callback) {
                 $data = call_user_func($callback, $data);
             }
+
             return $data;
         }
-        
+
         $this->log(sprintf('Undefined filter name "%s"', $name));
+
         return $data;
     }
-    
+
     public function has($name, $callback)
     {
         if (!isset($this->filters[$name])) {
             throw new Exception(sprintf('Undefined filter name "%s"', $name));
         }
-        
-        return (bool)array_search($callback, $this->filters[$name], true);
+
+        return (bool) array_search($callback, $this->filters[$name], true);
     }
-    
+
     public function remove($name, $callback)
     {
         if (!isset($this->filters[$name])) {
             throw new Exception(sprintf('Undefined filter name "%s"', $name));
         }
-        
+
         $key = array_search($callback, $this->filters[$name], true);
-        
+
         if (false === $key) {
             return false;
         }
-        
+
         unset($this->filters[$name][$key]);
-        
+
         return true;
     }
 }

@@ -44,7 +44,7 @@ class Redis extends Widget implements Storable
 
     /**
      * Options
-     * 
+     *
      * @var array
      */
     public $options = array(
@@ -70,9 +70,9 @@ class Redis extends Widget implements Storable
     /**
      * Get or set cache
      *
-     * @param string $key the name of cache
-     * @param mixed $value
-     * @param int $expire expire time for set cache
+     * @param  string $key    the name of cache
+     * @param  mixed  $value
+     * @param  int    $expire expire time for set cache
      * @return mixed
      */
     public function __invoke($key, $value = null, $expire = 0)
@@ -87,7 +87,7 @@ class Redis extends Widget implements Storable
     /**
      * Get cache
      *
-     * @param string $key the name of cache
+     * @param  string      $key the name of cache
      * @return mixed|false
      */
     public function get($key, $options = null)
@@ -98,9 +98,9 @@ class Redis extends Widget implements Storable
     /**
      * Set cache
      *
-     * @param string $key the name of cache
-     * @param value $value the value of cache
-     * @param int $expire expire time, 0 means never expired
+     * @param  string $key    the name of cache
+     * @param  value  $value  the value of cache
+     * @param  int    $expire expire time, 0 means never expired
      * @return bool
      */
     public function set($key, $value, $expire = 0, array $options = array())
@@ -111,37 +111,38 @@ class Redis extends Widget implements Storable
     /**
      * Add cache, if cache is exists, return false
      *
-     * @param string $key the name of cache
-     * @param mixed $value the value of cache
-     * @param int $expire expire is not supported by redis when add new cache
+     * @param  string $key    the name of cache
+     * @param  mixed  $value  the value of cache
+     * @param  int    $expire expire is not supported by redis when add new cache
      * @return bool
      */
     public function add($key, $value, $expire = 0, array $options = array())
     {
         return $this->_object->setnx($key, $value);
         /*$this->_object->watch($key);
-        
+
         if ($this->_object->exists($key)) {
             $this->_object->unwatch();
+
             return false;
         } else {
             $result = $this->_object
                 ->multi()
                 ->set($key, $value, $expire)
                 ->exec();
-            
+
             $this->_object->unwatch();
-            
+
             return $result[0];
         }*/
     }
-    
+
     /**
      * Replace cache, if cache not exists, return false
      *
-     * @param string $key the name of cache
-     * @param mixed $value the value of cache
-     * @param int $expire expire is not supported by redis when replace cache
+     * @param  string $key    the name of cache
+     * @param  mixed  $value  the value of cache
+     * @param  int    $expire expire is not supported by redis when replace cache
      * @return bool
      */
     public function replace($key, $value, $expire = 0, array $options = array())
@@ -163,8 +164,8 @@ class Redis extends Widget implements Storable
      * Increase a cache, if cache is not exists, redis will automatic creat it,
      * this is different with other cache driver
      *
-     * @param string $key the name of cache
-     * @param int $offset the value to decrease
+     * @param  string    $key    the name of cache
+     * @param  int       $offset the value to decrease
      * @return int|false
      */
     public function increment($key, $offset = 1)
@@ -175,8 +176,8 @@ class Redis extends Widget implements Storable
     /**
      * Decrease a cache
      *
-     * @param string $key the name of cache
-     * @param int $offset the value to decrease
+     * @param  string    $key    the name of cache
+     * @param  int       $offset the value to decrease
      * @return int|false
      * @see Qwin_Redis::increment
      */
@@ -188,7 +189,7 @@ class Redis extends Widget implements Storable
     /**
      * Remove cache by key
      *
-     * @param string $key the name of cache
+     * @param  string $key the name of cache
      * @return bool
      */
     public function remove($key)

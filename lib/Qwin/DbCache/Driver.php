@@ -35,25 +35,25 @@ abstract class Qwin_DbCache_Driver
 {
     /**
      * Sql queries
-     * 
+     *
      * @var array
      */
     protected $_sqls = array();
-    
+
     /**
      *  Get one sql query
-     * 
-     * @param string $type sql type, the key of the $this->_sqls array
+     *
+     * @param  string $type sql type, the key of the $this->_sqls array
      * @return string
      */
     public function getSql($type)
     {
         return isset($this->_sqls[$type]) ? $this->_sqls[$type] : false;
     }
-    
+
     /**
      *  Get all sql queries
-     * 
+     *
      * @return array
      */
     public function getSqls()

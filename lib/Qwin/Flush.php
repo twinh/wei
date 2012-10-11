@@ -45,7 +45,7 @@ class Flush extends Widget
         ob_implicit_flush(true);
 
         // todo $buffer = ini_get('output_buffering');
-        // echo str_repeat(' ',$buffer+1); 
+        // echo str_repeat(' ',$buffer+1);
         // NOTE output here !!!
         echo str_pad('',4096);
     }
@@ -53,8 +53,8 @@ class Flush extends Widget
     /**
      * flush content to the browser
      *
-     * @param string $content the content flushes to the browser
-     * @param int $sleep the second to sleep
+     * @param  string     $content the content flushes to the browser
+     * @param  int        $sleep   the second to sleep
      * @return Qwin_Flush
      */
     public function __invoke($content, $sleep = 0)

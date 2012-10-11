@@ -37,6 +37,6 @@ class IsAlnum extends Widget
 {
     public function __invoke($value)
     {
-        return (bool)preg_match('/^([a-z0-9]+)$/i', $value);
+        return (bool) preg_match('/^([a-z0-9]+)$/i', $value);
     }
 }

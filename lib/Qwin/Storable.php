@@ -14,7 +14,7 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-interface Storable 
+interface Storable
 {
     public function get($key, $options = null);
 

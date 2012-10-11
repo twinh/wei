@@ -38,9 +38,9 @@ class Url extends Widget
      * 或是模块(mod,m)和操作(act,a)的缩写等等
      * 通过该方法,可以减少编写链接的工作量,同时将参数名称隐藏起来
      *
-     * @param string $value1 值1
-     * @param string $value2 值2
-     * @param array $params 其他参数
+     * @param  string $value1 值1
+     * @param  string $value2 值2
+     * @param  array  $params 其他参数
      * @return string
      */
     public function __invoke($value1, $value2 = 'index', array $params = array())
