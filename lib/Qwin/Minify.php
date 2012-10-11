@@ -50,7 +50,7 @@ class Minify extends Widget
 
         // todo 缓存类型,参数
         $this->_cache = $this->fcache;
-            
+
         $this->filter('response', array($this, 'replaceTags'));
     }
 
@@ -62,7 +62,7 @@ class Minify extends Widget
     /**
      * 添加一个或多个文件
      *
-     * @param string $file 文件路径
+     * @param  string      $file 文件路径
      * @return Qwin_Minify
      */
     public function add($file)
@@ -76,13 +76,14 @@ class Minify extends Widget
 
             $this->_files[$ext][] = $file;
         }
+
         return $this;
     }
 
     /**
      * 打包某一类后缀的文件
      *
-     * @param string $ext 后缀名
+     * @param  string $ext 后缀名
      * @return string 打包后的名称
      */
     public function pack($ext)
@@ -105,7 +106,7 @@ class Minify extends Widget
     /**
      * 根据名称获取文件数组
      *
-     * @param string $name 名称
+     * @param  string      $name 名称
      * @return array|false
      */
     public function getFiles($name)
@@ -116,7 +117,7 @@ class Minify extends Widget
     /**
      * 打包一类文件
      *
-     * @param string $extension 后缀名
+     * @param  string $extension 后缀名
      * @return string 打包的名称
      */
     public function output($ext)
@@ -133,23 +134,23 @@ class Minify extends Widget
             return $this->exception('Unsupport output type "' . $ext . '"');
         }
     }
-    
+
     public function replaceTags($output)
     {
         $replace = '';
-        
+
         if ($css = $this->pack('css')) {
             $replace .= sprintf($this->_tpls['css'], $this->url('minify', 'index', array('id' => $css))) . PHP_EOL;
         }
-        
+
         if ($js = $this->pack('js')) {
             $replace .= sprintf($this->_tpls['js'], $this->url('minify', 'index', array('id' => $js))) . PHP_EOL;
         }
-        
+
         if ($replace) {
             $output = $this->replaceFirst($output, '</head>', $replace . '</head>');
         }
-        
+
         return $output;
     }
 }

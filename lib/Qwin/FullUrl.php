@@ -1,7 +1,7 @@
 <?php
 /**
  * Qwin Framework
- * 
+ *
  * @copyright   Copyright (c) 2008-2012 Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
@@ -22,6 +22,7 @@ class FullUrl extends Widget
         $s = $this->server['HTTPS'] == 'on' ? 's' : '';
         $protocol = substr(strtolower($this->server['SERVER_PROTOCOL']), 0, strpos(strtolower($this->server['SERVER_PROTOCOL']), '/')) . $s;
         $port = ($this->server['SERVER_PORT'] == '80') ? '' : (':' . $this->server['SERVER_PORT']);
-	return $protocol . '://' . $this->server('SERVER_NAME') . $port . $this->server['REQUEST_URI'];
+
+    return $protocol . '://' . $this->server('SERVER_NAME') . $port . $this->server['REQUEST_URI'];
     }
 }

@@ -18,17 +18,16 @@ class EventManager extends Widget
 {
     /**
      * Event array
-     * 
+     *
      * @var string
      */
     protected $events = array();
 
-
     /**
      * 调用一个事件
      *
-     * @param string $name the name of event or the Event object
-     * @param mixed $args arguments
+     * @param  string       $name the name of event or the Event object
+     * @param  mixed        $args arguments
      * @return EventManager
      */
     public function __invoke($name, $args)
@@ -40,7 +39,7 @@ class EventManager extends Widget
             $name = strtolower($name);
             $event = new Event($name);
         }
-        
+
         if (!isset($this->events[$name])) {
             return $this;
         }
@@ -59,13 +58,13 @@ class EventManager extends Widget
 
         return $this;
     }
-    
+
     /**
      * Add event
      *
-     * @param string $name the name of event
-     * @param mixed $callback callbable struct
-     * @param int $priority the event priority
+     * @param  string       $name     the name of event
+     * @param  mixed        $callback callbable struct
+     * @param  int          $priority the event priority
      * @return EventManager
      */
     public function add($name, $callback, $priority = 10)
@@ -79,15 +78,15 @@ class EventManager extends Widget
         if (!isset($this->events[$name])) {
             $this->events[$name] = array();
         }
-        
+
         $this->events[$name][$priority][] = $callback;
-        
+
         return $this;
     }
-    
+
     /**
      * Remove one or all events
-     * 
+     *
      * param string|null $name the name of event
      * @return \Qwin\EventManager
      */
@@ -108,7 +107,7 @@ class EventManager extends Widget
     /**
      * Check if has the given name of event
      *
-     * @param string $name
+     * @param  string $name
      * @return bool
      */
     public function has($name)

@@ -58,6 +58,7 @@ class Dump extends Widget
             exit();
             // @codeCoverageIgnoreEnd
         }
+
         return $this;
     }
 }

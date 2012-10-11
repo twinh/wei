@@ -19,8 +19,8 @@ class Instance extends Widget
     /**
      * Instance a class
      *
-     * @param string $class the name of class
-     * @param array $args the parameters to be passed to the class constructor as an array.
+     * @param  string       $class the name of class
+     * @param  array        $args  the parameters to be passed to the class constructor as an array.
      * @return false|object false when class not found or a instance of the class
      */
     public function __invoke($class, $args = array())
@@ -58,6 +58,7 @@ class Instance extends Widget
                     $object = new $class;
                 }
         }
+
         return $object;
     }
 }

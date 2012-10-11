@@ -10,7 +10,7 @@ namespace Qwin;
 
 /**
  * On
- * 
+ *
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
@@ -18,10 +18,10 @@ class On extends Widget
 {
     /**
      * 绑定事件
-     * 
+     *
      * @see Event::add()
-     * @param string $event 事件名称
-     * @param mixed $callback 回调结构
+     * @param  string $event    事件名称
+     * @param  mixed  $callback 回调结构
      * @return Widget
      */
     public function __invoke($event, $callback, $priority = 10)

@@ -76,7 +76,7 @@ class Error extends Widget
                     $options = $message;
                     $message = isset($options['message']) ? $options['message'] : $this->options['message'];
                 } else {
-                    $message = (string)$message;
+                    $message = (string) $message;
                 }
 
                 $offset = 5;
@@ -87,7 +87,6 @@ class Error extends Widget
                 $traces = array_slice($traces, $offset);
                 $trace = $this->getTraceString($traces);
             }
-
 
             // merge options
             $options = array(
@@ -174,7 +173,7 @@ class Error extends Widget
             }
         // @codeCoverageIgnoreStart
         // dispaly basic error message for exception in exception handler
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             if ($this->config('debug')) {
                 echo sprintf('<p>%s: %s in %s on line %s</p>', get_class($e), $e->getMessage(), $e->getFile(), $e->getCode());
                 echo '<pre>' . $e->getTraceAsString() . '</pre>';
@@ -188,10 +187,10 @@ class Error extends Widget
     /**
      * Error handler
      *
-     * @param int $errno
+     * @param int    $errno
      * @param string $errstr
      * @param string $errfile
-     * @param int $errline
+     * @param int    $errline
      */
     public function renderError($errno, $errstr, $errfile, $errline)
     {
@@ -202,16 +201,16 @@ class Error extends Widget
     /**
      * 获取文件指定行号周围的代码
      *
-     * @param string $file 文件路径
-     * @param int $line 文化行号
-     * @param int $range 获取的总行数
+     * @param  string $file  文件路径
+     * @param  int    $line  文化行号
+     * @param  int    $range 获取的总行数
      * @return string 文件代码
      */
     public function getFileCode($file, $line, $range = 20)
     {
         $code = file($file);
 
-        $half = (int)($range / 2);
+        $half = (int) ($range / 2);
 
         // 开始行
         $start = $line - $half;
@@ -225,7 +224,7 @@ class Error extends Widget
         // 调整file获取的文件行数与Exception->getLine相差一行的问题
         array_unshift($code, null);
         $content = '';
-        for($i = $start; $i < $end; $i++) {
+        for ($i = $start; $i < $end; $i++) {
             $temp = str_pad($i, 4, 0, STR_PAD_LEFT) . ':' . $code[$i];
             if ($line != $i) {
                 $content .= htmlspecialchars($temp, ENT_QUOTES);
@@ -235,13 +234,14 @@ class Error extends Widget
         }
 
         unset($code);
+
         return $content;
     }
 
     /**
      * Get trace string like Exception::getTraceAsString
      *
-     * @param array $traces usally get from debug_backtrace()
+     * @param  array  $traces usally get from debug_backtrace()
      * @return string
      */
     public function getTraceString($traces)
@@ -273,12 +273,13 @@ class Error extends Widget
                         $args[] = 'false';
                     }
                 } else {
-                    $args[] = (string)$arg;
+                    $args[] = (string) $arg;
                 }
             }
             $str .= '(' . implode(', ', $args) . ')' . PHP_EOL;
         }
         $str .= '#' . ++$i . ' {main}' . PHP_EOL . PHP_EOL;
+
         return $str;
     }
 
@@ -308,8 +309,9 @@ class Error extends Widget
                 $server[$key] = '<pre>' . htmlspecialchars(var_export($value, true), ENT_QUOTES) . '</pre>';
                 continue;
             }
-            $server[$key] = htmlspecialchars((string)$value, ENT_QUOTES);
+            $server[$key] = htmlspecialchars((string) $value, ENT_QUOTES);
         }
+
         return $server;
     }
 
@@ -327,6 +329,7 @@ class Error extends Widget
             }
             $get[$key] = htmlspecialchars($value, ENT_QUOTES);
         }
+
         return $get;
     }
 
@@ -344,6 +347,7 @@ class Error extends Widget
             }
             $post[$key] = htmlspecialchars($value, ENT_QUOTES);
         }
+
         return $post;
     }
 
@@ -358,6 +362,7 @@ class Error extends Widget
         foreach ($this->cookie as $key => $value) {
             $cookie[$key] = htmlspecialchars($value, ENT_QUOTES);
         }
+
         return $cookie;
     }
 

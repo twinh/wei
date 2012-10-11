@@ -19,7 +19,7 @@ class Ip extends Widget
     /**
      * Get ip address
      *
-     * @param string $default default ip address
+     * @param  string $default default ip address
      * @return string ip address
      * @todo valid
      */

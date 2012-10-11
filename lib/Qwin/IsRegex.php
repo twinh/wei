@@ -37,6 +37,6 @@ class IsRegex extends Widget
 {
     public function __invoke($value, $x)
     {
-        return (bool)preg_match($x, $value);
+        return (bool) preg_match($x, $value);
     }
 }

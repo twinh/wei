@@ -38,6 +38,6 @@ class IsPostcode extends Widget
 {
     public function __invoke($data)
     {
-        return (bool)preg_match('/^[1-9][\d]{5}$/', $data);
+        return (bool) preg_match('/^[1-9][\d]{5}$/', $data);
     }
 }

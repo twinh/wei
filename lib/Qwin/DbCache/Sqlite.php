@@ -32,10 +32,10 @@
  * @since       2012-07-26
  */
 class Qwin_DbCache_Sqlite extends Qwin_DbCache_Driver
-{    
+{
     /**
      * Sql queries
-     * 
+     *
      * @var array
      */
     protected $_sqls = array(

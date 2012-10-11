@@ -44,8 +44,8 @@ class JQuery extends Widget
     /**
      * 获取jQuery插件/UI等的文件路径
      *
-     * @param string $name 插件/UI等名称,多个以逗号隔开
-     * @return array 文件数组
+     * @param  string $name 插件/UI等名称,多个以逗号隔开
+     * @return array  文件数组
      */
     public function get($name)
     {
@@ -61,13 +61,14 @@ class JQuery extends Widget
                 $files[] = $this->_dir . '/' . $name . '/jquery.' . $name . '.css';
             }
         }
+
         return $files;
     }
 
     /**
      * 加载jQuery插件/UI等的文件路径
      *
-     * @param string $name 插件/UI等名称,多个以逗号隔开
+     * @param  string $name 插件/UI等名称,多个以逗号隔开
      * @return string html代码
      * @todo 如果是磁盘路径,应该转换为Url
      */
@@ -95,13 +96,14 @@ class JQuery extends Widget
                 $html .= '<link rel="stylesheet" type="text/css" media="all" href="' . $file . '" />' . "\n";
             }
         }
+
         return $html;
     }
 
     /**
      * 获取主题样式
      *
-     * @param string $name 主题名称
+     * @param  string $name 主题名称
      * @return string
      */
     public function getTheme($name)

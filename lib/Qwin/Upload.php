@@ -38,7 +38,7 @@ class Upload extends Widget
 
     public function __invoke(array $options = array())
     {
-        $options = (array)$options + $this->options;
+        $options = (array) $options + $this->options;
         $this->options = &$options;
 
         $this->option($options);
@@ -67,7 +67,7 @@ class Upload extends Widget
         }
 
         $ext = pathinfo($_FILES[$options['name']]['name'], PATHINFO_EXTENSION);
-        if ($options['exts'] && !in_array($ext, (array)$options['exts'])) {
+        if ($options['exts'] && !in_array($ext, (array) $options['exts'])) {
             return array(
                 'code' => -4,
                 'message' => 'Invalid File Extension',
@@ -101,6 +101,7 @@ class Upload extends Widget
     public function setNameOption($name)
     {
         $this->options['name'] = $name ? $name : key($_FILES);
+
         return $this;
     }
 }

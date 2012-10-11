@@ -37,6 +37,6 @@ class IsDigit extends Widget
 {
     public function __invoke($data)
     {
-        return (bool)preg_match('/^([0-9]+)$/', $data);
+        return (bool) preg_match('/^([0-9]+)$/', $data);
     }
 }

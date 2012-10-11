@@ -21,11 +21,11 @@ class Get extends ArrayWidget
     public $options = array(
         'parameters' => false,
     );
-    
+
     public function __construct($options = null)
     {
         parent::__construct($options);
-        
+
         if (is_array($this->options['parameters'])) {
             $this->data = $this->options['parameters'];
         } else {
@@ -33,13 +33,13 @@ class Get extends ArrayWidget
             $this->data = $this->router->matchRequestUri() ?: $_GET;
         }
     }
-    
+
     /**
      * Return get parameter
-     * 
-     * @param string $name the parameter name
-     * @param mixed $default the default parameter value if the parameter does not exist
-     * @return mixed the parameter value
+     *
+     * @param  string $name    the parameter name
+     * @param  mixed  $default the default parameter value if the parameter does not exist
+     * @return mixed  the parameter value
      */
     public function __invoke($name, $default = null)
     {

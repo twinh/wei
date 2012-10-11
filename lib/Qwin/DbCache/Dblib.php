@@ -33,5 +33,5 @@
  */
 class Qwin_DbCache_Dblib extends Qwin_DbCache_Sqlsrv
 {
-    
+
 }

@@ -146,7 +146,7 @@ class Router extends Widget
     /**
      * Set base uri option
      *
-     * @param string $uri
+     * @param  string      $uri
      * @return Qwin_Router
      */
     public function setBaseUriOption($uri)
@@ -158,23 +158,24 @@ class Router extends Widget
         } elseif ('/' != $uri[strlen($uri) - 1]) {
             $this->options['baseUri'] = $uri . '/';
         }
+
         return $this;
     }
-    
+
     public function setRoutesOption($routes)
     {
         foreach ($routes as &$route) {
             $route += $this->_routeOptions;
         }
         $this->options['routes'] = $routes;
-        
+
         return $this;
     }
 
     /**
      * Set route
      *
-     * @param array $route the options of the route
+     * @param  array       $route the options of the route
      * @return Qwin_Router
      */
     public function set(array $route)
@@ -186,13 +187,14 @@ class Router extends Widget
         } else {
             $this->_routes = array($route['name'] => $route) + $this->_routes;
         }
+
         return $this;
     }
 
     /**
      * Get the route by name
      *
-     * @param string $name the name of the route
+     * @param  string $name the name of the route
      * @return array
      */
     public function get($name)
@@ -203,7 +205,7 @@ class Router extends Widget
     /**
      * Remove the route
      *
-     * @param string $name the name of the route
+     * @param  string      $name the name of the route
      * @return Qwin_Router
      */
     public function remove($name)
@@ -211,13 +213,14 @@ class Router extends Widget
         if (isset($this->_routes[$name])) {
             unset($this->_routes[$name]);
         }
+
         return $this;
     }
 
     /**
      * Prepare the route uri to regex
      *
-     * @param array $route the route array
+     * @param  array  $route the route array
      * @return string
      */
     protected function _compile(&$route)
@@ -252,8 +255,8 @@ class Router extends Widget
      * Check if there is a route matches the uri and method,
      * and return the parameters, or return false when not matched
      *
-     * @param string $uri uri to match
-     * @param string $method the request method to match, maybe GET, POST, etc
+     * @param  string $uri    uri to match
+     * @param  string $method the request method to match, maybe GET, POST, etc
      * @return array
      */
     public function match($uri, $method = null, $name = null)
@@ -267,6 +270,7 @@ class Router extends Widget
                 }
             }
         }
+
         return false;
     }
 
@@ -274,9 +278,9 @@ class Router extends Widget
      * Check if the route matches the uri and method,
      * and return the parameters, or return false when not matched
      *
-     * @param string $uri the uri to match
-     * @param string $method the request method to match
-     * @param string $name the name of the route
+     * @param  string      $uri    the uri to match
+     * @param  string      $method the request method to match
+     * @param  string      $name   the name of the route
      * @return array|false
      */
     protected function _match($uri, $method, $name)
@@ -313,8 +317,8 @@ class Router extends Widget
     /**
      * Parse the query string to array
      *
-     * @param string $query the query string to parse
-     * @param bool $slash whether combined by slash or normal(&,=) separators
+     * @param  string $query the query string to parse
+     * @param  bool   $slash whether combined by slash or normal(&,=) separators
      * @return array
      */
     protected function _parseQuery($query, $slash = false)
@@ -331,6 +335,7 @@ class Router extends Widget
                 }
             }
         }
+
         return $params;
     }
 
@@ -338,7 +343,7 @@ class Router extends Widget
      * Build params to query string
      *
      * @param array $params the array params to combine
-     * @param bool $slash whether combined by slash or normal(&,=) separators
+     * @param bool  $slash  whether combined by slash or normal(&,=) separators
      */
     protected function _buildQuery($params, $slash = false)
     {
@@ -353,6 +358,7 @@ class Router extends Widget
             foreach ($params as $key => $value) {
                 $query .= '/' . $key . '/' . $value;
             }
+
             return $query;
         }
     }
@@ -370,6 +376,7 @@ class Router extends Widget
             if ($route['defaults'] == $intersect) {
                 return $uri . $this->_buildQuery(array_diff_assoc($params, $route['defaults']), $route['slashSeparator']);
             }
+
             return false;
         } else {
             $regex = $route['regex'];
@@ -448,8 +455,8 @@ class Router extends Widget
     /**
      * Generate uri from the $params array
      *
-     * @param array $params
-     * @param string|null $name
+     * @param  array       $params
+     * @param  string|null $name
      * @return string
      */
     public function uri(array $params = array(), $name = null)
@@ -464,6 +471,7 @@ class Router extends Widget
                     }
                 }
             }
+
             return $this->options['baseUri'] . $this->_buildQuery($params);
         } else {
             return $this->_buildQuery($params);

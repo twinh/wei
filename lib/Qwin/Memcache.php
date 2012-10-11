@@ -37,7 +37,7 @@ class Memcache extends Widget implements Storable
 {
     /**
      * Options
-     * 
+     *
      * @var array
      */
     public $options = array(
@@ -45,7 +45,7 @@ class Memcache extends Widget implements Storable
         'object' => null,
         'flag' => MEMCACHE_COMPRESSED,
     );
-    
+
     protected $_serverOptions = array(
         'host' => '127.0.0.1',
         'port' => 11211,
@@ -61,11 +61,11 @@ class Memcache extends Widget implements Storable
      *
      * @var Memcache
      */
-    protected  $_object;
+    protected $_object;
 
     /**
      * Init
-     * 
+     *
      * @param array $options
      */
     public function __construct(array $options = array())
@@ -85,6 +85,7 @@ class Memcache extends Widget implements Storable
     public function set($key, $value, $expire = 0, array $options = array())
     {
         $o = $options + $this->_objectOptions;
+
         return $this->_object->set($key, $value, $o['flag'], $expire);
     }
 
@@ -96,12 +97,14 @@ class Memcache extends Widget implements Storable
     public function add($key, $value, $expire = 0, array $options = array())
     {
         $o = $options + $this->_objectOptions;
+
         return $this->_object->add($key, $value, $o['flag'], $expire);
     }
 
     public function replace($key, $value, $expire = 0, array $options = array())
     {
         $o = $options + $this->_objectOptions;
+
         return $this->_object->replace($key, $value, $o['flag'], $expire);
     }
 
@@ -122,7 +125,7 @@ class Memcache extends Widget implements Storable
 
     /**
      * Get memcache object
-     * 
+     *
      * @return Memcache
      */
     public function getObject()

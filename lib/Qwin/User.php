@@ -46,7 +46,7 @@ class User extends ArrayWidget
 
     public function __construct(array $options = array())
     {
-        $data = (array)$this->session->get('user');
+        $data = (array) $this->session->get('user');
 
         if (empty($data) || !isset($data['username']) || !$data['username']) {
             // todo $this->login('guest');
@@ -101,6 +101,7 @@ class User extends ArrayWidget
     public function logout()
     {
         $this->_data = array();//$this->_initData;
+
         return $this;
     }
 

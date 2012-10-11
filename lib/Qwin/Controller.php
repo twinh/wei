@@ -18,35 +18,35 @@ abstract class Controller extends Widget
 {
     /**
      * Execute the controller's action method
-     * 
-     * @param string $action the action name
+     *
+     * @param  string $action the action name
      * @return mixed
      * @todo add events
      */
     public function __invoke($action = 'index')
     {
         $method = $action . 'Action';
-        
+
         if (method_exists($this, $method)) {
             $this->trigger('before.action');
-            
+
             $result = $this->$method();
-            
+
             $this->trigger('after.action');
-            
+
             return $result;
         }
-        
+
         $this->log(sprintf('Action "%s" not found in controller "%s".', $action, get_class($this)));
-        
+
         throw new \Exception('The page you requested was not found.', 404);
     }
 
     /**
      * Set or get options
      *
-     * @param mixed $name
-     * @param mixed $value
+     * @param  mixed $name
+     * @param  mixed $value
      * @return mixed
      */
     public function option($name = null, $value = null)
