@@ -69,15 +69,6 @@ class WidgetManager extends Widget
         'widget'        => null,
         'deps'          => array(),
         'initWidgets'   => array(),
-        'funcMap'       => array(
-            'isArray'       => 'is_array',
-            'isBool'        => 'is_bool',
-            'isInt'         => 'is_int',
-            'isNull'        => 'is_null',
-            'isNumeric'     => 'is_numeric',
-            'isScalar'      => 'is_scalar',
-            'isString'      => 'is_string',
-        ),
     );
 
     /**
@@ -246,11 +237,6 @@ class WidgetManager extends Widget
      */
     public function invokeWidget($name, array $args, $config = null, $deps = array())
     {
-        // check if function widget
-        if (isset($this->options['funcMap'][$name])) {
-            return call_user_func_array($this->options['funcMap'][$name], $args);
-        }
-
         $widget = $this->getWidget($name, $config, $deps);
 
         if (!method_exists($widget, '__invoke')) {
@@ -358,7 +344,7 @@ class WidgetManager extends Widget
      *
      * @param bool $enable
      */
-    public function setAutoloadOption($enable)
+    public function setAutoload($enable)
     {
         if ($enable) {
             spl_autoload_register(array($this, 'autoload'));
@@ -376,7 +362,7 @@ class WidgetManager extends Widget
      * @param  string|array        $dirs
      * @return \Qwin\WidgetManager
      */
-    public function setAutoloadDirsOption($dirs)
+    public function setAutoloadDirs($dirs)
     {
         !is_array($dirs) && $dirs = (array) $dirs;
         foreach ($dirs as &$dir) {
