@@ -25,12 +25,10 @@ class Tmpl extends Widget
      * @var array
      */
     public $options = array(
-        'name'  => null,
-        'debug' => false,
         'start' => '<!-- START %s:%s -->',
         'end'   => '<!-- END %s:%s -->',
     );
-
+    
     /**
      * The name of the template
      *
@@ -81,22 +79,9 @@ class Tmpl extends Widget
     protected $placeholders = array();
 
     /**
-     * @see $options['debug']
      * @var boolen
      */
-    protected $debug;
-
-    /**
-     * Constructor
-     *
-     * @param array $options The options
-     */
-    public function __construct(array $options = array())
-    {
-        parent::__construct($options);
-        $this->name = &$this->options['name'];
-        $this->debug = &$this->options['debug'];
-    }
+    protected $debug = false;
 
     /**
      * Render the template
