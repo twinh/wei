@@ -11,31 +11,31 @@ namespace Qwin;
 require_once 'Widgetable.php';
 
 /**
- * The base class for all widget
+ * The base class for all widgets
  *
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
- * @todo        global ? shared ? how to defined?
  */
 abstract class Widget implements Widgetable
 {
+    protected static $optionProperties = array(
+        'widgetManager',
+    );
+    
     /**
-     * Options
-     *
+     * The default dependence map
+     * 
      * @var array
      */
-    public $options = array(
-        'widget' => null,
-        'deps' => array(),
-    );
-
+    protected $deps = array();
+    
     /**
      * The widget manager object
-     *
+     * 
      * @var \Qwin\WidgetManager
      */
     protected $widgetManager;
-
+    
     /**
      * Constructor
      *
@@ -46,15 +46,13 @@ abstract class Widget implements Widgetable
     {
         $this->option($options);
 
-        if (!isset($options['widget']) || empty($options['widget'])) {
-            $options['widget'] = WidgetManager::getInstance();
-        } elseif (!$options['widget'] instanceof self) {
+        if (!isset($this->widgetManager)) {
+            $this->widgetManager = WidgetManager::getInstance();
+        } elseif (!$this->widgetManager instanceof self) {
             throw new \InvalidArgumentException('Option "widget" should be an instance of "' . __CLASS__ . '"');
         }
-
-        $this->widgetManager = &$options['widget'];
     }
-
+    
     /**
      * Get or set options
      *
@@ -66,6 +64,7 @@ abstract class Widget implements Widgetable
      *          $widget->option();                  // get all options
      *          $widget->option(array());           // set options
      * @todo append
+     * @todo how to init all or partail options when class construct ?
      */
     public function option($name = null, $value = null)
     {
@@ -74,41 +73,54 @@ abstract class Widget implements Widgetable
             foreach ($name as $k => $v) {
                 $this->option($k, $v);
             }
-
-            return $this->options;
+            return $this;
         }
 
-        if (is_string($name) || is_int($name)) {
+        if (is_string($name)) {
+            if (in_array($name, $this->getNonOptionalProperties())) {
+                throw new \InvalidArgumentException(sprintf('Cannot access non-optional property %s', $name));
+            }
+            
             // get option
             if (1 == func_num_args()) {
-                $method = 'get' . ucfirst($name) . 'Option';
+                $method = 'get' . ucfirst($name);
                 if (method_exists($this, $method)) {
                     return $this->$method();
                 } else {
-                    return isset($this->options[$name]) ? $this->options[$name] : null;
+                    // 必需是定义的列表中
+                    return isset($this->$name) ? $this->$name : null;
                 }
             // set option
             } else {
-                $method = 'set' . ucfirst($name) . 'Option';
+                $method = 'set' . ucfirst($name);
                 if (method_exists($this, $method)) {
                     return $this->$method($value);
                 } else {
-                    return $this->options[$name] = $value;
+                    return $this->$name = $value;
                 }
             }
         }
 
-        // get all options
-        if (null === $name) {
-            return $this->options;
-        }
+        // get all options as array ?
+        //if (null === $name) {
+        //    return $this->options;
+        //}
 
-        // not match any actions
-        return null;
+        throw new \InvalidArgumentException();
     }
 
     /**
-     * 魔术方法,实现通过方法调用同名微件
+     * Return the non-optional properties for option method
+     * 
+     * @return array
+     */
+    protected function getNonOptionalProperties()
+    {
+        return array();
+    }
+
+    /**
+     * Invoke widget by the given name
      *
      * @param  string $name The name of widget
      * @param  array  $args The arguments for widget's __invoke method
@@ -117,18 +129,18 @@ abstract class Widget implements Widgetable
     public function __call($name, $args)
     {
         //return call_user_func_array($this->$name, $args);
-        return $this->widgetManager->invokeWidget($name, $args, null, $this->option('deps'));
+        return $this->widgetManager->invokeWidget($name, $args, null, $this->deps);
     }
 
     /**
-     * 魔术方法,实现通过对象属性获取同名微件
+     * Get widget instance by the given name
      *
      * @param  string       $name The name of widget
      * @return \Qwin\Widget
      */
     public function __get($name)
     {
-        return $this->$name = $this->widgetManager->getWidget($name, null, $this->option('deps'));
+        return $this->$name = $this->widgetManager->getWidget($name, null, $this->deps);
     }
 
     // should be implemented by subclasses
