@@ -17,11 +17,20 @@ namespace Qwin;
  */
 class View extends Widget implements Viewable
 {
-    public $options = array(
-        'dirs'  => array(),
-        'ext'   => '.php',
-    );
-
+    /**
+     * Template directory
+     * 
+     * @var string|array
+     */
+    protected $dirs = array();
+    
+    /**
+     * Default template file extension
+     * 
+     * @var string
+     */
+    protected $extension = '.php';
+    
     /**
      * Get view object
      *
@@ -37,10 +46,11 @@ class View extends Widget implements Viewable
      */
     public function render($name, $context = array())
     {
-        $tmpl = new Tmpl(array('name' => $name));
-
-        // inject view object
-        $tmpl->view = $this;
+        $tmpl = new Tmpl(array(
+            'name' => $name,
+            'view' => $this,
+            'widgetManager' => $this->widgetManager
+        ));
 
         return $tmpl->render($context);
     }
@@ -76,12 +86,12 @@ class View extends Widget implements Viewable
      */
     public function getFile($name)
     {
-        foreach ($this->options['dirs'] as $dir) {
+        foreach ($this->dirs as $dir) {
             if (is_file($file = $dir . '/' .  $name)) {
                 return $file;
             }
         }
 
-        throw new Exception(sprintf('Template "%s" not found in directories "%s"', $name, implode('", "', $this->options['dirs'])));
+        throw new Exception(sprintf('Template "%s" not found in directories "%s"', $name, implode('", "', $this->dirs)));
     }
 }
