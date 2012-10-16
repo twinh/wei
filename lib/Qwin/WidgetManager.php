@@ -19,78 +19,95 @@ require_once 'Widget.php';
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  * @todo        autoload interaction with composer ?
+ * @todo        set first or get first ?
+ * @todo        not shared widgets ?
  */
 class WidgetManager extends Widget
 {
     /**
      * Version
      */
-    const VERSION = '0.8.8';
-
+    const VERSION = '0.8.9';
+    
     /**
-     * 存储微件对象的数组
+     * The instance of widget manager
+     *
+     * @var \Qwin\WidgetManager
+     */
+    protected static $instance;
+    
+    /**
+     * The array contains the instanced widget objects
      *
      * @var array
      */
     protected $widgets = array();
 
     /**
-     * Global configurations of all widgets
+     * The global configurations for all widgets
      *
      * @var array
      */
     protected $config = array();
 
     /**
-     * The instance of Qwin
-     *
-     * @var \Qwin\WidgetManager
+     * The php configuration options that will be set when widget manager constructing
+     * 
+     * @var array 
+     * @see http://www.php.net/manual/en/ini.php
+     * @see http://www.php.net/manual/en/function.ini-set.php
      */
-    protected static $instance;
-
+    protected $inis = array();
+    
     /**
-     * Options
-     *
+     * The direcroties for autoload
+     * 
      * @var array
-     *
-     *       inis           array       ini options
-     *
-     *       autoload       bool        whether enable autoload or not
-     *
-     *       autoloadDirs   array       the direcroties of classes
-     *
-     *       widgetMap      array       widget name => new class name
      */
-    public $options = array(
-        'inis'          => array(),
-        'autoload'      => true,
-        'autoloadDirs'  => array(),
-        'widgetMap'     => array(),
-        'widget'        => null,
-        'deps'          => array(),
-        'initWidgets'   => array(),
-    );
-
+    protected $autoloadDirs = array();
+    
+    /**
+     * Whether enable autoload or not
+     * 
+     * @var bool
+     */
+    protected $autoload = true;
+    
+    /**
+     * The widget name to class name map
+     * 
+     * @var array
+     */
+    protected $widgetMap = array();
+    
+    /**
+     * The widgets that will be instanced after widget manager constructed
+     * 
+     * @var array
+     */
+    protected $initWidgets = array();
+    
     /**
      * Instance widget manager
-     *
+     * 
+     * @param array $config
      * @return \Qwin\WidgetManager
      */
     public function __construct(array $config = array())
     {
         // set configurations for all widget
-        $this->config($config);
+        $this->config = $config;
+        
+        $this->widgetManager = $this;
 
+        // TODO full properties
         // set options for current widget
         if (isset($config['widgetManager'])) {
-            $this->options = $config['widgetManager'] + $this->options;
+            $this->option($config['widgetManager']);
         }
-        $options = &$this->options;
-        $options['widget'] = $this;
-        parent::__construct($options);
-
-        // call init widgets
-        foreach ($options['initWidgets'] as $widgetName) {
+        
+        // instance initial widgets
+        foreach ($this->initWidgets as $widgetName) {
             $this->getWidget($widgetName, null, $this);
         }
     }
@@ -105,7 +122,7 @@ class WidgetManager extends Widget
     public function autoload($class)
     {
         $class = strtr($class, array('_' => DIRECTORY_SEPARATOR, '\\' => DIRECTORY_SEPARATOR));
-        foreach ($this->options['autoloadDirs'] as $dir) {
+        foreach ($this->autoloadDirs as $dir) {
             $file = $dir . $class . '.php';
             if (file_exists($file)) {
                 require_once $file;
@@ -135,10 +152,10 @@ class WidgetManager extends Widget
      * @param  mixed $param The value of configuration
      * @return mixed
      * @example $this->config();                 // Get all configurations
-     *          $this->config('widgetName');     // 获取此项的配置,建议为类名
-     *          $this->config('array');          // 设定该数组为全局配置
-     *          $this->config('name', 'param');  // 设定项为name的配置为param
-     *          $this->config('key1/key2');      // Get the value of $config['key1']['key2']
+     *          $this->config('widgetName');     // Get the configuration for 'widgetName'
+     *          $this->config($array);           // Replace all configurations
+     *          $this->config('name', 'param');  // Set one configuration
+     *          $this->config('key1/key2');      // Get the value of $this->config['key1']['key2']
      */
     public function config($name = null)
     {
@@ -178,15 +195,16 @@ class WidgetManager extends Widget
     }
 
     /**
-     * Get widget manager class instance
+     * Get widget manager instance
      *
-     * @param mixed $config [optional] config file path or array
-     * @param mixed $ [optional] TODO remove extra args ?
-     * @return WidgetManager
+     * @param mixed $config [optional] The configurations file path or array
+     * @param mixed $ [optional]
+     * @return \Qwin\WidgetManager
+     * @todo remove extra args ?
      */
     public static function getInstance($config = array())
     {
-        // most of time, it's called after instanced and without arguments
+        // most of time, it's called after instanced and without any arguments
         if (!$config && isset(static::$instance)) {
             return static::$instance;
         }
@@ -200,7 +218,7 @@ class WidgetManager extends Widget
                 } elseif (is_string($arg) && is_file($arg)) {
                     $config = ((array) require $arg) + $config;
                 } else {
-                    throw new \InvalidArgumentException('Config should be array or file.');
+                    throw new \InvalidArgumentException('Configuration should be array or file.');
                 }
             }
         }
@@ -229,11 +247,11 @@ class WidgetManager extends Widget
     /**
      * Get a widget object and call its "__invoke" method
      *
-     * @param  string          $name   the name of widget
-     * @param  array           $args   arguments for "__invoke" method
+     * @param  string          $name   The name of widget
+     * @param  array           $args   The arguments for "__invoke" method
      * @param  string          $config
      * @return mixed
-     * @throws \Qwin\Exception when method "__invoke" not found
+     * @throws \Qwin\Exception When method "__invoke" not found
      */
     public function invokeWidget($name, array $args, $config = null, $deps = array())
     {
@@ -249,8 +267,8 @@ class WidgetManager extends Widget
     /**
      * Get a widget instance
      *
-     * @param  string $name the name of the widget, without class prefix "Qwin_"
-     * @return Widget the widget object
+     * @param  string $name The name of the widget, without class prefix "Qwin\"
+     * @return \Qwin\Widget
      */
     public function getWidget($name, $config = null, $deps = array())
     {
@@ -269,8 +287,8 @@ class WidgetManager extends Widget
             return $this->widgets[$lower];
         }
 
-        if (isset($this->options['widgetMap'][$name])) {
-            $class = $this->options['widgetMap'][$name];
+        if (isset($this->widgetMap[$name])) {
+            $class = $this->widgetMap[$name];
         } else {
             $class = 'Qwin\\' . ucfirst($name);
         }
@@ -282,7 +300,7 @@ class WidgetManager extends Widget
                 throw new \InvalidArgumentException(sprintf('Config name "%s" not found', $full));
             }
 
-            $options = array('widget' => $this,) + (array) $options;
+            $options = array('widgetManager' => $this) + (array) $options;
 
             return $this->widgets[$lower] = new $class($options);
         }
@@ -300,7 +318,6 @@ class WidgetManager extends Widget
             $line = isset($traces[3]['line']) ? $traces[3]['line'] : $traces[4]['line'];
             throw new \BadMethodCallException(sprintf('Method "%s->%2$s" or widget "%s" (class "%s") not found, called in file "%s" at line %s', $traces[3]['class'], $traces[3]['function'], $class, $file, $line));
         } else {
-            // would this happen ?
             // Call to undefined method class::method
             // Undefined property: class::$property
             throw new \BadMethodCallException(sprintf('Property or method "%s" not defined', $name));
@@ -308,10 +325,10 @@ class WidgetManager extends Widget
     }
 
     /**
-     * Remove widget
+     * Remove the widget instance by the given name
      *
-     * @param  string  $name the name of widget
-     * @return boolean
+     * @param  string  $name The name of widget
+     * @return bool
      */
     public function removeWidget($name)
     {
@@ -319,19 +336,22 @@ class WidgetManager extends Widget
 
         if (isset($this->widgets[$lower])) {
             unset($this->widgets[$lower]);
-
             return true;
         }
-
-        return $this->exception('Widget "' . $name . '" not found');
+        
+        return false;
     }
 
+    /**
+     * Check if the widget exists by the given name
+     * 
+     * @param string $name The name of widget
+     * @return bool
+     */
     public function hasWidget($name)
     {
-        $widgetMap = $this->options['widgetMap'];
-
-        if (isset($widgetMap[$name])) {
-            $class = $widgetMap[$name];
+        if (isset($this->widgetMap[$name])) {
+            $class = $this->widgetMap[$name];
         } else {
             $class = 'Qwin\\' . ucfirst($name);
         }
@@ -351,7 +371,7 @@ class WidgetManager extends Widget
         } else {
             spl_autoload_unregister(array($this, 'autoload'));
         }
-        $this->options['autoload'] = (bool) $enable;
+        $this->autoload = (bool) $enable;
 
         return $this;
     }
@@ -371,7 +391,7 @@ class WidgetManager extends Widget
         // the autoload directories will always contain the directory of the class file
         $dirs[] = dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR;
 
-        $this->options['autoloadDirs'] = array_unique($dirs);
+        $this->autoloadDirs = array_unique($dirs);
 
         return $this;
     }
@@ -382,7 +402,7 @@ class WidgetManager extends Widget
      * @param  array               $inis
      * @return \Qwin\WidgetManager
      */
-    public function setInisOption($inis)
+    public function setInis($inis)
     {
         foreach ($inis as $key => $value) {
             ini_set($key, $value);
