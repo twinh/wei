@@ -9,7 +9,7 @@
 namespace Qwin;
 
 /**
- * Db
+ * Doctrine dbal connection
  *
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
@@ -24,7 +24,14 @@ class Db extends Widget
      * @var \Doctrine\DBAL\Connection
      */
     protected $conn;
-
+    
+    /**
+     * The first parameter for DriverManager::getConnection
+     * 
+     * @var array
+     */
+    protected $params = array();
+    
     /**
      * Constructor
      *
@@ -35,7 +42,7 @@ class Db extends Widget
     {
         parent::__construct($options);
 
-        $this->conn = DriverManager::getConnection($this->options);
+        $this->conn = DriverManager::getConnection($this->params);
     }
 
     /**
