@@ -16,11 +16,11 @@ namespace Qwin;
  */
 class CodeHintGenerator extends Widget
 {
-    public $options = array(
-        'target' => 'doc/qwin-code-hint.php',
-        'exclusions' => false,
-        'withWidgetMap' => false,
-    );
+    protected $target = 'doc/qwin-code-hint.php';
+    
+    protected $exclusions = array();
+    
+    protected $withWidgetMap = false;
 
     protected $classTmpl =
 '<?php
@@ -56,12 +56,11 @@ class Widget implements Widgetable
     public function __invoke(array $options = array())
     {
         $this->option($options);
-        $options = &$this->options;
 
         $content = '';
 
         // generate the custom widgets
-        if ($options['withWidgetMap']) {
+        if ($this->withWidgetMap) {
             foreach ($this->widgetManager->option('widgetMap') as $widget => $class) {
                 if ($this->isExcludeWidget($widget)) {
                     continue;
@@ -82,13 +81,13 @@ class Widget implements Widgetable
         }
 
         // save file
-        $dir = dirname($options['target']);
+        $dir = dirname($this->target);
 
         if (!is_dir($dir)) {
             mkdir($dir, 0777, true);
         }
 
-        file_put_contents($options['target'], sprintf($this->classTmpl, $content));
+        file_put_contents($this->target, sprintf($this->classTmpl, $content));
 
         return $this;
     }
@@ -198,7 +197,7 @@ class Widget implements Widgetable
      * @param  array|string            $widgets the exclusion widget list
      * @return \Qwin\CodeHintGenerator
      */
-    public function setExclusionsOption($widgets)
+    public function setExclusions($widgets)
     {
         if (!empty($widgets) && is_string($widgets)) {
             $exclusions = explode(',', $widgets);
@@ -212,7 +211,7 @@ class Widget implements Widgetable
             $value = strtolower(trim($value));
         });
 
-        $this->options['exclusions'] = $exclusions;
+        $this->exclusions = $exclusions;
 
         return $this;
     }
@@ -225,6 +224,6 @@ class Widget implements Widgetable
      */
     public function isExcludeWidget($widget)
     {
-        return in_array(strtolower($widget), $this->options['exclusions']);
+        return in_array(strtolower($widget), $this->exclusions);
     }
 }
