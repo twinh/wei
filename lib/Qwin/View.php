@@ -76,6 +76,14 @@ class View extends Widget implements Viewable
 
         return $this;
     }
+    
+    /**
+     * @see \Qwin\Viewable::getExtension
+     */
+    public function getExtension()
+    {
+        return $this->extension;
+    }
 
     /**
      * Get the template file by name

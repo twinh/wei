@@ -40,4 +40,9 @@ interface Viewable
      * @param mixed  $value The value of the variable
      */
     public function assign($name, $value = null);
+    
+    /**
+     * Get default template file extension, for automatic render template only
+     */
+    public function getExtension();
 }
