@@ -1,7 +1,7 @@
 {
     "name": "twinh/qwin",
     "description": "The PHP library",
-    "version": "0.8.7",
+    "version": "0.8.9",
     "type": "library",
     "keywords": ["library"],
     "homepage": "https://github.com/twinh/qwin",
