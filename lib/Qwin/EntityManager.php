@@ -13,6 +13,7 @@ namespace Qwin;
  *
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @todo        ohter mapping
  */
 use Doctrine\ORM\Configuration,
     Doctrine\ORM\EntityManager as DoctrineEntityManager;
@@ -25,7 +26,7 @@ class EntityManager extends Widget
      * @var array
      * @see \Doctrine\ORM\Configuration
      */
-    public $options = array(
+    protected $config = array(
         'cache' => null,
         'proxyDir' => null,
         'proxyNamespace' => null,
@@ -33,6 +34,11 @@ class EntityManager extends Widget
         'annotationDriverPaths' => array(),
         'entityNamespaces' => array(),
     );
+    
+    /**
+     * @var \Doctrine\ORM\EntityManager
+     */
+    protected $em;
 
     /**
      * Constructor
@@ -42,7 +48,7 @@ class EntityManager extends Widget
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-        $options = &$this->options;
+        $options = $this->config;
 
         // create cache object
         switch (true) {
@@ -59,7 +65,6 @@ class EntityManager extends Widget
                  $cache = false;
         }
 
-        // TODO as a widget ?
         $config = new Configuration;
 
         // set default cache
@@ -72,9 +77,7 @@ class EntityManager extends Widget
 
         // todo other driver ?
         if ($options['annotationDriverPaths']) {
-            //$driver = new \Doctrine\Common\Annotations\Annotation\
-            //$driverImpl = new \Doctrine\ORM\Mapping\Driver\YamlDriver('bin');
-            $driverImpl = $config->newDefaultAnnotationDriver($options['annotationDriverPaths']);
+            $driverImpl = $config->newDefaultAnnotationDriver($options['annotationDriverPaths'], false);
             $config->setMetadataDriverImpl($driverImpl);
         }
 
@@ -107,5 +110,18 @@ class EntityManager extends Widget
     public function __invoke()
     {
         return $this->em;
+    }
+    
+    /**
+     * Set options for \Doctrine\ORM\Configuration
+     * 
+     * @param array $config
+     * @return \Qwin\EntityManager
+     */
+    public function setConfig(array $config)
+    {
+        $this->config = $config + $this->config;
+
+        return $this;
     }
 }
