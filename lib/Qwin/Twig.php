@@ -17,16 +17,12 @@ namespace Qwin;
 class Twig extends Widget implements Viewable
 {
     /**
-     * Options
-     *
+     * Options for \Twig_Environment
+     * 
      * @var array
-     * @see \Twig_Environment
-     * @see \Twig_Loader_Filesystem
-     * @todo integrate with debug widget
+     * @see \Twig_Environment::__construct
      */
-    public $options = array(
-        // Options for \Twig_Loader_Filesystem
-        'paths'                 => array(),
+    protected $envOptions = array(
         'debug'                 => false,
         'charset'               => 'UTF-8',
         'base_template_class'   => 'Twig_Template',
@@ -35,10 +31,21 @@ class Twig extends Widget implements Viewable
         'cache'                 => false,
         'auto_reload'           => null,
         'optimizations'         => -1,
-
-        // options for \Qwin\Twig
-        'ext'                   => '.html.twig'
     );
+    
+    /**
+     * Path for \Twig_Loader_Filesystem
+     * 
+     * @var string|array
+     */
+    protected $paths = array();
+    
+    /**
+     * Default template file extension
+     * 
+     * @var string
+     */
+    protected $extension = '.html.twig';
 
     /**
      * The twig environment object
@@ -56,10 +63,10 @@ class Twig extends Widget implements Viewable
     {
         parent::__construct($options);
 
-        $this->twig = new \Twig_Environment(new \Twig_Loader_Filesystem($this->options['paths']), $this->options);
+        $this->twig = new \Twig_Environment(new \Twig_Loader_Filesystem($this->paths), $this->envOptions);
 
+        // add in common use object
         $this->twig->addGlobal('widget', $this->widgetManager);
-
         $this->twig->addGlobal('app', $this->app);
     }
 
@@ -95,5 +102,13 @@ class Twig extends Widget implements Viewable
     public function render($name, $context = array())
     {
         return $this->twig->render($name, $context);
+    }
+    
+    /**
+     * @see \Qwin\Viewable::getExtension
+     */
+    public function getExtension()
+    {
+        return $this->extension;
     }
 }
