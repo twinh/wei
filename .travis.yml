@@ -3,3 +3,9 @@ language: php
 php:
    - 5.4
    - 5.3
+   
+# Let phpunit generate the code coverage report in the clover format
+script: phpunit --coverage-clover "clover"
+
+after_success:
+    - curl -sL https://bit.ly/artifact-uploader | php
