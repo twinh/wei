@@ -20,29 +20,35 @@ namespace Qwin;
 class Router extends Widget
 {
     /**
-     * @var array Options
-     *
-     *      -- enable       bool    whether enable the router or not
-     *
-     *      -- baseUri      string  the base uri of the request uri
-     *
-     *      -- routes       array   routes configurations
+     * Whether enable the router or not
+     * 
+     * @var bool 
      */
-    public $options = array(
-        'enable'    => true,
-        'baseUri'   => null,
-        'routes'    => array(
-            'default' => array(
-                'name'              => 'default',
-                'uri'               => '(<controller>(/<action>(/<id>)))',
-                'rules'             => array(),
-                'method'            => null,
-                'regex'             => null,
-                'slashSeparator'    => false,
-                'defaults' => array(
-                    'controller'    => 'index',
-                    'action'        => 'index',
-                ),
+    protected $enable = true;
+    
+    /**
+     * The base uri of the request uri
+     * 
+     * @var string
+     */
+    protected $baseUri;
+    
+    /**
+     * Routes configurations
+     * 
+     * @var array 
+     */
+    protected $routes = array(
+        'default' => array(
+            'name'              => 'default',
+            'uri'               => '(<controller>(/<action>(/<id>)))',
+            'rules'             => array(),
+            'method'            => null,
+            'regex'             => null,
+            'slashSeparator'    => false,
+            'defaults' => array(
+                'controller'    => 'index',
+                'action'        => 'index',
             ),
         ),
     );
@@ -77,13 +83,6 @@ class Router extends Widget
     );
 
     /**
-     * Equals to $this->options['routes']
-     *
-     * @var array
-     */
-    protected $_routes;
-
-    /**
      * The match results of the request uri
      *
      * @var array
@@ -92,10 +91,12 @@ class Router extends Widget
 
     public function __construct(array $options = array())
     {
-        $this->option($options + $this->options);
-        $options = &$this->options;
-
-        $this->_routes = &$this->options['routes'];
+        parent::__construct($options);
+        
+        // todo
+        if (!$this->baseUri) {
+            $this->setBaseUri('');
+        }
     }
 
     /**
@@ -115,7 +116,7 @@ class Router extends Widget
      */
     public function matchRequestUri()
     {
-        if (!$this->options['enable']) {
+        if (!$this->enable) {
             return $_GET;
         }
 
@@ -136,7 +137,7 @@ class Router extends Widget
             $uri = '';
         }
 
-        $uri = substr($uri, strlen($this->options['baseUri']));
+        $uri = substr($uri, strlen($this->baseUri));
 
         $params = $this->match($uri, $_SERVER['REQUEST_METHOD']);
 
@@ -149,25 +150,25 @@ class Router extends Widget
      * @param  string      $uri
      * @return Qwin_Router
      */
-    public function setBaseUriOption($uri)
+    public function setBaseUri($uri)
     {
         if (!$uri) {
             // strtr for windows
             $uri = strtr(dirname($_SERVER['SCRIPT_NAME']), '\\', '/');
-            $this->options['baseUri'] = '/' == $uri ? $uri : $uri . '/';
+            $this->baseUri = '/' == $uri ? $uri : $uri . '/';
         } elseif ('/' != $uri[strlen($uri) - 1]) {
-            $this->options['baseUri'] = $uri . '/';
+            $this->baseUri = $uri . '/';
         }
 
         return $this;
     }
 
-    public function setRoutesOption($routes)
+    public function setRoutes($routes)
     {
         foreach ($routes as &$route) {
             $route += $this->_routeOptions;
         }
-        $this->options['routes'] = $routes;
+        $this->routes = $routes;
 
         return $this;
     }
@@ -183,9 +184,9 @@ class Router extends Widget
         $route =  $route + $this->_routeOptions;
 
         if (!$route['name']) {
-            array_unshift($this->_routes, $route);
+            array_unshift($this->routes, $route);
         } else {
-            $this->_routes = array($route['name'] => $route) + $this->_routes;
+            $this->routes = array($route['name'] => $route) + $this->routes;
         }
 
         return $this;
@@ -199,7 +200,7 @@ class Router extends Widget
      */
     public function get($name)
     {
-        return isset($this->_routes[$name]) ? $this->_routes[$name] : null;
+        return isset($this->routes[$name]) ? $this->routes[$name] : null;
     }
 
     /**
@@ -210,8 +211,8 @@ class Router extends Widget
      */
     public function remove($name)
     {
-        if (isset($this->_routes[$name])) {
-            unset($this->_routes[$name]);
+        if (isset($this->routes[$name])) {
+            unset($this->routes[$name]);
         }
 
         return $this;
@@ -261,10 +262,10 @@ class Router extends Widget
      */
     public function match($uri, $method = null, $name = null)
     {
-        if ($name && isset($this->_routes[$name])) {
+        if ($name && isset($this->routes[$name])) {
             return $this->_match($uri, $method, $name);
         } else {
-            foreach ($this->_routes as $name => &$route) {
+            foreach ($this->routes as $name => &$route) {
                 if (false !== ($params = $this->_match($uri, $method, $name))) {
                     return $params;
                 }
@@ -285,7 +286,7 @@ class Router extends Widget
      */
     protected function _match($uri, $method, $name)
     {
-        $route = $this->_compile($this->_routes[$name]);
+        $route = $this->_compile($this->routes[$name]);
 
         // when $route['method'] is not provided, accepts all request methods
         if ($method && $route['method'] && !preg_match('#' . $route['method'] . '#i', $method)) {
@@ -365,7 +366,7 @@ class Router extends Widget
 
     protected function _uri($params, $name)
     {
-        $route = $this->_compile($this->_routes[$name]);
+        $route = $this->_compile($this->routes[$name]);
 
         $uri = $route['uri'];
 
@@ -461,18 +462,18 @@ class Router extends Widget
      */
     public function uri(array $params = array(), $name = null)
     {
-        if ($this->options['enable']) {
-            if ($name && isset($this->_routes[$name])) {
-                return $this->options['baseUri'] . $this->_uri($params, $name);
+        if ($this->enable) {
+            if ($name && isset($this->routes[$name])) {
+                return $this->baseUri . $this->_uri($params, $name);
             } else {
-                foreach ($this->_routes as $name => $route) {
+                foreach ($this->routes as $name => $route) {
                     if (false !== ($uri = $this->_uri($params, $name))) {
-                        return $this->options['baseUri'] . $uri;
+                        return $this->baseUri . $uri;
                     }
                 }
             }
 
-            return $this->options['baseUri'] . $this->_buildQuery($params);
+            return $this->baseUri . $this->_buildQuery($params);
         } else {
             return $this->_buildQuery($params);
         }
