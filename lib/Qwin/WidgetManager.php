@@ -108,7 +108,7 @@ class WidgetManager extends Widget
         
         // instance initial widgets
         foreach ($this->initWidgets as $widgetName) {
-            $this->getWidget($widgetName, null, $this);
+            $this->get($widgetName, null, $this);
         }
     }
 
@@ -256,9 +256,9 @@ class WidgetManager extends Widget
      * @return mixed
      * @throws \Qwin\Exception When method "__invoke" not found
      */
-    public function invokeWidget($name, array $args, $config = null, $deps = array())
+    public function invoke($name, array $args, $config = null, $deps = array())
     {
-        $widget = $this->getWidget($name, $config, $deps);
+        $widget = $this->get($name, $config, $deps);
 
         if (!method_exists($widget, '__invoke')) {
             return $this->exception('Method "__invoke" not found in widget "' . get_class($widget) . '"');
@@ -273,7 +273,7 @@ class WidgetManager extends Widget
      * @param  string $name The name of the widget, without class prefix "Qwin\"
      * @return \Qwin\Widget
      */
-    public function getWidget($name, $config = null, $deps = array())
+    public function get($name, $config = null, $deps = array())
     {
         if ($config) {
             $full = $name . '.' . $config;
@@ -333,7 +333,7 @@ class WidgetManager extends Widget
      * @param  string  $name The name of widget
      * @return bool
      */
-    public function removeWidget($name)
+    public function remove($name)
     {
         $lower = strtolower($name);
 
@@ -351,7 +351,7 @@ class WidgetManager extends Widget
      * @param string $name The name of widget
      * @return bool
      */
-    public function hasWidget($name)
+    public function has($name)
     {
         if (isset($this->widgetMap[$name])) {
             $class = $this->widgetMap[$name];
