@@ -195,7 +195,7 @@ class WidgetManager extends Widget
      */
     public function __invoke($name)
     {
-        return $this->getWidget($name, null, $this);
+        return $this->get($name, null, $this);
     }
 
     /**
