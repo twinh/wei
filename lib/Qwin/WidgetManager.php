@@ -30,11 +30,11 @@ class WidgetManager extends Widget
     const VERSION = '0.8.9';
     
     /**
-     * The instance of widget manager
+     * The instances of widget manager
      *
-     * @var \Qwin\WidgetManager
+     * @var array
      */
-    protected static $instance;
+    protected static $instances = array();
     
     /**
      * The array contains the instanced widget objects
@@ -109,6 +109,59 @@ class WidgetManager extends Widget
         // instance initial widgets
         foreach ($this->initWidgets as $widgetName) {
             $this->getWidget($widgetName, null, $this);
+        }
+    }
+
+    /**
+     * Get widget manager instance
+     * 
+     * @param array|string $config          The array or file configuration
+     * @param string $name                  The name of the instance
+     * @return \Qwin\WidgetManager         
+     * @throws \InvalidArgumentException    When the configuration parameter is not array or file
+     */
+    public static function create($config = array(), $name = 'default')
+    {
+        // Most of time, it's called after instanced and without any arguments
+        if (!$config && isset(static::$instances[$name])) {
+            return static::$instances[$name];
+        }
+        
+        switch (true) {
+            case is_array($config):
+                break;
+            
+            case is_string($config) && file_exists($config):
+                $config = (array) require $config;
+                break;
+            
+            default:
+                throw new \InvalidArgumentException('Configuration should be array or file');
+        }
+        
+        if (!isset(static::$instances[$name])) {
+            static::$instances[$name] = new static($config);
+        } else {
+            static::$instances[$name]->config($config);
+        }
+        
+        return static::$instances[$name];
+    }
+    
+    /**
+     * Reset the internal static instance
+     * 
+     * @param string|null $name             The name of the instance, if $name is null, reset all instances
+     * @throws \InvalidArgumentException    When instance not found
+     */
+    public static function reset($name = null)
+    {
+        if (is_null($name)) {
+            static::$instances = array();
+        } elseif (isset(static::$instances[$name])) {
+            unset(static::$instances[$name]);
+        } else {
+            throw new \InvalidArgumentException(sprintf('Widget instance "%s" not found', $name));
         }
     }
 
@@ -192,56 +245,6 @@ class WidgetManager extends Widget
 
         // not match any actions
         return null;
-    }
-
-    /**
-     * Get widget manager instance
-     *
-     * @param mixed $config [optional] The configurations file path or array
-     * @param mixed $ [optional]
-     * @return \Qwin\WidgetManager
-     * @todo remove extra args ?
-     */
-    public static function getInstance($config = array())
-    {
-        // most of time, it's called after instanced and without any arguments
-        if (!$config && isset(static::$instance)) {
-            return static::$instance;
-        }
-
-        // merge all configurations
-        if ($config) {
-            $config = array();
-            foreach (func_get_args() as $arg) {
-                if (is_array($arg)) {
-                    $config = $arg + $config;
-                } elseif (is_string($arg) && is_file($arg)) {
-                    $config = ((array) require $arg) + $config;
-                } else {
-                    throw new \InvalidArgumentException('Configuration should be array or file.');
-                }
-            }
-        }
-
-        if (!isset(static::$instance)) {
-            static::$instance = new static($config);
-        } else {
-            static::$instance->config($config);
-        }
-
-        return static::$instance;
-    }
-
-    /**
-     * Reset the internal static instance
-     *
-     * @return void
-     */
-    public static function resetInstance()
-    {
-        if (static::$instance) {
-            static::$instance = null;
-        }
     }
 
     /**
