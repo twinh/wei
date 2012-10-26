@@ -18,10 +18,6 @@ require_once 'Widgetable.php';
  */
 abstract class Widget implements Widgetable
 {
-    protected static $optionProperties = array(
-        'widgetManager',
-    );
-    
     /**
      * The default dependence map
      * 
@@ -47,7 +43,7 @@ abstract class Widget implements Widgetable
         $this->option($options);
 
         if (!isset($this->widgetManager)) {
-            $this->widgetManager = WidgetManager::getInstance();
+            $this->widgetManager = WidgetManager::create();
         } elseif (!$this->widgetManager instanceof self) {
             throw new \InvalidArgumentException('Option "widget" should be an instance of "' . __CLASS__ . '"');
         }
@@ -129,7 +125,7 @@ abstract class Widget implements Widgetable
     public function __call($name, $args)
     {
         //return call_user_func_array($this->$name, $args);
-        return $this->widgetManager->invokeWidget($name, $args, null, $this->deps);
+        return $this->widgetManager->invoke($name, $args, null, $this->deps);
     }
 
     /**
@@ -140,7 +136,7 @@ abstract class Widget implements Widgetable
      */
     public function __get($name)
     {
-        return $this->$name = $this->widgetManager->getWidget($name, null, $this->deps);
+        return $this->$name = $this->widgetManager->get($name, null, $this->deps);
     }
 
     // should be implemented by subclasses
