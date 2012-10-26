@@ -16,7 +16,7 @@ namespace Qwin;
  * @todo        ohter mapping
  */
 use Doctrine\ORM\Configuration,
-    Doctrine\ORM\EntityManager as DoctrineEntityManager;
+    Doctrine\ORM\EntityManager as BaseEntityManager;
 
 class EntityManager extends Widget
 {
@@ -99,7 +99,7 @@ class EntityManager extends Widget
         }
 
         // Create EntityManager
-        $this->em = DoctrineEntityManager::create($this->db(), $config);
+        $this->em = BaseEntityManager::create($this->db(), $config);
     }
 
     /**
