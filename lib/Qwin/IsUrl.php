@@ -33,7 +33,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-2 0:40:04
  */
-class IsUrl extends Widget
+class IsUrl extends WidgetProvider
 {
 
 }

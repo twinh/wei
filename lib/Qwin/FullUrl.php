@@ -15,7 +15,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @see         http://snipplr.com/view.php?codeview&id=2734
  */
-class FullUrl extends Widget
+class FullUrl extends WidgetProvider
 {
     public function __invoke()
     {

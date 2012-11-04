@@ -33,7 +33,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-05 11:44:13
  */
-class IsExists extends Widget
+class IsExists extends WidgetProvider
 {
     /**
      * whether function "stream_resolve_include_path" exists

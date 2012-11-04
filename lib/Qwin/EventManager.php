@@ -14,7 +14,7 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class EventManager extends Widget
+class EventManager extends WidgetProvider
 {
     /**
      * Event array

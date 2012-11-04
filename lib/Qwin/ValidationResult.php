@@ -33,7 +33,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-01-23 22:06:18
  */
-class ValidationResult extends Widget
+class ValidationResult extends WidgetProvider
 {
     /**
      * Validated result

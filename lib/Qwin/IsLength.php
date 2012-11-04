@@ -33,7 +33,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-01-14 16:28:13
  */
-class IsLength extends Widget
+class IsLength extends WidgetProvider
 {
     public function __invoke($data, $min, $max = null)
     {

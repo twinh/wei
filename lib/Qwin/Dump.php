@@ -33,7 +33,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-05 12:04:07
  */
-class Dump extends Widget
+class Dump extends WidgetProvider
 {
     public $options = array(
         'exit' => true,

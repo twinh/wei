@@ -14,7 +14,7 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class IsEmail extends Widget
+class IsEmail extends WidgetProvider
 {
     public function __invoke($value)
     {

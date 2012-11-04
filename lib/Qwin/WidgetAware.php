@@ -26,7 +26,7 @@ abstract class WidgetAware
      */
     public function __call($name, $args)
     {
-        return WidgetManager::create()->invoke($name, $args);
+        return Widget::create()->invoke($name, $args);
     }
 
     /**
@@ -37,6 +37,6 @@ abstract class WidgetAware
      */
     public function __get($name)
     {
-        return $this->$name = WidgetManager::create()->get($name);
+        return $this->$name = Widget::create()->get($name);
     }
 }

@@ -35,7 +35,7 @@ use Qwin\Widget;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-01-12 17:53:49
  */
-class Escape extends Widget
+class Escape extends WidgetProvider
 {
     /**
      * Escapes special characters for sql query

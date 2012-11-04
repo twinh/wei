@@ -15,7 +15,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @todo        add group
  */
-class Minify extends Widget
+class Minify extends WidgetProvider
 {
     /**
      * 存储文件的二维数组,键名为文件类型,如js,css,值为文件路径数组

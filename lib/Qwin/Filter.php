@@ -14,7 +14,7 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Filter extends Widget
+class Filter extends WidgetProvider
 {
     protected $filters = array();
 

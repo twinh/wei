@@ -12,7 +12,7 @@ namespace Qwin;
  * @version     $Id$
  * @since       2012-06-16
  */
-class Cache extends Widget
+class Cache extends WidgetProvider
 {
     public $options = array(
         'driver' => 'apc',

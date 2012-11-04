@@ -18,7 +18,7 @@ namespace Qwin;
 use Doctrine\ORM\Configuration,
     Doctrine\ORM\EntityManager as BaseEntityManager;
 
-class EntityManager extends Widget
+class EntityManager extends WidgetProvider
 {
     /**
      * Options for configuration

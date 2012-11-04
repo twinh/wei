@@ -33,7 +33,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-01-26 16:39:15
  */
-class ToText extends Widget
+class ToText extends WidgetProvider
 {
     /**
      * Convert widget source to text

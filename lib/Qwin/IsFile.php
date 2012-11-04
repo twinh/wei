@@ -14,7 +14,7 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class IsFile extends Widget
+class IsFile extends WidgetProvider
 {
     /**
      * Determine the object source is a file path, check with the include_path.

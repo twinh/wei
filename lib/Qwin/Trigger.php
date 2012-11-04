@@ -14,7 +14,7 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Trigger extends Widget
+class Trigger extends WidgetProvider
 {
     public function __invoke($event, $params = array())
     {

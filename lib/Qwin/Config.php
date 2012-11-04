@@ -14,10 +14,10 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Config extends Widget
+class Config extends WidgetProvider
 {
     public function __invoke()
     {
-        return call_user_func_array(array($this->widgetManager, 'config'), func_get_args());
+        return call_user_func_array(array($this->widget, 'config'), func_get_args());
     }
 }

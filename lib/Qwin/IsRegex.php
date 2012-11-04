@@ -33,7 +33,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-02 00:36:13
  */
-class IsRegex extends Widget
+class IsRegex extends WidgetProvider
 {
     public function __invoke($value, $x)
     {

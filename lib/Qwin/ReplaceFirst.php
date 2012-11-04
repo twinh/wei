@@ -15,7 +15,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @todo        replaceOne, replaceLast ?
  */
-class ReplaceFirst extends Widget
+class ReplaceFirst extends WidgetProvider
 {
     /**
      * Replace the first string

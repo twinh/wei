@@ -33,7 +33,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-05 11:56:38
  */
-class IsDigit extends Widget
+class IsDigit extends WidgetProvider
 {
     public function __invoke($data)
     {

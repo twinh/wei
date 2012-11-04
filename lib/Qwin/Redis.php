@@ -33,7 +33,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-06-07
  */
-class Redis extends Widget implements Storable
+class Redis extends WidgetProvider implements Storable
 {
     /**
      * Redis object

@@ -12,7 +12,7 @@ namespace Qwin;
  * @version     $Id$
  * @since       2012-7-24
  */
-class DbCache extends Widget implements Storable
+class DbCache extends WidgetProvider implements Storable
 {
     public $options = array(
         'dsn' => 'sqlite:cache.sqlite',

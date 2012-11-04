@@ -33,7 +33,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-05-30
  */
-class Memcache extends Widget implements Storable
+class Memcache extends WidgetProvider implements Storable
 {
     /**
      * Options

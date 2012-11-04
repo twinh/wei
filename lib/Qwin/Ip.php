@@ -14,7 +14,7 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Ip extends Widget
+class Ip extends WidgetProvider
 {
     /**
      * Get ip address

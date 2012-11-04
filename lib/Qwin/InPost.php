@@ -14,7 +14,7 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class InPost extends Widget
+class InPost extends WidgetProvider
 {
     public function __invoke()
     {

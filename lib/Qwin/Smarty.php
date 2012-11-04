@@ -14,7 +14,7 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Smarty extends Widget implements Viewable
+class Smarty extends WidgetProvider implements Viewable
 {
     /**
      * Smarty object
@@ -53,7 +53,7 @@ class Smarty extends Widget implements Viewable
         }
 
         // added default global template variable
-        $this->smarty->assign('widget', $this->widgetManager);
+        $this->smarty->assign('widget', $this->widget);
     }
 
     /**
@@ -92,6 +92,14 @@ class Smarty extends Widget implements Viewable
         $context && $this->smarty->assign($context);
 
         return $this->smarty->fetch($name);
+    }
+    
+    /**
+     * @see \Qwin\Viewable::getExtension
+     */
+    public function getExtension()
+    {
+        return $this->extension;
     }
 
     /**

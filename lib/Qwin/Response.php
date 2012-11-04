@@ -15,7 +15,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @todo        Filterable ? filter response
  */
-class Response extends Widget
+class Response extends WidgetProvider
 {
     /**
      * Whether response content has been sent

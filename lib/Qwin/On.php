@@ -14,7 +14,7 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class On extends Widget
+class On extends WidgetProvider
 {
     /**
      * 绑定事件

@@ -15,7 +15,7 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class BeInArray extends Widget
+class BeInArray extends WidgetProvider
 {
     /**
      * while $value is not find in the specify $array, use the first element of array instead

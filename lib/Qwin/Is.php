@@ -32,8 +32,17 @@ namespace Qwin;
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-01-14 15:32:49
+ * @todo        'funcMap'       => array(
+            'isArray'       => 'is_array',
+            'isBool'        => 'is_bool',
+            'isInt'         => 'is_int',
+            'isNull'        => 'is_null',
+            'isNumeric'     => 'is_numeric',
+            'isScalar'      => 'is_scalar',
+            'isString'      => 'is_string',
+        ),
  */
-class Is extends Widget
+class Is extends WidgetProvider
 {
     public $options = array(
         'rules' => array(),
