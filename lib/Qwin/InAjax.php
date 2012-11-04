@@ -18,11 +18,6 @@ class InAjax extends WidgetProvider
 {
     public function __invoke()
     {
-        // debug support
-        if ($this->config('debug') && $this->get('ajax')) {
-            return true;
-        }
-
         return 'xmlhttprequest' == strtolower($this->server('HTTP_X_REQUESTED_WITH'));
     }
 }
