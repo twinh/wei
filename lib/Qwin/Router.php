@@ -17,7 +17,7 @@ namespace Qwin;
  *              http://kohanaframework.org/3.0/guide/api/Kohana_Route
  *
  */
-class Router extends Widget
+class Router extends WidgetProvider
 {
     /**
      * Whether enable the router or not
@@ -47,6 +47,7 @@ class Router extends Widget
             'regex'             => null,
             'slashSeparator'    => false,
             'defaults' => array(
+                'module'        => 'index',
                 'controller'    => 'index',
                 'action'        => 'index',
             ),
@@ -87,7 +88,7 @@ class Router extends Widget
      *
      * @var array
      */
-    protected $_defaultParams;
+    protected $defaultParams;
 
     public function __construct(array $options = array())
     {
@@ -120,8 +121,8 @@ class Router extends Widget
             return $_GET;
         }
 
-        if ($this->_defaultParams) {
-            return $this->_defaultParams;
+        if ($this->defaultParams) {
+            return $this->defaultParams;
         }
 
         // Apache2 & Nginx
@@ -138,10 +139,10 @@ class Router extends Widget
         }
 
         $uri = substr($uri, strlen($this->baseUri));
-
+        
         $params = $this->match($uri, $_SERVER['REQUEST_METHOD']);
 
-        return $this->_defaultParams = $params;
+        return $this->defaultParams = $params;
     }
 
     /**
@@ -153,7 +154,7 @@ class Router extends Widget
     public function setBaseUri($uri)
     {
         if (!$uri) {
-            // strtr for windows
+            // strtr for windows directory separator
             $uri = strtr(dirname($_SERVER['SCRIPT_NAME']), '\\', '/');
             $this->baseUri = '/' == $uri ? $uri : $uri . '/';
         } elseif ('/' != $uri[strlen($uri) - 1]) {
@@ -292,12 +293,12 @@ class Router extends Widget
         if ($method && $route['method'] && !preg_match('#' . $route['method'] . '#i', $method)) {
             return false;
         }
-
+        
         // check if the route matches the uri
         if (!preg_match($route['regex'], $uri, $matches)) {
             return false;
         }
-
+               
         // get the query string and parse it to array
         $query = substr($uri, strlen($matches[0]));
         $query = $query ? $this->_parseQuery($query, $route['slashSeparator']) : array();
@@ -416,9 +417,13 @@ class Router extends Widget
                         break;
                     }
                 }
-
+                
                 // replace the group in the uri
                 $uri = str_replace($search, $replace, $uri);
+            }
+            
+            if ('' === $uri) {
+                return false;
             }
 
             // search the required parts NOT in the optional parts
@@ -445,7 +450,7 @@ class Router extends Widget
             }
 
             // if nothing matched
-            if (!$isMatched) {
+            if (!$isMatched || '' === $uri) {
                 return false;
             }
 
