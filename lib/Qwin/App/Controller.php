@@ -9,6 +9,8 @@
 
 namespace Qwin\App;
 
+use Qwin\WidgetProvider;
+
 /**
  * Controller
  *
