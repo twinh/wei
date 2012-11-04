@@ -16,7 +16,7 @@ namespace Qwin;
  */
 use Doctrine\DBAL\DriverManager;
 
-class Db extends Widget
+class Db extends WidgetProvider
 {
     /**
      * Doctrine DBAL connection object

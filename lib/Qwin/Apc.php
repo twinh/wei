@@ -33,7 +33,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-05-30
  */
-class Apc extends Widget implements Storable
+class Apc extends WidgetProvider implements Storable
 {
     public function __construct(array $options = array())
     {

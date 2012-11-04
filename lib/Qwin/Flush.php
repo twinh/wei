@@ -33,7 +33,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-02-16 15:02:26
  */
-class Flush extends Widget
+class Flush extends WidgetProvider
 {
     public function __construct(array $options = array())
     {

@@ -14,7 +14,7 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class ArrayWidget extends Widget implements \ArrayAccess, \Countable, \IteratorAggregate
+class ArrayWidget extends WidgetProvider implements \ArrayAccess, \Countable, \IteratorAggregate
 {
     /**
      * The variable to store array

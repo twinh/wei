@@ -14,7 +14,7 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Twig extends Widget implements Viewable
+class Twig extends WidgetProvider implements Viewable
 {
     /**
      * Options for \Twig_Environment
@@ -66,7 +66,7 @@ class Twig extends Widget implements Viewable
         $this->twig = new \Twig_Environment(new \Twig_Loader_Filesystem($this->paths), $this->envOptions);
 
         // add in common use object
-        $this->twig->addGlobal('widget', $this->widgetManager);
+        $this->twig->addGlobal('widget', $this->widget);
         $this->twig->addGlobal('app', $this->app);
     }
 

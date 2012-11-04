@@ -14,7 +14,7 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class JQuery extends Widget
+class JQuery extends WidgetProvider
 {
     public $options = array(
         'dir' => null,

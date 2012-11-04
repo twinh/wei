@@ -16,7 +16,7 @@ namespace Qwin;
  * @todo        rename to orderBy ?
  * @tddo        add selectKeys or filterKeys ?
  */
-class Sort extends Widget
+class Sort extends WidgetProvider
 {
     /**
      * Sort two-dimensional array like SQL ORDER BY clause

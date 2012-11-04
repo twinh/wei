@@ -14,7 +14,7 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Fcache extends Widget implements Storable
+class Fcache extends WidgetProvider implements Storable
 {
     /**
      * Options
@@ -24,7 +24,7 @@ class Fcache extends Widget implements Storable
      *       dir    string  Cache directory
      */
     public $options = array(
-        'dir'       => './cache',
+        'dir'       => '../cache',
     );
 
     /**

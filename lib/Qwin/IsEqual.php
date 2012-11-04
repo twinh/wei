@@ -33,7 +33,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-11-15 10:16:59
  */
-class IsEqual extends Widget
+class IsEqual extends WidgetProvider
 {
     public function __invoke($value, $mixed = null, $strict = false)
     {

@@ -36,7 +36,7 @@ namespace Qwin;
  * @todo        add index total row
  * @todo        add memory column
  */
-class Marker extends Widget
+class Marker extends WidgetProvider
 {
     /**
      * Maker index

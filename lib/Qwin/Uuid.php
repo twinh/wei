@@ -33,7 +33,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-12-20 22:05:35
  */
-class Uuid extends Widget
+class Uuid extends WidgetProvider
 {
     /**
      * Generate a FAKE UUID(universally unique identifier)

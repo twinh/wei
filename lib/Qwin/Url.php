@@ -15,7 +15,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @todo add path ?
  */
-class Url extends Widget
+class Url extends WidgetProvider
 {
     /**
      * @var array Options

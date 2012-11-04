@@ -16,7 +16,7 @@ namespace Qwin;
  * @todo        throw exception when called
  * @todo        add options display
  */
-class Error extends Widget
+class Error extends WidgetProvider
 {
     /**
      * Options

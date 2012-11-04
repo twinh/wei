@@ -34,7 +34,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-05-29 23:53:20
  */
-class IsPostcode extends Widget
+class IsPostcode extends WidgetProvider
 {
     public function __invoke($data)
     {

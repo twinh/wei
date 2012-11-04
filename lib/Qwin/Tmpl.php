@@ -17,7 +17,7 @@ namespace Qwin;
  * @todo        Generate debug info
  * @todo        cache
  */
-class Tmpl extends Widget
+class Tmpl extends WidgetProvider
 {
     /**
      * Options

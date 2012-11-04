@@ -33,7 +33,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2011-10-09 20:45:27
  */
-class IsQQ extends Widget
+class IsQQ extends WidgetProvider
 {
     public function __invoke($value)
     {

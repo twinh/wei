@@ -14,7 +14,7 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class InAjax extends Widget
+class InAjax extends WidgetProvider
 {
     public function __invoke()
     {

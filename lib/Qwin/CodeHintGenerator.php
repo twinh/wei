@@ -14,7 +14,7 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class CodeHintGenerator extends Widget
+class CodeHintGenerator extends WidgetProvider
 {
     protected $target = 'doc/qwin-code-hint.php';
     
@@ -61,7 +61,7 @@ class Widget implements Widgetable
 
         // generate the custom widgets
         if ($this->withWidgetMap) {
-            foreach ($this->widgetManager->option('widgetMap') as $widget => $class) {
+            foreach ($this->widget->option('widgetMap') as $widget => $class) {
                 if ($this->isExcludeWidget($widget)) {
                     continue;
                 }

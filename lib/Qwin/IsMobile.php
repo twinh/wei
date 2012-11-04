@@ -33,7 +33,7 @@ namespace Qwin;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @since       2012-05-29 23:43:02
  */
-class IsMobile extends Widget
+class IsMobile extends WidgetProvider
 {
     public function __invoke($data)
     {

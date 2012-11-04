@@ -28,7 +28,7 @@ abstract class WidgetProvider implements Widgetable
     /**
      * The widget manager object
      * 
-     * @var \Qwin\WidgetManager
+     * @var \Qwin\Widget
      */
     protected $widget;
     

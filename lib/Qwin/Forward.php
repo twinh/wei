@@ -14,7 +14,7 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Forward extends Widget
+class Forward extends WidgetProvider
 {
     /**
      * Forwards to the given controller and action

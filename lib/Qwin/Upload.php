@@ -25,7 +25,7 @@
 
 namespace Qwin;
 
-class Upload extends Widget
+class Upload extends WidgetProvider
 {
     public $options = array(
         'name' => null,

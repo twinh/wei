@@ -35,7 +35,7 @@ namespace Qwin;
  * @todo        xml, others?
  * @todo        as response ?
  */
-class Result extends Widget
+class Result extends WidgetProvider
 {
     public $options = array(
         'code' => 'code',

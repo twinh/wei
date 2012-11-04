@@ -14,7 +14,7 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Instance extends Widget
+class Instance extends WidgetProvider
 {
     /**
      * Instance a class

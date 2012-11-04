@@ -14,7 +14,7 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class GetInt extends Widget
+class GetInt extends WidgetProvider
 {
     public function __invoke($name, $min = null, $max = null)
     {

@@ -14,7 +14,7 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-abstract class Controller extends Widget
+abstract class Controller extends WidgetProvider
 {
     /**
      * Execute the controller's action method

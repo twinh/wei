@@ -14,7 +14,7 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class JqGridJson extends Widget
+class JqGridJson extends WidgetProvider
 {
     public $options = array(
         'page' => 1,

@@ -15,7 +15,7 @@ namespace Qwin;
  * @package     Qwin
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class View extends Widget implements Viewable
+class View extends WidgetProvider implements Viewable
 {
     /**
      * Template directory
@@ -49,7 +49,7 @@ class View extends Widget implements Viewable
         $tmpl = new Tmpl(array(
             'name' => $name,
             'view' => $this,
-            'widgetManager' => $this->widgetManager
+            'widget' => $this->widget
         ));
 
         return $tmpl->render($context);
