@@ -9,7 +9,8 @@
 namespace Qwin;
 
 use Qwin\Response,
-    Qwin\App\WorkFlowBreakNotifyException;
+    Qwin\App\NotFoundException,
+    Qwin\App\DispatchBreakException;
 
 /**
  * App
@@ -18,42 +19,51 @@ use Qwin\Response,
  * @author      Twin Huang <twinh@yahoo.cn>
  * @todo        output anywhere support?
  */
-class App extends Widget
-{
+class App extends WidgetProvider
+{    
     /**
-     * @var array           options
-     *
-     *       dirs           the root directories of the applications
-     *
-     *       controller     the default controller name
-     *
-     *       action         the default action name
-     *
-     *       view           the name of view engine
+     * The available modules
+     * 
+     * @var array
      */
-    public $options = array(
-        'dirs'          => array(),
-        'controller'    => null,
-        'action'        => null,
-        'viewEngine'    => 'view',
+    protected $modules = array(
+        'App'
     );
-
+    
     /**
-     * The controller name
-     *
+     * The default values for module, controller and action
+     * 
+     * @var array 
+     */
+    protected $defaults = array(
+        'module'        => 'index',
+        'controller'    => 'index',
+        'action'        => 'index',
+    );
+    
+    /**
+     * The name of module
+     * 
+     * @var string
+     */
+    protected $module;
+    
+    /**
+     * The name of controller
+     /
      * @var string
      */
     protected $controller;
 
     /**
-     * The action name
+     * The name of action
      *
      * @var string
      */
     protected $action;
 
     /**
-     * Controller instances
+     * The controller instances
      *
      * @var array
      */
@@ -69,150 +79,93 @@ class App extends Widget
     /**
      * Startup application
      *
-     * @param  array     $options options
+     * @param  array     $options
      * @return \Qwin\App
      */
     public function __invoke(array $options = array())
     {
-        $options = $this->option($options);
+        $this->option($options);
 
-        $controller = $this->getControllerName();
-        $action = $this->getActionName();
-
-        return $this->dispatch($controller, $action);
+        return $this->dispatch(
+            $this->getModule(),
+            $this->getController(),
+            $this->getAction()
+        );
     }
 
     /**
      * Load and execute the controller action
      *
+     * @param  string    $module     The name of module
      * @param  string    $controller The name of controller
      * @param  string    $action     The name of action
      * @return mixed
      * @throws Exception When controller or action not found
      */
-    public function dispatch($controller, $action = 'index')
+    public function dispatch($module, $controller, $action = 'index')
     {
-        try {
-            $controllerObject = $this->getController($controller);
-
-            if ($controllerObject) {
+        // Check if module available
+        if ($this->isModuleAvaiable($module)) {
+            
+            // Get controller instance by module and controller name
+            $object = $this->getControllerInstance($module, $controller);
+            if ($object) {
+                
+                // Check if action exists
+                // TODO Check by controller object, such as $object->hasAction($action)
                 $method = $action . 'Action';
-                if (method_exists($controllerObject, $method)) {
+                if (method_exists($object, $method)) {
+                    
+                    try {
+                        
+                        $this->trigger('before.action');
 
-                    $this->trigger('before.action');
+                        $response = $object->$method();
 
-                    $response = $controllerObject->$method();
+                        $this->trigger('after.action');
+                        
+                        $this->handleResponse($response);
+                        
+                        return $this;
 
-                    $this->trigger('after.action');
-
-                    $this->handleResponse($response);
-
-                    return $this;
+                    } catch (DispatchBreakException $e) {
+                        $this->log(sprintf('Caught exception "%s" with message "%s" called in %s on line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine()));
+                    }
+                
                 } else {
-                    $this->log(sprintf('Action "%s" not found in controller "%s".', $action, get_class($controllerObject)));
-                    throw new Exception('The page you requested was not found.', 404);
+                    $notFound = 'action';
                 }
             } else {
-                $this->log(sprintf('Controller "%s" not found', $controller));
-                throw new Exception('The page you requested was not found.', 404);
+                $notFound = 'controller';
             }
-        // TODO has better name ?
-        } catch (WorkFlowBreakNotifyException $e) {
-            $this->log(sprintf('Caught exception "%s" with message "%s" called in %s on line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine()));
+        } else {
+            $notFound = 'module';
         }
-    }
-
-    /**
-     * Get the of name controller
-     *
-     * @return string the name of controller
-     */
-    public function getControllerName()
-    {
-        if (!$this->controller) {
-            $this->controller = $this->options['controller'] ?: $this->request('controller');
-        }
-
-        return $this->controller;
-    }
-
-    /**
-     * Set the name of controller
-     *
-     * @param  string    $controller the name of controller
-     * @return \Qwin\App
-     */
-    public function setControllerName($controller)
-    {
-        $this->controller = $controller;
-
-        return $this;
-    }
-
-    /**
-     * Get the name of action
-     *
-     * @return string the name of controller
-     */
-    public function getActionName()
-    {
-        if (!$this->action) {
-            $this->action = $this->options['action'] ?: $this->request('action');
-        }
-
-        return $this->action;
-    }
-
-    /**
-     * Set the name of action
-     *
-     * @param  string    $action the name of action
-     * @return \Qwin\App
-     */
-    public function setActionName($action)
-    {
-        $this->action = $action;
-
-        return $this;
-    }
-
-    /**
-     * Get the controller instance, if not found, return false instead
-     *
-     * @param  string                   $name the name of controller
-     * @return boolean|\Qwin\Controller
-     */
-    public function getController($name)
-    {
-        if (isset($this->controllers[$name])) {
-            return $this->controllers[$name];
-        }
-
-        if (!preg_match('/^([_a-z0-9]+)$/i', $name)) {
-            return false;
-        }
-
-        foreach ((array) $this->options['dirs'] as $namespace => $dir) {
-            $file = $dir . '/' . $namespace . '/Controller/' . ucfirst($name) . 'Controller.php';
-
-            if (!is_file($file)) {
-                continue;
+        
+        // Prepare exception message
+        $message = 'The page you requested was not found';
+        if ($this->config('debug')) {
+            $message .= (' - ');
+            switch ($notFound) {
+                case 'module':
+                    $message .= sprintf('module "%s" is not available', $module);
+                    break;
+                
+                case 'controller':
+                    $message .= sprintf('controller "%s" not found in module "%s"', $controller, $module);
+                    break;
+                
+                case 'action':
+                    $message .= sprintf('action "%s" not found in controller "%s".', $action, get_class($object));
+                    break;
             }
-
-            require_once $file;
-
-            $class = $namespace . '\Controller\\' . ucfirst($name) . 'Controller';
-
-            return $this->controllers[$name] = new $class(array(
-                'widget' => $this->widgetManager
-            ));
         }
-
-        return false;
+        
+        throw new NotFoundException($message);
     }
-
+    
     /**
-     * Handle the response variable by controller action
+     * Handle the response variable returned by controller action
      *
      * @param  mixed                     $response
      * @return mixed
@@ -235,6 +188,7 @@ class App extends Widget
                 return !$response->isSent() && $response->send();
 
             default :
+                // use settype ?
                 try {
                     $response = strval($response);
 
@@ -246,29 +200,148 @@ class App extends Widget
                 }
         }
     }
+    
+    /**
+     * Get the of name module
+     *
+     * @return string The name of module
+     */
+    public function getModule()
+    {
+        if (!$this->module) {
+            $this->module = ucfirst($this->request('module', $this->defaults['module']));
+        }
+        
+        return $this->module;
+    }
+    
+    /**
+     * Set the name of module
+     *
+     * @param  string    $module The name of module
+     * @return \Qwin\App
+     */
+    public function setModule($module)
+    {
+        $this->module = $module;
+        
+        return $this;
+    }
+    
+    /**
+     * Check if the given module in avaiable modules
+     * 
+     * @param string $module
+     * @return bool
+     */
+    public function isModuleAvaiable($module)
+    {
+        return in_array($module, $this->modules);
+    }
 
     /**
-     * Throwa a WorkFlowBreakNotifyException to prevent the previous dispatch process
+     * Get the of name controller
      *
-     * @throws WorkFlowBreakNotifyException
+     * @return string The name of controller
+     */
+    public function getController()
+    {
+        if (!$this->controller) {
+            $this->controller = ucfirst($this->request('controller', $this->defaults['controller']));
+        }
+
+        return $this->controller;
+    }
+
+    /**
+     * Set the name of controller
+     *
+     * @param  string    $controller The name of controller
+     * @return \Qwin\App
+     */
+    public function setController($controller)
+    {
+        $this->controller = $controller;
+
+        return $this;
+    }
+
+    /**
+     * Get the name of action
+     *
+     * @return string The name of controller
+     */
+    public function getAction()
+    {
+        if (!$this->action) {
+            $this->action = $this->request('action', $this->defaults['action']);
+        }
+
+        return $this->action;
+    }
+
+    /**
+     * Set the name of action
+     *
+     * @param  string    $action The name of action
+     * @return \Qwin\App
+     */
+    public function setAction($action)
+    {
+        $this->action = $action;
+
+        return $this;
+    }
+
+    /**
+     * Get the controller instance, if not found, return false instead
+     *
+     * @param  string                   $name the name of controller
+     * @return boolean|\Qwin\Controller
+     * @todo custom module namespace
+     */
+    public function getControllerInstance($module, $controller)
+    {
+        if (!preg_match('/^([_a-z0-9]+)$/i', $module . $controller)) {
+            return false;
+        }
+        
+        $class = $module . '\Controller\\' . $controller . 'Controller';
+
+        if (isset($this->controllers[$class])) {
+            return $this->controllers[$class];
+        }
+        
+        if (!class_exists($class)) {
+            return false;
+        }
+        
+        return $this->controllers[$class] = new $class(array(
+            'widget' => $this->widget,
+        ));
+    }
+
+    /**
+     * Throwa a DispatchBreakException to prevent the previous dispatch process
+     *
+     * @throws DispatchBreakException
      */
     public function preventPreviousDispatch()
     {
         $traces = debug_backtrace();
-        throw new WorkFlowBreakNotifyException('', 0, $traces[0]['file'], $traces[0]['line']);
+        throw new DispatchBreakException('', 0, $traces[0]['file'], $traces[0]['line']);
     }
 
     /**
-     * Set view engine option
+     * Set view engine
      *
-     * @param  string    $value The name of view engine
+     * @param  string    $viewEngine The name or object of view engine
      * @return \Qwin\App
      */
-    public function setViewEngineOption($value)
+    public function setViewEngine($viewEngine)
     {
-        $this->viewEngine = null;
-        $this->options['viewEngine'] = $value;
-
+        $this->viewEngine = $viewEngine;
+        
         return $this;
     }
 
@@ -279,15 +352,15 @@ class App extends Widget
      */
     public function getViewEngine()
     {
-        if (!$this->viewEngine) {
-            $this->viewEngine = $this->{$this->options['viewEngine']};
-
-            if (!$this->viewEngine instanceof \Qwin\Viewable) {
-                throw new \UnexpectedValueException(sprintf('View engine widget should implement \Qwin\Viewable interface, "%s" given',
-                    (is_object($this->viewEngine) ? get_class($this->viewEngine) : gettype($this->viewEngine))), 500);
-            }
+        if (is_string($this->viewEngine)) {
+            $this->viewEngine = $this->{$this->viewEngine};
         }
-
+        
+        if (!$this->viewEngine instanceof \Qwin\Viewable) {
+            throw new \UnexpectedValueException(sprintf('View engine widget should implement \Qwin\Viewable interface, "%s" given',
+                (is_object($this->viewEngine) ? get_class($this->viewEngine) : gettype($this->viewEngine))), 500);
+        }
+        
         return $this->viewEngine;
     }
 
@@ -299,6 +372,6 @@ class App extends Widget
      */
     public function getDefaultTemplate()
     {
-        return strtolower($this->controller . '/' . $this->action) . $this->getViewEngine()->option('ext');
+        return strtolower($this->controller . '/' . $this->action) . $this->getViewEngine()->getExtension();
     }
 }
