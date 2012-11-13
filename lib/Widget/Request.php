@@ -61,4 +61,19 @@ class Request extends ArrayWidget
     {
         return isset($this->data[$name]) ? $this->data[$name] : $default;
     }
+    
+    /**
+     * Get full url
+     * 
+     * @return string
+     * @see http://snipplr.com/view.php?codeview&id=2734
+     */
+    public function fullUrl()
+    {
+        $s = $this->server['HTTPS'] == 'on' ? 's' : '';
+        $protocol = substr(strtolower($this->server['SERVER_PROTOCOL']), 0, strpos(strtolower($this->server['SERVER_PROTOCOL']), '/')) . $s;
+        $port = ($this->server['SERVER_PORT'] == '80') ? '' : (':' . $this->server['SERVER_PORT']);
+
+        return $protocol . '://' . $this->server('SERVER_NAME') . $port . $this->server['REQUEST_URI'];
+    }
 }
