@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Widget Framework
  *
@@ -11,10 +12,9 @@ namespace Widget;
 /**
  * Get
  *
- * @package     Widget
+ * @package     Request
  * @author      Twin Huang <twinh@yahoo.cn>
- * @todo        add init data support
- * @todo        add array param support
+ * @todo        add get array
  */
 class Get extends ArrayWidget
 {
@@ -22,7 +22,12 @@ class Get extends ArrayWidget
         'parameters' => false,
     );
 
-    public function __construct($options = null)
+    /**
+     * Constructor
+     * 
+     * @param array $options
+     */
+    public function __construct(array $options = array())
     {
         parent::__construct($options);
 
@@ -37,12 +42,33 @@ class Get extends ArrayWidget
     /**
      * Return get parameter
      *
-     * @param  string $name    the parameter name
-     * @param  mixed  $default the default parameter value if the parameter does not exist
-     * @return mixed  the parameter value
+     * @param  string $name    The parameter name
+     * @param  mixed  $default The default parameter value if the parameter does not exist
+     * @return mixed  The parameter value
      */
     public function __invoke($name, $default = null)
     {
         return isset($this->data[$name]) ? $this->data[$name] : $default;
+    }
+    
+    /**
+     * Get a integer parameter
+     * 
+     * @param string $name The parameter name
+     * @param int $min The min value for the parameter
+     * @param int $max The max value for the parameter
+     * @return int
+     */
+    public function int($name, $min = null, $max = null)
+    {
+        $value = intval($this->data[$name]);
+
+        if (!is_null($min) && $value < $min) {
+            return $min;
+        } elseif (!is_null($max) && $value > $max) {
+            return $max;
+        }
+
+        return $value;
     }
 }
