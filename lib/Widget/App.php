@@ -8,9 +8,9 @@
 
 namespace Widget;
 
-use Widget\Response,
-    Widget\App\NotFoundException,
-    Widget\App\DispatchBreakException;
+use Widget\Response;
+use Widget\App\NotFoundException;
+use Widget\App\DispatchBreakException;
 
 /**
  * App
