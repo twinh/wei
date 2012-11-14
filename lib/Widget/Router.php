@@ -73,7 +73,7 @@ class Router extends WidgetProvider
      *      -- regex            string  the regex complied from the uri, just leave it blank when
      *                                  set a new route
      */
-    protected $_routeOptions = array(
+    protected $routeOptions = array(
         'name'              => null,
         'uri'               => null,
         'rules'             => array(),
@@ -167,7 +167,7 @@ class Router extends WidgetProvider
     public function setRoutes($routes)
     {
         foreach ($routes as &$route) {
-            $route += $this->_routeOptions;
+            $route += $this->routeOptions;
         }
         $this->routes = $routes;
 
@@ -178,11 +178,11 @@ class Router extends WidgetProvider
      * Set route
      *
      * @param  array       $route the options of the route
-     * @return Widget_Router
+     * @return \Widget\Router
      */
     public function set(array $route)
     {
-        $route =  $route + $this->_routeOptions;
+        $route =  $route + $this->routeOptions;
 
         if (!$route['name']) {
             array_unshift($this->routes, $route);
@@ -325,6 +325,8 @@ class Router extends WidgetProvider
      */
     protected function _parseQuery($query, $slash = false)
     {
+        $params = array();
+        
         if (!$slash) {
             parse_str(ltrim($query, '?/'), $params);
         } else {
@@ -381,8 +383,6 @@ class Router extends WidgetProvider
 
             return false;
         } else {
-            $regex = $route['regex'];
-
             $isMatched = false;
 
             // search the minimal optional parts
