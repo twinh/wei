@@ -14,6 +14,7 @@ namespace Widget;
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @property \Widget\View $view The view widget
  * @todo        Generate debug info
  * @todo        cache
  */
@@ -94,7 +95,7 @@ class Tmpl extends WidgetProvider
     {
         extract($context, EXTR_OVERWRITE);
 
-        $this->current = $this->name;
+        $this->current = (string)$this->name;
         do {
             ob_start();
             require $this->view->getFile($this->current);
@@ -130,7 +131,7 @@ class Tmpl extends WidgetProvider
      */
     protected function layout($name)
     {
-        $this->layoutStack[$this->current] = $name;
+        $this->layoutStack[$this->current] = (string)$name;
     }
 
     /**
@@ -152,7 +153,7 @@ class Tmpl extends WidgetProvider
      */
     protected function block($name)
     {
-        $this->blockStack[] = $name;
+        $this->blockStack[] = (string)$name;
 
         $execute = true;
         $control = true;
