@@ -94,14 +94,14 @@ class Is extends WidgetProvider
                 array_unshift($params, $data);
 
                 // TODO check if rule is exists
-                if (false === $this->callback(array($this, $widget), $params)) {
+                if (false === call_user_func_array(array($this, $widget), $params)) {
                     // would be always false in the whole valid flow
                     $result = false;
 
                     $validationResult->addInvalidatedRule($rule);
 
                     // trigger invalidatedOne event
-                    $options['invalidatedOne'] && $this->callback($options['invalidatedOne'], array(
+                    $options['invalidatedOne'] && call_user_func_array($options['invalidatedOne'], array(
                         $name, $rule, $params, $data, $rules, $validationResult, $this,
                     ));
 
@@ -110,7 +110,7 @@ class Is extends WidgetProvider
                     }
                 } else {
                     // trigger validatedOne event
-                    $options['validatedOne'] && $this->callback($options['validatedOne'], array(
+                    $options['validatedOne'] && call_user_func_array($options['validatedOne'], array(
                         $name, $rule, $params, $data, $rules, $validationResult, $this,
                     ));
 
@@ -122,11 +122,11 @@ class Is extends WidgetProvider
             }
 
             if ($result) {
-                $options['validated'] && $this->callback($options['validated'], array(
+                $options['validated'] && call_user_func_array($options['validated'], array(
                     $name, $rules, $validationResult, $this,
                 ));
             } else {
-                $options['invalidated'] && $this->callback($options['invalidated'], array(
+                $options['invalidated'] && call_user_func_array($options['invalidated'], array(
                     $name, $rules, $validationResult, $this,
                 ));
 
@@ -137,7 +137,7 @@ class Is extends WidgetProvider
         }
 
         $event = $result ? 'success' : 'failure';
-        $options[$event] && $this->callback($options[$event], array(
+        $options[$event] && call_user_func_array($options[$event], array(
             $validationResult, $this,
         ));
 
