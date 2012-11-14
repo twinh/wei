@@ -13,6 +13,7 @@ namespace Widget;
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @method string server(string $name) Returns the request server parameter
  */
 class InPost extends WidgetProvider
 {

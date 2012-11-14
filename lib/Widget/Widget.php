@@ -21,6 +21,8 @@ require_once 'WidgetProvider.php';
  * @todo        autoload interaction with composer ?
  * @todo        set first or get first ?
  * @todo        not shared widgets ?
+ * @todo        registerWidgets($dir, $namespace, $prefix)
+ * @todo        $this->option($options, array('mustCallSetProperty', '...'))
  */
 class Widget extends WidgetProvider
 {
