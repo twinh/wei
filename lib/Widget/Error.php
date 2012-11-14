@@ -12,6 +12,9 @@ namespace Widget;
  * Error
  *
  * @package     Widget
+ * @method mixed config(string $name) Get the widget config value
+ * @property \Widget\Get $get The get widget
+ * @property \Widget\Session $session The session widget
  * @todo        cli support
  * @todo        throw exception when called
  * @todo        add options display
