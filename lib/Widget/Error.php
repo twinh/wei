@@ -14,7 +14,10 @@ namespace Widget;
  * @package     Widget
  * @method mixed config(string $name) Get the widget config value
  * @property \Widget\Get $get The get widget
+ * @property \Widget\Post $post The post widget
  * @property \Widget\Session $session The session widget
+ * @property \Widget\Cookie $cookie The cookie widget
+ * @property \Widget\Server $server The server widget
  * @todo        cli support
  * @todo        throw exception when called
  * @todo        add options display
