@@ -17,6 +17,11 @@ use Widget\App\DispatchBreakException;
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @method \Widget\EventManager trigger(string $eventName) Trigger a event
+ * @method \Widget\Log log(string $message) Log a default level message
+ * @method mixed config(string $name) Get a config
+ * @method \Widget\Response response(string $content) Send headers and output content
+ * @method \Widget\Request request(string $name, mixed $default = null) Get a request parameter
  * @todo        output anywhere support?
  */
 class App extends WidgetProvider
