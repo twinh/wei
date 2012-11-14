@@ -37,7 +37,7 @@ class Server extends ArrayWidget
     }
 
     /**
-     * Return server parameter
+     * Returns the request server parameter
      *
      * @param  string $name    the parameter name
      * @param  mixed  $default the default parameter value if the parameter does not exist

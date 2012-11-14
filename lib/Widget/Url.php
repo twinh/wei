@@ -13,7 +13,7 @@ namespace Widget;
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
- * @todo add path ?
+ * @property    \Widget\Router $router Router
  */
 class Url extends WidgetProvider
 {
