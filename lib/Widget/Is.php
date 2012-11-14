@@ -65,7 +65,7 @@ class Is extends WidgetProvider
         $this->options = &$options;
 
         if (empty($options['rules'])) {
-            return $this->exception('Rules should not be empty.');
+            throw new Exception('Rules should not be empty.');
         }
 
         // set true for default and will change to false when invalidated
