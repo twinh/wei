@@ -8,6 +8,10 @@
 
 namespace Widget;
 
+use Doctrine\ORM\Configuration;
+use Doctrine\ORM\EntityManager as BaseEntityManager;
+use Doctrine\Common\Cache\Cache;
+
 /**
  * EntityManager
  *
@@ -15,9 +19,6 @@ namespace Widget;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @todo        ohter mapping
  */
-use Doctrine\ORM\Configuration;
-use Doctrine\ORM\EntityManager as BaseEntityManager;
-
 class EntityManager extends WidgetProvider
 {
     /**
@@ -57,7 +58,7 @@ class EntityManager extends WidgetProvider
                 $cache = new $class;
                 break;
 
-             case $options['cache'] instanceof \Doctrine\Common\Cache\Cache :
+             case $options['cache'] instanceof Cache :
                  $cache = $options['cache'];
                  break;
 
