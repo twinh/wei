@@ -14,7 +14,7 @@ namespace Widget;
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
- * @todo        custome view
+ * @method \Widget\Header header(string $name, string|array $values) Set the header value
  */
 class Redirect extends Response
 {
@@ -46,7 +46,7 @@ class Redirect extends Response
 </html>';
 
     /**
-     * send a redirect response
+     * Send a redirect response
      *
      * @param  string         $url     The url redirect to
      * @param  int            $status  The redirect status code
@@ -54,7 +54,7 @@ class Redirect extends Response
      * @return \Widget\Redirect
      * @throws Exception      When custom view file not found
      */
-    public function __invoke($url = '', $status = 302, array $options = array())
+    public function __invoke($url, $status = 302, array $options = array())
     {
         $options = $this->option($options);
 
