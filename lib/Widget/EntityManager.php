@@ -15,8 +15,8 @@ namespace Widget;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @todo        ohter mapping
  */
-use Doctrine\ORM\Configuration,
-    Doctrine\ORM\EntityManager as BaseEntityManager;
+use Doctrine\ORM\Configuration;
+use Doctrine\ORM\EntityManager as BaseEntityManager;
 
 class EntityManager extends WidgetProvider
 {
