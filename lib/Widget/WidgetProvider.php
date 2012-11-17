@@ -73,10 +73,6 @@ abstract class WidgetProvider implements Widgetable
         }
 
         if (is_string($name)) {
-            if (in_array($name, $this->getNonOptionalProperties())) {
-                throw new \InvalidArgumentException(sprintf('Cannot access non-optional property %s', $name));
-            }
-            
             // get option
             if (1 == func_num_args()) {
                 $method = 'get' . ucfirst($name);
@@ -105,16 +101,6 @@ abstract class WidgetProvider implements Widgetable
             'Parameter 1 for option method should be string or array, %s given', 
             (is_object($name) ? get_class($name) : gettype($name))
         ));
-    }
-
-    /**
-     * Return the non-optional properties for option method
-     * 
-     * @return array
-     */
-    protected function getNonOptionalProperties()
-    {
-        return array();
     }
 
     /**
