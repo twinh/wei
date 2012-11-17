@@ -12,12 +12,12 @@
          bootstrap="./tests/bootstrap.php"
 >
     <testsuite name="Widget Test Suite">
-        <directory>./tests/QwinTest</directory>
+        <directory>./tests/WidgetTest</directory>
     </testsuite>
     
     <filter>
         <blacklist>
-            <directory suffix=".php">./libs/Qwin/views</directory>
+            <directory suffix=".php">./libs/Widget/views</directory>
             <file>*</file>
         </blacklist>
     </filter>
