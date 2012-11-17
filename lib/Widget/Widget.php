@@ -66,7 +66,7 @@ class Widget extends WidgetProvider
      * 
      * @var array
      */
-    protected $autoloadDirs = array();
+    protected $autoloadMap = array();
     
     /**
      * Whether enable autoload or not
@@ -107,6 +107,8 @@ class Widget extends WidgetProvider
         if (isset($config['widget'])) {
             $this->option($config['widget']);
         }
+        
+        $this->setAutoload($this->autoload);
         
         // instance initial widgets
         foreach ($this->initWidgets as $widgetName) {
@@ -168,21 +170,21 @@ class Widget extends WidgetProvider
     }
 
     /**
-     * 自动加载按标准格式命名的类
+     * Autoload the PSR-0 class
      *
      * @param  string $class the name of the class
      * @return bool
-     * @todo class prefix
      */
     public function autoload($class)
     {
-        $class = strtr($class, array('_' => DIRECTORY_SEPARATOR, '\\' => DIRECTORY_SEPARATOR));
-        foreach ($this->autoloadDirs as $dir) {
-            $file = $dir . $class . '.php';
-            if (file_exists($file)) {
-                require_once $file;
+        $class = strtr($class, array('_' => DIRECTORY_SEPARATOR, '\\' => DIRECTORY_SEPARATOR)) . '.php';
 
-                return true;
+        foreach ($this->autoloadMap as $prefix => $dir) {
+            if (0 === strpos($class, $prefix)) {
+                if (file_exists($file = $dir . $class)) {
+                    require_once $file;
+                    return true;
+                }
             }
         }
 
@@ -365,18 +367,19 @@ class Widget extends WidgetProvider
     }
 
     /**
-     * Whether enable autoload method
+     * Whether enable autoload or not
      *
      * @param bool $enable
      */
     public function setAutoload($enable)
     {
+        $this->autoload = (bool) $enable;
+        
         if ($enable) {
             spl_autoload_register(array($this, 'autoload'));
         } else {
             spl_autoload_unregister(array($this, 'autoload'));
         }
-        $this->autoload = (bool) $enable;
 
         return $this;
     }
@@ -384,20 +387,22 @@ class Widget extends WidgetProvider
     /**
      * Set autoload directories for autoload method
      *
-     * @param  string|array        $dirs
+     * @param  string|array        $map
      * @return \Widget\Widget
      */
-    public function setAutoloadDirs($dirs)
+    public function setAutoloadMap($maps)
     {
-        !is_array($dirs) && $dirs = (array) $dirs;
-        foreach ($dirs as &$dir) {
+        !is_array($maps) && $maps = (array) $maps;
+        
+        foreach ($maps as &$dir) {
             $dir = realpath($dir) . DIRECTORY_SEPARATOR;
         }
-        // the autoload directories will always contain the directory of the class file
-        $dirs[] = dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR;
+        
+        // The autoload directories will always contain the widget directory
+        $maps['Widget'] = dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR;
 
-        $this->autoloadDirs = array_unique($dirs);
-
+        $this->autoloadMap = $maps;
+        
         return $this;
     }
 
