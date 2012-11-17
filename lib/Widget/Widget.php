@@ -420,4 +420,30 @@ class Widget extends WidgetProvider
 
         return $this;
     }
+    
+    /**
+     * Import the class in the given directory as widget
+     * 
+     * @param string $dir The directory for class
+     * @param string $namespace The prefix namespace of the class 
+     * @param string $prefix The widget name prefix
+     * @return \Widget\Widget
+     * @throws \InvalidArgumentException When the first parameter is not a directory
+     */
+    public function import($dir, $namespace, $prefix = null)
+    {
+        if (!is_dir($dir)) {
+            throw new \InvalidArgumentException('Parameter 1 should be valid directory');
+        }
+        
+        $files = glob($dir . '/*.php');
+        
+        foreach ($files as $file) {
+            $class = substr(basename($file), 0, -4);
+            $name = $prefix ? $prefix . $class : strtolower($class[0]) . substr($class, 1);
+            $this->widgetMap[$name] = $namespace . '\\' . $class;
+        }
+
+        return $this;
+    }
 }
