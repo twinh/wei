@@ -104,30 +104,19 @@ abstract class WidgetProvider implements Widgetable
     }
 
     /**
-     * Invoke widget by the given name
-     *
-     * @param  string $name The name of widget
-     * @param  array  $args The arguments for widget's __invoke method
-     * @return mixed
+     * {@inheritdoc}
      */
     public function __call($name, $args)
     {
         //return call_user_func_array($this->$name, $args);
         return $this->widget->invoke($name, $args, null, $this->deps);
     }
-
+    
     /**
-     * Get widget instance by the given name
-     *
-     * @param  string       $name The name of widget
-     * @return \Widget\Widget
+     * {@inheritdoc}
      */
     public function __get($name)
     {
         return $this->$name = $this->widget->get($name, null, $this->deps);
     }
-
-    // should be implemented by subclasses
-    // avoid "Strict standards: Declaration of xxx::__invoke() should be compatible with that of xxx::__invoke()
-    //public function __invoke(){}
 }
