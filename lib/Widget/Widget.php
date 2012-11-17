@@ -293,8 +293,10 @@ class Widget extends WidgetProvider
         if (isset($this->widgets[$lower])) {
             return $this->widgets[$lower];
         }
+        
+        $class = $this->getClass($name);
 
-        if ($class = $this->has($name)) {
+        if (class_exists($class)) {
             $options = $this->config($full);
 
             if (null === $options && $this->config($name)) {
@@ -353,6 +355,23 @@ class Widget extends WidgetProvider
         
         return false;
     }
+    
+    /**
+     * Get the widget class by the given name
+     * 
+     * @param string $name The name of widget
+     * @return string
+     */
+    public function getClass($name)
+    {
+        if (isset($this->widgetMap[$name])) {
+            $class = $this->widgetMap[$name];
+        } else {
+            $class = 'Widget\\' . ucfirst($name);
+        }
+        
+        return $class;
+    }
 
     /**
      * Check if the widget exists by the given name, if the widget exists, 
@@ -363,11 +382,7 @@ class Widget extends WidgetProvider
      */
     public function has($name)
     {
-        if (isset($this->widgetMap[$name])) {
-            $class = $this->widgetMap[$name];
-        } else {
-            $class = 'Widget\\' . ucfirst($name);
-        }
+        $class = $this->getClass($name);
 
         return class_exists($class) ? $class : false;
     }
