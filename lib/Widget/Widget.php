@@ -330,6 +330,17 @@ class Widget extends WidgetProvider
             throw new \BadMethodCallException(sprintf('Property or method "%s" not defined', $name));
         }
     }
+    
+    /**
+     * Add a widget
+     * 
+     * @param string $name The name of widget
+     * @param \Widget\Widgetable $widget The widget object
+     */
+    public function set($name, Widgetable $widget)
+    {
+        $this->widgets[$name] = $widget;
+    }
 
     /**
      * Remove the widget instance by the given name
