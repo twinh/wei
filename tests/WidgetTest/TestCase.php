@@ -32,7 +32,8 @@ class TestCase extends \PHPUnit_Framework_TestCase
     protected function getWidgetName()
     {
         if (empty($this->widgetName)) {
-            $class = array_pop(explode('\\', get_class($this)));
+            $names = explode('\\', get_class($this));
+            $class = array_pop($names);
             $this->widgetName = substr($class, 0, -4);
         }
         
