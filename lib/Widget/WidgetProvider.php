@@ -108,7 +108,7 @@ abstract class WidgetProvider implements Widgetable
      */
     public function __call($name, $args)
     { 
-        //return call_user_func_array($this->$name, $args);
+        //return call_user_func_array($this->__get($name), $args);
         return $this->widget->invoke($name, $args, $this->deps);
     }
     
