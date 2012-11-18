@@ -50,7 +50,7 @@ abstract class WidgetProvider implements Widgetable
     }
     
     /**
-     * Get or set options
+     * Get or set property value
      *
      * @param  mixed $name  option name or options array
      * @param  mixed $value
@@ -107,9 +107,9 @@ abstract class WidgetProvider implements Widgetable
      * {@inheritdoc}
      */
     public function __call($name, $args)
-    {
+    { 
         //return call_user_func_array($this->$name, $args);
-        return $this->widget->invoke($name, $args, null, $this->deps);
+        return $this->widget->invoke($name, $args, $this->deps);
     }
     
     /**
@@ -117,6 +117,6 @@ abstract class WidgetProvider implements Widgetable
      */
     public function __get($name)
     {
-        return $this->$name = $this->widget->get($name, null, $this->deps);
+        return $this->$name = $this->widget->get($name, $this->deps);
     }
 }
