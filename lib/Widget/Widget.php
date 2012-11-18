@@ -21,8 +21,6 @@ require_once 'WidgetProvider.php';
  * @todo        autoload interaction with composer ?
  * @todo        set first or get first ?
  * @todo        not shared widgets ?
- * @todo        registerWidgets($dir, $namespace, $prefix)
- * @todo        $this->option($options, array('mustCallSetProperty', '...'))
  */
 class Widget extends WidgetProvider
 {
@@ -69,7 +67,7 @@ class Widget extends WidgetProvider
     protected $autoloadMap = array();
     
     /**
-     * Whether enable autoload or not
+     * Whether enable class autoload or not
      * 
      * @var bool
      */
@@ -102,13 +100,12 @@ class Widget extends WidgetProvider
         
         $this->widget = $this;
 
-        // TODO full properties
-        // set options for current widget
-        if (isset($config['widget'])) {
-            $this->option($config['widget']);
+        // set all options
+        $options = get_object_vars($this);
+        if (isset($this->config['widget'])) {
+            $options = $this->config['widget'] + $options;
         }
-        
-        $this->setAutoload($this->autoload);
+        $this->option($options);
         
         // instance initial widgets
         foreach ($this->initWidgets as $widgetName) {
@@ -253,67 +250,74 @@ class Widget extends WidgetProvider
 
     /**
      * Get a widget object and call its "__invoke" method
-     *
-     * @param  string          $name   The name of widget
-     * @param  array           $args   The arguments for "__invoke" method
-     * @param  string          $config
+     * 
+     * @param string $name  The name of the widget
+     * @param array $args   The arguments for "__invoke" method
+     * @param array|null $deps    The dependent configuration
      * @return mixed
-     * @throws \Widget\Exception When method "__invoke" not found
      */
-    public function invoke($name, array $args, $config = null, $deps = array())
+    public function invoke($name, array $args, $deps = array())
     {
-        $widget = $this->get($name, $config, $deps);
-
-        if (!method_exists($widget, '__invoke')) {
-            return $this->exception('Method "__invoke" not found in widget "' . get_class($widget) . '"');
-        }
+        $widget = $this->get($name, $deps);
 
         return call_user_func_array(array($widget, '__invoke'), $args);
     }
 
     /**
-     * Get a widget object
+     * 
      *
-     * @param  string $name The name of the widget, without class prefix "Widget\"
-     * @return \Widget\Widget
+     * @param  string $name 
+     * @return 
      */
-    public function get($name, $config = null, $deps = array())
+    /**
+     * Get a widget object
+     * 
+     * @param string $name  The name of the widget, without class prefix "Widget\"
+     * @param array|null $deps The dependent configuration
+     * @return \Widget\Widget The widget object
+     */
+    public function get($name, $deps = array())
     {
-        if ($config) {
-            $full = $name . '.' . $config;
-        } elseif (is_array($deps) && isset($deps[$name])) {
-            $full = $deps[$name];
-        } else {
-            $full = $name;
+        // Resolve the widget name in dependent configuration
+        if (isset($deps[$name])) {
+            $name = $deps[$name];
         }
-
-        $lower = strtolower($full);
-
-        // todo shared or not ?
+         
+        // TODO shared or not ?
+        $lower = strtolower($name);
         if (isset($this->widgets[$lower])) {
             return $this->widgets[$lower];
         }
         
+        // Resolve the real widget name and the config name($full)
+        $full = $name;
+        if (false !== ($pos = strpos($name, '.'))) {
+            $name = substr($name, 0, $pos);
+        }
+
+        // Get the widget class and instance
         $class = $this->getClass($name);
-
         if (class_exists($class)) {
-            $options = $this->config($full);
-
-            if (null === $options && $this->config($name)) {
+            if (!method_exists($class, '__invoke')) {
+                throw new \BadMethodCallException(sprintf('Method "__invoke" not found in widget "%s"', $class));
+            }
+            
+            // Load the widget configuration
+            $options = (array)$this->config($full);
+            if (empty($options) && $this->config($name)) {
                 throw new \InvalidArgumentException(sprintf('Config name "%s" not found', $full));
             }
-
-            $options = array('widget' => $this) + (array) $options;
+            $options['widget'] = $this;
 
             return $this->widgets[$lower] = new $class($options);
         }
 
+        // Build the error message
         $traces = debug_backtrace();
-
-        require_once 'Exception.php';
 
         // called by class ?
         if (isset($traces[1]) && '__get' == $traces[1]['function'] && $name == $traces[1]['args'][0]) {
+            //require_once 'Exception.php';
             throw new Exception(sprintf('Property or widget "%s" (class "%s") not found, called in file "%s" at line %s', $traces[1]['args'][0], $class, $traces[1]['file'], $traces[1]['line']));
         } elseif (isset($traces[3]) && $name == $traces[3]['function']) {
             // for call_user_func
