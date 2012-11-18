@@ -40,7 +40,7 @@ class Session extends ArrayWidget
      * @see http://php.net/manual/en/session.configuration.php
      */
     public $options = array(
-        'namespace'         => 'qwin',
+        'namespace'         => 'widget',
         'autoStart'         => true,
         'cache_limiter'     => 'private_no_expire, must-revalidate',
         'cookie_lifetime'   => 86400,
@@ -79,6 +79,18 @@ class Session extends ArrayWidget
         }
 
         return parent::option($name);
+    }
+    
+    /**
+     * Return session value
+     *
+     * @param  string $name    The parameter name
+     * @param  mixed  $default The default parameter value if the parameter does not exist
+     * @return mixed  The parameter value
+     */
+    public function __invoke($name, $default = null)
+    {
+        return isset($this->data[$name]) ? $this->data[$name] : $default;
     }
 
     /**
