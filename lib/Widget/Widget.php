@@ -264,12 +264,6 @@ class Widget extends WidgetProvider
     }
 
     /**
-     * 
-     *
-     * @param  string $name 
-     * @return 
-     */
-    /**
      * Get a widget object
      * 
      * @param string $name  The name of the widget, without class prefix "Widget\"
