@@ -14,6 +14,7 @@ namespace Widget;
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @property \Widget\Server $server The server widget
  * @todo        more options
  */
 class UrlDebugger extends WidgetProvider
