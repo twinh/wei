@@ -108,7 +108,7 @@ class Widget extends WidgetProvider
         $this->option($options);
         
         // instance initial widgets
-        foreach ($this->initWidgets as $widgetName) {
+        foreach ((array)$this->initWidgets as $widgetName) {
             $this->get($widgetName, null, $this);
         }
     }
