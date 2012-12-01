@@ -75,8 +75,8 @@ interface Storable
     /**
      * Increase a numerical cache
      *
-     * @param  string    $key    the name of cache
-     * @param  int       $offset the value to decrease
+     * @param  string    $key    The name of cache
+     * @param  int       $offset The value to decrease
      * @return int|false
      */
     public function increment($key, $step = 1);
@@ -84,8 +84,8 @@ interface Storable
     /**
      * Decrease a numerical cache
      *
-     * @param  string    $key    the name of cache
-     * @param  int       $offset the value to decrease
+     * @param  string    $key    The name of cache
+     * @param  int       $offset The value to decrease
      * @return int|false
      */
     public function decrement($key, $step = 1);
