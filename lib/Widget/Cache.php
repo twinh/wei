@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Widget Framework
+ * 
+ * @copyright   Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ */
+
 namespace Widget;
 
 /**
@@ -7,38 +14,37 @@ namespace Widget;
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
- * @copyright   2008-2012 Twin Huang
- * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id$
- * @since       2012-06-16
  */
-class Cache extends WidgetProvider
+class Cache extends WidgetProvider implements Storable
 {
-    public $options = array(
-        'driver' => 'apc',
-    );
+    /**
+     * The storable widget object
+     * 
+     * @var Widget\Storable
+     */
+    protected $object;
 
     /**
-     * Cache object
-     *
-     * @var Widget_Storable
+     * The storable widget name
+     * 
+     * @ver string
      */
-    protected $_cache;
+    protected $driver = 'fcache';
 
+    /**
+     * Constructor
+     * 
+     * @param array $options
+     */
     public function __construct(array $options = array())
     {
-        parent::__construct($options);
-
-        $class = 'Widget_' . ucfirst($this->options['driver']);
-
-        if (!in_array('Widget_Storable', class_implements($class))) {
-            $this->exception('Cache driver "%s" not found', $class);
-        }
-
-        $this->_cache = new $class($options);
+        parent::__construct($options + get_object_vars($this));
     }
 
-    public function __invoke($key, $value = null, array $expire = array())
+    /**
+     * {@inheritdoc}
+     */
+    public function __invoke($key, $value = null, $expire = 0)
     {
         if (1 == func_num_args()) {
             return $this->get($key);
@@ -47,8 +53,92 @@ class Cache extends WidgetProvider
         }
     }
 
-    public function __call($name, $args)
+    /**
+     * Set cache driver
+     * 
+     * @param string $driver
+     * @return \Widget\Cache
+     * @throws Exception
+     */
+    public function setDriver($driver)
     {
-        return call_user_func_array(array($this->_cache, $name), $args);
+        $class = $this->widget->getClass($driver);
+
+        if (!class_exists($class)) {
+            throw new Exception(sprintf('Cache driver class "%s" not found', $class));
+        }
+
+        if (!in_array('Widget\Storable', class_implements($class))) {
+            throw new Exception(sprintf('Cache driver "%s" should implement the interface "Widget\Storable"', $class));
+        }
+
+        $this->object = $this->widget->get($driver);
+
+        return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function add($key, $value, $expire = 0, array $options = array())
+    {
+        return $this->object->add($key, $options, $expire, $options);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function clear()
+    {
+        return $this->object->clear();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function decrement($key, $step = 1)
+    {
+        return $this->object->decrement($key, $step);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function get($key, $options = null)
+    {
+        return $this->object->get($key, $options);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function increment($key, $step = 1)
+    {
+        return $this->object->increment($key, $step);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function remove($key)
+    {
+        return $this->object->remove($key);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function replace($key, $value, $expire = 0, array $options = array())
+    {
+        return $this->object->replace($key, $options, $expire, $options);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function set($key, $value, $expire = 0, array $options = array())
+    {
+        return $this->object->set($key, $value, $expire, $options);
+    }
+
 }
