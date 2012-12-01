@@ -8,6 +8,9 @@
 
 namespace Widget;
 
+/**
+ * @see Widget\Widgetable
+ */
 require_once 'Widgetable.php';
 
 /**
@@ -35,8 +38,8 @@ abstract class WidgetProvider implements Widgetable
     /**
      * Constructor
      *
-     * @param  array        $options The options
-     * @return \Widget\Widget
+     * @param  array        $options The property options
+     * @return \Widget\WidgetProvider
      */
     public function __construct(array $options = array())
     {
@@ -52,20 +55,22 @@ abstract class WidgetProvider implements Widgetable
     /**
      * Get or set property value
      *
-     * @param  mixed $name  option name or options array
-     * @param  mixed $value
+     * @param  mixed $name  The option name or options array
+     * @param  mixed $value 
      * @return mixed
-     * @example $widget->option('name');            // get "name" option's value
-     *          $widget->option('name', 'value');   // set "name" to "value"
-     *          $widget->option();                  // get all options
-     *          $widget->option(array());           // set options
+     * @example $widget->option('name');            // Get "name" option's value
+     *          $widget->option('name', 'value');   // Set "name" to "value"
+     *          $widget->option();                  // Get all options
+     *          $widget->option(array());           // Set options
      * @todo append
-     * @todo how to init all or partail options when class construct ?
      */
     public function option($name = null, $value = null)
     {
-        // set options
+        // Set options
         if (is_array($name)) {
+            if (is_array($value)) {
+                $name += array_intersect_key(get_object_vars($this), array_flip($value));
+            }
             foreach ($name as $k => $v) {
                 $this->option($k, $v);
             }
@@ -73,19 +78,16 @@ abstract class WidgetProvider implements Widgetable
         }
 
         if (is_string($name)) {
-            // get option
+            // Get option
             if (1 == func_num_args()) {
-                $method = 'get' . ucfirst($name);
-                if (method_exists($this, $method)) {
+                if (method_exists($this, $method = 'get' . $name)) {
                     return $this->$method();
                 } else {
-                    // 必需是定义的列表中
                     return isset($this->$name) ? $this->$name : null;
                 }
-            // set option
+            // Set option
             } else {
-                $method = 'set' . ucfirst($name);
-                if (method_exists($this, $method)) {
+                if (method_exists($this, $method = 'set' . $name)) {
                     return $this->$method($value);
                 } else {
                     return $this->$name = $value;
@@ -93,12 +95,13 @@ abstract class WidgetProvider implements Widgetable
             }
         }
 
-        // get all options as array ?
-        //if (null === $name) {
-        //    return $this->options;
-        //}
+        // Get all property options
+        if (null === $name) {
+            return get_object_vars($this);
+        }
+        
         throw new \InvalidArgumentException(sprintf(
-            'Parameter 1 for option method should be string or array, %s given', 
+            'Parameter 1 for option method should be string, array or null, %s given', 
             (is_object($name) ? get_class($name) : gettype($name))
         ));
     }
