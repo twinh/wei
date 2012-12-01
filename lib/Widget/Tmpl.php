@@ -324,4 +324,9 @@ class Tmpl extends WidgetProvider
     {
         // todo
     }
+    
+    public function __invoke()
+    {
+        return $this;
+    }
 }
