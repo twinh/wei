@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Widget Framework
  *
@@ -9,7 +10,7 @@
 namespace Widget;
 
 /**
- * FCache
+ * File cache
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
@@ -17,60 +18,65 @@ namespace Widget;
 class Fcache extends WidgetProvider implements Storable
 {
     /**
-     * Options
-     *
-     * @var array
-     *
-     *       dir    string  Cache directory
+     * The cache directory
+     * 
+     * @var string
      */
-    public $options = array(
-        'dir'       => '../cache',
-    );
+    protected $dir = '../cache';
 
     /**
      * Illegal chars as the name of cache, would be replaced to "_"
      *
      * @var array
-     * @todo others chars ?
      */
-    protected $_illegalChars = array(
+    protected $illegalChars = array(
         '\\', '/', ':', '*', '?', '"', '<', '>', '|', "\r", "\n"
     );
+    
+    /**
+     * The cache file extension
+     * 
+     * @var string
+     */
+    protected $ext = 'cache';
 
-    public function __construct($options = null)
+    /**
+     * Constructor
+     * 
+     * @param array $options
+     */
+    public function __construct(array $options = array())
     {
-        $options = (array) $options + $this->options;
-        $this->option($options);
+        parent::__construct($options + array(
+            'dir' => $this->dir
+        ));
     }
 
     /**
-     * Set cache dir
-     *
-     * @param  string      $dir
-     * @return Widget_Fcache
+     * Set cache directory
+     * 
+     * @param string      $dir
+     * @return \Widget\Fcache
+     * @throws Exception When failed to create the cache directory
      */
-    public function setDirOption($dir)
+    public function setDir($dir)
     {
         if (!is_dir($dir)) {
             // @codeCoverageIgnoreStart
             if (!@mkdir($dir, 0644, true)) {
-                return $this->exception('Failed to create directory: ' . $dir );
+                throw new Exception('Failed to create directory: ' . $dir);
             }
             chmod($dir, 0644);
             // @codeCoverageIgnoreEnd
         }
-        $this->options['dir'] = $dir;
+        
+        $this->dir = $dir;
 
         return $this;
     }
 
     /**
-     * Get or set cache
-     *
-     * @param  string      $key    the name of cache
-     * @param  mixed       $value
-     * @param  int         $expire expire time for set cache
-     * @return Widget_Fcache
+     * {@inheritdoc}
      */
     public function __invoke($key, $value = null, $expire = 0)
     {
@@ -82,10 +88,7 @@ class Fcache extends WidgetProvider implements Storable
     }
 
     /**
-     * Get cache
-     *
-     * @param  string      $key the name of cache
-     * @return mixed|false
+     * {@inheritdoc}
      */
     public function get($key, $options = null)
     {
@@ -106,69 +109,54 @@ class Fcache extends WidgetProvider implements Storable
     }
 
     /**
-     * Set cache
-     *
-     * @param  string $key    the name of cache
-     * @param  value  $value  the value of cache
-     * @param  int    $expire expire time, 0 means never expired
-     * @return bool
+     * {@inheritdoc}
      */
     public function set($key, $value, $expire = 0, array $options = array())
     {
         $file = $this->getFile($key);
 
-        $content = $this->_prepareContent($value, $expire);
+        $content = $this->prepareContent($value, $expire);
 
         return (bool) file_put_contents($file, $content, LOCK_EX);
     }
 
     /**
-     * Add cache, if cache is exists, return false
-     *
-     * @param  string $key    the name of cache
-     * @param  mixed  $value  the value of cache
-     * @param  int    $expire expire time (seconds)
-     * @return bool
+     * {@inheritdoc}
      */
     public function add($key, $value, $expire = 0, array $options = array())
     {
         $file = $this->getFile($key);
 
         if (!is_file($file)) {
-            // open and try to lock file immediately
-            if (!$handle = $this->_openAndLock($file, 'wb', LOCK_EX | LOCK_NB)) {
+            // Open and try to lock file immediately
+            if (!$handle = $this->openAndLock($file, 'wb', LOCK_EX | LOCK_NB)) {
                 return false;
             }
 
-            $content = $this->_prepareContent($value, $expire);
+            $content = $this->prepareContent($value, $expire);
 
-            return $this->_writeAndRelease($handle, $content);
+            return $this->writeAndRelease($handle, $content);
         } else {
-            // open file for reading and rewriting
-            if (!$handle = $this->_openAndLock($file, 'r+b', LOCK_EX)) {
+            // Open file for reading and rewriting
+            if (!$handle = $this->openAndLock($file, 'r+b', LOCK_EX)) {
                 return false;
             }
 
-            // cache is not expired
-            if ($this->_readAndVerify($handle, $file)) {
+            // The cache is not expired
+            if ($this->readAndVerify($handle, $file)) {
                 fclose($handle);
 
                 return false;
             }
 
-            $content = $this->_prepareContent($value, $expire);
+            $content = $this->prepareContent($value, $expire);
 
-            return $this->_writeAndRelease($handle, $content, true);
+            return $this->writeAndRelease($handle, $content, true);
         }
     }
 
     /**
-     * Replace cache, if cache not exists, return false
-     *
-     * @param  string $key    the name of cache
-     * @param  mixed  $value  the value of cache
-     * @param  int    $expire expire time
-     * @return bool
+     * {@inheritdoc}
      */
     public function replace($key, $value, $expire = 0, array $options = array())
     {
@@ -178,27 +166,24 @@ class Fcache extends WidgetProvider implements Storable
             return false;
         }
 
-        // open file for reading and rewriting
-        if (!$handle = $this->_openAndLock($file, 'r+b', LOCK_EX)) {
+        // Open file for reading and rewriting
+        if (!$handle = $this->openAndLock($file, 'r+b', LOCK_EX)) {
             return false;
         }
 
-        if (!$this->_readAndVerify($handle, $file)) {
+        if (!$this->readAndVerify($handle, $file)) {
             fclose($handle);
 
             return false;
         }
 
-        $content = $this->_prepareContent($value, $expire);
+        $content = $this->prepareContent($value, $expire);
 
-        return $this->_writeAndRelease($handle, $content, true);
+        return $this->writeAndRelease($handle, $content, true);
     }
 
     /**
-     * Remove cache by key
-     *
-     * @param  string $key the name of cache
-     * @return bool
+     * {@inheritdoc}
      */
     public function remove($key)
     {
@@ -219,17 +204,13 @@ class Fcache extends WidgetProvider implements Storable
      */
     public function getFile($key)
     {
-        $key = str_replace($this->_illegalChars, '_', $key);
+        $key = str_replace($this->illegalChars, '_', $key);
 
-        return $this->options['dir'] . '/' . $key . '.tmp';
+        return $this->dir . '/' . $key . '.' . $this->ext;
     }
 
     /**
-     * Increase a numerical cache
-     *
-     * @param  string    $key    the name of cache
-     * @param  int       $offset the value to decrease
-     * @return int|false
+     * {@inheritdoc}
      */
     public function increment($key, $offset = 1)
     {
@@ -239,12 +220,12 @@ class Fcache extends WidgetProvider implements Storable
             return false;
         }
 
-        // open file for reading and rewriting
-        if (!$handle = $this->_openAndLock($file, 'r+b', LOCK_EX)) {
+        // Open file for reading and rewriting
+        if (!$handle = $this->openAndLock($file, 'r+b', LOCK_EX)) {
             return false;
         }
 
-        if (!$content = $this->_readAndVerify($handle, $file)) {
+        if (!$content = $this->readAndVerify($handle, $file)) {
             fclose($handle);
 
             return false;
@@ -254,12 +235,12 @@ class Fcache extends WidgetProvider implements Storable
             return false;
         }
 
-        // prepare file content
+        // Prepare file content
         $result = $content[1] += $offset;
         $content = serialize($content);
 
-        // rewrite content
-        if ($this->_writeAndRelease($handle, $content, true)) {
+        // Rewrite content
+        if ($this->writeAndRelease($handle, $content, true)) {
             return $result;
         } else {
             return false;
@@ -267,11 +248,7 @@ class Fcache extends WidgetProvider implements Storable
     }
 
     /**
-     * Decrease a numerical cache
-     *
-     * @param  string    $key    the name of cache
-     * @param  int       $offset the value to decrease
-     * @return int|false
+     * {@inheritdoc}
      */
     public function decrement($key, $offset = 1)
     {
@@ -279,15 +256,13 @@ class Fcache extends WidgetProvider implements Storable
     }
 
     /**
-     * Clear all cache
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function clear()
     {
         $result = true;
 
-        foreach (glob($this->options['dir']. '/' . '*.tmp') as $file) {
+        foreach (glob($this->dir . '/' . '*.' . $this->ext) as $file) {
             $result = $result && @unlink($file);
         }
 
@@ -302,9 +277,9 @@ class Fcache extends WidgetProvider implements Storable
      * @param  int            $operation lock operation
      * @return false|resource false or file handle
      */
-    protected function _openAndLock($file, $mode, $operation)
+    protected function openAndLock($file, $mode, $operation)
     {
-        if (!$handle = fopen($file , $mode)) {
+        if (!$handle = fopen($file, $mode)) {
             return false;
         }
 
@@ -324,13 +299,13 @@ class Fcache extends WidgetProvider implements Storable
      * @param  string      $file   file path
      * @return false|array false or file content array
      */
-    protected function _readAndVerify($handle, $file)
+    protected function readAndVerify($handle, $file)
     {
-        // read all content
+        // Read all content
         $content = fread($handle, filesize($file));
         $content = @unserialize($content);
 
-        // check if content is valid
+        // Check if content is valid
         if ($content && is_array($content) && time() < $content[0]) {
             return $content;
         } else {
@@ -345,7 +320,7 @@ class Fcache extends WidgetProvider implements Storable
      * @param  int    $expire  expire time
      * @return string file content
      */
-    protected function _prepareContent($content, $expire)
+    protected function prepareContent($content, $expire)
     {
         // 2147483647 = pow(2, 31) - 1
         // avoid year 2038 problem in 32-bit system when date coverts or compares
@@ -364,7 +339,7 @@ class Fcache extends WidgetProvider implements Storable
      * @param  bool    $rewirte whether rewrite the whole file
      * @return boolen
      */
-    protected function _writeAndRelease($handle, $content, $rewirte = false)
+    protected function writeAndRelease($handle, $content, $rewirte = false)
     {
         if ($rewirte) {
             rewind($handle);
