@@ -21,6 +21,7 @@ namespace Widget;
  * @todo        cli support
  * @todo        throw exception when called
  * @todo        add options display
+ * @todo        response
  */
 class Error extends WidgetProvider
 {

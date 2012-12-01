@@ -25,18 +25,15 @@
 namespace Widget;
 
 /**
- * IsDigit
+ * IsRegx
  *
  * @package     Widget
- * @subpackage  Widget
- * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2011-10-05 11:56:38
  */
-class IsDigit extends WidgetProvider
+class Regex extends WidgetProvider
 {
-    public function __invoke($data)
+    public function __invoke($value, $x)
     {
-        return (bool) preg_match('/^([0-9]+)$/', $data);
+        return (bool) preg_match($x, $value);
     }
 }
