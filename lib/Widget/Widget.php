@@ -394,12 +394,11 @@ class Widget extends WidgetProvider
     {
         $this->autoload = (bool) $enable;
         
-        if ($enable) {
-            spl_autoload_register(array($this, 'autoload'));
-        } else {
-            spl_autoload_unregister(array($this, 'autoload'));
-        }
-
+        call_user_func(
+            $enable ? 'spl_autoload_register' : 'spl_autoload_unregister', 
+            array($this, 'autoload')
+        );
+        
         return $this;
     }
 
