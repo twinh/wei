@@ -78,7 +78,7 @@ class Widget extends WidgetProvider
      * 
      * @var array
      */
-    protected $widgetMap = array();
+    protected $alias = array();
     
     /**
      * The widgets that will be instanced after widget manager constructed
@@ -362,8 +362,8 @@ class Widget extends WidgetProvider
      */
     public function getClass($name)
     {
-        if (isset($this->widgetMap[$name])) {
-            $class = $this->widgetMap[$name];
+        if (isset($this->alias[$name])) {
+            $class = $this->alias[$name];
         } else {
             $class = 'Widget\\' . ucfirst($name);
         }
@@ -460,7 +460,7 @@ class Widget extends WidgetProvider
         foreach ($files as $file) {
             $class = substr(basename($file), 0, -4);
             $name = $prefix ? $prefix . $class : strtolower($class[0]) . substr($class, 1);
-            $this->widgetMap[$name] = $namespace . '\\' . $class;
+            $this->alias[$name] = $namespace . '\\' . $class;
         }
 
         return $this;
