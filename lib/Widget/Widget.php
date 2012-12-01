@@ -88,6 +88,11 @@ class Widget extends WidgetProvider
     protected $initWidgets = array();
     
     /**
+     * @var array
+     */
+    protected $import = array();
+    
+    /**
      * Instance widget manager
      * 
      * @param array $config
@@ -462,6 +467,26 @@ class Widget extends WidgetProvider
             $this->alias[$name] = $namespace . '\\' . $class;
         }
 
+        return $this;
+    }
+    
+    /**
+     * Set import
+     * 
+     * @param array $import
+     * @return \Widget\Widget
+     */
+    public function setImport($import = array())
+    {
+        foreach ((array)$import as $option) {
+            $option += array(
+                'dir' => null,
+                'namespace' => null,
+                'prefix' => null
+            );
+            $this->import($option['dir'], $option['namespace'], $option['prefix']);
+        }
+        
         return $this;
     }
 }
