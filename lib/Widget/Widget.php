@@ -24,7 +24,7 @@ class Widget extends WidgetProvider
     /**
      * Version
      */
-    const VERSION = '0.8.9';
+    const VERSION = '0.9.0';
     
     /**
      * The instances of widget manager
@@ -113,6 +113,8 @@ class Widget extends WidgetProvider
         foreach ((array)$this->initWidgets as $widgetName) {
             $this->get($widgetName, null, $this);
         }
+        
+        $this->dbCache;
     }
 
     /**
@@ -278,7 +280,7 @@ class Widget extends WidgetProvider
         if (isset($deps[$name])) {
             $name = $deps[$name];
         }
-         
+
         $lower = strtolower($name);
         if (isset($this->widgets[$lower])) {
             return $this->widgets[$lower];
@@ -293,16 +295,13 @@ class Widget extends WidgetProvider
         // Get the widget class and instance
         $class = $this->getClass($name);
         if (class_exists($class)) {
+            // @see Widgetable::__invoke
             if (!method_exists($class, '__invoke')) {
                 throw new \BadMethodCallException(sprintf('Method "__invoke" not found in widget "%s"', $class));
             }
-            
-            // FIXME $this->dbCache should load "dbCache" config rathar than "dbcache" 
+
             // Load the widget configuration
             $options = (array)$this->config($full);
-            if (empty($options) && $this->config($name)) {
-                throw new \InvalidArgumentException(sprintf('Config name "%s" not found', $full));
-            }
             $options['widget'] = $this;
 
             return $this->widgets[$lower] = new $class($options);

@@ -18,6 +18,7 @@ require_once 'Widgetable.php';
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @method mixed __invoke(mixed $mixed) The invoke method
  */
 abstract class WidgetProvider implements Widgetable
 {
