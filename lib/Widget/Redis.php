@@ -2,24 +2,8 @@
 /**
  * Widget Framework
  *
- * Copyright (c) 2008-2012 Twin Huang. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id$
  */
 
 namespace Widget;
@@ -28,52 +12,73 @@ namespace Widget;
  * Redis
  *
  * @package     Widget
- * @subpackage  Widget
- * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2012-06-07
  */
 class Redis extends WidgetProvider implements Storable
 {
     /**
-     * Redis object
+     * The redis object
      *
-     * @var Redis
+     * @var \Redis
      */
-    protected $_object;
+    protected $object;
+    
+    /**
+     * The host, or the path to a unix domain socket
+     * 
+     * @var string 
+     */
+    protected $host = '127.0.0.1';
+    
+    /**
+     * The port of the host
+     * 
+     * @var int
+     */
+    protected $port = 6379;
+    
+    /**
+     * The timeout seconds
+     * 
+     * @var float|int
+     */
+    protected $timeout = 0.0;
+    
+    /**
+     * Whether persistent connection or not
+     * 
+     * @var bool
+     */
+    protected $persistent = true;
 
     /**
-     * Options
-     *
-     * @var array
+     * Constructor
+     * 
+     * @param array $options
      */
-    public $options = array(
-        'host' => '127.0.0.1',
-        'port' => 6379,
-        'timeout' => 0.0,
-        'object' => null,
-    );
-
     public function __construct(array $options = array())
     {
-        parent::__construct($options);
-        $options = $this->options;
+        $this->option($options, array('object'));
+        
+        parent::__construct();
 
-        if ($options['object'] && $options['object'] instanceof Redis) {
-            $this->_object = $options['object'];
-        } else {
-            $this->_object = new Redis();
-            $this->_object->connect($options['host'], $options['port'], $options['timeout']);
-        }
+        $this->connect();
+    }
+    
+    /**
+     * Connet the redis server
+     * 
+     * @return bool true on success, false on error
+     */
+    public function connect()
+    {
+        $connect = $this->persistent ? 'pconnect' : 'connect';
+        
+        return $this->object->$connect($this->host, $this->port, $this->timeout);
     }
 
     /**
-     * Get or set cache
-     *
-     * @param  string $key    the name of cache
-     * @param  mixed  $value
-     * @param  int    $expire expire time for set cache
-     * @return mixed
+     * {@inheritdoc}
      */
     public function __invoke($key, $value = null, $expire = 0)
     {
@@ -85,125 +90,90 @@ class Redis extends WidgetProvider implements Storable
     }
 
     /**
-     * Get cache
-     *
-     * @param  string      $key the name of cache
-     * @return mixed|false
+     * {@inheritdoc}
      */
     public function get($key, $options = null)
     {
-        return $this->_object->get($key);
+        return $this->object->get($key);
     }
 
     /**
-     * Set cache
-     *
-     * @param  string $key    the name of cache
-     * @param  value  $value  the value of cache
-     * @param  int    $expire expire time, 0 means never expired
-     * @return bool
+     * {@inheritdoc}
      */
     public function set($key, $value, $expire = 0, array $options = array())
     {
-        return $this->_object->set($key, $value, $expire);
+        return $this->object->set($key, $value, $expire);
     }
 
     /**
-     * Add cache, if cache is exists, return false
-     *
-     * @param  string $key    the name of cache
-     * @param  mixed  $value  the value of cache
-     * @param  int    $expire expire is not supported by redis when add new cache
-     * @return bool
+     * {@inheritdoc}
      */
     public function add($key, $value, $expire = 0, array $options = array())
     {
-        return $this->_object->setnx($key, $value);
-        /*$this->_object->watch($key);
-
-        if ($this->_object->exists($key)) {
-            $this->_object->unwatch();
-
-            return false;
-        } else {
-            $result = $this->_object
-                ->multi()
-                ->set($key, $value, $expire)
-                ->exec();
-
-            $this->_object->unwatch();
-
-            return $result[0];
-        }*/
+        return $this->object->setnx($key, $value);
     }
 
     /**
-     * Replace cache, if cache not exists, return false
-     *
-     * @param  string $key    the name of cache
-     * @param  mixed  $value  the value of cache
-     * @param  int    $expire expire is not supported by redis when replace cache
-     * @return bool
+     * {@inheritdoc}
      */
     public function replace($key, $value, $expire = 0, array $options = array())
     {
-        return $this->_object->getSet($key, $value);
+        return $this->object->getSet($key, $value);
     }
 
     /**
-     * Clear all cache
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function clear()
     {
-        return $this->_object->flushAll();
+        return $this->object->flushAll();
     }
 
     /**
-     * Increase a cache, if cache is not exists, redis will automatic creat it,
-     * this is different with other cache driver
-     *
-     * @param  string    $key    the name of cache
-     * @param  int       $offset the value to decrease
-     * @return int|false
+     * {@inheritdoc}
      */
     public function increment($key, $offset = 1)
     {
-        return $this->_object->incrBy($key, $offset);
+        return $this->object->incrBy($key, $offset);
     }
 
     /**
-     * Decrease a cache
-     *
-     * @param  string    $key    the name of cache
-     * @param  int       $offset the value to decrease
-     * @return int|false
-     * @see Widget_Redis::increment
+     * {@inheritdoc}
      */
     public function decrement($key, $offset = 1)
     {
-        return $this->_object->decrBy($key, $offset);
+        return $this->object->decrBy($key, $offset);
     }
 
     /**
-     * Remove cache by key
-     *
-     * @param  string $key the name of cache
-     * @return bool
+     * {@inheritdoc}
      */
     public function remove($key)
     {
-        return $this->_object->del($key);
+        return $this->object->del($key);
     }
 
     /**
-     * Get redis object
+     * Get the redis object
      *
-     * @return Redis
+     * @return \Redis
      */
     public function getObject()
     {
-        return $this->_object;
+        return $this->object;
+    }
+    
+    /**
+     * Set the redis object
+     * 
+     * @param \Redis $object
+     */
+    public function setObject(\Redis $object = null)
+    {
+        if ($object) {
+            $this->object = $object;
+        } else {
+            $this->object = new \Redis;
+        }
     }
 }
