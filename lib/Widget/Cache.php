@@ -29,7 +29,7 @@ class Cache extends WidgetProvider implements Storable
      * 
      * @ver string
      */
-    protected $driver = 'fcache';
+    protected $driver = 'apc';
 
     /**
      * Constructor
@@ -140,5 +140,4 @@ class Cache extends WidgetProvider implements Storable
     {
         return $this->object->set($key, $value, $expire, $options);
     }
-
 }
