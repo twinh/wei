@@ -8,14 +8,14 @@
 
 namespace Widget;
 
+use Doctrine\DBAL\DriverManager;
+
 /**
  * Doctrine dbal connection
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-use Doctrine\DBAL\DriverManager;
-
 class Db extends WidgetProvider
 {
     /**
