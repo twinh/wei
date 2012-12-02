@@ -20,7 +20,6 @@ require_once 'WidgetProvider.php';
  * @author      Twin Huang <twinh@yahoo.cn>
  * @todo        autoload interaction with composer ?
  * @todo        set first or get first ?
- * @todo        not shared widgets ?
  */
 class Widget extends WidgetProvider
 {
@@ -282,7 +281,6 @@ class Widget extends WidgetProvider
             $name = $deps[$name];
         }
          
-        // TODO shared or not ?
         $lower = strtolower($name);
         if (isset($this->widgets[$lower])) {
             return $this->widgets[$lower];
