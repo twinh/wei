@@ -1,25 +1,10 @@
 <?php
+
 /**
  * Widget Framework
- *
- * Copyright (c) 2008-2012 Twin Huang. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * 
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id$
  */
 
 namespace Widget;
@@ -28,30 +13,12 @@ namespace Widget;
  * Apc
  *
  * @package     Widget
- * @subpackage  Widget
- * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2012-05-30
  */
 class Apc extends WidgetProvider implements Storable
 {
-    public function __construct(array $options = array())
-    {
-        if (!extension_loaded('apc')) {
-            $this->exception('Extension "apc" is not loaded.');
-        }
-
-        $options = $options + $this->options;
-        parent::__construct($options);
-    }
-
     /**
-     * Get or set cache
-     *
-     * @param  string   $key    the name of cache
-     * @param  mixed    $value
-     * @param  int      $expire expire time for set cache
-     * @return Widget_Apc
+     * {@inheritdoc}
      */
     public function __invoke($key, $value = null, $expire = 0)
     {
@@ -63,10 +30,7 @@ class Apc extends WidgetProvider implements Storable
     }
 
     /**
-     * Get cache
-     *
-     * @param  string      $key the name of cache
-     * @return mixed|false
+     * {@inheritdoc}
      */
     public function get($key, $options = null)
     {
@@ -74,12 +38,7 @@ class Apc extends WidgetProvider implements Storable
     }
 
     /**
-     * Set cache
-     *
-     * @param  string $key    the name of cache
-     * @param  value  $value  the value of cache
-     * @param  int    $expire expire time, 0 means never expired
-     * @return bool
+     * {@inheritdoc}
      */
     public function set($key, $value, $expire = 0, array $options = array())
     {
@@ -87,10 +46,7 @@ class Apc extends WidgetProvider implements Storable
     }
 
     /**
-     * Remove cache by key
-     *
-     * @param  string $key the name of cache
-     * @return bool
+     * {@inheritdoc}
      */
     public function remove($key)
     {
@@ -98,12 +54,7 @@ class Apc extends WidgetProvider implements Storable
     }
 
     /**
-     * Add cache, if cache is exists, return false
-     *
-     * @param  string $key    the name of cache
-     * @param  mixed  $value  the value of cache
-     * @param  int    $expire expire time
-     * @return bool
+     * {@inheritdoc}
      */
     public function add($key, $value, $expire = 0, array $options = array())
     {
@@ -111,13 +62,7 @@ class Apc extends WidgetProvider implements Storable
     }
 
     /**
-     * Replace cache, if cache not exists, return false
-     *
-     * @param  string $key    the name of cache
-     * @param  mixed  $value  the value of cache
-     * @param  int    $expire expire time
-     * @return bool
-     * @todo lock ? atom ?
+     * {@inheritdoc}
      */
     public function replace($key, $value, $expire = 0, array $options = array())
     {
@@ -130,11 +75,7 @@ class Apc extends WidgetProvider implements Storable
     }
 
     /**
-     * Increase a numerical cache
-     *
-     * @param  string    $key    the name of cache
-     * @param  int       $offset the value to decrease
-     * @return int|false
+     * {@inheritdoc}
      */
     public function increment($key, $offset = 1)
     {
@@ -142,11 +83,7 @@ class Apc extends WidgetProvider implements Storable
     }
 
     /**
-     * Decrease a numerical cache
-     *
-     * @param  string    $key    the name of cache
-     * @param  int       $offset the value to decrease
-     * @return int|false
+     * {@inheritdoc}
      */
     public function decrement($key, $offset = 1)
     {
@@ -154,9 +91,7 @@ class Apc extends WidgetProvider implements Storable
     }
 
     /**
-     * Clear all user apc cache
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function clear()
     {
