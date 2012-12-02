@@ -19,7 +19,6 @@ require_once 'WidgetProvider.php';
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @todo        autoload interaction with composer ?
- * @todo        set first or get first ?
  */
 class Widget extends WidgetProvider
 {
