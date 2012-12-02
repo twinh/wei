@@ -18,6 +18,13 @@ namespace Widget;
 class Memcache extends WidgetProvider implements Storable
 {
     /**
+     * The memcache object
+     *
+     * @var \Memcache
+     */
+    protected $object;
+    
+    /**
      * The memcache server configurations
      * 
      * @var array
@@ -37,13 +44,6 @@ class Memcache extends WidgetProvider implements Storable
      * @var int
      */
     protected $flag = 2;
-
-    /**
-     * The memcache object
-     *
-     * @var \Memcache
-     */
-    protected $object;
     
     /**
      * Constructor
@@ -52,11 +52,9 @@ class Memcache extends WidgetProvider implements Storable
      */
     public function __construct(array $options = array())
     {
-        $this->object = new \Memcache;
-
-        parent::__construct($options + array(
-            'servers' => $this->servers
-        ));
+        $this->option($options, array('object', 'servers'));
+        
+        parent::__construct();
     }
     
     /**
@@ -160,5 +158,22 @@ class Memcache extends WidgetProvider implements Storable
     public function getObject()
     {
         return $this->object;
+    }
+    
+    /**
+     * Set memcache object
+     * 
+     * @param \Memcache $object
+     * @return \Widget\Memcache
+     */
+    public function setObject(\Memcache $object = null)
+    {
+        if ($object) {
+            $this->object = $object;
+        } else {
+            $this->object = new \Memcache;
+        }
+        
+        return $this;
     }
 }
