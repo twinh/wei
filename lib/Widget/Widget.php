@@ -113,8 +113,6 @@ class Widget extends WidgetProvider
         foreach ((array)$this->initWidgets as $widgetName) {
             $this->get($widgetName, null, $this);
         }
-        
-        $this->dbCache;
     }
 
     /**
