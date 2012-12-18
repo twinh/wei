@@ -1,107 +1,245 @@
 <?php
 /**
- * Controller
+ * Qwin Framework
  *
- * Copyright (c) 2008-2012 Twin Huang. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @author      Twin Huang <twinh@yahoo.cn>
- * @copyright   Twin Huang
+ * @copyright   Copyright (c) 2008-2012 Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id$
- * @since       2010-05-27 07:56:33
  */
 
 namespace Widget;
 
+/**
+ * Upload
+ *
+ * @package     Qwin
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @todo        Use other various instead of global various $_FILES
+ * @todo        Add service widget and extend it
+ * @todo        language
+ */
 class Upload extends WidgetProvider
 {
-    public $options = array(
-        'name' => null,
-        'maxSize' => 0,
-        'exts' => array(),
-        'savedName' => null,
-        'savedDir' => './uploads',
-        //to
-    );
+    /**
+     * $_FILES do not contain the key "$this->name" 
+     */
+    const ERR_NO_FILE           = 20;
+    
+    /**
+     * File not valid for function is_uploaded_file
+     */
+    const ERR_NOT_UPLOADED_FILE = 21;
+    
+    /**
+     * File size large than $this->maxSize
+     */
+    const ERR_FILE_TOO_LARGE    = 22;
+    
+    /**
+     * File size samll than $this->minSize
+     */
+    const ERR_FILE_TOO_SAMLL    = 23;
+    
+    /**
+     * File extension in black list
+     */
+    const ERR_EXT_NOT_ALLOW     = 24;
+    
+    /**
+     * File extension not in white list
+     */
+    const ERR_EXT_NOT_IN_ALLOW  = 25;
+    
+    /**
+     * The name defined in the file input, if it's not specified, use the first
+     * key in $_FILES
+     * 
+     * @var string
+     */
+    protected $name;
+    
+    /**
+     * The max file size limit
+     * 
+     * @var int
+     */
+    protected $maxSize = 0;
+    
+    /**
+     * The min file size limit
+     * 
+     * @var int
+     */
+    protected $minSize = 1;
 
+    /**
+     * The white extensions list
+     * 
+     * @var array 
+     */
+    protected $whiteExts = array();
+    
+    /**
+     * The black extensions list
+     * 
+     * @var array 
+     */
+    protected $blackExts = array();
+    
+    /**
+     * Custome file name without extension to save
+     * 
+     * @var string 
+     */
+    protected $fileName;
+    
+    /**
+     * The diretory to save file, if not exist, will try to create it
+     * 
+     * @var string 
+     */
+    protected $dir;
+    
+    /**
+     * The full file path to save file, NOT IMPLEMENTED YET
+     * 
+     * @var string 
+     */
+    protected $to;
+
+    /**
+     * The return result list
+     * 
+     * @var array
+     */
+    protected $results = array(
+        UPLOAD_ERR_OK           => 'File uploaded', 
+        UPLOAD_ERR_INI_SIZE     => 'File too large', // file larger than upload_max_filesize, 
+        UPLOAD_ERR_FORM_SIZE    => 'File too large', // file larger than MAX_FILE_SIZE defiend in html form
+        UPLOAD_ERR_PARTIAL      => 'Partial file uploaded, please try again', 
+        UPLOAD_ERR_NO_FILE      => 'No file uploaded', 
+        UPLOAD_ERR_NO_TMP_DIR   => 'No temporary directory', 
+        UPLOAD_ERR_CANT_WRITE   => 'Can\'t write to disk',
+        UPLOAD_ERR_EXTENSION    => 'File upload stopped by extension',
+        20                      => 'No file uploaded',
+        21                      => 'No file uploaded',
+        22                      => 'File too large', // file larget than $this->maxSize
+        23                      => 'File too samll',
+        24                      => 'File extension not allowed',
+        25                      => 'File extension not in allowed list',
+    );
+    
+    /**
+     * Upload a file
+     * 
+     * @param array $options
+     * @return array
+     * @todo divide to serval samll valid methods
+     */
     public function __invoke(array $options = array())
     {
-        $options = (array) $options + $this->options;
-        $this->options = &$options;
-
         $this->option($options);
-
-        if (!isset($_FILES[$options['name']])) {
-            return array(
-                'code' => -1,
-                'message' => 'No file uploaded',
-            );
+        
+        $files = $this->getFiles();
+        
+        // Set default name
+        if (!$this->name) {
+            $this->setName(null);
         }
 
-        $tmpFile = $_FILES[$options['name']]['tmp_name'];
-
-        if (!is_uploaded_file($tmpFile)) {
-            return array(
-                'code' => -2,
-                'message' => 'No file uploaded',
-            );
+        // Check if has file uploaded
+        if (!isset($files[$this->name])) {
+            return $this->result(static::ERR_NO_FILE);
+        }
+        
+        $file = $files[$this->name];
+        
+        // Handle UPLOAD_ERR_* error
+        if (0 !== $file['error']) {
+            return $this->result($file['error']);
         }
 
-        if ($options['maxSize'] && $_FILES[$options['name']]['size'] > $options['maxSize']) {
-            return array(
-                'code' => -3,
-                'message' => 'File too big',
-            );
+        if (!is_uploaded_file($file['tmp_name'])) {
+            return $this->result(static::ERR_NOT_UPLOADED_FILE);
         }
-
-        $ext = pathinfo($_FILES[$options['name']]['name'], PATHINFO_EXTENSION);
-        if ($options['exts'] && !in_array($ext, (array) $options['exts'])) {
-            return array(
-                'code' => -4,
-                'message' => 'Invalid File Extension',
-            );
+        
+        // Check if size is valid
+        if ($this->maxSize && $this->maxSize < $file['size']) {
+            return $this->result(static::ERR_FILE_TOO_LARGE);
         }
-
-        // todo: callable
-        if ($options['savedName']) {
-            $savedName = $options['savedName'] . '.' . $ext;
+        
+        if ($this->minSize && $this->minSize > $file['size']) {
+            return $this->result(static::ERR_FILE_TOO_SAMLL);
+        }
+        
+        // Check if extension is valid
+        $ext = $file['ext'] = pathinfo($file['name'], PATHINFO_EXTENSION);
+        if ($this->blackExts && in_array($ext, (array) $this->blackExts)) {
+            return $this->result(static::ERR_EXT_NOT_ALLOW);
+        }
+        
+        if ($this->whiteExts && !in_array($ext, (array) $this->whiteExts)) {
+            return $this->result(static::ERR_EXT_NOT_IN_ALLOW);
+        }
+        
+        // Custom saved file name
+        if ($this->fileName) {
+            if (is_callable($this->fileName)) {
+                $fileName = $this->fileName();
+            } else {
+                $fileName = $this->fileName;
+            }
         } else {
-            $savedName = $_FILES[$options['name']]['name'];
+            $fileName = $file['name'];
+        }
+        
+        // Looks not good, FIXED ME
+        if (!is_dir($this->dir)) {
+            mkdir($this->dir, 0700, true);
+        }
+        
+        $fullFile = $file['file'] = $this->dir . '/' . $fileName;
+        if (@!move_uploaded_file($file['tmp_name'], $fullFile)) {
+            return $this->result('Can not move uploaded file');
         }
 
-        if (!is_dir($options['savedDir'])) {
-            mkdir($options['savedDir'], 0700, true);
-        }
-
-        if (@!move_uploaded_file($tmpFile, $options['savedDir'] . '/' . $savedName)) {
-            return array(
-                'code' => -5,
-                'message' => 'Can not move uploaded file',
-            );
-        }
-
-        return array(
-            'code' => 0,
-            'message' => 'File uploaded!',
-        );
+        return $this->result(UPLOAD_ERR_OK, array('file' => $file));
     }
 
-    public function setNameOption($name)
+    /**
+     * Set name
+     * 
+     * @param string $name
+     * @return \Qwin\Upload
+     */
+    public function setName($name)
     {
-        $this->options['name'] = $name ? $name : key($_FILES);
+        $this->name = $name ? $name : key($_FILES);
 
         return $this;
+    }
+    
+    /**
+     * Get uploaded file list
+     * 
+     * @return array
+     */
+    public function getFiles()
+    {
+        return $_FILES;
+    }
+    
+    /**
+     * Return result
+     * 
+     * @param int $code
+     * @param array $data
+     * @return array
+     */
+    public function result($code, array $data = array())
+    {
+        return array(
+            'code'      => $code,
+            'message'   => $this->results[$code],
+        ) + $data;
     }
 }
