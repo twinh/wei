@@ -1,161 +1,113 @@
 <?php
+
 /**
  * Widget Framework
- *
- * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @author      Twin Huang <twinh@yahoo.cn>
- * @copyright   Twin Huang
+ * 
+ * @copyright   Copyright (c) 2008-2012 Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id$
  */
 
 namespace Widget;
+
+use Widget\Is\Validator;
+use InvalidArgumentException;
 
 /**
  * Is
  *
  * @package     Widget
- * @subpackage  Widget
- * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2012-01-14 15:32:49
- * @todo        'funcMap'       => array(
-            'isArray'       => 'is_array',
-            'isBool'        => 'is_bool',
-            'isInt'         => 'is_int',
-            'isNull'        => 'is_null',
-            'isNumeric'     => 'is_numeric',
-            'isScalar'      => 'is_scalar',
-            'isString'      => 'is_string',
-        ),
  */
 class Is extends WidgetProvider
 {
-    public $options = array(
-        'rules' => array(),
-        'data' => array(),
-        'break' => false,
-        'breakOne' => false,
-        'validatedOne' => null,
-        'invalidatedOne' => null,
-        'validated' => null,
-        'invalidated' => null,
-        'success' => null,
-        'failure' => null,
+    protected $internalValidators = array(
+        'array' => 'is_array',
+        'bool' => 'is_bool',
+        'int' => 'is_int',
+        'null' => 'is_null',
+        'numeric' => 'is_numeric',
+        'scalar' => 'is_scalar',
+        'string' => 'is_string',
     );
-
-    protected $_validationResult;
-
-    public function __invoke(array $options = array())
+    
+    protected $rules = array(
+        'qq' => '\Widget\Is\Rule\QQ',
+    );
+    
+    /**
+     * The last validator object
+     * 
+     * @var \Widget\Is\Validator
+     */
+    public $validator;
+    
+    public function validateOne($rule, $data, $option = array())
     {
-        $options = $options + $this->options;
-        $this->options = &$options;
-
-        if (empty($options['rules'])) {
-            throw new Exception('Rules should not be empty.');
+        if (!$class = $this->hasRule($rule)) {
+            throw new Exception(sprintf('Rule "%s" not defined', $rule));
         }
 
-        // set true for default and will change to false when invalidated
-        $result = true;
-
-        $validationResult = new Widget_ValidationResult;
-        $this->_validationResult = $validationResult;
-
-        foreach ($options['rules'] as $name => $rules) {
-            $data = isset($options['data'][$name]) ? $options['data'][$name] : null;
-
-            // make required rule at first
-            if (!isset($rules['required'])) {
-                $value = true;
-            } else {
-                $value = (bool) $rules['required'];
-                unset($rules['required']);
-            }
-            $rules = array('required' => $value) + $rules;
-
-            foreach ($rules as $rule => $params) {
-                $widget = 'is' . ucfirst($rule);
-
-                // prepare parameters for validte widget
-                $params = (array) $params;
-                array_unshift($params, $data);
-
-                // TODO check if rule is exists
-                if (false === call_user_func_array(array($this, $widget), $params)) {
-                    // would be always false in the whole valid flow
-                    $result = false;
-
-                    $validationResult->addInvalidatedRule($rule);
-
-                    // trigger invalidatedOne event
-                    $options['invalidatedOne'] && call_user_func_array($options['invalidatedOne'], array(
-                        $name, $rule, $params, $data, $rules, $validationResult, $this,
-                    ));
-
-                    if ($options['breakOne']) {
-                        break;
-                    }
-                } else {
-                    // trigger validatedOne event
-                    $options['validatedOne'] && call_user_func_array($options['validatedOne'], array(
-                        $name, $rule, $params, $data, $rules, $validationResult, $this,
-                    ));
-
-                    // goto next rules
-                    if (!$data && 'required' == $rule) {
-                        break;
-                    }
-                }
-            }
-
-            if ($result) {
-                $options['validated'] && call_user_func_array($options['validated'], array(
-                    $name, $rules, $validationResult, $this,
-                ));
-            } else {
-                $options['invalidated'] && call_user_func_array($options['invalidated'], array(
-                    $name, $rules, $validationResult, $this,
-                ));
-
-                if ($options['breakOne'] || $options['break']) {
-                    break;
-                }
-            }
-        }
-
-        $event = $result ? 'success' : 'failure';
-        $options[$event] && call_user_func_array($options[$event], array(
-            $validationResult, $this,
+        $rule = new $class(array(
+            'widget' => $this->widget
         ));
 
-        return $result;
+        switch (count($option)) {
+            case 0:
+                return $rule($data);
+
+            case 1:
+                return $rule($data, $option[0]);
+
+            case 2:
+                return $rule($data, $option[0], $option[1]);
+
+            default:
+                return call_user_func_array($rule, array_unshift($data, $option));
+        }
     }
 
     /**
-     * Get last validation result
-     *
-     * @return Widget_ValidationResult
+     * Validate data
+     * 
+     * @param array|string $options
+     * @param array $data
+     * @return bool
+     * @throws \InvalidArgumentException
+     * @example $this->is('rule', $data) Validate by one rule
      */
-    public function getLastValidationResult()
+    public function __invoke($options = array(), $data = null)
     {
-        return $this->_validationResult;
+        switch (true) {
+            case is_string($options):
+                $args = func_get_args();
+                array_shift($args);
+                return $this->validateOne($options, $data, $args);
+                
+            case is_array($options):
+                $this->validator = new Validator;
+                return $this->validator->__invoke($options);
+
+            default:
+                throw new InvalidArgumentException('Parameter 1 shoud be string or array');
+
+                break;
+        }
     }
 
-    public function isRequired($data, $required)
+    /**
+     * Check if the validate rule exists
+     * 
+     * @param string $rule
+     * @return string|boolean
+     */
+    public function hasRule($rule)
     {
-        return !$required || $data;
+        if (isset($this->rules[$rule])) {
+            return $this->rules[$rule];
+        } elseif (class_exists($class = '\Widget\Is\Rule\\' . ucfirst($rule))) {
+            return $class;
+        } else {
+            return false;
+        }
     }
 }
