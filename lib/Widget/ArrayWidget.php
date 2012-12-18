@@ -108,4 +108,14 @@ class ArrayWidget extends WidgetProvider implements \ArrayAccess, \Countable, \I
     {
         return new \ArrayIterator($this->data);
     }
+    
+    /**
+     * Returns the data keys.
+     * 
+     * @return array
+     */
+    public function keys()
+    {
+        return array_keys($this->data);
+    }
 }
