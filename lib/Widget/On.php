@@ -13,16 +13,18 @@ namespace Widget;
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @property \Widget\EventManager $eventManager The event manager widget
  */
 class On extends WidgetProvider
 {
     /**
-     * 绑定事件
+     * Attach a handler to an event
      *
      * @see Event::add()
-     * @param  string $event    事件名称
-     * @param  mixed  $callback 回调结构
-     * @return Widget
+     * @param  string $event    The type of event
+     * @param  mixed  $callback The handle of event
+     * @param int $priority The priority of event
+     * @return Widget\EventManager
      */
     public function __invoke($event, $callback, $priority = 0)
     {
