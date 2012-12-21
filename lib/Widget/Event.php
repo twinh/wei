@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Widget Framework
  *
@@ -14,16 +15,15 @@ namespace Widget;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @see         http://api.jquery.com/category/events/event-object/
- * @todo        add default event shut_down error ...
  */
-class Event
+class Event extends WidgetProvider
 {
     /**
      * The name of event
      *
      * @var string
      */
-    protected $name;
+    protected $type;
 
     /**
      * Time stamp with microseconds when object constructed
@@ -31,37 +31,50 @@ class Event
      * @var float
      */
     protected $timeStamp;
+    
+    /**
+     * @var bool
+     */
+    protected $preventDefault = false;
 
     /**
-     * Creat a new event object
+     *  The last value returned by an event handler
+     * 
+     * @var mixed
+     */
+    protected $result;
+    
+    /**
+     * Constructor
      *
      * @param string $name
      */
-    public function __construct($name)
+    public function __construct(array $options = array())
     {
-        $this->setName($name);
         $this->timeStamp = microtime(true);
+        
+        parent::__construct($options);
     }
 
     /**
-     * Get the name of event
+     * Get the type of event
      *
      * @return string
      */
-    public function getName()
+    public function getType()
     {
-        return $this->name;
+        return $this->type;
     }
 
     /**
-     * Set event name
+     * Set the type of event
      *
-     * @param  string      $name
+     * @param  string      $type
      * @return \Widget\Event
      */
-    public function setName($name)
+    public function setType($type)
     {
-        $this->name = strtolower($name);
+        $this->type = strtolower($type);
 
         return $this;
     }
@@ -77,12 +90,41 @@ class Event
     }
 
     /**
-     * Trigger the event
+     * Create a new event
      *
      * @return mixed
      */
-    public function __invoke(array$args = array())
+    public function __invoke($type)
     {
-        return $this->eventManager->__invoke($this, $args);
+        return new static(array(
+            'widget'    => $this->widget,
+            'type'      => $type
+        ));
+    }
+    
+    /**
+     * @return \Widget\Event
+     */
+    public function preventDefault()
+    {
+        $this->preventDefault = true;
+        
+        return $this;
+    }
+
+    /**
+     * @return type
+     */
+    public function isDefaultPrevented()
+    {
+        return $this->preventDefault;
+    }
+    
+    /**
+     * @param mixed $result
+     */
+    public function setResult($result)
+    {
+        $this->result = $result;
     }
 }
