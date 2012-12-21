@@ -24,7 +24,7 @@ class On extends WidgetProvider
      * @param  mixed  $callback 回调结构
      * @return Widget
      */
-    public function __invoke($event, $callback, $priority = 10)
+    public function __invoke($event, $callback, $priority = 0)
     {
         return $this->eventManager->add($event, $callback, $priority);
     }
