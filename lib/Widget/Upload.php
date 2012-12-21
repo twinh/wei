@@ -16,6 +16,7 @@ namespace Widget;
  * @todo        Use other various instead of global various $_FILES
  * @todo        Add service widget and extend it
  * @todo        language
+ * @todo        display size in result message
  */
 class Upload extends WidgetProvider
 {
@@ -48,6 +49,18 @@ class Upload extends WidgetProvider
      * File extension not in white list
      */
     const ERR_EXT_NOT_IN_ALLOW  = 25;
+    
+    /**
+     * Seems that the total file size is larger than the max size of post data
+     * 
+     * @link http://php.net/manual/en/ini.core.php#ini.post-max-size
+     */
+    const ERR_POST_SIZE = 26;
+    
+    /**
+     * Can not move uploaded file
+     */
+    const ERR_MOVE_FAIL = 27;
     
     /**
      * The name defined in the file input, if it's not specified, use the first
@@ -97,7 +110,7 @@ class Upload extends WidgetProvider
      * 
      * @var string 
      */
-    protected $dir;
+    protected $dir = 'uploads';
     
     /**
      * The full file path to save file, NOT IMPLEMENTED YET
@@ -113,8 +126,8 @@ class Upload extends WidgetProvider
      */
     protected $results = array(
         UPLOAD_ERR_OK           => 'File uploaded', 
-        UPLOAD_ERR_INI_SIZE     => 'File too large', // file larger than upload_max_filesize, 
-        UPLOAD_ERR_FORM_SIZE    => 'File too large', // file larger than MAX_FILE_SIZE defiend in html form
+        UPLOAD_ERR_INI_SIZE     => 'File too large', // File larger than upload_max_filesize, 
+        UPLOAD_ERR_FORM_SIZE    => 'File too large', // File larger than MAX_FILE_SIZE defiend in html form
         UPLOAD_ERR_PARTIAL      => 'Partial file uploaded, please try again', 
         UPLOAD_ERR_NO_FILE      => 'No file uploaded', 
         UPLOAD_ERR_NO_TMP_DIR   => 'No temporary directory', 
@@ -122,10 +135,12 @@ class Upload extends WidgetProvider
         UPLOAD_ERR_EXTENSION    => 'File upload stopped by extension',
         20                      => 'No file uploaded',
         21                      => 'No file uploaded',
-        22                      => 'File too large', // file larget than $this->maxSize
+        22                      => 'File too large', // File larger than $this->maxSize
         23                      => 'File too samll',
         24                      => 'File extension not allowed',
         25                      => 'File extension not in allowed list',
+        26                      => 'Seems that the total file size is larger than the max size of post data, please check the size of your file',
+        27                      => 'Can not move uploaded file',
     );
     
     /**
@@ -146,9 +161,13 @@ class Upload extends WidgetProvider
             $this->setName(null);
         }
 
-        // Check if has file uploaded
+        // Check if has file uploaded or file to large
         if (!isset($files[$this->name])) {
-            return $this->result(static::ERR_NO_FILE);
+            if (empty($files) && !$this->post->toArray()) {
+                return $this->result(static::ERR_POST_SIZE); 
+            } else {
+                return $this->result(static::ERR_NO_FILE);
+            }
         }
         
         $file = $files[$this->name];
@@ -199,7 +218,7 @@ class Upload extends WidgetProvider
         
         $fullFile = $file['file'] = $this->dir . '/' . $fileName;
         if (@!move_uploaded_file($file['tmp_name'], $fullFile)) {
-            return $this->result('Can not move uploaded file');
+            return $this->result(static::ERR_MOVE_FAIL);
         }
 
         return $this->result(UPLOAD_ERR_OK, array('file' => $file));
