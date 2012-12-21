@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Widget Framework
  *
@@ -13,61 +14,85 @@ namespace Widget;
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @todo namespace
  */
 class EventManager extends WidgetProvider
 {
     /**
-     * Event array
+     * The array contains the event handles
      *
-     * @var string
+     * @var array
+     */
+    protected $handles = array();
+    
+    /**
+     * The array contains the event objects
+     * 
+     * @var array
      */
     protected $events = array();
 
     /**
-     * 调用一个事件
-     *
-     * @param  string       $name the name of event or the Event object
-     * @param  mixed        $args arguments
-     * @return EventManager
+     * Constructor
+     * 
+     * @param array $options
      */
-    public function __invoke($name, $args)
+    public function __construct(array $options = array())
     {
-        if ($name instanceof Event) {
-            $event = $name;
-            $name = $event->getName();
+        parent::__construct($options);
+
+        $this->initInternalEvent();
+    }
+
+    /**
+     * Trigger a event
+     *
+     * @param  string $name The name of event or the Event object
+     * @param  mixed $args The arguments pass to the handle
+     * @return mixed The result returned by the last handle
+     */
+    public function __invoke($type, $args = array())
+    {
+        if ($type instanceof Event) {
+            $event = $type;
+            $type = $event->getType();
         } else {
-            $name = strtolower($name);
-            $event = new Event($name);
+            $event = $this->event($type);
+        }
+        
+        // Storage the event object
+        $this->events[$type] = $event;
+
+        if (!isset($this->handles[$type])) {
+            return;
         }
 
-        if (!isset($this->events[$name])) {
-            return $this;
-        }
-
-        // prepend the Event object to the beginning of the arguments
+        // Prepend the Event object to the beginning of the arguments
         array_unshift($args, $event);
 
-        ksort($this->events[$name]);
-        foreach ($this->events[$name] as $callbacks) {
+        ksort($this->handles[$type]);
+        foreach ($this->handles[$type] as $callbacks) {
             foreach ($callbacks as $callback) {
-                if (false === call_user_func_array($callback, $args)) {
+                $result = call_user_func_array($callback, $args);
+                $event->setResult($result);
+                if (false === $result || $event->isDefaultPrevented()) {
                     break 2;
                 }
             }
         }
 
-        return $this;
+        return $result;
     }
 
     /**
-     * Add event
+     * Add a event handle
      *
-     * @param  string       $name     the name of event
+     * @param  string       $type     The type of event
      * @param  mixed        $callback callbable struct
      * @param  int          $priority the event priority
      * @return EventManager
      */
-    public function add($name, $callback, $priority = 10)
+    public function add($name, $callback, $priority = 0)
     {
         if (!is_callable($callback)) {
             throw new Exception('Parameter 2 should be a valid callback');
@@ -75,17 +100,17 @@ class EventManager extends WidgetProvider
 
         $name = strtolower($name);
 
-        if (!isset($this->events[$name])) {
-            $this->events[$name] = array();
+        if (!isset($this->handles[$name])) {
+            $this->handles[$name] = array();
         }
 
-        $this->events[$name][$priority][] = $callback;
+        $this->handles[$name][$priority][] = $callback;
 
         return $this;
     }
 
     /**
-     * Remove one or all events
+     * Remove one or all handles
      *
      * param string|null $name the name of event
      * @return \Widget\EventManager
@@ -93,11 +118,11 @@ class EventManager extends WidgetProvider
     public function remove($name = null)
     {
         if (null === $name) {
-            $this->_events = array();
+            $this->handles = array();
         } else {
             $name = strtolower($name);
-            if (isset($this->_events[$name])) {
-                unset($this->_events[$name]);
+            if (isset($this->handles[$name])) {
+                unset($this->handles[$name]);
             }
         }
 
@@ -112,6 +137,52 @@ class EventManager extends WidgetProvider
      */
     public function has($name)
     {
-        return isset($this->_events[$name]);
+        return isset($this->handles[$name]);
+    }
+    
+    /**
+     * Returns the event object storaged in the event manager
+     * 
+     * @param string $type
+     * @return \Widget\Event
+     */
+    public function getEvent($type)
+    {
+        return isset($this->events[$type]) ? $this->events[$type] : false;
+    }
+
+    /**
+     * Init the internal event
+     */
+    protected function initInternalEvent()
+    {
+        $widget = $this->widget;
+        $that   = $this;
+
+        // Trigger the shutdown event
+        register_shutdown_function(function() use($that, $widget) {
+            $that('shutdown', array($widget));
+        });
+        
+        // Assign the lambda function to the variable to avoid " Fatal error: Cannot destroy active lambda function"
+        // Trigger the exception event
+        $exceptionHandle = function($exception) use($that, $widget) {
+            $that('exception', array($widget, $exception));
+
+            restore_exception_handler();
+
+            if (!$that->getEvent('exception')->isDefaultPrevented()) {
+                throw $exception;
+            }
+        };
+        
+        $prevHandle = set_exception_handler($exceptionHandle);
+  
+        // If setted the previous handle, bind it agian
+        if ($prevHandle) {
+            $this->add('exception', function($event, $widget, $exception) use($prevHandle) {
+                call_user_func($prevHandle, $exception);
+            });
+        }
     }
 }
