@@ -308,15 +308,15 @@ class Widget extends WidgetProvider
         // Build the error message
         $traces = debug_backtrace();
 
-        // called by class ?
-        if (isset($traces[1]) && '__get' == $traces[1]['function'] && $name == $traces[1]['args'][0]) {
-            //require_once 'Exception.php';
-            throw new Exception(sprintf('Property or widget "%s" (class "%s") not found, called in file "%s" at line %s', $traces[1]['args'][0], $class, $traces[1]['file'], $traces[1]['line']));
-        } elseif (isset($traces[3]) && $name == $traces[3]['function']) {
+        if (isset($traces[3]) && $name == $traces[3]['function']) {
             // for call_user_func
             $file = isset($traces[3]['file']) ? $traces[3]['file'] : $traces[4]['file'];
             $line = isset($traces[3]['line']) ? $traces[3]['line'] : $traces[4]['line'];
             throw new \BadMethodCallException(sprintf('Method "%s->%2$s" or widget "%s" (class "%s") not found, called in file "%s" at line %s', $traces[3]['class'], $traces[3]['function'], $class, $file, $line));
+        // called by class ?
+        } elseif (isset($traces[1]) && '__get' == $traces[1]['function'] && $name == $traces[1]['args'][0]) {
+            //require_once 'Exception.php';
+            throw new Exception(sprintf('Property or widget "%s" (class "%s") not found, called in file "%s" at line %s', $traces[1]['args'][0], $class, $traces[1]['file'], $traces[1]['line']));
         } else {
             // Call to undefined method class::method
             // Undefined property: class::$property
