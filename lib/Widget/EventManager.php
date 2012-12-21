@@ -19,11 +19,11 @@ namespace Widget;
 class EventManager extends WidgetProvider
 {
     /**
-     * The array contains the event handles
+     * The array contains the event handlers
      *
      * @var array
      */
-    protected $handles = array();
+    protected $handlers = array();
     
     /**
      * The array contains the event objects
@@ -63,15 +63,15 @@ class EventManager extends WidgetProvider
         // Storage the event object
         $this->events[$type] = $event;
 
-        if (!isset($this->handles[$type])) {
+        if (!isset($this->handlers[$type])) {
             return;
         }
 
         // Prepend the Event object to the beginning of the arguments
         array_unshift($args, $event);
 
-        krsort($this->handles[$type]);
-        foreach ($this->handles[$type] as $callbacks) {
+        krsort($this->handlers[$type]);
+        foreach ($this->handlers[$type] as $callbacks) {
             foreach ($callbacks as $callback) {
                 $result = call_user_func_array($callback, $args);
                 $event->setResult($result);
@@ -100,17 +100,17 @@ class EventManager extends WidgetProvider
 
         $name = strtolower($name);
 
-        if (!isset($this->handles[$name])) {
-            $this->handles[$name] = array();
+        if (!isset($this->handlers[$name])) {
+            $this->handlers[$name] = array();
         }
 
-        $this->handles[$name][$priority][] = $callback;
+        $this->handlers[$name][$priority][] = $callback;
 
         return $this;
     }
 
     /**
-     * Remove one or all handles
+     * Remove one or all handlers
      *
      * param string|null $type The type of event
      * @return \Widget\EventManager
@@ -118,11 +118,11 @@ class EventManager extends WidgetProvider
     public function remove($type = null)
     {
         if (null === $type) {
-            $this->handles = array();
+            $this->handlers = array();
         } else {
             $type = strtolower($type);
-            if (isset($this->handles[$type])) {
-                unset($this->handles[$type]);
+            if (isset($this->handlers[$type])) {
+                unset($this->handlers[$type]);
             }
         }
 
@@ -130,14 +130,14 @@ class EventManager extends WidgetProvider
     }
 
     /**
-     * Check if has the given type of event handles
+     * Check if has the given type of event handlers
      *
      * @param  string $name
      * @return bool
      */
     public function has($type)
     {
-        return isset($this->handles[$type]);
+        return isset($this->handlers[$type]);
     }
      
     /**
