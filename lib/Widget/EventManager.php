@@ -14,6 +14,7 @@ namespace Widget;
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @method \Widget\Event event(string $type) Create a event object
  * @todo namespace
  */
 class EventManager extends WidgetProvider
