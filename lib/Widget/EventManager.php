@@ -70,7 +70,7 @@ class EventManager extends WidgetProvider
         // Prepend the Event object to the beginning of the arguments
         array_unshift($args, $event);
 
-        ksort($this->handles[$type]);
+        krsort($this->handles[$type]);
         foreach ($this->handles[$type] as $callbacks) {
             foreach ($callbacks as $callback) {
                 $result = call_user_func_array($callback, $args);
@@ -88,9 +88,9 @@ class EventManager extends WidgetProvider
      * Add a event handle
      *
      * @param  string       $type     The type of event
-     * @param  mixed        $callback callbable struct
-     * @param  int          $priority the event priority
-     * @return EventManager
+     * @param  mixed        $callback The callbable struct
+     * @param  int          $priority The event priority
+     * @return \Widget\EventManager
      */
     public function add($name, $callback, $priority = 0)
     {
@@ -112,17 +112,17 @@ class EventManager extends WidgetProvider
     /**
      * Remove one or all handles
      *
-     * param string|null $name the name of event
+     * param string|null $type The type of event
      * @return \Widget\EventManager
      */
-    public function remove($name = null)
+    public function remove($type = null)
     {
-        if (null === $name) {
+        if (null === $type) {
             $this->handles = array();
         } else {
-            $name = strtolower($name);
-            if (isset($this->handles[$name])) {
-                unset($this->handles[$name]);
+            $type = strtolower($type);
+            if (isset($this->handles[$type])) {
+                unset($this->handles[$type]);
             }
         }
 
@@ -130,16 +130,16 @@ class EventManager extends WidgetProvider
     }
 
     /**
-     * Check if has the given name of event
+     * Check if has the given type of event handles
      *
      * @param  string $name
      * @return bool
      */
-    public function has($name)
+    public function has($type)
     {
-        return isset($this->handles[$name]);
+        return isset($this->handles[$type]);
     }
-    
+     
     /**
      * Returns the event object storaged in the event manager
      * 
