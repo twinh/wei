@@ -47,7 +47,7 @@ class EventManager extends WidgetProvider
     /**
      * Trigger a event
      *
-     * @param  string $name The name of event or the Event object
+     * @param  string $type The name of event or the Event object
      * @param  mixed $args The arguments pass to the handle
      * @return mixed The result returned by the last handle
      */
@@ -92,19 +92,19 @@ class EventManager extends WidgetProvider
      * @param  int          $priority The event priority
      * @return \Widget\EventManager
      */
-    public function add($name, $callback, $priority = 0)
+    public function add($type, $callback, $priority = 0)
     {
         if (!is_callable($callback)) {
             throw new Exception('Parameter 2 should be a valid callback');
         }
 
-        $name = strtolower($name);
+        $type = strtolower($type);
 
-        if (!isset($this->handlers[$name])) {
-            $this->handlers[$name] = array();
+        if (!isset($this->handlers[$type])) {
+            $this->handlers[$type] = array();
         }
 
-        $this->handlers[$name][$priority][] = $callback;
+        $this->handlers[$type][$priority][] = $callback;
 
         return $this;
     }
@@ -132,7 +132,7 @@ class EventManager extends WidgetProvider
     /**
      * Check if has the given type of event handlers
      *
-     * @param  string $name
+     * @param  string $type
      * @return bool
      */
     public function has($type)
