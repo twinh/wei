@@ -14,7 +14,7 @@ namespace Widget;
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
- * @see         http://api.jquery.com/category/events/event-object/
+ * @link        http://api.jquery.com/category/events/event-object/
  */
 class Event extends WidgetProvider
 {
@@ -38,9 +38,16 @@ class Event extends WidgetProvider
      * @var bool
      */
     protected $preventDefault = false;
+    
+    /**
+     * Whether top triggering the next handler or nots
+     * 
+     * @var bool
+     */
+    protected $stopPropagation = false;
 
     /**
-     *  The last value returned by an event handler
+     * The last value returned by an event handler
      * 
      * @var mixed
      */
@@ -122,7 +129,7 @@ class Event extends WidgetProvider
     }
 
     /**
-     * @return type
+     * @return bool
      */
     public function isDefaultPrevented()
     {
@@ -135,6 +142,8 @@ class Event extends WidgetProvider
     public function setResult($result)
     {
         $this->result = $result;
+        
+        return $this;
     }
     
     /**
@@ -143,6 +152,8 @@ class Event extends WidgetProvider
     public function setData($data = array())
     {
         $this->data = $data;
+        
+        return $this;
     }
     
     /**
@@ -151,5 +162,23 @@ class Event extends WidgetProvider
     public function getData()
     {
         return $this->data;
+    }
+    
+    /**
+     * @return \Widget\Event
+     */
+    public function stopPropagation()
+    {
+        $this->stopPropagation = true;
+        
+        return $this;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function isPropagationStopped()
+    {
+        return $this->stopPropagation;
     }
 }
