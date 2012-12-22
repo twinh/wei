@@ -31,6 +31,17 @@ class EventManager extends WidgetProvider
      * @var array
      */
     protected $events = array();
+    
+    /**
+     * The priorities text map
+     * 
+     * @var array
+     */
+    protected $priorities = array(
+        'low'       => -10,
+        'normal'    => 0,
+        'high'      => 10
+    );
 
     /**
      * Constructor
@@ -104,6 +115,9 @@ class EventManager extends WidgetProvider
         if (!is_callable($fn)) {
             throw new Exception('Parameter 2 should be a valid callback');
         }
+        
+        $priority = is_numeric($priority) ? $priority :
+            isset($this->priorities[$priority]) ? $this->priorities[$priority] : 0;
 
         $type = strtolower($type);
 
