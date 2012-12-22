@@ -68,8 +68,8 @@ class EventManager extends WidgetProvider
             return;
         }
 
-        // Prepend the Event object to the beginning of the arguments
-        array_unshift($args, $event);
+        // Prepend the event and widget manager object to the beginning of the arguments
+        array_unshift($args, $event, $this->widget);
 
         krsort($this->handlers[$type]);
         foreach ($this->handlers[$type] as $callbacks) {
@@ -157,18 +157,17 @@ class EventManager extends WidgetProvider
      */
     protected function initInternalEvent()
     {
-        $widget = $this->widget;
         $that   = $this;
 
         // Trigger the shutdown event
-        register_shutdown_function(function() use($that, $widget) {
-            $that('shutdown', array($widget));
+        register_shutdown_function(function() use($that) {
+            $that('shutdown');
         });
         
         // Assign the lambda function to the variable to avoid " Fatal error: Cannot destroy active lambda function"
         // Trigger the exception event
-        $exceptionHandle = function($exception) use($that, $widget) {
-            $that('exception', array($widget, $exception));
+        $exceptionHandle = function($exception) use($that) {
+            $that('exception', array($exception));
 
             restore_exception_handler();
 
