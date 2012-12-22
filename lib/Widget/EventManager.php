@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -76,9 +75,13 @@ class EventManager extends WidgetProvider
             foreach ($handlers as $handler) {
                 list($fn, $data) = $handler;
                 $event->setData($data);
-                $result = call_user_func_array($fn, $args);
+                
+                if (false === ($result = call_user_func_array($fn, $args))) {
+                    $event->preventDefault();
+                }
                 $event->setResult($result);
-                if (false === $result || $event->isDefaultPrevented()) {
+
+                if ($event->isPropagationStopped()) {
                     break 2;
                 }
             }
