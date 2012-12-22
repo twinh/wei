@@ -16,18 +16,18 @@ namespace Widget;
  * @property \Widget\EventManager $eventManager The event manager widget
  */
 class On extends WidgetProvider
-{
+{    
     /**
      * Attach a handler to an event
      *
-     * @see Event::add()
-     * @param  string $event    The type of event
-     * @param  mixed  $callback The handle of event
-     * @param int $priority The priority of event
-     * @return Widget\EventManager
+     * @param  string       $type     The type of event
+     * @param  mixed        $fn       The callbable struct
+     * @param  int          $priority The event priority
+     * @param array $data The data passed to the event object, when the handler is bound
+     * @return \Widget\EventManager
      */
-    public function __invoke($event, $callback, $priority = 0)
+    public function __invoke($type, $fn, $priority = 0, $data = array())
     {
-        return $this->eventManager->add($event, $callback, $priority);
+        return $this->eventManager->add($type, $fn, $priority, $data);
     }
 }
