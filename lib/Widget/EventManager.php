@@ -163,7 +163,7 @@ class EventManager extends WidgetProvider
      */
     protected function initInternalEvent()
     {
-        $that   = $this;
+        $that = $this;
 
         // Trigger the shutdown event
         register_shutdown_function(function() use($that) {
