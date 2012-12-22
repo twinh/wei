@@ -33,6 +33,8 @@ class Event extends WidgetProvider
     protected $timeStamp;
     
     /**
+     * Whether prevent the default action or not
+     * 
      * @var bool
      */
     protected $preventDefault = false;
@@ -43,6 +45,13 @@ class Event extends WidgetProvider
      * @var mixed
      */
     protected $result;
+    
+    /**
+     * The data accepted from the handler
+     * 
+     * @var array 
+     */
+    protected $data = array();
     
     /**
      * Constructor
@@ -56,6 +65,19 @@ class Event extends WidgetProvider
         parent::__construct($options);
     }
 
+    /**
+     * Create a new event
+     *
+     * @return mixed
+     */
+    public function __invoke($type)
+    {
+        return new static(array(
+            'widget'    => $this->widget,
+            'type'      => $type
+        ));
+    }
+    
     /**
      * Get the type of event
      *
@@ -88,19 +110,6 @@ class Event extends WidgetProvider
     {
         return $this->timeStamp;
     }
-
-    /**
-     * Create a new event
-     *
-     * @return mixed
-     */
-    public function __invoke($type)
-    {
-        return new static(array(
-            'widget'    => $this->widget,
-            'type'      => $type
-        ));
-    }
     
     /**
      * @return \Widget\Event
@@ -126,5 +135,21 @@ class Event extends WidgetProvider
     public function setResult($result)
     {
         $this->result = $result;
+    }
+    
+    /**
+     * @param mixed $data
+     */
+    public function setData($data = array())
+    {
+        $this->data = $data;
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function getData()
+    {
+        return $this->data;
     }
 }

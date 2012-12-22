@@ -72,9 +72,11 @@ class EventManager extends WidgetProvider
         array_unshift($args, $event, $this->widget);
 
         krsort($this->handlers[$type]);
-        foreach ($this->handlers[$type] as $callbacks) {
-            foreach ($callbacks as $callback) {
-                $result = call_user_func_array($callback, $args);
+        foreach ($this->handlers[$type] as $handlers) {
+            foreach ($handlers as $handler) {
+                list($fn, $data) = $handler;
+                $event->setData($data);
+                $result = call_user_func_array($fn, $args);
                 $event->setResult($result);
                 if (false === $result || $event->isDefaultPrevented()) {
                     break 2;
@@ -86,16 +88,17 @@ class EventManager extends WidgetProvider
     }
 
     /**
-     * Add a event handle
+     * Attach a handler to an event
      *
      * @param  string       $type     The type of event
-     * @param  mixed        $callback The callbable struct
+     * @param  mixed        $fn       The callbable struct
      * @param  int          $priority The event priority
+     * @param array $data The data passed to the event object, when the handler is bound
      * @return \Widget\EventManager
      */
-    public function add($type, $callback, $priority = 0)
+    public function add($type, $fn, $priority = 0, $data = array())
     {
-        if (!is_callable($callback)) {
+        if (!is_callable($fn)) {
             throw new Exception('Parameter 2 should be a valid callback');
         }
 
@@ -105,7 +108,7 @@ class EventManager extends WidgetProvider
             $this->handlers[$type] = array();
         }
 
-        $this->handlers[$type][$priority][] = $callback;
+        $this->handlers[$type][$priority][] = array($fn, $data);
 
         return $this;
     }
