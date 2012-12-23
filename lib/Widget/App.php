@@ -22,7 +22,6 @@ use Widget\App\DispatchBreakException;
  * @method mixed config(string $name) Get a config
  * @method \Widget\Response response(string $content) Send headers and output content
  * @method string|array request(string $name, mixed $default = null) Get a request parameter
- * @todo        output anywhere support?
  */
 class App extends WidgetProvider
 {    
@@ -166,7 +165,9 @@ class App extends WidgetProvider
             }
         }
         
-        throw new NotFoundException($message);
+        if (false !== $this->trigger('404', array($this, $notFound, $message), $this)) {
+            throw new NotFoundException($message);
+        }
     }
     
     /**
