@@ -16,8 +16,11 @@ namespace Widget;
  */
 class Trigger extends WidgetProvider
 {
-    public function __invoke($event, $params = array())
+    /**
+     * @see \Widget\Manager::__invoke
+     */
+    public function __invoke($event, $params = array(), Widgetable $widget = null)
     {
-        return $this->eventManager->__invoke($event, $params);
+        return $this->eventManager->__invoke($event, $params, $widget);
     }
 }
