@@ -18,34 +18,60 @@ namespace Widget;
  * @property \Widget\Session $session The session widget
  * @property \Widget\Cookie $cookie The cookie widget
  * @property \Widget\Server $server The server widget
- * @todo        cli support
  * @todo        throw exception when called
  * @todo        add options display
  * @todo        response
+ * @todo        bootstrap style
  */
 class Error extends WidgetProvider
 {
     /**
-     * Options
-     *
-     * @var array
+     * The default error code
+     * 
+     * @var int
      */
-    public $options = array(
-        'code' => 500,
-        'message' => 'Server busy, please try again later',
-        'exception' => true,
-        'error' => true,
-        'exit' => true,
-        'clean' => true,
-    );
-
+    protected $code = 500;
+    
+    /**
+     * The default error message when debug is not enable
+     * 
+     * @var string 
+     */
+    protected $message = 'Server busy, please try again later';
+    
+    /**
+     * Whether exit after dispaly the error message or not
+     * 
+     * @var bool 
+     */
+    protected $exit = true;
+    
+    /**
+     * Whether clean previous output before error or not
+     * 
+     * @var bool
+     */
+    protected $clean = true;
+    
+    /**
+     * Whether handle the php error
+     *  
+     * @var bool 
+     */
+    protected $error = true;
+    
+    /**
+     * Constructor
+     * 
+     * @param array $options
+     */
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-        if ($this->options['exception']) {
-            set_exception_handler(array($this, '__invoke'));
-        }
-        if ($this->options['error']) {
+        
+        $this->on('exception', $this);
+
+        if ($this->error) {
             set_error_handler(array($this, 'renderError'));
         }
     }
@@ -57,13 +83,10 @@ class Error extends WidgetProvider
      * @param mixed $code
      * @param array $options
      */
-    public function __invoke($message, $code = 500, array $options = array())
+    public function __invoke($event, $widget, $message, $code = 500, array $options = array())
     {
         try {
-            if ($this->options['exception']) {
-                restore_exception_handler();
-            }
-            if ($this->options['error']) {
+            if ($this->error) {
                 restore_error_handler();
             }
 
@@ -95,17 +118,12 @@ class Error extends WidgetProvider
                 $trace = $this->getTraceString($traces);
             }
 
-            // merge options
-            $options = array(
-                'code' => $code,
-                'message' => $message,
-            ) + $options + $this->options;
-            $this->options = &$options;
+            $this->option($options);
 
             $debug = $this->config('debug');
 
             // clean up output
-            if ($options['clean'] && ob_get_status()) {
+            if ($this->clean && ob_get_status()) {
                 $output = ob_get_contents();
                 $output && ob_end_clean();
                 ob_start();
@@ -114,8 +132,10 @@ class Error extends WidgetProvider
             // TODO more info, may be need an ajax view file
             if ($this->inAjax()) {
                 exit(json_encode(array(
-                    'code' => $code ? ($code > 0 ? -$code : $code) : -9999,
+                    'code' => $code ? ($code > 0 ? -$code : $code) : -$this->code,
                     'message' => $message,
+                    'detail' => sprintf('%s: %s in %s on line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getCode()),
+                    'trace' => $e->getTraceAsString(),
                 )));
             }
 
@@ -162,19 +182,16 @@ class Error extends WidgetProvider
 
             //$this->trigger('error', array('data' => get_defined_vars()));
 
-            // require view file
+            // display view file
             require dirname(__FILE__) . '/views/error.php';
 
             // exit to prevent other output
-            if ($options['exit']) {
+            if ($this->exit) {
                 // @codeCoverageIgnoreStart
                 exit();
                 // @codeCoverageIgnoreEnd
             } else {
-                if ($this->options['exception']) {
-                    set_exception_handler(array($this, 'call'));
-                }
-                if ($this->options['error']) {
+                if ($this->error) {
                     set_error_handler(array($this, 'renderError'));
                 }
             }
@@ -201,6 +218,9 @@ class Error extends WidgetProvider
      */
     public function renderError($errno, $errstr, $errfile, $errline)
     {
+        if (!(error_reporting() & $errno)) {
+            return;
+        }
         restore_error_handler();
         throw new \ErrorException($errstr, 500, $errno, $errfile, $errline);
     }
