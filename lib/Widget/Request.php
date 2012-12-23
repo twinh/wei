@@ -17,15 +17,6 @@ namespace Widget;
 class Request extends ArrayWidget
 {
     /**
-     * Options
-     *
-     * @var array
-     */
-    public $options = array(
-        'parameters' => false,
-    );
-
-    /**
      * Constructor
      *
      * @param array $options
@@ -33,14 +24,16 @@ class Request extends ArrayWidget
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-
-        if (is_array($this->options['parameters'])) {
-            $this->data = $this->options['parameters'];
+        
         // rebuild request parameters from other widgets
-        } else {
+        if (!isset($options['data'])) {
             $order = ini_get('request_order') ?: ini_get('variables_order');
 
-            $map = array('G' => 'get', 'P' => 'post', 'C' => 'cookie');
+            $map = array(
+                'G' => 'get', 
+                'P' => 'post', 
+                'C' => 'cookie'
+            );
 
             foreach (str_split(strtoupper($order)) as $key) {
                 if (isset($map[$key])) {
@@ -48,18 +41,6 @@ class Request extends ArrayWidget
                 }
             }
         }
-    }
-
-    /**
-     * Return request parameter
-     *
-     * @param  string $name    the parameter name
-     * @param  mixed  $default the default parameter value if the parameter does not exist
-     * @return mixed  the parameter value
-     */
-    public function __invoke($name, $default = null)
-    {
-        return isset($this->data[$name]) ? $this->data[$name] : $default;
     }
     
     /**
@@ -74,6 +55,6 @@ class Request extends ArrayWidget
         $protocol = substr(strtolower($this->server['SERVER_PROTOCOL']), 0, strpos(strtolower($this->server['SERVER_PROTOCOL']), '/')) . $s;
         $port = ($this->server['SERVER_PORT'] == '80') ? '' : (':' . $this->server['SERVER_PORT']);
 
-        return $protocol . '://' . $this->server('SERVER_NAME') . $port . $this->server['REQUEST_URI'];
+        return $protocol . '://' . $this->server['SERVER_NAME'] . $port . $this->server['REQUEST_URI'];
     }
 }

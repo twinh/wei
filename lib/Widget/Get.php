@@ -12,16 +12,11 @@ namespace Widget;
 /**
  * Get
  *
- * @package     Request
+ * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
- * @todo        add get array
  */
-class Get extends ArrayWidget
+class Get extends Parameter
 {
-    public $options = array(
-        'parameters' => false,
-    );
-
     /**
      * Constructor
      * 
@@ -31,44 +26,9 @@ class Get extends ArrayWidget
     {
         parent::__construct($options);
 
-        if (is_array($this->options['parameters'])) {
-            $this->data = $this->options['parameters'];
-        } else {
-            // todo router start or not
+        // FIXME router start or not
+        if (!isset($options['data'])) {
             $this->data = $this->router->matchRequestUri() ?: $_GET;
         }
-    }
-
-    /**
-     * Return get parameter
-     *
-     * @param  string $name    The parameter name
-     * @param  mixed  $default The default parameter value if the parameter does not exist
-     * @return mixed  The parameter value
-     */
-    public function __invoke($name, $default = null)
-    {
-        return isset($this->data[$name]) ? $this->data[$name] : $default;
-    }
-    
-    /**
-     * Get a integer parameter
-     * 
-     * @param string $name The parameter name
-     * @param int $min The min value for the parameter
-     * @param int $max The max value for the parameter
-     * @return int
-     */
-    public function int($name, $min = null, $max = null)
-    {
-        $value = intval($this->data[$name]);
-
-        if (!is_null($min) && $value < $min) {
-            return $min;
-        } elseif (!is_null($max) && $value > $max) {
-            return $max;
-        }
-
-        return $value;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Widget Framework
  *
@@ -22,6 +23,18 @@ class ArrayWidget extends WidgetProvider implements \ArrayAccess, \Countable, \I
      * @var array
      */
     protected $data = array();
+    
+    /**
+     * Returns a parameter value
+     *
+     * @param  string $name    The parameter name
+     * @param  mixed  $default The default parameter value if the parameter does not exist
+     * @return mixed  The parameter value
+     */
+    public function __invoke($name, $default = null)
+    {
+        return isset($this->data[$name]) ? $this->data[$name] : $default;
+    }
 
     /**
      * Check if the offset exists

@@ -14,14 +14,13 @@ namespace Widget;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Cookie extends ArrayWidget
+class Cookie extends Parameter
 {
     /**
      * @var array Options
-     * @see http://php.net/manual/en/function.setcookie.php
+     * @link http://php.net/manual/en/function.setcookie.php
      */
-    public $options = array(
-        'parameters'    => false,
+    protected $options = array(
         'expire'        => 86400,
         'path'          => '/',
         'domain'        => null,
@@ -47,9 +46,7 @@ class Cookie extends ArrayWidget
     {
         parent::__construct($options);
 
-        if (is_array($this->options['parameters'])) {
-            $this->data = $this->options['parameters'];
-        } else {
+        if (!isset($options['data'])) {
             $this->data = $_COOKIE;
         }
     }
@@ -90,14 +87,12 @@ class Cookie extends ArrayWidget
      * @param  mixed        $value   The value of cookie
      * @param  array        $options
      * @return \Widget\Cookie
-     * @todo serialize or not ?
      */
     public function set($key, $value = null, array $options = array())
     {
         if (isset($options['expire']) && 0 > $options['expire'] && isset($this->data[$key])) {
              unset($this->data[$key]);
         } else {
-            //$this->data[$key] = serialize($value);
             $this->data[$key] = $value;
         }
 
