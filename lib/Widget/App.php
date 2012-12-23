@@ -22,6 +22,7 @@ use Widget\App\DispatchBreakException;
  * @method mixed config(string $name) Get a config
  * @method \Widget\Response response(string $content) Send headers and output content
  * @method string|array request(string $name, mixed $default = null) Get a request parameter
+ * @property callable $404 The 404 event handler
  */
 class App extends WidgetProvider
 {    
@@ -79,7 +80,7 @@ class App extends WidgetProvider
      * @var \Widget\Viewable
      */
     protected $viewEngine;
-
+    
     /**
      * Startup application
      *
