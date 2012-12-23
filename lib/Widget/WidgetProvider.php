@@ -78,7 +78,7 @@ abstract class WidgetProvider implements Widgetable
             return $this;
         }
 
-        if (is_string($name)) {
+        if (is_scalar($name)) {
             // Get option
             if (1 == func_num_args()) {
                 if (method_exists($this, $method = 'get' . $name)) {
