@@ -60,41 +60,54 @@ class EventManager extends WidgetProvider
      *
      * @param  string $type The name of event or the Event object
      * @param  mixed $args The arguments pass to the handle
+     * @param \Widget\Widgetable $widget If the widget contains the $type 
+     *                                   property, the event manager will 
+     *                                   trigger it too
      * @return mixed The result returned by the last handle
      */
-    public function __invoke($type, $args = array())
+    public function __invoke($type, $args = array(), Widgetable $widget = null)
     {
         if ($type instanceof Event) {
             $event = $type;
             $type = $event->getType();
         } else {
-            $event = $this->event($type);
+            if (isset($this->events[$type])) {
+                $event = $this->events[$type];
+            } else {
+                $event = $this->events[$type] = $this->event($type);
+            }
         }
         
-        // Storage the event object
-        $this->events[$type] = $event;
-
-        if (!isset($this->handlers[$type])) {
-            return;
-        }
-
+        $result = null;
+        
         // Prepend the event and widget manager object to the beginning of the arguments
         array_unshift($args, $event, $this->widget);
 
-        krsort($this->handlers[$type]);
-        foreach ($this->handlers[$type] as $handlers) {
-            foreach ($handlers as $handler) {
-                list($fn, $data) = $handler;
-                $event->setData($data);
-                
-                if (false === ($result = call_user_func_array($fn, $args))) {
+        if (isset($this->handlers[$type])) {
+            krsort($this->handlers[$type]);
+            foreach ($this->handlers[$type] as $handlers) {
+                foreach ($handlers as $handler) {
+                    list($fn, $data) = $handler;
+                    $event->setData($data);
+
+                    if (false === ($result = call_user_func_array($fn, $args))) {
+                        $event->preventDefault();
+                    }
+                    $event->setResult($result);
+
+                    if ($event->isPropagationStopped()) {
+                        break 2;
+                    }
+                }
+            }
+        }
+        
+        if ($widget && $selfEvent = $widget->option($type)) {
+            if (is_callable($selfEvent)) {
+                if (false === ($result = call_user_func_array($selfEvent, $args))) {
                     $event->preventDefault();
                 }
                 $event->setResult($result);
-
-                if ($event->isPropagationStopped()) {
-                    break 2;
-                }
             }
         }
 
