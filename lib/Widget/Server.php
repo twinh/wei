@@ -14,12 +14,8 @@ namespace Widget;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Server extends ArrayWidget
+class Server extends Parameter
 {
-    public $options = array(
-        'parameters' => false,
-    );
-
     /**
      * Constructor
      *
@@ -29,22 +25,8 @@ class Server extends ArrayWidget
     {
         parent::__construct($options);
 
-        if (is_array($this->options['parameters'])) {
-            $this->data = $this->options['parameters'];
-        } else {
+        if (!isset($options['data'])) {
             $this->data = $_SERVER;
         }
-    }
-
-    /**
-     * Returns the request server parameter
-     *
-     * @param  string $name    the parameter name
-     * @param  mixed  $default the default parameter value if the parameter does not exist
-     * @return mixed  the parameter value
-     */
-    public function __invoke($name, $default = null)
-    {
-        return isset($this->data[$name]) ? $this->data[$name] : $default;
     }
 }

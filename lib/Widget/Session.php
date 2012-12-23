@@ -13,98 +13,66 @@ namespace Widget;
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @todo        remove global variable $_SESSION
  */
-class Session extends ArrayWidget
+class Session extends Parameter
 {
     /**
      * Current namespace to store session data
      *
      * @var string
      */
-    protected $_namespace;
+    protected $namespace = 'widget';
 
     /**
      * Whether session started
      *
      * @var string
      */
-    protected $_started = false;
+    protected $started = false;
+    
+    /**
+     * Whether auto start session when object construct
+     * 
+     * @var bool
+     */
+    protected $autoStart = true;
 
     /**
      * @var array           Options
      *
-     *      -- namespace    namespace to store session data
-     *
-     *      -- autoStart    whether auto start session when object construct
-     *
-     * @see http://php.net/manual/en/session.configuration.php
+     * @link http://php.net/manual/en/session.configuration.php
      */
-    public $options = array(
-        'namespace'         => 'widget',
-        'autoStart'         => true,
+    protected $options = array(
         'cache_limiter'     => 'private_no_expire, must-revalidate',
         'cookie_lifetime'   => 86400,
         'cache_expire'      => 86400,
     );
 
-    public function __construct($options = null)
+    public function __construct(array $options = array())
     {
-        // merge options
-        $options = (array) $options + $this->options;
-        $this->options = &$options;
-
-        // init all options
-        $this->option($options);
-
-        if ($options['autoStart']) {
+        parent::__construct($options);
+        
+        if ($this->autoStart) {
             $this->start();
         }
     }
-
-    /**
-     * Get or set options
-     *
-     * @param  mixed $name
-     * @param  mixed $value
-     * @return mixed
-     */
-    public function option($name = null, $value = null)
-    {
-        if (2 == func_num_args() && (is_string($name) || is_int($name))) {
-            if ('name' == $name || false !== strpos($name, '_')) {
-                ini_set('session.' . $name, $value);
-            }
-            // set option
-            return parent::option($name, $value);
-        }
-
-        return parent::option($name);
-    }
     
     /**
-     * Return session value
+     * Get or set session
      *
-     * @param  string $name    The parameter name
-     * @param  mixed  $default The default parameter value if the parameter does not exist
-     * @return mixed  The parameter value
+     * @param  string       $key     the name of cookie
+     * @param  mixed        $value   the value of cookie
+     * @param  array        $options options for set cookie
+     * @return \Widget\Cookie
      */
-    public function __invoke($name, $default = null)
+    public function __invoke($key, $value = null, array $options = array())
     {
-        return isset($this->data[$name]) ? $this->data[$name] : $default;
-    }
-
-    /**
-     * Set current namespace
-     *
-     * @param  string       $name
-     * @return Widget_Session
-     */
-    public function setNamespaceOption($name)
-    {
-        $this->options['namespace'] = $name;
-        $this->_namespace = $name;
-
-        return $this;
+        if (1 == func_num_args()) {
+            return $this->get($key);
+        } else {
+            return $this->set($key, $value, $options);
+        }
     }
 
     /**
@@ -119,14 +87,14 @@ class Session extends ArrayWidget
             throw new Exception(sprintf('Unable to start session, output started at %s:%s', $file, $line));
         }
 
-        // session started, ignored
+        // If session started, ignored it
         if (!session_id()) {
             session_start();
-            $this->_started = true;
-            if (!isset($_SESSION[$this->_namespace])) {
-                $_SESSION[$this->_namespace] = array();
+            $this->started = true;
+            if (!isset($_SESSION[$this->namespace])) {
+                $_SESSION[$this->namespace] = array();
             }
-            $this->data = &$_SESSION[$this->_namespace];
+            $this->data = &$_SESSION[$this->namespace];
         }
 
         return $this;
@@ -139,7 +107,7 @@ class Session extends ArrayWidget
      */
     public function isStarted()
     {
-        return $this->_started;
+        return $this->started;
     }
 
     /**
@@ -176,7 +144,7 @@ class Session extends ArrayWidget
         if ($namespace) {
             $_SESSION[$namespace] = array();
         } else {
-            $_SESSION[$this->_namespace] = array();
+            $_SESSION[$this->namespace] = array();
 
             // clean up data for cli mode
             $this->data = array();
@@ -192,13 +160,28 @@ class Session extends ArrayWidget
      */
     public function destroy()
     {
-        if ($this->_started) {
+        if ($this->started) {
             session_destroy();
         }
 
         // clean up all data
         $this->data = array();
 
+        return $this;
+    }
+    
+    /**
+     * Set session options
+     * 
+     * @param array $options
+     * @return \Widget\Session
+     */
+    public function setOptions($options)
+    {
+        foreach ($options as $name => $value) {
+            ini_set('session.' . $name, $value);
+        }
+        
         return $this;
     }
 }

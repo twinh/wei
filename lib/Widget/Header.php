@@ -182,17 +182,17 @@ class Header extends ArrayWidget
             return false;
         }
 
-        // send status
+        // Send status
         header(sprintf('HTTP/%s %d %s', $this->version, $this->statusCode, $this->statusText));
 
-        // send headers
+        // Send headers
         foreach ($this->data as $name => $values) {
             foreach ($values as $value) {
                 header($name . ': ' . $value, false);
             }
         }
 
-        // send cookie
+        // Send cookie
         $this->cookie->send();
 
         return $this;
