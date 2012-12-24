@@ -13,6 +13,7 @@ namespace Widget;
  *
  * @author twinhuang
  * @property \Widget\Browser $browser The browser widget
+ * @property \Widget\Header $header The header widget
  * @todo refactor
  */
 class Download extends WidgetProvider
@@ -30,17 +31,19 @@ class Download extends WidgetProvider
      * @param string $file The file path
      * @param array $options The property options
      * @return \Widget\Download The current object
-     * @throws Exception When file not found
+     * @throws \Widget\Exception When file not found
      */
     public function __invoke($file, array $options = array())
     {
         $this->option($options);
         
+        $header = $this->header;
+        
         if (!is_file($file)) {
             throw new Exception('File not found');
         }
 
-        $this->header('Content-Description', 'File Transfer');
+        $header('Content-Description', 'File Transfer');
         
         if ($this->type) {
             $this->header('Content-Type', $this->type);
@@ -48,12 +51,12 @@ class Download extends WidgetProvider
 
         $name = basename($file);
         $this->browser->msie && $name = urlencode($name);
-        $this->header('Content-Disposition', 'attachment;filename="' . $name);
-        $this->header('Content-Transfer-Encoding', 'binary');
-        $this->header('Expires', '0');
-        $this->header('Cache-Control', 'must-revalidate');
-        $this->header('Pragma', 'public');
-        $this->header('Content-Length', filesize($file));
+        $header('Content-Disposition', 'attachment;filename="' . $name);
+        $header('Content-Transfer-Encoding', 'binary');
+        $header('Expires', '0');
+        $header('Cache-Control', 'must-revalidate');
+        $header('Pragma', 'public');
+        $header('Content-Length', filesize($file));
         
         $this->response->send();
         
