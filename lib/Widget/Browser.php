@@ -115,7 +115,8 @@ class Browser extends WidgetProvider
             false === strpos($ua, 'compatible') && preg_match('/(mozilla)(?:.*? rv:([\w.]+)|)/', $ua, $matches) ||
             array('', '', 0);
         
-        list($ignore, $this->name, $this->version) = $matches;
+        // Ignore the first element
+        list(, $this->name, $this->version) = $matches;
         
         $this->{$this->name} = true;
 
