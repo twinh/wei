@@ -13,6 +13,7 @@ namespace Widget;
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @property \Widget\EventManager $eventManager The event manager widget
  */
 class Trigger extends WidgetProvider
 {
