@@ -46,7 +46,7 @@ class Db extends WidgetProvider
     }
 
     /**
-     * Get Doctrine DBAL connection object
+     * Returns the Doctrine DBAL connection object
      *
      * @return \Doctrine\DBAL\Connection
      */
