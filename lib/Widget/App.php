@@ -216,7 +216,7 @@ class App extends WidgetProvider
     public function getModule()
     {
         if (!$this->module) {
-            $this->module = ucfirst($this->request('module', $this->defaults['module']));
+            $this->module = ucfirst((string)$this->request('module', $this->defaults['module']));
         }
         
         return $this->module;
@@ -254,7 +254,7 @@ class App extends WidgetProvider
     public function getController()
     {
         if (!$this->controller) {
-            $this->controller = ucfirst($this->request('controller', $this->defaults['controller']));
+            $this->controller = ucfirst((string)$this->request('controller', $this->defaults['controller']));
         }
 
         return $this->controller;
@@ -281,7 +281,7 @@ class App extends WidgetProvider
     public function getAction()
     {
         if (!$this->action) {
-            $this->action = $this->request('action', $this->defaults['action']);
+            $this->action = (string)$this->request('action', $this->defaults['action']);
         }
 
         return $this->action;
