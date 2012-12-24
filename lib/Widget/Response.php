@@ -15,6 +15,7 @@ namespace Widget;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @todo        Filterable ? filter response
  * @property    \Widget\Header $header The reponse header
+ * @method string filter(string $name, mixed $content) Returns the filtered content
  */
 class Response extends WidgetProvider
 {
