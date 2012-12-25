@@ -41,7 +41,7 @@ class Is extends WidgetProvider
      */
     public $validator;
     
-    public function validateOne($rule, $data, $option = array())
+    public function validateOne($rule, $data, $options = array())
     {
         if (!$class = $this->hasRule($rule)) {
             throw new Exception(sprintf('Rule "%s" not defined', $rule));
@@ -51,18 +51,19 @@ class Is extends WidgetProvider
             'widget' => $this->widget
         ));
 
-        switch (count($option)) {
+        switch (count($options)) {
             case 0:
                 return $rule($data);
 
             case 1:
-                return $rule($data, $option[0]);
+                return $rule($data, $options[0]);
 
             case 2:
-                return $rule($data, $option[0], $option[1]);
+                return $rule($data, $options[0], $options[1]);
 
             default:
-                return call_user_func_array($rule, array_unshift($data, $option));
+                array_unshift($data, $options);
+                return call_user_func_array($rule, $options);
         }
     }
 
