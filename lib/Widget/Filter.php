@@ -40,12 +40,8 @@ class Filter extends WidgetProvider
             foreach ($this->filters[$name] as $callback) {
                 $data = call_user_func($callback, $data);
             }
-
-            return $data;
         }
-
-        $this->log(sprintf('Undefined filter name "%s"', $name));
-
+        
         return $data;
     }
 
