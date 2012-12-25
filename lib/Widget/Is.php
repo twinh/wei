@@ -89,8 +89,6 @@ class Is extends WidgetProvider
 
             default:
                 throw new InvalidArgumentException('Parameter 1 shoud be string or array');
-
-                break;
         }
     }
 
