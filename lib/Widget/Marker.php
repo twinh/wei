@@ -59,7 +59,6 @@ class Marker extends WidgetProvider
      */
     public $options = array(
         'auto' => true,
-        'display' => null,
     );
 
     public function __construct(array $options = array())
@@ -106,12 +105,6 @@ class Marker extends WidgetProvider
      */
     public function display($print = true)
     {
-        if (is_callable($this->options['display'])) {
-            return $this->callback($this->options['display'], array(
-                $this->_data, $print, $this->_index
-            ));
-        }
-
         reset($this->_data);
         $start = current($this->_data);
         $total = bcsub(end($this->_data), $start, 8);
