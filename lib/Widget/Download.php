@@ -46,7 +46,7 @@ class Download extends WidgetProvider
         $header('Content-Description', 'File Transfer');
         
         if ($this->type) {
-            $this->header('Content-Type', $this->type);
+            $header('Content-Type', $this->type);
         }
 
         $name = basename($file);
