@@ -13,11 +13,12 @@ namespace Widget;
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @property \Widget\Server $server The server widget
  */
 class InAjax extends WidgetProvider
 {
     public function __invoke()
     {
-        return 'xmlhttprequest' == strtolower($this->server('HTTP_X_REQUESTED_WITH'));
+        return 'xmlhttprequest' == strtolower($this->server['HTTP_X_REQUESTED_WITH']);
     }
 }
