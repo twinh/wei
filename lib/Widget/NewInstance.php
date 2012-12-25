@@ -14,6 +14,7 @@ namespace Widget;
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @method array config(string $name) Returns the config by specified name
  */
 class NewInstance extends WidgetProvider
 {
