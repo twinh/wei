@@ -14,11 +14,12 @@ namespace Widget;
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
+ *  * @property \Widget\Server $server The server widget
  */
 class InMethod extends WidgetProvider
 {
     public function __invoke($method)
     {
-        return 0 === strcasecmp($this->server('REQUEST_METHOD'), $method);
+        return 0 === strcasecmp($this->server['REQUEST_METHOD'], $method);
     }
 }
