@@ -16,7 +16,7 @@ use Monolog\Logger;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Log extends WidgetProvider
+class Monolog extends WidgetProvider
 {
     public $options = array(
         'name' => null,
