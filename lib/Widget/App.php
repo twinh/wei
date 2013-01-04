@@ -73,13 +73,6 @@ class App extends WidgetProvider
      * @var array
      */
     protected $controllers = array();
-
-    /**
-     * The view engine instance
-     *
-     * @var \Widget\Viewable
-     */
-    protected $viewEngine;
     
     /**
      * Startup application
@@ -183,7 +176,7 @@ class App extends WidgetProvider
         switch (true) {
             // render default template and using $result as template variables
             case is_array($response) :
-                $response = $this->getViewEngine()->render($this->getDefaultTemplate(), $response);
+                $response = $this->view->render($this->getDefaultTemplate(), $response);
 
             // response directly
             case is_string($response) :
@@ -340,38 +333,6 @@ class App extends WidgetProvider
     }
 
     /**
-     * Set view engine
-     *
-     * @param  string    $viewEngine The name or object of view engine
-     * @return \Widget\App
-     */
-    public function setViewEngine($viewEngine)
-    {
-        $this->viewEngine = $viewEngine;
-        
-        return $this;
-    }
-
-    /**
-     * Get the view engine instance
-     *
-     * @return \Widget\Viewable
-     */
-    public function getViewEngine()
-    {
-        if (is_string($this->viewEngine)) {
-            $this->viewEngine = $this->{$this->viewEngine};
-        }
-        
-        if (!$this->viewEngine instanceof \Widget\Viewable) {
-            throw new \UnexpectedValueException(sprintf('View engine widget should implement \Widget\Viewable interface, "%s" given',
-                (is_object($this->viewEngine) ? get_class($this->viewEngine) : gettype($this->viewEngine))), 500);
-        }
-        
-        return $this->viewEngine;
-    }
-
-    /**
      * Get default template file according to the controller, action and file
      * extension provided by the view engine
      *
@@ -379,6 +340,6 @@ class App extends WidgetProvider
      */
     public function getDefaultTemplate()
     {
-        return strtolower($this->controller . '/' . $this->action) . $this->getViewEngine()->getExtension();
+        return strtolower($this->controller . '/' . $this->action) . $this->view->getExtension();
     }
 }
