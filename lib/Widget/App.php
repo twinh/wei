@@ -23,6 +23,7 @@ use Widget\App\DispatchBreakException;
  * @method \Widget\Response response(string $content) Send headers and output content
  * @method string|array request(string $name, mixed $default = null) Get a request parameter
  * @property callable $404 The 404 event handler
+ * @property \Widget\Viewable $view The view widget, instance of \Widget\Viewable interface
  */
 class App extends WidgetProvider
 {    
@@ -83,7 +84,7 @@ class App extends WidgetProvider
     public function __invoke(array $options = array())
     {
         $this->option($options);
-
+        
         return $this->dispatch(
             $this->getModule(),
             $this->getController(),
