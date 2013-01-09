@@ -26,6 +26,13 @@ class Event extends WidgetProvider
     protected $type;
 
     /**
+     * The namespaces of event
+     * 
+     * @var array 
+     */
+    protected $namespaces = array();
+
+    /**
      * Time stamp with microseconds when object constructed
      *
      * @var float
@@ -68,7 +75,7 @@ class Event extends WidgetProvider
     public function __construct(array $options = array())
     {
         $this->timeStamp = microtime(true);
-        
+
         parent::__construct($options);
     }
 
@@ -77,11 +84,12 @@ class Event extends WidgetProvider
      *
      * @return mixed
      */
-    public function __invoke($type)
+    public function __invoke($type, array $namespaces = array())
     {
         return new static(array(
-            'widget'    => $this->widget,
-            'type'      => $type
+            'widget'        => $this->widget,
+            'type'          => $type,
+            'namespaces'    => $namespaces,
         ));
     }
     
@@ -103,11 +111,44 @@ class Event extends WidgetProvider
      */
     public function setType($type)
     {
-        $this->type = strtolower($type);
+        $this->type = $type;
 
         return $this;
     }
-
+    
+    /**
+     * Returns the event namespaces
+     * 
+     * @return array
+     */
+    public function getNamespaces()
+    {
+        return $this->namespaces;
+    }
+    
+    /**
+     * Set the namespace of event
+     * 
+     * @param array $namespaces
+     * @return \Widget\Event
+     */
+    public function setNamespaces(array $namespaces)
+    {
+        $this->namespaces = $namespaces;
+        
+        return $this;
+    }
+    
+    /**
+     * Returns the event namespace
+     * 
+     * @return string
+     */
+    public function getNamespace()
+    {
+        return implode('.', $this->namespaces);
+    }
+    
     /**
      * Get the time stamp
      *
