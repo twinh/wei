@@ -45,7 +45,7 @@ class EventManager extends WidgetProvider
     {
         parent::__construct($options);
 
-        $this->initInternalEvent();
+        $this->registerInternalEvent();
     }
 
     /**
@@ -182,9 +182,9 @@ class EventManager extends WidgetProvider
     }
      
     /**
-     * Init the internal event
+     * Register the internal event
      */
-    protected function initInternalEvent()
+    protected function registerInternalEvent()
     {
         $that = $this;
 
