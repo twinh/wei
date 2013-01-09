@@ -66,10 +66,12 @@ class EventManager extends WidgetProvider
             $namespaces = $event->getNamespaces();
         } else {
             list($type, $namespaces) = $this->splitNamespace($type);
-            $event      = $this->event($type, $namespaces);
+            $event      = new Event(array(
+                'widget'        => $this->widget,
+                'type'          => $type,
+                'namespaces'    => $namespaces,
+            ));
         }
-        
-        $result     = null;
         
         // Prepend the event and widget manager object to the beginning of the arguments
         array_unshift($args, $event, $this->widget);
@@ -78,7 +80,7 @@ class EventManager extends WidgetProvider
             krsort($this->handlers[$type]);
             foreach ($this->handlers[$type] as $handlers) {
                 foreach ($handlers as $handler) {
-                    if (!$namespaces || $namespaces == array_intersect($namespaces, $handler[2])) {
+                    if (!$namespaces || !$handler[2] || $namespaces == array_intersect($namespaces, $handler[2])) {
                         list($fn, $data) = $handler;
                         $event->setData($data);
 
@@ -211,6 +213,16 @@ class EventManager extends WidgetProvider
                 call_user_func($prevHandle, $exception);
             });
         }
+        
+        // Trigger the widget manager's construct and construct event
+        $this->widget->option(array(
+            'construct' => function ($name, $full) use($that) {
+                $that('construct.' . $name, array($name, $full));
+            },
+            'constructed' => function($widget, $name, $full) use($that) {
+                $that('constructed.' . $name, array($widget, $name, $full));
+            }
+        ));
     }
     
     /**
