@@ -90,6 +90,20 @@ class Widget extends WidgetProvider
     protected $import = array();
     
     /**
+     * The callback executes *before* widget constructed
+     * 
+     * @var callable 
+     */
+    protected $construct;
+    
+    /**
+     * The callback executes *after* widget constructed
+     * 
+     * @var callable
+     */
+    protected $constructed;
+    
+    /**
      * Instance widget manager
      * 
      * @param array $config
@@ -297,12 +311,20 @@ class Widget extends WidgetProvider
             if (!method_exists($class, '__invoke')) {
                 throw new \BadMethodCallException(sprintf('Method "__invoke" not found in widget "%s"', $class));
             }
+            
+            // Trigger the construct callback
+            $this->construct && call_user_func($this->construct, $name, $full);
 
             // Load the widget configuration
             $options = (array)$this->config($full);
             $options['widget'] = $this;
+            
+            $this->widgets[$lower] = new $class($options);
+            
+            // Trigger the constructed callback
+            $this->constructed && call_user_func($this->constructed, $this->widgets[$lower], $name, $full);
 
-            return $this->widgets[$lower] = new $class($options);
+            return $this->widgets[$lower];
         }
 
         // Build the error message
