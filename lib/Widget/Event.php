@@ -188,6 +188,16 @@ class Event extends WidgetProvider
     }
     
     /**
+     * Returns the last result returnted by the handler
+     * 
+     * @return mixed
+     */
+    public function getResult()
+    {
+        return $this->result;
+    }
+    
+    /**
      * @param mixed $data
      */
     public function setData($data = array())
