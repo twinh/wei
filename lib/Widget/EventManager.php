@@ -26,13 +26,6 @@ class EventManager extends WidgetProvider
     protected $handlers = array();
     
     /**
-     * The array contains the event objects
-     * 
-     * @var array
-     */
-    protected $events = array();
-    
-    /**
      * The priorities text map
      * 
      * @var array
@@ -68,17 +61,15 @@ class EventManager extends WidgetProvider
     public function __invoke($type, $args = array(), Widgetable $widget = null)
     {
         if ($type instanceof Event) {
-            $event = $type;
-            $type = $event->getType();
+            $event      = $type;
+            $type       = $event->getType();
+            $namespaces = $event->getNamespaces();
         } else {
-            if (isset($this->events[$type])) {
-                $event = $this->events[$type];
-            } else {
-                $event = $this->events[$type] = $this->event($type);
-            }
+            list($type, $namespaces) = $this->splitNamespace($type);
+            $event      = $this->event($type, $namespaces);
         }
         
-        $result = null;
+        $result     = null;
         
         // Prepend the event and widget manager object to the beginning of the arguments
         array_unshift($args, $event, $this->widget);
@@ -87,16 +78,18 @@ class EventManager extends WidgetProvider
             krsort($this->handlers[$type]);
             foreach ($this->handlers[$type] as $handlers) {
                 foreach ($handlers as $handler) {
-                    list($fn, $data) = $handler;
-                    $event->setData($data);
+                    if (!$namespaces || $namespaces == array_intersect($namespaces, $handler[2])) {
+                        list($fn, $data) = $handler;
+                        $event->setData($data);
 
-                    if (false === ($result = call_user_func_array($fn, $args))) {
-                        $event->preventDefault();
-                    }
-                    $event->setResult($result);
+                        if (false === ($result = call_user_func_array($fn, $args))) {
+                            $event->preventDefault();
+                        }
+                        $event->setResult($result);
 
-                    if ($event->isPropagationStopped()) {
-                        break 2;
+                        if ($event->isPropagationStopped()) {
+                            break 2;
+                        }
                     }
                 }
             }
@@ -111,7 +104,7 @@ class EventManager extends WidgetProvider
             }
         }
 
-        return $result;
+        return $event;
     }
 
     /**
@@ -119,7 +112,7 @@ class EventManager extends WidgetProvider
      *
      * @param  string       $type     The type of event
      * @param  mixed        $fn       The callbable struct
-     * @param  int          $priority The event priority
+     * @param  int|string   $priority The event priority, could be int or specify strings
      * @param array $data The data passed to the event object, when the handler is bound
      * @return \Widget\EventManager
      */
@@ -132,31 +125,43 @@ class EventManager extends WidgetProvider
         $priority = is_numeric($priority) ? $priority :
             isset($this->priorities[$priority]) ? $this->priorities[$priority] : 0;
 
-        $type = strtolower($type);
+        list($type, $namespaces) = $this->splitNamespace($type);
 
         if (!isset($this->handlers[$type])) {
             $this->handlers[$type] = array();
         }
-
-        $this->handlers[$type][$priority][] = array($fn, $data);
+ 
+        $this->handlers[$type][$priority][] = array($fn, $data, $namespaces);
 
         return $this;
     }
 
     /**
-     * Remove one or all handlers
+     * Remove handlers by given type
      *
-     * param string|null $type The type of event
+     * param string $type The type of event
      * @return \Widget\EventManager
      */
-    public function remove($type = null)
+    public function remove($type)
     {
-        if (null === $type) {
-            $this->handlers = array();
-        } else {
-            $type = strtolower($type);
-            if (isset($this->handlers[$type])) {
+        list($type, $namespaces) = $this->splitNamespace($type);
+
+        if ($type && isset($this->handlers[$type])) {
+            if (!$namespaces) {
                 unset($this->handlers[$type]);
+            } else {
+                foreach ($this->handlers[$type] as $i => $handlers) {
+                    foreach ($handlers as $j => $handler) {
+                        if ($namespaces == array_intersect($namespaces, $handler[2])) {
+                            unset($this->handlers[$type][$i][$j]);
+                        }
+                    }
+                }
+            }
+        // Unbind all event in namespace
+        } else {
+            foreach ($this->handlers as $type => $handlers) {
+                $this->remove($type . '.' . implode('.', $namespaces));
             }
         }
 
@@ -175,17 +180,6 @@ class EventManager extends WidgetProvider
     }
      
     /**
-     * Returns the event object storaged in the event manager
-     * 
-     * @param string $type
-     * @return \Widget\Event
-     */
-    public function getEvent($type)
-    {
-        return isset($this->events[$type]) ? $this->events[$type] : false;
-    }
-
-    /**
      * Init the internal event
      */
     protected function initInternalEvent()
@@ -200,11 +194,11 @@ class EventManager extends WidgetProvider
         // Assign the lambda function to the variable to avoid " Fatal error: Cannot destroy active lambda function"
         // Trigger the exception event
         $exceptionHandle = function($exception) use($that) {
-            $that('exception', array($exception));
+            $event = $that('exception', array($exception));
 
             restore_exception_handler();
 
-            if (!$that->getEvent('exception')->isDefaultPrevented()) {
+            if (!$event->isDefaultPrevented()) {
                 throw $exception;
             }
         };
@@ -216,6 +210,29 @@ class EventManager extends WidgetProvider
             $this->add('exception', function($event, $widget, $exception) use($prevHandle) {
                 call_user_func($prevHandle, $exception);
             });
+        }
+    }
+    
+    /**
+     * Returns the array with two elements, the first one is the event name and
+     * the second one is the event namespaces
+     * 
+     * @param string $type
+     * @return array
+     */
+    protected function splitNamespace($type)
+    {
+        $type = strtolower($type);
+        
+        if (false === ($pos = strpos($type, '.'))) {
+            return array($type, array());
+        } else {
+            $namespaces = array_unique(array_filter(explode('.', substr($type, $pos))));
+            sort($namespaces);
+            return array(
+                substr($type, 0, $pos),
+                $namespaces
+            );
         }
     }
 }
