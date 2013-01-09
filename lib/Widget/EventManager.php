@@ -175,10 +175,35 @@ class EventManager extends WidgetProvider
      *
      * @param  string $type
      * @return bool
+     * @todo add namespace support
      */
     public function has($type)
     {
-        return isset($this->handlers[$type]);
+        list($type, $namespaces) = $this->splitNamespace($type);
+        
+        if (!$namespaces) {
+            return isset($this->handlers[$type]);
+        } elseif (!$type) {
+            foreach ($this->handlers as $type => $handlers) {
+                if (true === $this->has($type . '.' . implode('.', $namespaces))) {
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            if (!isset($this->handlers[$type])) {
+                return false;
+            } else {
+                foreach ($this->handlers[$type] as $handlers) {
+                    foreach ($handlers as $handler) {
+                        if ($namespaces == array_intersect($namespaces, $handler[2])) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+        }
     }
      
     /**
