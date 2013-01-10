@@ -3,7 +3,7 @@
 /**
  * Widget Framework
  *
- * @copyright   Twin Huang Copyright (c) 2008-2012
+ * @copyright   Twin Huang Copyright (c) 2008-2013
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
 

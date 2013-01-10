@@ -3,7 +3,7 @@
 /**
  * Widget Framework
  *
- * @copyright   Copyright (c) 2008-2012 Twin Huang
+ * @copyright   Copyright (c) 2008-2013 Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
 
@@ -64,7 +64,7 @@ class Header extends ArrayWidget
      * @param  bool               $replace Whether replace the exists values or not, for set method only
      * @return mixed|\Widget\Header
      */
-    public function __invoke($name, $values, $replace = true)
+    public function __invoke($name, $values = null, $replace = true)
     {
         if (1 == func_num_args()) {
             return $this->get($name);

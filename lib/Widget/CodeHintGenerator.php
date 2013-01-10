@@ -2,7 +2,7 @@
 /**
  * Widget Framework
  *
- * @copyright   Copyright (c) 2008-2012 Twin Huang
+ * @copyright   Copyright (c) 2008-2013 Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
 
@@ -16,12 +16,32 @@ namespace Widget;
  */
 class CodeHintGenerator extends WidgetProvider
 {
-    protected $target = 'doc/qwin-code-hint.php';
+    /**
+     * The file to be saved
+     * 
+     * @var string
+     */
+    protected $target = 'doc/code-hint/widget.php';
     
+    /**
+     * The excluded widgets 
+     * 
+     * @var array
+     */
     protected $exclusions = array();
     
-    protected $withWidgetMap = false;
+    /**
+     * Whether include the widget alias or not
+     * 
+     * @var bool 
+     */
+    protected $withAlias = true;
 
+    /**
+     * The 
+     * 
+     * @var string
+     */
     protected $classTmpl =
 '<?php
 namespace Widget;
@@ -59,9 +79,9 @@ class Widget implements Widgetable
 
         $content = '';
 
-        // generate the custom widgets
-        if ($this->withWidgetMap) {
-            foreach ($this->widget->option('widgetMap') as $widget => $class) {
+        // Generate the custom widgets
+        if ($this->withAlias) {
+            foreach ($this->widget->option('alias') as $widget => $class) {
                 if ($this->isExcludeWidget($widget)) {
                     continue;
                 }
@@ -69,7 +89,7 @@ class Widget implements Widgetable
             }
         }
 
-        // generate the base widgets
+        // Generate the base widgets
         foreach (glob(__DIR__ . '/*.php') as $file) {
             $widget = basename($file, '.php');
 
@@ -80,7 +100,7 @@ class Widget implements Widgetable
             $content .= $this->generateWidgetCodeHint($widget, '\Widget\\' . $widget);
         }
 
-        // save file
+        // Save file
         $dir = dirname($this->target);
 
         if (!is_dir($dir)) {
@@ -128,7 +148,7 @@ class Widget implements Widgetable
     {
         $widgetName[0] = strtolower($widgetName[0]);
 
-        return $protityContent = sprintf($this->propertyTmpl, $widgetClass, $widgetName);
+        return sprintf($this->propertyTmpl, $widgetClass, $widgetName);
     }
 
     /**
