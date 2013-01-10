@@ -113,4 +113,23 @@ class IsTest extends TestCase
         
         $this->assertFalse($this->isPhone('123456'));
     }
+    
+    public function testIsTime()
+    {
+        $this->assertTrue($this->isTime('00:00:00'));
+        
+        $this->assertTrue($this->isTime('00:00'));
+        
+        $this->assertTrue($this->isTime('23:59:59'));
+        
+        $this->assertFalse($this->isTime('24:00:00'));
+        
+        $this->assertFalse($this->isTime('23:60:00'));
+        
+        $this->assertFalse($this->isTime('23:59:61'));
+        
+        $this->assertFalse($this->isTime('61:00'));
+        
+        $this->assertFalse($this->isTime('01:01:01:01'));
+    }
 }
