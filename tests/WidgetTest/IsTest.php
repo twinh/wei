@@ -16,4 +16,15 @@ class IsTest extends TestCase
         
         $this->assertFalse($this->isAlnum('-213a bcdefg'));
     }
+    
+    public function testIsAlpha()
+    {
+        $this->assertTrue($this->isAlpha('abcedfg'));
+        
+        $this->assertTrue($this->isAlpha('aBcDeFg'));
+        
+        $this->assertFalse($this->isAlpha('abcdefg1'));
+        
+        $this->assertFalse($this->isAlpha('a bcdefg'));
+    }
 }
