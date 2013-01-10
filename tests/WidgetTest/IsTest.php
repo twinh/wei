@@ -40,4 +40,19 @@ class IsTest extends TestCase
         
         $this->assertFalse($this->isDigit('string'));
     }
+    
+    public function testIsLength()
+    {
+        $this->assertTrue($this->isLength('length7', 7), 'Length is 7');
+
+        $this->assertTrue($this->isLength('length7', 0, 10), 'Length between 0 and 10, or said length less than 10');
+
+        $this->assertTrue($this->isLength('length7', 5, 0), 'Length greater than 5');
+
+        $this->assertFalse($this->isLength('length7', 0), 'Length is not 0');
+
+        $this->assertFalse($this->isLength('length7', -2, -1), 'Length should be positive, so always be false');
+
+        $this->assertFalse($this->isLength('length7', 10, 0), 'Length should not greater than 10');
+    }
 }
