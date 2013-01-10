@@ -9,6 +9,7 @@ class EventTest extends TestCase
      */
     protected $object;
     
+    protected $callback;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -27,17 +28,7 @@ class EventTest extends TestCase
     {
     }
     
-    /**
-     * @covers \Widget\EventManager::__construct
-     * @covers \Widget\EventManager::add
-     * @covers \Widget\EventManager::splitNamespace
-     * @covers \Widget\Event::__construct
-     * @covers \Widget\Event::getType
-     * @covers \Widget\Event::setType
-     * @covers \Widget\Event::setNamespaces
-     * @covers \Widget\Off::__invoke
-     * @covers \Widget\Trigger::__invoke
-     */
+
     public function testGeter()
     {
         $that = $this;
@@ -64,11 +55,6 @@ class EventTest extends TestCase
         $this->on('test', 'not callback');
     }
 
-    /**
-     * @covers \Widget\EventManager::__invoke
-     * @covers \Widget\Event::stopPropagation
-     * @covers \Widget\Event::isPropagationStopped
-     */
     public function testTriggerHandler()
     {
         $event = $this->off('test')
@@ -97,11 +83,22 @@ class EventTest extends TestCase
             })
             ->trigger('test');
         $this->assertEquals('first', $event->getResult());
+        
+        $this->fn = function(){
+            return false;
+        };
+        
+        $fixture = new \WidgetTest\Fixtures\WidgetWithCallbackEvent(array(
+            'widget' => $this->widget,
+            'callback' => function(){
+                return false;
+            }
+        ));
+        $event = $this->trigger('callback', array(), $fixture);
+        $this->assertEquals(false, $event->getResult());
     }
 
-    /**
-     * @covers \Widget\EventManager::has
-     */
+
     public function testHasHandler()
     {
         $fn = function(){};
@@ -128,9 +125,7 @@ class EventTest extends TestCase
         $this->assertFalse($em->has('test2.ns3'));
     }
     
-    /**
-     * @covers \Widget\EventManager::remove
-     */
+
     public function testRemoveHandler()
     {
         $that = $this;
@@ -165,5 +160,20 @@ class EventTest extends TestCase
         $this->assertFalse($em->has('test.ns1'));
         $this->assertFalse($em->has('test.ns1.ns2'));
         $init();
+    }
+
+    public function testGetterAndSetterInEvent()
+    {
+        $event = $this->event('test', array('ns1', 'ns2'));
+        
+        $this->assertEquals('ns1.ns2', $event->getNamespace());
+        
+        $this->assertEquals(false, $event->isDefaultPrevented());
+        
+        $this->assertEquals(true, $event->preventDefault()->isDefaultPrevented());
+        
+        $this->assertEquals(array(), $event->getData());
+        
+        $this->assertEquals(time(), (int)$event->getTimeStamp());
     }
 }
