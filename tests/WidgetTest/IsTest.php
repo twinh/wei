@@ -70,10 +70,22 @@ class IsTest extends TestCase
         foreach ($trues as $mobile) {
             $this->assertTrue($this->isMobile($mobile));
         }
-
         
         $this->assertFalse($this->isMobile('12000000000'));
 
         $this->assertFalse($this->isMobile('88888888'));
+    }
+    
+    public function testIsQQ()
+    {
+        $this->assertFalse($this->isQQ('1000'), 'Too short');
+
+        $this->assertFalse($this->isQQ('011111'), 'Should not start with zero');
+
+        $this->assertFalse($this->isQQ('011111'), 'Should not start with zero, even digits');
+
+        $this->assertFalse($this->isQQ('134.433'), 'Not digits');
+
+        $this->assertTrue($this->isQQ('1234567'));
     }
 }
