@@ -36,8 +36,8 @@ class EventTest extends TestCase
         $this->off('test')
             ->on('test.ns.ns2', function(\Widget\Event $event) use($that) {
                 $that->assertEquals('test', $event->getType());
-                $this->assertEquals('ns.ns2', $event->getNamespace());
-                $this->assertEquals(array('ns', 'ns2'), $event->getNamespaces());
+                $that->assertEquals('ns.ns2', $event->getNamespace());
+                $that->assertEquals(array('ns', 'ns2'), $event->getNamespaces());
             })
             ->trigger('test.ns.ns2');
             
