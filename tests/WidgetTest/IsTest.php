@@ -27,4 +27,17 @@ class IsTest extends TestCase
         
         $this->assertFalse($this->isAlpha('a bcdefg'));
     }
+    
+    public function testIsDigit()
+    {
+        $this->assertTrue($this->isDigit('123456'));
+        
+        $this->assertTrue($this->isDigit('0123456'));
+        
+        $this->assertFalse($this->isDigit('0.123'));
+        
+        $this->assertFalse($this->isDigit('1 23456'));
+        
+        $this->assertFalse($this->isDigit('string'));
+    }
 }
