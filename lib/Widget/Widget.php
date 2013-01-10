@@ -24,7 +24,7 @@ class Widget extends WidgetProvider
     /**
      * Version
      */
-    const VERSION = '0.9.0';
+    const VERSION = '0.9.1';
     
     /**
      * The instances of widget manager
@@ -315,6 +315,7 @@ class Widget extends WidgetProvider
             // Trigger the construct callback
             $this->construct && call_user_func($this->construct, $name, $full);
 
+            // FIXME widget option should be set first
             // Load the widget configuration
             $options = (array)$this->config($full);
             $options['widget'] = $this;
