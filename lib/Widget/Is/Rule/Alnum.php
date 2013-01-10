@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -17,7 +16,7 @@ use Widget\WidgetProvider;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class IsAlnum extends WidgetProvider
+class Alnum extends WidgetProvider
 {
     public function __invoke($value)
     {

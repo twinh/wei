@@ -17,6 +17,13 @@ class TestCase extends \PHPUnit_Framework_TestCase implements Widgetable
      * @var \Widget\WidgetProvider
      */
     protected $object;
+    
+    /**
+     * The widget manager
+     * 
+     * @var \Widget\Widget
+     */
+    protected $widget;
 
     /**
      * The widget name of current test case
