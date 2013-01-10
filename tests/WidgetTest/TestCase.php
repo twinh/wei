@@ -3,6 +3,7 @@
 namespace WidgetTest;
 
 use Widget\Widget;
+use Widget\Widgetable;
 
 /**
  * TestCase
@@ -10,7 +11,7 @@ use Widget\Widget;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class TestCase extends \PHPUnit_Framework_TestCase
+class TestCase extends \PHPUnit_Framework_TestCase implements Widgetable
 {
     /**
      * @var \Widget\WidgetProvider
@@ -23,6 +24,13 @@ class TestCase extends \PHPUnit_Framework_TestCase
      * @var string
      */
     protected $widgetName;
+    
+    public function __construct($name = NULL, array $data = array(), $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+        
+        $this->widget = Widget::create();
+    }
     
     /**
      * Get the widget name
@@ -48,7 +56,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = Widget::create()->{$this->getWidgetName()};
+        $this->object = $this->widget->{$this->getWidgetName()};
     }
 
     /**
@@ -58,5 +66,15 @@ class TestCase extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         Widget::create()->remove($this->getWidgetName());
+    }
+
+    public function __call($name, $args)
+    {
+        return $this->widget->invoke($name, $args);
+    }
+
+    public function __get($name)
+    {
+        return $this->widget->get($name);
     }
 }
