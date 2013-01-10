@@ -88,4 +88,11 @@ class IsTest extends TestCase
 
         $this->assertTrue($this->isQQ('1234567'));
     }
+    
+    public function testIsRegex()
+    {
+        $this->assertTrue($this->isRegex('This is Widget Framework.', '/widget/i'));
+        
+        $this->assertFalse($this->isRegex('This is Widget Framework.', '/that/i'));
+    }
 }
