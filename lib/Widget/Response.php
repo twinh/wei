@@ -2,7 +2,7 @@
 /**
  * Widget Library
  *
- * @copyright   Copyright (c) 2008-2012 Twin Huang
+ * @copyright   Copyright (c) 2008-2013 Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
 
