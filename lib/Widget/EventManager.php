@@ -181,28 +181,6 @@ class EventManager extends WidgetProvider
     {
         list($type, $namespaces) = $this->splitNamespace($type);
         
-        /*if ($type && isset($this->handlers[$type])) {
-            if (!$namespaces) {
-                return isset($this->handlers[$type]);
-            } else {
-                foreach ($this->handlers[$type] as $i => $handlers) {
-                    foreach ($handlers as $j => $handler) {
-                        if ($namespaces == array_intersect($namespaces, $handler[2])) {
-                            return true;
-                        }
-                    }
-                }
-                return false;
-            }
-        } else {
-            foreach ($this->handlers as $type => $handlers) {
-                if (true === $this->has($type . '.' . implode('.', $namespaces))) {
-                    return true;
-                }
-            }
-            return false;
-        }*/
-        
         if (!$namespaces) {
             return isset($this->handlers[$type]);
         } elseif (!$type) {
