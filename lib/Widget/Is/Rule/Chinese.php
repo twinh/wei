@@ -2,7 +2,7 @@
 
 /**
  * Widget Framework
- *
+ * 
  * @copyright   Copyright (c) 2008-2013 Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
@@ -10,17 +10,17 @@
 namespace Widget\Is\Rule;
 
 /**
- * IsEmail
+ * Check if the given string is a chinese word
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Email extends AbstractRule
-{
-    protected $message = 'The value should be valid email address';
 
+class Chinese
+{
     public function __invoke($value)
     {
-        return (bool) preg_match('/^[-a-zA-Z0-9_\.]+\@([0-9A-Za-z][0-9A-Za-z-]+\.)+[A-Za-z]{2,5}$/i', $value);
+        // todo
+        return (bool) preg_match('/^[\u4e00-\u9fa5]+$/', $value);
     }
 }

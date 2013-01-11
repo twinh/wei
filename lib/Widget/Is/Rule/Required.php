@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -9,18 +8,18 @@
 
 namespace Widget\Is\Rule;
 
+use Widget\WidgetProvider;
+
 /**
- * IsEmail
+ * Required
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Email extends AbstractRule
+class Required extends WidgetProvider
 {
-    protected $message = 'The value should be valid email address';
-
-    public function __invoke($value)
+    public function __invoke($data, $required = true)
     {
-        return (bool) preg_match('/^[-a-zA-Z0-9_\.]+\@([0-9A-Za-z][0-9A-Za-z-]+\.)+[A-Za-z]{2,5}$/i', $value);
+        return !$required || $data;
     }
 }

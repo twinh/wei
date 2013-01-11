@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -9,17 +8,16 @@
 
 namespace Widget\Is\Rule;
 
-use Widget\WidgetProvider;
-
-
 /**
- * IsPostcode
+ * The chinese postcode validate rule
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Postcode extends WidgetProvider
+class Postcode extends AbstractRule
 {
+    protected $message = 'The value should be six length of digital';
+    
     public function __invoke($data)
     {
         return (bool) preg_match('/^[1-9][\d]{5}$/', $data);
