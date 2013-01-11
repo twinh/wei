@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -9,15 +8,13 @@
 
 namespace Widget\Is\Rule;
 
-use Widget\WidgetProvider;
-
 /**
  * Mobile
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Mobile extends WidgetProvider
+class Mobile extends AbstractRule
 {
     public function __invoke($data)
     {

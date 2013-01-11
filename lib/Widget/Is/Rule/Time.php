@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  * 
@@ -15,7 +14,7 @@ namespace Widget\Is\Rule;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Time
+class Time extends AbstractRule
 {
     public function __invoke($value)
     {

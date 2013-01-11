@@ -8,15 +8,13 @@
 
 namespace Widget\Is\Rule;
 
-use Widget\WidgetProvider;
-
 /**
  * IsAlnum
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Alnum extends WidgetProvider
+class Alnum extends AbstractRule
 {
     public function __invoke($value)
     {

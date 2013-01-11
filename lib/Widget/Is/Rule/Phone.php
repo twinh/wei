@@ -14,7 +14,7 @@ namespace Widget\Is\Rule;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Phone
+class Phone extends AbstractRule
 {
     public function __invoke($value)
     {

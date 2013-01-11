@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -9,15 +8,13 @@
 
 namespace Widget\Is\Rule;
 
-use Widget\WidgetProvider;
-
 /**
  * IsEqual
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Equal extends WidgetProvider
+class Equal extends AbstractRule
 {
     public function __invoke($value, $mixed = null, $strict = false)
     {

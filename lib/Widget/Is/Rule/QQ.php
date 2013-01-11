@@ -8,15 +8,13 @@
 
 namespace Widget\Is\Rule;
 
-use Widget\WidgetProvider;
-
 /**
  * IsQQ
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class QQ extends WidgetProvider
+class QQ extends AbstractRule
 {
     public function __invoke($value)
     {

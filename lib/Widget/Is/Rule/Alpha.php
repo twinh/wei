@@ -8,15 +8,13 @@
 
 namespace Widget\Is\Rule;
 
-use Widget\WidgetProvider;
-
 /**
  * IsAlpha
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Alpha extends WidgetProvider
+class Alpha extends AbstractRule
 {
     public function __invoke($value)
     {

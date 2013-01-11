@@ -9,15 +9,13 @@
 
 namespace Widget\Is\Rule;
 
-use Widget\WidgetProvider;
-
 /**
  * Callback
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Callback extends WidgetProvider
+class Callback extends AbstractRule
 {
     public function __invoke($data, $fn)
     {

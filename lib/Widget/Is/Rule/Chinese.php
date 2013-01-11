@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  * 
@@ -15,12 +14,10 @@ namespace Widget\Is\Rule;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-
-class Chinese
+class Chinese extends AbstractRule
 {
     public function __invoke($value)
     {
-        // todo
         return (bool) preg_match('/^[\u4e00-\u9fa5]+$/', $value);
     }
 }

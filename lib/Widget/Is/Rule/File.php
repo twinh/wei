@@ -6,15 +6,15 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
 
-namespace Widget;
+namespace Widget\Is\Rule;
 
 /**
- * IsFile
+ * Check if file exists
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class IsFile extends WidgetProvider
+class File extends AbstractRule
 {
     /**
      * Determine the object source is a file path, check with the include_path.

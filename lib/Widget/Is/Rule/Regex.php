@@ -8,15 +8,13 @@
 
 namespace Widget\Is\Rule;
 
-use Widget\WidgetProvider;
-
 /**
  * Regex
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Regex extends WidgetProvider
+class Regex extends AbstractRule
 {
     public function __invoke($value, $x)
     {

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  * 
@@ -16,7 +15,7 @@ namespace Widget\Is\Rule;
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 
-class DoubleByte
+class DoubleByte extends AbstractRule
 {
     public function __invoke($value)
     {

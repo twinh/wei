@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -9,15 +8,13 @@
 
 namespace Widget\Is\Rule;
 
-use Widget\WidgetProvider;
-
 /**
  * IsLength
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Length extends WidgetProvider
+class Length extends AbstractRule
 {
     public function __invoke($data, $min, $max = null)
     {

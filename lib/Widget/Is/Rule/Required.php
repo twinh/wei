@@ -8,15 +8,13 @@
 
 namespace Widget\Is\Rule;
 
-use Widget\WidgetProvider;
-
 /**
  * Required
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Required extends WidgetProvider
+class Required extends AbstractRule
 {
     public function __invoke($data, $required = true)
     {
