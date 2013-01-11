@@ -16,7 +16,7 @@ namespace Widget\Is\Rule;
  */
 class Postcode extends AbstractRule
 {
-    protected $message = 'The value should be six length of digital';
+    protected $message = 'The value should be six length of digit';
     
     public function __invoke($data)
     {
