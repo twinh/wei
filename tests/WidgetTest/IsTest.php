@@ -132,4 +132,13 @@ class IsTest extends TestCase
         
         $this->assertFalse($this->isTime('01:01:01:01'));
     }
+    
+    public function testIsPostCode()
+    {
+        $this->assertTrue($this->isPostcode('123456'));
+        
+        $this->assertFalse($this->isPostcode('1234567'));
+        
+        $this->assertFalse($this->isPostcode('0234567'));
+    }
 }
