@@ -206,4 +206,23 @@ class IsTest extends TestCase
             }
         }
     }
+    
+    public function testIsDate()
+    {
+        $this->assertTrue($this->isDate('2013-01-13'));
+        
+        $this->assertTrue($this->isDate('1000-01-01'));
+        
+        $this->assertTrue($this->isDate('3000-01-01'));
+        
+        $this->assertTrue($this->isDate('2012-02-29'));
+        
+        $this->assertFalse($this->isDate('2013-02-29'));
+        
+        $this->assertFalse($this->isDate('2013-01-32'));
+        
+        $this->assertFalse($this->isDate('2013-00-00'));
+        
+        $this->assertFalse($this->isDate('2012'));
+    }
 }
