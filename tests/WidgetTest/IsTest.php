@@ -242,4 +242,39 @@ class IsTest extends TestCase
         
         $this->assertFalse($this->isDateTime('2012 61:00'));
     }
+    
+    public function testIsRange()
+    {
+        $this->assertTrue($this->isRange(20, 10, 30));
+        
+        $this->assertTrue($this->isRange('2013-01-13', '2013-01-01', '2013-01-31'));
+        
+        $this->assertTrue($this->isRange(1.5, 0.9, 3.2));
+        
+        $this->assertFalse($this->isRange(20, 30, 40));
+    }
+    
+    public function testValidator()
+    {
+        $this->assertTrue($this->is('digit', '123'));
+        
+        $this->assertFalse($this->is('digit', 'abc'));
+        
+        $result = $this->is(array(
+            'data' => array(
+                'email' => 'twinhuang@qq.com',
+                'age' => '5',
+            ),
+            'rules' => array(
+                'email' => array(
+                    'email' => true
+                ),
+                'age' => array(
+                    'digit' => true
+                ),
+            ),
+        ));
+        
+        $this->assertTrue($result);
+    }
 }
