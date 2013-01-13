@@ -14,7 +14,7 @@ namespace Widget\Is\Rule;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class IsExists extends AbstractRule
+class Exists extends AbstractRule
 {
     /**
      * Determine the object source is a file path, check with the include_path.
