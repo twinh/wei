@@ -9,6 +9,7 @@
 namespace Widget\Is\Rule;
 
 use Widget\WidgetProvider;
+use DateTime;
 
 
 /**
@@ -19,5 +20,16 @@ use Widget\WidgetProvider;
  */
 class Date extends WidgetProvider
 {
+    protected $format = 'Y-m-d';
     
+    public function __invoke($data)
+    {
+        $date = DateTime::createFromFormat($this->format, $data);
+        
+        if (false === $date) {
+            return false;
+        }
+
+        return $data === $date->format($this->format);
+    }
 }
