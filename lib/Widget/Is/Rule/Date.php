@@ -22,14 +22,10 @@ class Date extends WidgetProvider
 {
     protected $format = 'Y-m-d';
     
-    public function __invoke($data)
+    public function __invoke($value)
     {
-        $date = DateTime::createFromFormat($this->format, $data);
+        $date = DateTime::createFromFormat($this->format, $value);
         
-        if (false === $date) {
-            return false;
-        }
-
-        return $data === $date->format($this->format);
+        return $date ? $value === $date->format($this->format) : false;
     }
 }

@@ -26,10 +26,6 @@ class DateTime extends WidgetProvider
     {
         $date = Dt::createFromFormat($this->format, $value);
         
-        if (false === $date) {
-            return false;
-        }
-
-        return $value === $date->format($this->format);
+        return $date ? $value === $date->format($this->format) : false;
     }
 }
