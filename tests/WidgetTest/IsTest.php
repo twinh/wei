@@ -311,4 +311,92 @@ class IsTest extends TestCase
     {
         $this->is('notThisRule', 'test');
     }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testEmptyRuleException()
+    {
+        $this->is(array(
+            'rules' => array(),
+        ));
+    }
+    
+    public function testBreakOne()
+    {
+        $breakRule = '';
+        
+        $this->is(array(
+            'data' => array(
+                'email' => 'error-email',
+            ),
+            'rules' => array(
+                'email' => array(
+                    'length' => array(1, 3), // invalid
+                    'email' => true, // valid
+                ),
+            ),
+            'breakOne' => true,
+            'invalidatedOne' => function($field, $rule, $validator) use(&$breakRule) {
+                $breakRule = $rule;
+            }
+        ));
+        
+        $this->assertEquals('length', $breakRule);
+    }
+    
+    public function testReturnFalseInValidatedOneCallback()
+    {
+        $lastRule = '';
+        
+        $this->is(array(
+            'data' => array(
+                'email' => 'twinhuang@qq.com',
+            ),
+            'rules' => array(
+                'email' => array(
+                    'required' => true, //Aavoid automatic added 
+                    'email' => true, // Will not validate
+                ),
+            ),
+            'validatedOne' => function($field, $rule, $validator) use(&$lastRule) {
+                $lastRule = $rule;
+            
+                // Return false to break the validation flow
+                return false;
+            }
+        ));
+        
+        $this->assertEquals('required', $lastRule);
+    }
+    
+    public function testReturnFalseInValidatedCallback()
+    {
+        $lastField = '';
+        
+        $this->is(array(
+            'data' => array(
+                'email' => 'twinhuang@qq.com',
+                'age' => 5 
+            ),
+            'rules' => array(
+                // Will validate
+                'email' => array(
+                    'email' => true,
+                ),
+                // Will not validate
+                'age' => array(
+                    'range' => array(0, 150)
+                ),
+            ),
+            'validated' => function($field, $validator) use(&$lastField) {
+                $lastField = $field;
+            
+                // Return false to break the validation flow
+                return false;
+            }
+        ));
+        
+        $this->assertEquals('email', $lastField);
+    }
 }
