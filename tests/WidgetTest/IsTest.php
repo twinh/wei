@@ -270,11 +270,45 @@ class IsTest extends TestCase
                     'email' => true
                 ),
                 'age' => array(
-                    'digit' => true
+                    'digit' => true,
+                    'range' => array(1, 150)
                 ),
             ),
         ));
         
         $this->assertTrue($result);
+    }
+    
+    public function testOptionalField()
+    {
+        $result = $this->is(array(
+            'data' => array(
+                'email' => ''
+            ),
+            'rules' => array(
+                'email' => array(
+                    'required' => false,
+                    'email' => true,
+                )
+            ),
+        ));
+        
+        $this->assertTrue($result);
+    }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidArgument()
+    {
+        $this->is(new \stdClass());
+    }
+    
+    /**
+     * @expectedException \Widget\Exception
+     */
+    public function testRuleNotDefined()
+    {
+        $this->is('notThisRule', 'test');
     }
 }
