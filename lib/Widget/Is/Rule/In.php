@@ -1,0 +1,31 @@
+<?php
+/**
+ * Widget Framework
+ *
+ * @copyright   Copyright (c) 2008-2013 Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ */
+
+namespace Widget\Is\Rule;
+
+use InvalidArgumentException;
+
+/**
+ * Check if the data in array
+ *
+ * @package     Widget
+ * @author      Twin Huang <twinh@yahoo.cn>
+ */
+class In
+{
+    public function __invoke($data, $array, $strict = false)
+    {
+        if ($array instanceof \ArrayObject) {
+            $array = $array->getArrayCopy();
+        } elseif (!is_array($array)) {
+            throw new InvalidArgumentException(sprintf('Expected argument of type array or ArrayObject, %s given', gettype($value)));
+        }
+        
+        return in_array($data, $array, $strict);
+    }
+}
