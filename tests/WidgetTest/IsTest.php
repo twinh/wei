@@ -254,6 +254,25 @@ class IsTest extends TestCase
         $this->assertFalse($this->isRange(20, 30, 40));
     }
     
+    public function testIsIn()
+    {
+        $this->assertTrue($this->isIn('apple', array('apple', 'pear')));
+        
+        $this->assertTrue($this->isIn('apple', new \ArrayObject(array('apple', 'pear'))));
+        
+        $this->assertTrue($this->isIn('', array(null)));
+        
+        $this->assertFalse($this->isIn('', array(null), true));
+    }
+    
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testIsInException()
+    {
+        $this->isIn('apple', 'not array');
+    }
+    
     public function testValidator()
     {
         $this->assertTrue($this->is('digit', '123'));
