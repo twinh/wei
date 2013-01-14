@@ -23,7 +23,7 @@ class In
         if ($array instanceof \ArrayObject) {
             $array = $array->getArrayCopy();
         } elseif (!is_array($array)) {
-            throw new InvalidArgumentException(sprintf('Expected argument of type array or ArrayObject, %s given', gettype($value)));
+            throw new InvalidArgumentException(sprintf('Expected argument of type array or ArrayObject, %s given', gettype($array)));
         }
         
         return in_array($data, $array, $strict);
