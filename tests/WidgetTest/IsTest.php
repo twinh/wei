@@ -286,6 +286,19 @@ class IsTest extends TestCase
         $this->assertFalse($this->isEndsWith('ABC', 'c', true));
     }
     
+    public function testIsStartsWith()
+    {
+        $this->assertTrue($this->isStartsWith('abc', 'a'));
+        
+        $this->assertFalse($this->isStartsWith('abc', ''));
+        
+        $this->assertFalse($this->isStartsWith('abc', 'b'));
+        
+        $this->assertTrue($this->isStartsWith('ABC', 'A'));
+        
+        $this->assertFalse($this->isStartsWith('ABC', 'a', true));
+    }
+    
     public function testClosureAsParameter()
     {
         $this->assertTrue($this->is(function($data){
