@@ -273,6 +273,20 @@ class IsTest extends TestCase
         $this->isIn('apple', 'not array');
     }
     
+    public function testClosureAsParameter()
+    {
+        $this->assertTrue($this->is(function($data){
+            return 'abc' === $data;
+        }, 'abc'));
+        
+        $this->assertFalse($this->is(function(
+            $data, \Widget\Is\Rule\Callback $callback, \Widget\Widget $widget
+        ){
+            return false;
+        }, 'data'));
+    }
+        
+    
     public function testValidator()
     {
         $this->assertTrue($this->is('digit', '123'));
@@ -328,7 +342,7 @@ class IsTest extends TestCase
      */
     public function testRuleNotDefined()
     {
-        $this->is('notThisRule', 'test');
+        $this->is('noThisRule', 'test');
     }
     
     /**

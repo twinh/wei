@@ -19,6 +19,6 @@ class Callback extends AbstractRule
 {
     public function __invoke($data, $fn)
     {
-        return (bool) call_user_func($fn, $data);
+        return (bool) call_user_func($fn, $data, $this, $this->widget);
     }
 }

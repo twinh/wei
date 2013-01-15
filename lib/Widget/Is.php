@@ -11,6 +11,7 @@ namespace Widget;
 
 use Widget\Is\Validator;
 use InvalidArgumentException;
+use Closure;
 
 /**
  * Is
@@ -19,20 +20,8 @@ use InvalidArgumentException;
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Is extends WidgetProvider
-{
-    protected $internalValidators = array(
-        'array' => 'is_array',
-        'bool' => 'is_bool',
-        'int' => 'is_int',
-        'null' => 'is_null',
-        'numeric' => 'is_numeric',
-        'scalar' => 'is_scalar',
-        'string' => 'is_string',
-    );
-    
-    protected $rules = array(
-        'qq' => '\Widget\Is\Rule\QQ',
-    );
+{    
+    protected $rules = array();
     
     /**
      * The last validator object
@@ -79,7 +68,10 @@ class Is extends WidgetProvider
     public function __invoke($options = array(), $data = null)
     {
         switch (true) {
-            case is_string($options):
+            case $options instanceof Closure :
+                return $this->validateOne('callback', $data, array($options));
+
+            case is_string($options) :
                 $args = func_get_args();
                 array_shift($args);
                 return $this->validateOne($options, $data, $args);
@@ -87,6 +79,9 @@ class Is extends WidgetProvider
             case is_array($options):
                 $this->validator = new Validator;
                 return $this->validator->__invoke($options);
+                
+            
+                
 
             default:
                 throw new InvalidArgumentException('Parameter 1 shoud be string or array');
@@ -108,5 +103,10 @@ class Is extends WidgetProvider
         } else {
             return false;
         }
+    }
+    
+    public function addRule($rule)
+    {
+        
     }
 }
