@@ -80,11 +80,8 @@ class Is extends WidgetProvider
                 $this->validator = new Validator;
                 return $this->validator->__invoke($options);
                 
-            
-                
-
             default:
-                throw new InvalidArgumentException('Parameter 1 shoud be string or array');
+                throw new InvalidArgumentException('Parameter 1 shoud be string, array or closure');
         }
     }
 
