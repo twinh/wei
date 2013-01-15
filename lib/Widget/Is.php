@@ -20,9 +20,7 @@ use Closure;
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Is extends WidgetProvider
-{    
-    protected $rules = array();
-    
+{
     /**
      * The last validator object
      * 
@@ -59,7 +57,7 @@ class Is extends WidgetProvider
     /**
      * Validate data
      * 
-     * @param array|string $options
+     * @param array|string|Closure $options
      * @param array $data
      * @return bool
      * @throws \InvalidArgumentException
@@ -93,17 +91,10 @@ class Is extends WidgetProvider
      */
     public function hasRule($rule)
     {
-        if (isset($this->rules[$rule])) {
-            return $this->rules[$rule];
-        } elseif (class_exists($class = '\Widget\Is\Rule\\' . ucfirst($rule))) {
+        if (class_exists($class = '\Widget\Is\Rule\\' . ucfirst($rule))) {
             return $class;
         } else {
             return false;
         }
-    }
-    
-    public function addRule($rule)
-    {
-        
     }
 }
