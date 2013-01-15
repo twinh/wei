@@ -15,7 +15,7 @@ namespace Widget\Is\Rule;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class EndsWith 
+class EndsWith extends AbstractRule
 {
     public function __invoke($data, $findMe, $case = false)
     {
@@ -23,6 +23,6 @@ class EndsWith
         
         $fn = $case ? 'strrpos' : 'strripos';
         
-        return $pos === $fn($data, $findMe, 0);
+        return $pos === $fn($data, $findMe);
     }
 }

@@ -273,6 +273,19 @@ class IsTest extends TestCase
         $this->isIn('apple', 'not array');
     }
     
+    public function testIsEndsWith()
+    {
+        $this->assertTrue($this->isEndsWith('abc', 'c'));
+        
+        $this->assertFalse($this->isEndsWith('abc', ''));
+        
+        $this->assertFalse($this->isEndsWith('abc', 'b'));
+        
+        $this->assertTrue($this->isEndsWith('ABC', 'c'));
+        
+        $this->assertFalse($this->isEndsWith('ABC', 'c', true));
+    }
+    
     public function testClosureAsParameter()
     {
         $this->assertTrue($this->is(function($data){
