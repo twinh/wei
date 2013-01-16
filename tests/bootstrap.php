@@ -4,7 +4,7 @@ use Widget\Widget;
 
 require dirname(__DIR__) . '/lib/Widget/Widget.php';
 
-$widget = Widget::create(array(
+return Widget::create(array(
     'widget' => array(
         'inis' => array(
             'error_reporting' => -1,
