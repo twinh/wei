@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -12,7 +11,7 @@ namespace Widget;
 /**
  * Upload
  *
- * @package     Qwin
+ * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @todo        Use other various instead of global various $_FILES
  * @todo        Add service widget and extend it
@@ -162,7 +161,7 @@ class Upload extends WidgetProvider
             $this->setName(null);
         }
 
-        // Check if has file uploaded or file to large
+        // Check if has file uploaded or file too large
         if (!isset($files[$this->name])) {
             if (empty($files) && !$this->post->toArray()) {
                 return $this->result(static::ERR_POST_SIZE); 
