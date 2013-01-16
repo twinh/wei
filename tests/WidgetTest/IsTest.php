@@ -75,25 +75,7 @@ class IsTest extends TestCase
         
         $this->assertFalse($this->isRegex('This is Widget Framework.', '/that/i'));
     }
-    
-    public function testIsPhone()
-    {
-        $this->assertTrue($this->isPhone('020-1234567'));
-        
-        $this->assertTrue($this->isPhone('0768-123456789'));
-        
-        $this->assertFalse($this->isPhone('012345-1234567890'));
-        
-        $this->assertFalse($this->isPhone('010-1234567890'));
-        
-        // Phone number without city code
-        $this->assertTrue($this->isPhone('1234567'));
-        
-        $this->assertTrue($this->isPhone('123456789'));
-        
-        $this->assertFalse($this->isPhone('123456'));
-    }
-    
+
     public function testIsTime()
     {
         $this->assertTrue($this->isTime('00:00:00'));
