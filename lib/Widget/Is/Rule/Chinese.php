@@ -18,6 +18,6 @@ class Chinese extends AbstractRule
 {
     public function __invoke($value)
     {
-        return (bool) preg_match('/^[\u4e00-\u9fa5]+$/', $value);
+        return (bool) preg_match('/^[\x{4e00}-\x{9fa5}]+$/u', $value);
     }
 }
