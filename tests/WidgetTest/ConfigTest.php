@@ -9,20 +9,14 @@ class ConfigTest extends TestCase
      */
     protected $object;
 
-    /**
-     * @covers \Widget\Config::__invoke
-     */
-    public function test__invoke()
+    public function testConfig()
     {
-        $widget = $this->object;
+        $this->config('key', 'value');
 
-        $widget->config('key', 'value');
+        $this->assertEquals('value', $this->config('key'));
 
-        $this->assertEquals('value', $widget->config('key'));
+        $this->config('first/second', 'value2');
 
-        $widget->config('first/second', 'value2');
-
-        $this->assertEquals(array('second' => 'value2',), $widget->config('first'));
+        $this->assertEquals(array('second' => 'value2',), $this->config('first'));
     }
-
 }
