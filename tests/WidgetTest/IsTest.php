@@ -56,26 +56,6 @@ class IsTest extends TestCase
         $this->assertFalse($this->isLength('length7', 10, 0), 'Length should not greater than 10');
     }
     
-    public function testIsMobile()
-    {
-        $trues = array(
-            '13112345678',
-            '13612345678',
-            '13800138000',
-            '15012345678',
-            '15812345678',
-            '18812345678',
-        );
-        
-        foreach ($trues as $mobile) {
-            $this->assertTrue($this->isMobile($mobile));
-        }
-        
-        $this->assertFalse($this->isMobile('12000000000'));
-
-        $this->assertFalse($this->isMobile('88888888'));
-    }
-    
     public function testIsQQ()
     {
         $this->assertFalse($this->isQQ('1000'), 'Too short');
