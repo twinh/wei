@@ -25,9 +25,11 @@ class NewInstance extends WidgetProvider
      * @param string $configName The name of configuration
      * @return object
      */
-    public function __invoke($name, $configName)
+    public function __invoke($name, $configName = null)
     {
+        !$configName && $configName = $name;
         $name .= '.' . uniqid();
+        
         $this->widget->config($name, $this->config($configName));
         return $this->widget->get($name);
     }
