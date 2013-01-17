@@ -24,7 +24,7 @@ class Is extends WidgetProvider
     /**
      * The last validator object
      * 
-     * @var \Widget\Is\Validator
+     * @var \Widget\Validator\Validator
      */
     public $validator;
     
