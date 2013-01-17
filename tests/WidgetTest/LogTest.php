@@ -124,11 +124,9 @@ class LogTest extends TestCase
     {
         $logger = $this->object;
 
-        $format = $logger->option('fileFormat');
+        $file = $logger->getFile();
 
-        $file = $logger->option('file');
-
-        $logger->option('fileFormat', 'newfile.log');
+        $logger->setfileFormat('newfile.log');
 
         $logger->debug(__METHOD__);
 
@@ -146,8 +144,6 @@ class LogTest extends TestCase
         $logger->debug(__METHOD__);
 
         $oldFile = $logger->option('file');
-
-        $size = $logger->option('fileSize');
 
         // always create new file
         $logger->option('fileSize', 1);
