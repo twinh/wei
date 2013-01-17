@@ -22,6 +22,7 @@ interface Viewable
      *
      * @param string $name    The name of template
      * @param array  $context The variables pass to template
+     * @return string|null
      */
     public function render($name, $context = array());
 
@@ -30,6 +31,7 @@ interface Viewable
      *
      * @param string $name    The name of template
      * @param array  $context The variables pass to template
+     * @return void
      */
     public function display($name, $context = array());
 
@@ -38,9 +40,10 @@ interface Viewable
      *
      * @param string $name  The name of the variable
      * @param mixed  $value The value of the variable
+     * @return View|null
      */
     public function assign($name, $value = null);
-    
+
     /**
      * Get default template file extension, for automatic render template only
      */

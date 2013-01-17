@@ -24,23 +24,23 @@ abstract class WidgetProvider implements Widgetable
 {
     /**
      * The default dependence map
-     * 
+     *
      * @var array
      */
     protected $deps = array();
-    
+
     /**
      * The widget manager object
-     * 
+     *
      * @var \Widget\Widget
      */
     protected $widget;
-    
+
     /**
      * Constructor
      *
      * @param  array        $options The property options
-     * @return \Widget\WidgetProvider
+     * @return void
      */
     public function __construct(array $options = array())
     {
@@ -52,12 +52,12 @@ abstract class WidgetProvider implements Widgetable
             throw new \InvalidArgumentException('Option "widget" should be an instance of "' . __CLASS__ . '"');
         }
     }
-    
+
     /**
      * Get or set property value
      *
      * @param  mixed $name  The option name or options array
-     * @param  mixed $value 
+     * @param  mixed $value
      * @return mixed
      * @example $widget->option('name');            // Get "name" option's value
      *          $widget->option('name', 'value');   // Set "name" to "value"
@@ -100,9 +100,9 @@ abstract class WidgetProvider implements Widgetable
         if (null === $name) {
             return get_object_vars($this);
         }
-        
+
         throw new \InvalidArgumentException(sprintf(
-            'Parameter 1 for option method should be string, array or null, %s given', 
+            'Parameter 1 for option method should be string, array or null, %s given',
             (is_object($name) ? get_class($name) : gettype($name))
         ));
     }
@@ -114,7 +114,7 @@ abstract class WidgetProvider implements Widgetable
     {
         return call_user_func_array($this->$name, $args);
     }
-    
+
     /**
      * {@inheritdoc}
      */

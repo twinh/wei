@@ -2,7 +2,7 @@
 
 /**
  * Widget Framework
- * 
+ *
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
@@ -19,7 +19,7 @@ class Escape extends WidgetProvider
 {
     /**
      * Escapes special characters for safe ouput
-     * 
+     *
      * @param string $data
      * @param string $type
      * @param string $charset
@@ -30,7 +30,7 @@ class Escape extends WidgetProvider
         switch ($type) {
             case 'js':
                 return $this->js($data);
-                
+
             case 'html':
             default:
                 return $this->html($data, $charset);
@@ -39,7 +39,7 @@ class Escape extends WidgetProvider
 
     /**
      * Escapes html data
-     * 
+     *
      * @param string $data
      * @param string $charset
      * @return string
@@ -51,7 +51,7 @@ class Escape extends WidgetProvider
 
     /**
      * Escapes javascript string
-     * 
+     *
      * @param string $data
      * @return string
      */
@@ -66,4 +66,3 @@ class Escape extends WidgetProvider
         ));
     }
 }
-

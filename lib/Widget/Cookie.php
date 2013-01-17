@@ -57,7 +57,7 @@ class Cookie extends Parameter
      * @param  string       $key     the name of cookie
      * @param  mixed        $value   the value of cookie
      * @param  array        $options options for set cookie
-     * @return \Widget\Cookie
+     * @return mixed
      */
     public function __invoke($key, $value = null, array $options = array())
     {
@@ -86,7 +86,7 @@ class Cookie extends Parameter
      * @param  string       $key     The name of cookie
      * @param  mixed        $value   The value of cookie
      * @param  array        $options
-     * @return \Widget\Cookie
+     * @return Cookie
      */
     public function set($key, $value = null, array $options = array())
     {
@@ -123,7 +123,7 @@ class Cookie extends Parameter
      * Remove cookie
      *
      * @param  string       $key the name of cookie
-     * @return \Widget\Cookie
+     * @return Cookie
      */
     public function offsetUnset($key)
     {
@@ -133,7 +133,7 @@ class Cookie extends Parameter
     /**
      * Send cookie to header
      *
-     * @return \Widget\Cookie
+     * @return Cookie
      */
     public function send()
     {

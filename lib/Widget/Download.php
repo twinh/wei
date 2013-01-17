@@ -20,31 +20,31 @@ class Download extends WidgetProvider
 {
     /**
      * The http content type
-     * 
+     *
      * @var string
      */
     protected $type;
-    
+
     /**
      * Download a file form server
-     * 
+     *
      * @param string $file The file path
      * @param array $options The property options
-     * @return \Widget\Download The current object
+     * @return Download The current object
      * @throws \Widget\Exception When file not found
      */
     public function __invoke($file, array $options = array())
     {
         $this->option($options);
-        
+
         $header = $this->header;
-        
+
         if (!is_file($file)) {
             throw new Exception('File not found');
         }
 
         $header('Content-Description', 'File Transfer');
-        
+
         if ($this->type) {
             $header('Content-Type', $this->type);
         }
@@ -57,11 +57,11 @@ class Download extends WidgetProvider
         $header('Cache-Control', 'must-revalidate');
         $header('Pragma', 'public');
         $header('Content-Length', filesize($file));
-        
+
         $this->response->send();
-        
+
         readfile($file);
-        
+
         return $this;
     }
 }

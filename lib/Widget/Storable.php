@@ -25,7 +25,7 @@ interface Storable
      * @return mixed
      */
     public function __invoke($key, $value = null, $expire = 0);
-    
+
     /**
      * Get cache
      *
@@ -40,6 +40,7 @@ interface Storable
      * @param  string $key    The name of cache
      * @param  value  $value  The value of cache
      * @param  int    $expire The expire time, 0 means never expired
+     * @param array $options
      * @return bool
      */
     public function set($key, $value, $expire = 0, array $options = array());
@@ -58,6 +59,7 @@ interface Storable
      * @param  string $key    The name of cache
      * @param  mixed  $value  The value of cache
      * @param  int    $expire The expire time (seconds)
+     * @param array $options
      * @return bool
      */
     public function add($key, $value, $expire = 0, array $options = array());
@@ -68,6 +70,7 @@ interface Storable
      * @param  string $key    The name of cache
      * @param  mixed  $value  The value of cache
      * @param  int    $expire The expire time
+     * @param array $options
      * @return bool
      */
     public function replace($key, $value, $expire = 0, array $options = array());

@@ -13,7 +13,7 @@ class MobileTest extends TestCase
     {
         $this->assertTrue($this->isMobile($input));
     }
-    
+
     /**
      * @dataProvider providerForNotMobile
      */
@@ -21,7 +21,7 @@ class MobileTest extends TestCase
     {
         $this->assertFalse($this->isMobile($input));
     }
-    
+
     public function providerForMobile()
     {
         return array(
@@ -33,7 +33,7 @@ class MobileTest extends TestCase
             array('18812345678'),
         );
     }
-    
+
     public function providerForNotMobile()
     {
         return array(

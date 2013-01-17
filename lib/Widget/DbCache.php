@@ -21,28 +21,28 @@ class DbCache extends WidgetProvider implements Storable
 {
     /**
      * The cache table name
-     * 
+     *
      * @var string
      */
     protected $table = 'cache';
-    
+
     /**
      * The database username
-     * 
+     *
      * @var string
      */
     protected $user;
-    
+
     /**
      * The database password
-     * 
+     *
      * @var string
      */
     protected $password;
-    
+
     /**
      * The dsn parameter for PDO constructor
-     * 
+     *
      * @var string
      */
     protected $dsn = 'sqlite:cache.sqlite';
@@ -77,19 +77,19 @@ class DbCache extends WidgetProvider implements Storable
 
     /**
      * Constructor
-     * 
+     *
      * @param array $options
      */
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-        
+
         $this->connect();
     }
-    
+
     /**
      * Connect the database
-     * 
+     *
      * @throws \Widget\Exception When driver not support
      */
     public function connect()
@@ -99,7 +99,7 @@ class DbCache extends WidgetProvider implements Storable
             $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->dbh->setAttribute(PDO::ATTR_STRINGIFY_FETCHES, true);
         }
-        
+
         // Get driver and load sql queries
         $driver = $this->dbh->getAttribute(PDO::ATTR_DRIVER_NAME);
         $class = 'Widget\DbCache\\' . ucfirst($driver);
@@ -158,6 +158,7 @@ class DbCache extends WidgetProvider implements Storable
 
     /**
      * {@inheritdoc}
+     * @param array $options
      */
     public function set($key, $value, $expire = 0, array $options = array())
     {
@@ -187,6 +188,7 @@ class DbCache extends WidgetProvider implements Storable
 
     /**
      * {@inheritdoc}
+     * @param array $options
      */
     public function add($key, $value, $expire = 0, array $options = array())
     {
@@ -206,6 +208,7 @@ class DbCache extends WidgetProvider implements Storable
 
     /**
      * {@inheritdoc}
+     * @param array $options
      */
     public function replace($key, $value, $expire = 0, array $options = array())
     {
@@ -291,7 +294,7 @@ class DbCache extends WidgetProvider implements Storable
     /**
      * Get last PDOStatement object
      *
-     * @return PDOStatement
+     * @return \PDOStatement
      */
     public function getStmt()
     {
@@ -301,7 +304,7 @@ class DbCache extends WidgetProvider implements Storable
     /**
      * Get current database cache driver
      *
-     * @return Widget_DbCache_Driver
+     * @return object
      */
     public function getDriver()
     {

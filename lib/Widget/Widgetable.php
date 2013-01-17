@@ -20,7 +20,7 @@ interface Widgetable
      * Get the widget object by the given name
      *
      * @param  string       $name The name of widget
-     * @return \Widget\Widget
+     * @return Widget
      */
     public function __get($name);
 
@@ -35,9 +35,9 @@ interface Widgetable
 
     /**
      * Invoke the current widget
-     * 
+     *
      * The method __invoke should be implemented by subclasses, the comment here
-     * is to avoid "Fatal error: Declaration of xxx::__invoke() must be 
+     * is to avoid "Fatal error: Declaration of xxx::__invoke() must be
      * compatible with that of Widget\Widgetable::__invoke() in xxx", because
      * php does NOT accept dynamic arguments in magic method __invoke
      */

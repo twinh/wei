@@ -29,7 +29,7 @@ class Tmpl extends WidgetProvider
         'start' => '<!-- START %s:%s -->',
         'end'   => '<!-- END %s:%s -->',
     );
-    
+
     /**
      * The name of the template
      *
@@ -88,7 +88,7 @@ class Tmpl extends WidgetProvider
      * Render the template
      *
      * @param  array  $context The variables pass to the template
-     * @return string The rendered content
+     * @return string|null The rendered content
      * @todo check block stack
      */
     public function render($context = array())
@@ -138,7 +138,7 @@ class Tmpl extends WidgetProvider
      * Check if the template has layout
      *
      * @param  string $name The name of the template
-     * @return boolen
+     * @return boolean
      */
     protected function hasLayout($name)
     {
@@ -233,6 +233,7 @@ class Tmpl extends WidgetProvider
 
     /**
      * @see \Widget\Tmpl::render
+     * @param array $context
      */
     public function display($context = array())
     {
@@ -288,6 +289,7 @@ class Tmpl extends WidgetProvider
      *
      * @param string $name The name of template
      * @param  $context The variables pass to the template
+     * @param array $context
      * @return mixed
      * @todo context scope
      */
@@ -317,14 +319,14 @@ class Tmpl extends WidgetProvider
      * Load a templace block
      *
      * @param string     $name
-     * @param int|string $level
+     * @param integer $level
      * @todo refact placeholders
      */
     protected function load($name, $level = 0)
     {
         // todo
     }
-    
+
     public function __invoke()
     {
         return $this;

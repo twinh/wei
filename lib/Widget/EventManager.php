@@ -24,10 +24,10 @@ class EventManager extends WidgetProvider
      * @var array
      */
     protected $handlers = array();
-    
+
     /**
      * The priorities text map
-     * 
+     *
      * @var array
      */
     protected $priorities = array(
@@ -38,7 +38,7 @@ class EventManager extends WidgetProvider
 
     /**
      * Constructor
-     * 
+     *
      * @param array $options
      */
     public function __construct(array $options = array())
@@ -52,11 +52,11 @@ class EventManager extends WidgetProvider
      * Trigger a event
      *
      * @param  string $type The name of event or the Event object
-     * @param  mixed $args The arguments pass to the handle
-     * @param \Widget\Widgetable $widget If the widget contains the $type 
-     *                                   property, the event manager will 
+     * @param  array $args The arguments pass to the handle
+     * @param null|Widgetable $widget If the widget contains the $type
+     *                                   property, the event manager will
      *                                   trigger it too
-     * @return mixed The result returned by the last handle
+     * @return Event The result returned by the last handle
      */
     public function __invoke($type, $args = array(), Widgetable $widget = null)
     {
@@ -72,7 +72,7 @@ class EventManager extends WidgetProvider
                 'namespaces'    => $namespaces,
             ));
         }
-        
+
         // Prepend the event and widget manager object to the beginning of the arguments
         array_unshift($args, $event, $this->widget);
 
@@ -96,7 +96,7 @@ class EventManager extends WidgetProvider
                 }
             }
         }
-        
+
         if ($widget && $selfEvent = $widget->option($type)) {
             if (is_callable($selfEvent)) {
                 if (false === ($result = call_user_func_array($selfEvent, $args))) {
@@ -114,16 +114,16 @@ class EventManager extends WidgetProvider
      *
      * @param  string       $type     The type of event
      * @param  mixed        $fn       The callbable struct
-     * @param  int|string   $priority The event priority, could be int or specify strings
+     * @param  integer   $priority The event priority, could be int or specify strings
      * @param array $data The data passed to the event object, when the handler is bound
-     * @return \Widget\EventManager
+     * @return EventManager
      */
     public function add($type, $fn, $priority = 0, $data = array())
     {
         if (!is_callable($fn)) {
             throw new Exception('Parameter 2 should be a valid callback');
         }
-        
+
         $priority = is_numeric($priority) ? $priority :
             isset($this->priorities[$priority]) ? $this->priorities[$priority] : 0;
 
@@ -132,7 +132,7 @@ class EventManager extends WidgetProvider
         if (!isset($this->handlers[$type])) {
             $this->handlers[$type] = array();
         }
- 
+
         $this->handlers[$type][$priority][] = array($fn, $data, $namespaces);
 
         return $this;
@@ -142,7 +142,7 @@ class EventManager extends WidgetProvider
      * Remove handlers by given type
      *
      * param string $type The type of event
-     * @return \Widget\EventManager
+     * @return EventManager
      */
     public function remove($type)
     {
@@ -180,7 +180,7 @@ class EventManager extends WidgetProvider
     public function has($type)
     {
         list($type, $namespaces) = $this->splitNamespace($type);
-        
+
         if (!$namespaces) {
             return isset($this->handlers[$type]);
         } elseif (!$type) {
@@ -205,10 +205,10 @@ class EventManager extends WidgetProvider
             }
         }
     }
-     
+
     /**
      * Register the internal event
-     * 
+     *
      * @codeCoverageIgnore
      */
     protected function registerInternalEvent()
@@ -219,7 +219,7 @@ class EventManager extends WidgetProvider
         register_shutdown_function(function() use($that) {
             $that('shutdown');
         });
-        
+
         // Assign the lambda function to the variable to avoid " Fatal error: Cannot destroy active lambda function"
         // Trigger the exception event
         $exceptionHandle = function($exception) use($that) {
@@ -231,16 +231,16 @@ class EventManager extends WidgetProvider
                 throw $exception;
             }
         };
-        
+
         $prevHandle = set_exception_handler($exceptionHandle);
-  
+
         // If setted the previous handle, bind it agian
         if ($prevHandle) {
             $this->add('exception', function($event, $widget, $exception) use($prevHandle) {
                 call_user_func($prevHandle, $exception);
             });
         }
-        
+
         // Trigger the widget manager's construct and construct event
         $this->widget->option(array(
             'construct' => function ($name, $full) use($that) {
@@ -251,18 +251,18 @@ class EventManager extends WidgetProvider
             }
         ));
     }
-    
+
     /**
      * Returns the array with two elements, the first one is the event name and
      * the second one is the event namespaces
-     * 
+     *
      * @param string $type
-     * @return array
+     * @return array<string|array>
      */
     protected function splitNamespace($type)
     {
         $type = strtolower($type);
-        
+
         if (false === ($pos = strpos($type, '.'))) {
             return array($type, array());
         } else {

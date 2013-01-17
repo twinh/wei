@@ -13,7 +13,7 @@ class PhoneTest extends TestCase
     {
         $this->assertTrue($this->isPhone($input));
     }
-    
+
     /**
      * @dataProvider providerForNotPhone
      */
@@ -21,7 +21,7 @@ class PhoneTest extends TestCase
     {
         $this->assertFalse($this->isPhone($input));
     }
-    
+
     public function providerForPhone()
     {
         return array(

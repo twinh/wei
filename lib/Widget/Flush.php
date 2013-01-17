@@ -55,7 +55,7 @@ class Flush extends WidgetProvider
      *
      * @param  string     $content the content flushes to the browser
      * @param  int        $sleep   the second to sleep
-     * @return Widget_Flush
+     * @return Flush
      */
     public function __invoke($content, $sleep = 0)
     {

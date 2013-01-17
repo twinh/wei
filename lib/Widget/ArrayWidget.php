@@ -23,7 +23,7 @@ class ArrayWidget extends WidgetProvider implements \ArrayAccess, \Countable, \I
      * @var array
      */
     protected $data = array();
-    
+
     /**
      * Returns a parameter value
      *
@@ -83,7 +83,7 @@ class ArrayWidget extends WidgetProvider implements \ArrayAccess, \Countable, \I
      * Merge data from array
      *
      * @param  array            $array
-     * @return Widget_ArrayWidget
+     * @return ArrayWidget
      */
     public function fromArray(array $array = array())
     {
@@ -121,11 +121,11 @@ class ArrayWidget extends WidgetProvider implements \ArrayAccess, \Countable, \I
     {
         return new \ArrayIterator($this->data);
     }
-    
+
     /**
      * Returns the data keys.
-     * 
-     * @return array
+     *
+     * @return array<integer|string>
      */
     public function keys()
     {

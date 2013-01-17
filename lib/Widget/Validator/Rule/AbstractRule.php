@@ -13,16 +13,16 @@ use Widget\WidgetProvider;
 abstract class AbstractRule extends WidgetProvider
 {
     protected $message;
-    
+
     public function getMessage()
     {
         return $this->message;
     }
-    
+
     public function setMessage($message)
     {
         $this->message = $message;
-        
+
         return $this;
     }
 }

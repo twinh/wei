@@ -2,7 +2,7 @@
 
 /**
  * Widget Framework
- * 
+ *
  * @copyright   Copyright (c) 2008-2013 Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
@@ -23,11 +23,15 @@ class Is extends WidgetProvider
 {
     /**
      * The last validator object
-     * 
+     *
      * @var \Widget\Validator\Validator
      */
     public $validator;
-    
+
+    /**
+     * @param string $rule
+     * @param array|null $data
+     */
     public function validateOne($rule, $data, $options = array())
     {
         if (!$class = $this->hasRule($rule)) {
@@ -56,10 +60,10 @@ class Is extends WidgetProvider
 
     /**
      * Validate data
-     * 
-     * @param array|string|Closure $options
-     * @param array $data
-     * @return bool
+     *
+     * @param array $options
+     * @param array|null $data
+     * @return mixed
      * @throws \InvalidArgumentException
      * @example $this->is('rule', $data) Validate by one rule
      */
@@ -73,11 +77,11 @@ class Is extends WidgetProvider
                 $args = func_get_args();
                 array_shift($args);
                 return $this->validateOne($options, $data, $args);
-                
+
             case is_array($options):
                 $this->validator = new Validator;
                 return $this->validator->__invoke($options);
-                
+
             default:
                 throw new InvalidArgumentException('Parameter 1 shoud be string, array or closure');
         }
@@ -85,9 +89,9 @@ class Is extends WidgetProvider
 
     /**
      * Check if the validate rule exists
-     * 
+     *
      * @param string $rule
-     * @return string|boolean
+     * @return string|false
      */
     public function hasRule($rule)
     {

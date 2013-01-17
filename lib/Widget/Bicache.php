@@ -20,17 +20,17 @@ namespace Widget;
 class Bicache extends WidgetProvider implements Storable
 {
     /**
-     * @var array 
+     * @var array
      */
     protected $deps = array(
         'master' => 'memcache',
         'slave' => 'fcache',
     );
-    
+
     /**
      * The seconds to update the slave cache
-     * 
-     * @var int 
+     *
+     * @var int
      */
     protected $time = 5;
 
@@ -50,6 +50,7 @@ class Bicache extends WidgetProvider implements Storable
 
     /**
      * {@inheritdoc}
+     * @param array $options
      */
     public function set($key, $value, $expire = 0, array $options = array())
     {
@@ -64,6 +65,7 @@ class Bicache extends WidgetProvider implements Storable
 
     /**
      * {@inheritdoc}
+     * @param array $options
      */
     public function add($key, $value, $expire = 0, array $options = array())
     {
@@ -107,6 +109,7 @@ class Bicache extends WidgetProvider implements Storable
 
     /**
      * {@inheritdoc}
+     * @param array $options
      */
     public function replace($key, $value, $expire = 0, array $options = array())
     {

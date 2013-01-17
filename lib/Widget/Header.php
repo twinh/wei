@@ -60,7 +60,7 @@ class Header extends ArrayWidget
      * Get or set the header values
      *
      * @param  string             $name    The header name
-     * @param  string|array       $values  The header values, for set method only
+     * @param  string|array|null       $values  The header values, for set method only
      * @param  bool               $replace Whether replace the exists values or not, for set method only
      * @return mixed|\Widget\Header
      */
@@ -79,7 +79,7 @@ class Header extends ArrayWidget
      * @param  string       $name    The header name
      * @param  string|array $values  The header values
      * @param  bool         $replace Whether replace the exists values or not
-     * @return \Widget\Header
+     * @return Header
      */
     public function set($name, $values, $replace = true)
     {
@@ -119,8 +119,8 @@ class Header extends ArrayWidget
      * Set the header status code
      *
      * @param  int          $code The status code
-     * @param  string       $text The status text
-     * @return \Widget\Header
+     * @param  string|null       $text The status text
+     * @return Header
      */
     public function setStatusCode($code, $text = null)
     {
@@ -149,7 +149,7 @@ class Header extends ArrayWidget
      * Set the http version
      *
      * @param  string       $version The http version
-     * @return \Widget\Header
+     * @return Header
      */
     public function setVersion($version)
     {
@@ -171,7 +171,7 @@ class Header extends ArrayWidget
     /**
      * Send headers, including http status, raw headers and cookie
      *
-     * @return boolean|\Widget\Header
+     * @return false|Header
      */
     public function send()
     {

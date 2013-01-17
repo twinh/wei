@@ -39,7 +39,7 @@ abstract class AbstractMessage implements MessageInterface
     public function setMessage($name, $data)
     {
         $this->messages[$name] = $data;
-        
+
         return $this;
     }
 
@@ -49,7 +49,7 @@ abstract class AbstractMessage implements MessageInterface
     public function setMessages($messages)
     {
         $this->messages = $messages;
-        
+
         return $this;
     }
 }
