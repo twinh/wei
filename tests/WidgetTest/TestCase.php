@@ -63,8 +63,18 @@ class TestCase extends \PHPUnit_Framework_TestCase implements Widgetable
      */
     protected function setUp()
     {
-        if ($this->widget->has($this->getWidgetName())) {
-            $this->object = $this->widget->{$this->getWidgetName()};
+        $widget = $this->widget;
+        $name = $this->getWidgetName();
+        
+        if ($widget->has($name)) {
+            // Removed
+            $widget->remove($name);
+            if (isset($widget->{$name})) {
+                unset($widget->{$name});
+            }
+            
+            // Reinstance
+            $this->object = $widget->{$name};
         }
     }
 
@@ -74,6 +84,9 @@ class TestCase extends \PHPUnit_Framework_TestCase implements Widgetable
      */
     protected function tearDown()
     {
+        $widget = $this->widget;
+        $name = $this->getWidgetName();
+
         foreach (get_object_vars($this) as $name => $property) {
             // Preserve the widget manager
             if ('widget' == $name) {
@@ -83,12 +96,18 @@ class TestCase extends \PHPUnit_Framework_TestCase implements Widgetable
             // Remove all widget instanlled by current test object
             if ($property instanceof \Widget\WidgetProvider) {
                 unset($this->$name);
-                $this->widget->remove($name);
+                $widget->remove($name);
             }
         }
+        
+        unset($this->object);
 
         // Remove $this->object
-        $this->widget->remove($this->getWidgetName());
+        $widget->remove($name);
+        
+        if (isset($widget->{$name})) {
+            unset($widget->{$name});
+        } 
     }
 
     public function __call($name, $args)

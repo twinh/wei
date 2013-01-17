@@ -4,14 +4,6 @@ namespace WidgetTest;
 
 class LogTest extends TestCase
 {
-    protected function setUp()
-    {
-        $this->object = new \Widget\Log(array(
-            'widget' => $this->widget
-        ));
-        //parent::setUp();
-    }
-
     protected function tearDown()
     {
         $this->object->clean();
@@ -21,7 +13,7 @@ class LogTest extends TestCase
             rmdir($dir);
         }
         
-        //parent::tearDown();
+        parent::tearDown();
     }
 
     public function testLog()
@@ -86,7 +78,7 @@ class LogTest extends TestCase
         $logger = $this->object;
         
         $logger->option('level', 'debug');
-            
+
         $logger->debug(__METHOD__);
 
         $file = $logger->option('file');
