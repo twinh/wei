@@ -268,7 +268,7 @@ class IsTest extends TestCase
         }, 'abc'));
         
         $this->assertFalse($this->is(function(
-            $data, \Widget\Is\Rule\Callback $callback, \Widget\Widget $widget
+            $data, \Widget\Validator\Rule\Callback $callback, \Widget\Widget $widget
         ){
             return false;
         }, 'data'));

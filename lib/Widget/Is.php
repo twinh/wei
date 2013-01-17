@@ -9,7 +9,7 @@
 
 namespace Widget;
 
-use Widget\Is\Validator;
+use Widget\Validator\Validator;
 use InvalidArgumentException;
 use Closure;
 
@@ -91,7 +91,7 @@ class Is extends WidgetProvider
      */
     public function hasRule($rule)
     {
-        if (class_exists($class = '\Widget\Is\Rule\\' . ucfirst($rule))) {
+        if (class_exists($class = '\Widget\Validator\Rule\\' . ucfirst($rule))) {
             return $class;
         } else {
             return false;
