@@ -18,59 +18,59 @@ use Monolog\Logger;
  */
 class Monolog extends WidgetProvider
 {
-    public $options = array(
-        'name' => null,
-        'level' => Logger::DEBUG,
-        'handlers' => array(),
-    );
+    protected $name = '';
+    
+    protected $level = Logger::DEBUG;
+    
+    protected $hanlders = array();
 
     /**
      * Monolog logger object
-     *
-     * @var Logger
+     * 
+     * @var Logger 
      */
     protected $log;
 
     /**
      * Constructor
-     *
+     * 
      * @param array $options
      * @throws \InvalidArgumentException When log handlder not found
      */
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-
+        
         // create a log channel
-        $log = $this->log = new Logger($this->options['name']);
+        $log = $this->log = new Logger($this->name);
 
         // add hanlder
         // todo formatter
-        foreach ($this->options['handlers'] as $name => $parameters) {
+        foreach ($this->handlers as $name => $parameters) {
             switch (true) {
                 case is_array($parameters) :
                     $class = '\Monolog\Handler\\' . ucfirst($name) . 'Handler';
                     $log->pushHandler($this->instance($class, $parameters));
                     break;
-
+                
                 case $parameters instanceof \Monolog\Handler\HandlerInterface :
                     $log->pushHandler($parameters);
                     break;
-
+                
                 default :
                     throw new \InvalidArgumentException(sprintf('Log handler "%s" not found', $name));
             }
         }
     }
-
+    
     /**
      * Get monolog logger object or add a log record
-     *
-     * @param string|null $message The log message
-     * @return Logger|boolen Return Logger obejct when $message is null, otherwise return added result
+     * 
+     * @param string $message The log message
+     * @return \Monolog\Logger|boolen Return Logger obejct when $message is null, otherwise return added result
      */
     public function __invoke($message = null)
     {
-        return $message ? $this->log->addRecord($this->options['level'], $message) : $this->log;
+        return $message ? $this->log->addRecord($this->level, $message) : $this->log;
     }
 }
