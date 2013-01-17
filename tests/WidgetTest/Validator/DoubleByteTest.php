@@ -13,7 +13,7 @@ class DoubleByteTest extends TestCase
     {
         $this->assertTrue($this->isDoubleByte($input));
     }
-    
+
     /**
      * @dataProvider providerForNotDoubleByte
      */
@@ -21,7 +21,7 @@ class DoubleByteTest extends TestCase
     {
         $this->assertFalse($this->isDoubleByte($input));
     }
-    
+
     public function providerForDoubleByte()
     {
         return array(
@@ -34,7 +34,7 @@ class DoubleByteTest extends TestCase
             array('āōêīūǖ'),
         );
     }
-    
+
     public function providerForNotDoubleByte()
     {
         return array(

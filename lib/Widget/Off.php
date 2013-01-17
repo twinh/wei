@@ -16,12 +16,12 @@ namespace Widget;
  * @property \Widget\EventManager $eventManager The event manager widget
  */
 class Off extends WidgetProvider
-{    
+{
     /**
      * Remove one or all handlers
      *
      * param string|null $type The type of event
-     * @return \Widget\EventManager
+     * @return EventManager
      */
     public function __invoke($type)
     {

@@ -30,10 +30,10 @@ class Session extends Parameter
      * @var string
      */
     protected $started = false;
-    
+
     /**
      * Whether auto start session when object construct
-     * 
+     *
      * @var bool
      */
     protected $autoStart = true;
@@ -52,19 +52,19 @@ class Session extends Parameter
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-        
+
         if ($this->autoStart) {
             $this->start();
         }
     }
-    
+
     /**
      * Get or set session
      *
      * @param  string       $key     the name of cookie
      * @param  mixed        $value   the value of cookie
      * @param  array        $options options for set cookie
-     * @return \Widget\Cookie
+     * @return mixed
      */
     public function __invoke($key, $value = null, array $options = array())
     {
@@ -78,7 +78,7 @@ class Session extends Parameter
     /**
      * Start session
      *
-     * @return Widget_Session
+     * @return Session
      */
     public function start()
     {
@@ -115,7 +115,7 @@ class Session extends Parameter
      *
      * @param  string       $offset
      * @param  mixed        $value
-     * @return Widget_Session
+     * @return mixed
      */
     public function set($offset, $value)
     {
@@ -126,6 +126,7 @@ class Session extends Parameter
      * Get a session from current namespace
      *
      * @param  string $name
+     * @param string $offset
      * @return mixed
      */
     public function get($offset)
@@ -136,8 +137,8 @@ class Session extends Parameter
     /**
      * Clear session in $namespace or current namespace
      *
-     * @param  string       $namespace
-     * @return Widget_Session
+     * @param  string|null       $namespace
+     * @return Session
      */
     public function clear($namespace = null)
     {
@@ -156,7 +157,7 @@ class Session extends Parameter
     /**
      * Destroy session
      *
-     * @return Widget_Session
+     * @return Session
      */
     public function destroy()
     {
@@ -169,19 +170,19 @@ class Session extends Parameter
 
         return $this;
     }
-    
+
     /**
      * Set session options
-     * 
+     *
      * @param array $options
-     * @return \Widget\Session
+     * @return Session
      */
     public function setOptions($options)
     {
         foreach ($options as $name => $value) {
             ini_set('session.' . $name, $value);
         }
-        
+
         return $this;
     }
 }

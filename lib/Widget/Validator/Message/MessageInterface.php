@@ -18,21 +18,24 @@ interface MessageInterface
 {
     /**
      * Returns all messages
+     * @return array
      */
     public function getMessages();
-    
+
     /**
      * Sets all messages
+     * @return AbstractMessage
      */
     public function setMessages($messages);
-    
+
     /**
      * Returns specify message by given rule name
      */
     public function getMessage($name);
-    
+
     /**
      * Sets specify message by given rule name
+     * @return AbstractMessage
      */
     public function setMessage($name, $data);
 }

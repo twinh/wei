@@ -2,7 +2,7 @@
 
 /**
  * Widget Framework
- * 
+ *
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
@@ -19,21 +19,21 @@ class Cache extends WidgetProvider implements Storable
 {
     /**
      * The storable widget object
-     * 
+     *
      * @var Widget\Storable
      */
     protected $object;
 
     /**
      * The storable widget name
-     * 
+     *
      * @ver string
      */
     protected $driver = 'apc';
 
     /**
      * Constructor
-     * 
+     *
      * @param array $options
      */
     public function __construct(array $options = array())
@@ -55,9 +55,9 @@ class Cache extends WidgetProvider implements Storable
 
     /**
      * Set cache driver
-     * 
+     *
      * @param string $driver
-     * @return \Widget\Cache
+     * @return Cache
      * @throws Exception
      */
     public function setDriver($driver)
@@ -79,6 +79,7 @@ class Cache extends WidgetProvider implements Storable
 
     /**
      * {@inheritdoc}
+     * @param array $options
      */
     public function add($key, $value, $expire = 0, array $options = array())
     {
@@ -127,6 +128,7 @@ class Cache extends WidgetProvider implements Storable
 
     /**
      * {@inheritdoc}
+     * @param array $options
      */
     public function replace($key, $value, $expire = 0, array $options = array())
     {
@@ -135,6 +137,7 @@ class Cache extends WidgetProvider implements Storable
 
     /**
      * {@inheritdoc}
+     * @param array $options
      */
     public function set($key, $value, $expire = 0, array $options = array())
     {

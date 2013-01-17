@@ -19,22 +19,22 @@ class View extends WidgetProvider implements Viewable
 {
     /**
      * Template directory
-     * 
+     *
      * @var string|array
      */
     protected $dirs = array();
-    
+
     /**
      * Default template file extension
-     * 
+     *
      * @var string
      */
     protected $extension = '.php';
-    
+
     /**
      * Get view object
      *
-     * @return \Widget\View
+     * @return View
      */
     public function __invoke()
     {
@@ -43,6 +43,7 @@ class View extends WidgetProvider implements Viewable
 
     /**
      * @see \Widget\Viewable::render
+     * @param array $context
      */
     public function render($name, $context = array())
     {
@@ -57,6 +58,7 @@ class View extends WidgetProvider implements Viewable
 
     /**
      * @see \Widget\Viewable::display
+     * @param array $context
      */
     public function display($name, $context = array())
     {
@@ -76,7 +78,7 @@ class View extends WidgetProvider implements Viewable
 
         return $this;
     }
-    
+
     /**
      * @see \Widget\Viewable::getExtension
      */

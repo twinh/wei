@@ -76,6 +76,7 @@ class Smarty extends WidgetProvider implements Viewable
 
     /**
      * @see \Widget\Viewable::display
+     * @param array $context
      */
     public function display($name, $context = array())
     {
@@ -86,6 +87,7 @@ class Smarty extends WidgetProvider implements Viewable
 
     /**
      * @see \Widget\Viewable::render
+     * @param array $context
      */
     public function render($name, $context = array())
     {
@@ -93,7 +95,7 @@ class Smarty extends WidgetProvider implements Viewable
 
         return $this->smarty->fetch($name);
     }
-    
+
     /**
      * @see \Widget\Viewable::getExtension
      */
@@ -106,7 +108,7 @@ class Smarty extends WidgetProvider implements Viewable
      * Set template directory for smarty object
      *
      * @param  string|array $dir
-     * @return \Widget\Smarty
+     * @return Smarty
      */
     public function setTemplateDirOption($dir)
     {
@@ -121,7 +123,7 @@ class Smarty extends WidgetProvider implements Viewable
      * Set compole directory for smarty object
      *
      * @param  string       $dir
-     * @return \Widget\Smarty
+     * @return Smarty
      */
     public function setCompileDirOption($dir)
     {

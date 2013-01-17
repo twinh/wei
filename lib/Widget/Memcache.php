@@ -23,10 +23,10 @@ class Memcache extends WidgetProvider implements Storable
      * @var \Memcache
      */
     protected $object;
-    
+
     /**
      * The memcache server configurations
-     * 
+     *
      * @var array
      * @see \Memcache::addServer
      */
@@ -37,14 +37,14 @@ class Memcache extends WidgetProvider implements Storable
             'persistent'    => true
         )
     );
-    
+
     /**
      * MEMCACHE_COMPRESSED
-     * 
+     *
      * @var int
      */
     protected $flag = 2;
-    
+
     /**
      * Constructor
      *
@@ -53,24 +53,24 @@ class Memcache extends WidgetProvider implements Storable
     public function __construct(array $options = array())
     {
         $this->option($options, array('object', 'servers'));
-        
+
         parent::__construct();
     }
-    
+
     /**
      * Set servers
-     * 
+     *
      * @param array $servers
-     * @return \Widget\Memcache
+     * @return Memcache
      */
     public function setServers($servers)
     {
         foreach ((array)$servers as $server) {
             call_user_func_array(array($this->object, 'addServer'), $server);
         }
-        
+
         $this->servers = $servers;
-        
+
         return $this;
     }
 
@@ -84,6 +84,7 @@ class Memcache extends WidgetProvider implements Storable
 
     /**
      * {@inheritdoc}
+     * @param array $options
      */
     public function set($key, $value, $expire = 0, array $options = array())
     {
@@ -100,6 +101,7 @@ class Memcache extends WidgetProvider implements Storable
 
     /**
      * {@inheritdoc}
+     * @param array $options
      */
     public function add($key, $value, $expire = 0, array $options = array())
     {
@@ -108,6 +110,7 @@ class Memcache extends WidgetProvider implements Storable
 
     /**
      * {@inheritdoc}
+     * @param array $options
      */
     public function replace($key, $value, $expire = 0, array $options = array())
     {
@@ -137,7 +140,7 @@ class Memcache extends WidgetProvider implements Storable
     {
         return $this->object->flush();
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -149,7 +152,7 @@ class Memcache extends WidgetProvider implements Storable
             return $this->set($key, $value, $expire);
         }
     }
-    
+
     /**
      * Get memcache object
      *
@@ -159,12 +162,12 @@ class Memcache extends WidgetProvider implements Storable
     {
         return $this->object;
     }
-    
+
     /**
      * Set memcache object
-     * 
-     * @param \Memcache $object
-     * @return \Widget\Memcache
+     *
+     * @param null|\Memcache $object
+     * @return Memcache
      */
     public function setObject(\Memcache $object = null)
     {
@@ -173,7 +176,7 @@ class Memcache extends WidgetProvider implements Storable
         } else {
             $this->object = new \Memcache;
         }
-        
+
         return $this;
     }
 }

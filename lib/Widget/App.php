@@ -26,34 +26,34 @@ use Widget\App\DispatchBreakException;
  * @property \Widget\Viewable $view The view widget, instance of \Widget\Viewable interface
  */
 class App extends WidgetProvider
-{    
+{
     /**
      * The available modules
-     * 
+     *
      * @var array
      */
     protected $modules = array(
         'App'
     );
-    
+
     /**
      * The default values for module, controller and action
-     * 
-     * @var array 
+     *
+     * @var array
      */
     protected $defaults = array(
         'module'        => 'index',
         'controller'    => 'index',
         'action'        => 'index',
     );
-    
+
     /**
      * The name of module
-     * 
+     *
      * @var string
      */
     protected $module;
-    
+
     /**
      * The name of controller
      /
@@ -74,17 +74,17 @@ class App extends WidgetProvider
      * @var array
      */
     protected $controllers = array();
-    
+
     /**
      * Startup application
      *
      * @param  array     $options
-     * @return \Widget\App
+     * @return App|null
      */
     public function __invoke(array $options = array())
     {
         $this->option($options);
-        
+
         return $this->dispatch(
             $this->getModule(),
             $this->getController(),
@@ -98,39 +98,39 @@ class App extends WidgetProvider
      * @param  string    $module     The name of module
      * @param  string    $controller The name of controller
      * @param  string    $action     The name of action
-     * @return mixed
+     * @return App|null
      * @throws Exception When controller or action not found
      */
     public function dispatch($module, $controller, $action = 'index')
     {
         // Check if module available
         if ($this->isModuleAvaiable($module)) {
-            
+
             // Get controller instance by module and controller name
             $object = $this->getControllerInstance($module, $controller);
             if ($object) {
-                
+
                 // Check if action exists
                 // TODO Check by controller object, such as $object->hasAction($action)
                 $method = $action . 'Action';
                 if (method_exists($object, $method)) {
-                    
+
                     try {
-                        
+
                         $this->trigger('before.action');
 
                         $response = $object->$method();
 
                         $this->trigger('after.action');
-                        
+
                         $this->handleResponse($response);
-                        
+
                         return $this;
 
                     } catch (DispatchBreakException $e) {
                         $this->log(sprintf('Caught exception "%s" with message "%s" called in %s on line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine()));
                     }
-                
+
                 } else {
                     $notFound = 'action';
                 }
@@ -140,7 +140,7 @@ class App extends WidgetProvider
         } else {
             $notFound = 'module';
         }
-        
+
         // Prepare exception message
         $message = 'The page you requested was not found';
         if ($this->config('debug')) {
@@ -149,27 +149,27 @@ class App extends WidgetProvider
                 case 'module':
                     $message .= sprintf('module "%s" is not available', $module);
                     break;
-                
+
                 case 'controller':
                     $message .= sprintf('controller "%s" not found in module "%s"', $controller, $module);
                     break;
-                
+
                 case 'action':
                     $message .= sprintf('action "%s" not found in controller "%s".', $action, get_class($object));
                     break;
             }
         }
-        
+
         if (false !== $this->trigger('404', array($this, $notFound, $message), $this)) {
             throw new NotFoundException($message);
         }
     }
-    
+
     /**
      * Handle the response variable returned by controller action
      *
      * @param  mixed                     $response
-     * @return mixed
+     * @return Response|boolean
      * @throws \UnexpectedValueException
      */
     public function handleResponse($response)
@@ -201,7 +201,7 @@ class App extends WidgetProvider
                 }
         }
     }
-    
+
     /**
      * Get the of name module
      *
@@ -212,26 +212,26 @@ class App extends WidgetProvider
         if (!$this->module) {
             $this->module = ucfirst((string)$this->request('module', $this->defaults['module']));
         }
-        
+
         return $this->module;
     }
-    
+
     /**
      * Set the name of module
      *
      * @param  string    $module The name of module
-     * @return \Widget\App
+     * @return App
      */
     public function setModule($module)
     {
         $this->module = $module;
-        
+
         return $this;
     }
-    
+
     /**
      * Check if the given module in avaiable modules
-     * 
+     *
      * @param string $module
      * @return bool
      */
@@ -258,7 +258,7 @@ class App extends WidgetProvider
      * Set the name of controller
      *
      * @param  string    $controller The name of controller
-     * @return \Widget\App
+     * @return App
      */
     public function setController($controller)
     {
@@ -285,7 +285,7 @@ class App extends WidgetProvider
      * Set the name of action
      *
      * @param  string    $action The name of action
-     * @return \Widget\App
+     * @return App
      */
     public function setAction($action)
     {
@@ -298,7 +298,9 @@ class App extends WidgetProvider
      * Get the controller instance, if not found, return false instead
      *
      * @param  string                   $name the name of controller
-     * @return boolean|\Widget\Controller
+     * @param string $module
+     * @param string $controller
+     * @return false|object
      * @todo custom module namespace
      */
     public function getControllerInstance($module, $controller)
@@ -306,17 +308,17 @@ class App extends WidgetProvider
         if (!preg_match('/^([_a-z0-9]+)$/i', $module . $controller)) {
             return false;
         }
-        
+
         $class = $module . '\Controller\\' . $controller . 'Controller';
 
         if (isset($this->controllers[$class])) {
             return $this->controllers[$class];
         }
-        
+
         if (!class_exists($class)) {
             return false;
         }
-        
+
         return $this->controllers[$class] = new $class(array(
             'widget' => $this->widget,
         ));

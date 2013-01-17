@@ -33,7 +33,7 @@ abstract class WidgetAware
      * Get widget instance by the given name
      *
      * @param  string       $name The name of widget
-     * @return \Widget\Widget
+     * @return object
      */
     public function __get($name)
     {

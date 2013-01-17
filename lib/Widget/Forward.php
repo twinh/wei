@@ -19,11 +19,11 @@ class Forward extends WidgetProvider
 {
     /**
      * Forwards to the given module, controller and action
-     * 
+     *
      * @param string $action        The name of action
-     * @param string $controller    The name of controller
-     * @param string $module        The name of module
-     * @return \Widget\Forward
+     * @param string|null $controller    The name of controller
+     * @param string|null $module        The name of module
+     * @return Forward
      */
     public function __invoke($action = 'index', $controller = null , $module = null)
     {

@@ -23,7 +23,7 @@ class ReplaceFirst extends WidgetProvider
      * @param  string $string  the string to be searched and replaced
      * @param  string $search  the string to search
      * @param  string $replace the string to replace
-     * @return string
+     * @return mixed
      */
     public function __invoke($string, $search, $replace)
     {

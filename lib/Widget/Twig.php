@@ -18,7 +18,7 @@ class Twig extends WidgetProvider implements Viewable
 {
     /**
      * Options for \Twig_Environment
-     * 
+     *
      * @var array
      * @see \Twig_Environment::__construct
      */
@@ -32,17 +32,17 @@ class Twig extends WidgetProvider implements Viewable
         'auto_reload'           => null,
         'optimizations'         => -1,
     );
-    
+
     /**
      * Path for \Twig_Loader_Filesystem
-     * 
+     *
      * @var string|array
      */
     protected $paths = array();
-    
+
     /**
      * Default template file extension
-     * 
+     *
      * @var string
      */
     protected $extension = '.html.twig';
@@ -58,6 +58,7 @@ class Twig extends WidgetProvider implements Viewable
      * Constructor
      *
      * @var array
+     * @param array $options
      */
     public function __construct(array $options = array())
     {
@@ -90,6 +91,7 @@ class Twig extends WidgetProvider implements Viewable
 
     /**
      * @see \Widget\Viewable::display
+     * @param array $context
      */
     public function display($name, $context = array())
     {
@@ -98,12 +100,13 @@ class Twig extends WidgetProvider implements Viewable
 
     /**
      * @see \Widget\Viewable::render
+     * @param array $context
      */
     public function render($name, $context = array())
     {
         return $this->twig->render($name, $context);
     }
-    
+
     /**
      * @see \Widget\Viewable::getExtension
      */

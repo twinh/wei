@@ -7,25 +7,25 @@ use WidgetTest\TestCase;
 class TypeTest extends TestCase
 {
     protected static $resource;
-    
+
     public function createResource()
     {
         if (!static::$resource) {
             static::$resource = fopen(__FILE__, 'r');
         }
-        
+
         return static::$resource;
     }
-    
+
     public static function tearDownAfterClass()
     {
         parent::tearDownAfterClass();
-        
+
         if (static::$resource) {
             fclose(static::$resource);
         }
     }
-    
+
     /**
      * @dataProvider providerForType
      */
@@ -33,7 +33,7 @@ class TypeTest extends TestCase
     {
         $this->assertTrue($this->isType->__invoke($input, $type));
     }
-    
+
     /**
      * @dataProvider providerForNotType
      */
@@ -41,7 +41,7 @@ class TypeTest extends TestCase
     {
         $this->assertFalse($this->isType->__invoke($input, $type));
     }
-    
+
     /**
      * @expectedException \Widget\Exception
      */
@@ -49,12 +49,12 @@ class TypeTest extends TestCase
     {
         $this->isType->__invoke('xx', 'unkonwn type');
     }
-    
+
     public function providerForType()
     {
         $obj = new \stdClass;
         $res = $this->createResource();
-        
+
         return array(
             // is_xxx
             array(array(),  'array'),
@@ -88,12 +88,12 @@ class TypeTest extends TestCase
             array('10BC9',  'xdigit'),
         );
     }
-    
+
     public function providerForNotType()
     {
         $obj = new \stdClass;
         $res = $this->createResource();
-        
+
         return array(
             // is_xxx
             array('1',      'array'),

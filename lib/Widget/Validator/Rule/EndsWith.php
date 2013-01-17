@@ -17,12 +17,15 @@ namespace Widget\Validator\Rule;
  */
 class EndsWith extends AbstractRule
 {
+    /**
+     * @param boolean $case
+     */
     public function __invoke($data, $findMe, $case = false)
     {
         $pos = strlen($data) - strlen($findMe);
-        
+
         $fn = $case ? 'strrpos' : 'strripos';
-        
+
         return $pos === $fn($data, $findMe);
     }
 }

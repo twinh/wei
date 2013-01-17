@@ -20,10 +20,10 @@ class NewInstance extends WidgetProvider
 {
     /**
      * Instance a widget with the specify configuration name
-     * 
+     *
      * @param string $name The name of widget
      * @param string $configName The name of configuration
-     * @return \Widget\WidgetProvider
+     * @return object
      */
     public function __invoke($name, $configName)
     {

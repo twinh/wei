@@ -51,7 +51,7 @@ class Redirect extends Response
      * @param  string         $url     The url redirect to
      * @param  int            $status  The redirect status code
      * @param  array          $options The widget options
-     * @return \Widget\Redirect
+     * @return Redirect
      * @throws Exception      When custom view file not found
      */
     public function __invoke($url, $status = 302, array $options = array())

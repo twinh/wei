@@ -23,10 +23,10 @@ class Memcached extends WidgetProvider implements Storable
      * @var \Memcached
      */
     protected $object;
-    
+
     /**
      * The memcached server configurations
-     * 
+     *
      * @var array
      * @see \Memcached::addServers
      */
@@ -36,7 +36,7 @@ class Memcached extends WidgetProvider implements Storable
             'port'          => 11211,
         )
     );
-    
+
     /**
      * Constructor
      *
@@ -45,22 +45,22 @@ class Memcached extends WidgetProvider implements Storable
     public function __construct(array $options = array())
     {
         $this->option($options, array('object', 'servers'));
-        
+
         parent::__construct();
     }
-    
+
     /**
      * Set servers
-     * 
+     *
      * @param array $servers
-     * @return \Widget\Memcached
+     * @return Memcached
      */
     public function setServers($servers)
     {
         $this->object->addServers($servers);
 
         $this->servers = $servers;
-        
+
         return $this;
     }
 
@@ -74,6 +74,7 @@ class Memcached extends WidgetProvider implements Storable
 
     /**
      * {@inheritdoc}
+     * @param array $options
      */
     public function set($key, $value, $expire = 0, array $options = array())
     {
@@ -90,6 +91,7 @@ class Memcached extends WidgetProvider implements Storable
 
     /**
      * {@inheritdoc}
+     * @param array $options
      */
     public function add($key, $value, $expire = 0, array $options = array())
     {
@@ -98,6 +100,7 @@ class Memcached extends WidgetProvider implements Storable
 
     /**
      * {@inheritdoc}
+     * @param array $options
      */
     public function replace($key, $value, $expire = 0, array $options = array())
     {
@@ -127,7 +130,7 @@ class Memcached extends WidgetProvider implements Storable
     {
         return $this->object->flush();
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -139,7 +142,7 @@ class Memcached extends WidgetProvider implements Storable
             return $this->set($key, $value, $expire);
         }
     }
-    
+
     /**
      * Get memcached object
      *
@@ -149,12 +152,12 @@ class Memcached extends WidgetProvider implements Storable
     {
         return $this->object;
     }
-    
+
     /**
      * Set memcached object
-     * 
-     * @param \Memcached $object
-     * @return \Widget\Memcached
+     *
+     * @param null|\Memcached $object
+     * @return Memcached
      */
     public function setObject(\Memcached $object = null)
     {
@@ -163,7 +166,7 @@ class Memcached extends WidgetProvider implements Storable
         } else {
             $this->object = new \Memcached;
         }
-        
+
         return $this;
     }
 }

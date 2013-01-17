@@ -27,6 +27,9 @@ class Filter extends WidgetProvider
         }
     }
 
+    /**
+     * @param callable $callback
+     */
     public function add($name, $callback)
     {
         $this->filters[$name][] = $callback;
@@ -41,7 +44,7 @@ class Filter extends WidgetProvider
                 $data = call_user_func($callback, $data);
             }
         }
-        
+
         return $data;
     }
 

@@ -21,22 +21,22 @@ class Router extends WidgetProvider
 {
     /**
      * Whether enable the router or not
-     * 
-     * @var bool 
+     *
+     * @var bool
      */
     protected $enable = true;
-    
+
     /**
      * The base uri of the request uri
-     * 
+     *
      * @var string
      */
     protected $baseUri;
-    
+
     /**
      * Routes configurations
-     * 
-     * @var array 
+     *
+     * @var array
      */
     protected $routes = array(
         'default' => array(
@@ -93,7 +93,7 @@ class Router extends WidgetProvider
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-        
+
         // todo
         if (!$this->baseUri) {
             $this->setBaseUri('');
@@ -103,7 +103,7 @@ class Router extends WidgetProvider
     /**
      * Get the router object
      *
-     * @return Widget_Router
+     * @return Router
      */
     public function __invoke()
     {
@@ -139,7 +139,7 @@ class Router extends WidgetProvider
         }
 
         $uri = substr($uri, strlen($this->baseUri));
-        
+
         $params = $this->match($uri, $_SERVER['REQUEST_METHOD']);
 
         return $this->defaultParams = $params;
@@ -149,7 +149,7 @@ class Router extends WidgetProvider
      * Set base uri option
      *
      * @param  string      $uri
-     * @return Widget_Router
+     * @return Router
      */
     public function setBaseUri($uri)
     {
@@ -178,7 +178,7 @@ class Router extends WidgetProvider
      * Set route
      *
      * @param  array       $route the options of the route
-     * @return \Widget\Router
+     * @return Router
      */
     public function set(array $route)
     {
@@ -197,7 +197,7 @@ class Router extends WidgetProvider
      * Get the route by name
      *
      * @param  string $name the name of the route
-     * @return array
+     * @return array|null
      */
     public function get($name)
     {
@@ -208,7 +208,7 @@ class Router extends WidgetProvider
      * Remove the route
      *
      * @param  string      $name the name of the route
-     * @return Widget_Router
+     * @return Router
      */
     public function remove($name)
     {
@@ -223,7 +223,7 @@ class Router extends WidgetProvider
      * Prepare the route uri to regex
      *
      * @param  array  $route the route array
-     * @return string
+     * @return array
      */
     protected function _compile(&$route)
     {
@@ -258,8 +258,8 @@ class Router extends WidgetProvider
      * and return the parameters, or return false when not matched
      *
      * @param  string $uri    uri to match
-     * @param  string $method the request method to match, maybe GET, POST, etc
-     * @return array
+     * @param  string|null $method the request method to match, maybe GET, POST, etc
+     * @return false|array
      */
     public function match($uri, $method = null, $name = null)
     {
@@ -283,7 +283,7 @@ class Router extends WidgetProvider
      * @param  string      $uri    the uri to match
      * @param  string      $method the request method to match
      * @param  string      $name   the name of the route
-     * @return array|false
+     * @return false|array
      */
     protected function _match($uri, $method, $name)
     {
@@ -293,12 +293,12 @@ class Router extends WidgetProvider
         if ($method && $route['method'] && !preg_match('#' . $route['method'] . '#i', $method)) {
             return false;
         }
-        
+
         // check if the route matches the uri
         if (!preg_match($route['regex'], $uri, $matches)) {
             return false;
         }
-               
+
         // get the query string and parse it to array
         $query = substr($uri, strlen($matches[0]));
         $query = $query ? $this->_parseQuery($query, $route['slashSeparator']) : array();
@@ -326,7 +326,7 @@ class Router extends WidgetProvider
     protected function _parseQuery($query, $slash = false)
     {
         $params = array();
-        
+
         if (!$slash) {
             parse_str(ltrim($query, '?/'), $params);
         } else {
@@ -367,6 +367,10 @@ class Router extends WidgetProvider
         }
     }
 
+    /**
+     * @param array $params
+     * @param string $name
+     */
     protected function _uri($params, $name)
     {
         $route = $this->_compile($this->routes[$name]);
@@ -417,11 +421,11 @@ class Router extends WidgetProvider
                         break;
                     }
                 }
-                
+
                 // replace the group in the uri
                 $uri = str_replace($search, $replace, $uri);
             }
-            
+
             if ('' === $uri) {
                 return false;
             }

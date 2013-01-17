@@ -22,58 +22,58 @@ class Redis extends WidgetProvider implements Storable
      * @var \Redis
      */
     protected $object;
-    
+
     /**
      * The host, or the path to a unix domain socket
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $host = '127.0.0.1';
-    
+
     /**
      * The port of the host
-     * 
+     *
      * @var int
      */
     protected $port = 6379;
-    
+
     /**
      * The timeout seconds
-     * 
+     *
      * @var float|int
      */
     protected $timeout = 0.0;
-    
+
     /**
      * Whether persistent connection or not
-     * 
+     *
      * @var bool
      */
     protected $persistent = true;
 
     /**
      * Constructor
-     * 
+     *
      * @param array $options
      */
     public function __construct(array $options = array())
     {
         $this->option($options, array('object'));
-        
+
         parent::__construct();
 
         $this->connect();
     }
-    
+
     /**
      * Connet the redis server
-     * 
+     *
      * @return bool true on success, false on error
      */
     public function connect()
     {
         $connect = $this->persistent ? 'pconnect' : 'connect';
-        
+
         return $this->object->$connect($this->host, $this->port, $this->timeout);
     }
 
@@ -99,6 +99,7 @@ class Redis extends WidgetProvider implements Storable
 
     /**
      * {@inheritdoc}
+     * @param array $options
      */
     public function set($key, $value, $expire = 0, array $options = array())
     {
@@ -107,6 +108,7 @@ class Redis extends WidgetProvider implements Storable
 
     /**
      * {@inheritdoc}
+     * @param array $options
      */
     public function add($key, $value, $expire = 0, array $options = array())
     {
@@ -115,6 +117,7 @@ class Redis extends WidgetProvider implements Storable
 
     /**
      * {@inheritdoc}
+     * @param array $options
      */
     public function replace($key, $value, $expire = 0, array $options = array())
     {
@@ -162,11 +165,11 @@ class Redis extends WidgetProvider implements Storable
     {
         return $this->object;
     }
-    
+
     /**
      * Set the redis object
-     * 
-     * @param \Redis $object
+     *
+     * @param null|\Redis $object
      */
     public function setObject(\Redis $object = null)
     {

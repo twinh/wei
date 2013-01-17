@@ -17,7 +17,7 @@ namespace Widget\Validator\Rule;
 class Postcode extends AbstractRule
 {
     protected $message = 'The value should be six length of digit';
-    
+
     public function __invoke($data)
     {
         return (bool) preg_match('/^[1-9][\d]{5}$/', $data);

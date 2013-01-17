@@ -21,11 +21,11 @@ use DateTime as Dt;
 class DateTime extends WidgetProvider
 {
     protected $format = 'Y-m-d H:i:s';
-    
+
     public function __invoke($value)
     {
         $date = Dt::createFromFormat($this->format, $value);
-        
+
         return $date ? $value === $date->format($this->format) : false;
     }
 }
