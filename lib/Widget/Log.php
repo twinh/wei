@@ -98,7 +98,7 @@ class Log extends WidgetProvider
     /**
      * The log file handle
      * 
-     * @var resource 
+     * @var resource|null 
      */
     protected $handle;
 
