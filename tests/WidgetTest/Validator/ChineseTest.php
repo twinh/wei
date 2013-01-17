@@ -13,7 +13,7 @@ class ChineseTest extends TestCase
     {
         $this->assertTrue($this->isChinese($input));
     }
-    
+
     /**
      * @dataProvider providerForNotChinese
      */
@@ -21,7 +21,7 @@ class ChineseTest extends TestCase
     {
         $this->assertFalse($this->isChinese($input));
     }
-    
+
     public function providerForChinese()
     {
         return array(
@@ -30,7 +30,7 @@ class ChineseTest extends TestCase
             array('姓名'),
         );
     }
-    
+
     public function providerForNotChinese()
     {
         return array(

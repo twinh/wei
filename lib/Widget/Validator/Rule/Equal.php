@@ -16,6 +16,9 @@ namespace Widget\Validator\Rule;
  */
 class Equal extends AbstractRule
 {
+    /**
+     * @param boolean $strict
+     */
     public function __invoke($value, $mixed = null, $strict = false)
     {
         return $strict ? $value === $mixed : $value == $mixed;

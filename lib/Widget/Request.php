@@ -24,14 +24,14 @@ class Request extends ArrayWidget
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-        
+
         // rebuild request parameters from other widgets
         if (!isset($options['data'])) {
             $order = ini_get('request_order') ?: ini_get('variables_order');
 
             $map = array(
-                'G' => 'get', 
-                'P' => 'post', 
+                'G' => 'get',
+                'P' => 'post',
                 'C' => 'cookie'
             );
 
@@ -42,10 +42,10 @@ class Request extends ArrayWidget
             }
         }
     }
-    
+
     /**
      * Get full url
-     * 
+     *
      * @return string
      * @see http://snipplr.com/view.php?codeview&id=2734
      */

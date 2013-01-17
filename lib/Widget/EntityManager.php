@@ -36,7 +36,7 @@ class EntityManager extends WidgetProvider
         'annotationDriverPaths' => array(),
         'entityNamespaces' => array(),
     );
-    
+
     /**
      * @var \Doctrine\ORM\EntityManager
      */
@@ -113,12 +113,12 @@ class EntityManager extends WidgetProvider
     {
         return $this->em;
     }
-    
+
     /**
      * Set options for \Doctrine\ORM\Configuration
-     * 
+     *
      * @param array $config
-     * @return \Widget\EntityManager
+     * @return EntityManager
      */
     public function setConfig(array $config)
     {

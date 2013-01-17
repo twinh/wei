@@ -24,14 +24,14 @@ class Db extends WidgetProvider
      * @var \Doctrine\DBAL\Connection
      */
     protected $conn;
-    
+
     /**
      * The first parameter for DriverManager::getConnection
-     * 
+     *
      * @var array
      */
     protected $params = array();
-    
+
     /**
      * Constructor
      *

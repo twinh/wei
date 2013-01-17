@@ -18,28 +18,28 @@ class CodeHintGenerator extends WidgetProvider
 {
     /**
      * The file to be saved
-     * 
+     *
      * @var string
      */
     protected $target = 'doc/code-hint/widget.php';
-    
+
     /**
-     * The excluded widgets 
-     * 
+     * The excluded widgets
+     *
      * @var array
      */
     protected $exclusions = array();
-    
+
     /**
      * Whether include the widget alias or not
-     * 
-     * @var bool 
+     *
+     * @var bool
      */
     protected $withAlias = true;
 
     /**
-     * The 
-     * 
+     * The
+     *
      * @var string
      */
     protected $classTmpl =
@@ -71,7 +71,7 @@ class Widget implements Widgetable
      * Generate the widget code hint file
      *
      * @param  array                   $options
-     * @return \Widget\CodeHintGenerator
+     * @return CodeHintGenerator
      */
     public function __invoke(array $options = array())
     {
@@ -215,7 +215,7 @@ class Widget implements Widgetable
      * Set exclusions option
      *
      * @param  array|string            $widgets the exclusion widget list
-     * @return \Widget\CodeHintGenerator
+     * @return CodeHintGenerator
      */
     public function setExclusions($widgets)
     {
@@ -240,7 +240,7 @@ class Widget implements Widgetable
      * Check if the widget is in exclusion list
      *
      * @param  string $widget the name of widget
-     * @return boolen
+     * @return boolean
      */
     public function isExcludeWidget($widget)
     {

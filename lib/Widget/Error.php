@@ -30,48 +30,48 @@ class Error extends WidgetProvider
 {
     /**
      * The default error code
-     * 
+     *
      * @var int
      */
     protected $code = 500;
-    
+
     /**
      * The default error message when debug is not enable
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $message = 'Server busy, please try again later';
-    
+
     /**
      * Whether exit after dispaly the error message or not
-     * 
-     * @var bool 
+     *
+     * @var bool
      */
     protected $exit = true;
-    
+
     /**
      * Whether clean previous output before error or not
-     * 
+     *
      * @var bool
      */
     protected $clean = true;
-    
+
     /**
      * Whether handle the php error
-     *  
-     * @var bool 
+     *
+     * @var bool
      */
     protected $error = true;
-    
+
     /**
      * Constructor
-     * 
+     *
      * @param array $options
      */
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-        
+
         $this->on('exception', $this);
 
         if ($this->error) {
@@ -83,7 +83,7 @@ class Error extends WidgetProvider
      * Show error message
      *
      * @param mixed $message
-     * @param mixed $code
+     * @param integer $code
      * @param array $options
      */
     public function __invoke($event, $widget, $message, $code = 500, array $options = array())
@@ -399,7 +399,7 @@ class Error extends WidgetProvider
     /**
      * Get session information ($_SESSION) for html output
      *
-     * @return array
+     * @return string|array
      * @todo when session not enable ?
      */
     public function getSession()

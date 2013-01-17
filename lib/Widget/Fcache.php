@@ -19,7 +19,7 @@ class Fcache extends WidgetProvider implements Storable
 {
     /**
      * The cache directory
-     * 
+     *
      * @var string
      */
     protected $dir = '../cache';
@@ -32,17 +32,17 @@ class Fcache extends WidgetProvider implements Storable
     protected $illegalChars = array(
         '\\', '/', ':', '*', '?', '"', '<', '>', '|', "\r", "\n"
     );
-    
+
     /**
      * The cache file extension
-     * 
+     *
      * @var string
      */
     protected $ext = 'cache';
 
     /**
      * Constructor
-     * 
+     *
      * @param array $options
      */
     public function __construct(array $options = array())
@@ -54,9 +54,9 @@ class Fcache extends WidgetProvider implements Storable
 
     /**
      * Set cache directory
-     * 
+     *
      * @param string      $dir
-     * @return \Widget\Fcache
+     * @return Fcache
      * @throws Exception When failed to create the cache directory
      */
     public function setDir($dir)
@@ -69,7 +69,7 @@ class Fcache extends WidgetProvider implements Storable
             chmod($dir, 0644);
             // @codeCoverageIgnoreEnd
         }
-        
+
         $this->dir = $dir;
 
         return $this;
@@ -110,6 +110,7 @@ class Fcache extends WidgetProvider implements Storable
 
     /**
      * {@inheritdoc}
+     * @param array $options
      */
     public function set($key, $value, $expire = 0, array $options = array())
     {
@@ -122,6 +123,7 @@ class Fcache extends WidgetProvider implements Storable
 
     /**
      * {@inheritdoc}
+     * @param array $options
      */
     public function add($key, $value, $expire = 0, array $options = array())
     {
@@ -157,6 +159,7 @@ class Fcache extends WidgetProvider implements Storable
 
     /**
      * {@inheritdoc}
+     * @param array $options
      */
     public function replace($key, $value, $expire = 0, array $options = array())
     {
@@ -275,7 +278,7 @@ class Fcache extends WidgetProvider implements Storable
      * @param  string         $file      file path
      * @param  string         $mode      open mode
      * @param  int            $operation lock operation
-     * @return false|resource false or file handle
+     * @return false false or file handle
      */
     protected function openAndLock($file, $mode, $operation)
     {
@@ -337,7 +340,7 @@ class Fcache extends WidgetProvider implements Storable
      * @param  resouce $handle  file handle
      * @param  string  $content the value of cache
      * @param  bool    $rewirte whether rewrite the whole file
-     * @return boolen
+     * @return boolean
      */
     protected function writeAndRelease($handle, $content, $rewirte = false)
     {

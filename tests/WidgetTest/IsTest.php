@@ -7,40 +7,40 @@ class IsTest extends TestCase
     public function testIsAlnum()
     {
         $this->assertTrue($this->isAlnum('abcedfg'));
-        
+
         $this->assertTrue($this->isAlnum('a2BcD3eFg4'));
-        
+
         $this->assertTrue($this->isAlnum('045fewwefds'));
-        
+
         $this->assertFalse($this->isAlnum('a bcdefg'));
-        
+
         $this->assertFalse($this->isAlnum('-213a bcdefg'));
     }
-    
+
     public function testIsAlpha()
     {
         $this->assertTrue($this->isAlpha('abcedfg'));
-        
+
         $this->assertTrue($this->isAlpha('aBcDeFg'));
-        
+
         $this->assertFalse($this->isAlpha('abcdefg1'));
-        
+
         $this->assertFalse($this->isAlpha('a bcdefg'));
     }
-    
+
     public function testIsDigit()
     {
         $this->assertTrue($this->isDigit('123456'));
-        
+
         $this->assertTrue($this->isDigit('0123456'));
-        
+
         $this->assertFalse($this->isDigit('0.123'));
-        
+
         $this->assertFalse($this->isDigit('1 23456'));
-        
+
         $this->assertFalse($this->isDigit('string'));
     }
-    
+
     public function testIsLength()
     {
         $this->assertTrue($this->isLength('length7', 7), 'Length is 7');
@@ -55,7 +55,7 @@ class IsTest extends TestCase
 
         $this->assertFalse($this->isLength('length7', 10, 0), 'Length should not greater than 10');
     }
-    
+
     public function testIsQQ()
     {
         $this->assertFalse($this->isQQ('1000'), 'Too short');
@@ -68,42 +68,42 @@ class IsTest extends TestCase
 
         $this->assertTrue($this->isQQ('1234567'));
     }
-    
+
     public function testIsRegex()
     {
         $this->assertTrue($this->isRegex('This is Widget Framework.', '/widget/i'));
-        
+
         $this->assertFalse($this->isRegex('This is Widget Framework.', '/that/i'));
     }
 
     public function testIsTime()
     {
         $this->assertTrue($this->isTime('00:00:00'));
-        
+
         $this->assertTrue($this->isTime('00:00'));
-        
+
         $this->assertTrue($this->isTime('23:59:59'));
-        
+
         $this->assertFalse($this->isTime('24:00:00'));
-        
+
         $this->assertFalse($this->isTime('23:60:00'));
-        
+
         $this->assertFalse($this->isTime('23:59:61'));
-        
+
         $this->assertFalse($this->isTime('61:00'));
-        
+
         $this->assertFalse($this->isTime('01:01:01:01'));
     }
-    
+
     public function testIsPostCode()
     {
         $this->assertTrue($this->isPostcode('123456'));
-        
+
         $this->assertFalse($this->isPostcode('1234567'));
-        
+
         $this->assertFalse($this->isPostcode('0234567'));
     }
-    
+
     public function testIsFile()
     {
         $this->assertFalse(false, $this->isFile(array()), 'Not File path');
@@ -146,7 +146,7 @@ class IsTest extends TestCase
             }
         }
     }
-    
+
     public function testIsExists()
     {
         $this->assertEquals(false, $this->isExists(array()), 'Not File path');
@@ -168,65 +168,65 @@ class IsTest extends TestCase
             }
         }
     }
-    
+
     public function testIsDate()
     {
         $this->assertTrue($this->isDate('2013-01-13'));
-        
+
         $this->assertTrue($this->isDate('1000-01-01'));
-        
+
         $this->assertTrue($this->isDate('3000-01-01'));
-        
+
         $this->assertTrue($this->isDate('2012-02-29'));
-        
+
         $this->assertFalse($this->isDate('2013-02-29'));
-        
+
         $this->assertFalse($this->isDate('2013-01-32'));
-        
+
         $this->assertFalse($this->isDate('2013-00-00'));
-        
+
         $this->assertFalse($this->isDate('2012'));
     }
-    
+
     public function testIsDateTime()
     {
         $this->assertTrue($this->isDateTime('1000-01-01 00:00:00'));
-        
+
         $this->assertTrue($this->isDateTime('3000-01-01 00:00:50'));
-        
+
         $this->assertTrue($this->isDateTime('2012-02-29 23:59:59'));
-        
+
         $this->assertFalse($this->isDateTime('2013-02-29 24:00:00'));
-        
+
         $this->assertFalse($this->isDateTime('2013-01-32 23:60:00'));
-        
+
         $this->assertFalse($this->isDateTime('2013-00-00 23:59:61'));
-        
+
         $this->assertFalse($this->isDateTime('2012 61:00'));
     }
-    
+
     public function testIsRange()
     {
         $this->assertTrue($this->isRange(20, 10, 30));
-        
+
         $this->assertTrue($this->isRange('2013-01-13', '2013-01-01', '2013-01-31'));
-        
+
         $this->assertTrue($this->isRange(1.5, 0.9, 3.2));
-        
+
         $this->assertFalse($this->isRange(20, 30, 40));
     }
-    
+
     public function testIsIn()
     {
         $this->assertTrue($this->isIn('apple', array('apple', 'pear')));
-        
+
         $this->assertTrue($this->isIn('apple', new \ArrayObject(array('apple', 'pear'))));
-        
+
         $this->assertTrue($this->isIn('', array(null)));
-        
+
         $this->assertFalse($this->isIn('', array(null), true));
     }
-    
+
     /**
      * @expectedException InvalidArgumentException
      */
@@ -234,53 +234,53 @@ class IsTest extends TestCase
     {
         $this->isIn('apple', 'not array');
     }
-    
+
     public function testIsEndsWith()
     {
         $this->assertTrue($this->isEndsWith('abc', 'c'));
-        
+
         $this->assertFalse($this->isEndsWith('abc', ''));
-        
+
         $this->assertFalse($this->isEndsWith('abc', 'b'));
-        
+
         $this->assertTrue($this->isEndsWith('ABC', 'c'));
-        
+
         $this->assertFalse($this->isEndsWith('ABC', 'c', true));
     }
-    
+
     public function testIsStartsWith()
     {
         $this->assertTrue($this->isStartsWith('abc', 'a'));
-        
+
         $this->assertFalse($this->isStartsWith('abc', ''));
-        
+
         $this->assertFalse($this->isStartsWith('abc', 'b'));
-        
+
         $this->assertTrue($this->isStartsWith('ABC', 'A'));
-        
+
         $this->assertFalse($this->isStartsWith('ABC', 'a', true));
     }
-    
+
     public function testClosureAsParameter()
     {
         $this->assertTrue($this->is(function($data){
             return 'abc' === $data;
         }, 'abc'));
-        
+
         $this->assertFalse($this->is(function(
             $data, \Widget\Validator\Rule\Callback $callback, \Widget\Widget $widget
         ){
             return false;
         }, 'data'));
     }
-        
-    
+
+
     public function testValidator()
     {
         $this->assertTrue($this->is('digit', '123'));
-        
+
         $this->assertFalse($this->is('digit', 'abc'));
-        
+
         $result = $this->is(array(
             'data' => array(
                 'email' => 'twinhuang@qq.com',
@@ -296,10 +296,10 @@ class IsTest extends TestCase
                 ),
             ),
         ));
-        
+
         $this->assertTrue($result);
     }
-    
+
     public function testOptionalField()
     {
         $result = $this->is(array(
@@ -313,10 +313,10 @@ class IsTest extends TestCase
                 )
             ),
         ));
-        
+
         $this->assertTrue($result);
     }
-    
+
     /**
      * @expectedException \InvalidArgumentException
      */
@@ -324,7 +324,7 @@ class IsTest extends TestCase
     {
         $this->is(new \stdClass());
     }
-    
+
     /**
      * @expectedException \Widget\Exception
      */
@@ -332,7 +332,7 @@ class IsTest extends TestCase
     {
         $this->is('noThisRule', 'test');
     }
-    
+
     /**
      * @expectedException \InvalidArgumentException
      */
@@ -342,11 +342,11 @@ class IsTest extends TestCase
             'rules' => array(),
         ));
     }
-    
+
     public function testBreakOne()
     {
         $breakRule = '';
-        
+
         $this->is(array(
             'data' => array(
                 'email' => 'error-email',
@@ -362,43 +362,43 @@ class IsTest extends TestCase
                 $breakRule = $rule;
             }
         ));
-        
+
         $this->assertEquals('length', $breakRule);
     }
-    
+
     public function testReturnFalseInValidatedOneCallback()
     {
         $lastRule = '';
-        
+
         $this->is(array(
             'data' => array(
                 'email' => 'twinhuang@qq.com',
             ),
             'rules' => array(
                 'email' => array(
-                    'required' => true, //Aavoid automatic added 
+                    'required' => true, //Aavoid automatic added
                     'email' => true, // Will not validate
                 ),
             ),
             'validatedOne' => function($field, $rule, $validator) use(&$lastRule) {
                 $lastRule = $rule;
-            
+
                 // Return false to break the validation flow
                 return false;
             }
         ));
-        
+
         $this->assertEquals('required', $lastRule);
     }
-    
+
     public function testReturnFalseInValidatedCallback()
     {
         $lastField = '';
-        
+
         $this->is(array(
             'data' => array(
                 'email' => 'twinhuang@qq.com',
-                'age' => 5 
+                'age' => 5
             ),
             'rules' => array(
                 // Will validate
@@ -412,12 +412,12 @@ class IsTest extends TestCase
             ),
             'validated' => function($field, $validator) use(&$lastField) {
                 $lastField = $field;
-            
+
                 // Return false to break the validation flow
                 return false;
             }
         ));
-        
+
         $this->assertEquals('email', $lastField);
     }
 }

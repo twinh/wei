@@ -27,8 +27,8 @@ class Event extends WidgetProvider
 
     /**
      * The namespaces of event
-     * 
-     * @var array 
+     *
+     * @var array
      */
     protected $namespaces = array();
 
@@ -38,39 +38,39 @@ class Event extends WidgetProvider
      * @var float
      */
     protected $timeStamp;
-    
+
     /**
      * Whether prevent the default action or not
-     * 
+     *
      * @var bool
      */
     protected $preventDefault = false;
-    
+
     /**
      * Whether top triggering the next handler or nots
-     * 
+     *
      * @var bool
      */
     protected $stopPropagation = false;
 
     /**
      * The last value returned by an event handler
-     * 
+     *
      * @var mixed
      */
     protected $result;
-    
+
     /**
      * The data accepted from the handler
-     * 
-     * @var array 
+     *
+     * @var array
      */
     protected $data = array();
-    
+
     /**
      * Constructor
      *
-     * @param string $name
+     * @param array $options
      */
     public function __construct(array $options = array())
     {
@@ -82,7 +82,8 @@ class Event extends WidgetProvider
     /**
      * Create a new event
      *
-     * @return mixed
+     * @return Event
+     * @param array $namespaces
      */
     public function __invoke($type, array $namespaces = array())
     {
@@ -92,7 +93,7 @@ class Event extends WidgetProvider
             'namespaces'    => $namespaces,
         ));
     }
-    
+
     /**
      * Get the type of event
      *
@@ -107,7 +108,7 @@ class Event extends WidgetProvider
      * Set the type of event
      *
      * @param  string      $type
-     * @return \Widget\Event
+     * @return Event
      */
     public function setType($type)
     {
@@ -115,57 +116,57 @@ class Event extends WidgetProvider
 
         return $this;
     }
-    
+
     /**
      * Returns the event namespaces
-     * 
+     *
      * @return array
      */
     public function getNamespaces()
     {
         return $this->namespaces;
     }
-    
+
     /**
      * Set the namespace of event
-     * 
+     *
      * @param array $namespaces
-     * @return \Widget\Event
+     * @return Event
      */
     public function setNamespaces(array $namespaces)
     {
         $this->namespaces = $namespaces;
-        
+
         return $this;
     }
-    
+
     /**
      * Returns the event namespace
-     * 
+     *
      * @return string
      */
     public function getNamespace()
     {
         return implode('.', $this->namespaces);
     }
-    
+
     /**
      * Get the time stamp
      *
-     * @return string
+     * @return string|double
      */
     public function getTimeStamp()
     {
         return $this->timeStamp;
     }
-    
+
     /**
-     * @return \Widget\Event
+     * @return Event
      */
     public function preventDefault()
     {
         $this->preventDefault = true;
-        
+
         return $this;
     }
 
@@ -176,55 +177,55 @@ class Event extends WidgetProvider
     {
         return $this->preventDefault;
     }
-    
+
     /**
      * @param mixed $result
      */
     public function setResult($result)
     {
         $this->result = $result;
-        
+
         return $this;
     }
-    
+
     /**
      * Returns the last result returnted by the handler
-     * 
+     *
      * @return mixed
      */
     public function getResult()
     {
         return $this->result;
     }
-    
+
     /**
-     * @param mixed $data
+     * @param array $data
      */
     public function setData($data = array())
     {
         $this->data = $data;
-        
+
         return $this;
     }
-    
+
     /**
-     * @return mixed
+     * @return array
      */
     public function getData()
     {
         return $this->data;
     }
-    
+
     /**
-     * @return \Widget\Event
+     * @return Event
      */
     public function stopPropagation()
     {
         $this->stopPropagation = true;
-        
+
         return $this;
     }
-    
+
     /**
      * @return bool
      */

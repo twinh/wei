@@ -25,14 +25,14 @@ class Widget extends WidgetProvider
      * Version
      */
     const VERSION = '0.9.1';
-    
+
     /**
      * The instances of widget manager
      *
      * @var array
      */
     protected static $instances = array();
-    
+
     /**
      * The array contains the instanced widget objects
      *
@@ -49,71 +49,71 @@ class Widget extends WidgetProvider
 
     /**
      * The php configuration options that will be set when widget manager constructing
-     * 
-     * @var array 
+     *
+     * @var array
      * @see http://www.php.net/manual/en/ini.php
      * @see http://www.php.net/manual/en/function.ini-set.php
      */
     protected $inis = array();
-    
+
     /**
      * The direcroties for autoload
-     * 
+     *
      * @var array
      */
     protected $autoloadMap = array();
-    
+
     /**
      * Whether enable class autoload or not
-     * 
+     *
      * @var bool
      */
     protected $autoload = true;
-    
+
     /**
      * The widget name to class name map
-     * 
+     *
      * @var array
      */
     protected $alias = array();
-    
+
     /**
      * The widgets that will be instanced after widget manager constructed
-     * 
+     *
      * @var array
      */
     protected $initWidgets = array();
-    
+
     /**
      * @var array
      */
     protected $import = array();
-    
+
     /**
      * The callback executes *before* widget constructed
-     * 
-     * @var callable 
+     *
+     * @var callable
      */
     protected $construct;
-    
+
     /**
      * The callback executes *after* widget constructed
-     * 
+     *
      * @var callable
      */
     protected $constructed;
-    
+
     /**
      * Instance widget manager
-     * 
+     *
      * @param array $config
-     * @return \Widget\Widget
+     * @return void
      */
     public function __construct(array $config = array())
     {
         // set configurations for all widget
         $this->config = $config;
-        
+
         $this->widget = $this;
 
         // set all options
@@ -122,7 +122,7 @@ class Widget extends WidgetProvider
             $options = $this->config['widget'] + $options;
         }
         $this->option($options);
-        
+
         // instance initial widgets
         foreach ((array)$this->initWidgets as $widgetName) {
             $this->get($widgetName, null, $this);
@@ -131,10 +131,10 @@ class Widget extends WidgetProvider
 
     /**
      * Get widget manager instance
-     * 
-     * @param array|string $config          The array or file configuration
+     *
+     * @param array $config          The array or file configuration
      * @param string $name                  The name of the instance
-     * @return \Widget\Widget         
+     * @return Widget
      * @throws \InvalidArgumentException    When the configuration parameter is not array or file
      */
     public static function create($config = array(), $name = 'default')
@@ -143,31 +143,31 @@ class Widget extends WidgetProvider
         if (!$config && isset(static::$instances[$name])) {
             return static::$instances[$name];
         }
-        
+
         switch (true) {
             case is_array($config):
                 break;
-            
+
             case is_string($config) && file_exists($config):
                 $config = (array) require $config;
                 break;
-            
+
             default:
                 throw new \InvalidArgumentException('Configuration should be array or file');
         }
-        
+
         if (!isset(static::$instances[$name])) {
             static::$instances[$name] = new static($config);
         } else {
             static::$instances[$name]->config($config);
         }
-        
+
         return static::$instances[$name];
     }
-    
+
     /**
      * Reset the internal static instance
-     * 
+     *
      * @param string|null $name             The name of the instance, if $name is null, reset all instances
      * @throws \InvalidArgumentException    When instance not found
      */
@@ -208,7 +208,7 @@ class Widget extends WidgetProvider
      * Get a widget instance
      *
      * @param  string       $name The name of widget
-     * @return \Widget\Widget
+     * @return object
      */
     public function __invoke($name)
     {
@@ -266,10 +266,10 @@ class Widget extends WidgetProvider
 
     /**
      * Get a widget object and call its "__invoke" method
-     * 
+     *
      * @param string $name  The name of the widget
      * @param array $args   The arguments for "__invoke" method
-     * @param array|null $deps    The dependent configuration
+     * @param array $deps    The dependent configuration
      * @return mixed
      */
     public function invoke($name, array $args, $deps = array())
@@ -281,10 +281,10 @@ class Widget extends WidgetProvider
 
     /**
      * Get a widget object
-     * 
+     *
      * @param string $name  The name of the widget, without class prefix "Widget\"
-     * @param array|null $deps The dependent configuration
-     * @return \Widget\Widget The widget object
+     * @param array $deps The dependent configuration
+     * @return object The widget object
      */
     public function get($name, $deps = array())
     {
@@ -297,7 +297,7 @@ class Widget extends WidgetProvider
         if (isset($this->widgets[$lower])) {
             return $this->widgets[$lower];
         }
-        
+
         // Resolve the real widget name and the config name($full)
         $full = $name;
         if (false !== ($pos = strpos($name, '.'))) {
@@ -311,7 +311,7 @@ class Widget extends WidgetProvider
             if (!method_exists($class, '__invoke')) {
                 throw new \BadMethodCallException(sprintf('Method "__invoke" not found in widget "%s"', $class));
             }
-            
+
             // Trigger the construct callback
             $this->construct && call_user_func($this->construct, $name, $full);
 
@@ -319,9 +319,9 @@ class Widget extends WidgetProvider
             // Load the widget configuration
             $options = (array)$this->config($full);
             $options['widget'] = $this;
-            
+
             $this->widgets[$lower] = new $class($options);
-            
+
             // Trigger the constructed callback
             $this->constructed && call_user_func($this->constructed, $this->widgets[$lower], $name, $full);
 
@@ -346,10 +346,10 @@ class Widget extends WidgetProvider
             throw new \BadMethodCallException(sprintf('Property or method "%s" not defined', $name));
         }
     }
-    
+
     /**
      * Add a widget
-     * 
+     *
      * @param string $name The name of widget
      * @param \Widget\Widgetable $widget The widget object
      */
@@ -372,13 +372,13 @@ class Widget extends WidgetProvider
             unset($this->widgets[$lower]);
             return true;
         }
-        
+
         return false;
     }
-    
+
     /**
      * Get the widget class by the given name
-     * 
+     *
      * @param string $name The name of widget
      * @return string
      */
@@ -389,16 +389,16 @@ class Widget extends WidgetProvider
         } else {
             $class = 'Widget\\' . ucfirst($name);
         }
-        
+
         return $class;
     }
 
     /**
-     * Check if the widget exists by the given name, if the widget exists, 
+     * Check if the widget exists by the given name, if the widget exists,
      * returns the full class name, else return false
-     * 
+     *
      * @param string $name The name of widget
-     * @return string|bool
+     * @return string|false
      */
     public function has($name)
     {
@@ -415,34 +415,34 @@ class Widget extends WidgetProvider
     public function setAutoload($enable)
     {
         $this->autoload = (bool) $enable;
-        
+
         call_user_func(
-            $enable ? 'spl_autoload_register' : 'spl_autoload_unregister', 
+            $enable ? 'spl_autoload_register' : 'spl_autoload_unregister',
             array($this, 'autoload')
         );
-        
+
         return $this;
     }
 
     /**
      * Set autoload directories for autoload method
      *
-     * @param  string|array        $map
-     * @return \Widget\Widget
+     * @param  string|array        $maps
+     * @return Widget
      */
     public function setAutoloadMap($maps)
     {
         !is_array($maps) && $maps = (array) $maps;
-        
+
         foreach ($maps as &$dir) {
             $dir = realpath($dir) . DIRECTORY_SEPARATOR;
         }
-        
+
         // The autoload directories will always contain the widget directory
         $maps['Widget'] = dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR;
 
         $this->autoloadMap = $maps;
-        
+
         return $this;
     }
 
@@ -450,7 +450,7 @@ class Widget extends WidgetProvider
      * Set the ini options
      *
      * @param  array               $inis
-     * @return \Widget\Widget
+     * @return Widget
      */
     public function setInis($inis)
     {
@@ -460,14 +460,13 @@ class Widget extends WidgetProvider
 
         return $this;
     }
-    
+
     /**
      * Import the class in the given directory as widget
-     * 
+     *
      * @param string $dir The directory for class
-     * @param string $namespace The prefix namespace of the class 
-     * @param string $prefix The widget name prefix
-     * @return \Widget\Widget
+     * @param string $namespace The prefix namespace of the class
+     * @return Widget
      * @throws \InvalidArgumentException When the first parameter is not a directory
      */
     public function import($dir, $namespace, $format = null)
@@ -475,7 +474,7 @@ class Widget extends WidgetProvider
         if (!is_dir($dir)) {
             throw new \InvalidArgumentException('Parameter 1 should be valid directory');
         }
-        
+
         $files = glob($dir . '/*.php');
 
         foreach ($files as $file) {
@@ -487,12 +486,12 @@ class Widget extends WidgetProvider
 
         return $this;
     }
-    
+
     /**
      * Set import
-     * 
+     *
      * @param array $import
-     * @return \Widget\Widget
+     * @return Widget
      */
     public function setImport($import = array())
     {
@@ -504,7 +503,7 @@ class Widget extends WidgetProvider
             );
             $this->import($option['dir'], $option['namespace'], $option['format']);
         }
-        
+
         return $this;
     }
 }

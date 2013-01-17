@@ -18,6 +18,7 @@ class On extends WidgetProvider
 {
     /**
      * @see \Widget\Manager::add
+     * @param array $data
      */
     public function __invoke($type, $fn, $priority = 0, $data = array())
     {

@@ -72,8 +72,8 @@ class Marker extends WidgetProvider
     /**
      * Set a marker
      *
-     * @param  string      $name marker's name
-     * @return Widget_Widget
+     * @param  string|null      $name marker's name
+     * @return Marker
      */
     public function __invoke($name = null)
     {
@@ -90,7 +90,7 @@ class Marker extends WidgetProvider
     /**
      * Get markers data
      *
-     * @return array
+     * @return array<*,string>
      */
     public function getMarkers()
     {
@@ -100,8 +100,8 @@ class Marker extends WidgetProvider
     /**
      * Display profiling data
      *
-     * @param  string $print
-     * @return mixed
+     * @param  boolean|string $print
+     * @return Marker|string
      */
     public function display($print = true)
     {

@@ -17,31 +17,31 @@ class TestCase extends \PHPUnit_Framework_TestCase implements Widgetable
      * @var \Widget\WidgetProvider
      */
     protected $object;
-    
+
     /**
      * The widget manager
-     * 
+     *
      * @var \Widget\Widget
      */
     protected $widget;
 
     /**
      * The widget name of current test case
-     * 
+     *
      * @var string
      */
     protected $widgetName;
-    
+
     public function __construct($name = NULL, array $data = array(), $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
-        
+
         $this->widget = Widget::create();
     }
-    
+
     /**
      * Get the widget name
-     * 
+     *
      * @return string
      */
     protected function getWidgetName()
@@ -51,14 +51,14 @@ class TestCase extends \PHPUnit_Framework_TestCase implements Widgetable
             $class = array_pop($names);
             $this->widgetName = substr($class, 0, -4);
         }
-        
+
         return $this->widgetName;
     }
-    
+
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
-     * 
+     *
      * @todo How to inject widget manager instead of Widget::create()
      */
     protected function setUp()
@@ -79,14 +79,14 @@ class TestCase extends \PHPUnit_Framework_TestCase implements Widgetable
             if ('widget' == $name) {
                 continue;
             }
-            
+
             // Remove all widget instanlled by current test object
             if ($property instanceof \Widget\WidgetProvider) {
                 unset($this->$name);
                 $this->widget->remove($name);
             }
         }
-        
+
         // Remove $this->object
         $this->widget->remove($this->getWidgetName());
     }

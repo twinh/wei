@@ -39,7 +39,7 @@ class Response extends WidgetProvider
      * @param  string         $content
      * @param  int            $status
      * @param  array          $options
-     * @return \Widget\Response
+     * @return Response
      */
     public function __invoke($content = '', $status = 200, array $options = array())
     {
@@ -60,7 +60,7 @@ class Response extends WidgetProvider
      * Set response content
      *
      * @param  mixed          $content
-     * @return \Widget\Response
+     * @return Response
      */
     public function setContent($content)
     {
@@ -72,7 +72,7 @@ class Response extends WidgetProvider
     /**
      * Get response content
      *
-     * @return string
+     * @return mixed
      */
     public function getContent()
     {
@@ -109,7 +109,7 @@ class Response extends WidgetProvider
      * Set response sent status
      *
      * @param  bool           $bool
-     * @return \Widget\Response
+     * @return Response
      */
     public function setSentStatus($bool)
     {

@@ -10,10 +10,10 @@
 namespace Widget;
 
 /**
- * Converts chinese words to phonetic alphabets 
- * 
+ * Converts chinese words to phonetic alphabets
+ *
  * The basic code of the pinyin widget is from the internet
- * 
+ *
  * @todo refactor and enhance
  */
 class Pinyin extends WidgetProvider
@@ -434,8 +434,8 @@ class Pinyin extends WidgetProvider
     }
 
     /**
-     * Converts chinese words to phonetic alphabets 
-     * 
+     * Converts chinese words to phonetic alphabets
+     *
      * @param string $word
      * @return string
      */
