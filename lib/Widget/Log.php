@@ -65,7 +65,7 @@ class Log extends WidgetProvider
      * 
      * @var type 
      */
-    protected $dir = '../log';
+    protected $dir = 'log';
     
     /**
      * The log file name, formatted by strftime
@@ -92,7 +92,7 @@ class Log extends WidgetProvider
         'warn'      => 2,
         'error'     => 3,
         'crit'      => 4,
-        'alert '    => 5,
+        'alert'     => 5,
     );
     
     /**
@@ -142,9 +142,10 @@ class Log extends WidgetProvider
             str_pad(strtoupper($record['level']), 5),
             $record['message'],
         ), $this->format);
-        
+
         // Write the log message
-        if (null === $this->handle) {
+        if (!$this->fileDetected || !$this->handle) {
+            $this->close();
             $this->handle = fopen($this->getFile(), 'a');
         }
         fwrite($this->handle, $content);
@@ -163,6 +164,7 @@ class Log extends WidgetProvider
             return $this->file;
         }
 
+        $this->handle = null;
         $file = &$this->file;
 
         if (!is_dir($this->dir) && false === @mkdir($this->dir, 0777, true)) {
@@ -247,7 +249,7 @@ class Log extends WidgetProvider
         
         return $this;
     }
-
+    
     /**
      * Log a debug level message
      *
@@ -287,11 +289,16 @@ class Log extends WidgetProvider
      * @param string $message
      * @return bool
      */
-    public function err($message)
+    public function error($message)
     {
         return $this($message, 'error');
     }
 
+    public function crit($message)
+    {
+        return $this($message, 'crit');
+    }
+    
     /**
      * Log an error level message
      *

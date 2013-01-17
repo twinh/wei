@@ -4,172 +4,141 @@ namespace WidgetTest;
 
 class LogTest extends TestCase
 {
-    protected function setUp() {
-        $this->widget->config('log', array(
-            'dir' => sys_get_temp_dir(),
+    protected function setUp()
+    {
+        $this->object = new \Widget\Log(array(
+            'widget' => $this->widget
         ));
-        parent::setUp();
-        $this->object->clean();
+        //parent::setUp();
     }
 
     protected function tearDown()
     {
         $this->object->clean();
-        parent::tearDown();
-    }
-
-    public static function tearDownAfterClass()
-    {
-        parent::tearDownAfterClass();
         
-//        $log = Qwin::getInstance()->log;
-//
-//        $log->clean();
-//
-//        $log->option('save', array(
-//            __CLASS__, 'notSave',
-//        ));
-//
-//        rmdir($log->option('dir'));
+        $dir = $this->object->option('dir');
+        if (is_dir($dir)) {
+            rmdir($dir);
+        }
+        
+        //parent::tearDown();
     }
 
-    public static function notSave()
+    public function testLog()
     {
+        $logger = $this->object;
 
-    }
+        $logger->option('level', 'debug');
 
-    public function testLog() {
-        $widget = $this->object;
+        $logger->debug(__METHOD__);
 
-        $widget->option('level', 'debug');
-
-        $widget->debug(__METHOD__);
-
-        $file = $widget->option('file');
+        $file = $logger->getFile();
 
         $this->assertContains(__METHOD__, file_get_contents($file));
 
         // clean all file in log diretory
-        $widget->clean();
+        $logger->clean();
 
-        $widget->option('level', 'info');
+        $logger->option('level', 'info');
 
-        $widget->debug(__METHOD__);
+        $logger->debug(__METHOD__);
         
         $this->assertFileNotExists($file);
     }
 
     public function testGetFileOption()
     {
-        $widget = $this->object;
+        $logger = $this->object;
+        
+        $logger->option('level', 'debug');
 
-        $widget->option('fileDetected', false);
+        $logger->option('fileDetected', false);
 
-        $widget->debug(__METHOD__);
+        $logger->debug(__METHOD__);
 
-        $oldFile = $widget->option('file');
+        $oldFile = $logger->getFile();
 
-        $size = $widget->option('fileSize');
+        // Make it always create new file
+        $logger->option('fileSize', 1);
 
-        // always create new file
-        $widget->option('fileSize', 1);
+        // Create the second file
+        $logger->debug(__METHOD__);
 
-        // create the second file
-        $widget->debug(__METHOD__);
+        $logger->option('fileDetected', false);
 
-        $widget->option('fileDetected', false);
+        // Create the thrid file
+        $logger->debug(__METHOD__);
 
-        // create the thrid file
-        $widget->debug(__METHOD__);
+        $logger->option('fileDetected', false);
 
-        $widget->option('fileDetected', false);
+        // Create the fouth file
+        $logger->debug(__METHOD__);
 
-        // create the fouth file
-        $widget->debug(__METHOD__);
+        $logger->option('fileDetected', false);
 
-        $widget->option('fileDetected', false);
+        $newFile = $logger->getFile();
 
-        //$newFile = $widget->option('file');
-
-        //$this->assertNotEquals($oldFile, $newFile);
+        $this->assertNotEquals($oldFile, $newFile);
     }
     
     public function testAllLevel()
     {
-        $widget = $this->object;
+        $logger = $this->object;
+        
+        $logger->option('level', 'debug');
+            
+        $logger->debug(__METHOD__);
 
-        $widget->option('level', 'debug');
-
-        $widget->debug(__METHOD__);
-
-        $file = $widget->option('file');
+        $file = $logger->option('file');
 
         $this->assertContains(__METHOD__, file_get_contents($file));
     }
 
     public function testSetFileOption()
     {
-        $widget = $this->object;
+        $logger = $this->object;
+        
+        $logger->option('level', 'debug');
+        
+        $newFile = dirname($logger->getFile()) . DIRECTORY_SEPARATOR . mt_rand(0, 1000);
 
-        $dir = dirname($widget->option('file')) . DIRECTORY_SEPARATOR . __FUNCTION__;
-        $file = $dir . DIRECTORY_SEPARATOR . __LINE__;
+        $logger->setFile($newFile);
 
-        // clean file and directory
-        if (is_file($file)) {
-            unlink($file);
-        }
-        if (is_dir($dir)) {
-            rmdir($dir);
-        }
+        $logger->debug(__METHOD__);
 
-        $widget->option('file', $file);
-
-        $widget->debug(__METHOD__);
-
-        $this->assertFileExists($file);
-
-        $widget->option('fileDetected', false);
-
-        $widget->clean();
-        // clean again
-//        if (is_file($file)) {
-//            unlink($file);
-//        }
-//        if (is_dir($dir)) {
-//            rmdir($dir);
-//        }
+        $this->assertFileExists($newFile);
     }
 
-    public function testSetFileDirOption()
+    public function testSetDir()
     {
-        $widget = $this->object;
+        $logger = $this->object;
+        
+        $file = $logger->getFile();
 
-        $oldDir = $widget->option('dir');
+        $oldDir = $logger->option('dir');
 
         $newDir = realpath($oldDir) . DIRECTORY_SEPARATOR . 'subdir';
 
-        $widget->option('dir', $newDir);
+        $logger->setDir($newDir);
 
-        $file = $widget->option('file');
+        $file = $logger->option('file');
 
         $this->assertEquals($newDir, dirname($file));
 
         rmdir($newDir);
-
-        $widget->option('dir', $oldDir);
     }
 
     public function testSetFileFormatOption()
     {
-        $widget = $this->object;
+        $logger = $this->object;
 
-        $format = $widget->option('fileFormat');
+        $format = $logger->option('fileFormat');
 
-        $file = $widget->option('file');
+        $file = $logger->option('file');
 
-        $widget->option('fileFormat', 'newfile.log');
+        $logger->option('fileFormat', 'newfile.log');
 
-        $widget->debug(__METHOD__);
+        $logger->debug(__METHOD__);
 
         $file = dirname($file) . DIRECTORY_SEPARATOR . 'newfile.log';
 
@@ -178,22 +147,22 @@ class LogTest extends TestCase
 
     public function testSetFileSizeOption()
     {
-        $widget = $this->object;
+        $logger = $this->object;
 
-        $widget->option('file', $widget->option('file'));
+        $logger->option('file', $logger->option('file'));
 
-        $widget->debug(__METHOD__);
+        $logger->debug(__METHOD__);
 
-        $oldFile = $widget->option('file');
+        $oldFile = $logger->option('file');
 
-        $size = $widget->option('fileSize');
+        $size = $logger->option('fileSize');
 
         // always create new file
-        $widget->option('fileSize', 1);
+        $logger->option('fileSize', 1);
 
-        $widget->debug(__METHOD__);
+        $logger->debug(__METHOD__);
 
-        $newFile = $widget->option('file');
+        $newFile = $logger->option('file');
 
         $this->assertNotEquals($oldFile, $newFile);
     }
