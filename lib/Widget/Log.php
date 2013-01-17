@@ -310,6 +310,9 @@ class Log extends WidgetProvider
      */
     public function clean()
     {
+        // Make sure the handle is close
+        $this->close();
+        
         $dir = dirname($this->getFile());
         if (is_dir($dir)) {
             $files = scandir($dir);
@@ -325,11 +328,16 @@ class Log extends WidgetProvider
         return $this;
     }
     
-    public function __destruct()
+    public function close()
     {
         if (is_resource($this->handle)) {
             fclose($this->handle);
         }
         $this->handle = null;
+    }
+    
+    public function __destruct()
+    {
+        $this->close();
     }
 }
