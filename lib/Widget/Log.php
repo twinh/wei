@@ -9,138 +9,147 @@
 namespace Widget;
 
 /**
- * The default logger for widget
+ * The default logger for widget, which is base on the Monolog!
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
- * @todo        refator
+ * @link        https://github.com/Seldaek/monolog
  */
 class Log extends WidgetProvider
-{   
+{
     /**
-     * Log options
-     *
-     * @var array
-     *
-     *      -- level        string      default level for "call" method and lowest level to write
-     *
-     *      -- format       string      logs format, words start with "$" would be replace to the
-     *                                  same variable, now only have "$time", "$level" and "$message"
-     *
-     *      -- timeFormat   string      time format in logs, formatted by strftime
-     *
-     *      -- save         callback    handle to save logs
-     *
-     *      -- file         string      logs file name, if specify this argument, option "fileDir"
-     *                                  and "fileFormat" would be ignored
-     *
-     *      -- fileDir      string      dir to store logs file
-     *
-     *      -- fileFormat   string      logs file name, formatted by strftime
-     *
-     *      -- fileSize     int         max file size for logs file
-     */
-    public $options = array(
-        'level' => 'debug',
-        'format' => '$time $level - $message',
-        'timeFormat' => '%Y-%m-%d %H:%M:%S',
-        'save' => null,
-        'file' => null,
-        'fileDir' => './logs',
-        'fileFormat' => '%Y%m%d.log',
-        'fileSize' => 134217728, // 128mb
-    );
-    
-    
-    
-    /**
-     * Log levels and priorities
-     *
-     * @var array
-     */
-    protected $_levels = array(
-        'trace' => 0,
-        'debug' => 1,
-        'info'  => 2,
-        'warn'  => 3,
-        'error' => 4,
-        'fatal' => 5,
-    );
-
-    /**
-     * log data
-     *
-     * @var array
-     */
-    protected $_data = array();
-
-    /**
-     * current working directory for getFileOption method
-     *
+     * The name of channel
+     *  
      * @var string
      */
-    protected $_cwd;
+    protected $name = 'widget';
+    
+    /**
+     * The default log level
+     * 
+     * @var string
+     */
+    protected $defaultLevel = 'debug';
+    
+    /**
+     *  and lowest level to write
+     * 
+     * @var string
+     */
+    protected $level = 'debug';
+    
+    /**
+     * The format for log message
+     * 
+     * @var string 
+     */
+    protected $format = "[%datetime%] %channel%.%level%: %message%\n";
+    
+    /**
+     * The date format for log message
+     * 
+     * @var string 
+     */
+    protected $dateFormat = 'Y-m-d H:i:s';
+    
+    /**
+     * The log file name, if specify this parameter, the "dir" and "fileFormat" 
+     * parameters would be ignored
+     * 
+     * @var null|string 
+     */
+    protected $file = null;
+    
+    /**
+     * The dir to store log files
+     * 
+     * @var type 
+     */
+    protected $dir = '../log';
+    
+    /**
+     * The log file name, formatted by strftime
+     * 
+     * @var string 
+     */
+    protected $fileFormat = '%Y%m%d.log';
+    
+    /**
+     * The max file size for log file, default to 128mb
+     * 
+     * @var int 
+     */
+    protected $fileSize = 134217728;
+        
+    /**
+     * The log levels and priorities
+     *
+     * @var array
+     */
+    protected $levels = array(
+        'debug'     => 0,
+        'info'      => 1,
+        'warn'      => 2,
+        'error'     => 3,
+        'crit'      => 4,
+        'alert '    => 5,
+    );
+    
+    /**
+     * The log file handle
+     * 
+     * @var resource 
+     */
+    protected $handle;
 
     /**
-     * whether log file's exact path has been detected
-     * when set fileDir, fileFormat or fileSize options, log file should be detected again
+     * Whether log file's exact path has been detected, when set dir, fileFormat
+     * or fileSize options, log file should be detected again
      *
      * @var bool
      */
-    protected $_fileDetected = false;
-
-    public function __construct($options = null)
-    {
-        $options = (array)$options + $this->options;
-        $this->options = &$options;
-
-        $this->_cwd = getcwd();
-
-        $this->option($options);
-
-        // save log file when shutdown
-        $that = $this;
-        $this->on('shutdown', function() use($that) {
-            $that->save();
-        });
-    }
+    protected $fileDetected = false;
 
     /**
      * Log a default level message
      *
      * @param string $message
-     * @return Qwin_Log
+     * @return bool whether the log record has been handle
      */
     public function __invoke($message, $level = null)
     {
-        $level = isset($level) ? $level : $this->options['level'];
+        $level = isset($level) ? $level : $this->defaultLevel;
 
-        // TODO add class method file line invoker category ?
-        $this->_data[] = array(
+        $record = array(
             'level' => $level,
             'message' => $message,
             'time' => microtime(true),
         );
 
-        return $this;
-    }
-
-    /**
-     * Set save option
-     *
-     * @param callback $callback
-     * @return Qwin_Log
-     */
-    public function setSaveOption($callback)
-    {
-        if (!$callback) {
-            $this->options['save'] = array($this, 'save');
-        } elseif (is_callable($callback)) {
-            $this->options['save'] = $callback;
-        } else {
-            return $this->exception('Invalid callback for save option');
+        // Check if the level would be handle
+        if (isset($this->levels[$level])) {
+            if ($this->levels[$level] < $this->levels[$this->level]) {
+                return false;
+            }
         }
-        return $this;
+
+        // Format the log message
+        $content = str_replace(array(
+            '%datetime%', '%channel%', '%level%', '%message%',
+        ), array(
+            date($this->dateFormat, $record['time']),
+            $this->name,
+            str_pad(strtoupper($record['level']), 5),
+            $record['message'],
+        ), $this->format);
+        
+        // Write the log message
+        if (null === $this->handle) {
+            $this->handle = fopen($this->getFile(), 'a');
+        }
+        fwrite($this->handle, $content);
+        
+        return true;
     }
 
     /**
@@ -148,28 +157,21 @@ class Log extends WidgetProvider
      *
      * @return string
      */
-    public function getFileOption()
+    public function getFile()
     {
-        if ($this->_fileDetected) {
-            return $this->options['file'];
+        if ($this->fileDetected) {
+            return $this->file;
         }
 
-        // some time, getFileOption is called in register_shutdown_function
-        // and the working directory is changed, we should change it back to the website directory
-        $cwd = getcwd();
-        chdir($this->_cwd);
+        $file = &$this->file;
 
-        $options = &$this->options;
-
-        $file = &$options['file'];
-
-        if (!is_dir($options['fileDir'])) {
-            mkdir($options['fileDir'], 0777, true);
+        if (!is_dir($this->dir) && false === @mkdir($this->dir, 0777, true)) {
+            throw new \RuntimeException('Unable to create directory ' . $this->dir);
         }
-        // use absolute path for file_put_contents in register_shutdown_function
-        $file = realpath($options['fileDir']) . '/' . strftime($options['fileFormat']);
+        
+        $file = realpath($this->dir) . '/' . strftime($this->fileFormat);
 
-        if ($options['fileSize']) {
+        if ($this->fileSize) {
             $firstFile = $file;
 
             $files = glob($file . '*', GLOB_NOSORT);
@@ -179,7 +181,7 @@ class Log extends WidgetProvider
                 $file = array_pop($files);
             }
 
-            if (is_file($file) && $options['fileSize'] < filesize($file)) {
+            if (is_file($file) && $this->fileSize < filesize($file)) {
                 $ext = pathinfo($file, PATHINFO_EXTENSION);
                 if (is_numeric($ext)) {
                     $file = $firstFile . '.' . ($ext + 1);
@@ -189,174 +191,126 @@ class Log extends WidgetProvider
             }
         }
 
-        chdir($cwd);
-
-        $this->_fileDetected = true;
+        $this->fileDetected = true;
 
         return $file;
     }
 
-    public function setFileOption($file)
+    /**
+     * Set custom log file
+     * 
+     * @param string $file The path of file
+     * @return \Widget\Log
+     * @throws \RuntimeException When unable to create directory
+     */
+    public function setFile($file)
     {
-        // reset detected state
-        if (!$file) {
-            $this->_fileDetected = false;
-            return $this;
+        if (!is_dir($dir = dirname($file)) && false === @mkdir($dir, 0777, true)) {
+            throw new \RuntimeException('Unable to create directory ' . $dir);
         }
-
-        $dir = dirname($file);
-        if (!is_dir($dir)) {
-            mkdir($dir, 0777, true);
-        }
-
-        $this->options['file'] = $file;
-        $this->_fileDetected = true;
-
+        
+        $this->file = $file;
+        $this->fileDetected = true;
+        
         return $this;
     }
-
+    
     /**
-     * Set file directory
+     * Set new directory for file
      *
      * @param string $dir
-     * @return Qwin_Log
+     * @return \Widget\Log
      */
-    public function setFileDirOption($dir)
+    public function setDir($dir)
     {
-        // reset detectd state
-        $this->_fileDetected = false;
-        $this->options['fileDir'] = $dir;
+        // Reset detectd state
+        $this->fileDetected = false;
+        $this->dir = $dir;
+
         return $this;
     }
-
-    /**
-     * Set file name format
-     *
-     * @param string $format
-     * @return Qwin_Log
-     */
-    public function setFileFormatOption($format)
+    
+    public function setFileFormat($format)
     {
-        // reset detectd state
-        $this->_fileDetected = false;
-        $this->options['fileFormat'] = $format;
+        // Reset detectd state
+        $this->fileDetected = false;
+        $this->fileFormat = $format;
+        
         return $this;
     }
-
-    /**
-     * Set file size
-     *
-     * @param int $size
-     * @return Qwin_Log
-     */
-    public function setFileSizeOption($size)
+    
+    public function setFileSize($size)
     {
-        // reset detectd state
-        $this->_fileDetected = false;
-        $this->options['fileSize'] = (int)$size;
+        // Reset detectd state
+        $this->fileDetected = false;
+        $this->fileSize = (int)$size;
+        
         return $this;
-    }
-
-    /**
-     * Log a trace level message
-     *
-     * @param string $message
-     * @return Qwin_Log
-     */
-    public function trace($message)
-    {
-        return $this->__invoke($message, 'trace');
     }
 
     /**
      * Log a debug level message
      *
      * @param string $message
-     * @return Qwin_Log
+     * @return bool
      */
-    public function debug($message)
+    public function debug ($message)
     {
-        return $this->__invoke($message, 'debug');
+        return $this($message, 'debug');
     }
 
     /**
      * Log a info level message
      *
      * @param string $message
-     * @return Qwin_Log
+     * @return bool
      */
     public function info($message)
     {
-        return $this->__invoke($message, 'info');
+        return $this($message, 'info');
     }
 
     /**
      * Log a warn level message
      *
      * @param string $message
-     * @return Qwin_Log
+     * @return bool
      */
     public function warn($message)
     {
-        return $this->__invoke($message, 'warn');
+        return $this($message, 'warning');
+    }
+
+    /**
+     * Log a warn level message
+     *
+     * @param string $message
+     * @return bool
+     */
+    public function err($message)
+    {
+        return $this($message, 'error');
     }
 
     /**
      * Log an error level message
      *
      * @param string $message
-     * @return Qwin_Log
+     * @return bool
      */
-    public function error($message)
+    public function alert($message)
     {
-        return $this->__invoke($message, 'error');
+        return $this($message, 'alert');
     }
 
     /**
-     * Log a fatal level message
-     *
-     * @param string $message
-     * @return Qwin_Log
+     * Clear up all log file
+     * 
+     * @return \Widget\Log
      */
-    public function fatal($message)
-    {
-        return $this->__invoke($message, 'fatal');
-    }
-
-    /**
-     * Default method to save logs
-     *
-     * @return Qwin_Log
-     */
-    public function save()
-    {
-        $content = '';
-        foreach ($this->_data as $data) {
-            if (isset($this->_levels[$data['level']])) {
-                if ($this->_levels[$data['level']] < $this->_levels[$this->options['level']]) {
-                    continue;
-                }
-            }
-            $content .= str_replace(array(
-                '$time', '$level', '$message',
-            ), array(
-                strftime($this->options['timeFormat'], $data['time']),
-                str_pad(strtoupper($data['level']), 5),
-                $data['message'],
-            ), $this->options['format']) . PHP_EOL;
-        }
-
-        file_put_contents($this->getFileOption(), $content, FILE_APPEND|LOCK_EX);
-
-        // clear logs
-        $this->_data = array();
-
-        return $this;
-    }
-
     public function clean()
     {
-        $dir = dirname($this->getFileOption());
+        $dir = dirname($this->getFile());
         if (is_dir($dir)) {
             $files = scandir($dir);
             foreach ($files as $file) {
@@ -369,5 +323,13 @@ class Log extends WidgetProvider
             }
         }
         return $this;
+    }
+    
+    public function __destruct()
+    {
+        if (is_resource($this->handle)) {
+            fclose($this->handle);
+        }
+        $this->handle = null;
     }
 }
