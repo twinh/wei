@@ -13,6 +13,7 @@ namespace Widget;
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @property \Widget\Post $post The post widget
  * @todo        Use other various instead of global various $_FILES
  * @todo        Add service widget and extend it
  * @todo        language
