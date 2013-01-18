@@ -9,22 +9,30 @@
 namespace Widget\Validator\Rule;
 
 /**
- * IsLength
- *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Length extends AbstractRule
 {
-    public function __invoke($data, $min, $max = null)
+    protected $min;
+    
+    protected $max;
+    
+    public function __invoke($data, $options = array())
     {
-        $len = strlen($data);
-        if (0 === $max) {
-            return $len >= $min;
-        } elseif (!$max) {
-            return $len == $min;
+        if (is_int($options)) {
+            $this->max = $this->min = $options;
         } else {
-            return $min <= $len && $max >= $len;
+            $this->option($options);
+        }
+        
+        $fn = function_exists('mb_strlen') ? 'mb_strlen' : 'strlen';
+        $len = $fn($data);
+        
+        if ($this->max === $this->min) {
+            return $len === $this->max;
+        } else {
+            return $this->min <= $len && $this->max >= $len;
         }
     }
 }
