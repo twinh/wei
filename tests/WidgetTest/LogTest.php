@@ -75,34 +75,6 @@ class LogTest extends TestCase
         }
     }
 
-    public function testSetFileOption()
-    {
-        $logger = $this->object;
-
-        $newFile = dirname($logger->getFile()) . DIRECTORY_SEPARATOR . mt_rand(0, 1000);
-
-        $logger->setFile($newFile);
-
-        $logger->addDebug(__METHOD__);
-
-        $this->assertFileExists($newFile);
-    }
-
-    public function testSetFileFormatOption()
-    {
-        $logger = $this->object;
-
-        $file = $logger->getFile();
-
-        $logger->setfileFormat('newfile.log');
-
-        $logger->addDebug(__METHOD__);
-
-        $file = dirname($file) . DIRECTORY_SEPARATOR . 'newfile.log';
-
-        $this->assertFileExists($file);
-    }
-
     public function testFileSize()
     {
         $oldLogger = new \Widget\Log(array(

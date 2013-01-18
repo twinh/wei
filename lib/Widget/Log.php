@@ -14,7 +14,6 @@ namespace Widget;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @link        https://github.com/Seldaek/monolog
- * @todo        Remove setFileFormat
  */
 class Log extends WidgetProvider
 {
@@ -76,7 +75,7 @@ class Log extends WidgetProvider
     protected $file = null;
     
     /**
-     * The dir to store log files
+     * The directory to store log files
      * 
      * @var type 
      */
@@ -199,35 +198,13 @@ class Log extends WidgetProvider
 
         return $file;
     }
-
+    
     /**
-     * Set custom log file
+     * Set default log level
      * 
-     * @param string $file The path of file
+     * @param string $level
      * @return \Widget\Log
-     * @throws \RuntimeException When unable to create directory
      */
-    public function setFile($file)
-    {
-        if (!is_dir($dir = dirname($file)) && false === @mkdir($dir, 0777, true)) {
-            throw new \RuntimeException('Unable to create directory ' . $dir);
-        }
-        
-        $this->file = $file;
-        $this->fileDetected = true;
-        
-        return $this;
-    }
-    
-    public function setFileFormat($format)
-    {
-        // Reset detectd state
-        $this->fileDetected = false;
-        $this->fileFormat = $format;
-        
-        return $this;
-    }
-    
     public function setLevel($level)
     {
         $this->level = $level;
