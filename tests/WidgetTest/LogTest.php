@@ -116,4 +116,16 @@ class LogTest extends TestCase
         
         $this->assertContains('INFO', file_get_contents($file));
     }
+    
+    /**
+     * @expectedException \RuntimeException
+     */
+    public function testMkdirException()
+    {
+        $logger = new \Widget\Log(array(
+            'dir' => 'http://example/'
+        ));
+        
+        $logger->getFile();
+    }
 }
