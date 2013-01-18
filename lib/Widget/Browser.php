@@ -118,7 +118,7 @@ class Browser extends WidgetProvider
         // Ignore the first element
         list(, $this->name, $this->version) = $matches;
 
-        $this->{$this->name} = true;
+        $this->name && $this->{$this->name} = true;
 
         // Chrome is Webkit, but Webkit is also Safari.
         if ($this->chrome) {
