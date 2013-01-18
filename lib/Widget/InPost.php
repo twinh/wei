@@ -13,12 +13,12 @@ namespace Widget;
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
- * @method string server(string $name) Returns the request server parameter
+ * @property    \Widget\Server $server The server widget
  */
 class InPost extends WidgetProvider
 {
     public function __invoke()
     {
-        return 'POST' == strtoupper($this->server('REQUEST_METHOD'));
+        return 'POST' == strtoupper($this->server['REQUEST_METHOD']);
     }
 }

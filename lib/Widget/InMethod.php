@@ -14,7 +14,7 @@ namespace Widget;
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
- *  * @property \Widget\Server $server The server widget
+ * @property \Widget\Server $server The server widget
  */
 class InMethod extends WidgetProvider
 {
