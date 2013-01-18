@@ -22,7 +22,7 @@ class LogTest extends TestCase
 
         $logger->option('level', 'debug');
 
-        $logger->debug(__METHOD__);
+        $logger->addDebug(__METHOD__);
 
         $file = $logger->getFile();
 
@@ -33,7 +33,7 @@ class LogTest extends TestCase
 
         $logger->option('level', 'info');
 
-        $logger->debug(__METHOD__);
+        $logger->addDebug(__METHOD__);
         
         $this->assertFileNotExists($file);
     }
@@ -46,7 +46,7 @@ class LogTest extends TestCase
 
         $logger->option('fileDetected', false);
 
-        $logger->debug(__METHOD__);
+        $logger->addDebug(__METHOD__);
 
         $oldFile = $logger->getFile();
 
@@ -54,17 +54,17 @@ class LogTest extends TestCase
         $logger->option('fileSize', 1);
 
         // Create the second file
-        $logger->debug(__METHOD__);
+        $logger->addDebug(__METHOD__);
 
         $logger->option('fileDetected', false);
 
         // Create the thrid file
-        $logger->debug(__METHOD__);
+        $logger->addDebug(__METHOD__);
 
         $logger->option('fileDetected', false);
 
         // Create the fouth file
-        $logger->debug(__METHOD__);
+        $logger->addDebug(__METHOD__);
 
         $logger->option('fileDetected', false);
 
@@ -79,7 +79,7 @@ class LogTest extends TestCase
         
         $logger->option('level', 'debug');
 
-        $logger->debug(__METHOD__);
+        $logger->addDebug(__METHOD__);
 
         $file = $logger->option('file');
 
@@ -96,7 +96,7 @@ class LogTest extends TestCase
 
         $logger->setFile($newFile);
 
-        $logger->debug(__METHOD__);
+        $logger->addDebug(__METHOD__);
 
         $this->assertFileExists($newFile);
     }
@@ -128,7 +128,7 @@ class LogTest extends TestCase
 
         $logger->setfileFormat('newfile.log');
 
-        $logger->debug(__METHOD__);
+        $logger->addDebug(__METHOD__);
 
         $file = dirname($file) . DIRECTORY_SEPARATOR . 'newfile.log';
 
@@ -141,14 +141,14 @@ class LogTest extends TestCase
 
         $logger->option('file', $logger->option('file'));
 
-        $logger->debug(__METHOD__);
+        $logger->addDebug(__METHOD__);
 
         $oldFile = $logger->option('file');
 
         // always create new file
         $logger->option('fileSize', 1);
 
-        $logger->debug(__METHOD__);
+        $logger->addDebug(__METHOD__);
 
         $newFile = $logger->option('file');
 

@@ -92,7 +92,7 @@ class Log extends WidgetProvider
         'info'      => 1,
         'warn'      => 2,
         'error'     => 3,
-        'crit'      => 4,
+        'critical'  => 4,
         'alert'     => 5,
     );
     
@@ -252,40 +252,40 @@ class Log extends WidgetProvider
     }
     
     /**
-     * Log a debug level message
+     * Adds a log record at DEBUG level
      *
      * @param string $message
      * @return bool
      */
-    public function debug ($message)
+    public function addDebug($message)
     {
         return $this($message, 'debug');
     }
 
     /**
-     * Log a info level message
+     * Adds a log record at INFO level
      *
      * @param string $message
      * @return bool
      */
-    public function info($message)
+    public function addInfo($message)
     {
         return $this($message, 'info');
     }
 
     /**
-     * Log a warn level message
+     * Adds a log record at WARNING level
      *
      * @param string $message
      * @return bool
      */
-    public function warn($message)
+    public function addWarning($message)
     {
         return $this($message, 'warning');
     }
 
     /**
-     * Log a warn level message
+     * Adds a log record at ERROR level
      *
      * @param string $message
      * @return bool
@@ -295,18 +295,24 @@ class Log extends WidgetProvider
         return $this($message, 'error');
     }
 
-    public function crit($message)
-    {
-        return $this($message, 'crit');
-    }
-    
     /**
-     * Log an error level message
+     * Adds a log record at CRITICAL level
      *
      * @param string $message
      * @return bool
      */
-    public function alert($message)
+    public function addCritical($message)
+    {
+        return $this($message, 'critical');
+    }
+    
+    /**
+     * Adds a log record at ALERT level
+     *
+     * @param string $message
+     * @return bool
+     */
+    public function addAlert($message)
     {
         return $this($message, 'alert');
     }
