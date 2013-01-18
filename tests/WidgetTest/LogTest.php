@@ -77,13 +77,13 @@ class LogTest extends TestCase
     {
         $logger = $this->object;
         
-        $logger->option('level', 'debug');
-
-        $logger->addDebug(__METHOD__);
-
         $file = $logger->option('file');
-
-        $this->assertContains(__METHOD__, file_get_contents($file));
+        
+        foreach ($logger->option('levels') as $level => $p) {
+            $uid = uniqid();
+            $logger->{'add' . $level}($uid);
+            $this->assertContains($uid, file_get_contents($file));
+        }
     }
 
     public function testSetFileOption()
