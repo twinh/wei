@@ -41,21 +41,8 @@ class Is extends WidgetProvider
         $rule = new $class(array(
             'widget' => $this->widget
         ));
-
-        switch (count($options)) {
-            case 0:
-                return $rule($data);
-
-            case 1:
-                return $rule($data, $options[0]);
-
-            case 2:
-                return $rule($data, $options[0], $options[1]);
-
-            default:
-                array_unshift($data, $options);
-                return call_user_func_array($rule, $options);
-        }
+        
+        return $rule($data, $options);
     }
 
     /**
@@ -65,22 +52,20 @@ class Is extends WidgetProvider
      * @param array|null $data
      * @return mixed
      * @throws \InvalidArgumentException
-     * @example $this->is('rule', $data) Validate by one rule
      */
-    public function __invoke($options = array(), $data = null)
+    public function __invoke($rule = null, $data = null, $options = array())
     {
         switch (true) {
-            case $options instanceof Closure :
-                return $this->validateOne('callback', $data, array($options));
-
-            case is_string($options) :
-                $args = func_get_args();
-                array_shift($args);
-                return $this->validateOne($options, $data, $args);
-
-            case is_array($options):
+            // (function(){}, $input)
+            case $rule instanceof Closure :
+                return $this->validateOne('callback', $data, $rule);
+            // ($rule, $data, $options)
+            case is_string($rule) :
+                return $this->validateOne($rule, $data, $options);
+            // ($options)
+            case is_array($rule):
                 $this->validator = new Validator;
-                return $this->validator->__invoke($options);
+                return $this->validator->__invoke($rule);
 
             default:
                 throw new InvalidArgumentException('Parameter 1 shoud be string, array or closure');

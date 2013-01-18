@@ -166,7 +166,9 @@ class Validator extends WidgetProvider
             // Start validate
             foreach ($rules as $rule => $params) {
                 // Prepare parameters for validte widget
-                $params = (array) $params;
+                if (!is_bool($params)) {
+                    $params = (array) $params;
+                }
 
                 // The current rule validate result
                 $result = $this->is->validateOne($rule, $data, $params);

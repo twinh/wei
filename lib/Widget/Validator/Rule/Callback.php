@@ -17,8 +17,22 @@ namespace Widget\Validator\Rule;
  */
 class Callback extends AbstractRule
 {
-    public function __invoke($data, $fn)
+    /**
+     *
+     * @var string
+     */
+    protected $fn;
+    
+    public function __invoke($data, $options = array())
     {
-        return (bool) call_user_func($fn, $data, $this, $this->widget);
+        // ($data, function(){})
+        if ($options instanceof \Closure) {
+            $this->fn = $options;
+        // ($data, array());
+        } else {
+            $this->option($options);
+        }
+        
+        return (bool) call_user_func($this->fn, $data, $this, $this->widget);
     }
 }

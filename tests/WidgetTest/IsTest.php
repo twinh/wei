@@ -192,13 +192,25 @@ class IsTest extends TestCase
 
     public function testIsRange()
     {
-        $this->assertTrue($this->isRange(20, 10, 30));
+        $this->assertTrue($this->isRange(20, array(
+            'min' => 10,
+            'max' => 30,
+        )));
 
-        $this->assertTrue($this->isRange('2013-01-13', '2013-01-01', '2013-01-31'));
+        $this->assertTrue($this->isRange('2013-01-13', array(
+            'min' => '2013-01-01',
+            'max' => '2013-01-31'
+        )));
 
-        $this->assertTrue($this->isRange(1.5, 0.9, 3.2));
+        $this->assertTrue($this->isRange(1.5, array(
+            'min' => 0.8,
+            'max' => 3.2
+        )));
 
-        $this->assertFalse($this->isRange(20, 30, 40));
+        $this->assertFalse($this->isRange(20, array(
+            'min' => 30,
+            'max' => 40
+        )));
     }
 
     public function testIsIn()
@@ -277,7 +289,10 @@ class IsTest extends TestCase
                 ),
                 'age' => array(
                     'digit' => true,
-                    'range' => array(1, 150)
+                    'range' => array(
+                        'min' => 1,
+                        'max' => 150
+                    )
                 ),
             ),
         ));

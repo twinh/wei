@@ -16,8 +16,14 @@ namespace Widget\Validator\Rule;
  */
 class Range extends AbstractRule
 {
-    public function __invoke($data, $min, $max)
+    protected $min;
+    
+    protected $max;
+    
+    public function __invoke($data, $options = array())
     {
-        return $min <= $data && $max >= $data;
+        $this->option($options);
+        
+        return $this->min <= $data && $this->max >= $data;
     }
 }
