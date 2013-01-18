@@ -14,7 +14,7 @@ namespace Widget;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @link        https://github.com/Seldaek/monolog
- * @todo        Remove setDir, setFileFormat
+ * @todo        Remove setFileFormat
  */
 class Log extends WidgetProvider
 {
@@ -216,21 +216,6 @@ class Log extends WidgetProvider
         $this->file = $file;
         $this->fileDetected = true;
         
-        return $this;
-    }
-    
-    /**
-     * Set new directory for file
-     *
-     * @param string $dir
-     * @return \Widget\Log
-     */
-    public function setDir($dir)
-    {
-        // Reset detectd state
-        $this->fileDetected = false;
-        $this->dir = $dir;
-
         return $this;
     }
     

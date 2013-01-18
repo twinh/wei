@@ -88,25 +88,6 @@ class LogTest extends TestCase
         $this->assertFileExists($newFile);
     }
 
-    public function testSetDir()
-    {
-        $logger = $this->object;
-        
-        $file = $logger->getFile();
-
-        $oldDir = $logger->option('dir');
-
-        $newDir = realpath($oldDir) . DIRECTORY_SEPARATOR . 'subdir';
-
-        $logger->setDir($newDir);
-
-        $file = $logger->getFile();
-
-        $this->assertEquals($newDir, dirname($file));
-
-        rmdir($newDir);
-    }
-
     public function testSetFileFormatOption()
     {
         $logger = $this->object;
