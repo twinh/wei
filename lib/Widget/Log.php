@@ -82,11 +82,11 @@ class Log extends WidgetProvider
     protected $dir = 'log';
     
     /**
-     * The log file name, formatted by strftime
+     * The log file name, formatted by date
      * 
      * @var string 
      */
-    protected $fileFormat = '%Y%m%d.log';
+    protected $fileFormat = 'Ymd.\l\o\g';
     
     /**
      * The max file size for log file, default to 128mb, set 0 to ignore this 
@@ -145,8 +145,7 @@ class Log extends WidgetProvider
         ), $this->format);
         
         // Write the log message
-        if (!$this->fileDetected || !$this->handle) {
-            $this->close();
+        if (!$this->handle) {
             $this->handle = fopen($this->getFile(), 'a');
         }
         fwrite($this->handle, $content);
@@ -172,7 +171,7 @@ class Log extends WidgetProvider
             throw new \RuntimeException('Unable to create directory ' . $this->dir);
         }
         
-        $file = realpath($this->dir) . '/' . strftime($this->fileFormat);
+        $file = realpath($this->dir) . '/' . date($this->fileFormat);
 
         if ($this->fileSize) {
             $firstFile = $file;
