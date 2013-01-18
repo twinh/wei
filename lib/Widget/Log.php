@@ -14,6 +14,7 @@ namespace Widget;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @link        https://github.com/Seldaek/monolog
+ * @todo        Remove setDir, setFileFormat, setFileSize
  */
 class Log extends WidgetProvider
 {
@@ -32,7 +33,7 @@ class Log extends WidgetProvider
     protected $defaultLevel = 'debug';
     
     /**
-     *  and lowest level to write
+     * The lowest level to write
      * 
      * @var string
      */
@@ -142,7 +143,7 @@ class Log extends WidgetProvider
             str_pad(strtoupper($record['level']), 5),
             $record['message'],
         ), $this->format);
-
+        
         // Write the log message
         if (!$this->fileDetected || !$this->handle) {
             $this->close();
