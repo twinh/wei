@@ -348,7 +348,7 @@ class Log extends WidgetProvider
         return $this;
     }
     
-    public function close()
+    protected function close()
     {
         if (is_resource($this->handle)) {
             fclose($this->handle);

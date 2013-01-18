@@ -142,4 +142,25 @@ class LogTest extends TestCase
 
         $this->assertNotEquals($oldFile, $newFile);
     }
+    
+    public function testSetLevel()
+    {
+        $logger = $this->object;
+        
+        $file = $logger->getFile();
+        
+        $logger->setLevel('debug');
+        
+        $logger(__METHOD__);
+        
+        $this->assertContains('DEBUG', file_get_contents($file));
+        
+        $logger->clean();
+        
+        $logger->setLevel('info');
+        
+        $logger(__METHOD__);
+        
+        $this->assertContains('INFO', file_get_contents($file));
+    }
 }
