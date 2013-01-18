@@ -24,21 +24,35 @@ class Log extends WidgetProvider
      * @var string
      */
     protected $name = 'widget';
-    
+
     /**
-     * The default log level
-     * 
-     * @var string
-     */
-    protected $defaultLevel = 'debug';
-    
-    /**
-     * The lowest level to write
+     * The default level for log record which level is not specified
      * 
      * @var string
      */
     protected $level = 'debug';
     
+    /**
+     * The lowest level to be handled
+     * 
+     * @var string
+     */
+    protected $handledLevel = 'debug';
+    
+    /**
+     * The log levels and priorities
+     *
+     * @var array
+     */
+    protected $levels = array(
+        'debug'     => 0,
+        'info'      => 1,
+        'warning'   => 2,
+        'error'     => 3,
+        'critical'  => 4,
+        'alert'     => 5,
+    );
+
     /**
      * The format for log message
      * 
@@ -82,20 +96,6 @@ class Log extends WidgetProvider
      * @var int 
      */
     protected $fileSize = 134217728;
-        
-    /**
-     * The log levels and priorities
-     *
-     * @var array
-     */
-    protected $levels = array(
-        'debug'     => 0,
-        'info'      => 1,
-        'warning'   => 2,
-        'error'     => 3,
-        'critical'  => 4,
-        'alert'     => 5,
-    );
     
     /**
      * The log file handle
@@ -120,7 +120,7 @@ class Log extends WidgetProvider
      */
     public function __invoke($message, $level = null)
     {
-        $level = isset($level) ? $level : $this->defaultLevel;
+        $level = isset($level) ? $level : $this->level;
 
         $record = array(
             'level' => $level,
@@ -130,7 +130,7 @@ class Log extends WidgetProvider
 
         // Check if the level would be handle
         if (isset($this->levels[$level])) {
-            if ($this->levels[$level] < $this->levels[$this->level]) {
+            if ($this->levels[$level] < $this->levels[$this->handledLevel]) {
                 return false;
             }
         }
@@ -239,6 +239,20 @@ class Log extends WidgetProvider
         // Reset detectd state
         $this->fileDetected = false;
         $this->fileFormat = $format;
+        
+        return $this;
+    }
+    
+    public function setLevel($level)
+    {
+        $this->level = $level;
+        
+        return $this;
+    }
+    
+    public function setHandledLevel($handledLevel)
+    {
+        $this->handledLevel = $handledLevel;
         
         return $this;
     }

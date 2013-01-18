@@ -20,8 +20,6 @@ class LogTest extends TestCase
     {
         $logger = $this->object;
 
-        $logger->option('level', 'debug');
-
         $logger->addDebug(__METHOD__);
 
         $file = $logger->getFile();
@@ -31,53 +29,44 @@ class LogTest extends TestCase
         // clean all file in log diretory
         $logger->clean();
 
-        $logger->option('level', 'info');
+        $logger->setHandledLevel('info');
 
         $logger->addDebug(__METHOD__);
         
         $this->assertFileNotExists($file);
     }
 
-    public function testGetFileOption()
+    public function testGetFile()
     {
-        $logger = $this->object;
+        $logger1 = new \Widget\Log(array(
+            'widget' => $this->widget,
+            'fileSize' => 1,
+        ));
         
-        $logger->option('level', 'debug');
-
-        $logger->option('fileDetected', false);
-
-        $logger->addDebug(__METHOD__);
-
-        $oldFile = $logger->getFile();
-
-        // Make it always create new file
-        $logger->option('fileSize', 1);
-
-        // Create the second file
-        $logger->addDebug(__METHOD__);
-
-        $logger->option('fileDetected', false);
-
-        // Create the thrid file
-        $logger->addDebug(__METHOD__);
-
-        $logger->option('fileDetected', false);
-
-        // Create the fouth file
-        $logger->addDebug(__METHOD__);
-
-        $logger->option('fileDetected', false);
-
-        $newFile = $logger->getFile();
-
-        $this->assertNotEquals($oldFile, $newFile);
+        $logger1->addDebug(__METHOD__);
+        
+        $logger2 = new \Widget\Log(array(
+            'widget' => $this->widget,
+            'fileSize' => 1,
+        ));
+        
+        $logger2->addDebug(__METHOD__);
+        
+        $logger3 = new \Widget\Log(array(
+            'widget' => $this->widget,
+            'fileSize' => 1,
+        ));
+        
+        $logger3->addDebug(__METHOD__);
+        
+        $this->assertNotEquals($logger1->getFile(), $logger2->getFile());
     }
     
     public function testAllLevel()
     {
         $logger = $this->object;
         
-        $file = $logger->option('file');
+        $file = $logger->getFile();
         
         foreach ($logger->option('levels') as $level => $p) {
             $uid = uniqid();
@@ -89,9 +78,7 @@ class LogTest extends TestCase
     public function testSetFileOption()
     {
         $logger = $this->object;
-        
-        $logger->option('level', 'debug');
-        
+
         $newFile = dirname($logger->getFile()) . DIRECTORY_SEPARATOR . mt_rand(0, 1000);
 
         $logger->setFile($newFile);
@@ -113,7 +100,7 @@ class LogTest extends TestCase
 
         $logger->setDir($newDir);
 
-        $file = $logger->option('file');
+        $file = $logger->getFile();
 
         $this->assertEquals($newDir, dirname($file));
 
