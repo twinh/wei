@@ -135,22 +135,23 @@ class LogTest extends TestCase
         $this->assertFileExists($file);
     }
 
-    public function testSetFileSizeOption()
+    public function testFileSize()
     {
-        $logger = $this->object;
+        $oldLogger = new \Widget\Log(array(
+            'widget' => $this->widget,
+            'fileSize' => 1,
+        ));
+        
+        $oldFile = $oldLogger->getFile();
+        
+        $oldLogger->addDebug(__METHOD__);
 
-        $logger->option('file', $logger->option('file'));
-
-        $logger->addDebug(__METHOD__);
-
-        $oldFile = $logger->option('file');
-
-        // always create new file
-        $logger->option('fileSize', 1);
-
-        $logger->addDebug(__METHOD__);
-
-        $newFile = $logger->option('file');
+        $newLogger = new \Widget\Log(array(
+            'widget' => $this->widget,
+            'fileSize' => 1,
+        ));
+        
+        $newFile = $newLogger->getFile();
 
         $this->assertNotEquals($oldFile, $newFile);
     }

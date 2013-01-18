@@ -14,7 +14,7 @@ namespace Widget;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @link        https://github.com/Seldaek/monolog
- * @todo        Remove setDir, setFileFormat, setFileSize
+ * @todo        Remove setDir, setFileFormat
  */
 class Log extends WidgetProvider
 {
@@ -76,7 +76,8 @@ class Log extends WidgetProvider
     protected $fileFormat = '%Y%m%d.log';
     
     /**
-     * The max file size for log file, default to 128mb
+     * The max file size for log file, default to 128mb, set 0 to ignore this 
+     * property
      * 
      * @var int 
      */
@@ -238,15 +239,6 @@ class Log extends WidgetProvider
         // Reset detectd state
         $this->fileDetected = false;
         $this->fileFormat = $format;
-        
-        return $this;
-    }
-    
-    public function setFileSize($size)
-    {
-        // Reset detectd state
-        $this->fileDetected = false;
-        $this->fileSize = (int)$size;
         
         return $this;
     }
