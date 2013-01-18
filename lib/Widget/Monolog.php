@@ -18,18 +18,38 @@ use Monolog\Logger;
  */
 class Monolog extends WidgetProvider
 {
-    protected $name = '';
+    /**
+     * The name of channel
+     *  
+     * @var string
+     */
+    protected $name = 'widget';
     
+    /**
+     * The default log level
+     * 
+     * @var int
+     */
     protected $level = Logger::DEBUG;
     
-    protected $hanlders = array();
+    /**
+     * The monolog handlers
+     * 
+     * @var array
+     */
+    protected $handlers = array(
+        'stream' => array(
+            'stream' => 'log/widget.log',
+            'level' => Logger::DEBUG,
+        ),
+    );
 
     /**
-     * Monolog logger object
+     * The Monolog logger object
      * 
-     * @var Logger 
+     * @var Monolog\Logger 
      */
-    protected $log;
+    protected $logger;
 
     /**
      * Constructor
@@ -41,20 +61,19 @@ class Monolog extends WidgetProvider
     {
         parent::__construct($options);
         
-        // create a log channel
-        $log = $this->log = new Logger($this->name);
+        // Create a logger channel
+        $logger = $this->logger = new Logger($this->name);
 
-        // add hanlder
-        // todo formatter
+        // Add hanlders
         foreach ($this->handlers as $name => $parameters) {
             switch (true) {
                 case is_array($parameters) :
                     $class = '\Monolog\Handler\\' . ucfirst($name) . 'Handler';
-                    $log->pushHandler($this->instance($class, $parameters));
+                    $logger->pushHandler($this->instance($class, $parameters));
                     break;
                 
                 case $parameters instanceof \Monolog\Handler\HandlerInterface :
-                    $log->pushHandler($parameters);
+                    $logger->pushHandler($parameters);
                     break;
                 
                 default :
@@ -67,10 +86,12 @@ class Monolog extends WidgetProvider
      * Get monolog logger object or add a log record
      * 
      * @param string $message The log message
-     * @return \Monolog\Logger|boolen Return Logger obejct when $message is null, otherwise return added result
+     * @return \Monolog\Logger|boolen Returns Logger obejct when $message is null, otherwise returns log result
      */
-    public function __invoke($message = null)
+    public function __invoke($message = null, $level = null, array $context = array())
     {
-        return $message ? $this->log->addRecord($this->level, $message) : $this->log;
+        !isset($level) && $level = $this->level;
+        
+        return $message ? $this->logger->addRecord($level, $message, $context) : $this->logger;
     }
 }
