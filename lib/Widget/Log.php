@@ -290,7 +290,7 @@ class Log extends WidgetProvider
      * @param string $message
      * @return bool
      */
-    public function error($message)
+    public function addError($message)
     {
         return $this($message, 'error');
     }
