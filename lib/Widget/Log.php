@@ -140,7 +140,7 @@ class Log extends WidgetProvider
         ), array(
             date($this->dateFormat, $record['time']),
             $this->name,
-            str_pad(strtoupper($record['level']), 5),
+            strtoupper($record['level']),
             $record['message'],
         ), $this->format);
         
