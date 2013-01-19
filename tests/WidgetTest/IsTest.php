@@ -4,17 +4,6 @@ namespace WidgetTest;
 
 class IsTest extends TestCase
 {
-    public function testIsAlpha()
-    {
-        $this->assertTrue($this->isAlpha('abcedfg'));
-
-        $this->assertTrue($this->isAlpha('aBcDeFg'));
-
-        $this->assertFalse($this->isAlpha('abcdefg1'));
-
-        $this->assertFalse($this->isAlpha('a bcdefg'));
-    }
-
     public function testIsDigit()
     {
         $this->assertTrue($this->isDigit('123456'));
