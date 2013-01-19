@@ -11,7 +11,7 @@ namespace Widget\Validator\Rule;
 use Widget\Exception;
 
 /**
- * Time
+ * Check if the data is the given type
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
