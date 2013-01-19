@@ -19,34 +19,43 @@ class CallbackTest extends TestCase
         $this->assertTrue($this->is(function(){
             return true;
         }, 'data'));
+        
+        $this->assertTrue($this->isCallback('data', array(
+            'fn' => function(){
+                return true;
+            }
+        )));
     }
-
+    
     /**
-     * @dataProvider providerForNotCallback
+     * @expectedException \InvalidArgumentException
      */
-//    public function testNotCallback($input)
-//    {
-//        $this->assertFalse($this->isCallback($input));
-//    }
-
-    public function providerForCallback()
+    public function testParameter2NotInvalidException()
     {
-        return array(
-            array('020-1234567'),
-            array('0768-123456789'),
-            // Callback number without city code
-            array('1234567'),
-            array('123456789'),
-        );
+        $this->isCallback('data', 'not callable');
     }
-
-    public function providerForNotCallback()
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testNotCallableException()
     {
-        return array(
-            array('012345-1234567890'),
-            array('010-1234567890'),
-            array('123456'),
-            array('not digit'),
-        );
+        $this->isCallback('data', array(
+            'fn' => 'not callable'
+        ));
+    }
+    
+    //public function tes
+    
+    public function testNotCallback()
+    {
+        $this->assertFalse($this->isCallback('data', function(){
+            return false;
+        }));
+        
+        $this->assertFalse($this->isCallback('data', function(){
+            // convert to boolen(false)
+            return  null;
+        }));
     }
 }
