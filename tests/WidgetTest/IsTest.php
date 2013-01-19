@@ -4,19 +4,6 @@ namespace WidgetTest;
 
 class IsTest extends TestCase
 {
-    public function testIsDigit()
-    {
-        $this->assertTrue($this->isDigit('123456'));
-
-        $this->assertTrue($this->isDigit('0123456'));
-
-        $this->assertFalse($this->isDigit('0.123'));
-
-        $this->assertFalse($this->isDigit('1 23456'));
-
-        $this->assertFalse($this->isDigit('string'));
-    }
-
     public function testIsQQ()
     {
         $this->assertFalse($this->isQQ('1000'), 'Too short');
