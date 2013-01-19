@@ -9,16 +9,21 @@
 namespace Widget\Validator\Rule;
 
 /**
- * DoubleByte
+ * Check if the data contains only double byte characters
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-
 class DoubleByte extends AbstractRule
 {
-    public function __invoke($value)
+    /**
+     * Validator
+     * 
+     * @param mixed $data
+     * @return bool
+     */
+    public function __invoke($data)
     {
-        return (bool) preg_match('/^[^\x00-xff]+$/', $value);
+        return (bool) preg_match('/^[^\x00-xff]+$/', $data);
     }
 }
