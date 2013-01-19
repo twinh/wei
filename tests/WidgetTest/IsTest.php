@@ -4,19 +4,6 @@ namespace WidgetTest;
 
 class IsTest extends TestCase
 {
-    public function testIsQQ()
-    {
-        $this->assertFalse($this->isQQ('1000'), 'Too short');
-
-        $this->assertFalse($this->isQQ('011111'), 'Should not start with zero');
-
-        $this->assertFalse($this->isQQ('011111'), 'Should not start with zero, even digits');
-
-        $this->assertFalse($this->isQQ('134.433'), 'Not digits');
-
-        $this->assertTrue($this->isQQ('1234567'));
-    }
-
     public function testIsRegex()
     {
         $this->assertTrue($this->isRegex('This is Widget Framework.', '/widget/i'));
