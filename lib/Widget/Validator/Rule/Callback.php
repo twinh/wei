@@ -10,27 +10,31 @@
 namespace Widget\Validator\Rule;
 
 /**
- * Callback
+ * Check if data valid by callback
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Callback extends AbstractRule
 {
-    /**
-     *
-     * @var string
-     */
     protected $fn;
     
     public function __invoke($data, $options = array())
     {
-        // ($data, function(){})
-        if ($options instanceof \Closure) {
-            $this->fn = $options;
-        // ($data, array());
-        } else {
-            $this->option($options);
+        if ($options) {
+            // ($data, function(){})
+            if ($options instanceof \Closure) {
+                $this->fn = $options;
+            // ($data, array());
+            } elseif (is_array($options)) {
+                $this->option($options);
+            } else {
+                throw new \InvalidArgumentException('Parameter 2 should be instance of \Closure or array');
+            }
+        }
+        
+        if (!is_callable($this->fn)) {
+            throw new \InvalidArgumentException('Property $fn should be a valid callback');
         }
         
         return (bool) call_user_func($this->fn, $data, $this, $this->widget);
