@@ -12,7 +12,7 @@ namespace Widget;
 use Widget\Validator\Validator;
 
 /**
- * Is
+ * The validator manager
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
