@@ -8,9 +8,7 @@
 
 namespace Widget\Validator\Rule;
 
-use Widget\WidgetProvider;
 use DateTime as Dt;
-
 
 /**
  * The date validate rule
@@ -18,7 +16,7 @@ use DateTime as Dt;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class DateTime extends WidgetProvider
+class DateTime extends AbstractRule
 {
     protected $format = 'Y-m-d H:i:s';
 
