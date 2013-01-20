@@ -24,15 +24,5 @@ class OneOf extends AbstractRule
             }
         }
         return false;
-        
-
-//        
-//        // NoneOf 所有的都不通过才true
-//        foreach ($rules as $rule => $options) {
-//            if ($this->is->validateOne($rule, $data, $options)) {
-//                return false;
-//            }
-//        }
-//        return true;
     }
 }
