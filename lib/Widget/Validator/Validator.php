@@ -19,8 +19,7 @@ use InvalidArgumentException;
  * @subpackage  Validation
  * @author      Twin Huang <twinh@yahoo.cn>
  * @todo        message
- * @todo        option method 冲突
- * @property \Widget\Is $is The validator manager
+ * @property    \Widget\Is $is The validator manager
  */
 class Validator extends WidgetProvider
 {

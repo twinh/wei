@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -62,8 +61,7 @@ class Is extends WidgetProvider
                 return $this->validateOne($rule, $data, $options);
             // ($rule, $data)
             case is_array($rule):
-                $this->validator = new Validator;
-                return $this->validator->__invoke(array(
+                return $this->createValidator()->__invoke(array(
                     'rules' => array(
                         'one' => $rule,
                     ),
@@ -71,7 +69,6 @@ class Is extends WidgetProvider
                         'one' => $data,
                     )
                 ));
-
             default:
                 throw new \InvalidArgumentException('Parameter 1 shoud be string, array or closure');
         }
@@ -90,5 +87,18 @@ class Is extends WidgetProvider
         } else {
             return false;
         }
+    }
+    
+    /**
+     * Create a new validator instance
+     * 
+     * @return \Widget\Validator\Validator
+     */
+    public function createValidator()
+    {
+        return new Validator(array(
+            'widget'    => $this->widget,
+            'is'        => $this->is,
+        ));
     }
 }

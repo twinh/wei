@@ -8,8 +8,6 @@
 
 namespace Widget;
 
-use Widget\Validator\Validator;
-
 /**
  * Validate
  *
@@ -28,9 +26,7 @@ class Validate extends WidgetProvider
     
     public function __invoke(array $options)
     {
-        $validator = $this->validator = new Validator(array(
-            'widget' => $this->widget
-        ));
+        $validator = $this->validator = $this->is->createValidator();
         
         $validator($options);
         
