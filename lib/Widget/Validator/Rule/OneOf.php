@@ -16,7 +16,7 @@ namespace Widget\Validator\Rule;
  */
 class OneOf extends AbstractRule
 {
-    public function __invoke($data, $rules)
+    public function __invoke($data, array $rules)
     {
         foreach ($rules as $rule => $options) {
             if ($this->is->validateOne($rule, $data, $options)) {
