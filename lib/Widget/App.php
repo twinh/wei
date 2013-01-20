@@ -325,7 +325,7 @@ class App extends WidgetProvider
     }
 
     /**
-     * Throwa a DispatchBreakException to prevent the previous dispatch process
+     * Throws a DispatchBreakException to prevent the previous dispatch process
      *
      * @throws DispatchBreakException
      */
