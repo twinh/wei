@@ -31,15 +31,23 @@ class Is extends WidgetProvider
      */
     public function validateOne($rule, $data, $options = array())
     {
+        // Starts with "not", such as notDigit, notEqual
+        if (0 === stripos($rule, 'not')) {
+            $reverse = true;
+            $rule = substr($rule, 3);
+        } else {
+            $reverse = false;
+        }
+
         if (!$class = $this->hasRule($rule)) {
             throw new Exception(sprintf('Rule "%s" not defined', $rule));
         }
 
-        $rule = new $class(array(
+        $validator = new $class(array(
             'widget' => $this->widget
         ));
         
-        return $rule($data, $options);
+        return $validator($data, $options) XOR $reverse;
     }
 
     /**

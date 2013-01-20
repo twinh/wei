@@ -370,4 +370,11 @@ class ValidatorTest extends TestCase
             ),
         ), 'example@example.com'));
     }
+    
+    public function testNotPrefix()
+    {
+        $this->assertTrue($this->is('notDigit', 'string'));
+        
+        $this->assertFalse($this->is('notDigit', '123'));
+    }
 }
