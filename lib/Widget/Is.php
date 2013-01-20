@@ -10,8 +10,6 @@
 namespace Widget;
 
 use Widget\Validator\Validator;
-use InvalidArgumentException;
-use Closure;
 
 /**
  * Is
@@ -46,7 +44,7 @@ class Is extends WidgetProvider
     }
 
     /**
-     * Validate data
+     * Validate data by given rules
      *
      * @param array $options
      * @param array|null $data
@@ -56,22 +54,29 @@ class Is extends WidgetProvider
     public function __invoke($rule = null, $data = null, $options = array())
     {
         switch (true) {
-            // (function(){}, $input)
-            case $rule instanceof Closure :
+            // (function(){}, $data)
+            case $rule instanceof \Closure :
                 return $this->validateOne('callback', $data, $rule);
             // ($rule, $data, $options)
             case is_string($rule) :
                 return $this->validateOne($rule, $data, $options);
-            // ($options)
+            // ($rule, $data)
             case is_array($rule):
                 $this->validator = new Validator;
-                return $this->validator->__invoke($rule);
+                return $this->validator->__invoke(array(
+                    'rules' => array(
+                        'one' => $rule,
+                    ),
+                    'data' => array(
+                        'one' => $data,
+                    )
+                ));
 
             default:
-                throw new InvalidArgumentException('Parameter 1 shoud be string, array or closure');
+                throw new \InvalidArgumentException('Parameter 1 shoud be string, array or closure');
         }
     }
-
+    
     /**
      * Check if the validate rule exists
      *

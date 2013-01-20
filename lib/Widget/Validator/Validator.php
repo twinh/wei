@@ -364,4 +364,14 @@ class Validator extends WidgetProvider
 
         return call_user_func_array($callback, $params);
     }
+    
+    /**
+     * Returns validate result
+     * 
+     * @return bool
+     */
+    public function valid()
+    {
+        return $this->result;
+    }
 }

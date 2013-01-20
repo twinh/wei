@@ -215,7 +215,7 @@ class IsTest extends TestCase
 
         $this->assertFalse($this->is('digit', 'abc'));
 
-        $result = $this->is(array(
+        $result = $this->validate(array(
             'data' => array(
                 'email' => 'twinhuang@qq.com',
                 'age' => '5',
@@ -232,14 +232,14 @@ class IsTest extends TestCase
                     )
                 ),
             ),
-        ));
+        ))->valid();
 
         $this->assertTrue($result);
     }
 
     public function testOptionalField()
     {
-        $result = $this->is(array(
+        $result = $this->validate(array(
             'data' => array(
                 'email' => ''
             ),
@@ -249,7 +249,7 @@ class IsTest extends TestCase
                     'email' => true,
                 )
             ),
-        ));
+        ))->valid();
 
         $this->assertTrue($result);
     }
@@ -275,7 +275,7 @@ class IsTest extends TestCase
      */
     public function testEmptyRuleException()
     {
-        $this->is(array(
+        $this->validate(array(
             'rules' => array(),
         ));
     }
@@ -284,7 +284,7 @@ class IsTest extends TestCase
     {
         $breakRule = '';
 
-        $this->is(array(
+        $this->validate(array(
             'data' => array(
                 'email' => 'error-email',
             ),
@@ -310,7 +310,7 @@ class IsTest extends TestCase
     {
         $lastRule = '';
 
-        $this->is(array(
+        $this->validate(array(
             'data' => array(
                 'email' => 'twinhuang@qq.com',
             ),
@@ -335,7 +335,7 @@ class IsTest extends TestCase
     {
         $lastField = '';
 
-        $this->is(array(
+        $this->validate(array(
             'data' => array(
                 'email' => 'twinhuang@qq.com',
                 'age' => 5
@@ -359,5 +359,15 @@ class IsTest extends TestCase
         ));
 
         $this->assertEquals('email', $lastField);
+    }
+    
+    public function testIsOne()
+    {
+        $this->assertTrue($this->is(array(
+            'email' => true,
+            'endsWith' => array(
+                'findMe' => 'example.com',
+            ),
+        ), 'example@example.com'));
     }
 }
