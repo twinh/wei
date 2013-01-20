@@ -20,7 +20,7 @@ use InvalidArgumentException;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @todo        message
  * @todo        option method 冲突
- * @property \Widget\Validator $is The validator manager
+ * @property \Widget\Is $is The validator manager
  */
 class Validator extends WidgetProvider
 {
@@ -366,7 +366,7 @@ class Validator extends WidgetProvider
     }
     
     /**
-     * Returns validate result
+     * Returns the validate result
      * 
      * @return bool
      */
