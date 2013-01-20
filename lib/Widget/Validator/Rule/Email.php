@@ -17,9 +17,9 @@ namespace Widget\Validator\Rule;
 class Email extends AbstractRule
 {
     protected $message = 'The value should be valid email address';
-
+    
     public function __invoke($value)
     {
-        return filter_var($value, FILTER_VALIDATE_EMAIL);
+        return (bool) filter_var($value, FILTER_VALIDATE_EMAIL);
     }
 }
