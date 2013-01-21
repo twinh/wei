@@ -28,6 +28,7 @@ class Is extends WidgetProvider
     /**
      * @param string $rule
      * @param array|null $data
+     * @internal Do NOT use this method for it may be change in the future
      */
     public function validateOne($rule, $data, $options = array())
     {
