@@ -139,30 +139,7 @@ class ValidatorTest extends TestCase
 
         $this->assertFalse($this->isDateTime('2012 61:00'));
     }
-
-    public function testIsRange()
-    {
-        $this->assertTrue($this->isRange(20, array(
-            'min' => 10,
-            'max' => 30,
-        )));
-
-        $this->assertTrue($this->isRange('2013-01-13', array(
-            'min' => '2013-01-01',
-            'max' => '2013-01-31'
-        )));
-
-        $this->assertTrue($this->isRange(1.5, array(
-            'min' => 0.8,
-            'max' => 3.2
-        )));
-
-        $this->assertFalse($this->isRange(20, array(
-            'min' => 30,
-            'max' => 40
-        )));
-    }
-
+    
     public function testIsIn()
     {
         $this->assertTrue($this->isIn('apple', array('apple', 'pear')));
