@@ -354,4 +354,65 @@ class ValidatorTest extends TestCase
         
         $this->assertFalse($this->is('notDigit', '123'));
     }
+    
+    public function testIsFieldInvalidted()
+    {
+        /* @var $validator \Widget\Validator\Validator */
+        $validator = $this->validate(array(
+            'data' => array(
+                'age' => 10,
+                'email' => 'example@example.com'
+            ),
+            'rules' => array(
+                'age' => array(
+                    'range' => array(
+                        'min' => 20,
+                        'max' => 30,
+                    )
+                ),
+                'email' => array(
+                    'email' => true
+                ),
+            )
+        ));
+        
+        $this->assertTrue($validator->isFieldInvalidted('age'));
+        
+        $this->assertTrue($validator->isFieldValidated('email'));
+        
+        $this->assertEquals(10, $validator->getFieldData('age'));
+        
+        $this->assertEquals(array('required', 'email'), $validator->getValidatedRules('email'));
+        
+        $this->assertEquals(array('range'), $validator->getInvalidatedRules('age'));
+
+        $this->assertEquals(array('range'), array_keys($validator->getRules('age')));
+        
+        $this->assertEquals(array(
+            'min' => 20,
+            'max' => 30
+        ), $validator->getRuleParams('age', 'range'));
+        
+        $this->assertEmpty($validator->getRuleParams('age', 'noThisRule'));
+        
+        $this->assertEmpty($validator->getRuleParams('noThisField', 'rule'));
+    }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidCallback()
+    {
+        $this->validate(array(
+            'data' => array(
+                'email' => 'example@example.com',
+            ),
+            'rules' => array(
+                'email' => array(
+                    'email' => true,
+                ),
+            ),
+            'success' => 'notCallable'
+        ));
+    }
 }

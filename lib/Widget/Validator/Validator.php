@@ -218,11 +218,6 @@ class Validator extends WidgetProvider
         return $this->result;
     }
 
-    public function isRequired($data, $required)
-    {
-        return !$required || $data;
-    }
-
     /**
      * Add validated rule
      *
