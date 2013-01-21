@@ -107,7 +107,7 @@ class Is extends WidgetProvider
     {
         return new Validator(array(
             'widget'    => $this->widget,
-            'is'        => $this->is,
+            'is'        => $this
         ));
     }
 }
