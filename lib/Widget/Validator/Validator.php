@@ -10,7 +10,6 @@
 namespace Widget\Validator;
 
 use Widget\WidgetProvider;
-use InvalidArgumentException;
 
 /**
  * Validator
@@ -140,14 +139,14 @@ class Validator extends WidgetProvider
      *
      * @param array $options The options for validation
      * @return false Whether pass the validation or not
-     * @throws InvalidArgumentException When validate rules is empty
+     * @throws \InvalidArgumentException When validate rules is empty
      */
     public function __invoke($options = array())
     {
         $this->option($options);
 
         if (empty($this->rules)) {
-            throw new InvalidArgumentException('Validate rules should not be empty.');
+            throw new \InvalidArgumentException('Validate rules should not be empty.');
         }
 
         foreach ($this->rules as $field => $rules) {
@@ -348,7 +347,7 @@ class Validator extends WidgetProvider
      * @param array $params The parameters to be passed to the callback, as an
      *                      indexed array.
      * @return mixed
-     * @throws InvalidArgumentException When the first argument is not callable
+     * @throws \InvalidArgumentException When the first argument is not callable
      */
     protected function callback($callback, array $params)
     {
@@ -358,7 +357,7 @@ class Validator extends WidgetProvider
         }
 
         if (!is_callable($callback)) {
-            throw new InvalidArgumentException('The first argument is not callable');
+            throw new \InvalidArgumentException('The first argument is not callable');
         }
 
         return call_user_func_array($callback, $params);
