@@ -41,7 +41,7 @@ class Is extends WidgetProvider
         }
 
         if (!$class = $this->hasRule($rule)) {
-            throw new Exception(sprintf('Rule "%s" not defined', $rule));
+            throw new Exception(sprintf('Rule "%s" not found', $rule));
         }
 
         $validator = new $class(array(
@@ -97,7 +97,7 @@ class Is extends WidgetProvider
             return false;
         }
     }
-    
+   
     /**
      * Create a new validator instance
      * 
