@@ -437,4 +437,56 @@ class Validator extends WidgetProvider
     {
         $this->data[$field] = $data;
     }
+    
+    /**
+     * Set custome messages
+     * 
+     * @param array $messages
+     */
+    public function setMessages(array $messages)
+    {
+        $this->messages = $messages;
+    }
+    
+    /**
+     * Returns custome message
+     * 
+     * @return array
+     */
+    public function getMessages()
+    {
+        return $this->messages;
+    }
+    
+    /**
+     * Returns invalidated messages
+     * 
+     * @return array
+     */
+    public function getInvalidatedMessages()
+    {
+        $messages = array();
+        
+        foreach ($this->invalidatedRules as $field => $rules) {
+            foreach ($rules as $rule) {
+                // Custom message
+                if (isset($this->messages[$field])) {
+                    if (is_string($this->messages[$field])) {
+                        $messages[$field][$rule] = $this->messages[$field];
+                        // Ignore the same message
+                        break;
+                    } elseif (isset($this->messages[$field][$rule])) {
+                        $messages[$field][$rule] = $this->messages[$field][$rule];
+                    } else {
+                        // todo
+                    }
+                // Get message from validate rule
+                } else {
+                    // todo
+                }
+            }
+        }
+        
+        return $messages;
+    }
 }
