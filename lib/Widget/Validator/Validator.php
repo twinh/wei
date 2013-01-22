@@ -391,4 +391,20 @@ class Validator extends WidgetProvider
     {
         return isset($this->rules[$field][$rule]);
     }
+    
+    /**
+     * Removes the rule in field
+     * 
+     * @param string $field The name of field
+     * @param string $rule The name of rule
+     * @return bool
+     */
+    public function removeRule($field, $rule)
+    {
+        if (isset($this->rules[$field][$rule])) {
+            unset($this->rules[$field][$rule]);
+            return true;
+        }
+        return false;
+    }
 }

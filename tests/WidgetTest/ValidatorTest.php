@@ -427,5 +427,8 @@ class ValidatorTest extends TestCase
         
         $this->assertTrue($validator->hasRule('username', 'email'));
         
+        $this->assertTrue($validator->removeRule('username', 'email'));
+        
+        $this->assertFalse($validator->removeRule('username', 'email'));
     }
 }
