@@ -299,7 +299,7 @@ class Validator extends WidgetProvider
     {
         return isset($this->data[$field]) ? $this->data[$field] : null;
     }
-
+    
     /**
      * Get validate rule parameters
      *
@@ -406,5 +406,28 @@ class Validator extends WidgetProvider
             return true;
         }
         return false;
+    }
+    
+    /**
+     * Sets data for validate
+     * 
+     * @param array $data
+     * @return \Widget\Validator\Validator
+     */
+    public function setData(array $data)
+    {
+        $this->data = $data;
+        
+        return $this;
+    }
+    
+    /**
+     * Returns validate data
+     * 
+     * @return array
+     */
+    public function getData()
+    {
+        return $this->data;
     }
 }

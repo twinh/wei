@@ -431,4 +431,20 @@ class ValidatorTest extends TestCase
         
         $this->assertFalse($validator->removeRule('username', 'email'));
     }
+    
+    public function testData()
+    {
+        /* @var $validator \Widget\Validator\Validator */
+        $validator = $this->is->createValidator();
+        
+        $this->assertEmpty($validator->getData());
+        
+        $data = array(
+            'username' => 'example@example.com'
+        );
+        
+        $validator->setData($data);
+        
+        $this->assertEquals($data, $validator->getData());
+    }
 }
