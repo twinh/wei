@@ -451,4 +451,29 @@ class ValidatorTest extends TestCase
         
         $this->assertEquals('example', $validator->getFieldData('username'));
     }
+    
+    public function testGetValidateFields()
+    {
+        /* @var $validator \Widget\Validator\Validator */
+        $validator = $this->validate(array(
+            'data' => array(
+                'email' => 'a@b.com',
+                'id' => 'xx'
+            ),
+            'rules' => array(
+                'email' => array(
+                    'email' => true,
+                ),
+                'id' => array(
+                    'email' => true
+                )
+            )
+        ));
+        
+        $this->assertContains('id', $validator->getInvalidatedFields());
+        $this->assertNotContains('email', $validator->getInvalidatedFields());
+        
+        $this->assertContains('email', $validator->getValidateFields());
+        $this->assertNotContains('id', $validator->getValidateFields());
+    }
 }

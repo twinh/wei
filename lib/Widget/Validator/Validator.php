@@ -100,20 +100,6 @@ class Validator extends WidgetProvider
     protected $failure = null;
 
     /**
-     * The validated fields
-     *
-     * @var array
-     */
-    protected $validatedFields = array();
-
-    /**
-     * The invalidated fields
-     *
-     * @var array
-     */
-    protected $invalidatedFields = array();
-
-    /**
      * The validated rules array, which use the field as key, and the rules as value
      *
      * @var string
@@ -198,7 +184,7 @@ class Validator extends WidgetProvider
                     }
                 }
             }
-
+            
             // Trigger the validated/invalidated callback
             $callback = $this->isFieldValidated($field) ? 'validated' : 'invalidated';
             if (false === $this->callback($this->$callback, array($field, $this))) {
@@ -228,7 +214,6 @@ class Validator extends WidgetProvider
     public function addValidatedRule($field, $rule)
     {
         if (!isset($this->validatedRules[$field])) {
-            $this->validatedFields[] = $field;
             $this->validatedRules[$field] = array();
         }
 
@@ -247,13 +232,32 @@ class Validator extends WidgetProvider
     public function addInvalidatedRule($field, $rule)
     {
         if (!isset($this->invalidatedRules[$field])) {
-            $this->invalidatedFields[] = $field;
             $this->invalidatedRules[$field] = array();
         }
 
         $this->invalidatedRules[$field][] = $rule;
 
         return $this;
+    }
+    
+    /**
+     * Returns the validated fields
+     * 
+     * @return array
+     */
+    public function getValidateFields()
+    {
+        return array_keys(array_diff_key($this->validatedRules, $this->invalidatedRules));
+    }
+    
+    /**
+     * Returns the invalidated fields
+     * 
+     * @return array
+     */
+    public function getInvalidatedFields()
+    {
+        return array_keys($this->invalidatedRules);
     }
 
     /**
@@ -264,7 +268,7 @@ class Validator extends WidgetProvider
      */
     public function isFieldValidated($field)
     {
-        return !in_array($field, $this->invalidatedFields);
+        return !in_array($field, $this->getInvalidatedFields());
     }
 
     /**
@@ -275,7 +279,7 @@ class Validator extends WidgetProvider
      */
     public function isFieldInvalidted($field)
     {
-        return in_array($field, $this->invalidatedFields);
+        return in_array($field, $this->getInvalidatedFields());
     }
 
     /**
