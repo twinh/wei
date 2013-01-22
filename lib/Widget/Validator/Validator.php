@@ -213,10 +213,6 @@ class Validator extends WidgetProvider
      */
     public function addValidatedRule($field, $rule)
     {
-        if (!isset($this->validatedRules[$field])) {
-            $this->validatedRules[$field] = array();
-        }
-
         $this->validatedRules[$field][] = $rule;
 
         return $this;
@@ -231,10 +227,6 @@ class Validator extends WidgetProvider
      */
     public function addInvalidatedRule($field, $rule)
     {
-        if (!isset($this->invalidatedRules[$field])) {
-            $this->invalidatedRules[$field] = array();
-        }
-
         $this->invalidatedRules[$field][] = $rule;
 
         return $this;
