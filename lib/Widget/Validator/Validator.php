@@ -367,4 +367,28 @@ class Validator extends WidgetProvider
     {
         return $this->result;
     }
+    
+    /**
+     * Adds rule for specified field
+     * 
+     * @param string $field The name of field
+     * @param string $rule The name of rule
+     * @param mixed $options The parameters for rule
+     */
+    public function addRule($field, $rule, $parameters)
+    {
+        $this->rules[$field][$rule] = $parameters;
+    }
+    
+    /**
+     * Returns whether the validate rule exists in specified field
+     * 
+     * @param string $field
+     * @param string $rule
+     * @return bool
+     */
+    public function hasRule($field, $rule)
+    {
+        return isset($this->rules[$field][$rule]);
+    }
 }

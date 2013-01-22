@@ -415,4 +415,17 @@ class ValidatorTest extends TestCase
             'success' => 'notCallable'
         ));
     }
+    
+    public function testRuleOperation()
+    {
+        /* @var $validator \Widget\Validator\Validator */
+        $validator = $this->is->createValidator();
+        
+        $this->assertFalse($validator->hasRule('username', 'email'));
+        
+        $validator->addRule('username', 'email', true);
+        
+        $this->assertTrue($validator->hasRule('username', 'email'));
+        
+    }
 }
