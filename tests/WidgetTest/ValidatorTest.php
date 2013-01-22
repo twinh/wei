@@ -446,5 +446,9 @@ class ValidatorTest extends TestCase
         $validator->setData($data);
         
         $this->assertEquals($data, $validator->getData());
+        
+        $validator->setFieldData('username', 'example');
+        
+        $this->assertEquals('example', $validator->getFieldData('username'));
     }
 }

@@ -290,17 +290,6 @@ class Validator extends WidgetProvider
     }
 
     /**
-     * Get validate field data
-     *
-     * @param string $field The validate field
-     * @return mixed
-     */
-    public function getFieldData($field)
-    {
-        return isset($this->data[$field]) ? $this->data[$field] : null;
-    }
-    
-    /**
      * Get validate rule parameters
      *
      * @param string $field The validate field
@@ -429,5 +418,27 @@ class Validator extends WidgetProvider
     public function getData()
     {
         return $this->data;
+    }
+    
+    /**
+     * Returns validate field data
+     *
+     * @param string $field The name of field
+     * @return mixed
+     */
+    public function getFieldData($field)
+    {
+        return isset($this->data[$field]) ? $this->data[$field] : null;
+    }
+    
+    /**
+     * Sets data for validate field
+     * 
+     * @param string $field The name of field
+     * @param mixed $data The data of field
+     */
+    public function setFieldData($field, $data)
+    {
+        $this->data[$field] = $data;
     }
 }
