@@ -19,13 +19,6 @@ use Widget\Validator\Validator;
 class Is extends WidgetProvider
 {
     /**
-     * The last validator object
-     *
-     * @var \Widget\Validator\Validator
-     */
-    public $validator;
-
-    /**
      * @param string $rule
      * @param array|null $data
      * @internal Do NOT use this method for it may be change in the future
@@ -50,7 +43,7 @@ class Is extends WidgetProvider
         
         return $validator($data, $options) XOR $reverse;
     }
-
+    
     /**
      * Validate data by given rules
      *
