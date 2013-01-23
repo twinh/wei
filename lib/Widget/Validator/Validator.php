@@ -28,6 +28,11 @@ class Validator extends WidgetProvider
      */
     protected $rules = array();
     
+    /**
+     * The rule validator instances
+     * 
+     * @var array<\Widget\Validator\AbstractRule>
+     */
     protected $ruleValidators = array();
 
     /**
