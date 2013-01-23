@@ -558,5 +558,19 @@ class ValidatorTest extends TestCase
         ));
         
         $this->assertFalse($validator->valid());
+        
+        $validator2 = $this->validate(array(
+            'data' => array(
+                'username' => '',
+            ),
+            'rules' => array(
+                'username' => array(
+                    'required',
+                    'email',
+                ),
+            )
+        ));
+        
+        $this->assertFalse($validator2->valid());
     }
 }

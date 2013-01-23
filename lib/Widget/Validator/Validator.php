@@ -162,6 +162,12 @@ class Validator extends WidgetProvider
 
             // Start validate
             foreach ($rules as $rule => $params) {
+                // Process simple array rule, eg 'username' => ['required', 'email']
+                if (is_int($rule) && is_string($params)) {
+                    $rule = $params;
+                    $params = true;
+                }
+                
                 // Prepare parameters for validte widget
                 if (!is_bool($params)) {
                     $params = (array) $params;
