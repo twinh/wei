@@ -545,4 +545,18 @@ class ValidatorTest extends TestCase
         
         $this->assertArrayNotHasKey('password', $validator->getMessages());
     }
+    
+    public function testSimpleRule()
+    {
+        $validator = $this->validate(array(
+            'data' => array(
+                'useranme' => '',
+            ),
+            'rules' => array(
+                'username' => 'required'
+            )
+        ));
+        
+        $this->assertFalse($validator->valid());
+    }
 }

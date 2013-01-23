@@ -143,6 +143,13 @@ class Validator extends WidgetProvider
 
         foreach ($this->rules as $field => $rules) {
             $data = isset($this->data[$field]) ? $this->data[$field] : null;
+            
+            // Process simple rule, eg 'username' => 'required'
+            if (is_string($rules)) {
+                $rules = array(
+                    $rules => true
+                );
+            }
 
             // Make sure the required rule at first
             if (!isset($rules['required'])) {
