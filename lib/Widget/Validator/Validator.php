@@ -28,6 +28,8 @@ class Validator extends WidgetProvider
      * @var array
      */
     protected $rules = array();
+    
+    protected $ruleValidators = array();
 
     /**
      * The data to be validated
@@ -157,6 +159,9 @@ class Validator extends WidgetProvider
                 // The current rule validate result
                 $result = $this->is->validateOne($rule, $data, $params);
 
+                // Record the rule validators
+                $this->ruleValidators[$field][$rule] = $this->is->getLastRuleValidator();
+                
                 // Would always be false in the whole validate flow
                 if (false === $result) {
                     $this->result = false;
@@ -478,11 +483,11 @@ class Validator extends WidgetProvider
                     } elseif (isset($this->messages[$field][$rule])) {
                         $messages[$field][$rule] = $this->messages[$field][$rule];
                     } else {
-                        // todo
+                        $messages[$field][$rule] = $this->ruleValidators[$field][$rule]->getMessage();
                     }
                 // Get message from validate rule
                 } else {
-                    // todo
+                    $messages[$field][$rule] = $this->ruleValidators[$field][$rule]->getMessage();
                 }
             }
         }

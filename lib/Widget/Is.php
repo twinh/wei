@@ -19,8 +19,15 @@ use Widget\Validator\Validator;
 class Is extends WidgetProvider
 {
     /**
+     * @var \Widget\Validator\AbstractRule
+     * @internal
+     */
+    private $ruleValidator;
+    
+    /**
      * @param string $rule
      * @param array|null $data
+     * @paran mixed $options
      * @internal Do NOT use this method for it may be change in the future
      */
     public function validateOne($rule, $data, $options = array())
@@ -37,11 +44,11 @@ class Is extends WidgetProvider
             throw new Exception(sprintf('Rule "%s" not found', $rule));
         }
 
-        $validator = new $class(array(
+        $rv = $this->ruleValidator = new $class(array(
             'widget' => $this->widget
         ));
         
-        return $validator($data, $options) XOR $reverse;
+        return $rv($data, $options) XOR $reverse;
     }
     
     /**
@@ -102,5 +109,13 @@ class Is extends WidgetProvider
             'widget'    => $this->widget,
             'is'        => $this
         ));
+    }
+    
+    /**
+     * @internal
+     */
+    public function getLastRuleValidator()
+    {
+        return $this->ruleValidator;
     }
 }
