@@ -17,7 +17,6 @@ use Widget\WidgetProvider;
  * @package     Widget
  * @subpackage  Validation
  * @author      Twin Huang <twinh@yahoo.cn>
- * @todo        message
  * @property    \Widget\Is $is The validator manager
  */
 class Validator extends WidgetProvider
@@ -478,14 +477,13 @@ class Validator extends WidgetProvider
                 if (isset($this->messages[$field])) {
                     if (is_string($this->messages[$field])) {
                         $messages[$field][$rule] = $this->messages[$field];
-                        // Ignore the same message
-                        break;
                     } elseif (isset($this->messages[$field][$rule])) {
                         $messages[$field][$rule] = $this->messages[$field][$rule];
+                    // Get message from rule validator
                     } else {
                         $messages[$field][$rule] = $this->ruleValidators[$field][$rule]->getMessage();
                     }
-                // Get message from validate rule
+                // Get message from rule validator
                 } else {
                     $messages[$field][$rule] = $this->ruleValidators[$field][$rule]->getMessage();
                 }

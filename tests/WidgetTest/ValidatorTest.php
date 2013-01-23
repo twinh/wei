@@ -476,4 +476,73 @@ class ValidatorTest extends TestCase
         $this->assertContains('email', $validator->getValidateFields());
         $this->assertNotContains('id', $validator->getValidateFields());
     }
+    
+    public function testMessage()
+    {
+        /* @var $validator \Widget\Validator\Validator */
+        $validator = $this->validate(array(
+            'data' => array(
+                'username'  => '',
+                'email'     => 'b.com',
+                'password'  => '',
+                'id'        => 'xx'
+            ),
+            // All is invalid
+            'rules' => array(
+                'username' => array(
+                    'required' => true
+                ),
+                'email' => array(
+                    'required' => true,
+                    'email' => true,
+                ),
+                'password' => array(
+                    'required' => true
+                ),
+                'id' => array(
+                    'length' => array(
+                       'min' => 10,
+                       'max' => 20,
+                    ),
+                    'email' => true
+                ),
+            ),
+            'messages' => array(
+                'username' => 'The username is required',
+                'email' => array(
+                    'email' => 'The email is invalid'
+                ),
+                'id' => array(
+                    'length' => 'The length must between 10 and 20',
+                )
+            ),
+        ));
+        
+        $messages = $validator->getInvalidatedMessages();
+        /*The invalid messages look like blow 
+        $messages = array(
+            'email' => array(
+                'email' => 'xxx', // user defined
+            ),
+            'id' => array(
+                'length' => 'xxx',
+                'email' => 'xxx', // get from rule validator
+            )
+        );*/
+        $this->assertArrayHasKey('username', $messages);
+        
+        $this->assertArrayHasKey('email', $messages);
+        
+        $this->assertArrayHasKey('password', $messages);
+        
+        $this->assertArrayHasKey('id', $messages);
+        
+        $this->assertArrayHasKey('email', $messages['email']);
+        
+        $this->assertArrayHasKey('length', $messages['id']);
+        
+        $this->assertArrayHasKey('email', $messages['id']);
+        
+        $this->assertArrayNotHasKey('password', $validator->getMessages());
+    }
 }
