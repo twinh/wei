@@ -12,13 +12,29 @@ use Widget\WidgetProvider;
 
 abstract class AbstractRule extends WidgetProvider
 {
+    /**
+     * The invalid message
+     * 
+     * @var string
+     */
     protected $message;
 
+    /**
+     * Returns the invalid message
+     * 
+     * @return string
+     */
     public function getMessage()
     {
         return $this->message;
     }
 
+    /**
+     * Set the invalid message
+     * 
+     * @param type $message
+     * @return \Widget\Validator\Rule\AbstractRule
+     */
     public function setMessage($message)
     {
         $this->message = $message;
