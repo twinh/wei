@@ -145,10 +145,8 @@ class Validator extends WidgetProvider
             $data = isset($this->data[$field]) ? $this->data[$field] : null;
             
             // Process simple rule, eg 'username' => 'required'
-            if (is_string($rules)) {
-                $rules = array(
-                    $rules => true
-                );
+            if (!is_array($rules)) {
+                $rules = array($rules);
             }
 
             // Make sure the required rule at first
@@ -163,9 +161,11 @@ class Validator extends WidgetProvider
             // Start validate
             foreach ($rules as $rule => $params) {
                 // Process simple array rule, eg 'username' => ['required', 'email']
-                if (is_int($rule) && is_string($params)) {
+                if (is_int($rule)) {
                     $rule = $params;
-                    $params = true;
+                    if (is_string($params)) {
+                        $params = true;
+                    }
                 }
                 
                 // Prepare parameters for validte widget
@@ -176,6 +176,10 @@ class Validator extends WidgetProvider
                 // The current rule validate result
                 $result = $this->is->validateOne($rule, $data, $params);
 
+                if (is_object($rule)) {
+                    $rule = get_class($rule);
+                }
+                
                 // Record the rule validators
                 $this->ruleValidators[$field][$rule] = $this->is->getLastRuleValidator();
                 

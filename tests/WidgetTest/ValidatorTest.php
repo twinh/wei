@@ -2,6 +2,8 @@
 
 namespace WidgetTest;
 
+use Widget\Validator\Rule;
+
 class ValidatorTest extends TestCase
 {
     public function testIsRegex()
@@ -569,6 +571,33 @@ class ValidatorTest extends TestCase
                     'email',
                 ),
             )
+        ));
+        
+        $this->assertFalse($validator2->valid());
+    }
+    
+    public function testObjectAsRule()
+    {
+        $validator = $this->validate(array(
+            'data' => array(
+                'username' => '',
+            ),
+            'rules' => array(
+                'username' => array(
+                    // FIXME inject widget manager
+                    new Rule\Email
+                )
+            )
+        ));
+        
+        $validator2 = $this->validate(array(
+            'data' => array(
+                'username' => '',
+            ),
+            'rules' => array(
+                // FIXME inject widget manager
+                'username' => new Rule\Email
+            ),
         ));
         
         $this->assertFalse($validator2->valid());

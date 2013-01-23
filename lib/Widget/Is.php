@@ -32,6 +32,11 @@ class Is extends WidgetProvider
      */
     public function validateOne($rule, $data, $options = array())
     {
+        if ($rule instanceof \Widget\Validator\Rule\AbstractRule) {
+            $this->ruleValidator = $rule;
+            return $rule($data);
+        }
+        
         // Starts with "not", such as notDigit, notEqual
         if (0 === stripos($rule, 'not')) {
             $reverse = true;
