@@ -6,7 +6,7 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
 
-namespace Widget\Validator\Rule;
+namespace Widget\Validator;
 
 /**
  * Check if the data contains only double byte characters

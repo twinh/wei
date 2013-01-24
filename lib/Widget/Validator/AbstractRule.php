@@ -6,7 +6,7 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
 
-namespace Widget\Validator\Rule;
+namespace Widget\Validator;
 
 use Widget\WidgetProvider;
 
@@ -33,7 +33,7 @@ abstract class AbstractRule extends WidgetProvider
      * Set the invalid message
      * 
      * @param type $message
-     * @return \Widget\Validator\Rule\AbstractRule
+     * @return \Widget\Validator\AbstractRule
      */
     public function setMessage($message)
     {

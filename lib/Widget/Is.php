@@ -30,7 +30,7 @@ class Is extends WidgetProvider
      */
     public function validateOne($rule, $data, $options = array())
     {
-        if ($rule instanceof \Widget\Validator\Rule\AbstractRule) {
+        if ($rule instanceof \Widget\Validator\AbstractRule) {
             $this->ruleValidator = $rule;
             return $rule($data);
         }
@@ -94,7 +94,7 @@ class Is extends WidgetProvider
      */
     public function hasRule($rule)
     {
-        if (class_exists($class = '\Widget\Validator\Rule\\' . ucfirst($rule))) {
+        if (class_exists($class = '\Widget\Validator\\' . ucfirst($rule))) {
             return $class;
         } else {
             return false;

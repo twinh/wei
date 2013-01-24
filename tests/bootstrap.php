@@ -20,8 +20,8 @@ return Widget::create(array(
         'import' => array(
             // Import is widgets
             array(
-                'dir' => dirname(__DIR__) . '/lib/Widget/Validator/Rule',
-                'namespace' => 'Widget\Validator\Rule',
+                'dir' => dirname(__DIR__) . '/lib/Widget/Validator',
+                'namespace' => 'Widget\Validator',
                 'format' => 'is%s'
             ),
         )

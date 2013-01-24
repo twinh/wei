@@ -6,7 +6,7 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
 
-namespace Widget\Validator\Rule;
+namespace Widget\Validator;
 
 /**
  * The default logger for widget, which is base on the Monolog!

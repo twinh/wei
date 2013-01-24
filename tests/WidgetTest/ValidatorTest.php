@@ -2,7 +2,7 @@
 
 namespace WidgetTest;
 
-use Widget\Validator\Rule;
+use Widget\Validator;
 
 class ValidatorTest extends TestCase
 {
@@ -146,7 +146,7 @@ class ValidatorTest extends TestCase
         }, 'abc'));
 
         $this->assertFalse($this->is(function(
-            $data, \Widget\Validator\Rule\Callback $callback, \Widget\Widget $widget
+            $data, \Widget\Validator\Callback $callback, \Widget\Widget $widget
         ){
             return false;
         }, 'data'));
@@ -550,7 +550,7 @@ class ValidatorTest extends TestCase
             'rules' => array(
                 'username' => array(
                     // FIXME inject widget manager
-                    new Rule\Email
+                    new Validator\Email
                 )
             )
         ));
@@ -561,7 +561,7 @@ class ValidatorTest extends TestCase
             ),
             'rules' => array(
                 // FIXME inject widget manager
-                'username' => new Rule\Email
+                'username' => new Validator\Email
             ),
         ));
         
