@@ -6,13 +6,6 @@ use Widget\Validator\Rule;
 
 class ValidatorTest extends TestCase
 {
-    public function testIsRegex()
-    {
-        $this->assertTrue($this->isRegex('This is Widget Framework.', '/widget/i'));
-
-        $this->assertFalse($this->isRegex('This is Widget Framework.', '/that/i'));
-    }
-
     public function testIsTime()
     {
         $this->assertTrue($this->isTime('00:00:00'));
