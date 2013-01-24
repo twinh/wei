@@ -548,4 +548,14 @@ class Validator extends WidgetProvider
             return $this;
         }
     }
+    
+    /**
+     * Returns the language code
+     * 
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
 }
