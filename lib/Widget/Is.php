@@ -8,8 +8,6 @@
 
 namespace Widget;
 
-use Widget\Validator\Validator;
-
 /**
  * The validator manager
  *
