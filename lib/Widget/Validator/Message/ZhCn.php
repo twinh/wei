@@ -10,7 +10,7 @@ namespace Widget\Validator\Message;
 class ZhCn extends AbstractMessage
 {
     protected $messages = array(
-        'alnum'             => '该项只能由字母和数字组成',
+        'alnum'             => '该项只能由字母(a-z)和数字(1-9)组成',
         'alpha'             => '该项只能由字母组成',
         'callback'          => '该项不合法',
         'digit'             => '该项只能由数字组成',
