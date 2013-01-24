@@ -50,4 +50,4 @@ class Url extends WidgetProvider
             $this->options['names'][1] => $value2,
         ) + $params);
     }
-    }
+}

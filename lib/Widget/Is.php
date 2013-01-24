@@ -104,7 +104,7 @@ class Is extends WidgetProvider
     /**
      * Create a new validator instance
      * 
-     * @return \Widget\Validator\Validator
+     * @return \Widget\Validator
      */
     public function createValidator()
     {

@@ -20,7 +20,7 @@ class Validate extends WidgetProvider
     /**
      * The last validator object
      *
-     * @var \Widget\Validator\Validator
+     * @var \Widget\Validator
      */
     protected $validator;
     

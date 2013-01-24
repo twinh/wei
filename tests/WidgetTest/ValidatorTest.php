@@ -324,7 +324,7 @@ class ValidatorTest extends TestCase
     
     public function testIsFieldInvalidted()
     {
-        /* @var $validator \Widget\Validator\Validator */
+        /* @var $validator \Widget\Validator */
         $validator = $this->validate(array(
             'data' => array(
                 'age' => 10,
@@ -385,7 +385,7 @@ class ValidatorTest extends TestCase
     
     public function testRuleOperation()
     {
-        /* @var $validator \Widget\Validator\Validator */
+        /* @var $validator \Widget\Validator */
         $validator = $this->is->createValidator();
         
         $this->assertFalse($validator->hasRule('username', 'email'));
@@ -401,7 +401,7 @@ class ValidatorTest extends TestCase
     
     public function testData()
     {
-        /* @var $validator \Widget\Validator\Validator */
+        /* @var $validator \Widget\Validator */
         $validator = $this->is->createValidator();
         
         $this->assertEmpty($validator->getData());
@@ -421,7 +421,7 @@ class ValidatorTest extends TestCase
     
     public function testGetValidateFields()
     {
-        /* @var $validator \Widget\Validator\Validator */
+        /* @var $validator \Widget\Validator */
         $validator = $this->validate(array(
             'data' => array(
                 'email' => 'a@b.com',
@@ -446,7 +446,7 @@ class ValidatorTest extends TestCase
     
     public function testMessage()
     {
-        /* @var $validator \Widget\Validator\Validator */
+        /* @var $validator \Widget\Validator */
         $validator = $this->validate(array(
             'data' => array(
                 'username'  => '',

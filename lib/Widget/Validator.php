@@ -434,7 +434,7 @@ class Validator extends WidgetProvider
      * Sets data for validate
      * 
      * @param array $data
-     * @return \Widget\Validator\Validator
+     * @return \Widget\Validator
      */
     public function setData(array $data)
     {
@@ -531,7 +531,7 @@ class Validator extends WidgetProvider
      * Set language code
      * 
      * @param string $code The language code
-     * @return \Widget\Validator\Validator
+     * @return \Widget\Validator
      * @throws \InvalidArgumentException When language file not found
      */
     public function setLanguage($code)
