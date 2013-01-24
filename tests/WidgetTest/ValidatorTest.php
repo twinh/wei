@@ -6,15 +6,6 @@ use Widget\Validator\Rule;
 
 class ValidatorTest extends TestCase
 {
-    public function testIsPostCode()
-    {
-        $this->assertTrue($this->isPostcode('123456'));
-
-        $this->assertFalse($this->isPostcode('1234567'));
-
-        $this->assertFalse($this->isPostcode('0234567'));
-    }
-
     public function testIsFile()
     {
         $this->assertFalse(false, $this->isFile(array()), 'Not File path');
