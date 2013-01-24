@@ -186,7 +186,7 @@ class Error extends WidgetProvider
             //$this->trigger('error', array('data' => get_defined_vars()));
 
             // display view file
-            require dirname(__FILE__) . '/views/error.php';
+            require __DIR__ . '/Resource/views/error.php';
 
             // exit to prevent other output
             if ($this->exit) {
