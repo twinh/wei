@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -7,9 +6,7 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
 
-namespace Widget\Validator;
-
-use Widget\WidgetProvider;
+namespace Widget;
 
 /**
  * Validator
@@ -539,7 +536,7 @@ class Validator extends WidgetProvider
      */
     public function setLanguage($code)
     {
-        $file = __DIR__ . '/../Resource/i18n/validator/' . $code . '.php';
+        $file = __DIR__ . '/Resource/i18n/validator/' . $code . '.php';
         if (!is_file($file)) {
             throw new \InvalidArgumentException(sprintf('Validator language code "%s" is not available', $code));
         } else {
