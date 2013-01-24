@@ -125,6 +125,20 @@ class Validator extends WidgetProvider
      * @var bool
      */
     protected $result = true;
+    
+    /**
+     * The language code for message
+     * 
+     * @var string
+     */
+    protected $language;
+    
+    /**
+     * The language file path
+     * 
+     * @var string
+     */
+    private $languageFile;
 
     /**
      * Validate the data by the given options
@@ -492,6 +506,7 @@ class Validator extends WidgetProvider
     public function getInvalidatedMessages()
     {
         $messages = array();
+        $languages = $this->languageFile ? require $this->languageFile : array();
         
         foreach ($this->invalidatedRules as $field => $rules) {
             foreach ($rules as $rule) {
@@ -503,15 +518,34 @@ class Validator extends WidgetProvider
                         $messages[$field][$rule] = $this->messages[$field][$rule];
                     // Get message from rule validator
                     } else {
-                        $messages[$field][$rule] = $this->ruleValidators[$field][$rule]->getMessage();
+                        $messages[$field][$rule] = isset($languages[$rule]) ? $languages[$rule] : $this->ruleValidators[$field][$rule]->getMessage();
                     }
                 // Get message from rule validator
                 } else {
-                    $messages[$field][$rule] = $this->ruleValidators[$field][$rule]->getMessage();
+                    $messages[$field][$rule] = isset($languages[$rule]) ? $languages[$rule] : $this->ruleValidators[$field][$rule]->getMessage();
                 }
             }
         }
         
         return $messages;
+    }
+    
+    /**
+     * Set language code
+     * 
+     * @param string $code The language code
+     * @return \Widget\Validator\Validator
+     * @throws \InvalidArgumentException When language file not found
+     */
+    public function setLanguage($code)
+    {
+        $file = __DIR__ . '/../Resource/i18n/validator/' . $code . '.php';
+        if (!is_file($file)) {
+            throw new \InvalidArgumentException(sprintf('Validator language code "%s" is not available', $code));
+        } else {
+            $this->languageFile = $file;
+            $this->language = $code;
+            return $this;
+        }
     }
 }
