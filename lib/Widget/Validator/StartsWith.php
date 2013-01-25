@@ -17,17 +17,19 @@ namespace Widget\Validator;
  */
 class StartsWith extends AbstractRule
 {
+    protected $findMe;
+    
+    protected $case = false;
+    
     /**
      * @param boolean $case
      */
-    public function __invoke($data, $findMe, $case = false)
+    public function __invoke($data, $options = array())
     {
-        if (!$findMe) {
-            return false;
-        }
+        $this->option($options);
 
-        $fn = $case ? 'strpos' : 'stripos';
+        $fn = $this->case ? 'strpos' : 'stripos';
 
-        return 0 === $fn($data, $findMe);
+        return 0 === $fn($data, $this->findMe);
     }
 }
