@@ -6,17 +6,6 @@ use Widget\Validator;
 
 class ValidatorTest extends TestCase
 {
-    public function testIsIn()
-    {
-        $this->assertTrue($this->isIn('apple', array('apple', 'pear')));
-
-        $this->assertTrue($this->isIn('apple', new \ArrayObject(array('apple', 'pear'))));
-
-        $this->assertTrue($this->isIn('', array(null)));
-
-        $this->assertFalse($this->isIn('', array(null), true));
-    }
-
     /**
      * @expectedException InvalidArgumentException
      */
