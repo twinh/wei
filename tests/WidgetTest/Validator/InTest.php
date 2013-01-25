@@ -21,6 +21,14 @@ class InTest extends TestCase
     {
         $this->assertFalse($this->isIn($input, $array, $case));
     }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidArgument()
+    {
+        $this->isIn('abc', 'bcd');
+    }
 
     public function providerForIn()
     {
