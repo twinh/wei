@@ -33,6 +33,7 @@ class RegexTest extends TestCase
     {
         return array(
             array('This is Widget Framework.', '/that/i'),
+            array('Abc', '/abc/')
         );
     }
 }
