@@ -70,23 +70,6 @@ class ValidatorTest extends TestCase
         $this->assertFalse($this->isDate('2012'));
     }
 
-    public function testIsDateTime()
-    {
-        $this->assertTrue($this->isDateTime('1000-01-01 00:00:00'));
-
-        $this->assertTrue($this->isDateTime('3000-01-01 00:00:50'));
-
-        $this->assertTrue($this->isDateTime('2012-02-29 23:59:59'));
-
-        $this->assertFalse($this->isDateTime('2013-02-29 24:00:00'));
-
-        $this->assertFalse($this->isDateTime('2013-01-32 23:60:00'));
-
-        $this->assertFalse($this->isDateTime('2013-00-00 23:59:61'));
-
-        $this->assertFalse($this->isDateTime('2012 61:00'));
-    }
-    
     public function testIsIn()
     {
         $this->assertTrue($this->isIn('apple', array('apple', 'pear')));
