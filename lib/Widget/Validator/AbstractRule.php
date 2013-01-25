@@ -20,9 +20,7 @@ abstract class AbstractRule extends WidgetProvider
     protected $message;
 
     /**
-     * Returns the invalid message
-     * 
-     * @return string
+     * {@inheritdoc}
      */
     public function getMessage()
     {
@@ -30,10 +28,7 @@ abstract class AbstractRule extends WidgetProvider
     }
 
     /**
-     * Set the invalid message
-     * 
-     * @param type $message
-     * @return \Widget\Validator\AbstractRule
+     * {@inheritdoc}
      */
     public function setMessage($message)
     {
