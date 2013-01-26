@@ -467,4 +467,40 @@ class ValidatorTest extends TestCase
             'language' => 'no this language'
         ));
     }
+    
+    public function testBreakRule()
+    {
+        /* @var $validator \Widget\Validator */
+        $validator = $this->validate(array(
+            'data' => array(
+                'email' => 'error-email',
+                'username' => 'abc'
+            ),
+            'rules' => array(
+                'email' => array(
+                    'required' => true, // valid
+                    'length' => array(  // invalid
+                        'min' => 1,
+                        'max' => 3 
+                    ),
+                    'email' => true,    // not valid
+                ),
+                'username' => array(
+                    'required' => true, // valid
+                    'length' => array(  // invalid
+                        'min' => 5,
+                        'max' => 10
+                    ),
+                    'alnum',            // not valid
+                ),
+            ),
+            'breakRule' => true
+        ));
+        
+        $this->assertCount(1, $validator->getInvalidatedRules('email'));
+        $this->assertContains('length', $validator->getInvalidatedRules('email'));
+        
+        $this->assertCount(1, $validator->getInvalidatedRules('username'));
+        $this->assertContains('length', $validator->getInvalidatedRules('username'));
+    }
 }

@@ -61,6 +61,13 @@ class Validator extends WidgetProvider
     protected $breakOne = false;
 
     /**
+     * Whether jump to the next field validation when the current filed's rule is invalidated
+     * 
+     * @var bool
+     */
+    protected $breakRule = false;
+    
+    /**
      * The callback method triggered when every rule is validated
      *
      * @var null|callback
@@ -216,7 +223,7 @@ class Validator extends WidgetProvider
                     }
                 } else {
                     // Break the validation flow when any field's rule is invalidated
-                    if ($this->breakOne) {
+                    if ($this->breakOne || $this->breakRule) {
                         break;
                     }
                 }
@@ -226,6 +233,10 @@ class Validator extends WidgetProvider
             $callback = $this->isFieldValidated($field) ? 'validated' : 'invalidated';
             if (false === $this->callback($this->$callback, array($field, $this))) {
                 return $this->result;
+            }
+
+            if (!$this->result && $this->breakRule) {
+                continue;
             }
 
             // Break the validation flow when any field is invalidated
