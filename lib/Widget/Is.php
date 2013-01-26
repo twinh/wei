@@ -87,7 +87,7 @@ class Is extends WidgetProvider
     }
     
     /**
-     * Check if the validate rule exists
+     * Check if the validation rule exists
      *
      * @param string $rule
      * @return string|false
