@@ -19,7 +19,7 @@ namespace Widget;
 class Validator extends WidgetProvider
 {
     /**
-     * The validate rules
+     * The validation rules
      *
      * @var array
      */
@@ -40,91 +40,91 @@ class Validator extends WidgetProvider
     protected $data = array();
 
     /**
-     * The invalidated messages
+     * The invalid messages
      *
      * @var array
      */
     protected $messages = array();
 
     /**
-     * Whether break the validation flow when any field is invalidated
+     * Whether break the validation flow when any field is not valid
      *
      * @var bool
      */
     protected $break = false;
 
     /**
-     * Whether break the validation flow when any field's rule is invalidated
+     * Whether break the validation flow when any field's rule is not valid
      *
      * @var bool
      */
     protected $breakOne = false;
 
     /**
-     * Whether jump to the next field validation when the current filed's rule is invalidated
+     * Whether jump to the next field validation when the current filed's rule is not valid
      * 
      * @var bool
      */
     protected $breakRule = false;
     
     /**
-     * The callback method triggered when every rule is validated
+     * The callback method triggered when every rule is valid
      *
      * @var null|callback
      */
-    protected $validatedOne = null;
+    protected $validOne = null;
 
     /**
-     * The callback method triggered when every rule is invalidated
+     * The callback method triggered when every rule is invalid
      *
      * @var null|callback
      */
-    protected $invalidatedOne = null;
+    protected $invalidOne = null;
 
     /**
-     * The callback method triggered when every field is validated
+     * The callback method triggered when every field is valid
      *
      * @var null|callback
      */
-    protected $validated = null;
+    protected $valid = null;
 
     /**
-     * The callback method triggered when every field is invalidated
+     * The callback method triggered when every field is invalid
      *
      * @var null|callback
      */
-    protected $invalidated = null;
+    protected $invalid = null;
 
     /**
-     * The callback method triggered after all rules are validated
+     * The callback method triggered after all rules are valid
      *
      * @var null|callback
      */
     protected $success = null;
 
     /**
-     * The callback method triggered when the whole validation is invalidated
+     * The callback method triggered when the whole validation is invalid
      *
      * @var null|callback
      */
     protected $failure = null;
 
     /**
-     * The validated rules array, which use the field as key, and the rules as value
+     * The valid rules array, which use the field as key, and the rules as value
      *
      * @var string
      */
-    protected $validatedRules = array();
+    protected $validRules = array();
 
     /**
-     * The invalidated rules array, which use the field as key, and the rules as value
+     * The invalid rules array, which use the field as key, and the rules as value
      *
      * @var string
      */
-    protected $invalidatedRules = array();
+    protected $invalidRules = array();
 
     /**
-     * The validate result
+     * The validation result
      *
      * @var bool
      */
@@ -149,14 +149,14 @@ class Validator extends WidgetProvider
      *
      * @param array $options The options for validation
      * @return false Whether pass the validation or not
-     * @throws \InvalidArgumentException When validate rules is empty
+     * @throws \InvalidArgumentException When validation rules is empty
      */
     public function __invoke($options = array())
     {
         $this->option($options);
 
         if (empty($this->rules)) {
-            throw new \InvalidArgumentException('Validate rules should not be empty.');
+            throw new \InvalidArgumentException('Validation rules should not be empty.');
         }
 
         foreach ($this->rules as $field => $rules) {
@@ -191,7 +191,7 @@ class Validator extends WidgetProvider
                     $params = (array) $params;
                 }
 
-                // The current rule validate result
+                // The current rule validation result
                 $result = $this->is->validateOne($rule, $data, $params);
 
                 if (is_object($rule)) {
@@ -201,36 +201,36 @@ class Validator extends WidgetProvider
                 // Record the rule validators
                 $this->ruleValidators[$field][$rule] = $this->is->getLastRuleValidator();
                 
-                // Would always be false in the whole validate flow
+                // Would always be false in the whole validation flow
                 if (false === $result) {
                     $this->result = false;
                 }
 
-                // Record the validated/invalidated rule
-                $method = $result ? 'addValidatedRule' : 'addInvalidatedRule';
+                // Record the valid/invalid rule
+                $method = $result ? 'addValidRule' : 'addInvalidRule';
                 $this->$method($field, $rule);
 
-                // Trigger the validatedOne/invalidatedOne callback
-                $callback = $result ? 'validatedOne' : 'invalidatedOne';
+                // Trigger the validOne/invalidOne callback
+                $callback = $result ? 'validOne' : 'invalidOne';
                 if (false === $this->callback($this->$callback, array($field, $rule, $this))) {
                     return $this->result;
                 }
 
                 if ($result) {
-                    // The field data is empty and optional, pass the left validate rules
+                    // The field data is empty and optional, pass the left valid rules
                     if (!$data && 'required' === $rule) {
                         break;
                     }
                 } else {
-                    // Break the validation flow when any field's rule is invalidated
+                    // Break the validation flow when any field's rule is invalid
                     if ($this->breakOne || $this->breakRule) {
                         break;
                     }
                 }
             }
             
-            // Trigger the validated/invalidated callback
-            $callback = $this->isFieldValidated($field) ? 'validated' : 'invalidated';
+            // Trigger the valid/invalid callback
+            $callback = $this->isFieldValid($field) ? 'valid' : 'invalid';
             if (false === $this->callback($this->$callback, array($field, $this))) {
                 return $this->result;
             }
@@ -239,7 +239,7 @@ class Validator extends WidgetProvider
                 continue;
             }
 
-            // Break the validation flow when any field is invalidated
+            // Break the validation flow when any field is invalid
             if (!$this->result && ($this->breakOne || $this->break)) {
                 break;
             }
@@ -253,79 +253,79 @@ class Validator extends WidgetProvider
     }
 
     /**
-     * Add validated rule
+     * Add valid rule
      *
      * @param string $field The field name
      * @param string $rule The rule name
      * @return Validator
      */
-    public function addValidatedRule($field, $rule)
+    public function addValidRule($field, $rule)
     {
-        $this->validatedRules[$field][] = $rule;
+        $this->validRules[$field][] = $rule;
 
         return $this;
     }
 
     /**
-     * Add invalidated rule
+     * Add invalid rule
      *
      * @param string $field The field name
      * @param string $rule The rule name
      * @return Validator
      */
-    public function addInvalidatedRule($field, $rule)
+    public function addInvalidRule($field, $rule)
     {
-        $this->invalidatedRules[$field][] = $rule;
+        $this->invalidRules[$field][] = $rule;
 
         return $this;
     }
     
     /**
-     * Returns the validated fields
+     * Returns the valid fields
      * 
      * @return array
      */
-    public function getValidateFields()
+    public function getValidFields()
     {
-        return array_keys(array_diff_key($this->validatedRules, $this->invalidatedRules));
+        return array_keys(array_diff_key($this->validRules, $this->invalidRules));
     }
     
     /**
-     * Returns the invalidated fields
+     * Returns the invalid fields
      * 
      * @return array
      */
-    public function getInvalidatedFields()
+    public function getInvalidFields()
     {
-        return array_keys($this->invalidatedRules);
+        return array_keys($this->invalidRules);
     }
 
     /**
-     * Check if field validted
+     * Check if field is valid
      *
      * @param string $field
      * @return bool
      */
-    public function isFieldValidated($field)
+    public function isFieldValid($field)
     {
-        return !in_array($field, $this->getInvalidatedFields());
+        return !in_array($field, $this->getInvalidFields());
     }
 
     /**
-     * Check if field invalidated
+     * Check if field is invalid
      *
      * @param string $field
      * @return bool
      */
     public function isFieldInvalidted($field)
     {
-        return in_array($field, $this->getInvalidatedFields());
+        return in_array($field, $this->getInvalidFields());
     }
 
     /**
-     * Get validate rules by field name
+     * Get valid rules by field name
      *
-     * @param string $field The validate field
+     * @param string $field The valid field
      * @return array
      */
     public function getRules($field)
@@ -334,10 +334,10 @@ class Validator extends WidgetProvider
     }
 
     /**
-     * Get validate rule parameters
+     * Get validation rule parameters
      *
-     * @param string $field The validate field
-     * @param string $rule The validate rule
+     * @param string $field The validation field
+     * @param string $rule The validation rule
      * @return array
      */
     public function getRuleParams($field, $rule)
@@ -346,25 +346,25 @@ class Validator extends WidgetProvider
     }
 
     /**
-     * Get validated rules by field
+     * Get valid rules by field
      *
      * @param string $field
      * @return array
      */
-    public function getValidatedRules($field)
+    public function getValidRules($field)
     {
-        return isset($this->validatedRules[$field]) ? $this->validatedRules[$field] : array();
+        return isset($this->validRules[$field]) ? $this->validRules[$field] : array();
     }
 
     /**
-     * Get Invalidated rules by field
+     * Get invalid rules by field
      *
      * @param string $field
      * @return array
      */
-    public function getInvalidatedRules($field)
+    public function getInvalidRules($field)
     {
-        return isset($this->invalidatedRules[$field]) ? $this->invalidatedRules[$field] : array();
+        return isset($this->invalidRules[$field]) ? $this->invalidRules[$field] : array();
     }
 
     /**
@@ -392,7 +392,7 @@ class Validator extends WidgetProvider
     }
     
     /**
-     * Returns the validate result
+     * Returns the validation result
      * 
      * @return bool
      */
@@ -414,7 +414,7 @@ class Validator extends WidgetProvider
     }
     
     /**
-     * Returns whether the validate rule exists in specified field
+     * Returns whether the validation rule exists in specified field
      * 
      * @param string $field
      * @param string $rule
@@ -442,7 +442,7 @@ class Validator extends WidgetProvider
     }
     
     /**
-     * Sets data for validate
+     * Sets data for validation
      * 
      * @param array $data
      * @return \Widget\Validator
@@ -455,7 +455,7 @@ class Validator extends WidgetProvider
     }
     
     /**
-     * Returns validate data
+     * Returns validation data
      * 
      * @return array
      */
@@ -465,7 +465,7 @@ class Validator extends WidgetProvider
     }
     
     /**
-     * Returns validate field data
+     * Returns validation field data
      *
      * @param string $field The name of field
      * @return mixed
@@ -476,7 +476,7 @@ class Validator extends WidgetProvider
     }
     
     /**
-     * Sets data for validate field
+     * Sets data for validation field
      * 
      * @param string $field The name of field
      * @param mixed $data The data of field
@@ -507,16 +507,16 @@ class Validator extends WidgetProvider
     }
     
     /**
-     * Returns invalidated messages
+     * Returns invalid messages
      * 
      * @return array
      */
-    public function getInvalidatedMessages()
+    public function getInvalidMessages()
     {
         $messages = array();
         $languages = $this->languageFile ? require $this->languageFile : array();
         
-        foreach ($this->invalidatedRules as $field => $rules) {
+        foreach ($this->invalidRules as $field => $rules) {
             foreach ($rules as $rule) {
                 // Custom message
                 if (isset($this->messages[$field])) {

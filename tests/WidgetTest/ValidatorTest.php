@@ -117,7 +117,7 @@ class ValidatorTest extends TestCase
                 ),
             ),
             'breakOne' => true,
-            'invalidatedOne' => function($field, $rule, $validator) use(&$breakRule) {
+            'invalidOne' => function($field, $rule, $validator) use(&$breakRule) {
                 $breakRule = $rule;
             }
         ));
@@ -125,7 +125,7 @@ class ValidatorTest extends TestCase
         $this->assertEquals('length', $breakRule);
     }
 
-    public function testReturnFalseInValidatedOneCallback()
+    public function testReturnFalseInvalidOneCallback()
     {
         $lastRule = '';
 
@@ -136,10 +136,10 @@ class ValidatorTest extends TestCase
             'rules' => array(
                 'email' => array(
                     'required' => true, //Aavoid automatic added
-                    'email' => true, // Will not validate
+                    'email' => true, // Will not valid
                 ),
             ),
-            'validatedOne' => function($field, $rule, $validator) use(&$lastRule) {
+            'validOne' => function($field, $rule, $validator) use(&$lastRule) {
                 $lastRule = $rule;
 
                 // Return false to break the validation flow
@@ -150,7 +150,7 @@ class ValidatorTest extends TestCase
         $this->assertEquals('required', $lastRule);
     }
 
-    public function testReturnFalseInValidatedCallback()
+    public function testReturnFalseInvalidCallback()
     {
         $lastField = '';
 
@@ -160,16 +160,16 @@ class ValidatorTest extends TestCase
                 'age' => 5
             ),
             'rules' => array(
-                // Will validate
+                // Will valild
                 'email' => array(
                     'email' => true,
                 ),
-                // Will not validate
+                // Will not valid
                 'age' => array(
                     'range' => array(0, 150)
                 ),
             ),
-            'validated' => function($field, $validator) use(&$lastField) {
+            'valid' => function($field, $validator) use(&$lastField) {
                 $lastField = $field;
 
                 // Return false to break the validation flow
@@ -220,13 +220,13 @@ class ValidatorTest extends TestCase
         
         $this->assertTrue($validator->isFieldInvalidted('age'));
         
-        $this->assertTrue($validator->isFieldValidated('email'));
+        $this->assertTrue($validator->isFieldValid('email'));
         
         $this->assertEquals(10, $validator->getFieldData('age'));
         
-        $this->assertEquals(array('required', 'email'), $validator->getValidatedRules('email'));
+        $this->assertEquals(array('required', 'email'), $validator->getValidRules('email'));
         
-        $this->assertEquals(array('range'), $validator->getInvalidatedRules('age'));
+        $this->assertEquals(array('range'), $validator->getInvalidRules('age'));
 
         $this->assertEquals(array('range'), array_keys($validator->getRules('age')));
         
@@ -312,11 +312,11 @@ class ValidatorTest extends TestCase
             )
         ));
         
-        $this->assertContains('id', $validator->getInvalidatedFields());
-        $this->assertNotContains('email', $validator->getInvalidatedFields());
+        $this->assertContains('id', $validator->getInvalidFields());
+        $this->assertNotContains('email', $validator->getInvalidFields());
         
-        $this->assertContains('email', $validator->getValidateFields());
-        $this->assertNotContains('id', $validator->getValidateFields());
+        $this->assertContains('email', $validator->getValidFields());
+        $this->assertNotContains('id', $validator->getValidFields());
     }
     
     public function testMessage()
@@ -360,7 +360,7 @@ class ValidatorTest extends TestCase
             ),
         ));
         
-        $messages = $validator->getInvalidatedMessages();
+        $messages = $validator->getInvalidMessages();
         /*The invalid messages look like blow 
         $messages = array(
             'email' => array(
@@ -497,10 +497,10 @@ class ValidatorTest extends TestCase
             'breakRule' => true
         ));
         
-        $this->assertCount(1, $validator->getInvalidatedRules('email'));
-        $this->assertContains('length', $validator->getInvalidatedRules('email'));
+        $this->assertCount(1, $validator->getInvalidRules('email'));
+        $this->assertContains('length', $validator->getInvalidRules('email'));
         
-        $this->assertCount(1, $validator->getInvalidatedRules('username'));
-        $this->assertContains('length', $validator->getInvalidatedRules('username'));
+        $this->assertCount(1, $validator->getInvalidRules('username'));
+        $this->assertContains('length', $validator->getInvalidRules('username'));
     }
 }
