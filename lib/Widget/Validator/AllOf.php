@@ -9,7 +9,7 @@
 namespace Widget\Validator;
 
 /**
- * The default logger for widget, which is base on the Monolog!
+ * Check if all of the validation rules is valid
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
