@@ -16,6 +16,8 @@ namespace Widget\Validator;
  */
 class Required extends AbstractRule
 {
+    protected $message = 'This value is required';
+    
     public function __invoke($data, $required = true)
     {
         return !$required || $data;

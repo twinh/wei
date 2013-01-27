@@ -16,7 +16,7 @@ namespace Widget\Validator;
  */
 class QQ extends AbstractRule
 {
-    protected $message = 'The QQ is invalid';
+    protected $message = 'This value must be valid QQ number';
     
     public function __invoke($value)
     {

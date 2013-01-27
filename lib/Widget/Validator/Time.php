@@ -16,6 +16,8 @@ namespace Widget\Validator;
  */
 class Time extends AbstractRule
 {
+    protected $message = 'This value is not a valid time';
+    
     public function __invoke($value)
     {
         return (bool) preg_match('/^([01]\d|2[0-3])(:[0-5]\d){0,2}$/', $value);

@@ -18,6 +18,8 @@ use Widget\Exception;
  */
 class Type extends AbstractRule
 {
+    protected $message = 'This value must be of type {{ type }}';
+    
     public function __invoke($value, $type)
     {
         $type = strtolower($type);

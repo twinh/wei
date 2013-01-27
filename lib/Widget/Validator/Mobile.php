@@ -16,6 +16,8 @@ namespace Widget\Validator;
  */
 class Mobile extends AbstractRule
 {
+    protected $message = 'This value must be valid mobile number';
+    
     public function __invoke($data)
     {
         return (bool) preg_match('/^1[358][\d]{9}$/', $data);
