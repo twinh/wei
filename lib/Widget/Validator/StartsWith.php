@@ -21,6 +21,8 @@ class StartsWith extends AbstractRule
     
     protected $case = false;
     
+    protected $message = 'This value must start with: {{ findMe }}';
+    
     /**
      * @param boolean $case
      */

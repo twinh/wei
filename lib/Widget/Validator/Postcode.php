@@ -16,7 +16,7 @@ namespace Widget\Validator;
  */
 class Postcode extends AbstractRule
 {
-    protected $message = 'The value should be six length of digit';
+    protected $message = 'This value should be six length of digit';
 
     public function __invoke($data)
     {

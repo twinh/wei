@@ -16,7 +16,7 @@ namespace Widget\Validator;
  */
 class Email extends AbstractRule
 {
-    protected $message = 'The value should be valid email address';
+    protected $message = 'This value must be valid email address';
     
     public function __invoke($value)
     {

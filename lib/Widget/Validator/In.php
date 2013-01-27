@@ -18,6 +18,8 @@ use InvalidArgumentException;
  */
 class In
 {
+    protected $message = 'This value must be in {{ array }}';
+    
     /**
      * @param boolean $strict
      */

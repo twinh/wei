@@ -21,6 +21,8 @@ class EndsWith extends AbstractRule
     
     protected $case = false;
     
+    protected $message = 'This value must end with: {{ findMe }}';
+    
     /**
      * @param boolean $case
      */

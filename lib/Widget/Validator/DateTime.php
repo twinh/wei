@@ -19,6 +19,8 @@ use DateTime as Dt;
 class DateTime extends AbstractRule
 {
     protected $format = 'Y-m-d H:i:s';
+    
+    protected $message = 'This value is not a valid datetime, the format should be {{ format }}';
 
     public function __invoke($value)
     {

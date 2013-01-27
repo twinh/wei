@@ -16,7 +16,7 @@ namespace Widget\Validator;
  */
 class Alnum extends AbstractRule
 {
-    protected $message = 'The value must contain letters (a-z) and digits (0-9)';
+    protected $message = 'This value must contain letters (a-z) and digits (0-9)';
     
     public function __invoke($value)
     {

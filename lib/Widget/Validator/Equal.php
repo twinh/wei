@@ -16,6 +16,8 @@ namespace Widget\Validator;
  */
 class Equal extends AbstractRule
 {
+    protected $message = 'This value must be equals {{ value }}';
+    
     /**
      * @param boolean $strict
      */

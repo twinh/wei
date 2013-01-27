@@ -16,6 +16,8 @@ namespace Widget\Validator;
  */
 class Chinese extends AbstractRule
 {
+    protected $message = 'This value must contain only Chinese characters';
+    
     public function __invoke($value)
     {
         return (bool) preg_match('/^[\x{4e00}-\x{9fa5}]+$/u', $value);

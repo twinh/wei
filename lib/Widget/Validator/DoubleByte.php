@@ -16,6 +16,8 @@ namespace Widget\Validator;
  */
 class DoubleByte extends AbstractRule
 {
+    protected $message = 'This value must contain only double byte characters';
+    
     /**
      * Validator
      * 

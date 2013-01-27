@@ -16,6 +16,8 @@ namespace Widget\Validator;
  */
 class QQ extends AbstractRule
 {
+    protected $message = 'The QQ is invalid';
+    
     public function __invoke($value)
     {
         return (bool) preg_match('/^[1-9][\d]{4,9}$/', $value);

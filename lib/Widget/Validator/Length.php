@@ -18,6 +18,12 @@ class Length extends AbstractRule
     
     protected $max;
     
+    protected $minMessage = 'This value must have a length greater than {{ min }}';
+    
+    protected $maxMessage = 'This value must have a length lower than {{ max }}';
+    
+    protected $message = 'This value must have a length between {{ min }} and {{ max }}';
+
     public function __invoke($data, $options = array())
     {
         if (is_int($options)) {
@@ -34,5 +40,20 @@ class Length extends AbstractRule
         } else {
             return $this->min <= $len && $this->max >= $len;
         }
+    }
+    
+    public function getMessage()
+    {
+        if (!is_null($this->min) && $this->max) {
+            $message = $this->message;
+        } elseif ($this->min) {
+            $message = $this->minMessage;
+        } elseif ($this->max) {
+            $message = $this->maxMessage;
+        } else {
+            $message = $this->message;
+        }
+        
+        return $message;
     }
 }

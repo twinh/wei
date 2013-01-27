@@ -20,6 +20,8 @@ class Date extends AbstractRule
 {
     protected $format = 'Y-m-d';
 
+    protected $message = 'This value is not a valid date, the format should be {{ format }}';
+    
     public function __invoke($value)
     {
         $date = DateTime::createFromFormat($this->format, $value);

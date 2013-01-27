@@ -16,6 +16,8 @@ namespace Widget\Validator;
  */
 class Dir extends AbstractRule
 {
+    protected $message = 'This value must be an existing directory';
+    
     /**
      * Determine the object source is a file path, check with the include_path.
      *

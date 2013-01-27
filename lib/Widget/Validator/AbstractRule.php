@@ -17,7 +17,7 @@ abstract class AbstractRule extends WidgetProvider
      * 
      * @var string
      */
-    protected $message = 'The value is invalid';
+    protected $message = 'This value is invalid';
 
     /**
      * {@inheritdoc}
