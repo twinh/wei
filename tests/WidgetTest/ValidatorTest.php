@@ -117,7 +117,7 @@ class ValidatorTest extends TestCase
                 ),
             ),
             'breakOne' => true,
-            'invalidOne' => function($field, $rule, $validator) use(&$breakRule) {
+            'ruleInvalid' => function($field, $rule, $validator) use(&$breakRule) {
                 $breakRule = $rule;
             }
         ));
@@ -125,7 +125,7 @@ class ValidatorTest extends TestCase
         $this->assertEquals('length', $breakRule);
     }
 
-    public function testReturnFalseInvalidOneCallback()
+    public function testReturnFalseOnRuleValidCallback()
     {
         $lastRule = '';
 
@@ -139,7 +139,7 @@ class ValidatorTest extends TestCase
                     'email' => true, // Will not valid
                 ),
             ),
-            'validOne' => function($field, $rule, $validator) use(&$lastRule) {
+            'ruleValid' => function($field, $rule, $validator) use(&$lastRule) {
                 $lastRule = $rule;
 
                 // Return false to break the validation flow

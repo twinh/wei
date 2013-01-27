@@ -72,14 +72,14 @@ class Validator extends WidgetProvider
      *
      * @var null|callback
      */
-    protected $validOne = null;
+    protected $ruleValid = null;
 
     /**
      * The callback method triggered when every rule is invalid
      *
      * @var null|callback
      */
-    protected $invalidOne = null;
+    protected $ruleInvalid = null;
 
     /**
      * The callback method triggered when every field is valid
@@ -210,8 +210,8 @@ class Validator extends WidgetProvider
                 $method = $result ? 'addValidRule' : 'addInvalidRule';
                 $this->$method($field, $rule);
 
-                // Trigger the validOne/invalidOne callback
-                $callback = $result ? 'validOne' : 'invalidOne';
+                // Trigger the ruleValid/ruleInvalid callback
+                $callback = $result ? 'ruleValid' : 'ruleInvalid';
                 if (false === $this->callback($this->$callback, array($field, $rule, $this))) {
                     return $this->result;
                 }
