@@ -61,11 +61,12 @@ class Validator extends WidgetProvider
     protected $breakOne = false;
 
     /**
-     * Whether jump to the next field validation when the current filed's rule is not valid
+     * Whether skip the crruent field validation when the filed's rule is not 
+     * valid, so every field contains one invalid rule at most
      * 
      * @var bool
      */
-    protected $breakRule = false;
+    protected $skip = false;
     
     /**
      * The callback method triggered when every rule is valid
@@ -223,7 +224,7 @@ class Validator extends WidgetProvider
                     }
                 } else {
                     // Break the validation flow when any field's rule is invalid
-                    if ($this->breakOne || $this->breakRule) {
+                    if ($this->breakOne || $this->skip) {
                         break;
                     }
                 }
@@ -235,7 +236,7 @@ class Validator extends WidgetProvider
                 return $this->result;
             }
 
-            if (!$this->result && $this->breakRule) {
+            if (!$this->result && $this->skip) {
                 continue;
             }
 

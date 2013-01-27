@@ -468,7 +468,7 @@ class ValidatorTest extends TestCase
         ));
     }
     
-    public function testBreakRule()
+    public function testSkip()
     {
         /* @var $validator \Widget\Validator */
         $validator = $this->validate(array(
@@ -494,7 +494,7 @@ class ValidatorTest extends TestCase
                     'alnum',            // not valid
                 ),
             ),
-            'breakRule' => true
+            'skip' => true
         ));
         
         $this->assertCount(1, $validator->getInvalidRules('email'));
