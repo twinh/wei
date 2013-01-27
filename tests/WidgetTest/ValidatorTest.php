@@ -116,7 +116,7 @@ class ValidatorTest extends TestCase
                     'email' => true, // valid
                 ),
             ),
-            'breakOne' => true,
+            'breakRule' => true,
             'ruleInvalid' => function($field, $rule, $validator) use(&$breakRule) {
                 $breakRule = $rule;
             }
@@ -169,7 +169,7 @@ class ValidatorTest extends TestCase
                     'range' => array(0, 150)
                 ),
             ),
-            'valid' => function($field, $validator) use(&$lastField) {
+            'fieldValid' => function($field, $validator) use(&$lastField) {
                 $lastField = $field;
 
                 // Return false to break the validation flow

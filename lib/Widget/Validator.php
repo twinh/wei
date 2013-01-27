@@ -26,13 +26,6 @@ class Validator extends WidgetProvider
     protected $rules = array();
     
     /**
-     * The rule validator instances
-     * 
-     * @var array<\Widget\Validator\AbstractRule>
-     */
-    protected $ruleValidators = array();
-
-    /**
      * The data to be validated
      *
      * @var array
@@ -51,14 +44,14 @@ class Validator extends WidgetProvider
      *
      * @var bool
      */
-    protected $break = false;
+    protected $breakField = false;
 
     /**
      * Whether break the validation flow when any field's rule is not valid
      *
      * @var bool
      */
-    protected $breakOne = false;
+    protected $breakRule = false;
 
     /**
      * Whether skip the crruent field validation when the filed's rule is not 
@@ -87,14 +80,14 @@ class Validator extends WidgetProvider
      *
      * @var null|callback
      */
-    protected $valid = null;
+    protected $fieldValid = null;
 
     /**
      * The callback method triggered when every field is invalid
      *
      * @var null|callback
      */
-    protected $invalid = null;
+    protected $fieldInvalid = null;
 
     /**
      * The callback method triggered after all rules are valid
@@ -104,7 +97,7 @@ class Validator extends WidgetProvider
     protected $success = null;
 
     /**
-     * The callback method triggered when the whole validation is invalid
+     * The callback method triggered when the validation is invalid
      *
      * @var null|callback
      */
@@ -127,9 +120,9 @@ class Validator extends WidgetProvider
     /**
      * The validation result
      *
-     * @var bool
+     * @var bool|null
      */
-    protected $result = true;
+    protected $result;
     
     /**
      * The language code for message
@@ -144,6 +137,13 @@ class Validator extends WidgetProvider
      * @var string
      */
     private $languageFile;
+    
+    /**
+     * The rule validator instances
+     * 
+     * @var array<\Widget\Validator\AbstractRule>
+     */
+    protected $ruleValidators = array();
 
     /**
      * Validate the data by the given options
@@ -159,6 +159,9 @@ class Validator extends WidgetProvider
         if (empty($this->rules)) {
             throw new \InvalidArgumentException('Validation rules should not be empty.');
         }
+        
+        // Initialize the validation result to true
+        $this->result = true;
 
         foreach ($this->rules as $field => $rules) {
             $data = isset($this->data[$field]) ? $this->data[$field] : null;
@@ -177,7 +180,7 @@ class Validator extends WidgetProvider
             }
             $rules = array('required' => $value) + $rules;
 
-            // Start validate
+            // Start validation
             foreach ($rules as $rule => $params) {
                 // Process simple array rule, eg 'username' => ['required', 'email']
                 if (is_int($rule)) {
@@ -202,7 +205,7 @@ class Validator extends WidgetProvider
                 // Record the rule validators
                 $this->ruleValidators[$field][$rule] = $this->is->getLastRuleValidator();
                 
-                // Would always be false in the whole validation flow
+                // If any rule is invlid, the result would always be false in the whole validation flow
                 if (false === $result) {
                     $this->result = false;
                 }
@@ -218,20 +221,20 @@ class Validator extends WidgetProvider
                 }
 
                 if ($result) {
-                    // The field data is empty and optional, pass the left valid rules
+                    // The field data is empty and optional, skip the remaining validation rules
                     if (!$data && 'required' === $rule) {
                         break;
                     }
                 } else {
                     // Break the validation flow when any field's rule is invalid
-                    if ($this->breakOne || $this->skip) {
+                    if ($this->breakRule || $this->skip) {
                         break;
                     }
                 }
             }
             
-            // Trigger the valid/invalid callback
-            $callback = $this->isFieldValid($field) ? 'valid' : 'invalid';
+            // Trigger the fieldValid/fieldInvalid callback
+            $callback = $this->isFieldValid($field) ? 'fieldValid' : 'fieldInvalid';
             if (false === $this->callback($this->$callback, array($field, $this))) {
                 return $this->result;
             }
@@ -241,7 +244,7 @@ class Validator extends WidgetProvider
             }
 
             // Break the validation flow when any field is invalid
-            if (!$this->result && ($this->breakOne || $this->break)) {
+            if (!$this->result && ($this->breakRule || $this->breakField)) {
                 break;
             }
         }
