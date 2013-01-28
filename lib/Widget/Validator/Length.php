@@ -8,6 +8,8 @@
 
 namespace Widget\Validator;
 
+use Widget\UnexpectedTypeException;
+
 /**
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
@@ -44,7 +46,13 @@ class Length extends AbstractRule
 
     public static function getLength($value)
     {
-        $fn = function_exists('mb_strlen') ? 'mb_strlen' : 'strlen';
-        return $fn($value);
+        if (is_scalar($value)) {
+            $fn = function_exists('mb_strlen') ? 'mb_strlen' : 'strlen';
+            return $fn($value);
+        } elseif (is_array($value) || $value instanceof \Countable) {
+            return count($value);
+        } else {
+            throw new UnexpectedTypeException($value, 'string, array, or \Countable');
+        }
     }
 }
