@@ -18,22 +18,22 @@ class Length extends AbstractRule
     
     protected $max;
     
-    protected $minMessage = 'This value must have a length greater than {{ min }}';
-    
-    protected $maxMessage = 'This value must have a length lower than {{ max }}';
-    
     protected $message = 'This value must have a length between {{ min }} and {{ max }}';
 
-    public function __invoke($data, $options = array())
+    public function __invoke($data, $min = null, $max = null)
     {
-        if (is_int($options)) {
-            $this->max = $this->min = $options;
+        // isLength($data, $min, $max)
+        if (is_int($min) && is_int($max)) {
+            $this->min = $min;
+            $this->max = $max;
+        // isLength($data, $options)
+        } elseif (is_array($min)) {
+            $this->option($min);
         } else {
-            $this->option($options);
+            throw new \InvalidArgumentException('Parameter 1 should be int or array');
         }
         
-        $fn = function_exists('mb_strlen') ? 'mb_strlen' : 'strlen';
-        $len = $fn($data);
+        $len = $this->getLength($data);
         
         if ($this->max === $this->min) {
             return $len === $this->max;
@@ -41,19 +41,10 @@ class Length extends AbstractRule
             return $this->min <= $len && $this->max >= $len;
         }
     }
-    
-    public function getMessage()
+
+    public function getLength($value)
     {
-        if (!is_null($this->min) && $this->max) {
-            $message = $this->message;
-        } elseif ($this->min) {
-            $message = $this->minMessage;
-        } elseif ($this->max) {
-            $message = $this->maxMessage;
-        } else {
-            $message = $this->message;
-        }
-        
-        return $message;
+        $fn = function_exists('mb_strlen') ? 'mb_strlen' : 'strlen';
+        return $fn($value);
     }
 }

@@ -18,7 +18,7 @@ class OneOffTest extends TestCase
     {
         $this->assertFalse($this->isOneOf('13', array(
             'email' => true,
-            'length' => 3
+            'length' => array(3, 6)
         )));
     }
 }
