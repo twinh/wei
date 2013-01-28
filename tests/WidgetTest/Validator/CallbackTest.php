@@ -28,7 +28,7 @@ class CallbackTest extends TestCase
     }
     
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException Widget\UnexpectedTypeException
      */
     public function testParameter2NotInvalidException()
     {

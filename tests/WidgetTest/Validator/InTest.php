@@ -23,9 +23,9 @@ class InTest extends TestCase
     }
     
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException Widget\UnexpectedTypeException
      */
-    public function testInvalidArgument()
+    public function testUnexpectedType()
     {
         $this->isIn('abc', 'bcd');
     }

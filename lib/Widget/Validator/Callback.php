@@ -8,6 +8,8 @@
 
 namespace Widget\Validator;
 
+use Widget\UnexpectedTypeException;
+
 /**
  * Check if data valid by callback
  *
@@ -28,7 +30,7 @@ class Callback extends AbstractRule
             } elseif (is_array($options)) {
                 $this->option($options);
             } else {
-                throw new \InvalidArgumentException('Parameter 2 should be instance of \Closure or array');
+                throw new UnexpectedTypeException($data, 'array or \Closure', 2);
             }
         }
         

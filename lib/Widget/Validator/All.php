@@ -8,6 +8,8 @@
 
 namespace Widget\Validator;
 
+use Widget\UnexpectedTypeException;
+
 /**
  * The default logger for widget, which is base on the Monolog!
  *
@@ -19,7 +21,7 @@ class All extends AbstractRule
     public function __invoke($data, array $rules)
     {
         if (!is_array($data) && !$data instanceof \Traversable) {
-            throw new \InvalidArgumentException(sprintf('Excepted array or Traversable, %s given', gettype($data)));
+            throw new UnexpectedTypeException($data, 'array or \Traversable');
         }
         
         foreach ($data as $element) {

@@ -16,7 +16,7 @@ class AllTest extends TestCase
     }
     
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException Widget\UnexpectedTypeException
      */
     public function testInvalidArgumentException()
     {

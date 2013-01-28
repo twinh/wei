@@ -7,7 +7,7 @@ use Widget\Validator;
 class ValidatorTest extends TestCase
 {
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException Widget\UnexpectedTypeException
      */
     public function testIsInException()
     {
@@ -74,9 +74,9 @@ class ValidatorTest extends TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException Widget\UnexpectedTypeException
      */
-    public function testInvalidArgument()
+    public function testUnexpectedType()
     {
         $this->is(new \stdClass());
     }

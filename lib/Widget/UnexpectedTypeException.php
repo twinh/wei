@@ -14,10 +14,11 @@ namespace Widget;
  */
 class UnexpectedTypeException extends Exception
 {
-    public function __construct($value, $expectedType)
+    public function __construct($value, $expectedType, $argument = '')
     {
         parent::__construct(sprintf(
-            'Expected argument of type %s, "%s" given', 
+            'Expected argument%s of type %s, "%s" given', 
+            ' ' . $argument,
             $expectedType, 
             is_object($value) ? get_class($value) : gettype($value)
         ));
