@@ -189,16 +189,7 @@ class App extends WidgetProvider
                 return !$response->isSent() && $response->send();
 
             default :
-                // use settype ?
-                try {
-                    $response = strval($response);
-
-                    return $this->response($response);
-                } catch (\Exception $e) {
-                    throw new \UnexpectedValueException(
-                        sprintf('Expected array, printable variable or \Widget\Response, "%s" given',
-                        (is_object($response) ? get_class($response) : gettype($response))), 500);
-                }
+                throw new UnexpectedTypeException($response, 'array, printable variable or \Widget\Response');
         }
     }
 
