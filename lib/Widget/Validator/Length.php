@@ -33,7 +33,6 @@ class Length extends AbstractRule
             $this->option($min);
         } else {
             throw new UnexpectedTypeException($data, 'int or array');
-            throw new \InvalidArgumentException('Parameter 1 should be int or array');
         }
         
         $len = static::getLength($data);
