@@ -12,11 +12,11 @@ namespace Widget\Validator;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class MaxLength extends AbstractRule
+class MinLength extends AbstractRule
 {
     protected $limit;
     
-    protected $message = 'This value must have a length lower than {{ limit }}';
+    protected $message = 'This value must have a length greater than {{ limit }}';
 
     public function __invoke($data, $options = array())
     {
@@ -26,7 +26,7 @@ class MaxLength extends AbstractRule
             $this->option($options);
         }
         
-        if ($this->limit >= Length::getLength($data)) {
+        if ($this->limit <= Length::getLength($data)) {
             return true;
         } else {
             return false;

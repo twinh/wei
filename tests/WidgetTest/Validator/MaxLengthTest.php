@@ -25,18 +25,18 @@ class MaxLengthTest extends TestCase
     public function providerForMaxLength()
     {
         return array(
-            array(6),
-            array(1),
-            array(-1)
+            array(7),
+            array(8),
+            array(200)
         );
     }
 
     public function providerForNotMaxLength()
     {
         return array(
-            array(7),
-            array(8),
-            array(200)
+            array(6),
+            array(1),
+            array(-1)
         );
     }
 }
