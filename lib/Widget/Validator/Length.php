@@ -33,7 +33,7 @@ class Length extends AbstractRule
             throw new \InvalidArgumentException('Parameter 1 should be int or array');
         }
         
-        $len = $this->getLength($data);
+        $len = static::getLength($data);
         
         if ($this->max === $this->min) {
             return $len === $this->max;
@@ -42,7 +42,7 @@ class Length extends AbstractRule
         }
     }
 
-    public function getLength($value)
+    public static function getLength($value)
     {
         $fn = function_exists('mb_strlen') ? 'mb_strlen' : 'strlen';
         return $fn($value);
