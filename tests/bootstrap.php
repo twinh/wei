@@ -15,7 +15,7 @@ return Widget::create(array(
         ),
         // FIXME The order of options
         'alias' => array(
-
+            'isEmpty' => '\Widget\Validator\EmptyValue'
         ),
         'import' => array(
             // Import is widgets
