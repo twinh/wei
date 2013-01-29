@@ -17,12 +17,32 @@ class Ip extends AbstractRule
 {
     protected $message = 'This value must be valid IP';
     
+    /**
+     * Allows the IP address to be ONLY in IPv4 format
+     * 
+     * @var bool
+     */
     protected $ipv4 = false;
     
+    /**
+     * Allows the IP address to be ONLY in IPv6 format
+     * 
+     * @var bool
+     */
     protected $ipv6 = false;
     
+    /**
+     * Not allows the IP address to be in private ranges
+     * 
+     * @var bool
+     */
     protected $noPrivRange = false;
     
+    /**
+     * Not allows the IP address to be in reserved ranges
+     * 
+     * @var bool
+     */
     protected $noResRange = false;
     
     public function __invoke($input, $options = array())
