@@ -17,6 +17,15 @@ namespace Widget;
 class Is extends WidgetProvider
 {
     /**
+     * The validator rule alias
+     * 
+     * @var array
+     */
+    protected $alias = array(
+        'empty' => 'Widget\Validator\EmptyValue',
+    );
+    
+    /**
      * @var \Widget\Validator\AbstractRule
      * @internal
      */
@@ -87,14 +96,19 @@ class Is extends WidgetProvider
     }
     
     /**
-     * Check if the validation rule exists
+     * Check if the validator rule exists
      *
      * @param string $rule
      * @return string|false
      */
     public function hasRule($rule)
     {
-        if (class_exists($class = '\Widget\Validator\\' . ucfirst($rule))) {
+        if (isset($this->alias[$rule])) {
+            $class = $this->alias[$rule];
+        } else {
+            $class = 'Widget\Validator\\' . ucfirst($rule);
+        }
+        if (class_exists($class)) {
             return $class;
         } else {
             return false;
