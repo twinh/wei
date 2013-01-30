@@ -448,11 +448,15 @@ class Validator extends WidgetProvider
     /**
      * Sets data for validation
      * 
-     * @param array $data
+     * @param array|Traversable $data
      * @return \Widget\Validator
      */
-    public function setData(array $data)
+    public function setData($data)
     {
+        if (!is_array($data) && !$data instanceof \Traversable) {
+            throw new UnexpectedTypeException($data, 'array or Traversable');
+        }
+            
         $this->data = $data;
         
         return $this;
