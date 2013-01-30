@@ -53,7 +53,7 @@ class Is extends WidgetProvider
         }
 
         if (!$class = $this->hasRule($rule)) {
-            throw new Exception(sprintf('Rule "%s" not found', $rule));
+            throw new Exception(sprintf('Validator rule "%s" not found', $rule));
         }
 
         $rv = $this->ruleValidator = new $class(array(
