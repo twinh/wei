@@ -456,7 +456,7 @@ class Validator extends WidgetProvider
         if (!is_array($data) && !$data instanceof \Traversable) {
             throw new UnexpectedTypeException($data, 'array or Traversable');
         }
-            
+
         $this->data = $data;
         
         return $this;
