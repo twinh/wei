@@ -11,7 +11,9 @@ class AllTest extends TestCase
         $this->assertTrue($this->isAll(array(
             'apple', 'pear', 'orange',
         ), array(
-            'in' => array('apple', 'pear', 'orange')
+            'in' => array(
+                array('apple', 'pear', 'orange')
+            )
         )));
     }
     
@@ -28,7 +30,9 @@ class AllTest extends TestCase
         $this->assertFalse($this->isAll(array(
             'apple', 'pear',
         ), array(
-            'in' => array('apple', 'pear', 'orange'),
+            'in' => array(
+                array('apple', 'pear', 'orange')
+            ),
             'length' => array(
                 'min' => 5,
                 'max' => 10
