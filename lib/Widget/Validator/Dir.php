@@ -17,12 +17,19 @@ class Dir extends AbstractRule
     protected $message = 'This value must be an existing directory';
     
     /**
+     * Returns file path or true
+     * 
+     * @var bool 
+     */
+    protected $abs = true;
+    
+    /**
      * Determine the object source is a file path, check with the include_path.
      *
      * @param  bool        $abs return file path or true
      * @return string|bool
      */
-    public function __invoke($value, $abs = true)
+    public function __invoke($value)
     {
         if (!is_string($value)) {
             return false;
@@ -31,13 +38,13 @@ class Dir extends AbstractRule
         // check directly if it's absolute path
         if ('/' == $value[0] || '\\' == $value[0] || ':' == $value[1]) {
             if (is_dir($value)) {
-                return $abs ? $value : true;
+                return $this->abs ? $value : true;
             }
         }
 
         $full = stream_resolve_include_path($value);
         if ($full) {
-            return $abs ? $full : true;
+            return $this->abs ? $full : true;
         }
 
         return false;
