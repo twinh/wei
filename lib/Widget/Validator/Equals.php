@@ -12,13 +12,10 @@ namespace Widget\Validator;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Equal extends AbstractRule
+class Equals extends AbstractRule
 {
     protected $message = 'This value must be equals {{ value }}';
     
-    /**
-     * @param boolean $strict
-     */
     public function __invoke($value, $mixed = null, $strict = false)
     {
         return $strict ? $value === $mixed : $value == $mixed;
