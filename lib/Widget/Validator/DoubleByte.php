@@ -14,18 +14,9 @@ namespace Widget\Validator;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class DoubleByte extends AbstractRule
+class DoubleByte extends Regex
 {
     protected $message = 'This value must contain only double byte characters';
     
-    /**
-     * Validator
-     * 
-     * @param mixed $data
-     * @return bool
-     */
-    public function __invoke($data)
-    {
-        return (bool) preg_match('/^[^\x00-xff]+$/', $data);
-    }
+    protected $pattern = '/^[^\x00-xff]+$/';
 }

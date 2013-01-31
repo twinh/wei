@@ -22,8 +22,10 @@ class Date extends AbstractRule
 
     protected $message = 'This value is not a valid date, the format should be {{ format }}';
     
-    public function __invoke($value)
+    public function __invoke($value, $format = null)
     {
+        $format && $format = $this->format;
+
         $date = DateTime::createFromFormat($this->format, $value);
 
         return $date ? $value === $date->format($this->format) : false;

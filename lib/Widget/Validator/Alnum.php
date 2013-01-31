@@ -14,12 +14,9 @@ namespace Widget\Validator;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Alnum extends AbstractRule
+class Alnum extends Regex
 {
     protected $message = 'This value must contain letters (a-z) and digits (0-9)';
     
-    public function __invoke($value)
-    {
-        return (bool) preg_match('/^([a-z0-9]+)$/i', $value);
-    }
+    protected $pattern = '/^([a-z0-9]+)$/i';
 }

@@ -25,7 +25,7 @@ class Regex extends AbstractRule
     
     public function __invoke($value, $pattern = null)
     {
-        $pattern && $this->pattern = $pattern;
+        is_string($pattern) && $this->pattern = $pattern;
 
         return (bool) preg_match($this->pattern, $value);
     }

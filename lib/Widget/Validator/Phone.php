@@ -14,12 +14,9 @@ namespace Widget\Validator;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Phone extends AbstractRule
+class Phone extends Regex
 {
     protected $message = 'This value must be valid phone number';
     
-    public function __invoke($value)
-    {
-        return (bool) preg_match('/^(\d{3,4}-?)?\d{7,9}$/', $value);
-    }
+    protected $pattern = '/^(\d{3,4}-?)?\d{7,9}$/';
 }

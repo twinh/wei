@@ -14,12 +14,9 @@ namespace Widget\Validator;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Alpha extends AbstractRule
+class Alpha extends Regex
 {
     protected $message = 'This value must contain only letters (a-z)';
     
-    public function __invoke($value)
-    {
-        return (bool) preg_match('/^([a-z]+)$/i', $value);
-    }
+    protected $pattern = '/^([a-z]+)$/i';
 }

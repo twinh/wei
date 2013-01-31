@@ -14,12 +14,9 @@ namespace Widget\Validator;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Postcode extends AbstractRule
+class Postcode extends Regex
 {
     protected $message = 'This value must be six length of digit';
-
-    public function __invoke($data)
-    {
-        return (bool) preg_match('/^[1-9][\d]{5}$/', $data);
-    }
+    
+    protected $pattern = '/^[1-9][\d]{5}$/';
 }

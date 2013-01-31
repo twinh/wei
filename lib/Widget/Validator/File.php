@@ -9,8 +9,6 @@
 namespace Widget\Validator;
 
 /**
- * Check if file exists
- *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */

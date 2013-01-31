@@ -14,12 +14,9 @@ namespace Widget\Validator;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Digit extends AbstractRule
+class Digit extends Regex
 {
     protected $message = 'This value must contain only digits (0-9)';
     
-    public function __invoke($data)
-    {
-        return (bool) preg_match('/^([0-9]+)$/', $data);
-    }
+    protected $pattern = '/^([0-9]+)$/';
 }

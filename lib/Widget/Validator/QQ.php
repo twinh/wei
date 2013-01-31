@@ -14,12 +14,9 @@ namespace Widget\Validator;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class QQ extends AbstractRule
+class QQ extends Regex
 {
     protected $message = 'This value must be valid QQ number';
     
-    public function __invoke($value)
-    {
-        return (bool) preg_match('/^[1-9][\d]{4,9}$/', $value);
-    }
+    protected $pattern = '/^[1-9][\d]{4,9}$/';
 }
