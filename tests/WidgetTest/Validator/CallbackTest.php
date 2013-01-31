@@ -19,30 +19,6 @@ class CallbackTest extends TestCase
         $this->assertTrue($this->is(function(){
             return true;
         }, 'data'));
-        
-        $this->assertTrue($this->isCallback('data', array(
-            'fn' => function(){
-                return true;
-            }
-        )));
-    }
-    
-    /**
-     * @expectedException Widget\UnexpectedTypeException
-     */
-    public function testParameter2NotInvalidException()
-    {
-        $this->isCallback('data', 'not callable');
-    }
-    
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testNotCallableException()
-    {
-        $this->isCallback('data', array(
-            'fn' => 'not callable'
-        ));
     }
     
     //public function tes

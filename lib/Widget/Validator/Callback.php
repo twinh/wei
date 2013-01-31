@@ -8,8 +8,6 @@
 
 namespace Widget\Validator;
 
-use Widget\UnexpectedTypeException;
-
 /**
  * Check if data valid by callback
  *
@@ -20,23 +18,9 @@ class Callback extends AbstractRule
 {
     protected $fn;
     
-    public function __invoke($data, $options = array())
+    public function __invoke($data, \Closure $fn = null)
     {
-        if ($options) {
-            // ($data, function(){})
-            if ($options instanceof \Closure) {
-                $this->fn = $options;
-            // ($data, array());
-            } elseif (is_array($options)) {
-                $this->option($options);
-            } else {
-                throw new UnexpectedTypeException($data, 'array or \Closure', 2);
-            }
-        }
-        
-        if (!is_callable($this->fn)) {
-            throw new \InvalidArgumentException('Property $fn should be a valid callback');
-        }
+        $fn && $this->fn = $fn;
         
         return (bool) call_user_func($this->fn, $data, $this, $this->widget);
     }
