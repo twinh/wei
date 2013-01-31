@@ -24,12 +24,9 @@ class Length extends AbstractRule
 
     public function __invoke($data, $min = null, $max = null)
     {
-        // isLength($data, $min, $max)
-        if (is_int($min) && is_int($max)) {
-            $this->option(array(
-                'min' => $min,
-                'max' => $max
-            ));
+        if (is_numeric($min) && is_numeric($max)) {
+            $this->min = $min;
+            $this->max = $max;
         }
         
         $len = static::getLength($data);

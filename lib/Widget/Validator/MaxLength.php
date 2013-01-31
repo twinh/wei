@@ -18,18 +18,10 @@ class MaxLength extends AbstractRule
     
     protected $message = 'This value must have a length lower than {{ limit }}';
 
-    public function __invoke($data, $options = array())
+    public function __invoke($data, $limit)
     {
-        if (is_int($options)) {
-            $this->limit = $options;
-        } else {
-            $this->option($options);
-        }
+        $limit && $this->limit = $limit;
         
-        if ($this->limit >= Length::getLength($data)) {
-            return true;
-        } else {
-            return false;
-        }
+        return $this->limit >= Length::getLength($data);
     }
 }
