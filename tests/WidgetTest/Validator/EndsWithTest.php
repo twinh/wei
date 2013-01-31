@@ -9,44 +9,33 @@ class EndsWithTest extends TestCase
     /**
      * @dataProvider providerForEndsWith
      */
-    public function testEndsWith($input, $options)
+    public function testEndsWith($input, $findMe, $case = false)
     {
-        $this->assertTrue($this->isEndsWith($input, $options));
+        $this->assertTrue($this->isEndsWith($input, $findMe, $case));
     }
 
     /**
      * @dataProvider providerForNotEndsWith
      */
-    public function testNotEndsWith($input, $options)
+    public function testNotEndsWith($input, $findMe, $case = false)
     {
-        $this->assertFalse($this->isEndsWith($input, $options));
+        $this->assertFalse($this->isEndsWith($input, $findMe, $case));
     }
 
     public function providerForEndsWith()
     {
         return array(
-            array('abc', array(
-                'findMe' => 'c'
-            )),
-            array('ABC', array(
-                'findMe' => 'c'
-            )),
+            array('abc', 'c'),
+            array('ABC', 'c'),
+            array('abc', ''),
         );
     }
 
     public function providerForNotEndsWith()
     {
         return array(
-            array('abc', array(
-                'findMe' => ''
-            )),
-            array('abc', array(
-                'findMe' => 'b'
-            )),
-            array('ABC', array(
-                'findMe' => 'c',
-                'case' => true
-            )),
+            array('abc', 'b'),
+            array('ABC', 'c', true),
         );
     }
 }
