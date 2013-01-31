@@ -28,20 +28,20 @@ class Dir extends AbstractRule
      *
      * @return string|bool
      */
-    public function __invoke($value)
+    public function __invoke($input)
     {
-        if (!is_string($value)) {
+        if (!is_string($input)) {
             return false;
         }
 
         // check directly if it's absolute path
-        if ('/' == $value[0] || '\\' == $value[0] || ':' == $value[1]) {
-            if (is_dir($value)) {
-                return $this->abs ? $value : true;
+        if ('/' == $input[0] || '\\' == $input[0] || ':' == $input[1]) {
+            if (is_dir($input)) {
+                return $this->abs ? $input : true;
             }
         }
 
-        $full = stream_resolve_include_path($value);
+        $full = stream_resolve_include_path($input);
         if ($full) {
             return $this->abs ? $full : true;
         }

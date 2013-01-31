@@ -21,10 +21,10 @@ class Regex extends AbstractRule
      */
     protected $pattern;
     
-    public function __invoke($value, $pattern = null)
+    public function __invoke($input, $pattern = null)
     {
         is_string($pattern) && $this->pattern = $pattern;
 
-        return (bool) preg_match($this->pattern, $value);
+        return (bool) preg_match($this->pattern, $input);
     }
 }

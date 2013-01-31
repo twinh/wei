@@ -20,12 +20,12 @@ class Equals extends AbstractRule
     
     protected $strict = false;
     
-    public function __invoke($value, $equals = null, $strict = null)
+    public function __invoke($input, $equals = null, $strict = null)
     {
         // Sets $this->equals only when the second argument provided
         func_num_args() > 1 && $this->equals = $equals;
         is_bool($strict) && $this->strict = $strict;
         
-        return $this->strict ? $value === $this->equals : $value == $this->equals;
+        return $this->strict ? $input === $this->equals : $input == $this->equals;
     }
 }

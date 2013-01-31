@@ -16,8 +16,8 @@ class Email extends AbstractRule
 {
     protected $message = 'This value must be valid email address';
     
-    public function __invoke($value)
+    public function __invoke($input)
     {
-        return (bool) filter_var($value, FILTER_VALIDATE_EMAIL);
+        return (bool) filter_var($input, FILTER_VALIDATE_EMAIL);
     }
 }

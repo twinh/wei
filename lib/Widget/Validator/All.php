@@ -16,13 +16,13 @@ use Widget\UnexpectedTypeException;
  */
 class All extends AbstractRule
 {
-    public function __invoke($data, array $rules)
+    public function __invoke($input, array $rules)
     {
-        if (!is_array($data) && !$data instanceof \Traversable) {
-            throw new UnexpectedTypeException($data, 'array or \Traversable');
+        if (!is_array($input) && !$input instanceof \Traversable) {
+            throw new UnexpectedTypeException($input, 'array or \Traversable');
         }
         
-        foreach ($data as $element) {
+        foreach ($input as $element) {
             foreach ($rules as $rule => $options) {
                 if (!$this->is->validateOne($rule, $element, $options)) {
                     return false;

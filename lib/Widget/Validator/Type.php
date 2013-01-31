@@ -20,14 +20,14 @@ class Type extends AbstractRule
     
     protected $type;
     
-    public function __invoke($value, $type = null)
+    public function __invoke($input, $type = null)
     {
         $type && $this->type = $type;
         
         if (function_exists($fn = 'is_' . $type)) {
-            return $fn($value);
+            return $fn($input);
         } elseif (function_exists($fn = 'ctype_' . $type)) {
-            return $fn($value);
+            return $fn($input);
         } else {
             throw new Exception(sprintf('Unknow type "%s"', $type));
         }

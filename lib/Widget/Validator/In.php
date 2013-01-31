@@ -22,7 +22,7 @@ class In
     
     protected $array = array();
     
-    public function __invoke($data, $array = array(), $strict = null)
+    public function __invoke($input, $array = array(), $strict = null)
     {
         if ($array) {
             if ($array instanceof \ArrayObject) {
@@ -30,13 +30,13 @@ class In
             } elseif (is_array($array)) {
                 $this->array = $array;
             } else {
-                throw new UnexpectedTypeException($data, 'array or \ArrayObject');
+                throw new UnexpectedTypeException($input, 'array or \ArrayObject');
             }
         }
         
         
         is_bool($strict) && $this->strict = $strict;
         
-        return in_array($data, $this->array, $this->strict);
+        return in_array($input, $this->array, $this->strict);
     }
 }

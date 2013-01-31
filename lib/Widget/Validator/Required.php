@@ -18,10 +18,10 @@ class Required extends AbstractRule
     
     protected $required = true;
     
-    public function __invoke($data, $required = null)
+    public function __invoke($input, $required = null)
     {
         is_bool($required) && $this->required = $required;
         
-        return !$this->required || $data;
+        return !$this->required || $input;
     }
 }

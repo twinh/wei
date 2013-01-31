@@ -18,13 +18,13 @@ class Range extends AbstractRule
     
     protected $max;
     
-    public function __invoke($data, $min = null, $max = null)
+    public function __invoke($input, $min = null, $max = null)
     {
         if ($min && $max) {
             $this->min = $min;
             $this->max = $max;
         }
 
-        return $this->min <= $data && $this->max >= $data;
+        return $this->min <= $input && $this->max >= $input;
     }
 }

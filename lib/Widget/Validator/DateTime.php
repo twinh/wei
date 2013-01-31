@@ -20,10 +20,12 @@ class DateTime extends AbstractRule
     
     protected $message = 'This value is not a valid datetime, the format should be {{ format }}';
 
-    public function __invoke($value)
+    public function __invoke($input, $format = null)
     {
-        $date = Dt::createFromFormat($this->format, $value);
+        $format && $this->format = $format;
+        
+        $date = Dt::createFromFormat($this->format, $input);
 
-        return $date ? $value === $date->format($this->format) : false;
+        return $date ? $input === $date->format($this->format) : false;
     }
 }

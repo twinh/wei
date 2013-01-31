@@ -14,10 +14,10 @@ namespace Widget\Validator;
  */
 class AllOf extends AbstractRule
 {
-    public function __invoke($data, array $rules)
+    public function __invoke($input, array $rules)
     {
         foreach ($rules as $rule => $options) {
-            if (!$this->is->validateOne($rule, $data, $options)) {
+            if (!$this->is->validateOne($rule, $input, $options)) {
                 return false;
             }
         }

@@ -20,15 +20,15 @@ class EndsWith extends AbstractRule
     
     protected $message = 'This value must end with: {{ findMe }}';
     
-    public function __invoke($data, $findMe = null, $case = null)
+    public function __invoke($input, $findMe = null, $case = null)
     {
         $findMe && $this->findMe = $findMe;
         is_bool($case) && $this->case = $case;
 
-        $pos = strlen($data) - strlen($this->findMe);
+        $pos = strlen($input) - strlen($this->findMe);
 
         $fn = $this->case ? 'strrpos' : 'strripos';
 
-        return $pos === $fn($data, $this->findMe);
+        return $pos === $fn($input, $this->findMe);
     }
 }

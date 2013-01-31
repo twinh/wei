@@ -22,14 +22,14 @@ class Length extends AbstractRule
     
     protected $message = 'This value must have a length between {{ min }} and {{ max }}';
 
-    public function __invoke($data, $min = null, $max = null)
+    public function __invoke($input, $min = null, $max = null)
     {
         if (is_numeric($min) && is_numeric($max)) {
             $this->min = $min;
             $this->max = $max;
         }
         
-        $len = static::getLength($data);
+        $len = static::getLength($input);
         
         if ($this->max === $this->min) {
             return $len === $this->max;
@@ -38,15 +38,15 @@ class Length extends AbstractRule
         }
     }
 
-    public static function getLength($value)
+    public static function getLength($input)
     {
-        if (is_scalar($value)) {
+        if (is_scalar($input)) {
             $fn = function_exists('mb_strlen') ? 'mb_strlen' : 'strlen';
-            return $fn($value);
-        } elseif (is_array($value) || $value instanceof \Countable) {
-            return count($value);
+            return $fn($input);
+        } elseif (is_array($input) || $input instanceof \Countable) {
+            return count($input);
         } else {
-            throw new UnexpectedTypeException($value, 'string, array, or \Countable');
+            throw new UnexpectedTypeException($input, 'string, array, or \Countable');
         }
     }
 }

@@ -16,8 +16,8 @@ class EmptyValue extends AbstractRule
 {
     protected $message = 'This value must be null';
     
-    public function __invoke($value)
+    public function __invoke($input)
     {
-        return empty($value);
+        return empty($input);
     }
 }

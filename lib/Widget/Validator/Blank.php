@@ -16,8 +16,8 @@ class Blank extends AbstractRule
 {
     protected $message = 'This value must be blank';
     
-    public function __invoke($value)
+    public function __invoke($input)
     {
-        return '' === trim($value);
+        return '' === trim($input);
     }
 }

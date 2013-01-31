@@ -16,8 +16,8 @@ class Number extends AbstractRule
 {
     protected $message = 'This value must be valid number';
     
-    public function __invoke($data)
+    public function __invoke($input)
     {
-        return (bool) is_numeric($data);
+        return (bool) is_numeric($input);
     }
 }

@@ -16,10 +16,10 @@ class Callback extends AbstractRule
 {
     protected $fn;
     
-    public function __invoke($data, \Closure $fn = null)
+    public function __invoke($input, \Closure $fn = null)
     {
         $fn && $this->fn = $fn;
         
-        return (bool) call_user_func($this->fn, $data, $this, $this->widget);
+        return (bool) call_user_func($this->fn, $input, $this, $this->widget);
     }
 }
