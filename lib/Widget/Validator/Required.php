@@ -16,8 +16,12 @@ class Required extends AbstractRule
 {
     protected $message = 'This value is required';
     
-    public function __invoke($data, $required = true)
+    protected $required = true;
+    
+    public function __invoke($data, $required = null)
     {
-        return !$required || $data;
+        is_bool($required) && $this->required = $required;
+        
+        return !$this->required || $data;
     }
 }
