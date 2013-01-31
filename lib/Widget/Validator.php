@@ -190,11 +190,6 @@ class Validator extends WidgetProvider
                     }
                 }
                 
-                // Prepare parameters for validte widget
-                if (!is_bool($params)) {
-                    $params = (array) $params;
-                }
-
                 // The current rule validation result
                 $result = $this->is->validateOne($rule, $data, $params);
 

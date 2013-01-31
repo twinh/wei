@@ -43,7 +43,7 @@ class Is extends WidgetProvider
             $this->ruleValidator = $rule;
             return $rule($data);
         }
-        
+         
         // Starts with "not", such as notDigit, notEqual
         if (0 === stripos($rule, 'not')) {
             $reverse = true;
@@ -60,9 +60,20 @@ class Is extends WidgetProvider
             'widget' => $this->widget
         ));
         
-        return $rv($data, $options) XOR $reverse;
+        if (!is_array($options)) {
+            $options = array($options);
+        }
+        
+        if (is_int(key($options))) {
+            array_unshift($options, $data);
+            $result = call_user_func_array($rv, $options);
+        } else {
+            $result = $rv($data, $options);
+        }
+
+        return $result xor $reverse;
     }
-    
+
     /**
      * Validate data by given rules
      *
@@ -74,12 +85,12 @@ class Is extends WidgetProvider
     public function __invoke($rule = null, $data = null, $options = array())
     {
         switch (true) {
-            // (function(){}, $data)
-            case $rule instanceof \Closure :
-                return $this->validateOne('callback', $data, $rule);
             // ($rule, $data, $options)
             case is_string($rule) :
                 return $this->validateOne($rule, $data, $options);
+            // (function(){}, $data)
+            case $rule instanceof \Closure :
+                return $this->validateOne('callback', $data, $rule);
             // ($rule, $data)
             case is_array($rule):
                 return $this->createValidator()->__invoke(array(
