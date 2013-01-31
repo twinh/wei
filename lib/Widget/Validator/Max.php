@@ -18,18 +18,10 @@ class Max extends AbstractRule
     
     protected $message = 'This value must be less or equal than {{ limit }}';
 
-    public function __invoke($data, $options = array())
+    public function __invoke($data, $limit = null)
     {
-        if (!is_array($options)) {
-            $this->limit = $options;
-        } else {
-            $this->option($options);
-        }
+        $limit && $this->max = $limit;
         
-        if ($this->limit >= $data) {
-            return true;
-        } else {
-            return false;
-        }
+        return $this->max >= $data;
     }
 }

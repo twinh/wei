@@ -18,18 +18,10 @@ class Min extends AbstractRule
     
     protected $message = 'This value must be greater or equal than {{ limit }}';
 
-    public function __invoke($data, $options = array())
+    public function __invoke($data, $limit = null)
     {
-        if (!is_array($options)) {
-            $this->limit = $options;
-        } else {
-            $this->option($options);
-        }
+        $limit && $this->limit = $limit;
         
-        if ($this->limit <= $data) {
-            return true;
-        } else {
-            return false;
-        }
+        return $this->limit <= $data;
     }
 }
