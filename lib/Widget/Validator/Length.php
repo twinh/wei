@@ -26,13 +26,10 @@ class Length extends AbstractRule
     {
         // isLength($data, $min, $max)
         if (is_int($min) && is_int($max)) {
-            $this->min = $min;
-            $this->max = $max;
-        // isLength($data, $options)
-        } elseif (is_array($min)) {
-            $this->option($min);
-        } else {
-            throw new UnexpectedTypeException($data, 'int or array');
+            $this->option(array(
+                'min' => $min,
+                'max' => $max
+            ));
         }
         
         $len = static::getLength($data);

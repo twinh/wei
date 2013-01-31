@@ -68,7 +68,8 @@ class Is extends WidgetProvider
             array_unshift($options, $data);
             $result = call_user_func_array($rv, $options);
         } else {
-            $result = $rv($data, $options);
+            $rv->option($options);
+            $result = $rv($data);
         }
 
         return $result xor $reverse;
