@@ -16,8 +16,17 @@ namespace Widget\Validator;
  */
 class Regex extends AbstractRule
 {
-    public function __invoke($value, $x)
+    /**
+     * The regex pattern
+     * 
+     * @var string
+     */
+    protected $pattern;
+    
+    public function __invoke($value, $pattern = null)
     {
-        return (bool) preg_match($x, $value);
+        $pattern && $this->pattern = $pattern;
+
+        return (bool) preg_match($this->pattern, $value);
     }
 }
