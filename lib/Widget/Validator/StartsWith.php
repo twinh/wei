@@ -20,13 +20,11 @@ class StartsWith extends AbstractRule
     
     protected $message = 'This value must start with: {{ findMe }}';
     
-    /**
-     * @param boolean $case
-     */
-    public function __invoke($data, $options = array())
+    public function __invoke($data, $findMe = null, $case = null)
     {
-        $this->option($options);
-
+        $findMe && $this->findMe = $findMe;
+        is_bool($case) && $this->case = $case;
+        
         $fn = $this->case ? 'strpos' : 'stripos';
 
         return 0 === $fn($data, $this->findMe);

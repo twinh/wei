@@ -20,13 +20,11 @@ class EndsWith extends AbstractRule
     
     protected $message = 'This value must end with: {{ findMe }}';
     
-    /**
-     * @param boolean $case
-     */
-    public function __invoke($data, $options = array())
+    public function __invoke($data, $findMe = null, $case = null)
     {
-        $this->option($options);
-        
+        $findMe && $this->findMe = $findMe;
+        is_bool($case) && $this->case = $case;
+
         $pos = strlen($data) - strlen($this->findMe);
 
         $fn = $this->case ? 'strrpos' : 'strripos';
