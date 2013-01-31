@@ -12,12 +12,9 @@ namespace Widget\Validator;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Time extends AbstractRule
+class Time extends DateTime
 {
-    protected $message = 'This value is not a valid time';
+    protected $format = 'H:i:s';
     
-    public function __invoke($input)
-    {
-        return (bool) preg_match('/^([01]\d|2[0-3])(:[0-5]\d){0,2}$/', $input);
-    }
+    protected $message = 'This value is not a valid time, the format should be {{ format }}';
 }

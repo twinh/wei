@@ -9,25 +9,25 @@ class TimeTest extends TestCase
     /**
      * @dataProvider providerForTime
      */
-    public function testTime($input)
+    public function testTime($input, $format = null)
     {
-        $this->assertTrue($this->isTime($input));
+        $this->assertTrue($this->isTime($input, $format));
     }
 
     /**
      * @dataProvider providerForNotTime
      */
-    public function testNotTime($input)
+    public function testNotTime($input, $format = null)
     {
-        $this->assertFalse($this->isTime($input));
+        $this->assertFalse($this->isTime($input, $format));
     }
 
     public function providerForTime()
     {
         return array(
             array('00:00:00'),
-            array('00:00'),
-            array('23:59:59'),
+            array('00:00', 'i:s'),
+            array('23:59:59', 'H:i:s'),
         );
     }
 
@@ -37,7 +37,7 @@ class TimeTest extends TestCase
             array('24:00:00'),
             array('23:60:00'),
             array('23:59:61'),
-            array('61:00'),
+            array('61:00', 'i:s'),
             array('01:01:01:01')
         );
     }
