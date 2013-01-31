@@ -9,44 +9,32 @@ class RangeTest extends TestCase
     /**
      * @dataProvider providerForRange
      */
-    public function testRange($input, $options)
+    public function testRange($input, $min, $max)
     {
-        $this->assertTrue($this->isRange($input, $options));
+        $this->assertTrue($this->isRange($input, $min, $max));
     }
 
     /**
      * @dataProvider providerForNotRange
      */
-    public function testNotRange($input, $options)
+    public function testNotRange($input, $min, $max)
     {
-        $this->assertFalse($this->isRange($input, $options));
+        $this->assertFalse($this->isRange($input, $min, $max));
     }
 
     public function providerForRange()
     {
         return array(
-            array(20, array(
-                'min' => 10,
-                'max' => 30,
-            )),
-            array('2013-01-13', array(
-                'min' => '2013-01-01',
-                'max' => '2013-01-31'
-            )),
-            array(1.5, array(
-                'min' => 0.8,
-                'max' => 3.2
-            ))
+            array(20, 10, 30),
+            array('2013-01-13', '2013-01-01', '2013-01-31'),
+            array(1.5, 0.8, 3.2)
         );
     }
 
     public function providerForNotRange()
     {
         return array(
-            array(20, array(
-                'min' => 30,
-                'max' => 40
-            ))
+            array(20, 30, 40)
         );
     }
 }
