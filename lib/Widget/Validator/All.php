@@ -13,6 +13,7 @@ use Widget\UnexpectedTypeException;
 /**
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @property \Widget\Is $is The validator manager
  */
 class All extends AbstractRule
 {

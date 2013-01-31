@@ -11,6 +11,7 @@ namespace Widget\Validator;
 /**
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @property \Widget\Is $is The validator manager
  */
 class NoneOf extends AbstractRule
 {
