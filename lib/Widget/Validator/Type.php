@@ -9,6 +9,7 @@
 namespace Widget\Validator;
 
 use Widget\Exception;
+use Widget\UnexpectedTypeException;
 
 /**
  * Check if the data is the given type
@@ -20,16 +21,18 @@ class Type extends AbstractRule
 {
     protected $message = 'This value must be of type {{ type }}';
     
-    public function __invoke($value, $type)
+    protected $type;
+    
+    public function __invoke($value, $type = null)
     {
-        $type = strtolower($type);
-
+        $type && $this->type = $type;
+        
         if (function_exists($fn = 'is_' . $type)) {
             return $fn($value);
         } elseif (function_exists($fn = 'ctype_' . $type)) {
             return $fn($value);
         } else {
-            throw new Exception(sprintf('Unknow type %s', $type));
+            throw new Exception(sprintf('Unknow type "%s"', $type));
         }
     }
 }
