@@ -17,16 +17,15 @@ class Dir extends AbstractRule
     protected $message = 'This value must be an existing directory';
     
     /**
-     * Returns file path or true
+     * Returns directory path or true
      * 
      * @var bool 
      */
     protected $abs = true;
     
     /**
-     * Determine the object source is a file path, check with the include_path.
+     * Determine the object source is a directory path, check with the include_path.
      *
-     * @param  bool        $abs return file path or true
      * @return string|bool
      */
     public function __invoke($value)
