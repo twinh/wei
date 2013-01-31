@@ -9,8 +9,6 @@
 namespace Widget\Validator;
 
 /**
- * Check if data valid by callback
- *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */

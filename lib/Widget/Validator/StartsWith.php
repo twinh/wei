@@ -8,10 +8,7 @@
 
 namespace Widget\Validator;
 
-
 /**
- * Check if the data ends with the specified string
- *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */

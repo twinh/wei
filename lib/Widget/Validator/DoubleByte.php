@@ -9,8 +9,6 @@
 namespace Widget\Validator;
 
 /**
- * Check if the data contains only double byte characters
- *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */

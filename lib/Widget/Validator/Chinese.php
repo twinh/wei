@@ -9,8 +9,6 @@
 namespace Widget\Validator;
 
 /**
- * Check if the given string is a chinese word
- *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */

@@ -11,8 +11,6 @@ namespace Widget\Validator;
 use Widget\UnexpectedTypeException;
 
 /**
- * The default logger for widget, which is base on the Monolog!
- *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */

@@ -9,8 +9,6 @@
 namespace Widget\Validator;
 
 /**
- * Check if all of the validation rules is valid
- *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */

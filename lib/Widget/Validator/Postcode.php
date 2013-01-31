@@ -9,8 +9,6 @@
 namespace Widget\Validator;
 
 /**
- * The chinese postcode validate rule
- *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */

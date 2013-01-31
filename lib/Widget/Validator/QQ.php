@@ -9,8 +9,6 @@
 namespace Widget\Validator;
 
 /**
- * IsQQ
- *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */

@@ -9,8 +9,6 @@
 namespace Widget\Validator;
 
 /**
- * IsEqual
- *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */

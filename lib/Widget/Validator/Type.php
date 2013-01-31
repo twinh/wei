@@ -9,11 +9,8 @@
 namespace Widget\Validator;
 
 use Widget\Exception;
-use Widget\UnexpectedTypeException;
 
 /**
- * Check if the data is the given type
- *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */

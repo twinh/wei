@@ -11,8 +11,6 @@ namespace Widget\Validator;
 use DateTime as Dt;
 
 /**
- * The date validate rule
- *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */

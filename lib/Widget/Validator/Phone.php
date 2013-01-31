@@ -9,8 +9,6 @@
 namespace Widget\Validator;
 
 /**
- * Phone
- *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */

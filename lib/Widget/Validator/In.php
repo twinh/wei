@@ -11,8 +11,6 @@ namespace Widget\Validator;
 use Widget\UnexpectedTypeException;
 
 /**
- * Check if the data in array
- *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
