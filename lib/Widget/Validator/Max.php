@@ -20,8 +20,8 @@ class Max extends AbstractRule
 
     public function __invoke($input, $limit = null)
     {
-        $limit && $this->max = $limit;
+        $limit && $this->limit = $limit;
         
-        return $this->max >= $input;
+        return $this->limit >= $input;
     }
 }
