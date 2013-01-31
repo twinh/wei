@@ -16,8 +16,16 @@ class Equals extends AbstractRule
 {
     protected $message = 'This value must be equals {{ value }}';
     
-    public function __invoke($value, $mixed = null, $strict = false)
+    protected $equals;
+    
+    protected $strict = false;
+    
+    public function __invoke($value, $equals = null, $strict = null)
     {
-        return $strict ? $value === $mixed : $value == $mixed;
+        // Sets $this->equals only when the second argument provided
+        func_num_args() > 1 && $this->equals = $equals;
+        is_bool($strict) && $this->strict = $strict;
+        
+        return $this->strict ? $value === $this->equals : $value == $this->equals;
     }
 }
