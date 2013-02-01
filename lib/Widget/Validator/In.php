@@ -14,7 +14,7 @@ use Widget\UnexpectedTypeException;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class In
+class In extends AbstractRule
 {
     protected $message = 'This value must be in {{ array }}';
     
