@@ -34,7 +34,8 @@ class RangeTest extends TestCase
     public function providerForNotRange()
     {
         return array(
-            array(20, 30, 40)
+            array(20, 30, 40),
+            array('2013-01-01', '2013-01-13', '2013-01-31'),
         );
     }
 }
