@@ -11,6 +11,8 @@ namespace Widget\Validator;
 use Widget\Exception;
 
 /**
+ * Check if the data is the given type
+ *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
@@ -20,14 +22,14 @@ class Type extends AbstractRule
     
     protected $type;
     
-    public function __invoke($input, $type = null)
+    public function __invoke($value, $type = null)
     {
         $type && $this->type = $type;
         
         if (function_exists($fn = 'is_' . $type)) {
-            return $fn($input);
+            return $fn($value);
         } elseif (function_exists($fn = 'ctype_' . $type)) {
-            return $fn($input);
+            return $fn($value);
         } else {
             throw new Exception(sprintf('Unknow type "%s"', $type));
         }
