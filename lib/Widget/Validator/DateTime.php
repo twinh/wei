@@ -18,13 +18,17 @@ class DateTime extends AbstractRule
 {
     protected $format = 'Y-m-d H:i:s';
     
-    protected $message = 'This value is not a valid datetime, the format should be {{ format }}';
+    protected $example;
+    
+    protected $message = 'This value is not a valid datetime, the format should be "{{ format }}", eg: {{ example }}';
 
     public function __invoke($input, $format = null)
     {
         $format && $this->format = $format;
         
         $date = Dt::createFromFormat($this->format, $input);
+        
+        $this->example = date($this->format);
 
         return $date ? $input === $date->format($this->format) : false;
     }

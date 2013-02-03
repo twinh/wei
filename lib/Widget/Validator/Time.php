@@ -16,5 +16,5 @@ class Time extends DateTime
 {
     protected $format = 'H:i:s';
     
-    protected $message = 'This value is not a valid time, the format should be {{ format }}';
+    protected $message = 'This value is not a valid time, the format should be "{{ format }}", eg: {{ example }}';
 }
