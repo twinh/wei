@@ -11,7 +11,7 @@ return array(
     'alpha'             => '该项只能由字母(a-z)组成',
     'callback'          => '该项不合法',
     'chinese'           => '该项只能由中文组成',
-    'date'              => '该项不是合法的日期,格式应该是{{ format }}',
+    'date'              => '该项不是合法的日期,格式应该是{{ format }},例如:{{ example }}',
     'dateTime'          => '该项不是合法的日期时间,格式应该是{{ format }}',
     'digit'             => '该项只能由数字(0-9)组成',
     'dir'               => '指定的目录不存在',
@@ -20,7 +20,9 @@ return array(
     'equal'             => '指定的值不相等',
     'exists'            => '指定的路径不存在',
     'file'              => '指定的文件不存在',
-    'in'                => '该项不在指定的范围内',
+    'file.blackExts'    => '文件后缀名非法',  
+    'file.maxSize'      => '文件太大了({{ size }}),允许的最大大小为{{ maxSize }}',
+    'in'                => '该项必须在指定的数据中:{{ array }}',
     'length'            => '该项的长度必须在{{ min }}和{{ max }}之间',
     'maxLength'         => '该项的长度必须小于等于{{ limit }}',
     'minLength'         => '该项的长度必须大于等于{{ limit }}',
@@ -32,5 +34,5 @@ return array(
     'regex'             => '该项格式不正确',
     'required'          => '该项不能为空',
     'time'              => '时间格式不正确',
-    'type'              => '类型不正确'
+    'type'              => '该项的类型必须是{{ type }}'
 );
