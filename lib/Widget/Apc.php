@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -39,7 +38,6 @@ class Apc extends WidgetProvider implements Storable
 
     /**
      * {@inheritdoc}
-     * @param array $options
      */
     public function set($key, $value, $expire = 0, array $options = array())
     {
@@ -56,7 +54,6 @@ class Apc extends WidgetProvider implements Storable
 
     /**
      * {@inheritdoc}
-     * @param array $options
      */
     public function add($key, $value, $expire = 0, array $options = array())
     {
@@ -65,7 +62,6 @@ class Apc extends WidgetProvider implements Storable
 
     /**
      * {@inheritdoc}
-     * @param array $options
      */
     public function replace($key, $value, $expire = 0, array $options = array())
     {
