@@ -18,13 +18,13 @@ class File extends AbstractRule
     
     protected $notFoundMessage = 'This value must be an existing file';
     
-    protected $maxSizeMessage = 'This file is too large({{ size }}),Allowed max size is {{ maxSize }}';
+    protected $maxSizeMessage = 'This file is too large({{ size }}), allowed maximum size is {{ maxSize }}';
     
-    protected $minSizeMessage = 'This file is too small({{ size }})';
+    protected $minSizeMessage = 'This file is too small({{ size }}), allowed minimum size is {{ minSize }}';
     
-    protected $whiteExtsMessage = 'This file\'s extension({{ ext }}) is not allowed, {{ whiteExts }}';
+    protected $whiteExtsMessage = 'This file\'s extension({{ ext }}) is not allowed, allowed {{ whiteExts }}';
     
-    protected $blackExtsMessage = 'This file\'s extension({{ ext }}) is not allowed, allow {{ blackExts }}';
+    protected $blackExtsMessage = 'This file\'s extension({{ ext }}) is not allowed, not allowed {{ blackExts }}';
     
     /**
      * The max file size limit
