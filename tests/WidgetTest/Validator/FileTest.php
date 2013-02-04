@@ -8,9 +8,9 @@ class FileTest extends TestCase
 {
     public function testIsFile()
     {
-        $this->assertFalse(false, $this->isFile(array()), 'Not File path');
+        $this->assertFalse($this->isFile(array()), 'Not File path');
 
-        $this->assertEquals($this->isFile(__FILE__), __FILE__, 'File found');
+        $this->assertTrue($this->isFile(__FILE__), 'File found');
 
         $this->assertFalse($this->isFile('.file not found'), 'File not found');
 

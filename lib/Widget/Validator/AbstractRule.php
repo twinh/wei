@@ -17,8 +17,13 @@ abstract class AbstractRule extends WidgetProvider
      * 
      * @var string
      */
-    protected $message = 'This value is invalid';
+    protected $message = 'This value is not valid';
     
+    /**
+     * The error definition
+     * 
+     * @var array
+     */
     protected $errors = array();
 
     /**
@@ -71,7 +76,7 @@ abstract class AbstractRule extends WidgetProvider
         if (!$message) {
             if ($name) {
                 if (!isset($this->{$name . 'Message'})) {
-                    throw new \UnexpectedValueException(sprintf('Message name %s not defined', $name));
+                    throw new \UnexpectedValueException(sprintf('Message name "%s" not defined', $name));
                 } else {
                     $message = $this->{$name . 'Message'};
                 }

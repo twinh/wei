@@ -544,7 +544,12 @@ class Validator extends WidgetProvider
                     } else {
                         $message = null;
                     }
-                    $messages[$field][$rule][$name] = $this->ruleValidators[$field][$rule]->getErrorMessage($name, $message);
+                    
+                    if ($name === $rule) {
+                        $messages[$field][$rule][$name] = $this->ruleValidators[$field][$rule]->getErrorMessage(null, $message);
+                    } else {
+                        $messages[$field][$rule][$name] = $this->ruleValidators[$field][$rule]->getErrorMessage($name, $message);
+                    }
                 }
             }
         }

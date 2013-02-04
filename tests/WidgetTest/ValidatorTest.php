@@ -360,15 +360,22 @@ class ValidatorTest extends TestCase
             ),
         ));
         
-        $messages = $validator->getInvalidMessages();
+        $messages = $validator->getDetailMessages();
+
         /*The invalid messages look like blow 
         $messages = array(
             'email' => array(
-                'email' => 'xxx', // user defined
+                'email' => array(
+                    'email' => 'xxx', // user defined
+                )
             ),
             'id' => array(
-                'length' => 'xxx',
-                'email' => 'xxx', // get from rule validator
+                'length' => array(
+                    'length' => 'xxx'
+                 ),
+                'email' => array(
+                   'email' => 'xxx' // get from rule validator
+                )
             )
         );*/
         $this->assertArrayHasKey('username', $messages);
