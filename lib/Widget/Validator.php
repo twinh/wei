@@ -500,7 +500,7 @@ class Validator extends WidgetProvider
     }
     
     /**
-     * Returns custome message
+     * Returns custom message
      * 
      * @return array
      */
@@ -508,37 +508,67 @@ class Validator extends WidgetProvider
     {
         return $this->messages;
     }
-    
+ 
     /**
-     * Returns invalid messages
+     * Returns detail invalid messages
      * 
      * @return array
      */
-    public function getInvalidMessages()
+    public function getDetailMessages()
     {
         $messages = array();
         $languages = $this->languageFile ? require $this->languageFile : array();
         
         foreach ($this->invalidRules as $field => $rules) {
             foreach ($rules as $rule) {
-                // Custom message
-                if (isset($this->messages[$field])) {
-                    if (is_string($this->messages[$field])) {
-                        $messages[$field][$rule] = $this->messages[$field];
-                    } elseif (isset($this->messages[$field][$rule])) {
-                        $messages[$field][$rule] = $this->messages[$field][$rule];
-                    // Get message from rule validator
+                $errors = $this->ruleValidators[$field][$rule]->getErrors();
+                if (empty($errors)) {
+                    $errors = array(
+                        $rule => array(),
+                    );
+                }
+                
+                foreach ($errors as $name => $vars) {
+                    $full = $name === $rule ? $name : $rule . '.' . $name;
+                    // Custom messages
+                    if (isset($this->messages[$field][$rule][$name])) {
+                        $message = $this->messages[$field][$rule][$name];
+                    } elseif (isset($this->messages[$field][$rule]) && is_string($this->messages[$field][$rule])) {
+                        $message = $this->messages[$field][$rule];
+                    } elseif (isset($this->messages[$field]) && is_string($this->messages[$field])) {
+                        $message = $this->messages[$field];
+                    // Language messages
+                    } elseif ($languages && isset($languages[$full])) {
+                        $message = $languages[$full];
+                    // Default messages
                     } else {
-                        $messages[$field][$rule] = isset($languages[$rule]) ? $languages[$rule] : $this->ruleValidators[$field][$rule]->getMessage();
+                        $message = null;
                     }
-                // Get message from rule validator
-                } else {
-                    $messages[$field][$rule] = isset($languages[$rule]) ? $languages[$rule] : $this->ruleValidators[$field][$rule]->getMessage();
+                    $messages[$field][$rule][$name] = $this->ruleValidators[$field][$rule]->getErrorMessage($name, $message);
                 }
             }
         }
-        
+
         return $messages;
+    }
+    
+    /**
+     * Returns summary invalid messages
+     * 
+     * @return array
+     */
+    public function getSummaryMessages()
+    {
+        $messages = $this->getDetailMessages();
+        $summaries = array();
+        foreach ($messages as $field => $rules) {
+            foreach ($rules as $options) {
+                foreach ($options as $message) {
+                    $summaries[$field][] = $message;
+                }
+            }
+        }
+        return $summaries;
     }
     
     /**
