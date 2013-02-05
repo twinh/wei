@@ -14,7 +14,7 @@ namespace Widget;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Request extends ArrayWidget
+class Request extends Parameter
 {
     /**
      * Constructor
