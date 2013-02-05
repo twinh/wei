@@ -14,7 +14,7 @@ namespace Widget\Validator;
  */
 class File extends AbstractRule
 {
-    protected $message = 'This value must be an valid file';
+    protected $message = 'This value must be a valid file';
     
     protected $notFoundMessage = 'This value must be an existing file';
     
