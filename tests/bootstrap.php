@@ -1,6 +1,8 @@
 <?php
-
 use Widget\Widget;
+
+// Display all error message
+error_reporting(-1);
 
 require dirname(__DIR__) . '/lib/Widget/Widget.php';
 
