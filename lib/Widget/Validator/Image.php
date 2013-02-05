@@ -26,7 +26,7 @@ class Image extends AbstractRule
     
     protected $heightTooBigMessage = 'This image height is too big ({{ maxHeight }}px), allowed maximum height is {{ height }}px';
     
-    protected $heightTooSamllMessage = 'This image height is too small ({{ minHeight }}), expected minimum height is {{ height }}px';
+    protected $heightTooSmallMessage = 'This image height is too small ({{ minHeight }}), expected minimum height is {{ height }}px';
     
     protected $maxWidth;
     
