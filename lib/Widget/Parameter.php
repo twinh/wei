@@ -17,6 +17,18 @@ namespace Widget;
 class Parameter extends ArrayWidget
 {
     /**
+     * Returns a *stringify* parameter value
+     *
+     * @param  string $name    The parameter name
+     * @param  mixed  $default The default parameter value if the parameter does not exist
+     * @return string|null  The parameter value
+     */
+    public function __invoke($name, $default = null)
+    {
+        return isset($this->data[$name]) ? (string)$this->data[$name] : $default;
+    }
+    
+    /**
      * Returns a integer value in the specified range
      *
      * @param string $name The parameter name
@@ -35,6 +47,18 @@ class Parameter extends ArrayWidget
         }
 
         return $value;
+    }
+    
+    /**
+     * Returns a raw parameter value
+     *
+     * @param  string $name    The parameter name
+     * @param  mixed  $default The default parameter value if the parameter does not exist
+     * @return string  The parameter value
+     */
+    public function getRaw($name, $default = null)
+    {
+        return isset($this->data[$name]) ? $this->data[$name] : $default;
     }
 
     /**
