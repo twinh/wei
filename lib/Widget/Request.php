@@ -25,7 +25,7 @@ class Request extends Parameter
     {
         parent::__construct($options);
 
-        // rebuild request parameters from other widgets
+        // Rebuild request parameters from other widgets
         if (!isset($options['data'])) {
             $order = ini_get('request_order') ?: ini_get('variables_order');
 
@@ -44,12 +44,12 @@ class Request extends Parameter
     }
 
     /**
-     * Get full url
+     * Returns the full url, which do not contain the fragment, for it never sent to the server
      *
      * @return string
      * @see http://snipplr.com/view.php?codeview&id=2734
      */
-    public function fullUrl()
+    public function getFullUrl()
     {
         $s = $this->server['HTTPS'] == 'on' ? 's' : '';
         $protocol = substr(strtolower($this->server['SERVER_PROTOCOL']), 0, strpos(strtolower($this->server['SERVER_PROTOCOL']), '/')) . $s;
