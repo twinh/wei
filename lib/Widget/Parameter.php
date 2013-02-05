@@ -17,7 +17,7 @@ namespace Widget;
 class Parameter extends ArrayWidget
 {
     /**
-     * Returns a *stringify* parameter value
+     * Returns a *stringify* or user defined($default) parameter value
      *
      * @param  string $name    The parameter name
      * @param  mixed  $default The default parameter value if the parameter does not exist
