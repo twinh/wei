@@ -18,13 +18,13 @@ class File extends AbstractRule
     
     protected $notFoundMessage = 'This value must be an existing file';
     
-    protected $maxSizeMessage = 'This file is too large({{ size }}), allowed maximum size is {{ maxSize }}';
+    protected $maxSizeMessage = 'This file is too large({{ size }}bytes), allowed maximum size is {{ maxSize }}bytes';
     
-    protected $minSizeMessage = 'This file is too small({{ size }}), allowed minimum size is {{ minSize }}';
+    protected $minSizeMessage = 'This file is too small({{ size }}bytes), expected minimum size is {{ minSize }}bytes';
+
+    protected $extsMessage = 'This file extension({{ ext }}) is not allowed, allowed extension: {{ exts }}';
     
-    protected $whiteExtsMessage = 'This file\'s extension({{ ext }}) is not allowed, allowed {{ whiteExts }}';
-    
-    protected $blackExtsMessage = 'This file\'s extension({{ ext }}) is not allowed, not allowed {{ blackExts }}';
+    protected $excludeExtsMessage = 'This file extension({{ ext }}) is not allowed, not allowed extension: {{ excludeExts }}';
     
     /**
      * The max file size limit
@@ -41,18 +41,18 @@ class File extends AbstractRule
     protected $minSize = 0;
 
     /**
-     * The white extensions list
+     * The allowed file extensions
      *
      * @var array
      */
-    protected $whiteExts = array();
+    protected $exts = array();
 
     /**
-     * The black extensions list
+     * The excluding file extensions
      *
      * @var array
      */
-    protected $blackExts = array();
+    protected $excludeExts = array();
     
     /**
      * Determine the object source is a file path, check with the include_path.
@@ -63,7 +63,7 @@ class File extends AbstractRule
     {
         $this->errors = array();
         $options && $this->option($options);
-        
+
         if (!is_string($file) || empty($file)) {
             return false;
         }
@@ -80,20 +80,20 @@ class File extends AbstractRule
             $this->addError('notFound');
             return false;
         }
-        
+
         // Use substr instead of pathinfo, because pathinfo may return error value in unicode
         $ext = substr($file, strrpos($file, '.') + 1);
-        if ($this->blackExts && in_array($ext, (array) $this->blackExts)) {
-            $this->addError('blackExts', array(
+        if ($this->excludeExts && in_array($ext, $this->excludeExts)) {
+            $this->addError('excludeExts', array(
                 'ext' => $ext,
-                'blackExts' => implode(',', (array) $this->blackExts)
+                'excludeExts' => implode(',', $this->excludeExts)
             ));
         }
 
-        if ($this->whiteExts && !in_array($ext, (array) $this->whiteExts)) {
-            $this->addError('whiteExts', array(
+        if ($this->exts && !in_array($ext, (array) $this->exts)) {
+            $this->addError('exts', array(
                 'ext' => $ext,
-                'whiteExts' => implode(',', (array) $this->whiteExts)
+                'exts' => implode(',', (array) $this->exts)
             ));
         }
 
@@ -122,5 +122,42 @@ class File extends AbstractRule
         }
         
         return !$this->errors;
+    }
+    
+    /**
+     * Set allowed file extensions
+     * 
+     * @param string|array $exts String format likes 'php,js' or array format likes [php, js]
+     * @return \Widget\Validator\File
+     */
+    public function setExts($exts)
+    {
+        $this->exts = $this->resolveExts($exts);
+        
+        return $this;
+    }
+    
+     /**
+     * Set exclude file extensions
+     * 
+     * @param string|array $exts String format likes 'php,js' or array format likes [php, js]
+     * @return \Widget\Validator\File
+     */
+    public function setExcludeExts($exts)
+    {
+        $this->excludeExts = $this->resolveExts($exts);
+        
+        return $this;
+    }
+    
+    protected function resolveExts($exts)
+    {
+        if (is_string($exts)) {
+            return explode(',', $exts);
+        } elseif (is_array($exts)) {
+            return $exts;
+        } else {
+            throw new \Widget\UnexpectedTypeException($exts, 'string or array');
+        }
     }
 }
