@@ -24,7 +24,7 @@ class Parameter extends ArrayWidget
      * @param integer|null $max The max value for the parameter
      * @return int
      */
-    public function int($name, $min = null, $max = null)
+    public function getInt($name, $min = null, $max = null)
     {
         $value = (int) $this($name, 0);
 
