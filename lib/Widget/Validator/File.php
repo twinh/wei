@@ -30,6 +30,12 @@ class File extends AbstractRule
     
     protected $excludeExtsMessage = 'This file extension({{ ext }}) is not allowed, not allowed extension: {{ excludeExts }}';
     
+    protected $mimeTypeNotDetectedMessage = 'This file mime type could not be detected';
+    
+    protected $mimeTypesMessage = 'This file mime type "{{ mimeType }}" is not allowed';
+    
+    protected $excludeMineTypesMessage = 'This file mime type "{{ mimeType }}" is not allowed';
+    
     /**
      * The max file size limit
      *
@@ -50,16 +56,35 @@ class File extends AbstractRule
      * @var array
      */
     protected $exts = array();
-
+    
+    /**
+     * The file size unit
+     * 
+     * @var string
+     */
+    protected $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+    
     /**
      * The excluding file extensions
      *
      * @var array
      */
     protected $excludeExts = array();
+        
+    protected $mimeTypes = array();
+    
+    protected $excludeMineTypes = array();
     
     /**
-     * Determine the object source is a file path, check with the include_path.
+     * The magic database file to detect file mime type
+     * 
+     * @link http://www.php.net/manual/en/function.finfo-open.php
+     * @var string|null
+     */
+    protected $magicFile;
+    
+    /**
+     * Determime the object source is a file path, check with the include_path.
      *
      * @return string|bool
      */
@@ -85,6 +110,7 @@ class File extends AbstractRule
             return false;
         }
 
+        // Validate file extension
         // Use substr instead of pathinfo, because pathinfo may return error value in unicode
         $ext = substr($file, strrpos($file, '.') + 1);
         if ($this->excludeExts && in_array($ext, $this->excludeExts)) {
@@ -101,7 +127,7 @@ class File extends AbstractRule
             ));
         }
 
-        // Size
+        // Validate file size
         $size = 0;
         if ($this->maxSize || $this->minSize) {
             if (!is_readable($file)) {
@@ -124,6 +150,33 @@ class File extends AbstractRule
                 'size'      => $this->fromBytes($size),
                 'minSize'   => $this->fromBytes($this->minSize)
             ));
+        }
+        
+        // Validate file mime type
+        if ($this->mimeTypes || $this->excludeMineTypes) {
+            $mimeType = $this->getMineType($file);
+            if (!$mimeType) {
+                $this->addError('mimeTypeNotDetected');
+                return false;
+            }
+        }
+        
+        if ($this->mimeTypes) {
+            if (!in_array($mimeType, $this->mimeTypes)) {
+                $this->addError('mimeTypes', array(
+                    'mimeType'  => $mimeType,
+                    'mimeTypes' => implode(',', $this->mimeTypes)
+                ));
+            }
+        }
+        
+        if ($this->excludeMineTypes) {
+            if (in_array($mimeType, $this->excludeMineTypes)) {
+                $this->addError('excludeMineTypes', array(
+                    'mimeType'          => $mimeType,
+                    'excludeMineTypes'  => implode(',', $this->excludeMineTypes)
+                ));
+            }
         }
         
         return !$this->errors;
@@ -192,8 +245,6 @@ class File extends AbstractRule
             return (int) $size;
         }
         
-        $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
-        
         $unit = strtoupper(substr($size, -2));
         
         $value = substr($size, 0, -1);
@@ -201,9 +252,8 @@ class File extends AbstractRule
             $value = substr($value, 0, -1);
         }
         
-        $power = array_search($unit, $units);
-
-        return (int)($value * pow(1024, $power));
+        $exponent = array_search($unit, $this->units);
+        return (int)($value * pow(1024, $exponent));
     }
     
     /**
@@ -214,12 +264,24 @@ class File extends AbstractRule
      */
     public function fromBytes($bytes)
     {
-        $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
-        
         for ($i=0; $bytes >= 1024 && $i < 8; $i++) {
             $bytes /= 1024;
         }
-        
-        return round($bytes, 2) . $units[$i];
+        return round($bytes, 2) . $this->units[$i];
+    }
+    
+    /**
+     * Returns the file mime type on success
+     * 
+     * @param string $file The file path
+     * @return string|false
+     */
+    public function getMineType($file)
+    {
+        $finfo = finfo_open(FILEINFO_MIME_TYPE, $this->magicFile);
+        if (!$finfo) {
+            throw new \InvalidArgumentException('Failed to open fileinfo database');
+        }
+        return finfo_file($finfo, $file);
     }
 }
