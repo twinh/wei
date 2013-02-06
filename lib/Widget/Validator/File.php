@@ -8,6 +8,8 @@
 
 namespace Widget\Validator;
 
+use Widget\UnexpectedTypeException;
+
 /**
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
@@ -17,6 +19,8 @@ class File extends AbstractRule
     protected $message = 'This value must be a valid file';
     
     protected $notFoundMessage = 'This value must be an existing file';
+    
+    protected $notReadableMessage = 'This file is not readable';
     
     protected $maxSizeMessage = 'This file is too large({{ size }}), allowed maximum size is {{ maxSize }}';
     
@@ -85,15 +89,15 @@ class File extends AbstractRule
         $ext = substr($file, strrpos($file, '.') + 1);
         if ($this->excludeExts && in_array($ext, $this->excludeExts)) {
             $this->addError('excludeExts', array(
-                'ext' => $ext,
-                'excludeExts' => implode(',', $this->excludeExts)
+                'ext'           => $ext,
+                'excludeExts'   => implode(',', $this->excludeExts)
             ));
         }
 
         if ($this->exts && !in_array($ext, (array) $this->exts)) {
             $this->addError('exts', array(
-                'ext' => $ext,
-                'exts' => implode(',', (array) $this->exts)
+                'ext'   => $ext,
+                'exts'  => implode(',', (array) $this->exts)
             ));
         }
 
@@ -102,6 +106,7 @@ class File extends AbstractRule
         if ($this->maxSize || $this->minSize) {
             if (!is_readable($file)) {
                 $this->addError('notReadable');
+                return false;
             } else {
                 $size = filesize($file);
             }
@@ -157,7 +162,7 @@ class File extends AbstractRule
         } elseif (is_array($exts)) {
             return $exts;
         } else {
-            throw new \Widget\UnexpectedTypeException($exts, 'string or array');
+            throw new UnexpectedTypeException($exts, 'string or array');
         }
     }
     
