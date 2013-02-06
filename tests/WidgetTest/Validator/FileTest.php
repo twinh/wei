@@ -75,4 +75,20 @@ class FileTest extends TestCase
         
         $file->setExcludeExts(new \stdClass());
     }
+    
+    public function testMineType()
+    {
+        $file = $this->createFileValidator();
+        
+        $this->assertFalse($file(dirname(__DIR__) . '/Fixtures/5x5.gif', array(
+            'mimeTypes' => array(
+                'image/jpg'
+            ),
+            'excludeMineTypes' => array(
+                'image/gif'
+            )
+        )));
+        
+        $this->assertEquals(array('mimeTypes', 'excludeMineTypes'), array_keys($file->getErrors()));
+    }
 }
