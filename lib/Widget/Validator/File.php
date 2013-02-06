@@ -18,9 +18,9 @@ class File extends AbstractRule
     
     protected $notFoundMessage = 'This value must be an existing file';
     
-    protected $maxSizeMessage = 'This file is too large({{ size }}bytes), allowed maximum size is {{ maxSize }}bytes';
+    protected $maxSizeMessage = 'This file is too large({{ size }}), allowed maximum size is {{ maxSize }}';
     
-    protected $minSizeMessage = 'This file is too small({{ size }}bytes), expected minimum size is {{ minSize }}bytes';
+    protected $minSizeMessage = 'This file is too small({{ size }}), expected minimum size is {{ minSize }}';
 
     protected $extsMessage = 'This file extension({{ ext }}) is not allowed, allowed extension: {{ exts }}';
     
@@ -109,15 +109,15 @@ class File extends AbstractRule
   
         if ($size && $this->maxSize && $this->maxSize <= $size) {
             $this->addError('maxSize', array(
-                'size' => $size,
-                'maxSize' => $this->maxSize
+                'size'      => $this->fromBytes($size),
+                'maxSize'   => $this->fromBytes($this->maxSize)
             ));
         }
         
         if ($size && $this->minSize && $this->minSize > $size) {
             $this->addError('minSize', array(
-                'size' => $size,
-                'minSize' => $this->minSize
+                'size'      => $this->fromBytes($size),
+                'minSize'   => $this->fromBytes($this->minSize)
             ));
         }
         
@@ -159,5 +159,62 @@ class File extends AbstractRule
         } else {
             throw new \Widget\UnexpectedTypeException($exts, 'string or array');
         }
+    }
+    
+    protected function setMaxSize($maxSize)
+    {
+        $this->maxSize = $this->toBytes($maxSize);
+        
+        return $this;
+    }
+    
+    protected function setMinSize($minSize)
+    {
+        $this->minSize = $this->toBytes($minSize);
+        
+        return $this;
+    }
+    
+    /**
+     * Converts human readable file size (e.g. 1.2MB, 10KB) into bytes
+     * 
+     * @param string|int $size
+     * @return int
+     */
+    public function toBytes($size)
+    {
+        if (is_numeric($size)) {
+            return (int) $size;
+        }
+        
+        $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+        
+        $unit = strtoupper(substr($size, -2));
+        
+        $value = substr($size, 0, -1);
+        if (!is_numeric($value)) {
+            $value = substr($value, 0, -1);
+        }
+        
+        $power = array_search($unit, $units);
+
+        return (int)($value * pow(1024, $power));
+    }
+    
+    /**
+     * Formats bytes to human readable file size (e.g. 1.2MB, 10KB)
+     * 
+     * @param int $bytes
+     * @return string
+     */
+    public function fromBytes($bytes)
+    {
+        $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+        
+        for ($i=0; $bytes >= 1024 && $i < 8; $i++) {
+            $bytes /= 1024;
+        }
+        
+        return round($bytes, 2) . $units[$i];
     }
 }
