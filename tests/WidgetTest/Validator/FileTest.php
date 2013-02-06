@@ -76,7 +76,7 @@ class FileTest extends TestCase
         $file->setExcludeExts(new \stdClass());
     }
     
-    public function testMineType()
+    public function testMimeType()
     {
         $file = $this->createFileValidator();
         
@@ -84,11 +84,11 @@ class FileTest extends TestCase
             'mimeTypes' => array(
                 'image/jpg'
             ),
-            'excludeMineTypes' => array(
+            'excludeMimeTypes' => array(
                 'image/gif'
             )
         )));
         
-        $this->assertEquals(array('mimeTypes', 'excludeMineTypes'), array_keys($file->getErrors()));
+        $this->assertEquals(array('mimeTypes', 'excludeMimeTypes'), array_keys($file->getErrors()));
     }
 }

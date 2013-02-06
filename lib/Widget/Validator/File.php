@@ -34,7 +34,7 @@ class File extends AbstractRule
     
     protected $mimeTypesMessage = 'This file mime type "{{ mimeType }}" is not allowed';
     
-    protected $excludeMineTypesMessage = 'This file mime type "{{ mimeType }}" is not allowed';
+    protected $excludeMimeTypesMessage = 'This file mime type "{{ mimeType }}" is not allowed';
     
     /**
      * The max file size limit
@@ -73,7 +73,7 @@ class File extends AbstractRule
         
     protected $mimeTypes = array();
     
-    protected $excludeMineTypes = array();
+    protected $excludeMimeTypes = array();
     
     /**
      * The magic database file to detect file mime type
@@ -153,8 +153,8 @@ class File extends AbstractRule
         }
         
         // Validate file mime type
-        if ($this->mimeTypes || $this->excludeMineTypes) {
-            $mimeType = $this->getMineType($file);
+        if ($this->mimeTypes || $this->excludeMimeTypes) {
+            $mimeType = $this->getMimeType($file);
             if (!$mimeType) {
                 $this->addError('mimeTypeNotDetected');
                 return false;
@@ -170,11 +170,11 @@ class File extends AbstractRule
             }
         }
         
-        if ($this->excludeMineTypes) {
-            if (in_array($mimeType, $this->excludeMineTypes)) {
-                $this->addError('excludeMineTypes', array(
+        if ($this->excludeMimeTypes) {
+            if (in_array($mimeType, $this->excludeMimeTypes)) {
+                $this->addError('excludeMimeTypes', array(
                     'mimeType'          => $mimeType,
-                    'excludeMineTypes'  => implode(',', $this->excludeMineTypes)
+                    'excludeMimeTypes'  => implode(',', $this->excludeMimeTypes)
                 ));
             }
         }
@@ -276,7 +276,7 @@ class File extends AbstractRule
      * @param string $file The file path
      * @return string|false
      */
-    public function getMineType($file)
+    public function getMimeType($file)
     {
         $finfo = finfo_open(FILEINFO_MIME_TYPE, $this->magicFile);
         if (!$finfo) {
