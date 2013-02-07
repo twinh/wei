@@ -56,6 +56,27 @@ class File extends AbstractRule
      * @var array
      */
     protected $exts = array();
+        
+    /**
+     * The excluding file extensions
+     *
+     * @var array
+     */
+    protected $excludeExts = array();
+    
+    /**
+     * The allowd file mime types
+     * 
+     * @var array
+     */
+    protected $mimeTypes = array();
+    
+    /**
+     * The excluding file mime types
+     * 
+     * @var array
+     */
+    protected $excludeMimeTypes = array();
     
     /**
      * The file size unit
@@ -63,18 +84,7 @@ class File extends AbstractRule
      * @var string
      */
     protected $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
-    
-    /**
-     * The excluding file extensions
-     *
-     * @var array
-     */
-    protected $excludeExts = array();
-        
-    protected $mimeTypes = array();
-    
-    protected $excludeMimeTypes = array();
-    
+
     /**
      * The magic database file to detect file mime type
      * 
