@@ -102,4 +102,13 @@ class FileTest extends TestCase
             )
         )));
     }
+    
+    public function testStringAsParameter()
+    {
+        $file = $this->createFileValidator();
+        
+        $this->assertTrue($file(dirname(__DIR__) . '/Fixtures/5x5.gif', array(
+            'mimeTypes' => 'image/jpg,image/gif'
+        )));
+    }
 }

@@ -160,7 +160,7 @@ class File extends AbstractRule
                 return false;
             }
         }
-        
+
         if ($this->mimeTypes && !$this->inMimeType($mimeType, $this->mimeTypes)) {
             $this->addError('mimeTypes', array(
                 'mimeType'  => $mimeType,
@@ -210,7 +210,7 @@ class File extends AbstractRule
      */
     public function setExts($exts)
     {
-        $this->exts = $this->resolveExts($exts);
+        $this->exts = $this->convertToArray($exts);
         
         return $this;
     }
@@ -223,22 +223,17 @@ class File extends AbstractRule
      */
     public function setExcludeExts($exts)
     {
-        $this->excludeExts = $this->resolveExts($exts);
+        $this->excludeExts = $this->convertToArray($exts);
         
         return $this;
     }
     
-    protected function resolveExts($exts)
-    {
-        if (is_string($exts)) {
-            return explode(',', $exts);
-        } elseif (is_array($exts)) {
-            return $exts;
-        } else {
-            throw new UnexpectedTypeException($exts, 'string or array');
-        }
-    }
-    
+    /**
+     * Set maximum file size 
+     * 
+     * @param string|int $maxSize
+     * @return \Widget\Validator\File
+     */
     protected function setMaxSize($maxSize)
     {
         $this->maxSize = $this->toBytes($maxSize);
@@ -246,6 +241,12 @@ class File extends AbstractRule
         return $this;
     }
     
+    /**
+     * Set the minimum file size
+     * 
+     * @param string|int $minSize
+     * @return \Widget\Validator\File
+     */
     protected function setMinSize($minSize)
     {
         $this->minSize = $this->toBytes($minSize);
@@ -288,6 +289,50 @@ class File extends AbstractRule
             $bytes /= 1024;
         }
         return round($bytes, 2) . $this->units[$i];
+    }
+    
+    /**
+     * Set the file mime types
+     * 
+     * @param string|array $mimeTypes
+     * @return \Widget\Validator\File
+     */
+    public function setMimeTypes($mimeTypes)
+    {
+        $this->mimeTypes = $this->convertToArray($mimeTypes);
+        
+        return $this;
+    }
+    
+    /**
+     * Set the file exclude mime types
+     * 
+     * @param string|array $excludeMimeTypes
+     * @return \Widget\Validator\File
+     */
+    public function setExcludeMimeTypes($excludeMimeTypes)
+    {
+        $this->excludeMimeTypes = $this->convertToArray($excludeMimeTypes);
+        
+        return $this;
+    }
+    
+    /**
+     * Converts parameter to array
+     * 
+     * @param mixed $var
+     * @return array
+     * @throws UnexpectedTypeException When parameter is not a string or array
+     */
+    protected function convertToArray($var)
+    {
+        if (is_string($var)) {
+            return explode(',', $var);
+        } elseif (is_array($var)) {
+            return $var;
+        } else {
+            throw new UnexpectedTypeException($var, 'string or array');
+        }
     }
     
     /**
