@@ -179,10 +179,12 @@ class File extends AbstractRule
     }
 
     /**
+     * Checks if a mime type exists in a mime type array
      * 
-     * 
-     * @param type $findMe
-     * @param type $mimeTypes
+     * @param string $findMe    The mime type to be searched
+     * @param array $mimeTypes  The mime type array, allow element likes 
+     *                          "image/*" to match all image mime type, such as 
+     *                          "image/gif", "image/jpeg", etc
      * @return boolean
      */
     public function inMimeType($findMe, $mimeTypes)
