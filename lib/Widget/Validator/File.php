@@ -161,25 +161,43 @@ class File extends AbstractRule
             }
         }
         
-        if ($this->mimeTypes) {
-            if (!in_array($mimeType, $this->mimeTypes)) {
-                $this->addError('mimeTypes', array(
-                    'mimeType'  => $mimeType,
-                    'mimeTypes' => implode(',', $this->mimeTypes)
-                ));
-            }
+        if ($this->mimeTypes && !$this->inMimeType($mimeType, $this->mimeTypes)) {
+            $this->addError('mimeTypes', array(
+                'mimeType'  => $mimeType,
+                'mimeTypes' => implode(',', $this->mimeTypes)
+            ));
         }
         
-        if ($this->excludeMimeTypes) {
-            if (in_array($mimeType, $this->excludeMimeTypes)) {
-                $this->addError('excludeMimeTypes', array(
-                    'mimeType'          => $mimeType,
-                    'excludeMimeTypes'  => implode(',', $this->excludeMimeTypes)
-                ));
-            }
+        if ($this->excludeMimeTypes && $this->inMimeType($mimeType, $this->excludeMimeTypes)) {
+            $this->addError('excludeMimeTypes', array(
+                'mimeType'          => $mimeType,
+                'excludeMimeTypes'  => implode(',', $this->excludeMimeTypes)
+            ));
         }
         
         return !$this->errors;
+    }
+
+    /**
+     * 
+     * 
+     * @param type $findMe
+     * @param type $mimeTypes
+     * @return boolean
+     */
+    public function inMimeType($findMe, $mimeTypes)
+    {
+        foreach ($mimeTypes as $mimeType) {
+            if ($mimeType == $findMe) {
+                return true;
+            }
+            
+            $type = strstr($mimeType, '/*', true);
+            if ($type && $type === strstr($findMe, '/', true)) {
+                return true;
+            }
+        }
+        return false;
     }
     
     /**

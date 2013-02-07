@@ -91,4 +91,15 @@ class FileTest extends TestCase
         
         $this->assertEquals(array('mimeTypes', 'excludeMimeTypes'), array_keys($file->getErrors()));
     }
+    
+    public function testMimeTypeWildcard()
+    {
+        $file = $this->createFileValidator();
+        
+        $this->assertTrue($file(dirname(__DIR__) . '/Fixtures/5x5.gif', array(
+            'mimeTypes' => array(
+                'image/*'
+            )
+        )));
+    }
 }
