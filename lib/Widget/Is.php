@@ -22,7 +22,9 @@ class Is extends WidgetProvider
      * @var array
      */
     protected $alias = array(
-        'empty' => 'Widget\Validator\EmptyValue',
+        'empty'     => 'Widget\Validator\EmptyValue',
+        'before'    => 'Widget\Validator\Max',
+        'after'     => 'Widget\Validator\Min'
     );
     
     /**
