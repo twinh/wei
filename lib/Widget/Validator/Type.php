@@ -16,7 +16,7 @@ use Widget\Exception;
  */
 class Type extends AbstractRule
 {
-    protected $typeMessage = 'This value must be of type {{ type }}';
+    protected $typeMessage = 'This value must be of type %type%';
     
     protected $type;
     

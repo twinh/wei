@@ -80,10 +80,10 @@ abstract class AbstractRule extends WidgetProvider
         if ($vars) {
             $keys = array_keys($vars);
             array_walk($keys, function(&$key) {
-                $key = '{{ ' . $key  . ' }}';
+                $key = '%' . $key  . '%';
             });
             return str_replace($keys, $vars, $message);
-        } elseif (preg_match_all('{{ (.+?) }}', $message, $matches)) {
+        } elseif (preg_match_all('/\%(.+?)\%/', $message, $matches)) {
             $keys = array();
             $values = array();
             foreach ($matches[1] as $match) {
@@ -94,7 +94,7 @@ abstract class AbstractRule extends WidgetProvider
                 if (is_array($value)) {
                     $value = implode(', ', $value);
                 }
-                $keys[] = '{{ ' . $match . ' }}';
+                $keys[] = '%' . $match . '%';
                 $values[] = $value;
             }
             return str_replace($keys, $values, $message);

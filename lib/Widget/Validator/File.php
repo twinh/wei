@@ -22,19 +22,19 @@ class File extends AbstractRule
     
     protected $notReadableMessage = 'This file is not readable';
     
-    protected $maxSizeMessage = 'This file is too large({{ size }}), allowed maximum size is {{ maxSize }}';
+    protected $maxSizeMessage = 'This file is too large(%size%), allowed maximum size is %maxSize%';
     
-    protected $minSizeMessage = 'This file is too small({{ size }}), expected minimum size is {{ minSize }}';
+    protected $minSizeMessage = 'This file is too small(%size%), expected minimum size is %minSize%';
 
-    protected $extsMessage = 'This file extension({{ ext }}) is not allowed, allowed extension: {{ exts }}';
+    protected $extsMessage = 'This file extension(%ext%) is not allowed, allowed extension: %exts%';
     
-    protected $excludeExtsMessage = 'This file extension({{ ext }}) is not allowed, not allowed extension: {{ excludeExts }}';
+    protected $excludeExtsMessage = 'This file extension(%ext%) is not allowed, not allowed extension: %excludeExts%';
     
     protected $mimeTypeNotDetectedMessage = 'This file mime type could not be detected';
     
-    protected $mimeTypesMessage = 'This file mime type "{{ mimeType }}" is not allowed';
+    protected $mimeTypesMessage = 'This file mime type "%mimeType%" is not allowed';
     
-    protected $excludeMimeTypesMessage = 'This file mime type "{{ mimeType }}" is not allowed';
+    protected $excludeMimeTypesMessage = 'This file mime type "%mimeType%" is not allowed';
     
     /**
      * The max file size limit

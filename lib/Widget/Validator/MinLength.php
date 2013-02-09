@@ -16,7 +16,7 @@ class MinLength extends AbstractRule
 {
     protected $limit;
     
-    protected $message = 'This value must have a length greater than {{ limit }}';
+    protected $message = 'This value must have a length greater than %limit%';
 
     public function __invoke($input, $limit = null)
     {

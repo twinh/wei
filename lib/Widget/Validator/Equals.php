@@ -14,7 +14,7 @@ namespace Widget\Validator;
  */
 class Equals extends AbstractRule
 {
-    protected $message = 'This value must be equals {{ value }}';
+    protected $message = 'This value must be equals %value%';
     
     protected $equals;
     

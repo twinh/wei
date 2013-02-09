@@ -18,9 +18,7 @@ class ImageTest extends TestCase
         $image = $this->createImageValidator();
         
         $this->assertFalse($image('not found file'));        
-        $this->assertEquals(array(
-            'notFound' => array()
-        ), $image->getErrors());
+        $this->assertEquals(array('notFound'), array_keys($image->getErrors()));
     }
     
     public function testNotDetected()
@@ -28,9 +26,7 @@ class ImageTest extends TestCase
         $image = $this->createImageValidator();
         
         $this->assertFalse($image(__FILE__));
-        $this->assertEquals(array(
-            'notDetected' => array()
-        ), $image->getErrors());
+        $this->assertEquals(array('notDetected'), array_keys($image->getErrors()));
     }
     
     public function testSize()
@@ -56,23 +52,9 @@ class ImageTest extends TestCase
             'minWidth' => 6
         )));
         
-        $this->assertEquals(array(
-            'widthTooBig' => array(
-                'maxWidth' => 4,
-                'width' => 5
-            ),
-            'widthTooSmall' => array(
-                'minWidth' => 6,
-                'width' => 5
-            ),
-            'heightTooBig' => array(
-                'maxHeight' => 4,
-                'height' => 5
-            ),
-            'heightTooSmall' => array(
-                'minHeight' => 6,
-                'height' => 5
-            )
-        ), $image->getErrors());
+        $this->assertEquals(
+            array('widthTooBig', 'widthTooSmall', 'heightTooBig', 'heightTooSmall'), 
+            array_keys($image->getErrors())
+        );
     }
 }

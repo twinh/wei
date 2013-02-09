@@ -20,7 +20,7 @@ class DateTime extends AbstractRule
     
     protected $example;
     
-    protected $message = 'This value is not a valid datetime, the format should be "{{ format }}", eg: {{ example }}';
+    protected $message = 'This value is not a valid datetime, the format should be "%format%", eg: %example%';
 
     public function __invoke($input, $format = null)
     {

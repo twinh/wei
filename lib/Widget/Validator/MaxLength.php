@@ -16,7 +16,7 @@ class MaxLength extends AbstractRule
 {
     protected $limit;
     
-    protected $message = 'This value must have a length lower than {{ limit }}';
+    protected $message = 'This value must have a length lower than %limit%';
 
     public function __invoke($input, $limit)
     {

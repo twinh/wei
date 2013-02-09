@@ -20,13 +20,13 @@ class Image extends AbstractRule
     
     protected $notDetectedMessage = 'This file is not a valid image or the size of the image could not be detected';
 
-    protected $widthTooBigMessage = 'This image width is too big ({{ width }}px), allowed maximum width is {{ maxWidth }}px';
+    protected $widthTooBigMessage = 'This image width is too big (%width%px), allowed maximum width is %maxWidth%px';
     
-    protected $widthTooSmallMessage = 'This image width is too small ({{ width }}px), expected minimum width is {{ minWidth }}px';
+    protected $widthTooSmallMessage = 'This image width is too small (%width%px), expected minimum width is %minWidth%px';
     
-    protected $heightTooBigMessage = 'This image height is too big ({{ height }}px), allowed maximum height is {{ maxHeight }}px';
+    protected $heightTooBigMessage = 'This image height is too big (%height%px), allowed maximum height is %maxHeight%px';
     
-    protected $heightTooSmallMessage = 'This image height is too small ({{ height }}px), expected minimum height is {{ minHeight }}px';
+    protected $heightTooSmallMessage = 'This image height is too small (%height%px), expected minimum height is %minHeight%px';
     
     protected $maxWidth;
     

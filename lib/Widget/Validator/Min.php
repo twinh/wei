@@ -16,7 +16,7 @@ class Min extends AbstractRule
 {
     protected $limit;
     
-    protected $message = 'This value must be greater or equal than {{ limit }}';
+    protected $message = 'This value must be greater or equal than %limit%';
 
     public function __invoke($input, $limit = null)
     {
