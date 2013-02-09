@@ -14,6 +14,8 @@ namespace Widget\Validator;
  */
 class Range extends AbstractRule
 {
+    protected $message = 'This value must between {{ min }} and {{ max }}';
+    
     protected $min;
     
     protected $max;
