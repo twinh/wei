@@ -518,18 +518,20 @@ class Validator extends WidgetProvider
     {
         $messages = array();
         $languages = $this->languageFile ? require $this->languageFile : array();
-        
+
         foreach ($this->invalidRules as $field => $rules) {
             foreach ($rules as $rule) {
                 $errors = $this->ruleValidators[$field][$rule]->getErrors();
                 if (empty($errors)) {
+                    // FIXME
                     $errors = array(
-                        $rule => array(),
+                        $rule => array(
+                            null, array()
+                        ),
                     );
                 }
-                
+
                 foreach ($errors as $name => $vars) {
-                    $full = $name === $rule ? $name : $rule . '.' . $name;
                     // Custom messages
                     if (isset($this->messages[$field][$rule][$name])) {
                         $message = $this->messages[$field][$rule][$name];
@@ -537,19 +539,18 @@ class Validator extends WidgetProvider
                         $message = $this->messages[$field][$rule];
                     } elseif (isset($this->messages[$field]) && is_string($this->messages[$field])) {
                         $message = $this->messages[$field];
-                    // Language messages
-                    } elseif ($languages && isset($languages[$full])) {
-                        $message = $languages[$full];
                     // Default messages
+                    } elseif (isset($vars[0])) {
+                        $message = $vars[0];
                     } else {
-                        $message = null;
+                        $message = $this->ruleValidators[$field][$rule]->getMessage();
+                    }
+
+                    if ($languages && isset($languages[$message])) {
+                        $message = $languages[$message];
                     }
                     
-                    if ($name === $rule) {
-                        $messages[$field][$rule][$name] = $this->ruleValidators[$field][$rule]->getErrorMessage(null, $message);
-                    } else {
-                        $messages[$field][$rule][$name] = $this->ruleValidators[$field][$rule]->getErrorMessage($name, $message);
-                    }
+                    $messages[$field][$rule][$name] = $this->ruleValidators[$field][$rule]->getErrorMessage($message, $vars[1]);
                 }
             }
         }
@@ -603,5 +604,16 @@ class Validator extends WidgetProvider
     public function getLanguage()
     {
         return $this->language;
+    }
+    
+    /**
+     * 
+     * @param type $field
+     * @param type $rule
+     * @return \Widget\Validator\AbstractRule
+     */
+    public function getRuleValidator($field, $rule)
+    {
+        return isset($this->ruleValidators[$field][$rule]) ? $this->ruleValidators[$field][$rule] : null;
     }
 }

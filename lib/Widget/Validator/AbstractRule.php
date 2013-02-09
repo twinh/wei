@@ -71,45 +71,35 @@ abstract class AbstractRule extends WidgetProvider
      * @return string
      * @throws \UnexpectedValueException
      */
-    public function getErrorMessage($name = null, $message = null)
+    public function getErrorMessage($message, $vars = array())
     {
         if (!$message) {
-            if ($name) {
-                if (!isset($this->{$name . 'Message'})) {
-                    throw new \UnexpectedValueException(sprintf('Message name "%s" not defined', $name));
-                } else {
-                    $message = $this->{$name . 'Message'};
-                }
-            } else {
-                $message = $this->message;
-            }
+            $message = $this->message;
         }
         
-        if (isset($this->errors[$name])) {
-            $keys = array_keys($this->errors[$name]);
-            array_walk($keys, function(&$key){
+        if ($vars) {
+            $keys = array_keys($vars);
+            array_walk($keys, function(&$key) {
                 $key = '{{ ' . $key  . ' }}';
             });
-            return str_replace($keys, $this->errors[$name], $message);
-        } else {
-            if (preg_match_all('{{ (.+?) }}', $message, $matches)) {
-                $keys = array();
-                $values = array();
-                foreach ($matches[1] as $match) {
-                    if (!isset($this->$match)) {
-                        throw new \UnexpectedValueException('Unkonwn property ' . $match);
-                    }
-                    $value = $this->$match;
-                    if (is_array($value)) {
-                        $value = implode(', ', $value);
-                    }
-                    $keys[] = '{{ ' . $match . ' }}';
-                    $values[] = $value;
+            return str_replace($keys, $vars, $message);
+        } elseif (preg_match_all('{{ (.+?) }}', $message, $matches)) {
+            $keys = array();
+            $values = array();
+            foreach ($matches[1] as $match) {
+                if (!isset($this->$match)) {
+                    throw new \UnexpectedValueException('Unkonwn property ' . $match);
                 }
-                return str_replace($keys, $values, $message);
-            } else {
-                return $message;
+                $value = $this->$match;
+                if (is_array($value)) {
+                    $value = implode(', ', $value);
+                }
+                $keys[] = '{{ ' . $match . ' }}';
+                $values[] = $value;
             }
+            return str_replace($keys, $values, $message);
+        } else {
+            return $message;
         }
     }
     
@@ -131,6 +121,6 @@ abstract class AbstractRule extends WidgetProvider
      */
     protected function addError($name, $vars = array())
     {
-        $this->errors[$name] = $vars;
+        $this->errors[$name] = array($this->{$name . 'Message'}, $vars);
     }
 }
