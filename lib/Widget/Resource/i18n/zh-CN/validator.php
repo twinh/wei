@@ -8,7 +8,8 @@
 
 return array(
     // default
-    'This value is not valid' => '该项不合法',
+    'This value' => '该项',
+    '%name% is not valid' => '%name%不合法',
     
     // alnum
     'This value must contain letters (a-z) and digits (0-9)' => '该项只能由字母(a-z)和数字(0-9)组成',
@@ -20,7 +21,7 @@ return array(
     'This value must contain only Chinese characters' => '该项只能由中文组成',
     
     // date
-    'This value is not a valid date, the format should be "%format%", eg: %example%' => '该项不是合法的日期,格式应该是%format%,例如:%example%',
+    '%name% is not a valid date, the format should be "%format%", eg: %example%' => '%name%不是合法的日期,格式应该是%format%,例如:%example%',
     
     // dateTime
     'This value is not a valid datetime, the format should be "%format%", eg: %example%'  => '该项不是合法的日期时间,格式应该是%format%,例如:%example%',
@@ -54,7 +55,7 @@ return array(
     'This image height is too small (%height%px), expected minimum height is %minHeight%px' => '该图片高度太小(%height%px), 允许的最小高度为%minHeight%px',
     
     // in
-    'This value must be in %array%' => '该项必须在指定的数据中:%array%',
+    'This value must be in %array%' => '%name%必须在指定的数据中:%array%',
     
     // length
     'This value must have a length between %min% and %max%' => '该项的长度必须在%min%和%max%之间',

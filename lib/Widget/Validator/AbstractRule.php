@@ -17,7 +17,14 @@ abstract class AbstractRule extends WidgetProvider
      * 
      * @var string
      */
-    protected $message = 'This value is not valid';
+    protected $message = '%name% is not valid';
+    
+    /**
+     * The message name
+     * 
+     * @var string
+     */
+    protected $name = 'This value';
     
     /**
      * The error definition
@@ -41,6 +48,29 @@ abstract class AbstractRule extends WidgetProvider
     {
         $this->message = $message;
 
+        return $this;
+    }
+    
+    /**
+     * Returns message name
+     * 
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+    
+    /**
+     * Sets message name
+     * 
+     * @param string $name
+     * @return \Widget\Validator\AbstractRule
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        
         return $this;
     }
     

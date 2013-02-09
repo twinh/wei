@@ -144,6 +144,8 @@ class Validator extends WidgetProvider
      * @var array<\Widget\Validator\AbstractRule>
      */
     protected $ruleValidators = array();
+    
+    protected $names = array();
 
     /**
      * Validate the data by the given options
@@ -530,11 +532,20 @@ class Validator extends WidgetProvider
                         ),
                     );
                 }
+                
+                if (isset($this->names[$field])) {
+                    $name = $this->names[$field];
+                } else {
+                    $name = $this->ruleValidators[$field][$rule]->getName();
+                }
+                if ($languages && isset($languages[$name])) {
+                    $name = $languages[$name];
+                }
 
-                foreach ($errors as $name => $vars) {
+                foreach ($errors as $option => $vars) {
                     // Custom messages
-                    if (isset($this->messages[$field][$rule][$name])) {
-                        $message = $this->messages[$field][$rule][$name];
+                    if (isset($this->messages[$field][$rule][$option])) {
+                        $message = $this->messages[$field][$rule][$option];
                     } elseif (isset($this->messages[$field][$rule]) && is_string($this->messages[$field][$rule])) {
                         $message = $this->messages[$field][$rule];
                     } elseif (isset($this->messages[$field]) && is_string($this->messages[$field])) {
@@ -550,7 +561,8 @@ class Validator extends WidgetProvider
                         $message = $languages[$message];
                     }
                     
-                    $messages[$field][$rule][$name] = $this->ruleValidators[$field][$rule]->getErrorMessage($message, $vars[1]);
+                    $vars[1]['name'] = $name;
+                    $messages[$field][$rule][$option] = $this->ruleValidators[$field][$rule]->getErrorMessage($message, $vars[1]);
                 }
             }
         }
@@ -615,5 +627,25 @@ class Validator extends WidgetProvider
     public function getRuleValidator($field, $rule)
     {
         return isset($this->ruleValidators[$field][$rule]) ? $this->ruleValidators[$field][$rule] : null;
+    }
+    
+    /**
+     * Sets field names
+     * 
+     * @param array $names
+     */
+    public function setNames($names)
+    {
+        $this->names = (array)$names;
+    }
+    
+    /**
+     * Returns field names
+     * 
+     * @return array
+     */
+    public function getNames()
+    {
+        return $this->names;
     }
 }
