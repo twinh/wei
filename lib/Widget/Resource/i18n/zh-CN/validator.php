@@ -28,11 +28,21 @@ return array(
     
     // digit
     'This value must contain only digits (0-9)' => '该项只能由数字(0-9)组成', 
-    'dir'                       => '指定的目录不存在',
-    'doubleByte'                => '该项只能由双字节字符组成',
-    'email'                     => '该项必须是有效的邮箱地址',
-    'equal'                     => '指定的值不相等',
-    'exists'                    => '指定的路径不存在',
+    
+    // dir
+    'This value must be an existing directory' => '指定的目录不存在',
+    
+    // 'doubleByte'
+    'This value must contain only double byte characters' => '该项只能由双字节字符组成',
+    
+    // email
+    'This value must be valid email address' => '该项必须是有效的邮箱地址',
+    
+    // equal
+    'This value must be equals %value%' => '指定的值不相等',
+    
+    // exists
+    'This value must be an existing file or directory' => '指定的路径不存在',
     
     // file
     'This value must be a valid file' => '指定的文件不存在',
