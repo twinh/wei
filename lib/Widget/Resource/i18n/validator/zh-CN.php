@@ -20,6 +20,7 @@ return array(
     'equal'                     => '指定的值不相等',
     'exists'                    => '指定的路径不存在',
     'file'                      => '指定的文件不存在',
+    'file.notFound'             => '指定的文件不存在',
     'file.notReadable'          => '该文件不可读',
     'file.minSize'              => '该文件太小了({{ size }}字节),允许的最小文件大小为{{ minSize }}字节', 
     'file.maxSize'              => '该文件太大了({{ size }}字节),允许的最大文件大小为{{ maxSize }}字节',
