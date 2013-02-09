@@ -586,7 +586,7 @@ class Validator extends WidgetProvider
      */
     public function setLanguage($code)
     {
-        $file = __DIR__ . '/Resource/i18n/validator/' . $code . '.php';
+        $file = __DIR__ . '/Resource/i18n/' . $code . '/validator.php';
         if (!is_file($file)) {
             throw new \InvalidArgumentException(sprintf('Validator language code "%s" is not available', $code));
         } else {
