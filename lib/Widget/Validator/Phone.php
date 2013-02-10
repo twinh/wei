@@ -14,7 +14,7 @@ namespace Widget\Validator;
  */
 class Phone extends Regex
 {
-    protected $message = 'This value must be valid phone number';
+    protected $message = '%name% must be valid phone number';
     
     protected $pattern = '/^(\d{3,4}-?)?\d{7,9}$/';
 }

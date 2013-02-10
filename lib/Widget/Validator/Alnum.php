@@ -14,7 +14,7 @@ namespace Widget\Validator;
  */
 class Alnum extends Regex
 {
-    protected $message = 'This value must contain letters (a-z) and digits (0-9)';
+    protected $message = '%name% must contain letters (a-z) and digits (0-9)';
     
     protected $pattern = '/^([a-z0-9]+)$/i';
 }

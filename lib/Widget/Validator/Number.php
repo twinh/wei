@@ -14,7 +14,7 @@ namespace Widget\Validator;
  */
 class Number extends AbstractRule
 {
-    protected $message = 'This value must be valid number';
+    protected $message = '%name% must be valid number';
     
     public function __invoke($input)
     {

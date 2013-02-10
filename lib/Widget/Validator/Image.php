@@ -14,19 +14,19 @@ namespace Widget\Validator;
  */
 class Image extends AbstractRule
 {
-    protected $message = 'This value must be a valid image';
+    protected $message = '%name% must be a valid image';
     
-    protected $notFoundMessage = 'This image is not found or not readable';
+    protected $notFoundMessage = '%name% is not found or not readable';
     
-    protected $notDetectedMessage = 'This file is not a valid image or the size of the image could not be detected';
+    protected $notDetectedMessage = '%name% is not a valid image or the size of the image could not be detected';
 
-    protected $widthTooBigMessage = 'This image width is too big (%width%px), allowed maximum width is %maxWidth%px';
+    protected $widthTooBigMessage = '%name% width is too big (%width%px), allowed maximum width is %maxWidth%px';
     
-    protected $widthTooSmallMessage = 'This image width is too small (%width%px), expected minimum width is %minWidth%px';
+    protected $widthTooSmallMessage = '%name% width is too small (%width%px), expected minimum width is %minWidth%px';
     
-    protected $heightTooBigMessage = 'This image height is too big (%height%px), allowed maximum height is %maxHeight%px';
+    protected $heightTooBigMessage = '%name% height is too big (%height%px), allowed maximum height is %maxHeight%px';
     
-    protected $heightTooSmallMessage = 'This image height is too small (%height%px), expected minimum height is %minHeight%px';
+    protected $heightTooSmallMessage = '%name% height is too small (%height%px), expected minimum height is %minHeight%px';
     
     protected $maxWidth;
     

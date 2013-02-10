@@ -14,7 +14,7 @@ namespace Widget\Validator;
  */
 class Postcode extends Regex
 {
-    protected $message = 'This value must be six length of digit';
+    protected $message = '%name% must be six length of digit';
     
     protected $pattern = '/^[1-9][\d]{5}$/';
 }

@@ -14,7 +14,7 @@ namespace Widget\Validator;
  */
 class Regex extends AbstractRule
 {
-    protected $message = 'This value must match against pattern "%pattern%"';
+    protected $message = '%name% must match against pattern "%pattern%"';
     
     /**
      * The regex pattern

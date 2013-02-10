@@ -16,7 +16,7 @@ use Widget\UnexpectedTypeException;
  */
 class In extends AbstractRule
 {
-    protected $message = 'This value must be in %array%';
+    protected $message = '%name% must be in %array%';
     
     protected $strict = false;
     

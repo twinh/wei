@@ -16,25 +16,25 @@ use Widget\UnexpectedTypeException;
  */
 class File extends AbstractRule
 {
-    protected $message = 'This value must be a valid file';
+    protected $message = '%name% must be a valid file';
     
-    protected $notFoundMessage = 'This value must be an existing file';
+    protected $notFoundMessage = '%name% must be an existing file';
     
-    protected $notReadableMessage = 'This file is not readable';
+    protected $notReadableMessage = '%name% is not readable';
     
-    protected $maxSizeMessage = 'This file is too large(%size%), allowed maximum size is %maxSize%';
+    protected $maxSizeMessage = '%name% is too large(%size%), allowed maximum size is %maxSize%';
     
-    protected $minSizeMessage = 'This file is too small(%size%), expected minimum size is %minSize%';
+    protected $minSizeMessage = '%name% is too small(%size%), expected minimum size is %minSize%';
 
-    protected $extsMessage = 'This file extension(%ext%) is not allowed, allowed extension: %exts%';
+    protected $extsMessage = '%name% extension(%ext%) is not allowed, allowed extension: %exts%';
     
-    protected $excludeExtsMessage = 'This file extension(%ext%) is not allowed, not allowed extension: %excludeExts%';
+    protected $excludeExtsMessage = '%name% extension(%ext%) is not allowed, not allowed extension: %excludeExts%';
     
-    protected $mimeTypeNotDetectedMessage = 'This file mime type could not be detected';
+    protected $mimeTypeNotDetectedMessage = '%name% mime type could not be detected';
     
-    protected $mimeTypesMessage = 'This file mime type "%mimeType%" is not allowed';
+    protected $mimeTypesMessage = '%name% mime type "%mimeType%" is not allowed';
     
-    protected $excludeMimeTypesMessage = 'This file mime type "%mimeType%" is not allowed';
+    protected $excludeMimeTypesMessage = '%name% mime type "%mimeType%" is not allowed';
     
     /**
      * The max file size limit

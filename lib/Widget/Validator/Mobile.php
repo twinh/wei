@@ -14,7 +14,7 @@ namespace Widget\Validator;
  */
 class Mobile extends Regex
 {
-    protected $message = 'This value must be valid mobile number';
+    protected $message = '%name% must be valid mobile number';
     
     protected $pattern = '/^1[358][\d]{9}$/';
 }

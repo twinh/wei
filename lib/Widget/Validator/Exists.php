@@ -14,7 +14,7 @@ namespace Widget\Validator;
  */
 class Exists extends AbstractRule
 {
-    protected $message = 'This value must be an existing file or directory';
+    protected $message = '%name% must be an existing file or directory';
     
     /**
      * Returns the path or true

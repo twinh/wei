@@ -14,7 +14,7 @@ namespace Widget\Validator;
  */
 class QQ extends Regex
 {
-    protected $message = 'This value must be valid QQ number';
+    protected $message = '%name% must be valid QQ number';
     
     protected $pattern = '/^[1-9][\d]{4,9}$/';
 }

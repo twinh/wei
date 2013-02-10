@@ -16,7 +16,7 @@ class Max extends AbstractRule
 {
     protected $limit;
     
-    protected $message = 'This value must be less or equal than %limit%';
+    protected $message = '%name% must be less or equal than %limit%';
 
     public function __invoke($input, $limit = null)
     {

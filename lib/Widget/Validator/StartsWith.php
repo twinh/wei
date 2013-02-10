@@ -18,7 +18,7 @@ class StartsWith extends AbstractRule
     
     protected $case = false;
     
-    protected $message = 'This value must start with: %findMe%';
+    protected $message = '%name% must start with: %findMe%';
     
     public function __invoke($input, $findMe = null, $case = null)
     {

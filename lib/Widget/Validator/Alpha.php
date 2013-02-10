@@ -14,7 +14,7 @@ namespace Widget\Validator;
  */
 class Alpha extends Regex
 {
-    protected $message = 'This value must contain only letters (a-z)';
+    protected $message = '%name% must contain only letters (a-z)';
     
     protected $pattern = '/^([a-z]+)$/i';
 }

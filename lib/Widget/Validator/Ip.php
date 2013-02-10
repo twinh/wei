@@ -15,7 +15,7 @@ namespace Widget\Validator;
  */
 class Ip extends AbstractRule
 {
-    protected $message = 'This value must be valid IP';
+    protected $message = '%name% must be valid IP';
     
     /**
      * Allows the IP address to be ONLY in IPv4 format

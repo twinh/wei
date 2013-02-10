@@ -20,7 +20,7 @@ class Length extends AbstractRule
     
     protected $max;
     
-    protected $message = 'This value must have a length between %min% and %max%';
+    protected $message = '%name% must have a length between %min% and %max%';
 
     public function __invoke($input, $min = null, $max = null)
     {
