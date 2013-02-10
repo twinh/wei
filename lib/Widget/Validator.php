@@ -147,6 +147,11 @@ class Validator extends WidgetProvider implements ValidatorInterface
      */
     protected $ruleValidators = array();
     
+    /**
+     * The names for messaages
+     * 
+     * @var array
+     */
     protected $names = array();
 
     /**
