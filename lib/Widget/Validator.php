@@ -8,6 +8,8 @@
 
 namespace Widget;
 
+use Widget\Validator\RuleInterface;
+
 /**
  * Validator
  *
@@ -16,7 +18,7 @@ namespace Widget;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property    \Widget\Is $is The validator manager
  */
-class Validator extends WidgetProvider
+class Validator extends WidgetProvider implements RuleInterface
 {
     /**
      * The validation rules
@@ -184,14 +186,6 @@ class Validator extends WidgetProvider
 
             // Start validation
             foreach ($rules as $rule => $params) {
-                // Process simple array rule, eg 'username' => ['required', 'email']
-                if (is_int($rule)) {
-                    $rule = $params;
-                    if (is_string($params)) {
-                        $params = true;
-                    }
-                }
-                
                 // The current rule validation result
                 $result = $this->is->validateOne($rule, $data, $params);
 
@@ -199,6 +193,7 @@ class Validator extends WidgetProvider
                     $rule = get_class($rule);
                 }
                 
+                // FIXME: When call validateOne in the rule validator, like oneOf, the last rule validator is not correct
                 // Record the rule validators
                 $this->ruleValidators[$field][$rule] = $this->is->getLastRuleValidator();
                 
@@ -403,6 +398,14 @@ class Validator extends WidgetProvider
     }
     
     /**
+     * {@inheritdoc}
+     */
+    public function isValid($input)
+    {
+        return $this->result;
+    }
+    
+    /**
      * Adds rule for specified field
      * 
      * @param string $field The name of field
@@ -509,6 +512,7 @@ class Validator extends WidgetProvider
      * Set custome messages
      * 
      * @param array $messages
+     * @todo confict with interface
      */
     public function setMessages(array $messages)
     {

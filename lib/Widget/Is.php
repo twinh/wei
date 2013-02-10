@@ -41,6 +41,14 @@ class Is extends WidgetProvider
      */
     public function validateOne($rule, $data, $options = array())
     {
+        // Process simple array rule, eg 'username' => ['required', 'email']
+        if (is_int($rule)) {
+            $rule = $options;
+            if (is_string($options)) {
+                $options = true;
+            }
+        }
+        
         if ($rule instanceof \Widget\Validator\AbstractRule) {
             $this->ruleValidator = $rule;
             return $rule($data);
