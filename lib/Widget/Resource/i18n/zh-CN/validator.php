@@ -30,7 +30,7 @@ return array(
     '%name% must contain only digits (0-9)' => '%name%只能由数字(0-9)组成', 
     
     // dir
-    '%name% must be an existing directory' => '指定的目录不存在',
+    '%name% must be an existing directory' => '%name%不存在',
     
     // 'doubleByte'
     '%name% must contain only double byte characters' => '%name%只能由双字节字符组成',
@@ -38,15 +38,15 @@ return array(
     // email
     '%name% must be valid email address' => '%name%必须是有效的邮箱地址',
     
-    // equal
-    '%name% must be equals %value%' => '指定的值不相等',
+    // equals
+    '%name% must be equals %value%' => '%name%必须等于%value%',
     
     // exists
-    '%name% must be an existing file or directory' => '指定的路径不存在',
+    '%name% must be an existing file or directory' => '%name%必须是存在的文件或目录',
     
     // file
     '%name% must be a valid file' => '%name%必须是有效的文件',
-    '%name% must be an existing file' => '%name%指定的文件不存在',
+    '%name% must be an existing file' => '%name%不存在',
     '%name% is not readable' => '%name%不可读',
     '%name% is too large(%size%), allowed maximum size is %maxSize%' => '%name%太大了(%size%),允许的最大文件大小为%maxSize%',
     '%name% is too small(%size%), expected minimum size is %minSize%' => '%name%太小了(%size%),允许的最小文件大小为%minSize%',
@@ -83,7 +83,7 @@ return array(
     '%name% must have a length greater than %limit%' => '%name%的长度必须大于等于%limit%',
     
     // mobile
-    '%name% must be valid mobile number' => '手机号码必须是13位长度的数字,以13,15,18开头',
+    '%name% must be valid mobile number' => '%name%必须是13位长度的数字,以13,15或18开头',
     
     // null
     '%name% must be null' => '%name%必须是null值',
@@ -92,7 +92,7 @@ return array(
     '%name% must be valid number' => '%name%必须是有效的数字',
     
     // phone
-    '%name% must be valid phone number' => '电话号码格式不正确',
+    '%name% must be valid phone number' => '%name%必须是有效的电话号码',
     
     // postcode
     '%name% must be six length of digit' => '%name%必须是6位长度的数字',
