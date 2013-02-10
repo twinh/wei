@@ -166,7 +166,7 @@ class Validator extends WidgetProvider
         $this->result = true;
 
         foreach ($this->rules as $field => $rules) {
-            $data = isset($this->data[$field]) ? $this->data[$field] : null;
+            $data = $this->getFieldData($field);
             
             // Process simple rule, eg 'username' => 'required'
             if (!is_array($rules)) {
@@ -445,13 +445,13 @@ class Validator extends WidgetProvider
     /**
      * Sets data for validation
      * 
-     * @param array|Traversable $data
+     * @param array|object $data
      * @return \Widget\Validator
      */
     public function setData($data)
     {
-        if (!is_array($data) && !$data instanceof \Traversable) {
-            throw new UnexpectedTypeException($data, 'array or Traversable');
+        if (!is_array($data) && !is_object($data)) {
+            throw new UnexpectedTypeException($data, 'array or object');
         }
 
         $this->data = $data;
@@ -477,7 +477,16 @@ class Validator extends WidgetProvider
      */
     public function getFieldData($field)
     {
-        return isset($this->data[$field]) ? $this->data[$field] : null;
+        // $this->data could only be array or object, which has been checked by $this->setData
+        if (is_array($this->data) && array_key_exists($field, $this->data)) {
+            return $this->data[$field];
+        } elseif (isset($this->data->$field)) {
+            return $this->data->$field;
+        } elseif (method_exists($this->data, 'get' . $field)) {
+            return $this->data->{'get' . $field}();
+        } else {
+            return null;
+        }
     }
     
     /**
@@ -488,7 +497,12 @@ class Validator extends WidgetProvider
      */
     public function setFieldData($field, $data)
     {
-        $this->data[$field] = $data;
+        if (is_array($this->data)) {
+            $this->data[$field] = $data;
+        } else {
+            $this->data->$field = $data;
+        }
+        return $this;
     }
     
     /**

@@ -522,4 +522,55 @@ class ValidatorTest extends TestCase
         $this->assertTrue($this->is('after', date('Y-m-d'), date('Y-m-d', time() - 864000)));
         $this->assertFalse($this->is('after', date('Y-m-d'), date('Y-m-d', time() + 864000)));
     }
+    
+    public function testStdClassAsData()
+    {
+        $data = new \stdClass();
+        $data->email = 'test@example.com';
+        
+        $validator = $this->validate(array(
+            'data' => $data,
+            'rules' => array(
+                'email' => 'email'
+            )
+        ));
+        
+        $this->assertTrue($validator->valid());
+    }
+    
+    public function testGetterAsData()
+    {
+        $user = new \WidgetTest\Fixtures\UserEntity('test@example.com');
+        
+        $validator = $this->validate(array(
+            'data' => $user,
+            'rules' => array(
+                'email' => 'email'
+            )
+        ));
+        
+        $this->assertTrue($validator->valid());
+    }
+    
+    // noop
+    public function testGetterSetter()
+    {
+        $data = new \stdClass();
+        $data->email = 'test@example.com';
+        
+        $validator = $this->is->createValidator();
+        
+        $validator->setData($data);
+        $validator->setFieldData('age', 18);
+    }
+    
+    /**
+     * @expectedException \Widget\UnexpectedTypeException
+     */
+    public function testUnexpectedTypeException()
+    {
+        $validator = $this->is->createValidator();
+        
+        $validator->setData('string');
+    }
 }
