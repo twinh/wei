@@ -8,8 +8,6 @@
 
 namespace Widget\Validator;
 
-use Widget\UnexpectedTypeException;
-
 /**
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
@@ -17,20 +15,29 @@ use Widget\UnexpectedTypeException;
  */
 class All extends AbstractRule
 {
+    protected $typeMessage = '%name% must be of type array';
+    
+    protected $elementInvalidMessage = 'The %index% element of %name% is not valid';
+    
     public function __invoke($input, array $rules)
     {
         if (!is_array($input) && !$input instanceof \Traversable) {
-            throw new UnexpectedTypeException($input, 'array or \Traversable');
+            $this->addError('type');
+            return false;
         }
-        
+
+        $index = 1;
         foreach ($input as $element) {
             foreach ($rules as $rule => $options) {
                 if (!$this->is->validateOne($rule, $element, $options)) {
-                    return false;
+                    $this->addError('elementInvalid', array(
+                        'index' => $index
+                    ));
                 }
             }
+            $index++;
         }
         
-        return true;
+        return !$this->errors;
     }
 }

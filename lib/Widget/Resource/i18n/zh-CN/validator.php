@@ -11,6 +11,9 @@ return array(
     'This value' => '该项',
     '%name% is not valid' => '%name%不合法',
     
+    // all
+    '%name% must be of type array' => '%name%必须是数组',
+    
     // alnum
     '%name% must contain letters (a-z) and digits (0-9)' => '%name%只能由字母(a-z)和数字(0-9)组成',
     

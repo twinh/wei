@@ -16,15 +16,7 @@ class AllTest extends TestCase
             )
         )));
     }
-    
-    /**
-     * @expectedException Widget\UnexpectedTypeException
-     */
-    public function testInvalidArgumentException()
-    {
-        $this->isAll('string', array());
-    }
-    
+
     public function testNotAll()
     {
         $this->assertFalse($this->isAll(array(
