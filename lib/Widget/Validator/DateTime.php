@@ -16,20 +16,23 @@ use DateTime as Dt;
  */
 class DateTime extends AbstractValidator
 {
+    protected $formatMessage = '%name% is not a valid datetime, the format should be "%format%", eg: %example%';
+    
     protected $format = 'Y-m-d H:i:s';
     
-    protected $example;
-    
-    protected $message = '%name% is not a valid datetime, the format should be "%format%", eg: %example%';
-
     public function __invoke($input, $format = null)
     {
         $format && $this->format = $format;
         
         $date = Dt::createFromFormat($this->format, $input);
         
-        $this->example = date($this->format);
-
-        return $date ? $input === $date->format($this->format) : false;
+        if (!$date || $input != $date->format($this->format)) {
+            $this->addError('format', array(
+                'format' => $this->format,
+                'example' => date($this->format)
+            ));
+        }
+        
+        return !$this->errors;
     }
 }
