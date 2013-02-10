@@ -16,12 +16,20 @@ class MinLength extends AbstractValidator
 {
     protected $limit;
     
-    protected $message = '%name% must have a length greater than %limit%';
+    protected $limitMessage = '%name% must have a length greater than %limit%';
+    
+    protected $limitArrayMessage = '%name% must contain at least %limit% item(s)';
 
     public function __invoke($input, $limit = null)
     {
         $limit && $this->limit = $limit;
         
-        return $this->limit <= Length::getLength($input);
+        if ($this->limit > Length::getLength($input)) {
+            $this->addError(is_scalar($input) ? 'limit' : 'limitArray', array(
+                'limit' => $limit
+            ));
+        }
+        
+        return !$this->errors;
     }
 }
