@@ -14,7 +14,7 @@ use DateTime as Dt;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class DateTime extends AbstractRule
+class DateTime extends AbstractValidator
 {
     protected $format = 'Y-m-d H:i:s';
     

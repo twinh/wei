@@ -12,7 +12,7 @@ namespace Widget\Validator;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Equals extends AbstractRule
+class Equals extends AbstractValidator
 {
     protected $message = '%name% must be equals %value%';
     

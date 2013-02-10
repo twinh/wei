@@ -12,7 +12,7 @@ namespace Widget\Validator;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Callback extends AbstractRule
+class Callback extends AbstractValidator
 {
     protected $fn;
     

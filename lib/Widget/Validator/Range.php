@@ -12,7 +12,7 @@ namespace Widget\Validator;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Range extends AbstractRule
+class Range extends AbstractValidator
 {
     protected $message = '%name% must between %min% and %max%';
     

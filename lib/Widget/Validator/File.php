@@ -14,7 +14,7 @@ use Widget\UnexpectedTypeException;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class File extends AbstractRule
+class File extends AbstractValidator
 {
     protected $message = '%name% must be a valid file';
     

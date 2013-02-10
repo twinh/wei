@@ -12,7 +12,7 @@ namespace Widget\Validator;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class EmptyValue extends AbstractRule
+class EmptyValue extends AbstractValidator
 {
     protected $message = '%name% must be null';
     

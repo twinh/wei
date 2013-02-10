@@ -12,7 +12,7 @@ namespace Widget\Validator;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Regex extends AbstractRule
+class Regex extends AbstractValidator
 {
     protected $message = '%name% must match against pattern "%pattern%"';
     

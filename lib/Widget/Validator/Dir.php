@@ -12,7 +12,7 @@ namespace Widget\Validator;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Dir extends AbstractRule
+class Dir extends AbstractValidator
 {
     protected $message = '%name% must be an existing directory';
     

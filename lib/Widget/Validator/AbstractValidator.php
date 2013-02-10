@@ -10,7 +10,7 @@ namespace Widget\Validator;
 
 use Widget\WidgetProvider;
 
-abstract class AbstractRule extends WidgetProvider implements RuleInterface
+abstract class AbstractValidator extends WidgetProvider implements ValidatorInterface
 {
     /**
      * The invalid message
@@ -94,7 +94,7 @@ abstract class AbstractRule extends WidgetProvider implements RuleInterface
      * Sets message name
      * 
      * @param string $name
-     * @return \Widget\Validator\AbstractRule
+     * @return \Widget\Validator\AbstractValidator
      */
     public function setName($name)
     {

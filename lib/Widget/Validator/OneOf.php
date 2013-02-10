@@ -13,7 +13,7 @@ namespace Widget\Validator;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\Is $is The validator manager
  */
-class OneOf extends AbstractRule
+class OneOf extends AbstractValidator
 {
     protected $rules = array();
     

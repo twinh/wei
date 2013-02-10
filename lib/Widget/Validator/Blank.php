@@ -12,7 +12,7 @@ namespace Widget\Validator;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Blank extends AbstractRule
+class Blank extends AbstractValidator
 {
     protected $message = '%name% must be blank';
     

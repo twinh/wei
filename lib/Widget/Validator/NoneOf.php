@@ -13,7 +13,7 @@ namespace Widget\Validator;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\Is $is The validator manager
  */
-class NoneOf extends AbstractRule
+class NoneOf extends AbstractValidator
 {
     public function __invoke($input, array $rules)
     {

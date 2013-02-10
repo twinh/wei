@@ -14,7 +14,7 @@ use Widget\UnexpectedTypeException;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Length extends AbstractRule
+class Length extends AbstractValidator
 {
     protected $min;
     

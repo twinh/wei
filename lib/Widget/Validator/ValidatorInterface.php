@@ -8,7 +8,7 @@
 
 namespace Widget\Validator;
 
-interface RuleInterface
+interface ValidatorInterface
 {
     /**
      * Returns the invalid messages

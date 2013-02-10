@@ -49,7 +49,7 @@ class Is extends WidgetProvider
             }
         }
         
-        if ($rule instanceof \Widget\Validator\AbstractRule) {
+        if ($rule instanceof \Widget\Validator\AbstractValidator) {
             $this->ruleValidator = $rule;
             return $rule($data);
         }

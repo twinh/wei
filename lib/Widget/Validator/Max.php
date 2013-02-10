@@ -12,7 +12,7 @@ namespace Widget\Validator;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Max extends AbstractRule
+class Max extends AbstractValidator
 {
     protected $limit;
     

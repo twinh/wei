@@ -13,7 +13,7 @@ namespace Widget\Validator;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @link http://php.net/manual/en/filter.filters.flags.php
  */
-class Ip extends AbstractRule
+class Ip extends AbstractValidator
 {
     protected $message = '%name% must be valid IP';
     

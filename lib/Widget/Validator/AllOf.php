@@ -13,7 +13,7 @@ namespace Widget\Validator;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\Is $is The validator manager
  */
-class AllOf extends AbstractRule
+class AllOf extends AbstractValidator
 {
     public function __invoke($input, array $rules)
     {

@@ -12,7 +12,7 @@ namespace Widget\Validator;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class EndsWith extends AbstractRule
+class EndsWith extends AbstractValidator
 {
     protected $findMe;
     

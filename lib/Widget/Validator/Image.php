@@ -12,7 +12,7 @@ namespace Widget\Validator;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Image extends AbstractRule
+class Image extends AbstractValidator
 {
     protected $message = '%name% must be a valid image';
     

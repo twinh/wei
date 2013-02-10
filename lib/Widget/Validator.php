@@ -8,7 +8,7 @@
 
 namespace Widget;
 
-use Widget\Validator\RuleInterface;
+use Widget\Validator\ValidatorInterface;
 
 /**
  * Validator
@@ -18,7 +18,7 @@ use Widget\Validator\RuleInterface;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property    \Widget\Is $is The validator manager
  */
-class Validator extends WidgetProvider implements RuleInterface
+class Validator extends WidgetProvider implements ValidatorInterface
 {
     /**
      * The validation rules

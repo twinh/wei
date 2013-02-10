@@ -14,7 +14,7 @@ use Widget\UnexpectedTypeException;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class In extends AbstractRule
+class In extends AbstractValidator
 {
     protected $message = '%name% must be in %array%';
     

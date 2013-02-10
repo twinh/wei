@@ -14,7 +14,7 @@ use Widget\Exception;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Type extends AbstractRule
+class Type extends AbstractValidator
 {
     protected $typeMessage = '%name% must be of type %type%';
     

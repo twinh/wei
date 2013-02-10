@@ -12,7 +12,7 @@ namespace Widget\Validator;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Number extends AbstractRule
+class Number extends AbstractValidator
 {
     protected $message = '%name% must be valid number';
     
