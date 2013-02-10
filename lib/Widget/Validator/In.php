@@ -16,7 +16,7 @@ use Widget\UnexpectedTypeException;
  */
 class In extends AbstractValidator
 {
-    protected $message = '%name% must be in %array%';
+    protected $notInMessage = '%name% must be in %array%';
     
     protected $strict = false;
     
@@ -34,9 +34,14 @@ class In extends AbstractValidator
             }
         }
         
-        
         is_bool($strict) && $this->strict = $strict;
         
-        return in_array($input, $this->array, $this->strict);
+        if (!in_array($input, $this->array, $this->strict)) {
+            $this->addError('notIn', array(
+                'array' => implode(',', $this->array)
+            ));
+        }
+        
+        return !$this->errors;
     }
 }
