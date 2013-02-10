@@ -10,7 +10,7 @@ namespace Widget\Validator;
 
 use Widget\WidgetProvider;
 
-abstract class AbstractRule extends WidgetProvider
+abstract class AbstractRule extends WidgetProvider implements RuleInterface
 {
     /**
      * The invalid message
@@ -32,9 +32,36 @@ abstract class AbstractRule extends WidgetProvider
      * @var array
      */
     protected $errors = array();
-
+    
     /**
      * {@inheritdoc}
+     */
+    public function isValid($input)
+    {
+        return $this->__invoke($input);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getMessages()
+    {
+        $messages = array();
+        foreach ($this->errors as $name => $vars) {
+            if (!$vars) {
+                $messages[$name] = $this->{$name . 'Message'};
+            } else {
+                $messages[$name] = $this->getErrorMessage($name, $this->{$name . 'Message'});
+            }
+            
+        }
+        return $messages;
+    }
+
+    /**
+     * Returns the invalid message
+     * 
+     * @todo remove
      */
     public function getMessage()
     {
@@ -42,7 +69,9 @@ abstract class AbstractRule extends WidgetProvider
     }
 
     /**
-     * {@inheritdoc}
+     * Sets the invalid message
+     * 
+     * @todo remove
      */
     public function setMessage($message)
     {
@@ -72,25 +101,6 @@ abstract class AbstractRule extends WidgetProvider
         $this->name = $name;
         
         return $this;
-    }
-    
-    /**
-     * Returns error messages
-     * 
-     * @return array
-     */
-    public function getErrorMessages()
-    {
-        $messages = array();
-        foreach ($this->errors as $name => $vars) {
-            if (!$vars) {
-                $messages[$name] = $this->{$name . 'Message'};
-            } else {
-                $messages[$name] = $this->getErrorMessage($name, $this->{$name . 'Message'});
-            }
-            
-        }
-        return $messages;
     }
     
     /**

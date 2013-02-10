@@ -11,17 +11,14 @@ namespace Widget\Validator;
 interface RuleInterface
 {
     /**
-     * Returns the invalid message
+     * Returns the invalid messages
      * 
      * @return string
      */
-    public function getMessage();
-
+    public function getMessages();
+    
     /**
-     * Set the invalid message
-     * 
-     * @param type $message
-     * @return \Widget\Validator\AbstractRule
+     * Returns whether the $input value is valid
      */
-    public function setMessage($message);
+    public function isValid($input);
 }
