@@ -13,11 +13,11 @@ namespace Widget\Validator;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\Is $is The validator manager
  */
-class All extends AbstractValidator
+class All extends AbstractGroupValidator
 {
     protected $typeMessage = '%name% must be of type array';
     
-    protected $elementInvalidMessage = 'The %index% element of %name% is not valid';
+    protected $itemName = '%name%\'s %index% item';
     
     public function __invoke($input, array $rules)
     {
@@ -27,12 +27,15 @@ class All extends AbstractValidator
         }
 
         $index = 1;
-        foreach ($input as $element) {
+        foreach ($input as $item) {
             foreach ($rules as $rule => $options) {
-                if (!$this->is->validateOne($rule, $element, $options)) {
-                    $this->addError('elementInvalid', array(
-                        'index' => $index
-                    ));
+                if (!$this->is->validateOne($rule, $item, $options, $validator)) {
+                    foreach ($validator->getErrors() as $name => $error) {
+                        $this->addError($rule . '.' . $name . '.' . $index, array(
+                            'name' => $this->itemName,
+                            'index' => $index
+                        ) + $error[1], $error[0]);
+                    }
                 }
             }
             $index++;
