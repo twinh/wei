@@ -14,7 +14,7 @@ namespace Widget\Validator;
  */
 class Chinese extends Regex
 {
-    protected $message = '%name% must contain only Chinese characters';
+    protected $patternMessage = '%name% must contain only Chinese characters';
     
     protected $pattern = '/^[\x{4e00}-\x{9fa5}]+$/u';
 }

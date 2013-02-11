@@ -14,7 +14,7 @@ namespace Widget\Validator;
  */
 class Digit extends Regex
 {
-    protected $message = '%name% must contain only digits (0-9)';
+    protected $patternMessage = '%name% must contain only digits (0-9)';
     
     protected $pattern = '/^([0-9]+)$/';
 }

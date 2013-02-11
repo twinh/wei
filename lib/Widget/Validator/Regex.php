@@ -14,7 +14,7 @@ namespace Widget\Validator;
  */
 class Regex extends AbstractValidator
 {
-    protected $message = '%name% must match against pattern "%pattern%"';
+    protected $patternMessage = '%name% must match against pattern "%pattern%"';
     
     /**
      * The regex pattern
@@ -27,6 +27,12 @@ class Regex extends AbstractValidator
     {
         is_string($pattern) && $this->pattern = $pattern;
 
-        return (bool) preg_match($this->pattern, $input);
+        if (!preg_match($this->pattern, $input)) {
+            $this->addError('pattern', array(
+                'pattern' => $this->pattern
+            ));
+        }
+        
+        return !$this->errors;
     }
 }

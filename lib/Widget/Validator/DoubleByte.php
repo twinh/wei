@@ -14,7 +14,7 @@ namespace Widget\Validator;
  */
 class DoubleByte extends Regex
 {
-    protected $message = '%name% must contain only double byte characters';
+    protected $patternMessage = '%name% must contain only double byte characters';
     
     protected $pattern = '/^[^\x00-xff]+$/';
 }
