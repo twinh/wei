@@ -8,7 +8,7 @@
 
 namespace Widget;
 
-use Widget\Validator\ValidatorInterface;
+use Widget\Validator\AbstractValidator;
 
 /**
  * Validator
@@ -18,7 +18,7 @@ use Widget\Validator\ValidatorInterface;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property    \Widget\Is $is The validator manager
  */
-class Validator extends WidgetProvider implements ValidatorInterface
+class Validator extends AbstractValidator
 {
     /**
      * The validation rules
@@ -192,15 +192,15 @@ class Validator extends WidgetProvider implements ValidatorInterface
             // Start validation
             foreach ($rules as $rule => $params) {
                 // The current rule validation result
-                $result = $this->is->validateOne($rule, $data, $params);
+                $validator = null;
+                $result = $this->is->validateOne($rule, $data, $params, $validator);
 
                 if (is_object($rule)) {
                     $rule = get_class($rule);
                 }
                 
-                // FIXME: When call validateOne in the rule validator, like oneOf, the last rule validator is not correct
                 // Record the rule validators
-                $this->ruleValidators[$field][$rule] = $this->is->getLastRuleValidator();
+                $this->ruleValidators[$field][$rule] = $validator;
                 
                 // If any rule is invlid, the result would always be false in the whole validation flow
                 if (false === $result) {
@@ -363,9 +363,11 @@ class Validator extends WidgetProvider implements ValidatorInterface
      * @param string $field
      * @return array
      */
-    public function getInvalidRules($field)
+    public function getInvalidRules($field = null)
     {
-        return isset($this->invalidRules[$field]) ? $this->invalidRules[$field] : array();
+        return $field ? 
+            isset($this->invalidRules[$field]) ? $this->invalidRules[$field] : array()
+            : $this->invalidRules;
     }
 
     /**
@@ -546,26 +548,25 @@ class Validator extends WidgetProvider implements ValidatorInterface
 
         foreach ($this->invalidRules as $field => $rules) {
             foreach ($rules as $rule) {
-                $errors = $this->ruleValidators[$field][$rule]->getErrors();
-                if (empty($errors)) {
-                    // FIXME
-                    $errors = array(
-                        $rule => array(
-                            null, array()
-                        ),
-                    );
-                }
-                
+                /* @var $validator \Widget\Validator\AbstractValidator */
+                $validator = $this->ruleValidators[$field][$rule];
+
+                /**
+                 * Prepare field name
+                 */
                 if (isset($this->names[$field])) {
                     $name = $this->names[$field];
                 } else {
-                    $name = $this->ruleValidators[$field][$rule]->getName();
+                    $name = $validator->getName();
                 }
                 if ($languages && isset($languages[$name])) {
                     $name = $languages[$name];
                 }
 
-                foreach ($errors as $option => $vars) {
+                foreach ($validator->getErrors() as $option => $params) {
+                    /**
+                     * Prepare error message
+                     */
                     // Custom messages
                     if (isset($this->messages[$field][$rule][$option])) {
                         $message = $this->messages[$field][$rule][$option];
@@ -574,25 +575,40 @@ class Validator extends WidgetProvider implements ValidatorInterface
                     } elseif (isset($this->messages[$field]) && is_string($this->messages[$field])) {
                         $message = $this->messages[$field];
                     // Default messages
-                    } elseif (isset($vars[0])) {
-                        $message = $vars[0];
                     } else {
-                        $message = $this->ruleValidators[$field][$rule]->getMessage();
+                        $message = $params[0];
                     }
 
                     if ($languages && isset($languages[$message])) {
                         $message = $languages[$message];
                     }
                     
-                    $vars[1]['name'] = $name;
-                    $messages[$field][$rule][$option] = $this->ruleValidators[$field][$rule]->getErrorMessage($message, $vars[1]);
+                    $vars = $params[1];
+
+                    // Translates error message name for "All" validator
+                    if ($validator instanceof \Widget\Validator\All) {
+                        $allName = $vars['name'];
+                        if ($languages && isset($languages[$allName])) {
+                            $allName = $languages[$allName];
+                        }
+                        $vars['name'] = $this->trans($allName, array('name' => $name) + $vars);
+                    } else {
+                        $vars['name'] = $name;
+                    }
+                    
+                    $messages[$field][$rule][$option] = $this->trans($message, $vars);
+                }
+                
+                // Combines message for group validator
+                if ($validator instanceof \Widget\Validator\AbstractGroupValidator) {
+                    $messages[$field][$rule] = $validator->combine($messages[$field][$rule]);
                 }
             }
         }
 
         return $messages;
     }
-    
+     
     /**
      * Returns summary invalid messages
      * 
