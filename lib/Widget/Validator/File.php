@@ -16,7 +16,7 @@ use Widget\UnexpectedTypeException;
  */
 class File extends AbstractValidator
 {
-    protected $message = '%name% must be a valid file';
+    protected $notStringMessage = '%name% must be a string';
     
     protected $notFoundMessage = '%name% must be an existing file';
     
@@ -104,6 +104,7 @@ class File extends AbstractValidator
         $options && $this->option($options);
 
         if (!is_string($file) || empty($file)) {
+            $this->addError('notString');
             return false;
         }
         
