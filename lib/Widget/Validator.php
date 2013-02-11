@@ -535,7 +535,7 @@ class Validator extends AbstractValidator
     {
         return $this->messages;
     }
- 
+    
     /**
      * Returns detail invalid messages
      * 
@@ -568,9 +568,9 @@ class Validator extends AbstractValidator
                      * Prepare error message
                      */
                     // Custom messages
-                    if (isset($this->messages[$field][$rule][$option])) {
+                    if (isset($this->messages[$field][$rule]) && is_array($this->messages[$field][$rule]) && array_key_exists($option, $this->messages[$field][$rule])) {
                         $message = $this->messages[$field][$rule][$option];
-                    } elseif (isset($this->messages[$field][$rule]) && is_string($this->messages[$field][$rule])) {
+                    } elseif (isset($this->messages[$field]) && is_array($this->messages[$field]) && array_key_exists($rule, $this->messages[$field])) {
                         $message = $this->messages[$field][$rule];
                     } elseif (isset($this->messages[$field]) && is_string($this->messages[$field])) {
                         $message = $this->messages[$field];
