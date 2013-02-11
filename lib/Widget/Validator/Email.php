@@ -14,10 +14,15 @@ namespace Widget\Validator;
  */
 class Email extends AbstractValidator
 {
-    protected $message = '%name% must be valid email address';
+    protected $formatMessage = '%name% must be valid email address';
     
     public function __invoke($input)
     {
-        return (bool) filter_var($input, FILTER_VALIDATE_EMAIL);
+        if (!filter_var($input, FILTER_VALIDATE_EMAIL)) {
+            $this->addError('format');
+            return false;
+        }
+        
+        return true;
     }
 }
