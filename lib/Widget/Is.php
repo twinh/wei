@@ -28,20 +28,14 @@ class Is extends WidgetProvider
     );
     
     /**
-     * @var \Widget\Validator\AbstractRule
-     * @internal
-     */
-    private $ruleValidator;
-    
-    /**
      * @param string $rule
      * @param array|null $data
      * @paran mixed $options
      * @internal Do NOT use this method for it may be change in the future
      */
-    public function validateOne($rule, $data, $options = array())
+    public function validateOne($rule, $data, $options = array(), &$validator = null)
     {
-        // Process simple array rule, eg 'username' => ['required', 'email']
+        // Process simple array rules, eg 'username' => ['required', 'email']
         if (is_int($rule)) {
             $rule = $options;
             if (is_string($options)) {
@@ -50,7 +44,7 @@ class Is extends WidgetProvider
         }
         
         if ($rule instanceof \Widget\Validator\AbstractValidator) {
-            $this->ruleValidator = $rule;
+            $validator = $this->ruleValidator = $rule;
             return $rule($data);
         }
          
@@ -63,10 +57,10 @@ class Is extends WidgetProvider
         }
 
         if (!$class = $this->hasRule($rule)) {
-            throw new Exception(sprintf('Validator rule "%s" not found', $rule));
+            throw new Exception(sprintf('Validator "%s" not found', $rule));
         }
 
-        $rv = $this->ruleValidator = new $class(array(
+        $validator = new $class(array(
             'widget' => $this->widget
         ));
         
@@ -76,10 +70,10 @@ class Is extends WidgetProvider
         
         if (is_int(key($options))) {
             array_unshift($options, $data);
-            $result = call_user_func_array($rv, $options);
+            $result = call_user_func_array($validator, $options);
         } else {
-            $rv->option($options);
-            $result = $rv($data);
+            $validator->option($options);
+            $result = $validator($data);
         }
 
         return $result xor $reverse;
@@ -148,13 +142,5 @@ class Is extends WidgetProvider
             'widget'    => $this->widget,
             'is'        => $this
         ));
-    }
-    
-    /**
-     * @internal
-     */
-    public function getLastRuleValidator()
-    {
-        return $this->ruleValidator;
     }
 }
