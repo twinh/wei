@@ -13,7 +13,11 @@ return array(
     
     // all
     '%name% must be of type array' => '%name%必须是数组',
+    '%name%\'s %index% item' => '%name%的第%index%项',
     
+    // allOf
+    '%name% must be passed by all of these rules' => '%name%必须满足以下任何一条规则',
+
     // alnum
     '%name% must contain letters (a-z) and digits (0-9)' => '%name%只能由字母(a-z)和数字(0-9)组成',
     
@@ -48,12 +52,12 @@ return array(
     '%name% must be an existing file or directory' => '%name%必须是存在的文件或目录',
     
     // file
-    '%name% must be a valid file' => '%name%必须是有效的文件',
+    '%name% must be a string' => '%name%必须是字符串',
     '%name% must be an existing file' => '%name%不存在',
     '%name% is not readable' => '%name%不可读',
     '%name% is too large(%size%), allowed maximum size is %maxSize%' => '%name%太大了(%size%),允许的最大文件大小为%maxSize%',
     '%name% is too small(%size%), expected minimum size is %minSize%' => '%name%太小了(%size%),允许的最小文件大小为%minSize%',
-    '%name% extension(%ext%) is not allowed, allowed extension: %exts%' => '%name%的扩展名(%ext%)不合法,允许的扩展名为:%exts%',
+    '%name% extension(%ext%) is not allowed, allowed extension: %exts%' => '%name%的扩展名(%ext%)不合法,只允许扩展名为:%exts%',
     '%name% extension(%ext%) is not allowed, not allowed extension: %excludeExts%' => '%name%的扩展名(%ext%)不合法,不允许扩展名为:%excludeExts%',
     '%name% mime type could not be detected' => '无法检测%name%的媒体类型',
     '%name% mime type "%mimeType%" is not allowed' => '%name%的媒体类型不合法',
@@ -84,6 +88,7 @@ return array(
     
     // minLength
     '%name% must have a length greater than %limit%' => '%name%的长度必须大于等于%limit%',
+    '%name% must contain at least %limit% item(s)' => '%name%至少需要包括%limit%项',
     
     // mobile
     '%name% must be valid mobile number' => '%name%必须是13位长度的数字,以13,15或18开头',
@@ -94,6 +99,9 @@ return array(
     // number
     '%name% must be valid number' => '%name%必须是有效的数字',
     
+    // oneOf
+    '%name% must be passed by at least one rule' => '%name%至少需要满足以下任何一条规则',
+
     // phone
     '%name% must be valid phone number' => '%name%必须是有效的电话号码',
     
@@ -111,6 +119,9 @@ return array(
     
     // require
     '%name% is required' => '%name%不能为空',
+    
+    // sameOf
+    '%name% must be passed by at least %left% of %count% rules' => '%name%至少需要满足以下%count%条规则中的%left%条',
     
     // time
     '%name% is not a valid time, the format should be "%format%", eg: %example%' => '%name%不是合法的时间,格式应该是%format%,例如:%example%',
