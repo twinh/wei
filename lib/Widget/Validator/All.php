@@ -13,7 +13,7 @@ namespace Widget\Validator;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\Is $is The validator manager
  */
-class All extends AbstractGroupValidator
+class All extends AbstractValidator
 {
     protected $typeMessage = '%name% must be of type array';
     
