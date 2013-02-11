@@ -13,13 +13,6 @@ use Widget\WidgetProvider;
 abstract class AbstractValidator extends WidgetProvider implements ValidatorInterface
 {
     /**
-     * The invalid message
-     * 
-     * @var string
-     */
-    protected $message = '%name% is not valid';
-    
-    /**
      * The message name
      * 
      * @var string
@@ -48,36 +41,9 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
     {
         $messages = array();
         foreach ($this->errors as $name => $vars) {
-            if (!$vars) {
-                $messages[$name] = $this->{$name . 'Message'};
-            } else {
-                $messages[$name] = $this->getErrorMessage($name, $this->{$name . 'Message'});
-            }
-            
+            $messages[$name] = $this->getErrorMessage($vars[0], $vars[1]);            
         }
         return $messages;
-    }
-
-    /**
-     * Returns the invalid message
-     * 
-     * @todo remove
-     */
-    public function getMessage()
-    {
-        return $this->message;
-    }
-
-    /**
-     * Sets the invalid message
-     * 
-     * @todo remove
-     */
-    public function setMessage($message)
-    {
-        $this->message = $message;
-
-        return $this;
     }
     
     /**
@@ -118,26 +84,14 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
         }
         
         if ($vars) {
+            if (!isset($vars['name'])) {
+                $vars['name'] = $this->name;
+            }
             $keys = array_keys($vars);
             array_walk($keys, function(&$key) {
                 $key = '%' . $key  . '%';
             });
             return str_replace($keys, $vars, $message);
-        } elseif (preg_match_all('/\%(.+?)\%/', $message, $matches)) {
-            $keys = array();
-            $values = array();
-            foreach ($matches[1] as $match) {
-                if (!isset($this->$match)) {
-                    throw new \UnexpectedValueException('Unkonwn property ' . $match);
-                }
-                $value = $this->$match;
-                if (is_array($value)) {
-                    $value = implode(', ', $value);
-                }
-                $keys[] = '%' . $match . '%';
-                $values[] = $value;
-            }
-            return str_replace($keys, $values, $message);
         } else {
             return $message;
         }
@@ -159,8 +113,11 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
      * @param string $name
      * @param array $vars
      */
-    protected function addError($name, $vars = array())
+    protected function addError($name, $vars = array(), $customMessage = null)
     {
-        $this->errors[$name] = array($this->{$name . 'Message'}, $vars);
+        $this->errors[$name] = array(
+            $customMessage ?: $this->{$name . 'Message'}, 
+            $vars
+        );
     }
 }
