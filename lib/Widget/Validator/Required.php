@@ -14,7 +14,7 @@ namespace Widget\Validator;
  */
 class Required extends AbstractValidator
 {
-    protected $message = '%name% is required';
+    protected $requiredMessage = '%name% is required';
     
     protected $required = true;
     
@@ -22,6 +22,10 @@ class Required extends AbstractValidator
     {
         is_bool($required) && $this->required = $required;
         
-        return !$this->required || $input;
+        if (!$this->required || $input) {
+            $this->addError('required');
+            return false;
+        }
+        return true;
     }
 }
