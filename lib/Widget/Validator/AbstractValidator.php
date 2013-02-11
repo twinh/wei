@@ -70,34 +70,6 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
     }
     
     /**
-     * Returns error message
-     * 
-     * @param string $name
-     * @param string $message
-     * @return string
-     * @throws \UnexpectedValueException
-     */
-    public function getErrorMessage($message, $vars = array())
-    {
-        if (!$message) {
-            $message = $this->message;
-        }
-        
-        if ($vars) {
-            if (!isset($vars['name'])) {
-                $vars['name'] = $this->name;
-            }
-            $keys = array_keys($vars);
-            array_walk($keys, function(&$key) {
-                $key = '%' . $key  . '%';
-            });
-            return str_replace($keys, $vars, $message);
-        } else {
-            return $message;
-        }
-    }
-    
-    /**
      * Returns error definition
      * 
      * @return array
