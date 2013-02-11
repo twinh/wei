@@ -27,6 +27,7 @@ class All extends AbstractValidator
         }
 
         $index = 1;
+        $validator = null;
         foreach ($input as $item) {
             foreach ($rules as $rule => $options) {
                 if (!$this->is->validateOne($rule, $item, $options, $validator)) {
