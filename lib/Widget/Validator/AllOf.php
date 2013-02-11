@@ -13,15 +13,14 @@ namespace Widget\Validator;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\Is $is The validator manager
  */
-class AllOf extends AbstractValidator
+class AllOf extends SomeOf
 {
-    public function __invoke($input, array $rules)
+    protected $atLeastMessage = '%name% must be passed by all of these rules';
+    
+    public function __invoke($input, array $rules = array(), $atLeast = null)
     {
-        foreach ($rules as $rule => $options) {
-            if (!$this->is->validateOne($rule, $input, $options)) {
-                return false;
-            }
-        }
-        return true;
+        $this->atLeast = count($rules ?: $this->rules);
+        
+        parent::__invoke($input, $rules, $atLeast);
     }
 }
