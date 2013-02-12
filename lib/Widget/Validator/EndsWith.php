@@ -18,7 +18,7 @@ class EndsWith extends AbstractValidator
     
     protected $case = false;
     
-    protected $message = '%name% must end with: %findMe%';
+    protected $notFoundMessage = '%name% must end with: %findMe%';
     
     public function __invoke($input, $findMe = null, $case = null)
     {
@@ -29,6 +29,12 @@ class EndsWith extends AbstractValidator
 
         $fn = $this->case ? 'strrpos' : 'strripos';
 
-        return $pos === $fn($input, $this->findMe);
+        if (!$pos === $fn($input, $this->findMe)) {
+            $this->addError('notFound', array(
+                'findMe' => $this->findMe
+            ));
+        }
+        
+        return !$this->errors;
     }
 }
