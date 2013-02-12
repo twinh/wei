@@ -18,9 +18,9 @@ class EmptyValue extends AbstractValidator
     
     public function __invoke($input)
     {
-        if (empty($input)) {
+        if (!empty($input)) {
             $this->addError('empty');
-        } 
+        }
         
         return !$this->errors;
     }
