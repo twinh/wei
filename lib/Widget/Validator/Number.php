@@ -18,6 +18,11 @@ class Number extends AbstractValidator
     
     public function __invoke($input)
     {
-        return (bool) is_numeric($input);
+        if (!is_numeric($input)) {
+            $this->addError('notNumber');
+            return false;
+        }
+        
+        return true;
     }
 }
