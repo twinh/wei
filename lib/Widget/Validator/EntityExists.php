@@ -14,6 +14,8 @@ namespace Widget\Validator;
  */
 class EntityExists extends AbstractValidator
 {
+    protected $notFoundMessage = '%name% is not exists';
+    
     protected $entityClass;
     
     protected $entity;
@@ -24,7 +26,12 @@ class EntityExists extends AbstractValidator
         
         $this->entity = $this->entityManager()->find($this->entityClass, $data);
         
-        return (bool) $this->entity;
+        if (!$this->entity) {
+            $this->addError('notFound');
+            return false;
+        }
+        
+        return true;
     }
     
     /**
