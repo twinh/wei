@@ -31,8 +31,9 @@ class DateTime extends AbstractValidator
                 'format' => $this->format,
                 'example' => date($this->format)
             ));
+            return false;
         }
         
-        return !$this->errors;
+        return true;
     }
 }

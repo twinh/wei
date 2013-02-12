@@ -40,8 +40,9 @@ class In extends AbstractValidator
             $this->addError('notIn', array(
                 'array' => implode(',', $this->array)
             ));
+            return false;
         }
         
-        return !$this->errors;
+        return true;
     }
 }

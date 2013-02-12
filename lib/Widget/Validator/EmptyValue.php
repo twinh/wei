@@ -20,8 +20,9 @@ class EmptyValue extends AbstractValidator
     {
         if (!empty($input)) {
             $this->addError('empty');
+            return false;
         }
         
-        return !$this->errors;
+        return true;
     }
 }

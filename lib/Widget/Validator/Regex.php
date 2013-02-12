@@ -31,8 +31,9 @@ class Regex extends AbstractValidator
             $this->addError('pattern', array(
                 'pattern' => $this->pattern
             ));
+            return false;
         }
         
-        return !$this->errors;
+        return true;
     }
 }

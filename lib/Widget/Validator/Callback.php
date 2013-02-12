@@ -24,8 +24,9 @@ class Callback extends AbstractValidator
         
         if (!call_user_func($this->fn, $input, $this, $this->widget)) {
             $this->addError('invalid');
+            return false;
         }
         
-        return !$this->errors;
+        return true;
     }
 }
