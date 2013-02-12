@@ -84,14 +84,17 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
     /**
      * Adds error definition
      * 
-     * @param string $name
-     * @param array $vars
+     * @param string $name The name of error
+     * @param array $parameters The parameters for error message
+     * @param string $customMessage The custom error message, if not provided, 
+     *                              use property $this->{$name . 'Message'} as 
+     *                              the error message
      */
-    protected function addError($name, $vars = array(), $customMessage = null)
+    protected function addError($name, array $parameters = array(), $customMessage = null)
     {
         $this->errors[$name] = array(
             $customMessage ?: $this->{$name . 'Message'}, 
-            $vars
+            $parameters
         );
     }
     
