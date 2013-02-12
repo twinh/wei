@@ -78,7 +78,7 @@ return array(
     '%name% must have a length between %min% and %max%' => '%name%的长度必须在%min%和%max%之间',
     
     // max
-    '%name% must be less or equal than %limit%' => '%name%必需小于等于%limit%',
+    '%name% must be less or equal than %max%' => '%name%必需小于等于%max%',
     
     // maxLength
     '%name% must have a length lower than %limit%' => '%name%的长度必须小于等于%limit%',
