@@ -14,11 +14,11 @@ namespace Widget\Validator;
  */
 class EndsWith extends AbstractValidator
 {
+    protected $notFoundMessage = '%name% must end with: %findMe%';
+    
     protected $findMe;
     
     protected $case = false;
-    
-    protected $notFoundMessage = '%name% must end with: %findMe%';
     
     public function __invoke($input, $findMe = null, $case = null)
     {

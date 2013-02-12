@@ -14,11 +14,11 @@ namespace Widget\Validator;
  */
 class MinLength extends AbstractValidator
 {
-    protected $min;
-    
     protected $minMessage = '%name% must have a length greater than %min%';
     
     protected $minItemMessage = '%name% must contain at least %min% item(s)';
+    
+    protected $min;
 
     public function __invoke($input, $min = null)
     {

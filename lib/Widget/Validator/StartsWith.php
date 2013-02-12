@@ -14,11 +14,11 @@ namespace Widget\Validator;
  */
 class StartsWith extends AbstractValidator
 {
+    protected $notFoundMessage = '%name% must start with: %findMe%';
+    
     protected $findMe;
     
     protected $case = false;
-    
-    protected $notFoundMessage = '%name% must start with: %findMe%';
     
     public function __invoke($input, $findMe = null, $case = null)
     {

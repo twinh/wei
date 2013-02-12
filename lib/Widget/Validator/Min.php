@@ -13,10 +13,10 @@ namespace Widget\Validator;
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Min extends AbstractValidator
-{
-    protected $min;
-    
+{        
     protected $minMessage = '%name% must be greater or equal than %min%';
+
+    protected $min;
 
     public function __invoke($input, $min = null)
     {

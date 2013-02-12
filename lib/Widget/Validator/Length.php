@@ -16,12 +16,12 @@ use Widget\UnexpectedTypeException;
  */
 class Length extends AbstractValidator
 {
+    protected $lengthMessage = '%name% must have a length between %min% and %max%';
+    
     protected $min;
     
     protected $max;
     
-    protected $lengthMessage = '%name% must have a length between %min% and %max%';
-
     public function __invoke($input, $min = null, $max = null)
     {
         if (is_numeric($min) && is_numeric($max)) {

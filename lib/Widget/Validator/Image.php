@@ -14,8 +14,6 @@ namespace Widget\Validator;
  */
 class Image extends AbstractValidator
 {
-    protected $message = '%name% must be a valid image';
-    
     protected $notFoundMessage = '%name% is not found or not readable';
     
     protected $notDetectedMessage = '%name% is not a valid image or the size of the image could not be detected';

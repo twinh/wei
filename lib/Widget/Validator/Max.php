@@ -14,10 +14,10 @@ namespace Widget\Validator;
  */
 class Max extends AbstractValidator
 {
+    protected $maxMessage = '%name% must be less or equal than %max%';
+    
     protected $max;
     
-    protected $maxMessage = '%name% must be less or equal than %max%';
-
     public function __invoke($input, $max = null)
     {
         $max && $this->max = $max;

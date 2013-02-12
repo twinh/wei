@@ -14,12 +14,12 @@ namespace Widget\Validator;
  */
 class MaxLength extends AbstractValidator
 {
-    protected $max;
-    
     protected $maxMessage = '%name% must have a length lower than %max%';
     
     protected $maxItemMessage = '%name% must contain no more than %max% items';
-
+    
+    protected $max;
+    
     public function __invoke($input, $max = null)
     {
         $max && $this->max = $max;
