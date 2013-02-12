@@ -395,19 +395,9 @@ class Validator extends AbstractValidator
     }
     
     /**
-     * Returns the validation result
-     * 
-     * @return bool
-     */
-    public function valid()
-    {
-        return $this->result;
-    }
-    
-    /**
      * {@inheritdoc}
      */
-    public function isValid($input)
+    public function isValid($input = null)
     {
         return $this->result;
     }

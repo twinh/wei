@@ -51,7 +51,7 @@ class ValidatorTest extends TestCase
                     )
                 ),
             ),
-        ))->valid();
+        ))->isValid();
 
         $this->assertTrue($result);
     }
@@ -68,7 +68,7 @@ class ValidatorTest extends TestCase
                     'email' => true,
                 )
             ),
-        ))->valid();
+        ))->isValid();
 
         $this->assertTrue($result);
     }
@@ -406,7 +406,7 @@ class ValidatorTest extends TestCase
             )
         ));
         
-        $this->assertFalse($validator->valid());
+        $this->assertFalse($validator->isValid());
         
         $validator2 = $this->validate(array(
             'data' => array(
@@ -420,7 +420,7 @@ class ValidatorTest extends TestCase
             )
         ));
         
-        $this->assertFalse($validator2->valid());
+        $this->assertFalse($validator2->isValid());
     }
     
     public function testObjectAsRule()
@@ -447,7 +447,7 @@ class ValidatorTest extends TestCase
             ),
         ));
         
-        $this->assertFalse($validator2->valid());
+        $this->assertFalse($validator2->isValid());
     }
     
     public function testLanguage()
@@ -535,7 +535,7 @@ class ValidatorTest extends TestCase
             )
         ));
         
-        $this->assertTrue($validator->valid());
+        $this->assertTrue($validator->isValid());
     }
     
     public function testGetterAsData()
@@ -549,7 +549,7 @@ class ValidatorTest extends TestCase
             )
         ));
         
-        $this->assertTrue($validator->valid());
+        $this->assertTrue($validator->isValid());
     }
     
     // noop
