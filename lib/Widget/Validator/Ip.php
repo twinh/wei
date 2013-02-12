@@ -15,7 +15,7 @@ namespace Widget\Validator;
  */
 class Ip extends AbstractValidator
 {
-    protected $message = '%name% must be valid IP';
+    protected $notAllowMessage = '%name% must be valid IP';
     
     /**
      * Allows the IP address to be ONLY in IPv4 format
@@ -63,6 +63,11 @@ class Ip extends AbstractValidator
             $flag = $flag | FILTER_FLAG_NO_RES_RANGE;
         }
 
-        return (bool) filter_var($input, FILTER_VALIDATE_IP, $flag);
+        if (!filter_var($input, FILTER_VALIDATE_IP, $flag)) {
+            $this->addError('notAllow');
+            return false;
+        }
+        
+        return true;
     }
 }
