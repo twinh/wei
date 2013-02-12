@@ -16,11 +16,6 @@ class Dir extends AbstractValidator
 {
     protected $notFoundMessage = '%name% must be an existing directory';
     
-    /**
-     * Determine the object source is a directory path, check with the include_path.
-     *
-     * @return string|bool
-     */
     public function __invoke($input)
     {
         if (!is_string($input)) {
@@ -30,8 +25,9 @@ class Dir extends AbstractValidator
         $dir = stream_resolve_include_path($input);
         if (!$dir || !is_dir($dir)) {
             $this->addError('notFound');
+            return false;
         }
         
-        return !$this->errors;
+        return true;
     }
 }
