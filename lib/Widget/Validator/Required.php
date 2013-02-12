@@ -22,7 +22,7 @@ class Required extends AbstractValidator
     {
         is_bool($required) && $this->required = $required;
         
-        if (!$this->required || $input) {
+        if ($this->required && !$input) {
             $this->addError('required');
             return false;
         }
