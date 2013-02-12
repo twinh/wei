@@ -14,10 +14,15 @@ namespace Widget\Validator;
  */
 class Blank extends AbstractValidator
 {
-    protected $message = '%name% must be blank';
+    protected $blankMessage = '%name% must be blank';
     
     public function __invoke($input)
     {
-        return '' === trim($input);
+        if ('' !== trim($input)) {
+            $this->addError('blank');
+            return false;
+        }
+        
+        return true;
     }
 }
