@@ -108,15 +108,8 @@ class File extends AbstractValidator
             return false;
         }
         
-        // Check directly if it's absolute path
-        if ('/' == $file[0] || '\\' == $file[0] || (isset($file[1]) && ':' == $file[1])) {
-            if (!is_file($file)) {
-                $this->addError('notFound');
-                return false;
-            }
-        }
-        
-        if (!stream_resolve_include_path($file)) {
+        $file = stream_resolve_include_path($file);
+        if (!$file || !is_file($file)) {
             $this->addError('notFound');
             return false;
         }
