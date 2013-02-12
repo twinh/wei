@@ -109,10 +109,7 @@ class ValidatorTest extends TestCase
             ),
             'rules' => array(
                 'email' => array(
-                    'length' => array(
-                        'min' => 1,
-                        'max' => 3 
-                    ), // invalid
+                    'length' => array(1, 3), // not valid
                     'email' => true, // valid
                 ),
             ),
@@ -486,7 +483,7 @@ class ValidatorTest extends TestCase
             'rules' => array(
                 'email' => array(
                     'required' => true, // valid
-                    'length' => array(  // invalid
+                    'length' => array(  // not valid
                         'min' => 1,
                         'max' => 3 
                     ),
@@ -494,7 +491,7 @@ class ValidatorTest extends TestCase
                 ),
                 'username' => array(
                     'required' => true, // valid
-                    'length' => array(  // invalid
+                    'length' => array(  // not valid
                         'min' => 5,
                         'max' => 10
                     ),
@@ -572,5 +569,29 @@ class ValidatorTest extends TestCase
         $validator = $this->is->createValidator();
         
         $validator->setData('string');
+    }
+    
+    public function testCustomeFieldName()
+    {
+        $validator = $this->validate(array(
+            'data' => array(
+                'email' => 'error-email',
+            ),
+            'rules' => array(
+                'email' => array(
+                    'required' => true, // valid
+                    'length' => array(1, 3), // not valid
+                    'email' => true,    // not valid
+                )
+            ),
+            'names' => array(
+                'email' => 'Your email'
+            )
+        ));
+        
+        $messages = $validator->getSummaryMessages();
+        foreach ($messages['email'] as $message) {
+            $this->assertContains('Your email', $message);
+        }
     }
 }
