@@ -14,10 +14,15 @@ namespace Widget\Validator;
  */
 class Null extends AbstractValidator
 {
-    protected $message = '%name% must be null';
+    protected $notNullMessage = '%name% must be null';
     
     public function __invoke($input)
     {
-        return is_null($input);
+        if (!is_null($input)) {
+            $this->addError('notNull');
+            return false;
+        }
+        
+        return true;
     }
 }
