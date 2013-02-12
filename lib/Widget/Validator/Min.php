@@ -14,14 +14,21 @@ namespace Widget\Validator;
  */
 class Min extends AbstractValidator
 {
-    protected $limit;
+    protected $min;
     
-    protected $message = '%name% must be greater or equal than %limit%';
+    protected $minMessage = '%name% must be greater or equal than %min%';
 
-    public function __invoke($input, $limit = null)
+    public function __invoke($input, $min = null)
     {
-        $limit && $this->limit = $limit;
+        $min && $this->min = $min;
         
-        return $this->limit <= $input;
+        if ($this->min > $input) {
+            $this->addError('min', array(
+                'min' => $this->min
+            ));
+            return false;
+        }
+        
+        return true;
     }
 }

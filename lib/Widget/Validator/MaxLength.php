@@ -14,14 +14,23 @@ namespace Widget\Validator;
  */
 class MaxLength extends AbstractValidator
 {
-    protected $limit;
+    protected $max;
     
-    protected $message = '%name% must have a length lower than %limit%';
+    protected $maxMessage = '%name% must have a length lower than %max%';
+    
+    protected $maxItemMessage = '%name% must contain no more than %max% items';
 
-    public function __invoke($input, $limit)
+    public function __invoke($input, $max = null)
     {
-        $limit && $this->limit = $limit;
+        $max && $this->max = $max;
         
-        return $this->limit >= Length::getLength($input);
+        if ($this->max < Length::getLength($input)) {
+            $this->addError(is_scalar($input) ? 'max' : 'maxItem', array(
+                'max' => $max
+            ));
+            return false;
+        }
+        
+        return true;
     }
 }

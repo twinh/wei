@@ -14,22 +14,23 @@ namespace Widget\Validator;
  */
 class MinLength extends AbstractValidator
 {
-    protected $limit;
+    protected $min;
     
-    protected $limitMessage = '%name% must have a length greater than %limit%';
+    protected $minMessage = '%name% must have a length greater than %min%';
     
-    protected $limitArrayMessage = '%name% must contain at least %limit% item(s)';
+    protected $minItemMessage = '%name% must contain at least %min% item(s)';
 
-    public function __invoke($input, $limit = null)
+    public function __invoke($input, $min = null)
     {
-        $limit && $this->limit = $limit;
+        $min && $this->min = $min;
         
-        if ($this->limit > Length::getLength($input)) {
-            $this->addError(is_scalar($input) ? 'limit' : 'limitArray', array(
-                'limit' => $limit
+        if ($this->min > Length::getLength($input)) {
+            $this->addError(is_scalar($input) ? 'min' : 'minItem', array(
+                'min' => $min
             ));
+            return false;
         }
         
-        return !$this->errors;
+        return true;
     }
 }

@@ -81,14 +81,15 @@ return array(
     '%name% must be less or equal than %max%' => '%name%必需小于等于%max%',
     
     // maxLength
-    '%name% must have a length lower than %limit%' => '%name%的长度必须小于等于%limit%',
+    '%name% must have a length lower than %max%' => '%name%的长度必须小于等于%max%',
+    '%name% must contain no more than %max% items' => '%name%最多包含%max%项',
     
     // min
-    '%name% must be greater or equal than %limit%' => '%name%必须大于等于%limit%',
+    '%name% must be greater or equal than %min%' => '%name%必须大于等于%min%',
     
     // minLength
-    '%name% must have a length greater than %limit%' => '%name%的长度必须大于等于%limit%',
-    '%name% must contain at least %limit% item(s)' => '%name%至少需要包括%limit%项',
+    '%name% must have a length greater than %min%' => '%name%的长度必须大于等于%min%',
+    '%name% must contain at least %min% item(s)' => '%name%至少需要包括%min%项',
     
     // mobile
     '%name% must be valid mobile number' => '%name%必须是13位长度的数字,以13,15或18开头',
