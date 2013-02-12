@@ -16,14 +16,14 @@ class Max extends AbstractValidator
 {
     protected $max;
     
-    protected $lessThanMessage = '%name% must be less or equal than %max%';
+    protected $maxMessage = '%name% must be less or equal than %max%';
 
     public function __invoke($input, $max = null)
     {
         $max && $this->max = $max;
         
         if ($this->max < $input) {
-            $this->addError('lessThan', array(
+            $this->addError('max', array(
                 'max' => $this->max
             ));
             return false;
