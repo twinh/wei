@@ -18,7 +18,7 @@ class StartsWith extends AbstractValidator
     
     protected $case = false;
     
-    protected $message = '%name% must start with: %findMe%';
+    protected $notFoundMessage = '%name% must start with: %findMe%';
     
     public function __invoke($input, $findMe = null, $case = null)
     {
@@ -27,6 +27,13 @@ class StartsWith extends AbstractValidator
         
         $fn = $this->case ? 'strpos' : 'stripos';
 
-        return 0 === $fn($input, $this->findMe);
+        if (0 !== $fn($input, $this->findMe)) {
+            $this->addError('notFound', array(
+                'findMe' => $this->findMe
+            ));
+            return false;
+        }
+        
+        return true;
     }
 }

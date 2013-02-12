@@ -33,8 +33,9 @@ class EndsWith extends AbstractValidator
             $this->addError('notFound', array(
                 'findMe' => $this->findMe
             ));
+            return false;
         }
         
-        return !$this->errors;
+        return true;
     }
 }
