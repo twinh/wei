@@ -14,12 +14,18 @@ namespace Widget\Validator;
  */
 class Callback extends AbstractValidator
 {
+    protected $invalidMessage = '%name% is not valid';
+    
     protected $fn;
     
     public function __invoke($input, \Closure $fn = null)
     {
         $fn && $this->fn = $fn;
         
-        return (bool) call_user_func($this->fn, $input, $this, $this->widget);
+        if (!call_user_func($this->fn, $input, $this, $this->widget)) {
+            $this->addError('invalid');
+        }
+        
+        return !$this->errors;
     }
 }
