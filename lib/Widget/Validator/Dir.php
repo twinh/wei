@@ -14,14 +14,7 @@ namespace Widget\Validator;
  */
 class Dir extends AbstractValidator
 {
-    protected $message = '%name% must be an existing directory';
-    
-    /**
-     * Returns directory path or true
-     * 
-     * @var bool 
-     */
-    protected $abs = true;
+    protected $notFoundMessage = '%name% must be an existing directory';
     
     /**
      * Determine the object source is a directory path, check with the include_path.
@@ -33,19 +26,12 @@ class Dir extends AbstractValidator
         if (!is_string($input)) {
             return false;
         }
-
-        // check directly if it's absolute path
-        if ('/' == $input[0] || '\\' == $input[0] || ':' == $input[1]) {
-            if (is_dir($input)) {
-                return $this->abs ? $input : true;
-            }
+        
+        $dir = stream_resolve_include_path($input);
+        if (!$dir || !is_dir($dir)) {
+            $this->addError('notFound');
         }
-
-        $full = stream_resolve_include_path($input);
-        if ($full) {
-            return $this->abs ? $full : true;
-        }
-
-        return false;
+        
+        return !$this->errors;
     }
 }
