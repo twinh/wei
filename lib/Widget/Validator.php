@@ -527,6 +527,27 @@ class Validator extends AbstractValidator
     }
     
     /**
+     * Returns the message by given field, rule and option
+     * 
+     * @param string $field The field of data
+     * @param string $rule The rule of field
+     * @param string $option The option of rule
+     * @return string|false
+     */
+    public function getMessage($field, $rule, $option)
+    {
+        if (isset($this->messages[$field][$rule][$option]) && is_string($this->messages[$field][$rule][$option]) && is_array($this->messages[$field][$rule])) {
+            return $this->messages[$field][$rule][$option];
+        } elseif (isset($this->messages[$field][$rule]) && is_string($this->messages[$field][$rule]) && is_array($this->messages[$field])) {
+            return $this->messages[$field][$rule];
+        } elseif (isset($this->messages[$field]) && is_string($this->messages[$field])) {
+            return $this->messages[$field];
+        } else {
+            return false;
+        }
+    }
+    
+    /**
      * Returns detail invalid messages
      * 
      * @return array
@@ -557,18 +578,7 @@ class Validator extends AbstractValidator
                     /**
                      * Prepare error message
                      */
-                    // Custom messages
-                    if (isset($this->messages[$field][$rule]) && is_array($this->messages[$field][$rule]) && array_key_exists($option, $this->messages[$field][$rule])) {
-                        $message = $this->messages[$field][$rule][$option];
-                    } elseif (isset($this->messages[$field]) && is_array($this->messages[$field]) && array_key_exists($rule, $this->messages[$field])) {
-                        $message = $this->messages[$field][$rule];
-                    } elseif (isset($this->messages[$field]) && is_string($this->messages[$field])) {
-                        $message = $this->messages[$field];
-                    // Default messages
-                    } else {
-                        $message = $params[0];
-                    }
-
+                    $message = $this->getMessage($field, $rule, $option) ?: $params[0];
                     if ($languages && isset($languages[$message])) {
                         $message = $languages[$message];
                     }
