@@ -11,6 +11,7 @@ namespace Widget\Validator;
 /**
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @todo        Adds property like dql, queryBuilder, etc
  */
 class EntityExists extends AbstractValidator
 {
