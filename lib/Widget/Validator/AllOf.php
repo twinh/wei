@@ -21,6 +21,6 @@ class AllOf extends SomeOf
     {
         $this->atLeast = count($rules ?: $this->rules);
         
-        parent::__invoke($input, $rules, $atLeast);
+        return parent::__invoke($input, $rules, $atLeast);
     }
 }
