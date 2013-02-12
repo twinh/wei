@@ -20,7 +20,7 @@ class Length extends AbstractValidator
     
     protected $max;
     
-    protected $message = '%name% must have a length between %min% and %max%';
+    protected $lengthMessage = '%name% must have a length between %min% and %max%';
 
     public function __invoke($input, $min = null, $max = null)
     {
@@ -31,11 +31,12 @@ class Length extends AbstractValidator
         
         $len = static::getLength($input);
         
-        if ($this->max === $this->min) {
-            return $len === $this->max;
-        } else {
-            return $this->min <= $len && $this->max >= $len;
+        if ($this->min > $len || $this->max < $len) {
+            $this->addError('length');
+            return false;
         }
+        
+        return true;
     }
 
     public static function getLength($input)
