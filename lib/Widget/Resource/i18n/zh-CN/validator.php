@@ -128,5 +128,29 @@ return array(
     '%name% is not a valid time, the format should be "%format%", eg: %example%' => '%name%不是合法的时间,格式应该是%format%,例如:%example%',
     
     // type
-    '%name% must be of type %type%' => '%name%的类型必须是%type%'
+    '%name% must be of type %type%' => '%name%必须是%type%',
+    // is_xxx
+    'array'     => '数组',
+    'bool'      => '布尔',
+    'float'     => '浮点数',
+    'int'       => '整型',
+    'integer'   => '整型',
+    'null'      => 'NULL',
+    'numeric'   => '数字',
+    'object'    => '对象',
+    'resource'  => '资源',
+    'scalar'    => '标量',
+    'string'    => '字符串',
+    // ctype_xxx
+    'alnum'     => '字母(a-z)或数字(0-9)',
+    'alpha'     => '字母',
+    'cntrl'     => '控制字符',
+    'digit'     => '数字',
+    'graph'     => '可显示字符',
+    'lower'     => '小写字母(a-z)',
+    'print'     => '可打印字符', // 包括空格
+    'punct'     => '标点符号',
+    'space'     => '空白字符',
+    'upper'     => '大写字母(A-Z)',
+    'xdigit'    => '16进制数字',
 );
