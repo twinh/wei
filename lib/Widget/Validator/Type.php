@@ -13,6 +13,8 @@ use Widget\Exception;
 /**
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @method string t(string $message, array $parameters) Translates a message
+ * @property \Widget\T $t The translator widget
  */
 class Type extends AbstractValidator
 {
@@ -34,10 +36,22 @@ class Type extends AbstractValidator
         
         if (!$result) {
             $this->addError('type', array(
-                'type' => $this->type
+                'type' => $this->t($this->type)
             ));
         }
         
         return $result;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getMessages()
+    {
+        // Translates the "type" paraemter
+//        if (isset($this->errors['type'])) {
+//            $this->errors['type'][1]['type'] = $this->t($this->errors['type'][1]['type']);
+//        }
+        return parent::getMessages();
     }
 }

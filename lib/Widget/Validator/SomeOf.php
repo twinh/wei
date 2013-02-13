@@ -42,7 +42,7 @@ class SomeOf extends AbstractGroupValidator
                 }
             } else {
                 foreach ($validator->getErrors() as $name => $error) {
-                    $this->addError($rule . '.' . $name, $error[1], $error[0]);
+                    $this->addError($rule . '.' . $name, $error['parameters'], $error['message']);
                 }
             }
         }

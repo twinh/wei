@@ -35,7 +35,7 @@ class All extends AbstractValidator
                         $this->addError($rule . '.' . $name . '.' . $index, array(
                             'name' => $this->itemName,
                             'index' => $index
-                        ) + $error[1], $error[0]);
+                        ) + $error['parameters'], $error['message']);
                     }
                 }
             }
@@ -43,5 +43,20 @@ class All extends AbstractValidator
         }
         
         return !$this->errors;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getMessages()
+    {
+        foreach ($this->errors as &$error) {
+            $error['parameters']['name'] = $this->t($error['parameters']['name']);
+            $error['parameters']['name'] = $this->t($error['parameters']['name'], array(
+                '%name%' => $this->name,
+                '%index%' => $error['parameters']['index'],
+            ));
+        }
+        return parent::getMessages();
     }
 }
