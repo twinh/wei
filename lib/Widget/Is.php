@@ -33,7 +33,7 @@ class Is extends WidgetProvider
      * @paran mixed $options
      * @internal Do NOT use this method for it may be change in the future
      */
-    public function validateOne($rule, $data, $options = array(), &$validator = null)
+    public function validateOne($rule, $data, $options = array(), &$validator = null, $props = array())
     {
         // Process simple array rules, eg 'username' => ['required', 'email']
         if (is_int($rule)) {
@@ -44,7 +44,7 @@ class Is extends WidgetProvider
         }
         
         if ($rule instanceof \Widget\Validator\AbstractValidator) {
-            $validator = $this->ruleValidator = $rule;
+            $validator = $rule;
             return $rule($data);
         }
          
@@ -55,15 +55,9 @@ class Is extends WidgetProvider
         } else {
             $reverse = false;
         }
-
-        if (!$class = $this->hasRule($rule)) {
-            throw new Exception(sprintf('Validator "%s" not found', $rule));
-        }
-
-        $validator = new $class(array(
-            'widget' => $this->widget
-        ));
         
+        $validator = $this->createRuleValidator($rule, $props);
+
         if (!is_array($options)) {
             $options = array($options);
         }
@@ -142,5 +136,19 @@ class Is extends WidgetProvider
             'widget'    => $this->widget,
             'is'        => $this
         ));
+    }
+    
+    /**
+     * @return Widget\Validator\AbstractValidator
+     */
+    public function createRuleValidator($rule, array $options = array())
+    {
+        if (!$class = $this->hasRule($rule)) {
+            throw new Exception(sprintf('Validator "%s" not found', $rule));
+        }
+
+        return new $class(array(
+            'widget' => $this->widget
+        ) + $options);
     }
 }
