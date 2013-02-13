@@ -64,10 +64,10 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
         $messages = array();
         foreach ($this->errors as $name => $vars) {
             $parameters = array();
-            foreach ($vars[1] as $key => $var) {
+            foreach ($vars['parameters'] as $key => $var) {
                 $parameters['%' . $key  . '%'] = $var;
             }
-            $messages[$name] = $this->t($vars[0], $parameters + array(
+            $messages[$name] = $this->t($vars['message'], $parameters + array(
                 '%name%' => $this->t($this->name)
             ));            
         }
@@ -131,8 +131,8 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
     protected function addError($name, array $parameters = array(), $customMessage = null)
     {
         $this->errors[$name] = array(
-            $customMessage ?: $this->message ?: $this->{$name . 'Message'}, 
-            $parameters
+            'message' => $customMessage ?: $this->message ?: $this->{$name . 'Message'},
+            'parameters' => $parameters
         );
     }
 }
