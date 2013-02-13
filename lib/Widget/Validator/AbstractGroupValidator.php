@@ -10,8 +10,29 @@ namespace Widget\Validator;
 
 class AbstractGroupValidator extends AbstractValidator
 {
-    public function combine(array $messages)
+    /**
+     * {@inheritdoc}
+     */
+    public function getMessages()
     {
+        $messages = parent::getMessages();
+        
+        /**
+         * Combines messages into single one
+         * 
+         * FROM 
+         * array(
+         *   'atLeast'          => 'atLeast message',
+         *   'validator.rule'   => 'first message',
+         *   'validator.rul2'   => 'second message',
+         *   'validator2.rule'  => 'third message'
+         * )
+         * TO
+         * array(
+         *   'atLeast' => "atLeast message\n"
+         *              . "first message;second message\n"
+         *              . "third message"
+         */
         $results = array();
         $key = key($messages);
         $results[] = array_shift($messages);
