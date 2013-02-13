@@ -1,0 +1,172 @@
+<?php
+/**
+ * Widget Framework
+ *
+ * Copyright (c) 2008-2013 Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ */
+
+namespace Widget;
+
+/**
+ * Translator
+ *
+ * @package     Widget
+ * @author      Twin Huang <twinh@yahoo.cn>
+ */
+class T extends WidgetProvider
+{
+    /**
+     * The default locale
+     * 
+     * @var string
+     */
+    protected $locale = 'en';
+    
+    /**
+     * The fallback locale
+     * 
+     * @var string
+     */
+    protected $fallbackLocale = 'en';
+    
+    /**
+     * The translator messages
+     *  
+     * @var array 
+     */
+    protected $data = array();
+
+    /**
+     * The loaded translation files
+     * 
+     * @var array
+     */
+    protected $files = array();
+    
+    /**
+     * Invoker
+     * 
+     * @param string $message
+     * @param array $parameters
+     * @return string
+     */
+    public function __invoke($message, array $parameters = array())
+    {
+        if (isset($this->data[$message])) {
+            $message = $this->data[$message];
+        }
+        
+        return $parameters ? strtr($message, $parameters) : $message;
+    }
+    
+    /**
+     * Translates a message
+     * 
+     * @param string $message
+     * @param array $parameters
+     * @return string
+     */
+    public function trans($message, array $parameters = array())
+    {
+        return $this($message, $parameters);
+    }
+    
+    /**
+     * Sets the default locale
+     * 
+     * @param string $locale
+     * @return \Widget\T
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+        
+        return $this;
+    }
+    
+    /**
+     * Returns the default locale
+     * 
+     * @return string
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+    
+    /**
+     * Set the fallback locale
+     * 
+     * @param string $locale
+     * @return \Widget\T
+     */
+    public function setFallbackLocale($locale)
+    {
+        $this->fallbackLocale = $locale;
+        
+        return $this;
+    }
+    
+    /**
+     * Returns the fallback locale
+     * 
+     * @return string
+     */
+    public function getFallbackLocale()
+    {
+        return $this->fallbackLocale;
+    }
+    
+    /**
+     * Loads translator messages from file
+     * 
+     * @param string $pattern The file path, which can contains %s that would be convert the current locale or fallback locale
+     * @return \Widget\T
+     * @throws Exception When file not found or not readable
+     */
+    public function loadFromFile($pattern)
+    {
+        if (isset($this->files[$pattern])) {
+            return $this;
+        }
+        
+        $file = sprintf($pattern, $this->locale);
+        if (!is_file($file)) {
+            $fallbackFile = sprintf($pattern, $this->fallbackLocale);
+            if (!is_file($fallbackFile)) {
+                throw new Exception(sprintf('File "%s" and "%s" not found or not readable', $file, $fallbackFile));
+            } else {
+                $file = $fallbackFile;
+            }
+        }
+        
+        $this->files[$file] = true;
+        
+        return $this->loadFromArray(require $file);
+    }
+    
+    /**
+     * Loads translator messages from array
+     * 
+     * @param array $messages
+     * @return \Widget\T
+     */
+    public function loadFromArray(array $messages)
+    {
+        $this->data = $messages + $this->data;
+        
+        return $this;
+    }
+    
+    /**
+     * Loads translator messages from closure
+     * 
+     * @param \Closure $fn
+     * @return \Widget\T
+     */
+    public function load(\Closure $fn)
+    {
+        return $this->loadFromArray($fn());
+    }
+}
