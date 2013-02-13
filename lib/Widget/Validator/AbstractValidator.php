@@ -10,6 +10,14 @@ namespace Widget\Validator;
 
 use Widget\WidgetProvider;
 
+/**
+ * The base class of validator
+ * 
+ * @package     Widget
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @method string t(string $message, array $parameters) Translates a message
+ * @property \Widget\T $t The translator widget
+ */
 abstract class AbstractValidator extends WidgetProvider implements ValidatorInterface
 {
     /**
@@ -27,6 +35,16 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
     protected $errors = array();
     
     /**
+     * The summary message that would overwrite all $this->xxxMessage messages
+     * when called addError, which MAY useful when you want to set message for 
+     * the validaor
+     * 
+     * @var string
+     * @internal
+     */
+    protected $message;
+    
+    /**
      * {@inheritdoc}
      */
     public function isValid($input)
@@ -39,13 +57,35 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
      */
     public function getMessages()
     {
+        // TODO better way?
+        // Loads the validator translation messages on demand
+        $this->t->loadFromFile(dirname(__DIR__) . '/Resource/i18n/%s/validator.php');
+        
         $messages = array();
         foreach ($this->errors as $name => $vars) {
-            $messages[$name] = $this->trans($vars[0], $vars[1] + array(
-                'name' => $this->name
+            $parameters = array();
+            foreach ($vars[1] as $key => $var) {
+                $parameters['%' . $key  . '%'] = $var;
+            }
+            $messages[$name] = $this->t($vars[0], $parameters + array(
+                '%name%' => $this->t($this->name)
             ));            
         }
         return $messages;
+    }
+    
+    /**
+     * Sets the specified messages
+     * 
+     * @param array $messages
+     * @return \Widget\Validator\AbstractValidator
+     */
+    public function setMessages(array $messages)
+    {
+        foreach ($messages as $name => $message) {
+            $this->{$name . 'Message'} = $message;
+        }
+        return $this;
     }
     
     /**
@@ -86,24 +126,13 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
      * 
      * @param string $name The name of error
      * @param array $parameters The parameters for error message
-     * @param string $customMessage The custom error message, if not provided, 
-     *                              use property $this->{$name . 'Message'} as 
-     *                              the error message
+     * @param string $customMessage The custom error message
      */
     protected function addError($name, array $parameters = array(), $customMessage = null)
     {
         $this->errors[$name] = array(
-            $customMessage ?: $this->{$name . 'Message'}, 
+            $customMessage ?: $this->message ?: $this->{$name . 'Message'}, 
             $parameters
         );
-    }
-    
-    protected function trans($message, $vars)
-    {
-        $keys = array_keys($vars);
-        array_walk($keys, function(&$key) {
-            $key = '%' . $key  . '%';
-        });
-        return str_replace($keys, $vars, $message);
     }
 }
