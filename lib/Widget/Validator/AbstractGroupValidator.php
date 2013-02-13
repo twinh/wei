@@ -11,12 +11,17 @@ namespace Widget\Validator;
 class AbstractGroupValidator extends AbstractValidator
 {
     /**
+     * The invalid validators
+     * 
+     * @var array<\Widget\Validator\AbstractValidator>
+     */
+    protected $validators = array();
+    
+    /**
      * {@inheritdoc}
      */
     public function getMessages()
     {
-        $messages = parent::getMessages();
-        
         /**
          * Combines messages into single one
          * 
@@ -33,22 +38,15 @@ class AbstractGroupValidator extends AbstractValidator
          *              . "first message;second message\n"
          *              . "third message"
          */
-        $results = array();
+        $messages = parent::getMessages();
         $key = key($messages);
-        $results[] = array_shift($messages);
         
-        foreach ($messages as $rule => $message) {
-            $results[strstr($rule, '.', true)][] = $message;
-        }
-        
-        foreach ($results as &$result) {
-            if (is_array($result)) {
-                $result = implode(';', $result);
-            }
+        foreach ($this->validators as $rule => $validator) {
+            $messages[$rule] = implode(';', $validator->getMessages());
         }
 
         return array(
-            $key => implode("\n", $results)
+            $key => implode("\n", $messages)
         );
     }
 }

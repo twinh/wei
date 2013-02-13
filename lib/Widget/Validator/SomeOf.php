@@ -41,9 +41,8 @@ class SomeOf extends AbstractGroupValidator
                     return true;
                 }
             } else {
-                foreach ($validator->getErrors() as $name => $error) {
-                    $this->addError($rule . '.' . $name, $error['parameters'], $error['message']);
-                }
+                $validator->setName($this->name);
+                $this->validators[$rule] = $validator;
             }
         }
         
