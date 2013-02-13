@@ -249,7 +249,12 @@ class Widget extends WidgetProvider
             }
 
             if (2 == func_num_args()) {
-                return $temp[$name] = func_get_arg(1);
+                if (isset($this->widgets[$name])) {
+                    $this->widgets[$name]->option(func_get_arg(1));
+                } else {
+                    $temp[$name] = func_get_arg(1);
+                }
+                return $this;
             }
 
             return isset($temp[$name]) ? $temp[$name] : null;
