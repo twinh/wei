@@ -44,6 +44,8 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
      */
     protected $message;
     
+    protected static $translationMessagesLoaded;
+    
     /**
      * {@inheritdoc}
      */
@@ -57,10 +59,8 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
      */
     public function getMessages()
     {
-        // TODO better way?
-        // Loads the validator translation messages on demand
-        $this->t->loadFromFile(dirname(__DIR__) . '/Resource/i18n/%s/validator.php');
-        
+        $this->loadTranslationMessages();
+
         $messages = array();
         foreach ($this->errors as $name => $error) {
             $parameters = array();
@@ -72,6 +72,19 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
             ));            
         }
         return $messages;
+    }
+    
+    /**
+     * Loads the validator translation messages
+     * 
+     * @todo better way?
+     */
+    protected function loadTranslationMessages()
+    {
+        if (!static::$translationMessagesLoaded) {
+            $this->t->loadFromFile(dirname(__DIR__) . '/Resource/i18n/%s/validator.php');
+            static::$translationMessagesLoaded = true;
+        }
     }
     
     /**
