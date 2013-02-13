@@ -36,7 +36,7 @@ class Type extends AbstractValidator
         
         if (!$result) {
             $this->addError('type', array(
-                'type' => $this->t($this->type)
+                'type' => $this->type
             ));
         }
         
@@ -48,10 +48,12 @@ class Type extends AbstractValidator
      */
     public function getMessages()
     {
-        // Translates the "type" paraemter
-//        if (isset($this->errors['type'])) {
-//            $this->errors['type'][1]['type'] = $this->t($this->errors['type'][1]['type']);
-//        }
+        $this->loadTranslationMessages();
+        
+        // Translates the "type" parameter
+        if (isset($this->errors['type'])) {
+            $this->errors['type']['parameters']['type'] = $this->t($this->errors['type']['parameters']['type']);
+        }
         return parent::getMessages();
     }
 }

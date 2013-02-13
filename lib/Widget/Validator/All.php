@@ -50,13 +50,18 @@ class All extends AbstractValidator
      */
     public function getMessages()
     {
+        $this->loadTranslationMessages();
+        
         foreach ($this->errors as &$error) {
-            $error['parameters']['name'] = $this->t($error['parameters']['name']);
-            $error['parameters']['name'] = $this->t($error['parameters']['name'], array(
-                '%name%' => $this->name,
-                '%index%' => $error['parameters']['index'],
-            ));
+            if (isset($error['parameters']['name'])) {
+                $error['parameters']['name'] = $this->t($error['parameters']['name']);
+                $error['parameters']['name'] = $this->t($error['parameters']['name'], array(
+                    '%name%' => $this->t($this->name),
+                    '%index%' => $error['parameters']['index'],
+                ));
+            }
         }
+
         return parent::getMessages();
     }
 }
