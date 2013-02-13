@@ -62,12 +62,12 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
         $this->t->loadFromFile(dirname(__DIR__) . '/Resource/i18n/%s/validator.php');
         
         $messages = array();
-        foreach ($this->errors as $name => $vars) {
+        foreach ($this->errors as $name => $error) {
             $parameters = array();
-            foreach ($vars['parameters'] as $key => $var) {
+            foreach ($error['parameters'] as $key => $var) {
                 $parameters['%' . $key  . '%'] = $var;
             }
-            $messages[$name] = $this->t($vars['message'], $parameters + array(
+            $messages[$name] = $this->t($error['message'], $parameters + array(
                 '%name%' => $this->t($this->name)
             ));            
         }
