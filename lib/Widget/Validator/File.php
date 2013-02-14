@@ -18,9 +18,7 @@ class File extends AbstractValidator
 {
     protected $notStringMessage = '%name% must be a string';
     
-    protected $notFoundMessage = '%name% must be an existing file';
-    
-    protected $notReadableMessage = '%name% is not readable';
+    protected $notFoundMessage = '%name% is not found or not readable';
     
     protected $maxSizeMessage = '%name% is too large(%size%), allowed maximum size is %maxSize%';
     
@@ -134,12 +132,7 @@ class File extends AbstractValidator
         // Validate file size
         $size = 0;
         if ($this->maxSize || $this->minSize) {
-            if (!is_readable($file)) {
-                $this->addError('notReadable');
-                return false;
-            } else {
-                $size = filesize($file);
-            }
+            $size = filesize($file);
         }
   
         if ($size && $this->maxSize && $this->maxSize <= $size) {
