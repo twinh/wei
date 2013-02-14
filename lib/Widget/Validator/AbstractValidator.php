@@ -152,6 +152,17 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
     }
     
     /**
+     * Returns whether the error defined
+     * 
+     * @param string $name
+     * @return bool
+     */
+    public function hasError($name)
+    {
+        return isset($this->errors[$name]);
+    }
+    
+    /**
      * Checks if the input value could be convert to string
      * 
      * @param mixed $input

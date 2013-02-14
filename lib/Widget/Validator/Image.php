@@ -49,6 +49,9 @@ class Image extends File
     public function __invoke($file, $options = array())
     {
         parent::__invoke($file, $options);
+        if ($this->hasError('notString') || $this->hasError('notFound')) {
+            return false;
+        }
         
         $size = @getimagesize($file);
         if (false === $size) {

@@ -18,7 +18,7 @@ class ImageTest extends TestCase
         $image = $this->createImageValidator();
         
         $this->assertFalse($image('not found file'));        
-        $this->assertEquals(array('notDetected'), array_keys($image->getErrors()));
+        $this->assertEquals(array('notFound'), array_keys($image->getErrors()));
     }
     
     public function testNotDetected()
