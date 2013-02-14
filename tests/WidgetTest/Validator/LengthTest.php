@@ -2,8 +2,6 @@
 
 namespace WidgetTest\Validator;
 
-use WidgetTest\TestCase;
-
 class LengthTest extends TestCase
 {
     /**
@@ -22,14 +20,6 @@ class LengthTest extends TestCase
         $this->assertFalse($this->isLength($input, $option1, $option2));
     }
     
-    /**
-     * @expectedException \Widget\UnexpectedTypeException
-     */
-    public function testUnexpectedTypeException()
-    {
-        $this->isLength(new \stdClass(), 1, 2);
-    }
-
     public function providerForLength()
     {
         $ao = new \ArrayObject(array(

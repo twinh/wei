@@ -2,8 +2,6 @@
 
 namespace WidgetTest\Validator;
 
-use WidgetTest\TestCase;
-
 class InTest extends TestCase
 {
     /**

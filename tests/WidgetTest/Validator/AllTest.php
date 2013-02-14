@@ -2,8 +2,6 @@
 
 namespace WidgetTest\Validator;
 
-use WidgetTest\TestCase;
-
 class AllTest extends TestCase
 {
     public function testAll()

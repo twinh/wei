@@ -2,10 +2,10 @@
 
 namespace WidgetTest\Validator;
 
-use WidgetTest\TestCase;
-
 class EmptyTest extends TestCase
 {
+    protected $name = 'emptyValue';
+    
     /**
      * @dataProvider providerForEmpty
      */

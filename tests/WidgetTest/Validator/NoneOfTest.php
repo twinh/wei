@@ -2,8 +2,6 @@
 
 namespace WidgetTest\Validator;
 
-use WidgetTest\TestCase;
-
 class NoneOfTest extends TestCase
 {
     public function testNoneOf()

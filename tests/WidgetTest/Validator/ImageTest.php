@@ -2,8 +2,6 @@
 
 namespace WidgetTest\Validator;
 
-use WidgetTest\TestCase;
-
 class ImageTest extends TestCase
 {
     public function createImageValidator()

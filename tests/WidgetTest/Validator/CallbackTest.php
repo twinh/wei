@@ -2,10 +2,15 @@
 
 namespace WidgetTest\Validator;
 
-use WidgetTest\TestCase;
-
 class CallbackTest extends TestCase
-{
+{    
+    public function setUp()
+    {
+        parent::setUp();
+        
+        $this->inputTestOptions['fn'] = function(){};
+    }
+    
     public function testCallback()
     {
         $this->assertTrue($this->isCallback('data', function(){

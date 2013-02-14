@@ -2,29 +2,11 @@
 
 namespace WidgetTest\Validator;
 
-use WidgetTest\TestCase;
-
 class TypeTest extends TestCase
 {
-    protected static $resource;
-
-    public function createResource()
-    {
-        if (!static::$resource) {
-            static::$resource = fopen(__FILE__, 'r');
-        }
-
-        return static::$resource;
-    }
-
-    public static function tearDownAfterClass()
-    {
-        parent::tearDownAfterClass();
-
-        if (static::$resource) {
-            fclose(static::$resource);
-        }
-    }
+    protected $inputTestOptions = array(
+        'type' => 'string'
+    );
 
     /**
      * @dataProvider providerForType
@@ -41,13 +23,12 @@ class TypeTest extends TestCase
     {
         $this->assertFalse($this->isType->__invoke($input, $type));
     }
-
-    /**
-     * @expectedException \Widget\Exception
-     */
-    public function testExcptionWithUnkonwnType()
+    
+    public function testResource()
     {
-        $this->isType->__invoke('xx', 'unkonwn type');
+        $res = $this->createResource();
+        $this->assertInternalType('resource', $res);
+        $this->assertTrue($this->isType->__invoke($res, 'resource'));
     }
 
     public function providerForType()
@@ -65,7 +46,8 @@ class TypeTest extends TestCase
             array(null,     'null'),
             array('1',      'numeric'),
             array($obj,     'object'),
-            array($res,     'resource'),
+            // FIXME failure on php 5.4.7 ?
+            //array($res,     'resource'),
             array(1,        'scalar'),
             array(1.1,      'scalar'),
             array('str',    'scalar'),
@@ -86,6 +68,8 @@ class TypeTest extends TestCase
             array("\n\r\t", 'space'),
             array('LMNSDO', 'upper'),
             array('10BC9',  'xdigit'),
+            // object
+            array($obj,     'stdClass')
         );
     }
 

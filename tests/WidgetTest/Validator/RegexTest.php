@@ -2,10 +2,12 @@
 
 namespace WidgetTest\Validator;
 
-use WidgetTest\TestCase;
-
 class RegexTest extends TestCase
 {
+    protected $inputTestOptions = array(
+        'pattern' => '(.+?)'
+    );
+    
     /**
      * @dataProvider providerForRegex
      */

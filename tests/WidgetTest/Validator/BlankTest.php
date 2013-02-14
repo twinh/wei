@@ -2,8 +2,6 @@
 
 namespace WidgetTest\Validator;
 
-use WidgetTest\TestCase;
-
 /**
  * @todo more space test
  * @link http://en.wikipedia.org/wiki/Space_(punctuation)

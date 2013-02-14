@@ -2,8 +2,6 @@
 
 namespace WidgetTest\Validator;
 
-use WidgetTest\TestCase;
-
 class DirTest extends TestCase
 {
     public function testIsDir()

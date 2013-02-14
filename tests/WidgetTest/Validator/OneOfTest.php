@@ -2,9 +2,7 @@
 
 namespace WidgetTest\Validator;
 
-use WidgetTest\TestCase;
-
-class OneOffTest extends TestCase
+class OneOfTest extends TestCase
 {
     public function testOneOf()
     {

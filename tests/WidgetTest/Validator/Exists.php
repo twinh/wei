@@ -2,8 +2,6 @@
 
 namespace WidgetTest\Validator;
 
-use WidgetTest\TestCase;
-
 class ExistsTest extends TestCase
 {
     public function testIsExists()
