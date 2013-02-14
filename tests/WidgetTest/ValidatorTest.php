@@ -447,31 +447,6 @@ class ValidatorTest extends TestCase
         $this->assertFalse($validator2->isValid());
     }
     
-    public function testLanguage()
-    {
-        $validator = $this->validate(array(
-            'data' => array(
-                'username' => ''
-            ),
-            'rules' => array(
-                'username' => 'required'
-            ),
-            'language' => 'zh-CN'
-        ));
-        
-        $this->assertEquals('zh-CN', $validator->getLanguage());
-    }
-    
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testInvalidLanguage()
-    {
-        $this->validate(array(
-            'language' => 'no this language'
-        ));
-    }
-    
     public function testSkip()
     {
         /* @var $validator \Widget\Validator */
