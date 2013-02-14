@@ -241,7 +241,7 @@ class EventManager extends WidgetProvider
             });
         }
 
-        // Trigger the widget manager's construct and construct event
+        // Trigger the widget manager's construct and constructed event
         $this->widget->option(array(
             'construct' => function ($name, $full) use($that) {
                 $that('construct.' . $name, array($name, $full));
@@ -251,7 +251,7 @@ class EventManager extends WidgetProvider
             }
         ));
     }
-
+    
     /**
      * Returns the array with two elements, the first one is the event name and
      * the second one is the event namespaces
