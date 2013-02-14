@@ -10,6 +10,7 @@ return array(
     // default
     'This value' => '该项',
     '%name% is not valid' => '%name%不合法',
+    '%name% must be a string' => '%name%必须是字符串',
     
     // all
     '%name% must be of type array' => '%name%必须是数组',
@@ -52,7 +53,6 @@ return array(
     '%name% must be an existing file or directory' => '%name%必须是存在的文件或目录',
     
     // file
-    '%name% must be a string' => '%name%必须是字符串',
     '%name% must be an existing file' => '%name%不存在',
     '%name% is not readable' => '%name%不可读',
     '%name% is too large(%size%), allowed maximum size is %maxSize%' => '%name%太大了(%size%),允许的最大文件大小为%maxSize%',
@@ -76,6 +76,7 @@ return array(
     
     // length
     '%name% must have a length between %min% and %max%' => '%name%的长度必须在%min%和%max%之间',
+    '%name%\'s length could not be detected' => '无法检测到%name%的长度',
     
     // max
     '%name% must be less or equal than %max%' => '%name%必需小于等于%max%',
