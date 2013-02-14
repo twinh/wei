@@ -24,6 +24,11 @@ class DateTime extends AbstractValidator
     {
         $format && $this->format = $format;
         
+        if (!$this->isString($input)) {
+            $this->addError('notString');
+            return false;
+        }
+        
         $date = Dt::createFromFormat($this->format, $input);
         
         if (!$date || $input != $date->format($this->format)) {
