@@ -16,8 +16,6 @@ use Widget\UnexpectedTypeException;
  */
 class File extends AbstractValidator
 {
-    protected $notStringMessage = '%name% must be a string';
-    
     protected $notFoundMessage = '%name% is not found or not readable';
     
     protected $maxSizeMessage = '%name% is too large(%size%), allowed maximum size is %maxSize%';

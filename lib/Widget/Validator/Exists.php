@@ -14,7 +14,7 @@ namespace Widget\Validator;
  */
 class Exists extends AbstractValidator
 {
-    protected $notFoundMessage = '%name% must be an existing directory';
+    protected $notFoundMessage = '%name% must be an existing file or directory';
     
     public function __invoke($input)
     {
@@ -23,8 +23,8 @@ class Exists extends AbstractValidator
             return false;
         }
         
-        $dir = stream_resolve_include_path($input);
-        if (!$dir || !file_exists($dir)) {
+        $file = stream_resolve_include_path($input);
+        if (!$file) {
             $this->addError('notFound');
             return false;
         }

@@ -8,8 +8,6 @@
 
 namespace Widget\Validator;
 
-use Widget\UnexpectedTypeException;
-
 /**
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>

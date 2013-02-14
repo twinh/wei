@@ -14,7 +14,7 @@ namespace Widget\Validator;
  */
 class EmptyValue extends AbstractValidator
 {
-    protected $emptyMessage = '%name% must be null';
+    protected $emptyMessage = '%name% must be empty';
     
     public function __invoke($input)
     {
