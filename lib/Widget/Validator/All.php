@@ -15,14 +15,14 @@ namespace Widget\Validator;
  */
 class All extends AbstractValidator
 {
-    protected $typeMessage = '%name% must be of type array';
+    protected $notArrayMessage = '%name% must be of type array';
     
     protected $itemName = '%name%\'s %index% item';
     
     public function __invoke($input, array $rules)
     {
         if (!is_array($input) && !$input instanceof \Traversable) {
-            $this->addError('type');
+            $this->addError('notArray');
             return false;
         }
 
