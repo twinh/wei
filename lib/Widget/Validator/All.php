@@ -19,8 +19,12 @@ class All extends AbstractValidator
     
     protected $itemName = '%name%\'s %index% item';
     
-    public function __invoke($input, array $rules)
+    protected $rules = array();
+    
+    public function __invoke($input, array $rules = array())
     {
+        $rules && $this->rules = $rules;
+        
         if (!is_array($input) && !$input instanceof \Traversable) {
             $this->addError('notArray');
             return false;
