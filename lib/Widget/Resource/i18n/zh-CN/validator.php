@@ -25,6 +25,9 @@ return array(
     // alpha
     '%name% must contain only letters (a-z)' => '%name%只能由字母(a-z)组成',
     
+    // blank
+    '%name% must be blank' => '%name%必须为空',
+    
     // chinese
     '%name% must contain only Chinese characters' => '%name%只能由中文组成',
     
@@ -46,6 +49,15 @@ return array(
     // email
     '%name% must be valid email address' => '%name%必须是有效的邮箱地址',
     
+    // emptyValue
+    '%name% must be empty' => '%name%必须为空',
+    
+    // endsWith
+    '%name% must end with: %findMe%' => '%name%必须以%findMe%结尾',
+    
+    // entityExists
+    '%name% is not exists' => '%name%不存在',
+    
     // equals
     '%name% must be equals %value%' => '%name%必须等于%value%',
     
@@ -53,8 +65,7 @@ return array(
     '%name% must be an existing file or directory' => '%name%必须是存在的文件或目录',
     
     // file
-    '%name% must be an existing file' => '%name%不存在',
-    '%name% is not readable' => '%name%不可读',
+    '%name% is not found or not readable' => '%name%不存在或不可读',
     '%name% is too large(%size%), allowed maximum size is %maxSize%' => '%name%太大了(%size%),允许的最大文件大小为%maxSize%',
     '%name% is too small(%size%), expected minimum size is %minSize%' => '%name%太小了(%size%),允许的最小文件大小为%minSize%',
     '%name% extension(%ext%) is not allowed, allowed extension: %exts%' => '%name%的扩展名(%ext%)不合法,只允许扩展名为:%exts%',
@@ -63,8 +74,6 @@ return array(
     '%name% mime type "%mimeType%" is not allowed' => '%name%的媒体类型不合法',
     
     // image
-    '%name% must be a valid image' => '%name%必须是有效的图片',
-    '%name% is not found or not readable' => '%name%不存在,或不可读',
     '%name% is not a valid image or the size of the image could not be detected' => '%name%不是有效的图片,或是无法检测到图片的尺寸',
     '%name% width is too big (%width%px), allowed maximum width is %maxWidth%px' => '%name%的宽度太大(%width%px), 允许的最大宽度为%maxWidth%px',
     '%name% width is too small (%width%px), expected minimum width is %minWidth%px' => '%name%的宽度太小(%width%px),允许的最小宽度应为%minWidth%px', 
@@ -74,8 +83,12 @@ return array(
     // in
     '%name% must be in %array%' => '%name%必须在指定的数据中:%array%',
     
+    // ip
+    '%name% must be valid IP' => '%name%必须是有效的IP地址',
+    
     // length
     '%name% must have a length between %min% and %max%' => '%name%的长度必须在%min%和%max%之间',
+    '%name% must contain %min% to %max% item(s)' => '%name%必须包含%min%到%max%项',
     '%name%\'s length could not be detected' => '无法检测到%name%的长度',
     
     // max
@@ -124,6 +137,9 @@ return array(
     
     // sameOf
     '%name% must be passed by at least %left% of %count% rules' => '%name%至少需要满足以下%count%条规则中的%left%条',
+    
+    // startsWith
+    '%name% must start with: %findMe%' => '%name%必须以%findMe%开头',
     
     // time
     '%name% is not a valid time, the format should be "%format%", eg: %example%' => '%name%不是合法的时间,格式应该是%format%,例如:%example%',
