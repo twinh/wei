@@ -16,6 +16,11 @@ class Callback extends AbstractValidator
 {
     protected $invalidMessage = '%name% is not valid';
     
+    /**
+     * The callback to validate the input value
+     * 
+     * @var callback
+     */
     protected $fn;
     
     public function __invoke($input, \Closure $fn = null)
