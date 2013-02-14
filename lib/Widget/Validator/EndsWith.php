@@ -24,6 +24,11 @@ class EndsWith extends AbstractValidator
     {
         $findMe && $this->findMe = $findMe;
         is_bool($case) && $this->case = $case;
+        
+        if (!$this->isString($input)) {
+            $this->addError('notString');
+            return false;
+        }
 
         $pos = strlen($input) - strlen($this->findMe);
 

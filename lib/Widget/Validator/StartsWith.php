@@ -25,6 +25,11 @@ class StartsWith extends AbstractValidator
         $findMe && $this->findMe = $findMe;
         is_bool($case) && $this->case = $case;
         
+        if (!$this->isString($input)) {
+            $this->addError('notString');
+            return false;
+        }
+        
         $fn = $this->case ? 'strpos' : 'stripos';
 
         if (0 !== $fn($input, $this->findMe)) {

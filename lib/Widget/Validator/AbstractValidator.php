@@ -20,6 +20,8 @@ use Widget\WidgetProvider;
  */
 abstract class AbstractValidator extends WidgetProvider implements ValidatorInterface
 {
+    protected $notStringMessage = '%name% must be a string';
+    
     /**
      * The message name
      * 
@@ -147,5 +149,16 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
             'message' => $customMessage ?: $this->message ?: $this->{$name . 'Message'},
             'parameters' => $parameters
         );
+    }
+    
+    /**
+     * Checks if the input value could be convert to string
+     * 
+     * @param mixed $input
+     * @return bool
+     */
+    protected function isString($input)
+    {
+        return is_scalar($input) || (is_object($input) && method_exists($input, '__toString'));
     }
 }

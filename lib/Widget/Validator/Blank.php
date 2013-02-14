@@ -18,6 +18,11 @@ class Blank extends AbstractValidator
     
     public function __invoke($input)
     {
+        if (!$this->isString($input)) {
+            $this->addError('notString');
+            return false;
+        }
+        
         if ('' !== trim($input)) {
             $this->addError('blank');
             return false;

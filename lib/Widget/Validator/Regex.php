@@ -26,6 +26,11 @@ class Regex extends AbstractValidator
     public function __invoke($input, $pattern = null)
     {
         is_string($pattern) && $this->pattern = $pattern;
+        
+        if (!$this->isString($input)) {
+            $this->addError('notString');
+            return false;
+        }
 
         if (!preg_match($this->pattern, $input)) {
             $this->addError('pattern', array(

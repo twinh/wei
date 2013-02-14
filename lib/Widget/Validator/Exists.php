@@ -18,7 +18,8 @@ class Exists extends AbstractValidator
     
     public function __invoke($input)
     {
-        if (!is_string($input)) {
+        if (!$this->isString($input)) {
+            $this->addError('notString');
             return false;
         }
         
