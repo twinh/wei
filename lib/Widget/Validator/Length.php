@@ -14,10 +14,12 @@ use Widget\UnexpectedTypeException;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Length extends AbstractValidator
+class Length extends AbstractLengthValidator
 {
     protected $lengthMessage = '%name% must have a length between %min% and %max%';
     
+    protected $lengthItemMessage = '%name% must contain %min% to %max% item(s)';
+
     protected $min;
     
     protected $max;
@@ -29,25 +31,19 @@ class Length extends AbstractValidator
             $this->max = $max;
         }
         
-        $len = static::getLength($input);
+        if (false === ($len = $this->getLength($input))) {
+            $this->addError('notDetectd');
+            return false;
+        }
         
         if ($this->min > $len || $this->max < $len) {
-            $this->addError('length');
+            $this->addError(is_scalar($input) ? 'length' : 'lengthItem', array(
+                'min' => $this->min,
+                'max' => $this->max
+            ));
             return false;
         }
         
         return true;
-    }
-
-    public static function getLength($input)
-    {
-        if (is_scalar($input)) {
-            $fn = function_exists('mb_strlen') ? 'mb_strlen' : 'strlen';
-            return $fn($input);
-        } elseif (is_array($input) || $input instanceof \Countable) {
-            return count($input);
-        } else {
-            throw new UnexpectedTypeException($input, 'string, array, or \Countable');
-        }
     }
 }

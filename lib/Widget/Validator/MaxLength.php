@@ -12,7 +12,7 @@ namespace Widget\Validator;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class MaxLength extends AbstractValidator
+class MaxLength extends AbstractLengthValidator
 {
     protected $maxMessage = '%name% must have a length lower than %max%';
     
@@ -24,7 +24,12 @@ class MaxLength extends AbstractValidator
     {
         $max && $this->max = $max;
         
-        if ($this->max < Length::getLength($input)) {
+        if (false === ($len = $this->getLength($input))) {
+            $this->addError('notDetectd');
+            return false;
+        }
+        
+        if ($this->max < $len) {
             $this->addError(is_scalar($input) ? 'max' : 'maxItem', array(
                 'max' => $max
             ));

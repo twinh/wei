@@ -12,7 +12,7 @@ namespace Widget\Validator;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class MinLength extends AbstractValidator
+class MinLength extends AbstractLengthValidator
 {
     protected $minMessage = '%name% must have a length greater than %min%';
     
@@ -24,7 +24,12 @@ class MinLength extends AbstractValidator
     {
         $min && $this->min = $min;
         
-        if ($this->min > Length::getLength($input)) {
+        if (false === ($len = $this->getLength($input))) {
+            $this->addError('notDetectd');
+            return false;
+        }
+        
+        if ($this->min > $len) {
             $this->addError(is_scalar($input) ? 'min' : 'minItem', array(
                 'min' => $min
             ));
