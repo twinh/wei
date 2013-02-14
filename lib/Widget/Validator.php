@@ -125,21 +125,7 @@ class Validator extends AbstractValidator
      * @var bool|null
      */
     protected $result;
-    
-    /**
-     * The language code for message
-     * 
-     * @var string
-     */
-    protected $language;
-    
-    /**
-     * The language file path
-     * 
-     * @var string
-     */
-    private $languageFile;
-    
+
     /**
      * The rule validator instances
      * 
@@ -169,18 +155,28 @@ class Validator extends AbstractValidator
             throw new \InvalidArgumentException('Validation rules should not be empty.');
         }
         
-        // Initialize the validation result to true
+        // Initialize the validation result to be true
         $this->result = true;
 
         foreach ($this->rules as $field => $rules) {
             $data = $this->getFieldData($field);
             
-            // Process simple rule, eg 'username' => 'required'
-            if (!is_array($rules)) {
-                $rules = array($rules);
+            /**
+             * Process simple rule
+             * FROM
+             * 'username' => 'required'
+             * TO
+             * 'username' => array(
+             *     'require' => true
+             * )
+             */
+            if (is_string($rules)) {
+                $rules = array($rules => true);
+            } elseif (!is_array($rules)) {
+                throw new UnexpectedTypeException($rules, 'array or string');
             }
 
-            // Make sure the required rule at first
+            // Make sure the "required" rule at first
             if (!isset($rules['required'])) {
                 $value = true;
             } else {
@@ -191,9 +187,24 @@ class Validator extends AbstractValidator
 
             // Start validation
             foreach ($rules as $rule => $params) {
+                // Prepare property options for validator
+                $props = array();
+                if (isset($this->names[$field])) {
+                    $props['name'] = $this->names[$field];
+                }
+                $messages = $this->getRuleMessage($field, $rule);
+                if (is_string($messages)) {
+                    $props['message'] =  $messages;
+                } elseif (is_array($messages)) {
+                    foreach ($messages as $name => $message) {
+                        $props[$name . 'Message'] = $message;
+                    }
+                }
+                
                 // The current rule validation result
+                /* @var $validator \Widget\Validator\AbstractValidator */
                 $validator = null;
-                $result = $this->is->validateOne($rule, $data, $params, $validator);
+                $result = $this->is->validateOne($rule, $data, $params, $validator, $props);
 
                 if (is_object($rule)) {
                     $rule = get_class($rule);
@@ -526,6 +537,17 @@ class Validator extends AbstractValidator
         return $this->messages;
     }
     
+    public function getRuleMessage($field, $rule)
+    {
+        if (isset($this->messages[$field][$rule]) && is_array($this->messages[$field])) {
+            return $this->messages[$field][$rule];
+        } elseif (isset($this->messages[$field]) && is_string($this->messages[$field])) {
+            return $this->messages[$field];
+        } else {
+            return false;
+        }
+    }
+    
     /**
      * Returns the message by given field, rule and option
      * 
@@ -555,57 +577,11 @@ class Validator extends AbstractValidator
     public function getDetailMessages()
     {
         $messages = array();
-        $languages = $this->languageFile ? require $this->languageFile : array();
-
         foreach ($this->invalidRules as $field => $rules) {
             foreach ($rules as $rule) {
-                /* @var $validator \Widget\Validator\AbstractValidator */
-                $validator = $this->ruleValidators[$field][$rule];
-
-                /**
-                 * Prepare field name
-                 */
-                if (isset($this->names[$field])) {
-                    $name = $this->names[$field];
-                } else {
-                    $name = $validator->getName();
-                }
-                if ($languages && isset($languages[$name])) {
-                    $name = $languages[$name];
-                }
-
-                foreach ($validator->getErrors() as $option => $params) {
-                    /**
-                     * Prepare error message
-                     */
-                    $message = $this->getMessage($field, $rule, $option) ?: $params[0];
-                    if ($languages && isset($languages[$message])) {
-                        $message = $languages[$message];
-                    }
-                    
-                    $vars = $params[1];
-
-                    // Translates error message name for "All" validator
-                    if ($validator instanceof \Widget\Validator\All) {
-                        $allName = $vars['name'];
-                        if ($languages && isset($languages[$allName])) {
-                            $allName = $languages[$allName];
-                        }
-                        $vars['name'] = $this->trans($allName, array('name' => $name) + $vars);
-                    } else {
-                        $vars['name'] = $name;
-                    }
-                    
-                    $messages[$field][$rule][$option] = $this->trans($message, $vars);
-                }
-                
-                // Combines message for group validator
-                if ($validator instanceof \Widget\Validator\AbstractGroupValidator) {
-                    $messages[$field][$rule] = $validator->combine($messages[$field][$rule]);
-                }
+                $messages[$field][$rule] = $this->ruleValidators[$field][$rule]->getMessages();
             }
         }
-
         return $messages;
     }
      
@@ -627,36 +603,7 @@ class Validator extends AbstractValidator
         }
         return $summaries;
     }
-    
-    /**
-     * Set language code
-     * 
-     * @param string $code The language code
-     * @return \Widget\Validator
-     * @throws \InvalidArgumentException When language file not found
-     */
-    public function setLanguage($code)
-    {
-        $file = __DIR__ . '/Resource/i18n/' . $code . '/validator.php';
-        if (!is_file($file)) {
-            throw new \InvalidArgumentException(sprintf('Validator language code "%s" is not available', $code));
-        } else {
-            $this->languageFile = $file;
-            $this->language = $code;
-            return $this;
-        }
-    }
-    
-    /**
-     * Returns the language code
-     * 
-     * @return string
-     */
-    public function getLanguage()
-    {
-        return $this->language;
-    }
-    
+
     /**
      * 
      * @param type $field
