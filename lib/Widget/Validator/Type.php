@@ -22,7 +22,7 @@ class Type extends AbstractValidator
     
     protected $type;
     
-    public function __invoke($input, $type = '')
+    public function __invoke($input, $type = null)
     {
         $type && $this->type = $type;
         
