@@ -22,7 +22,7 @@ class Type extends AbstractValidator
     
     protected $type;
     
-    public function __invoke($input, $type = null)
+    public function __invoke($input, $type = '')
     {
         $type && $this->type = $type;
         
@@ -31,7 +31,7 @@ class Type extends AbstractValidator
         } elseif (function_exists($fn = 'ctype_' . $this->type)) {
             $result = $fn($input);
         } else {
-            throw new Exception(sprintf('Unknow type "%s"', $this->type));
+            $result = $input instanceof $this->type;
         }
         
         if (!$result) {
