@@ -18,7 +18,7 @@ use Widget\Exception;
  */
 class Type extends AbstractValidator
 {
-    protected $typeMessage = '%name% must be of type %type%';
+    protected $typeMessage = '%name% must be %type%';
     
     protected $type;
     
