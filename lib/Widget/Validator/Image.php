@@ -12,10 +12,8 @@ namespace Widget\Validator;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Image extends AbstractValidator
+class Image extends File
 {
-    protected $notFoundMessage = '%name% is not found or not readable';
-    
     protected $notDetectedMessage = '%name% is not a valid image or the size of the image could not be detected';
 
     protected $widthTooBigMessage = '%name% width is too big (%width%px), allowed maximum width is %maxWidth%px';
@@ -50,12 +48,7 @@ class Image extends AbstractValidator
     
     public function __invoke($file, $options = array())
     {
-        $options && $this->option($options);
-        
-        if (false === stream_resolve_include_path($file)) {
-            $this->addError('notFound');
-            return false;
-        }
+        parent::__invoke($file, $options);
         
         $size = @getimagesize($file);
         if (false === $size) {
