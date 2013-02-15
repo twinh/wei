@@ -17,9 +17,23 @@ class All extends AbstractValidator
 {
     protected $notArrayMessage = '%name% must be of type array';
     
+    /**
+     * This message is just a placeholder, would not display to user
+     * 
+     * @var string
+     */
+    protected $invalidMessage = 'Some of the items is not valid';
+    
     protected $itemName = '%name%\'s %index% item';
     
     protected $rules = array();
+    
+    /**
+     * The invalid validators
+     * 
+     * @var array
+     */
+    protected $validators = array();
     
     public function __invoke($input, array $rules = array())
     {
@@ -35,18 +49,18 @@ class All extends AbstractValidator
         foreach ($input as $item) {
             foreach ($rules as $rule => $options) {
                 if (!$this->is->validateOne($rule, $item, $options, $validator)) {
-                    foreach ($validator->getErrors() as $name => $error) {
-                        $this->addError($rule . '.' . $name . '.' . $index, array(
-                            'name' => $this->itemName,
-                            'index' => $index
-                        ) + $error['parameters'], $error['message']);
-                    }
+                    $this->validators[$index][$rule] = $validator;
                 }
             }
             $index++;
         }
         
-        return !$this->errors;
+        // Adds the placeholder message
+        if (count($this->validators)) {
+            $this->addError('invalid');
+            return false;
+        }
+        return true;
     }
     
     /**
@@ -55,17 +69,26 @@ class All extends AbstractValidator
     public function getMessages()
     {
         $this->loadTranslationMessages();
+        $translator = $this->t;
         
-        foreach ($this->errors as &$error) {
-            if (isset($error['parameters']['name'])) {
-                $error['parameters']['name'] = $this->t($error['parameters']['name']);
-                $error['parameters']['name'] = $this->t($error['parameters']['name'], array(
-                    '%name%' => $this->t($this->name),
-                    '%index%' => $error['parameters']['index'],
-                ));
+        // Firstly, translates the item name (%name%'s %index% item)
+        // Secondly, translates "%name%" in the item name
+        $name = $translator($translator($this->itemName), array(
+            '%name%' => $translator($this->name)
+        ));
+        
+        $messages = array();
+        foreach ($this->validators as $index => $validators) {
+            foreach ($validators as $rule => $validator) {
+                // Lastly, translates "index" in the item name
+                $validator->setName($translator($name, array(
+                    '%index%' => $index
+                )));
+                foreach ($validator->getMessages() as $option => $message) {
+                    $messages[$rule . '.' . $option . '.' . $index] = $message;
+                }
             }
         }
-
-        return parent::getMessages();
+        return $messages;
     }
 }
