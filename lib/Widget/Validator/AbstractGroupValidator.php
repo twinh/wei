@@ -37,6 +37,7 @@ class AbstractGroupValidator extends AbstractValidator
          *   'atLeast' => "atLeast message\n"
          *              . "first message;second message\n"
          *              . "third message"
+         * )
          */
         $messages = parent::getMessages();
         $key = key($messages);
