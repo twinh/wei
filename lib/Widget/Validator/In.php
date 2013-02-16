@@ -37,9 +37,7 @@ class In extends AbstractValidator
         is_bool($strict) && $this->strict = $strict;
         
         if (!in_array($input, $this->array, $this->strict)) {
-            $this->addError('notIn', array(
-                'array' => implode(',', $this->array)
-            ));
+            $this->addError('notIn');
             return false;
         }
         

@@ -33,9 +33,7 @@ class Regex extends AbstractValidator
         }
 
         if (!preg_match($this->pattern, $input)) {
-            $this->addError('pattern', array(
-                'pattern' => $this->pattern
-            ));
+            $this->addError('pattern');
             return false;
         }
         

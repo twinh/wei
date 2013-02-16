@@ -23,9 +23,7 @@ class Max extends AbstractValidator
         $max && $this->max = $max;
         
         if ($this->max < $input) {
-            $this->addError('max', array(
-                'max' => $this->max
-            ));
+            $this->addError('max');
             return false;
         }
         

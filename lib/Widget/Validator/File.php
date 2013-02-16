@@ -18,9 +18,9 @@ class File extends AbstractValidator
 {
     protected $notFoundMessage = '%name% is not found or not readable';
     
-    protected $maxSizeMessage = '%name% is too large(%size%), allowed maximum size is %maxSize%';
+    protected $maxSizeMessage = '%name% is too large(%sizeString%), allowed maximum size is %maxSizeString%';
     
-    protected $minSizeMessage = '%name% is too small(%size%), expected minimum size is %minSize%';
+    protected $minSizeMessage = '%name% is too small(%sizeString%), expected minimum size is %minSizeString%';
 
     protected $extsMessage = '%name% extension(%ext%) is not allowed, allowed extension: %exts%';
     
@@ -33,18 +33,53 @@ class File extends AbstractValidator
     protected $excludeMimeTypesMessage = '%name% mime type "%mimeType%" is not allowed';
     
     /**
-     * The max file size limit
+     * The detected byte size of file
+     * 
+     * @var int
+     */
+    protected $size;
+    
+    /**
+     * The formatted file size, e.g. 1.2MB, 10KB
+     * 
+     * @var string
+     */
+    protected $sizeString;
+    
+    /**
+     * The maximum file size limit
      *
      * @var int
      */
     protected $maxSize = 0;
+    
+    /**
+     * The formatted maximum file size, e.g. 1.2MB, 10KB
+     * 
+     * @var string
+     */
+    protected $maxSizeString;
 
     /**
-     * The min file size limit
+     * The minimum file size limit
      *
      * @var int
      */
     protected $minSize = 0;
+    
+    /**
+     * The formatted minimum file size, e.g. 1.2MB, 10KB
+     * 
+     * @var string
+     */
+    protected $minSizeString;
+    
+    /**
+     * The detected file extension
+     * 
+     * @var string
+     */
+    protected $ext;
 
     /**
      * The allowed file extensions
@@ -59,6 +94,13 @@ class File extends AbstractValidator
      * @var array
      */
     protected $excludeExts = array();
+    
+    /**
+     * The detected file mime type
+     * 
+     * @var string 
+     */
+    protected $mimeType;
     
     /**
      * The allowd file mime types
@@ -112,62 +154,44 @@ class File extends AbstractValidator
 
         // Validate file extension
         // Use substr instead of pathinfo, because pathinfo may return error value in unicode
-        $ext = substr($file, strrpos($file, '.') + 1);
-        if ($this->excludeExts && in_array($ext, $this->excludeExts)) {
-            $this->addError('excludeExts', array(
-                'ext'           => $ext,
-                'excludeExts'   => implode(',', $this->excludeExts)
-            ));
+        $this->ext = substr($file, strrpos($file, '.') + 1);
+        if ($this->excludeExts && in_array($this->ext, $this->excludeExts)) {
+            $this->addError('excludeExts');
         }
 
-        if ($this->exts && !in_array($ext, (array) $this->exts)) {
-            $this->addError('exts', array(
-                'ext'   => $ext,
-                'exts'  => implode(',', (array) $this->exts)
-            ));
+        if ($this->exts && !in_array($this->ext, (array) $this->exts)) {
+            $this->addError('exts');
         }
 
         // Validate file size
-        $size = 0;
         if ($this->maxSize || $this->minSize) {
-            $size = filesize($file);
+            $this->size = filesize($file);
+            $this->sizeString = $this->fromBytes($this->size);
         }
   
-        if ($size && $this->maxSize && $this->maxSize <= $size) {
-            $this->addError('maxSize', array(
-                'size'      => $this->fromBytes($size),
-                'maxSize'   => $this->fromBytes($this->maxSize)
-            ));
+        if ($this->maxSize && $this->maxSize <= $this->size) {
+            $this->addError('maxSize');
         }
         
-        if ($size && $this->minSize && $this->minSize > $size) {
-            $this->addError('minSize', array(
-                'size'      => $this->fromBytes($size),
-                'minSize'   => $this->fromBytes($this->minSize)
-            ));
+        if ($this->minSize && $this->minSize > $this->size) {
+            $this->addError('minSize');
         }
         
         // Validate file mime type
         if ($this->mimeTypes || $this->excludeMimeTypes) {
-            $mimeType = $this->getMimeType($file);
-            if (!$mimeType) {
+            $this->mimeType = $this->getMimeType($file);
+            if (!$this->mimeType) {
                 $this->addError('mimeTypeNotDetected');
                 return false;
             }
         }
 
-        if ($this->mimeTypes && !$this->inMimeType($mimeType, $this->mimeTypes)) {
-            $this->addError('mimeTypes', array(
-                'mimeType'  => $mimeType,
-                'mimeTypes' => implode(',', $this->mimeTypes)
-            ));
+        if ($this->mimeTypes && !$this->inMimeType($this->mimeType, $this->mimeTypes)) {
+            $this->addError('mimeTypes');
         }
         
-        if ($this->excludeMimeTypes && $this->inMimeType($mimeType, $this->excludeMimeTypes)) {
-            $this->addError('excludeMimeTypes', array(
-                'mimeType'          => $mimeType,
-                'excludeMimeTypes'  => implode(',', $this->excludeMimeTypes)
-            ));
+        if ($this->excludeMimeTypes && $this->inMimeType($this->mimeType, $this->excludeMimeTypes)) {
+            $this->addError('excludeMimeTypes');
         }
         
         return !$this->errors;
@@ -232,6 +256,7 @@ class File extends AbstractValidator
     protected function setMaxSize($maxSize)
     {
         $this->maxSize = $this->toBytes($maxSize);
+        $this->maxSizeString = $this->fromBytes($this->maxSize);
         
         return $this;
     }
@@ -245,6 +270,7 @@ class File extends AbstractValidator
     protected function setMinSize($minSize)
     {
         $this->minSize = $this->toBytes($minSize);
+        $this->minSizeString = $this->fromBytes($this->minSize);
         
         return $this;
     }

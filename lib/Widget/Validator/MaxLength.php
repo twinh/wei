@@ -30,9 +30,7 @@ class MaxLength extends AbstractLengthValidator
         }
         
         if ($this->max < $len) {
-            $this->addError(is_scalar($input) ? 'max' : 'maxItem', array(
-                'max' => $max
-            ));
+            $this->addError(is_scalar($input) ? 'max' : 'maxItem');
             return false;
         }
         

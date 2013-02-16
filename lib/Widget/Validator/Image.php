@@ -63,31 +63,19 @@ class Image extends File
         $this->height = $size[1];
         
         if ($this->maxWidth && $this->maxWidth < $this->width) {
-            $this->addError('widthTooBig', array(
-                'maxWidth' => $this->maxWidth,
-                'width' => $this->width
-            ));
+            $this->addError('widthTooBig');
         }
         
         if ($this->minWidth && $this->minWidth > $this->width) {
-            $this->addError('widthTooSmall', array(
-                'minWidth' => $this->minWidth,
-                'width' => $this->width
-            ));
+            $this->addError('widthTooSmall');
         }
         
         if ($this->maxHeight && $this->maxHeight < $this->height) {
-            $this->addError('heightTooBig', array(
-                'maxHeight' => $this->maxHeight,
-                'height' => $this->height
-            ));
+            $this->addError('heightTooBig');
         }
         
         if ($this->minHeight && $this->minHeight > $this->height) {
-            $this->addError('heightTooSmall', array(
-                'minHeight' => $this->minHeight,
-                'height' => $this->height
-            ));
+            $this->addError('heightTooSmall');
         }
         
         return !$this->errors;

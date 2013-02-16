@@ -35,9 +35,7 @@ class EndsWith extends AbstractValidator
         $fn = $this->case ? 'strrpos' : 'strripos';
 
         if ($pos !== $fn($input, $this->findMe)) {
-            $this->addError('notFound', array(
-                'findMe' => $this->findMe
-            ));
+            $this->addError('notFound');
             return false;
         }
         

@@ -75,22 +75,25 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
         $this->loadTranslationMessages();
         
         if ($this->opposite) {
-            return array(
-                'not' => $this->t($this->notMessage, array(
-                    '%name%' => $this->t($this->name)
-                ))
-            );
+            $this->addError('not');
         }
 
         $messages = array();
-        foreach ($this->errors as $name => $error) {
+        foreach ($this->errors as $name => $message) {
+            preg_match_all('/\%(.+?)\%/', $message, $matches);
             $parameters = array();
-            foreach ($error['parameters'] as $key => $var) {
-                $parameters['%' . $key  . '%'] = $var;
+            foreach ($matches[1] as $match) {
+                if ('name' == $match) {
+                    $parameters['%name%'] = $this->t($this->name);
+                } else {
+                    if (!isset($this->$match)) {
+                        throw new \InvalidArgumentException(sprintf('Unkonwn parameter "%%%s%%" in message "%s"', $match, $message));
+                    }
+                    $parameters['%' . $match . '%'] = is_array($this->$match) ? 
+                        implode(', ', $this->$match) : $this->$match;;
+                }
             }
-            $messages[$name] = $this->t($error['message'], $parameters + array(
-                '%name%' => $this->t($this->name)
-            ));            
+            $messages[$name] = $this->t($message, $parameters);      
         }
         return $messages;
     }
@@ -159,15 +162,14 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
      * Adds error definition
      * 
      * @param string $name The name of error
-     * @param array $parameters The parameters for error message
      * @param string $customMessage The custom error message
      */
-    protected function addError($name, array $parameters = array(), $customMessage = null)
+    protected function addError($name, $customMessage = null)
     {
-        $this->errors[$name] = array(
-            'message' => $customMessage ?: $this->message ?: $this->{$name . 'Message'},
-            'parameters' => $parameters
-        );
+        if (is_array($customMessage)) {
+            throw new \Widget\Exception('改啦');
+        }
+        $this->errors[$name] = $customMessage ?: $this->message ?: $this->{$name . 'Message'};
     }
     
     /**

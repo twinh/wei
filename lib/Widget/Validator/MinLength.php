@@ -30,9 +30,7 @@ class MinLength extends AbstractLengthValidator
         }
         
         if ($this->min > $len) {
-            $this->addError(is_scalar($input) ? 'min' : 'minItem', array(
-                'min' => $min
-            ));
+            $this->addError(is_scalar($input) ? 'min' : 'minItem');
             return false;
         }
         

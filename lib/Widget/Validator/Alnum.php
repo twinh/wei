@@ -16,5 +16,7 @@ class Alnum extends Regex
 {
     protected $patternMessage = '%name% must contain letters (a-z) and digits (0-9)';
     
+    protected $notMessage = '%name% must not contain letters (a-z) and digits (0-9)';
+    
     protected $pattern = '/^([a-z0-9]+)$/i';
 }

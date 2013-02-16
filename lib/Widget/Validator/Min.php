@@ -23,9 +23,7 @@ class Min extends AbstractValidator
         $min && $this->min = $min;
         
         if ($this->min > $input) {
-            $this->addError('min', array(
-                'min' => $this->min
-            ));
+            $this->addError('min');
             return false;
         }
         

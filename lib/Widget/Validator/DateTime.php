@@ -20,6 +20,8 @@ class DateTime extends AbstractValidator
     
     protected $format = 'Y-m-d H:i:s';
     
+    protected $example;
+    
     public function __invoke($input, $format = null)
     {
         $format && $this->format = $format;
@@ -32,10 +34,8 @@ class DateTime extends AbstractValidator
         $date = Dt::createFromFormat($this->format, $input);
         
         if (!$date || $input != $date->format($this->format)) {
-            $this->addError('format', array(
-                'format' => $this->format,
-                'example' => date($this->format)
-            ));
+            $this->example = date($this->format);
+            $this->addError('format');
             return false;
         }
         

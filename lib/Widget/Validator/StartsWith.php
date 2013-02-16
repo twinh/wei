@@ -33,9 +33,7 @@ class StartsWith extends AbstractValidator
         $fn = $this->case ? 'strpos' : 'stripos';
 
         if (0 !== $fn($input, $this->findMe)) {
-            $this->addError('notFound', array(
-                'findMe' => $this->findMe
-            ));
+            $this->addError('notFound');
             return false;
         }
         

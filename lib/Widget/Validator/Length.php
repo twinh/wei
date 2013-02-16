@@ -35,10 +35,7 @@ class Length extends AbstractLengthValidator
         }
         
         if ($this->min > $len || $this->max < $len) {
-            $this->addError(is_scalar($input) ? 'length' : 'lengthItem', array(
-                'min' => $this->min,
-                'max' => $this->max
-            ));
+            $this->addError(is_scalar($input) ? 'length' : 'lengthItem');
             return false;
         }
         

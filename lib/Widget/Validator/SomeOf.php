@@ -46,11 +46,8 @@ class SomeOf extends AbstractGroupValidator
             }
         }
         
-        // Updates error parameters
-        $this->addError('atLeast', array(
-            'count' => count($rules) - $passed,
-            'left' => $this->atLeast - $passed
-        ));
+        $this->count = count($rules) - $passed;
+        $this->left = $this->atLeast - $passed;
         
         return false;
     }
