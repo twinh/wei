@@ -50,7 +50,7 @@ class Is extends WidgetProvider
          
         // Starts with "not", such as notDigit, notEqual
         if (0 === stripos($rule, 'not')) {
-            $opposite = true;
+            $opposite = $props['opposite'] = true;
             $rule = substr($rule, 3);
         } else {
             $opposite = false;
