@@ -146,7 +146,7 @@ return array(
     '%name% is not a valid time, the format should be "%format%", eg: %example%' => '%name%不是合法的时间,格式应该是%format%,例如:%example%',
     
     // type
-    '%name% must be %type%' => '%name%必须是%type%',
+    '%name% must be %typeName%' => '%name%必须是%typeName%',
     // is_xxx
     'array'     => '数组',
     'bool'      => '布尔',

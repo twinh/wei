@@ -18,9 +18,11 @@ use Widget\Exception;
  */
 class Type extends AbstractValidator
 {
-    protected $typeMessage = '%name% must be %type%';
+    protected $typeMessage = '%name% must be %typeName%';
     
     protected $type;
+
+    protected $typeName;
     
     public function __invoke($input, $type = null)
     {
@@ -35,9 +37,7 @@ class Type extends AbstractValidator
         }
         
         if (!$result) {
-            $this->addError('type', array(
-                'type' => $this->type
-            ));
+            $this->addError('type');
         }
         
         return $result;
@@ -50,10 +50,8 @@ class Type extends AbstractValidator
     {
         $this->loadTranslationMessages();
         
-        // Translates the "type" parameter
-        if (isset($this->errors['type'])) {
-            $this->errors['type']['parameters']['type'] = $this->t($this->errors['type']['parameters']['type']);
-        }
+        $this->typeName = $this->t($this->type);
+        
         return parent::getMessages();
     }
 }
