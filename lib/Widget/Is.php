@@ -50,10 +50,10 @@ class Is extends WidgetProvider
          
         // Starts with "not", such as notDigit, notEqual
         if (0 === stripos($rule, 'not')) {
-            $reverse = true;
+            $opposite = true;
             $rule = substr($rule, 3);
         } else {
-            $reverse = false;
+            $opposite = false;
         }
         
         $validator = $this->createRuleValidator($rule, $props);
@@ -70,7 +70,7 @@ class Is extends WidgetProvider
             $result = $validator($data);
         }
 
-        return $result xor $reverse;
+        return $result xor $opposite;
     }
 
     /**
