@@ -110,6 +110,7 @@ return array(
     
     // null
     '%name% must be null' => '%name%必须是null值',
+    '%name% must not be null' => '%name%不能为null值',
     
     // number
     '%name% must be valid number' => '%name%必须是有效的数字',
