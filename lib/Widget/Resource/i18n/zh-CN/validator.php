@@ -96,6 +96,7 @@ return array(
     
     // in
     '%name% must be in %array%' => '%name%必须在指定的数据中:%array%',
+    '%name% must not be in %array%' => '%name%不能在指定的数据中:%array%', 
     
     // ip
     '%name% must be valid IP' => '%name%必须是有效的IP地址',
