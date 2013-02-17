@@ -2,24 +2,8 @@
 /**
  * Widget Framework
  *
- * Copyright (c) 2008-2013 Twin Huang. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @author      Twin Huang <twinh@yahoo.cn>
- * @copyright   Twin Huang
+ * @copyright   Copyright (c) 2008-2013 Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id: Flush.php 1267 2012-06-30 08:42:51Z itwinh@gmail.com $
  */
 
 namespace Widget;
@@ -28,10 +12,8 @@ namespace Widget;
  * Flush
  *
  * @package     Widget
- * @subpackage  Widget
- * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2012-02-16 15:02:26
+ * @property \Widget\App $app The application widget
  */
 class Flush extends WidgetProvider
 {
@@ -42,7 +24,7 @@ class Flush extends WidgetProvider
         // how about other server
         apache_setenv('no-gzip', '1');
 
-        ob_implicit_flush(true);
+        ob_implicit_flush();
 
         // todo $buffer = ini_get('output_buffering');
         // echo str_repeat(' ',$buffer+1);
