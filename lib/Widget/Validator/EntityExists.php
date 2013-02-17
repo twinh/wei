@@ -15,8 +15,10 @@ namespace Widget\Validator;
  */
 class EntityExists extends AbstractValidator
 {
-    protected $notFoundMessage = '%name% is not exists';
+    protected $notFoundMessage = '%name% not exists';
     
+    protected $notMessage = '%name% already exists';
+
     protected $entityClass;
     
     protected $entity;

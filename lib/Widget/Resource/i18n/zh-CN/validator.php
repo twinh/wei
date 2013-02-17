@@ -65,7 +65,8 @@ return array(
     '%name% must not end with "%findMe%"' => '%name%不能以%findMe%结尾',
     
     // entityExists
-    '%name% is not exists' => '%name%不存在',
+    '%name% not exists' => '%name%不存在',
+    '%name% already exists' => '%name%已存在',
     
     // equals
     '%name% must be equals %value%' => '%name%必须等于%value%',
