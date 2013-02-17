@@ -16,6 +16,8 @@ class Regex extends AbstractValidator
 {
     protected $patternMessage = '%name% must match against pattern "%pattern%"';
     
+    protected $notMessage = '%name% must not match against pattern "%pattern%"';
+    
     /**
      * The regex pattern
      * 
