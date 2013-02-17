@@ -21,6 +21,20 @@ class SomeOf extends AbstractGroupValidator
     
     protected $atLeast;
     
+    /**
+     * The passed rules number, using for message only
+     *  
+     * @var string
+     */
+    protected $count;
+    
+    /**
+     * The not passed rules number, using for message only
+     * 
+     * @var string
+     */
+    protected $left;
+    
     public function __invoke($input, array $rules = array(), $atLeast = null)
     {
         $atLeast && $this->atLeast = $atLeast;
