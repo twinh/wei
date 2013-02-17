@@ -16,7 +16,7 @@ class Blank extends AbstractValidator
 {
     protected $blankMessage = '%name% must be blank';
     
-    protected $notMessage = '';
+    protected $notMessage = '%name% must not be blank';
     
     public function __invoke($input)
     {
