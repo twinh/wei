@@ -9,7 +9,9 @@ class QQTest extends TestCase
      */
     public function testQQ($input)
     {
-        $this->assertTrue($this->isQQ($input));
+        $this->assertTrue($this->is('QQ', $input));
+        
+        $this->assertFalse($this->is('notQQ', $input));
     }
 
     /**
@@ -17,7 +19,9 @@ class QQTest extends TestCase
      */
     public function testNotQQ($input)
     {
-        $this->assertFalse($this->isQQ($input));
+        $this->assertFalse($this->is('QQ', $input));
+        
+        $this->assertTrue($this->is('notQQ', $input));
     }
 
     public function providerForQQ()
