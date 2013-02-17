@@ -75,7 +75,7 @@ return array(
     
     // exists
     '%name% must be an existing file or directory' => '%name%必须是存在的文件或目录',
-    '%name% must be a non-existing file or directory' => '%name%必须是不存在的文件目录',
+    '%name% must be a non-existing file or directory' => '%name%必须是不存在的文件或目录',
     
     // file
     '%name% is not found or not readable' => '%name%不存在或不可读',
@@ -85,6 +85,7 @@ return array(
     '%name% extension(%ext%) is not allowed, not allowed extension: %excludeExts%' => '%name%的扩展名(%ext%)不合法,不允许扩展名为:%excludeExts%',
     '%name% mime type could not be detected' => '无法检测%name%的媒体类型',
     '%name% mime type "%mimeType%" is not allowed' => '%name%的媒体类型不合法',
+    '%name% must be a non-existing file' => '%name%必须是不存在的文件',
     
     // image
     '%name% is not a valid image or the size of the image could not be detected' => '%name%不是有效的图片,或是无法检测到图片的尺寸',

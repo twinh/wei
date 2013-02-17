@@ -32,6 +32,8 @@ class File extends AbstractValidator
     
     protected $excludeMimeTypesMessage = '%name% mime type "%mimeType%" is not allowed';
     
+    protected $notMessage = '%name% must be a non-existing file';
+    
     /**
      * The detected byte size of file
      * 
