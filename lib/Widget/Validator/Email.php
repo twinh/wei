@@ -16,6 +16,8 @@ class Email extends AbstractValidator
 {
     protected $formatMessage = '%name% must be valid email address';
     
+    protected $notMessage = '%name% must not be an email address';
+    
     public function __invoke($input)
     {
         if (!filter_var($input, FILTER_VALIDATE_EMAIL)) {

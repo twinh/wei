@@ -9,7 +9,9 @@ class EmailTest extends TestCase
      */
     public function testEmail($input)
     {
-        $this->assertTrue($this->isEmail($input));
+        $this->assertTrue($this->is('email', $input));
+        
+        $this->assertFalse($this->is('notEmail', $input));
     }
 
     /**
@@ -17,7 +19,9 @@ class EmailTest extends TestCase
      */
     public function testNotEmail($input)
     {
-        $this->assertFalse($this->isEmail($input));
+        $this->assertFalse($this->is('email', $input));
+        
+        $this->assertTrue($this->is('notEmail', $input));
     }
 
     public function providerForEmail()

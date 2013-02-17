@@ -54,6 +54,7 @@ return array(
     
     // email
     '%name% must be valid email address' => '%name%必须是有效的邮箱地址',
+    '%name% must not be an email address' => '%name%不能是邮箱地址',
     
     // emptyValue
     '%name% must be empty' => '%name%必须为空',
