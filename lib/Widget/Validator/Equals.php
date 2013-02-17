@@ -14,7 +14,9 @@ namespace Widget\Validator;
  */
 class Equals extends AbstractValidator
 {
-    protected $notEqualsMessage = '%name% must be equals %value%';
+    protected $notEqualsMessage = '%name% must be equals %equals%';
+    
+    protected $notMessage = '%name% must not be equals %equals%';
     
     protected $equals;
     
