@@ -16,5 +16,7 @@ class DoubleByte extends Regex
 {
     protected $patternMessage = '%name% must contain only double byte characters';
     
+    protected $notMessage = '%name% must not contain only double byte characters';
+    
     protected $pattern = '/^[^\x00-xff]+$/';
 }

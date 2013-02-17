@@ -50,6 +50,7 @@ return array(
     
     // 'doubleByte'
     '%name% must contain only double byte characters' => '%name%只能由双字节字符组成',
+    '%name% must not contain only double byte characters' => '%name%不能只由双字节字符组成',
     
     // email
     '%name% must be valid email address' => '%name%必须是有效的邮箱地址',
