@@ -152,6 +152,7 @@ return array(
     
     // regex
     '%name% must match against pattern "%pattern%"' => '%name%必须匹配模式"%pattern%"',
+    '%name% must not match against pattern "%pattern%"' => '%name%必须不匹配模式"%pattern%"',
     
     // require
     '%name% is required' => '%name%不能为空',
