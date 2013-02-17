@@ -18,6 +18,13 @@ class AbstractGroupValidator extends AbstractValidator
     protected $validators = array();
     
     /**
+     * Whether combine messages into single one or not
+     * 
+     * @var bool
+     */
+    protected $combineMessages = true;
+    
+    /**
      * {@inheritdoc}
      */
     public function getMessages()
@@ -39,15 +46,24 @@ class AbstractGroupValidator extends AbstractValidator
          *              . "third message"
          * )
          */
-        $messages = parent::getMessages();
-        $key = key($messages);
+        if ($this->combineMessages) {
+            $messages = parent::getMessages();
+            $key = key($messages);
         
-        foreach ($this->validators as $rule => $validator) {
-            $messages[$rule] = implode(';', $validator->getMessages());
-        }
+            foreach ($this->validators as $rule => $validator) {
+                $messages[$rule] = implode(';', $validator->getMessages());
+            }
 
-        return array(
-            $key => implode("\n", $messages)
-        );
+            return array(
+                $key => implode("\n", $messages)
+            );
+        } else {
+            foreach ($this->validators as $rule => $validator) {
+                foreach ($validator->getMessages() as $option => $message) {
+                    $messages[$rule . '.' . $option] = $message;
+                }
+            }
+            return $messages;
+        }
     }
 }
