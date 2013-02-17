@@ -58,6 +58,7 @@ return array(
     
     // emptyValue
     '%name% must be empty' => '%name%必须为空',
+    '%name% must not be empty' => '%name%必须为空',
     
     // endsWith
     '%name% must end with: %findMe%' => '%name%必须以%findMe%结尾',

@@ -113,6 +113,7 @@ class Is extends WidgetProvider
      */
     public function hasRule($rule)
     {
+        $rule[0] = strtolower($rule[0]);
         if (isset($this->alias[$rule])) {
             $class = $this->alias[$rule];
         } else {

@@ -16,6 +16,8 @@ class EmptyValue extends AbstractValidator
 {
     protected $emptyMessage = '%name% must be empty';
     
+    protected $notMessage = '%name% must not be empty';
+    
     public function __invoke($input)
     {
         if (!empty($input)) {

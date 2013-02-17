@@ -11,8 +11,9 @@ class EmptyTest extends TestCase
      */
     public function testEmpty($input)
     {
-        $empty = $this->isEmpty;
-        $this->assertTrue($empty($input));
+        $this->assertTrue($this->is('empty', $input));
+        
+        $this->assertFalse($this->is('notEmpty', $input));
     }
 
     /**
@@ -20,8 +21,9 @@ class EmptyTest extends TestCase
      */
     public function testNotEmpty($input)
     {
-        $empty = $this->isEmpty;
-        $this->assertFalse($empty($input));
+        $this->assertFalse($this->is('empty', $input));
+        
+        $this->assertTrue($this->is('notEmpty', $input));
     }
 
     public function providerForEmpty()
