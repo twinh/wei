@@ -13,19 +13,36 @@ namespace Widget\Validator;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\Is $is The validator manager
  */
-class NoneOf extends AbstractValidator
+class NoneOf extends AbstractGroupValidator
 {
-    protected $rules = array();
+    protected $invalidMessage = '%name% must be passed by all of these rules'; 
     
-    public function __invoke($input, array $rules = null)
+    protected $rules = array();
+
+    protected $validators = array();
+    
+    public function __invoke($input, array $rules = array())
     {
         $rules && $this->rules = $rules;
         
+        $this->addError('invalid');
+
+        $validator = null;
+        $props = array(
+            'name' => $this->name,
+            'opposite' => true
+        );
         foreach ($this->rules as $rule => $options) {
-            if ($this->is->validateOne($rule, $input, $options)) {
-                return false;
+            if ($this->is->validateOne($rule, $input, $options, $validator, $props)) {
+                $this->validators[$rule] = $validator;
             }
         }
-        return true;
+        
+        if (!$this->validators) {
+            $this->errors = array();
+            return true;
+        } else {
+            return false;
+        }
     }
 }
