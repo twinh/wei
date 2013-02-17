@@ -148,6 +148,7 @@ return array(
     
     // range
     '%name% must between %min% and %max%' => '%name%必须在%min%到%max%之间',
+    '%name% must not between %min% and %max%' => '%name%不能在%min%到%max%之间',
     
     // regex
     '%name% must match against pattern "%pattern%"' => '%name%必须匹配模式"%pattern%"',
