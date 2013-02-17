@@ -136,6 +136,7 @@ return array(
 
     // phone
     '%name% must be valid phone number' => '%name%必须是有效的电话号码',
+    '%name% must not be phone number' => '%name%不能是电话号码',
     
     // postcode
     '%name% must be six length of digit' => '%name%必须是6位长度的数字',

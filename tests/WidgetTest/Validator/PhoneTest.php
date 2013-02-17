@@ -9,7 +9,9 @@ class PhoneTest extends TestCase
      */
     public function testPhone($input)
     {
-        $this->assertTrue($this->isPhone($input));
+        $this->assertTrue($this->is('phone', $input));
+        
+        $this->assertFalse($this->is('notPhone', $input));
     }
 
     /**
@@ -17,7 +19,9 @@ class PhoneTest extends TestCase
      */
     public function testNotPhone($input)
     {
-        $this->assertFalse($this->isPhone($input));
+        $this->assertFalse($this->is('phone', $input));
+        
+        $this->assertTrue($this->is('notPhone', $input));
     }
 
     public function providerForPhone()
