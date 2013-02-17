@@ -175,7 +175,7 @@ class Validator extends AbstractValidator
             } elseif ($rules instanceof AbstractValidator) {
                 $rules = array($rules);
             } elseif (!is_array($rules)) {
-                throw new UnexpectedTypeException($rules, 'array or string');
+                throw new UnexpectedTypeException($rules, 'array, string or instance of AbstractValidator');
             }
 
             // Make sure the "required" rule at first
