@@ -191,6 +191,6 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
      */
     protected function isString($input)
     {
-        return is_scalar($input) || (is_object($input) && method_exists($input, '__toString'));
+        return is_scalar($input) || is_null($input) || (is_object($input) && method_exists($input, '__toString'));
     }
 }
