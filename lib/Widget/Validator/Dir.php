@@ -16,6 +16,8 @@ class Dir extends AbstractValidator
 {
     protected $notFoundMessage = '%name% must be an existing directory';
     
+    protected $notMessage = '%name% must be a not existing directory';
+    
     public function __invoke($input)
     {
         if (!$this->isString($input)) {

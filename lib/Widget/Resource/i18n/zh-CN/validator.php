@@ -17,19 +17,23 @@ return array(
     '%name%\'s %index% item' => '%name%的第%index%项',
     
     // allOf
-    '%name% must be passed by all of these rules' => '%name%必须满足以下任何一条规则',
+    '%name% must be passed by all of these rules'    => '%name%必须满足以下任何一条规则',
 
     // alnum
     '%name% must contain letters (a-z) and digits (0-9)' => '%name%只能由字母(a-z)和数字(0-9)组成',
+    '%name% must not contain letters (a-z) or digits (0-9)' => '%name%不能只由字母(a-z)和数字(0-9)组成',
     
     // alpha
     '%name% must contain only letters (a-z)' => '%name%只能由字母(a-z)组成',
+    '%name% must not contain  only letters (a-z)' => '%name%不能只由字母(a-z)组成',
     
     // blank
     '%name% must be blank' => '%name%必须为空',
+    '%name% must not be blank' => '%name%不能为空',
     
     // chinese
     '%name% must contain only Chinese characters' => '%name%只能由中文组成',
+    '%name% must not contain only Chinese characters' => '%name%不能只由中文组成',
     
     // date
     '%name% is not a valid date, the format should be "%format%", eg: %example%' => '%name%不是合法的日期,格式应该是%format%,例如:%example%',
@@ -41,7 +45,8 @@ return array(
     '%name% must contain only digits (0-9)' => '%name%只能由数字(0-9)组成', 
     
     // dir
-    '%name% must be an existing directory' => '%name%不存在',
+    '%name% must be an existing directory' => '%name%必须是存在的目录',
+    '%name% must be a not existing directory' => '%name%必须是不存在的目录',
     
     // 'doubleByte'
     '%name% must contain only double byte characters' => '%name%只能由双字节字符组成',
@@ -66,8 +71,8 @@ return array(
     
     // file
     '%name% is not found or not readable' => '%name%不存在或不可读',
-    '%name% is too large(%size%), allowed maximum size is %maxSize%' => '%name%太大了(%size%),允许的最大文件大小为%maxSize%',
-    '%name% is too small(%size%), expected minimum size is %minSize%' => '%name%太小了(%size%),允许的最小文件大小为%minSize%',
+    '%name% is too large(%sizeString%), allowed maximum size is %maxSizeString%' => '%name%太大了(%sizeString%),允许的最大文件大小为%maxSizeString%',
+    '%name% is too small(%sizeString%), expected minimum size is %minSizeString%' => '%name%太小了(%sizeString%),允许的最小文件大小为%minSizeString%',
     '%name% extension(%ext%) is not allowed, allowed extension: %exts%' => '%name%的扩展名(%ext%)不合法,只允许扩展名为:%exts%',
     '%name% extension(%ext%) is not allowed, not allowed extension: %excludeExts%' => '%name%的扩展名(%ext%)不合法,不允许扩展名为:%excludeExts%',
     '%name% mime type could not be detected' => '无法检测%name%的媒体类型',
