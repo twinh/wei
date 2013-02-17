@@ -9,7 +9,9 @@ class PostcodeTest extends TestCase
      */
     public function testPostcode($input)
     {
-        $this->assertTrue($this->isPostcode($input));
+        $this->assertTrue($this->is('postcode', $input));
+        
+        $this->assertFalse($this->is('notPostcode', $input));
     }
 
     /**
@@ -17,7 +19,9 @@ class PostcodeTest extends TestCase
      */
     public function testNotPostcode($input)
     {
-        $this->assertFalse($this->isPostcode($input));
+        $this->assertFalse($this->is('postcode', $input));
+        
+        $this->assertTrue($this->is('notPostcode', $input));
     }
 
     public function providerForPostcode()

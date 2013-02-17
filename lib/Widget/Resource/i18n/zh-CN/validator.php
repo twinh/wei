@@ -140,6 +140,7 @@ return array(
     
     // postcode
     '%name% must be six length of digit' => '%name%必须是6位长度的数字',
+    '%name% must not be postcode' => '%name%必须是6位长度的数字',
     
     // QQ
     '%name% must be valid QQ number' => '%name%必须是有效的QQ号码',

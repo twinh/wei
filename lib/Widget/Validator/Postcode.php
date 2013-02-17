@@ -16,5 +16,7 @@ class Postcode extends Regex
 {
     protected $patternMessage = '%name% must be six length of digit';
     
+    protected $notMessage = '%name% must not be postcode';
+    
     protected $pattern = '/^[1-9][\d]{5}$/';
 }
