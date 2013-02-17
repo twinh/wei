@@ -16,18 +16,20 @@ class Blank extends AbstractValidator
 {
     protected $blankMessage = '%name% must be blank';
     
+    protected $notMessage = '';
+    
     public function __invoke($input)
     {
-        if (!$this->isString($input)) {
-            $this->addError('notString');
-            return false;
+        if ($this->isString($input)) {
+            $result = '' === trim($input);
+        } else {
+            $result = !empty($input);
         }
         
-        if ('' !== trim($input)) {
+        if (!$result) {
             $this->addError('blank');
-            return false;
         }
         
-        return true;
+        return $result;
     }
 }
