@@ -42,7 +42,8 @@ return array(
     '%name% is not a valid datetime, the format should be "%format%", eg: %example%'  => '%name%不是合法的日期时间,格式应该是%format%,例如:%example%',
     
     // digit
-    '%name% must contain only digits (0-9)' => '%name%只能由数字(0-9)组成', 
+    '%name% must contain only digits (0-9)' => '%name%只能由数字(0-9)组成',
+    '%name% must not contain only digits (0-9)' => '%name%不能只由数字(0-9)组成',
     
     // dir
     '%name% must be an existing directory' => '%name%必须是存在的目录',
