@@ -9,7 +9,7 @@ class EndsWithTest extends TestCase
      */
     public function testEndsWith($input, $findMe, $case = false)
     {
-        $this->assertTrue($this->isEndsWith($input, $findMe, $case));
+        $this->assertTrue($this->is('endsWith', $input, $findMe, $case));
     }
 
     /**
