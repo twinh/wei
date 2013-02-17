@@ -9,7 +9,9 @@ class NumberTest extends TestCase
      */
     public function testNumber($input)
     {
-        $this->assertTrue($this->isNumber($input));
+        $this->assertTrue($this->is('number', $input));
+        
+        $this->assertFalse($this->is('notNumber', $input));
     }
 
     /**
@@ -17,7 +19,9 @@ class NumberTest extends TestCase
      */
     public function testNotNumber($input)
     {
-        $this->assertFalse($this->isNumber($input));
+        $this->assertFalse($this->is('number', $input));
+        
+        $this->assertTrue($this->is('notNumber', $input));
     }
 
     public function providerForNumber()
