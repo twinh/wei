@@ -28,7 +28,7 @@ class Is extends WidgetProvider
     );
     
     /**
-     * @param string $rule
+     * @param string|\Widget\Validator\AbstractValidator|int $rule
      * @param array|null $data
      * @paran mixed $options
      * @internal Do NOT use this method for it may be change in the future
@@ -75,11 +75,12 @@ class Is extends WidgetProvider
 
     /**
      * Validate data by given rules
-     *
-     * @param array $options
-     * @param array|null $data
-     * @return mixed
-     * @throws \InvalidArgumentException
+     * 
+     * @param string|\Closure|array $rule The validation rule
+     * @param mixed $data The data to be validated
+     * @param array $options The validation parameters
+     * @return bool
+     * @throws UnexpectedTypeException When rule is not string, array or \Closure
      */
     public function __invoke($rule = null, $data = null, $options = array())
     {
