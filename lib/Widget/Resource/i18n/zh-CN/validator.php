@@ -129,6 +129,7 @@ return array(
     
     // number
     '%name% must be valid number' => '%name%必须是有效的数字',
+    '%name% must not be number' => '%name%不能是数字',
     
     // oneOf
     '%name% must be passed by at least one rule' => '%name%至少需要满足以下任何一条规则',

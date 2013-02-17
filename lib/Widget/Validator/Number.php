@@ -16,6 +16,8 @@ class Number extends AbstractValidator
 {
     protected $notNumberMessage = '%name% must be valid number';
     
+    protected $notMessage = '%name% must not be number';
+    
     public function __invoke($input)
     {
         if (!is_numeric($input)) {
