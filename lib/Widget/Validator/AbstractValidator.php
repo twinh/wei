@@ -86,7 +86,7 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
                 if ('name' == $match) {
                     $parameters['%name%'] = $this->t($this->name);
                 } else {
-                    if (!isset($this->$match)) {
+                    if (!property_exists($this, $match)) {
                         throw new \InvalidArgumentException(sprintf('Unkonwn parameter "%%%s%%" in message "%s"', $match, $message));
                     }
                     $parameters['%' . $match . '%'] = is_array($this->$match) ? 
