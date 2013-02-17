@@ -163,6 +163,7 @@ return array(
     
     // type
     '%name% must be %typeName%' => '%name%必须是%typeName%',
+    '%name% must not be %typeName%' => '%name%不能是%typeName%',
     // is_xxx
     'array'     => '数组',
     'bool'      => '布尔',

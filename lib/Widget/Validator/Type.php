@@ -8,8 +8,6 @@
 
 namespace Widget\Validator;
 
-use Widget\Exception;
-
 /**
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
@@ -19,6 +17,8 @@ use Widget\Exception;
 class Type extends AbstractValidator
 {
     protected $typeMessage = '%name% must be %typeName%';
+    
+    protected $notMessage = '%name% must not be %typeName%';
     
     protected $type;
 
