@@ -32,8 +32,9 @@ class SomeOf extends AbstractGroupValidator
 
         $passed = 0;
         $validator = null;
+        $props = array('name' => $this->name);
         foreach ($this->rules as $rule => $options) {
-            if ($this->is->validateOne($rule, $input, $options, $validator)) {
+            if ($this->is->validateOne($rule, $input, $options, $validator, $props)) {
                 $passed++;
                 if ($passed >= $this->atLeast) {
                     // Removes all error messages
@@ -41,7 +42,6 @@ class SomeOf extends AbstractGroupValidator
                     return true;
                 }
             } else {
-                $validator->setName($this->name);
                 $this->validators[$rule] = $validator;
             }
         }
