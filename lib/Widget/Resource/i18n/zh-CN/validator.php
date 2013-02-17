@@ -74,6 +74,7 @@ return array(
     
     // exists
     '%name% must be an existing file or directory' => '%name%必须是存在的文件或目录',
+    '%name% must be a non-existing file or directory' => '%name%必须是不存在的文件目录',
     
     // file
     '%name% is not found or not readable' => '%name%不存在或不可读',

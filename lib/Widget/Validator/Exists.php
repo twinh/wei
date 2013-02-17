@@ -16,6 +16,8 @@ class Exists extends AbstractValidator
 {
     protected $notFoundMessage = '%name% must be an existing file or directory';
     
+    protected $notMessage = '%name% must be a non-existing file or directory';
+    
     public function __invoke($input)
     {
         if (!$this->isString($input)) {
