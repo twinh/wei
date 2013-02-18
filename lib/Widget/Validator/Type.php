@@ -11,8 +11,6 @@ namespace Widget\Validator;
 /**
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
- * @method string t(string $message, array $parameters) Translates a message
- * @property \Widget\T $t The translator widget
  */
 class Type extends AbstractValidator
 {
