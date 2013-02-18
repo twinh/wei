@@ -15,7 +15,7 @@ use Widget\WidgetProvider;
  * 
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
- * @method string t(string $message, array $parameters) Translates a message
+ * @method string t(string $message, array $parameters = arrray()) Translates a message
  * @property \Widget\T $t The translator widget
  */
 abstract class AbstractValidator extends WidgetProvider implements ValidatorInterface
@@ -166,9 +166,6 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
      */
     protected function addError($name, $customMessage = null)
     {
-        if (is_array($customMessage)) {
-            throw new \Widget\Exception('改啦');
-        }
         $this->errors[$name] = $customMessage ?: $this->message ?: $this->{$name . 'Message'};
     }
     
