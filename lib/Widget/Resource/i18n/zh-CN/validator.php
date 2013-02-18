@@ -100,6 +100,7 @@ return array(
     
     // ip
     '%name% must be valid IP' => '%name%必须是有效的IP地址',
+    '%name% must not be IP' => '%name%不能是IP地址',
     
     // length
     '%name% must have a length between %min% and %max%' => '%name%的长度必须在%min%和%max%之间',
