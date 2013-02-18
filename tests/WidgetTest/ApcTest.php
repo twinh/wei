@@ -30,7 +30,7 @@ class ApcTest extends TestCase
         $this->assertFalse($apc->get('test'), 'cache is expired');
     }
     
-    public function test__invoke()
+    public function testObjectAsInvoker()
     {
         $apc = $this->object;
 
