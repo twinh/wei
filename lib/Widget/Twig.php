@@ -66,9 +66,8 @@ class Twig extends WidgetProvider implements Viewable
 
         $this->twig = new \Twig_Environment(new \Twig_Loader_Filesystem($this->paths), $this->envOptions);
 
-        // add in common use object
+        // Adds widget as template variable
         $this->twig->addGlobal('widget', $this->widget);
-        $this->twig->addGlobal('app', $this->app);
     }
 
     /**
