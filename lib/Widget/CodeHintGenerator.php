@@ -13,6 +13,8 @@ namespace Widget;
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @property \Widget\Log $log The logger widget
+ * @method bool log(string $message) Description
  */
 class CodeHintGenerator extends WidgetProvider
 {
