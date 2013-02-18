@@ -59,9 +59,9 @@ class Header extends ArrayWidget
     /**
      * Get or set the header values
      *
-     * @param  string             $name    The header name
-     * @param  string|array|null       $values  The header values, for set method only
-     * @param  bool               $replace Whether replace the exists values or not, for set method only
+     * @param  string       $name    The header name
+     * @param  string|array $values  The header values, for set method only
+     * @param  bool         $replace Whether replace the exists values or not, for set method only
      * @return mixed|\Widget\Header
      */
     public function __invoke($name, $values = null, $replace = true)
