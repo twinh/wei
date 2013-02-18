@@ -13,6 +13,7 @@ namespace Widget;
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @property \Widget\Server $server The server widget
  */
 class Request extends Parameter
 {
@@ -47,7 +48,7 @@ class Request extends Parameter
      * Returns the full url, which do not contain the fragment, for it never sent to the server
      *
      * @return string
-     * @see http://snipplr.com/view.php?codeview&id=2734
+     * @link http://snipplr.com/view.php?codeview&id=2734
      */
     public function getFullUrl()
     {
