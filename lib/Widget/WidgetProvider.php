@@ -55,14 +55,17 @@ abstract class WidgetProvider implements Widgetable
 
     /**
      * Get or set property value
+     * 
+     * <code>
+     * $widget->option('name');            // Returns the value of property "name" 
+     * $widget->option('name', 'value');   // Sets property "name" to "value"
+     * $widget->option();                  // Returns all properties as array
+     * $widget->option(array());           // Sets options
+     * </code>
      *
      * @param  mixed $name  The option name or options array
      * @param  mixed $value
      * @return mixed
-     * @example $widget->option('name');            // Get "name" option's value
-     *          $widget->option('name', 'value');   // Set "name" to "value"
-     *          $widget->option();                  // Get all options
-     *          $widget->option(array());           // Set options
      * @todo append
      */
     public function option($name = null, $value = null)
@@ -96,7 +99,7 @@ abstract class WidgetProvider implements Widgetable
             }
         }
 
-        // Get all property options
+        // Returns all property options
         if (null === $name) {
             return get_object_vars($this);
         }
