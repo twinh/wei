@@ -22,6 +22,13 @@ class Smarty extends WidgetProvider implements Viewable
      * @var \Smarty
      */
     protected $smarty;
+    
+    /**
+     * Default template file extension
+     *
+     * @var string
+     */
+    protected $extension = '.tpl';
 
     /**
      * Options

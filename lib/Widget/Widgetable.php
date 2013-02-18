@@ -32,7 +32,7 @@ interface Widgetable
      * @return mixed
      */
     public function __call($name, $args);
-
+    
     /**
      * Invoke the current widget
      *
