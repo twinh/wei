@@ -432,21 +432,21 @@ class Widget extends WidgetProvider
     /**
      * Set autoload directories for autoload method
      *
-     * @param  string|array        $maps
+     * @param  string|array        $map
      * @return Widget
      */
-    public function setAutoloadMap($maps)
+    public function setAutoloadMap($map)
     {
-        !is_array($maps) && $maps = (array) $maps;
+        !is_array($map) && $map = (array) $map;
 
-        foreach ($maps as &$dir) {
+        foreach ($map as &$dir) {
             $dir = realpath($dir) . DIRECTORY_SEPARATOR;
         }
 
         // The autoload directories will always contain the widget directory
-        $maps['Widget'] = dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR;
+        $map['Widget'] = dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR;
 
-        $this->autoloadMap = $maps;
+        $this->autoloadMap = $map;
 
         return $this;
     }
