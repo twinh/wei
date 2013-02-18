@@ -112,7 +112,7 @@ class TestCase extends \PHPUnit_Framework_TestCase implements Widgetable
 
     public function __call($name, $args)
     {
-        return $this->widget->invoke($name, $args);
+        return call_user_func_array($this->$name, $args);
     }
 
     public function __get($name)
