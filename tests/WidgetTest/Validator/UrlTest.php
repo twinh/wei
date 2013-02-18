@@ -30,6 +30,9 @@ class UrlTest extends TestCase
             array('http://www.google.com'),
             array('http://example.com'),
             array('http://exa-mple.com'),
+            array('file:///tmp/test.c'),
+            array('ftp://ftp.example.com/tmp/'),
+            array('http://qwe')
         );
     }
 
@@ -37,7 +40,12 @@ class UrlTest extends TestCase
     {
         return array(
             array('http://exa_mple.com'),
-            array('g.cn')
+            array('g.cn'),
+            array('http//www.example'),
+            array('http:/www.example'),
+            array('/tmp/test.c'),
+            array('/'),
+            array("http://\r\n/bar")
         );
     }
 }
