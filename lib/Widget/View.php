@@ -18,6 +18,13 @@ namespace Widget;
 class View extends WidgetProvider implements Viewable
 {
     /**
+     * The template variables
+     * 
+     * @var array
+     */
+    protected $vars = array();
+    
+    /**
      * Template directory
      *
      * @var string|array
