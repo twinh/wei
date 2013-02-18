@@ -1,19 +1,21 @@
 <?php
-
 /**
  * Widget Framework
  *
  * @copyright   Copyright (c) 2008-2013 Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
+
 namespace Widget;
 
 /**
- * Description of Download
+ * Code hint generator
  *
- * @author twinhuang
- * @property \Widget\Browser $browser The browser widget
- * @property \Widget\Header $header The header widget
+ * @package     Widget
+ * @author      Twin Huang <twinh@yahoo.cn>
+ * @property    \Widget\Browser    $browser The browser widget
+ * @property    \Widget\Header     $header The header widget
+ * @property    \Widget\Response   $reponse The reponse widget
  * @todo refactor
  */
 class Download extends WidgetProvider
