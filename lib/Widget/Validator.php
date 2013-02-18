@@ -491,7 +491,9 @@ class Validator extends AbstractValidator
     public function getFieldData($field)
     {
         // $this->data could only be array or object, which has been checked by $this->setData
-        if (is_array($this->data) && array_key_exists($field, $this->data)) {
+        if ((is_array($this->data) && array_key_exists($field, $this->data)) 
+            || ($this->data instanceof \ArrayAccess && $this->data->offsetExists($field))
+        ) {
             return $this->data[$field];
         } elseif (isset($this->data->$field)) {
             return $this->data->$field;
