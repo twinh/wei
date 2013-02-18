@@ -125,7 +125,7 @@ class Widget extends WidgetProvider
 
         // instance initial widgets
         foreach ((array)$this->initWidgets as $widgetName) {
-            $this->get($widgetName, null, $this);
+            $this->get($widgetName);
         }
     }
 
@@ -212,7 +212,7 @@ class Widget extends WidgetProvider
      */
     public function __invoke($name)
     {
-        return $this->get($name, null, $this);
+        return $this->get($name);
     }
 
     /**
