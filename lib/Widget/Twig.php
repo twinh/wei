@@ -86,7 +86,7 @@ class Twig extends WidgetProvider implements Viewable
      */
     public function assign($name, $value = null)
     {
-        $this->twig->addGlobal($name, $name);
+        $this->twig->addGlobal($name, $value);
     }
 
     /**
