@@ -14,9 +14,9 @@ namespace Widget\Validator;
  */
 class MinLength extends AbstractLengthValidator
 {
-    protected $minMessage = '%name% must have a length greater than %min%';
+    protected $tooShortMessage = '%name% must have a length greater than %min%';
     
-    protected $minItemMessage = '%name% must contain at least %min% item(s)';
+    protected $tooFewMessage = '%name% must contain at least %min% item(s)';
     
     protected $min;
 
@@ -30,7 +30,7 @@ class MinLength extends AbstractLengthValidator
         }
         
         if ($this->min > $len) {
-            $this->addError(is_scalar($input) ? 'min' : 'minItem');
+            $this->addError(is_scalar($input) ? 'tooShort' : 'tooFew');
             return false;
         }
         
