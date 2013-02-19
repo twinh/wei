@@ -170,7 +170,8 @@ return array(
     '%name% must not start with "%findMe%"' => '%name%不能以%findMe%开头',
     
     // time
-    '%name% is not a valid time, the format should be "%format%", eg: %example%' => '%name%不是合法的时间,格式应该是%format%,例如:%example%',
+    '%name% must be a valid time, the format should be "%format%", eg: %example%' => '%name%不是合法的时间,格式应该是%format%,例如:%example%',
+    '%name% must not be a valid time' => '%name%不能是合法的时间',
     
     // type
     '%name% must be %typeName%' => '%name%必须是%typeName%',
