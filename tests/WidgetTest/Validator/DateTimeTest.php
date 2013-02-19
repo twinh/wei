@@ -38,4 +38,20 @@ class DateTimeTest extends TestCase
             array('2012 61:00')
         );
     }
+    
+    public function testBeforeAndAfter()
+    {
+        $this->assertTrue($this->is('date', '2013-02-19', array(
+            'before' => '2013-03-01',
+            'after' => '2013-01-01',
+        )));
+        
+        $this->assertFalse($this->is('date', '2013-02-19', array(
+            'before' => '2013-01-01'
+        )));
+        
+        $this->assertFalse($this->is('date', '2013-02-19', array(
+            'after' => '2013-03-01'
+        )));
+    }
 }

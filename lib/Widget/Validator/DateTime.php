@@ -18,9 +18,17 @@ class DateTime extends AbstractValidator
 {
     protected $formatMessage = '%name% is not a valid datetime, the format should be "%format%", eg: %example%';
     
+    protected $tooLateMessage = '%name% must be earlier than %before%';
+     
+    protected $tooEarlyMessage = '%name% must be later than %after%';
+    
     protected $notMessage = '%name% must not be a valid datetime';
     
     protected $format = 'Y-m-d H:i:s';
+    
+    protected $before;
+    
+    protected $after;
     
     protected $example;
     
@@ -41,6 +49,20 @@ class DateTime extends AbstractValidator
             return false;
         }
         
-        return true;
+        if ($this->before) {
+            $before = Dt::createFromFormat($this->format, $this->before);
+            if ($before < $date) {
+                $this->addError('tooLate');
+            }
+        }
+        
+        if ($this->after) {
+            $after = Dt::createFromFormat($this->format, $this->after);
+            if ($after > $date) {
+                $this->addError('tooEarly');
+            }
+        }
+        
+        return !$this->errors;
     }
 }
