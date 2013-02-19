@@ -108,7 +108,8 @@ return array(
     '%name%\'s length could not be detected' => '无法检测到%name%的长度',
     
     // max
-    '%name% must be less or equal than %max%' => '%name%必需小于等于%max%',
+    '%name% must be less or equal than %max%' => '%name%必须小于等于%max%',
+    '%name% must not be less or equal than %max%' => '%name%必须不小于等于%max%',
     
     // maxLength
     '%name% must have a length lower than %max%' => '%name%的长度必须小于等于%max%',
