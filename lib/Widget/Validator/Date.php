@@ -14,7 +14,9 @@ namespace Widget\Validator;
  */
 class Date extends DateTime
 {
-    protected $formatMessage = '%name% is not a valid date, the format should be "%format%", eg: %example%';
+    protected $formatMessage = '%name% must be a valid date, the format should be "%format%", eg: %example%';
+    
+    protected $notMessage = '%name% must not be a valid date';
     
     protected $format = 'Y-m-d';
 }

@@ -36,7 +36,8 @@ return array(
     '%name% must not contain only Chinese characters' => '%name%不能只由中文组成',
     
     // date
-    '%name% is not a valid date, the format should be "%format%", eg: %example%' => '%name%不是合法的日期,格式应该是%format%,例如:%example%',
+    '%name% must be a valid date, the format should be "%format%", eg: %example%' => '%name%不是合法的日期,格式应该是%format%,例如:%example%',
+    '%name% must not be a valid date' => '%name%不能是合法的日期',
     
     // dateTime
     '%name% is not a valid datetime, the format should be "%format%", eg: %example%'  => '%name%不是合法的日期时间,格式应该是%format%,例如:%example%',
