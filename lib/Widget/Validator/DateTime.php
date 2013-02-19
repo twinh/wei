@@ -16,10 +16,25 @@ use DateTime as Dt;
  */
 class DateTime extends AbstractValidator
 {
+    /**
+     * The error message for "format" property
+     * 
+     * @var string 
+     */
     protected $formatMessage = '%name% is not a valid datetime, the format should be "%format%", eg: %example%';
     
+    /**
+     * The error message for "before" property
+     *  
+     * @var string
+     */
     protected $tooLateMessage = '%name% must be earlier than %before%';
      
+    /**
+     * The error message for "after" property
+     * 
+     * @var string
+     */
     protected $tooEarlyMessage = '%name% must be later than %after%';
     
     protected $notMessage = '%name% must not be a valid datetime';
