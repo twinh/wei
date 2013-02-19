@@ -41,6 +41,8 @@ return array(
     
     // dateTime
     '%name% must be a valid datetime, the format should be "%format%", eg: %example%'  => '%name%不是合法的日期时间,格式应该是%format%,例如:%example%',
+    '%name% must be earlier than %before%' => '%name%必须早于%before%',
+    '%name% must be later than %after%' => '%name%必须晚于%after%',
     '%name% must not be a valid datetime' => '%name%不能是合法的日期时间',
     
     // digit
