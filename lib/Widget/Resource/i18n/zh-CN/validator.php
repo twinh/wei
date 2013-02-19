@@ -51,7 +51,7 @@ return array(
     '%name% must be an existing directory' => '%name%必须是存在的目录',
     '%name% must be a non-existing directory' => '%name%必须是不存在的目录',
     
-    // 'doubleByte'
+    // doubleByte
     '%name% must contain only double byte characters' => '%name%只能由双字节字符组成',
     '%name% must not contain only double byte characters' => '%name%不能只由双字节字符组成',
     
