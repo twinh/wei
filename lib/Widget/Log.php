@@ -46,10 +46,12 @@ class Log extends WidgetProvider
     protected $levels = array(
         'debug'     => 0,
         'info'      => 1,
-        'warning'   => 2,
-        'error'     => 3,
-        'critical'  => 4,
-        'alert'     => 5,
+        'notice'    => 2,
+        'warning'   => 3,
+        'error'     => 4,
+        'critical'  => 5,
+        'alert'     => 6,
+        'emergency' => 7
     );
 
     /**
@@ -115,11 +117,11 @@ class Log extends WidgetProvider
      * Log a default level message
      *
      * @param string $message
-     * @return bool whether the log record has been handle
+     * @return bool Whether the log record has been handled
      */
-    public function __invoke($message, $level = null)
+    public function __invoke($level, $message, array $context = array())
     {
-        $level = isset($level) ? $level : $this->level;
+        $level = isset($this->levels[$level]) ? $level : $this->level;
 
         $record = array(
             'level' => $level,
@@ -151,6 +153,19 @@ class Log extends WidgetProvider
         fwrite($this->handle, $content);
         
         return true;
+    }
+    
+    /**
+     * Logs with an arbitrary level.
+     *
+     * @param mixed $level
+     * @param string $message
+     * @param array $context
+     * @return null
+     */
+    public function log($level, $message, array $context = array())
+    {
+        return $this($level, $message, $context);
     }
 
     /**
@@ -219,69 +234,110 @@ class Log extends WidgetProvider
     }
     
     /**
-     * Adds a log record at DEBUG level
+     * System is unusable.
      *
      * @param string $message
+     * @param array $context
      * @return bool
      */
-    public function addDebug($message)
+    public function emergency($message, array $context = array())
     {
-        return $this($message, 'debug');
+        return $this('emergency', $message, $context);
     }
 
     /**
-     * Adds a log record at INFO level
+     * Action must be taken immediately.
+     *
+     * Example: Entire website down, database unavailable, etc. This should
+     * trigger the SMS alerts and wake you up.
      *
      * @param string $message
+     * @param array $context
      * @return bool
      */
-    public function addInfo($message)
+    public function alert($message, array $context = array())
     {
-        return $this($message, 'info');
+        return $this('alert', $message, $context);
     }
 
     /**
-     * Adds a log record at WARNING level
+     * Critical conditions.
+     *
+     * Example: Application component unavailable, unexpected exception.
      *
      * @param string $message
+     * @param array $context
      * @return bool
      */
-    public function addWarning($message)
+    public function critical($message, array $context = array())
     {
-        return $this($message, 'warning');
+        return $this('critical', $message, $context);
     }
 
     /**
-     * Adds a log record at ERROR level
+     * Runtime errors that do not require immediate action but should typically
+     * be logged and monitored.
      *
      * @param string $message
+     * @param array $context
      * @return bool
      */
-    public function addError($message)
+    public function error($message, array $context = array())
     {
-        return $this($message, 'error');
+        return $this('error', $message, $context);
     }
 
     /**
-     * Adds a log record at CRITICAL level
+     * Exceptional occurrences that are not errors.
+     *
+     * Example: Use of deprecated APIs, poor use of an API, undesirable things
+     * that are not necessarily wrong.
      *
      * @param string $message
+     * @param array $context
      * @return bool
      */
-    public function addCritical($message)
+    public function warning($message, array $context = array())
     {
-        return $this($message, 'critical');
+        return $this('warning', $message, $context);
     }
-    
+
     /**
-     * Adds a log record at ALERT level
+     * Normal but significant events.
      *
      * @param string $message
+     * @param array $context
      * @return bool
      */
-    public function addAlert($message)
+    public function notice($message, array $context = array())
     {
-        return $this($message, 'alert');
+        return $this('notice', $message, $context);
+    }
+
+    /**
+     * Interesting events.
+     *
+     * Example: User logs in, SQL logs.
+     *
+     * @param string $message
+     * @param array $context
+     * @return bool
+     */
+    public function info($message, array $context = array())
+    {
+        return $this('info', $message, $context);
+    }
+
+    /**
+     * Detailed debug information.
+     *
+     * @param string $message
+     * @param array $context
+     * @return bool
+     */
+    public function debug($message, array $context = array())
+    {
+        return $this('debug', $message, $context);
     }
 
     /**

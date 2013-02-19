@@ -20,7 +20,7 @@ class LogTest extends TestCase
     {
         $logger = $this->object;
 
-        $logger->addDebug(__METHOD__);
+        $logger->debug(__METHOD__);
 
         $file = $logger->getFile();
 
@@ -31,7 +31,7 @@ class LogTest extends TestCase
 
         $logger->setHandledLevel('info');
 
-        $logger->addDebug(__METHOD__);
+        $logger->debug(__METHOD__);
         
         $this->assertFileNotExists($file);
     }
@@ -43,21 +43,21 @@ class LogTest extends TestCase
             'fileSize' => 1,
         ));
         
-        $logger1->addDebug(__METHOD__);
+        $logger1->debug(__METHOD__);
         
         $logger2 = new \Widget\Log(array(
             'widget' => $this->widget,
             'fileSize' => 1,
         ));
         
-        $logger2->addDebug(__METHOD__);
+        $logger2->debug(__METHOD__);
         
         $logger3 = new \Widget\Log(array(
             'widget' => $this->widget,
             'fileSize' => 1,
         ));
         
-        $logger3->addDebug(__METHOD__);
+        $logger3->debug(__METHOD__);
         
         $this->assertNotEquals($logger1->getFile(), $logger2->getFile());
     }
@@ -70,7 +70,7 @@ class LogTest extends TestCase
         
         foreach ($logger->option('levels') as $level => $p) {
             $uid = uniqid();
-            $logger->{'add' . $level}($uid);
+            $logger->$level($uid);
             $this->assertContains($uid, file_get_contents($file));
         }
     }
@@ -84,7 +84,7 @@ class LogTest extends TestCase
         
         $oldFile = $oldLogger->getFile();
         
-        $oldLogger->addDebug(__METHOD__);
+        $oldLogger->debug(__METHOD__);
 
         $newLogger = new \Widget\Log(array(
             'widget' => $this->widget,
@@ -104,7 +104,8 @@ class LogTest extends TestCase
         
         $logger->setLevel('debug');
         
-        $logger(__METHOD__);
+        // call by __invoke method
+        $logger('no this level', __METHOD__);
         
         $this->assertContains('DEBUG', file_get_contents($file));
         
@@ -112,7 +113,8 @@ class LogTest extends TestCase
         
         $logger->setLevel('info');
         
-        $logger(__METHOD__);
+        // call by log method
+        $logger->log('no this level', __METHOD__);
         
         $this->assertContains('INFO', file_get_contents($file));
     }
