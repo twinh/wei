@@ -14,9 +14,9 @@ namespace Widget\Validator;
  */
 class MaxLength extends AbstractLengthValidator
 {
-    protected $maxMessage = '%name% must have a length lower than %max%';
+    protected $tooLongMessage = '%name% must have a length lower than %max%';
     
-    protected $maxItemMessage = '%name% must contain no more than %max% items';
+    protected $tooManayMessage = '%name% must contain no more than %max% items';
     
     protected $max;
     
@@ -30,7 +30,7 @@ class MaxLength extends AbstractLengthValidator
         }
         
         if ($this->max < $len) {
-            $this->addError(is_scalar($input) ? 'max' : 'maxItem');
+            $this->addError(is_scalar($input) ? 'tooLong' : 'tooManay');
             return false;
         }
         
