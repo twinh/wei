@@ -117,6 +117,7 @@ return array(
     
     // min
     '%name% must be greater or equal than %min%' => '%name%必须大于等于%min%',
+    '%name% must not be greater or equal than %max%' => '%name%必须不大于等于%max%',
     
     // minLength
     '%name% must have a length greater than %min%' => '%name%的长度必须大于等于%min%',
