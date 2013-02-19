@@ -15,7 +15,7 @@ namespace Widget;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property    \Widget\Browser    $browser The browser widget
  * @property    \Widget\Header     $header The header widget
- * @property    \Widget\Response   $reponse The reponse widget
+ * @property    \Widget\Response   $response The response widget
  * @todo refactor
  */
 class Download extends WidgetProvider
