@@ -18,6 +18,8 @@ class DateTime extends AbstractValidator
 {
     protected $formatMessage = '%name% is not a valid datetime, the format should be "%format%", eg: %example%';
     
+    protected $notMessage = '%name% must not be a valid datetime';
+    
     protected $format = 'Y-m-d H:i:s';
     
     protected $example;

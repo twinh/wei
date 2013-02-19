@@ -40,7 +40,8 @@ return array(
     '%name% must not be a valid date' => '%name%不能是合法的日期',
     
     // dateTime
-    '%name% is not a valid datetime, the format should be "%format%", eg: %example%'  => '%name%不是合法的日期时间,格式应该是%format%,例如:%example%',
+    '%name% must be a valid datetime, the format should be "%format%", eg: %example%'  => '%name%不是合法的日期时间,格式应该是%format%,例如:%example%',
+    '%name% must not be a valid datetime' => '%name%不能是合法的日期时间',
     
     // digit
     '%name% must contain only digits (0-9)' => '%name%只能由数字(0-9)组成',
