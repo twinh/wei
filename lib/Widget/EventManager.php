@@ -24,6 +24,14 @@ class EventManager extends WidgetProvider
      * @var array
      */
     protected $handlers = array();
+    
+    /**
+     * Whether ignore the previous exception handler or attch it again to the 
+     * exception event
+     * 
+     * @var bool
+     */
+    protected $ignorePrevHandler = false;
 
     /**
      * The priorities text map
@@ -205,7 +213,7 @@ class EventManager extends WidgetProvider
             }
         }
     }
-
+    
     /**
      * Register the internal event
      *
@@ -215,33 +223,23 @@ class EventManager extends WidgetProvider
     {
         $that = $this;
 
-        // Trigger the shutdown event
+        // Attach the shutdown event
         register_shutdown_function(function() use($that) {
             $that('shutdown');
         });
 
-        // Assign the lambda function to the variable to avoid " Fatal error: Cannot destroy active lambda function"
-        // Trigger the exception event
-        $exceptionHandle = function($exception) use($that) {
-            $event = $that('exception', array($exception));
+        // Assign the exception to a class method instead of a lambda function 
+        // to avoid "Fatal error: Cannot destroy active lambda function"
+        $prevHandler = set_exception_handler(array($this, 'handleException'));
 
-            restore_exception_handler();
-
-            if (!$event->isDefaultPrevented()) {
-                throw $exception;
-            }
-        };
-
-        $prevHandle = set_exception_handler($exceptionHandle);
-
-        // If setted the previous handle, bind it agian
-        if ($prevHandle) {
-            $this->add('exception', function($event, $widget, $exception) use($prevHandle) {
-                call_user_func($prevHandle, $exception);
+        // If setted the previous handler, attach it agian
+        if (!$this->ignorePrevHandler && $prevHandler) {
+            $this->add('exception', function($event, $widget, $exception) use($prevHandler) {
+                call_user_func($prevHandler, $exception);
             });
         }
 
-        // Trigger the widget manager's construct and constructed event
+        // Attach the widget manager's construct and constructed event
         $this->widget->option(array(
             'construct' => function ($name, $full) use($that) {
                 $that('construct.' . $name, array($name, $full));
@@ -250,6 +248,23 @@ class EventManager extends WidgetProvider
                 $that('constructed.' . $name, array($widget, $name, $full));
             }
         ));
+    }
+    
+    /**
+     * The internal exception hanlder
+     * 
+     * @internal
+     * @codeCoverageIgnore
+     */
+    public function handleException($exception)
+    {
+        $event = $this('exception', array($exception));
+
+        restore_exception_handler();
+
+        if (!$event->isDefaultPrevented()) {
+            throw $exception;
+        }
     }
     
     /**
