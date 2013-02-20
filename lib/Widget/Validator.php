@@ -202,14 +202,14 @@ class Validator extends AbstractValidator
                         $props[$name . 'Message'] = $message;
                     }
                 }
-                
+
                 // The current rule validation result
                 /* @var $validator \Widget\Validator\AbstractValidator */
                 $validator = null;
                 $result = $this->is->validateOne($rule, $data, $params, $validator, $props);
 
-                if (is_object($rule)) {
-                    $rule = get_class($rule);
+                if (is_object($params)) {
+                    $rule = get_class($params);
                 }
                 
                 // Record the rule validators

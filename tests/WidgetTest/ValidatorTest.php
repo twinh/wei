@@ -635,4 +635,16 @@ class ValidatorTest extends TestCase
         
         $this->assertEquals(array('key' => 'value'), $validator->getNames());
     }
+    
+    /**
+     * @expectedException \Widget\UnexpectedTypeException
+     */
+    public function testInvalidRule()
+    {
+        $this->validate(array(
+            'rules' => array(
+                'key' => new \stdClass()
+            )
+        ));
+    }
 }
