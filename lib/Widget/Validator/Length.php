@@ -14,19 +14,29 @@ namespace Widget\Validator;
  */
 class Length extends AbstractLengthValidator
 {
-    protected $lengthMessage = '%name% must have a length between %min% and %max%';
+    protected $lengthMessage = '%name must have a length of %length%';
     
     protected $lengthItemMessage = '%name% must contain %min% to %max% item(s)';
+    
+    protected $notInMessage = '%name% must have a length between %min% and %max%';
 
+    protected $notInItemMessage = '%name% must contain %min% to %max% item(s)';
+    
     protected $min;
     
     protected $max;
     
+    protected $length;
+    
     public function __invoke($input, $min = null, $max = null)
     {
+        // ($input, $min, $max)
         if (is_numeric($min) && is_numeric($max)) {
             $this->min = $min;
             $this->max = $max;
+        // ($input, $length)
+        } elseif (is_numeric($min) && is_null($max)) {
+            $this->length = $min;
         }
         
         if (false === ($len = $this->getLength($input))) {
@@ -34,8 +44,13 @@ class Length extends AbstractLengthValidator
             return false;
         }
         
-        if ($this->min > $len || $this->max < $len) {
-            $this->addError(is_scalar($input) ? 'length' : 'lengthItem');
+        if (!is_null($this->length)) {
+            if ($this->length != $len) {
+                $this->addError(is_scalar($input) ? 'length' : 'lengthItem');
+                return false;
+            }
+        } elseif ($this->min > $len || $this->max < $len) {
+            $this->addError(is_scalar($input) ? 'notIn' : 'notInItem');
             return false;
         }
         
