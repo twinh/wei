@@ -107,10 +107,13 @@ return array(
     '%name% must not be IP' => '%name%不能是IP地址',
     
     // length
+    '%name% must have a length of %length%' => '%name%的长度必须是%length%',
+    '%name% must contain %length% item(s)' => '%name%必须包含%length%项',
     '%name% must have a length between %min% and %max%' => '%name%的长度必须在%min%和%max%之间',
     '%name% must contain %min% to %max% item(s)' => '%name%必须包含%min%到%max%项',
     '%name%\'s length could not be detected' => '无法检测到%name%的长度',
     
+
     // max
     '%name% must be less or equal than %max%' => '%name%必须小于等于%max%',
     '%name% must not be less or equal than %max%' => '%name%必须不小于等于%max%',
