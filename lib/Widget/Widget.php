@@ -432,13 +432,11 @@ class Widget extends WidgetProvider
     /**
      * Set autoload directories for autoload method
      *
-     * @param  string|array        $map
+     * @param array $map
      * @return Widget
      */
-    public function setAutoloadMap($map)
+    public function setAutoloadMap(array $map)
     {
-        !is_array($map) && $map = array($map);
-
         foreach ($map as &$dir) {
             $dir = realpath($dir) . DIRECTORY_SEPARATOR;
         }
