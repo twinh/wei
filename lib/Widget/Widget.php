@@ -274,10 +274,10 @@ class Widget extends WidgetProvider
      *
      * @param string $name  The name of the widget
      * @param array $args   The arguments for "__invoke" method
-     * @param array $deps    The dependent configuration
+     * @param array $deps   The dependent configuration
      * @return mixed
      */
-    public function invoke($name, array $args, $deps = array())
+    public function invoke($name, array $args = array(), $deps = array())
     {
         $widget = $this->get($name, $deps);
 
