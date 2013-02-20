@@ -607,6 +607,25 @@ class Validator extends AbstractValidator
         }
         return $summaries;
     }
+    
+    /**
+     * Returns the joined message
+     * 
+     * @return srring
+     */
+    public function getJoinedMessage($separator = "\n")
+    {
+        $messages = $this->getDetailMessages();
+        $array = array();
+        foreach ($messages as $field => $rules) {
+            foreach ($rules as $options) {
+                foreach ($options as $message) {
+                    $array[] = $message;
+                }
+            }
+        }
+        return implode($separator, array_unique($array));
+    }
 
     /**
      * 
