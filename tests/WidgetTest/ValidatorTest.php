@@ -428,8 +428,7 @@ class ValidatorTest extends TestCase
             ),
             'rules' => array(
                 'username' => array(
-                    // FIXME inject widget manager
-                    new Validator\Email
+                    $this->is->createRuleValidator('email')
                 )
             )
         ));
@@ -646,5 +645,25 @@ class ValidatorTest extends TestCase
                 'key' => new \stdClass()
             )
         ));
+    }
+    
+    public function testSetDetailMessageForValidator()
+    {
+        $validator = $this->validate(array(
+            'rules' => array(
+                'username' => array(
+                    'email' => true,    // not valid
+                ),
+            ),
+            'messages' => array(
+                'username' => array(
+                    'email' => array(
+                        'format' => 'custom format message'
+                    )
+                )
+            )
+        ));
+        
+        $this->assertEquals('custom format message', $validator->getRuleValidator('username', 'email')->option('formatMessage'));
     }
 }
