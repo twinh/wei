@@ -617,7 +617,7 @@ class Validator extends AbstractValidator
     {
         $messages = $this->getDetailMessages();
         $array = array();
-        foreach ($messages as $field => $rules) {
+        foreach ($messages as $rules) {
             foreach ($rules as $options) {
                 foreach ($options as $message) {
                     $array[] = $message;
