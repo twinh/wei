@@ -598,4 +598,27 @@ class ValidatorTest extends TestCase
         $this->assertContains('error message 2', $message);
         $this->assertEquals('error message 1|error message 2', $message);
     }
+    
+    public function testGetRuleValidator()
+    {
+        $validator = $this->validate(array(
+            'data' => array(
+                'email' => 'error-email',
+            ),
+            'rules' => array(
+                'email' => array(
+                    'required' => true, // valid
+                    'length' => array(1, 3), // not valid
+                    'email' => true,    // not valid
+                )
+            ),
+            'names' => array(
+                'email' => 'Your email'
+            )
+        ));
+        
+        $this->assertInstanceOf('\Widget\Validator\Required', $validator->getRuleValidator('email', 'required'));
+        $this->assertInstanceOf('\Widget\Validator\Length', $validator->getRuleValidator('email', 'length'));
+        $this->assertInstanceOf('\Widget\Validator\Email', $validator->getRuleValidator('email', 'email'));
+    }
 }
