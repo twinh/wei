@@ -551,28 +551,7 @@ class Validator extends AbstractValidator
             return false;
         }
     }
-    
-    /**
-     * Returns the message by given field, rule and option
-     * 
-     * @param string $field The field of data
-     * @param string $rule The rule of field
-     * @param string $option The option of rule
-     * @return string|false
-     */
-    public function getMessage($field, $rule, $option)
-    {
-        if (isset($this->messages[$field][$rule][$option]) && is_string($this->messages[$field][$rule][$option]) && is_array($this->messages[$field][$rule])) {
-            return $this->messages[$field][$rule][$option];
-        } elseif (isset($this->messages[$field][$rule]) && is_string($this->messages[$field][$rule]) && is_array($this->messages[$field])) {
-            return $this->messages[$field][$rule];
-        } elseif (isset($this->messages[$field]) && is_string($this->messages[$field])) {
-            return $this->messages[$field];
-        } else {
-            return false;
-        }
-    }
-    
+       
     /**
      * Returns detail invalid messages
      * 
