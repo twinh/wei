@@ -6,13 +6,13 @@ class LengthTest extends TestCase
 {
     protected $ao;
     
-    public function __construct($name = NULL, array $data = array(), $dataName = '') {
+    public function __construct($name = NULL, array $data = array(), $dataName = '')
+    {
         parent::__construct($name, $data, $dataName);
-        
+
         $this->ao = new \ArrayObject(array(
             1, 2,
         ));
-        
     }
     
     /**
