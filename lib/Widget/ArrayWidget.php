@@ -123,7 +123,7 @@ class ArrayWidget extends WidgetProvider implements \ArrayAccess, \Countable, \I
     }
 
     /**
-     * Returns the data keys.
+     * Returns the data keys
      *
      * @return array<integer|string>
      */
