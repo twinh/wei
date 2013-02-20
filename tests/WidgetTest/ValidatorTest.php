@@ -569,4 +569,33 @@ class ValidatorTest extends TestCase
             $this->assertContains('Your email', $message);
         }
     }
+    
+    public function testJoinedMessage()
+    {
+        $validator = $this->validate(array(
+            'data' => array(
+                'email' => 'error-email',
+            ),
+            'rules' => array(
+                'email' => array(
+                    'required' => true, // valid
+                    'length' => array(1, 3), // not valid
+                    'email' => true,    // not valid
+                    'endsWith' => '@gamil.com' // not valid
+                )
+            ),
+            'messages' => array(
+                'email' => array(
+                    'length' => 'error message 1', 
+                    'email' => 'error message 2',
+                    'endsWith' => 'error message 2' // the same message would be combined
+                ),
+            )
+        ));
+        
+        $message = $validator->getJoinedMessage('|');
+        $this->assertContains('error message 1', $message);
+        $this->assertContains('error message 2', $message);
+        $this->assertEquals('error message 1|error message 2', $message);
+    }
 }
