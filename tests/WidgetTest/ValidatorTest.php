@@ -621,4 +621,18 @@ class ValidatorTest extends TestCase
         $this->assertInstanceOf('\Widget\Validator\Length', $validator->getRuleValidator('email', 'length'));
         $this->assertInstanceOf('\Widget\Validator\Email', $validator->getRuleValidator('email', 'email'));
     }
+    
+    public function testGetNames()
+    {
+        $validator = $this->validate(array(
+            'rules' => array(
+                'key' => 'required'
+            ),
+            'names' => array(
+                'key' => 'value'
+            )
+        ));
+        
+        $this->assertEquals(array('key' => 'value'), $validator->getNames());
+    }
 }
