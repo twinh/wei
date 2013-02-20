@@ -16,7 +16,7 @@ class Length extends AbstractLengthValidator
 {
     protected $lengthMessage = '%name must have a length of %length%';
     
-    protected $lengthItemMessage = '%name% must contain %min% to %max% item(s)';
+    protected $lengthItemMessage = '%name% must contain %length% item(s)';
     
     protected $notInMessage = '%name% must have a length between %min% and %max%';
 
