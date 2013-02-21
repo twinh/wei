@@ -1,37 +1,19 @@
 <?php
+
 /**
  * Widget Framework
  *
- * Copyright (c) 2008-2011 Twin Huang. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @author      Twin Huang <twinh@yahoo.cn>
  * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
- * @version     $Id$
  */
 
 namespace Widget;
 
 /**
- * Marker
+ * Memcache
  *
  * @package     Widget
- * @subpackage  Widget
- * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  * @author      Twin Huang <twinh@yahoo.cn>
- * @since       2012-01-12 13:39:05
  * @todo        add index column
  * @todo        add index total row
  * @todo        add memory column
@@ -43,30 +25,32 @@ class Marker extends WidgetProvider
      *
      * @var int
      */
-    protected $_index = 0;
+    protected $index = 0;
 
     /**
      * Markers data
      *
      * @var array
      */
-    protected $_data = array();
+    protected $data = array();
 
     /**
-     * Options
-     *
-     * @var array
+     * Whether auto start record when marker constructed
+     * 
+     * @var bool
      */
-    public $options = array(
-        'auto' => true,
-    );
+    protected $auto = false;
 
+    /**
+     * Constructor
+     * 
+     * @param array $options
+     */
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-        if ($this->options['auto']) {
-            $this->__invoke('Start');
-        }
+        
+        $this->auto && $this('Start');
     }
 
     /**
@@ -77,24 +61,24 @@ class Marker extends WidgetProvider
      */
     public function __invoke($name = null)
     {
-        // TODO add memory
-        //var_dump(memory_get_usage());
-        !$name && $name = ++$this->_index;
+        !$name && $name = ++$this->index;
 
-        $times = explode(' ', microtime());
-        $this->_data[$name] = $times[1] . substr($times[0], 1);
+        $this->data[$name] = array(
+            'time' => microtime(true),
+            'memory' => memory_get_usage()
+        );
 
         return $this;
     }
 
     /**
-     * Get markers data
+     * Returns the marker data
      *
      * @return array<*,string>
      */
     public function getMarkers()
     {
-        return $this->_data;
+        return $this->data;
     }
 
     /**
@@ -105,35 +89,44 @@ class Marker extends WidgetProvider
      */
     public function display($print = true)
     {
-        reset($this->_data);
-        $start = current($this->_data);
-        $total = bcsub(end($this->_data), $start, 8);
+        reset($this->data);
+        $start = current($this->data);
+        $end = end($this->data);
+        $total = bcsub($end['time'], $start['time'], 8);
 
-        $code = '<table cellpadding="3" cellspacing="1" border="1">'
-              . '<tr>'
+        $code = '<table class="table table-bordered table-hover">'
+              . '<thead><tr>'
               . '<th>Marker</th>'
               . '<th>Time</th>'
               . '<th>Elapsed Time</th>'
               . '<th>%</th>'
-              . '</tr>';
-        foreach ($this->_data as $name => $time) {
+              . '<th>Memory Usage</th>'
+              . '</tr></thead><tbody>';
+        foreach ($this->data as $name => $data) {
             if (isset($preTime)) {
-                $elapsedTime = bcsub($time, $preTime, 8);
+                $elapsedTime = bcsub($data['time'], $preTime, 8);
                 $percentage = bcmul(bcdiv($elapsedTime, $total, 4), 100, 2) . '%';
             } else {
                 $elapsedTime = '-';
                 $percentage = '-';
             }
-            $preTime = $time;
+            $preTime = $data['time'];
+            if (isset($preMemory)) {
+                $memoryDiff = '<span style="color:green; font-size: 0.8em">(+' . $this->isFile->fromBytes($data['memory'] - $preMemory) . ')</span>';
+            } else {
+                $memoryDiff = '';
+            }
+            $preMemory = $data['memory'];
 
             $code .= '<tr>'
                    . '<th>' . $name . '</th>'
-                   . '<td>' . $time . '</td>'
+                   . '<td>' . $data['time'] . '</td>'
                    . '<td>' . $elapsedTime . '</td>'
                    . '<td>' . $percentage . '</td>'
+                   . '<td>' . $this->isFile->fromBytes($data['memory']) . $memoryDiff . '</td>'
                    . '</tr>';
         }
-        $code .= '</table>';
+        $code .= '</tbody></table>';
 
         if ($print) {
             echo $code;
