@@ -22,6 +22,11 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
 {
     protected $notStringMessage = '%name% must be a string';
     
+    /**
+     * The common message for opposite validator
+     * 
+     * @var string
+     */
     protected $notMessage = '%name% is not valid';
     
     /**
@@ -49,7 +54,7 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
     protected $message;
     
     /**
-     * Whether it's the opposite validator, for examole, notDigit is digit's 
+     * Whether it's a opposite validator, for examole, notDigit is digit's 
      * opposite validator. The opposite validator will returns $this->notMessage 
      * as the error message currently
      * 
