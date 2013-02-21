@@ -104,7 +104,7 @@ class Marker extends WidgetProvider
               . '</tr></thead><tbody>';
         foreach ($this->data as $name => $data) {
             if (isset($preTime)) {
-                $elapsedTime = bcsub($data['time'], $preTime, 8);
+                $elapsedTime = bcsub($data['time'], $preTime, 4);
                 $percentage = bcmul(bcdiv($elapsedTime, $total, 4), 100, 2) . '%';
             } else {
                 $elapsedTime = '-';
