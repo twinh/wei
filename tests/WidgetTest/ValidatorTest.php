@@ -666,4 +666,51 @@ class ValidatorTest extends TestCase
         
         $this->assertEquals('custom format message', $validator->getRuleValidator('username', 'email')->option('formatMessage'));
     }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidArgumentException()
+    {
+        $email = $this->is->createRuleValidator('email', array(
+            'formatMessage' => '%noThisProperty%'
+        ));
+        
+        $email('not email');
+        
+        $email->getMessages();
+    }
+    
+    public function testGetNotMessages()
+    {
+        $email = $this->is->createRuleValidator('notEmail', array(
+            'notMessage' => 'this value must not be an email address'
+        ));
+            
+        $email('email@example.com');
+        
+        $this->assertContains('this value must not be an email address', $email->getMessages());
+    }
+    
+    public function testSetMessages()
+    {
+        $email = $this->is->createRuleValidator('email');
+        
+        $email->setMessages(array(
+            'format' => 'please provide a valid email address'
+        ));
+        
+        $email('not email');
+
+        $this->assertContains('please provide a valid email address', $email->getMessages());
+    }
+    
+    public function testGetName()
+    {
+        $email = $this->is->createRuleValidator('email');
+        
+        $email->setName('email');
+        
+        $this->assertEquals('email', $email->getName());
+    }
 }
