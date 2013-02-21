@@ -100,7 +100,6 @@ class Marker extends WidgetProvider
             if ($prevData) {
                 $data['fullName']           = $prevData['name'] . '~' . $name;
                 $data['elapsedTime']        = bcsub($data['time'], $prevData['time'], 4);
-                var_dump($totalTime);
                 $data['timePercentage']     = '0.0000' === $totalTime ? 0 : bcmul(bcdiv($data['elapsedTime'], $totalTime, 4), 100, 2) . '%';
                 $data['increasedMemory']    = $this->fromBytes($data['memory'] - $prevData['memory']);
                 $data['memoryPercentage']   = bcmul(bcdiv(bcsub($data['memory'], $prevData['memory']), $totalMemory, 4), 100, 2) . '%';
