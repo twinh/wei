@@ -80,60 +80,78 @@ class Marker extends WidgetProvider
     {
         return $this->data;
     }
+    
+    /**
+     * 
+     * @return array
+     */
+    public function getProcessedData()
+    {
+        $start          = current($this->data);
+        $end            = end($this->data);
+        $totalTime      = bcsub($end['time'], $start['time'], 4);
+        $totalMemory    = bcsub($end['memory'], $start['memory']);
+        $prevData       = array();
+        $result         = array();
+
+        foreach ($this->data as $name => $data) {
+            if ($prevData) {
+                $data['fullName']           = $prevData['name'] . '~' . $name;
+                $data['elapsedTime']        = bcsub($data['time'], $prevData['time'], 4);
+                $data['timePercentage']     = $totalTime ? bcmul(bcdiv($data['elapsedTime'], $totalTime, 4), 100, 2) . '%' : 0;
+                $data['increasedMemory']    = $this->isFile->fromBytes($data['memory'] - $prevData['memory']);
+                $data['memoryPercentage']   = bcmul(bcdiv(bcsub($data['memory'], $prevData['memory']), $totalMemory, 4), 100, 2) . '%';
+            } else {
+                $data['fullName']           = $name;
+                $data['elapsedTime']        = 0;
+                $data['timePercentage']     = '-';
+                $data['increasedMemory']    = 0;
+                $data['memoryPercentage']   = '-';
+            }
+            $data['name']                   = $name;
+            $data['formatedTime']           = date('i:s', $data['time']) . '.' . substr($data['time'], 11) . 'ms';
+            $data['formatedMemory']         = $this->isFile->fromBytes($data['memory']);
+            $result[] = $prevData = $data;
+        }
+        return $result;
+    }
 
     /**
      * Display profiling data
      *
      * @param  boolean|string $print
-     * @return Marker|string
+     * @return \Widget\Marker|string
      */
     public function display($print = true)
     {
-        reset($this->data);
-        $start = current($this->data);
-        $end = end($this->data);
-        $total = bcsub($end['time'], $start['time'], 8);
+        $data = $this->getProcessedData();
 
-        $code = '<table class="table table-bordered table-hover">'
+        $code = '<table class="table table-bordered table-hover marker-table">'
               . '<thead><tr>'
               . '<th>Marker</th>'
               . '<th>Time</th>'
-              . '<th>Elapsed Time</th>'
               . '<th>%</th>'
               . '<th>Memory Usage</th>'
-              . '</tr></thead><tbody>';
-        foreach ($this->data as $name => $data) {
-            if (isset($preTime)) {
-                $elapsedTime = bcsub($data['time'], $preTime, 4);
-                $percentage = bcmul(bcdiv($elapsedTime, $total, 4), 100, 2) . '%';
-            } else {
-                $elapsedTime = '-';
-                $percentage = '-';
-            }
-            $preTime = $data['time'];
-            if (isset($preMemory)) {
-                $memoryDiff = '<span style="color:green; font-size: 0.8em">(+' . $this->isFile->fromBytes($data['memory'] - $preMemory) . ')</span>';
-            } else {
-                $memoryDiff = '';
-            }
-            $preMemory = $data['memory'];
-
+              . '<th>%</th>'
+              . '</tr>'
+              . '</thead>'
+              . '<tbody>';
+        
+        foreach($data as $row) {
             $code .= '<tr>'
-                   . '<th>' . $name . '</th>'
-                   . '<td>' . $data['time'] . '</td>'
-                   . '<td>' . $elapsedTime . '</td>'
-                   . '<td>' . $percentage . '</td>'
-                   . '<td>' . $this->isFile->fromBytes($data['memory']) . $memoryDiff . '</td>'
+                   . '<th>' . $row['fullName'] . '</th>'
+                   . '<td>' . $row['formatedTime'] . ($row['elapsedTime'] ? '<span style="color:green; font-size: 0.8em">(+' . $row['elapsedTime'] . 'ms)' : '') . '</span></td>'
+                   . '<td>' . $row['timePercentage'] . '</td>'
+                   . '<td>' . $row['formatedMemory'] . ($row['increasedMemory'] ? '<span style="color:green; font-size: 0.8em">(+' . $row['increasedMemory'] . ')' : '') . '</span></td>'
+                   . '<td>' . $row['memoryPercentage'] . '</td>'
                    . '</tr>';
         }
         $code .= '</tbody></table>';
-
         if ($print) {
             echo $code;
-
             return $this;
         } else {
             return $code;
-        }
+        }        
     }
 }
