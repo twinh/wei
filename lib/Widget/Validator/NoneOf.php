@@ -21,6 +21,8 @@ class NoneOf extends AbstractGroupValidator
 
     protected $validators = array();
     
+    protected $combineMessages = false;
+    
     public function __invoke($input, array $rules = array())
     {
         $rules && $this->rules = $rules;
@@ -37,10 +39,11 @@ class NoneOf extends AbstractGroupValidator
 
         $validator = null;
         $props = array(
-            'name' => $this->name
+            'name' => $this->name,
+            'opposite' => true
         );
         foreach ($this->rules as $rule => $options) {
-            if ($this->is->validateOne($rule, $input, $options, $validator, $props)) {
+            if (!$this->is->validateOne($rule, $input, $options, $validator, $props)) {
                 $this->validators[$rule] = $validator;
             }
         }
