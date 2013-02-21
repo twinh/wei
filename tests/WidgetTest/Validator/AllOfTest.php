@@ -18,9 +18,20 @@ class AllOfTest extends TestCase
     {
         $this->assertFalse($this->isAllOf('10000@qq.com', array(
             'email' => true,
-            'endsWith' => array(
-                'findMe' => '@gmail.com'
-            )
+            'endsWith' => '@gmail.com'
         )));
+    }
+    
+    public function testGetMessages()
+    {
+        $allOf = $this->is->createRuleValidator('allOf');
+        
+        $allOf('10000@qq.com', array(
+            'email' => true,
+            'endsWith' => '@gmail.com'
+        ));
+        
+        // Returns single message as default
+        $this->assertCount(1, $allOf->getMessages());
     }
 }
