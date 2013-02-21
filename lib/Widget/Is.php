@@ -133,7 +133,12 @@ class Is extends WidgetProvider
     }
     
     /**
+     * Create a rule validator instance by specified rule name
+     * 
+     * @param string $rule The name of rule validator
+     * @param array $options The property options for rule validator
      * @return Widget\Validator\AbstractValidator
+     * @throws Exception When validator not found
      */
     public function createRuleValidator($rule, array $options = array())
     {
