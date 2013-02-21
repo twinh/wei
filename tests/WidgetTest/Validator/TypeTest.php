@@ -30,6 +30,17 @@ class TypeTest extends TestCase
         $this->assertInternalType('resource', $res);
         $this->assertTrue($this->isType->__invoke($res, 'resource'));
     }
+    
+    public function testGetMessages()
+    {
+        $type = $this->is->createRuleValidator('type', array(
+            'typeMessage' => 'type message',
+        ));
+        
+        $type('string', 'float');
+        
+        $this->assertContains('type message', $type->getMessages());
+    }
 
     public function providerForType()
     {
