@@ -266,11 +266,6 @@ class Validator extends AbstractValidator
         return $this->result;
     }
     
-    protected function validate($input)
-    {
-        //noop
-    }
-    
     /**
      * Add valid rule
      *
@@ -414,8 +409,18 @@ class Validator extends AbstractValidator
     
     /**
      * {@inheritdoc}
+     * @todo refactor
      */
     public function isValid($input = null)
+    {
+        return $this->result;
+    }
+    
+    /**
+     * {@inheritdoc}
+     * @todo refactor
+     */
+    protected function validate($input)
     {
         return $this->result;
     }
