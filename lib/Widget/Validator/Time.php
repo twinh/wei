@@ -14,7 +14,7 @@ namespace Widget\Validator;
  */
 class Time extends DateTime
 {
-    protected $formatMessage = '%name% is not a valid time, the format should be "%format%", eg: %example%';
+    protected $formatMessage = '%name% must be a valid time, the format should be "%format%", eg: %example%';
     
     protected $notMessage = '%name% must not be a valid time';
     

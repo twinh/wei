@@ -17,7 +17,7 @@ return array(
     '%name%\'s %index% item' => '%name%的第%index%项',
     
     // allOf
-    '%name% must be passed by all of these rules' => '%name%必须满足以下任何一条规则',
+    '%name% must be passed by all of these rules' => '%name%必须满足以下所有规则',
 
     // alnum
     '%name% must contain letters (a-z) and digits (0-9)' => '%name%只能由字母(a-z)和数字(0-9)组成',
