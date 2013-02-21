@@ -15,7 +15,7 @@ use Widget\WidgetProvider;
  * 
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
- * @method string t(string $message, array $parameters = arrray()) Translates a message
+ * @method string t(string $message, array $parameters = array()) Translates a message
  * @property \Widget\T $t The translator widget
  */
 abstract class AbstractValidator extends WidgetProvider implements ValidatorInterface
