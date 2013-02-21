@@ -90,6 +90,7 @@ class Marker extends WidgetProvider
     {
         $start          = current($this->data);
         $end            = end($this->data);
+        // If start time === end time, total time would be '0.0000'
         $totalTime      = bcsub($end['time'], $start['time'], 4);
         $totalMemory    = bcsub($end['memory'], $start['memory']);
         $prevData       = array();
@@ -99,7 +100,8 @@ class Marker extends WidgetProvider
             if ($prevData) {
                 $data['fullName']           = $prevData['name'] . '~' . $name;
                 $data['elapsedTime']        = bcsub($data['time'], $prevData['time'], 4);
-                $data['timePercentage']     = $totalTime ? bcmul(bcdiv($data['elapsedTime'], $totalTime, 4), 100, 2) . '%' : 0;
+                var_dump($totalTime);
+                $data['timePercentage']     = '0.0000' === $totalTime ? 0 : bcmul(bcdiv($data['elapsedTime'], $totalTime, 4), 100, 2) . '%';
                 $data['increasedMemory']    = $this->fromBytes($data['memory'] - $prevData['memory']);
                 $data['memoryPercentage']   = bcmul(bcdiv(bcsub($data['memory'], $prevData['memory']), $totalMemory, 4), 100, 2) . '%';
             } else {
