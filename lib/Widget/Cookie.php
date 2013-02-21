@@ -77,7 +77,7 @@ class Cookie extends Parameter
      */
     public function get($key, $default = null)
     {
-        return isset($this->data[$key]) ? @unserialize($this->data[$key]) : $default;
+        return isset($this->data[$key]) ? $this->data[$key] : $default;
     }
 
     /**
@@ -86,7 +86,7 @@ class Cookie extends Parameter
      * @param  string       $key     The name of cookie
      * @param  mixed        $value   The value of cookie
      * @param  array        $options
-     * @return Cookie
+     * @return \Widget\Cookie
      */
     public function set($key, $value = null, array $options = array())
     {
@@ -123,7 +123,7 @@ class Cookie extends Parameter
      * Remove cookie
      *
      * @param  string       $key the name of cookie
-     * @return Cookie
+     * @return \Widget\Cookie
      */
     public function offsetUnset($key)
     {
@@ -133,7 +133,8 @@ class Cookie extends Parameter
     /**
      * Send cookie to header
      *
-     * @return Cookie
+     * @return \Widget\Cookie
+     * @codeCoverageIgnore
      */
     public function send()
     {
@@ -148,9 +149,14 @@ class Cookie extends Parameter
 
     /**
      * Destructor
+     * 
+     * @todo send or not ?
+     * @codeCoverageIgnore
      */
     public function __destruct()
     {
-        $this->send();
+        if (!headers_sent()) {
+            $this->send();
+        }
     }
 }
