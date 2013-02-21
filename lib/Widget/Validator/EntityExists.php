@@ -11,6 +11,8 @@ namespace Widget\Validator;
 /**
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @property \Widget\EntityManager $entityManager The doctrine orm entity manager widget
+ * @method \Doctrine\ORM\EntityManager entityManager() Returns the doctrine orm entity object
  * @todo        Adds property like dql, queryBuilder, etc
  */
 class EntityExists extends AbstractValidator
