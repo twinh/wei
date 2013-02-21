@@ -82,6 +82,7 @@ class Marker extends WidgetProvider
     }
     
     /**
+     * Returns the processed data
      * 
      * @return array
      */
@@ -109,7 +110,7 @@ class Marker extends WidgetProvider
                 $data['memoryPercentage']   = '-';
             }
             $data['name']                   = $name;
-            $data['formatedTime']           = date('i:s', $data['time']) . '.' . substr($data['time'], 11) . 'ms';
+            $data['formatedTime']           = date('i:s', $data['time']) . '.' . substr($data['time'], 11) . 's';
             $data['formatedMemory']         = $this->isFile->fromBytes($data['memory']);
             $result[] = $prevData = $data;
         }
@@ -140,7 +141,7 @@ class Marker extends WidgetProvider
         foreach($data as $row) {
             $code .= '<tr>'
                    . '<th>' . $row['fullName'] . '</th>'
-                   . '<td>' . $row['formatedTime'] . ($row['elapsedTime'] ? '<span style="color:green; font-size: 0.8em">(+' . $row['elapsedTime'] . 'ms)' : '') . '</span></td>'
+                   . '<td>' . $row['formatedTime'] . ($row['elapsedTime'] ? '<span style="color:green; font-size: 0.8em">(+' . $row['elapsedTime'] . 's)' : '') . '</span></td>'
                    . '<td>' . $row['timePercentage'] . '</td>'
                    . '<td>' . $row['formatedMemory'] . ($row['increasedMemory'] ? '<span style="color:green; font-size: 0.8em">(+' . $row['increasedMemory'] . ')' : '') . '</span></td>'
                    . '<td>' . $row['memoryPercentage'] . '</td>'
