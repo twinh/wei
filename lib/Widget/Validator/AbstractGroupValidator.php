@@ -58,6 +58,7 @@ abstract class AbstractGroupValidator extends AbstractValidator
                 $key => implode("\n", $messages)
             );
         } else {
+            $messages = array();
             foreach ($this->validators as $rule => $validator) {
                 foreach ($validator->getMessages() as $option => $message) {
                     $messages[$rule . '.' . $option] = $message;
