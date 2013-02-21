@@ -57,6 +57,11 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
      */
     protected $opposite = false;
     
+    /**
+     * Whether the translation widget has loaded the validator messages
+     * 
+     * @var bool
+     */
     protected static $translationMessagesLoaded;
     
     /**
@@ -64,7 +69,7 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
      */
     public function isValid($input)
     {
-        return $this->__invoke($input);
+        return $this($input);
     }
     
     /**
