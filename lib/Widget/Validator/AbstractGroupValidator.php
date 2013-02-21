@@ -8,7 +8,7 @@
 
 namespace Widget\Validator;
 
-class AbstractGroupValidator extends AbstractValidator
+abstract class AbstractGroupValidator extends AbstractValidator
 {
     /**
      * The invalid validators

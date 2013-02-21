@@ -39,6 +39,14 @@ class All extends AbstractValidator
     {
         $rules && $this->rules = $rules;
         
+        return $this->isValid($input);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function validate($input)
+    {
         if (!is_array($input) && !$input instanceof \Traversable) {
             $this->addError('notArray');
             return false;
@@ -47,7 +55,7 @@ class All extends AbstractValidator
         $index = 1;
         $validator = null;
         foreach ($input as $item) {
-            foreach ($rules as $rule => $options) {
+            foreach ($this->rules as $rule => $options) {
                 if (!$this->is->validateOne($rule, $item, $options, $validator)) {
                     $this->validators[$index][$rule] = $validator;
                 }

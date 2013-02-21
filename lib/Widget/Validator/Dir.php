@@ -20,6 +20,14 @@ class Dir extends AbstractValidator
     
     public function __invoke($input)
     {
+        return $this->isValid($input);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function validate($input)
+    {
         if (!$this->isString($input)) {
             $this->addError('notString');
             return false;

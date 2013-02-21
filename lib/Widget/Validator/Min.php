@@ -22,6 +22,14 @@ class Min extends AbstractValidator
     {
         $min && $this->min = $min;
         
+        return $this->isValid($input);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function validate($input)
+    {
         if ($this->min > $input) {
             $this->addError('min');
             return false;

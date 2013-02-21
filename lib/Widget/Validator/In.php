@@ -38,6 +38,14 @@ class In extends AbstractValidator
         
         is_bool($strict) && $this->strict = $strict;
         
+        return $this->isValid($input);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function validate($input)
+    {
         if (!in_array($input, $this->array, $this->strict)) {
             $this->addError('notIn');
             return false;

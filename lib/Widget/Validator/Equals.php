@@ -28,6 +28,14 @@ class Equals extends AbstractValidator
         func_num_args() > 1 && $this->equals = $equals;
         is_bool($strict) && $this->strict = $strict;
         
+        return $this->isValid($input);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function validate($input)
+    {
         if (!($this->strict ? $input === $this->equals : $input == $this->equals)) {
             $this->addError('notEquals');
             return false;

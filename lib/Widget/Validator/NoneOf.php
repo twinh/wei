@@ -25,12 +25,19 @@ class NoneOf extends AbstractGroupValidator
     {
         $rules && $this->rules = $rules;
         
+        return $this->isValid($input);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function validate($input)
+    {
         $this->addError('invalid');
 
         $validator = null;
         $props = array(
-            'name' => $this->name,
-            'opposite' => true
+            'name' => $this->name
         );
         foreach ($this->rules as $rule => $options) {
             if ($this->is->validateOne($rule, $input, $options, $validator, $props)) {

@@ -31,7 +31,7 @@ class Is extends WidgetProvider
      * @param string|\Widget\Validator\AbstractValidator|int $rule
      * @param array|null $data
      * @paran mixed $options
-     * @internal Do NOT use this method for it may be change in the future
+     * @internal Do NOT use this method for it may be changed in the future
      */
     public function validateOne($rule, $data, $options = array(), &$validator = null, $props = array())
     {
@@ -50,10 +50,8 @@ class Is extends WidgetProvider
          
         // Starts with "not", such as notDigit, notEqual
         if (0 === stripos($rule, 'not')) {
-            $opposite = $props['opposite'] = true;
+            $props['opposite'] = true;
             $rule = substr($rule, 3);
-        } else {
-            $opposite = false;
         }
         
         $validator = $this->createRuleValidator($rule, $props);
@@ -70,7 +68,7 @@ class Is extends WidgetProvider
             $result = $validator($data);
         }
 
-        return $result xor $opposite;
+        return $result;
     }
 
     /**

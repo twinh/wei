@@ -30,6 +30,14 @@ class Range extends AbstractValidator
             $this->max = $max;
         }
         
+        return $this->isValid($input);
+    }
+     
+    /**
+     * {@inheritdoc}
+     */
+    protected function validate($input)
+    {
         if ($this->min > $input || $this->max < $input) {
             $this->addError('range');
             return false;

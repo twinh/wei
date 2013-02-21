@@ -45,15 +45,18 @@ class Image extends File
      * @var int
      */
     protected $height;
-    
-    public function __invoke($file, $options = array())
+        
+    /**
+     * {@inheritdoc}
+     */
+    protected function validate($input)
     {
-        parent::__invoke($file, $options);
+        parent::validate($input);
         if ($this->hasError('notString') || $this->hasError('notFound')) {
             return false;
         }
         
-        $size = @getimagesize($file);
+        $size = @getimagesize($input);
         if (false === $size) {
             $this->addError('notDetected');
             return false;

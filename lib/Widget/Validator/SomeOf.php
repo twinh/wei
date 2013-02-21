@@ -40,6 +40,14 @@ class SomeOf extends AbstractGroupValidator
         $atLeast && $this->atLeast = $atLeast;
         $rules && $this->rules = $rules;
         
+        return $this->isValid($input);
+    }
+        
+    /**
+     * {@inheritdoc}
+     */
+    protected function validate($input)
+    {
         // Adds "atLeast" error at first, make sure this error at the top of 
         // strack, if any rule is passed, the error will be removed
         $this->addError('atLeast');
@@ -60,7 +68,7 @@ class SomeOf extends AbstractGroupValidator
             }
         }
         
-        $this->count = count($rules) - $passed;
+        $this->count = count($this->rules) - $passed;
         $this->left = $this->atLeast - $passed;
         
         return false;

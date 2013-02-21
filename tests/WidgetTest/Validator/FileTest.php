@@ -13,11 +13,11 @@ class FileTest extends TestCase
     
     public function testIsFile()
     {
-        $this->assertFalse($this->isFile(array()), 'Not File path');
+        $this->assertFalse($this->is('file', array()), 'Not File path');
 
-        $this->assertTrue($this->isFile(__FILE__), 'File found');
+        $this->assertTrue($this->is('file', __FILE__), 'File found');
 
-        $this->assertFalse($this->isFile('.file not found'), 'File not found');
+        $this->assertFalse($this->is('file', '.file not found'), 'File not found');
 
         $paths = explode(PATH_SEPARATOR, ini_get('include_path'));
         $path = array_pop($paths);
@@ -27,7 +27,7 @@ class FileTest extends TestCase
                 continue;
             }
             if (is_file($path . DIRECTORY_SEPARATOR . $file)) {
-                $this->assertNotEquals(false, $this->isFile($file), 'File in include path found');
+                $this->assertNotEquals(false, $this->is('file', $file), 'File in include path found');
                 break;
             }
         }

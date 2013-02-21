@@ -20,6 +20,14 @@ class Null extends AbstractValidator
     
     public function __invoke($input)
     {
+        return $this->isValid($input);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function validate($input)
+    {
         if (!is_null($input)) {
             $this->addError('notNull');
             return false;

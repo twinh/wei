@@ -138,17 +138,24 @@ class File extends AbstractValidator
      *
      * @return string|bool
      */
-    public function __invoke($file, $options = array())
+    public function __invoke($input, $options = array())
     {
-        $this->errors = array();
         $options && $this->option($options);
-
-        if (!is_string($file) || empty($file)) {
+        
+        return $this->isValid($input);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function validate($input)
+    {
+        if (!is_string($input) || empty($input)) {
             $this->addError('notString');
             return false;
         }
-        
-        $file = stream_resolve_include_path($file);
+
+        $file = stream_resolve_include_path($input);
         if (!$file || !is_file($file)) {
             $this->addError('notFound');
             return false;

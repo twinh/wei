@@ -24,6 +24,14 @@ class MaxLength extends AbstractLengthValidator
     {
         $max && $this->max = $max;
         
+        return $this->isValid($input);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function validate($input)
+    {
         if (false === ($len = $this->getLength($input))) {
             $this->addError('notDetectd');
             return false;

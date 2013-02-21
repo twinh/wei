@@ -26,6 +26,14 @@ class Type extends AbstractValidator
     {
         $type && $this->type = $type;
         
+        return $this->isValid($input);
+    }
+        
+    /**
+     * {@inheritdoc}
+     */
+    protected function validate($input)
+    {
         if (function_exists($fn = 'is_' . $this->type)) {
             $result = $fn($input);
         } elseif (function_exists($fn = 'ctype_' . $this->type)) {

@@ -20,6 +20,14 @@ class Number extends AbstractValidator
     
     public function __invoke($input)
     {
+        return $this->isValid($input);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function validate($input)
+    {
         if (!is_numeric($input)) {
             $this->addError('notNumber');
             return false;

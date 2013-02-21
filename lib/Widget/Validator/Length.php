@@ -39,6 +39,14 @@ class Length extends AbstractLengthValidator
             $this->length = $min;
         }
         
+        return $this->isValid($input);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function validate($input)
+    {
         if (false === ($len = $this->getLength($input))) {
             $this->addError('notDetectd');
             return false;

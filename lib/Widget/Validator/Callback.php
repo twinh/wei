@@ -27,6 +27,14 @@ class Callback extends AbstractValidator
     {
         $fn && $this->fn = $fn;
         
+        return $this->isValid($input);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function validate($input)
+    {
         if (!call_user_func($this->fn, $input, $this, $this->widget)) {
             $this->addError('invalid');
             return false;

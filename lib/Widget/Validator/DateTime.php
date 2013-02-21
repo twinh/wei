@@ -51,6 +51,14 @@ class DateTime extends AbstractValidator
     {
         $format && $this->format = $format;
         
+        return $this->isValid($input);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function validate($input)
+    {
         if (!$this->isString($input)) {
             $this->addError('notString');
             return false;

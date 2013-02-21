@@ -20,6 +20,14 @@ class Url extends AbstractValidator
     
     public function __invoke($input)
     {
+        return $this->isValid($input);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function validate($input)
+    {
         if (!filter_var($input, FILTER_VALIDATE_URL)) {
             $this->addError('invalid');
             return false;

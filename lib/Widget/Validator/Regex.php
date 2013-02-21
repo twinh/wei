@@ -25,15 +25,30 @@ class Regex extends AbstractValidator
      */
     protected $pattern;
     
+    /**
+     * Returns whether the $input value is valid
+     * 
+     * @param mixed $input
+     * @param null|string $pattern
+     * @return bool
+     */
     public function __invoke($input, $pattern = null)
     {
         is_string($pattern) && $this->pattern = $pattern;
         
+        return $this->isValid($input);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function validate($input)
+    {
         if (!$this->isString($input)) {
             $this->addError('notString');
             return false;
         }
-
+        
         if (!preg_match($this->pattern, $input)) {
             $this->addError('pattern');
             return false;

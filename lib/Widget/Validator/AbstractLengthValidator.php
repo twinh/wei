@@ -8,7 +8,7 @@
 
 namespace Widget\Validator;
 
-class AbstractLengthValidator extends AbstractValidator
+abstract class AbstractLengthValidator extends AbstractValidator
 {
     protected $notDetectdMessage = '%name%\'s length could not be detected';
     

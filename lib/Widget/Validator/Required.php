@@ -22,6 +22,14 @@ class Required extends AbstractValidator
     {
         is_bool($required) && $this->required = $required;
         
+        return $this->isValid($input);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function validate($input)
+    {
         if ($this->required && !$input) {
             $this->addError('required');
             return false;

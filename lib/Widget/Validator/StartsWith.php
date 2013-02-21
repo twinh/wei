@@ -27,6 +27,14 @@ class StartsWith extends AbstractValidator
         $findMe && $this->findMe = $findMe;
         is_bool($case) && $this->case = $case;
         
+        return $this->isValid($input);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function validate($input)
+    {
         if (!$this->isString($input)) {
             $this->addError('notString');
             return false;

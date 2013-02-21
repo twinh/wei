@@ -51,6 +51,14 @@ class Ip extends AbstractValidator
     {
         $options && $this->option($options);
         
+        return $this->isValid($input);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function validate($input)
+    {
         $flag = 0;
         if ($this->ipv4) {
             $flag = $flag | FILTER_FLAG_IPV4;

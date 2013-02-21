@@ -265,7 +265,12 @@ class Validator extends AbstractValidator
 
         return $this->result;
     }
-
+    
+    protected function validate($input)
+    {
+        //noop
+    }
+    
     /**
      * Add valid rule
      *

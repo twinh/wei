@@ -23,11 +23,19 @@ class EntityExists extends AbstractValidator
     
     protected $entity;
     
-    public function __invoke($data, $entityClass = null)
-    {        
+    public function __invoke($input, $entityClass = null)
+    {
         $entityClass && $this->entityClass = $entityClass;
         
-        $this->entity = $this->entityManager()->find($this->entityClass, $data);
+        return $this->isValid($input);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function validate($input)
+    {
+        $this->entity = $this->entityManager()->find($this->entityClass, $input);
         
         if (!$this->entity) {
             $this->addError('notFound');

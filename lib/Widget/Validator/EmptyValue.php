@@ -20,6 +20,14 @@ class EmptyValue extends AbstractValidator
     
     public function __invoke($input)
     {
+        return $this->isValid($input);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function validate($input)
+    {
         if (!empty($input)) {
             $this->addError('empty');
             return false;
