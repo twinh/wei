@@ -47,12 +47,6 @@ class Is extends WidgetProvider
             $validator = $rule;
             return $rule($data);
         }
-         
-        // Starts with "not", such as notDigit, notEqual
-        if (0 === stripos($rule, 'not')) {
-            $props['opposite'] = true;
-            $rule = substr($rule, 3);
-        }
         
         $validator = $this->createRuleValidator($rule, $props);
 
@@ -143,6 +137,12 @@ class Is extends WidgetProvider
      */
     public function createRuleValidator($rule, array $options = array())
     {
+        // Starts with "not", such as notDigit, notEqual
+        if (0 === stripos($rule, 'not')) {
+            $options['opposite'] = true;
+            $rule = substr($rule, 3);
+        }
+        
         if (!$class = $this->hasRule($rule)) {
             throw new Exception(sprintf('Validator "%s" not found', $rule));
         }
