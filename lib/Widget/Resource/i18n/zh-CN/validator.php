@@ -45,6 +45,10 @@ return array(
     '%name% must be later than %after%' => '%name%必须晚于%after%',
     '%name% must not be a valid datetime' => '%name%不能是合法的日期时间',
     
+    // decimal
+    '%name% must be decimal' => '%name%必须是小数',
+    '%name% must not be decimal' => '%name%不能是小数',
+
     // digit
     '%name% must contain only digits (0-9)' => '%name%只能由数字(0-9)组成',
     '%name% must not contain only digits (0-9)' => '%name%不能只由数字(0-9)组成',
