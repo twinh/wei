@@ -95,6 +95,10 @@ return array(
     '%name% mime type "%mimeType%" is not allowed' => '%name%的媒体类型不合法',
     '%name% must be a non-existing file' => '%name%必须是不存在的文件',
     
+    // idCardCn
+    '%name% must be a valid Chinese identity card' => '%name%必须是有效的中国身份证',
+    '%name% must be a valid Chinese identity card' => '%name%不能是有效的中国身份证',
+
     // image
     '%name% is not a valid image or the size of the image could not be detected' => '%name%不是有效的图片,或是无法检测到图片的尺寸',
     '%name% width is too big (%width%px), allowed maximum width is %maxWidth%px' => '%name%的宽度太大(%width%px), 允许的最大宽度为%maxWidth%px',
@@ -180,6 +184,10 @@ return array(
     // time
     '%name% must be a valid time, the format should be "%format%", eg: %example%' => '%name%不是合法的时间,格式应该是%format%,例如:%example%',
     '%name% must not be a valid time' => '%name%不能是合法的时间',
+    
+    // tld
+    '%name% must be a valid top-level domain' => '%name%必须是有效的顶级域名',
+    '%name% must not a valid top-level domain' => '%name%不能是有效的顶级域名',
     
     // type
     '%name% must be %typeName%' => '%name%必须是%typeName%',
