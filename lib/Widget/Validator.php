@@ -190,18 +190,7 @@ class Validator extends AbstractValidator
             // Start validation
             foreach ($rules as $rule => $params) {
                 // Prepare property options for validator
-                $props = array();
-                if (isset($this->names[$field])) {
-                    $props['name'] = $this->names[$field];
-                }
-                $messages = $this->getRuleMessage($field, $rule);
-                if (is_string($messages)) {
-                    $props['message'] =  $messages;
-                } elseif (is_array($messages)) {
-                    foreach ($messages as $name => $message) {
-                        $props[$name . 'Message'] = $message;
-                    }
-                }
+                $props = $this->prepareProps($field, $rule);
 
                 // The current rule validation result
                 /* @var $validator \Widget\Validator\AbstractValidator */
@@ -266,6 +255,69 @@ class Validator extends AbstractValidator
         return $this->result;
     }
     
+    /**
+     * Prepare name and messages property option for rule validator
+     * 
+     * @param string $field
+     * @param string $rule
+     * @return array
+     */
+    protected function prepareProps($field, $rule)
+    {
+        $props = $messages = array();
+        
+        // Prepare name for validator
+        if (isset($this->names[$field])) {
+            $props['name'] = $this->names[$field];
+        }
+        
+        /**
+         * Prepare messages for validator 
+         * 
+         * The mesages array may look like below
+         * array(
+         *     // Case 1
+         *     'field' => 'message',
+         *     // Case 2
+         *     'field2' => array(
+         *         'rule' => 'message'
+         *     ),
+         *     // Case 2
+         *     'field3' => array(
+         *         'rule' => array(
+         *            'option' => 'message',
+         *            'option2' => 'message',
+         *         )
+         *     )
+         * )
+         * 
+         * In case 2, checking non-numeric offsets of strings would return true 
+         * in PHP 5.3, while return false in PHP 5.4, so we do NOT konw 
+         * $messages is array or string
+         * @link http://php.net/manual/en/function.isset.php
+         * 
+         * In case 1, $messages is string
+         */
+        // Case 2
+        if (isset($this->messages[$field][$rule]) && is_array($this->messages[$field])) {
+            $messages = $this->messages[$field][$rule];
+        // Case 1
+        } elseif (isset($this->messages[$field]) && is_string($this->messages[$field])) {
+            $messages = $this->messages[$field];
+        }
+
+        // Convert message to array for validator
+        if (is_string($messages)) {
+            $props['message'] =  $messages;
+        } elseif (is_array($messages)) {
+            foreach ($messages as $name => $message) {
+                $props[$name . 'Message'] = $message;
+            }
+        }
+        
+        return $props;
+    }
+
     /**
      * Add valid rule
      *
@@ -550,18 +602,7 @@ class Validator extends AbstractValidator
     {
         return $this->messages;
     }
-    
-    public function getRuleMessage($field, $rule)
-    {
-        if (isset($this->messages[$field][$rule]) && is_array($this->messages[$field])) {
-            return $this->messages[$field][$rule];
-        } elseif (isset($this->messages[$field]) && is_string($this->messages[$field])) {
-            return $this->messages[$field];
-        } else {
-            return false;
-        }
-    }
-       
+           
     /**
      * Returns detail invalid messages
      * 
