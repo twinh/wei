@@ -23,14 +23,16 @@ class Decimal extends AbstractValidator
         return $this->isValid($input);
     }
     
-
     /**
      * {@inheritdoc}
      */
     public function validate($input)
     {
-        if (!is_numeric($input) || floor($input) == $input) {
-            $this->addError('invalid');
+        if (is_float($input) || (is_numeric($input) && count(explode('.', $input)) == 2)) {
+            return true;
         }
+        
+        $this->addError('invalid');
+        return false;
     }
 }
