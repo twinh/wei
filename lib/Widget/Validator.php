@@ -617,9 +617,10 @@ class Validator extends AbstractValidator
     }
 
     /**
+     * Returns the rule validator object
      * 
-     * @param type $field
-     * @param type $rule
+     * @param string $field
+     * @param string $rule
      * @return \Widget\Validator\AbstractRule
      */
     public function getRuleValidator($field, $rule)
