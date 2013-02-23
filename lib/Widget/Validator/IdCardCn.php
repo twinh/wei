@@ -18,11 +18,6 @@ class IdCardCn extends AbstractValidator
     
     protected $notMessage = '%name% must not be a valid Chinese identity card';
     
-    protected function __invoke($input)
-    {
-        return $this->isValid($input);
-    }
-    
     /**
      * {@inheritdoc}
      */

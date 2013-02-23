@@ -18,11 +18,6 @@ class Decimal extends AbstractValidator
     
     protected $notMessage = '%name% must not be decimal';
     
-    public function __invoke($input)
-    {
-        return $this->isValid($input);
-    }
-    
     /**
      * {@inheritdoc}
      */

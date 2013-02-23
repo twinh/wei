@@ -76,6 +76,11 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
      * @return boolean
      */
     abstract protected function validate($input);
+    
+    public function __invoke($input)
+    {
+        return $this->isValid($input);
+    }
 
     /**
      * {@inheritdoc}
