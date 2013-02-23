@@ -9,6 +9,7 @@
 namespace Widget;
 
 use Widget\Validator\AbstractValidator;
+use Widget\Validator\ValidatorInterface;
 
 /**
  * Validator
@@ -172,7 +173,7 @@ class Validator extends AbstractValidator
              */
             if (is_string($rules)) {
                 $rules = array($rules => true);
-            } elseif ($rules instanceof AbstractValidator) {
+            } elseif ($rules instanceof ValidatorInterface) {
                 $rules = array($rules);
             } elseif (!is_array($rules)) {
                 throw new UnexpectedTypeException($rules, 'array, string or instance of AbstractValidator');
