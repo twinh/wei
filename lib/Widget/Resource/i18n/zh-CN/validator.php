@@ -121,6 +121,10 @@ return array(
     '%name% must contain %min% to %max% item(s)' => '%name%必须包含%min%到%max%项',
     '%name%\'s length could not be detected' => '无法检测到%name%的长度',
     
+    // lowercase
+    '%name% must be lowercase' => '%name%不能包含大写字母',
+    '%name% must not be lowercase' => '%name%不能包含小写字母',
+    
     // max
     '%name% must be less or equal than %max%' => '%name%必须小于等于%max%',
     '%name% must not be less or equal than %max%' => '%name%必须不小于等于%max%',
@@ -216,4 +220,8 @@ return array(
     'space'     => '空白字符',
     'upper'     => '大写字母(A-Z)',
     'xdigit'    => '16进制数字',
+    
+    // uppercase
+    '%name% must be uppercase' => '%name%不能包含小写字母',
+    '%name% must not be uppercase' => '%name%不能包含大写字母',
 );
