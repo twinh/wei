@@ -225,6 +225,11 @@ return array(
     '%name% must be uppercase' => '%name%不能包含小写字母',
     '%name% must not be uppercase' => '%name%不能包含大写字母',
     
+    // url
     '%name% must be valid URL' => '%name%必须是有效的URL地址',
     '%name% must not be URL' => '%name%不能是URL地址',
+    
+    // uuid
+    '%name% must be valid UUID' => '%name%必须是有效的UUID',
+    '%name% must not be valid UUID' => '%name%不能是有效的UUID'
 );
