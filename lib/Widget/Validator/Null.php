@@ -18,11 +18,6 @@ class Null extends AbstractValidator
     
     protected $notMessage = '%name% must not be null';
     
-    public function __invoke($input)
-    {
-        return $this->isValid($input);
-    }
-    
     /**
      * {@inheritdoc}
      */

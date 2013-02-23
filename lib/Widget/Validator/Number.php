@@ -18,11 +18,6 @@ class Number extends AbstractValidator
     
     protected $notMessage = '%name% must not be number';
     
-    public function __invoke($input)
-    {
-        return $this->isValid($input);
-    }
-    
     /**
      * {@inheritdoc}
      */

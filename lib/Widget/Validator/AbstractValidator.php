@@ -69,14 +69,6 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
      */
     protected static $translationMessagesLoaded;
     
-    /**
-     * Validate the input value (ignore the $opposite property)
-     * 
-     * @param type $input
-     * @return boolean
-     */
-    abstract protected function validate($input);
-    
     public function __invoke($input)
     {
         return $this->isValid($input);
@@ -89,6 +81,14 @@ abstract class AbstractValidator extends WidgetProvider implements ValidatorInte
     {
         return $this->opposite xor $this->validate($input);
     }
+    
+    /**
+     * Validate the input value (ignore the $opposite property)
+     * 
+     * @param type $input
+     * @return boolean
+     */
+    abstract protected function validate($input);
     
     /**
      * {@inheritdoc}

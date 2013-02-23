@@ -18,11 +18,6 @@ class Email extends AbstractValidator
     
     protected $notMessage = '%name% must not be an email address';
     
-    public function __invoke($input)
-    {
-        return $this->isValid($input);
-    }
-    
     /**
      * {@inheritdoc}
      */

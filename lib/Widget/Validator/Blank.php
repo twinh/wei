@@ -17,12 +17,7 @@ class Blank extends AbstractValidator
     protected $blankMessage = '%name% must be blank';
     
     protected $notMessage = '%name% must not be blank';
-    
-    public function __invoke($input)
-    {
-        return $this->isValid($input);
-    }
-    
+        
     /**
      * {@inheritdoc}
      */

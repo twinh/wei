@@ -18,11 +18,6 @@ class EmptyValue extends AbstractValidator
     
     protected $notMessage = '%name% must not be empty';
     
-    public function __invoke($input)
-    {
-        return $this->isValid($input);
-    }
-    
     /**
      * {@inheritdoc}
      */

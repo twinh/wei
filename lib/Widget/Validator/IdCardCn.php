@@ -21,6 +21,14 @@ class IdCardCn extends AbstractValidator
     /**
      * {@inheritdoc}
      */
+    public function isValid($input, $a = null)
+    {
+        return $this->opposite xor $this->validate($input);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
     protected function validate($input) 
     {
         if (!$this->isString($input)) {
