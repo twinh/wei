@@ -58,6 +58,17 @@ class PlateNumberCnTest extends TestCase
             array('青A12345'),
             array('宁A12345'),
             array('新A12345'),
+            array('新A12345'),
+            array('军A12345'),
+            array('海A12345'),
+            array('空A12345'),
+            array('北A12345'),
+            array('沈A12345'),
+            array('兰A12345'),
+            array('济A12345'),
+            array('南A12345'),
+            array('广A12345'),
+            array('成A12345'),
         );
     }
 
@@ -65,7 +76,9 @@ class PlateNumberCnTest extends TestCase
     {
         return array(
             array('12345'),
-            array('粤BBBBB')
+            array('粤BBBBB'),
+            array('粤123456'),
+            array('中A12345'),
         );
     }
 }
