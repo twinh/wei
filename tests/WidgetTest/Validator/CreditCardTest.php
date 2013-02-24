@@ -7,17 +7,20 @@ class CreditCardTest extends TestCase
     /**
      * @dataProvider providerForCreditCard
      */
-    public function testCreditCard($input)
+    public function testCreditCard($input, $type = null)
     {
-        $this->assertTrue($this->isCreditCard($input));
+        if (is_array($type)) {
+            $type = array('type' => $type);
+        }
+        $this->assertTrue($this->is('creditCard', $input, $type));
     }
 
     /**
      * @dataProvider providerForNotCreditCard
      */
-    public function testNotCreditCard($input)
+    public function testNotCreditCard($input, $type = null)
     {
-        $this->assertFalse($this->isCreditCard($input));
+        $this->assertFalse($this->is('creditCard', $input, $type));
     }
 
     public function providerForCreditCard()
@@ -26,7 +29,9 @@ class CreditCardTest extends TestCase
         // http://www.easy400.net/js2/regexp/ccnums.html
         // http://www.paypalobjects.com/en_US/vhelp/paypalmanager_help/credit_card_numbers.htm
         // http://names.igopaygo.com/credit_card/paypal
+        // http://www.regexmagic.com/manual/xmppatterncreditcard.html
         return array(
+            // validate luhn 
             array('4111111111111111'), // Visa 	
             array('5500000000000004'), // MasterCard
             array('340000000000009'),  // American Express
@@ -42,6 +47,25 @@ class CreditCardTest extends TestCase
             array('3530111333300000'), // JCB
             array('3566002020360505'), // JCB
             array('5555555555554444'), // MasterCard
+            // validate type
+            array('340000000000009',    'Amex'),
+            array('378282246310005',    'Amex'),
+            array('30000000000004',     'DinersClub'),
+            array('36000000000008',     'DinersClub'),
+            array('38000000000006',     'DinersClub'),
+            array('6011000000000004',   'Discover'),
+            array('6411000000000000',   'Discover'),
+            array('6511000000000009',   'Discover'),
+            array('213112345678904',    'JCB'),
+            array('180012345678905',    'JCB'),
+            array('3512345678901236',   'JCB'),
+            array('5500000000000004',   'MasterCard'),
+            array('6222222222222225',   'UnionPay'),
+            array('4123456789011',      'Visa'),
+            array('4111111111111111',   'Visa'),
+            array('4123456789011',      'UnionPay,Visa'),
+            array('4111111111111111',   array('MasterCard', 'Visa')),
+            array('4111111111111111',   'All')
         );
     }
 
@@ -52,6 +76,19 @@ class CreditCardTest extends TestCase
             array('411111111111111'),  // not 16-digit
             array('4111111111111112'), // luhn not valid
             array('3530111333300001'), // luhn not valid
+            // invalid card 
+            array('4111111111111111', 'MasterCard'),    // Visa
+            array('5500000000000004', 'Visa'),          // MasterCard
+            array('5500000000000004', 'Visa,UnionPay'), // MasterCard
+            array('5500000000000004', array('Visa', 'UnionPay')), // MasterCard
         );
+    }
+    
+    /**
+     * @expectedException \Widget\UnexpectedTypeException
+     */
+    public function testException()
+    {
+        $this->isCreditCard->setType(new \stdClass());
     }
 }

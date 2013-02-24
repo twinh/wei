@@ -36,8 +36,8 @@ return array(
     '%name% must not contain only Chinese characters' => '%name%不能只由中文组成',
     
     // creditCard
-    '%name% must be valid credit card' => '%name%必须是有效的信用卡号',
-    '%name% must not be valid credit card' => '%name%必须是有效的信用卡号',
+    '%name% must be valid credit card number' => '%name%必须是有效的信用卡号',
+    '%name% must not be valid credit card number' => '%name%必须是有效的信用卡号',
     
     // date
     '%name% must be a valid date, the format should be "%format%", eg: %example%' => '%name%不是合法的日期,格式应该是%format%,例如:%example%',
