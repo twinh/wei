@@ -292,7 +292,7 @@ class Widget extends WidgetProvider
      * @param array $options The option properies for widget
      * @return \Widget\Widgetable The widget object
      */
-    public function get($name, $deps = array(), array $options = array())
+    public function get($name, array $options = array(), array $deps = array())
     {
         // Resolve the widget name in dependent configuration
         if (isset($deps[$name])) {
@@ -362,7 +362,7 @@ class Widget extends WidgetProvider
     public function newInstance($name, array $options = array(), array $deps = array())
     {
         $name .= '.' . uniqid();
-        return $this->widget->get($name, $deps, $options);
+        return $this->widget->get($name, $options, $deps);
     }
     
     /**
