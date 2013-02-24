@@ -3,7 +3,8 @@
 namespace WidgetTest;
 
 use Widget\Widget;
-use Widget\WidgetInterface;
+use Widget\WidgetAwareInterface;
+use PHPUnit_Framework_TestCase;
 
 /**
  * TestCase
@@ -11,7 +12,7 @@ use Widget\WidgetInterface;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class TestCase extends \PHPUnit_Framework_TestCase implements WidgetInterface
+class TestCase extends PHPUnit_Framework_TestCase implements WidgetAwareInterface
 {
     /**
      * @var \Widget\WidgetProvider
@@ -32,7 +33,7 @@ class TestCase extends \PHPUnit_Framework_TestCase implements WidgetInterface
      */
     protected $widgetName;
 
-    public function __construct($name = NULL, array $data = array(), $dataName = '')
+    public function __construct($name = null, array $data = array(), $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
 
