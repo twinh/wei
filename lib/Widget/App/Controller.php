@@ -9,7 +9,7 @@
 
 namespace Widget\App;
 
-use Widget\WidgetProvider;
+use Widget\AbstractWidget;
 
 /**
  * Controller
@@ -17,6 +17,6 @@ use Widget\WidgetProvider;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-abstract class Controller extends WidgetProvider
+abstract class Controller extends AbstractWidget
 {
 }

@@ -16,7 +16,7 @@ namespace Widget;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @link        http://api.jquery.com/category/events/event-object/
  */
-class Event extends WidgetProvider
+class Event extends AbstractWidget
 {
     /**
      * The name of event

@@ -34,6 +34,14 @@ interface WidgetInterface
     public function __call($name, $args);
     
     /**
+     * Get or set property value
+     * 
+     * @param string|array $name
+     * @param string|array $value
+     */
+    public function option($name = null, $value = null);
+    
+    /**
      * Invoke the current widget
      *
      * The method __invoke should be implemented by subclasses, the comment here

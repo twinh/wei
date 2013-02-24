@@ -19,7 +19,7 @@ namespace Widget;
  * @property \Widget\Get $get The get widget
  * @todo        more options
  */
-class UrlDebugger extends WidgetProvider
+class UrlDebugger extends AbstractWidget
 {
 
     public function __construct(array $options = array())

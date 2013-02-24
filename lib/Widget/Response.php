@@ -17,7 +17,7 @@ namespace Widget;
  * @property    \Widget\Header $header The reponse header
  * @method string filter(string $name, mixed $content) Returns the filtered content
  */
-class Response extends WidgetProvider
+class Response extends AbstractWidget
 {
     /**
      * Whether response content has been sent

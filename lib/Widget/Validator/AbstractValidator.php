@@ -8,7 +8,7 @@
 
 namespace Widget\Validator;
 
-use Widget\WidgetProvider;
+use Widget\AbstractWidget;
 
 /**
  * The base class of validator
@@ -18,7 +18,7 @@ use Widget\WidgetProvider;
  * @method string t(string $message, array $parameters = array()) Translates a message
  * @property \Widget\T $t The translator widget
  */
-abstract class AbstractValidator extends WidgetProvider implements ValidatorInterface
+abstract class AbstractValidator extends AbstractWidget implements ValidatorInterface
 {
     protected $notStringMessage = '%name% must be a string';
     

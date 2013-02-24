@@ -17,7 +17,7 @@ namespace Widget;
  *              http://kohanaframework.org/3.0/guide/api/Kohana_Route
  * @todo        uri start with slash ?
  */
-class Router extends WidgetProvider
+class Router extends AbstractWidget
 {
     /**
      * Whether enable the router or not

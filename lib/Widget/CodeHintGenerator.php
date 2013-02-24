@@ -16,7 +16,7 @@ namespace Widget;
  * @property \Widget\Log $log The logger widget
  * @method bool log(string $message) Description
  */
-class CodeHintGenerator extends WidgetProvider
+class CodeHintGenerator extends AbstractWidget
 {
     /**
      * The file to be saved

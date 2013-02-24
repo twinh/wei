@@ -14,7 +14,7 @@ namespace Widget;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Twig extends WidgetProvider implements Viewable
+class Twig extends AbstractWidget implements Viewable
 {
     /**
      * Options for \Twig_Environment

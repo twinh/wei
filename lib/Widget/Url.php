@@ -15,7 +15,7 @@ namespace Widget;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property    \Widget\Router $router Router
  */
-class Url extends WidgetProvider
+class Url extends AbstractWidget
 {
     /**
      * @var array Options

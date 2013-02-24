@@ -17,7 +17,7 @@ use PDOException;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class DbCache extends WidgetProvider implements Storable
+class DbCache extends AbstractWidget implements Storable
 {
     /**
      * The cache table name

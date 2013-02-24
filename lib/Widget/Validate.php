@@ -16,7 +16,7 @@ namespace Widget;
  * @link        http://bassistance.de/jquery-plugins/jquery-plugin-validation/
  * @property \Widget\Is $is The validator manager
  */
-class Validate extends WidgetProvider
+class Validate extends AbstractWidget
 {
     /**
      * The last validator object

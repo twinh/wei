@@ -14,7 +14,7 @@ namespace Widget;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Marker extends WidgetProvider
+class Marker extends AbstractWidget
 {
     /**
      * Maker index

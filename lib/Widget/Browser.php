@@ -16,7 +16,7 @@ namespace Widget;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\Server $server The server widget
  */
-class Browser extends WidgetProvider
+class Browser extends AbstractWidget
 {
     /**
      * Whether in chrome browser

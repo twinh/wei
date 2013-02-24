@@ -15,7 +15,7 @@ namespace Widget;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @link        https://github.com/Seldaek/monolog
  */
-class Log extends WidgetProvider
+class Log extends AbstractWidget
 {
     /**
      * The name of channel

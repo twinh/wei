@@ -15,7 +15,7 @@ namespace Widget;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\App $app The application widget
  */
-class Forward extends WidgetProvider
+class Forward extends AbstractWidget
 {
     /**
      * Forwards to the given module, controller and action

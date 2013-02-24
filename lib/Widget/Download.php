@@ -18,7 +18,7 @@ namespace Widget;
  * @property    \Widget\Response   $response The response widget
  * @todo refactor
  */
-class Download extends WidgetProvider
+class Download extends AbstractWidget
 {
     /**
      * The http content type

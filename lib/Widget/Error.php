@@ -26,7 +26,7 @@ namespace Widget;
  * @todo        response
  * @todo        bootstrap style
  */
-class Error extends WidgetProvider
+class Error extends AbstractWidget
 {
     /**
      * The default error code

@@ -17,7 +17,7 @@ namespace Widget;
  * @property \Widget\Storable $master The master(faster) cache object
  * @property \Widget\Storable $slave The slave(slower) cache object
  */
-class Bicache extends WidgetProvider implements Storable
+class Bicache extends AbstractWidget implements Storable
 {
     /**
      * @var array

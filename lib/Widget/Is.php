@@ -14,7 +14,7 @@ namespace Widget;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Is extends WidgetProvider
+class Is extends AbstractWidget
 {
     /**
      * The validator rule alias

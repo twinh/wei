@@ -14,7 +14,7 @@ namespace Widget;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Uuid extends WidgetProvider
+class Uuid extends AbstractWidget
 {
     /**
      * Generate a FAKE UUID(universally unique identifier)

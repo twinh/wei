@@ -15,7 +15,7 @@ namespace Widget;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\App $app The application widget
  */
-class Flush extends WidgetProvider
+class Flush extends AbstractWidget
 {
     public function __construct(array $options = array())
     {

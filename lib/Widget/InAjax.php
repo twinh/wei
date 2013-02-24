@@ -15,7 +15,7 @@ namespace Widget;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\Server $server The server widget
  */
-class InAjax extends WidgetProvider
+class InAjax extends AbstractWidget
 {
     public function __invoke()
     {

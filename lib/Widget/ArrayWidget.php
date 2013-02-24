@@ -15,7 +15,7 @@ namespace Widget;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class ArrayWidget extends WidgetProvider implements \ArrayAccess, \Countable, \IteratorAggregate
+class ArrayWidget extends AbstractWidget implements \ArrayAccess, \Countable, \IteratorAggregate
 {
     /**
      * The variable to store array

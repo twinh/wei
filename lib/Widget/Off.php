@@ -15,7 +15,7 @@ namespace Widget;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\EventManager $eventManager The event manager widget
  */
-class Off extends WidgetProvider
+class Off extends AbstractWidget
 {
     /**
      * Remove one or all handlers

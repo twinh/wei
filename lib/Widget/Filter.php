@@ -14,7 +14,7 @@ namespace Widget;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Filter extends WidgetProvider
+class Filter extends AbstractWidget
 {
     protected $filters = array();
 

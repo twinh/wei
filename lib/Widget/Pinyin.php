@@ -16,7 +16,7 @@ namespace Widget;
  *
  * @todo refactor and enhance
  */
-class Pinyin extends WidgetProvider
+class Pinyin extends AbstractWidget
 {
     public static $dictionary = array(
         array('a', -20319),

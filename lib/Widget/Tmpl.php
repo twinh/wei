@@ -18,7 +18,7 @@ namespace Widget;
  * @todo        Generate debug info
  * @todo        cache
  */
-class Tmpl extends WidgetProvider
+class Tmpl extends AbstractWidget
 {
     /**
      * Options

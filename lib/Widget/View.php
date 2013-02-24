@@ -15,7 +15,7 @@ namespace Widget;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class View extends WidgetProvider implements Viewable
+class View extends AbstractWidget implements Viewable
 {
     /**
      * The template variables

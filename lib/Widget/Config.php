@@ -14,7 +14,7 @@ namespace Widget;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Config extends WidgetProvider
+class Config extends AbstractWidget
 {
     public function __invoke()
     {

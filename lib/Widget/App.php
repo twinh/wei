@@ -25,7 +25,7 @@ use Widget\App\DispatchBreakException;
  * @property callable $404 The 404 event handler
  * @property \Widget\Viewable $view The view widget, instance of \Widget\Viewable interface
  */
-class App extends WidgetProvider
+class App extends AbstractWidget
 {
     /**
      * The available modules

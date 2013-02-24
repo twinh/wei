@@ -16,7 +16,7 @@ use Monolog\Logger;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Monolog extends WidgetProvider
+class Monolog extends AbstractWidget
 {
     /**
      * The name of channel

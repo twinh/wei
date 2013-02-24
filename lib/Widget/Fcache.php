@@ -15,7 +15,7 @@ namespace Widget;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Fcache extends WidgetProvider implements Storable
+class Fcache extends AbstractWidget implements Storable
 {
     /**
      * The cache directory

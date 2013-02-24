@@ -15,7 +15,7 @@ namespace Widget;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\EventManager $eventManager The event manager widget
  */
-class Trigger extends WidgetProvider
+class Trigger extends AbstractWidget
 {
     /**
      * @see \Widget\Manager::__invoke

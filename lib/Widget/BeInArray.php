@@ -15,7 +15,7 @@ namespace Widget;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class BeInArray extends WidgetProvider
+class BeInArray extends AbstractWidget
 {
     /**
      * while $value is not find in the specify $array, use the first element of array instead

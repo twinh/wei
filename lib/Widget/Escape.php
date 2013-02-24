@@ -15,7 +15,7 @@ namespace Widget;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Escape extends WidgetProvider
+class Escape extends AbstractWidget
 {
     /**
      * Escapes special characters for safe ouput

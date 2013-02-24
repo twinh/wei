@@ -15,7 +15,7 @@ namespace Widget;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @todo        replaceOne, replaceLast ?
  */
-class ReplaceFirst extends WidgetProvider
+class ReplaceFirst extends AbstractWidget
 {
     /**
      * Replace the first string

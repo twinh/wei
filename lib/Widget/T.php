@@ -14,7 +14,7 @@ namespace Widget;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class T extends WidgetProvider
+class T extends AbstractWidget
 {
     /**
      * The default locale

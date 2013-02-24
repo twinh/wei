@@ -16,7 +16,7 @@ namespace Widget;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\Server $server The server widget
  */
-class InMethod extends WidgetProvider
+class InMethod extends AbstractWidget
 {
     public function __invoke($method)
     {

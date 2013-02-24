@@ -15,7 +15,7 @@ namespace Widget;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property    \Widget\Server $server The server widget
  */
-class InPost extends WidgetProvider
+class InPost extends AbstractWidget
 {
     public function __invoke()
     {

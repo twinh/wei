@@ -15,7 +15,7 @@ namespace Widget;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Memcache extends WidgetProvider implements Storable
+class Memcache extends AbstractWidget implements Storable
 {
     /**
      * The memcache object

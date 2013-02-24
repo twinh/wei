@@ -15,7 +15,7 @@ use PHPUnit_Framework_TestCase;
 class TestCase extends PHPUnit_Framework_TestCase implements WidgetAwareInterface
 {
     /**
-     * @var \Widget\WidgetProvider
+     * @var \Widget\AbstractWidget
      */
     protected $object;
 
@@ -95,7 +95,7 @@ class TestCase extends PHPUnit_Framework_TestCase implements WidgetAwareInterfac
             }
 
             // Remove all widget instanlled by current test object
-            if ($property instanceof \Widget\WidgetProvider) {
+            if ($property instanceof \Widget\AbstractWidget) {
                 unset($this->$name);
                 $widget->remove($name);
             }

@@ -35,7 +35,7 @@ namespace Widget;
  * @todo        xml, others?
  * @todo        as response ?
  */
-class Result extends WidgetProvider
+class Result extends AbstractWidget
 {
     public $options = array(
         'code' => 'code',

@@ -14,7 +14,7 @@ namespace Widget;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Apc extends WidgetProvider implements Storable
+class Apc extends AbstractWidget implements Storable
 {
     /**
      * {@inheritdoc}

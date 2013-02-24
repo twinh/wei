@@ -19,7 +19,7 @@ namespace Widget;
  * @todo        language
  * @todo        display size in result message
  */
-class Upload extends WidgetProvider
+class Upload extends AbstractWidget
 {
     /**
      * $_FILES do not contain the key "$this->name"

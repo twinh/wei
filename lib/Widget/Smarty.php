@@ -14,7 +14,7 @@ namespace Widget;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Smarty extends WidgetProvider implements Viewable
+class Smarty extends AbstractWidget implements Viewable
 {
     /**
      * Smarty object

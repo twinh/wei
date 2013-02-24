@@ -16,7 +16,7 @@ namespace Widget;
  * @method \Widget\Event event(string $type) Create a event object
  * @todo namespace
  */
-class EventManager extends WidgetProvider
+class EventManager extends AbstractWidget
 {
     /**
      * The array contains the event handlers

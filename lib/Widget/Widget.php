@@ -9,9 +9,9 @@
 namespace Widget;
 
 /**
- * @see Widget\WidgetProvider
+ * @see Widget\AbstractWidget
  */
-require_once 'WidgetProvider.php';
+require_once 'AbstractWidget.php';
 
 /**
  * The root widget and widget manager
@@ -19,7 +19,7 @@ require_once 'WidgetProvider.php';
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Widget extends WidgetProvider
+class Widget extends AbstractWidget
 {
     /**
      * Version
