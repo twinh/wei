@@ -123,6 +123,6 @@ abstract class WidgetProvider implements Widgetable
      */
     public function __get($name)
     {
-        return $this->$name = $this->widget->get($name, $this->deps);
+        return $this->$name = $this->widget->get($name, array(), $this->deps);
     }
 }
