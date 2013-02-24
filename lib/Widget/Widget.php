@@ -352,6 +352,20 @@ class Widget extends WidgetProvider
     }
     
     /**
+     * Initialize a new instance of widget, with the specified name
+     * 
+     * @param string $name The name of the widget
+     * @param array $options The option properies for widget
+     * @param array $deps The dependent configuration
+     * @return type
+     */
+    public function newInstance($name, array $options = array(), array $deps = array())
+    {
+        $name .= '.' . uniqid();
+        return $this->widget->get($name, $deps, $options);
+    }
+    
+    /**
      * Add a widget
      *
      * @param string $name The name of widget
