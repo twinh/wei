@@ -289,9 +289,10 @@ class Widget extends WidgetProvider
      *
      * @param string $name  The name of the widget, without class prefix "Widget\"
      * @param array $deps The dependent configuration
+     * @param array $options The option properies for widget
      * @return object The widget object
      */
-    public function get($name, $deps = array())
+    public function get($name, $deps = array(), array $options = array())
     {
         // Resolve the widget name in dependent configuration
         if (isset($deps[$name])) {
@@ -321,7 +322,7 @@ class Widget extends WidgetProvider
             $this->construct && call_user_func($this->construct, $name, $full);
 
             // Load the widget configuration and make sure "widget" option at first
-            $options = array('widget' => $this) + (array)$this->config($full);
+            $options = array('widget' => $this) + $options + (array)$this->config($full);
 
             $this->widgets[$lower] = new $class($options);
 
@@ -349,7 +350,7 @@ class Widget extends WidgetProvider
             throw new \BadMethodCallException(sprintf('Property or method "%s" not defined', $name));
         }
     }
-
+    
     /**
      * Add a widget
      *
