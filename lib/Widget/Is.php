@@ -151,8 +151,8 @@ class Is extends WidgetProvider
             throw new Exception(sprintf('Validator "%s" not found', $rule));
         }
 
-        return new $class(array(
-            'widget' => $this->widget
-        ) + $options);
+        $options = $options + array('widget' => $this->widget) + (array)$this->config('is' . ucfirst($rule));
+        
+        return new $class($options);
     }
 }
