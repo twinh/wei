@@ -320,10 +320,8 @@ class Widget extends WidgetProvider
             // Trigger the construct callback
             $this->construct && call_user_func($this->construct, $name, $full);
 
-            // FIXME widget option should be set first
-            // Load the widget configuration
-            $options = (array)$this->config($full);
-            $options['widget'] = $this;
+            // Load the widget configuration and make sure "widget" option at first
+            $options = array('widget' => $this) + (array)$this->config($full);
 
             $this->widgets[$lower] = new $class($options);
 
