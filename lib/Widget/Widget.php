@@ -290,7 +290,7 @@ class Widget extends WidgetProvider
      * @param string $name  The name of the widget, without class prefix "Widget\"
      * @param array $deps The dependent configuration
      * @param array $options The option properies for widget
-     * @return object The widget object
+     * @return \Widget\Widgetable The widget object
      */
     public function get($name, $deps = array(), array $options = array())
     {
@@ -357,7 +357,7 @@ class Widget extends WidgetProvider
      * @param string $name The name of the widget
      * @param array $options The option properies for widget
      * @param array $deps The dependent configuration
-     * @return type
+     * @return \Widget\Widgetable The widget object
      */
     public function newInstance($name, array $options = array(), array $deps = array())
     {
