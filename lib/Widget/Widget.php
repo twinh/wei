@@ -290,7 +290,7 @@ class Widget extends WidgetProvider
      * @param string $name  The name of the widget, without class prefix "Widget\"
      * @param array $deps The dependent configuration
      * @param array $options The option properies for widget
-     * @return \Widget\Widgetable The widget object
+     * @return \Widget\WidgetInterface The widget object
      */
     public function get($name, array $options = array(), array $deps = array())
     {
@@ -313,7 +313,7 @@ class Widget extends WidgetProvider
         // Get the widget class and instance
         $class = $this->getClass($name);
         if (class_exists($class)) {
-            // @see Widgetable::__invoke
+            // @see WidgetInterface::__invoke
             if (!method_exists($class, '__invoke')) {
                 throw new \BadMethodCallException(sprintf('Method "__invoke" not found in class "%s"', $class));
             }
@@ -357,7 +357,7 @@ class Widget extends WidgetProvider
      * @param string $name The name of the widget
      * @param array $options The option properies for widget
      * @param array $deps The dependent configuration
-     * @return \Widget\Widgetable The widget object
+     * @return \Widget\WidgetInterface The widget object
      */
     public function newInstance($name, array $options = array(), array $deps = array())
     {
@@ -369,9 +369,9 @@ class Widget extends WidgetProvider
      * Add a widget
      *
      * @param string $name The name of widget
-     * @param \Widget\Widgetable $widget The widget object
+     * @param \Widget\WidgetInterface $widget The widget object
      */
-    public function set($name, Widgetable $widget)
+    public function set($name, WidgetInterface $widget)
     {
         $this->widgets[$name] = $widget;
     }

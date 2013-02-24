@@ -38,8 +38,8 @@ interface WidgetInterface
      *
      * The method __invoke should be implemented by subclasses, the comment here
      * is to avoid "Fatal error: Declaration of xxx::__invoke() must be
-     * compatible with that of Widget\Widgetable::__invoke() in xxx", because
-     * php does NOT accept dynamic arguments in magic method __invoke
+     * compatible with that of Widget\WidgetInterface::__invoke() in xxx", 
+     * because php does NOT accept dynamic arguments in magic method __invoke
      */
     //public function __invoke();
 }
