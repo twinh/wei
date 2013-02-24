@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -10,13 +9,10 @@
 namespace Widget;
 
 /**
- * Memcache
+ * Marker
  *
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
- * @todo        add index column
- * @todo        add index total row
- * @todo        add memory column
  */
 class Marker extends WidgetProvider
 {
@@ -56,7 +52,7 @@ class Marker extends WidgetProvider
     /**
      * Set a marker
      *
-     * @param  string|null      $name marker's name
+     * @param  string|null      $name The name of marker
      * @return Marker
      */
     public function __invoke($name = null)
