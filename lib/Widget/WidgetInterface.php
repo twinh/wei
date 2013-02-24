@@ -20,7 +20,7 @@ interface WidgetInterface
      * Get the widget object by the given name
      *
      * @param  string       $name The name of widget
-     * @return Widget
+     * @return \Widget\WidgetInterface
      */
     public function __get($name);
 
