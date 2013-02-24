@@ -126,10 +126,7 @@ class Is extends WidgetProvider
      */
     public function createValidator()
     {
-        return new Validator(array(
-            'widget'    => $this->widget,
-            'is'        => $this
-        ));
+        return $this->newInstance('validator');
     }
     
     /**
