@@ -314,7 +314,7 @@ class Widget extends WidgetProvider
         if (class_exists($class)) {
             // @see Widgetable::__invoke
             if (!method_exists($class, '__invoke')) {
-                throw new \BadMethodCallException(sprintf('Method "__invoke" not found in widget "%s"', $class));
+                throw new \BadMethodCallException(sprintf('Method "__invoke" not found in class "%s"', $class));
             }
 
             // Trigger the construct callback
