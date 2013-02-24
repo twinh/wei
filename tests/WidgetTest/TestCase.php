@@ -3,7 +3,7 @@
 namespace WidgetTest;
 
 use Widget\Widget;
-use Widget\Widgetable;
+use Widget\WidgetInterface;
 
 /**
  * TestCase
@@ -11,7 +11,7 @@ use Widget\Widgetable;
  * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class TestCase extends \PHPUnit_Framework_TestCase implements Widgetable
+class TestCase extends \PHPUnit_Framework_TestCase implements WidgetInterface
 {
     /**
      * @var \Widget\WidgetProvider

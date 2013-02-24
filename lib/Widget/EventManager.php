@@ -61,12 +61,12 @@ class EventManager extends WidgetProvider
      *
      * @param  string $type The name of event or the Event object
      * @param  array $args The arguments pass to the handle
-     * @param null|Widgetable $widget If the widget contains the $type
-     *                                   property, the event manager will
-     *                                   trigger it too
+     * @param null|WidgetInterface $widget If the widget contains the $type
+     *                                     property, the event manager will
+     *                                     trigger it too
      * @return Event The result returned by the last handle
      */
-    public function __invoke($type, $args = array(), Widgetable $widget = null)
+    public function __invoke($type, $args = array(), WidgetInterface $widget = null)
     {
         if ($type instanceof Event) {
             $event      = $type;

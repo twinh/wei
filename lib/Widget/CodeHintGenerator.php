@@ -50,7 +50,7 @@ namespace Widget;
 
 throw new \Exception(\'The file "\' . __FILE__ . \'" is used for code hint only! Do NOT use for developing!\');
 
-class Widget implements Widgetable
+class Widget implements WidgetInterface
 {
 %s
 }';

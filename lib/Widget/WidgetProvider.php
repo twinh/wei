@@ -9,9 +9,9 @@
 namespace Widget;
 
 /**
- * @see Widget\Widgetable
+ * @see Widget\WidgetInterface
  */
-require_once 'Widgetable.php';
+require_once 'WidgetInterface.php';
 
 /**
  * The base class for all widgets
@@ -20,7 +20,7 @@ require_once 'Widgetable.php';
  * @author      Twin Huang <twinh@yahoo.cn>
  * @method mixed __invoke(mixed $mixed) The invoke method
  */
-abstract class WidgetProvider implements Widgetable
+abstract class WidgetProvider implements WidgetInterface
 {
     /**
      * The default dependence map
