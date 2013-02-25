@@ -148,7 +148,7 @@ class EventManager extends AbstractWidget
     /**
      * Remove handlers by given type
      *
-     * param string $type The type of event
+     * @param string $type The type of event
      * @return EventManager
      */
     public function remove($type)
@@ -248,14 +248,16 @@ class EventManager extends AbstractWidget
             }
         ));
     }
-    
+
     /**
-     * The internal exception hanlder
+     * The internal exception hanlder integrated with event
      * 
+     * @param \Exception $exception
+     * @throws \Exception When none of exception events have been prevented 
      * @internal
      * @codeCoverageIgnore
      */
-    public function handleException($exception)
+    public function handleException(\Exception $exception)
     {
         $event = $this('exception', array($exception));
 
