@@ -80,6 +80,8 @@ class Tmpl extends AbstractWidget
     protected $placeholders = array();
 
     /**
+     * Whether Output debug message
+     * 
      * @var boolen
      */
     protected $debug = false;
