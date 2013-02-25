@@ -12,7 +12,6 @@ namespace Widget;
 /**
  * File cache
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Fcache extends AbstractWidget implements Storable

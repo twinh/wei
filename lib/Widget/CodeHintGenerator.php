@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * Code hint generator
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\Log $log The logger widget
  * @method bool log(string $message) Description

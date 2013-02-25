@@ -12,7 +12,6 @@ namespace Widget\DbCache;
 /**
  * Driver
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 abstract class Driver

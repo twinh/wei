@@ -13,7 +13,6 @@ use Doctrine\DBAL\DriverManager;
 /**
  * Doctrine dbal connection
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Db extends AbstractWidget

@@ -12,7 +12,6 @@ namespace Widget;
 /**
  * Redirect
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @method \Widget\Header header(string $name, string|array $values) Set the header value
  */

@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * Sort
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @todo        rename to orderBy ?
  * @tddo        add selectKeys or filterKeys ?

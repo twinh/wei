@@ -12,7 +12,6 @@ namespace Widget\DbCache;
 /**
  * Oci
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Oci extends Driver

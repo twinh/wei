@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * UUid
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Uuid extends AbstractWidget

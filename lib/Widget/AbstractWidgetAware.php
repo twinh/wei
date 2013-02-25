@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * The infterce for all widget
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 abstract class AbstractWidgetAware implements WidgetAwareInterface

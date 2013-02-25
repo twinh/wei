@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * The base exception class for all widget
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Exception extends \Exception

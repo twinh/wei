@@ -10,7 +10,6 @@ namespace Widget;
 /**
  * On
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\EventManager $eventManager The event manager widget
  */

@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * Session
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @todo        remove global variable $_SESSION
  */

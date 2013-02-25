@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * Config
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Config extends AbstractWidget

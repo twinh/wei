@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * Apc
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Apc extends AbstractWidget implements Storable

@@ -15,7 +15,6 @@ use Widget\App\DispatchBreakException;
 /**
  * App
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @method \Widget\EventManager trigger(string $eventName) Trigger a event
  * @method \Widget\Log log(string $message) Log a default level message

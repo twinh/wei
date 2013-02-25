@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * Flush
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\App $app The application widget
  */

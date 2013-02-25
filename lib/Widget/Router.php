@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * Router
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @link        The code is base on the awesome framework - Kohana
  *              http://kohanaframework.org/3.0/guide/api/Kohana_Route

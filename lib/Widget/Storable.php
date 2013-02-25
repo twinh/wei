@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * Storable
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 interface Storable

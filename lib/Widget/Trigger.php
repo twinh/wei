@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * Trigger
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\EventManager $eventManager The event manager widget
  */

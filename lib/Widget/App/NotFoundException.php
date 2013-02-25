@@ -14,7 +14,6 @@ use Widget\Exception;
 /**
  * NotFoundException
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class NotFoundException extends Exception

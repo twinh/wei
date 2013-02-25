@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * Error
  *
- * @package     Widget
  * @method mixed config(string $name) Get the widget config value
  * @property \Widget\Get $get The get widget
  * @property \Widget\Post $post The post widget

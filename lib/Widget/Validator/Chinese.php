@@ -9,7 +9,6 @@
 namespace Widget\Validator;
 
 /**
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Chinese extends Regex

@@ -12,7 +12,6 @@ namespace Widget;
 /**
  * Header
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @method \Widget\Log log(string $message) Log a default level message
  * @property \Widget\Cookie $cookie The cookie widget

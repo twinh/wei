@@ -12,7 +12,6 @@ namespace Widget;
 /**
  * Bicache
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\Storable $master The master(faster) cache object
  * @property \Widget\Storable $slave The slave(slower) cache object

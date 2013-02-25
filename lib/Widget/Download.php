@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * Code hint generator
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property    \Widget\Browser    $browser The browser widget
  * @property    \Widget\Header     $header The header widget

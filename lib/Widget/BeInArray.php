@@ -12,7 +12,6 @@ namespace Widget;
 /**
  * BeInArray
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class BeInArray extends AbstractWidget

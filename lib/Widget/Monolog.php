@@ -13,7 +13,6 @@ use Monolog\Logger;
 /**
  * The wrapper for Monolog
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Monolog extends AbstractWidget

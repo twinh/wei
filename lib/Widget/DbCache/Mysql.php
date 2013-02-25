@@ -12,7 +12,6 @@ namespace Widget\DbCache;
 /**
  * Mysql
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Mysql extends Driver

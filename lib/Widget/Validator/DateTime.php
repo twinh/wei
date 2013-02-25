@@ -11,7 +11,6 @@ namespace Widget\Validator;
 use DateTime as Dt;
 
 /**
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class DateTime extends AbstractValidator

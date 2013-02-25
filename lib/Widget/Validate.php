@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * Validate
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @link        http://bassistance.de/jquery-plugins/jquery-plugin-validation/
  * @property \Widget\Is $is The validator manager

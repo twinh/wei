@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * The basic class for request widget, like get, post etc
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Parameter extends ArrayWidget

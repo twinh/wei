@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * Forward
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\App $app The application widget
  */

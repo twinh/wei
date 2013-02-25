@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * Redis
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Redis extends AbstractWidget implements Storable

@@ -12,7 +12,6 @@ namespace Widget;
 /**
  * Memcached
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Memcached extends AbstractWidget implements Storable

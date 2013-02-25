@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * ReplaceFirst
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @todo        replaceOne, replaceLast ?
  */

@@ -12,7 +12,6 @@ namespace Widget;
 /**
  * Get
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\Router $router The router widget
  */

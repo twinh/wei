@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * Upload
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\Post $post The post widget
  * @todo        Use other various instead of global various $_FILES

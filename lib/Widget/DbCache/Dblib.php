@@ -12,7 +12,6 @@ namespace Widget\DbCache;
 /**
  * Dblib
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Dblib extends Sqlsrv

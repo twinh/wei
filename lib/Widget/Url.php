@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * Url
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property    \Widget\Router $router Router
  */

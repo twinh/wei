@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * Response
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @todo        Filterable ? filter response
  * @property    \Widget\Header $header The reponse header

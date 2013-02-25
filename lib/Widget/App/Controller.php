@@ -14,7 +14,6 @@ use Widget\AbstractWidget;
 /**
  * Controller
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 abstract class Controller extends AbstractWidget

@@ -14,7 +14,6 @@ use PDOException;
 /**
  * DbCache
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class DbCache extends AbstractWidget implements Storable

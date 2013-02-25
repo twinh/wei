@@ -11,11 +11,10 @@ namespace Widget;
 /**
  * The infterce for all widget
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 interface WidgetInterface
-{
+{    
     /**
      * Get the widget object by the given name
      *

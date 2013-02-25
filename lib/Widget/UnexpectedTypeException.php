@@ -9,7 +9,6 @@
 namespace Widget;
 
 /**
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class UnexpectedTypeException extends Exception

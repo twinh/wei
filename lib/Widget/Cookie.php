@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * Cookie
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Cookie extends Parameter

@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * Post
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Post extends Parameter

@@ -12,7 +12,6 @@ namespace Widget\DbCache;
 /**
  * PgSql
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class PgSql extends Driver

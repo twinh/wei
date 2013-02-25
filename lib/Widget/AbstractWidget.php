@@ -16,7 +16,6 @@ require_once 'WidgetInterface.php';
 /**
  * The base class for all widgets
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @method mixed __invoke(mixed $mixed) The invoke method
  */

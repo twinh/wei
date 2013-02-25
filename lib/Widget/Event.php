@@ -12,7 +12,6 @@ namespace Widget;
 /**
  * Event
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @link        http://api.jquery.com/category/events/event-object/
  */

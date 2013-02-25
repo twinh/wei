@@ -12,7 +12,6 @@ namespace Widget;
 /**
  * Escape
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Escape extends AbstractWidget

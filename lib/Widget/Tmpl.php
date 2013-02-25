@@ -12,7 +12,6 @@ namespace Widget;
 /**
  * Tmpl
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\View $view The view widget
  * @todo        Generate debug info

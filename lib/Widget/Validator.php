@@ -14,8 +14,6 @@ use Widget\Validator\ValidatorInterface;
 /**
  * Validator
  *
- * @package     Widget
- * @subpackage  Validation
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property    \Widget\Is $is The validator manager
  */

@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * The validator manager
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Is extends AbstractWidget

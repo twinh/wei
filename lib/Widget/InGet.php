@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * Check if in get request
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property    \Widget\Server $server The server widget
  */

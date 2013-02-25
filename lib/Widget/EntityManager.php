@@ -15,7 +15,6 @@ use Doctrine\Common\Cache\Cache as DoctrineCache;
 /**
  * EntityManager
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @method \Doctrine\DBAL\Connection db() Returns the Doctrine DBAL connection object
  * @todo        ohter mapping

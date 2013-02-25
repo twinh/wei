@@ -12,7 +12,6 @@ namespace Widget;
 /**
  * Cache
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Cache extends AbstractWidget implements Storable

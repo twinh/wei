@@ -14,7 +14,6 @@ use Widget\Exception;
 /**
  * DispatchBreakException
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class DispatchBreakException extends Exception

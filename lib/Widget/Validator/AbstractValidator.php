@@ -13,7 +13,6 @@ use Widget\AbstractWidget;
 /**
  * The base class of validator
  * 
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  * @method string t(string $message, array $parameters = array()) Translates a message
  * @property \Widget\T $t The translator widget

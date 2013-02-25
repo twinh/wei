@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * Server
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Server extends Parameter

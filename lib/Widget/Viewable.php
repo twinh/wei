@@ -12,7 +12,6 @@ namespace Widget;
 /**
  * Viewable
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 interface Viewable

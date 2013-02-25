@@ -12,7 +12,6 @@ namespace Widget\DbCache;
 /**
  * Sqlsrv
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Sqlsrv extends Driver

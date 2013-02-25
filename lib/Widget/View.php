@@ -12,7 +12,6 @@ namespace Widget;
 /**
  * Tmpl
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class View extends AbstractWidget implements Viewable

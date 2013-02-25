@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * Filter
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Filter extends AbstractWidget

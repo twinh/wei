@@ -11,7 +11,6 @@ namespace Widget;
 /**
  * Twig
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Smarty extends AbstractWidget implements Viewable

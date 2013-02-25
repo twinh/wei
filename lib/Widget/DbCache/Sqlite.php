@@ -12,7 +12,6 @@ namespace Widget\DbCache;
 /**
  * Sqlite
  *
- * @package     Widget
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Sqlite extends Driver
