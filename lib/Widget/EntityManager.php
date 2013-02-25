@@ -37,6 +37,8 @@ class EntityManager extends AbstractWidget
     );
 
     /**
+     * The Doctrine ORM entity manager object
+     * 
      * @var \Doctrine\ORM\EntityManager
      */
     protected $em;
