@@ -45,7 +45,7 @@ class IdCardHkTest extends TestCase
     public function providerForNotIdCardHk()
     {
         return array(
-            array('13134191'), // first char should be A-B
+            array('13134191'), // first char should be A-Z
             array('Z2749051'), // checksum invalid
             array('Z2749052'),
             array('Z2749053'),
