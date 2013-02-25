@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input value is valid Chinese identity card
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class IdCardCn extends AbstractValidator
