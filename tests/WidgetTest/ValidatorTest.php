@@ -438,8 +438,7 @@ class ValidatorTest extends TestCase
                 'username' => '',
             ),
             'rules' => array(
-                // FIXME inject widget manager
-                'username' => new Validator\Email
+                'username' => $this->is->createRuleValidator('email')
             ),
         ));
         
