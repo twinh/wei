@@ -100,8 +100,12 @@ return array(
     '%name% must be a non-existing file' => '%name%必须是不存在的文件',
     
     // idCardCn
-    '%name% must be a valid Chinese identity card' => '%name%必须是有效的中国身份证',
-    '%name% must be a valid Chinese identity card' => '%name%不能是有效的中国身份证',
+    '%name% must be valid Chinese identity card' => '%name%必须是有效的中国身份证',
+    '%name% must be valid Chinese identity card' => '%name%不能是有效的中国身份证',
+    
+    // idCardHk
+    '%name% must be valid Hong Kong identity card' => '%name%必须是有效的香港身份证',
+    '%name% must not be valid Hong Kong identity card' => '%name%不能是有效的香港身份证',
 
     // image
     '%name% is not a valid image or the size of the image could not be detected' => '%name%不是有效的图片,或是无法检测到图片的尺寸',

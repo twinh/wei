@@ -13,9 +13,9 @@ namespace Widget\Validator;
  */
 class IdCardCn extends AbstractValidator
 {
-    protected $invalidMessage = '%name% must be a valid Chinese identity card';
+    protected $invalidMessage = '%name% must be valid Chinese identity card';
     
-    protected $notMessage = '%name% must not be a valid Chinese identity card';
+    protected $notMessage = '%name% must not be valid Chinese identity card';
         
     /**
      * {@inheritdoc}
