@@ -20,6 +20,8 @@ namespace Widget;
 class Bicache extends AbstractWidget implements Storable
 {
     /**
+     * The dependence map
+     * 
      * @var array
      */
     protected $deps = array(
