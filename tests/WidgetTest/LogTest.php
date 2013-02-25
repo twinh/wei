@@ -124,10 +124,9 @@ class LogTest extends TestCase
      */
     public function testMkdirException()
     {
-        $logger = new \Widget\Log(array(
+        $logger = $this->widget->newInstance('log', array(
             'dir' => 'http://example/'
         ));
-        
         $logger->getFile();
     }
 }
