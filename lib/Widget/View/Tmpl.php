@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -7,7 +6,9 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
 
-namespace Widget;
+namespace Widget\View;
+
+use Widget\AbstractWidget;
 
 /**
  * Tmpl
@@ -259,7 +260,6 @@ class Tmpl extends AbstractWidget
             throw new Exception(sprintf('Template "%s" do not have a parent layout', $this->current), 500, $file, $line);
         }
 
-        // TODO better way ?
         end($this->layoutStack);
         $layout = $this->layoutStack[key($this->layoutStack)];
 

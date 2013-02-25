@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -10,6 +9,7 @@
 namespace Widget;
 
 use Widget\View\AbstractView;
+use Widget\View\Tmpl;
 
 /**
  * The view widget
