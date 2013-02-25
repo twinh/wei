@@ -8,12 +8,14 @@
 
 namespace Widget;
 
+use Widget\View\ViewInterface;
+
 /**
- * Twig
+ * The twig widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Twig extends AbstractWidget implements Viewable
+class Twig extends AbstractWidget implements ViewInterface
 {
     /**
      * Options for \Twig_Environment

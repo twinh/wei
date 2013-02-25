@@ -9,12 +9,14 @@
 
 namespace Widget;
 
+use Widget\View\ViewInterface;
+
 /**
- * Tmpl
+ * The view widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class View extends AbstractWidget implements Viewable
+class View extends AbstractWidget implements ViewInterface
 {
     /**
      * The template variables

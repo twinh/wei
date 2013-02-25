@@ -8,12 +8,14 @@
 
 namespace Widget;
 
+use Widget\View\ViewInterface;
+
 /**
  * Twig
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Smarty extends AbstractWidget implements Viewable
+class Smarty extends AbstractWidget implements ViewInterface
 {
     /**
      * Smarty object

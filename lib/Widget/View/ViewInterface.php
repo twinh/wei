@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -7,14 +6,14 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
 
-namespace Widget;
+namespace Widget\View;
 
 /**
- * Viewable
+ * The interface for view widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-interface Viewable
+interface ViewInterface
 {
     /**
      * Render a template
@@ -39,12 +38,15 @@ interface Viewable
      *
      * @param string $name  The name of the variable
      * @param mixed  $value The value of the variable
-     * @return View|null
+     * @return ViewInterface|null
      */
     public function assign($name, $value = null);
 
     /**
-     * Get default template file extension, for automatic render template only
+     * Get default template file extension, such as php, tpl, this is useful for 
+     * automatic render template
+     * 
+     * @return string
      */
     public function getExtension();
 }
