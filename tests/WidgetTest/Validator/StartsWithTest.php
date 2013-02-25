@@ -23,17 +23,20 @@ class StartsWithTest extends TestCase
     public function providerForStartsWith()
     {
         return array(
-            array('abc', 'a'),
-            array('ABC', 'A'),
-            array('abc', ''),
+            array('abc', 'a', false),
+            array('ABC', 'A', false),
+            array('abc', '', false),
+            array('abc', array('A', 'B', 'C'), false),
+            array('hello word', array('hel', 'hell'), false)
         );
     }
 
     public function providerForNotStartsWith()
     {
         return array(
-            array('abc', 'b'),
+            array('abc', 'b', false),
             array('ABC', 'a', true),
+            array('abc', array('A', 'B', 'C'), true),
         );
     }
 }

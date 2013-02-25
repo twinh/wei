@@ -39,11 +39,21 @@ class StartsWith extends AbstractValidator
             return false;
         }
         
-        $fn = $this->case ? 'strpos' : 'stripos';
-
-        if (0 !== $fn($input, $this->findMe)) {
-            $this->addError('notFound');
-            return false;
+        if (is_string($this->findMe)) {
+            $fn = $this->case ? 'strpos' : 'stripos';
+            if (0 !== $fn($input, $this->findMe)) {
+                $this->addError('notFound');
+                return false;
+            }
+        } elseif (is_array($this->findMe)) {
+            $pattern = '/^' . implode('|', $this->findMe) . '/';
+            if (!$this->case) {
+                $pattern = $pattern . 'i';
+            }
+            if (!preg_match($pattern, $input)) {
+                $this->addError('notFound');
+                return false;
+            }
         }
         
         return true;
