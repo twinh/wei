@@ -50,6 +50,19 @@ class Parameter extends ArrayWidget
     }
     
     /**
+     * Returns a array parameter value
+     * 
+     * @param string $name The parameter name
+     * @param array $default The default paraemter value returned if the 
+     *                       parameter does not exist, should be array
+     * @return array
+     */
+    public function getArray($name, array $default = array())
+    {
+        return (array) $this->getRaw($name, $default);
+    }
+    
+    /**
      * Returns a raw parameter value
      *
      * @param  string $name    The parameter name
