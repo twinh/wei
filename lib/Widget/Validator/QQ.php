@@ -15,5 +15,7 @@ class QQ extends Regex
 {
     protected $patternMessage = '%name% must be valid QQ number';
     
+    protected $notMessage = '%name% must not be valid QQ number';
+    
     protected $pattern = '/^[1-9][\d]{4,9}$/';
 }
