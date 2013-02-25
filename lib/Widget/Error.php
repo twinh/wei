@@ -19,7 +19,7 @@ namespace Widget;
  * @property \Widget\Server $server The server widget
  * @method \Widget\EventManager on(string|\Widget\Event $event) Attach a handler to an event
  * @method bool inAjax() Check if in ajax request
- * @method \Widget\Log log(string $message) Add a log record
+ * @method \Widget\Log The logger widget
  * @todo        throw exception when called
  * @todo        add options display
  * @todo        response
@@ -180,7 +180,7 @@ class Error extends AbstractWidget
             // Server Environment
             $server = $this->getServer();
 
-            $this->log($code . $message . ' ' . $stackInfo);
+            $this->log->debug($code . $message . ' ' . $stackInfo);
 
             //$this->trigger('error', array('data' => get_defined_vars()));
 
