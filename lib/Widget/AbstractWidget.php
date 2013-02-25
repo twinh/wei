@@ -47,8 +47,8 @@ abstract class AbstractWidget implements WidgetInterface
 
         if (!isset($this->widget)) {
             $this->widget = Widget::create();
-        } elseif (!$this->widget instanceof self) {
-            throw new \InvalidArgumentException('Option "widget" should be an instance of "' . __CLASS__ . '"');
+        } elseif (!$this->widget instanceof WidgetInterface) {
+            throw new \InvalidArgumentException(sprintf('Option "widget" of class "%s" should be an instance of "WidgetInterface"', get_class($this)));
         }
     }
 
