@@ -13,6 +13,13 @@ namespace Widget;
  */
 class UnexpectedTypeException extends Exception
 {
+    /**
+     * Constructor
+     * 
+     * @param mixed $value The value to be detected
+     * @param string $expectedType The expected type string
+     * @param int $argument The index of argument
+     */
     public function __construct($value, $expectedType, $argument = '')
     {
         parent::__construct(sprintf(
