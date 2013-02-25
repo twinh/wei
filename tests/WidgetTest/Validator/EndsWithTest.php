@@ -23,17 +23,20 @@ class EndsWithTest extends TestCase
     public function providerForEndsWith()
     {
         return array(
-            array('abc', 'c'),
-            array('ABC', 'c'),
-            array('abc', ''),
+            array('abc', 'c', false),
+            array('ABC', 'c', false),
+            array('abc', '', false),
+            array('abc', array('C', 'B', 'A'), false),
+            array('hello word', array('wo', 'word'), true)
         );
     }
 
     public function providerForNotEndsWith()
     {
         return array(
-            array('abc', 'b'),
+            array('abc', 'b', false),
             array('ABC', 'c', true),
+            array('ABC', array('a', 'b', 'c'), true)
         );
     }
 }

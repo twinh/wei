@@ -39,15 +39,24 @@ class EndsWith extends AbstractValidator
             return false;
         }
 
-        $pos = strlen($input) - strlen($this->findMe);
-
-        $fn = $this->case ? 'strrpos' : 'strripos';
-
-        if ($pos !== $fn($input, $this->findMe)) {
-            $this->addError('notFound');
-            return false;
+        if (is_string($this->findMe)) {
+            $pos = strlen($input) - strlen($this->findMe);
+            $fn = $this->case ? 'strrpos' : 'strripos';
+            if ($pos !== $fn($input, $this->findMe)) {
+                $this->addError('notFound');
+                return false;
+            }
+        } elseif (is_array($this->findMe)) {
+            $pattern = '/' . implode('|', $this->findMe) . '$/';
+            if (!$this->case) {
+                $pattern = $pattern . 'i';
+            }
+            if (!preg_match($pattern, $input)) {
+                $this->addError('notFound');
+                return false;
+            }
         }
-        
+
         return true;
     }
 }
