@@ -9,14 +9,14 @@
 
 namespace Widget;
 
-use Widget\View\ViewInterface;
+use Widget\View\AbstractView;
 
 /**
  * The view widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class View extends AbstractWidget implements ViewInterface
+class View extends AbstractView
 {
     /**
      * The template variables
@@ -50,23 +50,21 @@ class View extends AbstractWidget implements ViewInterface
     }
 
     /**
-     * @see \Widget\Viewable::render
-     * @param array $context
+     * {@inheritdoc}
      */
     public function render($name, $context = array())
     {
         $tmpl = new Tmpl(array(
-            'name' => $name,
+            'widget' => $this->widget,
             'view' => $this,
-            'widget' => $this->widget
+            'name' => $name
         ));
 
         return $tmpl->render($context);
     }
 
     /**
-     * @see \Widget\Viewable::display
-     * @param array $context
+     * {@inheritdoc}
      */
     public function display($name, $context = array())
     {
@@ -74,7 +72,7 @@ class View extends AbstractWidget implements ViewInterface
     }
 
     /**
-     * @see \Widget\Viewable::assign
+     * {@inheritdoc}
      */
     public function assign($name, $value = null)
     {
@@ -85,14 +83,6 @@ class View extends AbstractWidget implements ViewInterface
         }
 
         return $this;
-    }
-
-    /**
-     * @see \Widget\Viewable::getExtension
-     */
-    public function getExtension()
-    {
-        return $this->extension;
     }
 
     /**

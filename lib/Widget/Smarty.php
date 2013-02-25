@@ -8,14 +8,14 @@
 
 namespace Widget;
 
-use Widget\View\ViewInterface;
+use Widget\View\AbstractView;
 
 /**
  * The smarty widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Smarty extends AbstractWidget implements ViewInterface
+class Smarty extends AbstractView
 {
     /**
      * Smarty object
@@ -45,6 +45,11 @@ class Smarty extends AbstractWidget implements ViewInterface
         'ext'           => '.tpl',
     );
 
+    /**
+     * Constructor
+     * 
+     * @param array $options
+     */
     public function __construct(array $options = array())
     {
         $this->smarty = new \Smarty();
@@ -60,7 +65,7 @@ class Smarty extends AbstractWidget implements ViewInterface
             }
         }
 
-        // added default global template variable
+        // Adds default global template variable
         $this->smarty->assign('widget', $this->widget);
     }
 
@@ -103,20 +108,12 @@ class Smarty extends AbstractWidget implements ViewInterface
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getExtension()
-    {
-        return $this->extension;
-    }
-
-    /**
      * Set template directory for smarty object
      *
      * @param  string|array $dir
-     * @return Smarty
+     * @return \Smarty
      */
-    public function setTemplateDirOption($dir)
+    public function setTemplateDir($dir)
     {
         $this->smarty->setTemplateDir($dir);
 
@@ -129,9 +126,9 @@ class Smarty extends AbstractWidget implements ViewInterface
      * Set compole directory for smarty object
      *
      * @param  string       $dir
-     * @return Smarty
+     * @return \Smarty
      */
-    public function setCompileDirOption($dir)
+    public function setCompileDir($dir)
     {
         $this->smarty->setCompileDir($dir);
 

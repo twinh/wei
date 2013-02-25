@@ -8,14 +8,14 @@
 
 namespace Widget;
 
-use Widget\View\ViewInterface;
+use Widget\View\AbstractView;
 
 /**
  * The twig widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Twig extends AbstractWidget implements ViewInterface
+class Twig extends AbstractView
 {
     /**
      * Options for \Twig_Environment
@@ -57,8 +57,7 @@ class Twig extends AbstractWidget implements ViewInterface
 
     /**
      * Constructor
-     *
-     * @var array
+     * 
      * @param array $options
      */
     public function __construct(array $options = array())
@@ -72,7 +71,7 @@ class Twig extends AbstractWidget implements ViewInterface
     }
 
     /**
-     * Get twig environment object
+     * Get Twig environment object
      *
      * @return \Twig_Environment
      */
@@ -82,7 +81,7 @@ class Twig extends AbstractWidget implements ViewInterface
     }
 
     /**
-     * @see \Widget\Viewable::assign
+     * {@inheritdoc}
      */
     public function assign($name, $value = null)
     {
@@ -90,8 +89,7 @@ class Twig extends AbstractWidget implements ViewInterface
     }
 
     /**
-     * @see \Widget\Viewable::display
-     * @param array $context
+     * {@inheritdoc}
      */
     public function display($name, $context = array())
     {
@@ -99,19 +97,10 @@ class Twig extends AbstractWidget implements ViewInterface
     }
 
     /**
-     * @see \Widget\Viewable::render
-     * @param array $context
+     * {@inheritdoc}
      */
     public function render($name, $context = array())
     {
         return $this->twig->render($name, $context);
-    }
-
-    /**
-     * @see \Widget\Viewable::getExtension
-     */
-    public function getExtension()
-    {
-        return $this->extension;
     }
 }
