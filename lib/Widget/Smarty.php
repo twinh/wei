@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\View\ViewInterface;
 
 /**
- * Twig
+ * The smarty widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
@@ -65,7 +65,7 @@ class Smarty extends AbstractWidget implements ViewInterface
     }
 
     /**
-     * Get smarty object
+     * Return the \Smarty object
      *
      * @return \Smarty
      */
@@ -75,7 +75,7 @@ class Smarty extends AbstractWidget implements ViewInterface
     }
 
     /**
-     * @see \Widget\Viewable::assign
+     * {@inheritdoc}
      */
     public function assign($name, $value = null)
     {
@@ -83,8 +83,7 @@ class Smarty extends AbstractWidget implements ViewInterface
     }
 
     /**
-     * @see \Widget\Viewable::display
-     * @param array $context
+     * {@inheritdoc}
      */
     public function display($name, $context = array())
     {
@@ -94,8 +93,7 @@ class Smarty extends AbstractWidget implements ViewInterface
     }
 
     /**
-     * @see \Widget\Viewable::render
-     * @param array $context
+     * {@inheritdoc}
      */
     public function render($name, $context = array())
     {
@@ -105,7 +103,7 @@ class Smarty extends AbstractWidget implements ViewInterface
     }
 
     /**
-     * @see \Widget\Viewable::getExtension
+     * {@inheritdoc}
      */
     public function getExtension()
     {
