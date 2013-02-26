@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input value is a valid date
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Date extends DateTime
