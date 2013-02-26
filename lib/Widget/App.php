@@ -287,12 +287,10 @@ class App extends AbstractWidget
 
     /**
      * Get the controller instance, if not found, return false instead
-     *
-     * @param  string                   $name the name of controller
-     * @param string $module
-     * @param string $controller
-     * @return false|object
-     * @todo custom module namespace
+     * 
+     * @param string $module The name of module
+     * @param string $controller The name of controller
+     * @return boolean
      */
     public function getControllerInstance($module, $controller)
     {
