@@ -484,7 +484,7 @@ class Validator extends AbstractValidator
      * 
      * @param string $field The name of field
      * @param string $rule The name of rule
-     * @param mixed $options The parameters for rule
+     * @param mixed $parameters The parameters for rule
      */
     public function addRule($field, $rule, $parameters)
     {
