@@ -22,9 +22,18 @@ class Callback extends AbstractValidator
      */
     protected $fn;
     
-    public function __invoke($input, \Closure $fn = null)
+    /**
+     * Invoker
+     * 
+     * @param mixed $input The input value
+     * @param \Closure|null $fn  The callback to validate the input value
+     * @param string|null $message The custom invalid message
+     * @return bool
+     */
+    public function __invoke($input, \Closure $fn = null, $message = null)
     {
         $fn && $this->fn = $fn;
+        $message && $this->invalidMessage = $message;
         
         return $this->isValid($input);
     }
