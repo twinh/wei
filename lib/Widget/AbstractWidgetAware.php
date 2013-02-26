@@ -9,18 +9,28 @@
 namespace Widget;
 
 /**
- * The infterce for all widget
+ * A simple implementation of \Widget\WidgetAwareInterface
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 abstract class AbstractWidgetAware implements WidgetAwareInterface
 {
     /**
-     * The widget manager
+     * A widget manager instance
      * 
      * @var \Widget\Widget
      */
     protected $widget;
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setWidget(Widget $widget)
+    {
+        $this->widget = $widget;
+        
+        return $this;
+    }
     
     /**
      * {@inheritdoc}

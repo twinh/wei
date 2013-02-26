@@ -9,12 +9,20 @@
 namespace Widget;
 
 /**
- * The infterce for all widget
+ * A interface for developers to get and invoke widget in their objects
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 interface WidgetAwareInterface
 {
+    /**
+     * Sets the Widget manager
+     * 
+     * @param \Widget\Widget $widget A Widget manager instance
+     * @return \Widget\WidgetAwareInterface
+     */
+    public function setWidget(Widget $widget);
+    
     /**
      * Get the widget object by the given name
      *
