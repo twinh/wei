@@ -84,6 +84,16 @@ class Widget extends AbstractWidget
     protected $initWidgets = array();
 
     /**
+     * The import configuration
+     * 
+     * format:
+     * array(
+     *     array(
+     *         'dir' => 'lib/Widget/Validator'
+     *         'namespace' => 'Widget\Validator'
+     *         'format' => 'is%s'
+     *     )
+     * )
      * @var array
      */
     protected $import = array();
