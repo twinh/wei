@@ -79,6 +79,9 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
      */
     public function isValid($input)
     {
+        // Rest error definition
+        $this->errors = array();
+         
         return $this->opposite xor $this->validate($input);
     }
     
