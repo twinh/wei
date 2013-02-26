@@ -153,7 +153,7 @@ class Is extends AbstractWidget
             throw new InvalidArgumentException(sprintf('Validator "%s" not found', $rule));
         }
 
-        $options = $options + array('widget' => $this->widget) + (array)$this->config('is' . ucfirst($rule));
+        $options = $options + array('widget' => $this->widget) + (array)$this->widget->config('is' . ucfirst($rule));
         
         return new $class($options);
     }

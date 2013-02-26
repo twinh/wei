@@ -66,6 +66,10 @@ class TestCase extends PHPUnit_Framework_TestCase implements WidgetAwareInterfac
     {
         $widget = $this->widget;
         $name = $this->getWidgetName();
+
+        if ('widget' == strtolower($name)) {
+            return;
+        }
         
         if ($widget->has($name)) {
             // Removed
@@ -87,6 +91,10 @@ class TestCase extends PHPUnit_Framework_TestCase implements WidgetAwareInterfac
     {
         $widget = $this->widget;
         $name = $this->getWidgetName();
+        
+        if ('widget' == strtolower($name)) {
+            return;
+        }
 
         foreach (get_object_vars($this) as $name => $property) {
             // Preserve the widget manager

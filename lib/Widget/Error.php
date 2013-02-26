@@ -122,7 +122,7 @@ class Error extends AbstractWidget
 
             $this->option($options);
 
-            $debug = $this->config('debug');
+            $debug = $this->widget->config('debug');
 
             // clean up output
             if ($this->clean && ob_get_status()) {
@@ -200,7 +200,7 @@ class Error extends AbstractWidget
         // @codeCoverageIgnoreStart
         // dispaly basic error message for exception in exception handler
         } catch (Exception $e) {
-            if ($this->config('debug')) {
+            if ($this->widget->config('debug')) {
                 echo sprintf('<p>%s: %s in %s on line %s</p>', get_class($e), $e->getMessage(), $e->getFile(), $e->getCode());
                 echo '<pre>' . $e->getTraceAsString() . '</pre>';
             } else {

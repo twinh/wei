@@ -227,7 +227,7 @@ ol, ul, li {
         </div>
         <div class="message-box">
             Tip: To disable debug message output, just set <code>debug = false</code>
-            in your Widget config file or use <code>$this-&gt;config(&#039;debug&#039;, false);</code>
+            in your Widget config file or use <code>$this-&gt;widget-&gt;config(&#039;debug&#039;, false);</code>
             in any widgets.
         </div>
         <?php endif ?>

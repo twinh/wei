@@ -25,7 +25,7 @@ class UrlDebugger extends AbstractWidget
     {
         parent::__construct($options);
 
-        if ($this->config('debug')) {
+        if ($this->widget->config('debug')) {
             $this->inject();
         }
     }
