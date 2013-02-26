@@ -8,12 +8,14 @@
 
 namespace Widget;
 
+use Widget\Storage\AbstractStorage;
+
 /**
  * Redis
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Redis extends AbstractWidget implements Storable
+class Redis extends AbstractStorage
 {
     /**
      * The redis object

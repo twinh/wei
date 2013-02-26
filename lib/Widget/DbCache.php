@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -11,13 +10,14 @@ namespace Widget;
 use PDO;
 use PDOException;
 use Widget\Exception\UnsupportedException;
+use Widget\Storage\AbstractStorage;
 
 /**
  * DbCache
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class DbCache extends AbstractWidget implements Storable
+class DbCache extends AbstractStorage
 {
     /**
      * The cache table name

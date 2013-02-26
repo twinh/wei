@@ -8,12 +8,14 @@
 
 namespace Widget;
 
+use Widget\Storage\AbstractStorage;
+
 /**
  * Apc
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Apc extends AbstractWidget implements Storable
+class Apc extends AbstractStorage
 {
     /**
      * {@inheritdoc}

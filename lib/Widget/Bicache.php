@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -9,14 +8,16 @@
 
 namespace Widget;
 
+use Widget\Storage\AbstractStorage;
+
 /**
  * Bicache
  *
  * @author      Twin Huang <twinh@yahoo.cn>
- * @property \Widget\Storable $master The master(faster) cache object
- * @property \Widget\Storable $slave The slave(slower) cache object
+ * @property \Widget\Storage\StorageInterface $master The master(faster) cache object
+ * @property \Widget\Storage\StorageInterface $slave The slave(slower) cache object
  */
-class Bicache extends AbstractWidget implements Storable
+class Bicache extends AbstractStorage
 {
     /**
      * The dependence map

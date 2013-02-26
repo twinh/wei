@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -9,12 +8,14 @@
 
 namespace Widget;
 
+use Widget\Storage\AbstractStorage;
+
 /**
  * Memcache
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Memcache extends AbstractWidget implements Storable
+class Memcache extends AbstractStorage
 {
     /**
      * The memcache object

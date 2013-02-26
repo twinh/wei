@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -10,13 +9,14 @@
 namespace Widget;
 
 use Widget\Exception\RuntimeException;
+use Widget\Storage\AbstractStorage;
 
 /**
  * File cache
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Fcache extends AbstractWidget implements Storable
+class Fcache extends AbstractStorage
 {
     /**
      * The cache directory
