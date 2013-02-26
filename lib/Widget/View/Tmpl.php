@@ -9,6 +9,7 @@
 namespace Widget\View;
 
 use Widget\AbstractWidget;
+use Widget\Exception\RuntimeException;
 
 /**
  * Tmpl
@@ -252,12 +253,12 @@ class Tmpl extends AbstractWidget
     {
         if (empty($this->blockStack)) {
             list($file, $line) = $this->getCalledPosition();
-            throw new Exception(sprintf('Method "parent" should be called between $this->block() and $this->endblock()'), 500, $file, $line);
+            throw new RuntimeException(sprintf('Method "parent" should be called between $this->block() and $this->endblock()'), 500, $file, $line);
         }
 
         if (!$this->hasLayout($this->current)) {
             list($file, $line) = $this->getCalledPosition();
-            throw new Exception(sprintf('Template "%s" do not have a parent layout', $this->current), 500, $file, $line);
+            throw new RuntimeException(sprintf('Template "%s" do not have a parent layout', $this->current), 500, $file, $line);
         }
 
         end($this->layoutStack);

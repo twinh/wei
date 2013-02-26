@@ -9,6 +9,8 @@
 
 namespace Widget;
 
+use Widget\Exception\NotFoundException;
+
 /**
  * Redirect
  *
@@ -63,7 +65,7 @@ class Redirect extends Response
                 $this->setSentStatus(true);
                 require $options['view'];
             } else {
-                throw new Exception(sprintf('View file "%s" not found', $options['view']));
+                throw new NotFoundException(sprintf('View file "%s" not found', $options['view']));
             }
         } else {
             $options['delay'] = (int) $options['delay'];

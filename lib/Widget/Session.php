@@ -8,6 +8,8 @@
 
 namespace Widget;
 
+use Widget\Exception\RuntimeException;
+
 /**
  * Session
  *
@@ -83,7 +85,7 @@ class Session extends Parameter
     {
         $file = $line = null;
         if (headers_sent($file, $line)) {
-            throw new Exception(sprintf('Unable to start session, output started at %s:%s', $file, $line));
+            throw new RuntimeException(sprintf('Unable to start session, output started at %s:%s', $file, $line));
         }
 
         // If session started, ignored it

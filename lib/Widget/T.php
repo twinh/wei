@@ -8,6 +8,8 @@
 
 namespace Widget;
 
+use Widget\Exception\InvalidArgumentException;
+
 /**
  * Translator
  *
@@ -134,7 +136,7 @@ class T extends AbstractWidget
         if (!is_file($file)) {
             $fallbackFile = sprintf($pattern, $this->fallbackLocale);
             if (!is_file($fallbackFile)) {
-                throw new Exception(sprintf('File "%s" and "%s" not found or not readable', $file, $fallbackFile));
+                throw new InvalidArgumentException(sprintf('File "%s" and "%s" not found or not readable', $file, $fallbackFile));
             } else {
                 $file = $fallbackFile;
             }

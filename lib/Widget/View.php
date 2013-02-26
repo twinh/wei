@@ -10,6 +10,7 @@ namespace Widget;
 
 use Widget\View\AbstractView;
 use Widget\View\Tmpl;
+use Widget\Exception\RuntimeException;
 
 /**
  * The view widget
@@ -100,6 +101,6 @@ class View extends AbstractView
             }
         }
 
-        throw new Exception(sprintf('Template "%s" not found in directories "%s"', $name, implode('", "', $this->dirs)));
+        throw new RuntimeException(sprintf('Template "%s" not found in directories "%s"', $name, implode('", "', $this->dirs)));
     }
 }

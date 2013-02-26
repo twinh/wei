@@ -8,6 +8,8 @@
 
 namespace Widget;
 
+use Widget\Exception\RuntimeException;
+
 /**
  * Filter
  *
@@ -50,7 +52,7 @@ class Filter extends AbstractWidget
     public function has($name, $callback)
     {
         if (!isset($this->filters[$name])) {
-            throw new Exception(sprintf('Undefined filter name "%s"', $name));
+            throw new RuntimeException(sprintf('Undefined filter name "%s"', $name));
         }
 
         return (bool) array_search($callback, $this->filters[$name], true);
@@ -59,7 +61,7 @@ class Filter extends AbstractWidget
     public function remove($name, $callback)
     {
         if (!isset($this->filters[$name])) {
-            throw new Exception(sprintf('Undefined filter name "%s"', $name));
+            throw new RuntimeException(sprintf('Undefined filter name "%s"', $name));
         }
 
         $key = array_search($callback, $this->filters[$name], true);

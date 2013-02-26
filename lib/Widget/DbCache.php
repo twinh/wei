@@ -10,6 +10,7 @@ namespace Widget;
 
 use PDO;
 use PDOException;
+use Widget\Exception\UnsupportedException;
 
 /**
  * DbCache
@@ -106,7 +107,7 @@ class DbCache extends AbstractWidget implements Storable
             $this->driver = new $class;
             $this->sqls = $this->driver->getSqls();
         } else {
-            throw new Exception(sprintf('Unsupport driver "%s"', $driver));
+            throw new UnsupportedException(sprintf('Unsupport driver "%s"', $driver));
         }
 
         // Execute prepare sql query

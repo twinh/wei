@@ -9,6 +9,8 @@
 
 namespace Widget;
 
+use Widget\Exception\InvalidArgumentException;
+
 /**
  * Cache
  *
@@ -64,11 +66,11 @@ class Cache extends AbstractWidget implements Storable
         $class = $this->widget->getClass($driver);
 
         if (!class_exists($class)) {
-            throw new Exception(sprintf('Cache driver class "%s" not found', $class));
+            throw new InvalidArgumentException(sprintf('Cache driver class "%s" not found', $class));
         }
 
         if (!in_array('Widget\Storable', class_implements($class))) {
-            throw new Exception(sprintf('Cache driver "%s" should implement the interface "Widget\Storable"', $class));
+            throw new InvalidArgumentException(sprintf('Cache driver "%s" should implement the interface "Widget\Storable"', $class));
         }
 
         $this->object = $this->widget->get($driver);

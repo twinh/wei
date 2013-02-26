@@ -8,6 +8,8 @@
 
 namespace Widget;
 
+use Widget\Exception\NotFoundException;
+
 /**
  * Code hint generator
  *
@@ -41,7 +43,7 @@ class Download extends AbstractWidget
         $header = $this->header;
 
         if (!is_file($file)) {
-            throw new Exception('File not found');
+            throw new NotFoundException('File not found');
         }
 
         $header('Content-Description', 'File Transfer');

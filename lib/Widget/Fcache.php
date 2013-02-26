@@ -9,6 +9,8 @@
 
 namespace Widget;
 
+use Widget\Exception\RuntimeException;
+
 /**
  * File cache
  *
@@ -63,7 +65,7 @@ class Fcache extends AbstractWidget implements Storable
         if (!is_dir($dir)) {
             // @codeCoverageIgnoreStart
             if (!@mkdir($dir, 0644, true)) {
-                throw new Exception('Failed to create directory: ' . $dir);
+                throw new RuntimeException('Failed to create directory: ' . $dir);
             }
             chmod($dir, 0644);
             // @codeCoverageIgnoreEnd
