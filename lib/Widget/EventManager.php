@@ -8,6 +8,8 @@
 
 namespace Widget;
 
+use Widget\Exception\UnexpectedTypeException;
+
 /**
  * EventManager
  *
@@ -128,7 +130,7 @@ class EventManager extends AbstractWidget
     public function add($type, $fn, $priority = 0, $data = array())
     {
         if (!is_callable($fn)) {
-            throw new Exception('Parameter 2 should be a valid callback');
+            throw new UnexpectedTypeException($fn, 'callable');
         }
 
         $priority = is_numeric($priority) ? $priority :

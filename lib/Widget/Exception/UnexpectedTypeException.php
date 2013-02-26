@@ -6,12 +6,12 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
 
-namespace Widget;
+namespace Widget\Exception;
 
 /**
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class UnexpectedTypeException extends Exception
+class UnexpectedTypeException extends \InvalidArgumentException implements ExceptionInterface
 {
     /**
      * Constructor

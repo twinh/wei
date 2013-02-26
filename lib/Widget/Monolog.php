@@ -9,6 +9,7 @@
 namespace Widget;
 
 use Monolog\Logger;
+use Widget\Exception\InvalidArgumentException;
 
 /**
  * The wrapper for Monolog
@@ -54,7 +55,7 @@ class Monolog extends AbstractWidget
      * Constructor
      * 
      * @param array $options
-     * @throws \InvalidArgumentException When log handlder not found
+     * @throws \Widget\Exception\InvalidArgumentException When log handlder not found
      */
     public function __construct(array $options = array())
     {
@@ -76,7 +77,7 @@ class Monolog extends AbstractWidget
                     break;
                 
                 default :
-                    throw new \InvalidArgumentException(sprintf('Log handler "%s" not found', $name));
+                    throw new InvalidArgumentException(sprintf('Log handler "%s" not found', $name));
             }
         }
     }

@@ -10,6 +10,8 @@ namespace Widget;
 
 use Widget\Validator\AbstractValidator;
 use Widget\Validator\ValidatorInterface;
+use Widget\Exception\InvalidArgumentException;
+use Widget\Exception\UnexpectedTypeException;
 
 /**
  * Validator
@@ -144,14 +146,15 @@ class Validator extends AbstractValidator
      *
      * @param array $options The options for validation
      * @return false Whether pass the validation or not
-     * @throws \InvalidArgumentException When validation rules is empty
+     * @throws \Widget\Exception\InvalidArgumentException When validation rules is empty
+     * @throws \Widget\Exception\UnexpectedTypeException  When validation rule is not array, string or instance of AbstractValidator
      */
     public function __invoke($options = array())
     {
         $this->option($options);
 
         if (empty($this->rules)) {
-            throw new \InvalidArgumentException('Validation rules should not be empty.');
+            throw new InvalidArgumentException('Validation rules should not be empty.');
         }
         
         // Initialize the validation result to be true
@@ -442,7 +445,7 @@ class Validator extends AbstractValidator
      * @param array $params The parameters to be passed to the callback, as an
      *                      indexed array.
      * @return mixed
-     * @throws \InvalidArgumentException When the first argument is not callable
+     * @throws \Widget\Exception\InvalidArgumentException When the first argument is not callable
      */
     protected function callback($callback, array $params)
     {
@@ -452,7 +455,7 @@ class Validator extends AbstractValidator
         }
 
         if (!is_callable($callback)) {
-            throw new \InvalidArgumentException('The first argument is not callable');
+            throw new InvalidArgumentException('The first argument is not callable');
         }
 
         return call_user_func_array($callback, $params);

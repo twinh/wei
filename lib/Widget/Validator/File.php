@@ -8,7 +8,8 @@
 
 namespace Widget\Validator;
 
-use Widget\UnexpectedTypeException;
+use Widget\Exception\UnexpectedTypeException;
+use Widget\Exception\UnexpectedValueException;
 
 /**
  * @author      Twin Huang <twinh@yahoo.cn>
@@ -351,7 +352,7 @@ class File extends AbstractValidator
      * 
      * @param mixed $var
      * @return array
-     * @throws UnexpectedTypeException When parameter is not a string or array
+     * @throws \Widget\Exception\UnexpectedTypeException When parameter is not a string or array
      */
     protected function convertToArray($var)
     {
@@ -369,12 +370,13 @@ class File extends AbstractValidator
      * 
      * @param string $file The file path
      * @return string|false
+     * @throws \Widget\Exception\UnexpectedValueException When failed to open fileinfo database
      */
     public function getMimeType($file)
     {
         $finfo = finfo_open(FILEINFO_MIME_TYPE, $this->magicFile);
         if (!$finfo) {
-            throw new \InvalidArgumentException('Failed to open fileinfo database');
+            throw new UnexpectedValueException('Failed to open fileinfo database');
         }
         return finfo_file($finfo, $file);
     }

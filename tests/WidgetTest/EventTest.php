@@ -24,14 +24,21 @@ class EventTest extends TestCase
             ->trigger('test.ns.ns2');
     }
 
+    /**
+     * @expectedException 
+     */
     public function testAddHandler()
     {
         $this->on('test', function(){});
 
         $this->assertTrue($this->eventManager->has('test'));
-
-        $this->setExpectedException('\Widget\Exception', 'Parameter 2 should be a valid callback');
-
+    }
+    
+    /**
+     * @expectedException \Widget\Exception\UnexpectedTypeException
+     */
+    public function testAddInvalidHandler()
+    {
         $this->on('test', 'not callback');
     }
 

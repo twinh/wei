@@ -9,8 +9,9 @@
 namespace Widget;
 
 use Widget\Response;
-use Widget\App\NotFoundException;
-use Widget\App\DispatchBreakException;
+use Widget\Exception\NotFoundException;
+use Widget\Exception\DispatchBreakException;
+use Widget\Exception\UnexpectedTypeException;
 
 /**
  * App
@@ -98,7 +99,7 @@ class App extends AbstractWidget
      * @param  string    $controller The name of controller
      * @param  string    $action     The name of action
      * @return App|null
-     * @throws Exception When controller or action not found
+     * @throws Widget\Exception\NotFoundException When controller or action not found
      */
     public function dispatch($module, $controller, $action = 'index')
     {
@@ -169,7 +170,7 @@ class App extends AbstractWidget
      *
      * @param  mixed                     $response
      * @return Response|boolean
-     * @throws \UnexpectedValueException
+     * @throws Widget\Exception\UnexpectedTypeException
      */
     public function handleResponse($response)
     {
@@ -317,7 +318,7 @@ class App extends AbstractWidget
     /**
      * Throws a DispatchBreakException to prevent the previous dispatch process
      *
-     * @throws DispatchBreakException
+     * @throws Widget\Exception\DispatchBreakException
      */
     public function preventPreviousDispatch()
     {

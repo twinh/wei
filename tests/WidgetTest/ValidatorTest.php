@@ -2,12 +2,11 @@
 
 namespace WidgetTest;
 
-use Widget\Validator;
 
 class ValidatorTest extends TestCase
 {
     /**
-     * @expectedException Widget\UnexpectedTypeException
+     * @expectedException Widget\Exception\UnexpectedTypeException
      */
     public function testIsInException()
     {
@@ -74,7 +73,7 @@ class ValidatorTest extends TestCase
     }
 
     /**
-     * @expectedException Widget\UnexpectedTypeException
+     * @expectedException Widget\Exception\UnexpectedTypeException
      */
     public function testUnexpectedType()
     {
@@ -82,7 +81,7 @@ class ValidatorTest extends TestCase
     }
 
     /**
-     * @expectedException \Widget\Exception
+     * @expectedException \Widget\Exception\InvalidArgumentException
      */
     public function testRuleNotDefined()
     {
@@ -90,7 +89,7 @@ class ValidatorTest extends TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException Widget\Exception\InvalidArgumentException
      */
     public function testEmptyRuleException()
     {
@@ -535,7 +534,7 @@ class ValidatorTest extends TestCase
     }
     
     /**
-     * @expectedException \Widget\UnexpectedTypeException
+     * @expectedException \Widget\Exception\UnexpectedTypeException
      */
     public function testUnexpectedTypeException()
     {
@@ -635,7 +634,7 @@ class ValidatorTest extends TestCase
     }
     
     /**
-     * @expectedException \Widget\UnexpectedTypeException
+     * @expectedException \Widget\Exception\UnexpectedTypeException
      */
     public function testInvalidRule()
     {
@@ -667,7 +666,7 @@ class ValidatorTest extends TestCase
     }
     
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException Widget\Exception\UnexpectedValueException
      */
     public function testInvalidArgumentException()
     {

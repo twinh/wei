@@ -9,6 +9,7 @@
 namespace Widget\Validator;
 
 use Widget\AbstractWidget;
+use Widget\Exception\UnexpectedValueException;
 
 /**
  * The base class of validator
@@ -91,6 +92,7 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
     
     /**
      * {@inheritdoc}
+     * @throws \Widget\Exception\UnexpectedValueException When message contains unkonwn parameter
      */
     public function getMessages()
     {
@@ -109,7 +111,7 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
                     $parameters['%name%'] = $this->t($this->name);
                 } else {
                     if (!property_exists($this, $match)) {
-                        throw new \InvalidArgumentException(sprintf('Unkonwn parameter "%%%s%%" in message "%s"', $match, $message));
+                        throw new UnexpectedValueException(sprintf('Unkonwn parameter "%%%s%%" in message "%s"', $match, $message));
                     }
                     $parameters['%' . $match . '%'] = is_array($this->$match) ? 
                         implode(', ', $this->$match) : $this->$match;;

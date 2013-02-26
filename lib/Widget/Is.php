@@ -8,6 +8,9 @@
 
 namespace Widget;
 
+use Widget\Exception\UnexpectedTypeException;
+use \Widget\Exception\InvalidArgumentException;
+
 /**
  * The validator manager
  *
@@ -71,7 +74,7 @@ class Is extends AbstractWidget
      * @param mixed $data The data to be validated
      * @param array $options The validation parameters
      * @return bool
-     * @throws UnexpectedTypeException When rule is not string, array or \Closure
+     * @throws Widget\Exception\UnexpectedTypeException When rule is not string, array or \Closure
      */
     public function __invoke($rule = null, $data = null, $options = array())
     {
@@ -136,7 +139,7 @@ class Is extends AbstractWidget
      * @param string $rule The name of rule validator
      * @param array $options The property options for rule validator
      * @return Widget\Validator\AbstractValidator
-     * @throws Exception When validator not found
+     * @throws \Widget\Exception\InvalidArgumentException When validator not found
      */
     public function createRuleValidator($rule, array $options = array())
     {
@@ -147,7 +150,7 @@ class Is extends AbstractWidget
         }
         
         if (!$class = $this->hasRule($rule)) {
-            throw new Exception(sprintf('Validator "%s" not found', $rule));
+            throw new InvalidArgumentException(sprintf('Validator "%s" not found', $rule));
         }
 
         $options = $options + array('widget' => $this->widget) + (array)$this->config('is' . ucfirst($rule));

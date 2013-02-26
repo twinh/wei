@@ -8,6 +8,8 @@
 
 namespace Widget\Validator;
 
+use Widget\Exception\UnexpectedTypeException;
+
 /**
  * @author      Twin Huang <twinh@yahoo.cn>
  */
@@ -133,7 +135,7 @@ class CreditCard extends AbstractValidator
      * 
      * @param string|array $type
      * @return \Widget\Validator\CreditCard
-     * @throws \Widget\UnexpectedTypeException When parameter is not array or string
+     * @throws \Widget\Exception\UnexpectedTypeException When parameter is not array or string
      */
     public function setType($type)
     {
@@ -146,7 +148,7 @@ class CreditCard extends AbstractValidator
         } elseif (is_array($type)) {
             $this->type = $type;
         } else {
-            throw new \Widget\UnexpectedTypeException($type, 'array or string');
+            throw new UnexpectedTypeException($type, 'array or string');
         }
         
         return $this;

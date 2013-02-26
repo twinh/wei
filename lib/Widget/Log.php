@@ -8,6 +8,8 @@
 
 namespace Widget;
 
+use Widget\Exception\RuntimeException;
+
 /**
  * The default logger for widget, which is base on the Monolog!
  *
@@ -171,6 +173,7 @@ class Log extends AbstractWidget
      * Get log file
      *
      * @return string
+     * @throws Widget\Exception\RuntimeException When unable to create logging directory
      */
     public function getFile()
     {
@@ -182,7 +185,7 @@ class Log extends AbstractWidget
         $file = &$this->file;
 
         if (!is_dir($this->dir) && false === @mkdir($this->dir, 0777, true)) {
-            throw new \RuntimeException('Unable to create directory ' . $this->dir);
+            throw new RuntimeException('Unable to create directory ' . $this->dir);
         }
         
         $file = realpath($this->dir) . '/' . date($this->fileFormat);

@@ -21,7 +21,7 @@ class InTest extends TestCase
     }
     
     /**
-     * @expectedException Widget\UnexpectedTypeException
+     * @expectedException Widget\Exception\UnexpectedTypeException
      */
     public function testUnexpectedType()
     {

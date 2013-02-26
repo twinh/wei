@@ -65,7 +65,7 @@ class FileTest extends TestCase
     }
     
     /**
-     * @expectedException Widget\UnexpectedTypeException
+     * @expectedException Widget\Exception\UnexpectedTypeException
      */
     public function testUnexpectedExts()
     {
