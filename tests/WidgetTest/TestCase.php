@@ -126,4 +126,14 @@ class TestCase extends PHPUnit_Framework_TestCase implements WidgetAwareInterfac
     {
         return $this->widget->get($name);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setWidget(Widget $widget)
+    {
+        $this->widget = $widget;
+        
+        return $this;
+    }
 }
