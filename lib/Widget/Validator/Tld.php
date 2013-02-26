@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input value is a valid top-level domain
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Tld extends In
