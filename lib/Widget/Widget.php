@@ -227,18 +227,21 @@ class Widget extends AbstractWidget
     /**
      * Get or set widget's configuration
      *
+     * <code>
+     * $this->config();                 // Returns all configurations
+     * $this->config('widgetName');     // Get the configuration for 'widgetName'
+     * $this->config($array);           // Replace all configurations
+     * $this->config('name', 'param');  // Set one configuration
+     * $this->config('key1/key2');      // Get the value of $this->config['key1']['key2']
+     * </code>
+     * 
      * @param  mixed $name  The name of configuration
-     * @param  mixed $param The value of configuration
-     * @return mixed
-     * @example $this->config();                 // Get all configurations
-     *          $this->config('widgetName');     // Get the configuration for 'widgetName'
-     *          $this->config($array);           // Replace all configurations
-     *          $this->config('name', 'param');  // Set one configuration
-     *          $this->config('key1/key2');      // Get the value of $this->config['key1']['key2']
+     * @param  mixed $value The value of configuration
+     * @return mixed     
      */
-    public function config($name = null)
+    public function config($name = null, $value = null)
     {
-        // get all configurations
+        // Returns all configurations
         if (null === $name) {
             return $this->config;
         }
