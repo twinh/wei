@@ -1,17 +1,19 @@
 <?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Widget Framework
+ *
+ * @copyright   Copyright (c) 2008-2013 Twin Huang
+ * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
+
+namespace Widget\Exception;
 
 /**
- * Description of BadMethodCallException
- *
- * @author Twin
+ * Exception thrown if a callback refers to an undefined function or if some arguments are missing
+ * 
+ * @author      Twin Huang <twinh@yahoo.cn>
  */
-class BadMethodCallException {
-    //put your code here
+class BadMethodCallException extends \BadMethodCallException implements ExceptionInterface
+{
 }
 
-?>
