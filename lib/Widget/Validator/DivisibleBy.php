@@ -26,7 +26,7 @@ class DivisibleBy extends AbstractValidator
     
     public function __invoke($input, $divisor = null)
     {
-        $divisor && $this->divisor = $divisor;
+        $divisor && $this->setOption('divisor', $divisor);
         
         return $this->isValid($input);
     }

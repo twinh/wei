@@ -27,6 +27,17 @@ abstract class AbstractGroupValidator extends AbstractValidator
     /**
      * {@inheritdoc}
      */
+    protected function reset()
+    {
+        $this->validators = array();
+        
+        parent::reset();
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
     public function getMessages()
     {
         /**

@@ -21,7 +21,7 @@ class MaxLength extends AbstractLengthValidator
     
     public function __invoke($input, $max = null)
     {
-        $max && $this->max = $max;
+        $max && $this->setOption('max', $max);
         
         return $this->isValid($input);
     }

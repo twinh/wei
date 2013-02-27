@@ -21,7 +21,7 @@ class Max extends AbstractValidator
     
     public function __invoke($input, $max = null)
     {
-        $max && $this->max = $max;
+        $max && $this->setOption('max', $max);
         
         return $this->isValid($input);
     }

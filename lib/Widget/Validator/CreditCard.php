@@ -65,7 +65,7 @@ class CreditCard extends AbstractValidator
     
     public function __invoke($input, $type = null)
     {
-        $type && $this->setType($type);
+        $type && $this->setOption('type', $type);
         
         return $this->isValid($input);
     }

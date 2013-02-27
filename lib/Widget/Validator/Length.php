@@ -31,11 +31,11 @@ class Length extends AbstractLengthValidator
     {
         // ($input, $min, $max)
         if (is_numeric($min) && is_numeric($max)) {
-            $this->min = $min;
-            $this->max = $max;
+            $this->setOption('min', $min);
+            $this->setOption('max', $max);
         // ($input, $length)
         } elseif (is_numeric($min) && is_null($max)) {
-            $this->length = $min;
+            $this->setOption('length', $min);
         }
         
         return $this->isValid($input);

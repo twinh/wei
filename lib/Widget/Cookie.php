@@ -8,12 +8,14 @@
 
 namespace Widget;
 
+use Widget\Storage\StorageInterface;
+
 /**
  * Cookie
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Cookie extends Parameter
+class Cookie extends Parameter /*implements StorageInterface*/
 {
     /**
      * @var array Options
@@ -150,12 +152,31 @@ class Cookie extends Parameter
      * Destructor
      * 
      * @todo send or not ?
-     * @codeCoverageIgnore
      */
     public function __destruct()
     {
         if (!headers_sent()) {
             $this->send();
         }
+    }
+
+    public function add($key, $value, $expire = 0, array $options = array()) {
+        
+    }
+
+    public function clear() {
+        
+    }
+
+    public function decrement($key, $step = 1) {
+        
+    }
+
+    public function increment($key, $step = 1) {
+        
+    }
+
+    public function replace($key, $value, $expire = 0, array $options = array()) {
+        
     }
 }

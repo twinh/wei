@@ -19,7 +19,7 @@ class Required extends AbstractValidator
     
     public function __invoke($input, $required = null)
     {
-        is_bool($required) && $this->required = $required;
+        is_bool($required) && $this->setOption('required', $required);
         
         return $this->isValid($input);
     }

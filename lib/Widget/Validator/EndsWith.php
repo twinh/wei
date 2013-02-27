@@ -23,8 +23,8 @@ class EndsWith extends AbstractValidator
     
     public function __invoke($input, $findMe = null, $case = null)
     {
-        $findMe && $this->findMe = $findMe;
-        is_bool($case) && $this->case = $case;
+        $findMe && $this->setOption('findMe', $findMe);
+        is_bool($case) && $this->setOption('case', $case);
         
         return $this->isValid($input);
     }

@@ -25,8 +25,8 @@ class Range extends AbstractValidator
     {
         // Allows not numeric parameter like 2000-01-01, 10:03, etc 
         if ($min && $max) {
-            $this->min = $min;
-            $this->max = $max;
+            $this->setOption('min', $min);
+            $this->setOption('max', $max);
         }
         
         return $this->isValid($input);

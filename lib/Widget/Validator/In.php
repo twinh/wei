@@ -27,15 +27,14 @@ class In extends AbstractValidator
     {
         if ($array) {
             if ($array instanceof \ArrayObject) {
-                $this->array = $array->getArrayCopy();
-            } elseif (is_array($array)) {
-                $this->array = $array;
-            } else {
+                $array = $array->getArrayCopy();
+            } elseif (!is_array($array)) {
                 throw new UnexpectedTypeException($input, 'array or \ArrayObject');
             }
+            $this->setOption('array', $array);
         }
         
-        is_bool($strict) && $this->strict = $strict;
+        is_bool($strict) && $this->setOption('strict', $strict);
         
         return $this->isValid($input);
     }

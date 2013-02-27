@@ -36,7 +36,7 @@ class All extends AbstractValidator
     
     public function __invoke($input, array $rules = array())
     {
-        $rules && $this->rules = $rules;
+        $rules && $this->setOption('rules', $rules);
         
         return $this->isValid($input);
     }
