@@ -82,7 +82,7 @@ interface StorageInterface
      * @param  int       $offset The value to increased
      * @return int|false Returns the new value on success, or false on failure
      */
-    public function increment($key, $step = 1);
+    public function increment($key, $offset = 1);
 
     /**
      * Decrement an item
@@ -91,7 +91,7 @@ interface StorageInterface
      * @param  int       $offset The value to be decreased
      * @return int|false Returns the new value on success, or false on failure
      */
-    public function decrement($key, $step = 1);
+    public function decrement($key, $offset = 1);
 
     /**
      * Clear all items
