@@ -20,7 +20,6 @@ namespace Widget;
  */
 class UrlDebugger extends AbstractWidget
 {
-
     /**
      * Constructor
      * 
