@@ -12,8 +12,7 @@ namespace Widget;
  * Code hint generator
  *
  * @author      Twin Huang <twinh@yahoo.cn>
- * @property \Widget\Log $log The logger widget
- * @method bool log(string $message) Description
+ * @property \Widget\Logger $logger The logger widget
  */
 class CodeHintGenerator extends AbstractWidget
 {
@@ -113,21 +112,15 @@ class Widget implements WidgetInterface
         return $this;
     }
 
-    public function generateWidgetCodeHint($name, $class)
+    protected function generateWidgetCodeHint($name, $class)
     {
         if (!class_exists($class)) {
-            $this->log(sprintf('Widget "%s" (Class "%s") not found', $name, $class));
+            $this->logger->debug(sprintf('Widget "%s" (Class "%s") not found', $name, $class));
 
             return false;
         }
 
         $reflection = new \ReflectionClass($class);
-
-        if (!$reflection->hasMethod('__invoke')) {
-            $this->log(sprintf('Method "__invoke" not found in class "%s"', $class));
-
-            return false;
-        }
 
         $invokeMethod = $reflection->getMethod('__invoke');
 

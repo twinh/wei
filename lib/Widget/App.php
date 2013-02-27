@@ -18,12 +18,12 @@ use Widget\Exception\UnexpectedTypeException;
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  * @method \Widget\EventManager trigger(string $eventName) Trigger a event
- * @method \Widget\Log log(string $message) Log a default level message
  * @method mixed config(string $name) Get a config
  * @method \Widget\Response response(string $content) Send headers and output content
  * @method string|array request(string $name, mixed $default = null) Get a request parameter
  * @property callable $404 The 404 event handler
  * @property \Widget\Viewable $view The view widget, instance of \Widget\Viewable interface
+ * @property \Widget\Logger $logger The logger widget
  */
 class App extends AbstractWidget
 {
@@ -128,7 +128,7 @@ class App extends AbstractWidget
                         return $this;
 
                     } catch (DispatchBreakException $e) {
-                        $this->log(sprintf('Caught exception "%s" with message "%s" called in %s on line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine()));
+                        $this->logger->debug(sprintf('Caught exception "%s" with message "%s" called in %s on line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine()));
                     }
 
                 } else {

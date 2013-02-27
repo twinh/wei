@@ -13,8 +13,8 @@ namespace Widget;
  * Header
  *
  * @author      Twin Huang <twinh@yahoo.cn>
- * @method \Widget\Log log(string $message) Log a default level message
  * @property \Widget\Cookie $cookie The cookie widget
+ * @property \Widget\Logger $logger The logger widget
  */
 class Header extends ArrayWidget
 {
@@ -176,7 +176,7 @@ class Header extends ArrayWidget
     {
         $file = $line = null;
         if (headers_sent($file, $line)) {
-            $this->log(sprintf('Header has been at %s:%s', $file, $line));
+            $this->logger->debug(sprintf('Header has been at %s:%s', $file, $line));
 
             return false;
         }

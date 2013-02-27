@@ -2,7 +2,7 @@
 
 namespace WidgetTest;
 
-class LogTest extends TestCase
+class LoggerTest extends TestCase
 {
     protected function tearDown()
     {
@@ -38,21 +38,21 @@ class LogTest extends TestCase
 
     public function testGetFile()
     {
-        $logger1 = new \Widget\Log(array(
+        $logger1 = new \Widget\Logger(array(
             'widget' => $this->widget,
             'fileSize' => 1,
         ));
         
         $logger1->debug(__METHOD__);
         
-        $logger2 = new \Widget\Log(array(
+        $logger2 = new \Widget\Logger(array(
             'widget' => $this->widget,
             'fileSize' => 1,
         ));
         
         $logger2->debug(__METHOD__);
         
-        $logger3 = new \Widget\Log(array(
+        $logger3 = new \Widget\Logger(array(
             'widget' => $this->widget,
             'fileSize' => 1,
         ));
@@ -77,7 +77,7 @@ class LogTest extends TestCase
 
     public function testFileSize()
     {
-        $oldLogger = new \Widget\Log(array(
+        $oldLogger = new \Widget\Logger(array(
             'widget' => $this->widget,
             'fileSize' => 1,
         ));
@@ -86,7 +86,7 @@ class LogTest extends TestCase
         
         $oldLogger->debug(__METHOD__);
 
-        $newLogger = new \Widget\Log(array(
+        $newLogger = new \Widget\Logger(array(
             'widget' => $this->widget,
             'fileSize' => 1,
         ));
@@ -124,7 +124,7 @@ class LogTest extends TestCase
      */
     public function testMkdirException()
     {
-        $logger = $this->widget->newInstance('log', array(
+        $logger = $this->widget->newInstance('logger', array(
             'dir' => 'http://example/'
         ));
         $logger->getFile();

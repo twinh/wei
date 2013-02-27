@@ -17,9 +17,9 @@ namespace Widget;
  * @property \Widget\Session $session The session widget
  * @property \Widget\Cookie $cookie The cookie widget
  * @property \Widget\Server $server The server widget
+ * @property \Widget\Logger $logger The logger widget
  * @method \Widget\EventManager on(string|\Widget\Event $event) Attach a handler to an event
  * @method bool inAjax() Check if in ajax request
- * @method \Widget\Log The logger widget
  * @todo        throw exception when called
  * @todo        add options display
  * @todo        response
