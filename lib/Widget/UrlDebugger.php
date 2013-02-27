@@ -21,6 +21,11 @@ namespace Widget;
 class UrlDebugger extends AbstractWidget
 {
 
+    /**
+     * Constructor
+     * 
+     * @param array $options
+     */
     public function __construct(array $options = array())
     {
         parent::__construct($options);
@@ -30,6 +35,9 @@ class UrlDebugger extends AbstractWidget
         }
     }
 
+    /**
+     * Inject widget parameter by specified query parameter
+     */
     public function inject()
     {
         if ($this->get['_ajax']) {
@@ -41,6 +49,11 @@ class UrlDebugger extends AbstractWidget
         }
     }
 
+    /**
+     * Invoker
+     * 
+     * @return \Widget\UrlDebugger
+     */
     public function __invoke()
     {
         return $this;
