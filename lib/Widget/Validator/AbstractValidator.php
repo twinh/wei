@@ -85,6 +85,12 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
      */
     protected static $translationMessagesLoaded;
      
+    /**
+     * Validate the input value
+     * 
+     * @param mixed $input
+     * @return bool
+     */
     public function __invoke($input)
     {
         return $this->isValid($input);
