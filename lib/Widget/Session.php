@@ -50,6 +50,11 @@ class Session extends Parameter
         'cache_expire'      => 86400,
     );
 
+    /**
+     * Constructor
+     * 
+     * @param array $options
+     */
     public function __construct(array $options = array())
     {
         parent::__construct($options);
