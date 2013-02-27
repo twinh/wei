@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input value is valid by all of the rules
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\Is $is The validator manager
  */
