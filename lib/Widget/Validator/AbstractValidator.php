@@ -118,13 +118,21 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
     /**
      * Set property value
      * 
-     * @param string $name The name of property
+     * @param string|array $name The name of property
      * @param mixed $value The value of property
      * @return \Widget\Validator\AbstractValidator
      * @internal This method should be use to set __invoke arguments only
      */
     protected function setOption($name, $value)
     {
+        // hanlde array
+        if (is_array($name)) {
+            foreach ($name as $key => $value) {
+                $this->setOption($key, $value);
+            }
+            return $this;
+        }
+        
         if (property_exists($this, $name)) {
             if (!array_key_exists($name, $this->backup)) {
                 $this->backup[$name] = $this->$name;
