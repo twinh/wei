@@ -63,12 +63,28 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
     protected $opposite = false;
     
     /**
+     * The array constains the validator original property values
+     * 
+     * @var array
+     * @internal
+     */
+    protected $backup = array();
+    
+    /**
+     * The array to store previous and current called parameters from __invoke
+     * 
+     * @var array
+     * @internal 
+     */
+    protected $store = array(array());
+    
+    /**
      * Whether the translation widget has loaded the validator messages
      * 
      * @var bool
      */
     protected static $translationMessagesLoaded;
-    
+     
     public function __invoke($input)
     {
         return $this->isValid($input);
@@ -79,8 +95,8 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
      */
     public function isValid($input)
     {
-        // Rest error definition
-        $this->errors = array();
+        // Clean previous status
+        $this->reset();
          
         return $this->opposite xor $this->validate($input);
     }
@@ -92,6 +108,49 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
      * @return boolean
      */
     abstract protected function validate($input);
+    
+    /**
+     * Set property value
+     * 
+     * @param string $name The name of property
+     * @param mixed $value The value of property
+     * @return \Widget\Validator\AbstractValidator
+     * @internal This method should be use to set __invoke arguments only
+     */
+    protected function setOption($name, $value)
+    {
+        if (property_exists($this, $name)) {
+            if (!array_key_exists($name, $this->backup)) {
+                $this->backup[$name] = $this->$name;
+            }
+            $this->store[count($this->store) - 1][$name] = $value;
+        }
+        
+        $this->option($name, $value);
+        
+        return $this;
+    }
+
+    /**
+     * Reset validator status
+     * 
+     * @internal
+     */
+    protected function reset()
+    {
+        $this->errors = array();
+
+        if (count($this->store) >= 2) {
+            $last = end($this->store);
+            foreach ($this->backup as $name => $value) {
+                if (!array_key_exists($name, $last)) {
+                    $this->$name = $value;
+                }
+            }
+            array_shift($this->store);
+        }
+        $this->store[] = array();
+    }
     
     /**
      * {@inheritdoc}
