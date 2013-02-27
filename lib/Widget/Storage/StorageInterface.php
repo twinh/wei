@@ -9,92 +9,92 @@
 namespace Widget\Storage;
 
 /**
- * The base storage interface for caching widget
+ * The base storage interface
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 interface StorageInterface
 {
     /**
-     * Get or set cache
+     * Get or store an item
      *
-     * @param  string      $key    The name of cache
-     * @param  mixed       $value  The value of cache
-     * @param  int         $expire The expire time for set cache
+     * @param  string      $key    The name of item
+     * @param  mixed       $value  The value of item
+     * @param  int         $expire The expire seconds, 0 means never expired
      * @return mixed
      */
     public function __invoke($key, $value = null, $expire = 0);
 
     /**
-     * Get cache
+     * Get an item
      *
-     * @param  string      $key The name of cache
-     * @param  mixed       $options
-     * @return mixed|false
+     * @param  string      $key The name of item
+     * @param  bool        $success
+     * @return mixed
      */
-    public function get($key, $options = null);
+    public function get($key, &$success = null);
 
     /**
-     * Set cache
+     * Store an item
      *
-     * @param  string $key    The name of cache
-     * @param  value  $value  The value of cache
-     * @param  int    $expire The expire time, 0 means never expired
+     * @param  string $key    The name of item
+     * @param  value  $value  The value of item
+     * @param  int    $expire The expire seconds, 0 means never expired
      * @param  array  $options
      * @return bool
      */
     public function set($key, $value, $expire = 0, array $options = array());
 
     /**
-     * Remove cache by key
+     * Remove an item
      *
-     * @param  string $key the name of cache
+     * @param  string $key The name of item
      * @return bool
      */
     public function remove($key);
 
     /**
-     * Add cache, if cache is exists, return false
+     * Add an item
      *
-     * @param  string $key    The name of cache
-     * @param  mixed  $value  The value of cache
-     * @param  int    $expire The expire time (seconds)
-     * @param array $options
+     * @param  string $key    The name of item
+     * @param  mixed  $value  The value of item
+     * @param  int    $expire The expire seconds, 0 means never expired
+     * @param  array  $options
      * @return bool
      */
     public function add($key, $value, $expire = 0, array $options = array());
 
     /**
-     * Replace cache, if cache not exists, return false
+     * Replace an existing item
      *
-     * @param  string $key    The name of cache
-     * @param  mixed  $value  The value of cache
-     * @param  int    $expire The expire time
-     * @param array $options
+     * @param  string $key    The name of item
+     * @param  mixed  $value  The value of item
+     * @param  int    $expire The expire seconds, 0 means never expired
+     * @param  array  $options
      * @return bool
      */
     public function replace($key, $value, $expire = 0, array $options = array());
 
     /**
-     * Increase a numerical cache
+     * Increment an item
      *
-     * @param  string    $key    The name of cache
-     * @param  int       $offset The value to decrease
-     * @return int|false
+     * @param  string    $key    The name of item
+     * @param  int       $offset The value to increased
+     * @return int|false Returns the new value on success, or false on failure
      */
     public function increment($key, $step = 1);
 
     /**
-     * Decrease a numerical cache
+     * Decrement an item
      *
-     * @param  string    $key    The name of cache
-     * @param  int       $offset The value to decrease
-     * @return int|false
+     * @param  string    $key    The name of item
+     * @param  int       $offset The value to be decreased
+     * @return int|false Returns the new value on success, or false on failure
      */
     public function decrement($key, $step = 1);
 
     /**
-     * Clear all cache
+     * Clear all items
      *
      * @return boolean
      */
