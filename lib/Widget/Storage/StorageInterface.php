@@ -29,6 +29,7 @@ interface StorageInterface
      * Get cache
      *
      * @param  string      $key The name of cache
+     * @param  mixed       $options
      * @return mixed|false
      */
     public function get($key, $options = null);
@@ -39,7 +40,7 @@ interface StorageInterface
      * @param  string $key    The name of cache
      * @param  value  $value  The value of cache
      * @param  int    $expire The expire time, 0 means never expired
-     * @param array $options
+     * @param  array  $options
      * @return bool
      */
     public function set($key, $value, $expire = 0, array $options = array());
