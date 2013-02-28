@@ -16,5 +16,9 @@ namespace Widget\Validator;
  */
 class PlateNumberCn extends Regex
 {
+    protected $patternMessage = '%name% must be valid Chinese plate number';
+    
+    protected $notMessage = '%name% must not be valid Chinese plate number';
+    
     protected $pattern = '/^[京津冀晋蒙辽吉黑沪苏浙皖闽赣鲁豫鄂湘粤桂琼渝川贵云藏陕甘青宁新军海空北沈兰济南广成][A-Z]{1}[A-Z0-9]{5}$/ui';
 }
