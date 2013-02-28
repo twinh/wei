@@ -9,7 +9,7 @@
 namespace Widget\Validator;
 
 /**
- * Check if the input value is a valid time
+ * Check if the input is a valid time
  * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */

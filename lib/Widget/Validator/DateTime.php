@@ -11,7 +11,7 @@ namespace Widget\Validator;
 use DateTime as Dt;
 
 /**
- * Check if the input value is a valid datetime
+ * Check if the input is a valid datetime
  * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */

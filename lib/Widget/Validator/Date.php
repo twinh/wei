@@ -9,7 +9,7 @@
 namespace Widget\Validator;
 
 /**
- * Check if the input value is a valid date
+ * Check if the input is a valid date
  * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */

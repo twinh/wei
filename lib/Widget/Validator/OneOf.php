@@ -9,7 +9,7 @@
 namespace Widget\Validator;
 
 /**
- * Check if the input value is valid by any of the rules
+ * Check if the input is valid by any of the rules
  * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */

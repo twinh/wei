@@ -9,7 +9,7 @@
 namespace Widget\Validator;
 
 /**
- * Check if the input value is valid Chinese identity card
+ * Check if the input is valid Chinese identity card
  * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */

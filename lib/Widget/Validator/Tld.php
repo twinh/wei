@@ -9,7 +9,7 @@
 namespace Widget\Validator;
 
 /**
- * Check if the input value is a valid top-level domain
+ * Check if the input is a valid top-level domain
  * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */

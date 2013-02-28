@@ -9,7 +9,7 @@
 namespace Widget\Validator;
 
 /**
- * Check if the input value is valid Hong Kong identity card
+ * Check if the input is valid Hong Kong identity card
  * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */

@@ -9,7 +9,7 @@
 namespace Widget\Validator;
 
 /**
- * Check if the input value is valid by specified regular expression
+ * Check if the input is valid by specified regular expression
  * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */

@@ -13,7 +13,7 @@ abstract class AbstractLengthValidator extends AbstractValidator
     protected $notDetectdMessage = '%name%\'s length could not be detected';
     
     /**
-     * Return the input value's length or false when could not detected
+     * Return the input's length or false when could not detected
      * 
      * @param string|array|\Countable $input
      * @return int|false

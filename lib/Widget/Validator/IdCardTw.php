@@ -9,7 +9,7 @@
 namespace Widget\Validator;
 
 /**
- * Check if the input value is valid Taiwan identity card
+ * Check if the input is valid Taiwan identity card
  * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */

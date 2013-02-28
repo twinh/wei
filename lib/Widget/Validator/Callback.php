@@ -18,7 +18,7 @@ class Callback extends AbstractValidator
     protected $invalidMessage = '%name% is not valid';
     
     /**
-     * The callback to validate the input value
+     * The callback to validate the input
      * 
      * @var callback
      */
@@ -28,7 +28,7 @@ class Callback extends AbstractValidator
      * Invoker
      * 
      * @param mixed $input The input value
-     * @param \Closure|null $fn  The callback to validate the input value
+     * @param \Closure|null $fn  The callback to validate the input
      * @param string|null $message The custom invalid message
      * @return bool
      */
