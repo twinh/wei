@@ -9,3 +9,7 @@ Testing
 To run the tests:
 
     $ phpunit
+
+License
+-------
+Widget is an open-source project released Apache 2.0 license.
