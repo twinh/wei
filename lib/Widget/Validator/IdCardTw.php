@@ -63,27 +63,5 @@ class IdCardTw extends AbstractValidator
         }
         
         return true;
-        
-        
-        // c1 = ord(c1) - 64 => A=1, B=2, ... , Z=26
-        // sum = c1*8 + c2*7 + ... + c6*3 + c5*2
-        $sum = ($first - 64) * 8;
-        for ($i = 1, $j = 7; $i < 7; $i++, $j--) {
-            $sum += $input[$i] * $j;
-        }
-
-        $checksum = $sum % 11;
-        if ($checksum == 1) {
-            $checksum = 'A';
-        } elseif ($checksum > 1) {
-            $checksum = 11 - $checksum;
-        }
-        
-        if ($checksum != $input[7]) {
-            $this->addError('invalid');
-            return false;
-        }
-        
-        return true;
     }
 }
