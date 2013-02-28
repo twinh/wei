@@ -7,7 +7,7 @@ Add or update your `composer.json` and run `php composer.phar install` to instal
 ```javascript
 {
     "require": {
-        "twinh/widget": "*"
+        "twinh/widget": "dev-master"
     }
 }
 ```
