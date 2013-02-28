@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input contains only letters
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Alpha extends Regex

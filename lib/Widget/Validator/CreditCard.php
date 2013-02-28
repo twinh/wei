@@ -11,6 +11,11 @@ namespace Widget\Validator;
 use Widget\Exception\UnexpectedTypeException;
 
 /**
+ * Check if the input is valid credit card number
+ * 
+ * The type of credit card could be American Express, Diners Club, Discover, 
+ * JCB, MasterCard, China UnionPay or Visa
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class CreditCard extends AbstractValidator

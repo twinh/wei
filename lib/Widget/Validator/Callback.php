@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input is valid by specified callback
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Callback extends AbstractValidator

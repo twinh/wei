@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input contains letters and digits
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Alnum extends Regex
