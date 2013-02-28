@@ -123,7 +123,7 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
      * @return \Widget\Validator\AbstractValidator
      * @internal This method should be use to set __invoke arguments only
      */
-    protected function setOption($name, $value)
+    protected function setOption($name, $value = null)
     {
         // hanlde array
         if (is_array($name)) {
