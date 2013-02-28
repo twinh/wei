@@ -29,7 +29,6 @@ class IdCardTw extends AbstractValidator
             return false;
         }
         
-        
         if (10 != strlen($input)) {
             $this->addError('invalid');
             return false;
@@ -49,7 +48,6 @@ class IdCardTw extends AbstractValidator
             $this->addError('invalid');
             return false;
         }
-        
         
         list($x1, $x2) = str_split((string)($first - 55));
         $sum = $x1 + 9 * $x2;
