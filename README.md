@@ -3,7 +3,7 @@ Widget is a micro-framework that provide a new way to write PHP for faster and e
 
 Installation - Composer
 -----------------------
-Add or update your `composer.json` and run `php composer.phar install` to install
+Define the following requirement in your `composer.json` file and run `php composer.phar install` to install
 ```javascript
 {
     "require": {
