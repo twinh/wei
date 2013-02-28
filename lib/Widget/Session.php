@@ -119,25 +119,24 @@ class Session extends Parameter
     /**
      * Set a session value in current namespace
      *
-     * @param  string       $offset
+     * @param  string       $name
      * @param  mixed        $value
      * @return mixed
      */
-    public function set($offset, $value)
+    public function set($name, $value)
     {
-        return $this->offsetSet($offset, $value);
+        return $this->offsetSet($name, $value);
     }
 
     /**
      * Get a session from current namespace
      *
      * @param  string $name
-     * @param string $offset
      * @return mixed
      */
-    public function get($offset)
+    public function get($name)
     {
-        return $this->offsetGet($offset);
+        return $this->offsetGet($name);
     }
 
     /**
