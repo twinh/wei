@@ -9,7 +9,7 @@
 namespace Widget\Exception;
 
 /**
- * The exception thrown when file or stream operation fail
+ * Exception thrown if file or stream operation fail
  * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
