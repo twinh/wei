@@ -1,7 +1,5 @@
-Widget
-======
-
-[![Build Status](https://travis-ci.org/twinh/widget.png?branch=master)](https://travis-ci.org/twinh/widget)
+#Widget v0.9.1-alpha [![Build Status](https://travis-ci.org/twinh/widget.png?branch=master)](https://travis-ci.org/twinh/widget)
+Widget is a micro-framework that provide a new way to write PHP for faster and easier web development.
 
 Installation - Composer
 -----------------------
