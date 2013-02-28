@@ -9,7 +9,7 @@
 namespace Widget\Validator;
 
 /**
- * Check if the input contains letters and digits
+ * Check if the input contains letters (a-z) and digits (0-9)
  * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */

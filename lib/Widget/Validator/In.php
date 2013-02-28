@@ -11,6 +11,8 @@ namespace Widget\Validator;
 use Widget\Exception\UnexpectedTypeException;
 
 /**
+ * Check if the input is in specified array
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class In extends AbstractValidator

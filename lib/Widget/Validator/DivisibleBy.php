@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input could be divisible by specified divisor
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class DivisibleBy extends AbstractValidator

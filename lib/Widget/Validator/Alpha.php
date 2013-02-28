@@ -9,7 +9,7 @@
 namespace Widget\Validator;
 
 /**
- * Check if the input contains only letters
+ * Check if the input contains only letters (a-z)
  * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */

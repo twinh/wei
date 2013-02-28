@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input is equals to specified value
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Equals extends AbstractValidator

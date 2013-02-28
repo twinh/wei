@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input is provided
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Required extends AbstractValidator

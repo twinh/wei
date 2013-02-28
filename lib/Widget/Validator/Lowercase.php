@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input is lowsercase
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Lowercase extends AbstractValidator

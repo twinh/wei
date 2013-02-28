@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input is starts with specified string
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class StartsWith extends AbstractValidator

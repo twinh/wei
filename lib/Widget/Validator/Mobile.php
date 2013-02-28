@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input is valid Chinese mobile number
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Mobile extends Regex

@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input is greater or equal than specified value
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Min extends AbstractValidator

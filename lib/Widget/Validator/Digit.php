@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input contains only digits (0-9)
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Digit extends Regex

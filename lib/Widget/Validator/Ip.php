@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input is valid IP address
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  * @link http://php.net/manual/en/filter.filters.flags.php
  */

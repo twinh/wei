@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input contains only double characters
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class DoubleByte extends Regex

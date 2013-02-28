@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input is decimal
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Decimal extends AbstractValidator

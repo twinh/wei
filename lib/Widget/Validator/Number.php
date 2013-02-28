@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input is number
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Number extends AbstractValidator

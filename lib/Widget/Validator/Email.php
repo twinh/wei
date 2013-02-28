@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input is valid email address
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Email extends AbstractValidator

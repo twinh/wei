@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input is empty
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class EmptyValue extends AbstractValidator

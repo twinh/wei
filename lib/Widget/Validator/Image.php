@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input is valid image
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Image extends File

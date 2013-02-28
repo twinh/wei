@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input is uppercase
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Uppercase extends AbstractValidator

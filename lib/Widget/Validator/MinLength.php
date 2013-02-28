@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the length (or size) of input is greater than specified length
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class MinLength extends AbstractLengthValidator

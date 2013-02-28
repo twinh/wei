@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input is valid UUID(v4)
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Uuid extends Regex

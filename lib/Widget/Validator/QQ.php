@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input is valid QQ number
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class QQ extends Regex

@@ -12,6 +12,8 @@ use Widget\Exception\UnexpectedTypeException;
 use Widget\Exception\UnexpectedValueException;
 
 /**
+ * Check if the input is valid file
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class File extends AbstractValidator

@@ -9,6 +9,8 @@
 namespace Widget\Validator;
 
 /**
+ * Check if the input is null
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Null extends AbstractValidator
