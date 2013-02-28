@@ -7,7 +7,7 @@ Define the following requirement in your `composer.json` file and run `php compo
 ```javascript
 {
     "require": {
-        "twinh/widget": "dev-master"
+        "widget/widget": "dev-master"
     }
 }
 ```
