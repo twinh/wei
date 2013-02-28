@@ -167,6 +167,9 @@ return array(
     '%name% must be valid phone number' => '%name%必须是有效的电话号码',
     '%name% must not be phone number' => '%name%不能是电话号码',
     
+    '%name% must be valid Chinese plate number' => '%name%必须是正确的车牌格式',
+    '%name% must not be valid Chinese plate number' => '%name%不能是正确的车牌格式',
+    
     // postcode
     '%name% must be six length of digit' => '%name%必须是6位长度的数字',
     '%name% must not be postcode' => '%name%必须是6位长度的数字',
