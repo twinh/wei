@@ -20,6 +20,12 @@ require 'path/to/widget/lib/Widget/Widget.php';
 
 // Creates the default widget manager instance
 $widget = Widget\Widget::create();
+
+// Initialize the "request" widget
+$request = $widget->request;
+
+// Invoke the "request" widget
+$id = $widget->request('id');
 ```
 
 Testing
