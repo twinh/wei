@@ -86,7 +86,7 @@ class Widget extends AbstractWidget
     /**
      * The import configuration
      * 
-     * format:
+     * Format:
      * array(
      *     array(
      *         'dir' => 'lib/Widget/Validator'
@@ -246,7 +246,7 @@ class Widget extends AbstractWidget
             return $this->config;
         }
 
-        // get or set one configuration
+        // Get or set one configuration
         if (is_string($name) || is_int($name)) {
             $temp = &$this->config;
             if (false !== strpos($name, '/')) {
@@ -272,12 +272,12 @@ class Widget extends AbstractWidget
             return isset($temp[$name]) ? $temp[$name] : null;
         }
 
-        // set global configurations
+        // Set global configurations
         if (is_array($name)) {
             return $this->config = $name;
         }
 
-        // not match any actions
+        // Do NOT match any actions
         return null;
     }
 
