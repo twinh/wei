@@ -69,6 +69,11 @@ abstract class AbstractWidget implements WidgetInterface
             return $this;
         }
         
+        // Append option
+        if (isset($name[0]) && '+' == $name[0]) {
+            return $this->appendOption(substr($name, 1), $value);
+        }
+        
         if (method_exists($this, $method = 'set' . $name)) {
             return $this->$method($value);
         } else {
@@ -91,6 +96,17 @@ abstract class AbstractWidget implements WidgetInterface
         } else {
             return isset($this->$name) ? $this->$name : null;
         }
+    }
+    
+    /**
+     * Append property value
+     * 
+     * @param string $name
+     * @param array $value
+     */
+    public function appendOption($name, array $value) 
+    {
+        $this->$name = (array)$this->$name + $value;
     }
 
     /**
