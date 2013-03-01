@@ -1,14 +1,13 @@
 <?php
-use Widget\Widget;
 
-// Display all error message
-error_reporting(-1);
+use Widget\Widget;
 
 require dirname(__DIR__) . '/lib/Widget/Widget.php';
 
 return Widget::create(array(
     'widget' => array(
         'inis' => array(
+            // Display all error message
             'error_reporting' => -1,
         ),
         // Set up autoload for WidgetTest namespace
@@ -19,7 +18,7 @@ return Widget::create(array(
             'isEmpty' => '\Widget\Validator\EmptyValue'
         ),    
         'import' => array(
-            // Import is widgets
+            // Import validator widgets
             array(
                 'dir' => dirname(__DIR__) . '/lib/Widget/Validator',
                 'namespace' => 'Widget\Validator',
