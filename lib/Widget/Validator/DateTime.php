@@ -22,7 +22,7 @@ class DateTime extends AbstractValidator
      * 
      * @var string 
      */
-    protected $formatMessage = '%name% must be a valid datetime, the format should be "%format%", eg: %example%';
+    protected $formatMessage = '%name% must be a valid datetime, the format should be "%format%", e.g. %example%';
     
     /**
      * The error message for "before" property

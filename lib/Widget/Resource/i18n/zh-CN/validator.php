@@ -40,11 +40,11 @@ return array(
     '%name% must not be valid credit card number' => '%name%必须是有效的信用卡号',
     
     // date
-    '%name% must be a valid date, the format should be "%format%", eg: %example%' => '%name%不是合法的日期,格式应该是%format%,例如:%example%',
+    '%name% must be a valid date, the format should be "%format%", e.g. %example%' => '%name%不是合法的日期,格式应该是%format%,例如:%example%',
     '%name% must not be a valid date' => '%name%不能是合法的日期',
     
     // dateTime
-    '%name% must be a valid datetime, the format should be "%format%", eg: %example%'  => '%name%不是合法的日期时间,格式应该是%format%,例如:%example%',
+    '%name% must be a valid datetime, the format should be "%format%", e.g. %example%'  => '%name%不是合法的日期时间,格式应该是%format%,例如:%example%',
     '%name% must be earlier than %before%' => '%name%必须早于%before%',
     '%name% must be later than %after%' => '%name%必须晚于%after%',
     '%name% must not be a valid datetime' => '%name%不能是合法的日期时间',
@@ -197,7 +197,7 @@ return array(
     '%name% must not start with "%findMe%"' => '%name%不能以%findMe%开头',
     
     // time
-    '%name% must be a valid time, the format should be "%format%", eg: %example%' => '%name%不是合法的时间,格式应该是%format%,例如:%example%',
+    '%name% must be a valid time, the format should be "%format%", e.g. %example%' => '%name%不是合法的时间,格式应该是%format%,例如:%example%',
     '%name% must not be a valid time' => '%name%不能是合法的时间',
     
     // tld
