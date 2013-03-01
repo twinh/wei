@@ -15,10 +15,9 @@ return Widget::create(array(
         'autoloadMap' => array(
             'WidgetTest' => __DIR__
         ),
-        // FIXME The order of options
         'alias' => array(
             'isEmpty' => '\Widget\Validator\EmptyValue'
-        ),
+        ),    
         'import' => array(
             // Import is widgets
             array(

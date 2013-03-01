@@ -120,19 +120,19 @@ class Widget extends AbstractWidget
      */
     public function __construct(array $config = array())
     {
-        // set configurations for all widget
+        // Set configurations for all widget
         $this->config = $config;
 
         $this->widget = $this;
 
-        // set all options
+        // Set all options
         $options = get_object_vars($this);
         if (isset($this->config['widget'])) {
-            $options = $this->config['widget'] + $options;
+            $options = array_merge($options, $this->config['widget']);
         }
         $this->setOption($options);
 
-        // instance initial widgets
+        // Instance initial widgets
         foreach ((array)$this->initWidgets as $widgetName) {
             $this->get($widgetName);
         }
