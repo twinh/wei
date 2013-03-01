@@ -33,10 +33,10 @@ class In extends AbstractValidator
             } elseif (!is_array($array)) {
                 throw new UnexpectedTypeException($input, 'array or \ArrayObject');
             }
-            $this->setOption('array', $array);
+            $this->storeOption('array', $array);
         }
         
-        is_bool($strict) && $this->setOption('strict', $strict);
+        is_bool($strict) && $this->storeOption('strict', $strict);
         
         return $this->isValid($input);
     }

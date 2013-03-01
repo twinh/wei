@@ -106,7 +106,7 @@ class EventManager extends AbstractWidget
             }
         }
 
-        if ($widget && $selfEvent = $widget->option($type)) {
+        if ($widget && $selfEvent = $widget->getOption($type)) {
             if (is_callable($selfEvent)) {
                 if (false === ($result = call_user_func_array($selfEvent, $args))) {
                     $event->preventDefault();
@@ -241,7 +241,7 @@ class EventManager extends AbstractWidget
         }
 
         // Attach the widget manager's construct and constructed event
-        $this->widget->option(array(
+        $this->widget->setOption(array(
             'construct' => function ($name, $full) use($that) {
                 $that('construct.' . $name, array($name, $full));
             },

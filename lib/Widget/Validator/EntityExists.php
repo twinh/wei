@@ -28,7 +28,7 @@ class EntityExists extends AbstractValidator
     
     public function __invoke($input, $entityClass = null)
     {
-        $entityClass && $this->setOption('entityClass', $entityClass);
+        $entityClass && $this->storeOption('entityClass', $entityClass);
         
         return $this->isValid($input);
     }

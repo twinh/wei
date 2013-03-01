@@ -38,7 +38,7 @@ class Download extends AbstractWidget
      */
     public function __invoke($file, array $options = array())
     {
-        $this->option($options);
+        $this->setOption($options);
 
         $header = $this->header;
 

@@ -32,9 +32,9 @@ class Apc extends AbstractStorage
     /**
      * {@inheritdoc}
      */
-    public function get($key, $options = null)
+    public function get($key, &$success = null)
     {
-        return apc_fetch($key, $options);
+        return apc_fetch($key, $success);
     }
 
     /**

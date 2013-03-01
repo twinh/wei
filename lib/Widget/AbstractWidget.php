@@ -43,7 +43,7 @@ abstract class AbstractWidget implements WidgetInterface
      */
     public function __construct(array $options = array())
     {
-        $this->option($options);
+        $this->setOption($options);
 
         if (!isset($this->widget)) {
             $this->widget = Widget::create();
@@ -51,23 +51,12 @@ abstract class AbstractWidget implements WidgetInterface
             throw new \InvalidArgumentException(sprintf('Option "widget" of class "%s" should be an instance of "WidgetInterface"', get_class($this)));
         }
     }
-
+    
     /**
-     * Get or set property value
-     * 
-     * <code>
-     * $widget->option('name');            // Returns the value of property "name" 
-     * $widget->option('name', 'value');   // Sets property "name" to "value"
-     * $widget->option();                  // Returns all properties as array
-     * $widget->option(array());           // Sets options
-     * </code>
-     *
-     * @param  mixed $name  The option name or options array
-     * @param  mixed $value
-     * @return mixed
+     * {@inheritdoc}
      * @todo append
      */
-    public function option($name = null, $value = null)
+    public function setOption($name, $value = null)
     {
         // Set options
         if (is_array($name)) {
@@ -75,38 +64,33 @@ abstract class AbstractWidget implements WidgetInterface
                 $name += array_intersect_key(get_object_vars($this), array_flip($value));
             }
             foreach ($name as $k => $v) {
-                $this->option($k, $v);
+                $this->setOption($k, $v);
             }
             return $this;
         }
-
-        if (is_scalar($name)) {
-            // Get option
-            if (1 == func_num_args()) {
-                if (method_exists($this, $method = 'get' . $name)) {
-                    return $this->$method();
-                } else {
-                    return isset($this->$name) ? $this->$name : null;
-                }
-            // Set option
-            } else {
-                if (method_exists($this, $method = 'set' . $name)) {
-                    return $this->$method($value);
-                } else {
-                    return $this->$name = $value;
-                }
-            }
+        
+        if (method_exists($this, $method = 'set' . $name)) {
+            return $this->$method($value);
+        } else {
+            return $this->$name = $value;
         }
-
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getOption($name = null)
+    {
         // Returns all property options
         if (null === $name) {
             return get_object_vars($this);
         }
-
-        throw new \InvalidArgumentException(sprintf(
-            'Parameter 1 for option method should be string, array or null, %s given',
-            (is_object($name) ? get_class($name) : gettype($name))
-        ));
+        
+        if (method_exists($this, $method = 'get' . $name)) {
+            return $this->$method();
+        } else {
+            return isset($this->$name) ? $this->$name : null;
+        }
     }
 
     /**

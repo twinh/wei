@@ -142,7 +142,7 @@ class File extends AbstractValidator
      */
     public function __invoke($input, $options = array())
     {
-        $options && $this->setOption($options);
+        $options && $this->storeOption($options);
         
         return $this->isValid($input);
     }

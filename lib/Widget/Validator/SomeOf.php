@@ -38,8 +38,8 @@ class SomeOf extends AbstractGroupValidator
     
     public function __invoke($input, array $rules = array(), $atLeast = null)
     {
-        $atLeast && $this->setOption('atLeast', $atLeast);
-        $rules && $this->setOption('rules', $rules);
+        $atLeast && $this->storeOption('atLeast', $atLeast);
+        $rules && $this->storeOption('rules', $rules);
         
         return $this->isValid($input);
     }

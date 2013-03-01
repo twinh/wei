@@ -57,7 +57,7 @@ class Redirect extends Response
      */
     public function __invoke($url, $status = 302, array $options = array())
     {
-        $options = $this->option($options);
+        $options = $this->setOption($options);
 
         // use custom view file for redirect
         if ($options['view']) {

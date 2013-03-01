@@ -152,7 +152,7 @@ class Upload extends AbstractWidget
      */
     public function __invoke(array $options = array())
     {
-        $this->option($options);
+        $this->setOption($options);
 
         $files = $this->getFiles();
 

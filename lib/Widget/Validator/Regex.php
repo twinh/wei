@@ -35,7 +35,7 @@ class Regex extends AbstractValidator
      */
     public function __invoke($input, $pattern = null)
     {
-        is_string($pattern) && $this->setOption('pattern', $pattern);
+        is_string($pattern) && $this->storeOption('pattern', $pattern);
         
         return $this->isValid($input);
     }

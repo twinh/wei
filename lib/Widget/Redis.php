@@ -59,7 +59,7 @@ class Redis extends AbstractStorage
      */
     public function __construct(array $options = array())
     {
-        $this->option($options, array('object'));
+        $this->setOption($options, array('object'));
 
         parent::__construct();
 

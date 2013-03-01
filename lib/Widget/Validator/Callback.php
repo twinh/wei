@@ -34,8 +34,8 @@ class Callback extends AbstractValidator
      */
     public function __invoke($input, \Closure $fn = null, $message = null)
     {
-        $fn && $this->setOption('fn', $fn);
-        $message && $this->setOption('message', $message);
+        $fn && $this->storeOption('fn', $fn);
+        $message && $this->storeOption('message', $message);
 
         return $this->isValid($input);
     }

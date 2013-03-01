@@ -8,6 +8,8 @@
 
 namespace Widget\Storage;
 
+use Widget\AbstractWidget;
+
 /**
  * A simple implementation of \Widget\Storage\StorageInterface
  *

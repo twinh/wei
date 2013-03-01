@@ -130,7 +130,7 @@ class Widget extends AbstractWidget
         if (isset($this->config['widget'])) {
             $options = $this->config['widget'] + $options;
         }
-        $this->option($options);
+        $this->setOption($options);
 
         // instance initial widgets
         foreach ((array)$this->initWidgets as $widgetName) {
@@ -262,7 +262,7 @@ class Widget extends AbstractWidget
 
             if (2 == func_num_args()) {
                 if (isset($this->widgets[$name])) {
-                    $this->widgets[$name]->option(func_get_arg(1));
+                    $this->widgets[$name]->setOption(func_get_arg(1), $value);
                 } else {
                     $temp[$name] = func_get_arg(1);
                 }

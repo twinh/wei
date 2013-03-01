@@ -25,8 +25,8 @@ class StartsWith extends AbstractValidator
     
     public function __invoke($input, $findMe = null, $case = null)
     {
-        $findMe && $this->setOption('findMe', $findMe);
-        is_bool($case) && $this->setOption('case', $case);
+        $findMe && $this->storeOption('findMe', $findMe);
+        is_bool($case) && $this->storeOption('case', $case);
         
         return $this->isValid($input);
     }

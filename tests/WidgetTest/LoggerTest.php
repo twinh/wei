@@ -8,7 +8,7 @@ class LoggerTest extends TestCase
     {
         $this->object->clean();
         
-        $dir = $this->object->option('dir');
+        $dir = $this->object->getOption('dir');
         if (is_dir($dir)) {
             rmdir($dir);
         }
@@ -68,7 +68,7 @@ class LoggerTest extends TestCase
         
         $file = $logger->getFile();
         
-        foreach ($logger->option('levels') as $level => $p) {
+        foreach ($logger->getOption('levels') as $level => $p) {
             $uid = uniqid();
             $logger->$level($uid);
             $this->assertContains($uid, file_get_contents($file));

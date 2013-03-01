@@ -123,12 +123,12 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
      * @return \Widget\Validator\AbstractValidator
      * @internal This method should be use to set __invoke arguments only
      */
-    protected function setOption($name, $value = null)
+    protected function storeOption($name, $value = null)
     {
         // hanlde array
         if (is_array($name)) {
             foreach ($name as $key => $value) {
-                $this->setOption($key, $value);
+                $this->storeOption($key, $value);
             }
             return $this;
         }
@@ -140,7 +140,7 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
             $this->store[count($this->store) - 1][$name] = $value;
         }
         
-        $this->option($name, $value);
+        $this->setOption($name, $value);
         
         return $this;
     }

@@ -52,7 +52,7 @@ class Memcache extends AbstractStorage
      */
     public function __construct(array $options = array())
     {
-        $this->option($options, array('object', 'servers'));
+        $this->setOption($options, array('object', 'servers'));
 
         parent::__construct();
     }

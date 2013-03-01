@@ -26,7 +26,7 @@ class NoneOf extends AbstractGroupValidator
     
     public function __invoke($input, array $rules = array())
     {
-        $rules && $this->setOption('rules', $rules);
+        $rules && $this->storeOption('rules', $rules);
         
         return $this->isValid($input);
     }

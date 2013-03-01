@@ -25,7 +25,7 @@ class Type extends AbstractValidator
     
     public function __invoke($input, $type = null)
     {
-        $type && $this->setOption('type', $type);
+        $type && $this->storeOption('type', $type);
         
         return $this->isValid($input);
     }

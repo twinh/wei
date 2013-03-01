@@ -75,13 +75,13 @@ class Widget implements WidgetInterface
      */
     public function __invoke(array $options = array())
     {
-        $this->option($options);
+        $this->setOption($options);
 
         $content = '';
 
         // Generate the custom widgets
         if ($this->withAlias) {
-            foreach ($this->widget->option('alias') as $widget => $class) {
+            foreach ($this->widget->getOption('alias') as $widget => $class) {
                 if ($this->isExcludeWidget($widget)) {
                     continue;
                 }

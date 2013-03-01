@@ -50,7 +50,7 @@ class DateTime extends AbstractValidator
     
     public function __invoke($input, $format = null)
     {
-        $format && $this->setOption('format', $format);
+        $format && $this->storeOption('format', $format);
         
         return $this->isValid($input);
     }

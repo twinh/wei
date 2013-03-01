@@ -60,7 +60,7 @@ class Is extends AbstractWidget
             array_unshift($options, $data);
             $result = call_user_func_array($validator, $options);
         } else {
-            $validator->option($options);
+            $validator->setOption($options);
             $result = $validator($data);
         }
 

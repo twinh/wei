@@ -33,12 +33,19 @@ interface WidgetInterface
     public function __call($name, $args);
     
     /**
-     * Get or set property value
+     * Set option property value
      * 
      * @param string|array $name
-     * @param string|array $value
+     * @param mixed $value
      */
-    public function option($name = null, $value = null);
+    public function setOption($name, $value = null);
+    
+    /**
+     * Returns option property value
+     * 
+     * @param string $name The name of property
+     */
+    public function getOption($name = null);
     
     /**
      * Invoke the current widget

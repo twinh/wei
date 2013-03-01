@@ -662,7 +662,7 @@ class ValidatorTest extends TestCase
             )
         ));
         
-        $this->assertEquals('custom format message', $validator->getRuleValidator('username', 'email')->option('formatMessage'));
+        $this->assertEquals('custom format message', $validator->getRuleValidator('username', 'email')->getOption('formatMessage'));
     }
     
     /**

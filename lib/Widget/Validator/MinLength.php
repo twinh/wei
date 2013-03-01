@@ -23,7 +23,7 @@ class MinLength extends AbstractLengthValidator
 
     public function __invoke($input, $min = null)
     {
-        $min && $this->setOption('min', $min);
+        $min && $this->storeOption('min', $min);
         
         return $this->isValid($input);
     }

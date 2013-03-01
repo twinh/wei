@@ -83,7 +83,7 @@ class App extends AbstractWidget
      */
     public function __invoke(array $options = array())
     {
-        $this->option($options);
+        $this->setOption($options);
 
         return $this->dispatch(
             $this->getModule(),

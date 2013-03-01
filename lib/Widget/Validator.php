@@ -151,7 +151,7 @@ class Validator extends AbstractValidator
      */
     public function __invoke($options = array())
     {
-        $this->option($options);
+        $this->setOption($options);
 
         if (empty($this->rules)) {
             throw new InvalidArgumentException('Validation rules should not be empty.');

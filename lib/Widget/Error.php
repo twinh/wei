@@ -120,7 +120,7 @@ class Error extends AbstractWidget
                 $trace = $this->getTraceString($traces);
             }
 
-            $this->option($options);
+            $this->setOption($options);
 
             $debug = $this->widget->config('debug');
 
