@@ -14,43 +14,58 @@ namespace Widget\Validator;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\EntityManager $entityManager The doctrine orm entity manager widget
  * @method \Doctrine\ORM\EntityManager entityManager() Returns the doctrine orm entity object
- * @todo        Adds property like dql, queryBuilder, etc
  */
 class EntityExists extends AbstractValidator
 {
     protected $notFoundMessage = '%name% not exists';
-    
+   
     protected $notMessage = '%name% already exists';
 
     protected $entityClass;
-    
+   
+    protected $field;
+   
     protected $entity;
-    
-    public function __invoke($input, $entityClass = null)
+   
+    protected $criteria;
+   
+    public function __invoke($input, $entityClass = null, $filed = null)
     {
         $entityClass && $this->storeOption('entityClass', $entityClass);
+        $filed && $this->storeOption('field', $filed);
         
         return $this->isValid($input);
     }
     
-    /**
-     * {@inheritdoc}
-     */
     protected function validate($input)
     {
-        $this->entity = $this->entityManager()->find($this->entityClass, $input);
-        
+        /* @var $em \Doctrine\ORM\EntityManager */
+        $em = $this->entityManager();
+
+        /* @var $repo \Doctrine\ORM\EntityRepository */
+        $repo = $em->getRepository($this->entityClass);
+
+        if ($this->field) {
+            $this->entity = $repo->findOneBy(array(
+                $this->field => $input
+            ));
+        } elseif ($this->criteria) {
+            $this->entity = $repo->findOneBy($this->criteria);
+        } else {
+            $this->entity = $repo->find((string)$input);
+        }
+       
         if (!$this->entity) {
             $this->addError('notFound');
             return false;
         }
-        
+       
         return true;
     }
-    
+   
     /**
      * Returns the entity object
-     * 
+     *
      * @return object
      */
     public function getEntity()
