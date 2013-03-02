@@ -82,7 +82,9 @@ if (!$widget->isAlnum($input)) {
 }
 ```
 
-可选参数
+详细参数
+
+isAlnum($input, $pattern = null)
 * pattern - 指定校验的正则表达式
 
 ### Alpha
@@ -96,7 +98,9 @@ if (!$widget->isAlpha($input)) {
 }
 ```
 
-可选参数
+详细参数
+
+isAlpha($input, $pattern = null)
 * pattern - 指定校验的正则表达式
 
 ### Blank
@@ -110,13 +114,14 @@ if (!$widget->isBlank($input)) {
 }
 ```
 
-可选参数
-* 无
+详细参数
+
+isBlank($input)
 
 ### Callback
 检查数据是否通过指定回调方法验证
 
-基本用法
+基本用法  
 ```php
 $input = 'abc';
 if (!$widget->isCallback($input, function($input){ 
@@ -126,7 +131,9 @@ if (!$widget->isCallback($input, function($input){
 }
 ```
 
-可选参数
+详细参数
+
+isCallback($input, \Closure $fn = null, $message = null)
 * $fn - 指定验证的回调结构
 * $message - 验证不通过时返回的信息
 
@@ -140,9 +147,10 @@ if (!$widget->isChinese($input)) {
     print_r($widget->isChinese->getMessages());
 }
 ```
-可选参数
 
-* 无
+详细参数
+
+isChinese($input)
 
 ### CreditCard
 检查数据是否为合法的信用卡号码
@@ -162,7 +170,10 @@ $widget->isCreditCard($input, 'UnionPay,Visa');
 // 第二个参数也可以是数组,每个元素表示一种类型
 $widget->isCreditCard($input, array('UnionPay', 'Visa'));
 ```
-可选参数
+
+详细参数
+
+isisCreditCard($input, $type = null)
 * type - 指定信用卡类型,多个使用`,`隔开,或是使用数组,留空表示允许任意信用卡号
 
 | **发卡机构**     | **中文名称** | **值**       |
@@ -186,7 +197,7 @@ if (!$widget->isDate($input) {
 }
 ```
 
-参数
+详细参数
 
 isDate($input, $format = 'Y-m-d');
 * $format - 指定日期格式
@@ -205,13 +216,28 @@ if (!$widget->isDateTime($input) {
 }
 ```
 
-参数
+详细参数
 
 isDateTime($input, $format = 'Y-m-d H:i:s');
 * $format - 指定日期格式
 
 对象属性
 * 同上
+
+### Decimal
+检查数据是否为小数
+
+基本用法
+```php
+$input = '0.0.1';
+if (!$widget->isDecimal($input)) {
+    print_r($widget->isDecimal->getMessages());
+}
+```
+
+详细参数
+
+* isDecimal($input)
 
 
 分组验证器
