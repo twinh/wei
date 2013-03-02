@@ -70,6 +70,7 @@
 
 其他
 * [Callback](#callback) - 检查数据是否通过指定回调方法验证
+* [DivisibleBy](#divisibleby) - 检查数据是否能被指定的除数整除
 
 ### Alnum 
 检查数据是否只由字母(a-z)和数字(0-9)组成
@@ -99,8 +100,9 @@ if (!$widget->isAlpha($input)) {
 ```
 
 详细参数
-
+```php
 isAlpha($input, $pattern = null)
+```
 * pattern - 指定校验的正则表达式
 
 ### Blank
@@ -115,8 +117,9 @@ if (!$widget->isBlank($input)) {
 ```
 
 详细参数
-
+```php
 isBlank($input)
+```
 
 ### Callback
 检查数据是否通过指定回调方法验证
@@ -132,8 +135,9 @@ if (!$widget->isCallback($input, function($input){
 ```
 
 详细参数
-
+```php
 isCallback($input, \Closure $fn = null, $message = null)
+```
 * $fn - 指定验证的回调结构
 * $message - 验证不通过时返回的信息
 
@@ -149,8 +153,9 @@ if (!$widget->isChinese($input)) {
 ```
 
 详细参数
-
+```php
 isChinese($input)
+```
 
 ### CreditCard
 检查数据是否为合法的信用卡号码
@@ -172,9 +177,12 @@ $widget->isCreditCard($input, array('UnionPay', 'Visa'));
 ```
 
 详细参数
-
+```php
 isisCreditCard($input, $type = null)
-* type - 指定信用卡类型,多个使用`,`隔开,或是使用数组,留空表示允许任意信用卡号
+```
+* type - 指定信用卡类型,多个使用`,`隔开,或是使用数组,留空表示允许任意信用卡号.
+
+下表为目前允许的信用卡类型
 
 | **发卡机构**     | **中文名称** | **值**       |
 |------------------|--------------|--------------|
@@ -198,8 +206,9 @@ if (!$widget->isDate($input) {
 ```
 
 详细参数
-
-isDate($input, $format = 'Y-m-d');
+```php
+isDate($input, $format = 'Y-m-d')
+```
 * $format - 指定日期格式
 
 对象属性
@@ -217,8 +226,9 @@ if (!$widget->isDateTime($input) {
 ```
 
 详细参数
-
-isDateTime($input, $format = 'Y-m-d H:i:s');
+```php
+isDateTime($input, $format = 'Y-m-d H:i:s')
+```
 * $format - 指定日期格式
 
 对象属性
@@ -236,8 +246,26 @@ if (!$widget->isDecimal($input)) {
 ```
 
 详细参数
+```php
+isDecimal($input)
+```
 
-* isDecimal($input)
+### DivisibleBy
+检查数据是否能被指定的除数整除
+
+基本用法
+```php
+$input = 10;
+if (!$widget->isDivisibleBy($input, 3)) {
+    print_r($widget->isDivisibleBy->getMessages());
+}
+```
+
+详细参数
+```php
+isDivisibleBy($input, int|float $divisor = null)
+```
+* $divisor - 除数
 
 
 分组验证器
