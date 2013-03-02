@@ -602,8 +602,13 @@ if (!$widget->isIp($input)) {
 
 详细参数
 ```php
-isIp($input)
+isIp($input, array $options = array())
 ```
+* $options 
+    * ipv4 - 只允许IPv4格式的IP地址
+    * ipv6 - 只允许IPv6格式的IP地址
+    * noPrivRange - 不允许私有的IP地址
+    * noResRange - 不允许保留的IP地址
 
 ### Length
 检查数据是否为指定的长度,或在指定的长度范围内
