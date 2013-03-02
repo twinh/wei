@@ -910,8 +910,9 @@ if (!$widget->isRequired($input)) {
 
 详细参数
 ```php
-isRequired($input)
+isRequired($input, $required = null)
 ```
+* $required - true表示数据不可以为空,false表示数据可为空
 
 ### SomeOf
 -
@@ -919,15 +920,22 @@ isRequired($input)
 基本用法
 ```php
 $input = 'abc';
-if (!$widget->isSomeOf($input)) {
+$rules = array(
+    'digit' => true,
+    'maxLength' => 5,
+    'email' => true
+);
+if (!$widget->isSomeOf($input, $input, 2)) {
     print_r($widget->isSomeOf->getMessages());
 }
 ```
 
 详细参数
 ```php
-isSomeOf($input)
+isSomeOf($input, array $rules = array(), $atLeast = null)
 ```
+* $rules - 验证规则数组,键名是验证器名称,值是验证器参数
+* $atLeast - 至少要有多少条规则通过
 
 ### StartsWith
 检查数据是否以指定字符串开头
@@ -935,15 +943,17 @@ isSomeOf($input)
 基本用法
 ```php
 $input = 'abc';
-if (!$widget->isStartsWith($input)) {
+if (!$widget->isStartsWith($input, 'd')) {
     print_r($widget->isStartsWith->getMessages());
 }
 ```
 
 详细参数
 ```php
-isStartsWith($input)
+isStartsWith($input, $findMe = null, $case = null)
 ```
+* $findMe - 要查找的字符串,如果是数组,只要数据以数组中任何一个元素开始就算验证通过
+* $case - 是否区分大小写
 
 ### Time
 检查数据是否为合法的时间
