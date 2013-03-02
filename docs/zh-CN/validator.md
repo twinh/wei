@@ -224,7 +224,7 @@ $widget->isCreditCard($input, array('UnionPay', 'Visa'));
 
 详细参数
 ```php
-isisCreditCard($input, $type = null)
+isCreditCard($input, $type = null)
 ```
 * type - 指定信用卡类型,多个使用`,`隔开,或是使用数组,留空表示允许任意信用卡号.
 
