@@ -397,15 +397,17 @@ isEmpty($input)
 基本用法
 ```php
 $input = 'abc';
-if (!$widget->isEndsWith($input)) {
+if (!$widget->isEndsWith($input, 'd')) {
     print_r($widget->isEndsWith->getMessages());
 }
 ```
 
 详细参数
 ```php
-isEndsWith($input)
+isEndsWith($input, $findMe = null, $case = null)
 ```
+* $findMe - 要查找的字符串,如果是数组,只要数据以数组中任何一个元素结尾就算验证通过
+* $case - 是否区分大小写
 
 ### EntityExists
 检查Doctrine ORM实体是否存在
@@ -413,15 +415,17 @@ isEndsWith($input)
 基本用法
 ```php
 $input = 'abc';
-if (!$widget->isEntityExists($input)) {
+if (!$widget->isEntityExists($input, 'User', 'username')) {
     print_r($widget->isEntityExists->getMessages());
 }
 ```
 
 详细参数
 ```php
-isEntityExists($input)
+isEntityExists($input, $entityClass = null, $field = null)
 ```
+* $entityClass - 实体的类名
+* $field - 指定的字段名称,留空表示主键
 
 ### Equals
 检查数据是否与指定数据相等
@@ -429,15 +433,17 @@ isEntityExists($input)
 基本用法
 ```php
 $input = 'abc';
-if (!$widget->isEquals($input)) {
+if (!$widget->isEquals($input, 'bbc')) {
     print_r($widget->isEquals->getMessages());
 }
 ```
 
 详细参数
 ```php
-isEquals($input)
+isEquals($input, $equals = null, $strict = null)
 ```
+* $equals - 与数据比较的值
+* $strict - 是否使用全等(===)进行比较
 
 ### Exists
 检查数据是否为存在的文件或目录
