@@ -250,6 +250,22 @@ if (!$widget->isDecimal($input)) {
 isDecimal($input)
 ```
 
+### Digit
+检查数据是否只由数字组成
+
+基本用法
+```php
+$input = 'abc123';
+if (!$widget->isDigit($input)) {
+    print_r($widget->isDigit->getMessages());
+}
+```
+
+详细参数
+```php
+isDigit($input)
+```
+
 ### DivisibleBy
 检查数据是否能被指定的除数整除
 
