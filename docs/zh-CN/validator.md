@@ -266,6 +266,22 @@ if (!$widget->isDigit($input)) {
 isDigit($input)
 ```
 
+### Dir
+检查数据是否为存在的目录
+
+基本用法
+```php
+$input = '/notfound/directory';
+if (!$widget->isDir($input)) {
+    print_r($widget->isDir->getMessages());
+}
+```
+
+详细参数
+```php
+isDir($input)
+```
+
 ### DivisibleBy
 检查数据是否能被指定的除数整除
 
@@ -282,6 +298,24 @@ if (!$widget->isDivisibleBy($input, 3)) {
 isDivisibleBy($input, int|float $divisor = null)
 ```
 * $divisor - 除数
+
+### DoubleByte
+检查数据是否只由双字节字符组成
+
+基本用法
+```php
+$input = '中文abc';
+if (!$widget->isDoubleByte($input, 3)) {
+    print_r($widget->isDoubleByte->getMessages());
+}
+```
+
+详细参数
+```php
+isDoubleByte($input)
+```
+
+
 
 
 分组验证器
