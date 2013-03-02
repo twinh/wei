@@ -575,15 +575,17 @@ isImage($input, array $options = array())
 基本用法
 ```php
 $input = 'abc';
-if (!$widget->isIn($input)) {
+if (!$widget->isIn($input, array('a', 'b'))) {
     print_r($widget->isIn->getMessages());
 }
 ```
 
 详细参数
 ```php
-isIn($input)
+isIn($input, $array = array(), $strict = null)
 ```
+* $array - 数组
+* $strict - 是否校验类型(===)
 
 ### Ip
 检查数据是否为有效的IP地址
