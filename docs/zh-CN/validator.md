@@ -44,7 +44,7 @@
 网络
 * [Email](#email) - 检查数据是否为有效的邮箱地址
 * [Ip](#ip) - 检查数据是否为有效的IP地址
-* [Tld](#tld) - 检查数据是否为顶级域名
+* [Tld](#tld) - 检查数据是否为存在的顶级域名
 * [Url](#url) - 检查数据是否为有效的URL地址
 * [Uuid](#uuid) - 检查数据是否为有效的UUID
 
@@ -968,11 +968,12 @@ if (!$widget->isTime($input)) {
 
 详细参数
 ```php
-isTime($input)
+isTime($input, $format = 'H:i:s')
 ```
+* $format - 指定的时间格式
 
 ### Tld
-检查数据是否为顶级域名
+检查数据是否为存在的顶级域名
 
 基本用法
 ```php
@@ -993,15 +994,43 @@ isTld($input)
 基本用法
 ```php
 $input = 'abc';
-if (!$widget->isType($input)) {
+if (!$widget->isType($input, 'array')) {
     print_r($widget->isType->getMessages());
 }
 ```
 
 详细参数
 ```php
-isType($input)
+isType($input, $type = null)
 ```
+* $type - 指定的数据类型
+
+如果$type的值不在下表中,将检查数据是否为$type的实例化对象(instanceof)
+
+| **值**   | **名称**             |
+|----------|----------------------|
+| array    | 数组                 |
+| bool     | 布尔                 |
+| float    | 浮点数               |
+| int      | 整型                 |
+| integer  | 整型                 |
+| null     | NULL                 |
+| numeric  | 数字                 |
+| object   | 对象                 |
+| resource | 资源                 |
+| scalar   | 标量                 |
+| string   | 字符串               |
+| alnum    | 字母(a-z)或数字(0-9) |
+| alpha    | 字母                 |
+| cntrl    | 控制字符             |
+| digit    | 数字                 |
+| graph    | 可显示字符           |
+| lower    | 小写字母(a-z)        |
+| print    | 可打印字符           |
+| punct    | 标点符号             |
+| space    | 空白字符             |
+| upper    | 大写字母(A-Z)        |
+| xdigit   | 16进制数字           |
 
 ### Uppercase
 检查数据是否为大写
