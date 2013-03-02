@@ -63,14 +63,58 @@
 * [Mobile](#mobile) - 检查数据是否为有效的手机号码
 
 分组
+* [AllOf](#allof) - 检查数据是否通过所有的规则校验
 * [OneOf](#oneof) - 检查数据是否满足指定规则中的任何一条
 
 第三方集成
 * [EntityExists](#entityexists) - 检查Doctrine ORM实体是否存在
 
 其他
+* [All](#all) - 检查集合里的每一项是否符合指定的规则
 * [Callback](#callback) - 检查数据是否通过指定回调方法验证
 * [DivisibleBy](#divisibleby) - 检查数据是否能被指定的除数整除
+
+### All
+-
+
+基本用法
+```php
+$input = array(1, 123456, 'abc');
+$rules = array(
+    'digit' => true,
+    'maxLength' => 5
+);
+if (!$widget->isAll($input, $rules)) {
+    print_r($widget->isAll->getMessages());
+}
+```
+
+详细参数
+```php
+isAll($input, array $rules = array())
+```
+* $rules - 验证规则数组,键名是验证器名称,值是验证器参数
+
+### AllOf
+检查数据是否通过所有的规则校验
+
+基本用法
+```php
+$input = 'abc';
+$rules = array(
+    'digit' => true,
+    'maxLength' => 5
+);
+if (!$widget->isAllOf($input, $rules)) {
+    print_r($widget->isAllOf->getMessages());
+}
+```
+
+详细参数
+```php
+isAllOf($input, array $rules = array())
+```
+* $rules = 验证规则数组,键名是验证器名称,值是验证器参数
 
 ### Alnum 
 检查数据是否只由字母(a-z)和数字(0-9)组成
@@ -106,7 +150,7 @@ isAlpha($input, $pattern = null)
 * pattern - 指定校验的正则表达式
 
 ### Blank
-检查数据是否为空
+检查数据是否为空(不允许空格)
 
 基本用法
 ```php
@@ -315,11 +359,642 @@ if (!$widget->isDoubleByte($input, 3)) {
 isDoubleByte($input)
 ```
 
+### Email
+检查数据是否为有效的邮箱地址
 
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isEmail($input)) {
+    print_r($widget->isEmail->getMessages());
+}
+```
 
+详细参数
+```php
+isEmail($input)
+```
 
-分组验证器
----------
-###All - 检查集合里的每一项是否符合指定的规则###
+### EmptyValue
+-
 
-###AllOf - 检查输入数据是否通过所有的规则校验###
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isEmptyValue($input)) {
+    print_r($widget->isEmptyValue->getMessages());
+}
+```
+
+详细参数
+```php
+isEmptyValue($input)
+```
+
+### EndsWith
+检查数据是否以指定字符串结尾
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isEndsWith($input)) {
+    print_r($widget->isEndsWith->getMessages());
+}
+```
+
+详细参数
+```php
+isEndsWith($input)
+```
+
+### EntityExists
+检查Doctrine ORM实体是否存在
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isEntityExists($input)) {
+    print_r($widget->isEntityExists->getMessages());
+}
+```
+
+详细参数
+```php
+isEntityExists($input)
+```
+
+### Equals
+检查数据是否与指定数据相等
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isEquals($input)) {
+    print_r($widget->isEquals->getMessages());
+}
+```
+
+详细参数
+```php
+isEquals($input)
+```
+
+### Exists
+检查数据是否为存在的文件或目录
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isExists($input)) {
+    print_r($widget->isExists->getMessages());
+}
+```
+
+详细参数
+```php
+isExists($input)
+```
+
+### File
+检查数据合法的文件
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isFile($input)) {
+    print_r($widget->isFile->getMessages());
+}
+```
+
+详细参数
+```php
+isFile($input)
+```
+
+### IdCardCn
+检查数据是否为有效的中国身份证
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isIdCardCn($input)) {
+    print_r($widget->isIdCardCn->getMessages());
+}
+```
+
+详细参数
+```php
+isIdCardCn($input)
+```
+
+### IdCardHk
+检查数据是否为有效的香港身份证
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isIdCardHk($input)) {
+    print_r($widget->isIdCardHk->getMessages());
+}
+```
+
+详细参数
+```php
+isIdCardHk($input)
+```
+
+### IdCardMo
+检查数据是否为有效的澳门身份证
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isIdCardMo($input)) {
+    print_r($widget->isIdCardMo->getMessages());
+}
+```
+
+详细参数
+```php
+isIdCardMo($input)
+```
+
+### IdCardTw
+检查数据是否为有效的台湾身份证
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isIdCardTw($input)) {
+    print_r($widget->isIdCardTw->getMessages());
+}
+```
+
+详细参数
+```php
+isIdCardTw($input)
+```
+
+### Image
+检查数据是否为有效的图片
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isImage($input)) {
+    print_r($widget->isImage->getMessages());
+}
+```
+
+详细参数
+```php
+isImage($input)
+```
+
+### In
+检查数据是否在指定的数组中
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isIn($input)) {
+    print_r($widget->isIn->getMessages());
+}
+```
+
+详细参数
+```php
+isIn($input)
+```
+
+### Ip
+检查数据是否为有效的IP地址
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isIp($input)) {
+    print_r($widget->isIp->getMessages());
+}
+```
+
+详细参数
+```php
+isIp($input)
+```
+
+### Length
+检查数据是否为指定的长度
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isLength($input)) {
+    print_r($widget->isLength->getMessages());
+}
+```
+
+详细参数
+```php
+isLength($input)
+```
+
+### Lowercase
+检查数据是否为小写
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isLowercase($input)) {
+    print_r($widget->isLowercase->getMessages());
+}
+```
+
+详细参数
+```php
+isLowercase($input)
+```
+
+### Max
+检查数据是否小于等于指定的值
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isMax($input)) {
+    print_r($widget->isMax->getMessages());
+}
+```
+
+详细参数
+```php
+isMax($input)
+```
+
+### MaxLength
+检查数据是否小于等于指定长度
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isMaxLength($input)) {
+    print_r($widget->isMaxLength->getMessages());
+}
+```
+
+详细参数
+```php
+isMaxLength($input)
+```
+
+### Min
+检查数据是否大于等于指定的值
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isMin($input)) {
+    print_r($widget->isMin->getMessages());
+}
+```
+
+详细参数
+```php
+isMin($input)
+```
+
+### MinLength
+检查数据是否大于等于指定长度
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isMinLength($input)) {
+    print_r($widget->isMinLength->getMessages());
+}
+```
+
+详细参数
+```php
+isMinLength($input)
+```
+
+### Mobile
+检查数据是否为有效的手机号码
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isMobile($input)) {
+    print_r($widget->isMobile->getMessages());
+}
+```
+
+详细参数
+```php
+isMobile($input)
+```
+
+### NoneOf
+-
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isNoneOf($input)) {
+    print_r($widget->isNoneOf->getMessages());
+}
+```
+
+详细参数
+```php
+isNoneOf($input)
+```
+
+### Null
+检查数据是否为null
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isNull($input)) {
+    print_r($widget->isNull->getMessages());
+}
+```
+
+详细参数
+```php
+isNull($input)
+```
+
+### Number
+检查数据是否为有效数字
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isNumber($input)) {
+    print_r($widget->isNumber->getMessages());
+}
+```
+
+详细参数
+```php
+isNumber($input)
+```
+
+### OneOf
+检查数据是否满足指定规则中的任何一条
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isOneOf($input)) {
+    print_r($widget->isOneOf->getMessages());
+}
+```
+
+详细参数
+```php
+isOneOf($input)
+```
+
+### Phone
+检查数据是否为有效的电话号码
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isPhone($input)) {
+    print_r($widget->isPhone->getMessages());
+}
+```
+
+详细参数
+```php
+isPhone($input)
+```
+
+### PlateNumberCn
+-
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isPlateNumberCn($input)) {
+    print_r($widget->isPlateNumberCn->getMessages());
+}
+```
+
+详细参数
+```php
+isPlateNumberCn($input)
+```
+
+### Postcode
+检查数据是否为有效的邮政编码
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isPostcode($input)) {
+    print_r($widget->isPostcode->getMessages());
+}
+```
+
+详细参数
+```php
+isPostcode($input)
+```
+
+### QQ
+检查数据是否为有效的QQ号码
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isQQ($input)) {
+    print_r($widget->isQQ->getMessages());
+}
+```
+
+详细参数
+```php
+isQQ($input)
+```
+
+### Range
+检查数据是否在指定的两个值之间
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isRange($input)) {
+    print_r($widget->isRange->getMessages());
+}
+```
+
+详细参数
+```php
+isRange($input)
+```
+
+### Regex
+检查数据是否匹配指定的正则表达式
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isRegex($input)) {
+    print_r($widget->isRegex->getMessages());
+}
+```
+
+详细参数
+```php
+isRegex($input)
+```
+
+### Required
+-
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isRequired($input)) {
+    print_r($widget->isRequired->getMessages());
+}
+```
+
+详细参数
+```php
+isRequired($input)
+```
+
+### SomeOf
+-
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isSomeOf($input)) {
+    print_r($widget->isSomeOf->getMessages());
+}
+```
+
+详细参数
+```php
+isSomeOf($input)
+```
+
+### StartsWith
+检查数据是否以指定字符串开头
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isStartsWith($input)) {
+    print_r($widget->isStartsWith->getMessages());
+}
+```
+
+详细参数
+```php
+isStartsWith($input)
+```
+
+### Time
+检查数据是否为合法的时间
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isTime($input)) {
+    print_r($widget->isTime->getMessages());
+}
+```
+
+详细参数
+```php
+isTime($input)
+```
+
+### Tld
+检查数据是否为顶级域名
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isTld($input)) {
+    print_r($widget->isTld->getMessages());
+}
+```
+
+详细参数
+```php
+isTld($input)
+```
+
+### Type
+检查数据是否为指定的类型
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isType($input)) {
+    print_r($widget->isType->getMessages());
+}
+```
+
+详细参数
+```php
+isType($input)
+```
+
+### Uppercase
+检查数据是否为大写
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isUppercase($input)) {
+    print_r($widget->isUppercase->getMessages());
+}
+```
+
+详细参数
+```php
+isUppercase($input)
+```
+
+### Url
+检查数据是否为有效的URL地址
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isUrl($input)) {
+    print_r($widget->isUrl->getMessages());
+}
+```
+
+详细参数
+```php
+isUrl($input)
+```
+
+### Uuid
+检查数据是否为有效的UUID
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isUuid($input)) {
+    print_r($widget->isUuid->getMessages());
+}
+```
+
+详细参数
+```php
+isUuid($input)
+```
