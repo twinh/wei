@@ -1050,8 +1050,11 @@ if (!$widget->isUrl($input)) {
 
 详细参数
 ```php
-isUrl($input)
+isUrl($input, array $options = array())
 ```
+* $options 
+    * path - 是否要求URL带有路径,如http://www.example.com/path/part
+    * query - 是否要求URL带有查询参数,如http://www.example/?query=string
 
 ### Uuid
 检查数据是否为有效的UUID
