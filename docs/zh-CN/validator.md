@@ -64,7 +64,7 @@
 
 分组
 * [AllOf](#allof) - 检查数据是否通过所有的规则校验
-* [NoneOf](#noneof) - 检查是否是否不符合所有指定的规则
+* [NoneOf](#noneof) - 检查数据是否不符合所有指定的规则
 * [OneOf](#oneof) - 检查数据是否满足指定规则中的任何一条
 
 第三方集成
@@ -867,16 +867,18 @@ isQQ($input)
 
 基本用法
 ```php
-$input = 'abc';
-if (!$widget->isRange($input)) {
+$input = 18;
+if (!$widget->isRange($input, 1, 10)) {
     print_r($widget->isRange->getMessages());
 }
 ```
 
 详细参数
 ```php
-isRange($input)
+isRange($input, $min = null, $max = null)
 ```
+* $min - 限制的最小值
+* $max - 限制的最大值
 
 ### Regex
 检查数据是否匹配指定的正则表达式
@@ -884,15 +886,16 @@ isRange($input)
 基本用法
 ```php
 $input = 'abc';
-if (!$widget->isRegex($input)) {
+if (!$widget->isRegex($input, '/d/i')) {
     print_r($widget->isRegex->getMessages());
 }
 ```
 
 详细参数
 ```php
-isRegex($input)
+isRegex($input, $pattern = null)
 ```
+* $pattern - 校验的正则表达式
 
 ### Required
 -
