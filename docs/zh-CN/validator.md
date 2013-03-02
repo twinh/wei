@@ -92,6 +92,23 @@ if (!$widget->isBlank($input)) {
 可选参数
 * 无
 
+### Callback
+检查数据是否通过指定回调方法验证
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isCallback($input, function($input){ 
+    return '123' === $input; 
+})) {
+    print_r($widget->isCallback->getMessages());
+}
+```
+
+可选参数
+* $fn - 指定验证的回调结构
+* $message - 验证不通过时返回的信息
+
 ### Chinese
 检查数据是否只由中文组成
 
@@ -114,12 +131,67 @@ if (!$widget->isChinese($input)) {
 基本用法
 ```php
 $input = '4111111111111111'; // Visa
-if (!$widget->isCreditCard($input, 'UnionPay')) {
-    print_r($widget->isChinese->getMessages());
+if (!$widget->isCreditCard($input)) {
+    print_r($widget->isCreditCard->getMessages());
+}
+
+// 指定类型只能是Visa或银联卡
+$widget->isCreditCard($input, 'UnionPay,Visa');
+
+// 第二个参数也可以是数组,每个元素表示一种类型
+$widget->isCreditCard($input, array('UnionPay', 'Visa'));
+```
+可选参数
+* type - 指定信用卡类型,多个使用`,`隔开,或是使用数组,留空表示允许任意信用卡号
+
+| **发卡机构**     | **中文名称** | **值**       |
+|------------------|--------------|--------------|
+| American Express | 美国运通     | `Amex`       |
+| Diners Club      | 大来卡       | `DinersClub` |
+| Discover Card    | 发现卡       | `Discover`   |
+| JCB              | -            |`JCB`         |
+| MasterCard       | 万事达卡     | `MasterCard` |
+| China UnionPay   | 中国银联     | `UnionPay`   | 
+| Visa             | -            | `Visa`       |
+
+### Date
+检查数据是否为合法的日期
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isDate($input) {
+    print_r($widget->isDate->getMessages());
 }
 ```
-#### 可选参数
-* type - 指定信用卡类型,多个可以为数组,或是以逗号`,`隔开,使用`all`或留空表示允许任意类型的卡号
+
+参数
+
+isDate($input, $format = 'Y-m-d');
+* $format - 指定日期格式
+
+对象属性
+* 同上
+
+### DateTime
+检查数据是否为合法的日期时间
+
+基本用法
+```php
+$input = 'abc';
+if (!$widget->isDateTime($input) {
+    print_r($widget->isDateTime->getMessages());
+}
+```
+
+参数
+
+isDateTime($input, $format = 'Y-m-d H:i:s');
+* $format - 指定日期格式
+
+对象属性
+* 同上
+
 
 分组验证器
 ---------
