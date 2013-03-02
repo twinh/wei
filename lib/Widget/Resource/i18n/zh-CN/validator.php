@@ -143,7 +143,7 @@ return array(
     
     // min
     '%name% must be greater or equal than %min%' => '%name%必须大于等于%min%',
-    '%name% must not be greater or equal than %max%' => '%name%必须不大于等于%max%',
+    '%name% must not be greater or equal than %min%' => '%name%必须不大于等于%min%',
     
     // minLength
     '%name% must have a length greater than %min%' => '%name%的长度必须大于等于%min%',
@@ -167,6 +167,7 @@ return array(
     '%name% must be valid phone number' => '%name%必须是有效的电话号码',
     '%name% must not be phone number' => '%name%不能是电话号码',
     
+    // plateNumberCN
     '%name% must be valid Chinese plate number' => '%name%必须是正确的车牌格式',
     '%name% must not be valid Chinese plate number' => '%name%不能是正确的车牌格式',
     
