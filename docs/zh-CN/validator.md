@@ -108,11 +108,12 @@ if (!$widget->isChinese($input)) {
 
 ### CreditCard
 检查数据是否为合法的信用卡号码
+
 允许指定的信用卡类型有: American Express, Diners Club, Discover, JCB, MasterCard, China UnionPay 和 Visa
 
 基本用法
 ```php
-$input = '4111111111111111';
+$input = '4111111111111111'; // Visa
 if (!$widget->isCreditCard($input, 'UnionPay')) {
     print_r($widget->isChinese->getMessages());
 }
