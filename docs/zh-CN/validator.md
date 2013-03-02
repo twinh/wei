@@ -466,7 +466,7 @@ isExists($input)
 
 基本用法
 ```php
-$input = 'abc';
+$input = 'file/not/found';
 if (!$widget->isFile($input)) {
     print_r($widget->isFile->getMessages());
 }
@@ -474,8 +474,15 @@ if (!$widget->isFile($input)) {
 
 详细参数
 ```php
-isFile($input)
+isFile($input, array $options = array())
 ```
+* $options 选项数组
+    * maxSize - 允许的文件最大字节数
+    * minSize - 允许的文件最小字节数
+    * ext - 允许的文件扩展名数组
+    * excludeExts - 不允许的文件扩展名数组
+    * mimeType - 允许的文件媒体类型
+    * excludeMimeTypes - 不允许的文件媒体类型
 
 ### IdCardCn
 检查数据是否为有效的中国身份证
@@ -546,7 +553,7 @@ isIdCardTw($input)
 
 基本用法
 ```php
-$input = 'abc';
+$input = 'image/not/found';
 if (!$widget->isImage($input)) {
     print_r($widget->isImage->getMessages());
 }
@@ -554,8 +561,13 @@ if (!$widget->isImage($input)) {
 
 详细参数
 ```php
-isImage($input)
+isImage($input, array $options = array())
 ```
+* $options 选项数组
+    * maxWidth - 允许的图片最大宽度
+    * minWidth - 允许的图片最小宽度
+    * maxHeight - 允许的图片最大高度
+    * minHeight - 允许的图片最小高度
 
 ### In
 检查数据是否在指定的数组中
