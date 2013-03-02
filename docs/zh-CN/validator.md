@@ -75,7 +75,7 @@
 * [DivisibleBy](#divisibleby) - 检查数据是否能被指定的除数整除
 
 ### All
--
+检查集合里的每一项是否符合指定的规则
 
 基本用法
 ```php
@@ -375,20 +375,20 @@ if (!$widget->isEmail($input)) {
 isEmail($input)
 ```
 
-### EmptyValue
--
+### Empty
+检查数据是否为空(允许空格)
 
 基本用法
 ```php
 $input = 'abc';
-if (!$widget->isEmptyValue($input)) {
-    print_r($widget->isEmptyValue->getMessages());
+if (!$widget->isEmpty($input)) {
+    print_r($widget->isEmpty->getMessages());
 }
 ```
 
 详细参数
 ```php
-isEmptyValue($input)
+isEmpty($input)
 ```
 
 ### EndsWith
