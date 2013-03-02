@@ -23,7 +23,7 @@
 * [Uppercase](#uppercase) - 检查数据是否为大写
 
 长度大小
-* [Length](#length) - 检查数据是否为指定的长度
+* [Length](#length) - 检查数据是否为指定的长度,或在指定的长度范围内
 * [Max](#max) - 检查数据是否小于等于指定的值
 * [MaxLength](#maxlength) - 检查数据是否小于等于指定长度
 * [Min](#min) - 检查数据是否大于等于指定的值
@@ -604,20 +604,28 @@ isIp($input)
 ```
 
 ### Length
-检查数据是否为指定的长度
+检查数据是否为指定的长度,或在指定的长度范围内
 
 基本用法
 ```php
+// 检查长度是否在5到10之间
 $input = 'abc';
-if (!$widget->isLength($input)) {
+if (!$widget->isLength($input, 5, 10)) {
+    print_r($widget->isLength->getMessages());
+}
+
+// 检查长度是否等于5
+if (!$widget->isLength($input, 5)) {
     print_r($widget->isLength->getMessages());
 }
 ```
 
 详细参数
 ```php
-isLength($input)
+isLength($input, $min = null, $max = null)
 ```
+* $min - 限制的长度最小值,如果没有提供最大值,则表示指定长度的值
+* $max - 限制的长度最大值
 
 ### Lowercase
 检查数据是否为小写
