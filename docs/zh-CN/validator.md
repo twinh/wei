@@ -64,6 +64,7 @@
 
 分组
 * [AllOf](#allof) - 检查数据是否通过所有的规则校验
+* [NoneOf](#noneof) - 检查是否是否不符合所有指定的规则
 * [OneOf](#oneof) - 检查数据是否满足指定规则中的任何一条
 
 第三方集成
@@ -724,20 +725,25 @@ isMobile($input)
 ```
 
 ### NoneOf
--
+检查数据是否不符合所有指定的规则
 
 基本用法
 ```php
 $input = 'abc';
-if (!$widget->isNoneOf($input)) {
+$rules = array(
+    'alpha' => true,
+    'maxLength' => 3
+);
+if (!$widget->isNoneOf($input, $rules)) {
     print_r($widget->isNoneOf->getMessages());
 }
 ```
 
 详细参数
 ```php
-isNoneOf($input)
+isNoneOf($input, array $rules = array())
 ```
+* $rules - 验证规则数组,键名是验证器名称,值是验证器参数
 
 ### Null
 检查数据是否为null
@@ -777,15 +783,20 @@ isNumber($input)
 基本用法
 ```php
 $input = 'abc';
-if (!$widget->isOneOf($input)) {
+$rules = array(
+    'digit' => true,
+    'maxLength' => 2
+);
+if (!$widget->isOneOf($input, $rules)) {
     print_r($widget->isOneOf->getMessages());
 }
 ```
 
 详细参数
 ```php
-isOneOf($input)
+isOneOf($input, array $rules = array())
 ```
+* $rules - 验证规则数组,键名是验证器名称,值是验证器参数
 
 ### Phone
 检查数据是否为有效的电话号码
