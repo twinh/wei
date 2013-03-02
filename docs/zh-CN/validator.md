@@ -66,6 +66,7 @@
 * [AllOf](#allof) - 检查数据是否通过所有的规则校验
 * [NoneOf](#noneof) - 检查数据是否不符合所有指定的规则
 * [OneOf](#oneof) - 检查数据是否满足指定规则中的任何一条
+* [SomeOf](#someof) - 检查数据是否通过指定数量规则的验证
 
 第三方集成
 * [EntityExists](#entityexists) - 检查Doctrine ORM实体是否存在
@@ -915,7 +916,7 @@ isRequired($input, $required = null)
 * $required - true表示数据不可以为空,false表示数据可为空
 
 ### SomeOf
--
+检查数据是否通过指定数量规则的验证
 
 基本用法
 ```php
