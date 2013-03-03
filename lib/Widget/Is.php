@@ -31,11 +31,11 @@ class Is extends AbstractWidget
     
     /**
      * @param string|\Widget\Validator\AbstractValidator|int $rule
-     * @param array|null $data
+     * @param array|null $input
      * @paran mixed $options
      * @internal Do NOT use this method for it may be changed in the future
      */
-    public function validateOne($rule, $data, $options = array(), &$validator = null, $props = array())
+    public function validateOne($rule, $input, $options = array(), &$validator = null, $props = array())
     {
         // Process simple array rules, eg 'username' => ['required', 'email']
         if (is_int($rule)) {
@@ -47,7 +47,7 @@ class Is extends AbstractWidget
         
         if ($rule instanceof \Widget\Validator\AbstractValidator) {
             $validator = $rule;
-            return $rule($data);
+            return $rule($input);
         }
         
         $validator = $this->createRuleValidator($rule, $props);
@@ -57,42 +57,42 @@ class Is extends AbstractWidget
         }
         
         if (is_int(key($options))) {
-            array_unshift($options, $data);
+            array_unshift($options, $input);
             $result = call_user_func_array($validator, $options);
         } else {
             $validator->setOption($options);
-            $result = $validator($data);
+            $result = $validator($input);
         }
 
         return $result;
     }
 
     /**
-     * Validate data by given rules
+     * Validate data by given rule
      * 
      * @param string|\Closure|array $rule The validation rule
-     * @param mixed $data The data to be validated
+     * @param mixed $input The data to be validated
      * @param array $options The validation parameters
      * @return bool
-     * @throws Widget\Exception\UnexpectedTypeException When rule is not string, array or \Closure
+     * @throws \Widget\Exception\UnexpectedTypeException When rule is not string, array or \Closure
      */
-    public function __invoke($rule = null, $data = null, $options = array())
+    public function __invoke($rule = null, $input = null, $options = array())
     {
         switch (true) {
-            // ($rule, $data, $options)
+            // ($rule, $input, $options)
             case is_string($rule) :
-                return $this->validateOne($rule, $data, $options);
-            // (function(){}, $data)
+                return $this->validateOne($rule, $input, $options);
+            // (function(){}, $input)
             case $rule instanceof \Closure :
-                return $this->validateOne('callback', $data, $rule);
-            // ($rule, $data)
+                return $this->validateOne('callback', $input, $rule);
+            // ($rule, $input)
             case is_array($rule):
                 return $this->createValidator()->__invoke(array(
                     'rules' => array(
                         'one' => $rule,
                     ),
                     'data' => array(
-                        'one' => $data,
+                        'one' => $input,
                     )
                 ));
             default:
