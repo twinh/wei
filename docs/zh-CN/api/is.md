@@ -3,13 +3,14 @@
 
 检查数据是否能通过指定规则的验证
 ```php
-->is($rule, $data, $options)
+bool is($rule, $data, $options)
 ```
+返回是否通过验证
+
+#### 参数
 * $rule      `string`  验证器的名称
 * $data      `mixed`   待验证的数据 
 * $options   `array`   验证器的配置选项
-
-返回: `bool` 是否通过验证
 
 #### 范例
 验证数据是否为邮箱
