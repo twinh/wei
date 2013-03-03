@@ -13,7 +13,7 @@ namespace Widget;
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Attr
+class Attr extends AbstractWidget
 {
     /**
      * Returns the value of specified key in $data
