@@ -180,7 +180,7 @@ class Error extends AbstractWidget
             // Server Environment
             $server = $this->getServer();
 
-            $this->log->debug($code . $message . ' ' . $stackInfo);
+            $this->logger->debug($code . $message . ' ' . $stackInfo);
 
             //$this->trigger('error', array('data' => get_defined_vars()));
 
