@@ -43,8 +43,8 @@ bool is((function($input, Widget\Validator\Callback $fn, Widget\Widget $widget),
 返回是否通过验证
 
 #### 参数
-* function($input, Widget\Validator\Callback $fn, Widget\Widget $widget) 用于验证数据的闭包
-* $input 待验证的数据
+* function($input, Widget\Validator\Callback $fn, Widget\Widget $widget) `\Closure` 用于验证数据的闭包
+* $input `mixed` 待验证的数据
 
 #### 范例
 ```php
