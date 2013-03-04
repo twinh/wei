@@ -9,6 +9,8 @@
 namespace Widget\Exception;
 
 /**
+ * Exception thrown if an argument type does not match with the expected type
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class UnexpectedTypeException extends \InvalidArgumentException implements ExceptionInterface
