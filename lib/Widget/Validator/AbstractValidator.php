@@ -110,7 +110,7 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
     /**
      * Validate the input value (ignore the $opposite property)
      * 
-     * @param type $input
+     * @param mixed $input The input to be validated
      * @return boolean
      */
     abstract protected function validate($input);
