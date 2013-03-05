@@ -91,7 +91,7 @@ class Fcache extends AbstractStorage
     /**
      * {@inheritdoc}
      */
-    public function get($key, $options = null)
+    public function get($key, &$success = null)
     {
         $file = $this->getFile($key);
 

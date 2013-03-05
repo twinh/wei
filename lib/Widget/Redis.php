@@ -93,7 +93,7 @@ class Redis extends AbstractStorage
     /**
      * {@inheritdoc}
      */
-    public function get($key, $options = null)
+    public function get($key, &$success = null)
     {
         return $this->object->get($key);
     }
