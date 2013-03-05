@@ -39,11 +39,11 @@ class Bicache extends AbstractStorage
     /**
      * {@inheritdoc}
      */
-    public function get($key, $options = null)
+    public function get($key, &$success = null)
     {
-        $value = $this->master->get($key);
+        $value = $this->master->get($key, $success);
 
-        if (false !== $value) {
+        if ($success) {
             return $value;
         } else {
             return $this->slave->get($key);
