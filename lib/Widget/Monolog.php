@@ -8,7 +8,7 @@
 
 namespace Widget;
 
-use Monolog\Logger;
+use Monolog\Logger as MonologLogger;
 use Widget\Exception\InvalidArgumentException;
 
 /**
@@ -30,7 +30,7 @@ class Monolog extends AbstractWidget
      * 
      * @var int
      */
-    protected $level = Logger::DEBUG;
+    protected $level = MonologLogger::DEBUG;
     
     /**
      * The monolog handlers
@@ -40,7 +40,7 @@ class Monolog extends AbstractWidget
     protected $handlers = array(
         'stream' => array(
             'stream' => 'log/widget.log',
-            'level' => Logger::DEBUG,
+            'level' => MonologLogger::DEBUG,
         ),
     );
 
