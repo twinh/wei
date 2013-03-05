@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>-&gt;session() | Widget API Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="../../assets/bootstrap/2.3.1/css/bootstrap.css" rel="stylesheet">
+    <link href="../../assets/bootstrap/2.3.1/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="../../assets/widget/api.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/github.min.css">
+  </head>
+  <body>
+   <!-- Navbar
+    ================================================== -->
+    <div class="navbar navbar-inverse navbar-static-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="../../index.html">Widget</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active">
+                <a href="../..//index.html">Home</a>
+              </li>
+              <li class="">
+                <a href="api">API Documentation</a>
+              </li>
+              <li class="">
+                <a href="phpdoc">PHPDoc</a>
+              </li>
+              <li class="">
+                <a href="https://github.com/twinh/widget/archive/master.zip">Download</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container"  style="padding-top: 20px;">
+<div class="row-fluid">
+    <div class="span3">
+        <div class="well sidebar-nav">
+    <ul class="nav nav-list">
+                <li><a href="../apc">Apc</a>
+                <li><a href="../app">App</a>
+                <li><a href="../arrayWidget">ArrayWidget</a>
+                <li><a href="../attr">Attr</a>
+                <li><a href="../beInArray">BeInArray</a>
+                <li><a href="../bicache">Bicache</a>
+                <li><a href="../browser">Browser</a>
+                <li><a href="../cache">Cache</a>
+                <li><a href="../codeHintGenerator">CodeHintGenerator</a>
+                <li><a href="../cookie">Cookie</a>
+                <li><a href="../db">Db</a>
+                <li><a href="../dbCache">DbCache</a>
+                <li><a href="../docBuilder">DocBuilder</a>
+                <li><a href="../download">Download</a>
+                <li><a href="../entityManager">EntityManager</a>
+                <li><a href="../error">Error</a>
+                <li><a href="../escape">Escape</a>
+                <li><a href="../event">Event</a>
+                <li><a href="../eventManager">EventManager</a>
+                <li><a href="../fcache">Fcache</a>
+                <li><a href="../filter">Filter</a>
+                <li><a href="../flush">Flush</a>
+                <li><a href="../forward">Forward</a>
+                <li><a href="../get">Get</a>
+                <li><a href="../header">Header</a>
+                <li><a href="../inAjax">InAjax</a>
+                <li><a href="../inGet">InGet</a>
+                <li><a href="../inMethod">InMethod</a>
+                <li><a href="../inPost">InPost</a>
+                <li><a href="../instance">Instance</a>
+                <li><a href="../ip">Ip</a>
+                <li><a href="../is">Is</a>
+                <li><a href="../logger">Logger</a>
+                <li><a href="../marker">Marker</a>
+                <li><a href="../memcache">Memcache</a>
+                <li><a href="../memcached">Memcached</a>
+                <li><a href="../monolog">Monolog</a>
+                <li><a href="../off">Off</a>
+                <li><a href="../on">On</a>
+                <li><a href="../parameter">Parameter</a>
+                <li><a href="../pinyin">Pinyin</a>
+                <li><a href="../post">Post</a>
+                <li><a href="../redirect">Redirect</a>
+                <li><a href="../redis">Redis</a>
+                <li><a href="../request">Request</a>
+                <li><a href="../response">Response</a>
+                <li><a href="../result">Result</a>
+                <li><a href="../router">Router</a>
+                <li><a href="../server">Server</a>
+                <li><a href="../session">Session</a>
+                <li><a href="../smarty">Smarty</a>
+                <li><a href="../sort">Sort</a>
+                <li><a href="../t">T</a>
+                <li><a href="../trigger">Trigger</a>
+                <li><a href="../twig">Twig</a>
+                <li><a href="../upload">Upload</a>
+                <li><a href="../url">Url</a>
+                <li><a href="../urlDebugger">UrlDebugger</a>
+                <li><a href="../uuid">Uuid</a>
+                <li><a href="../validate">Validate</a>
+                <li><a href="../validator">Validator</a>
+                <li><a href="../view">View</a>
+                <li><a href="../widget">Widget</a>
+            </ul>
+</div>    </div><!--/span-->
+    <div class="span9 section">
+        <h1>-&gt;session()</h1>
+        <p>Get or set session</p>
+        <h5>目录</h5>
+        <ul>
+                    <li><a href="#session-1">-&gt;session($key, $value, $options)</a></li>
+                </ul>
+                <div class="well" id="session-1">
+            <h4>-&gt;session($key, $value, $options)<span class="pull-right">返回: <a href="#">mixed</a></span></h4>
+            <div style="margin: 5px 8px">
+                <span class="pull-right" style="font-size: 12px;">
+                  添加于:<a href="#">1.0</a>
+                </span>
+            <p><strong>说明: </strong>Get or set session</p>
+            <div>
+                <ul>
+                                        <li><strong>$key</strong> <code><a href="#">string</a></code> the name of cookie</li>
+                                        <li><strong>$value</strong> <code><a href="#">mixed</a></code> the value of cookie</li>
+                                        <li><strong>$options</strong> <code><a href="#">array</a></code> options for set cookie</li>
+                                    </ul>
+            </div>
+            <p></p>
+                        </div>
+        </div>
+            </div><!--/span-->
+      </div><!--/row-->
+      <hr>
+      <footer>
+                  <p>&copy; Widget Framework 2008-2013</p>
+              </footer>  
+    </div><!--/.fluid-container-->
+<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+<script>
+hljs.tabReplace = '    '; //4 spaces
+hljs.initHighlightingOnLoad();
+</script>
+  </body>
+</html>
