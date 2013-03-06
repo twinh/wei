@@ -2,9 +2,11 @@ isCallback
 ==========
 检查数据是否通过指定回调方法验证
 
-#### isCallback($input, \Closure $fn = null, $message = null)
-** 说明: ** 检查数据是否通过指定回调方法验证
-* $fn `\Closure` 指定验证的回调结构
+```php
+isCallback( $input [, $fn [, $message ]] )
+```
+**说明:** 检查数据是否通过指定回调方法验证
+* $fn `callback` 指定验证的回调结构
 * $message `string` 验证不通过时返回的信息
 
 ##### 范例
