@@ -36,6 +36,13 @@ class All extends AbstractValidator
      */
     protected $validators = array();
     
+    /**
+     * Check if all of the element in the input is valid by all specified rules
+     * 
+     * @param array|\Traversable $input The input to be validated
+     * @param array $rules The validation rules
+     * @return bool
+     */
     public function __invoke($input, array $rules = array())
     {
         $rules && $this->storeOption('rules', $rules);

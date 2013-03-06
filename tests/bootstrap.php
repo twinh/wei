@@ -16,7 +16,7 @@ return Widget::create(array(
         ),
         'alias' => array(
             'isEmpty' => '\Widget\Validator\EmptyValue'
-        ),    
+        ),
         'import' => array(
             // Import validator widgets
             array(
