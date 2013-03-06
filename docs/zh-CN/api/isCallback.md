@@ -13,9 +13,10 @@ bool isCallback( $input [, $fn [, $message ]] )
 ##### 范例
 通过回调函数检查数据是否能被3整数
 ```php
-if ($widget->is(10, function($input) {
+<?php
+if ($widget->isCallback(10, function($input) {
     return 0 === $input % 3;
-}) {
+})) {
     echo 'success';
 } else {
     echo 'failure';
