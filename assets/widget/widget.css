@@ -1,18 +1,8 @@
-/* Body and structure
--------------------------------------------------- */
-
-
-
 /* Code in headings */
 h3 code {
   font-size: 14px;
   font-weight: normal;
 }
-
-
-
-/* Tweak navbar brand link to be super sleek
--------------------------------------------------- */
 
 body > .navbar {
   font-size: 13px;
