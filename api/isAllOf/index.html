@@ -82,10 +82,12 @@
                 <li><a href="../instance">Instance</a>
                 <li><a href="../ip">Ip</a>
                 <li><a href="../is">Is</a>
+                <li><a href="../isAfter">IsAfter</a>
                 <li><a href="../isAll">IsAll</a>
                 <li><a href="../isAllOf">IsAllOf</a>
                 <li><a href="../isAlnum">IsAlnum</a>
                 <li><a href="../isAlpha">IsAlpha</a>
+                <li><a href="../isBefore">IsBefore</a>
                 <li><a href="../isBlank">IsBlank</a>
                 <li><a href="../isCallback">IsCallback</a>
                 <li><a href="../isChinese">IsChinese</a>
@@ -99,7 +101,6 @@
                 <li><a href="../isDoubleByte">IsDoubleByte</a>
                 <li><a href="../isEmail">IsEmail</a>
                 <li><a href="../isEmpty">IsEmpty</a>
-                <li><a href="../isEmptyValue">IsEmptyValue</a>
                 <li><a href="../isEndsWith">IsEndsWith</a>
                 <li><a href="../isEntityExists">IsEntityExists</a>
                 <li><a href="../isEquals">IsEquals</a>
@@ -173,20 +174,23 @@
 </div>                             </div>
             <div class="span9 section">
     <h1>-&gt;isAllOf()</h1>
-    <p></p>
+    <p>Check if the input is valid by all of the rules</p>
     <h5>目录</h5>
     <ul>
             <li><a href="#isAllOf-1">-&gt;isAllOf($input, $rules, $atLeast)</a></li>
         </ul>
         <div class="well" id="isAllOf-1">
-        <h4>-&gt;isAllOf($input, $rules, $atLeast)<span class="pull-right">返回: <a href="#">void</a></span></h4>
+        <h4>-&gt;isAllOf($input, $rules, $atLeast)<span class="pull-right">返回: <a href="#">bool</a></span></h4>
         <div style="margin: 5px 8px">
             <span class="pull-right" style="font-size: 12px;">
               添加于:<a href="#">1.0</a>
             </span>
-        <p><strong>说明: </strong></p>
+        <p><strong>说明: </strong>Check if the input is valid by all of the rules</p>
         <div>
             <ul>
+                                <li><strong>$input</strong> <code><a href="#">mixed</a></code> The input to be validated</li>
+                                <li><strong>$rules</strong> <code><a href="#">array</a></code> An array that the key is validator rule name and the value is validator options</li>
+                                <li><strong>$atLeast</strong> <code><a href="#">int|null</a></code> How manay rules should be validated at least</li>
                             </ul>
         </div>
         <p></p>
