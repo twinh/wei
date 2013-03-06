@@ -14,16 +14,8 @@ return Widget::create(array(
         'autoloadMap' => array(
             'WidgetTest' => __DIR__
         ),
-        'alias' => array(
-            'isEmpty' => '\Widget\Validator\EmptyValue'
-        ),
-        'import' => array(
-            // Import validator widgets
-            array(
-                'dir' => dirname(__DIR__) . '/lib/Widget/Validator',
-                'namespace' => 'Widget\Validator',
-                'format' => 'is%s'
-            ),
+        'initWidgets' => array(
+            'is'
         )
     ),
 ));

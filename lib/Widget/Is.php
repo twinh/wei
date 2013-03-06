@@ -30,6 +30,38 @@ class Is extends AbstractWidget
         'after'     => 'Widget\Validator\Min'
     );
     
+    private $rules = array(
+        'All', 'AllOf', 'Alnum', 'Alpha', 'Blank', 'Callback', 'Chinese', 
+        'CreditCard', 'Date', 'DateTime', 'Decimal', 'Digit', 'Dir', 
+        'DivisibleBy', 'DoubleByte', 'Email', 'EndsWith', 'EntityExists', 
+        'Equals', 'Exists', 'File', 'IdCardCn', 'IdCardHk', 'IdCardMo', 
+        'IdCardTw', 'Image', 'In', 'Ip', 'Length', 'Lowercase', 'Max', 
+        'MaxLength', 'Min', 'MinLength', 'Mobile', 'NoneOf', 'Null', 'Number', 
+        'OneOf', 'Phone', 'PlateNumberCn', 'Postcode', 'QQ', 'Range', 'Regex', 
+        'Required', 'SomeOf', 'StartsWith', 'Time', 'Tld', 'Type', 'Uppercase', 
+        'Url', 'Uuid'
+    );
+
+    /**
+     * Constructor
+     * 
+     * @param array $options
+     */
+    public function __construct(array $options = array())
+    {
+        parent::__construct($options);
+        
+        // Adds widget alias for validators
+        $rules = array();
+        foreach ($this->rules as $rule) {
+            $rules['is' . $rule] = 'Widget\Validator\\' . $rule;
+        }
+        foreach ($this->alias as $rule => $class) {
+            $rules['is' . ucfirst($rule)] = $class;
+        }
+        $this->widget->appendOption('alias', $rules);
+    }
+    
     /**
      * @param string|\Widget\Validator\AbstractValidator|int $rule
      * @param array|null $input
