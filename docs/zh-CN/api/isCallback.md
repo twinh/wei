@@ -1,11 +1,12 @@
-isCallback
-==========
+[isCallback](http://twinh.github.com/widget/api/isCallback/)
+============
 检查数据是否通过指定回调方法验证
 
 ```php
-isCallback( $input [, $fn [, $message ]] )
+bool isCallback( $input [, $fn [, $message ]] )
 ```
-**说明:** 检查数据是否通过指定回调方法验证
+**说明:** 检查数据是否通过指定回调方法验证  
+* $input `mixed` 待验证的数据
 * $fn `callback` 指定验证的回调结构
 * $message `string` 验证不通过时返回的信息
 
