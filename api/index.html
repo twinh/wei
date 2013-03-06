@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Widget API Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="../assets/bootstrap/2.3.1/css/bootstrap.css" rel="stylesheet">
+    <link href="../assets/bootstrap/2.3.1/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="../assets/widget/api.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/github.min.css">
+  </head>
+  <body>
+   <!-- Navbar
+    ================================================== -->
+    <div class="navbar navbar-inverse navbar-static-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="../index.html">Widget</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active">
+                <a href="..//index.html">Home</a>
+              </li>
+              <li class="">
+                <a href="api">API Documentation</a>
+              </li>
+              <li class="">
+                <a href="phpdoc">PHPDoc</a>
+              </li>
+              <li class="">
+                <a href="https://github.com/twinh/widget/archive/master.zip">Download</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container"  style="padding-top: 20px;">
+        <div class="row-fluid">
+            <div class="span3">
+                    <div class="well sidebar-nav">
+    <ul class="nav nav-list">
+                <li><a href="apc">Apc</a>
+                <li><a href="app">App</a>
+                <li><a href="arrayWidget">ArrayWidget</a>
+                <li><a href="attr">Attr</a>
+                <li><a href="beInArray">BeInArray</a>
+                <li><a href="bicache">Bicache</a>
+                <li><a href="browser">Browser</a>
+                <li><a href="cache">Cache</a>
+                <li><a href="codeHintGenerator">CodeHintGenerator</a>
+                <li><a href="cookie">Cookie</a>
+                <li><a href="db">Db</a>
+                <li><a href="dbCache">DbCache</a>
+                <li><a href="docBuilder">DocBuilder</a>
+                <li><a href="download">Download</a>
+                <li><a href="entityManager">EntityManager</a>
+                <li><a href="error">Error</a>
+                <li><a href="escape">Escape</a>
+                <li><a href="event">Event</a>
+                <li><a href="eventManager">EventManager</a>
+                <li><a href="fcache">Fcache</a>
+                <li><a href="filter">Filter</a>
+                <li><a href="flush">Flush</a>
+                <li><a href="forward">Forward</a>
+                <li><a href="get">Get</a>
+                <li><a href="header">Header</a>
+                <li><a href="inAjax">InAjax</a>
+                <li><a href="inGet">InGet</a>
+                <li><a href="inMethod">InMethod</a>
+                <li><a href="inPost">InPost</a>
+                <li><a href="instance">Instance</a>
+                <li><a href="ip">Ip</a>
+                <li><a href="is">Is</a>
+                <li><a href="logger">Logger</a>
+                <li><a href="marker">Marker</a>
+                <li><a href="memcache">Memcache</a>
+                <li><a href="memcached">Memcached</a>
+                <li><a href="monolog">Monolog</a>
+                <li><a href="off">Off</a>
+                <li><a href="on">On</a>
+                <li><a href="parameter">Parameter</a>
+                <li><a href="pinyin">Pinyin</a>
+                <li><a href="post">Post</a>
+                <li><a href="redirect">Redirect</a>
+                <li><a href="redis">Redis</a>
+                <li><a href="request">Request</a>
+                <li><a href="response">Response</a>
+                <li><a href="result">Result</a>
+                <li><a href="router">Router</a>
+                <li><a href="server">Server</a>
+                <li><a href="session">Session</a>
+                <li><a href="smarty">Smarty</a>
+                <li><a href="sort">Sort</a>
+                <li><a href="t">T</a>
+                <li><a href="trigger">Trigger</a>
+                <li><a href="twig">Twig</a>
+                <li><a href="upload">Upload</a>
+                <li><a href="url">Url</a>
+                <li><a href="urlDebugger">UrlDebugger</a>
+                <li><a href="uuid">Uuid</a>
+                <li><a href="validate">Validate</a>
+                <li><a href="validator">Validator</a>
+                <li><a href="view">View</a>
+                <li><a href="widget">Widget</a>
+            </ul>
+</div>            </div>
+            <div class="span9 section">
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="apc">-&gt;apc()</a></h3>
+        <p>{@inheritdoc}</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="app">-&gt;app()</a></h3>
+        <p>Startup application</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="arrayWidget">-&gt;arrayWidget()</a></h3>
+        <p>Returns a parameter value</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="attr">-&gt;attr()</a></h3>
+        <p>Returns the value of specified key in $data</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="beInArray">-&gt;beInArray()</a></h3>
+        <p>while $value is not find in the specify $array, use the first element of array instead</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="bicache">-&gt;bicache()</a></h3>
+        <p></p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="browser">-&gt;browser()</a></h3>
+        <p>Get the name of browser</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="cache">-&gt;cache()</a></h3>
+        <p>{@inheritdoc}</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="codeHintGenerator">-&gt;codeHintGenerator()</a></h3>
+        <p>Generate the widget code hint file</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="cookie">-&gt;cookie()</a></h3>
+        <p>Get or set cookie</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="db">-&gt;db()</a></h3>
+        <p>Returns the Doctrine DBAL connection object</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="dbCache">-&gt;dbCache()</a></h3>
+        <p>{@inheritdoc}</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="docBuilder">-&gt;docBuilder()</a></h3>
+        <p></p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="download">-&gt;download()</a></h3>
+        <p>Download a file form server</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="entityManager">-&gt;entityManager()</a></h3>
+        <p>Get Docrine ORM entity manager</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="error">-&gt;error()</a></h3>
+        <p>Show error message</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="escape">-&gt;escape()</a></h3>
+        <p>Escapes special characters for safe ouput</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="event">-&gt;event()</a></h3>
+        <p>Create a new event</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="eventManager">-&gt;eventManager()</a></h3>
+        <p>Trigger a event</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="fcache">-&gt;fcache()</a></h3>
+        <p>{@inheritdoc}</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="filter">-&gt;filter()</a></h3>
+        <p></p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="flush">-&gt;flush()</a></h3>
+        <p>flush content to the browser</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="forward">-&gt;forward()</a></h3>
+        <p>Forwards to the given module, controller and action</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="get">-&gt;get()</a></h3>
+        <p>Returns a *stringify* or user defined($default) parameter value</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="header">-&gt;header()</a></h3>
+        <p>Get or set the header values</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="inAjax">-&gt;inAjax()</a></h3>
+        <p></p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="inGet">-&gt;inGet()</a></h3>
+        <p></p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="inMethod">-&gt;inMethod()</a></h3>
+        <p></p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="inPost">-&gt;inPost()</a></h3>
+        <p></p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="instance">-&gt;instance()</a></h3>
+        <p>Instance a class</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="ip">-&gt;ip()</a></h3>
+        <p>Get ip address</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="is">-&gt;is()</a></h3>
+        <p>Validate data by given rule</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="logger">-&gt;logger()</a></h3>
+        <p>Logs with an arbitrary level</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="marker">-&gt;marker()</a></h3>
+        <p>Set a marker</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="memcache">-&gt;memcache()</a></h3>
+        <p>{@inheritdoc}</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="memcached">-&gt;memcached()</a></h3>
+        <p>{@inheritdoc}</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="monolog">-&gt;monolog()</a></h3>
+        <p>Get monolog logger object or add a log record</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="off">-&gt;off()</a></h3>
+        <p>Remove one or all handlers</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="on">-&gt;on()</a></h3>
+        <p></p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="parameter">-&gt;parameter()</a></h3>
+        <p>Returns a *stringify* or user defined($default) parameter value</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="pinyin">-&gt;pinyin()</a></h3>
+        <p>Converts chinese words to phonetic alphabets</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="post">-&gt;post()</a></h3>
+        <p>Returns a *stringify* or user defined($default) parameter value</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="redirect">-&gt;redirect()</a></h3>
+        <p>Send a redirect response</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="redis">-&gt;redis()</a></h3>
+        <p>{@inheritdoc}</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="request">-&gt;request()</a></h3>
+        <p>Returns a *stringify* or user defined($default) parameter value</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="response">-&gt;response()</a></h3>
+        <p>Send response header and content</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="result">-&gt;result()</a></h3>
+        <p></p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="router">-&gt;router()</a></h3>
+        <p>Get the router object</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="server">-&gt;server()</a></h3>
+        <p>Returns a *stringify* or user defined($default) parameter value</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="session">-&gt;session()</a></h3>
+        <p>Get or set session</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="smarty">-&gt;smarty()</a></h3>
+        <p>Return the \Smarty object</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="sort">-&gt;sort()</a></h3>
+        <p>Sort two-dimensional array like SQL ORDER BY clause</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="t">-&gt;t()</a></h3>
+        <p>Invoker</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="trigger">-&gt;trigger()</a></h3>
+        <p></p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="twig">-&gt;twig()</a></h3>
+        <p>Get Twig environment object</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="upload">-&gt;upload()</a></h3>
+        <p>Upload a file</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="url">-&gt;url()</a></h3>
+        <p>快速构建链接</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="urlDebugger">-&gt;urlDebugger()</a></h3>
+        <p>Invoker</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="uuid">-&gt;uuid()</a></h3>
+        <p>Generate a FAKE UUID(universally unique identifier)</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="validate">-&gt;validate()</a></h3>
+        <p></p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="validator">-&gt;validator()</a></h3>
+        <p>Validate the data by the given options</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="view">-&gt;view()</a></h3>
+        <p>Get view object</p>
+    </div>
+        <div class="well" style="padding: 0 19px;">
+        <h3><a href="widget">-&gt;widget()</a></h3>
+        <p>Get a widget instance</p>
+    </div>
+    </div>
+        </div>
+        <hr>
+        <footer>
+            <p>&copy; Widget Framework 2008-2013</p>
+        </footer>
+    </div>
+  </body>
+</html>
