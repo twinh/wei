@@ -1,7 +1,5 @@
 /nbproject/private/
 /log
-/src
-/vendor
 /*.php
 /composer.json
 /composer.lock

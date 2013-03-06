@@ -38,7 +38,7 @@ body > .navbar .brand:hover {
 }
 
 .main {
-    max-width: 800px;
+    max-width: 640px;
     margin: 0 auto;
     text-align: center;
     padding: 70px 0 0;
@@ -52,7 +52,7 @@ body > .navbar .brand:hover {
     text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
     height: 96px;
     background: #333; 
-    width: 300px; 
+    width: 320px; 
     margin: 0 auto;
     margin-bottom: 60px;
     color: #4281CE;
@@ -70,7 +70,7 @@ body > .navbar .brand:hover {
     width: 180px;
 }
 footer {
-    max-width: 800px;
+    max-width: 640px;
     margin: 70px auto 0;
     text-align: center;
 }
