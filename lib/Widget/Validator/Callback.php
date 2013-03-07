@@ -25,7 +25,7 @@ class Callback extends AbstractValidator
     protected $fn;
     
     /**
-     * Invoker
+     * Check if the input is valid by specified callback
      * 
      * @param mixed $input The input value
      * @param \Closure|null $fn  The callback to validate the input
