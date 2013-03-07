@@ -81,7 +81,9 @@ class Widget extends AbstractWidget
      *
      * @var array
      */
-    protected $initWidgets = array();
+    protected $initWidgets = array(
+        'is'
+    );
 
     /**
      * The import configuration
