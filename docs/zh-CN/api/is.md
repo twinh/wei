@@ -25,7 +25,7 @@ bool is($rule, $input, $options)
 if ($widget->is('email', 'twinhuang@qq.com')) {
        echo 'twihuang@qq.com是邮箱';
 } else {
-       echo 'twihuang@qq.com不是邮箱'
+       echo 'twihuang@qq.com不是邮箱';
 }
 ```
 
