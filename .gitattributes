@@ -4,3 +4,4 @@
 phpunit.xml.dist export-ignore
 /tests export-ignore
 /vendor export-ignore
+/demos export-ignore
