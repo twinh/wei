@@ -21,7 +21,7 @@ bool isAll( $input [, $rules ] )
 
 $input = array(3, 2, 5);
 if ($widget->isAll($input, array(
-	'digit' => true
+    'digit' => true
 ))) {
     echo 'success';
 } else {

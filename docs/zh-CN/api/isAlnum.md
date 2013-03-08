@@ -4,11 +4,11 @@
 检查数据是否只由字母(a-z)和数字(0-9)组成
 
 ##### 目录
-* isAll( $input )
+* isAlnum( $input )
 
 ### 检查数据是否只由字母(a-z)和数字(0-9)组成
 ```php
-bool isAll( $input )
+bool isAlnum( $input )
 ```
 
 ##### 参数
