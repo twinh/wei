@@ -1,17 +1,31 @@
 [isAlpha()](http://twinh.github.com/widget/api/isAlpha)
 =======================================================
 
-Returns whether the $input value is valid
+检查数据是否只由字母(a-z)组成
 
 ##### 目录
-* isAlpha($input, $pattern)
+* isAlpha( $input )
 
-### Returns whether the $input value is valid
+### 检查数据是否只由字母(a-z)组成
 ```php
-bool isAlpha($input, $pattern)
+bool isAlpha( $input )
 ```
 
 ##### 参数
-* **$input** `mixed` 
-* **$pattern** `null|string` 
+* **$input** `mixed` 待验证的数据
 
+##### 范例
+```php
+<?php
+
+$input = 'abc123';
+if ($widget->isAlpha($input)) {
+    echo 'success';
+} else {
+    echo 'failure';
+}
+```
+##### 输出
+```php
+'failure'
+```
