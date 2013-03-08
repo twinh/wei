@@ -9,15 +9,20 @@
 namespace Widget;
 
 /**
- * Check if in get request
+ * Check if the current request method is GET 
  *
  * @author      Twin Huang <twinh@yahoo.cn>
- * @property    \Widget\Server $server The server widget
+ * @property    \Widget\Request $request The request widget
  */
 class InGet extends AbstractWidget
 {
+    /**
+     * Check if the current request method is GET
+     * 
+     * @return bool
+     */
     public function __invoke()
     {
-        return 'GET' == strtoupper($this->server['REQUEST_METHOD']);
+        return $this->request->inGet();
     }
 }

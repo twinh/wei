@@ -12,12 +12,17 @@ namespace Widget;
  * Check if in post request
  *
  * @author      Twin Huang <twinh@yahoo.cn>
- * @property    \Widget\Server $server The server widget
+ * @property    \Widget\Request $request The request widget
  */
 class InPost extends AbstractWidget
 {
+   /**
+     * Check if the current request method is POST
+     * 
+     * @return bool
+     */
     public function __invoke()
     {
-        return 'POST' == strtoupper($this->server['REQUEST_METHOD']);
+        return $this->request->inPost();
     }
 }

@@ -57,4 +57,45 @@ class Request extends Parameter
 
         return $protocol . '://' . $this->server['SERVER_NAME'] . $port . $this->server['REQUEST_URI'];
     }
+    
+    /**
+     * Check if the current request method is the specified string
+     * 
+     * @param string $method The method name to be compared
+     * @return bool
+     */
+    public function inMethod($method)
+    {
+        return $method === strtoupper($this->server['REQUEST_METHOD']);
+    }
+    
+    /**
+     * Check if the current request method is GET 
+     * 
+     * @return bool
+     */
+    public function inGet()
+    {
+        return $this->inMethod('GET');
+    }
+    
+    /**
+     * Check if the current request method is POST 
+     * 
+     * @return bool
+     */
+    public function inPost()
+    {
+        return $this->inMethod('POST');
+    }
+    
+    /**
+     * Check if the current request is an ajax(XMLHttpRequest) request
+     * 
+     * @return bool
+     */
+    public function inAjax()
+    {
+        return 'xmlhttprequest' == strtolower($this->server['HTTP_X_REQUESTED_WITH']);
+    }
 }

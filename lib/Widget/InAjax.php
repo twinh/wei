@@ -9,15 +9,20 @@
 namespace Widget;
 
 /**
- * Check if in ajax request
+ * Check if the current request is an ajax(XMLHttpRequest) request
  *
  * @author      Twin Huang <twinh@yahoo.cn>
- * @property \Widget\Server $server The server widget
+ * @property \Widget\Request $request The request widget
  */
 class InAjax extends AbstractWidget
 {
+    /**
+     * Check if the current request is an ajax(XMLHttpRequest) request
+     * 
+     * @return bool
+     */
     public function __invoke()
     {
-        return 'xmlhttprequest' == strtolower($this->server['HTTP_X_REQUESTED_WITH']);
+        return $this->request->inAjax();
     }
 }
