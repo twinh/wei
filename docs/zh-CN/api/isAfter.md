@@ -4,18 +4,20 @@
 检查数据是否大于等于指定的日期或时间
 
 ##### 目录
-* isAfter( $input )
+* isAfter( $input [, $max])
 
 ### 检查数据是否大于等于指定的日期或时间
 ```php
-bool isAfter( $input )
+bool isAfter( $input [, $max])
 ```
 
 ##### 参数
 * **$input** `mixed` 待验证的数据
+* **$max** `string` 日期或时间
 
 
-实际上,`isAfter`是`isMax`的别名.
+实际上,`isAfter`是`isMax`的别名.区别在于`isAfter`用于日期时间的比较,而`isMax`用于数据大小
+的比较,针对不同的比较情况使用不同的验证器可增加代码可读性.
 
 ##### 范例
 ```php
