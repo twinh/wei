@@ -1,18 +1,35 @@
 [isAllOf()](http://twinh.github.com/widget/api/isAllOf)
 =======================================================
 
-Check if the input is valid by all of the rules
+检查数组或对象里的每一项是否符合指定的规则
 
 ##### 目录
-* isAllOf($input, $rules, $atLeast)
+* isAll( $input [, $rules ] )
 
-### Check if the input is valid by all of the rules
+### 检查数据是否符合所有指定的规则
 ```php
-bool isAllOf($input, $rules, $atLeast)
+bool isAll( $input [, $rules ] )
 ```
 
 ##### 参数
-* **$input** `mixed` The input to be validated
-* **$rules** `array` An array that the key is validator rule name and the value is validator options
-* **$atLeast** `int|null` How manay rules should be validated at least
+* **$input** `mixed` 待验证的数据
+* **$rules** `array` 验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项
 
+##### 范例
+```php
+<?php
+
+$input = '123456';
+if ($widget->isAllOf($input, array(
+	'length' => array(5, 10),
+	'digit' => true
+))) {
+    echo 'success';
+} else {
+    echo 'failure';
+}
+```
+##### 输出
+```php
+'success'
+```
