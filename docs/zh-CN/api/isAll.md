@@ -1,17 +1,34 @@
 [isAll()](http://twinh.github.com/widget/api/isAll)
 ===================================================
 
-Check if all of the element in the input is valid by all specified rules
+检查数组或对象里的每一项是否符合指定的规则
 
 ##### 目录
-* isAll($input, $rules)
+* isAll( $input [, $rules ] )
 
-### Check if all of the element in the input is valid by all specified rules
+### 检查数组或对象里的每一项是否符合指定的规则
 ```php
-bool isAll($input, $rules)
+bool isAll( $input [, $rules ] )
 ```
 
 ##### 参数
-* **$input** `array|\Traversable` The input to be validated
-* **$rules** `array` The validation rules
+* **$input** `array|\Traversable` 待验证的数据
+* **$rules** `array` 验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项
 
+##### 范例
+```php
+<?php
+
+$input = array(3, 2, 5);
+if ($widget->isAll($input, array(
+	'digit' => true
+))) {
+    echo 'success';
+} else {
+    echo 'failure';
+}
+```
+##### 输出
+```php
+'success'
+```
