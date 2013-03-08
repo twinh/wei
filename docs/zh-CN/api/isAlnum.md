@@ -1,17 +1,31 @@
 [isAlnum()](http://twinh.github.com/widget/api/isAlnum)
 =======================================================
 
-检查数组或对象里的每一项是否符合指定的规则
+检查数据是否只由字母(a-z)和数字(0-9)组成
 
 ##### 目录
-* isAll( $input [, $rules ] )
+* isAll( $input )
 
-### 检查数据是否符合所有指定的规则
+### 检查数据是否只由字母(a-z)和数字(0-9)组成
 ```php
-bool isAll( $input [, $rules ] )
+bool isAll( $input )
 ```
 
 ##### 参数
 * **$input** `mixed` 待验证的数据
-* **$rules** `array` 验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项
 
+##### 范例
+```php
+<?php
+
+$input = 'abc123';
+if ($widget->isAlnum($input)) {
+    echo 'success';
+} else {
+    echo 'failure';
+}
+```
+##### 输出
+```php
+'success'
+```
