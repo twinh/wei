@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>custom() | Widget API Documentation</title>
+    <title>isCallback() | Widget API Documentation</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -172,14 +172,9 @@
             </ul>
 </div>                             </div>
             <div class="span9 section">
-    <h1>custom()</h1>
-    <p>desc</p>
-            <h5>目录</h5>
-    <ul>
-            <li><a href="#custom-1">isCallback( $input [, $fn [, $message ]] )</a></li>
-            <li><a href="#custom-2">isCallback( $input [, $fn [, $message] ])</a></li>
-        </ul>
-            <div class="well" id="custom-1">
+    <h1>isCallback()</h1>
+    <p>检查数据是否通过指定回调方法验证</p>
+                <div class="well" id="isCallback-1">
         <h4>isCallback( $input [, $fn [, $message ]] )<span class="pull-right">返回: <a href="#">bool</a></span></h4>
         <div style="margin: 5px 8px">
             <!--<span class="pull-right" style="font-size: 12px;">
@@ -190,25 +185,24 @@
             <ul>
                                 <li><strong>$input</strong> <code><a href="#">mixed</a></code> 待验证的数据</li>
                                 <li><strong>$fn</strong> <code><a href="#">callback</a></code> 指定验证的回调结构</li>
-                                <li><strong>$message</strong> <code><a href="#">string</a></code> 验证不通过时返回的信息</li>
-                            </ul>
-        </div>
-        <p><p>很长的说明</p>
-</p>
-                </div>
-    </div>
-        <div class="well" id="custom-2">
-        <h4>isCallback( $input [, $fn [, $message] ])<span class="pull-right">返回: <a href="#">bool</a></span></h4>
-        <div style="margin: 5px 8px">
-            <!--<span class="pull-right" style="font-size: 12px;">
-              添加于:<a href="#">1.0</a>
-            </span>-->
-        <p><strong>说明: </strong></p>
-        <div>
-            <ul>
+                                <li><strong>$message</strong> <code><a href="#">string</a></code> 验证不通过的提示信息</li>
                             </ul>
         </div>
         <p></p>
+                <h5>范例:</h5>
+        <p>通过回调方法检查数据是否能被3整除
+</p>
+        <pre><code>&lt;?php
+
+if ($widget-&gt;isCallback(3, function($input) {
+    return 0 === 10 % $input;
+})) {
+    echo &#039;success&#039;;
+} else {
+    echo &#039;failure&#039;;
+}</code></pre>
+        <h5>输出:</h5>
+        <pre><code class="php">'failure'</code></pre>
                 </div>
     </div>
     </div>

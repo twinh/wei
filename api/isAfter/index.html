@@ -173,19 +173,35 @@
 </div>                             </div>
             <div class="span9 section">
     <h1>isAfter()</h1>
-    <p></p>
+    <p>检查数据是否大于等于指定的日期或时间</p>
                 <div class="well" id="isAfter-1">
-        <h4>isAfter($input, $min)<span class="pull-right">返回: <a href="#">void</a></span></h4>
+        <h4>isAfter( $input [, $max])<span class="pull-right">返回: <a href="#">bool</a></span></h4>
         <div style="margin: 5px 8px">
             <!--<span class="pull-right" style="font-size: 12px;">
               添加于:<a href="#">1.0</a>
             </span>-->
-        <p><strong>说明: </strong></p>
+        <p><strong>说明: </strong>检查数据是否大于等于指定的日期或时间</p>
         <div>
             <ul>
+                                <li><strong>$input</strong> <code><a href="#">mixed</a></code> 待验证的数据</li>
+                                <li><strong>$max</strong> <code><a href="#">string</a></code> 日期或时间</li>
                             </ul>
         </div>
-        <p></p>
+        <p><p>实际上,<code>isAfter</code>是<code>isMax</code>的别名.区别在于<code>isAfter</code>用于日期时间的比较,而<code>isMax</code>用于数据大小
+的比较,针对不同的比较情况使用不同的验证器可增加代码可读性.</p>
+</p>
+                <h5>范例:</h5>
+        <p>检查数据是否大于等于2013-01-01
+</p>
+        <pre><code>&lt;?php
+ 
+if ($widget-&gt;isAfter(date(&#039;Y-m-d&#039;), &#039;2013-01-01&#039;)) {
+    echo &#039;Today is after 2013-01-01&#039;;
+} else {
+    echo &#039;Today is before 2013-01-01&#039;;
+}</code></pre>
+        <h5>输出:</h5>
+        <pre><code class="php">'Today is after 2013-01-01'</code></pre>
                 </div>
     </div>
     </div>
