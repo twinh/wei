@@ -1,17 +1,17 @@
 [isAlnum()](http://twinh.github.com/widget/api/isAlnum)
 =======================================================
 
-Returns whether the $input value is valid
+检查数组或对象里的每一项是否符合指定的规则
 
 ##### 目录
-* isAlnum($input, $pattern)
+* isAll( $input [, $rules ] )
 
-### Returns whether the $input value is valid
+### 检查数据是否符合所有指定的规则
 ```php
-bool isAlnum($input, $pattern)
+bool isAll( $input [, $rules ] )
 ```
 
 ##### 参数
-* **$input** `mixed` 
-* **$pattern** `null|string` 
+* **$input** `mixed` 待验证的数据
+* **$rules** `array` 验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项
 
