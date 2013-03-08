@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>-&gt;is() | Widget API Documentation</title>
+    <title>is() | Widget API Documentation</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -59,7 +59,6 @@
                 <li><a href="../bicache">Bicache</a>
                 <li><a href="../browser">Browser</a>
                 <li><a href="../cache">Cache</a>
-                <li><a href="../codeHintGenerator">CodeHintGenerator</a>
                 <li><a href="../cookie">Cookie</a>
                 <li><a href="../db">Db</a>
                 <li><a href="../dbCache">DbCache</a>
@@ -173,27 +172,110 @@
             </ul>
 </div>                             </div>
             <div class="span9 section">
-    <h1>-&gt;is()</h1>
-    <p>Validate data by given rule</p>
-    <h5>目录</h5>
+    <h1>is()</h1>
+    <p>检查数据是否能通过指定规则,或指定回调结构的验证</p>
+            <h5>目录</h5>
     <ul>
-            <li><a href="#is-1">-&gt;is($rule, $input, $options)</a></li>
+            <li><a href="#is-1">is($rule, $input, $options)</a></li>
+            <li><a href="#is-2">is($fn, $input)</a></li>
+            <li><a href="#is-3">is($rules, $input)</a></li>
         </ul>
-        <div class="well" id="is-1">
-        <h4>-&gt;is($rule, $input, $options)<span class="pull-right">返回: <a href="#">bool</a></span></h4>
+            <div class="well" id="is-1">
+        <h4>is($rule, $input, $options)<span class="pull-right">返回: <a href="#">bool</a></span></h4>
         <div style="margin: 5px 8px">
-            <span class="pull-right" style="font-size: 12px;">
+            <!--<span class="pull-right" style="font-size: 12px;">
               添加于:<a href="#">1.0</a>
-            </span>
-        <p><strong>说明: </strong>Validate data by given rule</p>
+            </span>-->
+        <p><strong>说明: </strong>检查数据是否能通过指定规则的验证</p>
         <div>
             <ul>
-                                <li><strong>$rule</strong> <code><a href="#">string|\Closure|array</a></code> The validation rule</li>
-                                <li><strong>$input</strong> <code><a href="#">mixed</a></code> The data to be validated</li>
-                                <li><strong>$options</strong> <code><a href="#">array</a></code> The validation parameters</li>
+                                <li><strong>$rule</strong> <code><a href="#">string</a></code> 验证器的名称</li>
+                                <li><strong>$input</strong> <code><a href="#">mixed</a></code> 待验证的数据</li>
+                                <li><strong>$options</strong> <code><a href="#">array</a></code> 验证器的配置选项</li>
                             </ul>
         </div>
         <p></p>
+                <h5>范例:</h5>
+        <p>检查数据是否为邮箱
+</p>
+        <pre><code>&lt;?php
+ 
+if ($widget-&gt;is(&#039;email&#039;, &#039;twinhuang@qq.com&#039;)) {
+    echo &#039;twihuang@qq.com is valid email&#039;;
+} else {
+    echo &#039;twihuang@qq.com is not valid email&#039;;
+}</code></pre>
+        <h5>输出:</h5>
+        <pre><code class="php">'twihuang@qq.com is valid email'</code></pre>
+                </div>
+    </div>
+        <div class="well" id="is-2">
+        <h4>is($fn, $input)<span class="pull-right">返回: <a href="#">bool</a></span></h4>
+        <div style="margin: 5px 8px">
+            <!--<span class="pull-right" style="font-size: 12px;">
+              添加于:<a href="#">1.0</a>
+            </span>-->
+        <p><strong>说明: </strong>检查数据是否能通过指定回调结构的验证</p>
+        <div>
+            <ul>
+                                <li><strong>$fn</strong> <code><a href="#">callback</a></code> 用于验证数据的回调结构</li>
+                                <li><strong>$input</strong> <code><a href="#">mixed</a></code> 待验证的数据</li>
+                            </ul>
+        </div>
+        <p><p>回调结构<code>$fn</code>包含三个参数,分别是</p>
+
+<ul>
+<li>$input <code>mixed</code> 待验证的数据</li>
+<li>$callback <code>\Widget\Validator\Callback</code> 回调验证器对象</li>
+<li>$widget <code>\Widget\Widget</code> 微件管理器</li>
+</ul>
+</p>
+                <h5>范例:</h5>
+        <p>检查数据是否能被3整除
+</p>
+        <pre><code>&lt;?php
+
+if ($widget-&gt;is(function($input) {
+    return 0 === 10 % $input;
+}, 3)) {
+    echo &#039;success&#039;;
+} else {
+    echo &#039;failure&#039;;
+}</code></pre>
+        <h5>输出:</h5>
+        <pre><code class="php">'failure'</code></pre>
+                </div>
+    </div>
+        <div class="well" id="is-3">
+        <h4>is($rules, $input)<span class="pull-right">返回: <a href="#">bool</a></span></h4>
+        <div style="margin: 5px 8px">
+            <!--<span class="pull-right" style="font-size: 12px;">
+              添加于:<a href="#">1.0</a>
+            </span>-->
+        <p><strong>说明: </strong></p>
+        <div>
+            <ul>
+                                <li><strong>$rules</strong> <code><a href="#">array</a></code> 验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项</li>
+                                <li><strong>$input</strong> <code><a href="#">mixed</a></code> 待验证的数据</li>
+                            </ul>
+        </div>
+        <p></p>
+                <h5>范例:</h5>
+        <p>检查数据是否为数字,且长度在3到5之间
+</p>
+        <pre><code>&lt;?php
+
+$rules = array(
+    &#039;digit&#039; =&gt; true,
+    &#039;length&#039; =&gt; array(3, 5)
+);
+if ($widget-&gt;is($rules, &#039;123456&#039;)) {
+    echo &#039;success&#039;;
+} else {
+    echo &#039;failure&#039;;
+}</code></pre>
+        <h5>输出:</h5>
+        <pre><code class="php">'failure'</code></pre>
                 </div>
     </div>
     </div>
