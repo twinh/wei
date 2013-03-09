@@ -14,7 +14,9 @@ bool isCreditCard( $input [, $type] )
 
 
 允许指定的信用卡类型有: American Express, Diners Club, Discover, JCB, MasterCard, China UnionPay 和 Visa
+
 下表为目前允许的信用卡类型
+
 | **发卡机构**     | **中文名称** | **值**       |
 |------------------|--------------|--------------|
 | American Express | 美国运通     | `Amex`       |
@@ -24,6 +26,7 @@ bool isCreditCard( $input [, $type] )
 | MasterCard       | 万事达卡     | `MasterCard` |
 | China UnionPay   | 中国银联     | `UnionPay`   | 
 | Visa             | -            | `Visa`       |
+
 
 ##### 范例
 检查数据是否为Visa或银联卡,第二个参数即可以是字符串,也可以是数组

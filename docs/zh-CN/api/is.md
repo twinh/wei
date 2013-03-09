@@ -21,6 +21,7 @@ bool is($rule, $input, $options)
 ##### 范例
 检查数据是否为邮箱
 
+
 ```php
 <?php
  
@@ -47,12 +48,15 @@ bool is($fn, $input)
 
 
 回调结构`$fn`包含三个参数,分别是
+
 * $input `mixed` 待验证的数据
 * $callback `\Widget\Validator\Callback` 回调验证器对象
 * $widget `\Widget\Widget` 微件管理器
 
+
 ##### 范例
 检查数据是否能被3整除
+
 
 ```php
 <?php
