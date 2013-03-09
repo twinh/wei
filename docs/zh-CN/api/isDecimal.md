@@ -1,13 +1,29 @@
 [isDecimal()](http://twinh.github.com/widget/api/isDecimal)
 ===========================================================
 
-Validate the input value
+检查数据是否为小数
 
-### Validate the input value
+### 
 ```php
-bool isDecimal($input)
+bool isDecimal( $input )
 ```
 
 ##### 参数
-* **$input** `mixed` 
+* **$input** `mixed` 待验证的数据
 
+##### 范例
+检查"0.0.1"是否为小数
+
+```php
+<?php
+
+if ($widget->isDecimal('1.0.0')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
+##### 输出
+```php
+'No'
+```
