@@ -3,7 +3,7 @@
 
 检查数据是否通过指定回调方法验证
 
-### 检查数据是否通过指定回调方法验证
+### 
 ```php
 bool isCallback( $input [, $fn [, $message ]] )
 ```

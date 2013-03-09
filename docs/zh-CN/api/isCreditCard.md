@@ -3,7 +3,7 @@
 
 检查数据是否为合法的信用卡号码
 
-### 检查数据是否为合法的信用卡号码
+### 
 ```php
 bool isCreditCard( $input [, $type] )
 ```
