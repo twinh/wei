@@ -18,7 +18,7 @@ Basic Usage
 // Require the widget manager class
 require 'path/to/widget/lib/Widget/Widget.php';
 
-// Creates the default widget manager instance
+// Create the default widget manager instance
 $widget = Widget\Widget::create();
 
 // Initialize the "request" widget
