@@ -13,7 +13,6 @@ bool isBlank( $input )
 
 ##### 范例
 检查空白字符会返回成功
-
 ```php
 <?php
 

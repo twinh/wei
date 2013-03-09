@@ -13,7 +13,6 @@ bool isDir( $input )
 
 ##### 范例
 检查"/notfound/directory"是否为存在的目录
-
 ```php
 <?php
 

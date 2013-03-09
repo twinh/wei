@@ -13,7 +13,6 @@ bool isDecimal( $input )
 
 ##### 范例
 检查"0.0.1"是否为小数
-
 ```php
 <?php
 

@@ -30,7 +30,6 @@ bool isCreditCard( $input [, $type] )
 
 ##### 范例
 检查数据是否为Visa或银联卡,第二个参数即可以是字符串,也可以是数组
-
 ```php
 <?php
 

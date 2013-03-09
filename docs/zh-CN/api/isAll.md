@@ -14,7 +14,6 @@ bool isAll( $input [, $rules ] )
 
 ##### 范例
 检查数组里的每一项是否都为数字
-
 ```php
 <?php
 

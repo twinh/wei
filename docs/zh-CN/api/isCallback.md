@@ -15,7 +15,6 @@ bool isCallback( $input [, $fn [, $message ]] )
 
 ##### 范例
 通过回调方法检查数据是否能被3整除
-
 ```php
 <?php
 

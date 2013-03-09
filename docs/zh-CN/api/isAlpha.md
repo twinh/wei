@@ -13,7 +13,6 @@ bool isAlpha( $input )
 
 ##### 范例
 检查数据是否只由字母组成
-
 ```php
 <?php
 

@@ -14,7 +14,6 @@ bool isAll( $input [, $rules ] )
 
 ##### 范例
 检查数据是否为5-10位的数字
-
 ```php
 <?php
 

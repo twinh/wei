@@ -13,7 +13,6 @@ bool isChinese( $input )
 
 ##### 范例
 检查数据是否只由汉字组成
-
 ```php
 <?php
 

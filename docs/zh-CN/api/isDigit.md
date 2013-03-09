@@ -13,7 +13,6 @@ bool isDigit( $input )
 
 ##### 范例
 检查"abc123"是否为数字
-
 ```php
 <?php
 

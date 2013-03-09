@@ -19,7 +19,6 @@ bool isAfter( $input [, $max])
 
 ##### 范例
 检查数据是否大于等于2013-01-01
-
 ```php
 <?php
  

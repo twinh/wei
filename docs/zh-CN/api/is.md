@@ -20,8 +20,6 @@ bool is($rule, $input, $options)
 
 ##### 范例
 检查数据是否为邮箱
-
-
 ```php
 <?php
  
@@ -56,8 +54,6 @@ bool is($fn, $input)
 
 ##### 范例
 检查数据是否能被3整除
-
-
 ```php
 <?php
 
@@ -86,7 +82,6 @@ bool is($rules, $input)
 
 ##### 范例
 检查数据是否为数字,且长度在3到5之间
-
 ```php
 <?php
 
