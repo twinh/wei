@@ -3,9 +3,6 @@
 
 {@inheritdoc}
 
-##### 目录
-* cache($key, $value, $expire)
-
 ### {@inheritdoc}
 ```php
 void cache($key, $value, $expire)

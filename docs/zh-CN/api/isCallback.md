@@ -3,9 +3,6 @@
 
 检查数据是否通过指定回调方法验证
 
-##### 目录
-* isCallback( $input [, $fn [, $message ]] )
-
 ### 检查数据是否通过指定回调方法验证
 ```php
 bool isCallback( $input [, $fn [, $message ]] )
@@ -17,6 +14,8 @@ bool isCallback( $input [, $fn [, $message ]] )
 * **$message** `string` 验证不通过的提示信息
 
 ##### 范例
+通过回调方法检查数据是否能被3整除
+
 ```php
 <?php
 

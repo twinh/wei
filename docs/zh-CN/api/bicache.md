@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* bicache($key, $value, $expire)
-
 ### 
 ```php
 void bicache($key, $value, $expire)

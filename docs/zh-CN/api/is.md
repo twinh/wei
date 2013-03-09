@@ -19,6 +19,8 @@ bool is($rule, $input, $options)
 * **$options** `array` 验证器的配置选项
 
 ##### 范例
+检查数据是否为邮箱
+
 ```php
 <?php
  
@@ -50,6 +52,8 @@ bool is($fn, $input)
 * $widget `\Widget\Widget` 微件管理器
 
 ##### 范例
+检查数据是否能被3整除
+
 ```php
 <?php
 
@@ -77,6 +81,8 @@ bool is($rules, $input)
 * **$input** `mixed` 待验证的数据
 
 ##### 范例
+检查数据是否为数字,且长度在3到5之间
+
 ```php
 <?php
 

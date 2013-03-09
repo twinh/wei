@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* isMin($input, $min)
-
 ### 
 ```php
 void isMin($input, $min)

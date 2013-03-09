@@ -3,9 +3,6 @@
 
 Get ip address
 
-##### 目录
-* ip($default)
-
 ### Get ip address
 ```php
 string ip($default)

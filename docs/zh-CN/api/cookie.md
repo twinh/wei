@@ -3,9 +3,6 @@
 
 Get or set cookie
 
-##### 目录
-* cookie($key, $value, $options)
-
 ### Get or set cookie
 ```php
 mixed cookie($key, $value, $options)

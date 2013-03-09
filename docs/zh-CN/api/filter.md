@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* filter($name, $callback)
-
 ### 
 ```php
 void filter($name, $callback)

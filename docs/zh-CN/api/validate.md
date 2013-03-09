@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* validate($options)
-
 ### 
 ```php
 void validate($options)

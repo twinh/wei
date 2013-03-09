@@ -3,9 +3,6 @@
 
 Remove one or all handlers
 
-##### 目录
-* off($type)
-
 ### Remove one or all handlers
 ```php
 \EventManager off($type)

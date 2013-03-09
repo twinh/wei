@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* isNoneOf($input, $rules)
-
 ### 
 ```php
 void isNoneOf($input, $rules)

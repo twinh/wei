@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* result($message, $code, $append)
-
 ### 
 ```php
 void result($message, $code, $append)

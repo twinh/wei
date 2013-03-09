@@ -3,9 +3,6 @@
 
 Validate the input value
 
-##### 目录
-* isNull($input)
-
 ### Validate the input value
 ```php
 bool isNull($input)

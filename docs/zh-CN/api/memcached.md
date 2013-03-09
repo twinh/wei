@@ -3,9 +3,6 @@
 
 {@inheritdoc}
 
-##### 目录
-* memcached($key, $value, $expire)
-
 ### {@inheritdoc}
 ```php
 void memcached($key, $value, $expire)

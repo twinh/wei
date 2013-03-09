@@ -3,9 +3,6 @@
 
 Invoker
 
-##### 目录
-* urlDebugger()
-
 ### Invoker
 ```php
 \Widget\UrlDebugger urlDebugger()

@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* isTime($input, $format)
-
 ### 
 ```php
 void isTime($input, $format)

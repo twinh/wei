@@ -3,9 +3,6 @@
 
 检查数据是否只由字母(a-z)组成
 
-##### 目录
-* isAlpha( $input )
-
 ### 检查数据是否只由字母(a-z)组成
 ```php
 bool isAlpha( $input )
@@ -15,6 +12,8 @@ bool isAlpha( $input )
 * **$input** `mixed` 待验证的数据
 
 ##### 范例
+检查数据是否只由字母组成
+
 ```php
 <?php
 

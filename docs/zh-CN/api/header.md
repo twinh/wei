@@ -3,9 +3,6 @@
 
 Get or set the header values
 
-##### 目录
-* header($name, $values, $replace)
-
 ### Get or set the header values
 ```php
 mixed|\Widget\Header header($name, $values, $replace)

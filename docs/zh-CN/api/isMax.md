@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* isMax($input, $max)
-
 ### 
 ```php
 void isMax($input, $max)

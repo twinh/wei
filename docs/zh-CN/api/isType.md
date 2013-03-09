@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* isType($input, $type)
-
 ### 
 ```php
 void isType($input, $type)

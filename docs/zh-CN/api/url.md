@@ -3,9 +3,6 @@
 
 快速构建链接
 
-##### 目录
-* url($value1, $value2, $params)
-
 ### 快速构建链接
 ```php
 string url($value1, $value2, $params)

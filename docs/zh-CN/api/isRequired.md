@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* isRequired($input, $required)
-
 ### 
 ```php
 void isRequired($input, $required)

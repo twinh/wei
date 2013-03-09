@@ -3,9 +3,6 @@
 
 Check if the current request method is POST
 
-##### 目录
-* inPost()
-
 ### Check if the current request method is POST
 ```php
 bool inPost()

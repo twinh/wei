@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* isIn($input, $array, $strict)
-
 ### 
 ```php
 void isIn($input, $array, $strict)

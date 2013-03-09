@@ -3,9 +3,6 @@
 
 Return the \Smarty object
 
-##### 目录
-* smarty()
-
 ### Return the \Smarty object
 ```php
 \Smarty smarty()

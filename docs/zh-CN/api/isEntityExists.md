@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* isEntityExists($input, $entityClass, $filed)
-
 ### 
 ```php
 void isEntityExists($input, $entityClass, $filed)

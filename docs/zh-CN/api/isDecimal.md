@@ -3,9 +3,6 @@
 
 Validate the input value
 
-##### 目录
-* isDecimal($input)
-
 ### Validate the input value
 ```php
 bool isDecimal($input)

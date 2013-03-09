@@ -3,9 +3,6 @@
 
 Validate the input value
 
-##### 目录
-* isUrl($input)
-
 ### Validate the input value
 ```php
 bool isUrl($input)

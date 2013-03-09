@@ -3,9 +3,6 @@
 
 flush content to the browser
 
-##### 目录
-* flush($content, $sleep)
-
 ### flush content to the browser
 ```php
 \Flush flush($content, $sleep)

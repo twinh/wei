@@ -3,9 +3,6 @@
 
 Send a redirect response
 
-##### 目录
-* redirect($url, $status, $options)
-
 ### Send a redirect response
 ```php
 \Redirect redirect($url, $status, $options)

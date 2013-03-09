@@ -3,9 +3,6 @@
 
 Trigger a event
 
-##### 目录
-* eventManager($type, $args, $widget)
-
 ### Trigger a event
 ```php
 \Event eventManager($type, $args, $widget)

@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* trigger($event, $params, $widget)
-
 ### 
 ```php
 void trigger($event, $params, $widget)

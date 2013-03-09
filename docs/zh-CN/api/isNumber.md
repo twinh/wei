@@ -3,9 +3,6 @@
 
 Validate the input value
 
-##### 目录
-* isNumber($input)
-
 ### Validate the input value
 ```php
 bool isNumber($input)

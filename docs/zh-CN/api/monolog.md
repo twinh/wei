@@ -3,9 +3,6 @@
 
 Get monolog logger object or add a log record
 
-##### 目录
-* monolog($message, $level, $context)
-
 ### Get monolog logger object or add a log record
 ```php
 \Monolog\Logger|\boolen monolog($message, $level, $context)

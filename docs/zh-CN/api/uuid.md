@@ -3,9 +3,6 @@
 
 Generate a FAKE UUID(universally unique identifier)
 
-##### 目录
-* uuid()
-
 ### Generate a FAKE UUID(universally unique identifier)
 ```php
 string uuid()

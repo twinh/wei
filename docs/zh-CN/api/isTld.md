@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* isTld($input, $array, $strict)
-
 ### 
 ```php
 void isTld($input, $array, $strict)

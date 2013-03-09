@@ -3,9 +3,6 @@
 
 Set a marker
 
-##### 目录
-* marker($name)
-
 ### Set a marker
 ```php
 \Marker marker($name)

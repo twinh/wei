@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* isBefore($input, $max)
-
 ### 
 ```php
 void isBefore($input, $max)

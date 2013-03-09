@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* isOneOf($input, $rules, $atLeast)
-
 ### 
 ```php
 void isOneOf($input, $rules, $atLeast)

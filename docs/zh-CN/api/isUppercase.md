@@ -3,9 +3,6 @@
 
 Validate the input value
 
-##### 目录
-* isUppercase($input)
-
 ### Validate the input value
 ```php
 bool isUppercase($input)

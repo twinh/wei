@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* isDate($input, $format)
-
 ### 
 ```php
 void isDate($input, $format)

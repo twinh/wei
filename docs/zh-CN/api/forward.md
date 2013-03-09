@@ -3,9 +3,6 @@
 
 Forwards to the given module, controller and action
 
-##### 目录
-* forward($action, $controller, $module)
-
 ### Forwards to the given module, controller and action
 ```php
 \Forward forward($action, $controller, $module)

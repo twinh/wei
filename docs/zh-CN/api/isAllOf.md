@@ -3,9 +3,6 @@
 
 检查数据是否通过所有的规则校验
 
-##### 目录
-* isAll( $input [, $rules ] )
-
 ### 检查数据是否通过所有的规则校验
 ```php
 bool isAll( $input [, $rules ] )
@@ -16,6 +13,8 @@ bool isAll( $input [, $rules ] )
 * **$rules** `array` 验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项
 
 ##### 范例
+检查数据是否为5-10位的数字
+
 ```php
 <?php
 

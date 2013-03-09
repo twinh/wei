@@ -3,9 +3,6 @@
 
 检查数据是否只由汉字组成
 
-##### 目录
-* isChinese( $input )
-
 ### 检查数据是否只由汉字组成
 ```php
 bool isChinese( $input )
@@ -15,6 +12,8 @@ bool isChinese( $input )
 * **$input** `mixed` 待验证的数据
 
 ##### 范例
+检查数据是否只由汉字组成
+
 ```php
 <?php
 

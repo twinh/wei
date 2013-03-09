@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* isRange($input, $min, $max)
-
 ### 
 ```php
 void isRange($input, $min, $max)

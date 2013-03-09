@@ -3,9 +3,6 @@
 
 Validate the data by the given options
 
-##### 目录
-* validator($options)
-
 ### Validate the data by the given options
 ```php
 false validator($options)

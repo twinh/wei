@@ -3,9 +3,6 @@
 
 Returns a *stringify* or user defined($default) parameter value
 
-##### 目录
-* get($name, $default)
-
 ### Returns a *stringify* or user defined($default) parameter value
 ```php
 string|null get($name, $default)

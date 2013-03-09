@@ -3,9 +3,6 @@
 
 Returns the value of specified key in $data
 
-##### 目录
-* attr($data, $key)
-
 ### Returns the value of specified key in $data
 ```php
 mixed|null attr($data, $key)

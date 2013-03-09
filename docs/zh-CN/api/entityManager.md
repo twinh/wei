@@ -3,9 +3,6 @@
 
 Get Docrine ORM entity manager
 
-##### 目录
-* entityManager()
-
 ### Get Docrine ORM entity manager
 ```php
 \Doctrine\ORM\EntityManager entityManager()

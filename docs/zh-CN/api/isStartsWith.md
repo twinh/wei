@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* isStartsWith($input, $findMe, $case)
-
 ### 
 ```php
 void isStartsWith($input, $findMe, $case)

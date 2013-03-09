@@ -3,9 +3,6 @@
 
 Invoker
 
-##### 目录
-* t($message, $parameters)
-
 ### Invoker
 ```php
 string t($message, $parameters)

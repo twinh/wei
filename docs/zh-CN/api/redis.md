@@ -3,9 +3,6 @@
 
 {@inheritdoc}
 
-##### 目录
-* redis($key, $value, $expire)
-
 ### {@inheritdoc}
 ```php
 void redis($key, $value, $expire)

@@ -3,9 +3,6 @@
 
 Upload a file
 
-##### 目录
-* upload($options)
-
 ### Upload a file
 ```php
 array upload($options)

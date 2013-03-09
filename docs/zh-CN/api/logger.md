@@ -3,9 +3,6 @@
 
 Logs with an arbitrary level
 
-##### 目录
-* logger($level, $message, $context)
-
 ### Logs with an arbitrary level
 ```php
 bool logger($level, $message, $context)

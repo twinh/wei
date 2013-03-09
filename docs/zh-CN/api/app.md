@@ -3,9 +3,6 @@
 
 Startup application
 
-##### 目录
-* app($options)
-
 ### Startup application
 ```php
 \App|null app($options)

@@ -3,9 +3,6 @@
 
 Returns whether the $input value is valid
 
-##### 目录
-* isDoubleByte($input, $pattern)
-
 ### Returns whether the $input value is valid
 ```php
 bool isDoubleByte($input, $pattern)

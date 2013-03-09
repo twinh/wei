@@ -3,9 +3,6 @@
 
 Get view object
 
-##### 目录
-* view()
-
 ### Get view object
 ```php
 \View view()

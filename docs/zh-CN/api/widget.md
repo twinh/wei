@@ -3,9 +3,6 @@
 
 Get a widget instance
 
-##### 目录
-* widget($name)
-
 ### Get a widget instance
 ```php
 object widget($name)

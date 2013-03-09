@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* isDivisibleBy($input, $divisor)
-
 ### 
 ```php
 void isDivisibleBy($input, $divisor)

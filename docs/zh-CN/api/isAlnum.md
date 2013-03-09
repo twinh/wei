@@ -3,9 +3,6 @@
 
 检查数据是否只由字母(a-z)和数字(0-9)组成
 
-##### 目录
-* isAlnum( $input )
-
 ### 检查数据是否只由字母(a-z)和数字(0-9)组成
 ```php
 bool isAlnum( $input )
@@ -15,6 +12,8 @@ bool isAlnum( $input )
 * **$input** `mixed` 待验证的数据
 
 ##### 范例
+检查数据是否只由字母和数字组成
+
 ```php
 <?php
 

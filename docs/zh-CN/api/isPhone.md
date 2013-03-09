@@ -3,9 +3,6 @@
 
 Returns whether the $input value is valid
 
-##### 目录
-* isPhone($input, $pattern)
-
 ### Returns whether the $input value is valid
 ```php
 bool isPhone($input, $pattern)

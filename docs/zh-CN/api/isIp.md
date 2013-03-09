@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* isIp($input, $options)
-
 ### 
 ```php
 void isIp($input, $options)

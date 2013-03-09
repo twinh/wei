@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* isEquals($input, $equals, $strict)
-
 ### 
 ```php
 void isEquals($input, $equals, $strict)

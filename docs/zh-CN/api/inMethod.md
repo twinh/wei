@@ -3,9 +3,6 @@
 
 Check if the current request method is the specified string
 
-##### 目录
-* inMethod($method)
-
 ### Check if the current request method is the specified string
 ```php
 bool inMethod($method)

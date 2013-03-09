@@ -3,9 +3,6 @@
 
 Sort two-dimensional array like SQL ORDER BY clause
 
-##### 目录
-* sort($array, $key, $type)
-
 ### Sort two-dimensional array like SQL ORDER BY clause
 ```php
 array sort($array, $key, $type)

@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* isMaxLength($input, $max)
-
 ### 
 ```php
 void isMaxLength($input, $max)

@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* on($type, $fn, $priority, $data)
-
 ### 
 ```php
 void on($type, $fn, $priority, $data)

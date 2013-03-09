@@ -3,9 +3,6 @@
 
 Validate the input value
 
-##### 目录
-* isIdCardTw($input)
-
 ### Validate the input value
 ```php
 bool isIdCardTw($input)

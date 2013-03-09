@@ -3,9 +3,6 @@
 
 Get or set session
 
-##### 目录
-* session($key, $value, $options)
-
 ### Get or set session
 ```php
 mixed session($key, $value, $options)

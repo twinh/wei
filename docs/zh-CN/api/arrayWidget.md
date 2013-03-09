@@ -3,9 +3,6 @@
 
 Returns a parameter value
 
-##### 目录
-* arrayWidget($name, $default)
-
 ### Returns a parameter value
 ```php
 mixed arrayWidget($name, $default)

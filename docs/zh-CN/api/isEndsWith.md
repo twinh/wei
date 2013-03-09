@@ -3,9 +3,6 @@
 
 
 
-##### 目录
-* isEndsWith($input, $findMe, $case)
-
 ### 
 ```php
 void isEndsWith($input, $findMe, $case)

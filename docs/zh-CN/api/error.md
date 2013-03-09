@@ -3,9 +3,6 @@
 
 Show error message
 
-##### 目录
-* error($event, $widget, $message, $code, $options)
-
 ### Show error message
 ```php
 void error($event, $widget, $message, $code, $options)

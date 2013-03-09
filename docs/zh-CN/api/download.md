@@ -3,9 +3,6 @@
 
 Download a file form server
 
-##### 目录
-* download($file, $options)
-
 ### Download a file form server
 ```php
 \Download download($file, $options)
