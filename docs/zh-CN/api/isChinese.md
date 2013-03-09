@@ -1,17 +1,30 @@
 [isChinese()](http://twinh.github.com/widget/api/isChinese)
 ===========================================================
 
-Returns whether the $input value is valid
+检查数据是否只由汉字组成
 
 ##### 目录
-* isChinese($input, $pattern)
+* isChinese( $input )
 
-### Returns whether the $input value is valid
+### 检查数据是否只由汉字组成
 ```php
-bool isChinese($input, $pattern)
+bool isChinese( $input )
 ```
 
 ##### 参数
-* **$input** `mixed` 
-* **$pattern** `null|string` 
+* **$input** `mixed` 待验证的数据
 
+##### 范例
+```php
+<?php
+
+if ($widget->isChinese('中文')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
+##### 输出
+```php
+'Yes'
+```
