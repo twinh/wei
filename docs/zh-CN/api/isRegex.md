@@ -1,15 +1,29 @@
-    该微件文档还在紧急编写中,敬请期待!
 [isRegex()](http://twinh.github.com/widget/api/isRegex)
 =======================================================
 
-Returns whether the $input value is valid
+检查数据是否匹配指定的正则表达式
 
-### Returns whether the $input value is valid
+### 
 ```php
-bool isRegex($input, $pattern)
+bool isRegex ( $input [, $pattern ] )
 ```
 
 ##### 参数
-* **$input** `mixed` 
-* **$pattern** `null|string` 
+* **$input** `mixed` 待验证的数据
+* **$pattern** `string` 校验的正则表达式
 
+##### 范例
+检查"abc"是否匹配正则表达式"/d/i"
+```php
+<?php
+ 
+if ($widget->isRegex('abc', '/d/i')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
+##### 输出
+```php
+'No'
+```
