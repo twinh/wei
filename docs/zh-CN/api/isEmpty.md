@@ -1,13 +1,28 @@
 [isEmpty()](http://twinh.github.com/widget/api/isEmpty)
 =======================================================
 
-Validate the input value
+检查数据是否为空(允许空格)
 
-### Validate the input value
+### 
 ```php
-bool isEmpty($input)
+bool isEmpty( $input )
 ```
 
 ##### 参数
-* **$input** `mixed` 
+* **$input** `mixed` 待验证的数据
 
+##### 范例
+检查"abc"是否为空
+```php
+<?php
+
+if ($widget->isEmpty('abc')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
+##### 输出
+```php
+'No'
+```
