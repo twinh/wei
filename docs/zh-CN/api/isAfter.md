@@ -10,7 +10,7 @@ bool isAfter( $input [, $max])
 
 ##### 参数
 * **$input** `mixed` 待验证的数据
-* **$max** `string` 日期或时间
+* **$max** `string` 用于比较的日期或时间
 
 
 实际上,`isAfter`是`isMax`的别名.区别在于`isAfter`用于日期时间的比较,而`isMax`用于数据大小
