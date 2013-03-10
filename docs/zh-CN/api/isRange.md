@@ -1,13 +1,30 @@
-    该微件文档还在紧急编写中,敬请期待!
 [isRange()](http://twinh.github.com/widget/api/isRange)
 =======================================================
 
-
+检查数据是否在指定的两个值之间
 
 ### 
 ```php
-void isRange($input, $min, $max)
+bool isRange ( $input [, $min [, $max ] ] )
 ```
 
 ##### 参数
+* **$input** `mixed` 待验证的数据
+* **$min** `int` 限制的最小值
+* **$max** `int` 限制的最大值
 
+##### 范例
+检查18是否在1到10之间
+```php
+<?php
+ 
+if ($widget->isRange(18, 1, 10)) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
+##### 输出
+```php
+'No'
+```
