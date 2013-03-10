@@ -16,7 +16,7 @@ bool isPhone ( $input )
 ```php
 <?php
  
-if ($widget->isPhone("020-1234567")) {
+if ($widget->isPhone('020-1234567')) {
     echo 'Yes';
 } else {
     echo 'No';
