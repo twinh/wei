@@ -1,14 +1,28 @@
-    该微件文档还在紧急编写中,敬请期待!
 [isNumber()](http://twinh.github.com/widget/api/isNumber)
 =========================================================
 
-Validate the input value
+检查数据是否为有效数字
 
-### Validate the input value
+### 
 ```php
-bool isNumber($input)
+bool isNumber ( $input )
 ```
 
 ##### 参数
-* **$input** `mixed` 
+* **$input** `mixed` 待验证的数据
 
+##### 范例
+检查-123.4是否为数字
+```php
+<?php
+ 
+if ($widget->isNumber(-123.4)) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
+##### 输出
+```php
+'Yes'
+```
