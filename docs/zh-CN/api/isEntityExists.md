@@ -10,8 +10,8 @@ bool isEntityExists( $input [, $entityClass [, $field ] ] )
 
 ##### 参数
 * **$input** `mixed` 待验证的数据,一般为主键的值
-* **$entityClass** `-` 实体的类名
-* **$field** `-` 指定的字段名称,留空表示主键
+* **$entityClass** `string` 实体的类名
+* **$field** `string` 指定的字段名称,留空表示主键
 
 ##### 范例
 检查主键为1的用户是否存在,和检查name为test的用户是否存在
@@ -109,8 +109,8 @@ if ($widget->isEntityExists('1', 'User')) {
     echo 'No';
 }
 
-// Check if the name=twin user exists
-if ($widget->isEntityExists('twin', 'User', 'name')) {
+// Check if the name=test user exists
+if ($widget->isEntityExists('test', 'User', 'name')) {
     echo 'Yes';
 } else {
     echo 'No';
