@@ -1,14 +1,28 @@
-    该微件文档还在紧急编写中,敬请期待!
 [isLowercase()](http://twinh.github.com/widget/api/isLowercase)
 ===============================================================
 
-Validate the input value
+检查数据是否为小写字符
 
-### Validate the input value
+### 
 ```php
-bool isLowercase($input)
+bool isLowercase( $input )
 ```
 
 ##### 参数
-* **$input** `mixed` 
+* **$input** `mixed` 待验证的数据
 
+##### 范例
+检查"abc"是否为小写字符
+```php
+<?php
+ 
+if ($widget->isLowercase('abc')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
+##### 输出
+```php
+'Yes'
+```
