@@ -1,14 +1,28 @@
 [isDoubleByte()](http://twinh.github.com/widget/api/isDoubleByte)
 =================================================================
 
-Returns whether the $input value is valid
+检查数据是否只由双字节字符组成
 
-### Returns whether the $input value is valid
+### 
 ```php
-bool isDoubleByte($input, $pattern)
+bool isDoubleByte( $input )
 ```
 
 ##### 参数
-* **$input** `mixed` 
-* **$pattern** `null|string` 
+* **$input** `mixed` 待验证的数据
 
+##### 范例
+检查"中文abc"是否只由双字节字符组成
+```php
+<?php
+
+if ($widget->isDoubleByte('中文abc')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
+##### 输出
+```php
+'No'
+```
