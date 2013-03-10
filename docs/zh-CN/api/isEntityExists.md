@@ -102,7 +102,7 @@ $em->persist($user2);
 
 $em->flush();
 
-// Check if the id=1 User exists
+// Check if the id=1 user exists
 if ($widget->isEntityExists('1', 'User')) {
     echo 'Yes';
 } else {
