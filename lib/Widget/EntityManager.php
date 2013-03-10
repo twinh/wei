@@ -34,6 +34,7 @@ class EntityManager extends AbstractWidget
         'autoGenerateProxyClasses' => null,
         'annotationDriverPaths' => array(),
         'entityNamespaces' => array(),
+        'useSimpleAnnotationReader' => false,
     );
 
     /**
@@ -80,7 +81,7 @@ class EntityManager extends AbstractWidget
 
         // todo other driver ?
         if ($options['annotationDriverPaths']) {
-            $driverImpl = $config->newDefaultAnnotationDriver($options['annotationDriverPaths'], false);
+            $driverImpl = $config->newDefaultAnnotationDriver($options['annotationDriverPaths'], $options['useSimpleAnnotationReader']);
             $config->setMetadataDriverImpl($driverImpl);
         }
 
