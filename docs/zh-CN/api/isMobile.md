@@ -1,15 +1,28 @@
-    该微件文档还在紧急编写中,敬请期待!
 [isMobile()](http://twinh.github.com/widget/api/isMobile)
 =========================================================
 
-Returns whether the $input value is valid
+检查数据是否为有效的手机号码
 
-### Returns whether the $input value is valid
+### 
 ```php
-bool isMobile($input, $pattern)
+bool isMobile ( $input )
 ```
 
 ##### 参数
-* **$input** `mixed` 
-* **$pattern** `null|string` 
+* **$input** `mixed` 待验证的数据
 
+##### 范例
+检查"13800138000"是否为有效的手机号码
+```php
+<?php
+ 
+if ($widget->isMobile('13800138000')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
+##### 输出
+```php
+'Yes'
+```
