@@ -7,7 +7,7 @@
 * isLength ( $input [, $length ] )
 * isLength ( $input [, $min [, $max ] ] )
 
-### 
+### 检查数据的长度是否为指定的数值
 ```php
 bool isLength ( $input [, $length ] )
 ```
@@ -33,7 +33,7 @@ if ($widget->isLength('abc', 3)) {
 ```
 - - - -
 
-### 
+### 检查数据的长度是否在指定的长度范围内
 ```php
 bool isLength ( $input [, $min [, $max ] ] )
 ```
