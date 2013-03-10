@@ -1,13 +1,28 @@
 [isIdCardCn()](http://twinh.github.com/widget/api/isIdCardCn)
 =============================================================
 
-Validate the input value
+检查数据是否为有效的中国身份证
 
-### Validate the input value
+### 
 ```php
-bool isIdCardCn($input)
+bool isIdCardCn( $input )
 ```
 
 ##### 参数
-* **$input** `mixed` 
+* **$input** `mixed` 待验证的数据
 
+##### 范例
+检查15位数字"342622840209049"是否为有效的中国身份证
+```php
+<?php
+
+if ($widget->isIdCardCn('342622840209049')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
+##### 输出
+```php
+'Yes'
+```
