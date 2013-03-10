@@ -1,13 +1,28 @@
 [isExists()](http://twinh.github.com/widget/api/isExists)
 =========================================================
 
-Validate the input value
+检查数据是否为存在的文件或目录
 
-### Validate the input value
+### 
 ```php
-bool isExists($input)
+bool isExists( $input )
 ```
 
 ##### 参数
-* **$input** `mixed` 
+* **$input** `mixed` 待验证的数据
 
+##### 范例
+检查路径"/notfound/directory"是否存在
+```php
+<?php
+
+if ($widget->isExists('/notfound/directory')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
+##### 输出
+```php
+'No'
+```
