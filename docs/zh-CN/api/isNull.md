@@ -1,14 +1,28 @@
-    该微件文档还在紧急编写中,敬请期待!
 [isNull()](http://twinh.github.com/widget/api/isNull)
 =====================================================
 
-Validate the input value
+检查数据是否为null
 
-### Validate the input value
+### 
 ```php
-bool isNull($input)
+bool isNull ( $input )
 ```
 
 ##### 参数
-* **$input** `mixed` 
+* **$input** `mixed` 待验证的数据
 
+##### 范例
+检查0是否为null
+```php
+<?php
+ 
+if ($widget->isNull(0)) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
+##### 输出
+```php
+'No'
+```
