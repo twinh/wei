@@ -1,15 +1,28 @@
-    该微件文档还在紧急编写中,敬请期待!
 [isPostcode()](http://twinh.github.com/widget/api/isPostcode)
 =============================================================
 
-Returns whether the $input value is valid
+检查数据是否为有效的中国邮政编码
 
-### Returns whether the $input value is valid
+### 
 ```php
-bool isPostcode($input, $pattern)
+bool isPostcode ( $input )
 ```
 
 ##### 参数
-* **$input** `mixed` 
-* **$pattern** `null|string` 
+* **$input** `mixed` 待验证的数据
 
+##### 范例
+检查"123456"是否为有效的车牌号码
+```php
+<?php
+ 
+if ($widget->isPostcode('123456')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
+##### 输出
+```php
+'Yes'
+```
