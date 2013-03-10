@@ -10,7 +10,7 @@ bool isBefore( $input [, $min ])
 
 ##### 参数
 * **$input** `mixed` 待验证的数据
-* **$min** `string` 用于日期或时间
+$min string 用于日期或时间
 
 
 实际上,`isBefore`是`isMin`的别名.区别在于`isBefore`用于日期时间的比较,而`isMin`用于数据大小
