@@ -21,12 +21,12 @@ bool isCallback( $input [, $fn [, $message ]] )
 if ($widget->isCallback(3, function($input) {
     return 0 === 10 % $input;
 })) {
-    echo 'success';
+    echo 'Yes';
 } else {
-    echo 'failure';
+    echo 'No';
 }
 ```
 ##### 输出
 ```php
-'failure'
+'No'
 ```

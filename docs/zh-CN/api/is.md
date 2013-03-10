@@ -60,14 +60,14 @@ bool is($fn, $input)
 if ($widget->is(function($input) {
     return 0 === 10 % $input;
 }, 3)) {
-    echo 'success';
+    echo 'Yes';
 } else {
-    echo 'failure';
+    echo 'No';
 }
 ```
 ##### 输出
 ```php
-'failure'
+'No'
 ```
 - - - -
 
@@ -90,12 +90,12 @@ $rules = array(
     'length' => array(3, 5)
 );
 if ($widget->is($rules, '123456')) {
-    echo 'success';
+    echo 'Yes';
 } else {
-    echo 'failure';
+    echo 'No';
 }
 ```
 ##### 输出
 ```php
-'failure'
+'No'
 ```

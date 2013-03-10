@@ -18,12 +18,12 @@ bool isAlnum( $input )
 
 $input = 'abc123';
 if ($widget->isAlnum($input)) {
-    echo 'success';
+    echo 'Yes';
 } else {
-    echo 'failure';
+    echo 'No';
 }
 ```
 ##### 输出
 ```php
-'success'
+'Yes'
 ```

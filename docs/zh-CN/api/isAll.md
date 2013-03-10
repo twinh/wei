@@ -21,12 +21,12 @@ $input = array(3, 2, 5);
 if ($widget->isAll($input, array(
     'digit' => true
 ))) {
-    echo 'success';
+    echo 'Yes';
 } else {
-    echo 'failure';
+    echo 'No';
 }
 ```
 ##### 输出
 ```php
-'success'
+'Yes'
 ```

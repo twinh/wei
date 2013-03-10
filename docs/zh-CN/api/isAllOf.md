@@ -22,12 +22,12 @@ if ($widget->isAllOf($input, array(
 	'length' => array(5, 10),
 	'digit' => true
 ))) {
-    echo 'success';
+    echo 'Yes';
 } else {
-    echo 'failure';
+    echo 'No';
 }
 ```
 ##### 输出
 ```php
-'success'
+'Yes'
 ```

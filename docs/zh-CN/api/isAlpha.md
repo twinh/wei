@@ -18,12 +18,12 @@ bool isAlpha( $input )
 
 $input = 'abc123';
 if ($widget->isAlpha($input)) {
-    echo 'success';
+    echo 'Yes';
 } else {
-    echo 'failure';
+    echo 'No';
 }
 ```
 ##### 输出
 ```php
-'failure'
+'No'
 ```
