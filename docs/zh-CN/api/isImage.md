@@ -15,6 +15,17 @@ bool isImage( $input [, $options ] )
    *  **minWidth** `int` 允许的图片最小宽度
    *  **maxHeight** `int` 允许的图片最大高度
    *  **minHeight** `int` 允许的图片最小高度
+   *  **maxSize** `int` 允许的文件最大字节数
+   *  **minSize** `int` 允许的文件最小字节数
+   *  **exts** `string|array` 允许的文件扩展名
+   *  **excludeExts** `string|array` 不允许的文件扩展名
+   *  **mimeTypes** `string|array` 允许的文件媒体类型
+   *  **excludeMimeTypes** `string|array` 不允许的文件媒体类型
+
+
+图片验证器是文件验证器[isFile](isFile.md)的子类,其中选项`maxSize`, `minSize`, `exts`,
+`excludeExts`, `mimeTypes`, `excludeMimeTypes`继承自父类.
+
 
 ##### 范例
 检查文件"5x5.gif"是否为图片且最大高度不能超过5px
