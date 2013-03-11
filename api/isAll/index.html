@@ -173,21 +173,35 @@
 </div>                             </div>
             <div class="span9 section">
     <h1>isAll()</h1>
-    <p>Check if all of the element in the input is valid by all specified rules</p>
+    <p>检查数组或对象里的每一项是否符合指定的规则</p>
                 <div class="well" id="isAll-1">
-        <h4>isAll($input, $rules)<span class="pull-right">返回: <a href="#">bool</a></span></h4>
+        <h4>isAll( $input [, $rules ] )<span class="pull-right">返回: <a href="#">bool</a></span></h4>
         <div style="margin: 5px 8px">
             <!--<span class="pull-right" style="font-size: 12px;">
               添加于:<a href="#">1.0</a>
             </span>-->
-        <p><strong>说明: </strong>Check if all of the element in the input is valid by all specified rules</p>
+        <p><strong>说明: </strong></p>
         <div>
             <ul>
-                                <li><strong>$input</strong> <code><a href="#">array|\Traversable</a></code> The input to be validated</li>
-                                <li><strong>$rules</strong> <code><a href="#">array</a></code> The validation rules</li>
-                            </ul>
+<li><strong>$input</strong> <code>array|\Traversable</code> 待验证的数据</li>
+<li><strong>$rules</strong> <code>array</code> 验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项</li>
+</ul>
         </div>
         <p></p>
+                <h5>范例:</h5>
+        <p>检查数组里的每一项是否都为数字</p>
+        <pre><code>&lt;?php
+
+$input = array(3, 2, 5);
+if ($widget-&gt;isAll($input, array(
+    &#039;digit&#039; =&gt; true
+))) {
+    echo &#039;Yes&#039;;
+} else {
+    echo &#039;No&#039;;
+}</code></pre>
+        <h5>输出:</h5>
+        <pre><code class="php">'Yes'</code></pre>
                 </div>
     </div>
     </div>

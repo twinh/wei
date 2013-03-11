@@ -173,21 +173,31 @@
 </div>                             </div>
             <div class="span9 section">
     <h1>isMobile()</h1>
-    <p>Returns whether the $input value is valid</p>
+    <p>检查数据是否为有效的手机号码</p>
                 <div class="well" id="isMobile-1">
-        <h4>isMobile($input, $pattern)<span class="pull-right">返回: <a href="#">bool</a></span></h4>
+        <h4>isMobile ( $input )<span class="pull-right">返回: <a href="#">bool</a></span></h4>
         <div style="margin: 5px 8px">
             <!--<span class="pull-right" style="font-size: 12px;">
               添加于:<a href="#">1.0</a>
             </span>-->
-        <p><strong>说明: </strong>Returns whether the $input value is valid</p>
+        <p><strong>说明: </strong></p>
         <div>
             <ul>
-                                <li><strong>$input</strong> <code><a href="#">mixed</a></code> </li>
-                                <li><strong>$pattern</strong> <code><a href="#">null|string</a></code> </li>
-                            </ul>
+<li><strong>$input</strong> <code>mixed</code> 待验证的数据</li>
+</ul>
         </div>
         <p></p>
+                <h5>范例:</h5>
+        <p>检查"13800138000"是否为有效的手机号码</p>
+        <pre><code>&lt;?php
+ 
+if ($widget-&gt;isMobile(&#039;13800138000&#039;)) {
+    echo &#039;Yes&#039;;
+} else {
+    echo &#039;No&#039;;
+}</code></pre>
+        <h5>输出:</h5>
+        <pre><code class="php">'Yes'</code></pre>
                 </div>
     </div>
     </div>

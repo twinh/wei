@@ -173,9 +173,9 @@
 </div>                             </div>
             <div class="span9 section">
     <h1>isSomeOf()</h1>
-    <p></p>
+    <p>检查数据是否通过指定数量规则的验证</p>
                 <div class="well" id="isSomeOf-1">
-        <h4>isSomeOf($input, $rules, $atLeast)<span class="pull-right">返回: <a href="#">void</a></span></h4>
+        <h4>isSomeOf( $input [, $rules [, $atLeast ] ] )<span class="pull-right">返回: <a href="#">bool</a></span></h4>
         <div style="margin: 5px 8px">
             <!--<span class="pull-right" style="font-size: 12px;">
               添加于:<a href="#">1.0</a>
@@ -183,9 +183,28 @@
         <p><strong>说明: </strong></p>
         <div>
             <ul>
-                            </ul>
+<li><strong>$input</strong> <code>mixed</code> 待验证的数据</li>
+<li><strong>$rules</strong> <code>array</code> 验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项</li>
+<li><strong>$atLeast</strong> <code>int</code> 至少要有多少条规则通过才算验证通过</li>
+</ul>
         </div>
         <p></p>
+                <h5>范例:</h5>
+        <p>检查数据符合"数字,长度小于5,邮箱"这三条中至少两条</p>
+        <pre><code>&lt;?php
+
+$rules = array(
+    &#039;digit&#039; =&gt; true,
+    &#039;maxLength&#039; =&gt; 5,
+    &#039;email&#039; =&gt; true
+);
+if ($widget-&gt;isSomeOf(&#039;abc&#039;, $rules)) {
+    echo &#039;Yes&#039;;
+} else {
+    echo &#039;No&#039;;
+}</code></pre>
+        <h5>输出:</h5>
+        <pre><code class="php">'Yes'</code></pre>
                 </div>
     </div>
     </div>

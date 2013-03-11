@@ -173,9 +173,9 @@
 </div>                             </div>
             <div class="span9 section">
     <h1>isTime()</h1>
-    <p></p>
+    <p>检查数据是否为合法的时间</p>
                 <div class="well" id="isTime-1">
-        <h4>isTime($input, $format)<span class="pull-right">返回: <a href="#">void</a></span></h4>
+        <h4>isDate( $input [, $format ] )<span class="pull-right">返回: <a href="#">bool</a></span></h4>
         <div style="margin: 5px 8px">
             <!--<span class="pull-right" style="font-size: 12px;">
               添加于:<a href="#">1.0</a>
@@ -183,9 +183,12 @@
         <p><strong>说明: </strong></p>
         <div>
             <ul>
-                            </ul>
+<li><strong>$input</strong> <code>mixed</code> 待验证的数据</li>
+<li><strong>$format</strong> <code>string</code> 日期格式,默认是"H:i:s"</li>
+</ul>
         </div>
-        <p></p>
+        <p><p>完整的日期格式可以查看PHP官方文档中关于<a href="http://php.net/manual/zh/function.date.php">date</a>函数的格式说明.</p>
+</p>
                 </div>
     </div>
     </div>

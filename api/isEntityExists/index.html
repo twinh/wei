@@ -173,9 +173,9 @@
 </div>                             </div>
             <div class="span9 section">
     <h1>isEntityExists()</h1>
-    <p></p>
+    <p>检查Doctrine ORM实体是否存在</p>
                 <div class="well" id="isEntityExists-1">
-        <h4>isEntityExists($input, $entityClass, $filed)<span class="pull-right">返回: <a href="#">void</a></span></h4>
+        <h4>isEntityExists( $input [, $entityClass [, $field ] ] )<span class="pull-right">返回: <a href="#">bool</a></span></h4>
         <div style="margin: 5px 8px">
             <!--<span class="pull-right" style="font-size: 12px;">
               添加于:<a href="#">1.0</a>
@@ -183,9 +183,119 @@
         <p><strong>说明: </strong></p>
         <div>
             <ul>
-                            </ul>
+<li><strong>$input</strong> <code>mixed</code> 待验证的数据,一般为主键的值</li>
+<li><strong>$entityClass</strong> <code>string</code> 实体的类名</li>
+<li><strong>$field</strong> <code>string</code> 指定的字段名称,留空表示主键</li>
+</ul>
         </div>
         <p></p>
+                <h5>范例:</h5>
+        <p>检查主键为1的用户是否存在,和检查name为test的用户是否存在</p>
+        <pre><code>&lt;?php
+
+/** @Entity @Table(name=&quot;users&quot;) */
+class User
+{
+    /**
+     * @Id @Column(type=&quot;integer&quot;)
+     * @GeneratedValue(strategy=&quot;AUTO&quot;)
+     */
+    private $id;
+    
+    /** @Column(type=&quot;string&quot;, length=50) */
+    private $name;
+    
+    /** @Column(type=&quot;string&quot;, length=256) */
+    private $address;
+
+    public function getId()
+    {
+        return $this-&gt;id;
+    }
+
+    public function getName()
+    {
+        return $this-&gt;name;
+    }
+
+    public function setName($name)
+    {
+        $this-&gt;name = $name;
+    }
+
+    public function getAddress()
+    {
+        return $this-&gt;address;
+    }
+
+    public function setAddress($address)
+    {
+        $this-&gt;address = $address;
+    }
+}
+
+// Set configuraion for db widget
+$widget-&gt;config(&#039;db&#039;, array(
+    &#039;params&#039; =&gt; array(
+        &#039;driver&#039; =&gt; &#039;pdo_sqlite&#039;,
+        &#039;memory&#039; =&gt; true
+    ),
+));
+
+// Set configuration for entityManager widget
+$widget-&gt;config(&#039;entityManager&#039;, array(
+    &#039;config&#039; =&gt; array(
+        &#039;proxyDir&#039; =&gt; &#039;./&#039;,
+        &#039;proxyNamespace&#039; =&gt; &#039;Proxy&#039;,
+        &#039;useSimpleAnnotationReader&#039; =&gt; true,
+        &#039;annotationDriverPaths&#039; =&gt; array(&#039;./&#039;)
+    )
+));
+
+/* @var $em \Doctrine\ORM\EntityManager */
+$em = $widget-&gt;entityManager();
+
+$tool = new Doctrine\ORM\Tools\SchemaTool($em);
+
+$metadata = $em-&gt;getClassMetadata(&#039;User&#039;);
+
+print_r($tool-&gt;getCreateSchemaSql(array($metadata)));
+
+// Create table from User entity
+$tool-&gt;createSchema(array($metadata));
+
+// Insert some test data
+$user1 = new User();
+$user1-&gt;setName(&#039;twin&#039;);
+$user1-&gt;setAddress(&#039;home&#039;);
+$em-&gt;persist($user1);
+
+$user2 = new User();
+$user2-&gt;setName(&#039;test&#039;);
+$user2-&gt;setAddress(&#039;office&#039;);
+$em-&gt;persist($user2);
+
+$em-&gt;flush();
+
+// Check if the id=1 user exists
+if ($widget-&gt;isEntityExists(&#039;1&#039;, &#039;User&#039;)) {
+    echo &#039;Yes&#039;;
+} else {
+    echo &#039;No&#039;;
+}
+
+// Check if the name=test user exists
+if ($widget-&gt;isEntityExists(&#039;test&#039;, &#039;User&#039;, &#039;name&#039;)) {
+    echo &#039;Yes&#039;;
+} else {
+    echo &#039;No&#039;;
+}</code></pre>
+        <h5>输出:</h5>
+        <pre><code class="php">'Array
+(
+    [0] => CREATE TABLE users (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))
+)
+YesYes'</code></pre>
                 </div>
     </div>
     </div>

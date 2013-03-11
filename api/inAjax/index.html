@@ -173,19 +173,43 @@
 </div>                             </div>
             <div class="span9 section">
     <h1>inAjax()</h1>
-    <p>Check if the current request is an ajax(XMLHttpRequest) request</p>
+    <p>检查当前的请求是否为Ajax(XMLHttpRequest)请求</p>
                 <div class="well" id="inAjax-1">
         <h4>inAjax()<span class="pull-right">返回: <a href="#">bool</a></span></h4>
         <div style="margin: 5px 8px">
             <!--<span class="pull-right" style="font-size: 12px;">
               添加于:<a href="#">1.0</a>
             </span>-->
-        <p><strong>说明: </strong>Check if the current request is an ajax(XMLHttpRequest) request</p>
+        <p><strong>说明: </strong></p>
         <div>
-            <ul>
-                            </ul>
+            
         </div>
-        <p></p>
+        <p><p><code>inAjax</code>微件是<code>request</code>微件<code>inAjax</code>方法的别名.</p>
+</p>
+                <h5>范例:</h5>
+        <p>通过向server微件设置Ajax请求的标记,将当前请求伪装为Ajax请求</p>
+        <pre><code>&lt;?php
+
+unset($widget-&gt;server[&#039;HTTP_X_REQUESTED_WITH&#039;]);
+
+if ($widget-&gt;inAjax()) {
+    echo &#039;ajax request&#039;;
+} else {
+    echo &#039;not ajax request&#039;;
+}
+
+echo &quot;\n&quot;;
+
+$widget-&gt;server[&#039;HTTP_X_REQUESTED_WITH&#039;] = &#039;xmlhttprequest&#039;;
+
+if ($widget-&gt;inAjax()) {
+    echo &#039;ajax request&#039;;
+} else {
+    echo &#039;not ajax request&#039;;
+}</code></pre>
+        <h5>输出:</h5>
+        <pre><code class="php">'not ajax request
+ajax request'</code></pre>
                 </div>
     </div>
     </div>
