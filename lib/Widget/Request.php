@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * Request
+ * The HTTP Request widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\Server $server The server widget
