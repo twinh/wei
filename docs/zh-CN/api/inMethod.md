@@ -1,14 +1,32 @@
-    该微件文档还在紧急编写中,敬请期待!
 [inMethod()](http://twinh.github.com/widget/api/inMethod)
 =========================================================
 
-Check if the current request method is the specified string
+检查当前的请求方式是否为指定的字符串
 
-### Check if the current request method is the specified string
+### 
 ```php
-bool inMethod($method)
+bool inMethod()
 ```
 
 ##### 参数
-* **$method** `string` The method name to be compared
+* **$method** `string` 指定的请求方式名称
 
+
+`inMethod`微件是`request`微件`inMethod`方法的别名.
+
+
+##### 范例
+检查当前的请求方式是否为HEAD
+```php
+<?php
+
+if ($widget->inMethod('HEAD')) {
+    echo 'The request method is HEAD';
+} else {
+    echo 'The request method is not HEAD';
+}
+```
+##### 输出
+```php
+'The request method is not HEAD'
+```
