@@ -34,6 +34,18 @@ class Url extends AbstractValidator
     protected $query = false;
     
     /**
+     * Check if the input is valid URL address, options could be "path" and "query"
+     *
+     * @return string|bool
+     */
+    public function __invoke($input, $options = array())
+    {
+        $options && $this->storeOption($options);
+        
+        return $this->isValid($input);
+    }
+    
+    /**
      * {@inheritdoc}
      */
     protected function validate($input)
