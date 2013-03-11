@@ -10,4 +10,5 @@ Return the \Smarty object
 ```
 
 ##### 参数
+*无*
 

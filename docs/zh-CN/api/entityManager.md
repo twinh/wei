@@ -10,4 +10,5 @@ Get Docrine ORM entity manager
 ```
 
 ##### 参数
+*无*
 

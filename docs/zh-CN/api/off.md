@@ -10,6 +10,7 @@ Remove one or all handlers
 ```
 
 ##### 参数
+*无*
 
 
 param string|null $type The type of event

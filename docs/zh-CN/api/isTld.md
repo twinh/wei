@@ -10,4 +10,5 @@ void isTld($input, $array, $strict)
 ```
 
 ##### 参数
+*无*
 

@@ -10,4 +10,5 @@ void bicache($key, $value, $expire)
 ```
 
 ##### 参数
+*无*
 

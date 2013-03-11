@@ -10,4 +10,5 @@ void validate($options)
 ```
 
 ##### 参数
+*无*
 

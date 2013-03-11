@@ -10,4 +10,5 @@ void memcached($key, $value, $expire)
 ```
 
 ##### 参数
+*无*
 

@@ -10,4 +10,5 @@ void isType($input, $type)
 ```
 
 ##### 参数
+*无*
 

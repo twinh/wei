@@ -10,4 +10,5 @@ void isSomeOf($input, $rules, $atLeast)
 ```
 
 ##### 参数
+*无*
 

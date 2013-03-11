@@ -10,4 +10,5 @@ Returns the Doctrine DBAL connection object
 ```
 
 ##### 参数
+*无*
 

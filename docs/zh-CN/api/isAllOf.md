@@ -5,7 +5,7 @@
 
 ### 
 ```php
-bool isAll( $input [, $rules ] )
+bool isAllOf( $input [, $rules ] )
 ```
 
 ##### 参数

@@ -10,4 +10,5 @@ Get view object
 ```
 
 ##### 参数
+*无*
 

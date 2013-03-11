@@ -10,4 +10,5 @@ void result($message, $code, $append)
 ```
 
 ##### 参数
+*无*
 
