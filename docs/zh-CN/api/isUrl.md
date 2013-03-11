@@ -1,14 +1,46 @@
-    该微件文档还在紧急编写中,敬请期待!
 [isUrl()](http://twinh.github.com/widget/api/isUrl)
 ===================================================
 
-Validate the input value
+检查数据是否为有效的URL地址,可选的检查选项有"path"和"query"
 
-### Validate the input value
+### 
 ```php
-bool isUrl($input)
+bool isUrl( $input [, $options] )
 ```
 
 ##### 参数
-* **$input** `mixed` 
+* **$input** `mixed` 待验证的数据
+* **$options** `array` 选项数组,留空表示只检查数据是否为URL地址
+* 	**path** `bool` 是否要求URL带有路径,如http://www.example.com/path/part
+* 	**query** `bool` 是否要求URL带有查询参数,如http://www.example/?query=string
 
+##### 范例
+检查"http://www.example.com"是否为有效的URL地址
+```php
+<?php
+ 
+if ($widget->isUrl('http://www.example.com')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
+##### 输出
+```php
+'Yes'
+```
+##### 范例
+检查"http://www.example.com"是否为有效的URL地址,要求带有查询参数
+```php
+<?php
+ 
+if ($widget->isUrl('http://www.example.com', array('query' => true))) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
+##### 输出
+```php
+'No'
+```
