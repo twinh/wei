@@ -63,7 +63,6 @@ class Request extends Parameter
      *
      * @param  string $default The default ip address
      * @return string
-     * @todo valid
      */
     public function getIp($default = '0.0.0.0')
     {
