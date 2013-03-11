@@ -20,7 +20,7 @@ class Escape extends AbstractWidget
      *
      * @param string $input The input to be escaped
      * @param string $type The escape type
-     * @param string $charset The charset to encoding input for html escape
+     * @param string $charset The charset to encoding input for HTML escape
      * @return string
      */
     public function __invoke($input, $type = 'html', $charset = 'UTF-8')
@@ -36,10 +36,10 @@ class Escape extends AbstractWidget
     }
 
     /**
-     * Escapes html data
+     * Escapes HTML data
      *
      * @param string $input The input to be escaped
-     * @param string $charset The charset to encoding input for html escape
+     * @param string $charset The charset to encoding input for HTML escape
      * @return string
      */
     public function html($input, $charset = 'UTF-8')
@@ -55,7 +55,7 @@ class Escape extends AbstractWidget
      */
     public function js($input)
     {
-        return strtr($data, array(
+        return strtr($input, array(
             '\\' => '\\\\',
             "'" => "\\'",
             '"' => '\\"',
