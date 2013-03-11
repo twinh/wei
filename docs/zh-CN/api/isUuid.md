@@ -1,15 +1,28 @@
-    该微件文档还在紧急编写中,敬请期待!
 [isUuid()](http://twinh.github.com/widget/api/isUuid)
 =====================================================
 
-Returns whether the $input value is valid
+检查数据是否为有效的UUID
 
-### Returns whether the $input value is valid
+### 
 ```php
-bool isUuid($input, $pattern)
+bool isUuid( $input )
 ```
 
 ##### 参数
-* **$input** `mixed` 
-* **$pattern** `null|string` 
+* **$input** `mixed` 待验证的数据
 
+##### 范例
+检查"00010203-0405-0607-0809-0A0B0C0D0E0F"是否为有效的UUID
+```php
+<?php
+ 
+if ($widget->isUuid('00010203-0405-0607-0809-0A0B0C0D0E0F')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
+##### 输出
+```php
+'Yes'
+```
