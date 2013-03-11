@@ -1,10 +1,9 @@
-    该微件文档还在紧急编写中,敬请期待!
 [inGet()](http://twinh.github.com/widget/api/inGet)
 ===================================================
 
-Check if the current request method is GET
+检查当前的请求方式是否为GET
 
-### Check if the current request method is GET
+### 
 ```php
 bool inGet()
 ```
@@ -12,3 +11,22 @@ bool inGet()
 ##### 参数
 *无*
 
+
+`inGet`微件是`request`微件`inGet`方法的别名.
+
+
+##### 范例
+检查当前的请求方式是否为GET
+```php
+<?php
+
+if ($widget->inGet()) {
+    echo 'The request method is GET';
+} else {
+    echo 'The request method is not GET';
+}
+```
+##### 输出
+```php
+'The request method is GET'
+```
