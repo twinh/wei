@@ -59,6 +59,21 @@ class Request extends Parameter
     }
     
     /**
+     * Returns the client IP address
+     *
+     * @param  string $default The default ip address
+     * @return string
+     * @todo valid
+     */
+    public function getIp($default = '0.0.0.0')
+    {
+        return $this->server['HTTP_X_FORWARDED_FOR']
+            ?: $this->server['HTTP_CLIENT_IP']
+            ?: $this->server['REMOTE_ADDR']
+            ?: $default;
+    }
+    
+    /**
      * Check if the current request method is the specified string
      * 
      * @param string $method The method name to be compared
