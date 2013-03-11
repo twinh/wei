@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -10,7 +9,7 @@
 namespace Widget;
 
 /**
- * Escape
+ * Escapes special characters for safe ouput
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
@@ -19,42 +18,42 @@ class Escape extends AbstractWidget
     /**
      * Escapes special characters for safe ouput
      *
-     * @param string $data
-     * @param string $type
-     * @param string $charset
+     * @param string $input The input to be escaped
+     * @param string $type The escape type
+     * @param string $charset The charset to encoding input for html escape
      * @return string
      */
-    public function __invoke($data, $type = 'html', $charset = 'UTF-8')
+    public function __invoke($input, $type = 'html', $charset = 'UTF-8')
     {
         switch ($type) {
             case 'js':
-                return $this->js($data);
+                return $this->js($input);
 
             case 'html':
             default:
-                return $this->html($data, $charset);
+                return $this->html($input, $charset);
         }
     }
 
     /**
      * Escapes html data
      *
-     * @param string $data
-     * @param string $charset
+     * @param string $input The input to be escaped
+     * @param string $charset The charset to encoding input for html escape
      * @return string
      */
-    public function html($data, $charset = 'UTF-8')
+    public function html($input, $charset = 'UTF-8')
     {
-        return htmlspecialchars($data, ENT_QUOTES, $charset);
+        return htmlspecialchars($input, ENT_QUOTES, $charset);
     }
 
     /**
      * Escapes javascript string
      *
-     * @param string $data
+     * @param string $input The input to be escaped
      * @return string
      */
-    public function js($data)
+    public function js($input)
     {
         return strtr($data, array(
             '\\' => '\\\\',
