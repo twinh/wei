@@ -1,14 +1,28 @@
-    该微件文档还在紧急编写中,敬请期待!
 [isTld()](http://twinh.github.com/widget/api/isTld)
 ===================================================
 
-
+检查数据是否为存在的顶级域名
 
 ### 
 ```php
-void isTld($input, $array, $strict)
+bool isTld( $input )
 ```
 
 ##### 参数
-*无*
+* **$input** `mixed` 待验证的数据
 
+##### 范例
+检查"cn"是否为存在的顶级域名
+```php
+<?php
+ 
+if ($widget->isTld('cn')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
+##### 输出
+```php
+'Yes'
+```
