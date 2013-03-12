@@ -80,7 +80,7 @@ class Parameter extends ArrayWidget
      * @param string $name
      * @param array $array
      */
-    public function inArray($name, $array = array())
+    public function getInArray($name, $array = array())
     {
         $value = $this($name);
 
