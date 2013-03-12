@@ -120,11 +120,11 @@ class EventManager extends AbstractWidget
     /**
      * Attach a handler to an event
      *
-     * @param  string       $type     The type of event
-     * @param  mixed        $fn       The callbable struct
-     * @param  integer   $priority The event priority, could be int or specify strings
-     * @param array $data The data passed to the event object, when the handler is bound
-     * @return EventManager
+     * @param string $type The type of event
+     * @param mixed $fn The callbable struct
+     * @param integer $priority The event priority, could be int or specify strings
+     * @param array $data The data pass to the event object, when the handler is trigger
+     * @return \Widget\EventManager
      */
     public function add($type, $fn, $priority = 0, $data = array())
     {
