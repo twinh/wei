@@ -1,16 +1,38 @@
-    该微件文档还在紧急编写中,敬请期待!
 [off()](http://twinh.github.com/widget/api/off)
 ===============================================
 
-Remove one or all handlers
+移除指定类型的事件触发器
 
-### Remove one or all handlers
+### 
 ```php
-\EventManager off($type)
+bool off( $type )
 ```
 
 ##### 参数
-*无*
+* **$type** `string` 事件类型,可以包含命名空间,如"error.namespace",也可以只有命名空间,如".namespace"
 
 
-param string|null $type The type of event
+`off`微件是事件管理器(`eventManager`)`remove`方法的别名
+
+如果`$type`只是纯命名空间,如'.namespace',表示移除该命名空间下所有的事件触发器
+
+
+##### 范例
+移除名称为example的事件触发器
+```php
+<?php
+
+$widget->on('example', function(){
+    echo 'example';
+});
+
+$widget->trigger('example');
+
+$widget->off('example');
+
+$widget->trigger('example');
+```
+##### 输出
+```php
+'example'
+```
