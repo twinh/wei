@@ -33,7 +33,7 @@ class Parameter extends ArrayWidget
      * @param string $name The parameter name
      * @param integer|null $min The min value for the parameter
      * @param integer|null $max The max value for the parameter
-     * @return int
+     * @return int The parameter value
      */
     public function getInt($name, $min = null, $max = null)
     {
@@ -54,7 +54,7 @@ class Parameter extends ArrayWidget
      * @param string $name The parameter name
      * @param array $default The default paraemter value returned if the 
      *                       parameter does not exist, should be array
-     * @return array
+     * @return array The parameter value
      */
     public function getArray($name, array $default = array())
     {
@@ -66,7 +66,7 @@ class Parameter extends ArrayWidget
      *
      * @param  string $name    The parameter name
      * @param  mixed  $default The default parameter value if the parameter does not exist
-     * @return string  The parameter value
+     * @return string The parameter value
      */
     public function getRaw($name, $default = null)
     {
@@ -79,6 +79,7 @@ class Parameter extends ArrayWidget
      *
      * @param string $name
      * @param array $array
+     * @return mixed The parameter value
      */
     public function getInArray($name, $array = array())
     {
