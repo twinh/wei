@@ -5,7 +5,7 @@
 
 ### 
 ```php
-bool attr($data, $key )
+bool attr( $data, $key )
 ```
 
 ##### 参数
@@ -14,6 +14,7 @@ bool attr($data, $key )
 
 
 取值的顺序如下
+
 1. 如果`$data`是数组或`\ArrayAccess`的实例化对象,检查并返回`$data[$key]`的值
 2. 如果`$data`是对象,检查属性`$key`是否存在,存在则返回`$data->$key`的值
 3. 如果`$data`是对象且方法`get. $key`存在,返回`$data->{'get' . $key}`
@@ -24,7 +25,7 @@ bool attr($data, $key )
 
 
 ##### 范例
-随机获取数组或对象的值,并打印出来
+依次取出数组或对象的值,并打印出来
 ```php
 <?php
 
