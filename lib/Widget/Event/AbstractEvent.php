@@ -135,7 +135,7 @@ abstract class AbstractEvent extends AbstractWidget implements EventInterface
     }
 
     /**
-     * Get the time stamp
+     * Returns the time stamp when event constructed
      *
      * @return string|double
      */
@@ -145,6 +145,8 @@ abstract class AbstractEvent extends AbstractWidget implements EventInterface
     }
 
     /**
+     * Set a flag to prevent the default action
+     * 
      * @return \Widget\Event\Event
      */
     public function preventDefault()
@@ -155,6 +157,8 @@ abstract class AbstractEvent extends AbstractWidget implements EventInterface
     }
 
     /**
+     * Whether prevent the default action of event or not
+     * 
      * @return bool
      */
     public function isDefaultPrevented()
@@ -163,6 +167,8 @@ abstract class AbstractEvent extends AbstractWidget implements EventInterface
     }
 
     /**
+     * Sets the event result
+     * 
      * @param mixed $result
      */
     public function setResult($result)
@@ -173,7 +179,7 @@ abstract class AbstractEvent extends AbstractWidget implements EventInterface
     }
 
     /**
-     * Returns the last result returnted by the handler
+     * Returns the last result returnted by the event handler
      *
      * @return mixed
      */
@@ -183,6 +189,8 @@ abstract class AbstractEvent extends AbstractWidget implements EventInterface
     }
 
     /**
+     * Set the event data
+     * 
      * @param array $data
      */
     public function setData($data = array())
@@ -193,6 +201,8 @@ abstract class AbstractEvent extends AbstractWidget implements EventInterface
     }
 
     /**
+     * Returns the event data
+     * 
      * @return array
      */
     public function getData()
@@ -201,6 +211,8 @@ abstract class AbstractEvent extends AbstractWidget implements EventInterface
     }
 
     /**
+     * Set a flag to stop trigger the next handler
+     * 
      * @return \Widget\Event\Event
      */
     public function stopPropagation()
@@ -211,6 +223,8 @@ abstract class AbstractEvent extends AbstractWidget implements EventInterface
     }
 
     /**
+     * Whether to trigger the next handler or not
+     * 
      * @return bool
      */
     public function isPropagationStopped()

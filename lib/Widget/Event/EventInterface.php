@@ -45,7 +45,7 @@ interface EventInterface
     public function getNamespace();
     
     /**
-     * Prevent the default action
+     * Set a flag to prevent the default action
      */
     public function preventDefault();
     
@@ -62,12 +62,12 @@ interface EventInterface
     public function setResult($result);
     
     /**
-     * Returns the last value returned by an event handler
+     * Returns the last value returned by the event handler
      */
     public function getResult();
     
     /**
-     * Set the flag to stop trigger the next handler
+     * Set a flag to stop trigger the next handler
      */
     public function stopPropagation();
     
