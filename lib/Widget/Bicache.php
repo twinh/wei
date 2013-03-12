@@ -26,7 +26,7 @@ class Bicache extends AbstractStorage
      */
     protected $deps = array(
         'master' => 'memcache',
-        'slave' => 'fcache',
+        'slave' => 'file',
     );
 
     /**
