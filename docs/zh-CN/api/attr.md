@@ -1,15 +1,65 @@
-    该微件文档还在紧急编写中,敬请期待!
 [attr()](http://twinh.github.com/widget/api/attr)
 =================================================
 
-Returns the value of specified key in $data
+获取数组或对象中指定键名的值
 
-### Returns the value of specified key in $data
+### 
 ```php
-mixed|null attr($data, $key)
+bool attr($data, $key )
 ```
 
 ##### 参数
-* **$data** `mixed` The data, could be array or instance of \ArrayAccess
-* **$key** `string` The key of data
+* **$data** `string` 数组或对象
+* **$key** `string` 转义的类型,目前支持html和js两种转义方式,默认是html
 
+
+取值的顺序如下
+1. 如果`$data`是数组或`\ArrayAccess`的实例化对象,检查并返回`$data[$key]`的值
+2. 如果`$data`是对象,检查属性`$key`是否存在,存在则返回`$data->$key`的值
+3. 如果`$data`是对象且方法`get. $key`存在,返回`$data->{'get' . $key}`
+4. 如果以上均不存在,返回null
+
+使用`attr()`微件的好处在于你不用关心要取值的变量类型,不管它是数组,对象数组(\ArrayAccess),还是
+其他对象
+
+
+##### 范例
+随机获取数组或对象的值,并打印出来
+```php
+<?php
+
+class Getter
+{
+    public function getKey()
+    {
+        return 'Get from Getter';
+    }
+}
+
+$data = array(
+    array(
+        'key' => 'Get from array',
+    ),
+    new \ArrayObject(array(
+        'key' => 'Get from ArrayObject'
+    )),
+    call_user_func(function(){
+        $object = new stdClass();
+        $object->key = 'Get from stdClass';
+        return $object;
+    }),
+    new Getter()
+);
+
+foreach ($data as $row) {
+    echo $widget->attr($row, 'key') . "\n";
+}
+```
+##### 输出
+```php
+'Get from array
+Get from ArrayObject
+Get from stdClass
+Get from Getter
+'
+```
