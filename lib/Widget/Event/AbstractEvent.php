@@ -39,14 +39,14 @@ abstract class AbstractEvent extends AbstractWidget implements EventInterface
     protected $timeStamp;
 
     /**
-     * Whether prevent the default action or not
+     * Whether prevent the default action of event or not
      *
      * @var bool
      */
     protected $preventDefault = false;
 
     /**
-     * Whether top triggering the next handler or nots
+     * Whether to trigger the next handler or not
      *
      * @var bool
      */
@@ -79,7 +79,7 @@ abstract class AbstractEvent extends AbstractWidget implements EventInterface
     }
 
     /**
-     * Get the type of event
+     * Returns the type of event
      *
      * @return string
      */
@@ -92,7 +92,7 @@ abstract class AbstractEvent extends AbstractWidget implements EventInterface
      * Set the type of event
      *
      * @param  string      $type
-     * @return Event
+     * @return \Widget\Event\Event
      */
     public function setType($type)
     {
@@ -102,7 +102,7 @@ abstract class AbstractEvent extends AbstractWidget implements EventInterface
     }
 
     /**
-     * Returns the event namespaces
+     * Returns the namespaces of event
      *
      * @return array
      */
@@ -112,10 +112,10 @@ abstract class AbstractEvent extends AbstractWidget implements EventInterface
     }
 
     /**
-     * Set the namespace of event
+     * Set the namespaces of event
      *
      * @param array $namespaces
-     * @return Event
+     * @return \Widget\Event\Event
      */
     public function setNamespaces(array $namespaces)
     {
@@ -145,7 +145,7 @@ abstract class AbstractEvent extends AbstractWidget implements EventInterface
     }
 
     /**
-     * @return Event
+     * @return \Widget\Event\Event
      */
     public function preventDefault()
     {
@@ -201,7 +201,7 @@ abstract class AbstractEvent extends AbstractWidget implements EventInterface
     }
 
     /**
-     * @return Event
+     * @return \Widget\Event\Event
      */
     public function stopPropagation()
     {
