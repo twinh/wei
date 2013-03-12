@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * Attr
+ * Returns the value of specified key in $data
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
@@ -18,7 +18,8 @@ class Attr extends AbstractWidget
     /**
      * Returns the value of specified key in $data
      * 
-     * @param mixed $data The data, could be array or instance of \ArrayAccess
+     * @param mixed $data The data, could be array, instance of \ArrayAccess, 
+     *                    object or object with getter method 
      * @param string $key The key of data
      * @return mixed|null Returns null on not found
      */
