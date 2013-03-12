@@ -9,14 +9,14 @@
 namespace Widget;
 
 /**
- * UUid
+ * Generate a RANDOM UUID(universally unique identifier)
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Uuid extends AbstractWidget
 {
     /**
-     * Generate a FAKE UUID(universally unique identifier)
+     * Generate a RANDOM UUID(universally unique identifier)
      *
      * @link http://stackoverflow.com/questions/2040240/php-function-to-generate-v4-uuid
      * @link http://php.net/manual/en/function.uniqid.php
