@@ -123,7 +123,7 @@ class EventManager extends AbstractWidget
      * @param string $type The type of event
      * @param mixed $fn The callbable struct
      * @param integer $priority The event priority, could be int or specify strings
-     * @param array $data The data pass to the event object, when the handler is trigger
+     * @param array $data The data pass to the event object, when the handler is triggered
      * @return \Widget\EventManager
      */
     public function add($type, $fn, $priority = 0, $data = array())

@@ -8,7 +8,9 @@
 namespace Widget;
 
 /**
- * On
+ * Attach a handler to an event
+ * 
+ * This widget is the alias of `$widget->eventManager->add()`
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\EventManager $eventManager The event manager widget
@@ -16,8 +18,13 @@ namespace Widget;
 class On extends AbstractWidget
 {
     /**
-     * @see \Widget\Manager::add
-     * @param array $data
+     * Attach a handler to an event
+     *
+     * @param string $type The type of event
+     * @param mixed $fn The callbable struct
+     * @param integer $priority The event priority, could be int or specify strings
+     * @param array $data The data pass to the event object, when the handler is triggered
+     * @return \Widget\EventManager
      */
     public function __invoke($type, $fn, $priority = 0, $data = array())
     {
