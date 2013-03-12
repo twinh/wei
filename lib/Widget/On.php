@@ -21,8 +21,8 @@ class On extends AbstractWidget
      * Attach a handler to an event
      *
      * @param string $type The type of event
-     * @param mixed $fn The callbable struct
-     * @param integer $priority The event priority, could be int or specify strings
+     * @param callback $fn The event handler
+     * @param int|string $priority The event priority, could be int or specify strings, the higer number, the higer priority
      * @param array $data The data pass to the event object, when the handler is triggered
      * @return \Widget\EventManager
      */

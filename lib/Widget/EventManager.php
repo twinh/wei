@@ -34,7 +34,7 @@ class EventManager extends AbstractWidget
     protected $ignorePrevHandler = false;
 
     /**
-     * The priorities text map
+     * The available priorities text
      *
      * @var array
      */
@@ -64,7 +64,7 @@ class EventManager extends AbstractWidget
      * @param null|WidgetInterface $widget If the widget contains the $type
      *                                     property, the event manager will
      *                                     trigger it too
-     * @return Event The result returned by the last handle
+     * @return \Widget\Event The result returned by the last handle
      */
     public function __invoke($type, $args = array(), WidgetInterface $widget = null)
     {
@@ -121,8 +121,8 @@ class EventManager extends AbstractWidget
      * Attach a handler to an event
      *
      * @param string $type The type of event
-     * @param mixed $fn The callbable struct
-     * @param integer $priority The event priority, could be int or specify strings
+     * @param callback $fn The event handler
+     * @param int|string $priority The event priority, could be int or specify strings, the higer number, the higer priority
      * @param array $data The data pass to the event object, when the handler is triggered
      * @return \Widget\EventManager
      */
@@ -150,7 +150,7 @@ class EventManager extends AbstractWidget
      * Remove event handlers by specified type
      *
      * @param string $type The type of event
-     * @return EventManager
+     * @return \Widget\EventManager
      */
     public function remove($type)
     {
