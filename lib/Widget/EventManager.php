@@ -183,7 +183,6 @@ class EventManager extends AbstractWidget
      *
      * @param  string $type
      * @return bool
-     * @todo add namespace support
      */
     public function has($type)
     {
