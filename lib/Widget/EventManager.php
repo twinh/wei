@@ -8,13 +8,14 @@
 
 namespace Widget;
 
+use Widget\Event\EventInterface;
+use Widget\Event\Event;
 use Widget\Exception\UnexpectedTypeException;
 
 /**
- * EventManager
+ * The event manager to add, remove and trigger events
  *
  * @author      Twin Huang <twinh@yahoo.cn>
- * @method \Widget\Event event(string $type) Create a event object
  */
 class EventManager extends AbstractWidget
 {
@@ -59,7 +60,7 @@ class EventManager extends AbstractWidget
     /**
      * Trigger a event
      *
-     * @param  string $type The name of event or the Event object
+     * @param  string $type The name of event or a Event object
      * @param  array $args The arguments pass to the handle
      * @param null|WidgetInterface $widget If the widget contains the $type
      *                                     property, the event manager will
@@ -68,7 +69,7 @@ class EventManager extends AbstractWidget
      */
     public function __invoke($type, $args = array(), WidgetInterface $widget = null)
     {
-        if ($type instanceof Event) {
+        if ($type instanceof EventInterface) {
             $event      = $type;
             $type       = $event->getType();
             $namespaces = $event->getNamespaces();
@@ -211,6 +212,21 @@ class EventManager extends AbstractWidget
                 return false;
             }
         }
+    }
+    
+    /**
+     * Create a new event
+     *
+     * @return Event
+     * @param array $namespaces
+     */
+    public function create($type, array $namespaces = array())
+    {
+        return new Event(array(
+            'widget'        => $this->widget,
+            'type'          => $type,
+            'namespaces'    => $namespaces,
+        ));
     }
     
     /**

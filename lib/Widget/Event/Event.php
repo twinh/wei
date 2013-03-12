@@ -9,15 +9,12 @@
 namespace Widget\Event;
 
 /**
- * The base interface for event class
+ * 
  *
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @link        http://api.jquery.com/category/events/event-object/
  */
-interface EventInterface
+class Event extends AbstractEvent
 {
-    public function getType();
-    
-    public function setType($type);
-    
     
 }

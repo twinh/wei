@@ -16,7 +16,7 @@ class EventTest extends TestCase
         $that = $this;
 
         $this->off('test')
-            ->on('test.ns.ns2', function(\Widget\Event $event) use($that) {
+            ->on('test.ns.ns2', function(\Widget\Event\EventInterface $event) use($that) {
                 $that->assertEquals('test', $event->getType());
                 $that->assertEquals('ns.ns2', $event->getNamespace());
                 $that->assertEquals(array('ns', 'ns2'), $event->getNamespaces());
@@ -51,7 +51,7 @@ class EventTest extends TestCase
             ->trigger('test');
         $this->assertEquals(false, $event->getResult());
 
-        $event = $this->event('test');
+        $event = $this->eventManager->create('test');
         $this->off('test')
             ->on('test', function(){
                 return 'result';
@@ -151,7 +151,7 @@ class EventTest extends TestCase
 
     public function testGetterAndSetterInEvent()
     {
-        $event = $this->event('test', array('ns1', 'ns2'));
+        $event = $this->eventManager->create('test', array('ns1', 'ns2'));
 
         $this->assertEquals('ns1.ns2', $event->getNamespace());
 
