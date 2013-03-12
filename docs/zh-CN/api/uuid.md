@@ -1,14 +1,24 @@
-    该微件文档还在紧急编写中,敬请期待!
 [uuid()](http://twinh.github.com/widget/api/uuid)
 =================================================
 
-Generate a FAKE UUID(universally unique identifier)
+随机生成一个UUID
 
-### Generate a FAKE UUID(universally unique identifier)
+### 
 ```php
-string uuid()
+bool uuid( )
 ```
 
 ##### 参数
 *无*
 
+##### 范例
+随机生成一个UUID
+```php
+<?php
+
+echo $widget->uuid();
+```
+##### 输出
+```php
+'b38fb4e2-2059-4b98-b991-74033a1bad13'
+```
