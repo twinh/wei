@@ -9,7 +9,9 @@
 namespace Widget;
 
 /**
- * Off
+ * Remove event handlers by specified type
+ *
+ * This widget is the alias of `$widget->eventManager->remove()`
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\EventManager $eventManager The event manager widget
@@ -17,7 +19,7 @@ namespace Widget;
 class Off extends AbstractWidget
 {
     /**
-     * Remove one or all handlers
+     * Remove event handlers by specified type
      *
      * param string|null $type The type of event
      * @return EventManager

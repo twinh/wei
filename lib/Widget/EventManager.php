@@ -148,7 +148,7 @@ class EventManager extends AbstractWidget
     }
 
     /**
-     * Remove handlers by given type
+     * Remove event handlers by specified type
      *
      * @param string $type The type of event
      * @return EventManager
