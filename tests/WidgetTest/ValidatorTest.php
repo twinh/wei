@@ -697,28 +697,8 @@ class ValidatorTest extends TestCase
         
     public function testValidatorEvents()
     {
-        $validator = $this->validate(array(
-            'data' => array(
-                'email' => 'error-email',
-                'age' => 13
-            ),
-            'rules' => array(
-                'email' => array(
-                    'required' => true, // valid
-                    'length' => array(1, 3), // not valid
-                    'email' => true,    // not valid
-                ),
-                'age' => array(
-                    'digit' => true
-                )
-            ),
-            'names' => array(
-                'email' => 'Your email'
-            )
-        ));
-        
         $coll = array();
-        $fn = function($e) use($coll) {
+        $fn = function($e) use(&$coll) {
             $coll[] = $e->getType();
         };
         $this->off('.validator')
@@ -730,5 +710,33 @@ class ValidatorTest extends TestCase
             'success.validator' => $fn,
             'failure.validator' => $fn
         ));
+        
+        $validator = $this->validate(array(
+            'data' => array(
+                'email' => 'error-email',
+                'age' => 13
+            ),
+            'rules' => array(
+                'email' => array( // fieldInvalid
+                    'required' => true, // ruleValid
+                    'email' => true,    // ruleInValid
+                ),
+                'age' => array( // fieldValid
+                    'digit' => true // ruleValid
+                )
+            ),
+            'names' => array(
+                'email' => 'Your email'
+            )
+        ));
+        
+        $coll = array_unique($coll);
+        
+        $this->assertContains('ruleValid', $coll);
+        $this->assertContains('ruleInvalid', $coll);
+        $this->assertContains('fieldValid', $coll);
+        $this->assertContains('fieldInvalid', $coll);
+        $this->assertContains('failure', $coll);
+        $this->assertNotContains('success', $coll);
     }
 }
