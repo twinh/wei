@@ -176,4 +176,13 @@ class EventTest extends TestCase
         $this->assertTrue($this->eventManager->has('test.ns1'));
         $this->assertTrue($this->eventManager->has('test.ns2'));
     }
+    
+    public function testGetFullType()
+    {
+        $event = $this->eventManager->create('test.ns1');
+        
+        $this->assertEquals('test', $event->getType());
+        
+        $this->assertEquals('test.ns1', $event->getType(true));
+    }
 }

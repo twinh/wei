@@ -17,8 +17,10 @@ interface EventInterface
 {
     /**
      * Returns the type of event
+     * 
+     * @param bool $full Whether return type or type with with namespace 
      */
-    public function getType();
+    public function getType($full = false);
     
     /**
      * Set the type of event

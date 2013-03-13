@@ -80,12 +80,17 @@ abstract class AbstractEvent extends AbstractWidget implements EventInterface
 
     /**
      * Returns the type of event
-     *
+     * 
+     * @param bool $full Whether return type or type with with namespace 
      * @return string
      */
-    public function getType()
+    public function getType($full = false)
     {
-        return $this->type;
+        if ($full && $this->namespaces) {
+            return $this->type . '.' . $this->getNamespace();
+        } else {
+            return $this->type;
+        }
     }
 
     /**
