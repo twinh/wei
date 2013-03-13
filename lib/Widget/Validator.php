@@ -216,8 +216,8 @@ class Validator extends AbstractValidator
                 $this->$method($field, $rule);
 
                 // Trigger the ruleValid/ruleInvalid callback
-                $callback = $result ? 'ruleValid' : 'ruleInvalid';
-                if (false === $this->callback($this->$callback, array($field, $rule, $this))) {
+                $event = $result ? 'ruleValid' : 'ruleInvalid';
+                if ($this->trigger($event . '.validator', array($field, $rule, $this), $this)->isDefaultPrevented()) {
                     return $this->result;
                 }
 
@@ -235,8 +235,8 @@ class Validator extends AbstractValidator
             }
             
             // Trigger the fieldValid/fieldInvalid callback
-            $callback = $this->isFieldValid($field) ? 'fieldValid' : 'fieldInvalid';
-            if (false === $this->callback($this->$callback, array($field, $this))) {
+            $event = $this->isFieldValid($field) ? 'fieldValid' : 'fieldInvalid';
+            if ($this->trigger($event . '.validator', array($field, $this), $this)->isDefaultPrevented()) {
                 return $this->result;
             }
 
@@ -251,8 +251,8 @@ class Validator extends AbstractValidator
         }
 
         // Trigger the success/failure callback
-        $callback = $this->result ? 'success' : 'failure';
-        $this->callback($this->$callback, array($this));
+        $event = $this->result ? 'success' : 'failure';
+        $this->trigger($event . '.validator', array($this), $this);
 
         return $this->result;
     }
@@ -437,30 +437,6 @@ class Validator extends AbstractValidator
             : $this->invalidRules;
     }
 
-    /**
-     * Call a callback with an array of parameters, if the callback is empty,
-     * returns true instead
-     *
-     * @param callback $callback The callable to be called
-     * @param array $params The parameters to be passed to the callback, as an
-     *                      indexed array.
-     * @return mixed
-     * @throws \Widget\Exception\InvalidArgumentException When the first argument is not callable
-     */
-    protected function callback($callback, array $params)
-    {
-        // Returns true when callback is not set
-        if (!$callback) {
-            return true;
-        }
-
-        if (!is_callable($callback)) {
-            throw new InvalidArgumentException('The first argument is not callable');
-        }
-
-        return call_user_func_array($callback, $params);
-    }
-    
     /**
      * {@inheritdoc}
      * @todo refactor

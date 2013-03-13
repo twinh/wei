@@ -305,8 +305,6 @@ class EventManager extends AbstractWidget
      */
     protected function splitNamespace($type)
     {
-        $type = strtolower($type);
-
         if (false === ($pos = strpos($type, '.'))) {
             return array($type, array());
         } else {

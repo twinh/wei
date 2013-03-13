@@ -113,7 +113,7 @@ class ValidatorTest extends TestCase
                 ),
             ),
             'breakRule' => true,
-            'ruleInvalid' => function($field, $rule, $validator) use(&$breakRule) {
+            'ruleInvalid' => function($event, $widget, $field, $rule, $validator) use(&$breakRule) {
                 $breakRule = $rule;
             }
         ));
@@ -135,7 +135,7 @@ class ValidatorTest extends TestCase
                     'email' => true, // Will not valid
                 ),
             ),
-            'ruleValid' => function($field, $rule, $validator) use(&$lastRule) {
+            'ruleValid' => function($event, $widget, $field, $rule, $validator) use(&$lastRule) {
                 $lastRule = $rule;
 
                 // Return false to break the validation flow
@@ -165,7 +165,7 @@ class ValidatorTest extends TestCase
                     'range' => array(0, 150)
                 ),
             ),
-            'fieldValid' => function($field, $validator) use(&$lastField) {
+            'fieldValid' => function($event, $widget, $field, $validator) use(&$lastField) {
                 $lastField = $field;
 
                 // Return false to break the validation flow
@@ -234,24 +234,6 @@ class ValidatorTest extends TestCase
         $this->assertEmpty($validator->getRuleParams('age', 'noThisRule'));
         
         $this->assertEmpty($validator->getRuleParams('noThisField', 'rule'));
-    }
-    
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testInvalidCallback()
-    {
-        $this->validate(array(
-            'data' => array(
-                'email' => 'example@example.com',
-            ),
-            'rules' => array(
-                'email' => array(
-                    'email' => true,
-                ),
-            ),
-            'success' => 'notCallable'
-        ));
     }
     
     public function testRuleOperation()
@@ -710,5 +692,43 @@ class ValidatorTest extends TestCase
         $email->setName('email');
         
         $this->assertEquals('email', $email->getName());
+    }
+    
+        
+    public function testValidatorEvents()
+    {
+        $validator = $this->validate(array(
+            'data' => array(
+                'email' => 'error-email',
+                'age' => 13
+            ),
+            'rules' => array(
+                'email' => array(
+                    'required' => true, // valid
+                    'length' => array(1, 3), // not valid
+                    'email' => true,    // not valid
+                ),
+                'age' => array(
+                    'digit' => true
+                )
+            ),
+            'names' => array(
+                'email' => 'Your email'
+            )
+        ));
+        
+        $coll = array();
+        $fn = function($e) use($coll) {
+            $coll[] = $e->getType();
+        };
+        $this->off('.validator')
+            ->on(array(
+            'ruleValid.validator' => $fn,
+            'ruleInvalid.validator' => $fn,
+            'fieldValid.validator' => $fn,
+            'fieldInvalid.validator' => $fn,
+            'success.validator' => $fn,
+            'failure.validator' => $fn
+        ));
     }
 }
