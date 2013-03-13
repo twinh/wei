@@ -57,7 +57,10 @@ class Image extends File
             return false;
         }
         
-        $size = @getimagesize($input);
+        // Receive the real file path resolved by parent class
+        $file = $this->file;
+        
+        $size = @getimagesize($file);
         if (false === $size) {
             $this->addError('notDetected');
             return false;

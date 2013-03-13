@@ -37,6 +37,13 @@ class File extends AbstractValidator
     protected $notMessage = '%name% must be a non-existing file';
     
     /**
+     * The absolute file path, or false when file not found or not readable
+     * 
+     * @var string|false
+     */
+    protected $file;
+    
+    /**
      * The detected byte size of file
      * 
      * @var int
@@ -177,7 +184,7 @@ class File extends AbstractValidator
                 return false;
         }
 
-        $file = stream_resolve_include_path($file);
+        $this->file = $file = stream_resolve_include_path($file);
         if (!$file || !is_file($file)) {
             $this->addError('notFound');
             return false;
