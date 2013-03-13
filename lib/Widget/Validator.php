@@ -147,7 +147,7 @@ class Validator extends AbstractValidator
      * @param array $options The options for validation
      * @return false Whether pass the validation or not
      * @throws \Widget\Exception\InvalidArgumentException When validation rules is empty
-     * @throws \Widget\Exception\UnexpectedTypeException  When validation rule is not array, string or instance of AbstractValidator
+     * @throws \Widget\Exception\UnexpectedTypeException  When validation rule is not array, string or instance of ValidatorInterface
      */
     public function __invoke($options = array())
     {
@@ -177,7 +177,7 @@ class Validator extends AbstractValidator
             } elseif ($rules instanceof ValidatorInterface) {
                 $rules = array($rules);
             } elseif (!is_array($rules)) {
-                throw new UnexpectedTypeException($rules, 'array, string or instance of AbstractValidator');
+                throw new UnexpectedTypeException($rules, 'array, string or instance of ValidatorInterface');
             }
 
             // Make sure the "required" rule at first
