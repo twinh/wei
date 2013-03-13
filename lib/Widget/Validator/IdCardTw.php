@@ -51,7 +51,7 @@ class IdCardTw extends AbstractValidator
         
         list($x1, $x2) = str_split((string)($first - 55));
         $sum = $x1 + 9 * $x2;
-        for ($i = 1, $j = 8; $i < 9; $i++, $j--) {
+        for ($i = 1; $i < 9; $i++) {
             $sum += $input[$i] * $i;
         }
         
