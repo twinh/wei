@@ -8,6 +8,8 @@
 
 namespace Widget;
 
+use Widget\Validator\Image;
+
 /**
  * Upload
  *
@@ -18,45 +20,27 @@ namespace Widget;
  * @todo        language
  * @todo        display size in result message
  */
-class Upload extends AbstractWidget
+class Upload extends Image
 {
-    /**
-     * $_FILES do not contain the key "$this->name"
-     */
-    const ERR_NO_FILE           = 20;
-
-    /**
-     * File not valid for function is_uploaded_file
-     */
-    const ERR_NOT_UPLOADED_FILE = 21;
-
-    /**
-     * File size large than $this->maxSize
-     */
-    const ERR_FILE_TOO_LARGE    = 22;
-
-    /**
-     * File size samll than $this->minSize
-     */
-    const ERR_FILE_TOO_SAMLL    = 23;
-
-    /**
-     * File extension in black list
-     */
-    const ERR_EXT_NOT_ALLOW     = 24;
-
-    /**
-     * File extension not in white list
-     */
-    const ERR_EXT_NOT_IN_ALLOW  = 25;
-
     /**
      * Seems that the total file size is larger than the max size of post data
      *
      * @link http://php.net/manual/en/ini.core.php#ini.post-max-size
      */
-    const ERR_POST_SIZE = 26;
+    protected $postSizeMessage = 'Seems that the total file size is larger than the max size of allowed post data, please check the size of your file';
 
+    /**
+     * $_FILES do not contain the key "$this->name"
+     * 
+     * @var string
+     */
+    protected $noFileMessage = 'No file uploaded';
+    
+    /**
+     * File not valid for function is_uploaded_file
+     */
+    const ERR_NOT_UPLOADED_FILE = 21;
+    
     /**
      * Can not move uploaded file
      */
@@ -69,35 +53,7 @@ class Upload extends AbstractWidget
      * @var string
      */
     protected $name;
-
-    /**
-     * The max file size limit
-     *
-     * @var int
-     */
-    protected $maxSize = 0;
-
-    /**
-     * The min file size limit
-     *
-     * @var int
-     */
-    protected $minSize = 1;
-
-    /**
-     * The white extensions list
-     *
-     * @var array
-     */
-    protected $whiteExts = array();
-
-    /**
-     * The black extensions list
-     *
-     * @var array
-     */
-    protected $blackExts = array();
-
+    
     /**
      * Custome file name without extension to save
      *
@@ -135,11 +91,6 @@ class Upload extends AbstractWidget
         UPLOAD_ERR_EXTENSION    => 'File upload stopped by extension',
         20                      => 'No file uploaded',
         21                      => 'No file uploaded',
-        22                      => 'File too large', // File larger than $this->maxSize
-        23                      => 'File too samll',
-        24                      => 'File extension not allowed',
-        25                      => 'File extension not in allowed list',
-        26                      => 'Seems that the total file size is larger than the max size of post data, please check the size of your file',
         27                      => 'Can not move uploaded file',
     );
 
@@ -148,7 +99,6 @@ class Upload extends AbstractWidget
      *
      * @param array $options
      * @return array
-     * @todo divide to serval samll valid methods
      */
     public function __invoke(array $options = array())
     {
@@ -158,16 +108,19 @@ class Upload extends AbstractWidget
 
         // Set default name
         if (!$this->name) {
-            $this->setName(null);
+            $this->setName(key($files));
         }
 
+        // TODO detail description for this situation
         // Check if has file uploaded or file too large
         if (!isset($files[$this->name])) {
             if (empty($files) && !$this->post->toArray()) {
-                return $this->result(static::ERR_POST_SIZE);
+                $error = 'postSize';
             } else {
-                return $this->result(static::ERR_NO_FILE);
+                $error = 'noFile';
             }
+            $this->addError($error);
+            return false;
         }
 
         $file = $files[$this->name];
@@ -181,32 +134,9 @@ class Upload extends AbstractWidget
             return $this->result(static::ERR_NOT_UPLOADED_FILE);
         }
 
-        // Check if size is valid
-        if ($this->maxSize && $this->maxSize < $file['size']) {
-            return $this->result(static::ERR_FILE_TOO_LARGE);
-        }
-
-        if ($this->minSize && $this->minSize > $file['size']) {
-            return $this->result(static::ERR_FILE_TOO_SAMLL);
-        }
-
-        // Check if extension is valid
-        $ext = $file['ext'] = pathinfo($file['name'], PATHINFO_EXTENSION);
-        if ($this->blackExts && in_array($ext, (array) $this->blackExts)) {
-            return $this->result(static::ERR_EXT_NOT_ALLOW);
-        }
-
-        if ($this->whiteExts && !in_array($ext, (array) $this->whiteExts)) {
-            return $this->result(static::ERR_EXT_NOT_IN_ALLOW);
-        }
-
         // Custom saved file name
         if ($this->fileName) {
-            if (is_callable($this->fileName)) {
-                $fileName = $this->fileName();
-            } else {
-                $fileName = $this->fileName;
-            }
+            $fileName = $this->fileName;
         } else {
             $fileName = $file['name'];
         }
@@ -216,6 +146,7 @@ class Upload extends AbstractWidget
             mkdir($this->dir, 0700, true);
         }
 
+        // TODO beforeSave & afterSave event
         $fullFile = $file['file'] = $this->dir . '/' . $fileName;
         if (@!move_uploaded_file($file['tmp_name'], $fullFile)) {
             return $this->result(static::ERR_MOVE_FAIL);
@@ -225,14 +156,14 @@ class Upload extends AbstractWidget
     }
 
     /**
-     * Set name
+     * Set the upload filed name
      *
      * @param string $name
-     * @return Upload
+     * @return \Widget\Upload
      */
     public function setName($name)
     {
-        $this->name = $name ? $name : key($_FILES);
+        $this->name = $name;
 
         return $this;
     }
