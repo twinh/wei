@@ -35,6 +35,8 @@ class TestCase extends BaseTestCase
             'this is a simple string',
             // object
             new \stdClass, new \ArrayObject(array(1, 3)), new \DateTime(),
+            // FIXME
+            //new \SplFileInfo(__FILE__),
             // resource
             $this->createResource(),
             // null
