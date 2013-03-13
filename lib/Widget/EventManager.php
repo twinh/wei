@@ -65,7 +65,7 @@ class EventManager extends AbstractWidget
      * @param null|WidgetInterface $widget If the widget contains the $type
      *                                     property, the event manager will
      *                                     trigger it too
-     * @return \Widget\Event The result returned by the last handle
+     * @return \Widget\Event\Interface The result returned by the last handle
      */
     public function __invoke($type, $args = array(), WidgetInterface $widget = null)
     {
@@ -217,12 +217,15 @@ class EventManager extends AbstractWidget
     /**
      * Create a new event
      *
-     * @return Event
+     * @return \Widget\Event\EventInterface
      * @param array $namespaces
+     * @todo check interface
      */
-    public function create($type, array $namespaces = array())
+    public function create($type, $class = '\Widget\Event\Event')
     {
-        return new Event(array(
+        list($type, $namespaces) = $this->splitNamespace($type);
+
+        return new $class(array(
             'widget'        => $this->widget,
             'type'          => $type,
             'namespaces'    => $namespaces,

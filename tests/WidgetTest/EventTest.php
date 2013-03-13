@@ -151,7 +151,7 @@ class EventTest extends TestCase
 
     public function testGetterAndSetterInEvent()
     {
-        $event = $this->eventManager->create('test', array('ns1', 'ns2'));
+        $event = $this->eventManager->create('test.ns1.ns2');
 
         $this->assertEquals('ns1.ns2', $event->getNamespace());
 
