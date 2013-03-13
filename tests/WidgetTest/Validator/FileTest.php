@@ -109,4 +109,31 @@ class FileTest extends TestCase
             'mimeTypes' => 'image/jpg,image/gif'
         )));
     }
+    
+    public function testSplFileInfoAsInput()
+    {
+        $file = $this->createFileValidator();
+        
+        $this->assertTrue($file(new \SplFileInfo(dirname(__DIR__) . '/Fixtures/5x5.gif')));
+    }
+    
+    public function testFilesArrayAsInput()
+    {
+        $file = $this->createFileValidator();
+        
+        $input = dirname(__DIR__) . '/Fixtures/5x5.gif';
+        $array = array(
+            'tmp_name' => $input,
+            'name' => $input
+        );
+        
+        $this->assertTrue($file($array));
+    }
+    
+    public function testInvalidArrayAsInput()
+    {
+        $file = $this->createFileValidator();
+        
+        $this->assertFalse($file(array()));
+    }
 }
