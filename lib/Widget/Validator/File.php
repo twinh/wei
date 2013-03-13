@@ -152,20 +152,40 @@ class File extends AbstractValidator
      */
     protected function validate($input)
     {
-        if (!is_string($input) || empty($input)) {
-            $this->addError('notString');
-            return false;
+        switch ( true ) {
+            case is_string($input) :
+                $file = $fileName = $input;
+                break;
+            
+            // File array from $_FILES
+            case is_array($input) :
+                if (!isset($input['tmp_name']) || !isset($input['name'])) {
+                    $this->addError('notFound');
+                    return false;
+                }
+                
+                $file = $input['tmp_name'];
+                $fileName = $input['name'];
+                break;
+            
+            case $input instanceof \SplFileInfo:
+                $file = $fileName = $input->getPathname();
+                break;
+            
+            default:
+                $this->addError('notString');
+                return false;
         }
 
-        $file = stream_resolve_include_path($input);
+        $file = stream_resolve_include_path($file);
         if (!$file || !is_file($file)) {
             $this->addError('notFound');
             return false;
         }
-
+                
         // Validate file extension
         // Use substr instead of pathinfo, because pathinfo may return error value in unicode
-        $this->ext = substr($file, strrpos($file, '.') + 1);
+        $this->ext = substr($fileName, strrpos($fileName, '.') + 1);
         if ($this->excludeExts && in_array($this->ext, $this->excludeExts)) {
             $this->addError('excludeExts');
         }
