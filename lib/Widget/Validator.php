@@ -223,7 +223,7 @@ class Validator extends AbstractValidator
 
                 if ($result) {
                     // The field data is empty and optional, skip the remaining validation rules
-                    if (!$data && 'required' === $rule) {
+                    if (empty($data) && 'required' === $rule) {
                         break;
                     }
                 } else {

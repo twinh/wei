@@ -31,7 +31,8 @@ class Required extends AbstractValidator
      */
     protected function validate($input)
     {
-        if ($this->required && !$input) {
+        //Catchable fatal error: Object of class SplFileInfo could not be converted to boolean
+        if ($this->required && empty($input)) {
             $this->addError('required');
             return false;
         }
