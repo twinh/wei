@@ -163,4 +163,17 @@ class EventTest extends TestCase
 
         $this->assertInternalType('float', $event->getTimeStamp());
     }
+    
+    public function testArrayAsOnParameters()
+    {
+        $this->off('test')
+            ->on(array(
+                'test.ns1' => function(){},
+                'test.ns2' => function(){}
+            ));
+            
+        $this->assertTrue($this->eventManager->has('test'));
+        $this->assertTrue($this->eventManager->has('test.ns1'));
+        $this->assertTrue($this->eventManager->has('test.ns2'));
+    }
 }

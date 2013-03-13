@@ -121,14 +121,23 @@ class EventManager extends AbstractWidget
     /**
      * Attach a handler to an event
      *
-     * @param string $type The type of event
+     * @param string|array $type The type of event, or an array that the key is event type and the value is event hanlder
      * @param callback $fn The event handler
      * @param int|string $priority The event priority, could be int or specify strings, the higer number, the higer priority
      * @param array $data The data pass to the event object, when the handler is triggered
      * @return \Widget\EventManager
      */
-    public function add($type, $fn, $priority = 0, $data = array())
+    public function add($type, $fn = null, $priority = 0, $data = array())
     {
+        // ( $types )
+        if (is_array($type)) {
+            foreach ($type as $name => $fn) {
+                $this->add($name, $fn);
+            }
+            return $this;
+        }
+        
+        // ( $type, $fn, $priority, $data )
         if (!is_callable($fn)) {
             throw new UnexpectedTypeException($fn, 'callable');
         }
