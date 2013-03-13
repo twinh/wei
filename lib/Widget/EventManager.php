@@ -65,7 +65,7 @@ class EventManager extends AbstractWidget
      * @param null|WidgetInterface $widget If the widget contains the $type
      *                                     property, the event manager will
      *                                     trigger it too
-     * @return \Widget\Event\Interface The result returned by the last handle
+     * @return \Widget\Event\Interface The event object
      */
     public function __invoke($type, $args = array(), WidgetInterface $widget = null)
     {
