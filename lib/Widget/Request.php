@@ -30,7 +30,7 @@ class Request extends Parameter
             $order = ini_get('request_order') ?: ini_get('variables_order');
 
             $map = array(
-                'G' => 'get',
+                'G' => 'query',
                 'P' => 'post',
                 'C' => 'cookie'
             );

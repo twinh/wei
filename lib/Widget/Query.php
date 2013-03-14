@@ -10,12 +10,12 @@
 namespace Widget;
 
 /**
- * Get
+ * The url query parameters($_GET) widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property \Widget\Router $router The router widget
  */
-class Get extends Parameter
+class Query extends Parameter
 {
     /**
      * Constructor
