@@ -14,8 +14,7 @@ use Widget\Validator\Image;
  * Upload
  *
  * @author      Twin Huang <twinh@yahoo.cn>
- * @property \Widget\Post $post The post widget
- * @todo        Use other various instead of global various $_FILES
+ * @property    \Widget\Post $post The post widget
  * @todo        Add service widget and extend it
  * @todo        language
  * @todo        display size in result message
@@ -36,23 +35,27 @@ class Upload extends Image
      */
     protected $noFileMessage = 'No file uploaded';
     
-    /**
-     * File not valid for function is_uploaded_file
-     */
-    const ERR_NOT_UPLOADED_FILE = 21;
+    protected $partialMessage = 'Partial file uploaded, please try again';
     
-    /**
-     * Can not move uploaded file
-     */
-    const ERR_MOVE_FAIL = 27;
-
+    protected $noTmpDirMessage = 'No temporary directory';
+    
+    protected $cantWriteMessage = 'Can\'t write to disk';
+    
+    protected $extensionMessage = 'File upload stopped by extension';
+    
+    protected $notUploadedFileMessage = 'No file uploaded';
+    
+    protected $cantMoveMessage = 'Can not move uploaded file';
+    
+    protected $name = 'File';
+    
     /**
      * The name defined in the file input, if it's not specified, use the first
      * key in $_FILES
      *
      * @var string
      */
-    protected $name;
+    protected $field;
     
     /**
      * Custome file name without extension to save
@@ -76,44 +79,25 @@ class Upload extends Image
     protected $to;
 
     /**
-     * The return result list
-     *
-     * @var array
-     */
-    protected $results = array(
-        UPLOAD_ERR_OK           => 'File uploaded',
-        UPLOAD_ERR_INI_SIZE     => 'File too large', // File larger than upload_max_filesize,
-        UPLOAD_ERR_FORM_SIZE    => 'File too large', // File larger than MAX_FILE_SIZE defiend in html form
-        UPLOAD_ERR_PARTIAL      => 'Partial file uploaded, please try again',
-        UPLOAD_ERR_NO_FILE      => 'No file uploaded',
-        UPLOAD_ERR_NO_TMP_DIR   => 'No temporary directory',
-        UPLOAD_ERR_CANT_WRITE   => 'Can\'t write to disk',
-        UPLOAD_ERR_EXTENSION    => 'File upload stopped by extension',
-        20                      => 'No file uploaded',
-        21                      => 'No file uploaded',
-        27                      => 'Can not move uploaded file',
-    );
-
-    /**
      * Upload a file
      *
      * @param array $options
      * @return array
      */
-    public function __invoke(array $options = array())
+    public function __invoke($options = array(), $options2 = array())
     {
-        $this->setOption($options);
+        $options && $this->setOption($options);
 
         $files = $this->getFiles();
 
         // Set default name
-        if (!$this->name) {
-            $this->setName(key($files));
+        if (!$this->field) {
+            $this->field = key($files);
         }
 
         // TODO detail description for this situation
         // Check if has file uploaded or file too large
-        if (!isset($files[$this->name])) {
+        if (!isset($files[$this->field])) {
             if (empty($files) && !$this->post->toArray()) {
                 $error = 'postSize';
             } else {
@@ -123,49 +107,70 @@ class Upload extends Image
             return false;
         }
 
-        $file = $files[$this->name];
+        $file = $files[$this->field];
 
-        // Handle UPLOAD_ERR_* error
-        if (0 !== $file['error']) {
-            return $this->result($file['error']);
+        switch ($file['error']) {
+            case UPLOAD_ERR_OK :
+                break;
+            
+            // File larger than upload_max_filesize
+            case UPLOAD_ERR_INI_SIZE :
+                $this->addError('maxSize');
+                break;
+            
+            // File larger than MAX_FILE_SIZE defiend in html form
+            case UPLOAD_ERR_FORM_SIZE :
+                $this->addError('maxSize');
+                break;
+            
+            case UPLOAD_ERR_PARTIAL :
+                $this->addError('partial');
+                break;
+            
+            case UPLOAD_ERR_NO_FILE :
+                $this->addError('noFile');
+                break;
+            
+            case UPLOAD_ERR_NO_TMP_DIR :
+                $this->addError('noTmpDir');
+                break;
+            
+            case UPLOAD_ERR_CANT_WRITE :
+                $this->addError('cantWrite');
+                break;
+            
+            case UPLOAD_ERR_EXTENSION :
+                $this->addError('extension');
+                break;
+
+            default :
+                $this->addError('noFile');
         }
-
+        
         if (!is_uploaded_file($file['tmp_name'])) {
-            return $this->result(static::ERR_NOT_UPLOADED_FILE);
+            $this->addError('notUploadedFile');
+            return false;
         }
-
-        // Custom saved file name
-        if ($this->fileName) {
-            $fileName = $this->fileName;
-        } else {
-            $fileName = $file['name'];
-        }
-
-        // Looks not good, FIXED ME
+        
+        $this->saveFile($file);
+        
+        return $this;
+    }
+    
+    protected function saveFile($file)
+    {
+        $fileName = $this->fileName ?: $file['name'];
+        
         if (!is_dir($this->dir)) {
             mkdir($this->dir, 0700, true);
         }
-
-        // TODO beforeSave & afterSave event
-        $fullFile = $file['file'] = $this->dir . '/' . $fileName;
-        if (@!move_uploaded_file($file['tmp_name'], $fullFile)) {
-            return $this->result(static::ERR_MOVE_FAIL);
+        
+        $this->file = $this->dir . '/' . $fileName;
+        if (!@move_uploaded_file($file['tmp_name'], $this->file)) {
+            $this->addError('cantMove');
+            $this->logger('critical', $this->cantMoveMessage);
+            return false;
         }
-
-        return $this->result(UPLOAD_ERR_OK, array('file' => $file));
-    }
-
-    /**
-     * Set the upload filed name
-     *
-     * @param string $name
-     * @return \Widget\Upload
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -176,20 +181,5 @@ class Upload extends Image
     public function getFiles()
     {
         return $_FILES;
-    }
-
-    /**
-     * Return result
-     *
-     * @param int $code
-     * @param array $data
-     * @return array
-     */
-    public function result($code, array $data = array())
-    {
-        return array(
-            'code'      => $code,
-            'message'   => $this->results[$code],
-        ) + $data;
     }
 }
