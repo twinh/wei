@@ -9,7 +9,7 @@
 
 namespace Widget;
 
-use Widget\Exception\NotFoundException;
+use Widget\Exception;
 
 /**
  * Redirect
@@ -20,14 +20,13 @@ use Widget\Exception\NotFoundException;
 class Redirect extends Response
 {
     /**
-     * Options
-     *
-     * @var array
+     * The custom view file
+     * 
+     * @var string
      */
-    public $options = array(
-        'view' => false,
-        'delay' => 0,
-    );
+    protected $view;
+    
+    protected $delay = 0;
 
     /**
      * Default view content
@@ -55,31 +54,41 @@ class Redirect extends Response
      * @return Redirect
      * @throws Exception      When custom view file not found
      */
-    public function __invoke($url, $status = 302, array $options = array())
+    public function __invoke($url = '', $status = 302, array $options = array())
     {
         $options = $this->setOption($options);
-
-        // use custom view file for redirect
-        if ($options['view']) {
-            if (is_file($options['view'])) {
-                $this->setSentStatus(true);
-                require $options['view'];
-            } else {
-                throw new NotFoundException(sprintf('View file "%s" not found', $options['view']));
-            }
+        
+        if ($this->view) {
+            require $this->view;
         } else {
-            $options['delay'] = (int) $options['delay'];
-
             // Location header does not support delay
-            if ($options['delay'] === 0) {
+            if (0 === $this->delay) {
                 $this->header('Location', $url);
             }
-
-            $content = sprintf(static::$html, $options['delay'], htmlspecialchars($url, ENT_QUOTES, 'UTF-8'));
+            
+            $content = sprintf(static::$html, $this->delay, htmlspecialchars($url, ENT_QUOTES, 'UTF-8'));
 
             parent::__invoke($content, $status);
         }
 
+        return $this;
+    }
+    
+    public function setView($view)
+    {
+        if (!is_file($view)) {
+            throw new Exception\NotFoundException(sprintf('File "%s" not found'));
+        }
+        
+        $this->view = $view;
+        
+        return $this;
+    }
+    
+    public function setDelay($delay)
+    {
+        $this->delay = (int)$delay;
+        
         return $this;
     }
 }
