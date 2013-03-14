@@ -12,9 +12,7 @@ namespace Widget;
  * Response
  *
  * @author      Twin Huang <twinh@yahoo.cn>
- * @todo        Filterable ? filter response
  * @property    \Widget\Header $header The reponse header
- * @method string filter(string $name, mixed $content) Returns the filtered content
  */
 class Response extends AbstractWidget
 {
@@ -44,7 +42,7 @@ class Response extends AbstractWidget
     {
         $this->isSent = true;
 
-        $this->content = $this->filter('response', $content);
+        $this->content = $content;
 
         $this->header->setStatusCode($status);
 
