@@ -16,6 +16,21 @@ namespace Widget;
  */
 class Request extends Parameter
 {
+    public $get;
+    
+    public $post;
+    
+    public $cookie;
+    
+    public $server;
+    
+    /**
+     * Whether create request parameter from PHP global varibales
+     * 
+     * @var bool
+     */
+    protected $fromGlobal = true;
+    
     /**
      * Constructor
      *
@@ -24,25 +39,16 @@ class Request extends Parameter
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-
-        // Rebuild request parameters from other widgets
-        if (!isset($options['data'])) {
-            $order = ini_get('request_order') ?: ini_get('variables_order');
-
-            $map = array(
-                'G' => 'query',
-                'P' => 'post',
-                'C' => 'cookie'
-            );
-
-            foreach (str_split(strtoupper($order)) as $key) {
-                if (isset($map[$key])) {
-                    $this->data = $this->$map[$key]->toArray() + $this->data;
-                }
-            }
+        
+        if ($this->fromGlobal) {
+            $this->get      = $_GET;
+            $this->post     = $_POST;
+            $this->cookie   = $_COOKIE;
+            $this->server   = $_SERVER;
+            $this->data     = $_REQUEST;
         }
     }
-
+    
     /**
      * Returns the full url, which do not contain the fragment, for it never sent to the server
      *
