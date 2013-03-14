@@ -26,7 +26,7 @@ class Trigger extends AbstractWidget
      * @param null|\Widget\WidgetInterface $widget If the widget contains the 
      *                                     $type property, the event manager 
      *                                     will trigger it too
-     * @return \Widget\Event\Interface The event object
+     * @return \Widget\Event\EventInterface The event object
      */
     public function __invoke($event, $params = array(), WidgetInterface $widget = null)
     {
