@@ -21,5 +21,3 @@
 #### 验证器
 
 #### 工具
-
-* [Validator - 验证器](validator.md)
