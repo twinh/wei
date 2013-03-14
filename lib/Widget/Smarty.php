@@ -40,9 +40,6 @@ class Smarty extends AbstractView
         // options for \Smarty
         'compile_dir'   => null,
         'templateDir'  => null,
-
-        // options for internal
-        'ext'           => '.tpl',
     );
 
     /**
