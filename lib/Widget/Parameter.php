@@ -49,7 +49,7 @@ class Parameter extends ArrayWidget
      */
     public function getInt($name, $min = null, $max = null)
     {
-        $value = (int) $this($name, 0);
+        $value = (int) $this($name);
 
         if (!is_null($min) && $value < $min) {
             return $min;
