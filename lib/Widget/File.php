@@ -22,7 +22,7 @@ class File extends AbstractStorage
      *
      * @var string
      */
-    protected $dir = '../cache';
+    protected $dir = 'cache';
 
     /**
      * Illegal chars as the name of cache, would be replaced to "_"
@@ -62,10 +62,9 @@ class File extends AbstractStorage
     public function setDir($dir)
     {
         if (!is_dir($dir)) {
-            if (!@mkdir($dir, 0644, true)) {
-                throw new Exception\IOException(sprintf('Failed to create directory: "%s", the error is %s', $dir, error_get_last()));
+            if (true !== @mkdir($dir, 0777, true)) {
+                throw new Exception\IOException(sprintf('Failed to create directory: "%s"', $dir));
             }
-            chmod($dir, 0644);
         }
 
         $this->dir = $dir;
