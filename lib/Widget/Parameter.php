@@ -113,4 +113,17 @@ class Parameter extends ArrayWidget
         
         return $this;
     }
+    
+    /**
+     * Remove parameter by specified name
+     * 
+     * @param string $name The parameter name
+     * @return \Widget\Parameter
+     */
+    public function remove($name)
+    {
+        unset($this->data[$name]);
+        
+        return $this;
+    }
 }
