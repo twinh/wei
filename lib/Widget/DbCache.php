@@ -158,7 +158,6 @@ class DbCache extends AbstractStorage
 
     /**
      * {@inheritdoc}
-     * @param array $options
      */
     public function set($key, $value, $expire = 0, array $options = array())
     {
@@ -188,7 +187,6 @@ class DbCache extends AbstractStorage
 
     /**
      * {@inheritdoc}
-     * @param array $options
      */
     public function add($key, $value, $expire = 0, array $options = array())
     {
@@ -208,7 +206,6 @@ class DbCache extends AbstractStorage
 
     /**
      * {@inheritdoc}
-     * @param array $options
      */
     public function replace($key, $value, $expire = 0, array $options = array())
     {

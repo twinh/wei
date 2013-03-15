@@ -118,7 +118,7 @@ class File extends AbstractStorage
     /**
      * {@inheritdoc}
      */
-    public function set($key, $value, $expire = 0, array $options = array())
+    public function set($key, $value, $expire = 0)
     {
         $file = $this->getFile($key);
 
@@ -130,7 +130,7 @@ class File extends AbstractStorage
     /**
      * {@inheritdoc}
      */
-    public function add($key, $value, $expire = 0, array $options = array())
+    public function add($key, $value, $expire = 0)
     {
         $file = $this->getFile($key);
 
@@ -165,7 +165,7 @@ class File extends AbstractStorage
     /**
      * {@inheritdoc}
      */
-    public function replace($key, $value, $expire = 0, array $options = array())
+    public function replace($key, $value, $expire = 0)
     {
         $file = $this->getFile($key);
 

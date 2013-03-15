@@ -40,10 +40,9 @@ interface StorageInterface
      * @param  string $key    The name of item
      * @param  value  $value  The value of item
      * @param  int    $expire The expire seconds, 0 means never expired
-     * @param  array  $options
      * @return bool
      */
-    public function set($key, $value, $expire = 0, array $options = array());
+    public function set($key, $value, $expire = 0);
 
     /**
      * Remove an item
@@ -59,10 +58,9 @@ interface StorageInterface
      * @param  string $key    The name of item
      * @param  mixed  $value  The value of item
      * @param  int    $expire The expire seconds, 0 means never expired
-     * @param  array  $options
      * @return bool
      */
-    public function add($key, $value, $expire = 0, array $options = array());
+    public function add($key, $value, $expire = 0);
 
     /**
      * Replace an existing item
@@ -70,10 +68,9 @@ interface StorageInterface
      * @param  string $key    The name of item
      * @param  mixed  $value  The value of item
      * @param  int    $expire The expire seconds, 0 means never expired
-     * @param  array  $options
      * @return bool
      */
-    public function replace($key, $value, $expire = 0, array $options = array());
+    public function replace($key, $value, $expire = 0);
 
     /**
      * Increment an item

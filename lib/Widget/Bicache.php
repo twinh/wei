@@ -52,14 +52,13 @@ class Bicache extends AbstractStorage
 
     /**
      * {@inheritdoc}
-     * @param array $options
      */
-    public function set($key, $value, $expire = 0, array $options = array())
+    public function set($key, $value, $expire = 0)
     {
-        $result = $this->master->set($key, $value, $expire, $options);
+        $result = $this->master->set($key, $value, $expire);
 
         if ($this->needUpdate($key)) {
-            $result = $this->slave->set($key, $value, $expire, $options);
+            $result = $this->slave->set($key, $value, $expire);
         }
 
         return $result;
@@ -67,15 +66,14 @@ class Bicache extends AbstractStorage
 
     /**
      * {@inheritdoc}
-     * @param array $options
      */
-    public function add($key, $value, $expire = 0, array $options = array())
+    public function add($key, $value, $expire = 0)
     {
-        $result = $this->master->add($key, $value, $expire, $options);
+        $result = $this->master->add($key, $value, $expire);
 
         // The key could be only added one time, when added successed, set to the slave cache
         if ($result) {
-            $result = $this->slave->set($key, $value, $expire, $options);
+            $result = $this->slave->set($key, $value, $expire);
         }
 
         return $result;
@@ -113,12 +111,12 @@ class Bicache extends AbstractStorage
      * {@inheritdoc}
      * @param array $options
      */
-    public function replace($key, $value, $expire = 0, array $options = array())
+    public function replace($key, $value, $expire = 0)
     {
-        $result = $this->master->replace($key, $value, $options);
+        $result = $this->master->replace($key, $value);
 
         if ($this->needUpdate($key)) {
-            $result = $this->slave->set($key, $value, $options);
+            $result = $this->slave->set($key, $value);
         }
 
         return $result;

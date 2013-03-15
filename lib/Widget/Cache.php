@@ -83,9 +83,9 @@ class Cache extends AbstractStorage
      * {@inheritdoc}
      * @param array $options
      */
-    public function add($key, $value, $expire = 0, array $options = array())
+    public function add($key, $value, $expire = 0)
     {
-        return $this->object->add($key, $options, $expire, $options);
+        return $this->object->add($key, $value, $expire);
     }
 
     /**
@@ -132,17 +132,16 @@ class Cache extends AbstractStorage
      * {@inheritdoc}
      * @param array $options
      */
-    public function replace($key, $value, $expire = 0, array $options = array())
+    public function replace($key, $value, $expire = 0)
     {
-        return $this->object->replace($key, $options, $expire, $options);
+        return $this->object->replace($key, $value, $expire);
     }
 
     /**
      * {@inheritdoc}
-     * @param array $options
      */
-    public function set($key, $value, $expire = 0, array $options = array())
+    public function set($key, $value, $expire = 0)
     {
-        return $this->object->set($key, $value, $expire, $options);
+        return $this->object->set($key, $value, $expire);
     }
 }

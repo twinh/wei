@@ -40,7 +40,7 @@ class Apc extends AbstractStorage
     /**
      * {@inheritdoc}
      */
-    public function set($key, $value, $expire = 0, array $options = array())
+    public function set($key, $value, $expire = 0)
     {
         return apc_store($key, $value, $expire);
     }
@@ -56,7 +56,7 @@ class Apc extends AbstractStorage
     /**
      * {@inheritdoc}
      */
-    public function add($key, $value, $expire = 0, array $options = array())
+    public function add($key, $value, $expire = 0)
     {
         return apc_add($key, $value, $expire);
     }
@@ -64,7 +64,7 @@ class Apc extends AbstractStorage
     /**
      * {@inheritdoc}
      */
-    public function replace($key, $value, $expire = 0, array $options = array())
+    public function replace($key, $value, $expire = 0)
     {
         apc_fetch($key, $success);
         if ($success) {

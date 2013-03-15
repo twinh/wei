@@ -61,7 +61,7 @@ class Memcache extends AbstractStorage
      * Set servers
      *
      * @param array $servers
-     * @return Memcache
+     * @return \Memcache
      */
     public function setServers($servers)
     {
@@ -84,9 +84,8 @@ class Memcache extends AbstractStorage
 
     /**
      * {@inheritdoc}
-     * @param array $options
      */
-    public function set($key, $value, $expire = 0, array $options = array())
+    public function set($key, $value, $expire = 0)
     {
         return $this->object->set($key, $value, $this->flag, $expire);
     }
@@ -101,18 +100,16 @@ class Memcache extends AbstractStorage
 
     /**
      * {@inheritdoc}
-     * @param array $options
      */
-    public function add($key, $value, $expire = 0, array $options = array())
+    public function add($key, $value, $expire = 0)
     {
         return $this->object->add($key, $value, $this->flag, $expire);
     }
 
     /**
      * {@inheritdoc}
-     * @param array $options
      */
-    public function replace($key, $value, $expire = 0, array $options = array())
+    public function replace($key, $value, $expire = 0)
     {
         return $this->object->replace($key, $value, $this->flag, $expire);
     }
