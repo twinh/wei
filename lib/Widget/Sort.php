@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * Sort
+ * Sort two-dimensional array like SQL ORDER BY clause
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  * @todo        rename to orderBy ?
