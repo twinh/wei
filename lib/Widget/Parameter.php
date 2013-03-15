@@ -89,13 +89,13 @@ class Parameter extends ArrayWidget
      * Returns a parameter value in the specified array, if not in, returns the
      * first element instead
      *
-     * @param string $name
-     * @param array $array
+     * @param string $name The parameter name
+     * @param array $array The array to be search
      * @return mixed The parameter value
      */
-    public function getInArray($name, $array = array())
+    public function getInArray($name, array $array)
     {
-        $value = $this($name);
+        $value = $this->getRaw($name);
 
         return in_array($value, $array) ? $value : $array[key($array)];
     }
