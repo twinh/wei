@@ -20,6 +20,6 @@ class Post extends Parameter
     {
         parent::__construct($options);
 
-        $this->data = &$this->request->post;
+        $this->data = &$this->request->getParameterReference('post');
     }
 }

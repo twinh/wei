@@ -21,28 +21,28 @@ class Request extends Parameter
      * 
      * @var array
      */
-    public $get;
+    protected $gets;
     
     /**
      * The HTTP request parameters, equal to $_POST if $fromGlobal is true
      * 
      * @var array
      */
-    public $post;
+    protected $posts;
     
     /**
      * The cookie parameters, equal to $_COOKIE if $fromGlobal is true
      * 
      * @var array 
      */
-    public $cookie;
+    protected $cookies;
     
     /**
      * The server parameters, equal to $_SERVER if $fromGlobal is true
      * 
      * @var array
      */
-    public $servers;
+    protected $servers;
     
     /**
      * The upload file parameters, equal to $_FILES if $fromGlobal is true
@@ -68,9 +68,9 @@ class Request extends Parameter
         parent::__construct($options);
 
         if ($this->fromGlobal) {
-            $this->get      = &$_GET;
-            $this->post     = &$_POST;
-            $this->cookie   = &$_COOKIE;
+            $this->gets     = &$_GET;
+            $this->posts    = &$_POST;
+            $this->cookies  = &$_COOKIE;
             $this->servers  = &$_SERVER;
             $this->files    = &$_FILES;
             $this->data     = &$_REQUEST;
@@ -145,5 +145,20 @@ class Request extends Parameter
     public function inAjax()
     {
         return 'xmlhttprequest' == strtolower($this->server['HTTP_X_REQUESTED_WITH']);
+    }
+    
+    /**
+     * Returns the HTTP parameters reference
+     * 
+     * @param string $type The parameter type, could be get, post, cookie, or server
+     * @return array The parameters array
+     */
+    public function &getParameterReference($type)
+    {
+        if (in_array($type, array('get', 'post', 'cookie', 'server'))) {
+            return $this->{$type . 's'};
+        }
+        
+        throw new Exception\InvalidArgumentException(sprintf('Unkonwn parameter type "%s"', $type));
     }
 }

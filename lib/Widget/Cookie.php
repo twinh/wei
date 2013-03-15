@@ -46,7 +46,7 @@ class Cookie extends Parameter
     {
         parent::__construct($options);
 
-        $this->data = &$this->request->cookie;
+        $this->data = &$this->request->getParameterReference('cookie');
     }
 
     /**

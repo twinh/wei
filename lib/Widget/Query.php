@@ -25,6 +25,6 @@ class Query extends Parameter
     {
         parent::__construct($options);
 
-        $this->data = &$this->request->get;
+        $this->data = &$this->request->getParameterReference('get');
     }
 }

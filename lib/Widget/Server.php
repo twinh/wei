@@ -25,6 +25,6 @@ class Server extends Parameter
     {
         parent::__construct($options);
 
-        $this->data = &$this->request->servers;
+        $this->data = &$this->request->getParameterReference('server');
     }
 }
