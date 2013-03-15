@@ -67,6 +67,7 @@ class Request extends Parameter
     {
         parent::__construct($options);
 
+        // Create paramters from super global variable on default
         if ($this->fromGlobal) {
             $this->gets     = &$_GET;
             $this->posts    = &$_POST;
