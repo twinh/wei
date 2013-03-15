@@ -53,6 +53,18 @@ class File extends AbstractStorage
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function __invoke($key, $value = null, $expire = 0)
+    {
+        if (1 == func_num_args()) {
+            return $this->get($key);
+        } else {
+            return $this->set($key, $value, $expire);
+        }
+    }
+    
+    /**
      * Set cache directory
      *
      * @param string      $dir
@@ -73,17 +85,15 @@ class File extends AbstractStorage
     }
 
     /**
-     * {@inheritdoc}
+     * Returns the cache directory
+     * 
+     * @return string
      */
-    public function __invoke($key, $value = null, $expire = 0)
+    public function getDir()
     {
-        if (1 == func_num_args()) {
-            return $this->get($key);
-        } else {
-            return $this->set($key, $value, $expire);
-        }
+        return $this->dir;
     }
-
+    
     /**
      * {@inheritdoc}
      */
