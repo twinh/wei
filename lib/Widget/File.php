@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\Storage\AbstractStorage;
 
 /**
- * File cache
+ * The file cache widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
@@ -67,9 +67,9 @@ class File extends AbstractStorage
     /**
      * Set cache directory
      *
-     * @param string      $dir
-     * @return Fcache
-     * @throws Exception When failed to create the cache directory
+     * @param string $dir
+     * @return \Widget\File
+     * @throws \Widget\Exception\IOException When failed to create the cache directory
      */
     public function setDir($dir)
     {
@@ -117,7 +117,6 @@ class File extends AbstractStorage
 
     /**
      * {@inheritdoc}
-     * @param array $options
      */
     public function set($key, $value, $expire = 0, array $options = array())
     {
@@ -130,7 +129,6 @@ class File extends AbstractStorage
 
     /**
      * {@inheritdoc}
-     * @param array $options
      */
     public function add($key, $value, $expire = 0, array $options = array())
     {
@@ -166,7 +164,6 @@ class File extends AbstractStorage
 
     /**
      * {@inheritdoc}
-     * @param array $options
      */
     public function replace($key, $value, $expire = 0, array $options = array())
     {
