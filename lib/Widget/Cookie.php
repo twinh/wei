@@ -8,15 +8,13 @@
 
 namespace Widget;
 
-use Widget\Storage\StorageInterface;
-
 /**
  * Cookie
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property    \Widget\Request $request The HTTP request widget
  */
-class Cookie extends Parameter /*implements StorageInterface*/
+class Cookie extends Parameter
 {
     /**
      * @var array Options
@@ -59,7 +57,7 @@ class Cookie extends Parameter /*implements StorageInterface*/
      * @param  array        $options options for set cookie
      * @return mixed
      */
-    public function __invoke($key, $value = null, array $options = array())
+    public function __invoke($key, $value = null, $options = array())
     {
         if (1 == func_num_args()) {
             return $this->get($key);
@@ -157,25 +155,5 @@ class Cookie extends Parameter /*implements StorageInterface*/
         if (!headers_sent()) {
             $this->send();
         }
-    }
-
-    public function add($key, $value, $expire = 0, array $options = array()) {
-        
-    }
-
-    public function clear() {
-        
-    }
-
-    public function decrement($key, $step = 1) {
-        
-    }
-
-    public function increment($key, $step = 1) {
-        
-    }
-
-    public function replace($key, $value, $expire = 0, array $options = array()) {
-        
     }
 }

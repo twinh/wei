@@ -47,6 +47,7 @@ class File extends AbstractStorage
      */
     public function __construct(array $options = array())
     {
+        throw new Exception\IOException('ac');
         parent::__construct($options + array(
             'dir' => $this->dir
         ));
