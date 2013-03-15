@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -13,7 +12,7 @@ namespace Widget;
  * The url query parameters($_GET) widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
- * @property \Widget\Router $router The router widget
+ * @property    \Widget\Request $request The HTTP request widget
  */
 class Query extends Parameter
 {
@@ -26,9 +25,6 @@ class Query extends Parameter
     {
         parent::__construct($options);
 
-        // FIXME router start or not
-        if (!isset($options['data'])) {
-            $this->data = $this->router->matchRequestUri() ?: $_GET;
-        }
+        $this->data = &$this->request->get;
     }
 }
