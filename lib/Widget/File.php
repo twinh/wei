@@ -8,7 +8,6 @@
 
 namespace Widget;
 
-use Widget\Exception\RuntimeException;
 use Widget\Storage\AbstractStorage;
 
 /**
@@ -63,12 +62,10 @@ class File extends AbstractStorage
     public function setDir($dir)
     {
         if (!is_dir($dir)) {
-            // @codeCoverageIgnoreStart
             if (!@mkdir($dir, 0644, true)) {
-                throw new RuntimeException('Failed to create directory: ' . $dir);
+                throw new Exception\IOException(sprintf('Failed to create directory: "%s", the error is %s', $dir, error_get_last()));
             }
             chmod($dir, 0644);
-            // @codeCoverageIgnoreEnd
         }
 
         $this->dir = $dir;
