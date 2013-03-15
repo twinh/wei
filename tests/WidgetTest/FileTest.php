@@ -9,16 +9,25 @@ class FileTest extends TestCase
      */
     protected $object;
     
+    protected function tearDown()
+    {
+        $this->object->clear();
+
+        rmdir($this->object->getDir());
+        
+        parent::tearDown();
+    }
+    
     public function testGetDirOption()
     {
         $file = $this->object;
 
-        $newDir = $file->getOption('dir') . DIRECTORY_SEPARATOR . 'newDir';
+        $newDir = $file->getDir() . DIRECTORY_SEPARATOR . 'newDir';
 
-        $file->setOption('dir', $newDir);
+        $file->setDir($newDir);
 
         $this->assertFileExists($newDir);
-
+        
         /*ob_start();
 
         $widget->error->option(array(
@@ -113,7 +122,8 @@ class FileTest extends TestCase
         $this->assertEquals(__METHOD__, $widget->get('test'));
     }
 
-    public function testReplace() {
+    public function testReplace()
+    {
         $widget = $this->object;
 
         $widget->set('test', __METHOD__);
@@ -133,7 +143,8 @@ class FileTest extends TestCase
         $this->assertFalse($widget->replace(__METHOD__, true), 'replace expired cache');
     }
 
-    public function testRemove() {
+    public function testRemove()
+    {
         $widget = $this->object;
 
         $widget->set('test', __METHOD__);
@@ -144,16 +155,6 @@ class FileTest extends TestCase
 
         $this->assertFalse($widget->remove('test'), 'cache not found');
     }
-
-    /*public function testGetFile() {
-        $widget = $this->object;
-
-        $widget->set('test', __METHOD__);
-
-        $file = $widget->getFile('test');
-
-        $this->assertFileExists($file);
-    }*/
 
     public function testClear()
     {
