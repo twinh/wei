@@ -9,9 +9,10 @@
 namespace Widget;
 
 /**
- * Post
+ * The HTTP request parameters ($_POST) widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @property    \Widget\Request $request The HTTP request widget
  */
 class Post extends Parameter
 {
@@ -19,8 +20,6 @@ class Post extends Parameter
     {
         parent::__construct($options);
 
-        if (!isset($options['data'])) {
-            $this->data = $_POST;
-        }
+        $this->data = &$this->request->post;
     }
 }

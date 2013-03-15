@@ -9,9 +9,10 @@
 namespace Widget;
 
 /**
- * Server
+ * The server and execution environment parameters ($_SERVER) widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @property    \Widget\Request $request The HTTP request widget
  */
 class Server extends Parameter
 {
@@ -24,8 +25,6 @@ class Server extends Parameter
     {
         parent::__construct($options);
 
-        if (!isset($options['data'])) {
-            $this->data = $_SERVER;
-        }
+        $this->data = &$this->request->servers;
     }
 }

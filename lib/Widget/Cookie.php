@@ -14,6 +14,7 @@ use Widget\Storage\StorageInterface;
  * Cookie
  *
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @property    \Widget\Request $request The HTTP request widget
  */
 class Cookie extends Parameter /*implements StorageInterface*/
 {
@@ -47,9 +48,7 @@ class Cookie extends Parameter /*implements StorageInterface*/
     {
         parent::__construct($options);
 
-        if (!isset($options['data'])) {
-            $this->data = $_COOKIE;
-        }
+        $this->data = &$this->request->cookie;
     }
 
     /**

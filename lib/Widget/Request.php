@@ -12,17 +12,44 @@ namespace Widget;
  * The HTTP Request widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
- * @property \Widget\Server $server The server widget
+ * @property    \Widget\Server $server The server widget
  */
 class Request extends Parameter
 {
+    /**
+     * The URL query parameters, equal to $_GET if $fromGlobal is true
+     * 
+     * @var array
+     */
     public $get;
     
+    /**
+     * The HTTP request parameters, equal to $_POST if $fromGlobal is true
+     * 
+     * @var array
+     */
     public $post;
     
+    /**
+     * The cookie parameters, equal to $_COOKIE if $fromGlobal is true
+     * 
+     * @var array 
+     */
     public $cookie;
     
-    public $server;
+    /**
+     * The server parameters, equal to $_SERVER if $fromGlobal is true
+     * 
+     * @var array
+     */
+    public $servers;
+    
+    /**
+     * The upload file parameters, equal to $_FILES if $fromGlobal is true
+     * 
+     * @var array
+     */
+    protected $files;
     
     /**
      * Whether create request parameter from PHP global varibales
@@ -39,13 +66,14 @@ class Request extends Parameter
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-        
+
         if ($this->fromGlobal) {
-            $this->get      = $_GET;
-            $this->post     = $_POST;
-            $this->cookie   = $_COOKIE;
-            $this->server   = $_SERVER;
-            $this->data     = $_REQUEST;
+            $this->get      = &$_GET;
+            $this->post     = &$_POST;
+            $this->cookie   = &$_COOKIE;
+            $this->servers  = &$_SERVER;
+            $this->files    = &$_FILES;
+            $this->data     = &$_REQUEST;
         }
     }
     
