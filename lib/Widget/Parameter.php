@@ -28,6 +28,18 @@ class Parameter extends ArrayWidget
     }
     
     /**
+     * Returns a *stringify* or user defined($default) parameter value
+     * 
+     * @param  string $name    The parameter name
+     * @param  mixed  $default The default parameter value if the parameter does not exist
+     * @return string|null  The parameter value
+     */
+    public function get($name, $default = null)
+    {
+        return $this->__invoke($name, $default);
+    }
+    
+    /**
      * Returns a integer value in the specified range
      *
      * @param string $name The parameter name
