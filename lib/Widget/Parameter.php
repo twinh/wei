@@ -99,4 +99,18 @@ class Parameter extends ArrayWidget
 
         return in_array($value, $array) ? $value : $array[key($array)];
     }
+    
+    /**
+     * Set parameter value
+     * 
+     * @param string $name The parameter name
+     * @param mixed $value The parameter value
+     * @return \Widget\Parameter
+     */
+    public function set($name, $value)
+    {
+        $this->data[$name] = $value;
+        
+        return $this;
+    }
 }
