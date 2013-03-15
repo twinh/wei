@@ -58,7 +58,12 @@ class ParameterTest extends TestCase
                 'secondKey' => 'secondValue'
             )));
 
+            // int => 5
             $this->assertEquals(6, $parameter->getInt('int', 6));
+            
+            $this->assertEquals(6, $parameter->getInt('int', 6, 10));
+            
+            $this->assertEquals(4, $parameter->getInt('int', 1, 4));
         }
     }
 }
