@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\Storage\AbstractStorage;
 
 /**
- * Apc
+ * The php APC cache widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
