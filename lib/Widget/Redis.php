@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\Cache\AbstractCache;
 
 /**
- * Redis
+ * The redis cache widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
@@ -59,9 +59,11 @@ class Redis extends AbstractCache
      */
     public function __construct(array $options = array())
     {
-        $this->setOption($options, array('object'));
+        // force the constructor call "setObject" to init the redis object
+        !array_key_exists('object', $options);
+        $options['object'] = $this->object;
 
-        parent::__construct();
+        parent::__construct($options);
 
         $this->connect();
     }
