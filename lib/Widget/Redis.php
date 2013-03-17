@@ -51,6 +51,15 @@ class Redis extends AbstractCache
      * @var bool
      */
     protected $persistent = true;
+    
+    /**
+     * The options for \Redis::setOptions()
+     * 
+     * @var array
+     */
+    protected $options = array(
+        \Redis::OPT_SERIALIZER => \Redis::SERIALIZER_IGBINARY
+    );
 
     /**
      * Constructor
@@ -69,7 +78,7 @@ class Redis extends AbstractCache
     }
 
     /**
-     * Connet the redis server
+     * Connet the redis server and set redis options
      *
      * @return bool true on success, false on error
      */
@@ -77,7 +86,15 @@ class Redis extends AbstractCache
     {
         $connect = $this->persistent ? 'pconnect' : 'connect';
 
-        return $this->object->$connect($this->host, $this->port, $this->timeout);
+        $result = $this->object->$connect($this->host, $this->port, $this->timeout);
+        
+        if ($result) {
+            foreach ($this->options as $key => $value) {
+                $this->object->setOption($key, $value);
+            }
+        }
+        
+        return $result;
     }
 
     /**
