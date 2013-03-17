@@ -12,4 +12,16 @@ class MemcacheTest extends CacheTestCase
         
         parent::setUp();
     }
+    
+    public function testGetAndSetObject()
+    {
+        $cache = $this->object;
+        $memcache = $cache->getObject();
+        
+        $this->assertInstanceOf('\Memcache', $memcache);
+        
+        $cache->setObject($memcache);
+        
+        $this->assertInstanceOf('\Memcache', $cache->getObject());
+    }
 }
