@@ -11,11 +11,11 @@ namespace Widget;
 use Widget\Cache\AbstractCache;
 
 /**
- * Bicache
+ * The two level cache widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
- * @property \Widget\Cache\CacheInterface $master The master(faster) cache object
- * @property \Widget\Cache\CacheInterface $slave The slave(slower) cache object
+ * @property    \Widget\Cache\CacheInterface $master The master(faster) cache object
+ * @property    \Widget\Cache\CacheInterface $slave The slave(slower) cache object
  */
 class Bicache extends AbstractCache
 {
@@ -25,7 +25,7 @@ class Bicache extends AbstractCache
      * @var array
      */
     protected $deps = array(
-        'master' => 'memcache',
+        'master' => 'apc',
         'slave' => 'file',
     );
 
@@ -35,19 +35,30 @@ class Bicache extends AbstractCache
      * @var int
      */
     protected $time = 5;
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function __invoke($key, $value = null, $expire = 0)
+    {
+        if (1 == func_num_args()) {
+            return $this->get($key);
+        } else {
+            return $this->set($key, $value, $expire);
+        }
+    }
 
     /**
      * {@inheritdoc}
      */
-    public function get($key, &$success = null)
+    public function get($key)
     {
-        $value = $this->master->get($key, $success);
-
-        if ($success) {
-            return $value;
-        } else {
+        $value = $this->master->get($key);
+        
+        if (false === $value) {
             return $this->slave->get($key);
         }
+        return $value;
     }
 
     /**
@@ -98,13 +109,7 @@ class Bicache extends AbstractCache
      */
     public function decrement($key, $offset = 1)
     {
-        $result = $this->master->decrement($key, $offset);
-
-        if ($this->needUpdate($key)) {
-            $result = $this->slave->set($key, $this->master->get($key));
-        }
-
-        return $result;
+        return $this->increment($key, -$offset);
     }
 
     /**
@@ -112,7 +117,7 @@ class Bicache extends AbstractCache
      */
     public function replace($key, $value, $expire = 0)
     {
-        $result = $this->master->replace($key, $value);
+        $result = $this->master->replace($key, $value, $expire);
 
         if ($result && $this->needUpdate($key)) {
             $result = $this->slave->set($key, $value);
@@ -151,14 +156,5 @@ class Bicache extends AbstractCache
     protected function needUpdate($key)
     {
         return $this->master->add('__' . $key, true, $this->time);
-    }
-
-    public function __invoke($key, $value = null, $expire = 0)
-    {
-        if (1 == func_num_args()) {
-            return $this->get($key);
-        } else {
-            return $this->set($key, $value, $expire);
-        }
     }
 }
