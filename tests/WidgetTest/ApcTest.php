@@ -1,7 +1,8 @@
 <?php
+
 namespace WidgetTest;
 
-class ApcTest extends TestCase
+class ApcTest extends CacheTestCase
 {
     protected function setUp()
     {

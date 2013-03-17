@@ -2,7 +2,7 @@
 
 namespace WidgetTest;
 
-class FileTest extends TestCase
+class FileTest extends CacheTestCase
 {
     /**
      * @var \Widget\File
