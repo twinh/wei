@@ -13,9 +13,10 @@ use Widget\Exception\UnsupportedException;
 use Widget\Cache\AbstractCache;
 
 /**
- * DbCache
+ * The database cache widget
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author  Twin Huang <twinh@yahoo.cn>
+ * @todo    add serialize field
  */
 class DbCache extends AbstractCache
 {
@@ -120,7 +121,7 @@ class DbCache extends AbstractCache
             if (!$this->query($this->sqls['checkTable'])) {
                 $this->query($this->sqls['create']);
             }
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             $this->query($this->sqls['create']);
         }
     }
@@ -150,7 +151,7 @@ class DbCache extends AbstractCache
         if ($result) {
             $row = $this->stmt->fetch(PDO::FETCH_ASSOC);
 
-            return $row ? $row['value'] : false;
+            return $row ? unserialize($row['value']) : false;
         }
 
         return false;
@@ -159,13 +160,13 @@ class DbCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function set($key, $value, $expire = 0, array $options = array())
+    public function set($key, $value, $expire = 0)
     {
         $this->remove($key);
 
         $result = $this->query($this->sqls['set'], array(
             ':id' => $key,
-            ':value' => $value,
+            ':value' => serialize($value),
             ':lastModified' => time(),
             ':expire' => $expire ? time() + $expire : 2147483647
         ));
@@ -188,12 +189,12 @@ class DbCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function add($key, $value, $expire = 0, array $options = array())
+    public function add($key, $value, $expire = 0)
     {
         try {
             $result = $this->query($this->sqls['set'], array(
                 ':id' => $key,
-                ':value' => $value,
+                ':value' => serialize($value),
                 ':lastModified' => time(),
                 ':expire' => $expire ? time() + $expire : 2147483647
             ));
@@ -207,11 +208,11 @@ class DbCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function replace($key, $value, $expire = 0, array $options = array())
+    public function replace($key, $value, $expire = 0)
     {
         $this->query($this->sqls['replace'], array(
             ':id' => $key,
-            ':value' => $value,
+            ':value' => serialize($value),
             ':lastModified' => time(),
             ':expire' => $expire ? time() + $expire : 2147483647
         ));
@@ -220,30 +221,15 @@ class DbCache extends AbstractCache
     }
 
     /**
+     * Note: This method is not an atomic operation
+     * 
      * {@inheritdoc}
      */
     public function increment($key, $offset = 1)
     {
-        // todo add lock or transaction
-        if (!is_numeric($value = $this->get($key))) {
-            return false;
-        }
-
-        try {
-            $this->query($this->sqls['increment'], array(
-                ':id' => $key,
-                ':offset' => $offset,
-                ':lastModified' => time(),
-            ));
-
-            if (0 === $this->stmt->rowCount()) {
-                return false;
-            } else {
-                return $value + $offset;
-            }
-        } catch (PDOException $e) {
-            return false;
-        }
+        $value = $this->get($key);
+        
+        return $this->set($key, $value + $offset);
     }
 
     /**
@@ -281,7 +267,7 @@ class DbCache extends AbstractCache
     /**
      * Get the PDO object
      *
-     * @return PDO
+     * @return \PDO
      */
     public function getDbh()
     {
@@ -301,7 +287,7 @@ class DbCache extends AbstractCache
     /**
      * Get current database cache driver
      *
-     * @return object
+     * @return \Widget\DbCache\Driver
      */
     public function getDriver()
     {
