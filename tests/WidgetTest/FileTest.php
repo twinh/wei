@@ -46,15 +46,6 @@ class FileTest extends CacheTestCase
         $this->assertContains('Failed to creat directory: ', $output);*/
     }
 
-    public function testInvoke()
-    {
-        $widget = $this->object;
-
-        $widget->file(__METHOD__, true);
-
-        $this->assertEquals(true, $widget->file(__METHOD__));
-    }
-
     public function testAdd()
     {
         $widget = $this->object;
@@ -154,17 +145,6 @@ class FileTest extends CacheTestCase
         $this->assertEquals(null, $widget->get('test'));
 
         $this->assertFalse($widget->remove('test'), 'cache not found');
-    }
-
-    public function testClear()
-    {
-        $widget = $this->object;
-
-        $widget->set('test', __METHOD__);
-
-        $widget->clear();
-
-        $this->assertFalse($widget->get('test'), 'cache not found');
     }
 
     public function testIncrement()

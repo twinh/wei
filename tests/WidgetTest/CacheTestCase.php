@@ -29,6 +29,22 @@ class CacheTestCase extends TestCase
         $this->assertTrue($cache->replace($key, $value));
     }
     
+    public function providerForGetterAndSetter()
+    {
+        $obj = new \stdClass;
+        
+        return array(
+            array(array(),  'array'),
+            array(true,     'bool'),
+            array(1.2,      'float'),
+            array(1,        'int'),
+            array(1,        'integer'),
+            array(null,     'null'),
+            array('1',      'numeric'),
+            array($obj,     'object'),
+        );
+    }
+    
     public function testIncrementAndDecrement()
     {
         $cache = $this->object;
@@ -47,20 +63,26 @@ class CacheTestCase extends TestCase
         $cache->decrement($key, 2);
         $this->assertEquals(2, $cache->get($key));
     }
-
-    public function providerForGetterAndSetter()
+    
+    public function testClear()
     {
-        $obj = new \stdClass;
+        $cache = $this->object;
+        $key = __METHOD__;
+
+        $cache->set($key, $key);
+        $this->assertEquals($key, $cache->get($key));
         
-        return array(
-            array(array(),  'array'),
-            array(true,     'bool'),
-            array(1.2,      'float'),
-            array(1,        'int'),
-            array(1,        'integer'),
-            array(null,     'null'),
-            array('1',      'numeric'),
-            array($obj,     'object'),
-        );
+        $cache->clear();
+        $this->assertFalse($cache->get($key));
+    }
+    
+    public function testInvoker()
+    {
+        $cache = $this->object;
+        $key = __METHOD__;
+        
+        $cache($key, 'value');
+        
+        $this->assertEquals('value', $cache($key));
     }
 }
