@@ -141,7 +141,7 @@ class DbCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function get($key, &$success = null)
+    public function get($key)
     {
         $result = $this->query($this->sqls['get'], array(
             ':id' => $key,

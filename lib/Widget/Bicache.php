@@ -109,13 +109,12 @@ class Bicache extends AbstractCache
 
     /**
      * {@inheritdoc}
-     * @param array $options
      */
     public function replace($key, $value, $expire = 0)
     {
         $result = $this->master->replace($key, $value);
 
-        if ($this->needUpdate($key)) {
+        if ($result && $this->needUpdate($key)) {
             $result = $this->slave->set($key, $value);
         }
 

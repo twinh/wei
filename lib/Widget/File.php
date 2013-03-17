@@ -97,7 +97,7 @@ class File extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function get($key, &$success = null)
+    public function get($key)
     {
         $file = $this->getFile($key);
 

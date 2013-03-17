@@ -77,7 +77,7 @@ class Memcache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function get($key, &$success = null)
+    public function get($key)
     {
         return $this->object->get($key);
     }

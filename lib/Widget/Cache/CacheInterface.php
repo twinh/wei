@@ -29,10 +29,9 @@ interface CacheInterface
      * Get an item
      *
      * @param  string      $key The name of item
-     * @param  bool        $success
      * @return mixed
      */
-    public function get($key, &$success = null);
+    public function get($key);
 
     /**
      * Store an item
