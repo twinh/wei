@@ -81,7 +81,6 @@ class Cache extends AbstractCache
 
     /**
      * {@inheritdoc}
-     * @param array $options
      */
     public function add($key, $value, $expire = 0)
     {
@@ -130,7 +129,6 @@ class Cache extends AbstractCache
 
     /**
      * {@inheritdoc}
-     * @param array $options
      */
     public function replace($key, $value, $expire = 0)
     {
