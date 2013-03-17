@@ -126,6 +126,8 @@ class Redis extends AbstractCache
     }
 
     /**
+     * Note: The thrid parameter `$expire` is no effect at this time
+     * 
      * {@inheritdoc}
      */
     public function add($key, $value, $expire = 0)
@@ -134,11 +136,16 @@ class Redis extends AbstractCache
     }
 
     /**
+     * Note: This method is not an atomic operation
+     * 
      * {@inheritdoc}
      */
     public function replace($key, $value, $expire = 0)
     {
-        return $this->object->getSet($key, $value);
+        if (false === $this->object->get($key)) {
+            return false;
+        }
+        return $this->object->set($key, $value, $expire);
     }
 
     /**
@@ -170,7 +177,7 @@ class Redis extends AbstractCache
      */
     public function remove($key)
     {
-        return $this->object->del($key);
+        return (bool)$this->object->del($key);
     }
 
     /**
