@@ -91,11 +91,11 @@ class ApcTest extends CacheTestCase
 
         $result = $apc->increment(__METHOD__);
 
-        $this->assertFalse($result, 'increment not found key');
+        $this->assertEquals(1, $result);
 
         $apc->set(__METHOD__, 'string');
 
-        $this->assertFalse($apc->increment(__METHOD__), 'not number key');
+        $this->assertEquals(1, $apc->increment(__METHOD__));
     }
 
     public function testDecrement() 
