@@ -23,4 +23,16 @@ class RedisTest extends CacheTestCase
         
         parent::testIncrementAndDecrement();
     }
+    
+    public function testGetAndSetObject()
+    {
+        $cache = $this->object;
+        $redis = $cache->getObject();
+        
+        $this->assertInstanceOf('\Redis', $redis);
+        
+        $cache->setObject($redis);
+        
+        $this->assertInstanceOf('\Redis', $cache->getObject());
+    }
 }
