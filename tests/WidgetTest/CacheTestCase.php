@@ -8,16 +8,7 @@ class CacheTestCase extends TestCase
      * @var \Widget\Cache\CacheInterface
      */
     protected $object;
-    
-    protected $name;
-       
-//    public function createCacheWidget()
-//    {
-//        $cache = $this->widget->newInstance($this->widgetName);
-//        
-//        return $cache;
-//    }
-    
+
     /**
      * @dataProvider providerForGetterAndSetter
      */
@@ -26,12 +17,16 @@ class CacheTestCase extends TestCase
         $cache = $this->object;
         
         $cache->remove($key);
-        
         $this->assertFalse($cache->get($key));
+
+        $this->assertFalse($cache->replace($key, $value));
+        $this->assertTrue($cache->add($key, $value));
         
         $cache->set($key, $value);
+        $this->assertEquals($value, $cache->get($key));
         
-        $this->assertEquals($value, $this->object->get($key));
+        $this->assertFalse($cache->add($key, $value));
+        $this->assertTrue($cache->replace($key, $value));
     }
     
     public function providerForGetterAndSetter()
