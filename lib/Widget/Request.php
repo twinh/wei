@@ -115,7 +115,7 @@ class Request extends Parameter
      */
     public function inMethod($method)
     {
-        return $method === strtoupper($this->server['REQUEST_METHOD']);
+        return (bool)strcmp($method, $this->server['REQUEST_METHOD']);
     }
     
     /**

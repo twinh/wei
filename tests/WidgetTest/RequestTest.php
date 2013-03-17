@@ -48,4 +48,25 @@ class RequestTest extends TestCase
 
         $this->assertNull($widget->request('remove'));
     }
+    
+    public function testMethod()
+    {
+        foreach (array('GET', 'POST') as $method) {
+            $request = new \Widget\Request(array(
+                'widget' => $this->widget,
+                'fromGlobal' => false,
+                'servers' => array(
+                    'REQUEST_METHOD' => $method
+                )
+            ));
+
+            $this->assertTrue($request->{'in' . $method}());
+            $this->assertTrue($request->inMethod($method));
+
+            $method = strtolower($method);
+            $method[0] = strtoupper($method[0]);
+            $this->{'in' . $method}->setOption('request', $request);
+            $this->assertTrue($this->{'in' . $method}());
+        }
+    }
 }
