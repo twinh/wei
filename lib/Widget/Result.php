@@ -8,8 +8,6 @@
 
 namespace Widget;
 
-use Widget\Storage\AbstractStorage;
-
 /**
  * Result
  *
