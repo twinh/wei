@@ -224,7 +224,7 @@ class File extends AbstractCache
         $file = $this->getFile($key);
 
         if (!is_file($file)) {
-            return false;
+            return $this->set($key, $offset);
         }
 
         // Open file for reading and rewriting
@@ -232,26 +232,16 @@ class File extends AbstractCache
             return false;
         }
 
-        if (!$content = $this->readAndVerify($handle, $file)) {
-            fclose($handle);
-
-            return false;
-        }
-
-        if (!is_numeric($content[1])) {
-            return false;
-        }
-
         // Prepare file content
-        $result = $content[1] += $offset;
-        $content = serialize($content);
+        if (!$content = $this->readAndVerify($handle, $file)) {
+            $content = $this->prepareContent($offset, 0);
+        } else {
+            $content[1] += $offset;
+            $content = serialize($content);
+        }
 
         // Rewrite content
-        if ($this->writeAndRelease($handle, $content, true)) {
-            return $result;
-        } else {
-            return false;
-        }
+        return $this->writeAndRelease($handle, $content, true);
     }
 
     /**

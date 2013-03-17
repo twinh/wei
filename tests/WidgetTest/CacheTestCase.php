@@ -29,6 +29,25 @@ class CacheTestCase extends TestCase
         $this->assertTrue($cache->replace($key, $value));
     }
     
+    public function testIncrementAndDecrement()
+    {
+        $cache = $this->object;
+
+        $key = __METHOD__;
+        $cache->remove($key);
+
+        // Increase from not exists key
+        $cache->increment($key);
+        $this->assertEquals(1, $cache->get($key));
+        
+        // Increase from exists key and the offset is 3
+        $cache->increment($key, 3);
+        $this->assertEquals(4, $cache->get($key));
+        
+        $cache->decrement($key, 2);
+        $this->assertEquals(2, $cache->get($key));
+    }
+
     public function providerForGetterAndSetter()
     {
         $obj = new \stdClass;

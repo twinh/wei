@@ -178,18 +178,16 @@ class FileTest extends CacheTestCase
         $this->assertEquals($widget->get(__METHOD__), 2);
 
         $widget->remove(__METHOD__);
-
         $result = $widget->increment(__METHOD__);
-
-        $this->assertFalse($result, 'increment not found key');
+        $this->assertEquals(1, $result);
 
         $widget->set(__METHOD__, 'string');
-
-        $this->assertFalse($widget->increment(__METHOD__), 'not number key');
+        $widget->increment(__METHOD__);
+        $this->assertEquals(1, $widget->get(__METHOD__));
 
         $widget->set(__METHOD__, 1, -1);
-
-        $this->assertFalse($widget->increment(__METHOD__), 'cache is expired');
+        $widget->increment(__METHOD__);
+        $this->assertEquals(1, $widget->get(__METHOD__));
     }
 
     public function testDecrement()
