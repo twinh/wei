@@ -8,16 +8,16 @@
 
 namespace Widget;
 
-use Widget\Storage\AbstractStorage;
+use Widget\Cache\AbstractCache;
 
 /**
  * Bicache
  *
  * @author      Twin Huang <twinh@yahoo.cn>
- * @property \Widget\Storage\StorageInterface $master The master(faster) cache object
- * @property \Widget\Storage\StorageInterface $slave The slave(slower) cache object
+ * @property \Widget\Cache\CacheInterface $master The master(faster) cache object
+ * @property \Widget\Cache\CacheInterface $slave The slave(slower) cache object
  */
-class Bicache extends AbstractStorage
+class Bicache extends AbstractCache
 {
     /**
      * The dependence map

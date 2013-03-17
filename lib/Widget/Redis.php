@@ -8,14 +8,14 @@
 
 namespace Widget;
 
-use Widget\Storage\AbstractStorage;
+use Widget\Cache\AbstractCache;
 
 /**
  * Redis
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Redis extends AbstractStorage
+class Redis extends AbstractCache
 {
     /**
      * The redis object

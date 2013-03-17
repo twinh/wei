@@ -10,19 +10,19 @@ namespace Widget;
 
 use Widget\Exception\InvalidArgumentException;
 
-use Widget\Storage\AbstractStorage;
+use Widget\Cache\AbstractCache;
 
 /**
  * Cache
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Cache extends AbstractStorage
+class Cache extends AbstractCache
 {
     /**
      * The storable widget object
      *
-     * @var Widget\Storage\StorageInterface
+     * @var Widget\Cache\CacheInterface
      */
     protected $object;
 
@@ -70,8 +70,8 @@ class Cache extends AbstractStorage
             throw new InvalidArgumentException(sprintf('Cache driver class "%s" not found', $class));
         }
 
-        if (!in_array('Widget\Storage\StorageInterface', class_implements($class))) {
-            throw new InvalidArgumentException(sprintf('Cache driver "%s" should implement the interface "Widget\Storage\StorageInterface"', $class));
+        if (!in_array('Widget\Cache\CacheInterface', class_implements($class))) {
+            throw new InvalidArgumentException(sprintf('Cache driver "%s" should implement the interface "Widget\Cache\CacheInterface"', $class));
         }
 
         $this->object = $this->widget->get($driver);

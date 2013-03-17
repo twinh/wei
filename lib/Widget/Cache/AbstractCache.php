@@ -6,16 +6,16 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
 
-namespace Widget\Storage;
+namespace Widget\Cache;
 
 use Widget\AbstractWidget;
 
 /**
- * A simple implementation of \Widget\Storage\StorageInterface
+ * A simple implementation of \Widget\Cache\CacheInterface
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-abstract class AbstractStorage extends AbstractWidget implements StorageInterface
+abstract class AbstractCache extends AbstractWidget implements CacheInterface
 {
     
 }

@@ -8,14 +8,14 @@
 
 namespace Widget;
 
-use Widget\Storage\AbstractStorage;
+use Widget\Cache\AbstractCache;
 
 /**
  * The php APC cache widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Apc extends AbstractStorage
+class Apc extends AbstractCache
 {
     /**
      * {@inheritdoc}

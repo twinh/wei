@@ -8,14 +8,14 @@
 
 namespace Widget;
 
-use Widget\Storage\AbstractStorage;
+use Widget\Cache\AbstractCache;
 
 /**
  * The file cache widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class File extends AbstractStorage
+class File extends AbstractCache
 {
     /**
      * The cache directory

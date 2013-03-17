@@ -6,14 +6,14 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
 
-namespace Widget\Storage;
+namespace Widget\Cache;
 
 /**
- * The base storage interface
+ * The base cache interface
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-interface StorageInterface
+interface CacheInterface
 {
     /**
      * Get or store an item

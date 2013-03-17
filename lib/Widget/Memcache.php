@@ -8,14 +8,14 @@
 
 namespace Widget;
 
-use Widget\Storage\AbstractStorage;
+use Widget\Cache\AbstractCache;
 
 /**
  * Memcache
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Memcache extends AbstractStorage
+class Memcache extends AbstractCache
 {
     /**
      * The memcache object
