@@ -126,13 +126,15 @@ class Redis extends AbstractCache
     }
 
     /**
-     * Note: The thrid parameter `$expire` is no effect at this time
-     * 
      * {@inheritdoc}
      */
     public function add($key, $value, $expire = 0)
     {
-        return $this->object->setnx($key, $value);
+        $result = $this->object->setnx($key, $value);
+        if (true === $result) {
+            $this->object->expire($key, $expire);   
+        }
+        return $result;
     }
 
     /**
