@@ -13,7 +13,7 @@ use Widget\Exception\InvalidArgumentException;
 use Widget\Cache\AbstractCache;
 
 /**
- * Cache
+ * The cache widget proxy
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
