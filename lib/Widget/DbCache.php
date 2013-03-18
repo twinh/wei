@@ -65,7 +65,7 @@ class DbCache extends AbstractCache
     /**
      * The sql driver object
      *
-     * @var \Widget\DbCache\Driver
+     * @var \Widget\Cache\Db\DriverInterface
      */
     protected $driver;
 

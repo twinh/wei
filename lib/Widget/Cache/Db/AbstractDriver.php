@@ -9,11 +9,11 @@
 namespace Widget\Cache\Db;
 
 /**
- * Driver
+ * A simple implementation of \Widget\Cache\Db\DriverInterface
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-abstract class AbstractDriver
+abstract class AbstractDriver implements DriverInterface
 {
     /**
      * Sql queries
@@ -23,10 +23,10 @@ abstract class AbstractDriver
     protected $sqls = array();
 
     /**
-     *  Get one sql query
+     * {@inheritdoc}
      *
      * @param  string $type sql type, the key of the $this->sqls array
-     * @return string
+     * @return string|false
      */
     public function getSql($type)
     {
