@@ -69,4 +69,12 @@ class RequestTest extends TestCase
             $this->assertTrue($this->{'in' . $method}());
         }
     }
+    
+    /**
+     * @expectedException \Widget\Exception\InvalidArgumentException
+     */
+    public function testInvalidParameterReference()
+    {
+        $this->request->getParameterReference('exception');
+    }
 }
