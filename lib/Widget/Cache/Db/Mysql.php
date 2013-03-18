@@ -13,7 +13,7 @@ namespace Widget\Cache\Db;
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Mysql extends Driver
+class Mysql extends AbstractDriver
 {
     /**
      * The sql queries

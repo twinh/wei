@@ -13,7 +13,7 @@ namespace Widget\Cache\Db;
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Sqlsrv extends Driver
+class Sqlsrv extends AbstractDriver
 {
     /**
      * The sql queries

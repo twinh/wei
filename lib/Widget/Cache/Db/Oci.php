@@ -13,7 +13,7 @@ namespace Widget\Cache\Db;
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Oci extends Driver
+class Oci extends AbstractDriver
 {
     /**
      * The sql queries

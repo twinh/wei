@@ -13,7 +13,7 @@ namespace Widget\Cache\Db;
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class PgSql extends Driver
+class PgSql extends AbstractDriver
 {
     /**
      * The sql queries

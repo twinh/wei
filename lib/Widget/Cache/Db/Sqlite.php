@@ -13,7 +13,7 @@ namespace Widget\Cache\Db;
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Sqlite extends Driver
+class Sqlite extends AbstractDriver
 {
     /**
      * Sql queries
