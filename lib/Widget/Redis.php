@@ -204,6 +204,7 @@ class Redis extends AbstractCache
      * Set the redis object
      *
      * @param null|\Redis $object
+     * @return \Widget\Redis
      */
     public function setObject(\Redis $object = null)
     {
@@ -212,5 +213,7 @@ class Redis extends AbstractCache
         } else {
             $this->object = new \Redis;
         }
+        
+        return $this;
     }
 }
