@@ -74,8 +74,7 @@ class Apc extends AbstractCache
      */
     public function replace($key, $value, $expire = 0)
     {
-        apc_fetch($key, $success);
-        if ($success) {
+        if (apc_exists($key)) {
             return apc_store($key, $value, $expire);
         } else {
             return false;
@@ -99,7 +98,7 @@ class Apc extends AbstractCache
      */
     public function decrement($key, $offset = 1)
     {
-        return apc_dec($key, $offset);
+        return $this->increment($key, -$offset);
     }
 
     /**
