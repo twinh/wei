@@ -68,14 +68,7 @@ class DbCache extends AbstractCache
      * @var \Widget\Cache\Db\DriverInterface
      */
     protected $driver;
-
-    /**
-     * The sql queries
-     *
-     * @var array
-     */
-    protected $sqls = array();
-
+    
     /**
      * Constructor
      *
@@ -106,23 +99,22 @@ class DbCache extends AbstractCache
         $class = 'Widget\Cache\Db\\' . ucfirst($driver);
         if (class_exists($class)) {
             $this->driver = new $class;
-            $this->sqls = $this->driver->getSqls();
         } else {
             throw new UnsupportedException(sprintf('Unsupport driver "%s"', $driver));
         }
 
         // Execute prepare sql query
-        if ($this->sqls['prepare']) {
-            $this->query($this->sqls['prepare']);
+        if ($prepare = $this->driver->getSql('prepare')) {
+            $this->query($prepare);
         }
 
         // Check if the table exists, if not, create the table
         try {
-            if (!$this->query($this->sqls['checkTable'])) {
-                $this->query($this->sqls['create']);
+            if (!$this->query($this->driver->getSql('checkTable'))) {
+                $this->query($this->driver->getSql('create'));
             }
         } catch (\PDOException $e) {
-            $this->query($this->sqls['create']);
+            $this->query($this->driver->getSql('create'));
         }
     }
 
@@ -143,7 +135,7 @@ class DbCache extends AbstractCache
      */
     public function get($key)
     {
-        $result = $this->query($this->sqls['get'], array(
+        $result = $this->query($this->driver->getSql('get'), array(
             ':id' => $key,
             ':expire' => time(),
         ));
@@ -164,7 +156,7 @@ class DbCache extends AbstractCache
     {
         $this->remove($key);
 
-        $result = $this->query($this->sqls['set'], array(
+        $result = $this->query($this->driver->getSql('set'), array(
             ':id' => $key,
             ':value' => serialize($value),
             ':lastModified' => time(),
@@ -179,7 +171,7 @@ class DbCache extends AbstractCache
      */
     public function remove($key)
     {
-        $result = $this->query($this->sqls['remove'], array(
+        $result = $this->query($this->driver->getSql('remove'), array(
             ':id' => $key,
         ));
 
@@ -192,7 +184,7 @@ class DbCache extends AbstractCache
     public function add($key, $value, $expire = 0)
     {
         try {
-            $result = $this->query($this->sqls['set'], array(
+            $result = $this->query($this->driver->getSql('set'), array(
                 ':id' => $key,
                 ':value' => serialize($value),
                 ':lastModified' => time(),
@@ -210,7 +202,7 @@ class DbCache extends AbstractCache
      */
     public function replace($key, $value, $expire = 0)
     {
-        $this->query($this->sqls['replace'], array(
+        $this->query($this->driver->getSql('replace'), array(
             ':id' => $key,
             ':value' => serialize($value),
             ':lastModified' => time(),
@@ -245,7 +237,7 @@ class DbCache extends AbstractCache
      */
     public function clear()
     {
-        return $this->query($this->sqls['clear']);
+        return $this->query($this->driver->getSql('clear'));
     }
 
     /**

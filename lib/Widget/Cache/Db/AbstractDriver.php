@@ -32,14 +32,4 @@ abstract class AbstractDriver implements DriverInterface
     {
         return isset($this->sqls[$type]) ? $this->sqls[$type] : false;
     }
-
-    /**
-     *  Get all sql queries
-     *
-     * @return array
-     */
-    public function getSqls()
-    {
-        return $this->sqls;
-    }
 }
