@@ -22,7 +22,7 @@ class Sqlsrv extends AbstractDriver
      */
     protected $sqls = array(
         'prepare' => null,
-        'checkTable' => 'SELECT 1 from %s',
+        'checkTable' => 'SELECT 1 FROM %s',
         'create' => 'CREATE TABLE %s (id nvarchar(255) PRIMARY KEY (id), value nvarchar(max), lastModified int, expire int)',
         'get' => 'SELECT TOP 1 value FROM %s WHERE id = :id AND expire > :expire',
         'set' => 'INSERT INTO %s (id, value, lastModified, expire) VALUES (:id, :value, :lastModified, :expire)',

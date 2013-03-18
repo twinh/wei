@@ -22,7 +22,7 @@ class PgSql extends AbstractDriver
      */
     protected $sqls = array(
         'prepare' => null,
-        'checkTable' => 'SELECT 1 from %s',
+        'checkTable' => 'SELECT 1 FROM %s',
         'create' => 'CREATE TABLE %s (id varchar(255) PRIMARY KEY, value text, "lastModified" int4, expire int4)',
         'get' => 'SELECT value FROM %s WHERE id = :id AND expire > :expire',
         'set' => 'INSERT INTO %s (id, value, "lastModified", expire) VALUES (:id, :value, :lastModified, :expire)',

@@ -22,7 +22,7 @@ class Mysql extends AbstractDriver
      */
     protected $sqls = array(
         'prepare' => 'SET NAMES UTF8',
-        'checkTable' => 'SELECT 1 from %s',
+        'checkTable' => 'SELECT 1 FROM %s',
         'create' => 'CREATE TABLE %s (id varchar(255) PRIMARY KEY, value longtext, lastModified int, expire int) ENGINE=InnoDB DEFAULT CHARSET=utf8',
         'get' => 'SELECT value FROM %s WHERE id = :id AND expire > :expire LIMIT 1',
         'set' => 'INSERT INTO %s (id, value, lastModified, expire) VALUES (:id, :value, :lastModified, :expire)',

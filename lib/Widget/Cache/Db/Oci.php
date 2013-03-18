@@ -22,7 +22,7 @@ class Oci extends AbstractDriver
      */
     protected $sqls = array(
         'prepare' => null,
-        'checkTable' => 'SELECT 1 from "%s"',
+        'checkTable' => 'SELECT 1 FROM "%s"',
         'create' => 'CREATE TABLE "%s" ("id" NVARCHAR2(255) PRIMARY KEY ,"lastModified" NUMBER,"expire" NUMBER,"value" NVARCHAR2(2000))',
         'get' => 'SELECT "value" FROM "%s" WHERE "id" = :id AND "expire" > :expire AND rownum = 1',
         'set' => 'INSERT INTO "%s" ("id", "value", "lastModified", "expire") VALUES (:id, :value, :lastModified, :expire)',

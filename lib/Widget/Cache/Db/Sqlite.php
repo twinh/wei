@@ -22,7 +22,7 @@ class Sqlite extends AbstractDriver
      */
     protected $sqls = array(
         'prepare' => null,
-        'checkTable' => 'SELECT 1 from %s',
+        'checkTable' => 'SELECT 1 FROM %s',
         'create' => 'CREATE TABLE %s (id TEXT, value TEXT, lastModified INTEGER, expire INTEGER, PRIMARY KEY (id))',
         'get' => 'SELECT value FROM %s WHERE id=:id AND expire > :expire LIMIT 1',
         'set' => 'INSERT INTO %s (id, value, lastModified, expire) VALUES (:id, :value, :lastModified, :expire)',
