@@ -50,6 +50,14 @@ interface CacheInterface
      * @return bool
      */
     public function remove($key);
+    
+    /**
+     * Check if an item is exists
+     * 
+     * @param string $key
+     * @return bool
+     */
+    public function exists($key);
 
     /**
      * Add an item

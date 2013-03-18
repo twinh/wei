@@ -85,4 +85,16 @@ class CacheTestCase extends TestCase
         
         $this->assertEquals('value', $cache($key));
     }
+    
+    public function testExists()
+    {
+        $cache = $this->object;
+        $key = __METHOD__;
+        
+        $cache->remove($key);
+        $this->assertFalse($cache->exists($key));
+        
+        $cache->set($key, 'value');
+        $this->assertTrue($cache->exists($key));
+    }
 }

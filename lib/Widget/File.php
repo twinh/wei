@@ -202,6 +202,14 @@ class File extends AbstractCache
 
         return false;
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function exists($key)
+    {
+        return (bool) $this->get($key);
+    }
 
     /**
      * Get cache file by key

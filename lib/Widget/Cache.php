@@ -142,4 +142,12 @@ class Cache extends AbstractCache
     {
         return $this->object->set($key, $value, $expire);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function exists($key)
+    {
+        return $this->object->exists($key);
+    }
 }

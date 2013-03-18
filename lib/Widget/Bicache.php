@@ -74,6 +74,14 @@ class Bicache extends AbstractCache
 
         return $result;
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function exists($key)
+    {
+        return $this->master->exists($key) || $this->slave->exists($key);
+    }
 
     /**
      * {@inheritdoc}

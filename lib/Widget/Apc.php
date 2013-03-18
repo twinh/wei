@@ -52,6 +52,14 @@ class Apc extends AbstractCache
     {
         return apc_delete($key);
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function exists($key)
+    {
+        return apc_exists($key);
+    }
 
     /**
      * {@inheritdoc}

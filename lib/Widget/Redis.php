@@ -205,4 +205,12 @@ class Redis extends AbstractCache
             $this->object = new \Redis;
         }
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function exists($key)
+    {
+        return $this->object->exists($key);
+    }
 }

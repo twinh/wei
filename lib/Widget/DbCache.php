@@ -148,6 +148,15 @@ class DbCache extends AbstractCache
 
         return false;
     }
+    
+    /**
+     * {@inheritdoc}
+     * @todo better way
+     */
+    public function exists($key)
+    {
+        return (bool)$this->get($key);
+    }
 
     /**
      * {@inheritdoc}

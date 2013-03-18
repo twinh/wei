@@ -170,4 +170,16 @@ class Memcached extends AbstractCache
 
         return $this;
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function exists($key)
+    {
+        if ($this->object->add($key, true)) {
+            $this->object->delete($key);
+            return false;
+        }
+        return true;
+    }
 }
