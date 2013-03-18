@@ -78,6 +78,17 @@ class Bicache extends AbstractCache
     /**
      * {@inheritdoc}
      */
+    public function remove($key)
+    {
+        $result1 = $this->master->remove($key);
+        $result2 = $this->slave->remove($key);
+
+        return $result1 && $result2;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
     public function exists($key)
     {
         return $this->master->exists($key) || $this->slave->exists($key);
@@ -93,6 +104,20 @@ class Bicache extends AbstractCache
         // The key could be only added one time, when added successed, set to the slave cache
         if ($result) {
             $result = $this->slave->set($key, $value, $expire);
+        }
+
+        return $result;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function replace($key, $value, $expire = 0)
+    {
+        $result = $this->master->replace($key, $value, $expire);
+
+        if ($result && $this->needUpdate($key)) {
+            $result = $this->slave->set($key, $value);
         }
 
         return $result;
@@ -118,31 +143,6 @@ class Bicache extends AbstractCache
     public function decrement($key, $offset = 1)
     {
         return $this->increment($key, -$offset);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function replace($key, $value, $expire = 0)
-    {
-        $result = $this->master->replace($key, $value, $expire);
-
-        if ($result && $this->needUpdate($key)) {
-            $result = $this->slave->set($key, $value);
-        }
-
-        return $result;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function remove($key)
-    {
-        $result1 = $this->master->remove($key);
-        $result2 = $this->slave->remove($key);
-
-        return $result1 && $result2;
     }
 
     /**

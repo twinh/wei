@@ -124,6 +124,22 @@ class Redis extends AbstractCache
     {
         return $this->object->set($key, $value, $expire);
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function remove($key)
+    {
+        return (bool)$this->object->del($key);
+    }
+       
+    /**
+     * {@inheritdoc}
+     */
+    public function exists($key)
+    {
+        return $this->object->exists($key);
+    }
 
     /**
      * {@inheritdoc}
@@ -153,14 +169,6 @@ class Redis extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function clear()
-    {
-        return $this->object->flushAll();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function increment($key, $offset = 1)
     {
         return $this->object->incrBy($key, $offset);
@@ -173,13 +181,13 @@ class Redis extends AbstractCache
     {
         return $this->object->decrBy($key, $offset);
     }
-
+    
     /**
      * {@inheritdoc}
      */
-    public function remove($key)
+    public function clear()
     {
-        return (bool)$this->object->del($key);
+        return $this->object->flushAll();
     }
 
     /**
@@ -204,13 +212,5 @@ class Redis extends AbstractCache
         } else {
             $this->object = new \Redis;
         }
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function exists($key)
-    {
-        return $this->object->exists($key);
     }
 }

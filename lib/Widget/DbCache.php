@@ -151,15 +151,6 @@ class DbCache extends AbstractCache
     
     /**
      * {@inheritdoc}
-     * @todo better way
-     */
-    public function exists($key)
-    {
-        return (bool)$this->get($key);
-    }
-
-    /**
-     * {@inheritdoc}
      */
     public function set($key, $value, $expire = 0)
     {
@@ -174,7 +165,7 @@ class DbCache extends AbstractCache
 
         return $result;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -185,6 +176,15 @@ class DbCache extends AbstractCache
         ));
 
         return $result;
+    }
+    
+    /**
+     * {@inheritdoc}
+     * @todo better way
+     */
+    public function exists($key)
+    {
+        return (bool)$this->get($key);
     }
 
     /**

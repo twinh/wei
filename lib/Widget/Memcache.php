@@ -73,6 +73,18 @@ class Memcache extends AbstractCache
 
         return $this;
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function __invoke($key, $value = null, $expire = 0)
+    {
+        if (1 == func_num_args()) {
+            return $this->get($key);
+        } else {
+            return $this->set($key, $value, $expire);
+        }
+    }
 
     /**
      * {@inheritdoc}
@@ -96,6 +108,18 @@ class Memcache extends AbstractCache
     public function remove($key)
     {
         return $this->object->delete($key);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function exists($key)
+    {
+        if ($this->object->add($key, true)) {
+            $this->object->delete($key);
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -141,19 +165,7 @@ class Memcache extends AbstractCache
     {
         return $this->object->flush();
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __invoke($key, $value = null, $expire = 0)
-    {
-        if (1 == func_num_args()) {
-            return $this->get($key);
-        } else {
-            return $this->set($key, $value, $expire);
-        }
-    }
-
+    
     /**
      * Get memcache object
      *
@@ -179,17 +191,5 @@ class Memcache extends AbstractCache
         }
 
         return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function exists($key)
-    {
-        if ($this->object->add($key, true)) {
-            $this->object->delete($key);
-            return false;
-        }
-        return true;
     }
 }

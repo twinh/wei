@@ -65,36 +65,6 @@ class File extends AbstractCache
     }
     
     /**
-     * Set cache directory
-     *
-     * @param string $dir
-     * @return \Widget\File
-     * @throws \Widget\Exception\IOException When failed to create the cache directory
-     */
-    public function setDir($dir)
-    {
-        if (!is_dir($dir)) {
-            if (true !== @mkdir($dir, 0777, true)) {
-                throw new Exception\IOException(sprintf('Failed to create directory: "%s"', $dir));
-            }
-        }
-
-        $this->dir = $dir;
-
-        return $this;
-    }
-
-    /**
-     * Returns the cache directory
-     * 
-     * @return string
-     */
-    public function getDir()
-    {
-        return $this->dir;
-    }
-    
-    /**
      * {@inheritdoc}
      */
     public function get($key)
@@ -126,7 +96,30 @@ class File extends AbstractCache
 
         return (bool) file_put_contents($file, $content, LOCK_EX);
     }
+    
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function remove($key)
+    {
+        $file = $this->getFile($key);
 
+        if (is_file($file)) {
+            return unlink($file);
+        }
+
+        return false;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function exists($key)
+    {
+        return (bool) $this->get($key);
+    }
+    
     /**
      * {@inheritdoc}
      */
@@ -188,42 +181,7 @@ class File extends AbstractCache
 
         return $this->writeAndRelease($handle, $content, true);
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function remove($key)
-    {
-        $file = $this->getFile($key);
-
-        if (is_file($file)) {
-            return unlink($file);
-        }
-
-        return false;
-    }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function exists($key)
-    {
-        return (bool) $this->get($key);
-    }
-
-    /**
-     * Get cache file by key
-     *
-     * @param  string $key
-     * @return string
-     */
-    public function getFile($key)
-    {
-        $key = str_replace($this->illegalChars, '_', $key);
-
-        return $this->dir . '/' . $key . '.' . $this->ext;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -259,8 +217,8 @@ class File extends AbstractCache
     {
         return $this->increment($key, -$offset);
     }
-
-    /**
+    
+        /**
      * {@inheritdoc}
      */
     public function clear()
@@ -272,6 +230,49 @@ class File extends AbstractCache
         }
 
         return $result;
+    }
+
+    /**
+     * Get cache file by key
+     *
+     * @param  string $key
+     * @return string
+     */
+    public function getFile($key)
+    {
+        $key = str_replace($this->illegalChars, '_', $key);
+
+        return $this->dir . '/' . $key . '.' . $this->ext;
+    }
+    
+    /**
+     * Set the cache directory
+     *
+     * @param string $dir
+     * @return \Widget\File
+     * @throws \Widget\Exception\IOException When failed to create the cache directory
+     */
+    public function setDir($dir)
+    {
+        if (!is_dir($dir)) {
+            if (true !== @mkdir($dir, 0777, true)) {
+                throw new Exception\IOException(sprintf('Failed to create directory: "%s"', $dir));
+            }
+        }
+
+        $this->dir = $dir;
+
+        return $this;
+    }
+
+    /**
+     * Returns the cache directory
+     * 
+     * @return string
+     */
+    public function getDir()
+    {
+        return $this->dir;
     }
 
     /**

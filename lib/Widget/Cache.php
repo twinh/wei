@@ -42,19 +42,7 @@ class Cache extends AbstractCache
     {
         parent::__construct($options + get_object_vars($this));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __invoke($key, $value = null, $expire = 0)
-    {
-        if (1 == func_num_args()) {
-            return $this->get($key);
-        } else {
-            return $this->set($key, $value, $expire);
-        }
-    }
-
+    
     /**
      * Set cache driver
      *
@@ -82,19 +70,71 @@ class Cache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function add($key, $value, $expire = 0)
+    public function __invoke($key, $value = null, $expire = 0)
     {
-        return $this->object->add($key, $value, $expire);
+        if (1 == func_num_args()) {
+            return $this->get($key);
+        } else {
+            return $this->set($key, $value, $expire);
+        }
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function get($key)
+    {
+        return $this->object->get($key);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function set($key, $value, $expire = 0)
+    {
+        return $this->object->set($key, $value, $expire);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function remove($key)
+    {
+        return $this->object->remove($key);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function exists($key)
+    {
+        return $this->object->exists($key);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function clear()
+    public function add($key, $value, $expire = 0)
     {
-        return $this->object->clear();
+        return $this->object->add($key, $value, $expire);
     }
-
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function replace($key, $value, $expire = 0)
+    {
+        return $this->object->replace($key, $value, $expire);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function increment($key, $step = 1)
+    {
+        return $this->object->increment($key, $step);
+    }
+    
     /**
      * {@inheritdoc}
      */
@@ -106,48 +146,8 @@ class Cache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function get($key)
+    public function clear()
     {
-        return $this->object->get($key);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function increment($key, $step = 1)
-    {
-        return $this->object->increment($key, $step);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function remove($key)
-    {
-        return $this->object->remove($key);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function replace($key, $value, $expire = 0)
-    {
-        return $this->object->replace($key, $value, $expire);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function set($key, $value, $expire = 0)
-    {
-        return $this->object->set($key, $value, $expire);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function exists($key)
-    {
-        return $this->object->exists($key);
+        return $this->object->clear();
     }
 }
