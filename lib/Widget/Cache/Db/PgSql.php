@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -7,7 +6,7 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
 
-namespace Widget\DbCache;
+namespace Widget\Cache\Db;
 
 /**
  * PgSql

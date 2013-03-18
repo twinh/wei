@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -7,14 +6,14 @@
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
 
-namespace Widget\DbCache;
+namespace Widget\Cache\Db;
 
 /**
- * Mysql
+ * Sqlsrv
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Mysql extends Driver
+class Sqlsrv extends Driver
 {
     /**
      * The sql queries
@@ -22,14 +21,14 @@ class Mysql extends Driver
      * @var array
      */
     protected $sqls = array(
-        'prepare' => 'SET NAMES UTF8',
+        'prepare' => null,
         'checkTable' => 'SELECT 1 from %s',
-        'create' => 'CREATE TABLE %s (id varchar(255) PRIMARY KEY, value longtext, lastModified int, expire int) ENGINE=InnoDB DEFAULT CHARSET=utf8',
-        'get' => 'SELECT value FROM %s WHERE id = :id AND expire > :expire LIMIT 1',
+        'create' => 'CREATE TABLE %s (id nvarchar(255) PRIMARY KEY (id), value nvarchar(max), lastModified int, expire int)',
+        'get' => 'SELECT TOP 1 value FROM %s WHERE id = :id AND expire > :expire',
         'set' => 'INSERT INTO %s (id, value, lastModified, expire) VALUES (:id, :value, :lastModified, :expire)',
         'remove' => 'DELETE FROM %s WHERE id = :id',
         'replace' => 'UPDATE %s SET value = :value, lastModified = :lastModified, expire = :expire WHERE id = :id',
-        'increment' => 'UPDATE %s SET value = value + :offset, lastModified = :lastModified WHERE id = :id',
+        'increment' => 'UPDATE %s SET value = CAST(value AS int) + :offset, lastModified = :lastModified WHERE id = :id',
         'clear' => 'DELETE FROM %s',
         'drop' => 'DROP TABLE %s',
     );

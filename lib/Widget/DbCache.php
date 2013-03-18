@@ -103,7 +103,7 @@ class DbCache extends AbstractCache
 
         // Get driver and load sql queries
         $driver = $this->dbh->getAttribute(PDO::ATTR_DRIVER_NAME);
-        $class = 'Widget\DbCache\\' . ucfirst($driver);
+        $class = 'Widget\Cache\Db\\' . ucfirst($driver);
         if (class_exists($class)) {
             $this->driver = new $class;
             $this->sqls = $this->driver->getSqls();
