@@ -70,6 +70,21 @@ class RequestTest extends TestCase
         }
     }
     
+    public function testAjax()
+    {
+        $this->server->set('HTTP_X_REQUESTED_WITH', 'xmlhttprequest');
+        
+        $this->assertTrue($this->inAjax());
+        
+        $this->server->set('HTTP_X_REQUESTED_WITH', 'json');
+        
+        $this->assertFalse($this->inAjax());
+        
+        $this->server->remove('HTTP_X_REQUESTED_WITH');
+        
+        $this->assertFalse($this->inAjax());
+    }
+    
     /**
      * @expectedException \Widget\Exception\InvalidArgumentException
      */
