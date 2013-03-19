@@ -117,7 +117,19 @@ class File extends AbstractCache
      */
     public function exists($key)
     {
-        return (bool) $this->get($key);
+        $file = $this->getFile($key);
+
+        if (!is_file($file)) {
+            return false;
+        }
+
+        $content = @unserialize(file_get_contents($file));
+        if ($content && is_array($content) && time() < $content[0]) {
+            return true;
+        } else {
+            $this->remove($key);
+            return false;
+        }
     }
     
     /**
@@ -145,7 +157,6 @@ class File extends AbstractCache
             // The cache is not expired
             if ($this->readAndVerify($handle, $file)) {
                 fclose($handle);
-
                 return false;
             }
 
@@ -173,7 +184,6 @@ class File extends AbstractCache
 
         if (!$this->readAndVerify($handle, $file)) {
             fclose($handle);
-
             return false;
         }
 
