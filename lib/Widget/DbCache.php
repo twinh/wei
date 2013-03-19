@@ -9,7 +9,7 @@ namespace Widget;
 
 use PDO;
 use PDOException;
-use Widget\Exception\UnsupportedException;
+use Widget\Exception;
 use Widget\Cache\AbstractCache;
 
 /**
@@ -84,7 +84,7 @@ class DbCache extends AbstractCache
     /**
      * Connect the database
      *
-     * @throws \Widget\Exception When driver not support
+     * @throws \Widget\Exception\UnsupportedException When driver not support
      */
     public function connect()
     {
@@ -100,7 +100,7 @@ class DbCache extends AbstractCache
         if (class_exists($class)) {
             $this->driver = new $class;
         } else {
-            throw new UnsupportedException(sprintf('Unsupport driver "%s"', $driver));
+            throw new Exception\UnsupportedException(sprintf('Unsupport driver "%s"', $driver));
         }
 
         // Execute prepare sql query
@@ -113,7 +113,7 @@ class DbCache extends AbstractCache
             if (!$this->query($this->driver->getSql('checkTable'))) {
                 $this->query($this->driver->getSql('create'));
             }
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             $this->query($this->driver->getSql('create'));
         }
     }
