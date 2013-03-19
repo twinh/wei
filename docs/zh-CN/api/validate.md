@@ -10,7 +10,7 @@
 
 ##### 参数
 * $options 验证器的配置选项
-   *  **data** `array|object` 待验证的数据,可是数组或对象
+   *  **data** `array|object` 待验证的数据,可以是数组或对象
    *  **rules** `array` 验证规则数组
    *  **messages** `array` 验证错误时的提示信心
    *  **ruleValid** `callback` 规则验证通过时调用的回调函数
@@ -31,7 +31,7 @@ Widget验证器是参考[jQuery Validation](http://bassistance.de/jquery-plugins
 ##### 参数详细说明
 
 ##### data
-待验证的数据,可是数组或对象
+待验证的数据,可以是数组或对象
 
 验证数据的取值的顺序如下(与`attr`微件一致)
 
@@ -41,11 +41,16 @@ Widget验证器是参考[jQuery Validation](http://bassistance.de/jquery-plugins
 4. 如果以上均不存在,返回null
 
 ##### rules
-验证规则数组.键名是验证的数据项名称,值是验证规则.验证规则可以字符串,表示一项验证规则,也可以是数组,表示多项验证规则.
+验证规则数组.键名是验证的数据项名称,值是验证规则.验证规则可以字符串,表示一项验证规则,也可以是数组
+,表示多项验证规则.
 
-**注意**验证规则数组有一点与`jQuery Validation`不同,默认情况下,`jQuery Validation`的所有
-数据项都是可选的,但是Widget验证器的所有数据项都是必选的.如果某一个数据项是选填的,只需在增加
-`required => false`的验证规则
+**注意:**验证规则数组有一点与`jQuery Validation`不同,默认情况下,`jQuery Validation`的所有
+数据项都是**可选**的,但是Widget验证器的所有数据项都是**必选**的.如果某一个数据项是选填的,只需增
+加`required => false`的验证规则
+
+在验证过程中,验证器会根据验证规则的名称,检查对应的规则验证器是否存在,如`email`规则将被转换为
+`\Widget\Validator\Email`类,如果类不存在,将抛出`\Widget\Exception\InvalidArgumentException`
+异常提醒开发人员规则不存在.如果类存在,将初始化该类.然后,验证器组织验证规则提供的参数,供规则验证器验证.
 
 ```php
 $widget->validate(array(
@@ -54,13 +59,12 @@ $widget->validate(array(
         'name' => 'required',
         // 复合规则
         'email' => array(
-            'required' => true,
+            'required' => false, // 设置为false表示email是选填
             'email' => true
-        )
+        ),
     )
 ))
 ```
-
 
 
 ##### 范例
