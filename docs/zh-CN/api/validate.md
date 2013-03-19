@@ -10,7 +10,7 @@
 
 ##### 参数
 * $options 验证器的配置选项
-   *  **data** `array|object` 待验证的数组或对象
+   *  **data** `array|object` 待验证的数据,可是数组或对象
    *  **rules** `array` 验证规则数组
    *  **messages** `array` 验证错误时的提示信心
    *  **ruleValid** `callback` 规则验证通过时调用的回调函数
@@ -22,6 +22,46 @@
    *  **breakField** `bool` 是否当任意一项数据验证不通过时就中断验证流程
    *  **breakRule** `bool` 是否当任意一项规则验证不通过时就中断验证流程
    *  **skip** `bool` 是否当任意一项数据中的一项规则不通过时,就跳转到下一项数据的验证流程,默认是false,启用后,每项数据最多会有一个未通过的验证规则
+
+
+Widget验证器是参考[jQuery Validation](http://bassistance.de/jquery-plugins/jquery-plugin-validation/)
+开发的数据验证器,她与`jQuery Validation`有着很多相似的地方,所以如果你使用过
+`jQuery Validation`,使用Widget验证器将非常容易上手.
+
+##### 参数详细说明
+
+##### data
+待验证的数据,可是数组或对象
+
+验证数据的取值的顺序如下(与`attr`微件一致)
+
+1. 如果`$data`是数组或`\ArrayAccess`的实例化对象,检查并返回`$data[$key]`的值
+2. 如果`$data`是对象,检查属性`$key`是否存在,存在则返回`$data->$key`的值
+3. 如果`$data`是对象且方法`get. $key`存在,返回`$data->{'get' . $key}`
+4. 如果以上均不存在,返回null
+
+##### rules
+验证规则数组.键名是验证的数据项名称,值是验证规则.验证规则可以字符串,表示一项验证规则,也可以是数组,表示多项验证规则.
+
+**注意**验证规则数组有一点与`jQuery Validation`不同,默认情况下,`jQuery Validation`的所有
+数据项都是可选的,但是Widget验证器的所有数据项都是必选的.如果某一个数据项是选填的,只需在增加
+`required => false`的验证规则
+
+```php
+$widget->validate(array(
+    'rules' => array(
+        // 简单规则,将会被转换为 array('required' => true)
+        'name' => 'required',
+        // 复合规则
+        'email' => array(
+            'required' => true,
+            'email' => true
+        )
+    )
+))
+```
+
+
 
 ##### 范例
 检查数据提交的数据是否符合验证规则
