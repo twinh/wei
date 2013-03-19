@@ -216,7 +216,7 @@ class Validator extends AbstractWidget
 
                 // Trigger the ruleValid/ruleInvalid callback
                 $event = $result ? 'ruleValid' : 'ruleInvalid';
-                if ($this->trigger($event . '.validator', array($field, $rule, $this), $this)->isDefaultPrevented()) {
+                if ($this->trigger($event . '.validator', array($rule, $field, $this), $this)->isDefaultPrevented()) {
                     return $this->result;
                 }
 
