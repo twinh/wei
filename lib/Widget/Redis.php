@@ -68,11 +68,9 @@ class Redis extends AbstractCache
      */
     public function __construct(array $options = array())
     {
-        // force the constructor call "setObject" to init the redis object
-        !array_key_exists('object', $options);
-        $options['object'] = $this->object;
-
-        parent::__construct($options);
+        parent::__construct($options + array(
+            'object' => $this->object
+        ));
 
         $this->connect();
     }
