@@ -8,7 +8,6 @@
 
 namespace Widget;
 
-use Widget\Validator\AbstractValidator;
 use Widget\Validator\ValidatorInterface;
 use Widget\Exception\InvalidArgumentException;
 use Widget\Exception\UnexpectedTypeException;
@@ -19,7 +18,7 @@ use Widget\Exception\UnexpectedTypeException;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property    \Widget\Is $is The validator manager
  */
-class Validator extends AbstractValidator
+class Validator extends AbstractWidget
 {
     /**
      * The validation rules
@@ -439,18 +438,8 @@ class Validator extends AbstractValidator
 
     /**
      * {@inheritdoc}
-     * @todo refactor
      */
-    public function isValid($input = null)
-    {
-        return $this->result;
-    }
-    
-    /**
-     * {@inheritdoc}
-     * @todo refactor
-     */
-    protected function validate($input)
+    public function isValid()
     {
         return $this->result;
     }
