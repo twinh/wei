@@ -45,7 +45,7 @@ Widget验证器是参考[jQuery Validation](http://bassistance.de/jquery-plugins
 ,表示多项验证规则.
 
 **注意:**验证规则数组有一点与`jQuery Validation`不同,默认情况下,`jQuery Validation`的所有
-数据项都是**可选**的,但是Widget验证器的所有数据项都是**必选**的.如果某一个数据项是选填的,只需增
+数据项都是 **可选** 的,但是Widget验证器的所有数据项都是 **必选** 的.如果某一个数据项是选填的,只需增
 加`required => false`的验证规则
 
 在验证过程中,验证器会根据验证规则的名称,检查对应的规则验证器是否存在,如`email`规则将被转换为
@@ -71,7 +71,9 @@ $widget->validate(array(
 
 **参数**
 
-`ruleValid( $event, $widget, $field, $rule, $validator )` 
+```php
+ruleValid( $event, $widget, $field, $rule, $validator )
+``` 
 
 * $event 事件对象
 * $widget 微件管理器
@@ -86,7 +88,9 @@ $widget->validate(array(
 
 **参数**
 
-`ruleInvalid( $event, $widget, $field, $rule, $validator )` 
+```php
+ruleInvalid( $event, $widget, $field, $rule, $validator )
+``` 
 
 `ruleInvalid`与`ruleValid`的行为一致.
 
