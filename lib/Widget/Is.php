@@ -9,7 +9,7 @@
 namespace Widget;
 
 use Widget\Exception\UnexpectedTypeException;
-use \Widget\Exception\InvalidArgumentException;
+use Widget\Exception\InvalidArgumentException;
 
 /**
  * The validator manager, use to validate data quickly, create validator and 
