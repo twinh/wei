@@ -96,5 +96,9 @@ class CacheTestCase extends TestCase
         
         $cache->set($key, 'value');
         $this->assertTrue($cache->exists($key));
+        
+        // The key is exists and the value is "false"
+        $cache->set($key, false);
+        $this->assertTrue($cache->exists($key));
     }
 }
