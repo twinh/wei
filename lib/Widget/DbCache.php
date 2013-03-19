@@ -142,7 +142,6 @@ class DbCache extends AbstractCache
 
         if ($result) {
             $row = $this->stmt->fetch(PDO::FETCH_ASSOC);
-
             return $row ? unserialize($row['value']) : false;
         }
 
@@ -184,7 +183,17 @@ class DbCache extends AbstractCache
      */
     public function exists($key)
     {
-        return (bool)$this->get($key);
+        $result = $this->query($this->driver->getSql('get'), array(
+            ':id' => $key,
+            ':expire' => time(),
+        ));
+
+        if ($result) {
+            $row = $this->stmt->fetch(PDO::FETCH_ASSOC);
+            return $row ? true : false;
+        }
+
+        return false;
     }
 
     /**
