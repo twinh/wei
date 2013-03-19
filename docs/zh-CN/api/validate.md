@@ -66,6 +66,30 @@ $widget->validate(array(
 ))
 ```
 
+##### ruleValid
+当任意一条规则验证通过时,验证器就会触发`ruleValid`事件.
+
+**参数**
+
+`ruleValid( $event, $widget, $field, $rule, $validator )` 
+
+* $event 事件对象
+* $widget 微件管理器
+* $rule 通过的规则名称
+* $field 当前验证的数据项名称
+* $validator 验证器对象
+
+如果`ruleValid`事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
+
+##### ruleInvalid
+当任意一条规则验证**不**通过时,验证器就会触发`ruleInvalid`事件.
+
+**参数**
+
+`ruleInvalid( $event, $widget, $field, $rule, $validator )` 
+
+`ruleInvalid`与`ruleValid`的行为一致.
+
 
 ##### 范例
 检查数据提交的数据是否符合验证规则
