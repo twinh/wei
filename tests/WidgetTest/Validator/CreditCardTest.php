@@ -81,6 +81,9 @@ class CreditCardTest extends TestCase
             array('5500000000000004', 'Visa'),          // MasterCard
             array('5500000000000004', 'Visa,UnionPay'), // MasterCard
             array('5500000000000004', array('Visa', 'UnionPay')), // MasterCard
+            
+            // valid luhn, valid type, invalid length
+            array('411111111111116', 'Visa')
         );
     }
     
