@@ -13,6 +13,7 @@
    *  **data** `array|object` 待验证的数据,可以是数组或对象
    *  **rules** `array` 验证规则数组
    *  **messages** `array` 验证错误时的提示信息
+   *  **names** `array` 数据项名称的数组,用于错误信息提示
    *  **ruleValid** `callback` 规则验证通过时调用的回调函数
    *  **ruleInvalid** `callback` 规则验证不通过时调用的回调函数
    *  **fieldValid** `callback` 数据项验证通过时调用的回调函数
@@ -67,7 +68,7 @@ $widget->validate(array(
 ```
 
 #### messages
-验证错误时的提示信息.提示信息的格式与规则类似.
+验证错误时的提示信息.提示信息的格式与验证规则类似.
 
 ```php
 $widget->validate(array(
@@ -101,6 +102,41 @@ $widget->validate(array(
         )
     )
 ));
+```
+
+##### names
+数据项名称的数组,用于错误信息提示.数组键名为验证的数据项名称.
+
+**注意:**如果未提供数据项名称,错误信息将以`该项`作为错误信息的主体,例如`该项不能为空`
+
+**代码范例**
+```php
+$widget->validate(array(
+    'rules' => array(
+        'name' => 'required',
+        'email' => array(
+            'required' => true,
+            'email' => true
+        ),
+        'avatar' => array(
+            'image' => array(
+                'maxWidth' => 200,
+                'maxHeight' => 200
+            )
+        )
+    ),
+    // 指定错误信息的主体
+    'names' => array(
+        'name' => '用户名',
+        'email' => '邮箱',
+        'avatar' => '头像'
+    )
+));
+
+// 输出信息类似:
+// 用户名不能为空
+// 邮箱不能为空
+// 头像宽度不能超过200px
 ```
 
 ##### ruleValid
