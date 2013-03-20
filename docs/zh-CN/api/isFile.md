@@ -25,6 +25,19 @@ bool isFile( $input [, $options ] )
 2. 数组,确切的说是来自文件上传变量`$_FILES`的子数组,该数组应该至少包括`tmp_name`和`name`两个键
 3. `\SplFile`对象
 
+##### 错误信息
+| **名称**              | **信息**                                                       | 
+|-----------------------|----------------------------------------------------------------|
+| `notFound`            | %name%不存在或不可读                                           |
+| `maxSize`             | %name%太大了(%sizeString%),允许的最大文件大小为%maxSizeString% |
+| `minSize`             | %name%太小了(%sizeString%),允许的最小文件大小为%minSizeString% |
+| `exts`                | %name%的扩展名(%ext%)不合法,只允许扩展名为:%exts%              |
+| `excludeExts`         | %name%的扩展名(%ext%)不合法,不允许扩展名为:%excludeExts%       |
+| `mimeTypeNotDetected` | 无法检测%name%的媒体类型                                       |
+| `mimeTypes`           | %name%的媒体类型不合法                                         |
+| `excludeMimeTypes`    | %name%的媒体类型不合法                                         |
+| `negative`            | %name%必须是不存在的文件                                       |
+
 
 ##### 代码范例
 检查文件"5x5.gif"是否为存在且大小小于1.2mb
