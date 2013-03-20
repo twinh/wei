@@ -17,7 +17,7 @@ class IdCardHk extends AbstractValidator
 {
     protected $invalidMessage = '%name% must be valid Hong Kong identity card';
     
-    protected $notMessage = '%name% must not be valid Hong Kong identity card';
+    protected $negativeMessage = '%name% must not be valid Hong Kong identity card';
         
     /**
      * {@inheritdoc}

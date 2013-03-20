@@ -17,7 +17,7 @@ class Exists extends AbstractValidator
 {
     protected $notFoundMessage = '%name% must be an existing file or directory';
     
-    protected $notMessage = '%name% must be a non-existing file or directory';
+    protected $negativeMessage = '%name% must be a non-existing file or directory';
             
     /**
      * {@inheritdoc}

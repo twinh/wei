@@ -17,7 +17,7 @@ class Decimal extends AbstractValidator
 {
     protected $invalidMessage = '%name% must be decimal';
     
-    protected $notMessage = '%name% must not be decimal';
+    protected $negativeMessage = '%name% must not be decimal';
     
     /**
      * {@inheritdoc}

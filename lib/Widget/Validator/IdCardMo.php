@@ -18,7 +18,7 @@ class IdCardMo extends Regex
 {
     protected $patternMessage = '%name% must be valid Macau identity card';
     
-    protected $notMessage = '%name% must not be valid Macau identity card';
+    protected $negativeMessage = '%name% must not be valid Macau identity card';
     
     protected $pattern = '/^[1|5|7][\d]{7}$/';
 }

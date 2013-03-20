@@ -17,7 +17,7 @@ class Email extends AbstractValidator
 {
     protected $formatMessage = '%name% must be valid email address';
     
-    protected $notMessage = '%name% must not be an email address';
+    protected $negativeMessage = '%name% must not be an email address';
     
     /**
      * {@inheritdoc}

@@ -17,7 +17,7 @@ class Phone extends Regex
 {
     protected $patternMessage = '%name% must be valid phone number';
     
-    protected $notMessage = '%name% must not be phone number';
+    protected $negativeMessage = '%name% must not be phone number';
     
     protected $pattern = '/^(\d{3,4}-?)?\d{7,9}$/';
 }

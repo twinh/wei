@@ -17,7 +17,7 @@ class Null extends AbstractValidator
 {
     protected $notNullMessage = '%name% must be null';
     
-    protected $notMessage = '%name% must not be null';
+    protected $negativeMessage = '%name% must not be null';
     
     /**
      * {@inheritdoc}

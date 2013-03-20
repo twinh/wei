@@ -38,7 +38,7 @@ class DateTime extends AbstractValidator
      */
     protected $tooEarlyMessage = '%name% must be later than %after%';
     
-    protected $notMessage = '%name% must not be a valid datetime';
+    protected $negativeMessage = '%name% must not be a valid datetime';
     
     protected $format = 'Y-m-d H:i:s';
     

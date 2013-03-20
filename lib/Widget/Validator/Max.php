@@ -17,7 +17,7 @@ class Max extends AbstractValidator
 {
     protected $maxMessage = '%name% must be less or equal than %max%';
     
-    protected $notMessage = '%name% must not be less or equal than %max%';
+    protected $negativeMessage = '%name% must not be less or equal than %max%';
     
     protected $max;
     

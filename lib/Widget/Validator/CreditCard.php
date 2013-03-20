@@ -22,7 +22,7 @@ class CreditCard extends AbstractValidator
 {
     protected $invalidMessage = '%name% must be valid credit card number';
     
-    protected $notMessage = '%name% must not be valid credit card number';
+    protected $negativeMessage = '%name% must not be valid credit card number';
     
     /**
      * Allowed credit cards name

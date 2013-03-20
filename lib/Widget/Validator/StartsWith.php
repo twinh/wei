@@ -17,7 +17,7 @@ class StartsWith extends AbstractValidator
 {
     protected $notFoundMessage = '%name% must start with: %findMe%';
     
-    protected $notMessage = '%name% must not start with "%findMe%"';
+    protected $negativeMessage = '%name% must not start with "%findMe%"';
     
     protected $findMe;
     

@@ -19,7 +19,7 @@ class EntityExists extends AbstractValidator
 {
     protected $notFoundMessage = '%name% not exists';
    
-    protected $notMessage = '%name% already exists';
+    protected $negativeMessage = '%name% already exists';
 
     protected $entityClass;
    

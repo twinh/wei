@@ -17,7 +17,7 @@ class Equals extends AbstractValidator
 {
     protected $notEqualsMessage = '%name% must be equals %equals%';
     
-    protected $notMessage = '%name% must not be equals %equals%';
+    protected $negativeMessage = '%name% must not be equals %equals%';
     
     protected $equals;
     

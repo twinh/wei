@@ -17,7 +17,7 @@ class Url extends AbstractValidator
 {
     protected $invalidMessage = '%name% must be valid URL';
     
-    protected $notMessage = '%name% must not be URL';
+    protected $negativeMessage = '%name% must not be URL';
     
     /**
      * Requires the URL to contain a path part (like http://www.example.com/path/part)

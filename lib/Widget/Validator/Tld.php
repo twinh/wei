@@ -17,7 +17,7 @@ class Tld extends In
 {
     protected $notInMessage = '%name% must be a valid top-level domain';
     
-    protected $notMessage = '%name% must not a valid top-level domain';
+    protected $negativeMessage = '%name% must not a valid top-level domain';
     
     /**
      * A list of all valid top-level domains

@@ -41,7 +41,7 @@ class NoneOf extends AbstractGroupValidator
         $validator = null;
         $props = array(
             'name' => $this->name,
-            'opposite' => true
+            'negative' => true
         );
         foreach ($this->rules as $rule => $options) {
             if (!$this->is->validateOne($rule, $input, $options, $validator, $props)) {

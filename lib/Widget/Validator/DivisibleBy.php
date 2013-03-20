@@ -17,7 +17,7 @@ class DivisibleBy extends AbstractValidator
 {
     protected $notDivisibleMessage = '%name% must be divisible by %divisor%';
     
-    protected $notMessage = '%name% must not be divisible by %divisor%';
+    protected $negativeMessage = '%name% must not be divisible by %divisor%';
     
     /**
      * Set divisor to 1 to avoid "division by zero" error

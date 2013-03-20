@@ -19,7 +19,7 @@ class In extends AbstractValidator
 {
     protected $notInMessage = '%name% must be in %array%';
     
-    protected $notMessage = '%name% must not be in %array%';
+    protected $negativeMessage = '%name% must not be in %array%';
     
     protected $strict = false;
     

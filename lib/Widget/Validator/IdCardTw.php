@@ -17,7 +17,7 @@ class IdCardTw extends AbstractValidator
 {
     protected $invalidMessage = '%name% must be valid Taiwan identity card';
     
-    protected $notMessage = '%name% must not be valid Taiwan identity card';
+    protected $negativeMessage = '%name% must not be valid Taiwan identity card';
         
     /**
      * {@inheritdoc}

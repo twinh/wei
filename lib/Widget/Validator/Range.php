@@ -17,7 +17,7 @@ class Range extends AbstractValidator
 {
     protected $rangeMessage = '%name% must between %min% and %max%';
     
-    protected $notMessage = '%name% must not between %min% and %max%';
+    protected $negativeMessage = '%name% must not between %min% and %max%';
     
     protected $min;
     

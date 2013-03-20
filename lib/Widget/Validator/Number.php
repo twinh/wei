@@ -17,7 +17,7 @@ class Number extends AbstractValidator
 {
     protected $notNumberMessage = '%name% must be valid number';
     
-    protected $notMessage = '%name% must not be number';
+    protected $negativeMessage = '%name% must not be number';
     
     /**
      * {@inheritdoc}

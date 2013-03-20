@@ -23,11 +23,11 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
     protected $notStringMessage = '%name% must be a string';
     
     /**
-     * The common message for opposite validator
+     * The common message for negative validator
      * 
      * @var string
      */
-    protected $notMessage = '%name% is not valid';
+    protected $negativeMessage = '%name% is not valid';
     
     /**
      * The message name
@@ -54,13 +54,13 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
     protected $message;
     
     /**
-     * Whether it's a opposite validator, for examole, notDigit is digit's 
-     * opposite validator. The opposite validator will returns $this->notMessage 
+     * Whether it's a negative validator, for examole, notDigit is digit's 
+     * negative validator. The negative validator will returns $this->negativeMessage 
      * as the error message currently
      * 
      * @var string
      */
-    protected $opposite = false;
+    protected $negative = false;
     
     /**
      * The array constains the validator original property values
@@ -104,11 +104,11 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
         // Clean previous status
         $this->reset();
          
-        return $this->opposite xor $this->validate($input);
+        return $this->negative xor $this->validate($input);
     }
     
     /**
-     * Validate the input value (ignore the $opposite property)
+     * Validate the input value (ignore the $negative property)
      * 
      * @param mixed $input The input to be validated
      * @return boolean
@@ -174,8 +174,8 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
     {
         $this->loadTranslationMessages();
         
-        if ($this->opposite) {
-            $this->addError('not');
+        if ($this->negative) {
+            $this->addError('negative');
         }
 
         $messages = array();

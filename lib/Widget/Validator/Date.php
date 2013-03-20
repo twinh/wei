@@ -17,7 +17,7 @@ class Date extends DateTime
 {
     protected $formatMessage = '%name% must be a valid date, the format should be "%format%", e.g. %example%';
     
-    protected $notMessage = '%name% must not be a valid date';
+    protected $negativeMessage = '%name% must not be a valid date';
     
     protected $format = 'Y-m-d';
 }

@@ -18,7 +18,7 @@ class Ip extends AbstractValidator
 {
     protected $notAllowMessage = '%name% must be valid IP';
     
-    protected $notMessage = '%name% must not be IP';
+    protected $negativeMessage = '%name% must not be IP';
     
     /**
      * Allows the IP address to be ONLY in IPv4 format

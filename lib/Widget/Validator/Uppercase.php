@@ -17,7 +17,7 @@ class Uppercase extends AbstractValidator
 {
     protected $invalidMessage = '%name% must be uppercase';
     
-    protected $notMessage = '%name% must not be uppercase';
+    protected $negativeMessage = '%name% must not be uppercase';
     
     protected function validate($input)
     {

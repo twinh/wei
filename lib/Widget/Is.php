@@ -178,7 +178,7 @@ class Is extends AbstractWidget
     {
         // Starts with "not", such as notDigit, notEqual
         if (0 === stripos($rule, 'not')) {
-            $options['opposite'] = true;
+            $options['negative'] = true;
             $rule = substr($rule, 3);
         }
         

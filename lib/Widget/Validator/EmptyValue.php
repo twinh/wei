@@ -17,7 +17,7 @@ class EmptyValue extends AbstractValidator
 {
     protected $emptyMessage = '%name% must be empty';
     
-    protected $notMessage = '%name% must not be empty';
+    protected $negativeMessage = '%name% must not be empty';
     
     /**
      * {@inheritdoc}

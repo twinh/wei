@@ -17,7 +17,7 @@ class Time extends DateTime
 {
     protected $formatMessage = '%name% must be a valid time, the format should be "%format%", e.g. %example%';
     
-    protected $notMessage = '%name% must not be a valid time';
+    protected $negativeMessage = '%name% must not be a valid time';
     
     protected $format = 'H:i:s';
 }

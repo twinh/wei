@@ -17,7 +17,7 @@ class Blank extends AbstractValidator
 {
     protected $blankMessage = '%name% must be blank';
     
-    protected $notMessage = '%name% must not be blank';
+    protected $negativeMessage = '%name% must not be blank';
         
     /**
      * {@inheritdoc}

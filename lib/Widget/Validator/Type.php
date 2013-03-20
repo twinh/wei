@@ -17,7 +17,7 @@ class Type extends AbstractValidator
 {
     protected $typeMessage = '%name% must be %typeName%';
     
-    protected $notMessage = '%name% must not be %typeName%';
+    protected $negativeMessage = '%name% must not be %typeName%';
     
     protected $type;
 

@@ -34,7 +34,7 @@ class File extends AbstractValidator
     
     protected $excludeMimeTypesMessage = '%name% mime type "%mimeType%" is not allowed';
     
-    protected $notMessage = '%name% must be a non-existing file';
+    protected $negativeMessage = '%name% must be a non-existing file';
     
     /**
      * The absolute file path, or false when file not found or not readable

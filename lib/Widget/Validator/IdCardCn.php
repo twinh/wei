@@ -17,7 +17,7 @@ class IdCardCn extends AbstractValidator
 {
     protected $invalidMessage = '%name% must be valid Chinese identity card';
     
-    protected $notMessage = '%name% must not be valid Chinese identity card';
+    protected $negativeMessage = '%name% must not be valid Chinese identity card';
         
     /**
      * {@inheritdoc}

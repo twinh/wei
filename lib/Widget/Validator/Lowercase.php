@@ -17,7 +17,7 @@ class Lowercase extends AbstractValidator
 {
     protected $invalidMessage = '%name% must be lowercase';
     
-    protected $notMessage = '%name% must not be lowercase';
+    protected $negativeMessage = '%name% must not be lowercase';
     
     protected function validate($input)
     {

@@ -17,7 +17,7 @@ class EndsWith extends AbstractValidator
 {
     protected $notFoundMessage = '%name% must end with "%findMe%"';
     
-    protected $notMessage = '%name% must not end with "%findMe%"';
+    protected $negativeMessage = '%name% must not end with "%findMe%"';
     
     protected $findMe;
     

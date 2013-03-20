@@ -17,7 +17,7 @@ class Digit extends Regex
 {
     protected $patternMessage = '%name% must contain only digits (0-9)';
     
-    protected $notMessage = '%name% must not contain only digits (0-9)';
+    protected $negativeMessage = '%name% must not contain only digits (0-9)';
     
     protected $pattern = '/^([0-9]+)$/';
 }
