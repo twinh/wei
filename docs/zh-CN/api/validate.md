@@ -371,10 +371,28 @@ $validator = $widget->validate(array(
         'email' => array(
             'email' => true
         )
+    ),
+    'names' => array(
+        'username' => '用户名',
+        'email' => '邮箱'
+    ),
+    'messages' => array(
+        'username' => array(
+            'minLength' => '%name%的长度必须大于3',
+            'alnum' => '%name%只能由字母和数字组成'
+        ),
+        'email' => '%name%格式不正确'
     )
 ));
 
+// 输出详细的错误信息
+print_r($validator->getDetailMessages());
+
+// 输出简练的错误信息
 print_r($validator->getSummaryMessages());
+
+// 输出合并的错误信息
+print_r($validator->getJoinedMessage());
 
 ```
 ##### 运行结果
@@ -383,14 +401,36 @@ print_r($validator->getSummaryMessages());
 (
     [username] => Array
         (
-            [0] => This value must have a length greater than 3
+            [minLength] => Array
+                (
+                    [tooShort] => 用户名的长度必须大于3
+                )
+
         )
 
     [email] => Array
         (
-            [0] => This value must be valid email address
+            [email] => Array
+                (
+                    [format] => 邮箱格式不正确
+                )
+
         )
 
 )
-'
+Array
+(
+    [username] => Array
+        (
+            [0] => 用户名的长度必须大于3
+        )
+
+    [email] => Array
+        (
+            [0] => 邮箱格式不正确
+        )
+
+)
+用户名的长度必须大于3
+邮箱格式不正确'
 ```
