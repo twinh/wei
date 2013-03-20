@@ -64,42 +64,42 @@ class Validator extends AbstractWidget
     protected $skip = false;
     
     /**
-     * The callback method triggered when every rule is valid
+     * The event triggered when every rule is valid
      *
      * @var null|callback
      */
     protected $ruleValid = null;
 
     /**
-     * The callback method triggered when every rule is invalid
+     * The event triggered when every rule is invalid
      *
      * @var null|callback
      */
     protected $ruleInvalid = null;
 
     /**
-     * The callback method triggered when every field is valid
+     * The event triggered when every field is valid
      *
      * @var null|callback
      */
     protected $fieldValid = null;
 
     /**
-     * The callback method triggered when every field is invalid
+     * The event triggered when every field is invalid
      *
      * @var null|callback
      */
     protected $fieldInvalid = null;
 
     /**
-     * The callback method triggered after all rules are valid
+     * The event triggered after all rules are valid
      *
      * @var null|callback
      */
     protected $success = null;
 
     /**
-     * The callback method triggered when the validation is invalid
+     * The event triggered when the validation is invalid
      *
      * @var null|callback
      */
