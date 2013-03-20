@@ -99,8 +99,25 @@ $widget->validate(array(
         // 复合规则
         'email' => array(
             'required' => false, // 设置为false表示email是选填
-            'email' => true
+            'email' => true,
+            'length' => array(3, 256),
         ),
+        // 完整规则
+        'avatar' => array(
+            'image' => array(
+                'maxWidth' => 200,
+                'maxHeight' => 200
+            )
+        ),
+        // 允许的验证器格式
+        '数据项名称' => array(
+            '验证器名称1',
+            '验证器名称2' => array('验证的选项1', '验证的选项2'), // 参数将传递给验证器的__invoke方法
+            '验证器名称3' => array( // 参数将传递给验证器的setOption方法
+                '验证器选项名称1' => '验证器选项值1',
+                '验证器选项名称2' => '验证器选项值2',
+            )
+        ) 
     )
 ))
 ```
