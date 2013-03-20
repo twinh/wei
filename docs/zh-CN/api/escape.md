@@ -19,25 +19,25 @@ bool escape($input [, $type [, $charset ] ] )
 转义Javascript字符串可以直接调用`$widget->escape->js($input)`
 
 
-##### 范例
+##### 代码范例
 转义HTML字符串"&lt;a href=&quot;#&quot;&gt;链接&lt;/a&gt;
 ```php
 <?php
 
 echo $widget->escape('<a href="#">链接</a>');
 ```
-##### 输出
+##### 运行结果
 ```php
 '&lt;a href=&quot;#&quot;&gt;链接&lt;/a&gt;'
 ```
-##### 范例
+##### 代码范例
 转义Javascript字符串"\'"
 ```php
 <?php
 
 echo $widget->escape->js("\'");
 ```
-##### 输出
+##### 运行结果
 ```php
 '\\\''
 ```

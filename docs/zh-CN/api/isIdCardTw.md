@@ -11,7 +11,7 @@ bool isIdCardTw( $input )
 ##### 参数
 * **$input** `mixed` 待验证的数据
 
-##### 范例
+##### 代码范例
 检查"A122501945"是否为有效的台湾身份证
 ```php
 <?php
@@ -22,7 +22,7 @@ if ($widget->isIdCardTw('A122501945')) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'Yes'
 ```

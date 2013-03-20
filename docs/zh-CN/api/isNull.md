@@ -11,7 +11,7 @@ bool isNull ( $input )
 ##### 参数
 * **$input** `mixed` 待验证的数据
 
-##### 范例
+##### 代码范例
 检查0是否为null
 ```php
 <?php
@@ -22,7 +22,7 @@ if ($widget->isNull(0)) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'No'
 ```

@@ -12,7 +12,7 @@ bool isAll( $input [, $rules ] )
 * **$input** `array|\Traversable` 待验证的数据
 * **$rules** `array` 验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项
 
-##### 范例
+##### 代码范例
 检查数组里的每一项是否都为数字
 ```php
 <?php
@@ -26,7 +26,7 @@ if ($widget->isAll($input, array(
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'Yes'
 ```

@@ -12,7 +12,7 @@ bool isRegex ( $input [, $pattern ] )
 * **$input** `mixed` 待验证的数据
 * **$pattern** `string` 校验的正则表达式
 
-##### 范例
+##### 代码范例
 检查"abc"是否匹配正则表达式"/d/i"
 ```php
 <?php
@@ -23,7 +23,7 @@ if ($widget->isRegex('abc', '/d/i')) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'No'
 ```

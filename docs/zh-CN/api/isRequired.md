@@ -16,7 +16,7 @@ bool isRequired ( $input [, $required ] )
 用于组合验证,如果允许为空且数据为空,则不对数据进行剩余规则的校验
 
 
-##### 范例
+##### 代码范例
 检查null是否为空
 ```php
 <?php
@@ -27,11 +27,11 @@ if ($widget->isRequired(null)) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'No'
 ```
-##### 范例
+##### 代码范例
 检查null是否为空,第二个参数设为false
 ```php
 <?php
@@ -42,7 +42,7 @@ if ($widget->isRequired(null, false)) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'Yes'
 ```

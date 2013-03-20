@@ -17,7 +17,7 @@ bool off( $type )
 如果`$type`只是纯命名空间,如'.namespace',表示移除该命名空间下所有的事件触发器
 
 
-##### 范例
+##### 代码范例
 移除名称为example的事件触发器
 ```php
 <?php
@@ -26,13 +26,15 @@ $widget->on('example', function(){
     echo 'example';
 });
 
+// Output 'example'
 $widget->trigger('example');
 
 $widget->off('example');
 
+// Nothing ouput
 $widget->trigger('example');
 ```
-##### 输出
+##### 运行结果
 ```php
 'example'
 ```

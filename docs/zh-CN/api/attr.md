@@ -24,7 +24,7 @@ bool attr( $data, $key )
 其他对象
 
 
-##### 范例
+##### 代码范例
 依次取出数组或对象的值,并打印出来
 ```php
 <?php
@@ -56,7 +56,7 @@ foreach ($data as $row) {
     echo $widget->attr($row, 'key') . "\n";
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'Get from array
 Get from ArrayObject

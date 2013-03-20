@@ -177,7 +177,7 @@ ruleInvalid( $event, $widget, $field, $rule, $validator )
 
 
 
-##### 范例
+##### 代码范例
 检查数据提交的数据是否符合验证规则
 ```php
 <?php
@@ -201,7 +201,7 @@ $validator = $widget->validate(array(
 print_r($validator->getSummaryMessages());
 
 ```
-##### 输出
+##### 运行结果
 ```php
 'Array
 (

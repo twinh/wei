@@ -28,7 +28,7 @@ bool isCreditCard( $input [, $type] )
 | Visa             | -            | `Visa`       |
 
 
-##### 范例
+##### 代码范例
 检查数据是否为Visa或银联卡,第二个参数即可以是字符串,也可以是数组
 ```php
 <?php
@@ -49,7 +49,7 @@ if ($widget->isCreditCard($input, array('UnionPay', 'Visa'))) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'Yes
 Yes'

@@ -2,9 +2,9 @@
 [bicache()](http://twinh.github.com/widget/api/bicache)
 =======================================================
 
+{@inheritdoc}
 
-
-### 
+### {@inheritdoc}
 ```php
 void bicache($key, $value, $expire)
 ```

@@ -27,7 +27,7 @@ bool isImage( $input [, $options ] )
 `excludeExts`, `mimeTypes`, `excludeMimeTypes`继承自父类.
 
 
-##### 范例
+##### 代码范例
 检查文件"5x5.gif"是否为图片且最大高度不能超过5px
 ```php
 <?php
@@ -38,11 +38,11 @@ if ($widget->isImage(__DIR__ . '/fixtures/5x5.gif', array('maxWidth' => 5))) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'Yes'
 ```
-##### 范例
+##### 代码范例
 检查文件"5x5.gif"是否为图片且后缀名不能为"gif"
 ```php
 <?php
@@ -53,7 +53,7 @@ if ($widget->isImage(__DIR__ . '/fixtures/5x5.gif', array('excludeExts' => 'gif'
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'No'
 ```

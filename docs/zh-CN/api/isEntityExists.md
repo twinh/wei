@@ -13,7 +13,7 @@ bool isEntityExists( $input [, $entityClass [, $field ] ] )
 * **$entityClass** `string` 实体的类名
 * **$field** `string` 指定的字段名称,留空表示主键
 
-##### 范例
+##### 代码范例
 检查主键为1的用户是否存在,和检查name为test的用户是否存在
 ```php
 <?php
@@ -116,7 +116,7 @@ if ($widget->isEntityExists('test', 'User', 'name')) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'Array
 (

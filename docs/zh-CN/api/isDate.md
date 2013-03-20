@@ -16,7 +16,7 @@ bool isDate( $input [, $format ] )
 完整的日期格式可以查看PHP官方文档中关于[date](http://php.net/manual/zh/function.date.php)函数的格式说明.
 
 
-##### 范例
+##### 代码范例
 检查"2013-01-01"是否为合法的日期
 ```php
 <?php
@@ -27,7 +27,7 @@ if ($widget->isDate('2013-01-01')) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'Yes'
 ```

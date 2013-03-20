@@ -11,7 +11,7 @@ bool isTld( $input )
 ##### 参数
 * **$input** `mixed` 待验证的数据
 
-##### 范例
+##### 代码范例
 检查"cn"是否为存在的顶级域名
 ```php
 <?php
@@ -22,7 +22,7 @@ if ($widget->isTld('cn')) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'Yes'
 ```

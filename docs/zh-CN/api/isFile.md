@@ -26,7 +26,7 @@ bool isFile( $input [, $options ] )
 3. `\SplFile`对象
 
 
-##### 范例
+##### 代码范例
 检查文件"5x5.gif"是否为存在且大小小于1.2mb
 ```php
 <?php
@@ -37,7 +37,7 @@ if ($widget->isImage(__DIR__ . '/fixtures/5x5.gif', array('maxSize' => '1.2mb'))
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'Yes'
 ```

@@ -15,7 +15,7 @@ bool inMethod()
 `inMethod`微件是`request`微件`inMethod`方法的别名.
 
 
-##### 范例
+##### 代码范例
 检查当前的请求方式是否为HEAD
 ```php
 <?php
@@ -26,7 +26,7 @@ if ($widget->inMethod('HEAD')) {
     echo 'The request method is not HEAD';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
-'The request method is not HEAD'
+'The request method is HEAD'
 ```

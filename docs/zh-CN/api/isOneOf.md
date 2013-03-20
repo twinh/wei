@@ -11,7 +11,7 @@ bool isOneOf ( $input )
 ##### 参数
 * **$input** `mixed` 待验证的数据
 
-##### 范例
+##### 代码范例
 检查"abc"是否为数字且最大长度不超过2
 ```php
 <?php
@@ -26,7 +26,7 @@ if ($widget->isOneOf('abc', $rules)) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'No'
 ```

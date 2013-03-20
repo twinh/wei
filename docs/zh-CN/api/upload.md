@@ -6,7 +6,7 @@ Upload a file
 
 ### Upload a file
 ```php
-array upload($options)
+array upload($options, $options2)
 ```
 
 ##### 参数

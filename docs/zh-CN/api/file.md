@@ -1,12 +1,12 @@
     该微件文档还在紧急编写中,敬请期待!
-[fcache()](http://twinh.github.com/widget/api/fcache)
-=====================================================
+[file()](http://twinh.github.com/widget/api/file)
+=================================================
 
 {@inheritdoc}
 
 ### {@inheritdoc}
 ```php
-void fcache($key, $value, $expire)
+void file($key, $value, $expire)
 ```
 
 ##### 参数

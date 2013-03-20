@@ -16,7 +16,7 @@ bool isIp ( $input [, $options ] )
    *  **noPrivRange** `bool` 是否不允许私有的IP地址
    *  **noResRange** `bool` 是否不允许保留的IP地址
 
-##### 范例
+##### 代码范例
 检查"192.168.0.1"是否为有效的IP地址
 ```php
 <?php
@@ -27,11 +27,11 @@ if ($widget->isIp('192.168.0.1')) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'Yes'
 ```
-##### 范例
+##### 代码范例
 检查"192.168.0.1"是否不在私有的IP地址中
 ```php
 <?php
@@ -42,7 +42,7 @@ if ($widget->isIp('192.168.0.1', array('noPrivRange' => true))) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'No'
 ```

@@ -14,7 +14,7 @@ bool isUrl( $input [, $options] )
 * 	**path** `bool` 是否要求URL带有路径,如http://www.example.com/path/part
 * 	**query** `bool` 是否要求URL带有查询参数,如http://www.example/?query=string
 
-##### 范例
+##### 代码范例
 检查"http://www.example.com"是否为有效的URL地址
 ```php
 <?php
@@ -25,11 +25,11 @@ if ($widget->isUrl('http://www.example.com')) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'Yes'
 ```
-##### 范例
+##### 代码范例
 检查"http://www.example.com"是否为有效的URL地址,要求带有查询参数
 ```php
 <?php
@@ -40,7 +40,7 @@ if ($widget->isUrl('http://www.example.com', array('query' => true))) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'No'
 ```

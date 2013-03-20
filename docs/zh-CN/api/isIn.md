@@ -13,7 +13,7 @@ bool isDir( $input [, $array [, $strict ] ] )
 * **$array** `array` 用于搜索的数组
 * **$strict** `bool` 是否使用全等(===)进行比较,默认使用等于(==)比较
 
-##### 范例
+##### 代码范例
 检查"1"是否在array(1, 2, 3)之中
 ```php
 <?php
@@ -24,7 +24,7 @@ if ($widget->isIn(1, array(1, 2, 3))) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'Yes'
 ```

@@ -11,7 +11,7 @@ bool isPostcode ( $input )
 ##### 参数
 * **$input** `mixed` 待验证的数据
 
-##### 范例
+##### 代码范例
 检查"123456"是否为有效的车牌号码
 ```php
 <?php
@@ -22,7 +22,7 @@ if ($widget->isPostcode('123456')) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'Yes'
 ```

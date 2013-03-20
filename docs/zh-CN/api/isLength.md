@@ -16,7 +16,7 @@ bool isLength ( $input [, $length ] )
 * **$input** `mixed` 待验证的数据
 * **$length** `int` 指定长度的值
 
-##### 范例
+##### 代码范例
 检查"abc"的长度是否为3
 ```php
 <?php
@@ -27,7 +27,7 @@ if ($widget->isLength('abc', 3)) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'Yes'
 ```
@@ -43,7 +43,7 @@ bool isLength ( $input [, $min [, $max ] ] )
 * **$min** `int` 限制长度的最小值
 * **$max** `int` 限制长度的最大值
 
-##### 范例
+##### 代码范例
 检查"abc"的长度是否在3到6之间
 ```php
 <?php
@@ -54,7 +54,7 @@ if ($widget->isLength('abc', 3, 6)) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'Yes'
 ```

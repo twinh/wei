@@ -25,7 +25,7 @@
 
 
 
-##### 范例
+##### 代码范例
 添加一个名称为example的事件并触发它
 ```php
 <?php
@@ -36,7 +36,7 @@ $widget->on('example', function(){
 
 $widget->trigger('example');
 ```
-##### 输出
+##### 运行结果
 ```php
 'example'
 ```

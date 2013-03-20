@@ -13,7 +13,7 @@ bool isCallback( $input [, $fn [, $message ]] )
 * **$fn** `callback` 指定验证的回调结构
 * **$message** `string` 验证不通过的提示信息
 
-##### 范例
+##### 代码范例
 通过回调方法检查数据是否能被3整除
 ```php
 <?php
@@ -26,7 +26,7 @@ if ($widget->isCallback(3, function($input) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'No'
 ```

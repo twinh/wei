@@ -13,7 +13,7 @@ bool isSomeOf( $input [, $rules [, $atLeast ] ] )
 * **$rules** `array` 验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项
 * **$atLeast** `int` 至少要有多少条规则通过才算验证通过
 
-##### 范例
+##### 代码范例
 检查数据符合"数字,长度小于5,邮箱"这三条中至少两条
 ```php
 <?php
@@ -29,7 +29,7 @@ if ($widget->isSomeOf('abc', $rules)) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'Yes'
 ```

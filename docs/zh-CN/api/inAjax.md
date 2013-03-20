@@ -15,7 +15,7 @@ bool inAjax()
 `inAjax`微件是`request`微件`inAjax`方法的别名.
 
 
-##### 范例
+##### 代码范例
 通过向server微件设置Ajax请求的标记,将当前请求伪装为Ajax请求
 ```php
 <?php
@@ -38,7 +38,7 @@ if ($widget->inAjax()) {
     echo 'not ajax request';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'not ajax request
 ajax request'

@@ -13,7 +13,7 @@ bool isRange ( $input [, $min [, $max ] ] )
 * **$min** `int` 限制的最小值
 * **$max** `int` 限制的最大值
 
-##### 范例
+##### 代码范例
 检查18是否在1到10之间
 ```php
 <?php
@@ -24,7 +24,7 @@ if ($widget->isRange(18, 1, 10)) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'No'
 ```

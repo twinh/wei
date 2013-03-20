@@ -13,7 +13,7 @@ bool isEquals( $input [, $equals [, $strict ] ] )
 * **$equals** `mixed` 与数据比较的值
 * **$strict** `bool` 是否使用全等(===)进行比较,默认使用等于(==)比较
 
-##### 范例
+##### 代码范例
 检查"10:00:00"是否为合法的时间
 ```php
 <?php
@@ -29,7 +29,7 @@ if ($widget->isEquals($post['password'], $post['password_confirmation'])) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'Yes'
 ```

@@ -11,7 +11,7 @@ bool isEmail( $input )
 ##### 参数
 * **$input** `mixed` 待验证的数据
 
-##### 范例
+##### 代码范例
 检查"example@example.com"是否为邮箱地址
 ```php
 <?php
@@ -22,7 +22,7 @@ if ($widget->isEmail('example@example.com')) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'Yes'
 ```

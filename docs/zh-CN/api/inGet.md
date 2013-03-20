@@ -15,7 +15,7 @@ bool inGet()
 `inGet`微件是`request`微件`inGet`方法的别名.
 
 
-##### 范例
+##### 代码范例
 检查当前的请求方式是否为GET
 ```php
 <?php
@@ -26,7 +26,7 @@ if ($widget->inGet()) {
     echo 'The request method is not GET';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
-'The request method is GET'
+'The request method is not GET'
 ```

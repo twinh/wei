@@ -30,7 +30,7 @@ $type string 指定的数据类型
 | string   | 字符串               | xdigit   | 16进制数字           |
 
 
-##### 范例
+##### 代码范例
 检查"abc"是否为字符串
 ```php
 <?php
@@ -41,11 +41,11 @@ if ($widget->isType('abc', 'string')) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'Yes'
 ```
-##### 范例
+##### 代码范例
 检查new ArrayObject()是否为Traversable
 ```php
 <?php
@@ -56,7 +56,7 @@ if ($widget->isType(new ArrayObject(), 'Traversable')) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'Yes'
 ```

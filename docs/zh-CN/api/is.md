@@ -18,7 +18,7 @@ bool is($rule, $input, $options)
 * **$input** `mixed` 待验证的数据
 * **$options** `array` 验证器的配置选项
 
-##### 范例
+##### 代码范例
 检查数据是否为邮箱
 ```php
 <?php
@@ -29,7 +29,7 @@ if ($widget->is('email', 'twinhuang@qq.com')) {
     echo 'twihuang@qq.com is not valid email';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'twihuang@qq.com is valid email'
 ```
@@ -52,7 +52,7 @@ bool is($fn, $input)
 * $widget `\Widget\Widget` 微件管理器
 
 
-##### 范例
+##### 代码范例
 检查数据是否能被3整除
 ```php
 <?php
@@ -65,7 +65,7 @@ if ($widget->is(function($input) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'No'
 ```
@@ -80,7 +80,7 @@ bool is($rules, $input)
 * **$rules** `array` 验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项
 * **$input** `mixed` 待验证的数据
 
-##### 范例
+##### 代码范例
 检查数据是否为数字,且长度在3到5之间
 ```php
 <?php
@@ -95,7 +95,7 @@ if ($widget->is($rules, '123456')) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'No'
 ```

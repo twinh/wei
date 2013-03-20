@@ -11,7 +11,7 @@ bool isExists( $input )
 ##### 参数
 * **$input** `mixed` 待验证的数据
 
-##### 范例
+##### 代码范例
 检查路径"/notfound/directory"是否存在
 ```php
 <?php
@@ -22,7 +22,7 @@ if ($widget->isExists('/notfound/directory')) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'No'
 ```

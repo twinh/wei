@@ -12,7 +12,7 @@ bool isMax ( $input [, $max ] )
 * **$input** `mixed` 待验证的数据
 * **$max** `int` 待比较的数值
 
-##### 范例
+##### 代码范例
 检查10是否小于等于20
 ```php
 <?php
@@ -23,7 +23,7 @@ if ($widget->isMax(10, 20)) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'Yes'
 ```

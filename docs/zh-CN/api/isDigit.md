@@ -11,7 +11,7 @@ bool isDigit( $input )
 ##### 参数
 * **$input** `mixed` 待验证的数据
 
-##### 范例
+##### 代码范例
 检查"abc123"是否为数字
 ```php
 <?php
@@ -22,7 +22,7 @@ if ($widget->isDigit('abc123')) {
     echo 'No';
 }
 ```
-##### 输出
+##### 运行结果
 ```php
 'No'
 ```
