@@ -1,12 +1,12 @@
     该微件文档还在紧急编写中,敬请期待!
-[get()](http://twinh.github.com/widget/api/get)
-===============================================
+[query()](http://twinh.github.com/widget/api/query)
+===================================================
 
 Returns a *stringify* or user defined($default) parameter value
 
 ### Returns a *stringify* or user defined($default) parameter value
 ```php
-string|null get($name, $default)
+string|null query($name, $default)
 ```
 
 ##### 参数
