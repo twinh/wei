@@ -105,9 +105,9 @@ $widget->validate(array(
 ```
 
 ##### names
-数据项名称的数组,用于错误信息提示.数组键名为验证的数据项名称.
+数据项名称的数组,用于错误信息提示.数组的键名是验证数据项的值,数值的值是验证数据项的名称.如
 
-**注意:**如果未提供数据项名称,错误信息将以`该项`作为错误信息的主体,例如`该项不能为空`
+**注意:**如果未提供数据项名称,错误信息将以`该项`作为验证数据项的名称,完整的错误信息例如`该项不能为空`
 
 **代码范例**
 ```php
@@ -125,7 +125,7 @@ $widget->validate(array(
             )
         )
     ),
-    // 指定错误信息的主体
+    // 指定验证数据项的名称
     'names' => array(
         'name' => '用户名',
         'email' => '邮箱',
@@ -145,7 +145,7 @@ $widget->validate(array(
 **参数**
 
 ```php
-ruleValid( $event, $widget, $field, $rule, $validator )
+ruleValid( $event, $widget, $rule, $field, $validator )
 ```
 
 * $event `Event` 事件对象
@@ -162,23 +162,75 @@ ruleValid( $event, $widget, $field, $rule, $validator )
 **参数**
 
 ```php
-ruleInvalid( $event, $widget, $field, $rule, $validator )
+ruleInvalid( $event, $widget, $rule, $field, $validator )
 ``` 
 
 * $event `Event` 事件对象
 * $widget `Widget` 微件管理器
-* $rule `string` 通过的规则名称
+* $rule `string` 未通过的规则名称
 * $field `string` 当前验证的数据项名称
 * $validator `Validator` 验证器对象
 
 `ruleInvalid`与`ruleValid`的行为一致.
 同样的,如果`ruleInvalid`事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
+##### fieldValid
+当任意数据项验证通过时,验证器就会触发`fieldValid`事件.
 
+**参数**
+
+```php
+fieldValid ( $event, $widget, $field, $validator )
+```
+
+* $event `Event` 事件对象
+* $widget `Widget` 微件管理器
+* $field `string` 当前验证的数据项名称
+* $validator `Validator` 验证器对象
+
+如果`fieldValid`事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
+
+##### fieldInvalid
+当任意数据项验证 **不** 通过时,验证器就会触发`fieldInvalid`事件.
+
+**参数**
+
+```php
+fieldInvalid ( $event, $widget, $field, $validator )
+```
+
+* $event `Event` 事件对象
+* $widget `Widget` 微件管理器
+* $field `string` 当前验证的数据项名称
+* $validator `Validator` 验证器对象
+
+如果`fieldInvalid`事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
+
+##### success
+验证结束时,最终验证结果为通过,验证器就触发`success`事件.
+
+```php
+success ( $event, $widget, $validator )
+```
+
+* $event `Event` 事件对象
+* $widget `Widget` 微件管理器
+* $validator `Validator` 验证器对象
+
+##### failure
+验证结束时,最终验证结果为 **不** 通过,验证器就触发`failure`事件.
+
+```php
+failure ( $event, $widget, $validator )
+```
+
+* $event `Event` 事件对象
+* $widget `Widget` 微件管理器
+* $validator `Validator` 验证器对象
 
 
 ##### 代码范例
-检查数据提交的数据是否符合验证规则
+检查数据是否符合指定的验证规则
 ```php
 <?php
  
