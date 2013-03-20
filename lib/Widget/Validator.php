@@ -40,28 +40,13 @@ class Validator extends AbstractWidget
      * @var array
      */
     protected $messages = array();
-
+    
     /**
-     * Whether break the validation flow when any field is not valid
-     *
-     * @var bool
-     */
-    protected $breakField = false;
-
-    /**
-     * Whether break the validation flow when any field's rule is not valid
-     *
-     * @var bool
-     */
-    protected $breakRule = false;
-
-    /**
-     * Whether skip the crruent field validation when the filed's rule is not 
-     * valid, so every field contains one invalid rule at most
+     * The names for messaages
      * 
-     * @var bool
+     * @var array
      */
-    protected $skip = false;
+    protected $names = array();
     
     /**
      * The event triggered when every rule is valid
@@ -104,6 +89,28 @@ class Validator extends AbstractWidget
      * @var null|callback
      */
     protected $failure = null;
+    
+    /**
+     * Whether break the validation flow when any field's rule is not valid
+     *
+     * @var bool
+     */
+    protected $breakRule = false;
+
+    /**
+     * Whether break the validation flow when any field is not valid
+     *
+     * @var bool
+     */
+    protected $breakField = false;
+
+    /**
+     * Whether skip the crruent field validation when the filed's rule is not 
+     * valid, so every field contains one invalid rule at most
+     * 
+     * @var bool
+     */
+    protected $skip = false;
 
     /**
      * The valid rules array, which use the field as key, and the rules as value
@@ -132,13 +139,6 @@ class Validator extends AbstractWidget
      * @var array<\Widget\Validator\AbstractRule>
      */
     protected $ruleValidators = array();
-    
-    /**
-     * The names for messaages
-     * 
-     * @var array
-     */
-    protected $names = array();
 
     /**
      * Validate the data by the given options
