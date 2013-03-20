@@ -113,7 +113,7 @@ class ValidatorTest extends TestCase
                 ),
             ),
             'breakRule' => true,
-            'ruleInvalid' => function($event, $widget, $field, $rule, $validator) use(&$breakRule) {
+            'ruleInvalid' => function($event, $widget, $rule, $field, $validator) use(&$breakRule) {
                 $breakRule = $rule;
             }
         ));
@@ -135,7 +135,7 @@ class ValidatorTest extends TestCase
                     'email' => true, // Will not valid
                 ),
             ),
-            'ruleValid' => function($event, $widget, $field, $rule, $validator) use(&$lastRule) {
+            'ruleValid' => function($event, $widget, $rule, $field, $validator) use(&$lastRule) {
                 $lastRule = $rule;
 
                 // Return false to break the validation flow
