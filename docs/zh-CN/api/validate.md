@@ -20,8 +20,8 @@
    *  **fieldInvalid** `callback` 数据项验证不通过时调用的回调函数
    *  **success** `callback` 验证器验证通过(所有验证规则都通过)时调用的回调函数
    *  **failure** `callback` 验证器验证不通过(任意验证规则不通过)时调用的回调函数
-   *  **breakField** `bool` 是否当任意一项数据验证不通过时就中断验证流程
-   *  **breakRule** `bool` 是否当任意一项规则验证不通过时就中断验证流程
+   *  **breakRule** `bool` 是否当任意一项规则验证不通过时就中断验证流程,默认为false
+   *  **breakField** `bool` 是否当任意一项数据验证不通过时就中断验证流程,默认为false
    *  **skip** `bool` 是否当任意一项数据中的一项规则不通过时,就跳转到下一项数据的验证流程,默认是false,启用后,每项数据最多会有一个未通过的验证规则
 
 
@@ -40,6 +40,8 @@ Widget验证器是参考[jQuery Validation](http://bassistance.de/jquery-plugins
 2. 如果`$data`是对象,检查属性`$key`是否存在,存在则返回`$data->$key`的值
 3. 如果`$data`是对象且方法`get. $key`存在,返回`$data->{'get' . $key}`
 4. 如果以上均不存在,返回null
+
+**代码范例**
 
 ```php
 class User
@@ -105,6 +107,8 @@ $widget->validate(array(
 
 #### messages
 验证错误时的提示信息.提示信息的格式与验证规则类似.
+
+**代码范例**
 
 ```php
 $widget->validate(array(
@@ -243,26 +247,81 @@ fieldInvalid ( $event, $widget, $field, $validator )
 如果`fieldInvalid`事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
 ##### success
-验证结束时,最终验证结果为通过,验证器就触发`success`事件.
+验证结束时,如果最终验证结果为通过,验证器就触发`success`事件.
 
 ```php
 success ( $event, $widget, $validator )
 ```
 
-* $event `Event` 事件对象
-* $widget `Widget` 微件管理器
-* $validator `Validator` 验证器对象
+* $event `Widge\Event\Event` 事件对象
+* $widget `Widget\Widget` 微件管理器
+* $validator `Widget\Validator` 验证器对象
+
+**代码范例**
+
+```php
+$widget->validate(array(
+    'data' => array(
+        'name' => 'twin'
+    ),
+    'rules' => array(
+        'name' => 'required'
+    ),
+    'success' => function($event, $widget, $validator) {
+        echo 'Yes';
+    }
+));
+```
+
+**运行结果**
+
+```php
+'Yes'
+```
 
 ##### failure
-验证结束时,最终验证结果为 **不** 通过,验证器就触发`failure`事件.
+验证结束时,如果最终验证结果为 **不** 通过,验证器就触发`failure`事件.
 
 ```php
 failure ( $event, $widget, $validator )
 ```
 
-* $event `Event` 事件对象
-* $widget `Widget` 微件管理器
-* $validator `Validator` 验证器对象
+* $event `Widge\Event\Event` 事件对象
+* $widget `Widget\Widget` 微件管理器
+* $validator `Widget\Validator` 验证器对象
+
+**代码范例**
+
+```php
+$widget->validate(array(
+    'data' => array(
+        'name' => null
+    ),
+    'rules' => array(
+        'name' => 'required'
+    ),
+    'failure' => function($event, $widget, $validator) {
+        echo 'No';
+    }
+));
+```
+
+**运行结果**
+
+```php
+'No'
+```
+
+##### breakRule 
+默认为不启用.启用该选项后,当任意一项规则验证不通过时就中断验证流程,直接返回验证结果(false)
+
+##### breakField
+默认为不启用.启用该选项后,当任意一项数据验证不通过时就中断验证流程,直接返回验证结果(false)
+
+##### skip
+默认是不启用.启用该选项后,当任意一项数据中的一项规则不通过时,就跳转到下一项数据的验证流程,因此,每项数据最多会有一个未通过的验证规则
+
+- - - - 
 
 
 ##### 代码范例
