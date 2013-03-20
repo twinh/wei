@@ -12,7 +12,7 @@
 * $options 验证器的配置选项
    *  **data** `array|object` 待验证的数据,可以是数组或对象
    *  **rules** `array` 验证规则数组
-   *  **messages** `array` 验证错误时的提示信心
+   *  **messages** `array` 验证错误时的提示信息
    *  **ruleValid** `callback` 规则验证通过时调用的回调函数
    *  **ruleInvalid** `callback` 规则验证不通过时调用的回调函数
    *  **fieldValid** `callback` 数据项验证通过时调用的回调函数
@@ -66,6 +66,43 @@ $widget->validate(array(
 ))
 ```
 
+#### messages
+验证错误时的提示信息.提示信息的格式与规则类似.
+
+```php
+$widget->validate(array(
+    'rules' => array(
+        'name' => 'required',
+        'email' => array(
+            'required' => true,
+            'email' => true
+        ),
+        'avatar' => array(
+            'image' => array(
+                'maxWidth' => 200,
+                'maxHeight' => 200
+            )
+        )
+    ),
+    'messges' => array(
+        // 简单信息
+        'name' => '请输入您的用户名',
+        // 复合信息
+        'email' => array(
+            'required' => '请输入邮箱地址',
+            'email' => '您输入的邮箱格式不正确'
+        ),
+        // 完整信息
+        'avatar' => array(
+            'image' => array(
+                'widthTooBig' => '您的头像宽度不能超过200px',
+                'heightTooBig' => '您的头像高度不能超过200px'
+            )
+        )
+    )
+));
+```
+
 ##### ruleValid
 当任意一条规则验证通过时,验证器就会触发`ruleValid`事件.
 
@@ -99,6 +136,7 @@ ruleInvalid( $event, $widget, $field, $rule, $validator )
 * $validator `Validator` 验证器对象
 
 `ruleInvalid`与`ruleValid`的行为一致.
+同样的,如果`ruleInvalid`事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
 
 
