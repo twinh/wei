@@ -41,6 +41,42 @@ Widget验证器是参考[jQuery Validation](http://bassistance.de/jquery-plugins
 3. 如果`$data`是对象且方法`get. $key`存在,返回`$data->{'get' . $key}`
 4. 如果以上均不存在,返回null
 
+```php
+class User
+{
+    public function getName()
+    {
+        return 'twin';
+    }
+
+    public function getEmail()
+    {
+        return 'test@test.com';
+    }
+}
+
+// 以数组为验证数据
+$widget->validate(array(
+    'data' => array(
+        'name' => 'twin',
+        'email' => 'test@test.com'
+    )
+));
+
+// 以数组对象为验证数据
+$widget->validate(array(
+    'data' => new \ArrayObject(array(
+        'name' => 'twin',
+        'email' => 'test@test.com'
+    ))
+));
+
+// 以对象为验证数据
+$widget->validate(array(
+    'data' => new User
+));
+```
+
 ##### rules
 验证规则数组.键名是验证的数据项名称,值是验证规则.验证规则可以字符串,表示一项验证规则,也可以是数组
 ,表示多项验证规则.
