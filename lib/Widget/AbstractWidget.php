@@ -54,7 +54,6 @@ abstract class AbstractWidget implements WidgetInterface
     
     /**
      * {@inheritdoc}
-     * @todo append
      */
     public function setOption($name, $value = null)
     {
