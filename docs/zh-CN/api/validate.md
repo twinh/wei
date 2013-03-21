@@ -225,6 +225,32 @@ ruleValid( $event, $widget, $rule, $field, $validator )
 
 如果`ruleValid`事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
+**代码范例**
+
+```php
+$widget->validate(array(
+    'data' => array(
+        'name' => 'twin'
+    ),
+    'rules' => array(
+        'name' => 'required'
+    ),
+    'ruleValid' => function($event, $widget, $rule, $field, $validator) {
+        echo $rule;
+        echo $field;
+        echo 'Yes';
+    }
+));
+```
+
+**运行结果**
+
+```php
+'required'
+'name'
+'Yes'
+```
+
 ##### ruleInvalid
 当任意一条规则验证 **不** 通过时,验证器就会触发`ruleInvalid`事件.
 
@@ -243,6 +269,32 @@ ruleInvalid( $event, $widget, $rule, $field, $validator )
 `ruleInvalid`与`ruleValid`的行为一致.
 同样的,如果`ruleInvalid`事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
+**代码范例**
+
+```php
+$widget->validate(array(
+    'data' => array(
+        'name' => null
+    ),
+    'rules' => array(
+        'name' => 'required'
+    ),
+    'ruleInvalid' => function($event, $widget, $rule, $field, $validator) {
+        echo $rule;
+        echo $field;
+        echo 'No';
+    }
+));
+```
+
+**运行结果**
+
+```php
+'required'
+'name'
+'No'
+```
+
 ##### fieldValid
 当任意数据项验证通过时,验证器就会触发`fieldValid`事件.
 
@@ -259,6 +311,30 @@ fieldValid ( $event, $widget, $field, $validator )
 
 如果`fieldValid`事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
+**代码范例**
+
+```php
+$widget->validate(array(
+    'data' => array(
+        'name' => 'twin'
+    ),
+    'rules' => array(
+        'name' => 'required'
+    ),
+    'fieldValid' => function($event, $widget, $field, $validator) {
+        echo $field;
+        echo 'Yes';
+    }
+));
+```
+
+**运行结果**
+
+```php
+'name'
+'Yes'
+```
+
 ##### fieldInvalid
 当任意数据项验证 **不** 通过时,验证器就会触发`fieldInvalid`事件.
 
@@ -274,6 +350,30 @@ fieldInvalid ( $event, $widget, $field, $validator )
 * $validator `Validator` 验证器对象
 
 如果`fieldInvalid`事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
+
+**代码范例**
+
+```php
+$widget->validate(array(
+    'data' => array(
+        'name' => null
+    ),
+    'rules' => array(
+        'name' => 'required'
+    ),
+    'fieldValid' => function($event, $widget, $field, $validator) {
+        echo $field;
+        echo 'No';
+    }
+));
+```
+
+**运行结果**
+
+```php
+'name'
+'No'
+```
 
 ##### success
 验证结束时,如果最终验证结果为通过,验证器就触发`success`事件.
