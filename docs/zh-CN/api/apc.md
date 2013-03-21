@@ -4,12 +4,12 @@
 设置或获取一项PHP APC缓存
 
 ##### 目录
-* %name%( $key, $value [ $expire ] )
-* %name%( $key )
+* apc( $key, $value [ $expire ] )
+* apc( $key )
 
 ### 设置一项PHP APC缓存
 ```php
-bool %name%( $key, $value [ $expire ] )
+bool apc( $key, $value [ $expire ] )
 ```
 
 ##### 参数
@@ -38,7 +38,7 @@ echo $widget->apc('key');
 
 ### 获取一项PHP APC缓存
 ```php
-bool %name%( $key )
+bool apc( $key )
 ```
 
 ##### 参数
