@@ -16,6 +16,17 @@ bool isLength ( $input [, $length ] )
 * **$input** `mixed` 待验证的数据
 * **$length** `int` 指定长度的值
 
+##### 错误信息
+| **名称**              | **信息**                                                       | 
+|-----------------------|----------------------------------------------------------------|
+| `notDetectd`          | 无法检测到%name%的长度                                         |
+| `length`              | %name%的长度必须是%length%                                     |
+| `notIn`             	| %name%的长度必须在%min%和%max%之间                             |
+| `lengthItem`          | %name%必须包含%length%项                                       |
+| `notInItem`           | %name%必须包含%min%到%max%项                                   |
+
+当检查的数据是字符串时,返回的错误信息是`length`或`notIn`,当数据是数组时,返回的是`lengthItem`或`notInItem`
+
 ##### 代码范例
 检查"abc"的长度是否为3
 ```php
