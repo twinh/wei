@@ -217,11 +217,11 @@ $widget->validate(array(
 ruleValid( $event, $widget, $rule, $field, $validator )
 ```
 
-* $event `Event` 事件对象
-* $widget `Widget` 微件管理器
+* $event `Widget\Event\Event` 事件对象
+* $widget `Widget\Widget` 微件管理器
 * $rule `string` 通过的规则名称
 * $field `string` 当前验证的数据项名称
-* $validator `Validator` 验证器对象
+* $validator `Widget\Validator` 验证器对象
 
 如果`ruleValid`事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
@@ -260,11 +260,11 @@ $widget->validate(array(
 ruleInvalid( $event, $widget, $rule, $field, $validator )
 ``` 
 
-* $event `Event` 事件对象
-* $widget `Widget` 微件管理器
+* $event `Widget\Event\Event` 事件对象
+* $widget `Widget\Widget` 微件管理器
 * $rule `string` 未通过的规则名称
 * $field `string` 当前验证的数据项名称
-* $validator `Validator` 验证器对象
+* $validator `Widget\Validator` 验证器对象
 
 `ruleInvalid`与`ruleValid`的行为一致.
 同样的,如果`ruleInvalid`事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
@@ -304,10 +304,10 @@ $widget->validate(array(
 fieldValid ( $event, $widget, $field, $validator )
 ```
 
-* $event `Event` 事件对象
-* $widget `Widget` 微件管理器
+* $event `Widget\Event\Event` 事件对象
+* $widget `Widget\Widget` 微件管理器
 * $field `string` 当前验证的数据项名称
-* $validator `Validator` 验证器对象
+* $validator `Widget\Validator` 验证器对象
 
 如果`fieldValid`事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
@@ -344,10 +344,10 @@ $widget->validate(array(
 fieldInvalid ( $event, $widget, $field, $validator )
 ```
 
-* $event `Event` 事件对象
-* $widget `Widget` 微件管理器
+* $event `Widge\Event\Event` 事件对象
+* $widget `Widget\Widget` 微件管理器
 * $field `string` 当前验证的数据项名称
-* $validator `Validator` 验证器对象
+* $validator `Widget\Validator` 验证器对象
 
 如果`fieldInvalid`事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.
 
