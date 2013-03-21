@@ -664,7 +664,7 @@ class ValidatorTest extends TestCase
     public function testGetNotMessages()
     {
         $email = $this->is->createRuleValidator('notEmail', array(
-            'notMessage' => 'this value must not be an email address'
+            'negativeMessage' => 'this value must not be an email address'
         ));
             
         $email('email@example.com');
