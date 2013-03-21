@@ -369,6 +369,9 @@ class Logger extends AbstractWidget
         return $this;
     }
     
+    /**
+     * Close the file handle and reset to null
+     */
     protected function close()
     {
         if (is_resource($this->handle)) {
