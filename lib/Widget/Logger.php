@@ -172,72 +172,6 @@ class Logger extends AbstractWidget
     }
 
     /**
-     * Get log file
-     *
-     * @return string
-     * @throws Widget\Exception\RuntimeException When unable to create logging directory
-     */
-    public function getFile()
-    {
-        if ($this->fileDetected) {
-            return $this->file;
-        }
-
-        $this->handle = null;
-        $file = &$this->file;
-
-        if (!is_dir($this->dir) && false === @mkdir($this->dir, 0777, true)) {
-            throw new RuntimeException('Unable to create directory ' . $this->dir);
-        }
-        
-        $file = realpath($this->dir) . '/' . date($this->fileFormat);
-
-        if ($this->fileSize) {
-            $firstFile = $file;
-
-            $files = glob($file . '*', GLOB_NOSORT);
-
-            if (1 < count($files)) {
-                natsort($files);
-                $file = array_pop($files);
-            }
-
-            if (is_file($file) && $this->fileSize < filesize($file)) {
-                $ext = pathinfo($file, PATHINFO_EXTENSION);
-                if (is_numeric($ext)) {
-                    $file = $firstFile . '.' . ($ext + 1);
-                } else {
-                    $file = $firstFile . '.1';
-                }
-            }
-        }
-
-        $this->fileDetected = true;
-
-        return $file;
-    }
-    
-    /**
-     * Set default log level
-     * 
-     * @param string $level
-     * @return \Widget\Logger
-     */
-    public function setLevel($level)
-    {
-        $this->level = $level;
-        
-        return $this;
-    }
-    
-    public function setHandledLevel($handledLevel)
-    {
-        $this->handledLevel = $handledLevel;
-        
-        return $this;
-    }
-    
-    /**
      * System is unusable.
      *
      * @param string $message
@@ -342,6 +276,78 @@ class Logger extends AbstractWidget
     public function debug($message, array $context = array())
     {
         return $this('debug', $message, $context);
+    }
+    
+    /**
+     * Get log file
+     *
+     * @return string
+     * @throws Widget\Exception\RuntimeException When unable to create logging directory
+     */
+    public function getFile()
+    {
+        if ($this->fileDetected) {
+            return $this->file;
+        }
+
+        $this->handle = null;
+        $file = &$this->file;
+
+        if (!is_dir($this->dir) && false === @mkdir($this->dir, 0777, true)) {
+            throw new RuntimeException('Unable to create directory ' . $this->dir);
+        }
+        
+        $file = realpath($this->dir) . '/' . date($this->fileFormat);
+
+        if ($this->fileSize) {
+            $firstFile = $file;
+
+            $files = glob($file . '*', GLOB_NOSORT);
+
+            if (1 < count($files)) {
+                natsort($files);
+                $file = array_pop($files);
+            }
+
+            if (is_file($file) && $this->fileSize < filesize($file)) {
+                $ext = pathinfo($file, PATHINFO_EXTENSION);
+                if (is_numeric($ext)) {
+                    $file = $firstFile . '.' . ($ext + 1);
+                } else {
+                    $file = $firstFile . '.1';
+                }
+            }
+        }
+
+        $this->fileDetected = true;
+
+        return $file;
+    }
+    
+    /**
+     * Set default log level
+     * 
+     * @param string $level
+     * @return \Widget\Logger
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
+        
+        return $this;
+    }
+    
+    /**
+     * Set handled level
+     * 
+     * @param int $handledLevel The handled level
+     * @return \Widget\Logger
+     */
+    public function setHandledLevel($handledLevel)
+    {
+        $this->handledLevel = $handledLevel;
+        
+        return $this;
     }
 
     /**
