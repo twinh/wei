@@ -26,6 +26,25 @@ bool isImage( $input [, $options ] )
 图片验证器是文件验证器[isFile](isFile.md)的子类,其中选项`maxSize`, `minSize`, `exts`,
 `excludeExts`, `mimeTypes`, `excludeMimeTypes`继承自父类.
 
+##### 错误信息
+| **名称**              | **信息**                                                       | 
+|-----------------------|----------------------------------------------------------------|
+| `notDetected`         | %name%不是有效的图片,或是无法检测到图片的尺寸                  |
+| `widthTooBig`         | %name%的宽度太大(%width%px), 允许的最大宽度为%maxWidth%px      |
+| `widthTooSmall`       | %name%的宽度太小(%width%px),允许的最小宽度应为%minWidth%px     |
+| `heightTooBig`        | %name%的高度太大(%height%px), 允许的最大高度为%maxHeight%px    |
+| `heightTooSmall`      | %name%的高度太小(%height%px), 允许的最小高度为%minHeight%px    |
+| `notFound`            | %name%不存在或不可读                                           |
+| `maxSize`             | %name%太大了(%sizeString%),允许的最大文件大小为%maxSizeString% |
+| `minSize`             | %name%太小了(%sizeString%),允许的最小文件大小为%minSizeString% |
+| `exts`                | %name%的扩展名(%ext%)不合法,只允许扩展名为:%exts%              |
+| `excludeExts`         | %name%的扩展名(%ext%)不合法,不允许扩展名为:%excludeExts%       |
+| `mimeTypeNotDetected` | 无法检测%name%的媒体类型                                       |
+| `mimeTypes`           | %name%的媒体类型不合法                                         |
+| `excludeMimeTypes`    | %name%的媒体类型不合法                                         |
+| `negative`            | %name%必须是不存在的文件                                       |
+| `notString`           | %name%必须是字符串                                             |
+
 
 ##### 代码范例
 检查文件"5x5.gif"是否为图片且最大高度不能超过5px
