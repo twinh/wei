@@ -91,12 +91,9 @@ class Router extends AbstractWidget
 
     public function __construct(array $options = array())
     {
-        parent::__construct($options);
-
-        // todo
-        if (!$this->baseUri) {
-            $this->setBaseUri('');
-        }
+        parent::__construct($options + array(
+            'baseUri' => $this->baseUri
+        ));
     }
 
     /**
@@ -158,6 +155,8 @@ class Router extends AbstractWidget
             $this->baseUri = '/' == $uri ? $uri : $uri . '/';
         } elseif ('/' != $uri[strlen($uri) - 1]) {
             $this->baseUri = $uri . '/';
+        } else {
+            $this->baseUri = $uri;
         }
 
         return $this;
