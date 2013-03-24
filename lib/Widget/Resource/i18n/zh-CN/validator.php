@@ -37,7 +37,7 @@ return array(
     
     // creditCard
     '%name% must be valid credit card number' => '%name%必须是有效的信用卡号',
-    '%name% must not be valid credit card number' => '%name%必须是有效的信用卡号',
+    '%name% must not be valid credit card number' => '%name%不能是有效的信用卡号',
     
     // date
     '%name% must be a valid date, the format should be "%format%", e.g. %example%' => '%name%不是合法的日期,格式应该是%format%,例如:%example%',
