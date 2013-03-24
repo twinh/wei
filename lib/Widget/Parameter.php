@@ -103,13 +103,19 @@ class Parameter extends ArrayWidget
     /**
      * Set parameter value
      * 
-     * @param string $name The parameter name
+     * @param string|array $name The parameter name or A key-value array
      * @param mixed $value The parameter value
      * @return \Widget\Parameter
      */
-    public function set($name, $value)
+    public function set($name, $value = null)
     {
-        $this->data[$name] = $value;
+        if (!is_array($name)) {
+            $this->data[$name] = $value;
+        } else {
+            foreach ($name as $key => $value) {
+                $this->data[$key] = $value;
+            }
+        }
         
         return $this;
     }

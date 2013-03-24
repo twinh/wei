@@ -66,4 +66,9 @@ class ParameterTest extends TestCase
             $this->assertEquals(4, $parameter->getInt('int', 1, 4));
         }
     }
+    
+    public function testArrayAsSetParameter()
+    {
+        
+    }
 }
