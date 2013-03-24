@@ -216,6 +216,18 @@ class EscapeTest extends TestCase
                 $this->escaper->escapeHtml($key),
                 'Failed to escape: ' . $key
             );
+            
+            // call by alias
+            $this->assertEquals(
+                $value,
+                $this->escaper->html($key)
+            );
+            
+            // call by widget
+            $this->assertEquals(
+                $value,
+                $this->escape($key, 'html')
+            );
         }
     }
 
@@ -226,6 +238,18 @@ class EscapeTest extends TestCase
                 $value,
                 $this->escaper->escapeHtmlAttr($key),
                 'Failed to escape: ' . $key
+            );
+            
+            // call by alias
+            $this->assertEquals(
+                $value,
+                $this->escaper->attr($key)
+            );
+            
+            // call by widget
+            $this->assertEquals(
+                $value,
+                $this->escape($key, 'attr')
             );
         }
     }
@@ -239,6 +263,18 @@ class EscapeTest extends TestCase
                 'Failed to escape: ' . $key
             );
         }
+        
+        // call by alias
+            $this->assertEquals(
+                $value,
+                $this->escaper->js($key)
+            );
+            
+            // call by widget
+            $this->assertEquals(
+                $value,
+                $this->escape($key, 'js')
+            );
     }
 
     public function testJavascriptEscapingReturnsStringIfZeroLength()
@@ -258,6 +294,18 @@ class EscapeTest extends TestCase
                 $value,
                 $this->escaper->escapeCss($key),
                 'Failed to escape: ' . $key
+            );
+            
+            // call by alias
+            $this->assertEquals(
+                $value,
+                $this->escaper->css($key)
+            );
+            
+            // call by widget
+            $this->assertEquals(
+                $value,
+                $this->escape($key, 'css')
             );
         }
     }
@@ -279,6 +327,18 @@ class EscapeTest extends TestCase
                 $value,
                 $this->escaper->escapeUrl($key),
                 'Failed to escape: ' . $key
+            );
+            
+            // call by alias
+            $this->assertEquals(
+                $value,
+                $this->escaper->url($key)
+            );
+            
+            // call by widget
+            $this->assertEquals(
+                $value,
+                $this->escape($key, 'url')
             );
         }
     }
@@ -400,5 +460,13 @@ class EscapeTest extends TestCase
                 );
             }
         }
+    }
+    
+    /**
+     * @expectedException Widget\Exception\InvalidArgumentException
+     */
+    public function testInvokeUnsupportedTypeShouldThrowException()
+    {
+        $this->escape('string', 'unsupport-type');
     }
 }

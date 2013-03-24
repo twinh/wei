@@ -395,6 +395,22 @@ class Escape extends AbstractWidget
     }
     
     /**
+     * Escapes a string by specified type for safe ouput
+     * 
+     * @param string $string
+     * @param string $type
+     * @return string
+     * @throws Exception\UnsupportedException
+     */
+    public function __invoke($string, $type = 'html')
+    {
+        if (in_array($type, array('html', 'js', 'css', 'attr', 'url'))) {
+            return $this->{'escape' . $type}($string);
+        }
+        throw new Exception\UnsupportedException(sprintf('Unsupported escape type "%s"', $type));
+    }
+    
+    /**
      * The alias of escapeHtml method
      * 
      * @param string $string
@@ -434,6 +450,17 @@ class Escape extends AbstractWidget
      * @return string
      */
     public function attr($string)
+    {
+        return $this->escapeHtmlAttr($string);
+    }
+    
+    /**
+     * The alias of escapeHtmlAttr method
+     * 
+     * @param string $string
+     * @return string
+     */
+    public function escapeAttr($string)
     {
         return $this->escapeHtmlAttr($string);
     }
