@@ -111,6 +111,9 @@ return array(
     '%name% must be valid Hong Kong identity card' => '%name%必须是有效的香港身份证',
     '%name% must not be valid Hong Kong identity card' => '%name%不能是有效的香港身份证',
 
+    '%name% must be valid Macau identity card' => '%name%必须是有效的澳门身份证',
+    '%name% must not be valid Macau identity card' => '%name%不能是有效的澳门身份证',
+
     // image
     '%name% is not a valid image or the size of the image could not be detected' => '%name%不是有效的图片,或是无法检测到图片的尺寸',
     '%name% width is too big (%width%px), allowed maximum width is %maxWidth%px' => '%name%的宽度太大(%width%px), 允许的最大宽度为%maxWidth%px',
