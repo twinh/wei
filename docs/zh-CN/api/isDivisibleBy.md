@@ -12,6 +12,15 @@ bool isDivisibleBy( $input )
 * **$input** `mixed` 待验证的数据,被除数
 * **$divisor** `int|float` 除数,可以是整数或小数
 
+
+##### 错误信息
+| **名称**              | **信息**                                                       | 
+|-----------------------|----------------------------------------------------------------|
+| `notDivisible`        | %name%必须被%divisor%整除                                      |
+| `negative`            | %name%不可以被%divisor%整除                                    |
+| `notString`           | %name%必须是字符串                                             |
+
+
 ##### 代码范例
 检查10能否被3整除
 ```php
