@@ -79,18 +79,56 @@ class Request extends Parameter
     }
     
     /**
-     * Returns the full url, which do not contain the fragment, for it never sent to the server
-     *
+     * Returns the base URI
+     * 
      * @return string
-     * @link http://snipplr.com/view.php?codeview&id=2734
      */
-    public function getFullUrl()
+    public function getBaseUri()
+    {
+        if (!$this->baseUri) {
+            $uri = strtr(dirname($_SERVER['SCRIPT_NAME']), '\\', '/');
+            $this->baseUri = '/' == $uri ? $uri : $uri . '/';
+        }
+        return $this->baseUri;
+    }
+    
+    /**
+     * Returns the domain in URL
+     * 
+     * @return string
+     */
+    public function getDomain()
+    {
+        return $this->server['SERVER_NAME'];
+    }
+    
+    /**
+     * Returns the base URL
+     * 
+     * The base URL contains scheme://domain:port/path
+     * 
+     * @link http://snipplr.com/view.php?codeview&id=2734
+     * @return string
+     */
+    public function getBaseUrl()
     {
         $s = $this->server['HTTPS'] == 'on' ? 's' : '';
         $protocol = substr(strtolower($this->server['SERVER_PROTOCOL']), 0, strpos(strtolower($this->server['SERVER_PROTOCOL']), '/')) . $s;
         $port = ($this->server['SERVER_PORT'] == '80') ? '' : (':' . $this->server['SERVER_PORT']);
+        
+        return $protocol . '://' . $this->server['SERVER_NAME'] . $port;
+    }
 
-        return $protocol . '://' . $this->server['SERVER_NAME'] . $port . $this->server['REQUEST_URI'];
+    /**
+     * Returns the full url, which do not contain the fragment, for it never sent to the server
+     *
+     * The full URL contains scheme://domain:port/path?queryString
+     * 
+     * @return string
+     */
+    public function getFullUrl()
+    {
+        return $this->getBaseUrl() . $this->server['REQUEST_URI'];
     }
     
     /**
