@@ -463,7 +463,7 @@ class EscapeTest extends TestCase
     }
     
     /**
-     * @expectedException Widget\Exception\InvalidArgumentException
+     * @expectedException Widget\Exception\UnsupportedException
      */
     public function testInvokeUnsupportedTypeShouldThrowException()
     {
