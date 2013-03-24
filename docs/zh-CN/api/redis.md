@@ -4,12 +4,13 @@
 设置或获取一项Redis缓存
 
 ##### 目录
-* redis( $key, $value [ $expire ] )
+* redis( $key, $value [ $expire ] ) 
 * redis( $key )
+* redis->remove( $key )
 
 ### 设置一项Redis缓存
 ```php
-bool redis( $key, $value [ $expire ] )
+bool redis( $key, $value [ $expire ] ) 
 ```
 
 ##### 参数
@@ -61,3 +62,13 @@ echo $widget->redis('key');
 ```php
 'value'
 ```
+- - - -
+
+### 删除指定键名的缓存
+```php
+bool redis->remove( $key )
+```
+
+##### 参数
+* **$key** `string` 缓存的键名
+
