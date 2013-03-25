@@ -238,11 +238,16 @@ class Request extends Parameter
      * Returns the request message string
      * 
      * @return string
-     * @todo added headers
      */
     public function __toString()
     {
+        $header = '';
+        foreach ($this->server->getHeaders() as $name => $value) {
+            $name = implode('-', array_map('ucfirst', explode('_', strtolower($name))));
+            $header .= $name . ': ' . $value . "\r\n";
+        } 
         return $this->server['REQUEST_METHOD'] . ' ' . $this->getFullUrl() . ' ' . $this->server['SERVER_PROTOCOL'] . "\r\n"
+            . $header
             . $this->getContent();
     }
 }
