@@ -232,7 +232,7 @@ class Widget extends AbstractWidget
      * ```php
      * $this->config();                 // Returns all configurations
      * $this->config('widgetName');     // Get the configuration for 'widgetName'
-     * $this->config($array);           // Replace all configurations
+     * $this->config($array);           // Merge all configurations
      * $this->config('name', 'param');  // Set one configuration
      * $this->config('key1/key2');      // Get the value of $this->config['key1']['key2']
      * ```
@@ -274,9 +274,17 @@ class Widget extends AbstractWidget
             return isset($temp[$name]) ? $temp[$name] : null;
         }
 
-        // Set global configurations
+        // Merge all configurations
         if (is_array($name)) {
-            return $this->config = $name;
+            foreach ($name as $key => $value) {
+                if (is_array($value)) {
+                    foreach ($value as $subKey => $subValue) {
+                        $this->config[$key][$subKey] = $subValue;
+                    }
+                } else {
+                    $this->config[$key] = $value;
+                }
+            }
         }
 
         // Do NOT match any actions
