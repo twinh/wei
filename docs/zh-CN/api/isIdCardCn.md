@@ -14,8 +14,8 @@ bool isIdCardCn( $input )
 ##### 错误信息
 | **名称**              | **信息**                                                       | 
 |-----------------------|----------------------------------------------------------------|
-| `invalid`             | %name%不能是有效的中国身份证                                   |
-| `negative`            | %name% must not be valid Chinese identity card                 |
+| `invalid`             | %name%必须是有效的中国身份证                                   |
+| `negative`            | %name%不能是有效的中国身份证                                   |
 | `notString`           | %name%必须是字符串                                             |
 
 ##### 代码范例

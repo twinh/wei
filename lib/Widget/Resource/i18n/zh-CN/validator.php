@@ -105,7 +105,7 @@ return array(
     
     // idCardCn
     '%name% must be valid Chinese identity card' => '%name%必须是有效的中国身份证',
-    '%name% must be valid Chinese identity card' => '%name%不能是有效的中国身份证',
+    '%name% must not be valid Chinese identity card' => '%name%不能是有效的中国身份证',
     
     // idCardHk
     '%name% must be valid Hong Kong identity card' => '%name%必须是有效的香港身份证',
