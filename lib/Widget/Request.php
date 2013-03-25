@@ -66,7 +66,7 @@ class Request extends Parameter
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-
+        
         // Create paramters from super global variable on default
         if ($this->fromGlobal) {
             $this->gets     = &$_GET;
@@ -153,7 +153,7 @@ class Request extends Parameter
      */
     public function inMethod($method)
     {
-        return !strcmp($method, $this->server['REQUEST_METHOD']);
+        return !strcasecmp($method, $this->server['REQUEST_METHOD']);
     }
     
     /**

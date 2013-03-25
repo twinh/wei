@@ -52,6 +52,8 @@ class RequestTest extends TestCase
     public function testMethod()
     {
         foreach (array('GET', 'POST') as $method) {
+            $this->widget->remove('request');
+            $this->widget->remove('server');
             $request = new \Widget\Request(array(
                 'widget' => $this->widget,
                 'fromGlobal' => false,
@@ -59,7 +61,8 @@ class RequestTest extends TestCase
                     'REQUEST_METHOD' => $method
                 )
             ));
-
+            $this->widget->set('request', $request);
+            
             $this->assertTrue($request->{'in' . $method}());
             $this->assertTrue($request->inMethod($method));
 
