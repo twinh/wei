@@ -229,13 +229,13 @@ class Widget extends AbstractWidget
     /**
      * Get or set widget's configuration
      *
-     * <code>
+     * ```php
      * $this->config();                 // Returns all configurations
      * $this->config('widgetName');     // Get the configuration for 'widgetName'
      * $this->config($array);           // Replace all configurations
      * $this->config('name', 'param');  // Set one configuration
      * $this->config('key1/key2');      // Get the value of $this->config['key1']['key2']
-     * </code>
+     * ```
      * 
      * @param  mixed $name  The name of configuration
      * @param  mixed $value The value of configuration
