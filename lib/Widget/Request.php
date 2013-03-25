@@ -52,6 +52,13 @@ class Request extends Parameter
     protected $files;
     
     /**
+     * The request message body
+     * 
+     * @var string
+     */
+    protected $content;
+    
+    /**
      * Whether create request parameter from PHP global varibales
      * 
      * @var bool
@@ -199,5 +206,43 @@ class Request extends Parameter
         }
         
         throw new Exception\InvalidArgumentException(sprintf('Unkonwn parameter type "%s"', $type));
+    }
+    
+    /**
+     * Returns the request message body
+     * 
+     * @return string
+     */
+    public function getContent()
+    {
+        if (null === $this->content && $this->fromGlobal) {
+            $this->content = file_get_contents('php://input');
+        }
+        return $this->content;
+    }
+    
+    /**
+     * Set the request message body
+     * 
+     * @param string $content
+     * @return \Widget\Request
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+        
+        return $this;
+    }
+    
+    /**
+     * Returns the request message string
+     * 
+     * @return string
+     * @todo added headers
+     */
+    public function __toString()
+    {
+        return $this->server['REQUEST_METHOD'] . ' ' . $this->getFullUrl() . ' ' . $this->server['SERVER_PROTOCOL'] . "\r\n"
+            . $this->getContent();
     }
 }
