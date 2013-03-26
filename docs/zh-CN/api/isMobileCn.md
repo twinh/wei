@@ -1,5 +1,5 @@
-[isMobile()](http://twinh.github.com/widget/api/isMobile)
-=========================================================
+[isMobileCn()](http://twinh.github.com/widget/api/isMobileCn)
+=============================================================
 
 检查数据是否为有效的手机号码
 
@@ -19,18 +19,3 @@ isMobile
 | `negative`            | %name%必须不匹配模式"%pattern%"                                |
 | `notString`           | %name%必须是字符串                                             |
 
-##### 代码范例
-检查"13800138000"是否为有效的手机号码
-```php
-<?php
- 
-if ($widget->isMobile('13800138000')) {
-    echo 'Yes';
-} else {
-    echo 'No';
-}
-```
-##### 运行结果
-```php
-'Yes'
-```

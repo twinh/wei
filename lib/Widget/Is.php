@@ -36,7 +36,7 @@ class Is extends AbstractWidget
         'DivisibleBy', 'DoubleByte', 'Email', 'EndsWith', 'EntityExists', 
         'Equals', 'Exists', 'File', 'IdCardCn', 'IdCardHk', 'IdCardMo', 
         'IdCardTw', 'Image', 'In', 'Ip', 'Length', 'Lowercase', 'Max', 
-        'MaxLength', 'Min', 'MinLength', 'Mobile', 'NoneOf', 'Null', 'Number', 
+        'MaxLength', 'Min', 'MinLength', 'MobileCn', 'NoneOf', 'Null', 'Number', 
         'OneOf', 'Phone', 'PlateNumberCn', 'Postcode', 'QQ', 'Range', 'Regex', 
         'Required', 'SomeOf', 'StartsWith', 'Time', 'Tld', 'Type', 'Uppercase', 
         'Url', 'Uuid'

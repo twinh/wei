@@ -13,7 +13,7 @@ namespace Widget\Validator;
  * 
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Mobile extends Regex
+class MobileCn extends Regex
 {
     protected $patternMessage = '%name% must be valid mobile number';
     

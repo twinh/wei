@@ -2,25 +2,25 @@
 
 namespace WidgetTest\Validator;
 
-class MobileTest extends TestCase
+class MobileCnTest extends TestCase
 {
     /**
-     * @dataProvider providerForMobile
+     * @dataProvider providerForMobileCn
      */
-    public function testMobile($input)
+    public function testMobileCn($input)
     {
-        $this->assertTrue($this->isMobile($input));
+        $this->assertTrue($this->isMobileCn($input));
     }
 
     /**
-     * @dataProvider providerForNotMobile
+     * @dataProvider providerForNotMobileCn
      */
-    public function testNotMobile($input)
+    public function testNotMobileCn($input)
     {
-        $this->assertFalse($this->isMobile($input));
+        $this->assertFalse($this->isMobileCn($input));
     }
 
-    public function providerForMobile()
+    public function providerForMobileCn()
     {
         return array(
             array('13112345678'),
@@ -32,7 +32,7 @@ class MobileTest extends TestCase
         );
     }
 
-    public function providerForNotMobile()
+    public function providerForNotMobileCn()
     {
         return array(
             array('12000000000'),
