@@ -9,7 +9,6 @@
 namespace Widget;
 
 use Widget\View\AbstractView;
-use Widget\View\Tmpl;
 use Widget\Exception\RuntimeException;
 
 /**
@@ -31,7 +30,7 @@ class View extends AbstractView
      *
      * @var string|array
      */
-    protected $dirs = array();
+    protected $dirs = array('.');
 
     /**
      * Default template file extension
@@ -39,11 +38,18 @@ class View extends AbstractView
      * @var string
      */
     protected $extension = '.php';
+    
+    /**
+     * The layout configuration
+     * 
+     * @var array|null
+     */
+    protected $layout;
 
     /**
-     * Get view object
+     * Returns view widget
      *
-     * @return View
+     * @return \Widget\View
      */
     public function __invoke()
     {
@@ -55,13 +61,25 @@ class View extends AbstractView
      */
     public function render($name, $context = array())
     {
-        $tmpl = new Tmpl(array(
-            'widget' => $this->widget,
-            'view' => $this,
-            'name' => $name
-        ));
-
-        return $tmpl->render($context);
+        // Set extra view variables
+        $context = $context ? $context + $this->vars : $this->vars;
+        
+        // Render view
+        extract($context, EXTR_OVERWRITE);
+        ob_start();
+        require $this->getFile($name);
+        $content = ob_get_clean();
+        
+        // Render layout
+        if ($this->layout) {
+            $layout = $this->layout;
+            $this->layout = null;
+            $content = $this->render($layout['name'], array(
+                $layout['variable'] => $content
+            ) + $context);
+        }
+        
+        return $content;
     }
 
     /**
@@ -102,5 +120,22 @@ class View extends AbstractView
         }
 
         throw new RuntimeException(sprintf('Template "%s" not found in directories "%s"', $name, implode('", "', $this->dirs)));
+    }
+    
+    /**
+     * Set layout for current view
+     * 
+     * @param string $name The name of layout template 
+     * @param string $variable The varibale name that 
+     * @return \Widget\View
+     */
+    public function layout($name, $variable = 'content')
+    {
+        $this->layout = array(
+            'name' => $name,
+            'variable' => $variable
+        );
+        
+        return $this;
     }
 }
