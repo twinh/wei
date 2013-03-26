@@ -243,8 +243,6 @@ class EventManager extends AbstractWidget
     
     /**
      * Register the internal event
-     *
-     * @codeCoverageIgnore
      */
     protected function registerInternalEvent()
     {
@@ -283,7 +281,6 @@ class EventManager extends AbstractWidget
      * @param \Exception $exception
      * @throws \Exception When none of exception events have been prevented 
      * @internal
-     * @codeCoverageIgnore
      */
     public function handleException(\Exception $exception)
     {
