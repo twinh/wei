@@ -5,7 +5,7 @@
 
 ### 
 ```php
-bool %name% ( $input )
+bool isMobileCn( $input )
 ```
 
 ##### 参数
