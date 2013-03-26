@@ -75,4 +75,9 @@ class ViewTest extends TestCase
         
         $this->assertEquals($expected, $content);
     }
+    
+    public function testGetExtension()
+    {
+        $this->assertEquals('.php', $this->object->getExtension());
+    }
 }
