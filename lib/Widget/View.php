@@ -9,7 +9,6 @@
 namespace Widget;
 
 use Widget\View\AbstractView;
-use Widget\Exception\RuntimeException;
 
 /**
  * The view widget
@@ -103,6 +102,17 @@ class View extends AbstractView
 
         return $this;
     }
+    
+    /**
+     * Returns the variable value or null if not defined
+     * 
+     * @param string $name The name of variable
+     * @return mixed
+     */
+    public function get($name)
+    {
+        return isset($this->vars[$name]) ? $this->vars[$name] : null;
+    }
 
     /**
      * Get the template file by name
@@ -119,7 +129,7 @@ class View extends AbstractView
             }
         }
 
-        throw new RuntimeException(sprintf('Template "%s" not found in directories "%s"', $name, implode('", "', $this->dirs)));
+        throw new Exception\NotFoundException(sprintf('Template "%s" not found in directories "%s"', $name, implode('", "', $this->dirs)));
     }
     
     /**
