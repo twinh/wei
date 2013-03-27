@@ -161,7 +161,7 @@ return array(
     '%name% must have a length greater than %min%' => '%name%的长度必须大于等于%min%',
     '%name% must contain at least %min% item(s)' => '%name%至少需要包括%min%项',
     
-    // mobile
+    // mobileCn
     '%name% must be valid mobile number' => '%name%必须是13位长度的数字,以13,15或18开头',
         
     // null
@@ -175,7 +175,7 @@ return array(
     // oneOf
     '%name% must be passed by at least one rule' => '%name%至少需要满足以下任何一条规则',
 
-    // phone
+    // phoneCn
     '%name% must be valid phone number' => '%name%必须是有效的电话号码',
     '%name% must not be phone number' => '%name%不能是电话号码',
     
@@ -185,7 +185,7 @@ return array(
     
     // postcode
     '%name% must be six length of digit' => '%name%必须是6位长度的数字',
-    '%name% must not be postcode' => '%name%必须是6位长度的数字',
+    '%name% must not be postcode' => '%name%不能是邮政编码',
     
     // QQ
     '%name% must be valid QQ number' => '%name%必须是有效的QQ号码',
