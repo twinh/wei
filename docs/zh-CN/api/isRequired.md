@@ -5,7 +5,7 @@
 
 ### 
 ```php
-bool isRequired ( $input [, $required ] )
+bool %name% ( $input [, $required ] )
 ```
 
 ##### 参数
@@ -14,6 +14,13 @@ bool isRequired ( $input [, $required ] )
 
 
 用于组合验证,如果允许为空且数据为空,则不对数据进行剩余规则的校验
+
+##### 错误信息
+| **名称**              | **信息**                                                       | 
+|-----------------------|----------------------------------------------------------------|
+| `required`            | %name%不能为空                                                 |
+| `notString`           | %name%必须是字符串                                             |
+| `negative`            | %name%不合法                                                   |
 
 
 ##### 代码范例
