@@ -9,8 +9,6 @@
 namespace Widget;
 
 use Widget\Validator\ValidatorInterface;
-use Widget\Exception\InvalidArgumentException;
-use Widget\Exception\UnexpectedTypeException;
 
 /**
  * Validator
@@ -153,7 +151,7 @@ class Validator extends AbstractWidget
         $this->setOption($options);
 
         if (empty($this->rules)) {
-            throw new InvalidArgumentException('Validation rules should not be empty.');
+            throw new Exception\InvalidArgumentException('Validation rules should not be empty.');
         }
         
         // Initialize the validation result to be true
@@ -176,7 +174,7 @@ class Validator extends AbstractWidget
             } elseif ($rules instanceof ValidatorInterface) {
                 $rules = array($rules);
             } elseif (!is_array($rules)) {
-                throw new UnexpectedTypeException($rules, 'array, string or instance of ValidatorInterface');
+                throw new Exception\UnexpectedTypeException($rules, 'array, string or instance of ValidatorInterface');
             }
 
             // Make sure the "required" rule at first
@@ -493,7 +491,7 @@ class Validator extends AbstractWidget
     public function setData($data)
     {
         if (!is_array($data) && !is_object($data)) {
-            throw new UnexpectedTypeException($data, 'array or object');
+            throw new Exception\UnexpectedTypeException($data, 'array or object');
         }
 
         $this->data = $data;
