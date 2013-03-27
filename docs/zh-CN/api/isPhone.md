@@ -5,7 +5,7 @@
 
 ### 
 ```php
-bool %name% ( $input )
+bool isPhone ( $input )
 ```
 
 ##### 参数
