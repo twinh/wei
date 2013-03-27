@@ -19,10 +19,25 @@ class Type extends AbstractValidator
     
     protected $negativeMessage = '%name% must not be %typeName%';
     
+    /**
+     * The expected type of input
+     * 
+     * @var string
+     */
     protected $type;
 
+    /**
+     * The translated type name for display
+     * 
+     * @var string
+     */
     protected $typeName;
     
+    /**
+     * {@inheritdoc}
+     * 
+     * @param string $type The expected type of $input
+     */
     public function __invoke($input, $type = null)
     {
         $type && $this->storeOption('type', $type);
