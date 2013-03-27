@@ -81,7 +81,9 @@ class Smarty extends AbstractView
      */
     public function assign($name, $value = null)
     {
-        return $this->smarty->assign($name, $value);
+        $this->smarty->assign($name, $value);
+        
+        return $this;
     }
 
     /**

@@ -38,7 +38,7 @@ interface ViewInterface
      *
      * @param string $name  The name of the variable
      * @param mixed  $value The value of the variable
-     * @return ViewInterface|null
+     * @return ViewInterface
      */
     public function assign($name, $value = null);
 

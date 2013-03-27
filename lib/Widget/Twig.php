@@ -86,6 +86,8 @@ class Twig extends AbstractView
     public function assign($name, $value = null)
     {
         $this->twig->addGlobal($name, $value);
+        
+        return $this;
     }
 
     /**
