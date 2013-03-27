@@ -5,7 +5,7 @@
 
 ### 
 ```php
-bool %name% ( $input [, $pattern ] )
+bool isRegex ( $input [, $pattern ] )
 ```
 
 ##### 参数
