@@ -189,7 +189,7 @@ return array(
     
     // QQ
     '%name% must be valid QQ number' => '%name%必须是有效的QQ号码',
-    '%name% must not be QQ number' => '%name%不能是QQ号码',
+    '%name% must not be valid QQ number' => '%name%不能是QQ号码',
     
     // range
     '%name% must between %min% and %max%' => '%name%必须在%min%到%max%之间',
