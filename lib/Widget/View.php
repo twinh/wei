@@ -44,6 +44,13 @@ class View extends AbstractView
      * @var array|null
      */
     protected $layout;
+    
+    /**
+     * The current render view name
+     * 
+     * @var string
+     */
+    private $currentName;
 
     /**
      * Returns view widget
@@ -63,10 +70,13 @@ class View extends AbstractView
         // Set extra view variables
         $context = $context ? $context + $this->vars : $this->vars;
         
+        // Assign $name to $this->currentName to avoid conflict with view parameter
+        $this->currentName = $name;
+
         // Render view
         extract($context, EXTR_OVERWRITE);
         ob_start();
-        require $this->getFile($name);
+        require $this->getFile($this->currentName);
         $content = ob_get_clean();
         
         // Render layout
