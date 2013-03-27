@@ -11,7 +11,8 @@
     },
     "require-dev": {
         "monolog/monolog": "1.4.*",
-        "doctrine/orm": "2.*"
+        "doctrine/orm": "2.*",
+        "twig/twig": "1.*"
     },
     "authors": [
         {
