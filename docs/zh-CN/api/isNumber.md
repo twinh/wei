@@ -5,7 +5,7 @@
 
 ### 
 ```php
-bool isNumber ( $input )
+bool isNumber( $input )
 ```
 
 ##### 参数

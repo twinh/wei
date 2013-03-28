@@ -5,7 +5,7 @@
 
 ### 
 ```php
-bool isRequired ( $input [, $required ] )
+bool isRequired( $input [, $required ] )
 ```
 
 ##### 参数

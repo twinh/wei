@@ -5,7 +5,7 @@
 
 ### 
 ```php
-bool isRange ( $input [, $min [, $max ] ] )
+bool isRange( $input [, $min [, $max ] ] )
 ```
 
 ##### 参数

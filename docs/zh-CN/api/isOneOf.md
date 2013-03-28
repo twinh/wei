@@ -5,7 +5,7 @@
 
 ### 
 ```php
-bool isOneOf ( $input )
+bool isOneOf( $input )
 ```
 
 ##### 参数

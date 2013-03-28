@@ -5,7 +5,7 @@
 
 ### 
 ```php
-bool isPlateNumberCn ( $input )
+bool isPlateNumberCn( $input )
 ```
 
 ##### 参数

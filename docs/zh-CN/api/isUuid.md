@@ -5,7 +5,7 @@
 
 ### 
 ```php
-bool %name%( $input )
+bool isUuid( $input )
 ```
 
 ##### 参数

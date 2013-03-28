@@ -5,7 +5,7 @@
 
 ### 
 ```php
-bool %name% ( $input )
+bool isPostcode( $input )
 ```
 
 ##### 参数

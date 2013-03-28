@@ -12,7 +12,7 @@ bool inMethod()
 * **$method** `string` 指定的请求方式名称
 
 
-`inMethod`微件是`request`微件`inMethod`方法的别名.
+`inMethod`微件是`request`微件`%name%`方法的别名.
 
 
 ##### 代码范例
@@ -28,5 +28,5 @@ if ($widget->inMethod('HEAD')) {
 ```
 ##### 运行结果
 ```php
-'The request method is HEAD'
+'The request method is not HEAD'
 ```

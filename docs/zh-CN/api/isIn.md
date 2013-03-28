@@ -5,7 +5,7 @@
 
 ### 
 ```php
-bool isDir( $input [, $array [, $strict ] ] )
+bool isIn( $input [, $array [, $strict ] ] )
 ```
 
 ##### 参数

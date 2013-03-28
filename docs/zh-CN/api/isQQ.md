@@ -5,7 +5,7 @@
 
 ### 
 ```php
-bool isQQ ( $input )
+bool isQQ( $input )
 ```
 
 ##### 参数

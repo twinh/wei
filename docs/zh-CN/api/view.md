@@ -2,11 +2,11 @@
 [view()](http://twinh.github.com/widget/api/view)
 =================================================
 
-Get view object
+Returns view widget
 
-### Get view object
+### Returns view widget
 ```php
-\View view()
+\Widget\View view()
 ```
 
 ##### 参数

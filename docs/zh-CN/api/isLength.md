@@ -4,12 +4,12 @@
 检查数据的长度是否为指定的数值,或在指定的长度范围内
 
 ##### 目录
-* isLength ( $input [, $length ] )
+* isLength( $input [, $length ] )
 * isLength ( $input [, $min [, $max ] ] )
 
 ### 检查数据的长度是否为指定的数值
 ```php
-bool isLength ( $input [, $length ] )
+bool isLength( $input [, $length ] )
 ```
 
 ##### 参数

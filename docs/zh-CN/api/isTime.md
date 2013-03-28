@@ -5,7 +5,7 @@
 
 ### 
 ```php
-bool isTime ( $input [, $format ] )
+bool isTime( $input [, $format ] )
 ```
 
 ##### 参数

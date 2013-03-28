@@ -5,7 +5,7 @@
 
 ### 
 ```php
-bool isSomeOf ( $input [, $rules [, $atLeast ] ] )
+bool isSomeOf( $input [, $rules [, $atLeast ] ] )
 ```
 
 ##### 参数

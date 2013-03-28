@@ -12,7 +12,7 @@ bool inPost()
 *无*
 
 
-`inPost`微件是`request`微件`inPost`方法的别名.
+`inPost`微件是`request`微件`%name%`方法的别名.
 
 
 ##### 代码范例
@@ -28,5 +28,5 @@ if ($widget->inGet()) {
 ```
 ##### 运行结果
 ```php
-'The request method is not POST'
+'The request method is POST'
 ```

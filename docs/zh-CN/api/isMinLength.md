@@ -5,7 +5,7 @@
 
 ### 
 ```php
-bool isMinLength ( $input [, $min ] )
+bool isMinLength( $input [, $min ] )
 ```
 
 ##### 参数

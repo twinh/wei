@@ -5,7 +5,7 @@
 
 ### 
 ```php
-bool isMin ( $input [, $min ] )
+bool isMin( $input [, $min ] )
 ```
 
 ##### 参数

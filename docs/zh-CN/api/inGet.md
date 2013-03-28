@@ -28,5 +28,5 @@ if ($widget->inGet()) {
 ```
 ##### 运行结果
 ```php
-'The request method is not GET'
+'The request method is GET'
 ```

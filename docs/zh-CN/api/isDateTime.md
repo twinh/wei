@@ -5,7 +5,7 @@
 
 ### 
 ```php
-bool isDate( $input [, $format ] )
+bool isDateTime( $input [, $format ] )
 ```
 
 ##### 参数

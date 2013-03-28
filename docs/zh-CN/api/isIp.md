@@ -5,7 +5,7 @@
 
 ### 
 ```php
-bool isIp ( $input [, $options ] )
+bool isIp( $input [, $options ] )
 ```
 
 ##### 参数

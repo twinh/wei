@@ -26,5 +26,5 @@ echo $widget->uuid();
 ```
 ##### 运行结果
 ```php
-'a2bff272-f784-438b-95eb-1cfdb29d3e50'
+'5c8a4525-40e7-45fa-b301-24c060cbb0a0'
 ```
