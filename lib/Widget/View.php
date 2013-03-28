@@ -53,13 +53,23 @@ class View extends AbstractView
     private $currentName;
 
     /**
-     * Returns view widget
+     * Returns view widget or render a template
+     * 
+     * if NO parameter provied, the invoke method will return the viw widget. 
+     * otherwise, call the render method
      *
-     * @return \Widget\View
+     * @param string $name The name of template
+     * @param array $context The variables pass to template
+     * 
+     * @return \Widget\View|string
      */
-    public function __invoke()
+    public function __invoke($name = null, $context = array())
     {
-        return $this;
+        if (0 === func_num_args()) {
+            return $this;
+        } else {
+            return $this->render($name, $context);
+        }
     }
 
     /**

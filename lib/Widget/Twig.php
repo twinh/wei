@@ -71,13 +71,23 @@ class Twig extends AbstractView
     }
 
     /**
-     * Get Twig environment object
+     * Returns \Twig_Environment object or render a template
+     * 
+     * if NO parameter provied, the invoke method will return the 
+     * \Twig_Environment object. otherwise, call the render method
      *
-     * @return \Twig_Environment
+     * @param string $name The name of template
+     * @param array $context The variables pass to template
+     * 
+     * @return \Twig_Environment|string
      */
-    public function __invoke()
+    public function __invoke($name = null, $context = array())
     {
-        return $this->twig;
+        if (0 === func_num_args()) {
+            return $this->twig;
+        } else {
+            return $this->render($name, $context);
+        }
     }
 
     /**

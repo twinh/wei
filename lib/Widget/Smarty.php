@@ -65,15 +65,25 @@ class Smarty extends AbstractView
         // Adds default global template variable
         $this->smarty->assign('widget', $this->widget);
     }
-
+    
     /**
-     * Return the \Smarty object
+     * Returns \Smarty object or render a template
+     * 
+     * if NO parameter provied, the invoke method will return the \Smarty 
+     * object otherwise, call the render method
      *
-     * @return \Smarty
+     * @param string $name The name of template
+     * @param array $context The variables pass to template
+     * 
+     * @return \Smarty|string
      */
-    public function __invoke()
+    public function __invoke($name = null, $context = array())
     {
-        return $this->smarty;
+        if (0 === func_num_args()) {
+            return $this->smarty;
+        } else {
+            return $this->render($name, $context);
+        }
     }
 
     /**
