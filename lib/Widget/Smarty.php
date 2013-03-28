@@ -32,14 +32,13 @@ class Smarty extends AbstractView
     protected $extension = '.tpl';
 
     /**
-     * Options
+     * Options for \Smarty
      *
      * @var array
      */
     public $options = array(
-        // options for \Smarty
         'compile_dir'   => null,
-        'templateDir'  => null,
+        'template_dir'  => null,
     );
 
     /**
@@ -114,35 +113,5 @@ class Smarty extends AbstractView
         $context && $this->smarty->assign($context);
 
         return $this->smarty->fetch($name);
-    }
-
-    /**
-     * Set template directory for smarty object
-     *
-     * @param  string|array $dir
-     * @return \Smarty
-     */
-    public function setTemplateDir($dir)
-    {
-        $this->smarty->setTemplateDir($dir);
-
-        $this->options['templateDir'] = $dir;
-
-        return $this;
-    }
-
-    /**
-     * Set compole directory for smarty object
-     *
-     * @param  string       $dir
-     * @return \Smarty
-     */
-    public function setCompileDir($dir)
-    {
-        $this->smarty->setCompileDir($dir);
-
-        $this->options['compileDir'] = $dir;
-
-        return $this;
     }
 }
