@@ -5,7 +5,7 @@
 
 ### 
 ```php
-bool %name%( $input [, $options] )
+bool isUrl( $input [, $options] )
 ```
 
 ##### 参数
