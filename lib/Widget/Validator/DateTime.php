@@ -18,7 +18,14 @@ use DateTime as Dt;
 class DateTime extends AbstractValidator
 {
     /**
-     * The error message for "format" property
+     * Message occurred when thrown "Failed to parse time string" exception
+     * 
+     * @var string
+     */
+    protected $invalidMessage = '%name% must be a valid dateime';
+    
+    /**
+     * Message occurred when datetime format not match "format" property
      * 
      * @var string 
      */
@@ -40,7 +47,13 @@ class DateTime extends AbstractValidator
     
     protected $negativeMessage = '%name% must not be a valid datetime';
     
-    protected $format = 'Y-m-d H:i:s';
+    /**
+     * The Datetime format string
+     * 
+     * @link http://www.php.net/manual/en/datetime.createfromformat.php
+     * @var string
+     */
+    protected $format = null;
     
     protected $before;
     
@@ -65,23 +78,38 @@ class DateTime extends AbstractValidator
             return false;
         }
         
-        $date = Dt::createFromFormat($this->format, $input);
+        try {
+            if ($this->format) {
+                $date = Dt::createFromFormat($this->format, $input);
+            } else {
+                $date = new Dt($input);
+            }
+        } catch (\Exception $e) {
+            $date = false;
+        }
         
-        if (!$date || $input != $date->format($this->format)) {
+        // Case 1: cannot parse time by specified format($this->foramt)
+        // Case 2: thrown exception "Failed to parse time string..."
+        if (false === $date) {
+            $this->addError('invalid');
+            return false;
+        }
+        
+        if ($this->format && $input != $date->format($this->format)) {
             $this->example = date($this->format);
             $this->addError('format');
             return false;
         }
-        
+                
         if ($this->before) {
-            $before = Dt::createFromFormat($this->format, $this->before);
+            $before = new Dt($this->before);
             if ($before < $date) {
                 $this->addError('tooLate');
             }
         }
         
         if ($this->after) {
-            $after = Dt::createFromFormat($this->format, $this->after);
+            $after = new Dt($this->after);
             if ($after > $date) {
                 $this->addError('tooEarly');
             }
