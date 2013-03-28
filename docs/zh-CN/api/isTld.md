@@ -5,7 +5,7 @@
 
 ### 
 ```php
-bool %name%( $input )
+bool isTld( $input )
 ```
 
 ##### 参数
