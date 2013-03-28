@@ -5,7 +5,7 @@
 
 ### 
 ```php
-bool isUrl( $input [, $options] )
+bool %name%( $input [, $options] )
 ```
 
 ##### 参数
@@ -13,6 +13,15 @@ bool isUrl( $input [, $options] )
 * **$options** `array` 选项数组,留空表示只检查数据是否为URL地址
 * 	**path** `bool` 是否要求URL带有路径,如http://www.example.com/path/part
 * 	**query** `bool` 是否要求URL带有查询参数,如http://www.example/?query=string
+
+
+##### 错误信息
+| **名称**              | **信息**                                                       | 
+|-----------------------|----------------------------------------------------------------|
+| `invalid`             | %name%必须是有效的URL地址                                      |
+| `negative`            | %name%不能是URL地址                                            |
+| `notString`           | %name%必须是字符串                                             |
+
 
 ##### 代码范例
 检查"http://www.example.com"是否为有效的URL地址
