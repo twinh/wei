@@ -44,12 +44,12 @@ class Website extends AbstractWidget
     protected $charset = 'utf-8';
     
     /**
-     * Returns the value of property
+     * Returns the value of website configuration
      * 
-     * @param string $name The name of property
+     * @param string $name The name of configuration(property)
      * @return mixed
      */
-    public function get($name)
+    public function __invoke($name)
     {
         return $this->getOption($name);
     }
