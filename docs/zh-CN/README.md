@@ -19,10 +19,10 @@ API 参考目录
 * [Bicache](api/bicache.md)
 
 #### 事件
-* [EventManager](api/eventManager.md) 事件管理器
-* [Off](api/off.md) 移除指定类型的事件触发器
-* [On](api/on.md) 添加指定类型的事件触发器
-* [Trigger](api/trigger.md) 触发指定类型的事件
+* [EventManager](api/eventManager.md) - 事件管理器
+* [Off](api/off.md) - 移除指定类型的事件触发器
+* [On](api/on.md) - 添加指定类型的事件触发器
+* [Trigger](api/trigger.md) - 触发指定类型的事件
 
 #### HTTP请求
 
