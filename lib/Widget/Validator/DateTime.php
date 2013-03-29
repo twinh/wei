@@ -22,7 +22,7 @@ class DateTime extends AbstractValidator
      * 
      * @var string
      */
-    protected $invalidMessage = '%name% must be a valid dateime';
+    protected $invalidMessage = '%name% must be a valid datetime';
     
     /**
      * Message occurred when datetime format not match "format" property
