@@ -10,7 +10,7 @@ bool isType( $input [, $type ] )
 
 ##### 参数
 * **$input** `mixed` 待验证的数据
-$type string 指定的数据类型
+* **$type** `string` 指定的数据类型
 
 
 如果`$type`的值不在下表中,将检查数据是否为`$type`的实例化对象($input instanceof $type)
