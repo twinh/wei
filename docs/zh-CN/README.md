@@ -6,7 +6,15 @@
 
 ### 参考目录
 
-#### 存储
+#### 缓存
+* [Apc](api/apc.md)
+* [DbCache](api/dbCache.md)
+* [File](api/file.md)
+* [Memcache](api/memcache.md)
+* [Memcached](api/memcached.md)
+* [Redis](api/redis.md)
+* [Cache](api/cache.md) 
+* [Bicache](api/bicache.md)
 
 #### 事件
 * [EventManager](api/eventManager.md)
