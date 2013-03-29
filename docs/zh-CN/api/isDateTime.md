@@ -27,11 +27,11 @@ bool isDateTime( $input [, $format ] )
 
 
 ##### 代码范例
-检查"2013-01-01 10:00:00"是否为合法的日期时间
+检查"2013-01-01 10:00"是否为合法的日期时间
 ```php
 <?php
 
-if ($widget->isDate('2013-01-01 10:00:00')) {
+if ($widget->isDateTime('2013-01-01 10:00')) {
     echo 'Yes';
 } else {
     echo 'No';
@@ -39,5 +39,20 @@ if ($widget->isDate('2013-01-01 10:00:00')) {
 ```
 ##### 运行结果
 ```php
-'No'
+'Yes'
+```
+##### 代码范例
+检查"2013-01-01"是否为符合格式"Ymd"的日期时间
+```php
+<?php
+
+if ($widget->isDateTime('20130101', 'Ymd')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
+##### 运行结果
+```php
+'Yes'
 ```
