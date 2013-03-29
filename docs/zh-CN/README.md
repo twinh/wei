@@ -108,4 +108,11 @@ API 参考目录
 * [isCallback](api/isCallback.md) - 检查数据是否通过指定回调方法验证
 * [isDivisibleBy](api/isDivisibleby.md) - 检查数据是否能被指定的除数整除
 
+#### 视图
+* [escape](api/escape.md) - 转义字符串中的特殊字符,以便安全的输出到网页中,支持HTML,JS,CSS,HTML属性和URL的转义
+* [smarty](api/smarty.md) - 渲染smarty模板
+* [twig](api/twig.md) - 渲染Twig模板
+* [view] - 渲染指定名称的模板
+
 #### 工具
+* [attr](api/attr.md) - 获取数组或对象中指定键名的值
