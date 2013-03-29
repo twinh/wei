@@ -9,27 +9,27 @@ API 参考目录
 ------------
 
 #### 缓存
-* [Apc](api/apc.md)
-* [DbCache](api/dbCache.md)
-* [File](api/file.md)
-* [Memcache](api/memcache.md)
-* [Memcached](api/memcached.md)
-* [Redis](api/redis.md)
-* [Cache](api/cache.md) 
-* [Bicache](api/bicache.md)
+* [apc](api/apc.md)
+* [dbCache](api/dbCache.md)
+* [file](api/file.md)
+* [memcache](api/memcache.md)
+* [memcached](api/memcached.md)
+* [redis](api/redis.md)
+* [cache](api/cache.md) 
+* [bicache](api/bicache.md)
 
 #### 事件
-* [EventManager](api/eventManager.md) - 事件管理器
-* [Off](api/off.md) - 移除指定类型的事件触发器
-* [On](api/on.md) - 添加指定类型的事件触发器
-* [Trigger](api/trigger.md) - 触发指定类型的事件
+* [eventManager](api/eventManager.md) - 事件管理器
+* [off](api/off.md) - 移除指定类型的事件触发器
+* [on](api/on.md) - 添加指定类型的事件触发器
+* [trigger](api/trigger.md) - 触发指定类型的事件
 
 #### HTTP请求
-* [Cookie](api/cookie.md) - 获取一项Cookie参数($_COOKIE)的值
-* [Post](api/post.md)  - 获取一项HTTP POST请求参数($_POST)的值
-* [Query](api/query.md) - 获取一项HTTP GET查询参数($_GET)的值
-* [Request](api/request.md) - 获取一项HTTP请求参数($_REQUEST)的值
-* [Server](api/server.md) - 获取一项服务器和执行环境信息($_SERVER)的值
+* [cookie](api/cookie.md) - 获取一项Cookie参数($_COOKIE)的值
+* [post](api/post.md)  - 获取一项HTTP POST请求参数($_POST)的值
+* [query](api/query.md) - 获取一项HTTP GET查询参数($_GET)的值
+* [request](api/request.md) - 获取一项HTTP请求参数($_REQUEST)的值
+* [server](api/server.md) - 获取一项服务器和执行环境信息($_SERVER)的值
 
 #### HTTP响应
 
