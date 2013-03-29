@@ -168,4 +168,17 @@ class View extends AbstractView
         
         return $this;
     }
+    
+    /**
+     * Set base directory for views
+     * 
+     * @param string|array $dirs
+     * @return \Widget\View
+     */
+    public function setDirs($dirs)
+    {
+        $this->dirs = (array)$dirs;
+        
+        return $this;
+    }
 }
