@@ -25,9 +25,11 @@ API 参考目录
 * [Trigger](api/trigger.md) - 触发指定类型的事件
 
 #### HTTP请求
+* [Cookie](api/cookie.md) - 获取一项Cookie参数($_COOKIE)的值
 * [Post](api/post.md)  - 获取一项HTTP POST请求参数($_POST)的值
 * [Query](api/query.md) - 获取一项HTTP GET查询参数($_GET)的值
 * [Request](api/request.md) - 获取一项HTTP请求参数($_REQUEST)的值
+* [Server](api/server.md) - 获取一项服务器和执行环境信息($_SERVER)的值
 
 #### HTTP响应
 
