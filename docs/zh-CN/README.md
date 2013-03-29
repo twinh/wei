@@ -1,10 +1,12 @@
 欢迎使用Widget文档
 ==================
 
-### Widget微框架简介
+Widget微框架简介
+---------------
 * [概览(README.md)](../../README.md)
 
-### 参考目录
+API 参考目录
+------------
 
 #### 缓存
 * [Apc](api/apc.md)
@@ -94,7 +96,7 @@
 * [isSomeOf](api/isSomeof.md) - 检查数据是否通过指定数量规则的验证
 
 第三方集成
-* [isEntityExists](api/isEntityexists.md) - 检查Doctrine ORM实体是否存在
+* [isEntityExists](api/isEntityExists.md) - 检查Doctrine ORM实体是否存在
 
 其他
 * [isAll](api/isAll.md) - 检查集合里的每一项是否符合指定的规则
