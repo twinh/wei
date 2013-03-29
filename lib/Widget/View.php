@@ -59,32 +59,32 @@ class View extends AbstractView
      * otherwise, call the render method
      *
      * @param string $name The name of template
-     * @param array $context The variables pass to template
+     * @param array $vars The variables pass to template
      * 
      * @return \Widget\View|string
      */
-    public function __invoke($name = null, $context = array())
+    public function __invoke($name = null, $vars = array())
     {
         if (0 === func_num_args()) {
             return $this;
         } else {
-            return $this->render($name, $context);
+            return $this->render($name, $vars);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function render($name, $context = array())
+    public function render($name, $vars = array())
     {
         // Set extra view variables
-        $context = $context ? $context + $this->vars : $this->vars;
+        $vars = $vars ? $vars + $this->vars : $this->vars;
         
         // Assign $name to $this->currentName to avoid conflict with view parameter
         $this->currentName = $name;
 
         // Render view
-        extract($context, EXTR_OVERWRITE);
+        extract($vars, EXTR_OVERWRITE);
         ob_start();
         require $this->getFile($this->currentName);
         $content = ob_get_clean();
@@ -95,7 +95,7 @@ class View extends AbstractView
             $this->layout = null;
             $content = $this->render($layout['name'], array(
                 $layout['variable'] => $content
-            ) + $context);
+            ) + $vars);
         }
         
         return $content;
@@ -104,9 +104,9 @@ class View extends AbstractView
     /**
      * {@inheritdoc}
      */
-    public function display($name, $context = array())
+    public function display($name, $vars = array())
     {
-        echo $this->render($name, $context);
+        echo $this->render($name, $vars);
     }
 
     /**

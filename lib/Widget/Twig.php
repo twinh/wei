@@ -77,16 +77,16 @@ class Twig extends AbstractView
      * \Twig_Environment object. otherwise, call the render method
      *
      * @param string $name The name of template
-     * @param array $context The variables pass to template
+     * @param array $vars The variables pass to template
      * 
      * @return \Twig_Environment|string
      */
-    public function __invoke($name = null, $context = array())
+    public function __invoke($name = null, $vars = array())
     {
         if (0 === func_num_args()) {
             return $this->twig;
         } else {
-            return $this->render($name, $context);
+            return $this->render($name, $vars);
         }
     }
 
@@ -103,16 +103,16 @@ class Twig extends AbstractView
     /**
      * {@inheritdoc}
      */
-    public function display($name, $context = array())
+    public function display($name, $vars = array())
     {
-        return $this->twig->display($name, $context);
+        return $this->twig->display($name, $vars);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function render($name, $context = array())
+    public function render($name, $vars = array())
     {
-        return $this->twig->render($name, $context);
+        return $this->twig->render($name, $vars);
     }
 }

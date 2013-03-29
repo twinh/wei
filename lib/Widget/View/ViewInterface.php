@@ -18,20 +18,20 @@ interface ViewInterface
     /**
      * Render a template
      *
-     * @param string $name    The name of template
-     * @param array  $context The variables pass to template
+     * @param string $name  The name of template
+     * @param array  $vars  The variables pass to template
      * @return string|null
      */
-    public function render($name, $context = array());
+    public function render($name, $vars = array());
 
     /**
      * Output a rendered template
      *
-     * @param string $name    The name of template
-     * @param array  $context The variables pass to template
+     * @param string $name  The name of template
+     * @param array  $vars  The variables pass to template
      * @return void
      */
-    public function display($name, $context = array());
+    public function display($name, $vars = array());
 
     /**
      * Assign variables to template

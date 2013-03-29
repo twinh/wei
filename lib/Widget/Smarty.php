@@ -72,16 +72,16 @@ class Smarty extends AbstractView
      * object otherwise, call the render method
      *
      * @param string $name The name of template
-     * @param array $context The variables pass to template
+     * @param array $vars The variables pass to template
      * 
      * @return \Smarty|string
      */
-    public function __invoke($name = null, $context = array())
+    public function __invoke($name = null, $vars = array())
     {
         if (0 === func_num_args()) {
             return $this->smarty;
         } else {
-            return $this->render($name, $context);
+            return $this->render($name, $vars);
         }
     }
 
@@ -98,9 +98,9 @@ class Smarty extends AbstractView
     /**
      * {@inheritdoc}
      */
-    public function display($name, $context = array())
+    public function display($name, $vars = array())
     {
-         $context && $this->smarty->assign($context);
+         $vars && $this->smarty->assign($vars);
 
          return $this->smarty->display($name);
     }
@@ -108,9 +108,9 @@ class Smarty extends AbstractView
     /**
      * {@inheritdoc}
      */
-    public function render($name, $context = array())
+    public function render($name, $vars = array())
     {
-        $context && $this->smarty->assign($context);
+        $vars && $this->smarty->assign($vars);
 
         return $this->smarty->fetch($name);
     }
