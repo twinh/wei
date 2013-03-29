@@ -1,7 +1,7 @@
 [trigger()](http://twinh.github.com/widget/api/trigger)
 =======================================================
 
-触发一个事件
+触发指定类型的事件
 
 ### 
 ```php
@@ -31,5 +31,5 @@ $widget->trigger('example');
 ```
 ##### 运行结果
 ```php
-'exampleexample'
+'example'
 ```
