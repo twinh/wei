@@ -153,6 +153,26 @@ class Request extends Parameter
     }
     
     /**
+     * Return request path info
+     * 
+     * @return string
+     */
+    public function getPathInfo()
+    {
+        $uri = $this->server['REQUEST_URI'] // Apache2 & Nginx
+            ?: $this->server['HTTP_X_ORIGINAL_URL'] // IIS7 + Rewrite Module
+            ?: $this->server['HTTP_X_REWRITE_URL'] // IIS6 + ISAPI Rewite
+            ?: '';
+
+        $uri = '/' . substr($uri, strlen($this->getBaseUri()));
+        
+        if (false !== $pos = strpos($uri, '?')) {
+            $uri = substr($uri, 0, $pos);
+        }
+        return $uri;
+    }
+    
+    /**
      * Returns the client IP address
      *
      * @param  string $default The default ip address
