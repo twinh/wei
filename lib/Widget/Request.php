@@ -200,6 +200,18 @@ class Request extends Parameter
     }
     
     /**
+     * Set the HTTP request method
+     * 
+     * @param string $method The value of method
+     * @return \Widget\Request
+     */
+    public function setMethod($method)
+    {
+        $this->method = $method;
+        return $this;
+    }
+    
+    /**
      * Check if the current request method is the specified string
      * 
      * @param string $method The method name to be compared
