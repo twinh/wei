@@ -18,20 +18,6 @@ namespace Widget;
 class Router extends AbstractWidget
 {
     /**
-     * Whether enable the router or not
-     *
-     * @var bool
-     */
-    protected $enable = true;
-
-    /**
-     * The base uri of the request uri
-     *
-     * @var string
-     */
-    protected $baseUri;
-
-    /**
      * Routes configurations
      *
      * @var array
@@ -76,83 +62,15 @@ class Router extends AbstractWidget
         'regex'             => null,
     );
 
-    /**
-     * The match results of the request uri
-     *
-     * @var array
-     */
-    protected $defaultParams;
-
-    public function __construct(array $options = array())
-    {
-        parent::__construct($options + array(
-            'baseUri' => $this->baseUri
-        ));
-    }
+    protected $parameters = array();
 
     /**
-     * Get the router object
+     * Returns the router object
      *
-     * @return Router
+     * @return \Widget\Router
      */
     public function __invoke()
     {
-        return $this;
-    }
-
-    /**
-     * Match the default parameters in the request uri
-     *
-     * @return array
-     */
-    public function matchRequestUri()
-    {
-        if (!$this->enable) {
-            return $_GET;
-        }
-
-        if ($this->defaultParams) {
-            return $this->defaultParams;
-        }
-
-        // Apache2 & Nginx
-        if (isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI']) {
-            $uri = $_SERVER['REQUEST_URI'];
-        // IIS7 + Rewrite Module
-        } elseif (isset($_SERVER['HTTP_X_ORIGINAL_URL']) && $_SERVER['HTTP_X_ORIGINAL_URL']) {
-            $uri = $_SERVER['HTTP_X_ORIGINAL_URL'];
-        // IIS6 + ISAPI Rewite
-        } elseif (isset($_SERVER['HTTP_X_REWRITE_URL']) && $_SERVER['HTTP_X_REWRITE_URL']) {
-            $uri = $_SERVER['HTTP_X_REWRITE_URL'];
-        } else {
-            $uri = '';
-        }
-
-        $uri = '/' . substr($uri, strlen($this->baseUri));
-        
-        $params = $this->match($uri, $_SERVER['REQUEST_METHOD']);
-
-        return $this->defaultParams = $params;
-    }
-
-    /**
-     * Set base uri option
-     *
-     * @param  string      $uri
-     * @return Router
-     */
-    public function setBaseUri($uri)
-    {
-        if (!$uri) {
-            // strtr for windows directory separator
-            $uri = strtr(dirname($_SERVER['SCRIPT_NAME']), '\\', '/');
-            $this->baseUri = '/' == $uri ? $uri : $uri . '/';
-        } elseif ('/' != $uri[strlen($uri) - 1]) {
-            $this->baseUri = $uri . '/';
-        } else {
-            $this->baseUri = $uri;
-        }
-
         return $this;
     }
 
@@ -255,19 +173,12 @@ class Router extends AbstractWidget
      */
     public function match($uri, $method = null, $name = null)
     {
-        $components = parse_url($uri);
-        $uri = $components['path'];
-        $queries = array();
-        if (isset($components['query'])) {
-            parse_str($components['query'], $queries);
-        }
-        
         if ($name && isset($this->routes[$name])) {
             return $this->_match($uri, $method, $name);
         } else {
             foreach ($this->routes as $name => &$route) {
                 if (false !== ($params = $this->_match($uri, $method, $name))) {
-                    return $params + $queries;
+                    return $params;
                 }
             }
         }
@@ -298,10 +209,6 @@ class Router extends AbstractWidget
             return false;
         }
 
-        // get the query string and parse it to array
-        $query = substr($uri, strlen($matches[0]));
-        $query = $query ? $this->_parseQuery($query) : array();
-
         // get params in the uri
         $params = array();
         foreach ($matches as $name => $param) {
@@ -311,22 +218,8 @@ class Router extends AbstractWidget
             $params[$name] = $param;
         }
 
-        // query params > uri params > defaults params
-        return $query + $params + $route['defaults'];
-    }
-
-    /**
-     * Parse the query string to array
-     *
-     * @param  string $query the query string to parse
-     * @return array
-     */
-    protected function _parseQuery($query)
-    {
-        $params = array();
-        parse_str(ltrim($query, '?/'), $params);
-
-        return $params;
+        // uri params > defaults params
+        return $params + $route['defaults'];
     }
 
     /**
@@ -446,20 +339,16 @@ class Router extends AbstractWidget
      */
     public function uri(array $params = array(), $name = null)
     {
-        if ($this->enable) {
-            if ($name && isset($this->routes[$name])) {
-                return $this->baseUri . $this->_uri($params, $name);
-            } else {
-                foreach ($this->routes as $name => $route) {
-                    if (false !== ($uri = $this->_uri($params, $name))) {
-                        return $this->baseUri . $uri;
-                    }
+        if ($name && isset($this->routes[$name])) {
+            return $this->_uri($params, $name);
+        } else {
+            foreach ($this->routes as $name => $route) {
+                if (false !== ($uri = $this->_uri($params, $name))) {
+                    return $uri;
                 }
             }
-
-            return $this->baseUri . $this->_buildQuery($params);
-        } else {
-            return $this->_buildQuery($params);
         }
+
+        return $this->_buildQuery($params);
     }
 }
