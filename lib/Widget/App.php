@@ -20,10 +20,10 @@ use Widget\Exception\UnexpectedTypeException;
  * @method \Widget\EventManager trigger(string $eventName) Trigger a event
  * @method mixed config(string $name) Get a config
  * @method \Widget\Response response(string $content) Send headers and output content
- * @method string|array request(string $name, mixed $default = null) Get a request parameter
  * @property callable $404 The 404 event handler
  * @property \Widget\Viewable $view The view widget, instance of \Widget\Viewable interface
  * @property \Widget\Logger $logger The logger widget
+ * @property \Widget\Router $router The router widget
  */
 class App extends AbstractWidget
 {
@@ -201,7 +201,7 @@ class App extends AbstractWidget
     public function getModule()
     {
         if (!$this->module) {
-            $this->module = ucfirst((string)$this->request('module', $this->defaults['module']));
+            $this->module = ucfirst((string)$this->request->get('module', $this->defaults['module']));
         }
 
         return $this->module;
@@ -239,7 +239,7 @@ class App extends AbstractWidget
     public function getController()
     {
         if (!$this->controller) {
-            $this->controller = ucfirst((string)$this->request('controller', $this->defaults['controller']));
+            $this->controller = ucfirst((string)$this->request->get('controller', $this->defaults['controller']));
         }
 
         return $this->controller;
@@ -266,7 +266,7 @@ class App extends AbstractWidget
     public function getAction()
     {
         if (!$this->action) {
-            $this->action = (string)$this->request('action', $this->defaults['action']);
+            $this->action = (string)$this->request->get('action', $this->defaults['action']);
         }
 
         return $this->action;
@@ -333,5 +333,92 @@ class App extends AbstractWidget
     public function getDefaultTemplate()
     {
         return strtolower($this->controller . '/' . $this->action) . $this->view->getExtension();
+    }
+    
+    /**
+     * Add a GET route
+     * 
+     * @param string $pattern
+     * @param callback $fn
+     */
+    public function get($pattern, $fn)
+    {
+        return $this->request($pattern, 'GET', $fn);
+    }
+    
+    /**
+     * Add a POST route
+     * 
+     * @param string $pattern
+     * @param callback $fn
+     */
+    public function post($pattern, $fn)
+    {
+        return $this->request($pattern, 'POST', $fn);
+    }
+    
+    /**
+     * Add a DELETE route
+     * 
+     * @param string $pattern
+     * @param callback $fn
+     */
+    public function delete($pattern, $fn)
+    {
+        return $this->request($pattern, 'DELETE', $fn);
+    }
+    
+    /**
+     * Add a PUT route
+     * 
+     * @param string $pattern
+     * @param callback $fn
+     */
+    public function put($pattern, $fn)
+    {
+        return $this->request($pattern, 'PUT', $fn);
+    }
+    
+    /**
+     * Add a route allow any request methods
+     * 
+     * @param string $pattern
+     * @param callback $fn
+     */
+    public function request($pattern, $method, $fn = null)
+    {
+        $argc = func_num_args();
+        if (2 == $argc) {
+            $fn = $method;
+            $method = null;
+        }
+        
+        $this->router->set(array(
+            'uri' => $pattern,
+            'method' => $method,
+            'callback' => $fn
+        ));
+    }
+    
+    /*
+     * Run the application
+     */
+    public function run()
+    {
+        $request = $this->request;
+        
+        if (false !== ($parameters = $this->router->match($request->getPathInfo(), $request->getMethod()))) {
+            // Merge parameters to query widget
+            $this->query->set($parameters);
+            
+            $route = $this->router->get($parameters['_route']);
+            
+            array_unshift($parameters, $this->widget);
+            $result = call_user_func_array($route['callback'], $parameters);
+
+            echo $result;
+        } else {
+            throw new Exception\NotFoundException('The page you requested was not found');
+        }
     }
 }
