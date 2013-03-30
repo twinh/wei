@@ -14,7 +14,6 @@ namespace Widget;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @link        The code is base on the awesome framework - Kohana
  *              http://kohanaframework.org/3.0/guide/api/Kohana_Route
- * @todo        uri start with slash ?
  */
 class Router extends AbstractWidget
 {
@@ -44,7 +43,6 @@ class Router extends AbstractWidget
             'rules'             => array(),
             'method'            => null,
             'regex'             => null,
-            'slashSeparator'    => false,
             'defaults' => array(
                 'module'        => 'app',
                 'controller'    => 'index',
@@ -65,10 +63,7 @@ class Router extends AbstractWidget
      *      -- defaults         array   the defaults params of the route
      *
      *      -- method           regex   the request method
-     *
-     *      -- slashSeparator   bool    use slash(/) or the default url separator(?&=) to match and
-     *                                  generate the uri
-     *
+     * 
      *      -- regex            string  the regex complied from the uri, just leave it blank when
      *                                  set a new route
      */
@@ -78,7 +73,6 @@ class Router extends AbstractWidget
         'rules'             => array(),
         'defaults'          => array(),
         'method'            => null,
-        'slashSeparator'    => false,
         'regex'             => null,
     );
 
@@ -134,8 +128,8 @@ class Router extends AbstractWidget
             $uri = '';
         }
 
-        $uri = substr($uri, strlen($this->baseUri));
-
+        $uri = '/' . substr($uri, strlen($this->baseUri));
+        
         $params = $this->match($uri, $_SERVER['REQUEST_METHOD']);
 
         return $this->defaultParams = $params;
@@ -246,7 +240,7 @@ class Router extends AbstractWidget
             $regex = str_replace($search, $replace, $regex);
         }
 
-        $route['regex'] = '#^' . $regex . '#uD';
+        $route['regex'] = '#^' . $regex . '$#uD';
 
         return $route;
     }
@@ -261,12 +255,19 @@ class Router extends AbstractWidget
      */
     public function match($uri, $method = null, $name = null)
     {
+        $components = parse_url($uri);
+        $uri = $components['path'];
+        $queries = array();
+        if (isset($components['query'])) {
+            parse_str($components['query'], $queries);
+        }
+        
         if ($name && isset($this->routes[$name])) {
             return $this->_match($uri, $method, $name);
         } else {
             foreach ($this->routes as $name => &$route) {
                 if (false !== ($params = $this->_match($uri, $method, $name))) {
-                    return $params;
+                    return $params + $queries;
                 }
             }
         }
@@ -299,7 +300,7 @@ class Router extends AbstractWidget
 
         // get the query string and parse it to array
         $query = substr($uri, strlen($matches[0]));
-        $query = $query ? $this->_parseQuery($query, $route['slashSeparator']) : array();
+        $query = $query ? $this->_parseQuery($query) : array();
 
         // get params in the uri
         $params = array();
@@ -318,25 +319,12 @@ class Router extends AbstractWidget
      * Parse the query string to array
      *
      * @param  string $query the query string to parse
-     * @param  bool   $slash whether combined by slash or normal(&,=) separators
      * @return array
      */
-    protected function _parseQuery($query, $slash = false)
+    protected function _parseQuery($query)
     {
         $params = array();
-
-        if (!$slash) {
-            parse_str(ltrim($query, '?/'), $params);
-        } else {
-            $query = explode('/', ltrim($query, '/'));
-            foreach ($query as $num => $param) {
-                if ($num % 2) {
-                    $params[$query[$num - 1]] = $param;
-                } else {
-                    $params[$param] = null;
-                }
-            }
-        }
+        parse_str(ltrim($query, '?/'), $params);
 
         return $params;
     }
@@ -345,24 +333,13 @@ class Router extends AbstractWidget
      * Build params to query string
      *
      * @param array $params the array params to combine
-     * @param bool  $slash  whether combined by slash or normal(&,=) separators
      */
-    protected function _buildQuery($params, $slash = false)
+    protected function _buildQuery($params)
     {
         if (!$params) {
             return '';
         }
-
-        if (!$slash) {
-            return '?' . http_build_query($params);
-        } else {
-            $query = '';
-            foreach ($params as $key => $value) {
-                $query .= '/' . $key . '/' . $value;
-            }
-
-            return $query;
-        }
+        return '?' . http_build_query($params);
     }
 
     /**
@@ -380,7 +357,7 @@ class Router extends AbstractWidget
             // check if $params contains all of the route default params
             $intersect = array_intersect_assoc($params, $route['defaults']);
             if ($route['defaults'] == $intersect) {
-                return $uri . $this->_buildQuery(array_diff_assoc($params, $route['defaults']), $route['slashSeparator']);
+                return $uri . $this->_buildQuery(array_diff_assoc($params, $route['defaults']));
             }
 
             return false;
@@ -456,7 +433,7 @@ class Router extends AbstractWidget
                 return false;
             }
 
-            return $uri . $this->_buildQuery(array_diff_assoc($params, $route['defaults']), $route['slashSeparator']);
+            return $uri . $this->_buildQuery(array_diff_assoc($params, $route['defaults']));
         }
     }
 
