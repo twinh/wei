@@ -79,7 +79,7 @@ class App extends AbstractWidget
      * Startup application
      *
      * @param  array     $options
-     * @return App|null
+     * @return \Widget\App|null
      */
     public function __invoke(array $options = array())
     {
@@ -98,7 +98,7 @@ class App extends AbstractWidget
      * @param  string    $module     The name of module
      * @param  string    $controller The name of controller
      * @param  string    $action     The name of action
-     * @return App|null
+     * @return \Widget\App|null
      * @throws Widget\Exception\NotFoundException When controller or action not found
      */
     public function dispatch($module, $controller, $action = 'index')
@@ -169,7 +169,7 @@ class App extends AbstractWidget
      * Handle the response variable returned by controller action
      *
      * @param  mixed                     $response
-     * @return Response|boolean
+     * @return \Widget\Response|boolean
      * @throws Widget\Exception\UnexpectedTypeException
      */
     public function handleResponse($response)
@@ -211,7 +211,7 @@ class App extends AbstractWidget
      * Set the name of module
      *
      * @param  string    $module The name of module
-     * @return App
+     * @return \Widget\App
      */
     public function setModule($module)
     {
@@ -249,7 +249,7 @@ class App extends AbstractWidget
      * Set the name of controller
      *
      * @param  string    $controller The name of controller
-     * @return App
+     * @return \Widget\App
      */
     public function setController($controller)
     {
@@ -417,7 +417,7 @@ class App extends AbstractWidget
             array_unshift($parameters, $this->widget);
             $result = call_user_func_array($route['callback'], $parameters);
 
-            echo $result;
+            $this->handleResponse($result);
         } else {
             throw new Exception\NotFoundException('The page you requested was not found');
         }
