@@ -408,10 +408,11 @@ class App extends AbstractWidget
         $request = $this->request;
         
         if (false !== ($parameters = $this->router->match($request->getPathInfo(), $request->getMethod()))) {
+            $route = $this->router->get($parameters['_route']);
+            unset($parameters['_route']);
+            
             // Merge parameters to query widget
             $this->query->set($parameters);
-            
-            $route = $this->router->get($parameters['_route']);
             
             array_unshift($parameters, $this->widget);
             $result = call_user_func_array($route['callback'], $parameters);
