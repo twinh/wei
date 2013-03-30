@@ -66,6 +66,13 @@ class Request extends Parameter
     protected $fromGlobal = true;
     
     /**
+     * The base URI
+     * 
+     * @var string
+     */
+    protected $baseUri;
+    
+    /**
      * Constructor
      *
      * @param array $options
