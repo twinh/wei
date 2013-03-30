@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * Router
+ * The router widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  * @link        The code is base on the awesome framework - Kohana
@@ -22,20 +22,7 @@ class Router extends AbstractWidget
      *
      * @var array
      */
-    protected $routes = array(
-        'default' => array(
-            'name'              => 'default',
-            'uri'               => '(<controller>(/<action>(/<id>)))',
-            'rules'             => array(),
-            'method'            => null,
-            'regex'             => null,
-            'defaults' => array(
-                'module'        => 'app',
-                'controller'    => 'index',
-                'action'        => 'index',
-            ),
-        ),
-    );
+    protected $routes = array();
 
     /**
      * @var array route options
@@ -54,15 +41,14 @@ class Router extends AbstractWidget
      *                                  set a new route
      */
     protected $routeOptions = array(
-        'name'              => null,
-        'uri'               => null,
-        'rules'             => array(),
-        'defaults'          => array(),
-        'method'            => null,
-        'regex'             => null,
+        'name'      => null,
+        'callback'  => null,
+        'pattern'   => null,
+        'rules'     => array(),
+        'defaults'  => array(),
+        'method'    => null,
+        'regex'     => null,
     );
-
-    protected $parameters = array();
 
     /**
      * Returns the router object
@@ -95,7 +81,8 @@ class Router extends AbstractWidget
         $route =  $route + $this->routeOptions;
 
         if (!$route['name']) {
-            array_unshift($this->routes, $route);
+            $this->routes[] = $route;
+            //array_unshift($this->routes, $route);
         } else {
             $this->routes = array($route['name'] => $route) + $this->routes;
         }
@@ -118,7 +105,7 @@ class Router extends AbstractWidget
      * Remove the route
      *
      * @param  string      $name the name of the route
-     * @return Router
+     * @return \Widget\Router
      */
     public function remove($name)
     {
@@ -167,17 +154,17 @@ class Router extends AbstractWidget
      * Check if there is a route matches the uri and method,
      * and return the parameters, or return false when not matched
      *
-     * @param  string $uri    uri to match
-     * @param  string|null $method the request method to match, maybe GET, POST, etc
+     * @param  string $pathInfo    The path info to match
+     * @param  string|null $method The request method to match, maybe GET, POST, etc
      * @return false|array
      */
-    public function match($uri, $method = null, $name = null)
+    public function match($pathInfo, $method = null, $name = null)
     {
         if ($name && isset($this->routes[$name])) {
-            return $this->_match($uri, $method, $name);
+            return $this->_match($pathInfo, $method, $name);
         } else {
-            foreach ($this->routes as $name => &$route) {
-                if (false !== ($params = $this->_match($uri, $method, $name))) {
+            foreach ($this->routes as $name => $route) {
+                if (false !== ($params = $this->_match($pathInfo, $method, $name))) {
                     return $params;
                 }
             }
@@ -195,31 +182,38 @@ class Router extends AbstractWidget
      * @param  string      $name   the name of the route
      * @return false|array
      */
-    protected function _match($uri, $method, $name)
+    protected function _match($pathInfo, $method, $name)
     {
         $route = $this->_compile($this->routes[$name]);
-
-        // when $route['method'] is not provided, accepts all request methods
+ 
+        // When $route['method'] is not provided, accepts all request methods
         if ($method && $route['method'] && !preg_match('#' . $route['method'] . '#i', $method)) {
             return false;
         }
 
-        // check if the route matches the uri
-        if (!preg_match($route['regex'], $uri, $matches)) {
+        // Check if the route matches the uri
+        if (!preg_match($route['regex'], $pathInfo, $matches)) {
             return false;
         }
-
+        
         // get params in the uri
-        $params = array();
-        foreach ($matches as $name => $param) {
-            if (is_int($name)) {
+        $parameters = array();
+        foreach ($matches as $key => $parameter) {
+            if (is_int($key)) {
                 continue;
             }
-            $params[$name] = $param;
+            $parameters[$key] = $parameter;
+        }
+        
+        preg_match_all('#<([a-zA-Z0-9_]++)>#', $route['uri'], $matches);
+        foreach ($matches[1] as $key) {
+            if (!array_key_exists($key, $parameters)) {
+                $parameters[$key] = null;
+            }
         }
 
         // uri params > defaults params
-        return $params + $route['defaults'];
+        return array('_route' => $name) + $parameters + $route['defaults'];
     }
 
     /**
