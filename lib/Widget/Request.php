@@ -73,6 +73,13 @@ class Request extends Parameter
     protected $baseUri;
     
     /**
+     * The HTTP request method
+     * 
+     * @var string
+     */
+    protected $method;
+    
+    /**
      * Constructor
      *
      * @param array $options
@@ -132,7 +139,7 @@ class Request extends Parameter
         
         return $protocol . '://' . $this->server['SERVER_NAME'] . $port;
     }
-
+    
     /**
      * Returns the full url, which do not contain the fragment, for it never sent to the server
      *
@@ -160,6 +167,19 @@ class Request extends Parameter
     }
     
     /**
+     * Returns the HTTP request method
+     * 
+     * @return string
+     */
+    public function getMethod()
+    {
+        if (null === $this->method) {
+            $this->method = $this->server->get('REQUEST_METHOD', 'GET');
+        }
+        return $this->method;
+    }
+    
+    /**
      * Check if the current request method is the specified string
      * 
      * @param string $method The method name to be compared
@@ -167,7 +187,7 @@ class Request extends Parameter
      */
     public function inMethod($method)
     {
-        return !strcasecmp($method, $this->server['REQUEST_METHOD']);
+        return !strcasecmp($method, $this->getMethod());
     }
     
     /**
