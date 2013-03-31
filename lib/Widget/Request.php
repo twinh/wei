@@ -68,12 +68,17 @@ class Request extends Parameter
     /**
      * @var string
      */
+    protected $baseUrl;
+    
+    /**
+     * @var string
+     */
     protected $pathInfo;
     
     /**
      * @var string
      */
-    protected $baseUrl;
+    protected $requestUri;
     
     /**
      * The HTTP request method
@@ -103,20 +108,6 @@ class Request extends Parameter
     }
     
     /**
-     * Returns the base URI
-     * 
-     * @return string
-     */
-    public function getBaseUrl()
-    {
-        if (!$this->baseUrl) {
-            $uri = strtr(dirname($_SERVER['SCRIPT_NAME']), '\\', '/');
-            $this->baseUrl = $uri;
-        }
-        return $this->baseUrl;
-    }
-    
-    /**
      * Returns the request scheme
      * 
      * @return string
@@ -140,6 +131,40 @@ class Request extends Parameter
         return $this->server['HTTP_HOST'] ?: $this->server['SERVER_NAME'];
     }
     
+    /**
+     * Returns the base URI
+     * 
+     * @return string
+     */
+    public function getBaseUrl()
+    {
+        if (!$this->baseUrl) {
+            $uri = strtr(dirname($_SERVER['SCRIPT_NAME']), '\\', '/');
+            $this->baseUrl = $uri;
+        }
+        return $this->baseUrl;
+    }
+    
+    /**
+     * Return request path info
+     *
+     * @return string
+     */
+    public function getPathInfo()
+    {
+        $uri = $this->server['REQUEST_URI'] // Apache2 & Nginx
+            ?: $this->server['HTTP_X_ORIGINAL_URL'] // IIS7 + Rewrite Module
+            ?: $this->server['HTTP_X_REWRITE_URL'] // IIS6 + ISAPI Rewite
+            ?: '';
+        
+        $uri = '/' . rtrim(substr($uri, strlen($this->getBaseUrl())), '/');
+
+        if (false !== $pos = strpos($uri, '?')) {
+            $uri = substr($uri, 0, $pos);
+        }
+        return $uri;
+    }
+      
     /**
      * Returns the base URL, which contains scheme://domain:port/path
      * 
@@ -166,27 +191,7 @@ class Request extends Parameter
     {
         return $this->getBaseUrl2() . $this->server['REQUEST_URI'];
     }
-    
-    /**
-     * Return request path info
-     *
-     * @return string
-     */
-    public function getPathInfo()
-    {
-        $uri = $this->server['REQUEST_URI'] // Apache2 & Nginx
-            ?: $this->server['HTTP_X_ORIGINAL_URL'] // IIS7 + Rewrite Module
-            ?: $this->server['HTTP_X_REWRITE_URL'] // IIS6 + ISAPI Rewite
-            ?: '';
-        
-        $uri = '/' . rtrim(substr($uri, strlen($this->getBaseUrl())), '/');
 
-        if (false !== $pos = strpos($uri, '?')) {
-            $uri = substr($uri, 0, $pos);
-        }
-        return $uri;
-    }
-    
     /**
      * Returns the client IP address
      * 
