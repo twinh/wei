@@ -141,13 +141,13 @@ class Request extends Parameter
     }
     
     /**
-     * Returns the full url, which do not contain the fragment, for it never sent to the server
-     *
-     * The full URL contains scheme://domain:port/path?queryString
+     * Returns the full URL which contains scheme://domain:port/path?queryString
+     * 
+     * The full URL do not contain the fragment, for it never sent to the server
      * 
      * @return string
      */
-    public function getFullUrl()
+    public function getUrl()
     {
         return $this->getBaseUrl() . $this->server['REQUEST_URI'];
     }
@@ -310,7 +310,7 @@ class Request extends Parameter
             $name = implode('-', array_map('ucfirst', explode('_', strtolower($name))));
             $header .= $name . ': ' . $value . "\r\n";
         } 
-        return $this->server['REQUEST_METHOD'] . ' ' . $this->getFullUrl() . ' ' . $this->server['SERVER_PROTOCOL'] . "\r\n"
+        return $this->server['REQUEST_METHOD'] . ' ' . $this->getUrl() . ' ' . $this->server['SERVER_PROTOCOL'] . "\r\n"
             . $header
             . $this->getContent();
     }
