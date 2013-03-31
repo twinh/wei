@@ -10,7 +10,7 @@ namespace Widget;
 
 /**
  * The HTTP Request widget
- *
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property    \Widget\Server $server The server widget
  */
@@ -66,11 +66,14 @@ class Request extends Parameter
     protected $fromGlobal = true;
     
     /**
-     * The base URI
-     * 
      * @var string
      */
-    protected $baseUri;
+    protected $pathInfo;
+    
+    /**
+     * @var string
+     */
+    protected $baseUrl;
     
     /**
      * The HTTP request method
@@ -104,34 +107,46 @@ class Request extends Parameter
      * 
      * @return string
      */
-    public function getBaseUri()
+    public function getBaseUrl()
     {
-        if (!$this->baseUri) {
+        if (!$this->baseUrl) {
             $uri = strtr(dirname($_SERVER['SCRIPT_NAME']), '\\', '/');
-            $this->baseUri = '/' == $uri ? $uri : $uri . '/';
+            $this->baseUrl = $uri;
         }
-        return $this->baseUri;
+        return $this->baseUrl;
     }
     
     /**
-     * Returns the domain in URL
+     * Returns the request scheme
      * 
      * @return string
      */
-    public function getDomain()
+    public function getScheme()
     {
-        return $this->server['SERVER_NAME'];
+        if ('on' === strtolower($this->server['HTTPS']) || 1 == $this->server['HTTPS']) {
+            return 'https';
+        } else {
+            return 'http';
+        }
     }
     
     /**
-     * Returns the base URL
+     * Returns the request host
      * 
-     * The base URL contains scheme://domain:port/path
+     * @return string
+     */
+    public function getHost()
+    {
+        return $this->server['HTTP_HOST'] ?: $this->server['SERVER_NAME'];
+    }
+    
+    /**
+     * Returns the base URL, which contains scheme://domain:port/path
      * 
      * @link http://snipplr.com/view.php?codeview&id=2734
      * @return string
      */
-    public function getBaseUrl()
+    public function getBaseUrl2()
     {
         $s = $this->server['HTTPS'] == 'on' ? 's' : '';
         $protocol = substr(strtolower($this->server['SERVER_PROTOCOL']), 0, strpos(strtolower($this->server['SERVER_PROTOCOL']), '/')) . $s;
@@ -141,7 +156,7 @@ class Request extends Parameter
     }
     
     /**
-     * Returns the full URL which contains scheme://domain:port/path?queryString
+     * Returns the full URL, which contains scheme://domain:port/path?queryString
      * 
      * The full URL do not contain the fragment, for it never sent to the server
      * 
@@ -149,12 +164,12 @@ class Request extends Parameter
      */
     public function getUrl()
     {
-        return $this->getBaseUrl() . $this->server['REQUEST_URI'];
+        return $this->getBaseUrl2() . $this->server['REQUEST_URI'];
     }
     
     /**
      * Return request path info
-     * 
+     *
      * @return string
      */
     public function getPathInfo()
@@ -163,9 +178,9 @@ class Request extends Parameter
             ?: $this->server['HTTP_X_ORIGINAL_URL'] // IIS7 + Rewrite Module
             ?: $this->server['HTTP_X_REWRITE_URL'] // IIS6 + ISAPI Rewite
             ?: '';
-
-        $uri = '/' . substr($uri, strlen($this->getBaseUri()));
         
+        $uri = '/' . rtrim(substr($uri, strlen($this->getBaseUrl())), '/');
+
         if (false !== $pos = strpos($uri, '?')) {
             $uri = substr($uri, 0, $pos);
         }
