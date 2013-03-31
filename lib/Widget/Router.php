@@ -137,7 +137,7 @@ class Router extends AbstractWidget
      * @param  array  $route the route array
      * @return array
      */
-    protected function _compile(&$route)
+    protected function compile(&$route)
     {
         if ($route['regex']) {
             return $route;
@@ -166,7 +166,7 @@ class Router extends AbstractWidget
     }
 
     /**
-     * Check if there is a route matches the uri and method,
+     * Check if there is a route matches the path info and method,
      * and return the parameters, or return false when not matched
      *
      * @param  string $pathInfo    The path info to match
@@ -176,10 +176,10 @@ class Router extends AbstractWidget
     public function match($pathInfo, $method = null, $name = null)
     {
         if ($name && isset($this->routes[$name])) {
-            return $this->_match($pathInfo, $method, $name);
+            return $this->matchRoute($pathInfo, $method, $name);
         } else {
             foreach ($this->routes as $name => $route) {
-                if (false !== ($params = $this->_match($pathInfo, $method, $name))) {
+                if (false !== ($params = $this->matchRoute($pathInfo, $method, $name))) {
                     return $params;
                 }
             }
@@ -189,7 +189,7 @@ class Router extends AbstractWidget
     }
 
     /**
-     * Check if the route matches the uri and method,
+     * Check if the route matches the path info and method,
      * and return the parameters, or return false when not matched
      *
      * @param  string      $uri    the uri to match
@@ -197,9 +197,9 @@ class Router extends AbstractWidget
      * @param  string      $name   the name of the route
      * @return false|array
      */
-    protected function _match($pathInfo, $method, $name)
+    protected function matchRoute($pathInfo, $method, $name)
     {
-        $route = $this->_compile($this->routes[$name]);
+        $route = $this->compile($this->routes[$name]);
  
         // When $route['method'] is not provided, accepts all request methods
         if ($method && $route['method'] && !preg_match('#' . $route['method'] . '#i', $method)) {
@@ -236,7 +236,7 @@ class Router extends AbstractWidget
      *
      * @param array $params the array params to combine
      */
-    protected function _buildQuery($params)
+    protected function buildQuery($params)
     {
         if (!$params) {
             return '';
@@ -248,9 +248,9 @@ class Router extends AbstractWidget
      * @param array $params
      * @param string $name
      */
-    protected function _uri($params, $name)
+    protected function buildPath($params, $name)
     {
-        $route = $this->_compile($this->routes[$name]);
+        $route = $this->compile($this->routes[$name]);
 
         $uri = $route['uri'];
 
@@ -259,7 +259,7 @@ class Router extends AbstractWidget
             // check if $params contains all of the route default params
             $intersect = array_intersect_assoc($params, $route['defaults']);
             if ($route['defaults'] == $intersect) {
-                return $uri . $this->_buildQuery(array_diff_assoc($params, $route['defaults']));
+                return $uri . $this->buildQuery(array_diff_assoc($params, $route['defaults']));
             }
 
             return false;
@@ -335,30 +335,30 @@ class Router extends AbstractWidget
                 return false;
             }
 
-            return $uri . $this->_buildQuery(array_diff_assoc($params, $route['defaults']));
+            return $uri . $this->buildQuery(array_diff_assoc($params, $route['defaults']));
         }
     }
 
     /**
-     * Generate uri from the $params array
+     * Generate url path from the specified array
      *
      * @param  array       $params
      * @param  string|null $name
      * @return string
      */
-    public function uri(array $params = array(), $name = null)
+    public function path(array $params = array(), $name = null)
     {
         if ($name && isset($this->routes[$name])) {
-            return $this->_uri($params, $name);
+            return $this->buildPath($params, $name);
         } else {
             foreach ($this->routes as $name => $route) {
-                if (false !== ($uri = $this->_uri($params, $name))) {
+                if (false !== ($uri = $this->buildPath($params, $name))) {
                     return $uri;
                 }
             }
         }
 
-        return $this->_buildQuery($params);
+        return $this->buildQuery($params);
     }
     
     /**
