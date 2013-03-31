@@ -14,6 +14,8 @@ namespace Widget;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @link        The code is base on the awesome framework - Kohana
  *              http://kohanaframework.org/3.0/guide/api/Kohana_Route
+ * 
+ * @method \Widget\Response response(string $content) Send response header and content
  */
 class Router extends AbstractWidget
 {
@@ -52,7 +54,6 @@ class Router extends AbstractWidget
 
     /**
      * Run the application
-     *
      */
     public function __invoke()
     {
@@ -68,8 +69,7 @@ class Router extends AbstractWidget
             array_unshift($parameters, $this->widget);
             $result = call_user_func_array($route['callback'], $parameters);
 
-            //$this->handleResponse($result);
-            echo $result;
+            return $this->response($result);
         } else {
             throw new Exception\NotFoundException('The page you requested was not found');
         }
