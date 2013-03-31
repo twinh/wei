@@ -51,13 +51,28 @@ class Router extends AbstractWidget
     );
 
     /**
-     * Returns the router object
+     * Run the application
      *
-     * @return \Widget\Router
      */
     public function __invoke()
     {
-        return $this;
+        $request = $this->request;
+        
+        if (false !== ($parameters = $this->router->match($request->getPathInfo(), $request->getMethod()))) {
+            $route = $this->router->getRoute($parameters['_route']);
+            unset($parameters['_route']);
+            
+            // Merge parameters to query widget
+            $this->query->set($parameters);
+            
+            array_unshift($parameters, $this->widget);
+            $result = call_user_func_array($route['callback'], $parameters);
+
+            //$this->handleResponse($result);
+            echo $result;
+        } else {
+            throw new Exception\NotFoundException('The page you requested was not found');
+        }
     }
 
     public function setRoutes($routes)
@@ -96,7 +111,7 @@ class Router extends AbstractWidget
      * @param  string $name the name of the route
      * @return array|null
      */
-    public function get($name)
+    public function getRoute($name)
     {
         return isset($this->routes[$name]) ? $this->routes[$name] : null;
     }
@@ -344,5 +359,70 @@ class Router extends AbstractWidget
         }
 
         return $this->_buildQuery($params);
+    }
+    
+    /**
+     * Add a GET route
+     * 
+     * @param string $pattern
+     * @param callback $fn
+     */
+    public function get($pattern, $fn)
+    {
+        return $this->request($pattern, 'GET', $fn);
+    }
+    
+    /**
+     * Add a POST route
+     * 
+     * @param string $pattern
+     * @param callback $fn
+     */
+    public function post($pattern, $fn)
+    {
+        return $this->request($pattern, 'POST', $fn);
+    }
+    
+    /**
+     * Add a DELETE route
+     * 
+     * @param string $pattern
+     * @param callback $fn
+     */
+    public function delete($pattern, $fn)
+    {
+        return $this->request($pattern, 'DELETE', $fn);
+    }
+    
+    /**
+     * Add a PUT route
+     * 
+     * @param string $pattern
+     * @param callback $fn
+     */
+    public function put($pattern, $fn)
+    {
+        return $this->request($pattern, 'PUT', $fn);
+    }
+    
+    /**
+     * Add a route allow any request methods
+     * 
+     * @param string $pattern
+     * @param callback $fn
+     */
+    public function request($pattern, $method, $fn = null)
+    {
+        $argc = func_num_args();
+        if (2 == $argc) {
+            $fn = $method;
+            $method = null;
+        }
+        
+        $this->router->set(array(
+            'uri' => $pattern,
+            'method' => $method,
+            'callback' => $fn
+        ));
     }
 }
