@@ -95,4 +95,24 @@ class RequestTest extends TestCase
     {
         $this->request->getParameterReference('exception');
     }
+    
+    public function testGetIp()
+    {
+        $this->server->set('HTTP_X_FORWARDED_FOR', '1.2.3.4');
+        $this->assertEquals('1.2.3.4', $this->request->getIp());
+        
+        $this->server->set('HTTP_X_FORWARDED_FOR', '1.2.3.4, 2.3.4.5');
+        $this->assertEquals('1.2.3.4', $this->request->getIp());
+        
+        $this->server->remove('HTTP_X_FORWARDED_FOR');
+        $this->server->set('HTTP_CLIENT_IP', '8.8.8.8');
+        $this->assertEquals('8.8.8.8', $this->request->getIp());
+        
+        $this->server->remove('HTTP_CLIENT_IP');
+        $this->server->set('REMOTE_ADDR', '9.9.9.9');
+        $this->assertEquals('9.9.9.9', $this->request->getIp());
+        
+        $this->server->set('HTTP_X_FORWARDED_FOR', 'invalid ip');
+        $this->assertEquals('0.0.0.0', $this->request->getIp());
+    }
 }

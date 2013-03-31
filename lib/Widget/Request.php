@@ -174,16 +174,21 @@ class Request extends Parameter
     
     /**
      * Returns the client IP address
-     *
+     * 
+     * If the IP could not receive from the server parameter, or the IP address
+     * is not valid, return the $default value instead
+     * 
+     * @link http://en.wikipedia.org/wiki/X-Forwarded-For
      * @param  string $default The default ip address
      * @return string
      */
     public function getIp($default = '0.0.0.0')
     {
-        return $this->server['HTTP_X_FORWARDED_FOR']
-            ?: $this->server['HTTP_CLIENT_IP']
-            ?: $this->server['REMOTE_ADDR']
-            ?: $default;
+        $ip = $this->server['HTTP_X_FORWARDED_FOR']
+            ? current(explode(',', $this->server['HTTP_X_FORWARDED_FOR'])) : $this->server['HTTP_CLIENT_IP']
+            ?: $this->server['REMOTE_ADDR'];
+
+        return filter_var($ip, FILTER_VALIDATE_IP) ? $ip : $default;
     }
     
     /**
