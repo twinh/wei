@@ -14,7 +14,7 @@ namespace Widget;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @link        The code is base on the awesome framework - Kohana
  *              http://kohanaframework.org/3.0/guide/api/Kohana_Route
- * 
+ * @property \Widget\Request $request The HTTP request widget
  * @method \Widget\Response response(string $content) Send response header and content
  */
 class Router extends AbstractWidget
