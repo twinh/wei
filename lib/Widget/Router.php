@@ -179,8 +179,8 @@ class Router extends AbstractWidget
             return $this->matchRoute($pathInfo, $method, $name);
         } else {
             foreach ($this->routes as $name => $route) {
-                if (false !== ($params = $this->matchRoute($pathInfo, $method, $name))) {
-                    return $params;
+                if (false !== ($parameters = $this->matchRoute($pathInfo, $method, $name))) {
+                    return $parameters;
                 }
             }
         }
@@ -234,21 +234,21 @@ class Router extends AbstractWidget
     /**
      * Build params to query string
      *
-     * @param array $params the array params to combine
+     * @param array $parameters the array params to combine
      */
-    protected function buildQuery($params)
+    protected function buildQuery($parameters)
     {
-        if (!$params) {
+        if (!$parameters) {
             return '';
         }
-        return '?' . http_build_query($params);
+        return '?' . http_build_query($parameters);
     }
 
     /**
-     * @param array $params
+     * @param array $parameters
      * @param string $name
      */
-    protected function buildPath($params, $name)
+    protected function buildPath($parameters, $name)
     {
         $route = $this->compile($this->routes[$name]);
 
@@ -256,10 +256,10 @@ class Router extends AbstractWidget
 
         // static route
         if (false === strpos($uri, '<') && false === strpos($uri, '(')) {
-            // check if $params contains all of the route default params
-            $intersect = array_intersect_assoc($params, $route['defaults']);
+            // check if $parameters contains all of the route default params
+            $intersect = array_intersect_assoc($parameters, $route['defaults']);
             if ($route['defaults'] == $intersect) {
-                return $uri . $this->buildQuery(array_diff_assoc($params, $route['defaults']));
+                return $uri . $this->buildQuery(array_diff_assoc($parameters, $route['defaults']));
             }
 
             return false;
@@ -278,20 +278,20 @@ class Router extends AbstractWidget
                 while (preg_match('#<([a-zA-Z0-9_]++)>#', $replace, $match)) {
                     list($key, $param) = $match;
 
-                    if (isset($params[$param])) {
+                    if (isset($parameters[$param])) {
                         if (isset($route['rules'][$param])) {
                             // the parameter not matched the rules
-                            if (!preg_match('#' . $route['rules'][$param] . '#', $params[$param])) {
+                            if (!preg_match('#' . $route['rules'][$param] . '#', $parameters[$param])) {
                                 return false;
                             }
                         }
 
                         // replace the key with the parameter value
-                        $replace = str_replace($key, urlencode($params[$param]), $replace);
+                        $replace = str_replace($key, urlencode($parameters[$param]), $replace);
 
                         $isMatched = true;
 
-                        unset($params[$param]);
+                        unset($parameters[$param]);
                     } else {
                         // this group has missing parameters
                         $replace = '';
@@ -312,22 +312,22 @@ class Router extends AbstractWidget
                 list($key, $param) = $match;
 
                 // required route parameter not passed
-                if (!isset($params[$param])) {
+                if (!isset($parameters[$param])) {
                     return false;
                 }
 
                 // check if parameter value matches the regex rule
                 if (isset($route['rules'][$param])) {
-                    if (!preg_match('#' . $route['rules'][$param] . '#', $params[$param])) {
+                    if (!preg_match('#' . $route['rules'][$param] . '#', $parameters[$param])) {
                         return false;
                     }
                 }
 
-                $uri = str_replace($key, urlencode($params[$param]), $uri);
+                $uri = str_replace($key, urlencode($parameters[$param]), $uri);
 
                 $isMatched = true;
 
-                unset($params[$param]);
+                unset($parameters[$param]);
             }
 
             // if nothing matched
@@ -335,42 +335,42 @@ class Router extends AbstractWidget
                 return false;
             }
 
-            return $uri . $this->buildQuery(array_diff_assoc($params, $route['defaults']));
+            return $uri . $this->buildQuery(array_diff_assoc($parameters, $route['defaults']));
         }
     }
 
     /**
      * Generate url path from the specified array
      *
-     * @param  array       $params
+     * @param  array       $parameters
      * @param  string|null $name
      * @return string
      */
-    public function path(array $params = array(), $name = null)
+    public function path(array $parameters = array(), $name = null)
     {
         if ($name && isset($this->routes[$name])) {
-            return $this->buildPath($params, $name);
+            return $this->buildPath($parameters, $name);
         } else {
             foreach ($this->routes as $name => $route) {
-                if (false !== ($uri = $this->buildPath($params, $name))) {
+                if (false !== ($uri = $this->buildPath($parameters, $name))) {
                     return $uri;
                 }
             }
         }
 
-        return $this->buildQuery($params);
+        return $this->buildQuery($parameters);
     }
     
     /**
      * Generate absolute url from specified array
      * 
-     * @param array $params
+     * @param array $parameters
      * @param string $name
      * @return string
      */
-    public function url(array $params = array(), $name = null)
+    public function url(array $parameters = array(), $name = null)
     {
-        return $this->request->getBaseUrl() . $this->path($params, $name);
+        return $this->request->getBaseUrl() . $this->path($parameters, $name);
     }
     
     /**
