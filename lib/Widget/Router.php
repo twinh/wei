@@ -31,7 +31,7 @@ class Router extends AbstractWidget
      *
      *      -- name             string  the name of the route
      *
-     *      -- uri              string  the string to be complied to regex
+     *      -- pattern          string  the string to be complied to regex
      *
      *      -- rules            array   the regex rules
      *
@@ -39,7 +39,7 @@ class Router extends AbstractWidget
      *
      *      -- method           regex   the request method
      * 
-     *      -- regex            string  the regex complied from the uri, just leave it blank when
+     *      -- regex            string  the regex complied from the pattern, just leave it blank when
      *                                  set a new route
      */
     protected $routeOptions = array(
@@ -132,7 +132,7 @@ class Router extends AbstractWidget
     }
 
     /**
-     * Prepare the route uri to regex
+     * Prepare the route pattern to regex
      *
      * @param  array  $route the route array
      * @return array
@@ -143,7 +143,7 @@ class Router extends AbstractWidget
             return $route;
         }
 
-        $regex = $route['uri'];
+        $regex = $route['pattern'];
 
         $regex = preg_replace('#[.\+*?[^\]${}=!|]#', '\\\\$0', $regex);
 
@@ -192,9 +192,9 @@ class Router extends AbstractWidget
      * Check if the route matches the path info and method,
      * and return the parameters, or return false when not matched
      *
-     * @param  string      $uri    the uri to match
-     * @param  string      $method the request method to match
-     * @param  string      $name   the name of the route
+     * @param  string      $pathInfo The path info to match
+     * @param  string      $method The request method to match
+     * @param  string      $name The name of the route
      * @return false|array
      */
     protected function matchRoute($pathInfo, $method, $name)
@@ -206,12 +206,12 @@ class Router extends AbstractWidget
             return false;
         }
 
-        // Check if the route matches the uri
+        // Check if the route matches the path info
         if (!preg_match($route['regex'], $pathInfo, $matches)) {
             return false;
         }
         
-        // get params in the uri
+        // get params in the path info
         $parameters = array();
         foreach ($matches as $key => $parameter) {
             if (is_int($key)) {
@@ -220,14 +220,14 @@ class Router extends AbstractWidget
             $parameters[$key] = $parameter;
         }
         
-        preg_match_all('#<([a-zA-Z0-9_]++)>#', $route['uri'], $matches);
+        preg_match_all('#<([a-zA-Z0-9_]++)>#', $route['pattern'], $matches);
         foreach ($matches[1] as $key) {
             if (!array_key_exists($key, $parameters)) {
                 $parameters[$key] = null;
             }
         }
 
-        // uri params > defaults params
+        // path info params > defaults params
         return array('_route' => $name) + $parameters + $route['defaults'];
     }
 
@@ -252,14 +252,14 @@ class Router extends AbstractWidget
     {
         $route = $this->compile($this->routes[$name]);
 
-        $uri = $route['uri'];
+        $pattern = $route['pattern'];
 
         // static route
-        if (false === strpos($uri, '<') && false === strpos($uri, '(')) {
+        if (false === strpos($pattern, '<') && false === strpos($pattern, '(')) {
             // check if $parameters contains all of the route default params
             $intersect = array_intersect_assoc($parameters, $route['defaults']);
             if ($route['defaults'] == $intersect) {
-                return $uri . $this->buildQuery(array_diff_assoc($parameters, $route['defaults']));
+                return $pattern . $this->buildQuery(array_diff_assoc($parameters, $route['defaults']));
             }
 
             return false;
@@ -267,7 +267,7 @@ class Router extends AbstractWidget
             $isMatched = false;
 
             // search the minimal optional parts
-            while (preg_match('#\([^()]++\)#', $uri, $match)) {
+            while (preg_match('#\([^()]++\)#', $pattern, $match)) {
                 // search for the matched value
                 $search = $match[0];
 
@@ -299,16 +299,16 @@ class Router extends AbstractWidget
                     }
                 }
 
-                // replace the group in the uri
-                $uri = str_replace($search, $replace, $uri);
+                // replace the group in the pattern
+                $pattern = str_replace($search, $replace, $pattern);
             }
 
-            if ('' === $uri) {
+            if ('' === $pattern) {
                 return false;
             }
 
             // search the required parts NOT in the optional parts
-            while (preg_match('#<([a-zA-Z0-9_]++)>#', $uri, $match)) {
+            while (preg_match('#<([a-zA-Z0-9_]++)>#', $pattern, $match)) {
                 list($key, $param) = $match;
 
                 // required route parameter not passed
@@ -323,7 +323,7 @@ class Router extends AbstractWidget
                     }
                 }
 
-                $uri = str_replace($key, urlencode($parameters[$param]), $uri);
+                $pattern = str_replace($key, urlencode($parameters[$param]), $pattern);
 
                 $isMatched = true;
 
@@ -331,11 +331,11 @@ class Router extends AbstractWidget
             }
 
             // if nothing matched
-            if (!$isMatched || '' === $uri) {
+            if (!$isMatched || '' === $pattern) {
                 return false;
             }
 
-            return $uri . $this->buildQuery(array_diff_assoc($parameters, $route['defaults']));
+            return $pattern . $this->buildQuery(array_diff_assoc($parameters, $route['defaults']));
         }
     }
 
@@ -432,7 +432,7 @@ class Router extends AbstractWidget
         }
         
         $this->router->set(array(
-            'uri' => $pattern,
+            'pattern' => $pattern,
             'method' => $method,
             'callback' => $fn
         ));
