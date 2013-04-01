@@ -346,7 +346,7 @@ class Router extends AbstractWidget
      * @param  string|null $name
      * @return string
      */
-    public function path(array $parameters = array(), $name = null)
+    public function generatePath(array $parameters = array(), $name = null)
     {
         if ($name && isset($this->routes[$name])) {
             return $this->buildPath($parameters, $name);
@@ -368,7 +368,7 @@ class Router extends AbstractWidget
      * @param string $name
      * @return string
      */
-    public function url(array $parameters = array(), $name = null)
+    public function generateUrl(array $parameters = array(), $name = null)
     {
         return $this->request->getBaseUrl() . $this->path($parameters, $name);
     }
