@@ -71,11 +71,24 @@ class Error extends AbstractWidget
     {
         parent::__construct($options);
 
-        $this->on('exception', $this);
+        $this->on('exception', array(
+            $this, 'showError'
+        ));
 
         if ($this->error) {
             set_error_handler(array($this, 'renderError'));
         }
+    }
+    
+    /**
+     * Attach a handler to the error event
+     * 
+     * @param \Closure $fn The error handler
+     * @return \Widget\EventManager
+     */
+    public function __invoke(\Closure $fn)
+    {
+        return $this->on('error', $fn);
     }
 
     /**
@@ -85,7 +98,7 @@ class Error extends AbstractWidget
      * @param integer $code
      * @param array $options
      */
-    public function __invoke($event, $widget, $message, $code = 500, array $options = array())
+    public function showError($event, $widget, $message, $code = 500, array $options = array())
     {
         try {
             if ($this->error) {
