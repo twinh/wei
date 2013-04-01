@@ -12,6 +12,7 @@ namespace Widget;
  * Error
  *
  * @method mixed config(string $name) Get the widget config value
+ * @property \Widget\Request $request The HTTP request widget
  * @property \Widget\Get $get The get widget
  * @property \Widget\Post $post The post widget
  * @property \Widget\Session $session The session widget
@@ -19,7 +20,6 @@ namespace Widget;
  * @property \Widget\Server $server The server widget
  * @property \Widget\Logger $logger The logger widget
  * @method \Widget\EventManager on(string|\Widget\Event $event) Attach a handler to an event
- * @method bool inAjax() Check if in ajax request
  * @todo        throw exception when called
  * @todo        add options display
  * @todo        response
@@ -145,7 +145,7 @@ class Error extends AbstractWidget
             }
 
             // TODO more info, may be need an ajax view file
-            if ($this->inAjax()) {
+            if ($this->request->inAjax()) {
                 exit(json_encode(array(
                     'code' => $code ? ($code > 0 ? -$code : $code) : -$this->code,
                     'message' => $message,
