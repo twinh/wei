@@ -130,4 +130,176 @@ class RequestTest extends TestCase
         $this->server->remove('HTTPS', '1');
         $this->assertEquals('http', $this->request->getScheme());
     }
+    
+    /**
+     * @link https://github.com/zendframework/zf2/blob/master/tests/ZendTest/Http/PhpEnvironment/RequestTest.php
+     * 
+     * Data provider for testing base URL and path detection.
+     */
+    public function baseUrlAndPathProvider()
+    {
+        return array(
+            array(
+                array(
+                    'REQUEST_URI'     => '/index.php/news/3?var1=val1&var2=val2',
+                    'QUERY_URI'       => 'var1=val1&var2=val2',
+                    'SCRIPT_NAME'     => '/index.php',
+                    'PHP_SELF'        => '/index.php/news/3',
+                    'SCRIPT_FILENAME' => '/var/web/html/index.php',
+                ),
+                '/index.php',
+                '/news/3'
+            ),
+            array(
+                array(
+                    'REQUEST_URI'     => '/public/index.php/news/3?var1=val1&var2=val2',
+                    'QUERY_URI'       => 'var1=val1&var2=val2',
+                    'SCRIPT_NAME'     => '/public/index.php',
+                    'PHP_SELF'        => '/public/index.php/news/3',
+                    'SCRIPT_FILENAME' => '/var/web/html/public/index.php',
+                ),
+                '/public/index.php',
+                '/news/3'
+            ),
+            array(
+                array(
+                    'REQUEST_URI'     => '/index.php/news/3?var1=val1&var2=val2',
+                    'SCRIPT_NAME'     => '/home.php',
+                    'PHP_SELF'        => '/index.php/news/3',
+                    'SCRIPT_FILENAME' => '/var/web/html/index.php',
+                ),
+                '/index.php',
+                '/news/3'
+            ),
+            array(
+                array(
+                    'REQUEST_URI'      => '/index.php/news/3?var1=val1&var2=val2',
+                    'SCRIPT_NAME'      => '/home.php',
+                    'PHP_SELF'         => '/home.php',
+                    'ORIG_SCRIPT_NAME' => '/index.php',
+                    'SCRIPT_FILENAME'  => '/var/web/html/index.php',
+                ),
+                '/index.php',
+                '/news/3'
+            ),
+            array(
+                array(
+                    'REQUEST_URI'     => '/index.php/news/3?var1=val1&var2=val2',
+                    'PHP_SELF'        => '/index.php/news/3',
+                    'SCRIPT_FILENAME' => '/var/web/html/index.php',
+                ),
+                '/index.php',
+                '/news/3'
+            ),
+            array(
+                array(
+                    'HTTP_X_REWRITE_URL' => '/index.php/news/3?var1=val1&var2=val2',
+                    'PHP_SELF'           => '/index.php/news/3',
+                    'SCRIPT_FILENAME'    => '/var/web/html/index.php',
+                ),
+                '/index.php',
+                '/news/3'
+            ),
+            array(
+                array(
+                    'ORIG_PATH_INFO'  => '/index.php/news/3',
+                    'QUERY_STRING'    => 'var1=val1&var2=val2',
+                    'PHP_SELF'        => '/index.php/news/3',
+                    'SCRIPT_FILENAME' => '/var/web/html/index.php',
+                ),
+                '/index.php',
+                '/news/3'
+            ),
+            array(
+                array(
+                    'REQUEST_URI'     => '/article/archive?foo=index.php',
+                    'QUERY_STRING'    => 'foo=index.php',
+                    'SCRIPT_FILENAME' => '/var/www/zftests/index.php',
+                ),
+                '',
+                '/article/archive'
+            ),
+            array(
+                array(
+                    'REQUEST_URI'     => '/html/index.php/news/3?var1=val1&var2=val2',
+                    'PHP_SELF'        => '/html/index.php/news/3',
+                    'SCRIPT_FILENAME' => '/var/web/html/index.php',
+                ),
+                '/html/index.php',
+                '/news/3'
+            ),
+            array(
+                array(
+                    'REQUEST_URI'     => '/dir/action',
+                    'PHP_SELF'        => '/dir/index.php',
+                    'SCRIPT_FILENAME' => '/var/web/dir/index.php',
+                ),
+                '/dir',
+                '/action'
+            ),
+            array(
+                array(
+                    'SCRIPT_NAME'     => '/~username/public/index.php',
+                    'REQUEST_URI'     => '/~username/public/',
+                    'PHP_SELF'        => '/~username/public/index.php',
+                    'SCRIPT_FILENAME' => '/Users/username/Sites/public/index.php',
+                    'ORIG_SCRIPT_NAME'=> null
+                ),
+                '/~username/public',
+                '/'
+            ),
+            // ZF2-206
+            array(
+                array(
+                    'SCRIPT_NAME'     => '/zf2tut/index.php',
+                    'REQUEST_URI'     => '/zf2tut/',
+                    'PHP_SELF'        => '/zf2tut/index.php',
+                    'SCRIPT_FILENAME' => 'c:/ZF2Tutorial/public/index.php',
+                    'ORIG_SCRIPT_NAME'=> null
+                ),
+                '/zf2tut',
+                '/'
+            ),
+            array(
+                array(
+                    'REQUEST_URI'     => '/html/index.php/news/3?var1=val1&var2=/index.php',
+                    'PHP_SELF'        => '/html/index.php/news/3',
+                    'SCRIPT_FILENAME' => '/var/web/html/index.php',
+                ),
+                '/html/index.php',
+                '/news/3'
+            ),
+            array(
+                array(
+                    'REQUEST_URI'     => '/html/index.php/news/index.php',
+                    'PHP_SELF'        => '/html/index.php/news/index.php',
+                    'SCRIPT_FILENAME' => '/var/web/html/index.php',
+                ),
+                '/html/index.php',
+                '/news/index.php'
+            ),
+
+            //Test when url quert contains a full http url
+            array(
+                array(
+                    'REQUEST_URI' => '/html/index.php?url=http://test.example.com/path/&foo=bar',
+                    'PHP_SELF' => '/html/index.php',
+                    'SCRIPT_FILENAME' => '/var/web/html/index.php',
+                ),
+                '/html/index.php',
+                '/'
+            ),
+        );
+    }
+
+    /**
+     * @dataProvider baseUrlAndPathProvider
+     */
+    public function testBasePathDetection(array $server, $baseUrl, $pathInfo)
+    {
+        $this->request->server->setOption('data', $server);
+
+        $this->assertEquals($baseUrl,  $this->request->getBaseUrl());
+        $this->assertEquals($pathInfo, $this->request->getPathInfo());
+    }
 }
