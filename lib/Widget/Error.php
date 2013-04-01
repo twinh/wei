@@ -228,12 +228,12 @@ class Error extends AbstractWidget
     }
 
     /**
-     * 获取文件指定行号周围的代码
+     * Get file code in specified range
      *
-     * @param  string $file  文件路径
-     * @param  int    $line  文化行号
-     * @param  int    $range 获取的总行数
-     * @return string 文件代码
+     * @param  string $file  The file name
+     * @param  int    $line  The file line 
+     * @param  int    $range The line range
+     * @return string
      */
     public function getFileCode($file, $line, $range = 20)
     {
