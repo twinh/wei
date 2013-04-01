@@ -11,6 +11,17 @@ namespace Widget;
 /**
  * The HTTP Request widget
  * 
+ * The methods are deviced from code of the Zend Framework (2.1-dev 2013-04-01)
+ *   * getBaseUrl
+ *   * getRequestUri
+ *   * detectBaseUrl
+ *   * detectRequestUri
+ * 
+ * @link      https://github.com/zendframework/zf2/blob/master/library/Zend/Http/PhpEnvironment/Request.php
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * 
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property    \Widget\Server $server The server widget
  */
@@ -132,19 +143,55 @@ class Request extends Parameter
     }
     
     /**
-     * Returns the base URI
-     * 
+     * Set the request URI.
+     *
+     * @param  string $requestUri
+     * @return self
+     */
+    public function setRequestUri($requestUri)
+    {
+        $this->requestUri = $requestUri;
+        return $this;
+    }
+
+    /**
+     * Get the request URI.
+     *
+     * @return string
+     */
+    public function getRequestUri()
+    {
+        if ($this->requestUri === null) {
+            $this->requestUri = $this->detectRequestUri();
+        }
+        return $this->requestUri;
+    }
+
+    /**
+     * Set the base URL.
+     *
+     * @param  string $baseUrl
+     * @return self
+     */
+    public function setBaseUrl($baseUrl)
+    {
+        $this->baseUrl = rtrim($baseUrl, '/');
+        return $this;
+    }
+
+    /**
+     * Get the base URL.
+     *
      * @return string
      */
     public function getBaseUrl()
     {
-        if (!$this->baseUrl) {
-            $uri = strtr(dirname($_SERVER['SCRIPT_NAME']), '\\', '/');
-            $this->baseUrl = $uri;
+        if ($this->baseUrl === null) {
+            $this->setBaseUrl($this->detectBaseUrl());
         }
         return $this->baseUrl;
     }
-    
+
     /**
      * Return request path info
      *
@@ -152,19 +199,12 @@ class Request extends Parameter
      */
     public function getPathInfo()
     {
-        $uri = $this->server['REQUEST_URI'] // Apache2 & Nginx
-            ?: $this->server['HTTP_X_ORIGINAL_URL'] // IIS7 + Rewrite Module
-            ?: $this->server['HTTP_X_REWRITE_URL'] // IIS6 + ISAPI Rewite
-            ?: '';
-        
-        $uri = '/' . rtrim(substr($uri, strlen($this->getBaseUrl())), '/');
-
-        if (false !== $pos = strpos($uri, '?')) {
-            $uri = substr($uri, 0, $pos);
+        if ($this->pathInfo === null) {
+            $this->pathInfo = $this->detectPathInfo();
         }
-        return $uri;
+        return $this->pathInfo;
     }
-      
+
     /**
      * Returns the base URL, which contains scheme://domain:port/path
      * 
@@ -333,5 +373,154 @@ class Request extends Parameter
         return $this->server['REQUEST_METHOD'] . ' ' . $this->getUrl() . ' ' . $this->server['SERVER_PROTOCOL'] . "\r\n"
             . $header
             . $this->getContent();
+    }
+    
+    /**
+     * Detect the base URI for the request
+     *
+     * Looks at a variety of criteria in order to attempt to autodetect a base
+     * URI, including rewrite URIs, proxy URIs, etc.
+     *
+     * @return string
+     */
+    protected function detectRequestUri()
+    {
+        $requestUri = null;
+        $server     = $this->server;
+
+        // Check this first so IIS will catch.
+        $httpXRewriteUrl = $server->get('HTTP_X_REWRITE_URL');
+        if ($httpXRewriteUrl !== null) {
+            $requestUri = $httpXRewriteUrl;
+        }
+
+        // Check for IIS 7.0 or later with ISAPI_Rewrite
+        $httpXOriginalUrl = $server->get('HTTP_X_ORIGINAL_URL');
+        if ($httpXOriginalUrl !== null) {
+            $requestUri = $httpXOriginalUrl;
+        }
+
+        // IIS7 with URL Rewrite: make sure we get the unencoded url
+        // (double slash problem).
+        $iisUrlRewritten = $server->get('IIS_WasUrlRewritten');
+        $unencodedUrl    = $server->get('UNENCODED_URL', '');
+        if ('1' == $iisUrlRewritten && '' !== $unencodedUrl) {
+            return $unencodedUrl;
+        }
+
+        // HTTP proxy requests setup request URI with scheme and host [and port]
+        // + the URL path, only use URL path.
+        if (!$httpXRewriteUrl) {
+            $requestUri = $server->get('REQUEST_URI');
+        }
+
+        if ($requestUri !== null) {
+            return preg_replace('#^[^/:]+://[^/]+#', '', $requestUri);
+        }
+
+        // IIS 5.0, PHP as CGI.
+        $origPathInfo = $server->get('ORIG_PATH_INFO');
+        if ($origPathInfo !== null) {
+            $queryString = $server->get('QUERY_STRING', '');
+            if ($queryString !== '') {
+                $origPathInfo .= '?' . $queryString;
+            }
+            return $origPathInfo;
+        }
+
+        return '/';
+    }
+
+    /**
+     * Auto-detect the base path from the request environment
+     *
+     * Uses a variety of criteria in order to detect the base URL of the request
+     * (i.e., anything additional to the document root).
+     *
+     * The base URL includes the schema, host, and port, in addition to the path.
+     *
+     * @return string
+     */
+    protected function detectBaseUrl()
+    {
+        $baseUrl        = '';
+        $filename       = $this->server->get('SCRIPT_FILENAME', '');
+        $scriptName     = $this->server->get('SCRIPT_NAME');
+        $phpSelf        = $this->server->get('PHP_SELF');
+        $origScriptName = $this->server->get('ORIG_SCRIPT_NAME');
+
+        if ($scriptName !== null && basename($scriptName) === $filename) {
+            $baseUrl = $scriptName;
+        } elseif ($phpSelf !== null && basename($phpSelf) === $filename) {
+            $baseUrl = $phpSelf;
+        } elseif ($origScriptName !== null && basename($origScriptName) === $filename) {
+            // 1and1 shared hosting compatibility.
+            $baseUrl = $origScriptName;
+        } else {
+            // Backtrack up the SCRIPT_FILENAME to find the portion
+            // matching PHP_SELF.
+
+            $baseUrl  = '/';
+            $basename = basename($filename);
+            if ($basename) {
+                $path     = ($phpSelf ? trim($phpSelf, '/') : '');
+                $baseUrl .= substr($path, 0, strpos($path, $basename)) . $basename;
+            }
+        }
+
+        // Does the base URL have anything in common with the request URI?
+        $requestUri = $this->getRequestUri();
+
+        // Full base URL matches.
+        if (0 === strpos($requestUri, $baseUrl)) {
+            return $baseUrl;
+        }
+
+        // Directory portion of base path matches.
+        $baseDir = str_replace('\\', '/', dirname($baseUrl));
+        if (0 === strpos($requestUri, $baseDir)) {
+            return $baseDir;
+        }
+
+        $truncatedRequestUri = $requestUri;
+
+        if (false !== ($pos = strpos($requestUri, '?'))) {
+            $truncatedRequestUri = substr($requestUri, 0, $pos);
+        }
+
+        $basename = basename($baseUrl);
+
+        // No match whatsoever
+        if (empty($basename) || false === strpos($truncatedRequestUri, $basename)) {
+            return '';
+        }
+
+        // If using mod_rewrite or ISAPI_Rewrite strip the script filename
+        // out of the base path. $pos !== 0 makes sure it is not matching a
+        // value from PATH_INFO or QUERY_STRING.
+        if (strlen($requestUri) >= strlen($baseUrl)
+            && (false !== ($pos = strpos($requestUri, $baseUrl)) && $pos !== 0)
+        ) {
+            $baseUrl = substr($requestUri, 0, $pos + strlen($baseUrl));
+        }
+
+        return $baseUrl;
+    }
+    
+    /**
+     * Detect the path info for the request
+     * 
+     * @return string
+     */
+    protected function detectPathInfo()
+    {
+        $uri = $this->getRequestUri();
+        
+        $pathInfo = '/' . trim(substr($uri, strlen($this->getBaseUrl())), '/');
+
+        if (false !== $pos = strpos($pathInfo, '?')) {
+            $pathInfo = substr($pathInfo, 0, $pos);
+        }
+        return $pathInfo;
     }
 }
