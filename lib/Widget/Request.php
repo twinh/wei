@@ -206,21 +206,6 @@ class Request extends Parameter
     }
 
     /**
-     * Returns the base URL, which contains scheme://domain:port/path
-     * 
-     * @link http://snipplr.com/view.php?codeview&id=2734
-     * @return string
-     */
-    public function getBaseUrl2()
-    {
-        $s = $this->server['HTTPS'] == 'on' ? 's' : '';
-        $protocol = substr(strtolower($this->server['SERVER_PROTOCOL']), 0, strpos(strtolower($this->server['SERVER_PROTOCOL']), '/')) . $s;
-        $port = ($this->server['SERVER_PORT'] == '80') ? '' : (':' . $this->server['SERVER_PORT']);
-        
-        return $protocol . '://' . $this->server['SERVER_NAME'] . $port;
-    }
-    
-    /**
      * Returns the full URL, which contains scheme://domain:port/path?queryString
      * 
      * The full URL do not contain the fragment, for it never sent to the server
@@ -229,7 +214,13 @@ class Request extends Parameter
      */
     public function getUrl()
     {
-        return $this->getBaseUrl2() . $this->server['REQUEST_URI'];
+        if ($port == 80 || $port == 433) {
+            $port = '';
+        } else {
+            $port = ':' . $port;
+        }
+        
+        return $this->getScheme() . '://' . $this->getHost() . $port . $this->getRequestUri();
     }
 
     /**
