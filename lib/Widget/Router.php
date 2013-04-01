@@ -370,7 +370,7 @@ class Router extends AbstractWidget
      */
     public function generateUrl(array $parameters = array(), $name = null)
     {
-        return $this->request->getBaseUrl() . $this->path($parameters, $name);
+        return $this->request->getBaseUrl() . $this->generateath($parameters, $name);
     }
     
     /**
