@@ -214,6 +214,7 @@ class Request extends Parameter
      */
     public function getUrl()
     {
+        $port = $this->server['SERVER_PORT'];
         if ($port == 80 || $port == 433) {
             $port = '';
         } else {
