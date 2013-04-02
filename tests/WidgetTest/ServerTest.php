@@ -2,7 +2,7 @@
 
 namespace WidgetTest;
 
-class RequestTest extends TestCase
+class ServerTest extends TestCase
 {
     public function testGetHeaders()
     {
