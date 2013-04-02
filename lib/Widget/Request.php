@@ -139,7 +139,9 @@ class Request extends Parameter
      */
     public function getHost()
     {
-        return $this->server['HTTP_HOST'] ?: $this->server['SERVER_NAME'];
+        return $this->server['HTTP_HOST'] 
+            ?: $this->server['SERVER_NAME']
+            ?: $this->server['REMOTE_ADDR'];
     }
     
     /**

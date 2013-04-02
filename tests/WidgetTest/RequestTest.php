@@ -307,7 +307,8 @@ class RequestTest extends TestCase
     {
         $server = array(
             'HTTP_HOST' => 'a.test.com',
-            'SERVER_NAME' => 'test.com'
+            'SERVER_NAME' => 'test.com',
+            'REMOTE_ADDR' => '127.0.0.1'
         );
         $this->server->setOption('data', $server);
         $this->assertEquals('a.test.com', $this->request->getHost());
@@ -315,5 +316,8 @@ class RequestTest extends TestCase
         unset($server['HTTP_HOST']);
         $this->server->setOption('data', $server);
         $this->assertEquals('test.com', $this->request->getHost());
+        
+        unset($server['SERVER_NAME']);
+        $this->server->setOption('127.0.0.1', $server);
     }
 }
