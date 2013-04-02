@@ -127,6 +127,9 @@ class RequestTest extends TestCase
         $this->server->set('HTTPS', '1');
         $this->assertEquals('https', $this->request->getScheme());
         
+        $this->server->set('HTTPS', 'off');
+        $this->assertEquals('http', $this->request->getScheme());
+        
         $this->server->remove('HTTPS', '1');
         $this->assertEquals('http', $this->request->getScheme());
     }
