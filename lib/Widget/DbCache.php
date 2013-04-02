@@ -283,21 +283,11 @@ class DbCache extends AbstractCache
     {
         return $this->dbh;
     }
-
-    /**
-     * Get last PDOStatement object
-     *
-     * @return \PDOStatement
-     */
-    public function getStmt()
-    {
-        return $this->stmt;
-    }
-
+    
     /**
      * Get current database cache driver
      *
-     * @return \Widget\DbCache\Driver
+     * @return \Widget\Cache\Db\DriverInterface
      */
     public function getDriver()
     {
