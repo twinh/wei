@@ -203,6 +203,27 @@ class RequestTest extends TestCase
                 '/index.php',
                 '/news/3'
             ),
+            // IIS 7.0 or later with ISAPI_Rewrite
+            array(
+                array(
+                    'HTTP_X_ORIGINAL_URL'   => '/index.php/news/3?var1=val1&var2=val2',
+                    'PHP_SELF'              => '/index.php/news/3',
+                    'SCRIPT_FILENAME'       => '/var/web/html/index.php',
+                ),
+                '',
+                '/'
+            ),
+            array(
+                array(
+                    'IIS_WasUrlRewritten'   => '1',
+                    'UNENCODED_URL'         => '/index.php/news/3?var1=val1&var2=val2',
+                    'HTTP_X_ORIGINAL_URL'   => '/index.php/news/3?var1=val1&var2=val2',
+                    'PHP_SELF'              => '/index.php/news/3',
+                    'SCRIPT_FILENAME'       => '/var/web/html/index.php',
+                ),
+                '/index.php',
+                '/news/3'
+            ),
             array(
                 array(
                     'ORIG_PATH_INFO'  => '/index.php/news/3',
@@ -322,5 +343,10 @@ class RequestTest extends TestCase
         
         unset($server['SERVER_NAME']);
         $this->server->setOption('127.0.0.1', $server);
+    }
+    
+    public function testSetRequestUri()
+    {
+        //$this->request->setRequestUri('/blog')
     }
 }
