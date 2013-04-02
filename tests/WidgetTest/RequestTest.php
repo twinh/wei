@@ -297,9 +297,23 @@ class RequestTest extends TestCase
      */
     public function testBasePathDetection(array $server, $baseUrl, $pathInfo)
     {
-        $this->request->server->setOption('data', $server);
+        $this->server->setOption('data', $server);
 
         $this->assertEquals($baseUrl,  $this->request->getBaseUrl());
         $this->assertEquals($pathInfo, $this->request->getPathInfo());
+    }
+    
+    public function testGetHost()
+    {
+        $server = array(
+            'HTTP_HOST' => 'a.test.com',
+            'SERVER_NAME' => 'test.com'
+        );
+        $this->server->setOption('data', $server);
+        $this->assertEquals('a.test.com', $this->request->getHost());
+        
+        unset($server['HTTP_HOST']);
+        $this->server->setOption('data', $server);
+        $this->assertEquals('test.com', $this->request->getHost());
     }
 }
