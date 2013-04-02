@@ -103,11 +103,13 @@ class DbCache extends AbstractCache
             throw new Exception\UnsupportedException(sprintf('Unsupport driver "%s"', $driver));
         }
 
+        // TODO use pdo option
         // Execute prepare sql query
         if ($prepare = $this->driver->getSql('prepare')) {
             $this->query($prepare);
         }
 
+        // TODO use CREATE IF NOT EXISTS
         // Check if the table exists, if not, create the table
         try {
             if (!$this->query($this->driver->getSql('checkTable'))) {
