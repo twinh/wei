@@ -15,7 +15,7 @@ return Widget::create(array(
             'WidgetTest' => __DIR__
         ),
         'initWidgets' => array(
-            'is'
+            
         )
     ),
 ));

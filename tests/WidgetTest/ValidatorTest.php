@@ -5,6 +5,12 @@ namespace WidgetTest;
 
 class ValidatorTest extends TestCase
 {
+    public function setUp()
+    {
+        // Instance validator manager widget
+        $this->is;
+    }
+
     /**
      * @expectedException Widget\Exception\UnexpectedTypeException
      */
