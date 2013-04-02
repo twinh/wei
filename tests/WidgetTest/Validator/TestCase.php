@@ -22,6 +22,14 @@ class TestCase extends BaseTestCase
     
     protected static $resource;
     
+    public function setUp()
+    {
+        parent::setUp();
+        
+        // Instance validator manager widget
+        $this->is;
+    }
+    
     public function getInputs()
     {
         return array(
