@@ -219,6 +219,8 @@ class Router extends AbstractWidget
             }
             $parameters[$key] = $parameter;
         }
+
+        $parameters += $route['defaults'];
         
         preg_match_all('#<([a-zA-Z0-9_]++)>#', $route['pattern'], $matches);
         foreach ($matches[1] as $key) {
@@ -228,7 +230,7 @@ class Router extends AbstractWidget
         }
 
         // path info params > defaults params
-        return array('_route' => $name) + $parameters + $route['defaults'];
+        return array('_route' => $name) + $parameters;
     }
 
     /**
