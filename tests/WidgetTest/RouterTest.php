@@ -153,10 +153,11 @@ class RouterTest extends TestCase
         
         $router->set(array(
             'name' => 'default',
-            'patter' => '<module>(/<action>)'
+            'pattern' => '<module>(/<action>)'
         ));
 
         $this->assertEquals(array(
+            '_route' => 'default',
             'module' => 'blog',
             'action' => 'list'
         ), $router->match('blog/list', null, 'default'));
@@ -224,7 +225,7 @@ class RouterTest extends TestCase
             ),
         ));
 
-        $this->assertEquals('blog/1', $router->path(array(
+        $this->assertEquals('blog/1', $router->generatePath(array(
             'matched' => true,
             'page' => 1,
         )));
@@ -241,7 +242,7 @@ class RouterTest extends TestCase
             ),
         ));
 
-        $this->assertEquals('?matched=1', $router->path(array(
+        $this->assertEquals('?matched=1', $router->generatePath(array(
             'matched' => true,
         )));
     }
@@ -262,7 +263,7 @@ class RouterTest extends TestCase
             ),
         ));
 
-        $this->assertEquals('?matched=1&page=notDigits', $router->path(array(
+        $this->assertEquals('?matched=1&page=notDigits', $router->generatePath(array(
             'matched' => true,
             'page' => 'notDigits',
         )));
@@ -280,7 +281,7 @@ class RouterTest extends TestCase
             ),
         ));
 
-        $this->assertEquals('blog', $router->path(array(
+        $this->assertEquals('blog', $router->generatePath(array(
             'module' => 'blog',
         )));
     }
@@ -302,7 +303,7 @@ class RouterTest extends TestCase
             ),
         ));
 
-        $this->assertEquals('?module=blog&page=notDigits', $router->path(array(
+        $this->assertEquals('?module=blog&page=notDigits', $router->generatePath(array(
             'module' => 'blog',
             'page' => 'notDigits'
         )));
@@ -321,7 +322,7 @@ class RouterTest extends TestCase
             ),
         ));
 
-        $this->assertEquals('blog/2', $router->path(array(
+        $this->assertEquals('blog/2', $router->generatePath(array(
             'module' => 'blog',
             'page' => '2',
         ), 'blogList'));

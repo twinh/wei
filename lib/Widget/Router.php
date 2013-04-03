@@ -279,7 +279,7 @@ class Router extends AbstractWidget
                 // search the required parts in the optional parts
                 while (preg_match('#<([a-zA-Z0-9_]++)>#', $replace, $match)) {
                     list($key, $param) = $match;
-
+                    
                     if (isset($parameters[$param])) {
                         if (isset($route['rules'][$param])) {
                             // the parameter not matched the rules
@@ -330,6 +330,10 @@ class Router extends AbstractWidget
                 $isMatched = true;
 
                 unset($parameters[$param]);
+            }
+            
+            if (false === strpos($pattern, '<') && false === strpos($pattern, '(')) {
+                return $pattern;
             }
 
             // if nothing matched
