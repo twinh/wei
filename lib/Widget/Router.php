@@ -20,7 +20,7 @@ namespace Widget;
 class Router extends AbstractWidget
 {
     /**
-     * Routes configurations
+     * The routes configurations
      *
      * @var array
      */
@@ -75,6 +75,12 @@ class Router extends AbstractWidget
         }
     }
 
+    /**
+     * Set routes
+     * 
+     * @param array $routes
+     * @return \Widget\Router
+     */
     public function setRoutes($routes)
     {
         foreach ($routes as &$route) {
@@ -86,10 +92,10 @@ class Router extends AbstractWidget
     }
 
     /**
-     * Set route
+     * Append one route
      *
      * @param  array       $route the options of the route
-     * @return Router
+     * @return \Widget\Router
      */
     public function set(array $route)
     {
@@ -97,7 +103,6 @@ class Router extends AbstractWidget
 
         if (!$route['name']) {
             $this->routes[] = $route;
-            //array_unshift($this->routes, $route);
         } else {
             $this->routes = array($route['name'] => $route) + $this->routes;
         }
@@ -211,7 +216,7 @@ class Router extends AbstractWidget
             return false;
         }
         
-        // get params in the path info
+        // Get params in the path info
         $parameters = array();
         foreach ($matches as $key => $parameter) {
             if (is_int($key)) {
@@ -229,21 +234,17 @@ class Router extends AbstractWidget
             }
         }
 
-        // path info params > defaults params
         return array('_route' => $name) + $parameters;
     }
 
     /**
      * Build params to query string
      *
-     * @param array $parameters the array params to combine
+     * @param array $parameters The array params to combine
      */
     protected function buildQuery($parameters)
     {
-        if (!$parameters) {
-            return '';
-        }
-        return '?' . http_build_query($parameters);
+        return $parameters ? '?' . http_build_query($parameters) : '';
     }
 
     /**
@@ -256,9 +257,9 @@ class Router extends AbstractWidget
 
         $pattern = $route['pattern'];
 
-        // static route
+        // Static route
         if (false === strpos($pattern, '<') && false === strpos($pattern, '(')) {
-            // check if $parameters contains all of the route default params
+            // Check if $parameters contains all of the route default params
             $intersect = array_intersect_assoc($parameters, $route['defaults']);
             if ($route['defaults'] == $intersect) {
                 return $pattern . $this->buildQuery(array_diff_assoc($parameters, $route['defaults']));
@@ -268,40 +269,40 @@ class Router extends AbstractWidget
         } else {
             $isMatched = false;
 
-            // search the minimal optional parts
+            // Search the minimal optional parts
             while (preg_match('#\([^()]++\)#', $pattern, $match)) {
-                // search for the matched value
+                // Search for the matched value
                 $search = $match[0];
 
-                // remove the parenthesis from the match as the replace
+                // Remove the parenthesis from the match as the replace
                 $replace = substr($match[0], 1, -1);
 
-                // search the required parts in the optional parts
+                // Search the required parts in the optional parts
                 while (preg_match('#<([a-zA-Z0-9_]++)>#', $replace, $match)) {
                     list($key, $param) = $match;
                     
                     if (isset($parameters[$param])) {
                         if (isset($route['rules'][$param])) {
-                            // the parameter not matched the rules
+                            // The parameter not matched the rules
                             if (!preg_match('#' . $route['rules'][$param] . '#', $parameters[$param])) {
                                 return false;
                             }
                         }
 
-                        // replace the key with the parameter value
+                        // Replace the key with the parameter value
                         $replace = str_replace($key, urlencode($parameters[$param]), $replace);
 
                         $isMatched = true;
 
                         unset($parameters[$param]);
                     } else {
-                        // this group has missing parameters
+                        // This group has missing parameters
                         $replace = '';
                         break;
                     }
                 }
 
-                // replace the group in the pattern
+                // Replace the group in the pattern
                 $pattern = str_replace($search, $replace, $pattern);
             }
 
@@ -309,16 +310,16 @@ class Router extends AbstractWidget
                 return false;
             }
 
-            // search the required parts NOT in the optional parts
+            // Search the required parts NOT in the optional parts
             while (preg_match('#<([a-zA-Z0-9_]++)>#', $pattern, $match)) {
                 list($key, $param) = $match;
 
-                // required route parameter not passed
+                // Required route parameter not passed
                 if (!isset($parameters[$param])) {
                     return false;
                 }
 
-                // check if parameter value matches the regex rule
+                // Check if parameter value matches the regex rule
                 if (isset($route['rules'][$param])) {
                     if (!preg_match('#' . $route['rules'][$param] . '#', $parameters[$param])) {
                         return false;
@@ -336,7 +337,7 @@ class Router extends AbstractWidget
 //                return $pattern;
 //            }
 
-            // if nothing matched
+            // If nothing matched
             if (!$isMatched && '' === $pattern) {
                 return false;
             }
