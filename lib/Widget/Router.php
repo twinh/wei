@@ -187,15 +187,11 @@ class Router extends AbstractWidget
      * @param  string|null $method The request method to match, maybe GET, POST, etc
      * @return false|array
      */
-    public function match($pathInfo, $method = null, $id = null)
+    public function match($pathInfo, $method = null)
     {
-        if ($id && isset($this->routes[$id])) {
-            return $this->matchRoute($pathInfo, $method, $id);
-        } else {
-            foreach ($this->routes as $id => $route) {
-                if (false !== ($parameters = $this->matchRoute($pathInfo, $method, $id))) {
-                    return $parameters;
-                }
+        foreach ($this->routes as $id => $route) {
+            if (false !== ($parameters = $this->matchRoute($pathInfo, $method, $id))) {
+                return $parameters;
             }
         }
 
@@ -262,20 +258,21 @@ class Router extends AbstractWidget
      */
     protected function buildPath($parameters, $id)
     {
-        $route = $this->compile($this->routes[$id]);
-
-        $pattern = $route['pattern'];
+        $defaults = $this->routes[$id]['defaults'];
+        $pattern = $this->routes[$id]['pattern'];
 
         // Static route
         if (false === strpos($pattern, '<') && false === strpos($pattern, '(')) {
             // Check if $parameters contains all of the route default params
-            $intersect = array_intersect_assoc($parameters, $route['defaults']);
-            if ($route['defaults'] == $intersect) {
-                return $pattern . $this->buildQuery(array_diff_assoc($parameters, $route['defaults']));
+            $intersect = array_intersect_assoc($parameters, $defaults);
+            if ($defaults == $intersect) {
+                return $pattern . $this->buildQuery(array_diff_assoc($parameters, $defaults));
             }
 
             return false;
         } else {
+            $route = $this->compile($this->routes[$id]);
+            
             $isMatched = false;
 
             // Search the minimal optional parts
@@ -351,7 +348,7 @@ class Router extends AbstractWidget
                 return false;
             }
 
-            return $pattern . $this->buildQuery(array_diff_assoc($parameters, $route['defaults']));
+            return $pattern . $this->buildQuery(array_diff_assoc($parameters, $defaults));
         }
     }
 
