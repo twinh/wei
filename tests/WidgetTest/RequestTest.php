@@ -313,6 +313,54 @@ class RequestTest extends TestCase
                 '/html/index.php',
                 '/'
             ),
+            array(
+                array(
+                    'SCRIPT_FILENAME' => '/web/blog/index.php',
+                    'SCRIPT_NAME' => '/blog/index.php',
+                    'REQUEST_URI' => '/blog/hello?string',
+                    'PHP_SELF' => '/blog/index.php'
+                ),
+                '/blog',
+                '/hello'
+            ),
+            array(
+                array(
+                    'SCRIPT_FILENAME' => '/web/blog/index.php',
+                    'SCRIPT_NAME' => '/blog/index.php',
+                    'REQUEST_URI' => '/blog/hello?string',
+                ),
+                '',
+                '/blog/hello'
+            ),
+            // cli php index.php
+            array(
+                array(
+                    'PHP_SELF' => 'index.php',
+                    'SCRIPT_NAME' => 'index.php',
+                    'SCRIPT_FILENAME' => 'index.php',
+                    'DOCUMENT_ROOT' => '',
+                ),
+                '',
+                '/'
+            ),
+            // NOTE The following data is for codecover only
+            array(
+                array(
+                    'PHP_SELF' => 'index.php',
+                    'SCRIPT_FILENAME' => 'index.php',
+                    'REQUEST_URI' => 'home/index.php?query=string'
+                ),
+                'home/index.php',
+                '/'
+            ),
+            array(
+                array(
+                    'ORIG_SCRIPT_NAME' => 'index.php',
+                    'SCRIPT_FILENAME' => 'index.php',
+                ),
+                '',
+                '/'
+            ),
         );
     }
 
