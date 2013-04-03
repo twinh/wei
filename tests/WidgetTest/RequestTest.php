@@ -395,6 +395,42 @@ class RequestTest extends TestCase
     
     public function testSetRequestUri()
     {
-        //$this->request->setRequestUri('/blog')
+        $this->request->setRequestUri('/blog');
+        
+        $this->assertEquals('/blog', $this->request->getRequestUri());
+    }
+    
+    public function providerForGetUrl()
+    {
+        return array(
+            array(
+                array(
+                    'HTTPS' => 'on',
+                    'SERVER_PORT' => '80',
+                    'HTTP_HOST' => 'test.com',
+                    'REQUEST_URI' => '/index.php?query=string'
+                ),
+                'https://test.com/index.php?query=string'
+            ),
+            array(
+                array(
+                    'HTTPS' => 'on',
+                    'SERVER_PORT' => '8080',
+                    'HTTP_HOST' => 'test.com',
+                    'REQUEST_URI' => '/index.php?query=string'
+                ),
+                'https://test.com:8080/index.php?query=string'
+            )
+        );
+    }
+    
+    /**
+     * @dataProvider providerForGetUrl
+     */
+    public function testGetUrl($server, $url)
+    {
+        $this->server->setOption('data', $server);
+        
+        $this->assertEquals($url, $this->request->getUrl());
     }
 }
