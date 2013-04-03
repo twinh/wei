@@ -105,7 +105,7 @@ class RouterTest extends TestCase
 
         $this->assertFalse($router->match('postOrPut', 'GET'));
     }
-
+    
     public function testNotMatchUri()
     {
         $router = $this->object;
@@ -121,12 +121,36 @@ class RouterTest extends TestCase
 
         $this->assertFalse($router->match('withoutThisRoute'));
     }
+    
+    public function testOptionalKeyShouldReturnNull()
+    {
+        $router = $this->object;
+        
+        $router->set(array(
+            'pattern' => '/blog(/<page>)(<format>)',
+            'defaults' => array(
+                'module' => 'blog',
+                'page' => '1'
+            ),
+        ));
+        
+        $parameters = $router->match('/blog/123');
+        
+        $this->assertArrayHasKey('format', $parameters);
+        
+        $this->assertNull($parameters['format']);
+        
+        $this->assertEquals(array(
+            '_route' => 0,
+            'page' => '123',
+            'module' => 'blog',
+            'format' => null
+        ), $parameters);
+    }
 
     public function testMatchUriWithRules()
     {
         $router = $this->object;
-
-        $router->remove('default');
 
         $router->set(array(
             'pattern' => 'blog/<page>',
@@ -326,5 +350,35 @@ class RouterTest extends TestCase
             'module' => 'blog',
             'page' => '2',
         ), 'blogList'));
+    }
+    
+    public function testNoRuleMatchd()
+    {
+        $router = $this->object;
+        
+        $router->set(array(
+            'name' => 'test',
+            'pattern' => 'blog/<page>'
+        ));
+        
+        $this->assertEquals('?controller=blog', $router->generatePath(array(
+            'controller' => 'blog'
+        )));
+    }
+    
+    public function testRemove()
+    {
+        $router = $this->object;
+        
+        $router->set(array(
+            'name' => 'test',
+            'pattern' => 'blog/<page>'
+        ));
+        
+        $this->assertNotEquals(false, $router->getRoute('test'));
+        
+        $router->remove('test');
+        
+        $this->assertFalse($router->getRoute('test'));
     }
 }

@@ -14,8 +14,8 @@ namespace Widget;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @link        The code is base on the awesome framework - Kohana
  *              http://kohanaframework.org/3.0/guide/api/Kohana_Route
- * @property \Widget\Request $request The HTTP request widget
- * @method \Widget\Response response(string $content) Send response header and content
+ * @property    \Widget\Request $request The HTTP request widget
+ * @method      \Widget\Response response(string $content) Send response header and content
  */
 class Router extends AbstractWidget
 {
@@ -109,11 +109,11 @@ class Router extends AbstractWidget
      * Get the route by name
      *
      * @param  string $name the name of the route
-     * @return array|null
+     * @return array|false
      */
     public function getRoute($name)
     {
-        return isset($this->routes[$name]) ? $this->routes[$name] : null;
+        return isset($this->routes[$name]) ? $this->routes[$name] : false;
     }
 
     /**
@@ -332,12 +332,12 @@ class Router extends AbstractWidget
                 unset($parameters[$param]);
             }
             
-            if (false === strpos($pattern, '<') && false === strpos($pattern, '(')) {
-                return $pattern;
-            }
+//            if (false === strpos($pattern, '<') && false === strpos($pattern, '(')) {
+//                return $pattern;
+//            }
 
             // if nothing matched
-            if (!$isMatched || '' === $pattern) {
+            if (!$isMatched && '' === $pattern) {
                 return false;
             }
 
