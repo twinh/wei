@@ -87,17 +87,35 @@ class Router extends AbstractWidget
 
         return $this;
     }
+    
+    /**
+     * Return routes
+     * 
+     * @return array
+     */
+    public function getRoutes()
+    {
+        return $this->routes;
+    }
 
     /**
-     * Append one route
+     * Add one route
      *
      * @param  array       $route the options of the route
      * @return \Widget\Router
      */
-    public function set(array $route)
+    public function set($route)
     {
-        $this->routes[] = $route + $this->routeOptions;
-
+        if (is_string($route)) {
+            $this->routes[] = array(
+                'pattern' => $route
+            ) + $this->routeOptions;
+        } elseif (is_array($route)) {
+            $this->routes[] = $route + $this->routeOptions;
+        } else {
+            throw new Exception\UnexpectedTypeException($route, 'string or array');
+        }
+        
         return $this;
     }
 

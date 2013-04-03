@@ -4,6 +4,11 @@ namespace WidgetTest;
 
 class RouterTest extends TestCase
 {
+    /**
+     * @var \Widget\Router
+     */
+    protected $object;
+    
     public function testAddRouteWithName()
     {
         $router = $this->object;
@@ -382,5 +387,22 @@ class RouterTest extends TestCase
         $this->assertEquals('?key=value', $router->generatePath(array(
             'key' => 'value'
         )));
+    }
+    
+    public function testStringAsRouteParameter()
+    {
+        $router = $this->object;
+        
+        $router->set('/blog');
+        
+        $this->assertNotEmpty($router->getRoutes());
+    }
+    
+    /**
+     * @expectedException \Widget\Exception\UnexpectedTypeException
+     */
+    public function testUnexpectedTypeExceptionForSetRoute()
+    {
+        $this->object->set(new \stdClass());
     }
 }
