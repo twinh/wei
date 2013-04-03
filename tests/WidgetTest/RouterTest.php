@@ -147,15 +147,20 @@ class RouterTest extends TestCase
         ), $router->match('blog/1'));
     }
 
-//    public function testMatchWithNameParameter()
-//    {
-//        $router = $this->object;
-//
-//        $this->assertEquals(array(
-//            'module' => 'blog',
-//            'action' => 'list'
-//        ), $router->match('blog/list', null, 'default'));
-//    }
+    public function testMatchWithNameParameter()
+    {
+        $router = $this->object;
+        
+        $router->set(array(
+            'name' => 'default',
+            'patter' => '<module>(/<action>)'
+        ));
+
+        $this->assertEquals(array(
+            'module' => 'blog',
+            'action' => 'list'
+        ), $router->match('blog/list', null, 'default'));
+    }
 
     public function testUriForStaticRule()
     {
@@ -208,22 +213,22 @@ class RouterTest extends TestCase
         )));
     }
 
-//    public function testUriForRequiredRule()
-//    {
-//        $router = $this->object;
-//
-//        $router->set(array(
-//            'pattern' => 'blog/<page>',
-//            'defaults' => array(
-//                'matched' => true
-//            ),
-//        ));
-//
-//        $this->assertEquals('blog/1', $router->path(array(
-//            'matched' => true,
-//            'page' => 1,
-//        )));
-//    }
+    public function testUriForRequiredRule()
+    {
+        $router = $this->object;
+
+        $router->set(array(
+            'pattern' => 'blog/<page>',
+            'defaults' => array(
+                'matched' => true
+            ),
+        ));
+
+        $this->assertEquals('blog/1', $router->path(array(
+            'matched' => true,
+            'page' => 1,
+        )));
+    }
 
     public function testUriForRequiredRuleAndRequiredParameterNotPassed()
     {
@@ -263,22 +268,22 @@ class RouterTest extends TestCase
         )));
     }
 
-//    public function testUriForOptionalRule()
-//    {
-//        $router = $this->object;
-//
-//        $router->set(array(
-//            'pattern' => 'blog(/<page>)',
-//            'defaults' => array(
-//                'module' => 'blog',
-//                'page' => '1'
-//            ),
-//        ));
-//
-//        $this->assertEquals('blog', $router->path(array(
-//            'module' => 'blog',
-//        )));
-//    }
+    public function testUriForOptionalRule()
+    {
+        $router = $this->object;
+
+        $router->set(array(
+            'pattern' => 'blog(/<page>)',
+            'defaults' => array(
+                'module' => 'blog',
+                'page' => '1'
+            ),
+        ));
+
+        $this->assertEquals('blog', $router->path(array(
+            'module' => 'blog',
+        )));
+    }
 
     public function testUriForOptionalRuleAndParameterNotMatchRule()
     {
@@ -303,22 +308,22 @@ class RouterTest extends TestCase
         )));
     }
 
-//    public function testUriWithNameParameter()
-//    {
-//        $router = $this->object;
-//
-//        $router->set(array(
-//            'name' => 'blogList',
-//            'pattern' => 'blog(/<page>)',
-//            'defaults' => array(
-//                'module' => 'blog',
-//                'page' => '1'
-//            ),
-//        ));
-//
-//        $this->assertEquals('blog/2', $router->path(array(
-//            'module' => 'blog',
-//            'page' => '2',
-//        ), 'blogList'));
-//    }
+    public function testUriWithNameParameter()
+    {
+        $router = $this->object;
+
+        $router->set(array(
+            'name' => 'blogList',
+            'pattern' => 'blog(/<page>)',
+            'defaults' => array(
+                'module' => 'blog',
+                'page' => '1'
+            ),
+        ));
+
+        $this->assertEquals('blog/2', $router->path(array(
+            'module' => 'blog',
+            'page' => '2',
+        ), 'blogList'));
+    }
 }
