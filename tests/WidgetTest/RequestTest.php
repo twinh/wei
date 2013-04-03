@@ -433,4 +433,30 @@ class RequestTest extends TestCase
         
         $this->assertEquals($url, $this->request->getUrl());
     }
+    
+    public function testGetContent()
+    {
+        // Should be empty on not post request
+        $this->assertEmpty($this->request->getContent());
+        
+        $this->request->setContent(__METHOD__);
+        
+        $this->assertEquals(__METHOD__, $this->request->getContent());
+    }
+    
+    public function testToString()
+    {
+        $this->server->setOption('data', array(
+            'HTTPS' => 'on',
+            'SERVER_PORT' => '8080',
+            'HTTP_HOST' => 'test.com',
+            'REQUEST_URI' => '/index.php?query=string',
+            'REQUEST_METHOD' => 'GET' 
+        ));
+        
+        $this->assertEquals(
+'GET https://test.com:8080/index.php?query=string 
+Host: test.com
+', (string)$this->request);
+    }
 }
