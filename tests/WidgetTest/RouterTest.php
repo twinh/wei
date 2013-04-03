@@ -381,4 +381,21 @@ class RouterTest extends TestCase
         
         $this->assertFalse($router->getRoute('test'));
     }
+    
+    public function testPatternIsOptional()
+    {
+        $router = $this->object;
+        
+        $router->set(array(
+            'pattern' => '(<controller>(/<action>))',
+            'defaults' => array(
+                'controller' => 'index',
+                'action' => 'index'
+            ),
+        ));
+
+        $this->assertEquals('?key=value', $router->generatePath(array(
+            'key' => 'value'
+        )));
+    }
 }
