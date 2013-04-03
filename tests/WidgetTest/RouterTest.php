@@ -24,14 +24,14 @@ class RouterTest extends TestCase
             'name' => 'test',
             'pattern' => 'user/login',
             'defaults' => array(
-                'module' => 'user',
+                'controller' => 'user',
                 'action' => 'login',
             ),
         ));
 
         $this->assertEquals($router->match('user/login'), array(
             '_route' => 'test',
-            'module' => 'user',
+            'controller' => 'user',
             'action' => 'login'
         ));
     }
@@ -43,13 +43,13 @@ class RouterTest extends TestCase
         $router->set(array(
             'pattern' => 'user/<action>',
             'defaults' => array(
-                'module' => 'user',
+                'controller' => 'user',
             ),
         ));
 
         $this->assertEquals(array(
             '_route' => 0,
-            'module' => 'user',
+            'controller' => 'user',
             'action' => 'login',
         ), $router->match('user/login'));
     }
@@ -61,20 +61,20 @@ class RouterTest extends TestCase
         $router->set(array(
             'pattern' => 'user(/<page>)',
             'defaults' => array(
-                'module' => 'user',
+                'controller' => 'user',
                 'page' => '1'
             ),
         ));
 
         $this->assertEquals(array(
             '_route' => 0,
-            'module' => 'user',
+            'controller' => 'user',
             'page' => '1',
         ), $router->match('user'));
 
         $this->assertEquals(array(
             '_route' => 0,
-            'module' => 'user',
+            'controller' => 'user',
             'page' => '2',
         ), $router->match('user/2'));
     }
@@ -129,7 +129,7 @@ class RouterTest extends TestCase
         $router->set(array(
             'pattern' => '/blog(/<page>)(<format>)',
             'defaults' => array(
-                'module' => 'blog',
+                'controller' => 'blog',
                 'page' => '1'
             ),
         ));
@@ -143,7 +143,7 @@ class RouterTest extends TestCase
         $this->assertEquals(array(
             '_route' => 0,
             'page' => '123',
-            'module' => 'blog',
+            'controller' => 'blog',
             'format' => null
         ), $parameters);
     }
@@ -177,12 +177,12 @@ class RouterTest extends TestCase
         
         $router->set(array(
             'name' => 'default',
-            'pattern' => '<module>(/<action>)'
+            'pattern' => '<controller>(/<action>)'
         ));
 
         $this->assertEquals(array(
             '_route' => 'default',
-            'module' => 'blog',
+            'controller' => 'blog',
             'action' => 'list'
         ), $router->match('blog/list', null, 'default'));
     }
@@ -194,13 +194,13 @@ class RouterTest extends TestCase
         $router->set(array(
             'pattern' => 'user/login',
             'defaults' => array(
-                'module' => 'user',
+                'controller' => 'user',
                 'action' => 'login',
             ),
         ));
 
         $this->assertEquals('user/login?var1=value1', $router->path(array(
-            'module' => 'user',
+            'controller' => 'user',
             'action' => 'login',
             'var1' => 'value1',
         )));
@@ -215,13 +215,13 @@ class RouterTest extends TestCase
         $router->set(array(
             'pattern' => 'user/login',
             'defaults' => array(
-                'module' => 'user',
+                'controller' => 'user',
                 'action' => 'login',
             ),
         ));
 
-        $this->assertEquals('?module=user&var1=value1', $router->path(array(
-            'module' => 'user',
+        $this->assertEquals('?controller=user&var1=value1', $router->path(array(
+            'controller' => 'user',
             'var1' => 'value1',
         )));
     }
@@ -300,13 +300,13 @@ class RouterTest extends TestCase
         $router->set(array(
             'pattern' => 'blog(/<page>)',
             'defaults' => array(
-                'module' => 'blog',
+                'controller' => 'blog',
                 'page' => '1'
             ),
         ));
 
         $this->assertEquals('blog', $router->generatePath(array(
-            'module' => 'blog',
+            'controller' => 'blog',
         )));
     }
 
@@ -322,13 +322,13 @@ class RouterTest extends TestCase
                 'page' => '\d+',
             ),
             'defaults' => array(
-                'module' => 'blog',
+                'controller' => 'blog',
                 'page' => '1'
             ),
         ));
 
-        $this->assertEquals('?module=blog&page=notDigits', $router->generatePath(array(
-            'module' => 'blog',
+        $this->assertEquals('?controller=blog&page=notDigits', $router->generatePath(array(
+            'controller' => 'blog',
             'page' => 'notDigits'
         )));
     }
@@ -341,13 +341,13 @@ class RouterTest extends TestCase
             'name' => 'blogList',
             'pattern' => 'blog(/<page>)',
             'defaults' => array(
-                'module' => 'blog',
+                'controller' => 'blog',
                 'page' => '1'
             ),
         ));
 
         $this->assertEquals('blog/2', $router->generatePath(array(
-            'module' => 'blog',
+            'controller' => 'blog',
             'page' => '2',
         ), 'blogList'));
     }
