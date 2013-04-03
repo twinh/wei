@@ -41,11 +41,11 @@ class Router extends AbstractWidget
      *                                  set a new route
      */
     protected $routeOptions = array(
-        'callback'  => null,
         'pattern'   => null,
         'rules'     => array(),
         'defaults'  => array(),
         'method'    => null,
+        'callback'  => null,
         'regex'     => null,
     );
 
