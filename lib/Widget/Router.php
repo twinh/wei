@@ -157,9 +157,7 @@ class Router extends AbstractWidget
             return $route;
         }
 
-        $regex = $route['pattern'];
-
-        $regex = preg_replace('#[.\+*?[^\]${}=!|]#', '\\\\$0', $regex);
+        $regex = preg_replace('#[.\+*?[^\]${}=!|:-]#', '\\\\$0', $route['pattern']);
 
         $regex = str_replace(array('(', ')'), array('(?:', ')?'), $regex);
 
@@ -355,19 +353,14 @@ class Router extends AbstractWidget
     /**
      * Generate url path from the specified array
      *
-     * @param  array       $parameters
-     * @param  string|null $id
+     * @param  array $parameters
      * @return string
      */
-    public function generatePath(array $parameters = array(), $id = null)
+    public function generatePath(array $parameters)
     {
-        if ($id && isset($this->routes[$id])) {
-            return $this->buildPath($parameters, $id);
-        } else {
-            foreach ($this->routes as $id => $route) {
-                if (false !== ($uri = $this->buildPath($parameters, $id))) {
-                    return $uri;
-                }
+        foreach ($this->routes as $id => $route) {
+            if (false !== ($uri = $this->buildPath($parameters, $id))) {
+                return $uri;
             }
         }
 
@@ -378,12 +371,11 @@ class Router extends AbstractWidget
      * Generate absolute url from specified array
      * 
      * @param array $parameters
-     * @param string $id
      * @return string
      */
-    public function generateUrl(array $parameters = array(), $id = null)
+    public function generateUrl(array $parameters)
     {
-        return $this->request->getBaseUrl() . $this->generateath($parameters, $id);
+        return $this->request->getBaseUrl() . $this->generateath($parameters);
     }
     
     /**
