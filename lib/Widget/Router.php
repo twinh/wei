@@ -29,8 +29,6 @@ class Router extends AbstractWidget
     /**
      * @var array route options
      *
-     *      -- name             string  the name of the route
-     *
      *      -- pattern          string  the string to be complied to regex
      *
      *      -- rules            array   the regex rules
@@ -43,7 +41,6 @@ class Router extends AbstractWidget
      *                                  set a new route
      */
     protected $routeOptions = array(
-        'name'      => null,
         'callback'  => null,
         'pattern'   => null,
         'rules'     => array(),
@@ -60,8 +57,8 @@ class Router extends AbstractWidget
         $request = $this->request;
         
         if (false !== ($parameters = $this->router->match($request->getPathInfo(), $request->getMethod()))) {
-            $route = $this->router->getRoute($parameters['_route']);
-            unset($parameters['_route']);
+            $route = $this->router->getRoute($parameters['_id']);
+            unset($parameters['_id']);
             
             // Merge parameters to query widget
             $this->query->set($parameters);
@@ -99,38 +96,32 @@ class Router extends AbstractWidget
      */
     public function set(array $route)
     {
-        $route =  $route + $this->routeOptions;
-
-        if (!$route['name']) {
-            $this->routes[] = $route;
-        } else {
-            $this->routes = array($route['name'] => $route) + $this->routes;
-        }
+        $this->routes[] = $route + $this->routeOptions;
 
         return $this;
     }
 
     /**
-     * Get the route by name
+     * Get the route by id
      *
-     * @param  string $name the name of the route
+     * @param  string $id The id of the route
      * @return array|false
      */
-    public function getRoute($name)
+    public function getRoute($id)
     {
-        return isset($this->routes[$name]) ? $this->routes[$name] : false;
+        return isset($this->routes[$id]) ? $this->routes[$id] : false;
     }
 
     /**
      * Remove the route
      *
-     * @param  string      $name the name of the route
+     * @param  string      $id The id of the route
      * @return \Widget\Router
      */
-    public function remove($name)
+    public function remove($id)
     {
-        if (isset($this->routes[$name])) {
-            unset($this->routes[$name]);
+        if (isset($this->routes[$id])) {
+            unset($this->routes[$id]);
         }
 
         return $this;
@@ -178,13 +169,13 @@ class Router extends AbstractWidget
      * @param  string|null $method The request method to match, maybe GET, POST, etc
      * @return false|array
      */
-    public function match($pathInfo, $method = null, $name = null)
+    public function match($pathInfo, $method = null, $id = null)
     {
-        if ($name && isset($this->routes[$name])) {
-            return $this->matchRoute($pathInfo, $method, $name);
+        if ($id && isset($this->routes[$id])) {
+            return $this->matchRoute($pathInfo, $method, $id);
         } else {
-            foreach ($this->routes as $name => $route) {
-                if (false !== ($parameters = $this->matchRoute($pathInfo, $method, $name))) {
+            foreach ($this->routes as $id => $route) {
+                if (false !== ($parameters = $this->matchRoute($pathInfo, $method, $id))) {
                     return $parameters;
                 }
             }
@@ -199,12 +190,12 @@ class Router extends AbstractWidget
      *
      * @param  string      $pathInfo The path info to match
      * @param  string      $method The request method to match
-     * @param  string      $name The name of the route
+     * @param  string      $id The id of the route
      * @return false|array
      */
-    protected function matchRoute($pathInfo, $method, $name)
+    protected function matchRoute($pathInfo, $method, $id)
     {
-        $route = $this->compile($this->routes[$name]);
+        $route = $this->compile($this->routes[$id]);
  
         // When $route['method'] is not provided, accepts all request methods
         if ($method && $route['method'] && !preg_match('#' . $route['method'] . '#i', $method)) {
@@ -234,7 +225,7 @@ class Router extends AbstractWidget
             }
         }
 
-        return array('_route' => $name) + $parameters;
+        return array('_id' => $id) + $parameters;
     }
 
     /**
@@ -249,11 +240,11 @@ class Router extends AbstractWidget
 
     /**
      * @param array $parameters
-     * @param string $name
+     * @param string $id
      */
-    protected function buildPath($parameters, $name)
+    protected function buildPath($parameters, $id)
     {
-        $route = $this->compile($this->routes[$name]);
+        $route = $this->compile($this->routes[$id]);
 
         $pattern = $route['pattern'];
 
@@ -350,16 +341,16 @@ class Router extends AbstractWidget
      * Generate url path from the specified array
      *
      * @param  array       $parameters
-     * @param  string|null $name
+     * @param  string|null $id
      * @return string
      */
-    public function generatePath(array $parameters = array(), $name = null)
+    public function generatePath(array $parameters = array(), $id = null)
     {
-        if ($name && isset($this->routes[$name])) {
-            return $this->buildPath($parameters, $name);
+        if ($id && isset($this->routes[$id])) {
+            return $this->buildPath($parameters, $id);
         } else {
-            foreach ($this->routes as $name => $route) {
-                if (false !== ($uri = $this->buildPath($parameters, $name))) {
+            foreach ($this->routes as $id => $route) {
+                if (false !== ($uri = $this->buildPath($parameters, $id))) {
                     return $uri;
                 }
             }
@@ -372,12 +363,12 @@ class Router extends AbstractWidget
      * Generate absolute url from specified array
      * 
      * @param array $parameters
-     * @param string $name
+     * @param string $id
      * @return string
      */
-    public function generateUrl(array $parameters = array(), $name = null)
+    public function generateUrl(array $parameters = array(), $id = null)
     {
-        return $this->request->getBaseUrl() . $this->generateath($parameters, $name);
+        return $this->request->getBaseUrl() . $this->generateath($parameters, $id);
     }
     
     /**

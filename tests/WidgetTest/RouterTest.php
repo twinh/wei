@@ -9,11 +9,10 @@ class RouterTest extends TestCase
         $router = $this->object;
 
         $router->set(array(
-            'name' => __FUNCTION__,
             'pattern' => 'blog(/<page>)',
         ));
-
-        $this->assertNotNull($router->getRoute(__FUNCTION__));
+        
+        $this->assertNotNull($router->getRoute(0));
     }
 
     public function testMatchStaticRoute()
@@ -21,7 +20,6 @@ class RouterTest extends TestCase
         $router = $this->object;
 
         $router->set(array(
-            'name' => 'test',
             'pattern' => 'user/login',
             'defaults' => array(
                 'controller' => 'user',
@@ -29,8 +27,7 @@ class RouterTest extends TestCase
             ),
         ));
 
-        $this->assertEquals($router->match('user/login'), array(
-            '_route' => 'test',
+        $this->assertIsSubset($router->match('user/login'), array(
             'controller' => 'user',
             'action' => 'login'
         ));
@@ -47,8 +44,7 @@ class RouterTest extends TestCase
             ),
         ));
 
-        $this->assertEquals(array(
-            '_route' => 0,
+        $this->assertIsSubset(array(
             'controller' => 'user',
             'action' => 'login',
         ), $router->match('user/login'));
@@ -66,14 +62,12 @@ class RouterTest extends TestCase
             ),
         ));
 
-        $this->assertEquals(array(
-            '_route' => 0,
+        $this->assertIsSubset(array(
             'controller' => 'user',
             'page' => '1',
         ), $router->match('user'));
 
-        $this->assertEquals(array(
-            '_route' => 0,
+        $this->assertIsSubset(array(
             'controller' => 'user',
             'page' => '2',
         ), $router->match('user/2'));
@@ -93,13 +87,11 @@ class RouterTest extends TestCase
             ),
         ));
 
-        $this->assertEquals(array(
-            '_route' => 0,
+        $this->assertIsSubset(array(
             'matched' => true,
         ), $router->match('postOrPut'));
 
-        $this->assertEquals(array(
-            '_route' => 0,
+        $this->assertIsSubset(array(
             'matched' => true
         ), $router->match('postOrPut', 'POST'));
 
@@ -140,8 +132,7 @@ class RouterTest extends TestCase
         
         $this->assertNull($parameters['format']);
         
-        $this->assertEquals(array(
-            '_route' => 0,
+        $this->assertIsSubset(array(
             'page' => '123',
             'controller' => 'blog',
             'format' => null
@@ -164,8 +155,7 @@ class RouterTest extends TestCase
 
         $this->assertFalse($router->match('blog/notDigits'));
 
-        $this->assertEquals(array(
-            '_route' => 0,
+        $this->assertIsSubset(array(
             'matched' => true,
             'page' => '1',
         ), $router->match('blog/1'));
@@ -176,12 +166,10 @@ class RouterTest extends TestCase
         $router = $this->object;
         
         $router->set(array(
-            'name' => 'default',
             'pattern' => '<controller>(/<action>)'
         ));
 
-        $this->assertEquals(array(
-            '_route' => 'default',
+        $this->assertIsSubset(array(
             'controller' => 'blog',
             'action' => 'list'
         ), $router->match('blog/list', null, 'default'));
@@ -338,7 +326,6 @@ class RouterTest extends TestCase
         $router = $this->object;
 
         $router->set(array(
-            'name' => 'blogList',
             'pattern' => 'blog(/<page>)',
             'defaults' => array(
                 'controller' => 'blog',
@@ -357,7 +344,6 @@ class RouterTest extends TestCase
         $router = $this->object;
         
         $router->set(array(
-            'name' => 'test',
             'pattern' => 'blog/<page>'
         ));
         
@@ -371,13 +357,12 @@ class RouterTest extends TestCase
         $router = $this->object;
         
         $router->set(array(
-            'name' => 'test',
             'pattern' => 'blog/<page>'
         ));
         
-        $this->assertNotEquals(false, $router->getRoute('test'));
+        $this->assertNotEquals(false, $router->getRoute(0));
         
-        $router->remove('test');
+        $router->remove(0);
         
         $this->assertFalse($router->getRoute('test'));
     }

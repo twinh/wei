@@ -145,7 +145,7 @@ class TestCase extends PHPUnit_Framework_TestCase implements WidgetAwareInterfac
         return $this;
     }
     
-    protected function assertIsSubset($parent, $subset, $message = '')
+    protected function assertIsSubset($subset, $parent, $message = '')
     {
         if (!(is_array($parent) && $subset)) {
             $this->assertTrue(false, $message);
