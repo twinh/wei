@@ -389,6 +389,22 @@ class RouterTest extends TestCase
         )));
     }
     
+    public function testSetRoutes()
+    {
+        $router = $this->object;
+        
+        $router->setRoutes(array(
+            array(
+                'pattern' => '/'
+            ),
+            array(
+                'pattern' => '/docs'
+            ),
+        ));
+        
+        $this->assertCount(2, $router->getRoutes());
+    }
+    
     public function testStringAsRouteParameter()
     {
         $router = $this->object;
@@ -487,6 +503,23 @@ class RouterTest extends TestCase
         });
         
         $this->assertContains('index', $this->getRouterOutput());
+    }
+    
+    public function testCallbackOptinalRouteParameter()
+    {
+        $router = $this->object;
+        
+        $router->get('/(<module>(/<controller>(/<action>)))', function($widget, $module, $controller, $action){
+            $args = func_get_args();
+            array_shift($args);
+            return implode('.', $args);
+        });
+        
+        $this->assertEquals('module.controller.action', $this->getRouterOutput('/module/controller/action'));
+        
+        $this->assertEquals('module.controller.', $this->getRouterOutput('/module/controller'));
+        
+        $this->assertEquals('..', $this->getRouterOutput('/'));
     }
     
     protected function getRouterOutput()
