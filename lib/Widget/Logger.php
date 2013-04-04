@@ -126,12 +126,6 @@ class Logger extends AbstractWidget
     {
         $level = isset($this->levels[$level]) ? $level : $this->level;
 
-        $record = array(
-            'level' => $level,
-            'message' => $message,
-            'time' => microtime(true),
-        );
-
         // Check if the level would be handle
         if (isset($this->levels[$level])) {
             if ($this->levels[$level] < $this->levels[$this->handledLevel]) {
@@ -143,10 +137,10 @@ class Logger extends AbstractWidget
         $content = str_replace(array(
             '%datetime%', '%channel%', '%level%', '%message%',
         ), array(
-            date($this->dateFormat, $record['time']),
+            date($this->dateFormat, microtime(true)),
             $this->name,
-            strtoupper($record['level']),
-            $record['message'],
+            strtoupper($level),
+            $message,
         ), $this->format);
         
         // Write the log message
@@ -286,7 +280,6 @@ class Logger extends AbstractWidget
      */
     public function getFile()
     {
-        var_dump($this->fileDetected);
         if ($this->fileDetected) {
             return $this->file;
         }
