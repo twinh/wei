@@ -52,11 +52,15 @@ class Router extends AbstractWidget
     /**
      * Run the application
      */
-    public function __invoke()
+    public function __invoke($pathInfo = null, $method = null)
     {
-        $request = $this->request;
+        if (0 === func_num_args()) {
+            $request = $this->request;
+            $pathInfo = $request->getPathInfo();
+            $method = $request->getMethod();
+        }
         
-        if (false !== ($parameters = $this->router->match($request->getPathInfo(), $request->getMethod()))) {
+        if (false !== ($parameters = $this->match($pathInfo, $method))) {
             $route = $this->router->getRoute($parameters['_id']);
             unset($parameters['_id']);
             
@@ -414,8 +418,9 @@ class Router extends AbstractWidget
     /**
      * Add a route allow any request methods
      * 
-     * @param string $pattern
-     * @param callback $fn
+     * @param string $pattern The route pattern
+     * @param string $method The route method
+     * @param callback $fn The callback invoke then route is matched
      */
     public function request($pattern, $method, $fn = null)
     {

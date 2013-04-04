@@ -193,6 +193,18 @@ class Request extends Parameter
         }
         return $this->baseUrl;
     }
+    
+    /**
+     * Set the path info
+     * 
+     * @param string $pathInfo
+     * @return \Widget\Request
+     */
+    public function setPathInfo($pathInfo)
+    {
+        $this->pathInfo = $pathInfo;
+        return $this;
+    }
 
     /**
      * Return request path info
