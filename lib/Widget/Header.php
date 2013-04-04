@@ -13,48 +13,9 @@ namespace Widget;
  * Header
  *
  * @author      Twin Huang <twinh@yahoo.cn>
- * @property \Widget\Cookie $cookie The cookie widget
- * @property \Widget\Logger $logger The logger widget
  */
 class Header extends ArrayWidget
 {
-    /**
-     * Common use http status code and text
-     *
-     * @var array
-     * @todo other status codes
-     */
-    protected static $codeTexts = array(
-        200 => 'OK',
-        301 => 'Moved Permanently',
-        302 => 'Found',
-        304 => 'Not Modified',
-        403 => 'Forbidden',
-        404 => 'Not Found',
-        500 => 'Internal Server Error',
-    );
-
-    /**
-     * The http version, current is 1.0 or 1.1
-     *
-     * @var string
-     */
-    protected $version = '1.1';
-
-    /**
-     * The status code
-     *
-     * @var int
-     */
-    protected $statusCode = 200;
-
-    /**
-     * The status text for status code
-     *
-     * @var string
-     */
-    protected $statusText = 'OK';
-
     /**
      * Get or set the header values
      *
@@ -112,88 +73,5 @@ class Header extends ArrayWidget
         }
 
         return $this->data[$name];
-    }
-
-    /**
-     * Set the header status code
-     *
-     * @param  int          $code The status code
-     * @param  string|null       $text The status text
-     * @return Header
-     */
-    public function setStatusCode($code, $text = null)
-    {
-        $this->statusCode = (int) $code;
-
-        if ($text) {
-            $this->statusText = $text;
-        } elseif (isset(static::$codeTexts[$code])) {
-            $this->statusText = static::$codeTexts[$code];
-        }
-
-        return $this;
-    }
-
-    /**
-     * Get the status code
-     *
-     * @return int
-     */
-    public function getStatusCode()
-    {
-        return $this->statusCode;
-    }
-
-    /**
-     * Set the http version
-     *
-     * @param  string       $version The http version
-     * @return Header
-     */
-    public function setVersion($version)
-    {
-        $this->version = $version;
-
-        return $this;
-    }
-
-    /**
-     * Get the http version
-     *
-     * @return string
-     */
-    public function getVersion()
-    {
-        return $this->version;
-    }
-
-    /**
-     * Send headers, including http status, raw headers and cookie
-     *
-     * @return false|Header
-     */
-    public function send()
-    {
-        $file = $line = null;
-        if (headers_sent($file, $line)) {
-            $this->logger->debug(sprintf('Header has been at %s:%s', $file, $line));
-
-            return false;
-        }
-
-        // Send status
-        header(sprintf('HTTP/%s %d %s', $this->version, $this->statusCode, $this->statusText));
-
-        // Send headers
-        foreach ($this->data as $name => $values) {
-            foreach ($values as $value) {
-                header($name . ': ' . $value, false);
-            }
-        }
-
-        // Send cookie
-        $this->cookie->send();
-
-        return $this;
     }
 }
