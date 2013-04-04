@@ -368,17 +368,6 @@ class Router extends AbstractWidget
     }
     
     /**
-     * Generate absolute url from specified array
-     * 
-     * @param array $parameters
-     * @return string
-     */
-    public function generateUrl(array $parameters)
-    {
-        return $this->request->getBaseUrl() . $this->generateath($parameters);
-    }
-    
-    /**
      * Add a GET route
      * 
      * @param string $pattern
