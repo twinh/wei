@@ -4,18 +4,19 @@ namespace WidgetTest;
 
 class LoggerTest extends TestCase
 {
+    protected static $logger;
+    
     protected function tearDown()
     {
         $this->object->clean();
-        
-        $dir = $this->object->getOption('dir');
-        if (is_dir($dir)) {
-            rmdir($dir);
-        }
-        
-        parent::tearDown();
+     
+        // TODO remove dir after test
+//        $dir = static::$logger->getOption('dir');
+//        if (is_dir($dir)) {
+//            rmdir($dir);
+//        }
     }
-
+    
     public function testLog()
     {
         $logger = $this->object;
