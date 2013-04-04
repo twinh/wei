@@ -286,6 +286,7 @@ class Logger extends AbstractWidget
      */
     public function getFile()
     {
+        var_dump($this->fileDetected);
         if ($this->fileDetected) {
             return $this->file;
         }
