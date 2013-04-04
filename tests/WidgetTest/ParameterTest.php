@@ -69,6 +69,13 @@ class ParameterTest extends TestCase
     
     public function testArrayAsSetParameter()
     {
+        $array = array(
+            'key' => 'value',
+            'key1' => 'value1'
+        );
         
+        $this->query->set($array);
+        
+        $this->assertIsSubset($array, $this->query->toArray());
     }
 }
