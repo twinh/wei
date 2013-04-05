@@ -187,15 +187,13 @@ class Response extends AbstractWidget
     /**
      * Send headers, including http status, raw headers and cookie
      *
-     * @return false|Header
+     * @return false|\Widget\Response
      */
     public function sendHeader()
     {
         $file = $line = null;
-        $this->logger->debug(sprintf('Header has been at %s:%s', $file, $line));
         if (headers_sent($file, $line)) {
             $this->logger->debug(sprintf('Header has been at %s:%s', $file, $line));
-
             return false;
         }
 
