@@ -9,14 +9,14 @@ API 参考目录
 ------------
 
 #### 缓存
-* [apc](api/apc.md)
-* [dbCache](api/dbCache.md)
-* [file](api/file.md)
-* [memcache](api/memcache.md)
-* [memcached](api/memcached.md)
-* [redis](api/redis.md)
-* [cache](api/cache.md) 
-* [bicache](api/bicache.md)
+* [apc](api/apc.md) - APC缓存
+* [dbCache](api/dbCache.md) - 数据库缓存
+* [file](api/file.md) - 文件缓存
+* [memcache](api/memcache.md) - Memcachce缓存
+* [memcached](api/memcached.md) - Memcached缓存
+* [redis](api/redis.md) - Redis缓存
+* [cache](api/cache.md) - 通用缓存
+* [bicache](api/bicache.md) - 二级缓存
 
 #### 事件
 * [eventManager](api/eventManager.md) - 事件管理器
