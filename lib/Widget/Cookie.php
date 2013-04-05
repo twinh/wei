@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * Cookie
+ * The cookie widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property    \Widget\Request $request The HTTP request widget
@@ -132,7 +132,6 @@ class Cookie extends Parameter
      * Send cookie to header
      *
      * @return \Widget\Cookie
-     * @codeCoverageIgnore
      */
     public function send()
     {
