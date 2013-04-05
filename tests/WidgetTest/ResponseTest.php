@@ -38,4 +38,26 @@ class ResponseTest extends TestCase
         $response($content, $statusCode);
         return ob_get_clean();
     }
+    
+    public function testVersion()
+    {
+        $response = $this->object;
+        
+        $response->setVersion('1.1');
+        $this->assertEquals('1.1', $response->getVersion());
+        
+        $response->setVersion('1.0');
+        $this->assertEquals('1.0', $response->getVersion());
+    }
+    
+    public function testSetStatusCode()
+    {
+        $response = $this->object;
+        
+        $response->setStatusCode(200, 'Right!');
+        
+        $parts = explode("\r\n", $response);
+        
+        $this->assertContains('HTTP/1.1 200 Right!', $parts[0]);        
+    }
 }

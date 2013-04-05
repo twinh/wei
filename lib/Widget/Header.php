@@ -10,7 +10,7 @@
 namespace Widget;
 
 /**
- * Header
+ * The response header widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
@@ -73,5 +73,15 @@ class Header extends ArrayWidget
         }
 
         return $this->data[$name];
+    }
+    
+    /**
+     * Returns response header as string
+     * 
+     * @return string
+     */
+    public function __toString()
+    {
+        return '';
     }
 }

@@ -212,4 +212,16 @@ class Response extends AbstractWidget
 
         return $this;
     }
+    
+    /**
+     * Returns response status, headers and content as string
+     * 
+     * @return string
+     */
+    public function __toString()
+    {
+        return sprintf('HTTP/%s %d %s', $this->version, $this->statusCode, $this->statusText) . "\r\n"
+            . $this->header . "\r\n"
+            . $this->content;
+    }
 }
