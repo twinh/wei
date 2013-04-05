@@ -56,13 +56,6 @@ class Response extends AbstractWidget
     protected $statusText = 'OK';
     
     /**
-     * Whether response content has been sent
-     *
-     * @var bool
-     */
-    protected $isSent = false;
-
-    /**
      * The response content
      *
      * @var string
@@ -74,22 +67,11 @@ class Response extends AbstractWidget
      *
      * @param  string         $content
      * @param  int            $status
-     * @param  array          $options
      * @return \Widget\Response
      */
-    public function __invoke($content = '', $status = 200, array $options = array())
+    public function __invoke($content = null, $status = null)
     {
-        $this->isSent = true;
-
-        $this->content = $content;
-
-        $this->setStatusCode($status);
-        
-        $this->sendHeader();
-
-        $this->sendContent();
-
-        return $this;
+        return $this->send($content, $status);
     }
 
     /**
@@ -117,18 +99,36 @@ class Response extends AbstractWidget
 
     /**
      * Send response content
+     * 
+     * @return \Widget\Response
      */
     public function sendContent()
     {
         echo $this->content;
+        
+        return $this;
     }
 
     /**
      * @see \Widget\Response::__invoke
      */
-    public function send($content = '', $status = 200)
+    public function send($content = null, $status = null)
     {
-        return $this->__invoke($content, $status);
+        $this->isSent = true;
+
+        if (null !== $content) {
+            $this->content = $content;
+        }
+        
+        if (null !== $status) {
+            $this->setStatusCode($status);
+        }
+        
+        $this->sendHeader();
+
+        $this->sendContent();
+
+        return $this;
     }
     
     /**
@@ -211,29 +211,6 @@ class Response extends AbstractWidget
 
         // Send cookie
         $this->cookie->send();
-
-        return $this;
-    }
-    
-    /**
-     * Check if response has been sent
-     *
-     * @return bool
-     */
-    public function isSent()
-    {
-        return $this->isSent;
-    }
-
-    /**
-     * Set response sent status
-     *
-     * @param  bool           $bool
-     * @return Response
-     */
-    public function setSentStatus($bool)
-    {
-        $this->isSent = (bool) $bool;
 
         return $this;
     }
