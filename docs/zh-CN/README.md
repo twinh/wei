@@ -32,6 +32,10 @@ API 参考目录
 * [server](api/server.md) - 获取一项服务器和执行环境信息($_SERVER)的值
 
 #### HTTP响应
+* [download](api/download.md) - 下载指定的文件
+* [flush](api/flush.md) - 直接输出内容到浏览器
+* [response](api/response.md) - 发送HTTP响应头和内容
+* [redirect](api/redirect.md) - 跳转到指定地址
 
 #### 验证器
 数据类型及组成
