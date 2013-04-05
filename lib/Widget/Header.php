@@ -17,6 +17,18 @@ namespace Widget;
 class Header extends ArrayWidget
 {
     /**
+     * Constructor
+     * 
+     * @param array $options
+     */
+    public function __construct(array $options = array())
+    {
+        parent::__construct($options);
+        
+        $this->data = &$this->response->getHeaderReference();
+    }
+    
+    /**
      * Get or set the header values
      *
      * @param  string       $name    The header name
@@ -76,12 +88,31 @@ class Header extends ArrayWidget
     }
     
     /**
+     * Remove header by specified name
+     * 
+     * @param string $name The header name
+     * @return \Widget\Header
+     */
+    public function remove($name)
+    {
+        unset($this->data[$name]);
+        
+        return $this;
+    }
+    
+    /**
      * Returns response header as string
      * 
      * @return string
      */
     public function __toString()
     {
-        return '';
+        $string = '';
+        foreach ($this->header->toArray() as $name => $values) {
+            foreach ($values as $value) {
+                $string .= $name . ': ' . $value . "\r\n";
+            }
+        }
+        return $string;
     }
 }

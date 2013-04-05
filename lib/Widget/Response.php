@@ -61,6 +61,13 @@ class Response extends AbstractWidget
      * @var string
      */
     protected $content;
+    
+    /**
+     * The response headers
+     * 
+     * @var array
+     */
+    protected $headers = array();
 
     /**
      * Send response header and content
@@ -212,7 +219,7 @@ class Response extends AbstractWidget
 
         return $this;
     }
-    
+
     /**
      * Returns response status, headers and content as string
      * 
@@ -223,5 +230,15 @@ class Response extends AbstractWidget
         return sprintf('HTTP/%s %d %s', $this->version, $this->statusCode, $this->statusText) . "\r\n"
             . $this->header . "\r\n"
             . $this->content;
+    }
+    
+    /**
+     * Returns the response headers varibale reference
+     * 
+     * @return array
+     */
+    public function &getHeaderReference()
+    {
+        return $this->headers;
     }
 }
