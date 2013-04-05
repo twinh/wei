@@ -101,7 +101,7 @@ class Browser extends AbstractWidget
      * @copyright Copyright 2012 jQuery Foundation and other contributors
      * @license http://jquery.org/license
      */
-    protected function detect()
+    public function detect()
     {
         $ua = strtolower($this->server['HTTP_USER_AGENT']);
         $matches = array();
