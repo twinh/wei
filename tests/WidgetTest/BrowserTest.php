@@ -12,9 +12,12 @@ class BrowserTest extends TestCase
         $this->server->set('HTTP_USER_AGENT', $ua);
         $this->browser->detect();
         $this->assertEquals($version, $this->browser->version);
-        $this->assertEquals($browser, $this->browser->name);
+        $this->assertEquals($browser, $this->browser());
     }
     
+    /**
+     * @link http://www.useragentstring.com/
+     */
     public function providerForUserAgent()
     {
         return array(
