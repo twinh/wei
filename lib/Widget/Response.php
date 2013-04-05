@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * Response
+ * The HTTP response
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property    \Widget\Header $header The reponse header
@@ -19,7 +19,7 @@ namespace Widget;
 class Response extends AbstractWidget
 {
     /**
-     * Common use http status code and text
+     * Common use HTTP status code and text
      *
      * @var array
      * @todo other status codes
@@ -35,7 +35,7 @@ class Response extends AbstractWidget
     );
 
     /**
-     * The http version, current is 1.0 or 1.1
+     * The HTTP version, current is 1.0 or 1.1
      *
      * @var string
      */
@@ -162,9 +162,9 @@ class Response extends AbstractWidget
     }
 
     /**
-     * Set the http version
+     * Set the HTTP version
      *
-     * @param  string       $version The http version
+     * @param  string       $version The HTTP version
      * @return Header
      */
     public function setVersion($version)
@@ -175,7 +175,7 @@ class Response extends AbstractWidget
     }
 
     /**
-     * Get the http version
+     * Get the HTTP version
      *
      * @return string
      */
@@ -185,7 +185,7 @@ class Response extends AbstractWidget
     }
 
     /**
-     * Send headers, including http status, raw headers and cookie
+     * Send headers, including HTTP status, raw headers and cookie
      *
      * @return false|\Widget\Response
      */
