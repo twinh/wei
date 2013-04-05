@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -10,10 +9,10 @@
 namespace Widget;
 
 /**
- * Browser
+ * The widget to detect user browser name and version
  *
  * @author      Twin Huang <twinh@yahoo.cn>
- * @property \Widget\Server $server The server widget
+ * @property    \Widget\Server $server The server widget
  */
 class Browser extends AbstractWidget
 {
@@ -111,8 +110,11 @@ class Browser extends AbstractWidget
             preg_match('/(webkit)[ \/]([\w.]+)/', $ua, $matches) ||
             preg_match('/(opera)(?:.*version|)[ \/]([\w.]+)/', $ua, $matches) ||
             preg_match('/(msie) ([\w.]+)/', $ua, $matches) ||
-            false === strpos($ua, 'compatible') && preg_match('/(mozilla)(?:.*? rv:([\w.]+)|)/', $ua, $matches) ||
-            array('', '', 0);
+            false === strpos($ua, 'compatible') && preg_match('/(mozilla)(?:.*? rv:([\w.]+)|)/', $ua, $matches);
+        
+        if (empty($matches)) {
+            $matches = array('', '', 0);
+        }
 
         // Ignore the first element
         list(, $this->name, $this->version) = $matches;
