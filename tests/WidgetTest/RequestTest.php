@@ -410,7 +410,8 @@ class RequestTest extends TestCase
                     'HTTP_HOST' => 'test.com',
                     'REQUEST_URI' => '/index.php?query=string'
                 ),
-                'https://test.com/index.php?query=string'
+                'https://test.com/index.php?query=string',
+                'https://test.com/path',
             ),
             array(
                 array(
@@ -419,7 +420,8 @@ class RequestTest extends TestCase
                     'HTTP_HOST' => 'test.com',
                     'REQUEST_URI' => '/index.php?query=string'
                 ),
-                'https://test.com:8080/index.php?query=string'
+                'https://test.com:8080/index.php?query=string',
+                'https://test.com:8080/path'
             )
         );
     }
@@ -427,11 +429,12 @@ class RequestTest extends TestCase
     /**
      * @dataProvider providerForGetUrl
      */
-    public function testGetUrl($server, $url)
+    public function testGetUrl($server, $url, $urlPath)
     {
         $this->server->setOption('data', $server);
         
         $this->assertEquals($url, $this->request->getUrl());
+        $this->assertEquals($urlPath, $this->request->getUrlFor('/path'));
     }
     
     public function testGetContent()
@@ -458,5 +461,12 @@ class RequestTest extends TestCase
 'GET https://test.com:8080/index.php?query=string 
 Host: test.com
 ', (string)$this->request);
+    }
+    
+    public function testPathInfo()
+    {
+        $this->request->setPathInfo('/blog');
+        
+        $this->assertEquals('/blog', $this->request->getPathInfo());
     }
 }

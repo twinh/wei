@@ -220,13 +220,23 @@ class Request extends Parameter
     }
 
     /**
-     * Returns the full URL, which contains scheme://domain:port/path?queryString
+     * Returns the full URL, which contains scheme://domain[:port]/[baseUrl][PathInfo][?queryString]
      * 
      * The full URL do not contain the fragment, for it never sent to the server
      * 
      * @return string
      */
     public function getUrl()
+    {
+        return $this->getSchemeAndHost() . $this->getRequestUri();
+    }
+    
+    /**
+     * Returns scheme and host which contains scheme://domain[:port]
+     * 
+     * @return string
+     */
+    public function getSchemeAndHost()
     {
         $port = $this->server['SERVER_PORT'];
         if ($port == 80 || $port == 433) {
@@ -235,7 +245,18 @@ class Request extends Parameter
             $port = ':' . $port;
         }
         
-        return $this->getScheme() . '://' . $this->getHost() . $port . $this->getRequestUri();
+        return $this->getScheme() . '://' . $this->getHost() . $port;
+    }
+    
+    /**
+     * Generates absolute URL for specified path
+     * 
+     * @param string $path
+     * @return string
+     */
+    public function getUrlFor($path)
+    {
+        return $this->getSchemeAndHost() . $path;
     }
 
     /**
