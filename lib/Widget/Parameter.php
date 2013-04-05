@@ -13,7 +13,7 @@ namespace Widget;
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class Parameter extends ArrayWidget
+abstract class Parameter extends ArrayWidget
 {
     /**
      * Returns a *stringify* or user defined($default) parameter value

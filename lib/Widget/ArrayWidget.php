@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -14,7 +13,7 @@ namespace Widget;
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
-class ArrayWidget extends AbstractWidget implements \ArrayAccess, \Countable, \IteratorAggregate
+abstract class ArrayWidget extends AbstractWidget implements \ArrayAccess, \Countable, \IteratorAggregate
 {
     /**
      * The variable to store array
