@@ -4,6 +4,13 @@ namespace WidgetTest;
 
 class ParameterTest extends TestCase
 {
+    public function setUp()
+    {
+        $this->object = new \WidgetTest\Fixtures\Parameter(array(
+            'widget' => $this->widget
+        ));
+    }
+    
     public function createParameterObject($type, $class)
     {
         // create request widget from custom parameter

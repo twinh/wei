@@ -4,6 +4,13 @@ namespace WidgetTest;
 
 class ArrayWidgetTest extends TestCase
 {
+    public function setUp()
+    {
+        $this->object = new \WidgetTest\Fixtures\ArrayWidget(array(
+            'widget' => $this->widget
+        ));
+    }
+    
     public function testOffsetExists() {
         $widget = $this->object;
 
