@@ -31,7 +31,9 @@ class Header extends ArrayWidget
     /**
      * Get or set the header values
      *
-     * @param  string       $name    The header name
+     * @param  string|array $name    The header name or an associative array 
+     *                               that the key is header name and the value 
+     *                               is header value
      * @param  string|array $values  The header values, for set method only
      * @param  bool         $replace Whether replace the exists values or not, for set method only
      * @return mixed|\Widget\Header
@@ -51,10 +53,17 @@ class Header extends ArrayWidget
      * @param  string       $name    The header name
      * @param  string|array $values  The header values
      * @param  bool         $replace Whether replace the exists values or not
-     * @return Header
+     * @return \Widget\Header
      */
-    public function set($name, $values, $replace = true)
+    public function set($name, $values = null, $replace = true)
     {
+        if (is_array($name)) {
+            foreach ($name as $key => $value) {
+                $this->set($key, $value);
+            }
+            return $this;
+        }
+        
         $values = (array) $values;
 
         if (true === $replace || !isset($this->data[$name])) {
