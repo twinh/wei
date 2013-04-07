@@ -132,4 +132,16 @@ abstract class Parameter extends ArrayWidget
         
         return $this;
     }
+    
+    /**
+     * Clear all parameter data
+     * 
+     * @return \Widget\Parameter
+     */
+    public function clear()
+    {
+        $this->data = array();
+        
+        return $this;
+    }
 }
