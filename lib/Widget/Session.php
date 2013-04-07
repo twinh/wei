@@ -73,7 +73,6 @@ class Session extends Parameter
     public function start()
     {
         $file = $line = null;
-        header('aa: bb');
         if (headers_sent($file, $line)) {
             throw new Exception\RuntimeException(sprintf('Unable to start session, output started at %s:%s', $file, $line));
         }
