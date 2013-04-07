@@ -1,16 +1,25 @@
-    该微件文档还在紧急编写中,敬请期待!
 [response()](http://twinh.github.com/widget/api/response)
 =========================================================
 
-Send response header and content
+发送HTTP响应头和响应内容
 
-### Send response header and content
+### 
 ```php
-\Response response($content, $status, $options)
+\Widget\Response response( $content [, $stateCode ] )
 ```
 
 ##### 参数
-* **$content** `string` 
-* **$status** `int` 
-* **$options** `array` 
+* **$content** `string` 响应的内容
+* **$stateCode** `string` HTTP状态码,默认是`200`
 
+##### 代码范例
+发送内容为"Hello World"的HTTP响应
+```php
+<?php
+
+$widget->response('Hello World');
+```
+##### 运行结果
+```php
+'Hello World'
+```
