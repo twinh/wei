@@ -8,8 +8,6 @@
 
 namespace Widget;
 
-use Widget\Exception\RuntimeException;
-
 /**
  * Session
  *
@@ -40,14 +38,16 @@ class Session extends Parameter
     protected $autoStart = true;
 
     /**
-     * @var array           Options
-     *
+     * The session configuration options
+     * 
+     * @var array
      * @link http://php.net/manual/en/session.configuration.php
      */
-    protected $options = array(
-        'cache_limiter'     => 'private_no_expire, must-revalidate',
+    protected $inis = array(
+        'cache_limiter'     => 'private_no_expire',
         'cookie_lifetime'   => 86400,
         'cache_expire'      => 86400,
+        'gc_maxlifetime'    => 86400
     );
 
     /**
@@ -57,40 +57,25 @@ class Session extends Parameter
      */
     public function __construct(array $options = array())
     {
-        parent::__construct($options);
-
+        parent::__construct($options + array(
+            'inis' => $this->inis,
+        ));
+        
         if ($this->autoStart) {
             $this->start();
         }
     }
 
     /**
-     * Get or set session
-     *
-     * @param  string       $key     the name of cookie
-     * @param  mixed        $value   the value of cookie
-     * @param  array        $options options for set cookie
-     * @return mixed
-     */
-    public function __invoke($key, $value = null, array $options = array())
-    {
-        if (1 == func_num_args()) {
-            return $this->get($key);
-        } else {
-            return $this->set($key, $value, $options);
-        }
-    }
-
-    /**
      * Start session
      *
-     * @return Session
+     * @return \Widget\Session
      */
     public function start()
     {
         $file = $line = null;
         if (headers_sent($file, $line)) {
-            throw new RuntimeException(sprintf('Unable to start session, output started at %s:%s', $file, $line));
+            throw new Exception\RuntimeException(sprintf('Unable to start session, output started at %s:%s', $file, $line));
         }
 
         // If session started, ignored it
@@ -117,33 +102,10 @@ class Session extends Parameter
     }
 
     /**
-     * Set a session value in current namespace
-     *
-     * @param  string       $name
-     * @param  mixed        $value
-     * @return mixed
-     */
-    public function set($name, $value)
-    {
-        return $this->offsetSet($name, $value);
-    }
-
-    /**
-     * Get a session from current namespace
-     *
-     * @param  string $name
-     * @return mixed
-     */
-    public function get($name)
-    {
-        return $this->offsetGet($name);
-    }
-
-    /**
      * Clear session in $namespace or current namespace
      *
      * @param  string|null       $namespace
-     * @return Session
+     * @return \Widget\Session
      */
     public function clear($namespace = null)
     {
@@ -162,7 +124,7 @@ class Session extends Parameter
     /**
      * Destroy session
      *
-     * @return Session
+     * @return \Widget\Session
      */
     public function destroy()
     {
@@ -177,14 +139,14 @@ class Session extends Parameter
     }
 
     /**
-     * Set session options
+     * Set session configuration options
      *
-     * @param array $options
-     * @return Session
+     * @param array $inis
+     * @return \Widget\Session
      */
-    public function setOptions($options)
+    public function setInis($inis)
     {
-        foreach ($options as $name => $value) {
+        foreach ($inis as $name => $value) {
             ini_set('session.' . $name, $value);
         }
 
