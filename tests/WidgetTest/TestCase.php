@@ -109,12 +109,9 @@ class TestCase extends PHPUnit_Framework_TestCase implements WidgetAwareInterfac
         
         unset($this->object);
 
-        // Remove $this->object
-        $widget->remove($name);
-        
         if (isset($widget->{$name})) {
             unset($widget->{$name});
-        } 
+        }
     }
 
     /**
