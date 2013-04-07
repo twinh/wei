@@ -23,3 +23,16 @@ $widget->response('Hello World');
 ```php
 'Hello World'
 ```
+##### 代码范例
+查看上面例子中HTTP响应的完整内容
+```php
+<?php
+
+echo (string)$widget->response;
+```
+##### 运行结果
+```php
+'HTTP/1.1 200 OK
+
+Hello World'
+```
