@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -9,13 +8,11 @@
 
 namespace Widget;
 
-use Widget\Exception;
-
 /**
- * Redirect
+ * The redirect response widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
- * @method \Widget\Header header(string $name, string|array $values) Set the header value
+ * @method      \Widget\Header header(string $name, string|array $values) Set the header value
  */
 class Redirect extends Response
 {
@@ -26,10 +23,15 @@ class Redirect extends Response
      */
     protected $view;
     
+    /**
+     * The seconds to wait before redirect
+     * 
+     * @var int
+     */
     protected $delay = 0;
 
     /**
-     * Default view content
+     * The default view content
      *
      * @var string
      */
@@ -51,10 +53,10 @@ class Redirect extends Response
      * @param  string         $url     The url redirect to
      * @param  int            $status  The redirect status code
      * @param  array          $options The widget options
-     * @return Redirect
-     * @throws Exception      When custom view file not found
+     * @return \Widget\Redirect
+     * @throws \Widget\Exception\NotFoundException  When custom view file not found
      */
-    public function __invoke($url = '', $status = 302, array $options = array())
+    public function __invoke($url = null, $status = 302, array $options = array())
     {
         $options = $this->setOption($options);
         
@@ -74,10 +76,17 @@ class Redirect extends Response
         return $this;
     }
     
+    /**
+     * Set redirect view file
+     * 
+     * @param string $view The view file
+     * @return \Widget\Redirect
+     * @throws Exception\NotFoundException When view file not found
+     */
     public function setView($view)
     {
         if (!is_file($view)) {
-            throw new Exception\NotFoundException(sprintf('File "%s" not found'));
+            throw new Exception\NotFoundException(sprintf('Redirect view "%s" not found'));
         }
         
         $this->view = $view;
@@ -85,6 +94,12 @@ class Redirect extends Response
         return $this;
     }
     
+    /**
+     * Set delay seconds
+     * 
+     * @param int $delay
+     * @return \Widget\Redirect
+     */
     public function setDelay($delay)
     {
         $this->delay = (int)$delay;
