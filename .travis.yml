@@ -8,6 +8,7 @@ php:
   
 before_script:
   - php -m
+  - composer install --dev
 
 matrix:
   allow_failures:
