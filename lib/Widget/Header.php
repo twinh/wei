@@ -117,7 +117,7 @@ class Header extends ArrayWidget
     public function __toString()
     {
         $string = '';
-        foreach ($this->header->toArray() as $name => $values) {
+        foreach ($this->data as $name => $values) {
             foreach ($values as $value) {
                 $string .= $name . ': ' . $value . "\r\n";
             }

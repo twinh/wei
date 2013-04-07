@@ -4,12 +4,19 @@ namespace WidgetTest;
 
 class LoggerTest extends TestCase
 {
-    protected static $logger;
+    //protected static $logger;
+    
+    /**
+     * @var \Widget\Logger
+     */
+    protected $logger;
     
     protected function tearDown()
     {
         $this->object->clean();
      
+        parent::tearDown();
+        
         // TODO remove dir after test
 //        $dir = static::$logger->getOption('dir');
 //        if (is_dir($dir)) {
@@ -67,6 +74,8 @@ class LoggerTest extends TestCase
     {
         $logger = $this->object;
         
+        $logger->setHandledLevel('debug');
+
         $file = $logger->getFile();
         
         foreach ($logger->getOption('levels') as $level => $p) {

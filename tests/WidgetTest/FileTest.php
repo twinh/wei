@@ -8,7 +8,7 @@ class FileTest extends CacheTestCase
      * @var \Widget\File
      */
     protected $object;
-    
+
     protected function tearDown()
     {
         $this->object->clear();
@@ -18,7 +18,7 @@ class FileTest extends CacheTestCase
         parent::tearDown();
     }
     
-    public function testGetDirOption()
+    public function testGetDir()
     {
         $file = $this->object;
 

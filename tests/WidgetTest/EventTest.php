@@ -127,26 +127,26 @@ class EventTest extends TestCase
                 ->on('test.ns1.ns2', $fn);
         };
 
+        $init();
         $this->assertTrue($em->has('test'));
         $this->off('test');
         $this->assertFalse($em->has('test'));
+        
         $init();
-
         $this->assertTrue($em->has('test.ns1'));
         $this->off('test.ns1');
         $this->assertFalse($em->has('test.ns1'));
+        
         $init();
-
         $this->assertTrue($em->has('test.ns1.ns2'));
         $this->off('test.ns1.ns2');
         $this->assertFalse($em->has('test.ns1.ns2'));
+        
         $init();
-
         $this->assertTrue($em->has('.ns1'));
         $this->off('.ns1');
         $this->assertFalse($em->has('test.ns1'));
         $this->assertFalse($em->has('test.ns1.ns2'));
-        $init();
     }
 
     public function testGetterAndSetterInEvent()
