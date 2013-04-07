@@ -2,6 +2,10 @@
 
 use Widget\Widget;
 
+if (is_file(__DIR__ . '/../vendor/autoload.php')) {
+    require __DIR__ . '/../vendor/autoload.php';
+}
+
 require dirname(__DIR__) . '/lib/Widget/Widget.php';
 
 return Widget::create(array(
