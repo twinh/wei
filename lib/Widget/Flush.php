@@ -9,10 +9,9 @@
 namespace Widget;
 
 /**
- * Flush
+ * Flush buffers to browser immediately
  *
  * @author      Twin Huang <twinh@yahoo.cn>
- * @property \Widget\App $app The application widget
  */
 class Flush extends AbstractWidget
 {
@@ -20,9 +19,10 @@ class Flush extends AbstractWidget
     {
         parent::__construct($options);
 
-        // how about other server
-        apache_setenv('no-gzip', '1');
-
+        if (function_exists('apache_setenv')) {
+            apache_setenv('no-gzip', '1');
+        }
+        
         ob_implicit_flush();
 
         // todo $buffer = ini_get('output_buffering');
