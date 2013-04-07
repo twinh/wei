@@ -1,16 +1,17 @@
-    该微件文档还在紧急编写中,敬请期待!
 [redirect()](http://twinh.github.com/widget/api/redirect)
 =========================================================
 
-Send a redirect response
+发送页面跳转的HTTP响应
 
-### Send a redirect response
+### 
 ```php
-\Redirect redirect($url, $status, $options)
+\Widget\Redirect redirect( $url [, $status [, $options ] ] )
 ```
 
 ##### 参数
-* **$url** `string` The url redirect to
-* **$status** `int` The redirect status code
-* **$options** `array` The widget options
+* **$url** `string` 跳转到的Url地址
+* **$status** `int` 响应的HTTP状态码,默认为`302`
+* **$options** `array` 跳转微件的配置选项
+   *  **delay** `int` 延迟跳转的秒数,默认是0
+   *  **view** `string` 自定义视图文件的路径
 
