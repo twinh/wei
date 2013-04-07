@@ -9,10 +9,9 @@
 namespace Widget;
 
 /**
- * Session
+ * The session widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
- * @todo        remove global variable $_SESSION
  */
 class Session extends Parameter
 {
@@ -74,6 +73,7 @@ class Session extends Parameter
     public function start()
     {
         $file = $line = null;
+        header('aa: bb');
         if (headers_sent($file, $line)) {
             throw new Exception\RuntimeException(sprintf('Unable to start session, output started at %s:%s', $file, $line));
         }
@@ -98,27 +98,7 @@ class Session extends Parameter
      */
     public function isStarted()
     {
-        return $this->started;
-    }
-
-    /**
-     * Clear session in $namespace or current namespace
-     *
-     * @param  string|null       $namespace
-     * @return \Widget\Session
-     */
-    public function clear($namespace = null)
-    {
-        if ($namespace) {
-            $_SESSION[$namespace] = array();
-        } else {
-            $_SESSION[$this->namespace] = array();
-
-            // clean up data for cli mode
-            $this->data = array();
-        }
-
-        return $this;
+        return $this->started && session_id();
     }
 
     /**
@@ -128,11 +108,11 @@ class Session extends Parameter
      */
     public function destroy()
     {
-        if ($this->started) {
+        if ($this->isStarted()) {
             session_destroy();
         }
 
-        // clean up all data
+        // Clean up all data
         $this->data = array();
 
         return $this;
