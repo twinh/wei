@@ -15,12 +15,11 @@ use Widget\Response;
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  * @method      \Widget\EventManager trigger(string $eventName) Trigger a event
- * @method      mixed config(string $name) Get a config
  * @method      \Widget\Response response(string $content) Send headers and output content
  * @property    callable $404 The 404 event handler
  * @property    \Widget\Viewable $view The view widget, instance of \Widget\Viewable interface
  * @property    \Widget\Logger $logger The logger widget
- * @property    \Widget\Router $router The router widget
+ * @property    \Widget\Request $request The HTTP request widget
  */
 class App extends AbstractWidget
 {
@@ -96,7 +95,7 @@ class App extends AbstractWidget
      * @param  string    $controller The name of controller
      * @param  string    $action     The name of action
      * @return \Widget\App|null
-     * @throws Widget\Exception\NotFoundException When controller or action not found
+     * @throws \Widget\Exception\NotFoundException When controller or action not found
      */
     public function dispatch($module, $controller, $action = 'index')
     {
@@ -198,7 +197,7 @@ class App extends AbstractWidget
     public function getModule()
     {
         if (!$this->module) {
-            $this->module = ucfirst((string)$this->request->get('module', $this->defaults['module']));
+            $this->module = ucfirst($this->request->get('module', $this->defaults['module']));
         }
 
         return $this->module;
@@ -236,7 +235,7 @@ class App extends AbstractWidget
     public function getController()
     {
         if (!$this->controller) {
-            $this->controller = ucfirst((string)$this->request->get('controller', $this->defaults['controller']));
+            $this->controller = ucfirst($this->request->get('controller', $this->defaults['controller']));
         }
 
         return $this->controller;
@@ -258,12 +257,12 @@ class App extends AbstractWidget
     /**
      * Get the name of action
      *
-     * @return string The name of controller
+     * @return string The name of action
      */
     public function getAction()
     {
         if (!$this->action) {
-            $this->action = (string)$this->request->get('action', $this->defaults['action']);
+            $this->action = $this->request->get('action', $this->defaults['action']);
         }
 
         return $this->action;
