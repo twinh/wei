@@ -151,7 +151,7 @@ class App extends AbstractWidget
                     break;
 
                 case 'action':
-                    $message .= sprintf('action "%s" not found in controller "%s".', $action, get_class($object));
+                    $message .= sprintf('action "%s" not found in controller "%s"', $action, get_class($object));
                     break;
             }
         }
