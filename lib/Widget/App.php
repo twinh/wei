@@ -38,7 +38,7 @@ class App extends AbstractWidget
      * @var array
      */
     protected $defaults = array(
-        'module'        => 'index',
+        'module'        => 'App',
         'controller'    => 'index',
         'action'        => 'index',
     );
