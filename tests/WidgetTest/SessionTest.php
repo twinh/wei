@@ -19,6 +19,9 @@ class SessionTest extends TestCase
         parent::tearDown();
     }
     
+    /**
+     * @runInSeparateProcess
+     */
     public function testIsStarted()
     {
         $session = $this->object;
@@ -26,6 +29,9 @@ class SessionTest extends TestCase
         $this->assertTrue($session->isStarted());
     }
     
+    /**
+     * @runInSeparateProcess
+     */
     public function testSet()
     {
         $session = $this->object;
@@ -35,6 +41,9 @@ class SessionTest extends TestCase
         $this->assertEquals('test', $session->get('action'));
     }
 
+    /**
+     * @runInSeparateProcess
+     */
     public function testClear()
     {
         $session = $this->object;
@@ -46,6 +55,9 @@ class SessionTest extends TestCase
         $this->assertEquals(null, $session->get('action'));
     }
 
+    /**
+     * @runInSeparateProcess
+     */
     public function testDestroy()
     {
         $session = $this->object;
