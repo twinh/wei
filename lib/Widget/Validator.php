@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\Validator\ValidatorInterface;
 
 /**
- * Validator
+ * The validator widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property    \Widget\Is $is The validator manager

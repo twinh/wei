@@ -9,11 +9,11 @@
 namespace Widget;
 
 /**
- * Validate
+ * A jQuery Validation style validator widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  * @link        http://bassistance.de/jquery-plugins/jquery-plugin-validation/
- * @property \Widget\Is $is The validator manager
+ * @property    \Widget\Is $is The validator manager
  */
 class Validate extends AbstractWidget
 {
