@@ -76,7 +76,8 @@ abstract class AbstractWidget implements WidgetInterface
         if (method_exists($this, $method = 'set' . $name)) {
             return $this->$method($value);
         } else {
-            return $this->$name = $value;
+            $this->$name = $value;
+            return $this;
         }
     }
     
