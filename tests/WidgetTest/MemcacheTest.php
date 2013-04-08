@@ -11,6 +11,10 @@ class MemcacheTest extends CacheTestCase
         }
         
         parent::setUp();
+        
+        if (false === @$this->object->getObject()->getStats()) {
+            $this->markTestSkipped('The memcache is not running');
+        }
     }
     
     public function testGetAndSetObject()
