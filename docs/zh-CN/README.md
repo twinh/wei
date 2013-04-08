@@ -30,6 +30,7 @@ API 参考目录
 * [query](api/query.md) - 获取一项HTTP GET查询参数($_GET)的值
 * [request](api/request.md) - 获取一项HTTP请求参数($_REQUEST)的值
 * [server](api/server.md) - 获取一项服务器和执行环境信息($_SERVER)的值
+* [session](api/session.md) - 获取一项会话($_SESSION)的值
 
 #### HTTP响应
 * [download](api/download.md) - 下载指定的文件
