@@ -94,7 +94,7 @@ class App extends AbstractWidget
      * @param  string    $module     The name of module
      * @param  string    $controller The name of controller
      * @param  string    $action     The name of action
-     * @return \Widget\App|null
+     * @return \Widget\App
      * @throws \Widget\Exception\NotFoundException When controller or action not found
      */
     public function dispatch($module, $controller, $action = 'index')
@@ -120,13 +120,10 @@ class App extends AbstractWidget
                         $this->trigger('after.action');
 
                         $this->handleResponse($response);
-
-                        return $this;
-
                     } catch (Exception\DispatchBreakException $e) {
                         $this->logger->debug(sprintf('Caught exception "%s" with message "%s" called in %s on line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine()));
                     }
-
+                    return $this;
                 } else {
                     $notFound = 'action';
                 }
@@ -156,9 +153,11 @@ class App extends AbstractWidget
             }
         }
 
-        if (false !== $this->trigger('404', array($this, $notFound, $message), $this)) {
+        if (!$this->trigger('404', array($this, $notFound, $message), $this)->isDefaultPrevented()) {
             throw new Exception\NotFoundException($message);
         }
+        
+        return $this;
     }
 
     /**
@@ -182,7 +181,7 @@ class App extends AbstractWidget
 
             // response
             case $response instanceof Response :
-                return !$response->isSent() && $response->send();
+                return $response->send();
 
             default :
                 throw new Exception\UnexpectedTypeException($response, 'array, printable variable or \Widget\Response');

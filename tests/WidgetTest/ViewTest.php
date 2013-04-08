@@ -5,7 +5,7 @@ namespace WidgetTest;
 class ViewTest extends TestCase
 {
     /**
-     * @var Widget\View
+     * @var \Widget\View
      */
     protected $object;
     
