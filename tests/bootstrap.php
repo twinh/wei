@@ -9,6 +9,7 @@ if (is_file(__DIR__ . '/../vendor/autoload.php')) {
 require dirname(__DIR__) . '/lib/Widget/Widget.php';
 
 return Widget::create(array(
+    'debug' => true,
     'widget' => array(
         'inis' => array(
             // Display all error message
