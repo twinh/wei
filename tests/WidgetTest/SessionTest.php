@@ -11,8 +11,11 @@ class SessionTest extends TestCase
     
     protected function tearDown()
     {
-        $this->object->destroy();
-        
+        // FIXME why sometime $this->obejct is NULL
+        if ($this->object) {
+            $this->object->destroy();
+        }
+
         parent::tearDown();
     }
     
