@@ -10,8 +10,9 @@
         "php": ">=5.3.0"
     },
     "require-dev": {
-        "monolog/monolog": "1.4.*",
         "doctrine/orm": "2.*",
+        "smarty/smarty": "v3.1.13",
+        "monolog/monolog": "1.4.*",
         "twig/twig": "1.*"
     },
     "authors": [
