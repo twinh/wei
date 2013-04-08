@@ -113,11 +113,7 @@ class App extends AbstractWidget
 
                     try {
 
-                        $this->trigger('before.action');
-
                         $response = $object->$method();
-
-                        $this->trigger('after.action');
 
                         $this->handleResponse($response);
                     } catch (Exception\DispatchBreakException $e) {
