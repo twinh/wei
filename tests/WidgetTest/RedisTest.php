@@ -11,6 +11,12 @@ class RedisTest extends CacheTestCase
         }
         
         parent::setUp();
+        
+        try {
+            $this->object->get('test');
+        } catch (\RedisException $e) {
+            $this->markTestSkipped('The redis server is not running');
+        }
     }
     
     public function testIncrementAndDecrement()
