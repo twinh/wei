@@ -290,7 +290,7 @@ class App extends AbstractWidget
      */
     public function getControllerInstance($module, $controller)
     {
-        if (!preg_match('/^([_a-z0-9]+)$/i', $module . $controller)) {
+        if (!preg_match('/^([_a-z0-9]+)$/i', $controller)) {
             return false;
         }
 
