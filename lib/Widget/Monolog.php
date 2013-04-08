@@ -62,7 +62,7 @@ class Monolog extends AbstractWidget
         parent::__construct($options);
         
         // Create a logger channel
-        $logger = $this->logger = new Logger($this->name);
+        $logger = $this->logger = new MonologLogger($this->name);
 
         // Add hanlders
         foreach ($this->handlers as $name => $parameters) {
