@@ -9,21 +9,18 @@
 namespace Widget;
 
 use Widget\Response;
-use Widget\Exception\NotFoundException;
-use Widget\Exception\DispatchBreakException;
-use Widget\Exception\UnexpectedTypeException;
 
 /**
  * App
  *
  * @author      Twin Huang <twinh@yahoo.cn>
- * @method \Widget\EventManager trigger(string $eventName) Trigger a event
- * @method mixed config(string $name) Get a config
- * @method \Widget\Response response(string $content) Send headers and output content
- * @property callable $404 The 404 event handler
- * @property \Widget\Viewable $view The view widget, instance of \Widget\Viewable interface
- * @property \Widget\Logger $logger The logger widget
- * @property \Widget\Router $router The router widget
+ * @method      \Widget\EventManager trigger(string $eventName) Trigger a event
+ * @method      mixed config(string $name) Get a config
+ * @method      \Widget\Response response(string $content) Send headers and output content
+ * @property    callable $404 The 404 event handler
+ * @property    \Widget\Viewable $view The view widget, instance of \Widget\Viewable interface
+ * @property    \Widget\Logger $logger The logger widget
+ * @property    \Widget\Router $router The router widget
  */
 class App extends AbstractWidget
 {
@@ -127,7 +124,7 @@ class App extends AbstractWidget
 
                         return $this;
 
-                    } catch (DispatchBreakException $e) {
+                    } catch (Exception\DispatchBreakException $e) {
                         $this->logger->debug(sprintf('Caught exception "%s" with message "%s" called in %s on line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine()));
                     }
 
@@ -161,7 +158,7 @@ class App extends AbstractWidget
         }
 
         if (false !== $this->trigger('404', array($this, $notFound, $message), $this)) {
-            throw new NotFoundException($message);
+            throw new Exception\NotFoundException($message);
         }
     }
 
@@ -189,7 +186,7 @@ class App extends AbstractWidget
                 return !$response->isSent() && $response->send();
 
             default :
-                throw new UnexpectedTypeException($response, 'array, printable variable or \Widget\Response');
+                throw new Exception\UnexpectedTypeException($response, 'array, printable variable or \Widget\Response');
         }
     }
 
@@ -321,7 +318,7 @@ class App extends AbstractWidget
     public function preventPreviousDispatch()
     {
         $traces = debug_backtrace();
-        throw new DispatchBreakException('', 0, $traces[0]['file'], $traces[0]['line']);
+        throw new Exception\DispatchBreakException('', 0, $traces[0]['file'], $traces[0]['line']);
     }
 
     /**
