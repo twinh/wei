@@ -63,4 +63,22 @@ class WidgetTest extends TestCase
         $this->assertArrayHasKey('widget', $options);
         $this->assertArrayHasKey('deps', $options);
     }
+    
+    public function testSetInis()
+    {
+        $this->widget->setInis(array(
+            'date.timezone' => 'Asia/Shanghai'
+        ));
+        $this->assertEquals('Asia/Shanghai', ini_get('date.timezone'));
+    }
+    
+    public function testSet()
+    {
+        $request = new \Widget\Request(array(
+            'widget' => $this->widget,
+        ));
+        
+        $this->widget->set('request', $request);
+        $this->assertSame($request, $this->widget->request);
+    }
 }
