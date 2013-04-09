@@ -16,7 +16,7 @@ namespace Widget;
 class Website extends AbstractWidget
 {
     /**
-     * The website url
+     * The website URL
      * 
      * @var string
      */
