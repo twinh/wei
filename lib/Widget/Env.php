@@ -55,17 +55,17 @@ class Env extends AbstractWidget
     }
 
     /**
-     * Returns the env widget
+     * Returns the env string
      * 
-     * @return \Widget\Env
+     * @return string
      */
     public function __invoke()
     {
-        return $this;
+        return $this->env;
     }
     
     /**
-     * Check if in the development development
+     * Check if in the development environment
      * 
      * @return bool
      */
@@ -75,7 +75,7 @@ class Env extends AbstractWidget
     }
     
     /**
-     * Check if in the test development
+     * Check if in the test environment
      * 
      * @return bool
      */
@@ -85,7 +85,7 @@ class Env extends AbstractWidget
     }
     
     /**
-     * Check if in the production development
+     * Check if in the production environment
      * 
      * @return bool
      */
