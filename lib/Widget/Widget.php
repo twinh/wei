@@ -261,7 +261,7 @@ class Widget extends AbstractWidget
                     $temp = &$temp[$value];
                 }
             }
-
+            
             if (2 == func_num_args()) {
                 if (isset($this->widgets[$name])) {
                     $this->widgets[$name]->setOption(func_get_arg(1), $value);
@@ -395,7 +395,7 @@ class Widget extends AbstractWidget
      */
     public function set($name, WidgetInterface $widget)
     {
-        $this->widgets[$name] = $widget;
+        $this->$name = $this->widgets[$name] = $widget;
     }
 
     /**

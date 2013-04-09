@@ -14,7 +14,6 @@ class WidgetTest extends TestCase
         ));
     }
 
-
     public function testConfig()
     {
         $widget = $this->widget;
@@ -26,6 +25,39 @@ class WidgetTest extends TestCase
         $widget->config('first/second', 'value2');
 
         $this->assertEquals(array('second' => 'value2',), $widget->config('first'));
+        
+        $config = $widget->config();
+        $this->assertEquals($widget->getOption('config'), $config);
+    }
+    
+    public function testMergeConfig()
+    {
+        $this->widget->config(array(
+            'widgetName' => array(
+                'option1' => 'value1',
+            )
+        ));
+        
+        $this->widget->config(array(
+            'widgetName' => array(
+                'option2' => 'value2',
+            )
+        ));
+        
+        $this->assertEquals('value1', $this->widget->config('widgetName/option1'));
+        $this->assertEquals('value2', $this->widget->config('widgetName/option2'));
+    }
+    
+    public function testSetOptionInSetConfig()
+    {
+        $widget = $this->widget;
+        $request = $widget->request;
+        
+        $widget->config('request', array(
+            'method' => 'POST'
+        ));
+        
+        $this->assertEquals('POST', $request->getMethod());
     }
     
     /**
