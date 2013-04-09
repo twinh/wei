@@ -2,6 +2,8 @@
 
 namespace WidgetTest;
 
+use Widget\Widget;
+
 class WidgetTest extends TestCase
 {
     public function createUserWidget()
@@ -80,5 +82,62 @@ class WidgetTest extends TestCase
         
         $this->widget->set('request', $request);
         $this->assertSame($request, $this->widget->request);
+    }
+    
+    public function testNewWidgetFromFactoryMethod()
+    {
+        $widget = Widget::create(array(), 'otherName');
+        
+        $this->assertInstanceOf('\Widget\Widget', $widget);
+        $this->assertSame($widget, Widget::create(array(), 'otherName'));
+    }
+    
+    public function testFileAsConfiguration()
+    {
+        $widget = Widget::create(__DIR__ . '/Fixtures/env/twin.php');
+        
+        $this->assertTrue($widget->config('twin'));
+    }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Configuration should be array or file
+     */
+    public function testInvalidArgumentExceptionOnCreate()
+    {
+        Widget::create(new \stdClass);
+    }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Configuration should be array or file
+     */
+    public function testInvalidArgumentExceptionWhenFileNotFind()
+    {
+        Widget::create('not existing file');
+    }
+    
+    public function testReset()
+    {
+        $first = Widget::create(array(), 'first');
+        $second = Widget::create(array(), 'second');
+        
+        Widget::reset('first');
+        
+        $this->assertNotSame($first, Widget::create(array(), 'second'));
+        $this->assertSame($second, Widget::create(array(), 'second'));
+        
+        Widget::reset();
+        $this->assertNotSame($first, Widget::create(array(), 'second'));
+        $this->assertNotSame($second, Widget::create(array(), 'second'));
+    }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Widget instance "NotInstance" not found
+     */
+    public function testRestInvalidArgumentException()
+    {
+        Widget::reset('NotInstance');
     }
 }
