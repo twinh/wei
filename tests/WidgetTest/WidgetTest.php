@@ -84,6 +84,36 @@ class WidgetTest extends TestCase
         $this->assertSame($request, $this->widget->request);
     }
     
+    public function testNewInstance()
+    {
+        $newRequest = $this->widget->newInstance('request');
+        
+        $this->assertInstanceOf('\Widget\Request', $newRequest);
+        $this->assertEquals($this->request, $newRequest);
+        $this->assertNotSame($this->request, $newRequest);
+    }
+    
+    public function testGetClassFromAlias()
+    {
+        $this->widget->appendOption('alias', array(
+            'request' => '\Widget\Request'
+        ));
+        
+        $this->assertEquals('\Widget\Request', $this->widget->getClass('request'));
+    }
+    
+    public function testRemove()
+    {
+        // Instance request widget
+        $request = $this->widget->request;
+        
+        $this->assertTrue($this->widget->remove('request'));
+        $this->assertFalse($this->widget->remove('request'));
+        
+        // Re-instance request widget
+        $this->assertNotSame($request, $this->widget->request);
+    }
+        
     public function testNewWidgetFromFactoryMethod()
     {
         $widget = Widget::create(array(), 'otherName');

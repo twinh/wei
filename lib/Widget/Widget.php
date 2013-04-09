@@ -410,6 +410,9 @@ class Widget extends AbstractWidget
 
         if (isset($this->widgets[$lower])) {
             unset($this->widgets[$lower]);
+            if (isset($this->$name) && $this->$name instanceof WidgetInterface) {
+                unset($this->$name);
+            }
             return true;
         }
 
