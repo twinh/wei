@@ -23,8 +23,16 @@ return Widget::create(array(
             
         )
     ),
+    // Databse Widget Configuration
     'db' => array(
         'driver' => 'pdo_sqlite',
         'path' => 'test.sqlite'
+    ),
+    // 
+    'entityManager' => array(
+        'config' => array(
+            'proxyDir' => './',
+            'annotationDriverPaths' => array('./')
+        )
     )
 ));

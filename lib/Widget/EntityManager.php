@@ -16,13 +16,13 @@ use Doctrine\Common\Cache\Cache as DoctrineCache;
  * EntityManager
  *
  * @author      Twin Huang <twinh@yahoo.cn>
- * @method \Doctrine\DBAL\Connection db() Returns the Doctrine DBAL connection object
+ * @method      \Doctrine\DBAL\Connection db() Returns the Doctrine DBAL connection object
  * @todo        ohter mapping
  */
 class EntityManager extends AbstractWidget
 {
     /**
-     * Options for configuration
+     * The configuration for \Doctrine\ORM\Configuration
      *
      * @var array
      * @see \Doctrine\ORM\Configuration
@@ -30,7 +30,7 @@ class EntityManager extends AbstractWidget
     protected $config = array(
         'cache' => null,
         'proxyDir' => null,
-        'proxyNamespace' => null,
+        'proxyNamespace' => 'Proxy',
         'autoGenerateProxyClasses' => null,
         'annotationDriverPaths' => array(),
         'entityNamespaces' => array(),
@@ -54,7 +54,7 @@ class EntityManager extends AbstractWidget
         parent::__construct($options);
         $options = $this->config;
 
-        // create cache object
+        // Create cache object
         switch (true) {
             case is_string($options['cache']) :
                 $class = '\Doctrine\Common\Cache\\' . $options['cache'];
@@ -71,7 +71,7 @@ class EntityManager extends AbstractWidget
 
         $config = new Configuration;
 
-        // set default cache
+        // Set default cache
         if ($cache) {
             $config->setMetadataCacheImpl($cache);
             $config->setQueryCacheImpl($cache);
@@ -107,7 +107,7 @@ class EntityManager extends AbstractWidget
     }
 
     /**
-     * Get Docrine ORM entity manager
+     * Returns the Docrine ORM entity manager
      *
      * @return \Doctrine\ORM\EntityManager
      */
@@ -117,10 +117,10 @@ class EntityManager extends AbstractWidget
     }
 
     /**
-     * Set options for \Doctrine\ORM\Configuration
+     * Set configuration for \Doctrine\ORM\Configuration
      *
      * @param array $config
-     * @return EntityManager
+     * @return \Widget\EntityManager
      */
     public function setConfig(array $config)
     {
