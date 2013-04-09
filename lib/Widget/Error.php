@@ -365,7 +365,7 @@ class Error extends AbstractWidget
     public function getGet()
     {
         $get = array();
-        foreach ($this->get as $key => $value) {
+        foreach ($this->query as $key => $value) {
             if (is_array($value)) {
                 $value = var_export($value, true);
             }
