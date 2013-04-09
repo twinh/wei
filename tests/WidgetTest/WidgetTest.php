@@ -137,6 +137,30 @@ class WidgetTest extends TestCase
         $this->assertTrue(class_exists('WidgetTest\Fixtures\Autoload'));
         $this->assertFalse(class_exists('WidgetTest\Fixtures\AutoloadNotFound'));
     }
+    
+    public function testImport()
+    {
+        $this->widget->setImport(array(
+            array(
+                'dir' => __DIR__ . '/Fixtures/Import',
+                'namespace' => '\WidgetTest\Fixtures\Import',
+                'format' => 'test%s',
+            )
+        ));
+        
+        $this->assertEquals('\WidgetTest\Fixtures\Import\Widget1', $this->widget->has('testWidget1'));
+        $this->assertEquals('\WidgetTest\Fixtures\Import\Widget2', $this->widget->has('testWidget2'));
+        $this->assertFalse($this->widget->has('testWidget3'));
+    }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Parameter 1 should be valid directory
+     */
+    public function testImportInvalidDir()
+    {
+        $this->widget->import(__DIR__ . '/not found/', 'test');
+    }
         
     public function testNewWidgetFromFactoryMethod()
     {
