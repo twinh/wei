@@ -23,4 +23,8 @@ return Widget::create(array(
             
         )
     ),
+    'db' => array(
+        'driver' => 'pdo_sqlite',
+        'path' => 'test.sqlite'
+    )
 ));

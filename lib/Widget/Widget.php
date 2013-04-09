@@ -328,6 +328,7 @@ class Widget extends AbstractWidget
 
         // Resolve the real widget name and the config name($full)
         $full = $name;
+        $full[0] = strtolower($full[0]);
         if (false !== ($pos = strpos($name, '.'))) {
             $name = substr($name, 0, $pos);
         }
