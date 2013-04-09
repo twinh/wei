@@ -12,6 +12,7 @@ namespace Widget;
  * The environment widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @property    \Widget\Server $server The server widget
  */
 class Env extends AbstractWidget
 {
@@ -58,16 +59,31 @@ class Env extends AbstractWidget
         return $this;
     }
     
+    /**
+     * Check if in the development development
+     * 
+     * @return bool
+     */
     public function isDev()
     {
         return $this->env === 'dev';
     }
     
+    /**
+     * Check if in the test development
+     * 
+     * @return bool
+     */
     public function isTest()
     {
         return $this->env === 'test';
     }
     
+    /**
+     * Check if in the production development
+     * 
+     * @return bool
+     */
     public function isProd()
     {
         return $this->env === 'prod';
@@ -101,6 +117,11 @@ class Env extends AbstractWidget
         }
     }
     
+    /**
+     * Load widget config by specified file
+     * 
+     * @param string $file
+     */
     public function loadConfigFile($file)
     {
         if (!is_file($file)) {
