@@ -39,12 +39,12 @@ class UrlDebugger extends AbstractWidget
      */
     public function inject()
     {
-        if ($this->get['_ajax']) {
+        if ($this->query['_ajax']) {
             $this->server['HTTP_X_REQUESTED_WITH'] = 'xmlhttprequest';
         }
 
-        if ($this->get['_method']) {
-            $this->server['REQUEST_METHOD'] = $this->get['_method'];
+        if ($this->query['_method']) {
+            $this->server['REQUEST_METHOD'] = $this->query['_method'];
         }
     }
 
