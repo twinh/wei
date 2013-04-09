@@ -23,6 +23,11 @@ class Env extends AbstractWidget
      */
     protected $env;
     
+    /**
+     * The configuration directory pattern
+     * 
+     * @var string
+     */
     protected $configDir = 'config/config_%env%.php';
     
     public function __construct(array $options = array())
