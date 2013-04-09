@@ -16,9 +16,9 @@ namespace Widget;
 interface WidgetAwareInterface
 {
     /**
-     * Sets the Widget manager
+     * Sets the widget manager
      * 
-     * @param \Widget\Widget $widget A Widget manager instance
+     * @param \Widget\Widget $widget A widget manager instance
      * @return \Widget\WidgetAwareInterface
      */
     public function setWidget(Widget $widget);
