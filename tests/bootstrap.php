@@ -28,7 +28,7 @@ return Widget::create(array(
         'driver' => 'pdo_sqlite',
         'path' => 'test.sqlite'
     ),
-    // 
+    // Doctrine ORM Widget Configuration
     'entityManager' => array(
         'config' => array(
             'proxyDir' => './',
