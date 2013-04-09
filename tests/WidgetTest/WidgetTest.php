@@ -113,6 +113,30 @@ class WidgetTest extends TestCase
         // Re-instance request widget
         $this->assertNotSame($request, $this->widget->request);
     }
+    
+    public function testHas()
+    {
+        $this->widget->request;
+        
+        $this->assertEquals('\Widget\Request', $this->widget->has('request'));
+        $this->assertFalse($this->widget->has('request2'));
+    }
+    
+    public function testAutoload()
+    {
+        $this->widget->setAutoload(false);
+        $this->assertNotContains(array($this->widget, 'autoload'), spl_autoload_functions());
+        
+        $this->widget->setAutoload(true);
+        $this->assertContains(array($this->widget, 'autoload'), spl_autoload_functions());
+        
+        $this->widget->setAutoloadMap(array(
+            'WidgetTest' => dirname(__DIR__)
+        ));
+        
+        $this->assertTrue(class_exists('WidgetTest\Fixtures\Autoload'));
+        $this->assertFalse(class_exists('WidgetTest\Fixtures\AutoloadNotFound'));
+    }
         
     public function testNewWidgetFromFactoryMethod()
     {
