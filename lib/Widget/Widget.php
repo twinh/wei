@@ -218,8 +218,8 @@ class Widget extends AbstractWidget
     /**
      * Get a widget instance
      *
-     * @param  string       $name The name of widget
-     * @return object
+     * @param string $name The name of widget
+     * @return \Widget\WidgetInterface
      */
     public function __invoke($name)
     {
