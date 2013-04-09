@@ -46,11 +46,34 @@ class Website extends AbstractWidget
     /**
      * Returns the value of website configuration
      * 
-     * @param string $name The name of configuration(property)
+     * @param string $name The name of configuration(widget option)
      * @return mixed
      */
     public function __invoke($name)
     {
         return $this->getOption($name);
+    }
+    
+    /**
+     * Returns the value of website configuration
+     * 
+     * @param string $name The name of configuration(widget option)
+     * @return mixed
+     */
+    public function get($name)
+    {
+        return $this->getOption($name);
+    }
+    
+    /**
+     * Set the value of website configuration
+     * 
+     * @param string $name The name of configuration(widget option)
+     * @param mixed $value The value of configuration
+     * @return \Widget\Website
+     */
+    public function set($name, $value)
+    {
+        return $this->setOption($name, $value);
     }
 }
