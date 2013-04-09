@@ -11,7 +11,7 @@ namespace Widget;
 use Doctrine\DBAL\DriverManager;
 
 /**
- * Doctrine dbal connection
+ * A container widget for Doctrine dbal connection object
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
@@ -25,23 +25,16 @@ class Db extends AbstractWidget
     protected $conn;
 
     /**
-     * The first parameter for DriverManager::getConnection
-     *
-     * @var array
-     */
-    protected $params = array();
-
-    /**
      * Constructor
      *
-     * @param array $options first parameters for DriverManager::getConnection
-     * @see http://docs.doctrine-project.org/projects/doctrine-dbal/en/2.0.x/reference/configuration.html
+     * @param array $options
+     * @link http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html
      */
     public function __construct(array $options = array())
     {
         parent::__construct($options);
 
-        $this->conn = DriverManager::getConnection($this->params);
+        $this->conn = DriverManager::getConnection($this->getOption());
     }
 
     /**
