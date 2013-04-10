@@ -11,18 +11,12 @@ namespace Widget;
 /**
  * Error
  *
- * @method mixed config(string $name) Get the widget config value
- * @property \Widget\Request $request The HTTP request widget
- * @property \Widget\Get $get The get widget
- * @property \Widget\Post $post The post widget
- * @property \Widget\Session $session The session widget
- * @property \Widget\Cookie $cookie The cookie widget
- * @property \Widget\Server $server The server widget
- * @property \Widget\Logger $logger The logger widget
- * @method \Widget\EventManager on(string|\Widget\Event $event) Attach a handler to an event
+ * @property    \Widget\Request $request The HTTP request widget
+ * @property    \Widget\Logger $logger The logger widget
+ * @property    \Widget\Response $response The HTTP response widget
+ * @method      \Widget\EventManager on(string|\Widget\Event $event) Attach a handler to an event
  * @todo        throw exception when called
  * @todo        add options display
- * @todo        response
  * @todo        bootstrap style
  */
 class Error extends AbstractWidget
@@ -164,53 +158,23 @@ class Error extends AbstractWidget
             // File Infomation
             $mtime = strftime('%c', filemtime($file));
             $fileInfo = $this->getFileCode($file, $line);
-
-            // System Information
-            $requestMethod = $this->server['REQUEST_METHOD'];
-
-            $requestUrl = htmlspecialchars(urldecode($this->server['REQUEST_URI']), ENT_QUOTES);;
-
-            $serverTime = strftime('%c');
-
-            $includePaths = explode(PATH_SEPARATOR, get_include_path());
-            foreach ($includePaths as $key => $value) {
-                $includePaths[$key] = realpath($value);
-            }
-            $includePath = implode('<br />', $includePaths);
-
-            // Request Information
-            $get = $this->getGet();
-
-            $post = $this->getPost();
-
-            $cookie = $this->getCookie();
-
-            $session = $this->getSession();
-
-            // Response Information
-            $response = $this->getResponse();
-
-            // Server Environment
-            $server = $this->getServer();
-
+            
             $this->logger->debug($code . $message . ' ' . $stackInfo);
 
             //$this->trigger('error', array('data' => get_defined_vars()));
 
             // display view file
+            $this->response->setStatusCode(500)->send();
             require __DIR__ . '/Resource/views/error.php';
 
             // exit to prevent other output
             if ($this->exit) {
-                // @codeCoverageIgnoreStart
                 exit();
-                // @codeCoverageIgnoreEnd
             } else {
                 if ($this->error) {
                     set_error_handler(array($this, 'renderError'));
                 }
             }
-        // @codeCoverageIgnoreStart
         // dispaly basic error message for exception in exception handler
         } catch (Exception $e) {
             if ($this->widget->config('debug')) {
@@ -220,7 +184,6 @@ class Error extends AbstractWidget
                 echo get_class($e) . ': ' . $e->getMessage();
             }
         }
-        // @codeCoverageIgnoreEnd
     }
 
     /**
@@ -323,138 +286,5 @@ class Error extends AbstractWidget
         $str .= '#' . ++$i . ' {main}' . PHP_EOL . PHP_EOL;
 
         return $str;
-    }
-
-    /**
-     * Get readable server($_SERVER) information for html output
-     *
-     * @return array
-     */
-    public function getServer()
-    {
-        $server = array();
-        foreach ($this->server as $key => $value) {
-            if ('PATH' == $key) {
-                $paths = explode(PATH_SEPARATOR, $value);
-                foreach ($paths as &$path) {
-                    $path = htmlspecialchars(realpath($path), ENT_QUOTES);
-                }
-                $value = implode('<br />', $paths);
-                $server[$key] = $value;
-                continue;
-            } elseif ('REQUEST_TIME' == $key) {
-                $server[$key] = $value . '&nbsp;<em>(' . strftime('%c', $value) . ')</em>';
-                continue;
-            } elseif ('QUERY_STRING' == $key || 'REQUEST_URI' == $key) {
-                $value = urldecode($value);
-            } elseif (is_array($value)) {
-                $server[$key] = '<pre>' . htmlspecialchars(var_export($value, true), ENT_QUOTES) . '</pre>';
-                continue;
-            }
-            $server[$key] = htmlspecialchars((string) $value, ENT_QUOTES);
-        }
-
-        return $server;
-    }
-
-    /**
-     * Get reqeust information ($_GET) for html output
-     *
-     * @return array
-     */
-    public function getGet()
-    {
-        $get = array();
-        foreach ($this->query as $key => $value) {
-            if (is_array($value)) {
-                $value = var_export($value, true);
-            }
-            $get[$key] = htmlspecialchars($value, ENT_QUOTES);
-        }
-
-        return $get;
-    }
-
-    /**
-     * Get reqeust information ($_POST) for html output
-     *
-     * @return array
-     */
-    public function getPost()
-    {
-        $post = array();
-        foreach ($this->post as $key => $value) {
-            if (is_array($value)) {
-                $value = var_export($value, true);
-            }
-            $post[$key] = htmlspecialchars($value, ENT_QUOTES);
-        }
-
-        return $post;
-    }
-
-    /**
-     * Get reqeust information ($_COOKIE) for html output
-     *
-     * @return array
-     */
-    public function getCookie()
-    {
-        $cookie = array();
-        foreach ($this->cookie as $key => $value) {
-            $cookie[$key] = htmlspecialchars($value, ENT_QUOTES);
-        }
-
-        return $cookie;
-    }
-
-    /**
-     * Get session information ($_SESSION) for html output
-     *
-     * @return string|array
-     * @todo when session not enable ?
-     */
-    public function getSession()
-    {
-        // Session Information
-        $session = array();
-
-        if (!@$this->session) {
-            return 'Unable to get sesion object, may be some errors occurred when called Widget_Session::__construct';
-        }
-
-        foreach ($this->session as $key => $value) {
-            if (is_array($value)) {
-                $value = var_export($value, true);
-            }
-            $session[$key] = htmlspecialchars($value, ENT_QUOTES);
-        }
-
-        return $session;
-    }
-
-    /**
-     * Get response information for html output
-     *
-     * @return array
-     */
-    public function getResponse()
-    {
-        if (function_exists('apache_response_headers')) {
-            $headers = apache_response_headers();
-        } else {
-            $headers = array();
-
-            foreach (headers_list() as $header) {
-                $pos = strpos($header, ':');
-                $headers[substr($header, 0, $pos)] = trim(substr($header, $pos + 1));
-            }
-        }
-
-        foreach ($headers as &$header) {
-            $header = htmlspecialchars($header, ENT_QUOTES);
-        }
-
-        return $headers;
     }
 }

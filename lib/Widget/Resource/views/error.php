@@ -61,6 +61,7 @@ ol, ul, li {
     line-height: 18px;
 }
 </style>
+<!--<link href="http://php/bootstrap/docs/assets/css/bootstrap.css" rel="stylesheet">-->
 </head>
 <body>
 <div class="message-wrapper">
@@ -85,14 +86,6 @@ ol, ul, li {
             <h2>System Information</h2>
             <table>
                 <tr>
-                    <th>Request Method</th>
-                    <td><?php echo $requestMethod ?></td>
-                </tr>
-                <tr>
-                    <th>Request URL</th>
-                    <td><?php echo $requestUrl ?></td>
-                </tr>
-                <tr>
                     <th>Widget Version</th>
                     <td><?php echo \Widget\Widget::VERSION ?></td>
                 </tr>
@@ -100,129 +93,6 @@ ol, ul, li {
                     <th>PHP Version</th>
                     <td><?php echo phpversion() ?></td>
                 </tr>
-                <tr>
-                    <th>Server Time</th>
-                    <td><?php echo $serverTime ?></td>
-                </tr>
-                <tr>
-                    <th>Include Paths</th>
-                    <td><?php echo $includePath ?></td>
-                </tr>
-            </table>
-        </div>
-        <div class="message-box">
-            <h2>Request Information</h2>
-            <table>
-                <tr>
-                    <th>GET</th>
-                    <td>
-                        <?php
-                        if (empty($get)):
-                            ?>
-                            <em>empty</em>
-                            <?php
-                        else:
-                            foreach ($get as $key => $value):
-                                ?>
-                                <?php echo $key ?>: <?php echo $value ?><br />
-                                <?php
-                            endforeach;
-                        endif;
-                        ?>
-                    </td>
-                </tr>
-                <tr>
-                    <th>POST</th>
-                    <td>
-                        <?php
-                        if (empty($post)):
-                            ?>
-                            <em>empty</em>
-                            <?php
-                        else:
-                            foreach ($post as $key => $value):
-                                ?>
-                                <?php echo $key ?>: <?php echo $value ?><br />
-                                <?php
-                            endforeach;
-                        endif;
-                        ?>
-                    </td>
-                </tr>
-                <tr>
-                    <th>COOKIE</th>
-                    <td>
-                        <?php
-                        if (empty($cookie)):
-                            ?>
-                            <em>empty</em>
-                            <?php
-                        else:
-                            foreach ($cookie as $key => $value):
-                                ?>
-                                <?php echo $key ?>: <?php echo $value ?><br />
-                                <?php
-                            endforeach;
-                        endif;
-                        ?>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="message-box">
-            <h2>Response Information</h2>
-            <table>
-
-                <?php
-                foreach ($response as $key => $value) :
-                    ?>
-                    <tr>
-                        <th><?php echo $key ?></th>
-                        <td><?php echo $value ?></td>
-                    </tr>
-                    <?php
-                endforeach;
-                ?>
-            </table>
-        </div>
-        <div class="message-box">
-            <h2>Session Information</h2>
-            <table>
-                <?php
-                if (empty($session)):
-                    ?>
-                    <tr><td clospan="2"><em>empty</em></td></tr>
-                    <?php
-                elseif (is_string($session)):
-                ?>
-                    <tr><td clospan="2"><em class="ui-state-error"><?php echo $session ?></em></td></tr>
-                <?php
-                else:
-                    foreach ($session as $key => $value):
-                        ?>
-                        <tr>
-                            <th><?php echo $key ?></th>
-                            <td><?php echo $value ?></td>
-                        </tr>
-                        <?php
-                    endforeach;
-                endif;
-                ?>
-            </table>
-        </div>
-        <div class="message-box">
-            <h2>Server Environment</h2>
-            <table>
-                <?php
-                foreach ($server as $key => $value) :
-                    ?>
-                    <tr>
-                        <th><?php echo $key ?></th>
-                        <td><?php echo $value ?></td>
-                    </tr>
-                    <?php
-                endforeach;
-                ?>
             </table>
         </div>
         <div class="message-box">
