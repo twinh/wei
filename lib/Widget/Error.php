@@ -86,7 +86,7 @@ class Error extends AbstractWidget
             $this->response->setStatusCode(500)->send();
             
             $this->logger->debug($detail);
-            
+            throw new \Exception('abc');
             if ($this->request->inAjax()) {
                 echo json_encode(array(
                     'code'      => -($code ? abs($code) : 500),
@@ -105,7 +105,7 @@ class Error extends AbstractWidget
         // Dispaly basic error message for exception in exception handler
         } catch (\Exception $e) {
             if ($debug) {
-                echo sprintf('<p>%s: %s in %s on line %s</p>', get_class($e), $e->getMessage(), $e->getFile(), $e->getCode());
+                echo sprintf('<p>%s: %s in %s on line %s</p>', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine());
                 echo '<pre>' . $e->getTraceAsString() . '</pre>';
             } else {
                 echo $this->message;

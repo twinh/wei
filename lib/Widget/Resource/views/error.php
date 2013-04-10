@@ -34,15 +34,15 @@ pre {
 <body>
 <h1><?php echo $message ?></h1>
 <?php if ($debug) : ?>
-<h2>Trace</h2>
-<p class="error-text"><?php echo $detail ?></p>
-<p>
-    <pre><code><?php echo $trace ?></code></pre>
-</p>
 <h2>File</h2>
 <p class="error-text"><?php echo $file ?> modified at <?php echo $mtime ?></p>
 <p>
     <pre><?php echo $fileInfo ?></pre>
+</p>
+<h2>Trace</h2>
+<p class="error-text"><?php echo $detail ?></p>
+<p>
+    <pre><code><?php echo $trace ?></code></pre>
 </p>
 <?php else : ?>
 <p>Unfortunately, an error occurred. Please try again later.</p>
