@@ -86,7 +86,7 @@ class Error extends AbstractWidget
             $this->response->setStatusCode(500)->send();
             
             $this->logger->debug($detail);
-            throw new \Exception('abc');
+
             if ($this->request->inAjax()) {
                 echo json_encode(array(
                     'code'      => -($code ? abs($code) : 500),
