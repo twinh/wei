@@ -156,8 +156,6 @@ class Error extends AbstractWidget
             
             $this->logger->debug($code . $message . ' ' . $stackInfo);
 
-            //$this->trigger('error', array('data' => get_defined_vars()));
-
             // display view file
             $this->response->setStatusCode(500)->send();
             require __DIR__ . '/Resource/views/error.php';
@@ -209,39 +207,35 @@ class Error extends AbstractWidget
     public function getFileCode($file, $line, $range = 20)
     {
         $code = file($file);
-
         $half = (int) ($range / 2);
 
-        // 开始行
         $start = $line - $half;
         0 > $start && $start = 0;
 
-        // 结束行
         $total = count($code);
         $end = $line + $half;
         $total < $end && $end = $total;
+        
+        $len = strlen($end);
 
-        // 调整file获取的文件行数与Exception->getLine相差一行的问题
         array_unshift($code, null);
         $content = '';
         for ($i = $start; $i < $end; $i++) {
-            $temp = str_pad($i, 4, 0, STR_PAD_LEFT) . ':' . $code[$i];
+            $temp = str_pad($i, $len, 0, STR_PAD_LEFT) . ':  ' . $code[$i];
             if ($line != $i) {
                 $content .= htmlspecialchars($temp, ENT_QUOTES);
             } else {
                 $content .= '<span class="error-text">' . htmlspecialchars($temp) . '</span>';
             }
         }
-
-        unset($code);
-
+        
         return $content;
     }
 
     /**
      * Get trace string like Exception::getTraceAsString
      *
-     * @param  array  $traces usally get from debug_backtrace()
+     * @param  array  $traces The traces array get from debug_backtrace()
      * @return string
      */
     public function getTraceString($traces)
