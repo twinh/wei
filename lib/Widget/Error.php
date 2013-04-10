@@ -8,8 +8,10 @@
 
 namespace Widget;
 
+use Widget\Event\Event;
+
 /**
- * Error
+ * The error widget to show pretty exception message 
  *
  * @property    \Widget\Request $request The HTTP request widget
  * @property    \Widget\Logger $logger The logger widget
@@ -24,13 +26,6 @@ class Error extends AbstractWidget
      * @var string
      */
     protected $message = 'Error';
-
-    /**
-     * Whether exit after dispaly the error message or not
-     *
-     * @var bool
-     */
-    protected $exit = true;
 
     /**
      * Whether handle the PHP errors
@@ -75,12 +70,13 @@ class Error extends AbstractWidget
      * @param type $widget
      * @param type $exception
      */
-    public function showError($event, $widget, $exception)
+    public function showError(Event $event, $widget, $exception)
     {
+        $event->preventDefault();
+        $debug = $this->widget->config('debug');
         try {
-            $debug      = $this->widget->config('debug');
             $code       = $exception->getCode();
-            $message    = $debug ? $this->message : $exception->getMessage();
+            $message    = htmlspecialchars($debug ? $exception->getMessage() : $this->message, ENT_QUOTES);
             $file       = $exception->getFile();
             $line       = $exception->getLine();
             $class      = get_class($exception);
@@ -106,22 +102,13 @@ class Error extends AbstractWidget
                 // Display view file
                 require __DIR__ . '/Resource/views/error.php';
             }
-
-            // Exit to prevent other output
-            if ($this->exit) {
-                exit();
-            } else {
-                if ($this->error) {
-                    set_error_handler(array($this, 'renderError'));
-                }
-            }
         // Dispaly basic error message for exception in exception handler
         } catch (\Exception $e) {
-            if ($this->widget->config('debug')) {
+            if ($debug) {
                 echo sprintf('<p>%s: %s in %s on line %s</p>', get_class($e), $e->getMessage(), $e->getFile(), $e->getCode());
                 echo '<pre>' . $e->getTraceAsString() . '</pre>';
             } else {
-                echo get_class($e) . ': ' . $e->getMessage();
+                echo $this->message;
             }
         }
     }
@@ -177,50 +164,5 @@ class Error extends AbstractWidget
         }
         
         return $content;
-    }
-
-    /**
-     * Get trace string like Exception::getTraceAsString
-     *
-     * @param  array  $traces The traces array get from debug_backtrace()
-     * @return string
-     */
-    public function getTraceString($traces)
-    {
-        $str = '';
-        foreach ($traces as $i => $trace) {
-            $str .= '#' . $i . ' ';
-            if (isset($trace['file'])) {
-                $str .= sprintf('%s(%s)', $trace['file'], $trace['line']);
-            } else {
-                $str .= '[internal function]';
-            }
-            if (isset($trace['class'])) {
-                $str .= ': ' . $trace['class'] . $trace['type'] . $trace['function'];
-            } else {
-                $str .= ': ' . $trace['function'];
-            }
-
-            $args = array();
-            foreach ($trace['args'] as $arg) {
-                if (is_object($arg)) {
-                    $args[] = 'Object(' . get_class($arg) . ')';
-                } elseif (is_string($arg)) {
-                    $args[] = "'{$arg}'";
-                } elseif (is_bool($arg)) {
-                    if (true == $arg) {
-                        $args[] = 'true';
-                    } else {
-                        $args[] = 'false';
-                    }
-                } else {
-                    $args[] = (string) $arg;
-                }
-            }
-            $str .= '(' . implode(', ', $args) . ')' . PHP_EOL;
-        }
-        $str .= '#' . ++$i . ' {main}' . PHP_EOL . PHP_EOL;
-
-        return $str;
     }
 }

@@ -10,7 +10,7 @@ body, div, h1, h2, p, pre {
 }
 body {
     font-size: 12px;
-    color: #363636;
+    color: #333;
     padding: 15px 20px 20px 20px;
 }
 body, pre, code {
@@ -27,7 +27,7 @@ pre {
     line-height: 18px;
 }
 .error-text {
-    color: #b94a48;
+    color: #FF3000;
 }
 </style>
 </head>
