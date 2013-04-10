@@ -35,7 +35,7 @@ pre {
 <h1><?php echo $message ?></h1>
 <?php if ($debug) : ?>
 <h2>Trace</h2>
-<p class="error-text"><?php echo $stackInfo ?></p>
+<p class="error-text"><?php echo $detail ?></p>
 <p>
     <pre><code><?php echo $trace ?></code></pre>
 </p>

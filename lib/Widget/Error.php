@@ -15,8 +15,6 @@ namespace Widget;
  * @property    \Widget\Logger $logger The logger widget
  * @property    \Widget\Response $response The HTTP response widget
  * @method      \Widget\EventManager on(string|\Widget\Event $event) Attach a handler to an event
- * @todo        throw exception when called
- * @todo        add options display
  */
 class Error extends AbstractWidget
 {
@@ -35,19 +33,12 @@ class Error extends AbstractWidget
     protected $exit = true;
 
     /**
-     * Whether clean previous output before error or not
+     * Whether handle the PHP errors
      *
      * @var bool
      */
-    protected $clean = true;
-
-    /**
-     * Whether handle the php error
-     *
-     * @var bool
-     */
-    protected $error = true;
-
+    protected $convertErrorToException = true;
+    
     /**
      * Constructor
      *
@@ -61,7 +52,7 @@ class Error extends AbstractWidget
             $this, 'showError'
         ));
 
-        if ($this->error) {
+        if ($this->convertErrorToException) {
             set_error_handler(array($this, 'renderError'));
         }
     }
@@ -79,88 +70,44 @@ class Error extends AbstractWidget
 
     /**
      * Show error message
-     *
-     * @param mixed $message
-     * @param integer $code
-     * @param array $options
+     * 
+     * @param type $event
+     * @param type $widget
+     * @param type $exception
      */
-    public function showError($event, $widget, $message, $code = 500, array $options = array())
+    public function showError($event, $widget, $exception)
     {
         try {
-            if ($this->error) {
-                restore_error_handler();
-            }
-
-            if ($message instanceof \Exception) {
-                if (is_array($code)) {
-                    $options = $code;
-                }
-                $e = $message;
-                $code = $e->getCode();
-                $message = $e->getMessage();
-                $file = $e->getFile();
-                $line = $e->getLine();
-                $class = get_class($e);
-                $trace = $e->getTraceAsString();
-            } else {
-                if (is_array($message)) {
-                    $options = $message;
-                    $message = isset($options['message']) ? $options['message'] : $this->message;
-                } else {
-                    $message = (string) $message;
-                }
-
-                $offset = 5;
-                $traces = debug_backtrace();
-                $file = $traces[$offset-1]['file'];
-                $line = $traces[$offset-1]['line'];
-                $class = 'Widget_Error';
-                $traces = array_slice($traces, $offset);
-                $trace = $this->getTraceString($traces);
-            }
-
-            $this->setOption($options);
-
-            $debug = $this->widget->config('debug');
-            if (!$debug) {
-                $message = $this->message;
-            }
-
-            // clean up output
-            if ($this->clean && ob_get_status()) {
-                $output = ob_get_contents();
-                $output && ob_end_clean();
-                ob_start();
-            }
-
-            // TODO more info, may be need an ajax view file
-            if ($this->request->inAjax()) {
-                exit(json_encode(array(
-                    'code' => $code ? ($code > 0 ? -$code : $code) : -$this->code,
-                    'message' => $message,
-                    'detail' => sprintf('%s: %s in %s on line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getCode()),
-                    'trace' => $e->getTraceAsString(),
-                )));
-            }
-
-            // Title & Message
-            $code = $code ? $code . ': ' : '';
-
-            // Call Stack
-            $stackInfo = sprintf('Threw by %s in %s on line %s', $class, $file, $line);
-            $trace = htmlspecialchars($trace, ENT_QUOTES);
-
-            // File Infomation
-            $mtime = strftime('%c', filemtime($file));
-            $fileInfo = $this->getFileCode($file, $line);
+            $debug      = $this->widget->config('debug');
+            $code       = $exception->getCode();
+            $message    = $debug ? $this->message : $exception->getMessage();
+            $file       = $exception->getFile();
+            $line       = $exception->getLine();
+            $class      = get_class($exception);
+            $trace      = htmlspecialchars($exception->getTraceAsString(), ENT_QUOTES);
+            $detail     = sprintf('Threw by %s in %s on line %s', $class, $file, $line);
             
-            $this->logger->debug($code . $message . ' ' . $stackInfo);
-
-            // display view file
             $this->response->setStatusCode(500)->send();
-            require __DIR__ . '/Resource/views/error.php';
+            
+            $this->logger->debug($detail);
+            
+            if ($this->request->inAjax()) {
+                echo json_encode(array(
+                    'code'      => -($code ? abs($code) : 500),
+                    'message'   => $message,
+                    'detail'    => $detail,
+                    'trace'     => $trace
+                ));
+            } else {
+                // File Infomation
+                $mtime = date('Y-m-d H:i:s', filemtime($file));
+                $fileInfo = $this->getFileCode($file, $line);
+                
+                // Display view file
+                require __DIR__ . '/Resource/views/error.php';
+            }
 
-            // exit to prevent other output
+            // Exit to prevent other output
             if ($this->exit) {
                 exit();
             } else {
@@ -168,8 +115,8 @@ class Error extends AbstractWidget
                     set_error_handler(array($this, 'renderError'));
                 }
             }
-        // dispaly basic error message for exception in exception handler
-        } catch (Exception $e) {
+        // Dispaly basic error message for exception in exception handler
+        } catch (\Exception $e) {
             if ($this->widget->config('debug')) {
                 echo sprintf('<p>%s: %s in %s on line %s</p>', get_class($e), $e->getMessage(), $e->getFile(), $e->getCode());
                 echo '<pre>' . $e->getTraceAsString() . '</pre>';
