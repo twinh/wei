@@ -159,7 +159,7 @@ class Error extends AbstractWidget
             if ($line != $i) {
                 $content .= htmlspecialchars($temp, ENT_QUOTES);
             } else {
-                $content .= '<span class="error-text">' . htmlspecialchars($temp) . '</span>';
+                $content .= '<span class="error-text">' . htmlspecialchars($temp, ENT_QUOTES) . '</span>';
             }
         }
         
