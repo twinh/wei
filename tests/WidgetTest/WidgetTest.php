@@ -116,6 +116,120 @@ class WidgetTest extends TestCase
         $this->assertSame($request, $this->widget->request);
     }
     
+    /**
+     * @expectedException \BadMethodCallException
+     * @expectedExceptionMessage Method "__invoke" not found in class "WidgetTest\Fixtures\WidgetWithoutInvokeMethod"
+     */
+    public function testInstanceWidgetWithoutInvokeMethodFromWidgetManager()
+    {
+        $this->widget->appendOption('alias', array(
+            'noInvokeMethod' => 'WidgetTest\Fixtures\WidgetWithoutInvokeMethod'
+        ));
+        
+        $this->widget->noInvokeMethod;
+    }
+    
+    /**
+     * @expectedException \BadMethodCallException
+     * @expectedExceptionMessage Method "__invoke" not found in class "WidgetTest\Fixtures\WidgetWithoutInvokeMethod"
+     */
+    public function testInstanceWidgetWithoutInvokeMethod()
+    {
+        $this->widget->appendOption('alias', array(
+            'noInvokeMethod' => 'WidgetTest\Fixtures\WidgetWithoutInvokeMethod'
+        ));
+        
+        $this->widget->request->noInvokeMethod;
+    }
+    
+    /**
+     * @expectedException \BadMethodCallException
+     * @expectedExceptionMessage Property or widget "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file
+     */
+    public function testInstanceNotFoundWidgetFromWidgetManager()
+    {
+        $this->widget->notFoundWidget;
+    }
+    
+    /**
+     * @expectedException \BadMethodCallException
+     * @expectedExceptionMessage Property or widget "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file
+     */
+    public function testInstanceNotFoundWidget()
+    {
+        $this->widget->request->notFoundWidget;
+    }
+    
+    /**
+     * @expectedException \BadMethodCallException
+     * @expectedExceptionMessage Method "Widget\Widget->notFoundWidget" or widget "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file
+     */
+    public function testInvokeNotFoundWidget()
+    {
+        $this->widget->notFoundWidget();
+    }
+    
+    /**
+     * @expectedException \BadMethodCallException
+     * @expectedExceptionMessage Property or method "notFoundWidget" not found
+     */
+    public function testInvokeNotFoundWidgetByCallUserFunc()
+    {
+        call_user_func($this->widget, 'notFoundWidget');
+    }
+    
+    public function testGetFromDeps()
+    {
+        // Set options for sub request
+        $this->widget->config('request.sub', array(
+            'fromGlobal' => false,
+            'data' => array(
+                'id' => 'fromSubRequest'
+            )
+        ));
+        
+        $request = $this->widget->request;
+        $request->set('id', 'fromOrigin');
+        
+        $widgetHasDeps = new \WidgetTest\Fixtures\WidgetHasDeps(array(
+            'widget' => $this->widget
+        ));
+        
+        // Instance request widget from 'request.sub' configuration
+        $subRequest = $widgetHasDeps->request;
+        $this->assertEquals('fromSubRequest', $subRequest->get('id'));
+        
+        $this->assertEquals('fromOrigin', $request->get('id'));
+    }
+
+    public function testInvoke()
+    {
+        $this->request->set('id', __METHOD__);
+        
+        // Equals to $this->wideget->request('id') 
+        $id = $this->widget->invoke('request', array('id'));
+        
+        $this->assertEquals(__METHOD__, $id);
+    }
+    
+    public function testInvoker()
+    {
+        $request = $this->widget('request');
+        
+        $this->assertInstanceOf('\Widget\Request', $request);
+    }
+    
+    public function testInstanceWidgetWithWidgetOption()
+    {
+        $widget = new \Widget\Widget(array(
+            'widget' => array(
+                'autoload' => false,
+            ),
+        ));
+        
+        $this->assertFalse($widget->getOption('autoload'));
+    }
+    
     public function testNewInstance()
     {
         $newRequest = $this->widget->newInstance('request');

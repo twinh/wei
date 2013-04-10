@@ -369,7 +369,7 @@ class Widget extends AbstractWidget
         } else {
             // Call to undefined method class::method
             // Undefined property: class::$property
-            throw new \BadMethodCallException(sprintf('Property or method "%s" not defined', $name));
+            throw new \BadMethodCallException(sprintf('Property or method "%s" not found', $name));
         }
     }
     
