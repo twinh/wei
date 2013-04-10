@@ -17,23 +17,15 @@ namespace Widget;
  * @method      \Widget\EventManager on(string|\Widget\Event $event) Attach a handler to an event
  * @todo        throw exception when called
  * @todo        add options display
- * @todo        bootstrap style
  */
 class Error extends AbstractWidget
 {
-    /**
-     * The default error code
-     *
-     * @var int
-     */
-    protected $code = 500;
-
     /**
      * The default error message when debug is not enable
      *
      * @var string
      */
-    protected $message = 'Server busy, please try again later';
+    protected $message = 'Error';
 
     /**
      * Whether exit after dispaly the error message or not
@@ -130,6 +122,9 @@ class Error extends AbstractWidget
             $this->setOption($options);
 
             $debug = $this->widget->config('debug');
+            if (!$debug) {
+                $message = $this->message;
+            }
 
             // clean up output
             if ($this->clean && ob_get_status()) {
@@ -234,7 +229,7 @@ class Error extends AbstractWidget
             if ($line != $i) {
                 $content .= htmlspecialchars($temp, ENT_QUOTES);
             } else {
-                $content .= '<span class="ui-state-error">' . htmlspecialchars($temp) . '</span>';
+                $content .= '<span class="error-text">' . htmlspecialchars($temp) . '</span>';
             }
         }
 
