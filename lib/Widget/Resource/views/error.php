@@ -1,3 +1,4 @@
+<?php if (!isset($message)) { return; } ?>
 <!DOCTYPE html>
 <html>
 <head>
