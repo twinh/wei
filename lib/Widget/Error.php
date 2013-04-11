@@ -44,7 +44,7 @@ class Error extends AbstractWidget
         parent::__construct($options);
 
         $this->on('exception', array(
-            $this, 'showError'
+            $this, 'handleException'
         ));
 
         if ($this->convertErrorToException) {
@@ -64,55 +64,65 @@ class Error extends AbstractWidget
     }
 
     /**
-     * Show error message
+     * The exception handler to render pretty message
      * 
-     * @param type $event
-     * @param type $widget
-     * @param type $exception
+     * @param \Widget\Event\Event $event
+     * @param \Widget\Widget $widget
+     * @param \Exception $exception
      */
-    public function showError(Event $event, $widget, $exception)
+    public function handleException(Event $event, $widget, $exception)
     {
+        // Prevent ogirin exception output
         $event->preventDefault();
-        $debug = $this->widget->config('debug');
+        
+        $debug = $widget->config('debug');
+        $ajax = $this->request->inAjax();
+        
         try {
-            $code       = $exception->getCode();
-            $message    = htmlspecialchars($debug ? $exception->getMessage() : $this->message, ENT_QUOTES);
-            $file       = $exception->getFile();
-            $line       = $exception->getLine();
-            $class      = get_class($exception);
-            $trace      = htmlspecialchars($exception->getTraceAsString(), ENT_QUOTES);
-            $detail     = sprintf('Threw by %s in %s on line %s', $class, $file, $line);
-            
+            // This widgets may show exception too
             $this->response->setStatusCode(500)->send();
+            $this->logger->debug((string)$exception);
             
-            $this->logger->debug($detail);
-
-            if ($this->request->inAjax()) {
-                echo json_encode(array(
-                    'code'      => -($code ? abs($code) : 500),
-                    'message'   => $message,
-                    'detail'    => $detail,
-                    'trace'     => $trace
-                ));
-            } else {
-                // File Infomation
-                $mtime = date('Y-m-d H:i:s', filemtime($file));
-                $fileInfo = $this->getFileCode($file, $line);
-                
-                // Display view file
-                require __DIR__ . '/Resource/views/error.php';
-            }
-        // Dispaly basic error message for exception in exception handler
+            $this->renderException($exception, $debug, $ajax);
         } catch (\Exception $e) {
-            if ($debug) {
-                echo sprintf('<p>%s: %s in %s on line %s</p>', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine());
-                echo '<pre>' . $e->getTraceAsString() . '</pre>';
-            } else {
-                echo $this->message;
-            }
+            $this->renderException($e, $debug, $ajax);
         }
     }
+    
+    /**
+     * Render exception message
+     * 
+     * @param \Exception $exception
+     * @param bool $debug Whether show debug trace
+     * @param bool $ajax Wherher return json instead html string
+     */
+    public function renderException(\Exception $exception, $debug, $ajax)
+    {
+        $code       = $exception->getCode();
+        $message    = htmlspecialchars($debug ? $exception->getMessage() : $this->message, ENT_QUOTES);
+        $file       = $exception->getFile();
+        $line       = $exception->getLine();
+        $class      = get_class($exception);
+        $trace      = htmlspecialchars($exception->getTraceAsString(), ENT_QUOTES);
+        $detail     = sprintf('Threw by %s in %s on line %s', $class, $file, $line);
+        
+        if ($ajax) {
+            echo json_encode(array(
+                'code'      => -($code ? abs($code) : 500),
+                'message'   => $message,
+                'detail'    => $detail,
+                'trace'     => $trace
+            ));
+        } else {
+            // File Infomation
+            $mtime = date('Y-m-d H:i:s', filemtime($file));
+            $fileInfo = $this->getFileCode($file, $line);
 
+            // Display view file
+            require __DIR__ . '/Resource/views/error.php';
+        }
+    }
+    
     /**
      * The error handler convert PHP error to exception
      *
