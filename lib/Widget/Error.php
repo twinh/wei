@@ -48,7 +48,7 @@ class Error extends AbstractWidget
         ));
 
         if ($this->convertErrorToException) {
-            set_error_handler(array($this, 'renderError'));
+            set_error_handler(array($this, 'hanldeError'));
         }
     }
     
@@ -114,20 +114,22 @@ class Error extends AbstractWidget
     }
 
     /**
-     * Error handler
+     * The error handler convert PHP error to exception
      *
-     * @param int    $errno
-     * @param string $errstr
-     * @param string $errfile
-     * @param int    $errline
+     * @param int    $errno     The level of the error raised
+     * @param string $errstr    The error message
+     * @param string $errfile   The filename that the error was raised in
+     * @param int    $errline   The line number the error was raised at
+     * @internal use for set_error_handler only
      */
-    public function renderError($errno, $errstr, $errfile, $errline)
+    public function hanldeError($errno, $errstr, $errfile, $errline)
     {
         if (!(error_reporting() & $errno)) {
+            // This error code is not included in error_reporting
             return;
         }
         restore_error_handler();
-        throw new \ErrorException($errstr, 500, $errno, $errfile, $errline);
+        throw new \ErrorException($errstr, $errno, 500, $errfile, $errline);
     }
 
     /**
