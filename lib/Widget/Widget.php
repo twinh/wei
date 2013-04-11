@@ -81,7 +81,7 @@ class Widget extends AbstractWidget
      *
      * @var array
      */
-    protected $initWidgets = array(
+    protected $preload = array(
         'is'
     );
 
@@ -134,8 +134,8 @@ class Widget extends AbstractWidget
         }
         $this->setOption($options);
 
-        // Instance initial widgets
-        foreach ((array)$this->initWidgets as $widgetName) {
+        // Instance preload widgets
+        foreach ((array)$this->preload as $widgetName) {
             $this->get($widgetName);
         }
     }

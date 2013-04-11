@@ -18,9 +18,6 @@ return Widget::create(array(
         // Set up autoload for WidgetTest namespace
         'autoloadMap' => array(
             'WidgetTest' => __DIR__
-        ),
-        'initWidgets' => array(
-            
         )
     ),
     // Databse Widget Configuration
