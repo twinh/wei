@@ -6,9 +6,9 @@ class ExistsTest extends TestCase
 {
     public function testIsExists()
     {
-        $this->assertEquals(false, $this->isExists(array()), 'Not File path');
+        $this->assertFalse($this->isExists(array()), 'Not File path');
 
-        $this->assertEquals($this->isExists(__FILE__), __FILE__, 'File found');
+        $this->assertTrue($this->isExists(__FILE__), 'File found');
 
         $this->assertFalse($this->isExists('.file not found'), 'File not found');
 
