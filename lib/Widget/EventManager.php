@@ -39,9 +39,9 @@ class EventManager extends AbstractWidget
      * @var array
      */
     protected $priorities = array(
-        'low'       => -10,
+        'low'       => -1000,
         'normal'    => 0,
-        'high'      => 10
+        'high'      => 1000
     );
 
     /**
