@@ -7,25 +7,30 @@ namespace WidgetTest;
  */
 class ErrorTest extends TestCase
 {
-    /**
-     * @runInSeparateProcess
-     */
-    public function testException()
+    public function createErrorView($message, $code = 0)
     {
-        $this->expectOutputRegex('/testException/');
+        $exception = new \Exception($message, $code);
+        $event = new \Widget\Event\Event(array(
+            'widget' => $this->widget,
+            'name' => 'exception'
+        ));
         
-        $this->trigger('exception', array(new \Exception('testException')));
+        $this->error->handleException($event, $this->widget, $exception);
     }
     
-    /**
-     * @runInSeparateProcess
-     */
+    public function testException()
+    {
+        $this->expectOutputRegex('/test exception/');
+        
+        $this->createErrorView('test exception');
+    }
+    
     public function testAjaxException()
     {
         $this->server->set('HTTP_X_REQUESTED_WITH', 'xmlhttprequest');
 
         ob_start();
-        $this->trigger('exception', array(new \Exception('ajax error', -250)));
+        $this->createErrorView('ajax error', 250);
         $json = json_decode(ob_get_clean(), true);
         
         $this->assertSame(json_last_error(), JSON_ERROR_NONE);
