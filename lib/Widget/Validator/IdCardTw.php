@@ -12,12 +12,42 @@ namespace Widget\Validator;
  * Check if the input is valid Taiwan identity card
  * 
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @link        http://zh.wikipedia.org/wiki/%E4%B8%AD%E8%8F%AF%E6%B0%91%E5%9C%8B%E5%9C%8B%E6%B0%91%E8%BA%AB%E5%88%86%E8%AD%89
  */
 class IdCardTw extends AbstractValidator
 {
     protected $invalidMessage = '%name% must be valid Taiwan identity card';
     
     protected $negativeMessage = '%name% must not be valid Taiwan identity card';
+    
+    protected $map = array(
+        'A' => 10,
+        'B' => 11,
+        'C' => 12,
+        'D' => 13,
+        'E' => 14,
+        'F' => 15,
+        'G' => 16,
+        'H' => 17,
+        'I' => 34,
+        'J' => 18,
+        'K' => 19,
+        'M' => 21,
+        'N' => 22,
+        'O' => 35,
+        'P' => 23,
+        'Q' => 24,
+        'T' => 27,
+        'U' => 28,
+        'V' => 29,
+        'W' => 32,
+        'X' => 30,
+        'Z' => 33,
+        'L' => 20,
+        'R' => 25,
+        'S' => 26,
+        'Y' => 31
+    );
         
     /**
      * {@inheritdoc}
@@ -48,14 +78,15 @@ class IdCardTw extends AbstractValidator
             $this->addError('invalid');
             return false;
         }
-        
-        list($x1, $x2) = str_split((string)($first - 55));
+
+        list($x1, $x2) = str_split((string)$this->map[$input[0]]);
         $sum = $x1 + 9 * $x2;
-        for ($i = 1; $i < 9; $i++) {
-            $sum += $input[$i] * $i;
+        for ($i = 1, $j = 8; $i < 9; $i++, $j--) {
+            $sum += $input[$i] * $j;
         }
-        
-        if (!($sum % 10)) {
+        $sum += $input[9];
+
+        if (0 !== $sum % 10) {
             $this->addError('invalid');
             return false;
         }
