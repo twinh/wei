@@ -10,7 +10,6 @@ namespace Widget;
 
 use Widget\Event\EventInterface;
 use Widget\Event\Event;
-use Widget\Exception\UnexpectedTypeException;
 
 /**
  * The event manager to add, remove and trigger events
@@ -139,7 +138,7 @@ class EventManager extends AbstractWidget
         
         // ( $type, $fn, $priority, $data )
         if (!is_callable($fn)) {
-            throw new UnexpectedTypeException($fn, 'callable');
+            throw new Exception\UnexpectedTypeException($fn, 'callable');
         }
 
         $priority = is_numeric($priority) ? $priority :
