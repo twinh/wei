@@ -6,7 +6,7 @@ class PhpErrorTest extends TestCase
 {
     public function setUp()
     {
-        // avoid Undefined index: SERVER_NAME
+        // Avoid "Undefined index: REQUEST_URI" error
         $_SERVER['REQUEST_URI'] = '/';
         $_SERVER['SERVER_NAME'] = 'localhost';
         
