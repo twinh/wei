@@ -13,4 +13,10 @@ class DbCacheTest extends CacheTestCase
     {
         $this->assertInstanceOf('\Widget\Cache\Db\DriverInterface', $this->dbCache->getDriver());
     }
+    
+    public static function tearDownAfterClass()
+    {
+        @unlink('cache.sqlite');
+        parent::tearDownAfterClass();
+    }
 }
