@@ -2,6 +2,9 @@
 
 namespace WidgetTest;
 
+/**
+ * It's hard to test error, some of the tests is use for code coverage only
+ */
 class ErrorTest extends TestCase
 {
     /**
@@ -39,5 +42,38 @@ class ErrorTest extends TestCase
         $array['key'];
         
         error_reporting(-1);
+    }
+    
+    /**
+     * @expectedException \ErrorException
+     */
+    public function testErrorToException()
+    {
+        $array['key'];
+    }
+    
+    public function testInvoker()
+    {
+        $this->error(function(){});
+        
+        $this->assertTrue($this->eventManager->has('exception'));
+    }
+    
+    public function testhandleException()
+    {
+        // Output error like Method "Widget\Widget->debug" or widget "debug" (class "Widget\Debug") not found, called in file ...
+        $this->expectOutputRegex('/Debug/');
+        
+        // Change logger to widget to make error in handleException
+        $this->error->logger = $this->widget;
+        
+        $event = new \Widget\Event\Event(array(
+            'widget' => $this->widget,
+            'name' => 'exception'
+        ));
+        
+        $exception = new \Exception();
+        
+        $this->error->handleException($event, $this->widget, $exception);
     }
 }
