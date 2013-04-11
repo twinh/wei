@@ -60,7 +60,7 @@ class Error extends AbstractWidget
      */
     public function __invoke(\Closure $fn)
     {
-        return $this->on('error', $fn);
+        return $this->on('exception', $fn);
     }
 
     /**
