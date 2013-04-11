@@ -55,9 +55,6 @@ class SessionTest extends TestCase
         $this->assertEquals(null, $session->get('action'));
     }
 
-    /**
-     * @runInSeparateProcess
-     */
     public function testDestroy()
     {
         $session = $this->object;
