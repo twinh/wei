@@ -7,6 +7,12 @@ namespace WidgetTest;
  */
 class ErrorTest extends TestCase
 {
+    protected function tearDown()
+    {
+        $this->logger->clean();
+        parent::tearDown();
+    }
+    
     public function createErrorView($message, $code = 0)
     {
         $exception = new \Exception($message, $code);
@@ -63,7 +69,7 @@ class ErrorTest extends TestCase
         
         $this->assertTrue($this->eventManager->has('exception'));
     }
-    
+
     public function testhandleException()
     {
         // Output error like Method "Widget\Widget->debug" or widget "debug" (class "Widget\Debug") not found, called in file ...

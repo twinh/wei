@@ -15,6 +15,12 @@ class AppTest extends TestCase
             ->setModule('WidgetTest\AppTest');
     }
     
+    protected function tearDown()
+    {
+        $this->logger->clean();
+        parent::tearDown();
+    }
+    
     public function testBaseApp()
     {
         // WidgetTest\AppTest\Controller\TestController::testAction
