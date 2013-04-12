@@ -17,6 +17,20 @@ class SmartyTest extends TestCase
         parent::setUp();
     }
     
+    public static function tearDownAfterClass()
+    {
+        parent::tearDownAfterClass();
+        
+        $dir = 'templates_c';
+        foreach (scandir($dir) as $file) {
+            if ('.' === $file || '..' === $file) {
+                continue;
+            }
+            unlink($dir . '/' . $file);
+        }
+        rmdir($dir);
+    }
+    
     public function testInvoker()
     {
         // Receive the original smarty object
