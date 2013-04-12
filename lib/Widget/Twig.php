@@ -53,7 +53,7 @@ class Twig extends AbstractView
      *
      * @return \Twig_Environment
      */
-    protected $twig;
+    protected $object;
 
     /**
      * Constructor
@@ -64,10 +64,12 @@ class Twig extends AbstractView
     {
         parent::__construct($options);
 
-        $this->twig = new \Twig_Environment(new \Twig_Loader_Filesystem($this->paths), $this->envOptions);
+        if (!$this->object) {
+            $this->object = new \Twig_Environment(new \Twig_Loader_Filesystem($this->paths), $this->envOptions);
+        }
 
         // Adds widget as template variable
-        $this->twig->addGlobal('widget', $this->widget);
+        $this->object->addGlobal('widget', $this->widget);
     }
 
     /**
@@ -84,7 +86,7 @@ class Twig extends AbstractView
     public function __invoke($name = null, $vars = array())
     {
         if (0 === func_num_args()) {
-            return $this->twig;
+            return $this->object;
         } else {
             return $this->render($name, $vars);
         }
@@ -95,7 +97,7 @@ class Twig extends AbstractView
      */
     public function assign($name, $value = null)
     {
-        $this->twig->addGlobal($name, $value);
+        $this->object->addGlobal($name, $value);
         
         return $this;
     }
@@ -105,7 +107,7 @@ class Twig extends AbstractView
      */
     public function display($name, $vars = array())
     {
-        return $this->twig->display($name, $vars);
+        return $this->object->display($name, $vars);
     }
 
     /**
@@ -113,6 +115,6 @@ class Twig extends AbstractView
      */
     public function render($name, $vars = array())
     {
-        return $this->twig->render($name, $vars);
+        return $this->object->render($name, $vars);
     }
 }
