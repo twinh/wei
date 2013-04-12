@@ -86,7 +86,7 @@ class Redirect extends Response
     public function setView($view)
     {
         if (!is_file($view)) {
-            throw new Exception\NotFoundException(sprintf('Redirect view "%s" not found'));
+            throw new Exception\NotFoundException(sprintf('Redirect view "%s" not found', $view));
         }
         
         $this->view = $view;

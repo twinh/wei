@@ -1,0 +1,43 @@
+<?php
+
+namespace WidgetTest;
+
+class RedirectTest extends TestCase
+{
+    public function testLocation()
+    {
+        $this->redirect;
+    }
+    
+    public function testCustomView()
+    {
+        $this->expectOutputString('redirect');
+        
+        $this->redirect->setView(__DIR__ . '/Fixtures/redirect.php');
+        
+        $this->redirect();
+    }
+    /**
+     * @expectedException \Widget\Exception\NotFoundException
+     */
+    public function testViewNotFound()
+    {
+        $this->redirect->setView('not found');
+    }
+    
+    public function testRedirectByHeader()
+    {
+        $this->redirect('http://www.google.com');
+        
+        $this->assertEquals('http://www.google.com', $this->header->get('Location'));
+    }
+    
+    public function testDelay()
+    {
+        $this->expectOutputRegex('/content=\"5;url=http:\/\/www\.google\.com"/');
+        
+        $this->redirect->setDelay(5);
+        
+        $this->redirect('http://www.google.com');
+    }
+}
