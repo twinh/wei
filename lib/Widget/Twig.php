@@ -97,7 +97,13 @@ class Twig extends AbstractView
      */
     public function assign($name, $value = null)
     {
-        $this->object->addGlobal($name, $value);
+        if (is_array($name)) {
+            foreach ($name as $key => $value) {
+                $this->object->addGlobal($key, $value);
+            }
+        } else {
+            $this->object->addGlobal($name, $value);
+        }
         
         return $this;
     }
