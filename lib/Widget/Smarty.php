@@ -11,18 +11,18 @@ namespace Widget;
 use Widget\View\AbstractView;
 
 /**
- * The smarty widget
+ * A wrapper widget for Smarty object
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  */
 class Smarty extends AbstractView
 {
     /**
-     * Smarty object
+     * The original Smarty object
      *
      * @var \Smarty
      */
-    protected $smarty;
+    protected $object;
     
     /**
      * Default template file extension
@@ -35,10 +35,16 @@ class Smarty extends AbstractView
      * Options for \Smarty
      *
      * @var array
+     * @link http://www.smarty.net/docs/en/api.variables.tpl
      */
     public $options = array(
-        'compile_dir'   => null,
-        'template_dir'  => null,
+        'template_dir'      => array(),
+        'config_dir'        => array(),
+        'plugins_dir'       => array(),
+        'compile_dir'       => null,
+        'cache_dir'         => null,
+        'left_delimiter'    => '{',
+        'right_delimiter'   => '}',
     );
 
     /**
@@ -48,21 +54,17 @@ class Smarty extends AbstractView
      */
     public function __construct(array $options = array())
     {
-        $this->smarty = new \Smarty();
-
-        // TODO better way
-        \Smarty::unmuteExpectedErrors();
-
-        parent::__construct($options);
-
+        parent::__construct($options + array(
+            'object' => $this->object
+        ));
+        
+        // Set property value for \Smarty
         foreach ($this->options as $key => $value) {
-            if (isset($this->smarty->$key)) {
-                $this->smarty->$key = $value;
-            }
+            $value && $this->object->$key = $value;
         }
 
-        // Adds default global template variable
-        $this->smarty->assign('widget', $this->widget);
+        // Adds widget to template variable
+        $this->object->assign('widget', $this->widget);
     }
     
     /**
@@ -79,7 +81,7 @@ class Smarty extends AbstractView
     public function __invoke($name = null, $vars = array())
     {
         if (0 === func_num_args()) {
-            return $this->smarty;
+            return $this->object;
         } else {
             return $this->render($name, $vars);
         }
@@ -90,7 +92,7 @@ class Smarty extends AbstractView
      */
     public function assign($name, $value = null)
     {
-        $this->smarty->assign($name, $value);
+        $this->object->assign($name, $value);
         
         return $this;
     }
@@ -100,9 +102,9 @@ class Smarty extends AbstractView
      */
     public function display($name, $vars = array())
     {
-         $vars && $this->smarty->assign($vars);
+         $vars && $this->object->assign($vars);
 
-         return $this->smarty->display($name);
+         return $this->object->display($name);
     }
 
     /**
@@ -110,8 +112,21 @@ class Smarty extends AbstractView
      */
     public function render($name, $vars = array())
     {
-        $vars && $this->smarty->assign($vars);
+        $vars && $this->object->assign($vars);
 
-        return $this->smarty->fetch($name);
+        return $this->object->fetch($name);
+    }
+    
+    /**
+     * Set Smarty object
+     * 
+     * @param \Smarty $object
+     * @return \Widget\Smarty
+     */
+    public function setObject(\Smarty $object = null)
+    {
+        $this->object = $object ? $object : new \Smarty();
+        
+        return $this;
     }
 }
