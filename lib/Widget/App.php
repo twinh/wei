@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\Response;
 
 /**
- * App
+ * The application widget
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  * @method      \Widget\EventManager trigger(string $eventName) Trigger a event
@@ -324,5 +324,24 @@ class App extends AbstractWidget
     public function getDefaultTemplate()
     {
         return strtolower($this->controller . '/' . $this->action) . $this->view->getExtension();
+    }
+    
+    /**
+     * Forwards to the given module, controller and action
+     *
+     * @param string $action            The name of action
+     * @param string|null $controller   The name of controller
+     * @param string|null $module       The name of module
+     * @return \Widget\App
+     */
+    public function forward($action = 'index', $controller = null , $module = null)
+    {
+        $this->setAction($action);
+        $controller && $this->setController($controller);
+        $module && $this->setModule($action);
+        
+        $this()->preventPreviousDispatch();
+        
+        return $this;
     }
 }

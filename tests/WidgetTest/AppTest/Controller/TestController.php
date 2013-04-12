@@ -43,4 +43,19 @@ class TestController extends \Widget\AbstractWidget
         
         throw new \Widget\Exception\RuntimeException('You can\'t see me too');
     }
+    
+    public function forwardActionAction()
+    {
+        return $this->app->forward('target');
+    }
+    
+    public function forwardControllerAction()
+    {
+        return $this->app->forward('target', 'forward');
+    }
+    
+    public function targetAction()
+    {
+        return 'target';
+    }
 }

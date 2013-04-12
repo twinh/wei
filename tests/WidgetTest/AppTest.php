@@ -2,6 +2,9 @@
 
 namespace WidgetTest;
 
+/**
+ * @property \Widget\App $app The application widget
+ */
 class AppTest extends TestCase
 {
     protected function setUp()
@@ -148,5 +151,29 @@ class AppTest extends TestCase
         
         $controller2 = $this->app->getControllerInstance('WidgetTest\AppTest', 'test');
         $this->assertSame($controller2, $controller);
-    }   
+    }
+    
+    public function testForwardAction()
+    {
+        $this->expectOutputString('target');
+        
+        $this->request->set(array(
+            'controller' => 'test',
+            'action' => 'forwardAction'
+        ));
+        
+        $this->app();
+    }
+    
+    public function testForwardController()
+    {
+        $this->expectOutputString('target');
+        
+        $this->request->set(array(
+            'controller' => 'test',
+            'action' => 'forwardController'
+        ));
+        
+        $this->app();
+    }
 }
