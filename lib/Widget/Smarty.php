@@ -54,15 +54,11 @@ class Smarty extends AbstractView
      */
     public function __construct(array $options = array())
     {
-        parent::__construct($options + array(
-            'object' => $this->object
-        ));
+        parent::__construct(array_merge(array(
+            'object' => $this->object,
+            'options' => $this->options
+        ), $options));
         
-        // Set property value for \Smarty
-        foreach ($this->options as $key => $value) {
-            $value && $this->object->$key = $value;
-        }
-
         // Adds widget to template variable
         $this->object->assign('widget', $this->widget);
     }
@@ -126,6 +122,22 @@ class Smarty extends AbstractView
     public function setObject(\Smarty $object = null)
     {
         $this->object = $object ? $object : new \Smarty();
+        
+        return $this;
+    }
+    
+    /**
+     * Set property value for Smarty
+     * 
+     * @param array $options
+     * @return \Widget\Smarty
+     */
+    public function setOptions(array $options)
+    { 
+        foreach ($options as $key => $value) {
+            $this->options[$key] = $value;
+            $value && $this->object->$key = $value;
+        }
         
         return $this;
     }
