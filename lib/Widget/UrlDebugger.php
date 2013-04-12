@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Widget Framework
  *
@@ -10,13 +9,11 @@
 namespace Widget;
 
 /**
- * UrlDebugger
+ * The widget allows inject data from URL query string
  *
  * @author      Twin Huang <twinh@yahoo.cn>
- * @property \Widget\Server $server The server widget
- * @method mixed config(string $name) Returns the configuration value
- * @property \Widget\Get $get The get widget
- * @todo        more options
+ * @property    \Widget\Server $server The server widget
+ * @property    \Widget\Query $query The query widget
  */
 class UrlDebugger extends AbstractWidget
 {
