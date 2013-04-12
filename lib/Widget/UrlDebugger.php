@@ -44,7 +44,7 @@ class UrlDebugger extends AbstractWidget
             $this->server['REQUEST_METHOD'] = $this->query['_method'];
         }
     }
-
+    
     /**
      * Invoker
      * 
