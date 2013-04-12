@@ -130,7 +130,7 @@ class AppTest extends TestCase
         $this->app->setModule(null);
         $this->request->set('module', 'test');
         
-        $this->assertEquals('Test', $this->app->getModule());
+        $this->assertEquals('test', $this->app->getModule());
     }
     
     public function testDispatchBreak()

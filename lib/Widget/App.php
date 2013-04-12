@@ -29,7 +29,7 @@ class App extends AbstractWidget
      * @var array
      */
     protected $modules = array(
-        'App'
+        'app'
     );
 
     /**
@@ -38,7 +38,7 @@ class App extends AbstractWidget
      * @var array
      */
     protected $defaults = array(
-        'module'        => 'App',
+        'module'        => 'app',
         'controller'    => 'index',
         'action'        => 'index',
     );
@@ -192,7 +192,7 @@ class App extends AbstractWidget
     public function getModule()
     {
         if (!$this->module) {
-            $this->module = ucfirst($this->request->get('module', $this->defaults['module']));
+            $this->module = $this->request->get('module', $this->defaults['module']);
         }
 
         return $this->module;
@@ -230,7 +230,7 @@ class App extends AbstractWidget
     public function getController()
     {
         if (!$this->controller) {
-            $this->controller = ucfirst($this->request->get('controller', $this->defaults['controller']));
+            $this->controller = $this->request->get('controller', $this->defaults['controller']);
         }
 
         return $this->controller;
@@ -289,7 +289,7 @@ class App extends AbstractWidget
             return false;
         }
 
-        $class = $module . '\Controller\\' . $controller . 'Controller';
+        $class = ucfirst($module) . '\Controller\\' . ucfirst($controller) . 'Controller';
 
         if (isset($this->controllers[$class])) {
             return $this->controllers[$class];
