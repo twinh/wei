@@ -31,7 +31,7 @@ class Flush extends Response
          * @link http://www.php.net/manual/en/zlib.configuration.php
          */
         if (extension_loaded('zlib') && !headers_sent()) {
-            ini_set('zlib.output_compression', 0);
+            ini_set('zlib.output_compression', '0');
         }
 
         /**

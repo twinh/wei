@@ -20,9 +20,7 @@ namespace WidgetTest
         public function testInvoker()
         {
             $this->assertInstanceOf('\Widget\Flush', $this->flush());
-            
-            $this->assertEquals('0', ini_get('zlib.output_compression'));
-            
+
             $this->assertEquals('1', ini_get('implicit_flush'));
             
             $this->assertEquals(0, ob_get_level());
