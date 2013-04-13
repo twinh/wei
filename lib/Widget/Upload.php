@@ -16,11 +16,11 @@ use Widget\Validator\Image;
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property    \Widget\Post $post The post widget
  * @todo        Add service widget and extend it
- * @todo        language
- * @todo        display size in result message
  */
 class Upload extends Image
 {
+    protected $typeInvalidMessage = '%name% must be array';
+    
     /**
      * Seems that the total file size is larger than the max size of post data
      *
@@ -78,23 +78,36 @@ class Upload extends Image
      */
     protected $to;
 
+    public function __invoke($field = null, $options = array())
+    {
+        // ($field, $options)
+        if (is_string($field)) {
+            $this->field = $field;
+            $options && $this->setOption($options);
+        // ($options)
+        } elseif (is_array($field)) {
+            $field && $this->setOption($field);
+        }
+        
+        return parent::isValid(null);
+    }
+    
     /**
      * Upload a file
      *
      * @param array $options
      * @return array
      */
-    public function __invoke($options = array(), $options2 = array())
+    public function validate($input)
     {
-        $options && $this->setOption($options);
-
+        // Receive the real file path resolved by parent class
         $files = $this->getFiles();
-
+        
         // Set default name
         if (!$this->field) {
             $this->field = key($files);
         }
-
+        
         // TODO detail description for this situation
         // Check if has file uploaded or file too large
         if (!isset($files[$this->field])) {
@@ -152,15 +165,23 @@ class Upload extends Image
             return false;
         }
         
-        $this->saveFile($file);
+        if ($this->isImage || $this->maxWidth || $this->maxHeight || $this->minWidth || $this->minHeight) {
+            $result = parent::validate($file);
+        } else {
+            $result = File::validate($file);
+        }
         
-        return $this;
+        if ($this->hasError('notString') || $this->hasError('notFound')) {
+            return false;
+        }
+        
+        return $this->saveFile($file);
     }
     
     protected function saveFile($file)
     {
         $fileName = $this->fileName ?: $file['name'];
-        
+       
         if (!is_dir($this->dir)) {
             mkdir($this->dir, 0700, true);
         }
@@ -168,9 +189,11 @@ class Upload extends Image
         $this->file = $this->dir . '/' . $fileName;
         if (!@move_uploaded_file($file['tmp_name'], $this->file)) {
             $this->addError('cantMove');
-            $this->logger('critical', $this->cantMoveMessage);
+            $this->logger->critical($this->cantMoveMessage);
             return false;
         }
+        
+        return true;
     }
 
     /**
