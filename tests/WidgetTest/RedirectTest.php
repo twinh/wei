@@ -27,6 +27,8 @@ class RedirectTest extends TestCase
     
     public function testRedirectByHeader()
     {
+        $this->expectOutputRegex('/http:\/\/www\.google\.com/');
+        
         $this->redirect('http://www.google.com');
         
         $this->assertEquals('http://www.google.com', $this->header->get('Location'));
