@@ -9,52 +9,55 @@
 namespace Widget;
 
 /**
- * Flush buffers to browser immediately
+ * The widget that flushes the content to browser immediately
  *
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @link        http://php.net/manual/en/function.flush.php
  */
-class Flush extends AbstractWidget
+class Flush extends Response
 {
-    public function __construct(array $options = array())
+    public function prepare()
     {
-        parent::__construct($options);
-
         if (function_exists('apache_setenv')) {
             apache_setenv('no-gzip', '1');
         }
-        
-        ob_implicit_flush();
 
-        // todo $buffer = ini_get('output_buffering');
-        // echo str_repeat(' ',$buffer+1);
-        // NOTE output here !!!
-        echo str_pad('',4096);
-    }
-
-    /**
-     * flush content to the browser
-     *
-     * @param  string     $content the content flushes to the browser
-     * @param  int        $sleep   the second to sleep
-     * @return Flush
-     */
-    public function __invoke($content, $sleep = 0)
-    {
-        $level = ob_get_level();
-        if (0 == $level) {
-            ob_start();
-        } else {
-            while (1 != ob_get_level()) {
-                ob_end_flush();
-            }
+        /**
+         * Disable zlib to compress output
+         * 
+         * @link http://www.php.net/manual/en/zlib.configuration.php
+         */
+        if (extension_loaded('zlib')) {
+            ini_set('zlib.output_compression', 0);
         }
 
-        echo $content;
+        /**
+         * Turn implicit flush on
+         * 
+         * @link http://www.php.net/manual/en/function.ob-implicit-flush.php
+         */
+        ob_implicit_flush();
+    }
+    
+    public function send($content = null, $status = null)
+    {
+        $this->prepare();
+        
+        parent::send($content, $status);
+        
+        /**
+         * Send blank characters for output_buffering
+         * 
+         * @link http://www.php.net/manual/en/outcontrol.configuration.php
+         */
+        if ($length = ini_get('output_buffering')) {
+            echo str_pad('', $length);
+        }
 
-        ob_flush();
-
-        $sleep && sleep($sleep);
-
+        while (ob_get_level()) {
+            ob_end_flush();
+        }
+        
         return $this;
     }
 }
