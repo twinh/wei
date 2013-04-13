@@ -21,8 +21,8 @@ class Url extends AbstractWidget
         'controller',
         'action'
     );
-        
-    public function __invoke($uri, $params = array())
+    
+    public function __invoke($uri)
     {
         $uris = explode('/', $uri);
         $arr = array();
@@ -47,10 +47,14 @@ class Url extends AbstractWidget
                 throw new Exception\InvalidArgumentException('');
         }
         
-        if (is_string($params)) {
-            parse_str($params, $params);
+        $args = func_get_args();
+        for ($i = 1, $count = count($args); $i < $count; $i++) {
+            if (is_string($args[$i])) {
+                parse_str($args[$i], $args[$i]);
+            }
+            $arr += $args[$i];
         }
 
-        return $this->router->uri($arr + $params);
+        return $this->router->generatePath($arr);
     }
 }
