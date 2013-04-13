@@ -12,7 +12,7 @@ namespace WidgetTest
              * @link https://github.com/symfony/symfony/issues/2531
              * @link https://github.com/sebastianbergmann/phpunit/issues/390
              */
-            if(ob_get_length() === 0) {
+            if(ob_get_level() === 0) {
                 ob_start();
             }
         }
