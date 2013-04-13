@@ -143,9 +143,9 @@ class File extends AbstractValidator
     protected $magicFile;
     
     /**
-     * Determime the object source is a file path, check with the include_path.
+     * Check if the input is valid file
      *
-     * @return string|bool
+     * @return bool
      */
     public function __invoke($input, $options = array())
     {
