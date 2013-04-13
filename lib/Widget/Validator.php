@@ -166,7 +166,7 @@ class Validator extends AbstractWidget
              * 'username' => 'required'
              * TO
              * 'username' => array(
-             *     'require' => true
+             *     'required' => true
              * )
              */
             if (is_string($rules)) {
