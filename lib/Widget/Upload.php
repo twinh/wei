@@ -9,6 +9,7 @@
 namespace Widget;
 
 use Widget\Validator\Image;
+use Widget\Validator\File;
 
 /**
  * The widget that handle file upload
@@ -19,8 +20,6 @@ use Widget\Validator\Image;
  */
 class Upload extends Image
 {
-    protected $typeInvalidMessage = '%name% must be array';
-    
     /**
      * Seems that the total file size is larger than the max size of post data
      *
@@ -29,7 +28,7 @@ class Upload extends Image
     protected $postSizeMessage = 'Seems that the total file size is larger than the max size of allowed post data, please check the size of your file';
 
     /**
-     * $_FILES do not contain the key "$this->name"
+     * $_FILES do not contain the key "$this->field"
      * 
      * @var string
      */
@@ -207,7 +206,7 @@ class Upload extends Image
             $result = File::validate($uploadedFile);
         }
         
-        if ($this->hasError('notString') || $this->hasError('notFound')) {
+        if (false === $result) {
             return false;
         }
         

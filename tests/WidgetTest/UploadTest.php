@@ -100,4 +100,20 @@ class UploadTest extends TestCase
         
         $this->assertTrue($upload->hasError('widthTooBig'));
     }
+    
+    public function testUploadFileLargerThanMaxPostSize()
+    {
+        $this->post->fromArray(array());
+        $upload = new \Widget\Upload(array(
+            'widget' => $this->widget,
+            'unitTest' => true,
+            'uploadedFiles' => array(
+                
+            )
+        ));
+        
+        $upload('bigFile');
+        
+        $this->assertTrue($upload->hasError('postSize'));
+    }
 }
