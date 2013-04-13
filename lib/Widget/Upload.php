@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\Validator\Image;
 
 /**
- * Upload
+ * The widget that handle file upload
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  * @property    \Widget\Post $post The post widget
@@ -91,7 +91,7 @@ class Upload extends Image
         
         return parent::isValid(null);
     }
-    
+        
     /**
      * Upload a file
      *
@@ -100,18 +100,17 @@ class Upload extends Image
      */
     public function validate($input)
     {
-        // Receive the real file path resolved by parent class
-        $files = $this->getFiles();
+        $uploadedFiles = $this->getUploadedFiles();
         
         // Set default name
         if (!$this->field) {
-            $this->field = key($files);
+            $this->field = key($uploadedFiles);
         }
         
         // TODO detail description for this situation
         // Check if has file uploaded or file too large
-        if (!isset($files[$this->field])) {
-            if (empty($files) && !$this->post->toArray()) {
+        if (!isset($uploadedFiles[$this->field])) {
+            if (empty($uploadedFiles) && !$this->post->toArray()) {
                 $error = 'postSize';
             } else {
                 $error = 'noFile';
@@ -120,9 +119,9 @@ class Upload extends Image
             return false;
         }
 
-        $file = $files[$this->field];
+        $uploadedFile = $uploadedFiles[$this->field];
 
-        switch ($file['error']) {
+        switch ($uploadedFile['error']) {
             case UPLOAD_ERR_OK :
                 break;
             
@@ -160,34 +159,34 @@ class Upload extends Image
                 $this->addError('noFile');
         }
         
-        if (!is_uploaded_file($file['tmp_name'])) {
+        if (!is_uploaded_file($uploadedFile['tmp_name'])) {
             $this->addError('notUploadedFile');
             return false;
         }
         
         if ($this->isImage || $this->maxWidth || $this->maxHeight || $this->minWidth || $this->minHeight) {
-            $result = parent::validate($file);
+            $result = parent::validate($uploadedFile);
         } else {
-            $result = File::validate($file);
+            $result = File::validate($uploadedFile);
         }
         
         if ($this->hasError('notString') || $this->hasError('notFound')) {
             return false;
         }
         
-        return $this->saveFile($file);
+        return $this->saveFile($uploadedFile);
     }
     
-    protected function saveFile($file)
+    protected function saveFile($uploadedFile)
     {
-        $fileName = $this->fileName ?: $file['name'];
+        $fileName = $this->fileName ?: $uploadedFile['name'];
        
         if (!is_dir($this->dir)) {
             mkdir($this->dir, 0700, true);
         }
         
         $this->file = $this->dir . '/' . $fileName;
-        if (!@move_uploaded_file($file['tmp_name'], $this->file)) {
+        if (!@move_uploaded_file($uploadedFile['tmp_name'], $this->file)) {
             $this->addError('cantMove');
             $this->logger->critical($this->cantMoveMessage);
             return false;
@@ -201,7 +200,7 @@ class Upload extends Image
      *
      * @return array
      */
-    public function getFiles()
+    public function getUploadedFiles()
     {
         return $_FILES;
     }
