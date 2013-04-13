@@ -22,6 +22,12 @@ class ViewTest extends TestCase
     {
         $view = $this->object;
         $this->assertInstanceOf('Widget\View', $view());
+        
+        // Render by invoker
+        $content = $this->view('layout.php', array(
+            'content' => __METHOD__
+        ));
+        $this->assertContains(__METHOD__, $content);
     }
     
     public function testAssign()
