@@ -51,7 +51,7 @@ class Instance extends AbstractWidget
 
             default:
                 if (method_exists($class, '__construct') || method_exists($class, $class)) {
-                    $reflection = new ReflectionClass($class);
+                    $reflection = new \ReflectionClass($class);
                     $object = $reflection->newInstanceArgs($args);
                 } else {
                     $object = new $class;
