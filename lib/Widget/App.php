@@ -332,7 +332,6 @@ class App extends AbstractWidget
      * @param string $action            The name of action
      * @param string|null $controller   The name of controller
      * @param string|null $module       The name of module
-     * @return \Widget\App
      */
     public function forward($action = 'index', $controller = null , $module = null)
     {
@@ -341,7 +340,5 @@ class App extends AbstractWidget
         $module && $this->setModule($action);
         
         $this()->preventPreviousDispatch();
-        
-        return $this;
     }
 }
