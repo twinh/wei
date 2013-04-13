@@ -78,6 +78,13 @@ class Upload extends Image
      */
     protected $to;
 
+    /**
+     * Upload a file
+     * 
+     * @param string|array $field
+     * @param array $options
+     * @return bool
+     */
     public function __invoke($field = null, $options = array())
     {
         // ($field, $options)
@@ -89,17 +96,6 @@ class Upload extends Image
             $field && $this->setOption($field);
         }
         
-        return parent::isValid(null);
-    }
-        
-    /**
-     * Upload a file
-     *
-     * @param array $options
-     * @return array
-     */
-    public function validate($input)
-    {
         $uploadedFiles = $this->getUploadedFiles();
         
         // Set default name
@@ -176,7 +172,7 @@ class Upload extends Image
         
         return $this->saveFile($uploadedFile);
     }
-    
+
     protected function saveFile($uploadedFile)
     {
         $fileName = $this->fileName ?: $uploadedFile['name'];
