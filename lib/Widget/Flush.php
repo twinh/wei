@@ -16,6 +16,9 @@ namespace Widget;
  */
 class Flush extends Response
 {
+    /**
+     * Disable compress and implicit flush
+     */
     public function prepare()
     {
         if (function_exists('apache_setenv')) {
@@ -39,6 +42,13 @@ class Flush extends Response
         ob_implicit_flush();
     }
     
+    /**
+     * Send response content 
+     * 
+     * @param string $content
+     * @param int $status
+     * @return \Widget\Flush
+     */
     public function send($content = null, $status = null)
     {
         $this->prepare();
