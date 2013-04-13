@@ -10,6 +10,7 @@ class UploadTest extends TestCase
     public function testUploadError($error, $name)
     {
         $upload = new \Widget\Upload(array(
+            'widget' => $this->widget,
             'uploadedFiles' => array(
                 'upload' => array(
                     'name' => 'test.jpg',
@@ -55,6 +56,7 @@ class UploadTest extends TestCase
     public function testUploadBySpecifiedName()
     {
         $upload = new \Widget\Upload(array(
+            'widget' => $this->widget,
             'uploadedFiles' => array(
                 'upload' => array(
                     'name' => 'test.jpg',
@@ -76,5 +78,26 @@ class UploadTest extends TestCase
         
         $upload('notThisFiled');
         $this->assertTrue($upload->hasError('noFile'));
+    }
+    
+    public function testUploadImageWidth()
+    {
+        $upload = new \Widget\Upload(array(
+            'widget' => $this->widget,
+            'unitTest' => true,
+            'uploadedFiles' => array(
+                'picture' => array(
+                    'name' => 'test.jpg',
+                    'type' => 'image/jpeg',
+                    'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
+                    'error' => UPLOAD_ERR_OK
+                )
+            ),
+            'maxWidth' => 3
+        ));
+        
+        $upload();
+        
+        $this->assertTrue($upload->hasError('widthTooBig'));
     }
 }

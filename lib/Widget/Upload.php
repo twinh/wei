@@ -50,6 +50,19 @@ class Upload extends Image
     protected $name = 'File';
     
     /**
+     * Whether check if the upload file is valid image or not
+     * 
+     * You can spcify any one of the following options to enable image detect
+     * * maxWidth
+     * * maxHeight
+     * * minWidth
+     * * minHieght
+     * 
+     * @var bool
+     */
+    protected $isImage = false;
+    
+    /**
      * The upload files, equal to $_FILES on default 
      * 
      * @var array
@@ -84,6 +97,13 @@ class Upload extends Image
      * @var string
      */
     protected $to;
+    
+    /**
+     * Whether in unit test mode
+     * 
+     * @var bool
+     */
+    protected $unitTest = false;
     
     /**
      * Constructor
@@ -176,7 +196,7 @@ class Upload extends Image
                 $this->addError('noFile');
         }
         
-        if (!is_uploaded_file($uploadedFile['tmp_name'])) {
+        if (!$this->isUploadedFile($uploadedFile['tmp_name'])) {
             $this->addError('notUploadedFile');
             return false;
         }
@@ -203,7 +223,7 @@ class Upload extends Image
         }
         
         $this->file = $this->dir . '/' . $fileName;
-        if (!@move_uploaded_file($uploadedFile['tmp_name'], $this->file)) {
+        if (!$this->moveUploadedFile($uploadedFile['tmp_name'], $this->file)) {
             $this->addError('cantMove');
             $this->logger->critical($this->cantMoveMessage);
             return false;
@@ -211,7 +231,7 @@ class Upload extends Image
         
         return true;
     }
-
+    
     /**
      * Get uploaded file list
      *
@@ -220,5 +240,30 @@ class Upload extends Image
     public function getUploadedFiles()
     {
         return $this->uploadedFiles;
+    }
+    
+    /**
+     * Check if the file was uploaded via HTTP POST, if $this->unitTest is 
+     * enable, it will always return true
+     * 
+     * @param string $file
+     * @return bool
+     */
+    protected function isUploadedFile($file)
+    {
+        return $this->unitTest ? true : is_uploaded_file($file);
+    }
+    
+    /**
+     * Moves an uploaded file to a new location, if $this->unitTest is enable, 
+     * it will use `copy` function instead
+     * 
+     * @param string $from The uploaded file name
+     * @param string $to The destination of the moved file.
+     * @return bool
+     */
+    protected function moveUploadedFile($from, $to)
+    {
+        return $this->unitTest ? copy($from, $to) : @move_uploaded_file($from, $to);
     }
 }
