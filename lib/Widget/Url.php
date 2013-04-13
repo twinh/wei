@@ -16,12 +16,35 @@ namespace Widget;
  */
 class Url extends AbstractWidget
 {
+    /**
+     * @var array
+     */
     protected $names = array(
         'module',
         'controller',
         'action'
     );
     
+    /**
+     * Build URL by specified uri and parameters
+     * 
+     * ```php
+     * // Returns controller=user&id=admin
+     * $this->url('user', array('id' => 'admin'));  
+
+     * // Returns controller=user&action=edit&id=>admin
+     * $this->url('user/edit', array('id' => 'admin'));
+     * 
+     * // Returns module=api&controller=user&action=edit&id=admin
+     * $this->url('api/user/edit', array('id' => 'admin'))
+     * ```
+     * 
+     * @param string $uri The uri like "user/edit"
+     * @param array|string $parameters Additional URL query parameters
+     * @param array|string $_ More additional URL query parameters
+     * @return string
+     * @throws Exception\InvalidArgumentException When the number of uri parts is not allowed
+     */
     public function __invoke($uri)
     {
         $uris = explode('/', $uri);
@@ -44,7 +67,7 @@ class Url extends AbstractWidget
                 break;
                 
             default:
-                throw new Exception\InvalidArgumentException('');
+                throw new Exception\InvalidArgumentException(sprintf('Unrecognized uri "%s"', $uri));
         }
         
         $args = func_get_args();
