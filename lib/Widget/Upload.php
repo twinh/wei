@@ -50,6 +50,13 @@ class Upload extends Image
     protected $name = 'File';
     
     /**
+     * The upload files, equal to $_FILES on default 
+     * 
+     * @var array
+     */
+    protected $uploadedFiles = array();
+    
+    /**
      * The name defined in the file input, if it's not specified, use the first
      * key in $_FILES
      *
@@ -77,6 +84,20 @@ class Upload extends Image
      * @var string
      */
     protected $to;
+    
+    /**
+     * Constructor
+     * 
+     * @param array $options
+     */
+    public function __construct(array $options = array())
+    {
+        parent::__construct($options);
+        
+        if (!isset($options['uploadedFiles'])) {
+            $this->uploadedFiles = $_FILES;
+        }
+    }
 
     /**
      * Upload a file
@@ -198,6 +219,6 @@ class Upload extends Image
      */
     public function getUploadedFiles()
     {
-        return $_FILES;
+        return $this->uploadedFiles;
     }
 }
