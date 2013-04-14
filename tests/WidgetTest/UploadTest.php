@@ -147,7 +147,7 @@ class UploadTest extends TestCase
                     'error' => UPLOAD_ERR_OK
                 )
             ),
-            'exts' => 'gif,png'
+            'exts' => 'jpg,png'
         ));
         
         $upload();
@@ -248,5 +248,32 @@ class UploadTest extends TestCase
         $this->upload->setDir('uploads/');
         
         $this->assertEquals('uploads', $this->upload->getDir());
+    }
+    
+    /**
+     * For code coverage only, not the recommend way to write your logic
+     */
+    public function testCantMoveFile()
+    {
+        $upload = new \Widget\Upload(array(
+            'widget' => $this->widget,
+            'dir' => 'uploads',
+            'fileName' => 'cu/stom', // invalid file name
+            'unitTest' => true,
+            'uploadedFiles' => array(
+                'picture' => array(
+                    'name' => 'test.gif',
+                    'type' => 'image/gif',
+                    'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
+                    'error' => UPLOAD_ERR_OK
+                )
+            )
+        ));    
+        
+        // Avoid Warning: copy(uploads/cus/tom.gif) [function.copy]: failed to open stream: No such file or directory
+        $result = @$upload();
+        
+        $this->assertFalse($result);
+        $this->assertTrue($upload->hasError('cantMove'));
     }
 }
