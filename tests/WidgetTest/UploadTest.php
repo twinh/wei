@@ -66,6 +66,9 @@ class UploadTest extends TestCase
             ),
             array(
                 UPLOAD_ERR_EXTENSION, 'extension'
+            ),
+            array(
+                'noThisError', 'noFile'
             )
         );
     }
@@ -97,7 +100,20 @@ class UploadTest extends TestCase
         $this->assertTrue($upload->hasError('noFile'));
     }
     
-    public function testUploadImageWidth()
+    public function testInvoker()
+    {
+        $upload = new \Widget\Upload(array(
+            'widget' => $this->widget
+        ));
+        
+        $upload(array(
+            'field' => 'upload'
+        ));
+        
+        $this->assertEquals('upload', $upload->getOption('field'));
+    }
+    
+    public function testUploadImage()
     {
         $upload = new \Widget\Upload(array(
             'widget' => $this->widget,
@@ -116,6 +132,27 @@ class UploadTest extends TestCase
         $upload();
         
         $this->assertTrue($upload->hasError('widthTooBig'));
+    }
+    
+    public function testUploadNormalFile()
+    {
+        $upload = new \Widget\Upload(array(
+            'widget' => $this->widget,
+            'unitTest' => true,
+            'uploadedFiles' => array(
+                'picture' => array(
+                    'name' => 'test.jpg',
+                    'type' => 'image/jpeg',
+                    'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
+                    'error' => UPLOAD_ERR_OK
+                )
+            ),
+            'exts' => 'gif,png'
+        ));
+        
+        $upload();
+        
+        $this->assertTrue($upload->hasError('exts'));
     }
     
     public function testUploadFileLargerThanMaxPostSize()

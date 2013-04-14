@@ -156,45 +156,42 @@ class Upload extends Image
         }
 
         $uploadedFile = $uploadedFiles[$this->field];
-
-        switch ($uploadedFile['error']) {
-            case UPLOAD_ERR_OK :
-                break;
-            
-            // File larger than upload_max_filesize
-            case UPLOAD_ERR_INI_SIZE :
-                $this->addError('maxSize');
-                break;
-            
-            // File larger than MAX_FILE_SIZE defiend in html form
-            case UPLOAD_ERR_FORM_SIZE :
-                $this->addError('maxSize');
-                break;
-            
-            case UPLOAD_ERR_PARTIAL :
-                $this->addError('partial');
-                break;
-            
-            case UPLOAD_ERR_NO_FILE :
-                $this->addError('noFile');
-                break;
-            
-            case UPLOAD_ERR_NO_TMP_DIR :
-                $this->addError('noTmpDir');
-                break;
-            
-            case UPLOAD_ERR_CANT_WRITE :
-                $this->addError('cantWrite');
-                break;
-            
-            case UPLOAD_ERR_EXTENSION :
-                $this->addError('extension');
-                break;
-
-            default :
-                $this->addError('noFile');
-        }
         
+        if ($uploadedFile['error'] !== UPLOAD_ERR_OK) {
+            switch ($uploadedFile['error']) {
+                // File larger than upload_max_filesize
+                case UPLOAD_ERR_INI_SIZE :
+                    $this->addError('maxSize');
+                    break;
+
+                // File larger than MAX_FILE_SIZE defiend in html form
+                case UPLOAD_ERR_FORM_SIZE :
+                    $this->addError('maxSize');
+                    break;
+
+                case UPLOAD_ERR_PARTIAL :
+                    $this->addError('partial');
+                    break;
+
+                case UPLOAD_ERR_NO_TMP_DIR :
+                    $this->addError('noTmpDir');
+                    break;
+
+                case UPLOAD_ERR_CANT_WRITE :
+                    $this->addError('cantWrite');
+                    break;
+
+                case UPLOAD_ERR_EXTENSION :
+                    $this->addError('extension');
+                    break;
+
+                case UPLOAD_ERR_NO_FILE :
+                default :
+                    $this->addError('noFile');
+            }
+            return false;
+        }
+
         if (!$this->isUploadedFile($uploadedFile['tmp_name'])) {
             $this->addError('notUploadedFile');
             return false;
