@@ -4,6 +4,23 @@ namespace WidgetTest;
 
 class UploadTest extends TestCase
 {
+    public static function tearDownAfterClass()
+    {
+        parent::tearDownAfterClass();
+        
+        $dir = 'uploads';
+        if (!is_dir($dir)) {
+            return;
+        }
+        foreach (scandir($dir) as $file) {
+            if ('.' === $file || '..' === $file) {
+                continue;
+            }
+            unlink($dir . '/' . $file);
+        }
+        rmdir($dir);
+    }
+    
     /**
      * @dataProvider providerForUploadError
      */
