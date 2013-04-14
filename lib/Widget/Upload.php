@@ -46,7 +46,34 @@ class Upload extends Image
     
     protected $cantMoveMessage = 'Can not move uploaded file';
     
+    /**
+     * The name for error message
+     * 
+     * @var string
+     */
     protected $name = 'File';
+    
+    /**
+     * The name defined in the file input, if it's not specified, use the first
+     * key in $this->uploadedFiles
+     *
+     * @var string
+     */
+    protected $field;
+    
+    /**
+     * The diretory to save file, if not exist, will try to create it
+     *
+     * @var string
+     */
+    protected $dir = 'uploads';
+    
+    /**
+     * Custome file name without extension to save
+     *
+     * @var string
+     */
+    protected $fileName;
     
     /**
      * Whether check if the upload file is valid image or not
@@ -62,40 +89,12 @@ class Upload extends Image
     protected $isImage = false;
     
     /**
-     * The upload files, equal to $_FILES on default 
+     * The uploaded files, equal to $_FILES if not provided. so you can provide
+     * a uploaded files array for testing
      * 
      * @var array
      */
     protected $uploadedFiles = array();
-    
-    /**
-     * The name defined in the file input, if it's not specified, use the first
-     * key in $_FILES
-     *
-     * @var string
-     */
-    protected $field;
-    
-    /**
-     * Custome file name without extension to save
-     *
-     * @var string
-     */
-    protected $fileName;
-
-    /**
-     * The diretory to save file, if not exist, will try to create it
-     *
-     * @var string
-     */
-    protected $dir = 'uploads';
-
-    /**
-     * The full file path to save file, NOT IMPLEMENTED YET
-     *
-     * @var string
-     */
-    protected $to;
     
     /**
      * Whether in unit test mode
@@ -111,7 +110,9 @@ class Upload extends Image
      */
     public function __construct(array $options = array())
     {
-        parent::__construct($options);
+        parent::__construct($options + array(
+            'dir' => $this->dir
+        ));
         
         if (!isset($options['uploadedFiles'])) {
             $this->uploadedFiles = $_FILES;
@@ -210,14 +211,16 @@ class Upload extends Image
         return $this->saveFile($uploadedFile);
     }
 
+    /**
+     * Save uploaded file to upload directory
+     * 
+     * @param array $uploadedFile
+     * @return boolean
+     */
     protected function saveFile($uploadedFile)
     {
         $fileName = $this->fileName ?: $uploadedFile['name'];
-       
-        if (!is_dir($this->dir)) {
-            mkdir($this->dir, 0700, true);
-        }
-        
+               
         $this->file = $this->dir . '/' . $fileName;
         if (!$this->moveUploadedFile($uploadedFile['tmp_name'], $this->file)) {
             $this->addError('cantMove');
@@ -226,6 +229,44 @@ class Upload extends Image
         }
         
         return true;
+    }
+    
+    /**
+     * Returns the uploaded file path
+     * 
+     * @return string
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+   
+
+    /**
+     * Set upload directory
+     * 
+     * @param string $dir
+     * @return \Widget\Upload
+     */
+    public function setDir($dir)
+    {
+        $dir = rtrim($dir, '/');
+        if (!is_dir($dir)) {
+            mkdir($dir, 0700, true);
+        }
+        $this->dir = $dir;
+        
+        return $this;
+    }
+    
+    /**
+     * Returns upload directory
+     * 
+     * @return string
+     */
+    public function getDir()
+    {
+        return $this->dir;
     }
     
     /**

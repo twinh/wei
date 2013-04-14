@@ -170,4 +170,50 @@ class UploadTest extends TestCase
         
         $this->assertTrue($upload->hasError('postSize'));
     }
+    
+    public function testSaveFile()
+    {
+        $upload = new \Widget\Upload(array(
+            'widget' => $this->widget,
+            'dir' => 'uploads',
+            'unitTest' => true,
+            'uploadedFiles' => array(
+                'picture' => array(
+                    'name' => 'test.jpg',
+                    'type' => 'image/jpeg',
+                    'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
+                    'error' => UPLOAD_ERR_OK
+                )
+            )
+        ));    
+        
+        $upload();
+    }
+    
+    public function testSaveFileToCustomDir()
+    {
+        $dir = 'uploads/' . date('Ymd');
+        $upload = new \Widget\Upload(array(
+            'widget' => $this->widget,
+            'dir' => $dir,
+            'unitTest' => true,
+            'uploadedFiles' => array(
+                'picture' => array(
+                    'name' => 'test.jpg',
+                    'type' => 'image/jpeg',
+                    'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
+                    'error' => UPLOAD_ERR_OK
+                )
+            )
+        ));
+        
+        $result = $upload();
+        $file = $upload->getFile();
+
+        $this->assertTrue($result);
+        $this->assertFileExists($dir . '/test.jpg');
+        
+        unlink($file);
+        rmdir(dirname($file));
+    }
 }
