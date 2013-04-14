@@ -16,12 +16,32 @@ namespace Widget\Validator;
  */
 class RecordExists extends AbstractValidator
 {
+    /**
+     * The message added when query return empty result
+     * 
+     * @var string
+     */
     protected $notFoundMessage = '%name% not exists';
    
+    /**
+     * The message for negative mode
+     * 
+     * @var string
+     */
     protected $negativeMessage = '%name% already exists';
     
+    /**
+     * The name of table
+     * 
+     * @var string
+     */
     protected $table;
     
+    /**
+     * The field to search
+     * 
+     * @var string
+     */
     protected $field = 'id';
     
     /**
@@ -31,6 +51,14 @@ class RecordExists extends AbstractValidator
      */
     protected $data = array();
     
+    /**
+     * Check if the input is existing table record
+     * 
+     * @param string $input
+     * @param string $table
+     * @param string $field
+     * @return bool
+     */
     public function __invoke($input = null, $table = null, $field = 'id')
     {
         $table && $this->storeOption('table', $table);
