@@ -29,7 +29,15 @@ class EntityExists extends AbstractValidator
    
     protected $criteria;
    
-    public function __invoke($input, $entityClass = null, $filed = null)
+    /**
+     * Check if the entity exists by specified criteria
+     * 
+     * @param mixed $input The input value, be null when using criteria to be validated
+     * @param string $entityClass The entity class to be validated
+     * @param string $filed The field to be validated, on default  it's the primary filed
+     * @return bool
+     */
+    public function __invoke($input = null, $entityClass = null, $filed = null)
     {
         $entityClass && $this->storeOption('entityClass', $entityClass);
         $filed && $this->storeOption('field', $filed);
@@ -37,8 +45,16 @@ class EntityExists extends AbstractValidator
         return $this->isValid($input);
     }
     
+    /**
+     * {@inheritdoc}
+     */
     protected function validate($input)
     {
+        if (!$this->isString($input)) {
+            $this->addError('notString');
+            return false;
+        }
+        
         /* @var $em \Doctrine\ORM\EntityManager */
         $em = $this->entityManager();
 

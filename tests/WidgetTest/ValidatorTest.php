@@ -497,7 +497,9 @@ class ValidatorTest extends TestCase
     
     public function testGetterAsData()
     {
-        $user = new \WidgetTest\Fixtures\UserEntity('test@example.com');
+        $user = new \WidgetTest\Fixtures\UserEntity();
+        
+        $user->setEmail('test@example.com');
         
         $validator = $this->validate(array(
             'data' => $user,
