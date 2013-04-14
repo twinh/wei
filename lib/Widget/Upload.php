@@ -243,7 +243,6 @@ class Upload extends Image
         $this->file = $this->dir . '/' . $fileName;
         if (!$this->moveUploadedFile($uploadedFile['tmp_name'], $this->file)) {
             $this->addError('cantMove');
-            $this->logger->critical($this->cantMoveMessage);
             return false;
         }
         
