@@ -44,6 +44,11 @@ class RecordExists extends AbstractValidator
      */
     protected function validate($input)
     {
+        if (!$this->isString($input)) {
+            $this->addError('notString');
+            return false;
+        }
+        
         $db = $this->db();
         
         $this->data = $db->createQueryBuilder()
