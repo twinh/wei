@@ -55,4 +55,16 @@ class ImageTest extends TestCase
             array_keys($image->getErrors())
         );
     }
+    
+    public function testFileNameWithSpace()
+    {
+        $image = $this->createImageValidator();
+        
+        $this->assertTrue($image(dirname(__DIR__) . '/Fixtures/5 x 5.gif', array(
+            'maxHeight' => 10,
+            'minHeight' => 0,
+            'maxWidth' => 10,
+            'minWidth' => 0
+        )));
+    }
 }
