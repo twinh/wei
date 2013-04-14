@@ -33,6 +33,7 @@ class UploadTest extends TestCase
                     'name' => 'test.gif',
                     'type' => 'image/gif',
                     'tmp_name' => '',
+                    'size' => 20,
                     'error' => $error
                 )
             )
@@ -50,7 +51,7 @@ class UploadTest extends TestCase
                 UPLOAD_ERR_INI_SIZE, 'maxSize'  
             ),
             array(
-                UPLOAD_ERR_FORM_SIZE, 'maxSize' 
+                UPLOAD_ERR_FORM_SIZE, 'formLimit' 
             ),
             array(
                 UPLOAD_ERR_PARTIAL, 'partial'
@@ -82,12 +83,14 @@ class UploadTest extends TestCase
                     'name' => 'test.gif',
                     'type' => 'image/gif',
                     'tmp_name' => '',
+                    'size' => 20,
                     'error' => UPLOAD_ERR_OK
                 ),
                 'picture2' => array(
                     'name' => 'test.gif',
                     'type' => 'image/gif',
                     'tmp_name' => '',
+                    'size' => 20,
                     'error' => UPLOAD_ERR_OK
                 )
             )
@@ -123,6 +126,7 @@ class UploadTest extends TestCase
                     'name' => 'test.gif',
                     'type' => 'image/gif',
                     'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
+                    'size' => 20,
                     'error' => UPLOAD_ERR_OK
                 )
             ),
@@ -144,6 +148,7 @@ class UploadTest extends TestCase
                     'name' => 'test.gif',
                     'type' => 'image/gif',
                     'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
+                    'size' => 20,
                     'error' => UPLOAD_ERR_OK
                 )
             ),
@@ -182,6 +187,7 @@ class UploadTest extends TestCase
                     'name' => 'test.gif',
                     'type' => 'image/gif',
                     'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
+                    'size' => 20,
                     'error' => UPLOAD_ERR_OK
                 )
             )
@@ -204,6 +210,7 @@ class UploadTest extends TestCase
                     'name' => 'test.gif',
                     'type' => 'image/gif',
                     'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
+                    'size' => 20,
                     'error' => UPLOAD_ERR_OK
                 )
             )
@@ -228,6 +235,7 @@ class UploadTest extends TestCase
                     'name' => 'test.gif',
                     'type' => 'image/gif',
                     'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
+                    'size' => 20,
                     'error' => UPLOAD_ERR_OK
                 )
             )
@@ -265,6 +273,7 @@ class UploadTest extends TestCase
                     'name' => 'test.gif',
                     'type' => 'image/gif',
                     'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
+                    'size' => 20,
                     'error' => UPLOAD_ERR_OK
                 )
             )

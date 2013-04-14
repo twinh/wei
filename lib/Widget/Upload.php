@@ -28,26 +28,28 @@ class Upload extends Image
     /**
      * $_FILES do not contain the key "$this->field" or error code not available
      */
-    protected $noFileMessage = 'No file uploaded';
+    protected $noFileMessage = 'No file uploaded, please select a file to upload';
     
-    protected $partialMessage = 'Partial file uploaded, please try again';
+    protected $formLimitMessage = '%name% is larger than the MAX_FILE_SIZE value in the HTML form';
     
-    protected $noTmpDirMessage = 'No temporary directory';
+    protected $partialMessage = '%name% was partial uploaded, please try again';
     
-    protected $cantWriteMessage = 'Can\'t write to disk';
+    protected $noTmpDirMessage = 'The temporary upload directory is missing';
+    
+    protected $cantWriteMessage = 'Cannot write %name% to disk';
     
     protected $extensionMessage = 'File upload stopped by extension';
     
     protected $notUploadedFileMessage = 'No file uploaded';
     
-    protected $cantMoveMessage = 'Can not move uploaded file';
+    protected $cantMoveMessage = 'Cannot move uploaded file';
     
     /**
      * The name for error message
      * 
      * @var string
      */
-    protected $name = 'File';
+    protected $name = 'file';
     
     /**
      * The name defined in the file input, if it's not specified, use the first
@@ -152,9 +154,7 @@ class Upload extends Image
             if (empty($uploadedFiles) && empty($this->post)) {
                 $error = 'postSize';
                 // Prepare postMaxSize variable for $this->postSizeMessage
-                $postMaxSize = ini_get('post_max_size');
-                $this->postMaxSize = is_numeric($postMaxSize) ? 
-                    $this->fromBytes($postMaxSize) : $postMaxSize;
+                $this->postMaxSize = $this->getIniSize('post_max_size');
             } else {
                 $error = 'noFile';
             }
@@ -171,12 +171,14 @@ class Upload extends Image
             switch ($uploadedFile['error']) {
                 // The uploaded file exceeds the upload_max_filesize directive in php.ini
                 case UPLOAD_ERR_INI_SIZE :
+                    $this->sizeString = $this->fromBytes($uploadedFile['size']);
+                    $this->maxSizeString = $this->getIniSize('upload_max_filesize');
                     $this->addError('maxSize');
                     break;
 
                 // The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form
                 case UPLOAD_ERR_FORM_SIZE :
-                    $this->addError('maxSize');
+                    $this->addError('formLimit');
                     break;
 
                 // The uploaded file was only partially uploaded 
@@ -295,6 +297,19 @@ class Upload extends Image
     public function getUploadedFiles()
     {
         return $this->uploadedFiles;
+    }
+    
+    /**
+     * Returns a human readable file size (e.g. 1.2MB, 10KB), which recive from
+     * the ini configuration
+     * 
+     * @param string $name The name of ini configuration
+     * @return string
+     */
+    protected function getIniSize($name)
+    {
+        $size = ini_get($name);
+        return is_numeric($size) ? $this->fromBytes($size) : $size;
     }
     
     /**
