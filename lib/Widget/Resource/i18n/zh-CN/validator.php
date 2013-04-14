@@ -256,5 +256,16 @@ return array(
     
     // uuid
     '%name% must be valid UUID' => '%name%必须是有效的UUID',
-    '%name% must not be valid UUID' => '%name%不能是有效的UUID'
+    '%name% must not be valid UUID' => '%name%不能是有效的UUID',
+    
+    // upload
+    'Seems that the total file size is larger than the max size (%postMaxSize%) of allowed post data, please check the size of your file' => '似乎您上传文件的总大小超过最大提交数据的限制(%postMaxSize%),请检查您上传文件的大小',
+    'No file uploaded, please select a file to upload' => '没有文件被上传,请选择一个文件上传', 
+    '%name% is larger than the MAX_FILE_SIZE value in the HTML form' => '%name%的大小超过HTML表单设置',
+    '%name% was partial uploaded, please try again' => '%name%未完全上传,请再试一遍',
+    'The temporary upload directory is missing' => '未找到上传文件的临时目录',
+    'Cannot write %name% to disk' => '无法保存%name%',
+    'File upload stopped by extension' => '文件上传被扩展中止',
+    'No file uploaded' => '没有文件被上传',
+    'Cannot move uploaded file' => '无法移动上传的文件'
 );

@@ -40,7 +40,7 @@ class UploadTest extends TestCase
         ));
         
         $upload();
-
+        
         $this->assertTrue($upload->hasError($name));
     }
     
