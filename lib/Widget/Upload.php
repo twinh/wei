@@ -219,8 +219,12 @@ class Upload extends Image
      */
     protected function saveFile($uploadedFile)
     {
-        $fileName = $this->fileName ?: $uploadedFile['name'];
-               
+        if ($this->fileName) {
+            $fileName = $this->fileName . '.' . $this->ext; 
+        } else {
+            $fileName = $uploadedFile['name'];
+        }
+        
         $this->file = $this->dir . '/' . $fileName;
         if (!$this->moveUploadedFile($uploadedFile['tmp_name'], $this->file)) {
             $this->addError('cantMove');

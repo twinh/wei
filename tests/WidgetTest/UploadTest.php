@@ -30,8 +30,8 @@ class UploadTest extends TestCase
             'widget' => $this->widget,
             'uploadedFiles' => array(
                 'upload' => array(
-                    'name' => 'test.jpg',
-                    'type' => 'image/jpeg',
+                    'name' => 'test.gif',
+                    'type' => 'image/gif',
                     'tmp_name' => '',
                     'error' => $error
                 )
@@ -79,14 +79,14 @@ class UploadTest extends TestCase
             'widget' => $this->widget,
             'uploadedFiles' => array(
                 'upload' => array(
-                    'name' => 'test.jpg',
-                    'type' => 'image/jpeg',
+                    'name' => 'test.gif',
+                    'type' => 'image/gif',
                     'tmp_name' => '',
                     'error' => UPLOAD_ERR_OK
                 ),
                 'picture2' => array(
-                    'name' => 'test.jpg',
-                    'type' => 'image/jpeg',
+                    'name' => 'test.gif',
+                    'type' => 'image/gif',
                     'tmp_name' => '',
                     'error' => UPLOAD_ERR_OK
                 )
@@ -120,8 +120,8 @@ class UploadTest extends TestCase
             'unitTest' => true,
             'uploadedFiles' => array(
                 'picture' => array(
-                    'name' => 'test.jpg',
-                    'type' => 'image/jpeg',
+                    'name' => 'test.gif',
+                    'type' => 'image/gif',
                     'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
                     'error' => UPLOAD_ERR_OK
                 )
@@ -141,8 +141,8 @@ class UploadTest extends TestCase
             'unitTest' => true,
             'uploadedFiles' => array(
                 'picture' => array(
-                    'name' => 'test.jpg',
-                    'type' => 'image/jpeg',
+                    'name' => 'test.gif',
+                    'type' => 'image/gif',
                     'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
                     'error' => UPLOAD_ERR_OK
                 )
@@ -179,8 +179,8 @@ class UploadTest extends TestCase
             'unitTest' => true,
             'uploadedFiles' => array(
                 'picture' => array(
-                    'name' => 'test.jpg',
-                    'type' => 'image/jpeg',
+                    'name' => 'test.gif',
+                    'type' => 'image/gif',
                     'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
                     'error' => UPLOAD_ERR_OK
                 )
@@ -188,6 +188,32 @@ class UploadTest extends TestCase
         ));    
         
         $upload();
+        
+        $this->assertFileExists($upload->getFile());
+    }
+    
+    public function testUploadWithCustomName()
+    {
+        $upload = new \Widget\Upload(array(
+            'widget' => $this->widget,
+            'dir' => 'uploads',
+            'fileName' => 'custom',
+            'unitTest' => true,
+            'uploadedFiles' => array(
+                'picture' => array(
+                    'name' => 'test.gif',
+                    'type' => 'image/gif',
+                    'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
+                    'error' => UPLOAD_ERR_OK
+                )
+            )
+        ));    
+        
+        $upload();
+        
+        $file = 'uploads/custom.gif';
+        $this->assertEquals($file, $upload->getFile());
+        $this->assertFileExists($file);
     }
     
     public function testSaveFileToCustomDir()
@@ -199,8 +225,8 @@ class UploadTest extends TestCase
             'unitTest' => true,
             'uploadedFiles' => array(
                 'picture' => array(
-                    'name' => 'test.jpg',
-                    'type' => 'image/jpeg',
+                    'name' => 'test.gif',
+                    'type' => 'image/gif',
                     'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
                     'error' => UPLOAD_ERR_OK
                 )
@@ -211,7 +237,7 @@ class UploadTest extends TestCase
         $file = $upload->getFile();
 
         $this->assertTrue($result);
-        $this->assertFileExists($dir . '/test.jpg');
+        $this->assertFileExists($dir . '/test.gif');
         
         unlink($file);
         rmdir(dirname($file));
