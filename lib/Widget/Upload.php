@@ -9,7 +9,7 @@
 namespace Widget;
 
 use Widget\Validator\Image;
-use Widget\Validator\File;
+use Widget\Validator\File as FileValidator;
 
 /**
  * The widget that handle file upload
@@ -203,7 +203,7 @@ class Upload extends Image
         if ($this->isImage || $this->maxWidth || $this->maxHeight || $this->minWidth || $this->minHeight) {
             $result = parent::validate($uploadedFile);
         } else {
-            $result = File::validate($uploadedFile);
+            $result = FileValidator::validate($uploadedFile);
         }
         
         if (false === $result) {
