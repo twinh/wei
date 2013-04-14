@@ -21,16 +21,12 @@ use Widget\Validator\File as FileValidator;
 class Upload extends Image
 {
     /**
-     * Seems that the total file size is larger than the max size of post data
-     *
      * @link http://php.net/manual/en/ini.core.php#ini.post-max-size
      */
-    protected $postSizeMessage = 'Seems that the total file size is larger than the max size of allowed post data, please check the size of your file';
+    protected $postSizeMessage = 'Seems that the total file size is larger than the max size (%postMaxSize%) of allowed post data, please check the size of your file';
 
     /**
-     * $_FILES do not contain the key "$this->field"
-     * 
-     * @var string
+     * $_FILES do not contain the key "$this->field" or error code not available
      */
     protected $noFileMessage = 'No file uploaded';
     
@@ -62,14 +58,14 @@ class Upload extends Image
     protected $field;
     
     /**
-     * The diretory to save file, if not exist, will try to create it
+     * The diretory to save file, automatic create it if not exist
      *
      * @var string
      */
     protected $dir = 'uploads';
     
     /**
-     * Custome file name without extension to save
+     * The custome file name (without extension) as upload file name to save
      *
      * @var string
      */
@@ -102,6 +98,13 @@ class Upload extends Image
      * @var bool
      */
     protected $unitTest = false;
+    
+    /**
+     * The max size of post data, for $this->postMaxSize
+     * 
+     * @var string
+     */
+    protected $postMaxSize;
     
     /**
      * Constructor
@@ -144,11 +147,14 @@ class Upload extends Image
             $this->field = key($uploadedFiles);
         }
         
-        // TODO detail description for this situation
         // Check if has file uploaded or file too large
         if (!isset($uploadedFiles[$this->field])) {
-            if (empty($uploadedFiles) && !$this->post->toArray()) {
+            if (empty($uploadedFiles) && empty($this->post)) {
                 $error = 'postSize';
+                // Prepare postMaxSize variable for $this->postSizeMessage
+                $postMaxSize = ini_get('post_max_size');
+                $this->postMaxSize = is_numeric($postMaxSize) ? 
+                    $this->fromBytes($postMaxSize) : $postMaxSize;
             } else {
                 $error = 'noFile';
             }
@@ -158,34 +164,43 @@ class Upload extends Image
 
         $uploadedFile = $uploadedFiles[$this->field];
         
+        /**
+         * @link http://php.net/manual/en/features.file-upload.errors.php
+         */
         if ($uploadedFile['error'] !== UPLOAD_ERR_OK) {
             switch ($uploadedFile['error']) {
-                // File larger than upload_max_filesize
+                // The uploaded file exceeds the upload_max_filesize directive in php.ini
                 case UPLOAD_ERR_INI_SIZE :
                     $this->addError('maxSize');
                     break;
 
-                // File larger than MAX_FILE_SIZE defiend in html form
+                // The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form
                 case UPLOAD_ERR_FORM_SIZE :
                     $this->addError('maxSize');
                     break;
 
+                // The uploaded file was only partially uploaded 
+                // http://stackoverflow.com/questions/2937466/why-might-a-file-only-be-partially-uploaded
                 case UPLOAD_ERR_PARTIAL :
                     $this->addError('partial');
                     break;
 
+                // Missing a temporary folder
                 case UPLOAD_ERR_NO_TMP_DIR :
                     $this->addError('noTmpDir');
                     break;
 
+                // Failed to write file to disk
                 case UPLOAD_ERR_CANT_WRITE :
                     $this->addError('cantWrite');
                     break;
 
+                // A PHP extension stopped the file upload
                 case UPLOAD_ERR_EXTENSION :
                     $this->addError('extension');
                     break;
 
+                // No file was uploaded
                 case UPLOAD_ERR_NO_FILE :
                 default :
                     $this->addError('noFile');
@@ -198,12 +213,12 @@ class Upload extends Image
             return false;
         }
         
+        // Valdiate file extension, size, mime type by parent class
         if ($this->isImage || $this->maxWidth || $this->maxHeight || $this->minWidth || $this->minHeight) {
             $result = parent::validate($uploadedFile);
         } else {
             $result = FileValidator::validate($uploadedFile);
         }
-        
         if (false === $result) {
             return false;
         }

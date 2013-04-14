@@ -167,7 +167,7 @@ class UploadTest extends TestCase
         ));
         
         $upload('bigFile');
-        
+
         $this->assertTrue($upload->hasError('postSize'));
     }
     
