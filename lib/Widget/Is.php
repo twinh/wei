@@ -37,9 +37,9 @@ class Is extends AbstractWidget
         'Equals', 'Exists', 'File', 'IdCardCn', 'IdCardHk', 'IdCardMo', 
         'IdCardTw', 'Image', 'In', 'Ip', 'Length', 'Lowercase', 'Max', 
         'MaxLength', 'Min', 'MinLength', 'MobileCn', 'NoneOf', 'Null', 'Number', 
-        'OneOf', 'PhoneCn', 'PlateNumberCn', 'Postcode', 'QQ', 'Range', 'Regex', 
-        'Required', 'SomeOf', 'StartsWith', 'Time', 'Tld', 'Type', 'Uppercase', 
-        'Url', 'Uuid'
+        'OneOf', 'PhoneCn', 'PlateNumberCn', 'Postcode', 'QQ', 'Range', 
+        'RecordExists', 'Regex', 'Required', 'SomeOf', 'StartsWith', 'Time', 
+        'Tld', 'Type', 'Uppercase', 'Url', 'Uuid'
     );
 
     /**

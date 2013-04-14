@@ -78,7 +78,7 @@ class EntityExists extends AbstractValidator
        
         return true;
     }
-   
+
     /**
      * Returns the entity object
      *
