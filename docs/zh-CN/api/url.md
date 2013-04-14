@@ -2,13 +2,26 @@
 [url()](http://twinh.github.com/widget/api/url)
 ===============================================
 
+Build URL by specified uri and parameters
 
-
-### 
+### Build URL by specified uri and parameters
 ```php
-void url($uri, $params)
+string url($uri)
 ```
 
 ##### 参数
-*无*
+* **$uri** `string` The uri like "user/edit"
+* **$parameters** `array|string` Additional URL query parameters
+* **$_** `array|string` More additional URL query parameters
 
+
+```php
+// Returns controller=user&id=admin
+$this->url('user', array('id' => 'admin'));
+
+// Returns controller=user&action=edit&id=>admin
+$this->url('user/edit', array('id' => 'admin'));
+
+// Returns module=api&controller=user&action=edit&id=admin
+$this->url('api/user/edit', array('id' => 'admin'))
+```

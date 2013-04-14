@@ -6,7 +6,7 @@ Get monolog logger object or add a log record
 
 ### Get monolog logger object or add a log record
 ```php
-\Monolog\Logger|\boolen monolog($message, $level, $context)
+\Monolog\Logger|\boolen monolog($level, $message, $context)
 ```
 
 ##### 参数

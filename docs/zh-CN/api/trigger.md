@@ -31,5 +31,5 @@ $widget->trigger('example');
 ```
 ##### 运行结果
 ```php
-'example'
+'exampleexample'
 ```

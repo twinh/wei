@@ -2,15 +2,13 @@
 [error()](http://twinh.github.com/widget/api/error)
 ===================================================
 
-Show error message
+Attach a handler to the error event
 
-### Show error message
+### Attach a handler to the error event
 ```php
-void error($event, $widget, $message, $code, $options)
+\Widget\EventManager error($fn)
 ```
 
 ##### 参数
-* **$message** `mixed` 
-* **$code** `integer` 
-* **$options** `array` 
+* **$fn** `\Closure` The error handler
 

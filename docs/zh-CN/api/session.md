@@ -2,15 +2,14 @@
 [session()](http://twinh.github.com/widget/api/session)
 =======================================================
 
-Get or set session
+Returns a *stringify* or user defined($default) parameter value
 
-### Get or set session
+### Returns a *stringify* or user defined($default) parameter value
 ```php
-mixed session($key, $value, $options)
+string|null session($name, $default)
 ```
 
 ##### 参数
-* **$key** `string` the name of cookie
-* **$value** `mixed` the value of cookie
-* **$options** `array` options for set cookie
+* **$name** `string` The parameter name
+* **$default** `mixed` The default parameter value if the parameter does not exist
 

@@ -2,14 +2,14 @@
 [flush()](http://twinh.github.com/widget/api/flush)
 ===================================================
 
-flush content to the browser
+Send response header and content
 
-### flush content to the browser
+### Send response header and content
 ```php
-\Flush flush($content, $sleep)
+\Widget\Response flush($content, $status)
 ```
 
 ##### 参数
-* **$content** `string` the content flushes to the browser
-* **$sleep** `int` the second to sleep
+* **$content** `string` 
+* **$status** `int` 
 

@@ -2,13 +2,17 @@
 [smarty()](http://twinh.github.com/widget/api/smarty)
 =====================================================
 
-Return the \Smarty object
+Returns \Smarty object or render a template
 
-### Return the \Smarty object
+### Returns \Smarty object or render a template
 ```php
-\Smarty smarty()
+\Smarty|string smarty($name, $vars)
 ```
 
 ##### 参数
-*无*
+* **$name** `string` The name of template
+* **$vars** `array` The variables pass to template
 
+
+if NO parameter provied, the invoke method will return the \Smarty
+object otherwise, call the render method

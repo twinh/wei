@@ -2,11 +2,11 @@
 [router()](http://twinh.github.com/widget/api/router)
 =====================================================
 
-Get the router object
+Run the application
 
-### Get the router object
+### Run the application
 ```php
-\Router router()
+void router($pathInfo, $method)
 ```
 
 ##### 参数

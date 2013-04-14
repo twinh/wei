@@ -69,10 +69,8 @@ class User
 
 // Set configuraion for db widget
 $widget->config('db', array(
-    'params' => array(
-        'driver' => 'pdo_sqlite',
-        'memory' => true
-    ),
+    'driver' => 'pdo_sqlite',
+    'memory' => true
 ));
 
 // Set configuration for entityManager widget

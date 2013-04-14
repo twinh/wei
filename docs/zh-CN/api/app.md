@@ -6,7 +6,7 @@ Startup application
 
 ### Startup application
 ```php
-\App|null app($options)
+\Widget\App|null app($options)
 ```
 
 ##### 参数

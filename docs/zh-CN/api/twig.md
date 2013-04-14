@@ -2,13 +2,17 @@
 [twig()](http://twinh.github.com/widget/api/twig)
 =================================================
 
-Get Twig environment object
+Returns \Twig_Environment object or render a template
 
-### Get Twig environment object
+### Returns \Twig_Environment object or render a template
 ```php
-\Twig_Environment twig()
+\Twig_Environment|string twig($name, $vars)
 ```
 
 ##### 参数
-*无*
+* **$name** `string` The name of template
+* **$vars** `array` The variables pass to template
 
+
+if NO parameter provied, the invoke method will return the
+\Twig_Environment object. otherwise, call the render method
