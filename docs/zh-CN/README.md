@@ -107,6 +107,7 @@ API 参考目录
 
 第三方集成
 * [isEntityExists](api/isEntityExists.md) - 检查Doctrine ORM实体是否存在
+* [isRecordExists](api/isRecordExists.md) - 检查数据表是否存在指定的记录
 
 其他
 * [isAll](api/isAll.md) - 检查集合里的每一项是否符合指定的规则
