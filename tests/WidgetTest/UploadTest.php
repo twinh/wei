@@ -216,4 +216,11 @@ class UploadTest extends TestCase
         unlink($file);
         rmdir(dirname($file));
     }
+    
+    public function testGetSetDir()
+    {
+        $this->upload->setDir('uploads/');
+        
+        $this->assertEquals('uploads', $this->upload->getDir());
+    }
 }

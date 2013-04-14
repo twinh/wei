@@ -288,7 +288,7 @@ class Upload extends Image
      */
     protected function isUploadedFile($file)
     {
-        return $this->unitTest ? true : is_uploaded_file($file);
+        return $this->unitTest ? is_file($file) : is_uploaded_file($file);
     }
     
     /**
