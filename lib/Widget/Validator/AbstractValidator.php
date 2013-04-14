@@ -15,11 +15,16 @@ use Widget\Exception\UnexpectedValueException;
  * The base class of validator
  * 
  * @author      Twin Huang <twinh@yahoo.cn>
- * @method string t(string $message, array $parameters = array()) Translates a message
- * @property \Widget\T $t The translator widget
+ * @method      string t(string $message, array $parameters = array()) Translates a message
+ * @property    \Widget\T $t The translator widget
  */
 abstract class AbstractValidator extends AbstractWidget implements ValidatorInterface
 {
+    /**
+     * The message added when the input required a stringify value
+     * 
+     * @var string
+     */
     protected $notStringMessage = '%name% must be a string';
     
     /**
