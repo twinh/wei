@@ -131,7 +131,7 @@ API 参考目录
 * [pinyin](api/pinyin.md) - 将中文转换为拼音字母
 
 #### 第三方
-* [db](api) - 获取Doctrine DBAL的Connection对象
-* [entityManager] - 获取Doctrine ORM的EntityManager对象
-* [monolog] - 获取Monolog对象或记录一条日志
-* [phpError] - 启用PHPError的错误视图
+* [db](api/db.md) - 获取Doctrine DBAL的Connection对象
+* [entityManager](api/entityManager.md) - 获取Doctrine ORM的EntityManager对象
+* [monolog](api/monolog.md) - 获取Monolog对象或记录一条日志
+* [phpError](api/phpError.md) - 启用PHPError的错误视图
