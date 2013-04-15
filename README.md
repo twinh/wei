@@ -4,10 +4,10 @@ Widget is a micro-framework provided a new way to write PHP for faster and easie
 Installation - Composer
 -----------------------
 Define the following requirement in your `composer.json` file and run `php composer.phar install` to install
-```javascript
+```json
 {
     "require": {
-        "widget/widget": "dev-master"
+        "widget/widget": "0.9.2-beta"
     }
 }
 ```
