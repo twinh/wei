@@ -25,7 +25,9 @@ API 参考目录
 * [trigger](api/trigger.md) - 触发指定类型的事件
 
 #### HTTP请求
+* [browser](api/browser.md) - 检测浏览器的名称和版本
 * [cookie](api/cookie.md) - 获取一项Cookie参数($_COOKIE)的值
+* [inAjax](api/inAjax.md) - 检测请求是否通过Ajax发送
 * [post](api/post.md)  - 获取一项HTTP POST请求参数($_POST)的值
 * [query](api/query.md) - 获取一项HTTP GET查询参数($_GET)的值
 * [request](api/request.md) - 获取一项HTTP请求参数($_REQUEST)的值
@@ -35,6 +37,7 @@ API 参考目录
 #### HTTP响应
 * [download](api/download.md) - 下载指定的文件
 * [flush](api/flush.md) - 直接输出内容到浏览器
+* [header](api/header.md) - 设置和获取HTTP响应头
 * [response](api/response.md) - 发送HTTP响应头和内容
 * [redirect](api/redirect.md) - 跳转到指定地址
 
@@ -122,3 +125,13 @@ API 参考目录
 
 #### 工具
 * [attr](api/attr.md) - 获取数组或对象中指定键名的值
+* [instance](api/instance.md) - 初始化指定的类
+* [logger](api/logger.md) - 记录日志
+* [marker](api/marker.md) - 设置一个标记,包括时间,内存使用量等信息
+* [pinyin](api/pinyin.md) - 将中文转换为拼音字母
+
+#### 第三方
+* [db](api) - 获取Doctrine DBAL的Connection对象
+* [entityManager] - 获取Doctrine ORM的EntityManager对象
+* [monolog] - 获取Monolog对象或记录一条日志
+* [phpError] - 启用PHPError的错误视图
