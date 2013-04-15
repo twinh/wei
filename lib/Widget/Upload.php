@@ -26,7 +26,7 @@ class Upload extends Image
     protected $postSizeMessage = 'Seems that the total file size is larger than the max size (%postMaxSize%) of allowed post data, please check the size of your file';
 
     /**
-     * $_FILES do not contain the key "$this->field" or error code not available
+     * The uploaded file array do not contain the key "$this->field", or error code not available
      */
     protected $noFileMessage = 'No file uploaded, please select a file to upload';
     
