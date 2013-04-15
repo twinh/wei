@@ -747,4 +747,17 @@ class ValidatorTest extends TestCase
         $this->assertContains('failure', $coll);
         $this->assertNotContains('success', $coll);
     }
+    
+    public function testReset()
+    {
+        $this->assertTrue($this->isEndsWith('abc', 'bc'));
+        
+        $this->assertTrue($this->isEndsWith('abc', 'bc', true));
+        
+        $this->assertFalse($this->isEndsWith('abc', 'BC', true));
+        
+        // Equals to $this->isEndsWith('abc', null);
+        // Not equals to $this->isEndsWith('abc', 'BC', true);
+        $this->assertTrue($this->isEndsWith('abc'));
+    }
 }
