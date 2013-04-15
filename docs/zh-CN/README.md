@@ -130,8 +130,8 @@ API 参考目录
 * [marker](api/marker.md) - 设置一个标记,包括时间,内存使用量等信息
 * [pinyin](api/pinyin.md) - 将中文转换为拼音字母
 
-#### 第三方
-* [db](api/db.md) - 获取Doctrine DBAL的Connection对象
-* [entityManager](api/entityManager.md) - 获取Doctrine ORM的EntityManager对象
-* [monolog](api/monolog.md) - 获取Monolog对象或记录一条日志
-* [phpError](api/phpError.md) - 启用PHPError的错误视图
+#### 第三方集成微件
+* [db](api/db.md) - 获取[Doctrine DBAL](https://github.com/doctrine/dbal)的Connection对象
+* [entityManager](api/entityManager.md) - 获取[Doctrine ORM](https://github.com/doctrine/doctrine2)的EntityManager对象
+* [monolog](api/monolog.md) - 获取[Monolog](https://github.com/Seldaek/monolog)对象或记录一条日志
+* [phpError](api/phpError.md) - 启用[PHPError](http://phperror.net/)的错误视图
