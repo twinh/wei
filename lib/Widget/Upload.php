@@ -123,13 +123,16 @@ class Upload extends Image
     {
         // ($field, $options)
         if (is_string($field)) {
-            $this->field = $field;
-            $options && $this->setOption($options);
+            $this->storeOption('field', $field);
+            $options && $this->storeOption($options);
         // ($options)
         } elseif (is_array($field)) {
-            $field && $this->setOption($field);
+            $field && $this->storeOption($field);
         }
         
+        // Clean previous status
+        parent::reset();
+
         $uploadedFiles = $this->request->getParameterReference('file');
         
         // Set default name

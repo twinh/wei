@@ -4,6 +4,13 @@ namespace WidgetTest;
 
 class UploadTest extends TestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+        
+        $this->upload->setOption('unitTest', true);
+    }
+    
     public static function tearDownAfterClass()
     {
         parent::tearDownAfterClass();
@@ -36,13 +43,9 @@ class UploadTest extends TestCase
             )
         ));
         
-        $upload = new \Widget\Upload(array(
-            'widget' => $this->widget
-        ));
+        $this->upload();
         
-        $upload();
-        
-        $this->assertTrue($upload->hasError($name));
+        $this->assertTrue($this->upload->hasError($name));
     }
     
     public function providerForUploadError()
@@ -78,46 +81,36 @@ class UploadTest extends TestCase
     public function testUploadBySpecifiedName()
     {
         $this->request->setOption('files', array(
-            'uploadedFiles' => array(
-                'upload' => array(
-                    'name' => 'test.gif',
-                    'type' => 'image/gif',
-                    'tmp_name' => '',
-                    'size' => 20,
-                    'error' => UPLOAD_ERR_OK
-                ),
-                'picture2' => array(
-                    'name' => 'test.gif',
-                    'type' => 'image/gif',
-                    'tmp_name' => '',
-                    'size' => 20,
-                    'error' => UPLOAD_ERR_OK
-                )
+            'upload' => array(
+                'name' => 'test.gif',
+                'type' => 'image/gif',
+                'tmp_name' => '',
+                'size' => 20,
+                'error' => UPLOAD_ERR_OK
+            ),
+            'picture2' => array(
+                'name' => 'test.gif',
+                'type' => 'image/gif',
+                'tmp_name' => '',
+                'size' => 20,
+                'error' => UPLOAD_ERR_OK
             )
         ));
         
-        $upload = new \Widget\Upload(array(
-            'widget' => $this->widget,
-        ));
+        $this->upload('picture2');
+        $this->assertEquals('picture2', $this->upload->getOption('field'));
         
-        $upload('picture2');
-        $this->assertEquals('picture2', $upload->getOption('field'));
-        
-        $upload('notThisFiled');
-        $this->assertTrue($upload->hasError('noFile'));
+        $this->upload('notThisFiled');
+        $this->assertTrue($this->upload->hasError('noFile'));
     }
     
     public function testInvoker()
     {
-        $upload = new \Widget\Upload(array(
-            'widget' => $this->widget
-        ));
-        
-        $upload(array(
+        $this->upload(array(
             'field' => 'upload'
         ));
         
-        $this->assertEquals('upload', $upload->getOption('field'));
+        $this->assertEquals('upload', $this->upload->getOption('field'));
     }
     
     public function testUploadImage()
@@ -132,15 +125,12 @@ class UploadTest extends TestCase
             )
         ));
         
-        $upload = new \Widget\Upload(array(
-            'widget' => $this->widget,
-            'unitTest' => true,
+        $this->upload(array(
             'maxWidth' => 3
         ));
         
-        $upload();
         
-        $this->assertTrue($upload->hasError('widthTooBig'));
+        $this->assertTrue($this->upload->hasError('widthTooBig'));
     }
     
     public function testUploadNormalFile()
@@ -155,30 +145,23 @@ class UploadTest extends TestCase
             )
         ));
         
-        $upload = new \Widget\Upload(array(
-            'widget' => $this->widget,
-            'unitTest' => true,
+        $this->upload(array(
             'exts' => 'jpg,png'
         ));
         
-        $upload();
-        
-        $this->assertTrue($upload->hasError('exts'));
+        $this->assertTrue($this->upload->hasError('exts'));
     }
     
     public function testUploadFileLargerThanMaxPostSize()
     {
         $this->request->setOption('files', array());
-        
         $this->post->fromArray(array());
-        $upload = new \Widget\Upload(array(
-            'widget' => $this->widget,
-            'unitTest' => true
+        
+        $this->upload(array(
+            'field' => 'bigFile'
         ));
         
-        $upload('bigFile');
-
-        $this->assertTrue($upload->hasError('postSize'));
+        $this->assertTrue($this->upload->hasError('postSize'));
     }
     
     public function testSaveFile()
@@ -193,15 +176,11 @@ class UploadTest extends TestCase
             )
         ));
         
-        $upload = new \Widget\Upload(array(
-            'widget' => $this->widget,
-            'dir' => 'uploads',
-            'unitTest' => true
+        $this->upload(array(
+            'dir' => 'uploads'
         ));    
         
-        $upload();
-        
-        $this->assertFileExists($upload->getFile());
+        $this->assertFileExists($this->upload->getFile());
     }
     
     public function testUploadWithCustomName()
@@ -216,17 +195,13 @@ class UploadTest extends TestCase
             )
         ));
         
-        $upload = new \Widget\Upload(array(
-            'widget' => $this->widget,
+        $this->upload(array(
             'dir' => 'uploads',
-            'fileName' => 'custom',
-            'unitTest' => true
+            'fileName' => 'custom'
         ));    
         
-        $upload();
-        
         $file = 'uploads/custom.gif';
-        $this->assertEquals($file, $upload->getFile());
+        $this->assertEquals($file, $this->upload->getFile());
         $this->assertFileExists($file);
     }
     
@@ -243,14 +218,11 @@ class UploadTest extends TestCase
         ));
         
         $dir = 'uploads/' . date('Ymd');
-        $upload = new \Widget\Upload(array(
-            'widget' => $this->widget,
-            'dir' => $dir,
-            'unitTest' => true
+        $result = $this->upload(array(
+            'dir' => $dir
         ));
         
-        $result = $upload();
-        $file = $upload->getFile();
+        $file = $this->upload->getFile();
 
         $this->assertTrue($result);
         $this->assertFileExists($dir . '/test.gif');
@@ -281,17 +253,13 @@ class UploadTest extends TestCase
             )
         ));
         
-        $upload = new \Widget\Upload(array(
-            'widget' => $this->widget,
+        // Avoid Warning: copy(uploads/cus/tom.gif) [function.copy]: failed to open stream: No such file or directory
+        $result = @$this->upload(array(
             'dir' => 'uploads',
-            'fileName' => 'cu/stom', // invalid file name
-            'unitTest' => true
+            'fileName' => 'cu/stom' // invalid file name
         ));    
         
-        // Avoid Warning: copy(uploads/cus/tom.gif) [function.copy]: failed to open stream: No such file or directory
-        $result = @$upload();
-        
         $this->assertFalse($result);
-        $this->assertTrue($upload->hasError('cantMove'));
+        $this->assertTrue($this->upload->hasError('cantMove'));
     }
 }
