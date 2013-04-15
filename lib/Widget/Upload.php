@@ -15,7 +15,7 @@ use Widget\Validator\File as FileValidator;
  * The widget that handle file upload
  *
  * @author      Twin Huang <twinh@yahoo.cn>
- * @property    \Widget\Post $post The post widget
+ * @property    \Widget\Request $request The HTTP request widget
  * @todo        Add service widget and extend it
  */
 class Upload extends Image
@@ -53,7 +53,7 @@ class Upload extends Image
     
     /**
      * The name defined in the file input, if it's not specified, use the first
-     * key in $this->uploadedFiles
+     * key in upload files array (equals to $_FILES on default)
      *
      * @var string
      */
@@ -87,14 +87,6 @@ class Upload extends Image
     protected $isImage = false;
     
     /**
-     * The uploaded files, equal to $_FILES if not provided. so you can provide
-     * a uploaded files array for testing
-     * 
-     * @var array
-     */
-    protected $uploadedFiles = array();
-    
-    /**
      * Whether in unit test mode
      * 
      * @var bool
@@ -118,10 +110,6 @@ class Upload extends Image
         parent::__construct($options + array(
             'dir' => $this->dir
         ));
-        
-        if (!isset($options['uploadedFiles'])) {
-            $this->uploadedFiles = $_FILES;
-        }
     }
 
     /**
@@ -142,7 +130,7 @@ class Upload extends Image
             $field && $this->setOption($field);
         }
         
-        $uploadedFiles = $this->getUploadedFiles();
+        $uploadedFiles = $this->request->getParameterReference('file');
         
         // Set default name
         if (!$this->field) {
@@ -151,7 +139,8 @@ class Upload extends Image
         
         // Check if has file uploaded or file too large
         if (!isset($uploadedFiles[$this->field])) {
-            if (empty($uploadedFiles) && empty($this->post)) {
+            $post = $this->request->getParameterReference('post');
+            if (empty($uploadedFiles) && empty($post)) {
                 $error = 'postSize';
                 // Prepare postMaxSize variable for $this->postSizeMessage
                 $this->postMaxSize = $this->getIniSize('post_max_size');
@@ -287,16 +276,6 @@ class Upload extends Image
     public function getDir()
     {
         return $this->dir;
-    }
-    
-    /**
-     * Get uploaded file list
-     *
-     * @return array
-     */
-    public function getUploadedFiles()
-    {
-        return $this->uploadedFiles;
     }
     
     /**

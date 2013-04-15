@@ -26,17 +26,18 @@ class UploadTest extends TestCase
      */
     public function testUploadError($error, $name)
     {
-        $upload = new \Widget\Upload(array(
-            'widget' => $this->widget,
-            'uploadedFiles' => array(
-                'upload' => array(
-                    'name' => 'test.gif',
-                    'type' => 'image/gif',
-                    'tmp_name' => '',
-                    'size' => 20,
-                    'error' => $error
-                )
+        $this->request->setOption('files', array(
+            'upload' => array(
+                'name' => 'test.gif',
+                'type' => 'image/gif',
+                'tmp_name' => '',
+                'size' => 20,
+                'error' => $error
             )
+        ));
+        
+        $upload = new \Widget\Upload(array(
+            'widget' => $this->widget
         ));
         
         $upload();
@@ -76,8 +77,7 @@ class UploadTest extends TestCase
     
     public function testUploadBySpecifiedName()
     {
-        $upload = new \Widget\Upload(array(
-            'widget' => $this->widget,
+        $this->request->setOption('files', array(
             'uploadedFiles' => array(
                 'upload' => array(
                     'name' => 'test.gif',
@@ -94,6 +94,10 @@ class UploadTest extends TestCase
                     'error' => UPLOAD_ERR_OK
                 )
             )
+        ));
+        
+        $upload = new \Widget\Upload(array(
+            'widget' => $this->widget,
         ));
         
         $upload('picture2');
@@ -118,18 +122,19 @@ class UploadTest extends TestCase
     
     public function testUploadImage()
     {
+        $this->request->setOption('files', array(
+            'picture' => array(
+                'name' => 'test.gif',
+                'type' => 'image/gif',
+                'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
+                'size' => 20,
+                'error' => UPLOAD_ERR_OK
+            )
+        ));
+        
         $upload = new \Widget\Upload(array(
             'widget' => $this->widget,
             'unitTest' => true,
-            'uploadedFiles' => array(
-                'picture' => array(
-                    'name' => 'test.gif',
-                    'type' => 'image/gif',
-                    'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
-                    'size' => 20,
-                    'error' => UPLOAD_ERR_OK
-                )
-            ),
             'maxWidth' => 3
         ));
         
@@ -140,18 +145,19 @@ class UploadTest extends TestCase
     
     public function testUploadNormalFile()
     {
+        $this->request->setOption('files', array(
+            'picture' => array(
+                'name' => 'test.gif',
+                'type' => 'image/gif',
+                'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
+                'size' => 20,
+                'error' => UPLOAD_ERR_OK
+            )
+        ));
+        
         $upload = new \Widget\Upload(array(
             'widget' => $this->widget,
             'unitTest' => true,
-            'uploadedFiles' => array(
-                'picture' => array(
-                    'name' => 'test.gif',
-                    'type' => 'image/gif',
-                    'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
-                    'size' => 20,
-                    'error' => UPLOAD_ERR_OK
-                )
-            ),
             'exts' => 'jpg,png'
         ));
         
@@ -162,13 +168,12 @@ class UploadTest extends TestCase
     
     public function testUploadFileLargerThanMaxPostSize()
     {
+        $this->request->setOption('files', array());
+        
         $this->post->fromArray(array());
         $upload = new \Widget\Upload(array(
             'widget' => $this->widget,
-            'unitTest' => true,
-            'uploadedFiles' => array(
-                
-            )
+            'unitTest' => true
         ));
         
         $upload('bigFile');
@@ -178,19 +183,20 @@ class UploadTest extends TestCase
     
     public function testSaveFile()
     {
+        $this->request->setOption('files', array(
+            'picture' => array(
+                'name' => 'test.gif',
+                'type' => 'image/gif',
+                'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
+                'size' => 20,
+                'error' => UPLOAD_ERR_OK
+            )
+        ));
+        
         $upload = new \Widget\Upload(array(
             'widget' => $this->widget,
             'dir' => 'uploads',
-            'unitTest' => true,
-            'uploadedFiles' => array(
-                'picture' => array(
-                    'name' => 'test.gif',
-                    'type' => 'image/gif',
-                    'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
-                    'size' => 20,
-                    'error' => UPLOAD_ERR_OK
-                )
-            )
+            'unitTest' => true
         ));    
         
         $upload();
@@ -200,20 +206,21 @@ class UploadTest extends TestCase
     
     public function testUploadWithCustomName()
     {
+        $this->request->setOption('files', array(
+            'picture' => array(
+                'name' => 'test.gif',
+                'type' => 'image/gif',
+                'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
+                'size' => 20,
+                'error' => UPLOAD_ERR_OK
+            )
+        ));
+        
         $upload = new \Widget\Upload(array(
             'widget' => $this->widget,
             'dir' => 'uploads',
             'fileName' => 'custom',
-            'unitTest' => true,
-            'uploadedFiles' => array(
-                'picture' => array(
-                    'name' => 'test.gif',
-                    'type' => 'image/gif',
-                    'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
-                    'size' => 20,
-                    'error' => UPLOAD_ERR_OK
-                )
-            )
+            'unitTest' => true
         ));    
         
         $upload();
@@ -225,20 +232,21 @@ class UploadTest extends TestCase
     
     public function testSaveFileToCustomDir()
     {
+        $this->request->setOption('files', array(
+            'picture' => array(
+                'name' => 'test.gif',
+                'type' => 'image/gif',
+                'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
+                'size' => 20,
+                'error' => UPLOAD_ERR_OK
+            )
+        ));
+        
         $dir = 'uploads/' . date('Ymd');
         $upload = new \Widget\Upload(array(
             'widget' => $this->widget,
             'dir' => $dir,
-            'unitTest' => true,
-            'uploadedFiles' => array(
-                'picture' => array(
-                    'name' => 'test.gif',
-                    'type' => 'image/gif',
-                    'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
-                    'size' => 20,
-                    'error' => UPLOAD_ERR_OK
-                )
-            )
+            'unitTest' => true
         ));
         
         $result = $upload();
@@ -263,20 +271,21 @@ class UploadTest extends TestCase
      */
     public function testCantMoveFile()
     {
+        $this->request->setOption('files', array(
+            'picture' => array(
+                'name' => 'test.gif',
+                'type' => 'image/gif',
+                'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
+                'size' => 20,
+                'error' => UPLOAD_ERR_OK
+            )
+        ));
+        
         $upload = new \Widget\Upload(array(
             'widget' => $this->widget,
             'dir' => 'uploads',
             'fileName' => 'cu/stom', // invalid file name
-            'unitTest' => true,
-            'uploadedFiles' => array(
-                'picture' => array(
-                    'name' => 'test.gif',
-                    'type' => 'image/gif',
-                    'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
-                    'size' => 20,
-                    'error' => UPLOAD_ERR_OK
-                )
-            )
+            'unitTest' => true
         ));    
         
         // Avoid Warning: copy(uploads/cus/tom.gif) [function.copy]: failed to open stream: No such file or directory

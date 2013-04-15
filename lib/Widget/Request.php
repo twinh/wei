@@ -352,7 +352,7 @@ class Request extends Parameter
      */
     public function &getParameterReference($type)
     {
-        if (in_array($type, array('get', 'post', 'cookie', 'server'))) {
+        if (in_array($type, array('get', 'post', 'cookie', 'server', 'file'))) {
             return $this->{$type . 's'};
         }
         
