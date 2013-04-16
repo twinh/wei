@@ -24,7 +24,7 @@ class CallbackTest extends TestCase
         $cb->setOption('postData', $input);
         
         $cb->fallback(function($callback){
-            return "Your input is " . $callback->getIntput() . "\n"
+            return "Your input is " . $callback->getInput() . "\n"
                 . "Type a number to see more \n"
                 . "[0]Show menu message"
                 . "[1]Show text message\n"
@@ -98,6 +98,46 @@ class CallbackTest extends TestCase
                     'from' => 'fromUser',
                     'to' => 'toUser',
                     'msgType' => 'text',
+                    'msgId' => '1234567890123456'
+                )
+            ),
+            array(
+                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                '<xml>
+                 <ToUserName><![CDATA[toUser]]></ToUserName>
+                 <FromUserName><![CDATA[fromUser]]></FromUserName>
+                 <CreateTime>1366118361</CreateTime>
+                 <MsgType><![CDATA[image]]></MsgType>
+                 <PicUrl><![CDATA[http://mmsns.qpic.cn/mmsns/X1X15BcJOnSyeD9OtgfgM5RovwBP83QMHpd2YtO8DqtWG5jarm937g/0]]></PicUrl>
+                 <MsgId>1234567890123456</MsgId>
+                 </xml>',
+                array(
+                    'from' => 'fromUser',
+                    'to' => 'toUser',
+                    'msgType' => 'image',
+                    'msgId' => '1234567890123456',
+                    'picUrl' => 'http://mmsns.qpic.cn/mmsns/X1X15BcJOnSyeD9OtgfgM5RovwBP83QMHpd2YtO8DqtWG5jarm937g/0'
+                ),
+            ),
+            array(
+                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                '<xml>
+                    <ToUserName><![CDATA[toUser]]></ToUserName> 
+                    <FromUserName><![CDATA[fromUser]]></FromUserName> 
+                    <CreateTime>1366118469</CreateTime> 
+                    <MsgType><![CDATA[location]]></MsgType> 
+                    <Location_X>22.000000</Location_X> 
+                    <Location_Y>114.000000</Location_Y> 
+                    <Scale>15</Scale> 
+                    <Label><![CDATA[中国广东省深圳市 邮政编码: 518049]]></Label> 
+                    <MsgId>1234567890123456</MsgId> 
+                 </xml>',
+                array(
+                    'msgType' => 'location',
+                    'locationX' => '22.000000',
+                    'locationY' => '114.000000',
+                    'scale' => '15',
+                    'label' => '中国广东省深圳市 邮政编码: 518049',
                     'msgId' => '1234567890123456'
                 )
             )

@@ -63,6 +63,41 @@ class Callback extends AbstractWidget
     protected $msgType;
     
     /**
+     * The picture URL, available when the message type is image
+     * 
+     * @var string
+     */
+    protected $picUrl;
+    
+    /**
+     * The latitude of location, available when the message type is location
+     * 
+     * @var string
+     */
+    protected $locationX;
+    
+    /**
+     * The longitude of location, available when the message type is location
+     * 
+     * @var string
+     */
+    protected $locationY;
+    
+    /**
+     * The scale of map, available when the message type is location
+     * 
+     * @var string
+     */
+    protected $scale;
+    
+    /**
+     * The detail address of location, available when the message type is location
+     * 
+     * @var string 
+     */
+    protected $label;
+    
+    /**
      * The HTTP raw post data, equals to $GLOBALS["HTTP_RAW_POST_DATA"] on default
      * 
      * @var string
@@ -149,6 +184,31 @@ class Callback extends AbstractWidget
     public function getMsgType()
     {
         return $this->msgType;
+    }
+    
+    public function getPicUrl()
+    {
+        return $this->picUrl;
+    }
+    
+    public function getLocationX()
+    {
+        return $this->locationX;
+    }
+    
+    public function getLocationY()
+    {
+        return $this->locationY;
+    }
+    
+    public function getLabel()
+    {
+        return $this->label;
+    }
+    
+    public function getScale()
+    {
+        return $this->scale;
     }
     
     /**
@@ -413,9 +473,27 @@ class Callback extends AbstractWidget
             $postObj = simplexml_load_string($this->postData, 'SimpleXMLElement', LIBXML_NOCDATA);
             $this->from = $postObj->FromUserName;
             $this->to = $postObj->ToUserName;
-            $this->input = trim($postObj->Content);
             $this->msgId = $postObj->MsgId;
             $this->msgType = $postObj->MsgType;
+            switch ($this->msgType) {
+                case 'text' :
+                    $this->input = trim($postObj->Content);
+                    break;
+                
+                case 'image' :
+                    $this->picUrl = $postObj->PicUrl;
+                    break;
+                
+                case 'location' :
+                    $this->locationX = $postObj->Location_X;
+                    $this->locationY = $postObj->Location_Y;
+                    $this->scale = $postObj->Scale;
+                    $this->label = $postObj->Label;
+                    break;
+                    
+                default :
+                    throw new Exception\UnexpectedValueException(sprintf('Unknown type "%s"', $this->msgType));
+            }           
         }
     }
     
