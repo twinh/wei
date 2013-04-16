@@ -15,7 +15,7 @@ use Widget\Response;
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  * @method      \Widget\EventManager trigger(string $eventName) Trigger a event
- * @method      \Widget\Response response(string $content) Send headers and output content
+ * @method      \Widget\Response response(string $content, int $status) Send headers and output content
  * @property    callable $404 The 404 event handler
  * @property    \Widget\View\ViewInterface $view The view widget, instance of \Widget\Viewable interface
  * @property    \Widget\Logger $logger The logger widget

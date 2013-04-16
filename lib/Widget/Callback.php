@@ -15,6 +15,8 @@ use \SimpleXMLElement;
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  * @link        http://mp.weixin.qq.com/wiki/index.php?title=%E6%B6%88%E6%81%AF%E6%8E%A5%E5%8F%A3%E6%8C%87%E5%8D%97
+ * @method      \Widget\Response response(string $content, int $status) Send headers and output content
+ * @method      string query(string $name) Returns the URL query parameter value
  */
 class Callback extends AbstractWidget
 {
@@ -61,7 +63,7 @@ class Callback extends AbstractWidget
     protected $msgType;
     
     /**
-     * The  HTTP raw post data, equals to $GLOBALS["HTTP_RAW_POST_DATA"] on default
+     * The HTTP raw post data, equals to $GLOBALS["HTTP_RAW_POST_DATA"] on default
      * 
      * @var string
      */
@@ -156,12 +158,12 @@ class Callback extends AbstractWidget
      */
     public function __invoke()
     {
-        // 校验请求是否来自微信服务器
+        // Check if it's requested from the WeChat server
         $echostr = $this->query('echostr');
         if ($this->checkSignature()) {
             echo $this->escape($echostr);
         } else {
-            return $this->response('404');
+            return $this->response('Not Found', '404');
         }
 
         // 解析用户输入
@@ -192,7 +194,6 @@ class Callback extends AbstractWidget
                     
                 default :
                     break;
-                    
             }
         }
         
@@ -253,16 +254,6 @@ class Callback extends AbstractWidget
     public function fallback(\Closure $fn)
     {
         $this->fallback = $fn;
-        return $this;
-    }
-    
-    public function addRule($type, $expected, \Closure $fn)
-    {
-        $this->rules[] = array(
-            'type' => $type,
-            'expected' => $expected,
-            'fn' => $fn
-        );
         return $this;
     }
     
@@ -398,6 +389,16 @@ class Callback extends AbstractWidget
         $node = dom_import_simplexml($child); 
         $od = $node->ownerDocument; 
         $node->appendChild($od->createCDATASection($value));
+        return $this;
+    }
+    
+    protected function addRule($type, $expected, \Closure $fn)
+    {
+        $this->rules[] = array(
+            'type' => $type,
+            'expected' => $expected,
+            'fn' => $fn
+        );
         return $this;
     }
     
