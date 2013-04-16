@@ -140,6 +140,24 @@ class CallbackTest extends TestCase
                     'label' => '中国广东省深圳市 邮政编码: 518049',
                     'msgId' => '1234567890123456'
                 )
+            ),
+            array(
+                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                '<xml>
+                    <ToUserName><![CDATA[toUser]]></ToUserName> 
+                    <FromUserName><![CDATA[fromUser]]></FromUserName> 
+                    <CreateTime>1366118483</CreateTime> 
+                    <MsgType><![CDATA[voice]]></MsgType> 
+                    <MediaId><![CDATA[vLzm6LJh88oq6xFk5HzC28AbbjQJgnJZH5r5eqBLs_-ddoGK4Hyvai7zvnlL34Si]]></MediaId> 
+                    <Format><![CDATA[amr]]></Format> 
+                    <MsgId>1234567890123456</MsgId> 
+                </xml>',
+                array(
+                    'msgType' => 'voice',
+                    'mediaId' => 'vLzm6LJh88oq6xFk5HzC28AbbjQJgnJZH5r5eqBLs_-ddoGK4Hyvai7zvnlL34Si',
+                    'format' => 'amr',
+                    'msgId' => '1234567890123456'
+                )
             )
         );
     }

@@ -98,6 +98,20 @@ class Callback extends AbstractWidget
     protected $label;
     
     /**
+     * The media id, available when the message type is voice
+     * 
+     * @var string
+     */
+    protected $mediaId;
+    
+    /**
+     * The media format, available when the message type is voice
+     * 
+     * @var string
+     */
+    protected $format;
+    
+    /**
      * The HTTP raw post data, equals to $GLOBALS["HTTP_RAW_POST_DATA"] on default
      * 
      * @var string
@@ -209,6 +223,16 @@ class Callback extends AbstractWidget
     public function getScale()
     {
         return $this->scale;
+    }
+    
+    public function getMediaId()
+    {
+        return $this->mediaId;
+    }
+    
+    public function getFormat()
+    {
+        return $this->format;
     }
     
     /**
@@ -473,7 +497,7 @@ class Callback extends AbstractWidget
             'text'      => array('Content'),
             'image'     => array('PicUrl'),
             'location'  => array('Location_X', 'Location_Y', 'Scale', 'Label'),
-            'voice'     => array('MediaId')
+            'voice'     => array('MediaId', 'Format')
         );
         
         if ($this->postData) {
