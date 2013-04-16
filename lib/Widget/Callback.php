@@ -112,6 +112,20 @@ class Callback extends AbstractWidget
     protected $format;
     
     /**
+     * The type of event, could be subscribe, unsubscribe or CLICK, available when the message type is event
+     * 
+     * @var string
+     */
+    protected $event;
+    
+    /**
+     * The key value of custom menu, available when the message type is event
+     * 
+     * @var string
+     */
+    protected $eventKey;
+    
+    /**
      * The HTTP raw post data, equals to $GLOBALS["HTTP_RAW_POST_DATA"] on default
      * 
      * @var string
@@ -233,6 +247,16 @@ class Callback extends AbstractWidget
     public function getFormat()
     {
         return $this->format;
+    }
+    
+    public function getEvent()
+    {
+        return $this->event;
+    }
+    
+    public function getEventKey()
+    {
+        return $this->eventKey;
     }
     
     /**
@@ -504,7 +528,8 @@ class Callback extends AbstractWidget
             'text'      => array('Content'),
             'image'     => array('PicUrl'),
             'location'  => array('Location_X', 'Location_Y', 'Scale', 'Label'),
-            'voice'     => array('MediaId', 'Format')
+            'voice'     => array('MediaId', 'Format'),
+            'event'     => array('Event', 'EventKey')
         );
         
         if ($this->postData) {

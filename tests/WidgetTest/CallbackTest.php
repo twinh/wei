@@ -158,6 +158,54 @@ class CallbackTest extends TestCase
                     'format' => 'amr',
                     'msgId' => '1234567890123456'
                 )
+            ),
+            array(
+                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                '<xml>
+                    <ToUserName><![CDATA[toUser]]></ToUserName> 
+                    <FromUserName><![CDATA[fromUser]]></FromUserName> 
+                    <CreateTime>1366131823</CreateTime> 
+                    <MsgType><![CDATA[event]]></MsgType> 
+                    <Event><![CDATA[unsubscribe]]></Event> 
+                    <EventKey><![CDATA[]]></EventKey>
+                </xml>',
+                array(
+                    'msgType' => 'event',
+                    'event' => 'unsubscribe',
+                    'eventKey' => ''
+                )
+            ),
+            array(
+                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                '<xml>
+                    <ToUserName><![CDATA[toUser]]></ToUserName> 
+                    <FromUserName><![CDATA[fromUser]]></FromUserName> 
+                    <CreateTime>1366131865</CreateTime> 
+                    <MsgType><![CDATA[event]]></MsgType> 
+                    <Event><![CDATA[subscribe]]></Event> 
+                    <EventKey><![CDATA[]]></EventKey>
+                 </xml>',
+                array(
+                    'msgType' => 'event',
+                    'event' => 'subscribe',
+                    'eventKey' => ''
+                )
+            ),
+            array(
+                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                '<xml>
+                    <ToUserName><![CDATA[toUser]]></ToUserName> 
+                    <FromUserName><![CDATA[fromUser]]></FromUserName> 
+                    <CreateTime>1366131865</CreateTime> 
+                    <MsgType><![CDATA[event]]></MsgType> 
+                    <Event><![CDATA[CLICK]]></Event> 
+                    <EventKey><![CDATA[V1001_HELLO_WORLD]]></EventKey>
+                 </xml>',
+                array(
+                    'msgType' => 'event',
+                    'event' => 'CLICK',
+                    'eventKey' => 'V1001_HELLO_WORLD'
+                )
             )
         );
     }
