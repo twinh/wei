@@ -12,7 +12,7 @@ class CallbackTest extends TestCase
     /**
      * @dataProvider providerForInputAndOutput
      */
-    public function testInputAndOutput($query, $input)
+    public function testInputAndOutput($query, $input, $data)
     {
         $cb = $this->callback;
         
@@ -65,10 +65,11 @@ class CallbackTest extends TestCase
         ob_start();
         $cb();
         $content = ob_get_clean();
-        
-        $this->assertEquals('fromUser', $cb->getFrom());
-        $this->assertEquals('toUser', $cb->getTo());
 
+        foreach ($data as $name => $value) {
+            $this->assertEquals($value, $cb->{'get' . $name}());
+        }
+        
         $output = simplexml_load_string($content, 'SimpleXMLElement', LIBXML_NOCDATA);
 
         $this->assertEquals('toUser', $output->FromUserName);
@@ -80,7 +81,25 @@ class CallbackTest extends TestCase
         return array(
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
-                $this->inputTextMessage('0')
+                $this->inputTextMessage('0'),
+                array(
+                    'input' => '0',
+                    'from' => 'fromUser',
+                    'to' => 'toUser',
+                    'msgType' => 'text',
+                    'msgId' => '1234567890123456'
+                )
+            ),
+            array(
+                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                $this->inputTextMessage('1'),
+                array(
+                    'input' => '1',
+                    'from' => 'fromUser',
+                    'to' => 'toUser',
+                    'msgType' => 'text',
+                    'msgId' => '1234567890123456'
+                )
             )
         );
     }

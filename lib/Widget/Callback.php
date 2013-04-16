@@ -47,6 +47,20 @@ class Callback extends AbstractWidget
     protected $from;
     
     /**
+     * The message id
+     * 
+     * @var string
+     */
+    protected $msgId;
+    
+    /**
+     * The message type, currently could be text, image, location, link or event
+     * 
+     * @var string
+     */
+    protected $msgType;
+    
+    /**
      * The  HTTP raw post data, equals to $GLOBALS["HTTP_RAW_POST_DATA"] on default
      * 
      * @var string
@@ -88,7 +102,7 @@ class Callback extends AbstractWidget
      * 
      * @return string
      */
-    public function getIntput()
+    public function getInput()
     {
         return $this->input;
     }
@@ -102,7 +116,7 @@ class Callback extends AbstractWidget
     {
         return $this->from;
     }
-    
+
     /**
      * Returns your id
      * 
@@ -111,6 +125,28 @@ class Callback extends AbstractWidget
     public function getTo()
     {
         return $this->to;
+    }
+    
+    /**
+     * Returns the message id
+     * 
+     * @return string
+     */
+    public function getMsgId()
+    {
+        return $this->msgId;
+    }
+    
+    /**
+     * Returns the message type
+     * 
+     * Currently could be text, image, location, link or event
+     * 
+     * @return string
+     */
+    public function getMsgType()
+    {
+        return $this->msgType;
     }
     
     /**
@@ -375,6 +411,8 @@ class Callback extends AbstractWidget
             $this->from = $postObj->FromUserName;
             $this->to = $postObj->ToUserName;
             $this->input = trim($postObj->Content);
+            $this->msgId = $postObj->MsgId;
+            $this->msgType = $postObj->MsgType;
         }
     }
     
