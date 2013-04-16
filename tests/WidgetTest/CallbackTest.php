@@ -64,22 +64,22 @@ class CallbackTest extends TestCase
         
         ob_start();
         $cb();
-        $content = ob_get_contents();
+        $content = ob_get_clean();
         
         $this->assertEquals('fromUser', $cb->getFrom());
         $this->assertEquals('toUser', $cb->getTo());
 
-        $output = simplexml_load_string($content, 'SimpleXMLElement', LIBXML_NOCDATA);
+        $output = simplexml_load_string($output, 'SimpleXMLElement', LIBXML_NOCDATA);
 
-        $this->assertEquals('toUser', $output->FromUserName);
-        $this->assertEquals('fromUser', $output->ToUserName);
+        $this->assertEquals('fromUser', $output->FromUserName);
+        $this->assertEquals('toUser', $output->ToUserName);
     }
     
     public function providerForInputAndOutput()
     {
         return array(
             array(
-                'signature=2c14ced70f1f149ce23e453d678eb9e465ac032a&timestamp=1366032735&nonce=1365872231',
+                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
                 $this->inputTextMessage('0'),
                 '<xml>
  <ToUserName><![CDATA[toUser]]></ToUserName>

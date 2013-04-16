@@ -17,14 +17,14 @@ namespace Widget;
 class Callback extends AbstractWidget
 {
     /**
-     * Callback接口的验证token
+     * The callback token for to generate signature
      * 
      * @var string
      */
-    protected $token = 'seekabcbbccbc';
+    protected $token = 'widget';
     
     /**
-     * 用户输入的数据
+     * The user input string
      * 
      * @var string
      */
@@ -44,14 +44,12 @@ class Callback extends AbstractWidget
      */
     protected $from;
     
-    protected $postData = ' <xml>
-        <ToUserName><![CDATA[toUser]]></ToUserName>
-        <FromUserName><![CDATA[fromUser]]></FromUserName> 
-        <CreateTime>1348831860</CreateTime>
-        <MsgType><![CDATA[text]]></MsgType>
-        <Content><![CDATA[Hello2BizUser]]></Content>
-        <MsgId>1234567890123456</MsgId>
-        </xml>';
+    /**
+     * The  HTTP raw post data, equals to $GLOBALS["HTTP_RAW_POST_DATA"] on default
+     * 
+     * @var string
+     */
+    protected $postData;
     
     /**
      * 自定回复的消息规则
@@ -70,17 +68,21 @@ class Callback extends AbstractWidget
     protected $handled = false;
     
     /**
-     * 构造器
+     * Constructor
      * 
-     * @param array $options 配置选项
+     * @param array $options
      */
     public function __construct($options = array())
     {
         parent::__construct($options);
+        
+        if (is_null($this->postData) && isset($GLOBALS["HTTP_RAW_POST_DATA"])) {
+            $this->postData = $GLOBALS["HTTP_RAW_POST_DATA"];
+        }
     }
     
     /**
-     * 获取用户发送的文本信息
+     * Returns user input string
      * 
      * @return string
      */
@@ -109,15 +111,6 @@ class Callback extends AbstractWidget
         return $this->to;
     }
     
-    protected function parseInput()
-    {
-        $postData = isset($GLOBALS["HTTP_RAW_POST_DATA"]) ? $GLOBALS["HTTP_RAW_POST_DATA"] : $this->postData;
-        $postObj = simplexml_load_string($postData, 'SimpleXMLElement', LIBXML_NOCDATA);
-        $this->from = $postObj->FromUserName;
-        $this->to = $postObj->ToUserName;
-        $this->input = trim($postObj->Content);
-    }
-    
     /**
      * 进行规则匹配并输入结果
      * 
@@ -134,7 +127,7 @@ class Callback extends AbstractWidget
         }
         
         // 解析用户输入
-        $this->parseInput();
+        $this->parsePostData();
         
         foreach ($this->rules as $rule) {
             switch ($rule['type']) {
@@ -249,23 +242,7 @@ class Callback extends AbstractWidget
         }
     }
     
-    /**
-     * 检查签名是否通过验证
-     * 
-     * @return bool
-     */
-    private function checkSignature()
-    {
-        $signature = $this->query('signature');
-        $timestamp = $this->query('timestamp');
-        $nonce = $this->query('nonce');
-
-        $tmpArr = array($this->token, $timestamp, $nonce);
-        sort($tmpArr);
-        $tmpStr = sha1(implode( $tmpArr ));
-
-        return $tmpStr === $signature;
-    }
+    
     
     public function sendText($content, $mark = false)
     {
@@ -276,12 +253,18 @@ class Callback extends AbstractWidget
     
     public function sendMusic($title, $description, $url, $hqUrl = null, $mark = false)
     {
-        $body = sprintf('<Music>
-                <Title><![CDATA[%s]]></Title>
-                <Description><![CDATA[%s]]></Description>
-                <MusicUrl><![CDATA[%s]]></MusicUrl>
-                <HQMusicUrl><![CDATA[%s]]></HQMusicUrl>
-            </Music>', $title, $description, $url, $hqUrl);
+        $body = sprintf(
+            '<Music>
+             <Title><![CDATA[%s]]></Title>
+             <Description><![CDATA[%s]]></Description>
+             <MusicUrl><![CDATA[%s]]></MusicUrl>
+             <HQMusicUrl><![CDATA[%s]]></HQMusicUrl>
+             </Music>', 
+            $title, 
+            $description, 
+            $url, 
+            $hqUrl
+        );
         
         return $this->send('music', $body, $mark);    
     }
@@ -303,7 +286,8 @@ class Callback extends AbstractWidget
                 'picUrl' => null,
                 'url' => null
             );
-            $body .= sprintf('<item>
+            $body .= sprintf(
+                '<item>
                 <Title><![CDATA[%s]]></Title> 
                 <Description><![CDATA[%s]]></Description>
                 <PicUrl><![CDATA[%s]]></PicUrl>
@@ -329,5 +313,37 @@ class Callback extends AbstractWidget
 
         $response = sprintf($template, $this->from, $this->to, time(), $type, (int)$mark); 
         return $response;
+    }
+    
+    /**
+     * Parse post data to recive user OpenID and user input
+     * 
+     * @todo detect invald input
+     */
+    protected function parsePostData()
+    {
+        if ($this->postData) {
+            $postObj = simplexml_load_string($this->postData, 'SimpleXMLElement', LIBXML_NOCDATA);
+            $this->from = $postObj->FromUserName;
+            $this->to = $postObj->ToUserName;
+            $this->input = trim($postObj->Content);
+        }
+    }
+    
+    /**
+     * Check if the signature is valid
+     * 
+     * @return bool
+     */
+    protected function checkSignature()
+    {
+        $tmpArr = array(
+            $this->token, 
+            $this->query('timestamp'),
+            $this->query('nonce')
+        );
+        sort($tmpArr);
+        $tmpStr = sha1(implode($tmpArr));
+        return $tmpStr === $this->query('signature');
     }
 }
