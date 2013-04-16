@@ -125,7 +125,7 @@ class Callback extends AbstractWidget
         } else {
             return $this->response('404');
         }
-        
+
         // 解析用户输入
         $this->parsePostData();
         
@@ -134,18 +134,21 @@ class Callback extends AbstractWidget
                 case 'has' :
                     if (false !== strpos($this->input, $rule['expected'])) {
                         $this->handle($rule['fn']);
+                        break 2;
                     }
                     break;
                 
                 case 'is' :
                     if ($this->input == $rule['expected']) {
                         $this->handle($rule['fn']);
+                        break 2;
                     }
                     break;
                 
                 case 'match' :
                     if (preg_match($rule['expected'], $this->input)) {
                         $this->handle($rule['fn']);
+                        break 2;
                     }
                     break;
                     
@@ -235,11 +238,10 @@ class Callback extends AbstractWidget
     
     public function responseMsg($content)
     {
-        if ('<xml>' == substr($content, 0, '5')) {
-            echo $content;
-        } else {
-            echo $this->sendText($content);
+        if (!$content instanceof \SimpleXMLElement) {
+            $content = $this->sendText($content);
         }
+        echo $content->asXml();
     }
 
     /**
@@ -270,20 +272,16 @@ class Callback extends AbstractWidget
      */
     public function sendMusic($title, $description, $url, $hqUrl = null, $mark = false)
     {
-        $body = sprintf(
-            '<Music>
-             <Title><![CDATA[%s]]></Title>
-             <Description><![CDATA[%s]]></Description>
-             <MusicUrl><![CDATA[%s]]></MusicUrl>
-             <HQMusicUrl><![CDATA[%s]]></HQMusicUrl>
-             </Music>', 
-            $title, 
-            $description, 
-            $url, 
-            $hqUrl
-        );
+        $xml = $this->createXml();
         
-        return $this->send('music', $body, $mark);    
+        $music = $xml->addChild('Music');
+        
+        $this->addCDataChild($music, 'Title', $title)
+            ->addCDataChild($music, 'Description', $description)
+            ->addCDataChild($music, 'MusicUrl', $url)
+            ->addCDataChild($music, 'HQMusicUrl', $hqUrl);
+
+        return $this->send('music', $xml, $mark);    
     }
     
     /**
@@ -295,13 +293,15 @@ class Callback extends AbstractWidget
      */
     public function sendArticle(array $articles, $mark = false)
     {
+        $xml = $this->createXml();
+
         // 单个图文转多条
         if (!is_int(key($articles))) {
             $articles = array($articles);
         }
         
-        $body = '<ArticleCount>' . count($articles) . '</ArticleCount>
-                <Articles>';
+        $xml->addChild('ArticleCount', count($articles));
+        $items = $xml->addChild('Articles');
         
         foreach ($articles as $article) {
             $article += array(
@@ -310,18 +310,15 @@ class Callback extends AbstractWidget
                 'picUrl' => null,
                 'url' => null
             );
-            $body .= sprintf(
-                '<item>
-                <Title><![CDATA[%s]]></Title> 
-                <Description><![CDATA[%s]]></Description>
-                <PicUrl><![CDATA[%s]]></PicUrl>
-                <Url><![CDATA[%s]]></Url>
-                </item>', $article['title'], $article['description'], $article['picUrl'], $article['url']);
+            
+            $item = $items->addChild('item');
+            $this->addCDataChild($item, 'Title', $article['title'])
+                ->addCDataChild($item, 'Description', $article['description'])
+                ->addCDataChild($item, 'PicUrl', $article['picUrl'])
+                ->addCDataChild($item, 'Url', $article['url']);
         }
-        
-        $body .= '</Articles>';
-        
-        return $this->send('news', $body, $mark);
+
+        return $this->send('news', $xml, $mark);
     }
     
     /**
@@ -334,23 +331,24 @@ class Callback extends AbstractWidget
      */
     protected function send($type, \SimpleXMLElement $xml, $mark = false)
     {
-        $this->addCDataChild($xml, 'MsgType', $type);
+        $this
+            ->addCDataChild($xml, 'ToUserName', $this->from)
+            ->addCDataChild($xml, 'FromUserName', $this->to)
+            ->addCDataChild($xml, 'MsgType', $type);
+        
+        $xml->addChild('CreateTime', time());
         $xml->addChild('FuncFlag', (int)$mark);
-        return $xml->asXML();
+        
+        return $xml;
     }
-    
+
     /**
-     * 
      * @return \SimpleXMLElement
      */
     protected function createXml()
     {
         $xml = new \SimpleXMLElement('<xml/>');
         
-        $this->addCDataChild($xml, 'ToUserName', $this->from);
-        $this->addCDataChild($xml, 'FromUserName', $this->to);
-        $xml->addChild('CreateTime', time());
-
         return $xml;
     }
     
