@@ -67,6 +67,8 @@ class Callback extends AbstractWidget
      */
     protected $fallback;
     
+    protected $handled = false;
+    
     /**
      * 构造器
      * 
@@ -160,7 +162,9 @@ class Callback extends AbstractWidget
             }
         }
         
-        $this->handle($this->fallback);
+        if (!$this->handled) {
+            $this->handle($this->fallback);
+        }
         
         return $this;
     }
@@ -230,6 +234,7 @@ class Callback extends AbstractWidget
     
     public function handle($fn)
     {
+        $this->handled = true;
         $content = $fn($this, $this->widget);
 
         $this->responseMsg($content);
