@@ -516,7 +516,7 @@ class Widget extends AbstractWidget
             throw new \InvalidArgumentException('Parameter 1 should be valid directory');
         }
 
-        $files = glob($dir . '/*.php');
+        $files = glob($dir . '/*.php') ?: array();
 
         foreach ($files as $file) {
             $class = substr(basename($file), 0, -4);
