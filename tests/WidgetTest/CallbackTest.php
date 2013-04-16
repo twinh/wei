@@ -24,7 +24,7 @@ class CallbackTest extends TestCase
         $cb->setOption('postData', $input);
         
         $cb->fallback(function($callback){
-            return "Your input is " . $callback->getInput() . "\n"
+            return "Your input is " . $callback->getContent() . "\n"
                 . "Type a number to see more \n"
                 . "[0]Show menu message"
                 . "[1]Show text message\n"
@@ -83,7 +83,7 @@ class CallbackTest extends TestCase
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
                 $this->inputTextMessage('0'),
                 array(
-                    'input' => '0',
+                    'content' => '0',
                     'from' => 'fromUser',
                     'to' => 'toUser',
                     'msgType' => 'text',
@@ -94,7 +94,7 @@ class CallbackTest extends TestCase
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
                 $this->inputTextMessage('1'),
                 array(
-                    'input' => '1',
+                    'content' => '1',
                     'from' => 'fromUser',
                     'to' => 'toUser',
                     'msgType' => 'text',

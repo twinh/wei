@@ -32,7 +32,7 @@ class Callback extends AbstractWidget
      * 
      * @var string
      */
-    protected $input;
+    protected $content;
     
     /**
      * 开发者微信号
@@ -135,13 +135,13 @@ class Callback extends AbstractWidget
     }
     
     /**
-     * Returns user input string
+     * Returns user input content
      * 
      * @return string
      */
-    public function getInput()
+    public function getContent()
     {
-        return $this->input;
+        return $this->content;
     }
     
     /**
@@ -232,21 +232,21 @@ class Callback extends AbstractWidget
         foreach ($this->rules as $rule) {
             switch ($rule['type']) {
                 case 'has' :
-                    if (false !== strpos($this->input, $rule['expected'])) {
+                    if (false !== strpos($this->content, $rule['expected'])) {
                         $this->handle($rule['fn']);
                         break 2;
                     }
                     break;
                 
                 case 'is' :
-                    if ($this->input == $rule['expected']) {
+                    if ($this->content == $rule['expected']) {
                         $this->handle($rule['fn']);
                         break 2;
                     }
                     break;
                 
                 case 'match' :
-                    if (preg_match($rule['expected'], $this->input)) {
+                    if (preg_match($rule['expected'], $this->content)) {
                         $this->handle($rule['fn']);
                         break 2;
                     }
@@ -469,31 +469,27 @@ class Callback extends AbstractWidget
      */
     protected function parsePostData()
     {
+        $fields = array(
+            'text'      => array('Content'),
+            'image'     => array('PicUrl'),
+            'location'  => array('Location_X', 'Location_Y', 'Scale', 'Label'),
+            'voice'     => array('MediaId')
+        );
+        
         if ($this->postData) {
             $postObj = simplexml_load_string($this->postData, 'SimpleXMLElement', LIBXML_NOCDATA);
             $this->from = $postObj->FromUserName;
             $this->to = $postObj->ToUserName;
             $this->msgId = $postObj->MsgId;
-            $this->msgType = $postObj->MsgType;
-            switch ($this->msgType) {
-                case 'text' :
-                    $this->input = trim($postObj->Content);
-                    break;
-                
-                case 'image' :
-                    $this->picUrl = $postObj->PicUrl;
-                    break;
-                
-                case 'location' :
-                    $this->locationX = $postObj->Location_X;
-                    $this->locationY = $postObj->Location_Y;
-                    $this->scale = $postObj->Scale;
-                    $this->label = $postObj->Label;
-                    break;
-                    
-                default :
-                    throw new Exception\UnexpectedValueException(sprintf('Unknown type "%s"', $this->msgType));
-            }           
+            $this->msgType = (string)$postObj->MsgType;
+            if (isset($fields[$this->msgType])) {
+                foreach ($fields[$this->msgType] as $field) {
+                    if (isset($postObj->$field)) {
+                        $name = lcfirst(strtr($field, array('_' => '')));
+                        $this->$name = $postObj->$field;
+                    }
+                }
+            }         
         }
     }
     
