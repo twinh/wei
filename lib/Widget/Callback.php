@@ -53,8 +53,18 @@ class Callback extends AbstractWidget
         <MsgId>1234567890123456</MsgId>
         </xml>';
     
+    /**
+     * 自定回复的消息规则
+     * 
+     * @var array
+     */
     protected $rules = array();
     
+    /**
+     *
+     * @var string
+     * @todo 更改更合适的名称
+     */
     protected $fallback;
     
     /**
@@ -87,6 +97,26 @@ class Callback extends AbstractWidget
     public function getIntput()
     {
         return $this->input;
+    }
+    
+    /**
+     * Reurns a user OpenID who send message to you
+     * 
+     * @return string
+     */
+    public function getFrom()
+    {
+        return $this->from;
+    }
+    
+    /**
+     * Returns your id
+     * 
+     * @return string
+     */
+    public function getTo()
+    {
+        return $this->to;
     }
     
     protected function parseInput()
