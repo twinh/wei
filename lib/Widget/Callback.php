@@ -283,11 +283,11 @@ class Callback extends AbstractWidget
     }
 
     /**
-     * Response text message to user
+     * Generate text message for response
      * 
      * @param string $content
      * @param bool $mark Whenter mark the message or not
-     * @return string
+     * @return \SimpleXMLElement
      */
     public function sendText($content, $mark = false)
     {
@@ -299,22 +299,22 @@ class Callback extends AbstractWidget
     }
     
     /**
-     * Response music message to user
+     * Generate music message for response
      * 
      * @param string $title The title of music
      * @param string $description The description display blow the title
      * @param string $url The music URL for player
      * @param string $hqUrl The HQ music URL for player when user in WIFI
      * @param string $mark Whenter mark the message or not
-     * @return string
+     * @return \SimpleXMLElement
      */
     public function sendMusic($title, $description, $url, $hqUrl = null, $mark = false)
     {
-        $xml = $this->createXml();
+        $xml    = $this->createXml();
+        $music  = $xml->addChild('Music');
         
-        $music = $xml->addChild('Music');
-        
-        $this->addCDataChild($music, 'Title', $title)
+        $this
+            ->addCDataChild($music, 'Title', $title)
             ->addCDataChild($music, 'Description', $description)
             ->addCDataChild($music, 'MusicUrl', $url)
             ->addCDataChild($music, 'HQMusicUrl', $hqUrl);
@@ -323,24 +323,24 @@ class Callback extends AbstractWidget
     }
     
     /**
-     * Response article message for user
+     * Generate article message for response
      * 
      * @param array $articles The article array
      * @param bool $mark Whenter mark the message or not
-     * @return string 
+     * @return \SimpleXMLElement 
      */
     public function sendArticle(array $articles, $mark = false)
     {
         $xml = $this->createXml();
 
-        // 单个图文转多条
+        // Convert single article array
         if (!is_int(key($articles))) {
             $articles = array($articles);
         }
         
         $xml->addChild('ArticleCount', count($articles));
-        $items = $xml->addChild('Articles');
         
+        $items = $xml->addChild('Articles');
         foreach ($articles as $article) {
             $article += array(
                 'title' => null,
@@ -348,9 +348,9 @@ class Callback extends AbstractWidget
                 'picUrl' => null,
                 'url' => null
             );
-            
             $item = $items->addChild('item');
-            $this->addCDataChild($item, 'Title', $article['title'])
+            $this
+                ->addCDataChild($item, 'Title', $article['title'])
                 ->addCDataChild($item, 'Description', $article['description'])
                 ->addCDataChild($item, 'PicUrl', $article['picUrl'])
                 ->addCDataChild($item, 'Url', $article['url']);
@@ -360,12 +360,12 @@ class Callback extends AbstractWidget
     }
     
     /**
-     * Generate message for user
+     * Generate message for response
      * 
      * @param string $type The type of message
      * @param \SimpleXMLElement $body The body of message
      * @param bool $mark $mark Whenter mark the message or not
-     * @return string
+     * @return \SimpleXMLElement
      */
     protected function send($type, SimpleXMLElement $xml, $mark = false)
     {
@@ -381,6 +381,8 @@ class Callback extends AbstractWidget
     }
 
     /**
+     * Create a root xml object 
+     * 
      * @return \SimpleXMLElement
      */
     protected function createXml()
