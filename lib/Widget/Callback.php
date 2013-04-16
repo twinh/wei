@@ -8,6 +8,8 @@
 
 namespace Widget;
 
+use \SimpleXMLElement;
+
 /**
  * The widget for WeChat(Weixin) callback message
  *
@@ -238,7 +240,7 @@ class Callback extends AbstractWidget
     
     public function responseMsg($content)
     {
-        if (!$content instanceof \SimpleXMLElement) {
+        if (!$content instanceof SimpleXMLElement) {
             $content = $this->sendText($content);
         }
         echo $content->asXml();
@@ -329,7 +331,7 @@ class Callback extends AbstractWidget
      * @param bool $mark $mark Whenter mark the message or not
      * @return string
      */
-    protected function send($type, \SimpleXMLElement $xml, $mark = false)
+    protected function send($type, SimpleXMLElement $xml, $mark = false)
     {
         $this
             ->addCDataChild($xml, 'ToUserName', $this->from)
@@ -347,12 +349,12 @@ class Callback extends AbstractWidget
      */
     protected function createXml()
     {
-        $xml = new \SimpleXMLElement('<xml/>');
+        $xml = new SimpleXMLElement('<xml/>');
         
         return $xml;
     }
     
-    protected function addCDataChild(\SimpleXMLElement $xml, $name, $value)
+    protected function addCDataChild(SimpleXMLElement $xml, $name, $value)
     {
         $child = $xml->addChild($name);
         $node = dom_import_simplexml($child); 

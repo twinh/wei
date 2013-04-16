@@ -12,7 +12,7 @@ class CallbackTest extends TestCase
     /**
      * @dataProvider providerForInputAndOutput
      */
-    public function testInputAndOutput($query, $input, $output)
+    public function testInputAndOutput($query, $input)
     {
         $cb = $this->callback;
         
@@ -69,10 +69,10 @@ class CallbackTest extends TestCase
         $this->assertEquals('fromUser', $cb->getFrom());
         $this->assertEquals('toUser', $cb->getTo());
 
-        $output = simplexml_load_string($output, 'SimpleXMLElement', LIBXML_NOCDATA);
+        $output = simplexml_load_string($content, 'SimpleXMLElement', LIBXML_NOCDATA);
 
-        $this->assertEquals('fromUser', $output->FromUserName);
-        $this->assertEquals('toUser', $output->ToUserName);
+        $this->assertEquals('toUser', $output->FromUserName);
+        $this->assertEquals('fromUser', $output->ToUserName);
     }
     
     public function providerForInputAndOutput()
@@ -80,15 +80,7 @@ class CallbackTest extends TestCase
         return array(
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
-                $this->inputTextMessage('0'),
-                '<xml>
- <ToUserName><![CDATA[toUser]]></ToUserName>
- <FromUserName><![CDATA[fromUser]]></FromUserName>
- <CreateTime>12345678</CreateTime>
- <MsgType><![CDATA[text]]></MsgType>
- <Content><![CDATA[content]]></Content>
- <FuncFlag>0</FuncFlag>
- </xml>'
+                $this->inputTextMessage('0')
             )
         );
     }
