@@ -251,9 +251,11 @@ class Callback extends AbstractWidget
      */
     public function sendText($content, $mark = false)
     {
-        $body = sprintf('<Content><![CDATA[%s]]></Content>', $content);
+        $xml = $this->createXml();
+
+        $this->addCDataChild($xml, 'Content', $content);
         
-        return $this->send('text', $body, $mark);
+        return $this->send('text', $xml, $mark);
     }
     
     /**
@@ -297,7 +299,7 @@ class Callback extends AbstractWidget
         if (!is_int(key($articles))) {
             $articles = array($articles);
         }
-
+        
         $body = '<ArticleCount>' . count($articles) . '</ArticleCount>
                 <Articles>';
         
@@ -326,23 +328,39 @@ class Callback extends AbstractWidget
      * Generate message for user
      * 
      * @param string $type The type of message
-     * @param string $body The body of message
+     * @param \SimpleXMLElement $body The body of message
      * @param bool $mark $mark Whenter mark the message or not
      * @return string
      */
-    protected function send($type, $body, $mark = false)
+    protected function send($type, \SimpleXMLElement $xml, $mark = false)
     {
-        $template = '<xml>
-            <ToUserName><![CDATA[%s]]></ToUserName>
-            <FromUserName><![CDATA[%s]]></FromUserName>
-            <CreateTime>%s</CreateTime>
-            <MsgType><![CDATA[%s]]></MsgType>'
-            . $body 
-            . '<FuncFlag>%s</FuncFlag>
-            </xml>';
+        $this->addCDataChild($xml, 'MsgType', $type);
+        $xml->addChild('FuncFlag', (int)$mark);
+        return $xml->asXML();
+    }
+    
+    /**
+     * 
+     * @return \SimpleXMLElement
+     */
+    protected function createXml()
+    {
+        $xml = new \SimpleXMLElement('<xml/>');
+        
+        $this->addCDataChild($xml, 'ToUserName', $this->from);
+        $this->addCDataChild($xml, 'FromUserName', $this->to);
+        $xml->addChild('CreateTime', time());
 
-        $response = sprintf($template, $this->from, $this->to, time(), $type, (int)$mark); 
-        return $response;
+        return $xml;
+    }
+    
+    protected function addCDataChild(\SimpleXMLElement $xml, $name, $value)
+    {
+        $child = $xml->addChild($name);
+        $node = dom_import_simplexml($child); 
+        $od = $node->ownerDocument; 
+        $node->appendChild($od->createCDATASection($value));
+        return $this;
     }
     
     /**
