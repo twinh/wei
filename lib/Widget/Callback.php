@@ -212,9 +212,9 @@ class Callback extends AbstractWidget
     }
     
     /**
-     * 进行规则匹配并输入结果
+     * Parse the user input message and response matched rule message
      * 
-     * @return \SeekApi\Widget\Callback
+     * @return \Widget\Callback
      */
     public function __invoke()
     {
