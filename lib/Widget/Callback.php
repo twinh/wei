@@ -241,9 +241,14 @@ class Callback extends AbstractWidget
             echo $this->sendText($content);
         }
     }
-    
-    
-    
+
+    /**
+     * Response text message to user
+     * 
+     * @param string $content
+     * @param bool $mark Whenter mark the message or not
+     * @return string
+     */
     public function sendText($content, $mark = false)
     {
         $body = sprintf('<Content><![CDATA[%s]]></Content>', $content);
@@ -251,6 +256,16 @@ class Callback extends AbstractWidget
         return $this->send('text', $body, $mark);
     }
     
+    /**
+     * Response music message to user
+     * 
+     * @param string $title The title of music
+     * @param string $description The description display blow the title
+     * @param string $url The music URL for player
+     * @param string $hqUrl The HQ music URL for player when user in WIFI
+     * @param string $mark Whenter mark the message or not
+     * @return string
+     */
     public function sendMusic($title, $description, $url, $hqUrl = null, $mark = false)
     {
         $body = sprintf(
@@ -269,6 +284,13 @@ class Callback extends AbstractWidget
         return $this->send('music', $body, $mark);    
     }
     
+    /**
+     * Response article message for user
+     * 
+     * @param array $articles The article array
+     * @param bool $mark Whenter mark the message or not
+     * @return string 
+     */
     public function sendArticle(array $articles, $mark = false)
     {
         // 单个图文转多条
@@ -300,6 +322,14 @@ class Callback extends AbstractWidget
         return $this->send('news', $body, $mark);
     }
     
+    /**
+     * Generate message for user
+     * 
+     * @param string $type The type of message
+     * @param string $body The body of message
+     * @param bool $mark $mark Whenter mark the message or not
+     * @return string
+     */
     protected function send($type, $body, $mark = false)
     {
         $template = '<xml>
