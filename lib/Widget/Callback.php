@@ -471,11 +471,18 @@ class Callback extends AbstractWidget
     {
         $child = $xml->addChild($name);
         $node = dom_import_simplexml($child); 
-        $od = $node->ownerDocument; 
-        $node->appendChild($od->createCDATASection($value));
+        $node->appendChild($node->ownerDocument->createCDATASection($value));
         return $this;
     }
     
+    /**
+     * Adds rule to handle user input
+     * 
+     * @param string $type
+     * @param string $expected
+     * @param \Closure $fn
+     * @return \Widget\Callback
+     */
     protected function addRule($type, $expected, \Closure $fn)
     {
         $this->rules[] = array(
@@ -501,16 +508,16 @@ class Callback extends AbstractWidget
         );
         
         if ($this->postData) {
-            $postObj = simplexml_load_string($this->postData, 'SimpleXMLElement', LIBXML_NOCDATA);
-            $this->from = $postObj->FromUserName;
-            $this->to = $postObj->ToUserName;
-            $this->msgId = $postObj->MsgId;
-            $this->msgType = (string)$postObj->MsgType;
+            $postObj        = simplexml_load_string($this->postData, 'SimpleXMLElement', LIBXML_NOCDATA);
+            $this->from     = (string)$postObj->FromUserName;
+            $this->to       = (string)$postObj->ToUserName;
+            $this->msgId    = (string)$postObj->MsgId;
+            $this->msgType  = (string)$postObj->MsgType;
             if (isset($fields[$this->msgType])) {
                 foreach ($fields[$this->msgType] as $field) {
                     if (isset($postObj->$field)) {
                         $name = lcfirst(strtr($field, array('_' => '')));
-                        $this->$name = $postObj->$field;
+                        $this->$name = (string)$postObj->$field;
                     }
                 }
             }         
