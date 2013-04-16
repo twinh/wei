@@ -269,7 +269,7 @@ class Callback extends AbstractWidget
         // Check if it's requested from the WeChat server
         $echostr = $this->query('echostr');
         if ($this->checkSignature()) {
-            echo $this->escape($echostr);
+            echo htmlspecialchars($echostr, \ENT_QUOTES, 'UTF-8');
         } else {
             return $this->response('Not Found', '404');
         }
