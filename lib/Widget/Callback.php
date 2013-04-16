@@ -21,7 +21,7 @@ class Callback extends AbstractWidget
      * 
      * @var string
      */
-    protected $token;
+    protected $token = 'seekabcbbccbc';
     
     /**
      * 用户输入的数据
@@ -75,18 +75,6 @@ class Callback extends AbstractWidget
     public function __construct($options = array())
     {
         parent::__construct($options);
-        
-        // 校验请求是否来自微信服务器
-        $echostr = $this->query('echostr');
-        if ($this->checkSignature()) {
-            echo $this->escape($echostr);
-        } else {
-            return $this->response('404');
-            exit('access deny');
-        }
-        
-        // 解析用户输入
-        $this->parseInput();
     }
     
     /**
@@ -135,6 +123,17 @@ class Callback extends AbstractWidget
      */
     public function __invoke()
     {
+        // 校验请求是否来自微信服务器
+        $echostr = $this->query('echostr');
+        if ($this->checkSignature()) {
+            echo $this->escape($echostr);
+        } else {
+            return $this->response('404');
+        }
+        
+        // 解析用户输入
+        $this->parseInput();
+        
         foreach ($this->rules as $rule) {
             switch ($rule['type']) {
                 case 'has' :
@@ -234,8 +233,6 @@ class Callback extends AbstractWidget
         $content = $fn($this, $this->widget);
 
         $this->responseMsg($content);
-
-        exit;
     }
     
     public function responseMsg($content)
@@ -261,7 +258,7 @@ class Callback extends AbstractWidget
         $tmpArr = array($this->token, $timestamp, $nonce);
         sort($tmpArr);
         $tmpStr = sha1(implode( $tmpArr ));
-        
+
         return $tmpStr === $signature;
     }
     
