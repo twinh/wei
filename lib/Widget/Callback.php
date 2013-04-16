@@ -35,14 +35,14 @@ class Callback extends AbstractWidget
     protected $content;
     
     /**
-     * 开发者微信号
+     * Your user id
      * 
      * @var string
      */
     protected $to;
     
     /**
-     * 发送方帐号（一个OpenID）
+     * The user(OpenID) who sent message to you
      * 
      * @var string
      */
@@ -173,7 +173,7 @@ class Callback extends AbstractWidget
     }
     
     /**
-     * Reurns a user OpenID who send message to you
+     * Reurns a user(OpenID) who sent message to you
      * 
      * @return string
      */
@@ -183,7 +183,7 @@ class Callback extends AbstractWidget
     }
 
     /**
-     * Returns your id
+     * Returns your user id
      * 
      * @return string
      */
