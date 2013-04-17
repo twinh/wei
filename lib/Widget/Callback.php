@@ -105,6 +105,7 @@ class Callback extends AbstractWidget
      * Constructor
      * 
      * @param array $options
+     * @global string $GLOBALS['HTTP_RAW_POST_DATA'] 
      */
     public function __construct($options = array())
     {
@@ -728,7 +729,6 @@ class Callback extends AbstractWidget
                     if (preg_match($rule['keyword'], $this->content)) {
                         return $this->handle($rule['fn']);
                     }
-                    break;
             }
         }
     }

@@ -39,6 +39,14 @@ class CallbackTest extends TestCase
         $this->assertEquals(200, $this->response->getStatusCode()); 
     }
     
+    public function testHttpRawPostData()
+    {
+        $GLOBALS['HTTP_RAW_POST_DATA'] = 'test';
+        $callback = new \Widget\Callback();
+        
+        $this->assertEquals('test', $callback->getOption('postData'));
+    }
+    
     /**
      * @dataProvider providerForInputAndOutput
      */
