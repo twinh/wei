@@ -22,154 +22,21 @@ use \Closure;
 class Callback extends AbstractWidget
 {
     /**
-     * The callback token for to generate signature
+     * The callback token to generate signature
      * 
      * @var string
      */
     protected $token = 'widget';
-    
+     
     /**
-     * The user input string
-     * 
-     * @var string
-     */
-    protected $content;
-    
-    /**
-     * Your user id
-     * 
-     * @var string
-     */
-    protected $toUserName;
-    
-    /**
-     * The user(OpenID) who sent message to you
-     * 
-     * @var string
-     */
-    protected $fromUserName;
-    
-    /**
-     * The timestamp when message created
-     * 
-     * @var string
-     */
-    protected $createTime;
-    
-    /**
-     * The message id
-     * 
-     * @var string
-     */
-    protected $msgId;
-    
-    /**
-     * The message type, currently could be text, image, location, link or event
-     * 
-     * @var string
-     */
-    protected $msgType;
-    
-    /**
-     * The picture URL, available when the message type is image
-     * 
-     * @var string
-     */
-    protected $picUrl;
-    
-    /**
-     * The latitude of location, available when the message type is location
-     * 
-     * @var string
-     */
-    protected $locationX;
-    
-    /**
-     * The longitude of location, available when the message type is location
-     * 
-     * @var string
-     */
-    protected $locationY;
-    
-    /**
-     * The scale of map, available when the message type is location
-     * 
-     * @var string
-     */
-    protected $scale;
-    
-    /**
-     * The detail address of location, available when the message type is location
-     * 
-     * @var string 
-     */
-    protected $label;
-    
-    /**
-     * The media id, available when the message type is voice or video
-     * 
-     * @var string
-     */
-    protected $mediaId;
-    
-    /**
-     * The media format, available when the message type is voice
-     * 
-     * @var string
-     */
-    protected $format;
-    
-    /**
-     * The type of event, could be subscribe, unsubscribe or CLICK, available when the message type is event
-     * 
-     * @var string
-     */
-    protected $event;
-    
-    /**
-     * The key value of custom menu, available when the message type is event
-     * 
-     * @var string
-     */
-    protected $eventKey;
-    
-    /**
-     * The thumbnail id of video, available when the message type is video
-     * 
-     * @var string 
-     */
-    protected $thumbMediaId;
-    
-    /**
-     * The title of URL, available when the message type is link
-     * 
-     * @var string
-     */
-    protected $title;
-    
-    /**
-     * The description of URL, available when the message type is link
-     * 
-     * @var string
-     */
-    protected $description;
-    
-    /**
-     * The URL link, available when the message type is link
-     * 
-     * @var string
-     */
-    protected $url;
-        
-    /**
-     * The HTTP raw post data, equals to $GLOBALS["HTTP_RAW_POST_DATA"] on default
+     * The HTTP raw post data, equals to $GLOBALS['HTTP_RAW_POST_DATA'] on default
      * 
      * @var string
      */
     protected $postData;
     
     /**
-     * The rules generate response message
+     * The rules to generate response message
      * 
      * @var array
      */
@@ -196,6 +63,44 @@ class Callback extends AbstractWidget
      */
     protected $handled = false;
     
+    protected $toUserName;
+    
+    protected $fromUserName;
+    
+    protected $createTime;
+    
+    protected $msgId;
+    
+    protected $msgType;
+    
+    protected $content;
+    
+    protected $picUrl;
+    
+    protected $locationX;
+    
+    protected $locationY;
+    
+    protected $scale;
+    
+    protected $label;
+    
+    protected $mediaId;
+    
+    protected $format;
+   
+    protected $event;
+
+    protected $eventKey;
+    
+    protected $thumbMediaId;
+    
+    protected $title;
+    
+    protected $description;
+    
+    protected $url;
+    
     /**
      * Constructor
      * 
@@ -209,129 +114,7 @@ class Callback extends AbstractWidget
             $this->postData = $GLOBALS['HTTP_RAW_POST_DATA'];
         }
     }
-    
-    /**
-     * Returns user input content
-     * 
-     * @return string
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-    
-    /**
-     * Reurns a user(OpenID) who sent message to you
-     * 
-     * @return string
-     */
-    public function getFromUserName()
-    {
-        return $this->fromUserName;
-    }
 
-    /**
-     * Returns your user id
-     * 
-     * @return string
-     */
-    public function getToUserName()
-    {
-        return $this->toUserName;
-    }
-    
-    public function getCreateTime()
-    {
-        return $this->createTime;
-    }
-    
-    /**
-     * Returns the message id
-     * 
-     * @return string
-     */
-    public function getMsgId()
-    {
-        return $this->msgId;
-    }
-    
-    /**
-     * Returns the message type
-     * 
-     * Currently could be text, image, location, link or event
-     * 
-     * @return string
-     */
-    public function getMsgType()
-    {
-        return $this->msgType;
-    }
-    
-    public function getPicUrl()
-    {
-        return $this->picUrl;
-    }
-    
-    public function getLocationX()
-    {
-        return $this->locationX;
-    }
-    
-    public function getLocationY()
-    {
-        return $this->locationY;
-    }
-    
-    public function getLabel()
-    {
-        return $this->label;
-    }
-    
-    public function getScale()
-    {
-        return $this->scale;
-    }
-    
-    public function getMediaId()
-    {
-        return $this->mediaId;
-    }
-    
-    public function getFormat()
-    {
-        return $this->format;
-    }
-    
-    public function getEvent()
-    {
-        return $this->event;
-    }
-    
-    public function getEventKey()
-    {
-        return $this->eventKey;
-    }
-    
-    public function getThumbMediaId()
-    {
-        return $this->thumbMediaId;
-    }
-    
-    public function getTitle()
-    {
-        return $this->title;
-    }
-    
-    public function getDescription()
-    {
-        return $this->description;
-    }
-    
-    public function getUrl()
-    {
-        return $this->url;
-    }
-    
     /**
      * Parse the user input message and response matched rule message
      * 
@@ -610,6 +393,198 @@ class Callback extends AbstractWidget
         }
 
         return $this->send('news', $xml, $mark);
+    }
+    
+    /**
+     * Returns your user id
+     * 
+     * @return string
+     */
+    public function getToUserName()
+    {
+        return $this->toUserName;
+    }
+    
+    /**
+     * Reurns a user(OpenID) who sent message to you
+     * 
+     * @return string
+     */
+    public function getFromUserName()
+    {
+        return $this->fromUserName;
+    }
+
+    /**
+     * Returns the timestamp when message created
+     * 
+     * @var string
+     */
+    public function getCreateTime()
+    {
+        return $this->createTime;
+    }
+    
+    /**
+     * Returns the user input string, available when the message type is text
+     * 
+     * @var string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+    
+    /**
+     * Returns the message id
+     * 
+     * @return string
+     */
+    public function getMsgId()
+    {
+        return $this->msgId;
+    }
+    
+    /**
+     * Returns the message type
+     * 
+     * Currently could be text, image, location, link, event, voice, video
+     * 
+     * @return string
+     */
+    public function getMsgType()
+    {
+        return $this->msgType;
+    }
+    
+    /**
+     * Returns the picture URL, available when the message type is image
+     * 
+     * @var string
+     */
+    public function getPicUrl()
+    {
+        return $this->picUrl;
+    }
+    
+    /**
+     * Returns the latitude of location, available when the message type is location
+     * 
+     * @var string
+     */
+    public function getLocationX()
+    {
+        return $this->locationX;
+    }
+    
+    /**
+     * Returns the longitude of location, available when the message type is location
+     * 
+     * @var string
+     */
+    public function getLocationY()
+    {
+        return $this->locationY;
+    }
+    
+    /**
+     * Returns the detail address of location, available when the message type is location
+     * 
+     * @var string 
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+    
+    /**
+     * Returns the scale of map, available when the message type is location
+     * 
+     * @var string
+     */
+    public function getScale()
+    {
+        return $this->scale;
+    }
+    
+    /**
+     * Returns the media id, available when the message type is voice or video
+     * 
+     * @var string
+     */
+    public function getMediaId()
+    {
+        return $this->mediaId;
+    }
+    
+    /**
+     * Returns the media format, available when the message type is voice
+     * 
+     * @var string
+     */
+    public function getFormat()
+    {
+        return $this->format;
+    }
+    
+    /**
+     * Returns the type of event, could be subscribe, unsubscribe or CLICK, available when the message type is event
+     * 
+     * @var string
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+    
+    /**
+     * Returns the key value of custom menu, available when the message type is event
+     * 
+     * @var string
+     */
+    public function getEventKey()
+    {
+        return $this->eventKey;
+    }
+    
+    /**
+     * Returns the thumbnail id of video, available when the message type is video
+     * 
+     * @var string 
+     */
+    public function getThumbMediaId()
+    {
+        return $this->thumbMediaId;
+    }
+    
+    /**
+     * Returns the title of URL, available when the message type is link
+     * 
+     * @var string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+    
+    /**
+     * Returns the description of URL, available when the message type is link
+     * 
+     * @var string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+    
+    /**
+     * Returns the URL link, available when the message type is link
+     * 
+     * @var string
+     */
+    public function getUrl()
+    {
+        return $this->url;
     }
     
     /**
