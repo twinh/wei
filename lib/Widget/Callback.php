@@ -134,6 +134,27 @@ class Callback extends AbstractWidget
     protected $thumbMediaId;
     
     /**
+     * The title of URL, available when the message type is link
+     * 
+     * @var string
+     */
+    protected $title;
+    
+    /**
+     * The description of URL, available when the message type is link
+     * 
+     * @var string
+     */
+    protected $description;
+    
+    /**
+     * The URL link, available when the message type is link
+     * 
+     * @var string
+     */
+    protected $url;
+        
+    /**
      * The HTTP raw post data, equals to $GLOBALS["HTTP_RAW_POST_DATA"] on default
      * 
      * @var string
@@ -151,7 +172,8 @@ class Callback extends AbstractWidget
         'image'     => null,
         'location'  => null,
         'voice'     => null,
-        'video'     => null
+        'video'     => null,
+        'link'      => null
     );
     
     /**
@@ -283,6 +305,21 @@ class Callback extends AbstractWidget
         return $this->thumbMediaId;
     }
     
+    public function getTitle()
+    {
+        return $this->title;
+    }
+    
+    public function getDescription()
+    {
+        return $this->description;
+    }
+    
+    public function getUrl()
+    {
+        return $this->url;
+    }
+    
     /**
      * Parse the user input message and response matched rule message
      * 
@@ -314,6 +351,7 @@ class Callback extends AbstractWidget
             case 'image':
             case 'voice':
             case 'video':
+            case 'link':
                 if (isset($this->rules[$this->msgType])) {
                     $this->handle($this->rules[$this->msgType]);
                 }
@@ -441,6 +479,18 @@ class Callback extends AbstractWidget
     public function receiveVideo(Closure $fn)
     {
         $this->rules['video'] = $fn;
+        return $this;
+    }
+    
+    /**
+     * Attach a callback to handle link message
+     * 
+     * @param Closure $fn
+     * @return \Widget\Callback
+     */
+    public function receiveLink(Closure $fn)
+    {
+        $this->rules['link'] = $fn;
         return $this;
     }
     
@@ -637,7 +687,8 @@ class Callback extends AbstractWidget
             'location'  => array('Location_X', 'Location_Y', 'Scale', 'Label'),
             'voice'     => array('MediaId', 'Format'),
             'event'     => array('Event', 'EventKey'),
-            'video'     => array('MediaId', 'ThumbMediaId')
+            'video'     => array('MediaId', 'ThumbMediaId'),
+            'link'      => array('Title', 'Description', 'Url')
         );
         
         if ($this->postData) {
