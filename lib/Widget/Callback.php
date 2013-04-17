@@ -9,6 +9,7 @@
 namespace Widget;
 
 use \SimpleXMLElement;
+use \Closure;
 
 /**
  * The widget for WeChat(Weixin) callback message
@@ -318,7 +319,7 @@ class Callback extends AbstractWidget
      * @param \Closure $fn
      * @return \Widget\Callback
      */
-    public function subscribe(\Closure $fn)
+    public function subscribe(Closure $fn)
     {
         return $this->addEventRule('subscribe', null, $fn);
     }
@@ -329,7 +330,7 @@ class Callback extends AbstractWidget
      * @param \Closure $fn
      * @return \Widget\Callback
      */
-    public function unsubscribe(\Closure $fn)
+    public function unsubscribe(Closure $fn)
     {
         return $this->addEventRule('unsubscribe', null, $fn);
     }
@@ -340,7 +341,7 @@ class Callback extends AbstractWidget
      * @param \Closure $fn
      * @return \Widget\Callback
      */
-    public function click($key, \Closure $fn)
+    public function click($key, Closure $fn)
     {
         return $this->addEventRule('click', $key, $fn);
     }
@@ -352,7 +353,7 @@ class Callback extends AbstractWidget
      * @param \Closure $fn
      * @return \Widget\Callback
      */
-    public function is($keyword, \Closure $fn)
+    public function is($keyword, Closure $fn)
     {
         return $this->addRule('is', $keyword, $fn);
     }
@@ -364,7 +365,7 @@ class Callback extends AbstractWidget
      * @param \Closure $fn
      * @return \Widget\Callback
      */
-    public function has($keyword, \Closure $fn)
+    public function has($keyword, Closure $fn)
     {
         return $this->addRule('has', $keyword, $fn);
     }
@@ -373,10 +374,10 @@ class Callback extends AbstractWidget
      * Attach a callback with a regex pattern which triggered when user input match the pattern
      * 
      * @param string $pattern The pattern to match
-     * @param \Closure $fn 回调函数
+     * @param \Closure $fn
      * @return \Widget\Callback
      */
-    public function match($pattern, \Closure $fn)
+    public function match($pattern, Closure $fn)
     {
         return $this->addRule('match', $pattern, $fn);
     }
@@ -387,7 +388,7 @@ class Callback extends AbstractWidget
      * @param \Closure $fn
      * @return \Widget\Callback
      */
-    public function receiveImage(\Closure $fn)
+    public function receiveImage(Closure $fn)
     {
         $this->rules['image'] = $fn;
         return $this;
@@ -399,7 +400,7 @@ class Callback extends AbstractWidget
      * @param \Closure $fn
      * @return \Widget\Callback
      */
-    public function receiveLocation(\Closure $fn)
+    public function receiveLocation(Closure $fn)
     {
         $this->rules['location'] = $fn;
         return $this;
@@ -411,7 +412,7 @@ class Callback extends AbstractWidget
      * @param \Closure $fn
      * @return \Widget\Callback
      */
-    public function receiveVoice(\Closure $fn)
+    public function receiveVoice(Closure $fn)
     {
         $this->rules['voice'] = $fn;
         return $this;
@@ -420,10 +421,10 @@ class Callback extends AbstractWidget
     /**
      * 当用户的输入不匹配任何规则时,指定会滴函数
      * 
-     * @param \Closure $fn 回调函数
+     * @param \Closure $fn
      * @return boolean
      */
-    public function fallback(\Closure $fn)
+    public function fallback(Closure $fn)
     {
         $this->fallback = $fn;
         return $this;
@@ -580,7 +581,7 @@ class Callback extends AbstractWidget
      * @param \Closure $fn
      * @return \Widget\Callback
      */
-    protected function addRule($type, $keyword, \Closure $fn)
+    protected function addRule($type, $keyword, Closure $fn)
     {
         $this->rules['text'][] = array(
             'type' => $type,
@@ -590,7 +591,7 @@ class Callback extends AbstractWidget
         return $this;
     }
     
-    protected function addEventRule($name, $key, \Closure $fn)
+    protected function addEventRule($name, $key, Closure $fn)
     {
         $this->rules['event'][$name][$key] = $fn;
         return $this;
