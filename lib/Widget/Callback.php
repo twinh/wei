@@ -139,7 +139,11 @@ class Callback extends AbstractWidget
                 break;
                 
             case  'event':
-                $this->handleEvent();
+                $eventRule = $this->rules['event'];
+                if (isset($eventRule[$this->event])
+                    && isset($eventRule[$this->event][$this->eventKey])) {
+                    $this->handle($eventRule[$this->event][$this->eventKey]);
+                }
                 break;
                 
             case 'location':
@@ -575,18 +579,13 @@ class Callback extends AbstractWidget
         $this->handled = true;
         
         $content = $fn($this, $this->widget);
-
-        $this->responseMsg($content);
-    }
-    
-    protected function responseMsg($content)
-    {
         if (!$content instanceof SimpleXMLElement) {
             $content = $this->sendText($content);
         }
-        echo $content->asXml();
+
+        $this->response($content->asXML());
     }
-    
+        
     /**
      * Generate message for response
      * 
@@ -731,14 +730,6 @@ class Callback extends AbstractWidget
                     }
                     break;
             }
-        }
-    }
-    
-    protected function handleEvent()
-    {
-        if (isset($this->rules['event'][$this->event])
-            && isset($this->rules['event'][$this->event][$this->eventKey])) {
-            return $this->handle($this->rules['event'][$this->event][$this->eventKey]);
         }
     }
 }
