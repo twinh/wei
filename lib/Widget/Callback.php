@@ -15,7 +15,7 @@ use \SimpleXMLElement;
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  * @link        http://mp.weixin.qq.com/wiki/index.php?title=%E6%B6%88%E6%81%AF%E6%8E%A5%E5%8F%A3%E6%8C%87%E5%8D%97
- * @method      \Widget\Response response(string $content, int $status) Send headers and output content
+ * @method      \Widget\Response response(string $content, int $status = 200) Send headers and output content
  * @method      string query(string $name) Returns the URL query parameter value
  */
 class Callback extends AbstractWidget
@@ -146,12 +146,16 @@ class Callback extends AbstractWidget
     );
     
     /**
-     *
      * @var string
-     * @todo 更改更合适的名称
+     * @todo better name
      */
     protected $fallback;
     
+    /**
+     * Are there any callbacks handled the message ?
+     * 
+     * @var bool
+     */
     protected $handled = false;
     
     /**
@@ -163,8 +167,8 @@ class Callback extends AbstractWidget
     {
         parent::__construct($options);
         
-        if (is_null($this->postData) && isset($GLOBALS["HTTP_RAW_POST_DATA"])) {
-            $this->postData = $GLOBALS["HTTP_RAW_POST_DATA"];
+        if (is_null($this->postData) && isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
+            $this->postData = $GLOBALS['HTTP_RAW_POST_DATA'];
         }
     }
     
@@ -275,12 +279,12 @@ class Callback extends AbstractWidget
         // Check if it's requested from the WeChat server
         $echostr = $this->query('echostr');
         if ($this->checkSignature()) {
-            echo htmlspecialchars($echostr, \ENT_QUOTES, 'UTF-8');
+            $this->response(htmlspecialchars($echostr, \ENT_QUOTES, 'UTF-8'));
         } else {
             return $this->response('Forbidden', '403');
         }
 
-        // 解析用户输入
+        // Parse user input data
         $this->parsePostData();
         
         switch ($this->msgType) {
@@ -593,7 +597,7 @@ class Callback extends AbstractWidget
     }
     
     /**
-     * Parse post data to recive user OpenID and user input
+     * Parse post data to recive user OpenID and input content and more
      * 
      * @todo detect invald input
      */
