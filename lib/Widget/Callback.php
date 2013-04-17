@@ -309,72 +309,108 @@ class Callback extends AbstractWidget
     }
     
     /**
-     * 当用户输入的值等于期待值时,执行回调函数 
+     * Attach a callback which triggered when user subscribed you
      * 
-     * @param string $expected 期待用户输入的值
-     * @param \Closure $fn 回调函数
-     * @return boolean
+     * @param \Closure $fn
+     * @return \Widget\Callback
      */
-    public function is($expected, \Closure $fn)
+    public function subscribe(\Closure $fn)
     {
-        return $this->addRule('is', $expected, $fn);
+        return $this->addEventRule('subscribe', null, $fn);
     }
     
     /**
-     * 当用户输入的值包含期待值时,执行回调函数
+     * Attach a callback which triggered when user unsubscribed you
      * 
-     * @param string $expected 期待用户输入的值
-     * @param \Closure $fn 回调函数
-     * @return boolean
+     * @param \Closure $fn
+     * @return \Widget\Callback
      */
-    public function has($expected, \Closure $fn)
+    public function unsubscribe(\Closure $fn)
     {
-        return $this->addRule('has', $expected, $fn);
+        return $this->addEventRule('unsubscribe', null, $fn);
     }
-    
-    public function receiveImage(\Closure $fn)
+
+    /**
+     * Attach a callback which triggered when user click the custom menu
+     * 
+     * @param \Closure $fn
+     * @return \Widget\Callback
+     */
+    public function click($key, \Closure $fn)
     {
-        $this->rules['image'] = $fn;
-        return $this;
-    }
-    
-    public function receiveLocation(\Closure $fn)
-    {
-        $this->rules['location'] = $fn;
-        return $this;
-    }
-    
-    public function receiveVoice(\Closure $fn)
-    {
-        $this->rules['voice'] = $fn;
-        return $this;
+        return $this->addEventRule('click', $key, $fn);
     }
     
     /**
-     * 当用户输入的值匹配指定的正则表达式时,执行回调函数
+     * Attach a callback which triggered when user input equals to the keyword
      * 
-     * @param string $pattern 正则表达式
+     * @param string $keyword The keyword to compare with user input
+     * @param \Closure $fn
+     * @return \Widget\Callback
+     */
+    public function is($keyword, \Closure $fn)
+    {
+        return $this->addRule('is', $keyword, $fn);
+    }
+    
+    /**
+     * Attach a callback with a keyword, which triggered when user input contains the keyword
+     * 
+     * @param string $keyword The keyword to search in user input
+     * @param \Closure $fn
+     * @return \Widget\Callback
+     */
+    public function has($keyword, \Closure $fn)
+    {
+        return $this->addRule('has', $keyword, $fn);
+    }
+    
+    /**
+     * Attach a callback with a regex pattern which triggered when user input match the pattern
+     * 
+     * @param string $pattern The pattern to match
      * @param \Closure $fn 回调函数
-     * @return boolean
+     * @return \Widget\Callback
      */
     public function match($pattern, \Closure $fn)
     {
         return $this->addRule('match', $pattern, $fn);
     }
     
-    public function subscribe(\Closure $fn)
+    /**
+     * Attach a callback to handle image message  
+     * 
+     * @param \Closure $fn
+     * @return \Widget\Callback
+     */
+    public function receiveImage(\Closure $fn)
     {
-        return $this->addEventRule('subscribe', null, $fn);
+        $this->rules['image'] = $fn;
+        return $this;
     }
     
-    public function unsubscribe(\Closure $fn)
+    /**
+     * Attach a callback to handle location message
+     * 
+     * @param \Closure $fn
+     * @return \Widget\Callback
+     */
+    public function receiveLocation(\Closure $fn)
     {
-        return $this->addEventRule('unsubscribe', null, $fn);
+        $this->rules['location'] = $fn;
+        return $this;
     }
     
-    public function click($key, \Closure $fn)
+    /**
+     * Attach a callback to handle voice message
+     * 
+     * @param \Closure $fn
+     * @return \Widget\Callback
+     */
+    public function receiveVoice(\Closure $fn)
     {
-        return $this->addEventRule('click', $key, $fn);
+        $this->rules['voice'] = $fn;
+        return $this;
     }
     
     /**
@@ -392,6 +428,7 @@ class Callback extends AbstractWidget
     public function handle($fn)
     {
         $this->handled = true;
+        
         $content = $fn($this, $this->widget);
 
         $this->responseMsg($content);
@@ -515,6 +552,14 @@ class Callback extends AbstractWidget
         return $xml;
     }
     
+    /**
+     * Adds a cdata section to specified xml object
+     * 
+     * @param \SimpleXMLElement $xml
+     * @param string $name
+     * @param string $value
+     * @return \Widget\Callback
+     */
     protected function addCDataChild(SimpleXMLElement $xml, $name, $value)
     {
         $child = $xml->addChild($name);
@@ -527,15 +572,15 @@ class Callback extends AbstractWidget
      * Adds rule to handle user input
      * 
      * @param string $type
-     * @param string $expected
+     * @param string $keyword
      * @param \Closure $fn
      * @return \Widget\Callback
      */
-    protected function addRule($type, $expected, \Closure $fn)
+    protected function addRule($type, $keyword, \Closure $fn)
     {
         $this->rules['text'][] = array(
             'type' => $type,
-            'expected' => $expected,
+            'keyword' => $keyword,
             'fn' => $fn
         );
         return $this;
@@ -566,7 +611,7 @@ class Callback extends AbstractWidget
         if ($this->postData) {
             $postObj        = simplexml_load_string($this->postData, 'SimpleXMLElement', LIBXML_NOCDATA);
             $this->msgType  = isset($postObj->MsgType) ? (string)$postObj->MsgType : null;
-            if (isset($fields[$this->msgType])) { 
+            if (isset($fields[$this->msgType])) {
                 foreach (array_merge($defaults,$fields[$this->msgType]) as $field) {
                     if (isset($postObj->$field)) {
                         $name = lcfirst(strtr($field, array('_' => '')));
@@ -599,19 +644,19 @@ class Callback extends AbstractWidget
         foreach ($this->rules['text'] as $rule) {
             switch ($rule['type']) {
                 case 'has' :
-                    if (false !== strpos($this->content, $rule['expected'])) {
+                    if (false !== strpos($this->content, $rule['keyword'])) {
                         return $this->handle($rule['fn']);
                     }
                     break;
                     
                 case 'is':
-                    if ($this->content == $rule['expected']) {
+                    if ($this->content == $rule['keyword']) {
                         return $this->handle($rule['fn']);
                     }
                     break;
                     
                 case 'match':
-                    if (preg_match($rule['expected'], $this->content)) {
+                    if (preg_match($rule['keyword'], $this->content)) {
                         return $this->handle($rule['fn']);
                     }
                     break;
