@@ -288,6 +288,7 @@ class CallbackTest extends TestCase
                 array(
                     'fromUserName' => 'fromUser',
                     'toUserName' => 'toUser',
+                    'createTime' => '1366118361',
                     'msgType' => 'image',
                     'msgId' => '1234567890123456',
                     'picUrl' => 'http://mmsns.qpic.cn/mmsns/X1X15BcJOnSyeD9OtgfgM5RovwBP83QMHpd2YtO8DqtWG5jarm937g/0'

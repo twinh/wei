@@ -50,6 +50,13 @@ class Callback extends AbstractWidget
     protected $fromUserName;
     
     /**
+     * The timestamp when message created
+     * 
+     * @var string
+     */
+    protected $createTime;
+    
+    /**
      * The message id
      * 
      * @var string
@@ -231,6 +238,11 @@ class Callback extends AbstractWidget
     public function getToUserName()
     {
         return $this->toUserName;
+    }
+    
+    public function getCreateTime()
+    {
+        return $this->createTime;
     }
     
     /**
