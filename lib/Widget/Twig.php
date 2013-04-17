@@ -68,7 +68,7 @@ class Twig extends AbstractView
             $this->object = new \Twig_Environment(new \Twig_Loader_Filesystem($this->paths), $this->envOptions);
         }
 
-        // Adds widget as template variable
+        // Adds widget to template variable
         $this->object->addGlobal('widget', $this->widget);
     }
 

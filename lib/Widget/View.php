@@ -51,6 +51,19 @@ class View extends AbstractView
      * @var string
      */
     private $currentName;
+    
+    /**
+     * Constructor
+     * 
+     * @param array $options
+     */
+    public function __construct(array $options = array())
+    {
+        parent::__construct($options);
+        
+        // Adds widget to template variable
+        $this->assign('widget', $this->widget);
+    }
 
     /**
      * Returns view widget or render a template
