@@ -91,6 +91,10 @@ class CallbackTest extends TestCase
         $cb->receiveVoice(function(){
             return 'u sound like a old man~';
         });
+        
+        $cb->receiveVideo(function(){
+            return 'good video';
+        });
 
         $cb->is('0', function(){
             return 'your input is 0';
@@ -156,6 +160,10 @@ class CallbackTest extends TestCase
             
             case 'voice':
                 $this->assertEquals('u sound like a old man~', $output->Content);
+                break;
+            
+            case 'video':
+                $this->assertEquals('good video', $output->Content);
                 break;
             
             case 'event':
@@ -379,6 +387,23 @@ class CallbackTest extends TestCase
                     'msgType' => 'event',
                     'event' => 'CLICK',
                     'eventKey' => 'button'
+                )
+            ),
+            array(
+                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                '<xml>
+                    <ToUserName><![CDATA[toUser]]></ToUserName> 
+                    <FromUserName><![CDATA[fromUser]]></FromUserName> 
+                    <CreateTime>1366209162</CreateTime> 
+                    <MsgType><![CDATA[video]]></MsgType> 
+                    <MediaId><![CDATA[1ilIgC6h1vmkKqoodLK-PiQy6DhVccDKm0cnLANsbjxKyDldYBTlhSepr3hAg5K9]]></MediaId> 
+                    <ThumbMediaId><![CDATA[ZWWu54xvKw6PRfEmrdzZuzfPAiKBpQMEPHfB732tF1QHazqp1wvN5nFWF18ppCto]]></ThumbMediaId>
+                    <MsgId>1234567890123456</MsgId> 
+                  </xml>',
+                array(
+                    'msgType' => 'video',
+                    'mediaId' => '1ilIgC6h1vmkKqoodLK-PiQy6DhVccDKm0cnLANsbjxKyDldYBTlhSepr3hAg5K9',
+                    'thumbMediaId' => 'ZWWu54xvKw6PRfEmrdzZuzfPAiKBpQMEPHfB732tF1QHazqp1wvN5nFWF18ppCto'
                 )
             )
         );
