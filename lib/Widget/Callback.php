@@ -133,11 +133,17 @@ class Callback extends AbstractWidget
     protected $postData;
     
     /**
-     * 自定回复的消息规则
+     * The rules generate response message
      * 
      * @var array
      */
-    protected $rules = array();
+    protected $rules = array(
+        'text'      => array(),
+        'event'     => array(),
+        'image'     => null,
+        'location'  => null,
+        'voice'     => null
+    );
     
     /**
      *
@@ -277,32 +283,22 @@ class Callback extends AbstractWidget
         // 解析用户输入
         $this->parsePostData();
         
-        foreach ($this->rules as $rule) {
-            switch ($rule['type']) {
-                case 'has' :
-                    if (false !== strpos($this->content, $rule['expected'])) {
-                        $this->handle($rule['fn']);
-                        break 2;
-                    }
-                    break;
+        switch ($this->msgType) {
+            case 'text' :
+                $this->handleText();
+                break;
                 
-                case 'is' :
-                    if ($this->content == $rule['expected']) {
-                        $this->handle($rule['fn']);
-                        break 2;
-                    }
-                    break;
+            case  'event':
+                $this->handleEvent();
+                break;
                 
-                case 'match' :
-                    if (preg_match($rule['expected'], $this->content)) {
-                        $this->handle($rule['fn']);
-                        break 2;
-                    }
-                    break;
-                    
-                default :
-                    break;
-            }
+            case 'location':
+            case 'image':
+            case 'voice':
+                if (isset($this->rules[$this->msgType])) {
+                    $this->handle($this->rules[$this->msgType]);
+                }
+                break;  
         }
         
         if (!$this->handled) {
@@ -336,9 +332,22 @@ class Callback extends AbstractWidget
         return $this->addRule('has', $expected, $fn);
     }
     
-    public function hello(\Closure $fn)
+    public function receiveImage(\Closure $fn)
     {
-        return $this->addRule('is', 'Hello2BizUser', $fn);
+        $this->rules['image'] = $fn;
+        return $this;
+    }
+    
+    public function receiveLocation(\Closure $fn)
+    {
+        $this->rules['location'] = $fn;
+        return $this;
+    }
+    
+    public function receiveVoice(\Closure $fn)
+    {
+        $this->rules['voice'] = $fn;
+        return $this;
     }
     
     /**
@@ -351,6 +360,21 @@ class Callback extends AbstractWidget
     public function match($pattern, \Closure $fn)
     {
         return $this->addRule('match', $pattern, $fn);
+    }
+    
+    public function subscribe(\Closure $fn)
+    {
+        return $this->addEventRule('subscribe', null, $fn);
+    }
+    
+    public function unsubscribe(\Closure $fn)
+    {
+        return $this->addEventRule('unsubscribe', null, $fn);
+    }
+    
+    public function click($key, \Closure $fn)
+    {
+        return $this->addEventRule('click', $key, $fn);
     }
     
     /**
@@ -509,11 +533,17 @@ class Callback extends AbstractWidget
      */
     protected function addRule($type, $expected, \Closure $fn)
     {
-        $this->rules[] = array(
+        $this->rules['text'][] = array(
             'type' => $type,
             'expected' => $expected,
             'fn' => $fn
         );
+        return $this;
+    }
+    
+    protected function addEventRule($name, $key, \Closure $fn)
+    {
+        $this->rules['event'][$name][$key] = $fn;
         return $this;
     }
     
@@ -564,5 +594,38 @@ class Callback extends AbstractWidget
         sort($tmpArr);
         $tmpStr = sha1(implode($tmpArr));
         return $tmpStr === $this->query('signature');
+    }
+    
+    protected function handleText()
+    {
+        foreach ($this->rules['text'] as $rule) {
+            switch ($rule['type']) {
+                case 'has' :
+                    if (false !== strpos($this->content, $rule['expected'])) {
+                        return $this->handle($rule['fn']);
+                    }
+                    break;
+                    
+                case 'is':
+                    if ($this->content == $rule['expected']) {
+                        return $this->handle($rule['fn']);
+                    }
+                    break;
+                    
+                case 'match':
+                    if (preg_match($rule['expected'], $this->content)) {
+                        return $this->handle($rule['fn']);
+                    }
+                    break;
+            }
+        }
+    }
+    
+    protected function handleEvent()
+    {
+        if (isset($this->rules['event'][$this->event])
+            && isset($this->rules['event'][$this->event][$this->eventKey])) {
+            return $this->handle($this->rules['event'][$this->event][$this->eventKey]);
+        }
     }
 }
