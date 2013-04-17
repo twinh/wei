@@ -99,7 +99,7 @@ class Callback extends AbstractWidget
     protected $label;
     
     /**
-     * The media id, available when the message type is voice
+     * The media id, available when the message type is voice or video
      * 
      * @var string
      */
@@ -127,6 +127,13 @@ class Callback extends AbstractWidget
     protected $eventKey;
     
     /**
+     * The thumbnail id of video, available when the message type is video
+     * 
+     * @var string 
+     */
+    protected $thumbMediaId;
+    
+    /**
      * The HTTP raw post data, equals to $GLOBALS["HTTP_RAW_POST_DATA"] on default
      * 
      * @var string
@@ -143,7 +150,8 @@ class Callback extends AbstractWidget
         'event'     => array(),
         'image'     => null,
         'location'  => null,
-        'voice'     => null
+        'voice'     => null,
+        'video'     => null
     );
     
     /**
@@ -270,6 +278,11 @@ class Callback extends AbstractWidget
         return $this->eventKey;
     }
     
+    public function getThumbMediaId()
+    {
+        return $this->thumbMediaId;
+    }
+    
     /**
      * Parse the user input message and response matched rule message
      * 
@@ -300,10 +313,11 @@ class Callback extends AbstractWidget
             case 'location':
             case 'image':
             case 'voice':
+            case 'video':
                 if (isset($this->rules[$this->msgType])) {
                     $this->handle($this->rules[$this->msgType]);
                 }
-                break;  
+                break;
         }
         
         if (!$this->handled && $this->fallback) {
@@ -415,6 +429,18 @@ class Callback extends AbstractWidget
     public function receiveVoice(Closure $fn)
     {
         $this->rules['voice'] = $fn;
+        return $this;
+    }
+    
+    /**
+     * Attach a callback to handle video message
+     * 
+     * @param Closure $fn
+     * @return \Widget\Callback
+     */
+    public function receiveVideo(Closure $fn)
+    {
+        $this->rules['video'] = $fn;
         return $this;
     }
     
@@ -610,7 +636,8 @@ class Callback extends AbstractWidget
             'image'     => array('PicUrl'),
             'location'  => array('Location_X', 'Location_Y', 'Scale', 'Label'),
             'voice'     => array('MediaId', 'Format'),
-            'event'     => array('Event', 'EventKey')
+            'event'     => array('Event', 'EventKey'),
+            'video'     => array('MediaId', 'ThumbMediaId')
         );
         
         if ($this->postData) {
