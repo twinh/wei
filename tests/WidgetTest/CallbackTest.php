@@ -165,6 +165,23 @@ class CallbackTest extends TestCase
                         break;
                 }
         }
+        
+        switch ($output->MsgType) {
+            case 'music':
+                $this->assertEquals('Burning', $output->Music->Title);
+                $this->assertEquals('A song of Maria Arredondo', $output->Music->Description);
+                $this->assertEquals('url', $output->Music->MusicUrl);
+                $this->assertEquals('HQ url', $output->Music->HQMusicUrl);
+                break;
+            
+            case 'news':
+                $this->assertEquals('1', $output->ArticleCount);
+                $this->assertEquals('It\'s fine today', $output->Articles->item->Title);
+                $this->assertEquals('A new day is coming~~', $output->Articles->item->Description);
+                $this->assertEquals('http://pic-url', $output->Articles->item->PicUrl);
+                $this->assertEquals('http://link-url', $output->Articles->item->Url);
+                break;
+        }
     }
     
     public function providerForInputAndOutput()
@@ -193,6 +210,22 @@ class CallbackTest extends TestCase
                     'msgId' => '1234567890123456'
                 ),
                 'your input is 1'
+            ),
+            array(
+                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                $this->inputTextMessage('2'),
+                array(
+                    'content' => '2',
+                ),
+                '' // return music
+            ),
+            array(
+                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                $this->inputTextMessage('3'),
+                array(
+                    'content' => '3',
+                ),
+               '' // return news
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
