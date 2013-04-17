@@ -9,6 +9,20 @@ use Widget\Callback;
  */
 class CallbackTest extends TestCase
 {
+    public function testForbiddenForInvalidSignature()
+    {
+        $callback = $this->callback;
+        $this->query->set('signature', 'invalid');
+        $this->query->set('timestamp', 'invalid');
+        $this->query->set('nonce', 'invalid');
+        
+        $this->expectOutputString('Forbidden');
+        
+        $callback();
+        
+        $this->assertEquals('403', $this->response->getStatusCode());
+    }
+    
     /**
      * @dataProvider providerForInputAndOutput
      */

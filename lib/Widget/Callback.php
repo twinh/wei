@@ -277,7 +277,7 @@ class Callback extends AbstractWidget
         if ($this->checkSignature()) {
             echo htmlspecialchars($echostr, \ENT_QUOTES, 'UTF-8');
         } else {
-            return $this->response('Not Found', '404');
+            return $this->response('Forbidden', '403');
         }
 
         // 解析用户输入
