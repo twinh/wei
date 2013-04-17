@@ -306,7 +306,7 @@ class Callback extends AbstractWidget
                 break;  
         }
         
-        if (!$this->handled) {
+        if (!$this->handled && $this->fallback) {
             $this->handle($this->fallback);
         }
         
@@ -419,7 +419,7 @@ class Callback extends AbstractWidget
     }
     
     /**
-     * 当用户的输入不匹配任何规则时,指定会滴函数
+     *  Attach a callback which triggered when none of the rule handled the input
      * 
      * @param \Closure $fn
      * @return boolean
@@ -430,7 +430,7 @@ class Callback extends AbstractWidget
         return $this;
     }
     
-    public function handle($fn)
+    protected function handle($fn)
     {
         $this->handled = true;
         
@@ -439,7 +439,7 @@ class Callback extends AbstractWidget
         $this->responseMsg($content);
     }
     
-    public function responseMsg($content)
+    protected function responseMsg($content)
     {
         if (!$content instanceof SimpleXMLElement) {
             $content = $this->sendText($content);
