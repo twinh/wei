@@ -26,11 +26,12 @@ class CallbackTest extends TestCase
     /**
      * @dataProvider providerForInputAndOutput
      */
-    public function testInputAndOutput($query, $input, $data)
+    public function testInputAndOutput($query, $input, $data, $outputContent = null)
     {
         $cb = $this->callback;
         
         // Inject HTTP query
+        $gets = array();
         parse_str($query, $gets);
         $this->request->setOption('gets', $gets);
         
@@ -76,11 +77,11 @@ class CallbackTest extends TestCase
         });
 
         $cb->is('0', function(){
-            
+            return 'your input is 0';
         });
         
         $cb->is('1', function(){
-            return 'text message';
+            return 'your input is 1';
         });
         
         $cb->is('2', function(Callback $cb){
@@ -96,12 +97,20 @@ class CallbackTest extends TestCase
             ));
         });
         
+        $cb->has('iphone', function(){
+           return 'sorry, not this time'; 
+        });
+        
         $cb->has('ipad', function(Callback $cb){
             return $cb->sendText('Find a ipad ? ok, i will remember u', true);
         });
         
+        $cb->match('/twin/', function(){
+            return 'anyone find my brother?';
+        });
+        
         $cb->match('/twin/i', function(Callback $cb){
-            return $cb->sendText('I\'m here');
+            return 'Yes, I\'m here';
         });
         
         ob_start();
@@ -117,6 +126,10 @@ class CallbackTest extends TestCase
         $this->assertEquals('fromUser', $output->ToUserName);
         
         switch ($cb->getMsgType()) {
+            case 'text':
+                $this->assertEquals($outputContent, $output->Content);
+                break;
+                
             case 'image':
                 $this->assertEquals('you sent a picture to me', $output->Content);
                 break;
@@ -166,7 +179,8 @@ class CallbackTest extends TestCase
                     'toUserName' => 'toUser',
                     'msgType' => 'text',
                     'msgId' => '1234567890123456'
-                )
+                ),
+                'your input is 0'
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -177,7 +191,24 @@ class CallbackTest extends TestCase
                     'toUserName' => 'toUser',
                     'msgType' => 'text',
                     'msgId' => '1234567890123456'
-                )
+                ),
+                'your input is 1'
+            ),
+            array(
+                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                $this->inputTextMessage('I want a ipad'),
+                array(
+                    'content' => 'I want a ipad',
+                ),
+                'Find a ipad ? ok, i will remember u'
+            ),
+            array(
+                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                $this->inputTextMessage('Are u Twin?'),
+                array(
+                    'content' => 'Are u Twin?',
+                ),
+                'Yes, I\'m here'
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -195,7 +226,7 @@ class CallbackTest extends TestCase
                     'msgType' => 'image',
                     'msgId' => '1234567890123456',
                     'picUrl' => 'http://mmsns.qpic.cn/mmsns/X1X15BcJOnSyeD9OtgfgM5RovwBP83QMHpd2YtO8DqtWG5jarm937g/0'
-                ),
+                )
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
