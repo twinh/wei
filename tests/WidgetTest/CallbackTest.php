@@ -26,16 +26,16 @@ class CallbackTest extends TestCase
     public function testEchostr()
     {
         $callback = $this->callback;
-        $callback->fallback(function(){});
         $this->query->set('signature', 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583');
         $this->query->set('timestamp', '1366032735');
         $this->query->set('nonce', '1365872231');
         $this->query->set('echostr', $rand = mt_rand(0, 100000));
         
-        $this->expectOutputString($rand);
-        
+        //$this->expectOutputString($rand);
+        ob_start();
         $callback();
-        
+        $this->assertEquals($rand, ob_get_clean());
+
         $this->assertEquals(200, $this->response->getStatusCode()); 
     }
     
@@ -94,6 +94,10 @@ class CallbackTest extends TestCase
         
         $cb->receiveVideo(function(){
             return 'good video';
+        });
+        
+        $cb->receiveLink(function(){
+            return 'got a link';
         });
 
         $cb->is('0', function(){
@@ -164,6 +168,10 @@ class CallbackTest extends TestCase
             
             case 'video':
                 $this->assertEquals('good video', $output->Content);
+                break;
+            
+            case 'link':
+                $this->assertEquals('got a link', $output->Content);
                 break;
             
             case 'event':
@@ -404,6 +412,25 @@ class CallbackTest extends TestCase
                     'msgType' => 'video',
                     'mediaId' => '1ilIgC6h1vmkKqoodLK-PiQy6DhVccDKm0cnLANsbjxKyDldYBTlhSepr3hAg5K9',
                     'thumbMediaId' => 'ZWWu54xvKw6PRfEmrdzZuzfPAiKBpQMEPHfB732tF1QHazqp1wvN5nFWF18ppCto'
+                )
+            ),
+            array(
+                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                '<xml>
+                    <ToUserName><![CDATA[toUser]]></ToUserName>
+                    <FromUserName><![CDATA[fromUser]]></FromUserName>
+                    <CreateTime>1351776360</CreateTime>
+                    <MsgType><![CDATA[link]]></MsgType>
+                    <Title><![CDATA[公众平台官网链接]]></Title>
+                    <Description><![CDATA[公众平台官网链接]]></Description>
+                    <Url><![CDATA[url]]></Url>
+                    <MsgId>1234567890123456</MsgId>
+                 </xml>',
+                array(
+                    'msgType' => 'link',
+                    'title' => '公众平台官网链接',
+                    'description' => '公众平台官网链接',
+                    'url' => 'url'
                 )
             )
         );
