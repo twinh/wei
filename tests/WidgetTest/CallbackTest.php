@@ -84,8 +84,8 @@ class CallbackTest extends TestCase
                 $this->inputTextMessage('0'),
                 array(
                     'content' => '0',
-                    'from' => 'fromUser',
-                    'to' => 'toUser',
+                    'fromUserName' => 'fromUser',
+                    'toUserName' => 'toUser',
                     'msgType' => 'text',
                     'msgId' => '1234567890123456'
                 )
@@ -95,8 +95,8 @@ class CallbackTest extends TestCase
                 $this->inputTextMessage('1'),
                 array(
                     'content' => '1',
-                    'from' => 'fromUser',
-                    'to' => 'toUser',
+                    'fromUserName' => 'fromUser',
+                    'toUserName' => 'toUser',
                     'msgType' => 'text',
                     'msgId' => '1234567890123456'
                 )
@@ -112,8 +112,8 @@ class CallbackTest extends TestCase
                  <MsgId>1234567890123456</MsgId>
                  </xml>',
                 array(
-                    'from' => 'fromUser',
-                    'to' => 'toUser',
+                    'fromUserName' => 'fromUser',
+                    'toUserName' => 'toUser',
                     'msgType' => 'image',
                     'msgId' => '1234567890123456',
                     'picUrl' => 'http://mmsns.qpic.cn/mmsns/X1X15BcJOnSyeD9OtgfgM5RovwBP83QMHpd2YtO8DqtWG5jarm937g/0'

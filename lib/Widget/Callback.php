@@ -39,14 +39,14 @@ class Callback extends AbstractWidget
      * 
      * @var string
      */
-    protected $to;
+    protected $toUserName;
     
     /**
      * The user(OpenID) who sent message to you
      * 
      * @var string
      */
-    protected $from;
+    protected $fromUserName;
     
     /**
      * The message id
@@ -183,9 +183,9 @@ class Callback extends AbstractWidget
      * 
      * @return string
      */
-    public function getFrom()
+    public function getFromUserName()
     {
-        return $this->from;
+        return $this->fromUserName;
     }
 
     /**
@@ -193,9 +193,9 @@ class Callback extends AbstractWidget
      * 
      * @return string
      */
-    public function getTo()
+    public function getToUserName()
     {
-        return $this->to;
+        return $this->toUserName;
     }
     
     /**
@@ -493,8 +493,8 @@ class Callback extends AbstractWidget
     protected function send($type, SimpleXMLElement $xml, $mark = false)
     {
         $this
-            ->addCDataChild($xml, 'ToUserName', $this->from)
-            ->addCDataChild($xml, 'FromUserName', $this->to)
+            ->addCDataChild($xml, 'ToUserName', $this->fromUserName)
+            ->addCDataChild($xml, 'FromUserName', $this->toUserName)
             ->addCDataChild($xml, 'MsgType', $type);
         
         $xml->addChild('CreateTime', time());
@@ -554,6 +554,7 @@ class Callback extends AbstractWidget
      */
     protected function parsePostData()
     {
+        $defaults = array('FromUserName', 'ToUserName', 'MsgId', 'MsgType', 'CreateTime');
         $fields = array(
             'text'      => array('Content'),
             'image'     => array('PicUrl'),
@@ -564,12 +565,9 @@ class Callback extends AbstractWidget
         
         if ($this->postData) {
             $postObj        = simplexml_load_string($this->postData, 'SimpleXMLElement', LIBXML_NOCDATA);
-            $this->from     = (string)$postObj->FromUserName;
-            $this->to       = (string)$postObj->ToUserName;
-            $this->msgId    = (string)$postObj->MsgId;
-            $this->msgType  = (string)$postObj->MsgType;
+            $this->msgType  = isset($postObj->MsgType) ? (string)$postObj->MsgType : null;
             if (isset($fields[$this->msgType])) {
-                foreach ($fields[$this->msgType] as $field) {
+                foreach (array_merge($defaults,$fields[$this->msgType]) as $field) {
                     if (isset($postObj->$field)) {
                         $name = lcfirst(strtr($field, array('_' => '')));
                         $this->$name = (string)$postObj->$field;
