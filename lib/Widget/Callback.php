@@ -554,7 +554,7 @@ class Callback extends AbstractWidget
      */
     protected function parsePostData()
     {
-        $defaults = array('FromUserName', 'ToUserName', 'MsgId', 'MsgType', 'CreateTime');
+        $defaults = array('FromUserName', 'ToUserName', 'MsgId', 'CreateTime');
         $fields = array(
             'text'      => array('Content'),
             'image'     => array('PicUrl'),
@@ -566,7 +566,7 @@ class Callback extends AbstractWidget
         if ($this->postData) {
             $postObj        = simplexml_load_string($this->postData, 'SimpleXMLElement', LIBXML_NOCDATA);
             $this->msgType  = isset($postObj->MsgType) ? (string)$postObj->MsgType : null;
-            if (isset($fields[$this->msgType])) {
+            if (isset($fields[$this->msgType])) { 
                 foreach (array_merge($defaults,$fields[$this->msgType]) as $field) {
                     if (isset($postObj->$field)) {
                         $name = lcfirst(strtr($field, array('_' => '')));
