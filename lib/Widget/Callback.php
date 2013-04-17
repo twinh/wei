@@ -8,8 +8,8 @@
 
 namespace Widget;
 
-use \SimpleXMLElement;
 use \Closure;
+use \SimpleXMLElement;
 
 /**
  * The widget for WeChat(Weixin) callback message
@@ -301,23 +301,6 @@ class Callback extends AbstractWidget
         return $this;
     }
     
-    protected function handle($fn)
-    {
-        $this->handled = true;
-        
-        $content = $fn($this, $this->widget);
-
-        $this->responseMsg($content);
-    }
-    
-    protected function responseMsg($content)
-    {
-        if (!$content instanceof SimpleXMLElement) {
-            $content = $this->sendText($content);
-        }
-        echo $content->asXml();
-    }
-
     /**
      * Generate text message for response
      * 
@@ -585,6 +568,23 @@ class Callback extends AbstractWidget
     public function getUrl()
     {
         return $this->url;
+    }
+    
+    protected function handle($fn)
+    {
+        $this->handled = true;
+        
+        $content = $fn($this, $this->widget);
+
+        $this->responseMsg($content);
+    }
+    
+    protected function responseMsg($content)
+    {
+        if (!$content instanceof SimpleXMLElement) {
+            $content = $this->sendText($content);
+        }
+        echo $content->asXml();
     }
     
     /**
