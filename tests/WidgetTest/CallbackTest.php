@@ -63,13 +63,7 @@ class CallbackTest extends TestCase
         $cb->setOption('postData', $input);
         
         $cb->fallback(function($callback){
-            return "Your input is " . $callback->getContent() . "\n"
-                . "Type a number to see more \n"
-                . "[0]Show menu message"
-                . "[1]Show text message\n"
-                . "[2]Show music message\n"
-                . "[3]Show richtext message\n"
-                . "[4]Show a random number\n";
+            return "Your input is " . $callback->getContent();
         });
         
         $cb->subscribe(function(){
@@ -258,6 +252,14 @@ class CallbackTest extends TestCase
                     'content' => '2',
                 ),
                 '' // return music
+            ),
+            array(
+                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                $this->inputTextMessage('99999'),
+                array(
+                    
+                ),
+               'Your input is 99999'
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',

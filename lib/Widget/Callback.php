@@ -712,23 +712,22 @@ class Callback extends AbstractWidget
     protected function handleText()
     {
         foreach ($this->rules['text'] as $rule) {
+            $matched = false;
             switch ($rule['type']) {
-                case 'has' :
-                    if (false !== strpos($this->content, $rule['keyword'])) {
-                        return $this->handle($rule['fn']);
-                    }
-                    break;
-                    
                 case 'is':
-                    if ($this->content == $rule['keyword']) {
-                        return $this->handle($rule['fn']);
-                    }
+                    $matched = $this->content == $rule['keyword'];
                     break;
                     
+                case 'has' :
+                    $matched = false !== strpos($this->content, $rule['keyword']);
+                    break;
+                
                 case 'match':
-                    if (preg_match($rule['keyword'], $this->content)) {
-                        return $this->handle($rule['fn']);
-                    }
+                    $matched = preg_match($rule['keyword'], $this->content);
+                    break;
+            }
+            if ($matched) {
+                return $this->handle($rule['fn']);
             }
         }
     }
