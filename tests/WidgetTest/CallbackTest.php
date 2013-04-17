@@ -32,6 +32,34 @@ class CallbackTest extends TestCase
                 . "[3]Show richtext message\n"
                 . "[4]Show a random number\n";
         });
+        
+        $cb->subscribe(function(){
+            return 'you are my 100 reader, wonderful!';
+        });
+        
+        $cb->unsubscribe(function(){
+            return 'you won\'t see this message';
+        });
+        
+        $cb->click('button', function(){
+            return 'you clicked the button';
+        });
+        
+        $cb->click('index', function(){
+            return 'you clicked index';
+        });
+        
+        $cb->receiveImage(function(){
+            return 'you sent a picture to me';
+        });
+        
+        $cb->receiveLocation(function(){
+            return 'the place looks livable';
+        });
+        
+        $cb->receiveVoice(function(){
+            return 'u sound like a old man~';
+        });
 
         $cb->is('0', function(){
             
@@ -71,9 +99,45 @@ class CallbackTest extends TestCase
         }
         
         $output = simplexml_load_string($content, 'SimpleXMLElement', LIBXML_NOCDATA);
-
         $this->assertEquals('toUser', $output->FromUserName);
         $this->assertEquals('fromUser', $output->ToUserName);
+        
+        switch ($cb->getMsgType()) {
+            case 'image':
+                $this->assertEquals('you sent a picture to me', $output->Content);
+                break;
+            
+            case 'location':
+                $this->assertEquals('the place looks livable', $output->Content);
+                break;
+            
+            case 'voice':
+                $this->assertEquals('u sound like a old man~', $output->Content);
+                break;
+            
+            case 'event':
+                switch ($cb->getEvent()) {
+                    case 'subscribe':
+                        $this->assertEquals('you are my 100 reader, wonderful!', $output->Content);
+                        break;
+                    
+                    case 'unsubscribe':
+                        $this->assertEquals('you won\'t see this message', $output->Content);
+                        break;
+                    
+                    case 'click' :
+                        switch ($cb->getEventKey()) {
+                            case 'button':
+                                $this->assertEquals('you clicked the button', $output->Content);
+                                break;
+                            
+                            case 'index':
+                                $this->assertEquals('you clicked index', $output->Content);
+                                break;
+                        }
+                        break;
+                }
+        }
     }
     
     public function providerForInputAndOutput()
@@ -199,12 +263,28 @@ class CallbackTest extends TestCase
                     <CreateTime>1366131865</CreateTime> 
                     <MsgType><![CDATA[event]]></MsgType> 
                     <Event><![CDATA[CLICK]]></Event> 
-                    <EventKey><![CDATA[V1001_HELLO_WORLD]]></EventKey>
+                    <EventKey><![CDATA[index]]></EventKey>
                  </xml>',
                 array(
                     'msgType' => 'event',
                     'event' => 'CLICK',
-                    'eventKey' => 'V1001_HELLO_WORLD'
+                    'eventKey' => 'index'
+                )
+            ),
+            array(
+                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                '<xml>
+                    <ToUserName><![CDATA[toUser]]></ToUserName> 
+                    <FromUserName><![CDATA[fromUser]]></FromUserName> 
+                    <CreateTime>1366131865</CreateTime> 
+                    <MsgType><![CDATA[event]]></MsgType> 
+                    <Event><![CDATA[CLICK]]></Event> 
+                    <EventKey><![CDATA[button]]></EventKey>
+                 </xml>',
+                array(
+                    'msgType' => 'event',
+                    'event' => 'CLICK',
+                    'eventKey' => 'button'
                 )
             )
         );
