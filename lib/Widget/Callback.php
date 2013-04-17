@@ -281,7 +281,7 @@ class Callback extends AbstractWidget
         if ($this->checkSignature()) {
             $this->response(htmlspecialchars($echostr, \ENT_QUOTES, 'UTF-8'));
         } else {
-            return $this->response('Forbidden', '403');
+            return $this->response('Forbidden', 403);
         }
 
         // Parse user input data

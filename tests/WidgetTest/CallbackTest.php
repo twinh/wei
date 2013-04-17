@@ -15,12 +15,28 @@ class CallbackTest extends TestCase
         $this->query->set('signature', 'invalid');
         $this->query->set('timestamp', 'invalid');
         $this->query->set('nonce', 'invalid');
-        
+    
         $this->expectOutputString('Forbidden');
         
         $callback();
         
         $this->assertEquals('403', $this->response->getStatusCode());
+    }
+    
+    public function testEchostr()
+    {
+        $callback = $this->callback;
+        $callback->fallback(function(){});
+        $this->query->set('signature', 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583');
+        $this->query->set('timestamp', '1366032735');
+        $this->query->set('nonce', '1365872231');
+        $this->query->set('echostr', $rand = mt_rand(0, 100000));
+        
+        $this->expectOutputString($rand);
+        
+        $callback();
+        
+        $this->assertEquals(200, $this->response->getStatusCode()); 
     }
     
     /**
