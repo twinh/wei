@@ -179,8 +179,8 @@ class CallbackTest extends TestCase
         }
         
         $output = simplexml_load_string($content, 'SimpleXMLElement', LIBXML_NOCDATA);
-        $this->assertEquals('toUser', $output->FromUserName);
-        $this->assertEquals('fromUser', $output->ToUserName);
+        $this->assertEquals($cb->getToUserName(), (string)$output->FromUserName);
+        $this->assertEquals($cb->getFromUserName(), (string)$output->ToUserName);
         
         // Test mark message
         if (is_bool($mark)) {
@@ -263,8 +263,6 @@ class CallbackTest extends TestCase
                 $this->inputTextMessage('0'),
                 array(
                     'content' => '0',
-                    'fromUserName' => 'fromUser',
-                    'toUserName' => 'toUser',
                     'msgType' => 'text',
                     'msgId' => '1234567890123456'
                 ),
@@ -276,8 +274,6 @@ class CallbackTest extends TestCase
                 $this->inputTextMessage('1'),
                 array(
                     'content' => '1',
-                    'fromUserName' => 'fromUser',
-                    'toUserName' => 'toUser',
                     'msgType' => 'text',
                     'msgId' => '1234567890123456'
                 ),
@@ -349,8 +345,6 @@ class CallbackTest extends TestCase
                  <MsgId>1234567890123456</MsgId>
                  </xml>',
                 array(
-                    'fromUserName' => 'fromUser',
-                    'toUserName' => 'toUser',
                     'createTime' => '1366118361',
                     'msgType' => 'image',
                     'msgId' => '1234567890123456',
@@ -505,7 +499,15 @@ class CallbackTest extends TestCase
                     'url' => 'url'
                 ),
                 false
-            )
+            ),
+            array(
+                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                'invalid xml',
+                array(
+                    'msgType' => null
+                ),
+                false
+            ),
         );
     }
     
