@@ -63,13 +63,20 @@ class Callback extends AbstractWidget
      * @todo better name
      */
     protected $fallback;
-    
+     
     /**
      * Are there any callbacks handled the message ?
      * 
      * @var bool
      */
     protected $handled = false;
+    
+    /**
+     * Available when the matched the "startsWith" rule
+     * 
+     * @var string
+     */
+    protected $keyword;
     
     protected $toUserName;
     
@@ -431,6 +438,16 @@ class Callback extends AbstractWidget
     }
     
     /**
+     * Returns the keyword
+     * 
+     * @return string
+     */
+    public function getKeyword()
+    {
+        return $this->keyword;
+    }
+
+    /**
      * Returns your user id
      * 
      * @return string
@@ -770,7 +787,11 @@ class Callback extends AbstractWidget
                     break;
                 
                 case 'startsWith':
-                    $matched = 0 === stripos($this->content, $rule['keyword']);
+                    if (0 === stripos($this->content, $rule['keyword'])) {
+                        $matched = true;
+                        $this->keyword = substr($this->content, strlen($rule['keyword']));
+                    }
+                    
                     break;
                 
                 case 'match':
