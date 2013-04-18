@@ -131,7 +131,8 @@ class Callback extends AbstractWidget
                 return $this;
             }
         } else {
-            return $this->response('Forbidden', 403);
+            $this->response('Forbidden', 403);
+            return $this;
         }
 
         // Parse user input data

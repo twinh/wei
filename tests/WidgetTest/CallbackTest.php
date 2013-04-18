@@ -18,8 +18,9 @@ class CallbackTest extends TestCase
     
         $this->expectOutputString('Forbidden');
         
-        $callback();
+        $return = $callback();
         
+        $this->assertInstanceOf('\Widget\Callback', $return);
         $this->assertEquals('403', $this->response->getStatusCode());
     }
     
@@ -33,9 +34,10 @@ class CallbackTest extends TestCase
         
         //$this->expectOutputString($rand);
         ob_start();
-        $callback();
+        $return = $callback();
         $this->assertEquals($rand, ob_get_clean());
 
+        $this->assertInstanceOf('\Widget\Callback', $return);
         $this->assertEquals(200, $this->response->getStatusCode()); 
     }
     
@@ -159,9 +161,12 @@ class CallbackTest extends TestCase
         });
         
         ob_start();
-        $cb();
+        $return = $cb();
         $content = ob_get_clean();
 
+        
+        $this->assertInstanceOf('\Widget\Callback', $return);
+        
         foreach ($data as $name => $value) {
             $this->assertEquals($value, $cb->{'get' . $name}());
         }
