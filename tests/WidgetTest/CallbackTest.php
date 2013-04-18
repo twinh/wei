@@ -39,6 +39,26 @@ class CallbackTest extends TestCase
         $this->assertEquals(200, $this->response->getStatusCode()); 
     }
     
+    public function testEchorStrOnlyWhenAuth()
+    {
+        $cb = $this->callback;
+        
+        $cb->fallback(function(){
+            return 'nerver see me';
+        });
+        
+        $this->query->set('signature', 'c61b3d7eab5dfea9b72af0b1574ff2f4d2109583');
+        $this->query->set('timestamp', '1366032735');
+        $this->query->set('nonce', '1365872231');
+        $this->query->set('echostr', $rand = mt_rand(0, 100000));
+        
+        //$this->expectOutputString($rand);
+        ob_start();
+        $cb();
+        $this->assertEquals($rand, ob_get_clean());
+    }
+    
+    
     public function testHttpRawPostData()
     {
         $GLOBALS['HTTP_RAW_POST_DATA'] = 'test';
@@ -52,6 +72,8 @@ class CallbackTest extends TestCase
      */
     public function testInputAndOutput($query, $input, $data, $outputContent = null)
     {
+        $this->request->setMethod('POST');
+        
         $cb = $this->callback;
         
         // Inject HTTP query

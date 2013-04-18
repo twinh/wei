@@ -126,7 +126,10 @@ class Callback extends AbstractWidget
         // Check if it's requested from the WeChat server
         $echostr = $this->query('echostr');
         if ($this->checkSignature()) {
-            $this->response(htmlspecialchars($echostr, \ENT_QUOTES, 'UTF-8'));
+            if ($this->request->inGet()) {
+                $this->response(htmlspecialchars($echostr, \ENT_QUOTES, 'UTF-8'));
+                return $this;
+            }
         } else {
             return $this->response('Forbidden', 403);
         }
