@@ -391,6 +391,33 @@ class Callback extends AbstractWidget
     /**
      * Generate article message for response
      * 
+     * ```
+     * // Sends one article
+     * $callback->sendArticle(array(
+     *     'title' => 'The title of article',
+     *     'description' => 'The description of article',
+     *     'picUrl' => 'The picture URL of article',
+     *     'url' => 'The URL link to of article'
+     * ));
+     * 
+     * // Sends two or more articles
+     * $callback->sendArticle(array(
+     *     array(
+     *         'title' => 'The title of article',
+     *         'description' => 'The description of article',
+     *         'picUrl' => 'The picture URL of article',
+     *         'url' => 'The URL link to of article'
+     *     ),
+     *     array(
+     *         'title' => 'The title of article',
+     *         'description' => 'The description of article',
+     *         'picUrl' => 'Te picture URL of article',
+     *         'url' => 'The URL link to of article'
+     *     ),
+     *     // more...
+     *  ));
+     * ```
+     * 
      * @param array $articles The article array
      * @param bool $mark Whenter mark the message or not
      * @return \SimpleXMLElement 
