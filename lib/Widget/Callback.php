@@ -246,6 +246,18 @@ class Callback extends AbstractWidget
     }
     
     /**
+     * Attach a callback with a keyword, which triggered when user input starts with the keyword
+     * 
+     * @param string $keyword The keyword to search in user input
+     * @param \Closure $fn
+     * @return \Widget\Callback
+     */
+    public function startsWith($keyword, Closure $fn)
+    {
+        return $this->addRule('startsWith', $keyword, $fn);
+    }
+    
+    /**
      * Attach a callback with a regex pattern which triggered when user input match the pattern
      * 
      * @param string $pattern The pattern to match
@@ -755,6 +767,10 @@ class Callback extends AbstractWidget
                     
                 case 'has' :
                     $matched = false !== strpos($this->content, $rule['keyword']);
+                    break;
+                
+                case 'startsWith':
+                    $matched = 0 === stripos($this->content, $rule['keyword']);
                     break;
                 
                 case 'match':
