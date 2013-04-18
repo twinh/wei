@@ -154,7 +154,9 @@ class CallbackTest extends TestCase
             return $cb->sendText('Find a ipad ? ok, i will remember u', true);
         });
         
-        $cb->startsWith('t', function(){
+        $that = $this;
+        $cb->startsWith('t', function($cb) use($that){
+            $that->assertEquals(' xx', $cb->getKeyword());
             return 'The translation result is: xx';
         });
         
