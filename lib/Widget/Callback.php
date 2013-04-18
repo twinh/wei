@@ -16,6 +16,7 @@ use \SimpleXMLElement;
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  * @link        http://mp.weixin.qq.com/wiki/index.php?title=%E6%B6%88%E6%81%AF%E6%8E%A5%E5%8F%A3%E6%8C%87%E5%8D%97
+ * @property    \Widget\Response $response The HTTP response widget
  * @method      \Widget\Response response(string $content, int $status = 200) Send headers and output content
  * @method      string query(string $name) Returns the URL query parameter value
  */
@@ -124,22 +125,33 @@ class Callback extends AbstractWidget
     }
 
     /**
-     * Parse the user input message and response matched rule message
+     * Output the matched rule message
      * 
      * @return \Widget\Callback
      */
     public function __invoke()
     {
+        $this->response($this->run());
+
+        return $this;
+    }
+    
+    /**
+     * Parse the user input message and return matched rule message
+     * 
+     * @return string|null
+     */
+    public function run()
+    {
         // Check if it's requested from the WeChat server
         if ($this->checkSignature()) {
             if ($echostr = $this->query('echostr')) {
                 // Response echostr for fist time authentication
-                $this->response(htmlspecialchars($echostr, \ENT_QUOTES, 'UTF-8'));
-                return $this;
+                return htmlspecialchars($echostr, \ENT_QUOTES, 'UTF-8');
             }
         } else {
-            $this->response('Forbidden', 403);
-            return $this;
+            $this->response->setStatusCode(403);
+            return 'Forbidden';
         }
 
         // Parse user input data
@@ -147,14 +159,16 @@ class Callback extends AbstractWidget
         
         switch ($this->msgType) {
             case 'text' :
-                $this->handleText();
+                if ($result = $this->handleText()) {
+                    return $result;
+                }
                 break;
                 
             case  'event':
                 $eventRule = $this->rules['event'];
                 if (isset($eventRule[$this->event])
                     && isset($eventRule[$this->event][$this->eventKey])) {
-                    $this->handle($eventRule[$this->event][$this->eventKey]);
+                    return $this->handle($eventRule[$this->event][$this->eventKey]);
                 }
                 break;
                 
@@ -164,16 +178,14 @@ class Callback extends AbstractWidget
             case 'video':
             case 'link':
                 if (isset($this->rules[$this->msgType])) {
-                    $this->handle($this->rules[$this->msgType]);
+                    return $this->handle($this->rules[$this->msgType]);
                 }
                 break;
         }
         
         if (!$this->handled && $this->fallback) {
-            $this->handle($this->fallback);
+            return $this->handle($this->fallback);
         }
-        
-        return $this;
     }
     
     /**
@@ -607,7 +619,7 @@ class Callback extends AbstractWidget
             $content = $this->sendText($content);
         }
 
-        $this->response($content->asXML());
+        return $content->asXML();
     }
         
     /**
