@@ -154,6 +154,10 @@ class CallbackTest extends TestCase
             return $cb->sendText('Find a ipad ? ok, i will remember u', true);
         });
         
+        $cb->startsWith('t', function(){
+            return 'The translation result is: xx';
+        });
+        
         $cb->match('/twin/', function(){
             return 'anyone find my brother?';
         });
@@ -294,6 +298,15 @@ class CallbackTest extends TestCase
                     
                 ),
                'Your input is 99999',
+                false
+            ),
+            array(
+                'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
+                $this->inputTextMessage('t xx'),
+                array(
+                    
+                ),
+               'The translation result is: xx',
                 false
             ),
             array(
