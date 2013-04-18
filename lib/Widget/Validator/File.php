@@ -217,18 +217,18 @@ class File extends AbstractValidator
         
         // Validate file mime type
         if ($this->mimeTypes || $this->excludeMimeTypes) {
-            $this->mimeType = $this->getMimeType($file);
-            if (!$this->mimeType) {
+            $mimeType = $this->getMimeType();
+            if (!$mimeType) {
                 $this->addError('mimeTypeNotDetected');
                 return false;
             }
         }
 
-        if ($this->mimeTypes && !$this->inMimeType($this->mimeType, $this->mimeTypes)) {
+        if ($this->mimeTypes && !$this->inMimeType($mimeType, $this->mimeTypes)) {
             $this->addError('mimeTypes');
         }
         
-        if ($this->excludeMimeTypes && $this->inMimeType($this->mimeType, $this->excludeMimeTypes)) {
+        if ($this->excludeMimeTypes && $this->inMimeType($mimeType, $this->excludeMimeTypes)) {
             $this->addError('excludeMimeTypes');
         }
         
@@ -397,16 +397,18 @@ class File extends AbstractValidator
     /**
      * Returns the file mime type on success
      * 
-     * @param string $file The file path
      * @return string|false
      * @throws \Widget\Exception\UnexpectedValueException When failed to open fileinfo database
      */
-    public function getMimeType($file)
+    public function getMimeType()
     {
-        $finfo = finfo_open(FILEINFO_MIME_TYPE, $this->magicFile);
-        if (!$finfo) {
-            throw new UnexpectedValueException('Failed to open fileinfo database');
+        if (!$this->mimeType) {
+            $finfo = finfo_open(FILEINFO_MIME_TYPE, $this->magicFile);
+            if (!$finfo) {
+                throw new UnexpectedValueException('Failed to open fileinfo database');
+            }
+            $this->mimeType = finfo_file($finfo, $this->file);
         }
-        return finfo_file($finfo, $file);
+        return $this->mimeType;
     }
 }
