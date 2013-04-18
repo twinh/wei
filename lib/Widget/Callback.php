@@ -51,6 +51,13 @@ class Callback extends AbstractWidget
     );
     
     /**
+     * Whether return the mark message or not
+     * 
+     * @var bool
+     */
+    protected $mark = false;
+    
+    /**
      * @var string
      * @todo better name
      */
@@ -317,7 +324,7 @@ class Callback extends AbstractWidget
      * @param bool $mark Whenter mark the message or not
      * @return \SimpleXMLElement
      */
-    public function sendText($content, $mark = false)
+    public function sendText($content, $mark = null)
     {
         $xml = $this->createXml();
 
@@ -336,7 +343,7 @@ class Callback extends AbstractWidget
      * @param string $mark Whenter mark the message or not
      * @return \SimpleXMLElement
      */
-    public function sendMusic($title, $description, $url, $hqUrl = null, $mark = false)
+    public function sendMusic($title, $description, $url, $hqUrl = null, $mark = null)
     {
         $xml    = $this->createXml();
         $music  = $xml->addChild('Music');
@@ -357,7 +364,7 @@ class Callback extends AbstractWidget
      * @param bool $mark Whenter mark the message or not
      * @return \SimpleXMLElement 
      */
-    public function sendArticle(array $articles, $mark = false)
+    public function sendArticle(array $articles, $mark = null)
     {
         $xml = $this->createXml();
 
@@ -385,6 +392,18 @@ class Callback extends AbstractWidget
         }
 
         return $this->send('news', $xml, $mark);
+    }
+    
+    /**
+     * Whether return the mark message or not
+     * 
+     * @param bool $bool
+     * @return \Widget\Callback
+     */
+    public function setMark($bool)
+    {
+        $this->mark = (bool)$bool;
+        return $this;
     }
     
     /**
@@ -599,7 +618,7 @@ class Callback extends AbstractWidget
      * @param bool $mark $mark Whenter mark the message or not
      * @return \SimpleXMLElement
      */
-    protected function send($type, SimpleXMLElement $xml, $mark = false)
+    protected function send($type, SimpleXMLElement $xml, $mark = null)
     {
         $this
             ->addCDataChild($xml, 'ToUserName', $this->fromUserName)
@@ -607,7 +626,7 @@ class Callback extends AbstractWidget
             ->addCDataChild($xml, 'MsgType', $type);
         
         $xml->addChild('CreateTime', time());
-        $xml->addChild('FuncFlag', (int)$mark);
+        $xml->addChild('FuncFlag', (int)(is_bool($mark) ? $mark : $this->mark));
         
         return $xml;
     }

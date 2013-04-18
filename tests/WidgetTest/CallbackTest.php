@@ -71,7 +71,7 @@ class CallbackTest extends TestCase
     /**
      * @dataProvider providerForInputAndOutput
      */
-    public function testInputAndOutput($query, $input, $data, $outputContent = null)
+    public function testInputAndOutput($query, $input, $data, $outputContent = null, $mark = null)
     {
         $cb = $this->callback;
         
@@ -103,11 +103,13 @@ class CallbackTest extends TestCase
             return 'you clicked index';
         });
         
-        $cb->receiveImage(function(){
+        $cb->receiveImage(function($cb){
+            $cb->setMark(true);
             return 'you sent a picture to me';
         });
         
-        $cb->receiveLocation(function(){
+        $cb->receiveLocation(function($cb){
+            $cb->setMark(false);
             return 'the place looks livable';
         });
         
@@ -145,7 +147,7 @@ class CallbackTest extends TestCase
         });
         
         $cb->has('iphone', function(){
-           return 'sorry, not this time'; 
+            return 'sorry, not this time'; 
         });
         
         $cb->has('ipad', function(Callback $cb){
@@ -164,7 +166,6 @@ class CallbackTest extends TestCase
         $return = $cb();
         $content = ob_get_clean();
 
-        
         $this->assertInstanceOf('\Widget\Callback', $return);
         
         foreach ($data as $name => $value) {
@@ -175,6 +176,12 @@ class CallbackTest extends TestCase
         $this->assertEquals('toUser', $output->FromUserName);
         $this->assertEquals('fromUser', $output->ToUserName);
         
+        // Test mark message
+        if (is_bool($mark)) {
+            $this->assertEquals($mark, (bool)(string)$output->FuncFlag);
+        }
+        
+        // Test message content
         switch ($cb->getMsgType()) {
             case 'text':
                 $this->assertEquals($outputContent, $output->Content);
@@ -255,7 +262,8 @@ class CallbackTest extends TestCase
                     'msgType' => 'text',
                     'msgId' => '1234567890123456'
                 ),
-                'your input is 0'
+                'your input is 0',
+                false
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -267,7 +275,8 @@ class CallbackTest extends TestCase
                     'msgType' => 'text',
                     'msgId' => '1234567890123456'
                 ),
-                'your input is 1'
+                'your input is 1',
+                false
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -275,7 +284,8 @@ class CallbackTest extends TestCase
                 array(
                     'content' => '2',
                 ),
-                '' // return music
+                '', // return music
+                true
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -283,7 +293,8 @@ class CallbackTest extends TestCase
                 array(
                     
                 ),
-               'Your input is 99999'
+               'Your input is 99999',
+                false
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -291,7 +302,8 @@ class CallbackTest extends TestCase
                 array(
                     'content' => '3',
                 ),
-               '' // return news
+                '', // return news
+                false
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -299,7 +311,8 @@ class CallbackTest extends TestCase
                 array(
                     'content' => 'I want a ipad',
                 ),
-                'Find a ipad ? ok, i will remember u'
+                'Find a ipad ? ok, i will remember u',
+                true
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -307,7 +320,8 @@ class CallbackTest extends TestCase
                 array(
                     'content' => 'Are u Twin?',
                 ),
-                'Yes, I\'m here'
+                'Yes, I\'m here',
+                false
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -326,7 +340,8 @@ class CallbackTest extends TestCase
                     'msgType' => 'image',
                     'msgId' => '1234567890123456',
                     'picUrl' => 'http://mmsns.qpic.cn/mmsns/X1X15BcJOnSyeD9OtgfgM5RovwBP83QMHpd2YtO8DqtWG5jarm937g/0'
-                )
+                ),
+                true
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -348,7 +363,8 @@ class CallbackTest extends TestCase
                     'scale' => '15',
                     'label' => '中国广东省深圳市 邮政编码: 518049',
                     'msgId' => '1234567890123456'
-                )
+                ),
+                false
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -366,7 +382,8 @@ class CallbackTest extends TestCase
                     'mediaId' => 'vLzm6LJh88oq6xFk5HzC28AbbjQJgnJZH5r5eqBLs_-ddoGK4Hyvai7zvnlL34Si',
                     'format' => 'amr',
                     'msgId' => '1234567890123456'
-                )
+                ),
+                false
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -382,7 +399,8 @@ class CallbackTest extends TestCase
                     'msgType' => 'event',
                     'event' => 'unsubscribe',
                     'eventKey' => ''
-                )
+                ),
+                false
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -398,7 +416,8 @@ class CallbackTest extends TestCase
                     'msgType' => 'event',
                     'event' => 'subscribe',
                     'eventKey' => ''
-                )
+                ),
+                false
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -414,7 +433,8 @@ class CallbackTest extends TestCase
                     'msgType' => 'event',
                     'event' => 'CLICK',
                     'eventKey' => 'index'
-                )
+                ),
+                false
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -430,7 +450,8 @@ class CallbackTest extends TestCase
                     'msgType' => 'event',
                     'event' => 'CLICK',
                     'eventKey' => 'button'
-                )
+                ),
+                false
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -447,7 +468,8 @@ class CallbackTest extends TestCase
                     'msgType' => 'video',
                     'mediaId' => '1ilIgC6h1vmkKqoodLK-PiQy6DhVccDKm0cnLANsbjxKyDldYBTlhSepr3hAg5K9',
                     'thumbMediaId' => 'ZWWu54xvKw6PRfEmrdzZuzfPAiKBpQMEPHfB732tF1QHazqp1wvN5nFWF18ppCto'
-                )
+                ),
+                false
             ),
             array(
                 'signature=c61b3d7eab5dfea9b72af0b1574ff2f4d2109583&timestamp=1366032735&nonce=1365872231',
@@ -466,7 +488,8 @@ class CallbackTest extends TestCase
                     'title' => '公众平台官网链接',
                     'description' => '公众平台官网链接',
                     'url' => 'url'
-                )
+                ),
+                false
             )
         );
     }
