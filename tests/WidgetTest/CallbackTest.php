@@ -58,7 +58,6 @@ class CallbackTest extends TestCase
         $this->assertEquals($rand, ob_get_clean());
     }
     
-    
     public function testHttpRawPostData()
     {
         $GLOBALS['HTTP_RAW_POST_DATA'] = 'test';
@@ -72,8 +71,6 @@ class CallbackTest extends TestCase
      */
     public function testInputAndOutput($query, $input, $data, $outputContent = null)
     {
-        $this->request->setMethod('POST');
-        
         $cb = $this->callback;
         
         // Inject HTTP query

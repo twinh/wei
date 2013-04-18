@@ -124,9 +124,9 @@ class Callback extends AbstractWidget
     public function __invoke()
     {
         // Check if it's requested from the WeChat server
-        $echostr = $this->query('echostr');
         if ($this->checkSignature()) {
-            if ($this->request->inGet()) {
+            if ($echostr = $this->query('echostr')) {
+                // Response echostr for fist time authentication
                 $this->response(htmlspecialchars($echostr, \ENT_QUOTES, 'UTF-8'));
                 return $this;
             }
