@@ -87,6 +87,14 @@ class Upload extends Image
     protected $isImage = false;
     
     /**
+     * Whether overwrite existing file, if set to false, the uploader will add 
+     * a number between file name and extension, like file-1.jpg, file-2.jpg
+     * 
+     * @var bool
+     */
+    protected $overwrite = false;
+    
+    /**
      * Whether in unit test mode
      * 
      * @var bool
@@ -228,13 +236,17 @@ class Upload extends Image
      */
     protected function saveFile($uploadedFile)
     {
-        if ($this->fileName) {
-            $fileName = $this->fileName . '.' . $this->ext; 
-        } else {
-            $fileName = $uploadedFile['name'];
-        }
+        $fileName = $this->fileName ?: substr($uploadedFile['name'], 0, strrpos($uploadedFile['name'], '.'));
+        $this->file = $this->dir . '/' . $fileName . '.' . $this->ext;
         
-        $this->file = $this->dir . '/' . $fileName;
+        if (!$this->overwrite) {
+            $i = 1;
+            while(is_file($this->file)) {
+                $this->file = $this->dir . '/' . $fileName . '-' . $i . '.' . $this->ext;
+                $i++;
+            }
+        }
+
         if (!$this->moveUploadedFile($uploadedFile['tmp_name'], $this->file)) {
             $this->addError('cantMove');
             return false;
