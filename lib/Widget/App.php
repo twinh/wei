@@ -177,7 +177,7 @@ class App extends AbstractWidget
 
             // response
             case $response instanceof Response :
-                return $response->send();
+                return !$response->isSent() && $response->send();
 
             default :
                 throw new Exception\UnexpectedTypeException($response, 'array, printable variable or \Widget\Response');

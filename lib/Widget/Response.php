@@ -100,6 +100,13 @@ class Response extends AbstractWidget
      * @var array
      */
     protected $headers = array();
+    
+    /**
+     * Whether response content has been sent
+     *
+     * @var bool
+     */
+    protected $isSent = false;
 
     /**
      * Send response header and content
@@ -272,5 +279,28 @@ class Response extends AbstractWidget
     public function &getHeaderReference()
     {
         return $this->headers;
+    }
+    
+    /**
+     * Check if response has been sent
+     *
+     * @return bool
+     */
+    public function isSent()
+    {
+        return $this->isSent;
+    }
+
+    /**
+     * Set response sent status
+     *
+     * @param  bool           $bool
+     * @return Response
+     */
+    public function setSentStatus($bool)
+    {
+        $this->isSent = (bool) $bool;
+
+        return $this;
     }
 }
