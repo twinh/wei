@@ -8,8 +8,7 @@
 
 namespace Widget\Validator;
 
-use Widget\Exception\UnexpectedTypeException;
-use Widget\Exception\UnexpectedValueException;
+use Widget\Exception;
 
 /**
  * Check if the input is valid file
@@ -390,7 +389,7 @@ class File extends AbstractValidator
         } elseif (is_array($var)) {
             return $var;
         } else {
-            throw new UnexpectedTypeException($var, 'string or array');
+            throw new Exception\UnexpectedTypeException($var, 'string or array');
         }
     }
     
@@ -405,7 +404,7 @@ class File extends AbstractValidator
         if (!$this->mimeType) {
             $finfo = finfo_open(FILEINFO_MIME_TYPE, $this->magicFile);
             if (!$finfo) {
-                throw new UnexpectedValueException('Failed to open fileinfo database');
+                throw new Exception\UnexpectedValueException('Failed to open fileinfo database');
             }
             $this->mimeType = finfo_file($finfo, $this->file);
         }
