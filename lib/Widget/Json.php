@@ -36,9 +36,12 @@ class Json extends Response
             $this->message => $message,
         ) + $append);
         
-        if ($callback) {
-            $callback = $this->escape->js($this->request['callback']);
+        if ($callback && $name = $this->request['callback']) {
+            $this->header->set('Content-Type', 'application/javascript');
+            $callback = $this->escape->js((string)$name);
             $result = $callback . '(' . $result . ')';
+        } else {
+            $this->header->set('Content-Type', 'application/json');
         }
         
         return parent::send($result);
