@@ -410,4 +410,14 @@ class File extends AbstractValidator
         }
         return $this->mimeType;
     }
+    
+    /**
+     * Returns the file extension, if file is not exists, return null instead
+     * 
+     * @return string
+     */
+    public function getExt()
+    {
+        return $this->ext;
+    }
 }
