@@ -38,6 +38,7 @@ API 参考目录
 * [download](api/download.md) - 下载指定的文件
 * [flush](api/flush.md) - 直接输出内容到浏览器
 * [header](api/header.md) - 设置和获取HTTP响应头
+* [json](api/json.md) - 输出JSON或JSONP内容
 * [response](api/response.md) - 发送HTTP响应头和内容
 * [redirect](api/redirect.md) - 跳转到指定地址
 
