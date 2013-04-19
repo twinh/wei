@@ -237,12 +237,13 @@ class Upload extends Image
     protected function saveFile($uploadedFile)
     {
         $fileName = $this->fileName ?: substr($uploadedFile['name'], 0, strrpos($uploadedFile['name'], '.'));
-        $this->file = $this->dir . '/' . $fileName . '.' . $this->ext;
+        $fullExt = $this->ext ? '.' . $this->ext : '';
+        $this->file = $this->dir . '/' . $fileName . $fullExt;
         
         if (!$this->overwrite) {
             $i = 1;
             while(is_file($this->file)) {
-                $this->file = $this->dir . '/' . $fileName . '-' . $i . '.' . $this->ext;
+                $this->file = $this->dir . '/' . $fileName . '-' . $i . $fullExt;
                 $i++;
             }
         }

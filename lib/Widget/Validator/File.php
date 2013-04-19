@@ -191,7 +191,11 @@ class File extends AbstractValidator
                 
         // Validate file extension
         // Use substr instead of pathinfo, because pathinfo may return error value in unicode
-        $this->ext = substr($fileName, strrpos($fileName, '.') + 1);
+        if (false !== $pos =  strrpos($fileName, '.')) {
+            $this->ext = substr($fileName, $pos + 1);
+        } else {
+            $this->ext = '';
+        }
         if ($this->excludeExts && in_array($this->ext, $this->excludeExts)) {
             $this->addError('excludeExts');
         }
