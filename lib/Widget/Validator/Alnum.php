@@ -11,7 +11,7 @@ namespace Widget\Validator;
 /**
  * Check if the input contains letters (a-z) and digits (0-9)
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Alnum extends Regex
 {

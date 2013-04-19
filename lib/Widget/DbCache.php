@@ -15,7 +15,7 @@ use Widget\Cache\AbstractCache;
 /**
  * The database cache widget
  *
- * @author  Twin Huang <twinh@yahoo.cn>
+ * @author  Twin Huang <twinhuang@qq.com>
  * @todo    add serialize field
  */
 class DbCache extends AbstractCache

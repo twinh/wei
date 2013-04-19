@@ -13,7 +13,7 @@ use Widget\View\AbstractView;
 /**
  * A wrapper widget for Smarty object
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Smarty extends AbstractView
 {

@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * The URL query parameters ($_GET) widget
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @property    \Widget\Request $request The HTTP request widget
  */
 class Query extends Parameter

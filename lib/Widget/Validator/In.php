@@ -13,7 +13,7 @@ use Widget\Exception\UnexpectedTypeException;
 /**
  * Check if the input is in specified array
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class In extends AbstractValidator
 {

@@ -11,7 +11,7 @@ namespace Widget\Cache\Db;
 /**
  * The mysql db cache driver
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Mysql extends AbstractDriver
 {

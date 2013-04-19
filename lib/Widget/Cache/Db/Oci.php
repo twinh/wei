@@ -11,7 +11,7 @@ namespace Widget\Cache\Db;
 /**
  * Oci
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Oci extends AbstractDriver
 {

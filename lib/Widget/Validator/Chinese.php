@@ -11,7 +11,7 @@ namespace Widget\Validator;
 /**
  * Check if the input contains only Chinese characters
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Chinese extends Regex
 {

@@ -12,7 +12,7 @@ namespace Widget\Validator;
  * Check if the length (or size) of input is equals specified length or in 
  * specified length range
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Length extends AbstractLengthValidator
 {

@@ -11,7 +11,7 @@ namespace Widget\Validator;
 /**
  * Check if the input is valid IP address
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @link http://php.net/manual/en/filter.filters.flags.php
  */
 class Ip extends AbstractValidator

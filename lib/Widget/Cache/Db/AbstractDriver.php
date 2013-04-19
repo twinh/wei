@@ -11,7 +11,7 @@ namespace Widget\Cache\Db;
 /**
  * A simple implementation of \Widget\Cache\Db\DriverInterface
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 abstract class AbstractDriver implements DriverInterface
 {

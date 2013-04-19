@@ -11,7 +11,7 @@ namespace Widget\Validator;
 /**
  * Check if the input contains only letters (a-z)
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Alpha extends Regex
 {

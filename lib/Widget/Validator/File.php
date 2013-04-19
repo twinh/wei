@@ -13,7 +13,7 @@ use Widget\Exception;
 /**
  * Check if the input is valid file
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class File extends AbstractValidator
 {

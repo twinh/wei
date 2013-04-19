@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * Instance
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Instance extends AbstractWidget
 {

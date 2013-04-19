@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * A jQuery Validation style validator widget
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @link        http://bassistance.de/jquery-plugins/jquery-plugin-validation/
  * @property    \Widget\Is $is The validator manager
  */

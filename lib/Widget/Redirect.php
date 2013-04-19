@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * The redirect response widget
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @method      \Widget\Header header(string $name, string|array $values) Set the header value
  */
 class Redirect extends Response

@@ -11,7 +11,7 @@ namespace Widget\Validator;
 /**
  * Check if the input is between the specified minimum and maximum value
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Range extends AbstractValidator
 {

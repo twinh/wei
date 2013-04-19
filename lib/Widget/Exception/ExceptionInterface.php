@@ -11,7 +11,7 @@ namespace Widget\Exception;
 /**
  * The base exception interface for widget exceptions
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 interface ExceptionInterface
 {

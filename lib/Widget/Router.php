@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * The router widget
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @link        The code is base on the awesome framework - Kohana
  *              http://kohanaframework.org/3.0/guide/api/Kohana_Route
  * @property    \Widget\Request $request The HTTP request widget

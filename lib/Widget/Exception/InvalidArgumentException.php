@@ -11,7 +11,7 @@ namespace Widget\Exception;
 /**
  * Exception thrown if an argument does not match with the expected value
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
 {

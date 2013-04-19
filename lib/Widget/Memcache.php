@@ -13,7 +13,7 @@ use Widget\Cache\AbstractCache;
 /**
  * Memcache
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Memcache extends AbstractCache
 {

@@ -13,7 +13,7 @@ use Widget\Response;
 /**
  * The application widget
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @method      \Widget\EventManager trigger(string $eventName) Trigger a event
  * @method      \Widget\Response response(string $content, int $status) Send headers and output content
  * @property    callable $404 The 404 event handler

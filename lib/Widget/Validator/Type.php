@@ -11,7 +11,7 @@ namespace Widget\Validator;
 /**
  * Check if the type of input is equals specified type name 
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Type extends AbstractValidator
 {

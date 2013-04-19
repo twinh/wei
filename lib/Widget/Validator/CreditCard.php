@@ -16,7 +16,7 @@ use Widget\Exception\UnexpectedTypeException;
  * The type of credit card could be American Express, Diners Club, Discover, 
  * JCB, MasterCard, China UnionPay or Visa
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class CreditCard extends AbstractValidator
 {

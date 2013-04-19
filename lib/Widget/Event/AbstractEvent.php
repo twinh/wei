@@ -13,7 +13,7 @@ use Widget\AbstractWidget;
 /**
  * A simple implementation of \Widget\Event\EventInterface
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 abstract class AbstractEvent extends AbstractWidget implements EventInterface
 {

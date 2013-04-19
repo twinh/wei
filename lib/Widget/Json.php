@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * A widget to response json
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Json extends Response
 {

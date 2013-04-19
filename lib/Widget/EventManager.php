@@ -14,7 +14,7 @@ use Widget\Event\Event;
 /**
  * The event manager to add, remove and trigger events
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class EventManager extends AbstractWidget
 {

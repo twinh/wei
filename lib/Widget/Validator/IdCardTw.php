@@ -11,7 +11,7 @@ namespace Widget\Validator;
 /**
  * Check if the input is valid Taiwan identity card
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @link        http://zh.wikipedia.org/wiki/%E4%B8%AD%E8%8F%AF%E6%B0%91%E5%9C%8B%E5%9C%8B%E6%B0%91%E8%BA%AB%E5%88%86%E8%AD%89
  */
 class IdCardTw extends AbstractValidator

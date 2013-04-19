@@ -14,7 +14,7 @@ use Widget\Exception\UnexpectedValueException;
 /**
  * The base class of validator
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @method      string t(string $message, array $parameters = array()) Translates a message
  * @property    \Widget\T $t The translator widget
  */

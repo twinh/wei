@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * A interface for developers to get and invoke widget in their objects
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 interface WidgetAwareInterface
 {

@@ -11,7 +11,7 @@ namespace Widget\Validator;
 /**
  * Check if the input is existing file or directory
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Exists extends AbstractValidator
 {

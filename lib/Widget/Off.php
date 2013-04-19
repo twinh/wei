@@ -13,7 +13,7 @@ namespace Widget;
  *
  * This widget is the alias of `$widget->eventManager->remove()`
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @property    \Widget\EventManager $eventManager The event manager widget
  */
 class Off extends AbstractWidget

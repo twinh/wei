@@ -16,7 +16,7 @@ require_once 'AbstractWidget.php';
 /**
  * The root widget and widget manager
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Widget extends AbstractWidget
 {

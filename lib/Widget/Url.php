@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * A widget helper to build URL
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @property    \Widget\Router $router Router
  */
 class Url extends AbstractWidget

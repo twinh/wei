@@ -13,7 +13,7 @@ use Widget\View\AbstractView;
 /**
  * The twig widget
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Twig extends AbstractView
 {

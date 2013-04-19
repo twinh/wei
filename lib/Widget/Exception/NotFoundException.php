@@ -11,7 +11,7 @@ namespace Widget\Exception;
 /**
  * Exception thrown if any resource or record not found
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class NotFoundException extends \RuntimeException implements ExceptionInterface
 {

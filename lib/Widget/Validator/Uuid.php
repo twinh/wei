@@ -11,7 +11,7 @@ namespace Widget\Validator;
 /**
  * Check if the input is valid UUID(v4)
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Uuid extends Regex
 {

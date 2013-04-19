@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * ArrayWidget
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 abstract class ArrayWidget extends AbstractWidget implements \ArrayAccess, \Countable, \IteratorAggregate
 {

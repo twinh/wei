@@ -11,7 +11,7 @@ namespace Widget\Event;
 /**
  * The base event class
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @link        http://api.jquery.com/category/events/event-object/
  */
 class Event extends AbstractEvent

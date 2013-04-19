@@ -12,7 +12,7 @@ namespace Widget;
 /**
  * The response header widget
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Header extends ArrayWidget
 {

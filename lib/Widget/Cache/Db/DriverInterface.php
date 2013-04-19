@@ -11,7 +11,7 @@ namespace Widget\Cache\Db;
 /**
  * The base SQL query interface for database cache
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 interface DriverInterface
 {

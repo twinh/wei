@@ -11,7 +11,7 @@ namespace Widget\Validator;
 /**
  * Check if the input is valid Chinese postcode
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Postcode extends Regex
 {

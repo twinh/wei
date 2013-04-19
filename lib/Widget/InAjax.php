@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * Check if the current request is an ajax(XMLHttpRequest) request
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @property \Widget\Request $request The request widget
  */
 class InAjax extends AbstractWidget

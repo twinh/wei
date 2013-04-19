@@ -13,7 +13,7 @@ use Widget\AbstractWidget;
 /**
  * The base class for view widget
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 abstract class AbstractView extends AbstractWidget implements ViewInterface
 {

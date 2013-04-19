@@ -15,7 +15,7 @@ use Widget\Exception\InvalidArgumentException;
  * The validator manager, use to validate data quickly, create validator and 
  * rule validator
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Is extends AbstractWidget
 {

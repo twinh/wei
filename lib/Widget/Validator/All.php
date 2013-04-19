@@ -11,7 +11,7 @@ namespace Widget\Validator;
 /**
  * Check if all of the element in the input is valid by all specified rules
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @property \Widget\Is $is The validator manager
  */
 class All extends AbstractValidator

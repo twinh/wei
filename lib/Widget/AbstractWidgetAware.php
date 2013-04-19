@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * A simple implementation of \Widget\WidgetAwareInterface
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 abstract class AbstractWidgetAware implements WidgetAwareInterface
 {

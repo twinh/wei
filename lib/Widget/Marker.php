@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * Marker
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Marker extends AbstractWidget
 {

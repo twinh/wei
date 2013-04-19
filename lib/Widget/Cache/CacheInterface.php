@@ -11,7 +11,7 @@ namespace Widget\Cache;
 /**
  * The base cache interface
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 interface CacheInterface
 {

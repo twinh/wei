@@ -11,7 +11,7 @@ namespace Widget\Exception;
 /**
  * Exception thrown if a callback refers to an undefined function or if some arguments are missing
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class BadMethodCallException extends \BadMethodCallException implements ExceptionInterface
 {

@@ -11,7 +11,7 @@ namespace Widget\Event;
 /**
  * The base interface for event class
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 interface EventInterface
 {

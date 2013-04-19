@@ -13,7 +13,7 @@ use Widget\Cache\AbstractCache;
 /**
  * The file cache widget
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class File extends AbstractCache
 {

@@ -11,7 +11,7 @@ namespace Widget\Validator;
 /**
  * Check if the input is ends with specified string
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class EndsWith extends AbstractValidator
 {

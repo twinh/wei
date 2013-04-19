@@ -11,7 +11,7 @@ namespace Widget\Validator;
 /**
  * Check if the input is valid by specified number of the rules
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @property    \Widget\Is $is The validator manager
  */
 class SomeOf extends AbstractGroupValidator

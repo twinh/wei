@@ -14,7 +14,7 @@ use \SimpleXMLElement;
 /**
  * The widget for WeChat(Weixin) callback message
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @link        http://mp.weixin.qq.com/wiki/index.php?title=%E6%B6%88%E6%81%AF%E6%8E%A5%E5%8F%A3%E6%8C%87%E5%8D%97
  * @property    \Widget\Response $response The HTTP response widget
  * @method      \Widget\Response response(string $content, int $status = 200) Send headers and output content

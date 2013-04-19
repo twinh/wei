@@ -13,7 +13,7 @@ use Widget\Validator\ValidatorInterface;
 /**
  * The validator widget
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @property    \Widget\Is $is The validator manager
  */
 class Validator extends AbstractWidget

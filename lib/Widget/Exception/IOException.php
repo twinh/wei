@@ -11,7 +11,7 @@ namespace Widget\Exception;
 /**
  * Exception thrown if file or stream operation fail
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class IOException extends \RuntimeException implements ExceptionInterface
 {

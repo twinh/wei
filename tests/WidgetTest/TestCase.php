@@ -10,7 +10,7 @@ use PHPUnit_Framework_TestCase;
  * TestCase
  *
  * @package     Widget
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class TestCase extends PHPUnit_Framework_TestCase implements WidgetAwareInterface
 {

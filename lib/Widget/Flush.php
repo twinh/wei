@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * The widget that flushes the content to browser immediately
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @link        http://php.net/manual/en/function.flush.php
  */
 class Flush extends Response

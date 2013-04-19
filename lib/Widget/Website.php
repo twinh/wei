@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * A pure configuration widget for your website
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Website extends AbstractWidget
 {

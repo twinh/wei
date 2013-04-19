@@ -13,7 +13,7 @@ use Widget\Exception\RuntimeException;
 /**
  * The default logger for widget, which is base on the Monolog!
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @link        https://github.com/Seldaek/monolog
  */
 class Logger extends AbstractWidget

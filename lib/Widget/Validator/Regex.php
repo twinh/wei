@@ -11,7 +11,7 @@ namespace Widget\Validator;
 /**
  * Check if the input is valid by specified regular expression
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Regex extends AbstractValidator
 {

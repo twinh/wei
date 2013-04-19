@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * A wrapper for PHP Error
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @link        http://phperror.net/
  */
 class PhpError extends AbstractWidget

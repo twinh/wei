@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * The infterce for all widget
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 interface WidgetInterface
 {    

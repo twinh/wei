@@ -11,7 +11,7 @@ namespace Widget\Validator;
 /**
  * Check if the input is valid QQ number
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class QQ extends Regex
 {

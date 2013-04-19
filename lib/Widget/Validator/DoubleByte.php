@@ -11,7 +11,7 @@ namespace Widget\Validator;
 /**
  * Check if the input contains only double characters
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class DoubleByte extends Regex
 {

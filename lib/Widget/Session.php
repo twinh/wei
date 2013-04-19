@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * The session widget
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Session extends Parameter
 {

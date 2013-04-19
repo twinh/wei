@@ -13,7 +13,7 @@ use Widget\AbstractWidget;
 /**
  * A simple implementation of \Widget\Cache\CacheInterface
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 abstract class AbstractCache extends AbstractWidget implements CacheInterface
 {

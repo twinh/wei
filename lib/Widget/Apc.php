@@ -13,7 +13,7 @@ use Widget\Cache\AbstractCache;
 /**
  * The php APC cache widget
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Apc extends AbstractCache
 {

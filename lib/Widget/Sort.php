@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * Sort two-dimensional array like SQL ORDER BY clause
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @todo        rename to orderBy ?
  * @tddo        add selectKeys or filterKeys ?
  */

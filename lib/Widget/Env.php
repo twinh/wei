@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * The environment widget
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @property    \Widget\Server $server The server widget
  */
 class Env extends AbstractWidget

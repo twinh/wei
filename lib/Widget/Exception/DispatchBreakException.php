@@ -10,7 +10,7 @@
 namespace Widget\Exception;
 
 /**
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class DispatchBreakException extends \RuntimeException
 {

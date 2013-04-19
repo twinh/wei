@@ -12,7 +12,7 @@ namespace Widget;
 /**
  * Check if the current request method is specified string
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @property \Widget\Request $request The request widget
  */
 class InMethod extends AbstractWidget

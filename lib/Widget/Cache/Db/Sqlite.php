@@ -11,7 +11,7 @@ namespace Widget\Cache\Db;
 /**
  * The sqlite cache driver
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Sqlite extends AbstractDriver
 {

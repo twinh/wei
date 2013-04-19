@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * The download widget
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @property    \Widget\Browser    $browser The browser widget
  * @property    \Widget\Header     $header The header widget
  */

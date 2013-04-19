@@ -11,7 +11,7 @@ namespace Widget\Validator;
 /**
  * Check if the length (or size) of input is lower than specified length
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class MaxLength extends AbstractLengthValidator
 {

@@ -13,7 +13,7 @@ use DateTime as Dt;
 /**
  * Check if the input is a valid datetime
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class DateTime extends AbstractValidator
 {

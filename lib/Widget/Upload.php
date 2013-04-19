@@ -14,7 +14,7 @@ use Widget\Validator\File as FileValidator;
 /**
  * The widget that handle file upload
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @property    \Widget\Request $request The HTTP request widget
  * @todo        Add service widget and extend it
  */

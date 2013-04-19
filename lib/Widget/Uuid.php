@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * Generate a RANDOM UUID(universally unique identifier)
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class Uuid extends AbstractWidget
 {

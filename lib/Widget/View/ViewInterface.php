@@ -11,7 +11,7 @@ namespace Widget\View;
 /**
  * The interface for view widget
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 interface ViewInterface
 {

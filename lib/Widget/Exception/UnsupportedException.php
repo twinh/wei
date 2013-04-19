@@ -11,7 +11,7 @@ namespace Widget\Exception;
 /**
  * Exception thrown if a requested operation is not supported
  * 
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class UnsupportedException extends \InvalidArgumentException implements ExceptionInterface
 {

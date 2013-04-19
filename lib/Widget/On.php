@@ -12,7 +12,7 @@ namespace Widget;
  * 
  * This widget is the alias of `$widget->eventManager->add()`
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @property \Widget\EventManager $eventManager The event manager widget
  */
 class On extends AbstractWidget

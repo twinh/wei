@@ -15,7 +15,7 @@ namespace Widget\Exception;
  * related errors.
  * 
  * @link http://php.net/manual/en/class.unexpectedvalueexception.php
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class UnexpectedValueException extends \UnexpectedValueException implements ExceptionInterface
 {

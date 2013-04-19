@@ -11,7 +11,7 @@ namespace Widget\Cache\Db;
 /**
  * PgSql
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class PgSql extends AbstractDriver
 {

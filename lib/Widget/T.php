@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * The translator widget
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  */
 class T extends AbstractWidget
 {
