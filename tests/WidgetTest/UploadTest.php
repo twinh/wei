@@ -262,4 +262,74 @@ class UploadTest extends TestCase
         $this->assertFalse($result);
         $this->assertTrue($this->upload->hasError('cantMove'));
     }
+    
+    public function testOverwriteUploadFile()
+    {
+        $this->request->setOption('files', array(
+            'picture' => array(
+                'name' => 'overwrite.gif',
+                'type' => 'image/gif',
+                'tmp_name' => __DIR__ . '/Fixtures/5x5.gif',
+                'size' => 20,
+                'error' => UPLOAD_ERR_OK
+            )
+        ));
+        
+        $result1 = $this->upload();
+        $file1 = $this->upload->getFile();
+        
+        $result2 = $this->upload();
+        $file2 = $this->upload->getFile();
+        
+        $result3 = $this->upload(array(
+            'overwrite' => true
+        ));
+        $file3 = $this->upload->getFile();
+        
+        $this->assertTrue($result1);
+        $this->assertTrue($result2);
+        $this->assertTrue($result3);
+        
+        $this->assertFileExists($file1);
+        $this->assertFileExists($file2);
+        $this->assertFileExists($file3);
+        
+        $this->assertNotEquals($file1, $file2);
+        $this->assertEquals($file1, $file3);
+    }
+    
+    public function testUploadFileWithoutExtension()
+    {
+        $this->request->setOption('files', array(
+            'picture' => array(
+                'name' => 'noext',
+                'type' => 'image/gif',
+                'tmp_name' => __DIR__ . '/Fixtures/5x5',
+                'size' => 20,
+                'error' => UPLOAD_ERR_OK
+            )
+        ));
+        
+        $result1 = $this->upload();
+        $file1 = $this->upload->getFile();
+        
+        $result2 = $this->upload();
+        $file2 = $this->upload->getFile();
+        
+        $result3 = $this->upload(array(
+            'overwrite' => true
+        ));
+        $file3 = $this->upload->getFile();
+        
+        $this->assertTrue($result1);
+        $this->assertTrue($result2);
+        $this->assertTrue($result3);
+        
+        $this->assertFileExists($file1);
+        $this->assertFileExists($file2);
+        $this->assertFileExists($file3);
+        
+        $this->assertNotEquals($file1, $file2);
+        $this->assertEquals($file1, $file3);
+    }
 }
