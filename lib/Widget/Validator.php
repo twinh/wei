@@ -148,7 +148,7 @@ class Validator extends AbstractWidget
      */
     public function __invoke($options = array())
     {
-        $this->setOption($options);
+        $options && $this->setOption($options);
         
         if (empty($this->rules)) {
             throw new Exception\InvalidArgumentException('Validation rules should not be empty.');
@@ -435,11 +435,11 @@ class Validator extends AbstractWidget
     }
 
     /**
-     * {@inheritdoc}
+     * Returns the validation result
      */
     public function isValid()
     {
-        return $this->result;
+        return is_null($this->result) ? $this->__invoke() : $this->result;
     }
     
     /**

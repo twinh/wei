@@ -157,13 +157,14 @@ class Is extends AbstractWidget
     /**
      * Create a new validator instance
      * 
+     * @param array $options
      * @return \Widget\Validator
      */
-    public function createValidator()
+    public function createValidator(array $options = array())
     {
         return $this->widget->newInstance('validator', array(
             'is' => $this
-        ));
+        ) + $options);
     }
     
     /**

@@ -24,9 +24,15 @@ class Validate extends AbstractWidget
      */
     protected $validator;
     
-    public function __invoke(array $options)
+    /**
+     * Create a new validator and validate by specified options
+     * 
+     * @param array $options
+     * @return \Widget\Validator
+     */
+    public function __invoke(array $options = array())
     {
-        $validator = $this->validator = $this->is->createValidator();
+        $validator = $this->validator = $this->is->createValidator($options);
         
         $validator($options);
         
