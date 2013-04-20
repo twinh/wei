@@ -26,23 +26,38 @@ interface CacheInterface
     public function __invoke($key, $value = null, $expire = 0);
 
     /**
-     * Get an item
+     * Retrieve an item
      *
      * @param  string      $key The name of item
      * @return mixed
      */
     public function get($key);
+    
+    /**
+     * Retrieve multiple items
+     * 
+     * @param array $keys The name of items
+     */
+    public function getMulti(array $keys);
 
     /**
      * Store an item
      *
      * @param  string $key    The name of item
      * @param  value  $value  The value of item
-     * @param  int    $expire The expire seconds, 0 means never expired
+     * @param  int    $expire The expire seconds, defaults to 0, means never expired
      * @return bool
      */
     public function set($key, $value, $expire = 0);
 
+    /**
+     * Store multiple items
+     * 
+     * @param array $items An array of key/value pairs to store
+     * @param int $expire The expire seconds, defaults to 0, means never expired
+     */
+    public function setMulti(array $items, $expire = 0);
+    
     /**
      * Remove an item
      *
@@ -64,7 +79,7 @@ interface CacheInterface
      *
      * @param  string $key    The name of item
      * @param  mixed  $value  The value of item
-     * @param  int    $expire The expire seconds, 0 means never expired
+     * @param  int    $expire The expire seconds, defaults to 0, means never expired
      * @return bool
      */
     public function add($key, $value, $expire = 0);
@@ -74,7 +89,7 @@ interface CacheInterface
      *
      * @param  string $key    The name of item
      * @param  mixed  $value  The value of item
-     * @param  int    $expire The expire seconds, 0 means never expired
+     * @param  int    $expire The expire seconds, defaults to 0, means never expired
      * @return bool
      */
     public function replace($key, $value, $expire = 0);
