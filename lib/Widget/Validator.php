@@ -142,14 +142,14 @@ class Validator extends AbstractWidget
      * Validate the data by the given options
      *
      * @param array $options The options for validation
-     * @return false Whether pass the validation or not
+     * @return bool Whether pass the validation or not
      * @throws \Widget\Exception\InvalidArgumentException When validation rules is empty
      * @throws \Widget\Exception\UnexpectedTypeException  When validation rule is not array, string or instance of ValidatorInterface
      */
     public function __invoke($options = array())
     {
         $this->setOption($options);
-
+        
         if (empty($this->rules)) {
             throw new Exception\InvalidArgumentException('Validation rules should not be empty.');
         }
