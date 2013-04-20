@@ -22,6 +22,9 @@ class SmartyTest extends TestCase
         parent::tearDownAfterClass();
         
         $dir = 'templates_c';
+        if (!is_dir($dir)) {
+            return;
+        }
         foreach (scandir($dir) as $file) {
             if ('.' === $file || '..' === $file) {
                 continue;
