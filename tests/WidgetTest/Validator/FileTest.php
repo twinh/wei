@@ -137,10 +137,10 @@ class FileTest extends TestCase
         $this->assertFalse($file(array()));
     }
     
-    public function testFileWithExtension()
+    public function testFileWithoutExtension()
     {
-        $file = __DIR__ . '/Fixtures/5x5';
+        $file = dirname(__DIR__) . '/Fixtures/5x5';
         $this->assertTrue($this->isFile($file));
-        $this->assertEquals('', $this->file->getExt());
+        $this->assertEquals('', $this->isFile->getExt());
     }
 }
