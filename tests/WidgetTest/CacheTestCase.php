@@ -101,4 +101,19 @@ class CacheTestCase extends TestCase
         $cache->set($key, false);
         $this->assertTrue($cache->exists($key));
     }
+    
+    public function getAndSetMulti()
+    {
+        $items = $this->providerForGetterAndSetter();
+        
+        $cache = $this->object;
+        
+        $results = $cache->setMulti($items);
+        foreach ($results as $result) {
+            $this->assertTrue($result);
+        }
+        
+        $this->assertEquals($results, $cache->getMulti(array_keys($items)));
+        
+    }
 }
