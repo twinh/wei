@@ -126,6 +126,30 @@ class Redis extends AbstractCache
     /**
      * {@inheritdoc}
      */
+    public function getMulti(array $keys)
+    {
+        return array_combine($keys, $this->object->mGet($keys));
+    }
+    
+    /**
+     * {@inheritdoc}
+     * 
+     * Note: 
+     * 1. The "$expire" parameter is not support by redis MSET command
+     * 2. The elements in returning values are all true or false, see links for more detail
+     * 
+     * @link http://redis.io/commands/mset
+     * @link https://github.com/nicolasff/phpredis/blob/master/redis_array.c#L844
+     */
+    public function setMulti(array $items, $expire = 0)
+    {
+        $result = $this->object->mset($items);
+        return array_combine(array_keys($items), array_pad(array(), count($items), $result));
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
     public function remove($key)
     {
         return (bool)$this->object->del($key);

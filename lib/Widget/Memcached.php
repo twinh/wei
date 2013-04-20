@@ -91,7 +91,22 @@ class Memcached extends AbstractCache
     {
         return $this->object->set($key, $value, $expire);
     }
-
+    
+    /**
+     * {@inheritdoc}
+     * 
+     * Note: setMulti method is not reimplemented for it returning only one 
+     * "true" or "false" for all items
+     * 
+     * @link http://www.php.net/manual/en/memcached.setmulti.php
+     * @link https://github.com/php-memcached-dev/php-memcached/blob/master/php_memcached.c#L1219
+     */
+    public function getMulti(array $keys)
+    {
+        $cas = null;
+        return $this->object->getMulti($keys, $cas, \Memcached::GET_PRESERVE_ORDER);
+    }
+    
     /**
      * {@inheritdoc}
      */
