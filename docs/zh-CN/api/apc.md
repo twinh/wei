@@ -1,11 +1,19 @@
 [apc()](http://twinh.github.com/widget/api/apc)
 ===============================================
 
-设置或获取一项PHP APC缓存
+Apc微件是对PHP APC缓存的管理
 
 ##### 目录
 * apc( $key, $value [ $expire ] )
 * apc( $key )
+* apc->get( $key )
+* apc->set( $key, $value )
+* apc->remove( $key ) 
+* apc->exists( $key )
+* apc->add( $key, $value )
+* apc->replace( $key, $value )
+* apc->increment ( $key )
+* apc->decrement( $key )
 
 ### 设置一项PHP APC缓存
 ```php
@@ -61,3 +69,83 @@ echo $widget->apc('key');
 ```php
 'value'
 ```
+- - - -
+
+### 获取一项缓存
+```php
+mixed apc->get( $key )
+```
+
+##### 参数
+*无*
+
+- - - -
+
+### 设置一项缓存
+```php
+bool apc->set( $key, $value )
+```
+
+##### 参数
+*无*
+
+- - - -
+
+### 移除一项缓存
+```php
+bool apc->remove( $key ) 
+```
+
+##### 参数
+*无*
+
+- - - -
+
+### 检查缓存是否存在
+```php
+bool apc->exists( $key )
+```
+
+##### 参数
+*无*
+
+- - - -
+
+### 增加一项缓存,如果缓存已存在,返回false
+```php
+bool apc->add( $key, $value )
+```
+
+##### 参数
+*无*
+
+- - - -
+
+### 替换一项缓存,如果缓存**不**存在,返回false
+```php
+bool apc->replace( $key, $value )
+```
+
+##### 参数
+*无*
+
+- - - -
+
+### 增加一项缓存的值
+```php
+int apc->increment ( $key )
+```
+
+##### 参数
+*无*
+
+- - - -
+
+### 减小一项缓存的值
+```php
+int apc->decrement( $key )
+```
+
+##### 参数
+*无*
+
