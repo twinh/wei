@@ -14,7 +14,7 @@ use Widget\Response;
  * The application widget
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @method      EventManager trigger(string $eventName) Trigger a event
+ * @method      Event\EventInterface trigger(string $eventName) Trigger a event
  * @method      Response response(string $content, int $status = 200) Send headers and output content
  * @property    callable $404 The 404 event handler
  * @property    View\ViewInterface $view The view widget, instance of \Widget\Viewable interface
@@ -166,16 +166,17 @@ class App extends AbstractWidget
     public function handleResponse($response)
     {
         switch (true) {
-            // render default template and using $result as template variables
+            // Render default template and using $result as template variables
             case is_array($response) :
                 $response = $this->view->render($this->getDefaultTemplate(), $response);
+                // No break here, $response is use for next case detect
 
-            // response directly
+            // Response directly
             case is_string($response) :
             case is_null($response) :
                 return $this->response($response);
 
-            // response
+            // Response if not sent
             case $response instanceof Response :
                 return !$response->isSent() && $response->send();
 

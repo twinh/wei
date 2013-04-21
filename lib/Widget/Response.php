@@ -12,7 +12,7 @@ namespace Widget;
  * The HTTP response
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    \Widget\Header $header The reponse header
+ * @property    \Widget\Header $header The response header
  * @property    \Widget\Cookie $cookie The cookie widget
  * @property    \Widget\Logger $logger The logger widget
  */

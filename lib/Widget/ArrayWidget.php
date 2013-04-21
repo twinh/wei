@@ -61,6 +61,7 @@ abstract class ArrayWidget extends AbstractWidget implements \ArrayAccess, \Coun
      *
      * @param string $offset
      * @param mixed  $value
+     * @return mixed
      */
     public function offsetSet($offset, $value)
     {

@@ -61,7 +61,7 @@ class Browser extends AbstractWidget
     /**
      * The name of browser
      *
-     * @var type
+     * @var string
      */
     public $name;
 

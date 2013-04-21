@@ -16,8 +16,8 @@ use \SimpleXMLElement;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        http://mp.weixin.qq.com/wiki/index.php?title=%E6%B6%88%E6%81%AF%E6%8E%A5%E5%8F%A3%E6%8C%87%E5%8D%97
- * @property    \Widget\Response $response The HTTP response widget
- * @method      \Widget\Response response(string $content, int $status = 200) Send headers and output content
+ * @property    Response $response The HTTP response widget
+ * @method      Response response(string $content, int $status = 200) Send headers and output content
  * @method      string query(string $name) Returns the URL query parameter value
  */
 class Callback extends AbstractWidget
@@ -219,7 +219,8 @@ class Callback extends AbstractWidget
 
     /**
      * Attach a callback which triggered when user click the custom menu
-     * 
+     *
+     * @param string $key The key of event
      * @param \Closure $fn
      * @return \Widget\Callback
      */
@@ -752,9 +753,7 @@ class Callback extends AbstractWidget
     }
     
     /**
-     * Parse post data to recive user OpenID and input content and more
-     * 
-     * @todo detect invald input
+     * Parse post data to receive user OpenID and input content and more
      */
     protected function parsePostData()
     {

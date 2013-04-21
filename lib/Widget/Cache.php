@@ -18,14 +18,14 @@ use Widget\Cache\AbstractCache;
 class Cache extends AbstractCache
 {
     /**
-     * The storable widget object
+     * The storage widget object
      *
-     * @var Widget\Cache\CacheInterface
+     * @var Cache\CacheInterface
      */
     protected $object;
 
     /**
-     * The storable widget name
+     * The storage widget name
      *
      * @ver string
      */
@@ -46,7 +46,7 @@ class Cache extends AbstractCache
      * 
      * @param string $driver
      * @return Cache
-     * @throws Widget\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     public function setDriver($driver)
     {

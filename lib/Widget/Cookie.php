@@ -105,6 +105,7 @@ class Cookie extends Parameter
      * Remove cookie
      *
      * @param string $key the name of cookie
+     * @return Cookie
      */
     public function remove($key)
     {
