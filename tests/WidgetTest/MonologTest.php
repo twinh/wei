@@ -8,6 +8,7 @@ class MonologTest extends TestCase
     {
         if (!class_exists('\Monolog\Logger')) {
             $this->markTestSkipped('The monolog/monolog is not loaded');
+            return;
         }
         
         parent::setUp();

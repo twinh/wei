@@ -8,6 +8,7 @@ class EntityManagerTest extends TestCase
     {
         if (!class_exists(('\Doctrine\ORM\EntityManager'))) {
             $this->markTestSkipped('doctrine\orm is required');
+            return;
         }
         
         parent::setUp();
