@@ -1,5 +1,5 @@
-[isEndsWith()](http://twinh.github.com/widget/api/isEndsWith)
-=============================================================
+[isEndsWith()](http://twinh.github.io/widget/api/isEndsWith)
+============================================================
 
 检查数据是否以指定字符串结尾
 

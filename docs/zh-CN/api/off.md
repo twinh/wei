@@ -1,5 +1,5 @@
-[off()](http://twinh.github.com/widget/api/off)
-===============================================
+[off()](http://twinh.github.io/widget/api/off)
+==============================================
 
 移除指定类型的事件触发器
 

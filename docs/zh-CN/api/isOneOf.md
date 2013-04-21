@@ -1,5 +1,5 @@
-[isOneOf()](http://twinh.github.com/widget/api/isOneOf)
-=======================================================
+[isOneOf()](http://twinh.github.io/widget/api/isOneOf)
+======================================================
 
 检查数据是否满足指定规则中的任何一条
 

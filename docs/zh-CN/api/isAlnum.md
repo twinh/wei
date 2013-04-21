@@ -1,5 +1,5 @@
-[isAlnum()](http://twinh.github.com/widget/api/isAlnum)
-=======================================================
+[isAlnum()](http://twinh.github.io/widget/api/isAlnum)
+======================================================
 
 检查数据是否只由字母(a-z)和数字(0-9)组成
 

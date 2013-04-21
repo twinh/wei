@@ -1,5 +1,5 @@
-[isAlpha()](http://twinh.github.com/widget/api/isAlpha)
-=======================================================
+[isAlpha()](http://twinh.github.io/widget/api/isAlpha)
+======================================================
 
 检查数据是否只由字母(a-z)组成
 

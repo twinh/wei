@@ -1,5 +1,5 @@
-[isDivisibleBy()](http://twinh.github.com/widget/api/isDivisibleBy)
-===================================================================
+[isDivisibleBy()](http://twinh.github.io/widget/api/isDivisibleBy)
+==================================================================
 
 检查数据是否能被指定的除数整除
 

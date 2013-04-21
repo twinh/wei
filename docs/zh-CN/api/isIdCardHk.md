@@ -1,5 +1,5 @@
-[isIdCardHk()](http://twinh.github.com/widget/api/isIdCardHk)
-=============================================================
+[isIdCardHk()](http://twinh.github.io/widget/api/isIdCardHk)
+============================================================
 
 检查数据是否为有效的香港身份证
 

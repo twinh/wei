@@ -1,5 +1,5 @@
-[isImage()](http://twinh.github.com/widget/api/isImage)
-=======================================================
+[isImage()](http://twinh.github.io/widget/api/isImage)
+======================================================
 
 检查数据是否为图片,同时还可以检查图片宽度和高度是否在指定的范围内
 

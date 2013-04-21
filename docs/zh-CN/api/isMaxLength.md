@@ -1,5 +1,5 @@
-[isMaxLength()](http://twinh.github.com/widget/api/isMaxLength)
-===============================================================
+[isMaxLength()](http://twinh.github.io/widget/api/isMaxLength)
+==============================================================
 
 检查数据的长度是否小于等于指定数值
 

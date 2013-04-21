@@ -1,5 +1,5 @@
-[isSomeOf()](http://twinh.github.com/widget/api/isSomeOf)
-=========================================================
+[isSomeOf()](http://twinh.github.io/widget/api/isSomeOf)
+========================================================
 
 检查数据是否通过指定数量规则的验证
 

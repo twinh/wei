@@ -1,5 +1,5 @@
-[isIn()](http://twinh.github.com/widget/api/isIn)
-=================================================
+[isIn()](http://twinh.github.io/widget/api/isIn)
+================================================
 
 检查数据是否在指定的数组中
 

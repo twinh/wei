@@ -1,5 +1,5 @@
-[isChinese()](http://twinh.github.com/widget/api/isChinese)
-===========================================================
+[isChinese()](http://twinh.github.io/widget/api/isChinese)
+==========================================================
 
 检查数据是否只由汉字组成
 

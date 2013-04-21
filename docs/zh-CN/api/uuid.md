@@ -1,5 +1,5 @@
-[uuid()](http://twinh.github.com/widget/api/uuid)
-=================================================
+[uuid()](http://twinh.github.io/widget/api/uuid)
+================================================
 
 随机生成一个UUID
 
@@ -26,5 +26,5 @@ echo $widget->uuid();
 ```
 ##### 运行结果
 ```php
-'f97b7017-876f-4789-b58f-0cb313b82063'
+'05b59eca-866d-410b-96d7-e4f2c286f5a8'
 ```

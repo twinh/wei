@@ -1,6 +1,6 @@
     该微件文档还在紧急编写中,敬请期待!
-[pinyin()](http://twinh.github.com/widget/api/pinyin)
-=====================================================
+[pinyin()](http://twinh.github.io/widget/api/pinyin)
+====================================================
 
 Converts chinese words to phonetic alphabets
 

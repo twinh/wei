@@ -1,5 +1,5 @@
-[isIdCardTw()](http://twinh.github.com/widget/api/isIdCardTw)
-=============================================================
+[isIdCardTw()](http://twinh.github.io/widget/api/isIdCardTw)
+============================================================
 
 检查数据是否为有效的台湾身份证
 

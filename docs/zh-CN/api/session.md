@@ -1,6 +1,6 @@
     该微件文档还在紧急编写中,敬请期待!
-[session()](http://twinh.github.com/widget/api/session)
-=======================================================
+[session()](http://twinh.github.io/widget/api/session)
+======================================================
 
 Returns a *stringify* or user defined($default) parameter value
 

@@ -1,6 +1,6 @@
     该微件文档还在紧急编写中,敬请期待!
-[dbCache()](http://twinh.github.com/widget/api/dbCache)
-=======================================================
+[dbCache()](http://twinh.github.io/widget/api/dbCache)
+======================================================
 
 {@inheritdoc}
 

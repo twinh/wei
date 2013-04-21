@@ -1,5 +1,5 @@
-[isType()](http://twinh.github.com/widget/api/isType)
-=====================================================
+[isType()](http://twinh.github.io/widget/api/isType)
+====================================================
 
 检查数据是否为指定的类型
 

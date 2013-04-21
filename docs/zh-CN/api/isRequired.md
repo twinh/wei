@@ -1,5 +1,5 @@
-[isRequired()](http://twinh.github.com/widget/api/isRequired)
-=============================================================
+[isRequired()](http://twinh.github.io/widget/api/isRequired)
+============================================================
 
 检查数据是否为空
 

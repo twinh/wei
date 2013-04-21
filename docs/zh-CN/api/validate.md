@@ -1,5 +1,5 @@
-[validate()](http://twinh.github.com/widget/api/validate)
-=========================================================
+[validate()](http://twinh.github.io/widget/api/validate)
+========================================================
 
 检查数组或对象中每一个元素是否能通过指定规则的验证
 

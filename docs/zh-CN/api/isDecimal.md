@@ -1,5 +1,5 @@
-[isDecimal()](http://twinh.github.com/widget/api/isDecimal)
-===========================================================
+[isDecimal()](http://twinh.github.io/widget/api/isDecimal)
+==========================================================
 
 检查数据是否为小数
 

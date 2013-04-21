@@ -1,5 +1,5 @@
-[isLowercase()](http://twinh.github.com/widget/api/isLowercase)
-===============================================================
+[isLowercase()](http://twinh.github.io/widget/api/isLowercase)
+==============================================================
 
 检查数据是否为小写字符
 

@@ -1,5 +1,5 @@
-[isPhoneCn()](http://twinh.github.com/widget/api/isPhoneCn)
-===========================================================
+[isPhoneCn()](http://twinh.github.io/widget/api/isPhoneCn)
+==========================================================
 
 检查数据是否为有效的电话号码
 

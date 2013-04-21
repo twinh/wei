@@ -1,6 +1,6 @@
     该微件文档还在紧急编写中,敬请期待!
-[url()](http://twinh.github.com/widget/api/url)
-===============================================
+[url()](http://twinh.github.io/widget/api/url)
+==============================================
 
 Build URL by specified uri and parameters
 

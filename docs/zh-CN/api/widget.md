@@ -1,12 +1,12 @@
     该微件文档还在紧急编写中,敬请期待!
-[widget()](http://twinh.github.com/widget/api/widget)
-=====================================================
+[widget()](http://twinh.github.io/widget/api/widget)
+====================================================
 
 Get a widget instance
 
 ### Get a widget instance
 ```php
-object widget($name)
+\WidgetInterface widget($name)
 ```
 
 ##### 参数

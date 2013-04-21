@@ -1,5 +1,5 @@
-[isNull()](http://twinh.github.com/widget/api/isNull)
-=====================================================
+[isNull()](http://twinh.github.io/widget/api/isNull)
+====================================================
 
 检查数据是否为null
 

@@ -1,5 +1,5 @@
-[isUrl()](http://twinh.github.com/widget/api/isUrl)
-===================================================
+[isUrl()](http://twinh.github.io/widget/api/isUrl)
+==================================================
 
 检查数据是否为有效的URL地址,可选的检查选项有"path"和"query"
 

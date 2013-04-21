@@ -1,6 +1,6 @@
     该微件文档还在紧急编写中,敬请期待!
-[t()](http://twinh.github.com/widget/api/t)
-===========================================
+[t()](http://twinh.github.io/widget/api/t)
+==========================================
 
 Invoker
 

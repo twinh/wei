@@ -1,5 +1,5 @@
-[isEquals()](http://twinh.github.com/widget/api/isEquals)
-=========================================================
+[isEquals()](http://twinh.github.io/widget/api/isEquals)
+========================================================
 
 检查数据是否与指定数据相等
 

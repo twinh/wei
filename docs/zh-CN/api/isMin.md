@@ -1,5 +1,5 @@
-[isMin()](http://twinh.github.com/widget/api/isMin)
-===================================================
+[isMin()](http://twinh.github.io/widget/api/isMin)
+==================================================
 
 检查数据是否大于等于指定的值
 

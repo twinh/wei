@@ -1,6 +1,6 @@
     该微件文档还在紧急编写中,敬请期待!
-[instance()](http://twinh.github.com/widget/api/instance)
-=========================================================
+[instance()](http://twinh.github.io/widget/api/instance)
+========================================================
 
 Instance a class
 

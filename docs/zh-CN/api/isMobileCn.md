@@ -1,5 +1,5 @@
-[isMobileCn()](http://twinh.github.com/widget/api/isMobileCn)
-=============================================================
+[isMobileCn()](http://twinh.github.io/widget/api/isMobileCn)
+============================================================
 
 检查数据是否为有效的手机号码
 

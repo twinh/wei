@@ -1,5 +1,5 @@
-[isStartsWith()](http://twinh.github.com/widget/api/isStartsWith)
-=================================================================
+[isStartsWith()](http://twinh.github.io/widget/api/isStartsWith)
+================================================================
 
 检查数据是否以指定字符串开头
 

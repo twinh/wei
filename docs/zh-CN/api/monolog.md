@@ -1,6 +1,6 @@
     该微件文档还在紧急编写中,敬请期待!
-[monolog()](http://twinh.github.com/widget/api/monolog)
-=======================================================
+[monolog()](http://twinh.github.io/widget/api/monolog)
+======================================================
 
 Get monolog logger object or add a log record
 

@@ -1,5 +1,5 @@
-[isIdCardMo()](http://twinh.github.com/widget/api/isIdCardMo)
-=============================================================
+[isIdCardMo()](http://twinh.github.io/widget/api/isIdCardMo)
+============================================================
 
 检查数据是否为有效的澳门身份证
 

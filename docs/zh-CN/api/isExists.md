@@ -1,5 +1,5 @@
-[isExists()](http://twinh.github.com/widget/api/isExists)
-=========================================================
+[isExists()](http://twinh.github.io/widget/api/isExists)
+========================================================
 
 检查数据是否为存在的文件或目录
 

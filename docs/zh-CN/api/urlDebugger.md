@@ -1,12 +1,12 @@
     该微件文档还在紧急编写中,敬请期待!
-[urlDebugger()](http://twinh.github.com/widget/api/urlDebugger)
-===============================================================
+[urlDebugger()](http://twinh.github.io/widget/api/urlDebugger)
+==============================================================
 
 Invoker
 
 ### Invoker
 ```php
-\Widget\UrlDebugger urlDebugger()
+\UrlDebugger urlDebugger()
 ```
 
 ##### 参数

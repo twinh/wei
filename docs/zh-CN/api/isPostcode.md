@@ -1,5 +1,5 @@
-[isPostcode()](http://twinh.github.com/widget/api/isPostcode)
-=============================================================
+[isPostcode()](http://twinh.github.io/widget/api/isPostcode)
+============================================================
 
 检查数据是否为有效的中国邮政编码
 

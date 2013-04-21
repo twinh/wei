@@ -1,5 +1,5 @@
-[db()](http://twinh.github.com/widget/api/db)
-=============================================
+[db()](http://twinh.github.io/widget/api/db)
+============================================
 
 获取[Doctrine DBAL](https://github.com/doctrine/dbal)的Connection对象
 
@@ -12,7 +12,7 @@
 *无*
 
 
-Db微件是对[Doctrine DBAL](https://github.com/doctrine/dbal)的简单封装,主要用于按需加载数据库查询对象
+Db微件是对[Doctrine DBAL](https://github.com/doctrine/dbal)的简单封装,主要用于按需加载数据库查询对象.
 
 完整的配置请查看Doctrine DBAL官方提供的文档
 http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html

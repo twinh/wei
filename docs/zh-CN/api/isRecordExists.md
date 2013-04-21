@@ -1,5 +1,5 @@
-[isRecordExists()](http://twinh.github.com/widget/api/isRecordExists)
-=====================================================================
+[isRecordExists()](http://twinh.github.io/widget/api/isRecordExists)
+====================================================================
 
 检查数据表是否存在指定的记录
 

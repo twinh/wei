@@ -1,6 +1,6 @@
     该微件文档还在紧急编写中,敬请期待!
-[sort()](http://twinh.github.com/widget/api/sort)
-=================================================
+[sort()](http://twinh.github.io/widget/api/sort)
+================================================
 
 Sort two-dimensional array like SQL ORDER BY clause
 

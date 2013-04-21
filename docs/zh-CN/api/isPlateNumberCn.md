@@ -1,5 +1,5 @@
-[isPlateNumberCn()](http://twinh.github.com/widget/api/isPlateNumberCn)
-=======================================================================
+[isPlateNumberCn()](http://twinh.github.io/widget/api/isPlateNumberCn)
+======================================================================
 
 检查数据是否为有效的中国车牌号码
 

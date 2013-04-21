@@ -1,5 +1,5 @@
-[isDoubleByte()](http://twinh.github.com/widget/api/isDoubleByte)
-=================================================================
+[isDoubleByte()](http://twinh.github.io/widget/api/isDoubleByte)
+================================================================
 
 检查数据是否只由双字节字符组成
 

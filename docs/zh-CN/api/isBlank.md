@@ -1,5 +1,5 @@
-[isBlank()](http://twinh.github.com/widget/api/isBlank)
-=======================================================
+[isBlank()](http://twinh.github.io/widget/api/isBlank)
+======================================================
 
 检查数据是否为空(不允许空格)
 

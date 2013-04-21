@@ -1,5 +1,5 @@
-[inGet()](http://twinh.github.com/widget/api/inGet)
-===================================================
+[inGet()](http://twinh.github.io/widget/api/inGet)
+==================================================
 
 检查当前的请求方式是否为GET
 

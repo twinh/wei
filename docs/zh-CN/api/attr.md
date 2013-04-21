@@ -1,5 +1,5 @@
-[attr()](http://twinh.github.com/widget/api/attr)
-=================================================
+[attr()](http://twinh.github.io/widget/api/attr)
+================================================
 
 获取数组或对象中指定键名的值
 

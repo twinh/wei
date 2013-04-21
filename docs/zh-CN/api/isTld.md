@@ -1,5 +1,5 @@
-[isTld()](http://twinh.github.com/widget/api/isTld)
-===================================================
+[isTld()](http://twinh.github.io/widget/api/isTld)
+==================================================
 
 检查数据是否为存在的顶级域名
 

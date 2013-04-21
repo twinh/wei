@@ -1,5 +1,5 @@
-[apc()](http://twinh.github.com/widget/api/apc)
-===============================================
+[apc()](http://twinh.github.io/widget/api/apc)
+==============================================
 
 Apc微件是对PHP APC缓存的管理
 

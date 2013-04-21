@@ -1,5 +1,5 @@
-[isUuid()](http://twinh.github.com/widget/api/isUuid)
-=====================================================
+[isUuid()](http://twinh.github.io/widget/api/isUuid)
+====================================================
 
 检查数据是否为有效的UUID
 

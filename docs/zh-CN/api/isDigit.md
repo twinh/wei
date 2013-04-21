@@ -1,5 +1,5 @@
-[isDigit()](http://twinh.github.com/widget/api/isDigit)
-=======================================================
+[isDigit()](http://twinh.github.io/widget/api/isDigit)
+======================================================
 
 检查数据是否只由数字组成
 

@@ -1,5 +1,5 @@
-[isRegex()](http://twinh.github.com/widget/api/isRegex)
-=======================================================
+[isRegex()](http://twinh.github.io/widget/api/isRegex)
+======================================================
 
 检查数据是否匹配指定的正则表达式
 

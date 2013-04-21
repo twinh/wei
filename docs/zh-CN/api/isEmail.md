@@ -1,5 +1,5 @@
-[isEmail()](http://twinh.github.com/widget/api/isEmail)
-=======================================================
+[isEmail()](http://twinh.github.io/widget/api/isEmail)
+======================================================
 
 检查数据是否为有效的邮箱地址
 

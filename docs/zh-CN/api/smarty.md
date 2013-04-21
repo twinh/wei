@@ -1,6 +1,6 @@
     该微件文档还在紧急编写中,敬请期待!
-[smarty()](http://twinh.github.com/widget/api/smarty)
-=====================================================
+[smarty()](http://twinh.github.io/widget/api/smarty)
+====================================================
 
 Returns \Smarty object or render a template
 

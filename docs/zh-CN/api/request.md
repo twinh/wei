@@ -1,5 +1,5 @@
-[request()](http://twinh.github.com/widget/api/request)
-=======================================================
+[request()](http://twinh.github.io/widget/api/request)
+======================================================
 
 获取一项HTTP请求参数($_REQUEST)的值
 

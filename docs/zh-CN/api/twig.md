@@ -1,6 +1,6 @@
     该微件文档还在紧急编写中,敬请期待!
-[twig()](http://twinh.github.com/widget/api/twig)
-=================================================
+[twig()](http://twinh.github.io/widget/api/twig)
+================================================
 
 Returns \Twig_Environment object or render a template
 

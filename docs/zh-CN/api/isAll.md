@@ -1,5 +1,5 @@
-[isAll()](http://twinh.github.com/widget/api/isAll)
-===================================================
+[isAll()](http://twinh.github.io/widget/api/isAll)
+==================================================
 
 检查数组或对象里的每一项是否符合指定的规则
 

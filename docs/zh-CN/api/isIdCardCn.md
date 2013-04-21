@@ -1,5 +1,5 @@
-[isIdCardCn()](http://twinh.github.com/widget/api/isIdCardCn)
-=============================================================
+[isIdCardCn()](http://twinh.github.io/widget/api/isIdCardCn)
+============================================================
 
 检查数据是否为有效的中国身份证
 

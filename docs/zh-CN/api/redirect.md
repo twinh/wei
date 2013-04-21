@@ -1,5 +1,5 @@
-[redirect()](http://twinh.github.com/widget/api/redirect)
-=========================================================
+[redirect()](http://twinh.github.io/widget/api/redirect)
+========================================================
 
 发送页面跳转的HTTP响应
 

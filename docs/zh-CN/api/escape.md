@@ -1,5 +1,5 @@
-[escape()](http://twinh.github.com/widget/api/escape)
-=====================================================
+[escape()](http://twinh.github.io/widget/api/escape)
+====================================================
 
 转义字符串中的特殊字符,以便安全的输出到网页中,支持HTML,JS,CSS,HTML属性和URL的转义
 

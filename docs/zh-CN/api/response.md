@@ -1,5 +1,5 @@
-[response()](http://twinh.github.com/widget/api/response)
-=========================================================
+[response()](http://twinh.github.io/widget/api/response)
+========================================================
 
 发送HTTP响应头和响应内容
 

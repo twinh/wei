@@ -1,5 +1,5 @@
-[isDateTime()](http://twinh.github.com/widget/api/isDateTime)
-=============================================================
+[isDateTime()](http://twinh.github.io/widget/api/isDateTime)
+============================================================
 
 检查数据是否为合法的日期时间
 

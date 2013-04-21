@@ -1,5 +1,5 @@
-[isNoneOf()](http://twinh.github.com/widget/api/isNoneOf)
-=========================================================
+[isNoneOf()](http://twinh.github.io/widget/api/isNoneOf)
+========================================================
 
 检查数据是否不符合所有指定的规则校验
 

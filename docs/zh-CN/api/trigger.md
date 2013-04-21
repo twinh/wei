@@ -1,5 +1,5 @@
-[trigger()](http://twinh.github.com/widget/api/trigger)
-=======================================================
+[trigger()](http://twinh.github.io/widget/api/trigger)
+======================================================
 
 触发指定类型的事件
 

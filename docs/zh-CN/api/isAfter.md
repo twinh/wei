@@ -1,5 +1,5 @@
-[isAfter()](http://twinh.github.com/widget/api/isAfter)
-=======================================================
+[isAfter()](http://twinh.github.io/widget/api/isAfter)
+======================================================
 
 检查数据是否大于等于指定的日期或时间
 

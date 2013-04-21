@@ -1,5 +1,5 @@
-[inAjax()](http://twinh.github.com/widget/api/inAjax)
-=====================================================
+[inAjax()](http://twinh.github.io/widget/api/inAjax)
+====================================================
 
 检查当前的请求是否为Ajax(XMLHttpRequest)请求
 

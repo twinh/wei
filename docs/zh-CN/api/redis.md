@@ -1,5 +1,5 @@
-[redis()](http://twinh.github.com/widget/api/redis)
-===================================================
+[redis()](http://twinh.github.io/widget/api/redis)
+==================================================
 
 设置或获取一项Redis缓存
 

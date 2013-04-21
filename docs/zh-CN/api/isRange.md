@@ -1,5 +1,5 @@
-[isRange()](http://twinh.github.com/widget/api/isRange)
-=======================================================
+[isRange()](http://twinh.github.io/widget/api/isRange)
+======================================================
 
 检查数据是否在指定的两个值之间
 

@@ -1,5 +1,5 @@
-[download()](http://twinh.github.com/widget/api/download)
-=========================================================
+[download()](http://twinh.github.io/widget/api/download)
+========================================================
 
 发送下载文件的HTTP响应
 

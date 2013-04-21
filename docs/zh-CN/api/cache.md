@@ -1,5 +1,5 @@
-[cache()](http://twinh.github.com/widget/api/cache)
-===================================================
+[cache()](http://twinh.github.io/widget/api/cache)
+==================================================
 
 设置或获取指定缓存类型的一项缓存
 

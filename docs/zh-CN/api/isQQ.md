@@ -1,5 +1,5 @@
-[isQQ()](http://twinh.github.com/widget/api/isQQ)
-=================================================
+[isQQ()](http://twinh.github.io/widget/api/isQQ)
+================================================
 
 检查数据是否为有效的QQ号码
 

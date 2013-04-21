@@ -1,12 +1,12 @@
     该微件文档还在紧急编写中,敬请期待!
-[header()](http://twinh.github.com/widget/api/header)
-=====================================================
+[header()](http://twinh.github.io/widget/api/header)
+====================================================
 
 Get or set the header values
 
 ### Get or set the header values
 ```php
-mixed|\Widget\Header header($name, $values, $replace)
+mixed|\Header header($name, $values, $replace)
 ```
 
 ##### 参数

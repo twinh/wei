@@ -1,5 +1,5 @@
-[isBefore()](http://twinh.github.com/widget/api/isBefore)
-=========================================================
+[isBefore()](http://twinh.github.io/widget/api/isBefore)
+========================================================
 
 检查数据是否小于等于指定的日期或时间
 

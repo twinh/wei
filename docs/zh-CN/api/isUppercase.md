@@ -1,5 +1,5 @@
-[isUppercase()](http://twinh.github.com/widget/api/isUppercase)
-===============================================================
+[isUppercase()](http://twinh.github.io/widget/api/isUppercase)
+==============================================================
 
 检查数据是否为大写字符
 

@@ -1,5 +1,5 @@
-[isMinLength()](http://twinh.github.com/widget/api/isMinLength)
-===============================================================
+[isMinLength()](http://twinh.github.io/widget/api/isMinLength)
+==============================================================
 
 检查数据的长度是否大于等于指定数值
 

@@ -1,5 +1,5 @@
-[view()](http://twinh.github.com/widget/api/view)
-=================================================
+[view()](http://twinh.github.io/widget/api/view)
+================================================
 
 渲染指定名称的模板或获取视图微件对象
 

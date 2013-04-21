@@ -1,5 +1,5 @@
-[isNumber()](http://twinh.github.com/widget/api/isNumber)
-=========================================================
+[isNumber()](http://twinh.github.io/widget/api/isNumber)
+========================================================
 
 检查数据是否为有效数字
 

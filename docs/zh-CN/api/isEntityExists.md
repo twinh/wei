@@ -1,5 +1,5 @@
-[isEntityExists()](http://twinh.github.com/widget/api/isEntityExists)
-=====================================================================
+[isEntityExists()](http://twinh.github.io/widget/api/isEntityExists)
+====================================================================
 
 检查Doctrine ORM实体是否存在
 

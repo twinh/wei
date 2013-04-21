@@ -1,5 +1,5 @@
-[isCreditCard()](http://twinh.github.com/widget/api/isCreditCard)
-=================================================================
+[isCreditCard()](http://twinh.github.io/widget/api/isCreditCard)
+================================================================
 
 检查数据是否为合法的信用卡号码
 

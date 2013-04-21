@@ -1,5 +1,5 @@
-[isDir()](http://twinh.github.com/widget/api/isDir)
-===================================================
+[isDir()](http://twinh.github.io/widget/api/isDir)
+==================================================
 
 检查数据是否为存在的目录
 

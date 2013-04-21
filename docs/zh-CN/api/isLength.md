@@ -1,5 +1,5 @@
-[isLength()](http://twinh.github.com/widget/api/isLength)
-=========================================================
+[isLength()](http://twinh.github.io/widget/api/isLength)
+========================================================
 
 检查数据的长度是否为指定的数值,或在指定的长度范围内
 

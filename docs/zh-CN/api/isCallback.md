@@ -1,5 +1,5 @@
-[isCallback()](http://twinh.github.com/widget/api/isCallback)
-=============================================================
+[isCallback()](http://twinh.github.io/widget/api/isCallback)
+============================================================
 
 检查数据是否通过指定回调方法验证
 

@@ -1,5 +1,5 @@
-[isIp()](http://twinh.github.com/widget/api/isIp)
-=================================================
+[isIp()](http://twinh.github.io/widget/api/isIp)
+================================================
 
 检查数据是否为有效的IP地址
 

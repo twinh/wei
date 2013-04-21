@@ -1,6 +1,6 @@
     该微件文档还在紧急编写中,敬请期待!
-[logger()](http://twinh.github.com/widget/api/logger)
-=====================================================
+[logger()](http://twinh.github.io/widget/api/logger)
+====================================================
 
 Logs with an arbitrary level
 

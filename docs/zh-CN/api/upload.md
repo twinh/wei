@@ -1,5 +1,5 @@
-[upload()](http://twinh.github.com/widget/api/upload)
-=====================================================
+[upload()](http://twinh.github.io/widget/api/upload)
+====================================================
 
 保存客户端上传的文件到指定目录
 

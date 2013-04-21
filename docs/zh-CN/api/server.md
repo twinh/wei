@@ -1,6 +1,6 @@
     该微件文档还在紧急编写中,敬请期待!
-[server()](http://twinh.github.com/widget/api/server)
-=====================================================
+[server()](http://twinh.github.io/widget/api/server)
+====================================================
 
 Returns a *stringify* or user defined($default) parameter value
 

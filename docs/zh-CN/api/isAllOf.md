@@ -1,5 +1,5 @@
-[isAllOf()](http://twinh.github.com/widget/api/isAllOf)
-=======================================================
+[isAllOf()](http://twinh.github.io/widget/api/isAllOf)
+======================================================
 
 检查数据是否通过所有的规则校验
 
