@@ -20,6 +20,6 @@ class UrlDebuggerTest extends TestCase
     {
         $this->query['_method'] = 'PUT';
         $this->urlDebugger->inject();
-        $this->assertTrue($this->inMethod('PUT'));
+        $this->assertTrue($this->request->inMethod('PUT'));
     }
 }

@@ -74,7 +74,6 @@ class RequestTest extends TestCase
         
         $this->request->setMethod('PUT');
         $this->assertTrue($this->request->inMethod('PUT'));
-        $this->assertTrue($this->inMethod('PUT'));
     }
     
     public function testAjax()
