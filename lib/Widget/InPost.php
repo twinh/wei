@@ -12,7 +12,7 @@ namespace Widget;
  * Check if in post request
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    \Widget\Request $request The request widget
+ * @property    Request $request The request widget
  */
 class InPost extends AbstractWidget
 {

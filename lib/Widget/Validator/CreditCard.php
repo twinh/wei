@@ -139,8 +139,8 @@ class CreditCard extends AbstractValidator
      * comma(,) or string "all" means all supported types
      * 
      * @param string|array $type
-     * @return \Widget\Validator\CreditCard
-     * @throws \Widget\Exception\UnexpectedTypeException When parameter is not array or string
+     * @return Validator\CreditCard
+     * @throws Exception\UnexpectedTypeException When parameter is not array or string
      */
     public function setType($type)
     {

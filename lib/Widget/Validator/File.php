@@ -273,7 +273,7 @@ class File extends AbstractValidator
      * Set allowed file extensions
      * 
      * @param string|array $exts String format likes 'php,js' or array format likes [php, js]
-     * @return \Widget\Validator\File
+     * @return Validator\File
      */
     public function setExts($exts)
     {
@@ -286,7 +286,7 @@ class File extends AbstractValidator
      * Set exclude file extensions
      * 
      * @param string|array $exts String format likes 'php,js' or array format likes [php, js]
-     * @return \Widget\Validator\File
+     * @return Validator\File
      */
     public function setExcludeExts($exts)
     {
@@ -299,7 +299,7 @@ class File extends AbstractValidator
      * Set maximum file size 
      * 
      * @param string|int $maxSize
-     * @return \Widget\Validator\File
+     * @return Validator\File
      */
     protected function setMaxSize($maxSize)
     {
@@ -313,7 +313,7 @@ class File extends AbstractValidator
      * Set the minimum file size
      * 
      * @param string|int $minSize
-     * @return \Widget\Validator\File
+     * @return Validator\File
      */
     protected function setMinSize($minSize)
     {
@@ -364,7 +364,7 @@ class File extends AbstractValidator
      * Set the file mime types
      * 
      * @param string|array $mimeTypes
-     * @return \Widget\Validator\File
+     * @return Validator\File
      */
     public function setMimeTypes($mimeTypes)
     {
@@ -377,7 +377,7 @@ class File extends AbstractValidator
      * Set the file exclude mime types
      * 
      * @param string|array $excludeMimeTypes
-     * @return \Widget\Validator\File
+     * @return Validator\File
      */
     public function setExcludeMimeTypes($excludeMimeTypes)
     {
@@ -391,7 +391,7 @@ class File extends AbstractValidator
      * 
      * @param mixed $var
      * @return array
-     * @throws \Widget\Exception\UnexpectedTypeException When parameter is not a string or array
+     * @throws Exception\UnexpectedTypeException When parameter is not a string or array
      */
     protected function convertToArray($var)
     {
@@ -408,7 +408,7 @@ class File extends AbstractValidator
      * Returns the file mime type on success
      * 
      * @return string|false
-     * @throws \Widget\Exception\UnexpectedValueException When failed to open fileinfo database
+     * @throws Exception\UnexpectedValueException When failed to open fileinfo database
      */
     public function getMimeType()
     {

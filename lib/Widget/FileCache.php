@@ -259,8 +259,8 @@ class FileCache extends AbstractCache
      * Set the cache directory
      *
      * @param string $dir
-     * @return \Widget\FileCache
-     * @throws \Widget\Exception\IOException When failed to create the cache directory
+     * @return FileCache
+     * @throws Exception\IOException When failed to create the cache directory
      */
     public function setDir($dir)
     {

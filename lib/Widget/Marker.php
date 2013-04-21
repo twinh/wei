@@ -133,7 +133,7 @@ class Marker extends AbstractWidget
      * Display profiling data in html code
      *
      * @param  boolean|string $print Whether output or return the result
-     * @return \Widget\Marker|string
+     * @return Marker|string
      */
     public function display($print = true)
     {

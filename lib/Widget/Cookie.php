@@ -12,7 +12,7 @@ namespace Widget;
  * The cookie widget
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    \Widget\Request $request The HTTP request widget
+ * @property    Request $request The HTTP request widget
  */
 class Cookie extends Parameter
 {
@@ -33,7 +33,7 @@ class Cookie extends Parameter
      * The cookies that have not been sent to header, but will sent when class destruct
      *
      * @var array
-     * @see \Widget\Cookie::__destruct
+     * @see Cookie::__destruct
      */
     protected $rawCookies = array();
 
@@ -84,7 +84,7 @@ class Cookie extends Parameter
      * @param  string       $key     The name of cookie
      * @param  mixed        $value   The value of cookie
      * @param  array        $options
-     * @return \Widget\Cookie
+     * @return Cookie
      */
     public function set($key, $value = null, array $options = array())
     {
@@ -122,7 +122,7 @@ class Cookie extends Parameter
      * Remove cookie
      *
      * @param  string       $key the name of cookie
-     * @return \Widget\Cookie
+     * @return Cookie
      */
     public function offsetUnset($key)
     {
@@ -132,7 +132,7 @@ class Cookie extends Parameter
     /**
      * Send cookie to header
      *
-     * @return \Widget\Cookie
+     * @return Cookie
      */
     public function send()
     {

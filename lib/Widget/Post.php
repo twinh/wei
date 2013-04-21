@@ -12,7 +12,7 @@ namespace Widget;
  * The HTTP request parameters ($_POST) widget
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    \Widget\Request $request The HTTP request widget
+ * @property    Request $request The HTTP request widget
  */
 class Post extends Parameter
 {

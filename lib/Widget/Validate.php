@@ -13,14 +13,14 @@ namespace Widget;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        http://bassistance.de/jquery-plugins/jquery-plugin-validation/
- * @property    \Widget\Is $is The validator manager
+ * @property    Is $is The validator manager
  */
 class Validate extends AbstractWidget
 {
     /**
      * The last validator object
      *
-     * @var \Widget\Validator
+     * @var Validator
      */
     protected $validator;
     
@@ -28,7 +28,7 @@ class Validate extends AbstractWidget
      * Create a new validator and validate by specified options
      * 
      * @param array $options
-     * @return \Widget\Validator
+     * @return Validator
      */
     public function __invoke(array $options = array())
     {

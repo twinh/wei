@@ -12,7 +12,7 @@ namespace Widget;
  * The redirect response widget
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @method      \Widget\Header header(string $name, string|array $values) Set the header value
+ * @method      Header header(string $name, string|array $values) Set the header value
  */
 class Redirect extends Response
 {
@@ -53,8 +53,8 @@ class Redirect extends Response
      * @param  string         $url     The url redirect to
      * @param  int            $status  The redirect status code
      * @param  array          $options The widget options
-     * @return \Widget\Redirect
-     * @throws \Widget\Exception\NotFoundException  When custom view file not found
+     * @return Redirect
+     * @throws Exception\NotFoundException  When custom view file not found
      */
     public function __invoke($url = null, $status = 302, array $options = array())
     {
@@ -80,7 +80,7 @@ class Redirect extends Response
      * Set redirect view file
      * 
      * @param string $view The view file
-     * @return \Widget\Redirect
+     * @return Redirect
      * @throws Exception\NotFoundException When view file not found
      */
     public function setView($view)
@@ -98,7 +98,7 @@ class Redirect extends Response
      * Set delay seconds
      * 
      * @param int $delay
-     * @return \Widget\Redirect
+     * @return Redirect
      */
     public function setDelay($delay)
     {

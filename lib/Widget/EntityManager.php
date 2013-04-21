@@ -120,7 +120,7 @@ class EntityManager extends AbstractWidget
      * Set configuration for \Doctrine\ORM\Configuration
      *
      * @param array $config
-     * @return \Widget\EntityManager
+     * @return EntityManager
      */
     public function setConfig(array $config)
     {

@@ -13,7 +13,7 @@ abstract class AbstractGroupValidator extends AbstractValidator
     /**
      * The invalid validators
      * 
-     * @var array<\Widget\Validator\AbstractValidator>
+     * @var array<Validator\AbstractValidator>
      */
     protected $validators = array();
     

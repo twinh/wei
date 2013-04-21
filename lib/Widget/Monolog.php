@@ -54,7 +54,7 @@ class Monolog extends AbstractWidget
      * Constructor
      * 
      * @param array $options
-     * @throws \Widget\Exception\InvalidArgumentException When log handlder not found
+     * @throws Exception\InvalidArgumentException When log handlder not found
      */
     public function __construct(array $options = array())
     {

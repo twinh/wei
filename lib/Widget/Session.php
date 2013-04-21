@@ -68,7 +68,7 @@ class Session extends Parameter
     /**
      * Start session
      *
-     * @return \Widget\Session
+     * @return Session
      */
     public function start()
     {
@@ -103,7 +103,7 @@ class Session extends Parameter
     /**
      * Destroy session
      *
-     * @return \Widget\Session
+     * @return Session
      */
     public function destroy()
     {
@@ -121,7 +121,7 @@ class Session extends Parameter
      * Set session configuration options
      *
      * @param array $inis
-     * @return \Widget\Session
+     * @return Session
      */
     public function setInis($inis)
     {

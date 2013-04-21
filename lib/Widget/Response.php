@@ -12,9 +12,9 @@ namespace Widget;
  * The HTTP response
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    \Widget\Header $header The response header
- * @property    \Widget\Cookie $cookie The cookie widget
- * @property    \Widget\Logger $logger The logger widget
+ * @property    Header $header The response header
+ * @property    Cookie $cookie The cookie widget
+ * @property    Logger $logger The logger widget
  */
 class Response extends AbstractWidget
 {
@@ -113,7 +113,7 @@ class Response extends AbstractWidget
      *
      * @param  string         $content
      * @param  int            $status
-     * @return \Widget\Response
+     * @return Response
      */
     public function __invoke($content = null, $status = null)
     {
@@ -146,7 +146,7 @@ class Response extends AbstractWidget
     /**
      * Send response content
      * 
-     * @return \Widget\Response
+     * @return Response
      */
     public function sendContent()
     {
@@ -156,7 +156,7 @@ class Response extends AbstractWidget
     }
 
     /**
-     * @see \Widget\Response::__invoke
+     * @see Response::__invoke
      */
     public function send($content = null, $status = null)
     {
@@ -233,7 +233,7 @@ class Response extends AbstractWidget
     /**
      * Send headers, including HTTP status, raw headers and cookie
      *
-     * @return false|\Widget\Response
+     * @return false|Response
      */
     public function sendHeader()
     {

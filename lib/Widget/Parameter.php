@@ -105,7 +105,7 @@ abstract class Parameter extends ArrayWidget
      * 
      * @param string|array $name The parameter name or A key-value array
      * @param mixed $value The parameter value
-     * @return \Widget\Parameter
+     * @return Parameter
      */
     public function set($name, $value = null)
     {
@@ -124,7 +124,7 @@ abstract class Parameter extends ArrayWidget
      * Remove parameter by specified name
      * 
      * @param string $name The parameter name
-     * @return \Widget\Parameter
+     * @return Parameter
      */
     public function remove($name)
     {
@@ -136,7 +136,7 @@ abstract class Parameter extends ArrayWidget
     /**
      * Clear all parameter data
      * 
-     * @return \Widget\Parameter
+     * @return Parameter
      */
     public function clear()
     {

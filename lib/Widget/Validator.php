@@ -14,7 +14,7 @@ use Widget\Validator\ValidatorInterface;
  * The validator widget
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    \Widget\Is $is The validator manager
+ * @property    Is $is The validator manager
  */
 class Validator extends AbstractWidget
 {
@@ -134,7 +134,7 @@ class Validator extends AbstractWidget
     /**
      * The rule validator instances
      * 
-     * @var array<\Widget\Validator\AbstractRule>
+     * @var array<Validator\AbstractRule>
      */
     protected $ruleValidators = array();
 
@@ -143,8 +143,8 @@ class Validator extends AbstractWidget
      *
      * @param array $options The options for validation
      * @return bool Whether pass the validation or not
-     * @throws \Widget\Exception\InvalidArgumentException When validation rules is empty
-     * @throws \Widget\Exception\UnexpectedTypeException  When validation rule is not array, string or instance of ValidatorInterface
+     * @throws Exception\InvalidArgumentException When validation rules is empty
+     * @throws Exception\UnexpectedTypeException  When validation rule is not array, string or instance of ValidatorInterface
      */
     public function __invoke($options = array())
     {
@@ -192,7 +192,7 @@ class Validator extends AbstractWidget
                 $props = $this->prepareProps($field, $rule);
 
                 // The current rule validation result
-                /* @var $validator \Widget\Validator\AbstractValidator */
+                /* @var $validator Validator\AbstractValidator */
                 $validator = null;
                 $result = $this->is->validateOne($rule, $data, $params, $validator, $props);
 
@@ -486,7 +486,7 @@ class Validator extends AbstractWidget
      * Sets data for validation
      * 
      * @param array|object $data
-     * @return \Widget\Validator
+     * @return Validator
      */
     public function setData($data)
     {
@@ -627,7 +627,7 @@ class Validator extends AbstractWidget
      * 
      * @param string $field
      * @param string $rule
-     * @return \Widget\Validator\AbstractRule
+     * @return Validator\AbstractRule
      */
     public function getRuleValidator($field, $rule)
     {

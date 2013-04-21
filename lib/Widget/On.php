@@ -13,7 +13,7 @@ namespace Widget;
  * This widget is the alias of `$widget->eventManager->add()`
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property \Widget\EventManager $eventManager The event manager widget
+ * @property EventManager $eventManager The event manager widget
  */
 class On extends AbstractWidget
 {
@@ -24,7 +24,7 @@ class On extends AbstractWidget
      * @param callback $fn The event handler
      * @param int|string $priority The event priority, could be int or specify strings, the higer number, the higer priority
      * @param array $data The data pass to the event object, when the handler is triggered
-     * @return \Widget\EventManager
+     * @return EventManager
      */
     public function __invoke($type, $fn = null, $priority = 0, $data = array())
     {

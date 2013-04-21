@@ -13,10 +13,10 @@ use Widget\Event\Event;
 /**
  * The error widget to show pretty exception message 
  *
- * @property    \Widget\Request $request The HTTP request widget
- * @property    \Widget\Logger $logger The logger widget
- * @property    \Widget\Response $response The HTTP response widget
- * @method      \Widget\EventManager on(string|\Widget\Event $event) Attach a handler to an event
+ * @property    Request $request The HTTP request widget
+ * @property    Logger $logger The logger widget
+ * @property    Response $response The HTTP response widget
+ * @method      EventManager on(string|Event $event) Attach a handler to an event
  */
 class Error extends AbstractWidget
 {
@@ -58,7 +58,7 @@ class Error extends AbstractWidget
      * @param \Closure $fn The error handler
      * @param int|string $priority The event priority, could be int or specify strings, the higer number, the higer priority
      * @param array $data The data pass to the event object, when the handler is triggered
-     * @return \Widget\EventManager
+     * @return EventManager
      */
     public function __invoke(\Closure $fn, $priority = 1, $data = array())
     {
@@ -68,8 +68,8 @@ class Error extends AbstractWidget
     /**
      * The exception handler to render pretty message
      * 
-     * @param \Widget\Event\Event $event
-     * @param \Widget\Widget $widget
+     * @param Event\Event $event
+     * @param Widget $widget
      * @param \Exception $exception
      */
     public function handleException(Event $event, $widget, $exception)

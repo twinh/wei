@@ -18,8 +18,8 @@ interface WidgetAwareInterface
     /**
      * Sets the widget manager
      * 
-     * @param \Widget\Widget $widget A widget manager instance
-     * @return \Widget\WidgetAwareInterface
+     * @param Widget $widget A widget manager instance
+     * @return WidgetAwareInterface
      */
     public function setWidget(Widget $widget);
     
@@ -27,7 +27,7 @@ interface WidgetAwareInterface
      * Get the widget object by the given name
      *
      * @param  string       $name The name of widget
-     * @return \Widget\WidgetInterface
+     * @return WidgetInterface
      */
     public function __get($name);
 

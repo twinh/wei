@@ -134,7 +134,7 @@ class Callback extends AbstractWidget
     /**
      * Output the matched rule message
      * 
-     * @return \Widget\Callback
+     * @return Callback
      */
     public function __invoke()
     {
@@ -199,7 +199,7 @@ class Callback extends AbstractWidget
      * Attach a callback which triggered when user subscribed you
      * 
      * @param \Closure $fn
-     * @return \Widget\Callback
+     * @return Callback
      */
     public function subscribe(Closure $fn)
     {
@@ -210,7 +210,7 @@ class Callback extends AbstractWidget
      * Attach a callback which triggered when user unsubscribed you
      * 
      * @param \Closure $fn
-     * @return \Widget\Callback
+     * @return Callback
      */
     public function unsubscribe(Closure $fn)
     {
@@ -222,7 +222,7 @@ class Callback extends AbstractWidget
      *
      * @param string $key The key of event
      * @param \Closure $fn
-     * @return \Widget\Callback
+     * @return Callback
      */
     public function click($key, Closure $fn)
     {
@@ -234,7 +234,7 @@ class Callback extends AbstractWidget
      * 
      * @param string $keyword The keyword to compare with user input
      * @param \Closure $fn
-     * @return \Widget\Callback
+     * @return Callback
      */
     public function is($keyword, Closure $fn)
     {
@@ -246,7 +246,7 @@ class Callback extends AbstractWidget
      * 
      * @param string $keyword The keyword to search in user input
      * @param \Closure $fn
-     * @return \Widget\Callback
+     * @return Callback
      */
     public function has($keyword, Closure $fn)
     {
@@ -258,7 +258,7 @@ class Callback extends AbstractWidget
      * 
      * @param string $keyword The keyword to search in user input
      * @param \Closure $fn
-     * @return \Widget\Callback
+     * @return Callback
      */
     public function startsWith($keyword, Closure $fn)
     {
@@ -270,7 +270,7 @@ class Callback extends AbstractWidget
      * 
      * @param string $pattern The pattern to match
      * @param \Closure $fn
-     * @return \Widget\Callback
+     * @return Callback
      */
     public function match($pattern, Closure $fn)
     {
@@ -281,7 +281,7 @@ class Callback extends AbstractWidget
      * Attach a callback to handle image message  
      * 
      * @param \Closure $fn
-     * @return \Widget\Callback
+     * @return Callback
      */
     public function receiveImage(Closure $fn)
     {
@@ -293,7 +293,7 @@ class Callback extends AbstractWidget
      * Attach a callback to handle location message
      * 
      * @param \Closure $fn
-     * @return \Widget\Callback
+     * @return Callback
      */
     public function receiveLocation(Closure $fn)
     {
@@ -305,7 +305,7 @@ class Callback extends AbstractWidget
      * Attach a callback to handle voice message
      * 
      * @param \Closure $fn
-     * @return \Widget\Callback
+     * @return Callback
      */
     public function receiveVoice(Closure $fn)
     {
@@ -317,7 +317,7 @@ class Callback extends AbstractWidget
      * Attach a callback to handle video message
      * 
      * @param Closure $fn
-     * @return \Widget\Callback
+     * @return Callback
      */
     public function receiveVideo(Closure $fn)
     {
@@ -329,7 +329,7 @@ class Callback extends AbstractWidget
      * Attach a callback to handle link message
      * 
      * @param Closure $fn
-     * @return \Widget\Callback
+     * @return Callback
      */
     public function receiveLink(Closure $fn)
     {
@@ -457,7 +457,7 @@ class Callback extends AbstractWidget
      * Whether return the mark message or not
      * 
      * @param bool $bool
-     * @return \Widget\Callback
+     * @return Callback
      */
     public function setMark($bool)
     {
@@ -718,7 +718,7 @@ class Callback extends AbstractWidget
      * @param \SimpleXMLElement $xml
      * @param string $name
      * @param string $value
-     * @return \Widget\Callback
+     * @return Callback
      */
     protected function addCDataChild(SimpleXMLElement $xml, $name, $value)
     {
@@ -734,7 +734,7 @@ class Callback extends AbstractWidget
      * @param string $type
      * @param string $keyword
      * @param \Closure $fn
-     * @return \Widget\Callback
+     * @return Callback
      */
     protected function addRule($type, $keyword, Closure $fn)
     {

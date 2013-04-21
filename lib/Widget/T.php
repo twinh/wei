@@ -75,7 +75,7 @@ class T extends AbstractWidget
      * Sets the default locale
      * 
      * @param string $locale
-     * @return \Widget\T
+     * @return T
      */
     public function setLocale($locale)
     {
@@ -98,7 +98,7 @@ class T extends AbstractWidget
      * Set the fallback locale
      * 
      * @param string $locale
-     * @return \Widget\T
+     * @return T
      */
     public function setFallbackLocale($locale)
     {
@@ -121,7 +121,7 @@ class T extends AbstractWidget
      * Loads translator messages from file
      * 
      * @param string $pattern The file path, which can contains %s that would be convert the current locale or fallback locale
-     * @return \Widget\T
+     * @return T
      * @throws Exception When file not found or not readable
      */
     public function loadFromFile($pattern)
@@ -149,7 +149,7 @@ class T extends AbstractWidget
      * Loads translator messages from array
      * 
      * @param array $messages
-     * @return \Widget\T
+     * @return T
      */
     public function loadFromArray(array $messages)
     {
@@ -162,7 +162,7 @@ class T extends AbstractWidget
      * Loads translator messages from closure
      * 
      * @param \Closure $fn
-     * @return \Widget\T
+     * @return T
      */
     public function load(\Closure $fn)
     {

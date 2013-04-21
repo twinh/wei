@@ -48,7 +48,7 @@ class UrlDebugger extends AbstractWidget
     /**
      * Invoker
      * 
-     * @return \Widget\UrlDebugger
+     * @return UrlDebugger
      */
     public function __invoke()
     {

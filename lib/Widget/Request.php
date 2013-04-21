@@ -23,7 +23,7 @@ namespace Widget;
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * 
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    \Widget\Server $server The server widget
+ * @property    Server $server The server widget
  */
 class Request extends Parameter
 {
@@ -198,7 +198,7 @@ class Request extends Parameter
      * Set the path info
      * 
      * @param string $pathInfo
-     * @return \Widget\Request
+     * @return Request
      */
     public function setPathInfo($pathInfo)
     {
@@ -295,7 +295,7 @@ class Request extends Parameter
      * Set the HTTP request method
      * 
      * @param string $method The value of method
-     * @return \Widget\Request
+     * @return Request
      */
     public function setMethod($method)
     {
@@ -376,7 +376,7 @@ class Request extends Parameter
      * Set the request message body
      * 
      * @param string $content
-     * @return \Widget\Request
+     * @return Request
      */
     public function setContent($content)
     {

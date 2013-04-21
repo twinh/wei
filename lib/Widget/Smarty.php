@@ -117,7 +117,7 @@ class Smarty extends AbstractView
      * Set Smarty object
      * 
      * @param \Smarty $object
-     * @return \Widget\Smarty
+     * @return Smarty
      */
     public function setObject(\Smarty $object = null)
     {
@@ -130,7 +130,7 @@ class Smarty extends AbstractView
      * Set property value for Smarty
      * 
      * @param array $options
-     * @return \Widget\Smarty
+     * @return Smarty
      */
     public function setOptions(array $options)
     { 

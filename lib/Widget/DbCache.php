@@ -65,7 +65,7 @@ class DbCache extends AbstractCache
     /**
      * The sql driver object
      *
-     * @var \Widget\Cache\Db\DriverInterface
+     * @var Cache\Db\DriverInterface
      */
     protected $driver;
     
@@ -84,7 +84,7 @@ class DbCache extends AbstractCache
     /**
      * Connect the database
      *
-     * @throws \Widget\Exception\UnsupportedException When driver not support
+     * @throws Exception\UnsupportedException When driver not support
      */
     public function connect()
     {
@@ -289,7 +289,7 @@ class DbCache extends AbstractCache
     /**
      * Get current database cache driver
      *
-     * @return \Widget\Cache\Db\DriverInterface
+     * @return Cache\Db\DriverInterface
      */
     public function getDriver()
     {

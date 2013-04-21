@@ -16,7 +16,7 @@ use Widget\Exception\UnexpectedValueException;
  * 
  * @author      Twin Huang <twinhuang@qq.com>
  * @method      string t(string $message, array $parameters = array()) Translates a message
- * @property    \Widget\T $t The translator widget
+ * @property    T $t The translator widget
  */
 abstract class AbstractValidator extends AbstractWidget implements ValidatorInterface
 {
@@ -125,7 +125,7 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
      * 
      * @param string|array $name The name of property
      * @param mixed $value The value of property
-     * @return \Widget\Validator\AbstractValidator
+     * @return Validator\AbstractValidator
      * @internal This method should be use to set __invoke arguments only
      */
     protected function storeOption($name, $value = null)
@@ -173,7 +173,7 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
     
     /**
      * {@inheritdoc}
-     * @throws \Widget\Exception\UnexpectedValueException When message contains unkonwn parameter
+     * @throws Exception\UnexpectedValueException When message contains unkonwn parameter
      */
     public function getMessages()
     {
@@ -220,7 +220,7 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
      * Sets the specified messages
      * 
      * @param array $messages
-     * @return \Widget\Validator\AbstractValidator
+     * @return Validator\AbstractValidator
      */
     public function setMessages(array $messages)
     {
@@ -244,7 +244,7 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
      * Sets message name
      * 
      * @param string $name
-     * @return \Widget\Validator\AbstractValidator
+     * @return Validator\AbstractValidator
      */
     public function setName($name)
     {

@@ -11,7 +11,7 @@ namespace Widget\Event;
 use Widget\AbstractWidget;
 
 /**
- * A simple implementation of \Widget\Event\EventInterface
+ * A simple implementation of Widget\Event\EventInterface
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
@@ -97,7 +97,7 @@ abstract class AbstractEvent extends AbstractWidget implements EventInterface
      * Set the type of event
      *
      * @param  string      $type
-     * @return \Widget\Event\Event
+     * @return Event\Event
      */
     public function setType($type)
     {
@@ -120,7 +120,7 @@ abstract class AbstractEvent extends AbstractWidget implements EventInterface
      * Set the namespaces of event
      *
      * @param array $namespaces
-     * @return \Widget\Event\Event
+     * @return Event\Event
      */
     public function setNamespaces(array $namespaces)
     {
@@ -152,7 +152,7 @@ abstract class AbstractEvent extends AbstractWidget implements EventInterface
     /**
      * Set a flag to prevent the default action
      * 
-     * @return \Widget\Event\Event
+     * @return Event\Event
      */
     public function preventDefault()
     {
@@ -218,7 +218,7 @@ abstract class AbstractEvent extends AbstractWidget implements EventInterface
     /**
      * Set a flag to stop trigger the next handler
      * 
-     * @return \Widget\Event\Event
+     * @return Event\Event
      */
     public function stopPropagation()
     {

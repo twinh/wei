@@ -14,8 +14,8 @@ namespace Widget;
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        The code is base on the awesome framework - Kohana
  *              http://kohanaframework.org/3.0/guide/api/Kohana_Route
- * @property    \Widget\Request $request The HTTP request widget
- * @method      \Widget\Response response(string $content) Send response header and content
+ * @property    Request $request The HTTP request widget
+ * @method      Response response(string $content) Send response header and content
  */
 class Router extends AbstractWidget
 {
@@ -80,7 +80,7 @@ class Router extends AbstractWidget
      * Set routes
      * 
      * @param array $routes
-     * @return \Widget\Router
+     * @return Router
      */
     public function setRoutes($routes)
     {
@@ -106,7 +106,7 @@ class Router extends AbstractWidget
      * Add one route
      *
      * @param  array       $route the options of the route
-     * @return \Widget\Router
+     * @return Router
      */
     public function set($route)
     {
@@ -138,7 +138,7 @@ class Router extends AbstractWidget
      * Remove the route
      *
      * @param  string      $id The id of the route
-     * @return \Widget\Router
+     * @return Router
      */
     public function remove($id)
     {

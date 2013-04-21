@@ -15,7 +15,7 @@ use Widget\Validator\File as FileValidator;
  * The widget that handle file upload
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    \Widget\Request $request The HTTP request widget
+ * @property    Request $request The HTTP request widget
  */
 class Upload extends Image
 {
@@ -276,7 +276,7 @@ class Upload extends Image
      * Set upload directory
      * 
      * @param string $dir
-     * @return \Widget\Upload
+     * @return Upload
      */
     public function setDir($dir)
     {

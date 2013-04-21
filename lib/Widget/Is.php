@@ -63,7 +63,7 @@ class Is extends AbstractWidget
     }
     
     /**
-     * @param string|\Widget\Validator\AbstractValidator|int $rule
+     * @param string|Validator\AbstractValidator|int $rule
      * @param array|null $input
      * @paran mixed $options
      * @internal Do NOT use this method for it may be changed in the future
@@ -78,7 +78,7 @@ class Is extends AbstractWidget
             }
         }
         
-        if ($rule instanceof \Widget\Validator\AbstractValidator) {
+        if ($rule instanceof Validator\AbstractValidator) {
             $validator = $rule;
             return $rule($input);
         }
@@ -107,7 +107,7 @@ class Is extends AbstractWidget
      * @param mixed $input The data to be validated
      * @param array $options The validation parameters
      * @return bool
-     * @throws \Widget\Exception\UnexpectedTypeException When rule is not string, array or \Closure
+     * @throws Exception\UnexpectedTypeException When rule is not string, array or \Closure
      */
     public function __invoke($rule = null, $input = null, $options = array())
     {
@@ -158,7 +158,7 @@ class Is extends AbstractWidget
      * Create a new validator instance
      * 
      * @param array $options
-     * @return \Widget\Validator
+     * @return Validator
      */
     public function createValidator(array $options = array())
     {
@@ -173,7 +173,7 @@ class Is extends AbstractWidget
      * @param string $rule The name of rule validator
      * @param array $options The property options for rule validator
      * @return Widget\Validator\AbstractValidator
-     * @throws \Widget\Exception\InvalidArgumentException When validator not found
+     * @throws Exception\InvalidArgumentException When validator not found
      */
     public function createRuleValidator($rule, array $options = array())
     {

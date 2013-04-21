@@ -12,8 +12,8 @@ namespace Widget;
  * The download widget
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    \Widget\Browser    $browser The browser widget
- * @property    \Widget\Header     $header The header widget
+ * @property    Browser    $browser The browser widget
+ * @property    Header     $header The header widget
  */
 class Download extends Response
 {
@@ -37,7 +37,7 @@ class Download extends Response
      * 
      * @param string $file The path of file
      * @param array $options The widget options
-     * @return \Widget\Download
+     * @return Download
      * @throws Exception\NotFoundException When file not found
      */
     public function send($file = null, $options = array())

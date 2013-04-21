@@ -70,7 +70,7 @@ class Website extends AbstractWidget
      * 
      * @param string $name The name of configuration(widget option)
      * @param mixed $value The value of configuration
-     * @return \Widget\Website
+     * @return Website
      */
     public function set($name, $value)
     {

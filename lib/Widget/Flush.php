@@ -47,7 +47,7 @@ class Flush extends Response
      * 
      * @param string $content
      * @param int $status
-     * @return \Widget\Flush
+     * @return Flush
      */
     public function send($content = null, $status = null)
     {

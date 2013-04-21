@@ -12,7 +12,7 @@ namespace Widget\Validator;
  * Check if the input is NOT valid by all off specified rules
  * 
  * @author      Twin Huang <twinhuang@qq.com>
- * @property \Widget\Is $is The validator manager
+ * @property    Is $is The validator manager
  */
 class NoneOf extends AbstractGroupValidator
 {

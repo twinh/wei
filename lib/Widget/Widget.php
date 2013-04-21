@@ -219,7 +219,7 @@ class Widget extends AbstractWidget
      * Get a widget instance
      *
      * @param string $name The name of widget
-     * @return \Widget\WidgetInterface
+     * @return WidgetInterface
      */
     public function __invoke($name)
     {
@@ -317,7 +317,7 @@ class Widget extends AbstractWidget
      * @param string $name  The name of the widget, without class prefix "Widget\"
      * @param array $deps The dependent configuration
      * @param array $options The option properies for widget
-     * @return \Widget\WidgetInterface The widget object
+     * @return WidgetInterface The widget object
      */
     public function get($name, array $options = array(), array $deps = array())
     {
@@ -383,7 +383,7 @@ class Widget extends AbstractWidget
      * @param string $name The name of the widget
      * @param array $options The option properies for widget
      * @param array $deps The dependent configuration
-     * @return \Widget\WidgetInterface The widget object
+     * @return WidgetInterface The widget object
      */
     public function newInstance($name, array $options = array(), array $deps = array())
     {
@@ -395,7 +395,7 @@ class Widget extends AbstractWidget
      * Add a widget
      *
      * @param string $name The name of widget
-     * @param \Widget\WidgetInterface $widget The widget object
+     * @param WidgetInterface $widget The widget object
      */
     public function set($name, WidgetInterface $widget)
     {

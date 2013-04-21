@@ -12,8 +12,8 @@ namespace Widget\Validator;
  * Check if the input is existing Doctrine ORM entity
  * 
  * @author      Twin Huang <twinhuang@qq.com>
- * @property \Widget\EntityManager $entityManager The doctrine orm entity manager widget
- * @method \Doctrine\ORM\EntityManager entityManager() Returns the doctrine orm entity object
+ * @property    EntityManager $entityManager The doctrine orm entity manager widget
+ * @method      \Doctrine\ORM\EntityManager entityManager() Returns the doctrine orm entity object
  */
 class EntityExists extends AbstractValidator
 {

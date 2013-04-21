@@ -12,7 +12,7 @@ namespace Widget;
  * Alias of $router->generatePath widget
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    \Widget\Router $router Router
+ * @property    Router $router Router
  */
 class Path extends AbstractWidget
 {

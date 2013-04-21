@@ -14,7 +14,7 @@ namespace Widget;
  * This widget is the alias of `$widget->eventManager->__invoke()`
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    \Widget\EventManager $eventManager The event manager widget
+ * @property    EventManager $eventManager The event manager widget
  */
 class Trigger extends AbstractWidget
 {
@@ -23,10 +23,10 @@ class Trigger extends AbstractWidget
      *
      * @param  string $type The name of event or a Event object
      * @param  array $args The arguments pass to the handle
-     * @param null|\Widget\WidgetInterface $widget If the widget contains the 
+     * @param null|WidgetInterface $widget If the widget contains the 
      *                                     $type property, the event manager 
      *                                     will trigger it too
-     * @return \Widget\Event\EventInterface The event object
+     * @return Event\EventInterface The event object
      */
     public function __invoke($event, $params = array(), WidgetInterface $widget = null)
     {

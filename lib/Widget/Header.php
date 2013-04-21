@@ -36,7 +36,7 @@ class Header extends ArrayWidget
      *                               is header value
      * @param  string|array $values  The header values, for set method only
      * @param  bool         $replace Whether replace the exists values or not, for set method only
-     * @return mixed|\Widget\Header
+     * @return mixed|Header
      */
     public function __invoke($name, $values = null, $replace = true)
     {
@@ -53,7 +53,7 @@ class Header extends ArrayWidget
      * @param  string       $name    The header name
      * @param  string|array $values  The header values
      * @param  bool         $replace Whether replace the exists values or not
-     * @return \Widget\Header
+     * @return Header
      */
     public function set($name, $values = null, $replace = true)
     {
@@ -100,7 +100,7 @@ class Header extends ArrayWidget
      * Remove header by specified name
      * 
      * @param string $name The header name
-     * @return \Widget\Header
+     * @return Header
      */
     public function remove($name)
     {

@@ -61,10 +61,10 @@ class EventManager extends AbstractWidget
      *
      * @param  string $type The name of event or a Event object
      * @param  array $args The arguments pass to the handle
-     * @param null|\Widget\WidgetInterface $widget If the widget contains the 
+     * @param null|WidgetInterface $widget If the widget contains the 
      *                                     $type property, the event manager 
      *                                     will trigger it too
-     * @return \Widget\Event\EventInterface The event object
+     * @return Event\EventInterface The event object
      */
     public function __invoke($type, $args = array(), WidgetInterface $widget = null)
     {
@@ -124,7 +124,7 @@ class EventManager extends AbstractWidget
      * @param callback $fn The event handler
      * @param int|string $priority The event priority, could be int or specify strings, the higer number, the higer priority
      * @param array $data The data pass to the event object, when the handler is triggered
-     * @return \Widget\EventManager
+     * @return EventManager
      */
     public function add($type, $fn = null, $priority = 0, $data = array())
     {
@@ -159,7 +159,7 @@ class EventManager extends AbstractWidget
      * Remove event handlers by specified type
      *
      * @param string $type The type of event
-     * @return \Widget\EventManager
+     * @return EventManager
      */
     public function remove($type)
     {
@@ -225,11 +225,11 @@ class EventManager extends AbstractWidget
     /**
      * Create a new event
      *
-     * @return \Widget\Event\EventInterface
+     * @return Event\EventInterface
      * @param array $namespaces
      * @todo check interface
      */
-    public function create($type, $class = '\Widget\Event\Event')
+    public function create($type, $class = 'Widget\Event\Event')
     {
         list($type, $namespaces) = $this->splitNamespace($type);
 

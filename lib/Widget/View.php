@@ -74,7 +74,7 @@ class View extends AbstractView
      * @param string $name The name of template
      * @param array $vars The variables pass to template
      * 
-     * @return \Widget\View|string
+     * @return View|string
      */
     public function __invoke($name = null, $vars = array())
     {
@@ -170,7 +170,7 @@ class View extends AbstractView
      * 
      * @param string $name The name of layout template 
      * @param string $variable The varibale name that 
-     * @return \Widget\View
+     * @return View
      */
     public function layout($name, $variable = 'content')
     {
@@ -186,7 +186,7 @@ class View extends AbstractView
      * Set base directory for views
      * 
      * @param string|array $dirs
-     * @return \Widget\View
+     * @return View
      */
     public function setDirs($dirs)
     {

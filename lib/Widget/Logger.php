@@ -322,7 +322,7 @@ class Logger extends AbstractWidget
      * Set default log level
      * 
      * @param string $level
-     * @return \Widget\Logger
+     * @return Logger
      */
     public function setLevel($level)
     {
@@ -335,7 +335,7 @@ class Logger extends AbstractWidget
      * Set handled level
      * 
      * @param int $handledLevel The handled level
-     * @return \Widget\Logger
+     * @return Logger
      */
     public function setHandledLevel($handledLevel)
     {
@@ -347,7 +347,7 @@ class Logger extends AbstractWidget
     /**
      * Clear up all log file
      * 
-     * @return \Widget\Logger
+     * @return Logger
      */
     public function clean()
     {

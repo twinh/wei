@@ -12,7 +12,7 @@ namespace Widget;
  * The server and execution environment parameters ($_SERVER) widget
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    \Widget\Request $request The HTTP request widget
+ * @property    Request $request The HTTP request widget
  */
 class Server extends Parameter
 {
