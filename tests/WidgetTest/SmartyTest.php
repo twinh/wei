@@ -9,6 +9,11 @@ class SmartyTest extends TestCase
 {
     public function setUp()
     {
+        if (!class_exists('\Smarty')) {
+            $this->markTestSkipped('Smarty 3 is required');
+            return;
+        }
+        
         $this->widget->config('smarty', array(
             'options' => array(
                 'template_dir' => __DIR__ . '/Fixtures'

@@ -6,6 +6,11 @@ class TwigTest extends TestCase
 {
     public function setUp()
     {
+        if (!class_exists('\Twig_Environment')) {
+            $this->markTestSkipped('twig/twig is required');
+            return;
+        }
+        
         $this->widget->config('twig', array(
             'paths' => __DIR__ . '/Fixtures'
         ));
