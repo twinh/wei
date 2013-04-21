@@ -251,27 +251,30 @@ class Widget extends AbstractWidget
         // Get or set one configuration
         if (is_string($name) || is_int($name)) {
             $temp = &$this->config;
+            
             if (false !== strpos($name, '/')) {
-                $array = explode('/', $name);
-                $name = array_pop($array);
-                foreach ($array as $value) {
-                    if (!isset($temp[$value])) {
-                        $temp[$value] = null;
+                $keys = explode('/', $name);
+                $first = $keys[0];
+                $name = array_pop($keys);
+                foreach ($keys as $key) {
+                    if (!isset($temp[$key])) {
+                        $temp[$key] = null;
                     }
-                    $temp = &$temp[$value];
+                    $temp = &$temp[$key];
                 }
+            } else {
+                $first = $name;
             }
             
-            if (2 == func_num_args()) {
-                if (isset($this->widgets[$name])) {
-                    $this->widgets[$name]->setOption(func_get_arg(1), $value);
-                } else {
-                    $temp[$name] = func_get_arg(1);
+            if (1 == func_num_args()) {
+                return isset($temp[$name]) ? $temp[$name] : null;
+            } else {
+                $temp[$name] = $value;
+                if (isset($this->widgets[$first])) {
+                    $this->widgets[$first]->setOption($value);
                 }
                 return $this;
             }
-
-            return isset($temp[$name]) ? $temp[$name] : null;
         }
 
         // Merge all configurations
@@ -280,6 +283,9 @@ class Widget extends AbstractWidget
                 if (is_array($value)) {
                     foreach ($value as $subKey => $subValue) {
                         $this->config[$key][$subKey] = $subValue;
+                    }
+                    if (isset($this->widgets[$key])) {
+                        $this->widgets[$key]->setOption($value);
                     }
                 } else {
                     $this->config[$key] = $value;

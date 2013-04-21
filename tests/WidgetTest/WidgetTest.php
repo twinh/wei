@@ -56,8 +56,18 @@ class WidgetTest extends TestCase
         $widget->config('request', array(
             'method' => 'POST'
         ));
-        
         $this->assertEquals('POST', $request->getMethod());
+        
+        // No effect at this time
+        $widget->config('request/method', 'PUT');
+        $this->assertEquals('POST', $request->getMethod());
+        
+        $widget->config(array(
+            'request' => array(
+                'method' => 'DELETE'
+            )
+        ));
+        $this->assertEquals('DELETE', $request->getMethod());
     }
     
     /**
