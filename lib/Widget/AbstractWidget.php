@@ -35,7 +35,7 @@ abstract class AbstractWidget implements WidgetInterface
     /**
      * The widget manager object
      *
-     * @var \Widget\Widget
+     * @var Widget
      */
     protected $widget;
 

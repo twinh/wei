@@ -18,7 +18,7 @@ abstract class AbstractWidgetAware implements WidgetAwareInterface
     /**
      * A widget manager instance
      * 
-     * @var \Widget\Widget
+     * @var Widget
      */
     protected $widget;
     

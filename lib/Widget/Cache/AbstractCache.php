@@ -11,7 +11,7 @@ namespace Widget\Cache;
 use Widget\AbstractWidget;
 
 /**
- * A simple implementation of \Widget\Cache\CacheInterface
+ * A simple implementation of Cache\CacheInterface
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */

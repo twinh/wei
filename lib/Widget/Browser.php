@@ -12,7 +12,7 @@ namespace Widget;
  * The widget to detect user browser name and version
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    \Widget\Server $server The server widget
+ * @property    Server $server The server widget
  */
 class Browser extends AbstractWidget
 {

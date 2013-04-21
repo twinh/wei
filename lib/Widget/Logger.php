@@ -276,7 +276,7 @@ class Logger extends AbstractWidget
      * Get log file
      *
      * @return string
-     * @throws Widget\Exception\RuntimeException When unable to create logging directory
+     * @throws Exception\RuntimeException When unable to create logging directory
      */
     public function getFile()
     {

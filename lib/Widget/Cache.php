@@ -45,7 +45,7 @@ class Cache extends AbstractCache
      * Set cache driver
      * 
      * @param string $driver
-     * @return \Widget\Cache
+     * @return Cache
      * @throws Widget\Exception\InvalidArgumentException
      */
     public function setDriver($driver)

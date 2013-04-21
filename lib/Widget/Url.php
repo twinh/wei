@@ -49,12 +49,12 @@ class Url extends AbstractWidget
     {
         $uris = explode('/', $uri);
         $arr = array();
-        
+
         switch (count($uris)) {
             case 1:
                 $arr[$this->names[1]] = $uris[0];
                 break;
-                
+
             case 2:
                 $arr[$this->names[1]] = $uris[0];
                 $arr[$this->names[2]] = $uris[1];

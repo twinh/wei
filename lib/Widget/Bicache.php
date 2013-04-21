@@ -14,8 +14,8 @@ use Widget\Cache\AbstractCache;
  * The two level cache widget
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    \Widget\Cache\CacheInterface $master The master(faster) cache object
- * @property    \Widget\Cache\CacheInterface $slave The slave(slower) cache object
+ * @property    Cache\CacheInterface $master The master(faster) cache object
+ * @property    Cache\CacheInterface $slave The slave(slower) cache object
  */
 class Bicache extends AbstractCache
 {

@@ -14,12 +14,12 @@ use Widget\Response;
  * The application widget
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @method      \Widget\EventManager trigger(string $eventName) Trigger a event
- * @method      \Widget\Response response(string $content, int $status) Send headers and output content
+ * @method      EventManager trigger(string $eventName) Trigger a event
+ * @method      Response response(string $content, int $status = 200) Send headers and output content
  * @property    callable $404 The 404 event handler
- * @property    \Widget\View\ViewInterface $view The view widget, instance of \Widget\Viewable interface
- * @property    \Widget\Logger $logger The logger widget
- * @property    \Widget\Request $request The HTTP request widget
+ * @property    View\ViewInterface $view The view widget, instance of \Widget\Viewable interface
+ * @property    Logger $logger The logger widget
+ * @property    Request $request The HTTP request widget
  */
 class App extends AbstractWidget
 {
@@ -75,7 +75,7 @@ class App extends AbstractWidget
      * Startup application
      *
      * @param  array     $options
-     * @return \Widget\App|null
+     * @return App|null
      */
     public function __invoke(array $options = array())
     {
@@ -94,8 +94,8 @@ class App extends AbstractWidget
      * @param  string    $module     The name of module
      * @param  string    $controller The name of controller
      * @param  string    $action     The name of action
-     * @return \Widget\App
-     * @throws \Widget\Exception\NotFoundException When controller or action not found
+     * @return App
+     * @throws Exception\NotFoundException When controller or action not found
      */
     public function dispatch($module, $controller, $action = 'index')
     {
@@ -160,8 +160,8 @@ class App extends AbstractWidget
      * Handle the response variable returned by controller action
      *
      * @param  mixed                     $response
-     * @return \Widget\Response|boolean
-     * @throws Widget\Exception\UnexpectedTypeException
+     * @return Response|boolean
+     * @throws Exception\UnexpectedTypeException
      */
     public function handleResponse($response)
     {
@@ -202,7 +202,7 @@ class App extends AbstractWidget
      * Set the name of module
      *
      * @param  string    $module The name of module
-     * @return \Widget\App
+     * @return App
      */
     public function setModule($module)
     {
@@ -240,7 +240,7 @@ class App extends AbstractWidget
      * Set the name of controller
      *
      * @param  string    $controller The name of controller
-     * @return \Widget\App
+     * @return App
      */
     public function setController($controller)
     {
@@ -307,7 +307,7 @@ class App extends AbstractWidget
     /**
      * Throws a DispatchBreakException to prevent the previous dispatch process
      *
-     * @throws Widget\Exception\DispatchBreakException
+     * @throws Exception\DispatchBreakException
      */
     public function preventPreviousDispatch()
     {
