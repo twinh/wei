@@ -43,6 +43,14 @@ class File extends AbstractValidator
     protected $file;
     
     /**
+     * The origin name of uploaded file, if the input is not uploaded file 
+     * array, the origin name is equals to $this->file
+     * 
+     * @var string
+     */
+    protected $originFile;
+    
+    /**
      * The detected byte size of file
      * 
      * @var int
@@ -160,7 +168,7 @@ class File extends AbstractValidator
     {
         switch ( true ) {
             case is_string($input) :
-                $file = $fileName = $input;
+                $file = $originFile = $input;
                 break;
             
             // File array from $_FILES
@@ -171,11 +179,11 @@ class File extends AbstractValidator
                 }
                 
                 $file = $input['tmp_name'];
-                $fileName = $input['name'];
+                $originFile = $input['name'];
                 break;
             
             case $input instanceof \SplFileInfo:
-                $file = $fileName = $input->getPathname();
+                $file = $originFile = $input->getPathname();
                 break;
             
             default:
@@ -183,6 +191,7 @@ class File extends AbstractValidator
                 return false;
         }
 
+        $this->originFile = $originFile;
         $this->file = $file = stream_resolve_include_path($file);
         if (!$file || !is_file($file)) {
             $this->addError('notFound');
@@ -190,17 +199,15 @@ class File extends AbstractValidator
         }
                 
         // Validate file extension
-        // Use substr instead of pathinfo, because pathinfo may return error value in unicode
-        if (false !== $pos =  strrpos($fileName, '.')) {
-            $this->ext = substr($fileName, $pos + 1);
-        } else {
-            $this->ext = '';
+        if ($this->exts || $this->excludeExts) {
+            $ext = $this->getExt();
         }
-        if ($this->excludeExts && in_array($this->ext, $this->excludeExts)) {
+
+        if ($this->excludeExts && in_array($ext, $this->excludeExts)) {
             $this->addError('excludeExts');
         }
 
-        if ($this->exts && !in_array($this->ext, (array) $this->exts)) {
+        if ($this->exts && !in_array($ext, $this->exts)) {
             $this->addError('exts');
         }
 
@@ -422,6 +429,16 @@ class File extends AbstractValidator
      */
     public function getExt()
     {
+        if (is_null($this->ext) && $this->originFile) {
+            $file = basename($this->originFile);
+            // Use substr instead of pathinfo, because pathinfo may return error value in unicode
+            if (false !== $pos = strrpos($file, '.')) {
+                $this->ext = substr($file, $pos + 1);
+            } else {
+                $this->ext = '';
+            }
+        }
+        
         return $this->ext;
     }
 }

@@ -48,7 +48,7 @@ class FileTest extends TestCase
             'exts' => 'gif,jpg',
             'excludeExts' => array('doc', 'php')
         )));
-        
+
         $this->assertEquals(array('excludeExts', 'exts'), array_keys($file->getErrors()));
     }
     
@@ -140,6 +140,13 @@ class FileTest extends TestCase
     public function testFileWithoutExtension()
     {
         $file = dirname(__DIR__) . '/Fixtures/5x5';
+        $this->assertTrue($this->isFile($file));
+        $this->assertEquals('', $this->isFile->getExt());
+    }
+    
+    public function testRelativeFileWithoutExtension()
+    {
+        $file = __DIR__ . '/../Fixtures/5x5';
         $this->assertTrue($this->isFile($file));
         $this->assertEquals('', $this->isFile->getExt());
     }
