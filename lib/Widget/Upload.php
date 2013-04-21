@@ -16,7 +16,6 @@ use Widget\Validator\File as FileValidator;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    \Widget\Request $request The HTTP request widget
- * @todo        Add service widget and extend it
  */
 class Upload extends Image
 {
