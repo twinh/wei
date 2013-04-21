@@ -226,7 +226,7 @@ class UploadTest extends TestCase
 
         $this->assertTrue($result);
         $this->assertFileExists($dir . '/test.gif');
-        
+
         unlink($file);
         rmdir(dirname($file));
     }
