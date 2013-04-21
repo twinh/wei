@@ -249,10 +249,11 @@ class Widget extends AbstractWidget
         }
 
         // Get or set one configuration
-        if (is_string($name) || is_int($name)) {
+        if (is_string($name)) {
             $temp = &$this->config;
-            
-            if (false !== strpos($name, '/')) {
+            if (false === strpos($name, '/')) {
+                $first = $name;
+            } else {
                 $keys = explode('/', $name);
                 $first = $keys[0];
                 $name = array_pop($keys);
@@ -262,8 +263,6 @@ class Widget extends AbstractWidget
                     }
                     $temp = &$temp[$key];
                 }
-            } else {
-                $first = $name;
             }
             
             if (1 == func_num_args()) {
