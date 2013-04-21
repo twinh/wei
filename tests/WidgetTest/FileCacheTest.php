@@ -2,10 +2,10 @@
 
 namespace WidgetTest;
 
-class FileTest extends CacheTestCase
+class FileCacheTest extends CacheTestCase
 {
     /**
-     * @var \Widget\File
+     * @var \Widget\FileCache
      */
     protected $object;
 

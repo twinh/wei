@@ -15,7 +15,7 @@ use Widget\Cache\AbstractCache;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class File extends AbstractCache
+class FileCache extends AbstractCache
 {
     /**
      * The cache directory
@@ -259,7 +259,7 @@ class File extends AbstractCache
      * Set the cache directory
      *
      * @param string $dir
-     * @return \Widget\File
+     * @return \Widget\FileCache
      * @throws \Widget\Exception\IOException When failed to create the cache directory
      */
     public function setDir($dir)
