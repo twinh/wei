@@ -16,7 +16,7 @@ namespace Widget\Cache;
 interface CacheInterface
 {
     /**
-     * Get or store an item
+     * Retrieve or store an item
      *
      * @param  string      $key    The name of item
      * @param  mixed       $value  The value of item

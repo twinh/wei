@@ -16,8 +16,12 @@ require_once 'WidgetInterface.php';
 /**
  * The base class for all widgets
  *
- * @author      Twin Huang <twinhuang@qq.com>
- * @method mixed __invoke(mixed $mixed) The invoke method
+ * @author   Twin Huang <twinhuang@qq.com>
+ * @method   mixed __invoke(mixed $mixed) The invoke method
+ * @property Apc $apc The PHP APC cache widget 
+ * @method   mixed apc($key, $value = null, $expire = 0) Retrieve or store an item
+ * @property App $app The application widget
+ * @method   App app(array $options = array()) Startup application
  */
 abstract class AbstractWidget implements WidgetInterface
 {

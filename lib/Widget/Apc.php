@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\Cache\AbstractCache;
 
 /**
- * The php APC cache widget
+ * The PHP APC cache widget
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
