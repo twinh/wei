@@ -142,7 +142,7 @@ class EventManager extends AbstractWidget
         }
 
         $priority = is_numeric($priority) ? $priority :
-            isset($this->priorities[$priority]) ? $this->priorities[$priority] : 0;
+            (isset($this->priorities[$priority]) ? $this->priorities[$priority] : 0);
 
         list($type, $namespaces) = $this->splitNamespace($type);
 

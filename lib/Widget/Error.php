@@ -56,11 +56,13 @@ class Error extends AbstractWidget
      * Attach a handler to the error event
      * 
      * @param \Closure $fn The error handler
+     * @param int|string $priority The event priority, could be int or specify strings, the higer number, the higer priority
+     * @param array $data The data pass to the event object, when the handler is triggered
      * @return \Widget\EventManager
      */
-    public function __invoke(\Closure $fn)
+    public function __invoke(\Closure $fn, $priority = 1, $data = array())
     {
-        return $this->on('exception', $fn);
+        return $this->on('exception', $fn, $priority, $data);
     }
 
     /**
