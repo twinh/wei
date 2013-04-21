@@ -23,7 +23,6 @@ namespace Widget;
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * 
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    Server $server The server widget
  */
 class Request extends Parameter
 {
@@ -125,7 +124,7 @@ class Request extends Parameter
      */
     public function getScheme()
     {
-        if ('on' === strtolower($this->server['HTTPS']) || 1 == $this->server['HTTPS']) {
+        if ('on' === strtolower($this->getServer('HTTPS')) || 1 == $this->getServer('HTTPS')) {
             return 'https';
         } else {
             return 'http';
@@ -139,9 +138,9 @@ class Request extends Parameter
      */
     public function getHost()
     {
-        return $this->server['HTTP_HOST'] 
-            ?: $this->server['SERVER_NAME']
-            ?: $this->server['REMOTE_ADDR'];
+        return $this->getServer('HTTP_HOST') 
+            ?: $this->getServer('SERVER_NAME')
+            ?: $this->getServer('REMOTE_ADDR');
     }
     
     /**
@@ -238,7 +237,7 @@ class Request extends Parameter
      */
     public function getSchemeAndHost()
     {
-        $port = $this->server['SERVER_PORT'];
+        $port = $this->getServer('SERVER_PORT');
         if ($port == 80 || $port == 433) {
             $port = '';
         } else {
@@ -271,9 +270,9 @@ class Request extends Parameter
      */
     public function getIp($default = '0.0.0.0')
     {
-        $ip = $this->server['HTTP_X_FORWARDED_FOR']
-            ? current(explode(',', $this->server['HTTP_X_FORWARDED_FOR'])) : $this->server['HTTP_CLIENT_IP']
-            ?: $this->server['REMOTE_ADDR'];
+        $ip = $this->getServer('HTTP_X_FORWARDED_FOR')
+            ? current(explode(',', $this->getServer('HTTP_X_FORWARDED_FOR'))) : $this->getServer('HTTP_CLIENT_IP')
+            ?: $this->getServer('REMOTE_ADDR');
 
         return filter_var($ip, FILTER_VALIDATE_IP) ? $ip : $default;
     }
@@ -341,7 +340,7 @@ class Request extends Parameter
      */
     public function inAjax()
     {
-        return 'xmlhttprequest' == strtolower($this->server['HTTP_X_REQUESTED_WITH']);
+        return 'xmlhttprequest' == strtolower($this->getServer('HTTP_X_REQUESTED_WITH'));
     }
     
     /**
@@ -397,9 +396,20 @@ class Request extends Parameter
             $name = implode('-', array_map('ucfirst', explode('_', strtolower($name))));
             $header .= $name . ': ' . $value . "\r\n";
         } 
-        return $this->server['REQUEST_METHOD'] . ' ' . $this->getUrl() . ' ' . $this->server['SERVER_PROTOCOL'] . "\r\n"
+        return $this->getServer('REQUEST_METHOD') . ' ' . $this->getUrl() . ' ' . $this->getServer('SERVER_PROTOCOL') . "\r\n"
             . $header
             . $this->getContent();
+    }
+    
+    /**
+     * Return the server and execution environment parameter value ($_SERVER)
+     * 
+     * @param string $name The name of parameter
+     * @return mixed
+     */
+    public function getServer($name)
+    {
+        return isset($this->servers[$name]) ? $this->servers[$name] : null;
     }
     
     /**
