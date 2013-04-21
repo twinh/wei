@@ -36,6 +36,10 @@ class RecordExistsTest extends TestCase
     
     public static function tearDownAfterClass()
     {
+        if (!class_exists(('\Doctrine\DBAL\DriverManager'))) {
+            return;
+        }
+        
         $widget = \Widget\Widget::create();
         
         $widget->db()->query("DROP TABLE users");
