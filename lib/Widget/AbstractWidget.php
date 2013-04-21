@@ -94,7 +94,7 @@ abstract class AbstractWidget implements WidgetInterface
         if (null === $name) {
             return get_object_vars($this);
         }
-        
+
         if (method_exists($this, $method = 'get' . $name)) {
             return $this->$method();
         } else {
@@ -107,10 +107,13 @@ abstract class AbstractWidget implements WidgetInterface
      * 
      * @param string $name
      * @param array $value
+     * @return AbstractWidget
      */
     public function appendOption($name, array $value) 
     {
         $this->$name = (array)$this->$name + $value;
+
+        return $this;
     }
 
     /**
