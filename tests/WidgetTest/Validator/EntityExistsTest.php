@@ -64,6 +64,10 @@ class EntityExistsTest extends TestCase
 
     public static function tearDownAfterClass()
     {
+        if (!class_exists(('\Doctrine\ORM\EntityManager'))) {
+            return;
+        }
+        
         $widget = \Widget\Widget::create();
         
         /* @var $em \Doctrine\ORM\EntityManager */
