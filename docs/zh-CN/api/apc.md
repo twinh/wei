@@ -23,7 +23,7 @@ bool apc( $key, $value [ $expire ] )
 ```
 
 ##### 参数
-* **$key** `string` 缓存的键名
+* **$key** `string` 缓存的名称
 * **$value** `mixed` 缓存的值,允许任意类型
 * **$expire** `int` 缓存的有效期,默认为0秒,表示永不过期
 
@@ -52,7 +52,7 @@ bool apc( $key )
 ```
 
 ##### 参数
-* **$key** `string` 缓存的键名
+* **$key** `string` 缓存的名称
 
 
 该调用方式是`$widget->apc->get($key)`的缩写
@@ -79,7 +79,7 @@ bool apc->set( $key, $value [ $expire ] )
 ```
 
 ##### 参数
-* **$key** `string` 缓存的键名
+* **$key** `string` 缓存的名称
 * **$value** `mixed` 缓存的值,允许任意类型
 * **$expire** `int` 缓存的有效期,默认为0秒,表示永不过期
 
@@ -91,7 +91,7 @@ mixed apc->get( $key )
 ```
 
 ##### 参数
-* **$key** `string` 缓存的键名
+* **$key** `string` 缓存的名称
 
 
 `$widget->apc->get( $key )`
@@ -105,7 +105,7 @@ bool apc->remove( $key )
 ```
 
 ##### 参数
-*无*
+* **$key** `string` 缓存的名称
 
 - - - -
 
@@ -115,7 +115,7 @@ bool apc->exists( $key )
 ```
 
 ##### 参数
-*无*
+* **$key** `string` 缓存的名称
 
 - - - -
 
@@ -125,7 +125,8 @@ bool apc->add( $key, $value )
 ```
 
 ##### 参数
-*无*
+* **$key** `string` 缓存的名称
+* **$value** `mixed` 缓存的值
 
 - - - -
 
@@ -135,7 +136,8 @@ bool apc->replace( $key, $value )
 ```
 
 ##### 参数
-*无*
+* **$key** `string` 缓存的名称
+* **$value** `mixed` 缓存的值
 
 - - - -
 
@@ -145,7 +147,7 @@ int apc->increment ( $key )
 ```
 
 ##### 参数
-*无*
+* **$key** `string` 缓存的名称
 
 - - - -
 
@@ -155,7 +157,7 @@ int apc->decrement( $key )
 ```
 
 ##### 参数
-*无*
+* **$key** `string` 缓存的名称
 
 - - - -
 
