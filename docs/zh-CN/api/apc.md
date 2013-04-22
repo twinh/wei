@@ -1,21 +1,23 @@
 [apc()](http://twinh.github.io/widget/api/apc)
 ==============================================
 
-Apc微件是对PHP APC缓存的管理
+设置或获取PHP APC缓存
 
 ##### 目录
 * apc( $key, $value [ $expire ] )
 * apc( $key )
+* apc->set( $key, $value [ $expire ] )
 * apc->get( $key )
-* apc->set( $key, $value )
-* apc->remove( $key ) 
+* apc->remove( $key )
 * apc->exists( $key )
 * apc->add( $key, $value )
 * apc->replace( $key, $value )
 * apc->increment ( $key )
 * apc->decrement( $key )
+* apc->getMulti( $keys )
+* apc->setMulti( $values )
 
-### 设置一项PHP APC缓存
+### 设置一项缓存
 ```php
 bool apc( $key, $value [ $expire ] )
 ```
@@ -26,7 +28,7 @@ bool apc( $key, $value [ $expire ] )
 * **$expire** `int` 缓存的有效期,默认为0秒,表示永不过期
 
 
-该调用方式相等于`$widget->apc->set($key, $value, $expire)`
+该调用方式是`$widget->apc->set($key, $value, $expire)`的缩写
 
 
 ##### 代码范例
@@ -44,7 +46,7 @@ echo $widget->apc('key');
 ```
 - - - -
 
-### 获取一项PHP APC缓存
+### 获取一项缓存的值
 ```php
 bool apc( $key )
 ```
@@ -53,7 +55,7 @@ bool apc( $key )
 * **$key** `string` 缓存的键名
 
 
-该调用方式相等于`$widget->apc->get($key)`
+该调用方式是`$widget->apc->get($key)`的缩写
 
 
 ##### 代码范例
@@ -71,29 +73,35 @@ echo $widget->apc('key');
 ```
 - - - -
 
-### 获取一项缓存
+### 设置一项缓存
+```php
+bool apc->set( $key, $value [ $expire ] )
+```
+
+##### 参数
+* **$key** `string` 缓存的键名
+* **$value** `mixed` 缓存的值,允许任意类型
+* **$expire** `int` 缓存的有效期,默认为0秒,表示永不过期
+
+- - - -
+
+### 获取一项缓存的值
 ```php
 mixed apc->get( $key )
 ```
 
 ##### 参数
-*无*
+* **$key** `string` 缓存的键名
 
-- - - -
 
-### 设置一项缓存
-```php
-bool apc->set( $key, $value )
-```
+`$widget->apc->get( $key )`
 
-##### 参数
-*无*
 
 - - - -
 
 ### 移除一项缓存
 ```php
-bool apc->remove( $key ) 
+bool apc->remove( $key )
 ```
 
 ##### 参数
@@ -148,4 +156,24 @@ int apc->decrement( $key )
 
 ##### 参数
 *无*
+
+- - - -
+
+### 批量获取缓存的值
+```php
+array apc->getMulti( $keys )
+```
+
+##### 参数
+* **$key** `array` 缓存键名数组
+
+- - - -
+
+### 批量设置缓存的值
+```php
+array apc->setMulti( $values )
+```
+
+##### 参数
+* **$values** `array` key/value格式的数组,key是缓存的名称,value是缓存的值
 
