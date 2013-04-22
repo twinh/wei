@@ -1,13 +1,37 @@
-[phpError()](http://twinh.github.io/widget/api/phpError)
-========================================================
+PHP Error
+=========
+[PHP Error](http://phperror.net/)提供了更友好的错误提示信息,完整的语法和代码片段高亮,同时支持Ajax错误提示
 
-Returns PHP Error ErrorHandler object
-
-### Returns PHP Error ErrorHandler object
+案例
+----
+### 在Widget初始化时加载PHP Error
 ```php
-\php_error\ErrorHandler phpError()
+\Widget\Widget::create(array(
+    'widget' => array(
+        'preload' => array(
+            'phpError' // 在预加载选项增加phpError微件
+            '...'      // 预加载其他微件
+        )
+    ),
+    // 配置PHP Error微件的选项
+    'phpError' => array(
+        'catch_ajax_errors' => true,
+        'catch_class_not_found' => true,
+        '...' => '...'
+    )
+));
 ```
 
-##### 参数
-*无*
+调用方式
+--------
+
+### 参数
+参见PHP Error官网文档https://github.com/JosephLenton/PHP-Error/wiki/Options
+
+### 方法
+
+#### phpError()
+获取\php_error\ErrorHandler对象
+
+
 
