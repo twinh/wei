@@ -142,7 +142,7 @@ $widget->validate(array(
             )
         )
     ),
-    'messges' => array(
+    'messages' => array(
         // 简单信息
         'name' => '请输入您的用户名',
         // 复合信息
