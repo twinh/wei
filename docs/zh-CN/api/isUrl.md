@@ -28,18 +28,16 @@ if ($widget->isUrl('http://www.example.com', array('query' => true))) {
 调用方式
 --------
 
-```php
-bool isUrl( $input [, $options] )
-```
-
 ### 选项
+*todo*
+
+### 方法
+#### isUrl($input, $options = array())
 * **$input** `mixed` 待验证的数据
 * **$options** `array` 选项数组,留空表示只检查数据是否为URL地址
  *  **path** `bool` 是否要求URL带有路径,如http://www.example.com/path/part
- * 	**query** `bool` 是否要求URL带有查询参数,如http://www.example/?query=string
+ *     **query** `bool` 是否要求URL带有查询参数,如http://www.example/?query=string
 
-### 方法
-*todo*
 
 ### 错误信息
 | **名称**              | **信息**                                                       | 
