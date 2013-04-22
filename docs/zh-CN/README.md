@@ -43,6 +43,7 @@ API 参考目录
 * [redirect](api/redirect.md) - 跳转到指定地址
 
 #### 验证器
+* [validate](api/validate.md) - 检查数组或对象中每一个元素是否能通过指定规则的验证(类似[jQuery Validation](http://bassistance.de/jquery-plugins/jquery-plugin-validation/)插件)
 数据类型及组成
 * [isAlnum](api/isAlnum.md) - 检查数据是否只由字母(a-z)和数字(0-9)组成
 * [isAlpha](api/isAlpha.md) - 检查数据是否只由字母(a-z)组成
