@@ -25,7 +25,8 @@ PHP Error
 调用方式
 --------
 
-### 参数
+### 选项
+
 参见PHP Error官网文档https://github.com/JosephLenton/PHP-Error/wiki/Options
 
 ### 方法
