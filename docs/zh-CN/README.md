@@ -11,7 +11,7 @@ API 参考目录
 #### 缓存
 * [apc](api/apc.md) - APC缓存
 * [dbCache](api/dbCache.md) - 数据库缓存
-* [file](api/file.md) - 文件缓存
+* [fileCache](api/fileCache.md) - 文件缓存
 * [memcache](api/memcache.md) - Memcachce缓存
 * [memcached](api/memcached.md) - Memcached缓存
 * [redis](api/redis.md) - Redis缓存
@@ -72,9 +72,9 @@ API 参考目录
 * [isRange](api/isRange.md) - 检查数据是否在指定的两个值之间
 
 日期和时间
-* [isDate](api/isdate.md) - 检查数据是否为合法的日期
-* [isDateTime](api/isdatetime.md) - 检查数据是否为合法的日期时间
-* [isTime](api/istime) - 检查数据是否为合法的时间
+* [isDate](api/isDate.md) - 检查数据是否为合法的日期
+* [isDateTime](api/isDatetime.md) - 检查数据是否为合法的日期时间
+* [isTime](api/isTime) - 检查数据是否为合法的时间
 
 文件目录
 * [isDir](api/isDir.md)－ 检查数据是否为存在的目录
