@@ -485,6 +485,13 @@ $validator = $widget->validate(array(
     )
 ));
 
+// 检查是否通过验证
+if ($validator->isValid()) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+
 // 输出详细的错误信息
 print_r($validator->getDetailMessages());
 
@@ -497,7 +504,7 @@ print_r($validator->getJoinedMessage());
 ```
 ##### 运行结果
 ```php
-'Array
+'NoArray
 (
     [username] => Array
         (
