@@ -469,4 +469,17 @@ Host: test.com
         
         $this->assertEquals('/blog', $this->request->getPathInfo());
     }
+    
+    public function testEmptyPort()
+    {
+        $request = new \Widget\Request(array(
+            'widget' => $this->widget,
+            'fromGlobal' => false,
+            'servers' => array(
+                'HTTP_HOST' => 'test.com'
+            ),
+        ));
+        
+        $this->assertEquals('http://test.com/', $request->getUrl());
+    }
 }

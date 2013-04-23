@@ -238,7 +238,7 @@ class Request extends Parameter
     public function getSchemeAndHost()
     {
         $port = $this->getServer('SERVER_PORT');
-        if ($port == 80 || $port == 433) {
+        if ($port == 80 || $port == 433 || empty($port)) {
             $port = '';
         } else {
             $port = ':' . $port;
