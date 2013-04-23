@@ -79,7 +79,7 @@ class RequestTest extends TestCase
     public function testAjax()
     {
         $this->server->set('HTTP_X_REQUESTED_WITH', 'xmlhttprequest');
-        
+    
         $this->assertTrue($this->inAjax());
         
         $this->server->set('HTTP_X_REQUESTED_WITH', 'json');
@@ -454,7 +454,8 @@ class RequestTest extends TestCase
             'SERVER_PORT' => '8080',
             'HTTP_HOST' => 'test.com',
             'REQUEST_URI' => '/index.php?query=string',
-            'REQUEST_METHOD' => 'GET' 
+            'REQUEST_METHOD' => 'GET',
+            'SCRIPT_NAME' => 'index.php' 
         ));
         
         $this->assertEquals(
@@ -479,7 +480,7 @@ Host: test.com
                 'HTTP_HOST' => 'test.com'
             ),
         ));
-        
+
         $this->assertEquals('http://test.com/', $request->getUrl());
     }
 }

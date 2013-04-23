@@ -424,24 +424,23 @@ class Request extends Parameter
     protected function detectRequestUri()
     {
         $requestUri = null;
-        $server     = $this->server;
 
         // Check this first so IIS will catch.
-        $httpXRewriteUrl = $server->get('HTTP_X_REWRITE_URL');
+        $httpXRewriteUrl = $this->getServer('HTTP_X_REWRITE_URL');
         if ($httpXRewriteUrl !== null) {
             $requestUri = $httpXRewriteUrl;
         }
 
         // Check for IIS 7.0 or later with ISAPI_Rewrite
-        $httpXOriginalUrl = $server->get('HTTP_X_ORIGINAL_URL');
+        $httpXOriginalUrl = $this->getServer('HTTP_X_ORIGINAL_URL');
         if ($httpXOriginalUrl !== null) {
             $requestUri = $httpXOriginalUrl;
         }
 
         // IIS7 with URL Rewrite: make sure we get the unencoded url
         // (double slash problem).
-        $iisUrlRewritten = $server->get('IIS_WasUrlRewritten');
-        $unencodedUrl    = $server->get('UNENCODED_URL', '');
+        $iisUrlRewritten = $this->getServer('IIS_WasUrlRewritten');
+        $unencodedUrl    = $this->getServer('UNENCODED_URL', '');
         if ('1' == $iisUrlRewritten && '' !== $unencodedUrl) {
             return $unencodedUrl;
         }
@@ -449,7 +448,7 @@ class Request extends Parameter
         // HTTP proxy requests setup request URI with scheme and host [and port]
         // + the URL path, only use URL path.
         if (!$httpXRewriteUrl) {
-            $requestUri = $server->get('REQUEST_URI');
+            $requestUri = $this->getServer('REQUEST_URI');
         }
 
         if ($requestUri !== null) {
@@ -457,9 +456,9 @@ class Request extends Parameter
         }
 
         // IIS 5.0, PHP as CGI.
-        $origPathInfo = $server->get('ORIG_PATH_INFO');
+        $origPathInfo = $this->getServer('ORIG_PATH_INFO');
         if ($origPathInfo !== null) {
-            $queryString = $server->get('QUERY_STRING', '');
+            $queryString = $this->getServer('QUERY_STRING', '');
             if ($queryString !== '') {
                 $origPathInfo .= '?' . $queryString;
             }
