@@ -31,35 +31,35 @@ class Request extends Parameter
      * 
      * @var array
      */
-    protected $gets;
+    protected $gets = array();
     
     /**
      * The HTTP request parameters, equal to $_POST if $fromGlobal is true
      * 
      * @var array
      */
-    protected $posts;
+    protected $posts = array();
     
     /**
      * The cookie parameters, equal to $_COOKIE if $fromGlobal is true
      * 
      * @var array 
      */
-    protected $cookies;
+    protected $cookies = array();
     
     /**
      * The server parameters, equal to $_SERVER if $fromGlobal is true
      * 
      * @var array
      */
-    protected $servers;
+    protected $servers = array();
     
     /**
      * The upload file parameters, equal to $_FILES if $fromGlobal is true
      * 
      * @var array
      */
-    protected $files;
+    protected $files = array();
     
     /**
      * The request message body

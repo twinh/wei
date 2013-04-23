@@ -483,4 +483,18 @@ Host: test.com
 
         $this->assertEquals('http://test.com/', $request->getUrl());
     }
+    
+    /**
+     * @link https://github.com/twinh/widget/issues/54
+     */
+    public function testErrorParameterTypeWhenFromGlobalIsFalse()
+    {
+        $request = new \Widget\Request(array(
+            'fromGlobal' => false
+        ));
+        
+        foreach (array('get', 'post', 'cookie', 'server', 'file') as $option) {
+            $this->assertInternalType('array', $request->getParameterReference($option));
+        }
+    }
 }
