@@ -285,7 +285,7 @@ class Request extends Parameter
     public function getMethod()
     {
         if (null === $this->method) {
-            $this->method = $this->server->get('REQUEST_METHOD', 'GET');
+            $this->method = $this->getServer('REQUEST_METHOD', 'GET');
         }
         return $this->method;
     }
@@ -392,6 +392,7 @@ class Request extends Parameter
     public function __toString()
     {
         $header = '';
+        // FIXME remove server
         foreach ($this->server->getHeaders() as $name => $value) {
             $name = implode('-', array_map('ucfirst', explode('_', strtolower($name))));
             $header .= $name . ': ' . $value . "\r\n";
@@ -481,10 +482,10 @@ class Request extends Parameter
     protected function detectBaseUrl()
     {
         $baseUrl        = '';
-        $filename       = $this->server->get('SCRIPT_FILENAME', '');
-        $scriptName     = $this->server->get('SCRIPT_NAME');
-        $phpSelf        = $this->server->get('PHP_SELF');
-        $origScriptName = $this->server->get('ORIG_SCRIPT_NAME');
+        $filename       = $this->getServer('SCRIPT_FILENAME', '');
+        $scriptName     = $this->getServer('SCRIPT_NAME');
+        $phpSelf        = $this->getServer('PHP_SELF');
+        $origScriptName = $this->getServer('ORIG_SCRIPT_NAME');
 
         if ($scriptName !== null && basename($scriptName) === $filename) {
             $baseUrl = $scriptName;
