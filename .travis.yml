@@ -9,7 +9,6 @@ php:
 before_script:
   - php -m
   - php -i
-  - composer install --dev
 
 matrix:
   allow_failures:
