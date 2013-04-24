@@ -353,7 +353,7 @@ class Widget extends AbstractWidget
             $this->widgets[$full] = new $class($options);
 
             // Trigger the constructed callback
-            $this->constructed && call_user_func($this->constructed, $this->widgets[$name], $name, $full);
+            $this->constructed && call_user_func($this->constructed, $this->widgets[$full], $name, $full);
 
             return $this->widgets[$full];
         }
