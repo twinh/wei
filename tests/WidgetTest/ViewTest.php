@@ -13,9 +13,7 @@ class ViewTest extends TestCase
     {
         parent::setUp();
         
-        $this->object->setOption('dirs', array(
-            __DIR__ . '/Fixtures'
-        ));
+        $this->object->setDirs(__DIR__ . '/Fixtures');
     }
     
     public function testInvoker()
@@ -24,7 +22,7 @@ class ViewTest extends TestCase
         $this->assertInstanceOf('Widget\View', $view());
         
         // Render by invoker
-        $content = $this->view('layout.php', array(
+        $content = $view('layout.php', array(
             'content' => __METHOD__
         ));
         $this->assertContains(__METHOD__, $content);
@@ -89,6 +87,6 @@ class ViewTest extends TestCase
     
     public function testGetVarWidget()
     {
-        $this->assertEquals($this->widget, $this->view->get('widget'));
+        $this->assertEquals($this->widget, $this->object->get('widget'));
     }
 }

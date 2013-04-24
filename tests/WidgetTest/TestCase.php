@@ -73,7 +73,7 @@ class TestCase extends PHPUnit_Framework_TestCase implements WidgetAwareInterfac
 
         if ($widget->has($name)) {
             // Reinstance
-            $this->object = $widget->{$name};
+            $this->object = $widget->{lcfirst($name)};
         }
     }
 
