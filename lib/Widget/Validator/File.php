@@ -433,7 +433,7 @@ class File extends AbstractValidator
             $file = basename($this->originFile);
             // Use substr instead of pathinfo, because pathinfo may return error value in unicode
             if (false !== $pos = strrpos($file, '.')) {
-                $this->ext = substr($file, $pos + 1);
+                $this->ext = strtolower(substr($file, $pos + 1));
             } else {
                 $this->ext = '';
             }
