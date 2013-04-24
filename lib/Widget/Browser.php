@@ -63,14 +63,14 @@ class Browser extends AbstractWidget
      *
      * @var string
      */
-    public $name;
+    protected $name;
 
     /**
      * The version of browser
      *
      * @var string
      */
-    public $version;
+    protected $version;
 
     /**
      * Constructor
@@ -85,7 +85,7 @@ class Browser extends AbstractWidget
     }
 
     /**
-     * Get the name of browser
+     * Returns the version of browser
      *
      * @return string
      */
@@ -127,5 +127,25 @@ class Browser extends AbstractWidget
         } elseif ($this->webkit) {
             $this->safari = true;
         }
+    }
+    
+    /**
+     * Returns the version of browser
+     * 
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+    
+    /**
+     * Returns the version of browser
+     * 
+     * @return string
+     */
+    public function getVersion()
+    {
+        return $this->version;
     }
 }
