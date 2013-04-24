@@ -604,7 +604,7 @@ class Validator extends AbstractWidget
     }
     
     /**
-     * Returns the joined message
+     * Returns error message string
      * 
      * @return srring
      */

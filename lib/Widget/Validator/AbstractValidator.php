@@ -204,6 +204,16 @@ abstract class AbstractValidator extends AbstractWidget implements ValidatorInte
     }
     
     /**
+     * Returns error message string
+     * 
+     * @return srring
+     */
+    public function getJoinedMessage($separator = "\n")
+    {
+        return implode($separator, $this->getMessages());
+    }
+    
+    /**
      * Loads the validator translation messages
      * 
      * @todo better way?
