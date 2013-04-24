@@ -1,17 +1,7 @@
-[attr()](http://twinh.github.io/widget/api/attr)
-================================================
+Attr
+====
 
 获取数组或对象中指定键名的值
-
-### 
-```php
-bool attr( $data, $key )
-```
-
-##### 参数
-* **$data** `string` 数组或对象
-* **$key** `string` 转义的类型,目前支持html和js两种转义方式,默认是html
-
 
 取值的顺序如下
 
@@ -23,9 +13,10 @@ bool attr( $data, $key )
 使用`attr()`微件的好处在于你不用关心要取值的变量类型,不管它是数组,对象数组(\ArrayAccess),还是
 其他对象
 
+案例
+----
 
-##### 代码范例
-依次取出数组或对象的值,并打印出来
+### 依次取出数组或对象的值,并打印出来
 ```php
 <?php
 
@@ -56,11 +47,28 @@ foreach ($data as $row) {
     echo $widget->attr($row, 'key') . "\n";
 }
 ```
-##### 运行结果
+### 运行结果
 ```php
-'Get from array
-Get from ArrayObject
-Get from stdClass
-Get from Getter
-'
+'Get from array'
+
+'Get from ArrayObject'
+
+'Get from stdClass'
+
+'Get from Getter'
 ```
+
+调用方式
+-------
+
+### 选项
+*无*
+
+### 方法
+
+### attr($data, $key)
+获取数组或对象中指定键名的值
+
+##### 参数
+* **$data** `string` 数组或对象
+* **$key** `string` 转义的类型,目前支持html和js两种转义方式,默认是html
