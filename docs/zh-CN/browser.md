@@ -8,9 +8,10 @@ Browser
 
 ### 打印出当前浏览器的名称和版本
 ```php
+// 也可以通过 $widget->browser->getName(); 获取浏览器名称
 echo $widget->browser();
 
-echo $widget->browser->version();
+echo $widget->browser->getVersion();
 ```
 
 ### 运行结果
@@ -23,13 +24,12 @@ echo $widget->browser->version();
 '26.0.1410.64'
 ```
 
-
 调用方式
 -------
 
 ### 选项
 
-目前Browser的选项均为公开属性,可以直接调用,如`$widget->browser->chrome`.
+目前Browser除了`name`和`version`之外的选项均为公开属性,可以直接调用,如`$widget->browser->chrome`.
 
 | 名称      | 类型      | 默认值    | 说明                                                                                  |
 |-----------|-----------|-----------|---------------------------------------------------------------------------------------|
@@ -46,4 +46,10 @@ echo $widget->browser->version();
 
 #### browser()
 获取浏览器名称
+
+#### browser->getName()
+获取浏览器名称,与上一个方法行为一致
+
+#### browser->getVersion()
+获取浏览器版本
 
