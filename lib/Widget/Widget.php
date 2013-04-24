@@ -326,13 +326,12 @@ class Widget extends AbstractWidget
             $name = $deps[$name];
         }
 
-        $lower = strtolower($name);
-        if (isset($this->widgets[$lower])) {
-            return $this->widgets[$lower];
+        if (isset($this->widgets[$name])) {
+            return $this->widgets[$name];
         }
 
         // Resolve the real widget name and the config name($full)
-        $full = lcfirst($name);
+        $full = $name;
         if (false !== ($pos = strpos($name, '.'))) {
             $name = substr($name, 0, $pos);
         }
@@ -351,12 +350,12 @@ class Widget extends AbstractWidget
             // Load the widget configuration and make sure "widget" option at first
             $options = array('widget' => $this) + $options + (array)$this->config($full);
 
-            $this->widgets[$lower] = new $class($options);
+            $this->widgets[$full] = new $class($options);
 
             // Trigger the constructed callback
-            $this->constructed && call_user_func($this->constructed, $this->widgets[$lower], $name, $full);
+            $this->constructed && call_user_func($this->constructed, $this->widgets[$name], $name, $full);
 
-            return $this->widgets[$lower];
+            return $this->widgets[$full];
         }
 
         // Build the error message
@@ -410,10 +409,8 @@ class Widget extends AbstractWidget
      */
     public function remove($name)
     {
-        $lower = strtolower($name);
-
-        if (isset($this->widgets[$lower])) {
-            unset($this->widgets[$lower]);
+        if (isset($this->widgets[$name])) {
+            unset($this->widgets[$name]);
             if (isset($this->$name) && $this->$name instanceof WidgetInterface) {
                 unset($this->$name);
             }
@@ -525,8 +522,7 @@ class Widget extends AbstractWidget
         foreach ($files as $file) {
             $class = substr(basename($file), 0, -4);
             $name = $format ? sprintf($format, $class) : $class;
-            $name = strtolower($name[0]) . substr($name, 1);
-            $this->alias[$name] = $namespace . '\\' . $class;
+            $this->alias[lcfirst($name)] = $namespace . '\\' . $class;
         }
 
         return $this;

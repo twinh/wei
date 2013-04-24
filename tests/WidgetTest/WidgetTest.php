@@ -126,6 +126,17 @@ class WidgetTest extends TestCase
         $this->assertSame($request, $this->widget->request);
     }
     
+    public function testSetWithCaseSensitiveName()
+    {
+        $arrayCache = new \Widget\ArrayCache(array(
+            'widget' => $this->widget
+        ));
+        
+        $this->widget->set('myArrayCache', $arrayCache);
+        
+        $this->assertSame($arrayCache, $this->widget->get('myArrayCache'));
+    }
+    
     /**
      * @expectedException \BadMethodCallException
      * @expectedExceptionMessage Method "__invoke" not found in class "WidgetTest\Fixtures\WidgetWithoutInvokeMethod"
