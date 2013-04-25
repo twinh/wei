@@ -43,7 +43,7 @@ $widget->cookie->remove('logined');
 #### cookie->get($key)
 读取cookie,同`cookie($key)`
 
-#### cookie->set($key)
+#### cookie->set($key, $value, $options = array())
 写入cookie,同`cookie($key, $value, $options = array())`
 
 #### cookie->remove($key)
