@@ -1,28 +1,13 @@
-[db()](http://twinh.github.io/widget/api/db)
-============================================
+Db
+==
 
-获取[Doctrine DBAL](https://github.com/doctrine/dbal)的Connection对象
+获取[Doctrine DBAL](https://github.com/doctrine/dbal)的数据库查询对象
 
-### 
+案例
+----
+
+### 设置数据库类型并执行简单的查询
 ```php
-\Doctrine\DBAL\Connection db()
-```
-
-##### 参数
-*无*
-
-
-Db微件是对[Doctrine DBAL](https://github.com/doctrine/dbal)的简单封装,主要用于按需加载数据库查询对象.
-
-完整的配置请查看Doctrine DBAL官方提供的文档
-http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html
-
-
-##### 代码范例
-设置数据库类型并执行简单的查询
-```php
-<?php
-
 $widget->config('db', array(
     'driver' => 'pdo_sqlite',
     'path' => 'test.sqlite'
@@ -32,9 +17,10 @@ $db = $widget->db();
 
 print_r($db->fetchAll("SELECT MAX(1, 2)"));
 ```
-##### 运行结果
-```php
-'Array
+
+### 返回结果
+```
+Array
 (
     [0] => Array
         (
@@ -42,5 +28,17 @@ print_r($db->fetchAll("SELECT MAX(1, 2)"));
         )
 
 )
-'
 ```
+
+调用方式
+--------
+
+### 选项
+
+完整的配置请查看Doctrine DBAL官方提供的文档
+http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html
+
+### 方法
+
+#### db()
+获取数据库查询对象
