@@ -1,21 +1,21 @@
 Cookie
 ======
 
-读取,写入和删除Cookie
+写入,读取和删除cookie
 
 案例
 ----
 
-### 设置和获取Cookie的值
+### 写入和读取cookie的值
 ```php
-// 返回true
+// 写入cookie,返回true
 $widget->cookie('key', 'value');
 
-// 返回value
+// 读取cookie返回value
 $widget->cookie('key');
 ```
 
-### 设置7天过期的Cookie
+### 写入7天过期的cookie
 ```php
 $widget->cookie('key', 'value', array('expire' => 7));
 ```
