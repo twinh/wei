@@ -68,7 +68,7 @@ http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/conf
 
 | 名称          | 类型      | 默认值    | 说明                                                                                          |
 |---------------|-----------|-----------|-----------------------------------------------------------------------------------------------|
-| driver        | string    | 无        | 数据库驱动的类型,目前支持`pdo_mysql`,`pdo_sqlite`,`pdo_pgsql`,`pdo_oci`,`pdo_sqlsrv`和`oci8`  |                                              |
+| driver        | string    | 无        | 数据库驱动的类型,目前支持 `pdo_mysql`,`pdo_sqlite`,`pdo_pgsql`,`pdo_oci`,`pdo_sqlsrv`和`oci8`  |
 | driverClass   | string    | 无        | 驱动的类名                                                                                    |
 | pdo           | \PDO      | 无        | 实例化的PDO对象                                                                               |
 
