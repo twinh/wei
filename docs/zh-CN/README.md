@@ -19,10 +19,10 @@ API 参考目录
 * [bicache](bicache.md) - 二级缓存
 
 #### 事件
-* [eventManager](eventManager.md) - 事件管理器
-* [off](off.md) - 移除指定类型的事件触发器
-* [on](on.md) - 添加指定类型的事件触发器
-* [trigger](trigger.md) - 触发指定类型的事件
+* [event](event.md) - 事件管理器
+* [off](event.md#off) - 移除指定类型的事件触发器
+* [on](event.md#on) - 添加指定类型的事件触发器
+* [trigger](event.md#trigger) - 触发指定类型的事件
 
 #### HTTP请求
 * [browser](browser.md) - 检测浏览器的名称和版本

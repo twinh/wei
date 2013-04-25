@@ -32,6 +32,8 @@ $widget->trigger('connect');
 
 ### 方法
 
+on
+--
 #### on($type, $fn, $priority = 0, $data = array())
 绑定指定类型的事件触发器
 
@@ -50,8 +52,8 @@ $widget->trigger('connect');
 | `normal` | 0        |
 | `high`   | 1000     |
 
-----
-
+off
+---
 ####  off($type)
 移除指定类型的事件触发器
 
@@ -62,8 +64,8 @@ $widget->trigger('connect');
 
 如果`$type`只是纯命名空间,如'.namespace',表示移除该命名空间下所有的事件触发器
 
-----
-
+trigger
+------
 ### trigger($type, $params = array(), $widget = null)
 触发指定类型的事件
 
