@@ -23,7 +23,7 @@ class Cookie extends Parameter
      * @var int
      * @link http://php.net/manual/en/function.setcookie.php
      */
-    protected $expire = 86400;
+    protected $expires = 86400;
     
     /**
      * The path on the server in which the cookie will be available on
@@ -119,7 +119,7 @@ class Cookie extends Parameter
      */
     public function set($key, $value = null, array $options = array())
     {
-        if (isset($options['expire']) && 0 > $options['expire'] && isset($this->data[$key])) {
+        if (isset($options['expires']) && 0 > $options['expires'] && isset($this->data[$key])) {
              unset($this->data[$key]);
         } else {
             $this->data[$key] = $value;
@@ -140,7 +140,7 @@ class Cookie extends Parameter
     {
         if (isset($this->data[$key])) {
             $this->set($key, null, array(
-                'expire' => -1
+                'expires' => -1
             ));
         }
 
@@ -171,7 +171,7 @@ class Cookie extends Parameter
             $fn(
                 $name, 
                 $options['value'], 
-                $time + $this->resolveValue($options, 'expire'), 
+                $time + $this->resolveValue($options, 'expires'), 
                 $this->resolveValue($options, 'path'),
                 $this->resolveValue($options, 'domain'),
                 $this->resolveValue($options, 'secure'),

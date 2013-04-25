@@ -26,15 +26,13 @@ class CookieTest extends TestCase
     {
         $widget = $this->object;
 
-        $widget->set('test', __METHOD__, array('expire' => 1));
+        $widget->set('test', __METHOD__, array('expires' => 1));
 
         $this->assertEquals(__METHOD__, $widget->get('test'));
 
-        $widget->set('test', __METHOD__, array('expire' => -1));
+        $widget->set('test', __METHOD__, array('expires' => -1));
 
-        $this->assertEquals(null, $widget->get('test'), 'test expired cookie');
-        
-        
+        $this->assertEquals(null, $widget->get('test'), 'test expiresd cookie');
     }
 
     public function testRemove() 
