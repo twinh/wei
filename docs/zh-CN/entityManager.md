@@ -1,14 +1,32 @@
-    该微件文档还在紧急编写中,敬请期待!
-[entityManager()](http://twinh.github.io/widget/api/entityManager)
-==================================================================
+EntityManager
+-------------
 
-Returns the Docrine ORM entity manager
+获取[Doctrine ORM](https://github.com/doctrine/doctrine2)的实体管理对象
 
-### Returns the Docrine ORM entity manager
+案例
+====
+
+### 获取Doctrine ORM的实体管理对象
 ```php
-\Doctrine\ORM\EntityManager entityManager()
+$em = $widget->entityManager();
+
+// 返回 Doctrine\ORM\EntityManager();
+echo get_class($em);
 ```
 
-##### 参数
-*无*
+调用方式
+=======
 
+### 选项
+$config
+  * cache null
+  * proxyDir null
+  * proxyNamespace Proxy
+  * autoGenerateProxyClasses Proxy
+  * entityNamespaces array()
+  * useSimpleAnnotationReader false
+
+### 方法
+
+#### entityManager()
+获取Doctrine ORM的实体管理对象
