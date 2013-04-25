@@ -1,79 +1,90 @@
-[cache()](http://twinh.github.io/widget/api/cache)
-==================================================
+Cache
+=====
 
 设置或获取指定缓存类型的一项缓存
 
-##### 目录
-* cache( $key, $value [ $expire ] )
-* cache( $key )
-
-### 设置指定存储类型的一项缓存
-```php
-bool cache( $key, $value [ $expire ] )
-```
-
-##### 参数
-* **$key** `string` 缓存的键名
-* **$value** `mixed` 缓存的值,允许任意类型
-* **$expire** `int` 缓存的有效期,默认为0秒,表示永不过期
-
-
-该调用方式相等于`$widget->cache->set($key, $value, $expire)`
-
-默认的缓存类型是apc,可以通过`$widget->cache->setDriver('redis')`来更改缓存为redis或其他缓存类型
-
 使用`cache`微件会让你的代码更加灵活自由,你可以不用关注缓存的类型,并且可以根据需求或代码运行环境快速切换缓存类型,同时不用过多改动已有的代码
 
+案例
+----
+
+### 设置和获取缓存
+```php
+// 设置缓存
+$widget->cache('key', 'value');
+// 返回 true
+
+// 获取缓存
+$widget->cache('key');
+// 返回 value
+```
+
+### 设置60秒后就过期的缓存
+```php
+$widget->cache('key', 'value', 60);
+```
+
+调用方式
+-------
+
+### 选项
+
+| 名称      | 类型   | 默认值    | 说明                                                                                  |
+|-----------|--------|-----------|-----------------------------------------------------------------|
+| driver    | string | apc       | 缓存的类型                                                      |
+
 目前支持的缓存类型有
-* `apc`
+* `apc` *推荐*
+* `arrayCache`
 * `dbCache`
     * sqlite
     * mysql
     * pgsql
     * sqlsrv/dblib *不稳定*
     * oci *不稳定*
+* `fileCache`
 * `memcache`
 * `memcached`
-* `redis`
+* `redis` *推荐*
 
+### 方法
 
-##### 代码范例
-设置键名为"key",值为"value"的缓存
-```php
-<?php
-
-$widget->cache('key', 'value');
-
-echo $widget->cache('key');
-```
-##### 运行结果
-```php
-'value'
-```
-- - - -
-
-### 获取指定缓存类型的一项缓存
-```php
-bool cache( $key )
-```
-
+#### cache( $key, $value [ $expire ] )
+设置缓存的值
 ##### 参数
 * **$key** `string` 缓存的键名
+* **$value** `mixed` 缓存的值,允许任意类型
+* **$expire** `int` 缓存的有效期,默认为0秒,表示永不过期
 
+#### cache( $key )
+获取指定名称的缓存
 
-该调用方式相等于`$widget->cache->get($key)`
+### cache->set($key, $value)
+设置缓存的值
 
+### cache->get($key)
+获取缓存的值
 
-##### 代码范例
-获取键名为"key"的缓存,并打印出来
-```php
-<?php
+### cache->remove($key)
+移除一项缓存
 
-$widget->cache('key', 'value');
+### cache->exists($key)
+检查缓存是否存在
 
-echo $widget->cache('key');
-```
-##### 运行结果
-```php
-'value'
-```
+### cache->add($key, $value)
+增加一项缓存,如果缓存已存在,返回false
+
+### cache->replace($key, $value)
+替换一项缓存,如果缓存 **不** 存在,返回false
+
+### cache->increment($key, $offset = 1)
+增大一项缓存的值
+
+### cache->decrement($key, $offset = 1)
+减小一项缓存的值
+
+### cache->getMulti($keys)
+批量获取缓存的值
+
+### cache->setMulti($values)
+批量设置缓存的值
