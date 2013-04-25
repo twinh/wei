@@ -122,7 +122,7 @@ class T extends AbstractWidget
      * 
      * @param string $pattern The file path, which can contains %s that would be convert the current locale or fallback locale
      * @return T
-     * @throws Exception When file not found or not readable
+     * @throws Exception\InvalidArgumentException When file not found or not readable
      */
     public function loadFromFile($pattern)
     {
