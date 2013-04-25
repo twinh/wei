@@ -30,6 +30,32 @@ Array
 )
 ```
 
+### 创建读写(主备)分离的数据库查询对象
+```php
+// 添加微件别名
+$widget->appendOption('alias', array(
+    'dbSlave' => 'Widget\Db'
+));
+
+// 设置数据库配置选项
+$widget->config(array(
+    'db' => array(
+        'driver' => 'pdo_sqlite',
+        'path' => 'test.sqlite'
+    ),
+    'dbSlave' => array(
+        'driver' => 'pdo_sqlite',
+        'path' => 'slave.sqlite'
+    )
+));
+
+// 获取主DB数据库对象
+$widget->db();
+
+// 获取备DB数据库对象
+$widget->dbSlave();
+```
+
 调用方式
 --------
 
