@@ -17,7 +17,7 @@ $widget->cookie('key');
 
 ### 写入7天过期的cookie
 ```php
-$widget->cookie('key', 'value', array('expire' => 7));
+$widget->cookie('key', 'value', array('expires' => 7));
 ```
 
 ### 删除名称为'logined'的cookie
