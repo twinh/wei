@@ -11,7 +11,7 @@ class BrowserTest extends TestCase
     {
         $this->server->set('HTTP_USER_AGENT', $ua);
         $this->browser->detect();
-        $this->assertEquals($version, $this->browser->version);
+        $this->assertEquals($version, $this->browser->getVersion());
         $this->assertEquals($browser, $this->browser());
     }
     
