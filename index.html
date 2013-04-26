@@ -20,20 +20,26 @@
 <!-- Documentation extras -->
 <link href="./assets/css/docs.css" rel="stylesheet">
 <link href="./assets/css/pygments-manni.css" rel="stylesheet">
+<link rel="stylesheet" href="./assets/highlight.js/styles/github.css">
 
+<style type="text/css">
+pre .comment { font-style: normal;}
+h1, h2, h3, .lead
+{
+  font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei UI", "Microsoft YaHei", SimHei, "\5B8B\4F53", simsun, sans-serif;
+  font-weight: normal;
+}
+h4 {
+  font-weight: bold;
+}
+
+</style>
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
   <script src="./assets/js/html5shiv.js"></script>
   <script src="./assets/js/respond/respond.min.js"></script>
 <![endif]-->
-
-<!-- Favicons -->
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="./assets/ico/apple-touch-icon-144-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="./assets/ico/apple-touch-icon-114-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="./assets/ico/apple-touch-icon-72-precomposed.png">
-                <link rel="apple-touch-icon-precomposed" href="./assets/ico/apple-touch-icon-57-precomposed.png">
-                               <link rel="shortcut icon" href="./assets/ico/favicon.png">
 
     <!-- Place anything custom after this. -->
   </head>
@@ -45,7 +51,7 @@
     <h3 class="bs-docs-sidenav-heading"><a href="/">Widget</a></h3>
     
     <li><a href="#welcome">欢迎!</a></li>
-    <li><a href="#getting-started">Getting started</a></li>
+    <li><a href="#getting-started">入门</a></li>
     <li><a href="#whats-included">What's included</a></li>
     <li><a href="#examples">Templates and examples</a></li>
     <li><a href="#customizing">Customizing Bootstrap</a></li>
@@ -233,16 +239,26 @@
 <!-- Welcome
   ================================================== -->
   <div id="welcome" class="bs-docs-section-header">
-    <h1>Welcome</h1>
-    <p class="lead">Welcome to the Bootstrap documentation, the living, interactive style and code guide for all things Bootstrap. If you're new here, continue reading to learn how to get started. Otherwise, carry on you beautiful person you.</p>
+    <h1>欢迎</h1>
+    <p class="lead">欢迎来到PHP微框架Widget的文档.这里将为您展示丰富全面的Widget代码指导和案例.</p>
   </div>
 
   <!-- Getting started
   ================================================== -->
   <div class="bs-docs-section" id="getting-started">
     <div class="page-header">
-      <h1>Getting started</h1>
+      <h1>入门</h1>
     </div>
+    <p class="lead">Widget是一个非常小的PHP框架,她提供了一种高效简洁的方式让你更方便的使用PHP.<p>
+    <p>Widget的使用比任何框架都要简单,只需3步,<code>加载</code>=><code>创建</code>=><code>调用</code>!</p>
+    <pre class="php"><code>// 加载核心类文件
+require 'path/to/widget/lib/Widget/Widget.php';
+
+// 创建微件管理器对象
+$widget = \Widget\Widget::create();
+
+// 调用query微件,获取URL请求中id参数
+$id = $widget->query('id');</code></pre>
     <p class="lead">There are a few easy ways to quickly get started with Bootstrap, each one appealing to a different skill level and use case. Read through to see what suits your particular needs.</p>
     <div class="row">
       <div class="col-span-6">
@@ -268,6 +284,15 @@
       </div>
     </div>
   </div>
+
+<!-- Event
+  ================================================== -->
+  {{{event}}}
+<!-- Cache
+  ================================================== -->
+  {{{cache}}}
+  <!-- cache -->
+
 
 </div><!-- /.container -->
 
@@ -332,10 +357,14 @@
 <script src="./assets/js/bootstrap-typeahead.js"></script>
 <script src="./assets/js/bootstrap-affix.js"></script>
 
-<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 <script src="./assets/js/holder/holder.js"></script>
 
 <script src="./assets/js/application.js"></script>
+<script src="./assets/highlight.js/highlight.pack.js"></script>
+<script>
+hljs.tabReplace = '    '; //4 spaces
+hljs.initHighlightingOnLoad();
+</script>
 
 <!-- Analytics
 ================================================== -->
