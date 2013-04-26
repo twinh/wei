@@ -56,7 +56,7 @@ h4 {
     <li><a href="#news">随时关注最新消息</a></li>
 
     <li>
-      <a class="nav-header" href="#widget">微件</a>
+      <a class="nav-header" href="#widget">微件列表</a>
     </li>
     <li>
       <a href="#cache">缓存</a>
@@ -205,35 +205,36 @@ h4 {
 <li><a href="#isDivisibleby">isDivisibleBy</a> - 检查数据是否能被指定的除数整除</li>
 </ul></li>
 </ul></li>
-<li><a href="#view">视图</a>
-
-<ul>
-<li><a href="#escape">escape</a> - 转义字符串中的特殊字符,以便安全的输出到网页中,支持HTML,JS,CSS,HTML属性和URL的转义</li>
-<li><a href="#smarty">smarty</a> - 渲染smarty模板</li>
-<li><a href="#twig">twig</a> - 渲染Twig模板</li>
-<li><a href="#view">view</a> - 渲染指定名称的模板</li>
-</ul></li>
-<li><a href="#util">工具</a>
-
-<ul>
-<li><a href="#attr">attr</a> - 获取数组或对象中指定键名的值</li>
-<li><a href="#instance">instance</a> - 初始化指定的类</li>
-<li><a href="#logger">logger</a> - 记录日志</li>
-<li><a href="#marker">marker</a> - 设置一个标记,包括时间,内存使用量等信息</li>
-<li><a href="#pinyin">pinyin</a> - 将中文转换为拼音字母</li>
-</ul></li>
-<li><a href="#integration">第三方集成微件</a>
-
-<ul>
-<li><a href="#db">db</a> - 获取<a href="#https://github.com/doctrine/dbal">Doctrine DBAL</a>的Connection对象</li>
-<li><a href="#entityManager">entityManager</a> - 获取<a href="#https://github.com/doctrine/doctrine2">Doctrine ORM</a>的EntityManager对象</li>
-<li><a href="#monolog">monolog</a> - 获取<a href="#https://github.com/Seldaek/monolog">Monolog</a>对象或记录一条日志</li>
-<li><a href="#phpError">phpError</a> - 启用<a href="#http://phperror.net/">PHPError</a>的错误视图</li>
-</ul></li>
-</ul>
-
+    <li>
+      <a href="#view">视图</a>
+      <ul class="nav">
+        <li><a href="#escape">escape</a> - 转义字符串中的特殊字符,以便安全的输出到网页中,支持HTML,JS,CSS,HTML属性和URL的转义</li>
+        <li><a href="#smarty">smarty</a> - 渲染smarty模板</li>
+        <li><a href="#twig">twig</a> - 渲染Twig模板</li>
+        <li><a href="#view">view</a> - 渲染指定名称的模板</li>
+      </ul>
+    </li>
+    <li>
+      <a href="#view">工具</a>
+      <ul class="nav">
+        <li><a href="#attr">attr</a> - 获取数组或对象中指定键名的值</li>
+        <li><a href="#instance">instance</a> - 初始化指定的类</li>
+        <li><a href="#logger">logger</a> - 记录日志</li>
+        <li><a href="#marker">marker</a> - 设置一个标记,包括时间,内存使用量等信息</li>
+        <li><a href="#pinyin">pinyin</a> - 将中文转换为拼音字母</li>
+      </ul>
+    </li>
+    <li>
+      <a href="#view">第三方集成</a>
+      <ul class="nav">
+        <li><a href="#db">db</a> - 获取<a href="#https://github.com/doctrine/dbal">Doctrine DBAL</a>的Connection对象</li>
+        <li><a href="#entityManager">entityManager</a> - 获取<a href="#https://github.com/doctrine/doctrine2">Doctrine ORM</a>的EntityManager对象</li>
+        <li><a href="#monolog">monolog</a> - 获取<a href="#https://github.com/Seldaek/monolog">Monolog</a>对象或记录一条日志</li>
+        <li><a href="#phpError">phpError</a> - 启用<a href="#http://phperror.net/">PHPError</a>的错误视图</li>
+      </ul>
+    </li>
+  </ul>
 </div>
-
 
 <!-- Page content of course! -->
     <div class="bs-docs-container"> 
@@ -251,7 +252,7 @@ h4 {
     <div class="page-header">
       <h1>入门</h1>
     </div>
-    <p class="lead">Widget是一个非常小的PHP框架,她提供了一种高效简洁的方式让您更方便的使用PHP.<p>
+    <p class="lead">Widget是一个非常小的PHP框架,她提供了一种高效简洁的方式让您更方便地使用PHP.<p>
     <p>Widget的使用比任何框架都要简单,只需3步,<code>加载</code>=><code>创建</code>=><code>调用</code>!</p>
     <pre class="php"><code>// 加载核心类文件
 require 'path/to/widget/lib/Widget/Widget.php';
@@ -304,8 +305,8 @@ $id = $widget->query('id');</code></pre>
   <!-- Widget
   ================================================== -->
   <div id="widget" class="bs-docs-section-header">
-    <h1>Widget</h1>
-    <p class="lead">提供了上百个个各具特色的微件,主要包括缓存,事件,HTTP请求,HTTP响应,验证器等</p>
+    <h1>微件列表</h1>
+    <p class="lead">提供了上百个个各具特色的微件,包括缓存,事件,HTTP请求,HTTP响应,验证器等</p>
   </div>
 
 
