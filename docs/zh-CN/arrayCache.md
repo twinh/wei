@@ -72,5 +72,4 @@ $widget->arrayCache('name');
 批量获取缓存的值
 
 ### arrayCache->setMulti($values)
-
-
+批量设置缓存的值
