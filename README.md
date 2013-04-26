@@ -12,20 +12,17 @@ Define the following requirement in your `composer.json` file and run `php compo
 }
 ```
 
-Basic Usage
------------
+Getting started
+---------------
 ```php
 // Require the widget manager class
 require 'path/to/widget/lib/Widget/Widget.php';
 
 // Create the default widget manager instance
-$widget = Widget\Widget::create();
+$widget = \Widget\Widget::create();
 
-// Initialize the "request" widget
-$request = $widget->request;
-
-// Invoke the "request" widget
-$id = $widget->request('id');
+// Invoke the query widget to receive the URL query parameter
+$id = $widget->query('id');
 ```
 
 Testing
