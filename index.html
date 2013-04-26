@@ -50,12 +50,14 @@ h4 {
   <ul class="nav bs-docs-sidenav">
     <h3 class="bs-docs-sidenav-heading"><a href="/">Widget</a></h3>
     
-    <li><a href="#welcome">欢迎!</a></li>
+    <li><a href="#welcome">欢迎</a></li>
     <li><a href="#getting-started">入门</a></li>
-    <li><a href="#whats-included">What's included</a></li>
-    <li><a href="#examples">Templates and examples</a></li>
-    <li><a href="#customizing">Customizing Bootstrap</a></li>
+    <li><a href="#download">下载</a></li>
+    <li><a href="#news">随时关注最新消息</a></li>
 
+    <li>
+      <a class="nav-header" href="#widget">微件</a>
+    </li>
     <li>
       <a href="#cache">缓存</a>
       <ul class="nav">
@@ -243,13 +245,13 @@ h4 {
     <p class="lead">欢迎来到PHP微框架Widget的文档.这里将为您展示丰富全面的Widget代码指导和案例.</p>
   </div>
 
-  <!-- Getting started
+<!-- Getting started
   ================================================== -->
   <div class="bs-docs-section" id="getting-started">
     <div class="page-header">
       <h1>入门</h1>
     </div>
-    <p class="lead">Widget是一个非常小的PHP框架,她提供了一种高效简洁的方式让你更方便的使用PHP.<p>
+    <p class="lead">Widget是一个非常小的PHP框架,她提供了一种高效简洁的方式让您更方便的使用PHP.<p>
     <p>Widget的使用比任何框架都要简单,只需3步,<code>加载</code>=><code>创建</code>=><code>调用</code>!</p>
     <pre class="php"><code>// 加载核心类文件
 require 'path/to/widget/lib/Widget/Widget.php';
@@ -259,29 +261,55 @@ $widget = \Widget\Widget::create();
 
 // 调用query微件,获取URL请求中id参数
 $id = $widget->query('id');</code></pre>
-    <p class="lead">There are a few easy ways to quickly get started with Bootstrap, each one appealing to a different skill level and use case. Read through to see what suits your particular needs.</p>
+  </div>
+
+<!-- Download
+  ================================================== -->
+  <div class="bs-docs-section" id="download">
+    <div class="page-header">
+      <h1>下载</h1>
+    </div>
     <div class="row">
       <div class="col-span-6">
-        <h3>Compiled CSS and JS</h3>
-        <p><strong>The fastest way to get started:</strong> get the compiled and minified versions of our CSS, JavaScript, and fonts. No documentation or original source files are included.</p>
-        <p><a class="btn btn-large btn-primary" href="assets/bootstrap.zip" onclick="_gaq.push(['_trackEvent', 'Getting started', 'Download', 'Download compiled']);">Download Bootstrap</a></p>
+        <h3>1. 通过<a href="http://getcomposer.org/" target="_blank">Composer</a>下载</h3>
+        <p><pre class="json"><code>{
+    "require": {
+        "widget/widget": "0.9.2-beta"
+    }
+}</code></pre></p>
       </div>
       <div class="col-span-6">
-        <h3>Latest source code</h3>
-        <p>Get the original files for all CSS and JavaScript, along with a local copy of the docs by downloading the latest version directly from GitHub.</p>
-        <p><a class="btn btn-large" href="https://github.com/twitter/bootstrap/zipball/master" onclick="_gaq.push(['_trackEvent', 'Getting started', 'Download', 'Download source']);">Download Bootstrap source</a></p>
+        <h3>2. 直接下载</h3>
+        <p><a class="btn btn-large btn-primary btn-block" href="https://github.com/twinh/widget/archive/v0.9.2-beta.zip">最新版 v0.9.2-beta</a></p>
+        <p><a class="btn btn-large btn-block" href="https://github.com/twinh/widget/archive/master.zip">开发版</a></p>
       </div>
-      <div class="col-span-6">
-        <h3>Clone or fork via GitHub</h3>
-        <p>Clone the entire project or fork your own version of Bootstrap to make it your own by visiting us on GitHub.</p>
-        <p><a class="btn btn-large" href="https://github.com/twitter/bootstrap/" onclick="_gaq.push(['_trackEvent', 'Getting started', 'Download', 'GitHub project']);">GitHub repository</a></p>
-      </div>
-      <div class="col-span-6">
-        <h3>Bower</h3>
-        <p>Install and manage the original files for all CSS and JavaScript, along with a local copy of the docs, using <a href="http://twitter.github.com/bower">Bower</a>.</p>
-        <div class="highlight"><pre><code class="bash"><span class="nv">$ </span>bower install bootstrap
-</code></pre></div>
-      </div>
+    </div>
+  </div>
+
+<!-- News
+  ================================================== -->
+  <div class="bs-docs-section" id="news">
+    <div class="page-header">
+      <h1>随时关注最新消息</h1>
+    </div>
+    <p class="lead">Widget每天都有新的提交,欢迎关注,了解最新趋势!</p>
+    <p>
+      <iframe src="http://ghbtns.com/github-btn.html?user=twinh&repo=widget&type=watch"
+        allowtransparency="true" frameborder="0" scrolling="0" width="53" height="20"></iframe>
+      <iframe src="http://ghbtns.com/github-btn.html?user=twinh&type=follow"
+        allowtransparency="true" frameborder="0" scrolling="0" width="132" height="20"></iframe>
+    </p>
+  </div>
+
+  <!-- Widget
+  ================================================== -->
+  <div id="widget" class="bs-docs-section-header">
+    <h1>Widget</h1>
+    <p class="lead">提供了上百个个各具特色的微件,主要包括缓存,事件,HTTP请求,HTTP响应,验证器等</p>
+  </div>
+
+
+
     </div>
   </div>
 
