@@ -27,7 +27,6 @@ API 参考目录
 #### HTTP请求
 * [browser](browser.md) - 检测浏览器的名称和版本
 * [cookie](cookie.md) - 获取一项Cookie参数($_COOKIE)的值
-* [inAjax](inAjax.md) - 检测请求是否通过Ajax发送
 * [post](post.md)  - 获取一项HTTP POST请求参数($_POST)的值
 * [query](query.md) - 获取一项HTTP GET查询参数($_GET)的值
 * [request](request.md) - 获取一项HTTP请求参数($_REQUEST)的值

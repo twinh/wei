@@ -65,30 +65,22 @@ class RequestTest extends TestCase
             
             $this->assertTrue($request->{'in' . $method}());
             $this->assertTrue($request->inMethod($method));
-
-            $method = strtolower($method);
-            $method[0] = strtoupper($method[0]);
-            $this->{'in' . $method}->setOption('request', $request);
-            $this->assertTrue($this->{'in' . $method}());
         }
-        
-        $this->request->setMethod('PUT');
-        $this->assertTrue($this->request->inMethod('PUT'));
     }
     
     public function testAjax()
     {
         $this->server->set('HTTP_X_REQUESTED_WITH', 'xmlhttprequest');
     
-        $this->assertTrue($this->inAjax());
+        $this->assertTrue($this->request->inAjax());
         
         $this->server->set('HTTP_X_REQUESTED_WITH', 'json');
         
-        $this->assertFalse($this->inAjax());
+        $this->assertFalse($this->request->inAjax());
         
         $this->server->remove('HTTP_X_REQUESTED_WITH');
         
-        $this->assertFalse($this->inAjax());
+        $this->assertFalse($this->request->inAjax());
     }
     
     /**
