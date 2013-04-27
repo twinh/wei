@@ -34,6 +34,7 @@ $widget->cache('key', 'value', 60);
 | driver    | string | apc       | 缓存的类型                                                      |
 
 目前支持的缓存类型有
+
 * `apc` *推荐*
 * `arrayCache`
 * `dbCache`

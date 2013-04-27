@@ -1,4 +1,4 @@
-fileCache
+FileCache
 =========
 
 设置或获取文件缓存
