@@ -32,7 +32,12 @@ h1, h2, h3, .lead
 h4 {
   font-weight: bold;
 }
-
+.bs-docs-sidebar .nav .nav .nav > li > a {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 55px;
+  font-size: 90%;
+}
 </style>
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -216,20 +221,26 @@ h4 {
     <li>
       <a href="#util">工具</a>
       <ul class="nav">
-        <li><a href="#attr">attr</a> - 获取数组或对象中指定键名的值</li>
-        <li><a href="#instance">instance</a> - 初始化指定的类</li>
-        <li><a href="#logger">logger</a> - 记录日志</li>
-        <li><a href="#marker">marker</a> - 设置一个标记,包括时间,内存使用量等信息</li>
-        <li><a href="#pinyin">pinyin</a> - 将中文转换为拼音字母</li>
+        <li>
+          <a href="#arr">Arr</a>
+          <ul class="nav">
+            <li><a href="#attr">attr</a></li>
+            <li><a href="#sort">sort</a></li>
+          </ul>
+        </li>
+        <li><a href="#instance">instance</a></li>
+        <li><a href="#logger">logger</a></li>
+        <li><a href="#marker">marker</a></li>
+        <li><a href="#pinyin">pinyin</a></li>
       </ul>
     </li>
     <li>
       <a href="#vendor">第三方集成</a>
       <ul class="nav">
-        <li><a href="#db">db</a> - 获取<a href="https://github.com/doctrine/dbal">Doctrine DBAL</a>的Connection对象</li>
-        <li><a href="#entityManager">entityManager</a> - 获取<a href="https://github.com/doctrine/doctrine2">Doctrine ORM</a>的EntityManager对象</li>
-        <li><a href="#monolog">monolog</a> - 获取<a href="https://github.com/Seldaek/monolog">Monolog</a>对象或记录一条日志</li>
-        <li><a href="#phpError">phpError</a> - 启用<a href="http://phperror.net/">PHPError</a>的错误视图</li>
+        <li><a href="#db">db</a></li>
+        <li><a href="#entityManager">entityManager</a></li>
+        <li><a href="#monolog">monolog</a></li>
+        <li><a href="#phpError">phpError</a></li>
       </ul>
     </li>
   </ul>
@@ -355,20 +366,33 @@ $widget-&gt;cache('key');
 <td>缓存的类型</td>
 </tr></tbody>
 </table>
-<p>目前支持的缓存类型有<br>
-* <code>apc</code> <em>推荐</em><br>
-* <code>arrayCache</code><br>
-* <code>dbCache</code><br>
-    * sqlite<br>
-    * mysql<br>
-    * pgsql<br>
-    * sqlsrv/dblib <em>不稳定</em><br>
-    * oci <em>不稳定</em><br>
-* <code>fileCache</code><br>
-* <code>memcache</code><br>
-* <code>memcached</code><br>
-* <code>redis</code> <em>推荐</em></p>
+<p>目前支持的缓存类型有</p>
 
+<ul>
+<li>
+<code>apc</code> <em>推荐</em>
+</li>
+<li><code>arrayCache</code></li>
+<li>
+<code>dbCache</code>
+
+<ul>
+<li>sqlite</li>
+<li>mysql</li>
+<li>pgsql</li>
+<li>sqlsrv/dblib <em>不稳定</em>
+</li>
+<li>oci <em>不稳定</em>
+</li>
+</ul>
+</li>
+<li><code>fileCache</code></li>
+<li><code>memcache</code></li>
+<li><code>memcached</code></li>
+<li>
+<code>redis</code> <em>推荐</em>
+</li>
+</ul>
 <h3>方法</h3>
 
 <h4>cache( $key, $value [ $expire ] )</h4>
@@ -623,7 +647,7 @@ $widget-&gt;dbCache('key');
   <section id="fileCache">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1>fileCache</h1>
+<h1>FileCache</h1>
 
 <p>设置或获取文件缓存</p>
 
@@ -1882,6 +1906,118 @@ object otherwise, call the render method</p>
 
   </section>
 
+<!-- arr
+  ================================================== -->
+  <section id="arr">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>Arr</h1>
+
+<p>数组工具微件,提供一些实用的数组操作方法</p>
+
+<h2>案例</h2>
+
+<h3>获取数组或对象中指定键名的值</h3>
+
+<pre><code class="php">&lt;?php
+
+class Getter
+{
+    public function getKey()
+    {
+        return 'Get from Getter';
+    }
+}
+
+$data = array(
+    array(
+        'key' =&gt; 'Get from array',
+    ),
+    new \ArrayObject(array(
+        'key' =&gt; 'Get from ArrayObject'
+    )),
+    call_user_func(function(){
+        $object = new stdClass();
+        $object-&gt;key = 'Get from stdClass';
+        return $object;
+    }),
+    new Getter()
+);
+
+foreach ($data as $row) {
+    echo $widget-&gt;arr-&gt;attr($row, 'key') . "\n";
+}
+</code></pre>
+
+<h3>运行结果</h3>
+
+<pre><code class="php">'Get from array'
+
+'Get from ArrayObject'
+
+'Get from stdClass'
+
+'Get from Getter'
+</code></pre>
+
+<h3>对二维数组进行按order键名,从大到小排序</h3>
+
+<pre><code class="php">$data = array(
+    array('id' =&gt; 2, 'order' =&gt; 1),
+    array('id' =&gt; 1, 'order' =&gt; 2)
+);
+
+print_r($widget-&gt;arr-&gt;sort($data, 'order', SORT_DESC));
+</code></pre>
+
+<h3>运行结果</h3>
+
+<pre><code class="php">Array
+(
+    [0] =&gt; Array
+        (
+            [id] =&gt; 1
+            [order] =&gt; 2
+        )
+    [1] =&gt; Array
+        (
+            [id] =&gt; 2
+            [order] =&gt; 1
+        )
+)
+</code></pre>
+
+<h2>调用方法</h2>
+
+<h3>选项</h3>
+
+<p><em>无</em></p>
+
+<h3>方法</h3>
+
+<h4>arr-&gt;attr($data, $key)</h4>
+
+<p>获取数组或对象中指定键名的值</p>
+
+<p>取值的顺序如下</p>
+
+<ol>
+<li>如果<code>$data</code>是数组或<code>\ArrayAccess</code>的实例化对象,检查并返回<code>$data[$key]</code>的值</li>
+<li>如果<code>$data</code>是对象,检查属性<code>$key</code>是否存在,存在则返回<code>$data-&gt;$key</code>的值</li>
+<li>如果<code>$data</code>是对象且方法<code>get. $key</code>存在,返回<code>$data-&gt;{'get' . $key}</code>
+</li>
+<li>如果以上均不存在,返回null</li>
+</ol>
+<p>使用<code>attr()</code>微件的好处在于你不用关心要取值的变量类型,不管它是数组,对象数组(\ArrayAccess),还是<br>
+其他对象</p>
+
+<h4>arr-&gt;sort($array, $key = 'order', $type = SORT_ASC)</h4>
+
+<p>对一个二维数组进行排序,类似SQL的ORDER BY语句</p>
+</body></html>
+
+  </section>
+
 <!-- instance
   ================================================== -->
   <section id="instance">
@@ -1965,6 +2101,507 @@ object otherwise, call the render method</p>
 <li>
 <strong>$word</strong> <code>string</code> </li>
 </ul>
+</body></html>
+
+  </section>
+
+<!-- db
+  ================================================== -->
+  <section id="db">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>Db</h1>
+
+<p>获取<a href="https://github.com/doctrine/dbal">Doctrine DBAL</a>的数据库查询对象</p>
+
+<h2>案例</h2>
+
+<h3>设置数据库类型并执行简单的查询</h3>
+
+<pre><code class="php">$widget-&gt;config('db', array(
+    'driver' =&gt; 'pdo_sqlite',
+    'path' =&gt; 'test.sqlite'
+));
+
+$db = $widget-&gt;db();
+
+print_r($db-&gt;fetchAll("SELECT MAX(1, 2)"));
+</code></pre>
+
+<h3>返回结果</h3>
+
+<pre><code>Array
+(
+    [0] =&gt; Array
+        (
+            [MAX(1, 2)] =&gt; 2
+        )
+
+)
+</code></pre>
+
+<h3>创建读写(主备)分离的数据库查询对象</h3>
+
+<pre><code class="php">// 添加微件别名
+$widget-&gt;appendOption('alias', array(
+    'dbSlave' =&gt; 'Widget\Db'
+));
+
+// 设置数据库配置选项
+$widget-&gt;config(array(
+    'db' =&gt; array(
+        'driver' =&gt; 'pdo_sqlite',
+        'path' =&gt; 'test.sqlite'
+    ),
+    'dbSlave' =&gt; array(
+        'driver' =&gt; 'pdo_sqlite',
+        'path' =&gt; 'slave.sqlite'
+    )
+));
+
+// 获取主DB数据库对象
+$widget-&gt;db();
+
+// 获取备DB数据库对象
+$widget-&gt;dbSlave();
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<p>完整的配置请查看Doctrine DBAL官方提供的文档<br><a href="http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html">http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html</a></p>
+
+<h4>以下三个主要选项,只要提供一个的值即可</h4>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>driver</td>
+<td>string</td>
+<td>无</td>
+<td>数据库驱动的类型,目前支持 <code>pdo_mysql</code>,<code>pdo_sqlite</code>,<code>pdo_pgsql</code>,<code>pdo_oci</code>,<code>pdo_sqlsrv</code>和<code>oci8</code>
+</td>
+</tr>
+<tr>
+<td>driverClass</td>
+<td>string</td>
+<td>无</td>
+<td>驱动的类名</td>
+</tr>
+<tr>
+<td>pdo</td>
+<td>\PDO</td>
+<td>无</td>
+<td>实例化的PDO对象</td>
+</tr>
+</tbody>
+</table>
+<h4>当选项<code>driver</code>的值为<code>pdo_sqlite</code>时,需提供以下配置选项</h4>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>user</td>
+<td>string</td>
+<td>无</td>
+<td>连接数据库的用户名</td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td>无</td>
+<td>连接数据库的密码</td>
+</tr>
+<tr>
+<td>path</td>
+<td>string</td>
+<td>无</td>
+<td>数据库存放的路径,与<code>memory</code>选项二选一,优先使用<code>path</code>选项</td>
+</tr>
+<tr>
+<td>memory</td>
+<td>bool</td>
+<td>无</td>
+<td>是否使用SQLite的内存数据库(非持久化,在每次请求完毕就自动删除)</td>
+</tr>
+</tbody>
+</table>
+<h4>当选项<code>driver</code>的值为<code>pdo_mysql</code>时,需提供以下配置选项</h4>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>user</td>
+<td>string</td>
+<td>无</td>
+<td>连接数据库的用户名</td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td>无</td>
+<td>连接数据库的密码</td>
+</tr>
+<tr>
+<td>host</td>
+<td>string</td>
+<td>无</td>
+<td>数据库的主机地址</td>
+</tr>
+<tr>
+<td>port</td>
+<td>int</td>
+<td>无</td>
+<td>连接数据库的端口</td>
+</tr>
+<tr>
+<td>dbname</td>
+<td>string</td>
+<td>无</td>
+<td>连接数据库的数据库名称</td>
+</tr>
+<tr>
+<td>unix_socket</td>
+<td>string</td>
+<td>无</td>
+<td>连接数据库的socket名称</td>
+</tr>
+<tr>
+<td>charset</td>
+<td>string</td>
+<td>无</td>
+<td>连接数据库的字符集</td>
+</tr>
+</tbody>
+</table>
+<h4>当选项<code>driver</code>的值为<code>pdo_pgsql</code>时,需提供以下配置选项</h4>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>user</td>
+<td>string</td>
+<td>无</td>
+<td>连接数据库的用户名</td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td>无</td>
+<td>连接数据库的密码</td>
+</tr>
+<tr>
+<td>host</td>
+<td>string</td>
+<td>无</td>
+<td>数据库的主机地址</td>
+</tr>
+<tr>
+<td>port</td>
+<td>int</td>
+<td>无</td>
+<td>连接数据库的端口</td>
+</tr>
+<tr>
+<td>dbname</td>
+<td>string</td>
+<td>无</td>
+<td>连接数据库的数据库名称</td>
+</tr>
+</tbody>
+</table>
+<h4>当选项<code>driver</code>的值为<code>pdo_oci</code> / <code>oci8</code>时,需提供以下配置选项</h4>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>user</td>
+<td>string</td>
+<td>无</td>
+<td>连接数据库的用户名</td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td>无</td>
+<td>连接数据库的密码</td>
+</tr>
+<tr>
+<td>host</td>
+<td>string</td>
+<td>无</td>
+<td>数据库的主机地址</td>
+</tr>
+<tr>
+<td>port</td>
+<td>int</td>
+<td>无</td>
+<td>连接数据库的端口</td>
+</tr>
+<tr>
+<td>dbname</td>
+<td>string</td>
+<td>无</td>
+<td>连接数据库的数据库名称</td>
+</tr>
+<tr>
+<td>charset</td>
+<td>string</td>
+<td>无</td>
+<td>连接数据库的字符集</td>
+</tr>
+</tbody>
+</table>
+<h4>当选项<code>driver</code>的值为<code>pdo_sqlsrv</code>时,需提供以下配置选项</h4>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>user</td>
+<td>string</td>
+<td>无</td>
+<td>连接数据库的用户名</td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td>无</td>
+<td>连接数据库的密码</td>
+</tr>
+<tr>
+<td>host</td>
+<td>string</td>
+<td>无</td>
+<td>数据库的主机地址</td>
+</tr>
+<tr>
+<td>port</td>
+<td>int</td>
+<td>无</td>
+<td>连接数据库的端口</td>
+</tr>
+<tr>
+<td>dbname</td>
+<td>string</td>
+<td>无</td>
+<td>连接数据库的数据库名称</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>db()</h4>
+
+<p>获取数据库查询对象</p>
+</body></html>
+
+  </section>
+
+<!-- entityManager
+  ================================================== -->
+  <section id="entityManager">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>EntityManager</h1>
+
+<p>获取<a href="https://github.com/doctrine/doctrine2">Doctrine ORM</a>的实体管理对象</p>
+
+<h2>案例</h2>
+
+<h3>获取Doctrine ORM的实体管理对象</h3>
+
+<pre><code class="php">$em = $widget-&gt;entityManager();
+
+// 返回 Doctrine\ORM\EntityManager();
+echo get_class($em);
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>config</td>
+<td>array</td>
+<td>见下表</td>
+<td>
+<code>\Doctrine\ORM\Configuration</code>的初始化参数</td>
+</tr></tbody>
+</table>
+<p>config选项的详细配置</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>cache</td>
+<td>string</td>
+<td>null</td>
+<td>无</td>
+</tr>
+<tr>
+<td>proxyDir</td>
+<td>string</td>
+<td>null</td>
+<td></td>
+</tr>
+<tr>
+<td>proxyNamespace</td>
+<td>string</td>
+<td>'Proxy'</td>
+<td></td>
+</tr>
+<tr>
+<td>autoGenerateProxyClasses</td>
+<td>bool</td>
+<td>null</td>
+<td></td>
+</tr>
+<tr>
+<td>annotationDriverPaths</td>
+<td>array</td>
+<td>array()</td>
+<td></td>
+</tr>
+<tr>
+<td>entityNamespaces</td>
+<td>array</td>
+<td>array()</td>
+<td></td>
+</tr>
+<tr>
+<td>useSimpleAnnotationReader</td>
+<td>bool</td>
+<td>false</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>entityManager()</h4>
+
+<p>获取Doctrine ORM的实体管理对象</p>
+</body></html>
+
+  </section>
+
+<!-- monolog
+  ================================================== -->
+  <section id="monolog">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<pre><code>该微件文档还在紧急编写中,敬请期待!
+</code></pre>
+
+<h1><a href="http://twinh.github.io/widget/api/monolog">monolog()</a></h1>
+
+<p>Get monolog logger object or add a log record</p>
+
+<h3>Get monolog logger object or add a log record</h3>
+
+<pre><code class="php">\Monolog\Logger|\boolen monolog($level, $message, $context)
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$message</strong> <code>string</code> The log message</li>
+</ul>
+</body></html>
+
+  </section>
+
+<!-- phpError
+  ================================================== -->
+  <section id="phpError">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>PHP Error</h1>
+
+<p><a href="http://phperror.net/">PHP Error</a>提供了更友好的错误提示信息,完整的语法和代码片段高亮,同时支持Ajax错误提示</p>
+
+<h2>案例</h2>
+
+<h3>在Widget初始化时加载PHP Error</h3>
+
+<pre><code class="php">\Widget\Widget::create(array(
+    'widget' =&gt; array(
+        'preload' =&gt; array(
+            'phpError' // 在预加载选项增加phpError微件
+            '...'      // 预加载其他微件
+        )
+    ),
+    // 配置PHP Error微件的选项
+    'phpError' =&gt; array(
+        'catch_ajax_errors' =&gt; true,
+        'catch_class_not_found' =&gt; true,
+        '...' =&gt; '...'
+    )
+));
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<p>参见PHP Error官网文档<a href="https://github.com/JosephLenton/PHP-Error/wiki/Options">https://github.com/JosephLenton/PHP-Error/wiki/Options</a></p>
+
+<h3>方法</h3>
+
+<h4>phpError()</h4>
+
+<p>获取\php_error\ErrorHandler对象</p>
 </body></html>
 
   </section>
