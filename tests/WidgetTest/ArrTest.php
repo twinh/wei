@@ -24,7 +24,7 @@ class ArrTest extends TestCase
     {
         $this->assertEquals('pv', $this->arr->attr($this, 'propertyValue'));
         $this->assertEquals('value', $this->arr->attr($this, 'value'));
-        $this->assertEquals(null, $this->attr($this, 'no this property'));
+        $this->assertEquals(null, $this->arr->attr($this, 'no this property'));
     }
     
     /**

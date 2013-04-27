@@ -13,7 +13,7 @@ class UrlDebuggerTest extends TestCase
     {
         $this->query['_ajax'] = true;
         $this->urlDebugger->inject();
-        $this->assertTrue($this->inAjax());
+        $this->assertTrue($this->request->inAjax());
     }
     
     public function testMethod()
