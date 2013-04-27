@@ -20,9 +20,11 @@ use Widget\Validator\File as FileValidator;
 class Upload extends Image
 {
     /**
+     * Seems that the total post data size is too large
+     * 
      * @link http://php.net/manual/en/ini.core.php#ini.post-max-size
      */
-    protected $postSizeMessage = 'Seems that the total file size is larger than the max size (%postMaxSize%) of allowed post data, please check the size of your file';
+    protected $postSizeMessage = 'No file uploaded or the total file size is too large, allowed maximum size is %postMaxSize%';
 
     /**
      * The uploaded file array do not contain the key "$this->field", or error code not available
