@@ -69,7 +69,7 @@ class Env extends AbstractWidget
      * 
      * @return bool
      */
-    public function isDev()
+    public function inDev()
     {
         return $this->env === 'dev';
     }
@@ -79,7 +79,7 @@ class Env extends AbstractWidget
      * 
      * @return bool
      */
-    public function isTest()
+    public function inTest()
     {
         return $this->env === 'test';
     }
@@ -89,7 +89,7 @@ class Env extends AbstractWidget
      * 
      * @return bool
      */
-    public function isProd()
+    public function inProd()
     {
         return $this->env === 'prod';
     }
