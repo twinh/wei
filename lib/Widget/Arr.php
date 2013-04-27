@@ -2,19 +2,41 @@
 /**
  * Widget Framework
  *
- * @copyright   Copyright (c) 2008-2013 Twin Huang
+ * @copyright   Twin Huang
  * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
  */
 
 namespace Widget;
 
 /**
- * Returns the value of specified key in $data
+ * An util widget provides some useful method to manipulation array 
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Attr extends AbstractWidget
+class Arr extends AbstractWidget
 {
+    /**
+     * Sort two-dimensional array like SQL ORDER BY clause
+     *
+     * @param  array  $array the two-dimensional array
+     * @param  string $key   the array to be sort
+     * @param  int    $type  sort in ascending or descending order
+     * @return array
+     */
+    public function sort(array $array, $key = 'order', $type = SORT_ASC)
+    {
+        if (!$array) {
+            return $array;
+        }
+        $array2 = array();
+        foreach ($array as $k => $v) {
+            $array2[$k] = $v[$key];
+        }
+        array_multisort($array2, $type, $array);
+
+        return $array;
+    }
+    
     /**
      * Returns the value of specified key in $data
      * 
@@ -23,7 +45,7 @@ class Attr extends AbstractWidget
      * @param string $key The key of data
      * @return mixed|null Returns null on not found
      */
-    public function __invoke($data, $key)
+    public function attr($data, $key)
     {
         if ((is_array($data) && array_key_exists($key, $data)) 
             || ($data instanceof \ArrayAccess && $data->offsetExists($key))
@@ -36,5 +58,14 @@ class Attr extends AbstractWidget
         } else {
             return null;
         }
+    }
+    
+    /**
+     * 
+     * @return \Widget\Arr
+     */
+    public function __invoke()
+    {
+        return $this;
     }
 }
