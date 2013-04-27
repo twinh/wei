@@ -57,11 +57,35 @@ h4 {
     
     <li><a href="#welcome">欢迎</a></li>
     <li><a href="#getting-started">入门</a></li>
-    <li><a href="#download">下载</a></li>
+    <li><a href="#downloads">下载</a></li>
     <li><a href="#news">随时关注最新消息</a></li>
 
     <li>
       <a class="nav-header" href="#widget">微件列表</a>
+    </li>
+    <li>
+      <a href="#request">HTTP请求</a>
+      <ul class="nav">
+        <li><a href="#request">Request</a></li>
+        <li><a href="#browser">Browser</a></li>
+        <li><a href="#cookie">Cookie</a></li>
+        <li><a href="#post">Post</a></li>
+        <li><a href="#query">Query</a></li>
+        <li><a href="#server">Server</a></li>
+        <li><a href="#session">Session</a></li>
+        <li><a href="#upload">Upload</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#response">HTTP响应</a>
+      <ul class="nav">
+        <li><a href="#response">Response</a></li>
+        <li><a href="#download">Download</a></li>
+        <li><a href="#flush">Flush</a></li>
+        <li><a href="#header">Header</a></li>
+        <li><a href="#json">Json</a></li>
+        <li><a href="#redirect">Redirect</a></li>
+      </ul>
     </li>
     <li>
       <a href="#cache">缓存</a>
@@ -74,39 +98,6 @@ h4 {
         <li><a href="#memcached">Memcached</a></li>
         <li><a href="#redis">Redis</a></li>
         <li><a href="#bicache">二级缓存</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#event">事件</a>
-      <ul class="nav">
-        <li><a href="#eventManager">EventManager</a> </li>
-        <li><a href="#off">off</a></li>
-        <li><a href="#on">on</a></li>
-        <li><a href="#trigger">trigger</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#http-request">HTTP请求</a>
-      <ul class="nav">
-        <li><a href="#browser">Browser</a></li>
-        <li><a href="#cookie">Cookie</a></li>
-        <li><a href="#inAjax">InAjax</a></li>
-        <li><a href="#post">Post</a></li>
-        <li><a href="#query">Query</a></li>
-        <li><a href="#request">Request</a></li>
-        <li><a href="#server">Server</a></li>
-        <li><a href="#session">Session</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#http-response">HTTP响应</a>
-      <ul class="nav">
-        <li><a href="#download-widget">Download</a></li>
-        <li><a href="#flush">Flush</a></li>
-        <li><a href="#header">Header</a></li>
-        <li><a href="#json">Json</a></li>
-        <li><a href="#response">Response</a></li>
-        <li><a href="#redirect">Redirect</a></li>
       </ul>
     </li>
     <li>
@@ -219,6 +210,15 @@ h4 {
       </ul>
     </li>
     <li>
+      <a href="#event">事件</a>
+      <ul class="nav">
+        <li><a href="#eventManager">EventManager</a> </li>
+        <li><a href="#off">off</a></li>
+        <li><a href="#on">on</a></li>
+        <li><a href="#trigger">trigger</a></li>
+      </ul>
+    </li>
+    <li>
       <a href="#util">工具</a>
       <ul class="nav">
         <li>
@@ -241,6 +241,8 @@ h4 {
         <li><a href="#entityManager">entityManager</a></li>
         <li><a href="#monolog">monolog</a></li>
         <li><a href="#phpError">phpError</a></li>
+        <li><a href="#smarty">smarty</a></li>
+        <li><a href="#twig">twig</a></li>
       </ul>
     </li>
   </ul>
@@ -276,7 +278,7 @@ $id = $widget->query('id');</code></pre>
 
 <!-- Download
   ================================================== -->
-  <div class="bs-docs-section" id="download">
+  <div class="bs-docs-section" id="downloads">
     <div class="page-header">
       <h1>下载</h1>
     </div>
@@ -318,6 +320,848 @@ $id = $widget->query('id');</code></pre>
     <h1>微件列表</h1>
     <p class="lead">提供了上百个个各具特色的微件,包括缓存,事件,HTTP请求,HTTP响应,验证器等</p>
   </div>
+
+<!-- request
+  ================================================== -->
+  <section id="request">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1><a href="http://twinh.github.io/widget/api/request">request()</a></h1>
+
+<p>获取一项HTTP请求参数($_REQUEST)的值</p>
+
+<pre><code class="php">string|null request( $name [, $default ] )
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$name</strong> <code>string</code> 请求参数的名称</li>
+<li>
+<strong>$default</strong> <code>string</code> 当请求参数不存在时返回的值,默认是null</li>
+</ul>
+<p><strong>注意:</strong>通过<code>$widget-&gt;request($name)</code>取到的值是字符串或<code>$default</code>,如果需要获取原始值,可以通过<code>$widget-&gt;request-&gt;getRaw($name)</code>取得.</p>
+</body></html>
+
+  </section>
+
+<!-- browser
+  ================================================== -->
+  <section id="browser">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>Browser</h1>
+
+<p>获取浏览器的名称和版本</p>
+
+<h2>案例</h2>
+
+<h3>打印出当前浏览器的名称和版本</h3>
+
+<pre><code class="php">// 也可以通过 $widget-&gt;browser-&gt;getName(); 获取浏览器名称
+echo $widget-&gt;browser();
+
+echo $widget-&gt;browser-&gt;getVersion();
+</code></pre>
+
+<h3>运行结果</h3>
+
+<pre><code class="php">
+// 输出会因浏览器和版本的不同而不同
+
+'chrome'
+
+'26.0.1410.64'
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<p>目前Browser除了<code>name</code>和<code>version</code>之外的选项均为公开属性,可以直接调用,如<code>$widget-&gt;browser-&gt;chrome</code>.</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>chrome</td>
+<td>bool</td>
+<td>false</td>
+<td>当用户使用谷歌浏览器时为true</td>
+</tr>
+<tr>
+<td>webkit</td>
+<td>bool</td>
+<td>false</td>
+<td>当用户使用谷歌或Safari浏览器时为true</td>
+</tr>
+<tr>
+<td>opera</td>
+<td>bool</td>
+<td>false</td>
+<td>当用户使用Opera浏览器时为true</td>
+</tr>
+<tr>
+<td>msie</td>
+<td>bool</td>
+<td>false</td>
+<td>当用户使用Internet Explorer浏览器时为true</td>
+</tr>
+<tr>
+<td>mozilla</td>
+<td>bool</td>
+<td>false</td>
+<td>当用户使用火狐浏览器时为true</td>
+</tr>
+<tr>
+<td>safari</td>
+<td>bool</td>
+<td>false</td>
+<td>当用户使用Safari浏览器时为true</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>null</td>
+<td>用户当前浏览器的名称,为上面选项的任何一个值,如chrome,msie,null表示无法识别浏览器名称</td>
+</tr>
+<tr>
+<td>version</td>
+<td>string</td>
+<td>null</td>
+<td>用户当前浏览器的版本,同样null表示无法识别浏览器版本</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>browser()</h4>
+
+<p>获取浏览器名称</p>
+
+<h4>browser-&gt;getName()</h4>
+
+<p>获取浏览器名称,与上一个方法行为一致</p>
+
+<h4>browser-&gt;getVersion()</h4>
+
+<p>获取浏览器版本</p>
+</body></html>
+
+  </section>
+
+<!-- cookie
+  ================================================== -->
+  <section id="cookie">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>Cookie</h1>
+
+<p>写入,读取和删除cookie</p>
+
+<h2>案例</h2>
+
+<h3>写入和读取cookie的值</h3>
+
+<pre><code class="php">// 写入cookie,返回true
+$widget-&gt;cookie('key', 'value');
+
+// 读取cookie返回value
+$widget-&gt;cookie('key');
+</code></pre>
+
+<h3>写入7天过期的cookie</h3>
+
+<pre><code class="php">$widget-&gt;cookie('key', 'value', array('expires' =&gt; 7));
+</code></pre>
+
+<h3>删除名称为'logined'的cookie</h3>
+
+<pre><code class="php">$widget-&gt;cookie-&gt;remove('logined');
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>expires</td>
+<td>int</td>
+<td>86400</td>
+<td>当用户使用谷歌浏览器时为true</td>
+</tr>
+<tr>
+<td>path</td>
+<td>string</td>
+<td>/</td>
+<td>cookie活动的路径</td>
+</tr>
+<tr>
+<td>domain</td>
+<td>string</td>
+<td>null</td>
+<td>保存该cookie的域名</td>
+</tr>
+<tr>
+<td>secure</td>
+<td>bool</td>
+<td>false</td>
+<td>是否只通过HTTPS安全连接来发送,只有在HTTPS连接下才有效</td>
+</tr>
+<tr>
+<td>httpOnly</td>
+<td>bool</td>
+<td>false</td>
+<td>是否只通过HTTP协议发送cookie,如果是,客户端javascript将无法读取到该cookie</td>
+</tr>
+<tr>
+<td>raw</td>
+<td>bool</td>
+<td>false</td>
+<td>是否发送为不经过URL解码的cookie</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>cookie($key)</h4>
+
+<p>读取cookie</p>
+
+<h4>cookie($key, $value, $options = array())</h4>
+
+<p>写入cookie</p>
+
+<h4>cookie-&gt;get($key)</h4>
+
+<p>读取cookie,同<code>cookie($key)</code></p>
+
+<h4>cookie-&gt;set($key, $value, $options = array())</h4>
+
+<p>写入cookie,同<code>cookie($key, $value, $options = array())</code></p>
+
+<h4>cookie-&gt;remove($key)</h4>
+
+<p>删除cookie</p>
+
+<h4>cookie-&gt;send()</h4>
+
+<p>发送cookie到浏览器</p>
+</body></html>
+
+  </section>
+
+<!-- post
+  ================================================== -->
+  <section id="post">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<pre><code>该微件文档还在紧急编写中,敬请期待!
+</code></pre>
+
+<h1><a href="http://twinh.github.io/widget/api/post">post()</a></h1>
+
+<p>Returns a <em>stringify</em> or user defined($default) parameter value</p>
+
+<h3>Returns a <em>stringify</em> or user defined($default) parameter value</h3>
+
+<pre><code class="php">string|null post($name, $default)
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$name</strong> <code>string</code> The parameter name</li>
+<li>
+<strong>$default</strong> <code>mixed</code> The default parameter value if the parameter does not exist</li>
+</ul>
+</body></html>
+
+  </section>
+
+<!-- query
+  ================================================== -->
+  <section id="query">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<pre><code>该微件文档还在紧急编写中,敬请期待!
+</code></pre>
+
+<h1><a href="http://twinh.github.io/widget/api/query">query()</a></h1>
+
+<p>Returns a <em>stringify</em> or user defined($default) parameter value</p>
+
+<h3>Returns a <em>stringify</em> or user defined($default) parameter value</h3>
+
+<pre><code class="php">string|null query($name, $default)
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$name</strong> <code>string</code> The parameter name</li>
+<li>
+<strong>$default</strong> <code>mixed</code> The default parameter value if the parameter does not exist</li>
+</ul>
+</body></html>
+
+  </section>
+
+<!-- server
+  ================================================== -->
+  <section id="server">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<pre><code>该微件文档还在紧急编写中,敬请期待!
+</code></pre>
+
+<h1><a href="http://twinh.github.io/widget/api/server">server()</a></h1>
+
+<p>Returns a <em>stringify</em> or user defined($default) parameter value</p>
+
+<h3>Returns a <em>stringify</em> or user defined($default) parameter value</h3>
+
+<pre><code class="php">string|null server($name, $default)
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$name</strong> <code>string</code> The parameter name</li>
+<li>
+<strong>$default</strong> <code>mixed</code> The default parameter value if the parameter does not exist</li>
+</ul>
+</body></html>
+
+  </section>
+
+<!-- session
+  ================================================== -->
+  <section id="session">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<pre><code>该微件文档还在紧急编写中,敬请期待!
+</code></pre>
+
+<h1><a href="http://twinh.github.io/widget/api/session">session()</a></h1>
+
+<p>Returns a <em>stringify</em> or user defined($default) parameter value</p>
+
+<h3>Returns a <em>stringify</em> or user defined($default) parameter value</h3>
+
+<pre><code class="php">string|null session($name, $default)
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$name</strong> <code>string</code> The parameter name</li>
+<li>
+<strong>$default</strong> <code>mixed</code> The default parameter value if the parameter does not exist</li>
+</ul>
+</body></html>
+
+  </section>
+
+<!-- upload
+  ================================================== -->
+  <section id="upload">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1><a href="http://twinh.github.io/widget/api/upload">upload()</a></h1>
+
+<p>保存客户端上传的文件到指定目录</p>
+
+<pre><code class="php">bool upload( $options )
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>$options 上传微件的配置选项
+
+<ul>
+<li> <strong>field</strong> <code>string</code> 上传表单中,文件上传控件name的值,留空将自动获取第一个name的值</li>
+<li> <strong>dir</strong> <code>string</code> 文件保存的目录,默认是<code>uploads</code>
+</li>
+<li> <strong>fileName</strong> <code>string</code> 文件保存时的名称(不包括扩展),留空表示使用原来的名称保存</li>
+<li> <strong>isImage</strong> <code>bool</code> 是否检查上传的文件为图片,默认为否</li>
+<li> <strong>maxSize</strong> <code>int</code> 允许的文件最大字节数</li>
+<li> <strong>minSize</strong> <code>int</code> 允许的文件最小字节数</li>
+<li> <strong>exts</strong> <code>string|array</code> 允许的文件扩展名</li>
+<li> <strong>excludeExts</strong> <code>string|array</code> 不允许的文件扩展名</li>
+<li> <strong>mimeTypes</strong> <code>string|array</code> 允许的文件媒体类型</li>
+<li> <strong>excludeMimeTypes</strong> <code>string|array</code> 不允许的文件媒体类型</li>
+<li> <strong>maxWidth</strong> <code>int</code> 允许的图片最大宽度</li>
+<li> <strong>minWidth</strong> <code>int</code> 允许的图片最小宽度</li>
+<li> <strong>maxHeight</strong> <code>int</code> 允许的图片最大高度</li>
+<li> <strong>minHeight</strong> <code>int</code> 允许的图片最小高度</li>
+</ul>
+</li>
+</ul>
+<p>上传微件是图片(<a href="isImage.md">isImage</a>)和文件(<a href="isFile.md">isFile</a>)验证器的子类,所以支持验证器的所有特性,如获取错误信息等.</p>
+
+<p>上传微件是针对一个文件上传,如果需要在一次请求中批量上传文件,只需多次调用即可,详情请查看下面的例子</p>
+
+<h5>错误信息</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th><strong>名称</strong></th>
+<th><strong>信息</strong></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>postSize</code></td>
+<td>似乎您上传文件的总大小超过最大提交数据的限制(%postMaxSize%),请检查您上传文件的大小</td>
+</tr>
+<tr>
+<td><code>noFile</code></td>
+<td>没有文件被上传</td>
+</tr>
+<tr>
+<td><code>formLimit</code></td>
+<td>%name%的大小超过HTML表单设置</td>
+</tr>
+<tr>
+<td><code>partial</code></td>
+<td>%name%未完全上传,请再试一遍</td>
+</tr>
+<tr>
+<td><code>noTmpDir</code></td>
+<td>未找到上传文件的临时目录</td>
+</tr>
+<tr>
+<td><code>cantWrite</code></td>
+<td>无法保存%name%</td>
+</tr>
+<tr>
+<td><code>extension</code></td>
+<td>文件上传被扩展中止</td>
+</tr>
+<tr>
+<td><code>notUploadedFile</code></td>
+<td>没有文件被上传,请选择一个文件上传</td>
+</tr>
+<tr>
+<td><code>cantMove</code></td>
+<td>无法移动上传的文件</td>
+</tr>
+<tr>
+<td><code>notDetected</code></td>
+<td>%name%不是有效的图片,或是无法检测到图片的尺寸</td>
+</tr>
+<tr>
+<td><code>widthTooBig</code></td>
+<td>%name%的宽度太大(%width%px), 允许的最大宽度为%maxWidth%px</td>
+</tr>
+<tr>
+<td><code>widthTooSmall</code></td>
+<td>%name%的宽度太小(%width%px),允许的最小宽度应为%minWidth%px</td>
+</tr>
+<tr>
+<td><code>heightTooBig</code></td>
+<td>%name%的高度太大(%height%px), 允许的最大高度为%maxHeight%px</td>
+</tr>
+<tr>
+<td><code>heightTooSmall</code></td>
+<td>%name%的高度太小(%height%px), 允许的最小高度为%minHeight%px</td>
+</tr>
+<tr>
+<td><code>notFound</code></td>
+<td>%name%不存在或不可读</td>
+</tr>
+<tr>
+<td><code>maxSize</code></td>
+<td>%name%太大了(%sizeString%),允许的最大文件大小为%maxSizeString%</td>
+</tr>
+<tr>
+<td><code>minSize</code></td>
+<td>%name%太小了(%sizeString%),允许的最小文件大小为%minSizeString%</td>
+</tr>
+<tr>
+<td><code>exts</code></td>
+<td>%name%的扩展名(%ext%)不合法,只允许扩展名为:%exts%</td>
+</tr>
+<tr>
+<td><code>excludeExts</code></td>
+<td>%name%的扩展名(%ext%)不合法,不允许扩展名为:%excludeExts%</td>
+</tr>
+<tr>
+<td><code>mimeTypeNotDetected</code></td>
+<td>无法检测%name%的媒体类型</td>
+</tr>
+<tr>
+<td><code>mimeTypes</code></td>
+<td>%name%的媒体类型不合法</td>
+</tr>
+<tr>
+<td><code>excludeMimeTypes</code></td>
+<td>%name%的媒体类型不合法</td>
+</tr>
+<tr>
+<td><code>negative</code></td>
+<td>%name%必须是不存在的文件</td>
+</tr>
+<tr>
+<td><code>notString</code></td>
+<td>%name%必须是字符串</td>
+</tr>
+</tbody>
+</table>
+<h5>代码范例</h5>
+
+<p>上传文件<br>
+```php<br>
+&lt;?php</p>
+
+<p>$result = $widget-&gt;upload();<br>
+if ($result) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    print_r($widget-&gt;upload-&gt;getMessages());<br>
+}</p>
+
+<pre><code>##### 运行结果
+```php
+'Array
+(
+    [postSize] =&gt; Seems that the total file size is larger than the max size (20M) of allowed post data, please check the size of your file
+)
+'
+</code></pre>
+
+<h5>代码范例</h5>
+
+<p>指定上传的文件为图片,宽度和高度小于2000px<br>
+```php<br>
+&lt;?php</p>
+
+<p>$result = $widget-&gt;upload(array(<br>
+    'maxHeight' =&gt; 2000,<br>
+    'maxWidth' =&gt; 2000<br>
+));</p>
+
+<p>if ($result) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    print_r($widget-&gt;upload-&gt;getMessages());<br>
+}</p>
+
+<pre><code>##### 运行结果
+```php
+'Array
+(
+    [postSize] =&gt; Seems that the total file size is larger than the max size (20M) of allowed post data, please check the size of your file
+)
+'
+</code></pre>
+
+<h5>代码范例</h5>
+
+<p>在一个请求中批量上传文件<br>
+```php<br>
+&lt;?php</p>
+
+<p>for ($i = 0; $i &lt; 3; $i++) {<br>
+    $result = $widget-&gt;upload(array(<br>
+        'field' =&gt; 'upload_' . $i<br>
+    ));<br>
+    if ($result) {<br>
+        echo '文件' . $i . '上传成功';<br>
+    } else {<br>
+        print_r($widget-&gt;upload-&gt;getMessages());<br>
+    }<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'Array
+(
+    [postSize] =&gt; Seems that the total file size is larger than the max size (20M) of allowed post data, please check the size of your file
+)
+Array
+(
+    [postSize] =&gt; Seems that the total file size is larger than the max size (20M) of allowed post data, please check the size of your file
+)
+Array
+(
+    [postSize] =&gt; Seems that the total file size is larger than the max size (20M) of allowed post data, please check the size of your file
+)
+'
+</code></pre>
+</body></html>
+
+  </section>
+
+<!-- response
+  ================================================== -->
+  <section id="response">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1><a href="http://twinh.github.io/widget/api/response">response()</a></h1>
+
+<p>发送HTTP响应头和响应内容</p>
+
+<pre><code class="php">\Widget\Response response( $content [, $stateCode ] )
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$content</strong> <code>string</code> 响应的内容</li>
+<li>
+<strong>$stateCode</strong> <code>string</code> HTTP状态码,默认是<code>200</code>
+</li>
+</ul>
+<h5>代码范例</h5>
+
+<p>发送内容为"Hello World"的HTTP响应<br>
+```php<br>
+&lt;?php</p>
+
+<p>$widget-&gt;response('Hello World');<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'Hello World'
+</code></pre>
+
+<h5>代码范例</h5>
+
+<p>查看上面例子中HTTP响应的完整内容<br>
+```php<br>
+&lt;?php</p>
+
+<p>echo (string)$widget-&gt;response;<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'HTTP/1.1 200 OK
+
+Hello World'
+</code></pre>
+</body></html>
+
+  </section>
+
+<!-- download
+  ================================================== -->
+  <section id="download">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>Download</h1>
+
+<p>发送下载文件的HTTP响应</p>
+
+<h2>案例</h2>
+
+<h3>下载当前运行的文件</h3>
+
+<pre><code class="php">$widget-&gt;download(__FILE__);
+</code></pre>
+
+<h4>运行结果</h4>
+
+<p><img src="resources/download.png" alt="弹出下载对话框"></p>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>file</td>
+<td>string</td>
+<td>null</td>
+<td>要下载的文件路径</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>application/x-download</td>
+<td>指定HTTP内容类型（Content-Type）</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>download($file, $options = array())</h4>
+
+<p>下载指定的文件</p>
+</body></html>
+
+  </section>
+
+<!-- flush
+  ================================================== -->
+  <section id="flush">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>flush</h1>
+
+<p>直接输出内容到浏览器</p>
+
+<h2>代码范例</h2>
+
+<h3>逐个打印1-10的数字到浏览器窗口,没每隔一秒输出一个</h3>
+
+<pre><code class="php">//
+$widget-&gt;flush();
+
+for ($i = 1; $i &lt;= 10; $i++) {
+    echo $i;
+    sleep(1);
+}
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<p><em>无</em></p>
+
+<h3>方法</h3>
+
+<h4>flush($content = null, $status = null)</h4>
+
+<p>直接输出内容到浏览器</p>
+</body></html>
+
+  </section>
+
+<!-- header
+  ================================================== -->
+  <section id="header">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<pre><code>该微件文档还在紧急编写中,敬请期待!
+</code></pre>
+
+<h1><a href="http://twinh.github.io/widget/api/header">header()</a></h1>
+
+<p>Get or set the header values</p>
+
+<h3>Get or set the header values</h3>
+
+<pre><code class="php">mixed|\Header header($name, $values, $replace)
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$name</strong> <code>string|array</code> The header name or an associative array
+                          that the key is header name and the value
+                          is header value</li>
+<li>
+<strong>$values</strong> <code>string|array</code> The header values, for set method only</li>
+<li>
+<strong>$replace</strong> <code>bool</code> Whether replace the exists values or not, for set method only</li>
+</ul>
+</body></html>
+
+  </section>
+
+<!-- json
+  ================================================== -->
+  <section id="json">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>Json</h1>
+
+<p>输出Json格式数据</p>
+
+<h2>代码范例</h2>
+
+<h3>逐个打印1-10的数字到浏览器窗口,没每隔一秒输出一个</h3>
+
+<pre><code class="php">//
+$widget-&gt;flush();
+
+for ($i = 1; $i &lt;= 10; $i++) {
+    echo $i;
+    sleep(1);
+}
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<p><em>无</em></p>
+
+<h3>方法</h3>
+
+<h4>flush($content = null, $status = null)</h4>
+
+<p>直接输出内容到浏览器</p>
+</body></html>
+
+  </section>
+
+<!-- redirect
+  ================================================== -->
+  <section id="redirect">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1><a href="http://twinh.github.io/widget/api/redirect">redirect()</a></h1>
+
+<p>发送页面跳转的HTTP响应</p>
+
+<pre><code class="php">\Widget\Redirect redirect( $url [, $status [, $options ] ] )
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$url</strong> <code>string</code> 跳转到的Url地址</li>
+<li>
+<strong>$status</strong> <code>int</code> 响应的HTTP状态码,默认为<code>302</code>
+</li>
+<li>
+<strong>$options</strong> <code>array</code> 跳转微件的配置选项
+
+<ul>
+<li> <strong>delay</strong> <code>int</code> 延迟跳转的秒数,默认是0</li>
+<li> <strong>view</strong> <code>string</code> 自定义视图文件的路径</li>
+</ul>
+</li>
+</ul>
+<p><strong>注意</strong>: 如果delay为0,使用的是HTTP header跳转,如果不为0,因为HTTP header不支持延迟跳转,所以使用的是HTML <a href="http://en.wikipedia.org/wiki/Meta_refresh">Meta refresh</a>跳转,此时,可以通过view选项指定更加友好的跳转视图.</p>
+</body></html>
+
+  </section>
 
 <!-- cache
   ================================================== -->
@@ -874,247 +1718,6 @@ $widget-&gt;fileCache('name');<br></code></p>
 <h5>参数</h5>
 
 <p><em>无</em></p>
-</body></html>
-
-  </section>
-
-<!-- event
-  ================================================== -->
-  <section id="event">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Event</h1>
-
-<p>绑定,触发和移除事件,并支持命名空间等特性.</p>
-
-<h2>案例</h2>
-
-<h3>绑定,触发和移除事件</h3>
-
-<pre><code class="php">// 绑定名称为connect的事件
-$widget-&gt;on('connect', function(){
-    echo 'connected';
-});
-
-// 触发connect事件,将输出connected
-$widget-&gt;trigger('connect');
-
-// 移除connect事件
-$widget-&gt;off('connect');
-
-// 再次触发connect事件,没有任何输出
-$widget-&gt;trigger('connect');
-</code></pre>
-
-<h2>调用方式</h2>
-
-<h3>选项</h3>
-
-<p><em>无</em></p>
-
-<h3>方法</h3>
-
-<h4>on($type, $fn, $priority = 0, $data = array())</h4>
-
-<p>绑定指定类型的事件触发器</p>
-
-<h5>参数</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>$type</td>
-<td>string</td>
-<td>无</td>
-<td>事件的类型</td>
-</tr>
-<tr>
-<td>$fn</td>
-<td>callback</td>
-<td>无</td>
-<td>事件触发器</td>
-</tr>
-<tr>
-<td>$priority</td>
-<td>int,string</td>
-<td>0</td>
-<td>事件触发器的优先级,越大表示优先级越高,默认是0</td>
-</tr>
-<tr>
-<td>$data</td>
-<td>array</td>
-<td>array()</td>
-<td>当事件触发器触发时,传递给事件对象的数据</td>
-</tr>
-</tbody>
-</table>
-<p>事件触发器的优先级既可以是数字,也可以是字符串.预定于的字符串有<code>low</code>, <code>normal</code>, <code>high</code>,它们分别代表的数值如下表所示:</p>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>值</th>
-<th>数值</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>low</td>
-<td>-1000</td>
-</tr>
-<tr>
-<td>normal</td>
-<td>0</td>
-</tr>
-<tr>
-<td>high</td>
-<td>1000</td>
-</tr>
-</tbody>
-</table>
-<h4>off($type)</h4>
-
-<p>移除指定类型的事件触发器</p>
-
-<h5>参数</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody><tr>
-<td>$type</td>
-<td>string</td>
-<td>无</td>
-<td>事件的类型,可以包含命名空间,如"error.namespace",也可以只有命名空间,如".namespace"</td>
-</tr></tbody>
-</table>
-<p><code>off</code>微件是事件管理器(<code>eventManager</code>)<code>remove</code>方法的别名</p>
-
-<p>如果<code>$type</code>只是纯命名空间,如'.namespace',表示移除该命名空间下所有的事件触发器</p>
-
-<h4>trigger($type, $params = array(), $widget = null)</h4>
-
-<p>触发指定类型的事件</p>
-
-<h5>参数</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>$type</td>
-<td>string,Widget\Event\EventInterface</td>
-<td>无</td>
-<td>事件的类型或是事件对象</td>
-</tr>
-<tr>
-<td>$params</td>
-<td>array</td>
-<td>array()</td>
-<td>传递给事件触发器的参数</td>
-</tr>
-<tr>
-<td>$widget</td>
-<td>Widget\WidgetInterface</td>
-<td>null</td>
-<td>微件对象</td>
-</tr>
-</tbody>
-</table>
-<p>第三个参数<code>$widget</code>为可选的微件对象,如果微件包含与事件名称相同的属性,那么,事件管理器将会把该属性<br>
-作为一个事件触发器,在所有的触发器触发后才触发.</p>
-</body></html>
-
-  </section>
-
-<!-- request
-  ================================================== -->
-  <section id="request">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1><a href="http://twinh.github.io/widget/api/request">request()</a></h1>
-
-<p>获取一项HTTP请求参数($_REQUEST)的值</p>
-
-<pre><code class="php">string|null request( $name [, $default ] )
-</code></pre>
-
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$name</strong> <code>string</code> 请求参数的名称</li>
-<li>
-<strong>$default</strong> <code>string</code> 当请求参数不存在时返回的值,默认是null</li>
-</ul>
-<p><strong>注意:</strong>通过<code>$widget-&gt;request($name)</code>取到的值是字符串或<code>$default</code>,如果需要获取原始值,可以通过<code>$widget-&gt;request-&gt;getRaw($name)</code>取得.</p>
-</body></html>
-
-  </section>
-
-<!-- response
-  ================================================== -->
-  <section id="response">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1><a href="http://twinh.github.io/widget/api/response">response()</a></h1>
-
-<p>发送HTTP响应头和响应内容</p>
-
-<pre><code class="php">\Widget\Response response( $content [, $stateCode ] )
-</code></pre>
-
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$content</strong> <code>string</code> 响应的内容</li>
-<li>
-<strong>$stateCode</strong> <code>string</code> HTTP状态码,默认是<code>200</code>
-</li>
-</ul>
-<h5>代码范例</h5>
-
-<p>发送内容为"Hello World"的HTTP响应<br>
-```php<br>
-&lt;?php</p>
-
-<p>$widget-&gt;response('Hello World');<br>
-```</p>
-
-<h5>运行结果</h5>
-
-<pre><code class="php">'Hello World'
-</code></pre>
-
-<h5>代码范例</h5>
-
-<p>查看上面例子中HTTP响应的完整内容<br>
-```php<br>
-&lt;?php</p>
-
-<p>echo (string)$widget-&gt;response;<br>
-```</p>
-
-<h5>运行结果</h5>
-
-<pre><code class="php">'HTTP/1.1 200 OK
-
-Hello World'
-</code></pre>
 </body></html>
 
   </section>
@@ -1902,6 +2505,168 @@ object otherwise, call the render method</p>
 </ul>
 <p>if NO parameter provied, the invoke method will return the<br>
 \Twig_Environment object. otherwise, call the render method</p>
+</body></html>
+
+  </section>
+
+<!-- event
+  ================================================== -->
+  <section id="event">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>Event</h1>
+
+<p>绑定,触发和移除事件,并支持命名空间等特性.</p>
+
+<h2>案例</h2>
+
+<h3>绑定,触发和移除事件</h3>
+
+<pre><code class="php">// 绑定名称为connect的事件
+$widget-&gt;on('connect', function(){
+    echo 'connected';
+});
+
+// 触发connect事件,将输出connected
+$widget-&gt;trigger('connect');
+
+// 移除connect事件
+$widget-&gt;off('connect');
+
+// 再次触发connect事件,没有任何输出
+$widget-&gt;trigger('connect');
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<p><em>无</em></p>
+
+<h3>方法</h3>
+
+<h4>on($type, $fn, $priority = 0, $data = array())</h4>
+
+<p>绑定指定类型的事件触发器</p>
+
+<h5>参数</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$type</td>
+<td>string</td>
+<td>无</td>
+<td>事件的类型</td>
+</tr>
+<tr>
+<td>$fn</td>
+<td>callback</td>
+<td>无</td>
+<td>事件触发器</td>
+</tr>
+<tr>
+<td>$priority</td>
+<td>int,string</td>
+<td>0</td>
+<td>事件触发器的优先级,越大表示优先级越高,默认是0</td>
+</tr>
+<tr>
+<td>$data</td>
+<td>array</td>
+<td>array()</td>
+<td>当事件触发器触发时,传递给事件对象的数据</td>
+</tr>
+</tbody>
+</table>
+<p>事件触发器的优先级既可以是数字,也可以是字符串.预定于的字符串有<code>low</code>, <code>normal</code>, <code>high</code>,它们分别代表的数值如下表所示:</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>值</th>
+<th>数值</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>low</td>
+<td>-1000</td>
+</tr>
+<tr>
+<td>normal</td>
+<td>0</td>
+</tr>
+<tr>
+<td>high</td>
+<td>1000</td>
+</tr>
+</tbody>
+</table>
+<h4>off($type)</h4>
+
+<p>移除指定类型的事件触发器</p>
+
+<h5>参数</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>$type</td>
+<td>string</td>
+<td>无</td>
+<td>事件的类型,可以包含命名空间,如"error.namespace",也可以只有命名空间,如".namespace"</td>
+</tr></tbody>
+</table>
+<p><code>off</code>微件是事件管理器(<code>eventManager</code>)<code>remove</code>方法的别名</p>
+
+<p>如果<code>$type</code>只是纯命名空间,如'.namespace',表示移除该命名空间下所有的事件触发器</p>
+
+<h4>trigger($type, $params = array(), $widget = null)</h4>
+
+<p>触发指定类型的事件</p>
+
+<h5>参数</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$type</td>
+<td>string,Widget\Event\EventInterface</td>
+<td>无</td>
+<td>事件的类型或是事件对象</td>
+</tr>
+<tr>
+<td>$params</td>
+<td>array</td>
+<td>array()</td>
+<td>传递给事件触发器的参数</td>
+</tr>
+<tr>
+<td>$widget</td>
+<td>Widget\WidgetInterface</td>
+<td>null</td>
+<td>微件对象</td>
+</tr>
+</tbody>
+</table>
+<p>第三个参数<code>$widget</code>为可选的微件对象,如果微件包含与事件名称相同的属性,那么,事件管理器将会把该属性<br>
+作为一个事件触发器,在所有的触发器触发后才触发.</p>
 </body></html>
 
   </section>
