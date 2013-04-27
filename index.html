@@ -61,23 +61,23 @@ h4 {
     <li>
       <a href="#cache">缓存</a>
       <ul class="nav">
-        <li><a href="#apc">apc</a> - APC缓存</li>
-        <li><a href="#dbCache">dbCache</a> - 数据库缓存</li>
-        <li><a href="#fileCache">fileCache</a> - 文件缓存</li>
-        <li><a href="#memcache">memcache</a> - Memcachce缓存</li>
-        <li><a href="#memcached">memcached</a> - Memcached缓存</li>
-        <li><a href="#redis">redis</a> - Redis缓存</li>
-        <li><a href="#cache">cache</a> - 通用缓存</li>
-        <li><a href="#bicache">bicache</a> - 二级缓存</li>
+        <li><a href="#cache">通用缓存</a></li>
+        <li><a href="#apc">APC</a></li>
+        <li><a href="#dbCache">数据库缓存</a></li>
+        <li><a href="#fileCache">文件缓存</a></li>
+        <li><a href="#memcache">Memcache</a></li>
+        <li><a href="#memcached">Memcached</a></li>
+        <li><a href="#redis">Redis</a></li>
+        <li><a href="#bicache">二级缓存</a></li>
       </ul>
     </li>
     <li>
       <a href="#event">事件</a>
       <ul class="nav">
-        <li><a href="#eventManager">eventManager</a> - 事件管理器</li>
-        <li><a href="#off">off</a> - 移除指定类型的事件触发器</li>
-        <li><a href="#on">on</a> - 添加指定类型的事件触发器</li>
-        <li><a href="#trigger">trigger</a> - 触发指定类型的事件</li>
+        <li><a href="#eventManager">EventManager</a> </li>
+        <li><a href="#off">off</a></li>
+        <li><a href="#on">on</a></li>
+        <li><a href="#trigger">trigger</a></li>
       </ul>
     </li>
     <li>
@@ -313,14 +313,713 @@ $id = $widget->query('id');</code></pre>
     </div>
   </div>
 
-<!-- Event
+<!-- cache
   ================================================== -->
-  {{{event}}}
-<!-- Cache
-  ================================================== -->
-  {{{cache}}}
-  <!-- cache -->
+  <div class="bs-docs-section" id="cache">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>Cache</h1>
 
+<p>设置或获取指定缓存类型的一项缓存</p>
+
+<p>使用<code>cache</code>微件会让你的代码更加灵活自由,你可以不用关注缓存的类型,并且可以根据需求或代码运行环境快速切换缓存类型,同时不用过多改动已有的代码</p>
+
+<h2>案例</h2>
+
+<h3>设置和获取缓存</h3>
+
+<pre><code class="php">// 设置缓存
+$widget-&gt;cache('key', 'value');
+// 返回 true
+
+// 获取缓存
+$widget-&gt;cache('key');
+// 返回 value
+</code></pre>
+
+<h3>设置60秒后就过期的缓存</h3>
+
+<pre><code class="php">$widget-&gt;cache('key', 'value', 60);
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>driver</td>
+<td>string</td>
+<td>apc</td>
+<td>缓存的类型</td>
+</tr></tbody>
+</table>
+<p>目前支持的缓存类型有<br>
+* <code>apc</code> <em>推荐</em><br>
+* <code>arrayCache</code><br>
+* <code>dbCache</code><br>
+    * sqlite<br>
+    * mysql<br>
+    * pgsql<br>
+    * sqlsrv/dblib <em>不稳定</em><br>
+    * oci <em>不稳定</em><br>
+* <code>fileCache</code><br>
+* <code>memcache</code><br>
+* <code>memcached</code><br>
+* <code>redis</code> <em>推荐</em></p>
+
+<h3>方法</h3>
+
+<h4>cache( $key, $value [ $expire ] )</h4>
+
+<p>设置缓存的值</p>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$key</strong> <code>string</code> 缓存的键名</li>
+<li>
+<strong>$value</strong> <code>mixed</code> 缓存的值,允许任意类型</li>
+<li>
+<strong>$expire</strong> <code>int</code> 缓存的有效期,默认为0秒,表示永不过期</li>
+</ul>
+<h4>cache( $key )</h4>
+
+<p>获取指定名称的缓存</p>
+
+<h3>cache-&gt;set($key, $value)</h3>
+
+<p>设置缓存的值</p>
+
+<h3>cache-&gt;get($key)</h3>
+
+<p>获取缓存的值</p>
+
+<h3>cache-&gt;remove($key)</h3>
+
+<p>移除一项缓存</p>
+
+<h3>cache-&gt;exists($key)</h3>
+
+<p>检查缓存是否存在</p>
+
+<h3>cache-&gt;add($key, $value)</h3>
+
+<p>增加一项缓存,如果缓存已存在,返回false</p>
+
+<h3>cache-&gt;replace($key, $value)</h3>
+
+<p>替换一项缓存,如果缓存 <strong>不</strong> 存在,返回false</p>
+
+<h3>cache-&gt;increment($key, $offset = 1)</h3>
+
+<p>增大一项缓存的值</p>
+
+<h3>cache-&gt;decrement($key, $offset = 1)</h3>
+
+<p>减小一项缓存的值</p>
+
+<h3>cache-&gt;getMulti($keys)</h3>
+
+<p>批量获取缓存的值</p>
+
+<h3>cache-&gt;setMulti($values)</h3>
+
+<p>批量设置缓存的值</p>
+</body></html>
+
+  </div>
+
+<!-- apc
+  ================================================== -->
+  <div class="bs-docs-section" id="apc">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>Apc</h1>
+
+<p>通过面向对象的方式设置或获取PHP APC缓存,并提供更多友好方便的功能方法.</p>
+
+<h2>案例</h2>
+
+<h3>设置和获取缓存</h3>
+
+<pre><code class="php">// 设置缓存
+$widget-&gt;apc('key', 'value');
+// true
+
+// 获取缓存
+$widget-&gt;apc('key');
+// value
+</code></pre>
+
+<h3>设置60秒后就过期的缓存</h3>
+
+<pre><code class="php">$widget-&gt;apc('key', 'value', 60);
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<p><em>无</em></p>
+
+<h3>方法</h3>
+
+<h4>apc ($key, $value)</h4>
+
+<p>设置缓存的值<br><code>php<br>
+$widget-&gt;apc('key', 'value');<br></code></p>
+
+<h4>apc($key)</h4>
+
+<p>获取指定名称的缓存<br><code>php<br>
+$widget-&gt;apc('name');<br></code></p>
+
+<h3>apc-&gt;set($key, $value)</h3>
+
+<p>设置缓存的值</p>
+
+<h3>apc-&gt;get($key)</h3>
+
+<p>获取缓存的值</p>
+
+<h3>apc-&gt;remove($key)</h3>
+
+<p>移除一项缓存</p>
+
+<h3>apc-&gt;exists($key)</h3>
+
+<p>检查缓存是否存在</p>
+
+<h3>apc-&gt;add($key, $value)</h3>
+
+<p>增加一项缓存,如果缓存已存在,返回false</p>
+
+<h3>apc-&gt;replace($key, $value)</h3>
+
+<p>替换一项缓存,如果缓存 <strong>不</strong> 存在,返回false</p>
+
+<h3>apc-&gt;increment($key, $offset = 1)</h3>
+
+<p>增大一项缓存的值</p>
+
+<h3>apc-&gt;decrement($key, $offset = 1)</h3>
+
+<p>减小一项缓存的值</p>
+
+<h3>apc-&gt;getMulti($keys)</h3>
+
+<p>批量获取缓存的值</p>
+
+<h3>apc-&gt;setMulti($values)</h3>
+
+<p>批量设置缓存的值</p>
+</body></html>
+
+  </div>
+
+<!-- dbCache
+  ================================================== -->
+  <div class="bs-docs-section" id="dbCache">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>DbCache</h1>
+
+<p>设置或获取一项缓存,缓存数据存储于数据库中</p>
+
+<p>目前支持<code>sqlite</code>,<code>mysql</code>,<code>pgsql</code>,<code>sqlsrv</code>/<code>dblib</code>(不稳定),<code>oci</code>(不稳定)</p>
+
+<h2>案例</h2>
+
+<h3>设置和获取缓存</h3>
+
+<pre><code class="php">// 设置缓存
+$widget-&gt;dbCache('key', 'value');
+// 返回 true
+
+// 获取缓存
+$widget-&gt;dbCache('key');
+// 返回 value
+</code></pre>
+
+<h3>设置60秒后就过期的缓存</h3>
+
+<pre><code class="php">$widget-&gt;dbCache('key', 'value', 60);
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<p><em>无</em></p>
+
+<h3>方法</h3>
+
+<h4>dbCache( $key, $value [ $expire ] )</h4>
+
+<p>设置缓存的值</p>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$key</strong> <code>string</code> 缓存的键名</li>
+<li>
+<strong>$value</strong> <code>mixed</code> 缓存的值,允许任意类型</li>
+<li>
+<strong>$expire</strong> <code>int</code> 缓存的有效期,默认为0秒,表示永不过期</li>
+</ul>
+<h4>dbCache( $key )</h4>
+
+<p>获取指定名称的缓存</p>
+
+<h3>dbCache-&gt;set($key, $value)</h3>
+
+<p>设置缓存的值</p>
+
+<h3>dbCache-&gt;get($key)</h3>
+
+<p>获取缓存的值</p>
+
+<h3>dbCache-&gt;remove($key)</h3>
+
+<p>移除一项缓存</p>
+
+<h3>dbCache-&gt;exists($key)</h3>
+
+<p>检查缓存是否存在</p>
+
+<h3>dbCache-&gt;add($key, $value)</h3>
+
+<p>增加一项缓存,如果缓存已存在,返回false</p>
+
+<h3>dbCache-&gt;replace($key, $value)</h3>
+
+<p>替换一项缓存,如果缓存 <strong>不</strong> 存在,返回false</p>
+
+<h3>dbCache-&gt;increment($key, $offset = 1)</h3>
+
+<p>增大一项缓存的值</p>
+
+<h3>dbCache-&gt;decrement($key, $offset = 1)</h3>
+
+<p>减小一项缓存的值</p>
+
+<h3>dbCache-&gt;getMulti($keys)</h3>
+
+<p>批量获取缓存的值</p>
+
+<h3>dbCache-&gt;setMulti($values)</h3>
+
+<p>批量设置缓存的值</p>
+</body></html>
+
+  </div>
+
+<!-- fileCache
+  ================================================== -->
+  <div class="bs-docs-section" id="fileCache">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>fileCache</h1>
+
+<p>设置或获取文件缓存</p>
+
+<h2>案例</h2>
+
+<h3>设置和获取文件缓存</h3>
+
+<pre><code class="php">// 设置缓存
+$widget-&gt;fileCache('key', 'value');
+// true
+
+// 获取缓存
+$widget-&gt;fileCache('key');
+// value
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<p><em>无</em></p>
+
+<h3>方法</h3>
+
+<h4>fileCache ($key, $value)</h4>
+
+<p>设置缓存的值<br><code>php<br>
+$widget-&gt;fileCache('key', 'value');<br></code></p>
+
+<h4>fileCache($key)</h4>
+
+<p>获取指定名称的缓存<br><code>php<br>
+$widget-&gt;fileCache('name');<br></code></p>
+
+<h3>fileCache-&gt;set($key, $value)</h3>
+
+<p>设置缓存的值</p>
+
+<h3>fileCache-&gt;get($key)</h3>
+
+<p>获取缓存的值</p>
+
+<h3>fileCache-&gt;remove($key)</h3>
+
+<p>移除一项缓存</p>
+
+<h3>fileCache-&gt;exists($key)</h3>
+
+<p>检查缓存是否存在</p>
+
+<h3>fileCache-&gt;add($key, $value)</h3>
+
+<p>增加一项缓存,如果缓存已存在,返回false</p>
+
+<h3>fileCache-&gt;replace($key, $value)</h3>
+
+<p>替换一项缓存,如果缓存 <strong>不</strong> 存在,返回false</p>
+
+<h3>fileCache-&gt;increment($key, $offset = 1)</h3>
+
+<p>增大一项缓存的值</p>
+
+<h3>fileCache-&gt;decrement($key, $offset = 1)</h3>
+
+<p>减小一项缓存的值</p>
+
+<h3>fileCache-&gt;getMulti($keys)</h3>
+
+<p>批量获取缓存的值</p>
+
+<h3>fileCache-&gt;setMulti($values)</h3>
+
+<p>批量设置缓存的值</p>
+</body></html>
+
+  </div>
+
+<!-- Memcache
+  ================================================== -->
+  <div class="bs-docs-section" id="Memcache">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<pre><code>该微件文档还在紧急编写中,敬请期待!
+</code></pre>
+
+<h1><a href="http://twinh.github.io/widget/api/memcache">memcache()</a></h1>
+
+<p>{@inheritdoc}</p>
+
+<h3>{@inheritdoc}</h3>
+
+<pre><code class="php">void memcache($key, $value, $expire)
+</code></pre>
+
+<h5>参数</h5>
+
+<p><em>无</em></p>
+</body></html>
+
+  </div>
+
+<!-- Memcached
+  ================================================== -->
+  <div class="bs-docs-section" id="Memcached">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<pre><code>该微件文档还在紧急编写中,敬请期待!
+</code></pre>
+
+<h1><a href="http://twinh.github.io/widget/api/memcached">memcached()</a></h1>
+
+<p>{@inheritdoc}</p>
+
+<h3>{@inheritdoc}</h3>
+
+<pre><code class="php">void memcached($key, $value, $expire)
+</code></pre>
+
+<h5>参数</h5>
+
+<p><em>无</em></p>
+</body></html>
+
+  </div>
+
+<!-- Redis
+  ================================================== -->
+  <div class="bs-docs-section" id="Redis">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1><a href="http://twinh.github.io/widget/api/redis">redis()</a></h1>
+
+<p>设置或获取一项Redis缓存</p>
+
+<h5>目录</h5>
+
+<ul>
+<li>redis( $key, $value [ $expire ] )</li>
+<li>redis( $key )</li>
+</ul>
+<h3>设置一项Redis缓存</h3>
+
+<pre><code class="php">bool redis( $key, $value [ $expire ] )
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$key</strong> <code>string</code> 缓存的键名</li>
+<li>
+<strong>$value</strong> <code>mixed</code> 缓存的值,允许任意类型</li>
+<li>
+<strong>$expire</strong> <code>int</code> 缓存的有效期,默认为0秒,表示永不过期</li>
+</ul>
+<p>该调用方式相等于<code>$widget-&gt;redis-&gt;set($key, $value, $expire)</code></p>
+
+<h5>代码范例</h5>
+
+<p>设置键名为"key",值为"value"的缓存<br>
+```php<br>
+&lt;?php</p>
+
+<p>$widget-&gt;redis('key', 'value');</p>
+
+<p>echo $widget-&gt;redis('key');<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'value'
+</code></pre>
+
+<hr>
+<h3>获取一项Redis缓存</h3>
+
+<pre><code class="php">bool redis( $key )
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$key</strong> <code>string</code> 缓存的键名</li>
+</ul>
+<p>该调用方式相等于<code>$widget-&gt;redis-&gt;get($key)</code></p>
+
+<h5>代码范例</h5>
+
+<p>获取键名为"key"的缓存,并打印出来<br>
+```php<br>
+&lt;?php</p>
+
+<p>$widget-&gt;redis('key', 'value');</p>
+
+<p>echo $widget-&gt;redis('key');<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'value'
+</code></pre>
+</body></html>
+
+  </div>
+
+<!-- Bicache
+  ================================================== -->
+  <div class="bs-docs-section" id="Bicache">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<pre><code>该微件文档还在紧急编写中,敬请期待!
+</code></pre>
+
+<h1><a href="http://twinh.github.io/widget/api/bicache">bicache()</a></h1>
+
+<p>{@inheritdoc}</p>
+
+<h3>{@inheritdoc}</h3>
+
+<pre><code class="php">void bicache($key, $value, $expire)
+</code></pre>
+
+<h5>参数</h5>
+
+<p><em>无</em></p>
+</body></html>
+
+  </div>
+
+<!-- event
+  ================================================== -->
+  <div class="bs-docs-section" id="event">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>Event</h1>
+
+<p>绑定,触发和移除事件,并支持命名空间等特性.</p>
+
+<h2>案例</h2>
+
+<h3>绑定,触发和移除事件</h3>
+
+<pre><code class="php">// 绑定名称为connect的事件
+$widget-&gt;on('connect', function(){
+    echo 'connected';
+});
+
+// 触发connect事件,将输出connected
+$widget-&gt;trigger('connect');
+
+// 移除connect事件
+$widget-&gt;off('connect');
+
+// 再次触发connect事件,没有任何输出
+$widget-&gt;trigger('connect');
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<p><em>无</em></p>
+
+<h3>方法</h3>
+
+<h4>on($type, $fn, $priority = 0, $data = array())</h4>
+
+<p>绑定指定类型的事件触发器</p>
+
+<h5>参数</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$type</td>
+<td>string</td>
+<td>无</td>
+<td>事件的类型</td>
+</tr>
+<tr>
+<td>$fn</td>
+<td>callback</td>
+<td>无</td>
+<td>事件触发器</td>
+</tr>
+<tr>
+<td>$priority</td>
+<td>int,string</td>
+<td>0</td>
+<td>事件触发器的优先级,越大表示优先级越高,默认是0</td>
+</tr>
+<tr>
+<td>$data</td>
+<td>array</td>
+<td>array()</td>
+<td>当事件触发器触发时,传递给事件对象的数据</td>
+</tr>
+</tbody>
+</table>
+<p>事件触发器的优先级既可以是数字,也可以是字符串.预定于的字符串有<code>low</code>, <code>normal</code>, <code>high</code>,它们分别代表的数值如下表所示:</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>值</th>
+<th>数值</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>low</td>
+<td>-1000</td>
+</tr>
+<tr>
+<td>normal</td>
+<td>0</td>
+</tr>
+<tr>
+<td>high</td>
+<td>1000</td>
+</tr>
+</tbody>
+</table>
+<h4>off($type)</h4>
+
+<p>移除指定类型的事件触发器</p>
+
+<h5>参数</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>$type</td>
+<td>string</td>
+<td>无</td>
+<td>事件的类型,可以包含命名空间,如"error.namespace",也可以只有命名空间,如".namespace"</td>
+</tr></tbody>
+</table>
+<p><code>off</code>微件是事件管理器(<code>eventManager</code>)<code>remove</code>方法的别名</p>
+
+<p>如果<code>$type</code>只是纯命名空间,如'.namespace',表示移除该命名空间下所有的事件触发器</p>
+
+<h4>trigger($type, $params = array(), $widget = null)</h4>
+
+<p>触发指定类型的事件</p>
+
+<h5>参数</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$type</td>
+<td>string,Widget\Event\EventInterface</td>
+<td>无</td>
+<td>事件的类型或是事件对象</td>
+</tr>
+<tr>
+<td>$params</td>
+<td>array</td>
+<td>array()</td>
+<td>传递给事件触发器的参数</td>
+</tr>
+<tr>
+<td>$widget</td>
+<td>Widget\WidgetInterface</td>
+<td>null</td>
+<td>微件对象</td>
+</tr>
+</tbody>
+</table>
+<p>第三个参数<code>$widget</code>为可选的微件对象,如果微件包含与事件名称相同的属性,那么,事件管理器将会把该属性<br>
+作为一个事件触发器,在所有的触发器触发后才触发.</p>
+</body></html>
+
+  </div>
 
 </div><!-- /.container -->
 
