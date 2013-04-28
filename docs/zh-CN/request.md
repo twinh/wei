@@ -1,17 +1,20 @@
-[request()](http://twinh.github.io/widget/api/request)
-======================================================
+Request
+=======
 
-获取一项HTTP请求参数($_REQUEST)的值
+管理HTTP请求数据/获取一项HTTP请求参数($_REQUEST)的值
 
-### 
+案例
+----
+
+### 获取HTTP请求参数的值
 ```php
-string|null request( $name [, $default ] )
+// 假设 $_REQUEST['id'] = 5;
+
+// 返回5
+$id = $widget->request('id');
 ```
 
-##### 参数
-* **$name** `string` 请求参数的名称
-* **$default** `string` 当请求参数不存在时返回的值,默认是null
-
-
-**注意:**通过`$widget->request($name)`取到的值是字符串或`$default`,如果需要获取原始值,可以通过`$widget->request->getRaw($name)`取得.
-
+### 获取当前请求的URL地址
+```php
+$url = $widget->request->getUrl();
+```
