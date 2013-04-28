@@ -1,20 +1,22 @@
 Json
 ====
 
-输出Json格式数据
+输出JSON或JSONP格式的数据到浏览器
 
 代码范例
 --------
 
-### 逐个打印1-10的数字到浏览器窗口,没每隔一秒输出一个
+### 输出JSON个数的数据
 ```php
-//
-$widget->flush();
+// 输出 {"code":0,"message":"success"}
+$widget->json('success', 0);
+```
 
-for ($i = 1; $i <= 10; $i++) {
-    echo $i;
-    sleep(1);
-}
+### 输出JSONP格式的数据
+```php
+// 假设URL请求地址为 index.php?callback=callback
+// 下面的调用将输出 callback({"code":0,"message":"success"})
+$widget->json('success', 0, array(), true);
 ```
 
 调用方式
@@ -26,5 +28,12 @@ for ($i = 1; $i <= 10; $i++) {
 
 ### 方法
 
-#### flush($content = null, $status = null)
-直接输出内容到浏览器
+#### json($message, $code = 0, $append = array(), $jsonp = false)
+
+参数
+| 名称      | 类型      | 默认值    | 说明                                                                       |
+|-----------|-----------|-----------|----------------------------------------------------------------------------|
+| $message  | string    | 无        | 返回message的值                                                            |
+| $code     | int       | 0         | 返回code的值                                                               |
+| $append   | array     | array()   | 附加的数据                                                                 |
+| $jsonp    | bool      | false     | 是否允许返回JSONP格式的数据                                                |
