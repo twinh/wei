@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * The cookie widget
+ * A widget manager the HTTP cookie
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Request $request The HTTP request widget

@@ -25,14 +25,16 @@ require_once 'WidgetInterface.php';
  * @property Arr        $arr An util widget provides some useful method to manipulation array
  * @property ArrayCache $arrayCache  A cache widget stored data in PHP array
  * @method   mixed      arrayCache($key, $value = null, $expire = 0) Retrieve or store an item by array cache
- * @property Bicache    $bicache An two-level cache widget
+ * @property Bicache    $bicache A two-level cache widget
  * @method   mixed      bicache($key, $value = null, $expire = 0) Retrieve or store an item by two-level cache
  * @property Browser    $browser A widget to detect user browser name and version
  * @method   string     browser() Returns the name of browser
  * @property Cache      $cache A cache widget proxy
  * @method   mixed      cache($key, $value = null, $expire = 0) Retrieve or store an item by cache
  * @property Callback   $callback A widget handles WeChat(Weixin) callback message
- * @method   callback() Start up callback widget and output the matched rule message
+ * @method   Callback   callback() Start up callback widget and output the matched rule message
+ * @property Cookie     $cookie A widget manager the HTTP cookie
+ * @method   mixed      cookie($key, $value = null, $options = array()) Get or set cookie
  */
 abstract class AbstractWidget implements WidgetInterface
 {

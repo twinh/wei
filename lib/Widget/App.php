@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\Response;
 
 /**
- * The application widget
+ * A widget to build simple mvc application
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @method      Event\EventInterface trigger(string $eventName) Trigger a event
