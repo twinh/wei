@@ -6,7 +6,7 @@ Json
 代码范例
 --------
 
-### 输出JSON个数的数据
+### 输出JSON格式的数据
 ```php
 // 输出 {"code":0,"message":"success"}
 $widget->json('success', 0);
@@ -31,6 +31,7 @@ $widget->json('success', 0, array(), true);
 #### json($message, $code = 0, $append = array(), $jsonp = false)
 
 参数
+
 | 名称      | 类型      | 默认值    | 说明                                                                       |
 |-----------|-----------|-----------|----------------------------------------------------------------------------|
 | $message  | string    | 无        | 返回message的值                                                            |
