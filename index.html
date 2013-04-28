@@ -1153,13 +1153,13 @@ Hello World'
 <html><body>
 <h1>flush</h1>
 
-<p>直接输出内容到浏览器</p>
+<p>关闭缓冲区,让后台脚本实时输出内容到浏览器</p>
 
 <h2>代码范例</h2>
 
 <h3>逐个打印1-10的数字到浏览器窗口,没每隔一秒输出一个</h3>
 
-<pre><code class="php">//
+<pre><code class="php">// 关闭缓冲区,发送HTTP响应等
 $widget-&gt;flush();
 
 for ($i = 1; $i &lt;= 10; $i++) {
@@ -1223,19 +1223,21 @@ for ($i = 1; $i &lt;= 10; $i++) {
 <html><body>
 <h1>Json</h1>
 
-<p>输出Json格式数据</p>
+<p>输出JSON或JSONP格式的数据到浏览器</p>
 
 <h2>代码范例</h2>
 
-<h3>逐个打印1-10的数字到浏览器窗口,没每隔一秒输出一个</h3>
+<h3>输出JSON个数的数据</h3>
 
-<pre><code class="php">//
-$widget-&gt;flush();
+<pre><code class="php">// 输出 {"code":0,"message":"success"}
+$widget-&gt;json('success', 0);
+</code></pre>
 
-for ($i = 1; $i &lt;= 10; $i++) {
-    echo $i;
-    sleep(1);
-}
+<h3>输出JSONP格式的数据</h3>
+
+<pre><code class="php">// 假设URL请求地址为 index.php?callback=callback
+// 下面的调用将输出 callback({"code":0,"message":"success"})
+$widget-&gt;json('success', 0, array(), true);
 </code></pre>
 
 <h2>调用方式</h2>
@@ -1246,9 +1248,15 @@ for ($i = 1; $i &lt;= 10; $i++) {
 
 <h3>方法</h3>
 
-<h4>flush($content = null, $status = null)</h4>
+<h4>json($message, $code = 0, $append = array(), $jsonp = false)</h4>
 
-<p>直接输出内容到浏览器</p>
+<p>参数<br>
+| 名称      | 类型      | 默认值    | 说明                                                                       |<br>
+|-----------|-----------|-----------|----------------------------------------------------------------------------|<br>
+| $message  | string    | 无        | 返回message的值                                                            |<br>
+| $code     | int       | 0         | 返回code的值                                                               |<br>
+| $append   | array     | array()   | 附加的数据                                                                 |<br>
+| $jsonp    | bool      | false     | 是否允许返回JSONP格式的数据                                                |</p>
 </body></html>
 
   </section>
