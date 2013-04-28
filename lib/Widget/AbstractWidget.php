@@ -17,11 +17,16 @@ require_once 'WidgetInterface.php';
  * The base class for all widgets
  *
  * @author   Twin Huang <twinhuang@qq.com>
- * @method   mixed __invoke(mixed $mixed) The invoke method
- * @property Apc $apc The PHP APC cache widget 
- * @method   mixed apc($key, $value = null, $expire = 0) Retrieve or store an item
- * @property App $app The application widget
- * @method   App app(array $options = array()) Startup application
+ * @method   mixed      __invoke(mixed $mixed) The invoke method
+ * @property Apc        $apc The PHP APC cache widget 
+ * @method   mixed      apc($key, $value = null, $expire = 0) Retrieve or store an item
+ * @property App        $app The application widget
+ * @method   App        app(array $options = array()) Startup application
+ * @property Arr        $arr An util widget provides some useful method to manipulation array
+ * @property ArrayCache $arrayCache  An cache widget stored data in PHP array
+ * @method   mixed      arrayCache($key, $value = null, $expire = 0) Retrieve or store an item by array cache
+ * @property Bicache    $bicache An two-level cache widget
+ * @method   mixed      bicache($key, $value = null, $expire = 0) Retrieve or store an item by two-level cache
  */
 abstract class AbstractWidget implements WidgetInterface
 {
@@ -43,7 +48,6 @@ abstract class AbstractWidget implements WidgetInterface
      * Constructor
      *
      * @param  array        $options The property options
-     * @return void
      */
     public function __construct(array $options = array())
     {

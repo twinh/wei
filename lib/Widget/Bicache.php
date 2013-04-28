@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\Cache\AbstractCache;
 
 /**
- * The two level cache widget
+ * An two-level cache widget
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Cache\CacheInterface $master The master(faster) cache object
