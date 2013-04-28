@@ -46,7 +46,7 @@ class RequestTest extends TestCase
 
         $widget->remove('remove');
 
-        $this->assertNull($widget->request('remove'));
+        $this->assertNull($widget->request->getRaw('remove'));
     }
     
     public function testMethod()

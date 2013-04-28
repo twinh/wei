@@ -59,6 +59,8 @@ class ParameterTest extends TestCase
 
             $this->assertEquals(array('5'), $parameter->getArray('int'));
 
+            $this->assertEquals('', $parameter->get('notFound'));
+            
             // int => 5, not in specified array
             $this->assertEquals('firstValue', $parameter->getInArray('int', array(
                 'firstKey' => 'firstValue',

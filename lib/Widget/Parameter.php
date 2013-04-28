@@ -22,7 +22,7 @@ abstract class Parameter extends ArrayWidget
      * @param  mixed  $default The default parameter value if the parameter does not exist
      * @return string|null  The parameter value
      */
-    public function __invoke($name, $default = null)
+    public function __invoke($name, $default = '')
     {
         return isset($this->data[$name]) ? (string)$this->data[$name] : $default;
     }
@@ -34,7 +34,7 @@ abstract class Parameter extends ArrayWidget
      * @param  mixed  $default The default parameter value if the parameter does not exist
      * @return string|null  The parameter value
      */
-    public function get($name, $default = null)
+    public function get($name, $default = '')
     {
         return $this->__invoke($name, $default);
     }
