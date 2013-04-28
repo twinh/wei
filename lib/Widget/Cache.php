@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\Cache\AbstractCache;
 
 /**
- * The cache widget proxy
+ * A cache widget proxy
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */

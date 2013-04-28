@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * The widget to detect user browser name and version
+ * A widget to detect user browser name and version
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Server $server The server widget
@@ -85,7 +85,7 @@ class Browser extends AbstractWidget
     }
 
     /**
-     * Returns the version of browser
+     * Returns the name of browser
      *
      * @return string
      */

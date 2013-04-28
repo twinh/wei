@@ -23,10 +23,16 @@ require_once 'WidgetInterface.php';
  * @property App        $app The application widget
  * @method   App        app(array $options = array()) Startup application
  * @property Arr        $arr An util widget provides some useful method to manipulation array
- * @property ArrayCache $arrayCache  An cache widget stored data in PHP array
+ * @property ArrayCache $arrayCache  A cache widget stored data in PHP array
  * @method   mixed      arrayCache($key, $value = null, $expire = 0) Retrieve or store an item by array cache
  * @property Bicache    $bicache An two-level cache widget
  * @method   mixed      bicache($key, $value = null, $expire = 0) Retrieve or store an item by two-level cache
+ * @property Browser    $browser A widget to detect user browser name and version
+ * @method   string     browser() Returns the name of browser
+ * @property Cache      $cache A cache widget proxy
+ * @method   mixed      cache($key, $value = null, $expire = 0) Retrieve or store an item by cache
+ * @property Callback   $callback A widget handles WeChat(Weixin) callback message
+ * @method   callback() Start up callback widget and output the matched rule message
  */
 abstract class AbstractWidget implements WidgetInterface
 {
