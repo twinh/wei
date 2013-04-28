@@ -29,17 +29,17 @@ class Json extends Response
      */
     protected $message = 'message';
     
-    public function __invoke($message = null, $code = 0, array $append = array(), $callback = false)
+    public function __invoke($message = null, $code = 0, array $append = array(), $jsonp = false)
     {
         $result = json_encode(array(
             $this->code => $code,
             $this->message => $message,
         ) + $append);
         
-        if ($callback && $name = $this->request['callback']) {
+        if ($jsonp && $name = $this->request['callback']) {
             $this->header->set('Content-Type', 'application/javascript');
-            $callback = $this->escape->js((string)$name);
-            $result = $callback . '(' . $result . ')';
+            $jsonp = $this->escape->js((string)$name);
+            $result = $jsonp . '(' . $result . ')';
         } else {
             $this->header->set('Content-Type', 'application/json');
         }
