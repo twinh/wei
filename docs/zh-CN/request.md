@@ -53,6 +53,7 @@ $url = $widget->request->getUrl();
 获取请求的URI地址
 
 #### request->getBaseUrl()
+获取基本URL地址
 
 #### request->getPathInfo()
 获取请求的路径信息,一般用于路由器解析
