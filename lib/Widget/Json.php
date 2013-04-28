@@ -29,7 +29,7 @@ class Json extends Response
      */
     protected $message = 'message';
     
-    public function __invoke($message, $code = 0, array $append = array(), $callback = false)
+    public function __invoke($message = null, $code = 0, array $append = array(), $callback = false)
     {
         $result = json_encode(array(
             $this->code => $code,
