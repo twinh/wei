@@ -35,7 +35,7 @@ API 参考目录
 
 #### HTTP响应
 * [download](download.md) - 下载指定的文件
-* [flush](flush.md) - 直接输出内容到浏览器
+* [flush](flush.md) - 关闭缓冲区,让后台脚本实时输出内容到浏览器
 * [header](header.md) - 设置和获取HTTP响应头
 * [json](json.md) - 输出JSON或JSONP内容
 * [response](response.md) - 发送HTTP响应头和内容
