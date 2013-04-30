@@ -13,7 +13,7 @@ use Widget\Exception;
 use Widget\Cache\AbstractCache;
 
 /**
- * The database cache widget
+ * A database cache widget
  *
  * @author  Twin Huang <twinhuang@qq.com>
  * @todo    add serialize field

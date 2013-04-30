@@ -35,6 +35,12 @@ require_once 'WidgetInterface.php';
  * @method   Callback   callback() Start up callback widget and output the matched rule message
  * @property Cookie     $cookie A widget manager the HTTP cookie
  * @method   mixed      cookie($key, $value = null, $options = array()) Get or set cookie
+ * @property Db         $db A container widget for Doctrine DBAL connection object
+ * @method   \Doctrine\DBAL\Connection db() Retrieve the Doctrine DBAL connection object
+ * @property DbCache    $dbCache A database cache widget
+ * @method   mixed      dbCache($key, $value = null, $expire = 0) Retrieve or store an item by databse cache
+ * @property Download   $download A widget send file download response
+ * @method   Download   download($file, $options) Send file download response
  */
 abstract class AbstractWidget implements WidgetInterface
 {

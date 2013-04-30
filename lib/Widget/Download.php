@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * The download widget
+ * A widget send file download response
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Browser    $browser The browser widget
