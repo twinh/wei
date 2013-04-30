@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\Cache\AbstractCache;
 
 /**
- * Memcache
+ * A cache widget base on Memcache
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */

@@ -56,6 +56,14 @@ require_once 'WidgetInterface.php';
  * @method   mixed      header($name, $values = null, $replace = true) Get or set HTTP header
  * @property Is         $is The validator manager, use to validate input quickly, create validator and rule validator
  * @method   bool       is($rule = null, $input = null, $options = array()) Validate input by given rule
+ * @property Json       $json A widget to response json
+ * @method   Json       json($message = null, $code = 0, array $append = array(), $jsonp = false) Send JSON(P) response
+ * @property Logger     $logger A simple logger widget, which is base on the Monolog
+ * @method   bool       logger($level, $message) Logs with an arbitrary level
+ * @property Memcache   $memcache A cache widget base on Memcache
+ * @method   mixed      memcache($key, $value = null, $expire = 0) Retrieve or store an item by Memcache
+ * @property Memcached  $memcached A cache widget base on Memcached
+ * @method   mixed      memcached($key, $value = null, $expire = 0) Retrieve or store an item by Memcached
  * @property Pinyin     $pinyin An util widget that converts Chinese words to phonetic alphabets
  * @method   string     pinyin($word) Converts Chinese words to phonetic alphabets
  * @property Post       $post A widget that handles the HTTP request parameters ($_POST)
