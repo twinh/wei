@@ -12,7 +12,7 @@ use Widget\Exception\UnexpectedTypeException;
 use Widget\Exception\InvalidArgumentException;
 
 /**
- * The validator manager, use to validate data quickly, create validator and 
+ * The validator manager, use to validate input quickly, create validator and 
  * rule validator
  *
  * @author      Twin Huang <twinhuang@qq.com>
@@ -101,7 +101,7 @@ class Is extends AbstractWidget
     }
 
     /**
-     * Validate data by given rule
+     * Validate input by given rule
      * 
      * @param string|\Closure|array $rule The validation rule
      * @param mixed $input The data to be validated

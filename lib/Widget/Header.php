@@ -29,14 +29,14 @@ class Header extends ArrayWidget
     }
     
     /**
-     * Get or set the header values
+     * Get or set HTTP header
      *
      * @param  string|array $name    The header name or an associative array 
      *                               that the key is header name and the value 
      *                               is header value
      * @param  string|array $values  The header values, for set method only
      * @param  bool         $replace Whether replace the exists values or not, for set method only
-     * @return mixed|Header
+     * @return mixed
      */
     public function __invoke($name, $values = null, $replace = true)
     {
