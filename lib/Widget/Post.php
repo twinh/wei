@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * The HTTP request parameters ($_POST) widget
+ * A widget that handles the HTTP request parameters ($_POST)
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Request $request The HTTP request widget

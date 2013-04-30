@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\Cache\AbstractCache;
 
 /**
- * The file cache widget
+ * A file cache widget
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */

@@ -47,6 +47,15 @@ require_once 'WidgetInterface.php';
  * @method   string     env() Returns the environment name
  * @property Escape     $escape A widget to escape HTML, javascript, CSS, HTML Attribute and URL for secure output
  * @method   string     escape($string, $type = 'html') Escapes a string by specified type for secure ouput
+ * @property EventManager $eventManager The event manager to add, remove and trigger events
+ * @property FileCache  $fileCache A file cache widget
+ * @method   mixed      fileCache($key, $value = null, $expire = 0) Retrieve or store an item by file
+ * @property Flush      $fulsh A widget that flushes the content to browser immediately
+ * @method   Flush      flush($content = null, $status = null) Send response content
+ * @property Pinyin     $pinyin An util widget that converts Chinese words to phonetic alphabets
+ * @method   string     pinyin($word) Converts Chinese words to phonetic alphabets
+ * @property Post       $post A widget that handles the HTTP request parameters ($_POST)
+ * @method   string     post($name, $default = null) Returns a stringify rquest parameter value
  */
 abstract class AbstractWidget implements WidgetInterface
 {

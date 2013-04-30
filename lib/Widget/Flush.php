@@ -9,8 +9,8 @@
 namespace Widget;
 
 /**
- * The widget that flushes the content to browser immediately
- *
+ * A widget that flushes the content to browser immediately
+ * 
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        http://php.net/manual/en/function.flush.php
  */

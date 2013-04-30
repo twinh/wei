@@ -10,7 +10,7 @@
 namespace Widget;
 
 /**
- * Converts chinese words to phonetic alphabets
+ * An util widget that converts Chinese words to phonetic alphabets
  *
  * The basic code of the pinyin widget is from the internet
  *
@@ -434,7 +434,7 @@ class Pinyin extends AbstractWidget
     }
 
     /**
-     * Converts chinese words to phonetic alphabets
+     * Converts Chinese words to phonetic alphabets
      *
      * @param string $word
      * @return string
