@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * The environment widget
+ * A widget to detect the environment and load configuration by environment
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Server $server The server widget
@@ -17,7 +17,7 @@ namespace Widget;
 class Env extends AbstractWidget
 {
     /**
-     * The env name
+     * The environment name
      * 
      * @var string
      */
@@ -55,7 +55,7 @@ class Env extends AbstractWidget
     }
 
     /**
-     * Returns the env string
+     * Returns the environment name
      * 
      * @return string
      */

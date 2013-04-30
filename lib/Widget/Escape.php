@@ -395,7 +395,7 @@ class Escape extends AbstractWidget
     }
     
     /**
-     * Escapes a string by specified type for safe ouput
+     * Escapes a string by specified type for secure ouput
      * 
      * @param string $string
      * @param string $type

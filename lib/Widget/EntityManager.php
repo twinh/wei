@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityManager as BaseEntityManager;
 use Doctrine\Common\Cache\Cache as DoctrineCache;
 
 /**
- * EntityManager
+ * A container widget for Doctrine ORM entity manager object
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @method      \Doctrine\DBAL\Connection db() Returns the Doctrine DBAL connection object

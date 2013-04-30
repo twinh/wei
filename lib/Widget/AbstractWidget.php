@@ -41,6 +41,12 @@ require_once 'WidgetInterface.php';
  * @method   mixed      dbCache($key, $value = null, $expire = 0) Retrieve or store an item by databse cache
  * @property Download   $download A widget send file download response
  * @method   Download   download($file, $options) Send file download response
+ * @property EntityManager $entityManager A container widget for Doctrine ORM entity manager object
+ * @method   \Doctrine\ORM\EntityManager entity() Returns the Docrine ORM entity manager
+ * @property Env        $env A widget to detect the environment and load configuration by environment
+ * @method   string     env() Returns the environment name
+ * @property Escape     $escape A widget to escape HTML, javascript, CSS, HTML Attribute and URL for secure output
+ * @method   string     escape($string, $type = 'html') Escapes a string by specified type for secure ouput
  */
 abstract class AbstractWidget implements WidgetInterface
 {
