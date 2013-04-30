@@ -52,7 +52,7 @@ require_once 'WidgetInterface.php';
  * @method   mixed      fileCache($key, $value = null, $expire = 0) Retrieve or store an item by file
  * @property Flush      $fulsh A widget that flushes the content to browser immediately
  * @method   Flush      flush($content = null, $status = null) Send response content
- * @property Header     The response header widget
+ * @property Header     $header The response header widget
  * @method   mixed      header($name, $values = null, $replace = true) Get or set HTTP header
  * @property Is         $is The validator manager, use to validate input quickly, create validator and rule validator
  * @method   bool       is($rule = null, $input = null, $options = array()) Validate input by given rule
