@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * Trigger a event
+ * Trigger an event
  * 
  * This widget is the alias of `$widget->eventManager->__invoke()`
  *
@@ -19,7 +19,7 @@ namespace Widget;
 class Trigger extends AbstractWidget
 {
     /**
-     * Trigger a event
+     * Trigger an event
      *
      * @param  string $type The name of event or a Event object
      * @param  array $args The arguments pass to the handle

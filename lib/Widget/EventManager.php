@@ -57,9 +57,9 @@ class EventManager extends AbstractWidget
     }
 
     /**
-     * Trigger a event
+     * Trigger an event
      *
-     * @param  string $type The name of event or a Event object
+     * @param  string $type The name of event or an Event object
      * @param  array $args The arguments pass to the handle
      * @param null|WidgetInterface $widget If the widget contains the 
      *                                     $type property, the event manager 

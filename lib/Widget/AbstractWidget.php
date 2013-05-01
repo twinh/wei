@@ -64,6 +64,11 @@ require_once 'WidgetInterface.php';
  * @method   mixed      memcache($key, $value = null, $expire = 0) Retrieve or store an item by Memcache
  * @property Memcached  $memcached A cache widget base on Memcached
  * @method   mixed      memcached($key, $value = null, $expire = 0) Retrieve or store an item by Memcached
+ * @property Monolog    $monolog A wrapper widget for Monolog
+ * @method   bool       monolog($level = null, $message = null, array $context = array()) Get monolog logger object or add a log record
+ * @method   EventManager off($type) Remove event handlers by specified type
+ * @method   EventManager on($type, $fn = null, $priority = 0, $data = array()) Attach a handler to an event
+ * @method Event\Event trigger($event, $params = array(), WidgetInterface $widget = null) Trigger an event
  * @property Pinyin     $pinyin An util widget that converts Chinese words to phonetic alphabets
  * @method   string     pinyin($word) Converts Chinese words to phonetic alphabets
  * @property Post       $post A widget that handles the HTTP request parameters ($_POST)

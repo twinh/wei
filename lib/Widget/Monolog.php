@@ -11,9 +11,10 @@ namespace Widget;
 use Monolog\Logger as MonologLogger;
 
 /**
- * The wrapper for Monolog
+ * A wrapper widget for Monolog
  *
  * @author      Twin Huang <twinhuang@qq.com>
+ * @link        https://github.com/Seldaek/monolog
  */
 class Monolog extends AbstractWidget
 {
