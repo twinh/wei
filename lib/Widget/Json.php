@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * A widget to response json
+ * A widget to response JSON or JSONP format string
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
@@ -29,6 +29,15 @@ class Json extends Response
      */
     protected $message = 'message';
     
+    /**
+     * Response JSON or JSONP format string
+     * 
+     * @param string $message The message node value
+     * @param int $code The code node value
+     * @param array $append The array append to the root node
+     * @param bool $jsonp Whether allow response json format on demand
+     * @return Json
+     */
     public function __invoke($message = null, $code = 0, array $append = array(), $jsonp = false)
     {
         $result = json_encode(array(
