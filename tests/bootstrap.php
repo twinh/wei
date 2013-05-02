@@ -20,7 +20,8 @@ return Widget::create(array(
             'WidgetTest' => __DIR__
         ),
         'alias' => array(
-            'mysqlCache' => 'Widget\DbCache'
+            'mysqlCache' => 'Widget\DbCache',
+            'pgCache' => 'Widget\DbCache'
         )
     ),
     // Databse Widget Configuration
@@ -33,6 +34,11 @@ return Widget::create(array(
             'db' => 'db.mysqlCache'
         )
     ),
+    'pgCache' => array(
+        'deps' => array(
+            'db' => 'db.pgCache'
+        )
+    ),
     'db.mysqlCache' => array(
         'driver'    => 'pdo_mysql',
         'host'      => '127.0.0.1',
@@ -41,6 +47,14 @@ return Widget::create(array(
         'password'  => '123456',
         'dbname'    => 'widget',
         'charset'   => 'utf8'
+    ),
+    'db.pgCache' => array(
+        'driver'    => 'pdo_pgsql',
+        'host'      => '127.0.0.1',
+        'port'      => '5432',
+        'user'      => 'postgres',
+        'password'  => '123456',
+        'dbname'    => 'postgres',
     ),
     // Doctrine ORM Widget Configuration
     'entityManager' => array(
