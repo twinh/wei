@@ -35,6 +35,11 @@ h1, h2, h3, .lead
   padding-left: 55px;
   font-size: 90%;
 }
+.bs-docs-sidebar .nav .nav > li > a.nav-header {
+  margin-top: 15px;
+  margin-bottom: 0px;
+  font-weight: normal;
+}
 </style>
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -87,116 +92,97 @@ h1, h2, h3, .lead
     <li>
       <a href="#cache">缓存</a>
       <ul class="nav">
-        <li><a href="#cache">通用缓存</a></li>
+        <li><a href="#cache">Cache</a></li>
         <li><a href="#apc">APC</a></li>
-        <li><a href="#dbCache">数据库缓存</a></li>
-        <li><a href="#fileCache">文件缓存</a></li>
+        <li><a href="#dbCache">DbCache</a></li>
+        <li><a href="#fileCache">FileCache</a></li>
         <li><a href="#memcache">Memcache</a></li>
         <li><a href="#memcached">Memcached</a></li>
         <li><a href="#redis">Redis</a></li>
-        <li><a href="#bicache">二级缓存</a></li>
+        <li><a href="#bicache">Bicache</a></li>
       </ul>
     </li>
     <li>
-      <a href="#validation">验证器</a>
+      <a href="#validate">验证器</a>
       <ul class="nav">
-        <li><a href="#validate">Validation</a></li>
-        <li>数据类型及组成
-          <ul>
-            <li><a href="#isAlnum">isAlnum</a> - 检查数据是否只由字母(a-z)和数字(0-9)组成</li>
-            <li><a href="#isAlpha">isAlpha</a> - 检查数据是否只由字母(a-z)组成</li>
-            <li><a href="#isBlank">isBlank</a> - 检查数据是否为空(不允许空格)</li>
-            <li><a href="#isDecimal">isDecimal</a> - 检查数据是否为小数</li>
-            <li><a href="#isDigit">isDigit</a> - 检查数据是否只由数字组成</li>
-            <li><a href="#isDoubleByte">isDoubleByte</a> - 检查数据是否只由双字节字符组成</li>
-            <li><a href="#isEmpty">isEmpty</a> - 检查数据是否为空(允许空格)</li>
-            <li><a href="#isEndsWith">isEndsWith</a> - 检查数据是否以指定字符串结尾</li>
-            <li><a href="#isEquals">isEquals</a> - 检查数据是否与指定数据相等</li>
-            <li><a href="#isIn">isIn</a> - 检查数据是否在指定的数组中</li>
-            <li><a href="#isLowercase">isLowercase</a> - 检查数据是否为小写</li>
-            <li><a href="#isNull">isNull</a> - 检查数据是否为null</li>
-            <li><a href="#isNumber">isNumber</a> - 检查数据是否为有效数字</li>
-            <li><a href="#isRegex">isRegex</a> - 检查数据是否匹配指定的正则表达式</li>
-            <li><a href="#isRequired">isRequired</a> - 检查数据是否为空(用于组合验证,如果允许为空且数据为空,则不对数据进行剩余规则的校验)</li>
-            <li><a href="#isStartsWith">isStartsWith</a> - 检查数据是否以指定字符串开头</li>
-            <li><a href="#isType">isType</a> - 检查数据是否为指定的类型</li>
-            <li><a href="#isUppercase">isUppercase</a> - 检查数据是否为大写</li>
-          </ul>
-        </li>
-<li>长度大小
+        <li><a href="#validate">Validate</a></li>
 
-<ul>
-<li><a href="#isLength">isLength</a> - 检查数据是否为指定的长度,或在指定的长度范围内</li>
-<li><a href="#isMax">isMax</a> - 检查数据是否小于等于指定的值</li>
-<li><a href="#isMaxlength">isMaxLength</a> - 检查数据是否小于等于指定长度</li>
-<li><a href="#isMin">isMin</a> - 检查数据是否大于等于指定的值</li>
-<li><a href="#isMinlength">isMinLength</a> - 检查数据是否大于等于指定长度</li>
-<li><a href="#isRange">isRange</a> - 检查数据是否在指定的两个值之间</li>
-</ul></li>
-<li>日期和时间
+        <li><a href="#isAlnum" class="nav-header">数据类型及组成</a><li>
+        <li><a href="#isAlnum">isAlnum</a></li>
+        <li><a href="#isAlpha">isAlpha</a></li>
+        <li><a href="#isBlank">isBlank</a></li>
+        <li><a href="#isDecimal">isDecimal</a></li>
+        <li><a href="#isDigit">isDigit</a></li>
+        <li><a href="#isDoubleByte">isDoubleByte</a></li>
+        <li><a href="#isEmpty">isEmpty</a></li>
+        <li><a href="#isEndsWith">isEndsWith</a></li>
+        <li><a href="#isEquals">isEquals</a></li>
+        <li><a href="#isIn">isIn</a></li>
+        <li><a href="#isLowercase">isLowercase</a></li>
+        <li><a href="#isNull">isNull</a></li>
+        <li><a href="#isNumber">isNumber</a></li>
+        <li><a href="#isRegex">isRegex</a></li>
+        <li><a href="#isRequired">isRequired</a></li>
+        <li><a href="#isStartsWith">isStartsWith</a></li>
+        <li><a href="#isType">isType</a></li>
+        <li><a href="#isUppercase">isUppercase</a></li>
 
-<ul>
-<li><a href="#isDate">isDate</a> - 检查数据是否为合法的日期</li>
-<li><a href="#isDatetime">isDateTime</a> - 检查数据是否为合法的日期时间</li>
-<li><a href="#isTime">isTime</a> - 检查数据是否为合法的时间</li>
-</ul></li>
-<li>文件目录
+        <li><a href="#isLength" class="nav-header">长度大小</a></li>
+        <li><a href="#isLength">isLength</a></li>
+        <li><a href="#isMax">isMax</a></li>
+        <li><a href="#isMaxlength">isMaxLength</a></li>
+        <li><a href="#isMin">isMin</a></li>
+        <li><a href="#isMinlength">isMinLength</a></li>
+        <li><a href="#isRange">isRange</a></li>
 
-<ul>
-<li><a href="#isDir">isDir</a>－ 检查数据是否为存在的目录</li>
-<li><a href="#isExists">isExists</a> - 检查数据是否为存在的文件或目录</li>
-<li><a href="#isFile">isFile</a> - 检查数据是否为合法的文件</li>
-<li><a href="#isImage">isImage</a> - 检查数据是否为合法的图片</li>
-</ul></li>
-<li>网络
+        <li><a href="#isDate" class="nav-header">日期和时间</a>
+        <li><a href="#isDate">isDate</a></li>
+        <li><a href="#isDatetime">isDateTime</a></li>
+        <li><a href="#isTime">isTime</a></li>
 
-<ul>
-<li><a href="#isEmail">isEmail</a> - 检查数据是否为有效的邮箱地址</li>
-<li><a href="#isIp">isIp</a> - 检查数据是否为有效的IP地址</li>
-<li><a href="#isTld">isTld</a> - 检查数据是否为存在的顶级域名</li>
-<li><a href="#isUrl">isUrl</a> - 检查数据是否为有效的URL地址</li>
-<li><a href="#isUuid">isUuid</a> - 检查数据是否为有效的UUID</li>
-</ul></li>
-<li>区域:所有
+        <li><a href="#isDir" class="nav-header">文件目录</a></li>
+        <li><a href="#isDir">isDir</a></li>
+        <li><a href="#isExists">isExists</a></li>
+        <li><a href="#isFile">isFile</a></li>
+        <li><a href="#isImage">isImage</a></li>
 
-<ul>
-<li><a href="#isCreditcard">isCreditCard</a> - 检查数据是否为合法的信用卡号码</li>
-</ul></li>
-<li>区域:中国
+        <li><a href="#isEmail" class="nav-header">网络</a></li>
+        <li><a href="#isEmail">isEmail</a></li>
+        <li><a href="#isIp">isIp</a></li>
+        <li><a href="#isTld">isTld</a></li>
+        <li><a href="#isUrl">isUrl</a></li>
+        <li><a href="#isUuid">isUuid</a></li>
 
-<ul>
-<li><a href="#isChinese">isChinese</a> - 检查数据是否只由中文组成</li>
-<li><a href="#isIdCardCn">isIdCardCn</a> - 检查数据是否为有效的中国身份证</li>
-<li><a href="#isIdCardHk">isIdCardHk</a> - 检查数据是否为有效的香港身份证</li>
-<li><a href="#isIdCardMo">isIdCardMo</a> - 检查数据是否为有效的澳门身份证</li>
-<li><a href="#isIdCardTw">isIdCardTw</a> - 检查数据是否为有效的台湾身份证</li>
-<li><a href="#isPhoneCn">isPhoneCn</a> - 检查数据是否为有效的电话号码</li>
-<li><a href="#isPostcode">isPostcode</a> - 检查数据是否为有效的邮政编码</li>
-<li><a href="#isQQ">isQQ</a> - 检查数据是否为有效的QQ号码</li>
-<li><a href="#isMobileCn">isMobileCn</a> - 检查数据是否为有效的手机号码</li>
-</ul></li>
-<li>分组
+        <li><a href="#isCreditcard" class="nav-header">区域:所有</a></li>
+        <li><a href="#isCreditcard">isCreditCard</a></li>
 
-<ul>
-<li><a href="#isAllof">isAllOf</a> - 检查数据是否通过所有的规则校验</li>
-<li><a href="#isNoneof">isNoneOf</a> - 检查数据是否不符合所有指定的规则</li>
-<li><a href="#isOneof">isOneOf</a> - 检查数据是否满足指定规则中的任何一条</li>
-<li><a href="#isSomeof">isSomeOf</a> - 检查数据是否通过指定数量规则的验证</li>
-</ul></li>
-<li>第三方集成
+        <li><a href="#isChinese" class="nav-header">区域:中国</a></li>
+        <li><a href="#isChinese">isChinese</a></li>
+        <li><a href="#isIdCardCn">isIdCardCn</a></li>
+        <li><a href="#isIdCardHk">isIdCardHk</a></li>
+        <li><a href="#isIdCardMo">isIdCardMo</a></li>
+        <li><a href="#isIdCardTw">isIdCardTw</a></li>
+        <li><a href="#isPhoneCn">isPhoneCn</a></li>
+        <li><a href="#isPostcode">isPostcode</a></li>
+        <li><a href="#isQQ">isQQ</a></li>
+        <li><a href="#isMobileCn">isMobileCn</a></li>
 
-<ul>
-<li><a href="#isEntityExists">isEntityExists</a> - 检查Doctrine ORM实体是否存在</li>
-<li><a href="#isRecordExists">isRecordExists</a> - 检查数据表是否存在指定的记录</li>
-</ul></li>
-<li>其他
+        <li><a href="#isAllof" class="nav-header">分组</a></li>
+        <li><a href="#isAllof">isAllOf</a></li>
+        <li><a href="#isNoneof">isNoneOf</a></li>
+        <li><a href="#isOneof">isOneOf</a></li>
+        <li><a href="#isSomeof">isSomeOf</a></li>
 
-<ul>
-<li><a href="#isAll">isAll</a> - 检查集合里的每一项是否符合指定的规则</li>
-<li><a href="#isCallback">isCallback</a> - 检查数据是否通过指定回调方法验证</li>
-<li><a href="#isDivisibleby">isDivisibleBy</a> - 检查数据是否能被指定的除数整除</li>
-</ul></li>
-</ul></li>
+        <li><a href="#isEntityExists" class="nav-header">第三方集成</a></li>
+        <li><a href="#isEntityExists">isEntityExists</a></li>
+        <li><a href="#isRecordExists">isRecordExists</a></li>
+
+        <li><a href="#isAll" class="nav-header">其他</a></li>
+        <li><a href="#isAll">isAll</a></li>
+        <li><a href="#isCallback">isCallback</a></li>
+        <li><a href="#isDivisibleby">isDivisibleBy</a></li>
+      </ul>
+    </li>
     <li>
       <a href="#view">视图</a>
       <ul class="nav">
@@ -216,7 +202,7 @@ h1, h2, h3, .lead
       </ul>
     </li>
     <li>
-      <a href="#util">工具</a>
+      <a href="#env">工具</a>
       <ul class="nav">
         <li><a href="#env">环境</a></li>
         <li>
@@ -233,7 +219,7 @@ h1, h2, h3, .lead
       </ul>
     </li>
     <li>
-      <a href="#vendor">第三方集成</a>
+      <a href="#db">第三方集成</a>
       <ul class="nav">
         <li><a href="#db">db</a></li>
         <li><a href="#entityManager">entityManager</a></li>
@@ -694,26 +680,47 @@ $widget-&gt;cookie('key');
   <section id="post">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<pre><code>该微件文档还在紧急编写中,敬请期待!
+<h1>Post</h1>
+
+<p>获取HTTP请求($_POST)数据</p>
+
+<h2>案例</h2>
+
+<h3>获取名称为id的请求数据</h3>
+
+<pre><code class="php">// 假设 $_POST['id'] = 5;
+
+// 返回5
+$id = $widget-&gt;post('id');
 </code></pre>
 
-<h1><a href="http://twinh.github.io/widget/api/post">post()</a></h1>
+<h2>调用方法</h2>
 
-<p>Returns a <em>stringify</em> or user defined($default) parameter value</p>
+<h3>选项</h3>
 
-<h3>Returns a <em>stringify</em> or user defined($default) parameter value</h3>
+<p><em>无</em></p>
 
-<pre><code class="php">string|null post($name, $default)
-</code></pre>
+<h3>方法</h3>
 
-<h5>参数</h5>
+<h4>post($name, $default = null)</h4>
 
-<ul>
-<li>
-<strong>$name</strong> <code>string</code> The parameter name</li>
-<li>
-<strong>$default</strong> <code>mixed</code> The default parameter value if the parameter does not exist</li>
-</ul>
+<p>获取HTTP请求参数($_POST),返回值类型为字符串</p>
+
+<h4>post-&gt;getRaw($name, $default = null)</h4>
+
+<p>获取HTTP请求参数的原始值</p>
+
+<h4>post-&gt;getInt($name, $min = null, $max = null)</h4>
+
+<p>获取HTTP请求参数,返回值类型为整形</p>
+
+<h4>post-&gt;getArray($name, $default = null)</h4>
+
+<p>获取HTTP请求参数,返回值类型为数组</p>
+
+<h4>post-&gt;getInArray($name, array $array)</h4>
+
+<p>获取HTTP请求参数,如果参数的值不在数组中,将返回数组的第一个值</p>
 </body></html>
 
   </section>
@@ -1151,7 +1158,7 @@ Hello World'
   <section id="flush">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1>flush</h1>
+<h1>Flush</h1>
 
 <p>关闭缓冲区,让后台脚本实时输出内容到浏览器</p>
 
@@ -1227,7 +1234,7 @@ for ($i = 1; $i &lt;= 10; $i++) {
 
 <h2>代码范例</h2>
 
-<h3>输出JSON个数的数据</h3>
+<h3>输出JSON格式的数据</h3>
 
 <pre><code class="php">// 输出 {"code":0,"message":"success"}
 $widget-&gt;json('success', 0);
@@ -1250,13 +1257,42 @@ $widget-&gt;json('success', 0, array(), true);
 
 <h4>json($message, $code = 0, $append = array(), $jsonp = false)</h4>
 
-<p>参数<br>
-| 名称      | 类型      | 默认值    | 说明                                                                       |<br>
-|-----------|-----------|-----------|----------------------------------------------------------------------------|<br>
-| $message  | string    | 无        | 返回message的值                                                            |<br>
-| $code     | int       | 0         | 返回code的值                                                               |<br>
-| $append   | array     | array()   | 附加的数据                                                                 |<br>
-| $jsonp    | bool      | false     | 是否允许返回JSONP格式的数据                                                |</p>
+<p>参数</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$message</td>
+<td>string</td>
+<td>无</td>
+<td>返回message的值</td>
+</tr>
+<tr>
+<td>$code</td>
+<td>int</td>
+<td>0</td>
+<td>返回code的值</td>
+</tr>
+<tr>
+<td>$append</td>
+<td>array</td>
+<td>array()</td>
+<td>附加的数据</td>
+</tr>
+<tr>
+<td>$jsonp</td>
+<td>bool</td>
+<td>false</td>
+<td>是否允许返回JSONP格式的数据</td>
+</tr>
+</tbody>
+</table>
 </body></html>
 
   </section>
@@ -2399,6 +2435,1310 @@ Array
 )
 用户名的长度必须大于3
 邮箱格式不正确'
+</code></pre>
+</body></html>
+
+  </section>
+
+<!-- isAlnum
+  ================================================== -->
+  <section id="isAlnum">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1><a href="http://twinh.github.io/widget/api/isAlnum">isAlnum()</a></h1>
+
+<p>检查数据是否只由字母(a-z)和数字(0-9)组成</p>
+
+<pre><code class="php">bool isAlnum( $input )
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
+</ul>
+<h5>错误信息</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th><strong>名称</strong></th>
+<th><strong>信息</strong></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>pattern</code></td>
+<td>%name%只能由字母(a-z)和数字(0-9)组成</td>
+</tr>
+<tr>
+<td><code>negative</code></td>
+<td>%name%不能只由字母(a-z)和数字(0-9)组成</td>
+</tr>
+</tbody>
+</table>
+<h5>代码范例</h5>
+
+<p>检查数据是否只由字母和数字组成<br>
+```php<br>
+&lt;?php</p>
+
+<p>$input = 'abc123';<br>
+if ($widget-&gt;isAlnum($input)) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    echo 'No';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'Yes'
+</code></pre>
+</body></html>
+
+  </section>
+
+<!-- isAlpha
+  ================================================== -->
+  <section id="isAlpha">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1><a href="http://twinh.github.io/widget/api/isAlpha">isAlpha()</a></h1>
+
+<p>检查数据是否只由字母(a-z)组成</p>
+
+<pre><code class="php">bool isAlpha( $input )
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
+</ul>
+<h5>错误信息</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th><strong>名称</strong></th>
+<th><strong>信息</strong></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>pattern</code></td>
+<td>%name%只能由字母(a-z)组成</td>
+</tr>
+<tr>
+<td><code>negative</code></td>
+<td>%name%必须不匹配模式"%pattern%"</td>
+</tr>
+<tr>
+<td><code>notString</code></td>
+<td>%name%必须是字符串</td>
+</tr>
+</tbody>
+</table>
+<h5>代码范例</h5>
+
+<p>检查数据是否只由字母组成<br>
+```php<br>
+&lt;?php</p>
+
+<p>$input = 'abc123';<br>
+if ($widget-&gt;isAlpha($input)) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    echo 'No';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'No'
+</code></pre>
+</body></html>
+
+  </section>
+
+<!-- isBlank
+  ================================================== -->
+  <section id="isBlank">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1><a href="http://twinh.github.io/widget/api/isBlank">isBlank()</a></h1>
+
+<p>检查数据是否为空(不允许空格)</p>
+
+<pre><code class="php">bool isBlank( $input )
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
+</ul>
+<h5>错误信息</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th><strong>名称</strong></th>
+<th><strong>信息</strong></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>blank</code></td>
+<td>%name%必须为空</td>
+</tr>
+<tr>
+<td><code>negative</code></td>
+<td>%name%不能为空</td>
+</tr>
+</tbody>
+</table>
+<h5>代码范例</h5>
+
+<p>检查空白字符会返回成功<br>
+```php<br>
+&lt;?php</p>
+
+<p>$input = '    ';<br>
+if ($widget-&gt;isBlank($input)) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    echo 'No';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'Yes'
+</code></pre>
+</body></html>
+
+  </section>
+
+<!-- isDecimal
+  ================================================== -->
+  <section id="isDecimal">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1><a href="http://twinh.github.io/widget/api/isDecimal">isDecimal()</a></h1>
+
+<p>检查数据是否为小数</p>
+
+<pre><code class="php">bool isDecimal( $input )
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
+</ul>
+<h5>错误信息</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th><strong>名称</strong></th>
+<th><strong>信息</strong></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>invalid</code></td>
+<td>%name%必须是小数</td>
+</tr>
+<tr>
+<td><code>negative</code></td>
+<td>%name%不能是小数</td>
+</tr>
+<tr>
+<td><code>notString</code></td>
+<td>%name%必须是字符串</td>
+</tr>
+</tbody>
+</table>
+<h5>代码范例</h5>
+
+<p>检查"0.0.1"是否为小数<br>
+```php<br>
+&lt;?php</p>
+
+<p>if ($widget-&gt;isDecimal('1.0.0')) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    echo 'No';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'No'
+</code></pre>
+</body></html>
+
+  </section>
+
+<!-- isDigit
+  ================================================== -->
+  <section id="isDigit">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>isDigit</h1>
+
+<p>检查数据是否只由数字组成</p>
+
+<h2>案例</h2>
+
+<h3>检查"abc123"是否为数字</h3>
+
+<pre><code class="php">if ($widget-&gt;isDigit('abc123')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+// 输出了'No'
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>patternMessage</td>
+<td>string</td>
+<td>%name%只能由数字(0-9)组成</td>
+<td></td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能只由数字(0-9)组成</td>
+<td></td>
+</tr>
+<tr>
+<td>notStringSring</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isDigit($input)</h4>
+
+<h3>错误信息</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th><strong>名称</strong></th>
+<th><strong>信息</strong></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>pattern</code></td>
+<td>%name%只能由数字(0-9)组成</td>
+</tr>
+<tr>
+<td><code>negative</code></td>
+<td>%name%不能只由数字(0-9)组成</td>
+</tr>
+<tr>
+<td><code>notString</code></td>
+<td>%name%必须是字符串</td>
+</tr>
+</tbody>
+</table>
+</body></html>
+
+  </section>
+
+<!-- isDoubleByte
+  ================================================== -->
+  <section id="isDoubleByte">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1><a href="http://twinh.github.io/widget/api/isDoubleByte">isDoubleByte()</a></h1>
+
+<p>检查数据是否只由双字节字符组成</p>
+
+<pre><code class="php">bool isDoubleByte( $input )
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
+</ul>
+<h5>错误信息</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th><strong>名称</strong></th>
+<th><strong>信息</strong></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>pattern</code></td>
+<td>%name%只能由双字节字符组成</td>
+</tr>
+<tr>
+<td><code>negative</code></td>
+<td>%name%不能只由双字节字符组成</td>
+</tr>
+<tr>
+<td><code>notString</code></td>
+<td>%name%必须是字符串</td>
+</tr>
+</tbody>
+</table>
+<h5>代码范例</h5>
+
+<p>检查"中文abc"是否只由双字节字符组成<br>
+```php<br>
+&lt;?php</p>
+
+<p>if ($widget-&gt;isDoubleByte('中文abc')) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    echo 'No';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'No'
+</code></pre>
+</body></html>
+
+  </section>
+
+<!-- isEmpty
+  ================================================== -->
+  <section id="isEmpty">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1><a href="http://twinh.github.io/widget/api/isEmpty">isEmpty()</a></h1>
+
+<p>检查数据是否为空(允许空格)</p>
+
+<pre><code class="php">bool isEmpty( $input )
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
+</ul>
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th><strong>名称</strong></th>
+<th><strong>信息</strong></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>empty</code></td>
+<td>%name%必须为空</td>
+</tr>
+<tr>
+<td><code>negative</code></td>
+<td>%name%不能为空</td>
+</tr>
+</tbody>
+</table>
+<h5>代码范例</h5>
+
+<p>检查"abc"是否为空<br>
+```php<br>
+&lt;?php</p>
+
+<p>if ($widget-&gt;isEmpty('abc')) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    echo 'No';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'No'
+</code></pre>
+</body></html>
+
+  </section>
+
+<!-- isEndsWith
+  ================================================== -->
+  <section id="isEndsWith">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1><a href="http://twinh.github.io/widget/api/isEndsWith">isEndsWith()</a></h1>
+
+<p>检查数据是否以指定字符串结尾</p>
+
+<pre><code class="php">bool isEndsWith( $input [, $findMe [, $case ] ] )
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
+<li>
+<strong>$findMe</strong> <code>string|array</code> 要查找的字符串,可以是字符串或数组.如果是数组,只要数据以数组中任何一个元素结尾就算验证通过</li>
+<li>
+<strong>$case</strong> <code>bool</code> 是否区分大小写,默认为不区分</li>
+</ul>
+<h5>错误信息</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th><strong>名称</strong></th>
+<th><strong>信息</strong></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>notFound</code></td>
+<td>%name%必须以%findMe%结尾</td>
+</tr>
+<tr>
+<td><code>negative</code></td>
+<td>%name%不能以%findMe%结尾</td>
+</tr>
+<tr>
+<td><code>notString</code></td>
+<td>%name%必须是字符串</td>
+</tr>
+</tbody>
+</table>
+<h5>代码范例</h5>
+
+<p>检查"abc"是否以"C"结尾<br>
+```php<br>
+&lt;?php</p>
+
+<p>if ($widget-&gt;isEndsWith('abc', 'C')) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    echo 'No';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'Yes'
+</code></pre>
+
+<h5>代码范例</h5>
+
+<p>以区分大小写的方式,检查"abc"是否以"C"结尾<br>
+```php<br>
+&lt;?php</p>
+
+<p>if ($widget-&gt;isEndsWith('abc', 'C', true)) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    echo 'No';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'No'
+</code></pre>
+
+<h5>代码范例</h5>
+
+<p>检查"abc"是否以数组array('a', 'b', 'c')中的任意元素结尾<br>
+```php<br>
+&lt;?php</p>
+
+<p>if ($widget-&gt;isEndsWith('abc', array('a', 'b', 'c'))) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    echo 'No';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'Yes'
+</code></pre>
+</body></html>
+
+  </section>
+
+<!-- isEquals
+  ================================================== -->
+  <section id="isEquals">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1><a href="http://twinh.github.io/widget/api/isEquals">isEquals()</a></h1>
+
+<p>检查数据是否与指定数据相等</p>
+
+<pre><code class="php">bool isEquals( $input [, $equals [, $strict ] ] )
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
+<li>
+<strong>$equals</strong> <code>mixed</code> 与数据比较的值</li>
+<li>
+<strong>$strict</strong> <code>bool</code> 是否使用全等(===)进行比较,默认使用等于(==)比较</li>
+</ul>
+<h5>错误信息</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th><strong>名称</strong></th>
+<th><strong>信息</strong></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>notEquals</code></td>
+<td>%name%必须等于%equals%</td>
+</tr>
+<tr>
+<td><code>negative</code></td>
+<td>%name%不能等于%equals%</td>
+</tr>
+</tbody>
+</table>
+<h5>代码范例</h5>
+
+<p>检查指定的两个值是否相等<br>
+```php<br>
+&lt;?php</p>
+
+<p>$post = array(<br>
+    'password' =&gt; '123456',<br>
+    'password_confirmation' =&gt; '123456',<br>
+);</p>
+
+<p>if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    echo 'No';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'Yes'
+</code></pre>
+</body></html>
+
+  </section>
+
+<!-- isIn
+  ================================================== -->
+  <section id="isIn">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1><a href="http://twinh.github.io/widget/api/isIn">isIn()</a></h1>
+
+<p>检查数据是否在指定的数组中</p>
+
+<pre><code class="php">bool isIn( $input [, $array [, $strict ] ] )
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
+<li>
+<strong>$array</strong> <code>array</code> 用于搜索的数组</li>
+<li>
+<strong>$strict</strong> <code>bool</code> 是否使用全等(===)进行比较,默认使用等于(==)比较</li>
+</ul>
+<h5>错误信息</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th><strong>名称</strong></th>
+<th><strong>信息</strong></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>notIn</code></td>
+<td>%name%必须在指定的数据中:%array%</td>
+</tr>
+<tr>
+<td><code>negative</code></td>
+<td>%name%不能在指定的数据中:%array%</td>
+</tr>
+</tbody>
+</table>
+<h5>代码范例</h5>
+
+<p>检查"1"是否在array(1, 2, 3)之中<br>
+```php<br>
+&lt;?php</p>
+
+<p>if ($widget-&gt;isIn(1, array(1, 2, 3))) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    echo 'No';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'Yes'
+</code></pre>
+</body></html>
+
+  </section>
+
+<!-- isLowercase
+  ================================================== -->
+  <section id="isLowercase">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1><a href="http://twinh.github.io/widget/api/isLowercase">isLowercase()</a></h1>
+
+<p>检查数据是否为小写字符</p>
+
+<pre><code class="php">bool isLowercase( $input )
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
+</ul>
+<h5>错误信息</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th><strong>名称</strong></th>
+<th><strong>信息</strong></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>invalid</code></td>
+<td>%name%不能包含大写字母</td>
+</tr>
+<tr>
+<td><code>negative</code></td>
+<td>%name%不能包含小写字母</td>
+</tr>
+<tr>
+<td><code>notString</code></td>
+<td>%name%必须是字符串</td>
+</tr>
+</tbody>
+</table>
+<h5>代码范例</h5>
+
+<p>检查"abc"是否为小写字符<br>
+```php<br>
+&lt;?php</p>
+
+<p>if ($widget-&gt;isLowercase('abc')) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    echo 'No';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'Yes'
+</code></pre>
+</body></html>
+
+  </section>
+
+<!-- isNull
+  ================================================== -->
+  <section id="isNull">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1><a href="http://twinh.github.io/widget/api/isNull">isNull()</a></h1>
+
+<p>检查数据是否为null</p>
+
+<pre><code class="php">bool isNull( $input )
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
+</ul>
+<h5>错误信息</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th><strong>名称</strong></th>
+<th><strong>信息</strong></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>notNull</code></td>
+<td>%name%必须是null值</td>
+</tr>
+<tr>
+<td><code>negative</code></td>
+<td>%name%不能为null值</td>
+</tr>
+</tbody>
+</table>
+<h5>代码范例</h5>
+
+<p>检查0是否为null<br>
+```php<br>
+&lt;?php</p>
+
+<p>if ($widget-&gt;isNull(0)) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    echo 'No';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'No'
+</code></pre>
+</body></html>
+
+  </section>
+
+<!-- isNumber
+  ================================================== -->
+  <section id="isNumber">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1><a href="http://twinh.github.io/widget/api/isNumber">isNumber()</a></h1>
+
+<p>检查数据是否为有效数字</p>
+
+<pre><code class="php">bool isNumber( $input )
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
+</ul>
+<h5>错误信息</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th><strong>名称</strong></th>
+<th><strong>信息</strong></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>notNumber</code></td>
+<td>%name%必须是有效的数字</td>
+</tr>
+<tr>
+<td><code>negative</code></td>
+<td>%name%不能是数字</td>
+</tr>
+</tbody>
+</table>
+<h5>代码范例</h5>
+
+<p>检查-123.4是否为数字<br>
+```php<br>
+&lt;?php</p>
+
+<p>if ($widget-&gt;isNumber(-123.4)) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    echo 'No';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'Yes'
+</code></pre>
+</body></html>
+
+  </section>
+
+<!-- isRegex
+  ================================================== -->
+  <section id="isRegex">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1><a href="http://twinh.github.io/widget/api/isRegex">isRegex()</a></h1>
+
+<p>检查数据是否匹配指定的正则表达式</p>
+
+<pre><code class="php">bool isRegex( $input [, $pattern ] )
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
+<li>
+<strong>$pattern</strong> <code>string</code> 校验的正则表达式</li>
+</ul>
+<h5>错误信息</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th><strong>名称</strong></th>
+<th><strong>信息</strong></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>pattern</code></td>
+<td>%name%必须匹配模式"%pattern%"</td>
+</tr>
+<tr>
+<td><code>negative</code></td>
+<td>%name%必须不匹配模式"%pattern%"</td>
+</tr>
+<tr>
+<td><code>notString</code></td>
+<td>%name%必须是字符串</td>
+</tr>
+</tbody>
+</table>
+<h5>代码范例</h5>
+
+<p>检查"abc"是否匹配正则表达式"/d/i"<br>
+```php<br>
+&lt;?php</p>
+
+<p>if ($widget-&gt;isRegex('abc', '/d/i')) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    echo 'No';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'No'
+</code></pre>
+</body></html>
+
+  </section>
+
+<!-- isRequired
+  ================================================== -->
+  <section id="isRequired">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1><a href="http://twinh.github.io/widget/api/isRequired">isRequired()</a></h1>
+
+<p>检查数据是否为空</p>
+
+<pre><code class="php">bool isRequired( $input [, $required ] )
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
+<li>
+<strong>$required</strong> <code>bool</code> true表示数据不可以为空,false表示数据可为空</li>
+</ul>
+<p>用于组合验证,如果允许为空且数据为空,则不对数据进行剩余规则的校验</p>
+
+<h5>错误信息</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th><strong>名称</strong></th>
+<th><strong>信息</strong></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>required</code></td>
+<td>%name%不能为空</td>
+</tr>
+<tr>
+<td><code>notString</code></td>
+<td>%name%必须是字符串</td>
+</tr>
+<tr>
+<td><code>negative</code></td>
+<td>%name%不合法</td>
+</tr>
+</tbody>
+</table>
+<h5>代码范例</h5>
+
+<p>检查null是否为空<br>
+```php<br>
+&lt;?php</p>
+
+<p>if ($widget-&gt;isRequired(null)) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    echo 'No';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'No'
+</code></pre>
+
+<h5>代码范例</h5>
+
+<p>检查null是否为空,第二个参数设为false<br>
+```php<br>
+&lt;?php</p>
+
+<p>if ($widget-&gt;isRequired(null, false)) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    echo 'No';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'Yes'
+</code></pre>
+</body></html>
+
+  </section>
+
+<!-- isStartsWith
+  ================================================== -->
+  <section id="isStartsWith">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1><a href="http://twinh.github.io/widget/api/isStartsWith">isStartsWith()</a></h1>
+
+<p>检查数据是否以指定字符串开头</p>
+
+<pre><code class="php">bool isStartsWith( $input [, $findMe [, $case ] ] )
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
+<li>
+<strong>$findMe</strong> <code>string|array</code> 要查找的字符串,可以是字符串或数组.如果是数组,只要数据以数组中任何一个元素开头就算验证通过</li>
+<li>
+<strong>$case</strong> <code>bool</code> 是否区分大小写,默认为不区分</li>
+</ul>
+<h5>错误信息</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th><strong>名称</strong></th>
+<th><strong>信息</strong></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>notFound</code></td>
+<td>%name%必须以%findMe%开头</td>
+</tr>
+<tr>
+<td><code>negative</code></td>
+<td>%name%不能以%findMe%开头</td>
+</tr>
+<tr>
+<td><code>notString</code></td>
+<td>%name%必须是字符串</td>
+</tr>
+</tbody>
+</table>
+<h5>代码范例</h5>
+
+<p>检查"abc"是否以"C"开头<br>
+```php<br>
+&lt;?php</p>
+
+<p>if ($widget-&gt;isEndsWith('abc', 'C')) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    echo 'No';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'Yes'
+</code></pre>
+
+<h5>代码范例</h5>
+
+<p>以区分大小写的方式,检查"abc"是否以"C"开头<br>
+```php<br>
+&lt;?php</p>
+
+<p>if ($widget-&gt;isEndsWith('abc', 'C', true)) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    echo 'No';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'No'
+</code></pre>
+
+<h5>代码范例</h5>
+
+<p>检查"abc"是否以数组array('a', 'b', 'c')中的任意元素开头<br>
+```php<br>
+&lt;?php</p>
+
+<p>if ($widget-&gt;isEndsWith('abc', array('a', 'b', 'c'))) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    echo 'No';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'Yes'
+</code></pre>
+</body></html>
+
+  </section>
+
+<!-- isType
+  ================================================== -->
+  <section id="isType">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1><a href="http://twinh.github.io/widget/api/isType">isType()</a></h1>
+
+<p>检查数据是否为指定的类型</p>
+
+<pre><code class="php">bool isType( $input [, $type ] )
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
+<li>
+<strong>$type</strong> <code>string</code> 指定的数据类型</li>
+</ul>
+<p>如果<code>$type</code>的值不在下表中,将检查数据是否为<code>$type</code>的实例化对象($input instanceof $type)</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th><strong>值</strong></th>
+<th><strong>名称</strong></th>
+<th><strong>值</strong></th>
+<th><strong>名称</strong></th>
+</tr></thead>
+<tbody>
+<tr>
+<td>array</td>
+<td>数组</td>
+<td>alnum</td>
+<td>字母(a-z)或数字(0-9)</td>
+</tr>
+<tr>
+<td>bool</td>
+<td>布尔</td>
+<td>alpha</td>
+<td>字母</td>
+</tr>
+<tr>
+<td>float</td>
+<td>浮点数</td>
+<td>cntrl</td>
+<td>控制字符</td>
+</tr>
+<tr>
+<td>int</td>
+<td>整型</td>
+<td>digit</td>
+<td>数字</td>
+</tr>
+<tr>
+<td>integer</td>
+<td>整型</td>
+<td>graph</td>
+<td>可显示字符</td>
+</tr>
+<tr>
+<td>null</td>
+<td>NULL</td>
+<td>lower</td>
+<td>小写字母(a-z)</td>
+</tr>
+<tr>
+<td>numeric</td>
+<td>数字</td>
+<td>print</td>
+<td>可打印字符</td>
+</tr>
+<tr>
+<td>object</td>
+<td>对象</td>
+<td>punct</td>
+<td>标点符号</td>
+</tr>
+<tr>
+<td>resource</td>
+<td>资源</td>
+<td>space</td>
+<td>空白字符</td>
+</tr>
+<tr>
+<td>scalar</td>
+<td>标量</td>
+<td>upper</td>
+<td>大写字母(A-Z)</td>
+</tr>
+<tr>
+<td>string</td>
+<td>字符串</td>
+<td>xdigit</td>
+<td>16进制数字</td>
+</tr>
+</tbody>
+</table>
+<h5>错误信息</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th><strong>名称</strong></th>
+<th><strong>信息</strong></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td>%name%必须是%typeName%</td>
+</tr>
+<tr>
+<td><code>negative</code></td>
+<td>%name%不能是%typeName%</td>
+</tr>
+</tbody>
+</table>
+<h5>代码范例</h5>
+
+<p>检查"abc"是否为字符串<br>
+```php<br>
+&lt;?php</p>
+
+<p>if ($widget-&gt;isType('abc', 'string')) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    echo 'No';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'Yes'
+</code></pre>
+
+<h5>代码范例</h5>
+
+<p>检查new ArrayObject()是否为Traversable<br>
+```php<br>
+&lt;?php</p>
+
+<p>if ($widget-&gt;isType(new ArrayObject(), 'Traversable')) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    echo 'No';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'Yes'
+</code></pre>
+</body></html>
+
+  </section>
+
+<!-- isUppercase
+  ================================================== -->
+  <section id="isUppercase">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1><a href="http://twinh.github.io/widget/api/isUppercase">isUppercase()</a></h1>
+
+<p>检查数据是否为大写字符</p>
+
+<pre><code class="php">bool isUppercase( $input )
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
+</ul>
+<h5>错误信息</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th><strong>名称</strong></th>
+<th><strong>信息</strong></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>invalid</code></td>
+<td>%name%不能包含小写字母</td>
+</tr>
+<tr>
+<td><code>negative</code></td>
+<td>%name%不能包含大写字母</td>
+</tr>
+<tr>
+<td><code>notString</code></td>
+<td>%name%必须是字符串</td>
+</tr>
+</tbody>
+</table>
+<h5>代码范例</h5>
+
+<p>检查"abc"是否为大写字符<br>
+```php<br>
+&lt;?php</p>
+
+<p>if ($widget-&gt;isLowercase('abc')) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    echo 'No';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'Yes'
 </code></pre>
 </body></html>
 
