@@ -730,26 +730,47 @@ $id = $widget-&gt;post('id');
   <section id="query">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<pre><code>该微件文档还在紧急编写中,敬请期待!
+<h1>Query</h1>
+
+<p>获取HTTP请求($_GET)数据</p>
+
+<h2>案例</h2>
+
+<h3>获取名称为id的请求数据</h3>
+
+<pre><code class="php">// 假设 $_GET['id'] = 5;
+
+// 返回5
+$id = $widget-&gt;query('id');
 </code></pre>
 
-<h1><a href="http://twinh.github.io/widget/api/query">query()</a></h1>
+<h2>调用方法</h2>
 
-<p>Returns a <em>stringify</em> or user defined($default) parameter value</p>
+<h3>选项</h3>
 
-<h3>Returns a <em>stringify</em> or user defined($default) parameter value</h3>
+<p><em>无</em></p>
 
-<pre><code class="php">string|null query($name, $default)
-</code></pre>
+<h3>方法</h3>
 
-<h5>参数</h5>
+<h4>query($name, $default = null)</h4>
 
-<ul>
-<li>
-<strong>$name</strong> <code>string</code> The parameter name</li>
-<li>
-<strong>$default</strong> <code>mixed</code> The default parameter value if the parameter does not exist</li>
-</ul>
+<p>获取HTTP请求参数($_GET),返回值类型为字符串</p>
+
+<h4>query-&gt;getRaw($name, $default = null)</h4>
+
+<p>获取HTTP请求参数的原始值</p>
+
+<h4>query-&gt;getInt($name, $min = null, $max = null)</h4>
+
+<p>获取HTTP请求参数,返回值类型为整形</p>
+
+<h4>query-&gt;getArray($name, $default = null)</h4>
+
+<p>获取HTTP请求参数,返回值类型为数组</p>
+
+<h4>query-&gt;getInArray($name, array $array)</h4>
+
+<p>获取HTTP请求参数,如果参数的值不在数组中,将返回数组的第一个值</p>
 </body></html>
 
   </section>
@@ -759,26 +780,47 @@ $id = $widget-&gt;post('id');
   <section id="server">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<pre><code>该微件文档还在紧急编写中,敬请期待!
+<h1>Server</h1>
+
+<p>获取服务器运行和环境参数($_SERVER)</p>
+
+<h2>案例</h2>
+
+<h3>获取名称为iSERVER_NAME的服务器运行参数</h3>
+
+<pre><code class="php">// 假设 $_SERVER['SERVER_NAME'] = 'www.example.com';
+
+// 返回www.example.com
+$id = $widget-&gt;server('SERVER_NAME');
 </code></pre>
 
-<h1><a href="http://twinh.github.io/widget/api/server">server()</a></h1>
+<h2>调用方法</h2>
 
-<p>Returns a <em>stringify</em> or user defined($default) parameter value</p>
+<h3>选项</h3>
 
-<h3>Returns a <em>stringify</em> or user defined($default) parameter value</h3>
+<p><em>无</em></p>
 
-<pre><code class="php">string|null server($name, $default)
-</code></pre>
+<h3>方法</h3>
 
-<h5>参数</h5>
+<h4>server($name, $default = null)</h4>
 
-<ul>
-<li>
-<strong>$name</strong> <code>string</code> The parameter name</li>
-<li>
-<strong>$default</strong> <code>mixed</code> The default parameter value if the parameter does not exist</li>
-</ul>
+<p>获取服务器参数($_SERVER),返回值类型为字符串</p>
+
+<h4>server-&gt;getRaw($name, $default = null)</h4>
+
+<p>获取服务器参数的原始值</p>
+
+<h4>server-&gt;getInt($name, $min = null, $max = null)</h4>
+
+<p>获取服务器参数,返回值类型为整形</p>
+
+<h4>server-&gt;getArray($name, $default = null)</h4>
+
+<p>获取服务器参数,返回值类型为数组</p>
+
+<h4>server-&gt;getInArray($name, array $array)</h4>
+
+<p>获取服务器参数,如果参数的值不在数组中,将返回数组的第一个值</p>
 </body></html>
 
   </section>
@@ -817,229 +859,302 @@ $id = $widget-&gt;post('id');
   <section id="upload">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/upload">upload()</a></h1>
+<h1>Upload</h1>
 
 <p>保存客户端上传的文件到指定目录</p>
 
-<pre><code class="php">bool upload( $options )
+<h2>案例</h2>
+
+<h3>上传单个文件</h3>
+
+<pre><code class="php">$result = $widget-&gt;upload();
+if ($result) {
+    echo 'Yes';
+} else {
+    print_r($widget-&gt;upload-&gt;getMessages());
+}
 </code></pre>
 
-<h5>参数</h5>
+<h3>上传图片文件,限定宽度和高度小于2000px</h3>
 
-<ul>
-<li>$options 上传微件的配置选项
+<pre><code class="php">$result = $widget-&gt;upload(array(
+    'maxHeight' =&gt; 2000,
+    'maxWidth' =&gt; 2000
+));
 
-<ul>
-<li> <strong>field</strong> <code>string</code> 上传表单中,文件上传控件name的值,留空将自动获取第一个name的值</li>
-<li> <strong>dir</strong> <code>string</code> 文件保存的目录,默认是<code>uploads</code>
-</li>
-<li> <strong>fileName</strong> <code>string</code> 文件保存时的名称(不包括扩展),留空表示使用原来的名称保存</li>
-<li> <strong>isImage</strong> <code>bool</code> 是否检查上传的文件为图片,默认为否</li>
-<li> <strong>maxSize</strong> <code>int</code> 允许的文件最大字节数</li>
-<li> <strong>minSize</strong> <code>int</code> 允许的文件最小字节数</li>
-<li> <strong>exts</strong> <code>string|array</code> 允许的文件扩展名</li>
-<li> <strong>excludeExts</strong> <code>string|array</code> 不允许的文件扩展名</li>
-<li> <strong>mimeTypes</strong> <code>string|array</code> 允许的文件媒体类型</li>
-<li> <strong>excludeMimeTypes</strong> <code>string|array</code> 不允许的文件媒体类型</li>
-<li> <strong>maxWidth</strong> <code>int</code> 允许的图片最大宽度</li>
-<li> <strong>minWidth</strong> <code>int</code> 允许的图片最小宽度</li>
-<li> <strong>maxHeight</strong> <code>int</code> 允许的图片最大高度</li>
-<li> <strong>minHeight</strong> <code>int</code> 允许的图片最小高度</li>
-</ul>
-</li>
-</ul>
-<p>上传微件是图片(<a href="isImage.md">isImage</a>)和文件(<a href="isFile.md">isFile</a>)验证器的子类,所以支持验证器的所有特性,如获取错误信息等.</p>
+if ($result) {
+    echo 'Yes';
+} else {
+    print_r($widget-&gt;upload-&gt;getMessages());
+}
+</code></pre>
 
-<p>上传微件是针对一个文件上传,如果需要在一次请求中批量上传文件,只需多次调用即可,详情请查看下面的例子</p>
+<h3>在一个请求中批量上传文件</h3>
 
-<h5>错误信息</h5>
+<pre><code class="php">for ($i = 0; $i &lt; 3; $i++) {
+    $result = $widget-&gt;upload(array(
+        'field' =&gt; 'upload_' . $i
+    ));
+    if ($result) {
+        echo '文件' . $i . '上传成功';
+    } else {
+        print_r($widget-&gt;upload-&gt;getMessages());
+    }
+}
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
 </tr></thead>
 <tbody>
 <tr>
-<td><code>postSize</code></td>
+<td>field</td>
+<td>string</td>
+<td>null</td>
+<td>上传表单中,文件上传控件name的值,留空将自动获取第一个name的值</td>
+</tr>
+<tr>
+<td>dir</td>
+<td>string</td>
+<td>uploads</td>
+<td>文件保存的目录,默认是<code>uploads</code>
+</td>
+</tr>
+<tr>
+<td>fileName</td>
+<td>string</td>
+<td>nulll</td>
+<td>文件保存时的名称(不包括扩展),留空表示使用原来的名称保存</td>
+</tr>
+<tr>
+<td>isImage</td>
+<td>bool</td>
+<td>false</td>
+<td>是否检查上传的文件为图片,默认为否</td>
+</tr>
+<tr>
+<td>maxSize</td>
+<td>int</td>
+<td>0</td>
+<td>允许的文件最大字节数,允许使用类似<code>10.5MB</code>, <code>500KB</code>的文件大小值</td>
+</tr>
+<tr>
+<td>minSize</td>
+<td>int</td>
+<td>0</td>
+<td>允许的文件最小字节数,允许使用类似<code>10.5MB</code>, <code>500KB</code>的文件大小值</td>
+</tr>
+<tr>
+<td>exts</td>
+<td>array</td>
+<td>array()</td>
+<td>允许的文件扩展名</td>
+</tr>
+<tr>
+<td>excludeExts</td>
+<td>array</td>
+<td>array()</td>
+<td>不允许的文件扩展名</td>
+</tr>
+<tr>
+<td>mimeTypes</td>
+<td>array</td>
+<td>array()</td>
+<td>允许的文件媒体类型</td>
+</tr>
+<tr>
+<td>excludeMimeTypes</td>
+<td>array</td>
+<td>array()</td>
+<td>不允许的文件媒体类型</td>
+</tr>
+<tr>
+<td>maxWidth</td>
+<td>int</td>
+<td>0</td>
+<td>允许的图片最大宽度</td>
+</tr>
+<tr>
+<td>maxHeight</td>
+<td>int</td>
+<td>0</td>
+<td>允许的图片最大高度</td>
+</tr>
+<tr>
+<td>minWidth</td>
+<td>int</td>
+<td>0</td>
+<td>允许的图片最小宽度</td>
+</tr>
+<tr>
+<td>minHeight</td>
+<td>int</td>
+<td>0</td>
+<td>允许的图片最小高度</td>
+</tr>
+<tr>
+<td>postSizeMessage</td>
+<td>string</td>
 <td>没有文件被上传,或您上传的总文件大小超过%postMaxSize%</td>
+<td>-</td>
 </tr>
 <tr>
-<td><code>noFile</code></td>
+<td>noFileMessage</td>
+<td>string</td>
 <td>没有文件被上传</td>
+<td>-</td>
 </tr>
 <tr>
-<td><code>formLimit</code></td>
+<td>formLimitMessage</td>
+<td>string</td>
 <td>%name%的大小超过HTML表单设置</td>
+<td>-</td>
 </tr>
 <tr>
-<td><code>partial</code></td>
+<td>partialMessage</td>
+<td>string</td>
 <td>%name%未完全上传,请再试一遍</td>
+<td>-</td>
 </tr>
 <tr>
-<td><code>noTmpDir</code></td>
+<td>noTmpDirMessage</td>
+<td>string</td>
 <td>未找到上传文件的临时目录</td>
+<td>-</td>
 </tr>
 <tr>
-<td><code>cantWrite</code></td>
+<td>cantWriteMessage</td>
+<td>string</td>
 <td>无法保存%name%</td>
+<td>-</td>
 </tr>
 <tr>
-<td><code>extension</code></td>
+<td>extensionMessage</td>
+<td>string</td>
 <td>文件上传被扩展中止</td>
+<td>-</td>
 </tr>
 <tr>
-<td><code>notUploadedFile</code></td>
+<td>notUploadedFileMessage</td>
+<td>string</td>
 <td>没有文件被上传,请选择一个文件上传</td>
+<td>-</td>
 </tr>
 <tr>
-<td><code>cantMove</code></td>
+<td>cantMoveMessage</td>
+<td>string</td>
 <td>无法移动上传的文件</td>
+<td>-</td>
 </tr>
 <tr>
-<td><code>notDetected</code></td>
+<td>notDetectedMessage</td>
+<td>string</td>
 <td>%name%不是有效的图片,或是无法检测到图片的尺寸</td>
+<td>-</td>
 </tr>
 <tr>
-<td><code>widthTooBig</code></td>
+<td>widthTooBigMessage</td>
+<td>string</td>
 <td>%name%的宽度太大(%width%px), 允许的最大宽度为%maxWidth%px</td>
+<td>-</td>
 </tr>
 <tr>
-<td><code>widthTooSmall</code></td>
+<td>widthTooSmallMessage</td>
+<td>string</td>
 <td>%name%的宽度太小(%width%px),允许的最小宽度应为%minWidth%px</td>
+<td>-</td>
 </tr>
 <tr>
-<td><code>heightTooBig</code></td>
+<td>heightTooBigMessage</td>
+<td>string</td>
 <td>%name%的高度太大(%height%px), 允许的最大高度为%maxHeight%px</td>
+<td>-</td>
 </tr>
 <tr>
-<td><code>heightTooSmall</code></td>
+<td>heightTooSmallMessage</td>
+<td>string</td>
 <td>%name%的高度太小(%height%px), 允许的最小高度为%minHeight%px</td>
+<td>-</td>
 </tr>
 <tr>
-<td><code>notFound</code></td>
+<td>notFoundMessage</td>
+<td>string</td>
 <td>%name%不存在或不可读</td>
+<td>-</td>
 </tr>
 <tr>
-<td><code>maxSize</code></td>
+<td>maxSizeMessage</td>
+<td>string</td>
 <td>%name%太大了(%sizeString%),允许的最大文件大小为%maxSizeString%</td>
+<td>-</td>
 </tr>
 <tr>
-<td><code>minSize</code></td>
+<td>minSizeMessage</td>
+<td>string</td>
 <td>%name%太小了(%sizeString%),允许的最小文件大小为%minSizeString%</td>
+<td>-</td>
 </tr>
 <tr>
-<td><code>exts</code></td>
+<td>extsMessage</td>
+<td>string</td>
 <td>%name%的扩展名(%ext%)不合法,只允许扩展名为:%exts%</td>
+<td>-</td>
 </tr>
 <tr>
-<td><code>excludeExts</code></td>
+<td>excludeExtsMessage</td>
+<td>string</td>
 <td>%name%的扩展名(%ext%)不合法,不允许扩展名为:%excludeExts%</td>
+<td>-</td>
 </tr>
 <tr>
-<td><code>mimeTypeNotDetected</code></td>
+<td>mimeTypeNotDetectedMessage</td>
+<td>string</td>
 <td>无法检测%name%的媒体类型</td>
+<td>-</td>
 </tr>
 <tr>
-<td><code>mimeTypes</code></td>
+<td>mimeTypesMessage</td>
+<td>string</td>
 <td>%name%的媒体类型不合法</td>
+<td>-</td>
 </tr>
 <tr>
-<td><code>excludeMimeTypes</code></td>
+<td>excludeMimeTypesMessage</td>
+<td>string</td>
 <td>%name%的媒体类型不合法</td>
+<td>-</td>
 </tr>
 <tr>
-<td><code>negative</code></td>
+<td>negativeMessage</td>
+<td>string</td>
 <td>%name%必须是不存在的文件</td>
+<td>-</td>
 </tr>
 <tr>
-<td><code>notString</code></td>
+<td>notStringMessage</td>
+<td>string</td>
 <td>%name%必须是字符串</td>
+<td>-</td>
 </tr>
 </tbody>
 </table>
-<h5>代码范例</h5>
+<h3>方法</h3>
 
-<p>上传文件<br>
-```php<br>
-&lt;?php</p>
+<h4>upload($options)</h4>
 
-<p>$result = $widget-&gt;upload();<br>
-if ($result) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    print_r($widget-&gt;upload-&gt;getMessages());<br>
-}</p>
+<p>上传一个文件</p>
 
-<pre><code>##### 运行结果
-```php
-'Array
-(
-    [postSize] =&gt; Seems that the total file size is larger than the max size (20M) of allowed post data, please check the size of your file
-)
-'
-</code></pre>
+<h4>upload-&gt;getMessages()</h4>
 
-<h5>代码范例</h5>
-
-<p>指定上传的文件为图片,宽度和高度小于2000px<br>
-```php<br>
-&lt;?php</p>
-
-<p>$result = $widget-&gt;upload(array(<br>
-    'maxHeight' =&gt; 2000,<br>
-    'maxWidth' =&gt; 2000<br>
-));</p>
-
-<p>if ($result) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    print_r($widget-&gt;upload-&gt;getMessages());<br>
-}</p>
-
-<pre><code>##### 运行结果
-```php
-'Array
-(
-    [postSize] =&gt; Seems that the total file size is larger than the max size (20M) of allowed post data, please check the size of your file
-)
-'
-</code></pre>
-
-<h5>代码范例</h5>
-
-<p>在一个请求中批量上传文件<br>
-```php<br>
-&lt;?php</p>
-
-<p>for ($i = 0; $i &lt; 3; $i++) {<br>
-    $result = $widget-&gt;upload(array(<br>
-        'field' =&gt; 'upload_' . $i<br>
-    ));<br>
-    if ($result) {<br>
-        echo '文件' . $i . '上传成功';<br>
-    } else {<br>
-        print_r($widget-&gt;upload-&gt;getMessages());<br>
-    }<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
-
-<pre><code class="php">'Array
-(
-    [postSize] =&gt; Seems that the total file size is larger than the max size (20M) of allowed post data, please check the size of your file
-)
-Array
-(
-    [postSize] =&gt; Seems that the total file size is larger than the max size (20M) of allowed post data, please check the size of your file
-)
-Array
-(
-    [postSize] =&gt; Seems that the total file size is larger than the max size (20M) of allowed post data, please check the size of your file
-)
-'
-</code></pre>
+<p>获取错误信息</p>
 </body></html>
 
   </section>
