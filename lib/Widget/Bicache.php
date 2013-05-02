@@ -26,7 +26,7 @@ class Bicache extends AbstractCache
      */
     protected $deps = array(
         'master' => 'apc',
-        'slave' => 'file',
+        'slave' => 'fileCache',
     );
 
     /**
