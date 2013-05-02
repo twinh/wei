@@ -106,11 +106,13 @@ class DbCache extends AbstractCache
         );
         
         if ($this->exists($key)) {
-            $result = $this->conn->update($this->table, $data, $identifier);
+            // In mysql, the rowCount method return 0 when data is not modified, 
+            // so check errorCode to make sure it executed success
+            $result = $this->conn->update($this->table, $data, $identifier) || !$this->conn->errorCode();
         } else {
             $result = $this->conn->insert($this->table, $data + $identifier);
         }
-        
+
         return (bool)$result;
     }
     
