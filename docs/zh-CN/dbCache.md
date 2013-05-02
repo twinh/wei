@@ -3,7 +3,7 @@ DbCache
 
 设置或获取一项缓存,缓存数据存储于数据库中
 
-目前支持`sqlite`,`mysql`,`pgsql`,`sqlsrv`/`dblib`(不稳定),`oci`(不稳定)
+dbCache微件依赖于<a href="#db">db</a>微件
 
 案例
 ----
@@ -29,16 +29,22 @@ $widget->dbCache('key', 'value', 60);
 
 ### 选项
 
-*无*
+| 名称      | 类型      | 默认值    | 说明               |
+|-----------|-----------|-----------|--------------------|
+| table     | string    | cache     | 缓存数据表名称     |
 
 ### 方法
 
 #### dbCache( $key, $value [ $expire ] )
 设置缓存的值
+
 ##### 参数
-* **$key** `string` 缓存的键名
-* **$value** `mixed` 缓存的值,允许任意类型
-* **$expire** `int` 缓存的有效期,默认为0秒,表示永不过期
+
+| 名称      | 类型      | 默认值    | 说明                                  |
+|-----------|-----------|-----------|---------------------------------------|
+| $key      | string    | 无        | 缓存的键名                            |
+| $value    | mixed     | 无        | 缓存的值,允许任意类型                 |
+| $expire   | int       | 0         | 缓存的有效期,默认为0秒,表示永不过期   |
 
 #### dbCache( $key )
 获取指定名称的缓存
@@ -59,7 +65,7 @@ $widget->dbCache('key', 'value', 60);
 增加一项缓存,如果缓存已存在,返回false
 
 ### dbCache->replace($key, $value)
-替换一项缓存,如果缓存 **不** 存在,返回false
+替换一项缓存,如果缓存不存在,返回false
 
 ### dbCache->increment($key, $offset = 1)
 增大一项缓存的值
