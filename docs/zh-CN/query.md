@@ -11,7 +11,7 @@ Query
 // 假设 $_GET['id'] = 5;
 
 // 返回5
-$id = $widget->get('id');
+$id = $widget->query('id');
 ```
 
 调用方法
@@ -23,17 +23,17 @@ $id = $widget->get('id');
 
 ### 方法
 
-#### get($name, $default = null)
+#### query($name, $default = null)
 获取HTTP请求参数($_GET),返回值类型为字符串
 
-#### get->getRaw($name, $default = null)
+#### query->getRaw($name, $default = null)
 获取HTTP请求参数的原始值
 
-#### get->getInt($name, $min = null, $max = null)
+#### query->getInt($name, $min = null, $max = null)
 获取HTTP请求参数,返回值类型为整形
 
-#### get->getArray($name, $default = null)
+#### query->getArray($name, $default = null)
 获取HTTP请求参数,返回值类型为数组
 
-#### get->getInArray($name, array $array)
+#### query->getInArray($name, array $array)
 获取HTTP请求参数,如果参数的值不在数组中,将返回数组的第一个值
