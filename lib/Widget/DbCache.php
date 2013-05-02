@@ -7,8 +7,6 @@
  */
 namespace Widget;
 
-use PDO;
-use PDOException;
 use Widget\Exception;
 use Widget\Cache\AbstractCache;
 
@@ -28,46 +26,9 @@ class DbCache extends AbstractCache
     protected $table = 'cache';
 
     /**
-     * The database username
-     *
-     * @var string
+     * @var \Doctrine\DBAL\Connection
      */
-    protected $user;
-
-    /**
-     * The database password
-     *
-     * @var string
-     */
-    protected $password;
-
-    /**
-     * The dsn parameter for PDO constructor
-     *
-     * @var string
-     */
-    protected $dsn = 'sqlite:cache.sqlite';
-
-    /**
-     * The PDO object
-     *
-     * @var \PDO
-     */
-    protected $dbh;
-
-    /**
-     * The PDOStatement object
-     *
-     * @var \PDOStatement
-     */
-    protected $stmt;
-
-    /**
-     * The sql driver object
-     *
-     * @var Cache\Db\DriverInterface
-     */
-    protected $driver;
+    protected $conn;
     
     /**
      * Constructor
@@ -77,6 +38,8 @@ class DbCache extends AbstractCache
     public function __construct(array $options = array())
     {
         parent::__construct($options);
+        
+        $this->conn = $this->db();
 
         $this->connect();
     }
@@ -88,35 +51,22 @@ class DbCache extends AbstractCache
      */
     public function connect()
     {
-        if (!$this->dbh) {
-            $this->dbh = new PDO($this->dsn, $this->user, $this->password);
-            $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->dbh->setAttribute(PDO::ATTR_STRINGIFY_FETCHES, true);
+        $db = $this->db();
+        
+        $sm = $db->getSchemaManager();
+        
+        if (!$sm->tablesExist($this->table)) {
+            $schema = $sm->createSchema();
+            $table = $schema->createTable($this->table);
+            $table->addColumn('id', 'string');
+            $table->addColumn('value', 'string');
+            $table->addColumn('expire', 'integer');
+            $table->addColumn('lastModified', 'integer');
+            $table->setPrimaryKey(array('id'));
+            $sm->createTable($table);
         }
-
-        // Get driver and load sql queries
-        $driver = $this->dbh->getAttribute(PDO::ATTR_DRIVER_NAME);
-        $class = 'Widget\Cache\Db\\' . ucfirst($driver);
-        if (class_exists($class)) {
-            $this->driver = new $class;
-        } else {
-            throw new Exception\UnsupportedException(sprintf('Unsupport driver "%s"', $driver));
-        }
-
-        // Execute prepare sql query
-        if ($prepare = $this->driver->getSql('prepare')) {
-            $this->query($prepare);
-        }
-
-        // TODO use CREATE IF NOT EXISTS
-        // Check if the table exists, if not, create the table
-        try {
-            if (!$this->query($this->driver->getSql('checkTable'))) {
-                $this->query($this->driver->getSql('create'));
-            }
-        } catch (PDOException $e) {
-            $this->query($this->driver->getSql('create'));
-        }
+        
+        return $this;
     }
 
     /**
@@ -136,17 +86,9 @@ class DbCache extends AbstractCache
      */
     public function get($key)
     {
-        $result = $this->query($this->driver->getSql('get'), array(
-            ':id' => $key,
-            ':expire' => time(),
-        ));
+        $result = $this->conn->fetchAssoc("SELECT * FROM {$this->table} WHERE id = ?", array($key));
 
-        if ($result) {
-            $row = $this->stmt->fetch(PDO::FETCH_ASSOC);
-            return $row ? unserialize($row['value']) : false;
-        }
-
-        return false;
+        return $result ? unserialize($result['value']) : false;
     }
     
     /**
@@ -154,16 +96,22 @@ class DbCache extends AbstractCache
      */
     public function set($key, $value, $expire = 0)
     {
-        $this->remove($key);
-
-        $result = $this->query($this->driver->getSql('set'), array(
-            ':id' => $key,
-            ':value' => serialize($value),
-            ':lastModified' => time(),
-            ':expire' => $expire ? time() + $expire : 2147483647
-        ));
-
-        return $result;
+        $data = array(
+            'value' => serialize($value),
+            'lastModified' => time(),
+            'expire' => $expire ? time() + $expire : 2147483647
+        );
+        $identifier = array(
+            'id' => $key
+        );
+        
+        if ($this->exists($key)) {
+            $result = $this->conn->update($this->table, $data, $identifier);
+        } else {
+            $result = $this->conn->insert($this->table, $data + $identifier);
+        }
+        
+        return (bool)$result;
     }
     
     /**
@@ -171,30 +119,15 @@ class DbCache extends AbstractCache
      */
     public function remove($key)
     {
-        $result = $this->query($this->driver->getSql('remove'), array(
-            ':id' => $key,
-        ));
-
-        return $result;
+        return (bool)$this->conn->delete($this->table, array('id' => $key));
     }
     
     /**
      * {@inheritdoc}
-     * @todo better way
      */
     public function exists($key)
     {
-        $result = $this->query($this->driver->getSql('get'), array(
-            ':id' => $key,
-            ':expire' => time(),
-        ));
-
-        if ($result) {
-            $row = $this->stmt->fetch(PDO::FETCH_ASSOC);
-            return $row ? true : false;
-        }
-
-        return false;
+        return (bool)$this->conn->fetchArray("SELECT id FROM {$this->table} WHERE id = ?", array($key));
     }
 
     /**
@@ -202,17 +135,10 @@ class DbCache extends AbstractCache
      */
     public function add($key, $value, $expire = 0)
     {
-        try {
-            $result = $this->query($this->driver->getSql('set'), array(
-                ':id' => $key,
-                ':value' => serialize($value),
-                ':lastModified' => time(),
-                ':expire' => $expire ? time() + $expire : 2147483647
-            ));
-
-            return $result;
-        } catch (PDOException $e) {
+        if ($this->exists($key)) {
             return false;
+        } else {
+            return $this->set($key, $value, $expire);
         }
     }
 
@@ -221,14 +147,11 @@ class DbCache extends AbstractCache
      */
     public function replace($key, $value, $expire = 0)
     {
-        $this->query($this->driver->getSql('replace'), array(
-            ':id' => $key,
-            ':value' => serialize($value),
-            ':lastModified' => time(),
-            ':expire' => $expire ? time() + $expire : 2147483647
-        ));
-
-        return (bool) $this->stmt->rowCount();
+        if (!$this->exists($key)) {
+            return false;
+        } else {
+            return $this->set($key, $value, $expire);
+        }
     }
 
     /**
@@ -256,42 +179,6 @@ class DbCache extends AbstractCache
      */
     public function clear()
     {
-        return $this->query($this->driver->getSql('clear'));
-    }
-
-    /**
-     * Execute a sql query
-     *
-     * @param  string $sql  sql query from driver
-     * @param  array  $args args for prepare
-     * @return bool
-     */
-    public function query($sql, $args = array())
-    {
-        $sql = sprintf($sql, $this->table);
-        
-        $this->stmt = $this->dbh->prepare($sql);
-        
-        return $this->stmt->execute($args);
-    }
-
-    /**
-     * Get the PDO object
-     *
-     * @return \PDO
-     */
-    public function getDbh()
-    {
-        return $this->dbh;
-    }
-    
-    /**
-     * Get current database cache driver
-     *
-     * @return Cache\Db\DriverInterface
-     */
-    public function getDriver()
-    {
-        return $this->driver;
+        return (bool)$this->conn->executeUpdate("DELETE FROM {$this->table}");
     }
 }
