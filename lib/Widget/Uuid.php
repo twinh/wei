@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * Generate a RANDOM UUID(universally unique identifier)
+ * A util widget that generates a RANDOM UUID(universally unique identifier)
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */

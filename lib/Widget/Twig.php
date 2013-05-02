@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\View\AbstractView;
 
 /**
- * The twig widget
+ * A wrapper widget for Twig object
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
@@ -73,7 +73,7 @@ class Twig extends AbstractView
     }
 
     /**
-     * Returns \Twig_Environment object or render a template
+     * Returns \Twig_Environment object or render a Twig template
      * 
      * if NO parameter provied, the invoke method will return the 
      * \Twig_Environment object. otherwise, call the render method

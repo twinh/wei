@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * The translator widget
+ * A translator widget
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
@@ -44,7 +44,7 @@ class T extends AbstractWidget
     protected $files = array();
     
     /**
-     * Invoker
+     * Translate the message
      * 
      * @param string $message
      * @param array $parameters

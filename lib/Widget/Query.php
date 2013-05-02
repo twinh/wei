@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * The URL query parameters ($_GET) widget
+ * A widget that handles the URL query parameters ($_GET)
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Request $request The HTTP request widget

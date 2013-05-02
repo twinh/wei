@@ -12,7 +12,7 @@ use Widget\Validator\Image;
 use Widget\Validator\File as FileValidator;
 
 /**
- * The widget that handle file upload
+ * A widget that handles the uploaded files
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Request $request The HTTP request widget

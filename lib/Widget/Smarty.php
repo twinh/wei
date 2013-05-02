@@ -64,7 +64,7 @@ class Smarty extends AbstractView
     }
     
     /**
-     * Returns \Smarty object or render a template
+     * Returns the internal Smarty object or render a Smarty template
      * 
      * if NO parameter provied, the invoke method will return the \Smarty 
      * object otherwise, call the render method

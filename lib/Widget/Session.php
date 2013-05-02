@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * The session widget
+ * A widget that session parameters ($_SESSION)
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */

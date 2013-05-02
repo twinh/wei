@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * The redirect response widget
+ * A widget that send a redirect response
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @method      Header header(string $name, string|array $values) Set the header value

@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * The server and execution environment parameters ($_SERVER) widget
+ * A widget that handles the server and execution environment parameters ($_SERVER)
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Request $request The HTTP request widget

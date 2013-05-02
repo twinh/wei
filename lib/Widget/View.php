@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\View\AbstractView;
 
 /**
- * The view widget
+ * A widget that use to render PHP template
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
@@ -66,7 +66,7 @@ class View extends AbstractView
     }
 
     /**
-     * Returns view widget or render a template
+     * Returns view widget or render a PHP template
      * 
      * if NO parameter provied, the invoke method will return the viw widget. 
      * otherwise, call the render method

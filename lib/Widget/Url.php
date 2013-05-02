@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * A widget helper to build URL
+ * A util widget to build URL
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Router $router Router

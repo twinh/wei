@@ -73,6 +73,39 @@ require_once 'WidgetInterface.php';
  * @method   string     pinyin($word) Converts Chinese words to phonetic alphabets
  * @property Post       $post A widget that handles the HTTP request parameters ($_POST)
  * @method   string     post($name, $default = null) Returns a stringify rquest parameter value
+ * @property Query      $query A widget that handles the URL query parameters ($_GET)
+ * @method   string     query($name, $default = null) Returns a stringify URL query parameter value
+ * @property Redirect   $redirect A widget that send a redirect response
+ * @method   Redirect   redirect($url = null, $status = 302, array $options = array()) Send a redirect response
+ * @property redis      $redis A cache widget base on Redis
+ * @method   mixed      redis($key, $value = null, $expire = 0) Retrieve or store an item by Redis
+ * @property Request    $request A widget that handles the HTTP request Data
+ * @method   mixed      request($name, $default = null) Returns a stringify rquest parameter value
+ * @property Response   $response A widget that send the HTTP response
+ * @method   Response   response($content = null, $status = null) Send response header and content
+ * @property Router     $router A widget that build a simple REST application
+ * @method   Router     router($pathInfo = null, $method = null) Run the application
+ * @property Server     $server A widget that handles the server and execution environment parameters ($_SERVER)
+ * @method   string     server($name, $default = null) Returns a stringify server or execution environment parameter value
+ * @property Session    $session A widget that session parameters ($_SESSION)
+ * @method   mixed      session($name, $default = null) Returns a stringify session parameter value
+ * @property Smarty     $smarty A wrapper widget for Smarty object
+ * @method   mixed      smarty($name = null, $vars = array()) Returns the internal Smarty object or render a Smarty template
+ * @property T          $t A translator widget
+ * @method   string     t($message, array $parameters = array()) Translate the message
+ * @property Twig       $twig A wrapper widget for Twig object
+ * @method   mixed      twig($name = null, $vars = array()) Returns \Twig_Environment object or render a Twig template
+ * @property Upload     $upload A widget that handles the uploaded files
+ * @method   bool       upload(array $options = array() Upload a file
+ * @property Url        $url A util widget to build URL
+ * @method   string     url($uri) Build URL by specified uri and parameters
+ * @property Uuid       $uuid A util widget that generates a RANDOM UUID(universally unique identifier)
+ * @method   string     uuid() generates a RANDOM UUID(universally unique identifier)
+ * @method   Validator  validate(array $option) Create a new validator and validate by specified options
+ * @property View       $view A widget that use to render PHP template
+ * @method   string     view($name = null, $vars = array()) Returns view widget or render a PHP template
+ * @property Website    $website A pure configuration widget for your website
+ * @method   string     website($name) Returns the value of website configuration
  */
 abstract class AbstractWidget implements WidgetInterface
 {

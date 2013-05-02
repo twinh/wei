@@ -11,7 +11,7 @@ namespace Widget;
 use Widget\Cache\AbstractCache;
 
 /**
- * The redis cache widget
+ * A cache widget base on Redis
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
