@@ -103,7 +103,6 @@ class DbCache extends AbstractCache
             throw new Exception\UnsupportedException(sprintf('Unsupport driver "%s"', $driver));
         }
 
-        // TODO use pdo option
         // Execute prepare sql query
         if ($prepare = $this->driver->getSql('prepare')) {
             $this->query($prepare);
@@ -270,9 +269,9 @@ class DbCache extends AbstractCache
     public function query($sql, $args = array())
     {
         $sql = sprintf($sql, $this->table);
-
+        
         $this->stmt = $this->dbh->prepare($sql);
-
+        
         return $this->stmt->execute($args);
     }
 

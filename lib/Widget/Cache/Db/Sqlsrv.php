@@ -28,7 +28,6 @@ class Sqlsrv extends AbstractDriver
         'set' => 'INSERT INTO %s (id, value, lastModified, expire) VALUES (:id, :value, :lastModified, :expire)',
         'remove' => 'DELETE FROM %s WHERE id = :id',
         'replace' => 'UPDATE %s SET value = :value, lastModified = :lastModified, expire = :expire WHERE id = :id',
-        'increment' => 'UPDATE %s SET value = CAST(value AS int) + :offset, lastModified = :lastModified WHERE id = :id',
         'clear' => 'DELETE FROM %s',
         'drop' => 'DROP TABLE %s',
     );
