@@ -8,7 +8,6 @@
 
 namespace Widget;
 
-use Widget\Event\EventInterface;
 use Widget\Event\Event;
 
 /**
@@ -64,11 +63,11 @@ class EventManager extends AbstractWidget
      * @param null|WidgetInterface $widget If the widget contains the 
      *                                     $type property, the event manager 
      *                                     will trigger it too
-     * @return Event\EventInterface The event object
+     * @return Event\Event The event object
      */
     public function __invoke($type, $args = array(), WidgetInterface $widget = null)
     {
-        if ($type instanceof EventInterface) {
+        if ($type instanceof Event) {
             $event      = $type;
             $type       = $event->getType();
             $namespaces = $event->getNamespaces();
@@ -225,7 +224,7 @@ class EventManager extends AbstractWidget
     /**
      * Create a new event
      *
-     * @return Event\EventInterface
+     * @return Event\Event
      * @param array $namespaces
      * @todo check interface
      */

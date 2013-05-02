@@ -14,7 +14,7 @@ use Widget\Response;
  * A widget to build simple mvc application
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @method      Event\EventInterface trigger(string $eventName) Trigger a event
+ * @method      Event\Event trigger(string $eventName) Trigger a event
  * @method      Response response(string $content, int $status = 200) Send headers and output content
  * @property    callable $404 The 404 event handler
  * @property    View\ViewInterface $view The view widget, instance of \Widget\Viewable interface
