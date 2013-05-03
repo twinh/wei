@@ -10,6 +10,7 @@ API 参考目录
 
 #### 缓存
 * [apc](apc.md) - APC缓存
+* [couchbase](couchbase.md) - Couchbase缓存
 * [dbCache](dbCache.md) - 数据库缓存
 * [fileCache](fileCache.md) - 文件缓存
 * [memcache](memcache.md) - Memcachce缓存
