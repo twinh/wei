@@ -14,18 +14,53 @@ use Widget\Cache\AbstractCache;
  * A cache widget base on Couchbase
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @link https://github.com/couchbase/php-ext-couchbase
+ * @link        https://github.com/couchbase/php-ext-couchbase
  */
 class Couchbase extends AbstractCache
 {
+    /**
+     * An array of hostnames[:port] where the Couchbase cluster is running. The 
+     * port number is optional (and only needed if you're using a non-standard 
+     * port).
+     * 
+     * @var array|string
+     */
+    protected $hosts = '127.0.0.1:8091';
+    
+    /**
+     * The username used for authentication to the cluster
+     * 
+     * @var string 
+     */
+    protected $user;
+    
+    /**
+     * The password used to authenticate to the cluster
+     * 
+     * @var string 
+     */
+    protected $password;
+    
+    /**
+     * The name of the bucket to connect to
+     * 
+     * @var string
+     */
+    protected $bucket = 'default';
+    
+    /**
+     * If a persistent object should be used or not
+     * 
+     * @var bool
+     */
+    protected $persistent = true;
+    
     /**
      * The couchbase object
      *
      * @var \Couchbase
      */
     protected $object;
-    
-    
     
     /**
      * Constructor
@@ -34,11 +69,11 @@ class Couchbase extends AbstractCache
      */
     public function __construct(array $options = array())
     {
-        $this->setOption($options);
+        parent::__construct($options);
 
-        $this->object = new \Couchbase('127.0.0.1:8091', '', '', 'default');
-        
-        parent::__construct();
+        if (!$this->object) {
+            $this->object = new \Couchbase($this->hosts, $this->user, $this->password, $this->bucket, $this->persistent);
+        }
     }
     
     /**
@@ -122,7 +157,7 @@ class Couchbase extends AbstractCache
      */
     public function decrement($key, $offset = 1)
     {
-        return $this->object->decrement($key, $offset);
+        return $this->object->increment($key, -$offset);
     }
 
     /**
