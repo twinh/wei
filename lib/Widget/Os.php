@@ -13,65 +13,43 @@ namespace Widget;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Request $request A widget that handles the HTTP request data
+ * 
+ * @method      bool inIe() Check if the user is browsing in Internet Explorer browser
+ * @method      bool inChrome() Check if the user is browsing in Chrome browser
+ * @method      bool inFirefox() Check if the user is browsing in Firefox browser
+ * 
+ * @method      bool inIos()  Check if the device is running on Apple's iOS platform
+ * @method      bool inAndroid() Check if the device is running on Google's Android platform
+ * @method      bool inWindowsPhone() Check if the device is running on Windows Phone platform
+ * 
+ * @method      bool inIphone() Check if the user is browsing by iPhone/iPod
+ * @method      bool inIpad() Check if the user is browsing by iPad
  */
 class Os extends AbstractWidget
 {
-    /**
-     * Whether in chrome browser
-     *
-     * @var bool
-     */
-    public $chrome = false;
+    protected $os = array(
+        // Browser 
+        'ie'            => 'MSIE ([\w.]+)',
+        'chrome'        => 'Chrome\/([\w.]+)',
+        'firefox'       => 'Firefox\/([\w.]+)',
+        
+        // OS
+        'ios'           => 'iP(?:hone|ad).*OS ([\d_]+)', // Contains iPod
+        'android'       => 'Android ([\w.]+)',
+        'windowsphone'  => 'Windows Phone (?:OS )?([\w.]+)',
+        
+        // Device (Mobile & Tablet)
+        'iphone'        => 'iPhone OS ([\d_]+)',
+        'ipad'          => 'iPad.*OS ([\d_]+)'
+    );
 
     /**
-     * Whether in webkit browser
-     *
-     * @var bool
-     */
-    public $webkit = false;
-
-    /**
-     * Whether in opera browser
-     *
-     * @var bool
-     */
-    public $opera = false;
-
-    /**
-     * Whether in internet explorer browser
-     *
-     * @var bool
-     */
-    public $msie = false;
-
-    /**
-     * Whether in firefox browser
-     *
-     * @var bool
-     */
-    public $mozilla = false;
-
-    /**
-     * Whether in safari browser
-     *
-     * @var bool
-     */
-    public $safari = false;
-
-    /**
-     * The name of browser
+     * The versions of detected os
      * 
      * @var string
      */
-    protected $browser;
+    protected $versions = array();
 
-    /**
-     * The version of browser
-     *
-     * @var string
-     */
-    protected $version;
-    
     /**
      * The user agent string from request header
      * 
@@ -89,73 +67,63 @@ class Os extends AbstractWidget
         parent::__construct($options);
 
         $this->ua = $this->request->getServer('HTTP_USER_AGENT');
-
-        $this->detect();
     }
 
     /**
-     * Returns the name of browser
-     *
-     * @return string
+     * Check if in the specified browser, OS or device
+     * 
+     * @param string $os The name of browser, OS or device
+     * @return bool
      */
-    public function __invoke()
+    public function __invoke($os)
     {
-        return $this->browser;
+        return $this->in($os);
     }
 
     /**
-     * Detect the browser name and version
-     *
-     * @link http://api.jquery.com/jQuery.browser
-     * @copyright Copyright 2012 jQuery Foundation and other contributors
-     * @license http://jquery.org/license
+     * Check if in the specified browser, OS or device
+     * 
+     * @param string $os The name of browser, OS or device
+     * @return bool
      */
-    public function detect()
+    public function in($os)
     {
-        $ua = strtolower($this->ua);
-        $matches = array();
-
-        preg_match('/(chrome)[ \/]([\w.]+)/', $ua, $matches) ||
-            preg_match('/(webkit)[ \/]([\w.]+)/', $ua, $matches) ||
-            preg_match('/(opera)(?:.*version|)[ \/]([\w.]+)/', $ua, $matches) ||
-            preg_match('/(msie) ([\w.]+)/', $ua, $matches) ||
-            false === strpos($ua, 'compatible') && preg_match('/(mozilla)(?:.*? rv:([\w.]+)|)/', $ua, $matches);
-        
-        if (empty($matches)) {
-            $matches = array('', '', 0);
-        }
-
-        // Ignore the first element
-        list(, $this->browser, $this->version) = $matches;
-
-        $this->browser && $this->{$this->browser} = true;
-
-        // Chrome is Webkit, but Webkit is also Safari.
-        if ($this->chrome) {
-            $this->webkit = true;
-        } elseif ($this->webkit) {
-            $this->safari = true;
+        $os = strtolower($os);
+        if (isset($this->os[$os]) && preg_match('/' . $this->os[$os] . '/i', $this->ua, $matches)) {
+            $this->versions[$os] = isset($matches[1]) ? $matches[1] : false;
+            return true;
+        } else {
+            return false;
         }
     }
     
     /**
-     * Returns the version of browser
+     * Returns the version of specified browser, OS or device
      * 
      * @return string
      */
-    public function getBrowser()
+    public function getVersion($os)
     {
-        return $this->browser;
+        $os = strtolower($os);
+        if (!isset($this->versions[$os])) {
+            $this->in($os);
+        }
+        return $this->versions[$os];
     }
-    
+
     /**
-     * Returns the version of browser
+     * Magic call for method inXXX
      * 
-     * @return string
+     * @param string $name
+     * @param array $args
+     * @return bool
      */
-    public function getVersion()
+    public function __call($name, $args)
     {
-        return $this->version;
+        if('in' == substr($name, 0, 2)) {
+            return $this->in(substr($name, 2));
+        }
+        return parent::__call($name, $args);
     }
     
     /**
@@ -196,56 +164,5 @@ class Os extends AbstractWidget
             return true;
         }
         return false;
-    }
-    
-    /**
-     * Check if the user is browsing by iPhone/iPod
-     * 
-     * @return bool
-     */
-    public function inIphone()
-    {
-        return (bool)preg_match('/(iPhone\sOS)\s([\d_]+)/', $this->ua);
-    }
-    
-    /**
-     * Check if the user is browsing by iPad
-     * 
-     * @return bool
-     */
-    public function inIpad()
-    {
-        return (bool)preg_match('/(iPad).*OS\s([\d_]+)/', $this->ua);
-    }
-    
-    /**
-     * Check if the device is running on Apple's iOS platform
-     * 
-     * @return bool
-     */
-    public function inIOs()
-    {
-        return $this->inIPhone() || $this->inIPad();
-    }
-    
-    /**
-     * Check if the device is running on Google's Android platform
-     * 
-     * @return bool
-     */
-    public function inAndroid()
-    {
-        return preg_match('/(Android)\s+([\d.]+)/', $this->ua)
-            || preg_match('/Silk-Accelerated/', $this->ua);
-    }
-    
-    /**
-     * Check if the device is running on Windows Phone platform
-     * 
-     * @return bool
-     */
-    public function inWindowsPhone()
-    {
-        return (bool)preg_match('/Windows Phone OS|XBLWP7|ZuneWP7/', $this->ua);
     }
 }
