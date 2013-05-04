@@ -79,7 +79,7 @@ require_once 'WidgetInterface.php';
  * @method   Redirect   redirect($url = null, $status = 302, array $options = array()) Send a redirect response
  * @property redis      $redis A cache widget base on Redis
  * @method   mixed      redis($key, $value = null, $expire = 0) Retrieve or store an item by Redis
- * @property Request    $request A widget that handles the HTTP request Data
+ * @property Request    $request A widget that handles the HTTP request data
  * @method   mixed      request($name, $default = null) Returns a stringify rquest parameter value
  * @property Response   $response A widget that send the HTTP response
  * @method   Response   response($content = null, $status = null) Send response header and content

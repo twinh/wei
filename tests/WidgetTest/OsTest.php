@@ -2,17 +2,17 @@
 
 namespace WidgetTest;
 
-class BrowserTest extends TestCase
+class OsTest extends TestCase
 {
     /**
      * @dataProvider providerForUserAgent
      */
-    public function testBrowser($ua, $browser, $version)
+    public function testBrowser($ua, $os, $version)
     {
-        $this->server->set('HTTP_USER_AGENT', $ua);
-        $this->browser->detect();
-        $this->assertEquals($version, $this->browser->getVersion());
-        $this->assertEquals($browser, $this->browser());
+        $this->os->setOption('ua', $ua);
+        $this->os->detect();
+        $this->assertEquals($version, $this->os->getVersion());
+        $this->assertEquals($os, $this->os->getBrowser());
     }
     
     /**
