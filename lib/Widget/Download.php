@@ -49,7 +49,7 @@ class Download extends Response
         }
 
         $name = basename($file);
-        $this->browser->msie && $name = urlencode($name);
+        $this->os->in('ie') && $name = urlencode($name);
         
         $this->header->set(array(
             'Content-Description'       => 'File Transfer',
