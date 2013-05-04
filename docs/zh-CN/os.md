@@ -20,7 +20,7 @@ if ($widget->os->inIphone()) {
 
 ### 获取Windows Phone手机用户的版本
 ```php
-echo $widget->os->inWindowsPhone()
+echo $widget->os->getVersion('WindowsPhone');
 ```
 
 ### 如果用户为IE浏览器,输出用浏览器版本
