@@ -1,63 +1,82 @@
-[redis()](http://twinh.github.io/widget/api/redis)
-==================================================
+Redis
+=====
 
-设置或获取一项Redis缓存
+设置或获取一项缓存,缓存数据存储于Redis中
 
-##### 目录
-* redis( $key, $value [ $expire ] )
-* redis( $key )
+案例
+----
 
-### 设置一项Redis缓存
+### 设置和获取缓存
 ```php
-bool redis( $key, $value [ $expire ] )
+// 设置缓存
+$widget->redis('key', 'value');
+// 返回 true
+
+// 获取缓存
+$widget->redis('key');
+// 返回 value
 ```
+
+### 设置60秒后就过期的缓存
+```php
+$widget->redis('key', 'value', 60);
+```
+
+调用方式
+-------
+
+### 选项
+
+| 名称       | 类型         | 默认值         | 说明                                                    |
+|------------|--------------|----------------|---------------------------------------------------------|
+| host       | string       | 127.0.0.1      | Redis所在的服务器名称                                   |
+| prot       | int          | 6379           | Redis所在的服务器端口                                   | 
+| timeout    | float        | 0.0            | 连接服务器的超时秒数                                    |
+| persistent | bool         | true           | 是否使用长连接                                          |
+| object     | \Redis       | 无             | 原始的Redis对象                                         |
+
+### 方法
+
+#### redis($key, $value, $expire = 0)
+设置缓存的值
 
 ##### 参数
-* **$key** `string` 缓存的键名
-* **$value** `mixed` 缓存的值,允许任意类型
-* **$expire** `int` 缓存的有效期,默认为0秒,表示永不过期
 
+| 名称      | 类型      | 默认值    | 说明                                  |
+|-----------|-----------|-----------|---------------------------------------|
+| $key      | string    | 无        | 缓存的键名                            |
+| $value    | mixed     | 无        | 缓存的值,允许任意类型                 |
+| $expire   | int       | 0         | 缓存的有效期,默认为0秒,表示永不过期   |
 
-该调用方式相等于`$widget->redis->set($key, $value, $expire)`
+#### redis($key)
+获取指定名称的缓存
 
+#### redis->set($key, $value, $expire = 0)
+设置缓存的值,同`redis($key, $value, $expire = 0)`
 
-##### 代码范例
-设置键名为"key",值为"value"的缓存
-```php
-<?php
+#### redis->get($key)
+获取缓存的值,同`redis($key)`
 
-$widget->redis('key', 'value');
+#### redis->remove($key)
+移除一项缓存
 
-echo $widget->redis('key');
-```
-##### 运行结果
-```php
-'value'
-```
-- - - -
+#### redis->exists($key)
+检查缓存是否存在
 
-### 获取一项Redis缓存
-```php
-bool redis( $key )
-```
+#### redis->add($key, $value)
+增加一项缓存,如果缓存已存在,返回false
 
-##### 参数
-* **$key** `string` 缓存的键名
+#### redis->replace($key, $value)
+替换一项缓存,如果缓存不存在,返回false
 
+#### redis->increment($key, $offset = 1)
+增大一项缓存的值
 
-该调用方式相等于`$widget->redis->get($key)`
+#### redis->decrement($key, $offset = 1)
+减小一项缓存的值
 
+#### redis->getMulti($keys)
+批量获取缓存的值
 
-##### 代码范例
-获取键名为"key"的缓存,并打印出来
-```php
-<?php
-
-$widget->redis('key', 'value');
-
-echo $widget->redis('key');
-```
-##### 运行结果
-```php
-'value'
-```
+#### redis->setMulti($values)
+批量设置缓存的值
