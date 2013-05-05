@@ -98,6 +98,7 @@ h1, h2, h3, .lead
         <li><a href="#fileCache">FileCache</a></li>
         <li><a href="#memcache">Memcache</a></li>
         <li><a href="#memcached">Memcached</a></li>
+        <li><a href="#couchbase">Couchbase</a></li>
         <li><a href="#redis">Redis</a></li>
         <li><a href="#bicache">Bicache</a></li>
       </ul>
@@ -456,116 +457,6 @@ $id = $widget-&gt;request('id');
 
   </section>
 
-<!-- browser
-  ================================================== -->
-  <section id="browser">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Browser</h1>
-
-<p>获取浏览器的名称和版本</p>
-
-<h2>案例</h2>
-
-<h3>打印出当前浏览器的名称和版本</h3>
-
-<pre><code class="php">// 也可以通过 $widget-&gt;browser-&gt;getName(); 获取浏览器名称
-echo $widget-&gt;browser();
-
-echo $widget-&gt;browser-&gt;getVersion();
-</code></pre>
-
-<h3>运行结果</h3>
-
-<pre><code class="php">
-// 输出会因浏览器和版本的不同而不同
-
-'chrome'
-
-'26.0.1410.64'
-</code></pre>
-
-<h2>调用方式</h2>
-
-<h3>选项</h3>
-
-<p>目前Browser除了<code>name</code>和<code>version</code>之外的选项均为公开属性,可以直接调用,如<code>$widget-&gt;browser-&gt;chrome</code>.</p>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>chrome</td>
-<td>bool</td>
-<td>false</td>
-<td>当用户使用谷歌浏览器时为true</td>
-</tr>
-<tr>
-<td>webkit</td>
-<td>bool</td>
-<td>false</td>
-<td>当用户使用谷歌或Safari浏览器时为true</td>
-</tr>
-<tr>
-<td>opera</td>
-<td>bool</td>
-<td>false</td>
-<td>当用户使用Opera浏览器时为true</td>
-</tr>
-<tr>
-<td>msie</td>
-<td>bool</td>
-<td>false</td>
-<td>当用户使用Internet Explorer浏览器时为true</td>
-</tr>
-<tr>
-<td>mozilla</td>
-<td>bool</td>
-<td>false</td>
-<td>当用户使用火狐浏览器时为true</td>
-</tr>
-<tr>
-<td>safari</td>
-<td>bool</td>
-<td>false</td>
-<td>当用户使用Safari浏览器时为true</td>
-</tr>
-<tr>
-<td>name</td>
-<td>string</td>
-<td>null</td>
-<td>用户当前浏览器的名称,为上面选项的任何一个值,如chrome,msie,null表示无法识别浏览器名称</td>
-</tr>
-<tr>
-<td>version</td>
-<td>string</td>
-<td>null</td>
-<td>用户当前浏览器的版本,同样null表示无法识别浏览器版本</td>
-</tr>
-</tbody>
-</table>
-<h3>方法</h3>
-
-<h4>browser()</h4>
-
-<p>获取浏览器名称</p>
-
-<h4>browser-&gt;getName()</h4>
-
-<p>获取浏览器名称,与上一个方法行为一致</p>
-
-<h4>browser-&gt;getVersion()</h4>
-
-<p>获取浏览器版本</p>
-</body></html>
-
-  </section>
-
 <!-- cookie
   ================================================== -->
   <section id="cookie">
@@ -671,6 +562,105 @@ $widget-&gt;cookie('key');
 <h4>cookie-&gt;send()</h4>
 
 <p>发送cookie到浏览器</p>
+</body></html>
+
+  </section>
+
+<!-- os
+  ================================================== -->
+  <section id="os">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>Os</h1>
+
+<p>检测客户端浏览器,操作系统和设备是否为指定的名称和版本</p>
+
+<h2>案例</h2>
+
+<h3>根据用户设备跳转到相应的页面</h3>
+
+<pre><code class="php">if ($widget-&gt;os-&gt;inIphone()) {
+    // 跳转到iPhone定制页面
+} elseif ($widget-&gt;os-&gt;inIpad()) {
+    // 跳转到iPad定制页面
+} else {
+    // 展示默认页面
+}
+
+</code></pre>
+
+<h3>获取Windows Phone手机用户的版本</h3>
+
+<pre><code class="php">echo $widget-&gt;os-&gt;getVersion('WindowsPhone');
+</code></pre>
+
+<h3>如果用户为IE浏览器,输出用浏览器版本</h3>
+
+<pre><code class="php">if ($widget-&gt;os-&gt;inIe()) {
+    echo $widget-&gt;os-&gt;getVersion('ie');
+}
+</code></pre>
+
+<h3>运行结果</h3>
+
+<pre><code class="php">'10.0'
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<p><em>无</em></p>
+
+<h3>方法</h3>
+
+<h4>os($name)</h4>
+
+<p>检测客户端是否为指定的浏览器,操作系统和手持设备</p>
+
+<h4>os-&gt;in($name)</h4>
+
+<p>同<code>os($name)</code></p>
+
+<h4>os-&gt;getVersion($name)</h4>
+
+<p>获取客户端浏览器,操作系统或手持设备的版本</p>
+
+<h4>os-&gt;inMobile()</h4>
+
+<p>检查用户是否通过移动设备访问</p>
+
+<h4>os-&gt;inIe()</h4>
+
+<p>检查用户是否通过IE浏览器访问</p>
+
+<h4>os-&gt;inChrome()</h4>
+
+<p>检查用户是否通过Chrome浏览器访问</p>
+
+<h4>os-&gt;inFirefox()</h4>
+
+<p>检查用户是否通过Firefox浏览器访问</p>
+
+<h4>os-&gt;inIos()</h4>
+
+<p>检查用户是否使用苹果iOS系统</p>
+
+<h4>os-&gt;inAndroid()</h4>
+
+<p>检查用户是否使用谷歌安卓系统</p>
+
+<h4>os-&gt;inWindowsPhone()</h4>
+
+<p>检查用户是否使用微软Windows Phone系统</p>
+
+<h4>os-&gt;inIphone()</h4>
+
+<p>检查用户是否使用iPhone/iPod访问网站</p>
+
+<h4>os-&gt;inIpad()</h4>
+
+<p>检查用户是否使用iPad访问网站</p>
 </body></html>
 
   </section>
@@ -786,7 +776,7 @@ $id = $widget-&gt;query('id');
 
 <h2>案例</h2>
 
-<h3>获取名称为iSERVER_NAME的服务器运行参数</h3>
+<h3>获取名称为iERVER_NAME的服务器运行参数</h3>
 
 <pre><code class="php">// 假设 $_SERVER['SERVER_NAME'] = 'www.example.com';
 
@@ -830,26 +820,55 @@ $id = $widget-&gt;server('SERVER_NAME');
   <section id="session">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<pre><code>该微件文档还在紧急编写中,敬请期待!
+<h1>Session</h1>
+
+<p>管理用户会话信息</p>
+
+<h2>案例</h2>
+
+<h3>设置和获取会话信息</h3>
+
+<pre><code class="php">$widget-&gt;session('verfiyCode', 'WIDG');
+
+if ($widget-&gt;sessio('verfiyCode') == $widget-&gt;post('verfiyCode')) {
+    echo '验证码正确';
+} else {
+    echo '验证码错误';
+}
 </code></pre>
 
-<h1><a href="http://twinh.github.io/widget/api/session">session()</a></h1>
+<h2>调用方式</h2>
 
-<p>Returns a <em>stringify</em> or user defined($default) parameter value</p>
+<h3>选项</h3>
 
-<h3>Returns a <em>stringify</em> or user defined($default) parameter value</h3>
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>namespace</td>
+<td>string</td>
+<td>widget</td>
+<td>存储会话信息的命名空间,因为在PHP中,用户会话信息是共享的</td>
+</tr></tbody>
+</table>
+<h3>方法</h3>
 
-<pre><code class="php">string|null session($name, $default)
-</code></pre>
+<h4>session($name)</h4>
 
-<h5>参数</h5>
+<p>获取会话信息的值</p>
 
-<ul>
-<li>
-<strong>$name</strong> <code>string</code> The parameter name</li>
-<li>
-<strong>$default</strong> <code>mixed</code> The default parameter value if the parameter does not exist</li>
-</ul>
+<h4>session($name, $value)</h4>
+
+<p>设置会话信息的值</p>
+
+<h4>session-&gt;setInis(array $inis)</h4>
+
+<p>设置会话相关的ini配置,配置名称会自定加上<code>session.</code>前缀<br><br>
+详细配置可以查看<a href="http://php.net/manual/en/session.configuration.php">http://php.net/manual/en/session.configuration.php</a></p>
 </body></html>
 
   </section>
@@ -1246,16 +1265,22 @@ Hello World'
 </tr></thead>
 <tbody>
 <tr>
-<td>file</td>
+<td>filename</td>
 <td>string</td>
 <td>null</td>
-<td>要下载的文件路径</td>
+<td>弹出下载对话框时显示的文件名称</td>
 </tr>
 <tr>
 <td>type</td>
 <td>string</td>
 <td>application/x-download</td>
 <td>指定HTTP内容类型（Content-Type）</td>
+</tr>
+<tr>
+<td>disposition</td>
+<td>string</td>
+<td>attachment</td>
+<td>下载的方式,可选项为<code>inline</code>或<code>attachment</code>,如果是<code>inline</code>,浏览器会先尝试直接在浏览器中打开,如果是<code>attachment</code>,浏览器将直接弹出下载对话框</td>
 </tr>
 </tbody>
 </table>
@@ -1497,86 +1522,101 @@ $widget-&gt;cache('key');
 
 <ul>
 <li>
-<code>apc</code> <em>推荐</em>
+<code>apc</code> APC缓存 <em>推荐</em>
 </li>
-<li><code>arrayCache</code></li>
 <li>
-<code>dbCache</code>
-
-<ul>
-<li>sqlite</li>
-<li>mysql</li>
-<li>pgsql</li>
-<li>sqlsrv/dblib <em>不稳定</em>
-</li>
-<li>oci <em>不稳定</em>
-</li>
-</ul>
-</li>
-<li><code>fileCache</code></li>
-<li><code>memcache</code></li>
-<li><code>memcached</code></li>
+<code>arrayCache</code> 数值缓存</li>
 <li>
-<code>redis</code> <em>推荐</em>
+<code>couchbase</code> Couchbase缓存</li>
+<li>
+<code>dbCache</code> 数据库缓存</li>
+<li>
+<code>fileCache</code> 文件缓存</li>
+<li>
+<code>memcache</code> Memcache缓存</li>
+<li>
+<code>memcached</code> Memcached缓存</li>
+<li>
+<code>redis</code> Redis缓存 <em>推荐</em>
 </li>
 </ul>
 <h3>方法</h3>
 
-<h4>cache( $key, $value [ $expire ] )</h4>
+<h4>cache($key, $value, $expire = 0)</h4>
 
 <p>设置缓存的值</p>
 
 <h5>参数</h5>
 
-<ul>
-<li>
-<strong>$key</strong> <code>string</code> 缓存的键名</li>
-<li>
-<strong>$value</strong> <code>mixed</code> 缓存的值,允许任意类型</li>
-<li>
-<strong>$expire</strong> <code>int</code> 缓存的有效期,默认为0秒,表示永不过期</li>
-</ul>
-<h4>cache( $key )</h4>
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$key</td>
+<td>string</td>
+<td>无</td>
+<td>缓存的键名</td>
+</tr>
+<tr>
+<td>$value</td>
+<td>mixed</td>
+<td>无</td>
+<td>缓存的值,允许任意类型</td>
+</tr>
+<tr>
+<td>$expire</td>
+<td>int</td>
+<td>0</td>
+<td>缓存的有效期,默认为0秒,表示永不过期</td>
+</tr>
+</tbody>
+</table>
+<h4>cache($key)</h4>
 
 <p>获取指定名称的缓存</p>
 
-<h3>cache-&gt;set($key, $value)</h3>
+<h4>cache-&gt;set($key, $value, $expire = 0)</h4>
 
-<p>设置缓存的值</p>
+<p>设置缓存的值,同<code>cache($key, $value, $expire = 0)</code></p>
 
-<h3>cache-&gt;get($key)</h3>
+<h4>cache-&gt;get($key)</h4>
 
-<p>获取缓存的值</p>
+<p>获取缓存的值,同<code>cache($key)</code></p>
 
-<h3>cache-&gt;remove($key)</h3>
+<h4>cache-&gt;remove($key)</h4>
 
 <p>移除一项缓存</p>
 
-<h3>cache-&gt;exists($key)</h3>
+<h4>cache-&gt;exists($key)</h4>
 
 <p>检查缓存是否存在</p>
 
-<h3>cache-&gt;add($key, $value)</h3>
+<h4>cache-&gt;add($key, $value)</h4>
 
 <p>增加一项缓存,如果缓存已存在,返回false</p>
 
-<h3>cache-&gt;replace($key, $value)</h3>
+<h4>cache-&gt;replace($key, $value)</h4>
 
-<p>替换一项缓存,如果缓存 <strong>不</strong> 存在,返回false</p>
+<p>替换一项缓存,如果缓存不存在,返回false</p>
 
-<h3>cache-&gt;increment($key, $offset = 1)</h3>
+<h4>cache-&gt;increment($key, $offset = 1)</h4>
 
 <p>增大一项缓存的值</p>
 
-<h3>cache-&gt;decrement($key, $offset = 1)</h3>
+<h4>cache-&gt;decrement($key, $offset = 1)</h4>
 
 <p>减小一项缓存的值</p>
 
-<h3>cache-&gt;getMulti($keys)</h3>
+<h4>cache-&gt;getMulti($keys)</h4>
 
 <p>批量获取缓存的值</p>
 
-<h3>cache-&gt;setMulti($values)</h3>
+<h4>cache-&gt;setMulti($values)</h4>
 
 <p>批量设置缓存的值</p>
 </body></html>
@@ -1618,53 +1658,81 @@ $widget-&gt;apc('key');
 
 <h3>方法</h3>
 
-<h4>apc ($key, $value)</h4>
-
-<p>设置缓存的值<br><code>php<br>
-$widget-&gt;apc('key', 'value');<br></code></p>
-
-<h4>apc($key)</h4>
-
-<p>获取指定名称的缓存<br><code>php<br>
-$widget-&gt;apc('name');<br></code></p>
-
-<h3>apc-&gt;set($key, $value)</h3>
+<h4>apc($key, $value, $expire = 0)</h4>
 
 <p>设置缓存的值</p>
 
-<h3>apc-&gt;get($key)</h3>
+<h5>参数</h5>
 
-<p>获取缓存的值</p>
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$key</td>
+<td>string</td>
+<td>无</td>
+<td>缓存的键名</td>
+</tr>
+<tr>
+<td>$value</td>
+<td>mixed</td>
+<td>无</td>
+<td>缓存的值,允许任意类型</td>
+</tr>
+<tr>
+<td>$expire</td>
+<td>int</td>
+<td>0</td>
+<td>缓存的有效期,默认为0秒,表示永不过期</td>
+</tr>
+</tbody>
+</table>
+<h4>apc($key)</h4>
 
-<h3>apc-&gt;remove($key)</h3>
+<p>获取指定名称的缓存</p>
+
+<h4>apc-&gt;set($key, $value)</h4>
+
+<p>设置缓存的值,同<code>apc($key, $value, $expire = 0)</code></p>
+
+<h4>apc-&gt;get($key)</h4>
+
+<p>获取缓存的值,同<code>apc($key)</code></p>
+
+<h4>apc-&gt;remove($key)</h4>
 
 <p>移除一项缓存</p>
 
-<h3>apc-&gt;exists($key)</h3>
+<h4>apc-&gt;exists($key)</h4>
 
 <p>检查缓存是否存在</p>
 
-<h3>apc-&gt;add($key, $value)</h3>
+<h4>apc-&gt;add($key, $value)</h4>
 
 <p>增加一项缓存,如果缓存已存在,返回false</p>
 
-<h3>apc-&gt;replace($key, $value)</h3>
+<h4>apc-&gt;replace($key, $value)</h4>
 
 <p>替换一项缓存,如果缓存 <strong>不</strong> 存在,返回false</p>
 
-<h3>apc-&gt;increment($key, $offset = 1)</h3>
+<h4>apc-&gt;increment($key, $offset = 1)</h4>
 
 <p>增大一项缓存的值</p>
 
-<h3>apc-&gt;decrement($key, $offset = 1)</h3>
+<h4>apc-&gt;decrement($key, $offset = 1)</h4>
 
 <p>减小一项缓存的值</p>
 
-<h3>apc-&gt;getMulti($keys)</h3>
+<h4>apc-&gt;getMulti($keys)</h4>
 
 <p>批量获取缓存的值</p>
 
-<h3>apc-&gt;setMulti($values)</h3>
+<h4>apc-&gt;setMulti($values)</h4>
 
 <p>批量设置缓存的值</p>
 </body></html>
@@ -1680,7 +1748,7 @@ $widget-&gt;apc('name');<br></code></p>
 
 <p>设置或获取一项缓存,缓存数据存储于数据库中</p>
 
-<p>目前支持<code>sqlite</code>,<code>mysql</code>,<code>pgsql</code>,<code>sqlsrv</code>/<code>dblib</code>(不稳定),<code>oci</code>(不稳定)</p>
+<p>dbCache微件依赖于db微件</p>
 
 <h2>案例</h2>
 
@@ -1704,65 +1772,97 @@ $widget-&gt;dbCache('key');
 
 <h3>选项</h3>
 
-<p><em>无</em></p>
-
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody><tr>
+<td>table</td>
+<td>string</td>
+<td>cache</td>
+<td>缓存数据表名称</td>
+</tr></tbody>
+</table>
 <h3>方法</h3>
 
-<h4>dbCache( $key, $value [ $expire ] )</h4>
+<h4>dbCache($key, $value, $expire = 0)</h4>
 
 <p>设置缓存的值</p>
 
 <h5>参数</h5>
 
-<ul>
-<li>
-<strong>$key</strong> <code>string</code> 缓存的键名</li>
-<li>
-<strong>$value</strong> <code>mixed</code> 缓存的值,允许任意类型</li>
-<li>
-<strong>$expire</strong> <code>int</code> 缓存的有效期,默认为0秒,表示永不过期</li>
-</ul>
-<h4>dbCache( $key )</h4>
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$key</td>
+<td>string</td>
+<td>无</td>
+<td>缓存的键名</td>
+</tr>
+<tr>
+<td>$value</td>
+<td>mixed</td>
+<td>无</td>
+<td>缓存的值,允许任意类型</td>
+</tr>
+<tr>
+<td>$expire</td>
+<td>int</td>
+<td>0</td>
+<td>缓存的有效期,默认为0秒,表示永不过期</td>
+</tr>
+</tbody>
+</table>
+<h4>dbCache($key)</h4>
 
 <p>获取指定名称的缓存</p>
 
-<h3>dbCache-&gt;set($key, $value)</h3>
+<h4>dbCache-&gt;set($key, $value, $expire = 0)</h4>
 
-<p>设置缓存的值</p>
+<p>设置缓存的值,同<code>dbCache($key, $value, $expire = 0)</code></p>
 
-<h3>dbCache-&gt;get($key)</h3>
+<h4>dbCache-&gt;get($key)</h4>
 
-<p>获取缓存的值</p>
+<p>获取缓存的值,同<code>dbCache($key)</code></p>
 
-<h3>dbCache-&gt;remove($key)</h3>
+<h4>dbCache-&gt;remove($key)</h4>
 
 <p>移除一项缓存</p>
 
-<h3>dbCache-&gt;exists($key)</h3>
+<h4>dbCache-&gt;exists($key)</h4>
 
 <p>检查缓存是否存在</p>
 
-<h3>dbCache-&gt;add($key, $value)</h3>
+<h4>dbCache-&gt;add($key, $value)</h4>
 
 <p>增加一项缓存,如果缓存已存在,返回false</p>
 
-<h3>dbCache-&gt;replace($key, $value)</h3>
+<h4>dbCache-&gt;replace($key, $value)</h4>
 
-<p>替换一项缓存,如果缓存 <strong>不</strong> 存在,返回false</p>
+<p>替换一项缓存,如果缓存不存在,返回false</p>
 
-<h3>dbCache-&gt;increment($key, $offset = 1)</h3>
+<h4>dbCache-&gt;increment($key, $offset = 1)</h4>
 
 <p>增大一项缓存的值</p>
 
-<h3>dbCache-&gt;decrement($key, $offset = 1)</h3>
+<h4>dbCache-&gt;decrement($key, $offset = 1)</h4>
 
 <p>减小一项缓存的值</p>
 
-<h3>dbCache-&gt;getMulti($keys)</h3>
+<h4>dbCache-&gt;getMulti($keys)</h4>
 
 <p>批量获取缓存的值</p>
 
-<h3>dbCache-&gt;setMulti($values)</h3>
+<h4>dbCache-&gt;setMulti($values)</h4>
 
 <p>批量设置缓存的值</p>
 </body></html>
@@ -1799,53 +1899,81 @@ $widget-&gt;fileCache('key');
 
 <h3>方法</h3>
 
-<h4>fileCache ($key, $value)</h4>
-
-<p>设置缓存的值<br><code>php<br>
-$widget-&gt;fileCache('key', 'value');<br></code></p>
-
-<h4>fileCache($key)</h4>
-
-<p>获取指定名称的缓存<br><code>php<br>
-$widget-&gt;fileCache('name');<br></code></p>
-
-<h3>fileCache-&gt;set($key, $value)</h3>
+<h4>fileCache($key, $value, $expire = 0)</h4>
 
 <p>设置缓存的值</p>
 
-<h3>fileCache-&gt;get($key)</h3>
+<h5>参数</h5>
 
-<p>获取缓存的值</p>
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$key</td>
+<td>string</td>
+<td>无</td>
+<td>缓存的键名</td>
+</tr>
+<tr>
+<td>$value</td>
+<td>mixed</td>
+<td>无</td>
+<td>缓存的值,允许任意类型</td>
+</tr>
+<tr>
+<td>$expire</td>
+<td>int</td>
+<td>0</td>
+<td>缓存的有效期,默认为0秒,表示永不过期</td>
+</tr>
+</tbody>
+</table>
+<h4>fileCache($key)</h4>
 
-<h3>fileCache-&gt;remove($key)</h3>
+<p>获取指定名称的缓存</p>
+
+<h4>fileCache-&gt;set($key, $value, $expire = 0)</h4>
+
+<p>设置缓存的值,同<code>fileCache($key, $value, $expire = 0)</code></p>
+
+<h4>fileCache-&gt;get($key)</h4>
+
+<p>获取缓存的值,同<code>fileCache($key)</code></p>
+
+<h4>fileCache-&gt;remove($key)</h4>
 
 <p>移除一项缓存</p>
 
-<h3>fileCache-&gt;exists($key)</h3>
+<h4>fileCache-&gt;exists($key)</h4>
 
 <p>检查缓存是否存在</p>
 
-<h3>fileCache-&gt;add($key, $value)</h3>
+<h4>fileCache-&gt;add($key, $value)</h4>
 
 <p>增加一项缓存,如果缓存已存在,返回false</p>
 
-<h3>fileCache-&gt;replace($key, $value)</h3>
+<h4>fileCache-&gt;replace($key, $value)</h4>
 
 <p>替换一项缓存,如果缓存 <strong>不</strong> 存在,返回false</p>
 
-<h3>fileCache-&gt;increment($key, $offset = 1)</h3>
+<h4>fileCache-&gt;increment($key, $offset = 1)</h4>
 
 <p>增大一项缓存的值</p>
 
-<h3>fileCache-&gt;decrement($key, $offset = 1)</h3>
+<h4>fileCache-&gt;decrement($key, $offset = 1)</h4>
 
 <p>减小一项缓存的值</p>
 
-<h3>fileCache-&gt;getMulti($keys)</h3>
+<h4>fileCache-&gt;getMulti($keys)</h4>
 
 <p>批量获取缓存的值</p>
 
-<h3>fileCache-&gt;setMulti($values)</h3>
+<h4>fileCache-&gt;setMulti($values)</h4>
 
 <p>批量设置缓存的值</p>
 </body></html>
@@ -1857,21 +1985,170 @@ $widget-&gt;fileCache('name');<br></code></p>
   <section id="memcache">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<pre><code>该微件文档还在紧急编写中,敬请期待!
+<h1>Memcache</h1>
+
+<p>设置或获取一项缓存,缓存数据存储于Memcache中</p>
+
+<h2>案例</h2>
+
+<h3>设置和获取缓存</h3>
+
+<pre><code class="php">// 设置缓存
+$widget-&gt;memcache('key', 'value');
+// 返回 true
+
+// 获取缓存
+$widget-&gt;memcache('key');
+// 返回 value
 </code></pre>
 
-<h1><a href="http://twinh.github.io/widget/api/memcache">memcache()</a></h1>
+<h3>设置60秒后就过期的缓存</h3>
 
-<p>{@inheritdoc}</p>
-
-<h3>{@inheritdoc}</h3>
-
-<pre><code class="php">void memcache($key, $value, $expire)
+<pre><code class="php">$widget-&gt;memcache('key', 'value', 60);
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>servers</td>
+<td>array</td>
+<td>见下表</td>
+<td>服务器配置数组</td>
+</tr>
+<tr>
+<td>flag</td>
+<td>int</td>
+<td><code>MEMCACHE_COMPRESSED</code></td>
+<td>用于服务器验证的用户名</td>
+</tr>
+<tr>
+<td>object</td>
+<td>\Memcache</td>
+<td>无</td>
+<td>原始的Memcache对象</td>
+</tr>
+</tbody>
+</table>
+<h4>选项<code>servers</code>
+</h4>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>host</td>
+<td>string</td>
+<td>127.0.0.1</td>
+<td>Memcache服务器地址</td>
+</tr>
+<tr>
+<td>port</td>
+<td>int</td>
+<td>11211</td>
+<td>Memcache服务器端口</td>
+</tr>
+<tr>
+<td>persistent</td>
+<td>bool</td>
+<td>true</td>
+<td>是否使用长连接</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>memcache($key, $value, $expire = 0)</h4>
+
+<p>设置缓存的值</p>
 
 <h5>参数</h5>
 
-<p><em>无</em></p>
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$key</td>
+<td>string</td>
+<td>无</td>
+<td>缓存的键名</td>
+</tr>
+<tr>
+<td>$value</td>
+<td>mixed</td>
+<td>无</td>
+<td>缓存的值,允许任意类型</td>
+</tr>
+<tr>
+<td>$expire</td>
+<td>int</td>
+<td>0</td>
+<td>缓存的有效期,默认为0秒,表示永不过期</td>
+</tr>
+</tbody>
+</table>
+<h4>memcache($key)</h4>
+
+<p>获取指定名称的缓存</p>
+
+<h4>memcache-&gt;set($key, $value)</h4>
+
+<p>设置缓存的值,同<code>memcache($key, $value, $expire = 0)</code></p>
+
+<h4>memcache-&gt;get($key)</h4>
+
+<p>获取缓存的值,同<code>memcache($key)</code></p>
+
+<h4>memcache-&gt;remove($key)</h4>
+
+<p>移除一项缓存</p>
+
+<h4>memcache-&gt;exists($key)</h4>
+
+<p>检查缓存是否存在</p>
+
+<h4>memcache-&gt;add($key, $value)</h4>
+
+<p>增加一项缓存,如果缓存已存在,返回false</p>
+
+<h4>memcache-&gt;replace($key, $value)</h4>
+
+<p>替换一项缓存,如果缓存不存在,返回false</p>
+
+<h4>memcache-&gt;increment($key, $offset = 1)</h4>
+
+<p>增大一项缓存的值</p>
+
+<h4>memcache-&gt;decrement($key, $offset = 1)</h4>
+
+<p>减小一项缓存的值</p>
+
+<h4>memcache-&gt;getMulti($keys)</h4>
+
+<p>批量获取缓存的值</p>
+
+<h4>memcache-&gt;setMulti($values)</h4>
+
+<p>批量设置缓存的值</p>
 </body></html>
 
   </section>
@@ -1881,21 +2158,312 @@ $widget-&gt;fileCache('name');<br></code></p>
   <section id="memcached">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<pre><code>该微件文档还在紧急编写中,敬请期待!
+<h1>Memcached</h1>
+
+<p>设置或获取一项缓存,缓存数据存储于memcached中</p>
+
+<h2>案例</h2>
+
+<h3>设置和获取缓存</h3>
+
+<pre><code class="php">// 设置缓存
+$widget-&gt;memcached('key', 'value');
+// 返回 true
+
+// 获取缓存
+$widget-&gt;memcached('key');
+// 返回 value
 </code></pre>
 
-<h1><a href="http://twinh.github.io/widget/api/memcached">memcached()</a></h1>
+<h3>设置60秒后就过期的缓存</h3>
 
-<p>{@inheritdoc}</p>
-
-<h3>{@inheritdoc}</h3>
-
-<pre><code class="php">void memcached($key, $value, $expire)
+<pre><code class="php">$widget-&gt;memcached('key', 'value', 60);
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>servers</td>
+<td>array</td>
+<td>见下表</td>
+<td>服务器配置数组</td>
+</tr>
+<tr>
+<td>object</td>
+<td>\Memcached</td>
+<td>无</td>
+<td>原始的memcached对象</td>
+</tr>
+</tbody>
+</table>
+<h4>选项<code>servers</code>
+</h4>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>host</td>
+<td>string</td>
+<td>127.0.0.1</td>
+<td>memcached服务器地址</td>
+</tr>
+<tr>
+<td>port</td>
+<td>int</td>
+<td>11211</td>
+<td>memcached服务器端口</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>memcached($key, $value, $expire = 0)</h4>
+
+<p>设置缓存的值</p>
 
 <h5>参数</h5>
 
-<p><em>无</em></p>
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$key</td>
+<td>string</td>
+<td>无</td>
+<td>缓存的键名</td>
+</tr>
+<tr>
+<td>$value</td>
+<td>mixed</td>
+<td>无</td>
+<td>缓存的值,允许任意类型</td>
+</tr>
+<tr>
+<td>$expire</td>
+<td>int</td>
+<td>0</td>
+<td>缓存的有效期,默认为0秒,表示永不过期</td>
+</tr>
+</tbody>
+</table>
+<h4>memcached($key)</h4>
+
+<p>获取指定名称的缓存</p>
+
+<h4>memcached-&gt;set($key, $value)</h4>
+
+<p>设置缓存的值,同<code>memcached($key, $value, $expire = 0)</code></p>
+
+<h4>memcached-&gt;get($key)</h4>
+
+<p>获取缓存的值,同<code>memcached($key)</code></p>
+
+<h4>memcached-&gt;remove($key)</h4>
+
+<p>移除一项缓存</p>
+
+<h5>memcached-&gt;exists($key)</h5>
+
+<p>检查缓存是否存在</p>
+
+<h5>memcached-&gt;add($key, $value)</h5>
+
+<p>增加一项缓存,如果缓存已存在,返回false</p>
+
+<h4>memcached-&gt;replace($key, $value)</h4>
+
+<p>替换一项缓存,如果缓存不存在,返回false</p>
+
+<h4>memcached-&gt;increment($key, $offset = 1)</h4>
+
+<p>增大一项缓存的值</p>
+
+<h4>memcached-&gt;decrement($key, $offset = 1)</h4>
+
+<p>减小一项缓存的值</p>
+
+<h4>memcached-&gt;getMulti($keys)</h4>
+
+<p>批量获取缓存的值</p>
+
+<h4>memcached-&gt;setMulti($values)</h4>
+
+<p>批量设置缓存的值</p>
+</body></html>
+
+  </section>
+
+<!-- couchbase
+  ================================================== -->
+  <section id="couchbase">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>Couchbase</h1>
+
+<p>设置或获取一项缓存,缓存数据存储于Couchbase中</p>
+
+<h2>案例</h2>
+
+<h3>设置和获取缓存</h3>
+
+<pre><code class="php">// 设置缓存
+$widget-&gt;couchbase('key', 'value');
+// 返回 true
+
+// 获取缓存
+$widget-&gt;couchbase('key');
+// 返回 value
+</code></pre>
+
+<h3>设置60秒后就过期的缓存</h3>
+
+<pre><code class="php">$widget-&gt;couchbase('key', 'value', 60);
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>host</td>
+<td>array</td>
+<td>string</td>
+<td>127.0.0.1:8091</td>
+</tr>
+<tr>
+<td>user</td>
+<td>string</td>
+<td>无</td>
+<td>用于服务器验证的用户名</td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td>无</td>
+<td>用于服务器验证的密码</td>
+</tr>
+<tr>
+<td>bucket</td>
+<td>string</td>
+<td>default</td>
+<td>连接的桶的名称</td>
+</tr>
+<tr>
+<td>persistent</td>
+<td>bool</td>
+<td>true</td>
+<td>是否使用长连接</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>couchbase($key, $value, $expire = 0)</h4>
+
+<p>设置缓存的值</p>
+
+<h5>参数</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$key</td>
+<td>string</td>
+<td>无</td>
+<td>缓存的键名</td>
+</tr>
+<tr>
+<td>$value</td>
+<td>mixed</td>
+<td>无</td>
+<td>缓存的值,允许任意类型</td>
+</tr>
+<tr>
+<td>$expire</td>
+<td>int</td>
+<td>0</td>
+<td>缓存的有效期,默认为0秒,表示永不过期</td>
+</tr>
+</tbody>
+</table>
+<h4>couchbase($key)</h4>
+
+<p>获取指定名称的缓存</p>
+
+<h4>couchbase-&gt;set($key, $value, $expire = 0)</h4>
+
+<p>设置缓存的值,同<code>couchbase($key, $value, $expire = 0)</code></p>
+
+<h4>couchbase-&gt;get($key)</h4>
+
+<p>获取缓存的值,同<code>couchbase($key)</code></p>
+
+<h4>couchbase-&gt;remove($key)</h4>
+
+<p>移除一项缓存</p>
+
+<h4>couchbase-&gt;exists($key)</h4>
+
+<p>检查缓存是否存在</p>
+
+<h4>couchbase-&gt;add($key, $value)</h4>
+
+<p>增加一项缓存,如果缓存已存在,返回false</p>
+
+<h4>couchbase-&gt;replace($key, $value)</h4>
+
+<p>替换一项缓存,如果缓存不存在,返回false</p>
+
+<h4>couchbase-&gt;increment($key, $offset = 1)</h4>
+
+<p>增大一项缓存的值</p>
+
+<h4>couchbase-&gt;decrement($key, $offset = 1)</h4>
+
+<p>减小一项缓存的值</p>
+
+<h4>couchbase-&gt;getMulti($keys)</h4>
+
+<p>批量获取缓存的值</p>
+
+<h4>couchbase-&gt;setMulti($values)</h4>
+
+<p>批量设置缓存的值</p>
 </body></html>
 
   </section>
