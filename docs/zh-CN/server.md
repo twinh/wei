@@ -6,7 +6,7 @@ Server
 案例
 ----
 
-### 获取名称为iSERVER_NAME的服务器运行参数
+### 获取名称为iERVER_NAME的服务器运行参数
 ```php
 // 假设 $_SERVER['SERVER_NAME'] = 'www.example.com';
 
