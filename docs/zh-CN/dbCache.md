@@ -35,7 +35,7 @@ $widget->dbCache('key', 'value', 60);
 
 ### 方法
 
-#### dbCache( $key, $value [ $expire ] )
+#### dbCache($key, $value, $expire = 0)
 设置缓存的值
 
 ##### 参数
@@ -46,14 +46,14 @@ $widget->dbCache('key', 'value', 60);
 | $value    | mixed     | 无        | 缓存的值,允许任意类型                 |
 | $expire   | int       | 0         | 缓存的有效期,默认为0秒,表示永不过期   |
 
-#### dbCache( $key )
+#### dbCache($key)
 获取指定名称的缓存
 
-#### dbCache->set($key, $value)
-设置缓存的值
+#### dbCache->set($key, $value, $expire = 0)
+设置缓存的值,同`dbCache($key, $value, $expire = 0)`
 
 #### dbCache->get($key)
-获取缓存的值
+获取缓存的值,同`dbCache($key)`
 
 #### dbCache->remove($key)
 移除一项缓存

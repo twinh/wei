@@ -26,23 +26,25 @@ $widget->fileCache('key');
 
 ### 方法
 
-#### fileCache ($key, $value)
+#### fileCache($key, $value, $expire = 0)
 设置缓存的值
-```php
-$widget->fileCache('key', 'value');
-```
+
+##### 参数
+
+| 名称      | 类型      | 默认值    | 说明                                  |
+|-----------|-----------|-----------|---------------------------------------|
+| $key      | string    | 无        | 缓存的键名                            |
+| $value    | mixed     | 无        | 缓存的值,允许任意类型                 |
+| $expire   | int       | 0         | 缓存的有效期,默认为0秒,表示永不过期   |
 
 #### fileCache($key)
 获取指定名称的缓存
-```php
-$widget->fileCache('name');
-```
 
-#### fileCache->set($key, $value)
-设置缓存的值
+#### fileCache->set($key, $value, $expire = 0)
+设置缓存的值,同`fileCache($key, $value, $expire = 0)`
 
 #### fileCache->get($key)
-获取缓存的值
+获取缓存的值,同`fileCache($key)`
 
 #### fileCache->remove($key)
 移除一项缓存

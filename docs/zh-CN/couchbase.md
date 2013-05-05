@@ -51,11 +51,11 @@ $widget->couchbase('key', 'value', 60);
 #### couchbase($key)
 获取指定名称的缓存
 
-#### couchbase->set($key, $value)
-设置缓存的值
+#### couchbase->set($key, $value, $expire = 0)
+设置缓存的值,同`couchbase($key, $value, $expire = 0)`
 
 #### couchbase->get($key)
-获取缓存的值
+获取缓存的值,同`couchbase($key)`
 
 #### couchbase->remove($key)
 移除一项缓存

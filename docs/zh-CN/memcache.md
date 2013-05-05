@@ -57,10 +57,10 @@ $widget->memcache('key', 'value', 60);
 获取指定名称的缓存
 
 #### memcache->set($key, $value)
-设置缓存的值
+设置缓存的值,同`memcache($key, $value, $expire = 0)`
 
 #### memcache->get($key)
-获取缓存的值
+获取缓存的值,同`memcache($key)`
 
 #### memcache->remove($key)
 移除一项缓存

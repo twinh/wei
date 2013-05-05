@@ -31,23 +31,25 @@ $widget->apc('key', 'value', 60);
 
 ### 方法
 
-#### apc ($key, $value)
+#### apc($key, $value, $expire = 0)
 设置缓存的值
-```php
-$widget->apc('key', 'value');
-```
+
+##### 参数
+
+| 名称      | 类型      | 默认值    | 说明                                  |
+|-----------|-----------|-----------|---------------------------------------|
+| $key      | string    | 无        | 缓存的键名                            |
+| $value    | mixed     | 无        | 缓存的值,允许任意类型                 |
+| $expire   | int       | 0         | 缓存的有效期,默认为0秒,表示永不过期   |
 
 #### apc($key)
 获取指定名称的缓存
-```php
-$widget->apc('name');
-```
 
 #### apc->set($key, $value)
-设置缓存的值
+设置缓存的值,同`apc($key, $value, $expire = 0)`
 
 #### apc->get($key)
-获取缓存的值
+获取缓存的值,同`apc($key)`
 
 #### apc->remove($key)
 移除一项缓存
