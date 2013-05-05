@@ -69,7 +69,7 @@ class Monolog extends AbstractWidget
             switch (true) {
                 case is_array($parameters) :
                     $class = '\Monolog\Handler\\' . ucfirst($name) . 'Handler';
-                    $logger->pushHandler($this->instance($class, $parameters));
+                    $logger->pushHandler($this->createInstance($class, $parameters));
                     break;
                 
                 case $parameters instanceof \Monolog\Handler\HandlerInterface :
@@ -93,5 +93,52 @@ class Monolog extends AbstractWidget
         !isset($level) && $level = $this->level;
         
         return $message ? $this->logger->addRecord($level, $message, $context) : $this->logger;
+    }
+
+    /**
+     * Instance a class
+     *
+     * @param  string       $class the name of class
+     * @param  array        $args  the parameters to be passed to the class constructor as an array.
+     * @return false|object false when class not found or a instance of the class
+     * @internal
+     */
+    public function createInstance($class, $args = array())
+    {
+        if (!class_exists($class)) {
+            return false;
+        }
+
+        // get class arguments
+        !is_array($args) && $args = array($args);
+
+        // instance according to the argument number
+        switch (count($args)) {
+            case 0:
+                $object = new $class;
+                break;
+
+            case 1:
+                $object = new $class(current($args));
+                break;
+
+            case 2:
+                $object = new $class(current($args), next($args));
+                break;
+
+            case 3:
+                $object = new $class(current($args), next($args), next($args));
+                break;
+
+            default:
+                if (method_exists($class, '__construct') || method_exists($class, $class)) {
+                    $reflection = new \ReflectionClass($class);
+                    $object = $reflection->newInstanceArgs($args);
+                } else {
+                    $object = new $class;
+                }
+        }
+
+        return $object;
     }
 }
