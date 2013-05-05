@@ -56,32 +56,32 @@ $widget->memcache('key', 'value', 60);
 #### memcache($key)
 获取指定名称的缓存
 
-### memcache->set($key, $value)
+#### memcache->set($key, $value)
 设置缓存的值
 
-### memcache->get($key)
+#### memcache->get($key)
 获取缓存的值
 
-### memcache->remove($key)
+#### memcache->remove($key)
 移除一项缓存
 
-### memcache->exists($key)
+#### memcache->exists($key)
 检查缓存是否存在
 
-### memcache->add($key, $value)
+#### memcache->add($key, $value)
 增加一项缓存,如果缓存已存在,返回false
 
-### memcache->replace($key, $value)
+#### memcache->replace($key, $value)
 替换一项缓存,如果缓存不存在,返回false
 
-### memcache->increment($key, $offset = 1)
+#### memcache->increment($key, $offset = 1)
 增大一项缓存的值
 
-### memcache->decrement($key, $offset = 1)
+#### memcache->decrement($key, $offset = 1)
 减小一项缓存的值
 
-### memcache->getMulti($keys)
+#### memcache->getMulti($keys)
 批量获取缓存的值
 
-### memcache->setMulti($values)
+#### memcache->setMulti($values)
 批量设置缓存的值

@@ -43,32 +43,32 @@ $widget->apc('key', 'value');
 $widget->apc('name');
 ```
 
-### apc->set($key, $value)
+#### apc->set($key, $value)
 设置缓存的值
 
-### apc->get($key)
+#### apc->get($key)
 获取缓存的值
 
-### apc->remove($key)
+#### apc->remove($key)
 移除一项缓存
 
-### apc->exists($key)
+#### apc->exists($key)
 检查缓存是否存在
 
-### apc->add($key, $value)
+#### apc->add($key, $value)
 增加一项缓存,如果缓存已存在,返回false
 
-### apc->replace($key, $value)
+#### apc->replace($key, $value)
 替换一项缓存,如果缓存 **不** 存在,返回false
 
-### apc->increment($key, $offset = 1)
+#### apc->increment($key, $offset = 1)
 增大一项缓存的值
 
-### apc->decrement($key, $offset = 1)
+#### apc->decrement($key, $offset = 1)
 减小一项缓存的值
 
-### apc->getMulti($keys)
+#### apc->getMulti($keys)
 批量获取缓存的值
 
-### apc->setMulti($values)
+#### apc->setMulti($values)
 批量设置缓存的值

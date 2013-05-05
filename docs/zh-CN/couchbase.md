@@ -51,32 +51,32 @@ $widget->couchbase('key', 'value', 60);
 #### couchbase($key)
 获取指定名称的缓存
 
-### couchbase->set($key, $value)
+#### couchbase->set($key, $value)
 设置缓存的值
 
-### couchbase->get($key)
+#### couchbase->get($key)
 获取缓存的值
 
-### couchbase->remove($key)
+#### couchbase->remove($key)
 移除一项缓存
 
-### couchbase->exists($key)
+#### couchbase->exists($key)
 检查缓存是否存在
 
-### couchbase->add($key, $value)
+#### couchbase->add($key, $value)
 增加一项缓存,如果缓存已存在,返回false
 
-### couchbase->replace($key, $value)
+#### couchbase->replace($key, $value)
 替换一项缓存,如果缓存不存在,返回false
 
-### couchbase->increment($key, $offset = 1)
+#### couchbase->increment($key, $offset = 1)
 增大一项缓存的值
 
-### couchbase->decrement($key, $offset = 1)
+#### couchbase->decrement($key, $offset = 1)
 减小一项缓存的值
 
-### couchbase->getMulti($keys)
+#### couchbase->getMulti($keys)
 批量获取缓存的值
 
-### couchbase->setMulti($values)
+#### couchbase->setMulti($values)
 批量设置缓存的值

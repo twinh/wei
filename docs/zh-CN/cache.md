@@ -35,18 +35,13 @@ $widget->cache('key', 'value', 60);
 
 目前支持的缓存类型有
 
-* `apc` *推荐*
-* `arrayCache`
-* `dbCache`
-    * sqlite
-    * mysql
-    * pgsql
-    * sqlsrv/dblib *不稳定*
-    * oci *不稳定*
-* `fileCache`
-* `memcache`
-* `memcached`
-* `redis` *推荐*
+* `apc` APC缓存 *推荐*
+* `arrayCache` 数值缓存
+* `dbCache` 数据库缓存
+* `fileCache` 文件缓存
+* `memcache` Memcache缓存
+* `memcached` Memcached缓存
+* `redis` Redis缓存 *推荐*
 
 ### 方法
 
@@ -60,32 +55,32 @@ $widget->cache('key', 'value', 60);
 #### cache( $key )
 获取指定名称的缓存
 
-### cache->set($key, $value)
+#### cache->set($key, $value)
 设置缓存的值
 
-### cache->get($key)
+#### cache->get($key)
 获取缓存的值
 
-### cache->remove($key)
+#### cache->remove($key)
 移除一项缓存
 
-### cache->exists($key)
+#### cache->exists($key)
 检查缓存是否存在
 
-### cache->add($key, $value)
+#### cache->add($key, $value)
 增加一项缓存,如果缓存已存在,返回false
 
-### cache->replace($key, $value)
+#### cache->replace($key, $value)
 替换一项缓存,如果缓存 **不** 存在,返回false
 
-### cache->increment($key, $offset = 1)
+#### cache->increment($key, $offset = 1)
 增大一项缓存的值
 
-### cache->decrement($key, $offset = 1)
+#### cache->decrement($key, $offset = 1)
 减小一项缓存的值
 
-### cache->getMulti($keys)
+#### cache->getMulti($keys)
 批量获取缓存的值
 
-### cache->setMulti($values)
+#### cache->setMulti($values)
 批量设置缓存的值

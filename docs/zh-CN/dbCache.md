@@ -49,32 +49,32 @@ $widget->dbCache('key', 'value', 60);
 #### dbCache( $key )
 获取指定名称的缓存
 
-### dbCache->set($key, $value)
+#### dbCache->set($key, $value)
 设置缓存的值
 
-### dbCache->get($key)
+#### dbCache->get($key)
 获取缓存的值
 
-### dbCache->remove($key)
+#### dbCache->remove($key)
 移除一项缓存
 
-### dbCache->exists($key)
+#### dbCache->exists($key)
 检查缓存是否存在
 
-### dbCache->add($key, $value)
+#### dbCache->add($key, $value)
 增加一项缓存,如果缓存已存在,返回false
 
-### dbCache->replace($key, $value)
+#### dbCache->replace($key, $value)
 替换一项缓存,如果缓存不存在,返回false
 
-### dbCache->increment($key, $offset = 1)
+#### dbCache->increment($key, $offset = 1)
 增大一项缓存的值
 
-### dbCache->decrement($key, $offset = 1)
+#### dbCache->decrement($key, $offset = 1)
 减小一项缓存的值
 
-### dbCache->getMulti($keys)
+#### dbCache->getMulti($keys)
 批量获取缓存的值
 
-### dbCache->setMulti($values)
+#### dbCache->setMulti($values)
 批量设置缓存的值

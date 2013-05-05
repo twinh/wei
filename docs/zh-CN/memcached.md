@@ -54,32 +54,32 @@ $widget->memcached('key', 'value', 60);
 #### memcached($key)
 获取指定名称的缓存
 
-### memcached->set($key, $value)
+#### memcached->set($key, $value)
 设置缓存的值
 
-### memcached->get($key)
+#### memcached->get($key)
 获取缓存的值
 
-### memcached->remove($key)
+#### memcached->remove($key)
 移除一项缓存
 
-### memcached->exists($key)
+##### memcached->exists($key)
 检查缓存是否存在
 
-### memcached->add($key, $value)
+##### memcached->add($key, $value)
 增加一项缓存,如果缓存已存在,返回false
 
-### memcached->replace($key, $value)
+#### memcached->replace($key, $value)
 替换一项缓存,如果缓存不存在,返回false
 
-### memcached->increment($key, $offset = 1)
+#### memcached->increment($key, $offset = 1)
 增大一项缓存的值
 
-### memcached->decrement($key, $offset = 1)
+#### memcached->decrement($key, $offset = 1)
 减小一项缓存的值
 
-### memcached->getMulti($keys)
+#### memcached->getMulti($keys)
 批量获取缓存的值
 
-### memcached->setMulti($values)
+#### memcached->setMulti($values)
 批量设置缓存的值

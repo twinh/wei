@@ -38,32 +38,32 @@ $widget->fileCache('key', 'value');
 $widget->fileCache('name');
 ```
 
-### fileCache->set($key, $value)
+#### fileCache->set($key, $value)
 设置缓存的值
 
-### fileCache->get($key)
+#### fileCache->get($key)
 获取缓存的值
 
-### fileCache->remove($key)
+#### fileCache->remove($key)
 移除一项缓存
 
-### fileCache->exists($key)
+#### fileCache->exists($key)
 检查缓存是否存在
 
-### fileCache->add($key, $value)
+#### fileCache->add($key, $value)
 增加一项缓存,如果缓存已存在,返回false
 
-### fileCache->replace($key, $value)
+#### fileCache->replace($key, $value)
 替换一项缓存,如果缓存 **不** 存在,返回false
 
-### fileCache->increment($key, $offset = 1)
+#### fileCache->increment($key, $offset = 1)
 增大一项缓存的值
 
-### fileCache->decrement($key, $offset = 1)
+#### fileCache->decrement($key, $offset = 1)
 减小一项缓存的值
 
-### fileCache->getMulti($keys)
+#### fileCache->getMulti($keys)
 批量获取缓存的值
 
-### fileCache->setMulti($values)
+#### fileCache->setMulti($values)
 批量设置缓存的值
