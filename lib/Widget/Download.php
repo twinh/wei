@@ -68,9 +68,9 @@ class Download extends Response
 
         // For IE
         if (preg_match('/MSIE ([\w.]+)/', $this->request->getServer('HTTP_USER_AGENT'))) {
-            $filename = '=' . urlencode($name);
+            $filename = '=' . rawurlencode($name);
         } else {
-            $filename = "*=UTF-8''" . urlencode($name);
+            $filename = "*=UTF-8''" . rawurlencode($name);
         }
         
         $this->header->set(array(
