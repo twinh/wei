@@ -12,8 +12,7 @@ namespace Widget;
  * A widget send file download response
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @property    Browser    $browser The browser widget
- * @property    Header     $header The header widget
+ * @property    Request $request A widget that handles the HTTP request data
  */
 class Download extends Response
 {
@@ -23,6 +22,23 @@ class Download extends Response
      * @var string
      */
     protected $type = 'application/x-download';
+
+    /**
+     * The type of disposition, could be "attachment" or "inline"
+     *
+     * With inline, the browser will try to open file within the browser, while attachment will force it to download
+     *
+     * @var string
+     * @link http://stackoverflow.com/questions/1395151/content-dispositionwhat-are-the-differences-between-inline-and-attachment
+     */
+    protected $disposition = 'attachment';
+
+    /**
+     * The file name to display in download dialog
+     * 
+     * @var string
+     */
+    protected $filename;
 
     /**
      * Send file download response
@@ -48,13 +64,19 @@ class Download extends Response
             throw new Exception\NotFoundException('File not found');
         }
 
-        $name = basename($file);
-        $this->os->in('ie') && $name = urlencode($name);
+        $name = $this->filename ?: basename($file);
+
+        // For IE
+        if (preg_match('/MSIE ([\w.]+)/', $this->request->getServer('HTTP_USER_AGENT'))) {
+            $filename = '=' . urlencode($name);
+        } else {
+            $filename = "*=UTF-8''" . urlencode($name);
+        }
         
         $this->header->set(array(
             'Content-Description'       => 'File Transfer',
             'Content-Type'              => $this->type,
-            'Content-Disposition'       => 'attachment;filename="' . $name,
+            'Content-Disposition'       => $this->disposition . ';filename' . $filename,
             'Content-Transfer-Encoding' => 'binary',
             'Expires'                   => '0',
             'Cache-Control'             => 'must-revalidate',
