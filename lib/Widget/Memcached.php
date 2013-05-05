@@ -171,8 +171,6 @@ class Memcached extends AbstractCache
         return $this->object->flush();
     }
 
-    
-
     /**
      * Get memcached object
      *
