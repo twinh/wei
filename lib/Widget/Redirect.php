@@ -28,7 +28,7 @@ class Redirect extends Response
      * 
      * @var int
      */
-    protected $delay = 0;
+    protected $wait = 0;
 
     /**
      * The default view content
@@ -64,11 +64,11 @@ class Redirect extends Response
             require $this->view;
         } else {
             // Location header does not support delay
-            if (0 === $this->delay) {
+            if (0 === $this->wait) {
                 $this->header('Location', $url);
             }
             
-            $content = sprintf(static::$html, $this->delay, htmlspecialchars($url, ENT_QUOTES, 'UTF-8'));
+            $content = sprintf(static::$html, $this->wait, htmlspecialchars($url, ENT_QUOTES, 'UTF-8'));
 
             parent::__invoke($content, $status);
         }
@@ -95,14 +95,14 @@ class Redirect extends Response
     }
     
     /**
-     * Set delay seconds
+     * Set wait seconds
      * 
-     * @param int $delay
+     * @param int $wait
      * @return Redirect
      */
-    public function setDelay($delay)
+    public function setWait($wait)
     {
-        $this->delay = (int)$delay;
+        $this->wait = (int)$wait;
         
         return $this;
     }

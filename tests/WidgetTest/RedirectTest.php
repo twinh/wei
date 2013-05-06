@@ -34,11 +34,11 @@ class RedirectTest extends TestCase
         $this->assertEquals('http://www.google.com', $this->header->get('Location'));
     }
     
-    public function testDelay()
+    public function testWait()
     {
         $this->expectOutputRegex('/content=\"5;url=http:\/\/www\.google\.com"/');
         
-        $this->redirect->setDelay(5);
+        $this->redirect->setWait(5);
         
         $this->redirect('http://www.google.com');
     }
