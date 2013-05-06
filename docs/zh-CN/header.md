@@ -1,18 +1,39 @@
-    该微件文档还在紧急编写中,敬请期待!
-[header()](http://twinh.github.io/widget/api/header)
-====================================================
+Header
+======
 
-Get or set the header values
+设置和获取HTTP响应头
 
-### Get or set the header values
+案例
+----
+
+### 设置和获取自定义HTTP响应头
 ```php
-mixed|\Header header($name, $values, $replace)
+$widget->header('X-Powered-By', 'PHP');
+
+// 输出'PHP'
+echo $widget->header('X-Powered-By');
 ```
 
-##### 参数
-* **$name** `string|array` The header name or an associative array
-                              that the key is header name and the value
-                              is header value
-* **$values** `string|array` The header values, for set method only
-* **$replace** `bool` Whether replace the exists values or not, for set method only
+调用方式
+--------
 
+### 选项
+
+*无*
+
+### 方法
+
+#### header($name)
+获取HTTP响应头信息
+
+#### header($name, $values, $replace = true)
+设置HTTP响应头信息
+
+| 名称          | 类型      | 默认值    | 说明                 |
+|---------------|-----------|-----------|----------------------|
+| $name         | string    | 无        | HTTP响应头的名称     |
+| $values       | string    | 无        | HTTP响应头的值       |
+| $replace      | bool      | true      | 是否替换已有的响应头 |
+
+#### remove($name)
+删除HTTP响应头信息
