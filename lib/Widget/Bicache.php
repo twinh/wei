@@ -58,6 +58,7 @@ class Bicache extends AbstractCache
         if (false === $value) {
             return $this->slave->get($key);
         }
+        
         return $value;
     }
 
@@ -67,11 +68,13 @@ class Bicache extends AbstractCache
     public function set($key, $value, $expire = 0)
     {
         $result = $this->master->set($key, $value, $expire);
-
-        if ($this->needUpdate($key)) {
-            $result = $this->slave->set($key, $value, $expire);
+        
+        if ($result && $this->needUpdate($key)) {
+            // $result is true, so return the slave cache result only
+            return $this->slave->set($key, $value, $expire);
         }
-
+        
+        // No need to update, return mater result only
         return $result;
     }
     
@@ -101,11 +104,13 @@ class Bicache extends AbstractCache
     {
         $result = $this->master->add($key, $value, $expire);
 
-        // The key could be only added one time, when added successed, set to the slave cache
+        // The cache can be added only one time, when added success, set it to the slave cache
         if ($result) {
-            $result = $this->slave->set($key, $value, $expire);
+            // $result is true, so return the slave cache result only
+            return $this->slave->set($key, $value, $expire);
         }
 
+        // false
         return $result;
     }
     
@@ -115,11 +120,12 @@ class Bicache extends AbstractCache
     public function replace($key, $value, $expire = 0)
     {
         $result = $this->master->replace($key, $value, $expire);
-
+        
+        // The cache can always be replaced when it's exists, so check for update
         if ($result && $this->needUpdate($key)) {
-            $result = $this->slave->set($key, $value);
+            return $this->slave->set($key, $value, $expire);
         }
-
+        
         return $result;
     }
 
@@ -129,11 +135,11 @@ class Bicache extends AbstractCache
     public function increment($key, $offset = 1)
     {
         $result = $this->master->increment($key, $offset);
-
-        if ($this->needUpdate($key)) {
-            $result = $this->slave->set($key, $this->master->get($key));
+        
+        if (false !== $result && $this->needUpdate($key)) {
+            return $this->slave->set($key, $result) ? $result : false;
         }
-
+        
         return $result;
     }
 
