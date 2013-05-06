@@ -53,6 +53,8 @@ class SessionTest extends TestCase
     }
     
     /**
+     * FIXME remove @runInSeparateProcess for travis-ci
+     * 
      * @runInSeparateProcess
      */
     public function testSet()
@@ -90,5 +92,32 @@ class SessionTest extends TestCase
         $session->destroy();
 
         $this->assertEquals(null, $session->get('action'));
+    }
+    /**
+     * @dataProvider providerForGetterAndSetter
+     */
+    public function testValues($value, $key)
+    {
+        $this->session($key, $value);
+        $this->assertEquals($value, $this->session($key));
+        
+        $this->session->set($key, $value);
+        $this->assertEquals($value, $this->session->get($key));
+    }
+    
+    public function providerForGetterAndSetter()
+    {
+        $obj = new \stdClass;
+        
+        return array(
+            array(array(),  'array'),
+            array(true,     'bool'),
+            array(1.2,      'float'),
+            array(1,        'int'),
+            array(1,        'integer'),
+            array(null,     'null'),
+            array('1',      'numeric'),
+            array($obj,     'object'),
+        );
     }
 }

@@ -13,7 +13,7 @@ namespace Widget;
  *
  * @author      Twin Huang <twinhuang@qq.com>
  */
-class Session extends Parameter
+class Session extends ArrayWidget
 {
     /**
      * Current namespace to store session data
@@ -72,7 +72,59 @@ class Session extends Parameter
 
         return $this;
     }
-
+    
+    /**
+     * Get or set session
+     *
+     * @param  string $key The name of cookie
+     * @param  mixed $value The value of cookie
+     * @return mixed
+     */
+    public function __invoke($key, $value = null)
+    {
+        if (1 == func_num_args()) {
+            return $this->get($key);
+        } else {
+            return $this->set($key, $value);
+        }
+    }
+    
+    /**
+     * Returns session value
+     * 
+     * @param  string $key    The name of session
+     * @param  mixed  $default The default parameter value if the session does not exist
+     * @return mixed
+     */
+    public function get($key)
+    {
+        return $this->offsetGet($key);
+    }
+    
+     /**
+     * Set session value
+     *
+     * @param string $name The name of session
+     * @param mixed  $value The value of session
+     * @return mixed
+     */
+    public function set($name, $value)
+    {
+        return $this->offsetSet($name, $value);
+    }
+    
+    /**
+     * Clear all session data
+     * 
+     * @return Parameter
+     */
+    public function clear()
+    {
+        $this->data = array();
+        
+        return $this;
+    }
+    
     /**
      * Destroy session
      *
@@ -84,10 +136,7 @@ class Session extends Parameter
             session_destroy();
         }
         
-        // Clean up all data
-        $this->data = array();
-
-        return $this;
+        return $this->clear();
     }
 
     /**
