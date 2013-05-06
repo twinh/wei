@@ -23,20 +23,6 @@ class Session extends Parameter
     protected $namespace = 'widget';
 
     /**
-     * Whether session started
-     *
-     * @var string
-     */
-    protected $started = false;
-
-    /**
-     * Whether auto start session when object construct
-     *
-     * @var bool
-     */
-    protected $autoStart = true;
-
-    /**
      * The session configuration options
      * 
      * @var array
@@ -60,9 +46,7 @@ class Session extends Parameter
             'inis' => $this->inis,
         ));
         
-        if ($this->autoStart) {
-            $this->start();
-        }
+        $this->start();
     }
 
     /**
@@ -70,7 +54,7 @@ class Session extends Parameter
      *
      * @return Session
      */
-    public function start()
+    protected function start()
     {
         $file = $line = null;
         if (headers_sent($file, $line)) {
@@ -80,7 +64,6 @@ class Session extends Parameter
         // If session started, ignored it
         if (!session_id()) {
             session_start();
-            $this->started = true;
             if (!isset($_SESSION[$this->namespace])) {
                 $_SESSION[$this->namespace] = array();
             }
@@ -91,26 +74,16 @@ class Session extends Parameter
     }
 
     /**
-     * Whether session started
-     *
-     * @return bool
-     */
-    public function isStarted()
-    {
-        return $this->started && session_id();
-    }
-
-    /**
      * Destroy session
      *
      * @return Session
      */
     public function destroy()
     {
-        if ($this->isStarted()) {
+        if (session_id()) {
             session_destroy();
         }
-
+        
         // Clean up all data
         $this->data = array();
 

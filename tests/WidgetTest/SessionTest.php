@@ -9,6 +9,39 @@ class SessionTest extends TestCase
      */
     protected $object;
     
+    protected function setUp()
+    {
+        parent::setUp();
+        $data = array();
+        session_set_save_handler(
+            // open
+            function(){
+                return true;
+            },
+            // close
+            function(){
+                return true;
+            },
+            // read
+            function($id) use($data){
+                return $data[$id];
+            },
+            // write
+            function($id, $value) use($data){
+                $data[$id] = $value;
+                return true;
+            },
+            // destroy
+            function(){
+                return true;
+            },
+            // gc
+            function(){
+                return true;
+            }
+       );
+    }
+    
     protected function tearDown()
     {
         // FIXME why sometime $this->obejct is NULL
@@ -18,20 +51,7 @@ class SessionTest extends TestCase
 
         parent::tearDown();
     }
-    
-    /**
-     * @runInSeparateProcess
-     */
-    public function testIsStarted()
-    {
-        $session = $this->object;
 
-        $this->assertTrue($session->isStarted());
-    }
-    
-    /**
-     * @runInSeparateProcess
-     */
     public function testSet()
     {
         $session = $this->object;
@@ -41,9 +61,6 @@ class SessionTest extends TestCase
         $this->assertEquals('test', $session->get('action'));
     }
 
-    /**
-     * @runInSeparateProcess
-     */
     public function testClear()
     {
         $session = $this->object;
@@ -55,9 +72,6 @@ class SessionTest extends TestCase
         $this->assertEquals(null, $session->get('action'));
     }
 
-    /**
-     * @runInSeparateProcess
-     */
     public function testDestroy()
     {
         $session = $this->object;
