@@ -153,14 +153,6 @@ class Memcache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function decrement($key, $offset = 1)
-    {
-        return $this->object->decrement($key, $offset);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function clear()
     {
         return $this->object->flush();

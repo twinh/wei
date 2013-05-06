@@ -199,14 +199,6 @@ class Redis extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function decrement($key, $offset = 1)
-    {
-        return $this->object->decrBy($key, $offset);
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
     public function clear()
     {
         return $this->object->flushAll();

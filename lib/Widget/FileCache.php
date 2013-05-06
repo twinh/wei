@@ -220,15 +220,8 @@ class FileCache extends AbstractCache
         return $this->writeAndRelease($handle, $content, true);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function decrement($key, $offset = 1)
-    {
-        return $this->increment($key, -$offset);
-    }
     
-        /**
+    /**
      * {@inheritdoc}
      */
     public function clear()

@@ -41,4 +41,12 @@ abstract class AbstractCache extends AbstractWidget implements CacheInterface
         }
         return $results;
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function decrement($key, $offset = 1)
+    {
+        return $this->increment($key, -$offset);
+    }
 }

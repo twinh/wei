@@ -96,14 +96,6 @@ class Apc extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function decrement($key, $offset = 1)
-    {
-        return $this->increment($key, -$offset);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function clear()
     {
         return apc_clear_cache('user');

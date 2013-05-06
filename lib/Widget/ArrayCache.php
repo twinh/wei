@@ -110,14 +110,6 @@ class ArrayCache extends AbstractCache
     /**
      * {@inheritdoc}
      */
-    public function decrement($key, $offset = 1)
-    {
-        return $this->increment($key, -$offset);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function clear()
     {
         $this->data = array();

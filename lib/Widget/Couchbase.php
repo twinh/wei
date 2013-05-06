@@ -154,14 +154,6 @@ class Couchbase extends AbstractCache
 
     /**
      * {@inheritdoc}
-     */
-    public function decrement($key, $offset = 1)
-    {
-        return $this->object->increment($key, -$offset);
-    }
-
-    /**
-     * {@inheritdoc}
      * 
      * @throws \CouchbaseServerException when flush is disabled for the bucket
      * @link http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-admin-web-console-data-buckets-createedit.html
