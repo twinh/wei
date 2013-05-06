@@ -9,7 +9,7 @@ Redirect
 ### 等待3秒后跳转d到谷歌首页
 ```php
 $widget->redirect('http://www.google.com', 302, array(
-    'delay' => 3
+    'wait' => 3
 ));
 ```
 
@@ -25,7 +25,7 @@ $widget->redirect('http://www.google.com');
 
 | 名称          | 类型      | 默认值    | 说明                                                                                                                                                                           |
 |---------------|-----------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| delay         | int       | 0         | 等待跳转的秒数,如果delay为0,使用的是HTTP header跳转,如果不为0,因为HTTP header不支持延迟跳转,所以使用的是HTML [Meta refresh](http://en.wikipedia.org/wiki/Meta_refresh)跳转     |
+| wait          | int       | 0         | 等待跳转的秒数,如果wait为0,使用的是HTTP header跳转,如果不为0,因为HTTP header不支持延迟跳转,所以使用的是HTML [Meta refresh](http://en.wikipedia.org/wiki/Meta_refresh)跳转     |
 | view          | string    | 无        | 自定义跳转视图的文件,可以设置该选项以展示更加友好的跳转视图                                                                                                                    |
 
 ### 方法
@@ -33,7 +33,7 @@ $widget->redirect('http://www.google.com');
 #### redirect($url, $status = 302, $options = array())
 跳转到指定地址
 
-#### redirect->setDelay($delay)
+#### redirect->setWait($wait)
 设置默认的等待时间
 
 #### redirect->setView($view)
