@@ -69,8 +69,8 @@ h1, h2, h3, .lead
       <a href="#request">HTTP请求</a>
       <ul class="nav">
         <li><a href="#request">Request</a></li>
-        <li><a href="#browser">Browser</a></li>
         <li><a href="#cookie">Cookie</a></li>
+        <li><a href="#os">Os</a></li>
         <li><a href="#post">Post</a></li>
         <li><a href="#query">Query</a></li>
         <li><a href="#server">Server</a></li>
@@ -1183,51 +1183,91 @@ if ($result) {
   <section id="response">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/response">response()</a></h1>
+<h1>Response</h1>
 
 <p>发送HTTP响应头和响应内容</p>
 
-<pre><code class="php">\Widget\Response response( $content [, $stateCode ] )
+<h2>案例</h2>
+
+<h3>发送内容为"Hello World"的HTTP响应</h3>
+
+<pre><code class="php">$widget-&gt;response('Hello World');
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$content</strong> <code>string</code> 响应的内容</li>
-<li>
-<strong>$stateCode</strong> <code>string</code> HTTP状态码,默认是<code>200</code>
-</li>
-</ul>
-<h5>代码范例</h5>
-
-<p>发送内容为"Hello World"的HTTP响应<br>
-```php<br>
-&lt;?php</p>
-
-<p>$widget-&gt;response('Hello World');<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Hello World'
 </code></pre>
 
-<h5>代码范例</h5>
+<h4>获取上面案例中HTTP响应的完整内容</h4>
 
-<p>查看上面例子中HTTP响应的完整内容<br>
-```php<br>
-&lt;?php</p>
+<pre><code class="php">echo (string)$widget-&gt;response;
+</code></pre>
 
-<p>echo (string)$widget-&gt;response;<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'HTTP/1.1 200 OK
 
 Hello World'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<p><em>无</em></p>
+
+<h3>方法</h3>
+
+<h4>response($content, $status = null)</h4>
+
+<p>发送HTTP响应头和响应内容</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$content</td>
+<td>string</td>
+<td>无</td>
+<td>HTTP响应的内容</td>
+</tr>
+<tr>
+<td>$stateCode</td>
+<td>int</td>
+<td>200</td>
+<td>HTTP响应的状态码</td>
+</tr>
+</tbody>
+</table>
+<h4>response-&gt;setContent($content)</h4>
+
+<p>设置HTTP响应的内容</p>
+
+<h4>response-&gt;getContent()</h4>
+
+<p>获取HTTP响应的内容</p>
+
+<h4>response-&gt;setStatusCode($code, $text = null)</h4>
+
+<p>设置HTTP响应的状态码</p>
+
+<h4>response-&gt;setStatusCode()</h4>
+
+<p>获取HTTP响应的状态码</p>
+
+<h4>response-&gt;isSent()</h4>
+
+<p>检查内容是否已发送</p>
+
+<h4>response-&gt;setSentStatus($bool)</h4>
+
+<p>设置内容是否已发送</p>
 </body></html>
 
   </section>
@@ -1335,30 +1375,67 @@ for ($i = 1; $i &lt;= 10; $i++) {
   <section id="header">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<pre><code>该微件文档还在紧急编写中,敬请期待!
+<h1>Header</h1>
+
+<p>设置和获取HTTP响应头</p>
+
+<h2>案例</h2>
+
+<h3>设置和获取自定义HTTP响应头</h3>
+
+<pre><code class="php">$widget-&gt;header('X-Powered-By', 'PHP');
+
+// 输出'PHP'
+echo $widget-&gt;header('X-Powered-By');
 </code></pre>
 
-<h1><a href="http://twinh.github.io/widget/api/header">header()</a></h1>
+<h2>调用方式</h2>
 
-<p>Get or set the header values</p>
+<h3>选项</h3>
 
-<h3>Get or set the header values</h3>
+<p><em>无</em></p>
 
-<pre><code class="php">mixed|\Header header($name, $values, $replace)
-</code></pre>
+<h3>方法</h3>
 
-<h5>参数</h5>
+<h4>header($name)</h4>
 
-<ul>
-<li>
-<strong>$name</strong> <code>string|array</code> The header name or an associative array
-                          that the key is header name and the value
-                          is header value</li>
-<li>
-<strong>$values</strong> <code>string|array</code> The header values, for set method only</li>
-<li>
-<strong>$replace</strong> <code>bool</code> Whether replace the exists values or not, for set method only</li>
-</ul>
+<p>获取HTTP响应头信息</p>
+
+<h4>header($name, $values, $replace = true)</h4>
+
+<p>设置HTTP响应头信息</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$name</td>
+<td>string</td>
+<td>无</td>
+<td>HTTP响应头的名称</td>
+</tr>
+<tr>
+<td>$values</td>
+<td>string</td>
+<td>无</td>
+<td>HTTP响应头的值</td>
+</tr>
+<tr>
+<td>$replace</td>
+<td>bool</td>
+<td>true</td>
+<td>是否替换已有的响应头</td>
+</tr>
+</tbody>
+</table>
+<h4>remove($name)</h4>
+
+<p>删除HTTP响应头信息</p>
 </body></html>
 
   </section>
@@ -1442,31 +1519,63 @@ $widget-&gt;json('success', 0, array(), true);
   <section id="redirect">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/redirect">redirect()</a></h1>
+<h1>Redirect</h1>
 
-<p>发送页面跳转的HTTP响应</p>
+<p>跳转到指定地址</p>
 
-<pre><code class="php">\Widget\Redirect redirect( $url [, $status [, $options ] ] )
+<h2>案例</h2>
+
+<h3>等待3秒后跳转d到谷歌首页</h3>
+
+<pre><code class="php">$widget-&gt;redirect('http://www.google.com', 302, array(
+    'wait' =&gt; 3
+));
 </code></pre>
 
-<h5>参数</h5>
+<h3>直接跳转到谷歌首页</h3>
 
-<ul>
-<li>
-<strong>$url</strong> <code>string</code> 跳转到的Url地址</li>
-<li>
-<strong>$status</strong> <code>int</code> 响应的HTTP状态码,默认为<code>302</code>
-</li>
-<li>
-<strong>$options</strong> <code>array</code> 跳转微件的配置选项
+<pre><code class="php">$widget-&gt;redirect('http://www.google.com');
+</code></pre>
 
-<ul>
-<li> <strong>delay</strong> <code>int</code> 延迟跳转的秒数,默认是0</li>
-<li> <strong>view</strong> <code>string</code> 自定义视图文件的路径</li>
-</ul>
-</li>
-</ul>
-<p><strong>注意</strong>: 如果delay为0,使用的是HTTP header跳转,如果不为0,因为HTTP header不支持延迟跳转,所以使用的是HTML <a href="http://en.wikipedia.org/wiki/Meta_refresh">Meta refresh</a>跳转,此时,可以通过view选项指定更加友好的跳转视图.</p>
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>wait</td>
+<td>int</td>
+<td>0</td>
+<td>等待跳转的秒数,如果wait为0,使用的是HTTP header跳转,如果不为0,因为HTTP header不支持延迟跳转,所以使用的是HTML <a href="http://en.wikipedia.org/wiki/Meta_refresh">Meta refresh</a>跳转</td>
+</tr>
+<tr>
+<td>view</td>
+<td>string</td>
+<td>无</td>
+<td>自定义跳转视图的文件,可以设置该选项以展示更加友好的跳转视图</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>redirect($url, $status = 302, $options = array())</h4>
+
+<p>跳转到指定地址</p>
+
+<h4>redirect-&gt;setWait($wait)</h4>
+
+<p>设置默认的等待时间</p>
+
+<h4>redirect-&gt;setView($view)</h4>
+
+<p>设置默认的跳转视图</p>
 </body></html>
 
   </section>
@@ -2473,78 +2582,151 @@ $widget-&gt;couchbase('key');
   <section id="redis">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/redis">redis()</a></h1>
+<h1>Redis</h1>
 
-<p>设置或获取一项Redis缓存</p>
+<p>设置或获取一项缓存,缓存数据存储于Redis中</p>
 
-<h5>目录</h5>
+<h2>案例</h2>
 
-<ul>
-<li>redis( $key, $value [ $expire ] )</li>
-<li>redis( $key )</li>
-</ul>
-<h3>设置一项Redis缓存</h3>
+<h3>设置和获取缓存</h3>
 
-<pre><code class="php">bool redis( $key, $value [ $expire ] )
+<pre><code class="php">// 设置缓存
+$widget-&gt;redis('key', 'value');
+// 返回 true
+
+// 获取缓存
+$widget-&gt;redis('key');
+// 返回 value
 </code></pre>
+
+<h3>设置60秒后就过期的缓存</h3>
+
+<pre><code class="php">$widget-&gt;redis('key', 'value', 60);
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>host</td>
+<td>string</td>
+<td>127.0.0.1</td>
+<td>Redis所在的服务器名称</td>
+</tr>
+<tr>
+<td>prot</td>
+<td>int</td>
+<td>6379</td>
+<td>Redis所在的服务器端口</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>float</td>
+<td>0.0</td>
+<td>连接服务器的超时秒数</td>
+</tr>
+<tr>
+<td>persistent</td>
+<td>bool</td>
+<td>true</td>
+<td>是否使用长连接</td>
+</tr>
+<tr>
+<td>object</td>
+<td>\Redis</td>
+<td>无</td>
+<td>原始的Redis对象</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>redis($key, $value, $expire = 0)</h4>
+
+<p>设置缓存的值</p>
 
 <h5>参数</h5>
 
-<ul>
-<li>
-<strong>$key</strong> <code>string</code> 缓存的键名</li>
-<li>
-<strong>$value</strong> <code>mixed</code> 缓存的值,允许任意类型</li>
-<li>
-<strong>$expire</strong> <code>int</code> 缓存的有效期,默认为0秒,表示永不过期</li>
-</ul>
-<p>该调用方式相等于<code>$widget-&gt;redis-&gt;set($key, $value, $expire)</code></p>
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$key</td>
+<td>string</td>
+<td>无</td>
+<td>缓存的键名</td>
+</tr>
+<tr>
+<td>$value</td>
+<td>mixed</td>
+<td>无</td>
+<td>缓存的值,允许任意类型</td>
+</tr>
+<tr>
+<td>$expire</td>
+<td>int</td>
+<td>0</td>
+<td>缓存的有效期,默认为0秒,表示永不过期</td>
+</tr>
+</tbody>
+</table>
+<h4>redis($key)</h4>
 
-<h5>代码范例</h5>
+<p>获取指定名称的缓存</p>
 
-<p>设置键名为"key",值为"value"的缓存<br>
-```php<br>
-&lt;?php</p>
+<h4>redis-&gt;set($key, $value, $expire = 0)</h4>
 
-<p>$widget-&gt;redis('key', 'value');</p>
+<p>设置缓存的值,同<code>redis($key, $value, $expire = 0)</code></p>
 
-<p>echo $widget-&gt;redis('key');<br>
-```</p>
+<h4>redis-&gt;get($key)</h4>
 
-<h5>运行结果</h5>
+<p>获取缓存的值,同<code>redis($key)</code></p>
 
-<pre><code class="php">'value'
-</code></pre>
+<h4>redis-&gt;remove($key)</h4>
 
-<hr>
-<h3>获取一项Redis缓存</h3>
+<p>移除一项缓存</p>
 
-<pre><code class="php">bool redis( $key )
-</code></pre>
+<h4>redis-&gt;exists($key)</h4>
 
-<h5>参数</h5>
+<p>检查缓存是否存在</p>
 
-<ul>
-<li>
-<strong>$key</strong> <code>string</code> 缓存的键名</li>
-</ul>
-<p>该调用方式相等于<code>$widget-&gt;redis-&gt;get($key)</code></p>
+<h4>redis-&gt;add($key, $value)</h4>
 
-<h5>代码范例</h5>
+<p>增加一项缓存,如果缓存已存在,返回false</p>
 
-<p>获取键名为"key"的缓存,并打印出来<br>
-```php<br>
-&lt;?php</p>
+<h4>redis-&gt;replace($key, $value)</h4>
 
-<p>$widget-&gt;redis('key', 'value');</p>
+<p>替换一项缓存,如果缓存不存在,返回false</p>
 
-<p>echo $widget-&gt;redis('key');<br>
-```</p>
+<h4>redis-&gt;increment($key, $offset = 1)</h4>
 
-<h5>运行结果</h5>
+<p>增大一项缓存的值</p>
 
-<pre><code class="php">'value'
-</code></pre>
+<h4>redis-&gt;decrement($key, $offset = 1)</h4>
+
+<p>减小一项缓存的值</p>
+
+<h4>redis-&gt;getMulti($keys)</h4>
+
+<p>批量获取缓存的值</p>
+
+<h4>redis-&gt;setMulti($values)</h4>
+
+<p>批量设置缓存的值</p>
 </body></html>
 
   </section>
@@ -3186,59 +3368,64 @@ if ($widget-&gt;isAlnum($input)) {<br>
   <section id="isAlpha">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isAlpha">isAlpha()</a></h1>
+<h1>isAlpha</h1>
 
 <p>检查数据是否只由字母(a-z)组成</p>
 
-<pre><code class="php">bool isAlpha( $input )
+<h2>案例</h2>
+
+<h3>检查数据是否只由字母组成</h3>
+
+<pre><code class="php">$input = 'abc123';
+if ($widget-&gt;isAlpha($input)) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>pattern</code></td>
-<td>%name%只能由字母(a-z)组成</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%必须不匹配模式"%pattern%"</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查数据是否只由字母组成<br>
-```php<br>
-&lt;?php</p>
-
-<p>$input = 'abc123';<br>
-if ($widget-&gt;isAlpha($input)) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'No'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>patternMessage</td>
+<td>string</td>
+<td>%name%只能由字母(a-z)组成</td>
+<td>-</td>
+</tr>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%必须不匹配模式"%pattern%"</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isAlpha($input)</h4>
+
+<p>检查数据是否只由字母(a-z)组成</p>
 </body></html>
 
   </section>
@@ -7786,35 +7973,6 @@ print_r($widget-&gt;arr-&gt;sort($data, 'order', SORT_DESC));
 <h4>arr-&gt;sort($array, $key = 'order', $type = SORT_ASC)</h4>
 
 <p>对一个二维数组进行排序,类似SQL的ORDER BY语句</p>
-</body></html>
-
-  </section>
-
-<!-- instance
-  ================================================== -->
-  <section id="instance">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<pre><code>该微件文档还在紧急编写中,敬请期待!
-</code></pre>
-
-<h1><a href="http://twinh.github.io/widget/api/instance">instance()</a></h1>
-
-<p>Instance a class</p>
-
-<h3>Instance a class</h3>
-
-<pre><code class="php">false|object instance($class, $args)
-</code></pre>
-
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$class</strong> <code>string</code> the name of class</li>
-<li>
-<strong>$args</strong> <code>array</code> the parameters to be passed to the class constructor as an array.</li>
-</ul>
 </body></html>
 
   </section>
