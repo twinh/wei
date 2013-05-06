@@ -28,11 +28,23 @@ if ($widget->sessio('verfiyCode') == $widget->post('verfiyCode')) {
 
 ### 方法
 
-#### session($name)
+#### session($key)
 获取会话信息的值
 
-#### session($name, $value)
+#### session($key, $value)
 设置会话信息的值
+
+#### session->get($key)
+获取会话信息的值,同`session($key)`
+
+#### session->set($key, $value)
+设置会话信息的值,同`session($key, $value)`
+
+#### session->clear()
+删除当前命名空间的会话信息
+
+#### session->destory()
+删除所有的会话消息
 
 #### session->setInis(array $inis)
 设置会话相关的ini配置,配置名称会自定加上`session.`前缀  

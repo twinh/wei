@@ -114,7 +114,7 @@ class Session extends ArrayWidget
     }
     
     /**
-     * Clear all session data
+     * Clear session data in current namespace
      * 
      * @return Parameter
      */
@@ -126,7 +126,7 @@ class Session extends ArrayWidget
     }
     
     /**
-     * Destroy session
+     * Destroy all session data
      *
      * @return Session
      */
