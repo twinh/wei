@@ -145,11 +145,7 @@ class Couchbase extends AbstractCache
      */
     public function increment($key, $offset = 1)
     {
-        if (is_numeric($this->object->get($key))) {
-            return $this->object->increment($key, $offset);
-        } else {
-            return $this->object->set($key, $offset);
-        }
+        return $this->object->increment($key, $offset, true, 0, $offset);
     }
 
     /**
