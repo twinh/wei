@@ -53,15 +53,17 @@ class CacheTestCase extends TestCase
         $cache->remove($key);
 
         // Increase from not exists key
-        $cache->increment($key);
-        $this->assertEquals(1, $cache->get($key));
+        $this->assertSame(2, $cache->increment($key, 2));
         
         // Increase from exists key and the offset is 3
-        $cache->increment($key, 3);
-        $this->assertEquals(4, $cache->get($key));
+        $this->assertSame(5, $cache->increment($key, 3));
         
-        $cache->decrement($key, 2);
-        $this->assertEquals(2, $cache->get($key));
+        $this->assertSame(3, $cache->decrement($key, 2));
+        
+        // Negative number
+        $this->assertSame(1, $cache->increment($key, -2));
+        
+        $this->assertSame(3, $cache->decrement($key, -2));
     }
     
     public function testClear()

@@ -200,7 +200,7 @@ class FileCache extends AbstractCache
         $file = $this->getFile($key);
 
         if (!is_file($file)) {
-            return $this->set($key, $offset);
+            return $this->set($key, $offset) ? $offset : false;
         }
 
         // Open file for reading and rewriting
@@ -211,13 +211,14 @@ class FileCache extends AbstractCache
         // Prepare file content
         if (!$content = $this->readAndVerify($handle, $file)) {
             $content = $this->prepareContent($offset, 0);
+            $result = $offset;
         } else {
-            $content[1] += $offset;
+            $result = $content[1] += $offset;
             $content = serialize($content);
         }
 
         // Rewrite content
-        return $this->writeAndRelease($handle, $content, true);
+        return $this->writeAndRelease($handle, $content, true) ? $result : false;
     }
 
     

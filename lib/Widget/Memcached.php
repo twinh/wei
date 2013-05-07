@@ -148,11 +148,35 @@ class Memcached extends AbstractCache
      */
     public function increment($key, $offset = 1)
     {
-        if (is_numeric($this->object->get($key))) {
-            return $this->object->increment($key, $offset);
-        } else {
-            return $this->object->set($key, $offset);
+        return $this->incdec($key, $offset, $offset > 0);
+    }
+ 
+    /**
+      * {@inheritdoc}
+      */
+    public function decrement($key, $offset = 1)
+    {
+        return $this->incdec($key, $offset, $offset < 0);
+    }
+    
+    /**
+     * Increment/Decrement an item
+     * 
+     * Memcached do not allow negative number as $offset parameter
+     * 
+     * @link   https://github.com/php-memcached-dev/php-memcached/blob/master/php_memcached.c#L1746
+     * @param  string    $key    The name of item
+     * @param  int       $offset The value to be increased/decreased
+     * @return int|false Returns the new value on success, or false on failure
+     */
+    protected function incdec($key, $offset, $inc = true)
+    {
+        $method = $inc ? 'increment' : 'decrement';
+        $offset = abs($offset);
+        if (false === $this->object->$method($key, $offset)) {
+            return $this->object->set($key, $offset) ? $offset : false;
         }
+        return $this->object->get($key);
     }
 
     /**

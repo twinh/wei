@@ -143,11 +143,10 @@ class Memcache extends AbstractCache
      */
     public function increment($key, $offset = 1)
     {
-        if (is_numeric($this->object->get($key))) {
-            return $this->object->increment($key, $offset);
-        } else {
-            return $this->object->set($key, $offset);
+        if (false === $this->object->increment($key, $offset)) {
+            return $this->object->set($key, $offset) ? $offset : false;
         }
+        return $this->object->get($key);
     }
 
     /**

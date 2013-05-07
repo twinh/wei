@@ -163,9 +163,9 @@ class DbCache extends AbstractCache
      */
     public function increment($key, $offset = 1)
     {
-        $value = $this->get($key);
+        $value = $this->get($key) + $offset;
         
-        return $this->set($key, $value + $offset);
+        return $this->set($key, $value) ? $value : false;
     }
 
     /**
