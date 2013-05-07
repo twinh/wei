@@ -90,7 +90,7 @@ h1, h2, h3, .lead
       </ul>
     </li>
     <li>
-      <a href="#cache">缓存</a>
+      <a href="#cache-section">缓存</a>
       <ul class="nav">
         <li><a href="#cache">Cache</a></li>
         <li><a href="#apc">APC</a></li>
@@ -107,6 +107,7 @@ h1, h2, h3, .lead
       <a href="#validate">验证器</a>
       <ul class="nav">
         <li><a href="#validate">Validate</a></li>
+        <li><a href="#is">Is</a></li>
 
         <li><a href="#isAlnum" class="nav-header">数据类型及组成</a><li>
         <li><a href="#isAlnum">isAlnum</a></li>
@@ -213,7 +214,6 @@ h1, h2, h3, .lead
             <li><a href="#sort">sort</a></li>
           </ul>
         </li>
-        <li><a href="#instance">instance</a></li>
         <li><a href="#logger">logger</a></li>
         <li><a href="#marker">marker</a></li>
         <li><a href="#pinyin">pinyin</a></li>
@@ -857,13 +857,29 @@ if ($widget-&gt;sessio('verfiyCode') == $widget-&gt;post('verfiyCode')) {
 </table>
 <h3>方法</h3>
 
-<h4>session($name)</h4>
+<h4>session($key)</h4>
 
 <p>获取会话信息的值</p>
 
-<h4>session($name, $value)</h4>
+<h4>session($key, $value)</h4>
 
 <p>设置会话信息的值</p>
+
+<h4>session-&gt;get($key)</h4>
+
+<p>获取会话信息的值,同<code>session($key)</code></p>
+
+<h4>session-&gt;set($key, $value)</h4>
+
+<p>设置会话信息的值,同<code>session($key, $value)</code></p>
+
+<h4>session-&gt;clear()</h4>
+
+<p>删除当前命名空间的会话信息</p>
+
+<h4>session-&gt;destory()</h4>
+
+<p>删除所有的会话消息</p>
 
 <h4>session-&gt;setInis(array $inis)</h4>
 
@@ -1576,6 +1592,167 @@ $widget-&gt;json('success', 0, array(), true);
 <h4>redirect-&gt;setView($view)</h4>
 
 <p>设置默认的跳转视图</p>
+</body></html>
+
+  </section>
+
+<!-- cache-section
+  ================================================== -->
+  <section id="cache-section">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>缓存</h1>
+
+<p>Widget提供了多个PHP流行的后端缓存.这里有apc,redis,memcached等主流缓存,也有简单的文件缓存fileCache,<br>
+可用于简单数据分析的数据库缓存dbCache等等.所有缓存拥有一致的接口,可以随意替换.</p>
+
+<h2>使用案例</h2>
+
+<ul>
+<li>缓存数据库查询,接口调用等耗时较长的操作</li>
+<li>将缓存作为计数器,记录按钮点击次数,网站访问次数等等</li>
+<li>在不同的请求之间,共享数据</li>
+</ul>
+<h2>支持的缓存类型及比较</h2>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th></th>
+<th>Cache</th>
+<th>Apc</th>
+<th>DbCache</th>
+<th>FileCache</th>
+<th>Memecache</th>
+<th>Memcached</th>
+<th>Couchbase</th>
+<th>Redis</th>
+<th>Bicache</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>速度</td>
+<td>-</td>
+<td>快</td>
+<td>慢</td>
+<td>慢</td>
+<td>快</td>
+<td>快</td>
+<td>快</td>
+<td>快</td>
+<td>-</td>
+</tr>
+<tr>
+<td>持久化</td>
+<td>-</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>分布式</td>
+<td>-</td>
+<td>×</td>
+<td>√</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>持久化:缓存是否因为相关服务重启而丢失数据</li>
+<li>
+<code>Cache</code>和<code>Bicache</code>为视配置而定</li>
+</ul>
+<h2>通用方法</h2>
+
+<p>在下面的方法中,<code>cache</code>表示缓存微件的名称,可以替换为其他任意缓存,如<code>redis</code>, <code>memcached</code></p>
+
+<h4>cache($key, $value, $expire = 0)</h4>
+
+<p>设置缓存的值</p>
+
+<h5>参数</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$key</td>
+<td>string</td>
+<td>无</td>
+<td>缓存的键名</td>
+</tr>
+<tr>
+<td>$value</td>
+<td>mixed</td>
+<td>无</td>
+<td>缓存的值,允许任意类型</td>
+</tr>
+<tr>
+<td>$expire</td>
+<td>int</td>
+<td>0</td>
+<td>缓存的有效期,默认为0秒,表示永不过期</td>
+</tr>
+</tbody>
+</table>
+<h4>cache($key)</h4>
+
+<p>获取指定名称的缓存</p>
+
+<h4>cache-&gt;set($key, $value, $expire = 0)</h4>
+
+<p>设置缓存的值,同<code>cache($key, $value, $expire = 0)</code></p>
+
+<h4>cache-&gt;get($key)</h4>
+
+<p>获取缓存的值,同<code>cache($key)</code></p>
+
+<h4>cache-&gt;remove($key)</h4>
+
+<p>移除一项缓存</p>
+
+<h4>cache-&gt;exists($key)</h4>
+
+<p>检查缓存是否存在</p>
+
+<h4>cache-&gt;add($key, $value)</h4>
+
+<p>增加一项缓存,如果缓存已存在,返回false</p>
+
+<h4>cache-&gt;replace($key, $value)</h4>
+
+<p>替换一项缓存,如果缓存不存在,返回false</p>
+
+<h4>cache-&gt;increment($key, $offset = 1)</h4>
+
+<p>增大一项缓存的值</p>
+
+<h4>cache-&gt;decrement($key, $offset = 1)</h4>
+
+<p>减小一项缓存的值</p>
+
+<h4>cache-&gt;getMulti($keys)</h4>
+
+<p>批量获取缓存的值</p>
+
+<h4>cache-&gt;setMulti($values)</h4>
+
+<p>批量设置缓存的值</p>
 </body></html>
 
   </section>
@@ -2736,21 +2913,151 @@ $widget-&gt;redis('key');
   <section id="bicache">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<pre><code>该微件文档还在紧急编写中,敬请期待!
+<h1>Bicache</h1>
+
+<p>设置或获取缓存,数据存储在二级缓存中</p>
+
+<p>二级缓存使用主从同步机制,由一个主缓存(master)和一个从缓存(slave)组成,二级缓存的原理非常简单,有以下两点.</p>
+
+<ol>
+<li>每次读取数据时,如果主缓存读取不到数据,将从从缓存读取数据</li>
+<li>每次写入数据时,如果检查上次更新到从缓存的间隔秒数大于配置秒数,则同步数据到从缓存中</li>
+</ol>
+<h2>案例</h2>
+
+<h3>设置和获取缓存</h3>
+
+<pre><code class="php">// 设置缓存
+$widget-&gt;bicache('key', 'value');
+// 返回 true
+
+// 获取缓存
+$widget-&gt;bicache('key');
+// 返回 value
 </code></pre>
 
-<h1><a href="http://twinh.github.io/widget/api/bicache">bicache()</a></h1>
+<h3>设置60秒后就过期的缓存</h3>
 
-<p>{@inheritdoc}</p>
-
-<h3>{@inheritdoc}</h3>
-
-<pre><code class="php">void bicache($key, $value, $expire)
+<pre><code class="php">$widget-&gt;bicache('key', 'value', 60);
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>time</td>
+<td>int</td>
+<td>5</td>
+<td>当主缓存写数据时,会检查上次更新到slave缓存的间隔秒数,如果超过该秒数,就同步到从缓存中</td>
+</tr>
+<tr>
+<td>deps</td>
+<td>array</td>
+<td></td>
+<td>主从缓存类型的配置</td>
+</tr>
+<tr>
+<td>- master</td>
+<td>string</td>
+<td>apc</td>
+<td>主缓存的类型,推荐使用内存类缓存,如apc,redis,memcache,memcached或couchbase</td>
+</tr>
+<tr>
+<td>- slave</td>
+<td>string</td>
+<td>fileCache</td>
+<td>从缓存的类型,推荐使用文件类缓存,如fileCache或dbCache</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>bicache($key, $value, $expire = 0)</h4>
+
+<p>设置缓存的值</p>
 
 <h5>参数</h5>
 
-<p><em>无</em></p>
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$key</td>
+<td>string</td>
+<td>无</td>
+<td>缓存的键名</td>
+</tr>
+<tr>
+<td>$value</td>
+<td>mixed</td>
+<td>无</td>
+<td>缓存的值,允许任意类型</td>
+</tr>
+<tr>
+<td>$expire</td>
+<td>int</td>
+<td>0</td>
+<td>缓存的有效期,默认为0秒,表示永不过期</td>
+</tr>
+</tbody>
+</table>
+<h4>bicache($key)</h4>
+
+<p>获取指定名称的缓存</p>
+
+<h4>bicache-&gt;set($key, $value, $expire = 0)</h4>
+
+<p>设置缓存的值,同<code>bicache($key, $value, $expire = 0)</code></p>
+
+<h4>bicache-&gt;get($key)</h4>
+
+<p>获取缓存的值,同<code>bicache($key)</code></p>
+
+<h4>bicache-&gt;remove($key)</h4>
+
+<p>移除一项缓存</p>
+
+<h4>bicache-&gt;exists($key)</h4>
+
+<p>检查缓存是否存在</p>
+
+<h4>bicache-&gt;add($key, $value)</h4>
+
+<p>增加一项缓存,如果缓存已存在,返回false</p>
+
+<h4>bicache-&gt;replace($key, $value)</h4>
+
+<p>替换一项缓存,如果缓存不存在,返回false</p>
+
+<h4>bicache-&gt;increment($key, $offset = 1)</h4>
+
+<p>增大一项缓存的值</p>
+
+<h4>bicache-&gt;decrement($key, $offset = 1)</h4>
+
+<p>减小一项缓存的值</p>
+
+<h4>bicache-&gt;getMulti($keys)</h4>
+
+<p>批量获取缓存的值</p>
+
+<h4>bicache-&gt;setMulti($values)</h4>
+
+<p>批量设置缓存的值</p>
 </body></html>
 
   </section>
@@ -3305,50 +3612,85 @@ Array
 
   </section>
 
-<!-- isAlnum
+<!-- is
   ================================================== -->
-  <section id="isAlnum">
+  <section id="is">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isAlnum">isAlnum()</a></h1>
+<h1><a href="http://twinh.github.io/widget/api/is">is()</a></h1>
 
-<p>检查数据是否只由字母(a-z)和数字(0-9)组成</p>
+<p>检查数据是否能通过指定规则,或指定回调结构的验证</p>
 
-<pre><code class="php">bool isAlnum( $input )
+<h5>目录</h5>
+
+<ul>
+<li>is($rule, $input, $options)</li>
+<li>is($fn, $input)</li>
+<li>is($rules, $input)</li>
+</ul>
+<h3>检查数据是否能通过指定规则的验证</h3>
+
+<pre><code class="php">bool is($rule, $input, $options)
 </code></pre>
 
 <h5>参数</h5>
 
 <ul>
 <li>
+<strong>$rule</strong> <code>string</code> 验证器的名称</li>
+<li>
 <strong>$input</strong> <code>mixed</code> 待验证的数据</li>
+<li>
+<strong>$options</strong> <code>array</code> 验证器的配置选项</li>
 </ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>pattern</code></td>
-<td>%name%只能由字母(a-z)和数字(0-9)组成</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不能只由字母(a-z)和数字(0-9)组成</td>
-</tr>
-</tbody>
-</table>
 <h5>代码范例</h5>
 
-<p>检查数据是否只由字母和数字组成<br>
+<p>检查数据是否为邮箱<br>
 ```php<br>
 &lt;?php</p>
 
-<p>$input = 'abc123';<br>
-if ($widget-&gt;isAlnum($input)) {<br>
+<p>if ($widget-&gt;is('email', '<a href="mailto:twinhuang@qq.com">twinhuang@qq.com</a>')) {<br>
+    echo '<a href="mailto:twihuang@qq.com">twihuang@qq.com</a> is valid email';<br>
+} else {<br>
+    echo '<a href="mailto:twihuang@qq.com">twihuang@qq.com</a> is not valid email';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'twihuang@qq.com is valid email'
+</code></pre>
+
+<hr>
+<h3>检查数据是否能通过指定回调结构的验证</h3>
+
+<pre><code class="php">bool is($fn, $input)
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$fn</strong> <code>callback</code> 用于验证数据的回调结构</li>
+<li>
+<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
+</ul>
+<p>回调结构<code>$fn</code>包含三个参数,分别是</p>
+
+<ul>
+<li>$input <code>mixed</code> 待验证的数据</li>
+<li>$callback <code>\Widget\Validator\Callback</code> 回调验证器对象</li>
+<li>$widget <code>\Widget\Widget</code> 微件管理器</li>
+</ul>
+<h5>代码范例</h5>
+
+<p>检查数据是否能被3整除<br>
+```php<br>
+&lt;?php</p>
+
+<p>if ($widget-&gt;is(function($input) {<br>
+    return 0 === 10 % $input;<br>
+}, 3)) {<br>
     echo 'Yes';<br>
 } else {<br>
     echo 'No';<br>
@@ -3357,8 +3699,111 @@ if ($widget-&gt;isAlnum($input)) {<br>
 
 <h5>运行结果</h5>
 
+<pre><code class="php">'No'
+</code></pre>
+
+<hr>
+<h3>检查数据是否能通过指定的验证规则数组验证</h3>
+
+<pre><code class="php">bool is($rules, $input)
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$rules</strong> <code>array</code> 验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项</li>
+<li>
+<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
+</ul>
+<h5>代码范例</h5>
+
+<p>检查数据是否为数字,且长度在3到5之间<br>
+```php<br>
+&lt;?php</p>
+
+<p>$rules = array(<br>
+    'digit' =&gt; true,<br>
+    'length' =&gt; array(3, 5)<br>
+);<br>
+if ($widget-&gt;is($rules, '123456')) {<br>
+    echo 'Yes';<br>
+} else {<br>
+    echo 'No';<br>
+}<br>
+```</p>
+
+<h5>运行结果</h5>
+
+<pre><code class="php">'No'
+</code></pre>
+</body></html>
+
+  </section>
+
+<!-- isAlnum
+  ================================================== -->
+  <section id="isAlnum">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>isAlnum</h1>
+
+<p>检查数据是否只由字母(a-z)和数字(0-9)组成</p>
+
+<h2>案例</h2>
+
+<h3>检查数据是否只由字母和数字组成</h3>
+
+<pre><code class="php">$input = 'abc123';
+if ($widget-&gt;isAlnum($input)) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+</code></pre>
+
+<h4>运行结果</h4>
+
 <pre><code class="php">'Yes'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>patternMessage</td>
+<td>string</td>
+<td>%name%只能由字母(a-z)和数字(0-9)组成</td>
+<td>-</td>
+</tr>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能只由字母(a-z)和数字(0-9)组成</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isAlnum($input)</h4>
+
+<p>检查数据是否只由字母(a-z)和数字(0-9)组成</p>
 </body></html>
 
   </section>
@@ -3435,55 +3880,58 @@ if ($widget-&gt;isAlpha($input)) {
   <section id="isBlank">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isBlank">isBlank()</a></h1>
+<h1>isBlank</h1>
 
 <p>检查数据是否为空(不允许空格)</p>
 
-<pre><code class="php">bool isBlank( $input )
+<h2>案例</h2>
+
+<h3>检查空白字符会返回成功</h3>
+
+<pre><code class="php">$input = '    ';
+if ($widget-&gt;isBlank($input)) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>blank</code></td>
-<td>%name%必须为空</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不能为空</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查空白字符会返回成功<br>
-```php<br>
-&lt;?php</p>
-
-<p>$input = '    ';<br>
-if ($widget-&gt;isBlank($input)) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Yes'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>blankMessage</td>
+<td>string</td>
+<td>%name%必须为空</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能为空</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isBlank($input)</h4>
+
+<p>检查数据是否为空(不允许空格)</p>
 </body></html>
 
   </section>
@@ -3493,58 +3941,63 @@ if ($widget-&gt;isBlank($input)) {<br>
   <section id="isDecimal">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isDecimal">isDecimal()</a></h1>
+<h1>isDecimal</h1>
 
 <p>检查数据是否为小数</p>
 
-<pre><code class="php">bool isDecimal( $input )
+<h2>案例</h2>
+
+<h3>检查"0.0.1"是否为小数</h3>
+
+<pre><code class="php">if ($widget-&gt;isDecimal('1.0.0')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>invalid</code></td>
-<td>%name%必须是小数</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不能是小数</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查"0.0.1"是否为小数<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isDecimal('1.0.0')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'No'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>invalidMessage</td>
+<td>string</td>
+<td>%name%必须是小数</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能是小数</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isDecimal($input)</h4>
+
+<p>检查数据是否为小数</p>
 </body></html>
 
   </section>
@@ -3637,58 +4090,63 @@ if ($widget-&gt;isBlank($input)) {<br>
   <section id="isDoubleByte">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isDoubleByte">isDoubleByte()</a></h1>
+<h1>isDoubleByte</h1>
 
 <p>检查数据是否只由双字节字符组成</p>
 
-<pre><code class="php">bool isDoubleByte( $input )
+<h2>案例</h2>
+
+<h3>检查"中文abc"是否只由双字节字符组成</h3>
+
+<pre><code class="php">if ($widget-&gt;isDoubleByte('中文abc')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>pattern</code></td>
-<td>%name%只能由双字节字符组成</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不能只由双字节字符组成</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查"中文abc"是否只由双字节字符组成<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isDoubleByte('中文abc')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'No'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>patternMessage</td>
+<td>string</td>
+<td>%name%只能由双字节字符组成</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能只由双字节字符组成</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isDoubleByte($input)</h4>
+
+<p>检查数据是否只由双字节字符组成</p>
 </body></html>
 
   </section>
@@ -3698,52 +4156,71 @@ if ($widget-&gt;isBlank($input)) {<br>
   <section id="isEmpty">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isEmpty">isEmpty()</a></h1>
+<h1>isEmpty()</h1>
 
 <p>检查数据是否为空(允许空格)</p>
 
-<pre><code class="php">bool isEmpty( $input )
+<h2>案例</h2>
+
+<h3>检查"abc"是否为空</h3>
+
+<pre><code class="php">if ($widget-&gt;isEmpty('abc')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-</ul>
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>empty</code></td>
-<td>%name%必须为空</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不能为空</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查"abc"是否为空<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isEmpty('abc')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'No'
 </code></pre>
+
+<h3>检查空格字符串是否为空</h3>
+
+<pre><code class="php">if ($widget-&gt;isEmpty(' ')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+</code></pre>
+
+<h4>运行结果</h4>
+
+<pre><code class="php">'No'
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>emptyMessage</td>
+<td>string</td>
+<td>%name%必须为空</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能为空</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isEmpty($input)</h4>
+
+<p>检查数据是否为空(允许空格)</p>
 </body></html>
 
   </section>
@@ -3753,98 +4230,103 @@ if ($widget-&gt;isBlank($input)) {<br>
   <section id="isEndsWith">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isEndsWith">isEndsWith()</a></h1>
+<h1>isEndsWith</h1>
 
 <p>检查数据是否以指定字符串结尾</p>
 
-<pre><code class="php">bool isEndsWith( $input [, $findMe [, $case ] ] )
+<h2>案例</h2>
+
+<h3>检查"abc"是否以"C"结尾</h3>
+
+<pre><code class="php">if ($widget-&gt;isEndsWith('abc', 'C')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-<li>
-<strong>$findMe</strong> <code>string|array</code> 要查找的字符串,可以是字符串或数组.如果是数组,只要数据以数组中任何一个元素结尾就算验证通过</li>
-<li>
-<strong>$case</strong> <code>bool</code> 是否区分大小写,默认为不区分</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>notFound</code></td>
-<td>%name%必须以%findMe%结尾</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不能以%findMe%结尾</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查"abc"是否以"C"结尾<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isEndsWith('abc', 'C')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Yes'
 </code></pre>
 
-<h5>代码范例</h5>
+<h3>以区分大小写的方式,检查"abc"是否以"C"结尾</h3>
 
-<p>以区分大小写的方式,检查"abc"是否以"C"结尾<br>
-```php<br>
-&lt;?php</p>
+<pre><code class="php">if ($widget-&gt;isEndsWith('abc', 'C', true)) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+</code></pre>
 
-<p>if ($widget-&gt;isEndsWith('abc', 'C', true)) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'No'
 </code></pre>
 
-<h5>代码范例</h5>
+<h3>检查"abc"是否以数组array('a', 'b', 'c')中的任意元素结尾</h3>
 
-<p>检查"abc"是否以数组array('a', 'b', 'c')中的任意元素结尾<br>
-```php<br>
-&lt;?php</p>
+<pre><code class="php">if ($widget-&gt;isEndsWith('abc', array('a', 'b', 'c'))) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+</code></pre>
 
-<p>if ($widget-&gt;isEndsWith('abc', array('a', 'b', 'c'))) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Yes'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>findMe</td>
+<td>string,array</td>
+<td>-</td>
+<td>要查找的字符串.如果是数组,只要数据以数组中任何一个元素结尾就算验证通过</td>
+</tr>
+<tr>
+<td>case</td>
+<td>bool</td>
+<td>false</td>
+<td>查找时是否区分大小写</td>
+</tr>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>notFoundMessage</td>
+<td>string</td>
+<td>%name%必须以%findMe%结尾</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能以%findMe%结尾</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isEndsWith($input, $findMe, $case = false)</h4>
+
+<p>检查数据是否以指定字符串结尾</p>
 </body></html>
 
   </section>
@@ -4156,60 +4638,63 @@ if ($widget-&gt;isBlank($input)) {<br>
   <section id="isRegex">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isRegex">isRegex()</a></h1>
+<h1>isRegex</h1>
 
 <p>检查数据是否匹配指定的正则表达式</p>
 
-<pre><code class="php">bool isRegex( $input [, $pattern ] )
+<h2>案例</h2>
+
+<h3>检查"abc"是否匹配正则表达式"/d/i"</h3>
+
+<pre><code class="php">if ($widget-&gt;isRegex('abc', '/d/i')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-<li>
-<strong>$pattern</strong> <code>string</code> 校验的正则表达式</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>pattern</code></td>
-<td>%name%必须匹配模式"%pattern%"</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%必须不匹配模式"%pattern%"</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查"abc"是否匹配正则表达式"/d/i"<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isRegex('abc', '/d/i')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'No'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>patternMessage</td>
+<td>string</td>
+<td>%name%必须匹配模式"%pattern%"</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%必须不匹配模式"%pattern%"</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isRegex($input)</h4>
+
+<p>检查数据是否匹配指定的正则表达式</p>
 </body></html>
 
   </section>
@@ -4302,98 +4787,103 @@ if ($widget-&gt;isBlank($input)) {<br>
   <section id="isStartsWith">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isStartsWith">isStartsWith()</a></h1>
+<h1>isStartsWith</h1>
 
 <p>检查数据是否以指定字符串开头</p>
 
-<pre><code class="php">bool isStartsWith( $input [, $findMe [, $case ] ] )
+<h2>案例</h2>
+
+<h3>检查"abc"是否以"C"开头</h3>
+
+<pre><code class="php">if ($widget-&gt;isEndsWith('abc', 'C')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-<li>
-<strong>$findMe</strong> <code>string|array</code> 要查找的字符串,可以是字符串或数组.如果是数组,只要数据以数组中任何一个元素开头就算验证通过</li>
-<li>
-<strong>$case</strong> <code>bool</code> 是否区分大小写,默认为不区分</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>notFound</code></td>
-<td>%name%必须以%findMe%开头</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不能以%findMe%开头</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查"abc"是否以"C"开头<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isEndsWith('abc', 'C')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Yes'
 </code></pre>
 
-<h5>代码范例</h5>
+<h3>以区分大小写的方式,检查"abc"是否以"C"开头</h3>
 
-<p>以区分大小写的方式,检查"abc"是否以"C"开头<br>
-```php<br>
-&lt;?php</p>
+<pre><code class="php">if ($widget-&gt;isEndsWith('abc', 'C', true)) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+</code></pre>
 
-<p>if ($widget-&gt;isEndsWith('abc', 'C', true)) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'No'
 </code></pre>
 
-<h5>代码范例</h5>
+<h3>检查"abc"是否以数组array('a', 'b', 'c')中的任意元素开头</h3>
 
-<p>检查"abc"是否以数组array('a', 'b', 'c')中的任意元素开头<br>
-```php<br>
-&lt;?php</p>
+<pre><code class="php">if ($widget-&gt;isEndsWith('abc', array('a', 'b', 'c'))) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+</code></pre>
 
-<p>if ($widget-&gt;isEndsWith('abc', array('a', 'b', 'c'))) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Yes'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>findMe</td>
+<td>string,array</td>
+<td>-</td>
+<td>要查找的字符串.如果是数组,只要数据以数组中任何一个元素开头就算验证通过</td>
+</tr>
+<tr>
+<td>case</td>
+<td>bool</td>
+<td>false</td>
+<td>查找时是否区分大小写</td>
+</tr>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>notFoundMessage</td>
+<td>string</td>
+<td>%name%必须以%findMe%开头</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能以%findMe%开头</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isStartsWith($input, $findMe, $case = false)</h4>
+
+<p>检查数据是否以指定字符串开头</p>
 </body></html>
 
   </section>
@@ -5018,62 +5508,75 @@ if ($widget-&gt;isBlank($input)) {<br>
   <section id="isRange">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isRange">isRange()</a></h1>
+<h1>isRange</h1>
 
 <p>检查数据是否在指定的两个值之间</p>
 
-<pre><code class="php">bool isRange( $input [, $min [, $max ] ] )
+<h2>案例</h2>
+
+<h3>检查18是否在1到10之间</h3>
+
+<pre><code class="php">if ($widget-&gt;isRange(18, 1, 10)) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-<li>
-<strong>$min</strong> <code>int</code> 限制的最小值</li>
-<li>
-<strong>$max</strong> <code>int</code> 限制的最大值</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>range</code></td>
-<td>%name%必须在%min%到%max%之间</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不能在%min%到%max%之间</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查18是否在1到10之间<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isRange(18, 1, 10)) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'No'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>min</td>
+<td>int</td>
+<td>无</td>
+<td>用于比较的较小值</td>
+</tr>
+<tr>
+<td>max</td>
+<td>int</td>
+<td>无</td>
+<td>用于比较的较大值</td>
+</tr>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>rangeMessage</td>
+<td>string</td>
+<td>%name%必须在%min%到%max%之间</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能在%min%到%max%之间</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isRange($input)</h4>
+
+<p>检查数据是否在指定的两个值之间</p>
 </body></html>
 
   </section>
@@ -6584,58 +7087,63 @@ Yes'
   <section id="isQQ">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isQQ">isQQ()</a></h1>
+<h1>isQQ</h1>
 
 <p>检查数据是否为有效的QQ号码</p>
 
-<pre><code class="php">bool isQQ( $input )
+<h2>案例</h2>
+
+<h3>检查"123456"是否为有效的QQ号码</h3>
+
+<pre><code class="php">if ($widget-&gt;isQQ('123456')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>pattern</code></td>
-<td>%name%必须是有效的QQ号码</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不能是QQ号码</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查"123456"是否为有效的QQ号码<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isQQ('123456')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Yes'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>patternMessage</td>
+<td>string</td>
+<td>%name%必须是有效的QQ号码</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能是QQ号码</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isQQ($input)</h4>
+
+<p>检查数据是否为有效的QQ号码</p>
 </body></html>
 
   </section>
