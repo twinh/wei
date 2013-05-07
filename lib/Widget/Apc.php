@@ -86,11 +86,10 @@ class Apc extends AbstractCache
      */
     public function increment($key, $offset = 1)
     {
-        if (is_numeric(apc_fetch($key))) {
-            return apc_inc($key, $offset);
-        } else {
-            return apc_store($key, $offset);
+        if (false === apc_inc($key, $offset)) {
+            return apc_store($key, $offset) ? $offset : false;
         }
+        return apc_fetch($key);
     }
 
     /**
