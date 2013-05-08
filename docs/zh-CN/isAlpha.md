@@ -28,9 +28,9 @@ if ($widget->isAlpha($input)) {
 
 | 名称                | 类型    | 默认值                           | 说明              |
 |---------------------|---------|----------------------------------|-------------------|
-| patternMessage      | string  |%name%只能由字母(a-z)组成         | -                 |
-| notStringMessage    | string  |%name%必须是字符串                | -                 |
-| negativeMessage     | string  |%name%必须不匹配模式"%pattern%"   | -                 |
+| notStringMessage    | string  | %name%必须是字符串               | -                 |
+| patternMessage      | string  | %name%只能由字母(a-z)组成        | -                 |
+| negativeMessage     | string  | %name%必须不匹配模式"%pattern%"  | -                 |
 
 ### 方法
 
