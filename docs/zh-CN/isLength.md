@@ -56,11 +56,11 @@ if ($widget->isLength('abc', 3, 6)) {
 | notInMessage      | string  | %name%的长度必须在%min%和%max%之间 | -                    |
 | notInItemMessage  | string  | %name%必须包含%min%到%max%项       | -                    |
 
-注意: 当检查的数据是字符串时,返回的错误信息是`notIn`,当数据是数组时,返回的是`notInItem`
+    注意: 当检查的数据是字符串时,返回的错误信息是`notIn`,当数据是数组时,返回的是`notInItem`
+
 
 #### isLength($input, $length)
 检查数据的长度是否为指定的数值
-
 
 ##### 选项
 
@@ -71,4 +71,4 @@ if ($widget->isLength('abc', 3, 6)) {
 | lengthMessage     | string  | %name%的长度必须是%length%         | -                    |
 | lengthItemMessage | string  | %name%必须包含%length%项           | -                    |
 
-注意: 当检查的数据是字符串时,返回的错误信息是`length`,当数据是数组时,返回的是`lengthItem`
+    注意: 当检查的数据是字符串时,返回的错误信息是`length`,当数据是数组时,返回的是`lengthItem`
