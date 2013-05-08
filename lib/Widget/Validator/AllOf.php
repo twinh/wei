@@ -10,7 +10,7 @@ namespace Widget\Validator;
 
 /**
  * Check if the input is valid by all of the rules
- * 
+ *
  * @author      Twin Huang <twinhuang@qq.com>
  * @property    Is $is The validator manager
  */
@@ -20,7 +20,7 @@ class AllOf extends SomeOf
     
     /**
      * Check if the input is valid by all of the rules
-     * 
+     *
      * @param mixed $input The input to be validated
      * @param array $rules An array that the key is validator rule name and the value is validator options
      * @param int|null $atLeast How manay rules should be validated at least
@@ -29,7 +29,7 @@ class AllOf extends SomeOf
     public function __invoke($input, array $rules = array(), $atLeast = null)
     {
         $this->atLeast = count($rules ?: $this->rules);
-        
+
         return parent::__invoke($input, $rules, $atLeast);
     }
 }
