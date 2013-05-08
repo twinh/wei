@@ -31,7 +31,7 @@ if ($widget->isDate('2013-01-01')) {
 | notStringMessage  | string  | %name%必须是字符串                                     | -                    |
 | invalidMessage    | string  | %name%必须是合法的日期时间                             | 当日期无法解析时出现 |
 | formatMessage     | string  | %name%不是合法的日期,格式应该是%format%,例如:%example% | -                    |
-| tooEarlyMessage   | string  | %name%必须晚于%after%                                 | -                    |
+| tooEarlyMessage   | string  | %name%必须晚于%after%                                  | -                    |
 | tooLateMessage    | string  | %name%必须早于%before%                                 | -                    |
 | negativeMessage   | string  | %name%不能是合法的日期                                 | -                    |
 
