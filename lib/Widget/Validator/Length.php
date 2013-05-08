@@ -30,6 +30,9 @@ class Length extends AbstractLengthValidator
     
     protected $length;
     
+    /**
+     * {@inheritdoc}
+     */
     public function __invoke($input, $min = null, $max = null)
     {
         // ($input, $min, $max)

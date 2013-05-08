@@ -68,6 +68,9 @@ class CreditCard extends AbstractValidator
         )
     );
     
+    /**
+     * {@inheritdoc}
+     */
     public function __invoke($input, $type = null)
     {
         $type && $this->storeOption('type', $type);

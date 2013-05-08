@@ -19,6 +19,9 @@ class Uppercase extends AbstractValidator
     
     protected $negativeMessage = '%name% must not be uppercase';
     
+    /**
+     * {@inheritdoc}
+     */
     protected function validate($input)
     {
         if (!$this->isString($input)) {

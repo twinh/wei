@@ -26,6 +26,9 @@ class DivisibleBy extends AbstractValidator
      */
     protected $divisor = 1;
     
+    /**
+     * {@inheritdoc}
+     */
     public function __invoke($input, $divisor = null)
     {
         $divisor && $this->storeOption('divisor', $divisor);

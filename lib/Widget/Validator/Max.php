@@ -21,6 +21,9 @@ class Max extends AbstractValidator
     
     protected $max;
     
+    /**
+     * {@inheritdoc}
+     */
     public function __invoke($input, $max = null)
     {
         $max && $this->storeOption('max', $max);

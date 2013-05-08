@@ -23,6 +23,9 @@ class Range extends AbstractValidator
     
     protected $max;
     
+    /**
+     * {@inheritdoc}
+     */
     public function __invoke($input, $min = null, $max = null)
     {
         // Allows not numeric parameter like 2000-01-01, 10:03, etc 

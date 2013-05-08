@@ -19,6 +19,9 @@ class Lowercase extends AbstractValidator
     
     protected $negativeMessage = '%name% must not be lowercase';
     
+    /**
+     * {@inheritdoc}
+     */
     protected function validate($input)
     {
         if (!$this->isString($input)) {

@@ -21,6 +21,9 @@ class MinLength extends AbstractLengthValidator
     
     protected $min;
 
+    /**
+     * {@inheritdoc}
+     */
     public function __invoke($input, $min = null)
     {
         $min && $this->storeOption('min', $min);

@@ -23,6 +23,9 @@ class Equals extends AbstractValidator
     
     protected $strict = false;
     
+    /**
+     * {@inheritdoc}
+     */
     public function __invoke($input, $equals = null, $strict = null)
     {
         // Sets $this->equals only when the second argument provided

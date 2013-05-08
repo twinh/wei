@@ -20,6 +20,11 @@ class SomeOf extends AbstractGroupValidator
     
     protected $rules = array();
     
+    /**
+     * How many rules should pass at least
+     * 
+     * @var int
+     */
     protected $atLeast;
     
     /**

@@ -207,7 +207,7 @@ return array(
     '%name% must be passed by at least %left% of %count% rules' => '%name%至少需要满足以下%count%条规则中的%left%条',
     
     // startsWith
-    '%name% must start with: %findMe%' => '%name%必须以%findMe%开头',
+    '%name% must start with "%findMe%"' => '%name%必须以%findMe%开头',
     '%name% must not start with "%findMe%"' => '%name%不能以%findMe%开头',
     
     // time

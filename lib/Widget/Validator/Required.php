@@ -19,6 +19,9 @@ class Required extends AbstractValidator
     
     protected $required = true;
     
+    /**
+     * {@inheritdoc}
+     */
     public function __invoke($input, $required = null)
     {
         is_bool($required) && $this->storeOption('required', $required);

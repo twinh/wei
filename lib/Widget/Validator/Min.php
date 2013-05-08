@@ -16,9 +16,14 @@ namespace Widget\Validator;
 class Min extends AbstractValidator
 {        
     protected $minMessage = '%name% must be greater or equal than %min%';
+    
+    protected $negativeMessage = '%name% must not be greater or equal than %min%';
 
     protected $min;
 
+    /**
+     * {@inheritdoc}
+     */
     public function __invoke($input, $min = null)
     {
         $min && $this->storeOption('min', $min);

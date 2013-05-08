@@ -48,6 +48,9 @@ class Ip extends AbstractValidator
      */
     protected $noResRange = false;
     
+    /**
+     * {@inheritdoc}
+     */
     public function __invoke($input, $options = array())
     {
         $options && $this->storeOption($options);

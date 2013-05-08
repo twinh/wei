@@ -25,6 +25,9 @@ class In extends AbstractValidator
     
     protected $array = array();
     
+    /**
+     * {@inheritdoc}
+     */
     public function __invoke($input, $array = array(), $strict = null)
     {
         if ($array) {

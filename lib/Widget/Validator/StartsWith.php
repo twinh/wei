@@ -15,7 +15,7 @@ namespace Widget\Validator;
  */
 class StartsWith extends AbstractValidator
 {
-    protected $notFoundMessage = '%name% must start with: %findMe%';
+    protected $notFoundMessage = '%name% must start with "%findMe%"';
     
     protected $negativeMessage = '%name% must not start with "%findMe%"';
     
@@ -23,6 +23,9 @@ class StartsWith extends AbstractValidator
     
     protected $case = false;
     
+    /**
+     * {@inheritdoc}
+     */
     public function __invoke($input, $findMe = null, $case = null)
     {
         $findMe && $this->storeOption('findMe', $findMe);

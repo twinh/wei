@@ -61,6 +61,9 @@ class DateTime extends AbstractValidator
     
     protected $example;
     
+    /**
+     * {@inheritdoc}
+     */
     public function __invoke($input, $format = null)
     {
         $format && $this->storeOption('format', $format);

@@ -24,6 +24,9 @@ class NoneOf extends AbstractGroupValidator
     
     protected $combineMessages = false;
     
+    /**
+     * {@inheritdoc}
+     */
     public function __invoke($input, array $rules = array())
     {
         $rules && $this->storeOption('rules', $rules);

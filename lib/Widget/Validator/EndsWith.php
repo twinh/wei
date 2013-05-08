@@ -23,6 +23,9 @@ class EndsWith extends AbstractValidator
     
     protected $case = false;
     
+    /**
+     * {@inheritdoc}
+     */
     public function __invoke($input, $findMe = null, $case = null)
     {
         $findMe && $this->storeOption('findMe', $findMe);
