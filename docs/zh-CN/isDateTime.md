@@ -41,7 +41,7 @@ if ($widget->isDateTime('20130101', 'Ymd')) {
 | 名称              | 类型    | 默认值                                                 | 说明                 |
 |-------------------|---------|--------------------------------------------------------|----------------------|
 | format            | string  | Y-m-d H:i:s                                            | 日期时间格式         |
-| notStringMessage  | string  | %name%必须是字符串                                     | -                    |
+| notStringMessage  | string  | %name%必须是字符串                                     | -                    |   |
 | invalidMessage    | string  | %name%必须是合法的日期时间                             | 当日期无法解析时出现 |
 | formatMessage     | string  | %name%不是合法的日期,格式应该是%format%,例如:%example% | -                    |
 | tooEarlyMessage   | string  | %%name%必须晚于%after%                                 | -                    |
