@@ -1,7 +1,7 @@
 Request
 =======
 
-管理HTTP请求数据/获取一项HTTP请求参数($_REQUEST)的值
+管理HTTP请求数据($_REQUEST)
 
 案例
 ----

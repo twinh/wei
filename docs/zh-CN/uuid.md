@@ -1,7 +1,7 @@
 [uuid()](http://twinh.github.io/widget/api/uuid)
 ================================================
 
-随机生成一个UUID
+生成一个随机的UUID
 
 ### 
 ```php

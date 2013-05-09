@@ -1,7 +1,7 @@
 Cookie
 ======
 
-写入,读取和删除cookie
+写入,读取和删除cookie($_COOKIE)
 
 案例
 ----

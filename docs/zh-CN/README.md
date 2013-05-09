@@ -8,7 +8,25 @@
 API 参考目录
 ------------
 
-#### 缓存
+#### HTTP请求
+* [request](request.md) - 管理HTTP请求数据($_REQUEST)
+* [cookie](cookie.md) - 写入,读取和删除cookie($_COOKIE)
+* [os](os.md) - 检测客户端浏览器,操作系统和设备是否为指定的名称和版本
+* [post](post.md)  - 获取一项HTTP POST请求参数($_POST)的值
+* [query](query.md) - 获取一项HTTP GET查询参数($_GET)的值
+* [server](server.md) - 获取一项服务器和执行环境信息($_SERVER)的值
+* [session](session.md) - 获取一项会话($_SESSION)的值
+* [upload](upload.md) - 保存客户端上传的文件到指定目录
+
+#### HTTP响应
+* [response](response.md) - 发送HTTP响应头和内容
+* [download](download.md) - 发送下载文件的HTTP响应
+* [flush](flush.md) - 关闭缓冲区,让后台脚本实时输出内容到浏览器
+* [header](header.md) - 设置和获取HTTP响应头
+* [json](json.md) - 输出JSON或JSONP格式的数据到浏览器
+* [redirect](redirect.md) - 跳转到指定地址
+
+#### [缓存](cache-section.md)
 * [apc](apc.md) - APC缓存
 * [couchbase](couchbase.md) - Couchbase缓存
 * [dbCache](dbCache.md) - 数据库缓存
@@ -18,29 +36,6 @@ API 参考目录
 * [redis](redis.md) - Redis缓存
 * [cache](cache.md) - 通用缓存
 * [bicache](bicache.md) - 二级缓存
-
-#### 事件
-* [event](event.md) - 事件管理器
-* [off](event.md#off) - 移除指定类型的事件触发器
-* [on](event.md#on) - 添加指定类型的事件触发器
-* [trigger](event.md#trigger) - 触发指定类型的事件
-
-#### HTTP请求
-* [cookie](cookie.md) - 获取一项Cookie参数($_COOKIE)的值
-* [os](os.md) - 检测客户端浏览器,操作系统和设备是否为指定的名称和版本
-* [post](post.md)  - 获取一项HTTP POST请求参数($_POST)的值
-* [query](query.md) - 获取一项HTTP GET查询参数($_GET)的值
-* [request](request.md) - 获取一项HTTP请求参数($_REQUEST)的值
-* [server](server.md) - 获取一项服务器和执行环境信息($_SERVER)的值
-* [session](session.md) - 获取一项会话($_SESSION)的值
-
-#### HTTP响应
-* [download](download.md) - 下载指定的文件
-* [flush](flush.md) - 关闭缓冲区,让后台脚本实时输出内容到浏览器
-* [header](header.md) - 设置和获取HTTP响应头
-* [json](json.md) - 输出JSON或JSONP内容
-* [response](response.md) - 发送HTTP响应头和内容
-* [redirect](redirect.md) - 跳转到指定地址
 
 #### 验证器
 * [validate](validate.md) - 检查数组或对象中每一个元素是否能通过指定规则的验证(类似[jQuery Validation](http://bassistance.de/jquery-plugins/jquery-plugin-validation/)插件)
@@ -126,14 +121,25 @@ API 参考目录
 * [twig](twig.md) - 渲染Twig模板
 * [view](view.md) - 渲染指定名称的模板
 
-#### 工具
-* [arr](attr.md) - 数组工具微件,提供一些实用的数组操作方法
-* [logger](logger.md) - 记录日志
-* [marker](marker.md) - 设置一个标记,包括时间,内存使用量等信息
-* [pinyin](pinyin.md) - 将中文转换为拼音字母
+#### 事件
+* [event](event.md) - 事件管理器
+* [off](event.md#off) - 移除指定类型的事件触发器
+* [on](event.md#on) - 添加指定类型的事件触发器
+* [trigger](event.md#trigger) - 触发指定类型的事件
 
-#### 第三方集成微件
+#### 数据库
 * [db](db.md) - 获取[Doctrine DBAL](https://github.com/doctrine/dbal)的Connection对象
 * [entityManager](entityManager.md) - 获取[Doctrine ORM](https://github.com/doctrine/doctrine2)的EntityManager对象
-* [monolog](monolog.md) - 获取[Monolog](https://github.com/Seldaek/monolog)对象或记录一条日志
+
+#### 错误处理
+* [error](error.md) - 提供简单友好的错误界面
 * [phpError](phpError.md) - 启用[PHPError](http://phperror.net/)的错误视图
+
+#### 工具
+* [arr](attr.md) - 数组工具微件,提供一些实用的数组操作方法
+* [env](env.md) - 环境检测及根据不同环境加载不同的配置文件
+* [logger](logger.md) - 记录日志
+* [monolog](monolog.md) - 获取[Monolog](https://github.com/Seldaek/monolog)对象或记录一条日志
+* [pinyin](pinyin.md) - 将中文转换为拼音字母
+* [uuid](uuid.md) - 生成一个随机的UUID
+* [website](website.md) - 设置和获取网站自定义网站配置信息
