@@ -68,14 +68,14 @@ API 参考目录
 长度大小
 * [isLength](isLength.md) - 检查数据是否为指定的长度,或在指定的长度范围内
 * [isMax](isMax.md) - 检查数据是否小于等于指定的值
-* [isMaxLength](isMaxlength.md) - 检查数据是否小于等于指定长度
+* [isMaxLength](isMaxLength.md) - 检查数据是否小于等于指定长度
 * [isMin](isMin.md) - 检查数据是否大于等于指定的值
-* [isMinLength](isMinlength.md) - 检查数据是否大于等于指定长度
+* [isMinLength](isMinLength.md) - 检查数据是否大于等于指定长度
 * [isRange](isRange.md) - 检查数据是否在指定的两个值之间
 
 日期和时间
 * [isDate](isDate.md) - 检查数据是否为合法的日期
-* [isDateTime](isDatetime.md) - 检查数据是否为合法的日期时间
+* [isDateTime](isDateTime.md) - 检查数据是否为合法的日期时间
 * [isTime](isTime) - 检查数据是否为合法的时间
 
 文件目录
@@ -92,7 +92,7 @@ API 参考目录
 * [isUuid](isUuid.md) - 检查数据是否为有效的UUID
 
 区域:所有
-* [isCreditCard](isCreditcard.md) - 检查数据是否为合法的信用卡号码
+* [isCreditCard](isCreditCard.md) - 检查数据是否为合法的信用卡号码
 
 区域:中国
 * [isChinese](isChinese.md) - 检查数据是否只由中文组成
@@ -106,10 +106,10 @@ API 参考目录
 * [isMobileCn](isMobileCn.md) - 检查数据是否为有效的手机号码
 
 分组
-* [isAllOf](isAllof.md) - 检查数据是否通过所有的规则校验
-* [isNoneOf](isNoneof.md) - 检查数据是否不符合所有指定的规则
-* [isOneOf](isOneof.md) - 检查数据是否满足指定规则中的任何一条
-* [isSomeOf](isSomeof.md) - 检查数据是否通过指定数量规则的验证
+* [isAllOf](isAllOf.md) - 检查数据是否通过所有的规则校验
+* [isNoneOf](isNoneOf.md) - 检查数据是否不符合所有指定的规则
+* [isOneOf](isOneOf.md) - 检查数据是否满足指定规则中的任何一条
+* [isSomeOf](isSomeOf.md) - 检查数据是否通过指定数量规则的验证
 
 第三方集成
 * [isEntityExists](isEntityExists.md) - 检查Doctrine ORM实体是否存在
@@ -118,7 +118,7 @@ API 参考目录
 其他
 * [isAll](isAll.md) - 检查集合里的每一项是否符合指定的规则
 * [isCallback](isCallback.md) - 检查数据是否通过指定回调方法验证
-* [isDivisibleBy](isDivisibleby.md) - 检查数据是否能被指定的除数整除
+* [isDivisibleBy](isDivisibleBy.md) - 检查数据是否能被指定的除数整除
 
 #### 视图
 * [escape](escape.md) - 转义字符串中的特殊字符,以便安全的输出到网页中,支持HTML,JS,CSS,HTML属性和URL的转义
@@ -127,8 +127,7 @@ API 参考目录
 * [view](view.md) - 渲染指定名称的模板
 
 #### 工具
-* [attr](attr.md) - 获取数组或对象中指定键名的值
-* [instance](instance.md) - 初始化指定的类
+* [arr](attr.md) - 数组工具微件,提供一些实用的数组操作方法
 * [logger](logger.md) - 记录日志
 * [marker](marker.md) - 设置一个标记,包括时间,内存使用量等信息
 * [pinyin](pinyin.md) - 将中文转换为拼音字母
