@@ -57,6 +57,8 @@ class App extends AbstractWidget
      */
     protected $controller;
 
+    protected $controllerClass = '';
+
     /**
      * The name of action
      *
@@ -152,7 +154,7 @@ class App extends AbstractWidget
         if (!$this->trigger('404', array($this, $notFound, $message), $this)->isDefaultPrevented()) {
             throw new Exception\NotFoundException($message);
         }
-        
+
         return $this;
     }
 
@@ -279,7 +281,7 @@ class App extends AbstractWidget
 
     /**
      * Get the controller instance, if not found, return false instead
-     * 
+     *
      * @param string $module The name of module
      * @param string $controller The name of controller
      * @return boolean
@@ -326,7 +328,7 @@ class App extends AbstractWidget
     {
         return strtolower($this->controller . '/' . $this->action) . $this->view->getExtension();
     }
-    
+
     /**
      * Forwards to the given module, controller and action
      *
@@ -339,7 +341,7 @@ class App extends AbstractWidget
         $this->setAction($action);
         $controller && $this->setController($controller);
         $module && $this->setModule($action);
-        
+
         $this()->preventPreviousDispatch();
     }
 }

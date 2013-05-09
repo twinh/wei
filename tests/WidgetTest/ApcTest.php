@@ -2,7 +2,7 @@
 
 namespace WidgetTest;
 
-class ApcTest extends CacheTestCase
+class ApcTest extends PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {
