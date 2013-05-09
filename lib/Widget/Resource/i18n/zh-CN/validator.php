@@ -37,7 +37,7 @@ return array(
 
     // color
     '%name% must be valid hex color, e.g. #FF0000' => '%name%必须是有效的十六进制颜色,例如#FF0000',
-    '%name% must not be valid hex color' => '%name%不能是有效的有效的十六进制颜色',
+    '%name% must not be valid hex color' => '%name%不能是有效的十六进制颜色',
 
     // creditCard
     '%name% must be valid credit card number' => '%name%必须是有效的信用卡号',
