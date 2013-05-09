@@ -1,21 +1,53 @@
-[isType()](http://twinh.github.io/widget/api/isType)
-====================================================
+isType
+======
 
 检查数据是否为指定的类型
 
-### 
+案例
+----
+
+### 检查"abc"是否为字符串
 ```php
-bool isType( $input [, $type ] )
+if ($widget->isType('abc', 'string')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 ```
 
-##### 参数
-* **$input** `mixed` 待验证的数据
-* **$type** `string` 指定的数据类型
+#### 运行结果
+```php
+'Yes'
+```
 
+### 检查new ArrayObject()是否为Traversable类型
+```php
+if ($widget->isType(new ArrayObject(), 'Traversable')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+```
 
-如果`$type`的值不在下表中,将检查数据是否为`$type`的实例化对象($input instanceof $type)
+#### 运行结果
+```php
+'Yes'
+```
 
-| **值**   | **名称**             | **值**   | **名称**             |
+调用方式
+--------
+
+### 选项
+
+| 名称              | 类型    | 默认值                           | 说明                                             |
+|-------------------|---------|----------------------------------|--------------------------------------------------|
+| type              | string  | 无                               | 数据的类型,可选值见下表                          |
+| typeMessage       | string  | %name%必须是%typeName%           | -                                                |
+| negativeMessage   | string  | %name%不能是%typeName%           | -                                                |
+
+如果`type`的值不在下表中,将检查数据是否为`type`的实例化对象($input instanceof $type)
+
+| 值       | 名称                 | 值       | 名称                 |
 |----------|----------------------|----------|----------------------|
 | array    | 数组                 | alnum    | 字母(a-z)或数字(0-9) |
 | bool     | 布尔                 | alpha    | 字母                 |
@@ -29,40 +61,8 @@ bool isType( $input [, $type ] )
 | scalar   | 标量                 | upper    | 大写字母(A-Z)        |
 | string   | 字符串               | xdigit   | 16进制数字           |
 
-##### 错误信息
-| **名称**              | **信息**                                                       | 
-|-----------------------|----------------------------------------------------------------|
-| `type`                | %name%必须是%typeName%                                         |
-| `negative`            | %name%不能是%typeName%                                         |
+### 方法
 
+#### isType($input, $type)
+检查数据是否为指定的类型
 
-##### 代码范例
-检查"abc"是否为字符串
-```php
-<?php
- 
-if ($widget->isType('abc', 'string')) {
-    echo 'Yes';
-} else {
-    echo 'No';
-}
-```
-##### 运行结果
-```php
-'Yes'
-```
-##### 代码范例
-检查new ArrayObject()是否为Traversable
-```php
-<?php
- 
-if ($widget->isType(new ArrayObject(), 'Traversable')) {
-    echo 'Yes';
-} else {
-    echo 'No';
-}
-```
-##### 运行结果
-```php
-'Yes'
-```
