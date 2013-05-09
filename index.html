@@ -212,28 +212,22 @@ h1, h2, h3, .lead
       </ul>
     </li>
     <li>
+      <a href="#error">错误处理</a>
+      <ul class="nav">
+        <li><a href="#error">error</a></li>
+        <li><a href="#phpError">phpError</a></li>
+      </ul>
+    </li>
+    <li>
       <a href="#arr">工具</a>
       <ul class="nav">
-        <li>
-          <a href="#arr">Arr</a>
-          <ul class="nav">
-            <li><a href="#attr">attr</a></li>
-            <li><a href="#sort">sort</a></li>
-          </ul>
-        </li>
+        <li><a href="#arr">arr</a></li>
         <li><a href="#env">env</a></li>
         <li><a href="#logger">logger</a></li>
         <li><a href="#monolog">monolog</a></li>
         <li><a href="#pinyin">pinyin</a></li>
         <li><a href="#uuid">uuid</a></li>
         <li><a href="#website">website</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#error">错误处理</a>
-      <ul class="nav">
-        <li><a href="#error">error</a></li>
-        <li><a href="#phpError">phpError</a></li>
       </ul>
     </li>
   </ul>
@@ -319,7 +313,7 @@ $id = $widget->query('id');</code></pre>
 <html><body>
 <h1>Request</h1>
 
-<p>管理HTTP请求数据/获取一项HTTP请求参数($_REQUEST)的值</p>
+<p>管理HTTP请求数据($_REQUEST)</p>
 
 <h2>案例</h2>
 
@@ -470,7 +464,7 @@ $id = $widget-&gt;request('id');
 <html><body>
 <h1>Cookie</h1>
 
-<p>写入,读取和删除cookie</p>
+<p>写入,读取和删除cookie($_COOKIE)</p>
 
 <h2>案例</h2>
 
@@ -4719,54 +4713,57 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
   <section id="isNumber">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isNumber">isNumber()</a></h1>
+<h1>isNumber</h1>
 
 <p>检查数据是否为有效数字</p>
 
-<pre><code class="php">bool isNumber( $input )
+<h2>案例</h2>
+
+<h3>检查-123.4是否为数字</h3>
+
+<pre><code class="php">if ($widget-&gt;isNumber(-123.4)) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>notNumber</code></td>
-<td>%name%必须是有效的数字</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不能是数字</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查-123.4是否为数字<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isNumber(-123.4)) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Yes'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>notNumberMessage</td>
+<td>string</td>
+<td>%name%必须是有效的数字</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能是数字</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isNumber($input)</h4>
+
+<p>检查数据是否为有效数字</p>
 </body></html>
 
   </section>
@@ -5022,29 +5019,80 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
   <section id="isType">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isType">isType()</a></h1>
+<h1>isType</h1>
 
 <p>检查数据是否为指定的类型</p>
 
-<pre><code class="php">bool isType( $input [, $type ] )
+<h2>案例</h2>
+
+<h3>检查"abc"是否为字符串</h3>
+
+<pre><code class="php">if ($widget-&gt;isType('abc', 'string')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
+<h4>运行结果</h4>
 
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-<li>
-<strong>$type</strong> <code>string</code> 指定的数据类型</li>
-</ul>
-<p>如果<code>$type</code>的值不在下表中,将检查数据是否为<code>$type</code>的实例化对象($input instanceof $type)</p>
+<pre><code class="php">'Yes'
+</code></pre>
+
+<h3>检查new ArrayObject()是否为Traversable类型</h3>
+
+<pre><code class="php">if ($widget-&gt;isType(new ArrayObject(), 'Traversable')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+</code></pre>
+
+<h4>运行结果</h4>
+
+<pre><code class="php">'Yes'
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
-<th><strong>值</strong></th>
-<th><strong>名称</strong></th>
-<th><strong>值</strong></th>
-<th><strong>名称</strong></th>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>无</td>
+<td>数据的类型,可选值见下表</td>
+</tr>
+<tr>
+<td>typeMessage</td>
+<td>string</td>
+<td>%name%必须是%typeName%</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能是%typeName%</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>如果<code>type</code>的值不在下表中,将检查数据是否为<code>type</code>的实例化对象($input instanceof $type)</p>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>值</th>
+<th>名称</th>
+<th>值</th>
+<th>名称</th>
 </tr></thead>
 <tbody>
 <tr>
@@ -5115,59 +5163,11 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 </tr>
 </tbody>
 </table>
-<h5>错误信息</h5>
+<h3>方法</h3>
 
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>type</code></td>
-<td>%name%必须是%typeName%</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不能是%typeName%</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
+<h4>isType($input, $type)</h4>
 
-<p>检查"abc"是否为字符串<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isType('abc', 'string')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
-
-<pre><code class="php">'Yes'
-</code></pre>
-
-<h5>代码范例</h5>
-
-<p>检查new ArrayObject()是否为Traversable<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isType(new ArrayObject(), 'Traversable')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
-
-<pre><code class="php">'Yes'
-</code></pre>
+<p>检查数据是否为指定的类型</p>
 </body></html>
 
   </section>
@@ -5177,58 +5177,63 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
   <section id="isUppercase">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isUppercase">isUppercase()</a></h1>
+<h1>isUppercase</h1>
 
 <p>检查数据是否为大写字符</p>
 
-<pre><code class="php">bool isUppercase( $input )
+<h2>案例</h2>
+
+<h3>检查"abc"是否为大写字符</h3>
+
+<pre><code class="php">if ($widget-&gt;isLowercase('abc')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>invalid</code></td>
-<td>%name%不能包含小写字母</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不能包含大写字母</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查"abc"是否为大写字符<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isLowercase('abc')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Yes'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>invalidMessage</td>
+<td>string</td>
+<td>%name%不能包含小写字母</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能包含大写字母</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isUppercase($input)</h4>
+
+<p>检查数据是否为大写字符</p>
 </body></html>
 
   </section>
@@ -6195,31 +6200,142 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
   <section id="isFile">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isFile">isFile()</a></h1>
+<h1>isFile</h1>
 
-<p>检查数据是否为合法的文件,可选的检查选项有文件大小,后缀名和媒体类型</p>
+<p>检查数据是否为合法的文件,可选的检查选项有文件大小,扩展名和媒体类型</p>
 
-<pre><code class="php">bool isFile( $input [, $options ] )
+<h2>案例</h2>
+
+<h3>检查文件"5x5.gif"是否为存在且大小小于1.2mb</h3>
+
+<pre><code class="php">if ($widget-&gt;isImage('./5x5.gif', array('maxSize' =&gt; '1.2mb'))) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
+<h4>运行结果</h4>
 
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-<li>
-<strong>$options</strong> <code>array</code> 选项数组,留空表示只检查数据是否为存在的文件
+<pre><code class="php">'Yes'
+</code></pre>
 
-<ul>
-<li> <strong>maxSize</strong> <code>int</code> 允许的文件最大字节数</li>
-<li> <strong>minSize</strong> <code>int</code> 允许的文件最小字节数</li>
-<li> <strong>exts</strong> <code>string|array</code> 允许的文件扩展名</li>
-<li> <strong>excludeExts</strong> <code>string|array</code> 不允许的文件扩展名</li>
-<li> <strong>mimeTypes</strong> <code>string|array</code> 允许的文件媒体类型</li>
-<li> <strong>excludeMimeTypes</strong> <code>string|array</code> 不允许的文件媒体类型</li>
-</ul>
-</li>
-</ul>
+<h2>调用方法</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>maxSize</td>
+<td>int</td>
+<td>0</td>
+<td>允许的文件最大字节数,允许使用类似<code>10.5MB</code>, <code>500KB</code>的文件大小值</td>
+</tr>
+<tr>
+<td>minSize</td>
+<td>int</td>
+<td>0</td>
+<td>允许的文件最小字节数,允许使用类似<code>10.5MB</code>, <code>500KB</code>的文件大小值</td>
+</tr>
+<tr>
+<td>exts</td>
+<td>array</td>
+<td>array()</td>
+<td>允许的文件扩展名</td>
+</tr>
+<tr>
+<td>excludeExts</td>
+<td>array</td>
+<td>array()</td>
+<td>不允许的文件扩展名</td>
+</tr>
+<tr>
+<td>mimeTypes</td>
+<td>array</td>
+<td>array()</td>
+<td>允许的文件媒体类型</td>
+</tr>
+<tr>
+<td>excludeMimeTypes</td>
+<td>array</td>
+<td>array()</td>
+<td>不允许的文件媒体类型</td>
+</tr>
+<tr>
+<td>notFoundMessage</td>
+<td>string</td>
+<td>%name%不存在或不可读</td>
+<td>-</td>
+</tr>
+<tr>
+<td>maxSizeMessage</td>
+<td>string</td>
+<td>%name%太大了(%sizeString%),允许的最大文件大小为%maxSizeString%</td>
+<td>-</td>
+</tr>
+<tr>
+<td>minSizeMessage</td>
+<td>string</td>
+<td>%name%太小了(%sizeString%),允许的最小文件大小为%minSizeString%</td>
+<td>-</td>
+</tr>
+<tr>
+<td>extsMessage</td>
+<td>string</td>
+<td>%name%的扩展名(%ext%)不合法,只允许扩展名为:%exts%</td>
+<td>-</td>
+</tr>
+<tr>
+<td>excludeExtsMessage</td>
+<td>string</td>
+<td>%name%的扩展名(%ext%)不合法,不允许扩展名为:%excludeExts%</td>
+<td>-</td>
+</tr>
+<tr>
+<td>mimeTypeNotDetectedMessage</td>
+<td>string</td>
+<td>无法检测%name%的媒体类型</td>
+<td>-</td>
+</tr>
+<tr>
+<td>mimeTypesMessage</td>
+<td>string</td>
+<td>%name%的媒体类型不合法</td>
+<td>-</td>
+</tr>
+<tr>
+<td>excludeMimeTypesMessage</td>
+<td>string</td>
+<td>%name%的媒体类型不合法</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%必须是不存在的文件</td>
+<td>-</td>
+</tr>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isFile($input, $options)</h4>
+
+<p>检查数据是否为合法的文件,可选的检查选项有文件大小,扩展名和媒体类型</p>
+
 <p>第一个参数<code>$input</code>允许以下3种变量类型.</p>
 
 <ol>
@@ -6228,69 +6344,6 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <li>
 <code>\SplFile</code>对象</li>
 </ol>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>notFound</code></td>
-<td>%name%不存在或不可读</td>
-</tr>
-<tr>
-<td><code>maxSize</code></td>
-<td>%name%太大了(%sizeString%),允许的最大文件大小为%maxSizeString%</td>
-</tr>
-<tr>
-<td><code>minSize</code></td>
-<td>%name%太小了(%sizeString%),允许的最小文件大小为%minSizeString%</td>
-</tr>
-<tr>
-<td><code>exts</code></td>
-<td>%name%的扩展名(%ext%)不合法,只允许扩展名为:%exts%</td>
-</tr>
-<tr>
-<td><code>excludeExts</code></td>
-<td>%name%的扩展名(%ext%)不合法,不允许扩展名为:%excludeExts%</td>
-</tr>
-<tr>
-<td><code>mimeTypeNotDetected</code></td>
-<td>无法检测%name%的媒体类型</td>
-</tr>
-<tr>
-<td><code>mimeTypes</code></td>
-<td>%name%的媒体类型不合法</td>
-</tr>
-<tr>
-<td><code>excludeMimeTypes</code></td>
-<td>%name%的媒体类型不合法</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%必须是不存在的文件</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查文件"5x5.gif"是否为存在且大小小于1.2mb<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isImage(__DIR__ . '/fixtures/5x5.gif', array('maxSize' =&gt; '1.2mb'))) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
-
-<pre><code class="php">'Yes'
-</code></pre>
 </body></html>
 
   </section>
@@ -6300,142 +6353,211 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
   <section id="isImage">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isImage">isImage()</a></h1>
+<h1>isImage</h1>
 
 <p>检查数据是否为图片,同时还可以检查图片宽度和高度是否在指定的范围内</p>
 
-<pre><code class="php">bool isImage( $input [, $options ] )
+<h2>案例</h2>
+
+<h3>检查文件"5x5.gif"是否为图片且最大高度不能超过5px</h3>
+
+<pre><code class="php">if ($widget-&gt;isImage('./5x5.gif', array('maxWidth' =&gt; 5))) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-<li>
-<strong>$options</strong> <code>array</code> 选项数组,留空表示只检查数据是否为图片
-
-<ul>
-<li> <strong>maxWidth</strong> <code>int</code> 允许的图片最大宽度</li>
-<li> <strong>minWidth</strong> <code>int</code> 允许的图片最小宽度</li>
-<li> <strong>maxHeight</strong> <code>int</code> 允许的图片最大高度</li>
-<li> <strong>minHeight</strong> <code>int</code> 允许的图片最小高度</li>
-<li> <strong>maxSize</strong> <code>int</code> 允许的文件最大字节数</li>
-<li> <strong>minSize</strong> <code>int</code> 允许的文件最小字节数</li>
-<li> <strong>exts</strong> <code>string|array</code> 允许的文件扩展名</li>
-<li> <strong>excludeExts</strong> <code>string|array</code> 不允许的文件扩展名</li>
-<li> <strong>mimeTypes</strong> <code>string|array</code> 允许的文件媒体类型</li>
-<li> <strong>excludeMimeTypes</strong> <code>string|array</code> 不允许的文件媒体类型</li>
-</ul>
-</li>
-</ul>
-<p>图片验证器是文件验证器<a href="isFile.md">isFile</a>的子类,其中选项<code>maxSize</code>, <code>minSize</code>, <code>exts</code>,<br><code>excludeExts</code>, <code>mimeTypes</code>, <code>excludeMimeTypes</code>继承自父类.</p>
-
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>notDetected</code></td>
-<td>%name%不是有效的图片,或是无法检测到图片的尺寸</td>
-</tr>
-<tr>
-<td><code>widthTooBig</code></td>
-<td>%name%的宽度太大(%width%px), 允许的最大宽度为%maxWidth%px</td>
-</tr>
-<tr>
-<td><code>widthTooSmall</code></td>
-<td>%name%的宽度太小(%width%px),允许的最小宽度应为%minWidth%px</td>
-</tr>
-<tr>
-<td><code>heightTooBig</code></td>
-<td>%name%的高度太大(%height%px), 允许的最大高度为%maxHeight%px</td>
-</tr>
-<tr>
-<td><code>heightTooSmall</code></td>
-<td>%name%的高度太小(%height%px), 允许的最小高度为%minHeight%px</td>
-</tr>
-<tr>
-<td><code>notFound</code></td>
-<td>%name%不存在或不可读</td>
-</tr>
-<tr>
-<td><code>maxSize</code></td>
-<td>%name%太大了(%sizeString%),允许的最大文件大小为%maxSizeString%</td>
-</tr>
-<tr>
-<td><code>minSize</code></td>
-<td>%name%太小了(%sizeString%),允许的最小文件大小为%minSizeString%</td>
-</tr>
-<tr>
-<td><code>exts</code></td>
-<td>%name%的扩展名(%ext%)不合法,只允许扩展名为:%exts%</td>
-</tr>
-<tr>
-<td><code>excludeExts</code></td>
-<td>%name%的扩展名(%ext%)不合法,不允许扩展名为:%excludeExts%</td>
-</tr>
-<tr>
-<td><code>mimeTypeNotDetected</code></td>
-<td>无法检测%name%的媒体类型</td>
-</tr>
-<tr>
-<td><code>mimeTypes</code></td>
-<td>%name%的媒体类型不合法</td>
-</tr>
-<tr>
-<td><code>excludeMimeTypes</code></td>
-<td>%name%的媒体类型不合法</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%必须是不存在的文件</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查文件"5x5.gif"是否为图片且最大高度不能超过5px<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isImage(__DIR__ . '/fixtures/5x5.gif', array('maxWidth' =&gt; 5))) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Yes'
 </code></pre>
 
-<h5>代码范例</h5>
+<h3>检查文件"5x5.gif"是否为图片且后缀名不能为"gif"</h3>
 
-<p>检查文件"5x5.gif"是否为图片且后缀名不能为"gif"<br>
-```php<br>
-&lt;?php</p>
+<pre><code class="php">if ($widget-&gt;isImage('./5x5.gif', array('excludeExts' =&gt; 'gif'))) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+</code></pre>
 
-<p>if ($widget-&gt;isImage(__DIR__ . '/fixtures/5x5.gif', array('excludeExts' =&gt; 'gif'))) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'No'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>maxSize</td>
+<td>int</td>
+<td>0</td>
+<td>允许的文件最大字节数,允许使用类似<code>10.5MB</code>, <code>500KB</code>的文件大小值</td>
+</tr>
+<tr>
+<td>minSize</td>
+<td>int</td>
+<td>0</td>
+<td>允许的文件最小字节数,允许使用类似<code>10.5MB</code>, <code>500KB</code>的文件大小值</td>
+</tr>
+<tr>
+<td>exts</td>
+<td>array</td>
+<td>array()</td>
+<td>允许的文件扩展名</td>
+</tr>
+<tr>
+<td>excludeExts</td>
+<td>array</td>
+<td>array()</td>
+<td>不允许的文件扩展名</td>
+</tr>
+<tr>
+<td>mimeTypes</td>
+<td>array</td>
+<td>array()</td>
+<td>允许的文件媒体类型</td>
+</tr>
+<tr>
+<td>excludeMimeTypes</td>
+<td>array</td>
+<td>array()</td>
+<td>不允许的文件媒体类型</td>
+</tr>
+<tr>
+<td>maxWidth</td>
+<td>int</td>
+<td>0</td>
+<td>允许的图片最大宽度</td>
+</tr>
+<tr>
+<td>maxHeight</td>
+<td>int</td>
+<td>0</td>
+<td>允许的图片最大高度</td>
+</tr>
+<tr>
+<td>minWidth</td>
+<td>int</td>
+<td>0</td>
+<td>允许的图片最小宽度</td>
+</tr>
+<tr>
+<td>minHeight</td>
+<td>int</td>
+<td>0</td>
+<td>允许的图片最小高度</td>
+</tr>
+<tr>
+<td>notDetectedMessage</td>
+<td>string</td>
+<td>%name%不是有效的图片,或是无法检测到图片的尺寸</td>
+<td>-</td>
+</tr>
+<tr>
+<td>widthTooBigMessage</td>
+<td>string</td>
+<td>%name%的宽度太大(%width%px), 允许的最大宽度为%maxWidth%px</td>
+<td>-</td>
+</tr>
+<tr>
+<td>widthTooSmallMessage</td>
+<td>string</td>
+<td>%name%的宽度太小(%width%px),允许的最小宽度应为%minWidth%px</td>
+<td>-</td>
+</tr>
+<tr>
+<td>heightTooBigMessage</td>
+<td>string</td>
+<td>%name%的高度太大(%height%px), 允许的最大高度为%maxHeight%px</td>
+<td>-</td>
+</tr>
+<tr>
+<td>heightTooSmallMessage</td>
+<td>string</td>
+<td>%name%的高度太小(%height%px), 允许的最小高度为%minHeight%px</td>
+<td>-</td>
+</tr>
+<tr>
+<td>notFoundMessage</td>
+<td>string</td>
+<td>%name%不存在或不可读</td>
+<td>-</td>
+</tr>
+<tr>
+<td>maxSizeMessage</td>
+<td>string</td>
+<td>%name%太大了(%sizeString%),允许的最大文件大小为%maxSizeString%</td>
+<td>-</td>
+</tr>
+<tr>
+<td>minSizeMessage</td>
+<td>string</td>
+<td>%name%太小了(%sizeString%),允许的最小文件大小为%minSizeString%</td>
+<td>-</td>
+</tr>
+<tr>
+<td>extsMessage</td>
+<td>string</td>
+<td>%name%的扩展名(%ext%)不合法,只允许扩展名为:%exts%</td>
+<td>-</td>
+</tr>
+<tr>
+<td>excludeExtsMessage</td>
+<td>string</td>
+<td>%name%的扩展名(%ext%)不合法,不允许扩展名为:%excludeExts%</td>
+<td>-</td>
+</tr>
+<tr>
+<td>mimeTypeNotDetectedMessage</td>
+<td>string</td>
+<td>无法检测%name%的媒体类型</td>
+<td>-</td>
+</tr>
+<tr>
+<td>mimeTypesMessage</td>
+<td>string</td>
+<td>%name%的媒体类型不合法</td>
+<td>-</td>
+</tr>
+<tr>
+<td>excludeMimeTypesMessage</td>
+<td>string</td>
+<td>%name%的媒体类型不合法</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%必须是不存在的文件</td>
+<td>-</td>
+</tr>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isImage($input, $options = array())</h4>
+
+<p>检查数据是否为图片,同时还可以检查图片宽度和高度是否在指定的范围内</p>
+
+<p>图片验证器是文件验证器<a href="isFile.md">isFile</a>的子类,其中选项<code>maxSize</code>, <code>minSize</code>, <code>exts</code>,<br><code>excludeExts</code>, <code>mimeTypes</code>, <code>excludeMimeTypes</code>继承自父类.</p>
 </body></html>
 
   </section>
@@ -6445,58 +6567,63 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
   <section id="isEmail">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isEmail">isEmail()</a></h1>
+<h1>isEmail</h1>
 
 <p>检查数据是否为有效的邮箱地址</p>
 
-<pre><code class="php">bool isEmail( $input )
+<h2>案例</h2>
+
+<h3>检查"<a href="mailto:example@example.com">example@example.com</a>"是否为邮箱地址</h3>
+
+<pre><code class="php">if ($widget-&gt;isEmail('example@example.com')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>format</code></td>
-<td>%name%必须是有效的邮箱地址</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不能是邮箱地址</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查"<a href="mailto:example@example.com">example@example.com</a>"是否为邮箱地址<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isEmail('<a href="mailto:example@example.com">example@example.com</a>')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Yes'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>formatMessage</td>
+<td>string</td>
+<td>%name%必须是有效的邮箱地址</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能是数字</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isEmail($input)</h4>
+
+<p>检查数据是否为有效的邮箱地址</p>
 </body></html>
 
   </section>
@@ -6506,82 +6633,95 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
   <section id="isIp">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isIp">isIp()</a></h1>
+<h1>isIp</h1>
 
 <p>检查数据是否为有效的IP地址</p>
 
-<pre><code class="php">bool isIp( $input [, $options ] )
+<h2>案例</h2>
+
+<h3>检查"192.168.0.1"是否为有效的IP地址</h3>
+
+<pre><code class="php">if ($widget-&gt;isIp('192.168.0.1')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-<li>
-<strong>$options</strong> <code>array</code> 选项数组,留空表示只检查IP地址是否有效
-
-<ul>
-<li> <strong>ipv4</strong> <code>bool</code> 是否只允许IPv4格式的IP地址</li>
-<li> <strong>ipv6</strong> <code>bool</code> 是否只允许IPv6格式的IP地址</li>
-<li> <strong>noPrivRange</strong> <code>bool</code> 是否不允许私有的IP地址</li>
-<li> <strong>noResRange</strong> <code>bool</code> 是否不允许保留的IP地址</li>
-</ul>
-</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>notAllow</code></td>
-<td>%name%必须是有效的IP地址</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不能是IP地址</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查"192.168.0.1"是否为有效的IP地址<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isIp('192.168.0.1')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Yes'
 </code></pre>
 
-<h5>代码范例</h5>
+<h3>检查"192.168.0.1"是否不在私有的IP地址中</h3>
 
-<p>检查"192.168.0.1"是否不在私有的IP地址中<br>
-```php<br>
-&lt;?php</p>
+<pre><code class="php">if ($widget-&gt;isIp('192.168.0.1', array('noPrivRange' =&gt; true))) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+</code></pre>
 
-<p>if ($widget-&gt;isIp('192.168.0.1', array('noPrivRange' =&gt; true))) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'No'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>ipv4</td>
+<td>bool</td>
+<td>false</td>
+<td>是否只允许IPv4格式的IP地址</td>
+</tr>
+<tr>
+<td>ipv6</td>
+<td>bool</td>
+<td>false</td>
+<td>是否只允许IPv6格式的IP地址</td>
+</tr>
+<tr>
+<td>noPrivRange</td>
+<td>bool</td>
+<td>false</td>
+<td>是否不允许私有的IP地址</td>
+</tr>
+<tr>
+<td>noResRange</td>
+<td>bool</td>
+<td>false</td>
+<td>是否不允许保留的IP地址</td>
+</tr>
+<tr>
+<td>notAllowMessage</td>
+<td>string</td>
+<td>%name%必须是有效的IP地址</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能是IP地址</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isIp($input, $options = array())</h4>
+
+<p>检查数据是否为有效的IP地址</p>
 </body></html>
 
   </section>
@@ -6591,58 +6731,63 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
   <section id="isTld">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isTld">isTld()</a></h1>
+<h1>isTld</h1>
 
 <p>检查数据是否为存在的顶级域名</p>
 
-<pre><code class="php">bool isTld( $input )
+<h2>案例</h2>
+
+<h3>检查"cn"是否为存在的顶级域名</h3>
+
+<pre><code class="php">if ($widget-&gt;isTld('cn')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>notIn</code></td>
-<td>%name%必须是有效的顶级域名</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不能是有效的顶级域名</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查"cn"是否为存在的顶级域名<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isTld('cn')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Yes'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>notInMessage</td>
+<td>string</td>
+<td>%name%必须是有效的顶级域名</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能是有效的顶级域名</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isTld($input)</h4>
+
+<p>检查数据是否为存在的顶级域名</p>
 </body></html>
 
   </section>
@@ -6794,21 +6939,73 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
   <section id="isCreditCard">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isCreditCard">isCreditCard()</a></h1>
+<h1>isCreditCard</h1>
 
 <p>检查数据是否为合法的信用卡号码</p>
 
-<pre><code class="php">bool isCreditCard( $input [, $type] )
+<h2>案例</h2>
+
+<h3>检查数据是否为Visa或银联卡,第二个参数即可以是字符串,也可以是数组</h3>
+
+<pre><code class="php">$input = '4111111111111111'; // Visa
+
+if ($widget-&gt;isCreditCard($input, 'UnionPay,Visa')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+
+if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
+<h4>运行结果</h4>
 
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-<li>
-<strong>$type</strong> <code>string|array</code> 指定信用卡类型,多个使用<code>,</code>隔开,或是使用数组,留空表示允许任意信用卡号.</li>
-</ul>
+<pre><code class="php">'Yes'
+'Yes'
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>string,array</td>
+<td>无</td>
+<td>指定信用卡类型,多个使用<code>,</code>隔开,或是使用数组,留空表示允许任意信用卡号</td>
+</tr>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>invalidMessage</td>
+<td>string</td>
+<td>%name%必须是有效的信用卡号</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能是有效的信用卡号</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
 <p>允许指定的信用卡类型有: American Express, Diners Club, Discover, JCB, MasterCard, China UnionPay 和 Visa</p>
 
 <p>下表为目前允许的信用卡类型</p>
@@ -6857,56 +7054,9 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 </tr>
 </tbody>
 </table>
-<h5>错误信息</h5>
+<h3>方法</h3>
 
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>invalid</code></td>
-<td>%name%必须是有效的信用卡号</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不能是有效的信用卡号</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查数据是否为Visa或银联卡,第二个参数即可以是字符串,也可以是数组<br>
-```php<br>
-&lt;?php</p>
-
-<p>$input = '4111111111111111'; // Visa</p>
-
-<p>if ($widget-&gt;isCreditCard($input, 'UnionPay,Visa')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}</p>
-
-<p>echo "\n";</p>
-
-<p>if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
-
-<pre><code class="php">'Yes
-Yes'
-</code></pre>
+<h4>isCreditCard($input, $type)</h4>
 </body></html>
 
   </section>
@@ -7414,60 +7564,61 @@ Yes'
   <section id="isMobileCn">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isMobileCn">isMobileCn()</a></h1>
+<h1>isMobileCn</h1>
 
-<p>检查数据是否为有效的手机号码</p>
+<p>检查数据是否为有效的中国手机号码</p>
 
-<pre><code class="php">bool isMobileCn( $input )
+<h2>案例</h2>
+
+<h3>检查"13800138000"是否为有效的手机号码</h3>
+
+<pre><code class="php">if ($widget-&gt;isMobileCn('13800138000')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-</ul>
-<p>isMobile</p>
-
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>pattern</code></td>
-<td>%name%必须是13位长度的数字,以13,15或18开头</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%必须不匹配模式"%pattern%"</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查"13800138000"是否为有效的手机号码<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isMobileCn('13800138000')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Yes'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>patternMessage</td>
+<td>string</td>
+<td>%name%必须是13位长度的数字,以13,15或18开头</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%必须不匹配模式"%pattern%"</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isMobileCn($input)</h4>
 </body></html>
 
   </section>
@@ -9292,34 +9443,31 @@ print_r($widget-&gt;arr-&gt;sort($data, 'order', SORT_DESC));
   <section id="uuid">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/uuid">uuid()</a></h1>
+<h1>Uuid</h1>
 
-<p>随机生成一个UUID</p>
+<p>生成一个随机的UUID</p>
 
-<pre><code class="php">bool uuid( )
+<h2>案例</h2>
+
+<h3>随机生成一个UUID</h3>
+
+<pre><code class="php">// 输出格式类似"05b59eca-866d-410b-96d7-e4f2c286f5a8"
+echo $widget-&gt;uuid();
 </code></pre>
 
-<h5>参数</h5>
+<h2>调用方式</h2>
+
+<h3>选项</h3>
 
 <p><em>无</em></p>
 
+<h3>方法</h3>
+
+<h4>uuid()</h4>
+
+<p>生成一个随机的UUID</p>
+
 <p>生成的UUID可用于数据表主键,相比通过SQL语句<code>SELECT UUID</code>生成的UUID要快很多,而且调用更加方便.</p>
-
-<p>值得注意的是,UUID是固定长度和格式的随机的字符串,所以下面的例子中,你输出的结果和我的结果肯定不一样.</p>
-
-<h5>代码范例</h5>
-
-<p>随机生成一个UUID<br>
-```php<br>
-&lt;?php</p>
-
-<p>echo $widget-&gt;uuid();<br>
-```</p>
-
-<h5>运行结果</h5>
-
-<pre><code class="php">'05b59eca-866d-410b-96d7-e4f2c286f5a8'
-</code></pre>
 </body></html>
 
   </section>
