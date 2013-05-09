@@ -12,7 +12,7 @@ use Widget\Exception\UnexpectedTypeException;
 use Widget\Exception\InvalidArgumentException;
 
 /**
- * The validator manager, use to validate input quickly, create validator and 
+ * The validator manager, use to validate input quickly, create validator and
  * rule validator
  *
  * @author      Twin Huang <twinhuang@qq.com>
@@ -21,7 +21,7 @@ class Is extends AbstractWidget
 {
     /**
      * The validator rule alias
-     * 
+     *
      * @var array
      */
     protected $alias = array(
@@ -29,28 +29,28 @@ class Is extends AbstractWidget
         'before'    => 'Widget\Validator\Max',
         'after'     => 'Widget\Validator\Min'
     );
-    
+
     private $rules = array(
-        'All', 'AllOf', 'Alnum', 'Alpha', 'Blank', 'Callback', 'Chinese', 
-        'CreditCard', 'Date', 'DateTime', 'Decimal', 'Digit', 'Dir', 
-        'DivisibleBy', 'DoubleByte', 'Email', 'EndsWith', 'EntityExists', 
-        'Equals', 'Exists', 'File', 'IdCardCn', 'IdCardHk', 'IdCardMo', 
-        'IdCardTw', 'Image', 'In', 'Ip', 'Length', 'Lowercase', 'Max', 
-        'MaxLength', 'Min', 'MinLength', 'MobileCn', 'NoneOf', 'Null', 'Number', 
-        'OneOf', 'PhoneCn', 'PlateNumberCn', 'Postcode', 'QQ', 'Range', 
-        'RecordExists', 'Regex', 'Required', 'SomeOf', 'StartsWith', 'Time', 
+        'All', 'AllOf', 'Alnum', 'Alpha', 'Blank', 'Callback', 'Chinese',
+        'Color', 'CreditCard', 'Date', 'DateTime', 'Decimal', 'Digit', 'Dir',
+        'DivisibleBy', 'DoubleByte', 'Email', 'EndsWith', 'EntityExists',
+        'Equals', 'Exists', 'File', 'IdCardCn', 'IdCardHk', 'IdCardMo',
+        'IdCardTw', 'Image', 'In', 'Ip', 'Length', 'Lowercase', 'Max',
+        'MaxLength', 'Min', 'MinLength', 'MobileCn', 'NoneOf', 'Null', 'Number',
+        'OneOf', 'PhoneCn', 'PlateNumberCn', 'Postcode', 'QQ', 'Range',
+        'RecordExists', 'Regex', 'Required', 'SomeOf', 'StartsWith', 'Time',
         'Tld', 'Type', 'Uppercase', 'Url', 'Uuid'
     );
 
     /**
      * Constructor
-     * 
+     *
      * @param array $options
      */
     public function __construct(array $options = array())
     {
         parent::__construct($options);
-        
+
         // Adds widget alias for validators
         $rules = array();
         foreach ($this->rules as $rule) {
@@ -61,7 +61,7 @@ class Is extends AbstractWidget
         }
         $this->widget->appendOption('alias', $rules);
     }
-    
+
     /**
      * @param string|Validator\AbstractValidator|int $rule
      * @param array|null $input
@@ -77,18 +77,18 @@ class Is extends AbstractWidget
                 $options = true;
             }
         }
-        
+
         if ($rule instanceof Validator\AbstractValidator) {
             $validator = $rule;
             return $rule($input);
         }
-        
+
         $validator = $this->createRuleValidator($rule, $props);
 
         if (!is_array($options)) {
             $options = array($options);
         }
-        
+
         if (is_int(key($options))) {
             array_unshift($options, $input);
             $result = call_user_func_array($validator, $options);
@@ -102,7 +102,7 @@ class Is extends AbstractWidget
 
     /**
      * Validate input by given rule
-     * 
+     *
      * @param string|\Closure|array $rule The validation rule
      * @param mixed $input The data to be validated
      * @param array $options The validation parameters
@@ -132,7 +132,7 @@ class Is extends AbstractWidget
                 throw new UnexpectedTypeException($rule, 'string, array or \Closure');
         }
     }
-    
+
     /**
      * Check if the validator rule exists
      *
@@ -153,10 +153,10 @@ class Is extends AbstractWidget
             return false;
         }
     }
-   
+
     /**
      * Create a new validator instance
-     * 
+     *
      * @param array $options
      * @return Validator
      */
@@ -166,10 +166,10 @@ class Is extends AbstractWidget
             'is' => $this
         ) + $options);
     }
-    
+
     /**
      * Create a rule validator instance by specified rule name
-     * 
+     *
      * @param string $rule The name of rule validator
      * @param array $options The property options for rule validator
      * @return Widget\Validator\AbstractValidator
@@ -182,13 +182,13 @@ class Is extends AbstractWidget
             $options['negative'] = true;
             $rule = substr($rule, 3);
         }
-        
+
         if (!$class = $this->hasRule($rule)) {
             throw new InvalidArgumentException(sprintf('Validator "%s" not found', $rule));
         }
 
         $options = $options + array('widget' => $this->widget) + (array)$this->widget->config('is' . ucfirst($rule));
-        
+
         return new $class($options);
     }
 }
