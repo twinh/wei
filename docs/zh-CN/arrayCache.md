@@ -44,32 +44,32 @@ $widget->arrayCache('key', 'value');
 $widget->arrayCache('name');
 ```
 
-### arrayCache->set($key, $value)
+#### arrayCache->set($key, $value)
 设置缓存的值
 
-### arrayCache->get($key)
+#### arrayCache->get($key)
 获取缓存的值
 
-### arrayCache->remove($key)
+#### arrayCache->remove($key)
 移除一项缓存
 
-### arrayCache->exists($key)
+#### arrayCache->exists($key)
 检查缓存是否存在
 
-### arrayCache->add($key, $value)
+#### arrayCache->add($key, $value)
 增加一项缓存,如果缓存已存在,返回false
 
-### arrayCache->replace($key, $value)
+#### arrayCache->replace($key, $value)
 替换一项缓存,如果缓存 **不** 存在,返回false
 
-### arrayCache->increment($key, $offset = 1)
+#### arrayCache->increment($key, $offset = 1)
 增大一项缓存的值
 
-### arrayCache->decrement($key, $offset = 1)
+#### arrayCache->decrement($key, $offset = 1)
 减小一项缓存的值
 
-### arrayCache->getMulti($keys)
+#### arrayCache->getMulti($keys)
 批量获取缓存的值
 
-### arrayCache->setMulti($values)
+#### arrayCache->setMulti($values)
 批量设置缓存的值

@@ -17,7 +17,7 @@ PHP Error
     'phpError' => array(
         'catch_ajax_errors' => true,
         'catch_class_not_found' => true,
-        '...' => '...'
+        // more options
     )
 ));
 ```
