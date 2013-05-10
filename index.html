@@ -95,13 +95,14 @@ h1, h2, h3, .lead
         <li><a href="#cache">Cache</a></li>
         <li><a href="#apc">APC</a></li>
         <li><a href="#arrayCache">ArrayCache</a></li>
+        <li><a href="#bicache">Bicache</a></li>
+        <li><a href="#couchbase">Couchbase</a></li>
         <li><a href="#dbCache">DbCache</a></li>
         <li><a href="#fileCache">FileCache</a></li>
         <li><a href="#memcache">Memcache</a></li>
         <li><a href="#memcached">Memcached</a></li>
-        <li><a href="#couchbase">Couchbase</a></li>
+        <li><a href="#mongoCache">MongoCache</a></li>
         <li><a href="#redis">Redis</a></li>
-        <li><a href="#bicache">Bicache</a></li>
       </ul>
     </li>
     <li>
@@ -183,6 +184,7 @@ h1, h2, h3, .lead
         <li><a href="#isAll" class="nav-header">其他</a></li>
         <li><a href="#isAll">isAll</a></li>
         <li><a href="#isCallback">isCallback</a></li>
+        <li><a href="#isColor">isColor</a></li>
         <li><a href="#isDivisibleby">isDivisibleBy</a></li>
       </ul>
     </li>
@@ -2129,6 +2131,314 @@ $widget-&gt;arrayCache('name');<br></code></p>
 
   </section>
 
+<!-- bicache
+  ================================================== -->
+  <section id="bicache">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>Bicache</h1>
+
+<p>设置或获取缓存,数据存储在二级缓存中</p>
+
+<p>二级缓存使用主从同步机制,由一个主缓存(master)和一个从缓存(slave)组成,二级缓存的原理非常简单,有以下两点.</p>
+
+<ol>
+<li>每次读取数据时,如果主缓存读取不到数据,将从从缓存读取数据</li>
+<li>每次写入数据时,如果检查上次更新到从缓存的间隔秒数大于配置秒数,则同步数据到从缓存中</li>
+</ol>
+<h2>案例</h2>
+
+<h3>设置和获取缓存</h3>
+
+<pre><code class="php">// 设置缓存
+$widget-&gt;bicache('key', 'value');
+// 返回 true
+
+// 获取缓存
+$widget-&gt;bicache('key');
+// 返回 value
+</code></pre>
+
+<h3>设置60秒后就过期的缓存</h3>
+
+<pre><code class="php">$widget-&gt;bicache('key', 'value', 60);
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>time</td>
+<td>int</td>
+<td>5</td>
+<td>当主缓存写数据时,会检查上次更新到slave缓存的间隔秒数,如果超过该秒数,就同步到从缓存中</td>
+</tr>
+<tr>
+<td>deps</td>
+<td>array</td>
+<td></td>
+<td>主从缓存类型的配置</td>
+</tr>
+<tr>
+<td>- master</td>
+<td>string</td>
+<td>apc</td>
+<td>主缓存的类型,推荐使用内存类缓存,如apc,redis,memcache,memcached或couchbase</td>
+</tr>
+<tr>
+<td>- slave</td>
+<td>string</td>
+<td>fileCache</td>
+<td>从缓存的类型,推荐使用文件类缓存,如fileCache或dbCache</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>bicache($key, $value, $expire = 0)</h4>
+
+<p>设置缓存的值</p>
+
+<h5>参数</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$key</td>
+<td>string</td>
+<td>无</td>
+<td>缓存的键名</td>
+</tr>
+<tr>
+<td>$value</td>
+<td>mixed</td>
+<td>无</td>
+<td>缓存的值,允许任意类型</td>
+</tr>
+<tr>
+<td>$expire</td>
+<td>int</td>
+<td>0</td>
+<td>缓存的有效期,默认为0秒,表示永不过期</td>
+</tr>
+</tbody>
+</table>
+<h4>bicache($key)</h4>
+
+<p>获取指定名称的缓存</p>
+
+<h4>bicache-&gt;set($key, $value, $expire = 0)</h4>
+
+<p>设置缓存的值,同<code>bicache($key, $value, $expire = 0)</code></p>
+
+<h4>bicache-&gt;get($key)</h4>
+
+<p>获取缓存的值,同<code>bicache($key)</code></p>
+
+<h4>bicache-&gt;remove($key)</h4>
+
+<p>移除一项缓存</p>
+
+<h4>bicache-&gt;exists($key)</h4>
+
+<p>检查缓存是否存在</p>
+
+<h4>bicache-&gt;add($key, $value)</h4>
+
+<p>增加一项缓存,如果缓存已存在,返回false</p>
+
+<h4>bicache-&gt;replace($key, $value)</h4>
+
+<p>替换一项缓存,如果缓存不存在,返回false</p>
+
+<h4>bicache-&gt;increment($key, $offset = 1)</h4>
+
+<p>增大一项缓存的值</p>
+
+<h4>bicache-&gt;decrement($key, $offset = 1)</h4>
+
+<p>减小一项缓存的值</p>
+
+<h4>bicache-&gt;getMulti($keys)</h4>
+
+<p>批量获取缓存的值</p>
+
+<h4>bicache-&gt;setMulti($values)</h4>
+
+<p>批量设置缓存的值</p>
+</body></html>
+
+  </section>
+
+<!-- couchbase
+  ================================================== -->
+  <section id="couchbase">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>Couchbase</h1>
+
+<p>设置或获取一项缓存,缓存数据存储于Couchbase中</p>
+
+<h2>案例</h2>
+
+<h3>设置和获取缓存</h3>
+
+<pre><code class="php">// 设置缓存
+$widget-&gt;couchbase('key', 'value');
+// 返回 true
+
+// 获取缓存
+$widget-&gt;couchbase('key');
+// 返回 value
+</code></pre>
+
+<h3>设置60秒后就过期的缓存</h3>
+
+<pre><code class="php">$widget-&gt;couchbase('key', 'value', 60);
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>host</td>
+<td>array</td>
+<td>string</td>
+<td>127.0.0.1:8091</td>
+</tr>
+<tr>
+<td>user</td>
+<td>string</td>
+<td>无</td>
+<td>用于服务器验证的用户名</td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td>无</td>
+<td>用于服务器验证的密码</td>
+</tr>
+<tr>
+<td>bucket</td>
+<td>string</td>
+<td>default</td>
+<td>连接的桶的名称</td>
+</tr>
+<tr>
+<td>persistent</td>
+<td>bool</td>
+<td>true</td>
+<td>是否使用长连接</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>couchbase($key, $value, $expire = 0)</h4>
+
+<p>设置缓存的值</p>
+
+<h5>参数</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$key</td>
+<td>string</td>
+<td>无</td>
+<td>缓存的键名</td>
+</tr>
+<tr>
+<td>$value</td>
+<td>mixed</td>
+<td>无</td>
+<td>缓存的值,允许任意类型</td>
+</tr>
+<tr>
+<td>$expire</td>
+<td>int</td>
+<td>0</td>
+<td>缓存的有效期,默认为0秒,表示永不过期</td>
+</tr>
+</tbody>
+</table>
+<h4>couchbase($key)</h4>
+
+<p>获取指定名称的缓存</p>
+
+<h4>couchbase-&gt;set($key, $value, $expire = 0)</h4>
+
+<p>设置缓存的值,同<code>couchbase($key, $value, $expire = 0)</code></p>
+
+<h4>couchbase-&gt;get($key)</h4>
+
+<p>获取缓存的值,同<code>couchbase($key)</code></p>
+
+<h4>couchbase-&gt;remove($key)</h4>
+
+<p>移除一项缓存</p>
+
+<h4>couchbase-&gt;exists($key)</h4>
+
+<p>检查缓存是否存在</p>
+
+<h4>couchbase-&gt;add($key, $value)</h4>
+
+<p>增加一项缓存,如果缓存已存在,返回false</p>
+
+<h4>couchbase-&gt;replace($key, $value)</h4>
+
+<p>替换一项缓存,如果缓存不存在,返回false</p>
+
+<h4>couchbase-&gt;increment($key, $offset = 1)</h4>
+
+<p>增大一项缓存的值</p>
+
+<h4>couchbase-&gt;decrement($key, $offset = 1)</h4>
+
+<p>减小一项缓存的值</p>
+
+<h4>couchbase-&gt;getMulti($keys)</h4>
+
+<p>批量获取缓存的值</p>
+
+<h4>couchbase-&gt;setMulti($values)</h4>
+
+<p>批量设置缓存的值</p>
+</body></html>
+
+  </section>
+
 <!-- dbCache
   ================================================== -->
   <section id="dbCache">
@@ -2704,31 +3014,31 @@ $widget-&gt;memcached('key');
 
   </section>
 
-<!-- couchbase
+<!-- mongoCache
   ================================================== -->
-  <section id="couchbase">
+  <section id="mongoCache">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1>Couchbase</h1>
+<h1>MongoCache</h1>
 
-<p>设置或获取一项缓存,缓存数据存储于Couchbase中</p>
+<p>设置或获取一项缓存,缓存数据存储于<a href="http://docs.mongodb.org/ecosystem/drivers/php/">Mangodb</a>中</p>
 
 <h2>案例</h2>
 
 <h3>设置和获取缓存</h3>
 
 <pre><code class="php">// 设置缓存
-$widget-&gt;couchbase('key', 'value');
+$widget-&gt;mongoCache('key', 'value');
 // 返回 true
 
 // 获取缓存
-$widget-&gt;couchbase('key');
+$widget-&gt;mongoCache('key');
 // 返回 value
 </code></pre>
 
 <h3>设置60秒后就过期的缓存</h3>
 
-<pre><code class="php">$widget-&gt;couchbase('key', 'value', 60);
+<pre><code class="php">$widget-&gt;mongoCache('key', 'value', 60);
 </code></pre>
 
 <h2>调用方式</h2>
@@ -2745,39 +3055,33 @@ $widget-&gt;couchbase('key');
 <tbody>
 <tr>
 <td>host</td>
-<td>array</td>
 <td>string</td>
-<td>127.0.0.1:8091</td>
+<td>localhost</td>
+<td>Mongodb所在的服务器名称</td>
 </tr>
 <tr>
-<td>user</td>
-<td>string</td>
-<td>无</td>
-<td>用于服务器验证的用户名</td>
+<td>port</td>
+<td>int</td>
+<td>27017</td>
+<td>Mongodb所在的服务器的端口</td>
 </tr>
 <tr>
-<td>password</td>
+<td>db</td>
 <td>string</td>
-<td>无</td>
-<td>用于服务器验证的密码</td>
+<td>cache</td>
+<td>存储缓存数据的数据库的名称</td>
 </tr>
 <tr>
-<td>bucket</td>
+<td>collection</td>
 <td>string</td>
-<td>default</td>
-<td>连接的桶的名称</td>
-</tr>
-<tr>
-<td>persistent</td>
-<td>bool</td>
-<td>true</td>
-<td>是否使用长连接</td>
+<td>cache</td>
+<td>存储缓存数据的集合的名称</td>
 </tr>
 </tbody>
 </table>
 <h3>方法</h3>
 
-<h4>couchbase($key, $value, $expire = 0)</h4>
+<h4>mongoCache($key, $value, $expire = 0)</h4>
 
 <p>设置缓存的值</p>
 
@@ -2811,47 +3115,47 @@ $widget-&gt;couchbase('key');
 </tr>
 </tbody>
 </table>
-<h4>couchbase($key)</h4>
+<h4>mongoCache($key)</h4>
 
 <p>获取指定名称的缓存</p>
 
-<h4>couchbase-&gt;set($key, $value, $expire = 0)</h4>
+<h4>mongoCache-&gt;set($key, $value, $expire = 0)</h4>
 
-<p>设置缓存的值,同<code>couchbase($key, $value, $expire = 0)</code></p>
+<p>设置缓存的值,同<code>mongoCache($key, $value, $expire = 0)</code></p>
 
-<h4>couchbase-&gt;get($key)</h4>
+<h4>mongoCache-&gt;get($key)</h4>
 
-<p>获取缓存的值,同<code>couchbase($key)</code></p>
+<p>获取缓存的值,同<code>mongoCache($key)</code></p>
 
-<h4>couchbase-&gt;remove($key)</h4>
+<h4>mongoCache-&gt;remove($key)</h4>
 
 <p>移除一项缓存</p>
 
-<h4>couchbase-&gt;exists($key)</h4>
+<h4>mongoCache-&gt;exists($key)</h4>
 
 <p>检查缓存是否存在</p>
 
-<h4>couchbase-&gt;add($key, $value)</h4>
+<h4>mongoCache-&gt;add($key, $value)</h4>
 
 <p>增加一项缓存,如果缓存已存在,返回false</p>
 
-<h4>couchbase-&gt;replace($key, $value)</h4>
+<h4>mongoCache-&gt;replace($key, $value)</h4>
 
 <p>替换一项缓存,如果缓存不存在,返回false</p>
 
-<h4>couchbase-&gt;increment($key, $offset = 1)</h4>
+<h4>mongoCache-&gt;increment($key, $offset = 1)</h4>
 
 <p>增大一项缓存的值</p>
 
-<h4>couchbase-&gt;decrement($key, $offset = 1)</h4>
+<h4>mongoCache-&gt;decrement($key, $offset = 1)</h4>
 
 <p>减小一项缓存的值</p>
 
-<h4>couchbase-&gt;getMulti($keys)</h4>
+<h4>mongoCache-&gt;getMulti($keys)</h4>
 
 <p>批量获取缓存的值</p>
 
-<h4>couchbase-&gt;setMulti($values)</h4>
+<h4>mongoCache-&gt;setMulti($values)</h4>
 
 <p>批量设置缓存的值</p>
 </body></html>
@@ -3006,160 +3310,6 @@ $widget-&gt;redis('key');
 <p>批量获取缓存的值</p>
 
 <h4>redis-&gt;setMulti($values)</h4>
-
-<p>批量设置缓存的值</p>
-</body></html>
-
-  </section>
-
-<!-- bicache
-  ================================================== -->
-  <section id="bicache">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>Bicache</h1>
-
-<p>设置或获取缓存,数据存储在二级缓存中</p>
-
-<p>二级缓存使用主从同步机制,由一个主缓存(master)和一个从缓存(slave)组成,二级缓存的原理非常简单,有以下两点.</p>
-
-<ol>
-<li>每次读取数据时,如果主缓存读取不到数据,将从从缓存读取数据</li>
-<li>每次写入数据时,如果检查上次更新到从缓存的间隔秒数大于配置秒数,则同步数据到从缓存中</li>
-</ol>
-<h2>案例</h2>
-
-<h3>设置和获取缓存</h3>
-
-<pre><code class="php">// 设置缓存
-$widget-&gt;bicache('key', 'value');
-// 返回 true
-
-// 获取缓存
-$widget-&gt;bicache('key');
-// 返回 value
-</code></pre>
-
-<h3>设置60秒后就过期的缓存</h3>
-
-<pre><code class="php">$widget-&gt;bicache('key', 'value', 60);
-</code></pre>
-
-<h2>调用方式</h2>
-
-<h3>选项</h3>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>time</td>
-<td>int</td>
-<td>5</td>
-<td>当主缓存写数据时,会检查上次更新到slave缓存的间隔秒数,如果超过该秒数,就同步到从缓存中</td>
-</tr>
-<tr>
-<td>deps</td>
-<td>array</td>
-<td></td>
-<td>主从缓存类型的配置</td>
-</tr>
-<tr>
-<td>- master</td>
-<td>string</td>
-<td>apc</td>
-<td>主缓存的类型,推荐使用内存类缓存,如apc,redis,memcache,memcached或couchbase</td>
-</tr>
-<tr>
-<td>- slave</td>
-<td>string</td>
-<td>fileCache</td>
-<td>从缓存的类型,推荐使用文件类缓存,如fileCache或dbCache</td>
-</tr>
-</tbody>
-</table>
-<h3>方法</h3>
-
-<h4>bicache($key, $value, $expire = 0)</h4>
-
-<p>设置缓存的值</p>
-
-<h5>参数</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th>名称</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>$key</td>
-<td>string</td>
-<td>无</td>
-<td>缓存的键名</td>
-</tr>
-<tr>
-<td>$value</td>
-<td>mixed</td>
-<td>无</td>
-<td>缓存的值,允许任意类型</td>
-</tr>
-<tr>
-<td>$expire</td>
-<td>int</td>
-<td>0</td>
-<td>缓存的有效期,默认为0秒,表示永不过期</td>
-</tr>
-</tbody>
-</table>
-<h4>bicache($key)</h4>
-
-<p>获取指定名称的缓存</p>
-
-<h4>bicache-&gt;set($key, $value, $expire = 0)</h4>
-
-<p>设置缓存的值,同<code>bicache($key, $value, $expire = 0)</code></p>
-
-<h4>bicache-&gt;get($key)</h4>
-
-<p>获取缓存的值,同<code>bicache($key)</code></p>
-
-<h4>bicache-&gt;remove($key)</h4>
-
-<p>移除一项缓存</p>
-
-<h4>bicache-&gt;exists($key)</h4>
-
-<p>检查缓存是否存在</p>
-
-<h4>bicache-&gt;add($key, $value)</h4>
-
-<p>增加一项缓存,如果缓存已存在,返回false</p>
-
-<h4>bicache-&gt;replace($key, $value)</h4>
-
-<p>替换一项缓存,如果缓存不存在,返回false</p>
-
-<h4>bicache-&gt;increment($key, $offset = 1)</h4>
-
-<p>增大一项缓存的值</p>
-
-<h4>bicache-&gt;decrement($key, $offset = 1)</h4>
-
-<p>减小一项缓存的值</p>
-
-<h4>bicache-&gt;getMulti($keys)</h4>
-
-<p>批量获取缓存的值</p>
-
-<h4>bicache-&gt;setMulti($values)</h4>
 
 <p>批量设置缓存的值</p>
 </body></html>
@@ -7376,58 +7526,63 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
   <section id="isPhoneCn">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isPhoneCn">isPhoneCn()</a></h1>
+<h1>isPhoneCn</h1>
 
 <p>检查数据是否为有效的电话号码</p>
 
-<pre><code class="php">bool isPhoneCn( $input )
+<h2>案例</h2>
+
+<h3>检查"020-1234567"是否为电话号码</h3>
+
+<pre><code class="php">if ($widget-&gt;isPhoneCn('020-1234567')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>pattern</code></td>
-<td>%name%必须是有效的电话号码</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不能是电话号码</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查"020-1234567"是否为电话号码<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isPhoneCn('020-1234567')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Yes'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>patternMessage</td>
+<td>string</td>
+<td>%name%必须是有效的电话号码</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能是电话号码</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isPhoneCn($input)</h4>
+
+<p>检查数据是否为有效的电话号码</p>
 </body></html>
 
   </section>
@@ -7437,58 +7592,63 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
   <section id="isPostcode">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isPostcode">isPostcode()</a></h1>
+<h1>isPostcode</h1>
 
 <p>检查数据是否为有效的中国邮政编码</p>
 
-<pre><code class="php">bool isPostcode( $input )
+<h2>案例</h2>
+
+<h3>检查"123456"是否为有效的车牌号码</h3>
+
+<pre><code class="php">if ($widget-&gt;isPostcode('123456')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>pattern</code></td>
-<td>%name%必须是6位长度的数字</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不能是邮政编码</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查"123456"是否为有效的车牌号码<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isPostcode('123456')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Yes'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>patternMessage</td>
+<td>string</td>
+<td>%name%必须是6位长度的数字</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能是邮政编码</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isPostcode($input)</h4>
+
+<p>检查数据是否为有效的中国邮政编码</p>
 </body></html>
 
   </section>
@@ -8130,53 +8290,60 @@ if ($widget-&gt;isRecordExists('test', 'users', 'name')) {<br>
   <section id="isAll">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isAll">isAll()</a></h1>
+<h1>isAll</h1>
 
 <p>检查数组或对象里的每一项是否符合指定的规则</p>
 
-<pre><code class="php">bool isAll( $input [, $rules ] )
+<h2>案例</h2>
+
+<h3>检查数组里的每一项是否都为数字</h3>
+
+<pre><code class="php">$input = array(3, 2, 5);
+if ($widget-&gt;isAll($input, array(
+    'digit' =&gt; true
+))) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>array|\Traversable</code> 待验证的数据</li>
-<li>
-<strong>$rules</strong> <code>array</code> 验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody><tr>
-<td><code>notArray</code></td>
-<td>%name%必须是数组</td>
-</tr></tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查数组里的每一项是否都为数字<br>
-```php<br>
-&lt;?php</p>
-
-<p>$input = array(3, 2, 5);<br>
-if ($widget-&gt;isAll($input, array(<br>
-    'digit' =&gt; true<br>
-))) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Yes'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>rules</td>
+<td>array</td>
+<td>验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项</td>
+<td>-</td>
+</tr>
+<tr>
+<td>notArrayMessage</td>
+<td>string</td>
+<td>%name%必须是数组</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isAll($input, $rules)</h4>
+
+<p>检查数组或对象里的每一项是否符合指定的规则</p>
 </body></html>
 
   </section>
@@ -8260,6 +8427,72 @@ if ($widget-&gt;isAll($input, array(<br>
 </tr>
 </tbody>
 </table>
+</body></html>
+
+  </section>
+
+<!-- isColor
+  ================================================== -->
+  <section id="isColor">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>isColor</h1>
+
+<p>检查数据是否为有效的十六进制颜色</p>
+
+<h2>案例</h2>
+
+<h3>检查"#FF0000"是否为有效的十六进制颜色</h3>
+
+<pre><code class="php">if ($widget-&gt;isColor('#FF0000')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+</code></pre>
+
+<h4>运行结果</h4>
+
+<pre><code class="php">'Yes'
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>patternMessage</td>
+<td>string</td>
+<td>%name%必须是有效的十六进制颜色,例如#FF0000</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能是有效的十六进制颜色</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isColor($input)</h4>
+
+<p>检查数据是否为有效的十六进制颜色</p>
 </body></html>
 
   </section>
