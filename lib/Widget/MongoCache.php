@@ -14,7 +14,6 @@ use Widget\Cache\AbstractCache;
  * A cache widget base on Mongodb
  *
  * @author      Twin Huang <twinhuang@qq.com>
- * @link        https://github.com/couchbase/php-ext-couchbase
  */
 class MongoCache extends AbstractCache
 {
