@@ -23,11 +23,11 @@ class EventManager extends AbstractWidget
      * @var array
      */
     protected $handlers = array();
-    
+
     /**
-     * Whether ignore the previous exception handler or attch it again to the 
+     * Whether ignore the previous exception handler or attch it again to the
      * exception event
-     * 
+     *
      * @var bool
      */
     protected $ignorePrevHandler = false;
@@ -41,6 +41,15 @@ class EventManager extends AbstractWidget
         'low'       => -1000,
         'normal'    => 0,
         'high'      => 1000
+    );
+
+    /**
+     * The 404 exception classes
+     *
+     * @var array
+     */
+    protected $notFoundExceptions = array(
+        'Widget\Exception\NotFoundException'
     );
 
     /**
@@ -60,8 +69,8 @@ class EventManager extends AbstractWidget
      *
      * @param  string $type The name of event or an Event object
      * @param  array $args The arguments pass to the handle
-     * @param null|WidgetInterface $widget If the widget contains the 
-     *                                     $type property, the event manager 
+     * @param null|WidgetInterface $widget If the widget contains the
+     *                                     $type property, the event manager
      *                                     will trigger it too
      * @return Event\Event The event object
      */
@@ -134,7 +143,7 @@ class EventManager extends AbstractWidget
             }
             return $this;
         }
-        
+
         // ( $type, $fn, $priority, $data )
         if (!is_callable($fn)) {
             throw new Exception\UnexpectedTypeException($fn, 'callable');
@@ -220,7 +229,7 @@ class EventManager extends AbstractWidget
             }
         }
     }
-    
+
     /**
      * Create a new event
      *
@@ -238,7 +247,7 @@ class EventManager extends AbstractWidget
             'namespaces'    => $namespaces,
         ));
     }
-    
+
     /**
      * Register the internal event
      */
@@ -251,7 +260,7 @@ class EventManager extends AbstractWidget
             $that('shutdown');
         });
 
-        // Assign the exception to a class method instead of a lambda function 
+        // Assign the exception to a class method instead of a lambda function
         // to avoid "Fatal error: Cannot destroy active lambda function"
         $prevHandler = set_exception_handler(array($this, 'handleException'));
 
@@ -261,6 +270,19 @@ class EventManager extends AbstractWidget
                 call_user_func($prevHandler, $exception);
             });
         }
+
+        // Convert exceptions to 404 event
+        $notFoundExceptions = $this->notFoundExceptions;
+        $this->add('exception', function(Event $event, $widget, $exception) use($that, $notFoundExceptions) {
+            foreach ($notFoundExceptions as $class) {
+                if ($exception instanceof $class) {
+                    $event->preventDefault();
+                    $event->stopPropagation();
+                    $that('404');
+                    return;
+                }
+            }
+        });
 
         // Attach the widget manager's construct and constructed event
         $this->widget->setOption(array(
@@ -275,9 +297,9 @@ class EventManager extends AbstractWidget
 
     /**
      * The internal exception hanlder integrated with event
-     * 
+     *
      * @param \Exception $exception
-     * @throws \Exception When none of exception events have been prevented 
+     * @throws \Exception When none of exception events have been prevented
      * @internal
      */
     public function handleException(\Exception $exception)
@@ -290,7 +312,7 @@ class EventManager extends AbstractWidget
             throw $exception;
         }
     }
-    
+
     /**
      * Returns the array with two elements, the first one is the event name and
      * the second one is the event namespaces
