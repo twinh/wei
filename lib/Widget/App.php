@@ -16,7 +16,6 @@ use Widget\Response;
  * @author      Twin Huang <twinhuang@qq.com>
  * @method      Event\Event trigger(string $eventName) Trigger a event
  * @method      Response response(string $content, int $status = 200) Send headers and output content
- * @property    callable $404 The 404 event handler
  * @property    View\ViewInterface $view The view widget, instance of \Widget\Viewable interface
  * @property    Logger $logger The logger widget
  * @property    Request $request The HTTP request widget
@@ -150,12 +149,8 @@ class App extends AbstractWidget
                     break;
             }
         }
-
-        if (!$this->trigger('404', array($this, $notFound, $message), $this)->isDefaultPrevented()) {
-            throw new Exception\NotFoundException($message);
-        }
-
-        return $this;
+        // You can use `$widget->on('404', function(){});` to custom the 404 page
+        throw new Exception\NotFoundException($message);
     }
 
     /**

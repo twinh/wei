@@ -274,12 +274,14 @@ class EventManager extends AbstractWidget
         // Convert exceptions to 404 event
         $notFoundExceptions = $this->notFoundExceptions;
         $this->add('exception', function(Event $event, $widget, $exception) use($that, $notFoundExceptions) {
-            foreach ($notFoundExceptions as $class) {
-                if ($exception instanceof $class) {
-                    $event->preventDefault();
-                    $event->stopPropagation();
-                    $that('404');
-                    return;
+            if ($that->has('404')) {
+                foreach ($notFoundExceptions as $class) {
+                    if ($exception instanceof $class) {
+                        $event->preventDefault();
+                        $event->stopPropagation();
+                        $that('404', array($exception));
+                        return;
+                    }
                 }
             }
         });
