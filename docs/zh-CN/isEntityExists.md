@@ -1,31 +1,13 @@
-[isEntityExists()](http://twinh.github.io/widget/api/isEntityExists)
-====================================================================
+isEntityExists
+==============
 
 检查Doctrine ORM实体是否存在
 
-### 
+案例
+----
+
+### 检查主键为1的用户是否存在,和检查name为test的用户是否存在
 ```php
-bool isEntityExists( $input [, $entityClass [, $field ] ] )
-```
-
-##### 参数
-* **$input** `mixed` 待验证的数据,一般为主键的值
-* **$entityClass** `string` 实体的类名
-* **$field** `string` 指定的字段名称,留空表示主键
-
-
-##### 错误信息
-| **名称**              | **信息**                                                       | 
-|-----------------------|----------------------------------------------------------------|
-| `notFound`            | %name%不存在                                                   |
-| `negative`            | %name%已存在                                                   |
-
-
-##### 代码范例
-检查主键为1的用户是否存在,和检查name为test的用户是否存在
-```php
-<?php
-
 /** @Entity @Table(name="users") */
 class User
 {
@@ -122,11 +104,30 @@ if ($widget->isEntityExists('test', 'User', 'name')) {
     echo 'No';
 }
 ```
-##### 运行结果
+
+#### 运行结果
 ```php
-'Array
+Array
 (
     [0] => CREATE TABLE users (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))
 )
-YesYes'
+'Yes'
+'Yes'
 ```
+
+调用方式
+--------
+
+### 选项
+
+| 名称                | 类型    | 默认值                 | 说明                         |
+|---------------------|---------|------------------------|------------------------------|
+| entityClass         | string  | 无                     | 实体的类名                   |
+| field               | string  | 无                     | 指定的字段名称,留空表示主键  |
+| notFoundMessage     | string  | %name%不存在           | -                            |
+| negativeMessage     | string  | %name%已存在           | -                            |
+
+### 方法
+
+#### isEntityExists($input, $entityClass, $field = 'id')
+检查Doctrine ORM实体是否存在

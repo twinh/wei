@@ -48,7 +48,8 @@ if ($widget->isRecordExists('test', 'users', 'name')) {
 
 #### 运行结果
 ```php
-'YesYes'
+'Yes'
+'Yes'
 ```
 
 调用方式
