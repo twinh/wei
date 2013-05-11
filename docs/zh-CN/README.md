@@ -46,6 +46,7 @@ API 参考目录
 * [isBlank](isBlank.md) - 检查数据是否为空(不允许空格)
 * [isDecimal](isDecimal.md) - 检查数据是否为小数
 * [isDigit](isDigit.md) - 检查数据是否只由数字组成
+* [isDivisibleBy](isDivisibleBy.md) - 检查数据是否能被指定的除数整除
 * [isDoubleByte](isDoubleByte.md) - 检查数据是否只由双字节字符组成
 * [isEmpty](isEmpty.md) - 检查数据是否为空(允许空格)
 * [isEndsWith](isEndsWith.md) - 检查数据是否以指定字符串结尾
@@ -106,14 +107,14 @@ API 参考目录
 * [isOneOf](isOneOf.md) - 检查数据是否满足指定规则中的任何一条
 * [isSomeOf](isSomeOf.md) - 检查数据是否通过指定数量规则的验证
 
-第三方集成
+数据库
 * [isEntityExists](isEntityExists.md) - 检查Doctrine ORM实体是否存在
 * [isRecordExists](isRecordExists.md) - 检查数据表是否存在指定的记录
 
 其他
 * [isAll](isAll.md) - 检查集合里的每一项是否符合指定的规则
 * [isCallback](isCallback.md) - 检查数据是否通过指定回调方法验证
-* [isDivisibleBy](isDivisibleBy.md) - 检查数据是否能被指定的除数整除
+* [isColor](isColor.md) - 检查数据是否为有效的十六进制颜色
 
 #### 视图
 * [escape](escape.md) - 转义字符串中的特殊字符,以便安全的输出到网页中,支持HTML,JS,CSS,HTML属性和URL的转义
