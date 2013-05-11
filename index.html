@@ -2088,43 +2088,43 @@ $widget-&gt;arrayCache('key', 'value');<br></code></p>
 <p>获取指定名称的缓存<br><code>php<br>
 $widget-&gt;arrayCache('name');<br></code></p>
 
-<h3>arrayCache-&gt;set($key, $value)</h3>
+<h4>arrayCache-&gt;set($key, $value)</h4>
 
 <p>设置缓存的值</p>
 
-<h3>arrayCache-&gt;get($key)</h3>
+<h4>arrayCache-&gt;get($key)</h4>
 
 <p>获取缓存的值</p>
 
-<h3>arrayCache-&gt;remove($key)</h3>
+<h4>arrayCache-&gt;remove($key)</h4>
 
 <p>移除一项缓存</p>
 
-<h3>arrayCache-&gt;exists($key)</h3>
+<h4>arrayCache-&gt;exists($key)</h4>
 
 <p>检查缓存是否存在</p>
 
-<h3>arrayCache-&gt;add($key, $value)</h3>
+<h4>arrayCache-&gt;add($key, $value)</h4>
 
 <p>增加一项缓存,如果缓存已存在,返回false</p>
 
-<h3>arrayCache-&gt;replace($key, $value)</h3>
+<h4>arrayCache-&gt;replace($key, $value)</h4>
 
 <p>替换一项缓存,如果缓存 <strong>不</strong> 存在,返回false</p>
 
-<h3>arrayCache-&gt;increment($key, $offset = 1)</h3>
+<h4>arrayCache-&gt;increment($key, $offset = 1)</h4>
 
 <p>增大一项缓存的值</p>
 
-<h3>arrayCache-&gt;decrement($key, $offset = 1)</h3>
+<h4>arrayCache-&gt;decrement($key, $offset = 1)</h4>
 
 <p>减小一项缓存的值</p>
 
-<h3>arrayCache-&gt;getMulti($keys)</h3>
+<h4>arrayCache-&gt;getMulti($keys)</h4>
 
 <p>批量获取缓存的值</p>
 
-<h3>arrayCache-&gt;setMulti($values)</h3>
+<h4>arrayCache-&gt;setMulti($values)</h4>
 
 <p>批量设置缓存的值</p>
 </body></html>
@@ -7028,58 +7028,63 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
   <section id="isUuid">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isUuid">isUuid()</a></h1>
+<h1>isUuid</h1>
 
 <p>检查数据是否为有效的UUID</p>
 
-<pre><code class="php">bool isUuid( $input )
+<h2>案例</h2>
+
+<h3>检查"00010203-0405-0607-0809-0A0B0C0D0E0F"是否为有效的UUID</h3>
+
+<pre><code class="php">if ($widget-&gt;isUuid('00010203-0405-0607-0809-0A0B0C0D0E0F')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>pattern</code></td>
-<td>%name%必须是有效的UUID</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不能是有效的UUID</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查"00010203-0405-0607-0809-0A0B0C0D0E0F"是否为有效的UUID<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isUuid('00010203-0405-0607-0809-0A0B0C0D0E0F')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Yes'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>patternMessage</td>
+<td>string</td>
+<td>%name%必须是有效的UUID</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能是有效的UUID</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isUuid($input)</h4>
+
+<p>检查数据是否为有效的UUID</p>
 </body></html>
 
   </section>
@@ -7282,58 +7287,63 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
   <section id="isIdCardCn">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isIdCardCn">isIdCardCn()</a></h1>
+<h1>isIdCardCn</h1>
 
 <p>检查数据是否为有效的中国身份证</p>
 
-<pre><code class="php">bool isIdCardCn( $input )
+<h2>案例</h2>
+
+<h3>检查15位数字"342622840209049"是否为有效的中国身份证</h3>
+
+<pre><code class="php">if ($widget-&gt;isIdCardCn('342622840209049')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>invalid</code></td>
-<td>%name%必须是有效的中国身份证</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不能是有效的中国身份证</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查15位数字"342622840209049"是否为有效的中国身份证<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isIdCardCn('342622840209049')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Yes'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>invalidMessage</td>
+<td>string</td>
+<td>%name%必须是有效的中国身份证</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能是有效的中国身份证</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isIdCardCn($input)</h4>
+
+<p>检查数据是否为有效的中国身份证</p>
 </body></html>
 
   </section>
@@ -7343,58 +7353,63 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
   <section id="isIdCardHk">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isIdCardHk">isIdCardHk()</a></h1>
+<h1>isIdCardHk</h1>
 
 <p>检查数据是否为有效的香港身份证</p>
 
-<pre><code class="php">bool isIdCardHk( $input )
+<h2>案例</h2>
+
+<h3>检查"Z437626A"是否为有效的香港身份证</h3>
+
+<pre><code class="php">if ($widget-&gt;isIdCardHk('Z437626A')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>invalid</code></td>
-<td>%name%必须是有效的香港身份证</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不能是有效的香港身份证</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查"Z437626A"是否为有效的香港身份证<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isIdCardHk('Z437626A')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Yes'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>invalidMessage</td>
+<td>string</td>
+<td>%name%必须是有效的香港身份证</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能是有效的香港身份证</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isIdCardHk($input)</h4>
+
+<p>检查数据是否为有效的香港身份证</p>
 </body></html>
 
   </section>
@@ -7404,58 +7419,63 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
   <section id="isIdCardMo">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isIdCardMo">isIdCardMo()</a></h1>
+<h1>isIdCardMo</h1>
 
 <p>检查数据是否为有效的澳门身份证</p>
 
-<pre><code class="php">bool isIdCardMo( $input )
+<h2>案例</h2>
+
+<h3>检查"11111111"是否为有效的澳门身份证</h3>
+
+<pre><code class="php">if ($widget-&gt;isIdCardMo('11111111')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>pattern</code></td>
-<td>%name%必须是有效的澳门身份证</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不能是有效的澳门身份证</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查"11111111"是否为有效的澳门身份证<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isIdCardMo('11111111')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Yes'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>patternMessage</td>
+<td>string</td>
+<td>%name%必须是有效的澳门身份证</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能是有效的澳门身份证</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isIdCardMo($input)</h4>
+
+<p>检查数据是否为有效的澳门身份证</p>
 </body></html>
 
   </section>
@@ -7465,58 +7485,63 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
   <section id="isIdCardTw">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isIdCardTw">isIdCardTw()</a></h1>
+<h1>isIdCardTw</h1>
 
 <p>检查数据是否为有效的台湾身份证</p>
 
-<pre><code class="php">bool isIdCardTw( $input )
+<h2>案例</h2>
+
+<h3>检查"A122501945"是否为有效的台湾身份证</h3>
+
+<pre><code class="php">if ($widget-&gt;isIdCardTw('A122501945')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>invalid</code></td>
-<td>%name%必须是有效的台湾身份证</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不能是有效的台湾身份证</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查"A122501945"是否为有效的台湾身份证<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isIdCardTw('A122501945')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Yes'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>invalidMessage</td>
+<td>string</td>
+<td>%name%必须是有效的台湾身份证</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不能是有效的台湾身份证</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isIdCardTw($input)</h4>
+
+<p>检查数据是否为有效的台湾身份证</p>
 </body></html>
 
   </section>
@@ -7788,54 +7813,61 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
   <section id="isAllof">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isAllOf">isAllOf()</a></h1>
+<h1>isAllOf</h1>
 
 <p>检查数据是否通过所有的规则校验</p>
 
-<pre><code class="php">bool isAllOf( $input [, $rules ] )
+<h2>案例</h2>
+
+<h3>检查数据是否为5-10位的数字</h3>
+
+<pre><code class="php">$input = '123456';
+if ($widget-&gt;isAllOf($input, array(
+    'length' =&gt; array(5, 10),
+    'digit' =&gt; true
+))) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-<li>
-<strong>$rules</strong> <code>array</code> 验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody><tr>
-<td><code>atLeast</code></td>
-<td>%name%必须满足以下所有规则</td>
-</tr></tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查数据是否为5-10位的数字<br>
-```php<br>
-&lt;?php</p>
-
-<p>$input = '123456';<br>
-if ($widget-&gt;isAllOf($input, array(<br>
-    'length' =&gt; array(5, 10),<br>
-    'digit' =&gt; true<br>
-))) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Yes'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>rules</td>
+<td>array</td>
+<td>-</td>
+<td>验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项</td>
+</tr>
+<tr>
+<td>atLeastMessage</td>
+<td>string</td>
+<td>%name%必须满足以下所有规则</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isAllOf($input, $rules)</h4>
+
+<p>检查数据是否通过所有的规则校验</p>
 </body></html>
 
   </section>
@@ -7912,58 +7944,61 @@ if ($widget-&gt;isNoneOf('abc', $rules)) {<br>
   <section id="isOneof">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isOneOf">isOneOf()</a></h1>
+<h1>isOneOf</h1>
 
 <p>检查数据是否满足指定规则中的任何一条</p>
 
-<pre><code class="php">bool isOneOf( $input )
+<h2>案例</h2>
+
+<h3>检查"abc"是否为数字且最大长度不超过2</h3>
+
+<pre><code class="php">$rules = array(
+    'digit' =&gt; true,
+    'maxLength' =&gt; 2
+);
+if ($widget-&gt;isOneOf('abc', $rules)) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>atLeast</code></td>
-<td>%name%至少需要满足以下任何一条规则</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查"abc"是否为数字且最大长度不超过2<br>
-```php<br>
-&lt;?php</p>
-
-<p>$rules = array(<br>
-    'digit' =&gt; true,<br>
-    'maxLength' =&gt; 2<br>
-);<br>
-if ($widget-&gt;isOneOf('abc', $rules)) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'No'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>rules</td>
+<td>array</td>
+<td>-</td>
+<td>验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项</td>
+</tr>
+<tr>
+<td>atLeastMessage</td>
+<td>string</td>
+<td>%name%至少需要满足以下任何一条规则</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isOneOf($input, $rules)</h4>
+
+<p>检查数据是否满足指定规则中的任何一条</p>
 </body></html>
 
   </section>
@@ -8043,154 +8078,164 @@ if ($widget-&gt;isSomeOf('abc', $rules)) {<br>
   <section id="isEntityExists">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isEntityExists">isEntityExists()</a></h1>
+<h1>isEntityExists</h1>
 
 <p>检查Doctrine ORM实体是否存在</p>
 
-<pre><code class="php">bool isEntityExists( $input [, $entityClass [, $field ] ] )
+<h2>案例</h2>
+
+<h3>检查主键为1的用户是否存在,和检查name为test的用户是否存在</h3>
+
+<pre><code class="php">/** @Entity @Table(name="users") */
+class User
+{
+    /**
+     * @Id @Column(type="integer")
+     * @GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /** @Column(type="string", length=50) */
+    private $name;
+
+    /** @Column(type="string", length=256) */
+    private $address;
+
+    public function getId()
+    {
+        return $this-&gt;id;
+    }
+
+    public function getName()
+    {
+        return $this-&gt;name;
+    }
+
+    public function setName($name)
+    {
+        $this-&gt;name = $name;
+    }
+
+    public function getAddress()
+    {
+        return $this-&gt;address;
+    }
+
+    public function setAddress($address)
+    {
+        $this-&gt;address = $address;
+    }
+}
+
+// Set configuraion for db widget
+$widget-&gt;config('db', array(
+    'driver' =&gt; 'pdo_sqlite',
+    'memory' =&gt; true
+));
+
+// Set configuration for entityManager widget
+$widget-&gt;config('entityManager', array(
+    'config' =&gt; array(
+        'proxyDir' =&gt; './',
+        'proxyNamespace' =&gt; 'Proxy',
+        'useSimpleAnnotationReader' =&gt; true,
+        'annotationDriverPaths' =&gt; array('./')
+    )
+));
+
+/* @var $em \Doctrine\ORM\EntityManager */
+$em = $widget-&gt;entityManager();
+
+$tool = new Doctrine\ORM\Tools\SchemaTool($em);
+
+$metadata = $em-&gt;getClassMetadata('User');
+
+print_r($tool-&gt;getCreateSchemaSql(array($metadata)));
+
+// Create table from User entity
+$tool-&gt;createSchema(array($metadata));
+
+// Insert some test data
+$user1 = new User();
+$user1-&gt;setName('twin');
+$user1-&gt;setAddress('home');
+$em-&gt;persist($user1);
+
+$user2 = new User();
+$user2-&gt;setName('test');
+$user2-&gt;setAddress('office');
+$em-&gt;persist($user2);
+
+$em-&gt;flush();
+
+// Check if the id=1 user exists
+if ($widget-&gt;isEntityExists('1', 'User')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+
+// Check if the name=test user exists
+if ($widget-&gt;isEntityExists('test', 'User', 'name')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
+<h4>运行结果</h4>
 
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据,一般为主键的值</li>
-<li>
-<strong>$entityClass</strong> <code>string</code> 实体的类名</li>
-<li>
-<strong>$field</strong> <code>string</code> 指定的字段名称,留空表示主键</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>notFound</code></td>
-<td>%name%不存在</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%已存在</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查主键为1的用户是否存在,和检查name为test的用户是否存在<br>
-```php<br>
-&lt;?php</p>
-
-<p>/** @Entity @Table(name="users") <em>/<br>
-class User<br>
-{<br>
-    /</em>*<br>
-     * @Id @Column(type="integer")<br>
-     * @GeneratedValue(strategy="AUTO")<br>
-     */<br>
-    private $id;</p>
-
-<pre><code>/** @Column(type="string", length=50) */
-private $name;
-
-/** @Column(type="string", length=256) */
-private $address;
-
-public function getId()
-{
-    return $this-&gt;id;
-}
-
-public function getName()
-{
-    return $this-&gt;name;
-}
-
-public function setName($name)
-{
-    $this-&gt;name = $name;
-}
-
-public function getAddress()
-{
-    return $this-&gt;address;
-}
-
-public function setAddress($address)
-{
-    $this-&gt;address = $address;
-}
-</code></pre>
-
-<p>}</p>
-
-<p>// Set configuraion for db widget<br>
-$widget-&gt;config('db', array(<br>
-    'driver' =&gt; 'pdo_sqlite',<br>
-    'memory' =&gt; true<br>
-));</p>
-
-<p>// Set configuration for entityManager widget<br>
-$widget-&gt;config('entityManager', array(<br>
-    'config' =&gt; array(<br>
-        'proxyDir' =&gt; './',<br>
-        'proxyNamespace' =&gt; 'Proxy',<br>
-        'useSimpleAnnotationReader' =&gt; true,<br>
-        'annotationDriverPaths' =&gt; array('./')<br>
-    )<br>
-));</p>
-
-<p>/* @var $em \Doctrine\ORM\EntityManager */<br>
-$em = $widget-&gt;entityManager();</p>
-
-<p>$tool = new Doctrine\ORM\Tools\SchemaTool($em);</p>
-
-<p>$metadata = $em-&gt;getClassMetadata('User');</p>
-
-<p>print_r($tool-&gt;getCreateSchemaSql(array($metadata)));</p>
-
-<p>// Create table from User entity<br>
-$tool-&gt;createSchema(array($metadata));</p>
-
-<p>// Insert some test data<br>
-$user1 = new User();<br>
-$user1-&gt;setName('twin');<br>
-$user1-&gt;setAddress('home');<br>
-$em-&gt;persist($user1);</p>
-
-<p>$user2 = new User();<br>
-$user2-&gt;setName('test');<br>
-$user2-&gt;setAddress('office');<br>
-$em-&gt;persist($user2);</p>
-
-<p>$em-&gt;flush();</p>
-
-<p>// Check if the id=1 user exists<br>
-if ($widget-&gt;isEntityExists('1', 'User')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}</p>
-
-<p>// Check if the name=test user exists<br>
-if ($widget-&gt;isEntityExists('test', 'User', 'name')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
-
-<pre><code class="php">'Array
+<pre><code class="php">Array
 (
     [0] =&gt; CREATE TABLE users (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))
 )
-YesYes'
+'Yes'
+'Yes'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>entityClass</td>
+<td>string</td>
+<td>无</td>
+<td>实体的类名</td>
+</tr>
+<tr>
+<td>field</td>
+<td>string</td>
+<td>无</td>
+<td>指定的字段名称,留空表示主键</td>
+</tr>
+<tr>
+<td>notFoundMessage</td>
+<td>string</td>
+<td>%name%不存在</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%已存在</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isEntityExists($input, $entityClass, $field = 'id')</h4>
+
+<p>检查Doctrine ORM实体是否存在</p>
 </body></html>
 
   </section>
@@ -8200,87 +8245,99 @@ YesYes'
   <section id="isRecordExists">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isRecordExists">isRecordExists()</a></h1>
+<h1>isRecordExists</h1>
 
 <p>检查数据表是否存在指定的记录</p>
 
-<pre><code class="php">bool isRecordExists( $input [, $table ] , $field ] ] )
+<h2>案例</h2>
+
+<h4>检查主键为1的用户是否存在,和检查name为test的用户是否存在</h4>
+
+<pre><code class="php">// Set configuraion for db widget
+$widget-&gt;config('db', array(
+    'driver' =&gt; 'pdo_sqlite',
+    'memory' =&gt; true
+));
+
+/* @var $db \Doctrine\DBAL\Connection */
+$db = $widget-&gt;db();
+
+$db-&gt;query("CREATE TABLE users (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))");
+
+$db-&gt;insert('users', array(
+    'name' =&gt; 'twin',
+    'address' =&gt; 'test'
+));
+
+$db-&gt;insert('users', array(
+    'name' =&gt; 'test',
+    'address' =&gt; 'test'
+));
+
+
+// Check if the id=1 user exists
+if ($widget-&gt;isRecordExists('1', 'users')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+
+// Check if the name=test user exists
+if ($widget-&gt;isRecordExists('test', 'users', 'name')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+
 </code></pre>
 
-<h5>参数</h5>
+<h4>运行结果</h4>
 
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据,一般为主键的值</li>
-<li>
-<strong>$table</strong> <code>string</code> 数据表的名称</li>
-<li>
-<strong>$field</strong> <code>string</code> 指定的字段名称,留空表示"id"</li>
-</ul>
-<h5>错误信息</h5>
+<pre><code class="php">'Yes'
+'Yes'
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
 
 <table class="table table-bordered table-striped">
 <thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
 </tr></thead>
 <tbody>
 <tr>
-<td><code>notFound</code></td>
-<td>%name%不存在</td>
+<td>table</td>
+<td>string</td>
+<td>无</td>
+<td>记录所在的数据表</td>
 </tr>
 <tr>
-<td><code>negative</code></td>
+<td>field</td>
+<td>string</td>
+<td>id</td>
+<td>要查找的字段名称</td>
+</tr>
+<tr>
+<td>notFoundMessage</td>
+<td>string</td>
+<td>%name%不存在</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
 <td>%name%已存在</td>
+<td>-</td>
 </tr>
 </tbody>
 </table>
-<h5>代码范例</h5>
+<h3>方法</h3>
 
-<p>检查主键为1的用户是否存在,和检查name为test的用户是否存在<br>
-```php<br>
-&lt;?php</p>
-
-<p>// Set configuraion for db widget<br>
-$widget-&gt;config('db', array(<br>
-    'driver' =&gt; 'pdo_sqlite',<br>
-    'memory' =&gt; true<br>
-));</p>
-
-<p>/* @var $db \Doctrine\DBAL\Connection */<br>
-$db = $widget-&gt;db();</p>
-
-<p>$db-&gt;query("CREATE TABLE users (id INTEGER NOT NULL, name VARCHAR(50) NOT NULL, address VARCHAR(256) NOT NULL, PRIMARY KEY(id))");</p>
-
-<p>$db-&gt;insert('users', array(<br>
-    'name' =&gt; 'twin',<br>
-    'address' =&gt; 'test'<br>
-));</p>
-
-<p>$db-&gt;insert('users', array(<br>
-    'name' =&gt; 'test',<br>
-    'address' =&gt; 'test'<br>
-));</p>
-
-<p>// Check if the id=1 user exists<br>
-if ($widget-&gt;isRecordExists('1', 'users')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}</p>
-
-<p>// Check if the name=test user exists<br>
-if ($widget-&gt;isRecordExists('test', 'users', 'name')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
-
-<pre><code class="php">'YesYes'
-</code></pre>
+<h4>isRecordExists($input, $table, $field = 'id')</h4>
 </body></html>
 
   </section>
@@ -8502,60 +8559,63 @@ if ($widget-&gt;isAll($input, array(
   <section id="isDivisibleby">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isDivisibleBy">isDivisibleBy()</a></h1>
+<h1>isDivisibleBy</h1>
 
 <p>检查数据是否能被指定的除数整除</p>
 
-<pre><code class="php">bool isDivisibleBy( $input )
+<h2>案例</h2>
+
+<h3>检查10能否被3整除</h3>
+
+<pre><code class="php">if ($widget-&gt;isDivisibleBy(10, 3)) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据,被除数</li>
-<li>
-<strong>$divisor</strong> <code>int|float</code> 除数,可以是整数或小数</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>notDivisible</code></td>
-<td>%name%必须被%divisor%整除</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不可以被%divisor%整除</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查10能否被3整除<br>
-```php<br>
-&lt;?php</p>
-
-<p>if ($widget-&gt;isDivisibleBy(10, 3)) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'No'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>notDivisibleMessage</td>
+<td>string</td>
+<td>%name%必须被%divisor%整除</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不可以被%divisor%整除</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isDivisibleBy($input)</h4>
+
+<p>检查数据是否能被指定的除数整除</p>
 </body></html>
 
   </section>
@@ -9760,7 +9820,7 @@ echo $widget-&gt;uuid();
     'phpError' =&gt; array(
         'catch_ajax_errors' =&gt; true,
         'catch_class_not_found' =&gt; true,
-        '...' =&gt; '...'
+        // more options
     )
 ));
 </code></pre>
