@@ -3,15 +3,16 @@
  * Widget Framework
  *
  * @copyright   Copyright (c) 2008-2013 Twin Huang
- * @license     http://www.opensource.org/licenses/apache2.0.php Apache License
+ * @license     http://opensource.org/licenses/mit-license.php MIT License
  */
 
 namespace Widget;
 
 /**
- * Call
+ * A widget handles API request which inspired jQuery Ajax
  *
  * @author      Twin Huang <twinh@yahoo.cn>
+ * @link        http://api.jquery.com/jQuery.ajax/
  */
 class Call extends AbstractWidget
 {
