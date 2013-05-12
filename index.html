@@ -9884,6 +9884,51 @@ echo $widget-&gt;uuid();
 
   </section>
 
+<!-- website
+  ================================================== -->
+  <section id="website">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>Website</h1>
+
+<p>设置或获取网站的配置</p>
+
+<h2>案例</h2>
+
+<h3>设置网站的标题和URL</h3>
+
+<pre><code class="php">// 配置网站的标题为`Widget Documentation`
+$widget-&gt;website('title', 'Widget Documentation');
+
+// 输出网站标题
+echo $widget-&gt;website('title');
+
+// 配置网站的URL
+$widget-&gt;website('url', 'http://www.example.com');
+
+// 输出网站URL
+echo $widget-&gt;website('url');
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<p>Website微件接受任意选项作为网站配置,因为她只负责设置和获取配置,并不关心配置的名称和内容</p>
+
+<h3>方法</h3>
+
+<h4>website($name)</h4>
+
+<p>获取网站配置</p>
+
+<h4>website($name, $value)</h4>
+
+<p>设置网站配置</p>
+</body></html>
+
+  </section>
+
 </div><!-- /.container -->
 
 <a href="#welcome" class="bs-docs-top">
