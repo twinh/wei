@@ -117,6 +117,7 @@ h1, h2, h3, .lead
         <li><a href="#isBlank">isBlank</a></li>
         <li><a href="#isDecimal">isDecimal</a></li>
         <li><a href="#isDigit">isDigit</a></li>
+        <li><a href="#isDivisibleby">isDivisibleBy</a></li>
         <li><a href="#isDoubleByte">isDoubleByte</a></li>
         <li><a href="#isEmpty">isEmpty</a></li>
         <li><a href="#isEndsWith">isEndsWith</a></li>
@@ -177,7 +178,7 @@ h1, h2, h3, .lead
         <li><a href="#isOneof">isOneOf</a></li>
         <li><a href="#isSomeof">isSomeOf</a></li>
 
-        <li><a href="#isEntityExists" class="nav-header">第三方集成</a></li>
+        <li><a href="#isEntityExists" class="nav-header">数据库</a></li>
         <li><a href="#isEntityExists">isEntityExists</a></li>
         <li><a href="#isRecordExists">isRecordExists</a></li>
 
@@ -185,7 +186,6 @@ h1, h2, h3, .lead
         <li><a href="#isAll">isAll</a></li>
         <li><a href="#isCallback">isCallback</a></li>
         <li><a href="#isColor">isColor</a></li>
-        <li><a href="#isDivisibleby">isDivisibleBy</a></li>
       </ul>
     </li>
     <li>
@@ -4339,6 +4339,72 @@ if ($widget-&gt;isBlank($input)) {
 
   </section>
 
+<!-- isDivisibleby
+  ================================================== -->
+  <section id="isDivisibleby">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>isDivisibleBy</h1>
+
+<p>检查数据是否能被指定的除数整除</p>
+
+<h2>案例</h2>
+
+<h3>检查10能否被3整除</h3>
+
+<pre><code class="php">if ($widget-&gt;isDivisibleBy(10, 3)) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
+</code></pre>
+
+<h4>运行结果</h4>
+
+<pre><code class="php">'No'
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>notStringMessage</td>
+<td>string</td>
+<td>%name%必须是字符串</td>
+<td>-</td>
+</tr>
+<tr>
+<td>notDivisibleMessage</td>
+<td>string</td>
+<td>%name%必须被%divisor%整除</td>
+<td>-</td>
+</tr>
+<tr>
+<td>negativeMessage</td>
+<td>string</td>
+<td>%name%不可以被%divisor%整除</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isDivisibleBy($input)</h4>
+
+<p>检查数据是否能被指定的除数整除</p>
+</body></html>
+
+  </section>
+
 <!-- isDoubleByte
   ================================================== -->
   <section id="isDoubleByte">
@@ -7877,64 +7943,61 @@ if ($widget-&gt;isAllOf($input, array(
   <section id="isNoneof">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isNoneOf">isNoneOf()</a></h1>
+<h1>isNoneOf</h1>
 
 <p>检查数据是否不符合所有指定的规则校验</p>
 
-<pre><code class="php">bool isNoneOf( $input [, $rules ] )
+<h2>案例</h2>
+
+<h3>检查数据不为数字,且长度不大于3</h3>
+
+<pre><code class="php">$rules = array(
+    'alpha' =&gt; true,
+    'maxLength' =&gt; 3
+);
+if ($widget-&gt;isNoneOf('abc', $rules)) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-<li>
-<strong>$rules</strong> <code>array</code> 验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>invalid</code></td>
-<td>%name%必须满足以下所有规则</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不合法</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查数据不为数字,且长度不大于3<br>
-```php<br>
-&lt;?php</p>
-
-<p>$rules = array(<br>
-    'alpha' =&gt; true,<br>
-    'maxLength' =&gt; 3<br>
-);<br>
-if ($widget-&gt;isNoneOf('abc', $rules)) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'No'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>rules</td>
+<td>array</td>
+<td>-</td>
+<td>验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项</td>
+</tr>
+<tr>
+<td>invalidMessage</td>
+<td>string</td>
+<td>%name%必须满足以下所有规则</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isNoneOf($input, $rules)</h4>
+
+<p>检查数据是否不符合所有指定的规则校验</p>
 </body></html>
 
   </section>
@@ -8008,67 +8071,68 @@ if ($widget-&gt;isOneOf('abc', $rules)) {
   <section id="isSomeof">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1><a href="http://twinh.github.io/widget/api/isSomeOf">isSomeOf()</a></h1>
+<h1>isSomeOf</h1>
 
 <p>检查数据是否通过指定数量规则的验证</p>
 
-<pre><code class="php">bool isSomeOf( $input [, $rules [, $atLeast ] ] )
+<h2>案例</h2>
+
+<h3>检查数据符合"数字,长度小于5,邮箱"这三条中至少两条</h3>
+
+<pre><code class="php">$rules = array(
+    'digit' =&gt; true,
+    'maxLength' =&gt; 5,
+    'email' =&gt; true
+);
+if ($widget-&gt;isSomeOf('abc', $rules)) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 </code></pre>
 
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$input</strong> <code>mixed</code> 待验证的数据</li>
-<li>
-<strong>$rules</strong> <code>array</code> 验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项</li>
-<li>
-<strong>$atLeast</strong> <code>int</code> 至少要有多少条规则通过才算验证通过</li>
-</ul>
-<h5>错误信息</h5>
-
-<table class="table table-bordered table-striped">
-<thead><tr>
-<th><strong>名称</strong></th>
-<th><strong>信息</strong></th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>atLeast</code></td>
-<td>%name%至少需要满足以下%count%条规则中的%left%条</td>
-</tr>
-<tr>
-<td><code>notString</code></td>
-<td>%name%必须是字符串</td>
-</tr>
-<tr>
-<td><code>negative</code></td>
-<td>%name%不合法</td>
-</tr>
-</tbody>
-</table>
-<h5>代码范例</h5>
-
-<p>检查数据符合"数字,长度小于5,邮箱"这三条中至少两条<br>
-```php<br>
-&lt;?php</p>
-
-<p>$rules = array(<br>
-    'digit' =&gt; true,<br>
-    'maxLength' =&gt; 5,<br>
-    'email' =&gt; true<br>
-);<br>
-if ($widget-&gt;isSomeOf('abc', $rules)) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
-```</p>
-
-<h5>运行结果</h5>
+<h4>运行结果</h4>
 
 <pre><code class="php">'Yes'
 </code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>rules</td>
+<td>array</td>
+<td>-</td>
+<td>验证规则数组,数组的键名是规则名称,数组的值是验证规则的配置选项</td>
+</tr>
+<tr>
+<td>atLeast</td>
+<td>int</td>
+<td>无</td>
+<td>至少需要满足以下少要有多少条规则通过才算验证通过</td>
+</tr>
+<tr>
+<td>atLeastMessage</td>
+<td>string</td>
+<td>%name%至少需要满足以下%count%条规则中的%left%条</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>isSomeOf($input, $rules, $atLeast)</h4>
+
+<p>检查数据是否通过指定数量规则的验证</p>
 </body></html>
 
   </section>
@@ -8554,29 +8618,45 @@ if ($widget-&gt;isAll($input, array(
 
   </section>
 
-<!-- isDivisibleby
+<!-- view
   ================================================== -->
-  <section id="isDivisibleby">
+  <section id="view">
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h1>isDivisibleBy</h1>
+<h1>View</h1>
 
-<p>检查数据是否能被指定的除数整除</p>
+<p>渲染指定名称的模板或获取视图微件对象</p>
 
 <h2>案例</h2>
 
-<h3>检查10能否被3整除</h3>
+<h3>渲染带布局的模板<code>template.php</code>
+</h3>
 
-<pre><code class="php">if ($widget-&gt;isDivisibleBy(10, 3)) {
-    echo 'Yes';
-} else {
-    echo 'No';
-}
+<pre><code class="php">// 设置模板所在的目录
+$widget-&gt;view-&gt;setDirs(__DIR__ . '/fixtures');
+
+// View微件将先渲染`template.php`文件,再把渲染结果存储到变量`$content`中,再渲染layout.php文件,并输出运行结果
+echo $widget-&gt;view-&gt;render('template.php');
+</code></pre>
+
+<p>文件<code>template.php</code></p>
+
+<pre><code class="php">&lt;?php $this-&gt;layout('layout.php') ?&gt;
+Template Content
+</code></pre>
+
+<p>文件<code>layout.php</code></p>
+
+<pre><code class="php">Layout Header
+&lt;?= $content ?&gt;
+Layout Footer
 </code></pre>
 
 <h4>运行结果</h4>
 
-<pre><code class="php">'No'
+<pre><code class="php">'Layout Header
+Template Content
+Layout Footer'
 </code></pre>
 
 <h2>调用方式</h2>
@@ -8592,98 +8672,62 @@ if ($widget-&gt;isAll($input, array(
 </tr></thead>
 <tbody>
 <tr>
-<td>notStringMessage</td>
-<td>string</td>
-<td>%name%必须是字符串</td>
-<td>-</td>
+<td>vars</td>
+<td>array</td>
+<td>无</td>
+<td>模板变量</td>
 </tr>
 <tr>
-<td>notDivisibleMessage</td>
-<td>string</td>
-<td>%name%必须被%divisor%整除</td>
-<td>-</td>
+<td>dirs</td>
+<td>array</td>
+<td>无</td>
+<td>模板所在的目录</td>
 </tr>
 <tr>
-<td>negativeMessage</td>
+<td>extension</td>
 <td>string</td>
-<td>%name%不可以被%divisor%整除</td>
-<td>-</td>
+<td>.php</td>
+<td>默认的模板扩展名</td>
 </tr>
 </tbody>
 </table>
 <h3>方法</h3>
 
-<h4>isDivisibleBy($input)</h4>
+<h4>view($name, $vars = array())</h4>
 
-<p>检查数据是否能被指定的除数整除</p>
-</body></html>
+<p>渲染指定名称的模板</p>
 
-  </section>
+<h4>view()</h4>
 
-<!-- view
-  ================================================== -->
-  <section id="view">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1><a href="http://twinh.github.io/widget/api/view">view()</a></h1>
+<p>获取视图微件对象</p>
 
-<p>渲染指定名称的模板或获取视图微件对象</p>
+<h4>view-&gt;render($name, $vars = array())</h4>
 
-<h5>目录</h5>
+<p>渲染指定名称的模板,同<code>view($name, $vars = array())</code></p>
 
-<ul>
-<li>view( [$name [, $vars ] ] )</li>
-<li>view()</li>
-</ul>
-<pre><code class="php">string view( [$name [, $vars ] ] )
-</code></pre>
+<h4>view-&gt;display($name, $vars = array())</h4>
 
-<h5>参数</h5>
+<p>渲染并输出指定名称的模板</p>
 
-<ul>
-<li>
-<strong>$name</strong> <code>string</code> 模板文件的路径</li>
-<li>
-<strong>$vars</strong> <code>array</code> 附加到模板的变量</li>
-</ul>
-<p>在下面的例子中,View微件将先渲染<code>template.php</code>文件,再把渲染结果存储到变量<code>$content</code>中,再渲染layout.php文件,并输出运行结果</p>
+<h4>view-&gt;assign($name, $value)</h4>
 
-<p>文件<code>template.php</code><br><code>php<br>
-&lt;?php $this-&gt;layout('layout.php') ?&gt;<br>
-Template Content<br></code></p>
+<p>设置视图变量</p>
 
-<p>文件<code>layout.php</code><br><code>php<br>
-Layout Header<br>
-&lt;?= $content ?&gt;<br>
-Layout Footer<br></code></p>
+<h4>view-&gt;get($name)</h4>
 
-<h5>代码范例</h5>
+<p>获取视图变量</p>
 
-<p>渲染带布局的模板<code>template.php</code><br>
-```php<br>
-&lt;?php</p>
+<h4>view-&gt;getFile()</h4>
 
-<p>$widget-&gt;view-&gt;setDirs(__DIR__ . '/fixtures');</p>
+<p>获取模板文件</p>
 
-<p>echo $widget-&gt;view-&gt;render('template.php');<br>
-```</p>
+<h4>view-&gt;layout($name, $variable = 'content')</h4>
 
-<h5>运行结果</h5>
+<p>设置模板的父模板名称</p>
 
-<pre><code class="php">'Layout Header
-Template Content
-Layout Footer'
-</code></pre>
+<h4>view-&gt;setDirs($dirs)</h4>
 
-<hr>
-<h3>获取视图微件对象</h3>
-
-<pre><code class="php">\Widget\View view()
-</code></pre>
-
-<h5>参数</h5>
-
-<p><em>无</em></p>
+<p>设置模板所在的目录</p>
 </body></html>
 
   </section>
@@ -9449,6 +9493,81 @@ echo get_class($em);
 
   </section>
 
+<!-- error
+  ================================================== -->
+  <section id="error">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<pre><code>该微件文档还在紧急编写中,敬请期待!
+</code></pre>
+
+<h1><a href="http://twinh.github.io/widget/api/error">error()</a></h1>
+
+<p>Attach a handler to the error event</p>
+
+<h3>Attach a handler to the error event</h3>
+
+<pre><code class="php">\EventManager error($fn, $priority, $data)
+</code></pre>
+
+<h5>参数</h5>
+
+<ul>
+<li>
+<strong>$fn</strong> <code>\Closure</code> The error handler</li>
+<li>
+<strong>$priority</strong> <code>int|string</code> The event priority, could be int or specify strings, the higer number, the higer priority</li>
+<li>
+<strong>$data</strong> <code>array</code> The data pass to the event object, when the handler is triggered</li>
+</ul>
+</body></html>
+
+  </section>
+
+<!-- phpError
+  ================================================== -->
+  <section id="phpError">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>PHP Error</h1>
+
+<p><a href="http://phperror.net/">PHP Error</a>提供了更友好的错误提示信息,完整的语法和代码片段高亮,同时支持Ajax错误提示</p>
+
+<h2>案例</h2>
+
+<h3>在Widget初始化时加载PHP Error</h3>
+
+<pre><code class="php">\Widget\Widget::create(array(
+    'widget' =&gt; array(
+        'preload' =&gt; array(
+            'phpError' // 在预加载选项增加phpError微件
+            '...'      // 预加载其他微件
+        )
+    ),
+    // 配置PHP Error微件的选项
+    'phpError' =&gt; array(
+        'catch_ajax_errors' =&gt; true,
+        'catch_class_not_found' =&gt; true,
+        // more options
+    )
+));
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<p>参见PHP Error官网文档<a href="https://github.com/JosephLenton/PHP-Error/wiki/Options">https://github.com/JosephLenton/PHP-Error/wiki/Options</a></p>
+
+<h3>方法</h3>
+
+<h4>phpError()</h4>
+
+<p>获取\php_error\ErrorHandler对象</p>
+</body></html>
+
+  </section>
+
 <!-- arr
   ================================================== -->
   <section id="arr">
@@ -9761,81 +9880,6 @@ echo $widget-&gt;uuid();
 <p>生成一个随机的UUID</p>
 
 <p>生成的UUID可用于数据表主键,相比通过SQL语句<code>SELECT UUID</code>生成的UUID要快很多,而且调用更加方便.</p>
-</body></html>
-
-  </section>
-
-<!-- error
-  ================================================== -->
-  <section id="error">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<pre><code>该微件文档还在紧急编写中,敬请期待!
-</code></pre>
-
-<h1><a href="http://twinh.github.io/widget/api/error">error()</a></h1>
-
-<p>Attach a handler to the error event</p>
-
-<h3>Attach a handler to the error event</h3>
-
-<pre><code class="php">\EventManager error($fn, $priority, $data)
-</code></pre>
-
-<h5>参数</h5>
-
-<ul>
-<li>
-<strong>$fn</strong> <code>\Closure</code> The error handler</li>
-<li>
-<strong>$priority</strong> <code>int|string</code> The event priority, could be int or specify strings, the higer number, the higer priority</li>
-<li>
-<strong>$data</strong> <code>array</code> The data pass to the event object, when the handler is triggered</li>
-</ul>
-</body></html>
-
-  </section>
-
-<!-- phpError
-  ================================================== -->
-  <section id="phpError">
-  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<h1>PHP Error</h1>
-
-<p><a href="http://phperror.net/">PHP Error</a>提供了更友好的错误提示信息,完整的语法和代码片段高亮,同时支持Ajax错误提示</p>
-
-<h2>案例</h2>
-
-<h3>在Widget初始化时加载PHP Error</h3>
-
-<pre><code class="php">\Widget\Widget::create(array(
-    'widget' =&gt; array(
-        'preload' =&gt; array(
-            'phpError' // 在预加载选项增加phpError微件
-            '...'      // 预加载其他微件
-        )
-    ),
-    // 配置PHP Error微件的选项
-    'phpError' =&gt; array(
-        'catch_ajax_errors' =&gt; true,
-        'catch_class_not_found' =&gt; true,
-        // more options
-    )
-));
-</code></pre>
-
-<h2>调用方式</h2>
-
-<h3>选项</h3>
-
-<p>参见PHP Error官网文档<a href="https://github.com/JosephLenton/PHP-Error/wiki/Options">https://github.com/JosephLenton/PHP-Error/wiki/Options</a></p>
-
-<h3>方法</h3>
-
-<h4>phpError()</h4>
-
-<p>获取\php_error\ErrorHandler对象</p>
 </body></html>
 
   </section>
