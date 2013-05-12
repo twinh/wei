@@ -17,21 +17,13 @@ class Call extends AbstractWidget
 {
     protected $method = 'get';
 
-    protected $cache = false;
+    protected $cache;
 
     /**
      *
      * @var array
      */
     protected $data = array();
-
-    protected $beforeSend;
-
-    protected $complete;
-
-    protected $success;
-
-    protected $error;
 
     protected $time;
 
@@ -44,6 +36,29 @@ class Call extends AbstractWidget
     protected $headers = array();
 
     protected $wsdl = true;
+
+    /**
+     * An event triggered after prepared the data and before the process the request
+     *
+     * @var callback
+     */
+    protected $beforeSend;
+
+    /**
+     * An event triggered after the request is called success
+     *
+     * @var callback
+     */
+    protected $success;
+
+    /**
+     * An event triggered when the requeset fails
+     *
+     * @var callback
+     */
+    protected $error;
+
+    protected $complete;
 
     public function __invoke($options)
     {
@@ -65,18 +80,22 @@ class Call extends AbstractWidget
     public function handleUrl()
     {
         $ch = curl_init();
-        $opts = array();
+        $opts = array(
+            CURLOPT_RETURNTRANSFER => true
+        );
 
         if ('POST' === strtoupper($this->method)) {
             $opts[CURLOPT_URL] = $this->url;
             $opts[CURLOPT_POST] = 1;
             $opts[CURLOPT_POSTFIELDS] = $this->data;
         } else {
-            $query = http_build_query($this->data);
-            if (false === strpos('?', $this->url)) {
-                $opts[CURLOPT_URL] = $this->url . '?' . $query;
-            } else {
-                $opts[CURLOPT_URL] = $this->url . '?' . $query;
+            if ($this->data) {
+                $query = http_build_query($this->data);
+                if (false === strpos('?', $this->url)) {
+                    $opts[CURLOPT_URL] = $this->url . '?' . $query;
+                } else {
+                    $opts[CURLOPT_URL] = $this->url . '?' . $query;
+                }
             }
         }
 
@@ -86,7 +105,7 @@ class Call extends AbstractWidget
         if (false === $response) {
             $this->trigger('error', curl_error($ch));
         } else {
-            $this->handleResponse($response);
+            $this->handleResponse($response, $ch);
         }
     }
 
@@ -105,7 +124,7 @@ class Call extends AbstractWidget
         try {
             $this->trigger('beforeSend', $soap);
             $response = $soap->__soapCall($this->method, $this->data);
-            $this->handleResponse($response);
+            $this->handleResponse($response, $soap);
         } catch (\SoapFault $e) {
             $this->trigger('error', $e);
         }
@@ -137,10 +156,10 @@ class Call extends AbstractWidget
         ));
     }
 
-    protected function handleResponse($response)
+    protected function handleResponse($response, $object)
     {
         $data = $this->decode($response, $this->dataType);
-        $this->trigger('success', $data);
+        $this->trigger('success', array($data, $object));
     }
 
     protected function decode($data, $type)

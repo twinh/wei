@@ -24,6 +24,9 @@ return Widget::create(array(
             'pgCache' => 'Widget\DbCache'
         )
     ),
+    'call' => array(
+        'url' => 'http://php2/widget/tests/WidgetTest/Call/'
+    ),
     // Databse Widget Configuration
     'db' => array(
         'driver' => 'pdo_sqlite',
