@@ -9,6 +9,8 @@ switch ($dataType) {
             'message' => 'success'
         ));
         break;
+    default:
+        $result = 'default text';
 }
 
 echo $result;

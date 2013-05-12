@@ -28,6 +28,24 @@ class CallTest extends TestCase
         $test = $this;
 
         $this->call(array(
+            'url' => $this->url . 'url.php',
+            'beforeSend' => function() use($test) {
+                $test->assertTrue(true, 'beforeSend');
+            },
+            'success' => function() use($test) {
+                $test->assertTrue(true, 'success');
+            },
+            'complete' => function() use($test) {
+                $test->assertTrue(true, 'complete');
+            }
+        ));
+    }
+
+    public function testJson()
+    {
+        $test = $this;
+
+        $this->call(array(
             'url' => $this->url . 'url.php?type=json',
             'dataType' => 'json',
             'success' => function($data, $ch) use($test) {

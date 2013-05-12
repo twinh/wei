@@ -65,7 +65,22 @@ class Call extends AbstractWidget
      */
     protected $error;
 
+    /**
+     * An event triggered when finishes (after `success` and `error` callbacks are executed)
+     *
+     * ```php
+     * $widget->call(array(
+     *     'complete' => function($call){
+     *
+     *     }
+     * ));
+     * ```
+     *
+     * @var callback
+     */
     protected $complete;
+
+    protected $statusText = 'success';
 
     public function __invoke($options)
     {
@@ -115,6 +130,7 @@ class Call extends AbstractWidget
             $this->handleResponse($response, $ch);
         }
         curl_close($ch);
+        $this->trigger('complete', array($this));
     }
 
     public function handleSoap()
@@ -136,6 +152,7 @@ class Call extends AbstractWidget
         } catch (\SoapFault $e) {
             $this->trigger('error', array($this, 'exception', $e));
         }
+        $this->trigger('complete', array($this));
     }
 
     public function get($url, $data, $callback)
