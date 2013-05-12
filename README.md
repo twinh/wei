@@ -34,4 +34,4 @@ To run the tests:
 
 License
 -------
-Widget is an open-source project released Apache 2.0 license. See the LICENSE file for details.
+Widget is an open-source project released MIT license. See the LICENSE file for details.
