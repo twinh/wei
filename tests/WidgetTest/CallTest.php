@@ -18,7 +18,7 @@ class CallTest extends TestCase
         $this->url = $this->call->getOption('url');
 
         // TODO how to test in cli
-        if (false === @fopen($this->url)) {
+        if (false === @fopen($this->url, 'r')) {
             $this->markTestSkipped(sprintf('Url %s is not available', $this->url));
         }
     }
@@ -63,7 +63,7 @@ class CallTest extends TestCase
         $this->call(array(
             'url' => $this->url . 'soap.php',
             'type' => 'soap',
-            'method' => 'helloWorld',
+            'method' => 'add',
             'wsdl' => false,
             'dataType' => 'raw',
             'success' => function($data) use($test) {

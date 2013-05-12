@@ -25,7 +25,7 @@ return Widget::create(array(
         )
     ),
     'call' => array(
-        'url' => 'http://php2/widget/tests/WidgetTest/Call/'
+        'url' => 'http://php/widget/tests/WidgetTest/Call/'
     ),
     // Databse Widget Configuration
     'db' => array(

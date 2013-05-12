@@ -54,6 +54,13 @@ class Call extends AbstractWidget
     /**
      * An event triggered when the requeset fails
      *
+     * ```php
+     * $widget->call(array(
+     *     'error' => function($call, $textStatus, $message){
+     *
+     *     }
+     * ));
+     *
      * @var callback
      */
     protected $error;
@@ -103,10 +110,11 @@ class Call extends AbstractWidget
         $this->trigger('beforeSend', $ch);
         $response = curl_exec($ch);
         if (false === $response) {
-            $this->trigger('error', curl_error($ch));
+            $this->trigger('error', array($this, '', curl_error($ch)));
         } else {
             $this->handleResponse($response, $ch);
         }
+        curl_close($ch);
     }
 
     public function handleSoap()
@@ -126,7 +134,7 @@ class Call extends AbstractWidget
             $response = $soap->__soapCall($this->method, $this->data);
             $this->handleResponse($response, $soap);
         } catch (\SoapFault $e) {
-            $this->trigger('error', $e);
+            $this->trigger('error', array($this, 'exception', $e));
         }
     }
 
@@ -158,8 +166,12 @@ class Call extends AbstractWidget
 
     protected function handleResponse($response, $object)
     {
-        $data = $this->decode($response, $this->dataType);
-        $this->trigger('success', array($data, $object));
+        $response = $this->decode($response, $this->dataType);
+        if ('success' != $response['state']) {
+            $this->trigger('error', array($this, $response['state'], $response['error']));
+        } else {
+            $this->trigger('success', array($response['data'], $this));
+        }
     }
 
     protected function decode($data, $type)
@@ -169,10 +181,9 @@ class Call extends AbstractWidget
                 $data = json_decode($data);
 
                 if (null === $data && json_last_error() != JSON_ERROR_NONE) {
-                    $this->trigger('error');
+                    return array('state' => 'parsererror', 'error' => json_last_error());
                 }
-
-                return $data;
+                return array('state' => 'success', 'data' => $data);
             case 'raw' :
                 return $data;
 
