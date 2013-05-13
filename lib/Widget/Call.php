@@ -117,8 +117,10 @@ class Call extends AbstractWidget
                 if (false === strpos('?', $this->url)) {
                     $opts[CURLOPT_URL] = $this->url . '?' . $query;
                 } else {
-                    $opts[CURLOPT_URL] = $this->url . '?' . $query;
+                    $opts[CURLOPT_URL] = $this->url . '&' . $query;
                 }
+            } else {
+                $opts[CURLOPT_URL] = $this->url;
             }
         }
 
@@ -202,8 +204,7 @@ class Call extends AbstractWidget
                     return array('state' => 'parsererror', 'error' => json_last_error());
                 }
                 return array('state' => 'success', 'data' => $data);
-            case 'raw' :
-                return $data;
+
 
             case 'xml' :
                 // todo
@@ -219,8 +220,9 @@ class Call extends AbstractWidget
             case 'serialize' :
                 return unserialize($data);
 
-            default:
-                // serializer->decode
+            case 'raw' :
+            default :
+                return array('state' => 'success', 'data' => $data);
         }
     }
 

@@ -11,9 +11,13 @@ class CallTest extends TestCase
      */
     protected $url;
 
+    public $triggeredEvents;
+
     protected function setUp()
     {
         parent::setUp();
+
+        $this->triggeredEvents = array();
 
         $this->url = $this->call->getOption('url');
 
@@ -29,16 +33,22 @@ class CallTest extends TestCase
 
         $this->call(array(
             'url' => $this->url . 'url.php',
+            'dataType' => 'raw',
             'beforeSend' => function() use($test) {
-                $test->assertTrue(true, 'beforeSend');
+                $test->triggeredEvents[] = 'beforeSend';
+                $test->assertTrue(true);
             },
             'success' => function() use($test) {
-                $test->assertTrue(true, 'success');
+                $test->triggeredEvents[] = 'success';
+                $test->assertTrue(true);
             },
             'complete' => function() use($test) {
-                $test->assertTrue(true, 'complete');
+                $test->triggeredEvents[] = 'complete';
+                $test->assertTrue(true);
             }
         ));
+
+        $this->assertCalledEvents(array('beforeSend', 'success', 'complete'));
     }
 
     public function testJson()
@@ -91,5 +101,12 @@ class CallTest extends TestCase
 
             }
         ));
+    }
+
+    public function assertCalledEvents($events)
+    {
+        foreach ((array)$events as $event) {
+            $this->assertContains($event, $this->triggeredEvents);
+        }
     }
 }
