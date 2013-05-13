@@ -30,7 +30,6 @@ class CallTest extends TestCase
     public function testSuccess()
     {
         $test = $this;
-
         $this->call(array(
             'url' => $this->url . 'url.php',
             'dataType' => 'raw',
@@ -49,6 +48,26 @@ class CallTest extends TestCase
         ));
 
         $this->assertCalledEvents(array('beforeSend', 'success', 'complete'));
+    }
+
+    public function testUrlAndOptionsSyntax()
+    {
+        $test = $this;
+        $this->call($this->url . 'url.php', array(
+            'dataType' => 'raw',
+            'beforeSend' => function() use($test) {
+                $test->triggeredEvents[] = 'beforeSend';
+                $test->assertTrue(true);
+            },
+            'success' => function() use($test) {
+                $test->triggeredEvents[] = 'success';
+                $test->assertTrue(true);
+            },
+            'complete' => function() use($test) {
+                $test->triggeredEvents[] = 'complete';
+                $test->assertTrue(true);
+            }
+        ));
     }
 
     /**

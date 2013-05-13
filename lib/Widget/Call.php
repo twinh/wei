@@ -83,9 +83,15 @@ class Call extends AbstractWidget
 
     protected $statusText = 'success';
 
-    public function __invoke($options)
+    public function __invoke($url = null, array $options = array())
     {
-        $this->setOption($options);
+        // Merge and set options
+        if (is_array($url)) {
+            $options = $url;
+        } else {
+            $options['url'] = $url;
+        }
+        $options && $this->setOption($options);
 
         switch ($this->type) {
             case 'url':
@@ -122,6 +128,10 @@ class Call extends AbstractWidget
             } else {
                 $opts[CURLOPT_URL] = $this->url;
             }
+        }
+
+        if ($this->timeout >= 0) {
+            $opts[CURLOPT_TIMEOUT] = $this->timeout;
         }
 
         curl_setopt_array($ch, $opts);
