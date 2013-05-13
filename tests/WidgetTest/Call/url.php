@@ -1,16 +1,31 @@
 <?php
-$dataType = isset($_GET['type']) ? $_GET['type'] : null;
+
+require '../../../lib/Widget/Widget.php';
+
+$widget = Widget\Widget::create();
+
+$dataType = $widget->query('type');
+$test = $widget->query('test');
+$statusCode = $widget->query->getInt('code', 200);
 $result = null;
 
-switch ($dataType) {
-    case 'json':
-        $result = json_encode(array(
-            'code' => 0,
-            'message' => 'success'
-        ));
+switch ($test) {
+    case 'headers':
+        $widget->header('customHeader', 'value');
+        $result = json_encode($widget->server->getHeaders());
         break;
+
     default:
-        $result = 'default text';
+        switch ($dataType) {
+            case 'json':
+                $result = json_encode(array(
+                    'code' => 0,
+                    'message' => 'success'
+                ));
+                break;
+            default:
+                $result = 'default text';
+        }
 }
 
-echo $result;
+$widget->response($result, $statusCode);

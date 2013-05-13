@@ -2,6 +2,8 @@
 
 namespace WidgetTest;
 
+use Widget\Call;
+
 class CallTest extends TestCase
 {
     /**
@@ -25,6 +27,10 @@ class CallTest extends TestCase
         if (false === @fopen($this->url, 'r')) {
             $this->markTestSkipped(sprintf('Url %s is not available', $this->url));
         }
+
+        $this->call->setOption('error', function(){
+            throw new \Exception('An error occurred');
+        });
     }
 
     public function testSuccess()
@@ -100,13 +106,36 @@ class CallTest extends TestCase
         return array(
             // 404 but return content
             array(array(
-                'url' => $this->url . 'notfound.php',
+                'url' => $this->url . 'url.php?code=404'
+            )),
+            array(array(
+                'url' => $this->url . 'url.php?code=500'
             )),
             // Couldn't resolve host '404.php.net'
             array(array(
                 'url' => 'http://404.php.net/'
             )),
         );
+    }
+
+    public function testHeaders()
+    {
+        $test = $this;
+        $this->call(array(
+            'url' => $this->url . 'url.php?test=headers',
+            'headers' => array(
+                'Key' => 'Value',
+                'Key-Name' => 'Value',
+                'Key_Name' => 'Value with space' // overwrite previous header
+            ),
+            'success' => function($data, $call) use($test) {
+                // header set by php script
+                $test->assertEquals('value', $call->getResponseHeader('customHeader'));
+
+                $test->assertEquals('Value', $data->KEY);
+                $test->assertEquals('Value with space', $data->KEY_NAME);
+            }
+        ));
     }
 
     public function testJson()

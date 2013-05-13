@@ -26,6 +26,13 @@ class Call extends AbstractWidget
      */
     protected $data = array();
 
+    /**
+     * The request header
+     *
+     * @var array
+     */
+    protected $headers = array();
+
     protected $time;
 
     protected $timeout;
@@ -33,8 +40,6 @@ class Call extends AbstractWidget
     protected $type = 'url';
 
     protected $dataType = 'json';
-
-    protected $headers = array();
 
     protected $wsdl = true;
 
@@ -83,6 +88,20 @@ class Call extends AbstractWidget
 
     protected $statusText = 'success';
 
+    /**
+     * The response header string
+     *
+     * @var string
+     */
+    protected $responseHeader;
+
+    /**
+     * The parsed response header array
+     *
+     * @var string
+     */
+    protected $responseHeaders;
+
     public function __invoke($url = null, array $options = array())
     {
         // Merge and set options
@@ -110,7 +129,8 @@ class Call extends AbstractWidget
     {
         $ch = curl_init();
         $opts = array(
-            CURLOPT_RETURNTRANSFER => true
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HEADER => true
         );
 
         if ('POST' === strtoupper($this->method)) {
@@ -134,6 +154,15 @@ class Call extends AbstractWidget
             $opts[CURLOPT_TIMEOUT] = $this->timeout;
         }
 
+        // Set HTTP headers
+        if ($this->headers) {
+            $headers = array();
+            foreach ($this->headers as $key => $value) {
+                $headers[] = $key . ': ' . $value;
+            }
+            $opts[CURLOPT_HTTPHEADER] = $headers;
+        }
+
         curl_setopt_array($ch, $opts);
         $this->trigger('beforeSend', $ch);
         $response = curl_exec($ch);
@@ -142,7 +171,8 @@ class Call extends AbstractWidget
         $isSuccess = $statusCode >= 200 && $statusCode < 300 || $statusCode === 304;
 
         if ($isSuccess) {
-            $this->handleResponse($response, $ch);
+            list($this->responseHeader, $body) = explode("\r\n\r\n", $response, 2);
+            $this->handleResponse($body, $ch);
         } else {
             $this->trigger('error', array($this, '', curl_error($ch)));
         }
@@ -247,5 +277,38 @@ class Call extends AbstractWidget
             call_user_func_array($this->$name, $params);
         }
         //return $this->eventManager->trigger('call' . ucfirst($name));
+    }
+
+    public function setRequestHeader($name, $value)
+    {
+        $this->headers[$name] = $value;
+
+        return $this;
+    }
+
+    public function getResponseHeader($name)
+    {
+        if (!is_array($this->responseHeaders)) {
+            if ($this->responseHeader) {
+                $this->responseHeaders = $this->parseHeader($this->responseHeader);
+            } else {
+                $this->responseHeaders = array();
+            }
+        }
+        $name = strtoupper($name);
+        return isset($this->responseHeaders[$name]) ? $this->responseHeaders[$name] : null;
+    }
+
+    public function parseHeader($header)
+    {
+        $headers = array();
+        foreach (explode("\n", $header) as $line) {
+            $line = explode(':', $line, 2);
+            if (isset($line[1])) {
+                $headers[strtoupper($line[0])] = trim($line[1]);
+            }
+        }
+
+        return $headers;
     }
 }
