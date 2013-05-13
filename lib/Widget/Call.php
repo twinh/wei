@@ -127,10 +127,14 @@ class Call extends AbstractWidget
         curl_setopt_array($ch, $opts);
         $this->trigger('beforeSend', $ch);
         $response = curl_exec($ch);
-        if (false === $response) {
-            $this->trigger('error', array($this, '', curl_error($ch)));
-        } else {
+
+        $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $isSuccess = $statusCode >= 200 && $statusCode < 300 || $statusCode === 304;
+
+        if ($isSuccess) {
             $this->handleResponse($response, $ch);
+        } else {
+            $this->trigger('error', array($this, '', curl_error($ch)));
         }
         curl_close($ch);
         $this->trigger('complete', array($this));
