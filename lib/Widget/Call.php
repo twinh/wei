@@ -21,6 +21,8 @@ class Call extends AbstractWidget
 
     protected $cache;
 
+    protected $contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
+
     /**
      *
      * @var array

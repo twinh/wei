@@ -33,11 +33,13 @@ class CallTest extends TestCase
         });
     }
 
-    public function testSuccess()
+    /**
+     * @dataProvider providerForSuccess
+     */
+    public function testSuccess($options)
     {
         $test = $this;
         $this->call(array(
-            'url' => $this->url . 'url.php',
             'dataType' => 'raw',
             'beforeSend' => function() use($test) {
                 $test->triggeredEvents[] = 'beforeSend';
@@ -51,9 +53,29 @@ class CallTest extends TestCase
                 $test->triggeredEvents[] = 'complete';
                 $test->assertTrue(true);
             }
-        ));
+        ) + $options);
 
         $this->assertCalledEvents(array('beforeSend', 'success', 'complete'));
+    }
+
+    public function providerForSuccess()
+    {
+        $url = $this->call->getOption('url');
+
+        return array(
+            array(array(
+                'url' => $url . 'url.php'
+            )),
+            array(array(
+                'url' => $url . 'url.php?abc=cdf',
+            )),
+            array(array(
+                'url' => $url . 'url.php#abc'
+            )),
+            array(array(
+                'url' => $url . 'url.php?abc#abc'
+            ))
+         );
     }
 
     public function testUrlAndOptionsSyntax()
@@ -105,7 +127,6 @@ class CallTest extends TestCase
     {
         $url = $this->call->getOption('url');
 
-        $this->setUp();
         return array(
             // 404 but return content
             array(array(
