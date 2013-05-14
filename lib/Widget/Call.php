@@ -164,7 +164,7 @@ class Call extends AbstractWidget
         }
 
         curl_setopt_array($ch, $opts);
-        $this->trigger('beforeSend', $ch);
+        $this->trigger('beforeSend', array($this, $ch));
         $response = curl_exec($ch);
 
         $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -193,7 +193,7 @@ class Call extends AbstractWidget
         }
 
         try {
-            $this->trigger('beforeSend', $soap);
+            $this->trigger('beforeSend', array($this, $soap));
             $response = $soap->__soapCall($this->method, $this->data);
             $this->handleResponse($response, $soap);
         } catch (\SoapFault $e) {
@@ -310,5 +310,41 @@ class Call extends AbstractWidget
         }
 
         return $headers;
+    }
+
+    /**
+     * Set callback for success event
+     *
+     * @param \Closure $fn
+     * @return \Widget\Call
+     */
+    public function success(\Closure $fn)
+    {
+        $this->success = $fn;
+        return $this;
+    }
+
+    /**
+     * Set callback for error event
+     *
+     * @param \Closure $fn
+     * @return \Widget\Call
+     */
+    public function error(\Closure $fn)
+    {
+        $this->error = $fn;
+        return $this;
+    }
+
+    /**
+     * Set callback for complete event
+     *
+     * @param \Closure $fn
+     * @return \Widget\Call
+     */
+    public function complete(\Closure $fn)
+    {
+        $this->complete = $fn;
+        return $this;
     }
 }

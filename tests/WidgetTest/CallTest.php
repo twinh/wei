@@ -28,8 +28,8 @@ class CallTest extends TestCase
             $this->markTestSkipped(sprintf('Url %s is not available', $this->url));
         }
 
-        $this->call->setOption('error', function(){
-            throw new \Exception('An error occurred');
+        $this->call->setOption('error', function($call, $type){
+            throw new \Exception('An error occurred: ' . $type);
         });
     }
 
@@ -136,6 +136,26 @@ class CallTest extends TestCase
                 $test->assertEquals('Value with space', $data->KEY_NAME);
             }
         ));
+    }
+
+    public function testLateBindingCallbacks()
+    {
+        $test = $this;
+
+        $this->call(array(
+            'url' => $this->url . 'url.php',
+            'dataType' => 'raw',
+            'beforeSend' => function(Call $call) use($test) {
+                $test->triggeredEvents[] = 'beforeSend';
+                $call->success(function() use($test) {
+                    $test->triggeredEvents[] = 'success';
+                })->complete(function() use($test) {
+                    $test->triggeredEvents[] = 'complete';
+                });
+            }
+        ));
+
+        $this->assertCalledEvents(array('beforeSend', 'success', 'complete'));
     }
 
     public function testJson()
