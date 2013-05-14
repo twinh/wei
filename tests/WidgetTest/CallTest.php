@@ -161,6 +161,23 @@ class CallTest extends TestCase
         $this->assertCalledEvents(array('beforeSend', 'success', 'complete'));
     }
 
+    public function testCustomOptions()
+    {
+        $test = $this;
+
+        $this->call(array(
+            'url' => $this->url . 'url.php',
+            'dataType' => 'raw',
+            'customOption' => 'value',
+            'beforeSend' => function(Call $call) use($test) {
+                $test->triggeredEvents[] = 'beforeSend';
+                $test->assertEquals('value', $call->customOption);
+            }
+        ));
+
+        $this->assertCalledEvents(array('beforeSend'));
+    }
+
     public function testJson()
     {
         $test = $this;

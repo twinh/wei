@@ -13,6 +13,7 @@ namespace Widget;
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  * @link        http://api.jquery.com/jQuery.ajax/
+ * @todo        retry $widget->call($call);
  */
 class Call extends AbstractWidget
 {
