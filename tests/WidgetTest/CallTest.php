@@ -79,7 +79,7 @@ class CallTest extends TestCase
     /**
      * @dataProvider providerForError
      */
-    public function testError($options)
+    public function testError($options, $responseText)
     {
         $test = $this;
 
@@ -92,9 +92,9 @@ class CallTest extends TestCase
                 $test->triggeredEvents[] = 'error';
                 $test->assertTrue(true);
             },
-            'complete' => function() use($test) {
+            'complete' => function($call) use($test, $responseText) {
                 $test->triggeredEvents[] = 'complete';
-                $test->assertTrue(true);
+                $test->assertEquals($responseText, $call->getResponseText());
             }
         ) + $options);
 
@@ -103,18 +103,21 @@ class CallTest extends TestCase
 
     public function providerForError()
     {
+        $url = $this->call->getOption('url');
+
+        $this->setUp();
         return array(
             // 404 but return content
             array(array(
-                'url' => $this->url . 'url.php?code=404'
-            )),
+                'url' => $url . 'url.php?code=404'
+            ), 'default text'),
             array(array(
-                'url' => $this->url . 'url.php?code=500'
-            )),
+                'url' => $url . 'url.php?code=500'
+            ), 'default text'),
             // Couldn't resolve host '404.php.net'
             array(array(
                 'url' => 'http://404.php.net/'
-            )),
+            ), null),
         );
     }
 

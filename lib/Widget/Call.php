@@ -89,6 +89,13 @@ class Call extends AbstractWidget
     protected $statusText = 'success';
 
     /**
+     * The response body string
+     *
+     * @var string
+     */
+    protected $responseText;
+
+    /**
      * The response header string
      *
      * @var string
@@ -170,9 +177,12 @@ class Call extends AbstractWidget
         $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $isSuccess = $statusCode >= 200 && $statusCode < 300 || $statusCode === 304;
 
+        if (false !== $response) {
+            list($this->responseHeader, $this->responseText) = explode("\r\n\r\n", $response, 2);
+        }
+
         if ($isSuccess) {
-            list($this->responseHeader, $body) = explode("\r\n\r\n", $response, 2);
-            $this->handleResponse($body, $ch);
+            $this->handleResponse($this->responseText, $ch);
         } else {
             $this->trigger('error', array($this, '', curl_error($ch)));
         }
@@ -277,6 +287,16 @@ class Call extends AbstractWidget
             call_user_func_array($this->$name, $params);
         }
         //return $this->eventManager->trigger('call' . ucfirst($name));
+    }
+
+    /**
+     * Returns the response text
+     *
+     * @return string
+     */
+    public function getResponseText()
+    {
+        return $this->responseText;
     }
 
     public function setRequestHeader($name, $value)
