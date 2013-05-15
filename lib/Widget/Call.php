@@ -16,7 +16,7 @@ namespace Widget;
  */
 class Call extends AbstractWidget
 {
-    protected $method = 'get';
+    protected $method = 'GET';
 
     protected $cache;
 
@@ -145,23 +145,44 @@ class Call extends AbstractWidget
         $ch = curl_init();
         $opts = array(
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HEADER => true
+            CURLOPT_HEADER => true,
+            CURLOPT_URL => $this->url,
         );
 
-        if ('POST' === strtoupper($this->method)) {
-            $opts[CURLOPT_URL] = $this->url;
-            $opts[CURLOPT_POST] = 1;
-            $opts[CURLOPT_POSTFIELDS] = http_build_query($this->data);
-        } else {
-            if ($this->data) {
-                $query = http_build_query($this->data);
-                if (false === strpos('?', $this->url)) {
-                    $opts[CURLOPT_URL] = $this->url . '?' . $query;
-                } else {
-                    $opts[CURLOPT_URL] = $this->url . '&' . $query;
-                }
+        $this->method = strtoupper($this->method);
+        switch ($this->method) {
+            case 'GET' :
+                $postData = false;
+                break;
+
+            case 'POST' :
+                $postData = true;
+                $opts[CURLOPT_POST] = 1;
+                break;
+
+            case 'DELETE':
+            case 'PUT':
+            case 'PATCH':
+                $postData = true;
+                $opts[CURLOPT_CUSTOMREQUEST] = $this->method;
+                break;
+
+            default:
+                $postData = false;
+                $opts[CURLOPT_CUSTOMREQUEST] = $this->method;
+        }
+
+
+        if ($this->data) {
+            $data = http_build_query($this->data);
+            if ($postData) {
+                $opts[CURLOPT_POSTFIELDS] = $data;
             } else {
-                $opts[CURLOPT_URL] = $this->url;
+                if (false === strpos($this->url, '?')) {
+                    $opts[CURLOPT_URL] = $this->url . '?' . $data;
+                } else {
+                    $opts[CURLOPT_URL] = $this->url . '&' . $data;
+                }
             }
         }
 

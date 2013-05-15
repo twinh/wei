@@ -370,7 +370,7 @@ class CallTest extends TestCase
     {
         $test = $this;
         $data = array(
-                'key' => 'value',
+             'key' => 'value',
             'post' => true,
             'array' => array(
                 1,
@@ -378,14 +378,77 @@ class CallTest extends TestCase
             )
         );
         $this->call->post($this->url . 'url.php?test=post', $data, function($data) use($test) {
-                $test->triggeredEvents[] = 'success';
-                $test->assertEquals('value', $data->key);
+            $test->triggeredEvents[] = 'success';
+            $test->assertEquals('value', $data->key);
             $test->assertEquals('1', $data->post);
             $test->assertEquals('1', $data->array->{0});
             $test->assertEquals('value', $data->array->string);
         });
 
         $this->assertCalledEvents(array('success'));
+    }
+
+    /**
+     * @dataProvider providerForMethods
+     */
+    public function testMethods($method)
+    {
+        $test = $this;
+        $this->call(array(
+            'url' => $this->url . 'url.php?test=methods',
+            'method' => $method,
+            'data' => array(
+                'k' => 'v'
+            ),
+            'success' => function($data) use($test, $method) {
+                $test->triggeredEvents[] = 'success';
+                $test->assertEquals(strtoupper($method), $data->method);
+                $test->assertEquals('v', $data->data->k);
+            }
+        ));
+        $this->assertCalledEvents(array('success'));
+    }
+
+    /**
+     * @dataProvider providerForGetMethods
+     */
+    public function testGet($method)
+    {
+        $test = $this;
+        $this->call(array(
+            'url' => $this->url . 'url.php?test=get',
+            'method' => $method,
+            'data' => array(
+                'k' => 'v'
+            ),
+            'success' => function($data) use($test) {
+                $test->triggeredEvents[] = 'success';
+                $test->assertEquals('v', $data->k);
+            }
+        ));
+        $this->assertCalledEvents(array('success'));
+    }
+
+    public function providerForGetMethods()
+    {
+        return array(
+            array('GET'),
+            ///array('HEAD'), no content
+            //array('TRACE'), Method Not Allowed
+            array('OPTIONS'),
+            // array('CONNECT'), Bad Request
+            array('CUSTOM')
+        );
+    }
+
+    public function providerForMethods()
+    {
+        return array(
+            array('DELETE'),
+            array('PUT'),
+            array('PATCH'),
+            array('pAtCh'),
+        );
     }
 
     public function testSoap()

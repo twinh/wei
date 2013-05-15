@@ -3,7 +3,7 @@
 require '../../../lib/Widget/Widget.php';
 
 $widget = Widget\Widget::create();
-
+$request = $widget->request;
 $dataType = $widget->query('type');
 $test = $widget->query('test');
 $statusCode = $widget->query->getInt('code', 200);
@@ -29,6 +29,19 @@ switch ($test) {
 
     case 'cookie':
         $result = json_encode($widget->cookie->toArray());
+        break;
+
+    case 'methods':
+        $result = array(
+            'method' => $request->getMethod(),
+            'data' => array()
+        );
+        parse_str($request->getContent(), $result['data']);
+        $result = json_encode($result);
+        break;
+
+    case 'get':
+        $result = json_encode($request->getParameterReference('get'));
         break;
 
     default:
