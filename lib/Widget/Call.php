@@ -43,7 +43,9 @@ class Call extends AbstractWidget
 
     protected $dataType = 'json';
 
-    protected $userAgent = 'Widget/0.9.2';
+    protected $referer;
+
+    protected $userAgent;
 
     protected $wsdl = true;
 
@@ -165,11 +167,15 @@ class Call extends AbstractWidget
             $opts[CURLOPT_TIMEOUT] = $this->timeout;
         }
 
+        if ($this->referer) {
+            $opts[CURLOPT_REFERER] = $this->referer;
+        }
+
         if ($this->userAgent) {
             $opts[CURLOPT_USERAGENT] = $this->userAgent;
         }
 
-        // Set HTTP headers
+        // Custom headers will overwrite other options
         if ($this->headers) {
             $headers = array();
             foreach ($this->headers as $key => $value) {

@@ -331,6 +331,21 @@ class CallTest extends TestCase
         $this->assertCalledEvents(array('success'));
     }
 
+    public function testReferer()
+    {
+        $test = $this;
+        $this->call(array(
+            'url' => $this->url . 'url.php?test=referer',
+            'dataType' => 'text',
+            'referer' => 'Sent from my iPhone',
+            'success' => function($data) use($test) {
+                $test->triggeredEvents[] = 'success';
+                $test->assertEquals('Sent from my iPhone', $data);
+            }
+        ));
+        $this->assertCalledEvents(array('success'));
+    }
+
     public function testPost()
     {
         $test = $this;

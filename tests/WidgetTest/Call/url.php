@@ -23,6 +23,10 @@ switch ($test) {
         $result = $widget->server('HTTP_USER_AGENT');
         break;
 
+    case 'referer':
+        $result = $widget->server('HTTP_REFERER');
+        break;
+
     default:
         switch ($dataType) {
             case 'json':
