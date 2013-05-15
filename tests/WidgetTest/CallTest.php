@@ -277,6 +277,33 @@ class CallTest extends TestCase
         $this->assertCalledEvents(array('error'));
     }
 
+    public function testXmlDataType()
+    {
+        $test = $this;
+        $this->call(array(
+            'url' => $this->url . 'url.php?type=xml',
+            'dataType' => 'xml',
+            'success' => function(\SimpleXMLElement $data) use($test) {
+                $test->triggeredEvents[] = 'success';
+                $test->assertEquals('0', (string)$data->code);
+                $test->assertEquals('success', (string)$data->message);
+            }
+        ));
+        $this->assertCalledEvents(array('success'));
+
+        $this->triggeredEvents = array();
+        $this->call(array(
+            'url' => $this->url . 'url.php?type=json',
+            'dataType' => 'xml',
+            'error' => function($call, $textStatus, $exception) use($test) {
+                $test->triggeredEvents[] = 'error';
+                $test->assertEquals('parsererror', $textStatus);
+                $test->assertInstanceOf('\ErrorException', $exception);
+            }
+        ));
+        $this->assertCalledEvents(array('error'));
+    }
+
     public function testGet()
     {
 

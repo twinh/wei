@@ -257,7 +257,6 @@ class Call extends AbstractWidget
         switch ($type) {
             case 'json' :
                 $data = json_decode($data);
-
                 if (null === $data && json_last_error() != JSON_ERROR_NONE) {
                     return array('state' => 'parsererror', 'error' => json_last_error());
                 }
@@ -265,7 +264,12 @@ class Call extends AbstractWidget
 
 
             case 'xml' :
-                // todo
+                $data = @simplexml_load_string($data);
+                if (false === $data) {
+                    return array('state' => 'parsererror', 'data' => $data, 'error' => $this->createErrorException());
+                } else {
+                    return array('state' => 'success', 'data' => $data);
+                }
 
             case 'query' :
                 $output = array();
@@ -274,10 +278,8 @@ class Call extends AbstractWidget
 
             case 'serialize' :
                 $data = @unserialize($data);
-                $error = error_get_last();
-                if ($error) {
-                    $exception = new \ErrorException($error['message'], $error['type'], 0, $error['file'], $error['line']);
-                    return array('state' => 'parsererror', 'data' => false, 'error' => $exception);
+                if (error_get_last()) {
+                    return array('state' => 'parsererror', 'data' => false, 'error' => $this->createErrorException());
                 } else {
                     return array('state' => 'success', 'data' => $data);
                 }
@@ -374,5 +376,13 @@ class Call extends AbstractWidget
     {
         $this->complete = $fn;
         return $this;
+    }
+
+    protected function createErrorException()
+    {
+        if ($error = error_get_last()) {
+            return new \ErrorException($error['message'], $error['type'], 0, $error['file'], $error['line']);
+        }
+        return false;
     }
 }

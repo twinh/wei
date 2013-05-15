@@ -46,6 +46,13 @@ switch ($test) {
                 ));
                 break;
 
+            case 'xml':
+                $result = '<xml>
+                <code><![CDATA[0]]></code>
+                <message><![CDATA[success]]></message>
+                </xml>';
+                break;
+
             default:
                 $result = 'default text';
         }
