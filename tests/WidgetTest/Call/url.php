@@ -27,6 +27,10 @@ switch ($test) {
         $result = $widget->server('HTTP_REFERER');
         break;
 
+    case 'cookie':
+        $result = json_encode($widget->cookie->toArray());
+        break;
+
     default:
         switch ($dataType) {
             case 'json':

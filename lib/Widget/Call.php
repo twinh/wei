@@ -22,6 +22,8 @@ class Call extends AbstractWidget
 
     protected $contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
 
+    protected $cookies = array();
+
     /**
      *
      * @var array
@@ -173,6 +175,13 @@ class Call extends AbstractWidget
 
         if ($this->userAgent) {
             $opts[CURLOPT_USERAGENT] = $this->userAgent;
+        }
+
+        if ($this->cookies) {
+            foreach($this->cookies as $key => $value) {
+                $cookies[] = $key . '=' . urlencode($value);
+            }
+            $opts[CURLOPT_COOKIE] = implode('; ', $cookies);
         }
 
         // Custom headers will overwrite other options
