@@ -19,6 +19,10 @@ switch ($test) {
         $result = json_encode($_POST);
         break;
 
+    case 'user-agent':
+        $result = $widget->server('HTTP_USER_AGENT');
+        break;
+
     default:
         switch ($dataType) {
             case 'json':
@@ -27,6 +31,14 @@ switch ($test) {
                     'message' => 'success'
                 ));
                 break;
+
+            case 'query':
+                $result = http_build_query(array(
+                    'code' => 0,
+                    'message' => 'success'
+                ));
+                break;
+
             default:
                 $result = 'default text';
         }

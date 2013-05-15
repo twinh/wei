@@ -43,6 +43,8 @@ class Call extends AbstractWidget
 
     protected $dataType = 'json';
 
+    protected $userAgent = '';
+
     protected $wsdl = true;
 
     /**
@@ -268,7 +270,7 @@ class Call extends AbstractWidget
             case 'query' :
                 $output = array();
                 parse_str($data, $output);
-                return $output;
+                return array('state' => 'success', 'data' => $output);
 
             case 'serialize' :
                 return unserialize($data);
@@ -286,7 +288,6 @@ class Call extends AbstractWidget
             $params = is_array($params) ? $params : array($params);
             call_user_func_array($this->$name, $params);
         }
-        //return $this->eventManager->trigger('call' . ucfirst($name));
     }
 
     /**

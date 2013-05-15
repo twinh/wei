@@ -219,7 +219,22 @@ class CallTest extends TestCase
         $this->assertCalledEvents(array('beforeSend', 'success'));
     }
 
-    public function testJson()
+    public function testQueryDataType()
+    {
+        $test = $this;
+        $this->call(array(
+            'url' => $this->url . 'url.php?type=query',
+            'dataType' => 'query',
+            'success' => function($data) use($test) {
+                $test->triggeredEvents[] = 'success';
+                $test->assertEquals('0', $data['code']);
+                $test->assertEquals('success', $data['message']);
+            }
+        ));
+        $this->assertCalledEvents(array('success'));
+    }
+
+    public function testJsonDataType()
     {
         $test = $this;
 
