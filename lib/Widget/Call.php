@@ -13,7 +13,6 @@ namespace Widget;
  *
  * @author      Twin Huang <twinh@yahoo.cn>
  * @link        http://api.jquery.com/jQuery.ajax/
- * @todo        retry $widget->call($call);
  */
 class Call extends AbstractWidget
 {
@@ -146,7 +145,7 @@ class Call extends AbstractWidget
         if ('POST' === strtoupper($this->method)) {
             $opts[CURLOPT_URL] = $this->url;
             $opts[CURLOPT_POST] = 1;
-            $opts[CURLOPT_POSTFIELDS] = $this->data;
+            $opts[CURLOPT_POSTFIELDS] = http_build_query($this->data);
         } else {
             if ($this->data) {
                 $query = http_build_query($this->data);
@@ -266,9 +265,6 @@ class Call extends AbstractWidget
             case 'xml' :
                 // todo
 
-            case 'text':
-                return $data;
-
             case 'query' :
                 $output = array();
                 parse_str($data, $output);
@@ -277,6 +273,7 @@ class Call extends AbstractWidget
             case 'serialize' :
                 return unserialize($data);
 
+            case 'text':
             case 'raw' :
             default :
                 return array('state' => 'success', 'data' => $data);

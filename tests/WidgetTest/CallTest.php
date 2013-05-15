@@ -250,7 +250,24 @@ class CallTest extends TestCase
 
     public function testPost()
     {
+        $test = $this;
+        $data = array(
+            'key' => 'value',
+            'post' => true,
+            'array' => array(
+                1,
+                'string' => 'value'
+            )
+        );
+        $this->call->post($this->url . 'url.php?test=post', $data, function($data) use($test) {
+            $test->triggeredEvents[] = 'success';
+            $test->assertEquals('value', $data->key);
+            $test->assertEquals('1', $data->post);
+            $test->assertEquals('1', $data->array->{0});
+            $test->assertEquals('value', $data->array->string);
+        });
 
+        $this->assertCalledEvents(array('success'));
     }
 
     public function testSoap()

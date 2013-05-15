@@ -15,6 +15,10 @@ switch ($test) {
         $result = json_encode($widget->server->getHeaders());
         break;
 
+    case 'post':
+        $result = json_encode($_POST);
+        break;
+
     default:
         switch ($dataType) {
             case 'json':
