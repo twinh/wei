@@ -304,9 +304,31 @@ class CallTest extends TestCase
         $this->assertCalledEvents(array('error'));
     }
 
-    public function testGet()
+    public function testUserAgent()
     {
+        $test = $this;
+        $this->call(array(
+            'url' => $this->url . 'url.php?test=user-agent',
+            'dataType' => 'text',
+            'userAgent' => 'Test',
+            'success' => function($data) use($test) {
+                $test->triggeredEvents[] = 'success';
+                $test->assertEquals('Test', $data);
+            }
+        ));
+        $this->assertCalledEvents(array('success'));
 
+        $test->triggeredEvents = array();
+        $this->call(array(
+            'url' => $this->url . 'url.php?test=user-agent',
+            'dataType' => 'text',
+            'userAgent' => false,
+            'success' => function($data) use($test) {
+                $test->triggeredEvents[] = 'success';
+                $test->assertEquals('', $data);
+            }
+        ));
+        $this->assertCalledEvents(array('success'));
     }
 
     public function testPost()
