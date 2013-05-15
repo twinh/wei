@@ -39,6 +39,13 @@ switch ($test) {
                 ));
                 break;
 
+            case 'serialize':
+                $result = serialize(array(
+                    'code' => 0,
+                    'message' => 'success'
+                ));
+                break;
+
             default:
                 $result = 'default text';
         }

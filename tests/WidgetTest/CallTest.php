@@ -237,25 +237,44 @@ class CallTest extends TestCase
     public function testJsonDataType()
     {
         $test = $this;
-
         $this->call(array(
             'url' => $this->url . 'url.php?type=json',
             'dataType' => 'json',
-            'success' => function($data, $ch) use($test) {
-                //$test->assertInstanceOf('stdClass', $data);
-                //$test->assertInternalType('resource', $ch);
-            },
-            'complete' => function($data) {
-
+            'success' => function($data) use($test) {
+                $test->triggeredEvents[] = 'success';
+                $test->assertEquals(0, $data->code);
+                $test->assertEquals('success', $data->message);
             }
         ));
+        $this->assertCalledEvents(array('success'));
     }
 
-    public function testCall()
+    public function testSerializeDataType()
     {
-//        $this->call(array(
-//            'dataType' => 'json'
-//        ));
+        $test = $this;
+        $this->call(array(
+            'url' => $this->url . 'url.php?type=serialize',
+            'dataType' => 'serialize',
+            'success' => function($data) use($test) {
+                $test->triggeredEvents[] = 'success';
+                $test->assertEquals(0, $data['code']);
+                $test->assertEquals('success', $data['message']);
+            }
+        ));
+        $this->assertCalledEvents(array('success'));
+
+        // Parse error
+        $test->triggeredEvents = array();
+        $this->call(array(
+            'url' => $this->url . 'url.php?type=json',
+            'dataType' => 'serialize',
+            'error' => function($call, $textStatus, $exception) use($test) {
+                $test->triggeredEvents[] = 'error';
+                $test->assertEquals('parsererror', $textStatus);
+                $test->assertInstanceOf('\ErrorException', $exception);
+            }
+        ));
+        $this->assertCalledEvents(array('error'));
     }
 
     public function testGet()

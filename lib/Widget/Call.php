@@ -273,7 +273,14 @@ class Call extends AbstractWidget
                 return array('state' => 'success', 'data' => $output);
 
             case 'serialize' :
-                return unserialize($data);
+                $data = @unserialize($data);
+                $error = error_get_last();
+                if ($error) {
+                    $exception = new \ErrorException($error['message'], $error['type'], 0, $error['file'], $error['line']);
+                    return array('state' => 'parsererror', 'data' => false, 'error' => $exception);
+                } else {
+                    return array('state' => 'success', 'data' => $data);
+                }
 
             case 'text':
             case 'raw' :
