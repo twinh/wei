@@ -28,8 +28,8 @@ class CallTest extends TestCase
             $this->markTestSkipped(sprintf('Url %s is not available', $this->url));
         }
 
-        $this->call->setOption('error', function($call, $type){
-            throw new \Exception('An error occurred: ' . $type);
+        $this->call->setOption('error', function($call, $type, $e){
+            throw $e;
         });
     }
 
@@ -137,7 +137,9 @@ class CallTest extends TestCase
             ), 'default text'),
             // Couldn't resolve host '404.php.net'
             array(array(
-                'url' => 'http://404.php.net/'
+                'url' => 'http://404.php.net/',
+                // set ip to null to enable dns lookup
+                'ip' => null,
             ), null),
         );
     }
@@ -489,6 +491,36 @@ class CallTest extends TestCase
             }
         ));
         $this->assertCalledEvents(array('error'));
+    }
+
+    public function testGlobal()
+    {
+        $test = $this;
+        $this->call->setMethod('POST');
+
+        $this->call(array(
+            'url' => $this->url . '?test=methods',
+            'global' => true,
+            'data' => array(
+                'k' => 'v'
+            ),
+            'success' => function($data) use($test) {
+                $test->triggeredEvents[] = 'success';
+                $test->assertEquals('POST', $data->method);
+            }
+        ));
+        $this->assertCalledEvents(array('success'));
+
+        $this->triggeredEvents = array();
+        $this->call(array(
+            'url' => $this->url . '?test=methods',
+            'global' => false,
+            'success' => function($data) use($test) {
+                $test->triggeredEvents[] = 'success';
+                $test->assertEquals('GET', $data->method);
+            }
+        ));
+        $this->assertCalledEvents(array('success'));
     }
 
     public function assertCalledEvents($events)

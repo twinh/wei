@@ -48,6 +48,14 @@ class Call extends AbstractWidget
     protected $data = array();
 
     /**
+     * Whether use the global options in `$widget->call` object when create a
+     * new object
+     *
+     * @var string
+     */
+    protected $gloabl = true;
+
+    /**
      * A key-value array to store request headers
      *
      * @var array
@@ -198,7 +206,17 @@ class Call extends AbstractWidget
             $options['url'] = $url;
         }
 
-        $call = new self(array('widget' => $this->widget) + $options);
+        // Merge options from parent options
+        if (!isset($options['global']) || $options['global'] === true) {
+            $options += get_object_vars($this);
+        } else {
+            $options = array(
+                'widget' => $this->widget,
+                'global' => false
+            ) + $options;
+        }
+
+        $call = new self($options);
 
         $call->execute();
 
@@ -277,7 +295,7 @@ class Call extends AbstractWidget
             }
         }
 
-        if ($this->timeout >= 0) {
+        if ($this->timeout > 0) {
             $opts[CURLOPT_TIMEOUT_MS] = $this->timeout;
         }
 
