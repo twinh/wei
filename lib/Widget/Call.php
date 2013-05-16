@@ -16,22 +16,46 @@ namespace Widget;
  */
 class Call extends AbstractWidget
 {
+    /**
+     * The HTTP request method
+     *
+     * The method could be `GET`, `POST`, `DELETE`, `PUT`, `PATCH` or any other
+     * methods that the server is supported
+     *
+     * @var string
+     */
     protected $method = 'GET';
 
+    /**
+     *  Not implemented yet
+     *
+     * @var bool
+     */
     protected $cache;
 
+    /**
+     * The content type in HTTP request header
+     *
+     * @var string
+     */
     protected $contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
 
+    /**
+     * A key-value array to store cookies
+     *
+     * @var array
+     */
     protected $cookies = array();
 
     /**
+     * The data request
      *
      * @var array
      */
     protected $data = array();
 
     /**
-     * The request header
+     * A key-value array to store request headers
      *
      * @var array
      */
@@ -44,14 +68,35 @@ class Call extends AbstractWidget
      */
     protected $ip;
 
-    protected $time;
-
+    /**
+     * A number of milliseconds to wait in the whole connection
+     *
+     * @var int
+     */
     protected $timeout;
 
+    /**
+     * The data type to parse the response body
+     *
+     * The data type could by `json`, `xml`, `query`(URL query string),
+     * `serialize` and `text`
+     *
+     * @var string
+     */
     protected $dataType = 'json';
 
+    /**
+     * The custom HTTP referer string
+     *
+     * @var string
+     */
     protected $referer;
 
+    /**
+     * The custom HTTP user agent string
+     *
+     * @var string
+     */
     protected $userAgent;
 
     /**
@@ -64,6 +109,14 @@ class Call extends AbstractWidget
     /**
      * An event triggered after the request is called success
      *
+     * ```php
+     * $widget->call(array(
+     *     'success' => function($data, Call $call){
+     *
+     *     }
+     * ));
+     * ```
+     *
      * @var callback
      */
     protected $success;
@@ -73,10 +126,11 @@ class Call extends AbstractWidget
      *
      * ```php
      * $widget->call(array(
-     *     'error' => function($call, $textStatus, $message){
+     *     'error' => function(Call $call, $textStatus, $message){
      *
      *     }
      * ));
+     * ```
      *
      * @var callback
      */
@@ -87,7 +141,7 @@ class Call extends AbstractWidget
      *
      * ```php
      * $widget->call(array(
-     *     'complete' => function($call){
+     *     'complete' => function(Call $call){
      *
      *     }
      * ));
@@ -120,6 +174,13 @@ class Call extends AbstractWidget
      */
     protected $responseHeaders;
 
+    /**
+     * Instance a new call object and execute
+     *
+     * @param array|string $url A options array or the request URL
+     * @param array $options A options array if the first parameter is string
+     * @return Call A new call object
+     */
     public function __invoke($url = null, array $options = array())
     {
         // Merge and set options
