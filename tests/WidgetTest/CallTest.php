@@ -64,16 +64,16 @@ class CallTest extends TestCase
 
         return array(
             array(array(
-                'url' => $url . 'url.php'
+                'url' => $url
             )),
             array(array(
-                'url' => $url . 'url.php?abc=cdf',
+                'url' => $url . '?abc=cdf',
             )),
             array(array(
-                'url' => $url . 'url.php#abc'
+                'url' => $url . '#abc'
             )),
             array(array(
-                'url' => $url . 'url.php?abc#abc'
+                'url' => $url . '?abc#abc'
             ))
          );
     }
@@ -81,7 +81,7 @@ class CallTest extends TestCase
     public function testUrlAndOptionsSyntax()
     {
         $test = $this;
-        $this->call($this->url . 'url.php', array(
+        $this->call($this->url, array(
             'dataType' => 'raw',
             'beforeSend' => function() use($test) {
                 $test->triggeredEvents[] = 'beforeSend';
@@ -130,10 +130,10 @@ class CallTest extends TestCase
         return array(
             // 404 but return content
             array(array(
-                'url' => $url . 'url.php?code=404'
+                'url' => $url . '?code=404'
             ), 'default text'),
             array(array(
-                'url' => $url . 'url.php?code=500'
+                'url' => $url . '?code=500'
             ), 'default text'),
             // Couldn't resolve host '404.php.net'
             array(array(
@@ -146,7 +146,7 @@ class CallTest extends TestCase
     {
         $test = $this;
         $this->call(array(
-            'url' => $this->url . 'url.php?test=headers',
+            'url' => $this->url . '?test=headers',
             'headers' => array(
                 'Key' => 'Value',
                 'Key-Name' => 'Value',
@@ -167,7 +167,7 @@ class CallTest extends TestCase
         $test = $this;
 
         $this->call(array(
-            'url' => $this->url . 'url.php',
+            'url' => $this->url,
             'dataType' => 'raw',
             'beforeSend' => function(Call $call) use($test) {
                 $test->triggeredEvents[] = 'beforeSend';
@@ -187,7 +187,7 @@ class CallTest extends TestCase
         $test = $this;
 
         $this->call(array(
-            'url' => $this->url . 'url.php',
+            'url' => $this->url,
             'dataType' => 'raw',
             'customOption' => 'value',
             'beforeSend' => function(Call $call) use($test) {
@@ -204,7 +204,7 @@ class CallTest extends TestCase
         $test = $this;
 
         $this->call(array(
-            'url' => $this->url . 'url.php',
+            'url' => $this->url,
             'dataType' => 'raw',
             'beforeSend' => function(Call $call) use($test) {
                 $test->triggeredEvents[] = 'beforeSend';
@@ -223,7 +223,7 @@ class CallTest extends TestCase
     {
         $test = $this;
         $this->call(array(
-            'url' => $this->url . 'url.php?type=query',
+            'url' => $this->url . '?type=query',
             'dataType' => 'query',
             'success' => function($data) use($test) {
                 $test->triggeredEvents[] = 'success';
@@ -238,7 +238,7 @@ class CallTest extends TestCase
     {
         $test = $this;
         $this->call(array(
-            'url' => $this->url . 'url.php?type=json',
+            'url' => $this->url . '?type=json',
             'dataType' => 'json',
             'success' => function($data) use($test) {
                 $test->triggeredEvents[] = 'success';
@@ -253,7 +253,7 @@ class CallTest extends TestCase
     {
         $test = $this;
         $this->call(array(
-            'url' => $this->url . 'url.php?type=serialize',
+            'url' => $this->url . '?type=serialize',
             'dataType' => 'serialize',
             'success' => function($data) use($test) {
                 $test->triggeredEvents[] = 'success';
@@ -266,7 +266,7 @@ class CallTest extends TestCase
         // Parse error
         $test->triggeredEvents = array();
         $this->call(array(
-            'url' => $this->url . 'url.php?type=json',
+            'url' => $this->url . '?type=json',
             'dataType' => 'serialize',
             'error' => function($call, $textStatus, $exception) use($test) {
                 $test->triggeredEvents[] = 'error';
@@ -281,7 +281,7 @@ class CallTest extends TestCase
     {
         $test = $this;
         $this->call(array(
-            'url' => $this->url . 'url.php?type=xml',
+            'url' => $this->url . '?type=xml',
             'dataType' => 'xml',
             'success' => function(\SimpleXMLElement $data) use($test) {
                 $test->triggeredEvents[] = 'success';
@@ -293,7 +293,7 @@ class CallTest extends TestCase
 
         $this->triggeredEvents = array();
         $this->call(array(
-            'url' => $this->url . 'url.php?type=json',
+            'url' => $this->url . '?type=json',
             'dataType' => 'xml',
             'error' => function($call, $textStatus, $exception) use($test) {
                 $test->triggeredEvents[] = 'error';
@@ -308,7 +308,7 @@ class CallTest extends TestCase
     {
         $test = $this;
         $this->call(array(
-            'url' => $this->url . 'url.php?test=user-agent',
+            'url' => $this->url . '?test=user-agent',
             'dataType' => 'text',
             'userAgent' => 'Test',
             'success' => function($data) use($test) {
@@ -320,7 +320,7 @@ class CallTest extends TestCase
 
         $test->triggeredEvents = array();
         $this->call(array(
-            'url' => $this->url . 'url.php?test=user-agent',
+            'url' => $this->url . '?test=user-agent',
             'dataType' => 'text',
             'userAgent' => false,
             'success' => function($data) use($test) {
@@ -335,7 +335,7 @@ class CallTest extends TestCase
     {
         $test = $this;
         $this->call(array(
-            'url' => $this->url . 'url.php?test=referer',
+            'url' => $this->url . '?test=referer',
             'dataType' => 'text',
             'referer' => 'Sent from my iPhone',
             'success' => function($data) use($test) {
@@ -350,7 +350,7 @@ class CallTest extends TestCase
     {
         $test = $this;
         $this->call(array(
-            'url' => $this->url . 'url.php?test=cookie',
+            'url' => $this->url . '?test=cookie',
             'cookies' => array(
                 'key' => 'value',
                 'bool' => true,
@@ -377,7 +377,7 @@ class CallTest extends TestCase
                 'string' => 'value'
             )
         );
-        $this->call->post($this->url . 'url.php?test=post', $data, function($data) use($test) {
+        $this->call->post($this->url . '?test=post', $data, function($data) use($test) {
             $test->triggeredEvents[] = 'success';
             $test->assertEquals('value', $data->key);
             $test->assertEquals('1', $data->post);
@@ -395,7 +395,7 @@ class CallTest extends TestCase
     {
         $test = $this;
         $this->call(array(
-            'url' => $this->url . 'url.php?test=methods',
+            'url' => $this->url . '?test=methods',
             'method' => $method,
             'data' => array(
                 'k' => 'v'
@@ -416,7 +416,7 @@ class CallTest extends TestCase
     {
         $test = $this;
         $this->call(array(
-            'url' => $this->url . 'url.php?test=get',
+            'url' => $this->url . '?test=get',
             'method' => $method,
             'data' => array(
                 'k' => 'v'
@@ -457,7 +457,7 @@ class CallTest extends TestCase
     public function testAliasMethod($method)
     {
         $test = $this;
-        $this->call->$method($this->url . 'url.php?test=methods', function($data) use($test, $method) {
+        $this->call->$method($this->url . '?test=methods', function($data) use($test, $method) {
             $test->triggeredEvents[] = 'success';
             $test->assertEquals($method, $data->method);
         });
@@ -479,7 +479,7 @@ class CallTest extends TestCase
     {
         $test = $this;
         $this->call(array(
-            'url' => $this->url . 'url.php?wait=0.1',
+            'url' => $this->url . '?wait=0.1',
             'timeout' => 50,
             'error' => function($call, $textStatus) use($test) {
                 $test->triggeredEvents[] = 'error';

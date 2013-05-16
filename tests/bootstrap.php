@@ -25,7 +25,7 @@ return Widget::create(array(
         )
     ),
     'call' => array(
-        'url' => 'http://php/widget/tests/WidgetTest/Call/',
+        'url' => 'http://php/widget/tests/WidgetTest/Fixtures/call.php',
         'ip' => '127.0.0.1' // set ip for WidgetTest\CallTest\::testIp
     ),
     // Databse Widget Configuration
