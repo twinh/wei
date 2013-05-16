@@ -523,6 +523,21 @@ class CallTest extends TestCase
         $this->assertCalledEvents(array('success'));
     }
 
+    public function testStringAsData()
+    {
+        $test = $this;
+        $this->call(array(
+            'url' => $this->url . '?test=get',
+            'data' => 'key=value&number=10',
+            'success' => function($data) use($test) {
+                $test->triggeredEvents[] = 'success';
+                $test->assertEquals('value', $data->key);
+                $test->assertEquals('10', $data->number);
+            }
+        ));
+        $this->assertCalledEvents(array('success'));
+    }
+
     public function assertCalledEvents($events)
     {
         foreach ((array)$events as $event) {

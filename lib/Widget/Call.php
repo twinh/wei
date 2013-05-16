@@ -41,9 +41,9 @@ class Call extends AbstractWidget
     protected $cookies = array();
 
     /**
-     * The data request
+     * The data to send to the server
      *
-     * @var array
+     * @var array|string
      */
     protected $data = array();
 
@@ -283,7 +283,7 @@ class Call extends AbstractWidget
         }
 
         if ($this->data) {
-            $data = http_build_query($this->data);
+            $data = is_string($this->data) ? $this->data : http_build_query($this->data);
             if ($postData) {
                 $opts[CURLOPT_POSTFIELDS] = $data;
             } else {
