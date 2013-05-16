@@ -9,7 +9,7 @@
 namespace Widget;
 
 /**
- * A widget handles API request which inspired jQuery Ajax
+ * A widget handles HTTP request which inspired jQuery Ajax
  *
  * @author      Twin Huang <twinhuang@qq.com>
  * @link        http://api.jquery.com/jQuery.ajax/
@@ -191,7 +191,7 @@ class Call extends AbstractWidget
     );
 
     /**
-     * Instance a new call object and execute
+     * Create a new call object and execute
      *
      * @param array|string $url A options array or the request URL
      * @param array $options A options array if the first parameter is string

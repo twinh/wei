@@ -115,7 +115,8 @@ require_once 'WidgetInterface.php';
  * @method   string     uuid() generates a RANDOM UUID(universally unique identifier)
  * @property Website    $website A pure configuration widget for your website
  * @method   string     website($name) Returns the value of website configuration
- *
+ * @property Call       $call A widget handles HTTP request like jQuery Ajax
+ * @method   Call       call(array $options) Create a new call object and execute
  * @property Callback   $callback A widget handles WeChat(Weixin) callback message
  * @method   Callback   callback() Start up callback widget and output the matched rule message
  * @property App        $app The application widget
