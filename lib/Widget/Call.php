@@ -11,7 +11,7 @@ namespace Widget;
 /**
  * A widget handles API request which inspired jQuery Ajax
  *
- * @author      Twin Huang <twinh@yahoo.cn>
+ * @author      Twin Huang <twinhuang@qq.com>
  * @link        http://api.jquery.com/jQuery.ajax/
  */
 class Call extends AbstractWidget
@@ -119,7 +119,7 @@ class Call extends AbstractWidget
      *
      * ```php
      * $widget->call(array(
-     *     'error' => function(Call $call, $textStatus, $message){
+     *     'error' => function(Call $call, $textStatus, \ErrorException $exception){
      *
      *     }
      * ));
@@ -205,6 +205,9 @@ class Call extends AbstractWidget
         return $call;
     }
 
+    /**
+     * Execute the request, parse the response data and trigger relative events
+     */
     public function execute()
     {
         $ch = $this->ch = curl_init();
@@ -223,7 +226,7 @@ class Call extends AbstractWidget
     }
 
     /**
-     * Prepare curl options
+     * Prepare cURL options
      *
      * @return array
      */
@@ -311,6 +314,11 @@ class Call extends AbstractWidget
         return $this->curlOpts + $opts;
     }
 
+    /**
+     * Parse response text
+     *
+     * @param string $response
+     */
     protected function handleResponse($response)
     {
         $ch = $this->ch;
@@ -343,7 +351,8 @@ class Call extends AbstractWidget
      *
      * @param string $data
      * @param string $type
-     * @return array
+     * @param null $exception A variable to store exception when parser error
+     * @return mixed
      */
     protected function parse($data, $type, &$exception)
     {
