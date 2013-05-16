@@ -128,11 +128,12 @@ class Call extends AbstractWidget
         } else {
             $options['url'] = $url;
         }
-        $options && $this->setOption($options);
 
-        $this->execute();
+        $call = new self(array('widget' => $this->widget) + $options);
 
-        return $this;
+        $call->execute();
+
+        return $call;
     }
 
     public function execute()
