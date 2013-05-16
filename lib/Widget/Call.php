@@ -48,15 +48,11 @@ class Call extends AbstractWidget
 
     protected $timeout;
 
-    protected $type = 'url';
-
     protected $dataType = 'json';
 
     protected $referer;
 
     protected $userAgent;
-
-    protected $wsdl = true;
 
     /**
      * An event triggered after prepared the data and before the process the request
@@ -134,26 +130,18 @@ class Call extends AbstractWidget
         }
         $options && $this->setOption($options);
 
-        switch ($this->type) {
-            case 'url':
-                $this->handleUrl();
-                break;
-
-            case 'soap':
-                $this->handleSoap();
-                break;
-        }
+        $this->execute();
 
         return $this;
     }
 
-    public function handleUrl()
+    public function execute()
     {
         $ch = curl_init();
         $opts = array(
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HEADER => true,
-            CURLOPT_URL => $this->url,
+            CURLOPT_URL => $this->url
         );
 
         $this->method = strtoupper($this->method);
@@ -249,28 +237,6 @@ class Call extends AbstractWidget
         }
 
         curl_close($ch);
-        $this->trigger('complete', array($this));
-    }
-
-    public function handleSoap()
-    {
-        if ($this->wsdl) {
-            $soap = new \SoapClient($this->url);
-        } else {
-            $soap = new \SoapClient(null, array(
-                'location' => $this->url,
-                'uri' => $this->url,
-                'trace' => 1
-            ));
-        }
-
-        try {
-            $this->trigger('beforeSend', array($this, $soap));
-            $response = $soap->__soapCall($this->method, $this->data);
-            $this->handleResponse($response, $soap);
-        } catch (\SoapFault $e) {
-            $this->trigger('error', array($this, 'exception', $e));
-        }
         $this->trigger('complete', array($this));
     }
 

@@ -465,24 +465,6 @@ class CallTest extends TestCase
         $this->assertCalledEvents(array('error'));
     }
 
-    public function testSoap()
-    {
-        $test = $this;
-        $this->call(array(
-            'url' => $this->url . 'soap.php',
-            'type' => 'soap',
-            'method' => 'add',
-            'wsdl' => false,
-            'dataType' => 'raw',
-            'success' => function($data) use($test) {
-
-            },
-            'error' => function(){
-
-            }
-        ));
-    }
-
     public function assertCalledEvents($events)
     {
         foreach ((array)$events as $event) {
