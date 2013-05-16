@@ -194,7 +194,7 @@ class Call extends AbstractWidget
         }
 
         if ($this->timeout >= 0) {
-            $opts[CURLOPT_TIMEOUT] = $this->timeout;
+            $opts[CURLOPT_TIMEOUT_MS] = $this->timeout;
         }
 
         if ($this->referer) {
@@ -232,18 +232,19 @@ class Call extends AbstractWidget
         $this->trigger('beforeSend', array($this, $ch));
         $response = curl_exec($ch);
 
-        $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $isSuccess = $statusCode >= 200 && $statusCode < 300 || $statusCode === 304;
-
         if (false !== $response) {
             list($this->responseHeader, $this->responseText) = explode("\r\n\r\n", $response, 2);
+            $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $isSuccess = $statusCode >= 200 && $statusCode < 300 || $statusCode === 304;
+            if ($isSuccess) {
+                $this->handleResponse($this->responseText, $ch);
+            } else {
+                $this->trigger('error', array($this, 'stateCode', curl_error($ch)));
+            }
+        } else {
+            $this->trigger('error', array($this, 'curl', curl_error($ch)));
         }
 
-        if ($isSuccess) {
-            $this->handleResponse($this->responseText, $ch);
-        } else {
-            $this->trigger('error', array($this, '', curl_error($ch)));
-        }
         curl_close($ch);
         $this->trigger('complete', array($this));
     }

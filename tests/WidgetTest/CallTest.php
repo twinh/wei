@@ -451,6 +451,20 @@ class CallTest extends TestCase
         );
     }
 
+    public function testTimeout()
+    {
+        $test = $this;
+        $this->call(array(
+            'url' => $this->url . 'url.php?wait=0.1',
+            'timeout' => 50,
+            'error' => function($call, $textStatus) use($test) {
+                $test->triggeredEvents[] = 'error';
+                $test->assertEquals('curl', $textStatus);
+            }
+        ));
+        $this->assertCalledEvents(array('error'));
+    }
+
     public function testSoap()
     {
         $test = $this;

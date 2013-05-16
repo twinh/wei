@@ -7,6 +7,7 @@ $request = $widget->request;
 $dataType = $widget->query('type');
 $test = $widget->query('test');
 $statusCode = $widget->query->getInt('code', 200);
+$wait = (float)$widget->query('wait');
 $result = null;
 
 switch ($test) {
@@ -77,6 +78,10 @@ switch ($test) {
             default:
                 $result = 'default text';
         }
+}
+
+if ($wait) {
+    usleep(1000000 * $wait);
 }
 
 $widget->response($result, $statusCode);
