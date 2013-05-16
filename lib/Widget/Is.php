@@ -120,7 +120,7 @@ class Is extends AbstractWidget
                 return $this->validateOne('callback', $input, $rule);
             // ($rule, $input)
             case is_array($rule):
-                return $this->createValidator()->__invoke(array(
+                return $this->createValidator()->valid(array(
                     'rules' => array(
                         'one' => $rule,
                     ),
@@ -162,7 +162,7 @@ class Is extends AbstractWidget
      */
     public function createValidator(array $options = array())
     {
-        return $this->widget->newInstance('validator', array(
+        return $this->widget->newInstance('validate', array(
             'is' => $this
         ) + $options);
     }
