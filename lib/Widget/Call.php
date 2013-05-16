@@ -27,13 +27,6 @@ class Call extends AbstractWidget
     protected $method = 'GET';
 
     /**
-     *  Not implemented yet
-     *
-     * @var bool
-     */
-    protected $cache;
-
-    /**
      * The content type in HTTP request header
      *
      * @var string
@@ -151,8 +144,6 @@ class Call extends AbstractWidget
      */
     protected $complete;
 
-    protected $statusText = 'success';
-
     /**
      * The response body string
      *
@@ -175,11 +166,17 @@ class Call extends AbstractWidget
     protected $responseHeaders;
 
     /**
+     * The cURL session
      *
      * @var resource
      */
     protected $ch;
 
+    /**
+     * The predefined cURL options
+     *
+     * @var array
+     */
     protected $curlOpts = array(
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_HEADER => true,
@@ -210,7 +207,28 @@ class Call extends AbstractWidget
 
     public function execute()
     {
-        $ch = curl_init();
+        $ch = $this->ch = curl_init();
+
+        curl_setopt_array($ch, $this->prepareCurlOpts());
+
+        $this->trigger('beforeSend', array($this, $ch));
+
+        $response = curl_exec($ch);
+
+        $this->handleResponse($response);
+
+        $this->trigger('complete', array($this, $ch));
+
+        curl_close($ch);
+    }
+
+    /**
+     * Prepare curl options
+     *
+     * @return array
+     */
+    protected function prepareCurlOpts()
+    {
         $opts = array();
         $url = $this->url;
 
@@ -289,34 +307,34 @@ class Call extends AbstractWidget
         }
 
         $opts[CURLOPT_URL] = $url;
-        curl_setopt_array($ch, $this->curlOpts + $opts);
-        $this->trigger('beforeSend', array($this, $ch));
-        $response = curl_exec($ch);
 
-        if (false !== $response) {
-            list($this->responseHeader, $this->responseText) = explode("\r\n\r\n", $response, 2);
-            $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            $isSuccess = $statusCode >= 200 && $statusCode < 300 || $statusCode === 304;
-            if ($isSuccess) {
-                $this->handleResponse($this->responseText, $ch);
-            } else {
-                $this->trigger('error', array($this, 'stateCode', curl_error($ch)));
-            }
-        } else {
-            $this->trigger('error', array($this, 'curl', curl_error($ch)));
-        }
-
-        $this->trigger('complete', array($this));
-        curl_close($ch);
+        return $this->curlOpts + $opts;
     }
 
     protected function handleResponse($response)
     {
-        $response = $this->parse($response, $this->dataType);
-        if ('success' != $response['state']) {
-            $this->trigger('error', array($this, $response['state'], $response['error']));
+        $ch = $this->ch;
+
+        if (false !== $response) {
+            // Split to two parts: header and body
+            list($this->responseHeader, $this->responseText) = explode("\r\n\r\n", $response, 2);
+            $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $isSuccess = $statusCode >= 200 && $statusCode < 300 || $statusCode === 304;
+            if ($isSuccess) {
+                $response = $this->parse($this->responseText, $this->dataType, $exception);
+                if (!$exception) {
+                    $this->trigger('success', array($response, $this));
+                } else {
+                    $this->trigger('error', array($this, 'parsererror', $exception));
+                }
+            } else {
+                preg_match('/[\d]{3} (.+?)\r/', $this->responseHeader, $matches);
+                $exception = new \ErrorException($matches[1], $statusCode);
+                $this->trigger('error', array($this, 'http', $exception));
+            }
         } else {
-            $this->trigger('success', array($response['data'], $this));
+            $exception = new \ErrorException(curl_error($ch), curl_errno($ch));
+            $this->trigger('error', array($this, 'curl', $exception));
         }
     }
 
@@ -327,42 +345,41 @@ class Call extends AbstractWidget
      * @param string $type
      * @return array
      */
-    protected function parse($data, $type)
+    protected function parse($data, $type, &$exception)
     {
         switch ($type) {
             case 'json' :
                 $data = json_decode($data);
                 if (null === $data && json_last_error() != JSON_ERROR_NONE) {
-                    return array('state' => 'parsererror', 'error' => json_last_error());
+                    $exception = new \ErrorException('Parser error', json_last_error());
                 }
-                return array('state' => 'success', 'data' => $data);
-
+                break;
 
             case 'xml' :
                 $data = @simplexml_load_string($data);
-                if (false === $data) {
-                    return array('state' => 'parsererror', 'data' => $data, 'error' => $this->createErrorException());
-                } else {
-                    return array('state' => 'success', 'data' => $data);
+                if (false === $data && $e = error_get_last()) {
+                    $exception = new \ErrorException($e['message'], $e['type'], 0, $e['file'], $e['line']);
                 }
+                break;
 
             case 'query' :
-                $output = array();
-                parse_str($data, $output);
-                return array('state' => 'success', 'data' => $output);
+                // Parse $data(string) and assign the result to $data(array)
+                parse_str($data, $data);
+                break;
 
             case 'serialize' :
                 $data = @unserialize($data);
-                if (error_get_last()) {
-                    return array('state' => 'parsererror', 'data' => false, 'error' => $this->createErrorException());
-                } else {
-                    return array('state' => 'success', 'data' => $data);
+                if (false === $data && $e = error_get_last()) {
+                    $exception = new \ErrorException($e['message'], $e['type'], 0, $e['file'], $e['line']);
                 }
+                break;
 
             case 'text':
             default :
-                return array('state' => 'success', 'data' => $data);
+                break;
         }
+
+        return $data;
     }
 
     /**
@@ -451,6 +468,16 @@ class Call extends AbstractWidget
     {
         $this->method = strtoupper($method);
         return $this;
+    }
+
+    /**
+     * Returns the cURL session
+     *
+     * @return source
+     */
+    public function getCh()
+    {
+        return $this->ch;
     }
 
     /**
@@ -576,13 +603,5 @@ class Call extends AbstractWidget
     {
         $this->complete = $fn;
         return $this;
-    }
-
-    protected function createErrorException()
-    {
-        if ($error = error_get_last()) {
-            return new \ErrorException($error['message'], $error['type'], 0, $error['file'], $error['line']);
-        }
-        return false;
     }
 }
