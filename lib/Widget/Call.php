@@ -179,7 +179,6 @@ class Call extends AbstractWidget
                 $opts[CURLOPT_CUSTOMREQUEST] = $this->method;
         }
 
-
         if ($this->data) {
             $data = http_build_query($this->data);
             if ($postData) {
@@ -210,6 +209,10 @@ class Call extends AbstractWidget
                 $cookies[] = $key . '=' . urlencode($value);
             }
             $opts[CURLOPT_COOKIE] = implode('; ', $cookies);
+        }
+
+        if ($this->contentType) {
+            $this->headers['Content-Type'] = $this->contentType;
         }
 
         // CURLOPT_RESOLVE
