@@ -537,7 +537,7 @@ class CallTest extends TestCase
         ));
         $this->assertCalledEvents(array('success'));
     }
-
+    
     public function assertCalledEvents($events)
     {
         foreach ((array)$events as $event) {
