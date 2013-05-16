@@ -240,32 +240,6 @@ class Call extends AbstractWidget
         $this->trigger('complete', array($this));
     }
 
-    public function get($url, $data, $callback)
-    {
-        return $this->processMethod($url, $data, $callback, 'GET');
-    }
-
-    public function post($url, $data, $callback)
-    {
-        return $this->processMethod($url, $data, $callback, 'POST');
-    }
-
-    protected function processMethod($url, $data, $callback, $method)
-    {
-        if (is_callable($data)) {
-            $callback = $data;
-            $method = $callback;
-            $data = array();
-        }
-
-        return $this(array(
-            'url' => $url,
-            'method' => $method,
-            'data' => $data,
-            'success' => $callback
-        ));
-    }
-
     protected function handleResponse($response, $object)
     {
         $response = $this->decode($response, $this->dataType);
@@ -364,6 +338,46 @@ class Call extends AbstractWidget
         }
 
         return $headers;
+    }
+
+    public function get($url, $data, $callback = null)
+    {
+        return $this->processMethod($url, $data, $callback, 'GET');
+    }
+
+    public function post($url, $data, $callback = null)
+    {
+        return $this->processMethod($url, $data, $callback, 'POST');
+    }
+
+    public function put($url, $data, $callback = null)
+    {
+        return $this->processMethod($url, $data, $callback, 'PUT');
+    }
+
+    public function delete($url, $data, $callback = null)
+    {
+        return $this->processMethod($url, $data, $callback, 'DELETE');
+    }
+
+    public function patch($url, $data, $callback = null)
+    {
+        return $this->processMethod($url, $data, $callback, 'PATCH');
+    }
+
+    protected function processMethod($url, $data, $callback, $method)
+    {
+        if (is_callable($data)) {
+            $callback = $data;
+            $data = array();
+        }
+
+        return $this(array(
+            'url' => $url,
+            'method' => $method,
+            'data' => $data,
+            'success' => $callback
+        ));
     }
 
     /**

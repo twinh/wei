@@ -451,6 +451,30 @@ class CallTest extends TestCase
         );
     }
 
+    /**
+     * @dataProvider providerForAliasMethods
+     */
+    public function testAliasMethod($method)
+    {
+        $test = $this;
+        $this->call->$method($this->url . 'url.php?test=methods', function($data) use($test, $method) {
+            $test->triggeredEvents[] = 'success';
+            $test->assertEquals($method, $data->method);
+        });
+        $this->assertCalledEvents(array('success'));
+    }
+
+    public function providerForAliasMethods()
+    {
+        return array(
+            array('GET'),
+            // array('POST'), ?
+            array('DELETE'),
+            array('PUT'),
+            array('PATCH')
+        );
+    }
+
     public function testTimeout()
     {
         $test = $this;
