@@ -37,6 +37,13 @@ class Call extends AbstractWidget
      */
     protected $headers = array();
 
+    /**
+     * The IP address for the host name in URL, NOT your client IP
+     *
+     * @var string
+     */
+    protected $ip;
+
     protected $time;
 
     protected $timeout;
@@ -203,6 +210,13 @@ class Call extends AbstractWidget
                 $cookies[] = $key . '=' . urlencode($value);
             }
             $opts[CURLOPT_COOKIE] = implode('; ', $cookies);
+        }
+
+        // CURLOPT_RESOLVE
+        if ($this->ip) {
+            $host = parse_url($this->url, PHP_URL_HOST);
+            $this->url = substr_replace($this->url, $this->ip, strpos($this->url, $host), strlen($host));
+            $this->headers['Host'] = $host;
         }
 
         // Custom headers will overwrite other options
