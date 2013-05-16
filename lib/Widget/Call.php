@@ -302,7 +302,7 @@ class Call extends AbstractWidget
         $this->trigger('complete', array($this));
     }
 
-    protected function handleResponse($response, $object)
+    protected function handleResponse($response)
     {
         $response = $this->decode($response, $this->dataType);
         if ('success' != $response['state']) {
@@ -312,7 +312,14 @@ class Call extends AbstractWidget
         }
     }
 
-    protected function decode($data, $type)
+    /**
+     * Parse data by specified type
+     *
+     * @param string $data
+     * @param string $type
+     * @return array
+     */
+    protected function parse($data, $type)
     {
         switch ($type) {
             case 'json' :
@@ -345,12 +352,17 @@ class Call extends AbstractWidget
                 }
 
             case 'text':
-            case 'raw' :
             default :
                 return array('state' => 'success', 'data' => $data);
         }
     }
 
+    /**
+     * Trigger a internal callback event
+     *
+     * @param string $name
+     * @param array $params
+     */
     protected function trigger($name, $params = array())
     {
         if (is_callable($this->$name)) {
@@ -369,6 +381,13 @@ class Call extends AbstractWidget
         return $this->responseText;
     }
 
+    /**
+     * Set request header value
+     *
+     * @param string $name
+     * @param string $value
+     * @return Call
+     */
     public function setRequestHeader($name, $value)
     {
         $this->headers[$name] = $value;
@@ -376,6 +395,12 @@ class Call extends AbstractWidget
         return $this;
     }
 
+    /**
+     * Returns request header value
+     *
+     * @param string $name
+     * @return string
+     */
     public function getResponseHeader($name)
     {
         if (!is_array($this->responseHeaders)) {
@@ -389,7 +414,13 @@ class Call extends AbstractWidget
         return isset($this->responseHeaders[$name]) ? $this->responseHeaders[$name] : null;
     }
 
-    public function parseHeader($header)
+    /**
+     * Parse the HTTP reponse header to key-value array
+     *
+     * @param string $header
+     * @return array
+     */
+    protected function parseHeader($header)
     {
         $headers = array();
         foreach (explode("\n", $header) as $line) {
@@ -402,31 +433,80 @@ class Call extends AbstractWidget
         return $headers;
     }
 
+    /**
+     * Execute a GET method request
+     *
+     * @param string $url
+     * @param array $data
+     * @param callabck $callback
+     * @return Call
+     */
     public function get($url, $data, $callback = null)
     {
         return $this->processMethod($url, $data, $callback, 'GET');
     }
 
+    /**
+     * Execute a POST method request
+     *
+     * @param string $url
+     * @param array $data
+     * @param callabck $callback
+     * @return Call
+     */
     public function post($url, $data, $callback = null)
     {
         return $this->processMethod($url, $data, $callback, 'POST');
     }
 
+    /**
+     * Execute a PUT method request
+     *
+     * @param string $url
+     * @param array $data
+     * @param callabck $callback
+     * @return Call
+     */
     public function put($url, $data, $callback = null)
     {
         return $this->processMethod($url, $data, $callback, 'PUT');
     }
 
+    /**
+     * Execute a DELETE method request
+     *
+     * @param string $url
+     * @param array $data
+     * @param callabck $callback
+     * @return Call
+     */
     public function delete($url, $data, $callback = null)
     {
         return $this->processMethod($url, $data, $callback, 'DELETE');
     }
 
+    /**
+     * Execute a PATCH method request
+     *
+     * @param string $url
+     * @param array $data
+     * @param callabck $callback
+     * @return Call
+     */
     public function patch($url, $data, $callback = null)
     {
         return $this->processMethod($url, $data, $callback, 'PATCH');
     }
 
+    /**
+     * Execute a specified method request
+     *
+     * @param string $url
+     * @param array $data
+     * @param callback $callback
+     * @param string $method
+     * @return Call
+     */
     protected function processMethod($url, $data, $callback, $method)
     {
         if (is_callable($data)) {
