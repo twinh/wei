@@ -354,13 +354,15 @@ class CallTest extends TestCase
             'cookies' => array(
                 'key' => 'value',
                 'bool' => true,
-                'invalid' => ';"'
+                'invalid' => ';"',
+                'space' => 'S P'
             ),
             'success' => function($data) use($test) {
                 $test->triggeredEvents[] = 'success';
                 $test->assertEquals('value', $data->key);
                 $test->assertEquals('1', $data->bool);
                 $test->assertEquals(';"', $data->invalid);
+                $test->assertEquals('S P', $data->space);
             }
         ));
         $this->assertCalledEvents(array('success'));
