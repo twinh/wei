@@ -175,6 +175,17 @@ class Call extends AbstractWidget
     protected $responseHeaders;
 
     /**
+     *
+     * @var resource
+     */
+    protected $ch;
+
+    protected $curlOpts = array(
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_HEADER => true,
+    );
+
+    /**
      * Instance a new call object and execute
      *
      * @param array|string $url A options array or the request URL
@@ -200,13 +211,16 @@ class Call extends AbstractWidget
     public function execute()
     {
         $ch = curl_init();
-        $opts = array(
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HEADER => true,
-            CURLOPT_URL => $this->url
-        );
+        $opts = array();
+        $url = $this->url;
 
-        $this->method = strtoupper($this->method);
+        // CURLOPT_RESOLVE
+        if ($this->ip) {
+            $host = parse_url($url, PHP_URL_HOST);
+            $url = substr_replace($url, $this->ip, strpos($url, $host), strlen($host));
+            $this->headers['Host'] = $host;
+        }
+
         switch ($this->method) {
             case 'GET' :
                 $postData = false;
@@ -234,10 +248,10 @@ class Call extends AbstractWidget
             if ($postData) {
                 $opts[CURLOPT_POSTFIELDS] = $data;
             } else {
-                if (false === strpos($this->url, '?')) {
-                    $opts[CURLOPT_URL] = $this->url . '?' . $data;
+                if (false === strpos($url, '?')) {
+                    $url .= '?' . $data;
                 } else {
-                    $opts[CURLOPT_URL] = $this->url . '&' . $data;
+                    $url .= '&' . $data;
                 }
             }
         }
@@ -265,13 +279,6 @@ class Call extends AbstractWidget
             $this->headers['Content-Type'] = $this->contentType;
         }
 
-        // CURLOPT_RESOLVE
-        if ($this->ip) {
-            $host = parse_url($this->url, PHP_URL_HOST);
-            $this->url = substr_replace($this->url, $this->ip, strpos($this->url, $host), strlen($host));
-            $this->headers['Host'] = $host;
-        }
-
         // Custom headers will overwrite other options
         if ($this->headers) {
             $headers = array();
@@ -281,7 +288,8 @@ class Call extends AbstractWidget
             $opts[CURLOPT_HTTPHEADER] = $headers;
         }
 
-        curl_setopt_array($ch, $opts);
+        $opts[CURLOPT_URL] = $url;
+        curl_setopt_array($ch, $this->curlOpts + $opts);
         $this->trigger('beforeSend', array($this, $ch));
         $response = curl_exec($ch);
 
@@ -298,13 +306,13 @@ class Call extends AbstractWidget
             $this->trigger('error', array($this, 'curl', curl_error($ch)));
         }
 
-        curl_close($ch);
         $this->trigger('complete', array($this));
+        curl_close($ch);
     }
 
     protected function handleResponse($response)
     {
-        $response = $this->decode($response, $this->dataType);
+        $response = $this->parse($response, $this->dataType);
         if ('success' != $response['state']) {
             $this->trigger('error', array($this, $response['state'], $response['error']));
         } else {
@@ -431,6 +439,18 @@ class Call extends AbstractWidget
         }
 
         return $headers;
+    }
+
+    /**
+     * Set request method
+     *
+     * @param string $method
+     * @return Call
+     */
+    public function setMethod($method)
+    {
+        $this->method = strtoupper($method);
+        return $this;
     }
 
     /**
