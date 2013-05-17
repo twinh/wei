@@ -734,3 +734,20 @@ input.focused {
   }
 
 }
+
+h1, h2, h3, .lead
+{
+  font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei UI", "Microsoft YaHei", SimHei, "\5B8B\4F53", simsun, sans-serif;
+  font-weight: normal;
+}
+.bs-docs-sidebar .nav .nav .nav > li > a {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 55px;
+  font-size: 90%;
+}
+.bs-docs-sidebar .nav .nav > li > a.nav-header {
+  margin-top: 15px;
+  margin-bottom: 0px;
+  font-weight: normal;
+}
