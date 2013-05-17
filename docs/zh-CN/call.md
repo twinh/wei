@@ -37,6 +37,15 @@ $widget->call(array(
 ));
 ```
 
+### 通过HTTP方法发送请求
+```php
+// 此处的`get`还可以是`post`, `delete`, `put`或`patch`,表示通过相应的HTTP方法发送请求
+$widget->get('http://example.com', function($data, $call){
+    // 成功时打印出服务器返回的结果
+    print_r($data);
+});
+```
+
 调用方式
 --------
 
@@ -97,8 +106,8 @@ $exception  | Exception    | 错误的异常对象,可通过该对象获取详�
 
 值          | 出现情况
 ------------|--------------
-curl        | cURL内部错误,如无法解析域名IP地址等
-http        | HTTP状态码错误,如404页面不存在,500内部错误等等
+curl        | cURL内部错误,如无法解析域名IP地址
+http        | HTTP状态码错误,如404页面不存在,500内部错误
 parsererror | 数据解析错误,如返回的数据不是正确的json格式
 
 #### complete($call, $ch)

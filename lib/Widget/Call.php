@@ -103,6 +103,14 @@ class Call extends AbstractWidget
     /**
      * An event triggered after prepared the data and before the process the request
      *
+     * ```php
+     * $widget->call(array(
+     *     'beforeSend' => function(Call $call, $ch){
+     *
+     *     }
+     * ));
+     * ```
+     *
      * @var callback
      */
     protected $beforeSend;
@@ -142,7 +150,7 @@ class Call extends AbstractWidget
      *
      * ```php
      * $widget->call(array(
-     *     'complete' => function(Call $call){
+     *     'complete' => function(Call $call, $ch){
      *
      *     }
      * ));
