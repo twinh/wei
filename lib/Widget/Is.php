@@ -120,7 +120,7 @@ class Is extends AbstractWidget
                 return $this->validateOne('callback', $input, $rule);
             // ($rule, $input)
             case is_array($rule):
-                return $this->createValidator()->valid(array(
+                $validator = $this->validate(array(
                     'rules' => array(
                         'one' => $rule,
                     ),
@@ -128,6 +128,7 @@ class Is extends AbstractWidget
                         'one' => $input,
                     )
                 ));
+                return $validator->isValid();
             default:
                 throw new UnexpectedTypeException($rule, 'string, array or \Closure');
         }
@@ -152,19 +153,6 @@ class Is extends AbstractWidget
         } else {
             return false;
         }
-    }
-
-    /**
-     * Create a new validator instance
-     *
-     * @param array $options
-     * @return Validator
-     */
-    public function createValidator(array $options = array())
-    {
-        return $this->widget->newInstance('validate', array(
-            'is' => $this
-        ) + $options);
     }
 
     /**

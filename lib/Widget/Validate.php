@@ -142,11 +142,11 @@ class Validate extends AbstractWidget
      * Create a new validator and validate by specified options
      *
      * @param array $options
-     * @return Validator
+     * @return Validate
      */
     public function __invoke(array $options = array())
     {
-        $validator = $this->is->createValidator($options);
+        $validator = new self($options + get_object_vars($this));
 
         $validator->valid($options);
 
@@ -164,10 +164,6 @@ class Validate extends AbstractWidget
     public function valid($options = array())
     {
         $options && $this->setOption($options);
-
-        if (empty($this->rules)) {
-            throw new Exception\InvalidArgumentException('Validation rules should not be empty.');
-        }
 
         // Initialize the validation result to be true
         $this->result = true;
@@ -337,7 +333,7 @@ class Validate extends AbstractWidget
      *
      * @param string $field The field name
      * @param string $rule The rule name
-     * @return Validator
+     * @return Validate
      */
     public function addValidRule($field, $rule)
     {
@@ -351,7 +347,7 @@ class Validate extends AbstractWidget
      *
      * @param string $field The field name
      * @param string $rule The rule name
-     * @return Validator
+     * @return Validate
      */
     public function addInvalidRule($field, $rule)
     {
@@ -501,7 +497,7 @@ class Validate extends AbstractWidget
      * Sets data for validation
      *
      * @param array|object $data
-     * @return Validator
+     * @return Validate
      */
     public function setData($data)
     {
@@ -642,7 +638,7 @@ class Validate extends AbstractWidget
      *
      * @param string $field
      * @param string $rule
-     * @return Validator\AbstractRule
+     * @return Validate\AbstractRule
      */
     public function getRuleValidator($field, $rule)
     {

@@ -85,7 +85,7 @@ require_once 'WidgetInterface.php';
  * @method   mixed      twig($name = null, $vars = array()) Returns \Twig_Environment object or render a Twig template
  *
  * Validation
- * @method   Validator  validate(array $option) Create a new validator and validate by specified options
+ * @method   Validate   validate(array $option) Create a new validator and validate by specified options
  * @property Is         $is The validator manager, use to validate input quickly, create validator and rule validator
  *
  * Event
