@@ -249,7 +249,7 @@ class CallTest extends TestCase
 
     public function testGetJson()
     {
-         $test = $this;
+        $test = $this;
         $this->call->getJson($this->url . '?type=json', function($data) use($test) {
             $test->triggeredEvents[] = 'success';
             $test->assertEquals(0, $data->code);
