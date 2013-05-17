@@ -27,43 +27,12 @@
       $('.bs-docs-top').affix()
     }, 100)
 
-    // make code pretty
-    window.prettyPrint && prettyPrint()
-
     // add-ons
     $('.add-on :checkbox').on('click', function () {
       var $this = $(this)
         , method = $this.attr('checked') ? 'addClass' : 'removeClass'
       $(this).parents('.add-on')[method]('active')
     })
-
-    // add tipsies to grid for scaffolding
-    if ($('#grid-system').length) {
-      $('#grid-system').tooltip({
-          selector: '.show-grid > [class*="span"]'
-        , title: function () { return $(this).width() + 'px' }
-      })
-    }
-
-    // tooltip demo
-    $('.tooltip-demo').tooltip({
-      selector: "a[data-toggle=tooltip]"
-    })
-
-    $('.tooltip-test').tooltip()
-    $('.popover-test').popover()
-
-    $('.bs-docs-navbar').tooltip({
-      selector: "a[data-toggle=tooltip]",
-      container: ".bs-docs-navbar .nav"
-    })
-
-    // popover demo
-    $("a[data-toggle=popover]")
-      .popover()
-      .click(function(e) {
-        e.preventDefault()
-      })
 
     // button state demo
     $('#fat-btn')
@@ -74,9 +43,6 @@
           btn.button('reset')
         }, 3000)
       })
-
-    // carousel demo
-    $('.bs-docs-carousel-example').carousel()
 
     // javascript build logic
     var inputsComponent = $("#components.download input")
@@ -129,37 +95,4 @@
       })
     })
   })
-
-// Modified from the original jsonpi https://github.com/benvinegar/jquery-jsonpi
-$.ajaxTransport('jsonpi', function(opts, originalOptions, jqXHR) {
-  var url = opts.url;
-
-  return {
-    send: function(_, completeCallback) {
-      var name = 'jQuery_iframe_' + jQuery.now()
-        , iframe, form
-
-      iframe = $('<iframe>')
-        .attr('name', name)
-        .appendTo('head')
-
-      form = $('<form>')
-        .attr('method', opts.type) // GET or POST
-        .attr('action', url)
-        .attr('target', name)
-
-      $.each(opts.params, function(k, v) {
-
-        $('<input>')
-          .attr('type', 'hidden')
-          .attr('name', k)
-          .attr('value', typeof v == 'string' ? v : JSON.stringify(v))
-          .appendTo(form)
-      })
-
-      form.appendTo('body').submit()
-    }
-  }
-})
-
 }(window.jQuery)
