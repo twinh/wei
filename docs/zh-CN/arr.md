@@ -8,8 +8,6 @@ Arr
 
 ### 获取数组或对象中指定键名的值
 ```php
-<?php
-
 class Getter
 {
     public function getKey()

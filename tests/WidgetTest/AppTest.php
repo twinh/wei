@@ -12,6 +12,7 @@ class AppTest extends TestCase
         parent::setUp();
 
         $this->app
+            ->setOption('controllerFormat', '%module%\Controller\\%controller%Controller')
             // Change avaiable modules
             ->setOption('modules', array('WidgetTest\AppTest'))
             // Set default module

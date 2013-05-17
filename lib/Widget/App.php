@@ -51,12 +51,10 @@ class App extends AbstractWidget
 
     /**
      * The name of controller
-     /
+     *
      * @var string
      */
     protected $controller;
-
-    protected $controllerClass = '';
 
     /**
      * The name of action
@@ -64,6 +62,13 @@ class App extends AbstractWidget
      * @var string
      */
     protected $action;
+
+    /**
+     * The controller class format
+     *
+     * @var string
+     */
+    protected $controllerFormat = '%module%\%controller%Controller';
 
     /**
      * The controller instances
@@ -287,7 +292,11 @@ class App extends AbstractWidget
             return false;
         }
 
-        $class = ucfirst($module) . '\Controller\\' . ucfirst($controller) . 'Controller';
+        $class = str_replace(
+            array('%module%', '%controller%'),
+            array(ucfirst($module), ucfirst($controller)),
+            $this->controllerFormat
+        );
 
         if (isset($this->controllers[$class])) {
             return $this->controllers[$class];
