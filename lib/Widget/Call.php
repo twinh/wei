@@ -84,7 +84,7 @@ class Call extends AbstractWidget
      *
      * @var string
      */
-    protected $dataType = 'json';
+    protected $dataType = 'text';
 
     /**
      * The custom HTTP referer string
@@ -359,7 +359,7 @@ class Call extends AbstractWidget
                 if (!$exception) {
                     $this->trigger('success', array($response, $this));
                 } else {
-                    $this->trigger('error', array($this, 'parsererror', $exception));
+                    $this->trigger('error', array($this, 'parser', $exception));
                 }
             } else {
                 preg_match('/[\d]{3} (.+?)\r/', $this->responseHeader, $matches);
@@ -521,11 +521,25 @@ class Call extends AbstractWidget
      * @param string $url
      * @param array $data
      * @param callabck $callback
+     * @param string $dataType
      * @return Call
      */
-    public function get($url, $data, $callback = null)
+    public function get($url, $data, $callback = null, $dataType = null)
     {
-        return $this->processMethod($url, $data, $callback, 'GET');
+        return $this->processMethod($url, $data, $callback, $dataType, 'GET');
+    }
+
+    /**
+     * Execute a GET method request and parse response to json data
+     *
+     * @param string $url
+     * @param array $data
+     * @param callabck $callback
+     * @return Call
+     */
+    public function getJson($url, $data, $callback = null)
+    {
+        return $this->processMethod($url, $data, $callback, 'json', 'GET');
     }
 
     /**
@@ -534,11 +548,12 @@ class Call extends AbstractWidget
      * @param string $url
      * @param array $data
      * @param callabck $callback
+     * @param string $dataType
      * @return Call
      */
-    public function post($url, $data, $callback = null)
+    public function post($url, $data, $callback = null, $dataType = null)
     {
-        return $this->processMethod($url, $data, $callback, 'POST');
+        return $this->processMethod($url, $data, $callback, $dataType, 'POST');
     }
 
     /**
@@ -547,11 +562,12 @@ class Call extends AbstractWidget
      * @param string $url
      * @param array $data
      * @param callabck $callback
+     * @param string $dataType
      * @return Call
      */
-    public function put($url, $data, $callback = null)
+    public function put($url, $data, $callback = null, $dataType = null)
     {
-        return $this->processMethod($url, $data, $callback, 'PUT');
+        return $this->processMethod($url, $data, $callback, $dataType, 'PUT');
     }
 
     /**
@@ -560,11 +576,12 @@ class Call extends AbstractWidget
      * @param string $url
      * @param array $data
      * @param callabck $callback
+     * @param string $dataType
      * @return Call
      */
-    public function delete($url, $data, $callback = null)
+    public function delete($url, $data, $callback = null, $dataType = null)
     {
-        return $this->processMethod($url, $data, $callback, 'DELETE');
+        return $this->processMethod($url, $data, $callback, $dataType, 'DELETE');
     }
 
     /**
@@ -573,11 +590,12 @@ class Call extends AbstractWidget
      * @param string $url
      * @param array $data
      * @param callabck $callback
+     * @param string $dataType
      * @return Call
      */
-    public function patch($url, $data, $callback = null)
+    public function patch($url, $data, $callback = null, $dataType = null)
     {
-        return $this->processMethod($url, $data, $callback, 'PATCH');
+        return $this->processMethod($url, $data, $callback, $dataType, 'PATCH');
     }
 
     /**
@@ -589,9 +607,10 @@ class Call extends AbstractWidget
      * @param string $method
      * @return Call
      */
-    protected function processMethod($url, $data, $callback, $method)
+    protected function processMethod($url, $data, $callback, $dataType, $method)
     {
         if (is_callable($data)) {
+            $dataType = $dataType ?: $callback;
             $callback = $data;
             $data = array();
         }
@@ -599,6 +618,7 @@ class Call extends AbstractWidget
         return $this(array(
             'url' => $url,
             'method' => $method,
+            'dataType' => $dataType,
             'data' => $data,
             'success' => $callback
         ));

@@ -11,6 +11,7 @@ Call
 $widget->call(array(
     'url' => 'http://jsfiddle.net/echo/json/',
     'method' => 'POST',
+    'dataType' => 'json',
     'data' => array(
         'json' => json_encode(array(
             'key' => 'value'
@@ -61,7 +62,7 @@ gloabl      | bool         | true    | 是否使用全局配置选项
 headers     | array        | array   | 要发送的HTTP头
 ip          | string       | 无      | 要请求的URL地址中域名的IP地址,注意不是您的服务器IP地址
 timeout     | int          | 0       | 整个请求的最大运行时间,单位是毫秒,默认是无限制
-dataType    | string       | json    | 请求完成后,要对返回数据解析的类型
+dataType    | string       | text    | 请求完成后,要对返回数据解析的类型
 referer     | string       | 无      | 请求HTTP头中的referer值
 userAgent   | string       | 无      | 请求HTTP头中的userAgent值
 beforeSend  | callback     | 无      | 在发送请求前触发的回调,可通过该回调更改任意配置
@@ -149,32 +150,35 @@ $ch         | resource     | cUrl会话的变量
 #### call->complete($callback)
 设置请求完成后触发的回调
 
-#### call->get($url, $data, $callback)
+#### call->get($url, $data, $callback, $dataType)
 通过GET方式发送带数据的请求,成功时触发`$callback`回调
 
-#### call->get($url, $callback)
+#### call->get($url, $callback, $dataType)
 通过GET方式发送请求,成功时触发`$callback`回调
 
-#### call->post($url, $data, $callback)
+#### call->getJson($url, $callback)
+通过GET方式发送请求,并以JSON格式解析返回数据,成功时触发`$callback`回调
+
+#### call->post($url, $data, $callback, $dataType)
 通过POST方式发送带数据的请求,成功时触发`$callback`回调
 
-#### call->post($url, $callback)
+#### call->post($url, $callback, $dataType)
 通过POST方式发送请求,成功时触发`$callback`回调
 
-#### call->put($url, $data, $callback)
+#### call->put($url, $data, $callback, $dataType)
 通过PUT方式发送带数据的请求,成功时触发`$callback`回调
 
-#### call->put($url, $callback)
+#### call->put($url, $callback, $dataType)
 通过PUT方式发送请求,成功时触发`$callback`回调
 
-#### call->delete($url, $data, $callback)
+#### call->delete($url, $data, $callback, $dataType)
 通过DELETE方式发送带数据的请求,成功时触发`$callback`回调
 
-#### call->delete($url, $callback)
+#### call->delete($url, $callback, $dataType)
 通过DELETE方式发送请求,成功时触发`$callback`回调
 
-#### call->patch($url, $data, $callback)
+#### call->patch($url, $data, $callback, $dataType)
 通过PATCH方式发送带数据的请求,成功时触发`$callback`回调
 
-#### call->patch($url, $callback)
+#### call->patch($url, $callback, $dataType)
 通过PATCH方式发送请求,成功时触发`$callback`回调
