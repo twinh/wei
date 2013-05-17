@@ -90,6 +90,9 @@ h1, h2, h3, .lead
       </ul>
     </li>
     <li>
+      <a href="#call">接口调用</a>
+    </li>
+    <li>
       <a href="#cache-section">缓存</a>
       <ul class="nav">
         <li><a href="#cache">Cache</a></li>
@@ -885,7 +888,7 @@ if ($widget-&gt;sessio('verfiyCode') == $widget-&gt;post('verfiyCode')) {
 
 <h4>session-&gt;setInis(array $inis)</h4>
 
-<p>设置会话相关的ini配置,配置名称会自定加上<code>session.</code>前缀<br><br>
+<p>设置会话相关的ini配置,配置名称会自定加上<code>session.</code>前缀<br>
 详细配置可以查看<a href="http://php.net/manual/en/session.configuration.php">http://php.net/manual/en/session.configuration.php</a></p>
 </body></html>
 
@@ -1598,6 +1601,389 @@ $widget-&gt;json('success', 0, array(), true);
 
   </section>
 
+<!-- call
+  ================================================== -->
+  <section id="call">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1>Call</h1>
+
+<p>象jQuery Ajax一样调用您的接口</p>
+
+<h2>案例</h2>
+
+<h3>向接口<code>http://jsfiddle.net/echo/json/</code>发送POST请求并输出返回的json数据</h3>
+
+<pre><code class="php">$widget-&gt;call(array(
+    'url' =&gt; 'http://jsfiddle.net/echo/json/',
+    'method' =&gt; 'POST',
+    'data' =&gt; array(
+        'json' =&gt; json_encode(array(
+            'key' =&gt; 'value'
+        ))
+    ),
+    'success' =&gt; function($data){
+        // 输出value
+        echo $data-&gt;key;
+    }
+));
+</code></pre>
+
+<h3>处理请求错误</h3>
+
+<pre><code class="php">$widget-&gt;call(array(
+    'url' =&gt; 'http://404.php.net', // 不存在的URL地址
+    'error' =&gt; function($call, $status, $exception){
+        // 输出错误的类型,如`curl`,完全错误类型请查看选项
+        echo $status;
+
+        // 输出完整的错误信息,如`Couldn't resolve host '404.php.net'`
+        echo $exception-&gt;getMessage();
+    }
+));
+</code></pre>
+
+<h3>通过HTTP方法发送请求</h3>
+
+<pre><code class="php">// 此处的`get`还可以是`post`, `delete`, `put`或`patch`,表示通过相应的HTTP方法发送请求
+$widget-&gt;get('http://example.com', function($data, $call){
+    // 成功时打印出服务器返回的结果
+    print_r($data);
+});
+</code></pre>
+
+<h2>调用方式</h2>
+
+<h3>选项</h3>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>method</td>
+<td>string</td>
+<td>GET</td>
+<td>HTTP的请求方式,可以是<code>GET</code>, <code>POST</code>, <code>DELETE</code>, <code>PUT</code>, <code>PATCH</code>或任意其他服务器支持的方式</td>
+</tr>
+<tr>
+<td>contentType</td>
+<td>string</td>
+<td>application/x-www-form-urlencoded; charset=UTF-8</td>
+<td>HTTP请求头内容类型</td>
+</tr>
+<tr>
+<td>cookies</td>
+<td>array</td>
+<td>array()</td>
+<td>cookie数组,key是cookie的名称,value是cookie的值,cookie的值只能是字符串</td>
+</tr>
+<tr>
+<td>data</td>
+<td>array,string</td>
+<td>array()</td>
+<td>要发送到服务器的数据</td>
+</tr>
+<tr>
+<td>gloabl</td>
+<td>bool</td>
+<td>true</td>
+<td>是否使用全局配置选项</td>
+</tr>
+<tr>
+<td>headers</td>
+<td>array</td>
+<td>array</td>
+<td>要发送的HTTP头</td>
+</tr>
+<tr>
+<td>ip</td>
+<td>string</td>
+<td>无</td>
+<td>要请求的URL地址中域名的IP地址,注意不是您的服务器IP地址</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>int</td>
+<td>0</td>
+<td>整个请求的最大运行时间,单位是毫秒,默认是无限制</td>
+</tr>
+<tr>
+<td>dataType</td>
+<td>string</td>
+<td>json</td>
+<td>请求完成后,要对返回数据解析的类型</td>
+</tr>
+<tr>
+<td>referer</td>
+<td>string</td>
+<td>无</td>
+<td>请求HTTP头中的referer值</td>
+</tr>
+<tr>
+<td>userAgent</td>
+<td>string</td>
+<td>无</td>
+<td>请求HTTP头中的userAgent值</td>
+</tr>
+<tr>
+<td>beforeSend</td>
+<td>callback</td>
+<td>无</td>
+<td>在发送请求前触发的回调,可通过该回调更改任意配置</td>
+</tr>
+<tr>
+<td>success</td>
+<td>callback</td>
+<td>无</td>
+<td>请求并解析数据成功后触发的回调</td>
+</tr>
+<tr>
+<td>error</td>
+<td>callback</td>
+<td>无</td>
+<td>请求或解析失败后触发的回调,可用于记录日志,展示错误信息等</td>
+</tr>
+<tr>
+<td>complete</td>
+<td>callback</td>
+<td>无</td>
+<td>请求完成后,不论是否成功都触发的回调,可用于数据记录等</td>
+</tr>
+</tbody>
+</table>
+<h4>beforeSend($call, $ch)</h4>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$call</td>
+<td>Widget\Call</td>
+<td>当前的Call对象</td>
+</tr>
+<tr>
+<td>$ch</td>
+<td>resource</td>
+<td>cUrl会话的变量</td>
+</tr>
+</tbody>
+</table>
+<h4>success($data, $call)</h4>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$data</td>
+<td>mixed</td>
+<td>解析过的HTTP响应数据,数据类型与<code>dataType</code>选项相关,如下表所示</td>
+</tr>
+<tr>
+<td>$call</td>
+<td>\Widget\Call</td>
+<td>当前的Call对象</td>
+</tr>
+</tbody>
+</table>
+<h5>
+<code>dataType</code>的值与$data返回的类型</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>dataType</th>
+<th>返回数据类型</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>json</td>
+<td>stdClass</td>
+</tr>
+<tr>
+<td>xml</td>
+<td>SimpleXMLElement</td>
+</tr>
+<tr>
+<td>query</td>
+<td>array</td>
+</tr>
+<tr>
+<td>serialize</td>
+<td>任意PHP合法类型</td>
+</tr>
+<tr>
+<td>text</td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<h4>error($call, $textStatus, $exception)</h4>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$call</td>
+<td>Widget\Call</td>
+<td>当前的Call对象</td>
+</tr>
+<tr>
+<td>$textStatus</td>
+<td>string</td>
+<td>简单的错误说明,可能出现的值及出现情况如下表</td>
+</tr>
+<tr>
+<td>$exception</td>
+<td>Exception</td>
+<td>错误的异常对象,可通过该对象获取详细的错误信息</td>
+</tr>
+</tbody>
+</table>
+<h5>
+<code>$textStatus</code>的值与出现的情况</h5>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>值</th>
+<th>出现情况</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>curl</td>
+<td>cURL内部错误,如无法解析域名IP地址</td>
+</tr>
+<tr>
+<td>http</td>
+<td>HTTP状态码错误,如404页面不存在,500内部错误</td>
+</tr>
+<tr>
+<td>parsererror</td>
+<td>数据解析错误,如返回的数据不是正确的json格式</td>
+</tr>
+</tbody>
+</table>
+<h4>complete($call, $ch)</h4>
+
+<table class="table table-bordered table-striped">
+<thead><tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$call</td>
+<td>Widget\Call</td>
+<td>当前的Call对象</td>
+</tr>
+<tr>
+<td>$ch</td>
+<td>resource</td>
+<td>cUrl会话的变量</td>
+</tr>
+</tbody>
+</table>
+<h3>方法</h3>
+
+<h4>call($options = array())</h4>
+
+<p>初始化一个新的Call对象,并执行HTTP请求</p>
+
+<h4>call($url, $options = array())</h4>
+
+<p>根据给定的URL地址,初始化一个Call对象,并执行HTTP请求</p>
+
+<h4>call-&gt;getCh()</h4>
+
+<p>获取cURL的资源变量</p>
+
+<h4>call-&gt;getResponseHeader($name)</h4>
+
+<p>获取HTTP响应头的值</p>
+
+<h4>call-&gt;getResponseText()</h4>
+
+<p>获取HTTP响应的文本数据</p>
+
+<h4>call-&gt;setMethod($method)</h4>
+
+<p>设置HTTP的请求方式</p>
+
+<h4>call-&gt;setRequestHeader($name, $value)</h4>
+
+<p>设置HTTP请求头的值</p>
+
+<h4>call-&gt;success($callback)</h4>
+
+<p>设置请求并解析数据成功后触发的回调</p>
+
+<h4>call-&gt;error($callback)</h4>
+
+<p>设置请求或解析失败后触发的回调</p>
+
+<h4>call-&gt;complete($callback)</h4>
+
+<p>设置请求完成后触发的回调</p>
+
+<h4>call-&gt;get($url, $data, $callback)</h4>
+
+<p>通过GET方式发送带数据的请求,成功时触发<code>$callback</code>回调</p>
+
+<h4>call-&gt;get($url, $callback)</h4>
+
+<p>通过GET方式发送请求,成功时触发<code>$callback</code>回调</p>
+
+<h4>call-&gt;post($url, $data, $callback)</h4>
+
+<p>通过POST方式发送带数据的请求,成功时触发<code>$callback</code>回调</p>
+
+<h4>call-&gt;post($url, $callback)</h4>
+
+<p>通过POST方式发送请求,成功时触发<code>$callback</code>回调</p>
+
+<h4>call-&gt;put($url, $data, $callback)</h4>
+
+<p>通过PUT方式发送带数据的请求,成功时触发<code>$callback</code>回调</p>
+
+<h4>call-&gt;put($url, $callback)</h4>
+
+<p>通过PUT方式发送请求,成功时触发<code>$callback</code>回调</p>
+
+<h4>call-&gt;delete($url, $data, $callback)</h4>
+
+<p>通过DELETE方式发送带数据的请求,成功时触发<code>$callback</code>回调</p>
+
+<h4>call-&gt;delete($url, $callback)</h4>
+
+<p>通过DELETE方式发送请求,成功时触发<code>$callback</code>回调</p>
+
+<h4>call-&gt;patch($url, $data, $callback)</h4>
+
+<p>通过PATCH方式发送带数据的请求,成功时触发<code>$callback</code>回调</p>
+
+<h4>call-&gt;patch($url, $callback)</h4>
+
+<p>通过PATCH方式发送请求,成功时触发<code>$callback</code>回调</p>
+</body></html>
+
+  </section>
+
 <!-- cache-section
   ================================================== -->
   <section id="cache-section">
@@ -1605,7 +1991,7 @@ $widget-&gt;json('success', 0, array(), true);
 <html><body>
 <h1>缓存</h1>
 
-<p>Widget提供了多个PHP流行的后端缓存.这里有apc,redis,memcached等主流缓存,也有简单的文件缓存fileCache,<br>
+<p>Widget提供了多个PHP流行的后端缓存.这里有apc,redis,memcached等主流缓存,也有简单的文件缓存fileCache,
 可用于简单数据分析的数据库缓存dbCache等等.所有缓存拥有一致的接口,可以随意替换.</p>
 
 <h2>使用案例</h2>
@@ -2080,13 +2466,17 @@ $widget-&gt;arrayCache('key');
 
 <h4>arrayCache ($key, $value)</h4>
 
-<p>设置缓存的值<br><code>php<br>
-$widget-&gt;arrayCache('key', 'value');<br></code></p>
+<p>设置缓存的值
+<code>php
+$widget-&gt;arrayCache('key', 'value');
+</code></p>
 
 <h4>arrayCache($key)</h4>
 
-<p>获取指定名称的缓存<br><code>php<br>
-$widget-&gt;arrayCache('name');<br></code></p>
+<p>获取指定名称的缓存
+<code>php
+$widget-&gt;arrayCache('name');
+</code></p>
 
 <h4>arrayCache-&gt;set($key, $value)</h4>
 
@@ -3350,8 +3740,9 @@ $widget-&gt;redis('key');
 </ul>
 </li>
 </ul>
-<p>Widget验证器是参考<a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/">jQuery Validation</a><br>
-开发的数据验证器,她与<code>jQuery Validation</code>有着很多相似的地方,所以如果你使用过<br><code>jQuery Validation</code>,使用Widget验证器将非常容易上手.</p>
+<p>Widget验证器是参考<a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/">jQuery Validation</a>
+开发的数据验证器,她与<code>jQuery Validation</code>有着很多相似的地方,所以如果你使用过
+<code>jQuery Validation</code>,使用Widget验证器将非常容易上手.</p>
 
 <h5>参数详细说明</h5>
 
@@ -3407,14 +3798,15 @@ $widget-&gt;validate(array(
 
 <h5>rules</h5>
 
-<p>验证规则数组.键名是验证的数据项名称,值是验证规则.验证规则可以字符串,表示一项验证规则,也可以是数组<br>
+<p>验证规则数组.键名是验证的数据项名称,值是验证规则.验证规则可以字符串,表示一项验证规则,也可以是数组
 ,表示多项验证规则.</p>
 
-<p><strong>注意:</strong>验证规则数组有一点与<code>jQuery Validation</code>不同,默认情况下,<code>jQuery Validation</code>的所有<br>
-数据项都是 <strong>可选</strong> 的,但是Widget验证器的所有数据项都是 <strong>必选</strong> 的.如果某一个数据项是选填的,只需增<br>
+<p><strong>注意:</strong>验证规则数组有一点与<code>jQuery Validation</code>不同,默认情况下,<code>jQuery Validation</code>的所有
+数据项都是 <strong>可选</strong> 的,但是Widget验证器的所有数据项都是 <strong>必选</strong> 的.如果某一个数据项是选填的,只需增
 加<code>required =&gt; false</code>的验证规则</p>
 
-<p>在验证过程中,验证器会根据验证规则的名称,检查对应的规则验证器是否存在,如<code>email</code>规则将被转换为<br><code>\Widget\Validator\Email</code>类,如果类不存在,将抛出<code>\Widget\Exception\InvalidArgumentException</code><br>
+<p>在验证过程中,验证器会根据验证规则的名称,检查对应的规则验证器是否存在,如<code>email</code>规则将被转换为
+<code>\Widget\Validator\Email</code>类,如果类不存在,将抛出<code>\Widget\Exception\InvalidArgumentException</code>
 异常提醒开发人员规则不存在.如果类存在,将初始化该类.然后,验证器组织验证规则提供的参数,供规则验证器验证.</p>
 
 <pre><code class="php">$widget-&gt;validate(array(
@@ -3504,34 +3896,34 @@ $widget-&gt;validate(array(
 
 <p><strong>注意:</strong>如果未提供数据项名称,错误信息将以<code>该项</code>作为验证数据项的名称,完整的错误信息例如<code>该项不能为空</code></p>
 
-<p><strong>代码范例</strong><br>
-```php<br>
-$widget-&gt;validate(array(<br>
-    'rules' =&gt; array(<br>
-        'name' =&gt; 'required',<br>
-        'email' =&gt; array(<br>
-            'required' =&gt; true,<br>
-            'email' =&gt; true<br>
-        ),<br>
-        'avatar' =&gt; array(<br>
-            'image' =&gt; array(<br>
-                'maxWidth' =&gt; 200,<br>
-                'maxHeight' =&gt; 200<br>
-            )<br>
-        )<br>
-    ),<br>
-    // 指定验证数据项的名称<br>
-    'names' =&gt; array(<br>
-        'name' =&gt; '用户名',<br>
-        'email' =&gt; '邮箱',<br>
-        'avatar' =&gt; '头像'<br>
-    )<br>
+<p><strong>代码范例</strong>
+```php
+$widget-&gt;validate(array(
+    'rules' =&gt; array(
+        'name' =&gt; 'required',
+        'email' =&gt; array(
+            'required' =&gt; true,
+            'email' =&gt; true
+        ),
+        'avatar' =&gt; array(
+            'image' =&gt; array(
+                'maxWidth' =&gt; 200,
+                'maxHeight' =&gt; 200
+            )
+        )
+    ),
+    // 指定验证数据项的名称
+    'names' =&gt; array(
+        'name' =&gt; '用户名',
+        'email' =&gt; '邮箱',
+        'avatar' =&gt; '头像'
+    )
 ));</p>
 
-<p>// 输出信息类似:<br>
-// 用户名不能为空<br>
-// 邮箱不能为空<br>
-// 头像宽度不能超过200px<br>
+<p>// 输出信息类似:
+// 用户名不能为空
+// 邮箱不能为空
+// 头像宽度不能超过200px
 ```</p>
 
 <h5>ruleValid</h5>
@@ -3592,7 +3984,7 @@ $widget-&gt;validate(array(<br>
 <li>$field <code>string</code> 当前验证的数据项名称</li>
 <li>$validator <code>Widget\Validator</code> 验证器对象</li>
 </ul>
-<p><code>ruleInvalid</code>与<code>ruleValid</code>的行为一致.<br>
+<p><code>ruleInvalid</code>与<code>ruleValid</code>的行为一致.
 同样的,如果<code>ruleInvalid</code>事件返回false,验证器将直接中断后续所有验证流程,直接返回验证结果.</p>
 
 <p><strong>代码范例</strong></p>
@@ -3776,51 +4168,51 @@ $widget-&gt;validate(array(<br>
 <hr>
 <h5>代码范例</h5>
 
-<p>检查数据是否符合指定的验证规则<br>
-```php<br>
+<p>检查数据是否符合指定的验证规则
+```php
 &lt;?php</p>
 
-<p>$validator = $widget-&gt;validate(array(<br>
-    'data' =&gt; array(<br>
-        'username' =&gt; 'tw',<br>
-        'email' =&gt; 'invalid',<br>
-    ),<br>
-    'rules' =&gt; array(<br>
-        'username' =&gt; array(<br>
-            'minLength' =&gt; 3,<br>
-            'alnum' =&gt; true,<br>
-        ),<br>
-        'email' =&gt; array(<br>
-            'email' =&gt; true<br>
-        )<br>
-    ),<br>
-    'names' =&gt; array(<br>
-        'username' =&gt; '用户名',<br>
-        'email' =&gt; '邮箱'<br>
-    ),<br>
-    'messages' =&gt; array(<br>
-        'username' =&gt; array(<br>
-            'minLength' =&gt; '%name%的长度必须大于3',<br>
-            'alnum' =&gt; '%name%只能由字母和数字组成'<br>
-        ),<br>
-        'email' =&gt; '%name%格式不正确'<br>
-    )<br>
+<p>$validator = $widget-&gt;validate(array(
+    'data' =&gt; array(
+        'username' =&gt; 'tw',
+        'email' =&gt; 'invalid',
+    ),
+    'rules' =&gt; array(
+        'username' =&gt; array(
+            'minLength' =&gt; 3,
+            'alnum' =&gt; true,
+        ),
+        'email' =&gt; array(
+            'email' =&gt; true
+        )
+    ),
+    'names' =&gt; array(
+        'username' =&gt; '用户名',
+        'email' =&gt; '邮箱'
+    ),
+    'messages' =&gt; array(
+        'username' =&gt; array(
+            'minLength' =&gt; '%name%的长度必须大于3',
+            'alnum' =&gt; '%name%只能由字母和数字组成'
+        ),
+        'email' =&gt; '%name%格式不正确'
+    )
 ));</p>
 
-<p>// 检查是否通过验证<br>
-if ($validator-&gt;isValid()) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
+<p>// 检查是否通过验证
+if ($validator-&gt;isValid()) {
+    echo 'Yes';
+} else {
+    echo 'No';
 }</p>
 
-<p>// 输出详细的错误信息<br>
+<p>// 输出详细的错误信息
 print_r($validator-&gt;getDetailMessages());</p>
 
-<p>// 输出简练的错误信息<br>
+<p>// 输出简练的错误信息
 print_r($validator-&gt;getSummaryMessages());</p>
 
-<p>// 输出合并的错误信息<br>
+<p>// 输出合并的错误信息
 print_r($validator-&gt;getJoinedMessage());</p>
 
 <pre><code>##### 运行结果
@@ -3899,15 +4291,15 @@ Array
 </ul>
 <h5>代码范例</h5>
 
-<p>检查数据是否为邮箱<br>
-```php<br>
+<p>检查数据是否为邮箱
+```php
 &lt;?php</p>
 
-<p>if ($widget-&gt;is('email', '<a href="mailto:twinhuang@qq.com">twinhuang@qq.com</a>')) {<br>
-    echo '<a href="mailto:twihuang@qq.com">twihuang@qq.com</a> is valid email';<br>
-} else {<br>
-    echo '<a href="mailto:twihuang@qq.com">twihuang@qq.com</a> is not valid email';<br>
-}<br>
+<p>if ($widget-&gt;is('email', '<a href="mailto:twinhuang@qq.com">twinhuang@qq.com</a>')) {
+    echo '<a href="mailto:twihuang@qq.com">twihuang@qq.com</a> is valid email';
+} else {
+    echo '<a href="mailto:twihuang@qq.com">twihuang@qq.com</a> is not valid email';
+}
 ```</p>
 
 <h5>运行结果</h5>
@@ -3938,17 +4330,17 @@ Array
 </ul>
 <h5>代码范例</h5>
 
-<p>检查数据是否能被3整除<br>
-```php<br>
+<p>检查数据是否能被3整除
+```php
 &lt;?php</p>
 
-<p>if ($widget-&gt;is(function($input) {<br>
-    return 0 === 10 % $input;<br>
-}, 3)) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
+<p>if ($widget-&gt;is(function($input) {
+    return 0 === 10 % $input;
+}, 3)) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 ```</p>
 
 <h5>运行结果</h5>
@@ -3972,19 +4364,19 @@ Array
 </ul>
 <h5>代码范例</h5>
 
-<p>检查数据是否为数字,且长度在3到5之间<br>
-```php<br>
+<p>检查数据是否为数字,且长度在3到5之间
+```php
 &lt;?php</p>
 
-<p>$rules = array(<br>
-    'digit' =&gt; true,<br>
-    'length' =&gt; array(3, 5)<br>
-);<br>
-if ($widget-&gt;is($rules, '123456')) {<br>
-    echo 'Yes';<br>
-} else {<br>
-    echo 'No';<br>
-}<br>
+<p>$rules = array(
+    'digit' =&gt; true,
+    'length' =&gt; array(3, 5)
+);
+if ($widget-&gt;is($rules, '123456')) {
+    echo 'Yes';
+} else {
+    echo 'No';
+}
 ```</p>
 
 <h5>运行结果</h5>
@@ -6773,7 +7165,8 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 
 <p>检查数据是否为图片,同时还可以检查图片宽度和高度是否在指定的范围内</p>
 
-<p>图片验证器是文件验证器<a href="isFile.md">isFile</a>的子类,其中选项<code>maxSize</code>, <code>minSize</code>, <code>exts</code>,<br><code>excludeExts</code>, <code>mimeTypes</code>, <code>excludeMimeTypes</code>继承自父类.</p>
+<p>图片验证器是文件验证器<a href="isFile.md">isFile</a>的子类,其中选项<code>maxSize</code>, <code>minSize</code>, <code>exts</code>,
+<code>excludeExts</code>, <code>mimeTypes</code>, <code>excludeMimeTypes</code>继承自父类.</p>
 </body></html>
 
   </section>
@@ -8766,11 +9159,11 @@ Layout Footer'
 
 <h5>代码范例</h5>
 
-<p>转义HTML字符串<br>
-```php<br>
+<p>转义HTML字符串
+```php
 &lt;?php</p>
 
-<p>echo $widget-&gt;escape('alert("xss")');<br>
+<p>echo $widget-&gt;escape('alert("xss")');
 ```</p>
 
 <h5>运行结果</h5>
@@ -8780,11 +9173,11 @@ Layout Footer'
 
 <h5>代码范例</h5>
 
-<p>转义Javascript字符串<br>
-```php<br>
+<p>转义Javascript字符串
+```php
 &lt;?php</p>
 
-<p>echo $widget-&gt;escape-&gt;js('bar"; alert("Meow!"); var xss="true');<br>
+<p>echo $widget-&gt;escape-&gt;js('bar"; alert("Meow!"); var xss="true');
 ```</p>
 
 <h5>运行结果</h5>
@@ -8794,11 +9187,11 @@ Layout Footer'
 
 <h5>代码范例</h5>
 
-<p>转义CSS字符串<br>
-```php<br>
+<p>转义CSS字符串
+```php
 &lt;?php</p>
 
-<p>echo $widget-&gt;escape-&gt;css("background-image: url('<a href="http://example.com/foo.jpg">http://example.com/foo.jpg</a>?alert(1)');");<br>
+<p>echo $widget-&gt;escape-&gt;css("background-image: url('<a href="http://example.com/foo.jpg">http://example.com/foo.jpg</a>?alert(1)');");
 ```</p>
 
 <h5>运行结果</h5>
@@ -8808,12 +9201,12 @@ Layout Footer'
 
 <h5>代码范例</h5>
 
-<p>转义HTML属性字符串<br>
-```php<br>
+<p>转义HTML属性字符串
+```php
 &lt;?php</p>
 
-<p>echo 'escape-&gt;attr("faketitle onmouseover=alert(/xss/);");<br>
-echo '&gt;hi';<br>
+<p>echo 'escape-&gt;attr("faketitle onmouseover=alert(/xss/);");
+echo '&gt;hi';
 ```</p>
 
 <h5>运行结果</h5>
@@ -8823,12 +9216,12 @@ echo '&gt;hi';<br>
 
 <h5>代码范例</h5>
 
-<p>转义URL字符串<br>
-```php<br>
+<p>转义URL字符串
+```php
 &lt;?php</p>
 
-<p>echo 'escape-&gt;url("onmouseover= \"alert('zf2')");<br>
-echo '"&gt;Click here!';<br>
+<p>echo 'escape-&gt;url("onmouseover= \"alert('zf2')");
+echo '"&gt;Click here!';
 ```</p>
 
 <h5>运行结果</h5>
@@ -8864,7 +9257,7 @@ echo '"&gt;Click here!';<br>
 <li>
 <strong>$vars</strong> <code>array</code> The variables pass to template</li>
 </ul>
-<p>if NO parameter provied, the invoke method will return the \Smarty<br>
+<p>if NO parameter provied, the invoke method will return the \Smarty
 object otherwise, call the render method</p>
 </body></html>
 
@@ -8895,7 +9288,7 @@ object otherwise, call the render method</p>
 <li>
 <strong>$vars</strong> <code>array</code> The variables pass to template</li>
 </ul>
-<p>if NO parameter provied, the invoke method will return the<br>
+<p>if NO parameter provied, the invoke method will return the
 \Twig_Environment object. otherwise, call the render method</p>
 </body></html>
 
@@ -9057,7 +9450,7 @@ $widget-&gt;trigger('connect');
 </tr>
 </tbody>
 </table>
-<p>第三个参数<code>$widget</code>为可选的微件对象,如果微件包含与事件名称相同的属性,那么,事件管理器将会把该属性<br>
+<p>第三个参数<code>$widget</code>为可选的微件对象,如果微件包含与事件名称相同的属性,那么,事件管理器将会把该属性
 作为一个事件触发器,在所有的触发器触发后才触发.</p>
 </body></html>
 
@@ -9128,7 +9521,8 @@ $widget-&gt;dbSlave();
 
 <h3>选项</h3>
 
-<p>完整的配置请查看Doctrine DBAL官方提供的文档<br><a href="http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html">http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html</a></p>
+<p>完整的配置请查看Doctrine DBAL官方提供的文档
+<a href="http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html">http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html</a></p>
 
 <h4>以下三个主要选项,只要提供一个的值即可</h4>
 
@@ -9670,7 +10064,7 @@ print_r($widget-&gt;arr-&gt;sort($data, 'order', SORT_DESC));
 </li>
 <li>如果以上均不存在,返回null</li>
 </ol>
-<p>使用<code>attr()</code>微件的好处在于你不用关心要取值的变量类型,不管它是数组,对象数组(\ArrayAccess),还是<br>
+<p>使用<code>attr()</code>微件的好处在于你不用关心要取值的变量类型,不管它是数组,对象数组(\ArrayAccess),还是
 其他对象</p>
 
 <h4>arr-&gt;sort($array, $key = 'order', $type = SORT_ASC)</h4>
