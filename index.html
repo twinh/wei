@@ -314,7 +314,7 @@ $id = $widget->query('id');</code></pre>
 <!-- request
   ================================================== -->
   <section id="request">
-  <h1>Request</h1>
+  <div class="page-header"><h1>Request</h1></div>
 
 <p>管理HTTP请求数据($_REQUEST)</p>
 
@@ -460,7 +460,7 @@ $id = $widget-&gt;request('id');
 <!-- cookie
   ================================================== -->
   <section id="cookie">
-  <h1>Cookie</h1>
+  <div class="page-header"><h1>Cookie</h1></div>
 
 <p>写入,读取和删除cookie($_COOKIE)</p>
 
@@ -564,7 +564,7 @@ $widget-&gt;cookie('key');
 <!-- os
   ================================================== -->
   <section id="os">
-  <h1>Os</h1>
+  <div class="page-header"><h1>Os</h1></div>
 
 <p>检测客户端浏览器,操作系统和设备是否为指定的名称和版本</p>
 
@@ -659,7 +659,7 @@ $widget-&gt;cookie('key');
 <!-- post
   ================================================== -->
   <section id="post">
-  <h1>Post</h1>
+  <div class="page-header"><h1>Post</h1></div>
 
 <p>获取HTTP请求($_POST)数据</p>
 
@@ -705,7 +705,7 @@ $id = $widget-&gt;post('id');
 <!-- query
   ================================================== -->
   <section id="query">
-  <h1>Query</h1>
+  <div class="page-header"><h1>Query</h1></div>
 
 <p>获取HTTP请求($_GET)数据</p>
 
@@ -751,7 +751,7 @@ $id = $widget-&gt;query('id');
 <!-- server
   ================================================== -->
   <section id="server">
-  <h1>Server</h1>
+  <div class="page-header"><h1>Server</h1></div>
 
 <p>获取服务器运行和环境参数($_SERVER)</p>
 
@@ -797,7 +797,7 @@ $id = $widget-&gt;server('SERVER_NAME');
 <!-- session
   ================================================== -->
   <section id="session">
-  <h1>Session</h1>
+  <div class="page-header"><h1>Session</h1></div>
 
 <p>管理用户会话信息</p>
 
@@ -866,7 +866,7 @@ if ($widget-&gt;sessio('verfiyCode') == $widget-&gt;post('verfiyCode')) {
 <!-- upload
   ================================================== -->
   <section id="upload">
-  <h1>Upload</h1>
+  <div class="page-header"><h1>Upload</h1></div>
 
 <p>保存客户端上传的文件到指定目录</p>
 
@@ -1166,7 +1166,7 @@ if ($result) {
 <!-- response
   ================================================== -->
   <section id="response">
-  <h1>Response</h1>
+  <div class="page-header"><h1>Response</h1></div>
 
 <p>发送HTTP响应头和响应内容</p>
 
@@ -1255,7 +1255,7 @@ Hello World'
 <!-- download
   ================================================== -->
   <section id="download">
-  <h1>Download</h1>
+  <div class="page-header"><h1>Download</h1></div>
 
 <p>发送下载文件的HTTP响应</p>
 
@@ -1311,7 +1311,7 @@ Hello World'
 <!-- flush
   ================================================== -->
   <section id="flush">
-  <h1>Flush</h1>
+  <div class="page-header"><h1>Flush</h1></div>
 
 <p>关闭缓冲区,让后台脚本实时输出内容到浏览器</p>
 
@@ -1344,7 +1344,7 @@ for ($i = 1; $i &lt;= 10; $i++) {
 <!-- header
   ================================================== -->
   <section id="header">
-  <h1>Header</h1>
+  <div class="page-header"><h1>Header</h1></div>
 
 <p>设置和获取HTTP响应头</p>
 
@@ -1409,7 +1409,7 @@ echo $widget-&gt;header('X-Powered-By');
 <!-- json
   ================================================== -->
   <section id="json">
-  <h1>Json</h1>
+  <div class="page-header"><h1>Json</h1></div>
 
 <p>输出JSON或JSONP格式的数据到浏览器</p>
 
@@ -1479,7 +1479,7 @@ $widget-&gt;json('success', 0, array(), true);
 <!-- redirect
   ================================================== -->
   <section id="redirect">
-  <h1>Redirect</h1>
+  <div class="page-header"><h1>Redirect</h1></div>
 
 <p>跳转到指定地址</p>
 
@@ -1540,7 +1540,7 @@ $widget-&gt;json('success', 0, array(), true);
 <!-- call
   ================================================== -->
   <section id="call">
-  <h1>Call</h1>
+  <div class="page-header"><h1>Call</h1></div>
 
 <p>象jQuery Ajax一样调用您的接口</p>
 
@@ -1917,7 +1917,7 @@ $widget-&gt;get('http://example.com', function($data, $call){
 <!-- cache-section
   ================================================== -->
   <section id="cache-section">
-  <h1>缓存</h1>
+  <div class="page-header"><h1>缓存</h1></div>
 
 <p>Widget提供了多个PHP流行的后端缓存.这里有apc,redis,memcached等主流缓存,也有简单的文件缓存fileCache,
 可用于简单数据分析的数据库缓存dbCache等等.所有缓存拥有一致的接口,可以随意替换.</p>
@@ -2085,7 +2085,7 @@ $widget-&gt;get('http://example.com', function($data, $call){
 <!-- cache
   ================================================== -->
   <section id="cache">
-  <h1>Cache</h1>
+  <div class="page-header"><h1>Cache</h1></div>
 
 <p>设置或获取指定缓存类型的一项缓存</p>
 
@@ -2230,7 +2230,7 @@ $widget-&gt;cache('key');
 <!-- apc
   ================================================== -->
   <section id="apc">
-  <h1>Apc</h1>
+  <div class="page-header"><h1>Apc</h1></div>
 
 <p>通过面向对象的方式设置或获取PHP APC缓存,并提供更多友好方便的功能方法.</p>
 
@@ -2341,7 +2341,7 @@ $widget-&gt;apc('key');
 <!-- arrayCache
   ================================================== -->
   <section id="arrayCache">
-  <h1>ArrayCache</h1>
+  <div class="page-header"><h1>ArrayCache</h1></div>
 
 <p>数组缓存,将数据存储在PHP数组中,每次请求结束数据就会被清空.</p>
 
@@ -2429,7 +2429,7 @@ $widget-&gt;arrayCache('name');
 <!-- bicache
   ================================================== -->
   <section id="bicache">
-  <h1>Bicache</h1>
+  <div class="page-header"><h1>Bicache</h1></div>
 
 <p>设置或获取缓存,数据存储在二级缓存中</p>
 
@@ -2576,7 +2576,7 @@ $widget-&gt;bicache('key');
 <!-- couchbase
   ================================================== -->
   <section id="couchbase">
-  <h1>Couchbase</h1>
+  <div class="page-header"><h1>Couchbase</h1></div>
 
 <p>设置或获取一项缓存,缓存数据存储于Couchbase中</p>
 
@@ -2724,7 +2724,7 @@ $widget-&gt;couchbase('key');
 <!-- dbCache
   ================================================== -->
   <section id="dbCache">
-  <h1>DbCache</h1>
+  <div class="page-header"><h1>DbCache</h1></div>
 
 <p>设置或获取一项缓存,缓存数据存储于数据库中</p>
 
@@ -2848,7 +2848,7 @@ $widget-&gt;dbCache('key');
 <!-- fileCache
   ================================================== -->
   <section id="fileCache">
-  <h1>FileCache</h1>
+  <div class="page-header"><h1>FileCache</h1></div>
 
 <p>设置或获取文件缓存</p>
 
@@ -2954,7 +2954,7 @@ $widget-&gt;fileCache('key');
 <!-- memcache
   ================================================== -->
   <section id="memcache">
-  <h1>Memcache</h1>
+  <div class="page-header"><h1>Memcache</h1></div>
 
 <p>设置或获取一项缓存,缓存数据存储于Memcache中</p>
 
@@ -3120,7 +3120,7 @@ $widget-&gt;memcache('key');
 <!-- memcached
   ================================================== -->
   <section id="memcached">
-  <h1>Memcached</h1>
+  <div class="page-header"><h1>Memcached</h1></div>
 
 <p>设置或获取一项缓存,缓存数据存储于memcached中</p>
 
@@ -3274,7 +3274,7 @@ $widget-&gt;memcached('key');
 <!-- mongoCache
   ================================================== -->
   <section id="mongoCache">
-  <h1>MongoCache</h1>
+  <div class="page-header"><h1>MongoCache</h1></div>
 
 <p>设置或获取一项缓存,缓存数据存储于<a href="http://docs.mongodb.org/ecosystem/drivers/php/">Mangodb</a>中</p>
 
@@ -3416,7 +3416,7 @@ $widget-&gt;mongoCache('key');
 <!-- redis
   ================================================== -->
   <section id="redis">
-  <h1>Redis</h1>
+  <div class="page-header"><h1>Redis</h1></div>
 
 <p>设置或获取一项缓存,缓存数据存储于Redis中</p>
 
@@ -3564,7 +3564,7 @@ $widget-&gt;redis('key');
 <!-- validate
   ================================================== -->
   <section id="validate">
-  <h1>Validate</h1>
+  <div class="page-header"><h1>Validate</h1></div>
 
 <p>检查数组或对象中每一个元素是否能通过指定规则的验证</p>
 
@@ -4377,7 +4377,7 @@ $widget-&gt;validate(array(
 <!-- is
   ================================================== -->
   <section id="is">
-  <h1><a href="http://twinh.github.io/widget/api/is">is()</a></h1>
+  <div class="page-header"><h1><a href="http://twinh.github.io/widget/api/is">is()</a></h1></div>
 
 <p>检查数据是否能通过指定规则,或指定回调结构的验证</p>
 
@@ -4495,7 +4495,7 @@ if ($widget-&gt;is($rules, '123456')) {
 <!-- isAlnum
   ================================================== -->
   <section id="isAlnum">
-  <h1>isAlnum</h1>
+  <div class="page-header"><h1>isAlnum</h1></div>
 
 <p>检查数据是否只由字母(a-z)和数字(0-9)组成</p>
 
@@ -4557,7 +4557,7 @@ if ($widget-&gt;isAlnum($input)) {
 <!-- isAlpha
   ================================================== -->
   <section id="isAlpha">
-  <h1>isAlpha</h1>
+  <div class="page-header"><h1>isAlpha</h1></div>
 
 <p>检查数据是否只由字母(a-z)组成</p>
 
@@ -4619,7 +4619,7 @@ if ($widget-&gt;isAlpha($input)) {
 <!-- isBlank
   ================================================== -->
   <section id="isBlank">
-  <h1>isBlank</h1>
+  <div class="page-header"><h1>isBlank</h1></div>
 
 <p>检查数据是否为空(不允许空格)</p>
 
@@ -4675,7 +4675,7 @@ if ($widget-&gt;isBlank($input)) {
 <!-- isDecimal
   ================================================== -->
   <section id="isDecimal">
-  <h1>isDecimal</h1>
+  <div class="page-header"><h1>isDecimal</h1></div>
 
 <p>检查数据是否为小数</p>
 
@@ -4736,7 +4736,7 @@ if ($widget-&gt;isBlank($input)) {
 <!-- isDigit
   ================================================== -->
   <section id="isDigit">
-  <h1>isDigit</h1>
+  <div class="page-header"><h1>isDigit</h1></div>
 
 <p>检查数据是否只由数字组成</p>
 
@@ -4814,7 +4814,7 @@ if ($widget-&gt;isBlank($input)) {
 <!-- isDivisibleby
   ================================================== -->
   <section id="isDivisibleby">
-  <h1>isDivisibleBy</h1>
+  <div class="page-header"><h1>isDivisibleBy</h1></div>
 
 <p>检查数据是否能被指定的除数整除</p>
 
@@ -4875,7 +4875,7 @@ if ($widget-&gt;isBlank($input)) {
 <!-- isDoubleByte
   ================================================== -->
   <section id="isDoubleByte">
-  <h1>isDoubleByte</h1>
+  <div class="page-header"><h1>isDoubleByte</h1></div>
 
 <p>检查数据是否只由双字节字符组成</p>
 
@@ -4936,7 +4936,7 @@ if ($widget-&gt;isBlank($input)) {
 <!-- isEmpty
   ================================================== -->
   <section id="isEmpty">
-  <h1>isEmpty()</h1>
+  <div class="page-header"><h1>isEmpty()</h1></div>
 
 <p>检查数据是否为空(允许空格)</p>
 
@@ -5005,7 +5005,7 @@ if ($widget-&gt;isBlank($input)) {
 <!-- isEndsWith
   ================================================== -->
   <section id="isEndsWith">
-  <h1>isEndsWith</h1>
+  <div class="page-header"><h1>isEndsWith</h1></div>
 
 <p>检查数据是否以指定字符串结尾</p>
 
@@ -5106,7 +5106,7 @@ if ($widget-&gt;isBlank($input)) {
 <!-- isEquals
   ================================================== -->
   <section id="isEquals">
-  <h1>isEquals</h1>
+  <div class="page-header"><h1>isEquals</h1></div>
 
 <p>检查数据是否与指定数据相等</p>
 
@@ -5178,7 +5178,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isIn
   ================================================== -->
   <section id="isIn">
-  <h1>isIn</h1>
+  <div class="page-header"><h1>isIn</h1></div>
 
 <p>检查数据是否在指定的数组中</p>
 
@@ -5245,7 +5245,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isLowercase
   ================================================== -->
   <section id="isLowercase">
-  <h1>isLowercase</h1>
+  <div class="page-header"><h1>isLowercase</h1></div>
 
 <p>检查数据是否为小写字符</p>
 
@@ -5306,7 +5306,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isNull
   ================================================== -->
   <section id="isNull">
-  <h1>isNull</h1>
+  <div class="page-header"><h1>isNull</h1></div>
 
 <p>检查数据是否为null</p>
 
@@ -5359,7 +5359,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isNumber
   ================================================== -->
   <section id="isNumber">
-  <h1>isNumber</h1>
+  <div class="page-header"><h1>isNumber</h1></div>
 
 <p>检查数据是否为有效数字</p>
 
@@ -5414,7 +5414,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isRegex
   ================================================== -->
   <section id="isRegex">
-  <h1>isRegex</h1>
+  <div class="page-header"><h1>isRegex</h1></div>
 
 <p>检查数据是否匹配指定的正则表达式</p>
 
@@ -5475,7 +5475,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isRequired
   ================================================== -->
   <section id="isRequired">
-  <h1>isRequired</h1>
+  <div class="page-header"><h1>isRequired</h1></div>
 
 <p>检查数据是否为空</p>
 
@@ -5544,7 +5544,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isStartsWith
   ================================================== -->
   <section id="isStartsWith">
-  <h1>isStartsWith</h1>
+  <div class="page-header"><h1>isStartsWith</h1></div>
 
 <p>检查数据是否以指定字符串开头</p>
 
@@ -5645,7 +5645,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isType
   ================================================== -->
   <section id="isType">
-  <h1>isType</h1>
+  <div class="page-header"><h1>isType</h1></div>
 
 <p>检查数据是否为指定的类型</p>
 
@@ -5797,7 +5797,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isUppercase
   ================================================== -->
   <section id="isUppercase">
-  <h1>isUppercase</h1>
+  <div class="page-header"><h1>isUppercase</h1></div>
 
 <p>检查数据是否为大写字符</p>
 
@@ -5858,7 +5858,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isLength
   ================================================== -->
   <section id="isLength">
-  <h1>isLength</h1>
+  <div class="page-header"><h1>isLength</h1></div>
 
 <p>检查数据的长度是否为指定的数值,或在指定的长度范围内</p>
 
@@ -5994,7 +5994,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isMax
   ================================================== -->
   <section id="isMax">
-  <h1>isMax</h1>
+  <div class="page-header"><h1>isMax</h1></div>
 
 <p>检查数据是否小于等于指定的值</p>
 
@@ -6061,7 +6061,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isMaxLength
   ================================================== -->
   <section id="isMaxLength">
-  <h1>isMaxLength</h1>
+  <div class="page-header"><h1>isMaxLength</h1></div>
 
 <p>检查数据的长度是否小于等于指定数值</p>
 
@@ -6132,7 +6132,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isMin
   ================================================== -->
   <section id="isMin">
-  <h1>isMin</h1>
+  <div class="page-header"><h1>isMin</h1></div>
 
 <p>检查数据是否大于等于指定的值</p>
 
@@ -6199,7 +6199,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isMinLength
   ================================================== -->
   <section id="isMinLength">
-  <h1>isMinLength</h1>
+  <div class="page-header"><h1>isMinLength</h1></div>
 
 <p>检查数据的长度是否大于等于指定数值</p>
 
@@ -6272,7 +6272,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isRange
   ================================================== -->
   <section id="isRange">
-  <h1>isRange</h1>
+  <div class="page-header"><h1>isRange</h1></div>
 
 <p>检查数据是否在指定的两个值之间</p>
 
@@ -6345,7 +6345,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isDate
   ================================================== -->
   <section id="isDate">
-  <h1>isDate</h1>
+  <div class="page-header"><h1>isDate</h1></div>
 
 <p>检查数据是否为合法的日期</p>
 
@@ -6432,7 +6432,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isDateTime
   ================================================== -->
   <section id="isDateTime">
-  <h1>isDateTime</h1>
+  <div class="page-header"><h1>isDateTime</h1></div>
 
 <p>检查数据是否为合法的日期时间</p>
 
@@ -6533,7 +6533,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isTime
   ================================================== -->
   <section id="isTime">
-  <h1>isTime</h1>
+  <div class="page-header"><h1>isTime</h1></div>
 
 <p>检查数据是否为合法的时间</p>
 
@@ -6634,7 +6634,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isDir
   ================================================== -->
   <section id="isDir">
-  <h1>isDir</h1>
+  <div class="page-header"><h1>isDir</h1></div>
 
 <p>检查数据是否为存在的目录</p>
 
@@ -6695,7 +6695,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isExists
   ================================================== -->
   <section id="isExists">
-  <h1>isExists</h1>
+  <div class="page-header"><h1>isExists</h1></div>
 
 <p>检查数据是否为存在的文件或目录</p>
 
@@ -6759,7 +6759,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isFile
   ================================================== -->
   <section id="isFile">
-  <h1>isFile</h1>
+  <div class="page-header"><h1>isFile</h1></div>
 
 <p>检查数据是否为合法的文件,可选的检查选项有文件大小,扩展名和媒体类型</p>
 
@@ -6907,7 +6907,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isImage
   ================================================== -->
   <section id="isImage">
-  <h1>isImage</h1>
+  <div class="page-header"><h1>isImage</h1></div>
 
 <p>检查数据是否为图片,同时还可以检查图片宽度和高度是否在指定的范围内</p>
 
@@ -7117,7 +7117,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isEmail
   ================================================== -->
   <section id="isEmail">
-  <h1>isEmail</h1>
+  <div class="page-header"><h1>isEmail</h1></div>
 
 <p>检查数据是否为有效的邮箱地址</p>
 
@@ -7178,7 +7178,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isIp
   ================================================== -->
   <section id="isIp">
-  <h1>isIp</h1>
+  <div class="page-header"><h1>isIp</h1></div>
 
 <p>检查数据是否为有效的IP地址</p>
 
@@ -7271,7 +7271,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isTld
   ================================================== -->
   <section id="isTld">
-  <h1>isTld</h1>
+  <div class="page-header"><h1>isTld</h1></div>
 
 <p>检查数据是否为存在的顶级域名</p>
 
@@ -7332,7 +7332,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isUrl
   ================================================== -->
   <section id="isUrl">
-  <h1>isUrl</h1>
+  <div class="page-header"><h1>isUrl</h1></div>
 
 <p>检查数据是否为有效的URL地址,可选的检查选项有"path"和"query"</p>
 
@@ -7408,7 +7408,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isUuid
   ================================================== -->
   <section id="isUuid">
-  <h1>isUuid</h1>
+  <div class="page-header"><h1>isUuid</h1></div>
 
 <p>检查数据是否为有效的UUID</p>
 
@@ -7469,7 +7469,7 @@ if ($widget-&gt;isEquals($post['password'], $post['password_confirmation'])) {
 <!-- isCreditCard
   ================================================== -->
   <section id="isCreditCard">
-  <h1>isCreditCard</h1>
+  <div class="page-header"><h1>isCreditCard</h1></div>
 
 <p>检查数据是否为合法的信用卡号码</p>
 
@@ -7590,7 +7590,7 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
 <!-- isChinese
   ================================================== -->
   <section id="isChinese">
-  <h1>isChinese</h1>
+  <div class="page-header"><h1>isChinese</h1></div>
 
 <p>检查数据是否只由汉字组成</p>
 
@@ -7651,7 +7651,7 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
 <!-- isIdCardCn
   ================================================== -->
   <section id="isIdCardCn">
-  <h1>isIdCardCn</h1>
+  <div class="page-header"><h1>isIdCardCn</h1></div>
 
 <p>检查数据是否为有效的中国身份证</p>
 
@@ -7712,7 +7712,7 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
 <!-- isIdCardHk
   ================================================== -->
   <section id="isIdCardHk">
-  <h1>isIdCardHk</h1>
+  <div class="page-header"><h1>isIdCardHk</h1></div>
 
 <p>检查数据是否为有效的香港身份证</p>
 
@@ -7773,7 +7773,7 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
 <!-- isIdCardMo
   ================================================== -->
   <section id="isIdCardMo">
-  <h1>isIdCardMo</h1>
+  <div class="page-header"><h1>isIdCardMo</h1></div>
 
 <p>检查数据是否为有效的澳门身份证</p>
 
@@ -7834,7 +7834,7 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
 <!-- isIdCardTw
   ================================================== -->
   <section id="isIdCardTw">
-  <h1>isIdCardTw</h1>
+  <div class="page-header"><h1>isIdCardTw</h1></div>
 
 <p>检查数据是否为有效的台湾身份证</p>
 
@@ -7895,7 +7895,7 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
 <!-- isPhoneCn
   ================================================== -->
   <section id="isPhoneCn">
-  <h1>isPhoneCn</h1>
+  <div class="page-header"><h1>isPhoneCn</h1></div>
 
 <p>检查数据是否为有效的电话号码</p>
 
@@ -7956,7 +7956,7 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
 <!-- isPostcode
   ================================================== -->
   <section id="isPostcode">
-  <h1>isPostcode</h1>
+  <div class="page-header"><h1>isPostcode</h1></div>
 
 <p>检查数据是否为有效的中国邮政编码</p>
 
@@ -8017,7 +8017,7 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
 <!-- isQQ
   ================================================== -->
   <section id="isQQ">
-  <h1>isQQ</h1>
+  <div class="page-header"><h1>isQQ</h1></div>
 
 <p>检查数据是否为有效的QQ号码</p>
 
@@ -8078,7 +8078,7 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
 <!-- isMobileCn
   ================================================== -->
   <section id="isMobileCn">
-  <h1>isMobileCn</h1>
+  <div class="page-header"><h1>isMobileCn</h1></div>
 
 <p>检查数据是否为有效的中国手机号码</p>
 
@@ -8137,7 +8137,7 @@ if ($widget-&gt;isCreditCard($input, array('UnionPay', 'Visa'))) {
 <!-- isAllof
   ================================================== -->
   <section id="isAllof">
-  <h1>isAllOf</h1>
+  <div class="page-header"><h1>isAllOf</h1></div>
 
 <p>检查数据是否通过所有的规则校验</p>
 
@@ -8196,7 +8196,7 @@ if ($widget-&gt;isAllOf($input, array(
 <!-- isNoneof
   ================================================== -->
   <section id="isNoneof">
-  <h1>isNoneOf</h1>
+  <div class="page-header"><h1>isNoneOf</h1></div>
 
 <p>检查数据是否不符合所有指定的规则校验</p>
 
@@ -8255,7 +8255,7 @@ if ($widget-&gt;isNoneOf('abc', $rules)) {
 <!-- isOneof
   ================================================== -->
   <section id="isOneof">
-  <h1>isOneOf</h1>
+  <div class="page-header"><h1>isOneOf</h1></div>
 
 <p>检查数据是否满足指定规则中的任何一条</p>
 
@@ -8314,7 +8314,7 @@ if ($widget-&gt;isOneOf('abc', $rules)) {
 <!-- isSomeof
   ================================================== -->
   <section id="isSomeof">
-  <h1>isSomeOf</h1>
+  <div class="page-header"><h1>isSomeOf</h1></div>
 
 <p>检查数据是否通过指定数量规则的验证</p>
 
@@ -8380,7 +8380,7 @@ if ($widget-&gt;isSomeOf('abc', $rules)) {
 <!-- isEntityExists
   ================================================== -->
   <section id="isEntityExists">
-  <h1>isEntityExists</h1>
+  <div class="page-header"><h1>isEntityExists</h1></div>
 
 <p>检查Doctrine ORM实体是否存在</p>
 
@@ -8542,7 +8542,7 @@ if ($widget-&gt;isEntityExists('test', 'User', 'name')) {
 <!-- isRecordExists
   ================================================== -->
   <section id="isRecordExists">
-  <h1>isRecordExists</h1>
+  <div class="page-header"><h1>isRecordExists</h1></div>
 
 <p>检查数据表是否存在指定的记录</p>
 
@@ -8639,7 +8639,7 @@ if ($widget-&gt;isRecordExists('test', 'users', 'name')) {
 <!-- isAll
   ================================================== -->
   <section id="isAll">
-  <h1>isAll</h1>
+  <div class="page-header"><h1>isAll</h1></div>
 
 <p>检查数组或对象里的每一项是否符合指定的规则</p>
 
@@ -8697,7 +8697,7 @@ if ($widget-&gt;isAll($input, array(
 <!-- isCallback
   ================================================== -->
   <section id="isCallback">
-  <h1>isCallback</h1>
+  <div class="page-header"><h1>isCallback</h1></div>
 
 <p>检查数据是否通过指定回调方法验证</p>
 
@@ -8775,7 +8775,7 @@ if ($widget-&gt;isAll($input, array(
 <!-- isColor
   ================================================== -->
   <section id="isColor">
-  <h1>isColor</h1>
+  <div class="page-header"><h1>isColor</h1></div>
 
 <p>检查数据是否为有效的十六进制颜色</p>
 
@@ -8836,7 +8836,7 @@ if ($widget-&gt;isAll($input, array(
 <!-- view
   ================================================== -->
   <section id="view">
-  <h1>View</h1>
+  <div class="page-header"><h1>View</h1></div>
 
 <p>渲染指定名称的模板或获取视图微件对象</p>
 
@@ -8945,7 +8945,7 @@ Layout Footer'
 <!-- escape
   ================================================== -->
   <section id="escape">
-  <h1><a href="http://twinh.github.io/widget/api/escape">escape()</a></h1>
+  <div class="page-header"><h1><a href="http://twinh.github.io/widget/api/escape">escape()</a></h1></div>
 
 <p>转义字符串中的特殊字符,以便安全的输出到网页中,支持HTML,JS,CSS,HTML属性和URL的转义</p>
 
@@ -9050,7 +9050,7 @@ echo '"&gt;Click here!';
   <pre><code>该微件文档还在紧急编写中,敬请期待!
 </code></pre>
 
-<h1><a href="http://twinh.github.io/widget/api/smarty">smarty()</a></h1>
+<div class="page-header"><h1><a href="http://twinh.github.io/widget/api/smarty">smarty()</a></h1></div>
 
 <p>Returns \Smarty object or render a template</p>
 
@@ -9076,7 +9076,7 @@ object otherwise, call the render method</p>
   <pre><code>该微件文档还在紧急编写中,敬请期待!
 </code></pre>
 
-<h1><a href="http://twinh.github.io/widget/api/twig">twig()</a></h1>
+<div class="page-header"><h1><a href="http://twinh.github.io/widget/api/twig">twig()</a></h1></div>
 
 <p>Returns \Twig_Environment object or render a template</p>
 
@@ -9099,7 +9099,7 @@ object otherwise, call the render method</p>
 <!-- event
   ================================================== -->
   <section id="event">
-  <h1>Event</h1>
+  <div class="page-header"><h1>Event</h1></div>
 
 <p>绑定,触发和移除事件,并支持命名空间等特性.</p>
 
@@ -9253,7 +9253,7 @@ $widget-&gt;trigger('connect');
 <!-- db
   ================================================== -->
   <section id="db">
-  <h1>Db</h1>
+  <div class="page-header"><h1>Db</h1></div>
 
 <p>获取<a href="https://github.com/doctrine/dbal">Doctrine DBAL</a>的数据库查询对象</p>
 
@@ -9573,7 +9573,7 @@ $widget-&gt;dbSlave();
 <!-- entityManager
   ================================================== -->
   <section id="entityManager">
-  <h1>EntityManager</h1>
+  <div class="page-header"><h1>EntityManager</h1></div>
 
 <p>获取<a href="https://github.com/doctrine/doctrine2">Doctrine ORM</a>的实体管理对象</p>
 
@@ -9671,7 +9671,7 @@ echo get_class($em);
   <pre><code>该微件文档还在紧急编写中,敬请期待!
 </code></pre>
 
-<h1><a href="http://twinh.github.io/widget/api/error">error()</a></h1>
+<div class="page-header"><h1><a href="http://twinh.github.io/widget/api/error">error()</a></h1></div>
 
 <p>Attach a handler to the error event</p>
 
@@ -9695,7 +9695,7 @@ echo get_class($em);
 <!-- phpError
   ================================================== -->
   <section id="phpError">
-  <h1>PHP Error</h1>
+  <div class="page-header"><h1>PHP Error</h1></div>
 
 <p><a href="http://phperror.net/">PHP Error</a>提供了更友好的错误提示信息,完整的语法和代码片段高亮,同时支持Ajax错误提示</p>
 
@@ -9735,7 +9735,7 @@ echo get_class($em);
 <!-- arr
   ================================================== -->
   <section id="arr">
-  <h1>Arr</h1>
+  <div class="page-header"><h1>Arr</h1></div>
 
 <p>数组工具微件,提供一些实用的数组操作方法</p>
 
@@ -9842,7 +9842,7 @@ print_r($widget-&gt;arr-&gt;sort($data, 'order', SORT_DESC));
 <!-- env
   ================================================== -->
   <section id="env">
-  <h1>Env</h1>
+  <div class="page-header"><h1>Env</h1></div>
 
 <p>环境检测及根据不同环境加载不同的配置文件</p>
 
@@ -9925,7 +9925,7 @@ print_r($widget-&gt;arr-&gt;sort($data, 'order', SORT_DESC));
   <pre><code>该微件文档还在紧急编写中,敬请期待!
 </code></pre>
 
-<h1><a href="http://twinh.github.io/widget/api/logger">logger()</a></h1>
+<div class="page-header"><h1><a href="http://twinh.github.io/widget/api/logger">logger()</a></h1></div>
 
 <p>Logs with an arbitrary level</p>
 
@@ -9952,7 +9952,7 @@ print_r($widget-&gt;arr-&gt;sort($data, 'order', SORT_DESC));
   <pre><code>该微件文档还在紧急编写中,敬请期待!
 </code></pre>
 
-<h1><a href="http://twinh.github.io/widget/api/monolog">monolog()</a></h1>
+<div class="page-header"><h1><a href="http://twinh.github.io/widget/api/monolog">monolog()</a></h1></div>
 
 <p>Get monolog logger object or add a log record</p>
 
@@ -9975,7 +9975,7 @@ print_r($widget-&gt;arr-&gt;sort($data, 'order', SORT_DESC));
   <pre><code>该微件文档还在紧急编写中,敬请期待!
 </code></pre>
 
-<h1><a href="http://twinh.github.io/widget/api/pinyin">pinyin()</a></h1>
+<div class="page-header"><h1><a href="http://twinh.github.io/widget/api/pinyin">pinyin()</a></h1></div>
 
 <p>Converts chinese words to phonetic alphabets</p>
 
@@ -9995,7 +9995,7 @@ print_r($widget-&gt;arr-&gt;sort($data, 'order', SORT_DESC));
 <!-- uuid
   ================================================== -->
   <section id="uuid">
-  <h1>Uuid</h1>
+  <div class="page-header"><h1>Uuid</h1></div>
 
 <p>生成一个随机的UUID</p>
 
@@ -10025,7 +10025,7 @@ echo $widget-&gt;uuid();
 <!-- website
   ================================================== -->
   <section id="website">
-  <h1>Website</h1>
+  <div class="page-header"><h1>Website</h1></div>
 
 <p>设置或获取网站的配置</p>
 
@@ -10125,7 +10125,7 @@ echo $widget-&gt;website('url');
 hljs.tabReplace = '    '; //4 spaces
 hljs.initHighlightingOnLoad();
 jQuery(function(){
-  $('section h1').wrap('<div class="page-header"></div>')
+  
 })
 </script>
 
