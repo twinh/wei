@@ -17,7 +17,7 @@ class WidgetTest extends TestCase
     public function testConfig()
     {
         $widget = $this->widget;
-        
+
         $widget->config('key', 'value');
 
         $this->assertEquals('value', $widget->config('key'));
@@ -25,11 +25,11 @@ class WidgetTest extends TestCase
         $widget->config('first/second', 'value2');
 
         $this->assertEquals(array('second' => 'value2',), $widget->config('first'));
-        
+
         $config = $widget->config();
         $this->assertEquals($widget->getOption('config'), $config);
     }
-    
+
     public function testMergeConfig()
     {
         $this->widget->config(array(
@@ -37,31 +37,31 @@ class WidgetTest extends TestCase
                 'option1' => 'value1',
             )
         ));
-        
+
         $this->widget->config(array(
             'widgetName' => array(
                 'option2' => 'value2',
             )
         ));
-        
+
         $this->assertEquals('value1', $this->widget->config('widgetName/option1'));
         $this->assertEquals('value2', $this->widget->config('widgetName/option2'));
     }
-    
+
     public function testSetOptionInSetConfig()
     {
         $widget = $this->widget;
         $request = $widget->request;
-        
+
         $widget->config('request', array(
             'method' => 'POST'
         ));
         $this->assertEquals('POST', $request->getMethod());
-        
+
         // No effect at this time
         $widget->config('request/method', 'PUT');
         $this->assertEquals('POST', $request->getMethod());
-        
+
         $widget->config(array(
             'request' => array(
                 'method' => 'DELETE'
@@ -69,7 +69,7 @@ class WidgetTest extends TestCase
         ));
         $this->assertEquals('DELETE', $request->getMethod());
     }
-    
+
     /**
      * @expectedException \InvalidArgumentException
      */
@@ -79,35 +79,22 @@ class WidgetTest extends TestCase
             'widget' => new \stdClass
         ));
     }
-    
-    public function testAppendOption()
-    {
-        $request = $this->request;
-        
-        $request->setOption('posts', array('a' => 'b'));
-        $this->assertEquals(array('a' => 'b'), $request->getOption('posts'));
-        
-        $request->setOption('+posts', array('c' => 'd'));
-        $this->assertEquals(array('a' => 'b', 'c' => 'd'), $request->getOption('posts'));
-        
-        $this->request->setOption('post', array());
-    }
-    
+
     public function testGetOption()
     {
         $user = $this->createUserWidget();
-        
+
         $this->assertEquals('twin', $user->getName());
-        
+
         $this->assertEquals('twin', $user->getOption('name'));
-        
+
         $options = $user->getOption();
-        
+
         $this->assertArrayHasKey('name', $options);
         $this->assertArrayHasKey('widget', $options);
         $this->assertArrayHasKey('deps', $options);
     }
-    
+
     public function testSetInis()
     {
         $this->widget->setInis(array(
@@ -115,54 +102,54 @@ class WidgetTest extends TestCase
         ));
         $this->assertEquals('Asia/Shanghai', ini_get('date.timezone'));
     }
-    
+
     public function testSet()
     {
         $request = new \Widget\Request(array(
             'widget' => $this->widget,
         ));
-        
+
         $this->widget->set('request', $request);
         $this->assertSame($request, $this->widget->request);
     }
-    
+
     public function testSetWithCaseSensitiveName()
     {
         $arrayCache = new \Widget\ArrayCache(array(
             'widget' => $this->widget
         ));
-        
+
         $this->widget->set('myArrayCache', $arrayCache);
-        
+
         $this->assertSame($arrayCache, $this->widget->get('myArrayCache'));
     }
-    
+
     /**
      * @expectedException \BadMethodCallException
      * @expectedExceptionMessage Method "__invoke" not found in class "WidgetTest\Fixtures\WidgetWithoutInvokeMethod"
      */
     public function testInstanceWidgetWithoutInvokeMethodFromWidgetManager()
     {
-        $this->widget->appendOption('alias', array(
+        $this->widget->setOption('+alias', array(
             'noInvokeMethod' => 'WidgetTest\Fixtures\WidgetWithoutInvokeMethod'
         ));
-        
+
         $this->widget->noInvokeMethod;
     }
-    
+
     /**
      * @expectedException \BadMethodCallException
      * @expectedExceptionMessage Method "__invoke" not found in class "WidgetTest\Fixtures\WidgetWithoutInvokeMethod"
      */
     public function testInstanceWidgetWithoutInvokeMethod()
     {
-        $this->widget->appendOption('alias', array(
+        $this->widget->setOption('+alias', array(
             'noInvokeMethod' => 'WidgetTest\Fixtures\WidgetWithoutInvokeMethod'
         ));
-        
+
         $this->widget->request->noInvokeMethod;
     }
-    
+
     /**
      * @expectedException \BadMethodCallException
      * @expectedExceptionMessage Property or widget "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file
@@ -171,7 +158,7 @@ class WidgetTest extends TestCase
     {
         $this->widget->notFoundWidget;
     }
-    
+
     /**
      * @expectedException \BadMethodCallException
      * @expectedExceptionMessage Property or widget "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file
@@ -180,7 +167,7 @@ class WidgetTest extends TestCase
     {
         $this->widget->request->notFoundWidget;
     }
-    
+
     /**
      * @expectedException \BadMethodCallException
      * @expectedExceptionMessage Method "Widget\Widget->notFoundWidget" or widget "notFoundWidget" (class "Widget\NotFoundWidget") not found, called in file
@@ -189,7 +176,7 @@ class WidgetTest extends TestCase
     {
         $this->widget->notFoundWidget();
     }
-    
+
     /**
      * @expectedException \BadMethodCallException
      * @expectedExceptionMessage Property or method "notFoundWidget" not found
@@ -198,7 +185,7 @@ class WidgetTest extends TestCase
     {
         call_user_func($this->widget, 'notFoundWidget');
     }
-    
+
     public function testGetFromDeps()
     {
         // Set options for sub request
@@ -208,38 +195,38 @@ class WidgetTest extends TestCase
                 'id' => 'fromSubRequest'
             )
         ));
-        
+
         $request = $this->widget->request;
         $request->set('id', 'fromOrigin');
-        
+
         $widgetHasDeps = new \WidgetTest\Fixtures\WidgetHasDeps(array(
             'widget' => $this->widget
         ));
-        
+
         // Instance request widget from 'request.sub' configuration
         $subRequest = $widgetHasDeps->request;
         $this->assertEquals('fromSubRequest', $subRequest->get('id'));
-        
+
         $this->assertEquals('fromOrigin', $request->get('id'));
     }
 
     public function testInvoke()
     {
         $this->request->set('id', __METHOD__);
-        
-        // Equals to $this->wideget->request('id') 
+
+        // Equals to $this->wideget->request('id')
         $id = $this->widget->invoke('request', array('id'));
-        
+
         $this->assertEquals(__METHOD__, $id);
     }
-    
+
     public function testInvoker()
     {
         $request = $this->widget('request');
-        
+
         $this->assertInstanceOf('\Widget\Request', $request);
     }
-    
+
     public function testInstanceWidgetWithWidgetOption()
     {
         $widget = new \Widget\Widget(array(
@@ -247,64 +234,64 @@ class WidgetTest extends TestCase
                 'autoload' => false,
             ),
         ));
-        
+
         $this->assertFalse($widget->getOption('autoload'));
     }
-    
+
     public function testNewInstance()
     {
         $newRequest = $this->widget->newInstance('request');
-        
+
         $this->assertInstanceOf('\Widget\Request', $newRequest);
         $this->assertEquals($this->request, $newRequest);
         $this->assertNotSame($this->request, $newRequest);
     }
-    
+
     public function testGetClassFromAlias()
     {
-        $this->widget->appendOption('alias', array(
+        $this->widget->setOption('+alias', array(
             'request' => '\Widget\Request'
         ));
-        
+
         $this->assertEquals('\Widget\Request', $this->widget->getClass('request'));
     }
-    
+
     public function testRemove()
     {
         // Instance request widget
         $request = $this->widget->request;
-        
+
         $this->assertTrue($this->widget->remove('request'));
         $this->assertFalse($this->widget->remove('request'));
-        
+
         // Re-instance request widget
         $this->assertNotSame($request, $this->widget->request);
     }
-    
+
     public function testHas()
     {
         $this->widget->request;
-        
+
         $this->assertEquals('\Widget\Request', $this->widget->has('request'));
         $this->assertFalse($this->widget->has('request2'));
     }
-    
+
     public function testAutoload()
     {
         $this->widget->setAutoload(false);
         $this->assertNotContains(array($this->widget, 'autoload'), spl_autoload_functions());
-        
+
         $this->widget->setAutoload(true);
         $this->assertContains(array($this->widget, 'autoload'), spl_autoload_functions());
-        
+
         $this->widget->setAutoloadMap(array(
             'WidgetTest' => dirname(__DIR__)
         ));
-        
+
         $this->assertTrue(class_exists('WidgetTest\Fixtures\Autoload'));
         $this->assertFalse(class_exists('WidgetTest\Fixtures\AutoloadNotFound'));
     }
-    
+
     public function testImport()
     {
         $this->widget->setImport(array(
@@ -314,12 +301,12 @@ class WidgetTest extends TestCase
                 'format' => 'test%s',
             )
         ));
-        
+
         $this->assertEquals('\WidgetTest\Fixtures\Import\Widget1', $this->widget->has('testWidget1'));
         $this->assertEquals('\WidgetTest\Fixtures\Import\Widget2', $this->widget->has('testWidget2'));
         $this->assertFalse($this->widget->has('testWidget3'));
     }
-    
+
     /**
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Parameter 1 should be valid directory
@@ -328,22 +315,22 @@ class WidgetTest extends TestCase
     {
         $this->widget->import(__DIR__ . '/not found/', 'test');
     }
-        
+
     public function testNewWidgetFromFactoryMethod()
     {
         $widget = Widget::create(array(), 'otherName');
-        
+
         $this->assertInstanceOf('\Widget\Widget', $widget);
         $this->assertSame($widget, Widget::create(array(), 'otherName'));
     }
-    
+
     public function testFileAsConfiguration()
     {
         $widget = Widget::create(__DIR__ . '/Fixtures/env/twin.php');
-        
+
         $this->assertTrue($widget->config('twin'));
     }
-    
+
     /**
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Configuration should be array or file
@@ -352,7 +339,7 @@ class WidgetTest extends TestCase
     {
         Widget::create(new \stdClass);
     }
-    
+
     /**
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Configuration should be array or file
@@ -361,22 +348,22 @@ class WidgetTest extends TestCase
     {
         Widget::create('not existing file');
     }
-    
+
     public function testReset()
     {
         $first = Widget::create(array(), 'first');
         $second = Widget::create(array(), 'second');
-        
+
         Widget::reset('first');
-        
+
         $this->assertNotSame($first, Widget::create(array(), 'second'));
         $this->assertSame($second, Widget::create(array(), 'second'));
-        
+
         Widget::reset();
         $this->assertNotSame($first, Widget::create(array(), 'second'));
         $this->assertNotSame($second, Widget::create(array(), 'second'));
     }
-    
+
     /**
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Widget instance "NotInstance" not found

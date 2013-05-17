@@ -178,7 +178,9 @@ abstract class AbstractWidget implements WidgetInterface
 
         // Append option
         if (isset($name[0]) && '+' == $name[0]) {
-            return $this->appendOption(substr($name, 1), $value);
+            $name = substr($name, 1);
+            $this->$name = (array)$this->$name + $value;
+            return $this;
         }
 
         if (method_exists($this, $method = 'set' . $name)) {
@@ -204,20 +206,6 @@ abstract class AbstractWidget implements WidgetInterface
         } else {
             return isset($this->$name) ? $this->$name : null;
         }
-    }
-
-    /**
-     * Append property value
-     *
-     * @param string $name
-     * @param array $value
-     * @return AbstractWidget
-     */
-    public function appendOption($name, array $value)
-    {
-        $this->$name = (array)$this->$name + $value;
-
-        return $this;
     }
 
     /**

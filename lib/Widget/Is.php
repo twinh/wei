@@ -59,7 +59,7 @@ class Is extends AbstractWidget
         foreach ($this->alias as $rule => $class) {
             $rules['is' . ucfirst($rule)] = $class;
         }
-        $this->widget->appendOption('alias', $rules);
+        $this->widget->setOption('+alias', $rules);
     }
 
     /**
